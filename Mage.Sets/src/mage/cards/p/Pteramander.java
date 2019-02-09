@@ -5,8 +5,11 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.effects.keyword.AdaptEffect;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,6 +26,8 @@ import java.util.UUID;
  */
 public final class Pteramander extends CardImpl {
 
+    static final DynamicValue cardsCount = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY);
+
     public Pteramander(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}");
 
@@ -38,7 +43,8 @@ public final class Pteramander extends CardImpl {
         // TODO: Make ability properly copiable
         Ability ability = new SimpleActivatedAbility(new AdaptEffect(4).setText("Adapt 4. This ability costs {1} less to activate for each instant and sorcery card in your graveyard."), new ManaCostsImpl("{7}{U}"));
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new PteramanderCostIncreasingEffect(ability.getOriginalId())));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new PteramanderCostIncreasingEffect(ability.getOriginalId()))
+                .addHint(new ValueHint("Instant and sorcery card in your graveyard", cardsCount)));
     }
 
     private Pteramander(final Pteramander card) {
@@ -69,7 +75,8 @@ class PteramanderCostIncreasingEffect extends CostModificationEffectImpl {
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            CardUtil.reduceCost(abilityToModify, controller.getGraveyard().count(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY, game));
+            int count = Pteramander.cardsCount.calculate(game, source, this);
+            CardUtil.reduceCost(abilityToModify, count);
         }
         return true;
     }
