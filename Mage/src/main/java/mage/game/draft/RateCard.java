@@ -30,6 +30,8 @@ import java.util.*;
  */
 public final class RateCard {
 
+    public static final boolean PRELOAD_CARD_RATINGS_ON_STARTUP = false; // warning, rating and card classes preloading can cause lags for users with low memory
+
     private static Map<String, Integer> baseRatings = new HashMap<>();
     private static final Map<String, Integer> rated = new HashMap<>();
     private static boolean isLoaded = false;

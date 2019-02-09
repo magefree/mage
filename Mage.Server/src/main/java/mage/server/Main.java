@@ -137,8 +137,10 @@ public final class Main {
         logger.info("Done.");
 
         // cards preload with ratings
-        RateCard.bootstrapCardsAndRatings();
-        logger.info("Done.");
+        if (RateCard.PRELOAD_CARD_RATINGS_ON_STARTUP) {
+            RateCard.bootstrapCardsAndRatings();
+            logger.info("Done.");
+        }
 
         logger.info("Updating user stats DB...");
         UserStatsRepository.instance.updateUserStats();

@@ -216,7 +216,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
 
         RepositoryUtil.bootstrapLocalDb();
-        RateCard.bootstrapCardsAndRatings();
+        if (RateCard.PRELOAD_CARD_RATINGS_ON_STARTUP) {
+            RateCard.bootstrapCardsAndRatings();
+        }
         ManaSymbols.loadImages();
         Plugins.instance.loadPlugins();
 
