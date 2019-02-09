@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -27,6 +28,7 @@ public final class GoblinGathering extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(
                 new GoblinToken(), GoblinGatheringDynamicValue.instance
         ));
+        this.getSpellAbility().addHint(new ValueHint("You can create tokens", GoblinGatheringDynamicValue.instance));
     }
 
     private GoblinGathering(final GoblinGathering card) {

@@ -1,16 +1,15 @@
 package mage.cards.a;
 
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.hint.common.CreaturesYouControlHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
@@ -26,7 +25,7 @@ public final class AngelicExaltation extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
         // Whenever a creature you control attacks alone, it gets +X/+X until end of turn, where X is the number of creatures you control.
-        this.addAbility(new AngelicExaltationAbility());
+        this.addAbility(new AngelicExaltationAbility().addHint(CreaturesYouControlHint.instance));
     }
 
     private AngelicExaltation(final AngelicExaltation card) {
@@ -41,10 +40,8 @@ public final class AngelicExaltation extends CardImpl {
 
 class AngelicExaltationAbility extends TriggeredAbilityImpl {
 
-    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURE);
-
     public AngelicExaltationAbility() {
-        super(Zone.BATTLEFIELD, new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn, true), false);
+        super(Zone.BATTLEFIELD, new BoostTargetEffect(CreaturesYouControlCount.instance, CreaturesYouControlCount.instance, Duration.EndOfTurn, true), false);
     }
 
     public AngelicExaltationAbility(final AngelicExaltationAbility ability) {

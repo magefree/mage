@@ -1,43 +1,6 @@
 package org.mage.card.arcane;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
-import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
-import java.awt.image.FilteredImageSource;
-import java.awt.image.ImageProducer;
-import java.awt.image.RGBImageFilter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.nio.file.FileVisitResult;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.PathMatcher;
-import java.nio.file.Paths;
-import java.nio.file.SimpleFileVisitor;
-import java.nio.file.StandardCopyOption;
-import java.nio.file.attribute.BasicFileAttributes;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.StringTokenizer;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.regex.Pattern;
-import java.util.stream.IntStream;
-import javax.imageio.ImageIO;
-import javax.swing.*;
-
+import mage.abilities.hint.HintUtils;
 import mage.cards.repository.ExpansionRepository;
 import mage.client.MageFrame;
 import mage.client.constants.Constants;
@@ -46,6 +9,7 @@ import mage.client.constants.Constants.ResourceSymbolSize;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
+import mage.client.util.gui.GuiDisplayUtil;
 import mage.utils.StreamUtils;
 import org.apache.batik.dom.svg.SVGDOMImplementation;
 import org.apache.batik.transcoder.TranscoderException;
@@ -56,6 +20,26 @@ import org.apache.batik.transcoder.image.ImageTranscoder;
 import org.apache.batik.util.SVGConstants;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.utils.CardImageUtils;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.FilteredImageSource;
+import java.awt.image.ImageProducer;
+import java.awt.image.RGBImageFilter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.util.List;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.regex.Pattern;
+import java.util.stream.IntStream;
 
 import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
 
@@ -786,7 +770,18 @@ public final class ManaSymbols {
                 "<img src='" + filePathToUrl(htmlImagesPath) + "$1$2" + ".png' alt='$1$2' width="
                         + symbolSize + " height=" + symbolSize + '>');
 
-        // ignore data restore
+        // replace hint icons
+        if (replaced.contains(HintUtils.HINT_ICON_GOOD)) {
+            replaced = replaced.replace(HintUtils.HINT_ICON_GOOD, GuiDisplayUtil.getHintIconHtml("good", symbolSize) + "&nbsp;");
+        }
+        if (replaced.contains(HintUtils.HINT_ICON_BAD)) {
+            replaced = replaced.replace(HintUtils.HINT_ICON_BAD, GuiDisplayUtil.getHintIconHtml("bad", symbolSize) + "&nbsp;");
+        }
+        if (replaced.contains(HintUtils.HINT_ICON_RESTRICT)) {
+            replaced = replaced.replace(HintUtils.HINT_ICON_RESTRICT, GuiDisplayUtil.getHintIconHtml("restrict", symbolSize) + "&nbsp;");
+        }
+
+        // ignored data restore
         replaced = replaced
                 .replace("|source|", "{source}")
                 .replace("|this|", "{this}")

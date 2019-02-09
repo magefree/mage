@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.condition.common.FerociousCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.hint.common.FerociousHint;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -33,6 +34,7 @@ public final class ClearTheStage extends CardImpl {
         this.getSpellAbility().addEffect(new ClearTheStageEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 1, filter));
+        this.getSpellAbility().addHint(FerociousHint.instance);
     }
 
     private ClearTheStage(final ClearTheStage card) {

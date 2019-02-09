@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
@@ -13,7 +12,6 @@ import mage.game.permanent.Permanent;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public class CantAttackYouAllEffect extends RestrictionEffect {
@@ -51,6 +49,9 @@ public class CantAttackYouAllEffect extends RestrictionEffect {
 
     @Override
     public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
+        if (defenderId == null) {
+            return true;
+        }
         if (alsoPlaneswalker) {
             Permanent planeswalker = game.getPermanent(defenderId);
             if (planeswalker != null) {

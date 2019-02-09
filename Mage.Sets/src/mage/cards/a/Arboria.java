@@ -1,7 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
@@ -17,8 +15,9 @@ import mage.game.permanent.PermanentToken;
 import mage.watchers.common.CastSpellYourLastTurnWatcher;
 import mage.watchers.common.PermanentsEnteredBattlefieldYourLastTurnWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class Arboria extends CardImpl {
@@ -60,6 +59,10 @@ class ArboriaEffect extends RestrictionEffect {
 
     @Override
     public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
+        if (defenderId == null) {
+            return true;
+        }
+
         CastSpellYourLastTurnWatcher watcher = game.getState().getWatcher(CastSpellYourLastTurnWatcher.class);
         if (watcher != null && watcher.getAmountOfSpellsCastOnPlayersTurn(defenderId) > 0) {
             return true;

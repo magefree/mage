@@ -1,9 +1,5 @@
-
 package mage.cards.i;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.condition.common.OnOpponentsTurnCondition;
@@ -13,24 +9,23 @@ import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.PhaseStep;
-import mage.constants.TurnPhase;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.turn.Phase;
 import mage.game.turn.TurnMod;
 
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class IllusionistsGambit extends CardImpl {
 
     public IllusionistsGambit(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
 
         // Cast Illusionist's Gambit only during the declare blockers step on an opponent's turn.
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(PhaseStep.DECLARE_BLOCKERS, OnOpponentsTurnCondition.instance));
@@ -122,9 +117,7 @@ class IllusionistsGambitRequirementEffect extends RequirementEffect {
     @Override
     public boolean isInactive(Ability source, Game game) {
         if (game.getTurn().getStepType() == PhaseStep.END_COMBAT) {
-            if (!Objects.equals(game.getTurn().getPhase(), phase)) {
-                return true;
-            }
+            return !Objects.equals(game.getTurn().getPhase(), phase);
         }
         return false;
     }
@@ -166,25 +159,23 @@ class IllusionistsGambitRestrictionEffect extends RestrictionEffect {
     @Override
     public boolean isInactive(Ability source, Game game) {
         if (game.getTurn().getStepType() == PhaseStep.END_COMBAT) {
-            if (!Objects.equals(game.getTurn().getPhase(), phase)) {
-                return true;
-            }
+            return !Objects.equals(game.getTurn().getPhase(), phase);
         }
         return false;
     }
 
     @Override
     public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
+        if (defenderId == null) {
+            return true;
+        }
         if (defenderId.equals(source.getControllerId())) {
             return false;
         }
         // planeswalker
         Permanent permanent = game.getPermanent(defenderId);
-        if (permanent != null && permanent.isControlledBy(source.getControllerId())
-                && permanent.isPlaneswalker()) {
-            return false;
-        }
-        return true;
+        return permanent == null || !permanent.isControlledBy(source.getControllerId())
+                || !permanent.isPlaneswalker();
     }
 
     @Override

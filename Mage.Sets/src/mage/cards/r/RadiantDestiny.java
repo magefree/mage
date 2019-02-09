@@ -1,7 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -11,21 +9,20 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.abilities.effects.common.continuous.BoostAllOfChosenSubtypeEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllOfChosenSubtypeEffect;
+import mage.abilities.hint.common.CitysBlessingHint;
 import mage.abilities.keyword.AscendAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES_CONTROLLED;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
+import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES_CONTROLLED;
+
 /**
- *
  * @author LevelX2
  */
 public final class RadiantDestiny extends CardImpl {
@@ -52,6 +49,7 @@ public final class RadiantDestiny extends CardImpl {
                 CitysBlessingCondition.instance,
                 "As long as you have the city's blessing, they also have vigilance.");
         ability.addEffect(effect);
+        ability.addHint(CitysBlessingHint.instance);
         this.addAbility(ability);
     }
 

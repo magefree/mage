@@ -1,7 +1,7 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
@@ -10,6 +10,7 @@ import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.hint.common.DeliriumHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -19,13 +20,12 @@ import mage.constants.Zone;
 import mage.game.permanent.token.EldraziHorrorToken;
 
 /**
- *
  * @author LevelX2
  */
 public final class DesperateSentry extends CardImpl {
 
     public DesperateSentry(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(1);
@@ -39,6 +39,7 @@ public final class DesperateSentry extends CardImpl {
                 new BoostSourceEffect(3, 0, Duration.WhileOnBattlefield), DeliriumCondition.instance,
                 "<i>Delirium</i> &mdash; {this} gets +3/+0 as long as there are four or more card types among cards in your graveyard.");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        ability.addHint(DeliriumHint.instance);
         this.addAbility(ability);
     }
 

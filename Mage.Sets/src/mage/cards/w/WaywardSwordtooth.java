@@ -1,12 +1,11 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CitysBlessingCondition;
 import mage.abilities.effects.common.combat.CantAttackBlockUnlessConditionSourceEffect;
 import mage.abilities.effects.common.continuous.PlayAdditionalLandsControllerEffect;
+import mage.abilities.hint.common.CitysBlessingHint;
 import mage.abilities.keyword.AscendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -15,8 +14,9 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class WaywardSwordtooth extends CardImpl {
@@ -36,8 +36,9 @@ public final class WaywardSwordtooth extends CardImpl {
                 new PlayAdditionalLandsControllerEffect(1, Duration.WhileOnBattlefield)));
 
         // Wayward Sawtooth can't attack or block unless you have the city's blessing.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockUnlessConditionSourceEffect(CitysBlessingCondition.instance)));
-
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockUnlessConditionSourceEffect(CitysBlessingCondition.instance))
+                .addHint(CitysBlessingHint.instance)
+        );
     }
 
     public WaywardSwordtooth(final WaywardSwordtooth card) {

@@ -5,6 +5,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.hint.ConditionHint;
 import mage.abilities.mana.AnyColorLandsProduceManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
@@ -42,7 +43,7 @@ public final class PlazaOfHarmony extends CardImpl {
                 new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3)),
                 condition, "When {this} enters the battlefield, " +
                 "if you control two or more Gates, you gain 3 life."
-        ));
+        ).addHint(new ConditionHint(condition, "You control two or more Gates")));
 
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
