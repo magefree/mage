@@ -294,6 +294,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
             // total hints
             if (!abilityHints.isEmpty() || !restrictHints.isEmpty()) {
+                rules.add(HintUtils.HINT_START_MARK);
                 rules.addAll(abilityHints);
                 rules.addAll(restrictHints);
             }

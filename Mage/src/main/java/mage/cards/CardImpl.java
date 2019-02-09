@@ -273,6 +273,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
                 // total hints
                 if (!abilityHints.isEmpty()) {
+                    rules.add(HintUtils.HINT_START_MARK);
                     rules.addAll(abilityHints);
                 }
             }

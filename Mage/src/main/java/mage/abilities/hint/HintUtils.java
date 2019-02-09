@@ -15,6 +15,9 @@ public class HintUtils {
     public static final String HINT_ICON_BAD = "ICON_BAD";
     public static final String HINT_ICON_RESTRICT = "ICON_RESTRICT";
 
+    //
+    public static final String HINT_START_MARK = "<br/><hintstart/>"; // workaround to find hint text in rules list and shows it in html
+
     public static String prepareText(String text, Color color) {
         return prepareText(text, color, null);
     }
