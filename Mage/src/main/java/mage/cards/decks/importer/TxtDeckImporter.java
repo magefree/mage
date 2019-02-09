@@ -97,9 +97,8 @@ public class TxtDeckImporter extends PlainTextDeckImporter {
         if (lineName.contains("//") && !lineName.contains(" // ")) {
             lineName = lineName.replace("//", " // ");
         }
-        if (lineName.contains(" / ")) {
-            lineName = lineName.replace(" / ", " // ");
-        }
+        lineName = lineName.replaceFirst("(?<=[^/])\\s*/\\s*(?=[^/])", " // ");
+        
         if (IGNORE_NAMES.contains(lineName) || IGNORE_NAMES.contains(lineNum)) {
             return;
         }
