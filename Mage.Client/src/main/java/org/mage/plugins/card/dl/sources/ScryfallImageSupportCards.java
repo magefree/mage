@@ -25,6 +25,7 @@ public class ScryfallImageSupportCards {
             put("EURO", "pelp");
             put("GPX", "pgpx");
             put("MED", "me1");
+            put("MEDM", "med");
         }
     };
 
@@ -236,6 +237,7 @@ public class ScryfallImageSupportCards {
             add("UMA");
             add("PUMA");
             add("RNA");
+            add("MEDM");
             //
             add("EURO");
             add("GPX");

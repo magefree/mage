@@ -66,8 +66,9 @@ public enum ScryfallImageSource implements CardImageSource {
         if (baseUrl == null && card.isCollectorIdWithStr()) {
             // WARNING, after 2018 it's not compatible and some new sets have GUID files instead card numbers
             // TODO: replace card number links to API calls (need test with lands, alternative images and double faces), replace not working images by direct links
-            if (card.getCollectorId().startsWith("U")) {
-                // fix for Ultimate Box Topper (PUMA) -- need to use API
+
+            if (card.getCollectorId().startsWith("U") || card.getCollectorIdAsInt() == -1) {
+                // fix for Ultimate Box Topper (PUMA) and Mythic Edition (MED) -- need to use API
                 // ignored and go to API call at the end
             } else {
                 baseUrl = "https://img.scryfall.com/cards/large/" + localizedCode + "/" + formatSetName(card.getSet(), isToken) + "/"
