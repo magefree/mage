@@ -8,7 +8,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
-import mage.filter.common.FilterPermanentOrPlayer;
+import mage.filter.common.FilterCreaturePlayerOrPlaneswalker;
 import mage.filter.predicate.other.PlayerPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
@@ -18,10 +18,10 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public final class Endure extends CardImpl {
     
-    private static final FilterPermanentOrPlayer filter = new FilterPermanentOrPlayer("you and permanents you control");
+    private static final FilterCreaturePlayerOrPlaneswalker filter = new FilterCreaturePlayerOrPlaneswalker("you and permanents you control");
 
     static {
-        filter.getPermanentFilter().add(new ControllerPredicate(TargetController.YOU));
+        filter.getCreatureFilter().add(new ControllerPredicate(TargetController.YOU));
         filter.getPlayerFilter().add(new PlayerPredicate(TargetController.YOU));
     }
 
