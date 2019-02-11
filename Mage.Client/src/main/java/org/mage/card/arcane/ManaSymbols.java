@@ -10,6 +10,7 @@ import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
 import mage.client.util.gui.GuiDisplayUtil;
+import mage.constants.Rarity;
 import mage.utils.StreamUtils;
 import org.apache.batik.dom.svg.SVGDOMImplementation;
 import org.apache.batik.transcoder.TranscoderException;
@@ -48,10 +49,10 @@ public final class ManaSymbols {
     private static final Logger LOGGER = Logger.getLogger(ManaSymbols.class);
     private static final Map<Integer, Map<String, BufferedImage>> manaImages = new HashMap<>();
 
-    private static final Map<String, Map<String, Image>> setImages = new ConcurrentHashMap<>();
+    private static final Map<String, Map<Rarity, Image>> setImages = new ConcurrentHashMap<>();
 
-    private static final HashSet<String> onlyMythics = new HashSet<>();
-    private static final HashSet<String> withoutSymbols = new HashSet<>();
+    private static final Set<String> onlyMythics = new HashSet<>();
+    private static final Set<String> withoutSymbols = new HashSet<>();
 
     static {
         onlyMythics.add("DRB");
@@ -172,19 +173,19 @@ public final class ManaSymbols {
                 continue;
             }
 
-            String[] codes;
+            Set<Rarity> codes;
             if (onlyMythics.contains(set)) {
-                codes = new String[]{"M"};
+                codes = EnumSet.of(Rarity.MYTHIC);
             } else {
-                codes = new String[]{"C", "U", "R", "M"};
+                codes = EnumSet.of(Rarity.COMMON, Rarity.UNCOMMON, Rarity.RARE, Rarity.MYTHIC);
             }
 
-            Map<String, Image> rarityImages = new HashMap<>();
+            Map<Rarity, Image> rarityImages = new HashMap<>();
             setImages.put(set, rarityImages);
 
             // load medium size
-            for (String rarityCode : codes) {
-                File file = new File(getResourceSetsPath(ResourceSetSize.MEDIUM) + set + '-' + rarityCode + ".jpg");
+            for (Rarity rarityCode : codes) {
+                File file = new File(getResourceSetsPath(ResourceSetSize.MEDIUM) + set + '-' + rarityCode.getCode() + ".jpg");
                 try {
                     Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
                     int width = image.getWidth(null);
@@ -209,7 +210,7 @@ public final class ManaSymbols {
                     file.mkdirs();
                 }
                 String pathRoot = getResourceSetsPath(ResourceSetSize.SMALL) + set;
-                for (String code : codes) {
+                for (Rarity code : codes) {
                     File newFile = new File(pathRoot + '-' + code + ".png");
                     if (!(MageFrame.isSkipSmallSymbolGenerationForExisting() && newFile.exists())) {// skip if option enabled and file already exists
                         file = new File(getResourceSetsPath(ResourceSetSize.MEDIUM) + set + '-' + code + ".png");
@@ -791,23 +792,22 @@ public final class ManaSymbols {
     }
 
     public static String replaceSetCodeWithHTML(String set, String rarity, int size) {
-        String _set = set;
-        if (setImagesExist.containsKey(_set)) {
+        if (setImagesExist.containsKey(set)) {
             int factor = size / 15 + 1;
-            Integer width = setImagesExist.get(_set).width * factor;
-            Integer height = setImagesExist.get(_set).height * factor;
-            return "<img src='" + filePathToUrl(getResourceSetsPath(ResourceSetSize.SMALL)) + _set + '-' + rarity + ".png' alt='" + rarity + "' height='" + height + "' width='" + width + "' >";
+            Integer width = setImagesExist.get(set).width * factor;
+            Integer height = setImagesExist.get(set).height * factor;
+            return "<img src='" + filePathToUrl(getResourceSetsPath(ResourceSetSize.SMALL)) + set + '-' + rarity + ".png' alt='" + rarity + "' height='" + height + "' width='" + width + "' >";
         } else {
             return set;
         }
     }
 
     public static Image getSetSymbolImage(String set) {
-        return getSetSymbolImage(set, "C");
+        return getSetSymbolImage(set, Rarity.COMMON);
     }
 
-    public static Image getSetSymbolImage(String set, String rarity) {
-        Map<String, Image> rarityImages = setImages.get(set);
+    public static Image getSetSymbolImage(String set, Rarity rarity) {
+        Map<Rarity, Image> rarityImages = setImages.get(set);
         if (rarityImages != null) {
             return rarityImages.get(rarity);
         } else {
