@@ -9,7 +9,6 @@
         <version>1.4.33</version>
     </parent>
 
-    <groupId>org.mage</groupId>
     <artifactId>mage-client</artifactId>
     <packaging>jar</packaging>
     <name>Mage Client</name>
@@ -109,7 +108,7 @@
         <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
-            <version>1.5.2</version>
+            <version>1.11.3</version>
         </dependency>
         <dependency>
             <artifactId>truevfs-profile-base</artifactId>
