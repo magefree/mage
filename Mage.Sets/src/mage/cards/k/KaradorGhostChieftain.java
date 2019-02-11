@@ -114,11 +114,9 @@ class KaradorGhostChieftainContinuousEffect extends ContinuousEffectImpl {
                 return false;
             }
             for (Card card : player.getGraveyard().getCards(new FilterCreatureCard(), game)) {
-                //if (!card.isLand()) { // cards like Dryad Arbor
                 ContinuousEffect effect = new KaradorGhostChieftainCastFromGraveyardEffect();
                 effect.setTargetPointer(new FixedTarget(card.getId()));
                 game.addEffect(effect, source);
-                //}
             }
             return true;
         }
