@@ -1,4 +1,3 @@
-
 package mage.cards.k;
 
 import java.util.UUID;
@@ -115,9 +114,11 @@ class KaradorGhostChieftainContinuousEffect extends ContinuousEffectImpl {
                 return false;
             }
             for (Card card : player.getGraveyard().getCards(new FilterCreatureCard(), game)) {
+                //if (!card.isLand()) { // cards like Dryad Arbor
                 ContinuousEffect effect = new KaradorGhostChieftainCastFromGraveyardEffect();
                 effect.setTargetPointer(new FixedTarget(card.getId()));
                 game.addEffect(effect, source);
+                //}
             }
             return true;
         }
@@ -148,10 +149,14 @@ class KaradorGhostChieftainCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (objectId.equals(getTargetPointer().getFirst(game, source))) {
+        Card objectCard = game.getCard(objectId);
+        if (objectCard.getId().equals(getTargetPointer().getFirst(game, source))
+                && objectCard.isCreature()
+                && objectCard.getSpellAbility() != null
+                && objectCard.getSpellAbility().spellCanBeActivatedRegularlyNow(affectedControllerId, game)) {
             if (affectedControllerId.equals(source.getControllerId())) {
                 KaradorGhostChieftainWatcher watcher = game.getState().getWatcher(KaradorGhostChieftainWatcher.class, source.getSourceId());
-                return watcher != null &&  !watcher.isAbilityUsed();
+                return watcher != null && !watcher.isAbilityUsed();
             }
         }
         return false;
