@@ -80,7 +80,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         for (int i = 0; (i < setCodes.length) && (!is_removeFinish); i++) {
             String item = setCodes[i];
-            if (!item.equals(ConstructedFormats.ALL)) {
+            if (!item.equals(ConstructedFormats.ALL_SETS)) {
                 result.add(item);
             }
         }
