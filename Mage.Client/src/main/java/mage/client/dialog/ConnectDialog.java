@@ -92,7 +92,7 @@ public class ConnectDialog extends MageDialog {
         MagePreferences.setServerAddress(serverAddress);
         MagePreferences.setServerPort(Integer.parseInt(txtPort.getText().trim()));
         MagePreferences.setUserName(serverAddress, txtUserName.getText().trim());
-        MagePreferences.setPassword(serverAddress, txtPassword.getText().trim());
+        MagePreferences.setPassword(serverAddress, String.valueOf(txtPassword.getPassword()).trim());
         MageFrame.getPreferences().put(KEY_CONNECT_AUTO_CONNECT, Boolean.toString(chkAutoConnect.isSelected()));
     }
 
@@ -508,7 +508,7 @@ public class ConnectDialog extends MageDialog {
             connection.setHost(this.txtServer.getText().trim());
             connection.setPort(Integer.valueOf(this.txtPort.getText().trim()));
             connection.setUsername(this.txtUserName.getText().trim());
-            connection.setPassword(this.txtPassword.getText().trim());
+            connection.setPassword(String.valueOf(this.txtPassword.getPassword()).trim());
             // force to redownload db
             boolean redownloadDatabase = (ExpansionRepository.instance.getSetByCode("GRN") == null || CardRepository.instance.findCard("Island") == null);
             connection.setForceDBComparison(this.chkForceUpdateDB.isSelected() || redownloadDatabase);

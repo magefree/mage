@@ -4,6 +4,7 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.support.DatabaseConnection;
 import com.j256.ormlite.table.TableUtils;
@@ -70,7 +71,7 @@ public enum UserStatsRepository {
     public UserStats getUser(String userName) {
         try {
             QueryBuilder<UserStats, Object> qb = dao.queryBuilder();
-            qb.limit(1L).where().eq("userName", userName);
+            qb.limit(1L).where().eq("userName", new SelectArg(userName));
             List<UserStats> users = dao.query(qb.prepare());
             if (!users.isEmpty()) {
                 return users.get(0);

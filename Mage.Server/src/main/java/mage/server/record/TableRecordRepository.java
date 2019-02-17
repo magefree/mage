@@ -4,6 +4,7 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.support.DatabaseConnection;
 import com.j256.ormlite.table.TableUtils;
@@ -55,7 +56,7 @@ public enum TableRecordRepository {
     public List<TableRecord> getAfter(long endTimeMs) {
         try {
             QueryBuilder<TableRecord, Object> qb = dao.queryBuilder();
-            qb.where().gt("endTimeMs", endTimeMs);
+            qb.where().gt("endTimeMs", new SelectArg(endTimeMs));
             qb.orderBy("endTimeMs", true);
             return dao.query(qb.prepare());
         } catch (SQLException ex) {
