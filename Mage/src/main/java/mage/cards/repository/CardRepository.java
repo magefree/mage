@@ -506,7 +506,7 @@ public enum CardRepository {
     public void closeDB() {
         try {
             if (cardDao != null && cardDao.getConnectionSource() != null) {
-                DatabaseConnection conn = cardDao.getConnectionSource().getReadWriteConnection();
+                DatabaseConnection conn = cardDao.getConnectionSource().getReadWriteConnection(cardDao.getTableName());
                 conn.executeStatement("shutdown compact", 0);
             }
         } catch (SQLException ex) {

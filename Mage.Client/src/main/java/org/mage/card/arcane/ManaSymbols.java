@@ -12,7 +12,7 @@ import mage.client.util.gui.BufferedImageBuilder;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.constants.Rarity;
 import mage.utils.StreamUtils;
-import org.apache.batik.dom.svg.SVGDOMImplementation;
+import org.apache.batik.anim.dom.SVGDOMImplementation;
 import org.apache.batik.transcoder.TranscoderException;
 import org.apache.batik.transcoder.TranscoderInput;
 import org.apache.batik.transcoder.TranscoderOutput;

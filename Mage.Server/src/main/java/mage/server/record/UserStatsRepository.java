@@ -94,12 +94,12 @@ public enum UserStatsRepository {
 
     public long getLatestEndTimeMs() {
         try {
-          QueryBuilder<UserStats, Object> qb = dao.queryBuilder();
+            QueryBuilder<UserStats, Object> qb = dao.queryBuilder();
             qb.orderBy("endTimeMs", false).limit(1L);
-          List<UserStats> users = dao.query(qb.prepare());
+            List<UserStats> users = dao.query(qb.prepare());
             if (!users.isEmpty()) {
-              return users.get(0).getEndTimeMs();
-          }
+                return users.get(0).getEndTimeMs();
+            }
         } catch (SQLException ex) {
             Logger.getLogger(UserStatsRepository.class).error("Error getting the latest end time from DB - ", ex);
         }
@@ -111,7 +111,7 @@ public enum UserStatsRepository {
     public List<String> updateUserStats() {
         Set<String> updatedUsers = new HashSet<>();
         // Lock the DB so that no other updateUserStats runs at the same time.
-        synchronized(this) {
+        synchronized (this) {
             long latestEndTimeMs = this.getLatestEndTimeMs();
             List<TableRecord> records = TableRecordRepository.instance.getAfter(latestEndTimeMs);
             for (TableRecord record : records) {
@@ -126,9 +126,9 @@ public enum UserStatsRepository {
                     for (ResultProtos.MatchPlayerProto player : match.getPlayersList()) {
                         UserStats userStats = this.getUser(player.getName());
                         ResultProtos.UserStatsProto proto =
-                            userStats != null
-                                ? userStats.getProto()
-                                : ResultProtos.UserStatsProto.newBuilder().setName(player.getName()).build();
+                                userStats != null
+                                        ? userStats.getProto()
+                                        : ResultProtos.UserStatsProto.newBuilder().setName(player.getName()).build();
                         ResultProtos.UserStatsProto.Builder builder = ResultProtos.UserStatsProto.newBuilder(proto)
                                 .setMatches(proto.getMatches() + 1);
                         switch (player.getQuit()) {
@@ -370,7 +370,7 @@ public enum UserStatsRepository {
     public void closeDB() {
         try {
             if (dao != null && dao.getConnectionSource() != null) {
-                DatabaseConnection conn = dao.getConnectionSource().getReadWriteConnection();
+                DatabaseConnection conn = dao.getConnectionSource().getReadWriteConnection(dao.getTableName());
                 conn.executeStatement("shutdown compact", 0);
             }
         } catch (SQLException ex) {
