@@ -1260,7 +1260,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                     for (List<List<CardView>> gridRow : cardGrid) {
                         for (List<CardView> stack : gridRow) {
                             for (CardView card : stack) {
-                                boolean s = card.isSelected() | card.getCardTypes().contains(cardType);
+                                boolean s = card.isSelected() || card.getCardTypes().contains(cardType);
                                 card.setSelected(s);
                                 cardViews.get(card.getId()).update(card);
                             }

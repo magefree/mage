@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public final class ImageCaches {
 
-    private final static ArrayList<Map> IMAGE_CACHES;
+    private static final ArrayList<Map> IMAGE_CACHES;
 
     static {
         IMAGE_CACHES = new ArrayList<>();

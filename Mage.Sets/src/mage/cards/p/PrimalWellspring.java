@@ -50,7 +50,7 @@ public final class PrimalWellspring extends CardImpl {
 
 class PyrimalWellspringTriggeredAbility extends TriggeredAbilityImpl {
 
-    private final static FilterInstantOrSorcerySpell filter = new FilterInstantOrSorcerySpell();
+    private static final FilterInstantOrSorcerySpell filter = new FilterInstantOrSorcerySpell();
 
     String abilityOriginalId;
 

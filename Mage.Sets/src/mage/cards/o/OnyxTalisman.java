@@ -21,7 +21,7 @@ import mage.target.TargetPermanent;
  */
 public final class OnyxTalisman extends CardImpl {
     
-    private final static FilterSpell filter = new FilterSpell("a black spell");
+    private static final FilterSpell filter = new FilterSpell("a black spell");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));

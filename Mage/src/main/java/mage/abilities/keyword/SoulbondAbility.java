@@ -168,7 +168,7 @@ class SoulboundEntersSelfEffect extends OneShotEffect {
  */
 class SoulbondEntersOtherAbility extends EntersBattlefieldAllTriggeredAbility {
 
-    private final static FilterCreaturePermanent soulbondFilter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent soulbondFilter = new FilterCreaturePermanent();
 
     static {
         soulbondFilter.add(Predicates.not(new PairedPredicate()));

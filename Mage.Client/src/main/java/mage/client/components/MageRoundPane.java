@@ -36,7 +36,7 @@ public class MageRoundPane extends JPanel {
         IMAGE_CACHE = ImageCaches.register(new MapMaker().softValues().makeComputingMap((Function<Key, BufferedImage>) key -> createImage(key)));
     }
 
-    private final static class ShadowKey {
+    private static final class ShadowKey {
 
         final int width;
         final int height;
@@ -76,7 +76,7 @@ public class MageRoundPane extends JPanel {
         }
     }
 
-    private final static class Key {
+    private static final class Key {
 
         final int width;
         final int height;

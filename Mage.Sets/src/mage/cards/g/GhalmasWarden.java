@@ -22,7 +22,7 @@ import mage.constants.Zone;
  */
 public final class GhalmasWarden extends CardImpl {
 
-    private static final String text = "<i>Metalcraft</i> &mdash; Ghalma's Warden gets +2/+2 as long as you control three or more artifacts";
+    private static final String rule = "<i>Metalcraft</i> &mdash; Ghalma's Warden gets +2/+2 as long as you control three or more artifacts";
 
     public GhalmasWarden (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
@@ -32,7 +32,7 @@ public final class GhalmasWarden extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
         ContinuousEffect boostSource = new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield);
-        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(boostSource, MetalcraftCondition.instance, text);
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(boostSource, MetalcraftCondition.instance, rule);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

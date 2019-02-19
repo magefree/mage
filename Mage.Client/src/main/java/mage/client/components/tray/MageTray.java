@@ -78,7 +78,6 @@ public enum MageTray {
                 tray.add(trayIcon);
             } catch (AWTException e) {
                 log.error("TrayIcon could not be added: ", e);
-                return;
             }
 
         } catch (Exception e) {

@@ -27,7 +27,7 @@ import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES_CONTROLLED;
  */
 public final class RadiantDestiny extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control of the chosen type");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control of the chosen type");
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));

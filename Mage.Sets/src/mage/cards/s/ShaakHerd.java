@@ -20,7 +20,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public final class ShaakHerd extends CardImpl {
 
-    private final static FilterCard filter = new FilterCard("another target creature card");
+    private static final FilterCard filter = new FilterCard("another target creature card");
 
     static {
         filter.add(new AnotherCardPredicate());

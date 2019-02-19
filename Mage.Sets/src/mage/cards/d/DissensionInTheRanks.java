@@ -17,7 +17,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class DissensionInTheRanks extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("blocking creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("blocking creature");
 
     static {
         filter.add(BlockingPredicate.instance);

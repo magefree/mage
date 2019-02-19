@@ -10,7 +10,7 @@ import java.awt.*;
 /**
  * @author mw, noxx
  */
-abstract public class IDialogPanel extends JXPanel {
+public abstract class IDialogPanel extends JXPanel {
 
     private DlgParams params;
     private Dimension cardDimension;

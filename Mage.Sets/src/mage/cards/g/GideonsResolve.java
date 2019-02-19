@@ -20,7 +20,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
  */
 public final class GideonsResolve extends CardImpl {
 
-    private final static FilterCard filter = new FilterCard("Gideon, Martial Paragon");
+    private static final FilterCard filter = new FilterCard("Gideon, Martial Paragon");
 
     static {
         filter.add(new NamePredicate("Gideon, Martial Paragon"));

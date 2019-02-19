@@ -204,7 +204,7 @@ class DanceOfTheDeadAttachEffect extends OneShotEffect {
 
 class DanceOfTheDeadChangeAbilityEffect extends ContinuousEffectImpl implements SourceEffect {
 
-    private final static Ability newAbility = new EnchantAbility("creature put onto the battlefield with Dance of the Dead");
+    private static final Ability newAbility = new EnchantAbility("creature put onto the battlefield with Dance of the Dead");
 
     static {
         newAbility.setRuleAtTheTop(true);

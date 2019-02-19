@@ -23,7 +23,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public final class PrimalForcemage extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));

@@ -17,7 +17,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public final class BoilingEarth extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature your opponents control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature your opponents control");
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));

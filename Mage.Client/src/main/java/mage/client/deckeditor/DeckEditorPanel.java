@@ -1119,12 +1119,12 @@ class ImportFilter extends FileFilter {
             ext = s.substring(i + 1).toLowerCase(Locale.ENGLISH);
         }
         if (ext != null) {
-            if (ext.toLowerCase(Locale.ENGLISH).equals("dec")
-                || ext.toLowerCase(Locale.ENGLISH).equals("mwdeck")
-                || ext.toLowerCase(Locale.ENGLISH).equals("txt")
-                || ext.toLowerCase(Locale.ENGLISH).equals("dek")
-                || ext.toLowerCase(Locale.ENGLISH).equals("cod")
-                || ext.toLowerCase(Locale.ENGLISH).equals("o8d")) {
+            if (ext.equalsIgnoreCase("dec")
+                || ext.equalsIgnoreCase("mwdeck")
+                || ext.equalsIgnoreCase("txt")
+                || ext.equalsIgnoreCase("dek")
+                || ext.equalsIgnoreCase("cod")
+                || ext.equalsIgnoreCase("o8d")) {
                 return true;
             }
         }

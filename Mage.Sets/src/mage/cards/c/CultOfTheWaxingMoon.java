@@ -47,7 +47,7 @@ public final class CultOfTheWaxingMoon extends CardImpl {
 
 class CultOfTheWaxingMoonAbility extends TriggeredAbilityImpl {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     static {
         filter.add(Predicates.not(new SubtypePredicate(SubType.HUMAN)));

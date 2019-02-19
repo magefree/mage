@@ -21,7 +21,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public final class GravitySphere extends CardImpl {
 
-    final static private FilterPermanent filter = new FilterPermanent("All creatures");
+    static final private FilterPermanent filter = new FilterPermanent("All creatures");
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));

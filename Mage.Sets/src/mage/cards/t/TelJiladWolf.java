@@ -19,7 +19,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public final class TelJiladWolf extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creature");
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));

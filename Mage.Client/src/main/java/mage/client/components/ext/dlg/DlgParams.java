@@ -8,6 +8,7 @@ import mage.view.CardsView;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -26,9 +27,9 @@ public class DlgParams {
     private int playerID;
 
     private CardsView cards;
-    private ArrayList<String> stringList;
+    private java.util.List<String> stringList;
     //private ArrayList<DeckInfo> deckList;
-    private ArrayList<Object> objectList;
+    private java.util.List<Object> objectList;
 
     private String title;
     private int opponentID;
@@ -38,7 +39,7 @@ public class DlgParams {
 
     boolean isAI = false;
 
-    public HashSet<String> manaChoices = new HashSet<>();
+    public Set<String> manaChoices = new HashSet<>();
 
     public int getPlayerID() {
         return playerID;
@@ -74,11 +75,11 @@ public class DlgParams {
         this.message = message;
     }
 
-    public HashSet<String> getManaChoices() {
+    public Set<String> getManaChoices() {
         return manaChoices;
     }
 
-    public void setManaChoices(HashSet<String> manaChoices) {
+    public void setManaChoices(Set<String> manaChoices) {
         this.manaChoices = manaChoices;
     }
 
@@ -98,7 +99,7 @@ public class DlgParams {
         this.isChooseAbility = isChooseAbility;
     }
 
-    public ArrayList<String> getStringList() {
+    public java.util.List<String> getStringList() {
         return stringList;
     }
 
@@ -114,7 +115,7 @@ public class DlgParams {
         this.deckList = deckList;
     }*/
 
-    public ArrayList<Object> getObjectList() {
+    public java.util.List<Object> getObjectList() {
         return objectList;
     }
 

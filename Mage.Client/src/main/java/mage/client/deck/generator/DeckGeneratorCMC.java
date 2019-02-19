@@ -2,6 +2,7 @@
 package mage.client.deck.generator;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public enum DeckGeneratorCMC {
 
@@ -51,11 +52,11 @@ public enum DeckGeneratorCMC {
         this.poolCMCs40 = CMCs40;
     }
 
-    public ArrayList<CMC> get40CardPoolCMC() {
+    public List<CMC> get40CardPoolCMC() {
         return this.poolCMCs40;
     }
 
-    public ArrayList<CMC> get60CardPoolCMC() {
+    public List<CMC> get60CardPoolCMC() {
         return this.poolCMCs60;
     }
 

@@ -30,7 +30,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class GlimmerpointStag extends CardImpl {
 
-    private final static FilterPermanent filter = new FilterPermanent("another target permanent");
+    private static final FilterPermanent filter = new FilterPermanent("another target permanent");
 
     static {
         filter.add(AnotherPredicate.instance);

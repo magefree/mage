@@ -35,7 +35,7 @@ import java.util.UUID;
  */
 public final class GnarlrootTrapper extends CardImpl {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("attacking ELf you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("attacking ELf you control");
 
     static {
         filter.add(AttackingPredicate.instance);

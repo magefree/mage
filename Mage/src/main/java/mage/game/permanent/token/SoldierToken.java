@@ -15,7 +15,7 @@ import mage.util.RandomUtil;
  */
 public final class SoldierToken extends TokenImpl {
 
-    final static private List<String> tokenImageSets = new ArrayList<>();
+    static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
         tokenImageSets.addAll(Arrays.asList("10E", "M15", "C14", "ORI", "ALA", "DDF", "THS", "M12", "M13", "MM2", "MMA", "RTR",

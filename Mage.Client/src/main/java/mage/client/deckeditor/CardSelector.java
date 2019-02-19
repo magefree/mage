@@ -357,9 +357,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 for (int itemIndex : choiseValue) {
 
                     java.util.List<String> listReceived = ConstructedFormats.getSetsByFormat(x.getElementAt(itemIndex).toString());
-                    listReceived.stream().filter((item) -> (setCodes.contains(item) == false)).forEachOrdered((item) -> {
-                        setCodes.add(item);
-                    });
+                    listReceived.stream().filter(item -> !setCodes.contains(item)).forEachOrdered(setCodes::add);
                 }
                 criteria.setCodes(setCodes.toArray(new String[0]));
             }

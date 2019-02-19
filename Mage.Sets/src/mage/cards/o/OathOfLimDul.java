@@ -88,7 +88,7 @@ class OathOfLimDulTriggeredAbility extends TriggeredAbilityImpl {
 
 class OathOfLimDulEffect extends OneShotEffect {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("controlled permanent other than Oath of Lim-Dul");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("controlled permanent other than Oath of Lim-Dul");
 
     static {
         filter.add(AnotherPredicate.instance);

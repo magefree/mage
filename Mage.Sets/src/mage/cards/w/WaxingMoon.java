@@ -24,7 +24,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class WaxingMoon extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Werewolf you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Werewolf you control");
 
     static {
         filter.add(new SubtypePredicate(SubType.WEREWOLF));

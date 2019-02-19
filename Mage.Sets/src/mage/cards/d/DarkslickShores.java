@@ -23,7 +23,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  */
 public final class DarkslickShores extends CardImpl {
 
-    private final static FilterLandPermanent filter = new FilterLandPermanent();
+    private static final FilterLandPermanent filter = new FilterLandPermanent();
 
     static {
         filter.add(AnotherPredicate.instance);

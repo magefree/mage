@@ -26,8 +26,8 @@ import java.util.UUID;
  */
 public final class CruelRevival extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Zombie creature");
-    private final static FilterCard filter2 = new FilterCard("Zombie card from your graveyard");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Zombie creature");
+    private static final FilterCard filter2 = new FilterCard("Zombie card from your graveyard");
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));

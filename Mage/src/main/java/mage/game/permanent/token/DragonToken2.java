@@ -15,7 +15,7 @@ import mage.constants.SubType;
  */
 public final class DragonToken2 extends TokenImpl {
 
-    final static private List<String> tokenImageSets = new ArrayList<>();
+    static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
         tokenImageSets.addAll(Arrays.asList("WWK", "10E", "BFZ", "C15", "CN2", "CMA"));

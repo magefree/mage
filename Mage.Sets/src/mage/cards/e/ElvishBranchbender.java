@@ -58,7 +58,7 @@ public final class ElvishBranchbender extends CardImpl {
 
 class ElvishBranchbenderEffect extends OneShotEffect {
     
-    final static FilterControlledPermanent filter = new FilterControlledPermanent("Elves you control");
+    static final FilterControlledPermanent filter = new FilterControlledPermanent("Elves you control");
     static {
         filter.add(new SubtypePredicate(SubType.ELF));
     }

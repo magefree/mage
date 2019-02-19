@@ -24,7 +24,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class RuinsOfOranRief extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("colorless creature that entered the battlefield this turn");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("colorless creature that entered the battlefield this turn");
 
     static {
         filter.add(ColorlessPredicate.instance);

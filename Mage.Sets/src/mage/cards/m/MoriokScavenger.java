@@ -20,7 +20,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public final class MoriokScavenger extends CardImpl {
 
-    final static FilterCreatureCard filter = new FilterCreatureCard("artifact creature card from your graveyard");
+    static final FilterCreatureCard filter = new FilterCreatureCard("artifact creature card from your graveyard");
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));

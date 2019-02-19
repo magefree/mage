@@ -23,7 +23,7 @@ import mage.constants.Zone;
  */
 public final class HoundOfTheFarbogs extends CardImpl {
 
-    final static private String RULE = "{this} has menace as long as there are four or more card types among cards in your graveyard";
+    static final private String RULE = "{this} has menace as long as there are four or more card types among cards in your graveyard";
 
     public HoundOfTheFarbogs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");

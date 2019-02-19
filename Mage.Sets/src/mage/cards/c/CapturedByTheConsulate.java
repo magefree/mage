@@ -33,7 +33,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class CapturedByTheConsulate extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));

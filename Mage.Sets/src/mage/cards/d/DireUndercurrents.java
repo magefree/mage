@@ -22,11 +22,11 @@ import mage.target.TargetPlayer;
  */
 public final class DireUndercurrents extends CardImpl {
 
-    private final static String rule1 = "Whenever a blue creature enters the battlefield under your control, you may have target player draw a card.";
-    private final static String rule2 = "Whenever a black creature enters the battlefield under your control, you may have target player discard a card.";
+    private static final String rule1 = "Whenever a blue creature enters the battlefield under your control, you may have target player draw a card.";
+    private static final String rule2 = "Whenever a black creature enters the battlefield under your control, you may have target player discard a card.";
 
-    private final static FilterControlledPermanent filterBlue = new FilterControlledCreaturePermanent();
-    private final static FilterControlledPermanent filterBlack = new FilterControlledCreaturePermanent();
+    private static final FilterControlledPermanent filterBlue = new FilterControlledCreaturePermanent();
+    private static final FilterControlledPermanent filterBlack = new FilterControlledCreaturePermanent();
 
     static {
         filterBlue.add(new ColorPredicate(ObjectColor.BLUE));

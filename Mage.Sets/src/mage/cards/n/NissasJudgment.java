@@ -27,7 +27,7 @@ import mage.target.targetpointer.SecondTargetPointer;
  */
 public final class NissasJudgment extends CardImpl {
 
-    private final static FilterCreaturePermanent FILTER = new FilterCreaturePermanent("creature an opponent controls");
+    private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("creature an opponent controls");
 
     static {
         FILTER.add(new ControllerPredicate(TargetController.OPPONENT));
@@ -59,8 +59,8 @@ public final class NissasJudgment extends CardImpl {
 
 class NissasJudgmentEffect extends OneShotEffect {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-    private final static FilterCreaturePermanent filterWithCounter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
+    private static final FilterCreaturePermanent filterWithCounter = new FilterCreaturePermanent();
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));

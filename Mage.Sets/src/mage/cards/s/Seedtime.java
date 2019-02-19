@@ -22,8 +22,8 @@ import mage.watchers.common.SpellsCastWatcher;
  */
 public final class Seedtime extends CardImpl {
 
-    private final static String rule = "Cast this spell only during your turn.";
-    private final static String rule2 = "Take an extra turn after this one if an opponent cast a blue spell this turn.";
+    private static final String rule = "Cast this spell only during your turn.";
+    private static final String rule2 = "Take an extra turn after this one if an opponent cast a blue spell this turn.";
 
     public Seedtime(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");

@@ -10,7 +10,7 @@ import mage.constants.SubType;
 
 public final class AngelToken extends TokenImpl {
 
-    final static private List<String> tokenImageSets = new ArrayList<>();
+    static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
         tokenImageSets.addAll(Arrays.asList("AVR", "C14", "CFX", "GTC", "ISD", "M14", "ORI", "SOI", "ZEN", "C15", "MM3"));

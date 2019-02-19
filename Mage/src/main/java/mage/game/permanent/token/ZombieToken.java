@@ -14,7 +14,7 @@ import java.util.List;
  */
 public final class ZombieToken extends TokenImpl {
 
-    final static private List<String> tokenImageSets = new ArrayList<>();
+    static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
         tokenImageSets.addAll(Arrays.asList("10E", "M10", "M11", "M12", "M13", "M14", "M15", "MBS", "ALA", "ISD", "C14", "C15", "C16", "C17", "CNS",

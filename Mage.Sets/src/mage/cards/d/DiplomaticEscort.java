@@ -25,7 +25,7 @@ import mage.target.TargetStackObject;
  */
 public final class DiplomaticEscort extends CardImpl {
 
-    private final static FilterStackObject filter = new FilterStackObject("spell or ability that targets a creature");
+    private static final FilterStackObject filter = new FilterStackObject("spell or ability that targets a creature");
 
     static {
         filter.add(new TargetsPermanentPredicate(new FilterCreaturePermanent()));

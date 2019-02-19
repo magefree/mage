@@ -83,7 +83,7 @@ enum DragonlordsPrerogativeAdjuster implements CostAdjuster {
 
 class DragonlordsPrerogativeCondition implements Condition {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("Dragon");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Dragon");
 
     static {
         filter.add(new SubtypePredicate(SubType.DRAGON));

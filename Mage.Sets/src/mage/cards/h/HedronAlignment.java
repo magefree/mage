@@ -54,8 +54,8 @@ public final class HedronAlignment extends CardImpl {
 
 class HedronAlignmentEffect extends OneShotEffect {
 
-    private final static FilterPermanent filterPermanent = new FilterPermanent();
-    private final static FilterCard filterCard = new FilterCard();
+    private static final FilterPermanent filterPermanent = new FilterPermanent();
+    private static final FilterCard filterCard = new FilterCard();
 
     static {
         filterPermanent.add(new NamePredicate("Hedron Alignment"));

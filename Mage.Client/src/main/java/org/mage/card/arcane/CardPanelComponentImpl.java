@@ -78,7 +78,7 @@ public class CardPanelComponentImpl extends CardPanel {
     private boolean displayTitleAnyway;
     private boolean displayFullImagePath;
 
-    private final static Map<Key, BufferedImage> IMAGE_CACHE;
+    private static final Map<Key, BufferedImage> IMAGE_CACHE;
 
     static class Key {
 

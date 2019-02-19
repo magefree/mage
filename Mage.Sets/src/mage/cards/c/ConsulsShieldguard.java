@@ -26,7 +26,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class ConsulsShieldguard extends CardImpl {
 
-    private final static FilterAttackingCreature filter = new FilterAttackingCreature();
+    private static final FilterAttackingCreature filter = new FilterAttackingCreature();
 
     static {
         filter.add(AnotherPredicate.instance);

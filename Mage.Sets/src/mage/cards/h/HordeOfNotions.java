@@ -27,7 +27,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public final class HordeOfNotions extends CardImpl {
 
-    private final static FilterCard filter = new FilterCard("Elemental card from your graveyard");
+    private static final FilterCard filter = new FilterCard("Elemental card from your graveyard");
 
     static {
         filter.add(new SubtypePredicate(SubType.ELEMENTAL));

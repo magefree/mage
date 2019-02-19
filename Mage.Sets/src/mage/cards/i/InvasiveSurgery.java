@@ -24,7 +24,7 @@ import mage.target.TargetSpell;
  */
 public final class InvasiveSurgery extends CardImpl {
 
-    private final static FilterSpell filter = new FilterSpell("sorcery spell");
+    private static final FilterSpell filter = new FilterSpell("sorcery spell");
 
     static {
         filter.add(new CardTypePredicate(CardType.SORCERY));

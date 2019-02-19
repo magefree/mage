@@ -19,7 +19,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  */
 public final class BurningEarth extends CardImpl {
 
-    private final static FilterLandPermanent filter = new FilterLandPermanent("a player taps a nonbasic land");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("a player taps a nonbasic land");
     
     static {
         filter.add(Predicates.not(new SupertypePredicate(SuperType.BASIC)));

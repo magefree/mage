@@ -22,8 +22,8 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public final class RootsOfLife extends CardImpl {
 
-    private final static String ruleTrigger1 = "&bull Island &mdash; Whenever an Island an opponent controls becomes tapped, you gain 1 life";
-    private final static String ruleTrigger2 = "&bull Swamp &mdash; Whenever a Swamp an opponent controls becomes tapped, you gain 1 life";
+    private static final String ruleTrigger1 = "&bull Island &mdash; Whenever an Island an opponent controls becomes tapped, you gain 1 life";
+    private static final String ruleTrigger2 = "&bull Swamp &mdash; Whenever a Swamp an opponent controls becomes tapped, you gain 1 life";
 
     private static final FilterPermanent islandFilter = new FilterPermanent("an Island an opponent controls");
     private static final FilterPermanent swampFilter = new FilterPermanent("a Swamp an opponent controls");

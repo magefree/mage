@@ -34,7 +34,7 @@ import mage.util.CardUtil;
  */
 public final class Portcullis extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature");
 
     public Portcullis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

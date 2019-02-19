@@ -34,7 +34,7 @@ import mage.target.common.TargetLandPermanent;
  */
 public final class GaeasLiege extends CardImpl {
 
-    final static FilterControlledPermanent filterLands = new FilterControlledPermanent("Forests you control");
+    static final FilterControlledPermanent filterLands = new FilterControlledPermanent("Forests you control");
 
     static {
         filterLands.add(new SubtypePredicate(SubType.FOREST));

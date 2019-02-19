@@ -54,7 +54,7 @@ public final class PyromancersGoggles extends CardImpl {
 
 class PyromancersGogglesTriggeredAbility extends TriggeredAbilityImpl {
 
-    private final static FilterInstantOrSorcerySpell filter = new FilterInstantOrSorcerySpell();
+    private static final FilterInstantOrSorcerySpell filter = new FilterInstantOrSorcerySpell();
 
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));

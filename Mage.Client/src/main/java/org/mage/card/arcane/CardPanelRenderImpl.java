@@ -215,7 +215,7 @@ public class CardPanelRenderImpl extends CardPanel {
     }
 
     // Map of generated images
-    private final static Map<ImageKey, BufferedImage> IMAGE_CACHE = new MapMaker().softValues().makeMap();
+    private static final Map<ImageKey, BufferedImage> IMAGE_CACHE = new MapMaker().softValues().makeMap();
 
     // The art image for the card, loaded in from the disk
     private BufferedImage artImage;

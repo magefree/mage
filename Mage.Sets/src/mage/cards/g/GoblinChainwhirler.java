@@ -24,7 +24,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public final class GoblinChainwhirler extends CardImpl {
 
-    final static FilterPermanent filter = new FilterPermanent("creatures and planeswalkers your opponents control");
+    static final FilterPermanent filter = new FilterPermanent("creatures and planeswalkers your opponents control");
     
     static {
         filter.add(Predicates.or(

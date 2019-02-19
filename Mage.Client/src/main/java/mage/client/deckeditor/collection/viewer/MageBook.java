@@ -265,7 +265,7 @@ public class MageBook extends JComponent {
     public int showTokens() {
         jLayeredPane.removeAll();
         List<Token> tokens = getTokens(currentPage, currentSet);
-        if (tokens != null && tokens.size() > 0) {
+        if (tokens != null && !tokens.isEmpty()) {
             int size = tokens.size();
             Rectangle rectangle = new Rectangle();
             rectangle.translate(OFFSET_X, OFFSET_Y);
@@ -295,7 +295,7 @@ public class MageBook extends JComponent {
     public int showEmblems(int numTokens) {
         List<Emblem> emblems = getEmblems(currentPage, currentSet, numTokens);
         int numEmblems = 0;
-        if (emblems != null && emblems.size() > 0) {
+        if (emblems != null && !emblems.isEmpty()) {
             int size = emblems.size();
             numEmblems = size;
             Rectangle rectangle = new Rectangle();

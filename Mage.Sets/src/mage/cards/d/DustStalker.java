@@ -25,7 +25,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  */
 public final class DustStalker extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("if you control no other colorless creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("if you control no other colorless creatures");
 
     static {
         filter.add(AnotherPredicate.instance);
