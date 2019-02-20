@@ -31,7 +31,7 @@ public class GravestormWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.ZONE_CHANGE) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
+            if (zEvent.isDiesEvent()) {
                 gravestormCount++;
             }
         }

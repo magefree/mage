@@ -119,8 +119,7 @@ class CryOfTheCarnariumReplacementEffect extends ReplacementEffectImpl {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         return zEvent.getTarget() != null
                 && zEvent.getTarget().isCreature()
-                && zEvent.getFromZone() == Zone.BATTLEFIELD
-                && zEvent.getToZone() == Zone.GRAVEYARD;
+                && zEvent.isDiesEvent();
     }
 
 }
