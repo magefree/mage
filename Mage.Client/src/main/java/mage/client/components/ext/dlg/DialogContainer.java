@@ -1,6 +1,6 @@
 package mage.client.components.ext.dlg;
 
-import mage.client.components.ext.MessageDlg;
+import mage.client.components.ext.MessageDialogType;
 import mage.client.components.ext.dlg.impl.ChoiceDialog;
 import mage.client.components.ext.dlg.impl.StackDialog;
 
@@ -37,146 +37,99 @@ public class DialogContainer extends JPanel {
         setLayout(null);
         drawContainer = true;
 
-        if (dialogType == DialogManager.MTGDialogs.MessageDialog) {
-            //backgroundColor = new Color(0, 255, 255, 60);
-            if (params.type == MessageDlg.Types.Warning) {
-                backgroundColor = new Color(255, 0, 0, 90);
-            } else {
-                backgroundColor = new Color(0, 0, 0, 90);
+        switch (dialogType) {
+            case MESSAGE:
+                //backgroundColor = new Color(0, 255, 255, 60);
+                if (params.type == MessageDialogType.WARNING) {
+                    backgroundColor = new Color(255, 0, 0, 90);
+                } else {
+                    backgroundColor = new Color(0, 0, 0, 90);
+                }
+                alpha = 0;
+                //MessageDlg dlg = new MessageDlg(params);
+                //add(dlg);
+                //dlg.setLocation(X_OFFSET + 10, Y_OFFSET);
+                //dlg.updateSize(params.rect.width, params.rect.height);
+                break;
+            case STACK: {
+                //backgroundColor = new Color(0, 255, 255, 60);
+                backgroundColor = new Color(0, 0, 0, 50);
+                alpha = 0;
+                StackDialog dlg = new StackDialog(params);
+                add(dlg);
+                dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
+                //int width = Math.min(params.rect.width - 80, 600);
+                int width = params.rect.width;
+                int height = params.rect.height - 80;
+                dlg.updateSize(width, height);
+                break;
             }
-            alpha = 0;
-            //MessageDlg dlg = new MessageDlg(params);
-            //add(dlg);
-            //dlg.setLocation(X_OFFSET + 10, Y_OFFSET);
-            //dlg.updateSize(params.rect.width, params.rect.height);
-        } else if (dialogType == DialogManager.MTGDialogs.StackDialog) {
-            //backgroundColor = new Color(0, 255, 255, 60);
-            backgroundColor = new Color(0, 0, 0, 50);
-            alpha = 0;
-            StackDialog dlg = new StackDialog(params);
-            add(dlg);
-            dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
-            //int width = Math.min(params.rect.width - 80, 600);
-            int width = params.rect.width;
-            int height = params.rect.height - 80;
-            dlg.updateSize(width, height);
-        }
         /*
-        else if (dialogType == DialogManager.MTGDialogs.CombatDialog) {
+        else if (dialogType == DialogManager.MTGDialogs.COMBAT) {
             backgroundColor = new Color(0, 0, 0, 60);
             alpha = 0;
-            CombatDialog dlg = new CombatDialog(params);
+            COMBAT dlg = new COMBAT(params);
             add(dlg);
             dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
             dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
 
-        }*/ else if (dialogType == DialogManager.MTGDialogs.ChoiceDialog) {
+        }*/
+            case CHOICE: {
 
-            //backgroundColor = new Color(200, 200, 172, 120);
-            //backgroundColor = new Color(180, 150, 200, 120);
-            //backgroundColor = new Color(0, 255, 0, 60);
+                //backgroundColor = new Color(200, 200, 172, 120);
+                //backgroundColor = new Color(180, 150, 200, 120);
+                //backgroundColor = new Color(0, 255, 0, 60);
 
-            //backgroundColor = new Color(139, 46, 173, 20);
-            backgroundColor = new Color(0, 0, 0, 110);
-            //backgroundColor = new Color(139, 46, 173, 0);
+                //backgroundColor = new Color(139, 46, 173, 20);
+                backgroundColor = new Color(0, 0, 0, 110);
+                //backgroundColor = new Color(139, 46, 173, 0);
 
-            alpha = 0;
-            ChoiceDialog dlg = new ChoiceDialog(params, "Choose");
-            add(dlg);
-            //GameManager.getManager().setCurrentChoiceDlg(dlg);
-            dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
-            dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
+                alpha = 0;
+                ChoiceDialog dlg = new ChoiceDialog(params, "Choose");
+                add(dlg);
+                //GameManager.getManager().setCurrentChoiceDlg(dlg);
+                dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
+                dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
 
-        } else if (dialogType == DialogManager.MTGDialogs.GraveDialog) {
-
-            backgroundColor = new Color(0, 0, 0, 110);
-
-            alpha = 0;
-            ChoiceDialog dlg = new ChoiceDialog(params, "Graveyard");
-            add(dlg);
-            dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
-            dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
-
-        } else if (dialogType == DialogManager.MTGDialogs.ExileDialog) {
-
-            backgroundColor = new Color(250, 250, 250, 50);
-
-            alpha = 0;
-            ChoiceDialog dlg = new ChoiceDialog(params, "Exile");
-            add(dlg);
-            dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
-            dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
-
-        } else if (dialogType == DialogManager.MTGDialogs.EmblemsDialog) {
-
-            backgroundColor = new Color(0, 0, 50, 110);
-
-            alpha = 0;
-            ChoiceDialog dlg = new ChoiceDialog(params, "Command Zone (Commander, Emblems and Planes)");
-            add(dlg);
-            dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
-            dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
-
-        } /*else if (dialogType == DialogManager.MTGDialogs.GraveDialog) {
-            backgroundColor = new Color(20, 20, 20, 120);
-            alpha = 0;
-            GraveDialog dlg = new GraveDialog(params);
-            add(dlg);
-            dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
-            dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
-
-        } else if (dialogType == DialogManager.MTGDialogs.RevealDialog) {
-            backgroundColor = new Color(90, 135, 190, 80);
-            alpha = 0;
-            RevealDialog dlg = new RevealDialog(params);
-            add(dlg);
-            dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
-            dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
-
-        } else if (dialogType == DialogManager.MTGDialogs.AssignDamageDialog) {
-            backgroundColor = new Color(255, 255, 255, 130);
-            alpha = 0;
-            AssignDamageDialog dlg = new AssignDamageDialog(params);
-            add(dlg);
-            dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
-            dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
-        } else if (dialogType == DialogManager.MTGDialogs.ManaChoiceDialog) {
-            backgroundColor = new Color(0, 255, 255, 60);
-            alpha = 20;
-            ManaChoiceDialog dlg = new ManaChoiceDialog(params);
-            add(dlg);
-            dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
-            dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
-
-            //isGradient = true;
-            gradient = ImageManager.getGradientImage();
-            if (gradient != null) {
-                b = ImageToBufferedImage.toBufferedImage(gradient);
-                b = Transparency.makeImageTranslucent(b, 0.35);
-                Rectangle2D tr = new Rectangle2D.Double(0, 0, params.rect.width, params.rect.height);
-                //gradient = gradient.getScaledInstance(w, h, Image.SCALE_SMOOTH);
-                tp = new TexturePaint(b, tr);
+                break;
             }
-        } else if (dialogType == DialogManager.MTGDialogs.ChooseDeckDialog) {
-            MWDeckPanel deckPanel = new MWDeckPanel(params.getDeckList(), params.isAI);
-            deckPanel.setVisible(true);
-            deckPanel.setBounds(0,0,480,320);
-            add(deckPanel);
-            drawContainer = false;
-        } else if (dialogType == DialogManager.MTGDialogs.ChooseCommonDialog) {
-            MWChoosePanel choosePanel = new MWChoosePanel(params.getObjectList(), params.getTitle());
-            choosePanel.setVisible(true);
-            choosePanel.setBounds(0,0,440,240);
-            add(choosePanel);
-            drawContainer = false;
-        } else if (dialogType == DialogManager.MTGDialogs.AboutDialog) {
-            backgroundColor = new Color(255, 255, 255, 120);
-            alpha = 0;
-            AboutDialog dlg = new AboutDialog();
-            add(dlg);
-            dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
+            case GRAVEYARD: {
+
+                backgroundColor = new Color(0, 0, 0, 110);
+
+                alpha = 0;
+                ChoiceDialog dlg = new ChoiceDialog(params, "Graveyard");
+                add(dlg);
+                dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
+                dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
+
+                break;
+            }
+            case EXILE: {
+
+                backgroundColor = new Color(250, 250, 250, 50);
+
+                alpha = 0;
+                ChoiceDialog dlg = new ChoiceDialog(params, "Exile");
+                add(dlg);
+                dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
+                dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
+
+                break;
+            }
+            case EMBLEMS: {
+
+                backgroundColor = new Color(0, 0, 50, 110);
+
+                alpha = 0;
+                ChoiceDialog dlg = new ChoiceDialog(params, "Command Zone (Commander, Emblems and Planes)");
+                add(dlg);
+                dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
+                dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
+
+                break;
+            }
         }
-        */
     }
 
     public void cleanUp() {

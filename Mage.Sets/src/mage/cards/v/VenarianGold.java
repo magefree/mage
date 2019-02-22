@@ -71,7 +71,7 @@ class VenarianGoldValue implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         MageObject mageObject = game.getLastKnownInformation(sourceAbility.getSourceId(), Zone.STACK);
-        if (mageObject != null && mageObject instanceof StackObject) {
+        if (mageObject instanceof StackObject) {
             return ((StackObject) mageObject).getStackAbility().getManaCostsToPay().getX();
         }
         return 0;

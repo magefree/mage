@@ -16,10 +16,7 @@ import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public enum UserStatsRepository {
 
@@ -89,7 +86,7 @@ public enum UserStatsRepository {
         } catch (SQLException ex) {
             Logger.getLogger(UserStatsRepository.class).error("Error getting all users from DB - ", ex);
         }
-        return null;
+        return Collections.emptyList();
     }
 
     public long getLatestEndTimeMs() {

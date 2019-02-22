@@ -26,7 +26,7 @@ public class MageRoundPane extends JPanel {
     private int Y_OFFSET = 30;
     private final Color defaultBackgroundColor = new Color(141, 130, 112, 200); // color of the frame of the popup window
     private Color backgroundColor = defaultBackgroundColor;
-    private static final int alpha = 0;
+    private static final int ALPHA = 0;
     private static final Map<ShadowKey, BufferedImage> SHADOW_IMAGE_CACHE;
     private static final Map<Key, BufferedImage> IMAGE_CACHE;
 
@@ -163,8 +163,8 @@ public class MageRoundPane extends JPanel {
         /**
          * Add white translucent substrate
          */
-        /*if (alpha != 0) {
-            g2.setColor(new Color(255, 255, 255, alpha));
+        /*if (ALPHA != 0) {
+            g2.setColor(new Color(255, 255, 255, ALPHA));
             g2.fillRoundRect(x, y, w, h, arc, arc);
         }*/
         g2.setColor(key.backgroundColor);

@@ -39,8 +39,8 @@ public class DialogManager extends JComponent implements MouseListener,
     }
 
     public enum MTGDialogs {
-        none, AboutDialog, MessageDialog, StackDialog, AssignDamageDialog, ManaChoiceDialog, ChoiceDialog, EmblemsDialog, GraveDialog, DialogContainer, CombatDialog,
-        ChooseDeckDialog, ChooseCommonDialog, RevealDialog, ExileDialog
+        NONE, ABOUT, MESSAGE, STACK, ASSIGN_DAMAGE, MANA_CHOICE, CHOICE, EMBLEMS, GRAVEYARD, DialogContainer, COMBAT,
+        CHOOSE_DECK, CHOOSE_COMMON, REVEAL, EXILE
     }
 
     /**
@@ -58,7 +58,7 @@ public class DialogManager extends JComponent implements MouseListener,
         }
     }
 
-    private MTGDialogs currentDialog = MTGDialogs.none;
+    private MTGDialogs currentDialog = MTGDialogs.NONE;
 
     private DialogContainer dialogContainer = null;
 
@@ -133,7 +133,7 @@ public class DialogManager extends JComponent implements MouseListener,
         params.gameId = gameId;
         params.feedbackPanel = feedbackPanel;
         params.setCards(cards);
-        dialogContainer = new DialogContainer(MTGDialogs.StackDialog, params);
+        dialogContainer = new DialogContainer(MTGDialogs.STACK, params);
         dialogContainer.setVisible(true);
         add(dialogContainer);
 
@@ -163,7 +163,7 @@ public class DialogManager extends JComponent implements MouseListener,
         params.gameId = gameId;
         //params.feedbackPanel = feedbackPanel;
         params.setCards(cards);
-        dialogContainer = new DialogContainer(MTGDialogs.GraveDialog, params);
+        dialogContainer = new DialogContainer(MTGDialogs.GRAVEYARD, params);
         dialogContainer.setVisible(true);
         add(dialogContainer);
 
@@ -192,7 +192,7 @@ public class DialogManager extends JComponent implements MouseListener,
         params.bigCard = bigCard;
         params.gameId = gameId;
         params.setCards(cards);
-        dialogContainer = new DialogContainer(MTGDialogs.ExileDialog, params);
+        dialogContainer = new DialogContainer(MTGDialogs.EXILE, params);
         dialogContainer.setVisible(true);
         add(dialogContainer);
 
@@ -222,7 +222,7 @@ public class DialogManager extends JComponent implements MouseListener,
         params.gameId = gameId;
         //params.feedbackPanel = feedbackPanel;
         params.setCards(cards);
-        dialogContainer = new DialogContainer(MTGDialogs.EmblemsDialog, params);
+        dialogContainer = new DialogContainer(MTGDialogs.EMBLEMS, params);
         dialogContainer.setVisible(true);
         add(dialogContainer);
 
@@ -248,7 +248,7 @@ public class DialogManager extends JComponent implements MouseListener,
             removeAll();
         }
 
-        this.currentDialog = MTGDialogs.none;
+        this.currentDialog = MTGDialogs.NONE;
 
         setVisible(false);
 
@@ -312,6 +312,7 @@ public class DialogManager extends JComponent implements MouseListener,
 
     @Override
     public void mouseExited(MouseEvent e) {
+
     }
 
     @Override
@@ -360,7 +361,7 @@ public class DialogManager extends JComponent implements MouseListener,
     public void mouseWheelMoved(MouseWheelEvent e) {
         int notches = e.getWheelRotation();
 //        System.out.println("outx:"+notches);
-//        if (currentDialog != null && currentDialog.equals(MTGDialogs.ChooseCommonDialog)) {
+//        if (currentDialog != null && currentDialog.equals(MTGDialogs.CHOOSE_COMMON)) {
 //            System.out.println("out:"+1);
 //        }
     }

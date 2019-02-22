@@ -805,7 +805,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         insertArrow = new JLabel();
         insertArrow.setSize(20, 20);
         insertArrow.setVisible(false);
-        cardContent.add(insertArrow, new Integer(1000));
+        cardContent.add(insertArrow, 1000);
 
         // Selection panel
         selectionPanel = new SelectionBox();

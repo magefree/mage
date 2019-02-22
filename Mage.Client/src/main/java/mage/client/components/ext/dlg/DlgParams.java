@@ -1,7 +1,7 @@
 package mage.client.components.ext.dlg;
 
 import mage.client.cards.BigCard;
-import mage.client.components.ext.MessageDlg;
+import mage.client.components.ext.MessageDialogType;
 import mage.client.game.FeedbackPanel;
 import mage.view.CardsView;
 
@@ -19,7 +19,7 @@ import java.util.UUID;
 public class DlgParams {
 
     public Rectangle rect;
-    public MessageDlg.Types type;
+    public MessageDialogType type;
     public BigCard bigCard;
     public FeedbackPanel feedbackPanel;
     public UUID gameId;
@@ -33,13 +33,13 @@ public class DlgParams {
 
     private String title;
     private int opponentID;
-    boolean isOptional = false;
-    boolean isChooseAbility = false;
-    boolean isCancelStopsPlaying = true;
+    private boolean isOptional = false;
+    private boolean isChooseAbility = false;
+    private boolean isCancelStopsPlaying = true;
 
-    boolean isAI = false;
+    private boolean isAI = false;
 
-    public Set<String> manaChoices = new HashSet<>();
+    private Set<String> manaChoices = new HashSet<>();
 
     public int getPlayerID() {
         return playerID;

@@ -111,7 +111,7 @@ class CanTargetOnlyWallsPredicate implements Predicate<MageObject> {
             for (Mode mode : stackObject.getStackAbility().getModes().values()) {
                 for (Target target : mode.getTargets()) {
                     Filter filter = target.getFilter();
-                    if (filter != null && filter instanceof FilterPermanent) {
+                    if (filter instanceof FilterPermanent) {
                         for (Object predicate : filter.getPredicates()) {
                             if (predicate instanceof SubtypePredicate) {
                                 if (predicate.toString().equals("Subtype(Wall)")) {

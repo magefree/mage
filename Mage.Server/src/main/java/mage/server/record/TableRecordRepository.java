@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 
 public enum TableRecordRepository {
@@ -63,7 +64,7 @@ public enum TableRecordRepository {
         } catch (SQLException ex) {
             Logger.getLogger(TableRecordRepository.class).error("Error getting table_records from DB - ", ex);
         }
-        return null;
+        return Collections.emptyList();
     }
 
     public void closeDB() {
