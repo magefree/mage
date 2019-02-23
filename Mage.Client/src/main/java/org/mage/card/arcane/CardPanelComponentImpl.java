@@ -1,11 +1,27 @@
 package org.mage.card.arcane;
 
-import com.google.common.base.Function;
-import com.google.common.collect.MapMaker;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.StringTokenizer;
+import java.util.UUID;
+
+import javax.swing.*;
+
+import org.apache.log4j.Logger;
+import org.jdesktop.swingx.graphics.GraphicsUtilities;
+import org.mage.plugins.card.images.ImageCache;
+import org.mage.plugins.card.utils.impl.ImageManagerImpl;
+
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
+
 import mage.cards.action.ActionCallback;
+import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.ImageCaches;
 import mage.client.util.ImageHelper;
+import mage.client.util.SoftValuesLoadingCache;
 import mage.components.ImagePanel;
 import mage.components.ImagePanelStyle;
 import mage.constants.AbilityType;
@@ -13,18 +29,6 @@ import mage.view.CardView;
 import mage.view.CounterView;
 import mage.view.PermanentView;
 import mage.view.StackAbilityView;
-import org.apache.log4j.Logger;
-import org.jdesktop.swingx.graphics.GraphicsUtilities;
-import org.mage.plugins.card.images.ImageCache;
-import org.mage.plugins.card.utils.impl.ImageManagerImpl;
-import mage.client.constants.Constants;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.util.Map;
-import java.util.StringTokenizer;
-import java.util.UUID;
 
 /**
  * Class for drawing the mage card object by using a form based JComponent
@@ -78,7 +82,7 @@ public class CardPanelComponentImpl extends CardPanel {
     private boolean displayTitleAnyway;
     private boolean displayFullImagePath;
 
-    private static final Map<Key, BufferedImage> IMAGE_CACHE;
+    private final static SoftValuesLoadingCache<Key, BufferedImage> IMAGE_CACHE;
 
     static class Key {
 
@@ -175,7 +179,7 @@ public class CardPanelComponentImpl extends CardPanel {
     }
 
     static {
-        IMAGE_CACHE = ImageCaches.register(new MapMaker().softValues().makeComputingMap((Function<Key, BufferedImage>) key -> createImage(key)));
+        IMAGE_CACHE = ImageCaches.register(SoftValuesLoadingCache.from(CardPanelComponentImpl::createImage));
     }
 
     static private boolean canShowCardIcons(int cardFullWidth, boolean cardHasImage){
@@ -380,7 +384,7 @@ public class CardPanelComponentImpl extends CardPanel {
         }
 
         g2d.drawImage(
-                IMAGE_CACHE.get(
+                IMAGE_CACHE.getOrThrow(
                         new Key(getWidth(), getHeight(), getCardWidth(), getCardHeight(), getCardXOffset(), getCardYOffset(),
                                 hasImage, isSelected(), isChoosable(), gameCard.isPlayable(), gameCard.isCanAttack())),
                 0, 0, null);
