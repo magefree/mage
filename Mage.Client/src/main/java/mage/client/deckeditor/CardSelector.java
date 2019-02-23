@@ -72,15 +72,12 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         currentView = mainModel; // by default we use List View
 
         listCodeSelected = new CheckBoxList();
-        // remove the all option
-        boolean is_removeFinish = false;
 
         String[] setCodes = ConstructedFormats.getTypes();
         java.util.List<String> result = new ArrayList<>();
 
-        for (int i = 0; (i < setCodes.length) && (!is_removeFinish); i++) {
-            String item = setCodes[i];
-            if (!item.equals(ConstructedFormats.ALL)) {
+        for (String item : setCodes) {
+            if (!item.equals(ConstructedFormats.ALL_SETS)) {
                 result.add(item);
             }
         }
@@ -360,9 +357,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 for (int itemIndex : choiseValue) {
 
                     java.util.List<String> listReceived = ConstructedFormats.getSetsByFormat(x.getElementAt(itemIndex).toString());
-                    listReceived.stream().filter((item) -> (setCodes.contains(item) == false)).forEachOrdered((item) -> {
-                        setCodes.add(item);
-                    });
+                    listReceived.stream().filter(item -> !setCodes.contains(item)).forEachOrdered(setCodes::add);
                 }
                 criteria.setCodes(setCodes.toArray(new String[0]));
             }

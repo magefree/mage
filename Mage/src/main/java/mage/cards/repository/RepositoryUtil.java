@@ -32,7 +32,8 @@ public final class RepositoryUtil {
         Dao<DatabaseVersion, Object> dbVersionDao = DaoManager.createDao(connectionSource, DatabaseVersion.class);
 
         QueryBuilder<DatabaseVersion, Object> queryBuilder = dbVersionDao.queryBuilder();
-        queryBuilder.where().eq("entity", new SelectArg(entityName)).and().eq("version", version);
+        queryBuilder.where().eq("entity", new SelectArg(entityName))
+                .and().eq("version", new SelectArg(version));
         List<DatabaseVersion> dbVersions = dbVersionDao.query(queryBuilder.prepare());
 
         if (dbVersions.isEmpty()) {
@@ -56,7 +57,8 @@ public final class RepositoryUtil {
         Dao<DatabaseBuild, Object> dbBuildDao = DaoManager.createDao(connectionSource, DatabaseBuild.class);
 
         QueryBuilder<DatabaseBuild, Object> queryBuilder = dbBuildDao.queryBuilder();
-        queryBuilder.where().eq("entity", new SelectArg(entityName)).and().eq("last_build", currentBuild);
+        queryBuilder.where().eq("entity", new SelectArg(entityName))
+                .and().eq("last_build", new SelectArg(currentBuild));
         List<DatabaseBuild> dbBuilds = dbBuildDao.query(queryBuilder.prepare());
 
         if (dbBuilds.isEmpty()) {

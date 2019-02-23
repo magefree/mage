@@ -49,7 +49,7 @@ public final class GrothamaAllDevouring extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new GrothamaAllDevouringDrawCardsEffect(), false), new GrothamaAllDevouringWatcher());
     }
 
-    public GrothamaAllDevouring(final GrothamaAllDevouring card) {
+    private GrothamaAllDevouring(final GrothamaAllDevouring card) {
         super(card);
     }
 
@@ -61,16 +61,16 @@ public final class GrothamaAllDevouring extends CardImpl {
 
 class GrothamaAllDevouringGainAbilityEffect extends GainAbilityAllEffect {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creatures");
+    private static final FilterCreaturePermanent otherCreatureFilter = new FilterCreaturePermanent("other creatures");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        otherCreatureFilter.add(AnotherPredicate.instance);
     }
 
     GrothamaAllDevouringGainAbilityEffect() {
         super(new AttacksTriggeredAbility(
                 new GrothamaAllDevouringFightEffect(null, null), true
-        ), Duration.WhileOnBattlefield, filter);
+        ), Duration.WhileOnBattlefield, otherCreatureFilter);
         this.staticText = "Other creatures have \"Whenever this creature attacks, you may have it fight {this}.\"";
     }
 
@@ -168,7 +168,7 @@ class GrothamaAllDevouringDrawCardsEffect extends OneShotEffect {
 
 class GrothamaAllDevouringWatcher extends Watcher {
 
-    Map<MageObjectReference, Map<UUID, Integer>> damageMap = new HashMap<>();
+    private Map<MageObjectReference, Map<UUID, Integer>> damageMap = new HashMap<>();
 
     GrothamaAllDevouringWatcher() {
         super(GrothamaAllDevouringWatcher.class, WatcherScope.GAME);

@@ -25,8 +25,8 @@ import mage.players.Player;
  */
 public final class WarsToll extends CardImpl {
 
-    private final static FilterCreaturePermanent filterOpponentCreature = new FilterCreaturePermanent("creature an opponent controls");
-    private final static FilterLandPermanent filterOpponentLand = new FilterLandPermanent("an opponent taps a land");
+    private static final FilterCreaturePermanent filterOpponentCreature = new FilterCreaturePermanent("creature an opponent controls");
+    private static final FilterLandPermanent filterOpponentLand = new FilterLandPermanent("an opponent taps a land");
 
     static {
         filterOpponentCreature.add(new ControllerPredicate(TargetController.OPPONENT));

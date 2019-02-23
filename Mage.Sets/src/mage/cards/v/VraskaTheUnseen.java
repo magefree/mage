@@ -74,7 +74,6 @@ public final class VraskaTheUnseen extends CardImpl {
 class VraskaTheUnseenGainAbilityEffect extends ContinuousEffectImpl {
 
     protected Ability ability;
-    protected int startingTurn;
 
     public VraskaTheUnseenGainAbilityEffect(Ability ability) {
         super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);

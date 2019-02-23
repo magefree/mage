@@ -9,9 +9,6 @@ import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.support.DatabaseConnection;
 import com.j256.ormlite.table.TableUtils;
-import java.io.File;
-import java.sql.SQLException;
-import java.util.List;
 import mage.cards.repository.CardRepository;
 import mage.cards.repository.RepositoryUtil;
 import org.apache.log4j.Logger;
@@ -20,6 +17,10 @@ import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.Hash;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.apache.shiro.crypto.hash.SimpleHash;
+
+import java.io.File;
+import java.sql.SQLException;
+import java.util.List;
 
 public enum AuthorizedUserRepository {
 
@@ -108,7 +109,7 @@ public enum AuthorizedUserRepository {
     public void closeDB() {
         try {
             if (dao != null && dao.getConnectionSource() != null) {
-                DatabaseConnection conn = dao.getConnectionSource().getReadWriteConnection();
+                DatabaseConnection conn = dao.getConnectionSource().getReadWriteConnection(dao.getTableName());
                 conn.executeStatement("shutdown compact", 0);
             }
         } catch (SQLException ex) {

@@ -35,7 +35,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class GideonBattleForged extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));

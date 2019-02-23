@@ -24,7 +24,7 @@ import org.apache.log4j.Logger;
  */
 public class DraftSession {
 
-    protected final static Logger logger = Logger.getLogger(DraftSession.class);
+    protected static final Logger logger = Logger.getLogger(DraftSession.class);
 
     protected final UUID userId;
     protected final UUID playerId;

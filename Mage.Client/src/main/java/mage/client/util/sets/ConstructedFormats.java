@@ -16,7 +16,7 @@ import java.util.*;
  */
 public final class ConstructedFormats {
 
-    public static final String ALL = "- All Sets";
+    public static final String ALL_SETS = "- All Sets";
     public static final String STANDARD = "- Standard";
     public static final String EXTENDED = "- Extended";
     public static final String FRONTIER = "- Frontier";
@@ -65,7 +65,7 @@ public final class ConstructedFormats {
     }
 
     public static List<String> getSetsByFormat(final String format) {
-        if (!format.equals(ALL)) {
+        if (!format.equals(ALL_SETS)) {
             return underlyingSetCodesPerFormat.get(format);
         }
         return all;
@@ -244,7 +244,7 @@ public final class ConstructedFormats {
             formats.add(0, EXTENDED);
             formats.add(0, STANDARD);
         }
-        formats.add(0, ALL);
+        formats.add(0, ALL_SETS);
     }
 
     private static String getBlockDisplayName(String blockName) {

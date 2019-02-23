@@ -24,7 +24,7 @@ import mage.constants.Zone;
  * @author Loki
  */
 public final class EzurisBrigade extends CardImpl {
-    private static final String text = "<i>Metalcraft</i> &mdash; As long as you control three or more artifacts, Ezuri's Brigade gets +4/+4 and has trample";
+    private static final String rule = "<i>Metalcraft</i> &mdash; As long as you control three or more artifacts, Ezuri's Brigade gets +4/+4 and has trample";
 
     public EzurisBrigade (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
@@ -34,7 +34,7 @@ public final class EzurisBrigade extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         ContinuousEffect boostSource = new BoostSourceEffect(4, 4, Duration.WhileOnBattlefield);
-        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(boostSource, MetalcraftCondition.instance, text);
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(boostSource, MetalcraftCondition.instance, rule);
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield), MetalcraftCondition.instance, ""));
         this.addAbility(ability);

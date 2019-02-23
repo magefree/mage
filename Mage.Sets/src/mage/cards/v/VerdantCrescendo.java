@@ -19,7 +19,7 @@ import java.util.UUID;
  */
 public final class VerdantCrescendo extends CardImpl {
 
-    private final static FilterCard filter = new FilterCard("Nissa, Nature's Artisan");
+    private static final FilterCard filter = new FilterCard("Nissa, Nature's Artisan");
 
     static {
         filter.add(new NamePredicate("Nissa, Nature's Artisan"));

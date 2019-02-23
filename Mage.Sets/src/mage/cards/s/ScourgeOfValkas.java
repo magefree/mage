@@ -31,7 +31,7 @@ import mage.target.common.TargetAnyTarget;
  */
 public final class ScourgeOfValkas extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("{this} or another Dragon");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("{this} or another Dragon");
 
     static {
         filter.add(new SubtypePredicate(SubType.DRAGON));

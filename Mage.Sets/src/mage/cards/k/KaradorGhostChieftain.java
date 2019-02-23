@@ -1,4 +1,3 @@
-
 package mage.cards.k;
 
 import java.util.UUID;
@@ -148,10 +147,14 @@ class KaradorGhostChieftainCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (objectId.equals(getTargetPointer().getFirst(game, source))) {
+        Card objectCard = game.getCard(objectId);
+        if (objectCard.getId().equals(getTargetPointer().getFirst(game, source))
+                && objectCard.isCreature()
+                && objectCard.getSpellAbility() != null
+                && objectCard.getSpellAbility().spellCanBeActivatedRegularlyNow(affectedControllerId, game)) {
             if (affectedControllerId.equals(source.getControllerId())) {
                 KaradorGhostChieftainWatcher watcher = game.getState().getWatcher(KaradorGhostChieftainWatcher.class, source.getSourceId());
-                return watcher != null &&  !watcher.isAbilityUsed();
+                return watcher != null && !watcher.isAbilityUsed();
             }
         }
         return false;

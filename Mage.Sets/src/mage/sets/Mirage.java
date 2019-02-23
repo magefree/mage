@@ -210,6 +210,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Nettletooth Djinn", 232, Rarity.UNCOMMON, mage.cards.n.NettletoothDjinn.class));
         cards.add(new SetCardInfo("Noble Elephant", 30, Rarity.COMMON, mage.cards.n.NobleElephant.class));
         cards.add(new SetCardInfo("Nocturnal Raid", 132, Rarity.UNCOMMON, mage.cards.n.NocturnalRaid.class));
+        cards.add(new SetCardInfo("Null Chamber", 31, Rarity.RARE, mage.cards.n.NullChamber.class));
         cards.add(new SetCardInfo("Pacifism", 32, Rarity.COMMON, mage.cards.p.Pacifism.class));
         cards.add(new SetCardInfo("Painful Memories", 133, Rarity.UNCOMMON, mage.cards.p.PainfulMemories.class));
         cards.add(new SetCardInfo("Patagia Golem", 313, Rarity.UNCOMMON, mage.cards.p.PatagiaGolem.class));

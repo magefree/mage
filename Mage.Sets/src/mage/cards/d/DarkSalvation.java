@@ -58,7 +58,7 @@ public final class DarkSalvation extends CardImpl {
 
 class ZombiesControlledByTargetPlayerCount implements DynamicValue {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombies");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombies");
 
     static {
         filter.add(new SubtypePredicate(SubType.ZOMBIE));

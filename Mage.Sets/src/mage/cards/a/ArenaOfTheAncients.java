@@ -23,7 +23,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  */
 public final class ArenaOfTheAncients extends CardImpl {
     
-    private final static FilterCreaturePermanent legendaryFilter = new FilterCreaturePermanent("legendary creatures");
+    private static final FilterCreaturePermanent legendaryFilter = new FilterCreaturePermanent("legendary creatures");
     static {
         legendaryFilter.add(new SupertypePredicate(SuperType.LEGENDARY));
     }

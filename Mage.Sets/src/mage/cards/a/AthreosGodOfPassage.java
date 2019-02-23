@@ -144,7 +144,7 @@ class AthreosDiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
+        if (zEvent.isDiesEvent()) {
             if (zEvent.getTarget() != null && filter.match(zEvent.getTarget(), sourceId, controllerId, game)) {
                 for (Effect effect : this.getEffects()) {
                     effect.setValue("creatureId", event.getTargetId());

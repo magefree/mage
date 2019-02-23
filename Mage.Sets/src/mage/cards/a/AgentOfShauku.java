@@ -25,7 +25,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class AgentOfShauku extends CardImpl {
 
-    final static FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
+    static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 
     public AgentOfShauku(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

@@ -23,9 +23,9 @@ import org.mage.card.arcane.CardRenderer;
 public final class GUISizeHelper {
 
     // relate the native image card size to a value of the size scale
-    final static int CARD_IMAGE_WIDTH = 312;
-    final static int CARD_IMAGE_HEIGHT = 445;
-    final static int CARD_IMAG_VALUE = 42;
+    static final int CARD_IMAGE_WIDTH = 312;
+    static final int CARD_IMAGE_HEIGHT = 445;
+    static final int CARD_IMAG_VALUE = 42;
 
     public static String basicSymbolSize = "small";
 

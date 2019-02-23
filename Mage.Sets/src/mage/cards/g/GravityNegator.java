@@ -25,7 +25,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class GravityNegator extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
 
     static {
         filter.add(AnotherPredicate.instance);

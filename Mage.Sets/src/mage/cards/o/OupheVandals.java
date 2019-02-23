@@ -32,7 +32,7 @@ import mage.target.common.TargetActivatedOrTriggeredAbility;
  */
 public final class OupheVandals extends CardImpl {
 
-    private final static FilterStackObject filter = new FilterStackObject("ability from an artifact source");
+    private static final FilterStackObject filter = new FilterStackObject("ability from an artifact source");
 
     static {
         filter.add(new ArtifactSourcePredicate());

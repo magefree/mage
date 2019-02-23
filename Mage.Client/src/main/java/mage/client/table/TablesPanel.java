@@ -24,6 +24,7 @@ import org.apache.log4j.Logger;
 import org.mage.card.arcane.CardRendererUtils;
 import org.ocpsoft.prettytime.Duration;
 import org.ocpsoft.prettytime.PrettyTime;
+import org.ocpsoft.prettytime.TimeFormat;
 import org.ocpsoft.prettytime.units.JustNow;
 
 import javax.swing.*;
@@ -82,7 +83,7 @@ public class TablesPanel extends javax.swing.JPanel {
     final JToggleButton[] filterButtons;
 
     // time formater
-    private PrettyTime timeFormater = new PrettyTime();
+    private PrettyTime timeFormater = new PrettyTime(Locale.ENGLISH);
 
     // time ago renderer
     TableCellRenderer timeAgoCellRenderer = new DefaultTableCellRenderer() {
@@ -219,9 +220,12 @@ public class TablesPanel extends javax.swing.JPanel {
         //  tableModel.setSession(session);
 
         // formater
-        timeFormater.setLocale(Locale.ENGLISH);
-        JustNow jn = timeFormater.getUnit(JustNow.class);
-        jn.setMaxQuantity(1000L * 30L); // 30 seconds gap (show "just now" from 0 to 30 secs)
+        // change default just now from 60 to 30 secs
+        // see workaround for 4.0 versions: https://github.com/ocpsoft/prettytime/issues/152
+        TimeFormat timeFormat = timeFormater.removeUnit(JustNow.class);
+        JustNow newJustNow = new JustNow();
+        newJustNow.setMaxQuantity(1000L * 30L); // 30 seconds gap (show "just now" from 0 to 30 secs)
+        timeFormater.registerUnit(newJustNow, timeFormat);
 
         // 1. TABLE CURRENT
         tableTables.createDefaultColumnsFromModel();
@@ -1377,35 +1381,35 @@ public class TablesPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout jPanelTopLayout = new javax.swing.GroupLayout(jPanelTop);
         jPanelTop.setLayout(jPanelTopLayout);
         jPanelTopLayout.setHorizontalGroup(
-            jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelTopLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnNewTable)
-                .addGap(6, 6, 6)
-                .addComponent(btnNewTournament)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(filterBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(filterBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnQuickStart)
-                .addContainerGap(792, Short.MAX_VALUE))
+                jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanelTopLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnNewTable)
+                                .addGap(6, 6, 6)
+                                .addComponent(btnNewTournament)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(filterBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(filterBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnQuickStart)
+                                .addContainerGap(792, Short.MAX_VALUE))
         );
         jPanelTopLayout.setVerticalGroup(
-            jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelTopLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnNewTable)
-                        .addComponent(btnNewTournament))
-                    .addGroup(jPanelTopLayout.createSequentialGroup()
-                        .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(filterBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnQuickStart))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(filterBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanelTopLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(btnNewTable)
+                                                .addComponent(btnNewTournament))
+                                        .addGroup(jPanelTopLayout.createSequentialGroup()
+                                                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(filterBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(btnQuickStart))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(filterBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addContainerGap())
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1442,12 +1446,12 @@ public class TablesPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout jPanelTablesLayout = new javax.swing.GroupLayout(jPanelTables);
         jPanelTables.setLayout(jPanelTablesLayout);
         jPanelTablesLayout.setHorizontalGroup(
-            jPanelTablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPaneTables, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+                jPanelTablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jSplitPaneTables, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
         );
         jPanelTablesLayout.setVerticalGroup(
-            jPanelTablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPaneTables, javax.swing.GroupLayout.DEFAULT_SIZE, 672, Short.MAX_VALUE)
+                jPanelTablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jSplitPaneTables, javax.swing.GroupLayout.DEFAULT_SIZE, 672, Short.MAX_VALUE)
         );
 
         jSplitPane1.setLeftComponent(jPanelTables);

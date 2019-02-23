@@ -21,7 +21,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public final class PeopleOfTheWoods extends CardImpl {
     
-    final static FilterControlledPermanent filterLands = new FilterControlledPermanent("Forests you control");
+    static final FilterControlledPermanent filterLands = new FilterControlledPermanent("Forests you control");
 
     static {
         filterLands.add(new SubtypePredicate(SubType.FOREST));

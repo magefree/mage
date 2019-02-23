@@ -21,7 +21,7 @@ import mage.target.TargetPermanent;
  */
 public final class DespoticScepter extends CardImpl {
 
-    private final static FilterPermanent FILTER = new FilterPermanent("permanent you own");
+    private static final FilterPermanent FILTER = new FilterPermanent("permanent you own");
 
     static {
         FILTER.add(new OwnerPredicate(TargetController.YOU));

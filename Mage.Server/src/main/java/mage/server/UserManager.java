@@ -29,7 +29,6 @@ public enum UserManager {
 
     private List<UserView> userInfoList = new ArrayList<>();
 
-    private static final Logger LOGGER = Logger.getLogger(UserManager.class);
 
     private final ReadWriteLock lock = new ReentrantReadWriteLock();
     private final ConcurrentHashMap<UUID, User> users = new ConcurrentHashMap<>();
@@ -59,7 +58,7 @@ public enum UserManager {
 
     public Optional<User> getUser(UUID userId) {
         if (!users.containsKey(userId)) {
-            LOGGER.trace(String.format("User with id %s could not be found", userId));
+            logger.warn(String.format("User with id %s could not be found", userId));;
             return Optional.empty();
         } else {
             return Optional.of(users.get(userId));
@@ -130,10 +129,10 @@ public enum UserManager {
                     -> USER_EXECUTOR.execute(
                             () -> {
                                 try {
-                                    LOGGER.info("USER REMOVE - " + user.getName() + " (" + reason.toString() + ")  userId: " + userId + " [" + user.getGameInfo() + ']');
+                                    logger.info("USER REMOVE - " + user.getName() + " (" + reason.toString() + ")  userId: " + userId + " [" + user.getGameInfo() + ']');
                                     user.removeUserFromAllTables(reason);
                                     ChatManager.instance.removeUser(user.getId(), reason);
-                                    LOGGER.debug("USER REMOVE END - " + user.getName());
+                                    logger.debug("USER REMOVE END - " + user.getName());
                                 } catch (Exception ex) {
                                     handleException(ex);
                                 }
@@ -248,12 +247,12 @@ public enum UserManager {
 
     public void handleException(Exception ex) {
         if (ex != null) {
-            LOGGER.fatal("User manager exception ", ex);
+            logger.fatal("User manager exception ", ex);
             if (ex.getStackTrace() != null) {
-                LOGGER.fatal(ex.getStackTrace());
+                logger.fatal(ex.getStackTrace());
             }
         } else {
-            LOGGER.fatal("User manager exception - null");
+            logger.fatal("User manager exception - null");
         }
     }
 

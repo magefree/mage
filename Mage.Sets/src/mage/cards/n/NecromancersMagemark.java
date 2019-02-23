@@ -111,7 +111,7 @@ class NecromancersMagemarkEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
+        if (zEvent.isDiesEvent()) {
             Permanent permanent = ((ZoneChangeEvent) event).getTarget();
             if (permanent != null && permanent.isControlledBy(source.getControllerId())) {
                 for (UUID attachmentId : permanent.getAttachments()) {

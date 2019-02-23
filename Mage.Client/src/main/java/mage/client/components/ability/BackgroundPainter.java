@@ -16,7 +16,7 @@ public class BackgroundPainter extends AbstractPainter {
 
     private final Color bgColor = Color.black;
 
-    static final float bgalpha = 0.6f;
+    static final float BACKGROUND_ALPHA = 0.6f;
 
     public BackgroundPainter() {
         super();
@@ -25,7 +25,7 @@ public class BackgroundPainter extends AbstractPainter {
 
     @Override
     protected void doPaint(Graphics2D g2, Object o, int i, int i1) {
-        float alpha = bgalpha;
+        float alpha = BACKGROUND_ALPHA;
         Component c = (Component)o;
         Composite composite = g2.getComposite();
         if (composite instanceof AlphaComposite) {

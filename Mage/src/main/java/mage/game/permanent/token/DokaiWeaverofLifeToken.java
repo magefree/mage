@@ -19,7 +19,7 @@ import mage.filter.common.FilterControlledPermanent;
  */
 public final class DokaiWeaverofLifeToken extends TokenImpl {
 
-    final static FilterControlledPermanent filterLands = new FilterControlledLandPermanent("lands you control");
+    static final FilterControlledPermanent filterLands = new FilterControlledLandPermanent("lands you control");
 
     public DokaiWeaverofLifeToken() {
         super("Elemental", "X/X green Elemental creature token, where X is the number of lands you control");

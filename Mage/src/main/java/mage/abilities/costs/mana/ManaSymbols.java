@@ -17,7 +17,7 @@ import java.util.Map;
  */
 public class ManaSymbols extends ArrayList<ManaSymbol> {
 
-    private final static Map<ColoredManaSymbol, ManaSymbol> coloredManaMap = new EnumMap<ColoredManaSymbol, ManaSymbol>(ColoredManaSymbol.class) {{
+    private static final Map<ColoredManaSymbol, ManaSymbol> coloredManaMap = new EnumMap<ColoredManaSymbol, ManaSymbol>(ColoredManaSymbol.class) {{
         put(ColoredManaSymbol.W, ManaSymbol.W);
         put(ColoredManaSymbol.U, ManaSymbol.U);
         put(ColoredManaSymbol.B, ManaSymbol.B);
@@ -29,7 +29,7 @@ public class ManaSymbols extends ArrayList<ManaSymbol> {
      * Contains all possible hybrid mana costs (each represents different hybrid mana symbol)
      * We'll use it for converting from hybrid mana cost to hybrid mana symbol.
      */
-    private final static Map<ManaSymbol, HybridManaCost> hybridManaMap = new EnumMap<ManaSymbol, HybridManaCost>(ManaSymbol.class) {{
+    private static final Map<ManaSymbol, HybridManaCost> hybridManaMap = new EnumMap<ManaSymbol, HybridManaCost>(ManaSymbol.class) {{
 
     /**
      *  Build map of all possible hybrid mana symbols assigning corresponding instance of hybrid mana cost.

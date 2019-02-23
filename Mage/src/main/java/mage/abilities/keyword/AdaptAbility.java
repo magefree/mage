@@ -16,7 +16,7 @@ public class AdaptAbility extends ActivatedAbilityImpl {
         super(Zone.BATTLEFIELD, new AdaptEffect(adaptNumber), new ManaCostsImpl(manaCost));
     }
 
-    public AdaptAbility(final AdaptAbility ability) {
+    private AdaptAbility(final AdaptAbility ability) {
         super(ability);
     }
 

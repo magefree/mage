@@ -22,7 +22,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class GoblinTrenches extends CardImpl {
 
-    final static FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
+    static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 
     public GoblinTrenches(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{W}");

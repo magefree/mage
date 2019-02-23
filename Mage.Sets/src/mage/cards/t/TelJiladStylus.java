@@ -22,7 +22,7 @@ import mage.target.TargetPermanent;
  */
 public final class TelJiladStylus extends CardImpl {
 
-    private final static FilterPermanent filter = new FilterPermanent();
+    private static final FilterPermanent filter = new FilterPermanent();
     
     static {
         filter.add(new OwnerPredicate(TargetController.YOU));

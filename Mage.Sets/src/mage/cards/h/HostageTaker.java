@@ -38,7 +38,7 @@ import mage.util.CardUtil;
  */
 public final class HostageTaker extends CardImpl {
 
-    private final static FilterPermanent filter = new FilterPermanent("another target artifact or creature");
+    private static final FilterPermanent filter = new FilterPermanent("another target artifact or creature");
 
     static {
         filter.add(AnotherPredicate.instance);

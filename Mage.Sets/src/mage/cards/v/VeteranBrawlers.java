@@ -31,7 +31,7 @@ public final class VeteranBrawlers extends CardImpl {
         filter.add(Predicates.not(TappedPredicate.instance));
     }
     
-    final static private String rule = "{this} can't block if you control an untapped land";
+    static final private String rule = "{this} can't block if you control an untapped land";
 
     public VeteranBrawlers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

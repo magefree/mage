@@ -21,7 +21,7 @@ public class SkipNextDrawStepTargetEffect extends ReplacementEffectImpl {
 
     public SkipNextDrawStepTargetEffect() {
         super(Duration.OneUse, Outcome.Detriment);
-        staticText = "Target player skips his or her next draw step";
+        staticText = "Target player skips their next draw step";
     }
 
     public SkipNextDrawStepTargetEffect(final SkipNextDrawStepTargetEffect effect) {

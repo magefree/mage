@@ -395,7 +395,7 @@ public abstract class CardRenderer {
     // Return the width of the drawn symbol
     protected int drawExpansionSymbol(Graphics2D g, int x, int y, int w, int h) {
         // Draw the expansion symbol
-        Image setSymbol = ManaSymbols.getSetSymbolImage(cardView.getExpansionSetCode(), cardView.getRarity().getCode());
+        Image setSymbol = ManaSymbols.getSetSymbolImage(cardView.getExpansionSetCode(), cardView.getRarity());
         int setSymbolWidth;
         if (setSymbol == null) {
             // Don't draw anything when we don't have a set symbol

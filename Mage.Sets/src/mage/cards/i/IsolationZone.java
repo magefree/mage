@@ -28,7 +28,7 @@ import mage.util.CardUtil;
  */
 public final class IsolationZone extends CardImpl {
 
-    private final static FilterPermanent filter = new FilterPermanent("creature or enchantment an opponent controls");
+    private static final FilterPermanent filter = new FilterPermanent("creature or enchantment an opponent controls");
 
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE),

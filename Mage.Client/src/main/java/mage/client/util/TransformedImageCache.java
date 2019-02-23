@@ -22,7 +22,7 @@ import com.mortennobel.imagescaling.ResampleOp;
  */
 public final class TransformedImageCache {
 
-    private final static class Key {
+    private static final class Key {
 
         final int width;
         final int height;

@@ -52,7 +52,7 @@ public final class DjinnIlluminatus extends CardImpl {
 
 class DjinnIlluminatusGainReplicateEffect extends ContinuousEffectImpl {
 
-    private final static FilterInstantOrSorcerySpell filter = new FilterInstantOrSorcerySpell();
+    private static final FilterInstantOrSorcerySpell filter = new FilterInstantOrSorcerySpell();
     private final Map<UUID, ReplicateAbility> replicateAbilities = new HashMap<>();
 
     public DjinnIlluminatusGainReplicateEffect() {

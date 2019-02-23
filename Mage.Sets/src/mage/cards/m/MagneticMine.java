@@ -58,8 +58,7 @@ class MagneticMineTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getFromZone() == Zone.BATTLEFIELD
-                && zEvent.getToZone() == Zone.GRAVEYARD
+        if (zEvent.isDiesEvent()
                 && zEvent.getTarget().isArtifact()
                 && !Objects.equals(zEvent.getTarget().getId(), this.getSourceId())) {
             this.getTargets().get(0).add(zEvent.getTarget().getControllerId(), game);

@@ -31,6 +31,8 @@ import java.util.stream.Collectors;
  */
 public final class SystemUtil {
 
+    private SystemUtil(){}
+
     public static final DateFormat dateFormat = new SimpleDateFormat("yy-M-dd HH:mm:ss");
 
     private static final String INIT_FILE_PATH = "config" + File.separator + "init.txt";
@@ -120,7 +122,7 @@ public final class SystemUtil {
             String cardInfo = card.getName() + " - " + card.getExpansionSetCode();
 
             // optional info
-            ArrayList<String> resInfo = new ArrayList<>();
+            List<String> resInfo = new ArrayList<>();
             for (String param : commandParams) {
                 switch (param) {
                     case PARAM_COLOR_COST:
@@ -147,7 +149,7 @@ public final class SystemUtil {
                 }
             }
 
-            if (resInfo.size() > 0) {
+            if (!resInfo.isEmpty()) {
                 cardInfo += ": " + resInfo.stream().collect(Collectors.joining("; "));
             }
 
@@ -555,12 +557,9 @@ public final class SystemUtil {
      * @return
      */
     private static Optional<Player> findPlayer(Game game, String name) {
-        for (Player player : game.getPlayers().values()) {
-            if (player.getName().equals(name)) {
-                return Optional.of(player);
-            }
-        }
-        return Optional.empty();
+        return game.getPlayers().values().stream()
+                .filter(player -> player.getName().equals(name)).findFirst();
+
     }
 
     public static String sanitize(String input) {

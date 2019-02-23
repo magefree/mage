@@ -24,7 +24,7 @@ import mage.watchers.common.RevoltWatcher;
  */
 public final class DeadeyeHarpooner extends CardImpl {
 
-    private final static FilterOpponentsCreaturePermanent filter = new FilterOpponentsCreaturePermanent("tapped creature an opponent controls");
+    private static final FilterOpponentsCreaturePermanent filter = new FilterOpponentsCreaturePermanent("tapped creature an opponent controls");
 
     static {
         filter.add(TappedPredicate.instance);

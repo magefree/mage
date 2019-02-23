@@ -21,7 +21,7 @@ import mage.target.TargetPermanent;
  */
 public final class MalachiteTalisman extends CardImpl {
     
-    private final static FilterSpell filter = new FilterSpell("a green spell");
+    private static final FilterSpell filter = new FilterSpell("a green spell");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.GREEN));

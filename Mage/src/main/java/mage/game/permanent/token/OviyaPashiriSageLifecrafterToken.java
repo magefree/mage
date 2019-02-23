@@ -13,7 +13,7 @@ import mage.util.RandomUtil;
  */
 public final class OviyaPashiriSageLifecrafterToken extends TokenImpl {
 
-    final static FilterControlledCreaturePermanent filterCreature = new FilterControlledCreaturePermanent("creatures you control");
+    static final FilterControlledCreaturePermanent filterCreature = new FilterControlledCreaturePermanent("creatures you control");
 
     public OviyaPashiriSageLifecrafterToken() {
         this(1);

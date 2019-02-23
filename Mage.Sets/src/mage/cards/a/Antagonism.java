@@ -19,12 +19,12 @@ import mage.watchers.common.BloodthirstWatcher;
  */
 public final class Antagonism extends CardImpl {
 
-    private static final String rule = "{this} deals 2 damage to that player unless one of his or her opponents was dealt damage this turn";
+    private static final String rule = "{this} deals 2 damage to that player unless one of their opponents was dealt damage this turn";
 
     public Antagonism(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
 
-        // At the beginning of each player's end step, Antagonism deals 2 damage to that player unless one of his or her opponents was dealt damage this turn.
+        // At the beginning of each player's end step, Antagonism deals 2 damage to that player unless one of their opponents was dealt damage this turn.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new ConditionalOneShotEffect(new DamageTargetEffect(2),
                 new OpponentWasNotDealtDamageCondition(), rule), TargetController.ANY, false));
 

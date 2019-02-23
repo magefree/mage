@@ -45,7 +45,7 @@ public final class HoodedHorror extends CardImpl {
 
 class HoodedHorrorCantBeBlockedEffect extends RestrictionEffect {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     public HoodedHorrorCantBeBlockedEffect() {
         super(Duration.WhileOnBattlefield);

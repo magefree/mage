@@ -24,7 +24,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  */
 public final class RecklessBushwhacker extends CardImpl {
 
-    private final static FilterControlledCreaturePermanent FILTER = new FilterControlledCreaturePermanent("other creatures you control");
+    private static final FilterControlledCreaturePermanent FILTER = new FilterControlledCreaturePermanent("other creatures you control");
 
     static {
         FILTER.add(AnotherPredicate.instance);

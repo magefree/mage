@@ -34,9 +34,9 @@ public class GlowText extends JLabel {
     private Color glowColor;
     private boolean wrap;
     private int lineCount = 0;
-    private final static SoftValuesLoadingCache<Key, BufferedImage> IMAGE_CACHE;
+    private static final SoftValuesLoadingCache<Key, BufferedImage> IMAGE_CACHE;
 
-    private final static class Key {
+    private static final class Key {
 
         final int width;
         final int height;

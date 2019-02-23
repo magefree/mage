@@ -54,7 +54,7 @@ public class SessionImpl implements Session {
     private ServerState serverState;
     private SessionState sessionState = SessionState.DISCONNECTED;
     private Connection connection;
-    private final static int PING_CYCLES = 10;
+    private static final int PING_CYCLES = 10;
     private final LinkedList<Long> pingTime = new LinkedList<>();
     private String pingInfo = "";
     private static boolean debugMode = false;

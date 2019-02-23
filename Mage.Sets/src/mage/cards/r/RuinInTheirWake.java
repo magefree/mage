@@ -45,7 +45,7 @@ public final class RuinInTheirWake extends CardImpl {
 
 class RuinInTheirWakeEffect extends OneShotEffect {
 
-    private final static FilterLandPermanent filterWastes = new FilterLandPermanent();
+    private static final FilterLandPermanent filterWastes = new FilterLandPermanent();
 
     static {
         filterWastes.add(new NamePredicate("Wastes"));

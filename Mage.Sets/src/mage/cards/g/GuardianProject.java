@@ -51,14 +51,14 @@ public final class GuardianProject extends CardImpl {
 
 class GuardianProjectTriggeredAbility extends EntersBattlefieldAllTriggeredAbility {
 
-    public static final FilterPermanent filter = new FilterControlledCreaturePermanent();
+    public static final FilterPermanent filterNonTokenControlledCreature = new FilterControlledCreaturePermanent();
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filterNonTokenControlledCreature.add(Predicates.not(TokenPredicate.instance));
     }
 
     GuardianProjectTriggeredAbility() {
-        super(new GuardianProjectEffect(null), filter);
+        super(new GuardianProjectEffect(null), filterNonTokenControlledCreature);
     }
 
     private GuardianProjectTriggeredAbility(final GuardianProjectTriggeredAbility ability) {

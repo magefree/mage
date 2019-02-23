@@ -23,7 +23,7 @@ import mage.target.TargetPlayer;
  */
 public final class ScreechingSliver extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent(SubType.SLIVER, "All Slivers");
+    private static final FilterPermanent allSliversFilter = new FilterPermanent(SubType.SLIVER, "All Slivers");
 
     public ScreechingSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}");
@@ -37,7 +37,7 @@ public final class ScreechingSliver extends CardImpl {
 
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield,
-                        filter, "All Slivers have \"{T}: Target player puts the top card of their library into their graveyard.\"")));
+                        allSliversFilter, "All Slivers have \"{T}: Target player puts the top card of their library into their graveyard.\"")));
     }
 
     public ScreechingSliver(final ScreechingSliver card) {

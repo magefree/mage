@@ -20,7 +20,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class SaddlebackLagac extends CardImpl {
 
-    private final static FilterCreaturePermanent FILTER = new FilterCreaturePermanent("target creatures");
+    private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("target creatures");
 
     static {
         FILTER.add(AnotherPredicate.instance);
@@ -39,7 +39,7 @@ public final class SaddlebackLagac extends CardImpl {
 
     }
 
-    public SaddlebackLagac(final SaddlebackLagac card) {
+    private SaddlebackLagac(final SaddlebackLagac card) {
         super(card);
     }
 

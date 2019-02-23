@@ -58,7 +58,7 @@ public final class EtaliPrimalStorm extends CardImpl {
 
 class EtaliPrimalStormEffect extends OneShotEffect {
 
-    private final static FilterCard filter = new FilterCard("nonland cards");
+    private static final FilterCard filter = new FilterCard("nonland cards");
 
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));

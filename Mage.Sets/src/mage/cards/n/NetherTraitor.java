@@ -79,7 +79,7 @@ class NetherTraitorTriggeredAbility extends TriggeredAbilityImpl {
                 return false;
             }
         }
-        if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {            
+        if (zEvent.isDiesEvent()) {
             if (zEvent.getTarget() != null &&
                     zEvent.getTarget().isOwnedBy(this.getControllerId()) &&
                     zEvent.getTarget().isCreature()&&

@@ -19,7 +19,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  */
 public final class RagingSwordtooth extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("other creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creature");
 
     static {
         filter.add(AnotherPredicate.instance);

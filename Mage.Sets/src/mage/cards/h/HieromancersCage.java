@@ -20,7 +20,7 @@ import mage.target.TargetPermanent;
  */
 public final class HieromancersCage extends CardImpl {
 
-    private final static FilterNonlandPermanent filter = new FilterNonlandPermanent();
+    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent();
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));

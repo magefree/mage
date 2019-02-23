@@ -25,7 +25,7 @@ import java.util.UUID;
  */
 public final class MausoleumHarpy extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature you control");
 
     static {
         filter.add(AnotherPredicate.instance);

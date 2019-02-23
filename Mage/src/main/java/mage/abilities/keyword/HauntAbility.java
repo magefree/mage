@@ -110,8 +110,8 @@ public class HauntAbility extends TriggeredAbilityImpl {
 
 class HauntExileAbility extends ZoneChangeTriggeredAbility {
 
-    private final static String RULE_TEXT_CREATURE = "Haunt <i>(When this creature dies, exile it haunting target creature.)</i>";
-    private final static String RULE_TEXT_SPELL = "Haunt <i>(When this spell card is put into a graveyard after resolving, exile it haunting target creature.)</i>";
+    private static final String RULE_TEXT_CREATURE = "Haunt <i>(When this creature dies, exile it haunting target creature.)</i>";
+    private static final String RULE_TEXT_SPELL = "Haunt <i>(When this spell card is put into a graveyard after resolving, exile it haunting target creature.)</i>";
     
     private boolean creatureHaunt;
     

@@ -25,7 +25,7 @@ import java.util.UUID;
  */
 public final class AquitectsWill extends CardImpl {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("Merfolk");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Merfolk");
 
     static {
         filter.add(new SubtypePredicate(SubType.MERFOLK));

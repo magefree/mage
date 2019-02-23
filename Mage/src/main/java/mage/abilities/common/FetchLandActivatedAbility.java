@@ -22,6 +22,7 @@ import mage.target.common.TargetCardInLibrary;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -51,16 +52,12 @@ public class FetchLandActivatedAbility extends ActivatedAbilityImpl {
         addEffect(new SearchLibraryPutInPlayEffect(target, false, true, Outcome.PutLandInPlay));
     }
 
-    public FetchLandActivatedAbility(FetchLandActivatedAbility ability) {
+    private FetchLandActivatedAbility(FetchLandActivatedAbility ability) {
         super(ability);
     }
 
     private String subTypeNames(Set<SubType> subTypes) {
-        StringBuilder sb = new StringBuilder();
-        for (SubType subType: subTypes) {
-            sb.append(subType.getDescription()).append(" or ");
-        }
-        return sb.substring(0, sb.length() - 4);
+        return subTypes.stream().map(SubType::getDescription).collect(Collectors.joining(" or "));
     }
 
     @Override

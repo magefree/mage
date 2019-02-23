@@ -85,7 +85,7 @@ class ManaWebTriggeredAbility extends TriggeredAbilityImpl {
 
 class ManaWebeffect extends OneShotEffect {
 
-    private final static FilterLandPermanent filter = new FilterLandPermanent("an opponent taps a land");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("an opponent taps a land");
 
     public ManaWebeffect() {
         super(Outcome.Tap);

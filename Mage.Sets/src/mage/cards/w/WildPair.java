@@ -29,7 +29,7 @@ import mage.watchers.common.CastFromHandWatcher;
  */
 public final class WildPair extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature");
 
     static {
         filter.add(new OwnerPredicate(TargetController.YOU));

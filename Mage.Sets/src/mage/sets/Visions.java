@@ -117,6 +117,7 @@ public final class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Ovinomancer", 39, Rarity.UNCOMMON, mage.cards.o.Ovinomancer.class));
         cards.add(new SetCardInfo("Panther Warriors", 115, Rarity.COMMON, mage.cards.p.PantherWarriors.class));
         cards.add(new SetCardInfo("Parapet", 14, Rarity.COMMON, mage.cards.p.Parapet.class));
+        cards.add(new SetCardInfo("Peace Talks", 15, Rarity.UNCOMMON, mage.cards.p.PeaceTalks.class));
         cards.add(new SetCardInfo("Phyrexian Marauder", 151, Rarity.RARE, mage.cards.p.PhyrexianMarauder.class));
         cards.add(new SetCardInfo("Phyrexian Walker", 152, Rarity.COMMON, mage.cards.p.PhyrexianWalker.class));
         cards.add(new SetCardInfo("Pillar Tombs of Aku", 67, Rarity.RARE, mage.cards.p.PillarTombsOfAku.class));

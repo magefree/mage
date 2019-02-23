@@ -4,6 +4,7 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.support.DatabaseConnection;
 import com.j256.ormlite.table.TableUtils;
@@ -15,10 +16,7 @@ import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public enum UserStatsRepository {
 
@@ -70,7 +68,7 @@ public enum UserStatsRepository {
     public UserStats getUser(String userName) {
         try {
             QueryBuilder<UserStats, Object> qb = dao.queryBuilder();
-            qb.limit(1L).where().eq("userName", userName);
+            qb.limit(1L).where().eq("userName", new SelectArg(userName));
             List<UserStats> users = dao.query(qb.prepare());
             if (!users.isEmpty()) {
                 return users.get(0);
@@ -88,17 +86,17 @@ public enum UserStatsRepository {
         } catch (SQLException ex) {
             Logger.getLogger(UserStatsRepository.class).error("Error getting all users from DB - ", ex);
         }
-        return null;
+        return Collections.emptyList();
     }
 
     public long getLatestEndTimeMs() {
         try {
-          QueryBuilder<UserStats, Object> qb = dao.queryBuilder();
+            QueryBuilder<UserStats, Object> qb = dao.queryBuilder();
             qb.orderBy("endTimeMs", false).limit(1L);
-          List<UserStats> users = dao.query(qb.prepare());
+            List<UserStats> users = dao.query(qb.prepare());
             if (!users.isEmpty()) {
-              return users.get(0).getEndTimeMs();
-          }
+                return users.get(0).getEndTimeMs();
+            }
         } catch (SQLException ex) {
             Logger.getLogger(UserStatsRepository.class).error("Error getting the latest end time from DB - ", ex);
         }
@@ -110,7 +108,7 @@ public enum UserStatsRepository {
     public List<String> updateUserStats() {
         Set<String> updatedUsers = new HashSet<>();
         // Lock the DB so that no other updateUserStats runs at the same time.
-        synchronized(this) {
+        synchronized (this) {
             long latestEndTimeMs = this.getLatestEndTimeMs();
             List<TableRecord> records = TableRecordRepository.instance.getAfter(latestEndTimeMs);
             for (TableRecord record : records) {
@@ -125,9 +123,9 @@ public enum UserStatsRepository {
                     for (ResultProtos.MatchPlayerProto player : match.getPlayersList()) {
                         UserStats userStats = this.getUser(player.getName());
                         ResultProtos.UserStatsProto proto =
-                            userStats != null
-                                ? userStats.getProto()
-                                : ResultProtos.UserStatsProto.newBuilder().setName(player.getName()).build();
+                                userStats != null
+                                        ? userStats.getProto()
+                                        : ResultProtos.UserStatsProto.newBuilder().setName(player.getName()).build();
                         ResultProtos.UserStatsProto.Builder builder = ResultProtos.UserStatsProto.newBuilder(proto)
                                 .setMatches(proto.getMatches() + 1);
                         switch (player.getQuit()) {
@@ -369,7 +367,7 @@ public enum UserStatsRepository {
     public void closeDB() {
         try {
             if (dao != null && dao.getConnectionSource() != null) {
-                DatabaseConnection conn = dao.getConnectionSource().getReadWriteConnection();
+                DatabaseConnection conn = dao.getConnectionSource().getReadWriteConnection(dao.getTableName());
                 conn.executeStatement("shutdown compact", 0);
             }
         } catch (SQLException ex) {

@@ -44,7 +44,7 @@ public final class HiddenPredators extends CardImpl {
 
 class HiddenPredatorsStateTriggeredAbility extends StateTriggeredAbility {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));

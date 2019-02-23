@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public final class TemurBattleRage extends CardImpl {
 
-    private final static String rule = "<br><i>Ferocious</i> &mdash; That creature also gains trample until end of turn if you control a creature with power 4 or greater";
+    private static final String rule = "<br><i>Ferocious</i> &mdash; That creature also gains trample until end of turn if you control a creature with power 4 or greater";
 
     public TemurBattleRage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");

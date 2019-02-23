@@ -55,7 +55,7 @@ public class DeckArea extends javax.swing.JPanel {
         public int dividerLocationLimited;
         public int dividerLocationNormal;
 
-        private final static Pattern parser = Pattern.compile("([^|]*)\\|([^|]*)\\|([^|]*)\\|([^|]*)");
+        private static final Pattern parser = Pattern.compile("([^|]*)\\|([^|]*)\\|([^|]*)\\|([^|]*)");
 
         public static Settings parse(String s) {
             Matcher m = parser.matcher(s);

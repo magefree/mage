@@ -32,8 +32,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class TeysaOrzhovScion extends CardImpl {
     
-    private final static FilterControlledCreaturePermanent filterWhite = new FilterControlledCreaturePermanent("three white creatures");
-    private final static FilterCreaturePermanent filterBlack = new FilterCreaturePermanent("another black creature you control");
+    private static final FilterControlledCreaturePermanent filterWhite = new FilterControlledCreaturePermanent("three white creatures");
+    private static final FilterCreaturePermanent filterBlack = new FilterCreaturePermanent("another black creature you control");
     static {
         filterWhite.add(new ColorPredicate(ObjectColor.WHITE));
         filterBlack.add(new ColorPredicate(ObjectColor.BLACK));
