@@ -6,6 +6,7 @@ import mage.constants.CardType;
 import mage.constants.RangeOfInfluence;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
+import mage.players.Player;
 
 import java.io.Serializable;
 import java.util.*;
@@ -297,7 +298,11 @@ public class Battlefield implements Serializable {
                     .filter(perm -> perm.isPhasedIn() && filter.match(perm, sourceId, sourcePlayerId, game))
                     .collect(Collectors.toList());
         } else {
-            Set<UUID> range = game.getPlayer(sourcePlayerId).getInRange();
+            Player player = game.getPlayer(sourcePlayerId);
+            if(player == null){
+                return Collections.emptyList();
+            }
+            Set<UUID> range = player.getInRange();
             return  field.values()
                     .stream()
                     .filter(perm -> perm.isPhasedIn() && range.contains(perm.getControllerId())
