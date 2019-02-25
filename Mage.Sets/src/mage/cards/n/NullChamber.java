@@ -7,7 +7,6 @@ import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,6 +22,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
 
 /**
@@ -33,14 +33,14 @@ public final class NullChamber extends CardImpl {
 
     public NullChamber(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
-        
+
         this.addSuperType(SuperType.WORLD);
 
         // As Null Chamber enters the battlefield, you and an opponent each name a card other than a basic land card.
         // The named cards can't be played.
-        this.addAbility(new AsEntersBattlefieldAbility(new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.NOT_BASIC_LAND_NAME)));
+        this.addAbility(new AsEntersBattlefieldAbility(new NullChamberChooseEffect()));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NullChamberReplacementEffect()));
-        
+
     }
 
     public NullChamber(final NullChamber card) {
@@ -53,6 +53,68 @@ public final class NullChamber extends CardImpl {
     }
 }
 
+class NullChamberChooseEffect extends OneShotEffect {
+
+    public static final String INFO_KEY_CONTROLLER = "CONTROLLER_NAMED_CARD";
+    public static final String INFO_KEY_OPPONENT = "OPPONENT_NAMED_CARD";
+
+    public NullChamberChooseEffect() {
+        super(Outcome.AIDontUseIt);
+        staticText = "you and an opponent each name a card other than a basic land card";
+    }
+
+    public NullChamberChooseEffect(final NullChamberChooseEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        TargetOpponent chosenOpponent = new TargetOpponent(true);
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getPermanentEntering(source.getSourceId());
+        if (sourceObject == null) {
+            sourceObject = game.getObject(source.getSourceId());
+        }
+        if (controller != null
+                && sourceObject != null
+                && controller.choose(Outcome.Neutral, chosenOpponent, source.getSourceId(), game)) {
+            Player opponent = game.getPlayer(chosenOpponent.getFirstTarget());
+            Choice cardChoice = new ChoiceImpl();
+            cardChoice.setChoices(CardRepository.instance.getNotBasicLandNames());
+            cardChoice.setMessage("Choose a card name other than a basic land card name");
+            cardChoice.clearChoice();
+            if (controller.choose(Outcome.Detriment, cardChoice, game)) {
+                String cardName = cardChoice.getChoice();
+                if (!game.isSimulation()) {
+                    game.informPlayers(sourceObject.getLogName() + ", controller named card: [" + cardName + ']');
+                }
+                game.getState().setValue(source.getSourceId().toString() + INFO_KEY_CONTROLLER, cardName);
+                if (sourceObject instanceof Permanent) {
+                    ((Permanent) sourceObject).addInfo(INFO_KEY_CONTROLLER, CardUtil.addToolTipMarkTags("Named card (Controller): " + cardName), game);
+                }
+            }
+            cardChoice.clearChoice();
+            if (opponent != null
+                    && opponent.choose(Outcome.Detriment, cardChoice, game)) {
+                String cardName = cardChoice.getChoice();
+                if (!game.isSimulation()) {
+                    game.informPlayers(sourceObject.getLogName() + ",chosen opponent named card: [" + cardName + ']');
+                }
+                game.getState().setValue(source.getSourceId().toString() + INFO_KEY_OPPONENT, cardName);
+                if (sourceObject instanceof Permanent) {
+                    ((Permanent) sourceObject).addInfo(INFO_KEY_OPPONENT, CardUtil.addToolTipMarkTags("Named card (Opponent): " + cardName), game);
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public NullChamberChooseEffect copy() {
+        return new NullChamberChooseEffect(this);
+    }
+}
 
 class NullChamberReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
@@ -91,8 +153,11 @@ class NullChamberReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-            MageObject object = game.getObject(event.getSourceId());
-            return (object != null 
-                    && object.getName().equals(game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY)));
+        MageObject object = game.getObject(event.getSourceId());
+        if (object != null) {
+            return object.getName().equals(game.getState().getValue(source.getSourceId().toString() + NullChamberChooseEffect.INFO_KEY_CONTROLLER))
+                    || object.getName().equals(game.getState().getValue(source.getSourceId().toString() + NullChamberChooseEffect.INFO_KEY_OPPONENT));
+        }
+        return false;
     }
 }
