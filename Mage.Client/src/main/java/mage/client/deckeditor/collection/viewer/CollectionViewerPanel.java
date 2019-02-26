@@ -122,12 +122,12 @@ public final class CollectionViewerPanel extends JPanel {
 
         small3x3 = new JRadioButton("3x3");
         small3x3.setForeground(Color.white);
-        boolean selected3x3 = MageFrame.getPreferences().get(LAYOYT_CONFIG_KEY, MageBook.LAYOUT_3x3).equals(MageBook.LAYOUT_3x3);
+        boolean selected3x3 = MageFrame.getPreferences().get(LAYOYT_CONFIG_KEY, MageBook.LAYOUT_3X3).equals(MageBook.LAYOUT_3X3);
         small3x3.setSelected(selected3x3);
         small3x3.addActionListener(e -> {
             big4x4.setSelected(false);
-            mageBook.updateSize(MageBook.LAYOUT_3x3);
-            MageFrame.getPreferences().put(LAYOYT_CONFIG_KEY, MageBook.LAYOUT_3x3);
+            mageBook.updateSize(MageBook.LAYOUT_3X3);
+            MageFrame.getPreferences().put(LAYOYT_CONFIG_KEY, MageBook.LAYOUT_3X3);
         });
         buttonsPanel.add(small3x3);
 
@@ -136,8 +136,8 @@ public final class CollectionViewerPanel extends JPanel {
         big4x4.setSelected(!selected3x3);
         big4x4.addActionListener(e -> {
             small3x3.setSelected(false);
-            mageBook.updateSize(MageBook.LAYOUT_4x4);
-            MageFrame.getPreferences().put(LAYOYT_CONFIG_KEY, MageBook.LAYOUT_4x4);
+            mageBook.updateSize(MageBook.LAYOUT_4X4);
+            MageFrame.getPreferences().put(LAYOYT_CONFIG_KEY, MageBook.LAYOUT_4X4);
         });
         buttonsPanel.add(big4x4);
 
