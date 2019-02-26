@@ -19,11 +19,11 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.command.emblems.TeferiHeroOfDominariaEmblem;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetNonlandPermanent;
 
 import java.util.UUID;
+import mage.cards.Card;
 
 /**
  * @author LevelX2
@@ -85,9 +85,9 @@ class TeferiHeroOfDominariaSecondEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-            if (permanent != null) {
-                controller.putCardOnTopXOfLibrary(permanent, game, source, 3);
+            Card card = game.getCard(getTargetPointer().getFirst(game, source));
+            if (card != null) {
+                controller.putCardOnTopXOfLibrary(card, game, source, 3);
             }
             return true;
         }
