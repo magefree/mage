@@ -185,8 +185,9 @@ public class PlayersChatPanel extends javax.swing.JPanel {
                     return players[rowIndex].getInfoGames();
                 case 9:
                     return players[rowIndex].getInfoPing();
+                default:
+                    return "";
             }
-            return "";
         }
 
         @Override

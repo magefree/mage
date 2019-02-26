@@ -1,22 +1,5 @@
 package mage.client.plugins.adapters;
 
-import java.awt.Component;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelEvent;
-import java.awt.image.BufferedImage;
-import java.util.*;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.Popup;
-import javax.swing.PopupFactory;
-import javax.swing.SwingUtilities;
 import mage.cards.MageCard;
 import mage.cards.action.ActionCallback;
 import mage.cards.action.TransferData;
@@ -41,6 +24,18 @@ import org.apache.log4j.Logger;
 import org.jdesktop.swingx.JXPanel;
 import org.mage.card.arcane.CardPanel;
 import org.mage.plugins.card.images.ImageCache;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
+import java.awt.image.BufferedImage;
+import java.util.*;
+import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Class that handles the callbacks from the card panels to mage to display big
@@ -173,21 +168,21 @@ public class MageActionCallback implements ActionCallback {
             public void showPopup(final Component popupContainer, final Component infoPane) throws InterruptedException {
                 final Component c = MageFrame.getUI().getComponent(MageComponents.DESKTOP_PANE);
                 SwingUtilities.invokeLater(() -> {
-                    if (!popupTextWindowOpen
-                            || enlargedWindowState != EnlargedWindowState.CLOSED) {
-                        return;
-                    }
-                    if (data.locationOnScreen == null) {
-                        data.locationOnScreen = data.component.getLocationOnScreen();
-                    }
+                            if (!popupTextWindowOpen
+                                    || enlargedWindowState != EnlargedWindowState.CLOSED) {
+                                return;
+                            }
+                            if (data.locationOnScreen == null) {
+                                data.locationOnScreen = data.component.getLocationOnScreen();
+                            }
 
-                    Point location = new Point((int) data.locationOnScreen.getX() + data.popupOffsetX - 40, (int) data.locationOnScreen.getY() + data.popupOffsetY - 40);
-                    location = GuiDisplayUtil.keepComponentInsideParent(location, parentPoint, infoPane, parentComponent);
-                    location.translate(-parentPoint.x, -parentPoint.y);
-                    popupContainer.setLocation(location);
-                    popupContainer.setVisible(true);
-                    c.repaint();
-                }
+                            Point location = new Point((int) data.locationOnScreen.getX() + data.popupOffsetX - 40, (int) data.locationOnScreen.getY() + data.popupOffsetY - 40);
+                            location = GuiDisplayUtil.keepComponentInsideParent(location, parentPoint, infoPane, parentComponent);
+                            location.translate(-parentPoint.x, -parentPoint.y);
+                            popupContainer.setLocation(location);
+                            popupContainer.setVisible(true);
+                            c.repaint();
+                        }
                 );
             }
         });
@@ -500,7 +495,7 @@ public class MageActionCallback implements ActionCallback {
      * Show the big card image on mouse position while hovering over a card
      *
      * @param showAlternative defines if the original image (if it's a copied
-     * card) or the opposite side of a transformable card will be shown
+     *                        card) or the opposite side of a transformable card will be shown
      */
     public void enlargeCard(EnlargeMode showAlternative) {
         if (enlargedWindowState == EnlargedWindowState.CLOSED) {
@@ -597,6 +592,8 @@ public class MageActionCallback implements ActionCallback {
                                     image = ImageCache.getImageOriginalAlternateName(cardView);
                                 }
                             }
+                            break;
+                        default:
                             break;
                     }
                     if (image == null) {

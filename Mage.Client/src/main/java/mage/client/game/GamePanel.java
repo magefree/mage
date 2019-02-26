@@ -921,6 +921,8 @@ public final class GamePanel extends javax.swing.JPanel {
             case END_TURN:
                 updateButton("Cleanup");
                 break;
+            default:
+                break;
         }
     }
 
@@ -1026,6 +1028,8 @@ public final class GamePanel extends javax.swing.JPanel {
                     break;
                 case LOOKED_AT:
                     cardInfoWindowDialog.loadCards((SimpleCardsView) cardsView, bigCard, gameId);
+                    break;
+                default:
                     break;
             }
         }
@@ -1810,8 +1814,8 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         };
         String[] phases = {"Untap", "Upkeep", "Draw", "Main1",
-            "Combat_Start", "Combat_Attack", "Combat_Block", "Combat_Damage", "Combat_End",
-            "Main2", "Cleanup", "Next_Turn"};
+                "Combat_Start", "Combat_Attack", "Combat_Block", "Combat_Damage", "Combat_End",
+                "Main2", "Cleanup", "Next_Turn"};
         for (String name : phases) {
             createPhaseButton(name, phasesMouseAdapter);
         }
@@ -2213,6 +2217,8 @@ public final class GamePanel extends javax.swing.JPanel {
                 break;
             case CMD_AUTO_ORDER_RESET_ALL:
                 SessionHandler.sendPlayerAction(TRIGGER_AUTO_ORDER_RESET_ALL, gameId, null);
+                break;
+            default:
                 break;
         }
         for (ShowCardsDialog dialog : pickTarget) {

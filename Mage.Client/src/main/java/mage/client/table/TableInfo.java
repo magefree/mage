@@ -10,9 +10,6 @@ public class TableInfo {
 
     private List<ColumnInfo> columns = new ArrayList<>();
 
-    public TableInfo() {
-
-    }
 
     public TableInfo addColumn(Integer index, Integer width, Class colClass, String headerName, String headerHint) {
         this.columns.add(new ColumnInfo(index, width, colClass, headerName, headerHint));

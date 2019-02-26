@@ -92,8 +92,9 @@ public class MatchesTableModel extends AbstractTableModel {
                 }
             case 9:
                 return matches[arg0].getGames();
+            default:
+                return "";
         }
-        return "";
     }
 
     public java.util.List<UUID> getListofGames(int row) {

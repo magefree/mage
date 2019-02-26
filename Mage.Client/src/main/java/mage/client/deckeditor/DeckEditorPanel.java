@@ -1,14 +1,5 @@
 package mage.client.deckeditor;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.*;
-import java.util.concurrent.*;
-import javax.swing.*;
-import javax.swing.filechooser.FileFilter;
 import mage.cards.Card;
 import mage.cards.Sets;
 import mage.cards.decks.Deck;
@@ -36,6 +27,16 @@ import mage.view.CardView;
 import mage.view.SimpleCardView;
 import org.apache.log4j.Logger;
 
+import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.*;
+import java.util.concurrent.*;
+
 /**
  * @author BetaSteward_at_googlemail.com
  */
@@ -53,6 +54,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     private javax.swing.Timer countdown;
     private UpdateDeckTask updateDeckTask;
     private int timeToSubmit = -1;
+    private final String LAST_DECK_FOLDER = "lastDeckFolder";
 
     /**
      * Creates new form DeckEditorPanel
@@ -152,7 +154,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             case LIMITED_BUILDING:
                 this.btnAddLand.setVisible(true);
                 this.txtTimeRemaining.setVisible(true);
-            // Fall through to sideboarding
+                // Fall through to sideboarding
             case SIDEBOARDING:
                 this.btnSubmit.setVisible(true);
                 this.btnSubmitTimer.setVisible(true);
@@ -664,6 +666,8 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 case 2:
                     btnImportFromClipboardActionWAppendPerformed(evt);
                     break;
+                default:
+                    break;
             }
         });
 
@@ -848,7 +852,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
     private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed
         //fcSelectDeck.setCurrentDirectory(new File());
-        String lastFolder = MageFrame.getPreferences().get("lastDeckFolder", "");
+        String lastFolder = MageFrame.getPreferences().get(LAST_DECK_FOLDER, "");
         if (!lastFolder.isEmpty()) {
             fcSelectDeck.setCurrentDirectory(new File(lastFolder));
         }
@@ -887,7 +891,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
                 // save last deck history
                 try {
-                    MageFrame.getPreferences().put("lastDeckFolder", file.getCanonicalPath());
+                    MageFrame.getPreferences().put(LAST_DECK_FOLDER, file.getCanonicalPath());
                 } catch (IOException ex) {
                     logger.error("Error on save last load deck folder: " + ex.getMessage());
                 }
@@ -902,7 +906,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLoadActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        String lastFolder = MageFrame.getPreferences().get("lastDeckFolder", "");
+        String lastFolder = MageFrame.getPreferences().get(LAST_DECK_FOLDER, "");
         if (!lastFolder.isEmpty()) {
             fcSelectDeck.setCurrentDirectory(new File(lastFolder));
         }
@@ -942,7 +946,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 MageFrame.getDesktop().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             }
             try {
-                MageFrame.getPreferences().put("lastDeckFolder", file.getCanonicalPath());
+                MageFrame.getPreferences().put(LAST_DECK_FOLDER, file.getCanonicalPath());
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -1057,6 +1061,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         }
         refreshDeck();
     }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private mage.client.cards.BigCard bigCard;
     private javax.swing.JButton btnExit;
@@ -1120,11 +1125,11 @@ class ImportFilter extends FileFilter {
         }
         if (ext != null) {
             if (ext.equalsIgnoreCase("dec")
-                || ext.equalsIgnoreCase("mwdeck")
-                || ext.equalsIgnoreCase("txt")
-                || ext.equalsIgnoreCase("dek")
-                || ext.equalsIgnoreCase("cod")
-                || ext.equalsIgnoreCase("o8d")) {
+                    || ext.equalsIgnoreCase("mwdeck")
+                    || ext.equalsIgnoreCase("txt")
+                    || ext.equalsIgnoreCase("dek")
+                    || ext.equalsIgnoreCase("cod")
+                    || ext.equalsIgnoreCase("o8d")) {
                 return true;
             }
         }

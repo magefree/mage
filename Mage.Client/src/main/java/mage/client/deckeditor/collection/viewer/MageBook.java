@@ -52,15 +52,15 @@ public class MageBook extends JComponent {
 
     private static final long serialVersionUID = 1L;
 
-    public static final String LAYOUT_3x3 = "small";
+    public static final String LAYOUT_3X3 = "small";
 
-    public static final String LAYOUT_4x4 = "big";
+    public static final String LAYOUT_4X4 = "big";
 
     public MageBook(BigCard bigCard) {
         super();
         this.bigCard = bigCard;
         this.setsToDisplay = ConstructedFormats.getSetsByFormat(ConstructedFormats.getDefault());
-        boolean selected3x3 = MageFrame.getPreferences().get(CollectionViewerPanel.LAYOYT_CONFIG_KEY, MageBook.LAYOUT_3x3).equals(MageBook.LAYOUT_3x3);
+        boolean selected3x3 = MageFrame.getPreferences().get(CollectionViewerPanel.LAYOYT_CONFIG_KEY, MageBook.LAYOUT_3X3).equals(MageBook.LAYOUT_3X3);
         this.conf = selected3x3 ? new _3x3Configuration() : new _4x4Configuration();
         initComponents();
     }
@@ -827,10 +827,10 @@ public class MageBook extends JComponent {
 
     public void updateSize(String size) {
         switch (size) {
-            case LAYOUT_3x3:
+            case LAYOUT_3X3:
                 this.conf = new _3x3Configuration();
                 break;
-            case LAYOUT_4x4:
+            case LAYOUT_4X4:
                 this.conf = new _4x4Configuration();
                 break;
             default:

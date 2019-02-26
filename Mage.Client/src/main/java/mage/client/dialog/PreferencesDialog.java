@@ -829,7 +829,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .add(cbAskMoveToGraveOrder))
         );
 
-        nonLandPermanentsInOnePile.getAccessibleContext().setAccessibleName("nonLandPermanentsInOnePile");
+        nonLandPermanentsInOnePile.getAccessibleContext().setAccessibleName(KEY_PERMANENTS_IN_ONE_PILE);
 
         main_battlefield.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Battlefield"));
 
