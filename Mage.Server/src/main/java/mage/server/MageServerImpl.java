@@ -1199,13 +1199,15 @@ public class MageServerImpl implements MageServer {
                 result.add(expansionInfo);
             }
         }
+        logger.info("Missing exp downloaded: " + result.size());
         return result;
     }
 
     @Override
     public List<CardInfo> getMissingCardsData(List<String> classNames) {
-        return CardRepository.instance.getMissingCards(classNames);
-
+        List<CardInfo> res = CardRepository.instance.getMissingCards(classNames);
+        logger.info("Missing cards downloaded: " + res.size());
+        return res;
     }
 
     private static class MyActionWithNullNegativeResult extends ActionWithNullNegativeResult<Object> {
