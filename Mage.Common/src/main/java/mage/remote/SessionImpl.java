@@ -402,6 +402,9 @@ public class SessionImpl implements Session {
     }
 
     private void updateDatabase(boolean forceDBComparison, ServerState serverState) {
+        // download NEW cards/sets, but do not download data fixes (it's an old and rare feature from old clients, e.g. one client for different servers with different cards)
+        // use case: server gets new minor version with new cards, old client can get that cards too without donwload new version
+
         // sets
         long expansionDBVersion = ExpansionRepository.instance.getContentVersionFromDB();
         if (forceDBComparison || serverState.getExpansionsContentVersion() > expansionDBVersion) {

@@ -3,6 +3,7 @@ package mage.client;
 import mage.cards.action.ActionCallback;
 import mage.cards.decks.Deck;
 import mage.cards.repository.CardRepository;
+import mage.cards.repository.CardScanner;
 import mage.cards.repository.ExpansionRepository;
 import mage.cards.repository.RepositoryUtil;
 import mage.client.cards.BigCard;
@@ -215,7 +216,15 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             LOGGER.fatal(null, ex);
         }
 
+        // DATA PREPARE
         RepositoryUtil.bootstrapLocalDb();
+        // re-create database on empty (e.g. after new build cleaned db on startup)
+        if (RepositoryUtil.CARD_DB_RECREATE_BY_CLIENT_SIDE && RepositoryUtil.isDatabaseEmpty()) {
+            LOGGER.info("DB: creating cards database");
+            CardScanner.scan();
+            LOGGER.info("Done.");
+        }
+
         if (RateCard.PRELOAD_CARD_RATINGS_ON_STARTUP) {
             RateCard.bootstrapCardsAndRatings();
         }
