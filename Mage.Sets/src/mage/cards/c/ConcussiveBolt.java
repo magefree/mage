@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.effects.OneShotEffect;
@@ -17,8 +15,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class ConcussiveBolt extends CardImpl {
@@ -89,14 +88,11 @@ class ConcussiveBoltRestrictionEffect extends RestrictionEffect {
         if (player == null) {
             return false;
         }
-        if (metalcraft && permanent.isControlledBy(player.getId())) {
-            return true;
-        }
-        return false;
+        return metalcraft && permanent.isControlledBy(player.getId());
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         return false;
     }
 }

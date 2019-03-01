@@ -1,7 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -15,14 +13,15 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class DeathcultRogue extends CardImpl {
 
     public DeathcultRogue(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U/B}{U/B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U/B}{U/B}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ROGUE);
 
@@ -44,7 +43,7 @@ public final class DeathcultRogue extends CardImpl {
     }
 }
 
-class DeathcultRogueRestrictionEffect extends RestrictionEffect  {
+class DeathcultRogueRestrictionEffect extends RestrictionEffect {
 
     public DeathcultRogueRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
@@ -57,18 +56,12 @@ class DeathcultRogueRestrictionEffect extends RestrictionEffect  {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getId().equals(source.getSourceId())) {
-            return true;
-        }
-        return false;
+        return permanent.getId().equals(source.getSourceId());
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        if (blocker.hasSubtype(SubType.ROGUE, game)) {
-            return true;
-        }
-        return false;
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+        return blocker.hasSubtype(SubType.ROGUE, game);
     }
 
     @Override

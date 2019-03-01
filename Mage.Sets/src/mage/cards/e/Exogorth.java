@@ -82,7 +82,7 @@ class CanBlockOnlySpaceflightEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         if (attacker == null) {
             return true;
         }

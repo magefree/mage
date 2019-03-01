@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -11,24 +9,21 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class StupefyingTouch extends CardImpl {
 
     public StupefyingTouch(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
@@ -37,10 +32,10 @@ public final class StupefyingTouch extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        
+
         // When Stupefying Touch enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
-        
+
         // Enchanted creature's activated abilities can't be activated.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantActivateAbilitiesAttachedEffect()));
     }
@@ -70,15 +65,13 @@ class CantActivateAbilitiesAttachedEffect extends RestrictionEffect {
     public boolean applies(Permanent permanent, Ability source, Game game) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
         if (enchantment != null && enchantment.getAttachedTo() != null) {
-            if (permanent.getId().equals(enchantment.getAttachedTo())) {
-                return true;
-            }
+            return permanent.getId().equals(enchantment.getAttachedTo());
         }
         return false;
     }
-    
+
     @Override
-    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game) {
+    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game, boolean canUseChooseDialogs) {
         return false;
     }
 

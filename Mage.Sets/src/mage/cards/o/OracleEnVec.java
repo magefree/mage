@@ -1,8 +1,5 @@
-
 package mage.cards.o;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -18,12 +15,7 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TurnPhase;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -35,8 +27,10 @@ import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class OracleEnVec extends CardImpl {
@@ -169,7 +163,7 @@ class OracleEnVecCantAttackRestrictionEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Game game) {
+    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
         return false;
     }
 

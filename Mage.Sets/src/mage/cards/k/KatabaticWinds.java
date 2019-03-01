@@ -1,4 +1,3 @@
-
 package mage.cards.k;
 
 import mage.MageObject;
@@ -25,7 +24,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class KatabaticWinds extends CardImpl {
@@ -76,12 +74,12 @@ class KatabaticWindsRestrictionEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Game game) {
+    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
         return false;
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         return false;
     }
 
@@ -126,9 +124,7 @@ class KatabaticWindsRuleModifyingEffect extends ContinuousRuleModifyingEffectImp
                 && object.isCreature()
                 && object.getAbilities().contains(FlyingAbility.getInstance())
                 && game.getState().getPlayersInRange(source.getControllerId(), game).contains(event.getPlayerId())) {
-            if (ability.get().getCosts().stream().anyMatch((cost) -> (cost instanceof TapSourceCost))) {
-                return true;
-            }
+            return ability.get().getCosts().stream().anyMatch((cost) -> (cost instanceof TapSourceCost));
         }
         return false;
     }

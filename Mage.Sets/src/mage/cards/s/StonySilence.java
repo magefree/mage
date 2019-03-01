@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
@@ -13,14 +11,15 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward
  */
 public final class StonySilence extends CardImpl {
 
     public StonySilence(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 
 
         // Activated abilities of artifacts can't be activated.
@@ -55,7 +54,7 @@ class StonySilenceCantActivateEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game) {
+    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game, boolean canUseChooseDialogs) {
         return false;
     }
 

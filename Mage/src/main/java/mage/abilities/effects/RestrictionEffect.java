@@ -34,7 +34,10 @@ public abstract class RestrictionEffect extends ContinuousEffectImpl {
 
     public abstract boolean applies(Permanent permanent, Ability source, Game game);
 
-    public boolean canAttack(Game game) {
+    // canUseChooseDialogs -- restrict checks can be called by rules engine and by card info engine,
+    // last one uses for info only and can't use dialogs, e.g. canUseChooseDialogs = false
+
+    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
         return true;
     }
 
@@ -45,11 +48,11 @@ public abstract class RestrictionEffect extends ContinuousEffectImpl {
      * @param game
      * @return
      */
-    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
+    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game, boolean canUseChooseDialogs) {
         return true;
     }
 
-    public boolean canAttackCheckAfter(int numberOfAttackers, Ability source, Game game) {
+    public boolean canAttackCheckAfter(int numberOfAttackers, Ability source, Game game, boolean canUseChooseDialogs) {
         return true;
     }
 
@@ -60,15 +63,15 @@ public abstract class RestrictionEffect extends ContinuousEffectImpl {
      * @param game
      * @return
      */
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         return true;
     }
 
-    public boolean canBlockCheckAfter(Ability source, Game game) {
+    public boolean canBlockCheckAfter(Ability source, Game game, boolean canUseChooseDialogs) {
         return true;
     }
 
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         return true;
     }
 
@@ -81,19 +84,19 @@ public abstract class RestrictionEffect extends ContinuousEffectImpl {
      * @return true = block is ok false = block is not valid (human: back to
      * defining blockers, AI: remove blocker)
      */
-    public boolean canBeBlockedCheckAfter(Permanent attacker, Ability source, Game game) {
+    public boolean canBeBlockedCheckAfter(Permanent attacker, Ability source, Game game, boolean canUseChooseDialogs) {
         return true;
     }
 
-    public boolean canBeUntapped(Permanent permanent, Ability source, Game game) {
+    public boolean canBeUntapped(Permanent permanent, Ability source, Game game, boolean canUseChooseDialogs) {
         return true;
     }
 
-    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game) {
+    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game, boolean canUseChooseDialogs) {
         return true;
     }
 
-    public boolean canTransform(Permanent permanent, Ability source, Game game) {
+    public boolean canTransform(Permanent permanent, Ability source, Game game, boolean canUseChooseDialogs) {
         return true;
     }
 

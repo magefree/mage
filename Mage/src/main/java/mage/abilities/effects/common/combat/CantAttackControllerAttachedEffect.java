@@ -31,7 +31,7 @@ public class CantAttackControllerAttachedEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
+    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game, boolean canUseChooseDialogs) {
         if (defenderId == null) {
             return true;
         }

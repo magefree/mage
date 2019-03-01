@@ -268,23 +268,23 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                             continue;
                         }
 
-                        if (!entry.getKey().canAttack(game) || !entry.getKey().canAttack(this, null, ability, game)) {
+                        if (!entry.getKey().canAttack(game, false) || !entry.getKey().canAttack(this, null, ability, game, false)) {
                             restrictHints.add(HintUtils.prepareText("Can't attack" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_RESTRICT));
                         }
 
-                        if (!entry.getKey().canBlock(null, this, ability, game)) {
+                        if (!entry.getKey().canBlock(null, this, ability, game, false)) {
                             restrictHints.add(HintUtils.prepareText("Can't block" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_RESTRICT));
                         }
 
-                        if (!entry.getKey().canBeUntapped(this, ability, game)) {
+                        if (!entry.getKey().canBeUntapped(this, ability, game, false)) {
                             restrictHints.add(HintUtils.prepareText("Can't untapped" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_RESTRICT));
                         }
 
-                        if (!entry.getKey().canUseActivatedAbilities(this, ability, game)) {
+                        if (!entry.getKey().canUseActivatedAbilities(this, ability, game, false)) {
                             restrictHints.add(HintUtils.prepareText("Can't use activated abilities" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_RESTRICT));
                         }
 
-                        if (!entry.getKey().canTransform(this, ability, game)) {
+                        if (!entry.getKey().canTransform(this, ability, game, false)) {
                             restrictHints.add(HintUtils.prepareText("Can't transform" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_RESTRICT));
                         }
                     }
@@ -1190,11 +1190,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     private boolean canAttackCheckRestrictionEffects(UUID defenderId, Game game) {
         //20101001 - 508.1c
         for (Map.Entry<RestrictionEffect, Set<Ability>> effectEntry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
-            if (!effectEntry.getKey().canAttack(game)) {
+            if (!effectEntry.getKey().canAttack(game, true)) {
                 return false;
             }
             for (Ability ability : effectEntry.getValue()) {
-                if (!effectEntry.getKey().canAttack(this, defenderId, ability, game)) {
+                if (!effectEntry.getKey().canAttack(this, defenderId, ability, game, true)) {
                     return false;
                 }
             }
@@ -1219,7 +1219,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         // check blocker restrictions
         for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
             for (Ability ability : entry.getValue()) {
-                if (!entry.getKey().canBlock(attacker, this, ability, game)) {
+                if (!entry.getKey().canBlock(attacker, this, ability, game, true)) {
                     return false;
                 }
             }
@@ -1227,7 +1227,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         // check also attacker's restriction effects
         for (Map.Entry<RestrictionEffect, Set<Ability>> restrictionEntry : game.getContinuousEffects().getApplicableRestrictionEffects(attacker, game).entrySet()) {
             for (Ability ability : restrictionEntry.getValue()) {
-                if (!restrictionEntry.getKey().canBeBlocked(attacker, this, ability, game)) {
+                if (!restrictionEntry.getKey().canBeBlocked(attacker, this, ability, game, true)) {
                     return false;
                 }
             }
@@ -1245,7 +1245,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
             RestrictionEffect effect = entry.getKey();
             for (Ability ability : entry.getValue()) {
-                if (!effect.canBlock(null, this, ability, game)) {
+                if (!effect.canBlock(null, this, ability, game, true)) {
                     return false;
                 }
             }
@@ -1266,7 +1266,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
             RestrictionEffect effect = entry.getKey();
             for (Ability ability : entry.getValue()) {
-                if (!effect.canUseActivatedAbilities(this, ability, game)) {
+                if (!effect.canUseActivatedAbilities(this, ability, game, true)) {
                     return false;
                 }
             }
@@ -1280,7 +1280,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
                 RestrictionEffect effect = entry.getKey();
                 for (Ability ability : entry.getValue()) {
-                    if (!effect.canTransform(this, ability, game)) {
+                    if (!effect.canTransform(this, ability, game, true)) {
                         return false;
                     }
                 }

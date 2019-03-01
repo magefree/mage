@@ -1,4 +1,3 @@
-
 package mage.cards.o;
 
 import mage.abilities.Ability;
@@ -92,7 +91,7 @@ class OpenSeasonRestrictionEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game) {
+    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game, boolean canUseChooseDialogs) {
         return false;
     }
 

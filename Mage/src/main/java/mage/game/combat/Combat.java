@@ -520,7 +520,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(attackingCreature, game).entrySet()) {
                     RestrictionEffect effect = entry.getKey();
                     for (Ability ability : entry.getValue()) {
-                        if (!effect.canAttackCheckAfter(numberAttackers, ability, game)) {
+                        if (!effect.canAttackCheckAfter(numberAttackers, ability, game, true)) {
                             MageObject sourceObject = ability.getSourceObject(game);
                             if (attackingPlayer.isHuman()) {
                                 game.informPlayer(attackingPlayer, attackingCreature.getIdName() + " can't attack this way (" + (sourceObject == null ? "null" : sourceObject.getIdName()) + ')');
@@ -1178,7 +1178,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(blockingCreature, game).entrySet()) {
                     RestrictionEffect effect = entry.getKey();
                     for (Ability ability : entry.getValue()) {
-                        if (!effect.canBlockCheckAfter(ability, game)) {
+                        if (!effect.canBlockCheckAfter(ability, game, true)) {
                             if (controller.isHuman()) {
                                 game.informPlayer(controller, blockingCreature.getLogName() + " can't block this way.");
                                 return false;
@@ -1198,7 +1198,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(attackingCreature, game).entrySet()) {
                     RestrictionEffect effect = entry.getKey();
                     for (Ability ability : entry.getValue()) {
-                        if (!effect.canBeBlockedCheckAfter(attackingCreature, ability, game)) {
+                        if (!effect.canBeBlockedCheckAfter(attackingCreature, ability, game, true)) {
                             if (controller.isHuman()) {
                                 game.informPlayer(controller, attackingCreature.getLogName() + " can't be blocked this way.");
                                 return false;

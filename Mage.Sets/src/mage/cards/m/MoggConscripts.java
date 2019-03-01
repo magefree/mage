@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -9,21 +7,22 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.watchers.common.PlayerCastCreatureWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class MoggConscripts extends CardImpl {
 
     public MoggConscripts(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
         this.subtype.add(SubType.GOBLIN);
 
         this.power = new MageInt(2);
@@ -60,7 +59,7 @@ class MoggConscriptsEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Game game) {
+    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
         return false;
     }
 
@@ -68,9 +67,7 @@ class MoggConscriptsEffect extends RestrictionEffect {
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getId().equals(source.getSourceId())) {
             PlayerCastCreatureWatcher watcher = game.getState().getWatcher(PlayerCastCreatureWatcher.class);
-            if (watcher != null && !watcher.playerDidCastCreatureThisTurn(source.getControllerId())) {
-                return true;
-            }
+            return watcher != null && !watcher.playerDidCastCreatureThisTurn(source.getControllerId());
         }
         return false;
     }

@@ -12,7 +12,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author halljared
  */
 public class CantAttackBlockTransformAttachedEffect extends RestrictionEffect {
@@ -30,25 +29,23 @@ public class CantAttackBlockTransformAttachedEffect extends RestrictionEffect {
     public boolean applies(Permanent permanent, Ability source, Game game) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
         if (enchantment != null && enchantment.getAttachedTo() != null) {
-            if (permanent.getId().equals(enchantment.getAttachedTo())) {
-                return true;
-            }
+            return permanent.getId().equals(enchantment.getAttachedTo());
         }
         return false;
     }
 
     @Override
-    public boolean canAttack(Game game) {
+    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
         return false;
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         return false;
     }
 
     @Override
-    public boolean canTransform(Permanent permanent, Ability source, Game game) {
+    public boolean canTransform(Permanent permanent, Ability source, Game game, boolean canUseChooseDialogs) {
         return false;
     }
 

@@ -57,7 +57,7 @@ class SpaceFlightEffect extends RestrictionEffect implements MageSingleton {
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         if (attacker == null) {
             return true;
         }
@@ -65,7 +65,7 @@ class SpaceFlightEffect extends RestrictionEffect implements MageSingleton {
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         return blocker.getAbilities().containsKey(SpaceflightAbility.getInstance().getId())
                 || blocker.getAbilities().containsKey(CanBlockSpaceflightAbility.getInstance().getId());
     }

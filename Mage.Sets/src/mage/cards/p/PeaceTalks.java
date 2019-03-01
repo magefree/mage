@@ -1,6 +1,5 @@
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousRuleModifyingEffect;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
@@ -15,8 +14,9 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class PeaceTalks extends CardImpl {
@@ -86,7 +86,7 @@ class PeaceTalksCantAttackEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Game game) {
+    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
         return false;
     }
 
@@ -146,7 +146,7 @@ class PeaceTalksPlayersAndPermanentsCantBeTargetsOfSpellsOrActivatedAbilities ex
     public PeaceTalksPlayersAndPermanentsCantBeTargetsOfSpellsOrActivatedAbilities copy() {
         return new PeaceTalksPlayersAndPermanentsCantBeTargetsOfSpellsOrActivatedAbilities(this);
     }
-    
+
     @Override
     public boolean isInactive(Ability source, Game game) {
         if (startingTurn + 2 == game.getTurnNum()) {

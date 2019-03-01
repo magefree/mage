@@ -63,7 +63,7 @@ class GoblinGoonCantAttackEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
+    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game, boolean canUseChooseDialogs) {
         if (defenderId == null) {
             return true;
         }
@@ -110,7 +110,7 @@ class GoblinGoonCantBlockEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         if (attacker == null) {
             return true;
         }

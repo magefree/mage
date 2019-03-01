@@ -1,8 +1,5 @@
-
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -12,20 +9,21 @@ import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class SilhanaLedgewalker extends CardImpl {
 
-    public SilhanaLedgewalker (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+    public SilhanaLedgewalker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.ROGUE);
 
@@ -39,7 +37,7 @@ public final class SilhanaLedgewalker extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SilhanaLedgewalkerEffect()));
     }
 
-    public SilhanaLedgewalker (final SilhanaLedgewalker card) {
+    public SilhanaLedgewalker(final SilhanaLedgewalker card) {
         super(card);
     }
 
@@ -63,18 +61,12 @@ class SilhanaLedgewalkerEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (source.getSourceId().equals(permanent.getId())) {
-            return true;
-        }
-        return false;
+        return source.getSourceId().equals(permanent.getId());
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        if (blocker.getAbilities().contains(FlyingAbility.getInstance())) {
-            return true;
-        }
-        return false;
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+        return blocker.getAbilities().contains(FlyingAbility.getInstance());
     }
 
     @Override

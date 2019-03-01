@@ -1645,7 +1645,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(playerId)) {
                 boolean untap = true;
                 for (RestrictionEffect effect : game.getContinuousEffects().getApplicableRestrictionEffects(permanent, game).keySet()) {
-                    untap &= effect.canBeUntapped(permanent, null, game);
+                    untap &= effect.canBeUntapped(permanent, null, game, true);
                 }
                 if (untap) {
                     canBeUntapped.add(permanent);
@@ -1752,7 +1752,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(playerId)) {
                 boolean untap = true;
                 for (RestrictionEffect effect : game.getContinuousEffects().getApplicableRestrictionEffects(permanent, game).keySet()) {
-                    untap &= effect.canBeUntapped(permanent, null, game);
+                    untap &= effect.canBeUntapped(permanent, null, game, true);
                 }
                 if (untap) {
                     permanent.untap(game);
