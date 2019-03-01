@@ -61,6 +61,11 @@ public class TablesPanel extends javax.swing.JPanel {
     private static final Logger LOGGER = Logger.getLogger(TablesPanel.class);
     private static final int[] DEFAULT_COLUMNS_WIDTH = {35, 150, 100, 50, 120, 180, 80, 120, 80, 60, 40, 40, 60};
 
+    // refresh timeouts for data downloads from server
+    public static final int REFRESH_ACTIVE_TABLES_SECS = 5;
+    public static final int REFRESH_FINISHED_TABLES_SECS = 30;
+    public static final int REFRESH_PLAYERS_SECS = 10;
+
     private final TablesTableModel tableModel;
     private final MatchesTableModel matchesModel;
     private UUID roomId;
@@ -1661,7 +1666,8 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
             if (tables != null) {
                 this.publish(tables);
             }
-            TimeUnit.SECONDS.sleep(3);
+
+            TimeUnit.SECONDS.sleep(TablesPanel.REFRESH_ACTIVE_TABLES_SECS);
         }
         return null;
     }
@@ -1705,7 +1711,7 @@ class UpdatePlayersTask extends SwingWorker<Void, Collection<RoomUsersView>> {
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
             this.publish(SessionHandler.getRoomUsers(roomId));
-            TimeUnit.SECONDS.sleep(3);
+            TimeUnit.SECONDS.sleep(TablesPanel.REFRESH_PLAYERS_SECS);
         }
         return null;
     }
@@ -1746,7 +1752,7 @@ class UpdateMatchesTask extends SwingWorker<Void, Collection<MatchView>> {
             if (!matches.isEmpty()) {
                 this.publish(matches);
             }
-            TimeUnit.SECONDS.sleep(10);
+            TimeUnit.SECONDS.sleep(TablesPanel.REFRESH_FINISHED_TABLES_SECS);
         }
         return null;
     }
