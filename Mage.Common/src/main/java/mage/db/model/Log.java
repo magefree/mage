@@ -1,5 +1,6 @@
 package mage.db.model;
 
+import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -15,7 +16,7 @@ public class Log {
 
     @DatabaseField
     private String key;
-    @DatabaseField(columnName = "created_dt")
+    @DatabaseField(columnName = "created_dt", dataType = DataType.DATE_STRING, format = "yyyy-MM-dd HH:mm:ss")
     private Date createdDate;
     @DatabaseField
     private String arg0;

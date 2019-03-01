@@ -20,7 +20,7 @@ public class ExpansionInfo {
     protected String code;
     @DatabaseField
     protected String blockName;
-    @DatabaseField
+    @DatabaseField(dataType = DataType.DATE_STRING, format = "yyyy-MM-dd HH:mm:ss")
     protected Date releaseDate;
     @DatabaseField(dataType = DataType.ENUM_STRING)
     protected SetType type;
