@@ -404,6 +404,7 @@ public enum SubType {
     SAHEELI("Saheeli", SubTypeSet.PlaneswalkerType),
     SAMUT("Samut", SubTypeSet.PlaneswalkerType),
     SARKHAN("Sarkhan", SubTypeSet.PlaneswalkerType),
+    SERRA("Serra", SubTypeSet.PlaneswalkerType),
     SIDIOUS("Sidious", SubTypeSet.PlaneswalkerType, true), // Star Wars
     SORIN("Sorin", SubTypeSet.PlaneswalkerType),
     TAMIYO("Tamiyo", SubTypeSet.PlaneswalkerType),
