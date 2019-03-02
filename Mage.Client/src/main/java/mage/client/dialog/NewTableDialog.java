@@ -699,7 +699,7 @@ public class NewTableDialog extends MageDialog {
                 break;
             }
         }
-        String skillLevelDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_SKILL_LEVEL, "Casual");
+        String skillLevelDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_SKILL_LEVEL + versionStr, "Casual");
         for (SkillLevel skillLevel : SkillLevel.values()) {
             if (skillLevel.toString().equals(skillLevelDefault)) {
                 this.cbSkillLevel.setSelectedItem(skillLevel);
