@@ -139,6 +139,7 @@ Masters Edition|MED|
 Game Day|MGDC|
 Mirage|MIR|
 Launch Party|MLP|
+Modern Horizons|MH1|
 Modern Masters 2015|MM2|
 Modern Masters 2017|MM3|
 Modern Masters|MMA|
