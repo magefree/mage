@@ -239,6 +239,7 @@ public class ScryfallImageSupportCards {
             add("RNA");
             add("MEDM");
             add("GK2");
+            add("MH1");
             //
             add("EURO");
             add("GPX");
