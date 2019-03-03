@@ -11,7 +11,10 @@ import mage.cards.Sets;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.TimingRule;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.permanent.token.EmptyToken;
@@ -64,7 +67,9 @@ class MomirEffect extends OneShotEffect {
             game.informPlayers("No random creature card with converted mana cost of " + value + " was found.");
             return false;
         }
-        EmptyToken token = new EmptyToken(); // search for a non custom set creature
+
+        // search for a random non custom set creature
+        EmptyToken token = null;
         while (!options.isEmpty()) {
             int index = RandomUtil.nextInt(options.size());
             ExpansionSet expansionSet = Sets.findSet(options.get(index).getSetCode());
@@ -73,6 +78,7 @@ class MomirEffect extends OneShotEffect {
             } else {
                 Card card = options.get(index).getCard();
                 if (card != null) {
+                    token = new EmptyToken();
                     CardUtil.copyTo(token).from(card);
                     break;
                 } else {
@@ -80,7 +86,11 @@ class MomirEffect extends OneShotEffect {
                 }
             }
         }
-        token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId(), false, false);
-        return true;
+        if (token != null) {
+            token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId(), false, false);
+            return true;
+        }
+
+        return false;
     }
 }
