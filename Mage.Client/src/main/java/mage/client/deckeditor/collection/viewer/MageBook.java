@@ -250,7 +250,7 @@ public class MageBook extends JComponent {
 
         // calculate the x offset of the second (right) page
         int second_page_x = (conf.WIDTH - 2 * LEFT_RIGHT_PAGES_WIDTH)
-                - (cardDimensions.frameWidth + CardPosition.GAP_X) * conf.CARD_COLUMNS + CardPosition.GAP_X - OFFSET_X;
+                - (cardDimensions.getFrameWidth() + CardPosition.GAP_X) * conf.CARD_COLUMNS + CardPosition.GAP_X - OFFSET_X;
 
         rectangle.setLocation(second_page_x, OFFSET_Y);
         for (int i = conf.CARDS_PER_PAGE / 2; i < min(conf.CARDS_PER_PAGE, size); i++) {
@@ -277,7 +277,7 @@ public class MageBook extends JComponent {
 
             // calculate the x offset of the second (right) page
             int second_page_x = (conf.WIDTH - 2 * LEFT_RIGHT_PAGES_WIDTH)
-                    - (cardDimensions.frameWidth + CardPosition.GAP_X) * conf.CARD_COLUMNS + CardPosition.GAP_X - OFFSET_X;
+                    - (cardDimensions.getFrameWidth() + CardPosition.GAP_X) * conf.CARD_COLUMNS + CardPosition.GAP_X - OFFSET_X;
 
             rectangle.setLocation(second_page_x, OFFSET_Y);
             for (int i = conf.CARDS_PER_PAGE / 2; i < min(conf.CARDS_PER_PAGE, size); i++) {
@@ -302,7 +302,7 @@ public class MageBook extends JComponent {
             rectangle.translate(OFFSET_X, OFFSET_Y);
             // calculate the x offset of the second (right) page
             int second_page_x = (conf.WIDTH - 2 * LEFT_RIGHT_PAGES_WIDTH)
-                    - (cardDimensions.frameWidth + CardPosition.GAP_X) * conf.CARD_COLUMNS + CardPosition.GAP_X - OFFSET_X;
+                    - (cardDimensions.getFrameWidth() + CardPosition.GAP_X) * conf.CARD_COLUMNS + CardPosition.GAP_X - OFFSET_X;
 
             // Already have numTokens tokens presented. Appending the emblems to the end of these.
             numTokens = numTokens % conf.CARDS_PER_PAGE;
@@ -358,7 +358,7 @@ public class MageBook extends JComponent {
             rectangle.translate(OFFSET_X, OFFSET_Y);
 
             int second_page_x = (conf.WIDTH - 2 * LEFT_RIGHT_PAGES_WIDTH)
-                    - (cardDimensions.frameWidth + CardPosition.GAP_X) * conf.CARD_COLUMNS + CardPosition.GAP_X - OFFSET_X;
+                    - (cardDimensions.getFrameWidth() + CardPosition.GAP_X) * conf.CARD_COLUMNS + CardPosition.GAP_X - OFFSET_X;
 
             numTokensEmblems = numTokensEmblems % conf.CARDS_PER_PAGE;
             if (numTokensEmblems < conf.CARDS_PER_PAGE / 2) {
@@ -404,20 +404,20 @@ public class MageBook extends JComponent {
 
     private void addCard(CardView card, BigCard bigCard, UUID gameId, Rectangle rectangle) {
         if (cardDimension == null) {
-            cardDimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+            cardDimension = new Dimension(Config.dimensions.getFrameWidth(), Config.dimensions.getFrameHeight());
         }
         final MageCard cardImg = Plugins.instance.getMageCard(card, bigCard, cardDimension, gameId, true, true);
         cardImg.setBounds(rectangle);
         jLayeredPane.add(cardImg, JLayeredPane.DEFAULT_LAYER, 10);
         cardImg.update(card);
-        cardImg.setCardBounds(rectangle.x, rectangle.y, cardDimensions.frameWidth, cardDimensions.frameHeight);
+        cardImg.setCardBounds(rectangle.x, rectangle.y, cardDimensions.getFrameWidth(), cardDimensions.getFrameHeight());
 
         cardImg.setCardCaptionTopOffset(8); // card caption below real card caption to see full name even with mana icons
 
         // card number label
         JLabel cardNumber = new JLabel();
         int dy = -5; // image panel have empty space in bottom (bug?), need to move label up
-        cardNumber.setBounds(rectangle.x, rectangle.y + cardImg.getHeight() + dy, cardDimensions.frameWidth, 20);
+        cardNumber.setBounds(rectangle.x, rectangle.y + cardImg.getHeight() + dy, cardDimensions.getFrameWidth(), 20);
         cardNumber.setHorizontalAlignment(SwingConstants.CENTER);
         //cardNumber.setBorder(BorderFactory.createLineBorder(new Color(180, 50, 150), 3, true));
         cardNumber.setFont(jLayeredPane.getFont().deriveFont(jLayeredPane.getFont().getStyle() | Font.BOLD));
@@ -427,7 +427,7 @@ public class MageBook extends JComponent {
         // draft rating label (
         JLabel draftRating = new JLabel();
         dy = -5 * 2 + cardNumber.getHeight(); // under card number
-        draftRating.setBounds(rectangle.x, rectangle.y + cardImg.getHeight() + dy, cardDimensions.frameWidth, 20);
+        draftRating.setBounds(rectangle.x, rectangle.y + cardImg.getHeight() + dy, cardDimensions.getFrameWidth(), 20);
         draftRating.setHorizontalAlignment(SwingConstants.CENTER);
         //draftRating.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 150), 3, true));
         draftRating.setFont(jLayeredPane.getFont().deriveFont(jLayeredPane.getFont().getStyle() | Font.BOLD));
@@ -441,7 +441,7 @@ public class MageBook extends JComponent {
 
     private void addToken(Token token, BigCard bigCard, UUID gameId, Rectangle rectangle) {
         if (cardDimension == null) {
-            cardDimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+            cardDimension = new Dimension(Config.dimensions.getFrameWidth(), Config.dimensions.getFrameHeight());
         }
         PermanentToken newToken = new PermanentToken(token, null, token.getOriginalExpansionSetCode(), null);
         newToken.removeSummoningSickness();
@@ -451,7 +451,7 @@ public class MageBook extends JComponent {
         cardImg.setBounds(rectangle);
         jLayeredPane.add(cardImg, JLayeredPane.DEFAULT_LAYER, 10);
         cardImg.update(theToken);
-        cardImg.setCardBounds(rectangle.x, rectangle.y, cardDimensions.frameWidth, cardDimensions.frameHeight);
+        cardImg.setCardBounds(rectangle.x, rectangle.y, cardDimensions.getFrameWidth(), cardDimensions.getFrameHeight());
     }
 
     private void addEmblem(Emblem emblem, BigCard bigCard, UUID gameId, Rectangle rectangle) {
@@ -855,8 +855,8 @@ public class MageBook extends JComponent {
 
         public static Rectangle translatePosition(int index, Rectangle r, Configuration conf) {
             Rectangle rect = new Rectangle(r);
-            rect.translate((cardDimensions.frameWidth + GAP_X) * conf.dx[index],
-                    (cardDimensions.frameHeight + GAP_Y) * conf.dy[index]);
+            rect.translate((cardDimensions.getFrameWidth() + GAP_X) * conf.dx[index],
+                    (cardDimensions.getFrameHeight() + GAP_Y) * conf.dy[index]);
             return rect;
         }
 

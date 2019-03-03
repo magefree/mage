@@ -249,8 +249,8 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 
     private void addCard(CardView card, BigCard bigCard, UUID gameId) {
         if (cardDimension == null) {
-            cardDimension = new Dimension(Config.dimensions.frameWidth,
-                    Config.dimensions.frameHeight);
+            cardDimension = new Dimension(Config.dimensions.getFrameWidth(),
+                    Config.dimensions.getFrameHeight());
         }
         cards.put(card.getId(), card);
 

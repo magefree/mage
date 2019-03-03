@@ -84,7 +84,7 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
         for (int i = 1; i < maxRows; i++) {
             scale = (double) (this.getHeight()/i) / Constants.FRAME_MAX_HEIGHT;
             cardDimension = new CardDimensions(scale);
-            maxCards = this.getWidth() / (cardDimension.frameWidth + offsetX);
+            maxCards = this.getWidth() / (cardDimension.getFrameWidth() + offsetX);
             if ((maxCards * i) >= booster.size()) {
                 numColumns = booster.size() / i;
                 if (booster.size() % i > 0) {
@@ -95,8 +95,8 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
         }
 
         if (cardDimension != null) {
-            Rectangle rectangle = new Rectangle(cardDimension.frameWidth, cardDimension.frameHeight);
-            Dimension dimension = new Dimension(cardDimension.frameWidth, cardDimension.frameHeight);
+            Rectangle rectangle = new Rectangle(cardDimension.getFrameWidth(), cardDimension.getFrameHeight());
+            Dimension dimension = new Dimension(cardDimension.getFrameWidth(), cardDimension.getFrameHeight());
 
             List<CardView> sortedCards = new ArrayList<>(booster.values());
             sortedCards.sort(new CardViewRarityComparator());
@@ -105,7 +105,7 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
                 cardImg.addMouseListener(this);
                 add(cardImg);
                 cardImg.update(card);
-                rectangle.setLocation(curColumn * (cardDimension.frameWidth + offsetX) + offsetX, curRow * (rectangle.height + offsetY) + offsetY);
+                rectangle.setLocation(curColumn * (cardDimension.getFrameWidth() + offsetX) + offsetX, curRow * (rectangle.height + offsetY) + offsetY);
 
                 cardImg.setBounds(rectangle);
                 cardImg.setCardBounds(rectangle.x, rectangle.y, rectangle.width, rectangle.height);

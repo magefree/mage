@@ -615,7 +615,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         }
 
         List<ExpansionSet.SetCardInfo> cardInfo = Sets.findSet(expansionSetCode).findCardInfoByClass(secondSideCardClazz);
-        assert cardInfo.size() == 1;    // should find 1 second side card
         if (cardInfo.isEmpty()) {
             return null;
         }

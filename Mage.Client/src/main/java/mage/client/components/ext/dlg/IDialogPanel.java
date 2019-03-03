@@ -71,7 +71,7 @@ public abstract class IDialogPanel extends JXPanel {
 
     protected Dimension getCardDimension() {
         if (cardDimension == null) {
-            cardDimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+            cardDimension = new Dimension(Config.dimensions.getFrameWidth(), Config.dimensions.getFrameHeight());
         }
         return cardDimension;
     }

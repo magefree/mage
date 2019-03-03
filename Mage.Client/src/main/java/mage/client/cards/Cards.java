@@ -221,7 +221,7 @@ public class Cards extends javax.swing.JPanel {
 
     private Dimension getCardDimension() {
         if (cardDimension == null) {
-            cardDimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+            cardDimension = new Dimension(Config.dimensions.getFrameWidth(), Config.dimensions.getFrameHeight());
         }
         return cardDimension;
     }

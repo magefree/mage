@@ -27,8 +27,24 @@ public final class GuiDisplayUtil {
 
     public static class TextLines {
 
-        public int basicTextLength;
-        public ArrayList<String> lines;
+        private int basicTextLength;
+        private java.util.List<String> lines;
+
+        public int getBasicTextLength() {
+            return basicTextLength;
+        }
+
+        public void setBasicTextLength(int basicTextLength) {
+            this.basicTextLength = basicTextLength;
+        }
+
+        public java.util.List<String> getLines() {
+            return lines;
+        }
+
+        public void setLines(java.util.List<String> lines) {
+            this.lines = lines;
+        }
     }
 
     public static void restoreDividerLocations(Rectangle bounds, String lastDividerLocation, JComponent component) {
@@ -165,9 +181,9 @@ public final class GuiDisplayUtil {
 
     public static TextLines getTextLinesfromCardView(CardView card) {
         TextLines textLines = new TextLines();
-        textLines.lines = new ArrayList<>(card.getRules());
+        textLines.setLines(new ArrayList<>(card.getRules()));
         for (String rule : card.getRules()) {
-            textLines.basicTextLength += rule.length();
+            textLines.setBasicTextLength(textLines.getBasicTextLength() + rule.length());
         }
         if (card.getMageObjectType().canHaveCounters()) {
             ArrayList<CounterView> counters = new ArrayList<>();
@@ -192,15 +208,15 @@ public final class GuiDisplayUtil {
                         index++;
                     }
                 }
-                textLines.lines.add(sb.toString());
-                textLines.basicTextLength += 50;
+                textLines.getLines().add(sb.toString());
+                textLines.setBasicTextLength(textLines.getBasicTextLength() + 50);
             }
         }
         if (card.getMageObjectType().isPermanent() && card instanceof PermanentView) {
             int damage = ((PermanentView) card).getDamage();
             if (damage > 0) {
-                textLines.lines.add("<span color='red'><b>Damage dealt:</b> " + damage + "</span>");
-                textLines.basicTextLength += 50;
+                textLines.getLines().add("<span color='red'><b>Damage dealt:</b> " + damage + "</span>");
+                textLines.setBasicTextLength(textLines.getBasicTextLength() + 50);
             }
         }
         return textLines;
@@ -350,8 +366,8 @@ public final class GuiDisplayUtil {
                 }
             }
         }
-        if (!textLines.lines.isEmpty()) {
-            for (String textLine : textLines.lines) {
+        if (!textLines.getLines().isEmpty()) {
+            for (String textLine : textLines.getLines()) {
                 if (textLine != null && !textLine.replace(".", "").trim().isEmpty()) {
                     rule.append("<p style='margin: 2px'>").append(textLine).append("</p>");
                 }
