@@ -92,7 +92,7 @@ class DispersalEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Set<PermanentIdPredicate> permsToReturn = new HashSet();
+        Set<PermanentIdPredicate> permsToReturn = new HashSet<>();
         for (UUID opponentId : game.getOpponents(player.getId())) {
             Player opponent = game.getPlayer(opponentId);
             if (opponent == null) {

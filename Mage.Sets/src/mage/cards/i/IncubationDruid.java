@@ -153,7 +153,7 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
         int manaAmount = getManaAmount(game, source);
-        List<Mana> netManas = new ArrayList();
+        List<Mana> netManas = new ArrayList<>();
         Mana types = getManaTypes(game, source);
         if (types.getRed() > 0) {
             netManas.add(new Mana(manaAmount, 0, 0, 0, 0, 0, 0, 0));

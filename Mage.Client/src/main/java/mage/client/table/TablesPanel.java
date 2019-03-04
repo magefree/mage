@@ -245,7 +245,7 @@ public class TablesPanel extends javax.swing.JPanel {
                         setSortKeys(null);
                     } else {
                         // setup sort on first click
-                        ArrayList list = new ArrayList();
+                        List<SortKey> list = new ArrayList<>();
                         list.add(new RowSorter.SortKey(TablesTableModel.COLUMN_SEATS, SortOrder.ASCENDING));
                         list.add(new RowSorter.SortKey(TablesTableModel.COLUMN_CREATED, SortOrder.DESCENDING));
                         setSortKeys(list);
@@ -293,7 +293,7 @@ public class TablesPanel extends javax.swing.JPanel {
         });
 
         // default sort by created date (last games from above)
-        ArrayList list = new ArrayList();
+        ArrayList list = new ArrayList<>();
         list.add(new RowSorter.SortKey(TablesTableModel.COLUMN_SEATS, SortOrder.ASCENDING));
         list.add(new RowSorter.SortKey(TablesTableModel.COLUMN_CREATED, SortOrder.DESCENDING));
         activeTablesSorter.setSortKeys(list);
@@ -310,7 +310,7 @@ public class TablesPanel extends javax.swing.JPanel {
         tableCompleted.getColumnModel().getColumn(MatchesTableModel.COLUMN_START).setCellRenderer(datetimeCellRenderer);
         tableCompleted.getColumnModel().getColumn(MatchesTableModel.COLUMN_END).setCellRenderer(datetimeCellRenderer);
         // default sort by ended date (last games from above)
-        ArrayList list2 = new ArrayList();
+        ArrayList list2 = new ArrayList<>();
         list2.add(new RowSorter.SortKey(MatchesTableModel.COLUMN_END, SortOrder.DESCENDING));
         completedTablesSorter.setSortKeys(list2);
 

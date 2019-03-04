@@ -116,7 +116,7 @@ class TuvasaTheSunlitTriggeredAbility extends SpellCastControllerTriggeredAbilit
 
 class TuvasaTheSunlitWatcher extends Watcher {
 
-    private final Map<UUID, UUID> firstEnchantmentThisTurn = new HashMap();
+    private final Map<UUID, UUID> firstEnchantmentThisTurn = new HashMap<>();
 
     public TuvasaTheSunlitWatcher() {
         super(TuvasaTheSunlitWatcher.class, WatcherScope.GAME);

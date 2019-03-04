@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public class CanadianHighlander extends Constructed {
 
-    public static final Map<String, Integer> pointMap = new HashMap();
+    public static final Map<String, Integer> pointMap = new HashMap<>();
 
     static {
         pointMap.put("Ancestral Recall", 7);

@@ -128,7 +128,7 @@ class VaevictisAsmadiTheDireEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Player> playersToFlip = new ArrayList();
+        List<Player> playersToFlip = new ArrayList<>();
         for (Target target : source.getTargets()) {
             for (UUID permId : target.getTargets()) {
                 Permanent permanent = game.getPermanent(permId);

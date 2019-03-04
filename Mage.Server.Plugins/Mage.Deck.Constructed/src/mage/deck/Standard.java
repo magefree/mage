@@ -28,7 +28,7 @@ public class Standard extends Constructed {
     }
 
     public static List<String> makeLegalSets() {
-        List<String> codes = new ArrayList();
+        List<String> codes = new ArrayList<>();
         GregorianCalendar current = new GregorianCalendar();
         List<ExpansionSet> sets = new ArrayList(Sets.getInstance().values());
         Collections.sort(sets, new Comparator<ExpansionSet>() {

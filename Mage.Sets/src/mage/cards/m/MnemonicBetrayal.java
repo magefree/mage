@@ -177,7 +177,7 @@ class MnemonicBetrayalAnyColorEffect extends AsThoughEffectImpl implements AsTho
 class MnemonicBetrayalDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     private final Cards cards;
-    private final Map<UUID, Integer> cardMap = new HashMap();
+    private final Map<UUID, Integer> cardMap = new HashMap<>();
 
     public MnemonicBetrayalDelayedTriggeredAbility(Cards cards, Map<UUID, Integer> cardMap) {
         super(new MnemonicBetrayalReturnEffect(cards, cardMap));
@@ -224,7 +224,7 @@ class MnemonicBetrayalDelayedTriggeredAbility extends DelayedTriggeredAbility {
 class MnemonicBetrayalReturnEffect extends OneShotEffect {
 
     private final Cards cards;
-    private final Map<UUID, Integer> cardMap = new HashMap();
+    private final Map<UUID, Integer> cardMap = new HashMap<>();
 
     public MnemonicBetrayalReturnEffect(Cards cards, Map<UUID, Integer> cardMap) {
         super(Outcome.Benefit);

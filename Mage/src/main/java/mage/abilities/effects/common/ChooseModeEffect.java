@@ -19,7 +19,7 @@ import mage.players.Player;
  */
 public class ChooseModeEffect extends OneShotEffect {
 
-    protected final List<String> modes = new ArrayList();
+    protected final List<String> modes = new ArrayList<>();
     protected final String choiceMessage;
 
     public ChooseModeEffect(String choiceMessage, String... modes) {
