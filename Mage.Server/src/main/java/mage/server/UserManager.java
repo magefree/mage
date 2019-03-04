@@ -58,7 +58,7 @@ public enum UserManager {
 
     public Optional<User> getUser(UUID userId) {
         if (!users.containsKey(userId)) {
-            logger.warn(String.format("User with id %s could not be found", userId));;
+            logger.warn(String.format("User with id %s could not be found", userId), new Throwable()); // TODO: remove after session freezes fixed
             return Optional.empty();
         } else {
             return Optional.of(users.get(userId));
