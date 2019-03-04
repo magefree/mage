@@ -95,41 +95,52 @@ public final class ConstructedFormats {
             return;
         }
 
+        // build formats list for deck validators
         for (ExpansionInfo set : ExpansionRepository.instance.getAll()) {
             expansionInfo.put(set.getName(), set);
             formats.add(set.getName());
 
+            // full list
             underlyingSetCodesPerFormat.put(set.getName(), new ArrayList<>());
             underlyingSetCodesPerFormat.get(set.getName()).add(set.getCode());
 
-            // create the play formats
-            if (set.getType() == SetType.CUSTOM_SET) {
+            // custom
+            if (set.getType().isCustomSet()) {
                 underlyingSetCodesPerFormat.get(CUSTOM).add(set.getCode());
                 continue;
             }
-            if (set.getType() == SetType.JOKESET) {
+
+            // joke
+            if (set.getType().isJokeSet()) {
                 underlyingSetCodesPerFormat.get(JOKE).add(set.getCode());
                 continue;
             }
+
+            // vintage/legacy (any set, TODO: even ?custom set?)
             underlyingSetCodesPerFormat.get(VINTAGE_LEGACY).add(set.getCode());
-            if (set.getType() == SetType.CORE || set.getType() == SetType.EXPANSION || set.getType() == SetType.SUPPLEMENTAL_STANDARD_LEGAL) {
-                if (STANDARD_CARDS.getSetCodes().contains(set.getCode())) {
-                    underlyingSetCodesPerFormat.get(STANDARD).add(set.getCode());
-                }
-                if (set.getType() != SetType.SUPPLEMENTAL_STANDARD_LEGAL) {
-                    if (set.getReleaseDate().after(extendedDate) && (set.getType() == SetType.EXPANSION || set.getType() == SetType.CORE)) {
-                        underlyingSetCodesPerFormat.get(EXTENDED).add(set.getCode());
-                    }
-                    if (set.getReleaseDate().after(frontierDate) && (set.getType() == SetType.EXPANSION || set.getType() == SetType.CORE)) {
-                        underlyingSetCodesPerFormat.get(FRONTIER).add(set.getCode());
-                    }
-                    if (set.getReleaseDate().after(modernDate) && (set.getType() == SetType.EXPANSION || set.getType() == SetType.CORE)) {
-                        underlyingSetCodesPerFormat.get(MODERN).add(set.getCode());
-                    }
-                }
+
+            // standard (dependent on current date)
+            if (STANDARD_CARDS.getSetCodes().contains(set.getCode())) {
+                underlyingSetCodesPerFormat.get(STANDARD).add(set.getCode());
             }
 
-            // Create the Block formats
+            // extended
+            if (set.getType().isStandardLegal() && set.getReleaseDate().after(extendedDate)) {
+                underlyingSetCodesPerFormat.get(EXTENDED).add(set.getCode());
+            }
+
+            // frontier
+            if (set.getType().isStandardLegal() && set.getReleaseDate().after(frontierDate)) {
+                underlyingSetCodesPerFormat.get(FRONTIER).add(set.getCode());
+            }
+
+            // modern
+            if (set.getType().isModernLegal() && set.getReleaseDate().after(modernDate)) {
+                underlyingSetCodesPerFormat.get(MODERN).add(set.getCode());
+            }
+
+            // BLOCKS formats
+
             if (set.getType() == SetType.EXPANSION && set.getBlockName() != null) {
                 String blockDisplayName = getBlockDisplayName(set.getBlockName());
                 underlyingSetCodesPerFormat.computeIfAbsent(blockDisplayName, k -> new ArrayList<>());
@@ -144,7 +155,6 @@ public final class ConstructedFormats {
                 if (expansionInfo.get(blockDisplayName).getReleaseDate().after(set.getReleaseDate())) {
                     expansionInfo.put(blockDisplayName, set);
                 }
-
             }
 
             if (set.getType() == SetType.SUPPLEMENTAL && set.getBlockName() != null) {
@@ -235,6 +245,7 @@ public final class ConstructedFormats {
             }
             return expansionInfo1.getType().compareTo(expansionInfo2.getType());
         });
+
         if (!formats.isEmpty()) {
             formats.add(0, CUSTOM);
             formats.add(0, JOKE);

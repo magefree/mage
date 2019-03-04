@@ -20,7 +20,7 @@ public class Pauper extends Constructed {
 
         //TODO: Add only Magic Online sets for pauper
         for (ExpansionSet set : Sets.getInstance().values()) {
-            if (set.isEternalLegal()) {
+            if (set.getSetType().isEternalLegal()) {
                 setCodes.add(set.getCode());
             }
         }

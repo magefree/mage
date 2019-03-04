@@ -12,7 +12,6 @@ import com.j256.ormlite.support.DatabaseConnection;
 import com.j256.ormlite.table.TableUtils;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SetType;
 import mage.constants.SuperType;
 import mage.game.events.Listener;
 import mage.util.RandomUtil;
@@ -407,8 +406,7 @@ public enum CardRepository {
                         return cardinfo;
                     }
 
-                    if ((set.getType() == SetType.EXPANSION || set.getType() == SetType.CORE)
-                            && (lastExpansionDate == null || set.getReleaseDate().after(lastExpansionDate))) {
+                    if (set.getType().isStandardLegal() && (lastExpansionDate == null || set.getReleaseDate().after(lastExpansionDate))) {
                         cardToUse = cardinfo;
                         lastExpansionDate = set.getReleaseDate();
                     }

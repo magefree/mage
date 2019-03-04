@@ -55,7 +55,7 @@ public class Standard extends Constructed {
 
         for (ExpansionSet set : sets) {
             boolean isDateCompatible = earliestDate != null && !set.getReleaseDate().before(earliestDate) /*!set.getReleaseDate().after(current.getTime())*/; // no after date restrict for early tests and beta
-            if (set.isStandardLegal() && isDateCompatible) {
+            if (set.getSetType().isStandardLegal() && isDateCompatible) {
                 codes.add(set.getCode());
             }
         }

@@ -17,8 +17,7 @@ public class ModernNoBannedList extends Constructed {
 
         Date cutoff = new GregorianCalendar(2003, 6, 28).getTime(); // Eight edition release date
         for (ExpansionSet set : Sets.getInstance().values()) {
-            if (set.isStandardLegal()
-                    && (set.getReleaseDate().after(cutoff) || set.getReleaseDate().equals(cutoff))) {
+            if (set.getSetType().isModernLegal() && (set.getReleaseDate().after(cutoff) || set.getReleaseDate().equals(cutoff))) {
                 setCodes.add(set.getCode());
             }
         }

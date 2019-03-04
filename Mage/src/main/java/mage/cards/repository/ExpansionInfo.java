@@ -3,12 +3,12 @@ package mage.cards.repository;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-import java.util.Date;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 
+import java.util.Date;
+
 /**
- *
  * @author North
  */
 @DatabaseTable(tableName = "expansion")
@@ -16,7 +16,7 @@ public class ExpansionInfo {
 
     @DatabaseField(unique = true)
     protected String name;
-    @DatabaseField(id = true,unique = true)
+    @DatabaseField(id = true, unique = true)
     protected String code;
     @DatabaseField
     protected String blockName;
@@ -74,5 +74,4 @@ public class ExpansionInfo {
     public String toString() {
         return name;
     }
-
 }

@@ -51,13 +51,9 @@ public class Sets extends HashMap<String, ExpansionSet> {
             throw new IllegalArgumentException("Set code " + set.getCode() + " already exists.");
         }
         this.put(set.getCode(), set);
-        if (set.isCustomSet()) {
+        if (set.getSetType().isCustomSet()) {
             customSets.add(set.getCode());
         }
-    }
-
-    public static boolean isCustomSet(String setCode) {
-        return getInstance().customSets.contains(setCode);
     }
 
     /**

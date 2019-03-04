@@ -17,10 +17,10 @@ public final class ModernHorizons extends ExpansionSet {
 
     private ModernHorizons() {
         // TODO: update the set type closer to release (no point right now, the cards won't be legal for a while)
-        super("Modern Horizons", "MH1", ExpansionSet.buildDate(2019, 6, 14), SetType.SUPPLEMENTAL);
+        super("Modern Horizons", "MH1", ExpansionSet.buildDate(2019, 6, 14), SetType.SUPPLEMENTAL_MODERN_LEGAL);
         this.blockName = "Modern Horizons";
         this.hasBasicLands = false;
-        this.hasBoosters = true;
+        this.hasBoosters = false; // TODO: enable after more cards will be available
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
@@ -30,5 +30,4 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Cabal Therapist", 80, Rarity.RARE, mage.cards.c.CabalTherapist.class));
         cards.add(new SetCardInfo("Serra the Benevolent", 26, Rarity.MYTHIC, mage.cards.s.SerraTheBenevolent.class));
     }
-
 }

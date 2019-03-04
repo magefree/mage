@@ -26,7 +26,7 @@ public class Commander extends Constructed {
     public Commander() {
         this("Commander");
         for (ExpansionSet set : Sets.getInstance().values()) {
-            if (set.isEternalLegal()) {
+            if (set.getSetType().isEternalLegal()) {
                 setCodes.add(set.getCode());
             }
         }
@@ -743,7 +743,7 @@ public class Commander extends Constructed {
         }
 
         edhPowerLevel += numberInfinitePieces * 12;
-        edhPowerLevel = (int) Math.round(edhPowerLevel / 10);
+        edhPowerLevel = Math.round(edhPowerLevel / 10);
         if (edhPowerLevel >= 100) {
             edhPowerLevel = 99;
         }

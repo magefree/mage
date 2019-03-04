@@ -154,7 +154,7 @@ public class SuperType2 extends Constructed {
             // Get the sets in that time period.
             // (code taken from standard.java)
             for (ExpansionSet set : Sets.getInstance().values()) {
-                if (set.isStandardLegal()
+                if (set.getSetType().isStandardLegal()
                         && set.getReleaseDate().after(start.getTime())
                         && set.getReleaseDate().before(end.getTime())) {
                     setCodes.add(set.getCode());

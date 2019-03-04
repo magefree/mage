@@ -5,7 +5,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author fireshoes
  */
 public final class ModernMasters2015 extends ExpansionSet {
@@ -17,7 +16,7 @@ public final class ModernMasters2015 extends ExpansionSet {
     }
 
     private ModernMasters2015() {
-        super("Modern Masters 2015", "MM2", ExpansionSet.buildDate(2015, 5, 22), SetType.SUPPLEMENTAL);
+        super("Modern Masters 2015", "MM2", ExpansionSet.buildDate(2015, 5, 22), SetType.SUPPLEMENTAL_MODERN_LEGAL);
         this.blockName = "Reprint";
         this.hasBasicLands = false;
         this.hasBoosters = true;

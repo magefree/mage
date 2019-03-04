@@ -600,20 +600,6 @@ public abstract class ExpansionSet implements Serializable {
         return new ArrayList<>();
     }
 
-    public boolean isCustomSet() {
-        return setType == SetType.CUSTOM_SET;
-    }
-
-    public boolean isEternalLegal() {
-        // any official sets except un-sets
-        return setType != SetType.CUSTOM_SET && setType != SetType.JOKESET;
-    }
-
-    public boolean isStandardLegal() {
-        // any official sets that was in standard
-        return setType == SetType.CORE || setType == SetType.EXPANSION || setType == SetType.SUPPLEMENTAL_STANDARD_LEGAL;
-    }
-
     public void removeSavedCards() {
         savedCards.clear();
     }

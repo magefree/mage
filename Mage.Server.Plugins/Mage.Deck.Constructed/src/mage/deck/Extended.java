@@ -22,7 +22,7 @@ public class Extended extends Constructed {
             cutoff = new GregorianCalendar(current.get(Calendar.YEAR) - 4, Calendar.SEPTEMBER, 1);
         }
         for (ExpansionSet set : Sets.getInstance().values()) {
-            if (set.isStandardLegal() && set.getReleaseDate().after(cutoff.getTime())) {
+            if (set.getSetType().isStandardLegal() && set.getReleaseDate().after(cutoff.getTime())) {
                 setCodes.add(set.getCode());
             }
         }

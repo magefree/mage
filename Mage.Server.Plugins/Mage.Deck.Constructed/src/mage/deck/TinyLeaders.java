@@ -1,4 +1,3 @@
-
 package mage.deck;
 
 import mage.abilities.common.CanBeYourCommanderAbility;
@@ -26,7 +25,7 @@ public class TinyLeaders extends Constructed {
     public TinyLeaders() {
         this("Tiny Leaders");
         for (ExpansionSet set : Sets.getInstance().values()) {
-            if (set.isEternalLegal()) {
+            if (set.getSetType().isEternalLegal()) {
                 setCodes.add(set.getCode());
             }
         }

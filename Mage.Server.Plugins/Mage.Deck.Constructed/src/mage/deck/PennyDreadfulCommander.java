@@ -1,4 +1,3 @@
-
 package mage.deck;
 
 import mage.abilities.Ability;
@@ -27,7 +26,7 @@ public class PennyDreadfulCommander extends Constructed {
     public PennyDreadfulCommander() {
         this("Penny Dreadful Commander");
         for (ExpansionSet set : Sets.getInstance().values()) {
-            if (set.isEternalLegal()) {
+            if (set.getSetType().isEternalLegal()) {
                 setCodes.add(set.getCode());
             }
         }

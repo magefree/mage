@@ -80,7 +80,7 @@ public final class CardScanner {
         Collection<ExpansionSet> sets = Sets.getInstance().values();
         List<Card> cards = new ArrayList<>();
         for (ExpansionSet set : sets) {
-            if (ignoreCustomSets && set.isCustomSet()) {
+            if (ignoreCustomSets && set.getSetType().isCustomSet()) {
                 continue;
             }
             for (ExpansionSet.SetCardInfo setInfo : set.getSetCardInfo()) {

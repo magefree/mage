@@ -1,4 +1,3 @@
-
 package mage.deck;
 
 import mage.cards.ExpansionSet;
@@ -17,7 +16,7 @@ public class Eternal extends Constructed {
     public Eternal() {
         super("Constructed - Eternal");
         for (ExpansionSet set : Sets.getInstance().values()) {
-            if (set.isEternalLegal()) {
+            if (set.getSetType().isEternalLegal()) {
                 setCodes.add(set.getCode());
             }
         }

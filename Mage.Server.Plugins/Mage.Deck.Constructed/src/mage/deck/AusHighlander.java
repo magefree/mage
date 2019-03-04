@@ -81,7 +81,7 @@ public class AusHighlander extends Constructed {
     public AusHighlander() {
         this("Australian Highlander");
         for (ExpansionSet set : Sets.getInstance().values()) {
-            if (set.isEternalLegal()) {
+            if (set.getSetType().isEternalLegal()) {
                 setCodes.add(set.getCode());
             }
         }
