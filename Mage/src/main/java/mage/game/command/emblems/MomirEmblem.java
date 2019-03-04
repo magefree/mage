@@ -73,7 +73,7 @@ class MomirEffect extends OneShotEffect {
         while (!options.isEmpty()) {
             int index = RandomUtil.nextInt(options.size());
             ExpansionSet expansionSet = Sets.findSet(options.get(index).getSetCode());
-            if (expansionSet == null || expansionSet.getSetType() == SetType.CUSTOM_SET) {
+            if (expansionSet == null || !expansionSet.getSetType().isEternalLegal()) {
                 options.remove(index);
             } else {
                 Card card = options.get(index).getCard();
