@@ -1,6 +1,6 @@
-
 package mage.abilities.effects.common;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -39,12 +39,13 @@ public class LoseLifeTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (player != null) {
-            player.loseLife(amount.calculate(game, source, this), game, false);
-            return true;
+        for (UUID playerId : targetPointer.getTargets(game, source)) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+              player.loseLife(amount.calculate(game, source, this), game, false);
+            }
         }
-        return false;
+        return true;
     }
 
     @Override

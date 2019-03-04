@@ -2,26 +2,26 @@ package mage.cards.p;
 
 import mage.MageInt;
 import mage.Mana;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.abilities.effects.common.SacrificeEffect;
+import mage.filter.StaticFilters;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  * @author TheElk801
@@ -53,9 +53,9 @@ public final class PriestOfForgottenGods extends CardImpl {
                 new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "")
                         .setText("and sacrifice a creature")
         );
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter, true)));
         ability.addEffect(new BasicManaEffect(Mana.BlackMana(2)).setText("You add {B}{B}"));
         ability.addEffect(new DrawCardSourceControllerEffect(1).setText("and draw a card"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter, true)));
         ability.addTarget(new TargetPlayer(0, Integer.MAX_VALUE, false));
         this.addAbility(ability);
     }
