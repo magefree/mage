@@ -36,7 +36,7 @@ public class LoadPhaseManager {
 
     private static Map<PhaseStep, Boolean> skipYou;
     static {
-        skipYou = new HashMap<>() {{
+        skipYou = new HashMap() {{
             put(PhaseStep.UPKEEP, true);
             put(PhaseStep.PRECOMBAT_MAIN, true);
             put(PhaseStep.BEGIN_COMBAT, true);
@@ -50,7 +50,7 @@ public class LoadPhaseManager {
 
     private static Map<PhaseStep, Boolean> skipOthers;
     static {
-        skipYou = new HashMap<>() {{
+        skipYou = new HashMap() {{
             put(PhaseStep.UPKEEP, true);
             put(PhaseStep.PRECOMBAT_MAIN, true);
             put(PhaseStep.BEGIN_COMBAT, true);
