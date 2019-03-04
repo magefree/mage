@@ -180,7 +180,7 @@ public final class ManaSymbols {
                 codes = EnumSet.of(Rarity.COMMON, Rarity.UNCOMMON, Rarity.RARE, Rarity.MYTHIC);
             }
 
-            Map<Rarity, Image> rarityImages = new HashMap<>();
+            Map<Rarity, Image> rarityImages = new EnumMap<>(Rarity.class);
             setImages.put(set, rarityImages);
 
             // load medium size

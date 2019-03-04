@@ -289,8 +289,9 @@ public final class RateCard {
         }
 
         // normalize for the file to [1..100]
-        for (String name : thisFileRatings.keySet()) {
-            int r = thisFileRatings.get(name);
+        for (Map.Entry<String, Integer> ratingByName : thisFileRatings.entrySet()) {
+            int r = ratingByName.getValue();
+            String name = ratingByName.getKey();
             int newRating = (int) (100.0f * (r - min) / (max - min));
             int oldRating = baseRatings.getOrDefault(name, 0);
             if (newRating > oldRating) {
@@ -339,7 +340,7 @@ public final class RateCard {
                 }
                 Integer typeCount = singleCount.get(symbol);
                 if (typeCount == null) {
-                    typeCount = new Integer(0);
+                    typeCount = 0;
                 }
                 typeCount += 1;
                 singleCount.put(symbol, typeCount);

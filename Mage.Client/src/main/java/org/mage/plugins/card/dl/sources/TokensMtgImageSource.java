@@ -25,7 +25,7 @@ public enum TokensMtgImageSource implements CardImageSource {
     private static final Logger logger = Logger.getLogger(TokensMtgImageSource.class);
 
     // [[EXP/Name, TokenData>
-    private HashMap<String, ArrayList<TokenData>> tokensData;
+    private HashMap<String, List<TokenData>> tokensData;
     private static final Set<String> supportedSets = new LinkedHashSet<String>();
 
     private final Object tokensDataSync = new Object();
@@ -177,7 +177,7 @@ public enum TokensMtgImageSource implements CardImageSource {
         return false;
     }
 
-    private HashMap<String, ArrayList<TokenData>> getTokensData() throws IOException {
+    private HashMap<String, List<TokenData>> getTokensData() throws IOException {
         synchronized (tokensDataSync) {
             if (tokensData == null) {
                 DownloadPicturesService.getInstance().updateAndViewMessage("Find tokens data...");
@@ -188,7 +188,7 @@ public enum TokensMtgImageSource implements CardImageSource {
                     List<TokenData> fileTokensData = parseTokensData(inputStream);
                     for (TokenData tokenData : fileTokensData) {
                         String key = tokenData.getExpansionSetCode() + "/" + tokenData.getName();
-                        ArrayList<TokenData> list = tokensData.get(key);
+                        List<TokenData> list = tokensData.get(key);
                         if (list == null) {
                             list = new ArrayList<>();
                             tokensData.put(key, list);
@@ -213,7 +213,7 @@ public enum TokensMtgImageSource implements CardImageSource {
                         // logger.info("TOK: " + siteData.getExpansionSetCode() + "/" + siteData.getName());
                         String key = siteData.getExpansionSetCode() + "/" + siteData.getName();
                         supportedSets.add(siteData.getExpansionSetCode());
-                        ArrayList<TokenData> list = tokensData.get(key);
+                        List<TokenData> list = tokensData.get(key);
                         if (list == null) {
                             list = new ArrayList<>();
                             tokensData.put(key, list);
@@ -249,7 +249,7 @@ public enum TokensMtgImageSource implements CardImageSource {
              BufferedReader reader = new BufferedReader(inputReader)) {
             // we have to specify encoding to read special comma
 
-            reader.readLine(); // skip header
+            String header = reader.readLine(); // skip header
             String line = reader.readLine();
             // states
             // 0 - wait set name

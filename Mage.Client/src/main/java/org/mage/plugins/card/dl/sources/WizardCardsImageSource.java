@@ -40,7 +40,7 @@ public enum WizardCardsImageSource implements CardImageSource {
 
     WizardCardsImageSource() {
 
-        languageAliases = new HashMap<>();
+        languageAliases = new EnumMap<>(CardLanguage.class);
         languageAliases.put(CardLanguage.ENGLISH, "English");
         languageAliases.put(CardLanguage.SPANISH, "Spanish");
         languageAliases.put(CardLanguage.FRENCH, "French");
@@ -544,9 +544,9 @@ public enum WizardCardsImageSource implements CardImageSource {
                                 getLandVariations(setLinks, cardSet, multiverseId, cardName);
                             } else {
                                 String numberChar = "";
-                                int pos1 = cardName.indexOf("(");
+                                int pos1 = cardName.indexOf('(');
                                 if (pos1 > 0) {
-                                    int pos2 = cardName.indexOf("(", pos1 + 1);
+                                    int pos2 = cardName.indexOf('(', pos1 + 1);
                                     if (pos2 > 0) {
                                         numberChar = cardName.substring(pos2 + 1, pos2 + 2);
                                         cardName = cardName.substring(0, pos1);

@@ -121,10 +121,8 @@ public enum ServerMessagesUtil {
             return Collections.emptyList();
         }
 
-        Scanner scanner = null;
         List<String> newMessages = new ArrayList<>();
-        try {
-            scanner = new Scanner(is);
+        try(Scanner scanner = new Scanner(is)) {
             while (scanner.hasNextLine()) {
                 String message = scanner.nextLine();
                 if (!message.trim().isEmpty()) {
@@ -134,7 +132,6 @@ public enum ServerMessagesUtil {
         } catch (Exception e) {
             log.error(e, e);
         } finally {
-            StreamUtils.closeQuietly(scanner);
             StreamUtils.closeQuietly(is);
         }
         return newMessages;

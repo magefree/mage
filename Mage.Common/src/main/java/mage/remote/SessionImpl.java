@@ -119,7 +119,7 @@ public class SessionImpl implements Session {
             if (ex.getMessage() != null && ex.getMessage().startsWith("Unable to perform invocation")) {
                 addMessage = "Maybe the server version is not compatible. ";
             }
-            client.showMessage("Unable connect to server. " + addMessage + ex.getMessage() != null ? ex.getMessage() : "");
+            client.showMessage("Unable connect to server. " + addMessage + (ex.getMessage() != null ? ex.getMessage() : ""));
         } catch (MageVersionException ex) {
             if (!canceled) {
                 client.showMessage("Unable connect to server. " + ex.getMessage());

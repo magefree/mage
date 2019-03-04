@@ -1,5 +1,6 @@
 package mage.cards.c;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -61,12 +62,11 @@ class CentaurMediatorEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         game.getState().getPlayersInRange(
-                source.getControllerId(), game
-        ).stream().map((playerId) -> game.getPlayer(playerId)).filter(
-                (player) -> (player != null)
-        ).forEachOrdered((player) -> {
-            player.gainLife(4, game, source);
-        });
+                source.getControllerId(), game)
+                .stream()
+                .map(game::getPlayer)
+                .filter(Objects::nonNull)
+                .forEachOrdered(player -> player.gainLife(4, game, source));
         return true;
     }
 

@@ -72,7 +72,7 @@ class KavuPredatorTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
-            this.getEffects().get(0).setValue("gainedLife", new Integer(event.getAmount()));
+            this.getEffects().get(0).setValue("gainedLife", event.getAmount());
             return true;
         }
         return false;
