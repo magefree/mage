@@ -29,7 +29,7 @@ public class CanadianHighlander extends Constructed {
         pointMap.put("Imperial Seal", 1);
         pointMap.put("Intuition", 1);
         pointMap.put("Library of Alexandria", 1);
-        pointMap.put("Mana Crypt", 2);
+        pointMap.put("Mana Crypt", 3);
         pointMap.put("Mana Drain", 1);
         pointMap.put("Mana Vault", 1);
         pointMap.put("Merchant Scroll", 1);
@@ -41,7 +41,6 @@ public class CanadianHighlander extends Constructed {
         pointMap.put("Mox Sapphire", 3);
         pointMap.put("Mystical Tutor", 2);
         pointMap.put("Natural Order", 4);
-        pointMap.put("Personal Tutor", 1);
         pointMap.put("Protean Hulk", 3);
         pointMap.put("Sol Ring", 3);
         pointMap.put("Spellseeker", 1);
