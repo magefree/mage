@@ -442,7 +442,7 @@ public class TestPlayer implements Player {
                             continue;
                         }
 
-                        // founded, can use as target
+                        // found, can use as target
 
                         if (currentTarget.getNumberOfTargets() == 1) {
                             currentTarget.clearChosen();

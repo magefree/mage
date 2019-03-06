@@ -145,11 +145,11 @@ public class VerifyCardDataTest {
 
                     String errorType;
                     if (checkCard.getName().equals(prevCard.getName())) {
-                        errorType = " founded DUPLICATED cards"
+                        errorType = " found DUPLICATED cards"
                                 + " set (" + set.getCode() + " - " + set.getName() + ")"
                                 + " (" + checkCard.getCardNumber() + " - " + checkCard.getName() + ")";
                     } else {
-                        errorType = " founded TYPOS in card numbers"
+                        errorType = " found TYPOS in card numbers"
                                 + " set (" + set.getCode() + " - " + set.getName() + ")"
                                 + " (" + prevCard.getCardNumber() + " - " + prevCard.getName() + ")"
                                 + " and"
@@ -170,7 +170,7 @@ public class VerifyCardDataTest {
         }
 
         if (doubleErrors.size() > 0) {
-            Assert.fail("DB have duplicated card numbers, founded errors: " + doubleErrors.size());
+            Assert.fail("DB have duplicated card numbers, found errors: " + doubleErrors.size());
         }
     }
 
@@ -191,7 +191,7 @@ public class VerifyCardDataTest {
                     if (!needClass.equals(currentClass)) {
                         // workaround to star wars set with same card names
                         if (!checkCard.getName().equals("Syndicate Enforcer")) {
-                            errorsList.add("Error: founded wrong class in set " + set.getCode() + " - " + checkCard.getName() + " (" + currentClass + " <> " + needClass + ")");
+                            errorsList.add("Error: found wrong class in set " + set.getCode() + " - " + checkCard.getName() + " (" + currentClass + " <> " + needClass + ")");
                         }
                     }
                 } else {
@@ -208,7 +208,7 @@ public class VerifyCardDataTest {
         System.out.println("Total unique cards: " + classesIndex.size() + ", total non unique cards (reprints): " + totalCards);
 
         if (errorsList.size() > 0) {
-            Assert.fail("DB have wrong card classes, founded errors: " + errorsList.size());
+            Assert.fail("DB have wrong card classes, found errors: " + errorsList.size());
         }
     }
 
@@ -351,7 +351,7 @@ public class VerifyCardDataTest {
         printMessages(warningsList);
         printMessages(errorsList);
         if (errorsList.size() > 0) {
-            Assert.fail("Founded set errors: " + errorsList.size());
+            Assert.fail("Found set errors: " + errorsList.size());
         }
     }
 
@@ -386,7 +386,7 @@ public class VerifyCardDataTest {
         printMessages(warningsList);
         printMessages(errorsList);
         if (errorsList.size() > 0) {
-            Assert.fail("Founded card errors: " + errorsList.size());
+            Assert.fail("Found card errors: " + errorsList.size());
         }
     }
 
@@ -485,7 +485,7 @@ public class VerifyCardDataTest {
         printMessages(warningsList);
         printMessages(errorsList);
         if (errorsList.size() > 0) {
-            Assert.fail("Founded token errors: " + errorsList.size());
+            Assert.fail("Found token errors: " + errorsList.size());
         }
     }
 

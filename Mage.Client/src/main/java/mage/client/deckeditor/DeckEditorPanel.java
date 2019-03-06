@@ -780,7 +780,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     private void processAndShowImportErrors(StringBuilder errorMessages) {
         // show up errors list
         if (errorMessages.length() > 0) {
-            String mes = "Founded problems with deck: \n\n" + errorMessages.toString();
+            String mes = "Found problems with deck: \n\n" + errorMessages.toString();
             JOptionPane.showMessageDialog(MageFrame.getDesktop(), mes.substring(0, Math.min(1000, mes.length())), "Errors while loading deck", JOptionPane.WARNING_MESSAGE);
         }
     }

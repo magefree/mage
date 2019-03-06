@@ -410,7 +410,7 @@ public class SessionImpl implements Session {
         if (forceDBComparison || serverState.getExpansionsContentVersion() > expansionDBVersion) {
             List<String> setCodes = ExpansionRepository.instance.getSetCodes();
             List<ExpansionInfo> expansions = server.getMissingExpansionData(setCodes);
-            logger.info("DB: updating sets... Founded new: " + expansions.size());
+            logger.info("DB: updating sets... Found new: " + expansions.size());
             ExpansionRepository.instance.saveSets(expansions, null, serverState.getExpansionsContentVersion());
         }
 
@@ -419,7 +419,7 @@ public class SessionImpl implements Session {
         if (forceDBComparison || serverState.getCardsContentVersion() > cardDBVersion) {
             List<String> classNames = CardRepository.instance.getClassNames();
             List<CardInfo> cards = server.getMissingCardsData(classNames);
-            logger.info("DB: updating cards... Founded new: " + cards.size());
+            logger.info("DB: updating cards... Found new: " + cards.size());
             CardRepository.instance.saveCards(cards, serverState.getCardsContentVersion());
         }
     }
