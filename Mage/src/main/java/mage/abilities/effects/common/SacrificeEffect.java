@@ -46,6 +46,7 @@ public class SacrificeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        boolean applied = false;
         for (UUID playerId : targetPointer.getTargets(game, source)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
@@ -56,19 +57,22 @@ public class SacrificeEffect extends OneShotEffect {
                 amount = Math.min(amount, realCount);
                 Target target = new TargetPermanent(amount, amount, newFilter, true);
                 if (amount > 0 && target.canChoose(source.getSourceId(), player.getId(), game)) {
-                    while (!target.isChosen() && target.canChoose(player.getId(), game) && player.canRespond()) {
+                    while (!target.isChosen()
+                            && target.canChoose(player.getId(), game)
+                            && player.canRespond()) {
                         player.chooseTarget(Outcome.Sacrifice, target, source, game);
                     }
                     for (int idx = 0; idx < target.getTargets().size(); idx++) {
                         Permanent permanent = game.getPermanent(target.getTargets().get(idx));
-                        if (permanent != null) {
-                            permanent.sacrifice(source.getSourceId(), game);
+                        if (permanent != null
+                                && permanent.sacrifice(source.getSourceId(), game)) {
+                            applied = true;
                         }
                     }
                 }
             }
         }
-        return true;
+        return applied;
     }
 
     public void setAmount(DynamicValue amount) {
