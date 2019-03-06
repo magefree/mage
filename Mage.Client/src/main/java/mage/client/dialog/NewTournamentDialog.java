@@ -907,7 +907,6 @@ public class NewTournamentDialog extends MageDialog {
             packPanels.add(setPanel); // for later access
             // combo set
             JComboBox pack = new JComboBox();
-            pack = new JComboBox();
             pack.setModel(new DefaultComboBoxModel(ExpansionRepository.instance.getWithBoostersSortedByReleaseDate()));
             pack.addActionListener(evt -> packActionPerformed(evt));
             pack.setAlignmentX(0.0F);
@@ -963,7 +962,7 @@ public class NewTournamentDialog extends MageDialog {
         int startIndex = 0;
         for (int i = 0; i < packPanels.size(); i++) {
             JComboBox pack = findComboInComponent(packPanels.get(i));
-            if (pack.equals(curentCombo)) {
+            if (pack != null && pack.equals(curentCombo)) {
                 startIndex = i + 1;
                 break;
             }
@@ -972,7 +971,9 @@ public class NewTournamentDialog extends MageDialog {
         // change all from start index
         for (int i = startIndex; i < packPanels.size(); i++) {
             JComboBox pack = findComboInComponent(packPanels.get(i));
-            pack.setSelectedIndex(newValue);
+            if(pack != null) {
+                pack.setSelectedIndex(newValue);
+            }
         }
     }
 

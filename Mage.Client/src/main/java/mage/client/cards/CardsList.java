@@ -77,6 +77,12 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
             for (MouseListener ml : cardArea.getMouseListeners()) {
                 cardArea.removeMouseListener(ml);
             }
+            for (Component comp : cardArea.getComponents()) {
+                if (comp instanceof CardPanel) {
+                    ((CardPanel) comp).cleanUp();
+                }
+            }
+            cardArea.removeAll();
         }
         if (mainTable != null) {
             for (MouseListener ml : mainTable.getMouseListeners()) {
@@ -86,13 +92,8 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         if (currentView != null) {
             currentView.clearCardEventListeners();
         }
-        for (Component comp : cardArea.getComponents()) {
-            if (comp instanceof CardPanel) {
-                ((CardPanel) comp).cleanUp();
-            }
-        }
+
         mageCards.clear();
-        cardArea.removeAll();
         this.bigCard = null;
 
     }

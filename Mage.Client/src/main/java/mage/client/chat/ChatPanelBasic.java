@@ -224,7 +224,6 @@ public class ChatPanelBasic extends javax.swing.JPanel {
         StringBuilder text = new StringBuilder();
         if (time != null) {
             text.append(getColoredText(TIMESTAMP_COLOR, timeFormatter.format(time) + ": "));
-            //this.txtConversation.append(TIMESTAMP_COLOR, time + " ");
         }
         String userColor;
         String textColor;
@@ -239,11 +238,7 @@ public class ChatPanelBasic extends javax.swing.JPanel {
                 userColor = USER_INFO_COLOR;
                 break;
             default:
-                if (parentChatRef != null) {
-                    userColor = SessionHandler.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
-                } else {
-                    userColor = SessionHandler.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
-                }
+                userColor = SessionHandler.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
                 textColor = MESSAGE_COLOR;
                 userSeparator = ": ";
         }
