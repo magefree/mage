@@ -17,6 +17,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
@@ -89,7 +90,7 @@ class CabalTherapistReflexiveTriggeredAbility extends DelayedTriggeredAbility {
     CabalTherapistReflexiveTriggeredAbility() {
         super(new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.NON_LAND_NAME), Duration.OneUse, true);
         this.addEffect(new CabalTherapistDiscardEffect());
-        this.addTarget(new TargetOpponent());
+        this.addTarget(new TargetPlayer());
     }
 
     private CabalTherapistReflexiveTriggeredAbility(final CabalTherapistReflexiveTriggeredAbility ability) {
