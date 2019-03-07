@@ -1220,17 +1220,17 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     public void assertActionsCount(TestPlayer player, int count) throws AssertionError {
-        Assert.assertEquals("(Actions of " + player.getName() + ") Count are not equel (found ["
+        Assert.assertEquals("(Actions of " + player.getName() + ") Count are not equal (found ["
                 + player.getActions().stream().map(PlayerAction::getAction).collect(Collectors.joining(", "))
                 + "])", count, player.getActions().size());
     }
 
     public void assertChoicesCount(TestPlayer player, int count) throws AssertionError {
-        Assert.assertEquals("(Choices of " + player.getName() + ") Count are not equel (found " + player.getChoices() + ")", count, player.getChoices().size());
+        Assert.assertEquals("(Choices of " + player.getName() + ") Count are not equal (found " + player.getChoices() + ")", count, player.getChoices().size());
     }
 
     public void assertTargetsCount(TestPlayer player, int count) throws AssertionError {
-        Assert.assertEquals("(Targets of " + player.getName() + ") Count are not equel (found " + player.getTargets() + ")", count, player.getTargets().size());
+        Assert.assertEquals("(Targets of " + player.getName() + ") Count are not equal (found " + player.getTargets() + ")", count, player.getTargets().size());
     }
 
     public void assertAllCommandsUsed() throws AssertionError {

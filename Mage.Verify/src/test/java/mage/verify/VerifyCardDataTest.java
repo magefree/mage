@@ -170,7 +170,7 @@ public class VerifyCardDataTest {
         }
 
         if (doubleErrors.size() > 0) {
-            Assert.fail("DB have duplicated card numbers, found errors: " + doubleErrors.size());
+            Assert.fail("DB has duplicated card numbers, found errors: " + doubleErrors.size());
         }
     }
 
@@ -208,7 +208,7 @@ public class VerifyCardDataTest {
         System.out.println("Total unique cards: " + classesIndex.size() + ", total non unique cards (reprints): " + totalCards);
 
         if (errorsList.size() > 0) {
-            Assert.fail("DB have wrong card classes, found errors: " + errorsList.size());
+            Assert.fail("DB has wrong card classes, found errors: " + errorsList.size());
         }
     }
 
