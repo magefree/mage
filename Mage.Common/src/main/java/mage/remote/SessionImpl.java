@@ -98,10 +98,12 @@ public class SessionImpl implements Session {
             if (cause instanceof InvocationFailureException) {
                 InvocationFailureException exep = (InvocationFailureException) cause;
                 if (exep.getCause() instanceof IOException) {
-                    if (exep.getCause().getMessage().startsWith("Field hash null is not available on current")
-                            || exep.getCause().getMessage().endsWith("end of file")) {
+                    if ((exep.getCause().getMessage() != null) && (exep.getCause().getMessage().startsWith("Field hash null is not available on current")
+                            || exep.getCause().getMessage().endsWith("end of file"))) {
                         addMessage = "Probably the server version is not compatible with the client. ";
                     }
+                } else {
+                    logger.error("Unknown server error", exep.getCause());
                 }
             } else if (cause instanceof NoSuchMethodException) {
                 // NoSuchMethodException is thrown on an invocation of an unknow JBoss remoting
