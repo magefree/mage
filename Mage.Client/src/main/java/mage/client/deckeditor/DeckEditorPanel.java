@@ -4,6 +4,7 @@ import mage.cards.Card;
 import mage.cards.Sets;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
+import mage.cards.decks.DnDDeckTargetListener;
 import mage.cards.decks.importer.DeckImporter;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -30,11 +31,13 @@ import org.apache.log4j.Logger;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import java.awt.*;
+import java.awt.dnd.DropTarget;
 import java.awt.event.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
+import java.util.List;
 import java.util.concurrent.*;
 
 /**
@@ -445,6 +448,16 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 });
         refreshDeck();
 
+        if (mode == DeckEditorMode.FREE_BUILDING) {
+            setDropTarget(new DropTarget(this, new DnDDeckTargetListener() {
+                @Override
+                protected boolean handleFilesDrop(boolean move, List<File> files) {
+                    loadDeck(files.get(0).getAbsolutePath());
+                    return true;
+                }
+            }));
+        }
+
         this.setVisible(true);
         this.repaint();
     }
@@ -785,6 +798,29 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         }
     }
 
+    private boolean loadDeck(String file) {
+        Deck newDeck = null;
+        StringBuilder errorMessages = new StringBuilder();
+
+        MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
+        try {
+            newDeck = Deck.load(DeckImporter.importDeckFromFile(file, errorMessages), true, true);
+            processAndShowImportErrors(errorMessages);
+
+            if (newDeck != null) {
+                deck = newDeck;
+                refreshDeck();
+                return true;
+            }
+
+        } catch (GameException e1) {
+            JOptionPane.showMessageDialog(MageFrame.getDesktop(), e1.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            MageFrame.getDesktop().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
+        return false;
+    }
+
     /**
      * @param evt ActionEvent
      */
@@ -796,24 +832,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         dialog.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                Deck newDeck = null;
-                StringBuilder errorMessages = new StringBuilder();
-
-                MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
-                try {
-                    newDeck = Deck.load(DeckImporter.importDeckFromFile(dialog.getTmpPath(), errorMessages), true, true);
-                    processAndShowImportErrors(errorMessages);
-
-                    if (newDeck != null) {
-                        deck = newDeck;
-                        refreshDeck();
-                    }
-
-                } catch (GameException e1) {
-                    JOptionPane.showMessageDialog(MageFrame.getDesktop(), e1.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE);
-                } finally {
-                    MageFrame.getDesktop().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-                }
+                loadDeck(dialog.getTmpPath());
             }
         });
     }
