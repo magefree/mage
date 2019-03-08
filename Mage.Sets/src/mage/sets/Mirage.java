@@ -51,6 +51,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Blinding Light", 5, Rarity.UNCOMMON, mage.cards.b.BlindingLight.class));
         cards.add(new SetCardInfo("Blistering Barrier", 159, Rarity.COMMON, mage.cards.b.BlisteringBarrier.class));
         cards.add(new SetCardInfo("Bone Harvest", 108, Rarity.COMMON, mage.cards.b.BoneHarvest.class));
+        cards.add(new SetCardInfo("Bone Mask", 295, Rarity.RARE, mage.cards.b.BoneMask.class));
         cards.add(new SetCardInfo("Boomerang", 56, Rarity.COMMON, mage.cards.b.Boomerang.class));
         cards.add(new SetCardInfo("Breathstealer", 109, Rarity.COMMON, mage.cards.b.Breathstealer.class));
         cards.add(new SetCardInfo("Brushwagg", 208, Rarity.RARE, mage.cards.b.Brushwagg.class));

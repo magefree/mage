@@ -157,12 +157,16 @@ class KithkinArmorPreventionEffect extends PreventionEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)
                 && event instanceof DamageCreatureEvent
-                && event.getAmount() > 0) {
+                && event.getAmount() > 0
+                && !this.used) {
             UUID enchantedCreatureId = (UUID) game.getState().getValue(source.getSourceId().toString() + "attachedToPermanent");
             DamageCreatureEvent damageEvent = (DamageCreatureEvent) event;
             if (enchantedCreatureId != null
-                    && event.getTargetId().equals(enchantedCreatureId)) {
-                return (damageEvent.getSourceId().equals(source.getFirstTarget()));
+                    && event.getTargetId().equals(enchantedCreatureId)
+                    && damageEvent.getSourceId().equals(source.getFirstTarget()))      {
+                this.used = true;
+                this.discard();
+                return true;
             }
         }
         return false;
