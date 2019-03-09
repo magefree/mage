@@ -1,4 +1,3 @@
-
 package mage.client.game;
 
 import mage.cards.Card;
@@ -19,8 +18,8 @@ import mage.client.dialog.CardInfoWindowDialog.ShowType;
 import mage.client.game.FeedbackPanel.FeedbackMode;
 import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
-import mage.client.util.*;
 import mage.client.util.Event;
+import mage.client.util.*;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.gui.ArrowBuilder;
 import mage.client.util.gui.MageDialogState;
@@ -32,8 +31,8 @@ import org.mage.card.arcane.CardPanel;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
 import javax.swing.*;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.Timer;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -42,8 +41,8 @@ import javax.swing.plaf.basic.BasicSplitPaneUI;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.Serializable;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -52,7 +51,7 @@ import static mage.client.dialog.PreferencesDialog.*;
 import static mage.constants.PlayerAction.*;
 
 /**
- * @author BetaSteward_at_googlemail.com, nantuko8
+ * @author BetaSteward_at_googlemail.com, nantuko8, JayDi85
  */
 public final class GamePanel extends javax.swing.JPanel {
 
@@ -1045,6 +1044,114 @@ public final class GamePanel extends javax.swing.JPanel {
         this.feedbackPanel.getFeedback(FeedbackMode.QUESTION, question, false, options, messageId, true, gameView.getPhase());
     }
 
+    private void prepareSelectableView(GameView gameView, Map<String, Serializable> options, Set<UUID> targets) {
+        // make cards/perm selectable
+        // highlighting chosen
+        // code calls after each selects or updates, no needs in switch off cards
+
+        Zone needZone = Zone.ALL;
+        if (options.containsKey("targetZone")) {
+            needZone = (Zone) options.get("targetZone");
+        }
+
+        List<UUID> needChoosen = null;
+        if (options.containsKey("chosen")) {
+            needChoosen = (List<UUID>) options.get("chosen");
+        }
+        if (needChoosen == null) {
+            needChoosen = new ArrayList<>();
+        }
+
+        Set<UUID> needSelectable;
+        if (targets != null) {
+            needSelectable = targets;
+        } else {
+            needSelectable = new HashSet<>();
+        }
+
+        // hand
+        if (needZone == Zone.HAND || needZone == Zone.ALL) {
+            for (CardView card : gameView.getHand().values()) {
+                if (needSelectable.contains(card.getId())) {
+                    card.setChoosable(true);
+                }
+                if (needChoosen.contains(card.getId())) {
+                    card.setSelected(true);
+                }
+            }
+        }
+
+        if (needChoosen.size() == 0 && needSelectable.size() == 0) {
+            return;
+        }
+
+        // stack
+        if (needZone == Zone.STACK || needZone == Zone.ALL) {
+            for (Map.Entry<UUID, CardView> card : gameView.getStack().entrySet()) {
+                if (needSelectable.contains(card.getKey())) {
+                    card.getValue().setChoosable(true);
+                }
+                if (needChoosen.contains(card.getKey())) {
+                    card.getValue().setSelected(true);
+                }
+            }
+        }
+
+        // battlefield
+        if (needZone == Zone.BATTLEFIELD || needZone == Zone.ALL) {
+            for (PlayerView player : gameView.getPlayers()) {
+                for (Map.Entry<UUID, PermanentView> perm : player.getBattlefield().entrySet()) {
+                    if (needSelectable.contains(perm.getKey())) {
+                        perm.getValue().setChoosable(true);
+                    }
+                    if (needChoosen.contains(perm.getKey())) {
+                        perm.getValue().setSelected(true);
+                    }
+                }
+            }
+        }
+
+        // graveyard
+        if (needZone == Zone.GRAVEYARD || needZone == Zone.ALL) {
+            for (PlayerView player : gameView.getPlayers()) {
+                for (Map.Entry<UUID, CardView> card : player.getGraveyard().entrySet()) {
+                    if (needSelectable.contains(card.getKey())) {
+                        card.getValue().setChoosable(true);
+                    }
+                    if (needChoosen.contains(card.getKey())) {
+                        card.getValue().setSelected(true);
+                    }
+                }
+            }
+        }
+
+        // exile
+        if (needZone == Zone.HAND || needZone == Zone.ALL) {
+            for (ExileView exile : gameView.getExile()) {
+                for (Map.Entry<UUID, CardView> card : exile.entrySet()) {
+                    if (needSelectable.contains(card.getKey())) {
+                        card.getValue().setChoosable(true);
+                    }
+                    if (needChoosen.contains(card.getKey())) {
+                        card.getValue().setSelected(true);
+                    }
+                }
+            }
+        }
+
+        // revealed
+        for (RevealedView rev : gameView.getRevealed()) {
+            for (Map.Entry<UUID, CardView> card : rev.getCards().entrySet()) {
+                if (needSelectable.contains(card.getKey())) {
+                    card.getValue().setChoosable(true);
+                }
+                if (needChoosen.contains(card.getKey())) {
+                    card.getValue().setSelected(true);
+                }
+            }
+        }
+    }
+
     /**
      * Shows a pick target dialog and allows the player to pick a target (e.g.
      * the pick triggered ability)
@@ -1060,30 +1167,23 @@ public final class GamePanel extends javax.swing.JPanel {
     public void pickTarget(String message, CardsView cardView, GameView gameView, Set<UUID> targets, boolean required, Map<String, Serializable> options, int messageId) {
         PopUpMenuType popupMenuType = null;
         if (options != null) {
-            if (options.containsKey("targetZone")) {
-                if (Zone.HAND == options.get("targetZone")) { // mark selectable target cards in hand
-                    List<UUID> choosen = null;
-                    if (options.containsKey("chosen")) {
-                        choosen = (List<UUID>) options.get("chosen");
-                    }
-                    for (CardView card : gameView.getHand().values()) {
-                        if (targets == null || targets.isEmpty()) {
-                            card.setPlayable(false);
-                            card.setChoosable(true);
-                        } else if (targets.contains(card.getId())) {
-                            card.setPlayable(false);
-                            card.setChoosable(true);
-                        }
-                        if (choosen != null && choosen.contains(card.getId())) {
-                            card.setSelected(true);
-                        }
-                    }
+            if (options.containsKey("queryType")) {
+                PlayerQueryEvent.QueryType needType = (PlayerQueryEvent.QueryType) options.get("queryType");
+                switch (needType) {
+                    case PICK_ABILITY:
+                        popupMenuType = PopUpMenuType.TRIGGER_ORDER;
+                        prepareSelectableView(gameView, options, targets);
+                        break;
+                    case PICK_TARGET:
+                        prepareSelectableView(gameView, options, targets);
+                        break;
+                    default:
+                        logger.warn("Unknown query type in pick target: " + needType + " in " + message);
+                        break;
                 }
             }
-            if (options.containsKey("queryType") && PlayerQueryEvent.QueryType.PICK_ABILITY == options.get("queryType")) {
-                popupMenuType = PopUpMenuType.TRIGGER_ORDER;
-            }
         }
+
         updateGame(gameView);
         Map<String, Serializable> options0 = options == null ? new HashMap<>() : options;
         ShowCardsDialog dialog = null;
