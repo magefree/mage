@@ -712,7 +712,7 @@ public class TestPlayer implements Player {
                         // show battlefield
                         if (params[0].equals(SHOW_COMMAND_BATTLEFIELD) && params.length == 1) {
                             printStart(action.getActionName());
-                            printPermanents(game.getBattlefield().getAllActivePermanents(computerPlayer.getId()));
+                            printPermanents(game, game.getBattlefield().getAllActivePermanents(computerPlayer.getId()));
                             printEnd();
                             actions.remove(action);
                             wasProccessed = true;
@@ -816,7 +816,7 @@ public class TestPlayer implements Player {
         }
     }
 
-    private void printPermanents(List<Permanent> cards) {
+    private void printPermanents(Game game, List<Permanent> cards) {
         System.out.println("Total permanents: " + cards.size());
 
         List<String> data = cards.stream()
@@ -824,6 +824,7 @@ public class TestPlayer implements Player {
                         + " - " + c.getPower().getValue()
                         + "/" + c.getToughness().getValue()
                         + ", " + (c.isTapped() ? "Tapped" : "Untapped")
+                        + (c.getAttachedTo() == null ? "" : ", attached to " + game.getPermanent(c.getAttachedTo()).getIdName())
                 ))
                 .sorted()
                 .collect(Collectors.toList());
