@@ -29,7 +29,7 @@ public class HintUtils {
 
         // text
         if (text != null && color != null) {
-            String hex = String.format("#%02x%02x%02x", color.getRed(), color.getGreen(), color.getGreen());
+            String hex = String.format("#%02x%02x%02x", color.getRed(), color.getGreen(), color.getBlue());
             res = String.format("<font color=%s>%s</font>", hex, text);
         } else {
             res = text;
