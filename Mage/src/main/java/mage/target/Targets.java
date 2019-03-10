@@ -64,7 +64,7 @@ public class Targets extends ArrayList<Target> {
         return true;
     }
 
-    public boolean chooseTargets(Outcome outcome, UUID playerId, Ability source, boolean noMana, Game game) {
+    public boolean chooseTargets(Outcome outcome, UUID playerId, Ability source, boolean noMana, Game game, boolean canCancel) {
         if (this.size() > 0) {
             if (!canChoose(source.getSourceId(), playerId, game)) {
                 return false;
@@ -73,12 +73,23 @@ public class Targets extends ArrayList<Target> {
             while (!isChosen()) {
                 Target target = this.getUnchosen().get(0);
                 UUID targetController = playerId;
-                if (target.getTargetController() != null) { // some targets can have controller different than ability controller
+
+                // some targets can have controller different than ability controller
+                if (target.getTargetController() != null) {
                     targetController = target.getTargetController();
                 }
-                if (noMana) { // if cast without mana (e.g. by suspend you may not be able to cancel the casting if you are able to cast it
+
+                // if cast without mana (e.g. by suspend you may not be able to cancel the casting if you are able to cast it
+                if (noMana) {
                     target.setRequired(true);
                 }
+
+                // can be cancel by user
+                if (canCancel) {
+                    target.setRequired(false);
+                }
+
+                // make response checks
                 if (!target.chooseTarget(outcome, targetController, source, game)) {
                     return false;
                 }

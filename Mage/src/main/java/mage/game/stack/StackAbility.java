@@ -174,7 +174,7 @@ public class StackAbility extends StackObjImpl implements Ability {
 
     @Override
     public Abilities<Ability> getAbilities() {
-       return new AbilitiesImpl<>(ability);
+        return new AbilitiesImpl<>(ability);
     }
 
     @Override
@@ -587,7 +587,7 @@ public class StackAbility extends StackObjImpl implements Ability {
             Outcome outcome = newAbility.getEffects().isEmpty() ? Outcome.Detriment : newAbility.getEffects().get(0).getOutcome();
             if (controller.chooseUse(outcome, "Choose new targets?", source, game)) {
                 newAbility.getTargets().clearChosen();
-                newAbility.getTargets().chooseTargets(outcome, newControllerId, newAbility, false, game);
+                newAbility.getTargets().chooseTargets(outcome, newControllerId, newAbility, false, game, false);
             }
         }
         game.fireEvent(new GameEvent(GameEvent.EventType.COPIED_STACKOBJECT, newStackAbility.getId(), this.getId(), newControllerId));
