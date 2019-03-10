@@ -418,6 +418,7 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
+        // choose one or multiple permanents
         updateGameStatePriority("choose(5)", game);
         UUID abilityControllerId = playerId;
         if (target.getTargetController() != null
@@ -447,6 +448,14 @@ public class HumanPlayer extends PlayerImpl {
             }
             waitForResponse(game);
             if (response.getUUID() != null) {
+                // selected some target
+
+                // remove selected
+                if (target.getTargets().contains(response.getUUID())) {
+                    target.remove(response.getUUID());
+                    continue;
+                }
+
                 if (!targetIds.contains(response.getUUID())) {
                     continue;
                 }
@@ -482,13 +491,17 @@ public class HumanPlayer extends PlayerImpl {
                     }
                 }
             } else {
+                // send other command like cancel or done (??sends other commands like concede??)
+
+                // auto-complete on all selected
                 if (target.getTargets().size() >= target.getNumberOfTargets()) {
                     return true;
                 }
-                if (!target.isRequired(sourceId, game)) {
+
+                // cancel/done button
+                if (!required) {
                     return false;
                 }
-
             }
         }
         return false;
@@ -496,6 +509,7 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
+        // choose one or multiple targets
         updateGameStatePriority("chooseTarget", game);
         UUID abilityControllerId = playerId;
         if (target.getAbilityController() != null) {
@@ -516,10 +530,13 @@ public class HumanPlayer extends PlayerImpl {
             }
             waitForResponse(game);
             if (response.getUUID() != null) {
+
+                // remove selected
                 if (target.getTargets().contains(response.getUUID())) {
                     target.remove(response.getUUID());
                     continue;
                 }
+
                 if (possibleTargets.contains(response.getUUID())) {
                     if (target.canTarget(abilityControllerId, response.getUUID(), source, game)) {
                         target.addTarget(response.getUUID(), source, game);
@@ -554,6 +571,7 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
+        // choose one or multiple cards
         if (cards == null) {
             return false;
         }
@@ -611,6 +629,7 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
+        // choose one or multiple target cards
         updateGameStatePriority("chooseTarget(5)", game);
         while (!abort) {
             boolean required;
@@ -673,6 +692,7 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
+        // choose amount
         updateGameStatePriority("chooseTargetAmount", game);
         while (!abort) {
             prepareForResponse(game);
@@ -913,6 +933,7 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game) {
+        // choose triggered abilitity from list
         String autoOrderRuleText = null;
         boolean autoOrderUse = getControllingPlayersUserData(game).isAutoOrderTrigger();
         while (!abort) {
@@ -989,6 +1010,7 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     protected boolean playManaHandling(Ability abilityToCast, ManaCost unpaid, String promptText, Game game) {
+        // choose mana to pay (from permanents or from pool)
         updateGameStatePriority("playMana", game);
         Map<String, Serializable> options = new HashMap<>();
         prepareForResponse(game);
@@ -1649,6 +1671,7 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public Mode chooseMode(Modes modes, Ability source, Game game) {
+        // choose mode to activate
         updateGameStatePriority("chooseMode", game);
         if (modes.size() > 1) {
             MageObject obj = game.getObject(source.getSourceId());

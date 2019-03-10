@@ -319,7 +319,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private void saveDividerLocations() {
         // save panel sizes and divider locations.
         Rectangle rec = MageFrame.getDesktop().getBounds();
-        String sb = Double.toString(rec.getWidth()) + 'x' + Double.toString(rec.getHeight());
+        String sb = Double.toString(rec.getWidth()) + 'x' + rec.getHeight();
         PreferencesDialog.saveValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, sb);
         PreferencesDialog.saveValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_0, Integer.toString(this.jSplitPane0.getDividerLocation()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_1, Integer.toString(this.jSplitPane1.getDividerLocation()));
@@ -330,7 +330,7 @@ public final class GamePanel extends javax.swing.JPanel {
         Rectangle rec = MageFrame.getDesktop().getBounds();
         if (rec != null) {
             String size = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, null);
-            String sb = Double.toString(rec.getWidth()) + 'x' + Double.toString(rec.getHeight());
+            String sb = Double.toString(rec.getWidth()) + 'x' + rec.getHeight();
             // use divider positions only if screen size is the same as it was the time the settings were saved
             if (size != null && size.equals(sb)) {
 
@@ -1069,6 +1069,10 @@ public final class GamePanel extends javax.swing.JPanel {
             needSelectable = new HashSet<>();
         }
 
+        if (needChoosen.size() == 0 && needSelectable.size() == 0) {
+            return;
+        }
+
         // hand
         if (needZone == Zone.HAND || needZone == Zone.ALL) {
             for (CardView card : gameView.getHand().values()) {
@@ -1079,10 +1083,6 @@ public final class GamePanel extends javax.swing.JPanel {
                     card.setSelected(true);
                 }
             }
-        }
-
-        if (needChoosen.size() == 0 && needSelectable.size() == 0) {
-            return;
         }
 
         // stack
