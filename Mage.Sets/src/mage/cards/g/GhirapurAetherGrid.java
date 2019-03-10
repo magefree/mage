@@ -36,7 +36,7 @@ public final class GhirapurAetherGrid extends CardImpl {
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DamageTargetEffect(1),
                 new TapTargetCost(new TargetControlledPermanent(2, 2, filter, true)));
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetAnyTarget().withChooseHint("deals 1 damage to"));
         this.addAbility(ability);
     }
 
