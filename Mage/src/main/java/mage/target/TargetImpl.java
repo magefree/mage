@@ -269,14 +269,20 @@ public abstract class TargetImpl implements Target {
     @Override
     public boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Game game) {
         Player player = game.getPlayer(playerId);
-        while (!isChosen() && !doneChosing()) {
-            chosen = targets.size() >= getNumberOfTargets();
-            if (!player.choose(outcome, this, sourceId, game)) {
-                return chosen;
+        if (player != null) {
+            while (!isChosen() && !doneChosing()) {
+                if (!player.canRespond()) {
+                    return chosen = targets.size() >= getNumberOfTargets();
+                }
+                chosen = targets.size() >= getNumberOfTargets();
+                if (!player.choose(outcome, this, sourceId, game)) {
+                    return chosen;
+                }
+                chosen = targets.size() >= getNumberOfTargets();
             }
-            chosen = targets.size() >= getNumberOfTargets();
+            return chosen = true;
         }
-        return chosen = true;
+        return false;
     }
 
     @Override
