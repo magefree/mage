@@ -6,14 +6,12 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -57,7 +55,10 @@ class ElkinLairUpkeepEffect extends OneShotEffect {
 
     public ElkinLairUpkeepEffect() {
         super(Outcome.Benefit);
-        this.staticText = "that player exiles a card at random from their hand. The player may play that card this turn. At the beginning of the next end step, if the player hasn't played the card, he or she puts it into their graveyard";
+        this.staticText = "that player exiles a card at random from their hand. "
+                + "The player may play that card this turn. "
+                + "At the beginning of the next end step, if the "
+                + "player hasn't played the card, he or she puts it into their graveyard";
     }
 
     public ElkinLairUpkeepEffect(final ElkinLairUpkeepEffect effect) {
@@ -72,8 +73,9 @@ class ElkinLairUpkeepEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(game.getActivePlayerId());
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (player != null && sourcePermanent != null) {
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        if (player != null
+                && sourcePermanent != null) {
             Card[] cards = player.getHand().getCards(new FilterCard(), game).toArray(new Card[0]);
             if (cards.length > 0) {
                 Card card = cards[RandomUtil.nextInt(cards.length)];
@@ -84,46 +86,14 @@ class ElkinLairUpkeepEffect extends OneShotEffect {
                         ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, Duration.EndOfTurn);
                         effect.setTargetPointer(new FixedTarget(card, game));
                         game.addEffect(effect, source);
-
-                        DelayedTriggeredAbility delayed = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ElkinLairPutIntoGraveyardEffect());
+                        DelayedTriggeredAbility delayed
+                                = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
+                                        new ElkinLairPutIntoGraveyardEffect());
                         game.addDelayedTriggeredAbility(delayed, source);
+                        return true;
                     }
                 }
-                return true;
             }
-        }
-        return false;
-    }
-}
-
-class ElkinLairPlayExiledEffect extends AsThoughEffectImpl {
-
-    public ElkinLairPlayExiledEffect(Duration duration) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, duration, Outcome.Benefit);
-        staticText = "The player may play that card this turn";
-    }
-
-    public ElkinLairPlayExiledEffect(final ElkinLairPlayExiledEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public ElkinLairPlayExiledEffect copy() {
-        return new ElkinLairPlayExiledEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        Card card = game.getCard(objectId);
-        if (card != null
-                && affectedControllerId.equals(card.getOwnerId())
-                && game.getState().getZone(card.getId()) == Zone.EXILED) {
-            return true;
         }
         return false;
     }
