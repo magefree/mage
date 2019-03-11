@@ -15,6 +15,8 @@ public class KeyboundButton extends JButton {
 	private final String text;
 	private static final Font keyFont = new Font(Font.SANS_SERIF, Font.BOLD, 13);
 
+	private boolean pressing = false;
+
 	public KeyboundButton(String key) {
 		text = PreferencesDialog.getCachedKeyText(key);
 	}
@@ -25,7 +27,11 @@ public class KeyboundButton extends JButton {
 			Graphics sg = g.create();
 			try {
 				ui.update(sg, this);
-				sg.setColor(Color.white);
+				if (pressing) {
+					sg.setColor(new Color(0, 0, 0, 32));
+					sg.fillRoundRect(2, 2, getWidth() - 4 , getHeight() - 4, 6, 6);
+				}
+				sg.setColor(pressing ? Color.lightGray : Color.white);
 				sg.setFont(keyFont);
 
 				int textWidth = sg.getFontMetrics(keyFont).stringWidth(text);
@@ -37,4 +43,10 @@ public class KeyboundButton extends JButton {
 			}
 		}
 	}
+
+	public void setPressing(boolean pressing) {
+		this.pressing = pressing;
+		repaint();
+	}
+
 }

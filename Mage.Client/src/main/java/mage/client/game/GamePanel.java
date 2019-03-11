@@ -1364,14 +1364,8 @@ public final class GamePanel extends javax.swing.JPanel {
         btnToggleMacro.setToolTipText("Toggle Record Macro ("
                 + getCachedKeyText(KEY_CONTROL_TOGGLE_MACRO) + ").");
         btnToggleMacro.setFocusable(false);
-        btnToggleMacro.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                if (evt.getButton() == MouseEvent.BUTTON1) {
-                    btnToggleMacroActionPerformed(null);
-                }
-            }
-        });
+        btnToggleMacro.addMouseListener(new FirstButtonMousePressedAction(e ->
+                btnToggleMacroActionPerformed(null)));
 
         KeyStroke kst = getCachedKeystroke(KEY_CONTROL_TOGGLE_MACRO);
         this.getInputMap(c).put(kst, "F8_PRESS");
@@ -1397,14 +1391,8 @@ public final class GamePanel extends javax.swing.JPanel {
         btnCancelSkip.setToolTipText("Cancel all skip actions ("
                 + getCachedKeyText(KEY_CONTROL_CANCEL_SKIP) + ").");
         btnCancelSkip.setFocusable(false);
-        btnCancelSkip.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                if (evt.getButton() == MouseEvent.BUTTON1) {
-                    restorePriorityActionPerformed(null);
-                }
-            }
-        });
+        btnCancelSkip.addMouseListener(new FirstButtonMousePressedAction(e ->
+                restorePriorityActionPerformed(null)));
 
         btnSkipToNextTurn.setContentAreaFilled(false);
         btnSkipToNextTurn.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
@@ -1412,14 +1400,8 @@ public final class GamePanel extends javax.swing.JPanel {
         btnSkipToNextTurn.setToolTipText("Skip to next turn ("
                 + getCachedKeyText(KEY_CONTROL_NEXT_TURN) + ").");
         btnSkipToNextTurn.setFocusable(false);
-        btnSkipToNextTurn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                if (evt.getButton() == MouseEvent.BUTTON1) {
-                    btnEndTurnActionPerformed(null);
-                }
-            }
-        });
+        btnSkipToNextTurn.addMouseListener(new FirstButtonMousePressedAction(e ->
+                btnEndTurnActionPerformed(null)));
 
         KeyStroke ks = getCachedKeystroke(KEY_CONTROL_NEXT_TURN);
         this.getInputMap(c).put(ks, "F4_PRESS");
@@ -1436,14 +1418,8 @@ public final class GamePanel extends javax.swing.JPanel {
         btnSkipToEndTurn.setToolTipText("Skip to (opponents/next) end of turn step ("
                 + getCachedKeyText(KEY_CONTROL_END_STEP) + ") - adjust using preferences.");
         btnSkipToEndTurn.setFocusable(false);
-        btnSkipToEndTurn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                if (evt.getButton() == MouseEvent.BUTTON1) {
-                    btnUntilEndOfTurnActionPerformed(null);
-                }
-            }
-        });
+        btnSkipToEndTurn.addMouseListener(new FirstButtonMousePressedAction(e ->
+                btnUntilEndOfTurnActionPerformed(null)));
 
         ks = getCachedKeystroke(KEY_CONTROL_END_STEP);
         this.getInputMap(c).put(ks, "F5_PRESS");
@@ -1469,14 +1445,8 @@ public final class GamePanel extends javax.swing.JPanel {
         btnSkipToNextMain.setToolTipText("Skip to (your) next main phase ("
                 + getCachedKeyText(KEY_CONTROL_MAIN_STEP) + ") - adjust using preferences.");
         btnSkipToNextMain.setFocusable(false);
-        btnSkipToNextMain.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                if (evt.getButton() == MouseEvent.BUTTON1) {
-                    btnUntilNextMainPhaseActionPerformed(null);
-                }
-            }
-        });
+        btnSkipToNextMain.addMouseListener(new FirstButtonMousePressedAction(e ->
+                btnUntilNextMainPhaseActionPerformed(null)));
 
         ks = getCachedKeystroke(KEY_CONTROL_MAIN_STEP);
         this.getInputMap(c).put(ks, "F7_PRESS");
@@ -1493,14 +1463,8 @@ public final class GamePanel extends javax.swing.JPanel {
         btnSkipToYourTurn.setToolTipText("Skip to your next turn ("
                 + getCachedKeyText(KEY_CONTROL_YOUR_TURN) + ").");
         btnSkipToYourTurn.setFocusable(false);
-        btnSkipToYourTurn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                if (evt.getButton() == MouseEvent.BUTTON1) {
-                    btnPassPriorityUntilNextYourTurnActionPerformed(null);
-                }
-            }
-        });
+        btnSkipToYourTurn.addMouseListener(new FirstButtonMousePressedAction(e ->
+                btnPassPriorityUntilNextYourTurnActionPerformed(null)));
 
         KeyStroke ks9 = getCachedKeystroke(KEY_CONTROL_YOUR_TURN);
         this.getInputMap(c).put(ks9, "F9_PRESS");
@@ -1517,14 +1481,8 @@ public final class GamePanel extends javax.swing.JPanel {
         btnSkipToEndStepBeforeYourTurn.setToolTipText("Skip to the end step before your turn ("
                 + getCachedKeyText(KEY_CONTROL_PRIOR_END) + ") - adjust using preferences.");
         btnSkipToEndStepBeforeYourTurn.setFocusable(false);
-        btnSkipToEndStepBeforeYourTurn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                if (evt.getButton() == MouseEvent.BUTTON1) {
-                    btnSkipToEndStepBeforeYourTurnActionPerformed(null);
-                }
-            }
-        });
+        btnSkipToEndStepBeforeYourTurn.addMouseListener(new FirstButtonMousePressedAction(e ->
+                btnSkipToEndStepBeforeYourTurnActionPerformed(null)));
 
         KeyStroke ks11 = getCachedKeystroke(KEY_CONTROL_PRIOR_END);
         this.getInputMap(c).put(ks11, "F11_PRESS");
@@ -1541,14 +1499,8 @@ public final class GamePanel extends javax.swing.JPanel {
         btnSkipStack.setToolTipText("Skip until stack is resolved ("
                 + getCachedKeyText(KEY_CONTROL_SKIP_STACK) + ").");
         btnSkipStack.setFocusable(false);
-        btnSkipStack.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                if (evt.getButton() == MouseEvent.BUTTON1) {
-                    btnPassPriorityUntilStackResolvedActionPerformed(null);
-                }
-            }
-        });
+        btnSkipStack.addMouseListener(new FirstButtonMousePressedAction(e ->
+                btnPassPriorityUntilStackResolvedActionPerformed(null)));
 
         ks = getCachedKeystroke(KEY_CONTROL_SKIP_STACK);
         this.getInputMap(c).put(ks, "F10_PRESS");
@@ -1564,14 +1516,8 @@ public final class GamePanel extends javax.swing.JPanel {
         btnConcede.setIcon(new ImageIcon(ImageManagerImpl.instance.getConcedeButtonImage()));
         btnConcede.setToolTipText("Concede the current game.");
         btnConcede.setFocusable(false);
-        btnConcede.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                if (evt.getButton() == MouseEvent.BUTTON1) {
-                    btnConcedeActionPerformed(null);
-                }
-            }
-        });
+        btnConcede.addMouseListener(new FirstButtonMousePressedAction(e ->
+                btnConcedeActionPerformed(null)));
 
         KeyStroke ks2 = getCachedKeystroke(KEY_CONTROL_CONFIRM);
         this.getInputMap(c).put(ks2, "F2_PRESS");
@@ -1672,28 +1618,16 @@ public final class GamePanel extends javax.swing.JPanel {
         btnSwitchHands.setIcon(new ImageIcon(ImageManagerImpl.instance.getSwitchHandsButtonImage()));
         btnSwitchHands.setFocusable(false);
         btnSwitchHands.setToolTipText("Switch between your hand cards and hand cards of controlled players.");
-        btnSwitchHands.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                if (evt.getButton() == MouseEvent.BUTTON1) {
-                    btnSwitchHandActionPerformed(null);
-                }
-            }
-        });
+        btnSwitchHands.addMouseListener(new FirstButtonMousePressedAction(e ->
+                btnSwitchHandActionPerformed(null)));
 
         btnStopWatching.setContentAreaFilled(false);
         btnStopWatching.setBorder(new EmptyBorder(0, 0, 0, 0));
         btnStopWatching.setIcon(new ImageIcon(ImageManagerImpl.instance.getStopWatchButtonImage()));
         btnStopWatching.setFocusable(false);
         btnStopWatching.setToolTipText("Stop watching this game.");
-        btnStopWatching.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                if (evt.getButton() == MouseEvent.BUTTON1) {
-                    btnStopWatchingActionPerformed(null);
-                }
-            }
-        });
+        btnStopWatching.addMouseListener(new FirstButtonMousePressedAction(e ->
+                btnStopWatchingActionPerformed(null)));
 
         stackObjects.setBackgroundColor(new Color(0, 0, 0, 40));
 
