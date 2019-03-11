@@ -431,7 +431,9 @@ public class CallbackClientImpl implements CallbackClient {
                                 .append("<br/><b>")
                                 .append(KeyEvent.getKeyText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_TOGGLE_MACRO, 119)))
                                 .append("</b> - Toggle recording a sequence of actions to repeat. Will not pause if interrupted and can fail if a selected card changes such as when scrying top card to bottom.")
-                                .append("<br/><b>").append(System.getProperty("os.name").contains("Mac OS X") ? "Cmd" : "Ctrl").append(" + click</b> - Hold priority while casting a spell or activating an ability").toString(),
+                                .append("<br/><b>").append(System.getProperty("os.name").contains("Mac OS X") ? "Cmd" : "Ctrl").append(" + click</b> - Hold priority while casting a spell or activating an ability")
+                                .append("<br/>").append("Type <b>/FIX</b> message in chat to fix freezed game")
+                                .toString(),
                         null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
                 break;
             case TOURNAMENT:
