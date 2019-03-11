@@ -889,7 +889,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                 }
             } else {
-                TargetCard target = new TargetCard(Zone.ALL, new FilterCard("card to put on the bottom of your library (last one chosen will be bottommost)"));
+                TargetCard target = new TargetCard(Zone.ALL, new FilterCard("card ORDER to put on the BOTTOM of your library (last one chosen will be bottommost)"));
                 target.setRequired(true);
                 while (cards.size() > 1) {
                     this.choose(Outcome.Neutral, cards, target, game);
@@ -954,7 +954,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                 }
             } else {
-                TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put on the top of your library (last one chosen will be topmost)"));
+                TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card ORDER to put on the TOP of your library (last one chosen will be topmost)"));
                 target.setRequired(true);
                 while (cards.size() > 1) {
                     this.choose(Outcome.Neutral, cards, target, game);
@@ -3969,13 +3969,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         Cards cards = new CardsImpl();
         cards.addAll(getLibrary().getTopCards(game, value));
         if (!cards.isEmpty()) {
-            String text;
-            if (cards.size() == 1) {
-                text = "card if you want to put it on the bottom of your library (Scry)";
-            } else {
-                text = "cards you want to put on the bottom of your library (Scry)";
-            }
-            TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY, new FilterCard(text));
+            TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY,
+                    new FilterCard("cards to PUT on the BOTTOM of your library (Scry)"));
             chooseTarget(Outcome.Benefit, cards, target, source, game);
             putCardsOnBottomOfLibrary(new CardsImpl(target.getTargets()), game, source, true);
             cards.removeAll(target.getTargets());
@@ -3995,13 +3990,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         Cards cards = new CardsImpl();
         cards.addAll(getLibrary().getTopCards(game, event.getAmount()));
         if (!cards.isEmpty()) {
-            String text;
-            if (cards.size() == 1) {
-                text = "card if you want to put it into your graveyard (Surveil)";
-            } else {
-                text = "cards you want to put into your graveyard (Surveil)";
-            }
-            TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY, new FilterCard(text));
+            TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY,
+                    new FilterCard("cards to PUT into your GRAVEYARD (Surveil)"));
             chooseTarget(Outcome.Benefit, cards, target, source, game);
             moveCards(new CardsImpl(target.getTargets()), Zone.GRAVEYARD, source, game);
             cards.removeAll(target.getTargets());
