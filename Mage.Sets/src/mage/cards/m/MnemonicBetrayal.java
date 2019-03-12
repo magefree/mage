@@ -156,6 +156,7 @@ class MnemonicBetrayalAnyColorEffect extends AsThoughEffectImpl implements AsTho
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        objectId = game.getCard(objectId).getMainCard().getId(); // for split cards
         if (objectId.equals(card.getId())
                 && card.getZoneChangeCounter(game) <= zoneCounter + 1
                 && affectedControllerId.equals(source.getControllerId())) {
