@@ -1,5 +1,7 @@
 package mage.cards.decks;
 
+import org.apache.log4j.Logger;
+
 import javax.swing.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.UnsupportedFlavorException;
@@ -14,6 +16,7 @@ import java.util.List;
 
 public class DnDDeckTargetListener extends DropTargetAdapter {
 
+    private static final transient Logger logger = Logger.getLogger(DnDDeckTargetListener.class);
     private static final DataFlavor fileFlavor = DataFlavor.javaFileListFlavor;
     private static final DataFlavor plainTextFlavor = DataFlavor.stringFlavor;
 
@@ -30,6 +33,12 @@ public class DnDDeckTargetListener extends DropTargetAdapter {
     }
 
     private boolean isAcceptable(DropTargetDragEvent dtde) {
+        boolean copyOrMove = isCopyOrMove(dtde.getDropAction());
+        boolean flavorSupported = dtde.isDataFlavorSupported(plainTextFlavor) || dtde.isDataFlavorSupported(fileFlavor);
+        return copyOrMove && flavorSupported;
+    }
+
+    private boolean isAcceptable(DropTargetDropEvent dtde) {
         boolean copyOrMove = isCopyOrMove(dtde.getDropAction());
         boolean flavorSupported = dtde.isDataFlavorSupported(plainTextFlavor) || dtde.isDataFlavorSupported(fileFlavor);
         return copyOrMove && flavorSupported;
@@ -64,9 +73,7 @@ public class DnDDeckTargetListener extends DropTargetAdapter {
 
     @Override
     public void drop(DropTargetDropEvent dtde) {
-        if (isCopyOrMove(dtde.getDropAction()) && dtde.isDataFlavorSupported(fileFlavor)) {
-            dtde.acceptDrop(TransferHandler.COPY);
-        } else if (isCopyOrMove(dtde.getDropAction()) && dtde.isDataFlavorSupported(plainTextFlavor)) {
+        if (isAcceptable(dtde)) {
             dtde.acceptDrop(TransferHandler.COPY);
         } else {
             dtde.rejectDrop();
@@ -89,7 +96,7 @@ public class DnDDeckTargetListener extends DropTargetAdapter {
                 }
             }
         } catch (UnsupportedFlavorException | IOException e) {
-            e.printStackTrace();
+            logger.error("Unsupported drag and drop data", e);
             dtde.dropComplete(false);
         }
     }

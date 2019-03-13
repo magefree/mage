@@ -24,6 +24,7 @@ import mage.client.util.audio.AudioManager;
 import mage.components.CardInfoPane;
 import mage.game.GameException;
 import mage.remote.Session;
+import mage.util.DeckUtil;
 import mage.view.CardView;
 import mage.view.SimpleCardView;
 import org.apache.log4j.Logger;
@@ -36,8 +37,8 @@ import java.awt.event.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 import java.util.concurrent.*;
 
 /**
@@ -450,9 +451,17 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
         if (mode == DeckEditorMode.FREE_BUILDING) {
             setDropTarget(new DropTarget(this, new DnDDeckTargetListener() {
+
                 @Override
                 protected boolean handleFilesDrop(boolean move, List<File> files) {
                     loadDeck(files.get(0).getAbsolutePath());
+                    return true;
+                }
+
+                @Override
+                protected boolean handlePlainTextDrop(boolean move, String text) {
+                    String tmpFile = DeckUtil.writeTextToTempFile(text);
+                    loadDeck(tmpFile);
                     return true;
                 }
             }));
@@ -585,9 +594,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             text = Integer.toString(minute) + ':';
         }
         if (second < 10) {
-            text = text + '0' + Integer.toString(second);
+            text = text + '0' + second;
         } else {
-            text = text + Integer.toString(second);
+            text = text + second;
         }
         this.txtTimeRemaining.setText(text);
         if (s == 60) {
@@ -799,12 +808,10 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     }
 
     private boolean loadDeck(String file) {
-        Deck newDeck = null;
-        StringBuilder errorMessages = new StringBuilder();
-
         MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
         try {
-            newDeck = Deck.load(DeckImporter.importDeckFromFile(file, errorMessages), true, true);
+            StringBuilder errorMessages = new StringBuilder();
+            Deck newDeck = Deck.load(DeckImporter.importDeckFromFile(file, errorMessages), true, true);
             processAndShowImportErrors(errorMessages);
 
             if (newDeck != null) {
@@ -1118,7 +1125,7 @@ class DeckFilter extends FileFilter {
         if (i > 0 && i < s.length() - 1) {
             ext = s.substring(i + 1).toLowerCase(Locale.ENGLISH);
         }
-        return (ext == null) ? false : ext.equals("dck");
+        return (ext != null) && ext.equals("dck");
     }
 
     @Override
@@ -1143,14 +1150,12 @@ class ImportFilter extends FileFilter {
             ext = s.substring(i + 1).toLowerCase(Locale.ENGLISH);
         }
         if (ext != null) {
-            if (ext.equalsIgnoreCase("dec")
+            return ext.equalsIgnoreCase("dec")
                     || ext.equalsIgnoreCase("mwdeck")
                     || ext.equalsIgnoreCase("txt")
                     || ext.equalsIgnoreCase("dek")
                     || ext.equalsIgnoreCase("cod")
-                    || ext.equalsIgnoreCase("o8d")) {
-                return true;
-            }
+                    || ext.equalsIgnoreCase("o8d");
         }
         return false;
     }

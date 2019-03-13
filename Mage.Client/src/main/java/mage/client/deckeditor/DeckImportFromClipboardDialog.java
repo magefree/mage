@@ -1,29 +1,27 @@
 package mage.client.deckeditor;
 
-import mage.util.StreamUtils;
+import mage.util.DeckUtil;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.UnsupportedFlavorException;
-import java.awt.event.*;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.Optional;
-
-import javax.swing.*;
 
 public class DeckImportFromClipboardDialog extends JDialog {
 
     private static final String FORMAT_TEXT =
             "// Example:\n" +
-            "//1 Library of Congress\n" +
-            "//1 Cryptic Gateway\n" +
-            "//1 Azami, Lady of Scrolls\n" +
-            "// NB: This is slow as, and will lock your screen :)\n" +
-            "\n" +
-            "// Your current clipboard:\n";
+                    "//1 Library of Congress\n" +
+                    "//1 Cryptic Gateway\n" +
+                    "//1 Azami, Lady of Scrolls\n" +
+                    "// NB: This is slow as, and will lock your screen :)\n" +
+                    "\n" +
+                    "// Your current clipboard:\n";
 
     private JPanel contentPane;
     private JButton buttonOK;
@@ -58,7 +56,7 @@ public class DeckImportFromClipboardDialog extends JDialog {
 
     private Optional<String> getClipboardStringData() {
         try {
-            return Optional.of((String)Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor));
+            return Optional.of((String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor));
         } catch (HeadlessException | UnsupportedFlavorException | IOException e) {
             //e.printStackTrace();
         }
@@ -66,18 +64,7 @@ public class DeckImportFromClipboardDialog extends JDialog {
     }
 
     private void onOK() {
-        BufferedWriter bw = null;
-        try {
-            File temp = File.createTempFile("cbimportdeck", ".txt");
-            bw = new BufferedWriter(new FileWriter(temp));
-            bw.write(txtDeckList.getText());
-            tmpPath = temp.getPath();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            StreamUtils.closeQuietly(bw);
-        }
-
+        tmpPath = DeckUtil.writeTextToTempFile(txtDeckList.getText());
         dispose();
     }
 
