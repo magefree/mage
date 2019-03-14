@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import java.util.UUID;
@@ -27,18 +26,18 @@ import mage.target.common.TargetOpponent;
 public final class EbonyCharm extends CardImpl {
 
     public EbonyCharm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");
 
         // Choose one - Target opponent loses 1 life and you gain 1 life;
         this.getSpellAbility().addEffect(new EbonyCharmDrainEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
-        
+
         // or exile up to three target cards from a single graveyard; 
         Mode mode = new Mode();
         mode.addEffect(new EbonyCharmExileEffect());
         mode.addTarget((new TargetCardInASingleGraveyard(0, 3, new FilterCard("up to three target cards from a single graveyard"))));
         this.getSpellAbility().addMode(mode);
-        
+
         // or target creature gains fear until end of turn.
         mode = new Mode();
         mode.addTarget(new TargetCreaturePermanent());
@@ -69,11 +68,13 @@ class EbonyCharmDrainEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        Player controllerPlayer = game.getPlayer(source.getControllerId());
-        if (targetPlayer != null && controllerPlayer != null) {
-            targetPlayer.damage(1, source.getSourceId(), game, false, true);
-            controllerPlayer.gainLife(1, game, source);
+        Player targetOpponent = game.getPlayer(source.getFirstTarget());
+        Player controller = game.getPlayer(source.getControllerId());
+        if (targetOpponent != null
+                && controller != null) {
+            targetOpponent.loseLife(1, game, false);
+            controller.gainLife(1, game, source);
+            return true;
         }
         return false;
     }
@@ -88,17 +89,17 @@ class EbonyCharmDrainEffect extends OneShotEffect {
 class EbonyCharmExileEffect extends OneShotEffect {
 
     public EbonyCharmExileEffect() {
-            super(Outcome.Exile);
-            this.staticText = "Exile up to three target cards from a single graveyard";
+        super(Outcome.Exile);
+        this.staticText = "Exile up to three target cards from a single graveyard";
     }
 
     public EbonyCharmExileEffect(final EbonyCharmExileEffect effect) {
-            super(effect);
+        super(effect);
     }
 
     @Override
     public EbonyCharmExileEffect copy() {
-            return new EbonyCharmExileEffect(this);
+        return new EbonyCharmExileEffect(this);
     }
 
     @Override
