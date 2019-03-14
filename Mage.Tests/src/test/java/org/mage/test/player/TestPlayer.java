@@ -270,9 +270,7 @@ public class TestPlayer implements Player {
             String spellOnTopOFStack = groups[2].substring(18);
             if (!game.getStack().isEmpty()) {
                 StackObject stackObject = game.getStack().getFirst();
-                if (stackObject != null && stackObject.getStackAbility().toString().contains(spellOnTopOFStack)) {
-                    return true;
-                }
+                return stackObject != null && stackObject.getStackAbility().toString().contains(spellOnTopOFStack);
             }
             return false;
         } else if (groups[2].startsWith("manaInPool=")) {
@@ -576,6 +574,14 @@ public class TestPlayer implements Player {
                             permanent.addCounters(counter, null, game);
                             break;
                         }
+                    }
+                } else if (action.getAction().startsWith("waitStackResolved")) {
+                    if (game.getStack().isEmpty()) {
+                        // can use next command
+                        actions.remove(action);
+                    } else {
+                        // need pass to empty stack
+                        break;
                     }
                 } else if (action.getAction().startsWith("playerAction:")) {
                     String command = action.getAction();
@@ -1371,7 +1377,7 @@ public class TestPlayer implements Player {
                             }
                             if (permanent.getName().equals(targetName)) {
 
-                                if (target.isNotTarget() || ((TargetPermanent) target).canTarget(computerPlayer.getId(), permanent.getId(), source, game)) {
+                                if (target.isNotTarget() || target.canTarget(computerPlayer.getId(), permanent.getId(), source, game)) {
                                     if ((permanent.isCopy() && !originOnly) || (!permanent.isCopy() && !copyOnly)) {
                                         target.add(permanent.getId(), game);
                                         targetFound = true;
@@ -1379,7 +1385,7 @@ public class TestPlayer implements Player {
                                     }
                                 }
                             } else if ((permanent.getName() + '-' + permanent.getExpansionSetCode()).equals(targetName)) {
-                                if (target.isNotTarget() || ((TargetPermanent) target).canTarget(computerPlayer.getId(), permanent.getId(), source, game)) {
+                                if (target.isNotTarget() || target.canTarget(computerPlayer.getId(), permanent.getId(), source, game)) {
                                     if ((permanent.isCopy() && !originOnly) || (!permanent.isCopy() && !copyOnly)) {
                                         target.add(permanent.getId(), game);
                                         targetFound = true;
@@ -1400,7 +1406,7 @@ public class TestPlayer implements Player {
                 for (Player player : game.getPlayers().values()) {
                     for (String choose2 : choices) {
                         if (player.getName().equals(choose2)) {
-                            if (((TargetPlayer) target).canTarget(computerPlayer.getId(), player.getId(), null, game) && !target.getTargets().contains(player.getId())) {
+                            if (target.canTarget(computerPlayer.getId(), player.getId(), null, game) && !target.getTargets().contains(player.getId())) {
                                 target.add(player.getId(), game);
                                 choices.remove(choose2);
                                 return true;
@@ -1648,7 +1654,7 @@ public class TestPlayer implements Player {
                     for (String targetName : targetList) {
                         for (Card card : computerPlayer.getHand().getCards(((TargetCardInHand) target).getFilter(), game)) {
                             if (card.getName().equals(targetName) || (card.getName() + '-' + card.getExpansionSetCode()).equals(targetName)) {
-                                if (((TargetCardInHand) target).canTarget(abilityControllerId, card.getId(), source, game) && !target.getTargets().contains(card.getId())) {
+                                if (target.canTarget(abilityControllerId, card.getId(), source, game) && !target.getTargets().contains(card.getId())) {
                                     target.add(card.getId(), game);
                                     targetFound = true;
                                     break;
@@ -1857,7 +1863,7 @@ public class TestPlayer implements Player {
             //Assert.fail("Wrong choice");
         }
 
-        this.chooseStrictModeFailed(game,abilities.stream().map(this::getInfo).collect(Collectors.joining("; ")));
+        this.chooseStrictModeFailed(game, abilities.stream().map(this::getInfo).collect(Collectors.joining("; ")));
         return computerPlayer.chooseTriggeredAbility(abilities, game);
     }
 
@@ -1914,7 +1920,7 @@ public class TestPlayer implements Player {
             }
         }
 
-        this.chooseStrictModeFailed(game,getInfo(ability) + "; " + message);
+        this.chooseStrictModeFailed(game, getInfo(ability) + "; " + message);
         return computerPlayer.announceXCost(min, max, message, game, ability, null);
     }
 
@@ -3115,7 +3121,7 @@ public class TestPlayer implements Player {
             }
         }
 
-        this.chooseStrictModeFailed(game,getInfo(source) + "; " + getInfo(target));
+        this.chooseStrictModeFailed(game, getInfo(source) + "; " + getInfo(target));
         return computerPlayer.chooseTargetAmount(outcome, target, source, game);
     }
 

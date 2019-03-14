@@ -1299,6 +1299,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         player.addAction(turnNum, step, "activate:Cast " + cardName + "$targetPlayer=" + target.getName() + "$manaInPool=" + manaInPool);
     }
 
+    public void waitStackResolved(int turnNum, PhaseStep step, TestPlayer player) {
+        player.addAction(turnNum, step, "waitStackResolved");
+    }
+
     /**
      * Rollback the number of given turns: 0 = rollback to the start of the
      * current turn
@@ -1573,5 +1577,12 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         if (p != null) {
             Assert.assertEquals("Wrong damage received: ", expected, p.getDamage());
         }
+    }
+
+    public void waitStackResolved(int turnNum, PhaseStep step) {
+        if (playerA != null) waitStackResolved(turnNum, step, playerA);
+        if (playerB != null) waitStackResolved(turnNum, step, playerB);
+        if (playerC != null) waitStackResolved(turnNum, step, playerC);
+        if (playerD != null) waitStackResolved(turnNum, step, playerD);
     }
 }
