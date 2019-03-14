@@ -1,9 +1,5 @@
 package mage.cards.t;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -18,8 +14,12 @@ import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class ThousandYearStorm extends CardImpl {
@@ -65,10 +65,11 @@ class ThousandYearStormEffect extends OneShotEffect {
         if (spell != null) {
             ThousandYearWatcher watcher = game.getState().getWatcher(ThousandYearWatcher.class);
             if (watcher != null) {
+                String stateSearchId = spell.getId().toString() + source.getSourceId().toString();
                 // recall only the spells cast before it
                 int numberOfCopies = 0;
-                if (game.getState().getValue(spell.getId().toString() + source.getSourceId().toString()) != null) {
-                    numberOfCopies = (int) game.getState().getValue(spell.getId().toString() + source.getSourceId().toString());
+                if (game.getState().getValue(stateSearchId) != null) {
+                    numberOfCopies = (int) game.getState().getValue(stateSearchId);
                 }
                 if (numberOfCopies > 0) {
                     for (int i = 0; i < numberOfCopies; i++) {
@@ -99,19 +100,17 @@ class ThousandYearWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST
-                && !game.getStack().contains(game.getSpell(sourceId))) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST && !sourceId.equals(event.getTargetId())) {
             Spell spell = game.getSpellOrLKIStack(event.getTargetId());
-            if (spell != null
-                    && spell.isInstantOrSorcery()) {
+            if (spell != null && spell.isInstantOrSorcery()) {
                 UUID playerId = event.getPlayerId();
                 if (playerId != null) {
+                    String stateSearchId = spell.getId().toString() + sourceId.toString();
+                    // calc current spell
                     amountOfInstantSorcerySpellsCastOnCurrentTurn.putIfAbsent(playerId, 0);
                     amountOfInstantSorcerySpellsCastOnCurrentTurn.compute(playerId, (k, a) -> a + 1);
-
                     // remember only the spells cast before it
-                    game.getState().setValue(spell.getId().toString() + sourceId.toString(), amountOfInstantSorcerySpellsCastOnCurrentTurn.get(playerId) - 1);
-                    
+                    game.getState().setValue(stateSearchId, amountOfInstantSorcerySpellsCastOnCurrentTurn.get(playerId) - 1);
                 }
             }
         }
