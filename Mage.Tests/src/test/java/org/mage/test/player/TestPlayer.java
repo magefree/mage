@@ -82,6 +82,7 @@ public class TestPlayer implements Player {
     private final List<String> modesSet = new ArrayList<>();
 
     private final ComputerPlayer computerPlayer;
+    private boolean strictChooseMode = false; // test will raise error on empty choice/target (e.g. devs must setup all choices/targets for all spells)
 
     private String[] groupsForTargetHandling = null;
 
@@ -113,6 +114,7 @@ public class TestPlayer implements Player {
         if (testPlayer.groupsForTargetHandling != null) {
             this.groupsForTargetHandling = testPlayer.groupsForTargetHandling.clone();
         }
+        this.strictChooseMode = testPlayer.strictChooseMode;
     }
 
     public void addChoice(String choice) {
@@ -1250,6 +1252,24 @@ public class TestPlayer implements Player {
         // No errors raised - all the blockers pass the test!
     }
 
+    private String getInfo(MageObject o) {
+        return o != null ? o.getClass().getSimpleName() + ": " + o.getName() : "null";
+    }
+
+    private String getInfo(Ability o) {
+        return o != null ? o.getClass().getSimpleName() + ": " + o.getRule() : "null";
+    }
+
+    private String getInfo(Target o) {
+        return o != null ? o.getClass().getSimpleName() + ": " + o.getMessage() : "null";
+    }
+
+    private void chooseStrictModeFailed(Game game, String reason) {
+        if (strictChooseMode) {
+            Assert.fail("Missing target/choice def for turn " + game.getTurnNum() + ", " + game.getStep().getType().name() + ": " + reason);
+        }
+    }
+
     @Override
     public Mode chooseMode(Modes modes, Ability source, Game game) {
         if (!modesSet.isEmpty() && modes.getMaxModes() > modes.getSelectedModes().size()) {
@@ -1271,7 +1291,9 @@ public class TestPlayer implements Player {
         if (modes.getMinModes() <= modes.getSelectedModes().size()) {
             return null;
         }
-        return computerPlayer.chooseMode(modes, source, game); //To change body of generated methods, choose Tools | Templates.
+
+        this.chooseStrictModeFailed(game, getInfo(source));
+        return computerPlayer.chooseMode(modes, source, game);
     }
 
     @Override
@@ -1283,6 +1305,8 @@ public class TestPlayer implements Player {
             // TODO: enable fail checks and fix tests
             //Assert.fail("Wrong choice");
         }
+
+        this.chooseStrictModeFailed(game, choice.getMessage());
         return computerPlayer.choose(outcome, choice, game);
     }
 
@@ -1300,6 +1324,8 @@ public class TestPlayer implements Player {
             // TODO: enable fail checks and fix tests
             //Assert.fail("wrong choice");
         }
+
+        this.chooseStrictModeFailed(game, String.join("; ", rEffects.values()));
         return computerPlayer.chooseReplacementEffect(rEffects, game);
     }
 
@@ -1490,6 +1516,10 @@ public class TestPlayer implements Player {
             */
         }
 
+        // ignore player select
+        if (!target.getMessage().equals("Select a starting player")) {
+            this.chooseStrictModeFailed(game, getInfo(game.getObject(sourceId)) + "; " + getInfo(target));
+        }
         return computerPlayer.choose(outcome, target, sourceId, game, options);
     }
 
@@ -1781,6 +1811,7 @@ public class TestPlayer implements Player {
             Assert.fail(message);
         }
 
+        this.chooseStrictModeFailed(game, getInfo(source) + "; " + getInfo(target));
         return computerPlayer.chooseTarget(outcome, target, source, game);
     }
 
@@ -1808,6 +1839,8 @@ public class TestPlayer implements Player {
             // TODO: enable fail checks and fix tests
             //Assert.fail("Wrong target");
         }
+
+        this.chooseStrictModeFailed(game, getInfo(source) + "; " + getInfo(target));
         return computerPlayer.chooseTarget(outcome, cards, target, source, game);
     }
 
@@ -1823,6 +1856,8 @@ public class TestPlayer implements Player {
             // TODO: enable fail checks and fix tests
             //Assert.fail("Wrong choice");
         }
+
+        this.chooseStrictModeFailed(game,abilities.stream().map(this::getInfo).collect(Collectors.joining("; ")));
         return computerPlayer.chooseTriggeredAbility(abilities, game);
     }
 
@@ -1848,6 +1883,8 @@ public class TestPlayer implements Player {
             // TODO: enable fail checks and fix tests
             //Assert.fail("Wrong choice");
         }
+
+        this.chooseStrictModeFailed(game, getInfo(source) + "; " + message + ": " + trueText + " - " + falseText);
         return computerPlayer.chooseUse(outcome, message, secondMessage, trueText, falseText, source, game);
     }
 
@@ -1862,6 +1899,8 @@ public class TestPlayer implements Player {
                 }
             }
         }
+
+        this.chooseStrictModeFailed(game, getInfo(ability) + "; " + message);
         return computerPlayer.announceXMana(min, max, message, game, ability);
     }
 
@@ -1874,6 +1913,8 @@ public class TestPlayer implements Player {
                 return xValue;
             }
         }
+
+        this.chooseStrictModeFailed(game,getInfo(ability) + "; " + message);
         return computerPlayer.announceXCost(min, max, message, game, ability, null);
     }
 
@@ -1886,6 +1927,8 @@ public class TestPlayer implements Player {
                 return xValue;
             }
         }
+
+        this.chooseStrictModeFailed(game, message);
         return computerPlayer.getAmount(min, max, message, game);
     }
 
@@ -3018,6 +3061,8 @@ public class TestPlayer implements Player {
             // TODO: enable fail checks and fix tests
             //Assert.fail("Wrong choice");
         }
+
+        this.chooseStrictModeFailed(game, getInfo(target));
         return computerPlayer.choose(outcome, cards, target, game);
     }
 
@@ -3070,6 +3115,7 @@ public class TestPlayer implements Player {
             }
         }
 
+        this.chooseStrictModeFailed(game,getInfo(source) + "; " + getInfo(target));
         return computerPlayer.chooseTargetAmount(outcome, target, source, game);
     }
 
@@ -3250,5 +3296,9 @@ public class TestPlayer implements Player {
         }
 
         return this.getId().equals(obj.getId());
+    }
+
+    public void setChooseStrictMode(boolean enable) {
+        this.strictChooseMode = enable;
     }
 }

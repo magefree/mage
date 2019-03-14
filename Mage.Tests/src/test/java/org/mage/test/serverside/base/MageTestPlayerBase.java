@@ -333,4 +333,10 @@ public abstract class MageTestPlayerBase {
         return new TestPlayer(new TestComputerPlayer(name, rangeOfInfluence));
     }
 
+    public void setStrictChooseMode(boolean enable) {
+        if (playerA != null) playerA.setChooseStrictMode(enable);
+        if (playerB != null) playerB.setChooseStrictMode(enable);
+        if (playerC != null) playerC.setChooseStrictMode(enable);
+        if (playerD != null) playerD.setChooseStrictMode(enable);
+    }
 }
