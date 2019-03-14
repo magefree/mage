@@ -85,10 +85,7 @@ class BenevolentUnicornEffect extends ReplacementEffectImpl {
         if (stackObject == null) {
             stackObject = (StackObject) game.getLastKnownInformation(event.getSourceId(), Zone.STACK);
         }
-        if (stackObject instanceof Spell) {
-            return super.applies(event, source, game);
-        }
-        return false;
+        return stackObject instanceof Spell;
     }
 
 }
