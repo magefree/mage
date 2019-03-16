@@ -80,7 +80,7 @@ class MindstormCrownWatcher extends Watcher {
     private int cardsInHandCount;
 
     public MindstormCrownWatcher() {
-        super(MindstormCrownWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public MindstormCrownWatcher(final MindstormCrownWatcher watcher) {

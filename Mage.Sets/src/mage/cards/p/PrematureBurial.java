@@ -103,7 +103,7 @@ class ETBSinceYourLastTurnWatcher extends Watcher {
     private final Map<UUID, Set<MageObjectReference>> playerToETBMap;
 
     public ETBSinceYourLastTurnWatcher() {
-        super(ETBSinceYourLastTurnWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
         this.playerToETBMap = new HashMap<>();
     }
 

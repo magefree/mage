@@ -171,7 +171,7 @@ class GrothamaAllDevouringWatcher extends Watcher {
     private Map<MageObjectReference, Map<UUID, Integer>> damageMap = new HashMap<>();
 
     GrothamaAllDevouringWatcher() {
-        super(GrothamaAllDevouringWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     GrothamaAllDevouringWatcher(final GrothamaAllDevouringWatcher watcher) {

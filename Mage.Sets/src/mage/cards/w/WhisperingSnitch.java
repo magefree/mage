@@ -89,7 +89,7 @@ class WhisperingSnitchWatcher extends Watcher {
     private final Map<UUID, Integer> timesSurveiled = new HashMap<>();
 
     public WhisperingSnitchWatcher() {
-        super(WhisperingSnitchWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public WhisperingSnitchWatcher(final WhisperingSnitchWatcher watcher) {

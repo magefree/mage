@@ -71,7 +71,7 @@ class DamagedByPiratesWatcher extends Watcher {
     private final Map<UUID, Set<UUID>> damageSourceIds = new HashMap<>();
 
     public DamagedByPiratesWatcher() {
-        super(DamagedByPiratesWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     private DamagedByPiratesWatcher(final DamagedByPiratesWatcher watcher) {

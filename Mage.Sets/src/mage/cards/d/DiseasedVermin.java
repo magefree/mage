@@ -137,7 +137,7 @@ class DiseasedVerminWatcher extends Watcher {
     private final Set<UUID> damagedPlayers;
 
     public DiseasedVerminWatcher() {
-        super(DiseasedVerminWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
         damagedPlayers = new HashSet<>();
     }
 

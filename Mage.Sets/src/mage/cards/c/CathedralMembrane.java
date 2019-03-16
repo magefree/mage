@@ -111,7 +111,7 @@ class CathedralMembraneWatcher extends Watcher {
     private final Set<UUID> blockedCreatures = new HashSet<>();
 
     CathedralMembraneWatcher() {
-        super(CathedralMembraneWatcher.class.getSimpleName(), WatcherScope.CARD);
+        super(WatcherScope.CARD);
     }
 
     private CathedralMembraneWatcher(final CathedralMembraneWatcher watcher) {

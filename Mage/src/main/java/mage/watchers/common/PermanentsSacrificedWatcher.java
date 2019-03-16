@@ -5,10 +5,8 @@
  */
 package mage.watchers.common;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -21,10 +19,10 @@ import mage.watchers.Watcher;
  */
 public class PermanentsSacrificedWatcher extends Watcher {
 
-    private final HashMap<UUID, List<Permanent>> sacrificedPermanents = new HashMap<>();
+    private final Map<UUID, List<Permanent>> sacrificedPermanents = new HashMap<>();
 
     public PermanentsSacrificedWatcher() {
-        super(PermanentsSacrificedWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public PermanentsSacrificedWatcher(final PermanentsSacrificedWatcher watcher) {

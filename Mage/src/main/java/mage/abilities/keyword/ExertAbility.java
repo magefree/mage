@@ -145,7 +145,7 @@ class ExertedThisTurnWatcher extends Watcher {
     private final Set<MageObjectReference> exertedThisTurnCreatures;
 
     public ExertedThisTurnWatcher() {
-        super(ExertedThisTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
         exertedThisTurnCreatures = new HashSet<>();
     }
 

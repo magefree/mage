@@ -81,7 +81,7 @@ class CerebralVortexWatcher extends Watcher {
     private final Map<UUID, Integer> draws = new HashMap<>();
 
     CerebralVortexWatcher() {
-        super(CerebralVortexWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     CerebralVortexWatcher(final CerebralVortexWatcher watcher) {

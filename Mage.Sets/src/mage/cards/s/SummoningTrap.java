@@ -67,10 +67,10 @@ enum SummoningTrapCondition implements Condition {
 
 class SummoningTrapWatcher extends Watcher {
 
-    Set<UUID> players = new HashSet<>();
+    private Set<UUID> players = new HashSet<>();
 
     public SummoningTrapWatcher() {
-        super(SummoningTrapWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public SummoningTrapWatcher(final SummoningTrapWatcher watcher) {

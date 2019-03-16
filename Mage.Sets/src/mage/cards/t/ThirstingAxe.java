@@ -83,12 +83,11 @@ class EquippedDealtCombatDamageToCreatureCondition implements Condition {
 class CombatDamageToCreatureWatcher extends Watcher {
 
     // which objects dealt combat damage to creature during the turn
-    public final Set<MageObjectReference> dealtCombatDamageToCreature;
+    private final Set<MageObjectReference> dealtCombatDamageToCreature;
 
-    static final String BASIC_KEY = "CombatDamageToCreatureWatcher";
 
     public CombatDamageToCreatureWatcher() {
-        super(BASIC_KEY, WatcherScope.GAME);
+        super(WatcherScope.GAME);
         dealtCombatDamageToCreature = new HashSet<>();
     }
 

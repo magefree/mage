@@ -163,10 +163,10 @@ class KaradorGhostChieftainCastFromGraveyardEffect extends AsThoughEffectImpl {
 
 class KaradorGhostChieftainWatcher extends Watcher {
 
-    boolean abilityUsed = false;
+    private boolean abilityUsed = false;
 
     KaradorGhostChieftainWatcher() {
-        super(KaradorGhostChieftainWatcher.class, WatcherScope.CARD);
+        super(WatcherScope.CARD);
     }
 
     KaradorGhostChieftainWatcher(final KaradorGhostChieftainWatcher watcher) {

@@ -86,7 +86,7 @@ class InvestigatedWatcher extends Watcher {
     private final Map<UUID, Integer> timesInvestigated = new HashMap<>();
 
     public InvestigatedWatcher() {
-        super(InvestigatedWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public InvestigatedWatcher(final InvestigatedWatcher watcher) {

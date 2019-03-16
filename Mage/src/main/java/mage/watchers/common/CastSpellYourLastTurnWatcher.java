@@ -19,7 +19,7 @@ public class CastSpellYourLastTurnWatcher extends Watcher {
     private UUID lastActivePlayer = null;
 
     public CastSpellYourLastTurnWatcher() {
-        super(CastSpellYourLastTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public CastSpellYourLastTurnWatcher(final CastSpellYourLastTurnWatcher watcher) {

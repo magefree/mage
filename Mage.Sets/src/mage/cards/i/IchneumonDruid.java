@@ -97,7 +97,7 @@ class IchneumonDruidWatcher extends Watcher {
     private final Map<UUID, Integer> playerInstantCount = new HashMap<>();
 
     public IchneumonDruidWatcher() {
-        super(IchneumonDruidWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public IchneumonDruidWatcher(final IchneumonDruidWatcher watcher) {

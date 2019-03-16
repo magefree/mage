@@ -54,7 +54,7 @@ class ArchiveTrapWatcher extends Watcher {
    private Set<UUID> playerIds = new HashSet<>();
 
     public ArchiveTrapWatcher() {
-        super(ArchiveTrapWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     private ArchiveTrapWatcher(final ArchiveTrapWatcher watcher) {

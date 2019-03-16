@@ -80,7 +80,7 @@ class SiftThroughSandsWatcher extends Watcher {
     boolean castReachThroughMists = false;
 
     public SiftThroughSandsWatcher() {
-        super(SiftThroughSandsWatcher.class, WatcherScope.PLAYER);
+        super(WatcherScope.PLAYER);
     }
 
     public SiftThroughSandsWatcher(final SiftThroughSandsWatcher watcher) {

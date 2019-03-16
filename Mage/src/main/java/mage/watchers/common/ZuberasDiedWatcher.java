@@ -21,7 +21,7 @@ public class ZuberasDiedWatcher extends Watcher {
     private int zuberasDiedThisTurn = 0;
 
     public ZuberasDiedWatcher() {
-        super(ZuberasDiedWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public ZuberasDiedWatcher(final ZuberasDiedWatcher watcher) {

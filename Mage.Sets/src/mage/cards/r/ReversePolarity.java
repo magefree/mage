@@ -69,7 +69,7 @@ class ReversePolarityWatcher extends Watcher {
     private final Map<UUID, Integer> artifactDamageReceivedThisTurn = new HashMap<>();
 
     public ReversePolarityWatcher() {
-        super(ReversePolarityWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public ReversePolarityWatcher(final ReversePolarityWatcher watcher) {

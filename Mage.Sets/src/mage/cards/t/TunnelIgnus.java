@@ -53,7 +53,7 @@ class TunnelIgnusWatcher extends Watcher {
     protected Map<UUID, Integer> counts = new HashMap<>();
 
     public TunnelIgnusWatcher() {
-        super(TunnelIgnusWatcher.class, WatcherScope.PLAYER);
+        super(WatcherScope.PLAYER);
     }
 
     public TunnelIgnusWatcher(final TunnelIgnusWatcher watcher) {

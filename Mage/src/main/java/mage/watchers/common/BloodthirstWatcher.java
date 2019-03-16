@@ -16,7 +16,7 @@ import java.util.UUID;
  */
 public class BloodthirstWatcher extends Watcher {
     public BloodthirstWatcher(UUID controllerId) {
-        super(BloodthirstWatcher.class.getSimpleName(), WatcherScope.PLAYER);
+        super(WatcherScope.PLAYER);
         this.controllerId = controllerId;
     }
 

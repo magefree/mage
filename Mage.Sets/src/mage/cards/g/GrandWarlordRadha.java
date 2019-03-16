@@ -62,10 +62,10 @@ public final class GrandWarlordRadha extends CardImpl {
 
 class CreaturesAttackedWatcher extends Watcher {
 
-    public final Set<MageObjectReference> attackedThisTurnCreatures = new HashSet<>();
+    private final Set<MageObjectReference> attackedThisTurnCreatures = new HashSet<>();
 
     public CreaturesAttackedWatcher() {
-        super(CreaturesAttackedWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public CreaturesAttackedWatcher(final CreaturesAttackedWatcher watcher) {

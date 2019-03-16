@@ -112,7 +112,7 @@ class MuldrothaTheGravetideCastFromGraveyardEffect extends AsThoughEffectImpl {
  */
 class MuldrothaTheGravetideWatcher extends Watcher {
 
-    final HashMap<MageObjectReference, Set<CardType>> sourcePlayedPermanentTypes = new HashMap<>(); // source that played permanent types from graveyard
+    private final HashMap<MageObjectReference, Set<CardType>> sourcePlayedPermanentTypes = new HashMap<>(); // source that played permanent types from graveyard
     // final HashMap<UUID, Set<CardType>> playerPlayedPermanentTypes = new HashMap<>(); // player that played permanent types from graveyard
     // 4/27/2018 If multiple effects allow you to play a card from your graveyard, such as those of Gisa and Geralf and Karador,
     // Ghost Chieftain, you must announce which permission you're using as you begin to play the card.
@@ -121,7 +121,7 @@ class MuldrothaTheGravetideWatcher extends Watcher {
     private Zone fromZone;
 
     public MuldrothaTheGravetideWatcher() {
-        super(MuldrothaTheGravetideWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public MuldrothaTheGravetideWatcher(final MuldrothaTheGravetideWatcher watcher) {

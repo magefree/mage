@@ -1,10 +1,8 @@
 
 package mage.cards.m;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
@@ -74,10 +72,10 @@ class MultanisPresenceTriggeredAbility extends TriggeredAbilityImpl {
 
 class MultanisPresenceWatcher extends Watcher {
 
-    private final HashMap<UUID, List<UUID>> spellsCast = new HashMap<>();
+    private final Map<UUID, List<UUID>> spellsCast = new HashMap<>();
 
     public MultanisPresenceWatcher() {
-        super(MultanisPresenceWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public MultanisPresenceWatcher(final MultanisPresenceWatcher watcher) {

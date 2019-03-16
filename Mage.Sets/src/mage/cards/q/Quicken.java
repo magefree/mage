@@ -100,7 +100,7 @@ class QuickenWatcher extends Watcher {
     private List<String> activeQuickenSpells = new ArrayList<>();
 
     public QuickenWatcher() {
-        super(QuickenWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     private QuickenWatcher(final QuickenWatcher watcher) {

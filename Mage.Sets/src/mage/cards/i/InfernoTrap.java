@@ -69,10 +69,10 @@ enum InfernoTrapCondition implements Condition {
 
 class InfernoTrapWatcher extends Watcher {
 
-    Map<UUID, Set<MageObjectReference>> playerDamagedByCreature = new HashMap<>();
+    private Map<UUID, Set<MageObjectReference>> playerDamagedByCreature = new HashMap<>();
 
     public InfernoTrapWatcher() {
-        super(InfernoTrapWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public InfernoTrapWatcher(final InfernoTrapWatcher watcher) {

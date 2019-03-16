@@ -159,7 +159,7 @@ class KessDissidentMageWatcher extends Watcher {
     private final Map<MageObjectReference, UUID> castSpells = new HashMap<>();
 
     KessDissidentMageWatcher() {
-        super(KessDissidentMageWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     private KessDissidentMageWatcher(final KessDissidentMageWatcher watcher) {

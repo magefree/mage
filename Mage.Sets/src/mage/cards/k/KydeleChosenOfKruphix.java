@@ -85,7 +85,7 @@ class KydeleCardsDrawnThisTurnWatcher extends Watcher {
     private final Map<UUID, Integer> cardsDrawnThisTurn = new HashMap<>();
 
     public KydeleCardsDrawnThisTurnWatcher() {
-        super(KydeleCardsDrawnThisTurnWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public KydeleCardsDrawnThisTurnWatcher(final KydeleCardsDrawnThisTurnWatcher watcher) {

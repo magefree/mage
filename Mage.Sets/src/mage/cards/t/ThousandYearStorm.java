@@ -88,7 +88,7 @@ class ThousandYearWatcher extends Watcher {
     private final Map<UUID, Integer> amountOfInstantSorcerySpellsCastOnCurrentTurn = new HashMap<>();
 
     public ThousandYearWatcher() {
-        super(ThousandYearWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public ThousandYearWatcher(final ThousandYearWatcher watcher) {

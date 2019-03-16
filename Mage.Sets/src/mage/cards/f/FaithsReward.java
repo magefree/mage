@@ -80,7 +80,7 @@ class FaithsRewardWatcher extends Watcher {
     private List<UUID> cards = new ArrayList<>();
 
     public FaithsRewardWatcher() {
-        super(FaithsRewardWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public FaithsRewardWatcher(final FaithsRewardWatcher watcher) {

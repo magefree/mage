@@ -163,7 +163,7 @@ class VodalianWarMachineWatcher extends Watcher {
     public Map<MageObjectReference, Set<MageObjectReference>> tappedMerfolkIds = new HashMap<>();
 
     public VodalianWarMachineWatcher() {
-        super(VodalianWarMachineWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public VodalianWarMachineWatcher(final VodalianWarMachineWatcher watcher) {

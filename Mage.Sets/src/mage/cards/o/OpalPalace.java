@@ -67,7 +67,7 @@ class OpalPalaceWatcher extends Watcher {
     private final String originalId;
 
     public OpalPalaceWatcher(String originalId) {
-        super(OpalPalaceWatcher.class, WatcherScope.CARD);
+        super(WatcherScope.CARD);
         this.originalId = originalId;
     }
 

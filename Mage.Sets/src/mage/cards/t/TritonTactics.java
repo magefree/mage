@@ -185,7 +185,7 @@ class TritonTacticsEndOfCombatEffect extends OneShotEffect {
 class BlockedCreaturesWatcher extends Watcher {
 
     public BlockedCreaturesWatcher() {
-        super("BlockedCreatures", WatcherScope.CARD);
+        super(WatcherScope.CARD);
     }
 
     public BlockedCreaturesWatcher(final BlockedCreaturesWatcher watcher) {

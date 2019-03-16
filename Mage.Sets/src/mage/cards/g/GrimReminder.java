@@ -116,7 +116,7 @@ class GrimReminderWatcher extends Watcher {
     private final Map<String, Set<UUID>> playersCastSpell = new HashMap<>();
 
     public GrimReminderWatcher() {
-        super(GrimReminderWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public GrimReminderWatcher(final GrimReminderWatcher watcher) {

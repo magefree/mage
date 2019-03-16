@@ -70,7 +70,7 @@ class AttackedLastCombatWatcher extends Watcher {
     public final Map<UUID, Map<MageObjectReference, UUID>> attackedLastCombatPlayers = new HashMap<>();
 
     public AttackedLastCombatWatcher() {
-        super(AttackedLastCombatWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public AttackedLastCombatWatcher(final AttackedLastCombatWatcher watcher) {

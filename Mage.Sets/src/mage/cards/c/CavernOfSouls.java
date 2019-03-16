@@ -125,7 +125,7 @@ class CavernOfSoulsWatcher extends Watcher {
     private final String originalId;
 
     public CavernOfSoulsWatcher(UUID originalId) {
-        super(CavernOfSoulsWatcher.class.getSimpleName(), WatcherScope.CARD);
+        super(WatcherScope.CARD);
         this.originalId = originalId.toString();
     }
 

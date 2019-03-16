@@ -19,11 +19,11 @@ public class WasBlockedThisTurnWatcher extends Watcher {
     private final Set<MageObjectReference> wasBlockedThisTurnCreatures;
 
     public WasBlockedThisTurnWatcher() {
-        super(WasBlockedThisTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
         wasBlockedThisTurnCreatures = new HashSet<>();
     }
 
-    public WasBlockedThisTurnWatcher(final WasBlockedThisTurnWatcher watcher) {
+    private WasBlockedThisTurnWatcher(final WasBlockedThisTurnWatcher watcher) {
         super(watcher);
         wasBlockedThisTurnCreatures = new HashSet<>(watcher.wasBlockedThisTurnCreatures);
     }

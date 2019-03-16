@@ -74,7 +74,7 @@ class ConduitOfRuinWatcher extends Watcher {
    private Map<UUID, Integer> playerCreatureSpells;
 
     public ConduitOfRuinWatcher() {
-        super(ConduitOfRuinWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
         playerCreatureSpells = new HashMap<>();
     }
 

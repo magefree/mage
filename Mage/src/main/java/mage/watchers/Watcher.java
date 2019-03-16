@@ -15,18 +15,14 @@ import mage.game.events.GameEvent;
  */
 public abstract class Watcher implements Serializable {
 
-    protected String basicKey;
     protected UUID controllerId;
     protected UUID sourceId;
     protected boolean condition;
     protected final WatcherScope scope;
 
-    public Watcher(Class<? extends Watcher> watcherClass, WatcherScope scope){
-        this(watcherClass.getSimpleName(), scope);
-    }
 
-    public Watcher(String basicKey, WatcherScope scope) {
-        this.basicKey = basicKey;
+
+    public Watcher(WatcherScope scope) {
         this.scope = scope;
     }
 
@@ -35,7 +31,6 @@ public abstract class Watcher implements Serializable {
         this.controllerId = watcher.controllerId;
         this.sourceId = watcher.sourceId;
         this.scope = watcher.scope;
-        this.basicKey = watcher.basicKey;
     }
 
     public UUID getControllerId() {
@@ -57,13 +52,14 @@ public abstract class Watcher implements Serializable {
     public String getKey() {
         switch (scope) {
             case GAME:
-                return basicKey;
+                return getBasicKey();
             case PLAYER:
-                return controllerId + basicKey;
+                return controllerId + getBasicKey();
             case CARD:
-                return sourceId + basicKey;
+                return sourceId + getBasicKey();
+                default:
+                    return getBasicKey();
         }
-        return basicKey;
     }
 
     public boolean conditionMet() {
@@ -72,6 +68,10 @@ public abstract class Watcher implements Serializable {
 
     public void reset() {
         condition = false;
+    }
+
+    protected String getBasicKey(){
+        return getClass().getSimpleName();
     }
 
     public abstract void watch(GameEvent event, Game game);

@@ -19,7 +19,7 @@ public class GravestormWatcher extends Watcher {
     private int gravestormCount = 0;
 
     public GravestormWatcher() {
-        super(GravestormWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public GravestormWatcher(final GravestormWatcher watcher) {

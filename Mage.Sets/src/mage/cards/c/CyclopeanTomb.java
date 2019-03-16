@@ -190,7 +190,7 @@ class CyclopeanTombCounterWatcher extends Watcher {
     private final Map<MageObjectReference, Set<MageObjectReference>> counterData = new HashMap<>();
 
     CyclopeanTombCounterWatcher() {
-        super(CyclopeanTombCounterWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     private CyclopeanTombCounterWatcher(final CyclopeanTombCounterWatcher watcher) {

@@ -97,7 +97,7 @@ class GontisMachinationsFirstLostLifeThisTurnWatcher extends Watcher {
     private final Map<UUID, Integer> playersLostLife = new HashMap<>();
 
     public GontisMachinationsFirstLostLifeThisTurnWatcher() {
-        super(GontisMachinationsFirstLostLifeThisTurnWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public GontisMachinationsFirstLostLifeThisTurnWatcher(final GontisMachinationsFirstLostLifeThisTurnWatcher watcher) {

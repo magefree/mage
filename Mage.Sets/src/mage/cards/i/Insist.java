@@ -104,7 +104,7 @@ class InsistWatcher extends Watcher {
     protected UUID uncounterableSpell;
 
     InsistWatcher() {
-        super(InsistWatcher.class, WatcherScope.PLAYER);
+        super(WatcherScope.PLAYER);
     }
 
     InsistWatcher(final InsistWatcher watcher) {

@@ -106,7 +106,7 @@ class OvermasterWatcher extends Watcher {
     protected UUID uncounterableSpell;
 
     OvermasterWatcher() {
-        super(OvermasterWatcher.class, WatcherScope.PLAYER);
+        super(WatcherScope.PLAYER);
     }
 
     OvermasterWatcher(final OvermasterWatcher watcher) {

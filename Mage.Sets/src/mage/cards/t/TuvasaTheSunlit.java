@@ -119,7 +119,7 @@ class TuvasaTheSunlitWatcher extends Watcher {
     private final Map<UUID, UUID> firstEnchantmentThisTurn = new HashMap<>();
 
     public TuvasaTheSunlitWatcher() {
-        super(TuvasaTheSunlitWatcher.class, WatcherScope.GAME);
+        super( WatcherScope.GAME);
     }
 
     public TuvasaTheSunlitWatcher(final TuvasaTheSunlitWatcher watcher) {

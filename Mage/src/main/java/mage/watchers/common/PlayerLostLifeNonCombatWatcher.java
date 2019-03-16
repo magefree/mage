@@ -25,7 +25,7 @@ public class PlayerLostLifeNonCombatWatcher extends Watcher {
     private final Map<UUID, Integer> amountOfLifeLostLastTurn = new HashMap<>();
 
     public PlayerLostLifeNonCombatWatcher() {
-        super(PlayerLostLifeNonCombatWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public PlayerLostLifeNonCombatWatcher(final PlayerLostLifeNonCombatWatcher watcher) {

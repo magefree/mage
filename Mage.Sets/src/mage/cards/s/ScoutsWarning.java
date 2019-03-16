@@ -101,7 +101,7 @@ class ScoutsWarningWatcher extends Watcher {
     private List<String> activeScoutsWarningSpells = new ArrayList<>();
 
     public ScoutsWarningWatcher() {
-        super(ScoutsWarningWatcher.class.getSimpleName(), WatcherScope.PLAYER);
+        super(WatcherScope.PLAYER);
     }
 
     public ScoutsWarningWatcher(final ScoutsWarningWatcher watcher) {

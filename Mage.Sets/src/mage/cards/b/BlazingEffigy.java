@@ -81,10 +81,10 @@ enum BlazingEffigyCount implements DynamicValue {
 
 class BlazingEffigyWatcher extends Watcher {
 
-    public final Map<MageObjectReference, Integer> damagedObjects = new HashMap<>();
+    private final Map<MageObjectReference, Integer> damagedObjects = new HashMap<>();
 
     public BlazingEffigyWatcher() {
-        super(BlazingEffigyWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public BlazingEffigyWatcher(final BlazingEffigyWatcher watcher) {

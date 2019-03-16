@@ -73,7 +73,7 @@ class PatriciansScornWatcher extends Watcher {
     }
 
     public PatriciansScornWatcher() {
-        super(PatriciansScornWatcher.class, WatcherScope.CARD);
+        super(WatcherScope.CARD);
     }
 
     public PatriciansScornWatcher(final PatriciansScornWatcher watcher) {

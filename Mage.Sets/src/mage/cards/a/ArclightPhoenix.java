@@ -84,7 +84,7 @@ class ArclightPhoenixWatcher extends Watcher {
     private final Map<UUID, Integer> instantSorceryCount = new HashMap<>();
 
     public ArclightPhoenixWatcher() {
-        super(ArclightPhoenixWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public ArclightPhoenixWatcher(final ArclightPhoenixWatcher watcher) {

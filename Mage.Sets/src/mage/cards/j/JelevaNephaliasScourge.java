@@ -144,7 +144,7 @@ class JelevaNephaliasWatcher extends Watcher {
     private final Map<String, Integer> manaSpendToCast = new HashMap<>(); // cast
 
     public JelevaNephaliasWatcher() {
-        super(JelevaNephaliasWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public JelevaNephaliasWatcher(final JelevaNephaliasWatcher watcher) {

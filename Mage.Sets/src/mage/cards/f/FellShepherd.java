@@ -65,7 +65,7 @@ class FellShepherdWatcher extends Watcher {
     private Set<UUID> creatureIds = new HashSet<>();
 
     public FellShepherdWatcher() {
-        super(FellShepherdWatcher.class, WatcherScope.PLAYER);
+        super(WatcherScope.PLAYER);
         condition = true;
     }
 

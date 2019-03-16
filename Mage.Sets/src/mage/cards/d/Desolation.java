@@ -106,7 +106,7 @@ class DesolationWatcher extends Watcher {
     private final Set<UUID> tappedForManaThisTurnPlayers = new HashSet<>();
 
     public DesolationWatcher() {
-        super(DesolationWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super( WatcherScope.GAME);
     }
 
     public DesolationWatcher(final DesolationWatcher watcher) {

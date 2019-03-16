@@ -26,10 +26,10 @@ public class ProwlWatcher extends Watcher {
     private final Set<UUID> allSubtypes = new HashSet<>();
 
     public ProwlWatcher() {
-        super(ProwlWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
-    public ProwlWatcher(final ProwlWatcher watcher) {
+    private ProwlWatcher(final ProwlWatcher watcher) {
         super(watcher);
         for (Entry<UUID, Set<SubType>> entry : watcher.damagingSubtypes.entrySet()) {
             damagingSubtypes.put(entry.getKey(), entry.getValue());

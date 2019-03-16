@@ -120,7 +120,7 @@ class BlockedByWatcher extends Watcher {
     private List<UUID> blockedByWatcher = new ArrayList<>();
 
     public BlockedByWatcher() {
-        super(BlockedByWatcher.class.getSimpleName(), WatcherScope.CARD);
+        super(WatcherScope.CARD);
     }
 
     private BlockedByWatcher(final BlockedByWatcher watcher) {

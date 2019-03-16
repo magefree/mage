@@ -18,11 +18,11 @@ import java.util.Set;
  */
 public class AttackedThisTurnWatcher extends Watcher {
 
-    protected final Set<MageObjectReference> attackedThisTurnCreatures = new HashSet<>();
-    protected final Map<MageObjectReference, Integer> attackedThisTurnCreaturesCounts = new HashMap<>();
+    private final Set<MageObjectReference> attackedThisTurnCreatures = new HashSet<>();
+    private final Map<MageObjectReference, Integer> attackedThisTurnCreaturesCounts = new HashMap<>();
 
     public AttackedThisTurnWatcher() {
-        super(AttackedThisTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public AttackedThisTurnWatcher(final AttackedThisTurnWatcher watcher) {

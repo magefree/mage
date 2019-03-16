@@ -115,7 +115,7 @@ enum KrovikanVampireInterveningIfCondition implements Condition {
         KrovikanVampireCreaturesDiedWatcher watcherDied = game.getState().getWatcher(KrovikanVampireCreaturesDiedWatcher.class);
         KrovikanVampireCreaturesDamagedWatcher watcherDamaged = game.getState().getWatcher(KrovikanVampireCreaturesDamagedWatcher.class);
         if (watcherDied != null) {
-            Set<UUID> creaturesThatDiedThisTurn = watcherDied.diedThisTurn;
+            Set<UUID> creaturesThatDiedThisTurn = watcherDied.getDiedThisTurn();
             for (UUID mor : creaturesThatDiedThisTurn) {
                 if (watcherDamaged != null) {
                     for (UUID mor2 : watcherDamaged.getDamagedBySource()) {
@@ -143,10 +143,10 @@ enum KrovikanVampireInterveningIfCondition implements Condition {
 
 class KrovikanVampireCreaturesDamagedWatcher extends Watcher {
 
-    public final Set<UUID> damagedBySource = new HashSet<>();
+    private final Set<UUID> damagedBySource = new HashSet<>();
 
     public KrovikanVampireCreaturesDamagedWatcher() {
-        super(KrovikanVampireCreaturesDamagedWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public KrovikanVampireCreaturesDamagedWatcher(final KrovikanVampireCreaturesDamagedWatcher watcher) {
@@ -179,10 +179,10 @@ class KrovikanVampireCreaturesDamagedWatcher extends Watcher {
 
 class KrovikanVampireCreaturesDiedWatcher extends Watcher {
 
-    public final Set<UUID> diedThisTurn = new HashSet<>();
+    private final Set<UUID> diedThisTurn = new HashSet<>();
 
     public KrovikanVampireCreaturesDiedWatcher() {
-        super(KrovikanVampireCreaturesDiedWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public KrovikanVampireCreaturesDiedWatcher(final KrovikanVampireCreaturesDiedWatcher watcher) {

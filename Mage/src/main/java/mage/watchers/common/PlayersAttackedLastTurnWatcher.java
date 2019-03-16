@@ -20,7 +20,7 @@ public class PlayersAttackedLastTurnWatcher extends Watcher {
     private final Map<UUID, PlayerList> playersAttackedInLastTurn = new HashMap<>();
 
     public PlayersAttackedLastTurnWatcher() {
-        super(PlayersAttackedLastTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public PlayersAttackedLastTurnWatcher(final PlayersAttackedLastTurnWatcher watcher) {

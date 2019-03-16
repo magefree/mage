@@ -52,18 +52,18 @@ public final class RocketLauncher extends CardImpl {
 
 class RocketLauncherWatcher extends Watcher {
 
-    boolean changedControllerOR1stTurn;
-    UUID cardId = null;
+    private boolean changedControllerOR1stTurn;
+    private UUID cardId = null;
 
     public RocketLauncherWatcher(UUID cardId) {
-        super(RocketLauncherWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
         this.changedControllerOR1stTurn = true;
         this.cardId = cardId;
     }
 
     public RocketLauncherWatcher(final RocketLauncherWatcher watcher) {
         super(watcher);        
-        this.changedControllerOR1stTurn = watcher.changedControllerOR1stTurn;
+        this.changedControllerOR1stTurn = watcher.isChangedControllerOR1stTurn();
         this.cardId = watcher.cardId;
     }
 
@@ -88,6 +88,10 @@ class RocketLauncherWatcher extends Watcher {
         super.reset();
         changedControllerOR1stTurn = true; //when is this reset called? may cause problems if in mid-life
     }
+
+    public boolean isChangedControllerOR1stTurn() {
+        return changedControllerOR1stTurn;
+    }
 }
 
 enum ControlledTurnCondition implements Condition {
@@ -99,7 +103,7 @@ enum ControlledTurnCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         RocketLauncherWatcher watcher = game.getState().getWatcher(RocketLauncherWatcher.class);
         
-        return watcher != null && !watcher.changedControllerOR1stTurn;
+        return watcher != null && !watcher.isChangedControllerOR1stTurn();
     }
 
     @Override

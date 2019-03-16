@@ -85,7 +85,7 @@ class DarkbladeAgentWatcher extends Watcher {
     private final Set<UUID> surveiledThisTurn = new HashSet<>();
 
     public DarkbladeAgentWatcher() {
-        super(DarkbladeAgentWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public DarkbladeAgentWatcher(final DarkbladeAgentWatcher watcher) {

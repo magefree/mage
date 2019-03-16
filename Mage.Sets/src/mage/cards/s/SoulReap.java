@@ -84,7 +84,7 @@ class SoulReapWatcher extends Watcher {
     private UUID cardId;
 
     public SoulReapWatcher(UUID cardId) {
-        super(SoulReapWatcher.class, WatcherScope.PLAYER);
+        super(WatcherScope.PLAYER);
         this.cardId = cardId;
     }
 

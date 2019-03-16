@@ -133,7 +133,7 @@ class GisaAndGeralfWatcher extends Watcher {
    private boolean abilityUsed = false;
 
     GisaAndGeralfWatcher() {
-        super("GisaAndGeralfWatcher", WatcherScope.CARD);
+        super(WatcherScope.CARD);
     }
 
     GisaAndGeralfWatcher(final GisaAndGeralfWatcher watcher) {

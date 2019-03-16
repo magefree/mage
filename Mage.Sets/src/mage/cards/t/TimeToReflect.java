@@ -72,7 +72,7 @@ class BlockedOrWasBlockedByAZombieWatcher extends Watcher {
     private final Set<MageObjectReference> blockedOrWasBlockedByAZombieWatcher;
 
     public BlockedOrWasBlockedByAZombieWatcher() {
-        super(BlockedOrWasBlockedByAZombieWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
         blockedOrWasBlockedByAZombieWatcher = new HashSet<>();
     }
 

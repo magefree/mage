@@ -60,7 +60,7 @@ class ActivatedLoyaltyAbilityWatcher extends Watcher {
     private final Set<UUID> playerIds = new HashSet<>();
 
     public ActivatedLoyaltyAbilityWatcher() {
-        super(ActivatedLoyaltyAbilityWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public ActivatedLoyaltyAbilityWatcher(final ActivatedLoyaltyAbilityWatcher watcher) {

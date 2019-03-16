@@ -19,7 +19,7 @@ public class FirstSpellCastThisTurnWatcher extends Watcher {
     private final Map<UUID, UUID> playerFirstCastSpell = new HashMap<>();
 
     public FirstSpellCastThisTurnWatcher() {
-        super(FirstSpellCastThisTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public FirstSpellCastThisTurnWatcher(final FirstSpellCastThisTurnWatcher watcher) {

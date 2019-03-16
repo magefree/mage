@@ -25,10 +25,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.watchers.Watcher;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author L_J
@@ -83,10 +80,10 @@ enum CustodiSoulcallerAdjuster implements TargetAdjuster {
 
 class CustodiSoulcallerWatcher extends Watcher {
 
-    private final HashMap<UUID, Set<UUID>> playersAttacked = new HashMap<>(0);
+    private final Map<UUID, Set<UUID>> playersAttacked = new HashMap<>(0);
 
     CustodiSoulcallerWatcher() {
-        super("CustodiSoulcallerWatcher", WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     CustodiSoulcallerWatcher(final CustodiSoulcallerWatcher watcher) {

@@ -91,7 +91,7 @@ class SpinerockKnollWatcher extends Watcher {
     private final Map<UUID, Integer> amountOfDamageReceivedThisTurn = new HashMap<>(1);
 
     SpinerockKnollWatcher() {
-        super(SpinerockKnollWatcher.class.getSimpleName(), WatcherScope.CARD);
+        super(WatcherScope.CARD);
     }
 
     SpinerockKnollWatcher(final SpinerockKnollWatcher watcher) {

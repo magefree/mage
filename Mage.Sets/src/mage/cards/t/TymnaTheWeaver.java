@@ -97,7 +97,7 @@ class TymnaTheWeaverWatcher extends Watcher {
     private final Map<UUID, Set<UUID>> players = new HashMap<>();
 
     public TymnaTheWeaverWatcher() {
-        super(TymnaTheWeaverWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public TymnaTheWeaverWatcher(final TymnaTheWeaverWatcher watcher) {

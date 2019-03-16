@@ -83,7 +83,7 @@ class InsatiableRakghoulEffect extends OneShotEffect {
 class NonArtifactCreaturesDiedWatcher extends Watcher {
 
     public NonArtifactCreaturesDiedWatcher() {
-        super(NonArtifactCreaturesDiedWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public NonArtifactCreaturesDiedWatcher(final NonArtifactCreaturesDiedWatcher watcher) {

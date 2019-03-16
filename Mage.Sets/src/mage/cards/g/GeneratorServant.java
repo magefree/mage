@@ -63,7 +63,7 @@ class GeneratorServantWatcher extends Watcher {
     private List<UUID> creatures = new ArrayList<>();
 
     public GeneratorServantWatcher() {
-        super(GeneratorServantWatcher.class, WatcherScope.CARD);
+        super(WatcherScope.CARD);
     }
 
     private GeneratorServantWatcher(final GeneratorServantWatcher watcher) {

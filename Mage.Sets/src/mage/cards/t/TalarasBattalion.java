@@ -112,7 +112,7 @@ class TalarasBattalionWatcher extends Watcher {
     private final UUID cardId;
 
     public TalarasBattalionWatcher(UUID cardId) {
-        super(TalarasBattalionWatcher.class, WatcherScope.PLAYER);
+        super(WatcherScope.PLAYER);
         this.cardId = cardId;
     }
 
