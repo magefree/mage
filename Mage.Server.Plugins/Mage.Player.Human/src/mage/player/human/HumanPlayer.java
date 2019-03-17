@@ -8,6 +8,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.RequirementEffect;
+import mage.abilities.hint.HintUtils;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.Card;
 import mage.cards.Cards;
@@ -45,7 +46,10 @@ import mage.util.ManaUtil;
 import mage.util.MessageToClient;
 import org.apache.log4j.Logger;
 
+import java.awt.*;
 import java.io.Serializable;
+import java.util.List;
+import java.util.Queue;
 import java.util.*;
 
 import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
@@ -232,9 +236,15 @@ public class HumanPlayer extends PlayerImpl {
         updateGameStatePriority("chooseMulligan", game);
         int nextHandSize = game.mulliganDownTo(playerId);
         do {
-            String message = "Mulligan "
-                    + (getHand().size() > nextHandSize ? "down to " : "for free, draw ")
-                    + nextHandSize + (nextHandSize == 1 ? " card?" : " cards?");
+            String cardsCountInfo = nextHandSize + (nextHandSize == 1 ? " card" : " cards");
+            String message;
+            if (getHand().size() > nextHandSize) {
+                // pay
+                message = "Mulligan " + HintUtils.prepareText("down to " + cardsCountInfo, Color.YELLOW) + "?";
+            } else {
+                // free
+                message = "Mulligan " + HintUtils.prepareText("for free", Color.GREEN) + ", draw another " + cardsCountInfo + "?";
+            }
             Map<String, Serializable> options = new HashMap<>();
             options.put("UI.left.btn.text", "Mulligan");
             options.put("UI.right.btn.text", "Keep");
