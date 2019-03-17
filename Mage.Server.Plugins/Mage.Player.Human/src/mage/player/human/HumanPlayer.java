@@ -728,6 +728,7 @@ public class HumanPlayer extends PlayerImpl {
                     controllingPlayer = (HumanPlayer) player;
                 }
             }
+
             if (getJustActivatedType() != null && !holdingPriority) {
                 if (controllingPlayer.getUserData().isPassPriorityCast()
                         && getJustActivatedType() == AbilityType.SPELL) {
@@ -742,43 +743,55 @@ public class HumanPlayer extends PlayerImpl {
                     return false;
                 }
             }
-            if (isGameUnderControl()) { // Use the skip actions only if the player itself controls its turn
-                if (passedAllTurns
-                        || passedTurnSkipStack) {
+
+            // SKIP buttons - use the skip actions only if the player itself controls its turn
+            if (isGameUnderControl()) {
+                if (passedAllTurns || passedTurnSkipStack) {
                     if (passWithManaPoolCheck(game)) {
                         return false;
                     }
                 }
-                if (passedUntilEndStepBeforeMyTurn) {
 
+                if (passedUntilEndStepBeforeMyTurn) {
                     if (game.getTurn().getStepType() != PhaseStep.END_TURN) {
+                        // other step
                         if (passWithManaPoolCheck(game)) {
                             return false;
                         }
                     } else {
+                        // end step - search yourself
                         PlayerList playerList = game.getState().getPlayerList(playerId);
                         if (!playerList.getPrevious().equals(game.getActivePlayerId())) {
                             if (passWithManaPoolCheck(game)) {
                                 return false;
                             }
+                        } else {
+                            // stop
+                            passedUntilEndStepBeforeMyTurn = false;
                         }
                     }
                 }
+
                 if (game.getStack().isEmpty()) {
+                    // empty stack
+
                     boolean dontCheckPassStep = false;
                     if (passedUntilStackResolved) { // Don't skip to next step with this action. It always only resolves a stack. If stack is empty it does nothing.
+                        passedUntilStackResolved = false;
                         dontCheckPassStep = true;
                     }
+
                     if (passedTurn
                             || passedTurnSkipStack) {
                         if (passWithManaPoolCheck(game)) {
                             return false;
                         }
                     }
+
                     if (passedUntilNextMain) {
                         if (game.getTurn().getStepType() == PhaseStep.POSTCOMBAT_MAIN
                                 || game.getTurn().getStepType() == PhaseStep.PRECOMBAT_MAIN) {
-                            // it's a main phase
+                            // it's main step
                             if (!skippedAtLeastOnce
                                     || (!playerId.equals(game.getActivePlayerId())
                                     && !controllingPlayer.getUserData().getUserSkipPrioritySteps().isStopOnAllMainPhases())) {
@@ -797,9 +810,10 @@ public class HumanPlayer extends PlayerImpl {
                             }
                         }
                     }
+
                     if (passedUntilEndOfTurn) {
                         if (game.getTurn().getStepType() == PhaseStep.END_TURN) {
-                            // It's end of turn phase
+                            // it's end of turn step
                             if (!skippedAtLeastOnce
                                     || (playerId.equals(game.getActivePlayerId())
                                     && !controllingPlayer
@@ -812,7 +826,7 @@ public class HumanPlayer extends PlayerImpl {
                                 }
                             } else {
                                 dontCheckPassStep = true;
-                                passedUntilEndOfTurn = false;
+                                passedUntilEndOfTurn = false; // reset skip action
                             }
                         } else {
                             skippedAtLeastOnce = true;
@@ -821,23 +835,39 @@ public class HumanPlayer extends PlayerImpl {
                             }
                         }
                     }
+
                     if (!dontCheckPassStep
                             && checkPassStep(game, controllingPlayer)) {
                         if (passWithManaPoolCheck(game)) {
                             return false;
                         }
                     }
-                } else if (passedUntilStackResolved) {
-                    if (Objects.equals(dateLastAddedToStack, game.getStack().getDateLastAdded())) {
-                        dateLastAddedToStack = game.getStack().getDateLastAdded();
+
+                } else {
+                    // non empty stack
+                    boolean haveNewObjectsOnStack = Objects.equals(dateLastAddedToStack, game.getStack().getDateLastAdded());
+                    dateLastAddedToStack = game.getStack().getDateLastAdded();
+                    if (passedUntilStackResolved) {
+                        if (haveNewObjectsOnStack
+                                && (playerId.equals(game.getActivePlayerId())
+                                && controllingPlayer
+                                .getUserData()
+                                .getUserSkipPrioritySteps()
+                                .isStopOnStackNewObjects())) {
+                            // new objects on stack -- disable "pass until stack resolved"
+                            passedUntilStackResolved = false;
+                        } else {
+                            // no new objects on stack -- go to next priority
+                        }
+                    }
+                    if (passedUntilStackResolved) {
                         if (passWithManaPoolCheck(game)) {
                             return false;
                         }
-                    } else {
-                        passedUntilStackResolved = false;
                     }
                 }
             }
+
             while (canRespond()) {
                 updateGameStatePriority("priority", game);
                 holdingPriority = false;

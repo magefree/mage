@@ -1,10 +1,8 @@
-
 package mage.players.net;
 
 import java.io.Serializable;
 
 /**
- *
  * @author LevelX2
  */
 public class UserSkipPrioritySteps implements Serializable {
@@ -16,6 +14,7 @@ public class UserSkipPrioritySteps implements Serializable {
     boolean stopOnDeclareBlockerIfNoneAvailable = true;
     boolean stopOnAllMainPhases = true;
     boolean stopOnAllEndPhases = true;
+    boolean stopOnStackNewObjects = true;
 
     public UserSkipPrioritySteps() {
         yourTurn = new SkipPrioritySteps();
@@ -62,4 +61,11 @@ public class UserSkipPrioritySteps implements Serializable {
         this.stopOnAllEndPhases = stopOnAllEndPhases;
     }
 
+    public boolean isStopOnStackNewObjects() {
+        return stopOnStackNewObjects;
+    }
+
+    public void setStopOnStackNewObjects(boolean stopOnStackNewObjects) {
+        this.stopOnStackNewObjects = stopOnStackNewObjects;
+    }
 }

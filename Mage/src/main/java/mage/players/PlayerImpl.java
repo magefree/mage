@@ -104,7 +104,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     // priority control
     protected boolean passed; // player passed priority
     protected boolean passedTurn; // F4
-    protected boolean passedTurnSkipStack; // F6
+    protected boolean passedTurnSkipStack; // F6 // TODO: research
     protected boolean passedUntilEndOfTurn; // F5
     protected boolean passedUntilNextMain; // F7
     protected boolean passedUntilStackResolved; // F10
