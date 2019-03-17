@@ -11,13 +11,14 @@ import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
-import mage.cards.Sets;
 import mage.cards.decks.Deck;
 import mage.client.MageFrame;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.gui.ColorsChooser;
 import mage.client.util.gui.FastSearchUtil;
 import mage.client.util.sets.ConstructedFormats;
+
+import static mage.cards.decks.DeckFormats.DCK;
 
 /**
  *
@@ -328,7 +329,7 @@ public class DeckGeneratorDialog {
             tmp.getParentFile().mkdirs();
             tmp.createNewFile();
             deck.setName(deckName);
-            Sets.saveDeck(tmp.getAbsolutePath(), deck.getDeckCardLists());
+            DCK.getExporter().writeDeck(tmp.getAbsolutePath(), deck.getDeckCardLists());
             cleanUp();
             return tmp.getAbsolutePath();
         } catch (Exception e) {

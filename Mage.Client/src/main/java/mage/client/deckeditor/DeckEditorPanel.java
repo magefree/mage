@@ -1,7 +1,6 @@
 package mage.client.deckeditor;
 
 import mage.cards.Card;
-import mage.cards.Sets;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.DnDDeckTargetListener;
@@ -35,11 +34,12 @@ import java.awt.*;
 import java.awt.dnd.DropTarget;
 import java.awt.event.*;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.*;
 import java.util.concurrent.*;
+
+import static mage.cards.decks.DeckFormats.DCK;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -965,8 +965,8 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 DeckCardLists cardLists = deck.getDeckCardLists();
                 cardLists.setCardLayout(deckArea.getCardLayout());
                 cardLists.setSideboardLayout(deckArea.getSideboardLayout());
-                Sets.saveDeck(fileName, cardLists);
-            } catch (FileNotFoundException ex) {
+                DCK.getExporter().writeDeck(fileName, cardLists);
+            } catch (IOException ex) {
                 JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage() + "\nTry ensuring that the selected directory is writable.", "Error saving deck", JOptionPane.ERROR_MESSAGE);
             } finally {
                 MageFrame.getDesktop().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
