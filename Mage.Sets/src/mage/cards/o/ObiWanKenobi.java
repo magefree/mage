@@ -27,6 +27,7 @@ public final class ObiWanKenobi extends CardImpl {
 
     public ObiWanKenobi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{U}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.OBI_WAN);
 
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
