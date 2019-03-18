@@ -16,6 +16,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.*;
+import mage.game.mulligan.VancouverMulligan;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.watchers.common.CommanderInfoWatcher;
@@ -31,7 +32,7 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
     protected boolean startingPlayerSkipsDraw = true;
 
     public GameTinyLeadersImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans, int startLife) {
-        super(attackOption, range, freeMulligans, startLife);
+        super(attackOption, range, new VancouverMulligan(freeMulligans), startLife);
     }
 
     public GameTinyLeadersImpl(final GameTinyLeadersImpl game) {

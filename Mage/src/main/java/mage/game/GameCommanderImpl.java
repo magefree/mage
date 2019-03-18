@@ -12,6 +12,7 @@ import mage.constants.MultiplayerAttackOption;
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
+import mage.game.mulligan.VancouverMulligan;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.watchers.common.CommanderInfoWatcher;
@@ -25,7 +26,7 @@ public abstract class GameCommanderImpl extends GameImpl {
     protected boolean startingPlayerSkipsDraw = true;
 
     public GameCommanderImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans, int startLife) {
-        super(attackOption, range, freeMulligans, startLife);
+        super(attackOption, range, new VancouverMulligan(freeMulligans), startLife);
     }
 
     public GameCommanderImpl(final GameCommanderImpl game) {

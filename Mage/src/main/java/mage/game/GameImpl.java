@@ -40,6 +40,8 @@ import mage.game.command.Emblem;
 import mage.game.command.Plane;
 import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
+import mage.game.mulligan.LondonMulligan;
+import mage.game.mulligan.Mulligan;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
@@ -108,8 +110,8 @@ public abstract class GameImpl implements Game, Serializable {
     protected UUID winnerId;
 
     protected RangeOfInfluence range;
-    protected int freeMulligans;
-    protected Map<UUID, Integer> usedFreeMulligans = new LinkedHashMap<>();
+    protected Mulligan mulligan;
+
     protected MultiplayerAttackOption attackOption;
     protected GameOptions gameOptions;
     protected String startMessage;
@@ -142,10 +144,10 @@ public abstract class GameImpl implements Game, Serializable {
     // used to proceed player conceding requests
     private final LinkedList<UUID> concedingPlayers = new LinkedList<>(); // used to handle asynchronous request of a player to leave the game
 
-    public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans, int startLife) {
+    public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
         this.id = UUID.randomUUID();
         this.range = range;
-        this.freeMulligans = freeMulligans;
+        this.mulligan = mulligan;
         this.attackOption = attackOption;
         this.state = new GameState();
         this.startLife = startLife;
@@ -163,7 +165,7 @@ public abstract class GameImpl implements Game, Serializable {
         this.startingPlayerId = game.startingPlayerId;
         this.winnerId = game.winnerId;
         this.range = game.range;
-        this.freeMulligans = game.freeMulligans;
+        this.mulligan = game.getMulligan().copy();
         this.attackOption = game.attackOption;
         this.state = game.state.copy();
         this.gameCards = game.gameCards;
@@ -968,50 +970,7 @@ public abstract class GameImpl implements Game, Serializable {
         }
 
         //20091005 - 103.4
-        List<UUID> keepPlayers = new ArrayList<>();
-        List<UUID> mulliganPlayers = new ArrayList<>();
-        do {
-            mulliganPlayers.clear();
-            for (UUID playerId : state.getPlayerList(startingPlayerId)) {
-                if (!keepPlayers.contains(playerId)) {
-                    Player player = getPlayer(playerId);
-                    boolean keep = true;
-                    while (true) {
-                        if (player.getHand().isEmpty()) {
-                            break;
-                        }
-                        GameEvent event = new GameEvent(GameEvent.EventType.CAN_TAKE_MULLIGAN, null, null, playerId);
-                        if (!replaceEvent(event)) {
-                            fireEvent(event);
-                            getState().setChoosingPlayerId(playerId);
-                            if (player.chooseMulligan(this)) {
-                                keep = false;
-                            }
-                            break;
-                        }
-                    }
-                    if (keep) {
-                        endMulligan(player.getId());
-                        keepPlayers.add(playerId);
-                        fireInformEvent(player.getLogName() + " keeps hand");
-                    } else {
-                        mulliganPlayers.add(playerId);
-                        fireInformEvent(player.getLogName() + " decides to take mulligan");
-                    }
-                }
-            }
-            for (UUID mulliganPlayerId : mulliganPlayers) {
-                mulligan(mulliganPlayerId);
-            }
-            saveState(false);
-        } while (!mulliganPlayers.isEmpty());
-        // new scry rule
-        for (UUID playerId : state.getPlayerList(startingPlayerId)) {
-            Player player = getPlayer(playerId);
-            if (player != null && player.getHand().size() < startingHandSize) {
-                player.scry(1, null, this);
-            }
-        }
+        mulligan.executeMulliganPhase(this, startingHandSize);
         getState().setChoosingPlayerId(null);
         state.resetWatchers(); // watcher objects from cards are reused during match so reset all card watchers already added
 
@@ -1169,51 +1128,17 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public int mulliganDownTo(UUID playerId) {
-        Player player = getPlayer(playerId);
-        int deduction = 1;
-        if (freeMulligans > 0) {
-            if (usedFreeMulligans != null && usedFreeMulligans.containsKey(player.getId())) {
-                int used = usedFreeMulligans.get(player.getId());
-                if (used < freeMulligans) {
-                    deduction = 0;
-                }
-            } else {
-                deduction = 0;
-            }
-        }
-        return player.getHand().size() - deduction;
+        return mulligan.mulliganDownTo(this, playerId);
     }
 
     @Override
     public void endMulligan(UUID playerId) {
+        mulligan.endMulligan(this, playerId);
     }
 
     @Override
     public void mulligan(UUID playerId) {
-        Player player = getPlayer(playerId);
-        int numCards = player.getHand().size();
-        player.getLibrary().addAll(player.getHand().getCards(this), this);
-        player.getHand().clear();
-        player.shuffleLibrary(null, this);
-        int deduction = 1;
-        if (freeMulligans > 0) {
-            if (usedFreeMulligans.containsKey(player.getId())) {
-                int used = usedFreeMulligans.get(player.getId());
-                if (used < freeMulligans) {
-                    deduction = 0;
-                    usedFreeMulligans.put(player.getId(), used + 1);
-                }
-            } else {
-                deduction = 0;
-                usedFreeMulligans.put(player.getId(), 1);
-            }
-        }
-        fireInformEvent(new StringBuilder(player.getLogName())
-                .append(" mulligans")
-                .append(deduction == 0 ? " for free and draws " : " down to ")
-                .append((numCards - deduction))
-                .append(numCards - deduction == 1 ? " card" : " cards").toString());
-        player.drawCards(numCards - deduction, this);
+        mulligan.mulligan(this, playerId);
     }
 
     @Override
@@ -3249,4 +3174,10 @@ public abstract class GameImpl implements Game, Serializable {
         }
         return 0;
     }
+
+    @Override
+    public Mulligan getMulligan() {
+        return mulligan;
+    }
+
 }

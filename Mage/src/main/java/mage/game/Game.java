@@ -25,7 +25,9 @@ import mage.game.events.GameEvent;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
 import mage.game.events.TableEvent;
+import mage.game.match.Match;
 import mage.game.match.MatchType;
+import mage.game.mulligan.Mulligan;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
@@ -472,4 +474,7 @@ public interface Game extends MageItem, Serializable {
     int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable);
 
     int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects);
+
+    Mulligan getMulligan();
+
 }

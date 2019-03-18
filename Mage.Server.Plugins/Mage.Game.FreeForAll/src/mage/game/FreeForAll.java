@@ -4,6 +4,7 @@ package mage.game;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 import mage.game.match.MatchType;
+import mage.game.mulligan.VancouverMulligan;
 
 /**
  *
@@ -14,7 +15,7 @@ public class FreeForAll extends GameImpl {
     private int numPlayers;
 
     public FreeForAll(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans, int startLife) {
-        super(attackOption, range, freeMulligans, startLife);
+        super(attackOption, range, new VancouverMulligan(freeMulligans), startLife);
     }
 
     public FreeForAll(final FreeForAll game) {
