@@ -34,6 +34,7 @@ public final class AurraSingBaneOfJedi extends CardImpl {
 
     public AurraSingBaneOfJedi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{B}{R}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.AURRA);
 
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
