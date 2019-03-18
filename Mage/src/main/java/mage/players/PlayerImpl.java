@@ -1,5 +1,6 @@
 package mage.players;
 
+import com.google.common.collect.ImmutableMap;
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.MageObjectReference;
@@ -178,11 +179,10 @@ public abstract class PlayerImpl implements Player, Serializable {
     /**
      * During some steps we can't play anything
      */
-    protected final Map<PhaseStep, Step.StepPart> silentPhaseSteps = new EnumMap<PhaseStep, Step.StepPart>(PhaseStep.class) {
-        {
-            put(PhaseStep.DECLARE_ATTACKERS, Step.StepPart.PRE);
-        }
-    };
+    protected final Map<PhaseStep, Step.StepPart> silentPhaseSteps = ImmutableMap.<PhaseStep, Step.StepPart>builder().
+            put(PhaseStep.DECLARE_ATTACKERS, Step.StepPart.PRE).build();
+
+
 
     public PlayerImpl(String name, RangeOfInfluence range) {
         this(UUID.randomUUID());

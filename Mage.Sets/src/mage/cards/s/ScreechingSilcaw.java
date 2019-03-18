@@ -20,7 +20,7 @@ import mage.constants.SubType;
  */
 public final class ScreechingSilcaw extends CardImpl {
 
-    private static final String text = "<i>Metalcraft</i> &mdash; Whenever Screeching Silcaw deals combat damage to a player, if you control three or more artifacts, that player puts the top four cards of their library into their graveyard.";
+    private static final String rule = "<i>Metalcraft</i> &mdash; Whenever Screeching Silcaw deals combat damage to a player, if you control three or more artifacts, that player puts the top four cards of their library into their graveyard.";
 
     public ScreechingSilcaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
@@ -34,7 +34,7 @@ public final class ScreechingSilcaw extends CardImpl {
         //"<i>Metalcraft</i> &mdash; Whenever Screeching Silcaw deals combat damage to a player, if you control three or more artifacts, that player puts the top four cards of their library into their graveyard.
         TriggeredAbility conditional = new ConditionalInterveningIfTriggeredAbility(
                 new DealsCombatDamageToAPlayerTriggeredAbility(new PutLibraryIntoGraveTargetEffect(4), false, true),
-                MetalcraftCondition.instance, text);
+                MetalcraftCondition.instance, rule);
         this.addAbility(conditional);
     }
 

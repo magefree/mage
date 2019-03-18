@@ -1,5 +1,6 @@
 package mage.cards;
 
+import com.google.common.collect.ImmutableList;
 import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.Mana;
@@ -224,11 +225,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         game.getState().getCardState(objectId).addInfo(key, value);
     }
 
-    protected static final ArrayList<String> rulesError = new ArrayList<String>() {
-        {
-            add("Exception occurred in rules generation");
-        }
-    };
+    protected static final List<String> rulesError = ImmutableList.of("Exception occurred in rules generation");
 
     @Override
     public List<String> getRules() {
