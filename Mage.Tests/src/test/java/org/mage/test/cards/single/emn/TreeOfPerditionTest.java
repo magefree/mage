@@ -26,6 +26,7 @@ public class TreeOfPerditionTest extends CardTestPlayerBase {
         
         /*
          Tree of Perdition - {3}{B} - Creature Plant - 0/13
+           {T}: Exchange target opponent's life total with Tree of Perdition's toughness.
         Defender
         Tap: Exchange target opponent's life total with Tree of Perdition's toughness.
         */
@@ -34,7 +35,7 @@ public class TreeOfPerditionTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Unsummon", 1); // {U} instant - return target creature to owner hand
         addCard(Zone.BATTLEFIELD,playerB,"Island",1);
         
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}:");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Exchange");
         addTarget(playerA, playerB);
         
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Unsummon");
@@ -65,7 +66,7 @@ public class TreeOfPerditionTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Tree of Perdition");
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
         
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}:");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Exchange");
         addTarget(playerA, playerB);
         
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

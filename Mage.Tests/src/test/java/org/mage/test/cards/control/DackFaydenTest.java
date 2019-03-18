@@ -59,7 +59,7 @@ public class DackFaydenTest extends CardTestPlayerBase {
 
         castSpell(10, PhaseStep.PRECOMBAT_MAIN, playerA, "Gut Shot", "Ornithopter");
         castSpell(10, PhaseStep.PRECOMBAT_MAIN, playerA,  "Unsummon", "Ornithopter", "Gut Shot", StackClause.WHILE_NOT_ON_STACK);
-        castSpell(10, PhaseStep.PRECOMBAT_MAIN, playerB, "Ornithopter");
+        castSpell(10, PhaseStep.POSTCOMBAT_MAIN, playerB, "Ornithopter");
 
         setStopAt(10, PhaseStep.END_TURN);
         execute();

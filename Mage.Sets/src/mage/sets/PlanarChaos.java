@@ -1,30 +1,4 @@
-/*
- * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -35,7 +9,7 @@ import mage.constants.SetType;
  *
  * @author North
  */
-public class PlanarChaos extends ExpansionSet {
+public final class PlanarChaos extends ExpansionSet {
 
     private static final PlanarChaos instance = new PlanarChaos();
 
@@ -87,6 +61,7 @@ public class PlanarChaos extends ExpansionSet {
         cards.add(new SetCardInfo("Deadly Grub", 69, Rarity.COMMON, mage.cards.d.DeadlyGrub.class));
         cards.add(new SetCardInfo("Deadwood Treefolk", 126, Rarity.UNCOMMON, mage.cards.d.DeadwoodTreefolk.class));
         cards.add(new SetCardInfo("Detritivore", 96, Rarity.RARE, mage.cards.d.Detritivore.class));
+        cards.add(new SetCardInfo("Dichotomancy", 38, Rarity.RARE, mage.cards.d.Dichotomancy.class));
         cards.add(new SetCardInfo("Dismal Failure", 39, Rarity.UNCOMMON, mage.cards.d.DismalFailure.class));
         cards.add(new SetCardInfo("Dormant Sliver", 156, Rarity.UNCOMMON, mage.cards.d.DormantSliver.class));
         cards.add(new SetCardInfo("Dreamscape Artist", 40, Rarity.COMMON, mage.cards.d.DreamscapeArtist.class));
@@ -140,6 +115,7 @@ public class PlanarChaos extends ExpansionSet {
         cards.add(new SetCardInfo("Midnight Charm", 74, Rarity.COMMON, mage.cards.m.MidnightCharm.class));
         cards.add(new SetCardInfo("Mire Boa", 135, Rarity.COMMON, mage.cards.m.MireBoa.class));
         cards.add(new SetCardInfo("Mirri the Cursed", 75, Rarity.RARE, mage.cards.m.MirriTheCursed.class));
+        cards.add(new SetCardInfo("Molten Firebird", 117, Rarity.RARE, mage.cards.m.MoltenFirebird.class));
         cards.add(new SetCardInfo("Muck Drubb", 76, Rarity.UNCOMMON, mage.cards.m.MuckDrubb.class));
         cards.add(new SetCardInfo("Mycologist", 27, Rarity.UNCOMMON, mage.cards.m.Mycologist.class));
         cards.add(new SetCardInfo("Necrotic Sliver", 159, Rarity.UNCOMMON, mage.cards.n.NecroticSliver.class));

@@ -52,7 +52,7 @@ public class GainControlTargetEffectTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Vedalken Shackles", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
 
-        // Lightning Strike deals 3 damage to target creature or player.
+        // Lightning Strike deals 3 damage to any target.
         addCard(Zone.HAND, playerB, "Lightning Strike", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
         // Flying
@@ -89,7 +89,7 @@ public class GainControlTargetEffectTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
 
         addCard(Zone.BATTLEFIELD, playerB, "Island", 1);
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         // {1}: Mutavault becomes a 2/2 creature with all creature types until end of turn. It's still a land.
         addCard(Zone.BATTLEFIELD, playerB, "Mutavault", 1);
 

@@ -14,11 +14,12 @@ public enum SuperType {
 
     String text;
 
-    SuperType(String text){
+    SuperType(String text) {
         this.text = text;
     }
 
-    public String toString(){
+    @Override
+    public String toString() {
         return text;
     }
 

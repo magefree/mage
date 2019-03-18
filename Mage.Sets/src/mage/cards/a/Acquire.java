@@ -19,7 +19,7 @@ import mage.target.common.TargetOpponent;
 /**
  * @author andyfries
  */
-public class Acquire extends CardImpl {
+public final class Acquire extends CardImpl {
 
     public Acquire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");

@@ -113,7 +113,7 @@ public class TheGitrogMonsterTest extends CardTestPlayerBase {
         // As an additional cost to cast Toxic Deluge, pay X life.
         // All creatures get -X/-X until end of turn.
         addCard(Zone.HAND, playerA, "Toxic Deluge", 1); // Sorcery {2}{B}
-        // (Dryad Arbor isn't a spell, it's affected by summoning sickness, and it has "{T}: Add {G} to your mana pool.")
+        // (Dryad Arbor isn't a spell, it's affected by summoning sickness, and it has "{T}: Add {G}.")
         addCard(Zone.HAND, playerA, "Dryad Arbor", 1); // Land Creature 1/1
         addCard(Zone.HAND, playerA, "Swamp", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);

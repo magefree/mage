@@ -1,11 +1,10 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.cards.b.BrothersYamazaki;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-public class ChampionsOfKamigawa extends ExpansionSet {
+public final class ChampionsOfKamigawa extends ExpansionSet {
 
     private static final ChampionsOfKamigawa instance = new ChampionsOfKamigawa();
 
@@ -22,6 +21,7 @@ public class ChampionsOfKamigawa extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Akki Avalanchers", 151, Rarity.COMMON, mage.cards.a.AkkiAvalanchers.class));
         cards.add(new SetCardInfo("Akki Coalflinger", 152, Rarity.UNCOMMON, mage.cards.a.AkkiCoalflinger.class));
         cards.add(new SetCardInfo("Akki Lavarunner", 153, Rarity.RARE, mage.cards.a.AkkiLavarunner.class));
@@ -40,15 +40,15 @@ public class ChampionsOfKamigawa extends ExpansionSet {
         cards.add(new SetCardInfo("Blood Speaker", 103, Rarity.UNCOMMON, mage.cards.b.BloodSpeaker.class));
         cards.add(new SetCardInfo("Bloodthirsty Ogre", 104, Rarity.UNCOMMON, mage.cards.b.BloodthirstyOgre.class));
         cards.add(new SetCardInfo("Boseiju, Who Shelters All", 273, Rarity.RARE, mage.cards.b.BoseijuWhoSheltersAll.class));
-        cards.add(new SetCardInfo("Brothers Yamazaki", "160a", Rarity.UNCOMMON, BrothersYamazaki.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Brothers Yamazaki", "160b", Rarity.UNCOMMON, BrothersYamazaki.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Brothers Yamazaki", "160a", Rarity.UNCOMMON, mage.cards.b.BrothersYamazaki.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Brothers Yamazaki", "160b", Rarity.UNCOMMON, mage.cards.b.BrothersYamazaki.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Brutal Deceiver", 161, Rarity.COMMON, mage.cards.b.BrutalDeceiver.class));
         cards.add(new SetCardInfo("Budoka Gardener", 202, Rarity.RARE, mage.cards.b.BudokaGardener.class));
         cards.add(new SetCardInfo("Burr Grafter", 203, Rarity.COMMON, mage.cards.b.BurrGrafter.class));
         cards.add(new SetCardInfo("Bushi Tenderfoot", 2, Rarity.UNCOMMON, mage.cards.b.BushiTenderfoot.class));
         cards.add(new SetCardInfo("Cage of Hands", 3, Rarity.COMMON, mage.cards.c.CageOfHands.class));
-        cards.add(new SetCardInfo("Callous Deceiver", 53, Rarity.COMMON, mage.cards.c.CallousDeceiver.class));
         cards.add(new SetCardInfo("Call to Glory", 4, Rarity.COMMON, mage.cards.c.CallToGlory.class));
+        cards.add(new SetCardInfo("Callous Deceiver", 53, Rarity.COMMON, mage.cards.c.CallousDeceiver.class));
         cards.add(new SetCardInfo("Candles' Glow", 5, Rarity.UNCOMMON, mage.cards.c.CandlesGlow.class));
         cards.add(new SetCardInfo("Cleanfall", 6, Rarity.UNCOMMON, mage.cards.c.Cleanfall.class));
         cards.add(new SetCardInfo("Cloudcrest Lake", 274, Rarity.UNCOMMON, mage.cards.c.CloudcrestLake.class));
@@ -100,19 +100,19 @@ public class ChampionsOfKamigawa extends ExpansionSet {
         cards.add(new SetCardInfo("Gutwrencher Oni", 113, Rarity.UNCOMMON, mage.cards.g.GutwrencherOni.class));
         cards.add(new SetCardInfo("Hair-Strung Koto", 252, Rarity.RARE, mage.cards.h.HairStrungKoto.class));
         cards.add(new SetCardInfo("Hall of the Bandit Lord", 277, Rarity.RARE, mage.cards.h.HallOfTheBanditLord.class));
-        cards.add(new SetCardInfo("Hanabi Blast", 170, Rarity.UNCOMMON, mage.cards.h.HanabiBlast.class));
         cards.add(new SetCardInfo("Hana Kami", 211, Rarity.UNCOMMON, mage.cards.h.HanaKami.class));
+        cards.add(new SetCardInfo("Hanabi Blast", 170, Rarity.UNCOMMON, mage.cards.h.HanabiBlast.class));
         cards.add(new SetCardInfo("Hankyu", 253, Rarity.UNCOMMON, mage.cards.h.Hankyu.class));
         cards.add(new SetCardInfo("Harsh Deceiver", 11, Rarity.COMMON, mage.cards.h.HarshDeceiver.class));
+        cards.add(new SetCardInfo("He Who Hungers", 114, Rarity.RARE, mage.cards.h.HeWhoHungers.class));
         cards.add(new SetCardInfo("Heartbeat of Spring", 212, Rarity.RARE, mage.cards.h.HeartbeatOfSpring.class));
         cards.add(new SetCardInfo("Hearth Kami", 171, Rarity.COMMON, mage.cards.h.HearthKami.class));
-        cards.add(new SetCardInfo("He Who Hungers", 114, Rarity.RARE, mage.cards.h.HeWhoHungers.class));
         cards.add(new SetCardInfo("Hideous Laughter", 115, Rarity.UNCOMMON, mage.cards.h.HideousLaughter.class));
         cards.add(new SetCardInfo("Hikari, Twilight Guardian", 12, Rarity.RARE, mage.cards.h.HikariTwilightGuardian.class));
         cards.add(new SetCardInfo("Hinder", 65, Rarity.UNCOMMON, mage.cards.h.Hinder.class));
-        cards.add(new SetCardInfo("Hisoka, Minamo Sensei", 66, Rarity.RARE, mage.cards.h.HisokaMinamoSensei.class));
         cards.add(new SetCardInfo("Hisoka's Defiance", 67, Rarity.COMMON, mage.cards.h.HisokasDefiance.class));
         cards.add(new SetCardInfo("Hisoka's Guard", 68, Rarity.COMMON, mage.cards.h.HisokasGuard.class));
+        cards.add(new SetCardInfo("Hisoka, Minamo Sensei", 66, Rarity.RARE, mage.cards.h.HisokaMinamoSensei.class));
         cards.add(new SetCardInfo("Hold the Line", 13, Rarity.RARE, mage.cards.h.HoldTheLine.class));
         cards.add(new SetCardInfo("Honden of Cleansing Fire", 14, Rarity.UNCOMMON, mage.cards.h.HondenOfCleansingFire.class));
         cards.add(new SetCardInfo("Honden of Infinite Rage", 172, Rarity.UNCOMMON, mage.cards.h.HondenOfInfiniteRage.class));
@@ -130,7 +130,7 @@ public class ChampionsOfKamigawa extends ExpansionSet {
         cards.add(new SetCardInfo("Indomitable Will", 17, Rarity.COMMON, mage.cards.i.IndomitableWill.class));
         cards.add(new SetCardInfo("Initiate of Blood", 173, Rarity.UNCOMMON, mage.cards.i.InitiateOfBlood.class));
         cards.add(new SetCardInfo("Innocence Kami", 18, Rarity.UNCOMMON, mage.cards.i.InnocenceKami.class));
-        cards.add(new SetCardInfo("Isamaru, Hound of Konda", 19, Rarity.RARE, mage.cards.i.IsamaruHoundofKonda.class));
+        cards.add(new SetCardInfo("Isamaru, Hound of Konda", 19, Rarity.RARE, mage.cards.i.IsamaruHoundOfKonda.class));
         cards.add(new SetCardInfo("Island", 291, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 292, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 293, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
@@ -167,11 +167,11 @@ public class ChampionsOfKamigawa extends ExpansionSet {
         cards.add(new SetCardInfo("Kodama's Might", 224, Rarity.COMMON, mage.cards.k.KodamasMight.class));
         cards.add(new SetCardInfo("Kodama's Reach", 225, Rarity.COMMON, mage.cards.k.KodamasReach.class));
         cards.add(new SetCardInfo("Kokusho, the Evening Star", 122, Rarity.RARE, mage.cards.k.KokushoTheEveningStar.class));
-        cards.add(new SetCardInfo("Konda, Lord of Eiganjo", 30, Rarity.RARE, mage.cards.k.KondaLordOfEiganjo.class));
         cards.add(new SetCardInfo("Konda's Banner", 259, Rarity.RARE, mage.cards.k.KondasBanner.class));
         cards.add(new SetCardInfo("Konda's Hatamoto", 31, Rarity.UNCOMMON, mage.cards.k.KondasHatamoto.class));
-        cards.add(new SetCardInfo("Kumano, Master Yamabushi", 176, Rarity.RARE, mage.cards.k.KumanoMasterYamabushi.class));
+        cards.add(new SetCardInfo("Konda, Lord of Eiganjo", 30, Rarity.RARE, mage.cards.k.KondaLordOfEiganjo.class));
         cards.add(new SetCardInfo("Kumano's Pupils", 177, Rarity.UNCOMMON, mage.cards.k.KumanosPupils.class));
+        cards.add(new SetCardInfo("Kumano, Master Yamabushi", 176, Rarity.RARE, mage.cards.k.KumanoMasterYamabushi.class));
         cards.add(new SetCardInfo("Kuro, Pitlord", 123, Rarity.RARE, mage.cards.k.KuroPitlord.class));
         cards.add(new SetCardInfo("Kusari-Gama", 260, Rarity.RARE, mage.cards.k.KusariGama.class));
         cards.add(new SetCardInfo("Lantern Kami", 32, Rarity.COMMON, mage.cards.l.LanternKami.class));
@@ -280,9 +280,9 @@ public class ChampionsOfKamigawa extends ExpansionSet {
         cards.add(new SetCardInfo("Soratami Savant", 90, Rarity.UNCOMMON, mage.cards.s.SoratamiSavant.class));
         cards.add(new SetCardInfo("Soratami Seer", 91, Rarity.UNCOMMON, mage.cards.s.SoratamiSeer.class));
         cards.add(new SetCardInfo("Sosuke, Son of Seshiro", 244, Rarity.UNCOMMON, mage.cards.s.SosukeSonOfSeshiro.class));
+        cards.add(new SetCardInfo("Soul of Magma", 189, Rarity.COMMON, mage.cards.s.SoulOfMagma.class));
         cards.add(new SetCardInfo("Soulblast", 190, Rarity.RARE, mage.cards.s.Soulblast.class));
         cards.add(new SetCardInfo("Soulless Revival", 144, Rarity.COMMON, mage.cards.s.SoullessRevival.class));
-        cards.add(new SetCardInfo("Soul of Magma", 189, Rarity.COMMON, mage.cards.s.SoulOfMagma.class));
         cards.add(new SetCardInfo("Squelch", 92, Rarity.UNCOMMON, mage.cards.s.Squelch.class));
         cards.add(new SetCardInfo("Stone Rain", 191, Rarity.COMMON, mage.cards.s.StoneRain.class));
         cards.add(new SetCardInfo("Strange Inversion", 192, Rarity.UNCOMMON, mage.cards.s.StrangeInversion.class));
@@ -302,7 +302,7 @@ public class ChampionsOfKamigawa extends ExpansionSet {
         cards.add(new SetCardInfo("The Unspeakable", 98, Rarity.RARE, mage.cards.t.TheUnspeakable.class));
         cards.add(new SetCardInfo("Thief of Hope", 147, Rarity.UNCOMMON, mage.cards.t.ThiefOfHope.class));
         cards.add(new SetCardInfo("Thoughtbind", 96, Rarity.COMMON, mage.cards.t.Thoughtbind.class));
-        cards.add(new SetCardInfo("Thousand-legged Kami", 246, Rarity.UNCOMMON, mage.cards.t.ThousandleggedKami.class));
+        cards.add(new SetCardInfo("Thousand-legged Kami", 246, Rarity.UNCOMMON, mage.cards.t.ThousandLeggedKami.class));
         cards.add(new SetCardInfo("Through the Breach", 193, Rarity.RARE, mage.cards.t.ThroughTheBreach.class));
         cards.add(new SetCardInfo("Tide of War", 194, Rarity.RARE, mage.cards.t.TideOfWar.class));
         cards.add(new SetCardInfo("Time of Need", 247, Rarity.UNCOMMON, mage.cards.t.TimeOfNeed.class));
@@ -329,5 +329,4 @@ public class ChampionsOfKamigawa extends ExpansionSet {
         cards.add(new SetCardInfo("Yosei, the Morning Star", 50, Rarity.RARE, mage.cards.y.YoseiTheMorningStar.class));
         cards.add(new SetCardInfo("Zo-Zu the Punisher", 200, Rarity.RARE, mage.cards.z.ZoZuThePunisher.class));
     }
-
 }

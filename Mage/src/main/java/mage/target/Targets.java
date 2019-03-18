@@ -1,36 +1,14 @@
-/*
- * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.target;
 
 import mage.abilities.Ability;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.target.targetpointer.FirstTargetPointer;
+import mage.target.targetpointer.SecondTargetPointer;
+import mage.target.targetpointer.TargetPointer;
+import mage.target.targetpointer.ThirdTargetPointer;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,12 +16,17 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class Targets extends ArrayList<Target> {
 
+    private static final Logger logger = Logger.getLogger(Targets.class);
+
     public Targets() {
+    }
+
+    public Targets(Target target) {
+        this.add(target);
     }
 
     public Targets(final Targets targets) {
@@ -81,7 +64,7 @@ public class Targets extends ArrayList<Target> {
         return true;
     }
 
-    public boolean chooseTargets(Outcome outcome, UUID playerId, Ability source, boolean noMana, Game game) {
+    public boolean chooseTargets(Outcome outcome, UUID playerId, Ability source, boolean noMana, Game game, boolean canCancel) {
         if (this.size() > 0) {
             if (!canChoose(source.getSourceId(), playerId, game)) {
                 return false;
@@ -90,12 +73,23 @@ public class Targets extends ArrayList<Target> {
             while (!isChosen()) {
                 Target target = this.getUnchosen().get(0);
                 UUID targetController = playerId;
-                if (target.getTargetController() != null) { // some targets can have controller different than ability controller
+
+                // some targets can have controller different than ability controller
+                if (target.getTargetController() != null) {
                     targetController = target.getTargetController();
                 }
-                if (noMana) { // if cast without mana (e.g. by suspend you may not be able to cancel the casting if you are able to cast it
+
+                // if cast without mana (e.g. by suspend you may not be able to cancel the casting if you are able to cast it
+                if (noMana) {
                     target.setRequired(true);
                 }
+
+                // can be cancel by user
+                if (canCancel) {
+                    target.setRequired(false);
+                }
+
+                // make response checks
                 if (!target.chooseTarget(outcome, targetController, source, game)) {
                     return false;
                 }
@@ -123,7 +117,7 @@ public class Targets extends ArrayList<Target> {
      * Checks if there are enough targets that can be chosen. Should only be
      * used for Ability targets since this checks for protection, shroud etc.
      *
-     * @param sourceId - the target event source
+     * @param sourceId           - the target event source
      * @param sourceControllerId - controller of the target event source
      * @param game
      * @return - true if enough valid targets exist
@@ -151,6 +145,39 @@ public class Targets extends ArrayList<Target> {
         }
         return null;
     }
+
+    public Target getEffectTarget(TargetPointer targetPointer) {
+        boolean proccessed = false;
+
+        if (targetPointer instanceof FirstTargetPointer) {
+            proccessed = true;
+            if (this.size() > 0) {
+                return this.get(0);
+            }
+        }
+
+        if (targetPointer instanceof SecondTargetPointer) {
+            proccessed = true;
+            if (this.size() > 1) {
+                return this.get(1);
+            }
+        }
+
+        if (targetPointer instanceof ThirdTargetPointer) {
+            proccessed = true;
+            if (this.size() > 2) {
+                return this.get(2);
+            }
+        }
+
+        if (!proccessed) {
+            logger.error("Unknown target pointer " + (targetPointer != null ? targetPointer : "null"), new Throwable());
+            // TODO: add other target types?
+        }
+
+        return null;
+    }
+
     public Targets copy() {
         return new Targets(this);
     }

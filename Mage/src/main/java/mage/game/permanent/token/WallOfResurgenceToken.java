@@ -5,7 +5,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-public class WallOfResurgenceToken extends TokenImpl {
+public final class WallOfResurgenceToken extends TokenImpl {
 
     public WallOfResurgenceToken() {
         super("", "0/0 Elemental creature with haste");

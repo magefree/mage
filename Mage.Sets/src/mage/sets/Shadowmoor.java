@@ -1,42 +1,14 @@
-/*
- * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.cards.t.Torture;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author North
  */
-public class Shadowmoor extends ExpansionSet {
+public final class Shadowmoor extends ExpansionSet {
 
     private static final Shadowmoor instance = new Shadowmoor();
 
@@ -89,17 +61,17 @@ public class Shadowmoor extends ExpansionSet {
         cards.add(new SetCardInfo("Consign to Dream", 32, Rarity.COMMON, mage.cards.c.ConsignToDream.class));
         cards.add(new SetCardInfo("Corrosive Mentor", 61, Rarity.UNCOMMON, mage.cards.c.CorrosiveMentor.class));
         cards.add(new SetCardInfo("Corrupt", 62, Rarity.UNCOMMON, mage.cards.c.Corrupt.class));
-        cards.add(new SetCardInfo("Counterbore", 33, Rarity.UNCOMMON, mage.cards.c.Counterbore.class));
+        cards.add(new SetCardInfo("Counterbore", 33, Rarity.RARE, mage.cards.c.Counterbore.class));
         cards.add(new SetCardInfo("Crabapple Cohort", 109, Rarity.COMMON, mage.cards.c.CrabappleCohort.class));
         cards.add(new SetCardInfo("Cragganwick Cremator", 87, Rarity.RARE, mage.cards.c.CragganwickCremator.class));
-        cards.add(new SetCardInfo("Crimson Wisps", 88, Rarity.UNCOMMON, mage.cards.c.CrimsonWisps.class));
+        cards.add(new SetCardInfo("Crimson Wisps", 88, Rarity.COMMON, mage.cards.c.CrimsonWisps.class));
         cards.add(new SetCardInfo("Crowd of Cinders", 63, Rarity.UNCOMMON, mage.cards.c.CrowdOfCinders.class));
         cards.add(new SetCardInfo("Cultbrand Cinder", 182, Rarity.COMMON, mage.cards.c.CultbrandCinder.class));
-        cards.add(new SetCardInfo("Cursecatcher", 34, Rarity.UNCOMMON, mage.cards.c.Cursecatcher.class));
         cards.add(new SetCardInfo("Curse of Chains", 139, Rarity.COMMON, mage.cards.c.CurseOfChains.class));
+        cards.add(new SetCardInfo("Cursecatcher", 34, Rarity.UNCOMMON, mage.cards.c.Cursecatcher.class));
         cards.add(new SetCardInfo("Dawnglow Infusion", 225, Rarity.UNCOMMON, mage.cards.d.DawnglowInfusion.class));
-        cards.add(new SetCardInfo("Deepchannel Mentor", 35, Rarity.UNCOMMON, mage.cards.d.DeepchannelMentor.class));
         cards.add(new SetCardInfo("Deep-Slumber Titan", 89, Rarity.RARE, mage.cards.d.DeepSlumberTitan.class));
+        cards.add(new SetCardInfo("Deepchannel Mentor", 35, Rarity.UNCOMMON, mage.cards.d.DeepchannelMentor.class));
         cards.add(new SetCardInfo("Demigod of Revenge", 183, Rarity.RARE, mage.cards.d.DemigodOfRevenge.class));
         cards.add(new SetCardInfo("Deus of Calamity", 204, Rarity.RARE, mage.cards.d.DeusOfCalamity.class));
         cards.add(new SetCardInfo("Devoted Druid", 110, Rarity.COMMON, mage.cards.d.DevotedDruid.class));
@@ -195,9 +167,9 @@ public class Shadowmoor extends ExpansionSet {
         cards.add(new SetCardInfo("Lockjaw Snapper", 255, Rarity.UNCOMMON, mage.cards.l.LockjawSnapper.class));
         cards.add(new SetCardInfo("Lurebound Scarecrow", 256, Rarity.UNCOMMON, mage.cards.l.LureboundScarecrow.class));
         cards.add(new SetCardInfo("Madblind Mountain", 274, Rarity.UNCOMMON, mage.cards.m.MadblindMountain.class));
+        cards.add(new SetCardInfo("Mana Reflection", 122, Rarity.RARE, mage.cards.m.ManaReflection.class));
         cards.add(new SetCardInfo("Manaforge Cinder", 191, Rarity.COMMON, mage.cards.m.ManaforgeCinder.class));
         cards.add(new SetCardInfo("Manamorphose", 211, Rarity.COMMON, mage.cards.m.Manamorphose.class));
-        cards.add(new SetCardInfo("Mana Reflection", 122, Rarity.RARE, mage.cards.m.ManaReflection.class));
         cards.add(new SetCardInfo("Mass Calcify", 12, Rarity.RARE, mage.cards.m.MassCalcify.class));
         cards.add(new SetCardInfo("Medicine Runner", 230, Rarity.COMMON, mage.cards.m.MedicineRunner.class));
         cards.add(new SetCardInfo("Memory Plunder", 169, Rarity.RARE, mage.cards.m.MemoryPlunder.class));
@@ -225,8 +197,8 @@ public class Shadowmoor extends ExpansionSet {
         cards.add(new SetCardInfo("Niveous Wisps", 15, Rarity.COMMON, mage.cards.n.NiveousWisps.class));
         cards.add(new SetCardInfo("Nurturer Initiate", 124, Rarity.COMMON, mage.cards.n.NurturerInitiate.class));
         cards.add(new SetCardInfo("Old Ghastbark", 232, Rarity.COMMON, mage.cards.o.OldGhastbark.class));
-        cards.add(new SetCardInfo("Oona, Queen of the Fae", 172, Rarity.RARE, mage.cards.o.OonaQueenOfTheFae.class));
         cards.add(new SetCardInfo("Oona's Gatewarden", 173, Rarity.COMMON, mage.cards.o.OonasGatewarden.class));
+        cards.add(new SetCardInfo("Oona, Queen of the Fae", 172, Rarity.RARE, mage.cards.o.OonaQueenOfTheFae.class));
         cards.add(new SetCardInfo("Oracle of Nectars", 233, Rarity.RARE, mage.cards.o.OracleOfNectars.class));
         cards.add(new SetCardInfo("Order of Whiteclay", 16, Rarity.RARE, mage.cards.o.OrderOfWhiteclay.class));
         cards.add(new SetCardInfo("Oversoul of Dusk", 234, Rarity.RARE, mage.cards.o.OversoulOfDusk.class));
@@ -323,7 +295,7 @@ public class Shadowmoor extends ExpansionSet {
         cards.add(new SetCardInfo("Toil to Renown", 130, Rarity.COMMON, mage.cards.t.ToilToRenown.class));
         cards.add(new SetCardInfo("Torpor Dust", 177, Rarity.COMMON, mage.cards.t.TorporDust.class));
         cards.add(new SetCardInfo("Torrent of Souls", 199, Rarity.UNCOMMON, mage.cards.t.TorrentOfSouls.class));
-        cards.add(new SetCardInfo("Torture", 80, Rarity.COMMON, Torture.class));
+        cards.add(new SetCardInfo("Torture", 80, Rarity.COMMON, mage.cards.t.Torture.class));
         cards.add(new SetCardInfo("Tower Above", 131, Rarity.UNCOMMON, mage.cards.t.TowerAbove.class));
         cards.add(new SetCardInfo("Traitor's Roar", 200, Rarity.COMMON, mage.cards.t.TraitorsRoar.class));
         cards.add(new SetCardInfo("Trip Noose", 266, Rarity.UNCOMMON, mage.cards.t.TripNoose.class));
@@ -340,8 +312,8 @@ public class Shadowmoor extends ExpansionSet {
         cards.add(new SetCardInfo("Wheel of Sun and Moon", 243, Rarity.RARE, mage.cards.w.WheelOfSunAndMoon.class));
         cards.add(new SetCardInfo("Whimwader", 54, Rarity.COMMON, mage.cards.w.Whimwader.class));
         cards.add(new SetCardInfo("Wicker Warcrawler", 269, Rarity.UNCOMMON, mage.cards.w.WickerWarcrawler.class));
-        cards.add(new SetCardInfo("Wildslayer Elves", 133, Rarity.COMMON, mage.cards.w.WildslayerElves.class));
         cards.add(new SetCardInfo("Wild Swing", 108, Rarity.UNCOMMON, mage.cards.w.WildSwing.class));
+        cards.add(new SetCardInfo("Wildslayer Elves", 133, Rarity.COMMON, mage.cards.w.WildslayerElves.class));
         cards.add(new SetCardInfo("Wilt-Leaf Cavaliers", 244, Rarity.UNCOMMON, mage.cards.w.WiltLeafCavaliers.class));
         cards.add(new SetCardInfo("Wilt-Leaf Liege", 245, Rarity.RARE, mage.cards.w.WiltLeafLiege.class));
         cards.add(new SetCardInfo("Windbrisk Raptor", 26, Rarity.RARE, mage.cards.w.WindbriskRaptor.class));

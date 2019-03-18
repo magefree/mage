@@ -10,7 +10,7 @@ import mage.constants.SubType;
 /**
  * @author Stravant
  */
-public class Colossapede extends CardImpl {
+public final class Colossapede extends CardImpl {
 
     public Colossapede(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

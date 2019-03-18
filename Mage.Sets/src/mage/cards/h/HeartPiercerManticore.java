@@ -1,64 +1,35 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.SendOptionUsedEventEffect;
 import mage.abilities.keyword.EmbalmAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
  * @author fireshoes
  */
-public class HeartPiercerManticore extends CardImpl {
+public final class HeartPiercerManticore extends CardImpl {
 
     public HeartPiercerManticore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
@@ -67,13 +38,11 @@ public class HeartPiercerManticore extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 
-        // When Heart-Piercer Manticore enters the battlefield, you may sacrifice another creature.
-        Ability firstAbility = new EntersBattlefieldTriggeredAbility(new HeartPiercerManticoreSacrificeEffect(), true);
-        this.addAbility(firstAbility);
-        // When you do, Heart-Piercer Manticore deals damage equal to that creature's power to target creature or player.
-        Ability secondAbility = new HeartPiercerManticoreSacrificeTriggeredAbility(firstAbility.getOriginalId());
-        secondAbility.addTarget(new TargetCreatureOrPlayer());
-        this.addAbility(secondAbility);
+        // When Heart-Piercer Manticore enters the battlefield, you may sacrifice another creature. When you do, Heart-Piercer Manticore deals damage equal to that creature's power to any target.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new HeartPiercerManticoreSacrificeEffect(), true
+        ));
+
         // Embalm {5}{R}
         this.addAbility(new EmbalmAbility(new ManaCostsImpl("{5}{R}"), this));
 
@@ -93,7 +62,8 @@ class HeartPiercerManticoreSacrificeEffect extends OneShotEffect {
 
     public HeartPiercerManticoreSacrificeEffect() {
         super(Outcome.Damage);
-        this.staticText = "you may sacrifice another creature";
+        this.staticText = "sacrifice another creature. When you do, "
+                + "{this} deals damage equal to that creature's power to any target";
     }
 
     public HeartPiercerManticoreSacrificeEffect(final HeartPiercerManticoreSacrificeEffect effect) {
@@ -113,8 +83,11 @@ class HeartPiercerManticoreSacrificeEffect extends OneShotEffect {
             if (controller.choose(outcome, target, source.getSourceId(), game)) {
                 Permanent toSacrifice = game.getPermanent(target.getFirstTarget());
                 if (toSacrifice != null) {
-                    toSacrifice.sacrifice(source.getSourceId(), game);
-                    return new SendOptionUsedEventEffect(toSacrifice.getPower().getValue()).apply(game, source);
+                    DelayedTriggeredAbility trigger = new HeartPiercerManticoreReflexiveTriggeredAbility(toSacrifice.getPower().getValue());
+                    if (toSacrifice.sacrifice(source.getSourceId(), game)) {
+                        game.addDelayedTriggeredAbility(trigger, source);
+                        return new SendOptionUsedEventEffect().apply(game, source);
+                    }
                 }
             }
             return true;
@@ -123,44 +96,36 @@ class HeartPiercerManticoreSacrificeEffect extends OneShotEffect {
     }
 }
 
-class HeartPiercerManticoreSacrificeTriggeredAbility extends TriggeredAbilityImpl {
+class HeartPiercerManticoreReflexiveTriggeredAbility extends DelayedTriggeredAbility {
 
-    private final UUID relatedTriggerdAbilityOriginalId;
-
-    public HeartPiercerManticoreSacrificeTriggeredAbility(UUID relatedTriggerdAbilityOriginalId) {
-        super(Zone.BATTLEFIELD, new InfoEffect("{this} deals damage equal to that creature's power to target creature or player"));
-        this.relatedTriggerdAbilityOriginalId = relatedTriggerdAbilityOriginalId;
+    public HeartPiercerManticoreReflexiveTriggeredAbility(int damage) {
+        super(new DamageTargetEffect(damage), Duration.OneUse, true);
+        this.addTarget(new TargetAnyTarget());
     }
 
-    public HeartPiercerManticoreSacrificeTriggeredAbility(final HeartPiercerManticoreSacrificeTriggeredAbility ability) {
+    public HeartPiercerManticoreReflexiveTriggeredAbility(final HeartPiercerManticoreReflexiveTriggeredAbility ability) {
         super(ability);
-        this.relatedTriggerdAbilityOriginalId = ability.relatedTriggerdAbilityOriginalId;
     }
 
     @Override
-    public HeartPiercerManticoreSacrificeTriggeredAbility copy() {
-        return new HeartPiercerManticoreSacrificeTriggeredAbility(this);
+    public HeartPiercerManticoreReflexiveTriggeredAbility copy() {
+        return new HeartPiercerManticoreReflexiveTriggeredAbility(this);
     }
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.OPTION_USED;
+        return event.getType() == GameEvent.EventType.OPTION_USED;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getPlayerId().equals(this.getControllerId())
-                && event.getTargetId().equals(relatedTriggerdAbilityOriginalId)
-                && event.getSourceId().equals(getSourceId())) {
-            getEffects().clear();
-            getEffects().add(new DamageTargetEffect(event.getAmount()));
-            return true;
-        }
-        return false;
+        return event.getPlayerId().equals(this.getControllerId())
+                && event.getSourceId().equals(this.getSourceId());
     }
 
     @Override
     public String getRule() {
-        return "When you do, {this} deals damage equal to that creature's power to target creature or player.";
+        return "When you sacrifice a creature to {this}'s ability, "
+                + "{this} deals damage equal to that creature's power to any target";
     }
 }

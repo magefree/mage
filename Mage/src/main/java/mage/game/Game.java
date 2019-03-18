@@ -1,34 +1,5 @@
-/*
- * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.game;
 
-import java.io.Serializable;
-import java.util.*;
 import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -68,6 +39,10 @@ import mage.players.PlayerList;
 import mage.players.Players;
 import mage.util.MessageToClient;
 import mage.util.functions.ApplyToPermanent;
+
+import java.io.Serializable;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public interface Game extends MageItem, Serializable {
 
@@ -122,6 +97,7 @@ public interface Game extends MageItem, Serializable {
 
     Map<Zone, HashMap<UUID, MageObject>> getLKI();
 
+    // Result must be checked for null. Possible errors search pattern: (\S*) = game.getCard.+\n(?!.+\1 != null)
     Card getCard(UUID cardId);
 
     Optional<Ability> getAbility(UUID abilityId, UUID sourceId);
@@ -130,28 +106,49 @@ public interface Game extends MageItem, Serializable {
 
     void addPlayer(Player player, Deck deck);
 
+    // Result must be checked for null. Possible errors search pattern: (\S*) = game.getPlayer.+\n(?!.+\1 != null)
     Player getPlayer(UUID playerId);
+
+    Player getPlayerOrPlaneswalkerController(UUID playerId);
 
     Players getPlayers();
 
     PlayerList getPlayerList();
 
     /**
-     * Returns a Set of opponents in range for the given playerId
+     * Returns a Set of opponents in range for the given playerId This return
+     * also a player, that has dies this turn.
      *
      * @param playerId
      * @return
      */
-    Set<UUID> getOpponents(UUID playerId);
+    default Set<UUID> getOpponents(UUID playerId) {
+        Player player = getPlayer(playerId);
+        return player.getInRange().stream()
+                .filter(opponentId -> !opponentId.equals(playerId))
+                .collect(Collectors.toSet());
+
+    }
+
+
+    default boolean isActivePlayer(UUID playerId) {
+        return getActivePlayerId().equals(playerId);
+    }
 
     /**
-     * Checks if the given playerToCheckId is an opponent of player
+     * Checks if the given playerToCheckId is an opponent of player As long as
+     * no team formats are implemented, this method returns always true for each
+     * playerId not equal to the player it is checked for. Also if this player
+     * is out of range. This method can't handle that only players in range are
+     * processed because it can only return TRUE or FALSE.
      *
      * @param player
      * @param playerToCheckId
      * @return
      */
-    boolean isOpponent(Player player, UUID playerToCheckId);
+    default boolean isOpponent(Player player, UUID playerToCheckId) {
+        return !player.getId().equals(playerToCheckId);
+    }
 
     Turn getTurn();
 
@@ -298,9 +295,9 @@ public interface Game extends MageItem, Serializable {
     /**
      * Creates and fires an damage prevention event
      *
-     * @param damageEvent damage event that will be replaced (instanceof check
-     * will be done)
-     * @param source ability that's the source of the prevention effect
+     * @param damageEvent     damage event that will be replaced (instanceof check
+     *                        will be done)
+     * @param source          ability that's the source of the prevention effect
      * @param game
      * @param amountToPrevent max preventable amount
      * @return true prevention was successfull / false prevention was replaced
@@ -310,12 +307,12 @@ public interface Game extends MageItem, Serializable {
     /**
      * Creates and fires an damage prevention event
      *
-     * @param event damage event that will be replaced (instanceof check will be
-     * done)
-     * @param source ability that's the source of the prevention effect
+     * @param event            damage event that will be replaced (instanceof check will be
+     *                         done)
+     * @param source           ability that's the source of the prevention effect
      * @param game
      * @param preventAllDamage true if there is no limit to the damage that can
-     * be prevented
+     *                         be prevented
      * @return true prevention was successfull / false prevention was replaced
      */
     PreventionEffectData preventDamage(GameEvent event, Ability source, Game game, boolean preventAllDamage);
@@ -402,6 +399,8 @@ public interface Game extends MageItem, Serializable {
 
     void playPriority(UUID activePlayerId, boolean resuming);
 
+    void resetControlAfterSpellResolve(UUID topId);
+
     boolean endTurn(Ability source);
 
     int doAction(MageAction action);
@@ -469,4 +468,8 @@ public interface Game extends MageItem, Serializable {
     UUID getMonarchId();
 
     void setMonarchId(Ability source, UUID monarchId);
+
+    int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable);
+
+    int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects);
 }

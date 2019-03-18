@@ -1,13 +1,13 @@
 package mage.cards.k;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.AnyPlayerControlsCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.HexproofFromBlackAbility;
 import mage.abilities.keyword.HexproofFromWhiteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -18,9 +18,7 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
-import java.util.UUID;
-
-public class KnightOfMalice extends CardImpl {
+public final class KnightOfMalice extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("white permanent");
 
@@ -37,26 +35,20 @@ public class KnightOfMalice extends CardImpl {
         addAbility(FirstStrikeAbility.getInstance());
         addAbility(HexproofFromWhiteAbility.getInstance());
 
-
         //Knight of Malice gets +1/+0 as long as any player controls a white permanent.
         addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-                new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield),
+                new BoostSourceEffect(1, 0, Duration.WhileOnBattlefield),
                 new AnyPlayerControlsCondition(filter),
                 "{this} gets +1/+0 as long as any player controls a white permanent.")));
 
-
-
-
-
     }
 
-    public KnightOfMalice(final KnightOfMalice knightOfGrace){
+    public KnightOfMalice(final KnightOfMalice knightOfGrace) {
         super(knightOfGrace);
     }
 
-    public KnightOfMalice copy(){
+    public KnightOfMalice copy() {
         return new KnightOfMalice(this);
     }
-
 
 }

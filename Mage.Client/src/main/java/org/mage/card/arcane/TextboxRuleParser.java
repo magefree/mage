@@ -22,7 +22,7 @@ public final class TextboxRuleParser {
 
     private static final Logger LOGGER = Logger.getLogger(CardPanel.class);
 
-    private static final Pattern BasicManaAbility = Pattern.compile("\\{T\\}: Add \\{(\\w)\\} to your mana pool\\.");
+    private static final Pattern BasicManaAbility = Pattern.compile("\\{T\\}: Add \\{(\\w)\\}\\.");
     private static final Pattern LevelAbilityPattern = Pattern.compile("Level (\\d+)-?(\\d*)(\\+?)");
     private static final Pattern LoyaltyAbilityPattern = Pattern.compile("^(\\+|\\-)(\\d+|X): ");
     private static final Pattern SimpleKeywordPattern = Pattern.compile("^(\\w+( \\w+)?)\\s*(\\([^\\)]*\\))?\\s*$");

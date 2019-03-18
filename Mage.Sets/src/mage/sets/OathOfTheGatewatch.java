@@ -9,7 +9,6 @@ import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import mage.cards.w.Wastes;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
@@ -17,10 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author fireshoes
  */
-public class OathOfTheGatewatch extends ExpansionSet {
+public final class OathOfTheGatewatch extends ExpansionSet {
 
     private static final OathOfTheGatewatch instance = new OathOfTheGatewatch();
 
@@ -35,13 +33,14 @@ public class OathOfTheGatewatch extends ExpansionSet {
         this.blockName = "Battle for Zendikar";
         this.parentSet = BattleForZendikar.getInstance();
         this.hasBoosters = true;
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
         this.ratioBoosterSpecialLand = 48;
+
         cards.add(new SetCardInfo("Abstruse Interference", 40, Rarity.COMMON, mage.cards.a.AbstruseInterference.class));
         cards.add(new SetCardInfo("Affa Protector", 14, Rarity.COMMON, mage.cards.a.AffaProtector.class));
         cards.add(new SetCardInfo("Akoum Flameseeker", 101, Rarity.COMMON, mage.cards.a.AkoumFlameseeker.class));
@@ -218,10 +217,10 @@ public class OathOfTheGatewatch extends ExpansionSet {
         cards.add(new SetCardInfo("Wandering Fumarole", 182, Rarity.RARE, mage.cards.w.WanderingFumarole.class));
         cards.add(new SetCardInfo("Warden of Geometries", 11, Rarity.COMMON, mage.cards.w.WardenOfGeometries.class));
         cards.add(new SetCardInfo("Warping Wail", 12, Rarity.UNCOMMON, mage.cards.w.WarpingWail.class));
-        cards.add(new SetCardInfo("Wastes", "183a", Rarity.LAND, Wastes.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Wastes", "183b", Rarity.LAND, Wastes.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Wastes", "184a", Rarity.LAND, Wastes.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Wastes", "184b", Rarity.LAND, Wastes.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Wastes", "183a", Rarity.LAND, mage.cards.w.Wastes.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wastes", "183b", Rarity.LAND, mage.cards.w.Wastes.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Wastes", "184a", Rarity.LAND, mage.cards.w.Wastes.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wastes", "184b", Rarity.LAND, mage.cards.w.Wastes.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Weapons Trainer", 160, Rarity.UNCOMMON, mage.cards.w.WeaponsTrainer.class));
         cards.add(new SetCardInfo("Witness the End", 82, Rarity.COMMON, mage.cards.w.WitnessTheEnd.class));
         cards.add(new SetCardInfo("World Breaker", 126, Rarity.MYTHIC, mage.cards.w.WorldBreaker.class));

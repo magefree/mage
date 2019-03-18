@@ -8,9 +8,9 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-public class AngelToken extends TokenImpl {
+public final class AngelToken extends TokenImpl {
 
-    final static private List<String> tokenImageSets = new ArrayList<>();
+    static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
         tokenImageSets.addAll(Arrays.asList("AVR", "C14", "CFX", "GTC", "ISD", "M14", "ORI", "SOI", "ZEN", "C15", "MM3"));

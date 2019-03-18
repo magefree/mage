@@ -8,7 +8,7 @@ import mage.constants.SetType;
  *
  * @author North
  */
-public class LimitedEditionBeta extends ExpansionSet {
+public final class LimitedEditionBeta extends ExpansionSet {
 
     private static final LimitedEditionBeta instance = new LimitedEditionBeta();
 
@@ -89,6 +89,7 @@ public class LimitedEditionBeta extends ExpansionSet {
         cards.add(new SetCardInfo("Disrupting Scepter", 243, Rarity.RARE, mage.cards.d.DisruptingScepter.class));
         cards.add(new SetCardInfo("Dragon Whelp", 142, Rarity.UNCOMMON, mage.cards.d.DragonWhelp.class));
         cards.add(new SetCardInfo("Drain Life", 106, Rarity.COMMON, mage.cards.d.DrainLife.class));
+        cards.add(new SetCardInfo("Drain Power", 57, Rarity.RARE, mage.cards.d.DrainPower.class));
         cards.add(new SetCardInfo("Drudge Skeletons", 107, Rarity.COMMON, mage.cards.d.DrudgeSkeletons.class));
         cards.add(new SetCardInfo("Dwarven Demolition Team", 143, Rarity.UNCOMMON, mage.cards.d.DwarvenDemolitionTeam.class));
         cards.add(new SetCardInfo("Dwarven Warriors", 144, Rarity.COMMON, mage.cards.d.DwarvenWarriors.class));
@@ -315,6 +316,7 @@ public class LimitedEditionBeta extends ExpansionSet {
         cards.add(new SetCardInfo("Will-o'-the-Wisp", 136, Rarity.RARE, mage.cards.w.WillOTheWisp.class));
         cards.add(new SetCardInfo("Winter Orb", 276, Rarity.RARE, mage.cards.w.WinterOrb.class));
         cards.add(new SetCardInfo("Wooden Sphere", 277, Rarity.UNCOMMON, mage.cards.w.WoodenSphere.class));
+        cards.add(new SetCardInfo("Word of Command", 137, Rarity.RARE, mage.cards.w.WordOfCommand.class));
         cards.add(new SetCardInfo("Wrath of God", 46, Rarity.RARE, mage.cards.w.WrathOfGod.class));
         cards.add(new SetCardInfo("Zombie Master", 138, Rarity.RARE, mage.cards.z.ZombieMaster.class));
     }

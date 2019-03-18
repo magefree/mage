@@ -1,42 +1,15 @@
-/*
- * Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.deck;
 
 import java.util.*;
-import java.util.Map.Entry;
-import mage.abilities.common.CanBeYourCommanderAbility;
+import mage.abilities.Ability;
 import mage.abilities.keyword.PartnerAbility;
+import mage.abilities.keyword.PartnerWithAbility;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
-import mage.constants.SetType;
 import mage.filter.FilterMana;
 
 /**
@@ -47,13 +20,15 @@ public class FreeformCommander extends Constructed {
 
     protected List<String> bannedCommander = new ArrayList<>();
     private static final Map<String, Integer> pdAllowed = new HashMap<>();
-    private static boolean setupAllowed = false;
 
     public FreeformCommander() {
         this("Freeform Commander");
         for (ExpansionSet set : Sets.getInstance().values()) {
             setCodes.add(set.getCode());
         }
+
+        // no banned cards
+        this.banned.clear();
     }
 
     public FreeformCommander(String name) {
@@ -70,7 +45,6 @@ public class FreeformCommander extends Constructed {
             valid = false;
         }
 
-        List<String> basicLandNames = new ArrayList<>(Arrays.asList("Forest", "Island", "Mountain", "Swamp", "Plains", "Wastes"));
         Map<String, Integer> counts = new HashMap<>();
         countCards(counts, deck.getCards());
         countCards(counts, deck.getSideboard());
@@ -90,15 +64,29 @@ public class FreeformCommander extends Constructed {
             invalid.put("Commander", "Sideboard must contain only the commander(s)");
             valid = false;
         } else {
+            Set<String> commanderNames = new HashSet<>();
             for (Card commander : deck.getSideboard()) {
-                if (!(commander.isCreature() ||
-                    commander.isLegendary())) {
+                commanderNames.add(commander.getName());
+            }
+            for (Card commander : deck.getSideboard()) {
+                if (!(commander.isCreature()
+                        || commander.isLegendary())) {
                     invalid.put("Commander", "For Freeform Commander, the commander must be a creature or be legendary. Yours was: " + commander.getName());
                     valid = false;
                 }
                 if (deck.getSideboard().size() == 2 && !commander.getAbilities().contains(PartnerAbility.getInstance())) {
-                    invalid.put("Commander", "Commander without Partner (" + commander.getName() + ')');
-                    valid = false;
+                    boolean partnersWith = false;
+                    for (Ability ability : commander.getAbilities()) {
+                        if (ability instanceof PartnerWithAbility
+                                && commanderNames.contains(((PartnerWithAbility) ability).getPartnerName())) {
+                            partnersWith = true;
+                            break;
+                        }
+                    }
+                    if (!partnersWith) {
+                        invalid.put("Commander", "Commander without Partner (" + commander.getName() + ')');
+                        valid = false;
+                    }
                 }
                 FilterMana commanderColor = commander.getColorIdentity();
                 if (commanderColor.isWhite()) {

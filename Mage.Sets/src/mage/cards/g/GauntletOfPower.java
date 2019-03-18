@@ -1,30 +1,3 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.cards.g;
 
 import java.util.UUID;
@@ -57,7 +30,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class GauntletOfPower extends CardImpl {
+public final class GauntletOfPower extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("a basic land");
 
@@ -66,14 +39,14 @@ public class GauntletOfPower extends CardImpl {
     }
 
     public GauntletOfPower(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
         // As Gauntlet of Power enters the battlefield, choose a color.
         this.addAbility(new EntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));
         // Creatures of the chosen color get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GauntletOfPowerEffect1()));
 
-        // Whenever a basic land is tapped for mana of the chosen color, its controller adds one mana of that color to their mana pool.
+        // Whenever a basic land is tapped for mana of the chosen color, its controller adds one mana of that color.
         this.addAbility(new TapForManaAllTriggeredAbility(new GauntletOfPowerEffectEffect2(), filter, SetTargetPointer.PERMANENT));
     }
 
@@ -109,7 +82,7 @@ class GauntletOfPowerEffect1 extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
         if (color != null) {
-            for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 if (perm.getColor(game).contains(color)) {
                     perm.addPower(1);
                     perm.addToughness(1);
@@ -190,7 +163,8 @@ class TapForManaAllTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public String getRule() {
-        return "Whenever " + filter.getMessage() + " for mana, " + super.getRule();
+        return "Whenever a basic land is tapped for mana of the chosen color, "
+                + "its controller adds an additional one mana of that color.";
     }
 }
 
@@ -198,7 +172,7 @@ class GauntletOfPowerEffectEffect2 extends ManaEffect {
 
     public GauntletOfPowerEffectEffect2() {
         super();
-        staticText = "its controller adds one mana of that color to their mana pool";
+        staticText = "its controller adds one additional mana of that color";
     }
 
     public GauntletOfPowerEffectEffect2(final GauntletOfPowerEffectEffect2 effect) {
@@ -208,11 +182,10 @@ class GauntletOfPowerEffectEffect2 extends ManaEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent land = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
-        if(land != null){
+        if (land != null) {
             Player player = game.getPlayer(land.getControllerId());
-            Mana mana = (Mana) getValue("mana");
-            if (player != null && mana != null) {
-                player.getManaPool().addMana(mana, game, source);
+            if (player != null) {
+                player.getManaPool().addMana(getMana(game, source), game, source);
                 return true;
             }
         }
@@ -220,7 +193,14 @@ class GauntletOfPowerEffectEffect2 extends ManaEffect {
     }
 
     @Override
-    public Mana getMana(Game game, Ability source) {
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
+        Permanent land = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        if (land != null) {
+            Mana mana = (Mana) getValue("mana");
+            if (mana != null) {
+                return mana.copy();
+            }
+        }
         return null;
     }
 

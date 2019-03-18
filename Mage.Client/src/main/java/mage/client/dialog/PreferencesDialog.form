@@ -236,7 +236,7 @@
                     <Property name="toolTipText" type="java.lang.String" value="Write the card&apos;s name on the card to make the card name more recognizable."/>
                     <Property name="actionCommand" type="java.lang.String" value=""/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                      <Color id="Standardcursor"/>
+                      <Color id="Default Cursor"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -267,7 +267,7 @@
                     <Property name="selected" type="boolean" value="true"/>
                     <Property name="toolTipText" type="java.lang.String" value="Show the path Xmage is expecting for this card&apos;s image (only displays if missing)"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                      <Color id="Standardcursor"/>
+                      <Color id="Default Cursor"/>
                     </Property>
                     <Property name="label" type="java.lang.String" value="Display image path for missing images"/>
                   </Properties>
@@ -4071,7 +4071,7 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="phases_stopSettings" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="170" max="32767" attributes="0"/>
+                      <EmptySpace pref="185" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -4079,7 +4079,7 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabelHeadLine">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Choose phases your game will stop on if not skipped by a skip action (e.g. F6):"/>
+                <Property name="text" type="java.lang.String" value="Default stop steps if not skip buttons activated (e.g. F6):"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelYourTurn">
@@ -4112,7 +4112,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelMain1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Main:"/>
+                <Property name="text" type="java.lang.String" value="Main 1:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="checkBoxMainYou">
@@ -4159,7 +4159,7 @@
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Stop settings">
+                    <TitledBorder title="SKIP settings">
                       <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
                       </Border>
@@ -4170,14 +4170,14 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                 <Property name="columns" type="int" value="1"/>
-                <Property name="rows" type="int" value="7"/>
+                <Property name="rows" type="int" value="8"/>
               </Layout>
               <SubComponents>
                 <Component class="javax.swing.JCheckBox" name="cbStopAttack">
                   <Properties>
                     <Property name="selected" type="boolean" value="true"/>
-                    <Property name="text" type="java.lang.String" value="Stop on declare attackers step if you skip steps (F4/F5/F7) and attackers are available"/>
-                    <Property name="toolTipText" type="java.lang.String" value="If you use F4, F5 or F7 to skip steps, you stop on declare attackers step if attackers are available. If this option is not activated, you also skip the declare attackers step with this actions. F9 does always skip the declare attackers step."/>
+                    <Property name="text" type="java.lang.String" value="STOP skips on declare attackers if attackers are available"/>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
                     <Property name="actionCommand" type="java.lang.String" value=""/>
                   </Properties>
                   <Events>
@@ -4186,18 +4186,31 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbStopBlock">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Stop on your declare blockers step also if no blockers available"/>
-                    <Property name="toolTipText" type="java.lang.String" value="Also if you have no blockers to declare, the game stops at the declare blockers step."/>
+                    <Property name="text" type="java.lang.String" value="STOP skips on declare blockers if blockers are available"/>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
                     <Property name="actionCommand" type="java.lang.String" value=""/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbStopBlockActionPerformed"/>
                   </Events>
                 </Component>
+                <Component class="javax.swing.JCheckBox" name="cbStopOnNewStackObjects">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Skip to STACK resolved (F10): stop on new objects added (on) or stop until empty (off)"/>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
+                    <Property name="actionCommand" type="java.lang.String" value=""/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[300, 25]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbStopOnNewStackObjectsActionPerformed"/>
+                  </Events>
+                </Component>
                 <Component class="javax.swing.JCheckBox" name="cbStopOnAllMain">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Skip with F7 to next main phase (if not activated skip always to your next main phase)"/>
-                    <Property name="toolTipText" type="java.lang.String" value="If activated F7 skips to next main phases (regardless of the active players)."/>
+                    <Property name="text" type="java.lang.String" value="Skip to MAIN step (F7): stop on any main steps (on) or stop on your main step (off)"/>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
                     <Property name="actionCommand" type="java.lang.String" value=""/>
                   </Properties>
                   <Events>
@@ -4206,8 +4219,8 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbStopOnAllEnd">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Skip with F5 to next end step (if not activated only to end steps of opponents)"/>
-                    <Property name="toolTipText" type="java.lang.String" value="If activated - F5 skips to the next end step (regardless of the current player)"/>
+                    <Property name="text" type="java.lang.String" value="Skip to END step (F5): stop on any end steps (on) or stop on opponents end step (off)"/>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
                     <Property name="actionCommand" type="java.lang.String" value=""/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[300, 25]"/>
@@ -4302,7 +4315,7 @@
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Card images:">
+                    <TitledBorder title="Card images">
                       <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
                       </Border>
@@ -4425,6 +4438,7 @@
                 </Component>
                 <Component class="javax.swing.JComboBox" name="cbPreferedImageLanguage">
                   <Properties>
+                    <Property name="maximumRowCount" type="int" value="20"/>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="4">
                         <StringItem index="0" value="Item 1"/>
@@ -4451,6 +4465,7 @@
                 </Component>
                 <Component class="javax.swing.JComboBox" name="cbNumberOfDownloadThreads">
                   <Properties>
+                    <Property name="maximumRowCount" type="int" value="20"/>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="4">
                         <StringItem index="0" value="Item 1"/>
@@ -4467,7 +4482,7 @@
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Background images setting:">
+                    <TitledBorder title="Background images">
                       <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
                       </Border>
@@ -4608,7 +4623,7 @@
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Card rendering:">
+                    <TitledBorder title="Card styles (restart xmage to apply new settings)">
                       <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
                       </Border>
@@ -4646,7 +4661,7 @@
               <SubComponents>
                 <Component class="javax.swing.JCheckBox" name="cbCardRenderImageFallback">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Fall back to plain image based rendering"/>
+                    <Property name="text" type="java.lang.String" value="Render mode: MTGO style (off) or IMAGE style (on)"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbCardRenderImageFallbackActionPerformed"/>
@@ -6041,7 +6056,7 @@
                                   <Component id="keyToggleRecordMacro" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="controlsDescriptionLabel" pref="478" max="32767" attributes="0"/>
+                              <Component id="controlsDescriptionLabel" pref="468" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -6247,7 +6262,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="labelToggleRecordMacro">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Toggle Record Macro"/>
+                <Property name="text" type="java.lang.String" value="Record Macro (unsupported)"/>
               </Properties>
             </Component>
             <Component class="mage.client.components.KeyBindButton" name="keyToggleRecordMacro">

@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-public class HumanSoldierToken extends TokenImpl {
+public final class HumanSoldierToken extends TokenImpl {
 
     public HumanSoldierToken() {
         super("Human Soldier", "1/1 white Human Soldier creature token");

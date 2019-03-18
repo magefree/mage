@@ -24,7 +24,7 @@ public enum AttackedOrBlockedThisCombatSourceCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Permanent sourceObject = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (sourceObject != null) {
-            AttackedOrBlockedThisCombatWatcher watcher = (AttackedOrBlockedThisCombatWatcher) game.getState().getWatchers().get(AttackedOrBlockedThisCombatWatcher.class.getSimpleName());
+            AttackedOrBlockedThisCombatWatcher watcher = game.getState().getWatcher(AttackedOrBlockedThisCombatWatcher.class);
             if (watcher != null) {
                 for (MageObjectReference mor : watcher.getAttackedThisTurnCreatures()) {
                     if (mor.refersTo(sourceObject, game)) {

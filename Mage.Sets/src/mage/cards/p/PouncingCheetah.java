@@ -11,7 +11,7 @@ import mage.constants.SubType;
 /**
  * @author Stravant
  */
-public class PouncingCheetah extends CardImpl {
+public final class PouncingCheetah extends CardImpl {
 
     public PouncingCheetah(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

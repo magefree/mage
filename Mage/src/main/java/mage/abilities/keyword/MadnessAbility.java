@@ -2,6 +2,7 @@ package mage.abilities.keyword;
 
 import java.util.UUID;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
@@ -33,10 +34,10 @@ import mage.players.Player;
  * first ability is applied.
  *
  * "Madness [cost]" means "If a player would discard this card, that player
- * discards it, but may exile it instead of putting it into their
- * graveyard" and "When this card is exiled this way, its owner may cast it by
- * paying [cost] rather than paying its mana cost. If that player doesn't, he or
- * she puts this card into their graveyard.
+ * discards it, but may exile it instead of putting it into their graveyard" and
+ * "When this card is exiled this way, its owner may cast it by paying [cost]
+ * rather than paying its mana cost. If that player doesn't, he or she puts this
+ * card into their graveyard.
  *
  * 702.33b. Casting a spell using its madness ability follows the rules for
  * paying alternative costs in rules 601.2b and 601.2e-g.
@@ -70,7 +71,7 @@ public class MadnessAbility extends StaticAbility {
         return new MadnessAbility(this);
     }
 
-    public static Condition GetCondition() {
+    public static Condition getCondition() {
         return MadnessCondition.instance;
     }
 
@@ -219,7 +220,7 @@ class MadnessCastEffect extends OneShotEffect {
             castByMadness.setSpellAbilityCastMode(SpellAbilityCastMode.MADNESS);
             costRef.clear();
             costRef.add(madnessCost);
-            boolean result = owner.cast(castByMadness, game, false);
+            boolean result = owner.cast(castByMadness, game, false, new MageObjectReference(source.getSourceObject(game), game));
             return result;
 
         }

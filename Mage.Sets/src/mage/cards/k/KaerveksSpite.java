@@ -10,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterControlledPermanent;
 
-public class KaerveksSpite extends CardImpl {
+public final class KaerveksSpite extends CardImpl {
 
     public KaerveksSpite(UUID ownerId, CardSetInfo cardSetInfo) {
         super(ownerId, cardSetInfo, new CardType[]{CardType.INSTANT}, "{B}{B}{B}");

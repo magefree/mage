@@ -1,43 +1,9 @@
-/*
- * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.game.permanent.token;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectImpl;
-import mage.ObjectColor;
-import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.cards.Card;
-import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -47,7 +13,11 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.util.RandomUtil;
-import mage.util.SubTypeList;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.UUID;
 
 public abstract class TokenImpl extends MageObjectImpl implements Token {
 
@@ -112,49 +82,56 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         this.tokenDescriptor = tokenDescriptor();
     }
 
+    @Override
     public String getTokenDescriptor() {
         this.tokenDescriptor = tokenDescriptor();
         return tokenDescriptor;
     }
 
     private String tokenDescriptor() {
-        String name = this.name.replaceAll("[^a-zA-Z0-9]", "");
-        String color = this.color.toString().replaceAll("[^a-zA-Z0-9]", "");
-        String subtype = this.subtype.toString().replaceAll("[^a-zA-Z0-9]", "");
-        String cardType = this.cardType.toString().replaceAll("[^a-zA-Z0-9]", "");
-        String originalset = this.getOriginalExpansionSetCode();
-        String descriptor = name + '.' + color + '.' + subtype + '.' + cardType + '.' + this.power + '.' + this.toughness;
+        String strName = this.name.replaceAll("[^a-zA-Z0-9]", "");
+        String strColor = this.color.toString().replaceAll("[^a-zA-Z0-9]", "");
+        String strSubtype = this.subtype.toString().replaceAll("[^a-zA-Z0-9]", "");
+        String strCardType = this.cardType.toString().replaceAll("[^a-zA-Z0-9]", "");
+        String descriptor = strName + '.' + strColor + '.' + strSubtype + '.' + strCardType + '.' + this.power + '.' + this.toughness;
         descriptor = descriptor.toUpperCase(Locale.ENGLISH);
         return descriptor;
     }
 
+    @Override
     public String getDescription() {
         return description;
     }
 
+    @Override
     public UUID getLastAddedToken() {
         return lastAddedTokenId;
     }
 
+    @Override
     public ArrayList<UUID> getLastAddedTokenIds() {
         ArrayList<UUID> ids = new ArrayList<>();
         ids.addAll(lastAddedTokenIds);
         return ids;
     }
 
+    @Override
     public void addAbility(Ability ability) {
         ability.setSourceId(this.getId());
         abilities.add(ability);
     }
 
+    @Override
     public boolean putOntoBattlefield(int amount, Game game, UUID sourceId, UUID controllerId) {
         return this.putOntoBattlefield(amount, game, sourceId, controllerId, false, false);
     }
 
+    @Override
     public boolean putOntoBattlefield(int amount, Game game, UUID sourceId, UUID controllerId, boolean tapped, boolean attacking) {
         return putOntoBattlefield(amount, game, sourceId, controllerId, tapped, attacking, null);
     }
 
+    @Override
     public boolean putOntoBattlefield(int amount, Game game, UUID sourceId, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer) {
         Player controller = game.getPlayer(controllerId);
         if (controller == null) {
@@ -214,7 +191,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                 this.lastAddedTokenIds.add(permanent.getId());
                 this.lastAddedTokenId = permanent.getId();
                 game.addSimultaneousEvent(new ZoneChangeEvent(permanent, permanent.getControllerId(), Zone.OUTSIDE, Zone.BATTLEFIELD));
-                if (attacking && game.getCombat() != null) {
+                if (attacking && game.getCombat() != null && game.getActivePlayerId().equals(permanent.getControllerId())) {
                     game.getCombat().addAttackingCreature(permanent.getId(), game, attackedPlayer);
                 }
                 if (!game.isSimulation()) {
@@ -228,49 +205,62 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         return false;
     }
 
+    @Override
     public void setPower(int power) {
         this.power.setValue(power);
     }
 
+    @Override
     public void setToughness(int toughness) {
         this.toughness.setValue(toughness);
     }
 
+    @Override
     public int getTokenType() {
         return tokenType;
     }
 
+    @Override
     public void setTokenType(int tokenType) {
         this.tokenType = tokenType;
     }
 
+    @Override
     public String getOriginalCardNumber() {
         return originalCardNumber;
     }
 
+    @Override
     public void setOriginalCardNumber(String originalCardNumber) {
         this.originalCardNumber = originalCardNumber;
     }
 
+    @Override
     public String getOriginalExpansionSetCode() {
         return originalExpansionSetCode;
     }
 
+    @Override
     public void setOriginalExpansionSetCode(String originalExpansionSetCode) {
+        // TODO: remove original set code at all... token image must be takes by card source or by latest set (on null source)
+        // TODO: if set have same tokens then selects it by random
         this.originalExpansionSetCode = originalExpansionSetCode;
         setTokenDescriptor();
     }
 
+    @Override
     public Card getCopySourceCard() {
         return copySourceCard;
     }
 
+    @Override
     public void setCopySourceCard(Card copySourceCard) {
         if (copySourceCard != null) {
             this.copySourceCard = copySourceCard.copy();
         }
     }
 
+    @Override
     public void setExpansionSetCodeForImage(String code) {
         if (!availableImageSetCodes.isEmpty()) {
             if (availableImageSetCodes.contains(code)) {
@@ -288,6 +278,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         setTokenDescriptor();
     }
 
+    @Override
     public boolean updateExpansionSetCode(String setCode) {
         if (setCode == null || setCode.isEmpty()) {
             return false;

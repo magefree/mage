@@ -63,16 +63,16 @@ public class GathererSets implements Iterable<DownloadJob> {
         "POR", "P02", "PTK",
         "ARC", "DD3EVG",
         "W16", "W17",
-        //"APAC" -- gatherer do not have that set, scrly have PALP
+        //"APAC" -- gatherer do not have that set, scryfall has PALP
         //"ARENA" -- is't many set with different codes, not one
         "CLASH", "CP", "DD3GVL", "DPA", "EURO", "FNMP", "GPX", "GRC", "GUR", "H17", "JR", "MBP", "MGDC", "MLP", "MPRP", "MPS-AKH", "PTC", "S00", "S99", "SUS", "SWS", "UGIN", "UGL", "V10", "V17", "WMCQ", // need to fix
-        "H09", "PD2", "PD3", "UNH", "CM1", "E02", "V11", "A25", "UST", "IMA", "DD2", "EVG", "DDC", "DDE", "DDD", "DDT", "8EB", "9EB", "CHR" // ok
+        "H09", "PD2", "PD3", "UNH", "CM1", "V11", "A25", "UST", "IMA", "DD2", "EVG", "DDC", "DDE", "DDD", "8EB", "9EB", "CHR" // ok
     // current testing
     };
 
     private static final String[] symbolsBasicWithMyth = {"M10", "M11", "M12", "M13", "M14", "M15", "ORI",
         "DDF", "DDG", "DDH", "DDI", "DDJ", "DDK", "DDL", "DDM", "DDN",
-        "DD3DVD", "DD3JVC", "DDO", "DDP", "DDQ", "DDR", "DDS", "DDT",
+        "DD3DVD", "DD3JVC", "DDO", "DDP", "DDQ", "DDR", "DDS", "DDT", "DDU",
         "ALA", "CON", "ARB",
         "ZEN", "WWK", "ROE",
         "SOM", "MBS", "NPH",
@@ -90,8 +90,9 @@ public class GathererSets implements Iterable<DownloadJob> {
         "KLD", "AER",
         "AKH", "HOU",
         "XLN", "C17",
-        "RIX", "DOM", "M19", // not released
-        "E01"
+        "RIX", "DOM", "M19",
+        "E01", "CM2", "E02",
+        "GS1", "BBD", "C18"
     };
 
     private static final String[] symbolsOnlyMyth = {
@@ -176,7 +177,7 @@ public class GathererSets implements Iterable<DownloadJob> {
         CheckResult res = setsToDownload.get(searchCode);
 
         if (res != null) {
-            logger.error(String.format("Symbols: founded duplicated code: %s", searchCode));
+            logger.error(String.format("Symbols: found duplicate code: %s", searchCode));
         } else {
             res = new CheckResult(searchCode, foundedExp, haveCommon, haveUncommon, haveRare, haveMyth);
             setsToDownload.put(searchCode, res);
@@ -189,7 +190,7 @@ public class GathererSets implements Iterable<DownloadJob> {
         }
 
         // checks for founded sets only
-        // to early to download
+        // too early to download
         if (!canDownloadTask) {
             Calendar c = Calendar.getInstance();
             c.setTime(foundedExp.getReleaseDate());

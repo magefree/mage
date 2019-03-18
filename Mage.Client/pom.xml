@@ -6,10 +6,9 @@
     <parent>
         <groupId>org.mage</groupId>
         <artifactId>mage-root</artifactId>
-        <version>1.4.28</version>
+        <version>1.4.33</version>
     </parent>
 
-    <groupId>org.mage</groupId>
     <artifactId>mage-client</artifactId>
     <packaging>jar</packaging>
     <name>Mage Client</name>
@@ -52,12 +51,11 @@
         <dependency>
             <groupId>com.mortennobel</groupId>
             <artifactId>java-image-scaling</artifactId>
-            <version>0.8.5</version>
+            <version>0.8.6</version>
         </dependency>
         <dependency>
-            <groupId>com.google.collections</groupId>
-            <artifactId>google-collections</artifactId>
-            <version>1.0</version>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
         </dependency>
         <dependency>
             <groupId>org.swinglabs</groupId>
@@ -67,12 +65,12 @@
         <dependency>
             <groupId>org.jetlang</groupId>
             <artifactId>jetlang</artifactId>
-            <version>0.2.9</version>
+            <version>0.2.23</version>
         </dependency>
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk-s3</artifactId>
-            <version>1.11.286</version>
+            <version>1.11.498</version>
         </dependency>
         <dependency>
             <groupId>com.jgoodies</groupId>
@@ -109,13 +107,13 @@
         <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
-            <version>1.5.2</version>
+            <version>1.11.3</version>
         </dependency>
         <dependency>
             <artifactId>truevfs-profile-base</artifactId>
             <groupId>net.java.truevfs</groupId>
             <type>jar</type>
-            <version>0.10.8</version>
+            <version>0.11.1</version>
             <exclusions>
                 <exclusion>
                     <artifactId>truevfs-access-swing</artifactId>
@@ -130,7 +128,7 @@
         <dependency>
             <groupId>com.googlecode.soundlibs</groupId>
             <artifactId>mp3spi</artifactId>
-            <version>1.9.5-1</version>
+            <version>1.9.5.4</version>
         </dependency>
         <dependency>
             <groupId>javazoom</groupId>
@@ -155,14 +153,14 @@
         <dependency>
             <groupId>org.apache.xmlgraphics</groupId>
             <artifactId>batik-transcoder</artifactId>
-            <version>1.7</version>
+            <version>1.11</version>
         </dependency>
         <!-- svg support end -->
-		<dependency>
-			<groupId>org.ocpsoft.prettytime</groupId>
-			<artifactId>prettytime</artifactId>
-			<version>3.2.7.Final</version>
-		</dependency>
+        <dependency>
+            <groupId>org.ocpsoft.prettytime</groupId>
+            <artifactId>prettytime</artifactId>
+            <version>4.0.2.Final</version>
+        </dependency>
     </dependencies>
 
     <!-- to get the reference to local repository with com\googlecode\jspf\jspf-core\0.9.1\ -->
@@ -194,11 +192,13 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
                     <archive>
-                        <manifestFile>${manifest.file}</manifestFile>
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <mainClass>mage.client.MageFrame</mainClass>
                         </manifest>
+                        <manifestEntries>
+                            <SplashScreen-Image>splash.jpg</SplashScreen-Image>
+                        </manifestEntries>
                     </archive>
                 </configuration>
             </plugin>

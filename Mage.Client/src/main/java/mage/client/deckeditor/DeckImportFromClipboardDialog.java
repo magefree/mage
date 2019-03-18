@@ -1,16 +1,27 @@
 package mage.client.deckeditor;
 
-import mage.util.StreamUtils;
+import mage.util.DeckUtil;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
+import java.util.Optional;
 
 public class DeckImportFromClipboardDialog extends JDialog {
+
+    private static final String FORMAT_TEXT =
+            "// Example:\n" +
+                    "//1 Library of Congress\n" +
+                    "//1 Cryptic Gateway\n" +
+                    "//1 Azami, Lady of Scrolls\n" +
+                    "// NB: This is slow as, and will lock your screen :)\n" +
+                    "\n" +
+                    "// Your current clipboard:\n";
 
     private JPanel contentPane;
     private JButton buttonOK;
@@ -21,6 +32,9 @@ public class DeckImportFromClipboardDialog extends JDialog {
 
     public DeckImportFromClipboardDialog() {
         initComponents();
+
+        onRefreshClipboard();
+
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -40,24 +54,26 @@ public class DeckImportFromClipboardDialog extends JDialog {
         contentPane.registerKeyboardAction(e -> onCancel(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    private void onOK() {
-        BufferedWriter bw = null;
+    private Optional<String> getClipboardStringData() {
         try {
-            File temp = File.createTempFile("cbimportdeck", ".txt");
-            bw = new BufferedWriter(new FileWriter(temp));
-            bw.write(txtDeckList.getText());
-            tmpPath = temp.getPath();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            StreamUtils.closeQuietly(bw);
+            return Optional.of((String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor));
+        } catch (HeadlessException | UnsupportedFlavorException | IOException e) {
+            //e.printStackTrace();
         }
+        return Optional.empty();
+    }
 
+    private void onOK() {
+        tmpPath = DeckUtil.writeTextToTempFile(txtDeckList.getText());
         dispose();
     }
 
     private void onCancel() {
         dispose();
+    }
+
+    private void onRefreshClipboard() {
+        txtDeckList.setText(FORMAT_TEXT + getClipboardStringData().orElse(""));
     }
 
     public String getTmpPath() {
@@ -143,7 +159,7 @@ public class DeckImportFromClipboardDialog extends JDialog {
 
                 txtDeckList.setMinimumSize(new Dimension(250, 400));
                 txtDeckList.setPreferredSize(new Dimension(550, 400));
-                txtDeckList.setText("// Example:\n//1 Library of Congress\n//1 Cryptic Gateway\n//1 Azami, Lady of Scrolls\n// NB: This is slow as, and will lock your screen :)");
+                txtDeckList.setText(FORMAT_TEXT);
                 JScrollPane txtScrollableDeckList = new JScrollPane(txtDeckList);
                 panel3.add(txtScrollableDeckList, new GridBagConstraints(0, 0, 1, 1, 1.0, 0.0,
                         GridBagConstraints.CENTER, GridBagConstraints.BOTH,

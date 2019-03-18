@@ -1,5 +1,6 @@
 package mage.cards.h;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -10,11 +11,9 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.TargetPlayer;
 
-import java.util.UUID;
+public final class HomaridExplorer extends CardImpl {
 
-public class HomaridExplorer extends CardImpl {
-
-    public HomaridExplorer(UUID ownerId, CardSetInfo cardSetInfo){
+    public HomaridExplorer(UUID ownerId, CardSetInfo cardSetInfo) {
         super(ownerId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
         subtype.add(SubType.HOMARID, SubType.SCOUT);
         power = new MageInt(3);
@@ -26,11 +25,12 @@ public class HomaridExplorer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HomaridExplorer(final HomaridExplorer homaridExplorer){
+    public HomaridExplorer(final HomaridExplorer homaridExplorer) {
         super(homaridExplorer);
     }
 
-    public HomaridExplorer copy(){
+    @Override
+    public HomaridExplorer copy() {
         return new HomaridExplorer(this);
     }
 

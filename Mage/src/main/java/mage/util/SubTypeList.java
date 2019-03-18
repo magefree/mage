@@ -10,20 +10,14 @@ import java.util.stream.Collectors;
 
 public class SubTypeList extends ArrayList<SubType> {
 
-
-
-    @Deprecated
-    public boolean addAll(List<String> subtypes) {
-        return addAll(subtypes.stream()
-                .map(SubType::byDescription)
-                .collect(Collectors.toList()));
+    public SubTypeList(SubType firstSubType) {
+        super();
+        this.add(firstSubType);
     }
 
-    @Deprecated
-    public boolean removeAll(List<String> subtypes) {
-        return removeAll(subtypes.stream()
-                .map(SubType::byDescription)
-                .collect(Collectors.toList()));
+    public SubTypeList(SubType... subTypesList) {
+        super();
+        Collections.addAll(this, subTypesList);
     }
 
     public boolean add(SubType... subTypes) {
@@ -33,19 +27,5 @@ public class SubTypeList extends ArrayList<SubType> {
     public boolean removeAll(SubType... subTypes) {
         return super.removeAll(Arrays.stream(subTypes)
                 .collect(Collectors.toList()));
-    }
-
-    @Deprecated
-    public boolean add(String s) {
-        SubType subType = SubType.byDescription(s);
-        if (subType != null) {
-            return add(subType);
-        }
-        return false;
-    }
-
-    @Deprecated
-    public boolean contains(String s) {
-        return contains(SubType.byDescription(s));
     }
 }

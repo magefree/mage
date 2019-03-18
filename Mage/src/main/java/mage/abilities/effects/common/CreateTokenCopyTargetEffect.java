@@ -1,48 +1,17 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.abilities.effects.common;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.EmptyToken;
@@ -51,15 +20,18 @@ import mage.util.CardUtil;
 import mage.util.functions.ApplyToPermanent;
 import mage.util.functions.EmptyApplyToPermanent;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class CreateTokenCopyTargetEffect extends OneShotEffect {
 
     private final UUID playerId;
     private final CardType additionalCardType;
-    private boolean gainsHaste;
+    private boolean hasHaste;
     private final int number;
     private List<Permanent> addedTokenPermanents;
     private SubType additionalSubType;
@@ -81,56 +53,43 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
     }
 
     public CreateTokenCopyTargetEffect() {
-        super(Outcome.PutCreatureInPlay);
-        this.playerId = null;
-        this.additionalCardType = null;
-        this.addedTokenPermanents = new ArrayList<>();
-        this.number = 1;
-        this.additionalSubType = null;
-        this.onlySubType = null;
-        this.attackedPlayer = null;
-        this.tokenPower = Integer.MIN_VALUE;
-        this.tokenToughness = Integer.MIN_VALUE;
-        this.gainsFlying = false;
-        this.becomesArtifact = false;
-        this.color = null;
+        this((UUID) null);
     }
 
     public CreateTokenCopyTargetEffect(UUID playerId) {
         this(playerId, null, false);
     }
 
-    public CreateTokenCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean gainsHaste) {
-        this(playerId, additionalCardType, gainsHaste, 1);
+    public CreateTokenCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean hasHaste) {
+        this(playerId, additionalCardType, hasHaste, 1);
     }
 
-    public CreateTokenCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean gainsHaste, int number) {
-        this(playerId, additionalCardType, gainsHaste, number, false, false);
+    public CreateTokenCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean hasHaste, int number) {
+        this(playerId, additionalCardType, hasHaste, number, false, false);
     }
 
     /**
-     *
-     * @param playerId null the token is controlled/owned by the controller of
-     * the source ability
+     * @param playerId           null the token is controlled/owned by the controller of
+     *                           the source ability
      * @param additionalCardType the token gains this card type in addition
-     * @param gainsHaste the token gains haste
-     * @param number number of tokens to put into play
+     * @param hasHaste           the token gains haste
+     * @param number             number of tokens to put into play
      * @param tapped
      * @param attacking
      */
-    public CreateTokenCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean gainsHaste, int number, boolean tapped, boolean attacking) {
-        this(playerId, additionalCardType, gainsHaste, number, tapped, attacking, null);
+    public CreateTokenCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean hasHaste, int number, boolean tapped, boolean attacking) {
+        this(playerId, additionalCardType, hasHaste, number, tapped, attacking, null);
     }
 
-    public CreateTokenCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean gainsHaste, int number, boolean tapped, boolean attacking, UUID attackedPlayer) {
-        this(playerId, additionalCardType, gainsHaste, number, tapped, attacking, attackedPlayer, Integer.MIN_VALUE, Integer.MIN_VALUE, false);
+    public CreateTokenCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean hasHaste, int number, boolean tapped, boolean attacking, UUID attackedPlayer) {
+        this(playerId, additionalCardType, hasHaste, number, tapped, attacking, attackedPlayer, Integer.MIN_VALUE, Integer.MIN_VALUE, false);
     }
 
-    public CreateTokenCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean gainsHaste, int number, boolean tapped, boolean attacking, UUID attackedPlayer, int power, int toughness, boolean gainsFlying) {
+    public CreateTokenCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean hasHaste, int number, boolean tapped, boolean attacking, UUID attackedPlayer, int power, int toughness, boolean gainsFlying) {
         super(Outcome.PutCreatureInPlay);
         this.playerId = playerId;
         this.additionalCardType = additionalCardType;
-        this.gainsHaste = gainsHaste;
+        this.hasHaste = hasHaste;
         this.addedTokenPermanents = new ArrayList<>();
         this.number = number;
         this.tapped = tapped;
@@ -145,7 +104,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         super(effect);
         this.playerId = effect.playerId;
         this.additionalCardType = effect.additionalCardType;
-        this.gainsHaste = effect.gainsHaste;
+        this.hasHaste = effect.hasHaste;
         this.addedTokenPermanents = new ArrayList<>(effect.addedTokenPermanents);
         this.number = effect.number;
         this.additionalSubType = effect.additionalSubType;
@@ -160,14 +119,6 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         this.color = effect.color;
         this.useLKI = effect.useLKI;
         this.isntLegendary = effect.isntLegendary;
-    }
-
-    public void setBecomesArtifact(boolean becomesArtifact) {
-        this.becomesArtifact = becomesArtifact;
-    }
-
-    public void setIsntLegendary(boolean isntLegendary) {
-        this.isntLegendary = isntLegendary;
     }
 
     @Override
@@ -209,7 +160,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             copyFrom = game.getCard(getTargetPointer().getFirst(game, source));
         }
 
-        if (permanent == null && copyFrom == null) {
+        if (copyFrom == null) {
             return false;
         }
 
@@ -225,7 +176,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         if (additionalCardType != null && !token.getCardType().contains(additionalCardType)) {
             token.addCardType(additionalCardType);
         }
-        if (gainsHaste) {
+        if (hasHaste) {
             token.addAbility(HasteAbility.getInstance());
         }
         if (gainsFlying) {
@@ -319,5 +270,34 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
 
     public void setUseLKI(boolean useLKI) {
         this.useLKI = useLKI;
+    }
+
+    public void setBecomesArtifact(boolean becomesArtifact) {
+        this.becomesArtifact = becomesArtifact;
+    }
+
+    public void setIsntLegendary(boolean isntLegendary) {
+        this.isntLegendary = isntLegendary;
+    }
+
+    public void setHasHaste(boolean hasHaste) {
+        this.hasHaste = hasHaste;
+    }
+
+    public void exileTokensCreatedAtNextEndStep(Game game, Ability source) {
+        for (Permanent tokenPermanent : addedTokenPermanents) {
+            ExileTargetEffect exileEffect = new ExileTargetEffect(null, "", Zone.BATTLEFIELD);
+            exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
+            game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect), source);
+        }
+    }
+
+    public void exileTokensCreatedAtEndOfCombat(Game game, Ability source) {
+        for (Permanent tokenPermanent : addedTokenPermanents) {
+
+            ExileTargetEffect exileEffect = new ExileTargetEffect(null, "", Zone.BATTLEFIELD);
+            exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
+            game.addDelayedTriggeredAbility(new AtTheEndOfCombatDelayedTriggeredAbility(exileEffect), source);
+        }
     }
 }

@@ -67,7 +67,7 @@ public class DealsDamageToAPlayerAttachedTriggeredAbility extends TriggeredAbili
             }
         }
         if (targetController == TargetController.YOU) {
-            if (!this.getControllerId().equals(event.getPlayerId())) {
+            if (!this.isControlledBy(event.getPlayerId())) {
                 return false;
             }
         }

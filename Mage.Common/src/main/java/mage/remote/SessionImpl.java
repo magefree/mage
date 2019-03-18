@@ -1,41 +1,5 @@
-/*
- * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.remote;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.lang.reflect.UndeclaredThrowableException;
-import java.net.*;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
@@ -64,6 +28,12 @@ import org.jboss.remoting.transport.bisocket.Bisocket;
 import org.jboss.remoting.transport.socket.SocketWrapper;
 import org.jboss.remoting.transporter.TransporterClient;
 
+import java.io.*;
+import java.lang.reflect.UndeclaredThrowableException;
+import java.net.*;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+
 /**
  * @author BetaSteward_at_googlemail.com
  */
@@ -84,13 +54,14 @@ public class SessionImpl implements Session {
     private ServerState serverState;
     private SessionState sessionState = SessionState.DISCONNECTED;
     private Connection connection;
-    private final static int PING_CYCLES = 10;
+    private static final int PING_CYCLES = 10;
     private final LinkedList<Long> pingTime = new LinkedList<>();
     private String pingInfo = "";
     private static boolean debugMode = false;
 
     private boolean canceled = false;
     private boolean jsonLogActive = false;
+    private String lastError = "";
 
     static {
         debugMode = System.getProperty("debug.mage") != null;
@@ -110,7 +81,7 @@ public class SessionImpl implements Session {
     // handling.
     public interface RemotingTask {
 
-        public boolean run() throws Throwable;
+        boolean run() throws Throwable;
     }
 
     // handleRemotingTaskExceptions runs the given task and handles exceptions appropriately. This
@@ -120,37 +91,40 @@ public class SessionImpl implements Session {
             return remoting.run();
         } catch (MalformedURLException ex) {
             logger.fatal("", ex);
-            client.showMessage("Unable to connect to server. " + ex.getMessage());
+            client.showMessage("Unable connect to server. " + ex.getMessage());
         } catch (UndeclaredThrowableException ex) {
             String addMessage = "";
             Throwable cause = ex.getCause();
             if (cause instanceof InvocationFailureException) {
                 InvocationFailureException exep = (InvocationFailureException) cause;
                 if (exep.getCause() instanceof IOException) {
-                    if (exep.getCause().getMessage().startsWith("Field hash null is not available on current")) {
-                        addMessage = "Probabaly the server version is not compatible to the client. ";
+                    if ((exep.getCause().getMessage() != null) && (exep.getCause().getMessage().startsWith("Field hash null is not available on current")
+                            || exep.getCause().getMessage().endsWith("end of file"))) {
+                        addMessage = "Probably the server version is not compatible with the client. ";
                     }
+                } else {
+                    logger.error("Unknown server error", exep.getCause());
                 }
             } else if (cause instanceof NoSuchMethodException) {
                 // NoSuchMethodException is thrown on an invocation of an unknow JBoss remoting
                 // method, so it's likely to be because of a version incompatibility.
                 addMessage = "The following method is not available in the server, probably the "
-                        + "server version is not compatible to the client: " + cause.getMessage();
+                        + "server version is not compatible with the client: " + cause.getMessage();
             }
             if (addMessage.isEmpty()) {
                 logger.fatal("", ex);
             }
-            client.showMessage("Unable to connect to server. " + addMessage + (ex.getMessage() != null ? ex.getMessage() : ""));
+            client.showMessage("Unable connect to server. " + addMessage + (ex.getMessage() != null ? ex.getMessage() : ""));
         } catch (IOException ex) {
             logger.fatal("", ex);
             String addMessage = "";
             if (ex.getMessage() != null && ex.getMessage().startsWith("Unable to perform invocation")) {
                 addMessage = "Maybe the server version is not compatible. ";
             }
-            client.showMessage("Unable to connect to server. " + addMessage + ex.getMessage() != null ? ex.getMessage() : "");
+            client.showMessage("Unable connect to server. " + addMessage + (ex.getMessage() != null ? ex.getMessage() : ""));
         } catch (MageVersionException ex) {
             if (!canceled) {
-                client.showMessage("Unable to connect to server. " + ex.getMessage());
+                client.showMessage("Unable connect to server. " + ex.getMessage());
             }
             disconnect(false);
         } catch (CannotConnectException ex) {
@@ -158,11 +132,11 @@ public class SessionImpl implements Session {
                 handleCannotConnectException(ex);
             }
         } catch (Throwable t) {
-            logger.fatal("Unable to connect to server - ", t);
+            logger.fatal("Unable connect to server - ", t);
             if (!canceled) {
                 disconnect(false);
                 StringBuilder sb = new StringBuilder();
-                sb.append("Unable to connect to server.\n");
+                sb.append("Unable connect to server.\n");
                 for (StackTraceElement element : t.getStackTrace()) {
                     sb.append(element.toString()).append('\n');
                 }
@@ -222,37 +196,46 @@ public class SessionImpl implements Session {
     public synchronized boolean connect(final Connection connection) {
         return establishJBossRemotingConnection(connection)
                 && handleRemotingTaskExceptions(new RemotingTask() {
-                    @Override
-                    public boolean run() throws Throwable {
-                        logger.info("Trying to log-in as " + getUserName() + " to XMAGE server at " + connection.getHost() + ':' + connection.getPort());
-                        boolean registerResult;
-                        if (connection.getAdminPassword() == null) {
-                            // for backward compatibility. don't remove twice call - first one does nothing but for version checking
-                            registerResult = server.connectUser(connection.getUsername(), connection.getPassword(), sessionId, client.getVersion(), connection.getUserIdStr());
-                            if (registerResult) {
-                                server.setUserData(connection.getUsername(), sessionId, connection.getUserData(), client.getVersion().toString(), connection.getUserIdStr());
-                            }
-                        } else {
-                            registerResult = server.connectAdmin(connection.getAdminPassword(), sessionId, client.getVersion());
-                        }
-                        if (registerResult) {
-                            serverState = server.getServerState();
-                            if (!connection.getUsername().equals("Admin")) {
-                                updateDatabase(connection.isForceDBComparison(), serverState);
-                            }
-                            logger.info("Logged-in as " + getUserName() + " to MAGE server at " + connection.getHost() + ':' + connection.getPort());
-                            client.connected(getUserName() + '@' + connection.getHost() + ':' + connection.getPort() + ' ');
-                            return true;
-                        }
+            @Override
+            public boolean run() throws Throwable {
+                setLastError("");
+                logger.info("Trying to log-in as " + getUserName() + " to XMAGE server at " + connection.getHost() + ':' + connection.getPort());
+                boolean registerResult;
+                if (connection.getAdminPassword() == null) {
+                    // for backward compatibility. don't remove twice call - first one does nothing but for version checking
+                    registerResult = server.connectUser(connection.getUsername(), connection.getPassword(), sessionId, client.getVersion(), connection.getUserIdStr());
+                } else {
+                    registerResult = server.connectAdmin(connection.getAdminPassword(), sessionId, client.getVersion());
+                }
+                if (registerResult) {
+                    serverState = server.getServerState();
+
+                    // client side check for incompatible versions
+                    if (client.getVersion().compareTo(serverState.getVersion()) != 0) {
+                        String err = "Client and server versions are incompatible.";
+                        setLastError(err);
+                        logger.info(err);
                         disconnect(false);
                         return false;
                     }
-                });
+
+                    if (!connection.getUsername().equals("Admin")) {
+                        server.setUserData(connection.getUsername(), sessionId, connection.getUserData(), client.getVersion().toString(), connection.getUserIdStr());
+                        updateDatabase(connection.isForceDBComparison(), serverState);
+                    }
+                    logger.info("Logged-in as " + getUserName() + " to MAGE server at " + connection.getHost() + ':' + connection.getPort());
+                    client.connected(getUserName() + '@' + connection.getHost() + ':' + connection.getPort() + ' ');
+                    return true;
+                }
+                disconnect(false);
+                return false;
+            }
+        });
     }
 
     @Override
     public Optional<String> getServerHostname() {
-        return isConnected() ? Optional.of(connection.getHost()) : Optional.<String>empty();
+        return isConnected() ? Optional.of(connection.getHost()) : Optional.empty();
     }
 
     @Override
@@ -421,26 +404,25 @@ public class SessionImpl implements Session {
     }
 
     private void updateDatabase(boolean forceDBComparison, ServerState serverState) {
-        long cardDBVersion = CardRepository.instance.getContentVersionFromDB();
-        if (forceDBComparison || serverState.getCardsContentVersion() > cardDBVersion) {
-            List<String> classNames = CardRepository.instance.getClassNames();
-            List<CardInfo> cards = server.getMissingCardsData(classNames);
-            CardRepository.instance.addCards(cards);
-            CardRepository.instance.setContentVersion(serverState.getCardsContentVersion());
-            logger.info("Updating client cards DB - existing cards: " + classNames.size() + " new cards: " + cards.size()
-                    + " content versions - server: " + serverState.getCardsContentVersion() + " client: " + cardDBVersion);
-        }
+        // download NEW cards/sets, but do not download data fixes (it's an old and rare feature from old clients, e.g. one client for different servers with different cards)
+        // use case: server gets new minor version with new cards, old client can get that cards too without donwload new version
 
+        // sets
         long expansionDBVersion = ExpansionRepository.instance.getContentVersionFromDB();
         if (forceDBComparison || serverState.getExpansionsContentVersion() > expansionDBVersion) {
             List<String> setCodes = ExpansionRepository.instance.getSetCodes();
             List<ExpansionInfo> expansions = server.getMissingExpansionData(setCodes);
-            for (ExpansionInfo expansion : expansions) {
-                ExpansionRepository.instance.add(expansion);
-            }
-            ExpansionRepository.instance.setContentVersion(serverState.getExpansionsContentVersion());
-            logger.info("Updating client expansions DB - existing sets: " + setCodes.size() + " new sets: " + expansions.size()
-                    + " content versions - server: " + serverState.getExpansionsContentVersion() + " client: " + expansionDBVersion);
+            logger.info("DB: updating sets... Found new: " + expansions.size());
+            ExpansionRepository.instance.saveSets(expansions, null, serverState.getExpansionsContentVersion());
+        }
+
+        // cards
+        long cardDBVersion = CardRepository.instance.getContentVersionFromDB();
+        if (forceDBComparison || serverState.getCardsContentVersion() > cardDBVersion) {
+            List<String> classNames = CardRepository.instance.getClassNames();
+            List<CardInfo> cards = server.getMissingCardsData(classNames);
+            logger.info("DB: updating cards... Found new: " + cards.size());
+            CardRepository.instance.saveCards(cards, serverState.getCardsContentVersion());
         }
     }
 
@@ -468,7 +450,7 @@ public class SessionImpl implements Session {
 
             t = t.getCause();
         }
-        client.showMessage("Unable to connect to server. " + message);
+        client.showMessage("Unable connect to server. " + message);
         if (logger.isTraceEnabled()) {
             logger.trace("StackTrace", t);
         }
@@ -476,7 +458,7 @@ public class SessionImpl implements Session {
 
     /**
      * @param askForReconnect - true = connection was lost because of error and
-     * ask the user if he want to try to reconnect
+     *                        ask the user if he want to try to reconnect
      */
     @Override
     public synchronized void disconnect(boolean askForReconnect) {
@@ -1652,6 +1634,15 @@ public class SessionImpl implements Session {
     @Override
     public void setJsonLogActive(boolean jsonLogActive) {
         this.jsonLogActive = jsonLogActive;
+    }
+
+    private void setLastError(String error) {
+        lastError = error;
+    }
+
+    @Override
+    public String getLastError() {
+        return lastError;
     }
 
 }

@@ -4,6 +4,7 @@ import mage.abilities.Modes;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.condition.Condition;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.constants.EffectType;
 import mage.game.Game;
@@ -13,7 +14,7 @@ import mage.game.events.GameEvent;
  * Adds condition to {@link mage.abilities.effects.ContinuousEffect}. Acts as
  * decorator.
  *
- * @author nantuko
+ * @author noahg
  */
 public class ConditionalTriggeredAbility extends TriggeredAbilityImpl {
 
@@ -46,11 +47,6 @@ public class ConditionalTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkInterveningIfClause(Game game) {
-        return condition.apply(game, this);
-    }
-
-    @Override
     public ConditionalTriggeredAbility copy() {
         return new ConditionalTriggeredAbility(this);
     }
@@ -64,7 +60,7 @@ public class ConditionalTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         ability.setSourceId(this.getSourceId());
         ability.setControllerId(this.getControllerId());
-        return ability.checkTrigger(event, game);
+        return ability.checkTrigger(event, game) && condition.apply(game, this);
     }
 
     @Override
@@ -78,6 +74,11 @@ public class ConditionalTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public Effects getEffects() {
         return ability.getEffects();
+    }
+
+    @Override
+    public void addEffect(Effect effect) {
+        ability.addEffect(effect);
     }
 
     @Override

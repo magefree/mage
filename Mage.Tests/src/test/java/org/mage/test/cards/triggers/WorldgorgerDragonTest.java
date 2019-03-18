@@ -80,7 +80,7 @@ public class WorldgorgerDragonTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Animate Dead");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
         // Instant {X}{R}{R}
-        // Volcanic Geyser deals X damage to target creature or player.
+        // Volcanic Geyser deals X damage to any target.
         addCard(Zone.HAND, playerA, "Volcanic Geyser", 1);
         // When Staunch Defenders enters the battlefield, you gain 4 life.
         addCard(Zone.BATTLEFIELD, playerA, "Staunch Defenders", 1);
@@ -162,7 +162,7 @@ public class WorldgorgerDragonTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Animate Dead");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
         // Instant {X}{R}{R}
-        // Volcanic Geyser deals X damage to target creature or player.
+        // Volcanic Geyser deals X damage to any target.
         addCard(Zone.HAND, playerA, "Volcanic Geyser", 1);
         // When Staunch Defenders enters the battlefield, you gain 4 life.
         addCard(Zone.BATTLEFIELD, playerA, "Staunch Defenders", 1);

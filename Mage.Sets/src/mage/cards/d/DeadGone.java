@@ -16,7 +16,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author dustinconrad
  */
-public class DeadGone extends SplitCard {
+public final class DeadGone extends SplitCard {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
 

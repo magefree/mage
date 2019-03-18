@@ -1,30 +1,4 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards.j;
 
 import java.util.UUID;
@@ -37,7 +11,6 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
@@ -59,10 +32,10 @@ import mage.target.TargetCard;
  *
  * @author North
  */
-public class JarOfEyeballs extends CardImpl {
+public final class JarOfEyeballs extends CardImpl {
 
     public JarOfEyeballs(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // Whenever a creature you control dies, put two eyeball counters on Jar of Eyeballs.
         this.addAbility(new JarOfEyeballsTriggeredAbility());
@@ -110,7 +83,7 @@ class JarOfEyeballsTriggeredAbility extends TriggeredAbilityImpl {
         if (((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD
                 && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (permanent.getControllerId().equals(this.getControllerId()) && permanent.isCreature()) {
+            if (permanent.isControlledBy(this.getControllerId()) && permanent.isCreature()) {
                 return true;
             }
         }
@@ -184,37 +157,25 @@ class JarOfEyeballsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
         int countersRemoved = 0;
         for (Cost cost : source.getCosts()) {
             if (cost instanceof JarOfEyeballsCost) {
                 countersRemoved = ((JarOfEyeballsCost) cost).getRemovedCounters();
             }
         }
-
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-
-        Cards cards = new CardsImpl();
-        int count = Math.min(player.getLibrary().size(), countersRemoved);
-        for (int i = 0; i < count; i++) {
-            Card card = player.getLibrary().removeFromTop(game);
-            if (card != null) {
-                cards.add(card);
-            }
-        }
-        player.lookAtCards("Jar of Eyeballs", cards, game);
-
+        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, countersRemoved));
+        controller.lookAtCards(source, null, cards, game);
         TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put into your hand"));
-        if (player.choose(Outcome.DrawCard, cards, target, game)) {
-            Card card = cards.get(target.getFirstTarget(), game);
-            if (card != null) {
-                cards.remove(card);
-                card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-            }
+        if (controller.choose(Outcome.DrawCard, cards, target, game)) {
+            Cards targetCards = new CardsImpl(target.getTargets());
+            controller.moveCards(targetCards, Zone.HAND, source, game);
+            cards.removeAll(targetCards);
         }
-        player.putCardsOnBottomOfLibrary(cards, game, source, true);
+        controller.putCardsOnBottomOfLibrary(cards, game, source, true);
         return true;
     }
 }

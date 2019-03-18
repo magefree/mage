@@ -45,13 +45,13 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.watchers.common.DamagedByWatcher;
 
 /**
  * @author LevelX
  */
-public class KumanoMasterYamabushi extends CardImpl {
+public final class KumanoMasterYamabushi extends CardImpl {
 
     public KumanoMasterYamabushi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
@@ -62,9 +62,9 @@ public class KumanoMasterYamabushi extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // {{1}{R}: Kumano, Master Yamabushi deals 1 damage to target creature or player.
+        // {{1}{R}: Kumano, Master Yamabushi deals 1 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{1}{R}") );
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
         // If a creature dealt damage by Kumano this turn would die, exile it instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DealtDamageToCreatureBySourceDies(this, Duration.WhileOnBattlefield)), new DamagedByWatcher());

@@ -1,31 +1,10 @@
-/*
- * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
 package org.mage.plugins.card.dl.sources;
+
+import mage.constants.SubType;
+import org.apache.log4j.Logger;
+import org.mage.plugins.card.images.CardDownloadData;
+import org.mage.plugins.card.images.DownloadPicturesService;
+import org.mage.plugins.card.utils.CardImageUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -34,22 +13,10 @@ import java.io.InputStreamReader;
 import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.logging.Level;
-import mage.constants.SubType;
-import org.apache.log4j.Logger;
-import org.mage.plugins.card.images.CardDownloadData;
-import org.mage.plugins.card.images.DownloadPictures;
-import org.mage.plugins.card.utils.CardImageUtils;
 
 /**
- *
  * @author Quercitron
  */
 public enum TokensMtgImageSource implements CardImageSource {
@@ -58,7 +25,7 @@ public enum TokensMtgImageSource implements CardImageSource {
     private static final Logger logger = Logger.getLogger(TokensMtgImageSource.class);
 
     // [[EXP/Name, TokenData>
-    private HashMap<String, ArrayList<TokenData>> tokensData;
+    private HashMap<String, List<TokenData>> tokensData;
     private static final Set<String> supportedSets = new LinkedHashSet<String>();
 
     private final Object tokensDataSync = new Object();
@@ -84,7 +51,7 @@ public enum TokensMtgImageSource implements CardImageSource {
     }
 
     @Override
-    public String generateURL(CardDownloadData card) throws Exception {
+    public CardImageUrls generateCardUrl(CardDownloadData card) throws Exception {
         return null;
     }
 
@@ -97,7 +64,7 @@ public enum TokensMtgImageSource implements CardImageSource {
 
     private String getEmblemName(String originalName) {
 
-        for (SubType subType : SubType.getPlaneswalkerTypes(true)) {
+        for (SubType subType : SubType.getPlaneswalkerTypes()) {
             if (originalName.toLowerCase(Locale.ENGLISH).contains(subType.toString().toLowerCase(Locale.ENGLISH))) {
                 return subType.getDescription() + " Emblem";
             }
@@ -106,7 +73,7 @@ public enum TokensMtgImageSource implements CardImageSource {
     }
 
     @Override
-    public String generateTokenUrl(CardDownloadData card) throws IOException {
+    public CardImageUrls generateTokenUrl(CardDownloadData card) throws IOException {
         String name = card.getName();
         String set = card.getSet();
         int type = card.getType();
@@ -151,7 +118,7 @@ public enum TokensMtgImageSource implements CardImageSource {
         String url = "http://tokens.mtg.onl/tokens/" + tokenData.getExpansionSetCode().trim() + '_'
                 + tokenData.getNumber().trim() + '-' + tokenData.getName().trim() + ".jpg";
         url = url.replace(' ', '-');
-        return url;
+        return new CardImageUrls(url);
     }
 
     @Override
@@ -186,7 +153,12 @@ public enum TokensMtgImageSource implements CardImageSource {
     }
 
     @Override
-    public boolean isImageProvided(String setCode, String cardName) {
+    public boolean isCardImageProvided(String setCode, String cardName) {
+        return false;
+    }
+
+    @Override
+    public boolean isTokenImageProvided(String setCode, String cardName, Integer tokenNumber) {
         String searchName = cardName;
         if (cardName.toLowerCase(Locale.ENGLISH).contains("emblem")) {
             searchName = getEmblemName(cardName);
@@ -205,10 +177,10 @@ public enum TokensMtgImageSource implements CardImageSource {
         return false;
     }
 
-    private HashMap<String, ArrayList<TokenData>> getTokensData() throws IOException {
+    private HashMap<String, List<TokenData>> getTokensData() throws IOException {
         synchronized (tokensDataSync) {
             if (tokensData == null) {
-                DownloadPictures.getInstance().updateAndViewMessage("Creating token data...");
+                DownloadPicturesService.getInstance().updateAndViewMessage("Find tokens data...");
                 tokensData = new HashMap<>();
 
                 // get tokens data from resource file
@@ -216,7 +188,7 @@ public enum TokensMtgImageSource implements CardImageSource {
                     List<TokenData> fileTokensData = parseTokensData(inputStream);
                     for (TokenData tokenData : fileTokensData) {
                         String key = tokenData.getExpansionSetCode() + "/" + tokenData.getName();
-                        ArrayList<TokenData> list = tokensData.get(key);
+                        List<TokenData> list = tokensData.get(key);
                         if (list == null) {
                             list = new ArrayList<>();
                             tokensData.put(key, list);
@@ -241,7 +213,7 @@ public enum TokensMtgImageSource implements CardImageSource {
                         // logger.info("TOK: " + siteData.getExpansionSetCode() + "/" + siteData.getName());
                         String key = siteData.getExpansionSetCode() + "/" + siteData.getName();
                         supportedSets.add(siteData.getExpansionSetCode());
-                        ArrayList<TokenData> list = tokensData.get(key);
+                        List<TokenData> list = tokensData.get(key);
                         if (list == null) {
                             list = new ArrayList<>();
                             tokensData.put(key, list);
@@ -259,10 +231,10 @@ public enum TokensMtgImageSource implements CardImageSource {
                             }
                         }
                     }
-                    DownloadPictures.getInstance().updateAndViewMessage("");
+                    DownloadPicturesService.getInstance().updateAndViewMessage("");
                 } catch (Exception ex) {
                     logger.warn("Failed to get tokens description from tokens.mtg.onl", ex);
-                    DownloadPictures.getInstance().updateAndViewMessage(ex.getMessage());
+                    DownloadPicturesService.getInstance().updateAndViewMessage(ex.getMessage());
                 }
             }
         }
@@ -274,10 +246,10 @@ public enum TokensMtgImageSource implements CardImageSource {
         List<TokenData> newTokensData = new ArrayList<>();
 
         try (InputStreamReader inputReader = new InputStreamReader(inputStream, "Cp1252");
-                BufferedReader reader = new BufferedReader(inputReader)) {
+             BufferedReader reader = new BufferedReader(inputReader)) {
             // we have to specify encoding to read special comma
 
-            reader.readLine(); // skip header
+            String header = reader.readLine(); // skip header
             String line = reader.readLine();
             // states
             // 0 - wait set name

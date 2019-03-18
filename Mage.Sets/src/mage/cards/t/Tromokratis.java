@@ -1,35 +1,5 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.cards.t;
 
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -50,11 +20,14 @@ import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
-public class Tromokratis extends CardImpl {
+public final class Tromokratis extends CardImpl {
 
     public Tromokratis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
@@ -104,17 +77,17 @@ class CantBeBlockedUnlessAllEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         // check if all creatures of defender are able to block this permanent
         // permanent.canBlock() can't be used because causing recursive call
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, blocker.getControllerId(), game)) {
-            if (permanent.isTapped() && !game.getState().getContinuousEffects().asThough(this.getId(), AsThoughEffectType.BLOCK_TAPPED, source, blocker.getControllerId(), game)) {
+            if (permanent.isTapped() && null == game.getState().getContinuousEffects().asThough(this.getId(), AsThoughEffectType.BLOCK_TAPPED, source, blocker.getControllerId(), game)) {
                 return false;
             }
             // check blocker restrictions
             for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(permanent, game).entrySet()) {
                 for (Ability ability : entry.getValue()) {
-                    if (!entry.getKey().canBlock(attacker, permanent, ability, game)) {
+                    if (!entry.getKey().canBlock(attacker, permanent, ability, game, canUseChooseDialogs)) {
                         return false;
                     }
                 }
@@ -123,7 +96,7 @@ class CantBeBlockedUnlessAllEffect extends RestrictionEffect {
             for (Map.Entry<RestrictionEffect, Set<Ability>> restrictionEntry : game.getContinuousEffects().getApplicableRestrictionEffects(attacker, game).entrySet()) {
                 for (Ability ability : restrictionEntry.getValue()) {
                     if (!(restrictionEntry.getKey() instanceof CantBeBlockedUnlessAllEffect)
-                            && !restrictionEntry.getKey().canBeBlocked(attacker, permanent, ability, game)) {
+                            && !restrictionEntry.getKey().canBeBlocked(attacker, permanent, ability, game, canUseChooseDialogs)) {
                         return false;
                     }
                 }
@@ -136,7 +109,7 @@ class CantBeBlockedUnlessAllEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBeBlockedCheckAfter(Permanent attacker, Ability source, Game game) {
+    public boolean canBeBlockedCheckAfter(Permanent attacker, Ability source, Game game, boolean canUseChooseDialogs) {
         for (CombatGroup combatGroup : game.getCombat().getGroups()) {
             if (combatGroup.getAttackers().contains(source.getSourceId())) {
                 for (UUID blockerId : combatGroup.getBlockers()) {

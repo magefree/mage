@@ -51,7 +51,7 @@ import java.util.UUID;
 /**
  * @author LevelX
  */
-public class BushiTenderfoot extends CardImpl {
+public final class BushiTenderfoot extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that was dealt damage this turn");
 

@@ -1,57 +1,19 @@
-/*
- * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
-
- /*
- * MageDialog.java
- *
- * Created on 15-Dec-2009, 10:28:27 PM
- */
 package mage.client.dialog;
 
-import java.awt.AWTEvent;
-import java.awt.ActiveEvent;
-import java.awt.Component;
-import java.awt.EventQueue;
-import java.awt.KeyboardFocusManager;
-import java.awt.MenuComponent;
-import java.awt.TrayIcon;
+import mage.client.MageFrame;
+import mage.client.util.SettingsManager;
+import mage.client.util.gui.GuiDisplayUtil;
+import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.InvocationEvent;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyVetoException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Level;
-import javax.swing.*;
-
-import mage.client.MageFrame;
-import org.apache.log4j.Logger;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class MageDialog extends javax.swing.JInternalFrame {
@@ -101,7 +63,7 @@ public class MageDialog extends javax.swing.JInternalFrame {
 
         this.toFront();
 
-        if (modal){
+        if (modal) {
             startModal();
         }
     }
@@ -131,6 +93,7 @@ public class MageDialog extends javax.swing.JInternalFrame {
     }
 
     private synchronized void startModal() {
+        // modal loop -- all mouse events must be ignored by other windows
         try {
             if (SwingUtilities.isEventDispatchThread()) {
                 EventQueue theQueue = getToolkit().getSystemEventQueue();
@@ -141,18 +104,46 @@ public class MageDialog extends javax.swing.JInternalFrame {
 
                     // https://github.com/magefree/mage/issues/584 - Let's hope this will fix the Linux window problem
                     if (event.getSource() != null && event.getSource() instanceof TrayIcon && !(event instanceof InvocationEvent)) {
-                        return;
+                        dispatch = false;
+                        //return; // JayDi85: users can move mouse over try icon to disable modal mode (it's a bug but can be used in the future)
                     }
+
+                    // ignore mouse events outside from panel, only drag and move allowed -- as example:
+                    // combobox's popup will be selectable outside
+                    // cards and button hints will be works
+                    Component popupComponent = null;
+                    MouseEvent popupEvent = null;
                     if (event instanceof MouseEvent && event.getSource() instanceof Component) {
                         MouseEvent e = (MouseEvent) event;
                         MouseEvent m = SwingUtilities.convertMouseEvent((Component) e.getSource(), e, this);
-                        if (!this.contains(m.getPoint()) && e.getID() != MouseEvent.MOUSE_DRAGGED) {
-                            dispatch = false;
+
+                        // disable all outer events (except some actions)
+                        if (!this.contains(m.getPoint())) {
+                            boolean allowedEvent = false;
+
+                            // need any mouse move (for hints)
+                            if (e.getID() == MouseEvent.MOUSE_DRAGGED || e.getID() == MouseEvent.MOUSE_MOVED) {
+                                allowedEvent = true;
+                            }
+
+                            // need popup clicks and mouse wheel (for out of bound actions)
+                            if (!allowedEvent) {
+                                popupComponent = SwingUtilities.getDeepestComponentAt(e.getComponent(), e.getX(), e.getY()); // show root component (popups creates at root)
+                                if (popupComponent != null && popupComponent.getClass().getName().contains("BasicComboPopup")) {
+                                    popupEvent = SwingUtilities.convertMouseEvent((Component) e.getSource(), e, popupComponent);
+                                    allowedEvent = true;
+                                }
+                            }
+
+                            dispatch = allowedEvent;
                         }
                     }
 
                     if (dispatch) {
-                        if (event instanceof ActiveEvent) {
+                        if (popupEvent != null) {
+                            // process outer popup events, it's must be FIRST check
+                            popupComponent.dispatchEvent(popupEvent);
+                        } else if (event instanceof ActiveEvent) {
                             ((ActiveEvent) event).dispatch();
                         } else if (source instanceof Component) {
                             ((Component) source).dispatchEvent(event);
@@ -200,13 +191,20 @@ public class MageDialog extends javax.swing.JInternalFrame {
             java.util.logging.Logger.getLogger(MageDialog.class.getName()).log(Level.SEVERE, "setClosed(false) failed", ex);
         }
         MageFrame.getDesktop().remove(this);
+    }
 
+    public void makeWindowCentered() {
+        makeWindowCentered(this, getWidth(), getHeight());
+    }
+
+    public static void makeWindowCentered(Component component, int width, int height) {
+        Point centered = SettingsManager.instance.getComponentPosition(width, height);
+        component.setLocation(centered.x, centered.y);
+        GuiDisplayUtil.keepComponentInsideScreen(centered.x, centered.y, component);
     }
 
     /**
      * Used to set a tooltip text on icon and titel bar
-     *
-     * used in {@link ExileZoneDialog} and {@link ShowCardsDialog}
      *
      * @param text
      */
@@ -235,12 +233,12 @@ public class MageDialog extends javax.swing.JInternalFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 394, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 274, Short.MAX_VALUE)
         );
 
         pack();

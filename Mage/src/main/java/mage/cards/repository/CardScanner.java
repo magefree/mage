@@ -1,39 +1,13 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.cards.repository;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.cards.*;
 import org.apache.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 /**
- *
  * @author North
  */
 public final class CardScanner {
@@ -53,14 +27,15 @@ public final class CardScanner {
         scanned = true;
 
         List<CardInfo> cardsToAdd = new ArrayList<>();
-        int setsUpdatedCount = 0;
-        int setsAddedCount = 0;
+        List<ExpansionInfo> setsToAdd = new ArrayList<>();
+        List<ExpansionInfo> setsToUpdate = new ArrayList<>();
 
+        // check sets
         for (ExpansionSet set : Sets.getInstance().values()) {
             ExpansionInfo expansionInfo = ExpansionRepository.instance.getSetByCode(set.getCode());
             if (expansionInfo == null) {
-                setsAddedCount += 1;
-                ExpansionRepository.instance.add(new ExpansionInfo(set));
+                // need add
+                setsToAdd.add(new ExpansionInfo(set));
             } else if (!expansionInfo.name.equals(set.getName())
                     || !expansionInfo.code.equals(set.getCode())
                     || (expansionInfo.blockName == null ? set.getBlockName() != null : !expansionInfo.blockName.equals(set.getBlockName()))
@@ -68,22 +43,17 @@ public final class CardScanner {
                     || expansionInfo.type != set.getSetType()
                     || expansionInfo.boosters != set.hasBoosters()
                     || expansionInfo.basicLands != set.hasBasicLands()) {
-                setsUpdatedCount += 1;
-                ExpansionRepository.instance.update(expansionInfo);
+                // need update
+                setsToUpdate.add(expansionInfo);
             }
         }
-        ExpansionRepository.instance.setContentVersion(ExpansionRepository.instance.getContentVersionConstant());
+        ExpansionRepository.instance.saveSets(setsToAdd, setsToUpdate, ExpansionRepository.instance.getContentVersionConstant());
 
-        if (setsAddedCount > 0) {
-            logger.info("DB: need to add " + setsUpdatedCount + " new sets");
-        }
-        if (setsUpdatedCount > 0) {
-            logger.info("DB: need to update " + setsUpdatedCount + " sets");
-        }
-
+        // check cards (only add mode, without updates)
         for (ExpansionSet set : Sets.getInstance().values()) {
             for (ExpansionSet.SetCardInfo setInfo : set.getSetCardInfo()) {
                 if (CardRepository.instance.findCard(set.getCode(), setInfo.getCardNumber()) == null) {
+                    // need add
                     Card card = CardImpl.createCard(
                             setInfo.getCardClass(),
                             new CardSetInfo(setInfo.getName(), set.getCode(), setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()),
@@ -99,11 +69,25 @@ public final class CardScanner {
                 }
             }
         }
+        CardRepository.instance.saveCards(cardsToAdd, CardRepository.instance.getContentVersionConstant());
+    }
 
-        if (!cardsToAdd.isEmpty()) {
-            logger.info("DB: need to add " + cardsToAdd.size() + " new cards");
-            CardRepository.instance.addCards(cardsToAdd);
+    public static List<Card> getAllCards() {
+        return getAllCards(true);
+    }
+
+    public static List<Card> getAllCards(boolean ignoreCustomSets) {
+        Collection<ExpansionSet> sets = Sets.getInstance().values();
+        List<Card> cards = new ArrayList<>();
+        for (ExpansionSet set : sets) {
+            if (ignoreCustomSets && set.getSetType().isCustomSet()) {
+                continue;
+            }
+            for (ExpansionSet.SetCardInfo setInfo : set.getSetCardInfo()) {
+                cards.add(CardImpl.createCard(setInfo.getCardClass(), new CardSetInfo(setInfo.getName(), set.getCode(),
+                        setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo())));
+            }
         }
-        CardRepository.instance.setContentVersion(CardRepository.instance.getContentVersionConstant());
+        return cards;
     }
 }

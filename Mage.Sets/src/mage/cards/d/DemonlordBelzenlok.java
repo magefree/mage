@@ -1,0 +1,101 @@
+
+package mage.cards.d;
+
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.TrampleAbility;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
+
+/**
+ *
+ * @author TheElk801
+ */
+public final class DemonlordBelzenlok extends CardImpl {
+
+    public DemonlordBelzenlok(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
+
+        this.addSuperType(SuperType.LEGENDARY);
+        this.subtype.add(SubType.ELDER);
+        this.subtype.add(SubType.DEMON);
+        this.power = new MageInt(6);
+        this.toughness = new MageInt(6);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
+
+        // When Demonlord Belzenlok enters the battlefield, exile cards from the top of your library until you exile a nonland card, then put that card into your hand. If the card's converted mana cost is 4 or greater, repeat this process. Demonlord Belzenlok deals 1 damage to you for each card put into your hand this way.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DemonlordBelzenlokEffect()));
+    }
+
+    public DemonlordBelzenlok(final DemonlordBelzenlok card) {
+        super(card);
+    }
+
+    @Override
+    public DemonlordBelzenlok copy() {
+        return new DemonlordBelzenlok(this);
+    }
+}
+
+class DemonlordBelzenlokEffect extends OneShotEffect {
+
+    public DemonlordBelzenlokEffect() {
+        super(Outcome.Benefit);
+        staticText = "exile cards from the top of your library until you exile a nonland card, then put that card into your hand. "
+                + "If the card's converted mana cost is 4 or greater, repeat this process. "
+                + "{this} deals 1 damage to you for each card put into your hand this way";
+    }
+
+    public DemonlordBelzenlokEffect(final DemonlordBelzenlokEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (controller == null || permanent == null) {
+            return false;
+        }
+        boolean cont = true;
+        int addedToHand = 0;
+        while (controller.getLibrary().hasCards() && cont) {
+            Card card = controller.getLibrary().getFromTop(game);
+            if (card != null) {
+                controller.moveCards(card, Zone.EXILED, source, game);
+                if (!card.isLand()) {
+                    if (card.getConvertedManaCost() < 4) {
+                        cont = false;
+                    }
+                    controller.moveCards(card, Zone.HAND, source, game);
+                    addedToHand++;
+                }
+            }
+        }
+        controller.damage(addedToHand, source.getSourceId(), game, false, true);
+        return true;
+    }
+
+    @Override
+    public DemonlordBelzenlokEffect copy() {
+        return new DemonlordBelzenlokEffect(this);
+    }
+}

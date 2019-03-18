@@ -63,7 +63,7 @@ import static org.mage.card.arcane.ManaSymbols.getSizedManaSymbol;
  */
 public class ModernCardRenderer extends CardRenderer {
 
-    private final static Logger LOGGER = Logger.getLogger(ModernCardRenderer.class);
+    private static final Logger LOGGER = Logger.getLogger(ModernCardRenderer.class);
 
     ///////////////////////////////////////////////////////////////////////////
     // Textures for modern frame cards

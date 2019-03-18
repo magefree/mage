@@ -1,30 +1,4 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards.c;
 
 import java.util.UUID;
@@ -55,7 +29,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author BetaSteward
  */
-public class CurseOfEchoes extends CardImpl {
+public final class CurseOfEchoes extends CardImpl {
 
     public CurseOfEchoes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");
@@ -116,7 +90,7 @@ class CurseOfEchoesCopyTriggeredAbility extends TriggeredAbilityImpl {
             Permanent enchantment = game.getPermanent(sourceId);
             if (enchantment != null && enchantment.getAttachedTo() != null) {
                 Player player = game.getPlayer(enchantment.getAttachedTo());
-                if (player != null && spell.getControllerId().equals(player.getId())) {
+                if (player != null && spell.isControlledBy(player.getId())) {
                     this.getEffects().get(0).setTargetPointer(new FixedTarget(spell.getId()));
                     return true;
                 }
@@ -147,9 +121,9 @@ class CurseOfEchoesEffect extends OneShotEffect {
         if (spell != null) {
             String chooseMessage = "Copy target spell?  You may choose new targets for the copy.";
             for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-                if (!playerId.equals(spell.getControllerId())) {
+                if (!spell.isControlledBy(playerId)) {
                     Player player = game.getPlayer(playerId);
-                    if (player.chooseUse(Outcome.Copy, chooseMessage, source, game)) {
+                    if (player != null && player.chooseUse(Outcome.Copy, chooseMessage, source, game)) {
                         spell.createCopyOnStack(game, source, player.getId(), true);
                     }
                 }

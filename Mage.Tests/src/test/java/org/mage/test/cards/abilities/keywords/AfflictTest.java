@@ -50,9 +50,9 @@ public class AfflictTest extends CardTestPlayerBase {
         // {1}{R}: Frontline Devastator gets +1/+0 until end of turn.
         addCard(Zone.BATTLEFIELD, playerA, "Frontline Devastator");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         // {2}, {T}: Exile target creature you control.
-        // {4}, {T}, Sacrifice Endless Sands: Return each creature card exiled with Endless Sands to the battlefield under its owner’s control.
+        // {4}, {T}, Sacrifice Endless Sands: Return each creature card exiled with Endless Sands to the battlefield under its owner's control.
         addCard(Zone.BATTLEFIELD, playerA, "Endless Sands");
 
         // Deathtouch

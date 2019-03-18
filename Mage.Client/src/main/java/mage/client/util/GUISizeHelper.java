@@ -8,6 +8,7 @@ package mage.client.util;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.Locale;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -22,9 +23,9 @@ import org.mage.card.arcane.CardRenderer;
 public final class GUISizeHelper {
 
     // relate the native image card size to a value of the size scale
-    final static int CARD_IMAGE_WIDTH = 312;
-    final static int CARD_IMAGE_HEIGHT = 445;
-    final static int CARD_IMAG_VALUE = 42;
+    static final int CARD_IMAGE_WIDTH = 312;
+    static final int CARD_IMAGE_HEIGHT = 445;
+    static final int CARD_IMAG_VALUE = 42;
 
     public static String basicSymbolSize = "small";
 
@@ -177,5 +178,12 @@ public final class GUISizeHelper {
                 }
             }
         }
+    }
+
+    public static String textToHtmlWithSize(String text, Font font) {
+        if (text != null && !text.toLowerCase(Locale.ENGLISH).startsWith("<html>")) {
+            return "<html><p style=\"font-size: " + font.getSize() + ";\">" + text + "</p>";
+        }
+        return text;
     }
 }

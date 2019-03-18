@@ -10,6 +10,7 @@ Arabian Nights|ArabianNights|
 Arena League|ArenaLeague|
 Asia Pacific Land Program|AsiaPacificLandProgram|
 Avacyn Restored|AvacynRestored|
+Battlebond|Battlebond|
 Battle for Zendikar|BattleForZendikar|
 Betrayers of Kamigawa|BetrayersOfKamigawa|
 Born of the Gods|BornOfTheGods|
@@ -19,46 +20,48 @@ Chronicles|Chronicles|
 Clash Pack|ClashPack|
 Classic Sixth Edition|ClassicSixthEdition|
 Coldsnap|Coldsnap|
-Commander 2013 Edition|Commander2013|
-Commander 2014 Edition|Commander2014|
-Commander 2015|Commander2015|
-Commander 2016|Commander2016|
-Commander 2017|Commander2017|
+Commander 2013 Edition|Commander2013Edition|
+Commander 2014 Edition|Commander2014Edition|
+Commander 2015 Edition|Commander2015Edition|
+Commander 2016 Edition|Commander2016Edition|
+Commander 2017 Edition|Commander2017Edition|
+Commander 2018|Commander2018Edition|
 Commander Anthology|CommanderAnthology|
+Commander Anthology 2018|CommanderAnthology2018|
 Commander's Arsenal|CommandersArsenal|
 Conflux|Conflux|
 Conspiracy: Take the Crown|ConspiracyTakeTheCrown|
-Core 2019|Core2019|
+Core Set 2019|CoreSet2019|
 Dark Ascension|DarkAscension|
 Darksteel|Darksteel|
 Dissension|Dissension|
 Dominaria|Dominaria|
 Dragon's Maze|DragonsMaze|
 Dragons of Tarkir|DragonsOfTarkir|
-Duel Decks: Ajani vs. Nicol Bolas|AjaniVsNicolBolas|
-Duel Decks: Anthology, Divine vs. Demonic|AnthologyDivineVsDemonic|
-Duel Decks: Anthology, Elves vs. Goblins|AnthologyElvesVsGoblins|
-Duel Decks: Anthology, Garruk vs. Liliana|AnthologyGarrukVsLiliana|
-Duel Decks: Anthology, Jace vs. Chandra|AnthologyJaceVsChandra|
-Duel Decks: Blessed vs. Cursed|BlessedVsCursed|
-Duel Decks: Divine vs. Demonic|DivineVsDemonic|
-Duel Decks: Elspeth vs. Kiora|ElspethVsKiora|
-Duel Decks: Elspeth vs. Tezzeret|ElspethVsTezzeret|
-Duel Decks: Elves vs. Goblins|ElvesVsGoblins|
-Duel Decks: Garruk vs. Liliana|GarrukVsLiliana|
-Duel Decks: Heroes vs. Monsters|HeroesVsMonsters|
-Duel Decks: Izzet vs. Golgari|IzzetVsGolgari|
-Duel Decks: Jace vs. Chandra|JaceVsChandra|
-Duel Decks: Jace vs. Vraska|JaceVsVraska|
-Duel Decks: Knights vs. Dragons|KnightsVsDragons|
-Duel Decks: Merfolk vs. Goblins|MerfolkVsGoblins|
-Duel Decks: Mind vs. Might|MindVsMight|
-Duel Decks: Nissa vs. Ob Nixilis|NissaVsObNixilis|
-Duel Decks: Phyrexia vs. the Coalition|PhyrexiaVsTheCoalition|
-Duel Decks: Sorin vs. Tibalt|SorinVsTibalt|
-Duel Decks: Speed vs. Cunning|SpeedVsCunning|
-Duel Decks: Venser vs. Koth|VenserVsKoth|
-Duel Decks: Zendikar vs. Eldrazi|ZendikarVsEldrazi|
+Duel Decks: Ajani vs. Nicol Bolas|DuelDecksAjaniVsNicolBolas|
+Duel Decks: Anthology, Divine vs. Demonic|DuelDecksAnthologyDivineVsDemonic|
+Duel Decks: Anthology, Elves vs. Goblins|DuelDecksAnthologyElvesVsGoblins|
+Duel Decks: Anthology, Garruk vs. Liliana|DuelDecksAnthologyGarrukVsLiliana|
+Duel Decks: Anthology, Jace vs. Chandra|DuelDecksAnthologyJaceVsChandra|
+Duel Decks: Blessed vs. Cursed|DuelDecksBlessedVsCursed|
+Duel Decks: Divine vs. Demonic|DuelDecksDivineVsDemonic|
+Duel Decks: Elspeth vs. Kiora|DuelDecksElspethVsKiora|
+Duel Decks: Elspeth vs. Tezzeret|DuelDecksElspethVsTezzeret|
+Duel Decks: Elves vs. Goblins|DuelDecksElvesVsGoblins|
+Duel Decks: Garruk vs. Liliana|DuelDecksGarrukVsLiliana|
+Duel Decks: Heroes vs. Monsters|DuelDecksHeroesVsMonsters|
+Duel Decks: Izzet vs. Golgari|DuelDecksIzzetVsGolgari|
+Duel Decks: Jace vs. Chandra|DuelDecksJaceVsChandra|
+Duel Decks: Jace vs. Vraska|DuelDecksJaceVsVraska|
+Duel Decks: Knights vs. Dragons|DuelDecksKnightsVsDragons|
+Duel Decks: Merfolk vs. Goblins|DuelDecksMerfolkVsGoblins|
+Duel Decks: Mind vs. Might|DuelDecksMindVsMight|
+Duel Decks: Nissa vs. Ob Nixilis|DuelDecksNissaVsObNixilis|
+Duel Decks: Phyrexia vs. the Coalition|DuelDecksPhyrexiaVsTheCoalition|
+Duel Decks: Sorin vs. Tibalt|DuelDecksSorinVsTibalt|
+Duel Decks: Speed vs. Cunning|DuelDecksSpeedVsCunning|
+Duel Decks: Venser vs. Koth|DuelDecksVenserVsKoth|
+Duel Decks: Zendikar vs. Eldrazi|DuelDecksZendikarVsEldrazi|
 Duels of the Planeswalkers|DuelsOfThePlaneswalkers|
 Eighth Edition|EighthEdition|
 Eldritch Moon|EldritchMoon|
@@ -73,24 +76,26 @@ Fifth Dawn|FifthDawn|
 Fifth Edition|FifthEdition|
 Fourth Edition|FourthEdition|
 Friday Night Magic|FridayNightMagic|
-From the Vault: Angels|FTVAngels|
-From the Vault: Annihilation|FTVAnnihilation|
-From the Vault: Dragons|FTVDragons|
-From the Vault: Exiled|FTVExiled|
-From the Vault: Legends|FTVLegends|
-From the Vault: Lore|FTVLore|
-From the Vault: Realms|FTVRealms|
-From the Vault: Relics|FTVRelics|
-From the Vault: Transform|FTVTransform|
-From the Vault: Twenty|FTVTwenty|
+From the Vault: Angels|FromTheVaultAngels|
+From the Vault: Annihilation|FromTheVaultAnnihilation|
+From the Vault: Dragons|FromTheVaultDragons|
+From the Vault: Exiled|FromTheVaultExiled|
+From the Vault: Legends|FromTheVaultLegends|
+From the Vault: Lore|FromTheVaultLore|
+From the Vault: Realms|FromTheVaultRealms|
+From the Vault: Relics|FromTheVaultRelics|
+From the Vault: Transform|FromTheVaultTransform|
+From the Vault: Twenty|FromTheVaultTwenty|
 Future Sight|FutureSight|
 Game Day|GameDay|
 Gatecrash|Gatecrash|
-Grand Prix|GrandPrix|
+Global Series: Jiang Yanggu & Mu Yanling|GlobalSeriesJiangYangguAndMuYanling|
+Grand Prix|GrandPrixPromos|
 Guildpact|Guildpact|
+Guilds of Ravnica|GuildsOfRavnica|
 Guru|Guru|
 Happy Holidays|HappyHolidays|
-HASCON Promo 2017|HasconPromo2017|
+HASCON Promo 2017|HASCONPromo2017|
 Heroes of the Realm|HeroesOfTheRealm|
 Homelands|Homelands|
 Hour of Devastation|HourOfDevastation|
@@ -132,6 +137,7 @@ Mercadian Masques|MercadianMasques|
 Mirage|Mirage|
 Mirrodin|Mirrodin|
 Mirrodin Besieged|MirrodinBesieged|
+Modern Horizons|ModernHorizons|
 Modern Masters|ModernMasters|
 Modern Masters 2015|ModernMasters2015|
 Modern Masters 2017|ModernMasters2017|
@@ -144,17 +150,18 @@ Odyssey|Odyssey|
 Onslaught|Onslaught|
 Planar Chaos|PlanarChaos|
 Planechase|Planechase|
-Planechase 2012 Edition|Planechase2012|
+Planechase 2012 Edition|Planechase2012Edition|
 Planechase Anthology|PlanechaseAnthology|
 Planeshift|Planeshift|
 Portal|Portal|
 Portal Second Age|PortalSecondAge|
 Portal Three Kingdoms|PortalThreeKingdoms|
-Premium Deck Series: Graveborn|PDSGraveborn|
-Premium Deck Series: Fire and Lightning|PDSFireAndLightning|
-Premium Deck Series: Slivers|PDSSlivers|
+Premium Deck Series: Graveborn|PremiumDeckSeriesGraveborn|
+Premium Deck Series: Fire and Lightning|PremiumDeckSeriesFireAndLightning|
+Premium Deck Series: Slivers|PremiumDeckSeriesSlivers|
 Prerelease Events|PrereleaseEvents|
 Prophecy|Prophecy|
+Ravnica Allegiance|RavnicaAllegiance|
 Ravnica: City of Guilds|RavnicaCityOfGuilds|
 Return to Ravnica|ReturnToRavnica|
 Revised Edition|RevisedEdition|
@@ -195,6 +202,6 @@ Welcome Deck 2016|WelcomeDeck2016|
 Welcome Deck 2017|WelcomeDeck2017|
 World Magic Cup Qualifier|WorldMagicCupQualifier|
 Worldwake|Worldwake|
-WPN Gateway|WPNGateway|
+WPN Gateway|WPNAndGatewayPromos|
 Zendikar|Zendikar|
 Zendikar Expeditions|ZendikarExpeditions|

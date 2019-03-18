@@ -69,7 +69,7 @@ public class TargetPermanentOrSuspendedCard extends TargetImpl {
     }
     
     @Override
-    public Filter<Object> getFilter() {
+    public Filter<MageObject> getFilter() {
         return this.filter;
     }
     

@@ -18,7 +18,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author Styxo
  */
-public class HeavenEarth extends SplitCard {
+public final class HeavenEarth extends SplitCard {
 
     private static final FilterCreaturePermanent filterFlying = new FilterCreaturePermanent("creature with flying");
     private static final FilterCreaturePermanent filterWithouFlying = new FilterCreaturePermanent("creature without flying");
@@ -33,13 +33,13 @@ public class HeavenEarth extends SplitCard {
 
         // Falling
         // Falling deals X damage to each creature with flying.
-        getLeftHalfCard().getSpellAbility().addEffect(new DamageAllEffect(new ManacostVariableValue(), filterFlying));
+        getLeftHalfCard().getSpellAbility().addEffect(new DamageAllEffect(ManacostVariableValue.instance, filterFlying));
 
         // to
         // Earth
         // Earth deals X damage to each creature without flying.
-        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility().setRuleAtTheTop(true));
-        getRightHalfCard().getSpellAbility().addEffect(new DamageAllEffect(new ManacostVariableValue(), filterWithouFlying));
+        getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
+        getRightHalfCard().getSpellAbility().addEffect(new DamageAllEffect(ManacostVariableValue.instance, filterWithouFlying));
     }
 
     public HeavenEarth(final HeavenEarth card) {

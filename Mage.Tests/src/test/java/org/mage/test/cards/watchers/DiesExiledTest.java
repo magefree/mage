@@ -28,7 +28,7 @@ public class DiesExiledTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Sejiri Merfolk");
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Kumano's Blessing", "Prodigal Pyromancer");
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: {source} deals 1 damage to target creature or player.", "Sejiri Merfolk");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: {source} deals 1 damage to", "Sejiri Merfolk");
         
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -41,7 +41,7 @@ public class DiesExiledTest extends CardTestPlayerBase {
     /*
      * Frostwielder
      * Creature — Human Shaman 1/2, 2RR (4)
-     * {T}: Frostwielder deals 1 damage to target creature or player.
+     * {T}: Frostwielder deals 1 damage to 
      * If a creature dealt damage by Frostwielder this turn would die, exile it instead.
      *
     */
@@ -53,7 +53,7 @@ public class DiesExiledTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Frostwielder");
         addCard(Zone.BATTLEFIELD, playerB, "Sejiri Merfolk");
         
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals 1 damage to target creature or player.", "Sejiri Merfolk");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals 1 damage to ", "Sejiri Merfolk");
         
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -66,7 +66,7 @@ public class DiesExiledTest extends CardTestPlayerBase {
     /*
      * Kumano, Master Yamabushi
      * Legendary Creature — Human Shaman 4/4, 3RR (5)
-     * {1}{R}: Kumano, Master Yamabushi deals 1 damage to target creature or player.
+     * {1}{R}: Kumano, Master Yamabushi deals 1 damage to 
      * If a creature dealt damage by Kumano this turn would die, exile it instead.
      *
     */
@@ -78,7 +78,7 @@ public class DiesExiledTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Kumano, Master Yamabushi");
         addCard(Zone.BATTLEFIELD, playerB, "Sejiri Merfolk");
         
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{R}: {source} deals 1 damage to target creature or player.", "Sejiri Merfolk");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{R}: {source} deals 1 damage to ", "Sejiri Merfolk");
         
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -91,7 +91,7 @@ public class DiesExiledTest extends CardTestPlayerBase {
     /*
      * Yamabushi's Flame
      * Instant, 2R (3)
-     * Yamabushi's Flame deals 3 damage to target creature or player. If a 
+     * Yamabushi's Flame deals 3 damage to  If a 
      * creature dealt damage this way would die this turn, exile it instead.
      *
     */

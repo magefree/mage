@@ -71,6 +71,6 @@ public class InspiredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "<i>Inspired</i> - Whenever {this} becomes untapped, " + super.getRule();
+        return "<i>Inspired</i> &mdash; Whenever {this} becomes untapped, " + super.getRule();
     }
 }

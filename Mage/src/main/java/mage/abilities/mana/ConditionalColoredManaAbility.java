@@ -8,7 +8,7 @@ package mage.abilities.mana;
 import mage.Mana;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.AddConditionalManaEffect;
+import mage.abilities.effects.mana.AddConditionalManaEffect;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.constants.Zone;
 

@@ -2,7 +2,7 @@
 
 [![Join the chat at https://gitter.im/magefree/mage](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/magefree/mage?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://travis-ci.org/magefree/mage.svg?branch=master)](https://travis-ci.org/magefree/mage)
 
-XMage allows you to play Magic against one or more online players or computer opponents. It includes full rules enforcement for over **16950** unique cards (over 32800 counting all cards from different editions). Starting with *Morningtide*, all regular sets have nearly all the cards implemented.
+XMage allows you to play Magic against one or more online players or computer opponents. It includes full rules enforcement for over **17.200** unique cards (over 33.100 counting all cards from different editions). Starting with *Morningtide*, all regular sets have nearly all the cards implemented. A more detailed information which cards are implemented can be found [here](https://github.com/magefree/mage/wiki/Set-implementation-list).
 
 There are public servers where you can play XMage against other players. You can also host your own server to play against the AI and/or your friends.
 
@@ -11,6 +11,9 @@ XMage community:
 * [Official XMage support and feature request on github](https://github.com/magefree/mage/issues);
 * [Reddit XMage group](https://www.reddit.com/r/XMage/);
 * [Reddit XMage discord channel](https://discord.gg/Pqf42yn).
+
+Servers status:
+* http://xmageservers.online/
 
 ## Features
 
@@ -22,6 +25,10 @@ XMage community:
     * Booster (also Cube) draft tournaments (4-16)
     * Sealed (also from Cube) tournaments (2-16)
 
+## Issues / bugs
+
+Before you create a new issue, take a look at the [List of things already fixed but not yet released](https://github.com/magefree/mage/wiki/Features-and-fixes-not-released-yet#features-and-fixes-not-released-yet) to avoid creating uneccessary new issues.
+Also there is always a bug thread in the [Official XMage forum](http://www.slightlymagic.net/forum/viewforum.php?f=70) which we check regularly.
 
 ## Installation
 

@@ -1,0 +1,90 @@
+1 [CMD:272] Evolving Wilds
+1 [CMD:195] Duergar Hedge-Mage
+1 [CMD:273] Forgotten Cave
+1 [CMD:111] Avatar of Slaughter
+1 [CMD:231] Terminate
+2 [CMD:311] Mountain
+1 [CMD:24] Orim's Thunder
+2 [CMD:310] Swamp
+1 [CMD:25] Path to Exile
+2 [CMD:313] Mountain
+2 [CMD:312] Mountain
+1 [CMD:117] Comet Storm
+1 [CMD:238] Wrecking Ball
+2 [CMD:314] Mountain
+1 [CMD:21] Mother of Runes
+1 [CMD:116] Cleansing Beam
+1 [CMD:118] Death by Dragons
+2 [CMD:308] Swamp
+2 [CMD:307] Swamp
+1 [CMD:109] Anger
+2 [CMD:309] Swamp
+1 [CMD:18] Lightkeeper of Emeria
+1 [CMD:184] Basandra, Battle Seraph
+1 [CMD:261] Sol Ring
+1 [CMD:30] Serra Angel
+1 [CMD:186] Boros Guildmage
+1 [CMD:185] Bladewing the Risen
+1 [CMD:264] Akoum Refuge
+1 [CMD:267] Bojuka Bog
+2 [CMD:300] Plains
+1 [CMD:79] Dread Cacodemon
+1 [CMD:35] Voice of All
+1 [CMD:266] Barren Moor
+1 [CMD:36] Vow of Duty
+1 [CMD:269] Command Tower
+2 [CMD:302] Plains
+1 [CMD:104] Syphon Mind
+1 [CMD:268] Boros Garrison
+2 [CMD:301] Plains
+1 [CMD:103] Syphon Flesh
+1 [CMD:31] Shattered Angel
+1 [CMD:32] Soul Snare
+1 [CMD:108] Akroma, Angel of Fury
+1 [CMD:229] Tariel, Reckoner of Souls
+1 [CMD:77] Diabolic Tutor
+1 [CMD:107] Vow of Malice
+1 [CMD:28] Return to Dust
+1 [CMD:29] Righteous Cause
+1 [CMD:180] Angel of Despair
+1 [CMD:82] Fallen Angel
+1 [CMD:9] Bathe in Light
+1 [CMD:7] Archangel of Strife
+1 [CMD:5] Angelic Arbiter
+1 [CMD:130] Oni of Wild Places
+1 [CMD:298] Zoetic Cavern
+1 [CMD:3] Akroma's Vengeance
+1 [CMD:80] Evincar's Justice
+1 [CMD:297] Vivid Meadow
+1 [CMD:253] Lightning Greaves
+1 [CMD:132] Pyrohemia
+2 [CMD:299] Plains
+1 [CMD:211] Mortify
+1 [CMD:255] Orzhov Signet
+1 [CMD:137] Sulfurous Blast
+1 [CMD:257] Rakdos Signet
+1 [CMD:136] Stranglehold
+1 [CMD:216] Oros, the Avenger
+1 [CMD:138] Vow of Lightning
+1 [CMD:217] Orzhov Guildmage
+1 [CMD:209] Master Warcraft
+1 [CMD:208] Malfegor
+1 [CMD:94] Razorjaw Oni
+1 [CMD:283] Orzhov Basilica
+1 [CMD:95] Reiver Demon
+1 [CMD:282] Molten Slagheap
+1 [CMD:285] Rupture Spire
+1 [CMD:120] Dragon Whelp
+1 [CMD:284] Rakdos Carnarium
+1 [CMD:243] Boros Signet
+1 [CMD:286] Secluded Steppe
+1 [CMD:242] Armillary Sphere
+1 [CMD:121] Earthquake
+1 [CMD:124] Furnace Whelp
+1 [CMD:245] Darksteel Ingot
+1 [CMD:202] Gwyllion Hedge-Mage
+1 [CMD:11] Congregate
+1 [CMD:129] Mana-Charged Dragon
+SB: 1 [CMD:206] Kaalia of the Vast
+LAYOUT MAIN:(2,10)(CMC,true,50)|()([CMD:21])([CMD:186],[CMD:217])([CMD:195],[CMD:202])([CMD:109],[CMD:120],[CMD:124],[CMD:18],[CMD:94],[CMD:35])([CMD:184],[CMD:82],[CMD:30],[CMD:31])([CMD:208],[CMD:129],[CMD:130],[CMD:216])([CMD:180],[CMD:5],[CMD:7],[CMD:185],[CMD:229])([CMD:108],[CMD:111],[CMD:95])([CMD:79])([CMD:264],[CMD:266],[CMD:267],[CMD:268],[CMD:269],[CMD:272],[CMD:273],[CMD:282],[CMD:311],[CMD:311],[CMD:312],[CMD:312],[CMD:313],[CMD:313],[CMD:314],[CMD:314],[CMD:283],[CMD:299],[CMD:299],[CMD:300],[CMD:300],[CMD:301],[CMD:301],[CMD:302],[CMD:302],[CMD:284],[CMD:285],[CMD:286],[CMD:307],[CMD:307],[CMD:308],[CMD:308],[CMD:309],[CMD:309],[CMD:310],[CMD:310],[CMD:297],[CMD:298])([CMD:121],[CMD:25],[CMD:261],[CMD:32])([CMD:242],[CMD:9],[CMD:243],[CMD:117],[CMD:253],[CMD:255],[CMD:257],[CMD:231])([CMD:245],[CMD:211],[CMD:24],[CMD:36],[CMD:138],[CMD:107])([CMD:11],[CMD:77],[CMD:80],[CMD:209],[CMD:132],[CMD:28],[CMD:136],[CMD:137],[CMD:104],[CMD:238])([CMD:116],[CMD:29],[CMD:103])([CMD:3],[CMD:118])()()()
+LAYOUT SIDEBOARD:(1,1)(NONE,false,50)|([CMD:206])

@@ -1,52 +1,18 @@
-/*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.client.deckeditor.collection.viewer;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.GridBagLayout;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
+import mage.cards.repository.ExpansionRepository;
+import mage.cards.repository.RepositoryEvent;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.gui.FastSearchUtil;
 import mage.client.util.sets.ConstructedFormats;
+import mage.game.events.Listener;
 import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * Pane with big card and mage book.
@@ -59,6 +25,7 @@ public final class CollectionViewerPanel extends JPanel {
 
     protected static final String LAYOYT_CONFIG_KEY = "collectionViewerLayoutConfig";
     private static final String FORMAT_CONFIG_KEY = "collectionViewerFormat";
+    private static Listener<RepositoryEvent> setsDbListener = null;
 
     public CollectionViewerPanel() {
         initComponents();
@@ -73,6 +40,12 @@ public final class CollectionViewerPanel extends JPanel {
     public void cleanUp() {
         this.hidePopup();
         this.bigCard = null;
+    }
+
+    private void reloadFormatCombobox() {
+        DefaultComboBoxModel model = new DefaultComboBoxModel<>(ConstructedFormats.getTypes());
+        formats.setModel(model);
+        formats.setSelectedItem(ConstructedFormats.getDefault());
     }
 
     public void initComponents() {
@@ -100,8 +73,27 @@ public final class CollectionViewerPanel extends JPanel {
         setPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
         buttonsPanel.add(setPanel);
         // combo set
-        formats = new JComboBox<>(ConstructedFormats.getTypes());
-        formats.setSelectedItem(ConstructedFormats.getDefault());
+        formats = new JComboBox<>();
+        reloadFormatCombobox();
+        // auto-update sets list on changes
+        setsDbListener = new Listener<RepositoryEvent>() {
+            @Override
+            public void event(RepositoryEvent event) {
+                if (event.getEventType().equals(RepositoryEvent.RepositoryEventType.DB_UPDATED)) {
+                    reloadFormatCombobox();
+                }
+            }
+        };
+        ExpansionRepository.instance.subscribe(setsDbListener);
+        // update cards on format combobox changes
+        formats.addActionListener(e -> {
+            if (mageBook != null) {
+                String format = (String) formats.getSelectedItem();
+                MageFrame.getPreferences().put(CollectionViewerPanel.FORMAT_CONFIG_KEY, format);
+                mageBook.updateDispayedSets(format);
+            }
+        });
+
         formats.setAlignmentX(0.0F);
         formats.setMinimumSize(new Dimension(50, 25));
         formats.setPreferredSize(new Dimension(50, 25));
@@ -130,12 +122,12 @@ public final class CollectionViewerPanel extends JPanel {
 
         small3x3 = new JRadioButton("3x3");
         small3x3.setForeground(Color.white);
-        boolean selected3x3 = MageFrame.getPreferences().get(LAYOYT_CONFIG_KEY, MageBook.LAYOUT_3x3).equals(MageBook.LAYOUT_3x3);
+        boolean selected3x3 = MageFrame.getPreferences().get(LAYOYT_CONFIG_KEY, MageBook.LAYOUT_3X3).equals(MageBook.LAYOUT_3X3);
         small3x3.setSelected(selected3x3);
         small3x3.addActionListener(e -> {
             big4x4.setSelected(false);
-            mageBook.updateSize(MageBook.LAYOUT_3x3);
-            MageFrame.getPreferences().put(LAYOYT_CONFIG_KEY, MageBook.LAYOUT_3x3);
+            mageBook.updateSize(MageBook.LAYOUT_3X3);
+            MageFrame.getPreferences().put(LAYOYT_CONFIG_KEY, MageBook.LAYOUT_3X3);
         });
         buttonsPanel.add(small3x3);
 
@@ -144,8 +136,8 @@ public final class CollectionViewerPanel extends JPanel {
         big4x4.setSelected(!selected3x3);
         big4x4.addActionListener(e -> {
             small3x3.setSelected(false);
-            mageBook.updateSize(MageBook.LAYOUT_4x4);
-            MageFrame.getPreferences().put(LAYOYT_CONFIG_KEY, MageBook.LAYOUT_4x4);
+            mageBook.updateSize(MageBook.LAYOUT_4X4);
+            MageFrame.getPreferences().put(LAYOYT_CONFIG_KEY, MageBook.LAYOUT_4X4);
         });
         buttonsPanel.add(big4x4);
 
@@ -180,14 +172,6 @@ public final class CollectionViewerPanel extends JPanel {
         cardsOrTokens.setToolTipText("Select to show Cards for the chosen set.  When unselected, will show Tokens, Emblems and Planes for the set instead");
         cardsOrTokens.addActionListener(e -> mageBook.cardsOrTokens(cardsOrTokens.isSelected()));
         buttonsPanel.add(cardsOrTokens);
-
-        formats.addActionListener(e -> {
-            if (mageBook != null) {
-                String format = (String) formats.getSelectedItem();
-                MageFrame.getPreferences().put(CollectionViewerPanel.FORMAT_CONFIG_KEY, format);
-                mageBook.updateDispayedSets(format);
-            }
-        });
 
         buttonsPanel.add(Box.createVerticalGlue());
 

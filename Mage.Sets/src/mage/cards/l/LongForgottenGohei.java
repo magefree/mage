@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  * @author LevelX2
  */
 
-public class LongForgottenGohei extends CardImpl {
+public final class LongForgottenGohei extends CardImpl {
 
     private static final FilterCard arcaneFilter = new FilterCard("Arcane spells");
     private static final FilterCreaturePermanent spiritFilter = new FilterCreaturePermanent("Spirit creatures");

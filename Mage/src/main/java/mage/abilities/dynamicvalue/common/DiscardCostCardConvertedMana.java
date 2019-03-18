@@ -11,7 +11,8 @@ import mage.game.Game;
 /**
  * @author LevelX2
  */
-public class DiscardCostCardConvertedMana implements DynamicValue {
+public enum DiscardCostCardConvertedMana implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -26,7 +27,7 @@ public class DiscardCostCardConvertedMana implements DynamicValue {
 
     @Override
     public DiscardCostCardConvertedMana copy() {
-        return new DiscardCostCardConvertedMana();
+        return DiscardCostCardConvertedMana.instance;
     }
 
     @Override

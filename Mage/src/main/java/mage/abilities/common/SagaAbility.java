@@ -1,38 +1,12 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.abilities.common;
 
 import mage.abilities.Ability;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
-import mage.cards.CardImpl;
 import mage.constants.SagaChapter;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -42,21 +16,24 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
+import mage.target.Target;
+import mage.target.Targets;
 
 /**
  *
  * @author LevelX2
  */
-public class SagaAbility extends TriggeredAbilityImpl {
+public class SagaAbility extends SimpleStaticAbility {
 
     private SagaChapter maxChapter;
 
     public SagaAbility(Card card, SagaChapter maxChapter) {
-        super(Zone.ALL, new AddCountersSourceEffect(CounterType.LORE.createInstance()), false);
+        super(Zone.ALL, new AddCountersSourceEffect(CounterType.LORE.createInstance()));
         this.maxChapter = maxChapter;
         this.setRuleVisible(false);
-        ((CardImpl) card).addAbility(new SagaAddCounterAbility(maxChapter));
-
+        Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LORE.createInstance()));
+        ability.setRuleVisible(false);
+        card.addAbility(ability);
     }
 
     public SagaAbility(final SagaAbility ability) {
@@ -64,36 +41,57 @@ public class SagaAbility extends TriggeredAbilityImpl {
         this.maxChapter = ability.maxChapter;
     }
 
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
+    public void addChapterEffect(Card card, SagaChapter chapter, Effect effect) {
+        addChapterEffect(card, chapter, chapter, effect);
     }
 
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getTargetId().equals(getSourceId());
+    public void addChapterEffect(Card card, SagaChapter fromChapter, SagaChapter toChapter, Effect effect) {
+        addChapterEffect(card, fromChapter, toChapter, new Effects(effect), (Target) null);
     }
 
-    @Override
-    public String getRule() {
-        return "When {this} enters the battlefield, " + super.getRule();
+    public void addChapterEffect(Card card, SagaChapter fromChapter, SagaChapter toChapter, Effects effects) {
+        addChapterEffect(card, fromChapter, toChapter, effects, (Target) null);
     }
 
-    public Ability addChapterEffect(Card card, SagaChapter chapter, Effect effect) {
-        return addChapterEffect(card, chapter, chapter, effect);
+    public void addChapterEffect(Card card, SagaChapter fromChapter, SagaChapter toChapter, Effect effect, Target target) {
+        addChapterEffect(card, fromChapter, toChapter, new Effects(effect), new Targets(target));
     }
 
-    public Ability addChapterEffect(Card card, SagaChapter fromChapter, SagaChapter toChapter, Effect effect) {
-        ChapterTriggeredAbility ability = new ChapterTriggeredAbility(effect, fromChapter, toChapter);
-        ((CardImpl) card).addAbility(ability);
+    public void addChapterEffect(Card card, SagaChapter fromChapter, SagaChapter toChapter, Effects effects, Target target) {
+        addChapterEffect(card, fromChapter, toChapter, effects, new Targets(target));
+    }
+
+    public void addChapterEffect(Card card, SagaChapter fromChapter, SagaChapter toChapter, Effects effects, Targets targets) {
+        ChapterTriggeredAbility ability;
+        for (int i = fromChapter.getNumber(); i <= toChapter.getNumber(); i++) {
+            ability = new ChapterTriggeredAbility(null, SagaChapter.getChapter(i), toChapter);
+            for (Effect effect : effects) {
+                if (effect != null) {
+                    ability.addEffect(effect.copy());
+                }
+            }
+            for (Target target : targets) {
+                if (target != null) {
+                    ability.addTarget(target.copy());
+                }
+            }
+            if (i > fromChapter.getNumber()) {
+                ability.setRuleVisible(false);
+            }
+            card.addAbility(ability);
+        }
         if (maxChapter == null || toChapter.getNumber() > maxChapter.getNumber()) {
             maxChapter = toChapter;
         }
-        return ability;
     }
 
     public SagaChapter getMaxChapter() {
         return maxChapter;
+    }
+
+    @Override
+    public String getRule() {
+        return "<i>(As this Saga enters and after your draw step, add a lore counter. Sacrifice after " + maxChapter.toString() + ".)</i> ";
     }
 
     @Override
@@ -107,14 +105,18 @@ public class SagaAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
+
+    public static boolean isChapterAbility(TriggeredAbility ability) {
+        return ability instanceof ChapterTriggeredAbility;
+    }
 }
 
 class ChapterTriggeredAbility extends TriggeredAbilityImpl {
 
-    SagaChapter chapterFrom, chapterTo;
+    private SagaChapter chapterFrom, chapterTo;
 
     public ChapterTriggeredAbility(Effect effect, SagaChapter chapterFrom, SagaChapter chapterTo) {
-        super(Zone.BATTLEFIELD, effect, false);
+        super(Zone.ALL, effect, false);
         this.chapterFrom = chapterFrom;
         this.chapterTo = chapterTo;
     }
@@ -133,12 +135,18 @@ class ChapterTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(getSourceId()) && event.getData().equals(CounterType.LORE.getName())) {
-            Permanent sourceSaga = game.getPermanentOrLKIBattlefield(getSourceId());
-            if (sourceSaga != null) {
-                int loreCounters = sourceSaga.getCounters(game).getCount(CounterType.LORE);
-                return chapterFrom.getNumber() <= loreCounters
-                        && chapterTo.getNumber() >= loreCounters;
+            int amountAdded = event.getAmount();
+            int loreCounters = amountAdded;
+            //Permanent sourceSaga = game.getPermanentOrLKIBattlefield(getSourceId());  BUG #5393
+            Permanent sourceSaga = game.getPermanent(getSourceId());
+            if (sourceSaga == null) {
+                sourceSaga = game.getPermanentEntering(getSourceId());
             }
+            if (sourceSaga != null) {
+                loreCounters = sourceSaga.getCounters(game).getCount(CounterType.LORE);
+            }
+            return loreCounters - amountAdded < chapterFrom.getNumber()
+                    && chapterFrom.getNumber() <= loreCounters;
         }
         return false;
     }
@@ -176,41 +184,4 @@ class ChapterTriggeredAbility extends TriggeredAbilityImpl {
         sb.append(": ").append(Character.toUpperCase(text.charAt(0))).append(text.substring(1));
         return sb.toString();
     }
-}
-
-class SagaAddCounterAbility extends TriggeredAbilityImpl {
-
-    SagaChapter maxChapter;
-
-    SagaAddCounterAbility(SagaChapter maxChapter) {
-        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.LORE.createInstance()), false);
-        this.usesStack = false;
-        this.maxChapter = maxChapter;
-    }
-
-    SagaAddCounterAbility(final SagaAddCounterAbility ability) {
-        super(ability);
-        this.maxChapter = ability.maxChapter;
-    }
-
-    @Override
-    public SagaAddCounterAbility copy() {
-        return new SagaAddCounterAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.PRECOMBAT_MAIN_PHASE_PRE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(this.controllerId);
-    }
-
-    @Override
-    public String getRule() {
-        return "<i>(As this Saga enters and after your draw step, add a lore counter. Sacrifice after " + maxChapter.toString() + ".)</i> ";
-    }
-
 }

@@ -1,42 +1,14 @@
-/*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.cards.h.HymnToTourach;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author fireshoes
  */
-public class EternalMasters extends ExpansionSet {
+public final class EternalMasters extends ExpansionSet {
 
     private static final EternalMasters instance = new EternalMasters();
 
@@ -54,6 +26,7 @@ public class EternalMasters extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+
         cards.add(new SetCardInfo("Abundant Growth", 156, Rarity.COMMON, mage.cards.a.AbundantGrowth.class));
         cards.add(new SetCardInfo("Ancestral Mask", 157, Rarity.UNCOMMON, mage.cards.a.AncestralMask.class));
         cards.add(new SetCardInfo("Animate Dead", 78, Rarity.UNCOMMON, mage.cards.a.AnimateDead.class));
@@ -154,7 +127,7 @@ public class EternalMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Honden of Seeing Winds", 54, Rarity.UNCOMMON, mage.cards.h.HondenOfSeeingWinds.class));
         cards.add(new SetCardInfo("Humble", 14, Rarity.COMMON, mage.cards.h.Humble.class));
         cards.add(new SetCardInfo("Hydroblast", 55, Rarity.UNCOMMON, mage.cards.h.Hydroblast.class));
-        cards.add(new SetCardInfo("Hymn to Tourach", 92, Rarity.UNCOMMON, HymnToTourach.class));
+        cards.add(new SetCardInfo("Hymn to Tourach", 92, Rarity.UNCOMMON, mage.cards.h.HymnToTourach.class));
         cards.add(new SetCardInfo("Ichorid", 93, Rarity.RARE, mage.cards.i.Ichorid.class));
         cards.add(new SetCardInfo("Imperious Perfect", 173, Rarity.RARE, mage.cards.i.ImperiousPerfect.class));
         cards.add(new SetCardInfo("Inkwell Leviathan", 56, Rarity.RARE, mage.cards.i.InkwellLeviathan.class));
@@ -304,5 +277,4 @@ public class EternalMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Young Pyromancer", 155, Rarity.UNCOMMON, mage.cards.y.YoungPyromancer.class));
         cards.add(new SetCardInfo("Zealous Persecution", 213, Rarity.UNCOMMON, mage.cards.z.ZealousPersecution.class));
     }
-
 }

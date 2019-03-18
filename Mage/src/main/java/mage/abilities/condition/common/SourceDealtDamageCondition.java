@@ -24,7 +24,7 @@ public class SourceDealtDamageCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        DamageDoneWatcher watcher = (DamageDoneWatcher) game.getState().getWatchers().get(DamageDoneWatcher.class.getSimpleName());
+        DamageDoneWatcher watcher = game.getState().getWatcher(DamageDoneWatcher.class);
         return watcher != null && watcher.damageDoneBy(source.getSourceId(), source.getSourceObjectZoneChangeCounter(), game) >= value;
     }
 

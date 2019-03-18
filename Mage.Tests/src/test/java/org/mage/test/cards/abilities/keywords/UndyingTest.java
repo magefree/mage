@@ -251,7 +251,7 @@ public class UndyingTest extends CardTestPlayerBase {
 
     @Test
     public void testUndyingMikaeusAndTatterkiteSacrifice() {
-        // Sacrifice a creature: Add {C}{C} to your mana pool.
+        // Sacrifice a creature: Add {C}{C}.
         addCard(Zone.BATTLEFIELD, playerA, "Ashnod's Altar", 1);
         // Whenever a Human deals damage to you, destroy it.
         // Other non-Human creatures you control get +1/+1 and have undying

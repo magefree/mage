@@ -20,7 +20,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author Stravant
  */
-public class RagsRiches extends SplitCard {
+public final class RagsRiches extends SplitCard {
 
     public RagsRiches(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, new CardType[]{CardType.SORCERY}, "{2}{B}{B}", "{5}{U}{U}", SpellAbilityType.SPLIT_AFTERMATH);
@@ -32,7 +32,7 @@ public class RagsRiches extends SplitCard {
         // to
         // Riches
         // Each opponent chooses a creature he or she controls. You gain control of each of those creatures.
-        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility().setRuleAtTheTop(true));
+        getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
         getRightHalfCard().getSpellAbility().addEffect(new RichesEffect());
     }
 

@@ -5,10 +5,9 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author spjspj
  */
-public class HappyHolidays extends ExpansionSet {
+public final class HappyHolidays extends ExpansionSet {
 
     private static final HappyHolidays instance = new HappyHolidays();
 
@@ -18,6 +17,7 @@ public class HappyHolidays extends ExpansionSet {
 
     private HappyHolidays() {
         super("Happy Holidays", "HHO", ExpansionSet.buildDate(2006, 12, 31), SetType.JOKESET);
+        this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Fruitcake Elemental", 6, Rarity.RARE, mage.cards.f.FruitcakeElemental.class));
         cards.add(new SetCardInfo("Season's Beatings", 9, Rarity.RARE, mage.cards.s.SeasonsBeatings.class));

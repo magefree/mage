@@ -89,6 +89,7 @@ sub toCamelCase {
 # TODO: check for basic lands with ending 1,2,3,4,5 ...
 my %cardNames;
 my $toPrint = '';
+my $setAbbr = $sets{$setName};
 foreach my $card (sort cardSort @setCards) {
 	my $className = toCamelCase(@{$card}[0]);
 
@@ -99,8 +100,10 @@ foreach my $card (sort cardSort @setCards) {
         $cardNames {@{$card}[0]} = 0;
 		if ($toPrint) {
 			$toPrint .= "\n";
-		}   
-		$toPrint .= "@{$card}[2]|@{$card}[0]"; 
+		}
+                my $cardName = @{$card}[0];
+                $cardName =~ s/ /+/g;
+		$toPrint .= "@{$card}[2]|[@{$card}[0]](https://scryfall.com/search?q=!\"$cardName\"&nbsp;e:$setAbbr)";
 	}
 }
 
@@ -125,7 +128,7 @@ foreach $cn (sort keys (%cardNames))
     }
     my $cn2 = $cn;
     $cn2 =~ s/ /+/g;
-    print ISSUE_TRACKER "- $x_or_not [$cn](https://www.google.com.au/search?q=$cn2+MTG&tbm=isch)\n";
+    print ISSUE_TRACKER "- $x_or_not [$cn](https://scryfall.com/search?q=!\"$cn2\"&nbsp;e:$setAbbr)\n";
 }
 close ISSUE_TRACKER;
-print ("Tracking Issue text for a new Github issue (similar to https://github.com/magefree/mage/issues/2215): " . lc($sets{$setName}) ."_issue_tracker.txt\n");
+print ("Tracking Issue text for a new Github issue (similar to https://github.com/magefree/mage/issues/2215): " . lc($setAbbr) ."_issue_tracker.txt\n");

@@ -1,47 +1,22 @@
-/*
- * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.game.combat;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Stream;
+
+import mage.abilities.Ability;
 import mage.abilities.common.ControllerAssignCombatDamageToBlockersAbility;
 import mage.abilities.common.ControllerDivideCombatDamageAbility;
 import mage.abilities.common.DamageAsThoughNotBlockedAbility;
 import mage.abilities.keyword.BandingAbility;
+import mage.abilities.keyword.BandsWithOtherAbility;
 import mage.abilities.keyword.CantBlockAloneAbility;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.TrampleAbility;
+import mage.constants.AsThoughEffectType;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -90,19 +65,11 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     }
 
     public boolean hasFirstOrDoubleStrike(Game game) {
-        for (UUID permId : attackers) {
-            Permanent attacker = game.getPermanent(permId);
-            if (attacker != null && hasFirstOrDoubleStrike(attacker)) {
-                return true;
-            }
-        }
-        for (UUID permId : blockers) {
-            Permanent blocker = game.getPermanent(permId);
-            if (blocker != null && hasFirstOrDoubleStrike(blocker)) {
-                return true;
-            }
-        }
-        return false;
+        return Stream.concat(attackers.stream(), blockers.stream())
+                .map(id -> game.getPermanent(id))
+                .filter(Objects::nonNull)
+                .anyMatch(this::hasFirstOrDoubleStrike);
+
     }
 
     public UUID getDefenderId() {
@@ -145,6 +112,56 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         return perm.getAbilities().containsKey(BandingAbility.getInstance().getId());
     }
 
+    private boolean appliesBandsWithOther(List<UUID> creatureIds, Game game) {
+        for (UUID creatureId : creatureIds) {
+            Permanent perm = game.getPermanent(creatureId);
+            if (perm != null && perm.getBandedCards() != null) {
+                for (Ability ab : perm.getAbilities()) {
+                    if (ab.getClass().equals(BandsWithOtherAbility.class)) {
+                        BandsWithOtherAbility ability = (BandsWithOtherAbility) ab;
+                        if (ability.getSubtype() != null) {
+                            if (perm.hasSubtype(ability.getSubtype(), game)) {
+                                for (UUID bandedId : creatureIds) {
+                                    if (!bandedId.equals(creatureId)) {
+                                        Permanent banded = game.getPermanent(bandedId);
+                                        if (banded != null && banded.hasSubtype(ability.getSubtype(), game)) {
+                                            return true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (ability.getSupertype() != null) {
+                            if (perm.getSuperType().contains(ability.getSupertype())) {
+                                for (UUID bandedId : creatureIds) {
+                                    if (!bandedId.equals(creatureId)) {
+                                        Permanent banded = game.getPermanent(bandedId);
+                                        if (banded != null && banded.getSuperType().contains(ability.getSupertype())) {
+                                            return true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (ability.getName() != null) {
+                            if (perm.getName().equals(ability.getName())) {
+                                for (UUID bandedId : creatureIds) {
+                                    if (!bandedId.equals(creatureId)) {
+                                        Permanent banded = game.getPermanent(bandedId);
+                                        if (banded != null && banded.getName().equals(ability.getName())) {
+                                            return true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     public void assignDamageToBlockers(boolean first, Game game) {
         if (!attackers.isEmpty() && (!first || hasFirstOrDoubleStrike(game))) {
             Permanent attacker = game.getPermanent(attackers.get(0));
@@ -154,11 +171,14 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                     return;
                 } else {
                     Player player = game.getPlayer(defenderAssignsCombatDamage(game) ? defendingPlayerId : attacker.getControllerId());
-                    if (attacker.getAbilities().containsKey(DamageAsThoughNotBlockedAbility.getInstance().getId())) { // for handling creatures like Thorn Elemental
-                        if (player.chooseUse(Outcome.Damage, "Do you wish to assign damage for " + attacker.getLogName() + " as though it weren't blocked?", null, game)) {
-                            blocked = false;
-                            unblockedDamage(first, game);
-                        }
+                    if ((attacker.getAbilities().containsKey(DamageAsThoughNotBlockedAbility.getInstance().getId()) &&
+                            player.chooseUse(Outcome.Damage, "Do you wish to assign damage for "
+                            + attacker.getLogName() + " as though it weren't blocked?", null, game)) ||
+                            game.getContinuousEffects().asThough(attacker.getId(), AsThoughEffectType.DAMAGE_NOT_BLOCKED
+                                    , null, attacker.getControllerId(), game) != null) {
+                        // for handling creatures like Thorn Elemental
+                        blocked = false;
+                        unblockedDamage(first, game);
                     }
                     if (blockers.size() == 1) {
                         singleBlockerDamage(player, first, game);
@@ -181,7 +201,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             }
             if (attackers.size() != 1) {
                 multiAttackerDamage(first, game);
-            // } else {
+                // } else {
                 // singleAttackerDamage(first, game);
             }
         }
@@ -286,7 +306,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         if (attacker == null) {
             return;
         }
-        boolean oldRuleDamage = (player.getId() == defendingPlayerId);
+        boolean oldRuleDamage = (Objects.equals(player.getId(), defendingPlayerId));
         int damage = getDamageValueFromPermanent(attacker, game);
         if (canDamage(attacker, first)) {
             // must be set before attacker damage marking because of effects like Test of Faith
@@ -337,7 +357,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                     defenderDamage(attacker, damage, game);
                 } else if (!blockerOrder.isEmpty()) {
                     // Assign the damage left to first blocker
-                    assigned.put(blockerOrder.get(0), assigned.get(blockerOrder.get(0)) + damage);
+                    assigned.put(blockerOrder.get(0), assigned.get(blockerOrder.get(0)) == null ? 0 : assigned.get(blockerOrder.get(0)) + damage);
                 }
             }
             for (UUID blockerId : blockerOrder) {
@@ -433,7 +453,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         }
     }
 
-    public boolean checkSoleBlockerAfter (Permanent blocker, Game game) {
+    public boolean checkSoleBlockerAfter(Permanent blocker, Game game) {
         // this solves some corner cases (involving banding) when finding out whether a blocker is blocking alone or not
         if (blocker.getBlocking() == 1) {
             if (game.getCombat().blockingGroups.get(blocker.getId()) == null) {
@@ -457,9 +477,9 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
      * {@link #singleBlockerDamage}.
      *
      * Handles abilities like "{this} an block any number of creatures.".
-     * 
-     * Blocker damage for blockers blocking single creatures is handled in 
-     * the single/multi blocker methods, so this shouldn't be used anymore.
+     *
+     * Blocker damage for blockers blocking single creatures is handled in the
+     * single/multi blocker methods, so this shouldn't be used anymore.
      *
      * @param first
      * @param game
@@ -785,7 +805,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     /**
      * There are effects, that set an attacker to be blocked. Therefore this
      * setter can be used.
-     * 
+     *
      * This method lacks a band check, use setBlocked(blocked, game) instead.
      *
      * @param blocked
@@ -869,12 +889,15 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 }
             }
         }
+        if (appliesBandsWithOther(attackers, game)) { // 702.21k - both a [quality] creature with “bands with other [quality]” and another [quality] creature (...)
+            return true;
+        }
         return false;
     }
 
     /**
-     * Decides damage distribution for blocking creatures with banding or
-     * if defending player controls the Defensive Formation enchantment.
+     * Decides damage distribution for blocking creatures with banding or if
+     * defending player controls the Defensive Formation enchantment.
      *
      * @param game
      */
@@ -886,6 +909,9 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                     return true;
                 }
             }
+        }
+        if (appliesBandsWithOther(blockers, game)) { // 702.21j - both a [quality] creature with “bands with other [quality]” and another [quality] creature (...)
+            return true;
         }
         for (Permanent defensiveFormation : game.getBattlefield().getAllActivePermanents(defendingPlayerId)) {
             if (defensiveFormation.getAbilities().containsKey(ControllerAssignCombatDamageToBlockersAbility.getInstance().getId())) {
@@ -899,7 +925,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         // for handling Butcher Orgg
         if (creature.getAbilities().containsKey(ControllerDivideCombatDamageAbility.getInstance().getId())) {
             Player player = game.getPlayer(defenderAssignsCombatDamage(game) ? defendingPlayerId : (!isAttacking && attackerAssignsCombatDamage(game) ? game.getCombat().getAttackingPlayerId() : playerId));
-            // 10/4/2004 	If it is blocked but then all of its blockers are removed before combat damage is assigned, then it won’t be able to deal combat damage and you won’t be able to use its ability.
+            // 10/4/2004 	If it is blocked but then all of its blockers are removed before combat damage is assigned, then it won't be able to deal combat damage and you won't be able to use its ability.
             // (same principle should apply if it's blocking and its blocked attacker is removed from combat)
             if (!((blocked && blockers.isEmpty() && isAttacking) || (attackers.isEmpty() && !isAttacking)) && canDamage(creature, first)) {
                 if (player.chooseUse(Outcome.Damage, "Do you wish to assign " + creature.getLogName() + "'s combat damage divided among defending player and/or any number of defending creatures?", null, game)) {

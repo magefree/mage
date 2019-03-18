@@ -1,33 +1,6 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,28 +13,29 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
-public class CrookclawElder extends CardImpl {
+public final class CrookclawElder extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Bird you control");
-    private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("untapped Wizards you control");
+    private static final FilterControlledCreaturePermanent filter
+            = new FilterControlledCreaturePermanent(SubType.BIRD, "untapped Birds you control");
+    private static final FilterControlledCreaturePermanent filter2
+            = new FilterControlledCreaturePermanent(SubType.WIZARD, "untapped Wizards you control");
+    private static final Predicate pred = Predicates.not(TappedPredicate.instance);
 
     static {
-        filter.add(new SubtypePredicate(SubType.BIRD));
-        filter.add(Predicates.not(new TappedPredicate()));
-        filter2.add(new SubtypePredicate(SubType.WIZARD));
-        filter2.add(Predicates.not(new TappedPredicate()));
+        filter.add(pred);
+        filter2.add(pred);
     }
 
     public CrookclawElder(UUID ownerId, CardSetInfo setInfo) {
@@ -76,16 +50,26 @@ public class CrookclawElder extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Tap two untapped Birds you control: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapTargetCost(new TargetControlledCreaturePermanent(2, 2, filter, true)));
+        Ability ability = new SimpleActivatedAbility(
+                new DrawCardSourceControllerEffect(1),
+                new TapTargetCost(new TargetControlledCreaturePermanent(
+                        2, 2, filter, true
+                ))
+        );
         this.addAbility(ability);
 
         // Tap two untapped Wizards you control: Target creature gains flying until end of turn.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new TapTargetCost(new TargetControlledCreaturePermanent(2, 2, filter2, true)));
+        ability = new SimpleActivatedAbility(
+                new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn),
+                new TapTargetCost(new TargetControlledCreaturePermanent(
+                        2, 2, filter2, true
+                ))
+        );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
-    public CrookclawElder(final CrookclawElder card) {
+    private CrookclawElder(final CrookclawElder card) {
         super(card);
     }
 

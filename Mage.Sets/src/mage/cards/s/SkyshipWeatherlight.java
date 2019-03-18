@@ -34,7 +34,7 @@ import mage.util.CardUtil;
  *
  * @author nick.myers
  */
-public class SkyshipWeatherlight extends CardImpl {
+public final class SkyshipWeatherlight extends CardImpl {
 
     public SkyshipWeatherlight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

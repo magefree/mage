@@ -1,36 +1,12 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards.n;
 
-import mage.MageObject;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -46,20 +22,16 @@ import mage.game.Game;
 import mage.players.Library;
 import mage.players.Player;
 import mage.target.Target;
+import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCardInHand;
-import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 
 /**
  *
  * @author Will
  */
-public class NicolBolasGodPharaoh extends CardImpl {
+public final class NicolBolasGodPharaoh extends CardImpl {
 
     private static final FilterPermanent opponentsNonlandPermanentsFilter = new FilterNonlandPermanent("non-land permanents your opponents control");
 
@@ -72,7 +44,7 @@ public class NicolBolasGodPharaoh extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.BOLAS);
 
-        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(7));
+        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(7));
 
         // +2: Target opponent exiles cards from the top of their library until he or she exiles a nonland card. Until end of turn, you may cast that card without paying its mana cost.
         LoyaltyAbility ability = new LoyaltyAbility(new NicolBolasGodPharaohPlusTwoEffect(), 2);
@@ -82,9 +54,9 @@ public class NicolBolasGodPharaoh extends CardImpl {
         // +1: Each opponent exiles two cards from their hand.
         this.addAbility(new LoyaltyAbility(new NicolBolasGodPharaohPlusOneEffect(), 1));
 
-        // -4: Nicol Bolas, God-Pharaoh deals 7 damage to target creature or player.
+        // -4: Nicol Bolas, God-Pharaoh deals 7 damage to any target.
         ability = new LoyaltyAbility(new DamageTargetEffect(7), -4);
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
 
         // -12: Exile each nonland permanent your opponents control.
@@ -129,12 +101,11 @@ class NicolBolasGodPharaohPlusOneEffect extends OneShotEffect {
             }
 
             int numberOfCardsToExile = Math.min(2, player.getHand().size());
-            Cards cards = new CardsImpl();
 
             Target target = new TargetCardInHand(numberOfCardsToExile, new FilterCard());
+            Cards cards = new CardsImpl(target.getTargets());
 
             player.chooseTarget(Outcome.Exile, target, source, game);
-            cards.addAll(target.getTargets());
             cardsToExile.put(playerId, cards);
         }
         // Exile all choosen cards
@@ -172,22 +143,21 @@ class NicolBolasGodPharaohPlusTwoEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
-        MageObject sourceObject = source.getSourceObject(game);
-        if (opponent != null && opponent.getLibrary().hasCards() && sourceObject != null) {
+        if (opponent != null) {
             Library library = opponent.getLibrary();
             Card card;
             do {
-                card = library.removeFromTop(game);
+                card = library.getFromTop(game);
                 if (card != null) {
                     opponent.moveCards(card, Zone.EXILED, source, game);
+                    if (!card.isLand()) {
+                        ContinuousEffect effect = new NicolBolasGodPharaohFromExileEffect();
+                        effect.setTargetPointer(new FixedTarget(card.getId(), game.getState().getZoneChangeCounter(card.getId())));
+                        game.addEffect(effect, source);
+                        break;
+                    }
                 }
-            } while (library.hasCards() && card != null && card.isLand());
-
-            if (card != null) {
-                ContinuousEffect effect = new NicolBolasGodPharaohFromExileEffect();
-                effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
-                game.addEffect(effect, source);
-            }
+            } while (library.hasCards() && card != null);
             return true;
         }
         return false;
@@ -222,8 +192,10 @@ class NicolBolasGodPharaohFromExileEffect extends AsThoughEffectImpl {
             Card card = game.getCard(sourceId);
             if (card != null && game.getState().getZone(sourceId) == Zone.EXILED) {
                 Player player = game.getPlayer(affectedControllerId);
-                player.setCastSourceIdWithAlternateMana(sourceId, null, card.getSpellAbility().getCosts());
-                return true;
+                if(player != null) {
+                    player.setCastSourceIdWithAlternateMana(sourceId, null, card.getSpellAbility().getCosts());
+                    return true;
+                }
             }
         }
         return false;

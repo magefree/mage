@@ -1,12 +1,10 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.cards.o.OrcishSpy;
-import mage.cards.r.RukhEgg;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-public class EighthEdition extends ExpansionSet {
+public final class EighthEdition extends ExpansionSet {
 
     private static final EighthEdition instance = new EighthEdition();
 
@@ -225,7 +223,7 @@ public class EighthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Okk", 206, Rarity.RARE, mage.cards.o.Okk.class));
         cards.add(new SetCardInfo("Oracle's Attendants", 32, Rarity.RARE, mage.cards.o.OraclesAttendants.class));
         cards.add(new SetCardInfo("Orcish Artillery", 207, Rarity.UNCOMMON, mage.cards.o.OrcishArtillery.class));
-        cards.add(new SetCardInfo("Orcish Spy", 208, Rarity.COMMON, OrcishSpy.class));
+        cards.add(new SetCardInfo("Orcish Spy", 208, Rarity.COMMON, mage.cards.o.OrcishSpy.class));
         cards.add(new SetCardInfo("Pacifism", 33, Rarity.COMMON, mage.cards.p.Pacifism.class));
         cards.add(new SetCardInfo("Panic Attack", 209, Rarity.COMMON, mage.cards.p.PanicAttack.class));
         cards.add(new SetCardInfo("Patagia Golem", 308, Rarity.UNCOMMON, mage.cards.p.PatagiaGolem.class));
@@ -267,7 +265,7 @@ public class EighthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Rod of Ruin", 312, Rarity.UNCOMMON, mage.cards.r.RodOfRuin.class));
         cards.add(new SetCardInfo("Rolling Stones", 38, Rarity.RARE, mage.cards.r.RollingStones.class));
         cards.add(new SetCardInfo("Royal Assassin", 159, Rarity.RARE, mage.cards.r.RoyalAssassin.class));
-        cards.add(new SetCardInfo("Rukh Egg", 216, Rarity.RARE, RukhEgg.class));
+        cards.add(new SetCardInfo("Rukh Egg", 216, Rarity.RARE, mage.cards.r.RukhEgg.class));
         cards.add(new SetCardInfo("Rushwood Dryad", 278, Rarity.COMMON, mage.cards.r.RushwoodDryad.class));
         cards.add(new SetCardInfo("Sabretooth Tiger", 217, Rarity.COMMON, mage.cards.s.SabretoothTiger.class));
         cards.add(new SetCardInfo("Sacred Ground", 39, Rarity.RARE, mage.cards.s.SacredGround.class));
@@ -343,9 +341,9 @@ public class EighthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Unsummon", 112, Rarity.COMMON, mage.cards.u.Unsummon.class));
         cards.add(new SetCardInfo("Urborg Volcano", 327, Rarity.UNCOMMON, mage.cards.u.UrborgVolcano.class));
         cards.add(new SetCardInfo("Urza's Armor", 318, Rarity.RARE, mage.cards.u.UrzasArmor.class));
-        cards.add(new SetCardInfo("Urza's Mine", 328, Rarity.COMMON, mage.cards.u.UrzasMine.class));
-        cards.add(new SetCardInfo("Urza's Power Plant", 329, Rarity.COMMON, mage.cards.u.UrzasPowerPlant.class));
-        cards.add(new SetCardInfo("Urza's Tower", 330, Rarity.COMMON, mage.cards.u.UrzasTower.class));
+        cards.add(new SetCardInfo("Urza's Mine", 328, Rarity.UNCOMMON, mage.cards.u.UrzasMine.class));
+        cards.add(new SetCardInfo("Urza's Power Plant", 329, Rarity.UNCOMMON, mage.cards.u.UrzasPowerPlant.class));
+        cards.add(new SetCardInfo("Urza's Tower", 330, Rarity.UNCOMMON, mage.cards.u.UrzasTower.class));
         cards.add(new SetCardInfo("Vampiric Spirit", 170, Rarity.RARE, mage.cards.v.VampiricSpirit.class));
         cards.add(new SetCardInfo("Venerable Monk", 55, Rarity.COMMON, mage.cards.v.VenerableMonk.class));
         cards.add(new SetCardInfo("Verduran Enchantress", 285, Rarity.RARE, mage.cards.v.VerduranEnchantress.class));
@@ -372,6 +370,7 @@ public class EighthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Zombify", 174, Rarity.UNCOMMON, mage.cards.z.Zombify.class));
         cards.add(new SetCardInfo("Zur's Weirding", 116, Rarity.RARE, mage.cards.z.ZursWeirding.class));
         // 8ed Edition Box Set (we need to create own set)
+        // http://www.magiclibrarities.net/540-rarities-eighth-edition-box-set-cards-english-cards-index.html
         // cards.add(new SetCardInfo("Eager Cadet", 1, Rarity.COMMON, mage.cards.e.EagerCadet.class));
         // cards.add(new SetCardInfo("Vengeance", 2, Rarity.UNCOMMON, mage.cards.v.Vengeance.class));
         // cards.add(new SetCardInfo("Sea Eagle", 4, Rarity.COMMON, mage.cards.s.SeaEagle.class));

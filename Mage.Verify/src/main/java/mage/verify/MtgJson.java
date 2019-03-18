@@ -2,17 +2,19 @@ package mage.verify;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import mage.util.StreamUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.text.Normalizer;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.zip.ZipInputStream;
 
@@ -21,13 +23,16 @@ public final class MtgJson {
     public static Map<String, String> mtgJsonToXMageCodes = new HashMap<>();
     public static Map<String, String> xMageToMtgJsonCodes = new HashMap<>();
 
+    public static final boolean MTGJSON_IGNORE_NEW_PROPERTIES = true; // set it to false for full mtgjson checks and research (new fields finds or mtgjson updates)
+
     static {
         mtgJsonToXMageCodes.put("pWCQ", "WMCQ");
         mtgJsonToXMageCodes.put("pSUS", "SUS");
         mtgJsonToXMageCodes.put("pPRE", "PTC");
         mtgJsonToXMageCodes.put("pMPR", "MPRP");
         mtgJsonToXMageCodes.put("pMEI", "MBP");
-        mtgJsonToXMageCodes.put("pGTW", "GRC"); // pGTW - Gateway = GRC - WPN Gateway ???
+        mtgJsonToXMageCodes.put("pGTW", "GRC"); // pGTW - Gateway = GRC (WPN + Gateway in one inner set)
+        mtgJsonToXMageCodes.put("pWPN", "GRC"); // pWPN - Wizards Play Network = GRC (WPN + Gateway in one inner set)
         mtgJsonToXMageCodes.put("pGRU", "GUR");
         mtgJsonToXMageCodes.put("pGPX", "GPX");
         mtgJsonToXMageCodes.put("pFNM", "FNMP");
@@ -41,21 +46,48 @@ public final class MtgJson {
         mtgJsonToXMageCodes.put("DD3_DVD", "DDC");
         mtgJsonToXMageCodes.put("NMS", "NEM");
         mtgJsonToXMageCodes.put("MPS_AKH", "MPS-AKH");
+        mtgJsonToXMageCodes.put("FRF_UGIN", "UGIN");
+        mtgJsonToXMageCodes.put("pCMP", "CP");
 
 
         // revert search
-        for(Map.Entry<String, String> entry: mtgJsonToXMageCodes.entrySet()){
+        for (Map.Entry<String, String> entry : mtgJsonToXMageCodes.entrySet()) {
             xMageToMtgJsonCodes.put(entry.getValue(), entry.getKey());
         }
     }
 
-    private MtgJson() {}
+    private MtgJson() {
+    }
 
     private static final class CardHolder {
         private static final Map<String, JsonCard> cards;
+
         static {
             try {
                 cards = loadAllCards();
+
+                List<String> keysToDelete = new ArrayList<>();
+
+                // fix names
+                Map<String, JsonCard> newKeys = new HashMap<>();
+                for (String key : cards.keySet()) {
+                    if (key.contains("(")) {
+                        newKeys.put(key.replaceAll("\\(.*\\)", "").trim(), cards.get(key));
+                        keysToDelete.add(key);
+                    }
+                }
+                cards.putAll(newKeys);
+                cards.keySet().removeAll(keysToDelete);
+
+                // remove wrong data (tokens)
+                keysToDelete.clear();
+                for (Map.Entry<String, JsonCard> record : cards.entrySet()) {
+                    if (record.getValue().layout.equals("token") || record.getValue().layout.equals("double_faced_token")) {
+                        keysToDelete.add(record.getKey());
+                    }
+                }
+                cards.keySet().removeAll(keysToDelete);
+
                 addAliases(cards);
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -65,6 +97,7 @@ public final class MtgJson {
 
     private static final class SetHolder {
         private static final Map<String, JsonSet> sets;
+
         static {
             try {
                 sets = loadAllSets();
@@ -75,11 +108,13 @@ public final class MtgJson {
     }
 
     private static Map<String, JsonCard> loadAllCards() throws IOException {
-        return readFromZip("AllCards.json.zip", new TypeReference<Map<String, JsonCard>>() {});
+        return readFromZip("AllCards.json.zip", new TypeReference<Map<String, JsonCard>>() {
+        });
     }
 
     private static Map<String, JsonSet> loadAllSets() throws IOException {
-        return readFromZip("AllSets.json.zip", new TypeReference<Map<String, JsonSet>>() {});
+        return readFromZip("AllSets.json.zip", new TypeReference<Map<String, JsonSet>>() {
+        });
     }
 
     private static <T> T readFromZip(String filename, TypeReference<T> ref) throws IOException {
@@ -87,7 +122,9 @@ public final class MtgJson {
         if (stream == null) {
             File file = new File(filename);
             if (!file.exists()) {
-                InputStream download = new URL("http://mtgjson.com/json/" + filename).openStream();
+                URLConnection connection = new URL("https://mtgjson.com/json/" + filename).openConnection();
+                connection.setRequestProperty("user-agent", "xmage");
+                InputStream download = connection.getInputStream();
                 Files.copy(download, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
                 System.out.println("Downloaded " + filename + " to " + file.getAbsolutePath());
             } else {
@@ -95,14 +132,9 @@ public final class MtgJson {
             }
             stream = new FileInputStream(file);
         }
-        ZipInputStream zipInputStream = null;
-        try {
-            zipInputStream = new ZipInputStream(stream);
+        try (ZipInputStream zipInputStream = new ZipInputStream(stream)) {
             zipInputStream.getNextEntry();
             return new ObjectMapper().readValue(zipInputStream, ref);
-        } finally {
-            StreamUtils.closeQuietly(zipInputStream);
-            StreamUtils.closeQuietly(stream);
         }
 
     }
@@ -125,6 +157,7 @@ public final class MtgJson {
             name = name.replace("'", "\""); // for Kongming, "Sleeping Dragon" & Pang Tong, "Young Phoenix"
             ref = reference.get(name);
         }
+
         return ref;
     }
 

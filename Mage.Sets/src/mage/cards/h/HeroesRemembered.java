@@ -9,7 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 
-public class HeroesRemembered extends CardImpl {
+public final class HeroesRemembered extends CardImpl {
 
     public HeroesRemembered(UUID ownerId, CardSetInfo setInfo){
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{W}{W}{W}");

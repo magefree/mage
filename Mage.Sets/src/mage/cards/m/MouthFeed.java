@@ -19,7 +19,7 @@ import mage.game.permanent.token.HippoToken2;
 /**
  * @author Stravant
  */
-public class MouthFeed extends SplitCard {
+public final class MouthFeed extends SplitCard {
 
     private static final FilterControlledCreaturePermanent filterCreaturesYouControlPower3orGreater
             = new FilterControlledCreaturePermanent("creature you control with power 3 or greater.");
@@ -38,7 +38,7 @@ public class MouthFeed extends SplitCard {
         // to
         // Feed
         // Draw a card for each creature you control with power 3 or greater
-        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility().setRuleAtTheTop(true));
+        getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
         Effect draw = new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filterCreaturesYouControlPower3orGreater));
         getRightHalfCard().getSpellAbility().addEffect(draw);
 

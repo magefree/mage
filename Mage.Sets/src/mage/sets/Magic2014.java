@@ -1,30 +1,3 @@
-/*
- * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -35,7 +8,7 @@ import mage.constants.SetType;
  *
  * @author North
  */
-public class Magic2014 extends ExpansionSet {
+public final class Magic2014 extends ExpansionSet {
 
     private static final Magic2014 instance = new Magic2014();
 
@@ -103,7 +76,7 @@ public class Magic2014 extends ExpansionSet {
         cards.add(new SetCardInfo("Dark Favor", 92, Rarity.COMMON, mage.cards.d.DarkFavor.class));
         cards.add(new SetCardInfo("Dark Prophecy", 93, Rarity.RARE, mage.cards.d.DarkProphecy.class));
         cards.add(new SetCardInfo("Darksteel Forge", 206, Rarity.MYTHIC, mage.cards.d.DarksteelForge.class));
-        cards.add(new SetCardInfo("Darksteel Ingot", 207, Rarity.COMMON, mage.cards.d.DarksteelIngot.class));
+        cards.add(new SetCardInfo("Darksteel Ingot", 207, Rarity.UNCOMMON, mage.cards.d.DarksteelIngot.class));
         cards.add(new SetCardInfo("Dawnstrike Paladin", 15, Rarity.COMMON, mage.cards.d.DawnstrikePaladin.class));
         cards.add(new SetCardInfo("Deadly Recluse", 168, Rarity.COMMON, mage.cards.d.DeadlyRecluse.class));
         cards.add(new SetCardInfo("Deathgaze Cockatrice", 94, Rarity.COMMON, mage.cards.d.DeathgazeCockatrice.class));
@@ -239,7 +212,7 @@ public class Magic2014 extends ExpansionSet {
         cards.add(new SetCardInfo("Serra Angel", 32, Rarity.UNCOMMON, mage.cards.s.SerraAngel.class));
         cards.add(new SetCardInfo("Shadowborn Apostle", 114, Rarity.COMMON, mage.cards.s.ShadowbornApostle.class));
         cards.add(new SetCardInfo("Shadowborn Demon", 115, Rarity.MYTHIC, mage.cards.s.ShadowbornDemon.class));
-        cards.add(new SetCardInfo("Shimmering Grotto", 229, Rarity.COMMON, mage.cards.s.ShimmeringGrotto.class));
+        cards.add(new SetCardInfo("Shimmering Grotto", 229, Rarity.UNCOMMON, mage.cards.s.ShimmeringGrotto.class));
         cards.add(new SetCardInfo("Shivan Dragon", 154, Rarity.RARE, mage.cards.s.ShivanDragon.class));
         cards.add(new SetCardInfo("Shiv's Embrace", 153, Rarity.UNCOMMON, mage.cards.s.ShivsEmbrace.class));
         cards.add(new SetCardInfo("Shock", 155, Rarity.COMMON, mage.cards.s.Shock.class));

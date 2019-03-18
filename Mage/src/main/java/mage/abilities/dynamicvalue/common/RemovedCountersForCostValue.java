@@ -13,10 +13,10 @@ import mage.abilities.effects.Effect;
 import mage.game.Game;
 
 /**
- *
  * @author LevelX2
  */
-public class RemovedCountersForCostValue implements DynamicValue {
+public enum RemovedCountersForCostValue implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -35,7 +35,7 @@ public class RemovedCountersForCostValue implements DynamicValue {
 
     @Override
     public RemovedCountersForCostValue copy() {
-        return new RemovedCountersForCostValue();
+        return RemovedCountersForCostValue.instance;
     }
 
     @Override

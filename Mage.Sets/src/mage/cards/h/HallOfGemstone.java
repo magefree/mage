@@ -1,30 +1,4 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards.h;
 
 import java.util.UUID;
@@ -49,7 +23,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class HallOfGemstone extends CardImpl {
+public final class HallOfGemstone extends CardImpl {
 
     public HallOfGemstone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");
@@ -96,7 +70,7 @@ class HallOfGemstoneEffect extends ReplacementEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        MageObject mageObject = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        Permanent mageObject = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (player != null && mageObject != null) {
             ChoiceColor choice = new ChoiceColor();
             if (!player.choose(outcome, choice, game)) {
@@ -107,9 +81,7 @@ class HallOfGemstoneEffect extends ReplacementEffectImpl {
                 game.informPlayers(mageObject.getLogName() + ": " + player.getLogName() + " has chosen " + choice.getChoice());
             }
             game.getState().setValue(mageObject.getId() + "_color", choice.getColor());
-            if (mageObject instanceof Permanent) {
-                ((Permanent) mageObject).addInfo("chosen color", CardUtil.addToolTipMarkTags("Chosen color: " + choice.getChoice()), game);
-            }
+            mageObject.addInfo("chosen color", CardUtil.addToolTipMarkTags("Chosen color: " + choice.getChoice()), game);
         }
     }
 
@@ -119,24 +91,29 @@ class HallOfGemstoneEffect extends ReplacementEffectImpl {
         if (colorChosen != null) {
             ManaEvent manaEvent = (ManaEvent) event;
             Mana mana = manaEvent.getMana();
-            int amount = mana.count();
-            switch (colorChosen.getColoredManaSymbol()) {
+            // 8/23/2016 	Colorless mana added to a player's mana pool isn't affected.
+            int genericAmount = mana.getGeneric();
+            int colorlessAmount = mana.getColorless();
+            int coloredAmount = mana.countColored();
+            switch (colorChosen.getOneColoredManaSymbol()) {
                 case W:
-                    mana.setToMana(Mana.WhiteMana(amount));
+                    mana.setToMana(Mana.WhiteMana(coloredAmount));
                     break;
                 case U:
-                    mana.setToMana(Mana.BlueMana(amount));
+                    mana.setToMana(Mana.BlueMana(coloredAmount));
                     break;
                 case B:
-                    mana.setToMana(Mana.BlackMana(amount));
+                    mana.setToMana(Mana.BlackMana(coloredAmount));
                     break;
                 case R:
-                    mana.setToMana(Mana.RedMana(amount));
+                    mana.setToMana(Mana.RedMana(coloredAmount));
                     break;
                 case G:
-                    mana.setToMana(Mana.GreenMana(amount));
+                    mana.setToMana(Mana.GreenMana(coloredAmount));
                     break;
             }
+            mana.setGeneric(genericAmount);
+            mana.setColorless(colorlessAmount);
         }
         return false;
     }

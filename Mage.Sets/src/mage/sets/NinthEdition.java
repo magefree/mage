@@ -1,12 +1,10 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.cards.f.FishliverOil;
-import mage.cards.r.RukhEgg;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-public class NinthEdition extends ExpansionSet {
+public final class NinthEdition extends ExpansionSet {
 
     private static final NinthEdition instance = new NinthEdition();
 
@@ -22,6 +20,7 @@ public class NinthEdition extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Adarkar Wastes", 317, Rarity.RARE, mage.cards.a.AdarkarWastes.class));
         cards.add(new SetCardInfo("Air Elemental", 58, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));
         cards.add(new SetCardInfo("Aladdin's Ring", 286, Rarity.RARE, mage.cards.a.AladdinsRing.class));
@@ -57,6 +56,7 @@ public class NinthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Bog Imp", 116, Rarity.COMMON, mage.cards.b.BogImp.class));
         cards.add(new SetCardInfo("Bog Wraith", 117, Rarity.UNCOMMON, mage.cards.b.BogWraith.class));
         cards.add(new SetCardInfo("Boiling Seas", 178, Rarity.UNCOMMON, mage.cards.b.BoilingSeas.class));
+        cards.add(new SetCardInfo("Booby Trap", 289, Rarity.RARE, mage.cards.b.BoobyTrap.class));
         cards.add(new SetCardInfo("Boomerang", 66, Rarity.COMMON, mage.cards.b.Boomerang.class));
         cards.add(new SetCardInfo("Bottle Gnomes", 290, Rarity.UNCOMMON, mage.cards.b.BottleGnomes.class));
         cards.add(new SetCardInfo("Brushland", 319, Rarity.RARE, mage.cards.b.Brushland.class));
@@ -109,7 +109,7 @@ public class NinthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Festering Goblin", 130, Rarity.COMMON, mage.cards.f.FesteringGoblin.class));
         cards.add(new SetCardInfo("Final Punishment", 131, Rarity.RARE, mage.cards.f.FinalPunishment.class));
         cards.add(new SetCardInfo("Firebreathing", 181, Rarity.COMMON, mage.cards.f.Firebreathing.class));
-        cards.add(new SetCardInfo("Fishliver Oil", 77, Rarity.COMMON, FishliverOil.class));
+        cards.add(new SetCardInfo("Fishliver Oil", 77, Rarity.COMMON, mage.cards.f.FishliverOil.class));
         cards.add(new SetCardInfo("Flame Wave", 182, Rarity.UNCOMMON, mage.cards.f.FlameWave.class));
         cards.add(new SetCardInfo("Flashfires", 183, Rarity.UNCOMMON, mage.cards.f.Flashfires.class));
         cards.add(new SetCardInfo("Fleeting Image", 78, Rarity.RARE, mage.cards.f.FleetingImage.class));
@@ -265,7 +265,7 @@ public class NinthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Rootbreaker Wurm", 267, Rarity.UNCOMMON, mage.cards.r.RootbreakerWurm.class));
         cards.add(new SetCardInfo("Rootwalla", 268, Rarity.COMMON, mage.cards.r.Rootwalla.class));
         cards.add(new SetCardInfo("Royal Assassin", 159, Rarity.RARE, mage.cards.r.RoyalAssassin.class));
-        cards.add(new SetCardInfo("Rukh Egg", 214, Rarity.RARE, RukhEgg.class));
+        cards.add(new SetCardInfo("Rukh Egg", 214, Rarity.RARE, mage.cards.r.RukhEgg.class));
         cards.add(new SetCardInfo("Sacred Ground", 37, Rarity.RARE, mage.cards.s.SacredGround.class));
         cards.add(new SetCardInfo("Sacred Nectar", 38, Rarity.COMMON, mage.cards.s.SacredNectar.class));
         cards.add(new SetCardInfo("Sage Aven", 95, Rarity.COMMON, mage.cards.s.SageAven.class));
@@ -337,9 +337,9 @@ public class NinthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Underworld Dreams", 167, Rarity.RARE, mage.cards.u.UnderworldDreams.class));
         cards.add(new SetCardInfo("Unholy Strength", 168, Rarity.COMMON, mage.cards.u.UnholyStrength.class));
         cards.add(new SetCardInfo("Ur-Golem's Eye", 314, Rarity.UNCOMMON, mage.cards.u.UrGolemsEye.class));
-        cards.add(new SetCardInfo("Urza's Mine", 327, Rarity.COMMON, mage.cards.u.UrzasMine.class));
-        cards.add(new SetCardInfo("Urza's Power Plant", 328, Rarity.COMMON, mage.cards.u.UrzasPowerPlant.class));
-        cards.add(new SetCardInfo("Urza's Tower", 329, Rarity.COMMON, mage.cards.u.UrzasTower.class));
+        cards.add(new SetCardInfo("Urza's Mine", 327, Rarity.UNCOMMON, mage.cards.u.UrzasMine.class));
+        cards.add(new SetCardInfo("Urza's Power Plant", 328, Rarity.UNCOMMON, mage.cards.u.UrzasPowerPlant.class));
+        cards.add(new SetCardInfo("Urza's Tower", 329, Rarity.UNCOMMON, mage.cards.u.UrzasTower.class));
         cards.add(new SetCardInfo("Utopia Tree", 277, Rarity.RARE, mage.cards.u.UtopiaTree.class));
         cards.add(new SetCardInfo("Venerable Monk", 51, Rarity.COMMON, mage.cards.v.VenerableMonk.class));
         cards.add(new SetCardInfo("Verdant Force", 278, Rarity.RARE, mage.cards.v.VerdantForce.class));
@@ -371,5 +371,4 @@ public class NinthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Zombify", 171, Rarity.UNCOMMON, mage.cards.z.Zombify.class));
         cards.add(new SetCardInfo("Zur's Weirding", 114, Rarity.RARE, mage.cards.z.ZursWeirding.class));
     }
-
 }

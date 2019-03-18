@@ -1,30 +1,3 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.cards.f;
 
 import java.util.UUID;
@@ -41,22 +14,23 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
+import mage.target.targetadjustment.TargetAdjuster;
 
 /**
  *
  * @author jeffwadsworth
  */
-public class Firestorm extends CardImpl {
+public final class Firestorm extends CardImpl {
 
     public Firestorm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
 
         // As an additional cost to cast Firestorm, discard X cards.
         this.getSpellAbility().addCost(new DiscardXTargetCost(new FilterCard("cards"), true));
         // Firestorm deals X damage to each of X target creatures and/or players.
         this.getSpellAbility().addEffect(new FirestormEffect());
+        this.getSpellAbility().setTargetAdjuster(FirestormAdjuster.instance);
     }
 
     public Firestorm(final Firestorm card) {
@@ -64,17 +38,21 @@ public class Firestorm extends CardImpl {
     }
 
     @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int xValue = new GetXValue().calculate(game, ability, null);
-        if (xValue > 0) {
-            Target target = new TargetCreatureOrPlayer(xValue);
-            ability.addTarget(target);
-        }
-    }
-
-    @Override
     public Firestorm copy() {
         return new Firestorm(this);
+    }
+}
+
+enum FirestormAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        int xValue = GetXValue.instance.calculate(game, ability, null);
+        if (xValue > 0) {
+            Target target = new TargetAnyTarget(xValue);
+            ability.addTarget(target);
+        }
     }
 }
 
@@ -92,7 +70,7 @@ class FirestormEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
-        int amount = (new GetXValue()).calculate(game, source, this);
+        int amount = (GetXValue.instance).calculate(game, source, this);
         if (you != null) {
             if (!source.getTargets().isEmpty()) {
                 for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
@@ -111,9 +89,6 @@ class FirestormEffect extends OneShotEffect {
         }
         return false;
     }
-        
-
-    
 
     @Override
     public FirestormEffect copy() {

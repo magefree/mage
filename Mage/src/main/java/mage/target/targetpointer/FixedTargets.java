@@ -7,9 +7,11 @@ package mage.target.targetpointer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.cards.Card;
 import mage.cards.Cards;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -41,6 +43,14 @@ public class FixedTargets implements TargetPointer {
     public FixedTargets(List<Permanent> permanents, Game game) {
         for (Permanent permanent : permanents) {
             MageObjectReference mor = new MageObjectReference(permanent.getId(), permanent.getZoneChangeCounter(game), game);
+            targets.add(mor);
+        }
+        this.initialized = true;
+    }
+
+    public FixedTargets(Set<Card> cards, Game game) {
+        for (Card card : cards) {
+            MageObjectReference mor = new MageObjectReference(card.getId(), card.getZoneChangeCounter(game), game);
             targets.add(mor);
         }
         this.initialized = true;

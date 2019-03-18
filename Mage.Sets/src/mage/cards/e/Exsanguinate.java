@@ -1,31 +1,3 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
-
 package mage.cards.e;
 
 import java.util.UUID;
@@ -41,15 +13,15 @@ import mage.game.Game;
  *
  * @author Loki
  */
-public class Exsanguinate extends CardImpl {
+public final class Exsanguinate extends CardImpl {
 
-    public Exsanguinate (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}{B}");
+    public Exsanguinate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
 
         this.getSpellAbility().addEffect(new ExsanguinateEffect());
     }
 
-    public Exsanguinate (final Exsanguinate card) {
+    public Exsanguinate(final Exsanguinate card) {
         super(card);
     }
 
@@ -61,8 +33,9 @@ public class Exsanguinate extends CardImpl {
 }
 
 class ExsanguinateEffect extends OneShotEffect {
+
     public ExsanguinateEffect() {
-        super(Outcome.Damage);
+        super(Outcome.GainLife);
         staticText = "Each opponent loses X life. You gain life equal to the life lost this way";
     }
 
@@ -72,13 +45,14 @@ class ExsanguinateEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int loseLife = 0;
-        int damage = source.getManaCostsToPay().getX();
+        int totalLostLife = 0;
+        int loseLife = source.getManaCostsToPay().getX();
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-            loseLife += game.getPlayer(opponentId).loseLife(damage, game, false);
+            totalLostLife += game.getPlayer(opponentId).loseLife(loseLife, game, false);
         }
-        if (loseLife > 0)
-            game.getPlayer(source.getControllerId()).gainLife(loseLife, game);
+        if (totalLostLife > 0) {
+            game.getPlayer(source.getControllerId()).gainLife(totalLostLife, game, source);
+        }
         return true;
     }
 

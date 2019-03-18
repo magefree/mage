@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- * Pillar of Flame: Pillar of Flame deals 2 damage to target creature or player.
+ * Pillar of Flame: Pillar of Flame deals 2 damage to any target.
  * If a creature dealt damage this way would die this turn, exile it instead.
  *
  * @author LevelX2
@@ -25,7 +25,7 @@ public class PillarOfFlameTest extends CardTestPlayerBase {
         // Unleash (You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)
         addCard(Zone.BATTLEFIELD, playerA, "Rakdos Cackler"); // 1/1
 
-        // Pillar of Flame deals 2 damage to target creature or player.
+        // Pillar of Flame deals 2 damage to any target.
         // If a creature dealt damage this way would die this turn, exile it instead.
         addCard(Zone.HAND, playerA, "Pillar of Flame");
         // Soulbond

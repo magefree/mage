@@ -1,71 +1,37 @@
-/*
- * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.cards;
 
-import java.lang.reflect.Constructor;
-import java.util.*;
+import com.google.common.collect.ImmutableList;
 import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.*;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.RemoveVariableCountersTargetCost;
-import mage.abilities.effects.common.NameACardEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.HintUtils;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.repository.PluginClassloaderRegistery;
 import mage.constants.*;
 import mage.counters.Counter;
-import mage.counters.CounterType;
 import mage.counters.Counters;
-import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
-import mage.filter.FilterSpell;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
-import mage.filter.predicate.mageobject.NamePredicate;
-import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.filter.FilterMana;
 import mage.game.*;
+import mage.game.command.CommandObject;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
-import mage.target.TargetCard;
-import mage.target.TargetPermanent;
-import mage.target.TargetSpell;
-import mage.target.common.TargetCardInOpponentsGraveyard;
-import mage.target.common.TargetCreaturePermanent;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
 
 public abstract class CardImpl extends MageObjectImpl implements Card {
 
@@ -73,9 +39,15 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     private static final Logger logger = Logger.getLogger(CardImpl.class);
 
+    private static final String regexBlack = ".*\\x7b.{0,2}B.{0,2}\\x7d.*";
+    private static final String regexBlue = ".*\\x7b.{0,2}U.{0,2}\\x7d.*";
+    private static final String regexRed = ".*\\x7b.{0,2}R.{0,2}\\x7d.*";
+    private static final String regexGreen = ".*\\x7b.{0,2}G.{0,2}\\x7d.*";
+    private static final String regexWhite = ".*\\x7b.{0,2}W.{0,2}\\x7d.*";
+
     protected UUID ownerId;
     protected String cardNumber;
-    public String expansionSetCode;
+    protected String expansionSetCode;
     protected String tokenSetCode;
     protected String tokenDescriptor;
     protected Rarity rarity;
@@ -205,22 +177,30 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     public static Card createCard(Class<?> clazz, CardSetInfo setInfo, List<String> errorList) {
+        String setCode = null;
         try {
             Card card;
             if (setInfo == null) {
                 Constructor<?> con = clazz.getConstructor(UUID.class);
                 card = (Card) con.newInstance(new Object[]{null});
             } else {
+                setCode = setInfo.getExpansionSetCode();
                 Constructor<?> con = clazz.getConstructor(UUID.class, CardSetInfo.class);
                 card = (Card) con.newInstance(null, setInfo);
             }
             return card;
         } catch (Exception e) {
-            String err = "Error loading card: " + clazz.getCanonicalName();
+            String err = "Error loading card: " + clazz.getCanonicalName() + " (" + setCode + ")";
             if (errorList != null) {
                 errorList.add(err);
             }
-            logger.fatal(err, e);
+
+            if (e instanceof InvocationTargetException) {
+                logger.fatal(err, ((InvocationTargetException) e).getTargetException());
+            } else {
+                logger.fatal(err, e);
+            }
+
             return null;
         }
     }
@@ -245,11 +225,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         game.getState().getCardState(objectId).addInfo(key, value);
     }
 
-    protected static final ArrayList<String> rulesError = new ArrayList<String>() {
-        {
-            add("Exception occurred in rules generation");
-        }
-    };
+    protected static final List<String> rulesError = ImmutableList.of("Exception occurred in rules generation");
 
     @Override
     public List<String> getRules() {
@@ -266,6 +242,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         try {
             List<String> rules = getRules();
             if (game != null) {
+                // debug state
                 CardState cardState = game.getState().getCardState(objectId);
                 if (cardState != null) {
                     for (String data : cardState.getInfo().values()) {
@@ -274,6 +251,27 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     for (Ability ability : cardState.getAbilities()) {
                         rules.add(ability.getRule());
                     }
+                }
+
+                // ability hints
+                List<String> abilityHints = new ArrayList<>();
+                if (HintUtils.ABILITY_HINTS_ENABLE) {
+                    for (Ability ability : abilities) {
+                        for (Hint hint : ability.getHints()) {
+                            String s = hint.getText(game, ability);
+                            if (s != null && !s.isEmpty()) {
+                                abilityHints.add(s);
+                            }
+                        }
+                    }
+                }
+
+                // restrict hints only for permanents, not cards
+
+                // total hints
+                if (!abilityHints.isEmpty()) {
+                    rules.add(HintUtils.HINT_START_MARK);
+                    HintUtils.appendHints(rules, abilityHints);
                 }
             }
             return rules;
@@ -350,105 +348,14 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         return spellAbility;
     }
 
-//    @Override
-//    public void adjustCosts(Ability ability, Game game) {
-//    }
+    @Override
+    public void adjustCosts(Ability ability, Game game) {
+        ability.adjustCosts(game);
+    }
+
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        int xValue;
-        TargetPermanent oldTargetPermanent;
-        FilterPermanent permanentFilter;
-        int minTargets;
-        int maxTargets;
-        switch (ability.getTargetAdjustment()) {
-            case NONE:
-                break;
-            case X_CMC_EQUAL_PERM:
-                xValue = ability.getManaCostsToPay().getX();
-                oldTargetPermanent = (TargetPermanent) ability.getTargets().get(0);
-                minTargets = oldTargetPermanent.getMinNumberOfTargets();
-                maxTargets = oldTargetPermanent.getMaxNumberOfTargets();
-                permanentFilter = oldTargetPermanent.getFilter().copy();
-                permanentFilter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
-                ability.getTargets().clear();
-                ability.getTargets().add(new TargetPermanent(minTargets, maxTargets, permanentFilter, false));
-                break;
-            case X_TARGETS:
-                xValue = ability.getManaCostsToPay().getX();
-                permanentFilter = ((TargetPermanent) ability.getTargets().get(0)).getFilter();
-                ability.getTargets().clear();
-                ability.addTarget(new TargetPermanent(xValue, permanentFilter));
-                break;
-            case X_POWER_LEQ:// Minamo Sightbender only
-                xValue = ability.getManaCostsToPay().getX();
-                oldTargetPermanent = (TargetPermanent) ability.getTargets().get(0);
-                minTargets = oldTargetPermanent.getMinNumberOfTargets();
-                maxTargets = oldTargetPermanent.getMaxNumberOfTargets();
-                permanentFilter = oldTargetPermanent.getFilter().copy();
-                permanentFilter.add(new PowerPredicate(ComparisonType.FEWER_THAN, xValue + 1));
-                ability.getTargets().clear();
-                ability.getTargets().add(new TargetPermanent(minTargets, maxTargets, permanentFilter, false));
-                break;
-            case VERSE_COUNTER_TARGETS:
-                Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(ability.getSourceId());
-                if (sourcePermanent != null) {
-                    xValue = sourcePermanent.getCounters(game).getCount(CounterType.VERSE);
-                    permanentFilter = ((TargetPermanent) ability.getTargets().get(0)).getFilter();
-                    ability.getTargets().clear();
-                    ability.addTarget(new TargetPermanent(0, xValue, permanentFilter, false));
-                }
-                break;
-            case X_CMC_EQUAL_GY_CARD: //Geth, Lord of the Vault only
-                xValue = ability.getManaCostsToPay().getX();
-                TargetCard oldTarget = (TargetCard) ability.getTargets().get(0);
-                FilterCard filterCard = oldTarget.getFilter().copy();
-                filterCard.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
-                ability.getTargets().clear();
-                ability.getTargets().add(new TargetCardInOpponentsGraveyard(filterCard));
-                break;
-            case CHOSEN_NAME: //Declaration of Naught only
-                ability.getTargets().clear();
-                FilterSpell filterSpell = new FilterSpell("spell with the chosen name");
-                filterSpell.add(new NamePredicate((String) game.getState().getValue(ability.getSourceId().toString() + NameACardEffect.INFO_KEY)));
-                TargetSpell target = new TargetSpell(1, filterSpell);
-                ability.addTarget(target);
-                break;
-            case CHOSEN_COLOR: //Pentarch Paladin only
-                ObjectColor chosenColor = (ObjectColor) game.getState().getValue(ability.getSourceId() + "_color");
-                ability.getTargets().clear();
-                FilterPermanent filter = new FilterPermanent("permanent of the chosen color.");
-                if (chosenColor != null) {
-                    filter.add(new ColorPredicate(chosenColor));
-                } else {
-                    filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, -5));// Pretty sure this is always false
-                }
-                oldTargetPermanent = new TargetPermanent(filter);
-                ability.addTarget(oldTargetPermanent);
-                break;
-            case TREASURE_COUNTER_POWER: //Legacy's Allure only
-                sourcePermanent = game.getPermanentOrLKIBattlefield(ability.getSourceId());
-                if (sourcePermanent != null) {
-                    xValue = sourcePermanent.getCounters(game).getCount(CounterType.TREASURE);
-                    FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature with power less than or equal to the number of treasure counters on {this}");
-                    filter2.add(new PowerPredicate(ComparisonType.FEWER_THAN, xValue + 1));
-                    ability.getTargets().clear();
-                    ability.getTargets().add(new TargetCreaturePermanent(filter2));
-                }
-                break;
-            case SIMIC_MANIPULATOR: //Simic Manipulator only
-                xValue = 0;
-                for (Cost cost : ability.getCosts()) {
-                    if (cost instanceof RemoveVariableCountersTargetCost) {
-                        xValue = ((RemoveVariableCountersTargetCost) cost).getAmount();
-                        break;
-                    }
-                }
-                ability.getTargets().clear();
-                FilterCreaturePermanent newFilter = new FilterCreaturePermanent("creature with power less than or equal to " + xValue);
-                newFilter.add(new PowerPredicate(ComparisonType.FEWER_THAN, xValue + 1));
-                ability.addTarget(new TargetCreaturePermanent(newFilter));
-                break;
-        }
+        ability.adjustTargets(game);
     }
 
     @Override
@@ -476,9 +383,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public List<Mana> getMana() {
         List<Mana> mana = new ArrayList<>();
         for (ActivatedManaAbilityImpl ability : this.abilities.getActivatedManaAbilities(Zone.BATTLEFIELD)) {
-            for (Mana netMana : ability.getNetMana(null)) {
-                mana.add(netMana);
-            }
+            mana.addAll(ability.getNetMana(null));
         }
         return mana;
     }
@@ -591,14 +496,18 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     stackObject = game.getStack().getSpell(getId());
                 }
                 if (stackObject != null) {
-                    removed = game.getStack().remove(stackObject);
+                    removed = game.getStack().remove(stackObject, game);
                     lkiObject = stackObject;
                 }
                 break;
             case COMMAND:
-                lkiObject = game.getObject(objectId);
+                for (CommandObject commandObject : game.getState().getCommand()) {
+                    if (commandObject.getId().equals(objectId)) {
+                        lkiObject = commandObject;
+                    }
+                }
                 if (lkiObject != null) {
-                    removed = game.getState().getCommand().remove(game.getObject(objectId));
+                    removed = game.getState().getCommand().remove(lkiObject);
                 }
                 break;
             case OUTSIDE:
@@ -703,7 +612,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         }
 
         List<ExpansionSet.SetCardInfo> cardInfo = Sets.findSet(expansionSetCode).findCardInfoByClass(secondSideCardClazz);
-        assert cardInfo.size() == 1;    // should find 1 second side card
         if (cardInfo.isEmpty()) {
             return null;
         }
@@ -757,15 +665,34 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public boolean addCounters(Counter counter, Ability source, Game game) {
-        return addCounters(counter, source, game, null);
+        return addCounters(counter, source, game, null, true);
+    }
+
+    @Override
+    public boolean addCounters(Counter counter, Ability source, Game game, boolean isEffect) {
+        return addCounters(counter, source, game, null, isEffect);
     }
 
     @Override
     public boolean addCounters(Counter counter, Ability source, Game game, List<UUID> appliedEffects) {
+        return addCounters(counter, source, game, appliedEffects, true);
+    }
+
+    @Override
+    public boolean addCounters(Counter counter, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect) {
         boolean returnCode = true;
-        UUID sourceId = (source == null ? getId() : source.getSourceId());
+        UUID sourceId = getId();
+        if (source != null) {
+            MageObject object = game.getObject(source.getId());
+            if (object instanceof StackObject) {
+                sourceId = source.getId();
+            } else {
+                sourceId = source.getSourceId();
+            }
+        }
         GameEvent countersEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTERS, objectId, sourceId, getControllerOrOwner(), counter.getName(), counter.getCount());
         countersEvent.setAppliedEffects(appliedEffects);
+        countersEvent.setFlag(isEffect);
         if (!game.replaceEvent(countersEvent)) {
             int amount = countersEvent.getAmount();
             int finalAmount = amount;
@@ -813,7 +740,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public String getLogName() {
         if (name.isEmpty()) {
-            return GameLog.getNeutralColoredText("face down card");
+            return GameLog.getNeutralColoredText(EmptyNames.FACE_DOWN_CREATURE.toString());
         } else {
             return GameLog.getColoredObjectIdName(this);
         }
@@ -822,6 +749,64 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public Card getMainCard() {
         return this;
+    }
+
+    @Override
+    public FilterMana getColorIdentity() {
+        FilterMana mana = new FilterMana();
+        mana.setBlack(getManaCost().getText().matches(regexBlack));
+        mana.setBlue(getManaCost().getText().matches(regexBlue));
+        mana.setGreen(getManaCost().getText().matches(regexGreen));
+        mana.setRed(getManaCost().getText().matches(regexRed));
+        mana.setWhite(getManaCost().getText().matches(regexWhite));
+
+        for (String rule : getRules()) {
+            rule = rule.replaceAll("(?i)<i.*?</i>", ""); // Ignoring reminder text in italic
+            if (!mana.isBlack() && (rule.matches(regexBlack) || this.color.isBlack())) {
+                mana.setBlack(true);
+            }
+            if (!mana.isBlue() && (rule.matches(regexBlue) || this.color.isBlue())) {
+                mana.setBlue(true);
+            }
+            if (!mana.isGreen() && (rule.matches(regexGreen) || this.color.isGreen())) {
+                mana.setGreen(true);
+            }
+            if (!mana.isRed() && (rule.matches(regexRed) || this.color.isRed())) {
+                mana.setRed(true);
+            }
+            if (!mana.isWhite() && (rule.matches(regexWhite) || this.color.isWhite())) {
+                mana.setWhite(true);
+            }
+        }
+        if (isTransformable()) {
+            Card secondCard = getSecondCardFace();
+            ObjectColor color = secondCard.getColor(null);
+            mana.setBlack(mana.isBlack() || color.isBlack());
+            mana.setGreen(mana.isGreen() || color.isGreen());
+            mana.setRed(mana.isRed() || color.isRed());
+            mana.setBlue(mana.isBlue() || color.isBlue());
+            mana.setWhite(mana.isWhite() || color.isWhite());
+            for (String rule : secondCard.getRules()) {
+                rule = rule.replaceAll("(?i)<i.*?</i>", ""); // Ignoring reminder text in italic
+                if (!mana.isBlack() && rule.matches(regexBlack)) {
+                    mana.setBlack(true);
+                }
+                if (!mana.isBlue() && rule.matches(regexBlue)) {
+                    mana.setBlue(true);
+                }
+                if (!mana.isGreen() && rule.matches(regexGreen)) {
+                    mana.setGreen(true);
+                }
+                if (!mana.isRed() && rule.matches(regexRed)) {
+                    mana.setRed(true);
+                }
+                if (!mana.isWhite() && rule.matches(regexWhite)) {
+                    mana.setWhite(true);
+                }
+            }
+        }
+
+        return mana;
     }
 
     @Override

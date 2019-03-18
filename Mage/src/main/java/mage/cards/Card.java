@@ -1,37 +1,10 @@
-/*
- * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards;
 
 import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
 import mage.Mana;
-import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -45,12 +18,6 @@ import mage.game.GameState;
 import mage.game.permanent.Permanent;
 
 public interface Card extends MageObject {
-
-    final String regexBlack = ".*\\x7b.{0,2}B.{0,2}\\x7d.*";
-    final String regexBlue = ".*\\x7b.{0,2}U.{0,2}\\x7d.*";
-    final String regexRed = ".*\\x7b.{0,2}R.{0,2}\\x7d.*";
-    final String regexGreen = ".*\\x7b.{0,2}G.{0,2}\\x7d.*";
-    final String regexWhite = ".*\\x7b.{0,2}W.{0,2}\\x7d.*";
 
     UUID getOwnerId();
 
@@ -164,9 +131,15 @@ public interface Card extends MageObject {
 
     Counters getCounters(GameState state);
 
+    void addAbility(Ability ability);
+
     boolean addCounters(Counter counter, Ability source, Game game);
 
+    boolean addCounters(Counter counter, Ability source, Game game, boolean isEffect);
+
     boolean addCounters(Counter counter, Ability source, Game game, List<UUID> appliedEffects);
+
+    boolean addCounters(Counter counter, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect);
 
     void removeCounters(String name, int amount, Game game);
 
@@ -177,7 +150,7 @@ public interface Card extends MageObject {
 
     /**
      *
-     * @return The main card of a split half card, otherwise thae card itself is
+     * @return The main card of a split half card, otherwise the card itself is
      * returned
      */
     Card getMainCard();
@@ -188,66 +161,15 @@ public interface Card extends MageObject {
      *
      * @return
      */
-    default FilterMana getColorIdentity() {
-        FilterMana mana = new FilterMana();
-        mana.setBlack(getManaCost().getText().matches(regexBlack));
-        mana.setBlue(getManaCost().getText().matches(regexBlue));
-        mana.setGreen(getManaCost().getText().matches(regexGreen));
-        mana.setRed(getManaCost().getText().matches(regexRed));
-        mana.setWhite(getManaCost().getText().matches(regexWhite));
-
-        for (String rule : getRules()) {
-            rule = rule.replaceAll("(?i)<i.*?</i>", ""); // Ignoring reminder text in italic
-            if (!mana.isBlack() && rule.matches(regexBlack)) {
-                mana.setBlack(true);
-            }
-            if (!mana.isBlue() && rule.matches(regexBlue)) {
-                mana.setBlue(true);
-            }
-            if (!mana.isGreen() && rule.matches(regexGreen)) {
-                mana.setGreen(true);
-            }
-            if (!mana.isRed() && rule.matches(regexRed)) {
-                mana.setRed(true);
-            }
-            if (!mana.isWhite() && rule.matches(regexWhite)) {
-                mana.setWhite(true);
-            }
-        }
-        if (isTransformable()) {
-            Card secondCard = getSecondCardFace();
-            ObjectColor color = secondCard.getColor(null);
-            mana.setBlack(mana.isBlack() || color.isBlack());
-            mana.setGreen(mana.isGreen() || color.isGreen());
-            mana.setRed(mana.isRed() || color.isRed());
-            mana.setBlue(mana.isBlue() || color.isBlue());
-            mana.setWhite(mana.isWhite() || color.isWhite());
-            for (String rule : secondCard.getRules()) {
-                rule = rule.replaceAll("(?i)<i.*?</i>", ""); // Ignoring reminder text in italic
-                if (!mana.isBlack() && rule.matches(regexBlack)) {
-                    mana.setBlack(true);
-                }
-                if (!mana.isBlue() && rule.matches(regexBlue)) {
-                    mana.setBlue(true);
-                }
-                if (!mana.isGreen() && rule.matches(regexGreen)) {
-                    mana.setGreen(true);
-                }
-                if (!mana.isRed() && rule.matches(regexRed)) {
-                    mana.setRed(true);
-                }
-                if (!mana.isWhite() && rule.matches(regexWhite)) {
-                    mana.setWhite(true);
-                }
-            }
-        }
-
-        return mana;
-    }
+    FilterMana getColorIdentity();
 
     List<UUID> getAttachments();
 
     boolean addAttachment(UUID permanentId, Game game);
 
     boolean removeAttachment(UUID permanentId, Game game);
+
+    default boolean isOwnedBy(UUID controllerId){
+        return getOwnerId().equals(controllerId);
+    }
 }

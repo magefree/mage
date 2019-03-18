@@ -10,7 +10,7 @@ import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
-public class InvokeTheDivine extends CardImpl {
+public final class InvokeTheDivine extends CardImpl {
 
     public InvokeTheDivine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");

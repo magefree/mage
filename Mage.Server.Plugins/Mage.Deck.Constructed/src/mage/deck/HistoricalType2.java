@@ -1,24 +1,19 @@
 package mage.deck;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.Map;
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
-import mage.constants.SetType;
+
+import java.util.*;
 
 /**
  * This class represents a deck from any past standard.
- *
+ * <p>
  * This class was originally made to work with the historical standard ruleset.
  * Data taken from http://thattournament.website/historic-tournament.php (site
  * changed, originally http://mtgt.nfshost.com/historic-tournament.php)
- *
+ * <p>
  * If there are any questions or corrections, feel free to contact me.
  *
  * @author Marthinwurer (at gmail.com)
@@ -30,54 +25,54 @@ public class HistoricalType2 extends Constructed {
      * Kamigawa/Ravnica standard, where rotation stabilized.
      */
     protected static final String[][] standards = {
-        //  1st standard: The Dark, Fallen Empires, and 4th.
-        {"DRK", "FEM", "4ED"},
-        //  2nd standard: 4th, Fallen Empires, Ice Age, Chronicles, Homelands,
-        //                Alliances, and Mirage.
-        {"FEM", "4ED", "ICE", "CHR", "HML", "ALL", "MIR"},
-        //  3rd standard: 4th, Chronicles, Alliances, Mirage, Visions.
-        {"4ED", "CHR", "ALL", "MIR", "VIS"},
-        //  4th Standard: Ice Age, Homelands, Alliances, Mirage, Visions, 5th,
-        //                and Weatherlight.
-        {"ICE", "HML", "ALL", "MIR", "VIS", "5ED", "WTH"},
-        //  5th Standard: Mirage, Visions, 5th, Weatherlight, Tempest,
-        //                Stronghold, and Exodus.
-        {"MIR", "VIS", "5ED", "WTH", "TMP", "STH", "EXO"},
-        //  6th Standard: 5th, Tempest, Stronghold, Exodus, Urza's Saga, Urza's
-        //                Legacy, Urza's Destiny.
-        {"5ED", "TMP", "STH", "EXO", "USG", "ULG"},
-        //  7th Standard: Tempest, Stronghold, Exodus, Urza's Saga, Urza's
-        //                Legacy, 6th, Urza's Destiny.
-        {"TMP", "STH", "EXO", "USG", "ULG", "6ED", "UDS"},
-        //  8th Standard: Urza's Saga, Urza's Legacy, 6th, Urza's Destiny,
-        //                Mercadian Masques, Nemesis, Prophecy.
-        {"USG", "ULG", "6ED", "UDS", "MMQ", "NEM", "PCY"},
-        //  9th Standard
-        {"6ED", "MMQ", "NEM", "PCY", "INV", "PLS"},
-        //  10th Standard
-        {"7ED", "MMQ", "NEM", "PCY", "INV", "PLS", "APC"},
-        // 11th Standard
-        {"7ED", "INV", "APC", "PLS", "ODY", "TOR", "JUD"},
-        // 12th Standard
-        {"7ED", "ODY", "TOR", "JUD", "ONS", "LGN", "SCG"},
-        // 13th Standard
-        {"8ED", "ODY", "TOR", "JUD", "ONS", "LGN", "SCG"},
-        // 14th Standard
-        {"8ED", "ONS", "LGN", "SCG", "MRD", "DST", "5DN"},
-        // 15th Standard
-        {"8ED", "MRD", "DST", "5DN", "CHK", "BOK", "SOK"},
-        // 16th Standard
-        {"9ED", "MRD", "DST", "5DN", "CHK", "BOK", "SOK"},
-        // 17th Standard
-        {"9ED", "CHK", "BOK", "SOK", "RAV", "GPT", "DIS", "CSP"},
-        // 18th Standard
-        {"9ED", "RAV", "GPT", "DIS", "CSP", "TSP", "TSB", "PLC", "FUT"},
-        // 19th Standard
-        {"10E", "RAV", "GPT", "DIS", "CSP", "TSP", "TSB", "PLC", "FUT"},
-        // 20th Standard
-        {"10E", "CSP", "TSP", "TSB", "PLC", "FUT", "LRW", "MOR", "SHM", "EVE"},
-        // 21st Standard
-        {"10E", "LRW", "MOR", "SHM", "EVE", "ALA", "CON", "ARB"}
+            //  1st standard: The Dark, Fallen Empires, and 4th.
+            {"DRK", "FEM", "4ED"},
+            //  2nd standard: 4th, Fallen Empires, Ice Age, Chronicles, Homelands,
+            //                Alliances, and Mirage.
+            {"FEM", "4ED", "ICE", "CHR", "HML", "ALL", "MIR"},
+            //  3rd standard: 4th, Chronicles, Alliances, Mirage, Visions.
+            {"4ED", "CHR", "ALL", "MIR", "VIS"},
+            //  4th Standard: Ice Age, Homelands, Alliances, Mirage, Visions, 5th,
+            //                and Weatherlight.
+            {"ICE", "HML", "ALL", "MIR", "VIS", "5ED", "WTH"},
+            //  5th Standard: Mirage, Visions, 5th, Weatherlight, Tempest,
+            //                Stronghold, and Exodus.
+            {"MIR", "VIS", "5ED", "WTH", "TMP", "STH", "EXO"},
+            //  6th Standard: 5th, Tempest, Stronghold, Exodus, Urza's Saga, Urza's
+            //                Legacy, Urza's Destiny.
+            {"5ED", "TMP", "STH", "EXO", "USG", "ULG"},
+            //  7th Standard: Tempest, Stronghold, Exodus, Urza's Saga, Urza's
+            //                Legacy, 6th, Urza's Destiny.
+            {"TMP", "STH", "EXO", "USG", "ULG", "6ED", "UDS"},
+            //  8th Standard: Urza's Saga, Urza's Legacy, 6th, Urza's Destiny,
+            //                Mercadian Masques, Nemesis, Prophecy.
+            {"USG", "ULG", "6ED", "UDS", "MMQ", "NEM", "PCY"},
+            //  9th Standard
+            {"6ED", "MMQ", "NEM", "PCY", "INV", "PLS"},
+            //  10th Standard
+            {"7ED", "MMQ", "NEM", "PCY", "INV", "PLS", "APC"},
+            // 11th Standard
+            {"7ED", "INV", "APC", "PLS", "ODY", "TOR", "JUD"},
+            // 12th Standard
+            {"7ED", "ODY", "TOR", "JUD", "ONS", "LGN", "SCG"},
+            // 13th Standard
+            {"8ED", "ODY", "TOR", "JUD", "ONS", "LGN", "SCG"},
+            // 14th Standard
+            {"8ED", "ONS", "LGN", "SCG", "MRD", "DST", "5DN"},
+            // 15th Standard
+            {"8ED", "MRD", "DST", "5DN", "CHK", "BOK", "SOK"},
+            // 16th Standard
+            {"9ED", "MRD", "DST", "5DN", "CHK", "BOK", "SOK"},
+            // 17th Standard
+            {"9ED", "CHK", "BOK", "SOK", "RAV", "GPT", "DIS", "CSP"},
+            // 18th Standard
+            {"9ED", "RAV", "GPT", "DIS", "CSP", "TSP", "TSB", "PLC", "FUT"},
+            // 19th Standard
+            {"10E", "RAV", "GPT", "DIS", "CSP", "TSP", "TSB", "PLC", "FUT"},
+            // 20th Standard
+            {"10E", "CSP", "TSP", "TSB", "PLC", "FUT", "LRW", "MOR", "SHM", "EVE"},
+            // 21st Standard
+            {"10E", "LRW", "MOR", "SHM", "EVE", "ALA", "CON", "ARB"}
     };
 
     /**
@@ -108,15 +103,6 @@ public class HistoricalType2 extends Constructed {
      */
     @Override
     public boolean validate(Deck deck) {
-
-        // debug code for finding set info
-//        System.out.println();
-//        for (ExpansionSet set : Sets.getInstance().values()) {
-//            if (set.getSetType() == SetType.CORE || set.getSetType() == SetType.EXPANSION) {
-//                System.out.println("Set:\t" + set.getCode() + "\t" + set.getReleaseDate() + "\t" + set.getName() + "\t" + set.getBlockName());
-//            }
-//        }
-
 
         Map<String, String> leastInvalid = null;
 
@@ -187,9 +173,9 @@ public class HistoricalType2 extends Constructed {
             // Get the sets in that time period.
             // (code taken from standard.java)
             for (ExpansionSet set : Sets.getInstance().values()) {
-                if (set.getReleaseDate().after(start.getTime())
-                        && set.getReleaseDate().before(end.getTime())
-                        && (set.getSetType() == SetType.CORE || set.getSetType() == SetType.EXPANSION)) {
+                if (set.getSetType().isStandardLegal()
+                        && set.getReleaseDate().after(start.getTime())
+                        && set.getReleaseDate().before(end.getTime())) {
                     setCodes.add(set.getCode());
                 }
             }

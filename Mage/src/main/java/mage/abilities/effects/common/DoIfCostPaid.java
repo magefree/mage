@@ -1,6 +1,5 @@
 package mage.abilities.effects.common;
 
-import java.util.Locale;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -13,6 +12,8 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.Locale;
 
 public class DoIfCostPaid extends OneShotEffect {
 
@@ -27,7 +28,11 @@ public class DoIfCostPaid extends OneShotEffect {
     }
 
     public DoIfCostPaid(Effect effect, Effect effect2, Cost cost) {
-        this(effect, cost, null, true);
+        this(effect, effect2, cost, true);
+    }
+
+    public DoIfCostPaid(Effect effect, Effect effect2, Cost cost, boolean optional) {
+        this(effect, cost, null, optional);
         this.otherwiseEffects.add(effect2);
     }
 
@@ -54,8 +59,17 @@ public class DoIfCostPaid extends OneShotEffect {
         this.optional = effect.optional;
     }
 
-    public void addEffect(Effect effect) {
+    public DoIfCostPaid addEffect(Effect effect) {
         executingEffects.add(effect);
+        return this;
+    }
+
+    public Effects getExecutingEffects() {
+        return this.executingEffects;
+    }
+
+    public Effects getOtherwiseEffects() {
+        return this.otherwiseEffects;
     }
 
     @Override
@@ -71,6 +85,7 @@ public class DoIfCostPaid extends OneShotEffect {
                 }
                 message = getCostText() + " and " + effectText + '?';
                 message = Character.toUpperCase(message.charAt(0)) + message.substring(1);
+                CardUtil.replaceSourceName(message, mageObject.getName());
             } else {
                 message = chooseUseText;
             }
@@ -79,6 +94,7 @@ public class DoIfCostPaid extends OneShotEffect {
             if (cost.canPay(source, source.getSourceId(), player.getId(), game)
                     && executingEffects.size() > 0 && (!optional || player.chooseUse(executingEffects.get(0).getOutcome(), message, source, game))) {
                 cost.clearPaid();
+                int bookmark = game.bookmarkState();
                 if (cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
                     for (Effect effect : executingEffects) {
                         effect.setTargetPointer(this.targetPointer);
@@ -89,13 +105,17 @@ public class DoIfCostPaid extends OneShotEffect {
                         }
                     }
                     player.resetStoredBookmark(game); // otherwise you can e.g. undo card drawn with Mentor of the Meek
-                } else if (!otherwiseEffects.isEmpty()) {
-                    for (Effect effect : otherwiseEffects) {
-                        effect.setTargetPointer(this.targetPointer);
-                        if (effect instanceof OneShotEffect) {
-                            result &= effect.apply(game, source);
-                        } else {
-                            game.addEffect((ContinuousEffect) effect, source);
+                } else {
+                    // Paying cost was cancels so try to undo payment so far
+                    game.restoreState(bookmark, DoIfCostPaid.class.getName());
+                    if (!otherwiseEffects.isEmpty()) {
+                        for (Effect effect : otherwiseEffects) {
+                            effect.setTargetPointer(this.targetPointer);
+                            if (effect instanceof OneShotEffect) {
+                                result &= effect.apply(game, source);
+                            } else {
+                                game.addEffect((ContinuousEffect) effect, source);
+                            }
                         }
                     }
                 }
@@ -135,6 +155,7 @@ public class DoIfCostPaid extends OneShotEffect {
         String costText = cost.getText();
         if (costText != null
                 && !costText.toLowerCase(Locale.ENGLISH).startsWith("put")
+                && !costText.toLowerCase(Locale.ENGLISH).startsWith("return")
                 && !costText.toLowerCase(Locale.ENGLISH).startsWith("exile")
                 && !costText.toLowerCase(Locale.ENGLISH).startsWith("discard")
                 && !costText.toLowerCase(Locale.ENGLISH).startsWith("sacrifice")

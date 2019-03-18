@@ -2,6 +2,7 @@ package mage.utils.properties;
 
 import org.apache.log4j.Logger;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -19,39 +20,40 @@ public final class PropertiesUtil {
     private static Properties properties = new Properties();
 
     static {
-        InputStream in = PropertiesUtil.class.getResourceAsStream("/xmage.properties");
-        if (in != null) {
-            try {
+        try (InputStream in = PropertiesUtil.class.getResourceAsStream("/xmage.properties")) {
+            if(in != null) {
                 properties.load(in);
-            } catch (IOException e) {
-                logger.error("Couldn't load properties", e);
+            } else {
+                logger.warn("No xmage.properties were found");
             }
-        } else {
+        } catch (FileNotFoundException fnfe) {
             logger.warn("No xmage.properties were found on classpath");
-
+        } catch (IOException e) {
+            logger.error("Couldn't load properties");
+            e.printStackTrace();
         }
     }
 
-    /**
-     * Hide constructor
-     */
+        /**
+         * Hide constructor
+         */
     private PropertiesUtil() {
 
-    }
-
-    public static String getDBLogUrl() {
-        String url = properties.getProperty(PropertyKeys.KEY_DB_LOG_URL, LOG_JDBC_URL);
-        if (url != null) {
-            return url.trim();
         }
-        return null;
-    }
 
-    public static String getDBFeedbackUrl() {
-        String url = properties.getProperty(PropertyKeys.KEY_DB_FEEDBACK_URL, FEEDBACK_JDBC_URL);
-        if (url != null) {
-            return url.trim();
+        public static String getDBLogUrl () {
+            String url = properties.getProperty(PropertyKeys.KEY_DB_LOG_URL, LOG_JDBC_URL);
+            if (url != null) {
+                return url.trim();
+            }
+            return null;
         }
-        return null;
+
+        public static String getDBFeedbackUrl () {
+            String url = properties.getProperty(PropertyKeys.KEY_DB_FEEDBACK_URL, FEEDBACK_JDBC_URL);
+            if (url != null) {
+                return url.trim();
+            }
+            return null;
+        }
     }
-}

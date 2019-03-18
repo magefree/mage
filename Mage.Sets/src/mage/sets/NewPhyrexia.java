@@ -4,7 +4,7 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-public class NewPhyrexia extends ExpansionSet {
+public final class NewPhyrexia extends ExpansionSet {
 
     private static final NewPhyrexia instance = new NewPhyrexia();
 

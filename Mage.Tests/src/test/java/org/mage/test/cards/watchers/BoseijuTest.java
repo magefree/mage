@@ -14,8 +14,8 @@ public class BoseijuTest extends CardTestPlayerBase {
      * Boseiju, Who Shelters All
      * Legendary Land
      * Boseiju, Who Shelters All enters the battlefield tapped.
-     * {T}, Pay 2 life: Add {C} to your mana pool. If that mana is spent on an
-     * instant or sorcery spell, that spell can't be countered by spells or abilities.
+     * {T}, Pay 2 life: Add {C}. If that mana is spent on an
+     * instant or sorcery spell, that spell can't be countered.
      *
      */
 

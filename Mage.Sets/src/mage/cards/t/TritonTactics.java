@@ -1,30 +1,4 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards.t;
 
 import java.util.*;
@@ -56,7 +30,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class TritonTactics extends CardImpl {
+public final class TritonTactics extends CardImpl {
 
     public TritonTactics(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
@@ -115,7 +89,7 @@ class TritonTacticsUntapTargetEffect extends OneShotEffect {
             // save the targets for the watcher in a map with zone change counter (as the card is recast during combat it's neccessary to save with zone change counter)
             Map<Integer, Set<String>> targetMap;
             Object object = game.getState().getValue("targets" + source.getSourceId());
-            if (object != null && object instanceof Map) {
+            if (object instanceof Map) {
                 targetMap = (Map<Integer, Set<String>>) object;
             } else {
                 targetMap = new HashMap<>();
@@ -181,7 +155,7 @@ class TritonTacticsEndOfCombatEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Map<Integer, Set<String>> attackerMap = null;
         Object object = game.getState().getValue("blockedAttackers" + source.getSourceId());
-        if (object != null && object instanceof Map) {
+        if (object instanceof Map) {
             attackerMap = (Map<Integer, Set<String>>) object;
             for (Set<String> attackerSet : attackerMap.values()) {
                 List<Permanent> doNotUntapNextUntapStep = new ArrayList<>();
@@ -190,7 +164,7 @@ class TritonTacticsEndOfCombatEffect extends OneShotEffect {
                         // tap creature and add the not untap effect
                         creature.tap(game);
                         doNotUntapNextUntapStep.add(creature);
-                        game.informPlayers(new StringBuilder("Triton Tactics: ").append(creature.getName()).append(" doesn't untap during its controller's next untap step").toString());
+                        game.informPlayers("Triton Tactics: " + creature.getName() + " doesn't untap during its controller's next untap step");
                     }
                 }
                 if (!doNotUntapNextUntapStep.isEmpty()) {
@@ -211,7 +185,7 @@ class TritonTacticsEndOfCombatEffect extends OneShotEffect {
 class BlockedCreaturesWatcher extends Watcher {
 
     public BlockedCreaturesWatcher() {
-        super("BlockedCreatures", WatcherScope.CARD);
+        super(WatcherScope.CARD);
     }
 
     public BlockedCreaturesWatcher(final BlockedCreaturesWatcher watcher) {
@@ -223,7 +197,7 @@ class BlockedCreaturesWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
             Map<Integer, Set<String>> targetMap;
             Object object = game.getState().getValue("targets" + this.getSourceId().toString());
-            if (object != null && object instanceof Map) {
+            if (object instanceof Map) {
                 Permanent blocker = game.getPermanent(event.getSourceId());
                 if (blocker != null) {
                     targetMap = (Map<Integer, Set<String>>) object;
@@ -243,7 +217,7 @@ class BlockedCreaturesWatcher extends Watcher {
         Set<String> attackers;
         Map<Integer, Set<String>> attackerMap;
         Object object = game.getState().getValue("blockedAttackers" + getSourceId());
-        if (object != null && object instanceof Map) {
+        if (object instanceof Map) {
             attackerMap = (Map<Integer, Set<String>>) object;
         } else {
             attackerMap = new HashMap<>();

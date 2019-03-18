@@ -14,7 +14,7 @@ public class AltarOfTheLostTest extends CardTestPlayerBase {
     @Test
     public void testCard() {
         // Altar of the Lost enters the battlefield tapped.
-        // {tap}: Add two mana in any combination of colors to your mana pool. Spend this mana only to cast spells with flashback from a graveyard.
+        // {tap}: Add two mana in any combination of colors. Spend this mana only to cast spells with flashback from a graveyard.
         addCard(Zone.BATTLEFIELD, playerA, "Altar of the Lost");
         // Put two 1/1 white Spirit creature tokens with flying onto the battlefield.
         // Flashback {1}{B}

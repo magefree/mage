@@ -14,7 +14,7 @@ import mage.counters.CounterType;
 
 import java.util.UUID;
 
-public class AcademyDrake extends CardImpl {
+public final class AcademyDrake extends CardImpl {
 
     public AcademyDrake(UUID ownerId, CardSetInfo cardSetInfo) {
         super(ownerId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");

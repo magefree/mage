@@ -41,6 +41,8 @@ import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.players.Player;
 
 /**
@@ -106,8 +108,12 @@ public class BecomesColorTargetEffect extends ContinuousEffectImpl {
             for (UUID targetId : targetPointer.getTargets(game, source)) {
                 MageObject targetObject = game.getObject(targetId);
                 if (targetObject != null) {
-                    objectFound = true;
-                    targetObject.getColor(game).setColor(setColor);
+                    if (targetObject instanceof Spell || targetObject instanceof Permanent) {
+                        objectFound = true;
+                        targetObject.getColor(game).setColor(setColor);
+                    } else {
+                        objectFound = false;
+                    }
                 }
             }
             if (!objectFound && this.getDuration() == Duration.Custom) {

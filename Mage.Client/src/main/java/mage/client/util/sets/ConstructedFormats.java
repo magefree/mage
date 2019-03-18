@@ -1,16 +1,13 @@
 package mage.client.util.sets;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
+import mage.cards.repository.RepositoryEvent;
 import mage.constants.SetType;
 import mage.deck.Standard;
+import mage.game.events.Listener;
 
+import java.util.*;
 
 /**
  * Utility class for constructed formats (expansions and other editions).
@@ -19,17 +16,42 @@ import mage.deck.Standard;
  */
 public final class ConstructedFormats {
 
-    public static final String ALL = "- All Sets";
+    public static final String ALL_SETS = "- All Sets";
     public static final String STANDARD = "- Standard";
     public static final String EXTENDED = "- Extended";
     public static final String FRONTIER = "- Frontier";
     public static final String MODERN = "- Modern";
     public static final String VINTAGE_LEGACY = "- Vintage / Legacy";
+    public static final String JOKE = "- Joke Sets";
     public static final String CUSTOM = "- Custom";
     public static final Standard STANDARD_CARDS = new Standard();
 
+    // Attention -Month is 0 Based so Feb = 1 for example. //
+    private static final Date extendedDate = new GregorianCalendar(2009, 7, 20).getTime();
+    private static final Date frontierDate = new GregorianCalendar(2014, 6, 17).getTime();
+    private static final Date modernDate = new GregorianCalendar(2003, 6, 20).getTime();
+
+    // for all sets just return empty list
+    private static final List<String> all = new ArrayList<>();
+
     private static final Map<String, List<String>> underlyingSetCodesPerFormat = new HashMap<>();
     private static final List<String> formats = new ArrayList<>();
+    private static final Listener<RepositoryEvent> setsDbListener;
+
+    static {
+        buildLists();
+
+        // auto-update sets list on changes
+        setsDbListener = new Listener<RepositoryEvent>() {
+            @Override
+            public void event(RepositoryEvent event) {
+                if (event.getEventType().equals(RepositoryEvent.RepositoryEventType.DB_UPDATED)) {
+                    buildLists();
+                }
+            }
+        };
+        ExpansionRepository.instance.subscribe(setsDbListener);
+    }
 
     private ConstructedFormats() {
     }
@@ -43,7 +65,7 @@ public final class ConstructedFormats {
     }
 
     public static List<String> getSetsByFormat(final String format) {
-        if (!format.equals(ALL)) {
+        if (!format.equals(ALL_SETS)) {
             return underlyingSetCodesPerFormat.get(format);
         }
         return all;
@@ -56,44 +78,69 @@ public final class ConstructedFormats {
         }
     }
 
-    private static void buildLists() {
+    public static void buildLists() {
         underlyingSetCodesPerFormat.put(STANDARD, new ArrayList<>());
         underlyingSetCodesPerFormat.put(EXTENDED, new ArrayList<>());
         underlyingSetCodesPerFormat.put(FRONTIER, new ArrayList<>());
         underlyingSetCodesPerFormat.put(MODERN, new ArrayList<>());
         underlyingSetCodesPerFormat.put(VINTAGE_LEGACY, new ArrayList<>());
+        underlyingSetCodesPerFormat.put(JOKE, new ArrayList<>());
         underlyingSetCodesPerFormat.put(CUSTOM, new ArrayList<>());
         final Map<String, ExpansionInfo> expansionInfo = new HashMap<>();
         formats.clear(); // prevent NPE on sorting if this is not the first try
+
+        // Because this is also called in Netbeans Design view, but the object does not exist in that case,
+        // we have to return here to prevent exception in design view. (Does not hurt at design time)
+        if (!ExpansionRepository.instance.instanceInitialized) {
+            return;
+        }
+
+        // build formats list for deck validators
         for (ExpansionInfo set : ExpansionRepository.instance.getAll()) {
             expansionInfo.put(set.getName(), set);
             formats.add(set.getName());
 
+            // full list
             underlyingSetCodesPerFormat.put(set.getName(), new ArrayList<>());
             underlyingSetCodesPerFormat.get(set.getName()).add(set.getCode());
 
-            // create the play formats
-            if (set.getType() == SetType.CUSTOM_SET) {
+            // custom
+            if (set.getType().isCustomSet()) {
                 underlyingSetCodesPerFormat.get(CUSTOM).add(set.getCode());
                 continue;
             }
-            underlyingSetCodesPerFormat.get(VINTAGE_LEGACY).add(set.getCode());
-            if (set.getType() == SetType.CORE || set.getType() == SetType.EXPANSION || set.getType() == SetType.SUPPLEMENTAL_STANDARD_LEGAL) {
-                if (STANDARD_CARDS.getSetCodes().contains(set.getCode())) {
-                    underlyingSetCodesPerFormat.get(STANDARD).add(set.getCode());
-                }
-                if (set.getReleaseDate().after(extendedDate)) {
-                    underlyingSetCodesPerFormat.get(EXTENDED).add(set.getCode());
-                }
-                if (set.getReleaseDate().after(frontierDate)) {
-                    underlyingSetCodesPerFormat.get(FRONTIER).add(set.getCode());
-                }
-                if (set.getReleaseDate().after(modernDate)) {
-                    underlyingSetCodesPerFormat.get(MODERN).add(set.getCode());
-                }
+
+            // joke
+            if (set.getType().isJokeSet()) {
+                underlyingSetCodesPerFormat.get(JOKE).add(set.getCode());
+                continue;
             }
 
-            // Create the Block formats
+            // vintage/legacy (any set, TODO: even ?custom set?)
+            underlyingSetCodesPerFormat.get(VINTAGE_LEGACY).add(set.getCode());
+
+            // standard (dependent on current date)
+            if (STANDARD_CARDS.getSetCodes().contains(set.getCode())) {
+                underlyingSetCodesPerFormat.get(STANDARD).add(set.getCode());
+            }
+
+            // extended
+            if (set.getType().isStandardLegal() && set.getReleaseDate().after(extendedDate)) {
+                underlyingSetCodesPerFormat.get(EXTENDED).add(set.getCode());
+            }
+
+            // frontier
+            if (set.getType().isStandardLegal() && set.getReleaseDate().after(frontierDate)) {
+                underlyingSetCodesPerFormat.get(FRONTIER).add(set.getCode());
+            }
+
+            // modern
+            if (set.getType().isModernLegal() && set.getReleaseDate().after(modernDate)) {
+                underlyingSetCodesPerFormat.get(MODERN).add(set.getCode());
+            }
+
+            // BLOCKS formats
+
             if (set.getType() == SetType.EXPANSION && set.getBlockName() != null) {
                 String blockDisplayName = getBlockDisplayName(set.getBlockName());
                 underlyingSetCodesPerFormat.computeIfAbsent(blockDisplayName, k -> new ArrayList<>());
@@ -108,7 +155,6 @@ public final class ConstructedFormats {
                 if (expansionInfo.get(blockDisplayName).getReleaseDate().after(set.getReleaseDate())) {
                     expansionInfo.put(blockDisplayName, set);
                 }
-
             }
 
             if (set.getType() == SetType.SUPPLEMENTAL && set.getBlockName() != null) {
@@ -199,30 +245,20 @@ public final class ConstructedFormats {
             }
             return expansionInfo1.getType().compareTo(expansionInfo2.getType());
         });
+
         if (!formats.isEmpty()) {
             formats.add(0, CUSTOM);
+            formats.add(0, JOKE);
             formats.add(0, VINTAGE_LEGACY);
             formats.add(0, MODERN);
-            formats.add(0, EXTENDED);
             formats.add(0, FRONTIER);
+            formats.add(0, EXTENDED);
             formats.add(0, STANDARD);
-
         }
-        formats.add(0, ALL);
+        formats.add(0, ALL_SETS);
     }
 
     private static String getBlockDisplayName(String blockName) {
         return "* " + blockName + " Block";
-    }
-    // Attention -Month is 0 Based so Feb = 1 for example.
-    private static final Date extendedDate = new GregorianCalendar(2009, 7, 20).getTime();
-    private static final Date frontierDate = new GregorianCalendar(2014, 6, 17).getTime();
-    private static final Date modernDate = new GregorianCalendar(2003, 6, 20).getTime();
-
-    // for all sets just return empty list
-    private static final List<String> all = new ArrayList<>();
-
-    static {
-        buildLists();
     }
 }

@@ -1,30 +1,3 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
 package org.mage.test.cards.triggers;
 
 import mage.constants.PhaseStep;
@@ -33,7 +6,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class SpellskiteTest extends CardTestPlayerBase {
@@ -56,6 +28,7 @@ public class SpellskiteTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
         assertPermanentCount(playerA, "Spellskite", 1);
@@ -83,7 +56,7 @@ public class SpellskiteTest extends CardTestPlayerBase {
      */
     @Test
     public void testAfterChangeOfController() {
-        // {T}: Add one mana of any color to your mana pool. Spend this mana only to cast a multicolored spell.
+        // {T}: Add one mana of any color. Spend this mana only to cast a multicolored spell.
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
         // {2}, {tap}: Gain control of target creature with power less than or equal to the number of Islands you control for as long as Vedalken Shackles remains tapped.
@@ -106,6 +79,7 @@ public class SpellskiteTest extends CardTestPlayerBase {
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Spellskite", 1);
         assertPermanentCount(playerB, "Frost Titan", 1);
@@ -145,6 +119,7 @@ public class SpellskiteTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
 
@@ -186,6 +161,7 @@ public class SpellskiteTest extends CardTestPlayerBase {
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Cryptic Command", 1);
 
@@ -214,16 +190,16 @@ public class SpellskiteTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{U/P}: Change a target of target spell or ability to {this}.", "Lightning Bolt");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{U/P}: Change a target", "Lightning Bolt");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
 
         assertLife(playerA, 20);
         assertLife(playerB, 18);
-
     }
 
     /**
@@ -245,6 +221,7 @@ public class SpellskiteTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Flame Slash", 1);
         assertPowerToughness(playerB, "Spellskite", 3, 7);
@@ -264,24 +241,36 @@ public class SpellskiteTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Spellskite");
         addCard(Zone.BATTLEFIELD, playerB, "Scute Mob");
         addCard(Zone.BATTLEFIELD, playerB, "Island");
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Memnite"); // 1/1
+        addCard(Zone.BATTLEFIELD, playerB, "Royal Assassin"); // 1/1
+        addCard(Zone.BATTLEFIELD, playerB, "Blinking Spirit"); // 2/2
+        addCard(Zone.BATTLEFIELD, playerB, "Pearled Unicorn"); // 2/2
 
         addCard(Zone.HAND, playerA, "Fiery Justice");
 
+        // A cast Fiery Justice
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fiery Justice");
-        addTarget(playerA, "Scute Mob");
-        setChoice(playerA, "X=1");
-        addTarget(playerA, "Spellskite");
-        setChoice(playerA, "X=4");
+        addTarget(playerA, playerB); // 5 life to B
+        addTarget(playerA, "Scute Mob^X=1"); // target 1
+        addTarget(playerA, "Spellskite^X=4"); // target 2
+        // B activate Spellskite, but can't change any targets cause it's already targeted
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{U/P}: Change a target", "Fiery Justice", "Fiery Justice");
+        setChoice(playerB, "Yes"); // pay 2 life
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{UP}: Change a target of target spell or ability to {this}.", "Fiery Justice", "Fiery Justice");
-        setChoice(playerA, "Yes");
-
+        showBattlefield("B battle", 1, PhaseStep.BEGIN_COMBAT, playerB);
+        showGraveyard("B grave", 1, PhaseStep.BEGIN_COMBAT, playerB);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
+        assertLife(playerB, 20 + 5 - 2);
         assertGraveyardCount(playerB, 2);
+        assertGraveyardCount(playerB, "Scute Mob", 1);
+        assertGraveyardCount(playerB, "Spellskite", 1);
     }
 
+    @Test
     public void testThatSplitDamageCanGetRedirected() {
         /* Standard redirect test
            The Spellskite should die from the 5 damage that was redirected to it
@@ -293,59 +282,64 @@ public class SpellskiteTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Spellskite");// 0/4 creature
         addCard(Zone.BATTLEFIELD, playerB, "Scute Mob"); // 1/1 creauture
         addCard(Zone.BATTLEFIELD, playerB, "Island");
+        addCard(Zone.BATTLEFIELD, playerB, "Memnite"); // 1/1
+        addCard(Zone.BATTLEFIELD, playerB, "Royal Assassin"); // 1/1
+        addCard(Zone.BATTLEFIELD, playerB, "Blinking Spirit"); // 2/2
+        addCard(Zone.BATTLEFIELD, playerB, "Pearled Unicorn"); // 2/2
 
         addCard(Zone.HAND, playerA, "Fiery Justice");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fiery Justice"); // 5 damage distributed to any number of targets
-        addTarget(playerA, "Scute Mob");
-        setChoice(playerA, "X=5");
+        addTarget(playerA, "Scute Mob^X=5");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{UP}: Change a target of target spell or ability to {this}.", "Fiery Justice", "Fiery Justice");
-        setChoice(playerA, "Yes");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{U/P}: Change a target", "Fiery Justice", "Fiery Justice");
+        setChoice(playerB, "Yes"); // pay 2 life
+        setChoice(playerB, "Yes"); // retarget
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
+        assertLife(playerB, 20 + 5 - 2);
         assertGraveyardCount(playerB, 1);
         assertPermanentCount(playerB, "Scute Mob", 1);
     }
 
+    @Test
     public void testThatSplitDamageGetsRedirectedFromTheCorrectChoice() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
 
         addCard(Zone.BATTLEFIELD, playerB, "Spellskite");// 0/4 creature
-        addCard(Zone.BATTLEFIELD, playerB, "Memnite"); // 1/1 creauture
-        addCard(Zone.BATTLEFIELD, playerB, "Royal Assassin");
-        addCard(Zone.BATTLEFIELD, playerB, "Blinking Spirit");
-        addCard(Zone.BATTLEFIELD, playerB, "Pearled Unicorn");
+        addCard(Zone.BATTLEFIELD, playerB, "Memnite"); // 1/1
+        addCard(Zone.BATTLEFIELD, playerB, "Royal Assassin"); // 1/1
+        addCard(Zone.BATTLEFIELD, playerB, "Blinking Spirit"); // 2/2
+        addCard(Zone.BATTLEFIELD, playerB, "Pearled Unicorn"); // 2/2
         addCard(Zone.BATTLEFIELD, playerB, "Island");
 
         addCard(Zone.HAND, playerA, "Fiery Justice");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fiery Justice"); // 5 damage distributed to any number of targets
-        addTarget(playerA, "Memnite");
-        setChoice(playerA, "X=1");
-        addTarget(playerA, "Royal Assassin");
-        setChoice(playerA, "X=1");
-        addTarget(playerA, "Blinking Spirit");
-        setChoice(playerA, "X=1");
-        addTarget(playerA, "Pearled Unicorn");
-        setChoice(playerA, "X=2");//the unicorn deserves it
+        addTarget(playerA, "Royal Assassin^X=1");
+        addTarget(playerA, "Blinking Spirit^X=2");
+        addTarget(playerA, "Pearled Unicorn^X=2");
 
-
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{UP}: Change a target of target spell or ability to {this}.", "Fiery Justice", "Fiery Justice");
-        setChoice(playerA, "No");
-        setChoice(playerA, "No");
-        setChoice(playerA, "No");
-        setChoice(playerA, "Yes"); //of course
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{U/P}: Change a target", "Fiery Justice", "Fiery Justice");
+        setChoice(playerB, "Yes"); // pay 2 life
+        setChoice(playerB, "No"); // skip royal
+        setChoice(playerB, "No"); // skip blink
+        setChoice(playerB, "Yes"); // change pearl
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
-        assertGraveyardCount(playerB, 3);
-        assertPermanentCount(playerB, "Pearled Unicorn", 1);//it lives on
-        assertPowerToughness(playerB, "Spellskite", 0, 2);
+        assertLife(playerB, 20 + 5 - 2);
+        assertGraveyardCount(playerB, "Memnite", 0);
+        assertGraveyardCount(playerB, "Royal Assassin", 1);
+        assertGraveyardCount(playerB, "Blinking Spirit", 1);
+        assertGraveyardCount(playerB, "Pearled Unicorn", 0);
+        assertGraveyardCount(playerB, "Spellskite", 0);
     }
 }

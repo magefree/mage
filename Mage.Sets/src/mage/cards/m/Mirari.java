@@ -1,33 +1,5 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
@@ -45,17 +17,17 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
-import mage.target.TargetSpell;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
-public class Mirari extends CardImpl {
+public final class Mirari extends CardImpl {
 
     public Mirari(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
         addSuperType(SuperType.LEGENDARY);
 
         // Whenever you cast an instant or sorcery spell, you may pay {3}. If you do, copy that spell. You may choose new targets for the copy.
@@ -84,8 +56,9 @@ class MirariTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     MirariTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DoIfCostPaid(new CopyTargetSpellEffect(true), new GenericManaCost(3)), false);
-        this.addTarget(new TargetSpell(filter));
+        super(Zone.BATTLEFIELD, new DoIfCostPaid(
+                new CopyTargetSpellEffect(true),
+                new GenericManaCost(3)), false);
     }
 
     MirariTriggeredAbility(final MirariTriggeredAbility ability) {
@@ -108,7 +81,11 @@ class MirariTriggeredAbility extends TriggeredAbilityImpl {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (isControlledInstantOrSorcery(spell)) {
                 for (Effect effect : getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(spell.getId()));
+                    if (effect instanceof DoIfCostPaid) {
+                        for (Effect execEffect : ((DoIfCostPaid) effect).getExecutingEffects()) {
+                            execEffect.setTargetPointer(new FixedTarget(spell.getId()));
+                        }
+                    }
                 }
                 return true;
             }
@@ -118,7 +95,7 @@ class MirariTriggeredAbility extends TriggeredAbilityImpl {
 
     private boolean isControlledInstantOrSorcery(Spell spell) {
         return spell != null
-                && (spell.getControllerId().equals(this.getControllerId()))
+                && (spell.isControlledBy(this.getControllerId()))
                 && (spell.isInstant() || spell.isSorcery());
     }
 

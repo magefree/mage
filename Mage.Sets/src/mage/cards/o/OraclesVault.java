@@ -1,30 +1,4 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards.o;
 
 import java.util.UUID;
@@ -52,12 +26,13 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Library;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
  * @author fireshoes
  */
-public class OraclesVault extends CardImpl {
+public final class OraclesVault extends CardImpl {
 
     public OraclesVault(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
@@ -77,7 +52,7 @@ public class OraclesVault extends CardImpl {
         this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD,
                 new OraclesVaultFreeEffect(), new TapSourceCost(), new SourceHasCounterCondition(CounterType.BRICK, 3, Integer.MAX_VALUE),
                 "{T}: Exile the top card of your library. Until end of turn, you may play that card without paying its mana cost. "
-                        + "Activate this ability only if there are three or more brick counters on {this}"));
+                + "Activate this ability only if there are three or more brick counters on {this}"));
     }
 
     public OraclesVault(final OraclesVault card) {
@@ -108,12 +83,11 @@ class OraclesVaultEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null && controller.getLibrary().hasCards()) {
-            Library library = controller.getLibrary();
-            Card card = library.removeFromTop(game);
+        if (controller != null) {
+            Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
-                controller.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getIdName() + " <this card may be played the turn it was exiled>", source.getSourceId(), game, Zone.LIBRARY, true);
+                controller.moveCardsToExile(card, source, game, true, source.getSourceId(),
+                        CardUtil.createObjectRealtedWindowTitle(source, game, "<this card may be played the turn it was exiled>"));
                 game.addEffect(new OraclesVaultPlayEffect(new MageObjectReference(card, game)), source);
             }
             return true;
@@ -121,6 +95,7 @@ class OraclesVaultEffect extends OneShotEffect {
         return false;
     }
 }
+
 class OraclesVaultFreeEffect extends OneShotEffect {
 
     public OraclesVaultFreeEffect() {
@@ -142,9 +117,10 @@ class OraclesVaultFreeEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null && controller.getLibrary().hasCards()) {
             Library library = controller.getLibrary();
-            Card card = library.removeFromTop(game);
+            Card card = library.getFromTop(game);
             if (card != null) {
-                controller.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getIdName() + " <this card may be played the turn it was exiled>", source.getSourceId(), game, Zone.LIBRARY, true);
+                controller.moveCardsToExile(card, source, game, true, source.getSourceId(),
+                        CardUtil.createObjectRealtedWindowTitle(source, game, " <this card may be played the turn it was exiled>"));
                 game.addEffect(new OraclesVaultPlayForFreeEffect(new MageObjectReference(card, game)), source);
             }
             return true;
@@ -191,6 +167,7 @@ class OraclesVaultPlayEffect extends AsThoughEffectImpl {
         return false;
     }
 }
+
 class OraclesVaultPlayForFreeEffect extends AsThoughEffectImpl {
 
     private final MageObjectReference objectReference;

@@ -27,7 +27,9 @@
 package mage.client.deckeditor.table;
 
 import mage.cards.MageCard;
+import mage.game.draft.RateCard;
 import mage.view.CardView;
+import org.apache.log4j.Logger;
 
 import java.util.Comparator;
 
@@ -39,6 +41,8 @@ import java.util.Comparator;
  */
 public class MageCardComparator implements Comparator<CardView> {
 
+    private static final Logger logger = Logger.getLogger(MageCardComparator.class);
+
     private final int column;
     private final boolean ascending;
 
@@ -49,14 +53,12 @@ public class MageCardComparator implements Comparator<CardView> {
 
     @Override
     public int compare(CardView a, CardView b) {
-        Comparable aCom = null;
-        Comparable bCom = null;
+        Comparable aCom = 1;
+        Comparable bCom = 1;
 
         switch (column) {
             // #skip
             case 0:
-                aCom = 1;
-                bCom = 1;
                 break;
             // Name
             case 1:
@@ -75,7 +77,7 @@ public class MageCardComparator implements Comparator<CardView> {
             // Color
             case 3:
                 aCom = a.getColorText();
-                bCom = a.getColorText();
+                bCom = b.getColorText();
                 break;
             // Type
             case 4:
@@ -95,8 +97,8 @@ public class MageCardComparator implements Comparator<CardView> {
                 break;
             // Rarity
             case 6:
-                aCom = a.getRarity().toString();
-                bCom = b.getRarity().toString();
+                aCom = a.getRarity().getSorting();
+                bCom = b.getRarity().getSorting();
                 break;
             // Set name
             case 7:
@@ -106,6 +108,10 @@ public class MageCardComparator implements Comparator<CardView> {
             case 8:
                 aCom = Integer.parseInt(a.getCardNumber().replaceAll("[\\D]", ""));
                 bCom = Integer.parseInt(b.getCardNumber().replaceAll("[\\D]", ""));
+                break;
+            case 9:
+                aCom = RateCard.rateCard(a.getOriginalCard(), null);
+                bCom = RateCard.rateCard(b.getOriginalCard(), null);
                 break;
             default:
                 break;

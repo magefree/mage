@@ -1,30 +1,4 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards.a;
 
 import java.util.*;
@@ -53,7 +27,7 @@ import mage.watchers.Watcher;
  *
  * @author TheElk801
  */
-public class AdmiralBeckettBrass extends CardImpl {
+public final class AdmiralBeckettBrass extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Pirates you control");
     private static final FilterNonlandPermanent filter2 = new FilterNonlandPermanent("nonland permanent controlled by a player who was dealt combat damage by three or more Pirates this turn");
@@ -97,10 +71,10 @@ class DamagedByPiratesWatcher extends Watcher {
     private final Map<UUID, Set<UUID>> damageSourceIds = new HashMap<>();
 
     public DamagedByPiratesWatcher() {
-        super(DamagedByPiratesWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
-    public DamagedByPiratesWatcher(final DamagedByPiratesWatcher watcher) {
+    private DamagedByPiratesWatcher(final DamagedByPiratesWatcher watcher) {
         super(watcher);
         for (UUID playerId : watcher.damageSourceIds.keySet()) {
             Set<UUID> creatures = new HashSet<>();
@@ -132,7 +106,7 @@ class DamagedByPiratesWatcher extends Watcher {
         }
     }
 
-    public boolean damagedByEnoughPirates(UUID sourceId, Game game) {
+    public boolean damagedByEnoughPirates(UUID sourceId) {
         return damageSourceIds.keySet().contains(sourceId) && damageSourceIds.get(sourceId).size() > 2;
     }
 
@@ -145,14 +119,11 @@ class DamagedByPiratesWatcher extends Watcher {
 
 class ControllerDealtDamageByPiratesPredicate implements Predicate<Permanent> {
 
-    public ControllerDealtDamageByPiratesPredicate() {
-    }
-
     @Override
     public boolean apply(Permanent input, Game game) {
-        DamagedByPiratesWatcher watcher = (DamagedByPiratesWatcher) game.getState().getWatchers().get(DamagedByPiratesWatcher.class.getSimpleName());
+        DamagedByPiratesWatcher watcher = game.getState().getWatcher(DamagedByPiratesWatcher.class);
         if (watcher != null) {
-            return watcher.damagedByEnoughPirates(input.getControllerId(), game);
+            return watcher.damagedByEnoughPirates(input.getControllerId());
         }
         return false;
     }

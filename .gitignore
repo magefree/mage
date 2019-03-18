@@ -40,6 +40,8 @@ Mage.Server.Console/target/
 Mage.Server.Console/mageadmin.log
 Mage.Server.Plugins/Mage.Deck.Constructed/target
 Mage.Server.Plugins/Mage.Deck.Limited/target
+Mage.Server.Plugins/Mage.Game.BrawlDuel/target/
+Mage.Server.Plugins/Mage.Game.BrawlFreeForAll/target/
 Mage.Server.Plugins/Mage.Game.CanadianHighlanderDuel/target
 Mage.Server.Plugins/Mage.Game.CommanderDuel/target
 Mage.Server.Plugins/Mage.Game.CommanderFreeForAll/target/
@@ -76,6 +78,7 @@ Mage.Tests/Mage.log
 Mage.Tests/watchdog.log
 
 # Mage
+*.log
 Mage/target
 
 # Mage.Updater
@@ -84,11 +87,17 @@ mage.updater.client/target
 
 # Mage.Verify
 Mage.Verify/target
+Mage.Verify/mageclient.log
 Mage.Verify/AllCards.json.zip
 Mage.Verify/AllSets.json.zip
+Mage.Verify/AllCards.json
+Mage.Verify/AllSets.json
+Mage.Verify/db
 
 releases
 Utils/author.txt
+Utils/*_tracker.txt
+Utils/*implemented.txt
 .DS_Store
 .metadata
 .project
@@ -126,7 +135,6 @@ hs_err*.log
 /Mage.Stats/target/
 /Utils/*_unimplemented.txt
 *.netbeans_automatic_build
-*.txt
 Mage.Client/serverlist.txt
 /bin/
 /out/
@@ -137,3 +145,7 @@ client_secrets.json
 dependency-reduced-pom.xml
 mage-bundle
 /Mage.Client/game-*.json
+
+# build-tools config and log files when building client/server with Atom
+.build-tools.cson
+build-output.log

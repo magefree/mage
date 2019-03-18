@@ -1,30 +1,4 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards.g;
 
 import java.util.ArrayList;
@@ -54,7 +28,7 @@ import mage.watchers.Watcher;
  *
  * @author Quercitron
  */
-public class GeneratorServant extends CardImpl {
+public final class GeneratorServant extends CardImpl {
 
     public GeneratorServant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
@@ -63,18 +37,18 @@ public class GeneratorServant extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // {T}, Sacrifice Generator Servant: Add {C}{C} to your mana pool.  If that mana is spent on a creature spell, it gains haste until end of turn.
+        // {T}, Sacrifice Generator Servant: Add {C}{C}.  If that mana is spent on a creature spell, it gains haste until end of turn.
         Mana mana = Mana.ColorlessMana(2);
         mana.setFlag(true); // used to indicate this mana ability
         SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, mana, new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        ability.getEffects().get(0).setText("Add {C}{C} to your mana pool. If that mana is spent on a creature spell, it gains haste until end of turn.");
+        ability.getEffects().get(0).setText("Add {C}{C}. If that mana is spent on a creature spell, it gains haste until end of turn.");
         this.addAbility(ability);
 
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new GeneratorServantHasteEffect()), new GeneratorServantWatcher());
     }
 
-    public GeneratorServant(final GeneratorServant card) {
+    private GeneratorServant(final GeneratorServant card) {
         super(card);
     }
 
@@ -86,13 +60,13 @@ public class GeneratorServant extends CardImpl {
 
 class GeneratorServantWatcher extends Watcher {
 
-    public List<UUID> creatures = new ArrayList<>();
+    private List<UUID> creatures = new ArrayList<>();
 
     public GeneratorServantWatcher() {
-        super(GeneratorServantWatcher.class.getSimpleName(), WatcherScope.CARD);
+        super(WatcherScope.CARD);
     }
 
-    public GeneratorServantWatcher(final GeneratorServantWatcher watcher) {
+    private GeneratorServantWatcher(final GeneratorServantWatcher watcher) {
         super(watcher);
         this.creatures.addAll(watcher.creatures);
     }
@@ -121,6 +95,10 @@ class GeneratorServantWatcher extends Watcher {
         creatures.clear();
     }
 
+    public boolean creatureCastWithServantsMana(UUID permanentId){
+        return creatures.contains(permanentId);
+    }
+
 }
 
 class GeneratorServantHasteEffect extends ContinuousEffectImpl {
@@ -140,10 +118,10 @@ class GeneratorServantHasteEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        GeneratorServantWatcher watcher = (GeneratorServantWatcher) game.getState().getWatchers().get(GeneratorServantWatcher.class.getSimpleName(), source.getSourceId());
+        GeneratorServantWatcher watcher = game.getState().getWatcher(GeneratorServantWatcher.class, source.getSourceId());
         if (watcher != null) {
             for (Permanent perm : game.getBattlefield().getAllActivePermanents()) {
-                if (watcher.creatures.contains(perm.getId())) {
+                if (watcher.creatureCastWithServantsMana(perm.getId())) {
                     perm.addAbility(HasteAbility.getInstance(), source.getSourceId(), game);
                 }
             }

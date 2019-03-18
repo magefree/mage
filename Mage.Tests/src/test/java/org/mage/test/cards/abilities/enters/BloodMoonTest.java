@@ -69,7 +69,7 @@ public class BloodMoonTest extends CardTestPlayerBase {
         /**
          * Kabira Crossroads Land Kabira Crossroads enters the battlefield
          * tapped. When Kabira Crossroads enters the battlefield, you gain 2
-         * life. {W}: Add to your mana pool.
+         * life. {W}: Add.
          *
          */
         addCard(Zone.HAND, playerA, "Kabira Crossroads");
@@ -117,8 +117,8 @@ public class BloodMoonTest extends CardTestPlayerBase {
         // Enchanted land is an Island.
         addCard(Zone.HAND, playerA, "Spreading Seas"); // {1}{U}
 
-        // {T}: Add {C} to your mana pool.
-        // {T}: Add {B} or {W} to your mana pool. Caves of Koilos deals 1 damage to you.
+        // {T}: Add {C}.
+        // {T}: Add {B} or {W}. Caves of Koilos deals 1 damage to you.
         addCard(Zone.BATTLEFIELD, playerB, "Steam Vents");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spreading Seas", "Steam Vents");
@@ -148,8 +148,8 @@ public class BloodMoonTest extends CardTestPlayerBase {
         // Enchanted land is an Island.
         addCard(Zone.HAND, playerA, "Spreading Seas"); // {1}{U}
 
-        // {T}: Add {C} to your mana pool.
-        // {T}: Add {B} or {W} to your mana pool. Caves of Koilos deals 1 damage to you.
+        // {T}: Add {C}.
+        // {T}: Add {B} or {W}. Caves of Koilos deals 1 damage to you.
         addCard(Zone.BATTLEFIELD, playerB, "Steam Vents");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blood Moon");
@@ -184,7 +184,7 @@ public class BloodMoonTest extends CardTestPlayerBase {
         // Activated abilities of sources with the chosen name can't be activated unless they're mana abilities.
         addCard(Zone.HAND, playerB, "Pithing Needle"); // {1}
         addCard(Zone.HAND, playerB, "Ghost Quarter", 1);
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         // {T}, Sacrifice Ghost Quarter: Destroy target land. Its controller may search their library for a basic land card, put it onto the battlefield, then shuffle their library.
         addCard(Zone.BATTLEFIELD, playerB, "Ghost Quarter", 1);
 
@@ -192,9 +192,9 @@ public class BloodMoonTest extends CardTestPlayerBase {
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Pithing Needle");
         setChoice(playerB, "Blood Moon");
-        playLand(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Ghost Quarter");
+        playLand(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Ghost Quarter");
 
-        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerA, "Blood Moon", 1);
@@ -254,7 +254,7 @@ public class BloodMoonTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, "Swamp");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         // {1}: Mutavault becomes a 2/2 creature with all creature types until end of turn. It's still a land.
         addCard(Zone.BATTLEFIELD, playerA, "Mutavault", 1);
 
@@ -285,7 +285,7 @@ public class BloodMoonTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, "Swamp");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         // {1}: Mutavault becomes a 2/2 creature with all creature types until end of turn. It's still a land.
         addCard(Zone.BATTLEFIELD, playerA, "Mutavault", 1);
 
@@ -315,12 +315,12 @@ public class BloodMoonTest extends CardTestPlayerBase {
      * If Blood Moon is on the battlefield, Flagstones of Trokair will enter the
      * battlefield as a legendary non-basic Mountain. If Flagstones of Trokair
      * is put into the graveyard due to “Legends rule” or because it was
-     * destroyed, its ability doesn’t trigger, because it doesn’t exist: it
-     * won’t fetch you a Plains.
+     * destroyed, its ability doesn't trigger, because it doesn't exist: it
+     * won't fetch you a Plains.
      */
     @Test
     public void testBloodMoonFlagstonesOfTrokair() {
-        // {T}: Add {W} to your mana pool.
+        // {T}: Add {W}.
         // When Flagstones of Trokair is put into a graveyard from the battlefield, you may search
         // your library for a Plains card and put it onto the battlefield tapped. If you do, shuffle your library.
         addCard(Zone.HAND, playerA, "Flagstones of Trokair", 1);
@@ -350,13 +350,13 @@ public class BloodMoonTest extends CardTestPlayerBase {
     }
 
     /**
-     * Because Blood Moon’s static ability operates only when it’s on the
+     * Because Blood Moon's static ability operates only when it's on the
      * battlefield and begins affecting any nonbasic lands immediately. In fact,
-     * Blood Moon’s effect is so quick that once a non-basic land hits the
-     * battlefield it’s going to be affected. Therefore:
+     * Blood Moon's effect is so quick that once a non-basic land hits the
+     * battlefield it's going to be affected. Therefore:
      *
-     * If a nonbasic land’s has EtB triggered abilities, these will not trigger
-     * because the ability isn’t there (it’s gone). Effects that modify the way
+     * If a nonbasic land's has EtB triggered abilities, these will not trigger
+     * because the ability isn't there (it's gone). Effects that modify the way
      * the land enters the battlefield are replacement effects. They are applied
      * before the permanent enters the battlefield and taking into account
      * continuous effects that already exist and would apply to the permanent.
@@ -382,7 +382,7 @@ public class BloodMoonTest extends CardTestPlayerBase {
     @Test
     @Ignore
     public void testBloodMoonMadblindMountain() {
-        // {T}: Add {R} to your mana pool.
+        // {T}: Add {R}.
         // Madblind Mountain enters the battlefield tapped.
         // {R}, {tap}: Shuffle your library. Activate this ability only if you control two or more red permanents.
         addCard(Zone.HAND, playerA, "Madblind Mountain", 1);

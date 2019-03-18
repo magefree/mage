@@ -1,33 +1,6 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,20 +13,22 @@ import mage.abilities.effects.common.continuous.PlayWithTheTopCardRevealedEffect
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
  * @author jeffwadsworth
  */
-public class CrownOfConvergence extends CardImpl {
+public final class CrownOfConvergence extends CardImpl {
 
     private static final String rule1 = "As long as the top card of your library is a creature card, creatures you control that share a color with that card get +1/+1";
 
@@ -71,7 +46,7 @@ public class CrownOfConvergence extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CrownOfConvergenceEffect(), new ManaCostsImpl("{G}{W}")));
     }
 
-    public CrownOfConvergence(final CrownOfConvergence card) {
+    private CrownOfConvergence(final CrownOfConvergence card) {
         super(card);
     }
 
@@ -83,8 +58,6 @@ public class CrownOfConvergence extends CardImpl {
 
 class CrownOfConvergenceColorBoostEffect extends BoostAllEffect {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control");
-
     private static final String effectText = "creatures you control that share a color with that card get +1/+1";
 
     CrownOfConvergenceColorBoostEffect() {
@@ -92,7 +65,7 @@ class CrownOfConvergenceColorBoostEffect extends BoostAllEffect {
         staticText = effectText;
     }
 
-    CrownOfConvergenceColorBoostEffect(CrownOfConvergenceColorBoostEffect effect) {
+    private CrownOfConvergenceColorBoostEffect(CrownOfConvergenceColorBoostEffect effect) {
         super(effect);
     }
 
@@ -102,7 +75,7 @@ class CrownOfConvergenceColorBoostEffect extends BoostAllEffect {
         if (you != null) {
             Card topCard = you.getLibrary().getFromTop(game);
             if (topCard != null) {
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURE, source.getControllerId(), source.getSourceId(), game)) {
                     if (permanent.getColor(game).shares(topCard.getColor(game)) && !permanent.getColor(game).isColorless()) {
                         permanent.addPower(power.calculate(game, source, this));
                         permanent.addToughness(toughness.calculate(game, source, this));
@@ -122,12 +95,12 @@ class CrownOfConvergenceColorBoostEffect extends BoostAllEffect {
 
 class CrownOfConvergenceEffect extends OneShotEffect {
 
-    public CrownOfConvergenceEffect() {
+    CrownOfConvergenceEffect() {
         super(Outcome.Neutral);
         staticText = "Put the top card of your library on the bottom of your library";
     }
 
-    public CrownOfConvergenceEffect(final CrownOfConvergenceEffect effect) {
+    private CrownOfConvergenceEffect(final CrownOfConvergenceEffect effect) {
         super(effect);
     }
 
@@ -138,11 +111,11 @@ class CrownOfConvergenceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        if (you != null) {
-            Card card = you.getLibrary().removeFromTop(game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
-                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
+                controller.putCardsOnBottomOfLibrary(new CardsImpl(card), game, source, true);
             }
             return true;
         }

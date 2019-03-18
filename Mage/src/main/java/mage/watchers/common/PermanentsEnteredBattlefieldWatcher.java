@@ -5,10 +5,8 @@
  */
 package mage.watchers.common;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -21,11 +19,11 @@ import mage.watchers.Watcher;
  */
 public class PermanentsEnteredBattlefieldWatcher extends Watcher {
 
-    private final HashMap<UUID, List<Permanent>> enteringBattlefield = new HashMap<>();
-    private final HashMap<UUID, List<Permanent>> enteringBattlefieldLastTurn = new HashMap<>();
+    private final Map<UUID, List<Permanent>> enteringBattlefield = new HashMap<>();
+    private final Map<UUID, List<Permanent>> enteringBattlefieldLastTurn = new HashMap<>();
 
     public PermanentsEnteredBattlefieldWatcher() {
-        super(PermanentsEnteredBattlefieldWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public PermanentsEnteredBattlefieldWatcher(final PermanentsEnteredBattlefieldWatcher watcher) {
@@ -71,7 +69,7 @@ public class PermanentsEnteredBattlefieldWatcher extends Watcher {
         return enteringBattlefield.get(playerId);
     }
 
-    public boolean AnotherCreatureEnteredBattlefieldUnderPlayersControlLastTurn(Permanent sourcePermanent, Game game) {
+    public boolean anotherCreatureEnteredBattlefieldUnderPlayersControlLastTurn(Permanent sourcePermanent, Game game) {
         if (enteringBattlefieldLastTurn.containsKey(sourcePermanent.getControllerId())) {
             for (Permanent permanent : enteringBattlefieldLastTurn.get(sourcePermanent.getControllerId())) {
                 if (!permanent.getId().equals(sourcePermanent.getId())

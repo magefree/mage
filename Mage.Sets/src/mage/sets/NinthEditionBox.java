@@ -4,7 +4,7 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-public class NinthEditionBox extends ExpansionSet {
+public final class NinthEditionBox extends ExpansionSet {
 
     private static final NinthEditionBox instance = new NinthEditionBox();
 
@@ -15,6 +15,8 @@ public class NinthEditionBox extends ExpansionSet {
     private NinthEditionBox() {
         super("Ninth Edition Box", "9EB", ExpansionSet.buildDate(2005, 7, 29), SetType.CORE);
         this.hasBoosters = false;
+        this.hasBasicLands = false;
+
         cards.add(new SetCardInfo("Coral Eel", 3, Rarity.COMMON, mage.cards.c.CoralEel.class));
         cards.add(new SetCardInfo("Eager Cadet", 1, Rarity.COMMON, mage.cards.e.EagerCadet.class));
         cards.add(new SetCardInfo("Enormous Baloth", 9, Rarity.UNCOMMON, mage.cards.e.EnormousBaloth.class));

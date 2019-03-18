@@ -10,6 +10,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  * @author BetaSteward
  */
 public class UnscytheKillerOfKingsTest extends CardTestPlayerBase {
+
     /*
      * Unscythe, Killer of Kings
      * Legendary Artifact — Equipment, UBBR (4)
@@ -19,8 +20,8 @@ public class UnscytheKillerOfKingsTest extends CardTestPlayerBase {
      * the battlefield.
      * Equip {2}
      *
-    */
-    
+     */
+
     // test that when creature damaged by equipped creature dies a Zombie token is created
     @Test
     public void testDamagedCreatureDies() {
@@ -28,17 +29,17 @@ public class UnscytheKillerOfKingsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Unscythe, Killer of Kings");
         addCard(Zone.BATTLEFIELD, playerA, "Prodigal Pyromancer");
         addCard(Zone.BATTLEFIELD, playerB, "Sejiri Merfolk");
-        
+
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", "Prodigal Pyromancer");
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: {source} deals 1 damage to target creature or player.", "Sejiri Merfolk");
-        
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: {source} deals 1 damage to ", "Sejiri Merfolk");
+
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        
+
         assertPermanentCount(playerB, "Sejiri Merfolk", 0);
         assertPermanentCount(playerA, "Zombie", 1);
         assertExileCount("Sejiri Merfolk", 1);
-        
+
     }
 
     // test that when creature damaged by equipped creature dies a Zombie token is created
@@ -46,22 +47,22 @@ public class UnscytheKillerOfKingsTest extends CardTestPlayerBase {
     public void testDamagedCreatureDiesAfterEquipped() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Unscythe, Killer of Kings");
-        // {T}: Prodigal Pyromancer deals 1 damage to target creature or player.
+        // {T}: Prodigal Pyromancer deals 1 damage to 
         addCard(Zone.BATTLEFIELD, playerA, "Prodigal Pyromancer");
         addCard(Zone.HAND, playerA, "Lightning Bolt");
         addCard(Zone.BATTLEFIELD, playerB, "Craw Wurm");
-        
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals 1 damage to target creature or player.", "Craw Wurm");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals 1 damage to ", "Craw Wurm");
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Equip", "Prodigal Pyromancer");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Craw Wurm", "Equip", StackClause.WHILE_NOT_ON_STACK);
-        
+
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        
+
         assertPermanentCount(playerB, "Craw Wurm", 0);
         assertPermanentCount(playerA, "Zombie", 1);
         assertExileCount("Craw Wurm", 1);
-        
+
     }
-    
+
 }

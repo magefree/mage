@@ -23,7 +23,7 @@ public class ZuberasTest extends CardTestPlayerBase {
     
      * Ember-Fist Zubera
      * Creature — Zubera Spirit 1/2, 1R (2)
-     * When Ember-Fist Zubera dies, it deals damage to target creature or player 
+     * When Ember-Fist Zubera dies, it deals damage to any target
      * equal to the number of Zubera that died this turn.
 
      * Floating-Dream Zubera

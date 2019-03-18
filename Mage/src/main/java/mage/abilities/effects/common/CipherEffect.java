@@ -1,33 +1,7 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.abilities.effects.common;
 
-import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -45,11 +19,13 @@ import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
  * FAQ 2013/01/11
- *
+ * <p>
  * 702.97. Cipher
- *
+ * <p>
  * 702.97a Cipher appears on some instants and sorceries. It represents two
  * static abilities, one that functions while the spell is on the stack and one
  * that functions while the card with cipher is in the exile zone. "Cipher"
@@ -58,17 +34,17 @@ import mage.target.targetpointer.FixedTarget;
  * that creature, that creature has 'Whenever this creature deals combat damage
  * to a player, you may copy this card and you may cast the copy without paying
  * its mana cost.'"
- *
+ * <p>
  * 702.97b The term "encoded" describes the relationship between the card with
  * cipher while in the exile zone and the creature chosen when the spell
  * represented by that card resolves.
- *
+ * <p>
  * 702.97c The card with cipher remains encoded on the chosen creature as long
  * as the card with cipher remains exiled and the creature remains on the
  * battlefield. The card remains encoded on that object even if it changes
  * controller or stops being a creature, as long as it remains on the
  * battlefield.
- *
+ * <p>
  * TODO: Implement Cipher as two static abilities concerning the rules.
  *
  * @author LevelX2
@@ -139,20 +115,13 @@ class CipherStoreEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Card cipherCard = game.getCard(cipherCardId);
-        if (cipherCard != null) {
+        if (cipherCard != null && controller != null) {
             Card copyCard = game.copyCard(cipherCard, source, controller.getId());
             SpellAbility ability = copyCard.getSpellAbility();
             // remove the cipher effect from the copy
-            Effect cipherEffect = null;
-            for (Effect effect : ability.getEffects()) {
-                if (effect instanceof CipherEffect) {
-                    cipherEffect = effect;
-                }
-            }
-            ability.getEffects().remove(cipherEffect);
-            if (ability instanceof SpellAbility) {
-                controller.cast(ability, game, true);
-            }
+            ability.getEffects().removeIf(effect -> effect instanceof CipherEffect);
+            controller.cast(ability, game, true, new MageObjectReference(source.getSourceObject(game), game));
+
         }
 
         return false;

@@ -1,61 +1,27 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.cards.m;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.ChooseModeEffect;
+import mage.abilities.meta.OrTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.players.PlayerList;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
-public class MysticBarrier extends CardImpl {
+public final class MysticBarrier extends CardImpl {
 
     static final String ALLOW_ATTACKING_LEFT = "Allow attacking left";
     static final String ALLOW_ATTACKING_RIGHT = "Allow attacking right";
@@ -64,7 +30,10 @@ public class MysticBarrier extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");
 
         // When Mystic Barrier enters the battlefield or at the beginning of your upkeep, choose left or right.
-        this.addAbility(new MysticBarrierTriggeredAbility());
+        this.addAbility(new OrTriggeredAbility(Zone.BATTLEFIELD, new ChooseModeEffect("Choose a direction to allow attacking in.",
+                ALLOW_ATTACKING_LEFT, ALLOW_ATTACKING_RIGHT),
+                new EntersBattlefieldTriggeredAbility(null, false),
+                new BeginningOfUpkeepTriggeredAbility(null, TargetController.YOU, false)));
 
         // Each player may attack only the opponent seated nearest him or her in the last chosen direction and planeswalkers controlled by that player.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MysticBarrierReplacementEffect()));
@@ -77,77 +46,6 @@ public class MysticBarrier extends CardImpl {
     @Override
     public MysticBarrier copy() {
         return new MysticBarrier(this);
-    }
-}
-
-class MysticBarrierTriggeredAbility extends TriggeredAbilityImpl {
-
-    public MysticBarrierTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new MysticBarrierChooseEffect(), false);
-    }
-
-    public MysticBarrierTriggeredAbility(final MysticBarrierTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public MysticBarrierTriggeredAbility copy() {
-        return new MysticBarrierTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD || event.getType() == EventType.UPKEEP_STEP_PRE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD) {
-            return event.getTargetId().equals(this.getSourceId());
-        } else {
-            return event.getPlayerId().equals(this.getControllerId());
-        }
-    }
-
-    @Override
-    public String getRule() {
-        return "When {this} enters the battlefield or at the beginning of your upkeep, " + super.getRule();
-    }
-}
-
-class MysticBarrierChooseEffect extends OneShotEffect {
-
-    static final String[] SET_VALUES = new String[]{MysticBarrier.ALLOW_ATTACKING_LEFT, MysticBarrier.ALLOW_ATTACKING_RIGHT};
-    static final Set<String> CHOICES = new HashSet<>(Arrays.asList(SET_VALUES));
-
-    public MysticBarrierChooseEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "choose left or right";
-    }
-
-    public MysticBarrierChooseEffect(final MysticBarrierChooseEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MysticBarrierChooseEffect copy() {
-        return new MysticBarrierChooseEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Choice directionChoice = new ChoiceImpl(true);
-            directionChoice.setChoices(CHOICES);
-            directionChoice.setMessage("Direction each player may only attack to");
-            directionChoice.isRequired();
-            if (!controller.choose(outcome, directionChoice, game)) {
-                game.getState().setValue("attack_direction_" + source.getSourceId(), directionChoice.getChoice());
-                return true;
-            }
-        }
-        return false;
     }
 }
 
@@ -178,7 +76,7 @@ class MysticBarrierReplacementEffect extends ReplacementEffectImpl {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
                 if (game.getState().getPlayersInRange(controller.getId(), game).contains(event.getPlayerId())) {
-                    String allowedDirection = (String) game.getState().getValue(new StringBuilder("attack_direction_").append(source.getSourceId()).toString());
+                    String allowedDirection = (String) game.getState().getValue(source.getSourceId() + "_modeChoice");
                     if (allowedDirection != null) {
                         Player defender = game.getPlayer(event.getTargetId());
                         if (defender == null) {

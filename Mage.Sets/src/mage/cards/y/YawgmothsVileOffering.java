@@ -1,7 +1,5 @@
 package mage.cards.y;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.LegendarySpellAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -9,7 +7,11 @@ import mage.abilities.effects.common.ExileSpellEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SuperType;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -19,13 +21,14 @@ import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 
-/**
- * @author JRHerlehy
- *         Created on 4/8/18.
- */
-public class YawgmothsVileOffering extends CardImpl {
+import java.util.UUID;
 
-    private static final FilterPermanentCard cardFilter = new FilterPermanentCard();
+/**
+ * @author JRHerlehy Created on 4/8/18.
+ */
+public final class YawgmothsVileOffering extends CardImpl {
+
+    private static final FilterPermanentCard cardFilter = new FilterPermanentCard("creature or planeswalker card");
 
     static {
         cardFilter.add(Predicates.or(
@@ -42,10 +45,10 @@ public class YawgmothsVileOffering extends CardImpl {
         this.addAbility(new LegendarySpellAbility());
 
         // Put up to one target creature or planeswalker from a graveyard onto the battlefield under your control.
-        // Destroy up to one target creature or planeswalker. Exile Yawgmoth’s Vile Offering.
-        this.getSpellAbility().addEffect(new YawgmothsVireOfferingEffect());
+        // Destroy up to one target creature or planeswalker. Exile Yawgmoth's Vile Offering.
+        this.getSpellAbility().addEffect(new YawgmothsVileOfferingEffect());
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(0, 1, cardFilter));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker(0, 1, new FilterCreatureOrPlaneswalkerPermanent(), false));
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
@@ -59,14 +62,14 @@ public class YawgmothsVileOffering extends CardImpl {
     }
 }
 
-class YawgmothsVireOfferingEffect extends OneShotEffect {
+class YawgmothsVileOfferingEffect extends OneShotEffect {
 
-    public YawgmothsVireOfferingEffect() {
+    public YawgmothsVileOfferingEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Put up to one target creature or planeswalker from a graveyard onto the battlefield under your control. Destroy up to one target creature or planeswalker";
+        this.staticText = "Put up to one target creature or planeswalker card from a graveyard onto the battlefield under your control. Destroy up to one target creature or planeswalker";
     }
 
-    public YawgmothsVireOfferingEffect(final YawgmothsVireOfferingEffect effect) {
+    public YawgmothsVileOfferingEffect(final YawgmothsVileOfferingEffect effect) {
         super(effect);
     }
 
@@ -78,7 +81,6 @@ class YawgmothsVireOfferingEffect extends OneShotEffect {
         }
 
         Card returnCard = game.getCard(source.getTargets().getFirstTarget());
-
         if (returnCard != null) {
             controller.moveCards(returnCard, Zone.BATTLEFIELD, source, game);
         }
@@ -93,7 +95,7 @@ class YawgmothsVireOfferingEffect extends OneShotEffect {
     }
 
     @Override
-    public YawgmothsVireOfferingEffect copy() {
-        return new YawgmothsVireOfferingEffect(this);
+    public YawgmothsVileOfferingEffect copy() {
+        return new YawgmothsVileOfferingEffect(this);
     }
 }

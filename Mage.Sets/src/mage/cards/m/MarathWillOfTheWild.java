@@ -1,30 +1,4 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards.m;
 
 import java.util.UUID;
@@ -59,14 +33,14 @@ import mage.game.permanent.token.MarathWillOfTheWildElementalToken;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class MarathWillOfTheWild extends CardImpl {
+public final class MarathWillOfTheWild extends CardImpl {
 
     public MarathWillOfTheWild(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{G}{W}");
@@ -78,26 +52,26 @@ public class MarathWillOfTheWild extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Marath, Will of the Wild enters the battlefield with a number of +1/+1 counters on it equal to the amount of mana spent to cast it.
-        Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), new ManaSpentToCastCount(), true);
+        Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), ManaSpentToCastCount.instance, true);
         effect.setText("with a number of +1/+1 counters on it equal to the amount of mana spent to cast it");
         this.addAbility(new EntersBattlefieldAbility(effect));
 
         // {X}, Remove X +1/+1 counters from Marath: Choose one - Put X +1/+1 counters on target creature;
-        effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(0), new ManacostVariableValue());
+        effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(0), ManacostVariableValue.instance);
         effect.setText("Put X +1/+1 counters on target creature");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}"));
         ability.addCost(new MarathWillOfTheWildRemoveCountersCost());
         ability.addTarget(new TargetCreaturePermanent());
 
-        // or Marath deals X damage to target creature or player;
+        // or Marath deals X damage to any target;
         Mode mode = new Mode();
-        mode.getEffects().add(new DamageTargetEffect(new ManacostVariableValue()));
-        mode.getTargets().add(new TargetCreatureOrPlayer());
+        mode.addEffect(new DamageTargetEffect(ManacostVariableValue.instance));
+        mode.addTarget(new TargetAnyTarget());
         ability.addMode(mode);
 
         // or create an X/X green Elemental creature token.
         mode = new Mode();
-        mode.getEffects().add(new MarathWillOfTheWildCreateTokenEffect());
+        mode.addEffect(new MarathWillOfTheWildCreateTokenEffect());
         ability.addMode(mode);
 
         // X can't be 0.
@@ -158,7 +132,7 @@ class MarathWillOfTheWildCreateTokenEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            int amount = new ManacostVariableValue().calculate(game, source, this);
+            int amount = ManacostVariableValue.instance.calculate(game, source, this);
             Token token = new MarathWillOfTheWildElementalToken();
             token.getPower().modifyBaseValue(amount);
             token.getToughness().modifyBaseValue(amount);
@@ -191,7 +165,7 @@ class MarathWillOfTheWildRemoveCountersCost extends CostImpl {
 
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        int amount = new ManacostVariableValue().calculate(game, ability, null);
+        int amount = ManacostVariableValue.instance.calculate(game, ability, null);
         Permanent permanent = game.getPermanent(sourceId);
         if (permanent != null && permanent.getCounters(game).getCount(CounterType.P1P1) >= amount) {
             permanent.removeCounters(CounterType.P1P1.getName(), amount, game);

@@ -1,39 +1,9 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.condition.common.MonstrousCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.abilities.keyword.ProtectionAbility;
@@ -42,22 +12,22 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
+import mage.game.events.DamagedPlayerEvent;
+import mage.game.events.GameEvent;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.TargetPermanent;
-import mage.target.targetpointer.FirstTargetPointer;
 
 /**
  *
  * @author LevelX2
  */
-public class PolisCrusher extends CardImpl {
+public final class PolisCrusher extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("enchantments");
 
@@ -65,10 +35,8 @@ public class PolisCrusher extends CardImpl {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
 
-    private final UUID originalId;
-
     public PolisCrusher(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
         this.subtype.add(SubType.CYCLOPS);
 
         this.power = new MageInt(4);
@@ -76,46 +44,71 @@ public class PolisCrusher extends CardImpl {
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
+
         // protection from enchantments
         this.addAbility(new ProtectionAbility(filter));
+
         // {4}{R}{G}: Monstrosity 3.
         this.addAbility(new MonstrosityAbility("{4}{R}{G}", 3));
+
         // Whenever Polis Crusher deals combat damage to a player, if Polis Crusher is monstrous, destroy target enchantment that player controls.
-        Ability ability = new ConditionalTriggeredAbility(
-                new DealsCombatDamageToAPlayerTriggeredAbility(new DestroyTargetEffect(), false, true),
-                MonstrousCondition.instance,
-                "Whenever {this} deals combat damage to a player, if {this} is monstrous, destroy target enchantment that player controls.");
-        originalId = ability.getOriginalId();
-        this.addAbility(ability);
+        this.addAbility(new PolisCrusherTriggeredAbility());
     }
 
     public PolisCrusher(final PolisCrusher card) {
         super(card);
-        this.originalId = card.originalId;
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability.getOriginalId().equals(originalId)) {
-            for (Effect effect : ability.getEffects()) {
-                if (effect instanceof DestroyTargetEffect) {
-                    Player attackedPlayer = game.getPlayer(effect.getTargetPointer().getFirst(game, ability));
-                    if (attackedPlayer != null) {
-                        ability.getTargets().clear();
-                        FilterPermanent filterEnchantment = new FilterEnchantmentPermanent("enchantment attacked player controls");
-                        filterEnchantment.add(new ControllerIdPredicate(attackedPlayer.getId()));
-                        Target target = new TargetPermanent(filterEnchantment);
-                        ability.addTarget(target);
-                        effect.setTargetPointer(new FirstTargetPointer());
-                        break;
-                    }
-                }
-            }
-        }
     }
 
     @Override
     public PolisCrusher copy() {
         return new PolisCrusher(this);
+    }
+}
+
+class PolisCrusherTriggeredAbility extends TriggeredAbilityImpl {
+
+    public PolisCrusherTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new DestroyTargetEffect(), true);
+    }
+
+    public PolisCrusherTriggeredAbility(final PolisCrusherTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public PolisCrusherTriggeredAbility copy() {
+        return new PolisCrusherTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+    }
+
+    @Override
+    public boolean checkInterveningIfClause(Game game) {
+        return MonstrousCondition.instance.apply(game, this);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getSourceId().equals(this.sourceId) && ((DamagedPlayerEvent) event).isCombatDamage()) {
+            Player player = game.getPlayer(event.getTargetId());
+            if (player != null) {
+                FilterPermanent filter = new FilterPermanent("an enchantment controlled by " + player.getLogName());
+                filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
+                filter.add(new ControllerIdPredicate(event.getTargetId()));
+                this.getTargets().clear();
+                this.addTarget(new TargetPermanent(filter));
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever {this} deals combat damage to a player,"
+                + " if {this} is monstrous, destroy target enchantment that player controls";
     }
 }

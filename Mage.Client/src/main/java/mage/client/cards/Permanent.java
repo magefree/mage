@@ -1,30 +1,4 @@
-/*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
+
 
 /*
  * Permanent.java
@@ -75,7 +49,7 @@ public class Permanent extends Card {
         super(permanent, bigCard, dimensions, gameId);
         this.setSize(this.getPreferredSize());
         this.permanent = permanent;
-        tappedImage = new BufferedImage(Config.dimensions.frameHeight, Config.dimensions.frameWidth, BufferedImage.TYPE_INT_RGB);
+        tappedImage = new BufferedImage(Config.dimensions.getFrameHeight(), Config.dimensions.getFrameWidth(), BufferedImage.TYPE_INT_RGB);
     }
 
     public UUID getPermanentId() {
@@ -199,10 +173,10 @@ public class Permanent extends Card {
           g2.setColor(Color.BLACK);
         }
         if (permanent.isTapped()) {
-            g2.drawRect(0, 0, Config.dimensions.frameHeight - 1, Config.dimensions.frameWidth - 1);
+            g2.drawRect(0, 0, Config.dimensions.getFrameHeight() - 1, Config.dimensions.getFrameWidth() - 1);
         }
         else {
-            g2.drawRect(0, 0, Config.dimensions.frameWidth - 1, Config.dimensions.frameHeight - 1);
+            g2.drawRect(0, 0, Config.dimensions.getFrameWidth() - 1, Config.dimensions.getFrameHeight() - 1);
         }
 
     }
@@ -211,7 +185,7 @@ public class Permanent extends Card {
         Graphics2D g = (Graphics2D) tappedImage.getGraphics();
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        g.drawImage(TransformedImageCache.getRotatedResizedImage(small, dimension.frameWidth, dimension.frameHeight, Math.toRadians(90.0)), 0, 0, this);
+        g.drawImage(TransformedImageCache.getRotatedResizedImage(small, dimension.getFrameWidth(), dimension.getFrameHeight(), Math.toRadians(90.0)), 0, 0, this);
 
         g.dispose();
     }
@@ -232,10 +206,10 @@ public class Permanent extends Card {
     @Override
     public Dimension getPreferredSize() {
         if (permanent != null && permanent.isTapped()) {
-            return new Dimension(Config.dimensions.frameHeight, Config.dimensions.frameWidth);
+            return new Dimension(Config.dimensions.getFrameHeight(), Config.dimensions.getFrameWidth());
         }
         else {
-            return new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+            return new Dimension(Config.dimensions.getFrameWidth(), Config.dimensions.getFrameHeight());
         }
     }
 
@@ -255,7 +229,7 @@ public class Permanent extends Card {
                 tooltipPopup.hide();
             }
             PopupFactory factory = PopupFactory.getSharedInstance();
-            int x = (int) this.getLocationOnScreen().getX() + (permanent.isTapped()?Config.dimensions.frameHeight:Config.dimensions.frameWidth);
+            int x = (int) this.getLocationOnScreen().getX() + (permanent.isTapped()? Config.dimensions.getFrameHeight() : Config.dimensions.getFrameWidth());
             int y = (int) this.getLocationOnScreen().getY() + 40;
             tooltipPopup = factory.getPopup(this, tooltipText, x, y);
             tooltipPopup.show();

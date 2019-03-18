@@ -1,36 +1,5 @@
-/*
- * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.game.stack;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
@@ -53,6 +22,7 @@ import mage.cards.SplitCard;
 import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.Counters;
+import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.events.GameEvent;
@@ -64,14 +34,24 @@ import mage.players.Player;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
 
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class Spell extends StackObjImpl implements Card {
 
     private final List<SpellAbility> spellAbilities = new ArrayList<>();
     private final List<Card> spellCards = new ArrayList<>();
+
+    private static final String regexBlack = ".*\\x7b.{0,2}B.{0,2}\\x7d.*";
+    private static final String regexBlue = ".*\\x7b.{0,2}U.{0,2}\\x7d.*";
+    private static final String regexRed = ".*\\x7b.{0,2}R.{0,2}\\x7d.*";
+    private static final String regexGreen = ".*\\x7b.{0,2}G.{0,2}\\x7d.*";
+    private static final String regexWhite = ".*\\x7b.{0,2}W.{0,2}\\x7d.*";
 
     private final Card card;
     private final ObjectColor color;
@@ -82,10 +62,12 @@ public class Spell extends StackObjImpl implements Card {
     private final UUID id;
 
     private UUID controllerId;
-    private boolean copiedSpell;
+    private boolean copy;
+    private MageObject copyFrom; // copied card INFO (used to call original adjusters)
     private boolean faceDown;
     private boolean countered;
     private boolean resolving = false;
+    private UUID commandedBy = null; // for Word of Command
 
     private boolean doneActivatingManaAbilities; // if this is true, the player is no longer allowed to pay the spell costs with activating of mana abilies
 
@@ -136,12 +118,15 @@ public class Spell extends StackObjImpl implements Card {
         this.frameStyle = spell.frameStyle;
 
         this.controllerId = spell.controllerId;
-        this.copiedSpell = spell.copiedSpell;
+        this.copy = spell.copy;
+        this.copyFrom = (spell.copyFrom != null ? spell.copyFrom.copy() : null);
         this.faceDown = spell.faceDown;
         this.countered = spell.countered;
         this.resolving = spell.resolving;
+        this.commandedBy = spell.commandedBy;
 
         this.doneActivatingManaAbilities = spell.doneActivatingManaAbilities;
+        this.targetChanged = spell.targetChanged;
     }
 
     public boolean activate(Game game, boolean noMana) {
@@ -171,7 +156,7 @@ public class Spell extends StackObjImpl implements Card {
 
     public String getActivatedMessage(Game game) {
         StringBuilder sb = new StringBuilder();
-        if (isCopiedSpell()) {
+        if (isCopy()) {
             sb.append(" copies ");
         } else {
             sb.append(" casts ");
@@ -197,6 +182,12 @@ public class Spell extends StackObjImpl implements Card {
             return false;
         }
         this.resolving = true;
+        if (commandedBy != null && !commandedBy.equals(getControllerId())) {
+            Player turnController = game.getPlayer(commandedBy);
+            if (turnController != null) {
+                turnController.controlPlayersTurn(game, controller.getId());
+            }
+        }
         if (this.isInstant() || this.isSorcery()) {
             int index = 0;
             result = false;
@@ -262,7 +253,7 @@ public class Spell extends StackObjImpl implements Card {
                         // card will be copied during putOntoBattlefield, so the card of CardPermanent has to be changed
                         // TODO: Find a better way to prevent bestow creatures from being effected by creature affecting abilities
                         Permanent permanent = game.getPermanent(card.getId());
-                        if (permanent != null && permanent instanceof PermanentCard) {
+                        if (permanent instanceof PermanentCard) {
                             permanent.setSpellAbility(ability); // otherwise spell ability without bestow will be set
                             if (!card.getCardType().contains(CardType.CREATURE)) {
                                 card.addCardType(CardType.CREATURE);
@@ -282,7 +273,7 @@ public class Spell extends StackObjImpl implements Card {
                 updateOptionalCosts(0);
                 if (controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null)) {
                     Permanent permanent = game.getPermanent(card.getId());
-                    if (permanent != null && permanent instanceof PermanentCard) {
+                    if (permanent instanceof PermanentCard) {
                         ((PermanentCard) permanent).getCard().addCardType(CardType.CREATURE);
                         ((PermanentCard) permanent).getCard().getSubtype(game).remove(SubType.AURA);
                         return true;
@@ -372,7 +363,7 @@ public class Spell extends StackObjImpl implements Card {
     @Override
     public void counter(UUID sourceId, Game game, Zone zone, boolean owner, ZoneDetail zoneDetail) {
         this.countered = true;
-        if (!isCopiedSpell()) {
+        if (!isCopy()) {
             Player player = game.getPlayer(game.getControllerId(sourceId));
             if (player == null) {
                 player = game.getPlayer(getControllerId());
@@ -402,7 +393,7 @@ public class Spell extends StackObjImpl implements Card {
             }
         } else {
             // Copied spell, only remove from stack
-            game.getStack().remove(this);
+            game.getStack().remove(this, game);
         }
     }
 
@@ -716,7 +707,7 @@ public class Spell extends StackObjImpl implements Card {
             newAbility.newId();
             copy.addSpellAbility(newAbility);
         }
-        copy.setCopy(true);
+        copy.setCopy(true, this);
         copy.setControllerId(newController);
         return copy;
     }
@@ -750,7 +741,7 @@ public class Spell extends StackObjImpl implements Card {
         // 706.10a If a copy of a spell is in a zone other than the stack, it ceases to exist.
         // If a copy of a card is in any zone other than the stack or the battlefield, it ceases to exist.
         // These are state-based actions. See rule 704.
-        if (this.isCopiedSpell() && zone != Zone.STACK) {
+        if (this.isCopy() && zone != Zone.STACK) {
             return true;
         }
         return card.moveToZone(zone, sourceId, game, flag, appliedEffects);
@@ -763,6 +754,10 @@ public class Spell extends StackObjImpl implements Card {
 
     @Override
     public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, List<UUID> appliedEffects) {
+        if (this.isCopy()) {
+            game.getStack().remove(this, game);
+            return true;
+        }
         return this.card.moveToExile(exileId, name, sourceId, game, appliedEffects);
     }
 
@@ -841,26 +836,24 @@ public class Spell extends StackObjImpl implements Card {
         // do nothing
     }
 
-    public void setCopiedSpell(boolean isCopied) {
-        this.copiedSpell = isCopied;
-    }
-
-    public boolean isCopiedSpell() {
-        return this.copiedSpell;
-    }
-
     public Zone getFromZone() {
         return this.fromZone;
     }
 
     @Override
-    public void setCopy(boolean isCopy) {
-        setCopiedSpell(isCopy);
+    public void setCopy(boolean isCopy, MageObject copyFrom) {
+        this.copy = isCopy;
+        this.copyFrom = (copyFrom != null ? copyFrom.copy() : null);
     }
 
     @Override
     public boolean isCopy() {
-        return isCopiedSpell();
+        return this.copy;
+    }
+
+    @Override
+    public MageObject getCopyFrom() {
+        return this.copyFrom;
     }
 
     @Override
@@ -879,8 +872,18 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
+    public boolean addCounters(Counter counter, Ability source, Game game, boolean isEffect) {
+        return card.addCounters(counter, source, game, isEffect);
+    }
+
+    @Override
     public boolean addCounters(Counter counter, Ability source, Game game, List<UUID> appliedEffects) {
         return card.addCounters(counter, source, game, appliedEffects);
+    }
+
+    @Override
+    public boolean addCounters(Counter counter, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect) {
+        return card.addCounters(counter, source, game, appliedEffects, isEffect);
     }
 
     @Override
@@ -900,6 +903,64 @@ public class Spell extends StackObjImpl implements Card {
     @Override
     public Card getMainCard() {
         return card.getMainCard();
+    }
+
+    @Override
+    public FilterMana getColorIdentity() {
+        FilterMana mana = new FilterMana();
+        mana.setBlack(getManaCost().getText().matches(regexBlack));
+        mana.setBlue(getManaCost().getText().matches(regexBlue));
+        mana.setGreen(getManaCost().getText().matches(regexGreen));
+        mana.setRed(getManaCost().getText().matches(regexRed));
+        mana.setWhite(getManaCost().getText().matches(regexWhite));
+
+        for (String rule : getRules()) {
+            rule = rule.replaceAll("(?i)<i.*?</i>", ""); // Ignoring reminder text in italic
+            if (!mana.isBlack() && (rule.matches(regexBlack) || this.color.isBlack())) {
+                mana.setBlack(true);
+            }
+            if (!mana.isBlue() && (rule.matches(regexBlue) || this.color.isBlue())) {
+                mana.setBlue(true);
+            }
+            if (!mana.isGreen() && (rule.matches(regexGreen) || this.color.isGreen())) {
+                mana.setGreen(true);
+            }
+            if (!mana.isRed() && (rule.matches(regexRed) || this.color.isRed())) {
+                mana.setRed(true);
+            }
+            if (!mana.isWhite() && (rule.matches(regexWhite) || this.color.isWhite())) {
+                mana.setWhite(true);
+            }
+        }
+        if (isTransformable()) {
+            Card secondCard = getSecondCardFace();
+            ObjectColor color = secondCard.getColor(null);
+            mana.setBlack(mana.isBlack() || color.isBlack());
+            mana.setGreen(mana.isGreen() || color.isGreen());
+            mana.setRed(mana.isRed() || color.isRed());
+            mana.setBlue(mana.isBlue() || color.isBlue());
+            mana.setWhite(mana.isWhite() || color.isWhite());
+            for (String rule : secondCard.getRules()) {
+                rule = rule.replaceAll("(?i)<i.*?</i>", ""); // Ignoring reminder text in italic
+                if (!mana.isBlack() && rule.matches(regexBlack)) {
+                    mana.setBlack(true);
+                }
+                if (!mana.isBlue() && rule.matches(regexBlue)) {
+                    mana.setBlue(true);
+                }
+                if (!mana.isGreen() && rule.matches(regexGreen)) {
+                    mana.setGreen(true);
+                }
+                if (!mana.isRed() && rule.matches(regexRed)) {
+                    mana.setRed(true);
+                }
+                if (!mana.isWhite() && rule.matches(regexWhite)) {
+                    mana.setWhite(true);
+                }
+            }
+        }
+
+        return mana;
     }
 
     @Override
@@ -928,6 +989,7 @@ public class Spell extends StackObjImpl implements Card {
     @Override
     public StackObject createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets) {
         Spell copy = this.copySpell(newControllerId);
+        game.getState().setZone(copy.getId(), Zone.STACK); // required for targeting ex: Nivmagus Elemental
         game.getStack().push(copy);
         if (chooseNewTargets) {
             copy.chooseNewTargets(game, newControllerId);
@@ -968,6 +1030,14 @@ public class Spell extends StackObjImpl implements Card {
     @Override
     public boolean removeAttachment(UUID permanentId, Game game) {
         throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setCommandedBy(UUID playerId) {
+        this.commandedBy = playerId;
+    }
+
+    public UUID getCommandedBy() {
+        return commandedBy;
     }
 
 }

@@ -4,7 +4,7 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-public class Mirrodin extends ExpansionSet {
+public final class Mirrodin extends ExpansionSet {
 
     private static final Mirrodin instance = new Mirrodin();
 
@@ -92,6 +92,7 @@ public class Mirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Fiery Gambit", 90, Rarity.RARE, mage.cards.f.FieryGambit.class));
         cards.add(new SetCardInfo("Fireshrieker", 171, Rarity.UNCOMMON, mage.cards.f.Fireshrieker.class));
         cards.add(new SetCardInfo("Fists of the Anvil", 91, Rarity.COMMON, mage.cards.f.FistsOfTheAnvil.class));
+        cards.add(new SetCardInfo("Flayed Nim", 65, Rarity.UNCOMMON, mage.cards.f.FlayedNim.class));
         cards.add(new SetCardInfo("Forest", 303, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 304, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 305, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
@@ -115,6 +116,7 @@ public class Mirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Granite Shard", 182, Rarity.UNCOMMON, mage.cards.g.GraniteShard.class));
         cards.add(new SetCardInfo("Great Furnace", 282, Rarity.COMMON, mage.cards.g.GreatFurnace.class));
         cards.add(new SetCardInfo("Grid Monitor", 183, Rarity.RARE, mage.cards.g.GridMonitor.class));
+        cards.add(new SetCardInfo("Grim Reminder", 66, Rarity.RARE, mage.cards.g.GrimReminder.class));
         cards.add(new SetCardInfo("Groffskithur", 121, Rarity.COMMON, mage.cards.g.Groffskithur.class));
         cards.add(new SetCardInfo("Heartwood Shard", 184, Rarity.UNCOMMON, mage.cards.h.HeartwoodShard.class));
         cards.add(new SetCardInfo("Hematite Golem", 185, Rarity.COMMON, mage.cards.h.HematiteGolem.class));
@@ -167,6 +169,7 @@ public class Mirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Mind's Eye", 205, Rarity.RARE, mage.cards.m.MindsEye.class));
         cards.add(new SetCardInfo("Mindslaver", 206, Rarity.RARE, mage.cards.m.Mindslaver.class));
         cards.add(new SetCardInfo("Mindstorm Crown", 207, Rarity.UNCOMMON, mage.cards.m.MindstormCrown.class));
+        cards.add(new SetCardInfo("Mirror Golem", 208, Rarity.UNCOMMON, mage.cards.m.MirrorGolem.class));
         cards.add(new SetCardInfo("Molder Slug", 125, Rarity.RARE, mage.cards.m.MolderSlug.class));
         cards.add(new SetCardInfo("Molten Rain", 101, Rarity.COMMON, mage.cards.m.MoltenRain.class));
         cards.add(new SetCardInfo("Moriok Scavenger", 68, Rarity.COMMON, mage.cards.m.MoriokScavenger.class));
@@ -174,6 +177,7 @@ public class Mirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 300, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 301, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 302, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mourner's Shield", 209, Rarity.UNCOMMON, mage.cards.m.MournersShield.class));
         cards.add(new SetCardInfo("Myr Adapter", 210, Rarity.COMMON, mage.cards.m.MyrAdapter.class));
         cards.add(new SetCardInfo("Myr Enforcer", 211, Rarity.COMMON, mage.cards.m.MyrEnforcer.class));
         cards.add(new SetCardInfo("Myr Incubator", 212, Rarity.RARE, mage.cards.m.MyrIncubator.class));

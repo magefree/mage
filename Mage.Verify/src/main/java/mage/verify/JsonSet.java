@@ -1,24 +1,26 @@
 package mage.verify;
 
-import java.util.List;
-import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.List;
+
+import static mage.verify.MtgJson.MTGJSON_IGNORE_NEW_PROPERTIES;
+
+@JsonIgnoreProperties(ignoreUnknown = MTGJSON_IGNORE_NEW_PROPERTIES)
 class JsonSet {
-    public String name;
-    public String code;
-    public String oldCode;
-    public String gathererCode;
-    public String magicCardsInfoCode;
-    public String[] magicRaritiesCodes;
-    public String[] alternativeNames;
-    public String releaseDate;
-    public String border;
-    public String type;
-    public List<Object> booster; // [String|[String]]
-    public List<JsonCard> cards;
+    public int baseSetSize;
     public String block;
-    public boolean onlineOnly;
-    public String mkm_id;
-    public String mkm_name;
-    public Map<String, String> translations;
+    public List<Object> boosterV3; // [["rare", "mythic rare"], "uncommon", "uncommon", "uncommon", "common"]
+    public List<JsonCard> cards;
+    public String code;
+    public boolean isFoilOnly;
+    public boolean isOnlineOnly;
+    public JsonMeta meta;
+    public String mtgoCode;
+    public String name;
+    public String releaseDate;
+    public List<JsonToken> tokens;
+    public int totalSetSize;
+    public String type;
+    public String tcgplayerGroupId;
 }

@@ -69,7 +69,7 @@ class SplitSecondEffect extends ContinuousRuleModifyingEffectImpl {
         }
         if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
             Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
-            if (ability != null && !(ability.get() instanceof ActivatedManaAbilityImpl)) {
+            if (ability.isPresent() && !(ability.get() instanceof ActivatedManaAbilityImpl)) {
                 return true;
             }
         }

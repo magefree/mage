@@ -1,42 +1,14 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.cards.f.FeveredStrength;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author LevelX2
  */
-public class MastersEditionIII extends ExpansionSet {
+public final class MastersEditionIII extends ExpansionSet {
 
     private static final MastersEditionIII instance = new MastersEditionIII();
 
@@ -53,6 +25,7 @@ public class MastersEditionIII extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Active Volcano", 85, Rarity.UNCOMMON, mage.cards.a.ActiveVolcano.class));
         cards.add(new SetCardInfo("Akron Legionnaire", 1, Rarity.RARE, mage.cards.a.AkronLegionnaire.class));
         cards.add(new SetCardInfo("Alabaster Potion", 2, Rarity.UNCOMMON, mage.cards.a.AlabasterPotion.class));
@@ -113,7 +86,7 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("False Defeat", 11, Rarity.UNCOMMON, mage.cards.f.FalseDefeat.class));
         cards.add(new SetCardInfo("Famine", 65, Rarity.UNCOMMON, mage.cards.f.Famine.class));
         cards.add(new SetCardInfo("Fellwar Stone", 195, Rarity.COMMON, mage.cards.f.FellwarStone.class));
-        cards.add(new SetCardInfo("Fevered Strength", 66, Rarity.COMMON, FeveredStrength.class));
+        cards.add(new SetCardInfo("Fevered Strength", 66, Rarity.COMMON, mage.cards.f.FeveredStrength.class));
         cards.add(new SetCardInfo("Fire Ambush", 97, Rarity.COMMON, mage.cards.f.FireAmbush.class));
         cards.add(new SetCardInfo("Fire Drake", 98, Rarity.COMMON, mage.cards.f.FireDrake.class));
         cards.add(new SetCardInfo("Fire Sprites", 118, Rarity.COMMON, mage.cards.f.FireSprites.class));
@@ -123,9 +96,11 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 228, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 229, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 230, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Freyalise's Winds", 119, Rarity.RARE, mage.cards.f.FreyalisesWinds.class));
         cards.add(new SetCardInfo("Frost Giant", 101, Rarity.UNCOMMON, mage.cards.f.FrostGiant.class));
         cards.add(new SetCardInfo("Gabriel Angelfire", 148, Rarity.RARE, mage.cards.g.GabrielAngelfire.class));
         cards.add(new SetCardInfo("Gaea's Touch", 120, Rarity.UNCOMMON, mage.cards.g.GaeasTouch.class));
+        cards.add(new SetCardInfo("Gauntlets of Chaos", 196, Rarity.RARE, mage.cards.g.GauntletsOfChaos.class));
         cards.add(new SetCardInfo("Ghostly Visit", 67, Rarity.COMMON, mage.cards.g.GhostlyVisit.class));
         cards.add(new SetCardInfo("Ghosts of the Damned", 68, Rarity.COMMON, mage.cards.g.GhostsOfTheDamned.class));
         cards.add(new SetCardInfo("Giant Growth", 121, Rarity.COMMON, mage.cards.g.GiantGrowth.class));
@@ -272,5 +247,4 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Zhang Fei, Fierce Warrior", 28, Rarity.UNCOMMON, mage.cards.z.ZhangFeiFierceWarrior.class));
         cards.add(new SetCardInfo("Zodiac Dragon", 112, Rarity.RARE, mage.cards.z.ZodiacDragon.class));
     }
-
 }

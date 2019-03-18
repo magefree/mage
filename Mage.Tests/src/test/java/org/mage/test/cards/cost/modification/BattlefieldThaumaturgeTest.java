@@ -28,7 +28,7 @@ public class BattlefieldThaumaturgeTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Akroan Skyguard");
 
-        // Lightning Strike - {1}{R} -  Lightning Strike deals 3 damage to target creature or player.
+        // Lightning Strike - {1}{R} -  Lightning Strike deals 3 damage to any target.
         // Because Battlefield Thaumaturge is on the battlefield, and the creature is targeted by the
         // Lightning Strike it will be payable with {R}.
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Strike", "Akroan Skyguard");

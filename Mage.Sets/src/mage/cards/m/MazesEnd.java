@@ -1,44 +1,16 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
-
 package mage.cards.m;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ReturnToHandFromBattlefieldSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -53,35 +25,39 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 
-public class MazesEnd extends CardImpl {
+public final class MazesEnd extends CardImpl {
 
     private static final FilterCard filterCard = new FilterCard("Gate card");
+
     static {
         filterCard.add(new SubtypePredicate(SubType.GATE));
     }
 
     public MazesEnd(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
 
         // Maze's End enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // {T}: Add 1 to your mana pool.
+        // {T}: Add 1.
         this.addAbility(new ColorlessManaAbility());
 
-        // 3, {T}, Return Maze's End  to its owner’s hand: Search your library for a Gate card, put it onto the battlefield, then shuffle your library. If you control ten or more Gates with different names, you win the game.
+        // 3, {T}, Return Maze's End  to its owner's hand: Search your library for a Gate card, put it onto the battlefield, then shuffle your library. If you control ten or more Gates with different names, you win the game.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filterCard)), new GenericManaCost(3));
         ability.addEffect(new MazesEndEffect());
         ability.addCost(new TapSourceCost());
         ability.addCost(new ReturnToHandFromBattlefieldSourceCost());
+        ability.addHint(new ValueHint("Gates with different names you control", GatesWithDifferentNamesYouControlCount.instance));
         this.addAbility(ability);
-
     }
 
     public MazesEnd(final MazesEnd card) {
@@ -93,6 +69,40 @@ public class MazesEnd extends CardImpl {
         return new MazesEnd(this);
     }
 }
+
+enum GatesWithDifferentNamesYouControlCount implements DynamicValue {
+
+    instance;
+
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        List<String> names = new ArrayList<>();
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(sourceAbility.getControllerId())) {
+            if (permanent.hasSubtype(SubType.GATE, game)) {
+                if (!names.contains(permanent.getName())) {
+                    names.add(permanent.getName());
+                }
+            }
+        }
+        return names.size();
+    }
+
+    @Override
+    public GatesWithDifferentNamesYouControlCount copy() {
+        return instance;
+    }
+
+    @Override
+    public String toString() {
+        return "X";
+    }
+
+    @Override
+    public String getMessage() {
+        return "Gates with different names you control";
+    }
+}
+
 
 class MazesEndEffect extends OneShotEffect {
 
@@ -112,15 +122,8 @@ class MazesEndEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<String> names = new ArrayList<>();
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
-            if (permanent.hasSubtype(SubType.GATE, game)) {
-                if (!names.contains(permanent.getName())) {
-                    names.add(permanent.getName());
-                }
-            }
-        }
-        if (names.size() >= 10) {
+        int count = GatesWithDifferentNamesYouControlCount.instance.calculate(game, source, this);
+        if (count >= 10) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
                 controller.won(game);
@@ -128,5 +131,4 @@ class MazesEndEffect extends OneShotEffect {
         }
         return false;
     }
-
 }

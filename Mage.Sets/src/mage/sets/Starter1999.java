@@ -1,30 +1,3 @@
-/*
- * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -35,7 +8,7 @@ import mage.constants.SetType;
  *
  * @author LevelX2
  */
-public class Starter1999 extends ExpansionSet {
+public final class Starter1999 extends ExpansionSet {
 
     private static final Starter1999 instance = new Starter1999();
 
@@ -112,7 +85,7 @@ public class Starter1999 extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin Commando", 100, Rarity.UNCOMMON, mage.cards.g.GoblinCommando.class));
         cards.add(new SetCardInfo("Goblin General", 101, Rarity.UNCOMMON, mage.cards.g.GoblinGeneral.class));
         cards.add(new SetCardInfo("Goblin Glider", 102, Rarity.UNCOMMON, mage.cards.g.GoblinGlider.class));
-        cards.add(new SetCardInfo("Goblin Hero", 103, Rarity.RARE, mage.cards.g.GoblinHero.class));
+        cards.add(new SetCardInfo("Goblin Hero", 103, Rarity.COMMON, mage.cards.g.GoblinHero.class));
         cards.add(new SetCardInfo("Goblin Lore", 104, Rarity.UNCOMMON, mage.cards.g.GoblinLore.class));
         cards.add(new SetCardInfo("Goblin Mountaineer", 105, Rarity.COMMON, mage.cards.g.GoblinMountaineer.class));
         cards.add(new SetCardInfo("Goblin Settler", 106, Rarity.UNCOMMON, mage.cards.g.GoblinSettler.class));
@@ -140,7 +113,7 @@ public class Starter1999 extends ExpansionSet {
         cards.add(new SetCardInfo("Man-o'-War", 41, Rarity.UNCOMMON, mage.cards.m.ManOWar.class));
         cards.add(new SetCardInfo("Merfolk of the Pearl Trident", 42, Rarity.COMMON, mage.cards.m.MerfolkOfThePearlTrident.class));
         cards.add(new SetCardInfo("Mind Rot", 83, Rarity.COMMON, mage.cards.m.MindRot.class));
-        cards.add(new SetCardInfo("Mons's Goblin Raiders", 112, Rarity.RARE, mage.cards.m.MonssGoblinRaiders.class));
+        cards.add(new SetCardInfo("Mons's Goblin Raiders", 112, Rarity.COMMON, mage.cards.m.MonssGoblinRaiders.class));
         cards.add(new SetCardInfo("Monstrous Growth", 132, Rarity.COMMON, mage.cards.m.MonstrousGrowth.class));
         cards.add(new SetCardInfo("Moon Sprite", 133, Rarity.UNCOMMON, mage.cards.m.MoonSprite.class));
         cards.add(new SetCardInfo("Mountain", 166, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
@@ -164,6 +137,7 @@ public class Starter1999 extends ExpansionSet {
         cards.add(new SetCardInfo("Psychic Transfer", 46, Rarity.RARE, mage.cards.p.PsychicTransfer.class));
         cards.add(new SetCardInfo("Raging Goblin", 114, Rarity.COMMON, mage.cards.r.RagingGoblin.class));
         cards.add(new SetCardInfo("Raise Dead", 85, Rarity.COMMON, mage.cards.r.RaiseDead.class));
+        cards.add(new SetCardInfo("Ransack", 47, Rarity.RARE, mage.cards.r.Ransack.class));
         cards.add(new SetCardInfo("Ravenous Rats", 86, Rarity.UNCOMMON, mage.cards.r.RavenousRats.class));
         cards.add(new SetCardInfo("Relearn", 48, Rarity.UNCOMMON, mage.cards.r.Relearn.class));
         cards.add(new SetCardInfo("Relentless Assault", 115, Rarity.RARE, mage.cards.r.RelentlessAssault.class));

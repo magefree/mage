@@ -1,30 +1,4 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards.s;
 
 import java.util.HashSet;
@@ -50,15 +24,15 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  * @author noxx
  */
-public class SoulOfShandalar extends CardImpl {
+public final class SoulOfShandalar extends CardImpl {
 
     public SoulOfShandalar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
         this.subtype.add(SubType.AVATAR);
 
         this.power = new MageInt(6);
@@ -69,14 +43,14 @@ public class SoulOfShandalar extends CardImpl {
 
         // {3}{R}{R}: Soul of Shandalar deals 3 damage to target player and 3 damage to up to one target creature that player controls.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SoulOfShandalarEffect(), new ManaCostsImpl("{3}{R}{R}"));
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayerOrPlaneswalker());
         ability.addTarget(new SoulOfShandalarTarget());
         this.addAbility(ability);
 
         // {3}{R}{R}, Exile Soul of Shandalar from your graveyard: Soul of Shandalar deals 3 damage to target player and 3 damage to up to one target creature that player controls.
         ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new SoulOfShandalarEffect(), new ManaCostsImpl("{3}{R}{R}"));
         ability.addCost(new ExileSourceFromGraveCost());
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayerOrPlaneswalker());
         ability.addTarget(new SoulOfShandalarTarget());
         this.addAbility(ability);
     }
@@ -95,7 +69,8 @@ class SoulOfShandalarEffect extends OneShotEffect {
 
     public SoulOfShandalarEffect() {
         super(Outcome.Damage);
-        staticText = "Soul of Shandalar deals 3 damage to target player and 3 damage to up to one target creature that player controls";
+        staticText = "{this} deals 3 damage to target player or planeswalker "
+                + "and 3 damage to up to one target creature that player or that planeswalker's controller controls";
     }
 
     public SoulOfShandalarEffect(final SoulOfShandalarEffect effect) {
@@ -109,10 +84,7 @@ class SoulOfShandalarEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getTargets().get(0).getFirstTarget());
-        if (player != null) {
-            player.damage(3, source.getSourceId(), game, false, true);
-        }
+        game.damagePlayerOrPlaneswalker(source.getTargets().get(0).getFirstTarget(), 3, source.getSourceId(), game, false, true);
         Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (creature != null) {
             creature.damage(3, source.getSourceId(), game, false, true);
@@ -124,7 +96,7 @@ class SoulOfShandalarEffect extends OneShotEffect {
 class SoulOfShandalarTarget extends TargetPermanent {
 
     public SoulOfShandalarTarget() {
-        super(0, 1, new FilterCreaturePermanent("creature that the targeted player controls"), false);
+        super(0, 1, new FilterCreaturePermanent("creature that the targeted player or planeswalker's controller controls"), false);
     }
 
     public SoulOfShandalarTarget(final SoulOfShandalarTarget target) {
@@ -133,9 +105,13 @@ class SoulOfShandalarTarget extends TargetPermanent {
 
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
-        UUID firstTarget = source.getFirstTarget();
+        Player player = game.getPlayerOrPlaneswalkerController(source.getFirstTarget());
+        if (player == null) {
+            return false;
+        }
+        UUID firstTarget = player.getId();
         Permanent permanent = game.getPermanent(id);
-        if (firstTarget != null && permanent != null && permanent.getControllerId().equals(firstTarget)) {
+        if (firstTarget != null && permanent != null && permanent.isControlledBy(firstTarget)) {
             return super.canTarget(id, source, game);
         }
         return false;
@@ -158,10 +134,13 @@ class SoulOfShandalarTarget extends TargetPermanent {
 
         if (object instanceof StackObject) {
             UUID playerId = ((StackObject) object).getStackAbility().getFirstTarget();
-            for (UUID targetId : availablePossibleTargets) {
-                Permanent permanent = game.getPermanent(targetId);
-                if (permanent != null && permanent.getControllerId().equals(playerId)) {
-                    possibleTargets.add(targetId);
+            Player player = game.getPlayerOrPlaneswalkerController(playerId);
+            if (player != null) {
+                for (UUID targetId : availablePossibleTargets) {
+                    Permanent permanent = game.getPermanent(targetId);
+                    if (permanent != null && permanent.isControlledBy(player.getId())) {
+                        possibleTargets.add(targetId);
+                    }
                 }
             }
         }

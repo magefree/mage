@@ -1,30 +1,4 @@
-/*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -34,7 +8,7 @@ import mage.constants.SetType;
 /**
  * Created by IntelliJ IDEA. User: Loki Date: 20.12.10 Time: 21:40
  */
-public class Dissension extends ExpansionSet {
+public final class Dissension extends ExpansionSet {
 
     private static final Dissension instance = new Dissension();
 
@@ -64,6 +38,7 @@ public class Dissension extends ExpansionSet {
         cards.add(new SetCardInfo("Azorius First-Wing", 105, Rarity.COMMON, mage.cards.a.AzoriusFirstWing.class));
         cards.add(new SetCardInfo("Azorius Guildmage", 141, Rarity.UNCOMMON, mage.cards.a.AzoriusGuildmage.class));
         cards.add(new SetCardInfo("Azorius Herald", 2, Rarity.UNCOMMON, mage.cards.a.AzoriusHerald.class));
+        cards.add(new SetCardInfo("Azorius Ploy", 106, Rarity.UNCOMMON, mage.cards.a.AzoriusPloy.class));
         cards.add(new SetCardInfo("Azorius Signet", 159, Rarity.COMMON, mage.cards.a.AzoriusSignet.class));
         cards.add(new SetCardInfo("Beacon Hawk", 3, Rarity.COMMON, mage.cards.b.BeaconHawk.class));
         cards.add(new SetCardInfo("Biomantic Mastery", 142, Rarity.RARE, mage.cards.b.BiomanticMastery.class));
@@ -99,8 +74,10 @@ public class Dissension extends ExpansionSet {
         cards.add(new SetCardInfo("Entropic Eidolon", 45, Rarity.COMMON, mage.cards.e.EntropicEidolon.class));
         cards.add(new SetCardInfo("Evolution Vat", 161, Rarity.RARE, mage.cards.e.EvolutionVat.class));
         cards.add(new SetCardInfo("Experiment Kraj", 110, Rarity.RARE, mage.cards.e.ExperimentKraj.class));
+        cards.add(new SetCardInfo("Fertile Imagination", 84, Rarity.UNCOMMON, mage.cards.f.FertileImagination.class));
         cards.add(new SetCardInfo("Flame-Kin War Scout", 61, Rarity.UNCOMMON, mage.cards.f.FlameKinWarScout.class));
         cards.add(new SetCardInfo("Flaring Flame-Kin", 62, Rarity.UNCOMMON, mage.cards.f.FlaringFlameKin.class));
+        cards.add(new SetCardInfo("Flash Foliage", 85, Rarity.UNCOMMON, mage.cards.f.FlashFoliage.class));
         cards.add(new SetCardInfo("Freewind Equenaut", 9, Rarity.COMMON, mage.cards.f.FreewindEquenaut.class));
         cards.add(new SetCardInfo("Ghost Quarter", 173, Rarity.UNCOMMON, mage.cards.g.GhostQuarter.class));
         cards.add(new SetCardInfo("Gnat Alley Creeper", 63, Rarity.UNCOMMON, mage.cards.g.GnatAlleyCreeper.class));
@@ -131,6 +108,10 @@ public class Dissension extends ExpansionSet {
         cards.add(new SetCardInfo("Minister of Impediments", 144, Rarity.COMMON, mage.cards.m.MinisterOfImpediments.class));
         cards.add(new SetCardInfo("Mistral Charger", 13, Rarity.UNCOMMON, mage.cards.m.MistralCharger.class));
         cards.add(new SetCardInfo("Momir Vig, Simic Visionary", 118, Rarity.RARE, mage.cards.m.MomirVigSimicVisionary.class));
+        cards.add(new SetCardInfo("Muse Vessel", 163, Rarity.RARE, mage.cards.m.MuseVessel.class));
+        cards.add(new SetCardInfo("Nettling Curse", 48, Rarity.COMMON, mage.cards.n.NettlingCurse.class));
+        cards.add(new SetCardInfo("Nightcreep", 49, Rarity.UNCOMMON, mage.cards.n.Nightcreep.class));
+        cards.add(new SetCardInfo("Nihilistic Glee", 50, Rarity.RARE, mage.cards.n.NihilisticGlee.class));
         cards.add(new SetCardInfo("Novijen, Heart of Progress", 175, Rarity.UNCOMMON, mage.cards.n.NovijenHeartOfProgress.class));
         cards.add(new SetCardInfo("Novijen Sages", 27, Rarity.RARE, mage.cards.n.NovijenSages.class));
         cards.add(new SetCardInfo("Ocular Halo", 28, Rarity.COMMON, mage.cards.o.OcularHalo.class));
@@ -156,10 +137,12 @@ public class Dissension extends ExpansionSet {
         cards.add(new SetCardInfo("Pure // Simple", 154, Rarity.UNCOMMON, mage.cards.p.PureSimple.class));
         cards.add(new SetCardInfo("Ragamuffyn", 51, Rarity.UNCOMMON, mage.cards.r.Ragamuffyn.class));
         cards.add(new SetCardInfo("Rain of Gore", 126, Rarity.RARE, mage.cards.r.RainOfGore.class));
+        cards.add(new SetCardInfo("Rakdos Augermage", 127, Rarity.RARE, mage.cards.r.RakdosAugermage.class));
         cards.add(new SetCardInfo("Rakdos Carnarium", 178, Rarity.COMMON, mage.cards.r.RakdosCarnarium.class));
         cards.add(new SetCardInfo("Rakdos Guildmage", 145, Rarity.UNCOMMON, mage.cards.r.RakdosGuildmage.class));
         cards.add(new SetCardInfo("Rakdos Ickspitter", 128, Rarity.COMMON, mage.cards.r.RakdosIckspitter.class));
         cards.add(new SetCardInfo("Rakdos Pit Dragon", 69, Rarity.RARE, mage.cards.r.RakdosPitDragon.class));
+        cards.add(new SetCardInfo("Rakdos Riteknife", 164, Rarity.RARE, mage.cards.r.RakdosRiteknife.class));
         cards.add(new SetCardInfo("Rakdos Signet", 165, Rarity.COMMON, mage.cards.r.RakdosSignet.class));
         cards.add(new SetCardInfo("Rakdos the Defiler", 129, Rarity.RARE, mage.cards.r.RakdosTheDefiler.class));
         cards.add(new SetCardInfo("Ratcatcher", 52, Rarity.RARE, mage.cards.r.Ratcatcher.class));
@@ -193,7 +176,10 @@ public class Dissension extends ExpansionSet {
         cards.add(new SetCardInfo("Steeling Stance", 18, Rarity.COMMON, mage.cards.s.SteelingStance.class));
         cards.add(new SetCardInfo("Stoic Ephemera", 19, Rarity.UNCOMMON, mage.cards.s.StoicEphemera.class));
         cards.add(new SetCardInfo("Stomp and Howl", 96, Rarity.UNCOMMON, mage.cards.s.StompAndHowl.class));
+        cards.add(new SetCardInfo("Stormscale Anarch", 74, Rarity.RARE, mage.cards.s.StormscaleAnarch.class));
+        cards.add(new SetCardInfo("Street Savvy", 97, Rarity.COMMON, mage.cards.s.StreetSavvy.class));
         cards.add(new SetCardInfo("Supply // Demand", 157, Rarity.UNCOMMON, mage.cards.s.SupplyDemand.class));
+        cards.add(new SetCardInfo("Swift Silence", 132, Rarity.RARE, mage.cards.s.SwiftSilence.class));
         cards.add(new SetCardInfo("Taste for Mayhem", 75, Rarity.COMMON, mage.cards.t.TasteForMayhem.class));
         cards.add(new SetCardInfo("Thrive", 98, Rarity.COMMON, mage.cards.t.Thrive.class));
         cards.add(new SetCardInfo("Tidespout Tyrant", 34, Rarity.RARE, mage.cards.t.TidespoutTyrant.class));
@@ -209,11 +195,13 @@ public class Dissension extends ExpansionSet {
         cards.add(new SetCardInfo("Vesper Ghoul", 57, Rarity.COMMON, mage.cards.v.VesperGhoul.class));
         cards.add(new SetCardInfo("Vigean Graftmage", 35, Rarity.UNCOMMON, mage.cards.v.VigeanGraftmage.class));
         cards.add(new SetCardInfo("Vigean Hydropon", 135, Rarity.COMMON, mage.cards.v.VigeanHydropon.class));
+        cards.add(new SetCardInfo("Vigean Intuition", 136, Rarity.UNCOMMON, mage.cards.v.VigeanIntuition.class));
         cards.add(new SetCardInfo("Vision Skeins", 36, Rarity.COMMON, mage.cards.v.VisionSkeins.class));
         cards.add(new SetCardInfo("Voidslime", 137, Rarity.RARE, mage.cards.v.Voidslime.class));
         cards.add(new SetCardInfo("Wakestone Gargoyle", 21, Rarity.RARE, mage.cards.w.WakestoneGargoyle.class));
         cards.add(new SetCardInfo("Walking Archive", 169, Rarity.RARE, mage.cards.w.WalkingArchive.class));
         cards.add(new SetCardInfo("War's Toll", 77, Rarity.RARE, mage.cards.w.WarsToll.class));
+        cards.add(new SetCardInfo("Weight of Spires", 78, Rarity.UNCOMMON, mage.cards.w.WeightOfSpires.class));
         cards.add(new SetCardInfo("Whiptail Moloch", 79, Rarity.COMMON, mage.cards.w.WhiptailMoloch.class));
         cards.add(new SetCardInfo("Windreaver", 138, Rarity.RARE, mage.cards.w.Windreaver.class));
         cards.add(new SetCardInfo("Wit's End", 58, Rarity.RARE, mage.cards.w.WitsEnd.class));

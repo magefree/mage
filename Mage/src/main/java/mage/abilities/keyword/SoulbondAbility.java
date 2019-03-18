@@ -1,30 +1,4 @@
-/*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.abilities.keyword;
 
 import mage.MageObjectReference;
@@ -74,9 +48,9 @@ import mage.util.GameLog;
  * 702.94d A creature can be paired with only one other creature.
  *
  * 702.94e A paired creature becomes unpaired if any of the following occur:
- * another player gains control of it or the creature it’s paired with; it or
- * the creature it’s paired with stops being a creature; or it or the creature
- * it’s paired with leaves the battlefield.
+ * another player gains control of it or the creature it's paired with; it or
+ * the creature it's paired with stops being a creature; or it or the creature
+ * it's paired with leaves the battlefield.
  *
  * @author LevelX2
  */
@@ -104,7 +78,7 @@ public class SoulbondAbility extends EntersBattlefieldTriggeredAbility {
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(getControllerId())) {
             if (permanent.isCreature()) {
                 if (permanent.getId().equals(getSourceId())) {
-                    if (permanent.getControllerId().equals(getControllerId())) {
+                    if (permanent.isControlledBy(getControllerId())) {
                         self = true;
                         if (other) {
                             return true;
@@ -138,7 +112,7 @@ class SoulboundEntersSelfEffect extends OneShotEffect {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another not paired creature you control");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(Predicates.not(new PairedPredicate()));
     }
 
@@ -194,12 +168,12 @@ class SoulboundEntersSelfEffect extends OneShotEffect {
  */
 class SoulbondEntersOtherAbility extends EntersBattlefieldAllTriggeredAbility {
 
-    private final static FilterCreaturePermanent soulbondFilter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent soulbondFilter = new FilterCreaturePermanent();
 
     static {
         soulbondFilter.add(Predicates.not(new PairedPredicate()));
         soulbondFilter.add(new ControllerPredicate(TargetController.YOU));
-        soulbondFilter.add(new AnotherPredicate());
+        soulbondFilter.add(AnotherPredicate.instance);
     }
 
     public SoulbondEntersOtherAbility() {
@@ -221,7 +195,7 @@ class SoulbondEntersOtherAbility extends EntersBattlefieldAllTriggeredAbility {
         // if you control both this creature and another creature and both are unpaired
         if (game.getBattlefield().countAll(filter, getControllerId(), game) > 0) {
             Permanent sourcePermanent = game.getPermanent(getSourceId());
-            if (sourcePermanent != null && sourcePermanent.getControllerId().equals(getControllerId()) && sourcePermanent.getPairedCard() == null) {
+            if (sourcePermanent != null && sourcePermanent.isControlledBy(getControllerId()) && sourcePermanent.getPairedCard() == null) {
                 return true;
             }
         }
@@ -240,7 +214,7 @@ class SoulboundEntersOtherEffect extends OneShotEffect {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another not paired creature you control");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(Predicates.not(new PairedPredicate()));
     }
 

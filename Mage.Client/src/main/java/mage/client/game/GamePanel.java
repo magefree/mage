@@ -1,30 +1,3 @@
-/*
- * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.client.game;
 
 import mage.cards.Card;
@@ -45,8 +18,8 @@ import mage.client.dialog.CardInfoWindowDialog.ShowType;
 import mage.client.game.FeedbackPanel.FeedbackMode;
 import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
-import mage.client.util.*;
 import mage.client.util.Event;
+import mage.client.util.*;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.gui.ArrowBuilder;
 import mage.client.util.gui.MageDialogState;
@@ -58,8 +31,8 @@ import org.mage.card.arcane.CardPanel;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
 import javax.swing.*;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.Timer;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -68,8 +41,8 @@ import javax.swing.plaf.basic.BasicSplitPaneUI;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.Serializable;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -78,7 +51,7 @@ import static mage.client.dialog.PreferencesDialog.*;
 import static mage.constants.PlayerAction.*;
 
 /**
- * @author BetaSteward_at_googlemail.com, nantuko8
+ * @author BetaSteward_at_googlemail.com, nantuko8, JayDi85
  */
 public final class GamePanel extends javax.swing.JPanel {
 
@@ -113,6 +86,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private String chosenHandKey = "You";
     private boolean smallMode = false;
     private boolean initialized = false;
+    private skipButtonsList skipButtons = new skipButtonsList();
 
     private boolean menuNameSet = false;
     private boolean handCardsOfOpponentAvailable = false;
@@ -129,7 +103,6 @@ public final class GamePanel extends javax.swing.JPanel {
     private Timer resizeTimer;
 
     private enum PopUpMenuType {
-
         TRIGGER_ORDER
     }
 
@@ -346,7 +319,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private void saveDividerLocations() {
         // save panel sizes and divider locations.
         Rectangle rec = MageFrame.getDesktop().getBounds();
-        String sb = Double.toString(rec.getWidth()) + 'x' + Double.toString(rec.getHeight());
+        String sb = Double.toString(rec.getWidth()) + 'x' + rec.getHeight();
         PreferencesDialog.saveValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, sb);
         PreferencesDialog.saveValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_0, Integer.toString(this.jSplitPane0.getDividerLocation()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_1, Integer.toString(this.jSplitPane1.getDividerLocation()));
@@ -357,7 +330,7 @@ public final class GamePanel extends javax.swing.JPanel {
         Rectangle rec = MageFrame.getDesktop().getBounds();
         if (rec != null) {
             String size = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, null);
-            String sb = Double.toString(rec.getWidth()) + 'x' + Double.toString(rec.getHeight());
+            String sb = Double.toString(rec.getWidth()) + 'x' + rec.getHeight();
             // use divider positions only if screen size is the same as it was the time the settings were saved
             if (size != null && size.equals(sb)) {
 
@@ -734,8 +707,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 }
                 players.get(player.getPlayerId()).update(player);
                 if (player.getPlayerId().equals(playerId)) {
-                    updateSkipButtons(player.isPassedTurn(), player.isPassedUntilEndOfTurn(), player.isPassedUntilNextMain(), player.isPassedAllTurns(), player.isPassedUntilStackResolved(),
-                            player.isPassedUntilEndStepBeforeMyTurn());
+                    skipButtons.updateFromPlayer(player);
                 }
                 // update open or remove closed graveyard windows
                 graveyards.put(player.getName(), player.getGraveyard());
@@ -764,6 +736,8 @@ public final class GamePanel extends javax.swing.JPanel {
                 // can happen at the game start before player list is initiated
             }
         }
+        updateSkipButtons();
+
         if (!menuNameSet) {
             StringBuilder sb = new StringBuilder();
             if (playerId == null) {
@@ -847,41 +821,169 @@ public final class GamePanel extends javax.swing.JPanel {
         this.repaint();
     }
 
+    // skip buttons border
     private static final int BORDER_SIZE = 2;
+    private static final Border BORDER_ACTIVE = new LineBorder(Color.orange, BORDER_SIZE);
+    private static final Border BORDER_NON_ACTIVE = new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE);
 
-    private void updateSkipButtons(boolean turn, boolean endOfTurn, boolean nextMain, boolean allTurns, boolean stack, boolean endStepBeforeYourStep) {
-        if (turn) { //F4
-            btnSkipToNextTurn.setBorder(new LineBorder(Color.orange, BORDER_SIZE));
-        } else {
-            btnSkipToNextTurn.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
-        }
-        if (endOfTurn) { // F5
-            btnSkipToEndTurn.setBorder(new LineBorder(Color.orange, BORDER_SIZE));
-        } else {
-            btnSkipToEndTurn.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
-        }
-        if (nextMain) { // F7
-            btnSkipToNextMain.setBorder(new LineBorder(Color.orange, BORDER_SIZE));
-        } else {
-            btnSkipToNextMain.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
-        }
-        if (stack) { // F8
-            btnSkipStack.setBorder(new LineBorder(Color.orange, BORDER_SIZE));
-        } else {
-            btnSkipStack.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
-        }
-        if (allTurns) { // F9
-            btnSkipToYourTurn.setBorder(new LineBorder(Color.orange, BORDER_SIZE));
-        } else {
-            btnSkipToYourTurn.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
+    // skip buttons info
+    private class skipButton {
+
+        private final String text;
+        private final String extraFalse;
+        private final String extraTrue;
+        private final String hotkeyName;
+        private boolean extraMode = false; // extra option enabled from preferences
+        private boolean pressState = false; // activated by user or not
+
+        skipButton(String text, String extraFalse, String extraTrue, String hotkeyName) {
+            this.text = text;
+            this.extraFalse = extraFalse;
+            this.extraTrue = extraTrue;
+            this.hotkeyName = hotkeyName;
         }
 
-        if (endStepBeforeYourStep) { // F11
-            btnSkipToEndStepBeforeYourTurn.setBorder(new LineBorder(Color.orange, BORDER_SIZE));
-        } else {
-            btnSkipToEndStepBeforeYourTurn.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
+        public void setExtraMode(boolean enable) {
+            this.extraMode = enable;
         }
 
+        public void setPressState(boolean enable) {
+            this.pressState = enable;
+        }
+
+        public String getTooltip() {
+            // show hotkey and selects current button mode
+
+            // text
+            String res = "<html>"
+                    + "<b>" + getCachedKeyText(this.hotkeyName) + "</b>"
+                    + " - " + text;
+
+            // mode
+            String mesTrue = this.extraTrue;
+            String mesFalse = this.extraFalse;
+            if (!this.extraTrue.isEmpty() || !this.extraFalse.isEmpty()) {
+                if (this.extraMode) {
+                    mesTrue = "<b>" + mesTrue + "</b>";
+                } else {
+                    mesFalse = "<b>" + mesFalse + "</b>";
+                }
+                res = res.replace("EXTRA_FALSE", mesFalse);
+                res = res.replace("EXTRA_TRUE", mesTrue);
+                res = res + " - adjust using preferences";
+            }
+            return res;
+        }
+
+        public Border getBorder() {
+            return this.pressState ? BORDER_ACTIVE : BORDER_NON_ACTIVE;
+        }
+
+    }
+
+    private class skipButtonsList {
+
+        private final skipButton turn;
+        private final skipButton untilEndOfTurn;
+        private final skipButton untilNextMain;
+        private final skipButton allTurns;
+        private final skipButton untilStackResolved;
+        private final skipButton untilUntilEndStepBeforeMyTurn;
+
+        skipButtonsList() {
+            this.turn = new skipButton("Skip to next turn", "", "", KEY_CONTROL_NEXT_TURN);
+            this.untilEndOfTurn = new skipButton("Skip to [EXTRA_TRUE / EXTRA_FALSE] END OF TURN step", "opponent", "next", KEY_CONTROL_END_STEP);
+            this.untilNextMain = new skipButton("Skip to [EXTRA_TRUE / EXTRA_FALSE] MAIN step", "opponent", "next", KEY_CONTROL_MAIN_STEP);
+            this.allTurns = new skipButton("Skip to YOUR turn", "", "", KEY_CONTROL_YOUR_TURN);
+            this.untilStackResolved = new skipButton("Skip until stack is resolved [EXTRA_TRUE]", "", "or stop on new objects added", KEY_CONTROL_SKIP_STACK);
+            this.untilUntilEndStepBeforeMyTurn = new skipButton("Skip to END OF TURN before YOUR", "", "", KEY_CONTROL_PRIOR_END);
+        }
+
+        private void updateExtraMode(PlayerView player) {
+            this.turn.setExtraMode(false); // not used
+            this.untilEndOfTurn.setExtraMode(player.getUserData().getUserSkipPrioritySteps().isStopOnAllEndPhases());
+            this.untilNextMain.setExtraMode(player.getUserData().getUserSkipPrioritySteps().isStopOnAllMainPhases());
+            this.allTurns.setExtraMode(false); // not used
+            this.untilStackResolved.setExtraMode(player.getUserData().getUserSkipPrioritySteps().isStopOnStackNewObjects());
+            this.untilUntilEndStepBeforeMyTurn.setExtraMode(false); // not used
+        }
+
+        private void updatePressState(PlayerView player) {
+            this.turn.setPressState(player.isPassedTurn());
+            this.untilEndOfTurn.setPressState(player.isPassedUntilEndOfTurn());
+            this.untilNextMain.setPressState(player.isPassedUntilNextMain());
+            this.allTurns.setPressState(player.isPassedAllTurns());
+            this.untilStackResolved.setPressState(player.isPassedUntilStackResolved());
+            this.untilUntilEndStepBeforeMyTurn.setPressState(player.isPassedUntilEndStepBeforeMyTurn());
+        }
+
+        public void updateFromPlayer(PlayerView player) {
+            updateExtraMode(player);
+            updatePressState(player);
+        }
+
+        private skipButton findButton(String hotkey) {
+            switch (hotkey) {
+                case KEY_CONTROL_NEXT_TURN:
+                    return this.turn;
+                case KEY_CONTROL_END_STEP:
+                    return this.untilEndOfTurn;
+                case KEY_CONTROL_MAIN_STEP:
+                    return this.untilNextMain;
+                case KEY_CONTROL_YOUR_TURN:
+                    return this.allTurns;
+                case KEY_CONTROL_SKIP_STACK:
+                    return this.untilStackResolved;
+                case KEY_CONTROL_PRIOR_END:
+                    return this.untilUntilEndStepBeforeMyTurn;
+                default:
+                    logger.error("Unknown hotkey name " + hotkey);
+                    return null;
+            }
+        }
+
+        public String getTooltip(String hotkey) {
+            skipButton butt = findButton(hotkey);
+            return butt != null ? butt.getTooltip() : "";
+        }
+
+        public Border getBorder(String hotkey) {
+            skipButton butt = findButton(hotkey);
+            return butt != null ? butt.getBorder() : BORDER_NON_ACTIVE;
+        }
+
+        public void activateSkipButton(String hotkey) {
+            // enable ONE button and disable all other (no needs to wait server feedback)
+            this.turn.setPressState(false);
+            this.untilEndOfTurn.setPressState(false);
+            this.untilNextMain.setPressState(false);
+            this.allTurns.setPressState(false);
+            this.untilStackResolved.setPressState(false);
+            this.untilUntilEndStepBeforeMyTurn.setPressState(false);
+
+            if (!hotkey.isEmpty()) {
+                skipButton butt = findButton(hotkey);
+                if (butt != null) butt.setPressState(true);
+            }
+        }
+    }
+
+    private void updateSkipButtons() {
+        // hints
+        btnSkipToNextTurn.setToolTipText(skipButtons.turn.getTooltip());
+        btnSkipToEndTurn.setToolTipText(skipButtons.untilEndOfTurn.getTooltip());
+        btnSkipToNextMain.setToolTipText(skipButtons.untilNextMain.getTooltip());
+        btnSkipStack.setToolTipText(skipButtons.untilStackResolved.getTooltip());
+        btnSkipToYourTurn.setToolTipText(skipButtons.allTurns.getTooltip());
+        btnSkipToEndStepBeforeYourTurn.setToolTipText(skipButtons.untilUntilEndStepBeforeMyTurn.getTooltip());
+
+        // border
+        btnSkipToNextTurn.setBorder(skipButtons.turn.getBorder());
+        btnSkipToEndTurn.setBorder(skipButtons.untilEndOfTurn.getBorder());
+        btnSkipToNextMain.setBorder(skipButtons.untilNextMain.getBorder());
+        btnSkipStack.setBorder(skipButtons.untilStackResolved.getBorder());
+        btnSkipToYourTurn.setBorder(skipButtons.allTurns.getBorder());
+        btnSkipToEndStepBeforeYourTurn.setBorder(skipButtons.untilUntilEndStepBeforeMyTurn.getBorder());
     }
 
     /**
@@ -946,6 +1048,8 @@ public final class GamePanel extends javax.swing.JPanel {
                 break;
             case END_TURN:
                 updateButton("Cleanup");
+                break;
+            default:
                 break;
         }
     }
@@ -1053,6 +1157,8 @@ public final class GamePanel extends javax.swing.JPanel {
                 case LOOKED_AT:
                     cardInfoWindowDialog.loadCards((SimpleCardsView) cardsView, bigCard, gameId);
                     break;
+                default:
+                    break;
             }
         }
     }
@@ -1065,6 +1171,114 @@ public final class GamePanel extends javax.swing.JPanel {
     public void ask(String question, GameView gameView, int messageId, Map<String, Serializable> options) {
         updateGame(gameView);
         this.feedbackPanel.getFeedback(FeedbackMode.QUESTION, question, false, options, messageId, true, gameView.getPhase());
+    }
+
+    private void prepareSelectableView(GameView gameView, Map<String, Serializable> options, Set<UUID> targets) {
+        // make cards/perm selectable
+        // highlighting chosen
+        // code calls after each selects or updates, no needs in switch off cards
+
+        Zone needZone = Zone.ALL;
+        if (options.containsKey("targetZone")) {
+            needZone = (Zone) options.get("targetZone");
+        }
+
+        List<UUID> needChoosen = null;
+        if (options.containsKey("chosen")) {
+            needChoosen = (List<UUID>) options.get("chosen");
+        }
+        if (needChoosen == null) {
+            needChoosen = new ArrayList<>();
+        }
+
+        Set<UUID> needSelectable;
+        if (targets != null) {
+            needSelectable = targets;
+        } else {
+            needSelectable = new HashSet<>();
+        }
+
+        if (needChoosen.size() == 0 && needSelectable.size() == 0) {
+            return;
+        }
+
+        // hand
+        if (needZone == Zone.HAND || needZone == Zone.ALL) {
+            for (CardView card : gameView.getHand().values()) {
+                if (needSelectable.contains(card.getId())) {
+                    card.setChoosable(true);
+                }
+                if (needChoosen.contains(card.getId())) {
+                    card.setSelected(true);
+                }
+            }
+        }
+
+        // stack
+        if (needZone == Zone.STACK || needZone == Zone.ALL) {
+            for (Map.Entry<UUID, CardView> card : gameView.getStack().entrySet()) {
+                if (needSelectable.contains(card.getKey())) {
+                    card.getValue().setChoosable(true);
+                }
+                if (needChoosen.contains(card.getKey())) {
+                    card.getValue().setSelected(true);
+                }
+            }
+        }
+
+        // battlefield
+        if (needZone == Zone.BATTLEFIELD || needZone == Zone.ALL) {
+            for (PlayerView player : gameView.getPlayers()) {
+                for (Map.Entry<UUID, PermanentView> perm : player.getBattlefield().entrySet()) {
+                    if (needSelectable.contains(perm.getKey())) {
+                        perm.getValue().setChoosable(true);
+                    }
+                    if (needChoosen.contains(perm.getKey())) {
+                        perm.getValue().setSelected(true);
+                    }
+                }
+            }
+        }
+
+        // graveyard
+        if (needZone == Zone.GRAVEYARD || needZone == Zone.ALL) {
+            for (PlayerView player : gameView.getPlayers()) {
+                for (Map.Entry<UUID, CardView> card : player.getGraveyard().entrySet()) {
+                    if (needSelectable.contains(card.getKey())) {
+                        card.getValue().setChoosable(true);
+                    }
+                    if (needChoosen.contains(card.getKey())) {
+                        card.getValue().setSelected(true);
+                    }
+                }
+            }
+        }
+
+        // exile
+        if (needZone == Zone.HAND || needZone == Zone.ALL) {
+            for (ExileView exile : gameView.getExile()) {
+                for (Map.Entry<UUID, CardView> card : exile.entrySet()) {
+                    if (needSelectable.contains(card.getKey())) {
+                        card.getValue().setChoosable(true);
+                    }
+                    if (needChoosen.contains(card.getKey())) {
+                        card.getValue().setSelected(true);
+                    }
+                }
+            }
+        }
+
+        // revealed
+        for (RevealedView rev : gameView.getRevealed()) {
+            for (Map.Entry<UUID, CardView> card : rev.getCards().entrySet()) {
+                if (needSelectable.contains(card.getKey())) {
+                    card.getValue().setChoosable(true);
+                }
+                if (needChoosen.contains(card.getKey())) {
+                    card.getValue().setSelected(true);
+                }
+            }
+        }
     }
 
     /**
@@ -1082,30 +1296,23 @@ public final class GamePanel extends javax.swing.JPanel {
     public void pickTarget(String message, CardsView cardView, GameView gameView, Set<UUID> targets, boolean required, Map<String, Serializable> options, int messageId) {
         PopUpMenuType popupMenuType = null;
         if (options != null) {
-            if (options.containsKey("targetZone")) {
-                if (Zone.HAND == options.get("targetZone")) { // mark selectable target cards in hand
-                    List<UUID> choosen = null;
-                    if (options.containsKey("chosen")) {
-                        choosen = (List<UUID>) options.get("chosen");
-                    }
-                    for (CardView card : gameView.getHand().values()) {
-                        if (targets == null || targets.isEmpty()) {
-                            card.setPlayable(false);
-                            card.setChoosable(true);
-                        } else if (targets.contains(card.getId())) {
-                            card.setPlayable(false);
-                            card.setChoosable(true);
-                        }
-                        if (choosen != null && choosen.contains(card.getId())) {
-                            card.setSelected(true);
-                        }
-                    }
+            if (options.containsKey("queryType")) {
+                PlayerQueryEvent.QueryType needType = (PlayerQueryEvent.QueryType) options.get("queryType");
+                switch (needType) {
+                    case PICK_ABILITY:
+                        popupMenuType = PopUpMenuType.TRIGGER_ORDER;
+                        prepareSelectableView(gameView, options, targets);
+                        break;
+                    case PICK_TARGET:
+                        prepareSelectableView(gameView, options, targets);
+                        break;
+                    default:
+                        logger.warn("Unknown query type in pick target: " + needType + " in " + message);
+                        break;
                 }
             }
-            if (options.containsKey("queryType") && PlayerQueryEvent.QueryType.PICK_ABILITY == options.get("queryType")) {
-                popupMenuType = PopUpMenuType.TRIGGER_ORDER;
-            }
         }
+
         updateGame(gameView);
         Map<String, Serializable> options0 = options == null ? new HashMap<>() : options;
         ShowCardsDialog dialog = null;
@@ -1386,14 +1593,8 @@ public final class GamePanel extends javax.swing.JPanel {
         btnToggleMacro.setToolTipText("Toggle Record Macro ("
                 + getCachedKeyText(KEY_CONTROL_TOGGLE_MACRO) + ").");
         btnToggleMacro.setFocusable(false);
-        btnToggleMacro.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                if (evt.getButton() == MouseEvent.BUTTON1) {
-                    btnToggleMacroActionPerformed(null);
-                }
-            }
-        });
+        btnToggleMacro.addMouseListener(new FirstButtonMousePressedAction(e ->
+                btnToggleMacroActionPerformed(null)));
 
         KeyStroke kst = getCachedKeystroke(KEY_CONTROL_TOGGLE_MACRO);
         this.getInputMap(c).put(kst, "F8_PRESS");
@@ -1413,35 +1614,23 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         });
 
+        // SKIP BUTTONS (button's hint/state is dynamic)
+
         btnCancelSkip.setContentAreaFilled(false);
         btnCancelSkip.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
         btnCancelSkip.setIcon(new ImageIcon(ImageManagerImpl.instance.getCancelSkipButtonImage()));
-        btnCancelSkip.setToolTipText("Cancel all skip actions ("
-                + getCachedKeyText(KEY_CONTROL_CANCEL_SKIP) + ").");
+        btnCancelSkip.setToolTipText("CANCEL all skips");
         btnCancelSkip.setFocusable(false);
-        btnCancelSkip.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                if (evt.getButton() == MouseEvent.BUTTON1) {
-                    restorePriorityActionPerformed(null);
-                }
-            }
-        });
+        btnCancelSkip.addMouseListener(new FirstButtonMousePressedAction(e ->
+                restorePriorityActionPerformed(null)));
 
         btnSkipToNextTurn.setContentAreaFilled(false);
         btnSkipToNextTurn.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
         btnSkipToNextTurn.setIcon(new ImageIcon(ImageManagerImpl.instance.getSkipNextTurnButtonImage()));
-        btnSkipToNextTurn.setToolTipText("Skip to next turn ("
-                + getCachedKeyText(KEY_CONTROL_NEXT_TURN) + ").");
+        btnSkipToNextTurn.setToolTipText("dynamic");
         btnSkipToNextTurn.setFocusable(false);
-        btnSkipToNextTurn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                if (evt.getButton() == MouseEvent.BUTTON1) {
-                    btnEndTurnActionPerformed(null);
-                }
-            }
-        });
+        btnSkipToNextTurn.addMouseListener(new FirstButtonMousePressedAction(e ->
+                btnEndTurnActionPerformed(null)));
 
         KeyStroke ks = getCachedKeystroke(KEY_CONTROL_NEXT_TURN);
         this.getInputMap(c).put(ks, "F4_PRESS");
@@ -1455,17 +1644,10 @@ public final class GamePanel extends javax.swing.JPanel {
         btnSkipToEndTurn.setContentAreaFilled(false);
         btnSkipToEndTurn.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
         btnSkipToEndTurn.setIcon(new ImageIcon(ImageManagerImpl.instance.getSkipEndTurnButtonImage()));
-        btnSkipToEndTurn.setToolTipText("Skip to (opponents/next) end of turn step ("
-                + getCachedKeyText(KEY_CONTROL_END_STEP) + ") - adjust using preferences.");
+        btnSkipToEndTurn.setToolTipText("dynamic");
         btnSkipToEndTurn.setFocusable(false);
-        btnSkipToEndTurn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                if (evt.getButton() == MouseEvent.BUTTON1) {
-                    btnUntilEndOfTurnActionPerformed(null);
-                }
-            }
-        });
+        btnSkipToEndTurn.addMouseListener(new FirstButtonMousePressedAction(e ->
+                btnUntilEndOfTurnActionPerformed(null)));
 
         ks = getCachedKeystroke(KEY_CONTROL_END_STEP);
         this.getInputMap(c).put(ks, "F5_PRESS");
@@ -1488,17 +1670,10 @@ public final class GamePanel extends javax.swing.JPanel {
         btnSkipToNextMain.setContentAreaFilled(false);
         btnSkipToNextMain.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
         btnSkipToNextMain.setIcon(new ImageIcon(ImageManagerImpl.instance.getSkipMainButtonImage()));
-        btnSkipToNextMain.setToolTipText("Skip to (your) next main phase ("
-                + getCachedKeyText(KEY_CONTROL_MAIN_STEP) + ") - adjust using preferences.");
+        btnSkipToNextMain.setToolTipText("dynamic");
         btnSkipToNextMain.setFocusable(false);
-        btnSkipToNextMain.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                if (evt.getButton() == MouseEvent.BUTTON1) {
-                    btnUntilNextMainPhaseActionPerformed(null);
-                }
-            }
-        });
+        btnSkipToNextMain.addMouseListener(new FirstButtonMousePressedAction(e ->
+                btnUntilNextMainPhaseActionPerformed(null)));
 
         ks = getCachedKeystroke(KEY_CONTROL_MAIN_STEP);
         this.getInputMap(c).put(ks, "F7_PRESS");
@@ -1512,17 +1687,10 @@ public final class GamePanel extends javax.swing.JPanel {
         btnSkipToYourTurn.setContentAreaFilled(false);
         btnSkipToYourTurn.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
         btnSkipToYourTurn.setIcon(new ImageIcon(ImageManagerImpl.instance.getSkipYourNextTurnButtonImage()));
-        btnSkipToYourTurn.setToolTipText("Skip to your next turn ("
-                + getCachedKeyText(KEY_CONTROL_YOUR_TURN) + ").");
+        btnSkipToYourTurn.setToolTipText("dynamic");
         btnSkipToYourTurn.setFocusable(false);
-        btnSkipToYourTurn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                if (evt.getButton() == MouseEvent.BUTTON1) {
-                    btnPassPriorityUntilNextYourTurnActionPerformed(null);
-                }
-            }
-        });
+        btnSkipToYourTurn.addMouseListener(new FirstButtonMousePressedAction(e ->
+                btnPassPriorityUntilNextYourTurnActionPerformed(null)));
 
         KeyStroke ks9 = getCachedKeystroke(KEY_CONTROL_YOUR_TURN);
         this.getInputMap(c).put(ks9, "F9_PRESS");
@@ -1536,17 +1704,10 @@ public final class GamePanel extends javax.swing.JPanel {
         btnSkipToEndStepBeforeYourTurn.setContentAreaFilled(false);
         btnSkipToEndStepBeforeYourTurn.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
         btnSkipToEndStepBeforeYourTurn.setIcon(new ImageIcon(ImageManagerImpl.instance.getSkipEndStepBeforeYourTurnButtonImage()));
-        btnSkipToEndStepBeforeYourTurn.setToolTipText("Skip to the end step before your turn ("
-                + getCachedKeyText(KEY_CONTROL_PRIOR_END) + ") - adjust using preferences.");
+        btnSkipToEndStepBeforeYourTurn.setToolTipText("dynamic");
         btnSkipToEndStepBeforeYourTurn.setFocusable(false);
-        btnSkipToEndStepBeforeYourTurn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                if (evt.getButton() == MouseEvent.BUTTON1) {
-                    btnSkipToEndStepBeforeYourTurnActionPerformed(null);
-                }
-            }
-        });
+        btnSkipToEndStepBeforeYourTurn.addMouseListener(new FirstButtonMousePressedAction(e ->
+                btnSkipToEndStepBeforeYourTurnActionPerformed(null)));
 
         KeyStroke ks11 = getCachedKeystroke(KEY_CONTROL_PRIOR_END);
         this.getInputMap(c).put(ks11, "F11_PRESS");
@@ -1560,17 +1721,10 @@ public final class GamePanel extends javax.swing.JPanel {
         btnSkipStack.setContentAreaFilled(false);
         btnSkipStack.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
         btnSkipStack.setIcon(new ImageIcon(ImageManagerImpl.instance.getSkipStackButtonImage()));
-        btnSkipStack.setToolTipText("Skip until stack is resolved ("
-                + getCachedKeyText(KEY_CONTROL_SKIP_STACK) + ").");
+        btnSkipStack.setToolTipText("dynamic");
         btnSkipStack.setFocusable(false);
-        btnSkipStack.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                if (evt.getButton() == MouseEvent.BUTTON1) {
-                    btnPassPriorityUntilStackResolvedActionPerformed(null);
-                }
-            }
-        });
+        btnSkipStack.addMouseListener(new FirstButtonMousePressedAction(e ->
+                btnPassPriorityUntilStackResolvedActionPerformed(null)));
 
         ks = getCachedKeystroke(KEY_CONTROL_SKIP_STACK);
         this.getInputMap(c).put(ks, "F10_PRESS");
@@ -1584,16 +1738,15 @@ public final class GamePanel extends javax.swing.JPanel {
         btnConcede.setContentAreaFilled(false);
         btnConcede.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
         btnConcede.setIcon(new ImageIcon(ImageManagerImpl.instance.getConcedeButtonImage()));
-        btnConcede.setToolTipText("Concede the current game.");
+        btnConcede.setToolTipText("CONCEDE current game");
         btnConcede.setFocusable(false);
-        btnConcede.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                if (evt.getButton() == MouseEvent.BUTTON1) {
-                    btnConcedeActionPerformed(null);
-                }
-            }
-        });
+        btnConcede.addMouseListener(new FirstButtonMousePressedAction(e ->
+                btnConcedeActionPerformed(null)));
+
+        // update button hint/states to default values
+        updateSkipButtons();
+
+        // HOTKEYS
 
         KeyStroke ks2 = getCachedKeystroke(KEY_CONTROL_CONFIRM);
         this.getInputMap(c).put(ks2, "F2_PRESS");
@@ -1694,28 +1847,16 @@ public final class GamePanel extends javax.swing.JPanel {
         btnSwitchHands.setIcon(new ImageIcon(ImageManagerImpl.instance.getSwitchHandsButtonImage()));
         btnSwitchHands.setFocusable(false);
         btnSwitchHands.setToolTipText("Switch between your hand cards and hand cards of controlled players.");
-        btnSwitchHands.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                if (evt.getButton() == MouseEvent.BUTTON1) {
-                    btnSwitchHandActionPerformed(null);
-                }
-            }
-        });
+        btnSwitchHands.addMouseListener(new FirstButtonMousePressedAction(e ->
+                btnSwitchHandActionPerformed(null)));
 
         btnStopWatching.setContentAreaFilled(false);
         btnStopWatching.setBorder(new EmptyBorder(0, 0, 0, 0));
         btnStopWatching.setIcon(new ImageIcon(ImageManagerImpl.instance.getStopWatchButtonImage()));
         btnStopWatching.setFocusable(false);
         btnStopWatching.setToolTipText("Stop watching this game.");
-        btnStopWatching.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                if (evt.getButton() == MouseEvent.BUTTON1) {
-                    btnStopWatchingActionPerformed(null);
-                }
-            }
-        });
+        btnStopWatching.addMouseListener(new FirstButtonMousePressedAction(e ->
+                btnStopWatchingActionPerformed(null)));
 
         stackObjects.setBackgroundColor(new Color(0, 0, 0, 40));
 
@@ -1836,8 +1977,8 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         };
         String[] phases = {"Untap", "Upkeep", "Draw", "Main1",
-            "Combat_Start", "Combat_Attack", "Combat_Block", "Combat_Damage", "Combat_End",
-            "Main2", "Cleanup", "Next_Turn"};
+                "Combat_Start", "Combat_Attack", "Combat_Block", "Combat_Damage", "Combat_End",
+                "Main2", "Cleanup", "Next_Turn"};
         for (String name : phases) {
             createPhaseButton(name, phasesMouseAdapter);
         }
@@ -2045,66 +2186,85 @@ public final class GamePanel extends javax.swing.JPanel {
 
     private void btnToggleMacroActionPerformed(java.awt.event.ActionEvent evt) {
         SessionHandler.sendPlayerAction(PlayerAction.TOGGLE_RECORD_MACRO, gameId, null);
+        skipButtons.activateSkipButton("");
+
         AudioManager.playOnSkipButton();
-        updateSkipButtons(false, false, false, false, false, false);
-        if (btnToggleMacro.getBorder() instanceof EmptyBorder) {
-            btnToggleMacro.setBorder(new LineBorder(Color.orange, BORDER_SIZE));
+        if (btnToggleMacro.getBorder().equals(BORDER_ACTIVE)) {
+            btnToggleMacro.setBorder(BORDER_NON_ACTIVE);
         } else {
-            btnToggleMacro.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
+            btnToggleMacro.setBorder(BORDER_ACTIVE);
         }
     }
 
     private void btnEndTurnActionPerformed(java.awt.event.ActionEvent evt) {
         SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_TURN, gameId, null);
+        skipButtons.activateSkipButton(KEY_CONTROL_NEXT_TURN);
+
         AudioManager.playOnSkipButton();
-        updateSkipButtons(true, false, false, false, false, false);
+        updateSkipButtons();
     }
 
     private void btnUntilEndOfTurnActionPerformed(java.awt.event.ActionEvent evt) {
         SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_TURN_END_STEP, gameId, null);
+        skipButtons.activateSkipButton(KEY_CONTROL_END_STEP);
+
         AudioManager.playOnSkipButton();
-        updateSkipButtons(false, true, false, false, false, false);
+        updateSkipButtons();
     }
 
     private void btnEndTurnSkipStackActionPerformed(java.awt.event.ActionEvent evt) {
+        logger.error("Skip action don't used", new Throwable());
+        /*
         SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_TURN_SKIP_STACK, gameId, null);
         AudioManager.playOnSkipButton();
         updateSkipButtons(true, false, false, false, true, false);
+        */
     }
 
     private void btnUntilNextMainPhaseActionPerformed(java.awt.event.ActionEvent evt) {
         SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_MAIN_PHASE, gameId, null);
+        skipButtons.activateSkipButton(KEY_CONTROL_MAIN_STEP);
+
         AudioManager.playOnSkipButton();
-        updateSkipButtons(false, false, true, false, false, false);
+        updateSkipButtons();
     }
 
     private void btnPassPriorityUntilNextYourTurnActionPerformed(java.awt.event.ActionEvent evt) {
         SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_MY_NEXT_TURN, gameId, null);
+        skipButtons.activateSkipButton(KEY_CONTROL_YOUR_TURN);
+
         AudioManager.playOnSkipButton();
-        updateSkipButtons(false, false, false, true, false, false);
+        updateSkipButtons();
     }
 
     private void btnPassPriorityUntilStackResolvedActionPerformed(java.awt.event.ActionEvent evt) {
         SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_STACK_RESOLVED, gameId, null);
+        skipButtons.activateSkipButton(KEY_CONTROL_SKIP_STACK);
+
         AudioManager.playOnSkipButton();
-        updateSkipButtons(false, false, false, false, true, false);
+        updateSkipButtons();
     }
 
     private void btnSkipToEndStepBeforeYourTurnActionPerformed(java.awt.event.ActionEvent evt) {
         SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_END_STEP_BEFORE_MY_NEXT_TURN, gameId, null);
+        skipButtons.activateSkipButton(KEY_CONTROL_PRIOR_END);
+
         AudioManager.playOnSkipButton();
-        updateSkipButtons(false, false, false, false, false, true);
+        updateSkipButtons();
     }
 
     private void restorePriorityActionPerformed(java.awt.event.ActionEvent evt) {
         SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_CANCEL_ALL_ACTIONS, gameId, null);
+        skipButtons.activateSkipButton("");
+
         AudioManager.playOnSkipButtonCancel();
-        updateSkipButtons(false, false, false, false, false, false);
+        updateSkipButtons();
     }
 
     private void mouseClickPhaseBar(MouseEvent evt) {
         if (evt.getButton() == MouseEvent.BUTTON1) { // Left button
             PreferencesDialog.main(new String[]{PreferencesDialog.OPEN_PHASES_TAB});
+            // TODO: add event handler on preferences closed and refresh game data from server
         }
     }
 
@@ -2239,6 +2399,8 @@ public final class GamePanel extends javax.swing.JPanel {
                 break;
             case CMD_AUTO_ORDER_RESET_ALL:
                 SessionHandler.sendPlayerAction(TRIGGER_AUTO_ORDER_RESET_ALL, gameId, null);
+                break;
+            default:
                 break;
         }
         for (ShowCardsDialog dialog : pickTarget) {

@@ -1,30 +1,4 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards.m;
 
 import java.util.UUID;
@@ -56,12 +30,12 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Plopman
  */
-public class MinionReflector extends CardImpl {
+public final class MinionReflector extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
 
     static {
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public MinionReflector(UUID ownerId, CardSetInfo setInfo) {
@@ -74,8 +48,8 @@ public class MinionReflector extends CardImpl {
                         "entered the battlefield?"),
                 filter, false, SetTargetPointer.PERMANENT,
                 "Whenever a nontoken creature enters the battlefield under your control, " +
-                "you may pay 2. If you do, create a token that's a copy of that creature. " +
-                "That token has haste and \"At the beginning of the end step, sacrifice this " +
+                "you may pay 2. If you do, create a token that's a copy of that creature, " +
+                "except it has haste and \"At the beginning of the end step, sacrifice this " +
                 "permanent.\"");
         this.addAbility(ability);
     }
@@ -95,7 +69,7 @@ class MinionReflectorEffect extends OneShotEffect {
 
     public MinionReflectorEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "create a token that's a copy of that creature. That token has haste and \"At the beginning of the end step, sacrifice this permanent.";
+        this.staticText = "create a token that's a copy of that creature, except it has haste and \"At the beginning of the end step, sacrifice this permanent.";
     }
 
     public MinionReflectorEffect(final MinionReflectorEffect effect) {

@@ -1,30 +1,4 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- * 
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- * 
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- * 
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- * 
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 
 package mage.cards;
 
@@ -35,19 +9,19 @@ import static mage.constants.Constants.*;
  */
 public class CardDimensions {
 
-    public int frameHeight;
-    public int frameWidth;
-    public int symbolHeight;
-    public int symbolWidth;
-    public int contentXOffset;
-    public int nameYOffset;
-    public int typeYOffset;
-    public int textYOffset;
-    public int textWidth;
-    public int textHeight;
-    public int powBoxTextTop;
-    public int powBoxTextLeft;
-    public int nameFontSize;
+    private final int frameHeight;
+    private final int frameWidth;
+    private final int symbolHeight;
+    private final int symbolWidth;
+    private final int contentXOffset;
+    private final int nameYOffset;
+    private final int typeYOffset;
+    private final int textYOffset;
+    private final int textWidth;
+    private final int textHeight;
+    private final int powBoxTextTop;
+    private final int powBoxTextLeft;
+    private final int nameFontSize;
 
     public CardDimensions(double scaleFactor) {
         frameHeight = (int) (FRAME_MAX_HEIGHT * scaleFactor);
@@ -65,4 +39,55 @@ public class CardDimensions {
         nameFontSize = Math.max(9, (int) (NAME_FONT_MAX_SIZE * scaleFactor));
     }
 
+    public int getFrameHeight() {
+        return frameHeight;
+    }
+
+    public int getFrameWidth() {
+        return frameWidth;
+    }
+
+    public int getSymbolHeight() {
+        return symbolHeight;
+    }
+
+    public int getSymbolWidth() {
+        return symbolWidth;
+    }
+
+    public int getContentXOffset() {
+        return contentXOffset;
+    }
+
+    public int getNameYOffset() {
+        return nameYOffset;
+    }
+
+    public int getTypeYOffset() {
+        return typeYOffset;
+    }
+
+    public int getTextYOffset() {
+        return textYOffset;
+    }
+
+    public int getTextWidth() {
+        return textWidth;
+    }
+
+    public int getTextHeight() {
+        return textHeight;
+    }
+
+    public int getPowBoxTextTop() {
+        return powBoxTextTop;
+    }
+
+    public int getPowBoxTextLeft() {
+        return powBoxTextLeft;
+    }
+
+    public int getNameFontSize() {
+        return nameFontSize;
+    }
 }

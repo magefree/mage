@@ -1,30 +1,4 @@
-/*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -34,7 +8,7 @@ import mage.constants.SetType;
 /**
  * Created by IntelliJ IDEA. User: Loki Date: 20.12.10 Time: 21:01
  */
-public class Guildpact extends ExpansionSet {
+public final class Guildpact extends ExpansionSet {
 
     private static final Guildpact instance = new Guildpact();
 
@@ -55,6 +29,7 @@ public class Guildpact extends ExpansionSet {
         this.ratioBoosterMythic = 0;
         cards.add(new SetCardInfo("Absolver Thrull", 1, Rarity.COMMON, mage.cards.a.AbsolverThrull.class));
         cards.add(new SetCardInfo("Abyssal Nocturnus", 43, Rarity.RARE, mage.cards.a.AbyssalNocturnus.class));
+        cards.add(new SetCardInfo("Aetherplasm", 22, Rarity.UNCOMMON, mage.cards.a.Aetherplasm.class));
         cards.add(new SetCardInfo("Agent of Masks", 100, Rarity.UNCOMMON, mage.cards.a.AgentOfMasks.class));
         cards.add(new SetCardInfo("Angel of Despair", 101, Rarity.RARE, mage.cards.a.AngelOfDespair.class));
         cards.add(new SetCardInfo("Battering Wurm", 79, Rarity.UNCOMMON, mage.cards.b.BatteringWurm.class));
@@ -70,11 +45,12 @@ public class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Castigate", 106, Rarity.COMMON, mage.cards.c.Castigate.class));
         cards.add(new SetCardInfo("Caustic Rain", 44, Rarity.UNCOMMON, mage.cards.c.CausticRain.class));
         cards.add(new SetCardInfo("Cerebral Vortex", 107, Rarity.RARE, mage.cards.c.CerebralVortex.class));
+        cards.add(new SetCardInfo("Conjurer's Ban", 108, Rarity.UNCOMMON, mage.cards.c.ConjurersBan.class));
         cards.add(new SetCardInfo("Crash Landing", 82, Rarity.UNCOMMON, mage.cards.c.CrashLanding.class));
         cards.add(new SetCardInfo("Cremate", 45, Rarity.COMMON, mage.cards.c.Cremate.class));
         cards.add(new SetCardInfo("Cry of Contrition", 46, Rarity.COMMON, mage.cards.c.CryOfContrition.class));
         cards.add(new SetCardInfo("Cryptwailing", 47, Rarity.UNCOMMON, mage.cards.c.Cryptwailing.class));
-        cards.add(new SetCardInfo("Crystal Seer", 23, Rarity.UNCOMMON, mage.cards.c.CrystalSeer.class));
+        cards.add(new SetCardInfo("Crystal Seer", 23, Rarity.COMMON, mage.cards.c.CrystalSeer.class));
         cards.add(new SetCardInfo("Culling Sun", 109, Rarity.RARE, mage.cards.c.CullingSun.class));
         cards.add(new SetCardInfo("Daggerclaw Imp", 48, Rarity.UNCOMMON, mage.cards.d.DaggerclawImp.class));
         cards.add(new SetCardInfo("Debtors' Knell", 141, Rarity.RARE, mage.cards.d.DebtorsKnell.class));
@@ -151,9 +127,11 @@ public class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Ostiary Thrull", 55, Rarity.COMMON, mage.cards.o.OstiaryThrull.class));
         cards.add(new SetCardInfo("Parallectric Feedback", 71, Rarity.RARE, mage.cards.p.ParallectricFeedback.class));
         cards.add(new SetCardInfo("Petrahydrox", 148, Rarity.COMMON, mage.cards.p.Petrahydrox.class));
+        cards.add(new SetCardInfo("Petrified Wood-Kin", 91, Rarity.RARE, mage.cards.p.PetrifiedWoodKin.class));
         cards.add(new SetCardInfo("Pillory of the Sleepless", 125, Rarity.COMMON, mage.cards.p.PilloryOfTheSleepless.class));
         cards.add(new SetCardInfo("Plagued Rusalka", 56, Rarity.UNCOMMON, mage.cards.p.PlaguedRusalka.class));
         cards.add(new SetCardInfo("Poisonbelly Ogre", 57, Rarity.COMMON, mage.cards.p.PoisonbellyOgre.class));
+        cards.add(new SetCardInfo("Predatory Focus", 92, Rarity.UNCOMMON, mage.cards.p.PredatoryFocus.class));
         cards.add(new SetCardInfo("Primeval Light", 93, Rarity.UNCOMMON, mage.cards.p.PrimevalLight.class));
         cards.add(new SetCardInfo("Pyromatics", 72, Rarity.COMMON, mage.cards.p.Pyromatics.class));
         cards.add(new SetCardInfo("Quicken", 31, Rarity.RARE, mage.cards.q.Quicken.class));

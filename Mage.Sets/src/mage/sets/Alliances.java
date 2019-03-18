@@ -1,27 +1,10 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.cards.a.AesthirGlider;
-import mage.cards.a.AgentOfStromgald;
-import mage.cards.b.BalduvianWarMakers;
-import mage.cards.c.CarrierPigeons;
-import mage.cards.e.EnslavedScout;
-import mage.cards.f.FeveredStrength;
-import mage.cards.g.GorillaBerserkers;
-import mage.cards.g.GorillaShaman;
-import mage.cards.i.InsidiousBookworms;
-import mage.cards.l.LimDulsHighGuard;
-import mage.cards.p.PhyrexianWarBeast;
-import mage.cards.r.RoyalHerbalist;
-import mage.cards.s.SoldeviAdnate;
-import mage.cards.s.SoldeviSage;
-import mage.cards.s.StormShaman;
-import mage.cards.s.SwampMosquito;
-import mage.cards.w.WhipVine;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-public class Alliances extends ExpansionSet {
+public final class Alliances extends ExpansionSet {
 
     private static final Alliances instance = new Alliances();
 
@@ -40,6 +23,7 @@ public class Alliances extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Aesthir Glider", "116a", Rarity.COMMON, mage.cards.a.AesthirGlider.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aesthir Glider", "116b", Rarity.COMMON, mage.cards.a.AesthirGlider.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Agent of Stromgald", "64a", Rarity.COMMON, mage.cards.a.AgentOfStromgald.class, NON_FULL_USE_VARIOUS));
@@ -49,11 +33,15 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Ashnod's Cylix", 117, Rarity.RARE, mage.cards.a.AshnodsCylix.class));
         cards.add(new SetCardInfo("Astrolabe", "118a", Rarity.COMMON, mage.cards.a.Astrolabe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Astrolabe", "118b", Rarity.COMMON, mage.cards.a.Astrolabe.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Awesome Presence", "23a", Rarity.COMMON, mage.cards.a.AwesomePresence.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Awesome Presence", "23b", Rarity.COMMON, mage.cards.a.AwesomePresence.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Balduvian Dead", 43, Rarity.UNCOMMON, mage.cards.b.BalduvianDead.class));
         cards.add(new SetCardInfo("Balduvian Horde", 65, Rarity.RARE, mage.cards.b.BalduvianHorde.class));
         cards.add(new SetCardInfo("Balduvian Trading Post", 137, Rarity.RARE, mage.cards.b.BalduvianTradingPost.class));
         cards.add(new SetCardInfo("Balduvian War-Makers", "66a", Rarity.COMMON, mage.cards.b.BalduvianWarMakers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Balduvian War-Makers", "66b", Rarity.COMMON, mage.cards.b.BalduvianWarMakers.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Benthic Explorers", "24a", Rarity.COMMON, mage.cards.b.BenthicExplorers.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Benthic Explorers", "24b", Rarity.COMMON, mage.cards.b.BenthicExplorers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bestial Fury", "67a", Rarity.COMMON, mage.cards.b.BestialFury.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bestial Fury", "67b", Rarity.COMMON, mage.cards.b.BestialFury.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bounty of the Hunt", 85, Rarity.UNCOMMON, mage.cards.b.BountyOfTheHunt.class));
@@ -69,6 +57,7 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Deadly Insect", "86b", Rarity.COMMON, mage.cards.d.DeadlyInsect.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Death Spark", 70, Rarity.UNCOMMON, mage.cards.d.DeathSpark.class));
         cards.add(new SetCardInfo("Diminishing Returns", 26, Rarity.RARE, mage.cards.d.DiminishingReturns.class));
+        cards.add(new SetCardInfo("Diseased Vermin", 46, Rarity.UNCOMMON, mage.cards.d.DiseasedVermin.class));
         cards.add(new SetCardInfo("Dystopia", 47, Rarity.RARE, mage.cards.d.Dystopia.class));
         cards.add(new SetCardInfo("Elvish Bard", 87, Rarity.UNCOMMON, mage.cards.e.ElvishBard.class));
         cards.add(new SetCardInfo("Elvish Ranger", "88a", Rarity.COMMON, mage.cards.e.ElvishRanger.class, NON_FULL_USE_VARIOUS));
@@ -82,14 +71,18 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Exile", 3, Rarity.RARE, mage.cards.e.Exile.class));
         cards.add(new SetCardInfo("False Demise", "27a", Rarity.COMMON, mage.cards.f.FalseDemise.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("False Demise", "27b", Rarity.COMMON, mage.cards.f.FalseDemise.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fatal Lore", 48, Rarity.RARE, mage.cards.f.FatalLore.class));
         cards.add(new SetCardInfo("Feast or Famine", "49a", Rarity.COMMON, mage.cards.f.FeastOrFamine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Feast or Famine", "49b", Rarity.COMMON, mage.cards.f.FeastOrFamine.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Fevered Strength", "50a", Rarity.COMMON, mage.cards.f.FeveredStrength.class));
-        cards.add(new SetCardInfo("Fevered Strength", "50b", Rarity.COMMON, mage.cards.f.FeveredStrength.class));
+        cards.add(new SetCardInfo("Fevered Strength", "50a", Rarity.COMMON, mage.cards.f.FeveredStrength.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fevered Strength", "50b", Rarity.COMMON, mage.cards.f.FeveredStrength.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Floodwater Dam", 119, Rarity.RARE, mage.cards.f.FloodwaterDam.class));
         cards.add(new SetCardInfo("Force of Will", 28, Rarity.UNCOMMON, mage.cards.f.ForceOfWill.class));
-        cards.add(new SetCardInfo("Foresight", "29a", Rarity.COMMON, mage.cards.f.Foresight.class));
-        cards.add(new SetCardInfo("Foresight", "29b", Rarity.COMMON, mage.cards.f.Foresight.class));
+        cards.add(new SetCardInfo("Foresight", "29a", Rarity.COMMON, mage.cards.f.Foresight.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Foresight", "29b", Rarity.COMMON, mage.cards.f.Foresight.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fyndhorn Druid", "90a", Rarity.COMMON, mage.cards.f.FyndhornDruid.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fyndhorn Druid", "90b", Rarity.COMMON, mage.cards.f.FyndhornDruid.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gargantuan Gorilla", 91, Rarity.RARE, mage.cards.g.GargantuanGorilla.class));
         cards.add(new SetCardInfo("Gorilla Berserkers", "93a", Rarity.COMMON, mage.cards.g.GorillaBerserkers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gorilla Berserkers", "93b", Rarity.COMMON, mage.cards.g.GorillaBerserkers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gorilla Chieftain", "94a", Rarity.COMMON, mage.cards.g.GorillaChieftain.class, NON_FULL_USE_VARIOUS));
@@ -100,12 +93,14 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Gorilla War Cry", "73b", Rarity.COMMON, mage.cards.g.GorillaWarCry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Guerrilla Tactics", "74a", Rarity.COMMON, mage.cards.g.GuerrillaTactics.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Guerrilla Tactics", "74b", Rarity.COMMON, mage.cards.g.GuerrillaTactics.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gustha's Scepter", 120, Rarity.RARE, mage.cards.g.GusthasScepter.class));
         cards.add(new SetCardInfo("Hail Storm", 95, Rarity.UNCOMMON, mage.cards.h.HailStorm.class));
         cards.add(new SetCardInfo("Heart of Yavimaya", 138, Rarity.RARE, mage.cards.h.HeartOfYavimaya.class));
         cards.add(new SetCardInfo("Helm of Obedience", 121, Rarity.RARE, mage.cards.h.HelmOfObedience.class));
         cards.add(new SetCardInfo("Inheritance", 4, Rarity.UNCOMMON, mage.cards.i.Inheritance.class));
         cards.add(new SetCardInfo("Insidious Bookworms", "51a", Rarity.COMMON, mage.cards.i.InsidiousBookworms.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Insidious Bookworms", "51b", Rarity.COMMON, mage.cards.i.InsidiousBookworms.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ivory Gargoyle", 5, Rarity.RARE, mage.cards.i.IvoryGargoyle.class));
         cards.add(new SetCardInfo("Juniper Order Advocate", 6, Rarity.UNCOMMON, mage.cards.j.JuniperOrderAdvocate.class));
         cards.add(new SetCardInfo("Kaysa", 96, Rarity.RARE, mage.cards.k.Kaysa.class));
         cards.add(new SetCardInfo("Keeper of Tresserhorn", 52, Rarity.RARE, mage.cards.k.KeeperOfTresserhorn.class));
@@ -116,6 +111,8 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Krovikan Horror", 53, Rarity.RARE, mage.cards.k.KrovikanHorror.class));
         cards.add(new SetCardInfo("Krovikan Plague", 54, Rarity.UNCOMMON, mage.cards.k.KrovikanPlague.class));
         cards.add(new SetCardInfo("Lake of the Dead", 140, Rarity.RARE, mage.cards.l.LakeOfTheDead.class));
+        cards.add(new SetCardInfo("Lat-Nam's Legacy", "30a", Rarity.COMMON, mage.cards.l.LatNamsLegacy.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lat-Nam's Legacy", "30b", Rarity.COMMON, mage.cards.l.LatNamsLegacy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Library of Lat-Nam", 31, Rarity.RARE, mage.cards.l.LibraryOfLatNam.class));
         cards.add(new SetCardInfo("Lim-Dul's High Guard", "55a", Rarity.COMMON, mage.cards.l.LimDulsHighGuard.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lim-Dul's High Guard", "55b", Rarity.COMMON, mage.cards.l.LimDulsHighGuard.class, NON_FULL_USE_VARIOUS));
@@ -125,6 +122,7 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Lord of Tresserhorn", 112, Rarity.RARE, mage.cards.l.LordOfTresserhorn.class));
         cards.add(new SetCardInfo("Martyrdom", "10a", Rarity.COMMON, mage.cards.m.Martyrdom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Martyrdom", "10b", Rarity.COMMON, mage.cards.m.Martyrdom.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Misfortune", 113, Rarity.RARE, mage.cards.m.Misfortune.class));
         cards.add(new SetCardInfo("Mishra's Groundbreaker", 123, Rarity.UNCOMMON, mage.cards.m.MishrasGroundbreaker.class));
         cards.add(new SetCardInfo("Misinformation", 56, Rarity.UNCOMMON, mage.cards.m.Misinformation.class));
         cards.add(new SetCardInfo("Mystic Compass", 124, Rarity.UNCOMMON, mage.cards.m.MysticCompass.class));
@@ -136,10 +134,12 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Omen of Fire", 75, Rarity.RARE, mage.cards.o.OmenOfFire.class));
         cards.add(new SetCardInfo("Phantasmal Fiend", "57a", Rarity.COMMON, mage.cards.p.PhantasmalFiend.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Phantasmal Fiend", "57b", Rarity.COMMON, mage.cards.p.PhantasmalFiend.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Phantasmal Sphere", 32, Rarity.RARE, mage.cards.p.PhantasmalSphere.class));
         cards.add(new SetCardInfo("Phelddagrif", 115, Rarity.RARE, mage.cards.p.Phelddagrif.class));
         cards.add(new SetCardInfo("Phyrexian Boon", "58a", Rarity.COMMON, mage.cards.p.PhyrexianBoon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Phyrexian Boon", "58b", Rarity.COMMON, mage.cards.p.PhyrexianBoon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Phyrexian Devourer", 125, Rarity.RARE, mage.cards.p.PhyrexianDevourer.class));
+        cards.add(new SetCardInfo("Phyrexian Portal", 126, Rarity.RARE, mage.cards.p.PhyrexianPortal.class));
         cards.add(new SetCardInfo("Phyrexian War Beast", "127a", Rarity.COMMON, mage.cards.p.PhyrexianWarBeast.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Phyrexian War Beast", "127b", Rarity.COMMON, mage.cards.p.PhyrexianWarBeast.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pillage", 76, Rarity.UNCOMMON, mage.cards.p.Pillage.class));
@@ -150,8 +150,9 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Reprisal", "13b", Rarity.COMMON, mage.cards.r.Reprisal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ritual of the Machine", 59, Rarity.RARE, mage.cards.r.RitualOfTheMachine.class));
         cards.add(new SetCardInfo("Royal Decree", 14, Rarity.RARE, mage.cards.r.RoyalDecree.class));
-        cards.add(new SetCardInfo("Royal Herbalist", "15a", Rarity.COMMON, mage.cards.r.RoyalHerbalist.class));
-        cards.add(new SetCardInfo("Royal Herbalist", "15b", Rarity.COMMON, mage.cards.r.RoyalHerbalist.class));
+        cards.add(new SetCardInfo("Royal Herbalist", "15a", Rarity.COMMON, mage.cards.r.RoyalHerbalist.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Royal Herbalist", "15b", Rarity.COMMON, mage.cards.r.RoyalHerbalist.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Scarab of the Unseen", 128, Rarity.UNCOMMON, mage.cards.s.ScarabOfTheUnseen.class));
         cards.add(new SetCardInfo("School of the Unseen", 141, Rarity.UNCOMMON, mage.cards.s.SchoolOfTheUnseen.class));
         cards.add(new SetCardInfo("Seasoned Tactician", 17, Rarity.UNCOMMON, mage.cards.s.SeasonedTactician.class));
         cards.add(new SetCardInfo("Sheltered Valley", 142, Rarity.RARE, mage.cards.s.ShelteredValley.class));
@@ -168,18 +169,22 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Soldevi Steam Beast", "133a", Rarity.COMMON, mage.cards.s.SoldeviSteamBeast.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Soldevi Steam Beast", "133b", Rarity.COMMON, mage.cards.s.SoldeviSteamBeast.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Soldier of Fortune", 80, Rarity.UNCOMMON, mage.cards.s.SoldierOfFortune.class));
+        cards.add(new SetCardInfo("Spiny Starfish", 35, Rarity.UNCOMMON, mage.cards.s.SpinyStarfish.class));
+        cards.add(new SetCardInfo("Splintering Wind", 99, Rarity.RARE, mage.cards.s.SplinteringWind.class));
         cards.add(new SetCardInfo("Stench of Decay", "61a", Rarity.COMMON, mage.cards.s.StenchOfDecay.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stench of Decay", "61b", Rarity.COMMON, mage.cards.s.StenchOfDecay.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Storm Cauldron", 134, Rarity.RARE, mage.cards.s.StormCauldron.class));
         cards.add(new SetCardInfo("Storm Crow", "36a", Rarity.COMMON, mage.cards.s.StormCrow.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Storm Crow", "36b", Rarity.COMMON, mage.cards.s.StormCrow.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Storm Shaman", "81a", Rarity.COMMON, mage.cards.s.StormShaman.class));
-        cards.add(new SetCardInfo("Storm Shaman", "81b", Rarity.COMMON, mage.cards.s.StormShaman.class));
+        cards.add(new SetCardInfo("Storm Elemental", 37, Rarity.UNCOMMON, mage.cards.s.StormElemental.class));
+        cards.add(new SetCardInfo("Storm Shaman", "81a", Rarity.COMMON, mage.cards.s.StormShaman.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Storm Shaman", "81b", Rarity.COMMON, mage.cards.s.StormShaman.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stromgald Spy", 62, Rarity.UNCOMMON, mage.cards.s.StromgaldSpy.class));
         cards.add(new SetCardInfo("Surge of Strength", 109, Rarity.UNCOMMON, mage.cards.s.SurgeOfStrength.class));
         cards.add(new SetCardInfo("Sustaining Spirit", 18, Rarity.RARE, mage.cards.s.SustainingSpirit.class));
         cards.add(new SetCardInfo("Swamp Mosquito", "63a", Rarity.COMMON, mage.cards.s.SwampMosquito.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp Mosquito", "63b", Rarity.COMMON, mage.cards.s.SwampMosquito.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sworn Defender", 19, Rarity.RARE, mage.cards.s.SwornDefender.class));
         cards.add(new SetCardInfo("Thawing Glaciers", 144, Rarity.RARE, mage.cards.t.ThawingGlaciers.class));
         cards.add(new SetCardInfo("Thought Lash", 39, Rarity.RARE, mage.cards.t.ThoughtLash.class));
         cards.add(new SetCardInfo("Tidal Control", 40, Rarity.RARE, mage.cards.t.TidalControl.class));

@@ -1,33 +1,8 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards.s;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -45,13 +20,12 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 
 /**
- *
  * @author maxlebedev
  */
-public class SanctumPrelate extends CardImpl {
+public final class SanctumPrelate extends CardImpl {
 
     public SanctumPrelate(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(2);
@@ -88,15 +62,17 @@ class ChooseNumberEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            int numberChoice = controller.announceXMana(0, Integer.MAX_VALUE, "Choose a number. Noncreature spells with the chosen converted mana cost can't be cast", game, source);
+            game.getState().setValue(source.getSourceId().toString(), numberChoice);
 
-        int numberChoice = controller.announceXMana(0, Integer.MAX_VALUE, "Choose a number. Noncreature spells with the chosen converted mana cost can't be cast", game, source);
-        game.getState().setValue(source.getSourceId().toString(), numberChoice);
+            Permanent permanent = game.getPermanentEntering(source.getSourceId());
+            if(permanent != null) {
+                permanent.addInfo("chosen players", "<font color = 'blue'>Chosen Number: " + numberChoice + "</font>", game);
 
-        Permanent permanent = game.getPermanentEntering(source.getSourceId());
-        permanent.addInfo("chosen players", "<font color = 'blue'>Chosen Number: "+ numberChoice +"</font>", game);
-
-        game.informPlayers(permanent.getLogName() + ", chosen number: "+numberChoice);
-
+                game.informPlayers(permanent.getLogName() + ", chosen number: " + numberChoice);
+            }
+        }
         return true;
     }
 
@@ -113,6 +89,7 @@ class ChooseNumberEffect extends OneShotEffect {
 class SanctumPrelateReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
     Integer choiceValue;
+
     public SanctumPrelateReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Noncreature spells with the chosen converted mana cost can't be cast";
@@ -150,8 +127,8 @@ class SanctumPrelateReplacementEffect extends ContinuousRuleModifyingEffectImpl 
     public boolean applies(GameEvent event, Ability source, Game game) {
         choiceValue = (Integer) game.getState().getValue(source.getSourceId().toString());
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        
-        if (spell != null && !spell.isCreature()){
+
+        if (spell != null && !spell.isCreature()) {
             return spell.getConvertedManaCost() == choiceValue;
         }
         return false;

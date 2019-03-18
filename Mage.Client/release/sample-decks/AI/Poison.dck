@@ -1,0 +1,98 @@
+1 [RAV:231] Sisters of Stone Death
+1 [THS:201] Reaper of the Wilds
+1 [FUT:171] Llanowar Reborn
+1 [KLD:243] Blooming Marsh
+1 [ALA:225] Jund Panorama
+1 [MIR:12] Crypt Cobra
+1 [ZEN:221] Oran-Rief, the Vastwood
+1 [STH:132] Mox Diamond
+1 [M15:194] Reclamation Sage
+NAME:Poison
+1 [M13:168] Elvish Archdruid
+1 [STH:137] Volrath's Stronghold
+1 [FUT:174] Dryad Arbor
+1 [M15:101] Indulgent Tormentor
+1 [DKA:125] Scorned Villager
+9 [DOM:266] Forest
+1 [USG:321] Gaea's Cradle
+1 [ORI:101] Graveblade Marauder
+1 [MOR:140] Wolf-Skull Shaman
+1 [RTR:229] Golgari Keyrune
+1 [GTC:123] Gyre Sage
+1 [CON:144] Rupture Spire
+1 [LRW:268] Gilt-Leaf Palace
+1 [ORI:100] Gnarlroot Trapper
+1 [CHK:236] Orochi Sustainer
+1 [THS:153] Bow of Nylea
+1 [SOM:79] Skithiryx, the Blight Dragon
+1 [MBS:94] Viridian Corrupter
+1 [SOM:170] Leaden Myr
+1 [C13:84] Ophiomancer
+1 [M13:118] Xathrid Gorgon
+1 [JOU:154] Pharika, God of Affliction
+1 [MBS:96] Glissa, the Traitor
+1 [NPH:111] Glistener Elf
+1 [MBS:90] Rot Wolf
+1 [M15:183] Life's Legacy
+1 [RAV:262] Golgari Signet
+1 [EMN:159] Gnarlwood Dryad
+1 [M12:195] Skinshifter
+1 [NPH:119] Phyrexian Swarmlord
+1 [DGM:26] Maze Abomination
+1 [OGW:172] Holdout Settlement
+1 [M14:168] Deadly Recluse
+1 [OGW:171] Hissing Quagmire
+1 [AER:70] Resourceful Return
+1 [SOI:203] Duskwatch Recruiter
+1 [M14:207] Darksteel Ingot
+1 [SOI:202] Deathcap Cultivator
+1 [MBS:125] Plague Myr
+1 [BNG:68] Fate Unraveler
+1 [BFZ:225] Pathway Arrows
+1 [ODY:282] Werebear
+1 [VMA:250] Deathreap Ritual
+1 [MBS:121] Phyrexian Juggernaut
+1 [SOM:166] Ichorclaw Myr
+1 [CHK:238] Sachi, Daughter of Seshiro
+1 [LRW:250] Nath of the Gilt-Leaf
+1 [WWK:140] Quicksand
+1 [SOM:185] Necropede
+1 [SOM:140] Bladed Pinions
+1 [SOM:66] Hand of the Praetors
+1 [CMA:186] Meren of Clan Nel Toth
+1 [SHM:273] Leechridden Swamp
+1 [NPH:72] Reaper of Sheoldred
+1 [MIR:136] Sabertooth Cobra
+1 [RTR:243] Overgrown Tomb
+1 [AER:106] Druid of the Cowl
+1 [AKH:237] Throne of the God-Pharaoh
+1 [AVR:107] Harvester of Souls
+1 [DTK:204] Shaman of Forgotten Ways
+1 [BFZ:170] Beastcaller Savant
+1 [BNG:122] Graverobber Spider
+1 [DTK:123] Ukud Cobra
+1 [MBS:57] Virulent Wound
+1 [EVE:79] Twinblade Slasher
+1 [MBS:77] Blightwidow
+1 [MRD:270] Viridian Longbow
+1 [EVE:124] Noxious Hatchling
+1 [MOR:145] Thornbite Staff
+1 [ALA:71] Deathgreeter
+1 [FRF:169] Jungle Hollow
+1 [BOK:136] Matsu-Tribe Sniper
+1 [RAV:283] Svogthos, the Restless Tomb
+1 [KTK:152] Sultai Flayer
+1 [RTR:198] Sluiceway Scorpion
+1 [M12:81] Blood Seeker
+1 [AER:117] Narnam Renegade
+6 [DOM:258] Swamp
+1 [LRW:219] Immaculate Magistrate
+1 [EMN:175] Ulvenwald Captive
+1 [THS:91] Hythonia the Cruel
+1 [APC:109] Llanowar Dead
+1 [MBS:145] Inkmoth Nexus
+1 [BFZ:240] Mortuary Mire
+1 [SOM:223] Wurmcoil Engine
+1 [AKH:187] Sixth Sense
+LAYOUT MAIN:(1,11)(CARD_TYPE,false,50)|([SOM:170],[MBS:121],[MBS:125],[SOM:166],[SOM:185],[SOM:223])([THS:153])([MOR:145])([RTR:229],[BFZ:225],[SOM:140],[M14:207],[STH:132],[RAV:262],[AKH:237],[MRD:270])([JOU:154],[BNG:68])([FUT:174])([RAV:231],[M15:194],[M14:168],[M15:101],[DKA:125],[ORI:101],[ORI:100],[EMN:159],[M12:195],[NPH:119],[DGM:26],[SOI:203],[SOI:202],[LRW:250],[SOM:66],[NPH:72],[NPH:111],[AER:106],[DTK:123],[EVE:79],[EVE:124],[RTR:198],[AER:117],[EMN:175],[THS:91],[AVR:107],[THS:201],[ALA:71],[MIR:12],[MOR:140],[GTC:123],[CHK:236],[SOM:79],[MBS:94],[C13:84],[M13:118],[MBS:96],[MBS:90],[CMA:186],[M13:168],[CHK:238],[ODY:282],[MIR:136],[DTK:204],[BFZ:170],[BNG:122],[MBS:77],[BOK:136],[KTK:152],[M12:81],[LRW:219],[APC:109])([VMA:250],[AKH:187])([MBS:57])([KLD:243],[ZEN:221],[DOM:266],[DOM:266],[DOM:258],[DOM:258],[USG:321],[LRW:268],[RTR:243],[OGW:172],[OGW:171],[FUT:171],[DOM:266],[DOM:266],[DOM:266],[DOM:266],[DOM:266],[DOM:258],[WWK:140],[FRF:169],[MBS:145],[BFZ:240],[ALA:225],[DOM:258],[DOM:266],[STH:137],[SHM:273],[DOM:258],[DOM:258],[CON:144],[DOM:266],[RAV:283])([M15:183],[AER:70])
+LAYOUT SIDEBOARD:(0,0)(CMC,true,50)|

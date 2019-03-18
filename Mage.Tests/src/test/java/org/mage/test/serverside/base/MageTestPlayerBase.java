@@ -1,6 +1,7 @@
 package org.mage.test.serverside.base;
 
 import mage.cards.Card;
+import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.PhaseStep;
@@ -10,7 +11,6 @@ import mage.game.Game;
 import mage.game.match.MatchType;
 import mage.game.permanent.PermanentCard;
 import mage.game.tournament.TournamentType;
-import mage.player.ai.ComputerPlayer;
 import mage.players.Player;
 import mage.server.game.GameFactory;
 import mage.server.util.ConfigSettings;
@@ -21,6 +21,7 @@ import mage.util.Copier;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.junit.BeforeClass;
+import org.mage.test.player.TestComputerPlayer;
 import org.mage.test.player.TestPlayer;
 
 import java.io.File;
@@ -50,6 +51,8 @@ public abstract class MageTestPlayerBase {
     protected Map<TestPlayer, List<Card>> libraryCards = new HashMap<>();
 
     protected Map<TestPlayer, Map<Zone, String>> commands = new HashMap<>();
+
+    protected static Map<String, DeckCardLists> loadedDeckCardLists = new HashMap<>(); // test decks buffer
 
     protected TestPlayer playerA;
     protected TestPlayer playerB;
@@ -158,7 +161,7 @@ public abstract class MageTestPlayerBase {
     protected void parseScenario(String filename) throws FileNotFoundException {
         parserState = ParserState.INIT;
         File f = new File(filename);
-        try(Scanner scanner = new Scanner(f)) {
+        try (Scanner scanner = new Scanner(f)) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine().trim();
                 if (line == null || line.isEmpty() || line.startsWith("#")) {
@@ -327,7 +330,13 @@ public abstract class MageTestPlayerBase {
     }
 
     protected TestPlayer createPlayer(String name, RangeOfInfluence rangeOfInfluence) {
-        return new TestPlayer(new ComputerPlayer(name, rangeOfInfluence));
+        return new TestPlayer(new TestComputerPlayer(name, rangeOfInfluence));
     }
 
+    public void setStrictChooseMode(boolean enable) {
+        if (playerA != null) playerA.setChooseStrictMode(enable);
+        if (playerB != null) playerB.setChooseStrictMode(enable);
+        if (playerC != null) playerC.setChooseStrictMode(enable);
+        if (playerD != null) playerD.setChooseStrictMode(enable);
+    }
 }

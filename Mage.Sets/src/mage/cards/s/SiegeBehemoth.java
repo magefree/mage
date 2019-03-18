@@ -1,53 +1,29 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.DamageAsThoughNotBlockedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceAttackingCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
  * @author LevelX2
  */
-public class SiegeBehemoth extends CardImpl {
+public final class SiegeBehemoth extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each creature you control");
 
@@ -60,15 +36,9 @@ public class SiegeBehemoth extends CardImpl {
 
         // Hexproof
         this.addAbility(HexproofAbility.getInstance());
+
         // As long as Siege Behemoth is attacking, for each creature you control, you may have that creature assign its combat damage as though it weren't blocked.
-        // TODO: DamageAsThoughNotBlockedAbility should be done by rule modifying effect instead of adding ability (if controlled creature looses all abilities it should'nt loose this effect)
-        this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
-                new ConditionalContinuousEffect(
-                        new GainAbilityControlledEffect(DamageAsThoughNotBlockedAbility.getInstance(), Duration.WhileOnBattlefield, filter),
-                        SourceAttackingCondition.instance,
-                        "As long as {this} is attacking, for each creature you control, you may have that creature assign its combat damage as though it weren't blocked"
-                )));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SiegeBehemothEffect()));
     }
 
     public SiegeBehemoth(final SiegeBehemoth card) {
@@ -78,5 +48,41 @@ public class SiegeBehemoth extends CardImpl {
     @Override
     public SiegeBehemoth copy() {
         return new SiegeBehemoth(this);
+    }
+}
+
+class SiegeBehemothEffect extends AsThoughEffectImpl {
+
+    public SiegeBehemothEffect() {
+        super(AsThoughEffectType.DAMAGE_NOT_BLOCKED, Duration.WhileOnBattlefield, Outcome.Damage);
+        this.staticText = "As long as {this} is attacking, for each creature you control, you may have that creature assign its combat damage as though it weren't blocked";
+    }
+
+    public SiegeBehemothEffect(SiegeBehemothEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
+        if (sourcePermanent != null && sourcePermanent.isAttacking()){
+            Player controller = game.getPlayer(source.getControllerId());
+            Permanent otherCreature = game.getPermanent(sourceId);
+            if (controller != null && otherCreature != null && otherCreature.isControlledBy(controller.getId())){
+                return controller.chooseUse(Outcome.Damage, "Do you wish to assign damage for "
+                        + otherCreature.getLogName() + " as though it weren't blocked?", source, game);
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public SiegeBehemothEffect copy() {
+        return new SiegeBehemothEffect(this);
     }
 }

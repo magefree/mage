@@ -1,33 +1,5 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
 package org.mage.test.multiplayer;
 
-import java.io.FileNotFoundException;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
@@ -38,8 +10,9 @@ import mage.game.GameException;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestMultiPlayerBase;
 
+import java.io.FileNotFoundException;
+
 /**
- *
  * @author LevelX2
  */
 public class MyriadTest extends CardTestMultiPlayerBase {
@@ -98,27 +71,32 @@ public class MyriadTest extends CardTestMultiPlayerBase {
         // Myriad (Whenever this creature attacks, for each opponent other than the defending player, put a token that's a copy of this creature onto the battlefield tapped and attacking that player or a planeswalker he or she controls. Exile those tokens at the end of combat.)
         addCard(Zone.BATTLEFIELD, playerD, "Caller of the Pack"); // 8/6
 
+        // turns: A, D, C, B
+
         // +1: You gain 2 life.
         // -1: Put a +1/+1 counter on each creature you control. Those creatures gain vigilance until end of turn.
         // -6: Create a white Avatar creature token. It has "This creature's power and toughness are each equal to your life total."
         addCard(Zone.BATTLEFIELD, playerA, "Ajani Goldmane");
 
+        // +2 life
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1:");
+        checkLife("must have +2 life", 2, PhaseStep.PRECOMBAT_MAIN, playerA, 40 + 2);
 
+        // D attack C, create 2 copy of caller (for each opponent exclude defender = 2) and attack to ajani
         attack(2, playerD, "Caller of the Pack", playerC);
-        addTarget(playerD, "Ajani Goldmane");
+        addTarget(playerD, "Ajani Goldmane"); // select ajani instead playerA for pack attack
+        checkPermanentCount("must have 3 packs", 2, PhaseStep.END_COMBAT, playerD, "Caller of the Pack", 3);
+        checkPermanentCount("ajani must die", 2, PhaseStep.END_COMBAT, playerA, "Ajani Goldmane", 0);
+        checkLife("pack must not damage playerA", 2, PhaseStep.END_COMBAT, playerA, 40 + 2);
+        checkLife("pack must damage playerB by 8", 2, PhaseStep.END_COMBAT, playerB, 40 - 8);
+        checkLife("pack must damage playerC", 2, PhaseStep.END_COMBAT, playerC, 40 - 8);
+        checkLife("pack must not damage playerD", 2, PhaseStep.END_COMBAT, playerD, 40);
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
         assertPermanentCount(playerD, "Caller of the Pack", 1);
         assertGraveyardCount(playerA, "Ajani Goldmane", 1);
-
-        assertLife(playerA, 42);
-        assertLife(playerB, 32);
-        assertLife(playerC, 32);
-        assertLife(playerD, 40);
-
     }
 
     /**

@@ -3,6 +3,8 @@ package mage.abilities.dynamicvalue.common;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
+import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -13,26 +15,38 @@ import mage.players.Player;
  */
 public class HighestConvertedManaCostValue implements DynamicValue {
 
+    private final FilterPermanent filter;
+
+    public HighestConvertedManaCostValue() {
+        this(StaticFilters.FILTER_PERMANENTS);
+    }
+
+    public HighestConvertedManaCostValue(FilterPermanent filter) {
+        this.filter = filter;
+    }
+
+    public HighestConvertedManaCostValue(final HighestConvertedManaCostValue dynamicValue){
+        super();
+        this.filter = dynamicValue.filter.copy();
+    }
+
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int highCMC = 0;
         Player controller = game.getPlayer(sourceAbility.getControllerId());
-        if (controller != null) {
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(controller.getId())) {
-                if (permanent.getSpellAbility() != null) {
-                    int cmc = permanent.getSpellAbility().getManaCosts().convertedManaCost();
-                    if (cmc > highCMC) {
-                        highCMC = cmc;
-                    }
-                }
-            }
+        if (controller == null) {
+            return 0;
+        }
+        int highCMC = 0;
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controller.getId(), game)) {
+            int cmc = permanent.getConvertedManaCost();
+            highCMC = Math.max(highCMC, cmc);
         }
         return highCMC;
     }
 
     @Override
     public DynamicValue copy() {
-        return new HighestConvertedManaCostValue();
+        return new HighestConvertedManaCostValue(this);
     }
 
     @Override

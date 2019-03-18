@@ -1,10 +1,8 @@
 package mage.client.util.gui;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Locale;
-import javax.swing.*;
 import mage.client.MageFrame;
+import mage.client.dialog.PreferencesDialog;
+import mage.client.table.PlayersChatPanel;
 import mage.client.util.GUISizeHelper;
 import mage.constants.*;
 import mage.view.CardView;
@@ -14,6 +12,13 @@ import org.jdesktop.swingx.JXPanel;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.card.arcane.UI;
 
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Locale;
+
+import static mage.client.dialog.PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE;
+
 public final class GuiDisplayUtil {
 
     private static final Font cardNameFont = new Font("Calibri", Font.BOLD, 15);
@@ -22,8 +27,53 @@ public final class GuiDisplayUtil {
 
     public static class TextLines {
 
-        public int basicTextLength;
-        public ArrayList<String> lines;
+        private int basicTextLength;
+        private java.util.List<String> lines;
+
+        public int getBasicTextLength() {
+            return basicTextLength;
+        }
+
+        public void setBasicTextLength(int basicTextLength) {
+            this.basicTextLength = basicTextLength;
+        }
+
+        public java.util.List<String> getLines() {
+            return lines;
+        }
+
+        public void setLines(java.util.List<String> lines) {
+            this.lines = lines;
+        }
+    }
+
+    public static void restoreDividerLocations(Rectangle bounds, String lastDividerLocation, JComponent component) {
+        String currentBounds = Double.toString(bounds.getWidth()) + 'x' + bounds.getHeight();
+        String savedBounds = PreferencesDialog.getCachedValue(KEY_MAGE_PANEL_LAST_SIZE, null);
+        // use divider positions only if screen size is the same as it was the time the settings were saved
+        if (savedBounds != null && savedBounds.equals(currentBounds)) {
+            if (lastDividerLocation != null && component != null) {
+                if (component instanceof JSplitPane) {
+                    JSplitPane jSplitPane = (JSplitPane) component;
+                    jSplitPane.setDividerLocation(Integer.parseInt(lastDividerLocation));
+                }
+
+                if (component instanceof PlayersChatPanel) {
+                    PlayersChatPanel playerChatPanel = (PlayersChatPanel) component;
+                    playerChatPanel.setSplitDividerLocation(Integer.parseInt(lastDividerLocation));
+                }
+            }
+        }
+    }
+
+    public static void saveCurrentBoundsToPrefs() {
+        Rectangle rec = MageFrame.getDesktop().getBounds();
+        String currentBounds = Double.toString(rec.getWidth()) + 'x' + rec.getHeight();
+        PreferencesDialog.saveValue(KEY_MAGE_PANEL_LAST_SIZE, currentBounds);
+    }
+
+    public static void saveDividerLocationToPrefs(String dividerPrefKey, int position) {
+        PreferencesDialog.saveValue(dividerPrefKey, Integer.toString(position));
     }
 
     public static JXPanel getDescription(CardView card, int width, int height) {
@@ -131,9 +181,9 @@ public final class GuiDisplayUtil {
 
     public static TextLines getTextLinesfromCardView(CardView card) {
         TextLines textLines = new TextLines();
-        textLines.lines = new ArrayList<>(card.getRules());
+        textLines.setLines(new ArrayList<>(card.getRules()));
         for (String rule : card.getRules()) {
-            textLines.basicTextLength += rule.length();
+            textLines.setBasicTextLength(textLines.getBasicTextLength() + rule.length());
         }
         if (card.getMageObjectType().canHaveCounters()) {
             ArrayList<CounterView> counters = new ArrayList<>();
@@ -158,18 +208,22 @@ public final class GuiDisplayUtil {
                         index++;
                     }
                 }
-                textLines.lines.add(sb.toString());
-                textLines.basicTextLength += 50;
+                textLines.getLines().add(sb.toString());
+                textLines.setBasicTextLength(textLines.getBasicTextLength() + 50);
             }
         }
         if (card.getMageObjectType().isPermanent() && card instanceof PermanentView) {
             int damage = ((PermanentView) card).getDamage();
             if (damage > 0) {
-                textLines.lines.add("<span color='red'><b>Damage dealt:</b> " + damage + "</span>");
-                textLines.basicTextLength += 50;
+                textLines.getLines().add("<span color='red'><b>Damage dealt:</b> " + damage + "</span>");
+                textLines.setBasicTextLength(textLines.getBasicTextLength() + 50);
             }
         }
         return textLines;
+    }
+
+    public static String getHintIconHtml(String iconName, int symbolSize) {
+        return "<img src='" + getResourcePath("hint/" + iconName + ".png") + "' alt='" + iconName + "' width=" + symbolSize + " height=" + symbolSize + ">";
     }
 
     public static StringBuilder getRulefromCardView(CardView card, TextLines textLines) {
@@ -204,7 +258,7 @@ public final class GuiDisplayUtil {
         buffer.append("<tr><td valign='top'><b>");
         buffer.append(card.getDisplayName());
         if (card.isGameObject()) {
-            buffer.append(" [").append(card.getId().toString().substring(0, 3)).append(']');
+            buffer.append(" [").append(card.getId().toString(), 0, 3).append(']');
         }
         buffer.append("</b></td><td align='right' valign='top' style='width:");
         buffer.append(symbolCount * GUISizeHelper.cardTooltipFontSize);
@@ -312,8 +366,8 @@ public final class GuiDisplayUtil {
                 }
             }
         }
-        if (!textLines.lines.isEmpty()) {
-            for (String textLine : textLines.lines) {
+        if (!textLines.getLines().isEmpty()) {
+            for (String textLine : textLines.getLines()) {
                 if (textLine != null && !textLine.replace(".", "").trim().isEmpty()) {
                     rule.append("<p style='margin: 2px'>").append(textLine).append("</p>");
                 }

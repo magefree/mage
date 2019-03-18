@@ -1,30 +1,4 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards.c;
 
 import mage.abilities.Ability;
@@ -38,7 +12,7 @@ import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
 
@@ -46,16 +20,16 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class CandlesGlow extends CardImpl {
+public final class CandlesGlow extends CardImpl {
 
     public CandlesGlow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
         this.subtype.add(SubType.ARCANE);
 
 
-        // Prevent the next 3 damage that would be dealt to target creature or player this turn. You gain life equal to the damage prevented this way.
+        // Prevent the next 3 damage that would be dealt to any target this turn. You gain life equal to the damage prevented this way.
         this.getSpellAbility().addEffect(new CandlesGlowPreventDamageTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
         // Splice onto Arcane {1}{W}
         this.addAbility(new SpliceOntoArcaneAbility("{1}{W}"));
     }
@@ -76,7 +50,7 @@ class CandlesGlowPreventDamageTargetEffect extends PreventionEffectImpl {
 
     public CandlesGlowPreventDamageTargetEffect(Duration duration) {
         super(duration);
-        staticText = "Prevent the next 3 damage that would be dealt to target creature or player this turn. You gain life equal to the damage prevented this way";
+        staticText = "Prevent the next 3 damage that would be dealt to any target this turn. You gain life equal to the damage prevented this way";
     }
 
     public CandlesGlowPreventDamageTargetEffect(final CandlesGlowPreventDamageTargetEffect effect) {
@@ -117,9 +91,9 @@ class CandlesGlowPreventDamageTargetEffect extends PreventionEffectImpl {
             if (prevented > 0) {
                 Player controller = game.getPlayer(source.getControllerId());
                 if (controller != null) {
-                    controller.gainLife(prevented, game);
-                    game.informPlayers(new StringBuilder("Candles' Glow: Prevented ").append(prevented).append(" damage ").toString());
-                    game.informPlayers(new StringBuilder("Candles' Glow: ").append(controller.getLogName()).append(" gained ").append(prevented).append("life").toString());
+                    controller.gainLife(prevented, game, source);
+                    game.informPlayers("Candles' Glow: Prevented " + prevented + " damage ");
+                    game.informPlayers("Candles' Glow: " + controller.getLogName() + " gained " + prevented + "life");
                 }
             }
         }

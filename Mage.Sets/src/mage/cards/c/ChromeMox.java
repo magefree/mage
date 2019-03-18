@@ -1,34 +1,5 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.cards.c;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.Mana;
 import mage.ObjectColor;
@@ -56,18 +27,21 @@ import mage.target.TargetCard;
 import mage.util.CardUtil;
 import mage.util.GameLog;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
-public class ChromeMox extends CardImpl {
+public final class ChromeMox extends CardImpl {
 
     public ChromeMox(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{0}");
 
         // Imprint - When Chrome Mox enters the battlefield, you may exile a nonartifact, nonland card from your hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ChromeMoxEffect(), true));
-        // {tap}: Add one mana of any of the exiled card's colors to your mana pool.
+        // {T}: Add one mana of any of the exiled card's colors.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new ChromeMoxManaEffect(), new TapSourceCost()));
     }
 
@@ -136,7 +110,7 @@ class ChromeMoxManaEffect extends ManaEffect {
 
     ChromeMoxManaEffect() {
         super();
-        staticText = "Add one mana of any of the exiled card's colors to your mana pool";
+        staticText = "Add one mana of any of the exiled card's colors";
     }
 
     ChromeMoxManaEffect(ChromeMoxManaEffect effect) {
@@ -150,11 +124,55 @@ class ChromeMoxManaEffect extends ManaEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Mana mana = getMana(game, source);
+            checkToFirePossibleEvents(mana, game, source);
+            controller.getManaPool().addMana(mana, game, source);
+            return true;
+
+        }
+        return false;
+    }
+
+    @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
+        List<Mana> netMana = new ArrayList<>();
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            List<UUID> imprinted = permanent.getImprinted();
+            if (imprinted != null && !imprinted.isEmpty()) {
+                Card imprintedCard = game.getCard(imprinted.get(0));
+                if (imprintedCard != null) {
+                    ObjectColor color = imprintedCard.getColor(game);
+                    if (color.isBlack()) {
+                        netMana.add(Mana.BlackMana(1));
+                    }
+                    if (color.isRed()) {
+                        netMana.add(Mana.RedMana(1));
+                    }
+                    if (color.isBlue()) {
+                        netMana.add(Mana.BlueMana(1));
+                    }
+                    if (color.isGreen()) {
+                        netMana.add(Mana.GreenMana(1));
+                    }
+                    if (color.isWhite()) {
+                        netMana.add(Mana.WhiteMana(1));
+                    }
+                }
+            }
+        }
+        return netMana;
+    }
+
+    @Override
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         Player player = game.getPlayer(source.getControllerId());
         if (permanent != null && player != null) {
             List<UUID> imprinted = permanent.getImprinted();
-            if (!imprinted.isEmpty()) {
+            if (imprinted != null && !imprinted.isEmpty()) {
                 Card imprintedCard = game.getCard(imprinted.get(0));
                 if (imprintedCard != null) {
                     Choice choice = new ChoiceColor(true);
@@ -176,14 +194,14 @@ class ChromeMoxManaEffect extends ManaEffect {
                     if (color.isWhite()) {
                         choice.getChoices().add("White");
                     }
-
+                    Mana mana = new Mana();
                     if (!choice.getChoices().isEmpty()) {
-                        Mana mana = new Mana();
+
                         if (choice.getChoices().size() == 1) {
                             choice.setChoice(choice.getChoices().iterator().next());
                         } else {
                             if (!player.choose(outcome, choice, game)) {
-                                return false;
+                                return null;
                             }
                         }
                         switch (choice.getChoice()) {
@@ -202,23 +220,15 @@ class ChromeMoxManaEffect extends ManaEffect {
                             case "White":
                                 player.getManaPool().addMana(Mana.WhiteMana(1), game, source);
                                 break;
-                            case "Colorless":
-                                player.getManaPool().addMana(Mana.ColorlessMana(1), game, source);
-                                break;
                             default:
                                 break;
                         }
-                        checkToFirePossibleEvents(mana, game, source);
-                        player.getManaPool().addMana(mana, game, source);
+
                     }
+                    return mana;
                 }
             }
         }
-        return true;
-    }
-
-    @Override
-    public Mana getMana(Game game, Ability source) {
         return null;
     }
 

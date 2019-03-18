@@ -1,30 +1,4 @@
-/*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.server.util;
 
 import mage.utils.StreamUtils;
@@ -34,6 +8,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.Executors;
@@ -78,7 +53,6 @@ public enum ServerMessagesUtil {
     }
 
 
-
     public List<String> getMessages() {
         lock.readLock().lock();
         try {
@@ -92,9 +66,7 @@ public enum ServerMessagesUtil {
         log.debug("Reading server messages...");
         List<String> motdMessages = readFromFile();
         List<String> newMessages = new ArrayList<>();
-        if (motdMessages != null) {
-            newMessages.addAll(motdMessages);
-        }
+        newMessages.addAll(motdMessages);
         newMessages.add(getServerStatistics());
         newMessages.add(getServerStatistics2());
 
@@ -109,7 +81,7 @@ public enum ServerMessagesUtil {
 
     private List<String> readFromFile() {
         if (ignore) {
-            return null;
+            return Collections.emptyList();
         }
         File externalFile = null;
         if (pathToExternalMessages != null) {
@@ -146,23 +118,20 @@ public enum ServerMessagesUtil {
         }
         if (is == null) {
             log.warn("Couldn't find server.msg");
-            return null;
+            return Collections.emptyList();
         }
 
-        Scanner scanner = null;
         List<String> newMessages = new ArrayList<>();
-        try {
-            scanner = new Scanner(is);
+        try(Scanner scanner = new Scanner(is)) {
             while (scanner.hasNextLine()) {
                 String message = scanner.nextLine();
                 if (!message.trim().isEmpty()) {
                     newMessages.add(message.trim());
                 }
             }
-        } catch(Exception e) {
-            log.error(e,e);
+        } catch (Exception e) {
+            log.error(e, e);
         } finally {
-            StreamUtils.closeQuietly(scanner);
             StreamUtils.closeQuietly(is);
         }
         return newMessages;
@@ -194,7 +163,7 @@ public enum ServerMessagesUtil {
         return statistics.toString();
     }
 
-//    private Timer timer = new Timer(1000 * 60, new ActionListener() {
+    //    private Timer timer = new Timer(1000 * 60, new ActionListener() {
 //        public void actionPerformed(ActionEvent e) {
 //            reloadMessages();
 //        }

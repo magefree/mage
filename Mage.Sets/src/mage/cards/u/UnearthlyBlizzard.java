@@ -42,7 +42,7 @@ import java.util.UUID;
 /**
  * @author LevelX
  */
-public class UnearthlyBlizzard extends CardImpl {
+public final class UnearthlyBlizzard extends CardImpl {
 
     public UnearthlyBlizzard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");

@@ -1,30 +1,4 @@
-/*
- * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.client.dialog;
 
 import java.io.FileNotFoundException;
@@ -33,7 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import javax.swing.*;
-import mage.cards.decks.importer.DeckImporterUtil;
+
+import mage.cards.decks.importer.DeckImporter;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.components.MageComponents;
@@ -77,6 +52,7 @@ public class NewTableDialog extends MageDialog {
         this.spnNumWins.setModel(new SpinnerNumberModel(1, 1, 5, 1));
         this.spnFreeMulligans.setModel(new SpinnerNumberModel(0, 0, 5, 1));
         this.spnQuitRatio.setModel(new SpinnerNumberModel(100, 0, 100, 5));
+        this.spnMinimumRating.setModel(new SpinnerNumberModel(0, 0, 3000, 10));
         this.spnEdhPowerLevel.setModel(new SpinnerNumberModel(100, 0, 100, 5));
         MageFrame.getUI().addButton(MageComponents.NEW_TABLE_OK_BUTTON, btnOK);
     }
@@ -128,8 +104,10 @@ public class NewTableDialog extends MageDialog {
         btnPreviousConfiguration2 = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         lblQuitRatio = new javax.swing.JLabel();
+        lblMinimumRating = new javax.swing.JLabel();
         lblEdhPowerLevel = new javax.swing.JLabel();
         spnQuitRatio = new javax.swing.JSpinner();
+        spnMinimumRating = new javax.swing.JSpinner();
         spnEdhPowerLevel = new javax.swing.JSpinner();
 
         setTitle("New Table");
@@ -212,9 +190,11 @@ public class NewTableDialog extends MageDialog {
         btnCancel.addActionListener(evt -> btnCancelActionPerformed(evt));
 
         lblQuitRatio.setText("Allowed quit %");
+        lblMinimumRating.setText("Minimum rating");
         lblEdhPowerLevel.setText("EDH power level");
 
         spnQuitRatio.setToolTipText("Players with quit % more than this value can't join this table");
+        spnMinimumRating.setToolTipText("Players with rating less than this value can't join this table");
         spnEdhPowerLevel.setToolTipText("Players with decks with a higher power level can't join this table");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -265,9 +245,10 @@ public class NewTableDialog extends MageDialog {
                                                                 .addComponent(lblQuitRatio)
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                 .addComponent(spnQuitRatio, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addComponent(lblEdhPowerLevel)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                .addComponent(lblMinimumRating)
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addComponent(spnEdhPowerLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                                .addComponent(spnMinimumRating, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                         .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
@@ -296,7 +277,11 @@ public class NewTableDialog extends MageDialog {
                                                 .addGap(18, 18, 18)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addComponent(lblNumWins)
-                                                        .addComponent(spnNumWins, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                        .addComponent(spnNumWins, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(lblEdhPowerLevel)
+                                                        .addComponent(spnEdhPowerLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addComponent(jSeparator2)
                                         .addComponent(player1Panel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(pnlOtherPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -323,14 +308,13 @@ public class NewTableDialog extends MageDialog {
                                         .addComponent(cbTimeLimit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(cbDeckType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(lbDeckType)
+                                        .addComponent(cbDeckType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(chkRated)
                                         .addComponent(lblQuitRatio)
-                                        .addComponent(chkRated)
                                         .addComponent(spnQuitRatio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lblEdhPowerLevel)
-                                        .addComponent(chkRated)
-                                        .addComponent(spnEdhPowerLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(lblMinimumRating)
+                                        .addComponent(spnMinimumRating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -352,6 +336,7 @@ public class NewTableDialog extends MageDialog {
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addComponent(lblSkillLevel)
                                                         .addComponent(lblNumWins)
+                                                        .addComponent(lblEdhPowerLevel)
                                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                                 .addComponent(lblRange)
                                                                 .addComponent(lblAttack)))
@@ -360,7 +345,8 @@ public class NewTableDialog extends MageDialog {
                                                         .addComponent(cbRange, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(cbAttackOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(cbSkillLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(spnNumWins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                        .addComponent(spnNumWins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(spnEdhPowerLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -420,6 +406,7 @@ public class NewTableDialog extends MageDialog {
         options.setFreeMulligans((Integer) this.spnFreeMulligans.getValue());
         options.setPassword(this.txtPassword.getText());
         options.setQuitRatio((Integer) this.spnQuitRatio.getValue());
+        options.setMinimumRating((Integer) this.spnMinimumRating.getValue());
         options.setEdhPowerLevel((Integer) this.spnEdhPowerLevel.getValue());
         String serverAddress = SessionHandler.getSession().getServerHostname().orElseGet(() -> "");
         options.setBannedUsers(IgnoreList.ignoreList(serverAddress));
@@ -439,7 +426,7 @@ public class NewTableDialog extends MageDialog {
                     table.getTableId(),
                     this.player1Panel.getPlayerName(),
                     PlayerType.HUMAN, 1,
-                    DeckImporterUtil.importDeck(this.player1Panel.getDeckFile()),
+                    DeckImporter.importDeckFromFile(this.player1Panel.getDeckFile()),
                     this.txtPassword.getText())) {
                 for (TablePlayerPanel player : players) {
                     if (player.getPlayerType() != PlayerType.HUMAN) {
@@ -495,6 +482,13 @@ public class NewTableDialog extends MageDialog {
                     return false;
                 }
                 break;
+            case "Variant Magic - Brawl":
+            case "Variant Magic - Duel Brawl":
+                if (!options.getGameType().startsWith("Brawl")) {
+                    JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Deck type Brawl needs also a Brawl game type", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+                break;
             case "Variant Magic - Tiny Leaders":
                 if (!options.getGameType().startsWith("Tiny Leaders")) {
                     JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Deck type Tiny Leaders needs also a Tiny Leaders game type", "Error", JOptionPane.ERROR_MESSAGE);
@@ -515,6 +509,14 @@ public class NewTableDialog extends MageDialog {
                         && !options.getDeckType().equals("Variant Magic - Duel Commander")
                         && !options.getDeckType().equals("Variant Magic - MTGO 1v1 Commander")) {
                     JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Deck type Commander needs also a Commander game type", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+                break;
+            case "Brawl Two Player Duel":
+            case "Brawl Free For All":
+                if (!options.getDeckType().equals("Variant Magic - Brawl")
+                        && !options.getDeckType().equals("Variant Magic - Duel Brawl")) {
+                    JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Deck type Brawl needs also a Brawl game type", "Error", JOptionPane.ERROR_MESSAGE);
                     return false;
                 }
                 break;
@@ -697,7 +699,7 @@ public class NewTableDialog extends MageDialog {
                 break;
             }
         }
-        String skillLevelDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_SKILL_LEVEL, "Casual");
+        String skillLevelDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_SKILL_LEVEL + versionStr, "Casual");
         for (SkillLevel skillLevel : SkillLevel.values()) {
             if (skillLevel.toString().equals(skillLevelDefault)) {
                 this.cbSkillLevel.setSelectedItem(skillLevel);
@@ -706,6 +708,7 @@ public class NewTableDialog extends MageDialog {
         }
 
         this.spnQuitRatio.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_QUIT_RATIO, "100")));
+        this.spnMinimumRating.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_MINIMUM_RATING + versionStr, "0")));
         this.spnEdhPowerLevel.setValue(0);
     }
 
@@ -740,6 +743,7 @@ public class NewTableDialog extends MageDialog {
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_SPECTATORS_ALLOWED + versionStr, options.isSpectatorsAllowed() ? "Yes" : "No");
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_PLANECHASE + versionStr, options.isPlaneChase() ? "Yes" : "No");
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_QUIT_RATIO + versionStr, Integer.toString(options.getQuitRatio()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_MINIMUM_RATING + versionStr, Integer.toString(options.getMinimumRating()));
         StringBuilder playerTypesString = new StringBuilder();
         for (Object player : players) {
             if (playerTypesString.length() > 0) {
@@ -781,6 +785,7 @@ public class NewTableDialog extends MageDialog {
     private javax.swing.JLabel lblNumWins;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblQuitRatio;
+    private javax.swing.JLabel lblMinimumRating;
     private javax.swing.JLabel lblEdhPowerLevel;
     private javax.swing.JLabel lblRange;
     private javax.swing.JLabel lblSkillLevel;
@@ -790,6 +795,7 @@ public class NewTableDialog extends MageDialog {
     private javax.swing.JSpinner spnNumPlayers;
     private javax.swing.JSpinner spnNumWins;
     private javax.swing.JSpinner spnQuitRatio;
+    private javax.swing.JSpinner spnMinimumRating;
     private javax.swing.JSpinner spnEdhPowerLevel;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPassword;

@@ -85,7 +85,7 @@ public class CostModificationTest extends CardTestPlayerBase {
         // Spend only mana produced by creatures to cast Myr Superion.
         addCard(Zone.HAND, playerA, "Myr Superion");
 
-        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Add {G} to your mana pool.");
+        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Add {G}.");
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Myr Superion");
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -123,7 +123,7 @@ public class CostModificationTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Goblin Electromancer");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain");
 
-        // Add {R}{R}{R} to your mana pool.
+        // Add {R}{R}{R}.
         addCard(Zone.HAND, playerA, "Pyretic Ritual");
         // Fated Conflagration deals 5 damage to target creature or planeswalker.
         // If it's your turn, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
@@ -215,6 +215,35 @@ public class CostModificationTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Zoetic Cavern", 0);
 
         assertTappedCount("Plains", false, 2); // 2 for 1st Lion 1 for 2nd lion and only 1 mana needed to cast face down Zoetic
+
+    }
+
+    /**
+     * Confirm that Animar's cost reduction allows you to play spells that you wouldn't have enough mana for without it.
+     */
+    @Test
+    public void AnimarSoulOfElementsTest() {
+
+        // Protection from white and from black
+        // Whenever you cast a creature spell, put a +1/+1 counter on Animar, Soul of Elements.
+        // Creature spells you cast cost {1} less to cast for each +1/+1 counter on Animar.
+        addCard(Zone.BATTLEFIELD, playerA, "Animar, Soul of Elements");
+
+        addCard(Zone.HAND, playerA, "Silvercoat Lion", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+
+        addCard(Zone.HAND, playerA, "Zoetic Cavern");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Silvercoat Lion", 2);
+        assertCounterCount(playerA, "Animar, Soul of Elements", CounterType.P1P1, 2);
+
+        assertTappedCount("Plains", true, 3);
 
     }
 }

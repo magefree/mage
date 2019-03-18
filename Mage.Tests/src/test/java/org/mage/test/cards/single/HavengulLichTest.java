@@ -56,7 +56,7 @@ public class HavengulLichTest extends CardTestPlayerBase {
         // {1}: You may cast target creature card in a graveyard this turn. When you cast that card this turn, Havengul Lich
         // gains all activated abilities of that card until end of turn.
         addCard(Zone.BATTLEFIELD, playerA, "Havengul Lich");
-        // {T}: Prodigal Pyromancer deals 1 damage to target creature or player.
+        // {T}: Prodigal Pyromancer deals 1 damage to any target.
         addCard(Zone.GRAVEYARD, playerA, "Prodigal Pyromancer");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}: You may", "Prodigal Pyromancer");
@@ -97,7 +97,7 @@ public class HavengulLichTest extends CardTestPlayerBase {
         // Creature spells you cast cost {2} less to cast.
         // Creatures you control get -1/-1.
         addCard(Zone.BATTLEFIELD, playerA, "Heartless Summoning"); // Enchantment
-        // When Perilous Myr dies, it deals 2 damage to target creature or player.
+        // When Perilous Myr dies, it deals 2 damage to any target.
         addCard(Zone.GRAVEYARD, playerA, "Perilous Myr");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}: You may", "Perilous Myr");

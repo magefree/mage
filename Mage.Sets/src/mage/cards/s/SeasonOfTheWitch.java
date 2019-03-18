@@ -1,30 +1,4 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards.s;
 
 import java.util.HashSet;
@@ -56,7 +30,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  *
  * @author L_J
  */
-public class SeasonOfTheWitch extends CardImpl {
+public final class SeasonOfTheWitch extends CardImpl {
 
     public SeasonOfTheWitch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}{B}");
@@ -113,13 +87,13 @@ class SeasonOfTheWitchEffect extends OneShotEffect {
                     continue;
                 }
                 // Creatures that attacked are safe.
-                AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getSimpleName());
+                AttackedThisTurnWatcher watcher = game.getState().getWatcher(AttackedThisTurnWatcher.class);
                 if (watcher != null
                         && watcher.getAttackedThisTurnCreatures().contains(new MageObjectReference(permanent, game))) {
                     continue;
                 }
                 // Creatures that couldn't attack are safe.
-                CouldAttackThisTurnWatcher watcher2 = (CouldAttackThisTurnWatcher) game.getState().getWatchers().get(CouldAttackThisTurnWatcher.class.getSimpleName());
+                CouldAttackThisTurnWatcher watcher2 = game.getState().getWatcher(CouldAttackThisTurnWatcher.class);
                 if (watcher2 != null
                         && !watcher2.getCouldAttackThisTurnCreatures().contains(new MageObjectReference(permanent, game))) {
                     continue;
@@ -135,10 +109,10 @@ class SeasonOfTheWitchEffect extends OneShotEffect {
 
 class CouldAttackThisTurnWatcher extends Watcher {
 
-    public final Set<MageObjectReference> couldAttackThisTurnCreatures = new HashSet<>();
+    private final Set<MageObjectReference> couldAttackThisTurnCreatures = new HashSet<>();
 
     public CouldAttackThisTurnWatcher() {
-        super(CouldAttackThisTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public CouldAttackThisTurnWatcher(final CouldAttackThisTurnWatcher watcher) {
@@ -150,10 +124,13 @@ class CouldAttackThisTurnWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DECLARE_ATTACKERS_STEP_PRE) {
             Player activePlayer = game.getPlayer(game.getActivePlayerId());
+            if(activePlayer == null){
+                return;
+            }
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(activePlayer.getId())) {
                 if (permanent.isCreature()) {
                     for (UUID defender : game.getCombat().getDefenders()) {
-                        if (defender != activePlayer.getId()) {
+                        if (!defender.equals(activePlayer.getId())) {
                             if (permanent.canAttack(defender, game)) {
                                 // exclude Propaganda style effects
                                 if (!game.getContinuousEffects().checkIfThereArePayCostToAttackBlockEffects(

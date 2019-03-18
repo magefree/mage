@@ -1,34 +1,5 @@
-/*
- * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.player.human;
 
-import java.io.Serializable;
-import java.util.*;
 import mage.MageObject;
 import mage.abilities.*;
 import mage.abilities.costs.VariableCost;
@@ -37,6 +8,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.RequirementEffect;
+import mage.abilities.hint.HintUtils;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.Card;
 import mage.cards.Cards;
@@ -44,8 +16,6 @@ import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.*;
-import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
-import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterBlockingCreature;
@@ -68,16 +38,24 @@ import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
+import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetAttackingCreature;
-import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetDefender;
 import mage.util.GameLog;
 import mage.util.ManaUtil;
 import mage.util.MessageToClient;
 import org.apache.log4j.Logger;
 
+import java.awt.*;
+import java.io.Serializable;
+import java.util.List;
+import java.util.Queue;
+import java.util.*;
+
+import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
+import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class HumanPlayer extends PlayerImpl {
@@ -172,7 +150,7 @@ public class HumanPlayer extends PlayerImpl {
 
     protected boolean pullResponseFromQueue(Game game) {
         if (actionQueue.isEmpty() && actionIterations > 0 && !actionQueueSaved.isEmpty()) {
-            actionQueue = new LinkedList(actionQueueSaved);
+            actionQueue = new LinkedList<>(actionQueueSaved);
             actionIterations--;
 //            logger.info("MACRO iteration: " + actionIterations);
         }
@@ -258,9 +236,15 @@ public class HumanPlayer extends PlayerImpl {
         updateGameStatePriority("chooseMulligan", game);
         int nextHandSize = game.mulliganDownTo(playerId);
         do {
-            String message = "Mulligan "
-                    + (getHand().size() > nextHandSize ? "down to " : "for free, draw ")
-                    + nextHandSize + (nextHandSize == 1 ? " card?" : " cards?");
+            String cardsCountInfo = nextHandSize + (nextHandSize == 1 ? " card" : " cards");
+            String message;
+            if (getHand().size() > nextHandSize) {
+                // pay
+                message = "Mulligan " + HintUtils.prepareText("down to " + cardsCountInfo, Color.YELLOW) + "?";
+            } else {
+                // free
+                message = "Mulligan " + HintUtils.prepareText("for free", Color.GREEN) + ", draw another " + cardsCountInfo + "?";
+            }
             Map<String, Serializable> options = new HashMap<>();
             options.put("UI.left.btn.text", "Mulligan");
             options.put("UI.right.btn.text", "Keep");
@@ -368,7 +352,17 @@ public class HumanPlayer extends PlayerImpl {
         replacementEffectChoice.getChoices().clear();
         replacementEffectChoice.setKeyChoices(rEffects);
 
-        while (!abort) {
+        // Check if there are different ones
+        int differentChoices = 0;
+        String lastChoice = "";
+        for (String value : replacementEffectChoice.getKeyChoices().values()) {
+            if (!lastChoice.equalsIgnoreCase(value)) {
+                lastChoice = value;
+                differentChoices++;
+            }
+        }
+
+        while (!abort && differentChoices > 1) {
             updateGameStatePriority("chooseEffect", game);
             prepareForResponse(game);
             if (!isExecutingMacro()) {
@@ -434,6 +428,7 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
+        // choose one or multiple permanents
         updateGameStatePriority("choose(5)", game);
         UUID abilityControllerId = playerId;
         if (target.getTargetController() != null
@@ -463,6 +458,14 @@ public class HumanPlayer extends PlayerImpl {
             }
             waitForResponse(game);
             if (response.getUUID() != null) {
+                // selected some target
+
+                // remove selected
+                if (target.getTargets().contains(response.getUUID())) {
+                    target.remove(response.getUUID());
+                    continue;
+                }
+
                 if (!targetIds.contains(response.getUUID())) {
                     continue;
                 }
@@ -498,13 +501,17 @@ public class HumanPlayer extends PlayerImpl {
                     }
                 }
             } else {
+                // send other command like cancel or done (??sends other commands like concede??)
+
+                // auto-complete on all selected
                 if (target.getTargets().size() >= target.getNumberOfTargets()) {
                     return true;
                 }
-                if (!target.isRequired(sourceId, game)) {
+
+                // cancel/done button
+                if (!required) {
                     return false;
                 }
-
             }
         }
         return false;
@@ -512,6 +519,7 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
+        // choose one or multiple targets
         updateGameStatePriority("chooseTarget", game);
         UUID abilityControllerId = playerId;
         if (target.getAbilityController() != null) {
@@ -527,14 +535,18 @@ public class HumanPlayer extends PlayerImpl {
 
             prepareForResponse(game);
             if (!isExecutingMacro()) {
+                // hmm
                 game.fireSelectTargetEvent(getId(), new MessageToClient(target.getMessage(), getRelatedObjectName(source, game)), possibleTargets, required, getOptions(target, null));
             }
             waitForResponse(game);
             if (response.getUUID() != null) {
+
+                // remove selected
                 if (target.getTargets().contains(response.getUUID())) {
                     target.remove(response.getUUID());
                     continue;
                 }
+
                 if (possibleTargets.contains(response.getUUID())) {
                     if (target.canTarget(abilityControllerId, response.getUUID(), source, game)) {
                         target.addTarget(response.getUUID(), source, game);
@@ -569,6 +581,7 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
+        // choose one or multiple cards
         if (cards == null) {
             return false;
         }
@@ -626,6 +639,7 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
+        // choose one or multiple target cards
         updateGameStatePriority("chooseTarget(5)", game);
         while (!abort) {
             boolean required;
@@ -688,6 +702,7 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
+        // choose amount
         updateGameStatePriority("chooseTargetAmount", game);
         while (!abort) {
             prepareForResponse(game);
@@ -723,6 +738,7 @@ public class HumanPlayer extends PlayerImpl {
                     controllingPlayer = (HumanPlayer) player;
                 }
             }
+
             if (getJustActivatedType() != null && !holdingPriority) {
                 if (controllingPlayer.getUserData().isPassPriorityCast()
                         && getJustActivatedType() == AbilityType.SPELL) {
@@ -737,43 +753,55 @@ public class HumanPlayer extends PlayerImpl {
                     return false;
                 }
             }
-            if (isGameUnderControl()) { // Use the skip actions only if the player itself controls its turn
-                if (passedAllTurns
-                        || passedTurnSkipStack) {
+
+            // SKIP buttons - use the skip actions only if the player itself controls its turn
+            if (isGameUnderControl()) {
+                if (passedAllTurns || passedTurnSkipStack) {
                     if (passWithManaPoolCheck(game)) {
                         return false;
                     }
                 }
-                if (passedUntilEndStepBeforeMyTurn) {
 
+                if (passedUntilEndStepBeforeMyTurn) {
                     if (game.getTurn().getStepType() != PhaseStep.END_TURN) {
+                        // other step
                         if (passWithManaPoolCheck(game)) {
                             return false;
                         }
                     } else {
+                        // end step - search yourself
                         PlayerList playerList = game.getState().getPlayerList(playerId);
                         if (!playerList.getPrevious().equals(game.getActivePlayerId())) {
                             if (passWithManaPoolCheck(game)) {
                                 return false;
                             }
+                        } else {
+                            // stop
+                            passedUntilEndStepBeforeMyTurn = false;
                         }
                     }
                 }
+
                 if (game.getStack().isEmpty()) {
+                    // empty stack
+
                     boolean dontCheckPassStep = false;
                     if (passedUntilStackResolved) { // Don't skip to next step with this action. It always only resolves a stack. If stack is empty it does nothing.
+                        passedUntilStackResolved = false;
                         dontCheckPassStep = true;
                     }
+
                     if (passedTurn
                             || passedTurnSkipStack) {
                         if (passWithManaPoolCheck(game)) {
                             return false;
                         }
                     }
+
                     if (passedUntilNextMain) {
                         if (game.getTurn().getStepType() == PhaseStep.POSTCOMBAT_MAIN
                                 || game.getTurn().getStepType() == PhaseStep.PRECOMBAT_MAIN) {
-                            // it's a main phase
+                            // it's main step
                             if (!skippedAtLeastOnce
                                     || (!playerId.equals(game.getActivePlayerId())
                                     && !controllingPlayer.getUserData().getUserSkipPrioritySteps().isStopOnAllMainPhases())) {
@@ -792,22 +820,23 @@ public class HumanPlayer extends PlayerImpl {
                             }
                         }
                     }
+
                     if (passedUntilEndOfTurn) {
                         if (game.getTurn().getStepType() == PhaseStep.END_TURN) {
-                            // It's end of turn phase
+                            // it's end of turn step
                             if (!skippedAtLeastOnce
                                     || (playerId.equals(game.getActivePlayerId())
                                     && !controllingPlayer
-                                            .getUserData()
-                                            .getUserSkipPrioritySteps()
-                                            .isStopOnAllEndPhases())) {
+                                    .getUserData()
+                                    .getUserSkipPrioritySteps()
+                                    .isStopOnAllEndPhases())) {
                                 skippedAtLeastOnce = true;
                                 if (passWithManaPoolCheck(game)) {
                                     return false;
                                 }
                             } else {
                                 dontCheckPassStep = true;
-                                passedUntilEndOfTurn = false;
+                                passedUntilEndOfTurn = false; // reset skip action
                             }
                         } else {
                             skippedAtLeastOnce = true;
@@ -816,23 +845,39 @@ public class HumanPlayer extends PlayerImpl {
                             }
                         }
                     }
+
                     if (!dontCheckPassStep
                             && checkPassStep(game, controllingPlayer)) {
                         if (passWithManaPoolCheck(game)) {
                             return false;
                         }
                     }
-                } else if (passedUntilStackResolved) {
-                    if (dateLastAddedToStack == game.getStack().getDateLastAdded()) {
-                        dateLastAddedToStack = game.getStack().getDateLastAdded();
+
+                } else {
+                    // non empty stack
+                    boolean haveNewObjectsOnStack = Objects.equals(dateLastAddedToStack, game.getStack().getDateLastAdded());
+                    dateLastAddedToStack = game.getStack().getDateLastAdded();
+                    if (passedUntilStackResolved) {
+                        if (haveNewObjectsOnStack
+                                && (playerId.equals(game.getActivePlayerId())
+                                && controllingPlayer
+                                .getUserData()
+                                .getUserSkipPrioritySteps()
+                                .isStopOnStackNewObjects())) {
+                            // new objects on stack -- disable "pass until stack resolved"
+                            passedUntilStackResolved = false;
+                        } else {
+                            // no new objects on stack -- go to next priority
+                        }
+                    }
+                    if (passedUntilStackResolved) {
                         if (passWithManaPoolCheck(game)) {
                             return false;
                         }
-                    } else {
-                        passedUntilStackResolved = false;
                     }
                 }
             }
+
             while (canRespond()) {
                 updateGameStatePriority("priority", game);
                 holdingPriority = false;
@@ -892,9 +937,7 @@ public class HumanPlayer extends PlayerImpl {
                     }
                 }
                 return result;
-            } else if (response.getManaType() != null) {
-                return false;
-            }
+            } else return response.getManaType() == null;
             return true;
         }
         return false;
@@ -930,6 +973,7 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game) {
+        // choose triggered abilitity from list
         String autoOrderRuleText = null;
         boolean autoOrderUse = getControllingPlayersUserData(game).isAutoOrderTrigger();
         while (!abort) {
@@ -1006,6 +1050,7 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     protected boolean playManaHandling(Ability abilityToCast, ManaCost unpaid, String promptText, Game game) {
+        // choose mana to pay (from permanents or from pool)
         updateGameStatePriority("playMana", game);
         Map<String, Serializable> options = new HashMap<>();
         prepareForResponse(game);
@@ -1142,8 +1187,8 @@ public class HumanPlayer extends PlayerImpl {
             if (passedAllTurns
                     || passedUntilEndStepBeforeMyTurn
                     || (!getControllingPlayersUserData(game)
-                            .getUserSkipPrioritySteps()
-                            .isStopOnDeclareAttackersDuringSkipAction()
+                    .getUserSkipPrioritySteps()
+                    .isStopOnDeclareAttackersDuringSkipAction()
                     && (passedTurn
                     || passedTurnSkipStack
                     || passedUntilEndOfTurn
@@ -1162,7 +1207,7 @@ public class HumanPlayer extends PlayerImpl {
             }
             options.put(Constants.Option.POSSIBLE_ATTACKERS, (Serializable) possibleAttackers);
             if (!possibleAttackers.isEmpty()) {
-                options.put(Constants.Option.SPECIAL_BUTTON, (Serializable) "All attack");
+                options.put(Constants.Option.SPECIAL_BUTTON, "All attack");
             }
 
             prepareForResponse(game);
@@ -1320,7 +1365,7 @@ public class HumanPlayer extends PlayerImpl {
     /**
      * Selects a defender for an attacker and adds the attacker to combat
      *
-     * @param defenders - list of possible defender
+     * @param defenders  - list of possible defender
      * @param attackerId - UUID of attacker
      * @param game
      * @return
@@ -1380,8 +1425,8 @@ public class HumanPlayer extends PlayerImpl {
         filter.add(new ControllerIdPredicate(defendingPlayerId));
         if (game.getBattlefield().count(filter, null, playerId, game) == 0
                 && !getControllingPlayersUserData(game)
-                        .getUserSkipPrioritySteps()
-                        .isStopOnDeclareBlockerIfNoneAvailable()) {
+                .getUserSkipPrioritySteps()
+                .isStopOnDeclareBlockerIfNoneAvailable()) {
             return;
         }
         while (!abort) {
@@ -1483,7 +1528,7 @@ public class HumanPlayer extends PlayerImpl {
         updateGameStatePriority("assignDamage", game);
         int remainingDamage = damage;
         while (remainingDamage > 0 && canRespond()) {
-            Target target = new TargetCreatureOrPlayer();
+            Target target = new TargetAnyTarget();
             target.setNotTarget(true);
             if (singleTargetName != null) {
                 target.setTargetName(singleTargetName);
@@ -1666,6 +1711,7 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public Mode chooseMode(Modes modes, Ability source, Game game) {
+        // choose mode to activate
         updateGameStatePriority("chooseMode", game);
         if (modes.size() > 1) {
             MageObject obj = game.getObject(source.getSourceId());
@@ -1969,7 +2015,7 @@ public class HumanPlayer extends PlayerImpl {
         if (userData.confirmEmptyManaPool()
                 && game.getStack().isEmpty() && getManaPool().count() > 0) {
             String activePlayerText;
-            if (game.getActivePlayerId().equals(playerId)) {
+            if (game.isActivePlayer(playerId)) {
                 activePlayerText = "Your turn";
             } else {
                 activePlayerText = game.getPlayer(game.getActivePlayerId()).getName() + "'s turn";

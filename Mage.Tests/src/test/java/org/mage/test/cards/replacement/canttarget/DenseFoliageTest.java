@@ -37,7 +37,7 @@ public class DenseFoliageTest extends CardTestPlayerBase {
     public void testAbilityCanTarget() {
         // Creatures can't be the targets of spells
         addCard(Zone.BATTLEFIELD, playerA, "Dense Foliage");
-        //{T}: Prodigal Sorcerer deals 1 damage to target creature or player.
+        //{T}: Prodigal Sorcerer deals 1 damage to any target.
         addCard(Zone.BATTLEFIELD, playerA, "Prodigal Sorcerer");
 
         addCard(Zone.BATTLEFIELD, playerB, "Eager Cadet");

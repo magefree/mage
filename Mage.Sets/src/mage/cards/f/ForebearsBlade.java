@@ -15,8 +15,8 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
-import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
@@ -30,7 +30,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Rystan
  */
-public class ForebearsBlade extends CardImpl {
+public final class ForebearsBlade extends CardImpl {
 
     public ForebearsBlade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
@@ -48,10 +48,11 @@ public class ForebearsBlade extends CardImpl {
         effect = new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.EQUIPMENT);
         effect.setText("and trample");
         ability.addEffect(effect);
-        
-        // Whenever equipped creature dies, attach Forebear’s Blade to target creature you control.
+        this.addAbility(ability);
+
+        // Whenever equipped creature dies, attach Forebear's Blade to target creature you control.
         ability = new DiesAttachedTriggeredAbility(
-                new AttachEffect(Outcome.Neutral, "attach {source} to it"), "equipped creature", false);
+                new AttachEffect(Outcome.Neutral, "attach {this} to target creature you control"), "equipped creature", false);
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
 

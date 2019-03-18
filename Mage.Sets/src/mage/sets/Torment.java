@@ -1,30 +1,4 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -35,7 +9,7 @@ import mage.constants.SetType;
  *
  * @author North
  */
-public class Torment extends ExpansionSet {
+public final class Torment extends ExpansionSet {
 
     private static final Torment instance = new Torment();
 
@@ -58,7 +32,7 @@ public class Torment extends ExpansionSet {
         cards.add(new SetCardInfo("Acorn Harvest", 118, Rarity.COMMON, mage.cards.a.AcornHarvest.class));
         cards.add(new SetCardInfo("Ambassador Laquatus", 23, Rarity.RARE, mage.cards.a.AmbassadorLaquatus.class));
         cards.add(new SetCardInfo("Angel of Retribution", 1, Rarity.RARE, mage.cards.a.AngelOfRetribution.class));
-        cards.add(new SetCardInfo("Anurid Scavenger", 119, Rarity.COMMON, mage.cards.a.AnuridScavenger.class));
+        cards.add(new SetCardInfo("Anurid Scavenger", 119, Rarity.UNCOMMON, mage.cards.a.AnuridScavenger.class));
         cards.add(new SetCardInfo("Aquamoeba", 24, Rarity.COMMON, mage.cards.a.Aquamoeba.class));
         cards.add(new SetCardInfo("Arrogant Wurm", 120, Rarity.UNCOMMON, mage.cards.a.ArrogantWurm.class));
         cards.add(new SetCardInfo("Aven Trooper", 2, Rarity.COMMON, mage.cards.a.AvenTrooper.class));
@@ -77,6 +51,7 @@ public class Torment extends ExpansionSet {
         cards.add(new SetCardInfo("Cephalid Aristocrat", 27, Rarity.COMMON, mage.cards.c.CephalidAristocrat.class));
         cards.add(new SetCardInfo("Cephalid Illusionist", 28, Rarity.UNCOMMON, mage.cards.c.CephalidIllusionist.class));
         cards.add(new SetCardInfo("Cephalid Sage", 29, Rarity.UNCOMMON, mage.cards.c.CephalidSage.class));
+        cards.add(new SetCardInfo("Cephalid Snitch", 30, Rarity.COMMON, mage.cards.c.CephalidSnitch.class));
         cards.add(new SetCardInfo("Cephalid Vandal", 31, Rarity.RARE, mage.cards.c.CephalidVandal.class));
         cards.add(new SetCardInfo("Chainer, Dementia Master", 56, Rarity.RARE, mage.cards.c.ChainerDementiaMaster.class));
         cards.add(new SetCardInfo("Chainer's Edict", 57, Rarity.UNCOMMON, mage.cards.c.ChainersEdict.class));
@@ -161,6 +136,7 @@ public class Torment extends ExpansionSet {
         cards.add(new SetCardInfo("Rancid Earth", 78, Rarity.COMMON, mage.cards.r.RancidEarth.class));
         cards.add(new SetCardInfo("Reborn Hero", 14, Rarity.RARE, mage.cards.r.RebornHero.class));
         cards.add(new SetCardInfo("Restless Dreams", 79, Rarity.COMMON, mage.cards.r.RestlessDreams.class));
+        cards.add(new SetCardInfo("Retraced Image", 46, Rarity.RARE, mage.cards.r.RetracedImage.class));
         cards.add(new SetCardInfo("Sengir Vampire", 80, Rarity.RARE, mage.cards.s.SengirVampire.class));
         cards.add(new SetCardInfo("Seton's Scout", 138, Rarity.UNCOMMON, mage.cards.s.SetonsScout.class));
         cards.add(new SetCardInfo("Shade's Form", 81, Rarity.COMMON, mage.cards.s.ShadesForm.class));

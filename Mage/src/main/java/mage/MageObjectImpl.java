@@ -1,41 +1,9 @@
-/*
- * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
 package mage;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
-import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -46,15 +14,13 @@ import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.text.TextPart;
 import mage.abilities.text.TextPartSubType;
 import mage.cards.FrameStyle;
-import mage.constants.CardType;
-import mage.constants.SubLayer;
-import mage.constants.SubType;
-import mage.constants.SubTypeSet;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
+
+import java.util.*;
 
 public abstract class MageObjectImpl implements MageObject {
 
@@ -74,6 +40,7 @@ public abstract class MageObjectImpl implements MageObject {
     protected MageInt power;
     protected MageInt toughness;
     protected boolean copy;
+    protected MageObject copyFrom; // copied card INFO (used to call original adjusters)
     protected List<TextPart> textParts;
 
     public MageObjectImpl() {
@@ -108,6 +75,7 @@ public abstract class MageObjectImpl implements MageObject {
         isAllCreatureTypes = object.isAllCreatureTypes;
         supertype.addAll(object.supertype);
         this.copy = object.copy;
+        this.copyFrom = (object.copyFrom != null ? object.copyFrom.copy() : null);
         textParts = new ArrayList<>();
         textParts.addAll(object.textParts);
     }
@@ -184,8 +152,8 @@ public abstract class MageObjectImpl implements MageObject {
     @Override
     public int getStartingLoyalty() {
         for (Ability ab : getAbilities()) {
-            if (ab instanceof PlanswalkerEntersWithLoyalityCountersAbility) {
-                return ((PlanswalkerEntersWithLoyalityCountersAbility) ab).getStartingLoyalty();
+            if (ab instanceof PlaneswalkerEntersWithLoyaltyCountersAbility) {
+                return ((PlaneswalkerEntersWithLoyaltyCountersAbility) ab).getStartingLoyalty();
             }
         }
         return 0;
@@ -289,8 +257,14 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public void setCopy(boolean isCopy) {
+    public void setCopy(boolean isCopy, MageObject copyFrom) {
         this.copy = isCopy;
+        this.copyFrom = (copyFrom != null ? copyFrom.copy() : null);
+    }
+
+    @Override
+    public MageObject getCopyFrom() {
+        return this.copyFrom;
     }
 
     @Override
@@ -348,7 +322,7 @@ public abstract class MageObjectImpl implements MageObject {
      */
     @Override
     public void removePTCDA() {
-        for (Iterator<Ability> iter = this.getAbilities().iterator(); iter.hasNext();) {
+        for (Iterator<Ability> iter = this.getAbilities().iterator(); iter.hasNext(); ) {
             Ability ability = iter.next();
             for (Effect effect : ability.getEffects()) {
                 if (effect instanceof ContinuousEffect && ((ContinuousEffect) effect).getSublayer() == SubLayer.CharacteristicDefining_7a) {

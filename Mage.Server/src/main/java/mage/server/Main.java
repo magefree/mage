@@ -1,42 +1,11 @@
-/*
- * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.server;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.MalformedURLException;
-import java.util.*;
-import javax.management.MBeanServer;
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.repository.CardScanner;
 import mage.cards.repository.PluginClassloaderRegistery;
+import mage.cards.repository.RepositoryUtil;
+import mage.game.draft.RateCard;
 import mage.game.match.MatchType;
 import mage.game.tournament.TournamentType;
 import mage.interfaces.MageServer;
@@ -65,13 +34,20 @@ import org.jboss.remoting.transporter.TransporterClient;
 import org.jboss.remoting.transporter.TransporterServer;
 import org.w3c.dom.Element;
 
+import javax.management.MBeanServer;
+import java.io.File;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.util.*;
+
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public final class Main {
 
     private static final Logger logger = Logger.getLogger(Main.class);
-    private static final MageVersion version = new MageVersion(MageVersion.MAGE_VERSION_MAJOR, MageVersion.MAGE_VERSION_MINOR, MageVersion.MAGE_VERSION_PATCH, MageVersion.MAGE_VERSION_MINOR_PATCH, MageVersion.MAGE_VERSION_INFO);
+    private static final MageVersion version = new MageVersion(Main.class);
 
     private static final String testModeArg = "-testMode=";
     private static final String fastDBModeArg = "-fastDbMode=";
@@ -81,9 +57,9 @@ public final class Main {
     private static final File extensionFolder = new File("extensions");
 
     public static final PluginClassLoader classLoader = new PluginClassLoader();
-    public static TransporterServer server;
-    protected static boolean testMode;
-    protected static boolean fastDbMode;
+    private static TransporterServer server;
+    private static boolean testMode;
+    private static boolean fastDbMode;
 
     /**
      * @param args the command line arguments
@@ -113,6 +89,10 @@ public final class Main {
             }
             logger.info("Done.");
         }
+
+        // db init and updates checks (e.g. cleanup cards db on new version)
+        RepositoryUtil.bootstrapLocalDb();
+        logger.info("Done.");
 
         logger.info("Loading extension packages...");
         if (!extensionFolder.exists()) {
@@ -156,6 +136,12 @@ public final class Main {
         }
         logger.info("Done.");
 
+        // cards preload with ratings
+        if (RateCard.PRELOAD_CARD_RATINGS_ON_STARTUP) {
+            RateCard.bootstrapCardsAndRatings();
+            logger.info("Done.");
+        }
+
         logger.info("Updating user stats DB...");
         UserStatsRepository.instance.updateUserStats();
         logger.info("Done.");
@@ -179,15 +165,15 @@ public final class Main {
 
         for (ExtensionPackage pkg : extensions) {
             Map<String, Class> draftCubes = pkg.getDraftCubes();
-            for (String name : draftCubes.keySet()) {
-                logger.info("Loading extension: [" + name + "] " + draftCubes.get(name).toString());
-                CubeFactory.instance.addDraftCube(name, draftCubes.get(name));
-            }
+            draftCubes.forEach((name, draftCube) -> {
+                logger.info("Loading extension: [" + name + "] " + draftCube.toString());
+                CubeFactory.instance.addDraftCube(name, draftCube);
+            });
             Map<String, Class> deckTypes = pkg.getDeckTypes();
-            for (String name : deckTypes.keySet()) {
-                logger.info("Loading extension: [" + name + "] " + deckTypes.get(name));
-                DeckValidatorFactory.instance.addDeckType(name, deckTypes.get(name));
-            }
+            deckTypes.forEach((name, deckType) -> {
+                logger.info("Loading extension: [" + name + "] " + deckType);
+                DeckValidatorFactory.instance.addDeckType(name, deckType);
+            });
         }
 
         logger.info("Config - max seconds idle: " + config.getMaxSecondsIdle());
@@ -439,8 +425,10 @@ public final class Main {
         File[] files = directory.listFiles(
                 (dir, name) -> name.endsWith(".game")
         );
-        for (File file : files) {
-            file.delete();
+        if (files != null) {
+            for (File file : files) {
+                file.delete();
+            }
         }
     }
 

@@ -4,7 +4,7 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-public class Apocalypse extends ExpansionSet {
+public final class Apocalypse extends ExpansionSet {
 
     private static final Apocalypse instance = new Apocalypse();
 
@@ -81,6 +81,7 @@ public class Apocalypse extends ExpansionSet {
         cards.add(new SetCardInfo("Illuminate", 63, Rarity.UNCOMMON, mage.cards.i.Illuminate.class));
         cards.add(new SetCardInfo("Illusion // Reality", 129, Rarity.UNCOMMON, mage.cards.i.IllusionReality.class));
         cards.add(new SetCardInfo("Index", 25, Rarity.COMMON, mage.cards.i.Index.class));
+        cards.add(new SetCardInfo("Jaded Response", 26, Rarity.COMMON, mage.cards.j.JadedResponse.class));
         cards.add(new SetCardInfo("Jilt", 27, Rarity.COMMON, mage.cards.j.Jilt.class));
         cards.add(new SetCardInfo("Jungle Barrier", 106, Rarity.UNCOMMON, mage.cards.j.JungleBarrier.class));
         cards.add(new SetCardInfo("Kavu Glider", 64, Rarity.COMMON, mage.cards.k.KavuGlider.class));

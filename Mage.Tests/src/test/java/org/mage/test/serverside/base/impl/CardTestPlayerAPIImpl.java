@@ -1,10 +1,12 @@
 package org.mage.test.serverside.base.impl;
 
 import mage.Mana;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
-import mage.cards.decks.importer.DeckImporterUtil;
+import mage.cards.decks.DeckCardLists;
+import mage.cards.decks.importer.DeckImporter;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.cards.repository.CardScanner;
@@ -22,8 +24,10 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.players.ManaPool;
 import mage.players.Player;
+import mage.util.CardUtil;
 import org.junit.Assert;
 import org.junit.Before;
+import org.mage.test.player.PlayerAction;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestAPI;
 import org.mage.test.serverside.base.MageTestPlayerBase;
@@ -46,6 +50,31 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     // Defines the constant if for activate ability is not target but a ability on the stack to define
     public static final String NO_TARGET = "NO_TARGET";
 
+    // TODO: add target player param to commands
+    public static final String CHECK_COMMAND_PT = "PT";
+    public static final String CHECK_COMMAND_LIFE = "LIFE";
+    public static final String CHECK_COMMAND_ABILITY = "ABILITY";
+    public static final String CHECK_COMMAND_PERMANENT_COUNT = "PERMANENT_COUNT";
+    public static final String CHECK_COMMAND_EXILE_COUNT = "EXILE_COUNT";
+    public static final String CHECK_COMMAND_HAND_COUNT = "HAND_COUNT";
+    public static final String CHECK_COMMAND_HAND_CARD_COUNT = "HAND_CARD_COUNT";
+    public static final String CHECK_COMMAND_COLOR = "COLOR";
+    public static final String CHECK_COMMAND_SUBTYPE = "SUBTYPE";
+    public static final String CHECK_COMMAND_MANA_POOL = "MANA_POOL";
+    public static final String CHECK_COMMAND_ALIAS_ZONE = "ALIAS_ZONE";
+
+    // TODO: add target player param to commands
+    public static final String SHOW_COMMAND_LIBRARY = "LIBRARY";
+    public static final String SHOW_COMMAND_HAND = "HAND";
+    public static final String SHOW_COMMAND_BATTLEFIELD = "BATTLEFIELD";
+    public static final String SHOW_COMMAND_GRAVEYEARD = "GRAVEYARD";
+    public static final String SHOW_COMMAND_EXILE = "EXILE";
+    public static final String SHOW_COMMAND_AVAILABLE_ABILITIES = "AVAILABLE_ABILITIES";
+    public static final String SHOW_COMMAND_ALIASES = "ALIASES";
+
+    // TODO: add target player param to commands
+    public static final String ALIAS_COMMAND_ADD = "ADD";
+
     protected GameOptions gameOptions;
 
     protected String deckNameA;
@@ -54,7 +83,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     protected String deckNameD;
 
     protected enum ExpectedType {
-
         TURN_NUMBER,
         RESULT,
         LIFE,
@@ -63,7 +91,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         UNKNOWN
     }
 
-    public CardTestPlayerAPIImpl(){
+    public CardTestPlayerAPIImpl() {
         // load all cards to db from class list
         ArrayList<String> errorsList = new ArrayList<>();
         CardScanner.scan(errorsList);
@@ -155,12 +183,21 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     protected TestPlayer createPlayer(Game game, TestPlayer player, String name, String deckName) throws GameException {
         player = createNewPlayer(name, game.getRangeOfInfluence());
         player.setTestMode(true);
+
         logger.debug("Loading deck...");
-        Deck deck = Deck.load(DeckImporterUtil.importDeck(deckName), false, false);
+        DeckCardLists list;
+        if (loadedDeckCardLists.containsKey(deckName)) {
+            list = loadedDeckCardLists.get(deckName);
+        } else {
+            list = DeckImporter.importDeckFromFile(deckName);
+            loadedDeckCardLists.put(deckName, list);
+        }
+        Deck deck = Deck.load(list, false, false);
         logger.debug("Done!");
         if (deck.getCards().size() < 40) {
             throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck.getCards().size());
         }
+
         game.loadCards(deck.getCards(), player.getId());
         game.loadCards(deck.getSideboard(), player.getId());
         game.addPlayer(player, deck);
@@ -172,6 +209,27 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         if (currentGame == null || activePlayer == null) {
             throw new IllegalStateException("Game is not initialized. Use load method to load a test case and initialize a game.");
         }
+
+        // check stop command
+        int maxTurn = 1;
+        int maxPhase = 0;
+        for (Player player : currentGame.getPlayers().values()) {
+            if (player instanceof TestPlayer) {
+                TestPlayer testPlayer = (TestPlayer) player;
+                for (PlayerAction action : testPlayer.getActions()) {
+                    Assert.assertTrue("Wrong turn in action " + action.getTurnNum(), action.getTurnNum() >= 1);
+                    int curTurn = action.getTurnNum();
+                    int curPhase = action.getStep().getIndex();
+                    if ((curTurn > maxTurn) || (curTurn == maxTurn && curPhase > maxPhase)) {
+                        maxTurn = curTurn;
+                        maxPhase = curPhase;
+                    }
+                }
+            }
+        }
+        Assert.assertFalse("Wrong stop command on " + this.stopOnTurn + " / " + this.stopAtStep + " (" + this.stopAtStep.getIndex() + ")"
+                        + " (found actions after stop on " + maxTurn + " / " + maxPhase + ")",
+                (maxTurn > this.stopOnTurn) || (maxTurn == this.stopOnTurn && maxPhase > this.stopAtStep.getIndex()));
 
         for (Player player : currentGame.getPlayers().values()) {
             TestPlayer testPlayer = (TestPlayer) player;
@@ -191,6 +249,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         logger.debug("Winner: " + currentGame.getWinner());
         logger.info("Test has been executed. Execution time: " + (t2 - t1) / 1000000 + " ms");
 
+        // TODO: 01.12.2018, JayDi85 - uncomment and fix MANY broken tests with wrong commands
+        //assertAllCommandsUsed();
     }
 
     protected TestPlayer createNewPlayer(String playerName, RangeOfInfluence rangeOfInfluence) {
@@ -216,6 +276,109 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 throw new IllegalArgumentException("Wrong player in 'battlefield' line, player=" + player + ", line=" + line);
         }
         return player;
+    }
+
+    // check commands
+
+    private void check(String checkName, int turnNum, PhaseStep step, TestPlayer player, String command, String... params) {
+        String res = "check:" + command;
+        for (String param : params) {
+            res += "@" + param;
+        }
+        player.addAction(checkName, turnNum, step, res);
+    }
+
+    public void checkPT(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, Integer power, Integer toughness) {
+        //Assert.assertNotEquals("", permanentName);
+        check(checkName, turnNum, step, player, CHECK_COMMAND_PT, permanentName, power.toString(), toughness.toString());
+    }
+
+    public void checkLife(String checkName, int turnNum, PhaseStep step, TestPlayer player, Integer life) {
+        check(checkName, turnNum, step, player, CHECK_COMMAND_LIFE, life.toString());
+    }
+
+    public void checkAbility(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, Class<?> abilityClass, Boolean mustHave) {
+        //Assert.assertNotEquals("", permanentName);
+        check(checkName, turnNum, step, player, CHECK_COMMAND_ABILITY, permanentName, abilityClass.getName(), mustHave.toString());
+    }
+
+    public void checkPermanentCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, Integer count) {
+        //Assert.assertNotEquals("", permanentName);
+        check(checkName, turnNum, step, player, CHECK_COMMAND_PERMANENT_COUNT, permanentName, count.toString());
+    }
+
+    public void checkExileCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, Integer count) {
+        //Assert.assertNotEquals("", permanentName);
+        check(checkName, turnNum, step, player, CHECK_COMMAND_EXILE_COUNT, permanentName, count.toString());
+    }
+
+    public void checkHandCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, Integer count) {
+        check(checkName, turnNum, step, player, CHECK_COMMAND_HAND_COUNT, count.toString());
+    }
+
+    public void checkHandCardCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, String cardName, Integer count) {
+        //Assert.assertNotEquals("", cardName);
+        check(checkName, turnNum, step, player, CHECK_COMMAND_HAND_CARD_COUNT, cardName, count.toString());
+    }
+
+    public void checkColor(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, String colors, Boolean mustHave) {
+        //Assert.assertNotEquals("", permanentName);
+        check(checkName, turnNum, step, player, CHECK_COMMAND_COLOR, permanentName, colors, mustHave.toString());
+    }
+
+    public void checkSubType(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, SubType subType, Boolean mustHave) {
+        //Assert.assertNotEquals("", permanentName);
+        check(checkName, turnNum, step, player, CHECK_COMMAND_SUBTYPE, permanentName, subType.toString(), mustHave.toString());
+    }
+
+    public void checkManaPool(String checkName, int turnNum, PhaseStep step, TestPlayer player, String colors, Integer amount) {
+        check(checkName, turnNum, step, player, CHECK_COMMAND_MANA_POOL, colors, amount.toString());
+    }
+
+    public void checkAliasZone(String checkName, int turnNum, PhaseStep step, TestPlayer player, String alias, Zone zone) {
+        checkAliasZone(checkName, turnNum, step, player, alias, zone, true);
+    }
+
+    public void checkAliasZone(String checkName, int turnNum, PhaseStep step, TestPlayer player, String alias, Zone zone, Boolean mustHave) {
+        check(checkName, turnNum, step, player, CHECK_COMMAND_ALIAS_ZONE, alias, zone.toString(), mustHave.toString());
+    }
+
+    // show commands
+
+    private void show(String showName, int turnNum, PhaseStep step, TestPlayer player, String command, String... params) {
+        String res = "show:" + command;
+        for (String param : params) {
+            res += "@" + param;
+        }
+        player.addAction(showName, turnNum, step, res);
+    }
+
+    public void showLibrary(String showName, int turnNum, PhaseStep step, TestPlayer player) {
+        show(showName, turnNum, step, player, SHOW_COMMAND_LIBRARY);
+    }
+
+    public void showHand(String showName, int turnNum, PhaseStep step, TestPlayer player) {
+        show(showName, turnNum, step, player, SHOW_COMMAND_HAND);
+    }
+
+    public void showBattlefield(String showName, int turnNum, PhaseStep step, TestPlayer player) {
+        show(showName, turnNum, step, player, SHOW_COMMAND_BATTLEFIELD);
+    }
+
+    public void showGraveyard(String showName, int turnNum, PhaseStep step, TestPlayer player) {
+        show(showName, turnNum, step, player, SHOW_COMMAND_GRAVEYEARD);
+    }
+
+    public void showExile(String showName, int turnNum, PhaseStep step, TestPlayer player) {
+        show(showName, turnNum, step, player, SHOW_COMMAND_EXILE);
+    }
+
+    public void showAvaileableAbilities(String showName, int turnNum, PhaseStep step, TestPlayer player) {
+        show(showName, turnNum, step, player, SHOW_COMMAND_AVAILABLE_ABILITIES);
+    }
+
+    public void showAliases(String showName, int turnNum, PhaseStep step, TestPlayer player) {
+        show(showName, turnNum, step, player, SHOW_COMMAND_ALIASES);
     }
 
     /**
@@ -282,6 +445,19 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     @Override
     public void addCard(Zone gameZone, TestPlayer player, String cardName, int count, boolean tapped) {
 
+        // aliases for mage objects
+        String aliasName = "";
+        boolean useAliasMultiNames = (count != 1);
+        if (cardName.contains("@")) {
+            aliasName = cardName.substring(cardName.indexOf("@") + 1);
+            cardName = cardName.substring(0, cardName.indexOf("@"));
+        }
+
+        // one card = one aliase, massive adds can use auto-name
+        if (!useAliasMultiNames && !aliasName.isEmpty() && player.getAliasByName(aliasName) != null) {
+            Assert.fail("Can't add card " + cardName + " - alias " + aliasName + " already exists for " + player.getName());
+        }
+
         if (gameZone == Zone.BATTLEFIELD) {
             for (int i = 0; i < count; i++) {
                 CardInfo cardInfo = CardRepository.instance.findCard(cardName);
@@ -292,6 +468,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 PermanentCard p = new PermanentCard(card.copy(), player.getId(), currentGame);
                 p.setTapped(tapped);
                 getBattlefieldCards(player).add(p);
+
+                if (!aliasName.isEmpty()) {
+                    player.addAlias(player.generateAliasName(aliasName, useAliasMultiNames, i + 1), p.getId());
+                }
             }
         } else {
             if (tapped) {
@@ -305,6 +485,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                     throw new AssertionError("Couldn't find a card: " + cardName);
                 }
                 cards.add(card);
+
+                if (!aliasName.isEmpty()) {
+                    player.addAlias(player.generateAliasName(aliasName, useAliasMultiNames, i + 1), card.getId());
+                }
             }
         }
     }
@@ -339,7 +523,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     @Override
     public void setLife(TestPlayer player, int life) {
-        getCommands(player).put(Zone.OUTSIDE, "life:" + String.valueOf(life));
+        getCommands(player).put(Zone.OUTSIDE, "life:" + life);
     }
 
     /**
@@ -349,8 +533,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     @Override
     public void setStopOnTurn(int turn) {
-        stopOnTurn = turn == -1 ? null : turn;
-        stopAtStep = PhaseStep.UNTAP;
+        setStopAt(turn, PhaseStep.UNTAP);
     }
 
     /**
@@ -362,7 +545,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     @Override
     public void setStopAt(int turn, PhaseStep step) {
-        stopOnTurn = turn == -1 ? null : turn;
+        Assert.assertTrue("Wrong turn " + turn, turn >= 1);
+        stopOnTurn = turn;
         stopAtStep = step;
     }
 
@@ -441,6 +625,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     @Override
     public void assertPowerToughness(Player player, String cardName, int power, int toughness, Filter.ComparisonScope scope)
             throws AssertionError {
+        //Assert.assertNotEquals("", cardName);
         int count = 0;
         int fit = 0;
         int foundPower = 0;
@@ -495,6 +680,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     @Override
     public void assertAbilities(Player player, String cardName, List<Ability> abilities)
             throws AssertionError {
+        //Assert.assertNotEquals("", cardName);
         int count = 0;
         Permanent found = null;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents(player.getId())) {
@@ -516,20 +702,21 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         }
     }
 
-    public void assertAbility(Player player, String cardName, Ability ability, boolean flag) throws AssertionError {
-        assertAbility(player, cardName, ability, flag, 1);
+    public void assertAbility(Player player, String cardName, Ability ability, boolean mustHave) throws AssertionError {
+        assertAbility(player, cardName, ability, mustHave, 1);
     }
 
     /**
      * @param player
      * @param cardName
      * @param ability
-     * @param flag     true if creature should contain ability, false if it should
+     * @param mustHave true if creature should contain ability, false if it should
      *                 NOT contain it instead
      * @param count    number of permanents with that ability
      * @throws AssertionError
      */
-    public void assertAbility(Player player, String cardName, Ability ability, boolean flag, int count) throws AssertionError {
+    public void assertAbility(Player player, String cardName, Ability ability, boolean mustHave, int count) throws AssertionError {
+        //Assert.assertNotEquals("", cardName);
         int foundCount = 0;
         Permanent found = null;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents(player.getId())) {
@@ -545,7 +732,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         Assert.assertTrue("There is another number (" + foundCount + ") as defined (" + count + ") of such permanents under player's control, player=" + player.getName()
                 + ", cardName=" + cardName, count == foundCount);
 
-        if (flag) {
+        if (mustHave) {
             Assert.assertTrue("No such ability=" + ability.toString() + ", player=" + player.getName()
                     + ", cardName" + cardName, found.getAbilities(currentGame).containsRule(ability));
         } else {
@@ -580,6 +767,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     @Override
     public void assertPermanentCount(Player player, String cardName, int count) throws AssertionError {
+        //Assert.assertNotEquals("", cardName);
         int actualCount = 0;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
             if (permanent.getControllerId().equals(player.getId())) {
@@ -593,6 +781,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     @Override
     public void assertCommandZoneCount(Player player, String commandZoneObjectName, int count) throws AssertionError {
+        //Assert.assertNotEquals("", commandZoneObjectName);
         int actualCount = 0;
         for (CommandObject commandObject : currentGame.getState().getCommand()) {
             if (commandObject.getControllerId().equals(player.getId()) && commandObject.getName().equals(commandZoneObjectName)) {
@@ -632,6 +821,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     public void assertCounterCount(Player player, String cardName, CounterType type, int count) throws AssertionError {
+        //Assert.assertNotEquals("", cardName);
         Permanent found = null;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
             if (permanent.getName().equals(cardName) && (player == null || permanent.getControllerId().equals(player.getId()))) {
@@ -651,11 +841,12 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param count    Expected count.
      */
     public void assertCounterOnExiledCardCount(String cardName, CounterType type, int count) throws AssertionError {
+        //Assert.assertNotEquals("", cardName);
         Card found = null;
 
         if (found == null) {
             for (Card card : currentGame.getExile().getAllCards(currentGame)) {
-                if (card.getName().equals(cardName)) {
+                if (CardUtil.haveSameNames(card.getName(), cardName, true)) {
                     found = card;
                     break;
                 }
@@ -682,9 +873,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      *
      * @param cardName Name of the permanent that should be checked.
      * @param type     A type to test for
-     * @param flag     true if creature should have type, false if it should not
+     * @param mustHave true if creature should have type, false if it should not
      */
-    public void assertType(String cardName, CardType type, boolean flag) throws AssertionError {
+    public void assertType(String cardName, CardType type, boolean mustHave) throws AssertionError {
+        //Assert.assertNotEquals("", cardName);
         Permanent found = null;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
             if (permanent.getName().equals(cardName)) {
@@ -695,7 +887,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
         Assert.assertNotNull("There is no such permanent on the battlefield, cardName=" + cardName, found);
 
-        Assert.assertTrue("(Battlefield) card type not found (" + cardName + ':' + type + ')', (found.getCardType().contains(type) == flag));
+        Assert.assertTrue("(Battlefield) card type not found (" + cardName + ':' + type + ')', (found.getCardType().contains(type) == mustHave));
 
     }
 
@@ -707,6 +899,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param subType  a subtype to test for
      */
     public void assertType(String cardName, CardType type, SubType subType) throws AssertionError {
+        //Assert.assertNotEquals("", cardName);
         Permanent found = getPermanent(cardName);
         Assert.assertTrue("(Battlefield) card type not found (" + cardName + ':' + type + ')', found.getCardType().contains(type));
         if (subType != null) {
@@ -721,6 +914,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param type     A type to test for
      */
     public void assertNotType(String cardName, CardType type) throws AssertionError {
+        //Assert.assertNotEquals("", cardName);
         Permanent found = getPermanent(cardName);
         Assert.assertFalse("(Battlefield) card type found (" + cardName + ':' + type + ')', found.getCardType().contains(type));
     }
@@ -732,10 +926,48 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param subType  a subtype to test for
      */
     public void assertNotSubtype(String cardName, SubType subType) throws AssertionError {
+        //Assert.assertNotEquals("", cardName);
         Permanent found = getPermanent(cardName);
         if (subType != null) {
             Assert.assertFalse("(Battlefield) card sub-type equal (" + cardName + ':' + subType.getDescription() + ')', found.getSubtype(currentGame).contains(subType));
         }
+    }
+
+    /**
+     * Assert permanent color
+     *
+     * @param player       player to check
+     * @param cardName     card name on battlefield from player
+     * @param searchColors colors list with searchable values
+     * @param mustHave     must or not must have that colors
+     */
+    public void assertColor(Player player, String cardName, ObjectColor searchColors, boolean mustHave) {
+        //Assert.assertNotEquals("", cardName);
+        Assert.assertNotEquals("must setup colors to search", 0, searchColors.getColorCount());
+
+        Permanent card = getPermanent(cardName, player);
+        ObjectColor cardColor = card.getColor(currentGame);
+
+        List<ObjectColor> colorsHave = new ArrayList<>();
+        List<ObjectColor> colorsDontHave = new ArrayList<>();
+
+        for (ObjectColor searchColor : searchColors.getColors()) {
+            if (cardColor.shares(searchColor)) {
+                colorsHave.add(searchColor);
+            } else {
+                colorsDontHave.add(searchColor);
+            }
+        }
+
+        if (mustHave) {
+            Assert.assertEquals("must contain colors [" + searchColors.toString() + "] but found only [" + cardColor.toString() + "]", 0, colorsDontHave.size());
+        } else {
+            Assert.assertEquals("must not contain colors [" + searchColors.toString() + "] but found [" + cardColor.toString() + "]", 0, colorsHave.size());
+        }
+    }
+
+    public void assertColor(Player player, String cardName, String searchColors, boolean mustHave) {
+        assertColor(player, cardName, new ObjectColor(searchColors), mustHave);
     }
 
     /**
@@ -745,6 +977,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param tapped   Whether the permanent is tapped or not
      */
     public void assertTapped(String cardName, boolean tapped) throws AssertionError {
+        //Assert.assertNotEquals("", cardName);
         Permanent found = null;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
             if (permanent.getName().equals(cardName)) {
@@ -770,6 +1003,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param count    The amount of this permanents that should be tapped
      */
     public void assertTappedCount(String cardName, boolean tapped, int count) throws AssertionError {
+        //Assert.assertNotEquals("", cardName);
         int tappedAmount = 0;
         Permanent found = null;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
@@ -791,6 +1025,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param attacking Whether the permanent is attacking or not
      */
     public void assertAttacking(String cardName, boolean attacking) throws AssertionError {
+        //Assert.assertNotEquals("", cardName);
         Permanent found = null;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
             if (permanent.getName().equals(cardName)) {
@@ -822,43 +1057,44 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param count    Expected count.
      */
     public void assertHandCount(Player player, String cardName, int count) throws AssertionError {
+        //Assert.assertNotEquals("", cardName);
         int actual;
         if (cardName.contains("//")) { // special logic for cheched split cards, because in game logic of card name filtering is different than for test
             actual = 0;
             for (Card card : currentGame.getPlayer(player.getId()).getHand().getCards(currentGame)) {
-                if (card.getName().equals(cardName)) {
+                if (CardUtil.haveSameNames(card.getName(), cardName, true)) {
                     actual++;
                 }
             }
         } else {
             FilterCard filter = new FilterCard();
-            filter.add(new NamePredicate(cardName));
+            filter.add(new NamePredicate(cardName, true)); // must find any cards even without names
             actual = currentGame.getPlayer(player.getId()).getHand().count(filter, player.getId(), currentGame);
         }
         Assert.assertEquals("(Hand) Card counts for card " + cardName + " for " + player.getName() + " are not equal ", count, actual);
     }
 
 
-    public void assertManaPool(Player player, ManaType color, int amount){
+    public void assertManaPool(Player player, ManaType color, int amount) {
         ManaPool manaPool = currentGame.getPlayer(player.getId()).getManaPool();
-        switch (color){
+        switch (color) {
             case COLORLESS:
-                Assert.assertEquals(amount,manaPool.getColorless() + manaPool.getConditionalMana().stream().mapToInt(Mana::getColorless).sum());
+                Assert.assertEquals(amount, manaPool.getColorless() + manaPool.getConditionalMana().stream().mapToInt(Mana::getColorless).sum());
                 break;
             case RED:
-                Assert.assertEquals(amount,manaPool.getRed() + manaPool.getConditionalMana().stream().mapToInt(Mana::getRed).sum());
+                Assert.assertEquals(amount, manaPool.getRed() + manaPool.getConditionalMana().stream().mapToInt(Mana::getRed).sum());
                 break;
             case BLUE:
-                Assert.assertEquals(amount,manaPool.getBlue() + manaPool.getConditionalMana().stream().mapToInt(Mana::getBlue).sum());
+                Assert.assertEquals(amount, manaPool.getBlue() + manaPool.getConditionalMana().stream().mapToInt(Mana::getBlue).sum());
                 break;
             case WHITE:
-                Assert.assertEquals(amount,manaPool.getWhite() + manaPool.getConditionalMana().stream().mapToInt(Mana::getWhite).sum());
+                Assert.assertEquals(amount, manaPool.getWhite() + manaPool.getConditionalMana().stream().mapToInt(Mana::getWhite).sum());
                 break;
             case GREEN:
-                Assert.assertEquals(amount,manaPool.getGreen() + manaPool.getConditionalMana().stream().mapToInt(Mana::getGreen).sum());
+                Assert.assertEquals(amount, manaPool.getGreen() + manaPool.getConditionalMana().stream().mapToInt(Mana::getGreen).sum());
                 break;
             case BLACK:
-                Assert.assertEquals(amount,manaPool.getBlack() + manaPool.getConditionalMana().stream().mapToInt(Mana::getBlack).sum());
+                Assert.assertEquals(amount, manaPool.getBlack() + manaPool.getConditionalMana().stream().mapToInt(Mana::getBlack).sum());
                 break;
         }
     }
@@ -881,10 +1117,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param count    Expected count.
      */
     public void assertExileCount(String cardName, int count) throws AssertionError {
+        //Assert.assertNotEquals("", cardName);
         int actualCount = 0;
         for (ExileZone exile : currentGame.getExile().getExileZones()) {
             for (Card card : exile.getCards(currentGame)) {
-                if (card.getName().equals(cardName)) {
+                if (CardUtil.haveSameNames(card.getName(), cardName, true)) {
                     actualCount++;
                 }
             }
@@ -903,7 +1140,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         int actualCount = 0;
         for (ExileZone exile : currentGame.getExile().getExileZones()) {
             for (Card card : exile.getCards(currentGame)) {
-                if (card.getOwnerId().equals(owner.getId())) {
+                if (card.isOwnedBy(owner.getId())) {
                     actualCount++;
                 }
             }
@@ -920,10 +1157,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param count    Expected count.
      */
     public void assertExileCount(Player owner, String cardName, int count) throws AssertionError {
+        //Assert.assertNotEquals("", cardName);
         int actualCount = 0;
         for (ExileZone exile : currentGame.getExile().getExileZones()) {
             for (Card card : exile.getCards(currentGame)) {
-                if (card.getOwnerId().equals(owner.getId()) && card.getName().equals(cardName)) {
+                if (card.isOwnedBy(owner.getId()) && card.getName().equals(cardName)) {
                     actualCount++;
                 }
             }
@@ -939,9 +1177,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param count    Expected count.
      */
     public void assertGraveyardCount(Player player, String cardName, int count) throws AssertionError {
+        //Assert.assertNotEquals("", cardName);
         int actualCount = 0;
         for (Card card : player.getGraveyard().getCards(currentGame)) {
-            if (card.getName().equals(cardName)) {
+            if (CardUtil.haveSameNames(card.getName(), cardName, true)) {
                 actualCount++;
             }
         }
@@ -956,7 +1195,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param count  Expected count.
      */
     public void assertLibraryCount(Player player, int count) throws AssertionError {
-
         List<Card> libraryList = player.getLibrary().getCards(currentGame);
         int actualCount = libraryList != null && !libraryList.isEmpty() ? libraryList.size() : 0;
         Assert.assertEquals("(Library " + player.getName() + ") counts are not equal", count, actualCount);
@@ -970,9 +1208,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param count    Expected count.
      */
     public void assertLibraryCount(Player player, String cardName, int count) throws AssertionError {
+        //Assert.assertNotEquals("", cardName);
         int actualCount = 0;
         for (Card card : player.getLibrary().getCards(currentGame)) {
-            if (card.getName().equals(cardName)) {
+            if (CardUtil.haveSameNames(card.getName(), cardName, true)) {
                 actualCount++;
             }
         }
@@ -980,15 +1219,27 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         Assert.assertEquals("(Library " + player.getName() + ") Card counts are not equal (" + cardName + ')', count, actualCount);
     }
 
-    /**
-     * Asserts added actions count. Useful to make sure that all actions were
-     * executed.
-     *
-     * @param player
-     * @param count
-     */
-    public void assertActionCount(TestPlayer player, int count) {
-        Assert.assertEquals("Actions left are not equal: ", count, player.getActionCount());
+    public void assertActionsCount(TestPlayer player, int count) throws AssertionError {
+        Assert.assertEquals("(Actions of " + player.getName() + ") Count are not equal (found ["
+                + player.getActions().stream().map(PlayerAction::getAction).collect(Collectors.joining(", "))
+                + "])", count, player.getActions().size());
+    }
+
+    public void assertChoicesCount(TestPlayer player, int count) throws AssertionError {
+        Assert.assertEquals("(Choices of " + player.getName() + ") Count are not equal (found " + player.getChoices() + ")", count, player.getChoices().size());
+    }
+
+    public void assertTargetsCount(TestPlayer player, int count) throws AssertionError {
+        Assert.assertEquals("(Targets of " + player.getName() + ") Count are not equal (found " + player.getTargets() + ")", count, player.getTargets().size());
+    }
+
+    public void assertAllCommandsUsed() throws AssertionError {
+        for (Player player : currentGame.getPlayers().values()) {
+            TestPlayer testPlayer = (TestPlayer) player;
+            assertActionsCount(testPlayer, 0);
+            assertChoicesCount(testPlayer, 0);
+            assertTargetsCount(testPlayer, 0);
+        }
     }
 
     public void assertActivePlayer(TestPlayer player) {
@@ -1029,19 +1280,27 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     public void playLand(int turnNum, PhaseStep step, TestPlayer player, String cardName) {
+        //Assert.assertNotEquals("", cardName);
         player.addAction(turnNum, step, "activate:Play " + cardName);
     }
 
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName) {
+        //Assert.assertNotEquals("", cardName);
         player.addAction(turnNum, step, "activate:Cast " + cardName);
     }
 
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, Player target) {
+        //Assert.assertNotEquals("", cardName);
         player.addAction(turnNum, step, "activate:Cast " + cardName + "$targetPlayer=" + target.getName());
     }
 
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, Player target, int manaInPool) {
+        //Assert.assertNotEquals("", cardName);
         player.addAction(turnNum, step, "activate:Cast " + cardName + "$targetPlayer=" + target.getName() + "$manaInPool=" + manaInPool);
+    }
+
+    public void waitStackResolved(int turnNum, PhaseStep step, TestPlayer player) {
+        player.addAction(turnNum, step, "waitStackResolved");
     }
 
     /**
@@ -1077,11 +1336,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      *                   multiple targets can be seperated by ^
      */
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, String targetName) {
+        //Assert.assertNotEquals("", cardName);
         player.addAction(turnNum, step, "activate:Cast " + cardName + "$target=" + targetName);
     }
 
     public enum StackClause {
-
         WHILE_ON_STACK,
         WHILE_COPY_ON_STACK,
         WHILE_NOT_ON_STACK
@@ -1116,6 +1375,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param clause
      */
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, String targetName, String spellOnStack, StackClause clause) {
+        //Assert.assertNotEquals("", cardName);
         if (StackClause.WHILE_ON_STACK == clause) {
             player.addAction(turnNum, step, "activate:Cast " + cardName
                     + '$' + (targetName != null && targetName.startsWith("target") ? targetName : "target=" + targetName)
@@ -1128,6 +1388,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, String targetName, String spellOnStack, String spellOnTopOfStack) {
+        //Assert.assertNotEquals("", cardName);
         String action = "activate:Cast " + cardName + "$target=" + targetName;
         if (spellOnStack != null && !spellOnStack.isEmpty()) {
             action += "$spellOnStack=" + spellOnStack;
@@ -1143,18 +1404,22 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability) {
+        // TODO: it's uses computerPlayer to execute, only ability target will work, but choices and targets commands aren't
         player.addAction(turnNum, step, "activate:" + ability);
     }
 
     public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, Player target) {
+        // TODO: it's uses computerPlayer to execute, only ability target will work, but choices and targets commands aren't
         player.addAction(turnNum, step, "activate:" + ability + "$targetPlayer=" + target.getName());
     }
 
     public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, String... targetNames) {
+        // TODO: it's uses computerPlayer to execute, only ability target will work, but choices and targets commands aren't
         player.addAction(turnNum, step, "activate:" + ability + "$target=" + String.join("^", targetNames));
     }
 
     public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, String targetName, String spellOnStack) {
+        // TODO: it's uses computerPlayer to execute, only ability target will work, but choices and targets commands aren't
         this.activateAbility(turnNum, step, player, ability, targetName, spellOnStack, StackClause.WHILE_ON_STACK);
     }
 
@@ -1192,22 +1457,28 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     public void addCounters(int turnNum, PhaseStep step, TestPlayer player, String cardName, CounterType type, int count) {
+        //Assert.assertNotEquals("", cardName);
         player.addAction(turnNum, step, "addCounters:" + cardName + '$' + type.getName() + '$' + count);
     }
 
     public void attack(int turnNum, TestPlayer player, String attacker) {
+        //Assert.assertNotEquals("", attacker);
         player.addAction(turnNum, PhaseStep.DECLARE_ATTACKERS, "attack:" + attacker);
     }
 
     public void attack(int turnNum, TestPlayer player, String attacker, TestPlayer defendingPlayer) {
+        //Assert.assertNotEquals("", attacker);
         player.addAction(turnNum, PhaseStep.DECLARE_ATTACKERS, "attack:" + attacker + "$defendingPlayer=" + defendingPlayer.getName());
     }
 
     public void attack(int turnNum, TestPlayer player, String attacker, String planeswalker) {
+        //Assert.assertNotEquals("", attacker);
         player.addAction(turnNum, PhaseStep.DECLARE_ATTACKERS, new StringBuilder("attack:").append(attacker).append("$planeswalker=").append(planeswalker).toString());
     }
 
     public void block(int turnNum, TestPlayer player, String blocker, String attacker) {
+        //Assert.assertNotEquals("", blocker);
+        //Assert.assertNotEquals("", attacker);
         player.addAction(turnNum, PhaseStep.DECLARE_BLOCKERS, "block:" + blocker + '$' + attacker);
     }
 
@@ -1248,6 +1519,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      *               are copies. For modal spells use a prefix with the mode number:
      *               mode=1Lightning Bolt^mode=2Silvercoat Lion
      */
+    // TODO: mode options doesn't work here (see BrutalExpulsionTest)
     public void addTarget(TestPlayer player, String target) {
         player.addTarget(target);
     }
@@ -1300,9 +1572,17 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     public void assertDamageReceived(Player player, String cardName, int expected) {
+        //Assert.assertNotEquals("", cardName);
         Permanent p = getPermanent(cardName, player.getId());
         if (p != null) {
             Assert.assertEquals("Wrong damage received: ", expected, p.getDamage());
         }
+    }
+
+    public void waitStackResolved(int turnNum, PhaseStep step) {
+        if (playerA != null) waitStackResolved(turnNum, step, playerA);
+        if (playerB != null) waitStackResolved(turnNum, step, playerB);
+        if (playerC != null) waitStackResolved(turnNum, step, playerC);
+        if (playerD != null) waitStackResolved(turnNum, step, playerD);
     }
 }

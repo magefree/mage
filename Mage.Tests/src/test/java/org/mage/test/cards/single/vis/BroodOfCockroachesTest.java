@@ -4,11 +4,13 @@ import mage.game.permanent.Permanent;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import java.util.UUID;
 
-import static mage.constants.Zone.*;
 import static mage.constants.PhaseStep.*;
+import static mage.constants.Zone.BATTLEFIELD;
+import static mage.constants.Zone.HAND;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 
 public class BroodOfCockroachesTest extends CardTestPlayerBase {
 
@@ -19,7 +21,7 @@ public class BroodOfCockroachesTest extends CardTestPlayerBase {
 
     @Test
     public void should_display_correct_text() {
-        String expectedText  = "When {this} dies, at the beginning of the next end step, you lose 1 life and return Brood of Cockroaches to your hand.";
+        String expectedText = "When {this} is put into your graveyard from the battlefield, at the beginning of the next end step, you lose 1 life and return {this} to your hand.";
 
         playerA_casts_Brood_of_Cockroaches_at_precombat_main_phase();
 
@@ -28,12 +30,11 @@ public class BroodOfCockroachesTest extends CardTestPlayerBase {
 
         Permanent permanent = getPermanent(BROOD_OF_COCKROACHES, playerA);
         assertThat(permanent.getAbilities().get(1).toString(), is(expectedText));
-
     }
 
     @Test
     public void should_reduce_life_of_playerA_by_1_at_the_beginning_of_the_next_end_step() {
-        playerA.setLife(ANY_LIFE_TOTAL, currentGame);
+        playerA.setLife(ANY_LIFE_TOTAL, currentGame, UUID.randomUUID());
 
         playerA_casts_Brood_of_Cockroaches_at_precombat_main_phase();
 
@@ -47,7 +48,7 @@ public class BroodOfCockroachesTest extends CardTestPlayerBase {
 
     @Test
     public void should_not_reduce_life_of_playerA_by_1_at_post_combat_main_step() {
-        playerA.setLife(ANY_LIFE_TOTAL, currentGame);
+        playerA.setLife(ANY_LIFE_TOTAL, currentGame, UUID.randomUUID());
 
         playerA_casts_Brood_of_Cockroaches_at_precombat_main_phase();
 
@@ -56,12 +57,12 @@ public class BroodOfCockroachesTest extends CardTestPlayerBase {
         setStopAt(TURN_1, PRECOMBAT_MAIN);
         execute();
 
-        assertLife(playerA, ANY_LIFE_TOTAL );
+        assertLife(playerA, ANY_LIFE_TOTAL);
     }
 
     @Test
     public void should_return_Brood_of_Cockroaches_to_playerA_hand_end_of_turn() {
-        playerA.setLife(ANY_LIFE_TOTAL, currentGame);
+        playerA.setLife(ANY_LIFE_TOTAL, currentGame, UUID.randomUUID());
 
         playerA_casts_Brood_of_Cockroaches_at_precombat_main_phase();
 
@@ -75,7 +76,7 @@ public class BroodOfCockroachesTest extends CardTestPlayerBase {
 
     @Test
     public void should_not_return_Brood_of_Cockroaches_to_playerA_at_post_combat_step() {
-        playerA.setLife(ANY_LIFE_TOTAL, currentGame);
+        playerA.setLife(ANY_LIFE_TOTAL, currentGame, UUID.randomUUID());
 
         playerA_casts_Brood_of_Cockroaches_at_precombat_main_phase();
 
@@ -86,7 +87,6 @@ public class BroodOfCockroachesTest extends CardTestPlayerBase {
 
         assertHandCount(playerA, BROOD_OF_COCKROACHES, 0);
     }
-
 
     private void brood_of_cockroaches_diesat_precombat_main_phase() {
         addCard(BATTLEFIELD, playerB, "Mountain", 1);
@@ -99,6 +99,5 @@ public class BroodOfCockroachesTest extends CardTestPlayerBase {
         addCard(HAND, playerA, BROOD_OF_COCKROACHES, 1);
         castSpell(TURN_1, PRECOMBAT_MAIN, playerA, BROOD_OF_COCKROACHES);
     }
-
 
 }

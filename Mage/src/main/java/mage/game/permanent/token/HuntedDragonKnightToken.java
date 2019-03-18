@@ -12,9 +12,9 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class HuntedDragonKnightToken extends TokenImpl {
+public final class HuntedDragonKnightToken extends TokenImpl {
 
-    final static private List<String> tokenImageSets = new ArrayList<>();
+    static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
         tokenImageSets.addAll(Arrays.asList("ORI", "RTR", "C15"));

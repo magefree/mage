@@ -1,37 +1,5 @@
-/*
- * Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.deck;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import mage.abilities.common.CanBeYourCommanderAbility;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
@@ -39,14 +7,15 @@ import mage.cards.Sets;
 import mage.cards.SplitCard;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
-import mage.constants.CardType;
-import mage.constants.SetType;
 import mage.filter.FilterMana;
 import mage.game.GameTinyLeadersImpl;
-import mage.util.CardUtil;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
- *
  * @author JRHerlehy
  */
 public class TinyLeaders extends Constructed {
@@ -56,7 +25,7 @@ public class TinyLeaders extends Constructed {
     public TinyLeaders() {
         this("Tiny Leaders");
         for (ExpansionSet set : Sets.getInstance().values()) {
-            if (set.getSetType() != SetType.CUSTOM_SET) {
+            if (set.getSetType().isEternalLegal()) {
                 setCodes.add(set.getCode());
             }
         }
@@ -114,7 +83,6 @@ public class TinyLeaders extends Constructed {
     }
 
     /**
-     *
      * @param deck
      * @return - True if deck is valid
      */
@@ -127,15 +95,13 @@ public class TinyLeaders extends Constructed {
             valid = false;
         }
 
-        List<String> basicLandNames = new ArrayList<>(Arrays.asList("Forest", "Island", "Mountain", "Swamp", "Plains", "Wastes",
-                "Snow-Covered Forest", "Snow-Covered Island", "Snow-Covered Mountain", "Snow-Covered Swamp", "Snow-Covered Plains"));
         Map<String, Integer> counts = new HashMap<>();
         counts.put(deck.getName(), 1); // add the commander to the counts, so it can't be in the deck or sideboard again
         countCards(counts, deck.getCards());
         countCards(counts, deck.getSideboard());
         for (Map.Entry<String, Integer> entry : counts.entrySet()) {
             if (entry.getValue() > 1) {
-                if (!basicLandNames.contains(entry.getKey()) && !entry.getKey().equals("Relentless Rats") && !entry.getKey().equals("Shadowborn Apostle")) {
+                if (!basicLandNames.contains(entry.getKey()) && !anyNumberCardsAllowed.contains(entry.getKey())) {
                     invalid.put(entry.getKey(), "Too many: " + entry.getValue());
                     valid = false;
                 }
@@ -243,9 +209,8 @@ public class TinyLeaders extends Constructed {
     }
 
     /**
-     *
      * @param commander FilterMana object with Color Identity of Commander set
-     * @param card Card to validate
+     * @param card      Card to validate
      * @return True if card has a valid color identity
      */
     public boolean cardHasValideColor(FilterMana commander, Card card) {

@@ -24,7 +24,7 @@ import mage.players.Player;
  *
  * @author nick.myers
  */
-public class EonHub extends CardImpl {
+public final class EonHub extends CardImpl {
  
     public EonHub(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

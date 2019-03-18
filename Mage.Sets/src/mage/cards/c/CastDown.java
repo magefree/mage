@@ -12,7 +12,7 @@ import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
-public class CastDown extends CardImpl {
+public final class CastDown extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonlegendary creature");
     static {

@@ -33,7 +33,7 @@ import mage.util.CardUtil;
  *
  * @author nick.myers
  */
-public class PowerArtifact extends CardImpl {
+public final class PowerArtifact extends CardImpl {
 
     public PowerArtifact(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}{U}");

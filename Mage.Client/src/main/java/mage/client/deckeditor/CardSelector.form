@@ -851,7 +851,6 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="chkUnique">
           <Properties>
-            <Property name="selected" type="boolean" value="false"/>
             <Property name="text" type="java.lang.String" value="Unique"/>
             <Property name="toolTipText" type="java.lang.String" value="Show only the first found card of every card name."/>
             <Property name="focusable" type="boolean" value="false"/>

@@ -27,7 +27,7 @@ public class GratuitousViolenceTest extends CardTestPlayerBase {
     @Test
     public void testIgnoresNonCreatures() {
         // Legendary Enchantment - Shrine: At the beginning of your upkeep, Honden of Infinite
-        // Rage deals damage to target creature or player equal to the number of Shrines you control.
+        // Rage deals damage to any target equal to the number of Shrines you control.
         addCard(Zone.BATTLEFIELD, playerA, "Honden of Infinite Rage");
         addCard(Zone.BATTLEFIELD, playerA, "Gratuitous Violence");
         

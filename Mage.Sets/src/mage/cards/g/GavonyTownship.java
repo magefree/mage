@@ -12,18 +12,19 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
-public class GavonyTownship extends CardImpl {
+public final class GavonyTownship extends CardImpl {
 
     public GavonyTownship(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
 
-        // {T}: Add {1} to your mana pool.
+        // {T}: Add {1}.
         this.addAbility(new ColorlessManaAbility());
 
         // {2}{G}{W}, {T}: Put a +1/+1 counter on each creature you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersAllEffect(CounterType.P1P1.createInstance(), new FilterControlledCreaturePermanent("creature you control")), new ManaCostsImpl("{2}{G}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED), new ManaCostsImpl("{2}{G}{W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

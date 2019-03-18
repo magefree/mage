@@ -1,32 +1,6 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
 package org.mage.test.cards.rules;
 
+import mage.constants.EmptyNames;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -34,7 +8,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class CantCastTest extends CardTestPlayerBase {
@@ -76,7 +49,7 @@ public class CantCastTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
 
-        // Blaze deals X damage to target creature or player.
+        // Blaze deals X damage to any target.
         addCard(Zone.HAND, playerA, "Blaze", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blaze", playerA);
@@ -102,7 +75,7 @@ public class CantCastTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
 
-        // Blaze deals X damage to target creature or player.
+        // Blaze deals X damage to any target.
         addCard(Zone.HAND, playerA, "Blaze", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blaze", playerB);
@@ -139,7 +112,7 @@ public class CantCastTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, "", 0);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
         assertHandCount(playerA, "Pine Walker", 1);
 
     }
@@ -153,7 +126,7 @@ public class CantCastTest extends CardTestPlayerBase {
         // Your opponents can't block with creatures with even converted mana costs.
         addCard(Zone.BATTLEFIELD, playerB, "Void Winnower");
 
-        // Metalcraft - {T}: Add one mana of any color to your mana pool. Activate this ability only if you control three or more artifacts.
+        // <i>Metalcraft</i> &mdash; {T}: Add one mana of any color. Activate this ability only if you control three or more artifacts.
         addCard(Zone.HAND, playerA, "Mox Opal", 1); // {0}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mox Opal");
@@ -217,7 +190,7 @@ public class CantCastTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Llanowar Elves", 1); // Creature {G}
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Forest", 2);
-        // Abrupt Decay can't be countered by spells or abilities.
+        // Abrupt Decay can't be countered.
         // Destroy target nonland permanent with converted mana cost 3 or less.
         addCard(Zone.HAND, playerB, "Abrupt Decay", 1); // {B}{G}
 

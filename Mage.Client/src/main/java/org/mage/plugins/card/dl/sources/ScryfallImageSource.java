@@ -1,245 +1,113 @@
 package org.mage.plugins.card.dl.sources;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashSet;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
+import mage.client.util.CardLanguage;
 import org.mage.plugins.card.images.CardDownloadData;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+
 /**
- * @author Quercitron, JayDi85
- *
+ * @author JayDi85
  */
 public enum ScryfallImageSource implements CardImageSource {
 
     instance;
 
-    private final Set<String> supportedSets;
+    private final Map<CardLanguage, String> languageAliases;
+    private CardLanguage currentLanguage = CardLanguage.ENGLISH; // working language
 
     ScryfallImageSource() {
-        supportedSets = new LinkedHashSet<>();
-        // supportedSets.add("PTC"); //
-        supportedSets.add("LEA");
-        supportedSets.add("LEB");
-        supportedSets.add("2ED");
-        supportedSets.add("ARN");
-        supportedSets.add("ATQ");
-        supportedSets.add("3ED");
-        supportedSets.add("LEG");
-        supportedSets.add("DRK");
-        supportedSets.add("FEM");
-        supportedSets.add("4ED");
-        supportedSets.add("ICE");
-        supportedSets.add("CHR");
-        supportedSets.add("HML");
-        supportedSets.add("ALL");
-        supportedSets.add("MIR");
-        supportedSets.add("VIS");
-        supportedSets.add("5ED");
-        supportedSets.add("POR");
-        supportedSets.add("WTH");
-        supportedSets.add("TMP");
-        supportedSets.add("STH");
-        supportedSets.add("EXO");
-        supportedSets.add("P02");
-        supportedSets.add("UGL");
-        supportedSets.add("USG");
-        supportedSets.add("DD3DVD");
-        supportedSets.add("DD3EVG");
-        supportedSets.add("DD3GVL");
-        supportedSets.add("DD3JVC");
-
-        supportedSets.add("ULG");
-        supportedSets.add("6ED");
-        supportedSets.add("UDS");
-        supportedSets.add("PTK");
-        supportedSets.add("S99");
-        supportedSets.add("MMQ");
-        // supportedSets.add("BRB");Battle Royale Box Set
-        supportedSets.add("NEM");
-        supportedSets.add("S00");
-        supportedSets.add("PCY");
-        supportedSets.add("INV");
-        // supportedSets.add("BTD"); // Beatdown Boxset
-        supportedSets.add("PLS");
-        supportedSets.add("7ED");
-        supportedSets.add("APC");
-        supportedSets.add("ODY");
-        // supportedSets.add("DKM"); // Deckmasters 2001
-        supportedSets.add("TOR");
-        supportedSets.add("JUD");
-        supportedSets.add("ONS");
-        supportedSets.add("LGN");
-        supportedSets.add("SCG");
-        supportedSets.add("8ED");
-        supportedSets.add("MRD");
-        supportedSets.add("DST");
-        supportedSets.add("5DN");
-        supportedSets.add("CHK");
-        supportedSets.add("UNH");
-        supportedSets.add("BOK");
-        supportedSets.add("SOK");
-        supportedSets.add("9ED");
-        supportedSets.add("RAV");
-        supportedSets.add("GPT");
-        supportedSets.add("DIS");
-        supportedSets.add("CSP");
-        supportedSets.add("TSP");
-        supportedSets.add("TSB");
-        supportedSets.add("PLC");
-        supportedSets.add("FUT");
-        supportedSets.add("10E");
-        supportedSets.add("MED");
-        supportedSets.add("LRW");
-        supportedSets.add("EVG");
-        supportedSets.add("MOR");
-        supportedSets.add("SHM");
-        supportedSets.add("EVE");
-        supportedSets.add("DRB");
-        supportedSets.add("ME2");
-        supportedSets.add("ALA");
-        supportedSets.add("DD2");
-        supportedSets.add("CON");
-        supportedSets.add("DDC");
-        supportedSets.add("ARB");
-        supportedSets.add("M10");
-        // supportedSets.add("TD0"); // Magic Online Deck Series
-        supportedSets.add("V09");
-        supportedSets.add("HOP");
-        supportedSets.add("ME3");
-        supportedSets.add("ZEN");
-        supportedSets.add("DDD");
-        supportedSets.add("H09");
-        supportedSets.add("WWK");
-        supportedSets.add("DDE");
-        supportedSets.add("ROE");
-        supportedSets.add("DPA");
-        supportedSets.add("ARC");
-        supportedSets.add("M11");
-        supportedSets.add("V10");
-        supportedSets.add("DDF");
-        supportedSets.add("SOM");
-        // supportedSets.add("TD0"); // Commander Theme Decks
-        supportedSets.add("PD2");
-        supportedSets.add("ME4");
-        supportedSets.add("MBS");
-        supportedSets.add("DDG");
-        supportedSets.add("NPH");
-        supportedSets.add("CMD");
-        supportedSets.add("M12");
-        supportedSets.add("V11");
-        supportedSets.add("DDH");
-        supportedSets.add("ISD");
-        supportedSets.add("PD3");
-        supportedSets.add("DKA");
-        supportedSets.add("DDI");
-        supportedSets.add("AVR");
-        supportedSets.add("PC2");
-        supportedSets.add("M13");
-        supportedSets.add("V12");
-        supportedSets.add("DDJ");
-        supportedSets.add("RTR");
-        supportedSets.add("CM1");
-        // supportedSets.add("TD2"); // Duel Decks: Mirrodin Pure vs. New Phyrexia
-        supportedSets.add("GTC");
-        supportedSets.add("DDK");
-        supportedSets.add("DGM");
-        supportedSets.add("MMA");
-        supportedSets.add("M14");
-        supportedSets.add("V13");
-        supportedSets.add("DDL");
-        supportedSets.add("THS");
-        supportedSets.add("C13");
-        supportedSets.add("BNG");
-        supportedSets.add("DDM");
-        supportedSets.add("JOU");
-        // supportedSets.add("MD1"); // Modern Event Deck
-        supportedSets.add("CNS");
-        supportedSets.add("VMA");
-        supportedSets.add("M15");
-        supportedSets.add("V14");
-        supportedSets.add("DDN");
-        supportedSets.add("KTK");
-        supportedSets.add("C14");
-        // supportedSets.add("DD3"); // Duel Decks Anthology
-        supportedSets.add("FRF");
-        supportedSets.add("DDO");
-        supportedSets.add("DTK");
-        supportedSets.add("TPR");
-        supportedSets.add("MM2");
-        supportedSets.add("ORI");
-        supportedSets.add("V15");
-        supportedSets.add("DDP");
-        supportedSets.add("BFZ");
-        supportedSets.add("EXP");
-        supportedSets.add("C15");
-        // supportedSets.add("PZ1"); // Legendary Cube
-        supportedSets.add("OGW");
-        supportedSets.add("DDQ");
-        supportedSets.add("W16");
-        supportedSets.add("SOI");
-        supportedSets.add("EMA");
-        supportedSets.add("EMN");
-        supportedSets.add("V16");
-        supportedSets.add("CN2");
-        supportedSets.add("DDR");
-        supportedSets.add("KLD");
-        supportedSets.add("MPS");
-        // supportedSets.add("PZ2");
-        supportedSets.add("C16");
-        supportedSets.add("PCA");
-        supportedSets.add("AER");
-        supportedSets.add("MM3");
-        supportedSets.add("DDS");
-        supportedSets.add("W17");
-        supportedSets.add("AKH");
-        supportedSets.add("MPS");
-        supportedSets.add("CMA");
-        supportedSets.add("E01");
-        supportedSets.add("HOU");
-        supportedSets.add("C17");
-        supportedSets.add("XLN");
-        supportedSets.add("DDT");
-        supportedSets.add("IMA");
-        supportedSets.add("E02");
-        supportedSets.add("V17");
-        supportedSets.add("UST");
-        supportedSets.add("RIX");
-        supportedSets.add("WMCQ");
-        supportedSets.add("PPRO");
-        supportedSets.add("A25");
-        supportedSets.add("DOM");
-//        supportedSets.add("M19");
-
+        // LANGUAGES
+        // https://scryfall.com/docs/api/languages
+        languageAliases = new HashMap<>();
+        languageAliases.put(CardLanguage.ENGLISH, "en");
+        languageAliases.put(CardLanguage.SPANISH, "es");
+        languageAliases.put(CardLanguage.FRENCH, "fr");
+        languageAliases.put(CardLanguage.GERMAN, "de");
+        languageAliases.put(CardLanguage.ITALIAN, "it");
+        languageAliases.put(CardLanguage.PORTUGUESE, "pt");
+        languageAliases.put(CardLanguage.JAPANESE, "ja");
+        languageAliases.put(CardLanguage.KOREAN, "ko");
+        languageAliases.put(CardLanguage.RUSSIAN, "ru");
+        languageAliases.put(CardLanguage.CHINES_SIMPLE, "zhs");
+        languageAliases.put(CardLanguage.CHINES_TRADITION, "zht");
     }
 
-    @Override
-    public String generateURL(CardDownloadData card) throws Exception {
+    private CardImageUrls innerGenerateURL(CardDownloadData card, boolean isToken) {
+        String defaultCode = CardLanguage.ENGLISH.getCode();
+        String localizedCode = languageAliases.getOrDefault(this.getCurrentLanguage(), defaultCode);
+        // loc example: https://api.scryfall.com/cards/xln/121/ru?format=image
 
-        // special card number like "103a" already compatible
-        if (card.isCollectorIdWithStr()) {
-            return "https://img.scryfall.com/cards/large/en/" + formatSetName(card.getSet()) + "/"
-                    + card.getCollectorId() + ".jpg";
+        // WARNING, some cards haven't direct images and uses random GUID:
+        // As example: Raging Ravine - https://scryfall.com/card/uma/249/raging-ravine
+        // https://img.scryfall.com/cards/large/front/5/4/54f41726-e0bb-4154-a2db-4b68b50f5032.jpg
+        String baseUrl = null;
+        String alternativeUrl = null;
+
+        // TOKENS TRY
+
+        // tokens support only direct links
+        if (baseUrl == null && isToken) {
+            baseUrl = ScryfallImageSupportTokens.findTokenLink(card.getSet(), card.getName(), card.getType());
+            alternativeUrl = null;
         }
 
-        // double faced cards do not supporte by API (need direct link for img)
+        // CARDS TRY
+
+        // direct links to images (non localization)
+        if (baseUrl == null) {
+            baseUrl = ScryfallImageSupportCards.findDirectDownloadLink(card.getSet(), card.getName(), card.getCollectorId());
+            alternativeUrl = null;
+        }
+
+        // special card number like "103a" and "U123" already compatible
+        if (baseUrl == null && card.isCollectorIdWithStr()) {
+            // WARNING, after 2018 it's not compatible and some new sets have GUID files instead card numbers
+            // TODO: replace card number links to API calls (need test with lands, alternative images and double faces), replace not working images by direct links
+
+            if (card.getCollectorId().startsWith("U") || card.getCollectorIdAsInt() == -1) {
+                // fix for Ultimate Box Topper (PUMA) and Mythic Edition (MED) -- need to use API
+                // ignored and go to API call at the end
+            } else {
+                baseUrl = "https://img.scryfall.com/cards/large/" + localizedCode + "/" + formatSetName(card.getSet(), isToken) + "/"
+                        + card.getCollectorId() + ".jpg";
+                alternativeUrl = "https://img.scryfall.com/cards/large/" + defaultCode + "/" + formatSetName(card.getSet(), isToken) + "/"
+                        + card.getCollectorId() + ".jpg";
+            }
+        }
+
+        // double faced cards do not supports by API (need direct link for img)
         // example: https://img.scryfall.com/cards/large/en/xln/173b.jpg
-        if (card.isTwoFacedCard()) {
-            return "https://img.scryfall.com/cards/large/en/" + formatSetName(card.getSet()) + "/"
+        if (baseUrl == null && card.isTwoFacedCard()) {
+            baseUrl = "https://img.scryfall.com/cards/large/" + localizedCode + "/" + formatSetName(card.getSet(), isToken) + "/"
+                    + card.getCollectorId() + (card.isSecondSide() ? "b" : "a") + ".jpg";
+            alternativeUrl = "https://img.scryfall.com/cards/large/" + defaultCode + "/" + formatSetName(card.getSet(), isToken) + "/"
                     + card.getCollectorId() + (card.isSecondSide() ? "b" : "a") + ".jpg";
         }
 
         // basic cards by api call (redirect to img link)
-        // example: https://api.scryfall.com/cards/xln/121?format=image
-        return "https://api.scryfall.com/cards/" + formatSetName(card.getSet()) + "/"
-                + card.getCollectorId() + "?format=image";
+        // example: https://api.scryfall.com/cards/xln/121/en?format=image
+        if (baseUrl == null) {
+            baseUrl = "https://api.scryfall.com/cards/" + formatSetName(card.getSet(), isToken) + "/"
+                    + card.getCollectorId() + "/" + localizedCode + "?format=image";
+            alternativeUrl = "https://api.scryfall.com/cards/" + formatSetName(card.getSet(), isToken) + "/"
+                    + card.getCollectorId() + "/" + defaultCode + "?format=image";
+        }
+
+        return new CardImageUrls(baseUrl, alternativeUrl);
     }
 
     @Override
-    public String generateTokenUrl(CardDownloadData card) throws Exception {
-        return null;
+    public CardImageUrls generateCardUrl(CardDownloadData card) throws Exception {
+        return innerGenerateURL(card, false);
+
+    }
+
+    @Override
+    public CardImageUrls generateTokenUrl(CardDownloadData card) throws Exception {
+        return innerGenerateURL(card, true);
     }
 
     @Override
@@ -269,7 +137,22 @@ public enum ScryfallImageSource implements CardImageSource {
 
     @Override
     public boolean isTokenSource() {
-        return false;
+        return true;
+    }
+
+    @Override
+    public boolean isLanguagesSupport() {
+        return true;
+    }
+
+    @Override
+    public void setCurrentLanguage(CardLanguage cardLanguage) {
+        this.currentLanguage = cardLanguage;
+    }
+
+    @Override
+    public CardLanguage getCurrentLanguage() {
+        return currentLanguage;
     }
 
     @Override
@@ -277,29 +160,41 @@ public enum ScryfallImageSource implements CardImageSource {
 
     }
 
-    private String formatSetName(String setName) {
-        if (setNameReplacement.containsKey(setName)) {
-            setName = setNameReplacement.get(setName);
+    private String formatSetName(String setName, boolean isToken) {
+        if (isToken) {
+            // token uses direct link download, not set
+            return setName.toLowerCase(Locale.ENGLISH);
+        } else {
+            return ScryfallImageSupportCards.findScryfallSetCode(setName);
         }
-        return setName.toLowerCase(Locale.ENGLISH);
     }
-
-    private static final Map<String, String> setNameReplacement = new HashMap<String, String>() {
-        {
-            put("DD3GVL", "gvl");
-            put("DD3JVC", "jvc");
-            put("DD3DVD", "dvd");
-            put("DD3EVG", "evg");
-            put("MPS-AKH", "mp2");
-            put("MBP", "pmei");
-            put("WMCQ", "pwcq");
-        }
-    };
 
     @Override
     public ArrayList<String> getSupportedSets() {
         ArrayList<String> supportedSetsCopy = new ArrayList<>();
-        supportedSetsCopy.addAll(supportedSets);
+
+        // cards
+        supportedSetsCopy.addAll(ScryfallImageSupportCards.getSupportedSets());
+
+        // tokens
+        for (String code : ScryfallImageSupportTokens.getSupportedSets().keySet()) {
+            if (!supportedSetsCopy.contains(code)) {
+                supportedSetsCopy.add(code);
+            }
+        }
+
         return supportedSetsCopy;
+    }
+
+    @Override
+    public boolean isCardImageProvided(String setCode, String cardName) {
+        // all cards from set
+        return ScryfallImageSupportCards.getSupportedSets().contains(setCode);
+    }
+
+    @Override
+    public boolean isTokenImageProvided(String setCode, String cardName, Integer tokenNumber) {
+        // only direct tokens from set
+        return ScryfallImageSupportTokens.findTokenLink(setCode, cardName, tokenNumber) != null;
     }
 }

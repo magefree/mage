@@ -1,30 +1,4 @@
-/*
- * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.game.permanent;
 
 import java.util.UUID;
@@ -47,6 +21,8 @@ public class PermanentCard extends PermanentImpl {
     protected int maxLevelCounters;
     // A copy of the origin card that was cast (this is not the original card, so it's possible to chnage some attribute to this blueprint to change attributes to the permanent if it enters the battlefield with e.g. a subtype)
     protected Card card;
+    // A copy of original card that was used for copy and create current permanent (used in copy effects and special commands like adjustTargets)
+    protected Card copiedFromCard;
     // the number this permanent instance had
     protected int zoneChangeCounter;
 
@@ -179,7 +155,13 @@ public class PermanentCard extends PermanentImpl {
         if (this.isTransformed() && card.getSecondCardFace() != null) {
             card.getSecondCardFace().adjustTargets(ability, game);
         } else {
-            card.adjustTargets(ability, game);
+            if (this.isCopy()) {
+                // if COPIED card have adjuster then it's must be called instead own -- see OathOfLieges tests
+                // raise null error on wrong copy
+                this.getCopyFrom().adjustTargets(ability, game);
+            } else {
+                card.adjustTargets(ability, game);
+            }
         }
     }
 
@@ -204,7 +186,7 @@ public class PermanentCard extends PermanentImpl {
     @Override
     public int getConvertedManaCost() {
         if (isTransformed()) {
-            // 711.4b While a double-faced permanent’s back face is up, it has only the characteristics of its back face.
+            // 711.4b While a double-faced permanent's back face is up, it has only the characteristics of its back face.
             // However, its converted mana cost is calculated using the mana cost of its front face. This is a change from previous rules.
             // If a permanent is copying the back face of a double-faced card (even if the card representing that copy
             // is itself a double-faced card), the converted mana cost of that permanent is 0.

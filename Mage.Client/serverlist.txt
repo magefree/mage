@@ -1,7 +1,0 @@
-XMage.de 1    (Europe/Germany) fast :xmage.de:17171
-old xmage.de (Europe/Germany) :185.3.232.200:17171
-xmage.us   (North America/USA)       :xmage.us:17171
-XMage Players MTG:xmageplayersmtg.ddns.net:17171
-XMage.tahiti                         :xmage.tahiti.one:443
-Seedds Server (Asia)                :115.29.203.80:17171
-localhost -> connect to your local server (must be started):localhost:17171

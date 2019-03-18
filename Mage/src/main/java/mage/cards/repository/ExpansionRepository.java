@@ -8,17 +8,18 @@ import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+import mage.game.events.Listener;
+import org.apache.log4j.Logger;
+
 import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import org.apache.log4j.Logger;
 
 /**
- *
- * @author North
+ * @author North, JayDi85
  */
 public enum ExpansionRepository {
 
@@ -29,9 +30,11 @@ public enum ExpansionRepository {
     private static final String JDBC_URL = "jdbc:h2:file:./db/cards.h2;AUTO_SERVER=TRUE";
     private static final String VERSION_ENTITY_NAME = "expansion";
     private static final long EXPANSION_DB_VERSION = 5;
-    private static final long EXPANSION_CONTENT_VERSION = 14;
+    private static final long EXPANSION_CONTENT_VERSION = 18;
 
     private Dao<ExpansionInfo, Object> expansionDao;
+    private RepositoryEventSource eventSource = new RepositoryEventSource();
+    public boolean instanceInitialized = false;
 
     ExpansionRepository() {
         File file = new File("db");
@@ -40,32 +43,63 @@ public enum ExpansionRepository {
         }
         try {
             ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
-            boolean obsolete = RepositoryUtil.isDatabaseObsolete(connectionSource, VERSION_ENTITY_NAME, EXPANSION_DB_VERSION);
 
-            if (obsolete) {
+            boolean isObsolete = RepositoryUtil.isDatabaseObsolete(connectionSource, VERSION_ENTITY_NAME, EXPANSION_DB_VERSION);
+            boolean isNewBuild = RepositoryUtil.isNewBuildRun(connectionSource, VERSION_ENTITY_NAME, ExpansionRepository.class); // recreate db on new build
+            if (isObsolete || isNewBuild) {
+                //System.out.println("Local sets db is outdated, cleaning...");
                 TableUtils.dropTable(connectionSource, ExpansionInfo.class, true);
             }
 
             TableUtils.createTableIfNotExists(connectionSource, ExpansionInfo.class);
             expansionDao = DaoManager.createDao(connectionSource, ExpansionInfo.class);
+            instanceInitialized = true;
+
+            eventSource.fireRepositoryDbLoaded();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+
     }
 
-    public void add(ExpansionInfo expansion) {
-        try {
-            expansionDao.create(expansion);
-        } catch (SQLException ex) {
-            logger.error(ex);
-        }
+    public void subscribe(Listener<RepositoryEvent> listener) {
+        eventSource.addListener(listener);
     }
 
-    public void update(ExpansionInfo expansion) {
+    public void saveSets(final List<ExpansionInfo> newSets, final List<ExpansionInfo> updatedSets, long newContentVersion) {
         try {
-            expansionDao.update(expansion);
-        } catch (SQLException ex) {
-            logger.error(ex);
+            expansionDao.callBatchTasks(() -> {
+                // add
+                if (newSets != null && !newSets.isEmpty()) {
+                    logger.info("DB: need to add " + newSets.size() + " new sets");
+                    try {
+                        for (ExpansionInfo exp : newSets) {
+                            expansionDao.create(exp);
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(CardRepository.class).error("Error adding expansions to DB - ", ex);
+                    }
+                }
+
+                // update
+                if (updatedSets != null && !updatedSets.isEmpty()) {
+                    logger.info("DB: need to update " + updatedSets.size() + " sets");
+                    try {
+                        for (ExpansionInfo exp : updatedSets) {
+                            expansionDao.update(exp);
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(CardRepository.class).error("Error adding expansions to DB - ", ex);
+                    }
+                }
+
+                return null;
+            });
+
+            setContentVersion(newContentVersion);
+            eventSource.fireRepositoryDbUpdated();
+        } catch (Exception ex) {
+            //
         }
     }
 
@@ -88,10 +122,10 @@ public enum ExpansionRepository {
         try {
             // only with boosters and cards
             GenericRawResults<ExpansionInfo> setsList = expansionDao.queryRaw(
-                    "select * from expansion e " +
-                            " where e.boosters = 1 " +
-                            "   and exists(select (1) from  card c where c.setcode = e.code) " +
-                            " order by e.releasedate desc",
+                    "select * from expansion e "
+                            + " where e.boosters = 1 "
+                            + "   and exists(select (1) from  card c where c.setcode = e.code) "
+                            + " order by e.releasedate desc",
                     expansionDao.getRawRowMapper());
 
             List<ExpansionInfo> resList = new ArrayList<>();

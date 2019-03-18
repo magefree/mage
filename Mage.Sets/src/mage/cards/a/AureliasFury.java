@@ -1,33 +1,6 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards.a;
 
-import java.util.*;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -49,9 +22,13 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayerAmount;
+import mage.target.common.TargetAnyTargetAmount;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * GATECRASH FAQ 11.01.2013
@@ -77,7 +54,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class AureliasFury extends CardImpl {
+public final class AureliasFury extends CardImpl {
 
     public AureliasFury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{R}{W}");
@@ -85,15 +62,15 @@ public class AureliasFury extends CardImpl {
 
         // Aurelia's Fury deals X damage divided as you choose among any number of target creatures and/or players.
         // Tap each creature dealt damage this way. Players dealt damage this way can't cast noncreature spells this turn.
-        DynamicValue xValue = new ManacostVariableValue();
+        DynamicValue xValue = ManacostVariableValue.instance;
         this.getSpellAbility().addEffect(new DamageMultiEffect(xValue));
         this.getSpellAbility().addEffect(new AureliasFuryEffect());
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayerAmount(xValue));
+        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(xValue));
         this.getSpellAbility().addWatcher(new AureliasFuryDamagedByWatcher());
 
     }
 
-    public AureliasFury(final AureliasFury card) {
+    private AureliasFury(final AureliasFury card) {
         super(card);
     }
 
@@ -105,12 +82,12 @@ public class AureliasFury extends CardImpl {
 
 class AureliasFuryEffect extends OneShotEffect {
 
-    public AureliasFuryEffect() {
+    AureliasFuryEffect() {
         super(Outcome.Benefit);
         this.staticText = "Tap each creature dealt damage this way. Players dealt damage this way can't cast noncreature spells this turn";
     }
 
-    public AureliasFuryEffect(final AureliasFuryEffect effect) {
+    private AureliasFuryEffect(final AureliasFuryEffect effect) {
         super(effect);
     }
 
@@ -121,15 +98,15 @@ class AureliasFuryEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        AureliasFuryDamagedByWatcher watcher = (AureliasFuryDamagedByWatcher) game.getState().getWatchers().get(AureliasFuryDamagedByWatcher.class.getSimpleName(), source.getSourceId());
+        AureliasFuryDamagedByWatcher watcher = game.getState().getWatcher(AureliasFuryDamagedByWatcher.class, source.getSourceId());
         if (watcher != null) {
-            for (UUID creatureId : watcher.damagedCreatures) {
+            for (UUID creatureId : watcher.getDamagedCreatures()) {
                 Permanent permanent = game.getPermanent(creatureId);
                 if (permanent != null) {
                     permanent.tap(game);
                 }
             }
-            for (UUID playerId : watcher.damagedPlayers) {
+            for (UUID playerId : watcher.getDamagedPlayers()) {
                 ContinuousEffect effect = new AureliasFuryCantCastEffect();
                 effect.setTargetPointer(new FixedTarget(playerId));
                 game.addEffect(effect, source);
@@ -143,12 +120,12 @@ class AureliasFuryEffect extends OneShotEffect {
 
 class AureliasFuryCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public AureliasFuryCantCastEffect() {
+    AureliasFuryCantCastEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "Players dealt damage this way can't cast noncreature spells this turn";
     }
 
-    public AureliasFuryCantCastEffect(final AureliasFuryCantCastEffect effect) {
+    private AureliasFuryCantCastEffect(final AureliasFuryCantCastEffect effect) {
         super(effect);
     }
 
@@ -191,14 +168,14 @@ class AureliasFuryCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
 class AureliasFuryDamagedByWatcher extends Watcher {
 
-    public Set<UUID> damagedCreatures = new HashSet<>();
-    public Set<UUID> damagedPlayers = new HashSet<>();
+    private final Set<UUID> damagedCreatures = new HashSet<>();
+    private final Set<UUID> damagedPlayers = new HashSet<>();
 
-    public AureliasFuryDamagedByWatcher() {
-        super(AureliasFuryDamagedByWatcher.class.getSimpleName(), WatcherScope.CARD);
+    AureliasFuryDamagedByWatcher() {
+        super(WatcherScope.CARD);
     }
 
-    public AureliasFuryDamagedByWatcher(final AureliasFuryDamagedByWatcher watcher) {
+    private AureliasFuryDamagedByWatcher(final AureliasFuryDamagedByWatcher watcher) {
         super(watcher);
         this.damagedCreatures.addAll(watcher.damagedCreatures);
         this.damagedPlayers.addAll(watcher.damagedPlayers);
@@ -236,4 +213,11 @@ class AureliasFuryDamagedByWatcher extends Watcher {
         damagedPlayers.clear();
     }
 
+    Set<UUID> getDamagedCreatures() {
+        return damagedCreatures;
+    }
+
+    Set<UUID> getDamagedPlayers() {
+        return damagedPlayers;
+    }
 }

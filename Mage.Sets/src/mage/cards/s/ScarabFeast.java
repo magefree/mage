@@ -13,7 +13,7 @@ import mage.target.common.TargetCardInASingleGraveyard;
 /**
  * @author Stravant
  */
-public class ScarabFeast extends CardImpl {
+public final class ScarabFeast extends CardImpl {
     public ScarabFeast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
 

@@ -1,32 +1,6 @@
-/*
- *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.abilities.effects.common;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -58,35 +32,58 @@ public class FightTargetsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getSourceId());
         if (card != null) {
-            // only if both targets are legal the effect will be applied
-            if (source.getTargets().get(0).isLegal(source, game) && source.getTargets().get(1).isLegal(source, game)) {
-                Permanent creature1 = game.getPermanent(source.getTargets().get(0).getFirstTarget());
-                Permanent creature2 = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-                // 20110930 - 701.10
-                if (creature1 != null && creature2 != null) {
-                    if (creature1.isCreature() && creature2.isCreature()) {
-                        return creature1.fight(creature2, source, game);
-                    }
+            UUID target1Id = null;
+            UUID target2Id = null;
+            // first target is in target pointer, second target is a normal target
+            if (source.getTargets().size() < 2) {
+                if (!source.getTargets().get(0).isLegal(source, game)) {
+                    return false;
+                }
+                target1Id = getTargetPointer().getFirst(game, source);
+                target2Id = source.getTargets().getFirstTarget();
+                if (target1Id == target2Id) {
+                    return false;
+                }
+                // two normal targets available, only if both targets are legal the effect will be applied
+            } else if (source.getTargets().get(0).isLegal(source, game) && source.getTargets().get(1).isLegal(source, game)) {
+                target1Id = source.getTargets().get(0).getFirstTarget();
+                target2Id = source.getTargets().get(1).getFirstTarget();
+            }
+            Permanent creature1 = game.getPermanent(target1Id);
+            Permanent creature2 = game.getPermanent(target2Id);
+            // 20110930 - 701.10
+            if (creature1 != null && creature2 != null) {
+                if (creature1.isCreature() && creature2.isCreature()) {
+                    return creature1.fight(creature2, source, game);
                 }
             }
-            if (!game.isSimulation()) {
-                game.informPlayers(card.getName() + " has been fizzled.");
-            }
+        }
+        if (!game.isSimulation()) {
+            game.informPlayers(card.getName() + " has been fizzled.");
         }
         return false;
     }
 
     @Override
-    public FightTargetsEffect copy() {
+    public FightTargetsEffect
+            copy() {
         return new FightTargetsEffect(this);
+
     }
 
     @Override
-    public String getText(Mode mode) {
-        if (staticText != null && !staticText.isEmpty()) {
+    public String
+            getText(Mode mode
+            ) {
+        if (staticText
+                != null && !staticText
+                        .isEmpty()) {
             return staticText;
+
         }
-        return "Target " + mode.getTargets().get(0).getTargetName() + " fights another target " + mode.getTargets().get(1).getTargetName();
+        return "Target " + mode
+                .getTargets().get(0).getTargetName() + " fights another target " + mode
+                .getTargets().get(1).getTargetName();
     }
 
 }

@@ -1,5 +1,5 @@
 /*
- *  
+ *
  * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are
@@ -25,7 +25,7 @@
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
- * 
+ *
  */
 package mage.cards.f;
 
@@ -46,19 +46,19 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class ForbiddenOrchard extends CardImpl {
+public final class ForbiddenOrchard extends CardImpl {
 
-    public ForbiddenOrchard (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
-        
-        // {T}: Add one mana of any color to your mana pool.
+    public ForbiddenOrchard(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);
+
+        // {T}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());
-        
+
         // Whenever you tap Forbidden Orchard for mana, create a 1/1 colorless Spirit creature token under target opponent's control.
         this.addAbility(new ForbiddenOrchardTriggeredAbility());
     }
 
-    public ForbiddenOrchard (final ForbiddenOrchard card) {
+    public ForbiddenOrchard(final ForbiddenOrchard card) {
         super(card);
     }
 
@@ -83,7 +83,7 @@ class ForbiddenOrchardTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.TAPPED_FOR_MANA;
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getSourceId().equals(getSourceId());
@@ -91,7 +91,7 @@ class ForbiddenOrchardTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return new StringBuilder("Whenever you tap {this} for mana, ").append(super.getRule()).toString() ;
+        return "Whenever you tap {this} for mana, " + super.getRule();
     }
 
     @Override

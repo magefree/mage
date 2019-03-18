@@ -84,7 +84,9 @@
 |Generate|EMBLEM:M14|Garruk, Caller of Beasts||Emblem Garruk|GarrukCallerOfBeastsEmblem|
 |Generate|EMBLEM:M14|Liliana of the Dark Realms||Emblem Liliana|LilianaOfTheDarkRealmsEmblem|
 |Generate|EMBLEM:MMA|Elspeth, Knight Errant||Emblem Elspeth|ElspethKnightErrantEmblem|
+|Generate|EMBLEM:SWS|Obi-Wan Kenobi||Emblem Obi-Wan Kenobi|ObiWanKenobiEmblem|
 |Generate|EMBLEM:RIX|Huatli, Radiant Champion||Emblem Huatli|HuatliRadiantChampionEmblem|
+|Generate|EMBLEM:RNA|Domri, Chaos Bringer||Emblem Domri|DomriChaosBringerEmblem|
 |Generate|PLANE:PCA|Plane - Academy At Tolaria West|||AcademyAtTolariaWestPlane|
 |Generate|PLANE:PCA|Plane - Agyrem|||AgyremPlane|
 |Generate|PLANE:PCA|Plane - Akoum|||AkoumPlane|
@@ -96,12 +98,16 @@
 |Generate|PLANE:PCA|Plane - Hedron Fields of Agadeem|||HedronFieldsOfAgadeemPlane|
 |Generate|PLANE:PCA|Plane - Lethe Lake|||LetheLakePlane|
 |Generate|PLANE:PCA|Plane - Naya|||NayaPlane|
+|Generate|PLANE:PCA|Plane - Panopticon|||PanopticonPlane|
 |Generate|PLANE:PCA|Plane - Tazeem|||TazeemPlane|
 |Generate|PLANE:PCA|Plane - The Dark Barony|||TheDarkBaronyPlane|
 |Generate|PLANE:PCA|Plane - The Eon Fog|||TheEonFogPlane|
+|Generate|PLANE:PCA|Plane - The Great Forest|||TheGreatForestPlane|
 |Generate|PLANE:PCA|Plane - Truga Jungle|||TrugaJunglePlane|
 |Generate|PLANE:PCA|Plane - Turri Island|||TurriIslandPlane|
 |Generate|PLANE:PCA|Plane - Undercity Reaches|||UndercityReachesPlane|
+|Generate|TOK:ANA|Goblin|||GoblinToken|
+|Generate|TOK:ANA|Spirit|||SpiritWhiteToken|
 |Generate|TOK:PCA|Eldrazi|||EldraziAnnihilatorToken|
 |Generate|TOK:10E|Ape|||PongifyApeToken|
 |Generate|TOK:10E|Dragon|||DragonToken2|
@@ -182,6 +188,7 @@
 |Generate|TOK:ALL|Graveborn|||SekKuarDeathkeeperGravebornToken|
 |Generate|TOK:ALL|Hippo|||HippoToken|
 |Generate|TOK:ALL|Soldier|||SoldierToken|
+|Generate|TOK:ALL|Starfish|||StarfishToken|
 |Generate|TOK:ALL|Zombie|||ZombieToken|
 |Generate|TOK:APC|Angel|||HauntedAngelToken|
 |Generate|TOK:APC|Cat|||PenumbraBobcatToken|
@@ -343,6 +350,18 @@
 |Generate|TOK:C16|Thopter||
 |Generate|TOK:C16|Worm||
 |Generate|TOK:C16|Zombie||
+|Generate|TOK:C17|Bat||
+|Generate|TOK:C17|Cat||
+|Generate|TOK:C17|Cat Dragon|||WasitoraCatDragonToken|
+|Generate|TOK:C17|Cat Warrior||
+|Generate|TOK:C17|Dragon|1||DragonToken|
+|Generate|TOK:C17|Dragon|2||UtavaraHellkiteDragonToken|
+|Generate|TOK:C17|Eldrazi Spawn||
+|Generate|TOK:C17|Gold||
+|Generate|TOK:C17|Rat|||DeathtouchRatToken|
+|Generate|TOK:C17|Vampire|||EdgarMarkovToken|
+|Generate|TOK:C17|Zombie||
+|Generate|TOK:C18|Myr|||BrudicladTelchorMyrToken|
 |Generate|TOK:CHK|Dragon Spirit|||TatsumaDragonToken|
 |Generate|TOK:CHK|Elemental|||SeedGuardianToken|
 |Generate|TOK:CHK|Illusion|||MelokuTheCloudedMirrorToken|
@@ -500,6 +519,20 @@
 |Generate|TOK:DKA|Vampire|||SorinLordOfInnistradVampireToken|
 |Generate|TOK:DKA|Wolf|||WolfToken|
 |Generate|TOK:DKA|Zombie|||ZombieToken|
+|Generate|TOK:DOM|Cleric|||BelzenlokClericToken|
+|Generate|TOK:DOM|Construct|||KarnConstructToken|
+|Generate|TOK:DOM|Demon|||BelzenlokDemonToken|
+|Generate|TOK:DOM|Elemental|||ValdukElementalToken|
+|Gererate|TOK:DOM|Goblin||
+|Generate|TOK:DOM|Karox Bladewing|||KaroxBladewingDragonToken|
+|Generate|TOK:DOM|Knight|1|
+|Generate|TOK:DOM|Knight|2|
+|Generate|TOK:DOM|Nightmare Horror|||ChainersTormentNightmareToken|
+|Generate|TOK:DOM|Saproling|1|
+|Generate|TOK:DOM|Saproling|2|
+|Generate|TOK:DOM|Saproling|3|
+|Generate|TOK:DOM|Soldier||
+|Generate|TOK:DOM|Zombie Knight||
 |Generate|TOK:DRB|Saproling|||SaprolingToken|
 |Generate|TOK:DST|Beast|||BeastToken|
 |Generate|TOK:DST|Elemental|1||WandOfTheElementsFirstToken|
@@ -1030,6 +1063,16 @@
 |Generate|TOK:STH|Rat|||RatToken|
 |Generate|TOK:STH|Sliver|||SliversmithToken|
 |Generate|TOK:STH|Spike|||SpikeToken|
+|Generate|TOK:SWS|Ewok|||EwokToken|
+|Generate|TOK:SWS|B-Wing|||RebelStarshipToken|
+|Generate|TOK:SWS|Hunter|||HunterToken|
+|Generate|TOK:SWS|TIE Fighter|||TIEFighterToken|
+|Generate|TOK:SWS|Trooper|||TrooperToken|
+|Generate|TOK:SWS|AT-AT|||ATATToken|
+|Generate|TOK:SWS|Rebel|||RebelToken|
+|Generate|TOK:SWS|Royal Guard|||RoyalGuardToken|
+|Generate|TOK:SWS|Tusken Raider|||TuskenRaiderToken|
+|Generate|TOK:SWS|Droid|||DroidToken|
 |Generate|TOK:THS|Bird|||SwanSongBirdToken|
 |Generate|TOK:THS|Boar|||CurseOfTheSwineBoarToken|
 |Generate|TOK:THS|Cleric|||HeliodGodOfTheSunToken|
@@ -1143,3 +1186,15 @@
 |Generate|TOK:ZEN|Vampire||
 |Generate|TOK:ZEN|Wolf|||WolfToken|
 |Generate|TOK:ZEN|Zombie Giant|||QuestForTheGravelordZombieToken|
+|Generate|TOK:RNA|Beast|||RedGreenBeastToken|
+|Generate|TOK:RNA|Centaur|||CentaurToken|
+|Generate|TOK:RNA|Frog Lizard|||FrogLizardToken|
+|Generate|TOK:RNA|Goblin|||GoblinToken|
+|Generate|TOK:RNA|Human|||HumanToken|
+|Generate|TOK:RNA|Illusion|||MesmerizingBenthidToken|
+|Generate|TOK:RNA|Ooze|||BiogenicOozeToken|
+|Generate|TOK:RNA|Sphinx|||WardenSphinxToken|
+|Generate|TOK:RNA|Spirit|||SpiritWhiteToken|
+|Generate|TOK:RNA|Thopter|||ThopterToken|
+|Generate|TOK:RNA|Treasure|||TreasureToken|
+|Generate|TOK:RNA|Zombie|||ZombieToken|

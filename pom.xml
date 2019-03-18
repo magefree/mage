@@ -6,7 +6,7 @@
 
     <groupId>org.mage</groupId>
     <artifactId>mage-root</artifactId>
-    <version>1.4.28</version>
+    <version>1.4.33</version>
     <packaging>pom</packaging>
     <name>Mage Root</name>
     <description>Mage Root POM</description>
@@ -29,6 +29,7 @@
                     <!--                    <compilerArgument>-Xlint:all</compilerArgument> -->
                 </configuration>
             </plugin>
+
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>2.7</version>
@@ -36,6 +37,8 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
+
+            <!-- default manifest settings (parent) -->
             <plugin>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>2.5</version>
@@ -43,6 +46,7 @@
                     <archive>
                         <manifestEntries>
                             <Built-By>MageTeam</Built-By>
+                            <Build-Time>${maven.build.timestamp}</Build-Time>
                         </manifestEntries>
                     </archive>
                 </configuration>
@@ -60,7 +64,6 @@
         <module>Mage.Server.Console</module>
         <module>Mage.Tests</module>
         <module>Mage.Updater</module>
-        <module>Mage.Stats</module>
         <module>Mage.Verify</module>
     </modules>
 
@@ -84,8 +87,9 @@
     </repositories>
 
     <properties>
-        <mage-version>1.4.28</mage-version>
+        <mage-version>1.4.33</mage-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss'Z'</maven.build.timestamp.format>
     </properties>
 
     <dependencyManagement>
@@ -93,7 +97,7 @@
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <version>4.12</version>
+                <version>4.13-beta-2</version>
             </dependency>
             <dependency>
                 <groupId>log4j</groupId>
@@ -103,7 +107,12 @@
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-log4j12</artifactId>
-                <version>1.7.19</version>
+                <version>1.8.0-beta2</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>20.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

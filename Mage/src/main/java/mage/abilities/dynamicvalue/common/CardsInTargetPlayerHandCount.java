@@ -7,10 +7,10 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author cbrianhill
  */
-public class CardsInTargetPlayerHandCount implements DynamicValue {
+public enum CardsInTargetPlayerHandCount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -23,7 +23,7 @@ public class CardsInTargetPlayerHandCount implements DynamicValue {
 
     @Override
     public CardsInTargetPlayerHandCount copy() {
-        return new CardsInTargetPlayerHandCount();
+        return CardsInTargetPlayerHandCount.instance;
     }
 
     @Override

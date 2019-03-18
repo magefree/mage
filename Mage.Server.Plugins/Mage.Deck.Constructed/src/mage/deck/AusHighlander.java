@@ -1,54 +1,87 @@
-/*
- * Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.deck;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
-import mage.constants.SetType;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- *
  * @author spjspj
  */
 public class AusHighlander extends Constructed {
 
+    public static final Map<String, Integer> pointMap = new HashMap<>();
+
+    static {
+        pointMap.put("Ancestral Recall", 4);
+        pointMap.put("Black Lotus", 4);
+        pointMap.put("Time Vault", 4);
+        pointMap.put("Demonic Tutor", 3);
+        pointMap.put("Imperial Seal", 3);
+        pointMap.put("Mox Emerald", 3);
+        pointMap.put("Mox Jet", 3);
+        pointMap.put("Mox Pearl", 3);
+        pointMap.put("Mox Ruby", 3);
+        pointMap.put("Mox Sapphire", 3);
+        pointMap.put("Sol Ring", 3);
+        pointMap.put("Time Walk", 3);
+        pointMap.put("Vampiric Tutor", 3);
+        pointMap.put("Yawgmoth's Will", 3);
+        pointMap.put("Channel", 2);
+        pointMap.put("Dig Through Time", 2);
+        pointMap.put("Library of Alexandria", 2);
+        pointMap.put("Mana Crypt", 2);
+        pointMap.put("Mind Twist", 2);
+        pointMap.put("Mystical Tutor", 2);
+        pointMap.put("Protean Hulk", 2);
+        pointMap.put("Tinker", 2);
+        pointMap.put("Tolarian Academy", 2);
+        pointMap.put("Treasure Cruise", 2);
+        pointMap.put("Balance", 1);
+        pointMap.put("Birthing Pod", 1);
+        pointMap.put("Crop Rotation", 1);
+        pointMap.put("Dark Petition", 1);
+        pointMap.put("Enlightened Tutor", 1);
+        pointMap.put("Fastbond", 1);
+        pointMap.put("Force of Will", 1);
+        pointMap.put("Gifts Ungiven", 1);
+        pointMap.put("Green Sun's Zenith", 1);
+        pointMap.put("Hermit Druid", 1);
+        pointMap.put("Intuition", 1);
+        pointMap.put("Jace, the Mind Sculptor", 1);
+        pointMap.put("Karakas", 1);
+        pointMap.put("Life from the Loam", 1);
+        pointMap.put("Lim-Dul's Vault", 1);
+        pointMap.put("Mana Drain", 1);
+        pointMap.put("Mana Vault", 1);
+        pointMap.put("Memory Jar", 1);
+        pointMap.put("Merchant Scroll", 1);
+        pointMap.put("Mishra's Workshop", 1);
+        pointMap.put("Natural Order", 1);
+        pointMap.put("Oath of Druids", 1);
+        pointMap.put("Personal Tutor", 1);
+        pointMap.put("Sensei's Divining Top", 1);
+        pointMap.put("Skullclamp", 1);
+        pointMap.put("Snapcaster Mage", 1);
+        pointMap.put("Stoneforge Mystic", 1);
+        pointMap.put("Strip Mine", 1);
+        pointMap.put("Survival of the Fittest", 1);
+        pointMap.put("Tainted Pact", 1);
+        pointMap.put("Time Spiral", 1);
+        pointMap.put("Timetwister", 1);
+        pointMap.put("True-Name Nemesis", 1);
+        pointMap.put("Umezawa's Jitte", 1);
+        pointMap.put("Wasteland", 1);
+        pointMap.put("Yawgmoth's Bargain", 1);
+    }
+
     public AusHighlander() {
         this("Australian Highlander");
         for (ExpansionSet set : Sets.getInstance().values()) {
-            if (set.getSetType() != SetType.CUSTOM_SET) {
+            if (set.getSetType().isEternalLegal()) {
                 setCodes.add(set.getCode());
             }
         }
@@ -97,14 +130,12 @@ public class AusHighlander extends Constructed {
         banned.add("Unexpected Potential");
         banned.add("Worldknit");
 
-        List<String> basicLandNames = new ArrayList<>(Arrays.asList("Forest", "Island", "Mountain", "Swamp", "Plains", "Wastes",
-                "Snow-Covered Forest", "Snow-Covered Island", "Snow-Covered Mountain", "Snow-Covered Swamp", "Snow-Covered Plains"));
         Map<String, Integer> counts = new HashMap<>();
         countCards(counts, deck.getCards());
         countCards(counts, deck.getSideboard());
         for (Map.Entry<String, Integer> entry : counts.entrySet()) {
             if (entry.getValue() > 1) {
-                if (!basicLandNames.contains(entry.getKey()) && !entry.getKey().equals("Relentless Rats") && !entry.getKey().equals("Shadowborn Apostle")) {
+                if (!basicLandNames.contains(entry.getKey()) && !anyNumberCardsAllowed.contains(entry.getKey())) {
                     invalid.put(entry.getKey(), "Too many: " + entry.getValue());
                     valid = false;
                 }
@@ -114,79 +145,9 @@ public class AusHighlander extends Constructed {
         int totalPoints = 0;
         for (Map.Entry<String, Integer> entry : counts.entrySet()) {
             String cn = entry.getKey();
-            if (cn.equals("Ancestral Recall")
-                    || cn.equals("Black Lotus")
-                    || cn.equals("Time Vault")) {
-                totalPoints += 4;
-                invalid.put(cn, "4 points");
-            }
-            if (cn.equals("Demonic Tutor")
-                    || cn.equals("Imperial Seal")
-                    || cn.equals("Mox Emerald")
-                    || cn.equals("Mox Jet")
-                    || cn.equals("Mox Pearl")
-                    || cn.equals("Mox Ruby")
-                    || cn.equals("Sol Ring")
-                    || cn.equals("Time Walk")
-                    || cn.equals("Tinker")
-                    || cn.equals("Vampiric Tutor")
-                    || cn.equals("Yawgmoth's Will")
-                    || cn.equals("Mox Sapphire.")) {
-                totalPoints += 3;
-                invalid.put(cn, "3 points");
-            }
-            if (cn.equals("Channel")
-                    || cn.equals("Dig Through Time")
-                    || cn.equals("Library of Alexandria")
-                    || cn.equals("Mana Crypt")
-                    || cn.equals("Mystical Tutor")
-                    || cn.equals("Protean Hulk")
-                    || cn.equals("Skullclamp")
-                    || cn.equals("Strip Mine")
-                    || cn.equals("Tolarian Academy.")) {
-                totalPoints += 2;
-                invalid.put(cn, "2 points");
-            }
-            if (cn.equals("Back to Basics")
-                    || cn.equals("Balance")
-                    || cn.equals("Birthing Pod")
-                    || cn.equals("Crop Rotation")
-                    || cn.equals("Dark Petition")
-                    || cn.equals("Enlightened Tutor")
-                    || cn.equals("Fastbond")
-                    || cn.equals("Force of Will")
-                    || cn.equals("Gifts Ungiven")
-                    || cn.equals("Green Sun's Zenith")
-                    || cn.equals("Hermit Druid")
-                    || cn.equals("Intuition")
-                    || cn.equals("Jace, the Mind Sculptor")
-                    || cn.equals("Karakas")
-                    || cn.equals("Lim-Dul's Vault")
-                    || cn.equals("Mana Drain")
-                    || cn.equals("Mana Vault")
-                    || cn.equals("Memory Jar")
-                    || cn.equals("Merchant Scroll")
-                    || cn.equals("Mind Twist")
-                    || cn.equals("Mishra's Workshop")
-                    || cn.equals("Natural Order")
-                    || cn.equals("Oath of Druids")
-                    || cn.equals("Personal Tutor")
-                    || cn.equals("Sensei's Divining Top")
-                    || cn.equals("Snapcaster Mage")
-                    || cn.equals("Stoneforge Mystic")
-                    || cn.equals("Survival of the Fittest")
-                    || cn.equals("Tainted Pact")
-                    || cn.equals("Time Spiral")
-                    || cn.equals("Timetwister")
-                    || cn.equals("Treasure Cruise")
-                    || cn.equals("True-Name Nemesis")
-                    || cn.equals("Umezawa's Jitte")
-                    || cn.equals("Wasteland")
-                    || cn.equals("Wheel of Fortune")
-                    || cn.equals("Yawgmoth's Bargain")
-                    || cn.equals("Worldly Tutor")) {
-                totalPoints += 1;
-                invalid.put(cn, "1 point");
+            if (pointMap.containsKey(cn)) {
+                totalPoints += pointMap.get(cn);
+                invalid.put(entry.getKey(), " " + pointMap.get(cn) + " point " + cn);
             }
         }
         if (totalPoints > 7) {

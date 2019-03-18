@@ -1,30 +1,4 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards.repository;
 
 import com.j256.ormlite.stmt.QueryBuilder;
@@ -335,4 +309,97 @@ public class CardCriteria {
             qb.orderBy(sortBy, true);
         }
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getNameExact() {
+        return nameExact;
+    }
+
+    public String getRules() {
+        return rules;
+    }
+
+    public List<String> getSetCodes() {
+        return setCodes;
+    }
+
+    public List<CardType> getTypes() {
+        return types;
+    }
+
+    public List<CardType> getNotTypes() {
+        return notTypes;
+    }
+
+    public List<String> getSupertypes() {
+        return supertypes;
+    }
+
+    public List<String> getNotSupertypes() {
+        return notSupertypes;
+    }
+
+    public List<String> getSubtypes() {
+        return subtypes;
+    }
+
+    public List<Rarity> getRarities() {
+        return rarities;
+    }
+
+    public Boolean getDoubleFaced() {
+        return doubleFaced;
+    }
+
+    public boolean isBlack() {
+        return black;
+    }
+
+    public boolean isBlue() {
+        return blue;
+    }
+
+    public boolean isGreen() {
+        return green;
+    }
+
+    public boolean isRed() {
+        return red;
+    }
+
+    public boolean isWhite() {
+        return white;
+    }
+
+    public boolean isColorless() {
+        return colorless;
+    }
+
+    public Integer getConvertedManaCost() {
+        return convertedManaCost;
+    }
+
+    public String getSortBy() {
+        return sortBy;
+    }
+
+    public Long getStart() {
+        return start;
+    }
+
+    public Long getCount() {
+        return count;
+    }
+
+    public int getMinCardNumber() {
+        return minCardNumber;
+    }
+
+    public int getMaxCardNumber() {
+        return maxCardNumber;
+    }
+
 }

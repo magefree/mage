@@ -1,30 +1,4 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards.k;
 
 import mage.abilities.Ability;
@@ -45,11 +19,10 @@ import java.util.*;
  *
  * @author North
  */
-public class KillingWave extends CardImpl {
+public final class KillingWave extends CardImpl {
 
     public KillingWave(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}");
 
         // For each creature, its controller sacrifices it unless he or she pays X life.
         this.getSpellAbility().addEffect(new KillingWaveEffect());
@@ -88,7 +61,7 @@ class KillingWaveEffect extends OneShotEffect {
             return false;
         }
 
-        int amount = (new ManacostVariableValue()).calculate(game, source, this);
+        int amount = (ManacostVariableValue.instance).calculate(game, source, this);
         if (amount > 0) {
             List<Permanent> sacrifices = new LinkedList<>();
             Map<UUID, Integer> lifePaidAmounts = new HashMap<>();
@@ -96,21 +69,23 @@ class KillingWaveEffect extends OneShotEffect {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
-                List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(filter, playerId, game);
+                if (player != null) {
+                    List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(filter, playerId, game);
 
-                int lifePaid = 0;
-                int playerLife = player.getLife();
-                for (Permanent creature : creatures) {
-                    String message = "Pay " + amount + " life? If you don't, " + creature.getName() + " will be sacrificed.";
-                    if (playerLife - amount - lifePaid >= 0 && player != null && player.chooseUse(Outcome.Neutral, message, source, game)) {
-                        game.informPlayers(player.getLogName() + " pays " + amount + " life. He will not sacrifice " + creature.getName());
-                        lifePaid += amount;
-                    } else {
-                        game.informPlayers(player.getLogName() + " will sacrifice " + creature.getName());
-                        sacrifices.add(creature);
+                    int lifePaid = 0;
+                    int playerLife = player.getLife();
+                    for (Permanent creature : creatures) {
+                        String message = "Pay " + amount + " life? If you don't, " + creature.getName() + " will be sacrificed.";
+                        if (playerLife - amount - lifePaid >= 0 && player.chooseUse(Outcome.Neutral, message, source, game)) {
+                            game.informPlayers(player.getLogName() + " pays " + amount + " life. He will not sacrifice " + creature.getName());
+                            lifePaid += amount;
+                        } else {
+                            game.informPlayers(player.getLogName() + " will sacrifice " + creature.getName());
+                            sacrifices.add(creature);
+                        }
                     }
+                    lifePaidAmounts.put(playerId, lifePaid);
                 }
-                lifePaidAmounts.put(playerId, lifePaid);
             }
 
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {

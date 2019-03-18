@@ -10,6 +10,7 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.command.Commander;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.events.ZoneChangeGroupEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentMeld;
@@ -25,6 +26,12 @@ public final class ZonesHandler {
     public static boolean cast(ZoneChangeInfo info, Game game) {
         if (maybeRemoveFromSourceZone(info, game)) {
             placeInDestinationZone(info, game);
+            // create a group zone change event if a card is moved to stack for casting (it's always only one card, but some effects check for group events (one or more xxx))
+            Set<Card> cards = new HashSet<>();
+            Card targetCard = getTargetCard(game, info.event.getTargetId());
+            cards.add(targetCard);
+            game.fireEvent(new ZoneChangeGroupEvent(cards, info.event.getSourceId(), info.event.getPlayerId(), info.event.getFromZone(), info.event.getToZone()));
+            // normal movement
             game.fireEvent(info.event);
             return true;
         }
@@ -134,12 +141,15 @@ public final class ZonesHandler {
                 case STACK:
                     // There should never be more than one card here.
                     for (Card card : cards.getCards(game)) {
+                        Spell spell;
                         if (info instanceof ZoneChangeInfo.Stack && ((ZoneChangeInfo.Stack) info).spell != null) {
-                            game.getStack().push(((ZoneChangeInfo.Stack) info).spell);
+                            spell = ((ZoneChangeInfo.Stack) info).spell;
                         } else {
-                            game.getStack().push(
-                                    new Spell(card, card.getSpellAbility().copy(), card.getOwnerId(), event.getFromZone()));
+                            spell = new Spell(card, card.getSpellAbility().copy(), card.getOwnerId(), event.getFromZone());
                         }
+                        game.getStack().push(spell);
+                        game.getState().setZone(spell.getId(), Zone.STACK);
+                        game.getState().setZone(card.getId(), Zone.STACK);
                     }
                     break;
                 case BATTLEFIELD:

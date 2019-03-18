@@ -11,7 +11,7 @@ public class MycosynthLatticeTest extends CardTestPlayerBase {
     @Test
     public void testMycoSynthLatticeNormal() {
         // Converge - Crystalline Crawler enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.
-        // Remove a +1/+1 counter from Crystalline Crawler: Add one mana of any color to your mana pool.
+        // Remove a +1/+1 counter from Crystalline Crawler: Add one mana of any color.
         // {T}: Put a +1/+1 counter on Crystalline Crawler.
         String crawler = "Crystalline Crawler";
 
@@ -33,7 +33,7 @@ public class MycosynthLatticeTest extends CardTestPlayerBase {
     @Test
     public void testMycoSynthLatticeWithCrystallineCrawler() {
         // Converge - Crystalline Crawler enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.
-        // Remove a +1/+1 counter from Crystalline Crawler: Add one mana of any color to your mana pool.
+        // Remove a +1/+1 counter from Crystalline Crawler: Add one mana of any color.
         // {T}: Put a +1/+1 counter on Crystalline Crawler.
         String crawler = "Crystalline Crawler";
 

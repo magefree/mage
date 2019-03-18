@@ -1,30 +1,4 @@
-/*
-* Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.server.draft;
 
 import java.rmi.RemoteException;
@@ -50,7 +24,7 @@ import org.apache.log4j.Logger;
  */
 public class DraftSession {
 
-    protected final static Logger logger = Logger.getLogger(DraftSession.class);
+    protected static final Logger logger = Logger.getLogger(DraftSession.class);
 
     protected final UUID userId;
     protected final UUID playerId;
@@ -74,7 +48,8 @@ public class DraftSession {
             if (user.isPresent()) {
                 if (futureTimeout != null && !futureTimeout.isDone()) {
                     int remaining = (int) futureTimeout.getDelay(TimeUnit.SECONDS);
-                    user.get().fireCallback(new ClientCallback(ClientCallbackMethod.DRAFT_INIT, draft.getId(), new DraftClientMessage(getDraftPickView(remaining))));
+                    user.get().fireCallback(new ClientCallback(ClientCallbackMethod.DRAFT_INIT, draft.getId(),
+                        new DraftClientMessage(getDraftView(), getDraftPickView(remaining))));
                 }
                 return true;
             }
@@ -86,8 +61,8 @@ public class DraftSession {
         if (!killed) {
             UserManager.instance
                     .getUser(userId).
-                    ifPresent(user -> user.fireCallback(
-                    new ClientCallback(ClientCallbackMethod.DRAFT_UPDATE, draft.getId(), getDraftView())));
+                    ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.DRAFT_UPDATE, draft.getId(),
+                        new DraftClientMessage(getDraftView(), null))));
         }
     }
 
@@ -96,7 +71,6 @@ public class DraftSession {
             UserManager.instance
                     .getUser(userId)
                     .ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.DRAFT_OVER, draft.getId())));
-
         }
     }
 
@@ -105,7 +79,8 @@ public class DraftSession {
             setupTimeout(timeout);
             UserManager.instance
                     .getUser(userId)
-                    .ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.DRAFT_PICK, draft.getId(), new DraftClientMessage(getDraftPickView(timeout)))));
+                    .ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.DRAFT_PICK, draft.getId(),
+                        new DraftClientMessage(getDraftView(), getDraftPickView(timeout)))));
 
         }
     }

@@ -16,14 +16,14 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetControlledCreaturePermanent;
 
-public class EndlessSands extends CardImpl {
+public final class EndlessSands extends CardImpl {
 
     public EndlessSands(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
         
         this.subtype.add(SubType.DESERT);
                 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         
         // {2}, {T}: Exile target creature you control.
@@ -32,8 +32,8 @@ public class EndlessSands extends CardImpl {
         exileAbility.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(exileAbility);
         
-        // {4}, {T}, Sacrifice Endless Sands: Return each creature card exiled with Endless Sands to the battlefield under its owner’s control.
-        ReturnCreaturesFromExileEffect returnFromExileEffect = new ReturnCreaturesFromExileEffect(this.getId(), true, "Return each creature card exiled with {this} to the battlefield under its owner’s control.");
+        // {4}, {T}, Sacrifice Endless Sands: Return each creature card exiled with Endless Sands to the battlefield under its owner's control.
+        ReturnCreaturesFromExileEffect returnFromExileEffect = new ReturnCreaturesFromExileEffect(this.getId(), true, "Return each creature card exiled with {this} to the battlefield under its owner's control.");
         Ability returnAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, returnFromExileEffect,  new ManaCostsImpl("{4}"));
         returnAbility.addCost(new TapSourceCost());
         returnAbility.addCost(new SacrificeSourceCost());

@@ -1,0 +1,87 @@
+1 [CMD:193] Desecrator Hag
+1 [CMD:270] Dimir Aqueduct
+1 [CMD:62] Slipstream Eel
+1 [CMD:63] Spell Crumple
+1 [CMD:271] Dreadship Reef
+1 [CMD:152] Eternal Witness
+1 [CMD:275] Golgari Rot Farm
+1 [CMD:68] Vow of Flight
+2 [CMD:310] Swamp
+1 [CMD:236] Vulturous Zombie
+1 [CMD:235] Vorosh, the Hunter
+1 [CMD:279] Jwar Isle Refuge
+2 [CMD:315] Forest
+2 [CMD:317] Forest
+1 [CMD:239] Wrexial, the Risen Deep
+2 [CMD:316] Forest
+3 [CMD:308] Swamp
+3 [CMD:307] Swamp
+3 [CMD:309] Swamp
+1 [CMD:191] Damia, Sage of Stone
+1 [CMD:71] Wonder
+1 [CMD:140] Acidic Slime
+1 [CMD:73] Avatar of Woe
+1 [CMD:261] Sol Ring
+1 [CMD:74] Buried Alive
+1 [CMD:263] Triskelavus
+1 [CMD:262] Solemn Simulacrum
+1 [CMD:70] Windfall
+1 [CMD:102] Stitch Together
+1 [CMD:145] Brawn
+1 [CMD:101] Sign in Blood
+1 [CMD:266] Barren Moor
+1 [CMD:148] Cultivate
+1 [CMD:104] Syphon Mind
+1 [CMD:269] Command Tower
+1 [CMD:103] Syphon Flesh
+1 [CMD:75] Butcher of Malakir
+1 [CMD:227] Skullbriar, the Walking Grave
+2 [CMD:304] Island
+1 [CMD:76] Dark Hatchling
+1 [CMD:105] Unnerve
+2 [CMD:303] Island
+2 [CMD:306] Island
+1 [CMD:228] Szadek, Lord of Secrets
+1 [CMD:107] Vow of Malice
+2 [CMD:305] Island
+1 [CMD:292] Tranquil Thicket
+1 [CMD:83] Fleshbag Marauder
+1 [CMD:291] Terramorphic Expanse
+1 [CMD:85] Grave Pact
+1 [CMD:175] Tribute to the Wild
+1 [CMD:254] Oblivion Stone
+1 [CMD:81] Extractor Demon
+1 [CMD:176] Troll Ascetic
+1 [CMD:253] Lightning Greaves
+1 [CMD:1] Artisan of Kozilek
+1 [CMD:179] Yavimaya Elder
+1 [CMD:178] Vow of Wildness
+1 [CMD:86] Gravedigger
+1 [CMD:259] Simic Signet
+1 [CMD:44] Dreamborn Muse
+1 [CMD:88] Living Death
+1 [CMD:89] Mortivore
+1 [CMD:45] Fact or Fiction
+1 [CMD:290] Temple of the False God
+1 [CMD:93] Patron of the Nezumi
+1 [CMD:281] Lonely Sandbar
+1 [CMD:50] Memory Erosion
+1 [CMD:51] Minds Aglow
+1 [CMD:52] Mulldrifter
+1 [CMD:96] Rise from the Grave
+1 [CMD:285] Rupture Spire
+1 [CMD:165] Lhurgoyf
+1 [CMD:92] Nezumi Graverobber
+1 [CMD:168] Relic Crush
+1 [CMD:289] Svogthos, the Restless Tomb
+1 [CMD:288] Simic Growth Chamber
+1 [CMD:59] Riddlekeeper
+1 [CMD:246] Dimir Signet
+1 [CMD:97] Scythe Specter
+1 [CMD:249] Golgari Signet
+1 [CMD:98] Sewer Nemesis
+1 [CMD:99] Shared Trauma
+2 [CMD:318] Forest
+SB: 1 [CMD:210] The Mimeoplasm
+LAYOUT MAIN:(2,10)(CMC,true,50)|()()([CMD:92],[CMD:227])([CMD:152],[CMD:83],[CMD:59],[CMD:176],[CMD:179])([CMD:145],[CMD:193],[CMD:44],[CMD:86],[CMD:165],[CMD:89],[CMD:98],[CMD:262],[CMD:71])([CMD:140],[CMD:52],[CMD:236])([CMD:76],[CMD:81],[CMD:97],[CMD:235],[CMD:239])([CMD:75],[CMD:191],[CMD:93],[CMD:62],[CMD:228],[CMD:263])([CMD:73])([CMD:1])([CMD:266],[CMD:269],[CMD:270],[CMD:271],[CMD:315],[CMD:315],[CMD:316],[CMD:316],[CMD:317],[CMD:317],[CMD:318],[CMD:318],[CMD:275],[CMD:303],[CMD:303],[CMD:304],[CMD:304],[CMD:305],[CMD:305],[CMD:306],[CMD:306],[CMD:279],[CMD:281],[CMD:285],[CMD:288],[CMD:289],[CMD:307],[CMD:307],[CMD:307],[CMD:308],[CMD:308],[CMD:308],[CMD:309],[CMD:309],[CMD:309],[CMD:310],[CMD:310],[CMD:290],[CMD:291],[CMD:292])([CMD:51],[CMD:99],[CMD:261])([CMD:101],[CMD:102],[CMD:175],[CMD:246],[CMD:249],[CMD:253],[CMD:259])([CMD:74],[CMD:148],[CMD:70],[CMD:63],[CMD:254],[CMD:50],[CMD:68],[CMD:107],[CMD:178])([CMD:104],[CMD:105],[CMD:45],[CMD:85])([CMD:88],[CMD:96],[CMD:103],[CMD:168])()()()()
+LAYOUT SIDEBOARD:(1,1)(NONE,false,50)|([CMD:210])

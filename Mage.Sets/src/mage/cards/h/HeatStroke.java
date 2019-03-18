@@ -1,61 +1,46 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards.h;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
+
+import mage.MageObjectReference;
+import mage.abilities.Ability;
 import mage.abilities.common.EndOfCombatTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.BlockedPredicate;
 import mage.filter.predicate.permanent.BlockingPredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
+import mage.watchers.common.BlockedThisTurnWatcher;
+import mage.watchers.common.WasBlockedThisTurnWatcher;
 
 /**
  * @author dustinroepsch
  */
-public class HeatStroke extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterCreaturePermanent();
-
-    static {
-        filter.add(Predicates.or(new BlockedPredicate(), new BlockingPredicate()));
-    }
+public final class HeatStroke extends CardImpl {
 
     public HeatStroke(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
         // At end of combat, destroy each creature that blocked or was blocked this turn.
-        this.addAbility(new EndOfCombatTriggeredAbility(new DestroyAllEffect(filter)
-                .setText("destroy each creature that blocked or was blocked this turn"), false));
+        Ability ability = new EndOfCombatTriggeredAbility(new HeatStrokeEffect(), false);
+        ability.addWatcher(new BlockedThisTurnWatcher());
+        ability.addWatcher(new WasBlockedThisTurnWatcher());
+        this.addAbility(ability);
     }
 
     public HeatStroke(final HeatStroke card) {
@@ -65,5 +50,48 @@ public class HeatStroke extends CardImpl {
     @Override
     public HeatStroke copy() {
         return new HeatStroke(this);
+    }
+}
+
+class HeatStrokeEffect extends OneShotEffect {
+
+    public HeatStrokeEffect() {
+        super(Outcome.DestroyPermanent);
+        this.staticText = "destroy each creature that blocked or was blocked this turn";
+    }
+
+    public HeatStrokeEffect(HeatStrokeEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        BlockedThisTurnWatcher blockedWatcher = game.getState().getWatcher(BlockedThisTurnWatcher.class);
+        WasBlockedThisTurnWatcher wasBlockedThisTurnWatcher = game.getState().getWatcher(WasBlockedThisTurnWatcher.class);
+
+        Set<Permanent> inROI = new HashSet<>(game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game));
+        boolean toRet = false;
+        Set<MageObjectReference> toDestroy = new HashSet<>();
+
+        if (blockedWatcher != null){
+            toDestroy.addAll(blockedWatcher.getBlockedThisTurnCreatures());
+        }
+        if (wasBlockedThisTurnWatcher != null){
+            toDestroy.addAll(wasBlockedThisTurnWatcher.getWasBlockedThisTurnCreatures());
+        }
+
+        for (MageObjectReference mor : toDestroy) {
+            Permanent permanent = mor.getPermanent(game);
+            if (permanent != null && permanent.isCreature() && inROI.contains(permanent)){
+                permanent.destroy(source.getSourceId(), game, false);
+                toRet = true;
+            }
+        }
+        return toRet;
+    }
+
+    @Override
+    public HeatStrokeEffect copy() {
+        return new HeatStrokeEffect(this);
     }
 }

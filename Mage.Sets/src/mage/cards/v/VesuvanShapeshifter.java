@@ -1,33 +1,6 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -43,12 +16,7 @@ import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -58,13 +26,12 @@ import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.functions.ApplyToPermanent;
 
+import java.util.UUID;
+
 /**
  * @author spjspj
  */
-public class VesuvanShapeshifter extends CardImpl {
-
-    protected Ability turnFaceUpAbility = null;
-    private static final String effectText = "as a copy of any creature on the battlefield until {this} is turned faced down";
+public final class VesuvanShapeshifter extends CardImpl {
 
     public VesuvanShapeshifter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
@@ -79,12 +46,12 @@ public class VesuvanShapeshifter extends CardImpl {
 
         // As Vesuvan Shapeshifter etbs, you may choose another creature. If you do, until Vesuvan Shapeshifter is turned face down, it becomes a copy of that creature
         Effect effect = new CopyPermanentEffect(StaticFilters.FILTER_PERMANENT_CREATURE, new VesuvanShapeShifterFaceUpApplier());
-        effect.setText(effectText);
+        effect.setText("as a copy of any creature on the battlefield until {this} is turned faced down");
         ability = new EntersBattlefieldAbility(effect, true);
         ability.setWorksFaceDown(false);
         this.addAbility(ability);
 
-        // and gains "At the beginning of your upkeep, you may turn this creature face down".
+        // and has "At the beginning of your upkeep, you may turn this creature face down".
         effect = new VesuvanShapeshifterFaceDownEffect();
         ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, true);
         this.addAbility(ability);
@@ -128,7 +95,7 @@ class VesuvanShapeshifterEffect extends OneShotEffect {
 
     public VesuvanShapeshifterEffect() {
         super(Outcome.Copy);
-        staticText = "have {this} become a copy of a creature and gain this ability";
+        staticText = "have {this} become a copy of a creature, except it has this ability";
     }
 
     public VesuvanShapeshifterEffect(final VesuvanShapeshifterEffect effect) {
@@ -147,11 +114,11 @@ class VesuvanShapeshifterEffect extends OneShotEffect {
         Permanent copyToCreature = game.getPermanent(source.getSourceId());
         if (copyToCreature != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
-            filter.add(new AnotherPredicate());
+            filter.add(AnotherPredicate.instance);
 
             TargetCreaturePermanent target = new TargetCreaturePermanent(0, 1, filter, false);
 
-            if (controller.chooseTarget(Outcome.BecomeCreature, target, source, game) && !target.getTargets().isEmpty()) {
+            if (controller != null && controller.chooseTarget(Outcome.BecomeCreature, target, source, game) && !target.getTargets().isEmpty()) {
                 Permanent copyFromCreature = game.getPermanentOrLKIBattlefield(target.getFirstTarget());
                 if (copyFromCreature != null) {
                     game.copyPermanent(Duration.Custom, copyFromCreature, copyToCreature.getId(), source, new VesuvanShapeShifterFaceUpApplier());

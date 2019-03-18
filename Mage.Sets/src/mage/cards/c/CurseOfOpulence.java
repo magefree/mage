@@ -1,30 +1,4 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards.c;
 
 import java.util.HashSet;
@@ -53,7 +27,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Saga
  */
-public class CurseOfOpulence extends CardImpl {
+public final class CurseOfOpulence extends CardImpl {
 
     public CurseOfOpulence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}");
@@ -66,7 +40,7 @@ public class CurseOfOpulence extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // Whenever enchanted player is attacked, create a colorless artifact token named Gold.
-        // It has "sacrifice this artifact: Add one mana of any color to your mana pool." Each opponent attacking that player does the same.
+        // It has "sacrifice this artifact: Add one mana of any color." Each opponent attacking that player does the same.
         this.addAbility(new EnchantedPlayerAttackedTriggeredAbility(new CurseOfOpulenceEffect()));
     }
 
@@ -85,7 +59,7 @@ class CurseOfOpulenceEffect extends OneShotEffect {
     CurseOfOpulenceEffect() {
         super(Outcome.Benefit);
         this.staticText = "create a colorless artifact token named Gold. It has "
-                + "\"sacrifice this artifact: Add one mana of any color to your mana pool.\" "
+                + "\"sacrifice this artifact: Add one mana of any color.\" "
                 + "Each opponent attacking that player does the same.";
     }
 
@@ -104,7 +78,7 @@ class CurseOfOpulenceEffect extends OneShotEffect {
         if (enchantment != null) {
             Player enchantedPlayer = game.getPlayer(enchantment.getAttachedTo());
             if (enchantedPlayer != null) {
-                Set<UUID> players = new HashSet();
+                Set<UUID> players = new HashSet<>();
                 for (UUID attacker : game.getCombat().getAttackers()) {
                     UUID defender = game.getCombat().getDefenderId(attacker);
                     if (defender.equals(enchantedPlayer.getId())

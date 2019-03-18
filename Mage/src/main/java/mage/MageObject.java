@@ -64,20 +64,14 @@ public interface MageObject extends MageItem, Serializable {
 
     void adjustTargets(Ability ability, Game game);
 
+    // memory object copy (not mtg)
     MageObject copy();
 
-    /**
-     * Defines that MageObject is a copy of another object
-     *
-     * @param isCopy
-     */
-    void setCopy(boolean isCopy);
+    // copied card info (mtg)
+    void setCopy(boolean isCopy, MageObject copiedFrom);
 
-    /**
-     * Checks if current MageObject is a copy of another object
-     *
-     * @return
-     */
+    MageObject getCopyFrom();
+
     boolean isCopy();
 
     int getZoneChangeCounter(Game game);
@@ -86,10 +80,10 @@ public interface MageObject extends MageItem, Serializable {
 
     void setZoneChangeCounter(int value, Game game);
 
-    default boolean isHistoric(){
+    default boolean isHistoric() {
         return getCardType().contains(CardType.ARTIFACT)
                 || getSuperType().contains(SuperType.LEGENDARY)
-                || hasSubtype(SubType.SAGA, null );
+                || hasSubtype(SubType.SAGA, null);
     }
 
     default boolean isCreature() {
@@ -114,6 +108,10 @@ public interface MageObject extends MageItem, Serializable {
 
     default boolean isSorcery() {
         return getCardType().contains(CardType.SORCERY);
+    }
+
+    default boolean isInstantOrSorcery() {
+        return this.isInstant() || this.isSorcery();
     }
 
     default boolean isPlaneswalker() {

@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-public class KorAllyToken extends TokenImpl {
+public final class KorAllyToken extends TokenImpl {
 
     public KorAllyToken() {
         super("Kor Ally", "1/1 white Kor Ally creature token");

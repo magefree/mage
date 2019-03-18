@@ -1,49 +1,18 @@
-/*
- * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.abilities.effects.common.continuous;
 
-import java.util.Locale;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.PhaseStep;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 
+import java.util.Locale;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class GainAbilityTargetEffect extends ContinuousEffectImpl {
@@ -75,6 +44,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
         this.ability = ability;
         staticText = rule;
         this.onCard = onCard;
+        this.addDependencyType(DependencyType.AddingAbility);
     }
 
     public GainAbilityTargetEffect(final GainAbilityTargetEffect effect) {
@@ -112,9 +82,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
             return true;
         }
         if (durationPhaseStep != null && durationPhaseStep == game.getPhase().getStep().getType()) {
-            if (!sameStep && game.getActivePlayerId().equals(durationPlayerId) || game.getPlayer(durationPlayerId).hasReachedNextTurnAfterLeaving()) {
-                return true;
-            }
+            return !sameStep && game.isActivePlayer(durationPlayerId) || game.getPlayer(durationPlayerId).hasReachedNextTurnAfterLeaving();
         } else {
             sameStep = false;
         }
@@ -161,21 +129,26 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
-        Target target = mode.getTargets().get(0);
-        if (target.getMaxNumberOfTargets() == Integer.MAX_VALUE) {
-            sb.append("any number of target ").append(target.getTargetName()).append(" gain ");
-        } else if (target.getMaxNumberOfTargets() > 1) {
-            if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
-                sb.append("up to ");
-            }
-            sb.append(target.getMaxNumberOfTargets()).append(" target ").append(target.getTargetName()).append(" gain ");
-        } else {
-            if (!target.getTargetName().toUpperCase(Locale.ENGLISH).startsWith("ANOTHER")) {
-                sb.append("target ");
-            }
-            sb.append(target.getTargetName()).append(" gains ");
 
+        if (mode.getTargets().size() > 0) {
+            Target target = mode.getTargets().get(0);
+            if (target.getMaxNumberOfTargets() == Integer.MAX_VALUE) {
+                sb.append("any number of target ").append(target.getTargetName()).append(" gain ");
+            } else if (target.getMaxNumberOfTargets() > 1) {
+                if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
+                    sb.append("up to ");
+                }
+                sb.append(target.getMaxNumberOfTargets()).append(" target ").append(target.getTargetName()).append(" gain ");
+            } else {
+                if (!target.getTargetName().toUpperCase(Locale.ENGLISH).startsWith("ANOTHER")) {
+                    sb.append("target ");
+                }
+                sb.append(target.getTargetName()).append(" gains ");
+            }
+        } else {
+            sb.append("gains ");
         }
+
         sb.append(ability.getRule());
         if (durationPhaseStep != null) {
             sb.append(" until your next ").append(durationPhaseStep.toString().toLowerCase(Locale.ENGLISH));

@@ -48,9 +48,9 @@ public class SpellCounteredControllerTriggeredAbility extends TriggeredAbilityIm
         if (stackObjectThatCountered == null) {
             stackObjectThatCountered = (StackObject) game.getLastKnownInformation(event.getSourceId(), Zone.STACK);
         }
-        if (stackObjectThatCountered != null && stackObjectThatCountered.getControllerId().equals(getControllerId())) {
+        if (stackObjectThatCountered != null && stackObjectThatCountered.isControlledBy(getControllerId())) {
             StackObject counteredStackObject = (StackObject) game.getLastKnownInformation(event.getTargetId(), Zone.STACK);
-            return counteredStackObject != null && (counteredStackObject instanceof Spell);
+            return (counteredStackObject instanceof Spell);
         }
         return false;
     }

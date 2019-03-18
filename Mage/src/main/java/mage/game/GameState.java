@@ -1,35 +1,4 @@
-/*
- * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.game;
-
-import java.io.Serializable;
-import java.util.*;
-import java.util.stream.Collectors;
 
 import mage.MageObject;
 import mage.abilities.*;
@@ -63,15 +32,17 @@ import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import mage.watchers.Watchers;
 
+import java.io.Serializable;
+import java.util.*;
+import java.util.stream.Collectors;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
- *
+ * <p>
  * since at any time the game state may be copied and restored you cannot rely
  * on any object maintaining it's instance it then becomes necessary to only
  * refer to objects by their ids since these will always remain constant
  * throughout its lifetime
- *
  */
 public class GameState implements Serializable, Copyable<GameState> {
 
@@ -121,6 +92,8 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Map<UUID, Card> copiedCards = new HashMap<>();
     private int permanentOrderNumber;
 
+    private int applyEffectsCounter; // Upcounting number of each applyEffects execution
+
     public GameState() {
         players = new Players();
         playerList = new PlayerList();
@@ -137,6 +110,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         combat = new Combat();
         turnMods = new TurnMods();
         watchers = new Watchers();
+        applyEffectsCounter = 0;
     }
 
     public GameState(final GameState state) {
@@ -193,6 +167,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.zoneChangeCounter.putAll(state.zoneChangeCounter);
         this.copiedCards.putAll(state.copiedCards);
         this.permanentOrderNumber = state.permanentOrderNumber;
+        this.applyEffectsCounter = state.applyEffectsCounter;
     }
 
     public void restoreForRollBack(GameState state) {
@@ -210,7 +185,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.command = state.command;
         this.isPlaneChase = state.isPlaneChase;
         this.seenPlanes = state.seenPlanes;
-        this.designations = state.designations;        
+        this.designations = state.designations;
         this.exile = state.exile;
         this.battlefield = state.battlefield;
         this.turnNum = state.turnNum;
@@ -237,6 +212,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.zoneChangeCounter = state.zoneChangeCounter;
         this.copiedCards = state.copiedCards;
         this.permanentOrderNumber = state.permanentOrderNumber;
+        this.applyEffectsCounter = state.applyEffectsCounter;
     }
 
     @Override
@@ -466,12 +442,12 @@ public class GameState implements Serializable, Copyable<GameState> {
             }
         }
         return null;
-    }    
-    
+    }
+
     public List<String> getSeenPlanes() {
         return seenPlanes;
     }
-    
+
     public boolean isPlaneChase() {
         return isPlaneChase;
     }
@@ -555,8 +531,16 @@ public class GameState implements Serializable, Copyable<GameState> {
         return this.turnMods;
     }
 
-    public Watchers getWatchers() {
-        return this.watchers;
+    public <T extends Watcher> T getWatcher(Class<T> watcherClass) {
+        return watcherClass.cast(watchers.get(watcherClass.getSimpleName()));
+    }
+
+    public <T extends Watcher> T getWatcher(Class<T> watcherClass, UUID uuid) {
+        return watcherClass.cast(watchers.get(watcherClass.getSimpleName(), uuid.toString()));
+    }
+
+    public <T extends Watcher> T getWatcher(Class<T> watcherClass, String prefix) {
+        return watcherClass.cast(watchers.get(watcherClass.getSimpleName(), prefix));
     }
 
     public SpecialActions getSpecialActions() {
@@ -574,6 +558,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public void applyEffects(Game game) {
+        applyEffectsCounter++;
         for (Player player : players.values()) {
             player.reset();
         }
@@ -612,6 +597,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 //    public void addMessage(String message) {
 //        this.messages.add(message);
 //    }
+
     /**
      * Returns a list of all players of the game ignoring range or if a player
      * has lost or left the game.
@@ -680,7 +666,11 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public void setZone(UUID id, Zone zone) {
-        zones.put(id, zone);
+        if (zone == null) {
+            zones.remove(id);
+        } else {
+            zones.put(id, zone);
+        }
     }
 
     public void addSimultaneousEvent(GameEvent event, Game game) {
@@ -752,8 +742,8 @@ public class GameState implements Serializable, Copyable<GameState> {
                     ZoneChangeData data = (ZoneChangeData) obj;
                     return this.fromZone == data.fromZone
                             && this.toZone == data.toZone
-                            && this.sourceId == data.sourceId
-                            && this.playerId == data.playerId;
+                            && Objects.equals(this.sourceId, data.sourceId)
+                            && Objects.equals(this.playerId, data.playerId);
                 }
                 return false;
             }
@@ -776,12 +766,14 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
         for (Map.Entry<ZoneChangeData, List<GameEvent>> entry : eventsByKey.entrySet()) {
             Set<Card> movedCards = new LinkedHashSet<>();
-            for (Iterator<GameEvent> it = entry.getValue().iterator(); it.hasNext();) {
+            for (Iterator<GameEvent> it = entry.getValue().iterator(); it.hasNext(); ) {
                 GameEvent event = it.next();
                 ZoneChangeEvent castEvent = (ZoneChangeEvent) event;
                 UUID targetId = castEvent.getTargetId();
                 Card card = game.getCard(targetId);
-                movedCards.add(card);
+                if (card != null) {
+                    movedCards.add(card);
+                }
             }
             ZoneChangeData eventData = entry.getKey();
             if (!movedCards.isEmpty()) {
@@ -881,13 +873,13 @@ public class GameState implements Serializable, Copyable<GameState> {
             addAbility(ability, designation.getId(), null);
         }
     }
-    
+
     public void addSeenPlane(Plane plane, Game game, UUID controllerId) {
         if (plane != null) {
             getSeenPlanes().add(plane.getName());
         }
     }
-    
+
     public void resetSeenPlanes() {
         getSeenPlanes().clear();
     }
@@ -928,7 +920,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public List<TriggeredAbility> getTriggered(UUID controllerId) {
-        return triggered.stream().filter(triggeredAbility -> triggeredAbility.getControllerId().equals(controllerId))
+        return triggered.stream().filter(triggeredAbility -> controllerId.equals(triggeredAbility.getControllerId()))
                 .collect(Collectors.toList());
     }
 
@@ -961,7 +953,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     /**
      * Other abilities are used to implement some special kind of continuous
      * effects that give abilities to non permanents.
-     *
+     * <p>
      * Crucible of Worlds - You may play land cards from your graveyard. Past in
      * Flames - Each instant and sorcery card in your graveyard gains flashback
      * until end of turn. The flashback cost is equal to its mana cost. Varolz,
@@ -1002,7 +994,7 @@ public class GameState implements Serializable, Copyable<GameState> {
      * @param attachedTo
      * @param ability
      * @param copyAbility copies non MageSingleton abilities before adding to
-     * state
+     *                    state
      */
     public void addOtherAbility(Card attachedTo, Ability ability, boolean copyAbility) {
         Ability newAbility;
@@ -1122,6 +1114,10 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.watchers.add(watcher);
     }
 
+    public void resetWatchers() {
+        this.watchers.reset();
+    }
+
     public int getZoneChangeCounter(UUID objectId) {
         return zoneChangeCounter.getOrDefault(objectId, 1);
     }
@@ -1152,7 +1148,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         Card copiedCard = cardToCopy.copy();
         copiedCard.assignNewId();
         copiedCard.setOwnerId(source.getControllerId());
-        copiedCard.setCopy(true);
+        copiedCard.setCopy(true, cardToCopy);
         copiedCards.put(copiedCard.getId(), copiedCard);
         addCard(copiedCard);
         if (copiedCard.isSplitCard()) {
@@ -1169,4 +1165,9 @@ public class GameState implements Serializable, Copyable<GameState> {
     public int getNextPermanentOrderNumber() {
         return permanentOrderNumber++;
     }
+
+    public int getApplyEffectsCounter() {
+        return applyEffectsCounter;
+    }
+
 }

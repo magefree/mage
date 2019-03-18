@@ -19,27 +19,29 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 
 /**
  *
  * @author Rystan
  */
-public class BlackbladeReforged extends CardImpl {
- 
+public final class BlackbladeReforged extends CardImpl {
+
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     public BlackbladeReforged(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
+        addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+1 for each land you control.
         PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filter);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(count, count)));
- 
+
         // Equip legendary creature (3)
         this.addAbility(new EquipLegendaryAbility(Outcome.AddAbility, new GenericManaCost(3)));
-        
+
         // Equip {7}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(7)));
     }

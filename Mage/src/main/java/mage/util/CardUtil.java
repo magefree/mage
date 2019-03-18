@@ -1,30 +1,3 @@
-/*
- * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.util;
 
 import mage.MageObject;
@@ -35,9 +8,9 @@ import mage.abilities.SpellAbility;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.*;
 import mage.cards.Card;
+import mage.constants.EmptyNames;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.util.functions.CopyTokenFunction;
 
@@ -48,11 +21,13 @@ import java.util.UUID;
  */
 public final class CardUtil {
 
-
     private static final String SOURCE_EXILE_ZONE_TEXT = "SourceExileZone";
 
     static final String[] numberStrings = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
             "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"};
+
+    static final String[] ordinalStrings = {"first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eightth", "ninth",
+            "tenth", "eleventh", "twelfth", "thirteenth", "fourteenth", "fifteenth", "sixteenth", "seventeenth", "eighteenth", "nineteenth", "twentieth"};
 
     /**
      * Increase spell or ability cost to be paid.
@@ -81,7 +56,7 @@ public final class CardUtil {
      * @param reduceCount
      */
     public static void adjustCost(SpellAbility spellAbility, int reduceCount) {
-        CardUtil.adjustAbilityCost((Ability) spellAbility, reduceCount);
+        CardUtil.adjustAbilityCost(spellAbility, reduceCount);
     }
 
     public static ManaCosts<ManaCost> increaseCost(ManaCosts<ManaCost> manaCosts, int increaseCount) {
@@ -132,7 +107,6 @@ public final class CardUtil {
         adjustedCost.setSourceFilter(manaCosts.getSourceFilter());
         return adjustedCost;
     }
-
 
     public static void reduceCost(SpellAbility spellAbility, ManaCosts<ManaCost> manaCostsToReduce) {
         adjustCost(spellAbility, manaCostsToReduce, true);
@@ -367,38 +341,58 @@ public final class CardUtil {
         return number;
     }
 
+    public static String numberToOrdinalText(int number) {
+        if (number >= 1 && number < 21) {
+            return ordinalStrings[number - 1];
+        }
+        return number + "th";
+    }
+
     public static String replaceSourceName(String message, String sourceName) {
         message = message.replace("{this}", sourceName);
         message = message.replace("{source}", sourceName);
         return message;
     }
 
-    public static boolean checkNumeric(String s) {
-
-        for (int i = 0; i < s.length(); i++) {
-            if (!Character.isDigit(s.charAt(i))) {
-                return false;
-            }
+    public static String booleanToFlipName(boolean flip) {
+        if (flip) {
+            return "Heads";
         }
-        return true;
+        return "Tails";
     }
 
+    public static boolean checkNumeric(String s) {
+        return s.chars().allMatch(Character::isDigit);
+
+    }
 
     /**
-     * Parse card number as int (support base [123] and alternative numbers [123b]).
+     * Parse card number as int (support base [123] and alternative numbers
+     * [123b], [U123]).
      *
      * @param cardNumber origin card number
      * @return int
      */
-    public static int parseCardNumberAsInt(String cardNumber){
+    public static int parseCardNumberAsInt(String cardNumber) {
 
-        if (cardNumber.isEmpty()){ throw new IllegalArgumentException("Card number is empty.");}
+        if (cardNumber.isEmpty()) {
+            throw new IllegalArgumentException("Card number is empty.");
+        }
 
-        if(Character.isDigit(cardNumber.charAt(cardNumber.length() - 1)))
-        {
-            return Integer.parseInt(cardNumber);
-        }else{
-            return Integer.parseInt(cardNumber.substring(0, cardNumber.length() - 1));
+        try {
+            if (!Character.isDigit(cardNumber.charAt(0))) {
+                // U123
+                return Integer.parseInt(cardNumber.substring(1));
+            } else if (!Character.isDigit(cardNumber.charAt(cardNumber.length() - 1))) {
+                // 123b
+                return Integer.parseInt(cardNumber.substring(0, cardNumber.length() - 1));
+            } else {
+                // 123
+                return Integer.parseInt(cardNumber);
+            }
+        } catch (NumberFormatException e) {
+            // wrong numbers like RA5 and etc
+            return -1;
         }
     }
 
@@ -461,9 +455,9 @@ public final class CardUtil {
     public static String getObjectZoneString(String text, MageObject mageObject, Game game) {
         int zoneChangeCounter = 0;
         if (mageObject instanceof Permanent) {
-            zoneChangeCounter = ((Permanent) mageObject).getZoneChangeCounter(game);
+            zoneChangeCounter = mageObject.getZoneChangeCounter(game);
         } else if (mageObject instanceof Card) {
-            zoneChangeCounter = ((Card) mageObject).getZoneChangeCounter(game);
+            zoneChangeCounter = mageObject.getZoneChangeCounter(game);
         }
         return getObjectZoneString(text, mageObject.getId(), game, zoneChangeCounter, false);
     }
@@ -513,9 +507,9 @@ public final class CardUtil {
     public static int addWithOverflowCheck(int base, int increment) {
         long result = ((long) base) + increment;
         if (result > Integer.MAX_VALUE) {
-             return Integer.MAX_VALUE;
+            return Integer.MAX_VALUE;
         } else if (result < Integer.MIN_VALUE) {
-             return Integer.MIN_VALUE;
+            return Integer.MIN_VALUE;
         }
         return base + increment;
     }
@@ -523,11 +517,57 @@ public final class CardUtil {
     public static int subtractWithOverflowCheck(int base, int decrement) {
         long result = ((long) base) - decrement;
         if (result > Integer.MAX_VALUE) {
-             return Integer.MAX_VALUE;
+            return Integer.MAX_VALUE;
         } else if (result < Integer.MIN_VALUE) {
-             return Integer.MIN_VALUE;
+            return Integer.MIN_VALUE;
         }
         return base - decrement;
     }
 
+    public static String createObjectRealtedWindowTitle(Ability source, Game game, String textSuffix) {
+        String title;
+        if (source != null) {
+            MageObject sourceObject = game.getObject(source.getSourceId());
+            if (sourceObject != null) {
+                title = sourceObject.getIdName()
+                        + " [" + source.getSourceObjectZoneChangeCounter() + "]"
+                        + (textSuffix == null ? "" : " " + textSuffix);
+            } else {
+                title = textSuffix == null ? "" : textSuffix;
+            }
+        } else {
+            title = textSuffix == null ? "" : textSuffix;
+        }
+        return title;
+
+    }
+
+    /**
+     * Face down cards and their copy tokens don't have names and that's "empty" names is not equals
+     */
+    public static boolean haveSameNames(String name1, String name2, Boolean ignoreMtgRuleForEmptyNames) {
+        if (ignoreMtgRuleForEmptyNames) {
+            // simple compare for tests and engine
+            return name1 != null && name2 != null && name1.equals(name2);
+        } else {
+            // mtg logic compare for game (empty names can't be same)
+            return !haveEmptyName(name1) && !haveEmptyName(name2) && name1.equals(name2);
+        }
+    }
+
+    public static boolean haveSameNames(String name1, String name2) {
+        return haveSameNames(name1, name2, false);
+    }
+
+    public static boolean haveSameNames(MageObject object1, MageObject object2) {
+        return object1 != null && object2 != null && haveSameNames(object1.getName(), object2.getName());
+    }
+
+    public static boolean haveEmptyName(String name) {
+        return name == null || name.isEmpty() || name.equals(EmptyNames.FACE_DOWN_CREATURE.toString()) || name.equals(EmptyNames.FACE_DOWN_TOKEN.toString());
+    }
+
+    public static boolean haveEmptyName(MageObject object) {
+        return object == null || haveEmptyName(object.getName());
+    }
 }

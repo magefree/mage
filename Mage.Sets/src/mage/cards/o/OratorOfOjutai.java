@@ -1,30 +1,4 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards.o;
 
 import java.util.UUID;
@@ -54,7 +28,7 @@ import mage.watchers.common.DragonOnTheBattlefieldWhileSpellWasCastWatcher;
  *
  * @author LevelX2
  */
-public class OratorOfOjutai extends CardImpl {
+public final class OratorOfOjutai extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Dragon card from your hand (you don't have to)");
 
@@ -74,7 +48,7 @@ public class OratorOfOjutai extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // As an additional cost to cast Orator of Ojutai, you may reveal a Dragon card from your hand.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new InfoEffect("As an additional cost to cast {this}, you may reveal a Dragon card from your hand")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new InfoEffect("as an additional cost to cast this spell, you may reveal a Dragon card from your hand")));
 
         // When Orator of Ojutai enters the battlefield, if you revealed a Dragon card or controlled a Dragon as you cast Orator of Ojutai, draw a card.
         this.addAbility(new OratorOfOjutaiTriggeredAbility(new OratorOfOjutaiEffect()), new DragonOnTheBattlefieldWhileSpellWasCastWatcher());
@@ -121,7 +95,7 @@ class OratorOfOjutaiTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         //Intervening if must be checked
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(getSourceId());
-        DragonOnTheBattlefieldWhileSpellWasCastWatcher watcher = (DragonOnTheBattlefieldWhileSpellWasCastWatcher) game.getState().getWatchers().get(DragonOnTheBattlefieldWhileSpellWasCastWatcher.class.getSimpleName());
+        DragonOnTheBattlefieldWhileSpellWasCastWatcher watcher = game.getState().getWatcher(DragonOnTheBattlefieldWhileSpellWasCastWatcher.class);
         return event.getTargetId().equals(getSourceId())
                 && watcher != null
                 && watcher.castWithConditionTrue(sourcePermanent.getSpellAbility().getId());
@@ -161,7 +135,7 @@ class OratorOfOjutaiEffect extends OneShotEffect {
         if (controller != null) {
             Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
             if (sourcePermanent != null) {
-                DragonOnTheBattlefieldWhileSpellWasCastWatcher watcher = (DragonOnTheBattlefieldWhileSpellWasCastWatcher) game.getState().getWatchers().get(DragonOnTheBattlefieldWhileSpellWasCastWatcher.class.getSimpleName());
+                DragonOnTheBattlefieldWhileSpellWasCastWatcher watcher = game.getState().getWatcher(DragonOnTheBattlefieldWhileSpellWasCastWatcher.class);
                 if (watcher != null && watcher.castWithConditionTrue(sourcePermanent.getSpellAbility().getId())) {
                     controller.drawCards(1, game);
                     return true;

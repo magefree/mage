@@ -1,30 +1,4 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package org.mage.test.cards.asthough;
 
 import mage.constants.PhaseStep;
@@ -54,12 +28,12 @@ public class SpendOtherManaTest extends CardTestPlayerBase {
         // {U}: Target noncreature artifact becomes an artifact creature with power and toughness each equal to its converted mana cost until end of turn.
         // {W}{B}: Target artifact creature gains deathtouch and lifelink until end of turn.
         addCard(Zone.BATTLEFIELD, playerA, "Sydri, Galvanic Genius");
-        //{T}: Add {C} to your mana pool. ( represents colorless mana.)
-        // {1}, {T}: Add one mana of any color to your mana pool.
+        //{T}: Add {C}. ( represents colorless mana.)
+        // {1}, {T}: Add one mana of any color.
         addCard(Zone.BATTLEFIELD, playerA, "Unknown Shores");
         addCard(Zone.BATTLEFIELD, playerB, "Mountain");
 
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {C} to your mana pool");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {C}");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{U}: Target noncreature artifact becomes an artifact creature with power and toughness", "Mountain");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -115,7 +89,7 @@ public class SpendOtherManaTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, "Lightning Bolt", 2);
 
         // Search your library for a card and put that card into your hand. Then shuffle your library.
-        // <i>Spell mastery</i> - If there are two or more instant and/or sorcery cards in your graveyard, add {B}{B}{B} to your mana pool.
+        // <i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, add {B}{B}{B}.
         addCard(Zone.HAND, playerA, "Dark Petition"); // {3}{B}{B}
 
         // +1: Create a 0/1 green Plant creature token onto the battlefield.
@@ -150,8 +124,8 @@ public class SpendOtherManaTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hostage Taker");
         setChoice(playerA, "Silvercoat Lion");
 
-        activateManaAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Add {R} to your mana pool."); // red mana to pool
-        activateManaAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Add {R} to your mana pool."); // red mana to pool
+        activateManaAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Add {R}."); // red mana to pool
+        activateManaAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Add {R}."); // red mana to pool
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Silvercoat Lion"); // cast it from exile with red mana from pool
 
         setStopAt(1, PhaseStep.END_TURN);

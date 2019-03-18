@@ -1,30 +1,4 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.sets;
 
 import mage.cards.CardGraphicInfo;
@@ -37,7 +11,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class MasterpieceSeries extends ExpansionSet {
+public final class MasterpieceSeries extends ExpansionSet {
 
     private static final MasterpieceSeries instance = new MasterpieceSeries();
 
@@ -60,7 +34,7 @@ public class MasterpieceSeries extends ExpansionSet {
         cards.add(new SetCardInfo("Chromatic Lantern", 8, Rarity.MYTHIC, mage.cards.c.ChromaticLantern.class, cardGraphicInfo));
         cards.add(new SetCardInfo("Chrome Mox", 9, Rarity.MYTHIC, mage.cards.c.ChromeMox.class, cardGraphicInfo));
         cards.add(new SetCardInfo("Cloudstone Curio", 10, Rarity.MYTHIC, mage.cards.c.CloudstoneCurio.class, cardGraphicInfo));
-        cards.add(new SetCardInfo("Combustible Gearhulk", 2, Rarity.MYTHIC, mage.cards.c.CombustibleGearhulk.class, cardGraphicInfo));
+        cards.add(new SetCardInfo("Combustible Gearhulk", 4, Rarity.MYTHIC, mage.cards.c.CombustibleGearhulk.class, cardGraphicInfo));
         cards.add(new SetCardInfo("Crucible of Worlds", 11, Rarity.MYTHIC, mage.cards.c.CrucibleOfWorlds.class, cardGraphicInfo));
         cards.add(new SetCardInfo("Defense Grid", 34, Rarity.MYTHIC, mage.cards.d.DefenseGrid.class, cardGraphicInfo));
         cards.add(new SetCardInfo("Duplicant", 35, Rarity.MYTHIC, mage.cards.d.Duplicant.class, cardGraphicInfo));
@@ -88,8 +62,8 @@ public class MasterpieceSeries extends ExpansionSet {
         cards.add(new SetCardInfo("Rings of Brighthearth", 21, Rarity.MYTHIC, mage.cards.r.RingsOfBrighthearth.class, cardGraphicInfo));
         cards.add(new SetCardInfo("Scroll Rack", 22, Rarity.MYTHIC, mage.cards.s.ScrollRack.class, cardGraphicInfo));
         cards.add(new SetCardInfo("Sculpting Steel", 23, Rarity.MYTHIC, mage.cards.s.SculptingSteel.class, cardGraphicInfo));
-        cards.add(new SetCardInfo("Solemn Simulacrum", 25, Rarity.MYTHIC, mage.cards.s.SolemnSimulacrum.class, cardGraphicInfo));
         cards.add(new SetCardInfo("Sol Ring", 24, Rarity.MYTHIC, mage.cards.s.SolRing.class, cardGraphicInfo));
+        cards.add(new SetCardInfo("Solemn Simulacrum", 25, Rarity.MYTHIC, mage.cards.s.SolemnSimulacrum.class, cardGraphicInfo));
         cards.add(new SetCardInfo("Sphere of Resistance", 47, Rarity.MYTHIC, mage.cards.s.SphereOfResistance.class, cardGraphicInfo));
         cards.add(new SetCardInfo("Staff of Domination", 48, Rarity.MYTHIC, mage.cards.s.StaffOfDomination.class, cardGraphicInfo));
         cards.add(new SetCardInfo("Static Orb", 26, Rarity.MYTHIC, mage.cards.s.StaticOrb.class, cardGraphicInfo));
@@ -100,7 +74,7 @@ public class MasterpieceSeries extends ExpansionSet {
         cards.add(new SetCardInfo("Sword of Fire and Ice", 29, Rarity.MYTHIC, mage.cards.s.SwordOfFireAndIce.class, cardGraphicInfo));
         cards.add(new SetCardInfo("Sword of Light and Shadow", 30, Rarity.MYTHIC, mage.cards.s.SwordOfLightAndShadow.class, cardGraphicInfo));
         cards.add(new SetCardInfo("Sword of War and Peace", 51, Rarity.MYTHIC, mage.cards.s.SwordOfWarAndPeace.class, cardGraphicInfo));
-        cards.add(new SetCardInfo("Torrential Gearhulk", 4, Rarity.MYTHIC, mage.cards.t.TorrentialGearhulk.class, cardGraphicInfo));
+        cards.add(new SetCardInfo("Torrential Gearhulk", 2, Rarity.MYTHIC, mage.cards.t.TorrentialGearhulk.class, cardGraphicInfo));
         cards.add(new SetCardInfo("Trinisphere", 52, Rarity.MYTHIC, mage.cards.t.Trinisphere.class, cardGraphicInfo));
         cards.add(new SetCardInfo("Vedalken Shackles", 53, Rarity.MYTHIC, mage.cards.v.VedalkenShackles.class, cardGraphicInfo));
         cards.add(new SetCardInfo("Verdurous Gearhulk", 5, Rarity.MYTHIC, mage.cards.v.VerdurousGearhulk.class, cardGraphicInfo));

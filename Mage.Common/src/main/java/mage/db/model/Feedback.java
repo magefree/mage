@@ -1,5 +1,6 @@
 package mage.db.model;
 
+import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import java.util.Date;
@@ -23,7 +24,7 @@ public class Feedback {
     private String email;
     @DatabaseField
     private String host;
-    @DatabaseField(columnName = "created_dt")
+    @DatabaseField(columnName = "created_dt", dataType = DataType.DATE_STRING, format = "yyyy-MM-dd HH:mm:ss")
     private Date createdDate;
 
     @DatabaseField

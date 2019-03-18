@@ -1,30 +1,4 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards.p;
 
 import mage.MageInt;
@@ -47,14 +21,13 @@ import mage.util.functions.ApplyToPermanent;
 import java.util.UUID;
 
 /**
- *
  * @author North
  */
-public class PhantasmalImage extends CardImpl {
+public final class PhantasmalImage extends CardImpl {
 
-    private static final String effectText = "a copy of any creature on the battlefield, except it's an Illusion in addition to its other types and it gains \"When this creature becomes the target of a spell or ability, sacrifice it.\"";
+    private static final String effectText = "a copy of any creature on the battlefield, except it's an Illusion in addition to its other types and it has \"When this creature becomes the target of a spell or ability, sacrifice it.\"";
 
-    ApplyToPermanent phantasmalImageApplier = new ApplyToPermanent() {
+    private static final ApplyToPermanent phantasmalImageApplier = new ApplyToPermanent() {
         @Override
         public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
             if (!permanent.hasSubtype(SubType.ILLUSION, game)) {
@@ -88,7 +61,7 @@ public class PhantasmalImage extends CardImpl {
 
         // You may have Phantasmal Image enter the battlefield as a copy of any creature
         // on the battlefield, except it's an Illusion in addition to its other types and
-        // it gains "When this creature becomes the target of a spell or ability, sacrifice it."
+        // it has "When this creature becomes the target of a spell or ability, sacrifice it."
         Effect effect = new CopyPermanentEffect(StaticFilters.FILTER_PERMANENT_CREATURE, phantasmalImageApplier);
         effect.setText(effectText);
         this.addAbility(new EntersBattlefieldAbility(effect, true));

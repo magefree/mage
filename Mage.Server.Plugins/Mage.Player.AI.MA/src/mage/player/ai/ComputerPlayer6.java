@@ -1,64 +1,12 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.player.ai;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.FutureTask;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.PassAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.SearchEffect;
-import mage.abilities.keyword.DeathtouchAbility;
-import mage.abilities.keyword.DoubleStrikeAbility;
-import mage.abilities.keyword.ExaltedAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.IndestructibleAbility;
-import mage.abilities.keyword.ReachAbility;
+import mage.abilities.keyword.*;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.choices.Choice;
@@ -85,8 +33,12 @@ import mage.target.Targets;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 
+import java.io.File;
+import java.util.*;
+import java.util.concurrent.*;
+import mage.abilities.StaticAbility;
+
 /**
- *
  * @author nantuko
  */
 public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
@@ -172,7 +124,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
         sb.setLength(0);
         sb.append("-> Permanents: [");
         for (Permanent permanent : game.getBattlefield().getAllPermanents()) {
-            if (permanent.getOwnerId().equals(player.getId())) {
+            if (permanent.isOwnedBy(player.getId())) {
                 sb.append(permanent.getName());
                 if (permanent.isTapped()) {
                     sb.append("(tapped)");
@@ -216,10 +168,9 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                 if (!suggested.isEmpty() && !(ability instanceof PassAbility)) {
                     Iterator<String> it = suggested.iterator();
                     while (it.hasNext()) {
-                        Card card = game.getCard(ability.getSourceId());
                         String action = it.next();
-                        logger.info("Suggested action=" + action + ";card=" + card);
-                        if (action.equals(card.getName())) {
+                        Card card = game.getCard(ability.getSourceId());
+                        if (card != null && action.equals(card.getName())) {
                             logger.info("-> removed from suggested=" + action);
                             it.remove();
                         }
@@ -290,7 +241,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
             } else if (stepFinished) {
                 logger.debug("Step finished");
                 int testScore = GameStateEvaluator2.evaluate(playerId, game);
-                if (game.getActivePlayerId().equals(playerId)) {
+                if (game.isActivePlayer(playerId)) {
                     if (testScore < currentScore) {
                         // if score at end of step is worse than original score don't check further
                         //logger.debug("Add Action -- abandoning check, no immediate benefit");
@@ -440,7 +391,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
         }
         stackObject.resolve(game);
         if (stackObject instanceof StackAbility) {
-            game.getStack().remove(stackObject);
+            game.getStack().remove(stackObject, game);
         }
         game.applyEffects();
         game.getPlayers().resetPassed();
@@ -515,7 +466,8 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
             }
             Game sim = game.copy();
             sim.setSimulation(true);
-            if (sim.getPlayer(currentPlayer.getId()).activateAbility((ActivatedAbility) action.copy(), sim)) {
+            if (!(action instanceof StaticAbility) //for MorphAbility, etc
+                    && sim.getPlayer(currentPlayer.getId()).activateAbility((ActivatedAbility) action.copy(), sim)) {
                 sim.applyEffects();
                 if (checkForRepeatedAction(sim, node, action, currentPlayer.getId())) {
                     logger.debug("Sim Prio [" + depth + "] -- repeated action: " + action.toString());
@@ -528,7 +480,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                     do {
                         sim.getPlayer(nextPlayerId).pass(game);
                         nextPlayerId = sim.getPlayerList().getNext();
-                    } while (nextPlayerId != this.getId());
+                    } while (!Objects.equals(nextPlayerId, this.getId()));
                 }
                 SimulationNode2 newNode = new SimulationNode2(node, sim, action, depth, currentPlayer.getId());
                 sim.checkStateAndTriggered();
@@ -648,28 +600,45 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
         }
         Collections.sort(allActions, new Comparator<Ability>() {
             @Override
-            public int compare(Ability ability, Ability ability1) {
-                String rule = ability.toString();
+            public int compare(Ability ability1, Ability ability2) {
                 String rule1 = ability1.toString();
-                if (rule.equals("Pass")) {
-                    return 1;
+                String rule2 = ability2.toString();
+
+                // pass
+                boolean pass1 = rule1.startsWith("Pass");
+                boolean pass2 = rule2.startsWith("Pass");
+                if (pass1 != pass2) {
+                    if (pass1) {
+                        return 1;
+                    } else {
+                        return -1;
+                    }
                 }
-                if (rule1.equals("Pass")) {
-                    return -1;
+
+                // play
+                boolean play1 = rule1.startsWith("Play");
+                boolean play2 = rule2.startsWith("Play");
+                if (play1 != play2) {
+                    if (play1) {
+                        return -1;
+                    } else {
+                        return 1;
+                    }
                 }
-                if (rule.startsWith("Play")) {
-                    return -1;
+
+                // cast
+                boolean cast1 = rule1.startsWith("Cast");
+                boolean cast2 = rule2.startsWith("Cast");
+                if (cast1 != cast2) {
+                    if (cast1) {
+                        return -1;
+                    } else {
+                        return 1;
+                    }
                 }
-                if (rule1.startsWith("Play")) {
-                    return 1;
-                }
-                if (rule.startsWith("Cast")) {
-                    return -1;
-                }
-                if (rule1.startsWith("Cast")) {
-                    return 1;
-                }
-                return ability.getRule().compareTo(ability1.getRule());
+
+                // default
+                return ability1.getRule().compareTo(ability2.getRule());
             }
         });
     }
@@ -966,7 +935,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                     String line = scanner.nextLine();
                     if (line.startsWith("cast:")
                             || line.startsWith("play:")) {
-                        suggested.add(line.substring(5, line.length()));
+                        suggested.add(line.substring(5));
                     }
                 }
                 System.out.println("suggested::");
@@ -978,7 +947,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
             // swallow
             e.printStackTrace();
         } finally {
-            if(scanner != null) {
+            if (scanner != null) {
                 scanner.close();
             }
         }
@@ -989,7 +958,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
         if (action != null
                 && (action.startsWith("cast:")
                 || action.startsWith("play:"))) {
-            suggested.add(action.substring(5, action.length()));
+            suggested.add(action.substring(5));
         }
     }
 

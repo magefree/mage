@@ -1,32 +1,7 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -43,16 +18,14 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
 
-import java.util.UUID;
-
 /**
  *
  * @author LevelX2
  */
-public class GuildFeud extends CardImpl {
+public final class GuildFeud extends CardImpl {
 
     public GuildFeud(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{R}");
 
         // At the beginning of your upkeep, target opponent reveals the top three cards
         // of their library, may put a creature card from among them onto the battlefield,
@@ -95,9 +68,8 @@ class GuildFeudEffect extends OneShotEffect {
         if (opponent != null && controller != null && sourceObject != null) {
             for (int activePlayer = 0; activePlayer < 2; activePlayer++) {
                 Player player = (activePlayer == 0 ? opponent : controller);
-                Cards topThreeCards = new CardsImpl();
-                topThreeCards.addAll(player.getLibrary().getTopCards(game, 3));
-                player.revealCards(sourceObject.getIdName() + " - " + player.getName() + " top library cards", topThreeCards, game);
+                Cards topThreeCards = new CardsImpl(player.getLibrary().getTopCards(game, 3));
+                player.revealCards(source, player.getName() + " top library cards", topThreeCards, game);
                 Card creatureToBattlefield;
                 if (!topThreeCards.isEmpty()) {
                     if (player.chooseUse(Outcome.PutCreatureInPlay, "Put a creature card among them to the battlefield?", source, game)) {
@@ -108,9 +80,7 @@ class GuildFeudEffect extends OneShotEffect {
                             creatureToBattlefield = topThreeCards.get(target.getFirstTarget(), game);
                             if (creatureToBattlefield != null) {
                                 topThreeCards.remove(creatureToBattlefield);
-                                if (creatureToBattlefield.putOntoBattlefield(game, Zone.LIBRARY,
-                                        source.getSourceId(), player.getId())) {
-                                    game.informPlayers("Guild Feud: " + player.getLogName() + " put " + creatureToBattlefield.getName() + " to the battlefield");
+                                if (player.moveCards(creatureToBattlefield, Zone.BATTLEFIELD, source, game)) {
                                     if (activePlayer == 0) {
                                         opponentCreature = game.getPermanent(creatureToBattlefield.getId());
                                     } else {

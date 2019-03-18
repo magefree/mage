@@ -14,7 +14,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
-public class SinuousStriker extends CardImpl {
+public final class SinuousStriker extends CardImpl {
 
     private static String rule = "Eternalize - {3}{U}{U}, Discard a card <i>({3}{U}{U}, Discard a card, Exile this card from your graveyard: Create a token that's a copy of it, except it's a 4/4 black Zombie";
 

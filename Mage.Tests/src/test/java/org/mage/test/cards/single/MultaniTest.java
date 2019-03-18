@@ -30,7 +30,7 @@ public class MultaniTest extends CardTestPlayerBase {
          Hall of the Bandit Lord
         Legendary Land
         Hall of the Bandit Lord enters the battlefield tapped.
-        {T}, Pay 3 life: Add {1} to your mana pool. If that mana is spent on a creature spell, it gains haste.
+        {T}, Pay 3 life: Add {1}. If that mana is spent on a creature spell, it gains haste.
         */
         String hBandit = "Hall of the Bandit Lord";
 

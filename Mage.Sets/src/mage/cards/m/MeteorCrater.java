@@ -1,30 +1,4 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards.m;
 
 import java.util.ArrayList;
@@ -52,12 +26,12 @@ import mage.players.Player;
  *
  * @author anonymous
  */
-public class MeteorCrater extends CardImpl {
+public final class MeteorCrater extends CardImpl {
 
     public MeteorCrater(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        // {tap}: Choose a color of a permanent you control. Add one mana of that color to your mana pool.
+        // {tap}: Choose a color of a permanent you control. Add one mana of that color.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new MeteorCraterEffect(), new TapSourceCost()));
     }
 
@@ -82,7 +56,7 @@ class MeteorCraterEffect extends ManaEffect {
 
     public MeteorCraterEffect() {
         super();
-        staticText = "Choose a color of a permanent you control. Add one mana of that color to your mana pool";
+        staticText = "Choose a color of a permanent you control. Add one mana of that color";
     }
 
     public MeteorCraterEffect(final MeteorCraterEffect effect) {
@@ -91,6 +65,17 @@ class MeteorCraterEffect extends ManaEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            checkToFirePossibleEvents(getMana(game, source), game, source);
+            controller.getManaPool().addMana(getMana(game, source), game, source);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
         Mana types = getManaTypes(game, source);
         Choice choice = new ChoiceColor(true);
         choice.getChoices().clear();
@@ -144,15 +129,13 @@ class MeteorCraterEffect extends ManaEffect {
                         mana.setWhite(1);
                         break;
                 }
-                checkToFirePossibleEvents(mana, game, source);
-                player.getManaPool().addMana(mana, game, source);
-                return true;
+                return mana;
             }
-            return false;
         }
-        return true;
+        return null;
     }
 
+    @Override
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netManas = new ArrayList<>();
         Mana types = getManaTypes(game, source);
@@ -196,11 +179,6 @@ class MeteorCraterEffect extends ManaEffect {
             }
         }
         return types;
-    }
-
-    @Override
-    public Mana getMana(Game game, Ability source) {
-        return null;
     }
 
     @Override

@@ -28,7 +28,7 @@ public class HalimarTidecallerTest extends CardTestPlayerBase {
          Treetop Village
         Land
         Treetop Village enters the battlefield tapped.
-        {T}: Add Green to your mana pool.
+        {T}: Add Green.
         {1}{G}: Treetop Village becomes a 3/3 green Ape creature with trample until end of turn. It's still a land. 
         */
         String tVillage = "Treetop Village";

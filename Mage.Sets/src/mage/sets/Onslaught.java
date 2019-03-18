@@ -6,7 +6,7 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-public class Onslaught extends ExpansionSet {
+public final class Onslaught extends ExpansionSet {
 
     private static final Onslaught instance = new Onslaught();
 
@@ -51,6 +51,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Barkhide Mauler", 246, Rarity.COMMON, mage.cards.b.BarkhideMauler.class));
         cards.add(new SetCardInfo("Barren Moor", 312, Rarity.COMMON, mage.cards.b.BarrenMoor.class));
         cards.add(new SetCardInfo("Battering Craghorn", 188, Rarity.COMMON, mage.cards.b.BatteringCraghorn.class));
+        cards.add(new SetCardInfo("Battlefield Medic", 9, Rarity.COMMON, mage.cards.b.BattlefieldMedic.class));
         cards.add(new SetCardInfo("Biorhythm", 247, Rarity.RARE, mage.cards.b.Biorhythm.class));
         cards.add(new SetCardInfo("Birchlore Rangers", 248, Rarity.COMMON, mage.cards.b.BirchloreRangers.class));
         cards.add(new SetCardInfo("Blackmail", 127, Rarity.UNCOMMON, mage.cards.b.Blackmail.class));
@@ -78,6 +79,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Charging Slateback", 194, Rarity.COMMON, mage.cards.c.ChargingSlateback.class));
         cards.add(new SetCardInfo("Choking Tethers", 74, Rarity.COMMON, mage.cards.c.ChokingTethers.class));
         cards.add(new SetCardInfo("Clone", 75, Rarity.RARE, mage.cards.c.Clone.class));
+        cards.add(new SetCardInfo("Commando Raid", 195, Rarity.UNCOMMON, mage.cards.c.CommandoRaid.class));
         cards.add(new SetCardInfo("Complicate", 76, Rarity.UNCOMMON, mage.cards.c.Complicate.class));
         cards.add(new SetCardInfo("Contested Cliffs", 314, Rarity.RARE, mage.cards.c.ContestedCliffs.class));
         cards.add(new SetCardInfo("Convalescent Care", 14, Rarity.RARE, mage.cards.c.ConvalescentCare.class));
@@ -96,6 +98,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Dawning Purist", 22, Rarity.UNCOMMON, mage.cards.d.DawningPurist.class));
         cards.add(new SetCardInfo("Death Match", 136, Rarity.RARE, mage.cards.d.DeathMatch.class));
         cards.add(new SetCardInfo("Death Pulse", 137, Rarity.UNCOMMON, mage.cards.d.DeathPulse.class));
+        cards.add(new SetCardInfo("Defensive Maneuvers", 23, Rarity.COMMON, mage.cards.d.DefensiveManeuvers.class));
         cards.add(new SetCardInfo("Demystify", 24, Rarity.COMMON, mage.cards.d.Demystify.class));
         cards.add(new SetCardInfo("Dirge of Dread", 138, Rarity.COMMON, mage.cards.d.DirgeOfDread.class));
         cards.add(new SetCardInfo("Disciple of Grace", 25, Rarity.COMMON, mage.cards.d.DiscipleOfGrace.class));
@@ -120,6 +123,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Elvish Warrior", 260, Rarity.COMMON, mage.cards.e.ElvishWarrior.class));
         cards.add(new SetCardInfo("Embermage Goblin", 200, Rarity.UNCOMMON, mage.cards.e.EmbermageGoblin.class));
         cards.add(new SetCardInfo("Enchantress's Presence", 261, Rarity.RARE, mage.cards.e.EnchantresssPresence.class));
+        cards.add(new SetCardInfo("Endemic Plague", 142, Rarity.RARE, mage.cards.e.EndemicPlague.class));
         cards.add(new SetCardInfo("Entrails Feaster", 143, Rarity.RARE, mage.cards.e.EntrailsFeaster.class));
         cards.add(new SetCardInfo("Erratic Explosion", 201, Rarity.COMMON, mage.cards.e.ErraticExplosion.class));
         cards.add(new SetCardInfo("Essence Fracture", 82, Rarity.UNCOMMON, mage.cards.e.EssenceFracture.class));
@@ -146,6 +150,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Gangrenous Goliath", 150, Rarity.RARE, mage.cards.g.GangrenousGoliath.class));
         cards.add(new SetCardInfo("Ghosthelm Courier", 85, Rarity.UNCOMMON, mage.cards.g.GhosthelmCourier.class));
         cards.add(new SetCardInfo("Gigapede", 264, Rarity.RARE, mage.cards.g.Gigapede.class));
+        cards.add(new SetCardInfo("Glarecaster", 30, Rarity.RARE, mage.cards.g.Glarecaster.class));
         cards.add(new SetCardInfo("Glory Seeker", 31, Rarity.COMMON, mage.cards.g.GlorySeeker.class));
         cards.add(new SetCardInfo("Gluttonous Zombie", 151, Rarity.UNCOMMON, mage.cards.g.GluttonousZombie.class));
         cards.add(new SetCardInfo("Goblin Burrows", 318, Rarity.UNCOMMON, mage.cards.g.GoblinBurrows.class));
@@ -284,6 +289,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Slice and Dice", 232, Rarity.UNCOMMON, mage.cards.s.SliceAndDice.class));
         cards.add(new SetCardInfo("Slipstream Eel", 114, Rarity.COMMON, mage.cards.s.SlipstreamEel.class));
         cards.add(new SetCardInfo("Smother", 170, Rarity.UNCOMMON, mage.cards.s.Smother.class));
+        cards.add(new SetCardInfo("Snapping Thragg", 233, Rarity.UNCOMMON, mage.cards.s.SnappingThragg.class));
         cards.add(new SetCardInfo("Snarling Undorak", 283, Rarity.COMMON, mage.cards.s.SnarlingUndorak.class));
         cards.add(new SetCardInfo("Solar Blast", 234, Rarity.COMMON, mage.cards.s.SolarBlast.class));
         cards.add(new SetCardInfo("Soulless One", 171, Rarity.UNCOMMON, mage.cards.s.SoullessOne.class));
@@ -344,7 +350,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Windswept Heath", 328, Rarity.RARE, mage.cards.w.WindsweptHeath.class, new CardGraphicInfo(new ObjectColor("GW"), null, false)));
         cards.add(new SetCardInfo("Wirewood Elf", 301, Rarity.COMMON, mage.cards.w.WirewoodElf.class));
         cards.add(new SetCardInfo("Wirewood Herald", 302, Rarity.COMMON, mage.cards.w.WirewoodHerald.class));
-        cards.add(new SetCardInfo("Wirewood Lodge", 329, Rarity.RARE, mage.cards.w.WirewoodLodge.class));
+        cards.add(new SetCardInfo("Wirewood Lodge", 329, Rarity.UNCOMMON, mage.cards.w.WirewoodLodge.class));
         cards.add(new SetCardInfo("Wirewood Pride", 303, Rarity.COMMON, mage.cards.w.WirewoodPride.class));
         cards.add(new SetCardInfo("Wirewood Savage", 304, Rarity.COMMON, mage.cards.w.WirewoodSavage.class));
         cards.add(new SetCardInfo("Withering Hex", 181, Rarity.UNCOMMON, mage.cards.w.WitheringHex.class));

@@ -1,30 +1,3 @@
-/*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -35,7 +8,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class ConspiracyTakeTheCrown extends ExpansionSet {
+public final class ConspiracyTakeTheCrown extends ExpansionSet {
 
     private static final ConspiracyTakeTheCrown instance = new ConspiracyTakeTheCrown();
 
@@ -176,7 +149,7 @@ public class ConspiracyTakeTheCrown extends ExpansionSet {
         cards.add(new SetCardInfo("Mnemonic Wall", 116, Rarity.COMMON, mage.cards.m.MnemonicWall.class));
         cards.add(new SetCardInfo("Murder", 143, Rarity.COMMON, mage.cards.m.Murder.class));
         cards.add(new SetCardInfo("Negate", 117, Rarity.COMMON, mage.cards.n.Negate.class));
-        cards.add(new SetCardInfo("Nessian Asp", 187, Rarity.COMMON, mage.cards.n.NessianAsp.class));
+        cards.add(new SetCardInfo("Nessian Asp", 187, Rarity.UNCOMMON, mage.cards.n.NessianAsp.class));
         cards.add(new SetCardInfo("Netcaster Spider", 188, Rarity.COMMON, mage.cards.n.NetcasterSpider.class));
         cards.add(new SetCardInfo("Ogre Sentry", 168, Rarity.COMMON, mage.cards.o.OgreSentry.class));
         cards.add(new SetCardInfo("Omenspeaker", 118, Rarity.COMMON, mage.cards.o.Omenspeaker.class));
@@ -210,7 +183,7 @@ public class ConspiracyTakeTheCrown extends ExpansionSet {
         cards.add(new SetCardInfo("Selvala, Heart of the Wilds", 70, Rarity.MYTHIC, mage.cards.s.SelvalaHeartOfTheWilds.class));
         cards.add(new SetCardInfo("Serum Visions", 120, Rarity.UNCOMMON, mage.cards.s.SerumVisions.class));
         cards.add(new SetCardInfo("Shambling Goblin", 148, Rarity.COMMON, mage.cards.s.ShamblingGoblin.class));
-        cards.add(new SetCardInfo("Shimmering Grotto", 221, Rarity.COMMON, mage.cards.s.ShimmeringGrotto.class));
+        cards.add(new SetCardInfo("Shimmering Grotto", 221, Rarity.UNCOMMON, mage.cards.s.ShimmeringGrotto.class));
         cards.add(new SetCardInfo("Shipwreck Singer", 206, Rarity.UNCOMMON, mage.cards.s.ShipwreckSinger.class));
         cards.add(new SetCardInfo("Show and Tell", 121, Rarity.MYTHIC, mage.cards.s.ShowAndTell.class));
         cards.add(new SetCardInfo("Sinuous Vermin", 46, Rarity.COMMON, mage.cards.s.SinuousVermin.class));

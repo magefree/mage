@@ -60,7 +60,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author LevelX
  */
-public class OrochiEggwatcher extends CardImpl {
+public final class OrochiEggwatcher extends CardImpl {
 
     public OrochiEggwatcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

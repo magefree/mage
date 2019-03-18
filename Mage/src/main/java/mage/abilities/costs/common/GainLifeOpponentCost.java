@@ -67,7 +67,7 @@ public class GainLifeOpponentCost extends CostImpl {
             if (controller.chooseTarget(Outcome.Detriment, target, ability, game)) {
                 Player opponent = game.getPlayer(target.getFirstTarget());
                 if (opponent != null) {
-                    opponent.gainLife(amount, game);
+                    opponent.gainLife(amount, game, sourceId);
                     paid = true;
 
                 }

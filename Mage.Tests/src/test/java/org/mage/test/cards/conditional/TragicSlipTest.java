@@ -1,4 +1,4 @@
- package org.mage.test.cards.conditional;
+package org.mage.test.cards.conditional;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
@@ -6,12 +6,8 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
-
-
-
 public class TragicSlipTest extends CardTestPlayerBase {
 
     @Test
@@ -40,7 +36,7 @@ public class TragicSlipTest extends CardTestPlayerBase {
         // Tragic Slip - Instant, B - Target creature gets -1/-1 until end of turn.
         // Morbid — That creature gets -13/-13 until end of turn instead if a creature died this turn.
         addCard(Zone.HAND, playerA, "Tragic Slip");
-        // Searing Spear - Instant, 1R - Searing Spear deals 3 damage to target creature or player.
+        // Searing Spear - Instant, 1R - Searing Spear deals 3 damage to any target.
         addCard(Zone.HAND, playerA, "Searing Spear");
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
         addCard(Zone.BATTLEFIELD, playerA, "Pillarfield Ox");
@@ -63,7 +59,7 @@ public class TragicSlipTest extends CardTestPlayerBase {
         // Tragic Slip - Instant, B - Target creature gets -1/-1 until end of turn.
         // Morbid — That creature gets -13/-13 until end of turn instead if a creature died this turn.
         addCard(Zone.HAND, playerA, "Tragic Slip");
-        // Searing Spear - Instant, 1R - Searing Spear deals 3 damage to target creature or player.
+        // Searing Spear - Instant, 1R - Searing Spear deals 3 damage to any target.
         addCard(Zone.HAND, playerA, "Searing Spear");
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
         addCard(Zone.BATTLEFIELD, playerA, "Pillarfield Ox");
@@ -108,7 +104,7 @@ public class TragicSlipTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tragic Slip", "Silvercoat Lion");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Snapcaster Mage");
-        setChoice(playerA, "Tragic Slip");
+        addTarget(playerA, "Tragic Slip");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Snapcaster Mage");
 
@@ -122,7 +118,7 @@ public class TragicSlipTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Snapcaster Mage", 0);
         assertExileCount("Tragic Slip", 1);
         assertPermanentCount(playerB, "Silvercoat Lion", 1);
-        assertPowerToughness(playerB, "Silvercoat Lion", 1,1);
+        assertPowerToughness(playerB, "Silvercoat Lion", 1, 1);
         assertGraveyardCount(playerB, "Tarmogoyf", 1);
     }
 }

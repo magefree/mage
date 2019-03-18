@@ -1,30 +1,3 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.cards.s;
 
 import java.util.UUID;
@@ -47,7 +20,9 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetadjustment.TargetAdjuster;
 
 /**
  * Gatecrash FAQ (01.2013)
@@ -61,9 +36,8 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SimicManipulator extends CardImpl {
+public final class SimicManipulator extends CardImpl {
 
-    private final UUID originalId;
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("with power less than or equal to the number of +1/+1 counters removed this way");
 
     public SimicManipulator(UUID ownerId, CardSetInfo setInfo) {
@@ -81,36 +55,38 @@ public class SimicManipulator extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainControlTargetEffect(Duration.Custom, true), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.P1P1.createInstance(), 1, "Remove one or more +1/+1 counters from {this}"));
+        ability.setTargetAdjuster(SimicManipulatorAdjuster.instance);
         this.addAbility(ability);
-        this.originalId = ability.getOriginalId();
-
     }
 
     public SimicManipulator(final SimicManipulator card) {
         super(card);
-        this.originalId = card.originalId;
     }
 
     @Override
     public SimicManipulator copy() {
         return new SimicManipulator(this);
     }
+}
+
+enum SimicManipulatorAdjuster implements TargetAdjuster {
+    instance;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability.getOriginalId().equals(originalId)) {
-            ability.getTargets().clear();
-            int maxPower = 0;
-            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power less than or equal to the number of +1/+1 counters removed this way");
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(ability.getSourceId());
+        if (sourcePermanent != null) {
+            int xValue = 0;
             for (Cost cost : ability.getCosts()) {
                 if (cost instanceof RemoveVariableCountersSourceCost) {
-                    maxPower = ((RemoveVariableCountersSourceCost) cost).getAmount();
+                    xValue = ((RemoveVariableCountersSourceCost) cost).getAmount();
                     break;
                 }
             }
-            filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, maxPower + 1));
-            TargetCreaturePermanent target = new TargetCreaturePermanent(1, 1, filter, false);
-            ability.addTarget(target);
+            ability.getTargets().clear();
+            FilterCreaturePermanent newFilter = new FilterCreaturePermanent("creature with power " + xValue + " or less");
+            newFilter.add(new PowerPredicate(ComparisonType.FEWER_THAN, xValue + 1));
+            ability.addTarget(new TargetCreaturePermanent(newFilter));
         }
     }
 }

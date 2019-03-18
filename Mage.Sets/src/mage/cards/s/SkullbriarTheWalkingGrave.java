@@ -1,33 +1,6 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
@@ -48,15 +21,15 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 
+import java.util.UUID;
+
 /**
- *
  * @author anonymous
  */
-public class SkullbriarTheWalkingGrave extends CardImpl {
-    private Counters counters;
+public final class SkullbriarTheWalkingGrave extends CardImpl {
 
     public SkullbriarTheWalkingGrave(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{G}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.ELEMENTAL);
@@ -72,7 +45,9 @@ public class SkullbriarTheWalkingGrave extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SkullbriarEffect()));
     }
 
-    public SkullbriarTheWalkingGrave(SkullbriarTheWalkingGrave card) { super(card); }
+    public SkullbriarTheWalkingGrave(SkullbriarTheWalkingGrave card) {
+        super(card);
+    }
 
     @Override
     public SkullbriarTheWalkingGrave copy() {
@@ -84,7 +59,7 @@ public class SkullbriarTheWalkingGrave extends CardImpl {
     public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
         boolean skullBriarEffectApplied = false;
         if (event.getToZone() != Zone.HAND && event.getToZone() != Zone.LIBRARY) {
-            for (StaticAbility ability : getAbilities (game).getStaticAbilities(event.getFromZone())) {
+            for (StaticAbility ability : getAbilities(game).getStaticAbilities(event.getFromZone())) {
                 for (Effect effect : ability.getEffects(game, EffectType.REPLACEMENT)) {
                     if (effect instanceof SkullbriarEffect && event.getAppliedEffects().contains(effect.getId())) {
                         skullBriarEffectApplied = true;
@@ -110,7 +85,7 @@ public class SkullbriarTheWalkingGrave extends CardImpl {
             copyTo = this.getCounters(game);
         }
         if (copyTo != null && copyFrom != null) {
-            for(Counter counter : copyFrom.values()) {
+            for (Counter counter : copyFrom.values()) {
                 copyTo.addCounter(counter);
             }
         }

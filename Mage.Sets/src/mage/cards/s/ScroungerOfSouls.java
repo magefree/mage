@@ -8,7 +8,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-public class ScroungerOfSouls extends CardImpl {
+public final class ScroungerOfSouls extends CardImpl {
 
     public ScroungerOfSouls(UUID cardID, CardSetInfo cardSetInfo){
         super(cardID, cardSetInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");

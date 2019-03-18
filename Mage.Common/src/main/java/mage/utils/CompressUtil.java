@@ -39,7 +39,7 @@ public final class CompressUtil {
      * @return Decompressed object
      */
     public static Object decompress(Object data) {
-        if (data == null || !(data instanceof ZippedObject)) {
+        if (!(data instanceof ZippedObject)) {
             return data;
         }
         return ((ZippedObject) data).unzip();

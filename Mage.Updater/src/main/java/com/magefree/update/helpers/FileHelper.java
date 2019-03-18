@@ -68,8 +68,9 @@ public final class FileHelper {
         for (String filename : files) {
             File f = new File(filename);
             if (f.exists()) {
-                f.delete();
-                System.out.println("File has been deleted: " + filename);
+                if(f.delete()) {
+                    System.out.println("File has been deleted: " + filename);
+                }
             } else {
                 System.out.println("ERROR. Couldn't find file to delete: " + filename);
             }
@@ -84,17 +85,14 @@ public final class FileHelper {
      */
     public static void downloadFile(String filename, HttpURLConnection urlConnection) {
         System.out.println("Downloading " + filename);
-        InputStream in = null;
-        FileOutputStream out = null;
-        try {
-            in = urlConnection.getInputStream();
+        try (InputStream in  = urlConnection.getInputStream() ; FileOutputStream out = new FileOutputStream(filename)){
             File f = new File(filename);
             if (!f.exists() && f.getParentFile() != null) {
-                f.getParentFile().mkdirs();
-                System.out.println("Directories have been created: " + f.getParentFile().getPath());
+                if(f.getParentFile().mkdirs()) {
+                    System.out.println("Directories have been created: " + f.getParentFile().getPath());
+                }
             }
 
-            out = new FileOutputStream(filename);
             byte[] buf = new byte[4 * 1024];
             int bytesRead;
 
@@ -105,19 +103,6 @@ public final class FileHelper {
             System.out.println("File has been updated: " + filename);
         } catch (IOException e) {
             System.out.println("i/o exception - " + e.getMessage());
-        } finally {
-            closeQuietly(in);
-            closeQuietly(out);
-        }
-    }
-
-    public static void closeQuietly(Closeable s) {
-        if(s != null) {
-            try {
-                s.close();
-            } catch (Exception e) {
-                System.out.println("i/o exception - " + e.getMessage());
-            }
         }
     }
 }

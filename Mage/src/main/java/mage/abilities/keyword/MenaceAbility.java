@@ -39,7 +39,7 @@ public class MenaceAbility extends StaticAbility { // Menace may not be a Single
 
     @Override
     public String getRule() {
-        String res = "Menace";
+        String res = "menace";
         if (this.showAbilityHint) {
             res += " <i>(This creature can't be blocked except by two or more creatures.)</i>";
         }

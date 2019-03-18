@@ -1,6 +1,8 @@
 Afflict|number|
+Afterlife|number|
 Annihilator|number|
 Ascend|new|
+Assist|new|
 Basic landcycling|cost|
 Battle cry|new|
 Bestow|card, manaString|
@@ -50,12 +52,14 @@ Intimidate|instance|
 Ingest|new|
 Islandcycling|cost|
 Islandwalk|new|
+Jump-start|card|
 Level up|cost|
 Lifelink|instance|
 Living weapon|new|
 Madness|card, cost|
 Melee|new|
 Menace|new|
+Mentor|new|
 Miracle|cost|
 Mountaincycling|cost|
 Mountainwalk|new|
@@ -72,12 +76,14 @@ Prowess|new|
 Reach|instance|
 Rebound|new|
 Renown|number|
+Riot|new|
 Scavenge|cost|
 Shadow|instance|
 Shroud|instance|
 Soulbond|instance|
 Soulshift|number|
 Skulk|new|
+Spectacle|card, cost|
 Storm|new|
 Sunburst|new|
 Swampcycling|cost|

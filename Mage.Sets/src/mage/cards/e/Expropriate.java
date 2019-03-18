@@ -1,31 +1,3 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
-
 package mage.cards.e;
 
 import java.util.ArrayList;
@@ -53,7 +25,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author JRHerlehy
  */
-public class Expropriate extends CardImpl {
+public final class Expropriate extends CardImpl {
 
     public Expropriate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{7}{U}{U}");
@@ -95,7 +67,9 @@ class ExpropriateDilemmaEffect extends CouncilsDilemmaVoteEffect {
         Player controller = game.getPlayer(source.getControllerId());
 
         //If not controller, exit out here and do not vote.
-        if (controller == null) return false;
+        if (controller == null) {
+            return false;
+        }
 
         this.vote("time", "money", controller, game, source);
 
@@ -118,7 +92,6 @@ class ExpropriateDilemmaEffect extends CouncilsDilemmaVoteEffect {
         } else {
             game.informPlayers(controller.getName() + " will take " + timeCount + " extra turns");
         }
-
         do {
             game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), false));
             timeCount--;
@@ -135,26 +108,33 @@ class ExpropriateDilemmaEffect extends CouncilsDilemmaVoteEffect {
             Target target = new TargetPermanent(filter);
             target.setNotTarget(true);
 
-            if (controller.choose(Outcome.GainControl, target, source.getSourceId(), game)) {
+            if (controller != null
+                    && controller != game.getPlayer(playerId)
+                    && controller.choose(Outcome.GainControl, target, source.getSourceId(), game)) {
                 Permanent targetPermanent = game.getPermanent(target.getFirstTarget());
 
-                if (targetPermanent != null) chosenCards.add(targetPermanent);
+                if (targetPermanent != null) {
+                    chosenCards.add(targetPermanent);
+                }
             }
         }
-
-        for (Permanent permanent : chosenCards) {
-            ContinuousEffect effect = new ExpropriateControlEffect(controller.getId());
-            effect.setTargetPointer(new FixedTarget(permanent.getId()));
-            game.addEffect(effect, source);
-            game.informPlayers(controller.getName() + " gained control of " + permanent.getName() + " owned by " + game.getPlayer(permanent.getOwnerId()).getName());
+        if (controller != null) {
+            for (Permanent permanent : chosenCards) {
+                ContinuousEffect effect = new ExpropriateControlEffect(controller.getId());
+                effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                game.addEffect(effect, source);
+                game.informPlayers(controller.getName() + " gained control of " + permanent.getName() + " owned by " + game.getPlayer(permanent.getOwnerId()).getName());
+            }
         }
     }
 
     @Override
     protected void vote(String choiceOne, String choiceTwo, Player controller, Game game, Ability source) {
-        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+        for (UUID playerId : game.getState().getPlayerList(controller.getId())) {
             Player player = game.getPlayer(playerId);
-            if (player != null) {
+            if (player != null
+                    && player.canRespond()
+                    && player.isInGame()) {
                 if (player.chooseUse(Outcome.Vote, "Choose " + choiceOne + '?', source, game)) {
                     voteOneCount++;
                     game.informPlayers(player.getName() + " has voted for " + choiceOne);
@@ -176,7 +156,7 @@ class ExpropriateDilemmaEffect extends CouncilsDilemmaVoteEffect {
 
 class ExpropriateControlEffect extends ContinuousEffectImpl {
 
-    private UUID controllerId;
+    private final UUID controllerId;
 
     public ExpropriateControlEffect(UUID controllerId) {
         super(Duration.EndOfGame, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
@@ -196,7 +176,8 @@ class ExpropriateControlEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-        return permanent != null && controllerId != null &&
-                permanent.changeControllerId(controllerId, game);
+        return permanent != null
+                && controllerId != null
+                && permanent.changeControllerId(controllerId, game);
     }
 }

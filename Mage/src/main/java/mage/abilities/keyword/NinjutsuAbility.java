@@ -1,30 +1,3 @@
-/*
- * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.abilities.keyword;
 
 import java.util.UUID;
@@ -42,6 +15,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.UnblockedPredicate;
 import mage.game.Game;
+import mage.game.command.CommandObject;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -69,10 +43,11 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class NinjutsuAbility extends ActivatedAbilityImpl {
 
+    private final boolean commander;
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("unblocked attacker you control");
 
     static {
-        filter.add(new UnblockedPredicate());
+        filter.add(UnblockedPredicate.instance);
     }
 
     /**
@@ -80,13 +55,19 @@ public class NinjutsuAbility extends ActivatedAbilityImpl {
      * @param manaCost ninjutsu mana cost
      */
     public NinjutsuAbility(ManaCost manaCost) {
-        super(Zone.HAND, new NinjutsuEffect(), manaCost);
-        this.addCost(new RevealNinjutsuCardCost());
+        this(manaCost, false);
+    }
+
+    public NinjutsuAbility(ManaCost manaCost, boolean commander) {
+        super(commander ? Zone.ALL : Zone.HAND, new NinjutsuEffect(), manaCost);
+        this.addCost(new RevealNinjutsuCardCost(commander));
         this.addCost(new ReturnAttackerToHandTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true)));
+        this.commander = commander;
     }
 
     public NinjutsuAbility(NinjutsuAbility ability) {
         super(ability);
+        this.commander = ability.commander;
     }
 
     @Override
@@ -96,9 +77,13 @@ public class NinjutsuAbility extends ActivatedAbilityImpl {
 
     @Override
     public String getRule() {
-        return new StringBuilder("Ninjutsu ").append(getManaCostsToPay().getText()).append(" <i>(")
-                .append(getManaCostsToPay().getText())
-                .append(" Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)</i>").toString();
+        return (commander ? "Commander n" : "N") + "injutsu "
+                + getManaCostsToPay().getText() + " <i>("
+                + getManaCostsToPay().getText()
+                + " Return an unblocked attacker you control to hand: "
+                + "Put this card onto the battlefield from your hand"
+                + (commander ? " or the command zone " : " ")
+                + "tapped and attacking.)</i>";
     }
 }
 
@@ -106,7 +91,8 @@ class NinjutsuEffect extends OneShotEffect {
 
     public NinjutsuEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Put this card onto the battlefield from your hand tapped and attacking";
+        this.staticText = "Put this card onto the battlefield "
+                + "from your hand tapped and attacking";
     }
 
     public NinjutsuEffect(final NinjutsuEffect effect) {
@@ -120,9 +106,13 @@ class NinjutsuEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
         Card card = game.getCard(source.getSourceId());
         if (card != null) {
-            card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), source.getControllerId());
+            controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent != null) {
                 UUID defendingPlayerId = null;
@@ -133,7 +123,6 @@ class NinjutsuEffect extends OneShotEffect {
                 }
                 if (defendingPlayerId != null) {
                     game.getCombat().addAttackerToCombat(permanent.getId(), defendingPlayerId, game);
-                    permanent.setTapped(true);
                     return true;
                 }
             }
@@ -188,12 +177,16 @@ class ReturnAttackerToHandTargetCost extends CostImpl {
 
 class RevealNinjutsuCardCost extends CostImpl {
 
-    public RevealNinjutsuCardCost() {
+    private final boolean commander;
+
+    public RevealNinjutsuCardCost(boolean commander) {
         this.text = "reveal ninjutsu card";
+        this.commander = commander;
     }
 
     public RevealNinjutsuCardCost(RevealNinjutsuCardCost cost) {
         super(cost);
+        this.commander = cost.commander;
     }
 
     @Override
@@ -201,6 +194,15 @@ class RevealNinjutsuCardCost extends CostImpl {
         Player player = game.getPlayer(controllerId);
 
         Card card = player.getHand().get(ability.getSourceId(), game);
+        if (card == null && commander
+                && player.getCommandersIds().contains(ability.getSourceId())) {
+            for (CommandObject coj : game.getState().getCommand()) {
+                if (coj != null && coj.getId().equals(ability.getSourceId())) {
+                    card = game.getCard(ability.getSourceId());
+                    break;
+                }
+            }
+        }
         if (card != null) {
             Cards cards = new CardsImpl(card);
             player.revealCards("Ninjutsu", cards, game);

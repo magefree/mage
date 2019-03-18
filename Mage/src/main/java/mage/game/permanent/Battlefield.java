@@ -1,30 +1,4 @@
-/*
- * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.game.permanent;
 
 import mage.abilities.keyword.PhasingAbility;
@@ -32,6 +6,7 @@ import mage.constants.CardType;
 import mage.constants.RangeOfInfluence;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
+import mage.players.Player;
 
 import java.io.Serializable;
 import java.util.*;
@@ -84,7 +59,7 @@ public class Battlefield implements Serializable {
     public int countAll(FilterPermanent filter, UUID controllerId, Game game) {
         return (int) field.values()
                 .stream()
-                .filter(permanent -> permanent.getControllerId().equals(controllerId)
+                .filter(permanent -> permanent.isControlledBy(controllerId)
                         && filter.match(permanent, game)
                         && permanent.isPhasedIn())
                 .count();
@@ -150,7 +125,7 @@ public class Battlefield implements Serializable {
     public boolean contains(FilterPermanent filter, UUID controllerId, int num, Game game) {
         return field.values()
                 .stream()
-                .filter(permanent -> permanent.getControllerId().equals(controllerId)
+                .filter(permanent -> permanent.isControlledBy(controllerId)
                         && filter.match(permanent, game)
                         && permanent.isPhasedIn())
                 .count() >= num;
@@ -239,7 +214,7 @@ public class Battlefield implements Serializable {
         return field.values()
                 .stream()
                 .filter(perm -> perm.isPhasedIn()
-                        && perm.getControllerId().equals(controllerId))
+                        && perm.isControlledBy(controllerId))
                 .collect(Collectors.toList());
     }
 
@@ -287,7 +262,7 @@ public class Battlefield implements Serializable {
     public List<Permanent> getAllActivePermanents(FilterPermanent filter, UUID controllerId, Game game) {
         return field.values()
                 .stream()
-                .filter(perm -> perm.isPhasedIn() && perm.getControllerId().equals(controllerId) && filter.match(perm, game))
+                .filter(perm -> perm.isPhasedIn() && perm.isControlledBy(controllerId) && filter.match(perm, game))
                 .collect(Collectors.toList());
     }
 
@@ -323,7 +298,11 @@ public class Battlefield implements Serializable {
                     .filter(perm -> perm.isPhasedIn() && filter.match(perm, sourceId, sourcePlayerId, game))
                     .collect(Collectors.toList());
         } else {
-            Set<UUID> range = game.getPlayer(sourcePlayerId).getInRange();
+            Player player = game.getPlayer(sourcePlayerId);
+            if(player == null){
+                return Collections.emptyList();
+            }
+            Set<UUID> range = player.getInRange();
             return  field.values()
                     .stream()
                     .filter(perm -> perm.isPhasedIn() && range.contains(perm.getControllerId())
@@ -359,14 +338,14 @@ public class Battlefield implements Serializable {
                 .stream()
                 .filter(perm -> perm.getAbilities().containsKey(PhasingAbility.getInstance().getId())
                         && perm.isPhasedIn() &&
-                        perm.getControllerId().equals(controllerId))
+                        perm.isControlledBy(controllerId))
                 .collect(Collectors.toList());
     }
 
     public List<Permanent> getPhasedOut(UUID controllerId) {
         return field.values()
                 .stream()
-                .filter(perm -> !perm.isPhasedIn() && perm.getControllerId().equals(controllerId))
+                .filter(perm -> !perm.isPhasedIn() && perm.isControlledBy(controllerId))
                 .collect(Collectors.toList());
     }
 

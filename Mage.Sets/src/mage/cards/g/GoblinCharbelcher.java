@@ -1,32 +1,7 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,23 +16,21 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
-
-import java.util.UUID;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
  * @author Plopman
  */
-public class GoblinCharbelcher extends CardImpl {
+public final class GoblinCharbelcher extends CardImpl {
 
     public GoblinCharbelcher(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
-        // {3}, {tap}: Reveal cards from the top of your library until you reveal a land card. Goblin Charbelcher deals damage equal to the number of nonland cards revealed this way to target creature or player. If the revealed land card was a Mountain, Goblin Charbelcher deals double that damage instead. Put the revealed cards on the bottom of your library in any order.
+        // {3}, {tap}: Reveal cards from the top of your library until you reveal a land card. Goblin Charbelcher deals damage equal to the number of nonland cards revealed this way to any target. If the revealed land card was a Mountain, Goblin Charbelcher deals double that damage instead. Put the revealed cards on the bottom of your library in any order.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GoblinCharbelcherEffect(), new ManaCostsImpl("{3}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 
@@ -75,7 +48,7 @@ class GoblinCharbelcherEffect extends OneShotEffect {
 
     public GoblinCharbelcherEffect() {
         super(Outcome.Damage);
-        this.staticText = "Reveal cards from the top of your library until you reveal a land card. {this} deals damage equal to the number of nonland cards revealed this way to target creature or player. If the revealed land card was a Mountain, {this} deals double that damage instead. Put the revealed cards on the bottom of your library in any order";
+        this.staticText = "Reveal cards from the top of your library until you reveal a land card. {this} deals damage equal to the number of nonland cards revealed this way to any target. If the revealed land card was a Mountain, {this} deals double that damage instead. Put the revealed cards on the bottom of your library in any order";
     }
 
     public GoblinCharbelcherEffect(final GoblinCharbelcherEffect effect) {
@@ -97,13 +70,12 @@ class GoblinCharbelcherEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl();
         boolean landFound = false;
-        while (controller.getLibrary().hasCards()) {
-            Card card = controller.getLibrary().removeFromTop(game);
+        for (Card card : controller.getLibrary().getCards(game)) {
             if (card != null) {
                 cards.add(card);
-                if (card.isLand()){
+                if (card.isLand()) {
                     landFound = true;
-                    if(card.hasSubtype(SubType.MOUNTAIN, game)){
+                    if (card.hasSubtype(SubType.MOUNTAIN, game)) {
                         isMountain = true;
                     }
                     break;
@@ -118,20 +90,19 @@ class GoblinCharbelcherEffect extends OneShotEffect {
         if (landFound) {
             damage--;
         }
-        if(isMountain){
+        if (isMountain) {
             damage *= 2;
         }
-        
+
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         if (permanent != null) {
             permanent.damage(damage, source.getSourceId(), game, false, true);
-        }
-        else{
+        } else {
             Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
             if (targetPlayer != null) {
                 targetPlayer.damage(damage, source.getSourceId(), game, false, true);
             }
-        }        
+        }
         controller.putCardsOnBottomOfLibrary(cards, game, source, true);
         return true;
     }

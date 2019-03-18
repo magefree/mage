@@ -1,53 +1,19 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.GainAbilitySpellsEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterObject;
 import mage.filter.predicate.Predicates;
@@ -55,16 +21,15 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
-public class SoulfireGrandMaster extends CardImpl {
+public final class SoulfireGrandMaster extends CardImpl {
 
     private static final FilterObject filter = new FilterObject("instant and sorcery spells you control");
 
@@ -73,7 +38,7 @@ public class SoulfireGrandMaster extends CardImpl {
     }
 
     public SoulfireGrandMaster(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.MONK);
         this.power = new MageInt(2);
@@ -99,70 +64,6 @@ public class SoulfireGrandMaster extends CardImpl {
     @Override
     public SoulfireGrandMaster copy() {
         return new SoulfireGrandMaster(this);
-    }
-}
-
-class GainAbilitySpellsEffect extends ContinuousEffectImpl {
-
-    private final Ability ability;
-    private final FilterObject filter;
-
-    public GainAbilitySpellsEffect(Ability ability, FilterObject filter) {
-        super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        this.ability = ability;
-        this.filter = filter;
-        staticText = filter.getMessage() + " have " + ability.getRule();
-    }
-
-    public GainAbilitySpellsEffect(final GainAbilitySpellsEffect effect) {
-        super(effect);
-        this.ability = effect.ability;
-        this.filter = effect.filter;
-    }
-
-    @Override
-    public GainAbilitySpellsEffect copy() {
-        return new GainAbilitySpellsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player != null && permanent != null) {
-            for (Card card : game.getExile().getAllCards(game)) {
-                if (card.getOwnerId().equals(source.getControllerId()) && filter.match(card, game)) {
-                    game.getState().addOtherAbility(card, ability);
-                }
-            }
-            for (Card card : player.getLibrary().getCards(game)) {
-                if (filter.match(card, game)) {
-                    game.getState().addOtherAbility(card, ability);
-                }
-            }
-            for (Card card : player.getHand().getCards(game)) {
-                if (filter.match(card, game)) {
-                    game.getState().addOtherAbility(card, ability);
-                }
-            }
-            for (Card card : player.getGraveyard().getCards(game)) {
-                if (filter.match(card, game)) {
-                    game.getState().addOtherAbility(card, ability);
-                }
-            }
-            for (StackObject stackObject : game.getStack()) {
-                if (stackObject.getControllerId().equals(source.getControllerId())) {
-                    Card card = game.getCard(stackObject.getSourceId());
-                    if (card != null && filter.match(card, game)) {
-                        if (!card.getAbilities().contains(ability)) {
-                            game.getState().addOtherAbility(card, ability);
-                        }
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }
 
@@ -200,7 +101,7 @@ class SoulfireGrandMasterCastFromHandReplacementEffect extends ReplacementEffect
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         MageObject mageObject = game.getObject(spellId);
-        if (mageObject == null || !(mageObject instanceof Spell) || ((Spell) mageObject).isCopiedSpell()) {
+        if (!(mageObject instanceof Spell) || mageObject.isCopy()) {
             return false;
         } else {
             Card sourceCard = game.getCard(spellId);
@@ -225,7 +126,8 @@ class SoulfireGrandMasterCastFromHandReplacementEffect extends ReplacementEffect
     public boolean applies(GameEvent event, Ability source, Game game) {
         //Something hit the stack from the hand, see if its a spell with this ability.
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (spellId == null && // because this effect works only once, spellId has to be null here
+        if (spellId == null
+                && // because this effect works only once, spellId has to be null here
                 zEvent.getFromZone() == Zone.HAND
                 && zEvent.getToZone() == Zone.STACK
                 && event.getPlayerId().equals(source.getControllerId())) {

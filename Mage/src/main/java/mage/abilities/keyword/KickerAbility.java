@@ -1,32 +1,7 @@
-/*
- * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.abilities.keyword;
 
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
@@ -39,9 +14,8 @@ import mage.constants.AbilityType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.players.Player;
-
-import java.util.*;
 
 /**
  * 20121001 702.31. Kicker 702.31a Kicker is a static ability that functions
@@ -78,7 +52,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
     protected static final String KICKER_REMINDER_MANA = "You may pay an additional {cost} as you cast this spell.";
     protected static final String KICKER_REMINDER_COST = "You may {cost} in addition to any other costs as you cast this spell.";
 
-    protected Map<String, Integer> activations = new HashMap<>(); // zoneChangeCounter, activations
+    protected Map<String, Integer> activations = new ConcurrentHashMap<>(); // zoneChangeCounter, activations
 
     protected String keywordText;
     protected String reminderText;
@@ -110,7 +84,6 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
         this.reminderText = ability.reminderText;
         this.xManaValue = ability.xManaValue;
         this.activations.putAll(ability.activations);
-
     }
 
     @Override
@@ -135,12 +108,12 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
             cost.reset();
         }
         String key = getActivationKey(source, "", game);
-        for (String activationKey : activations.keySet()) {
+        for (Iterator<String> iterator = activations.keySet().iterator(); iterator.hasNext();) {
+            String activationKey = iterator.next();
             if (activationKey.startsWith(key) && activations.get(activationKey) > 0) {
                 activations.put(key, 0);
             }
         }
-
     }
 
     public int getXManaValue() {
@@ -180,6 +153,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
             amount += activations.get(key);
         }
         activations.put(key, amount);
+        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.KICKED, source.getSourceId(), source.getSourceId(), source.getControllerId()));
     }
 
     private String getActivationKey(Ability source, String costText, Game game) {
@@ -214,10 +188,10 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
                                 && player.chooseUse(Outcome.Benefit, "Pay " + times + kickerCost.getText(false) + " ?", ability, game)) {
                             this.activateKicker(kickerCost, ability, game);
                             if (kickerCost instanceof Costs) {
-                                for (Iterator itKickerCost = ((Costs) kickerCost).iterator(); itKickerCost.hasNext(); ) {
+                                for (Iterator itKickerCost = ((Costs) kickerCost).iterator(); itKickerCost.hasNext();) {
                                     Object kickerCostObject = itKickerCost.next();
                                     if ((kickerCostObject instanceof Costs) || (kickerCostObject instanceof CostsImpl)) {
-                                        for (@SuppressWarnings("unchecked") Iterator<Cost> itDetails = ((Costs) kickerCostObject).iterator(); itDetails.hasNext(); ) {
+                                        for (@SuppressWarnings("unchecked") Iterator<Cost> itDetails = ((Costs) kickerCostObject).iterator(); itDetails.hasNext();) {
                                             addKickerCostsToAbility(itDetails.next(), ability, game);
                                         }
                                     } else {

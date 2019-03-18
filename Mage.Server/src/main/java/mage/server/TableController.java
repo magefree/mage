@@ -1,30 +1,3 @@
-/*
- * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.server;
 
 import java.util.Locale;
@@ -100,7 +73,7 @@ public class TableController {
         } else {
             controllerName = "System";
         }
-        table = new Table(roomId, options.getGameType(), options.getName(), controllerName, DeckValidatorFactory.instance.createDeckValidator(options.getDeckType()), 
+        table = new Table(roomId, options.getGameType(), options.getName(), controllerName, DeckValidatorFactory.instance.createDeckValidator(options.getDeckType()),
                 options.getPlayerTypes(), TableRecorderImpl.instance, match, options.getBannedUsers(), options.isPlaneChase());
         chatId = ChatManager.instance.createChatSession("Match Table " + table.getId());
         init();
@@ -120,7 +93,7 @@ public class TableController {
         } else {
             controllerName = "System";
         }
-        table = new Table(roomId, options.getTournamentType(), options.getName(), controllerName, DeckValidatorFactory.instance.createDeckValidator(options.getMatchOptions().getDeckType()), 
+        table = new Table(roomId, options.getTournamentType(), options.getName(), controllerName, DeckValidatorFactory.instance.createDeckValidator(options.getMatchOptions().getDeckType()),
                 options.getPlayerTypes(), TableRecorderImpl.instance, tournament, options.getMatchOptions().getBannedUsers(), options.isPlaneChase());
         chatId = ChatManager.instance.createChatSession("Tourn. table " + table.getId());
     }
@@ -198,6 +171,21 @@ public class TableController {
             return false;
         }
 
+        // Check minimum rating.
+        int minimumRating = table.getTournament().getOptions().getMinimumRating();
+        int userRating;
+        if (table.getTournament().getOptions().getMatchOptions().isLimited()) {
+            userRating = user.getUserData().getLimitedRating();
+        } else {
+            userRating = user.getUserData().getConstructedRating();
+        }
+        if (userRating < minimumRating) {
+            String message = new StringBuilder("Your rating ").append(userRating)
+                    .append(" is lower than the table requirement ").append(minimumRating).toString();
+            user.showUserMessage("Join Table", message);
+            return false;
+        }
+
         Optional<Player> playerOptional = createPlayer(name, seat.getPlayerType(), skill);
         if (playerOptional.isPresent()) {
             Player player = playerOptional.get();
@@ -251,6 +239,7 @@ public class TableController {
     public synchronized boolean joinTable(UUID userId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws MageException {
         Optional<User> _user = UserManager.instance.getUser(userId);
         if (!_user.isPresent()) {
+            logger.error("Join Table: can't find user to join " + name + " Id = " + userId);
             return false;
         }
         User user = _user.get();
@@ -294,6 +283,21 @@ public class TableController {
         if (quitRatio < user.getMatchQuitRatio()) {
             String message = new StringBuilder("Your quit ratio ").append(user.getMatchQuitRatio())
                     .append("% is higher than the table requirement ").append(quitRatio).append('%').toString();
+            user.showUserMessage("Join Table", message);
+            return false;
+        }
+
+        // Check minimum rating.
+        int minimumRating = table.getMatch().getOptions().getMinimumRating();
+        int userRating;
+        if (table.getMatch().getOptions().isLimited()) {
+            userRating = user.getUserData().getLimitedRating();
+        } else {
+            userRating = user.getUserData().getConstructedRating();
+        }
+        if (userRating < minimumRating) {
+            String message = new StringBuilder("Your rating ").append(userRating)
+                    .append(" is lower than the table requirement ").append(minimumRating).toString();
             user.showUserMessage("Join Table", message);
             return false;
         }
@@ -486,7 +490,11 @@ public class TableController {
             if (userPlayerMap.get(userId) != null) {
                 return false;
             }
-            return UserManager.instance.getUser(userId).get().ccWatchGame(match.getGame().getId());
+            Optional<User> _user = UserManager.instance.getUser(userId);
+            if (!_user.isPresent()) {
+                return false;
+            }
+            return _user.get().ccWatchGame(match.getGame().getId());
         }
     }
 
@@ -919,12 +927,10 @@ public class TableController {
     public boolean isTournamentStillValid() {
         if (table.getTournament() != null) {
             if (table.getState() != TableState.WAITING && table.getState() != TableState.READY_TO_START && table.getState() != TableState.STARTING) {
-                TournamentController tournamentController = TournamentManager.instance.getTournamentController(table.getTournament().getId());
-                if (tournamentController != null) {
-                    return tournamentController.isTournamentStillValid(table.getState());
-                } else {
-                    return false;
-                }
+               return TournamentManager.instance.getTournamentController(table.getTournament().getId())
+                       .map(tc -> tc.isTournamentStillValid(table.getState()))
+                       .orElse(false);
+
             } else {
                 // check if table creator is still a valid user, if not removeUserFromAllTablesAndChat table
                 return UserManager.instance.getUser(userId).isPresent();
@@ -964,7 +970,7 @@ public class TableController {
             if (!(table.getState() == TableState.WAITING || table.getState() == TableState.STARTING || table.getState() == TableState.READY_TO_START)) {
                 if (match == null) {
                     logger.warn("- Match table with no match:");
-                    logger.warn("-- matchId:" + match.getId() + " [" + match.getName() + ']');
+                    logger.warn("-- matchId:" + match.getId() + " , table : " + table.getId());
                     // return false;
                 } else if (match.isDoneSideboarding() && match.getGame() == null) {
                     // no sideboarding and not active game -> match seems to hang (maybe the Draw bug)

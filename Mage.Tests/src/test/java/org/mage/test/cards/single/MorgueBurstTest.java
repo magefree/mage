@@ -19,7 +19,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 /*
 Morgue Burst    {4}{B}{R}
 Sorcery 
-Return target creature card from your graveyard to your hand. Morgue Burst deals damage to target creature or player equal to the power of the card returned this way.
+Return target creature card from your graveyard to your hand. Morgue Burst deals damage to any target equal to the power of the card returned this way.
 */
 
 

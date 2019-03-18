@@ -1,36 +1,14 @@
-/*
- *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.abilities.effects.common;
 
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.keyword.EnchantAbility;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
@@ -42,8 +20,9 @@ import mage.target.TargetPermanent;
 import mage.util.functions.ApplyToPermanent;
 import mage.util.functions.EmptyApplyToPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class CopyPermanentEffect extends OneShotEffect {
@@ -81,31 +60,100 @@ public class CopyPermanentEffect extends OneShotEffect {
         super(effect);
         this.filter = effect.filter.copy();
         this.applier = effect.applier;
-        this.bluePrintPermanent = effect.bluePrintPermanent;
+        if (effect.bluePrintPermanent != null) {
+            this.bluePrintPermanent = effect.bluePrintPermanent.copy();
+        }
         this.useTargetOfAbility = effect.useTargetOfAbility;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getPermanentEntering(source.getSourceId());
-        if (sourceObject == null) {
-            sourceObject = game.getObject(source.getSourceId());
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourcePermanent = game.getPermanentEntering(source.getSourceId());
+        if (sourcePermanent == null) {
+            sourcePermanent = game.getObject(source.getSourceId());
         }
-        if (player != null && sourceObject != null) {
+        if (controller != null && sourcePermanent != null) {
             Permanent copyFromPermanent = null;
             if (useTargetOfAbility) {
                 copyFromPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             } else {
                 Target target = new TargetPermanent(filter);
                 target.setNotTarget(true);
-                if (target.canChoose(source.getSourceId(), player.getId(), game)) {
-                    player.choose(Outcome.Copy, target, source.getSourceId(), game);
+                if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
+                    controller.choose(Outcome.Copy, target, source.getSourceId(), game);
                     copyFromPermanent = game.getPermanent(target.getFirstTarget());
                 }
             }
             if (copyFromPermanent != null) {
-                bluePrintPermanent = game.copyPermanent(copyFromPermanent, sourceObject.getId(), source, applier);
+                bluePrintPermanent = game.copyPermanent(copyFromPermanent, sourcePermanent.getId(), source, applier);
+                if (bluePrintPermanent == null) {
+                    return false;
+                }
+
+                // if object is a copy of an aura, it needs to attach again for new target
+                if (bluePrintPermanent.hasSubtype(SubType.AURA, game)) {
+                    //copied from mage.cards.c.CopyEnchantment.java
+
+                    // permanent can be attached (Estrid's Mask) or enchant (Utopia Sprawl)
+                    // TODO: fix Animate Dead -- it's can't be copied (can't retarget)
+                    Outcome auraOutcome = Outcome.BoostCreature;
+                    Target auraTarget = null;
+
+                    // attach - search effect in spell ability (example: cast Utopia Sprawl, cast Estrid's Invocation on it)
+                    for (Ability ability : bluePrintPermanent.getAbilities()) {
+                        if (ability instanceof SpellAbility) {
+                            for (Effect effect : ability.getEffects()) {
+                                if (effect instanceof AttachEffect) {
+                                    if (bluePrintPermanent.getSpellAbility().getTargets().size() > 0) {
+                                        auraTarget = bluePrintPermanent.getSpellAbility().getTargets().get(0);
+                                        auraOutcome = effect.getOutcome();
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // enchant - search in all abilities (example: cast Estrid's Invocation on enchanted creature by Estrid, the Masked second ability, cast Estrid's Invocation on it)
+                    if (auraTarget == null) {
+                        for (Ability ability : bluePrintPermanent.getAbilities()) {
+                            if (ability instanceof EnchantAbility) {
+                                if (ability.getTargets().size() > 0) { // Animate Dead don't have targets
+                                    auraTarget = ability.getTargets().get(0);
+                                    for (Effect effect : ability.getEffects()) {
+                                        // first outcome
+                                        auraOutcome = effect.getOutcome();
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    /* if this is a copy of a copy, the copy's target has been
+                     * copied and needs to be cleared
+                     */
+                    if (auraTarget != null) {
+                        // clear selected target
+                        if (auraTarget.getFirstTarget() != null) {
+                            auraTarget.remove(auraTarget.getFirstTarget());
+                        }
+
+                        // select new target
+                        auraTarget.setNotTarget(true);
+                        if (controller.choose(auraOutcome, auraTarget, source.getSourceId(), game)) {
+                            UUID targetId = auraTarget.getFirstTarget();
+                            Permanent targetPermanent = game.getPermanent(targetId);
+                            Player targetPlayer = game.getPlayer(targetId);
+                            if (targetPermanent != null) {
+                                targetPermanent.addAttachment(sourcePermanent.getId(), game);
+                            } else if (targetPlayer != null) {
+                                targetPlayer.addAttachment(sourcePermanent.getId(), game);
+                            } else {
+                                return false;
+                            }
+                        }
+                    }
+                }
             }
             return true;
         }

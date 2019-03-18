@@ -1,40 +1,5 @@
-/*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.server;
 
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.server.exceptions.UserNotFoundException;
@@ -45,6 +10,15 @@ import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
 import mage.view.ChatMessage.SoundToPlay;
 import org.apache.log4j.Logger;
+
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -133,7 +107,8 @@ public enum ChatManager {
                 if (u.isPresent()) {
 
                     User user = u.get();
-                    if (message.equals(userMessages.get(userName))) {
+                    String messageId = chatId.toString() + message;
+                    if (messageId.equals(userMessages.get(userName))) {
                         // prevent identical messages
                         String informUser = "Your message appears to be identical to your last message";
                         chatSessions.get(chatId).broadcastInfoToUser(user, informUser);
@@ -170,7 +145,7 @@ public enum ChatManager {
                         }
                     }
 
-                    userMessages.put(userName, message);
+                    userMessages.put(userName, messageId);
 
                     if (messageType == MessageType.TALK) {
                         if (user.getChatLockedUntil() != null) {
@@ -198,8 +173,8 @@ public enum ChatManager {
             + "<br/>\\whisper or \\w [player name] [text] - whisper to the player with the given name"
             + "<br/>\\card Card Name - Print oracle text for card"
             + "<br/>[Card Name] - Show a highlighted card name"
-            + "<br/>\\ignore - shows current ignore list on this server."
-            + "<br/>\\ignore [username] - add a username to your ignore list on this server."
+            + "<br/>\\ignore - shows your ignore list on this server."
+            + "<br/>\\ignore [username] - add username to ignore list (they won't be able to chat or join to your game)."
             + "<br/>\\unignore [username] - remove a username from your ignore list on this server.";
 
     final Pattern getCardTextPattern = Pattern.compile("^.card *(.*)");
@@ -229,7 +204,7 @@ public enum ChatManager {
             if (session != null && session.getInfo() != null) {
                 String gameId = session.getInfo();
                 if (gameId.startsWith("Game ")) {
-                    UUID id = java.util.UUID.fromString(gameId.substring(5, gameId.length()));
+                    UUID id = java.util.UUID.fromString(gameId.substring(5));
                     for (Entry<UUID, GameController> entry : GameManager.instance.getGameController().entrySet()) {
                         if (entry.getKey().equals(id)) {
                             GameController controller = entry.getValue();
@@ -250,7 +225,7 @@ public enum ChatManager {
             if (session != null && session.getInfo() != null) {
                 String gameId = session.getInfo();
                 if (gameId.startsWith("Game ")) {
-                    UUID id = java.util.UUID.fromString(gameId.substring(5, gameId.length()));
+                    UUID id = java.util.UUID.fromString(gameId.substring(5));
                     for (Entry<UUID, GameController> entry : GameManager.instance.getGameController().entrySet()) {
                         if (entry.getKey().equals(id)) {
                             GameController controller = entry.getValue();
@@ -264,7 +239,7 @@ public enum ChatManager {
                 }
             }
             return true;
-        }        
+        }
         if (command.startsWith("CARD ")) {
             Matcher matchPattern = getCardTextPattern.matcher(message.toLowerCase(Locale.ENGLISH));
             if (matchPattern.find()) {

@@ -4,7 +4,7 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-public class EighthEditionBox extends ExpansionSet {
+public final class EighthEditionBox extends ExpansionSet {
 
     private static final EighthEditionBox instance = new EighthEditionBox();
 
@@ -15,6 +15,9 @@ public class EighthEditionBox extends ExpansionSet {
     private EighthEditionBox() {
         super("EighthEditionBox", "8EB", ExpansionSet.buildDate(2003, 7, 28), SetType.CORE);
         this.hasBoosters = false;
+        this.hasBasicLands = false;
+
+        // // http://www.magiclibrarities.net/540-rarities-eighth-edition-box-set-cards-english-cards-index.html
         cards.add(new SetCardInfo("Eager Cadet", 1, Rarity.COMMON, mage.cards.e.EagerCadet.class));
         cards.add(new SetCardInfo("Vengeance", 2, Rarity.UNCOMMON, mage.cards.v.Vengeance.class));
         cards.add(new SetCardInfo("Giant Octopus", 3, Rarity.COMMON, mage.cards.g.GiantOctopus.class));

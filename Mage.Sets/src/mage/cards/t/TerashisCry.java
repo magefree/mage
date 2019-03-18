@@ -36,6 +36,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 
 import java.util.UUID;
 
@@ -43,7 +44,7 @@ import java.util.UUID;
  * @author LevelX
  */
 
-public class TerashisCry extends CardImpl {
+public final class TerashisCry extends CardImpl {
 
     public TerashisCry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}");
@@ -51,8 +52,7 @@ public class TerashisCry extends CardImpl {
 
 
         // Tap up to three target creatures.
-        Target target = new TargetCreaturePermanent(0, 3);
-        target.setTargetName("up to three");
+        Target target = new TargetCreaturePermanent(0, 3, FILTER_PERMANENT_CREATURES, false);
         this.getSpellAbility().addEffect(new TapTargetEffect());
         this.getSpellAbility().addTarget(target);
     }

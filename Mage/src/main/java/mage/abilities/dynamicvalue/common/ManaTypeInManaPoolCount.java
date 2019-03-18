@@ -1,5 +1,6 @@
 package mage.abilities.dynamicvalue.common;
 
+import mage.ConditionalMana;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -29,6 +30,9 @@ public class ManaTypeInManaPoolCount implements DynamicValue {
         Player player = game.getPlayer(sourceAbility.getControllerId());
         if (player != null) {
             amount = player.getManaPool().get(manaType);
+            for (ConditionalMana mana : player.getManaPool().getConditionalMana()) {
+                amount += mana.get(manaType);
+            }
         }
         return amount;
     }
@@ -45,7 +49,7 @@ public class ManaTypeInManaPoolCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder("unspent ");
         switch (manaType) {
             case BLACK:
                 sb.append("black");
@@ -66,7 +70,7 @@ public class ManaTypeInManaPoolCount implements DynamicValue {
                 sb.append("colorless");
                 break;
         }
-        sb.append(" mana in your mana pool");
+        sb.append(" mana you have");
         return sb.toString();
     }
 }

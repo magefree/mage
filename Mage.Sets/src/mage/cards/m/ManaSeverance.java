@@ -23,7 +23,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author nick.myers
  */
-public class ManaSeverance extends CardImpl {
+public final class ManaSeverance extends CardImpl {
     
     public ManaSeverance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");

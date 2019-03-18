@@ -1,30 +1,3 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -34,7 +7,7 @@ import mage.constants.SetType;
 /**
  * @author North
  */
-public class MercadianMasques extends ExpansionSet {
+public final class MercadianMasques extends ExpansionSet {
 
     private static final MercadianMasques instance = new MercadianMasques();
 
@@ -59,6 +32,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Armistice", 3, Rarity.RARE, mage.cards.a.Armistice.class));
         cards.add(new SetCardInfo("Arms Dealer", 172, Rarity.UNCOMMON, mage.cards.a.ArmsDealer.class));
         cards.add(new SetCardInfo("Arrest", 4, Rarity.UNCOMMON, mage.cards.a.Arrest.class));
+        cards.add(new SetCardInfo("Assembly Hall", 286, Rarity.RARE, mage.cards.a.AssemblyHall.class));
         cards.add(new SetCardInfo("Ballista Squad", 5, Rarity.UNCOMMON, mage.cards.b.BallistaSquad.class));
         cards.add(new SetCardInfo("Balloon Peddler", 59, Rarity.COMMON, mage.cards.b.BalloonPeddler.class));
         cards.add(new SetCardInfo("Battle Rampart", 173, Rarity.COMMON, mage.cards.b.BattleRampart.class));
@@ -101,6 +75,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Cho-Manno, Revolutionary", 11, Rarity.RARE, mage.cards.c.ChoMannoRevolutionary.class));
         cards.add(new SetCardInfo("Cho-Manno's Blessing", 12, Rarity.COMMON, mage.cards.c.ChoMannosBlessing.class));
         cards.add(new SetCardInfo("Cinder Elemental", 183, Rarity.UNCOMMON, mage.cards.c.CinderElemental.class));
+        cards.add(new SetCardInfo("Clear the Land", 235, Rarity.RARE, mage.cards.c.ClearTheLand.class));
         cards.add(new SetCardInfo("Close Quarters", 184, Rarity.UNCOMMON, mage.cards.c.CloseQuarters.class));
         cards.add(new SetCardInfo("Cloud Sprite", 67, Rarity.COMMON, mage.cards.c.CloudSprite.class));
         cards.add(new SetCardInfo("Coastal Piracy", 68, Rarity.UNCOMMON, mage.cards.c.CoastalPiracy.class));
@@ -142,9 +117,12 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Dust Bowl", 316, Rarity.RARE, mage.cards.d.DustBowl.class));
         cards.add(new SetCardInfo("Embargo", 77, Rarity.RARE, mage.cards.e.Embargo.class));
         cards.add(new SetCardInfo("Energy Flux", 78, Rarity.UNCOMMON, mage.cards.e.EnergyFlux.class));
+        cards.add(new SetCardInfo("Enslaved Horror", 134, Rarity.UNCOMMON, mage.cards.e.EnslavedHorror.class));
         cards.add(new SetCardInfo("Extortion", 135, Rarity.RARE, mage.cards.e.Extortion.class));
+        cards.add(new SetCardInfo("Extravagant Spirit", 79, Rarity.RARE, mage.cards.e.ExtravagantSpirit.class));
         cards.add(new SetCardInfo("Eye of Ramos", 294, Rarity.RARE, mage.cards.e.EyeOfRamos.class));
         cards.add(new SetCardInfo("False Demise", 80, Rarity.UNCOMMON, mage.cards.f.FalseDemise.class));
+        cards.add(new SetCardInfo("Ferocity", 245, Rarity.COMMON, mage.cards.f.Ferocity.class));
         cards.add(new SetCardInfo("Flailing Manticore", 187, Rarity.RARE, mage.cards.f.FlailingManticore.class));
         cards.add(new SetCardInfo("Flailing Ogre", 188, Rarity.UNCOMMON, mage.cards.f.FlailingOgre.class));
         cards.add(new SetCardInfo("Flailing Soldier", 189, Rarity.COMMON, mage.cards.f.FlailingSoldier.class));
@@ -197,10 +175,12 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 337, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 338, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ivory Mask", 24, Rarity.RARE, mage.cards.i.IvoryMask.class));
+        cards.add(new SetCardInfo("Jeweled Torque", 301, Rarity.UNCOMMON, mage.cards.j.JeweledTorque.class));
         cards.add(new SetCardInfo("Jhovall Queen", 25, Rarity.RARE, mage.cards.j.JhovallQueen.class));
         cards.add(new SetCardInfo("Jhovall Rider", 26, Rarity.UNCOMMON, mage.cards.j.JhovallRider.class));
         cards.add(new SetCardInfo("Karn's Touch", 86, Rarity.RARE, mage.cards.k.KarnsTouch.class));
         cards.add(new SetCardInfo("Kris Mage", 195, Rarity.COMMON, mage.cards.k.KrisMage.class));
+        cards.add(new SetCardInfo("Kyren Archive", 302, Rarity.RARE, mage.cards.k.KyrenArchive.class));
         cards.add(new SetCardInfo("Kyren Glider", 196, Rarity.COMMON, mage.cards.k.KyrenGlider.class));
         cards.add(new SetCardInfo("Kyren Legate", 197, Rarity.UNCOMMON, mage.cards.k.KyrenLegate.class));
         cards.add(new SetCardInfo("Kyren Negotiations", 198, Rarity.UNCOMMON, mage.cards.k.KyrenNegotiations.class));
@@ -219,7 +199,9 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Maggot Therapy", 145, Rarity.COMMON, mage.cards.m.MaggotTherapy.class));
         cards.add(new SetCardInfo("Magistrate's Scepter", 304, Rarity.RARE, mage.cards.m.MagistratesScepter.class));
         cards.add(new SetCardInfo("Magistrate's Veto", 204, Rarity.UNCOMMON, mage.cards.m.MagistratesVeto.class));
+        cards.add(new SetCardInfo("Megatherium", 259, Rarity.RARE, mage.cards.m.Megatherium.class));
         cards.add(new SetCardInfo("Mercadia's Downfall", 205, Rarity.UNCOMMON, mage.cards.m.MercadiasDownfall.class));
+        cards.add(new SetCardInfo("Mercadian Atlas", 305, Rarity.RARE, mage.cards.m.MercadianAtlas.class));
         cards.add(new SetCardInfo("Mercadian Bazaar", 321, Rarity.UNCOMMON, mage.cards.m.MercadianBazaar.class));
         cards.add(new SetCardInfo("Midnight Ritual", 146, Rarity.RARE, mage.cards.m.MidnightRitual.class));
         cards.add(new SetCardInfo("Misdirection", 87, Rarity.RARE, mage.cards.m.Misdirection.class));
@@ -328,7 +310,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Stinging Barrier", 107, Rarity.COMMON, mage.cards.s.StingingBarrier.class));
         cards.add(new SetCardInfo("Stone Rain", 215, Rarity.COMMON, mage.cards.s.StoneRain.class));
         cards.add(new SetCardInfo("Story Circle", 51, Rarity.UNCOMMON, mage.cards.s.StoryCircle.class));
-        cards.add(new SetCardInfo("Strongarm Thug", 165, Rarity.COMMON, mage.cards.s.StrongarmThug.class));
+        cards.add(new SetCardInfo("Strongarm Thug", 165, Rarity.UNCOMMON, mage.cards.s.StrongarmThug.class));
         cards.add(new SetCardInfo("Subterranean Hangar", 329, Rarity.UNCOMMON, mage.cards.s.SubterraneanHangar.class));
         cards.add(new SetCardInfo("Sustenance", 278, Rarity.UNCOMMON, mage.cards.s.Sustenance.class));
         cards.add(new SetCardInfo("Swamp", 339, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
@@ -360,10 +342,12 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Unmask", 168, Rarity.RARE, mage.cards.u.Unmask.class));
         cards.add(new SetCardInfo("Uphill Battle", 222, Rarity.UNCOMMON, mage.cards.u.UphillBattle.class));
         cards.add(new SetCardInfo("Vendetta", 170, Rarity.COMMON, mage.cards.v.Vendetta.class));
+        cards.add(new SetCardInfo("Venomous Breath", 281, Rarity.UNCOMMON, mage.cards.v.VenomousBreath.class));
         cards.add(new SetCardInfo("Venomous Dragonfly", 282, Rarity.COMMON, mage.cards.v.VenomousDragonfly.class));
         cards.add(new SetCardInfo("Vernal Equinox", 283, Rarity.RARE, mage.cards.v.VernalEquinox.class));
         cards.add(new SetCardInfo("Vine Dryad", 284, Rarity.RARE, mage.cards.v.VineDryad.class));
         cards.add(new SetCardInfo("Vine Trellis", 285, Rarity.COMMON, mage.cards.v.VineTrellis.class));
+        cards.add(new SetCardInfo("Volcanic Wind", 223, Rarity.UNCOMMON, mage.cards.v.VolcanicWind.class));
         cards.add(new SetCardInfo("Wall of Distortion", 171, Rarity.COMMON, mage.cards.w.WallOfDistortion.class));
         cards.add(new SetCardInfo("War Cadence", 224, Rarity.UNCOMMON, mage.cards.w.WarCadence.class));
         cards.add(new SetCardInfo("War Tax", 113, Rarity.UNCOMMON, mage.cards.w.WarTax.class));

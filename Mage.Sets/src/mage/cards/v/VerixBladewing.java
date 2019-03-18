@@ -20,7 +20,7 @@ import mage.game.permanent.token.KaroxBladewingDragonToken;
  * @author JRHerlehy
  *         Created on 4/5/18.
  */
-public class VerixBladewing extends CardImpl {
+public final class VerixBladewing extends CardImpl {
 
     public VerixBladewing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

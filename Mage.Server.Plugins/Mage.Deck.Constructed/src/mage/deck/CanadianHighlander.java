@@ -1,54 +1,68 @@
-/*
- * Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.deck;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
-import mage.constants.SetType;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- *
  * @author spjspj
  */
 public class CanadianHighlander extends Constructed {
 
+    public static final Map<String, Integer> pointMap = new HashMap<>();
+
+    static {
+        pointMap.put("Ancestral Recall", 7);
+        pointMap.put("Balance", 1);
+        pointMap.put("Birthing Pod", 2);
+        pointMap.put("Black Lotus", 7);
+        pointMap.put("Demonic Tutor", 3);
+        pointMap.put("Dig Through Time", 1);
+        pointMap.put("Enlightened Tutor", 1);
+        pointMap.put("Fastbond", 1);
+        pointMap.put("Flash", 7);
+        pointMap.put("Gifts Ungiven", 2);
+        pointMap.put("Imperial Seal", 1);
+        pointMap.put("Intuition", 1);
+        pointMap.put("Library of Alexandria", 1);
+        pointMap.put("Mana Crypt", 3);
+        pointMap.put("Mana Drain", 1);
+        pointMap.put("Mana Vault", 1);
+        pointMap.put("Merchant Scroll", 1);
+        pointMap.put("Mind Twist", 1);
+        pointMap.put("Mox Emerald", 3);
+        pointMap.put("Mox Jet", 3);
+        pointMap.put("Mox Pearl", 3);
+        pointMap.put("Mox Ruby", 3);
+        pointMap.put("Mox Sapphire", 3);
+        pointMap.put("Mystical Tutor", 2);
+        pointMap.put("Natural Order", 4);
+        pointMap.put("Protean Hulk", 3);
+        pointMap.put("Sol Ring", 3);
+        pointMap.put("Spellseeker", 1);
+        pointMap.put("Stoneforge Mystic", 1);
+        pointMap.put("Strip Mine", 2);
+        pointMap.put("Summoner's Pact", 2);
+        pointMap.put("Survival of the Fittest", 2);
+        pointMap.put("Time Vault", 6);
+        pointMap.put("Time Walk", 6);
+        pointMap.put("Tinker", 4);
+        pointMap.put("Tolarian Academy", 1);
+        pointMap.put("Transmute Artifact", 1);
+        pointMap.put("Treasure Cruise", 1);
+        pointMap.put("True-Name Nemesis", 1);
+        pointMap.put("Umezawa's Jitte", 2);
+        pointMap.put("Vampiric Tutor", 3);
+    }
+
     public CanadianHighlander() {
         this("Canadian Highlander");
         for (ExpansionSet set : Sets.getInstance().values()) {
-            if (set.getSetType() != SetType.CUSTOM_SET) {
+            if (set.getSetType().isEternalLegal()) {
                 setCodes.add(set.getCode());
             }
         }
@@ -72,88 +86,25 @@ public class CanadianHighlander extends Constructed {
             valid = false;
         }
 
-        List<String> basicLandNames = new ArrayList<>(Arrays.asList("Forest", "Island", "Mountain", "Swamp", "Plains", "Wastes",
-                "Snow-Covered Forest", "Snow-Covered Island", "Snow-Covered Mountain", "Snow-Covered Swamp", "Snow-Covered Plains"));
         Map<String, Integer> counts = new HashMap<>();
         countCards(counts, deck.getCards());
         countCards(counts, deck.getSideboard());
         for (Map.Entry<String, Integer> entry : counts.entrySet()) {
             if (entry.getValue() > 1) {
-                if (!basicLandNames.contains(entry.getKey()) && !entry.getKey().equals("Relentless Rats") && !entry.getKey().equals("Shadowborn Apostle")) {
+                if (!basicLandNames.contains(entry.getKey()) && !anyNumberCardsAllowed.contains(entry.getKey())) {
                     invalid.put(entry.getKey(), "Too many: " + entry.getValue());
                     valid = false;
                 }
             }
         }
 
-        int allowedPoints = 10 * (int) Math.floor(deck.getCards().size() / 100.0);
+        int allowedPoints = 10;
         int totalPoints = 0;
         for (Map.Entry<String, Integer> entry : counts.entrySet()) {
             String cn = entry.getKey();
-            if (cn.equals("Balance")
-                    || cn.equals("Dig Through Time")
-                    || cn.equals("Doomsday")
-                    || cn.equals("Enlightened Tutor")
-                    || cn.equals("Fastbond")
-                    || cn.equals("Intuition")
-                    || cn.equals("Library of Alexandria")
-                    || cn.equals("Mana Vault")
-                    || cn.equals("Merchant Scroll")
-                    || cn.equals("Mind Twist")
-                    || cn.equals("Personal Tutor")
-                    || cn.equals("Stoneforge Mystic")
-                    || cn.equals("Tainted Pact")
-                    || cn.equals("Tolarian Academy")
-                    || cn.equals("Transmute Artifact")
-                    || cn.equals("Treasure Cruise")
-                    || cn.equals("True-Name Nemesis")
-                    || cn.equals("Worldly Tutor")) {
-                totalPoints += 1;
-                invalid.put(entry.getKey(), " 1 point " + cn);
-            }
-            if (cn.equals("Gifts Ungiven")
-                    || cn.equals("Hermit Druid")
-                    || cn.equals("Imperial Seal")
-                    || cn.equals("Mana Crypt")
-                    || cn.equals("Mystical Tutor")
-                    || cn.equals("Strip Mine")
-                    || cn.equals("Summoner's Pact")
-                    || cn.equals("Survival of the Fittest")
-                    || cn.equals("Umezawa's Jitte")) {
-                totalPoints += 2;
-                invalid.put(entry.getKey(), " 2 points " + cn);
-            }
-            if (cn.equals("Birthing Pod")
-                    || cn.equals("Mox Emerald")
-                    || cn.equals("Mox Jet")
-                    || cn.equals("Mox Pearl")
-                    || cn.equals("Mox Ruby")
-                    || cn.equals("Mox Sapphire")
-                    || cn.equals("Protean Hulk")
-                    || cn.equals("Sol Ring")
-                    || cn.equals("Vampiric Tutor")) {
-                totalPoints += 3;
-                invalid.put(entry.getKey(), " 3 points " + cn);
-            }
-            if (cn.equals("Demonic Tutor")
-                    || cn.equals("Tinker")) {
-                totalPoints += 4;
-                invalid.put(entry.getKey(), " 4 points " + cn);
-            }
-            if (cn.equals("Natural Order")
-                    || cn.equals("Time Walk")) {
-                totalPoints += 5;
-                invalid.put(entry.getKey(), " 5 points " + cn);
-            }
-            if (cn.equals("Ancestral Recall")
-                    || cn.equals("Time Vault")) {
-                totalPoints += 6;
-                invalid.put(entry.getKey(), " 6 points " + cn);
-            }
-            if (cn.equals("Black Lotus")
-                    || cn.equals("Flash")) {
-                totalPoints += 7;
-                invalid.put(entry.getKey(), " 7 points " + cn);
+            if (pointMap.containsKey(cn)) {
+                totalPoints += pointMap.get(cn);
+                invalid.put(entry.getKey(), " " + pointMap.get(cn) + " point " + cn);
             }
         }
         if (totalPoints > allowedPoints) {

@@ -1,30 +1,4 @@
-/*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.sets;
 
 import java.util.ArrayList;
@@ -39,10 +13,9 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author fireshoes
  */
-public class FateReforged extends ExpansionSet {
+public final class FateReforged extends ExpansionSet {
 
     private static final FateReforged instance = new FateReforged();
 
@@ -57,7 +30,7 @@ public class FateReforged extends ExpansionSet {
         super("Fate Reforged", "FRF", ExpansionSet.buildDate(2015, 1, 23), SetType.EXPANSION);
         this.blockName = "Khans of Tarkir";
         this.parentSet = KhansOfTarkir.getInstance();
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
         this.hasBoosters = true;
         this.numBoosterSpecial = 1;
         this.numBoosterLands = 0;
@@ -66,6 +39,7 @@ public class FateReforged extends ExpansionSet {
         this.numBoosterRare = 1;
         this.numBoosterDoubleFaced = -1;
         this.ratioBoosterMythic = 8;
+
         cards.add(new SetCardInfo("Abzan Advantage", 2, Rarity.COMMON, mage.cards.a.AbzanAdvantage.class));
         cards.add(new SetCardInfo("Abzan Beastmaster", 119, Rarity.UNCOMMON, mage.cards.a.AbzanBeastmaster.class));
         cards.add(new SetCardInfo("Abzan Kin-Guard", 120, Rarity.UNCOMMON, mage.cards.a.AbzanKinGuard.class));
@@ -262,10 +236,10 @@ public class FateReforged extends ExpansionSet {
                 CardCriteria criteria = new CardCriteria();
                 criteria.rarities(Rarity.COMMON);
                 criteria.setCodes(this.code).notTypes(CardType.LAND);
-                if (maxCardNumberInBooster != Integer.MAX_VALUE) {
-                    criteria.maxCardNumber(maxCardNumberInBooster);
-                }
                 savedCardsInfos = CardRepository.instance.findCards(criteria);
+                if (maxCardNumberInBooster != Integer.MAX_VALUE) {
+                    savedCardsInfos.removeIf(next -> next.getCardNumberAsInt() > maxCardNumberInBooster && rarity != Rarity.LAND);
+                }
                 savedCards.put(rarity, savedCardsInfos);
             }
             // Return a copy of the saved cards information, as not to let modify the original.

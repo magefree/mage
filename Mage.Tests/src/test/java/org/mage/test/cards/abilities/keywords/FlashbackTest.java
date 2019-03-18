@@ -1,30 +1,3 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
 package org.mage.test.cards.abilities.keywords;
 
 import mage.abilities.keyword.TrampleAbility;
@@ -35,7 +8,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class FlashbackTest extends CardTestPlayerBase {
@@ -97,10 +69,9 @@ public class FlashbackTest extends CardTestPlayerBase {
     }
 
     /**
-     *
      * Test Granting Flashback to spells with X in manacost which have targeting
      * requirements depending on the choice of X
-     *
+     * <p>
      * Specific instance: Snapcaster Mage granting Flashback to Repeal
      */
     @Test
@@ -110,7 +81,7 @@ public class FlashbackTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, "Repeal", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
-        setChoice(playerA, "Repeal");
+        addTarget(playerA, "Repeal");
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback");
         setChoice(playerA, "X=2");
@@ -126,10 +97,9 @@ public class FlashbackTest extends CardTestPlayerBase {
     }
 
     /**
-     *
      * Test Granting Flashback to spells with X in mana cost, where X has no
      * influence on targeting requirements
-     *
+     * <p>
      * Specific instance: Snapcaster Mage granting Flashback to Blaze
      */
     @Test
@@ -141,7 +111,7 @@ public class FlashbackTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, "Blaze", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
-        setChoice(playerA, "Blaze");
+        addTarget(playerA, "Blaze");
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback");
         setChoice(playerA, "X=1");
@@ -159,7 +129,6 @@ public class FlashbackTest extends CardTestPlayerBase {
     /**
      * My opponent put Iona on the battlefield using Unburial Rites, but my game
      * log didn't show me the color he has chosen.
-     *
      */
     @Test
     public void testUnburialRites() {
@@ -264,7 +233,7 @@ public class FlashbackTest extends CardTestPlayerBase {
      * Ancestral Vision has no casting cost (this is different to a casting cost
      * of {0}). Snapcaster Mage, for example, is able to give it flashback
      * whilst it is in the graveyard.
-     *
+     * <p>
      * However the controller should not be able to cast Ancestral Visions from
      * the graveyard for {0} mana.
      */
@@ -374,7 +343,7 @@ public class FlashbackTest extends CardTestPlayerBase {
 
         // When Snapcaster Mage enters the battlefield, target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
-        setChoice(playerA, "Terminate");
+        addTarget(playerA, "Terminate");
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback"); // Flashback Terminate
         addTarget(playerA, "Icefall Regent");
@@ -563,7 +532,7 @@ public class FlashbackTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
-        setChoice(playerA, "Force of Will");
+        addTarget(playerA, "Force of Will");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Snapcaster Mage");
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback", null, "Lightning Bolt");

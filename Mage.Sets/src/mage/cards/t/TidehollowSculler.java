@@ -1,30 +1,3 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.cards.t;
 
 import java.util.UUID;
@@ -55,10 +28,10 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class TidehollowSculler extends CardImpl {
+public final class TidehollowSculler extends CardImpl {
 
     public TidehollowSculler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{W}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{W}{B}");
         this.subtype.add(SubType.ZOMBIE);
 
         this.power = new MageInt(2);
@@ -106,23 +79,30 @@ class TidehollowScullerExileEffect extends OneShotEffect {
         // 6/7/2013 	If Tidehollow Sculler leaves the battlefield before its first ability has resolved,
         //              its second ability will trigger. This ability will do nothing when it resolves.
         //              Then its first ability will resolve and exile the chosen card forever.
-        Permanent sourcePermanent = (Permanent) source.getSourceObject(game);
-        if (controller != null && opponent != null && sourcePermanent != null) {
+        Permanent sourcePermanent = (Permanent) source.getSourcePermanentIfItStillExists(game);
+        if (controller != null
+                && opponent != null
+                && sourcePermanent != null) {
             opponent.revealCards(sourcePermanent.getName(), opponent.getHand(), game);
-
             TargetCard target = new TargetCard(Zone.HAND, new FilterNonlandCard("nonland card to exile"));
             if (controller.choose(Outcome.Exile, opponent.getHand(), target, game)) {
                 Card card = opponent.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
-                    controller.moveCardToExileWithInfo(card, CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()), sourcePermanent.getIdName(), source.getSourceId(), game, Zone.HAND, true);
+                    controller.moveCardsToExile(
+                            card,
+                            source,
+                            game,
+                            true,
+                            CardUtil.getExileZoneId(game,
+                                    source.getSourceId(),
+                                    source.getSourceObjectZoneChangeCounter()),
+                            sourcePermanent.getIdName());
                 }
             }
-
             return true;
         }
         return false;
     }
-
 }
 
 class TidehollowScullerLeaveEffect extends OneShotEffect {
@@ -146,8 +126,11 @@ class TidehollowScullerLeaveEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
-            int zoneChangeCounter = (sourceObject instanceof PermanentToken) ? source.getSourceObjectZoneChangeCounter() : source.getSourceObjectZoneChangeCounter() - 1;
-            ExileZone exZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter));
+            int zoneChangeCounter = (sourceObject instanceof PermanentToken) 
+                    ? source.getSourceObjectZoneChangeCounter() 
+                    : source.getSourceObjectZoneChangeCounter() - 1;
+            ExileZone exZone = game.getExile().getExileZone(
+                    CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter));
             if (exZone != null) {
                 controller.moveCards(exZone, Zone.HAND, source, game);
             }

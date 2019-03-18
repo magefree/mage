@@ -1,30 +1,3 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
 package org.mage.test.utils;
 
 import mage.abilities.mana.ManaOptions;
@@ -61,8 +34,8 @@ public class ManaOptionsTest extends CardTestPlayerBase {
     }
 
     // Tinder Farm enters the battlefield tapped.
-    // {T}: Add {G} to your mana pool.
-    // {T}, Sacrifice Tinder Farm: Add {R}{W} to your mana pool.
+    // {T}: Add {G}.
+    // {T}, Sacrifice Tinder Farm: Add {R}{W}.
     @Test
     public void testTinderFarm() {
         addCard(Zone.BATTLEFIELD, playerA, "Tinder Farm", 3);
@@ -82,8 +55,8 @@ public class ManaOptionsTest extends CardTestPlayerBase {
     }
 
     // Adarkar Wastes
-    // {T}: Add {C} to your mana pool.
-    // {T}: Add {W} or {U} to your mana pool. Adarkar Wastes deals 1 damage to you.
+    // {T}: Add {C}.
+    // {T}: Add {W} or {U}. Adarkar Wastes deals 1 damage to you.
     @Test
     public void testAdarkarWastes() {
         addCard(Zone.BATTLEFIELD, playerA, "Adarkar Wastes", 3);
@@ -108,7 +81,7 @@ public class ManaOptionsTest extends CardTestPlayerBase {
     }
 
     // Chromatic Sphere
-    // {1}, {T}, Sacrifice Chromatic Sphere: Add one mana of any color to your mana pool. Draw a card.
+    // {1}, {T}, Sacrifice Chromatic Sphere: Add one mana of any color. Draw a card.
     @Test
     public void testChromaticSphere() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
@@ -125,7 +98,7 @@ public class ManaOptionsTest extends CardTestPlayerBase {
     }
 
     // Orochi Leafcaller
-    // {G}: Add one mana of any color to your mana pool.
+    // {G}: Add one mana of any color.
     @Test
     public void testOrochiLeafcaller() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
@@ -143,8 +116,8 @@ public class ManaOptionsTest extends CardTestPlayerBase {
     }
 
     // Crystal Quarry
-    // {T}: {1} Add  to your mana pool.
-    // {5}, {T}: Add {W}{U}{B}{R}{G} to your mana pool.
+    // {T}: {1} Add .
+    // {5}, {T}: Add {W}{U}{B}{R}{G}.
     @Test
     public void testCrystalQuarry() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
@@ -158,12 +131,12 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         assertDuplicatedManaOptions(manaOptions);
 
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
-        assertManaOptions("{C}{W}{W}{G}{G}",  manaOptions);
+        assertManaOptions("{C}{W}{W}{G}{G}", manaOptions);
     }
 
     // Crystal Quarry
-    // {T}: {1} Add  to your mana pool.
-    // {5}, {T}: Add {W}{U}{B}{R}{G} to your mana pool.
+    // {T}: {1} Add .
+    // {5}, {T}: Add {W}{U}{B}{R}{G}.
     @Test
     public void testCrystalQuarry2() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
@@ -182,8 +155,8 @@ public class ManaOptionsTest extends CardTestPlayerBase {
     }
 
     // Nykthos, Shrine to Nyx
-    // {T}: Add {C} to your mana pool.
-    // {2}, {T}: Choose a color. Add to your mana pool an amount of mana of that color equal to your devotion to that color. (Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)
+    // {T}: Add {C}.
+    // {2}, {T}: Choose a color. Add an amount of mana of that color equal to your devotion to that color. (Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)
     @Test
     public void testNykthos1() {
         addCard(Zone.BATTLEFIELD, playerA, "Sedge Scorpion", 4);
@@ -236,6 +209,48 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         assertManaOptions("{C}{G}{Any}", manaOptions);
     }
 
+    // Nykthos, Shrine to Nyx
+    // {T}: Add {C}.
+    // {2}, {T}: Choose a color. Add an amount of mana of that color equal to your devotion to that color. (Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)
+    @Test
+    public void testNykthos4() {
+        // If a land is tapped for two or more mana, it produces {C} instead of any other type and amount.
+        // Each spell a player casts costs {1} more to cast for each other spell that player has cast this turn.
+        addCard(Zone.BATTLEFIELD, playerA, "Damping Sphere", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Sedge Scorpion", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Nykthos, Shrine to Nyx", 1);
+
+        setStopAt(1, PhaseStep.UPKEEP);
+        execute();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        assertDuplicatedManaOptions(manaOptions);
+
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        assertManaOptions("{C}{G}{G}{G}", manaOptions);
+
+    }
+
+    @Test
+    public void testNykthos5() {
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Sedge Scorpion", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Nykthos, Shrine to Nyx", 1);
+
+        setStopAt(1, PhaseStep.UPKEEP);
+        execute();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        assertDuplicatedManaOptions(manaOptions);
+
+        Assert.assertEquals("mana variations don't fit", 3, manaOptions.size());
+        assertManaOptions("{W}{W}{G}", manaOptions);
+        assertManaOptions("{C}{G}{G}{G}", manaOptions);
+        assertManaOptions("{G}{G}{G}{G}{G}", manaOptions);
+    }
+
     @Test
     public void testDuplicatedDontHave1() {
         addCard(Zone.BATTLEFIELD, playerA, "City of Brass", 2); // Any
@@ -266,19 +281,19 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         // if mana ability cost another mana then if replaced in mana cost
         // example:
         // 1x forest
-        // 1x Chromatic Star ({1}, {T}, Sacrifice Chromatic Star: Add one mana of any color to your mana pool.)
+        // 1x Chromatic Star ({1}, {T}, Sacrifice Chromatic Star: Add one mana of any color.)
         // give {G}{Any}, but after pay it transform to {Any} (1 green will be pay)
         // That's why there are can be duplicated records in getManaAvailable
 
-        // {1}, {T}, Sacrifice Chromatic Star: Add one mana of any color to your mana pool.
+        // {1}, {T}, Sacrifice Chromatic Star: Add one mana of any color.
         // When Chromatic Star is put into a graveyard from the battlefield, draw a card.
         addCard(Zone.BATTLEFIELD, playerA, "Chromatic Star", 1);
-        // {1}, {T}, Sacrifice Chromatic Sphere: Add one mana of any color to your mana pool. Draw a card.
+        // {1}, {T}, Sacrifice Chromatic Sphere: Add one mana of any color. Draw a card.
         addCard(Zone.BATTLEFIELD, playerA, "Chromatic Sphere", 1);
-        // {T}: Add {C} to your mana pool. If you control an Urza's Mine and an Urza's Power-Plant, add {C}{C}{C} to your mana pool instead.
+        // {T}: Add {C}. If you control an Urza's Mine and an Urza's Power-Plant, add {C}{C}{C} instead.
         addCard(Zone.BATTLEFIELD, playerA, "Urza's Tower", 1);
-        // {T}: Add {C} to your mana pool.
-        // {T}: Add {R} or {G} to your mana pool. Each opponent gains 1 life.
+        // {T}: Add {C}.
+        // {T}: Add {R} or {G}. Each opponent gains 1 life.
         addCard(Zone.BATTLEFIELD, playerA, "Grove of the Burnwillows", 1);
 
         setStopAt(1, PhaseStep.UPKEEP);
@@ -346,9 +361,9 @@ public class ManaOptionsTest extends CardTestPlayerBase {
 
     @Test
     public void testMageRingNetwork() {
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         // {T}, {1} : Put a storage counter on Mage-Ring Network.
-        // {T}, Remove X storage counters from Mage-Ring Network: Add {X} to your mana pool.
+        // {T}, Remove X storage counters from Mage-Ring Network: Add {X}.
         addCard(Zone.BATTLEFIELD, playerA, "Mage-Ring Network", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
@@ -365,9 +380,9 @@ public class ManaOptionsTest extends CardTestPlayerBase {
 
     @Test
     public void testMageRingNetwork2() {
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         // {T}, {1} : Put a storage counter on Mage-Ring Network.
-        // {T}, Remove any number of storage counters from Mage-Ring Network: Add {C} to your mana pool for each storage counter removed this way.
+        // {T}, Remove any number of storage counters from Mage-Ring Network: Add {C} for each storage counter removed this way.
         addCard(Zone.BATTLEFIELD, playerA, "Mage-Ring Network", 1);
         addCounters(1, PhaseStep.UPKEEP, playerA, "Mage-Ring Network", CounterType.STORAGE, 4);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
@@ -387,7 +402,7 @@ public class ManaOptionsTest extends CardTestPlayerBase {
     @Ignore  // TriggeredManaAbilities not supported yet for getAvailableMana
     public void testCryptGhast() {
         //Extort (Whenever you cast a spell, you may pay {WB}. If you do, each opponent loses 1 life and you gain that much life.)
-        // Whenever you tap a Swamp for mana, add {B} to your mana pool (in addition to the mana the land produces).
+        // Whenever you tap a Swamp for mana, add {B} (in addition to the mana the land produces).
         addCard(Zone.BATTLEFIELD, playerA, "Crypt Ghast", 1);
 
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
@@ -401,4 +416,141 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
         assertManaOptions("{B}{B}", manaOptions);
     }
+
+    @Test
+    public void testDampingSphere() {
+        // If a land is tapped for two or more mana, it produces {C} instead of any other type and amount.
+        // Each spell a player casts costs {1} more to cast for each other spell that player has cast this turn.
+        addCard(Zone.BATTLEFIELD, playerA, "Damping Sphere", 1);
+        // {T}: Add {C}.
+        // {T}: Add {C}{C}. Spend this mana only to cast colorless Eldrazi spells or activate abilities of colorless Eldrazi.
+        addCard(Zone.BATTLEFIELD, playerA, "Eldrazi Temple", 1);
+
+        setStopAt(1, PhaseStep.UPKEEP);
+        execute();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        assertDuplicatedManaOptions(manaOptions);
+
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        assertManaOptions("{C}", manaOptions);
+    }
+
+    @Test
+    public void testCharmedPedant() {
+        // {T}, Put the top card of your library into your graveyard: For each colored mana symbol in that card's mana cost, add one mana of that color.
+        // Activate this ability only any time you could cast an instant.
+        addCard(Zone.BATTLEFIELD, playerA, "Charmed Pendant", 1);
+        // {T}: Add {C}.
+        // {T}: Add {C}{C}. Spend this mana only to cast colorless Eldrazi spells or activate abilities of colorless Eldrazi.
+        addCard(Zone.BATTLEFIELD, playerA, "Eldrazi Temple", 1);
+
+        setStopAt(1, PhaseStep.UPKEEP);
+        execute();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        assertDuplicatedManaOptions(manaOptions);
+
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        assertManaOptions("{C}{C}", manaOptions);
+    }
+
+    @Test
+    public void testManaSourcesWithCosts() {
+        // {T}: Add {C} to your mana pool.
+        // {5}, {T}: Add {W}{U}{B}{R}{G} to your mana pool.
+        addCard(Zone.BATTLEFIELD, playerA, "Crystal Quarry", 1);
+
+        // {T}: Add {C} to your mana pool.
+        // {W/B}, {T}: Add {W}{W}, {W}{B}, or {B}{B} to your mana pool.
+        addCard(Zone.BATTLEFIELD, playerA, "Fetid Heath", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+
+        setStopAt(1, PhaseStep.UPKEEP);
+        execute();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        assertDuplicatedManaOptions(manaOptions);
+
+        Assert.assertEquals("mana variations don't fit", 16, manaOptions.size());
+        assertManaOptions("{C}{C}{C}{C}{W}{W}{W}", manaOptions);
+        assertManaOptions("{C}{C}{C}{W}{W}{W}{W}", manaOptions);
+        assertManaOptions("{C}{C}{C}{W}{W}{W}{B}", manaOptions);
+        assertManaOptions("{C}{C}{C}{W}{W}{B}{B}", manaOptions);
+        assertManaOptions("{C}{C}{W}{W}{W}{W}{W}", manaOptions);
+        assertManaOptions("{C}{C}{W}{W}{W}{W}{B}", manaOptions);
+        assertManaOptions("{C}{C}{W}{W}{W}{B}{B}", manaOptions);
+        assertManaOptions("{C}{C}{W}{W}{B}{B}{B}", manaOptions);
+        assertManaOptions("{C}{C}{W}{B}{B}{B}{B}", manaOptions);
+        assertManaOptions("{C}{W}{W}{W}{W}{W}{W}", manaOptions);
+        assertManaOptions("{C}{W}{W}{W}{W}{W}{B}", manaOptions);
+        assertManaOptions("{C}{W}{W}{W}{W}{B}{B}", manaOptions);
+        assertManaOptions("{C}{W}{W}{W}{B}{B}{B}", manaOptions);
+        assertManaOptions("{C}{W}{W}{B}{B}{B}{B}", manaOptions);
+        assertManaOptions("{C}{W}{B}{B}{B}{B}{B}", manaOptions);
+        assertManaOptions("{C}{B}{B}{B}{B}{B}{B}", manaOptions);
+    }
+
+    @Test
+    public void testSungrassPrairie() {
+        // {1}, {T}: Add {G}{W}.
+        addCard(Zone.BATTLEFIELD, playerA, "Sungrass Prairie", 1);
+        // {T}: Add one mana of any color to your mana pool.
+        addCard(Zone.BATTLEFIELD, playerA, "Alloy Myr", 2);
+
+        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        assertDuplicatedManaOptions(manaOptions);
+
+        Assert.assertEquals("mana variations don't fit", 2, manaOptions.size());
+
+        assertManaOptions("{W}{G}{Any}", manaOptions);
+        assertManaOptions("{Any}{Any}", manaOptions);
+    }
+
+    @Test
+    public void testSungrassPrairie2() {
+        // {1}, {T}: Add {G}{W}.
+        addCard(Zone.BATTLEFIELD, playerA, "Sungrass Prairie", 5);
+        // ({T}: Add {U} or {W} to your mana pool.)
+        addCard(Zone.BATTLEFIELD, playerA, "Tundra", 9);
+        // ({T}: Add {G} or {U} to your mana pool.)
+        addCard(Zone.BATTLEFIELD, playerA, "Tropical Island", 3);
+
+        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        assertDuplicatedManaOptions(manaOptions);
+
+        Assert.assertEquals("mana variations don't fit", 88, manaOptions.size());
+
+        assertManaOptions("{W}{W}{W}{W}{W}{W}{W}{W}{W}{G}{G}{G}{G}{G}{G}{G}{G}", manaOptions);
+        assertManaOptions("{W}{W}{W}{W}{W}{W}{W}{W}{U}{G}{G}{G}{G}{G}{G}{G}{G}", manaOptions);
+    }
+
+    @Test
+    public void testSungrassPrairie3() {
+        // {1}, {T}: Add {G}{W}.
+        addCard(Zone.BATTLEFIELD, playerA, "Sungrass Prairie", 1);
+        // ({T}: Add {U} or {W} to your mana pool.)
+        addCard(Zone.BATTLEFIELD, playerA, "Tundra", 1);
+        // ({T}: Add {G} or {U} to your mana pool.)
+        addCard(Zone.BATTLEFIELD, playerA, "Tropical Island", 1);
+
+        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        assertDuplicatedManaOptions(manaOptions);
+
+        Assert.assertEquals("mana variations don't fit", 4, manaOptions.size());
+        assertManaOptions("{U}{U}", manaOptions);
+        assertManaOptions("{W}{G}{G}", manaOptions);
+        assertManaOptions("{W}{U}{G}", manaOptions);
+        assertManaOptions("{W}{W}{G}", manaOptions);
+    }
+
 }

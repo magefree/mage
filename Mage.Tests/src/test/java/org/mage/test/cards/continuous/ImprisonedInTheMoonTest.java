@@ -21,14 +21,14 @@ public class ImprisonedInTheMoonTest extends CardTestPlayerBase {
      * 
      * Card ruling: http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=414360
      *   If the enchanted permanent is a land and has land types, it retains those types even though it loses any intrinsic mana abilities associated with them. 
-     *   For example, a Plains enchanted by Imprisoned in the Moon is still a Plains, but it can’t tap for {W}, only for {C}.
+     *   For example, a Plains enchanted by Imprisoned in the Moon is still a Plains, but it can't tap for {W}, only for {C}.
     */
     @Test
     public void testEnchantUrzaLand() {
         
         // Imprisoned in the Moon - Enchantment - Aura - {2}{U}
         // Enchant creature, land, or planeswalker
-        // Enchanted permanent is a colorless land with "Tap: Add Colorless to your mana pool" and loses all other card types and abilities.
+        // Enchanted permanent is a colorless land with "Tap: Add Colorless" and loses all other card types and abilities.
         addCard(Zone.HAND, playerA, "Imprisoned in the Moon", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
         addCard(Zone.BATTLEFIELD, playerB, "Urza's Mine", 1);

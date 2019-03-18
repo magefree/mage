@@ -55,7 +55,7 @@ public class EventListenerList extends javax.swing.event.EventListenerList {
      * @param listenerClass
      * @return
      */
-    public <T extends EventListener> Iterator<T> getIterator(Class<? extends T>... listenerClass) {
+    public <T extends EventListener> Iterator<T> getIterator(Class<T>... listenerClass) {
         return getIterable(listenerClass).iterator();
     }
 

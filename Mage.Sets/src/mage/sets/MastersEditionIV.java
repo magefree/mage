@@ -1,35 +1,7 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.cards.a.AesthirGlider;
-import mage.cards.e.EliteCatWarrior;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -40,10 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author LevelX2
  */
-public class MastersEditionIV extends ExpansionSet {
+public final class MastersEditionIV extends ExpansionSet {
 
     private static final MastersEditionIV instance = new MastersEditionIV();
 
@@ -63,8 +34,9 @@ public class MastersEditionIV extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
         this.ratioBoosterSpecialLand = 1; // replace all basic lands
+
         cards.add(new SetCardInfo("Acid Rain", 36, Rarity.RARE, mage.cards.a.AcidRain.class));
-        cards.add(new SetCardInfo("Aesthir Glider", 176, Rarity.COMMON, AesthirGlider.class));
+        cards.add(new SetCardInfo("Aesthir Glider", 176, Rarity.COMMON, mage.cards.a.AesthirGlider.class));
         cards.add(new SetCardInfo("Air Elemental", 37, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));
         cards.add(new SetCardInfo("Al-abara's Carpet", 177, Rarity.RARE, mage.cards.a.AlAbarasCarpet.class));
         cards.add(new SetCardInfo("Alaborn Musketeer", 1, Rarity.COMMON, mage.cards.a.AlabornMusketeer.class));
@@ -130,7 +102,9 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Diabolic Machine", 196, Rarity.UNCOMMON, mage.cards.d.DiabolicMachine.class));
         cards.add(new SetCardInfo("Divine Offering", 10, Rarity.COMMON, mage.cards.d.DivineOffering.class));
         cards.add(new SetCardInfo("Dragon Engine", 197, Rarity.COMMON, mage.cards.d.DragonEngine.class));
+        cards.add(new SetCardInfo("Drain Power", 46, Rarity.RARE, mage.cards.d.DrainPower.class));
         cards.add(new SetCardInfo("Dread Reaper", 78, Rarity.RARE, mage.cards.d.DreadReaper.class));
+        cards.add(new SetCardInfo("Dread Wight", 79, Rarity.UNCOMMON, mage.cards.d.DreadWight.class));
         cards.add(new SetCardInfo("Drop of Honey", 150, Rarity.RARE, mage.cards.d.DropOfHoney.class));
         cards.add(new SetCardInfo("Drowned", 47, Rarity.COMMON, mage.cards.d.Drowned.class));
         cards.add(new SetCardInfo("Dust to Dust", 11, Rarity.UNCOMMON, mage.cards.d.DustToDust.class));
@@ -138,7 +112,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Ebony Horse", 198, Rarity.COMMON, mage.cards.e.EbonyHorse.class));
         cards.add(new SetCardInfo("Ebony Rhino", 199, Rarity.COMMON, mage.cards.e.EbonyRhino.class));
         cards.add(new SetCardInfo("Elephant Graveyard", 244, Rarity.UNCOMMON, mage.cards.e.ElephantGraveyard.class));
-        cards.add(new SetCardInfo("Elite Cat Warrior", 151, Rarity.COMMON, EliteCatWarrior.class));
+        cards.add(new SetCardInfo("Elite Cat Warrior", 151, Rarity.COMMON, mage.cards.e.EliteCatWarrior.class));
         cards.add(new SetCardInfo("Energy Flux", 48, Rarity.UNCOMMON, mage.cards.e.EnergyFlux.class));
         cards.add(new SetCardInfo("Eye for an Eye", 12, Rarity.RARE, mage.cards.e.EyeForAnEye.class));
         cards.add(new SetCardInfo("False Summoning", 49, Rarity.COMMON, mage.cards.f.FalseSummoning.class));
@@ -175,6 +149,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Healing Salve", 14, Rarity.COMMON, mage.cards.h.HealingSalve.class));
         cards.add(new SetCardInfo("Horn of Deafening", 205, Rarity.UNCOMMON, mage.cards.h.HornOfDeafening.class));
         cards.add(new SetCardInfo("Howl from Beyond", 87, Rarity.COMMON, mage.cards.h.HowlFromBeyond.class));
+        cards.add(new SetCardInfo("Ice Cauldron", 206, Rarity.RARE, mage.cards.i.IceCauldron.class));
         cards.add(new SetCardInfo("Icy Manipulator", 207, Rarity.UNCOMMON, mage.cards.i.IcyManipulator.class));
         cards.add(new SetCardInfo("In the Eye of Chaos", 51, Rarity.RARE, mage.cards.i.InTheEyeOfChaos.class));
         cards.add(new SetCardInfo("Instill Energy", 157, Rarity.UNCOMMON, mage.cards.i.InstillEnergy.class));
@@ -182,7 +157,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Island Sanctuary", 15, Rarity.RARE, mage.cards.i.IslandSanctuary.class));
         cards.add(new SetCardInfo("Jade Monolith", 208, Rarity.RARE, mage.cards.j.JadeMonolith.class));
         cards.add(new SetCardInfo("Juggernaut", 209, Rarity.UNCOMMON, mage.cards.j.Juggernaut.class));
-        cards.add(new SetCardInfo("Junún Efreet", 88, Rarity.UNCOMMON, mage.cards.j.JununEfreet.class));
+        cards.add(new SetCardInfo("Junun Efreet", 88, Rarity.UNCOMMON, mage.cards.j.JununEfreet.class));
         cards.add(new SetCardInfo("Just Fate", 16, Rarity.COMMON, mage.cards.j.JustFate.class));
         cards.add(new SetCardInfo("Kismet", 17, Rarity.RARE, mage.cards.k.Kismet.class));
         cards.add(new SetCardInfo("Kormus Bell", 210, Rarity.RARE, mage.cards.k.KormusBell.class));
@@ -194,6 +169,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Library of Leng", 211, Rarity.COMMON, mage.cards.l.LibraryOfLeng.class));
         cards.add(new SetCardInfo("Lich", 89, Rarity.RARE, mage.cards.l.Lich.class));
         cards.add(new SetCardInfo("Lifeforce", 160, Rarity.RARE, mage.cards.l.Lifeforce.class));
+        cards.add(new SetCardInfo("Lim-Dul's Cohort", 90, Rarity.COMMON, mage.cards.l.LimDulsCohort.class));
         cards.add(new SetCardInfo("Living Lands", 161, Rarity.RARE, mage.cards.l.LivingLands.class));
         cards.add(new SetCardInfo("Living Wall", 212, Rarity.UNCOMMON, mage.cards.l.LivingWall.class));
         cards.add(new SetCardInfo("Mahamoti Djinn", 52, Rarity.RARE, mage.cards.m.MahamotiDjinn.class));
@@ -252,6 +228,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Serendib Djinn", 61, Rarity.RARE, mage.cards.s.SerendibDjinn.class));
         cards.add(new SetCardInfo("Serra Angel", 25, Rarity.UNCOMMON, mage.cards.s.SerraAngel.class));
         cards.add(new SetCardInfo("Serra Aviary", 26, Rarity.UNCOMMON, mage.cards.s.SerraAviary.class));
+        cards.add(new SetCardInfo("Serra Bestiary", 27, Rarity.COMMON, mage.cards.s.SerraBestiary.class));
         cards.add(new SetCardInfo("Shapeshifter", 226, Rarity.UNCOMMON, mage.cards.s.Shapeshifter.class));
         cards.add(new SetCardInfo("Shivan Dragon", 136, Rarity.RARE, mage.cards.s.ShivanDragon.class));
         cards.add(new SetCardInfo("Sinkhole", 97, Rarity.RARE, mage.cards.s.Sinkhole.class));
@@ -321,6 +298,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Wild Griffin", 35, Rarity.COMMON, mage.cards.w.WildGriffin.class));
         cards.add(new SetCardInfo("Wild Ox", 174, Rarity.UNCOMMON, mage.cards.w.WildOx.class));
         cards.add(new SetCardInfo("Wood Elemental", 175, Rarity.RARE, mage.cards.w.WoodElemental.class));
+        cards.add(new SetCardInfo("Word of Command", 103, Rarity.RARE, mage.cards.w.WordOfCommand.class));
         cards.add(new SetCardInfo("Xenic Poltergeist", 104, Rarity.UNCOMMON, mage.cards.x.XenicPoltergeist.class));
         cards.add(new SetCardInfo("Yotian Soldier", 240, Rarity.COMMON, mage.cards.y.YotianSoldier.class));
         cards.add(new SetCardInfo("Zombie Master", 105, Rarity.UNCOMMON, mage.cards.z.ZombieMaster.class));
@@ -339,5 +317,4 @@ public class MastersEditionIV extends ExpansionSet {
 
         return new ArrayList<>(savedSpecialLand);
     }
-
 }

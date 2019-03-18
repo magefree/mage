@@ -1,30 +1,4 @@
-/*
- *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.server;
 
 import java.util.*;
@@ -55,7 +29,6 @@ public enum UserManager {
 
     private List<UserView> userInfoList = new ArrayList<>();
 
-    private static final Logger LOGGER = Logger.getLogger(UserManager.class);
 
     private final ReadWriteLock lock = new ReentrantReadWriteLock();
     private final ConcurrentHashMap<UUID, User> users = new ConcurrentHashMap<>();
@@ -85,7 +58,7 @@ public enum UserManager {
 
     public Optional<User> getUser(UUID userId) {
         if (!users.containsKey(userId)) {
-            LOGGER.trace(String.format("User with id %s could not be found", userId));
+            logger.warn(String.format("User with id %s could not be found", userId), new Throwable()); // TODO: remove after session freezes fixed
             return Optional.empty();
         } else {
             return Optional.of(users.get(userId));
@@ -96,13 +69,8 @@ public enum UserManager {
         final Lock r = lock.readLock();
         r.lock();
         try {
-            Optional<User> u = users.values().stream().filter(user -> user.getName().equals(userName))
+            return users.values().stream().filter(user -> user.getName().equals(userName))
                     .findFirst();
-            if (u.isPresent()) {
-                return u;
-            } else {
-                return Optional.empty();
-            }
         } finally {
             r.unlock();
         }
@@ -110,7 +78,7 @@ public enum UserManager {
     }
 
     public Collection<User> getUsers() {
-        ArrayList<User> userList = new ArrayList<>();
+        List<User> userList = new ArrayList<>();
         final Lock r = lock.readLock();
         r.lock();
         try {
@@ -161,10 +129,10 @@ public enum UserManager {
                     -> USER_EXECUTOR.execute(
                             () -> {
                                 try {
-                                    LOGGER.info("USER REMOVE - " + user.getName() + " (" + reason.toString() + ")  userId: " + userId + " [" + user.getGameInfo() + ']');
+                                    logger.info("USER REMOVE - " + user.getName() + " (" + reason.toString() + ")  userId: " + userId + " [" + user.getGameInfo() + ']');
                                     user.removeUserFromAllTables(reason);
                                     ChatManager.instance.removeUser(user.getId(), reason);
-                                    LOGGER.debug("USER REMOVE END - " + user.getName());
+                                    logger.debug("USER REMOVE END - " + user.getName());
                                 } catch (Exception ex) {
                                     handleException(ex);
                                 }
@@ -279,12 +247,12 @@ public enum UserManager {
 
     public void handleException(Exception ex) {
         if (ex != null) {
-            LOGGER.fatal("User manager exception ", ex);
+            logger.fatal("User manager exception ", ex);
             if (ex.getStackTrace() != null) {
-                LOGGER.fatal(ex.getStackTrace());
+                logger.fatal(ex.getStackTrace());
             }
         } else {
-            LOGGER.fatal("User manager exception - null");
+            logger.fatal("User manager exception - null");
         }
     }
 

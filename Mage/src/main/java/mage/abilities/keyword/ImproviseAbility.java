@@ -6,7 +6,6 @@
 package mage.abilities.keyword;
 
 import java.util.UUID;
-
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
@@ -38,7 +37,7 @@ public class ImproviseAbility extends SimpleStaticAbility implements AlternateMa
     private static final FilterArtifactPermanent filterUntapped = new FilterArtifactPermanent();
 
     static {
-        filterUntapped.add(Predicates.not(new TappedPredicate()));
+        filterUntapped.add(Predicates.not(TappedPredicate.instance));
     }
 
     public ImproviseAbility() {
@@ -65,11 +64,11 @@ public class ImproviseAbility extends SimpleStaticAbility implements AlternateMa
                 specialAction.setSourceId(source.getSourceId());
                 // create filter for possible artifacts to tap
                 FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent();
-                filter.add(Predicates.not(new TappedPredicate()));
+                filter.add(Predicates.not(TappedPredicate.instance));
                 Target target = new TargetControlledPermanent(1, unpaid.getMana().getGeneric(), filter, true);
                 target.setTargetName("artifact to Improvise");
                 specialAction.addTarget(target);
-                if (specialAction.canActivate(source.getControllerId(), game)) {
+                if (specialAction.canActivate(source.getControllerId(), game).canActivate()) {
                     game.getState().getSpecialActions().add(specialAction);
                 }
             }

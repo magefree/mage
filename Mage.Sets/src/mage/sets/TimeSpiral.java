@@ -8,7 +8,7 @@ import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-public class TimeSpiral extends ExpansionSet {
+public final class TimeSpiral extends ExpansionSet {
 
     private static final TimeSpiral instance = new TimeSpiral();
 
@@ -26,6 +26,8 @@ public class TimeSpiral extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
         cards.add(new SetCardInfo("Academy Ruins", 269, Rarity.RARE, mage.cards.a.AcademyRuins.class));
+        cards.add(new SetCardInfo("Aether Web", 189, Rarity.COMMON, mage.cards.a.AetherWeb.class));
+        cards.add(new SetCardInfo("Aetherflame Wall", 142, Rarity.COMMON, mage.cards.a.AetherflameWall.class));
         cards.add(new SetCardInfo("Amrou Scout", 1, Rarity.COMMON, mage.cards.a.AmrouScout.class));
         cards.add(new SetCardInfo("Amrou Seekers", 2, Rarity.COMMON, mage.cards.a.AmrouSeekers.class));
         cards.add(new SetCardInfo("Ancestral Vision", 48, Rarity.RARE, mage.cards.a.AncestralVision.class));
@@ -54,6 +56,7 @@ public class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Castle Raptors", 5, Rarity.COMMON, mage.cards.c.CastleRaptors.class));
         cards.add(new SetCardInfo("Cavalry Master", 6, Rarity.UNCOMMON, mage.cards.c.CavalryMaster.class));
         cards.add(new SetCardInfo("Celestial Crusader", 7, Rarity.UNCOMMON, mage.cards.c.CelestialCrusader.class));
+        cards.add(new SetCardInfo("Chameleon Blur", 192, Rarity.COMMON, mage.cards.c.ChameleonBlur.class));
         cards.add(new SetCardInfo("Children of Korlis", 8, Rarity.COMMON, mage.cards.c.ChildrenOfKorlis.class));
         cards.add(new SetCardInfo("Chromatic Star", 251, Rarity.COMMON, mage.cards.c.ChromaticStar.class));
         cards.add(new SetCardInfo("Chronatog Totem", 252, Rarity.UNCOMMON, mage.cards.c.ChronatogTotem.class));
@@ -67,6 +70,7 @@ public class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Corpulent Corpse", 98, Rarity.COMMON, mage.cards.c.CorpulentCorpse.class));
         cards.add(new SetCardInfo("Crookclaw Transmuter", 55, Rarity.COMMON, mage.cards.c.CrookclawTransmuter.class));
         cards.add(new SetCardInfo("Curse of the Cabal", 99, Rarity.RARE, mage.cards.c.CurseOfTheCabal.class));
+        cards.add(new SetCardInfo("Cyclopean Giant", 100, Rarity.COMMON, mage.cards.c.CyclopeanGiant.class));
         cards.add(new SetCardInfo("Dark Withering", 101, Rarity.COMMON, mage.cards.d.DarkWithering.class));
         cards.add(new SetCardInfo("D'Avenant Healer", 11, Rarity.COMMON, mage.cards.d.DAvenantHealer.class));
         cards.add(new SetCardInfo("Deathspore Thallid", 102, Rarity.COMMON, mage.cards.d.DeathsporeThallid.class));
@@ -83,6 +87,7 @@ public class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Drifter il-Dal", 59, Rarity.COMMON, mage.cards.d.DrifterIlDal.class));
         cards.add(new SetCardInfo("Drudge Reavers", 105, Rarity.COMMON, mage.cards.d.DrudgeReavers.class));
         cards.add(new SetCardInfo("Durkwood Baloth", 193, Rarity.COMMON, mage.cards.d.DurkwoodBaloth.class));
+        cards.add(new SetCardInfo("Durkwood Tracker", 194, Rarity.UNCOMMON, mage.cards.d.DurkwoodTracker.class));
         cards.add(new SetCardInfo("Duskrider Peregrine", 14, Rarity.UNCOMMON, mage.cards.d.DuskriderPeregrine.class));
         cards.add(new SetCardInfo("Empty the Warrens", 152, Rarity.COMMON, mage.cards.e.EmptyTheWarrens.class));
         cards.add(new SetCardInfo("Endrek Sahr, Master Breeder", 106, Rarity.RARE, mage.cards.e.EndrekSahrMasterBreeder.class));
@@ -209,7 +214,9 @@ public class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 283, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 284, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 285, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plated Pegasus", 34, Rarity.UNCOMMON, mage.cards.p.PlatedPegasus.class));
         cards.add(new SetCardInfo("Plunder", 174, Rarity.COMMON, mage.cards.p.Plunder.class));
+        cards.add(new SetCardInfo("Premature Burial", 125, Rarity.UNCOMMON, mage.cards.p.PrematureBurial.class));
         cards.add(new SetCardInfo("Primal Forcemage", 212, Rarity.UNCOMMON, mage.cards.p.PrimalForcemage.class));
         cards.add(new SetCardInfo("Prismatic Lens", 262, Rarity.COMMON, mage.cards.p.PrismaticLens.class));
         cards.add(new SetCardInfo("Psionic Sliver", 72, Rarity.RARE, mage.cards.p.PsionicSliver.class));
@@ -281,6 +288,7 @@ public class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Thallid Shell-Dweller", 226, Rarity.COMMON, mage.cards.t.ThallidShellDweller.class));
         cards.add(new SetCardInfo("Thelonite Hermit", 228, Rarity.RARE, mage.cards.t.TheloniteHermit.class));
         cards.add(new SetCardInfo("Thelon of Havenwood", 227, Rarity.RARE, mage.cards.t.ThelonOfHavenwood.class));
+        cards.add(new SetCardInfo("Thick-Skinned Goblin", 182, Rarity.UNCOMMON, mage.cards.t.ThickSkinnedGoblin.class));
         cards.add(new SetCardInfo("Think Twice", 86, Rarity.COMMON, mage.cards.t.ThinkTwice.class));
         cards.add(new SetCardInfo("Thrill of the Hunt", 229, Rarity.COMMON, mage.cards.t.ThrillOfTheHunt.class));
         cards.add(new SetCardInfo("Thunder Totem", 265, Rarity.UNCOMMON, mage.cards.t.ThunderTotem.class));
@@ -291,6 +299,7 @@ public class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Trickbind", 88, Rarity.RARE, mage.cards.t.Trickbind.class));
         cards.add(new SetCardInfo("Triskelavus", 266, Rarity.RARE, mage.cards.t.Triskelavus.class));
         cards.add(new SetCardInfo("Tromp the Domains", 230, Rarity.UNCOMMON, mage.cards.t.TrompTheDomains.class));
+        cards.add(new SetCardInfo("Truth or Tale", 89, Rarity.UNCOMMON, mage.cards.t.TruthOrTale.class));
         cards.add(new SetCardInfo("Two-Headed Sliver", 183, Rarity.COMMON, mage.cards.t.TwoHeadedSliver.class));
         cards.add(new SetCardInfo("Undying Rage", 184, Rarity.UNCOMMON, mage.cards.u.UndyingRage.class));
         cards.add(new SetCardInfo("Unyaro Bees", 231, Rarity.RARE, mage.cards.u.UnyaroBees.class));

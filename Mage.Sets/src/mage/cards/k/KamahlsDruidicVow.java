@@ -1,14 +1,9 @@
 package mage.cards.k;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
 import java.util.UUID;
-
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.LegendarySpellAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
@@ -29,10 +24,9 @@ import mage.players.Player;
 import mage.target.TargetCard;
 
 /**
- * @author JRHerlehy
- *         Created on 4/8/18.
+ * @author JRHerlehy Created on 4/8/18.
  */
-public class KamahlsDruidicVow extends CardImpl {
+public final class KamahlsDruidicVow extends CardImpl {
 
     public KamahlsDruidicVow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{G}{G}");
@@ -72,18 +66,12 @@ class KamahlsDruidicVowEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller == null || sourceObject == null) {
+        if (controller == null) {
             return false;
         }
-
-        Cards cards = new CardsImpl();
         int xValue = source.getManaCostsToPay().getX();
-        int numCards = Math.min(controller.getLibrary().size(), xValue);
-        for (int i = 0; i < numCards; i++) {
-            Card card = controller.getLibrary().removeFromTop(game);
-            cards.add(card);
-        }
+        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, xValue));
+        controller.lookAtCards(source, null, cards, game);
         if (!cards.isEmpty()) {
             FilterCard filter = new FilterPermanentCard("land and/or legendary permanent cards with converted mana cost " + xValue + " or less to put onto the battlefield");
             filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
@@ -93,18 +81,11 @@ class KamahlsDruidicVowEffect extends OneShotEffect {
                             new SupertypePredicate(SuperType.LEGENDARY)
                     ));
             TargetCard target1 = new TargetCard(0, Integer.MAX_VALUE, Zone.LIBRARY, filter);
-            target1.setRequired(false);
-
+            target1.setNotTarget(true);
             controller.choose(Outcome.PutCardInPlay, cards, target1, game);
-            Set<Card> toBattlefield = new LinkedHashSet<>();
-            for (UUID cardId : target1.getTargets()) {
-                Card card = cards.get(cardId, game);
-                if (card != null) {
-                    cards.remove(card);
-                    toBattlefield.add(card);
-                }
-            }
-            controller.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game, false, false, false, null);
+            Cards toBattlefield = new CardsImpl(target1.getTargets());
+            cards.removeAll(toBattlefield);
+            controller.moveCards(toBattlefield.getCards(game), Zone.BATTLEFIELD, source, game, false, false, false, null);
             controller.moveCards(cards, Zone.GRAVEYARD, source, game);
         }
         return true;

@@ -23,7 +23,7 @@ package mage;
  * <p>
  * 107.4c. Numeral symbols (such as {1}) and variable symbols (such as {X}) can
  * also represent colorless mana if they appear in the effect of a spell or
- * ability that reads "add [mana symbol] to your mana pool" or something similar.
+ * ability that reads "add [mana symbol]" or something similar.
  * (See rule 107.3e.)
  * <p>
  * 107.4d. The symbol {0} represents zero mana and is used as a placeholder for a

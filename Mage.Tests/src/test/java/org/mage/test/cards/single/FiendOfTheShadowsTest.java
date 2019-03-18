@@ -39,6 +39,8 @@ public class FiendOfTheShadowsTest extends CardTestPlayerBase {
 
     @Test
     public void testCardExile1() {
+        // Whenever Fiend of the Shadows deals combat damage to a player, that player exiles a card from their hand. You may play that card for as long as it remains exiled.
+        // Sacrifice a Human: Regenerate Fiend of the Shadows.
         addCard(Zone.BATTLEFIELD, playerA, "Fiend of the Shadows");
         removeAllCardsFromHand(playerB);
         addCard(Zone.HAND, playerB, "Swamp");

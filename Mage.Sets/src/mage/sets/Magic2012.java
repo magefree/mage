@@ -1,34 +1,6 @@
-/*
- * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.cards.g.GoblinGrenade;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
@@ -36,7 +8,7 @@ import mage.constants.SetType;
  *
  * @author North
  */
-public class Magic2012 extends ExpansionSet {
+public final class Magic2012 extends ExpansionSet {
 
     private static final Magic2012 instance = new Magic2012();
 
@@ -96,7 +68,7 @@ public class Magic2012 extends ExpansionSet {
         cards.add(new SetCardInfo("Chasm Drake", 48, Rarity.COMMON, mage.cards.c.ChasmDrake.class));
         cards.add(new SetCardInfo("Child of Night", 87, Rarity.COMMON, mage.cards.c.ChildOfNight.class));
         cards.add(new SetCardInfo("Circle of Flame", 127, Rarity.UNCOMMON, mage.cards.c.CircleOfFlame.class));
-        cards.add(new SetCardInfo("Combust", 128, Rarity.COMMON, mage.cards.c.Combust.class));
+        cards.add(new SetCardInfo("Combust", 128, Rarity.UNCOMMON, mage.cards.c.Combust.class));
         cards.add(new SetCardInfo("Consume Spirit", 88, Rarity.UNCOMMON, mage.cards.c.ConsumeSpirit.class));
         cards.add(new SetCardInfo("Coral Merfolk", 49, Rarity.COMMON, mage.cards.c.CoralMerfolk.class));
         cards.add(new SetCardInfo("Crimson Mage", 129, Rarity.UNCOMMON, mage.cards.c.CrimsonMage.class));
@@ -155,7 +127,7 @@ public class Magic2012 extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin Bangchuckers", 137, Rarity.UNCOMMON, mage.cards.g.GoblinBangchuckers.class));
         cards.add(new SetCardInfo("Goblin Chieftain", 138, Rarity.RARE, mage.cards.g.GoblinChieftain.class));
         cards.add(new SetCardInfo("Goblin Fireslinger", 139, Rarity.COMMON, mage.cards.g.GoblinFireslinger.class));
-        cards.add(new SetCardInfo("Goblin Grenade", 140, Rarity.UNCOMMON, GoblinGrenade.class));
+        cards.add(new SetCardInfo("Goblin Grenade", 140, Rarity.UNCOMMON, mage.cards.g.GoblinGrenade.class));
         cards.add(new SetCardInfo("Goblin Piker", 141, Rarity.COMMON, mage.cards.g.GoblinPiker.class));
         cards.add(new SetCardInfo("Goblin Tunneler", 142, Rarity.COMMON, mage.cards.g.GoblinTunneler.class));
         cards.add(new SetCardInfo("Goblin War Paint", 143, Rarity.COMMON, mage.cards.g.GoblinWarPaint.class));

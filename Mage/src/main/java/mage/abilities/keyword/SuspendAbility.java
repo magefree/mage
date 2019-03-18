@@ -1,33 +1,11 @@
-/*
- * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice, this list of
- *       conditions and the following disclaimer.
- *
- *    2. Redistributions in binary form must reproduce the above copyright notice, this list
- *       of conditions and the following disclaimer in the documentation and/or other materials
- *       provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * The views and conclusions contained in the software and documentation are those of the
- * authors and should not be interpreted as representing official policies, either expressed
- * or implied, of BetaSteward_at_googlemail.com.
- */
+
 package mage.abilities.keyword;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
 import mage.abilities.TriggeredAbilityImpl;
@@ -36,7 +14,7 @@ import mage.abilities.condition.common.SuspendedCondition;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.VariableManaCost;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -49,10 +27,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -108,7 +82,7 @@ import java.util.UUID;
  * play the spell if possible, even if that player doesn't want to. Normal
  * timing considerations for the spell are ignored (for example, if the
  * suspended card is a creature and this ability resolves during your upkeep,
- * you’re able to play the card), but other play restrictions are not ignored.
+ * you're able to play the card), but other play restrictions are not ignored.
  *
  * If the second triggered ability of suspend resolves and the suspended card
  * can't be played due to a lack of legal targets or a play restriction, for
@@ -120,10 +94,10 @@ import java.util.UUID;
  * card involves an additional cost, the card's owner must pay that cost if
  * able. If he or she can't, the card remains removed from the game. If the
  * additional cost includes mana, the situation is more complex. If the player
- * has enough mana in their mana pool to pay the cost, that player must do
- * so. If the player can't possibly pay the cost, the card remains removed from
- * the game. However, if the player has the means to produce enough mana to pay
- * the cost, then he or she has a choice: The player may play the spell, produce
+ * has enough mana in their mana pool to pay the cost, that player must do so.
+ * If the player can't possibly pay the cost, the card remains removed from the
+ * game. However, if the player has the means to produce enough mana to pay the
+ * cost, then he or she has a choice: The player may play the spell, produce
  * mana, and pay the cost. Or the player may choose to play no mana abilities,
  * thus making the card impossible to play because the additional mana can't be
  * paid.
@@ -166,7 +140,7 @@ public class SuspendAbility extends SpecialAction {
         }
         StringBuilder sb = new StringBuilder("Suspend ");
         if (cost != null) {
-            sb.append(suspend == Integer.MAX_VALUE ? "X" : suspend).append(" - ").append(cost.getText()).append(suspend == Integer.MAX_VALUE ? ". X can't be 0" : "");
+            sb.append(suspend == Integer.MAX_VALUE ? "X" : suspend).append("&mdash;").append(cost.getText()).append(suspend == Integer.MAX_VALUE ? ". X can't be 0" : "");
             if (!shortRule) {
                 sb.append(" <i>(Rather than cast this card from your hand, pay ")
                         .append(cost.getText())
@@ -180,7 +154,7 @@ public class SuspendAbility extends SpecialAction {
             if (card.getManaCost().isEmpty()) {
                 setRuleAtTheTop(true);
             }
-            addSubAbility(new SuspendBeginningOfUpkeepTriggeredAbility());
+            addSubAbility(new SuspendBeginningOfUpkeepInterveningIfTriggeredAbility());
             addSubAbility(new SuspendPlayCardAbility());
         }
         ruleText = sb.toString();
@@ -200,7 +174,7 @@ public class SuspendAbility extends SpecialAction {
         ability.setControllerId(card.getOwnerId());
         game.getState().addOtherAbility(card, ability);
 
-        SuspendBeginningOfUpkeepTriggeredAbility ability1 = new SuspendBeginningOfUpkeepTriggeredAbility();
+        SuspendBeginningOfUpkeepInterveningIfTriggeredAbility ability1 = new SuspendBeginningOfUpkeepInterveningIfTriggeredAbility();
         ability1.setSourceId(card.getId());
         ability1.setControllerId(card.getOwnerId());
         game.getState().addOtherAbility(card, ability1);
@@ -229,16 +203,16 @@ public class SuspendAbility extends SpecialAction {
     }
 
     @Override
-    public boolean canActivate(UUID playerId, Game game) {
+    public ActivationStatus canActivate(UUID playerId, Game game) {
         if (game.getState().getZone(getSourceId()) != Zone.HAND) {
             // Supend can only be activated from hand
-            return false;
+            return ActivationStatus.getFalse();
         }
         MageObject object = game.getObject(sourceId);
-        return (object.isInstant()
+        return new ActivationStatus(object.isInstant()
                 || object.hasAbility(FlashAbility.getInstance().getId(), game)
-                || game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game)
-                || game.canPlaySorcery(playerId));
+                || null != game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game)
+                || game.canPlaySorcery(playerId), null);
     }
 
     @Override
@@ -369,7 +343,7 @@ class SuspendPlayCardEffect extends OneShotEffect {
             }
             if (!abilitiesToRemove.isEmpty()) {
                 for (Ability ability : card.getAbilities()) {
-                    if (ability instanceof SuspendBeginningOfUpkeepTriggeredAbility || ability instanceof SuspendPlayCardAbility) {
+                    if (ability instanceof SuspendBeginningOfUpkeepInterveningIfTriggeredAbility || ability instanceof SuspendPlayCardAbility) {
                         abilitiesToRemove.add(ability);
                     }
                 }
@@ -377,7 +351,7 @@ class SuspendPlayCardEffect extends OneShotEffect {
                 card.getAbilities().removeAll(abilitiesToRemove);
             }
             // cast the card for free
-            if (player.cast(card.getSpellAbility(), game, true)) {
+            if (player.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game))) {
                 if (card.isCreature()) {
                     ContinuousEffect effect = new GainHasteEffect();
                     effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game) + 1));
@@ -431,9 +405,9 @@ class GainHasteEffect extends ContinuousEffectImpl {
 
 }
 
-class SuspendBeginningOfUpkeepTriggeredAbility extends ConditionalTriggeredAbility {
+class SuspendBeginningOfUpkeepInterveningIfTriggeredAbility extends ConditionalInterveningIfTriggeredAbility {
 
-    public SuspendBeginningOfUpkeepTriggeredAbility() {
+    public SuspendBeginningOfUpkeepInterveningIfTriggeredAbility() {
         super(new BeginningOfUpkeepTriggeredAbility(Zone.EXILED, new RemoveCounterSourceEffect(CounterType.TIME.createInstance()), TargetController.YOU, false),
                 SuspendedCondition.instance,
                 "At the beginning of your upkeep, if this card ({this}) is suspended, remove a time counter from it.");
@@ -441,12 +415,12 @@ class SuspendBeginningOfUpkeepTriggeredAbility extends ConditionalTriggeredAbili
 
     }
 
-    public SuspendBeginningOfUpkeepTriggeredAbility(final SuspendBeginningOfUpkeepTriggeredAbility effect) {
+    public SuspendBeginningOfUpkeepInterveningIfTriggeredAbility(final SuspendBeginningOfUpkeepInterveningIfTriggeredAbility effect) {
         super(effect);
     }
 
     @Override
-    public SuspendBeginningOfUpkeepTriggeredAbility copy() {
-        return new SuspendBeginningOfUpkeepTriggeredAbility(this);
+    public SuspendBeginningOfUpkeepInterveningIfTriggeredAbility copy() {
+        return new SuspendBeginningOfUpkeepInterveningIfTriggeredAbility(this);
     }
 }

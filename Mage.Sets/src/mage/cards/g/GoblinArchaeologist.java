@@ -28,7 +28,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author BursegSardaukar
  */
-public class GoblinArchaeologist extends CardImpl {
+public final class GoblinArchaeologist extends CardImpl {
 
     public GoblinArchaeologist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
@@ -75,7 +75,7 @@ class GoblinArchaeologistEffect extends OneShotEffect {
        Player player = game.getPlayer(source.getControllerId());
        Permanent permanent = game.getPermanent(source.getSourceId());
        if (player != null && permanent != null) {
-           if (!player.flipCoin(game)) {
+           if (!player.flipCoin(source, game, true)) {
                permanent.sacrifice(source.getSourceId(), game);
            }else{
                Permanent targetArtifact = game.getPermanent(source.getFirstTarget());
