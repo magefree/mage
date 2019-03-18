@@ -48,7 +48,8 @@ public class CanAttackAsThoughItDidntHaveDefenderAllEffect extends AsThoughEffec
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         Permanent permanent = game.getPermanent(objectId);
-        return permanent != null && filter.match(permanent, source.getSourceId(), affectedControllerId, game);
+        return permanent != null 
+                && filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
     }
 
     private String getText() {
