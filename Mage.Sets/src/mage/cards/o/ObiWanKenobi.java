@@ -15,6 +15,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.Duration;
 import mage.game.command.emblems.ObiWanKenobiEmblem;
 import mage.target.common.TargetCreaturePermanent;
