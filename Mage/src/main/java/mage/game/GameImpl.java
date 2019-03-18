@@ -114,9 +114,6 @@ public abstract class GameImpl implements Game, Serializable {
     protected GameOptions gameOptions;
     protected String startMessage;
 
-    public static volatile int copyCount = 0;
-    public static volatile long copyTime = 0;
-
     // private final transient LinkedList<MageAction> actions;
     private Player scorePlayer;
     // private int score = 0;
@@ -154,10 +151,6 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     public GameImpl(final GameImpl game) {
-        long t1 = 0;
-        if (logger.isDebugEnabled()) {
-            t1 = System.currentTimeMillis();
-        }
         this.id = game.id;
         this.ready = game.ready;
         this.startingPlayerId = game.startingPlayerId;
@@ -173,10 +166,7 @@ public abstract class GameImpl implements Game, Serializable {
         this.lkiExtended.putAll(game.lkiExtended);
         this.shortLivingLKI.putAll(game.shortLivingLKI);
         this.permanentsEntering.putAll(game.permanentsEntering);
-        if (logger.isDebugEnabled()) {
-            copyCount++;
-            copyTime += (System.currentTimeMillis() - t1);
-        }
+
         this.stateCheckRequired = game.stateCheckRequired;
         this.scorePlayer = game.scorePlayer;
         this.scopeRelevant = game.scopeRelevant;
