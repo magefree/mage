@@ -15,6 +15,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.Duration;
 import mage.game.command.emblems.ObiWanKenobiEmblem;
 import mage.target.common.TargetCreaturePermanent;
@@ -27,6 +28,7 @@ public final class ObiWanKenobi extends CardImpl {
 
     public ObiWanKenobi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{U}");
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.OBI_WAN);
 
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
