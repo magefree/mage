@@ -5,11 +5,12 @@ package mage.game;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 import mage.game.match.MatchType;
+import mage.game.mulligan.Mulligan;
 
 public class CommanderDuel extends GameCommanderImpl {
    
-    public CommanderDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans, int startLife) {
-        super(attackOption, range, freeMulligans, startLife);
+    public CommanderDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
+        super(attackOption, range, mulligan, startLife);
     }
 
     public CommanderDuel(final CommanderDuel game) {

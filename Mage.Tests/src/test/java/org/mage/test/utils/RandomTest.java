@@ -7,6 +7,7 @@ import mage.constants.PlanarDieRoll;
 import mage.constants.RangeOfInfluence;
 import mage.game.Game;
 import mage.game.TwoPlayerDuel;
+import mage.game.mulligan.VancouverMulligan;
 import mage.player.human.HumanPlayer;
 import mage.players.Player;
 import mage.util.RandomUtil;
@@ -92,7 +93,7 @@ public class RandomTest {
         String dest = "f:/test/xmage/";
         //RandomUtil.setSeed(123);
         Player player = new HumanPlayer("random", RangeOfInfluence.ALL, 1);
-        Game game = new TwoPlayerDuel(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, 0, 50);
+        Game game = new TwoPlayerDuel(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, new VancouverMulligan(0), 50);
 
         int height = 512;
         int weight = 512;
@@ -115,7 +116,7 @@ public class RandomTest {
         String dest = "f:/test/xmage/";
         //RandomUtil.setSeed(123);
         Player player = new HumanPlayer("random", RangeOfInfluence.ALL, 1);
-        Game game = new TwoPlayerDuel(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, 0, 50);
+        Game game = new TwoPlayerDuel(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, new VancouverMulligan(0), 50);
 
         int height = 512;
         int weight = 512;
@@ -140,7 +141,7 @@ public class RandomTest {
         String dest = "f:/test/xmage/";
         //RandomUtil.setSeed(123);
         Player player = new HumanPlayer("random", RangeOfInfluence.ALL, 1);
-        Game game = new TwoPlayerDuel(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, 0, 50);
+        Game game = new TwoPlayerDuel(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, new VancouverMulligan(0), 50);
         Deck deck = DeckTestUtils.buildRandomDeck("WGUBR", false, "GRN");
         player.getLibrary().addAll(deck.getCards(), game);
 

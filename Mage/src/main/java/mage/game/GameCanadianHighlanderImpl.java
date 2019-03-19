@@ -1,19 +1,18 @@
 
 package mage.game;
 
-import java.util.*;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
-import mage.game.mulligan.CanadianHighlanderMulligan;
 import mage.game.mulligan.Mulligan;
 import mage.game.turn.TurnMod;
-import mage.players.Player;
+
+import java.util.UUID;
 
 public abstract class GameCanadianHighlanderImpl extends GameImpl {
 
-    public GameCanadianHighlanderImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans, int startLife) {
-        super(attackOption, range, new CanadianHighlanderMulligan(freeMulligans), startLife);
+    public GameCanadianHighlanderImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
+        super(attackOption, range, mulligan, startLife);
     }
 
     public GameCanadianHighlanderImpl(final GameCanadianHighlanderImpl game) {

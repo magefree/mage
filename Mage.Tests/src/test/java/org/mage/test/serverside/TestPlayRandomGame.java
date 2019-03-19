@@ -10,6 +10,7 @@ import mage.game.Game;
 import mage.game.GameException;
 import mage.game.GameOptions;
 import mage.game.TwoPlayerDuel;
+import mage.game.mulligan.VancouverMulligan;
 import mage.player.ai.ComputerPlayer;
 import mage.players.Player;
 import mage.util.RandomUtil;
@@ -40,7 +41,7 @@ public class TestPlayRandomGame extends MageTestBase {
     }
 
     private void playOneGame() throws GameException, FileNotFoundException, IllegalArgumentException {
-        Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, 0, 20);
+        Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, new VancouverMulligan(0), 20);
 
         Player computerA = createRandomPlayer("ComputerA");
         Deck deck = generateRandomDeck();

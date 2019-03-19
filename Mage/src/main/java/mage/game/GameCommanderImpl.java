@@ -1,7 +1,5 @@
 package mage.game;
 
-import java.util.Map;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.InfoEffect;
@@ -12,10 +10,13 @@ import mage.constants.MultiplayerAttackOption;
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
-import mage.game.mulligan.VancouverMulligan;
+import mage.game.mulligan.Mulligan;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.watchers.common.CommanderInfoWatcher;
+
+import java.util.Map;
+import java.util.UUID;
 
 public abstract class GameCommanderImpl extends GameImpl {
 
@@ -25,8 +26,8 @@ public abstract class GameCommanderImpl extends GameImpl {
     protected boolean alsoLibrary; // replace commander going to library
     protected boolean startingPlayerSkipsDraw = true;
 
-    public GameCommanderImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans, int startLife) {
-        super(attackOption, range, new VancouverMulligan(freeMulligans), startLife);
+    public GameCommanderImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
+        super(attackOption, range, mulligan, startLife);
     }
 
     public GameCommanderImpl(final GameCommanderImpl game) {

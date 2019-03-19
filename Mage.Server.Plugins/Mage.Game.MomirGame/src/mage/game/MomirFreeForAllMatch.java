@@ -3,6 +3,7 @@ package mage.game;
 
 import mage.game.match.MatchImpl;
 import mage.game.match.MatchOptions;
+import mage.game.mulligan.Mulligan;
 
 /**
  *
@@ -19,7 +20,8 @@ public class MomirFreeForAllMatch extends MatchImpl {
         // Momir Vig, Simic Visionary gives +4 starting life
         int startLife = 24;
 
-        MomirGame game = new MomirGame(options.getAttackOption(), options.getRange(), options.getFreeMulligans(), startLife);
+        Mulligan mulligan = options.getMulliganType().getMulligan(options.getFreeMulligans());
+        MomirGame game = new MomirGame(options.getAttackOption(), options.getRange(), mulligan, startLife);
         game.setStartMessage(this.createGameStartMessage());
 
         this.initGame(game);

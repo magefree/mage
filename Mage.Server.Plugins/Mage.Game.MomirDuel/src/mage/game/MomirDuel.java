@@ -13,7 +13,7 @@ import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
 import mage.game.command.emblems.MomirEmblem;
 import mage.game.match.MatchType;
-import mage.game.mulligan.VancouverMulligan;
+import mage.game.mulligan.Mulligan;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
 
@@ -23,8 +23,8 @@ import mage.players.Player;
  */
 public class MomirDuel extends GameImpl {
 
-    public MomirDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans, int startLife) {
-        super(attackOption, range, new VancouverMulligan(freeMulligans), startLife);
+    public MomirDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
+        super(attackOption, range, mulligan, startLife);
     }
 
     public MomirDuel(final MomirDuel game) {
