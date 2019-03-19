@@ -1,9 +1,6 @@
 package mage.cards;
 
 import mage.Mana;
-import mage.cards.decks.DeckCardInfo;
-import mage.cards.decks.DeckCardLayout;
-import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -16,8 +13,6 @@ import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.util.*;
 
 /**
@@ -203,75 +198,6 @@ public class Sets extends HashMap<String, ExpansionSet> {
             return instance.get(code);
         }
         return null;
-    }
-
-    public static void saveDeck(String file, DeckCardLists deck) throws FileNotFoundException {
-        Map<String, DeckCardInfo> deckCards = new HashMap<>();
-        Map<String, DeckCardInfo> sideboard = new HashMap<>();
-        try (PrintWriter out = new PrintWriter(file)) {
-            if (deck.getName() != null && !deck.getName().isEmpty()) {
-                out.println("NAME:" + deck.getName());
-            }
-            if (deck.getAuthor() != null && !deck.getAuthor().isEmpty()) {
-                out.println("AUTHOR:" + deck.getAuthor());
-            }
-            for (DeckCardInfo deckCardInfo : deck.getCards()) {
-                if (deckCards.containsKey(deckCardInfo.getCardKey())) {
-                    deckCards.put(deckCardInfo.getCardKey(), deckCards.get(deckCardInfo.getCardKey()).increaseQuantity());
-                } else {
-                    deckCards.put(deckCardInfo.getCardKey(), deckCardInfo);
-                }
-            }
-
-            for (DeckCardInfo deckCardInfo : deck.getSideboard()) {
-                if (sideboard.containsKey(deckCardInfo.getCardKey())) {
-                    sideboard.put(deckCardInfo.getCardKey(), sideboard.get(deckCardInfo.getCardKey()).increaseQuantity());
-                } else {
-                    sideboard.put(deckCardInfo.getCardKey(), deckCardInfo);
-                }
-            }
-
-            // Write out all of the cards
-            for (Entry<String, DeckCardInfo> entry : deckCards.entrySet()) {
-                out.printf("%d [%s:%s] %s%n", entry.getValue().getQuantity(), entry.getValue().getSetCode(), entry.getValue().getCardNum(), entry.getValue().getCardName());
-            }
-            for (Entry<String, DeckCardInfo> entry : sideboard.entrySet()) {
-                out.printf("SB: %d [%s:%s] %s%n", entry.getValue().getQuantity(), entry.getValue().getSetCode(), entry.getValue().getCardNum(), entry.getValue().getCardName());
-            }
-
-            // Write out the layout
-            out.print("LAYOUT MAIN:");
-            writeCardLayout(out, deck.getCardLayout());
-            out.print("\n");
-            out.print("LAYOUT SIDEBOARD:");
-            writeCardLayout(out, deck.getSideboardLayout());
-            out.print("\n");
-        }
-    }
-
-    private static void writeCardLayout(PrintWriter out, DeckCardLayout layout) {
-        if (layout == null) {
-            return;
-        }
-        List<List<List<DeckCardInfo>>> cardGrid = layout.getCards();
-        int height = cardGrid.size();
-        int width = (height > 0) ? cardGrid.get(0).size() : 0;
-        out.print("(" + height + ',' + width + ')');
-        out.print(layout.getSettings());
-        out.print("|");
-        for (List<List<DeckCardInfo>> row : cardGrid) {
-            for (List<DeckCardInfo> stack : row) {
-                out.print("(");
-                for (int i = 0; i < stack.size(); ++i) {
-                    DeckCardInfo info = stack.get(i);
-                    out.printf("[%s:%s]", info.getSetCode(), info.getCardNum());
-                    if (i != stack.size() - 1) {
-                        out.print(",");
-                    }
-                }
-                out.print(")");
-            }
-        }
     }
 
 }
