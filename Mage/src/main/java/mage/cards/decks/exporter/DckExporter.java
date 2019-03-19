@@ -4,7 +4,7 @@ import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLayout;
 import mage.cards.decks.DeckCardLists;
 
-import java.io.*;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,10 +48,10 @@ public class DckExporter extends DeckExporter {
         // Write out the layout
         out.print("LAYOUT MAIN:");
         writeCardLayout(out, deck.getCardLayout());
-        out.print("\n");
+        out.println("");
         out.print("LAYOUT SIDEBOARD:");
         writeCardLayout(out, deck.getSideboardLayout());
-        out.print("\n");
+        out.println("");
     }
 
     private static void writeCardLayout(PrintWriter out, DeckCardLayout layout) {

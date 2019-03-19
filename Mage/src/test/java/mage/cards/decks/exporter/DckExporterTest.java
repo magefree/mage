@@ -20,13 +20,12 @@ public class DckExporterTest {
         deck.getSideboard().add(new DeckCardInfo("Island", "RNA", "3", 2));
         DckExporter exporter = new DckExporter();
         exporter.writeDeck(baos, deck);
-        assertEquals(
-                "2 [1:RNA] Forest\n" +
-                "3 [2:RNA] Plains\n" +
-                "SB: 2 [3:RNA] Island\n" +
-                "LAYOUT MAIN:\n" +
-                "LAYOUT SIDEBOARD:\n",
-                new String(baos.toByteArray()));
+        assertEquals("2 [1:RNA] Forest" + System.lineSeparator() +
+                        "3 [2:RNA] Plains" + System.lineSeparator() +
+                        "SB: 2 [3:RNA] Island" + System.lineSeparator() +
+                        "LAYOUT MAIN:" + System.lineSeparator() +
+                        "LAYOUT SIDEBOARD:" + System.lineSeparator(),
+                baos.toString());
     }
 
 }

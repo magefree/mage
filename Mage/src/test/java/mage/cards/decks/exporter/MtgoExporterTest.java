@@ -20,13 +20,13 @@ public class MtgoExporterTest {
         deck.getSideboard().add(new DeckCardInfo("Island", "RNA", "3", 2));
         MtgoExporter exporter = new MtgoExporter();
         exporter.writeDeck(baos, deck);
-        assertEquals(
-                "2 Forest\n" +
-                "3 Plains\n" +
-                "\n" +
-                "\n" +
-                "2 Island\n" +
-                "\n", new String(baos.toByteArray()));
+        assertEquals("2 Forest" + System.lineSeparator() +
+                        "3 Plains" + System.lineSeparator() +
+                        System.lineSeparator() +
+                        System.lineSeparator() +
+                        "2 Island" + System.lineSeparator() +
+                        System.lineSeparator(),
+                baos.toString());
     }
 
 }
