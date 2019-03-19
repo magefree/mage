@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import java.util.Optional;
@@ -9,6 +8,7 @@ import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.ChooseACardNameEffect;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -71,9 +71,10 @@ class PithingNeedleEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         MageObject object = game.getObject(event.getSourceId());
         Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
-        if (ability.isPresent() && object != null) {
+        if (ability.isPresent() 
+                && object != null) {
             if (game.getState().getPlayersInRange(source.getControllerId(), game).contains(event.getPlayerId()) // controller in range
-                    && ability.get().getAbilityType() != AbilityType.MANA
+                    && !(ability.get() instanceof ActivatedManaAbilityImpl) // not an activated mana ability
                     && object.getName().equals(game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY))) {
                 return true;
             }
