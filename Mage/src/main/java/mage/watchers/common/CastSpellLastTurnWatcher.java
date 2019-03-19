@@ -81,10 +81,10 @@ public class CastSpellLastTurnWatcher extends Watcher {
         }
         return 0;
     }
-
-    @Override
-    public CastSpellLastTurnWatcher copy() {
-        return new CastSpellLastTurnWatcher(this);
-    }
+//
+//    @Override
+//    public CastSpellLastTurnWatcher copy() {
+//        return new CastSpellLastTurnWatcher(this);
+//    }
 
 }

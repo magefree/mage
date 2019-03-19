@@ -56,8 +56,4 @@ public class PlanarRollWatcher extends Watcher {
         numberTimesPlanarDieRolled.clear();
     }
 
-    @Override
-    public PlanarRollWatcher copy() {
-        return new PlanarRollWatcher(this);
-    }
 }

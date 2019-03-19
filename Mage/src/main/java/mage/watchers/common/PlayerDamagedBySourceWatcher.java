@@ -30,10 +30,6 @@ public class PlayerDamagedBySourceWatcher extends Watcher {
         this.damageSourceIds.addAll(watcher.damageSourceIds);
     }
 
-    @Override
-    public PlayerDamagedBySourceWatcher copy() {
-        return new PlayerDamagedBySourceWatcher(this);
-    }
 
     @Override
     public void watch(GameEvent event, Game game) {

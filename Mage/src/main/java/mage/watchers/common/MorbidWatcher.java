@@ -33,9 +33,9 @@ public class MorbidWatcher extends Watcher {
         }
     }
 
-    @Override
-    public MorbidWatcher copy() {
-        return new MorbidWatcher(this);
-    }
+//    @Override
+//    public MorbidWatcher copy() {
+//        return new MorbidWatcher(this);
+//    }
 
 }

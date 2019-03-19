@@ -2,6 +2,8 @@
 package mage.watchers;
 
 import java.io.Serializable;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.UUID;
 import mage.constants.WatcherScope;
 import mage.game.Game;
@@ -76,6 +78,15 @@ public abstract class Watcher implements Serializable {
 
     public abstract void watch(GameEvent event, Game game);
 
-    public abstract Watcher copy();
+    public <T extends Watcher> T copy(){
+        try {
+            Constructor<? extends Watcher> constructor = this.getClass().getDeclaredConstructor(getClass());
+            constructor.setAccessible(true);
+            return (T) constructor.newInstance(this);
+        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 }

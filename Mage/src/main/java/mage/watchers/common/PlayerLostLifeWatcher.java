@@ -75,8 +75,8 @@ public class PlayerLostLifeWatcher extends Watcher {
         amountOfLifeLostThisTurn.clear();
     }
 
-    @Override
-    public PlayerLostLifeWatcher copy() {
-        return new PlayerLostLifeWatcher(this);
-    }
+//    @Override
+//    public PlayerLostLifeWatcher copy() {
+//        return new PlayerLostLifeWatcher(this);
+//    }
 }

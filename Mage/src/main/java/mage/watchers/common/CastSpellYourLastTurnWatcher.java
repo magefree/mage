@@ -60,9 +60,9 @@ public class CastSpellYourLastTurnWatcher extends Watcher {
     public Integer getAmountOfSpellsCastOnPlayersTurn(UUID playerId) {
         return amountOfSpellsCastOnPrevTurn.getOrDefault(playerId, 0);
     }
-
-    @Override
-    public CastSpellYourLastTurnWatcher copy() {
-        return new CastSpellYourLastTurnWatcher(this);
-    }
+//
+//    @Override
+//    public CastSpellYourLastTurnWatcher copy() {
+//        return new CastSpellYourLastTurnWatcher(this);
+//    }
 }
