@@ -89,7 +89,7 @@ public enum TokensMtgImageSource implements CardImageSource {
         }
 
         // Image URL contains token number
-        // e.g. http://tokens.mtg.onl/tokens/ORI_010-Thopter.jpg -- token number 010
+        // e.g. https://tokens.mtg.onl/tokens/ORI_010-Thopter.jpg -- token number 010
         // We don't know these numbers, but we can take them from a file
         // with tokens information that can be downloaded from the site.
         if (tokensData.isEmpty()) {
@@ -115,7 +115,7 @@ public enum TokensMtgImageSource implements CardImageSource {
             tokenData = list.get(card.getType() - 1);
         }
 
-        String url = "http://tokens.mtg.onl/tokens/" + tokenData.getExpansionSetCode().trim() + '_'
+        String url = "https://tokens.mtg.onl/tokens/" + tokenData.getExpansionSetCode().trim() + '_'
                 + tokenData.getNumber().trim() + '-' + tokenData.getName().trim() + ".jpg";
         url = url.replace(' ', '-');
         return new CardImageUrls(url);
