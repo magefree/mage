@@ -22,6 +22,22 @@ public class LondonMulligan extends Mulligan {
 
     @Override
     public void executeMulliganPhase(Game game, int startingHandSize) {
+        /*
+         * 103.4. Each player draws a number of cards equal to their starting hand size, which is normally
+         * seven. (Some effects can modify a player’s starting hand size.) A player who is dissatisfied with
+         * their initial hand may take a mulligan. First, the starting player declares whether they will
+         * take a mulligan. Then each other player in turn order does the same. Once each player has made a
+         * declaration, all players who decided to take mulligans do so at the same time. To take a mulligan,
+         * a player shuffles the cards in their hand back into their library, draws a new hand of cards equal
+         * to their starting hand size, then puts a number of those cards onto the bottom of their library in
+         * any order equal to the number of times that player has taken a mulligan. Once a player chooses not
+         * to take a mulligan, the remaining cards become the player’s opening hand, and that player may not
+         * take any further mulligans. This process is then repeated until no player takes a mulligan. A
+         * player can’t take a number of mulligans greater their starting hand size.
+         *
+         * https://magic.wizards.com/en/articles/archive/competitive-gaming/mythic-championship-ii-format-and-london-test-2019-02-21
+         */
+
         for (UUID playerId : game.getState().getPlayerList(game.getStartingPlayerId())) {
             startingHandSizes.put(playerId, startingHandSize);
         }
@@ -40,7 +56,6 @@ public class LondonMulligan extends Mulligan {
                 player.chooseTarget(Outcome.Neutral, cards, target, null, game);
                 player.putCardsOnBottomOfLibrary(new CardsImpl(target.getTargets()), game, null, true);
                 cards.removeAll(target.getTargets());
-                System.out.println(cardsToDiscard);
             }
         }
     }
@@ -60,6 +75,11 @@ public class LondonMulligan extends Mulligan {
             }
         }
         return startingHandSizes.get(playerId) - deduction;
+    }
+
+    @Override
+    public boolean canTakeMulligan(Game game, Player player) {
+        return super.canTakeMulligan(game, player) && startingHandSizes.get(player.getId()) > 0;
     }
 
     @Override
