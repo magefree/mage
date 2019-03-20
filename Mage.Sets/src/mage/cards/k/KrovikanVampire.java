@@ -47,7 +47,7 @@ public final class KrovikanVampire extends CardImpl {
                 Zone.BATTLEFIELD,
                 new KrovikanVampireEffect(),
                 TargetController.ANY,
-                KrovikanVampireInterveningIfCondition.instance,
+                new KrovikanVampireInterveningIfCondition(),
                 false);
         ability.addWatcher(new KrovikanVampireCreaturesDamagedWatcher());
         ability.addWatcher(new KrovikanVampireCreaturesDiedWatcher());
@@ -85,14 +85,17 @@ class KrovikanVampireEffect extends OneShotEffect {
         if (creaturesAffected != null
                 && controller != null
                 && krovikanVampire != null) {
-            for (UUID creatureId : creaturesAffected) {
+            creaturesAffected.stream().map((creatureId) -> {
                 controller.moveCards(game.getCard(creatureId), Zone.BATTLEFIELD, source, game, false, false, false, null);
+                return creatureId;
+            }).map((creatureId) -> {
                 OneShotEffect effect = new SacrificeTargetEffect();
                 effect.setText("Sacrifice this if Krovikan Vampire leaves the battlefield or its current controller loses control of it.");
                 effect.setTargetPointer(new FixedTarget(creatureId));
-                KrovikanVampireDelayedTriggeredAbility dTA = new KrovikanVampireDelayedTriggeredAbility(effect, krovikanVampire.getId());
+                return effect;
+            }).map((effect) -> new KrovikanVampireDelayedTriggeredAbility(effect, krovikanVampire.getId())).forEachOrdered((dTA) -> {
                 game.addDelayedTriggeredAbility(dTA, source);
-            }
+            });
             creaturesAffected.clear();
             return true;
         }
@@ -105,9 +108,8 @@ class KrovikanVampireEffect extends OneShotEffect {
     }
 }
 
-enum KrovikanVampireInterveningIfCondition implements Condition {
+class KrovikanVampireInterveningIfCondition implements Condition {
 
-    instance;
     Set<UUID> creaturesAffected = new HashSet<>();
 
     @Override
@@ -116,16 +118,12 @@ enum KrovikanVampireInterveningIfCondition implements Condition {
         KrovikanVampireCreaturesDamagedWatcher watcherDamaged = game.getState().getWatcher(KrovikanVampireCreaturesDamagedWatcher.class);
         if (watcherDied != null) {
             Set<UUID> creaturesThatDiedThisTurn = watcherDied.getDiedThisTurn();
-            for (UUID mor : creaturesThatDiedThisTurn) {
-                if (watcherDamaged != null) {
-                    for (UUID mor2 : watcherDamaged.getDamagedBySource()) {
-                        if (mor2 != null
-                                && mor == mor2) {
-                            creaturesAffected.add(mor);
-                        }
-                    }
-                }
-            }
+            creaturesThatDiedThisTurn.stream().filter((mor) -> (watcherDamaged != null)).forEachOrdered((mor) -> {
+                watcherDamaged.getDamagedBySource().stream().filter((mor2) -> (mor2 != null
+                        && mor == mor2)).forEachOrdered((_item) -> {
+                    creaturesAffected.add(mor);
+                });
+            });
             if (creaturesAffected != null
                     && creaturesAffected.size() > 0) {
                 game.getState().setValue(source.getSourceId() + "creatureToGainControl", creaturesAffected);

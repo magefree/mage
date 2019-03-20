@@ -1,5 +1,6 @@
 package org.mage.plugins.card.dl.sources;
 
+import com.google.common.collect.ImmutableMap;
 import org.tritonus.share.ArraySet;
 
 import java.util.HashMap;
@@ -12,22 +13,19 @@ import java.util.Set;
  */
 public class ScryfallImageSupportCards {
 
-    private static final Map<String, String> xmageSetsToScryfall = new HashMap<String, String>() {
-        {
-            // xmage -> scryfall
-            put("DD3GVL", "gvl");
-            put("DD3JVC", "jvc");
-            put("DD3DVD", "dvd");
-            put("DD3EVG", "evg");
-            put("MPS-AKH", "mp2");
-            put("MBP", "pmei");
-            put("WMCQ", "pwcq");
-            put("EURO", "pelp");
-            put("GPX", "pgpx");
-            put("MED", "me1");
-            put("MEDM", "med");
-        }
-    };
+    private static final Map<String, String> xmageSetsToScryfall = ImmutableMap.<String, String>builder().put("DD3GVL", "gvl").
+            put("DD3JVC", "jvc").
+            put("DD3DVD", "dvd").
+            put("DD3EVG", "evg").
+            put("MPS-AKH", "mp2").
+            put("MBP", "pmei").
+            put("WMCQ", "pwcq").
+            put("EURO", "pelp").
+            put("GPX", "pgpx").
+            put("MED", "me1").
+            put("MEDM", "med").build();
+
+
 
     private static final Set<String> supportedSets = new ArraySet<String>() {
         {
