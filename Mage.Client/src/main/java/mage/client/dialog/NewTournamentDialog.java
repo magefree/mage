@@ -1279,6 +1279,6 @@ class DeckFilter extends FileFilter {
 
     @Override
     public String getDescription() {
-        return "Deck Files";
+        return "XMage's deck files (*.dck)";
     }
 }
