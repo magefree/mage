@@ -1,16 +1,20 @@
 package mage.cards.decks;
 
-import mage.cards.decks.exporter.DckExporter;
 import mage.cards.decks.exporter.DeckExporter;
-import mage.cards.decks.exporter.MtgoExporter;
+import mage.cards.decks.exporter.MtgoDeckExporter;
+import mage.cards.decks.exporter.XmageDeckExporter;
 
+import javax.swing.filechooser.FileFilter;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 public enum DeckFormats {
 
-    DCK(new DckExporter()),
-    MTGO(new MtgoExporter());
+    XMAGE(new XmageDeckExporter()),
+    MTGO(new MtgoDeckExporter());
 
     private final DeckExporter exporter;
 
@@ -23,22 +27,45 @@ public enum DeckFormats {
     }
 
     public static Optional<DeckFormats> getFormatForExtension(String filename) {
-        return getExtension(filename).map(c -> {
-            try {
-                return DeckFormats.valueOf(c);
-            } catch (IllegalArgumentException e) {
-                return null;
+        String exp = getExtension(filename).orElse("");
+        for (DeckFormats df : values()) {
+            if (!exp.isEmpty() && df.getExporter().getDefaultFileExt().equals(exp)) {
+                return Optional.of(df);
             }
-        });
+        }
+        return Optional.empty();
     }
 
     public static Optional<String> getExtension(String filename) {
         int i = filename.lastIndexOf('.');
-        if (i > 0) {
-            return Optional.of(filename.substring(i+1).toUpperCase());
+        if (i > 0 && i < filename.length() - 1) {
+            return Optional.of(filename.substring(i + 1).toLowerCase(Locale.ENGLISH));
         } else {
             return Optional.empty();
         }
+    }
+
+    public static Optional<DeckFormats> getFormatForFilter(FileFilter filter) {
+        for (DeckFormats df : values()) {
+            if (df.getExporter().getFileFilter().equals(filter)) {
+                return Optional.of(df);
+            }
+        }
+        return Optional.empty();
+    }
+
+    public static String getDefaultFileExtForFilter(FileFilter filter) {
+        return getFormatForFilter(filter)
+                .map(df -> df.getExporter().getDefaultFileExt())
+                .orElse("");
+    }
+
+    public static List<FileFilter> getFileFilters() {
+        List<FileFilter> res = new ArrayList<>();
+        for (DeckFormats df : values()) {
+            res.add(df.getExporter().getFileFilter());
+        }
+        return res;
     }
 
     public static void writeDeck(String file, DeckCardLists deck) throws IOException {
@@ -65,7 +92,7 @@ public enum DeckFormats {
     }
 
     public static void writeDeck(File file, DeckCardLists deck, DeckExporter exporter) throws IOException {
-        try (FileOutputStream out = new FileOutputStream(file)){
+        try (FileOutputStream out = new FileOutputStream(file)) {
             writeDeck(out, deck, exporter);
         }
     }

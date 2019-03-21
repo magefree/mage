@@ -9,7 +9,7 @@ import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 
-public class MtgoExporterTest {
+public class MtgoDeckExporterTest {
 
     @Test
     public void writeDeck() throws IOException {
@@ -18,7 +18,7 @@ public class MtgoExporterTest {
         deck.getCards().add(new DeckCardInfo("Forest", "RNA", "1", 2));
         deck.getCards().add(new DeckCardInfo("Plains", "RNA", "2", 3));
         deck.getSideboard().add(new DeckCardInfo("Island", "RNA", "3", 2));
-        MtgoExporter exporter = new MtgoExporter();
+        MtgoDeckExporter exporter = new MtgoDeckExporter();
         exporter.writeDeck(baos, deck);
         assertEquals("2 Forest" + System.lineSeparator() +
                         "3 Plains" + System.lineSeparator() +

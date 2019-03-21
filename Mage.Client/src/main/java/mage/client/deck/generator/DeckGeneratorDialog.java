@@ -1,16 +1,5 @@
-
 package mage.client.deck.generator;
 
-import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemListener;
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import javax.swing.*;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.EtchedBorder;
 import mage.cards.decks.Deck;
 import mage.client.MageFrame;
 import mage.client.dialog.PreferencesDialog;
@@ -18,10 +7,20 @@ import mage.client.util.gui.ColorsChooser;
 import mage.client.util.gui.FastSearchUtil;
 import mage.client.util.sets.ConstructedFormats;
 
-import static mage.cards.decks.DeckFormats.DCK;
+import javax.swing.*;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
+import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import static mage.cards.decks.DeckFormats.XMAGE;
 
 /**
- *
  * @author Simown
  */
 public class DeckGeneratorDialog {
@@ -329,7 +328,7 @@ public class DeckGeneratorDialog {
             tmp.getParentFile().mkdirs();
             tmp.createNewFile();
             deck.setName(deckName);
-            DCK.getExporter().writeDeck(tmp.getAbsolutePath(), deck.getDeckCardLists());
+            XMAGE.getExporter().writeDeck(tmp.getAbsolutePath(), deck.getDeckCardLists());
             cleanUp();
             return tmp.getAbsolutePath();
         } catch (Exception e) {

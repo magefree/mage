@@ -18,6 +18,7 @@ import java.util.UUID;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import mage.cards.decks.Deck;
+import mage.cards.decks.DeckFileFilter;
 import mage.cards.decks.importer.DeckImporter;
 import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
@@ -709,7 +710,7 @@ public class NewTournamentDialog extends MageDialog {
         if (fcSelectDeck == null) {
             fcSelectDeck = new JFileChooser();
             fcSelectDeck.setAcceptAllFileFilterUsed(false);
-            fcSelectDeck.addChoosableFileFilter(new DeckFilter());
+            fcSelectDeck.addChoosableFileFilter(new DeckFileFilter("dck", "XMage's deck files (*.dck)"));
         }
         String lastFolder = MageFrame.getPreferences().get("lastDeckFolder", "");
         if (!lastFolder.isEmpty()) {
@@ -1257,28 +1258,4 @@ public class NewTournamentDialog extends MageDialog {
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 
-}
-
-class DeckFilter extends FileFilter {
-
-    @Override
-    public boolean accept(File f) {
-        if (f.isDirectory()) {
-            return true;
-        }
-
-        String ext = null;
-        String s = f.getName();
-        int i = s.lastIndexOf('.');
-
-        if (i > 0 && i < s.length() - 1) {
-            ext = s.substring(i + 1).toLowerCase(Locale.ENGLISH);
-        }
-        return (ext == null) ? false : ext.equals("dck");
-    }
-
-    @Override
-    public String getDescription() {
-        return "XMage's deck files (*.dck)";
-    }
 }

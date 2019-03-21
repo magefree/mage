@@ -3,7 +3,11 @@ package mage.cards.decks.exporter;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.DeckFormats;
 
-import java.io.*;
+import javax.swing.filechooser.FileFilter;
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 
 public abstract class DeckExporter {
 
@@ -21,4 +25,9 @@ public abstract class DeckExporter {
 
     public abstract void writeDeck(PrintWriter out, DeckCardLists deck);
 
+    public abstract FileFilter getFileFilter();
+
+    public abstract String getDefaultFileExt();
+
+    public abstract String getDescription();
 }

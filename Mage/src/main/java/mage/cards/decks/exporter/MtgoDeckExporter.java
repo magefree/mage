@@ -2,12 +2,18 @@ package mage.cards.decks.exporter;
 
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
+import mage.cards.decks.DeckFileFilter;
 
+import javax.swing.filechooser.FileFilter;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.TreeMap;
 
-public class MtgoExporter extends DeckExporter {
+public class MtgoDeckExporter extends DeckExporter {
+
+    private final String ext = "dek";
+    private final String description = "MTGO's deck format (*.dek)";
+    private final FileFilter fileFilter = new DeckFileFilter(ext, description);
 
     @Override
     public void writeDeck(PrintWriter out, DeckCardLists deck) {
@@ -40,4 +46,18 @@ public class MtgoExporter extends DeckExporter {
         return counts;
     }
 
+    @Override
+    public FileFilter getFileFilter() {
+        return fileFilter;
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
+    }
+
+    @Override
+    public String getDefaultFileExt() {
+        return ext;
+    }
 }
