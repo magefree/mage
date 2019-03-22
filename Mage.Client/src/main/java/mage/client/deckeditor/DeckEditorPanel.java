@@ -30,7 +30,9 @@ import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import java.awt.*;
 import java.awt.dnd.DropTarget;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.HierarchyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -680,45 +682,37 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     }
 
     private void importFromClipboard(ActionEvent evt) {
-        final DeckImportFromClipboardDialog dialog = new DeckImportFromClipboardDialog();
-        dialog.pack();
-        dialog.setVisible(true);
+        final DeckImportClipboardDialog dialog = new DeckImportClipboardDialog();
+        dialog.showDialog();
 
-        dialog.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                loadDeck(dialog.getTmpPath());
-            }
-        });
+        if (!dialog.getTmpPath().isEmpty()) {
+            loadDeck(dialog.getTmpPath());
+        }
     }
 
     private void importFromClipboardWithAppend(ActionEvent evt) {
-        final DeckImportFromClipboardDialog dialog = new DeckImportFromClipboardDialog();
-        dialog.pack();
-        dialog.setVisible(true);
+        final DeckImportClipboardDialog dialog = new DeckImportClipboardDialog();
+        dialog.showDialog();
 
-        dialog.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                Deck deckToAppend = null;
-                StringBuilder errorMessages = new StringBuilder();
+        if (!dialog.getTmpPath().isEmpty()) {
+            Deck deckToAppend = null;
+            StringBuilder errorMessages = new StringBuilder();
 
-                MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
-                try {
-                    deckToAppend = Deck.load(DeckImporter.importDeckFromFile(dialog.getTmpPath(), errorMessages), true, true);
-                    processAndShowImportErrors(errorMessages);
+            MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
+            try {
+                deckToAppend = Deck.load(DeckImporter.importDeckFromFile(dialog.getTmpPath(), errorMessages), true, true);
+                processAndShowImportErrors(errorMessages);
 
-                    if (deckToAppend != null) {
-                        deck = Deck.append(deckToAppend, deck);
-                        refreshDeck();
-                    }
-                } catch (GameException e1) {
-                    JOptionPane.showMessageDialog(MageFrame.getDesktop(), e1.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE);
-                } finally {
-                    MageFrame.getDesktop().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+                if (deckToAppend != null) {
+                    deck = Deck.append(deckToAppend, deck);
+                    refreshDeck();
                 }
+            } catch (GameException e1) {
+                JOptionPane.showMessageDialog(MageFrame.getDesktop(), e1.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE);
+            } finally {
+                MageFrame.getDesktop().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             }
-        });
+        }
     }
 
     private void exportChoose(java.awt.event.ActionEvent evt) {
