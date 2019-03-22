@@ -6,8 +6,10 @@ import mage.cards.decks.DeckFileFilter;
 
 import javax.swing.filechooser.FileFilter;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.TreeMap;
+import java.util.Map;
 
 public class MtgoDeckExporter extends DeckExporter {
 
@@ -17,33 +19,42 @@ public class MtgoDeckExporter extends DeckExporter {
 
     @Override
     public void writeDeck(PrintWriter out, DeckCardLists deck) {
-        TreeMap<String, Integer> deckCards = toCardMap(deck.getCards());
-        TreeMap<String, Integer> sideboard = toCardMap(deck.getSideboard());
-        deckCards.forEach((name, count) -> {
-            out.print(count);
-            out.print(' ');
-            out.println(name);
-        });
+        Map<String, Integer> amount = new HashMap<>();
+        List<String> deckMain = prepareCardsList(deck.getCards(), amount, "M@");
+        List<String> deckSideboard = prepareCardsList(deck.getSideboard(), amount, "S@");
 
-        out.println();
-        out.println();
-
-        sideboard.forEach((name, count) -> {
-            out.print(count);
-            out.print(' ');
-            out.println(name);
-        });
-
-        out.println();
+        printCards(out, deckMain, amount, "M@");
+        if (deckSideboard.size() > 0) {
+            out.println();
+            printCards(out, deckSideboard, amount, "S@");
+        }
     }
 
-    private TreeMap<String, Integer> toCardMap(List<DeckCardInfo> cards) {
-        TreeMap<String, Integer> counts = new TreeMap<>();
-        for (DeckCardInfo card : cards) {
-            int count = counts.getOrDefault(card.getCardName(), 0) + card.getQuantity();
-            counts.put(card.getCardName(), count);
+    private List<String> prepareCardsList(List<DeckCardInfo> sourceCards, Map<String, Integer> amount, String prefix) {
+        List<String> res = new ArrayList<>();
+        for (DeckCardInfo card : sourceCards) {
+            String code = prefix + card.getCardName();
+            int curAmount = amount.getOrDefault(code, 0);
+            if (curAmount == 0) {
+                res.add(card.getCardName());
+            }
+            amount.put(code, curAmount + card.getQuantity());
         }
-        return counts;
+        return res;
+    }
+
+    private void printCards(PrintWriter out, List<String> deck, Map<String, Integer> amount, String prefix) {
+        if (deck.size() == 0) return;
+
+        boolean firstCard = true;
+        for (String name : deck) {
+            if (!firstCard) out.println();
+            out.print(amount.get(prefix + name));
+            out.print(' ');
+            out.print(name);
+            firstCard = false;
+        }
+        out.println();
     }
 
     @Override

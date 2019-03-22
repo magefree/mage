@@ -15,18 +15,21 @@ public class MtgoDeckExporterTest {
     public void writeDeck() throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         DeckCardLists deck = new DeckCardLists();
-        deck.getCards().add(new DeckCardInfo("Forest", "RNA", "1", 2));
-        deck.getCards().add(new DeckCardInfo("Plains", "RNA", "2", 3));
-        deck.getSideboard().add(new DeckCardInfo("Island", "RNA", "3", 2));
+        deck.getCards().add(new DeckCardInfo("Forest", "1", "RNA", 2));
+        deck.getCards().add(new DeckCardInfo("Plains", "2", "RNA", 3));
+        deck.getCards().add(new DeckCardInfo("Plains", "2", "RNA", 5)); // must combine
+        deck.getCards().add(new DeckCardInfo("Mountain", "3", "RNA", 1));
+        deck.getSideboard().add(new DeckCardInfo("Island", "1", "RNA", 2));
+        deck.getSideboard().add(new DeckCardInfo("Island", "1", "RNA", 5)); // must combine
+        deck.getSideboard().add(new DeckCardInfo("Mountain", "2", "RNA", 3));
         MtgoDeckExporter exporter = new MtgoDeckExporter();
         exporter.writeDeck(baos, deck);
         assertEquals("2 Forest" + System.lineSeparator() +
-                        "3 Plains" + System.lineSeparator() +
+                        "8 Plains" + System.lineSeparator() +
+                        "1 Mountain" + System.lineSeparator() +
                         System.lineSeparator() +
-                        System.lineSeparator() +
-                        "2 Island" + System.lineSeparator() +
-                        System.lineSeparator(),
+                        "7 Island" + System.lineSeparator() +
+                        "3 Mountain" + System.lineSeparator(),
                 baos.toString());
     }
-
 }
