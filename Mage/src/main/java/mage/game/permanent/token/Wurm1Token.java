@@ -1,4 +1,3 @@
-
 package mage.game.permanent.token;
 
 import mage.constants.CardType;
@@ -24,6 +23,8 @@ public final class Wurm1Token extends TokenImpl {
         power = new MageInt(3);
         toughness = new MageInt(3);
         this.addAbility(DeathtouchAbility.getInstance());
+
+        setTokenType(1); // for image
     }
 
     public Wurm1Token(final Wurm1Token token) {

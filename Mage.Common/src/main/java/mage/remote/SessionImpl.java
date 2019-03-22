@@ -1539,6 +1539,10 @@ public class SessionImpl implements Session {
 
     private void handleThrowable(Throwable t) {
         logger.fatal("Communication error", t);
+        if (t instanceof InterruptedException) {
+            logger.error("Was interrupted", new Throwable());
+        }
+
         // Probably this can cause hanging the client under certain circumstances as the disconnect method is synchronized
         // so check if it's needed
         // disconnect(true);
