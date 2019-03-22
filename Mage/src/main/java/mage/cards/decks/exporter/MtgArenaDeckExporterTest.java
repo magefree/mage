@@ -9,7 +9,10 @@ import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 
-public class MtgoDeckExporterTest {
+/**
+ * @author JayDi85
+ */
+public class MtgArenaDeckExporterTest {
 
     @Test
     public void writeDeck() throws IOException {
@@ -22,14 +25,14 @@ public class MtgoDeckExporterTest {
         deck.getSideboard().add(new DeckCardInfo("Island", "1", "RNA", 2));
         deck.getSideboard().add(new DeckCardInfo("Island", "1", "RNA", 5)); // must combine
         deck.getSideboard().add(new DeckCardInfo("Mountain", "2", "RNA", 3));
-        MtgoDeckExporter exporter = new MtgoDeckExporter();
+        DeckExporter exporter = new MtgArenaDeckExporter();
         exporter.writeDeck(baos, deck);
-        assertEquals("2 Forest" + System.lineSeparator() +
-                        "8 Plains" + System.lineSeparator() +
-                        "1 Mountain" + System.lineSeparator() +
+        assertEquals("2 Forest (RNA) 1" + System.lineSeparator() +
+                        "8 Plains (RNA) 2" + System.lineSeparator() +
+                        "1 Mountain (RNA) 3" + System.lineSeparator() +
                         System.lineSeparator() +
-                        "7 Island" + System.lineSeparator() +
-                        "3 Mountain" + System.lineSeparator(),
+                        "7 Island (RNA) 1" + System.lineSeparator() +
+                        "3 Mountain (RNA) 2" + System.lineSeparator(),
                 baos.toString());
     }
 }

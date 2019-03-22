@@ -1,7 +1,8 @@
 package mage.cards.decks;
 
 import mage.cards.decks.exporter.DeckExporter;
-import mage.cards.decks.exporter.MtgoDeckExporter;
+import mage.cards.decks.exporter.MtgArenaDeckExporter;
+import mage.cards.decks.exporter.MtgOnlineDeckExporter;
 import mage.cards.decks.exporter.XmageDeckExporter;
 
 import javax.swing.filechooser.FileFilter;
@@ -14,7 +15,8 @@ import java.util.Optional;
 public enum DeckFormats {
 
     XMAGE(new XmageDeckExporter()),
-    MTGO(new MtgoDeckExporter());
+    MTG_ONLINE(new MtgOnlineDeckExporter()),
+    MTG_ARENA(new MtgArenaDeckExporter());
 
     private final DeckExporter exporter;
 

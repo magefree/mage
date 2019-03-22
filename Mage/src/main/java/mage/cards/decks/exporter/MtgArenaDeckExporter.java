@@ -6,15 +6,15 @@ import mage.cards.decks.DeckFileFilter;
 
 import javax.swing.filechooser.FileFilter;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-public class MtgoDeckExporter extends DeckExporter {
+/**
+ * @author JayDi85
+ */
+public class MtgArenaDeckExporter extends DeckExporter {
 
-    private final String ext = "dek";
-    private final String description = "MTGO's deck format (*.dek)";
+    private final String ext = "mtga";
+    private final String description = "MTG Arena's deck format (*.mtga)";
     private final FileFilter fileFilter = new DeckFileFilter(ext, description);
 
     @Override
@@ -33,10 +33,11 @@ public class MtgoDeckExporter extends DeckExporter {
     private List<String> prepareCardsList(List<DeckCardInfo> sourceCards, Map<String, Integer> amount, String prefix) {
         List<String> res = new ArrayList<>();
         for (DeckCardInfo card : sourceCards) {
-            String code = prefix + card.getCardName();
+            String name = card.getCardName() + " (" + card.getSetCode().toUpperCase(Locale.ENGLISH) + ") " + card.getCardNum();
+            String code = prefix + name;
             int curAmount = amount.getOrDefault(code, 0);
             if (curAmount == 0) {
-                res.add(card.getCardName());
+                res.add(name);
             }
             amount.put(code, curAmount + card.getQuantity());
         }

@@ -35,10 +35,10 @@ public class DeckFormatsTest {
         // 3. double ext
         String fileName = "C:\\xmage\\deck"
                 + "." + DeckFormats.XMAGE.getExporter().getDefaultFileExt()
-                + "." + DeckFormats.MTGO.getExporter().getDefaultFileExt();
-        Assert.assertEquals("Must find mtgo", DeckFormats.getFormatForExtension(fileName).get(), DeckFormats.MTGO);
+                + "." + DeckFormats.MTG_ONLINE.getExporter().getDefaultFileExt();
+        Assert.assertEquals("Must find mtgo", DeckFormats.getFormatForExtension(fileName).get(), DeckFormats.MTG_ONLINE);
         fileName = "C:\\xmage\\deck"
-                + "." + DeckFormats.MTGO.getExporter().getDefaultFileExt()
+                + "." + DeckFormats.MTG_ONLINE.getExporter().getDefaultFileExt()
                 + "." + DeckFormats.XMAGE.getExporter().getDefaultFileExt();
         Assert.assertEquals("Must find xmage", DeckFormats.getFormatForExtension(fileName).get(), DeckFormats.XMAGE);
     }
