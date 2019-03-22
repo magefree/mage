@@ -782,7 +782,8 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     }
 
     private void exportToClipboard(java.awt.event.ActionEvent evt) {
-        // TODO
+        final DeckExportClipboardDialog dialog = new DeckExportClipboardDialog();
+        dialog.showDialog(deck);
     }
 
     private void processAndShowImportErrors(StringBuilder errorMessages) {
