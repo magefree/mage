@@ -174,17 +174,19 @@
                   <Component id="cbAllowSpectators" alignment="3" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="chkRated" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblMinimumRating" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="spnMinimumRating" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                      <Component id="lblQuitRatio" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="spnQuitRatio" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblNumWins" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="spnNumWins" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" alignment="3" groupAlignment="3" attributes="0">
-                          <Component id="lblQuitRatio" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="spnQuitRatio" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                  </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="chkRated" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblMinimumRating" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="spnMinimumRating" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>

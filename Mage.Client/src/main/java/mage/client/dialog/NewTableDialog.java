@@ -730,6 +730,7 @@ public class NewTableDialog extends MageDialog {
         this.chkPlaneChase.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_PLANECHASE + versionStr, "No").equals("Yes"));
         this.chkRated.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_RATED + versionStr, "No").equals("Yes"));
         this.spnFreeMulligans.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_FREE_MULLIGANS + versionStr, "0")));
+        this.cbMulligan.setSelectedItem(MulliganType.valueByName(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_MULLIGAN_TYPE + versionStr, MulliganType.GAME_DEFAULT.toString())));
 
         int range = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_RANGE + versionStr, "1"));
         for (RangeOfInfluence roi : RangeOfInfluence.values()) {
@@ -781,6 +782,7 @@ public class NewTableDialog extends MageDialog {
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_ROLLBACK_TURNS_ALLOWED + versionStr, options.isRollbackTurnsAllowed() ? "Yes" : "No");
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_RATED + versionStr, options.isRated() ? "Yes" : "No");
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_FREE_MULLIGANS + versionStr, Integer.toString(options.getFreeMulligans()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_MULLIGAN_TYPE + versionStr, options.getMulliganType().toString());
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_DECK_FILE + versionStr, deckFile);
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_PLAYERS + versionStr, spnNumPlayers.getValue().toString());
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_RANGE + versionStr, Integer.toString(options.getRange().getRange()));
