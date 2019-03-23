@@ -41,16 +41,6 @@ public class DeckImportClipboardDialog extends MageDialog {
         this.setResizable(true);
         getRootPane().setDefaultButton(buttonOK);
 
-        /*
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                onCancel();
-            }
-        });
-        */
-
         this.makeWindowCentered();
 
         // windows settings
