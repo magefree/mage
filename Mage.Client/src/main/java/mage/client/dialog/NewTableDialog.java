@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class NewTableDialog extends MageDialog {
 
@@ -121,7 +121,7 @@ public class NewTableDialog extends MageDialog {
         chkRated = new javax.swing.JCheckBox();
         btnSettingsLoad = new javax.swing.JButton();
         btnSettingsSave = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        lblSettings = new javax.swing.JLabel();
 
         menuSaveSettings1.setText("Save to config 1");
         menuSaveSettings1.addActionListener(new java.awt.event.ActionListener() {
@@ -207,7 +207,7 @@ public class NewTableDialog extends MageDialog {
         chkSpectatorsAllowed.setText("Spectators allowed");
         chkSpectatorsAllowed.setToolTipText("Allow spectators to view your game.");
 
-        chkPlaneChase.setText("Use PlaneChase");
+        chkPlaneChase.setText("PlaneChase");
         chkPlaneChase.setToolTipText("Use the PlaneChase variant for your game.");
 
         lblNumPlayers.setLabelFor(spnNumPlayers);
@@ -294,7 +294,7 @@ public class NewTableDialog extends MageDialog {
             }
         });
 
-        jLabel3.setText("Settings");
+        lblSettings.setText("Settings");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -304,7 +304,7 @@ public class NewTableDialog extends MageDialog {
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel3)
+                                                .addComponent(lblSettings)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(btnSettingsLoad)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -383,8 +383,8 @@ public class NewTableDialog extends MageDialog {
                                                                         .addComponent(lblNumWins))
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                        .addComponent(cbMulligan, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addComponent(lblMullgian))
+                                                                        .addComponent(lblMullgian)
+                                                                        .addComponent(cbMulligan, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                                         .addGroup(layout.createSequentialGroup()
@@ -471,7 +471,7 @@ public class NewTableDialog extends MageDialog {
                                 .addGap(16, 16, 16)
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(pnlOtherPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                                .addComponent(pnlOtherPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
                                 .addGap(9, 9, 9)
                                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -480,7 +480,7 @@ public class NewTableDialog extends MageDialog {
                                         .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(btnSettingsLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(btnSettingsSave, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel3))
+                                        .addComponent(lblSettings))
                                 .addContainerGap())
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
@@ -794,6 +794,7 @@ public class NewTableDialog extends MageDialog {
         switch (version) {
             case -1:
                 versionStr = "-1"; // default (empty)
+                break;
             case 1:
                 versionStr = "1";
                 break;
@@ -939,7 +940,6 @@ public class NewTableDialog extends MageDialog {
     private javax.swing.JCheckBox chkSpectatorsAllowed;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -957,6 +957,7 @@ public class NewTableDialog extends MageDialog {
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblQuitRatio;
     private javax.swing.JLabel lblRange;
+    private javax.swing.JLabel lblSettings;
     private javax.swing.JLabel lblSkillLevel;
     private javax.swing.JMenuItem menuLoadSettings1;
     private javax.swing.JMenuItem menuLoadSettings2;
