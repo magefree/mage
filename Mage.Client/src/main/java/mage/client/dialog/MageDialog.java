@@ -129,7 +129,8 @@ public class MageDialog extends javax.swing.JInternalFrame {
                             // need popup clicks and mouse wheel (for out of bound actions)
                             if (!allowedEvent) {
                                 popupComponent = SwingUtilities.getDeepestComponentAt(e.getComponent(), e.getX(), e.getY()); // show root component (popups creates at root)
-                                if (popupComponent != null && popupComponent.getClass().getName().contains("BasicComboPopup")) {
+                                if (popupComponent != null && (popupComponent.getClass().getName().contains("BasicComboPopup")
+                                        || popupComponent.getClass().getName().contains("JMenuItem"))) {
                                     popupEvent = SwingUtilities.convertMouseEvent((Component) e.getSource(), e, popupComponent);
                                     allowedEvent = true;
                                 }

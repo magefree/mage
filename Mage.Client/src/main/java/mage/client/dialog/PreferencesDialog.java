@@ -203,6 +203,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_NEW_TABLE_QUIT_RATIO = "newTableQuitRatio";
     public static final String KEY_NEW_TABLE_MINIMUM_RATING = "newTableMinimumRating";
     public static final String KEY_NEW_TABLE_RATED = "newTableRated";
+    public static final String KEY_NEW_TABLE_EDH_POWER_LEVEL = "newTableEdhPowerLevel";
 
     // pref setting for new tournament dialog
     public static final String KEY_NEW_TOURNAMENT_NAME = "newTournamentName";
