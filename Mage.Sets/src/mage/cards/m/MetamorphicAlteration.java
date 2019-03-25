@@ -74,7 +74,8 @@ class ChooseACreature extends OneShotEffect {
         if (sourceObject == null) {
             sourceObject = game.getObject(source.getSourceId());
         }
-        if (controller != null && sourceObject != null) {
+        if (controller != null 
+                && sourceObject != null) {
             Target target = new TargetCreaturePermanent();
             target.setNotTarget(true);
             if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
@@ -108,12 +109,13 @@ class MetamorphicAlterationEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        //TODO this is stupid and there's got to be a better way, but it works and people probably want to practice full M19 before Prerelease.
         Permanent enchantment = game.getPermanent(source.getSourceId());
         Permanent copied = (Permanent) game.getState().getValue(source.getSourceId().toString() + ChooseACreature.INFO_KEY);
-        if (enchantment != null && copied != null) {
+        if (enchantment != null 
+                && copied != null) {
             Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
-            if (permanent != null && layer == Layer.CopyEffects_1) {
+            if (permanent != null 
+                    && layer == Layer.CopyEffects_1) {
                 permanent.setName(copied.getName());
                 permanent.getManaCost().clear();
                 permanent.getManaCost().addAll(copied.getManaCost());
@@ -123,20 +125,20 @@ class MetamorphicAlterationEffect extends ContinuousEffectImpl {
                     permanent.addSuperType(t);
                 }
                 permanent.getCardType().clear();
-                for (CardType t : copied.getCardType()) {
-                    permanent.addCardType(t);
+                for (CardType cardType : copied.getCardType()) {
+                    permanent.addCardType(cardType);
                 }
                 permanent.getSubtype(game).retainAll(SubType.getLandTypes());
-                for (SubType t : copied.getSubtype(game)) {
-                    permanent.getSubtype(game).add(t);
+                for (SubType subType : copied.getSubtype(game)) {
+                    permanent.getSubtype(game).add(subType);
                 }
                 permanent.getColor(game).setColor(copied.getColor(game));
                 permanent.removeAllAbilities(source.getSourceId(), game);
                 for (Ability ability : copied.getAbilities()) {
                     permanent.addAbility(ability, source.getSourceId(), game);
                 }
-                permanent.getPower().setValue(copied.getPower().getValue());
-                permanent.getToughness().setValue(copied.getToughness().getValue());
+                permanent.getPower().setValue(copied.getPower().getBaseValue());
+                permanent.getToughness().setValue(copied.getToughness().getBaseValue());
                 return true;
             }
         }
