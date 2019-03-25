@@ -27,11 +27,11 @@ public class PlayersAttackedThisTurnWatcher extends Watcher {
         super(watcher);
 
         for (Map.Entry<UUID, PlayerList> entry : watcher.playersAttackedThisTurn.entrySet()) {
-            this.playersAttackedThisTurn.put(entry.getKey(), entry.getValue());
+            this.playersAttackedThisTurn.putIfAbsent(entry.getKey(), entry.getValue());
         }
 
         for (Map.Entry<UUID, PlayerList> entry : watcher.opponentsAttackedThisTurn.entrySet()) {
-            this.opponentsAttackedThisTurn.put(entry.getKey(), entry.getValue());
+            this.opponentsAttackedThisTurn.putIfAbsent(entry.getKey(), entry.getValue());
         }
     }
 
@@ -55,10 +55,11 @@ public class PlayersAttackedThisTurnWatcher extends Watcher {
                 playersAttacked = new PlayerList();
             }
             UUID playerDefender = game.getCombat().getDefendingPlayerId(event.getSourceId(), game);
-            if (playerDefender != null) {
+            if (playerDefender != null
+                    && !playersAttacked.contains(playerDefender)) {
                 playersAttacked.add(playerDefender);
             }
-            playersAttackedThisTurn.put(event.getPlayerId(), playersAttacked);
+            playersAttackedThisTurn.putIfAbsent(event.getPlayerId(), playersAttacked);
 
             // opponents
             PlayerList opponentsAttacked = opponentsAttackedThisTurn.get(event.getPlayerId());
@@ -66,10 +67,12 @@ public class PlayersAttackedThisTurnWatcher extends Watcher {
                 opponentsAttacked = new PlayerList();
             }
             UUID opponentDefender = game.getCombat().getDefendingPlayerId(event.getSourceId(), game);
-            if (opponentDefender != null && game.getOpponents(event.getPlayerId()).contains(opponentDefender)) {
+            if (opponentDefender != null
+                    && game.getOpponents(event.getPlayerId()).contains(opponentDefender)
+                    && !opponentsAttacked.contains(opponentDefender)) {
                 opponentsAttacked.add(opponentDefender);
             }
-            opponentsAttackedThisTurn.put(event.getPlayerId(), opponentsAttacked);
+            opponentsAttackedThisTurn.putIfAbsent(event.getPlayerId(), opponentsAttacked);
         }
     }
 
