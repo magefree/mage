@@ -189,8 +189,10 @@ public class VerifyCardDataTest {
                 if (classesIndex.containsKey(checkCard.getName())) {
                     String needClass = classesIndex.get(checkCard.getName());
                     if (!needClass.equals(currentClass)) {
-                        // workaround to star wars set with same card names
-                        if (!checkCard.getName().equals("Syndicate Enforcer")) {
+                        // workaround to star wars and unstable set with same card names
+                        if (!checkCard.getName().equals("Syndicate Enforcer")
+                                && !checkCard.getName().equals("Garbage Elemental")
+                                && !checkCard.getName().equals("Very Cryptic Command")) {
                             errorsList.add("Error: found wrong class in set " + set.getCode() + " - " + checkCard.getName() + " (" + currentClass + " <> " + needClass + ")");
                         }
                     }

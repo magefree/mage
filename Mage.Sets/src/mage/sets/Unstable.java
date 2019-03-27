@@ -44,8 +44,8 @@ public final class Unstable extends ExpansionSet {
         cards.add(new SetCardInfo("Earl of Squirrel", 108, Rarity.RARE, mage.cards.e.EarlOfSquirrel.class));
         cards.add(new SetCardInfo("Forest", 216, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(FrameStyle.UST_FULL_ART_BASIC, false)));
         cards.add(new SetCardInfo("GO TO JAIL", 8, Rarity.COMMON, mage.cards.g.GOTOJAIL.class));
-        cards.add(new SetCardInfo("Garbage Elemental", "82c", Rarity.UNCOMMON, mage.cards.g.GarbageElementalC.class));
-        cards.add(new SetCardInfo("Garbage Elemental", "82d", Rarity.UNCOMMON, mage.cards.g.GarbageElementalD.class));
+        cards.add(new SetCardInfo("Garbage Elemental", "82c", Rarity.UNCOMMON, mage.cards.g.GarbageElementalC.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Garbage Elemental", "82d", Rarity.UNCOMMON, mage.cards.g.GarbageElementalD.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ground Pounder", 110, Rarity.COMMON, mage.cards.g.GroundPounder.class));
         cards.add(new SetCardInfo("Hammer Helper", 85, Rarity.COMMON, mage.cards.h.HammerHelper.class));
         cards.add(new SetCardInfo("Hammer Jammer", 86, Rarity.UNCOMMON, mage.cards.h.HammerJammer.class));
