@@ -135,6 +135,7 @@ public enum CounterType {
     VERSE("verse"),
     VITALITY("vitality"),
     VORTEX("vortex"),
+    WINCH("winch"),
     WIND("wind"),
     WISH("wish");
 
