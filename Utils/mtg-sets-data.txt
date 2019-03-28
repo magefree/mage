@@ -210,6 +210,7 @@ Vanguard Set 4|VG4|
 MTGO Vanguard|VGO|
 Visions|VIS|
 Vintage Masters|VMA|
+War of the Spark|WAR|
 Welcome Deck 2016|W16|
 Welcome Deck 2017|W17|
 World Magic Cup Qualifier|WMCQ|
