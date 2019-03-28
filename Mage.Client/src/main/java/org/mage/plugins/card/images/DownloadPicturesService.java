@@ -193,8 +193,6 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
         // PROGRESS BAR
         uiDialog.getProgressBar().setValue(0);
-
-        uiDialog.showDownloadControls(false);
     }
 
     public void findMissingCards() {

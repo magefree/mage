@@ -30,11 +30,13 @@ public class PickNumberDialog extends MageDialog {
         this.pack();
 
         // window settings
+        MageFrame.getDesktop().remove(this);
         if (this.isModal()) {
             MageFrame.getDesktop().add(this, JLayeredPane.MODAL_LAYER);
         } else {
             MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
         }
+
         this.getRootPane().setDefaultButton(this.btnOk); // restore default button after root panel change (no need actually)
 
         // enable spinner's enter key like text (one enter press instead two)

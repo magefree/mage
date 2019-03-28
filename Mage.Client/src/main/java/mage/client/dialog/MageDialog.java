@@ -14,7 +14,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Level;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class MageDialog extends javax.swing.JInternalFrame {
 
@@ -33,6 +33,22 @@ public class MageDialog extends javax.swing.JInternalFrame {
 
     }
 
+    public static void printFramesOrder(String name) {
+        ///*
+        JInternalFrame[] frames = MageFrame.getDesktop().getAllFrames();
+        System.out.println("--- " + name + " ---");
+        int order = 0;
+        for (JInternalFrame frame : frames) {
+            order++;
+            int zorder = -1;
+            if (frame.getParent() != null) {
+                zorder = frame.getParent().getComponentZOrder(frame);
+            }
+            System.out.println(order + ". " + frame.getClass() + " (" + frame.getTitle() + ") : layer = " + frame.getLayer() + ", zorder = " + zorder);
+        }
+        //*/
+    }
+
     @Override
     public void show() {
         super.show();
@@ -45,17 +61,6 @@ public class MageDialog extends javax.swing.JInternalFrame {
         // - JLayeredPane.MODAL_LAYER: all modal dialogs (user required actions - select cards in game, new game window, error windows)
         // - JLayeredPane.POPUP_LAYER: hints and other top level graphics
         // - JLayeredPane.DRAG_LAYER: top most layer for critical actions and user controls
-        /*
-        JInternalFrame[] frames  = MageFrame.getDesktop().getAllFrames();
-        System.out.println("---");
-        for(JInternalFrame frame: frames){
-            int zorder = -1;
-            if (frame.getParent() != null){
-                frame.getParent().getComponentZOrder(frame);
-            }
-            System.out.println(frame.getClass() + " (" + frame.getTitle() + ") : layer = " + frame.getLayer() + ", zorder = " + zorder);
-        }
-        */
 
         if (modal) {
             this.setClosable(false);
@@ -71,9 +76,16 @@ public class MageDialog extends javax.swing.JInternalFrame {
     @Override
     public void setVisible(boolean value) {
         super.setVisible(value);
+
         if (value) {
             this.toFront();
+            try {
+                this.setSelected(true);
+            } catch (PropertyVetoException e) {
+                //
+            }
         }
+
         if (modal) {
             this.setClosable(false);
             if (value) {
@@ -195,7 +207,7 @@ public class MageDialog extends javax.swing.JInternalFrame {
     }
 
     public void makeWindowCentered() {
-        makeWindowCentered(this, getWidth(), getHeight());
+        makeWindowCentered(this, this.getWidth(), this.getHeight());
     }
 
     public static void makeWindowCentered(Component component, int width, int height) {

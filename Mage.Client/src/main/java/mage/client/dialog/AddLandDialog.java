@@ -114,14 +114,15 @@ public class AddLandDialog extends MageDialog {
         }
 
         getRootPane().setDefaultButton(btnOK);
-        this.makeWindowCentered();
 
         // windows settings
+        MageFrame.getDesktop().remove(this);
         if (this.isModal()) {
             MageFrame.getDesktop().add(this, JLayeredPane.MODAL_LAYER);
         } else {
             MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
         }
+        this.makeWindowCentered();
 
         // Close on "ESC"
         registerKeyboardAction(e -> onCancel(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);

@@ -63,19 +63,19 @@ public class DownloadImagesDialog extends MageDialog {
     }
 
     public void showDialog(MageDialogState mageDialogState) {
-        showDownloadControls(false); // call to change window size
 
         // window settings
+        MageFrame.getDesktop().remove(this);
         if (this.isModal()) {
             MageFrame.getDesktop().add(this, JLayeredPane.MODAL_LAYER);
         } else {
             MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
         }
-        if (mageDialogState != null) {
-            mageDialogState.setStateToDialog(this);
-        } else {
-            this.makeWindowCentered();
-        }
+        if (mageDialogState != null) mageDialogState.setStateToDialog(this);
+        else this.makeWindowCentered();
+
+        showDownloadControls(false); // call to change window size
+
         this.setVisible(true);
     }
 
@@ -106,7 +106,7 @@ public class DownloadImagesDialog extends MageDialog {
     public JButton getCancelButton() {
         return this.buttonCancel;
     }
-    
+
     public JButton getStopButton() {
         return this.buttonStop;
     }
@@ -288,7 +288,7 @@ public class DownloadImagesDialog extends MageDialog {
         panelSourceLeft.add(labelSource);
 
         comboSource.setMaximumRowCount(15);
-        comboSource.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboSource.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
         comboSource.setMinimumSize(new java.awt.Dimension(300, 20));
         comboSource.setPreferredSize(new java.awt.Dimension(400, 25));
         panelSourceLeft.add(comboSource);
@@ -305,7 +305,7 @@ public class DownloadImagesDialog extends MageDialog {
         panelSourceRight.add(labelLanguage);
 
         comboLanguage.setMaximumRowCount(15);
-        comboLanguage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboLanguage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
         comboLanguage.setPreferredSize(new java.awt.Dimension(90, 25));
         panelSourceRight.add(comboLanguage);
 
@@ -328,7 +328,7 @@ public class DownloadImagesDialog extends MageDialog {
         panelModeSelect.setLayout(new javax.swing.BoxLayout(panelModeSelect, javax.swing.BoxLayout.X_AXIS));
 
         comboSets.setMaximumRowCount(15);
-        comboSets.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboSets.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
         comboSets.setPreferredSize(new java.awt.Dimension(373, 25));
         panelModeSelect.add(comboSets);
         panelModeSelect.add(fillerMode1);
