@@ -133,6 +133,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
 
             while (true) {
                 switch (selection) {
+
                     // ABILITY +1
                     case 1:
                         switch (result) {
@@ -228,8 +229,10 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                             case 20: // (altered) XENAGOS 1
                                 sb.append("Add X mana in any combination of colors to your mana pool, where X is the number of creatures you control.");
                                 effects.add(new UrzaAcademyHeadmasterManaEffect());
+                                break;
                         }
                         break;
+
                     // ABILITY -1
                     case 2:
                         switch (result) {
@@ -325,8 +328,10 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 sb.append("Draw four cards and discard two cards.");
                                 effects.add(new DrawCardSourceControllerEffect(4));
                                 effects.add(new DiscardControllerEffect(2));
+                                break;
                         }
                         break;
+
                     // ABILITY -6
                     case 3:
                         switch (result) {
@@ -421,7 +426,9 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                             case 20: // UGIN 3
                                 sb.append("You gain 7 life, draw seven cards, then put up to seven permanent cards from your hand onto the battlefield.");
                                 effects.add(new mage.cards.u.UginTheSpiritDragonEffect3());
+                                break;
                         }
+                        break;
                 }
 
                 game.informPlayers(sb.toString());
