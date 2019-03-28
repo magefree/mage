@@ -272,6 +272,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_PROXY_PSWD = "proxyPassword";
     public static final String KEY_CONNECTION_URL_SERVER_LIST = "connectionURLServerList";
 
+    // news
+    public static final String KEY_NEWS_PAGE_LAST_VERSION = "newsPageLastVersion";
+
     // controls
     public static final String KEY_CONTROL_TOGGLE_MACRO = "controlToggleMacro";
     public static final String KEY_CONTROL_CONFIRM = "controlConfirm";

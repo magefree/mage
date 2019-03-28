@@ -17,10 +17,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
+import java.io.InputStream;
+import java.net.*;
+import java.util.Scanner;
 
 /**
  * @author JayDi85
@@ -31,6 +30,7 @@ public class WhatsNewDialog extends MageDialog {
     private static final MageVersion clientVersion = new MageVersion(WhatsNewDialog.class);
 
     private static final String WHATS_NEW_PAGE = "https://jaydi85.github.io/xmage-web-news/news.html";
+    private static final String WHATS_NEW_VERSION_PAGE = "https://jaydi85.github.io/xmage-web-news/news_version.html"; // increment version=123 to auto-shown for all users
     private static final int WHATS_NEW_LOAD_TIMEOUT_SECS = 20; // timeout for page loading
 
     final JFXPanel fxPanel;
@@ -41,7 +41,6 @@ public class WhatsNewDialog extends MageDialog {
         @Override
         public Void doInBackground() {
             try {
-                logger.info("Checking news...");
                 int maxWait = WHATS_NEW_LOAD_TIMEOUT_SECS;
                 int currentWait = 0;
                 while (!isPageReady) {
@@ -72,6 +71,50 @@ public class WhatsNewDialog extends MageDialog {
         }
     };
 
+    private final SwingWorker<Void, Void> backgroundUpdatesWorker = new SwingWorker<Void, Void>() {
+
+        private String newVersion = "";
+
+        @Override
+        public Void doInBackground() {
+            try {
+                // download version
+                URLConnection connection = new URL(WHATS_NEW_VERSION_PAGE).openConnection();
+                connection.setRequestProperty("user-agent", "xmage");
+                InputStream download = connection.getInputStream();
+                Scanner s = new Scanner(download).useDelimiter("\\A");
+                String result = s.hasNext() ? s.next() : "";
+
+                // check version (default: always have new version)
+                if (result.startsWith("version=")) {
+                    newVersion = result.substring("version=".length());
+                }
+            } catch (MalformedURLException e) {
+                logger.error("Checking updates got wrong url " + WHATS_NEW_VERSION_PAGE, e);
+            } catch (IOException e) {
+                logger.error("Checking updates got error", e);
+            }
+            return null;
+        }
+
+        @Override
+        public void done() {
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    String oldVersion = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEWS_PAGE_LAST_VERSION, "1");
+
+                    boolean isHaveUpdates = newVersion.isEmpty() || !newVersion.equals(oldVersion);
+                    if (isHaveUpdates) {
+                        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEWS_PAGE_LAST_VERSION, newVersion);
+                        loadURL(WHATS_NEW_PAGE);
+                        backgroundWorker.execute();
+                    }
+                }
+            });
+        }
+    };
+
     public WhatsNewDialog() {
         initComponents();
 
@@ -86,15 +129,16 @@ public class WhatsNewDialog extends MageDialog {
         // shows it on page ready or by force
 
         isPageReady = false;
-        loadURL(WHATS_NEW_PAGE);
-
         if (forceToShowPage) {
-            if (!backgroundWorker.isDone()) {
-                backgroundWorker.cancel(true);
-            }
+            // direct open
+            loadURL(WHATS_NEW_PAGE);
+            if (!backgroundUpdatesWorker.isDone()) backgroundUpdatesWorker.cancel(true);
+            if (!backgroundWorker.isDone()) backgroundWorker.cancel(true);
+
             showDialog();
         } else {
-            backgroundWorker.execute();
+            // checks version -> loads on new
+            backgroundUpdatesWorker.execute();
         }
     }
 
@@ -140,7 +184,7 @@ public class WhatsNewDialog extends MageDialog {
                             SwingUtilities.invokeLater(new Runnable() {
                                 @Override
                                 public void run() {
-                                    logger.error("Can't load news page: " + (value != null ? value.getMessage() : "null"));
+                                    logger.error("Can't load news page: " + (value != null ? value.getMessage() : "null"), value);
                                 }
                             });
                         }
