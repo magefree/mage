@@ -1,4 +1,3 @@
-
 package mage.client.cards;
 
 import mage.cards.MageCard;
@@ -85,6 +84,12 @@ public class CardArea extends JPanel implements MouseListener {
 
         this.revalidate();
         this.repaint();
+
+        // fix panel size (must include scrolls)
+        Dimension newSize = new Dimension(cardArea.getPreferredSize());
+        newSize.width += 20;
+        newSize.height += 20;
+        this.setPreferredSize(newSize);
     }
 
     public void loadCardsNarrow(CardsView showCards, BigCard bigCard, UUID gameId) {
@@ -106,7 +111,7 @@ public class CardArea extends JPanel implements MouseListener {
             addCard(card, bigCard, gameId, rectangle);
             rectangle.translate(cardDimension.width, 0);
         }
-        cardArea.setPreferredSize(new Dimension(cardDimension.width * showCards.size(), cardDimension.height));
+        cardArea.setPreferredSize(new Dimension(cardDimension.width * showCards.size(), cardDimension.height + verticalCardOffset));
     }
 
     private void addCard(CardView card, BigCard bigCard, UUID gameId, Rectangle rectangle) {
@@ -221,7 +226,7 @@ public class CardArea extends JPanel implements MouseListener {
                     if (e.isAltDown()) {
                         cardEventSource.fireEvent(((MageCard) obj).getOriginal(), ClientEventType.ALT_DOUBLE_CLICK);
                     } else {
-                        cardEventSource.fireEvent(((MageCard) obj).getOriginal(),ClientEventType.DOUBLE_CLICK);
+                        cardEventSource.fireEvent(((MageCard) obj).getOriginal(), ClientEventType.DOUBLE_CLICK);
                     }
                 }
             }
