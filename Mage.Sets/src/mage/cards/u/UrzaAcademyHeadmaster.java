@@ -1,11 +1,5 @@
-
 package mage.cards.u;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -16,30 +10,8 @@ import mage.abilities.dynamicvalue.common.PermanentsTargetOpponentControlsCount;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.DamageAllControlledTargetEffect;
-import mage.abilities.effects.common.DamageAllEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.DestroyAllControlledTargetEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.ExileFromZoneTargetEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.GetEmblemEffect;
-import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
-import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
-import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
-import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
-import mage.abilities.effects.common.SacrificeEffect;
-import mage.abilities.effects.common.ShuffleHandGraveyardAllEffect;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.effects.common.continuous.GainControlTargetEffect;
+import mage.abilities.effects.common.*;
+import mage.abilities.effects.common.continuous.*;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.DistributeCountersEffect;
 import mage.abilities.effects.common.discard.DiscardControllerEffect;
@@ -59,41 +31,23 @@ import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterArtifactCard;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.common.FilterPermanentCard;
+import mage.filter.common.*;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
-import mage.game.command.emblems.AjaniSteadfastEmblem;
-import mage.game.command.emblems.DomriRadeEmblem;
-import mage.game.command.emblems.ElspethKnightErrantEmblem;
-import mage.game.command.emblems.GideonAllyOfZendikarEmblem;
-import mage.game.command.emblems.KioraMasterOfTheDepthsEmblem;
-import mage.game.command.emblems.VenserTheSojournerEmblem;
+import mage.game.command.emblems.*;
 import mage.game.permanent.token.*;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetAnyTarget;
-import mage.target.common.TargetCardInGraveyard;
-import mage.target.common.TargetCardInHand;
-import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetCreaturePermanent;
-import mage.target.common.TargetCreaturePermanentAmount;
-import mage.target.common.TargetNonlandPermanent;
-import mage.target.common.TargetOpponent;
-import mage.target.common.TargetPlayerOrPlaneswalker;
+import mage.target.common.*;
 import mage.util.RandomUtil;
 
+import java.util.*;
+
 /**
- *
  * @author L_J
  */
 public final class UrzaAcademyHeadmaster extends CardImpl {
@@ -127,13 +81,14 @@ public final class UrzaAcademyHeadmaster extends CardImpl {
 }
 
 class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
-    
+
     private int selection;
     private CardSetInfo setInfo;
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("creatures you control");
     private static final FilterPermanent filter2 = new FilterPermanent("noncreature permanent");
     private static final FilterCard filter3 = new FilterCard("creature and/or land cards");
     private static final FilterPermanent filter4 = new FilterPermanent("creatures and/or planeswalkers");
+
     static {
         filter1.add(new ControllerPredicate(TargetController.YOU));
         filter2.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
@@ -148,7 +103,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
     public UrzaAcademyHeadmasterRandomEffect(int selection, CardSetInfo setInfo) {
         super(Outcome.Neutral);
         this.selection = selection;
-        this.setInfo = setInfo;
+        this.setInfo = setInfo.copy();
         switch (selection) {
             case 1:
                 staticText = "Head to AskUrza.com and click +1";
@@ -164,7 +119,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
     public UrzaAcademyHeadmasterRandomEffect(final UrzaAcademyHeadmasterRandomEffect effect) {
         super(effect);
         this.selection = effect.selection;
-        this.setInfo = effect.setInfo;
+        this.setInfo = effect.setInfo.copy();
     }
 
     @Override
@@ -175,7 +130,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
             List<Effect> effects = new ArrayList<>();
             Target target = null;
             StringBuilder sb = new StringBuilder("[URZA] ");
-            
+
             while (true) {
                 switch (selection) {
                     // ABILITY +1
@@ -200,6 +155,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 target = new TargetPermanent(filter2);
                                 break;
                             case 4: // CHANDRA FLAMECALLER 1
+                                // TODO: replace ALL new mage.cards.* code with abilities index CONST or add tests to ensure about names nad abilities
                                 sb.append("Create two 3/1 red Elemental creature tokens with haste. Exile them at the beginning of the next end step.");
                                 effects.add(new mage.cards.c.ChandraFlamecaller(controller.getId(), setInfo).getAbilities().get(2).getEffects().get(0));
                                 break;
@@ -467,7 +423,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 effects.add(new mage.cards.u.UginTheSpiritDragonEffect3());
                         }
                 }
-                
+
                 game.informPlayers(sb.toString());
                 if (target != null) {
                     if (target.canChoose(source.getSourceId(), controller.getId(), game) && controller.canRespond()) {
@@ -496,6 +452,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                 break;
             }
         }
+
         return false;
     }
 
