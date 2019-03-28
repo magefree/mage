@@ -87,6 +87,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static final String PASSWORD_ARG = "-pw";
     private static final String SERVER_ARG = "-server";
     private static final String PORT_ARG = "-port";
+    private static final String DEBUG_ARG = "-debug";
 
     private static final String NOT_CONNECTED_TEXT = "<not connected>";
     private static MageFrame instance;
@@ -110,6 +111,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static String startPassword = "";
     private static String startServer = "localhost";
     private static int startPort = -1;
+    private static boolean debugMode = false;
 
     private static final Map<UUID, ChatPanelBasic> CHATS = new HashMap<>();
     private static final Map<UUID, GamePanel> GAMES = new HashMap<>();
@@ -808,6 +810,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        popupDebug = new javax.swing.JPopupMenu();
+        menuDebugTestModalDialog = new javax.swing.JMenuItem();
         desktopPane = new MageJDesktop();
         mageToolbar = new javax.swing.JToolBar();
         btnPreferences = new javax.swing.JButton();
@@ -826,7 +830,17 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         jSeparatorImages = new javax.swing.JToolBar.Separator();
         btnAbout = new javax.swing.JButton();
         jSeparator7 = new javax.swing.JToolBar.Separator();
+        btnDebug = new javax.swing.JButton();
+        separatorDebug = new javax.swing.JToolBar.Separator();
         jMemUsageLabel = new javax.swing.JLabel();
+
+        menuDebugTestModalDialog.setText("Test Modal Dialogs");
+        menuDebugTestModalDialog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuDebugTestModalDialogActionPerformed(evt);
+            }
+        });
+        popupDebug.add(menuDebugTestModalDialog);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 768));
@@ -932,7 +946,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
         btnAbout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/about.png"))); // NOI18N
         btnAbout.setText("About");
-        btnAbout.setToolTipText("Some information about the developers.");
+        btnAbout.setToolTipText("About app");
         btnAbout.setFocusable(false);
         btnAbout.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnAbout.addActionListener(new java.awt.event.ActionListener() {
@@ -942,6 +956,19 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         });
         mageToolbar.add(btnAbout);
         mageToolbar.add(jSeparator7);
+
+        btnDebug.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/connect.png"))); // NOI18N
+        btnDebug.setText("Debug");
+        btnDebug.setToolTipText("Show debug tools");
+        btnDebug.setFocusable(false);
+        btnDebug.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnDebug.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDebugMouseClicked(evt);
+            }
+        });
+        mageToolbar.add(btnDebug);
+        mageToolbar.add(separatorDebug);
 
         jMemUsageLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jMemUsageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/memory.png"))); // NOI18N
@@ -954,7 +981,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 769, Short.MAX_VALUE)
+                        .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)
                         .addComponent(mageToolbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -1027,6 +1054,15 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private void btnImagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImagesActionPerformed
         downloadImages();
     }//GEN-LAST:event_btnImagesActionPerformed
+
+    private void menuDebugTestModalDialogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDebugTestModalDialogActionPerformed
+        final TestModalDialog dialog = new TestModalDialog();
+        dialog.showDialog();
+    }//GEN-LAST:event_menuDebugTestModalDialogActionPerformed
+
+    private void btnDebugMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDebugMouseClicked
+        popupDebug.show(evt.getComponent(), 0, evt.getComponent().getHeight());
+    }//GEN-LAST:event_btnDebugMouseClicked
 
     public void downloadImages() {
         DownloadPicturesService.startDownload();
@@ -1219,6 +1255,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                     startPort = Integer.valueOf(args[i + 1]);
                     i++;
                 }
+                if (arg.startsWith(DEBUG_ARG)) {
+                    debugMode = true;
+                }
             }
             if (!liteMode) {
                 final SplashScreen splash = SplashScreen.getSplashScreen();
@@ -1231,6 +1270,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 }
             }
             instance = new MageFrame();
+
+            // debug menu
+            instance.separatorDebug.setVisible(debugMode);
+            instance.btnDebug.setVisible(debugMode);
 
             if (startUser != null) {
                 instance.currentConnection = new Connection();
@@ -1253,6 +1296,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private javax.swing.JButton btnAbout;
     private javax.swing.JButton btnCollectionViewer;
     private javax.swing.JButton btnConnect;
+    private javax.swing.JButton btnDebug;
     private javax.swing.JButton btnDeckEditor;
     private javax.swing.JButton btnImages;
     private javax.swing.JButton btnPreferences;
@@ -1269,6 +1313,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private javax.swing.JToolBar.Separator jSeparatorImages;
     private javax.swing.JToolBar.Separator jSeparatorSymbols;
     private javax.swing.JToolBar mageToolbar;
+    private javax.swing.JMenuItem menuDebugTestModalDialog;
+    private javax.swing.JPopupMenu popupDebug;
+    private javax.swing.JToolBar.Separator separatorDebug;
     // End of variables declaration//GEN-END:variables
 
     private static final long serialVersionUID = -9104885239063142218L;
