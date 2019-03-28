@@ -92,6 +92,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static MageFrame instance;
 
     private final ConnectDialog connectDialog;
+    private final WhatsNewDialog whatsNewDialog;
     private final ErrorDialog errorDialog;
     private static CallbackClient callbackClient;
     private static final Preferences PREFS = Preferences.userNodeForPackage(MageFrame.class);
@@ -243,6 +244,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         SessionHandler.startSession(this);
         callbackClient = new CallbackClientImpl(this);
         connectDialog = new ConnectDialog();
+        whatsNewDialog = new WhatsNewDialog();
         desktopPane.add(connectDialog, JLayeredPane.MODAL_LAYER);
         errorDialog = new ErrorDialog();
         errorDialog.setLocation(100, 100);
@@ -329,6 +331,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 SystemUtil.toggleMacOSFullScreenMode(this);
             }
         }
+
+        // run what's new checks (loading in background)
+        SwingUtilities.invokeLater(() -> {
+            whatsNewDialog.checkUpdatesAndShow(false);
+        });
     }
 
     private void setWindowTitle() {
@@ -1522,6 +1529,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         balloonTip.setFont(GUISizeHelper.balloonTooltipFont);
 
         addTooltipContainer();
+    }
+
+    public WhatsNewDialog getWhatsNewDialog() {
+        return whatsNewDialog;
     }
 }
 
