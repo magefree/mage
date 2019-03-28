@@ -1,17 +1,7 @@
 package org.mage.card.arcane;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.util.UUID;
-import java.util.concurrent.ExecutionException;
-
-import org.apache.log4j.Logger;
-import org.jdesktop.swingx.graphics.GraphicsUtilities;
-import org.mage.plugins.card.images.ImageCache;
-
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-
 import mage.cards.action.ActionCallback;
 import mage.client.constants.Constants;
 import mage.constants.CardType;
@@ -21,6 +11,14 @@ import mage.view.CardView;
 import mage.view.CounterView;
 import mage.view.PermanentView;
 import mage.view.StackAbilityView;
+import org.apache.log4j.Logger;
+import org.jdesktop.swingx.graphics.GraphicsUtilities;
+import org.mage.plugins.card.images.ImageCache;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 
 public class CardPanelRenderImpl extends CardPanel {
 
@@ -107,9 +105,7 @@ public class CardPanelRenderImpl extends CardPanel {
                 // are the same for a and b
                 return false;
             }
-            if (aa.getDamage() != bb.getDamage()) {
-                return false;
-            }
+            return aa.getDamage() == bb.getDamage();
         }
         return true;
     }
@@ -143,6 +139,7 @@ public class CardPanelRenderImpl extends CardPanel {
             sb.append((char) (isChoosable ? 1 : 0));
             sb.append((char) (this.view.isPlayable() ? 1 : 0));
             sb.append((char) (this.view.isCanAttack() ? 1 : 0));
+            sb.append((char) (this.view.isCanBlock() ? 1 : 0));
             sb.append((char) (this.view.isFaceDown() ? 1 : 0));
             sb.append((char) this.view.getFrameStyle().ordinal());
             if (this.view instanceof PermanentView) {
@@ -266,8 +263,8 @@ public class CardPanelRenderImpl extends CardPanel {
             // Try to get card image from cache based on our card characteristics
             ImageKey key
                     = new ImageKey(getGameCard(), artImage,
-                            getCardWidth(), getCardHeight(),
-                            isChoosable(), isSelected());
+                    getCardWidth(), getCardHeight(),
+                    isChoosable(), isSelected());
             try {
                 cardImage = IMAGE_CACHE.get(key, this::renderCard);
             } catch (ExecutionException e) {

@@ -51,6 +51,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Queue;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
 import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
@@ -1432,7 +1433,12 @@ public class HumanPlayer extends PlayerImpl {
         while (!abort) {
             prepareForResponse(game);
             if (!isExecutingMacro()) {
-                game.fireSelectEvent(playerId, "Select blockers");
+                Map<String, Serializable> options = new HashMap<>();
+                List<UUID> possibleBlockers = game.getBattlefield().getActivePermanents(filter, playerId, game).stream()
+                        .map(p -> p.getId())
+                        .collect(Collectors.toList());
+                options.put(Constants.Option.POSSIBLE_BLOCKERS, (Serializable) possibleBlockers);
+                game.fireSelectEvent(playerId, "Select blockers", options);
             }
             waitForResponse(game);
             if (response.getBoolean() != null) {
@@ -1504,9 +1510,21 @@ public class HumanPlayer extends PlayerImpl {
         TargetAttackingCreature target = new TargetAttackingCreature();
         prepareForResponse(game);
         if (!isExecutingMacro()) {
+            // possible attackers to block
+            Set<UUID> attackers = target.possibleTargets(null, playerId, game);
+            Permanent blocker = game.getPermanent(blockerId);
+            Set<UUID> possibleTargets = new HashSet<>();
+            for (UUID attackerId : attackers) {
+                CombatGroup group = game.getCombat().findGroup(attackerId);
+                if (group != null && blocker != null && group.canBlock(blocker, game)) {
+                    possibleTargets.add(attackerId);
+                }
+            }
+
             game.fireSelectTargetEvent(playerId, new MessageToClient("Select attacker to block", getRelatedObjectName(blockerId, game)),
-                    target.possibleTargets(null, playerId, game), false, getOptions(target, null));
+                    possibleTargets, false, getOptions(target, null));
         }
+
         waitForResponse(game);
         if (response.getBoolean() != null) {
             // do nothing

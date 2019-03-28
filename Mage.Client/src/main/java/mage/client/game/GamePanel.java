@@ -696,12 +696,26 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         }
 
+        List<UUID> possibleBlockers = new ArrayList<>();
+        if (options != null && options.containsKey(Constants.Option.POSSIBLE_BLOCKERS)) {
+            if (options.get(Constants.Option.POSSIBLE_BLOCKERS) instanceof List) {
+                possibleBlockers.addAll((List) options.get(Constants.Option.POSSIBLE_BLOCKERS));
+            }
+        }
+
         for (PlayerView player : game.getPlayers()) {
             if (players.containsKey(player.getPlayerId())) {
                 if (!possibleAttackers.isEmpty()) {
                     for (UUID permanentId : possibleAttackers) {
                         if (player.getBattlefield().containsKey(permanentId)) {
                             player.getBattlefield().get(permanentId).setCanAttack(true);
+                        }
+                    }
+                }
+                if (!possibleBlockers.isEmpty()) {
+                    for (UUID permanentId : possibleBlockers) {
+                        if (player.getBattlefield().containsKey(permanentId)) {
+                            player.getBattlefield().get(permanentId).setCanBlock(true);
                         }
                     }
                 }

@@ -1,17 +1,5 @@
 package org.mage.card.arcane;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.util.StringTokenizer;
-import java.util.UUID;
-
-import javax.swing.*;
-
-import org.apache.log4j.Logger;
-import org.jdesktop.swingx.graphics.GraphicsUtilities;
-import org.mage.plugins.card.images.ImageCache;
-import org.mage.plugins.card.utils.impl.ImageManagerImpl;
-
 import mage.cards.action.ActionCallback;
 import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
@@ -25,6 +13,16 @@ import mage.view.CardView;
 import mage.view.CounterView;
 import mage.view.PermanentView;
 import mage.view.StackAbilityView;
+import org.apache.log4j.Logger;
+import org.jdesktop.swingx.graphics.GraphicsUtilities;
+import org.mage.plugins.card.images.ImageCache;
+import org.mage.plugins.card.utils.impl.ImageManagerImpl;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.StringTokenizer;
+import java.util.UUID;
 
 /**
  * Class for drawing the mage card object by using a form based JComponent
@@ -117,8 +115,9 @@ public class CardPanelComponentImpl extends CardPanel {
         final boolean isChoosable;
         final boolean isPlayable;
         final boolean canAttack;
+        final boolean canBlock;
 
-        public Key(int width, int height, int cardWidth, int cardHeight, int cardXOffset, int cardYOffset, boolean hasImage, boolean isSelected, boolean isChoosable, boolean isPlayable, boolean canAttack) {
+        public Key(int width, int height, int cardWidth, int cardHeight, int cardXOffset, int cardYOffset, boolean hasImage, boolean isSelected, boolean isChoosable, boolean isPlayable, boolean canAttack, boolean canBlock) {
             this.width = width;
             this.height = height;
             this.cardWidth = cardWidth;
@@ -130,6 +129,7 @@ public class CardPanelComponentImpl extends CardPanel {
             this.isChoosable = isChoosable;
             this.isPlayable = isPlayable;
             this.canAttack = canAttack;
+            this.canBlock = canBlock;
         }
 
         @Override
@@ -146,6 +146,7 @@ public class CardPanelComponentImpl extends CardPanel {
             hash = 19 * hash + (this.isChoosable ? 1 : 0);
             hash = 19 * hash + (this.isPlayable ? 1 : 0);
             hash = 19 * hash + (this.canAttack ? 1 : 0);
+            hash = 19 * hash + (this.canBlock ? 1 : 0);
             return hash;
         }
 
@@ -194,7 +195,7 @@ public class CardPanelComponentImpl extends CardPanel {
             if (this.canAttack != other.canAttack) {
                 return false;
             }
-            return true;
+            return this.canBlock == other.canBlock;
         }
     }
 
@@ -202,20 +203,20 @@ public class CardPanelComponentImpl extends CardPanel {
         IMAGE_CACHE = ImageCaches.register(SoftValuesLoadingCache.from(CardPanelComponentImpl::createImage));
     }
 
-    static private boolean canShowCardIcons(int cardFullWidth, boolean cardHasImage){
+    static private boolean canShowCardIcons(int cardFullWidth, boolean cardHasImage) {
         // cards without images show icons and text always
         // TODO: apply "card names on card" setting to icon too?
         // TODO: fix card min-max size to hide (compare to settings size, not direct 60 and 200)
         return ((cardFullWidth > 60) && (cardFullWidth < 200)) || (!cardHasImage);
     }
 
-    private static class CardSizes{
+    private static class CardSizes {
         Rectangle rectFull;
         Rectangle rectSelection;
         Rectangle rectBorder;
         Rectangle rectCard;
 
-        CardSizes(int offsetX, int offsetY, int fullWidth, int fullHeight){
+        CardSizes(int offsetX, int offsetY, int fullWidth, int fullHeight) {
 
             int realBorderSizeX = Math.round(fullWidth * BLACK_BORDER_SIZE);
             int realBorderSizeY = Math.round(fullWidth * BLACK_BORDER_SIZE);
@@ -406,7 +407,8 @@ public class CardPanelComponentImpl extends CardPanel {
         g2d.drawImage(
                 IMAGE_CACHE.getOrThrow(
                         new Key(getWidth(), getHeight(), getCardWidth(), getCardHeight(), getCardXOffset(), getCardYOffset(),
-                                hasImage, isSelected(), isChoosable(), getGameCard().isPlayable(), getGameCard().isCanAttack())),
+                                hasImage, isSelected(), isChoosable(), getGameCard().isPlayable(), getGameCard().isCanAttack(),
+                                getGameCard().isCanBlock())),
                 0, 0, null);
         g2d.dispose();
     }
@@ -442,6 +444,12 @@ public class CardPanelComponentImpl extends CardPanel {
             g2d.fillRoundRect(sizes.rectSelection.x, sizes.rectSelection.y, sizes.rectSelection.width, sizes.rectSelection.height, cornerSizeSelection, cornerSizeSelection);
         }
 
+        // draw attack or block border (?inner part of selection?)
+        if (key.canAttack || key.canBlock) {
+            g2d.setColor(new Color(255, 50, 50, 230));
+            g2d.fillRoundRect(sizes.rectSelection.x + 1, sizes.rectSelection.y + 1, sizes.rectSelection.width - 2, sizes.rectSelection.height - 2, cornerSizeSelection, cornerSizeSelection);
+        }
+
         // draw empty card with border
         if (!key.hasImage) {
             // gray 1 px border
@@ -449,12 +457,6 @@ public class CardPanelComponentImpl extends CardPanel {
             g2d.fillRoundRect(sizes.rectBorder.x, sizes.rectBorder.y, sizes.rectBorder.width, sizes.rectBorder.height, cornerSizeBorder, cornerSizeBorder);
             // color plate
             g2d.setColor(new Color(30, 200, 200, 200));
-            g2d.fillRoundRect(sizes.rectBorder.x + 1, sizes.rectBorder.y + 1, sizes.rectBorder.width - 2, sizes.rectBorder.height - 2, cornerSizeBorder, cornerSizeBorder);
-        }
-
-        // draw attack border (inner part of selection)
-        if (key.canAttack) {
-            g2d.setColor(new Color(0, 0, 255, 230));
             g2d.fillRoundRect(sizes.rectBorder.x + 1, sizes.rectBorder.y + 1, sizes.rectBorder.width - 2, sizes.rectBorder.height - 2, cornerSizeBorder, cornerSizeBorder);
         }
 
@@ -521,7 +523,7 @@ public class CardPanelComponentImpl extends CardPanel {
         StringTokenizer tok = new StringTokenizer(manaCost, " ");
         while (tok.hasMoreTokens()) {
             tok.nextToken();
-            if(width != 0) {
+            if (width != 0) {
                 width += symbolMarginX;
             }
             width += getSymbolWidth();

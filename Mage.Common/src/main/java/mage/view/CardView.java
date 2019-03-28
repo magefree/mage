@@ -1,4 +1,3 @@
-
 package mage.view;
 
 import com.google.gson.annotations.Expose;
@@ -109,6 +108,7 @@ public class CardView extends SimpleCardView {
     protected boolean isChoosable;
     protected boolean selected;
     protected boolean canAttack;
+    protected boolean canBlock;
     protected boolean inViewerOnly;
 
     protected Card originalCard = null;
@@ -202,6 +202,7 @@ public class CardView extends SimpleCardView {
         this.isChoosable = cardView.isChoosable;
         this.selected = cardView.selected;
         this.canAttack = cardView.canAttack;
+        this.canBlock = cardView.canBlock;
         this.inViewerOnly = cardView.inViewerOnly;
         this.originalCard = cardView.originalCard.copy();
     }
@@ -286,7 +287,7 @@ public class CardView extends SimpleCardView {
                 this.power = Integer.toString(card.getPower().getValue());
                 this.toughness = Integer.toString(card.getToughness().getValue());
                 this.cardTypes = card.getCardType();
-                this.faceDown = ((Permanent) card).isFaceDown(game);
+                this.faceDown = card.isFaceDown(game);
             } else {
                 // this.hideInfo = true;
                 return;
@@ -296,9 +297,9 @@ public class CardView extends SimpleCardView {
         SplitCard splitCard = null;
         if (card.isSplitCard()) {
             splitCard = (SplitCard) card;
-            rotate = (((SplitCard) card).getSpellAbility().getSpellAbilityType()) != SpellAbilityType.SPLIT_AFTERMATH;
+            rotate = (card.getSpellAbility().getSpellAbilityType()) != SpellAbilityType.SPLIT_AFTERMATH;
         } else if (card instanceof Spell) {
-            switch (((Spell) card).getSpellAbility().getSpellAbilityType()) {
+            switch (card.getSpellAbility().getSpellAbilityType()) {
                 case SPLIT_FUSED:
                     splitCard = (SplitCard) ((Spell) card).getCard();
                     rotate = true;
@@ -390,12 +391,12 @@ public class CardView extends SimpleCardView {
                 this.cardNumber = ((PermanentToken) card).getToken().getOriginalCardNumber();
             } else {
                 // a created token
-                this.expansionSetCode = ((PermanentToken) card).getExpansionSetCode();
-                this.tokenDescriptor = ((PermanentToken) card).getTokenDescriptor();
+                this.expansionSetCode = card.getExpansionSetCode();
+                this.tokenDescriptor = card.getTokenDescriptor();
             }
             //
             // set code und card number for token copies to get the image
-            this.rules = ((PermanentToken) card).getRules(game);
+            this.rules = card.getRules(game);
             this.type = ((PermanentToken) card).getToken().getTokenType();
         } else {
             this.rarity = card.getRarity();
@@ -993,6 +994,14 @@ public class CardView extends SimpleCardView {
 
     public void setCanAttack(boolean canAttack) {
         this.canAttack = canAttack;
+    }
+
+    public boolean isCanBlock() {
+        return canBlock;
+    }
+
+    public void setCanBlock(boolean canBlock) {
+        this.canBlock = canBlock;
     }
 
     public boolean isCreature() {
