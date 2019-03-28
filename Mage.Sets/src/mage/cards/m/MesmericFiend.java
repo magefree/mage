@@ -86,15 +86,14 @@ class MesmericFiendExileEffect extends OneShotEffect {
                 Card card = opponent.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
                     UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+                    game.getState().setValue(source.getSourceId().toString() + source.getSourceObjectZoneChangeCounter(), exileId);
                     controller.moveCardsToExile(card, source, game, true, exileId, sourcePermanent.getName());
                 }
             }
-
             return true;
         }
         return false;
     }
-
 }
 
 class MesmericFiendLeaveEffect extends OneShotEffect {
@@ -119,7 +118,8 @@ class MesmericFiendLeaveEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null
                 && sourceObject != null) {
-            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter() - 1);
+            int zoneChangeMinusOne = source.getSourceObjectZoneChangeCounter() - 1;
+            UUID exileId = (UUID) game.getState().getValue(source.getSourceId().toString() + zoneChangeMinusOne);
             if (exileId != null) {
                 Cards cards = game.getExile().getExileZone(exileId);
                 if (!cards.isEmpty()) {
