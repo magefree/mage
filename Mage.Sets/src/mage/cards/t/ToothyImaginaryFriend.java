@@ -1,11 +1,12 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.DrawCardControllerTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
-import mage.abilities.dynamicvalue.common.CountersSourceCount;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.PartnerWithAbility;
@@ -14,7 +15,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
@@ -38,7 +42,7 @@ public final class ToothyImaginaryFriend extends CardImpl {
 
         // When Toothy leaves the battlefield, draw a card for each +1/+1 counter on it.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(
-                new DrawCardSourceControllerEffect(new CountersSourceCount(CounterType.P1P1))
+                new DrawCardSourceControllerEffect(new ToothyImaginaryFriendCountersCount(CounterType.P1P1))
                         .setText("draw a card for each +1/+1 counter on it"), false));
     }
 
@@ -49,5 +53,42 @@ public final class ToothyImaginaryFriend extends CardImpl {
     @Override
     public ToothyImaginaryFriend copy() {
         return new ToothyImaginaryFriend(this);
+    }
+}
+
+class ToothyImaginaryFriendCountersCount implements DynamicValue {
+
+    private final String counterName;
+
+    public ToothyImaginaryFriendCountersCount(CounterType counter) {
+        this.counterName = counter.getName();
+    }
+
+    public ToothyImaginaryFriendCountersCount(final ToothyImaginaryFriendCountersCount countersCount) {
+        this.counterName = countersCount.counterName;
+    }
+
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        Permanent permanent = (Permanent) game.getLastKnownInformation(sourceAbility.getSourceId(), Zone.BATTLEFIELD);
+        if (permanent != null) {
+            return permanent.getCounters(game).getCount(counterName);
+        }
+        return 0;
+    }
+
+    @Override
+    public ToothyImaginaryFriendCountersCount copy() {
+        return new ToothyImaginaryFriendCountersCount(this);
+    }
+
+    @Override
+    public String toString() {
+        return "1";
+    }
+
+    @Override
+    public String getMessage() {
+        return counterName + " counter on {this}";
     }
 }
