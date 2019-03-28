@@ -15,7 +15,8 @@ public final class WarOfTheSpark extends ExpansionSet {
     private WarOfTheSpark() {
         super("War of the Spark", "WAR", ExpansionSet.buildDate(2019, 5, 3), SetType.EXPANSION);
         this.blockName = "Guilds of Ravnica";
-        this.hasBoosters = true;
+        this.hasBoosters = false;
+        this.hasBasicLands = false; // TODO: enable after more cards are available
         this.numBoosterSpecial = 1;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 10;
