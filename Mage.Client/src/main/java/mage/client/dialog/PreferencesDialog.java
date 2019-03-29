@@ -121,7 +121,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String END_OF_TURN_OTHERS = "endOfTurnOthers";
 
     public static final String KEY_STOP_ATTACK = "stopDeclareAttacksStep";
-    public static final String KEY_STOP_BLOCK = "stopDeclareBlockersStep";
+    public static final String KEY_STOP_BLOCK_WITH_ANY = "stopDeclareBlockersStepWithAny";
+    public static final String KEY_STOP_BLOCK_WITH_ZERO = "stopDeclareBlockersStepWithZero";
     public static final String KEY_STOP_ALL_MAIN_PHASES = "stopOnAllMainPhases";
     public static final String KEY_STOP_ALL_END_PHASES = "stopOnAllEndPhases";
     public static final String KEY_STOP_NEW_STACK_OBJECTS = "stopOnNewStackObjects";
@@ -454,7 +455,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         checkBoxEndTurnOthers = new javax.swing.JCheckBox();
         phases_stopSettings = new javax.swing.JPanel();
         cbStopAttack = new javax.swing.JCheckBox();
-        cbStopBlock = new javax.swing.JCheckBox();
+        cbStopBlockWithAny = new javax.swing.JCheckBox();
+        cbStopBlockWithZero = new javax.swing.JCheckBox();
         cbStopOnNewStackObjects = new javax.swing.JCheckBox();
         cbStopOnAllMain = new javax.swing.JCheckBox();
         cbStopOnAllEnd = new javax.swing.JCheckBox();
@@ -655,7 +657,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         showFullImagePath.setSelected(true);
         showFullImagePath.setToolTipText("Show the path Xmage is expecting for this card's image (only displays if missing)");
         showFullImagePath.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        showFullImagePath.setText("Display image path for missing images");
+        showFullImagePath.setLabel("Display image path for missing images");
         showFullImagePath.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showFullImagePathActionPerformed(evt);
@@ -1321,7 +1323,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jLabelEndOfTurn.setText("End of turn:");
 
         phases_stopSettings.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "SKIP settings"));
-        phases_stopSettings.setLayout(new java.awt.GridLayout(8, 1));
+        phases_stopSettings.setLayout(new java.awt.GridLayout(9, 1));
 
         cbStopAttack.setSelected(true);
         cbStopAttack.setText("STOP skips on declare attackers if attackers are available");
@@ -1334,15 +1336,26 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
         phases_stopSettings.add(cbStopAttack);
 
-        cbStopBlock.setText("STOP skips on declare blockers if blockers are available");
-        cbStopBlock.setToolTipText("");
-        cbStopBlock.setActionCommand("");
-        cbStopBlock.addActionListener(new java.awt.event.ActionListener() {
+        cbStopBlockWithAny.setSelected(true);
+        cbStopBlockWithAny.setText("STOP skips on declare blockers if ANY blockers are available");
+        cbStopBlockWithAny.setToolTipText("");
+        cbStopBlockWithAny.setActionCommand("");
+        cbStopBlockWithAny.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbStopBlockActionPerformed(evt);
+                cbStopBlockWithAnyActionPerformed(evt);
             }
         });
-        phases_stopSettings.add(cbStopBlock);
+        phases_stopSettings.add(cbStopBlockWithAny);
+
+        cbStopBlockWithZero.setText("STOP skips on declare blockers if ZERO blockers are available");
+        cbStopBlockWithZero.setToolTipText("");
+        cbStopBlockWithZero.setActionCommand("");
+        cbStopBlockWithZero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbStopBlockWithZeroActionPerformed(evt);
+            }
+        });
+        phases_stopSettings.add(cbStopBlockWithZero);
 
         cbStopOnNewStackObjects.setText("Skip to STACK resolved (F10): stop on new objects added (on) or stop until empty (off)");
         cbStopOnNewStackObjects.setToolTipText("");
@@ -1520,7 +1533,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                                         .add(checkBoxEndTurnOthers))
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                                 .add(phases_stopSettings, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(185, Short.MAX_VALUE))
+                                .addContainerGap(160, Short.MAX_VALUE))
         );
 
         tabsPanel.addTab("Phases & Priority", tabPhases);
@@ -2700,7 +2713,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         tabsPanel.addTab("Controls", tabControls);
 
-        saveButton.setText("Save");
+        saveButton.setLabel("Save");
         saveButton.setMaximumSize(new java.awt.Dimension(100, 30));
         saveButton.setMinimumSize(new java.awt.Dimension(100, 30));
         saveButton.setPreferredSize(new java.awt.Dimension(100, 30));
@@ -2711,7 +2724,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
-        exitButton.setText("Exit");
+        exitButton.setLabel("Exit");
         exitButton.setMaximumSize(new java.awt.Dimension(100, 30));
         exitButton.setMinimumSize(new java.awt.Dimension(100, 30));
         exitButton.setPreferredSize(new java.awt.Dimension(100, 30));
@@ -2857,7 +2870,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS);
 
         save(prefs, dialog.cbStopAttack, KEY_STOP_ATTACK, "true", "false", UPDATE_CACHE_POLICY);
-        save(prefs, dialog.cbStopBlock, KEY_STOP_BLOCK, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.cbStopBlockWithAny, KEY_STOP_BLOCK_WITH_ANY, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.cbStopBlockWithZero, KEY_STOP_BLOCK_WITH_ZERO, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbStopOnAllMain, KEY_STOP_ALL_MAIN_PHASES, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbStopOnAllEnd, KEY_STOP_ALL_END_PHASES, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbStopOnNewStackObjects, KEY_STOP_NEW_STACK_OBJECTS, "true", "false", UPDATE_CACHE_POLICY);
@@ -3113,9 +3127,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbStopAttackActionPerformed
 
-    private void cbStopBlockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbStopBlockActionPerformed
+    private void cbStopBlockWithAnyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbStopBlockWithAnyActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbStopBlockActionPerformed
+    }//GEN-LAST:event_cbStopBlockWithAnyActionPerformed
 
     private void cbStopOnAllMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbStopOnAllMainActionPerformed
         // TODO add your handling code here:
@@ -3231,6 +3245,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private void cbStopOnNewStackObjectsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbStopOnNewStackObjectsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbStopOnNewStackObjectsActionPerformed
+
+    private void cbStopBlockWithZeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbStopBlockWithZeroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbStopBlockWithZeroActionPerformed
 
     private void showProxySettings() {
         Connection.ProxyType proxyType = (Connection.ProxyType) cbProxyType.getSelectedItem();
@@ -3376,7 +3394,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS, "on", "on");
 
         load(prefs, dialog.cbStopAttack, KEY_STOP_ATTACK, "true", "true");
-        load(prefs, dialog.cbStopBlock, KEY_STOP_BLOCK, "true", "true");
+        load(prefs, dialog.cbStopBlockWithAny, KEY_STOP_BLOCK_WITH_ANY, "true", "true");
+        load(prefs, dialog.cbStopBlockWithZero, KEY_STOP_BLOCK_WITH_ZERO, "true", "false");
         load(prefs, dialog.cbStopOnAllMain, KEY_STOP_ALL_MAIN_PHASES, "true", "false");
         load(prefs, dialog.cbStopOnAllEnd, KEY_STOP_ALL_END_PHASES, "true", "false");
         load(prefs, dialog.cbStopOnNewStackObjects, KEY_STOP_NEW_STACK_OBJECTS, "true", "false");
@@ -3544,7 +3563,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         userSkipPrioritySteps.getOpponentTurn().setEndOfTurn(dialog.checkBoxEndTurnOthers.isSelected());
 
         userSkipPrioritySteps.setStopOnDeclareAttackersDuringSkipActions(dialog.cbStopAttack.isSelected());
-        userSkipPrioritySteps.setStopOnDeclareBlockerIfNoneAvailable(dialog.cbStopBlock.isSelected());
+        userSkipPrioritySteps.setStopOnDeclareBlockersWithAnyPermanents(dialog.cbStopBlockWithAny.isSelected());
+        userSkipPrioritySteps.setStopOnDeclareBlockersWithZeroPermanents(dialog.cbStopBlockWithZero.isSelected());
         userSkipPrioritySteps.setStopOnAllEndPhases(dialog.cbStopOnAllEnd.isSelected());
         userSkipPrioritySteps.setStopOnAllMainPhases(dialog.cbStopOnAllMain.isSelected());
         userSkipPrioritySteps.setStopOnStackNewObjects(dialog.cbStopOnNewStackObjects.isSelected());
@@ -3914,7 +3934,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox cbSaveToZipFiles;
     private javax.swing.JCheckBox cbShowStormCounter;
     private javax.swing.JCheckBox cbStopAttack;
-    private javax.swing.JCheckBox cbStopBlock;
+    private javax.swing.JCheckBox cbStopBlockWithAny;
+    private javax.swing.JCheckBox cbStopBlockWithZero;
     private javax.swing.JCheckBox cbStopOnAllEnd;
     private javax.swing.JCheckBox cbStopOnAllMain;
     private javax.swing.JCheckBox cbStopOnNewStackObjects;

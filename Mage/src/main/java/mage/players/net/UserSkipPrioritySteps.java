@@ -10,8 +10,9 @@ public class UserSkipPrioritySteps implements Serializable {
     final SkipPrioritySteps yourTurn;
     final SkipPrioritySteps opponentTurn;
 
-    boolean stopOnDeclareAttackersDuringSkipAction = true;
-    boolean stopOnDeclareBlockerIfNoneAvailable = true;
+    boolean stopOnDeclareAttackers = true;
+    boolean stopOnDeclareBlockersWithZeroPermanents = false;
+    boolean stopOnDeclareBlockersWithAnyPermanents = true;
     boolean stopOnAllMainPhases = true;
     boolean stopOnAllEndPhases = true;
     boolean stopOnStackNewObjects = true;
@@ -29,20 +30,28 @@ public class UserSkipPrioritySteps implements Serializable {
         return opponentTurn;
     }
 
-    public boolean isStopOnDeclareBlockerIfNoneAvailable() {
-        return stopOnDeclareBlockerIfNoneAvailable;
+    public boolean isStopOnDeclareBlockersWithZeroPermanents() {
+        return stopOnDeclareBlockersWithZeroPermanents;
     }
 
-    public void setStopOnDeclareBlockerIfNoneAvailable(boolean stopOnDeclareBlockerIfNoneAvailable) {
-        this.stopOnDeclareBlockerIfNoneAvailable = stopOnDeclareBlockerIfNoneAvailable;
+    public void setStopOnDeclareBlockersWithZeroPermanents(boolean stopOnDeclareBlockersWithZeroPermanents) {
+        this.stopOnDeclareBlockersWithZeroPermanents = stopOnDeclareBlockersWithZeroPermanents;
     }
 
-    public boolean isStopOnDeclareAttackersDuringSkipAction() {
-        return stopOnDeclareAttackersDuringSkipAction;
+    public boolean isStopOnDeclareAttackers() {
+        return stopOnDeclareAttackers;
     }
 
     public void setStopOnDeclareAttackersDuringSkipActions(boolean stopOnDeclareAttackersDuringSkipActions) {
-        this.stopOnDeclareAttackersDuringSkipAction = stopOnDeclareAttackersDuringSkipActions;
+        this.stopOnDeclareAttackers = stopOnDeclareAttackersDuringSkipActions;
+    }
+
+    public boolean isStopOnDeclareBlockersWithAnyPermanents() {
+        return stopOnDeclareBlockersWithAnyPermanents;
+    }
+
+    public void setStopOnDeclareBlockersWithAnyPermanents(boolean stopOnDeclareBlockersWithAnyPermanents) {
+        this.stopOnDeclareBlockersWithAnyPermanents = stopOnDeclareBlockersWithAnyPermanents;
     }
 
     public boolean isStopOnAllMainPhases() {

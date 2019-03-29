@@ -755,8 +755,27 @@ public class HumanPlayer extends PlayerImpl {
                 }
             }
 
-            // SKIP buttons - use the skip actions only if the player itself controls its turn
+            // STOP conditions (temporary stop without skip reset)
+            boolean quickStop = false;
             if (isGameUnderControl()) {
+
+                // if was attacked - always stop BEFORE blocker step (to cast extra spells)
+                if (game.getTurn().getStepType() == PhaseStep.DECLARE_ATTACKERS
+                        && game.getCombat().getPlayerDefenders(game).contains(playerId)) {
+
+                    FilterCreatureForCombatBlock filter = filterCreatureForCombatBlock.copy();
+                    filter.add(new ControllerIdPredicate(playerId));
+                    // stop skip on any/zero permanents available
+                    int possibleBlockersCount = game.getBattlefield().count(filter, null, playerId, game);
+                    boolean canStopOnAny = possibleBlockersCount != 0 && getControllingPlayersUserData(game).getUserSkipPrioritySteps().isStopOnDeclareBlockersWithAnyPermanents();
+                    boolean canStopOnZero = possibleBlockersCount == 0 && getControllingPlayersUserData(game).getUserSkipPrioritySteps().isStopOnDeclareBlockersWithZeroPermanents();
+                    quickStop = canStopOnAny || canStopOnZero;
+                }
+            }
+
+            // SKIP - use the skip actions only if the player itself controls its turn
+            if (!quickStop && isGameUnderControl()) {
+
                 if (passedAllTurns || passedTurnSkipStack) {
                     if (passWithManaPoolCheck(game)) {
                         return false;
@@ -1185,11 +1204,23 @@ public class HumanPlayer extends PlayerImpl {
         filter.add(new ControllerIdPredicate(attackingPlayerId));
 
         while (!abort) {
+
+            List<UUID> possibleAttackers = new ArrayList<>();
+            for (Permanent possibleAttacker : game.getBattlefield().getActivePermanents(filter, attackingPlayerId, game)) {
+                if (possibleAttacker.canAttack(null, game)) {
+                    possibleAttackers.add(possibleAttacker.getId());
+                }
+            }
+
+            // skip declare attack step
+            // old version:
+            // - passedAllTurns, passedUntilEndStepBeforeMyTurn: always skipped
+            // - other: on disabled option skipped
             if (passedAllTurns
                     || passedUntilEndStepBeforeMyTurn
                     || (!getControllingPlayersUserData(game)
                     .getUserSkipPrioritySteps()
-                    .isStopOnDeclareAttackersDuringSkipAction()
+                    .isStopOnDeclareAttackers()
                     && (passedTurn
                     || passedTurnSkipStack
                     || passedUntilEndOfTurn
@@ -1198,14 +1229,21 @@ public class HumanPlayer extends PlayerImpl {
                     return;
                 }
             }
-            Map<String, Serializable> options = new HashMap<>();
 
-            List<UUID> possibleAttackers = new ArrayList<>();
-            for (Permanent possibleAttacker : game.getBattlefield().getActivePermanents(filter, attackingPlayerId, game)) {
-                if (possibleAttacker.canAttack(null, game)) {
-                    possibleAttackers.add(possibleAttacker.getId());
+            /*
+            // new version:
+            // - all: on disabled option skipped (if attackers selected)
+            if (!getControllingPlayersUserData(game)
+                    .getUserSkipPrioritySteps()
+                    .isStopOnDeclareAttackers()
+                    && (possibleAttackers.size() > 0)) {
+                if (checkIfAttackersValid(game)) {
+                    return;
                 }
             }
+            */
+
+            Map<String, Serializable> options = new HashMap<>();
             options.put(Constants.Option.POSSIBLE_ATTACKERS, (Serializable) possibleAttackers);
             if (!possibleAttackers.isEmpty()) {
                 options.put(Constants.Option.SPECIAL_BUTTON, "All attack");
@@ -1424,12 +1462,15 @@ public class HumanPlayer extends PlayerImpl {
         updateGameStatePriority("selectBlockers", game);
         FilterCreatureForCombatBlock filter = filterCreatureForCombatBlock.copy();
         filter.add(new ControllerIdPredicate(defendingPlayerId));
-        if (game.getBattlefield().count(filter, null, playerId, game) == 0
-                && !getControllingPlayersUserData(game)
-                .getUserSkipPrioritySteps()
-                .isStopOnDeclareBlockerIfNoneAvailable()) {
+
+        // stop skip on any/zero permanents available
+        int possibleBlockersCount = game.getBattlefield().count(filter, null, playerId, game);
+        boolean canStopOnAny = possibleBlockersCount != 0 && getControllingPlayersUserData(game).getUserSkipPrioritySteps().isStopOnDeclareBlockersWithAnyPermanents();
+        boolean canStopOnZero = possibleBlockersCount == 0 && getControllingPlayersUserData(game).getUserSkipPrioritySteps().isStopOnDeclareBlockersWithZeroPermanents();
+        if (!canStopOnAny && !canStopOnZero) {
             return;
         }
+
         while (!abort) {
             prepareForResponse(game);
             if (!isExecutingMacro()) {
