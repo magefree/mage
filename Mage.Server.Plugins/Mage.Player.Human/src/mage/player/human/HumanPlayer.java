@@ -875,7 +875,7 @@ public class HumanPlayer extends PlayerImpl {
 
                 } else {
                     // non empty stack
-                    boolean haveNewObjectsOnStack = Objects.equals(dateLastAddedToStack, game.getStack().getDateLastAdded());
+                    boolean haveNewObjectsOnStack = !Objects.equals(dateLastAddedToStack, game.getStack().getDateLastAdded());
                     dateLastAddedToStack = game.getStack().getDateLastAdded();
                     if (passedUntilStackResolved) {
                         if (haveNewObjectsOnStack
