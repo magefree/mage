@@ -274,6 +274,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     // news
     public static final String KEY_NEWS_PAGE_LAST_VERSION = "newsPageLastVersion";
+    public static final String KEY_NEWS_PAGE_COOKIES = "newsPageCookies";
 
     // controls
     public static final String KEY_CONTROL_TOGGLE_MACRO = "controlToggleMacro";

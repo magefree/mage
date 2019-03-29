@@ -1,5 +1,8 @@
 package mage.client.dialog;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -18,7 +21,10 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Type;
 import java.net.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -29,6 +35,7 @@ public class WhatsNewDialog extends MageDialog {
     private static final Logger logger = Logger.getLogger(WhatsNewDialog.class);
     private static final MageVersion clientVersion = new MageVersion(WhatsNewDialog.class);
 
+    // cookies tester: http://www.html-kit.com/tools/cookietester/
     private static final String WHATS_NEW_PAGE = "https://jaydi85.github.io/xmage-web-news/news.html";
     private static final String WHATS_NEW_VERSION_PAGE = "https://jaydi85.github.io/xmage-web-news/news_version.html"; // increment version=123 to auto-shown for all users
     private static final int WHATS_NEW_LOAD_TIMEOUT_SECS = 20; // timeout for page loading
@@ -117,6 +124,7 @@ public class WhatsNewDialog extends MageDialog {
 
     public WhatsNewDialog() {
         initComponents();
+        this.setDefaultCloseOperation(HIDE_ON_CLOSE);
 
         fxPanel = new JFXPanel();
         panelData.add(fxPanel);
@@ -163,6 +171,83 @@ public class WhatsNewDialog extends MageDialog {
         this.setVisible(true);
     }
 
+
+    /**
+     * Store cookies in preferences
+     */
+    private class PersistentCookieStore implements CookieStore, Runnable {
+        private CookieStore store;
+
+        public PersistentCookieStore() {
+            store = new CookieManager().getCookieStore();
+
+            // restore data
+            loadFromPrefs();
+
+            // save data on app close
+            Runtime.getRuntime().addShutdownHook(new Thread(this));
+        }
+
+        private void loadFromPrefs() {
+            String sourceValue = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEWS_PAGE_COOKIES, "");
+
+            Gson gson = new GsonBuilder().create();
+            List<HttpCookie> httpCookies = new ArrayList<>();
+            Type type = new TypeToken<List<HttpCookie>>() {
+            }.getType();
+            try {
+                httpCookies = gson.fromJson(sourceValue, type);
+                for (HttpCookie cookie : httpCookies) {
+                    store.add(URI.create(cookie.getDomain()), cookie);
+                }
+            } catch (Exception e) {
+                logger.error("Wrong news page cookies", e);
+            }
+        }
+
+        private void saveToPrefs() {
+            List<HttpCookie> httpCookies = store.getCookies();
+            Gson gson = new GsonBuilder().create();
+            String destValue = gson.toJson(httpCookies);
+            PreferencesDialog.saveValue(PreferencesDialog.KEY_NEWS_PAGE_COOKIES, destValue);
+        }
+
+        @Override
+        public void run() {
+            saveToPrefs();
+        }
+
+        @Override
+        public void add(URI uri, HttpCookie cookie) {
+            store.add(uri, cookie);
+        }
+
+        @Override
+        public List<HttpCookie> get(URI uri) {
+            return store.get(uri);
+        }
+
+        @Override
+        public List<HttpCookie> getCookies() {
+            return store.getCookies();
+        }
+
+        @Override
+        public List<URI> getURIs() {
+            return store.getURIs();
+        }
+
+        @Override
+        public boolean remove(URI uri, HttpCookie cookie) {
+            return store.remove(uri, cookie);
+        }
+
+        @Override
+        public boolean removeAll() {
+            return store.removeAll();
+        }
+    }
+
     private void createWebView() {
 
         // init web engine and events
@@ -176,6 +261,9 @@ public class WhatsNewDialog extends MageDialog {
                 engine = view.getEngine();
                 engine.setUserAgent(engine.getUserAgent() + " XMage/" + clientVersion.toString(false));
                 view.contextMenuEnabledProperty().setValue(false);
+
+                CookieManager cookieManager = new CookieManager(new PersistentCookieStore(), CookiePolicy.ACCEPT_ALL);
+                CookieHandler.setDefault(cookieManager);
 
                 // on error
                 engine.getLoadWorker().exceptionProperty().addListener(new ChangeListener<Throwable>() {
