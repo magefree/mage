@@ -568,9 +568,9 @@ public class TablesPanel extends javax.swing.JPanel {
         Dimension newDimension = new Dimension((int) jPanelBottom.getPreferredSize().getWidth(), GUISizeHelper.menuFont.getSize() + 28);
         jPanelBottom.setMinimumSize(newDimension);
         jPanelBottom.setPreferredSize(newDimension);
-        jButtonFooterNext.setFont(GUISizeHelper.menuFont);
-        jLabelFooterLabel.setFont(new Font(GUISizeHelper.menuFont.getName(), Font.BOLD, GUISizeHelper.menuFont.getSize()));
-        jLabelFooterText.setFont(GUISizeHelper.menuFont);
+        buttonNextMessage.setFont(GUISizeHelper.menuFont);
+        labelMessageHeader.setFont(new Font(GUISizeHelper.menuFont.getName(), Font.BOLD, GUISizeHelper.menuFont.getSize()));
+        labelMessageText.setFont(GUISizeHelper.menuFont);
     }
 
     private void saveDividerLocations() {
@@ -720,9 +720,9 @@ public class TablesPanel extends javax.swing.JPanel {
             this.jPanelBottom.setVisible(false);
         } else {
             this.jPanelBottom.setVisible(true);
-            URLHandler.RemoveMouseAdapter(jLabelFooterText);
-            URLHandler.handleMessage(this.messages.get(0), this.jLabelFooterText);
-            this.jButtonFooterNext.setVisible(this.messages.size() > 1);
+            URLHandler.RemoveMouseAdapter(labelMessageText);
+            URLHandler.handleMessage(this.messages.get(0), this.labelMessageText);
+            this.buttonNextMessage.setVisible(this.messages.size() > 1);
         }
     }
 
@@ -964,9 +964,10 @@ public class TablesPanel extends javax.swing.JPanel {
         tableCompleted = new javax.swing.JTable();
         chatPanelMain = new mage.client.table.PlayersChatPanel();
         jPanelBottom = new javax.swing.JPanel();
-        jButtonFooterNext = new javax.swing.JButton();
-        jLabelFooterLabel = new javax.swing.JLabel();
-        jLabelFooterText = new javax.swing.JLabel();
+        buttonWhatsNew = new javax.swing.JButton();
+        buttonNextMessage = new javax.swing.JButton();
+        labelMessageHeader = new javax.swing.JLabel();
+        labelMessageText = new javax.swing.JLabel();
 
         setLayout(new java.awt.GridBagLayout());
 
@@ -1474,26 +1475,37 @@ public class TablesPanel extends javax.swing.JPanel {
         jPanelBottom.setPreferredSize(new java.awt.Dimension(516, 37));
         jPanelBottom.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        jButtonFooterNext.setText("Next");
-        jButtonFooterNext.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButtonFooterNext.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButtonFooterNext.setOpaque(false);
-        jButtonFooterNext.addActionListener(new java.awt.event.ActionListener() {
+        buttonWhatsNew.setText("Show that's new");
+        buttonWhatsNew.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        buttonWhatsNew.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonWhatsNew.setOpaque(false);
+        buttonWhatsNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonFooterNextActionPerformed(evt);
+                buttonWhatsNewActionPerformed(evt);
             }
         });
-        jPanelBottom.add(jButtonFooterNext);
+        jPanelBottom.add(buttonWhatsNew);
 
-        jLabelFooterLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabelFooterLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabelFooterLabel.setText("Message of the Day:");
-        jLabelFooterLabel.setAlignmentY(0.3F);
-        jPanelBottom.add(jLabelFooterLabel);
+        buttonNextMessage.setText("Next message");
+        buttonNextMessage.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        buttonNextMessage.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonNextMessage.setOpaque(false);
+        buttonNextMessage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonNextMessageActionPerformed(evt);
+            }
+        });
+        jPanelBottom.add(buttonNextMessage);
 
-        jLabelFooterText.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabelFooterText.setText("You are playing Mage version 0.7.5. Welcome! -- Mage dev team --");
-        jPanelBottom.add(jLabelFooterText);
+        labelMessageHeader.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        labelMessageHeader.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labelMessageHeader.setText("Message of the Day:");
+        labelMessageHeader.setAlignmentY(0.3F);
+        jPanelBottom.add(labelMessageHeader);
+
+        labelMessageText.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labelMessageText.setText("You are playing Mage version 0.7.5. Welcome! -- Mage dev team --");
+        jPanelBottom.add(labelMessageText);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 2;
@@ -1544,7 +1556,7 @@ public class TablesPanel extends javax.swing.JPanel {
         newTableDialog.showDialog(roomId);
     }//GEN-LAST:event_btnNewTableActionPerformed
 
-    private void jButtonFooterNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFooterNextActionPerformed
+    private void buttonNextMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNextMessageActionPerformed
         synchronized (this) {
             if (messages != null && !messages.isEmpty()) {
                 currentMessage++;
@@ -1552,11 +1564,11 @@ public class TablesPanel extends javax.swing.JPanel {
                     currentMessage = 0;
                 }
 
-                URLHandler.RemoveMouseAdapter(jLabelFooterText);
-                URLHandler.handleMessage(messages.get(currentMessage), this.jLabelFooterText);
+                URLHandler.RemoveMouseAdapter(labelMessageText);
+                URLHandler.handleMessage(messages.get(currentMessage), this.labelMessageText);
             }
         }
-    }//GEN-LAST:event_jButtonFooterNextActionPerformed
+    }//GEN-LAST:event_buttonNextMessageActionPerformed
 
     private void btnFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterActionPerformed
         setTableFilter();
@@ -1586,6 +1598,10 @@ public class TablesPanel extends javax.swing.JPanel {
     private void btnFormatVintageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFormatVintageActionPerformed
         setTableFilter();
     }//GEN-LAST:event_btnFormatVintageActionPerformed
+
+    private void buttonWhatsNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonWhatsNewActionPerformed
+        MageFrame.getInstance().getWhatsNewDialog().checkUpdatesAndShow(true);
+    }//GEN-LAST:event_buttonWhatsNewActionPerformed
 
     private void handleError(Exception ex) {
         LOGGER.fatal("Error loading deck: ", ex);
@@ -1619,12 +1635,11 @@ public class TablesPanel extends javax.swing.JPanel {
     private javax.swing.JToggleButton btnTypeTourneyConstructed;
     private javax.swing.JToggleButton btnTypeTourneyLimited;
     private javax.swing.JToggleButton btnUnrated;
+    private javax.swing.JButton buttonNextMessage;
+    private javax.swing.JButton buttonWhatsNew;
     private mage.client.table.PlayersChatPanel chatPanelMain;
     private javax.swing.JToolBar filterBar1;
     private javax.swing.JToolBar filterBar2;
-    private javax.swing.JButton jButtonFooterNext;
-    private javax.swing.JLabel jLabelFooterLabel;
-    private javax.swing.JLabel jLabelFooterText;
     private javax.swing.JPanel jPanelBottom;
     private javax.swing.JPanel jPanelTables;
     private javax.swing.JPanel jPanelTop;
@@ -1638,6 +1653,8 @@ public class TablesPanel extends javax.swing.JPanel {
     private javax.swing.JToolBar.Separator jSeparator6;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JSplitPane jSplitPaneTables;
+    private javax.swing.JLabel labelMessageHeader;
+    private javax.swing.JLabel labelMessageText;
     private javax.swing.JTable tableCompleted;
     private javax.swing.JTable tableTables;
     // End of variables declaration//GEN-END:variables

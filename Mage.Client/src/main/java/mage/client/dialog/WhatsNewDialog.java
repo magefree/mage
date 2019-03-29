@@ -40,7 +40,8 @@ public class WhatsNewDialog extends MageDialog {
     private static final String WHATS_NEW_VERSION_PAGE = "https://jaydi85.github.io/xmage-web-news/news_version.html"; // increment version=123 to auto-shown for all users
     private static final int WHATS_NEW_LOAD_TIMEOUT_SECS = 20; // timeout for page loading
 
-    final JFXPanel fxPanel;
+    private final JFXPanel fxPanel;
+    private WebView webView;
     private WebEngine engine;
     private boolean isPageReady = false;
 
@@ -128,6 +129,8 @@ public class WhatsNewDialog extends MageDialog {
 
         fxPanel = new JFXPanel();
         panelData.add(fxPanel);
+        webView = null;
+        engine = null;
 
         createWebView();
     }
@@ -257,10 +260,10 @@ public class WhatsNewDialog extends MageDialog {
             @Override
             public void run() {
 
-                WebView view = new WebView();
-                engine = view.getEngine();
+                webView = new WebView();
+                engine = webView.getEngine();
                 engine.setUserAgent(engine.getUserAgent() + " XMage/" + clientVersion.toString(false));
-                view.contextMenuEnabledProperty().setValue(false);
+                webView.contextMenuEnabledProperty().setValue(false);
 
                 CookieManager cookieManager = new CookieManager(new PersistentCookieStore(), CookiePolicy.ACCEPT_ALL);
                 CookieHandler.setDefault(cookieManager);
@@ -324,7 +327,7 @@ public class WhatsNewDialog extends MageDialog {
                     }
                 });
 
-                fxPanel.setScene(new Scene(view));
+                fxPanel.setScene(new Scene(webView));
             }
         });
     }
