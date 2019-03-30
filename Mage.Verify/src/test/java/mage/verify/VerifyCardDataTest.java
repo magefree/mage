@@ -14,6 +14,7 @@ import mage.constants.SuperType;
 import mage.game.draft.RateCard;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
+import mage.watchers.Watcher;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -24,6 +25,7 @@ import org.reflections.Reflections;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -402,6 +404,34 @@ public class VerifyCardDataTest {
         printMessages(errorsList);
         if (errorsList.size() > 0) {
             Assert.fail("Found card errors: " + errorsList.size());
+        }
+    }
+
+    @Test
+    @Ignore // TODO: enable it on copy() methods removing
+    public void checkWatcherCopyMethods() {
+
+        Collection<String> errorsList = new ArrayList<>();
+        Collection<String> warningsList = new ArrayList<>();
+
+        Reflections reflections = new Reflections("mage.");
+        Set<Class<? extends Watcher>> watcherClassesList = reflections.getSubTypesOf(Watcher.class);
+
+        for (Class<? extends Watcher> watcherClass : watcherClassesList) {
+            try {
+                Method m = watcherClass.getMethod("copy");
+                if (!m.getGenericReturnType().getTypeName().equals("T")) {
+                    errorsList.add("error, copy() method must be deleted from watcher class: " + watcherClass.getName());
+                }
+            } catch (NoSuchMethodException e) {
+                errorsList.add("error, can't find copy() method in watcher class: " + watcherClass.getName());
+            }
+        }
+
+        printMessages(warningsList);
+        printMessages(errorsList);
+        if (errorsList.size() > 0) {
+            Assert.fail("Found watcher errors: " + errorsList.size());
         }
     }
 

@@ -8,6 +8,7 @@ import java.util.UUID;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -16,6 +17,8 @@ import mage.game.events.GameEvent;
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class Watcher implements Serializable {
+
+    private static final Logger logger = Logger.getLogger(Watcher.class);
 
     protected UUID controllerId;
     protected UUID sourceId;
@@ -84,7 +87,7 @@ public abstract class Watcher implements Serializable {
             constructor.setAccessible(true);
             return (T) constructor.newInstance(this);
         } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-            e.printStackTrace();
+            logger.error("Can't copy watcher: " + e.getMessage(), e);
         }
         return null;
     }
