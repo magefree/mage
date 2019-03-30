@@ -116,7 +116,8 @@ class OracleEnVecMustAttackRequirementEffect extends RequirementEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return this.getTargetPointer().getFirst(game, source).equals(permanent.getId());
+        return this.getTargetPointer().getFirst(game, source) != null
+                && this.getTargetPointer().getFirst(game, source).equals(permanent.getId());
     }
 
     @Override
@@ -159,7 +160,8 @@ class OracleEnVecCantAttackRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return this.getTargetPointer().getFirst(game, source).equals(permanent.getId());
+        return this.getTargetPointer().getFirst(game, source) != null
+                && this.getTargetPointer().getFirst(game, source).equals(permanent.getId());
     }
 
     @Override
