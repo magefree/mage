@@ -35,10 +35,6 @@ public class PlayersAttackedThisTurnWatcher extends Watcher {
         }
     }
 
-    @Override
-    public PlayersAttackedThisTurnWatcher copy() {
-        return new PlayersAttackedThisTurnWatcher(this);
-    }
 
     @Override
     public void watch(GameEvent event, Game game) {

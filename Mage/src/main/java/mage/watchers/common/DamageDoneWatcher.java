@@ -47,11 +47,6 @@ public class DamageDoneWatcher extends Watcher {
     }
 
     @Override
-    public DamageDoneWatcher copy() {
-        return new DamageDoneWatcher(this);
-    }
-
-    @Override
     public void watch(GameEvent event, Game game) {
         switch (event.getType()) {
             case DAMAGED_CREATURE:

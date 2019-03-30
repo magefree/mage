@@ -36,9 +36,4 @@ public class BloodthirstWatcher extends Watcher {
             }
         }
     }
-
-    @Override
-    public BloodthirstWatcher copy() {
-        return new BloodthirstWatcher(this);
-    }
 }

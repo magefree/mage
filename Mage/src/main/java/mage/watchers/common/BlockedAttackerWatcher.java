@@ -34,10 +34,10 @@ public class BlockedAttackerWatcher extends Watcher {
         }
     }
 
-    @Override
-    public BlockedAttackerWatcher copy() {
-        return new BlockedAttackerWatcher(this);
-    }
+//    @Override
+//    public BlockedAttackerWatcher copy() {
+//        return new BlockedAttackerWatcher(this);
+//    }
 
     @Override
     public void watch(GameEvent event, Game game) {
