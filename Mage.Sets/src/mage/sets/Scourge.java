@@ -168,5 +168,6 @@ public final class Scourge extends ExpansionSet {
         cards.add(new SetCardInfo("Xantid Swarm", 135, Rarity.RARE, mage.cards.x.XantidSwarm.class));
         cards.add(new SetCardInfo("Zealous Inquisitor", 27, Rarity.COMMON, mage.cards.z.ZealousInquisitor.class));
         cards.add(new SetCardInfo("Zombie Cutthroat", 81, Rarity.COMMON, mage.cards.z.ZombieCutthroat.class));
+        cards.add(new SetCardInfo("Exiled Doomsayer", 13, Rarity.RARE, mage.cards.e.ExiledDoomsayer.class));
     }
 }
