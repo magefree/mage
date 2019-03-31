@@ -37,7 +37,7 @@ public class AmassEffect extends OneShotEffect {
 
     public AmassEffect(int amassNumber) {
         this(new StaticValue(amassNumber));
-        staticText = "Amass " + amassNumber + ". <i>(Put " + CardUtil.numberToText(amassNumber) +
+        staticText = "amass " + amassNumber + ". <i>(Put " + CardUtil.numberToText(amassNumber) +
                 " +1/+1 counter" + (amassNumber > 1 ? "s" : "") +
                 "on an Army you control. If you don’t control one, " +
                 "create a 0/0 black Zombie Army creature token first.)</i>";
@@ -46,7 +46,7 @@ public class AmassEffect extends OneShotEffect {
     public AmassEffect(DynamicValue amassNumber) {
         super(Outcome.BoostCreature);
         this.amassNumber = amassNumber;
-        staticText = "Amass X, where X is the number of " + amassNumber.getMessage() + ". <i>(Put X +1/+1 counters" +
+        staticText = "amass X, where X is the number of " + amassNumber.getMessage() + ". <i>(Put X +1/+1 counters" +
                 "on an Army you control. If you don’t control one, " +
                 "create a 0/0 black Zombie Army creature token first.)</i>";
     }
