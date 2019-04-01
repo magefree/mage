@@ -61,7 +61,7 @@ public final class TezzeretMasterOfTheBridge extends CardImpl {
         this.addAbility(ability);
 
         // -8: Exile the top ten cards of your library. Put all artifact cards from among them onto the battlefield.
-        this.addAbility(new LoyaltyAbility(new TezzeretMasterOfTheBridgeEffect2, -8));
+        this.addAbility(new LoyaltyAbility(new TezzeretMasterOfTheBridgeEffect2(), -8));
     }
 
     private TezzeretMasterOfTheBridge(final TezzeretMasterOfTheBridge card) {
