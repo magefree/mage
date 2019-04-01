@@ -22,7 +22,7 @@ import java.util.UUID;
 public final class DreadhordeInvasion extends CardImpl {
 
     private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent(SubType.ZOMBIE, "a Zombie token you control with power 6 or greater");
+            = new FilterCreaturePermanent(SubType.ZOMBIE, "Zombie token you control with power 6 or greater");
 
     static {
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 5));
