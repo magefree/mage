@@ -1,4 +1,3 @@
-
 package mage.cards.decks;
 
 import mage.cards.Card;
@@ -42,11 +41,21 @@ public class Constructed extends DeckValidator {
     }
 
     @Override
+    public int getDeckMinSize() {
+        return 60;
+    }
+
+    @Override
+    public int getSideboardMinSize() {
+        return 0;
+    }
+
+    @Override
     public boolean validate(Deck deck) {
         boolean valid = true;
         //20091005 - 100.2a
-        if (deck.getCards().size() < 60) {
-            invalid.put("Deck", "Must contain at least 60 cards: has only " + deck.getCards().size() + " cards");
+        if (deck.getCards().size() < getDeckMinSize()) {
+            invalid.put("Deck", "Must contain at least " + getDeckMinSize() + " cards: has only " + deck.getCards().size() + " cards");
             valid = false;
         }
         //20130713 - 100.4a

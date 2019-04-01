@@ -37,12 +37,22 @@ public class PennyDreadfulCommander extends Constructed {
     }
 
     @Override
+    public int getDeckMinSize() {
+        return 99;
+    }
+
+    @Override
+    public int getSideboardMinSize() {
+        return 1;
+    }
+
+    @Override
     public boolean validate(Deck deck) {
         boolean valid = true;
         FilterMana colorIdentity = new FilterMana();
 
-        if (deck.getCards().size() + deck.getSideboard().size() != 100) {
-            invalid.put("Deck", "Must contain 100 cards: has " + (deck.getCards().size() + deck.getSideboard().size()) + " cards");
+        if (deck.getCards().size() + deck.getSideboard().size() != getDeckMinSize() + getSideboardMinSize()) {
+            invalid.put("Deck", "Must contain " + getDeckMinSize() + +getSideboardMinSize() + " cards: has " + (deck.getCards().size() + deck.getSideboard().size()) + " cards");
             valid = false;
         }
 

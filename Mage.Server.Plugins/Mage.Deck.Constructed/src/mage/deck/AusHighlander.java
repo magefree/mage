@@ -95,8 +95,8 @@ public class AusHighlander extends Constructed {
     public boolean validate(Deck deck) {
         boolean valid = true;
 
-        if (deck.getCards().size() != 60) {
-            invalid.put("Deck", "Must contain 60 singleton cards: has " + (deck.getCards().size()) + " cards");
+        if (deck.getCards().size() != getDeckMinSize()) {
+            invalid.put("Deck", "Must contain " + getDeckMinSize() + " singleton cards: has " + (deck.getCards().size()) + " cards");
             valid = false;
         }
         if (deck.getSideboard().size() > 15) {

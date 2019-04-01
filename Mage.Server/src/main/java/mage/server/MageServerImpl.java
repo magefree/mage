@@ -2,6 +2,7 @@ package mage.server;
 
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
+import mage.cards.decks.DeckValidatorFactory;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.cards.repository.ExpansionInfo;
@@ -142,7 +143,7 @@ public class MageServerImpl implements MageServer {
             return SessionManager.instance.connectUser(sessionId, userName, password, userIdStr);
         } catch (MageException ex) {
             if (ex instanceof MageVersionException) {
-                throw (MageVersionException) ex;
+                throw ex;
             }
             handleException(ex);
         }
@@ -268,7 +269,7 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    public boolean joinTable(final String sessionId, final UUID roomId, final UUID tableId, final String name, final PlayerType playerType, final int skill, final DeckCardLists deckList, final String password) throws MageException, GameException {
+    public boolean joinTable(final String sessionId, final UUID roomId, final UUID tableId, final String name, final PlayerType playerType, final int skill, final DeckCardLists deckList, final String password) throws MageException {
         return executeWithResult("joinTable", sessionId, new ActionWithBooleanResult() {
             @Override
             public Boolean execute() throws MageException {
@@ -293,7 +294,7 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    public boolean joinTournamentTable(final String sessionId, final UUID roomId, final UUID tableId, final String name, final PlayerType playerType, final int skill, final DeckCardLists deckList, final String password) throws MageException, GameException {
+    public boolean joinTournamentTable(final String sessionId, final UUID roomId, final UUID tableId, final String name, final PlayerType playerType, final int skill, final DeckCardLists deckList, final String password) throws MageException {
         return executeWithResult("joinTournamentTable", sessionId, new ActionWithBooleanResult() {
             @Override
             public Boolean execute() throws MageException {
@@ -321,7 +322,7 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    public boolean submitDeck(final String sessionId, final UUID tableId, final DeckCardLists deckList) throws MageException, GameException {
+    public boolean submitDeck(final String sessionId, final UUID tableId, final DeckCardLists deckList) throws MageException {
         return executeWithResult("submitDeck", sessionId, new ActionWithBooleanResult() {
             @Override
             public Boolean execute() throws MageException {
@@ -339,7 +340,7 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    public void updateDeck(final String sessionId, final UUID tableId, final DeckCardLists deckList) throws MageException, GameException {
+    public void updateDeck(final String sessionId, final UUID tableId, final DeckCardLists deckList) throws MageException {
         execute("updateDeck", sessionId, () -> {
             Optional<Session> session = SessionManager.instance.getSession(sessionId);
             if (!session.isPresent()) {

@@ -82,6 +82,16 @@ public class TinyLeaders extends Constructed {
         super(name);
     }
 
+    @Override
+    public int getDeckMinSize() {
+        return 49; // commander gives from deck name
+    }
+
+    @Override
+    public int getSideboardMinSize() {
+        return 0;
+    }
+
     /**
      * @param deck
      * @return - True if deck is valid
@@ -90,8 +100,8 @@ public class TinyLeaders extends Constructed {
     public boolean validate(Deck deck) {
         boolean valid = true;
 
-        if (deck.getCards().size() != 49) {
-            invalid.put("Deck", "Must contain 49 cards: has " + deck.getCards().size() + " cards");
+        if (deck.getCards().size() != getDeckMinSize()) {
+            invalid.put("Deck", "Must contain " + getDeckMinSize() + " cards: has " + deck.getCards().size() + " cards");
             valid = false;
         }
 

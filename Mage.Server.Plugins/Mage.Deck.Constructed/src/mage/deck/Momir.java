@@ -1,15 +1,14 @@
-
 package mage.deck;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidator;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
- *
  * @author nigelzor
  */
 public class Momir extends DeckValidator {
@@ -23,11 +22,21 @@ public class Momir extends DeckValidator {
     }
 
     @Override
+    public int getDeckMinSize() {
+        return 60;
+    }
+
+    @Override
+    public int getSideboardMinSize() {
+        return 0;
+    }
+
+    @Override
     public boolean validate(Deck deck) {
         boolean valid = true;
 
-        if (deck.getCards().size() != 60) {
-            invalid.put("Deck", "Must contain 60 cards: has " + deck.getCards().size() + " cards");
+        if (deck.getCards().size() != getDeckMinSize()) {
+            invalid.put("Deck", "Must contain " + getDeckMinSize() + " cards: has " + deck.getCards().size() + " cards");
             valid = false;
         }
 

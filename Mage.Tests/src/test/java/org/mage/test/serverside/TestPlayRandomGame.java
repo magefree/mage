@@ -30,6 +30,7 @@ import java.util.Locale;
 public class TestPlayRandomGame extends MageTestBase {
 
     private static final List<String> colorChoices = new ArrayList<>(Arrays.asList("bu", "bg", "br", "bw", "ug", "ur", "uw", "gr", "gw", "rw", "bur", "buw", "bug", "brg", "brw", "bgw", "wur", "wug", "wrg", "rgu"));
+    private static final int DECK_SIZE = 40;
 
     @Test
     @Ignore
@@ -46,16 +47,16 @@ public class TestPlayRandomGame extends MageTestBase {
         Player computerA = createRandomPlayer("ComputerA");
         Deck deck = generateRandomDeck();
 
-        if (deck.getCards().size() < 40) {
-            throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck.getCards().size());
+        if (deck.getCards().size() < DECK_SIZE) {
+            throw new IllegalArgumentException("Couldn't load deck, deck size = " + deck.getCards().size() + ", but must be " + DECK_SIZE);
         }
         game.addPlayer(computerA, deck);
         game.loadCards(deck.getCards(), computerA.getId());
 
         Player computerB = createRandomPlayer("ComputerB");
         Deck deck2 = generateRandomDeck();
-        if (deck2.getCards().size() < 40) {
-            throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck2.getCards().size());
+        if (deck2.getCards().size() < DECK_SIZE) {
+            throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck2.getCards().size() + ", but must be " + DECK_SIZE);
         }
         game.addPlayer(computerB, deck2);
         game.loadCards(deck2.getCards(), computerB.getId());
@@ -80,6 +81,6 @@ public class TestPlayRandomGame extends MageTestBase {
             allowedColors.add(ColoredManaSymbol.lookup(c));
         }
         List<Card> cardPool = Sets.generateRandomCardPool(45, allowedColors);
-        return ComputerPlayer.buildDeck(cardPool, allowedColors);
+        return ComputerPlayer.buildDeck(DECK_SIZE, cardPool, allowedColors);
     }
 }

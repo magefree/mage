@@ -1,17 +1,9 @@
 package mage.server;
 
-import java.util.Locale;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Optional;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 import mage.MageException;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
+import mage.cards.decks.DeckValidatorFactory;
 import mage.constants.RangeOfInfluence;
 import mage.constants.TableState;
 import mage.game.*;
@@ -28,12 +20,10 @@ import mage.game.tournament.TournamentPlayer;
 import mage.players.Player;
 import mage.players.PlayerType;
 import mage.server.draft.DraftManager;
-import mage.server.game.DeckValidatorFactory;
 import mage.server.game.GameFactory;
 import mage.server.game.GameManager;
 import mage.server.game.PlayerFactory;
 import mage.server.record.TableRecorderImpl;
-import mage.server.tournament.TournamentController;
 import mage.server.tournament.TournamentFactory;
 import mage.server.tournament.TournamentManager;
 import mage.server.util.ConfigSettings;
@@ -41,6 +31,16 @@ import mage.server.util.ServerMessagesUtil;
 import mage.server.util.ThreadExecutor;
 import mage.view.ChatMessage;
 import org.apache.log4j.Logger;
+
+import java.util.Locale;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -876,7 +876,7 @@ public class TableController {
     private void autoSideboard() {
         for (MatchPlayer player : match.getPlayers()) {
             if (!player.isDoneSideboarding()) {
-                match.submitDeck(player.getPlayer().getId(), player.generateDeck());
+                match.submitDeck(player.getPlayer().getId(), player.generateDeck(table.getValidator()));
             }
         }
     }
@@ -927,9 +927,9 @@ public class TableController {
     public boolean isTournamentStillValid() {
         if (table.getTournament() != null) {
             if (table.getState() != TableState.WAITING && table.getState() != TableState.READY_TO_START && table.getState() != TableState.STARTING) {
-               return TournamentManager.instance.getTournamentController(table.getTournament().getId())
-                       .map(tc -> tc.isTournamentStillValid(table.getState()))
-                       .orElse(false);
+                return TournamentManager.instance.getTournamentController(table.getTournament().getId())
+                        .map(tc -> tc.isTournamentStillValid(table.getState()))
+                        .orElse(false);
 
             } else {
                 // check if table creator is still a valid user, if not removeUserFromAllTablesAndChat table

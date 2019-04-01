@@ -2,6 +2,7 @@ package mage.server;
 
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
+import mage.cards.decks.DeckValidatorFactory;
 import mage.cards.repository.CardScanner;
 import mage.cards.repository.PluginClassloaderRegistery;
 import mage.cards.repository.RepositoryUtil;
@@ -11,7 +12,6 @@ import mage.game.tournament.TournamentType;
 import mage.interfaces.MageServer;
 import mage.remote.Connection;
 import mage.server.draft.CubeFactory;
-import mage.server.game.DeckValidatorFactory;
 import mage.server.game.GameFactory;
 import mage.server.game.PlayerFactory;
 import mage.server.record.UserStatsRepository;

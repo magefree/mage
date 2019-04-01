@@ -1,7 +1,5 @@
-
 package mage.deck;
 
-import java.util.*;
 import mage.abilities.Ability;
 import mage.abilities.keyword.PartnerAbility;
 import mage.abilities.keyword.PartnerWithAbility;
@@ -12,8 +10,9 @@ import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
 import mage.filter.FilterMana;
 
+import java.util.*;
+
 /**
- *
  * @author spjspj
  */
 public class FreeformCommander extends Constructed {
@@ -36,12 +35,22 @@ public class FreeformCommander extends Constructed {
     }
 
     @Override
+    public int getDeckMinSize() {
+        return 99;
+    }
+
+    @Override
+    public int getSideboardMinSize() {
+        return 1;
+    }
+
+    @Override
     public boolean validate(Deck deck) {
         boolean valid = true;
         FilterMana colorIdentity = new FilterMana();
 
-        if (deck.getCards().size() + deck.getSideboard().size() != 100) {
-            invalid.put("Deck", "Must contain 100 cards: has " + (deck.getCards().size() + deck.getSideboard().size()) + " cards");
+        if (deck.getCards().size() + deck.getSideboard().size() != getDeckMinSize() + getSideboardMinSize()) {
+            invalid.put("Deck", "Must contain " + getDeckMinSize() + getSideboardMinSize() + " cards: has " + (deck.getCards().size() + deck.getSideboard().size()) + " cards");
             valid = false;
         }
 

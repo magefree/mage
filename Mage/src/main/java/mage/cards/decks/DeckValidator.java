@@ -1,14 +1,13 @@
-
 package mage.cards.decks;
+
+import mage.cards.Card;
 
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import mage.cards.Card;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class DeckValidator implements Serializable {
@@ -32,11 +31,10 @@ public abstract class DeckValidator implements Serializable {
     }
 
     protected void countCards(Map<String, Integer> counts, Collection<Card> cards) {
-        for (Card card: cards) {
+        for (Card card : cards) {
             if (counts.containsKey(card.getName())) {
                 counts.put(card.getName(), counts.get(card.getName()) + 1);
-            }
-            else {
+            } else {
                 counts.put(card.getName(), 1);
             }
         }
@@ -45,4 +43,8 @@ public abstract class DeckValidator implements Serializable {
     public int getEdhPowerLevel(Deck deck) {
         return 0;
     }
+
+    public abstract int getDeckMinSize();
+
+    public abstract int getSideboardMinSize();
 }

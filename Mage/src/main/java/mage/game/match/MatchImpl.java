@@ -389,7 +389,9 @@ public abstract class MatchImpl implements Match {
             // Check if the cards included in the deck are the same as in the original deck
             validDeck = (player.getDeck().getDeckCompleteHashCode() == deck.getDeckCompleteHashCode());
             if (validDeck == false) {
-                deck.getCards().clear(); // Clear the deck so the player cheating looses the game
+                // clear the deck so the player cheating looses the game
+                deck.getCards().clear();
+                deck.getSideboard().clear();
             }
             player.updateDeck(deck);
         }

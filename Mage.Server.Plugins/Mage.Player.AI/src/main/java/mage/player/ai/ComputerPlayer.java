@@ -17,6 +17,8 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.cards.decks.Deck;
+import mage.cards.decks.DeckValidator;
+import mage.cards.decks.DeckValidatorFactory;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -200,7 +202,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 }
             }
             for (Permanent permanent : targets) {
-                if (((TargetPermanent) target).canTarget(abilityControllerId, permanent.getId(), null, game) && !target.getTargets().contains(permanent.getId())) {
+                if (target.canTarget(abilityControllerId, permanent.getId(), null, game) && !target.getTargets().contains(permanent.getId())) {
                     // stop to add targets if not needed and outcome is no advantage for AI player
                     if (target.getNumberOfTargets() == target.getTargets().size()) {
                         if (outcome.isGood() && hasOpponent(permanent.getControllerId(), game)) {
@@ -487,7 +489,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 Collections.reverse(targets);
             }
             for (Permanent permanent : targets) {
-                if (((TargetControlledPermanent) target).canTarget(abilityControllerId, permanent.getId(), source, game)) {
+                if (target.canTarget(abilityControllerId, permanent.getId(), source, game)) {
                     target.addTarget(permanent.getId(), source, game);
                     if (target.getNumberOfTargets() <= target.getTargets().size() && (!outcome.isGood() || target.getMaxNumberOfTargets() <= target.getTargets().size())) {
                         return true;
@@ -516,7 +518,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 targets = game.getBattlefield().getActivePermanents(t.getFilter(), playerId, game);
             }
             for (Permanent permanent : targets) {
-                if (((TargetPermanent) target).canTarget(abilityControllerId, permanent.getId(), source, game)) {
+                if (target.canTarget(abilityControllerId, permanent.getId(), source, game)) {
                     target.addTarget(permanent.getId(), source, game);
                     if (!outcomeTargets || target.getMaxNumberOfTargets() <= target.getTargets().size()) {
                         return true;
@@ -740,7 +742,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 outcomeTargets = false;
             }
             for (Permanent permanent : targets) {
-                if (((TargetSpellOrPermanent) target).canTarget(abilityControllerId, permanent.getId(), source, game)) {
+                if (target.canTarget(abilityControllerId, permanent.getId(), source, game)) {
                     target.addTarget(permanent.getId(), source, game);
                     if (!outcomeTargets || target.getMaxNumberOfTargets() <= target.getTargets().size()) {
                         return true;
@@ -750,7 +752,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             if (!game.getStack().isEmpty()) {
                 for (StackObject stackObject : game.getStack()) {
                     if (stackObject instanceof Spell && source != null && !source.getId().equals(stackObject.getStackAbility().getId())) {
-                        if (((TargetSpellOrPermanent) target).getFilter().match(stackObject, game)) {
+                        if (target.getFilter().match(stackObject, game)) {
                             return tryAddTarget(target, stackObject.getId(), source, game);
                         }
                     }
@@ -812,7 +814,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
         if (target.getOriginalTarget() instanceof TargetCardInExile) {
             List<Card> cards = new ArrayList<>();
-            for (UUID uuid : ((TargetCardInExile) target).possibleTargets(source.getSourceId(), source.getControllerId(), game)) {
+            for (UUID uuid : target.possibleTargets(source.getSourceId(), source.getControllerId(), game)) {
                 Card card = game.getCard(uuid);
                 if (card != null) {
                     cards.add(card);
@@ -829,7 +831,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
         if (target.getOriginalTarget() instanceof TargetActivatedAbility) {
             List<StackObject> stackObjects = new ArrayList<>();
-            for (UUID uuid : ((TargetActivatedAbility) target).possibleTargets(source.getSourceId(), source.getControllerId(), game)) {
+            for (UUID uuid : target.possibleTargets(source.getSourceId(), source.getControllerId(), game)) {
                 StackObject stackObject = game.getStack().getStackObject(uuid);
                 if (stackObject != null) {
                     stackObjects.add(stackObject);
@@ -1358,9 +1360,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
         // pay phyrexian life costs
         if (cost instanceof PhyrexianManaCost) {
-            if (cost.pay(null, game, null, playerId, false, null) || permittingObject != null) {
-                return true;
-            }
+            return cost.pay(null, game, null, playerId, false, null) || permittingObject != null;
         }
         return false;
     }
@@ -1828,22 +1828,22 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
     }
 
-    public static Deck buildDeck(List<Card> cardPool, final List<ColoredManaSymbol> colors) {
-        return buildDeck(cardPool, colors, false);
+    public static Deck buildDeck(int deckMinSize, List<Card> cardPool, final List<ColoredManaSymbol> colors) {
+        return buildDeck(deckMinSize, cardPool, colors, false);
     }
 
-    public static Deck buildDeck(List<Card> cardPool, final List<ColoredManaSymbol> colors, boolean onlyBasicLands) {
+    public static Deck buildDeck(int deckMinSize, List<Card> cardPool, final List<ColoredManaSymbol> colors, boolean onlyBasicLands) {
         if (onlyBasicLands) {
-            return buildDeckWithOnlyBasicLands(cardPool);
+            return buildDeckWithOnlyBasicLands(deckMinSize, cardPool);
         } else {
-            return buildDeckWithNormalCards(cardPool, colors);
+            return buildDeckWithNormalCards(deckMinSize, cardPool, colors);
         }
     }
 
-    public static Deck buildDeckWithOnlyBasicLands(List<Card> cardPool) {
+    public static Deck buildDeckWithOnlyBasicLands(int deckMinSize, List<Card> cardPool) {
         // random cards from card pool
         Deck deck = new Deck();
-        final int DECK_SIZE = 40;
+        final int DECK_SIZE = deckMinSize != 0 ? deckMinSize : 40;
 
         List<Card> sortedCards = new ArrayList<>(cardPool);
         if (sortedCards.size() > 0) {
@@ -1857,11 +1857,11 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
     }
 
-    public static Deck buildDeckWithNormalCards(List<Card> cardPool, final List<ColoredManaSymbol> colors) {
+    public static Deck buildDeckWithNormalCards(int deckMinSize, List<Card> cardPool, final List<ColoredManaSymbol> colors) {
         // top 23 cards plus basic lands until 40 deck size
         Deck deck = new Deck();
-        final int DECK_SIZE = 40;
-        final int DECK_CARDS_COUNT = 23;
+        final int DECK_SIZE = deckMinSize != 0 ? deckMinSize : 40;
+        final int DECK_CARDS_COUNT = Math.floorDiv(deckMinSize * 23, 40); // 23 from 40
         final int DECK_LANDS_COUNT = DECK_SIZE - DECK_CARDS_COUNT;
 
         // sort card pool by top score
@@ -1946,15 +1946,17 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     @Override
     public void construct(Tournament tournament, Deck deck) {
-        if (deck != null && deck.getCards().size() < 40 && !deck.getSideboard().isEmpty()) {
-            //pick the top 23 cards
+        DeckValidator deckValidator = DeckValidatorFactory.instance.createDeckValidator(tournament.getOptions().getMatchOptions().getDeckType());
+        int deckMinSize = deckValidator != null ? deckValidator.getDeckMinSize() : 0;
+
+        if (deck != null && deck.getCards().size() < deckMinSize && !deck.getSideboard().isEmpty()) {
             if (chosenColors == null) {
                 for (Card card : deck.getSideboard()) {
                     rememberPick(card, RateCard.rateCard(card, null));
                 }
                 chosenColors = chooseDeckColorsIfPossible();
             }
-            deck = buildDeck(new ArrayList<>(deck.getSideboard()), chosenColors);
+            deck = buildDeck(deckMinSize, new ArrayList<>(deck.getSideboard()), chosenColors);
         }
         tournament.submitDeck(playerId, deck);
     }
@@ -2430,21 +2432,21 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     private boolean setTargetPlayer(Outcome outcome, Target target, Ability source, UUID sourceId, UUID abilityControllerId, UUID randomOpponentId, Game game) {
         if (target.getOriginalTarget() instanceof TargetOpponent) {
             if (source == null) {
-                if (((TargetOpponent) target).canTarget(randomOpponentId, game)) {
+                if (target.canTarget(randomOpponentId, game)) {
                     target.add(randomOpponentId, game);
                     return true;
                 }
-            } else if (((TargetOpponent) target).canTarget(randomOpponentId, source, game)) {
+            } else if (target.canTarget(randomOpponentId, source, game)) {
                 target.add(randomOpponentId, game);
                 return true;
             }
             for (UUID currentId : game.getOpponents(abilityControllerId)) {
                 if (source == null) {
-                    if (((TargetOpponent) target).canTarget(currentId, game)) {
+                    if (target.canTarget(currentId, game)) {
                         target.add(currentId, game);
                         return true;
                     }
-                } else if (((TargetOpponent) target).canTarget(currentId, source, game)) {
+                } else if (target.canTarget(currentId, source, game)) {
                     target.add(currentId, game);
                     return true;
                 }
