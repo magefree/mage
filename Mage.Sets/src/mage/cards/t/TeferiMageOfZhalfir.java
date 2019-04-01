@@ -117,7 +117,7 @@ class TeferiMageOfZhalfirReplacementEffect extends ContinuousRuleModifyingEffect
 
     TeferiMageOfZhalfirReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Each opponent can cast spells only any time he or she could cast a sorcery";
+        staticText = "Each opponent can cast spells only any time they could cast a sorcery";
     }
 
     TeferiMageOfZhalfirReplacementEffect(final TeferiMageOfZhalfirReplacementEffect effect) {
