@@ -380,6 +380,7 @@ public enum SubType {
     CHANDRA("Chandra", SubTypeSet.PlaneswalkerType),
     DACK("Dack", SubTypeSet.PlaneswalkerType),
     DARETTI("Daretti", SubTypeSet.PlaneswalkerType),
+    DAVRIEL("Davriel", SubTypeSet.PlaneswalkerType),
     DOMRI("Domri", SubTypeSet.PlaneswalkerType),
     DOOKU("Dooku", SubTypeSet.PlaneswalkerType, true), // Star Wars
     DOVIN("Dovin", SubTypeSet.PlaneswalkerType),
