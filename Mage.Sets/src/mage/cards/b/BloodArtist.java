@@ -29,7 +29,7 @@ public final class BloodArtist extends CardImpl {
 
         // Whenever Blood Artist or another creature dies, target player loses 1 life and you gain 1 life.
         Ability ability = new DiesThisOrAnotherCreatureTriggeredAbility(new LoseLifeTargetEffect(1), false);
-        ability.addEffect(new GainLifeEffect(1));
+        ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         Target target = new TargetPlayer();
         ability.addTarget(target);
         this.addAbility(ability);
