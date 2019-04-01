@@ -70,6 +70,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 public abstract class PlayerImpl implements Player, Serializable {
 
@@ -714,19 +715,23 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (amount <= 0) {
             return discardedCards;
         }
+
+        // all without dialogs
         if (this.getHand().size() == 1 || this.getHand().size() == amount) {
-            discardedCards.addAll(this.getHand());
-            while (!this.getHand().isEmpty()) {
-                discard(this.getHand().get(this.getHand().iterator().next(), game), source, game);
+            List<UUID> cardsToDiscard = new ArrayList<>(this.getHand());
+            for (UUID id : cardsToDiscard) {
+                if (discard(this.getHand().get(id, game), source, game)) {
+                    discardedCards.add(id);
+                }
             }
             return discardedCards;
         }
+
         if (random) {
             for (int i = 0; i < amount; i++) {
                 Card card = this.getHand().getRandom(game);
-                if (card != null) {
+                if (discard(card, source, game)) {
                     discardedCards.add(card);
-                    discard(card, source, game);
                 }
             }
         } else {
@@ -734,11 +739,9 @@ public abstract class PlayerImpl implements Player, Serializable {
             TargetDiscard target = new TargetDiscard(possibleAmount, possibleAmount, new FilterCard(CardUtil.numberToText(possibleAmount, "a") + " card" + (possibleAmount > 1 ? "s" : "")), playerId);
             choose(Outcome.Discard, target, source == null ? null : source.getSourceId(), game);
             for (UUID cardId : target.getTargets()) {
-                Card card = this.getHand().get(cardId, game);
-                if (card != null) { // can happen if user is removed (session expires)
-                    discardedCards.add(card);
-                    discard(card, source, game);
-                }
+                    if(discard(this.getHand().get(cardId, game), source, game)) {
+                        discardedCards.add(cardId);
+                    }
             }
         }
         return discardedCards;
