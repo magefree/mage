@@ -794,7 +794,7 @@ public class ConnectDialog extends MageDialog {
     }//GEN-LAST:event_btnCheckStatusActionPerformed
 
     private void btnWhatsNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWhatsNewActionPerformed
-        MageFrame.getInstance().getWhatsNewDialog().checkUpdatesAndShow(true);
+        MageFrame.getInstance().showWhatsNewDialog(true);
     }//GEN-LAST:event_btnWhatsNewActionPerformed
 
     private void doFastFlagSearch() {

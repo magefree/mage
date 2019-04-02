@@ -1600,7 +1600,7 @@ public class TablesPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnFormatVintageActionPerformed
 
     private void buttonWhatsNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonWhatsNewActionPerformed
-        MageFrame.getInstance().getWhatsNewDialog().checkUpdatesAndShow(true);
+        MageFrame.getInstance().showWhatsNewDialog(true);
     }//GEN-LAST:event_buttonWhatsNewActionPerformed
 
     private void handleError(Exception ex) {

@@ -93,7 +93,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static MageFrame instance;
 
     private final ConnectDialog connectDialog;
-    private final WhatsNewDialog whatsNewDialog;
+    private WhatsNewDialog whatsNewDialog; // can be null
     private final ErrorDialog errorDialog;
     private static CallbackClient callbackClient;
     private static final Preferences PREFS = Preferences.userNodeForPackage(MageFrame.class);
@@ -246,7 +246,15 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         SessionHandler.startSession(this);
         callbackClient = new CallbackClientImpl(this);
         connectDialog = new ConnectDialog();
-        whatsNewDialog = new WhatsNewDialog();
+        try
+        {
+            whatsNewDialog = new WhatsNewDialog();
+        } catch (NoClassDefFoundError e) {
+            // JavaFX is not supported on old MacOS with OpenJDK
+            // https://bugs.openjdk.java.net/browse/JDK-8202132
+            LOGGER.error("JavaFX is not supported by your system. What's new page will be disabled.", e);
+            whatsNewDialog = null;
+        }
         desktopPane.add(connectDialog, JLayeredPane.MODAL_LAYER);
         errorDialog = new ErrorDialog();
         errorDialog.setLocation(100, 100);
@@ -336,7 +344,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
         // run what's new checks (loading in background)
         SwingUtilities.invokeLater(() -> {
-            whatsNewDialog.checkUpdatesAndShow(false);
+            showWhatsNewDialog(false);
         });
     }
 
@@ -1578,8 +1586,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         addTooltipContainer();
     }
 
-    public WhatsNewDialog getWhatsNewDialog() {
-        return whatsNewDialog;
+    public void showWhatsNewDialog(boolean forceToShowPage) {
+        if (whatsNewDialog != null) {
+            whatsNewDialog.checkUpdatesAndShow(forceToShowPage);
+        }
     }
 }
 
