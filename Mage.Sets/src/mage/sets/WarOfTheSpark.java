@@ -26,6 +26,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Ajani's Pridemate", 4, Rarity.UNCOMMON, mage.cards.a.AjanisPridemate.class));
         cards.add(new SetCardInfo("Ajani, the Greathearted", 184, Rarity.RARE, mage.cards.a.AjaniTheGreathearted.class));
         cards.add(new SetCardInfo("Angrath's Rampage", 185, Rarity.UNCOMMON, mage.cards.a.AngrathsRampage.class));
+        cards.add(new SetCardInfo("Angrath, Captain of Chaos", 227, Rarity.UNCOMMON, mage.cards.a.AngrathCaptainOfChaos.class));
         cards.add(new SetCardInfo("Arlinn's Wolf", 151, Rarity.COMMON, mage.cards.a.ArlinnsWolf.class));
         cards.add(new SetCardInfo("Arlinn, Voice of the Pack", 150, Rarity.UNCOMMON, mage.cards.a.ArlinnVoiceOfThePack.class));
         cards.add(new SetCardInfo("Augur of Bolas", 41, Rarity.UNCOMMON, mage.cards.a.AugurOfBolas.class));
