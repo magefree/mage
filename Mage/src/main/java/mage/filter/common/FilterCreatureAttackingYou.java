@@ -1,5 +1,5 @@
 
-package mage.target.common;
+package mage.filter.common;
 
 import java.util.UUID;
 import mage.filter.common.FilterAttackingCreature;
