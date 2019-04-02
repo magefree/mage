@@ -13,9 +13,9 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class KiorasDreammaker extends CardImpl {
+public final class KiorasDambreaker extends CardImpl {
 
-    public KiorasDreammaker(UUID ownerId, CardSetInfo setInfo) {
+    public KiorasDambreaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}");
 
         this.subtype.add(SubType.LEVIATHAN);
@@ -26,12 +26,12 @@ public final class KiorasDreammaker extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ProliferateEffect()));
     }
 
-    private KiorasDreammaker(final KiorasDreammaker card) {
+    private KiorasDambreaker(final KiorasDambreaker card) {
         super(card);
     }
 
     @Override
-    public KiorasDreammaker copy() {
-        return new KiorasDreammaker(this);
+    public KiorasDambreaker copy() {
+        return new KiorasDambreaker(this);
     }
 }
