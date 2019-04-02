@@ -15,7 +15,7 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.target.common.FilterCreatureAttackingYou;
+import mage.filter.common.FilterCreatureAttackingYou;
 import mage.target.common.TargetCreaturePermanent;
 
 /**

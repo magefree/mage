@@ -72,16 +72,19 @@ public final class TransformedImageCache {
 
     static {
         // TODO: can we use a single map?
-        IMAGE_CACHE = ImageCaches.register(SoftValuesLoadingCache.from(
-            key -> SoftValuesLoadingCache.from(image -> {
-                if (key.width != image.getWidth() || key.height != image.getHeight()) {
-                    image = resizeImage(image, key.width, key.height);
-                }
-                if (key.angle != 0.0) {
-                    image = rotateImage(image, key.angle);
-                }
-                return image;
-            })));
+        IMAGE_CACHE = ImageCaches.register(SoftValuesLoadingCache.from(TransformedImageCache::createTransformedImageCache));
+    }
+
+    private static SoftValuesLoadingCache<BufferedImage, BufferedImage> createTransformedImageCache(Key key) {
+        return SoftValuesLoadingCache.from(image -> {
+            if (key.width != image.getWidth() || key.height != image.getHeight()) {
+                image = resizeImage(image, key.width, key.height);
+            }
+            if (key.angle != 0.0) {
+                image = rotateImage(image, key.angle);
+            }
+            return image;           
+        });
     }
 
     private static BufferedImage rotateImage(BufferedImage image, double angle) {
