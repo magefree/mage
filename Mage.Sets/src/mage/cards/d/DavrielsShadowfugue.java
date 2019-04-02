@@ -12,9 +12,9 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class DavrielsShadowfuge extends CardImpl {
+public final class DavrielsShadowfugue extends CardImpl {
 
-    public DavrielsShadowfuge(UUID ownerId, CardSetInfo setInfo) {
+    public DavrielsShadowfugue(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}");
 
         // Target player discards two cards and loses 2 life.
@@ -23,12 +23,12 @@ public final class DavrielsShadowfuge extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    private DavrielsShadowfuge(final DavrielsShadowfuge card) {
+    private DavrielsShadowfugue(final DavrielsShadowfugue card) {
         super(card);
     }
 
     @Override
-    public DavrielsShadowfuge copy() {
-        return new DavrielsShadowfuge(this);
+    public DavrielsShadowfugue copy() {
+        return new DavrielsShadowfugue(this);
     }
 }
