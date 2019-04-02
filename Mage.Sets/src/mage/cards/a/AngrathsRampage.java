@@ -13,9 +13,9 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class AngrathsWrath extends CardImpl {
+public final class AngrathsRampage extends CardImpl {
 
-    public AngrathsWrath(UUID ownerId, CardSetInfo setInfo) {
+    public AngrathsRampage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}{R}");
 
         // Choose one:
@@ -43,12 +43,12 @@ public final class AngrathsWrath extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    private AngrathsWrath(final AngrathsWrath card) {
+    private AngrathsRampage(final AngrathsRampage card) {
         super(card);
     }
 
     @Override
-    public AngrathsWrath copy() {
-        return new AngrathsWrath(this);
+    public AngrathsRampage copy() {
+        return new AngrathsRampage(this);
     }
 }

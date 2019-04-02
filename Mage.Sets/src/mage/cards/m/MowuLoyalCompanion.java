@@ -29,11 +29,11 @@ public final class MowuLoyalCompanion extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Vigilance
-        this.addAbility(VigilanceAbility.getInstance());
-
         // Trample
         this.addAbility(TrampleAbility.getInstance());
+
+        // Vigilance
+        this.addAbility(VigilanceAbility.getInstance());
 
         // If one or more +1/+1 counters would be put on Mowu, Loyal Companion, that many plus one +1/+1 counters are put on it instead.
         this.addAbility(new SimpleStaticAbility(new MowuLoyalCompanionEffect()));
