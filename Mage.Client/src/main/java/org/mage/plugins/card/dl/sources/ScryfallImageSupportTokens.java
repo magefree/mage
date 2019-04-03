@@ -49,6 +49,9 @@ public class ScryfallImageSupportTokens {
             put("RNA/Treasure", "https://api.scryfall.com/cards/trna/12/en?format=image");
             put("RNA/Zombie", "https://api.scryfall.com/cards/trna/3/en?format=image");
 
+            // WAR
+            put("WAR/Zombie Army", "https://api.scryfall.com/cards/twar/8/en?format=image");
+
 
             // generate supported sets
             supportedSets.clear();
