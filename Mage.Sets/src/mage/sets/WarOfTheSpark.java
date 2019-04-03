@@ -63,6 +63,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Kaya, Bane of the Dead", 231, Rarity.UNCOMMON, mage.cards.k.KayaBaneOfTheDead.class));
         cards.add(new SetCardInfo("Kiora's Dambreaker", 58, Rarity.COMMON, mage.cards.k.KiorasDambreaker.class));
         cards.add(new SetCardInfo("Kiora, Behemoth Beckoner", 232, Rarity.UNCOMMON, mage.cards.k.KioraBehemothBeckoner.class));
+        cards.add(new SetCardInfo("Lazotep Behemoth", 95, Rarity.COMMON, mage.cards.l.LazotepBehemoth.class));
         cards.add(new SetCardInfo("Liliana's Triumph", 98, Rarity.UNCOMMON, mage.cards.l.LilianasTriumph.class));
         cards.add(new SetCardInfo("Liliana, Dreadhorde General", 97, Rarity.MYTHIC, mage.cards.l.LilianaDreadhordeGeneral.class));
         cards.add(new SetCardInfo("Mountain", 260, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
