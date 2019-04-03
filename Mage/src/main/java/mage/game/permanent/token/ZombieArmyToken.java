@@ -8,10 +8,11 @@ import mage.constants.SubType;
 /**
  * @author TheElk801
  */
-public final class AmassToken extends TokenImpl {
+public final class ZombieArmyToken extends TokenImpl {
 
-    public AmassToken() {
+    public ZombieArmyToken() {
         super("Zombie Army", "0/0 black Zombie Army creature token");
+        setExpansionSetCodeForImage("WAR"); // default
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.ZOMBIE);
@@ -20,12 +21,12 @@ public final class AmassToken extends TokenImpl {
         toughness = new MageInt(0);
     }
 
-    private AmassToken(final AmassToken token) {
+    private ZombieArmyToken(final ZombieArmyToken token) {
         super(token);
     }
 
     @Override
-    public AmassToken copy() {
-        return new AmassToken(this);
+    public ZombieArmyToken copy() {
+        return new ZombieArmyToken(this);
     }
 }

@@ -13,7 +13,7 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.AmassToken;
+import mage.game.permanent.token.ZombieArmyToken;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
@@ -69,7 +69,7 @@ public class AmassEffect extends OneShotEffect {
             return false;
         }
         if (!game.getBattlefield().contains(filter, 1, game)) {
-            new CreateTokenEffect(new AmassToken()).apply(game, source);
+            new CreateTokenEffect(new ZombieArmyToken()).apply(game, source);
         }
         Target target = new TargetPermanent(filter);
         target.setNotTarget(true);

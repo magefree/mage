@@ -1198,3 +1198,4 @@
 |Generate|TOK:RNA|Thopter|||ThopterToken|
 |Generate|TOK:RNA|Treasure|||TreasureToken|
 |Generate|TOK:RNA|Zombie|||ZombieToken|
+|Generate|TOK:WAR|Zombie Army|||ZombieArmyToken|
