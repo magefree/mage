@@ -47,8 +47,9 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
         this.onlyOpponents = ability.onlyOpponents;
     }
 
-    public void setOrPlaneswalker(boolean orPlaneswalker) {
+    public DealsCombatDamageToAPlayerTriggeredAbility setOrPlaneswalker(boolean orPlaneswalker) {
         this.orPlaneswalker = orPlaneswalker;
+        return this;
     }
 
     @Override
