@@ -38,10 +38,13 @@ public final class KaradorGhostChieftain extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Karador, Ghost Chieftain costs {1} less to cast for each creature card in your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.STACK, new KaradorGhostChieftainCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.STACK, 
+                new KaradorGhostChieftainCostReductionEffect()));
 
         // During each of your turns, you may cast one creature card from your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KaradorGhostChieftainContinuousEffect()), new KaradorGhostChieftainWatcher());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
+                new KaradorGhostChieftainContinuousEffect()), 
+                new KaradorGhostChieftainWatcher());
     }
 
     public KaradorGhostChieftain(final KaradorGhostChieftain card) {
@@ -78,7 +81,8 @@ class KaradorGhostChieftainCostReductionEffect extends CostModificationEffectImp
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if ((abilityToModify instanceof SpellAbility) && abilityToModify.getSourceId().equals(source.getSourceId())) {
+        if ((abilityToModify instanceof SpellAbility) 
+                && abilityToModify.getSourceId().equals(source.getSourceId())) {
             return game.getCard(abilityToModify.getSourceId()) != null;
         }
         return false;
@@ -110,7 +114,8 @@ class KaradorGhostChieftainContinuousEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            if (game.getActivePlayerId() == null || !game.isActivePlayer(player.getId())) {
+            if (game.getActivePlayerId() == null 
+                    || !game.isActivePlayer(player.getId())) {
                 return false;
             }
             for (Card card : player.getGraveyard().getCards(new FilterCreatureCard(), game)) {
@@ -148,13 +153,17 @@ class KaradorGhostChieftainCastFromGraveyardEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         Card objectCard = game.getCard(objectId);
-        if (objectCard.getId().equals(getTargetPointer().getFirst(game, source))
+        if (objectCard != null
+                && objectCard.getId().equals(getTargetPointer().getFirst(game, source))
                 && objectCard.isCreature()
                 && objectCard.getSpellAbility() != null
+                && affectedControllerId != null
                 && objectCard.getSpellAbility().spellCanBeActivatedRegularlyNow(affectedControllerId, game)) {
             if (affectedControllerId.equals(source.getControllerId())) {
-                KaradorGhostChieftainWatcher watcher = game.getState().getWatcher(KaradorGhostChieftainWatcher.class, source.getSourceId());
-                return watcher != null && !watcher.isAbilityUsed();
+                KaradorGhostChieftainWatcher watcher = 
+                        game.getState().getWatcher(KaradorGhostChieftainWatcher.class, source.getSourceId());
+                return watcher != null 
+                        && !watcher.isAbilityUsed();
             }
         }
         return false;
@@ -176,7 +185,8 @@ class KaradorGhostChieftainWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getZone() == Zone.GRAVEYARD) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST 
+                && event.getZone() == Zone.GRAVEYARD) {
             Spell spell = (Spell) game.getObject(event.getTargetId());
             if (spell.isCreature()) {
                 abilityUsed = true;
