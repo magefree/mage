@@ -2,7 +2,7 @@
 package mage.client.util;
 
 import java.util.Comparator;
-import mage.utils.CardUtil;
+import mage.utils.CardColorUtil;
 import mage.view.CardView;
 
 /**
@@ -13,7 +13,7 @@ public class CardViewColorIdentityComparator implements Comparator<CardView> {
 
     @Override
     public int compare(CardView o1, CardView o2) {
-        return CardUtil.getColorIdentitySortValue(o1.getManaCost(), o1.getColor(), o1.getRules())
-                - CardUtil.getColorIdentitySortValue(o2.getManaCost(), o2.getColor(), o2.getRules());
+        return CardColorUtil.getColorIdentitySortValue(o1.getManaCost(), o1.getColor(), o1.getRules())
+                - CardColorUtil.getColorIdentitySortValue(o2.getManaCost(), o2.getColor(), o2.getRules());
     }
 }
