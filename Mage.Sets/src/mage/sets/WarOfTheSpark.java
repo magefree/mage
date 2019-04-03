@@ -72,6 +72,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 261, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mowu, Loyal Companion", 167, Rarity.UNCOMMON, mage.cards.m.MowuLoyalCompanion.class));
         cards.add(new SetCardInfo("Naga Eternal", 60, Rarity.COMMON, mage.cards.n.NagaEternal.class));
+        cards.add(new SetCardInfo("Nahiri's Stoneblades", 139, Rarity.COMMON, mage.cards.n.NahirisStoneblades.class));
         cards.add(new SetCardInfo("No Escape", 63, Rarity.COMMON, mage.cards.n.NoEscape.class));
         cards.add(new SetCardInfo("Ob Nixilis's Cruelty", 101, Rarity.COMMON, mage.cards.o.ObNixilissCruelty.class));
         cards.add(new SetCardInfo("Ob Nixilis, the Hate-Twisted", 100, Rarity.UNCOMMON, mage.cards.o.ObNixilisTheHateTwisted.class));
