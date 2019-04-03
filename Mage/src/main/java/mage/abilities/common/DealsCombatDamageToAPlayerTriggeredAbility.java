@@ -5,20 +5,20 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbilityImpl {
 
-    protected boolean setTargetPointer;
+    protected final boolean setTargetPointer;
     protected String text;
     protected boolean onlyOpponents;
+    private boolean orPlaneswalker = false;
 
     public DealsCombatDamageToAPlayerTriggeredAbility(Effect effect, boolean optional) {
         this(effect, optional, false);
@@ -47,6 +47,10 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
         this.onlyOpponents = ability.onlyOpponents;
     }
 
+    public void setOrPlaneswalker(boolean orPlaneswalker) {
+        this.orPlaneswalker = orPlaneswalker;
+    }
+
     @Override
     public DealsCombatDamageToAPlayerTriggeredAbility copy() {
         return new DealsCombatDamageToAPlayerTriggeredAbility(this);
@@ -54,14 +58,15 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER
+                || (orPlaneswalker && event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER);
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getSourceId().equals(getSourceId())
-                && ((DamagedPlayerEvent) event).isCombatDamage()) {
-            if (onlyOpponents) {
+                && ((DamagedEvent) event).isCombatDamage()) {
+            if (onlyOpponents && event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
                 Player controller = game.getPlayer(getControllerId());
                 if (controller == null || !controller.hasOpponent(event.getPlayerId(), game)) {
                     return false;
@@ -81,7 +86,10 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
     @Override
     public String getRule() {
         if (text == null || text.isEmpty()) {
-            return "Whenever {this} deals combat damage to " + (onlyOpponents ? "an opponent, " : "a player, ") + super.getRule();
+            return "Whenever {this} deals combat damage to "
+                    + (onlyOpponents ? "an opponent" : "a player")
+                    + (orPlaneswalker ? " or planeswalker" : "")
+                    + ", " + super.getRule();
         }
         return text;
     }

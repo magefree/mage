@@ -39,6 +39,7 @@ public final class VraskaSwarmsEminence extends CardImpl {
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
 
         // Whenever a creature you control with deathtouch deals damage to a player or planeswalker, put a +1/+1 counter on that creature.
+        // TODO: make this trigger on planeswalkers
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
                 new AddCountersTargetEffect(
                         CounterType.P1P1.createInstance()
