@@ -95,6 +95,11 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     protected ComputerPlayer(UUID id) {
         super(id);
+        human = false;
+        userData = UserData.getDefaultUserDataView();
+        userData.setAvatarId(64);
+        userData.setGroupId(UserGroup.COMPUTER.getGroupId());
+        userData.setFlagName("computer.png");
         pickedCards = new ArrayList<>();
     }
 
@@ -2550,5 +2555,22 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
 
         return this.getId().equals(obj.getId());
+    }
+
+    @Override
+    public boolean isHuman() {
+        if (human) {
+            log.error("computer must be not human", new Throwable());
+        }
+        return human;
+    }
+
+    @Override
+    public void restore(Player player) {
+        super.restore(player);
+
+        // restore used in AI simulations
+        // all human players converted to computer and analyse
+        this.human = false;
     }
 }
