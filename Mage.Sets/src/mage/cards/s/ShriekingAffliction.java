@@ -1,17 +1,16 @@
 package mage.cards.s;
 
-import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
 
 import java.util.UUID;
 
@@ -29,8 +28,9 @@ public final class ShriekingAffliction extends CardImpl {
                 new BeginningOfUpkeepTriggeredAbility(
                         Zone.BATTLEFIELD, new LoseLifeTargetEffect(3),
                         TargetController.OPPONENT, false, true
-                ), ShriekingAfflictionCondition.instance, "At the beginning of each opponent’s upkeep, " +
-                "if that player has one or fewer cards in hand, they lose 3 life."
+                ),
+                (Condition)new CardsInHandCondition(ComparisonType.FEWER_THAN, 2, null, TargetController.ACTIVE),
+                "At the beginning of each opponent’s upkeep, if that player has one or fewer cards in hand, they lose 3 life."
         ));
     }
 
@@ -41,15 +41,5 @@ public final class ShriekingAffliction extends CardImpl {
     @Override
     public ShriekingAffliction copy() {
         return new ShriekingAffliction(this);
-    }
-}
-
-enum ShriekingAfflictionCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(game.getActivePlayerId());
-        return player != null && player.getHand().size() < 2;
     }
 }
