@@ -523,6 +523,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                         if (!effect.canAttackCheckAfter(numberAttackers, ability, game, true)) {
                             MageObject sourceObject = ability.getSourceObject(game);
                             if (attackingPlayer.isHuman()) {
+                                attackingPlayer.resetPlayerPassedActions();
                                 game.informPlayer(attackingPlayer, attackingCreature.getIdName() + " can't attack this way (" + (sourceObject == null ? "null" : sourceObject.getIdName()) + ')');
                                 return false;
                             } else {
@@ -856,9 +857,8 @@ public class Combat implements Serializable, Copyable<Combat> {
                             // if creature can block more attackers, inform human player or set blocks for AI player
                             if (mayBlock) {
                                 if (controller.isHuman()) {
-                                    if (!game.isSimulation()) {
-                                        game.informPlayer(controller, "Creature should block all attackers it's able to this turn: " + creature.getIdName());
-                                    }
+                                    controller.resetPlayerPassedActions();
+                                    game.informPlayer(controller, "Creature should block all attackers it's able to this turn: " + creature.getIdName());
                                 } else {
                                     Player defender = game.getPlayer(creature.getControllerId());
                                     if (defender != null) {
@@ -947,9 +947,8 @@ public class Combat implements Serializable, Copyable<Combat> {
                             // if creature can block, inform human player or set block for AI player
                             if (mayBlock) {
                                 if (controller.isHuman()) {
-                                    if (!game.isSimulation()) {
-                                        game.informPlayer(controller, "Creature should block this turn: " + creature.getIdName());
-                                    }
+                                    controller.resetPlayerPassedActions();
+                                    game.informPlayer(controller, "Creature should block this turn: " + creature.getIdName());
                                 } else {
                                     Player defender = game.getPlayer(creature.getControllerId());
                                     if (defender != null) {
@@ -1001,6 +1000,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                                             possibleBlockerId, toBeBlockedCreatureId, mustBeBlockedByAtLeastX, game);
                                     if (blockRequiredMessage != null) { // message means not required
                                         removeBlocker(possibleBlockerId, game);
+                                        controller.resetPlayerPassedActions();
                                         game.informPlayer(controller, blockRequiredMessage + " Existing block removed. It's a requirement to block " + toBeBlockedCreature.getIdName() + '.');
                                         return false;
                                     }
@@ -1095,7 +1095,8 @@ public class Combat implements Serializable, Copyable<Combat> {
             }
         }
         if (sb.length() > 0) {
-            if (!game.isSimulation()) {
+            if (controller.isHuman()) {
+                controller.resetPlayerPassedActions();
                 sb.insert(0, "Some creatures are forced to block certain attacker(s):\n");
                 sb.append("\nPlease block with each of these creatures an appropriate attacker.");
                 game.informPlayer(controller, sb.toString());
@@ -1180,6 +1181,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                     for (Ability ability : entry.getValue()) {
                         if (!effect.canBlockCheckAfter(ability, game, true)) {
                             if (controller.isHuman()) {
+                                controller.resetPlayerPassedActions();
                                 game.informPlayer(controller, blockingCreature.getLogName() + " can't block this way.");
                                 return false;
                             } else {
@@ -1200,6 +1202,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                     for (Ability ability : entry.getValue()) {
                         if (!effect.canBeBlockedCheckAfter(attackingCreature, ability, game, true)) {
                             if (controller.isHuman()) {
+                                controller.resetPlayerPassedActions();
                                 game.informPlayer(controller, attackingCreature.getLogName() + " can't be blocked this way.");
                                 return false;
                             } else {
@@ -1340,7 +1343,8 @@ public class Combat implements Serializable, Copyable<Combat> {
         }
         if (defenderAttackedBy.size() >= defendingPlayer.getMaxAttackedBy()) {
             Player attackingPlayer = game.getPlayer(game.getControllerId(attackerId));
-            if (attackingPlayer != null && !game.isSimulation()) {
+            if (attackingPlayer != null && attackingPlayer.isHuman()) {
+                attackingPlayer.resetPlayerPassedActions();
                 game.informPlayer(attackingPlayer, "No more than "
                         + CardUtil.numberToText(defendingPlayer.getMaxAttackedBy())
                         + " creatures can attack "
