@@ -26,7 +26,7 @@ public class ProliferateEffect extends OneShotEffect {
 
     public ProliferateEffect() {
         super(Outcome.Benefit);
-        staticText = "Proliferate. <i>(You choose any number of permanents and/or players with counters on them, then give each another counter of each kind already there.)</i>";
+        staticText = "proliferate. <i>(You choose any number of permanents and/or players with counters on them, then give each another counter of each kind already there.)</i>";
     }
 
     public ProliferateEffect(ProliferateEffect effect) {
