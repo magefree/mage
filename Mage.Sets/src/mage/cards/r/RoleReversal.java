@@ -1,5 +1,4 @@
-
-package mage.cards.s;
+package mage.cards.r;
 
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -18,34 +17,35 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * @author LevelX2
+ * @author TheElk801
  */
-public final class ShiftingLoyalties extends CardImpl {
+public final class RoleReversal extends CardImpl {
 
-    public ShiftingLoyalties(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{U}");
+    public RoleReversal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}{U}{R}");
 
-        // Exchange control of two target permanents that share a card type. <i>(Artifact, creature, enchantment, land, and planeswalker are card types.)</i>
-        this.getSpellAbility().addEffect(new ExchangeControlTargetEffect(Duration.EndOfGame, "Exchange control of two target permanents that share a card type. <i>(Artifact, creature, enchantment, land, and planeswalker are card types.)</i>"));
+        // Exchange control of two target permanents that share a permanent type.
+        this.getSpellAbility().addEffect(new ExchangeControlTargetEffect(
+                Duration.EndOfGame, "Exchange control of two target permanents that share a permanent type."
+        ));
         this.getSpellAbility().addTarget(new TargetPermanentsThatShareCardType());
-
     }
 
-    private ShiftingLoyalties(final ShiftingLoyalties card) {
+    private RoleReversal(final RoleReversal card) {
         super(card);
     }
 
     @Override
-    public ShiftingLoyalties copy() {
-        return new ShiftingLoyalties(this);
+    public RoleReversal copy() {
+        return new RoleReversal(this);
     }
 }
 
 class TargetPermanentsThatShareCardType extends TargetPermanent {
 
-    TargetPermanentsThatShareCardType() {
+     TargetPermanentsThatShareCardType() {
         super(2, 2, StaticFilters.FILTER_PERMANENT, false);
-        targetName = "permanents that share a card type";
+        targetName = "permanents that share a permanent type";
     }
 
     private TargetPermanentsThatShareCardType(final TargetPermanentsThatShareCardType target) {
