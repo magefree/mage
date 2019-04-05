@@ -41,6 +41,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Davriel, Rogue Shadowmage", 83, Rarity.UNCOMMON, mage.cards.d.DavrielRogueShadowmage.class));
         cards.add(new SetCardInfo("Deathsprout", 189, Rarity.UNCOMMON, mage.cards.d.Deathsprout.class));
         cards.add(new SetCardInfo("Dovin's Veto", 193, Rarity.UNCOMMON, mage.cards.d.DovinsVeto.class));
+        cards.add(new SetCardInfo("Dreadhorde Arcanist", 125, Rarity.RARE, mage.cards.d.DreadhordeArcanist.class));
         cards.add(new SetCardInfo("Dreadhorde Butcher", 194, Rarity.RARE, mage.cards.d.DreadhordeButcher.class));
         cards.add(new SetCardInfo("Dreadhorde Invasion", 86, Rarity.RARE, mage.cards.d.DreadhordeInvasion.class));
         cards.add(new SetCardInfo("Emergence Zone", 245, Rarity.UNCOMMON, mage.cards.e.EmergenceZone.class));
