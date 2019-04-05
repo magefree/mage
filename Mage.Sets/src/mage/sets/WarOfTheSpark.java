@@ -88,6 +88,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Loxodon Sergeant", 21, Rarity.COMMON, mage.cards.l.LoxodonSergeant.class));
         cards.add(new SetCardInfo("Makeshift Battalion", 22, Rarity.COMMON, mage.cards.m.MakeshiftBattalion.class));
         cards.add(new SetCardInfo("Massacre Girl", 99, Rarity.RARE, mage.cards.m.MassacreGirl.class));
+        cards.add(new SetCardInfo("Mayhem Devil", 204, Rarity.UNCOMMON, mage.cards.m.MayhemDevil.class));
         cards.add(new SetCardInfo("Merfolk Skydiver", 205, Rarity.UNCOMMON, mage.cards.m.MerfolkSkydiver.class));
         cards.add(new SetCardInfo("Mizzium Tank", 138, Rarity.RARE, mage.cards.m.MizziumTank.class));
         cards.add(new SetCardInfo("Mountain", 260, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
