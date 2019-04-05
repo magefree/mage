@@ -54,7 +54,7 @@ public final class TaigamSidisisHand extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipDrawStepEffect()));
 
         // At the beginning of your upkeep, look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LookLibraryAndPickControllerEffect(new StaticValue(4), false, new StaticValue(1),
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LookLibraryAndPickControllerEffect(new StaticValue(3), false, new StaticValue(1),
                 StaticFilters.FILTER_CARD, Zone.GRAVEYARD, false, false, false, Zone.HAND, false), TargetController.YOU, false));
 
         // {B}, {T}, Exile X cards from your graveyard: Target creature gets -X/-X until end of turn.
