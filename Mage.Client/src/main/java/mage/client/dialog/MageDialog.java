@@ -33,6 +33,18 @@ public class MageDialog extends javax.swing.JInternalFrame {
 
     }
 
+    public static boolean isModalDialogActivated() {
+        for (JInternalFrame frame : MageFrame.getDesktop().getAllFrames()) {
+            if (frame instanceof MageDialog) {
+                MageDialog md = (MageDialog) frame;
+                if (md.isVisible() && md.isModal()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public static void printFramesOrder(String name) {
         ///*
         JInternalFrame[] frames = MageFrame.getDesktop().getAllFrames();

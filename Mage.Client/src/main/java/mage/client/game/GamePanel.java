@@ -1615,6 +1615,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.getActionMap().put("F8_PRESS", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                if (isUserImputActive()) return;
                 btnToggleMacroActionPerformed(actionEvent);
             }
         });
@@ -1624,6 +1625,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.getActionMap().put("F3_PRESS", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                if (isUserImputActive()) return;
                 restorePriorityActionPerformed(actionEvent);
             }
         });
@@ -1651,6 +1653,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.getActionMap().put("F4_PRESS", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                if (isUserImputActive()) return;
                 btnEndTurnActionPerformed(actionEvent);
             }
         });
@@ -1668,6 +1671,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.getActionMap().put("F5_PRESS", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                if (isUserImputActive()) return;
                 btnUntilEndOfTurnActionPerformed(actionEvent);
             }
         });
@@ -1677,6 +1681,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.getActionMap().put("F6_PRESS", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                if (isUserImputActive()) return;
                 btnEndTurnSkipStackActionPerformed(actionEvent);
             }
         });
@@ -1694,6 +1699,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.getActionMap().put("F7_PRESS", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                if (isUserImputActive()) return;
                 btnUntilNextMainPhaseActionPerformed(actionEvent);
             }
         });
@@ -1711,6 +1717,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.getActionMap().put("F9_PRESS", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                if (isUserImputActive()) return;
                 btnPassPriorityUntilNextYourTurnActionPerformed(actionEvent);
             }
         });
@@ -1728,6 +1735,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.getActionMap().put("F11_PRESS", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                if (isUserImputActive()) return;
                 btnSkipToEndStepBeforeYourTurnActionPerformed(actionEvent);
             }
         });
@@ -1745,6 +1753,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.getActionMap().put("F10_PRESS", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                if (isUserImputActive()) return;
                 btnPassPriorityUntilStackResolvedActionPerformed(actionEvent);
             }
         });
@@ -1767,6 +1776,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.getActionMap().put("F2_PRESS", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                if (isUserImputActive()) return;
                 if (feedbackPanel != null) {
                     feedbackPanel.pressOKYesOrDone();
                 }
@@ -1778,6 +1788,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.getActionMap().put("ENLARGE", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                if (isUserImputActive()) return;
                 ActionCallback callback = Plugins.instance.getActionCallback();
                 ((MageActionCallback) callback).enlargeCard(EnlargeMode.NORMAL);
             }
@@ -1788,6 +1799,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.getActionMap().put("ENLARGE_SOURCE", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                if (isUserImputActive()) return;
                 ActionCallback callback = Plugins.instance.getActionCallback();
                 ((MageActionCallback) callback).enlargeCard(EnlargeMode.ALTERNATE);
             }
@@ -1798,6 +1810,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.getActionMap().put("BIG_IMAGE", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                if (isUserImputActive()) return;
                 imagePanelState = !imagePanelState;
                 if (!imagePanelState) {
                     jSplitPane0.resetToPreferredSizes();
@@ -1813,6 +1826,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.getActionMap().put("USEFIRSTMANAABILITY", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                if (isUserImputActive()) return;
                 SessionHandler.sendPlayerAction(PlayerAction.USE_FIRST_MANA_ABILITY_ON, gameId, null);
                 setMenuStates(
                         PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT, "true").equals("true"),
@@ -1837,6 +1851,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.getActionMap().put("ENLARGE_RELEASE", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                if (isUserImputActive()) return;
                 ActionCallback callback = Plugins.instance.getActionCallback();
                 ((MageActionCallback) callback).hideEnlargedCard();
             }
@@ -1847,6 +1862,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.getActionMap().put("USEFIRSTMANAABILITY_RELEASE", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                if (isUserImputActive()) return;
                 SessionHandler.sendPlayerAction(PlayerAction.USE_FIRST_MANA_ABILITY_OFF, gameId, null);
                 setMenuStates(
                         PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT, "true").equals("true"),
@@ -2218,6 +2234,21 @@ public final class GamePanel extends javax.swing.JPanel {
         updateSkipButtons();
     }
 
+    private boolean isChatInputUnderCursor(Point p) {
+        Component c = this.getComponentAt(p);
+        return gameChatPanel.getTxtMessageInputComponent().equals(c) || userChatPanel.getTxtMessageInputComponent().equals(c);
+    }
+
+    private boolean isChatInputActive() {
+        Component c = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
+        return gameChatPanel.getTxtMessageInputComponent().equals(c) || userChatPanel.getTxtMessageInputComponent().equals(c);
+    }
+
+    private boolean isUserImputActive() {
+        // any imput or choose dialog active (need to disable skip buttons in dialogs and chat)
+        return MageDialog.isModalDialogActivated() || isChatInputActive();
+    }
+
     private void btnUntilEndOfTurnActionPerformed(java.awt.event.ActionEvent evt) {
         SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_TURN_END_STEP, gameId, null);
         skipButtons.activateSkipButton(KEY_CONTROL_END_STEP);
@@ -2481,6 +2512,13 @@ public final class GamePanel extends javax.swing.JPanel {
             boolean isActionEvent = false;
             if (id == MouseEvent.MOUSE_PRESSED) {
                 isActionEvent = true;
+                // clear chat focus on click
+                if (event instanceof MouseEvent) {
+                    MouseEvent me = (MouseEvent) event;
+                    if (isChatInputActive() && !isChatInputUnderCursor(me.getPoint())) {
+                        KeyboardFocusManager.getCurrentKeyboardFocusManager().clearFocusOwner();
+                    }
+                }
             } else if (id == KeyEvent.KEY_PRESSED) {
                 KeyEvent key = (KeyEvent) event;
                 int keyCode = key.getKeyCode();
