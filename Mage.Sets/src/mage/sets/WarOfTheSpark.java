@@ -53,6 +53,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Gideon's Triumph", 15, Rarity.UNCOMMON, mage.cards.g.GideonsTriumph.class));
         cards.add(new SetCardInfo("Gleaming Overseer", 198, Rarity.UNCOMMON, mage.cards.g.GleamingOverseer.class));
         cards.add(new SetCardInfo("God-Pharaoh's Statue", 238, Rarity.UNCOMMON, mage.cards.g.GodPharaohsStatue.class));
+        cards.add(new SetCardInfo("Grateful Apparition", 17, Rarity.UNCOMMON, mage.cards.g.GratefulApparition.class));
         cards.add(new SetCardInfo("Grim Initiate", 130, Rarity.COMMON, mage.cards.g.GrimInitiate.class));
         cards.add(new SetCardInfo("Herald of the Dreadhorde", 93, Rarity.COMMON, mage.cards.h.HeraldOfTheDreadhorde.class));
         cards.add(new SetCardInfo("Honor the God-Pharaoh", 132, Rarity.COMMON, mage.cards.h.HonorTheGodPharaoh.class));
