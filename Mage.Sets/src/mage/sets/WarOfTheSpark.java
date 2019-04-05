@@ -104,6 +104,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Sorin, Vengeful Bloodlord", 217, Rarity.RARE, mage.cards.s.SorinVengefulBloodlord.class));
         cards.add(new SetCardInfo("Spellgorger Weird", 145, Rarity.COMMON, mage.cards.s.SpellgorgerWeird.class));
         cards.add(new SetCardInfo("Spellkeeper Weird", 69, Rarity.COMMON, mage.cards.s.SpellkeeperWeird.class));
+        cards.add(new SetCardInfo("Stealth Mission", 70, Rarity.COMMON, mage.cards.s.StealthMission.class));
         cards.add(new SetCardInfo("Swamp", 256, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 258, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Teferi, Time Raveler", 221, Rarity.RARE, mage.cards.t.TeferiTimeRaveler.class));
