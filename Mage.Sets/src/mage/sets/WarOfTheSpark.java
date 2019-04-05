@@ -95,6 +95,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Paradise Druid", 171, Rarity.UNCOMMON, mage.cards.p.ParadiseDruid.class));
         cards.add(new SetCardInfo("Plains", 250, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 252, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Pollenbright Druid", 173, Rarity.COMMON, mage.cards.p.PollenbrightDruid.class));
         cards.add(new SetCardInfo("Pouncing Lynx", 25, Rarity.COMMON, mage.cards.p.PouncingLynx.class));
         cards.add(new SetCardInfo("Primordial Wurm", 174, Rarity.COMMON, mage.cards.p.PrimordialWurm.class));
         cards.add(new SetCardInfo("Ravnica at War", 28, Rarity.RARE, mage.cards.r.RavnicaAtWar.class));
