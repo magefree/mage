@@ -1,4 +1,3 @@
-
 package mage.client.remote;
 
 import mage.cards.decks.Deck;
@@ -158,7 +157,7 @@ public class CallbackClientImpl implements CallbackClient {
                     case GAME_INIT: {
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
-                            appendJsonEvent("GAME_INIT", callback.getObjectId(), (GameView) callback.getData());
+                            appendJsonEvent("GAME_INIT", callback.getObjectId(), callback.getData());
                             panel.init((GameView) callback.getData());
                         }
                         break;
@@ -405,31 +404,34 @@ public class CallbackClientImpl implements CallbackClient {
                                 .append("<br/>Turn mousewheel up (ALT-e) - enlarge image of card the mousepointer hovers over")
                                 .append("<br/>Turn mousewheel down (ALT-s) - enlarge original/alternate image of card the mousepointer hovers over")
                                 .append("<br/><b>")
-                                .append(KeyEvent.getKeyText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_CONFIRM, 113)))
+                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentKeyControlKey(PreferencesDialog.KEY_CONTROL_CONFIRM)))
                                 .append("</b> - Confirm \"Ok\", \"Yes\" or \"Done\" button")
                                 .append("<br/><b>")
-                                .append(KeyEvent.getKeyText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_NEXT_TURN, 115)))
+                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentKeyControlKey(PreferencesDialog.KEY_CONTROL_NEXT_TURN)))
                                 .append("</b> - Skip current turn but stop on declare attackers/blockers and something on the stack")
                                 .append("<br/><b>")
-                                .append(KeyEvent.getKeyText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_END_STEP, 116)))
+                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentKeyControlKey(PreferencesDialog.KEY_CONTROL_END_STEP)))
                                 .append("</b> - Skip to next end step but stop on declare attackers/blockers and something on the stack")
                                 .append("<br/><b>")
-                                .append(KeyEvent.getKeyText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_SKIP_STEP, 117)))
+                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentKeyControlKey(PreferencesDialog.KEY_CONTROL_SKIP_STEP)))
                                 .append("</b> - Skip current turn but stop on declare attackers/blockers")
                                 .append("<br/><b>")
-                                .append(KeyEvent.getKeyText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_MAIN_STEP, 118)))
+                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentKeyControlKey(PreferencesDialog.KEY_CONTROL_MAIN_STEP)))
                                 .append("</b> - Skip to next main phase but stop on declare attackers/blockers and something on the stack")
                                 .append("<br/><b>")
-                                .append(KeyEvent.getKeyText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_YOUR_TURN, 120)))
+                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentKeyControlKey(PreferencesDialog.KEY_CONTROL_YOUR_TURN)))
                                 .append("</b> - Skip everything until your next turn")
                                 .append("<br/><b>")
-                                .append(KeyEvent.getKeyText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_PRIOR_END, 122)))
+                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentKeyControlKey(PreferencesDialog.KEY_CONTROL_PRIOR_END)))
                                 .append("</b> - Skip everything until the end step just prior to your turn")
                                 .append("<br/><b>")
-                                .append(KeyEvent.getKeyText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_CANCEL_SKIP, 114)))
+                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentKeyControlKey(PreferencesDialog.KEY_CONTROL_CANCEL_SKIP)))
                                 .append("</b> - Undo F4/F5/F7/F9/F11")
                                 .append("<br/><b>")
-                                .append(KeyEvent.getKeyText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_TOGGLE_MACRO, 119)))
+                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentKeyControlKey(PreferencesDialog.KEY_CONTROL_SWITCH_CHAT)))
+                                .append("</b> - Switth in/out to chat text field")
+                                .append("<br/><b>")
+                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentKeyControlKey(PreferencesDialog.KEY_CONTROL_TOGGLE_MACRO)))
                                 .append("</b> - Toggle recording a sequence of actions to repeat. Will not pause if interrupted and can fail if a selected card changes such as when scrying top card to bottom.")
                                 .append("<br/><b>").append(System.getProperty("os.name").contains("Mac OS X") ? "Cmd" : "Ctrl").append(" + click</b> - Hold priority while casting a spell or activating an ability")
                                 .append("<br/>").append("Type <b>/FIX</b> message in chat to fix freezed game")
