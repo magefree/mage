@@ -17,6 +17,7 @@ import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+import mage.target.TargetPlayer;
 
 import java.util.UUID;
 
@@ -39,6 +40,7 @@ public final class JaceWielderOfMysteries extends CardImpl {
 
         // +1 Target player puts the top two cards of their library into their graveyard. Draw a card.
         Ability ability = new LoyaltyAbility(new PutLibraryIntoGraveTargetEffect(2), 1);
+        ability.addTarget(new TargetPlayer());
         ability.addEffect(new DrawCardSourceControllerEffect(1));
         this.addAbility(ability);
 
