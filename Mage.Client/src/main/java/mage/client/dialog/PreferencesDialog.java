@@ -279,6 +279,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     // controls
     public static final String KEY_CONTROL_TOGGLE_MACRO = "controlToggleMacro";
+    public static final String KEY_CONTROL_SWITCH_CHAT = "controlSwitchChat";
     public static final String KEY_CONTROL_CONFIRM = "controlConfirm";
     public static final String KEY_CONTROL_CANCEL_SKIP = "controlCancelSkip";
     public static final String KEY_CONTROL_NEXT_TURN = "controlNextTurn";
@@ -568,6 +569,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         bttnResetControls = new javax.swing.JButton();
         labelToggleRecordMacro = new javax.swing.JLabel();
         keyToggleRecordMacro = new KeyBindButton(this, KEY_CONTROL_TOGGLE_MACRO);
+        labelSwitchChat = new javax.swing.JLabel();
+        keySwitchChat = new KeyBindButton(this, KEY_CONTROL_SWITCH_CHAT);
         saveButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
 
@@ -2622,6 +2625,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         keyToggleRecordMacro.setText("keyBindButton1");
 
+        labelSwitchChat.setText("Go in/out to chat");
+
+        keySwitchChat.setText("keyBindButton1");
+
         org.jdesktop.layout.GroupLayout tabControlsLayout = new org.jdesktop.layout.GroupLayout(tabControls);
         tabControls.setLayout(tabControlsLayout);
         tabControlsLayout.setHorizontalGroup(
@@ -2629,22 +2636,21 @@ public class PreferencesDialog extends javax.swing.JDialog {
                         .add(tabControlsLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                        .add(labelCancel)
+                                        .add(labelNextTurn)
+                                        .add(labelEndStep)
+                                        .add(labelMainStep)
+                                        .add(labelYourTurn)
+                                        .add(lebelSkip)
+                                        .add(labelPriorEnd)
+                                        .add(labelSkipStep)
+                                        .add(labelConfirm)
+                                        .add(labelToggleRecordMacro)
+                                        .add(bttnResetControls)
+                                        .add(labelSwitchChat))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                         .add(tabControlsLayout.createSequentialGroup()
-                                                .add(bttnResetControls)
-                                                .add(0, 0, Short.MAX_VALUE))
-                                        .add(tabControlsLayout.createSequentialGroup()
-                                                .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                                        .add(labelCancel)
-                                                        .add(labelNextTurn)
-                                                        .add(labelEndStep)
-                                                        .add(labelMainStep)
-                                                        .add(labelYourTurn)
-                                                        .add(lebelSkip)
-                                                        .add(labelPriorEnd)
-                                                        .add(labelSkipStep)
-                                                        .add(labelConfirm)
-                                                        .add(labelToggleRecordMacro))
-                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                                                 .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                                         .add(keyConfirm, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                                         .add(keyCancelSkip, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -2656,8 +2662,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
                                                         .add(keySkipStep, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                                         .add(keyEndStep, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                                         .add(keyToggleRecordMacro, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                                .add(controlsDescriptionLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)))
+                                                .add(321, 321, 321)
+                                                .add(controlsDescriptionLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE))
+                                        .add(tabControlsLayout.createSequentialGroup()
+                                                .add(keySwitchChat, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                                .add(0, 0, Short.MAX_VALUE)))
                                 .addContainerGap())
         );
         tabControlsLayout.setVerticalGroup(
@@ -2706,6 +2715,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
                                                 .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                                         .add(labelToggleRecordMacro)
                                                         .add(keyToggleRecordMacro, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                        .add(keySwitchChat, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                        .add(labelSwitchChat))
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                                 .add(bttnResetControls)
                                 .addContainerGap())
@@ -2927,6 +2940,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.keySkipStack);
         save(prefs, dialog.keyPriorEnd);
         save(prefs, dialog.keyToggleRecordMacro);
+        save(prefs, dialog.keySwitchChat);
 
         // Avatar
         if (selectedAvatarId < MIN_AVATAR_ID || selectedAvatarId > MAX_AVATAR_ID) {
@@ -3520,6 +3534,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.keySkipStack);
         load(prefs, dialog.keyPriorEnd);
         load(prefs, dialog.keyToggleRecordMacro);
+        load(prefs, dialog.keySwitchChat);
     }
 
     private static void loadSelectedAvatar(Preferences prefs) {
@@ -3728,6 +3743,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         }
     }
 
+    public static int getCurrentKeyControlKey(String key) {
+        return getCachedValue(key, getDefaultControlKey(key));
+    }
+
     private static int getDefaultControlKey(String key) {
         switch (key) {
             case KEY_CONTROL_CONFIRM:
@@ -3742,14 +3761,16 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 return KeyEvent.VK_F6;
             case KEY_CONTROL_MAIN_STEP:
                 return KeyEvent.VK_F7;
+            case KEY_CONTROL_TOGGLE_MACRO:
+                return KeyEvent.VK_F8;
             case KEY_CONTROL_YOUR_TURN:
                 return KeyEvent.VK_F9;
             case KEY_CONTROL_SKIP_STACK:
                 return KeyEvent.VK_F10;
             case KEY_CONTROL_PRIOR_END:
                 return KeyEvent.VK_F11;
-            case KEY_CONTROL_TOGGLE_MACRO:
-                return KeyEvent.VK_F8;
+            case KEY_CONTROL_SWITCH_CHAT:
+                return KeyEvent.VK_F12;
             default:
                 return 0;
         }
@@ -3897,7 +3918,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 keySkipStack,
                 keySkipStep,
                 keyYourTurn,
-                keyToggleRecordMacro
+                keyToggleRecordMacro,
+                keySwitchChat
         );
     }
 
@@ -4013,6 +4035,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private mage.client.components.KeyBindButton keyPriorEnd;
     private mage.client.components.KeyBindButton keySkipStack;
     private mage.client.components.KeyBindButton keySkipStep;
+    private mage.client.components.KeyBindButton keySwitchChat;
     private mage.client.components.KeyBindButton keyToggleRecordMacro;
     private mage.client.components.KeyBindButton keyYourTurn;
     private javax.swing.JLabel labelCancel;
@@ -4034,6 +4057,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel labelPriorEnd;
     private javax.swing.JLabel labelSkipStep;
     private javax.swing.JLabel labelStackWidth;
+    private javax.swing.JLabel labelSwitchChat;
     private javax.swing.JLabel labelToggleRecordMacro;
     private javax.swing.JLabel labelTooltipSize;
     private javax.swing.JLabel labelYourTurn;

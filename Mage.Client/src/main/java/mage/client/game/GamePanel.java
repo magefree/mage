@@ -1783,6 +1783,21 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         });
 
+        KeyStroke ks12 = getCachedKeystroke(KEY_CONTROL_SWITCH_CHAT);
+        this.getInputMap(c).put(ks12, "F12_PRESS");
+        this.getActionMap().put("F12_PRESS", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                // switch in/out to chat, must triggers in chat input too
+                //if (isUserImputActive()) return;
+                if (isChatInputActive()) {
+                    KeyboardFocusManager.getCurrentKeyboardFocusManager().clearFocusOwner();
+                } else if (!isUserImputActive()) {
+                    userChatPanel.getTxtMessageInputComponent().requestFocusInWindow();
+                }
+            }
+        });
+
         KeyStroke ksAltE = KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.ALT_MASK);
         this.getInputMap(c).put(ksAltE, "ENLARGE");
         this.getActionMap().put("ENLARGE", new AbstractAction() {
