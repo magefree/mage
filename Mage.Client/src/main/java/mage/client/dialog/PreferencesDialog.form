@@ -4375,7 +4375,7 @@
                                       </Group>
                                       <Component id="cbUseDefaultImageFolder" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="0" pref="308" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="391" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -5802,7 +5802,7 @@
                                   <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="201" max="32767" attributes="0"/>
+                          <EmptySpace pref="251" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -6033,45 +6033,42 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="labelCancel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="labelNextTurn" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="labelEndStep" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="labelMainStep" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="labelYourTurn" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lebelSkip" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="labelPriorEnd" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="labelSkipStep" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="labelConfirm" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="labelToggleRecordMacro" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="bttnResetControls" min="-2" max="-2" attributes="0"/>
-                          <Component id="labelSwitchChat" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="bttnResetControls" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="keyConfirm" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="keyCancelSkip" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="keyNextTurn" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="keySkipStack" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="keyYourTurn" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="keyMainStep" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="keyPriorEnd" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="keySkipStep" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="keyEndStep" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="keyToggleRecordMacro" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelCancel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelNextTurn" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelEndStep" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelMainStep" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelYourTurn" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lebelSkip" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelPriorEnd" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelSkipStep" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelConfirm" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelToggleRecordMacro" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelSwitchChat" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="321" max="-2" attributes="0"/>
-                              <Component id="controlsDescriptionLabel" pref="151" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="keySwitchChat" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="keyConfirm" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="keyCancelSkip" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="keyNextTurn" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="keySkipStack" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="keyYourTurn" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="keyMainStep" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="keyPriorEnd" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="keySkipStep" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="keyEndStep" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="keyToggleRecordMacro" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="keySwitchChat" min="-2" pref="100" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="controlsDescriptionLabel" pref="481" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -6080,9 +6077,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="controlsDescriptionLabel" alignment="0" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="labelConfirm" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="keyConfirm" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -6132,15 +6128,16 @@
                                   <Component id="labelToggleRecordMacro" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="keyToggleRecordMacro" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="labelSwitchChat" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="keySwitchChat" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                              <Component id="bttnResetControls" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="controlsDescriptionLabel" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="keySwitchChat" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="labelSwitchChat" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="bttnResetControls" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -6149,37 +6146,37 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="labelNextTurn">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Next Turn"/>
+                <Property name="text" type="java.lang.String" value="Next Turn:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="labelEndStep">
               <Properties>
-                <Property name="text" type="java.lang.String" value="End Step"/>
+                <Property name="text" type="java.lang.String" value="End Step:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="labelMainStep">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Main Step"/>
+                <Property name="text" type="java.lang.String" value="Main Step:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="labelYourTurn">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Your Turn"/>
+                <Property name="text" type="java.lang.String" value="Your Turn:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lebelSkip">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Skip Stack"/>
+                <Property name="text" type="java.lang.String" value="Skip Stack:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="labelPriorEnd">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Prior End"/>
+                <Property name="text" type="java.lang.String" value="Prior End:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="labelCancel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Cancel Skip"/>
+                <Property name="text" type="java.lang.String" value="Cancel Skip:"/>
               </Properties>
             </Component>
             <Component class="mage.client.components.KeyBindButton" name="keyCancelSkip">
@@ -6248,7 +6245,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="labelSkipStep">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Skip Step"/>
+                <Property name="text" type="java.lang.String" value="Skip Step:"/>
               </Properties>
             </Component>
             <Component class="mage.client.components.KeyBindButton" name="keyConfirm">
@@ -6261,12 +6258,12 @@
             </Component>
             <Component class="javax.swing.JLabel" name="labelConfirm">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Confirm"/>
+                <Property name="text" type="java.lang.String" value="Confirm:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="controlsDescriptionLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&lt;html&gt;Click on a button and press a key to change a keybind.&lt;br&gt;Space and ESC are not available, and will set the keybind to nothing.&lt;br&gt;If you are currently playing a game, the changes will not take effect until you start a new game."/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;Click on a button and press a KEY or a combination of CTRL/ALT/SHIF + KEY to change a keybind.&#xa;&lt;br&gt;&#xa;Press SPACE to clear binging.&#xa;&lt;br&gt;&#xa;Press ESC to cancel binding.&#xa;&lt;br&gt;&#xa;New changes will be applied after new game start."/>
                 <Property name="verticalAlignment" type="int" value="1"/>
               </Properties>
             </Component>
@@ -6280,7 +6277,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="labelToggleRecordMacro">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Record Macro (unsupported)"/>
+                <Property name="text" type="java.lang.String" value="Record Macro (unsupported):"/>
               </Properties>
             </Component>
             <Component class="mage.client.components.KeyBindButton" name="keyToggleRecordMacro">
@@ -6293,7 +6290,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="labelSwitchChat">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Go in/out to chat"/>
+                <Property name="text" type="java.lang.String" value="Go in/out to chat:"/>
               </Properties>
             </Component>
             <Component class="mage.client.components.KeyBindButton" name="keySwitchChat">
