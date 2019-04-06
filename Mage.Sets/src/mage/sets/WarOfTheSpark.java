@@ -40,6 +40,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Courage in Crisis", 158, Rarity.COMMON, mage.cards.c.CourageInCrisis.class));
         cards.add(new SetCardInfo("Cruel Celebrant", 188, Rarity.UNCOMMON, mage.cards.c.CruelCelebrant.class));
         cards.add(new SetCardInfo("Crush Dissent", 47, Rarity.COMMON, mage.cards.c.CrushDissent.class));
+        cards.add(new SetCardInfo("Cyclops Electromancer", 122, Rarity.UNCOMMON, mage.cards.c.CyclopsElectromancer.class));
         cards.add(new SetCardInfo("Davriel's Shadowfugue", 84, Rarity.COMMON, mage.cards.d.DavrielsShadowfugue.class));
         cards.add(new SetCardInfo("Davriel, Rogue Shadowmage", 83, Rarity.UNCOMMON, mage.cards.d.DavrielRogueShadowmage.class));
         cards.add(new SetCardInfo("Deathsprout", 189, Rarity.UNCOMMON, mage.cards.d.Deathsprout.class));
