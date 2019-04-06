@@ -124,6 +124,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 256, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 258, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Teferi, Time Raveler", 221, Rarity.RARE, mage.cards.t.TeferiTimeRaveler.class));
+        cards.add(new SetCardInfo("Tenth District Legionnaire", 222, Rarity.UNCOMMON, mage.cards.t.TenthDistrictLegionnaire.class));
         cards.add(new SetCardInfo("Teyo's Lightshield", 33, Rarity.COMMON, mage.cards.t.TeyosLightshield.class));
         cards.add(new SetCardInfo("Teyo, the Shieldmage", 32, Rarity.UNCOMMON, mage.cards.t.TeyoTheShieldmage.class));
         cards.add(new SetCardInfo("Tezzeret, Master of the Bridge", 275, Rarity.MYTHIC, mage.cards.t.TezzeretMasterOfTheBridge.class));
