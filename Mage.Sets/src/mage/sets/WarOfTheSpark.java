@@ -25,6 +25,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         this.maxCardNumberInBooster = 264;
 
         cards.add(new SetCardInfo("Ahn-Crop Invader", 113, Rarity.COMMON, mage.cards.a.AhnCropInvader.class));
+        cards.add(new SetCardInfo("Aid the Fallen", 76, Rarity.COMMON, mage.cards.a.AidTheFallen.class));
         cards.add(new SetCardInfo("Ajani's Pridemate", 4, Rarity.UNCOMMON, mage.cards.a.AjanisPridemate.class));
         cards.add(new SetCardInfo("Ajani, the Greathearted", 184, Rarity.RARE, mage.cards.a.AjaniTheGreathearted.class));
         cards.add(new SetCardInfo("Angrath's Rampage", 185, Rarity.UNCOMMON, mage.cards.a.AngrathsRampage.class));
