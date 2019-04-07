@@ -23,11 +23,6 @@ public class ManaSpentToCastWatcher extends Watcher {
         super(WatcherScope.CARD);
     }
 
-    public ManaSpentToCastWatcher(final ManaSpentToCastWatcher watcher) {
-        super(watcher);
-        this.payment = watcher.payment;
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getZone() == Zone.HAND) {
@@ -41,11 +36,6 @@ public class ManaSpentToCastWatcher extends Watcher {
                 payment = null;
             }
         }
-    }
-
-    @Override
-    public ManaSpentToCastWatcher copy() {
-        return new ManaSpentToCastWatcher(this);
     }
 
     public Mana getAndResetLastPayment() {

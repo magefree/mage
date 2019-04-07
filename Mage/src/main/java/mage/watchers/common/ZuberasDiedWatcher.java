@@ -24,16 +24,6 @@ public class ZuberasDiedWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public ZuberasDiedWatcher(final ZuberasDiedWatcher watcher) {
-        super(watcher);
-        this.zuberasDiedThisTurn = watcher.zuberasDiedThisTurn;
-    }
-
-    @Override
-    public ZuberasDiedWatcher copy() {
-        return new ZuberasDiedWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {

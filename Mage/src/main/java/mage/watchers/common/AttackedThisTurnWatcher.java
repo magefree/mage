@@ -25,12 +25,6 @@ public class AttackedThisTurnWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public AttackedThisTurnWatcher(final AttackedThisTurnWatcher watcher) {
-        super(watcher);
-        this.attackedThisTurnCreatures.addAll(watcher.attackedThisTurnCreatures);
-        this.attackedThisTurnCreaturesCounts.putAll(watcher.attackedThisTurnCreaturesCounts);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
@@ -56,11 +50,6 @@ public class AttackedThisTurnWatcher extends Watcher {
             }
         }
         return false;
-    }
-
-    @Override
-    public AttackedThisTurnWatcher copy() {
-        return new AttackedThisTurnWatcher(this);
     }
 
     @Override

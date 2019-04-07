@@ -21,9 +21,6 @@ public class CastFromHandWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public CastFromHandWatcher(final CastFromHandWatcher watcher) {
-        super(watcher);
-    }
 
     @Override
     public void watch(GameEvent event, Game game) {
@@ -58,8 +55,4 @@ public class CastFromHandWatcher extends Watcher {
         spellsCastFromHand.clear();
     }
 
-    @Override
-    public CastFromHandWatcher copy() {
-        return new CastFromHandWatcher(this);
-    }
 }

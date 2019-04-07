@@ -21,18 +21,6 @@ public class PlayerAttackedStepWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public PlayerAttackedStepWatcher(final PlayerAttackedStepWatcher watcher) {
-        super(watcher);
-        for (Map.Entry<UUID, Integer> entry : watcher.playerAttacked.entrySet()) {
-            this.playerAttacked.put(entry.getKey(), entry.getValue());
-        }
-    }
-
-    @Override
-    public PlayerAttackedStepWatcher copy() {
-        return new PlayerAttackedStepWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DECLARE_ATTACKERS_STEP_POST) {

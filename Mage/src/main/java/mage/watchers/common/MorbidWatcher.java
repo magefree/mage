@@ -17,10 +17,6 @@ public class MorbidWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public MorbidWatcher(final MorbidWatcher watcher) {
-        super(watcher);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (condition) {
@@ -32,10 +28,4 @@ public class MorbidWatcher extends Watcher {
             condition = true;
         }
     }
-
-//    @Override
-//    public MorbidWatcher copy() {
-//        return new MorbidWatcher(this);
-//    }
-
 }

@@ -15,14 +15,10 @@ import java.util.UUID;
  * @author Loki
  */
 public class BloodthirstWatcher extends Watcher {
-    public BloodthirstWatcher(UUID controllerId) {
+    public BloodthirstWatcher() {
         super(WatcherScope.PLAYER);
-        this.controllerId = controllerId;
     }
 
-    public BloodthirstWatcher(final BloodthirstWatcher watcher) {
-        super(watcher);
-    }
 
     @Override
     public void watch(GameEvent event, Game game) {

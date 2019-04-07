@@ -26,17 +26,6 @@ public class PermanentsEnteredBattlefieldWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public PermanentsEnteredBattlefieldWatcher(final PermanentsEnteredBattlefieldWatcher watcher) {
-        super(watcher);
-        this.enteringBattlefield.putAll(watcher.enteringBattlefield);
-        this.enteringBattlefieldLastTurn.putAll(watcher.enteringBattlefieldLastTurn);
-    }
-
-    @Override
-    public PermanentsEnteredBattlefieldWatcher copy() {
-        return new PermanentsEnteredBattlefieldWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {

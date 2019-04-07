@@ -23,13 +23,6 @@ public class CreatureAttackedWhichPlayerWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public CreatureAttackedWhichPlayerWatcher(final CreatureAttackedWhichPlayerWatcher watcher) {
-        super(watcher);
-        for (Entry<UUID, UUID> entry : watcher.getPlayerAttackedThisTurnByCreature.entrySet()) {
-            getPlayerAttackedThisTurnByCreature.put(entry.getKey(), entry.getValue());
-        }
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
@@ -49,10 +42,5 @@ public class CreatureAttackedWhichPlayerWatcher extends Watcher {
     @Override
     public void reset() {
         getPlayerAttackedThisTurnByCreature.clear();
-    }
-
-    @Override
-    public CreatureAttackedWhichPlayerWatcher copy() {
-        return new CreatureAttackedWhichPlayerWatcher(this);
     }
 }

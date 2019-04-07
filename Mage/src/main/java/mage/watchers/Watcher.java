@@ -1,17 +1,20 @@
 
 package mage.watchers;
 
-import java.io.Serializable;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.UUID;
+import mage.Mana;
 import mage.constants.WatcherScope;
 import mage.game.Game;
+import mage.game.turn.Step;
 import mage.game.events.GameEvent;
 import org.apache.log4j.Logger;
 
+import java.io.Serializable;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.util.*;
+
 /**
- *
  * watches for certain game events to occur and flags condition
  *
  * @author BetaSteward_at_googlemail.com
@@ -24,7 +27,6 @@ public abstract class Watcher implements Serializable {
     protected UUID sourceId;
     protected boolean condition;
     protected final WatcherScope scope;
-
 
 
     public Watcher(WatcherScope scope) {
@@ -62,8 +64,8 @@ public abstract class Watcher implements Serializable {
                 return controllerId + getBasicKey();
             case CARD:
                 return sourceId + getBasicKey();
-                default:
-                    return getBasicKey();
+            default:
+                return getBasicKey();
         }
     }
 
@@ -75,18 +77,61 @@ public abstract class Watcher implements Serializable {
         condition = false;
     }
 
-    protected String getBasicKey(){
+    protected String getBasicKey() {
         return getClass().getSimpleName();
     }
 
     public abstract void watch(GameEvent event, Game game);
 
-    public <T extends Watcher> T copy(){
+    public <T extends Watcher> T copy() {
         try {
-            Constructor<? extends Watcher> constructor = this.getClass().getDeclaredConstructor(getClass());
+            List<?> constructors = Arrays.asList(this.getClass().getConstructors());
+            if (constructors.size() > 1) {
+                logger.error(getClass().getSimpleName() + " has multiple constructors");
+                return null;
+            }
+
+            Constructor<? extends Watcher> constructor = (Constructor<? extends Watcher>) constructors.get(0);
+            if (constructor.getParameterCount() > 0) {
+                logger.error(getClass().getSimpleName() + " constructor has arguments, should be 0 and inject the parameters by setters");
+                return null;
+            }
             constructor.setAccessible(true);
-            return (T) constructor.newInstance(this);
-        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+            T watcher = (T) constructor.newInstance();
+            List<Field> allFields = new ArrayList<>();
+            allFields.addAll(Arrays.asList(getClass().getDeclaredFields()));
+            allFields.addAll(Arrays.asList(getClass().getSuperclass().getDeclaredFields()));
+            for (Field field : allFields) {
+                field.setAccessible(true);
+                if (field.getType().isPrimitive()) {
+                    field.set(watcher, field.get(this));
+                }
+                else if(field.getType() == Step.class){
+                    field.set(watcher, field.get(this));
+                }
+                else if (field.getType() == Mana.class) {
+                    field.set(watcher, field.get(this));
+                } else if (field.getType() == UUID.class) {
+                    field.set(watcher, field.get(this));
+                } else if (field.getType().isEnum()) {
+                    field.set(watcher, field.get(this));
+                } else if (field.getType() == Set.class) {
+                    ((Set) field.get(watcher)).clear();
+                    ((Set) field.get(watcher)).addAll((Set) field.get(this));
+                } else if (field.getType() == Map.class) {
+                    ((Map) field.get(watcher)).clear();
+                    ((Map) field.get(watcher)).putAll((Map) field.get(this));
+                } else if (field.getType() == List.class) {
+                    ((List) field.get(watcher)).clear();
+                    ((List) field.get(watcher)).addAll((List) field.get(this));
+                } else {
+                    if (field.getType() != Logger.class) {
+                        logger.error(field.getType() + " can not be copied");
+                    }
+                }
+            }
+            return watcher;
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
             logger.error("Can't copy watcher: " + e.getMessage(), e);
         }
         return null;

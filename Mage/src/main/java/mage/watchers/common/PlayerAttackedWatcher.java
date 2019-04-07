@@ -24,19 +24,6 @@ public class PlayerAttackedWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public PlayerAttackedWatcher(final PlayerAttackedWatcher watcher) {
-        super(watcher);
-        for (Map.Entry<UUID, Integer> entry : watcher.playerAttacked.entrySet()) {
-            this.playerAttacked.put(entry.getKey(), entry.getValue());
-
-        }
-    }
-
-    @Override
-    public PlayerAttackedWatcher copy() {
-        return new PlayerAttackedWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {

@@ -21,11 +21,6 @@ public class BlockedByOnlyOneCreatureThisCombatWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public BlockedByOnlyOneCreatureThisCombatWatcher(final BlockedByOnlyOneCreatureThisCombatWatcher watcher) {
-        super(watcher);
-        this.blockedByOneCreature.putAll(watcher.blockedByOneCreature);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.BEGIN_COMBAT_STEP_PRE) {
@@ -64,8 +59,4 @@ public class BlockedByOnlyOneCreatureThisCombatWatcher extends Watcher {
         return null;
     }
 
-    @Override
-    public BlockedByOnlyOneCreatureThisCombatWatcher copy() {
-        return new BlockedByOnlyOneCreatureThisCombatWatcher(this);
-    }
 }

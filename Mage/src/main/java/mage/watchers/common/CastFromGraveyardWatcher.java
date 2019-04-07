@@ -23,10 +23,6 @@ public class CastFromGraveyardWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public CastFromGraveyardWatcher(final CastFromGraveyardWatcher watcher) {
-        super(watcher);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         /**
@@ -54,10 +50,5 @@ public class CastFromGraveyardWatcher extends Watcher {
     public void reset() {
         super.reset();
         spellsCastFromGraveyard.clear();
-    }
-
-    @Override
-    public CastFromGraveyardWatcher copy() {
-        return new CastFromGraveyardWatcher(this);
     }
 }

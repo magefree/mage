@@ -22,11 +22,6 @@ public class GravestormWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public GravestormWatcher(final GravestormWatcher watcher) {
-        super(watcher);
-        this.gravestormCount = watcher.gravestormCount;
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.ZONE_CHANGE) {
@@ -45,10 +40,5 @@ public class GravestormWatcher extends Watcher {
 
     public int getGravestormCount() {
         return this.gravestormCount;
-    }
-
-    @Override
-    public GravestormWatcher copy() {
-        return new GravestormWatcher(this);
     }
 }

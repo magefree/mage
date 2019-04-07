@@ -20,16 +20,9 @@ public class PlayerDamagedBySourceWatcher extends Watcher {
 
     private final Set<String> damageSourceIds = new HashSet<>();
 
-    public PlayerDamagedBySourceWatcher(UUID playerId) {
+    public PlayerDamagedBySourceWatcher() {
         super(WatcherScope.PLAYER);
-        setControllerId(playerId);
     }
-
-    public PlayerDamagedBySourceWatcher(final PlayerDamagedBySourceWatcher watcher) {
-        super(watcher);
-        this.damageSourceIds.addAll(watcher.damageSourceIds);
-    }
-
 
     @Override
     public void watch(GameEvent event, Game game) {

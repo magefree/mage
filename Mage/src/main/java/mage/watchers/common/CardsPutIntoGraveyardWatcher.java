@@ -32,14 +32,6 @@ public class CardsPutIntoGraveyardWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public CardsPutIntoGraveyardWatcher(final CardsPutIntoGraveyardWatcher watcher) {
-        super(watcher);
-        for (Entry<UUID, Integer> entry : watcher.amountOfCardsThisTurn.entrySet()) {
-            amountOfCardsThisTurn.put(entry.getKey(), entry.getValue());
-        }
-        this.cardsPutToGraveyardFromBattlefield.addAll(watcher.cardsPutToGraveyardFromBattlefield);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.UNTAP_STEP_PRE) {
@@ -73,8 +65,4 @@ public class CardsPutIntoGraveyardWatcher extends Watcher {
         cardsPutToGraveyardFromBattlefield.clear();
     }
 
-    @Override
-    public CardsPutIntoGraveyardWatcher copy() {
-        return new CardsPutIntoGraveyardWatcher(this);
-    }
 }

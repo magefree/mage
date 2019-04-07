@@ -32,13 +32,6 @@ public class MiracleWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public MiracleWatcher(final MiracleWatcher watcher) {
-        super(watcher);
-        for (Entry<UUID, Integer> entry : watcher.amountOfCardsDrawnThisTurn.entrySet()) {
-            amountOfCardsDrawnThisTurn.put(entry.getKey(), entry.getValue());
-        }
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.UNTAP_STEP_PRE) {
@@ -81,10 +74,5 @@ public class MiracleWatcher extends Watcher {
     @Override
     public void reset() {
         amountOfCardsDrawnThisTurn.clear();
-    }
-
-    @Override
-    public MiracleWatcher copy() {
-        return new MiracleWatcher(this);
     }
 }

@@ -22,12 +22,6 @@ public class CreaturesDiedWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public CreaturesDiedWatcher(final CreaturesDiedWatcher watcher) {
-        super(watcher);
-        this.amountOfCreaturesThatDiedByController.putAll(watcher.amountOfCreaturesThatDiedByController);
-        this.amountOfCreaturesThatDiedByOwner.putAll(watcher.amountOfCreaturesThatDiedByOwner);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
@@ -55,11 +49,6 @@ public class CreaturesDiedWatcher extends Watcher {
 
     public int getAmountOfCreaturesDiedThisTurnByOwner(UUID playerId) {
         return amountOfCreaturesThatDiedByOwner.getOrDefault(playerId, 0);
-    }
-
-    @Override
-    public CreaturesDiedWatcher copy() {
-        return new CreaturesDiedWatcher(this);
     }
 
     public int getAmountOfCreaturesDiedThisTurn() {
