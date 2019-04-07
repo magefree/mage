@@ -23,16 +23,6 @@ public class WasBlockedThisTurnWatcher extends Watcher {
         wasBlockedThisTurnCreatures = new HashSet<>();
     }
 
-    private WasBlockedThisTurnWatcher(final WasBlockedThisTurnWatcher watcher) {
-        super(watcher);
-        wasBlockedThisTurnCreatures = new HashSet<>(watcher.wasBlockedThisTurnCreatures);
-    }
-
-    @Override
-    public Watcher copy() {
-        return new WasBlockedThisTurnWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {

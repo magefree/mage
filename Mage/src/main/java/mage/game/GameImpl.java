@@ -1025,8 +1025,14 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     public void initPlayerDefaultWatchers(UUID playerId) {
-        getState().addWatcher(new PlayerDamagedBySourceWatcher(playerId));
-        getState().addWatcher(new BloodthirstWatcher(playerId));
+        PlayerDamagedBySourceWatcher playerDamagedBySourceWatcher = new PlayerDamagedBySourceWatcher();
+        playerDamagedBySourceWatcher.setControllerId(playerId);
+
+        getState().addWatcher(playerDamagedBySourceWatcher);
+
+        BloodthirstWatcher bloodthirstWatcher = new BloodthirstWatcher();
+        bloodthirstWatcher.setControllerId(playerId);
+        getState().addWatcher(bloodthirstWatcher);
     }
 
     protected void sendStartMessage(Player choosingPlayer, Player startingPlayer) {

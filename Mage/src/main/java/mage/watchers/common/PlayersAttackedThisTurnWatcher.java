@@ -23,19 +23,6 @@ public class PlayersAttackedThisTurnWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public PlayersAttackedThisTurnWatcher(final PlayersAttackedThisTurnWatcher watcher) {
-        super(watcher);
-
-        for (Map.Entry<UUID, PlayerList> entry : watcher.playersAttackedThisTurn.entrySet()) {
-            this.playersAttackedThisTurn.putIfAbsent(entry.getKey(), entry.getValue());
-        }
-
-        for (Map.Entry<UUID, PlayerList> entry : watcher.opponentsAttackedThisTurn.entrySet()) {
-            this.opponentsAttackedThisTurn.putIfAbsent(entry.getKey(), entry.getValue());
-        }
-    }
-
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.BEGINNING_PHASE_PRE) {

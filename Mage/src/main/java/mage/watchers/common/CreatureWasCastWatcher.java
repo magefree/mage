@@ -25,10 +25,6 @@ public class CreatureWasCastWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public CreatureWasCastWatcher(final CreatureWasCastWatcher watcher) {
-        super(watcher);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
@@ -57,10 +53,5 @@ public class CreatureWasCastWatcher extends Watcher {
     public void reset() {
         super.reset();
         creaturesCasted.clear();
-    }
-
-    @Override
-    public CreatureWasCastWatcher copy() {
-        return new CreatureWasCastWatcher(this);
     }
 }

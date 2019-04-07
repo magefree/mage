@@ -25,10 +25,6 @@ public class CardsAmountDrawnThisTurnWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public CardsAmountDrawnThisTurnWatcher(final CardsAmountDrawnThisTurnWatcher watcher) {
-        super(watcher);
-        amountOfCardsDrawnThisTurn.putAll(watcher.amountOfCardsDrawnThisTurn);
-    }
 
     @Override
     public void watch(GameEvent event, Game game) {
@@ -60,10 +56,5 @@ public class CardsAmountDrawnThisTurnWatcher extends Watcher {
 
     public int getAmountCardsDrawn(UUID playerId) {
         return amountOfCardsDrawnThisTurn.getOrDefault(playerId, 0);
-    }
-
-    @Override
-    public CardsAmountDrawnThisTurnWatcher copy() {
-        return new CardsAmountDrawnThisTurnWatcher(this);
     }
 }

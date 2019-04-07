@@ -27,17 +27,6 @@ public class PermanentsEnteredBattlefieldYourLastTurnWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public PermanentsEnteredBattlefieldYourLastTurnWatcher(final PermanentsEnteredBattlefieldYourLastTurnWatcher watcher) {
-        super(watcher);
-        this.enteringBattlefield.putAll(watcher.enteringBattlefield);
-        this.enteringBattlefieldLastTurn.putAll(watcher.enteringBattlefieldLastTurn);
-    }
-
-    @Override
-    public PermanentsEnteredBattlefieldYourLastTurnWatcher copy() {
-        return new PermanentsEnteredBattlefieldYourLastTurnWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         lastActivePlayer = game.getActivePlayerId();

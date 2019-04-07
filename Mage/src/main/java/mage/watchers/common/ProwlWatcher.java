@@ -29,18 +29,6 @@ public class ProwlWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    private ProwlWatcher(final ProwlWatcher watcher) {
-        super(watcher);
-        for (Entry<UUID, Set<SubType>> entry : watcher.damagingSubtypes.entrySet()) {
-            damagingSubtypes.put(entry.getKey(), entry.getValue());
-        }
-    }
-
-    @Override
-    public ProwlWatcher copy() {
-        return new ProwlWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.DAMAGED_PLAYER) {

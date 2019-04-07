@@ -26,13 +26,6 @@ public class PlayerLostLifeWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public PlayerLostLifeWatcher(final PlayerLostLifeWatcher watcher) {
-        super(watcher);
-        for (Entry<UUID, Integer> entry : watcher.amountOfLifeLostThisTurn.entrySet()) {
-            amountOfLifeLostThisTurn.put(entry.getKey(), entry.getValue());
-        }
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.LOST_LIFE) {
@@ -74,9 +67,4 @@ public class PlayerLostLifeWatcher extends Watcher {
         amountOfLifeLostLastTurn.putAll(amountOfLifeLostThisTurn);
         amountOfLifeLostThisTurn.clear();
     }
-
-//    @Override
-//    public PlayerLostLifeWatcher copy() {
-//        return new PlayerLostLifeWatcher(this);
-//    }
 }

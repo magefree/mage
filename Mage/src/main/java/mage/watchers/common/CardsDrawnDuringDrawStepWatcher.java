@@ -27,13 +27,6 @@ public class CardsDrawnDuringDrawStepWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public CardsDrawnDuringDrawStepWatcher(final CardsDrawnDuringDrawStepWatcher watcher) {
-        super(watcher);
-        for (Entry<UUID, Integer> entry : watcher.amountOfCardsDrawnThisTurn.entrySet()) {
-            amountOfCardsDrawnThisTurn.put(entry.getKey(), entry.getValue());
-        }
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DREW_CARD
@@ -57,8 +50,4 @@ public class CardsDrawnDuringDrawStepWatcher extends Watcher {
         amountOfCardsDrawnThisTurn.clear();
     }
 
-    @Override
-    public CardsDrawnDuringDrawStepWatcher copy() {
-        return new CardsDrawnDuringDrawStepWatcher(this);
-    }
 }

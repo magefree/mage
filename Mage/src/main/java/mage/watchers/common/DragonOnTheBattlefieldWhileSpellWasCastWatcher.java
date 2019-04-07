@@ -29,11 +29,6 @@ public class DragonOnTheBattlefieldWhileSpellWasCastWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public DragonOnTheBattlefieldWhileSpellWasCastWatcher(final DragonOnTheBattlefieldWhileSpellWasCastWatcher watcher) {
-        super(watcher);
-        this.castWithDragonOnTheBattlefield.addAll(watcher.castWithDragonOnTheBattlefield);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
@@ -66,10 +61,5 @@ public class DragonOnTheBattlefieldWhileSpellWasCastWatcher extends Watcher {
 
     public boolean castWithConditionTrue(UUID spellId) {
         return castWithDragonOnTheBattlefield.contains(spellId);
-    }
-
-    @Override
-    public DragonOnTheBattlefieldWhileSpellWasCastWatcher copy() {
-        return new DragonOnTheBattlefieldWhileSpellWasCastWatcher(this);
     }
 }

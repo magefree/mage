@@ -23,17 +23,6 @@ public class CastSpellLastTurnWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public CastSpellLastTurnWatcher(final CastSpellLastTurnWatcher watcher) {
-        super(watcher);
-        for (Entry<UUID, Integer> entry : watcher.amountOfSpellsCastOnCurrentTurn.entrySet()) {
-            amountOfSpellsCastOnCurrentTurn.put(entry.getKey(), entry.getValue());
-        }
-        for (Entry<UUID, Integer> entry : watcher.amountOfSpellsCastOnPrevTurn.entrySet()) {
-            amountOfSpellsCastOnPrevTurn.put(entry.getKey(), entry.getValue());
-        }
-        this.spellsCastThisTurnInOrder.addAll(watcher.spellsCastThisTurnInOrder);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
@@ -81,10 +70,4 @@ public class CastSpellLastTurnWatcher extends Watcher {
         }
         return 0;
     }
-//
-//    @Override
-//    public CastSpellLastTurnWatcher copy() {
-//        return new CastSpellLastTurnWatcher(this);
-//    }
-
 }

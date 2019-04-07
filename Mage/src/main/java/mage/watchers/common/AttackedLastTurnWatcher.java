@@ -27,18 +27,6 @@ public class AttackedLastTurnWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public AttackedLastTurnWatcher(final AttackedLastTurnWatcher watcher) {
-        super(watcher);
-        for (Entry<UUID, Set<MageObjectReference>> entry : watcher.attackedLastTurnCreatures.entrySet()) {
-            Set<MageObjectReference> allAttackersCopy = new HashSet<>(entry.getValue());
-            attackedLastTurnCreatures.put(entry.getKey(), allAttackersCopy);
-        }
-        for (Entry<UUID, Set<MageObjectReference>> entry : watcher.attackedThisTurnCreatures.entrySet()) {
-            Set<MageObjectReference> allAttackersCopy = new HashSet<>(entry.getValue());
-            attackedThisTurnCreatures.put(entry.getKey(), allAttackersCopy);
-        }
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.BEGINNING_PHASE_PRE) {
@@ -77,11 +65,6 @@ public class AttackedLastTurnWatcher extends Watcher {
             return attackedThisTurnCreatures.get(combatPlayerId);
         }
         return new HashSet<>();
-    }
-
-    @Override
-    public AttackedLastTurnWatcher copy() {
-        return new AttackedLastTurnWatcher(this);
     }
 
 }

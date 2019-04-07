@@ -20,21 +20,10 @@ public class ChooseBlockersRedundancyWatcher extends Watcher { // workaround for
         super(WatcherScope.GAME);
     }
 
-    public ChooseBlockersRedundancyWatcher(final ChooseBlockersRedundancyWatcher watcher) {
-        super(watcher);
-        this.copyCount = watcher.copyCount;
-        this.copyCountApply = watcher.copyCountApply;
-    }
-
     @Override
     public void reset() {
         copyCount = 0;
         copyCountApply = 0;
-    }
-
-    @Override
-    public ChooseBlockersRedundancyWatcher copy() {
-        return new ChooseBlockersRedundancyWatcher(this);
     }
 
     @Override
