@@ -64,7 +64,7 @@ public final class NahiriStormOfStone extends CardImpl {
         this.addAbility(ability);
 
         // -X: Nahiri, Storm of Stone deals X damage to target tapped creature.
-        ability = new LoyaltyAbility(new DamageTargetEffect(NahiriStormOfStoneValue.instance));
+        ability = new LoyaltyAbility(new DamageTargetEffect(NahiriStormOfStoneValue.instance).setText("{this} deals X damage to target tapped creature."));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
