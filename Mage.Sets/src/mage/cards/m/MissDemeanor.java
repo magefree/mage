@@ -23,9 +23,9 @@ import mage.players.Player;
  *
  * @author Ketsuban
  */
-public final class MissDemeanour extends CardImpl {
+public final class MissDemeanor extends CardImpl {
 
-    public MissDemeanour(UUID ownerId, CardSetInfo setInfo) {
+    public MissDemeanor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
         
         this.subtype.add(SubType.LADYOFPROPERETIQUETTE);
@@ -39,33 +39,33 @@ public final class MissDemeanour extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // At the beginning of each other player's upkeep, you may compliment that player on their game play. If you don't, sacrifice Miss Demeanour.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new MissDemeanourEffect(), TargetController.NOT_YOU, false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new MissDemeanorEffect(), TargetController.NOT_YOU, false, true));
     }
 
-    public MissDemeanour(final MissDemeanour card) {
+    public MissDemeanor(final MissDemeanor card) {
         super(card);
     }
 
     @Override
-    public MissDemeanour copy() {
-        return new MissDemeanour(this);
+    public MissDemeanor copy() {
+        return new MissDemeanor(this);
     }
 }
 
-class MissDemeanourEffect extends OneShotEffect {
+class MissDemeanorEffect extends OneShotEffect {
 
-    public MissDemeanourEffect() {
+    public MissDemeanorEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "you may compliment that player on their game play. If you don't, sacrifice {this}";
     }
 
-    public MissDemeanourEffect(final MissDemeanourEffect effect) {
+    public MissDemeanorEffect(final MissDemeanorEffect effect) {
         super(effect);
     }
 
     @Override
-    public MissDemeanourEffect copy() {
-        return new MissDemeanourEffect(this);
+    public MissDemeanorEffect copy() {
+        return new MissDemeanorEffect(this);
     }
 
     @Override
