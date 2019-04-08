@@ -98,7 +98,12 @@ enum NahiriStormOfStoneValue implements DynamicValue {
     }
 
     @Override
-    public String getMessage() {
+    public String toString() {
         return "X";
+    }
+
+    @Override
+    public String getMessage() {
+        return "";
     }
 }
