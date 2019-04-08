@@ -5,7 +5,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
 
 import java.util.UUID;
@@ -25,7 +24,7 @@ public final class RavnicaAtWar extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}");
 
         // Exile all multicolored permanents.
-        this.getSpellAbility().addEffect(new ExileAllEffect(StaticFilters.FILTER_PERMANENT));
+        this.getSpellAbility().addEffect(new ExileAllEffect(filter));
     }
 
     private RavnicaAtWar(final RavnicaAtWar card) {
