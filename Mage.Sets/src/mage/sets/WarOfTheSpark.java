@@ -46,6 +46,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Davriel, Rogue Shadowmage", 83, Rarity.UNCOMMON, mage.cards.d.DavrielRogueShadowmage.class));
         cards.add(new SetCardInfo("Deathsprout", 189, Rarity.UNCOMMON, mage.cards.d.Deathsprout.class));
         cards.add(new SetCardInfo("Defiant Strike", 9, Rarity.COMMON, mage.cards.d.DefiantStrike.class));
+        cards.add(new SetCardInfo("Demolish", 123, Rarity.COMMON, mage.cards.d.Demolish.class));
         cards.add(new SetCardInfo("Devouring Hellion", 124, Rarity.UNCOMMON, mage.cards.d.DevouringHellion.class));
         cards.add(new SetCardInfo("Dovin's Veto", 193, Rarity.UNCOMMON, mage.cards.d.DovinsVeto.class));
         cards.add(new SetCardInfo("Dreadhorde Arcanist", 125, Rarity.RARE, mage.cards.d.DreadhordeArcanist.class));
@@ -54,7 +55,9 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Emergence Zone", 245, Rarity.UNCOMMON, mage.cards.e.EmergenceZone.class));
         cards.add(new SetCardInfo("Erratic Visionary", 48, Rarity.COMMON, mage.cards.e.ErraticVisionary.class));
         cards.add(new SetCardInfo("Eternal Taskmaster", 90, Rarity.UNCOMMON, mage.cards.e.EternalTaskmaster.class));
+        cards.add(new SetCardInfo("Evolution Sage", 159, Rarity.UNCOMMON, mage.cards.e.EvolutionSage.class));
         cards.add(new SetCardInfo("Flux Channeler", 52, Rarity.UNCOMMON, mage.cards.f.FluxChanneler.class));
+        cards.add(new SetCardInfo("Forced Landing", 161, Rarity.COMMON, mage.cards.f.ForcedLanding.class));
         cards.add(new SetCardInfo("Forest", 262, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 264, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Giant Growth", 162, Rarity.COMMON, mage.cards.g.GiantGrowth.class));
@@ -117,13 +120,16 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Role Reversal", 214, Rarity.RARE, mage.cards.r.RoleReversal.class));
         cards.add(new SetCardInfo("Samut's Sprint", 142, Rarity.COMMON, mage.cards.s.SamutsSprint.class));
         cards.add(new SetCardInfo("Samut, Tyrant Smasher", 235, Rarity.UNCOMMON, mage.cards.s.SamutTyrantSmasher.class));
+        cards.add(new SetCardInfo("Shriekdiver", 103, Rarity.COMMON, mage.cards.s.Shriekdiver.class));
         cards.add(new SetCardInfo("Single Combat", 30, Rarity.RARE, mage.cards.s.SingleCombat.class));
         cards.add(new SetCardInfo("Sorin's Thirst", 104, Rarity.COMMON, mage.cards.s.SorinsThirst.class));
         cards.add(new SetCardInfo("Sorin, Vengeful Bloodlord", 217, Rarity.RARE, mage.cards.s.SorinVengefulBloodlord.class));
         cards.add(new SetCardInfo("Spellgorger Weird", 145, Rarity.COMMON, mage.cards.s.SpellgorgerWeird.class));
         cards.add(new SetCardInfo("Spellkeeper Weird", 69, Rarity.COMMON, mage.cards.s.SpellkeeperWeird.class));
+        cards.add(new SetCardInfo("Steady Aim", 177, Rarity.COMMON, mage.cards.s.SteadyAim.class));
         cards.add(new SetCardInfo("Stealth Mission", 70, Rarity.COMMON, mage.cards.s.StealthMission.class));
         cards.add(new SetCardInfo("Storrev, Devkarin Lich", 219, Rarity.RARE, mage.cards.s.StorrevDevkarinLich.class));
+        cards.add(new SetCardInfo("Sunblade Angel", 31, Rarity.UNCOMMON, mage.cards.s.SunbladeAngel.class));
         cards.add(new SetCardInfo("Swamp", 256, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 258, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Teferi, Time Raveler", 221, Rarity.RARE, mage.cards.t.TeferiTimeRaveler.class));
