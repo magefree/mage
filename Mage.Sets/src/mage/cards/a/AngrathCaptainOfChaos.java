@@ -35,7 +35,7 @@ public final class AngrathCaptainOfChaos extends CardImpl {
         )));
 
         // -2: Amass 2.
-        this.addAbility(new LoyaltyAbility(new AmassEffect(2)));
+        this.addAbility(new LoyaltyAbility(new AmassEffect(2), -2));
     }
 
     private AngrathCaptainOfChaos(final AngrathCaptainOfChaos card) {
