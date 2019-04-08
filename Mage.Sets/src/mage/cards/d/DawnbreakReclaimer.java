@@ -19,10 +19,11 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.other.OwnerIdPredicate;
+import mage.filter.predicate.other.OwnerPredicate;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.TargetCard;
 import mage.target.common.TargetCardInGraveyard;
-import mage.target.common.TargetCardInOpponentsGraveyard;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -30,7 +31,7 @@ import mage.target.common.TargetOpponent;
  * @author LevelX2
  */
 public final class DawnbreakReclaimer extends CardImpl {
-    
+
     public DawnbreakReclaimer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
         this.subtype.add(SubType.ANGEL);
@@ -43,11 +44,11 @@ public final class DawnbreakReclaimer extends CardImpl {
         // You may return those cards to the battlefield under their owners' control.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new DawnbreakReclaimerEffect(), TargetController.YOU, false));
     }
-    
+
     public DawnbreakReclaimer(final DawnbreakReclaimer card) {
         super(card);
     }
-    
+
     @Override
     public DawnbreakReclaimer copy() {
         return new DawnbreakReclaimer(this);
@@ -55,21 +56,21 @@ public final class DawnbreakReclaimer extends CardImpl {
 }
 
 class DawnbreakReclaimerEffect extends OneShotEffect {
-    
+
     public DawnbreakReclaimerEffect() {
         super(Outcome.Detriment);
         this.staticText = "choose a creature card in an opponent's graveyard, then that player chooses a creature card in your graveyard. You may return those cards to the battlefield under their owners' control";
     }
-    
+
     public DawnbreakReclaimerEffect(final DawnbreakReclaimerEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public DawnbreakReclaimerEffect copy() {
         return new DawnbreakReclaimerEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         /**
@@ -86,41 +87,55 @@ class DawnbreakReclaimerEffect extends OneShotEffect {
          */
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null) {
-            TargetCardInOpponentsGraveyard targetOpponentGraveyard = new TargetCardInOpponentsGraveyard(new FilterCreatureCard("a creature card in an opponent's graveyard"));
-            targetOpponentGraveyard.setNotTarget(true);
+        if (controller != null
+                && sourceObject != null) {
+            FilterCreatureCard filter = new FilterCreatureCard("a creature card in an opponent's graveyard");
+            filter.add(new OwnerPredicate(TargetController.OPPONENT));
+            TargetCard chosenCreatureOpponentGraveyard = new TargetCard(Zone.GRAVEYARD, filter);
             Player opponent = null;
             Card cardOpponentGraveyard = null;
-            targetOpponentGraveyard.setNotTarget(true);
-            if (targetOpponentGraveyard.canChoose(source.getSourceId(), source.getControllerId(), game)) {
-                controller.choose(Outcome.Detriment, targetOpponentGraveyard, source.getSourceId(), game);
-                cardOpponentGraveyard = game.getCard(targetOpponentGraveyard.getFirstTarget());
+            chosenCreatureOpponentGraveyard.setNotTarget(true);
+            if (chosenCreatureOpponentGraveyard.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+                controller.choose(Outcome.Detriment, chosenCreatureOpponentGraveyard, source.getSourceId(), game);
+                cardOpponentGraveyard = game.getCard(chosenCreatureOpponentGraveyard.getFirstTarget());
                 if (cardOpponentGraveyard != null) {
                     opponent = game.getPlayer(cardOpponentGraveyard.getOwnerId());
-                    game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " has chosen " + cardOpponentGraveyard.getIdName() + " of " + opponent.getLogName());
+                    game.informPlayers(sourceObject.getLogName() 
+                            + ": " + controller.getLogName() 
+                            + " has chosen " 
+                            + cardOpponentGraveyard.getIdName() 
+                            + " of " + opponent.getLogName());
                 }
             }
             if (opponent == null) {
                 // if no card from opponent was available controller has to chose an opponent to select a creature card in controllers graveyard
                 TargetOpponent targetOpponent = new TargetOpponent(true);
-                targetOpponent.setNotTarget(true);
                 controller.choose(outcome, targetOpponent, source.getSourceId(), game);
                 opponent = game.getPlayer(targetOpponent.getFirstTarget());
                 if (opponent != null) {
-                    game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " has chosen " + opponent.getLogName() + " to select a creature card from their graveyard");
+                    game.informPlayers(sourceObject.getLogName() 
+                            + ": " + controller.getLogName() 
+                            + " has chosen " 
+                            + opponent.getLogName() 
+                            + " to select a creature card from their graveyard");
                 }
             }
             if (opponent != null) {
-                FilterCreatureCard filter = new FilterCreatureCard("a creature card in " + controller.getName() + "'s the graveyard");
-                filter.add(new OwnerIdPredicate(controller.getId()));
-                TargetCardInGraveyard targetControllerGaveyard = new TargetCardInGraveyard(filter);
+                FilterCreatureCard filterCreatureCard = 
+                        new FilterCreatureCard("a creature card in " + controller.getName() + "'s the graveyard");
+                filterCreatureCard.add(new OwnerIdPredicate(controller.getId()));
+                TargetCardInGraveyard targetControllerGaveyard = new TargetCardInGraveyard(filterCreatureCard);
                 targetControllerGaveyard.setNotTarget(true);
                 Card controllerCreatureCard = null;
                 if (targetControllerGaveyard.canChoose(source.getSourceId(), opponent.getId(), game)
                         && opponent.choose(outcome, targetControllerGaveyard, source.getSourceId(), game)) {
                     controllerCreatureCard = game.getCard(targetControllerGaveyard.getFirstTarget());
                     if (controllerCreatureCard != null) {
-                        game.informPlayers(sourceObject.getLogName() + ": " + opponent.getLogName() + " has chosen " + controllerCreatureCard.getIdName() + " of " + controller.getLogName());
+                        game.informPlayers(sourceObject.getLogName() 
+                                + ": " + opponent.getLogName() 
+                                + " has chosen " 
+                                + controllerCreatureCard.getIdName() 
+                                + " of " + controller.getLogName());
                     }
                 }
                 Set<Card> cards = new HashSet<>();
@@ -134,7 +149,11 @@ class DawnbreakReclaimerEffect extends OneShotEffect {
                     if (controller.chooseUse(
                             outcome,
                             "Return those cards to the battlefield under their owners' control?",
-                            "Opponent's creature card: " + (cardOpponentGraveyard == null ? "none" : cardOpponentGraveyard.getLogName()) + ", your creature card: " + (controllerCreatureCard == null ? "none" : controllerCreatureCard.getLogName()),
+                            "Opponent's creature card: " 
+                                    + (cardOpponentGraveyard == null 
+                                            ? "none" : cardOpponentGraveyard.getLogName()) 
+                                    + ", your creature card: " + (controllerCreatureCard == null 
+                                            ? "none" : controllerCreatureCard.getLogName()),
                             null,
                             null,
                             source,
@@ -143,10 +162,10 @@ class DawnbreakReclaimerEffect extends OneShotEffect {
                     }
                 }
             }
-            
+
             return true;
         }
         return false;
-        
+
     }
 }
