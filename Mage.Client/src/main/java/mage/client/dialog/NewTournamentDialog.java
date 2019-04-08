@@ -31,6 +31,7 @@ import java.awt.*;
 import java.io.File;
 import java.util.List;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com, JayDi85
@@ -663,6 +664,15 @@ public class NewTournamentDialog extends MageDialog {
         // get settings
         TournamentOptions tOptions = getTournamentOptions();
 
+        // CHECKS
+        TournamentTypeView tournamentType = (TournamentTypeView) cbTournamentType.getSelectedItem();
+        if (tournamentType.isRandom() || tournamentType.isRichMan()) {
+            if (tOptions.getLimitedOptions().getSetCodes().isEmpty()) {
+                JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Warning, you must select packs for the pool", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+
         // save last settings
         onSaveSettings(0, tOptions);
 
@@ -930,20 +940,20 @@ public class NewTournamentDialog extends MageDialog {
             txtRandomPacks = new JTextArea();
             txtRandomPacks.setEnabled(false);
             txtRandomPacks.setLineWrap(true);
+
+            ArrayList<String> packList;
+            String packNames;
             String randomPrefs = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_RANDOM_DRAFT, "");
             if (!randomPrefs.isEmpty()) {
-                txtRandomPacks.setText(randomPrefs);
-                ArrayList<String> theList = new ArrayList<>(Arrays.asList(randomPrefs.split(";")));
-                randomPackSelector.setSelectedPacks(theList);
+                packList = new ArrayList<>(Arrays.asList(randomPrefs.split(";")));
+                packNames = randomPrefs;
             } else {
                 ExpansionInfo[] allExpansions = ExpansionRepository.instance.getWithBoostersSortedByReleaseDate();
-                StringBuilder packList = new StringBuilder();
-                for (ExpansionInfo exp : allExpansions) {
-                    packList.append(exp.getCode());
-                    packList.append(';');
-                }
-                txtRandomPacks.setText(packList.toString());
+                packList = Arrays.stream(allExpansions).map(ExpansionInfo::getCode).collect(Collectors.toCollection(ArrayList::new));
+                packNames = Arrays.stream(allExpansions).map(ExpansionInfo::getCode).collect(Collectors.joining(";"));
             }
+            randomPackSelector.setSelectedPacks(packList);
+            txtRandomPacks.setText(packNames);
             txtRandomPacks.setAlignmentX(Component.LEFT_ALIGNMENT);
             pnlRandomPacks.add(txtRandomPacks);
             JButton btnSelectRandomPacks = new JButton();
@@ -953,6 +963,7 @@ public class NewTournamentDialog extends MageDialog {
             btnSelectRandomPacks.addActionListener(evt -> showRandomPackSelectorDialog());
             pnlRandomPacks.add(btnSelectRandomPacks);
         }
+        txtRandomPacks.setText(txtRandomPacks.getText()); // workaround to apply field's auto-size
         this.pack();
         this.revalidate();
         this.repaint();
@@ -961,12 +972,7 @@ public class NewTournamentDialog extends MageDialog {
     private void showRandomPackSelectorDialog() {
         randomPackSelector.setType(isRandom, isRichMan);
         randomPackSelector.showDialog();
-        StringBuilder packList = new StringBuilder();
-        for (String str : randomPackSelector.getSelectedPacks()) {
-            packList.append(str);
-            packList.append(';');
-        }
-        this.txtRandomPacks.setText(packList.toString());
+        this.txtRandomPacks.setText(String.join(";", randomPackSelector.getSelectedPacks()));
         this.pack();
         this.revalidate();
         this.repaint();
