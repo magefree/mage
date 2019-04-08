@@ -31,6 +31,7 @@ public final class TibaltsRager extends CardImpl {
         // When Tibalt's Rager dies, it deals 1 damage to any target.
         Ability ability = new DiesTriggeredAbility(new DamageTargetEffect(1, "it"));
         ability.addTarget(new TargetAnyTarget());
+        this.addAbility(ability);
 
         // {1}{R}: Tibalt's Rager gets +2/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
