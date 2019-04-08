@@ -656,7 +656,7 @@ public class NewTournamentDialog extends MageDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbTournamentTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTournamentTypeActionPerformed
-        setTournamentOptions((Integer) this.spnNumPlayers.getValue());
+        prepareTourneyView((Integer) this.spnNumPlayers.getValue());
     }//GEN-LAST:event_cbTournamentTypeActionPerformed
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
@@ -847,19 +847,25 @@ public class NewTournamentDialog extends MageDialog {
         createPlayers((Integer) spnNumPlayers.getValue() - 1);
     }
 
-    private void setTournamentOptions(int numPlayers) {
+    private void prepareTourneyView(int numPlayers) {
         TournamentTypeView tournamentType = (TournamentTypeView) cbTournamentType.getSelectedItem();
         activatePanelElements(tournamentType);
 
+        // players
         if (numPlayers < tournamentType.getMinPlayers() || numPlayers > tournamentType.getMaxPlayers()) {
             numPlayers = tournamentType.getMinPlayers();
-            createPlayers(numPlayers - 1);
+            createPlayers(numPlayers - 1); // ?
         }
         this.spnNumPlayers.setModel(new SpinnerNumberModel(numPlayers, tournamentType.getMinPlayers(), tournamentType.getMaxPlayers(), 1));
         this.spnNumPlayers.setEnabled(tournamentType.getMinPlayers() != tournamentType.getMaxPlayers());
         createPlayers((Integer) spnNumPlayers.getValue() - 1);
         this.spnNumSeats.setModel(new SpinnerNumberModel(2, 2, tournamentType.getMaxPlayers(), 1));
 
+        // packs
+        preparePacksView(tournamentType);
+    }
+
+    private void preparePacksView(TournamentTypeView tournamentType) {
         if (tournamentType.isLimited()) {
             this.isRandom = tournamentType.isRandom();
             this.isRichMan = tournamentType.isRichMan();
@@ -869,7 +875,6 @@ public class NewTournamentDialog extends MageDialog {
                 createPacks(tournamentType.getNumBoosters());
             }
         }
-
     }
 
     private void setNumberOfSwissRoundsMin(int numPlayers) {
@@ -931,6 +936,43 @@ public class NewTournamentDialog extends MageDialog {
         }
     }
 
+    private String prepareVersionStr(int version, boolean saveMode) {
+        // version: 0, 1, 2... to save/load
+        // version: -1 to reset (load from empty record)
+        switch (version) {
+            case -1:
+                return saveMode ? "" : "-1"; // can't save to -1 version
+            case 1:
+                return "1";
+            case 2:
+                return "2";
+            default:
+                return "";
+        }
+    }
+
+    private void loadRandomPacks(int version) {
+        String versionStr = prepareVersionStr(version, false);
+        ArrayList<String> packList;
+        String packNames;
+        String randomPrefs = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_RANDOM_DRAFT + versionStr, "");
+        if (!randomPrefs.isEmpty()) {
+            packList = new ArrayList<>(Arrays.asList(randomPrefs.split(";")));
+            packNames = randomPrefs;
+        } else {
+            ExpansionInfo[] allExpansions = ExpansionRepository.instance.getWithBoostersSortedByReleaseDate();
+            packList = Arrays.stream(allExpansions).map(ExpansionInfo::getCode).collect(Collectors.toCollection(ArrayList::new));
+            packNames = Arrays.stream(allExpansions).map(ExpansionInfo::getCode).collect(Collectors.joining(";"));
+        }
+        randomPackSelector.setSelectedPacks(packList);
+        txtRandomPacks.setText(packNames);
+
+        // workaround to apply field's auto-size
+        this.pack();
+        this.revalidate();
+        this.repaint();
+    }
+
     private void createRandomPacks() {
         if (pnlRandomPacks.getComponentCount() == 0) {
             if (randomPackSelector == null) {
@@ -941,19 +983,8 @@ public class NewTournamentDialog extends MageDialog {
             txtRandomPacks.setEnabled(false);
             txtRandomPacks.setLineWrap(true);
 
-            ArrayList<String> packList;
-            String packNames;
-            String randomPrefs = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_RANDOM_DRAFT, "");
-            if (!randomPrefs.isEmpty()) {
-                packList = new ArrayList<>(Arrays.asList(randomPrefs.split(";")));
-                packNames = randomPrefs;
-            } else {
-                ExpansionInfo[] allExpansions = ExpansionRepository.instance.getWithBoostersSortedByReleaseDate();
-                packList = Arrays.stream(allExpansions).map(ExpansionInfo::getCode).collect(Collectors.toCollection(ArrayList::new));
-                packNames = Arrays.stream(allExpansions).map(ExpansionInfo::getCode).collect(Collectors.joining(";"));
-            }
-            randomPackSelector.setSelectedPacks(packList);
-            txtRandomPacks.setText(packNames);
+            loadRandomPacks(-1); // load default packs
+
             txtRandomPacks.setAlignmentX(Component.LEFT_ALIGNMENT);
             pnlRandomPacks.add(txtRandomPacks);
             JButton btnSelectRandomPacks = new JButton();
@@ -1175,6 +1206,7 @@ public class NewTournamentDialog extends MageDialog {
         if (tournamentType.isLimited()) {
             tOptions.getLimitedOptions().setConstructionTime((Integer) this.spnConstructTime.getValue() * 60);
             tOptions.getLimitedOptions().setIsRandom(tournamentType.isRandom());
+            tOptions.getLimitedOptions().setIsRichMan(tournamentType.isRichMan());
             if (tournamentType.isCubeBooster()) {
                 tOptions.getLimitedOptions().setDraftCubeName(this.cbDraftCube.getSelectedItem().toString());
                 if (!(cubeFromDeckFilename.isEmpty())) {
@@ -1248,23 +1280,7 @@ public class NewTournamentDialog extends MageDialog {
     }
 
     private void onLoadSettings(int version) {
-
-        String versionStr = "";
-        switch (version) {
-            case -1:
-                versionStr = "-1"; // default (empty)
-                break;
-            case 1:
-                versionStr = "1";
-                break;
-            case 2:
-                versionStr = "2";
-                break;
-            default:
-                versionStr = "";
-                break;
-        }
-
+        String versionStr = prepareVersionStr(version, false);
         int numPlayers;
         txtName.setText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NAME + versionStr, "Tournament"));
         txtPassword.setText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PASSWORD + versionStr, ""));
@@ -1304,16 +1320,13 @@ public class NewTournamentDialog extends MageDialog {
         activatePanelElements(tournamentType);
 
         if (tournamentType.isLimited()) {
-            if (!tournamentType.isDraft()) {
-                numPlayers = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYERS_SEALED + versionStr, "2"));
-                setTournamentOptions(numPlayers);
-                loadBoosterPacks(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_SEALED + versionStr, ""));
-            }
-
             if (tournamentType.isDraft()) {
                 numPlayers = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYERS_DRAFT + versionStr, "4"));
-                setTournamentOptions(numPlayers);
-                if (!(tournamentType.isRandom() || tournamentType.isRichMan())) {
+                prepareTourneyView(numPlayers);
+
+                if (tournamentType.isRandom() || tournamentType.isRichMan()) {
+                    loadRandomPacks(version);
+                } else {
                     loadBoosterPacks(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_DRAFT + versionStr, ""));
                 }
 
@@ -1324,6 +1337,10 @@ public class NewTournamentDialog extends MageDialog {
                         break;
                     }
                 }
+            } else {
+                numPlayers = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYERS_SEALED + versionStr, "2"));
+                prepareTourneyView(numPlayers);
+                loadBoosterPacks(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_SEALED + versionStr, ""));
             }
         }
         this.cbAllowSpectators.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_ALLOW_SPECTATORS + versionStr, "Yes").equals("Yes"));
@@ -1338,20 +1355,7 @@ public class NewTournamentDialog extends MageDialog {
     }
 
     private void onSaveSettings(int version, TournamentOptions tOptions) {
-
-        String versionStr = "";
-        switch (version) {
-            case 1:
-                versionStr = "1";
-                break;
-            case 2:
-                versionStr = "2";
-                break;
-            default:
-                versionStr = "";
-                break;
-        }
-
+        String versionStr = prepareVersionStr(version, true);
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NAME + versionStr, tOptions.getName());
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PASSWORD + versionStr, tOptions.getPassword());
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_TIME_LIMIT + versionStr, Integer.toString(tOptions.getMatchOptions().getPriorityTime()));
@@ -1381,15 +1385,8 @@ public class NewTournamentDialog extends MageDialog {
             if (deckFile != null && !deckFile.isEmpty()) {
                 PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_DECK_FILE + versionStr, deckFile);
             }
-
-            if (tOptions.getLimitedOptions().getIsRandom()) {
-                // save random boosters to prefs
-                StringBuilder packlist = new StringBuilder();
-                for (String pack : this.randomPackSelector.getSelectedPacks()) {
-                    packlist.append(pack);
-                    packlist.append(';');
-                }
-                PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_RANDOM_DRAFT + versionStr, packlist.toString());
+            if (tOptions.getLimitedOptions().getIsRandom() || tOptions.getLimitedOptions().getIsRichMan()) {
+                PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_RANDOM_DRAFT + versionStr, String.join(";", this.randomPackSelector.getSelectedPacks()));
             }
         }
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_ALLOW_SPECTATORS + versionStr, (tOptions.isWatchingAllowed() ? "Yes" : "No"));
