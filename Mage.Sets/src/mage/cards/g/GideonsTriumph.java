@@ -53,6 +53,10 @@ class GideonsTriumphEffect extends OneShotEffect {
     private static final FilterPermanent filter2
             = new FilterPermanent("creature that attacked or blocked this turn");
 
+    static {
+        filter2.add(GideonsTriumphCondition.instance);
+    }
+
     GideonsTriumphEffect() {
         super(Outcome.Benefit);
         staticText = "Target opponent sacrifices a creature that attacked or blocked this turn. " +
