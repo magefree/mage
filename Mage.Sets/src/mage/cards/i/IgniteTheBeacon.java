@@ -5,6 +5,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterPlaneswalkerCard;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
@@ -14,7 +15,7 @@ import java.util.UUID;
  */
 public final class IgniteTheBeacon extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("planeswalker cards");
+    private static final FilterCard filter = new FilterPlaneswalkerCard("planeswalker cards");
 
     public IgniteTheBeacon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{W}");
