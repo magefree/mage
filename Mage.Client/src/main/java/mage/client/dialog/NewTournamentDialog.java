@@ -1226,6 +1226,7 @@ public class NewTournamentDialog extends MageDialog {
                 this.isRichMan = tournamentType.isRichMan();
                 tOptions.getLimitedOptions().getSetCodes().clear();
                 ArrayList<String> selected = randomPackSelector.getSelectedPacks();
+                Collections.shuffle(selected);
                 int maxPacks = 3 * (players.size() + 1);
                 if (tournamentType.isRichMan()) {
                     maxPacks = 36;
@@ -1235,7 +1236,6 @@ public class NewTournamentDialog extends MageDialog {
                     infoString.append(maxPacks);
                     infoString.append(" sets will be randomly chosen.");
                     JOptionPane.showMessageDialog(MageFrame.getDesktop(), infoString, "Information", JOptionPane.INFORMATION_MESSAGE);
-                    Collections.shuffle(selected);
                     tOptions.getLimitedOptions().getSetCodes().addAll(selected.subList(0, maxPacks));
                 } else {
                     tOptions.getLimitedOptions().getSetCodes().addAll(selected);
