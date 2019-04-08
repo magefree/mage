@@ -82,6 +82,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Jace, Wielder of Mysteries", 54, Rarity.RARE, mage.cards.j.JaceWielderOfMysteries.class));
         cards.add(new SetCardInfo("Jiang Yanggu, Wildcrafter", 164, Rarity.UNCOMMON, mage.cards.j.JiangYangguWildcrafter.class));
         cards.add(new SetCardInfo("Karn's Bastion", 248, Rarity.RARE, mage.cards.k.KarnsBastion.class));
+        cards.add(new SetCardInfo("Kasmina, Enigmatic Mentor", 56, Rarity.UNCOMMON, mage.cards.k.KasminaEnigmaticMentor.class));
         cards.add(new SetCardInfo("Kaya's Ghostform", 94, Rarity.COMMON, mage.cards.k.KayasGhostform.class));
         cards.add(new SetCardInfo("Kaya, Bane of the Dead", 231, Rarity.UNCOMMON, mage.cards.k.KayaBaneOfTheDead.class));
         cards.add(new SetCardInfo("Kiora's Dambreaker", 58, Rarity.COMMON, mage.cards.k.KiorasDambreaker.class));

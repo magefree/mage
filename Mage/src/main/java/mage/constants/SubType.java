@@ -392,6 +392,7 @@ public enum SubType {
     HUATLI("Huatli", SubTypeSet.PlaneswalkerType),
     JACE("Jace", SubTypeSet.PlaneswalkerType),
     KARN("Karn", SubTypeSet.PlaneswalkerType),
+    KASMINA("Kasmina", SubTypeSet.PlaneswalkerType),
     KAYA("Kaya", SubTypeSet.PlaneswalkerType),
     KIORA("Kiora", SubTypeSet.PlaneswalkerType),
     KOTH("Koth", SubTypeSet.PlaneswalkerType),
