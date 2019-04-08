@@ -44,7 +44,7 @@ public final class SamutTyrantSmasher extends CardImpl {
         ).setText("target creature gets +2/+1"), -1);
         ability.addEffect(new GainAbilityTargetEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn
-        ).setText("and gains haste until end of turn."));
+        ).setText("and gains haste until end of turn. "));
         ability.addEffect(new ScryEffect(1));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
