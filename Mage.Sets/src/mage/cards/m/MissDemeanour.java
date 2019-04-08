@@ -72,8 +72,12 @@ class MissDemeanourEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourceObject = (Permanent) source.getSourceObjectIfItStillExists(game);
+        String activePlayerName = game.getPlayer(game.getActivePlayerId()).getName();
         if (sourceObject != null) {
-            if (!controller.chooseUse(outcome, "Compliment " + game.getPlayer(game.getActivePlayerId()).getName() + " on their game play?", source, game)) {
+            if (controller.chooseUse(outcome, "Compliment " + activePlayerName + " on their game play?", source, game)) {
+                // TODO(Ketsuban): this could probably stand to be randomly chosen from a pool of compliments
+                game.informPlayers(controller.getLogName() + ": That's a well-built deck and you pilot it well, " + activePlayerName + ".");
+            } else {
                 sourceObject.sacrifice(source.getSourceId(), game);
             }
             return true;
