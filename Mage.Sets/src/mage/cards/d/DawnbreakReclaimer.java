@@ -88,6 +88,7 @@ class DawnbreakReclaimerEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
             TargetCardInOpponentsGraveyard targetOpponentGraveyard = new TargetCardInOpponentsGraveyard(new FilterCreatureCard("a creature card in an opponent's graveyard"));
+            targetOpponentGraveyard.setNotTarget(true);
             Player opponent = null;
             Card cardOpponentGraveyard = null;
             targetOpponentGraveyard.setNotTarget(true);
@@ -102,6 +103,7 @@ class DawnbreakReclaimerEffect extends OneShotEffect {
             if (opponent == null) {
                 // if no card from opponent was available controller has to chose an opponent to select a creature card in controllers graveyard
                 TargetOpponent targetOpponent = new TargetOpponent(true);
+                targetOpponent.setNotTarget(true);
                 controller.choose(outcome, targetOpponent, source.getSourceId(), game);
                 opponent = game.getPlayer(targetOpponent.getFirstTarget());
                 if (opponent != null) {
