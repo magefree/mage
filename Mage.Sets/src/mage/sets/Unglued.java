@@ -46,6 +46,7 @@ public final class Unglued extends ExpansionSet {
         cards.add(new SetCardInfo("Jumbo Imp", 34, Rarity.UNCOMMON, mage.cards.j.JumboImp.class));
         cards.add(new SetCardInfo("Krazy Kow", 48, Rarity.COMMON, mage.cards.k.KrazyKow.class));
         cards.add(new SetCardInfo("Mine, Mine, Mine!", 65, Rarity.RARE, mage.cards.m.MineMineMine.class));
+        cards.add(new SetCardInfo("Miss Demeanour", 10, Rarity.UNCOMMON, mage.cards.m.MissDemeanour.class));
         cards.add(new SetCardInfo("Mountain", 87, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(FrameStyle.UGL_FULL_ART_BASIC, false)));
         cards.add(new SetCardInfo("Once More with Feeling", 11, Rarity.RARE, mage.cards.o.OnceMoreWithFeeling.class));
         cards.add(new SetCardInfo("Paper Tiger", 78, Rarity.COMMON, mage.cards.p.PaperTiger.class));
