@@ -38,7 +38,7 @@ public final class AjaniTheGreathearted extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.AJANI);
-        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(0));
+        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
 
         // Creatures you control have vigilance.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
