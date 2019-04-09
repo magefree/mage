@@ -27,6 +27,7 @@ public final class Unhinged extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodletter", 50, Rarity.COMMON, mage.cards.b.Bloodletter.class));
         cards.add(new SetCardInfo("Booster Tutor", 51, Rarity.UNCOMMON, mage.cards.b.BoosterTutor.class));
         cards.add(new SetCardInfo("Double Header", 31, Rarity.COMMON, mage.cards.d.DoubleHeader.class));
+        cards.add(new SetCardInfo("Elvish House Party", 94, Rarity.UNCOMMON, mage.cards.e.ElvishHouseParty.class));
         cards.add(new SetCardInfo("First Come, First Served", 12, Rarity.UNCOMMON, mage.cards.f.FirstComeFirstServed.class));
         cards.add(new SetCardInfo("Forest", 140, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(FrameStyle.UNH_FULL_ART_BASIC, false)));
         cards.add(new SetCardInfo("Form of the Squirrel", 96, Rarity.RARE, mage.cards.f.FormOfTheSquirrel.class));
