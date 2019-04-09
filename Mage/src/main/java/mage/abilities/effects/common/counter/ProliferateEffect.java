@@ -1,16 +1,11 @@
-
 package mage.abilities.effects.common.counter;
 
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.Outcome;
 import mage.counters.Counter;
 import mage.game.Game;
@@ -36,6 +31,8 @@ public class ProliferateEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
+        int numberOfCounters = 0;
+        Counter newCounter = null;
         if (controller == null) {
             return false;
         }
@@ -49,8 +46,16 @@ public class ProliferateEffect extends OneShotEffect {
             if (permanent != null) {
                 if (!permanent.getCounters(game).isEmpty()) {
                     for (Counter counter : permanent.getCounters(game).values()) {
-                        Counter newCounter = new Counter(counter.getName());
+                        newCounter = new Counter(counter.getName());
                         permanent.addCounters(newCounter, source, game);
+                        numberOfCounters = numberOfCounters + 1;
+                    }
+                    if (newCounter != null) {
+                        game.informPlayers(permanent.getName()
+                                + " had "
+                                + numberOfCounters
+                                + " " + newCounter.getName()
+                                + " counter(s) added to it.");
                     }
                 }
             } else {
@@ -58,8 +63,15 @@ public class ProliferateEffect extends OneShotEffect {
                 if (player != null) {
                     if (!player.getCounters().isEmpty()) {
                         for (Counter counter : player.getCounters().values()) {
-                            Counter newCounter = new Counter(counter.getName());
+                            newCounter = new Counter(counter.getName());
                             player.addCounters(newCounter, game);
+                            numberOfCounters = numberOfCounters + 1;
+                        }
+                        if (newCounter != null) {
+                            game.informPlayers(player.getName() + " had "
+                                    + numberOfCounters + " "
+                                    + newCounter.getName()
+                                    + " counter(s) added to him or her.");
                         }
                     }
                 }
