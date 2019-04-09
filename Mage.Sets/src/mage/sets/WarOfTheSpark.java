@@ -85,6 +85,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 253, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 254, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jace, Wielder of Mysteries", 54, Rarity.RARE, mage.cards.j.JaceWielderOfMysteries.class));
+        cards.add(new SetCardInfo("Jaya's Greeting", 136, Rarity.COMMON, mage.cards.j.JayasGreeting.class));
         cards.add(new SetCardInfo("Jiang Yanggu, Wildcrafter", 164, Rarity.UNCOMMON, mage.cards.j.JiangYangguWildcrafter.class));
         cards.add(new SetCardInfo("Karn's Bastion", 248, Rarity.RARE, mage.cards.k.KarnsBastion.class));
         cards.add(new SetCardInfo("Kasmina's Transmutation", 57, Rarity.COMMON, mage.cards.k.KasminasTransmutation.class));
