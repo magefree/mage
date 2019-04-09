@@ -53,6 +53,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Demolish", 123, Rarity.COMMON, mage.cards.d.Demolish.class));
         cards.add(new SetCardInfo("Devouring Hellion", 124, Rarity.UNCOMMON, mage.cards.d.DevouringHellion.class));
         cards.add(new SetCardInfo("Dovin's Veto", 193, Rarity.UNCOMMON, mage.cards.d.DovinsVeto.class));
+        cards.add(new SetCardInfo("Dovin, Hand of Control", 229, Rarity.UNCOMMON, mage.cards.d.DovinHandOfControl.class));
         cards.add(new SetCardInfo("Dreadhorde Arcanist", 125, Rarity.RARE, mage.cards.d.DreadhordeArcanist.class));
         cards.add(new SetCardInfo("Dreadhorde Butcher", 194, Rarity.RARE, mage.cards.d.DreadhordeButcher.class));
         cards.add(new SetCardInfo("Dreadhorde Invasion", 86, Rarity.RARE, mage.cards.d.DreadhordeInvasion.class));
