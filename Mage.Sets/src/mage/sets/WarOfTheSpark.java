@@ -166,6 +166,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Turret Ogre", 148, Rarity.COMMON, mage.cards.t.TurretOgre.class));
         cards.add(new SetCardInfo("Vivien's Arkbow", 181, Rarity.RARE, mage.cards.v.ViviensArkbow.class));
         cards.add(new SetCardInfo("Vivien's Grizzly", 182, Rarity.COMMON, mage.cards.v.ViviensGrizzly.class));
+        cards.add(new SetCardInfo("Vizier of the Scorpion", 111, Rarity.UNCOMMON, mage.cards.v.VizierOfTheScorpion.class));
         cards.add(new SetCardInfo("Vraska's Finisher", 112, Rarity.COMMON, mage.cards.v.VraskasFinisher.class));
         cards.add(new SetCardInfo("Vraska, Swarm's Eminence", 236, Rarity.UNCOMMON, mage.cards.v.VraskaSwarmsEminence.class));
         cards.add(new SetCardInfo("Wanderer's Strike", 38, Rarity.COMMON, mage.cards.w.WanderersStrike.class));
