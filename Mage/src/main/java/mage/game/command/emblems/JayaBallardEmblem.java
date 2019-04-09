@@ -64,10 +64,12 @@ class JayaBallardCastFromGraveyardEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         Card card = game.getCard(objectId);
-        if (card != null) {
-            return (affectedControllerId.equals(source.getControllerId())
-                    && StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY.match(card, game)
-                    && Zone.GRAVEYARD.equals(game.getState().getZone(card.getId())));
+        if (card != null
+                && affectedControllerId.equals(source.getControllerId())
+                && StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY.match(card, game)
+                && Zone.GRAVEYARD.equals(game.getState().getZone(card.getId()))) {
+            game.getState().setValue("JayaBallard", card);
+            return true;
         }
         return false;
     }
@@ -98,7 +100,7 @@ class JayaBallardReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Card card = game.getCard(getTargetPointer().getFirst(game, source));
+            Card card = (Card) game.getState().getValue("JayaBallard");
             if (card != null) {
                 controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.STACK, true);
                 return true;
@@ -116,11 +118,13 @@ class JayaBallardReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (Zone.GRAVEYARD == ((ZoneChangeEvent) event).getToZone()) {
             Card card = game.getCard(event.getSourceId());
-            if (card != null && (card.isInstant() || card.isSorcery())) {
-                // TODO: Find a way to check, that the spell from graveyard was really cast by the ability of the emblem.
-                // currently every spell cast from graveyard will be exiled.
+            if (card != null
+                    && (card.isInstant()
+                    || card.isSorcery())) {
                 CastFromGraveyardWatcher watcher = game.getState().getWatcher(CastFromGraveyardWatcher.class);
-                return watcher != null && watcher.spellWasCastFromGraveyard(event.getTargetId(), game.getState().getZoneChangeCounter(event.getTargetId()));
+                return watcher != null
+                        && watcher.spellWasCastFromGraveyard(event.getTargetId(),
+                                game.getState().getZoneChangeCounter(event.getTargetId()));
             }
         }
         return false;
