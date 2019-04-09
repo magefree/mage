@@ -124,6 +124,7 @@ public final class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Prosperity", 40, Rarity.UNCOMMON, mage.cards.p.Prosperity.class));
         cards.add(new SetCardInfo("Python", 68, Rarity.COMMON, mage.cards.p.Python.class));
         cards.add(new SetCardInfo("Quicksand", 166, Rarity.UNCOMMON, mage.cards.q.Quicksand.class));
+        cards.add(new SetCardInfo("Quirion Druid", 116, Rarity.RARE, mage.cards.q.QuirionDruid.class));
         cards.add(new SetCardInfo("Quirion Ranger", 117, Rarity.COMMON, mage.cards.q.QuirionRanger.class));
         cards.add(new SetCardInfo("Raging Gorilla", 90, Rarity.COMMON, mage.cards.r.RagingGorilla.class));
         cards.add(new SetCardInfo("Rainbow Efreet", 41, Rarity.RARE, mage.cards.r.RainbowEfreet.class));
