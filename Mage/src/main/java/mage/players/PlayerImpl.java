@@ -70,7 +70,6 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Map.Entry;
-import java.util.stream.Collectors;
 
 public abstract class PlayerImpl implements Player, Serializable {
 
@@ -182,7 +181,6 @@ public abstract class PlayerImpl implements Player, Serializable {
      */
     protected final Map<PhaseStep, Step.StepPart> silentPhaseSteps = ImmutableMap.<PhaseStep, Step.StepPart>builder().
             put(PhaseStep.DECLARE_ATTACKERS, Step.StepPart.PRE).build();
-
 
 
     public PlayerImpl(String name, RangeOfInfluence range) {
@@ -739,9 +737,9 @@ public abstract class PlayerImpl implements Player, Serializable {
             TargetDiscard target = new TargetDiscard(possibleAmount, possibleAmount, new FilterCard(CardUtil.numberToText(possibleAmount, "a") + " card" + (possibleAmount > 1 ? "s" : "")), playerId);
             choose(Outcome.Discard, target, source == null ? null : source.getSourceId(), game);
             for (UUID cardId : target.getTargets()) {
-                    if(discard(this.getHand().get(cardId, game), source, game)) {
-                        discardedCards.add(cardId);
-                    }
+                if (discard(this.getHand().get(cardId, game), source, game)) {
+                    discardedCards.add(cardId);
+                }
             }
         }
         return discardedCards;
@@ -2046,6 +2044,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void removeCounters(String name, int amount, Ability source, Game game) {
+        int finalAmount = 0;
         for (int i = 0; i < amount; i++) {
             if (!counters.removeCounter(name, 1)) {
                 break;
@@ -2055,7 +2054,13 @@ public abstract class PlayerImpl implements Player, Serializable {
             event.setData(name);
             event.setAmount(1);
             game.fireEvent(event);
+            finalAmount++;
         }
+        GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTERS_REMOVED,
+                getId(), (source == null ? null : source.getSourceId()), (source == null ? null : source.getControllerId()));
+        event.setData(name);
+        event.setAmount(finalAmount);
+        game.fireEvent(event);
     }
 
     protected boolean canDamage(MageObject source, Game game) {

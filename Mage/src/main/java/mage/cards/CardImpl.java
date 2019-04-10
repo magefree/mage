@@ -720,6 +720,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public void removeCounters(String name, int amount, Game game) {
+        int finalAmount = 0;
         for (int i = 0; i < amount; i++) {
             if (!getCounters(game).removeCounter(name, 1)) {
                 break;
@@ -727,7 +728,12 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTER_REMOVED, objectId, getControllerOrOwner());
             event.setData(name);
             game.fireEvent(event);
+            finalAmount++;
         }
+        GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTERS_REMOVED, objectId, getControllerOrOwner());
+        event.setData(name);
+        event.setAmount(finalAmount);
+        game.fireEvent(event);
     }
 
     @Override

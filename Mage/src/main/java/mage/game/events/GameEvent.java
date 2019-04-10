@@ -292,7 +292,7 @@ public class GameEvent implements Serializable {
         UNATTACH, UNATTACHED,
         ADD_COUNTER, COUNTER_ADDED,
         ADD_COUNTERS, COUNTERS_ADDED,
-        COUNTER_REMOVED,
+        COUNTER_REMOVED, COUNTERS_REMOVED,
         LOSE_CONTROL,
         /* LOST_CONTROL
          targetId    id of the creature that lost control
