@@ -1592,7 +1592,7 @@ public class SessionImpl implements Session {
     @Override
     public boolean ping() {
         try {
-            if (isConnected()) {
+            if (isConnected() && sessionId != null) {
                 long startTime = System.nanoTime();
                 if (!server.ping(sessionId, pingInfo)) {
                     logger.error("Ping failed: " + this.getUserName() + " Session: " + sessionId + " to MAGE server at " + connection.getHost() + ':' + connection.getPort());
