@@ -28,14 +28,16 @@ import org.jboss.remoting.transport.bisocket.Bisocket;
 import org.jboss.remoting.transport.socket.SocketWrapper;
 import org.jboss.remoting.transporter.TransporterClient;
 
+import javax.swing.*;
 import java.io.*;
 import java.lang.reflect.UndeclaredThrowableException;
 import java.net.*;
 import java.util.*;
+import java.util.concurrent.CancellationException;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class SessionImpl implements Session {
 
@@ -54,6 +56,7 @@ public class SessionImpl implements Session {
     private ServerState serverState;
     private SessionState sessionState = SessionState.DISCONNECTED;
     private Connection connection;
+    private RemotingTask lastRemotingTask = null;
     private static final int PING_CYCLES = 10;
     private final LinkedList<Long> pingTime = new LinkedList<>();
     private String pingInfo = "";
@@ -76,22 +79,56 @@ public class SessionImpl implements Session {
         return sessionId;
     }
 
-    // RemotingTask encapsulates a task which is involved with some JBoss Remoting. This is
-    // intended to be used with handleRemotingTaskExceptions for sharing the common exception
-    // handling.
-    public interface RemotingTask {
+    // RemotingTask - do server side works in background and return result, can be canceled at any time
+    public abstract class RemotingTask {
 
-        boolean run() throws Throwable;
+        SwingWorker<Boolean, Object> worker = null;
+        Throwable lastError = null;
+
+        abstract public boolean work() throws Throwable;
+
+        boolean doWork() throws Throwable {
+            worker = new SwingWorker<Boolean, Object>() {
+                @Override
+                protected Boolean doInBackground() {
+                    try {
+                        return work();
+                    } catch (Throwable t) {
+                        lastError = t;
+                        return false;
+                    }
+                }
+            };
+            worker.execute();
+
+            boolean res = worker.get();
+            if (lastError != null) {
+                throw lastError;
+            }
+            return res;
+        }
+
+        public void cancel() {
+            if (worker != null) {
+                worker.cancel(true);
+            }
+        }
     }
 
-    // handleRemotingTaskExceptions runs the given task and handles exceptions appropriately. This
-    // way we can share the common exception handling.
-    private boolean handleRemotingTaskExceptions(RemotingTask remoting) {
+    private void showMessageToUser(String message) {
+        client.showMessage("Remote task error. " + message);
+    }
+
+    private boolean doRemoteWorkAndHandleErrors(RemotingTask remoting) {
+        // execute remote task and wait result, can be canceled
+        lastRemotingTask = remoting;
         try {
-            return remoting.run();
+            return remoting.doWork();
+        } catch (InterruptedException | CancellationException t) {
+            // was canceled by user, nothing to show
         } catch (MalformedURLException ex) {
-            logger.fatal("", ex);
-            client.showMessage("Unable connect to server. " + ex.getMessage());
+            logger.fatal("Connect: wrong server address", ex);
+            showMessageToUser(ex.getMessage());
         } catch (UndeclaredThrowableException ex) {
             String addMessage = "";
             Throwable cause = ex.getCause();
@@ -103,7 +140,7 @@ public class SessionImpl implements Session {
                         addMessage = "Probably the server version is not compatible with the client. ";
                     }
                 } else {
-                    logger.error("Unknown server error", exep.getCause());
+                    logger.error("Connect: unknown server error", exep.getCause());
                 }
             } else if (cause instanceof NoSuchMethodException) {
                 // NoSuchMethodException is thrown on an invocation of an unknow JBoss remoting
@@ -112,66 +149,59 @@ public class SessionImpl implements Session {
                         + "server version is not compatible with the client: " + cause.getMessage();
             }
             if (addMessage.isEmpty()) {
-                logger.fatal("", ex);
+                logger.fatal("Connect: unknown error", ex);
             }
-            client.showMessage("Unable connect to server. " + addMessage + (ex.getMessage() != null ? ex.getMessage() : ""));
+            showMessageToUser(addMessage + (ex.getMessage() != null ? ex.getMessage() : ""));
         } catch (IOException ex) {
-            logger.fatal("", ex);
+            logger.fatal("Connect: unknown IO error", ex);
             String addMessage = "";
             if (ex.getMessage() != null && ex.getMessage().startsWith("Unable to perform invocation")) {
                 addMessage = "Maybe the server version is not compatible. ";
             }
-            client.showMessage("Unable connect to server. " + addMessage + (ex.getMessage() != null ? ex.getMessage() : ""));
+            showMessageToUser(addMessage + (ex.getMessage() != null ? ex.getMessage() : ""));
         } catch (MageVersionException ex) {
-            if (!canceled) {
-                client.showMessage("Unable connect to server. " + ex.getMessage());
-            }
+            logger.warn("Connect: wrong versions");
             disconnect(false);
+            if (!canceled) {
+                showMessageToUser(ex.getMessage());
+            }
         } catch (CannotConnectException ex) {
             if (!canceled) {
                 handleCannotConnectException(ex);
             }
         } catch (Throwable t) {
-            logger.fatal("Unable connect to server - ", t);
+            logger.fatal("Connect: FAIL", t);
+            disconnect(false);
             if (!canceled) {
-                disconnect(false);
-                StringBuilder sb = new StringBuilder();
-                sb.append("Unable connect to server.\n");
-                for (StackTraceElement element : t.getStackTrace()) {
-                    sb.append(element.toString()).append('\n');
-                }
-                client.showMessage(sb.toString());
+                showMessageToUser(t.getMessage());
             }
+        } finally {
+            lastRemotingTask = null;
         }
         return false;
     }
 
     @Override
     public synchronized boolean register(final Connection connection) {
-        return establishJBossRemotingConnection(connection) && handleRemotingTaskExceptions(new RemotingTask() {
+        return doRemoteConnection(connection) && doRemoteWorkAndHandleErrors(new RemotingTask() {
             @Override
-            public boolean run() throws Throwable {
-                logger.info("Trying to register as " + getUserName() + " to XMAGE server at " + connection.getHost() + ':' + connection.getPort());
-                boolean registerResult = server.registerUser(sessionId, connection.getUsername(),
-                        connection.getPassword(), connection.getEmail());
-                if (registerResult) {
-                    logger.info("Registered as " + getUserName() + " to MAGE server at " + connection.getHost() + ':' + connection.getPort());
-                }
-                return registerResult;
+            public boolean work() throws Throwable {
+                logger.info("Registration: username " + getUserName() + " for email " + getEmail());
+                boolean result = server.registerUser(sessionId, connection.getUsername(), connection.getPassword(), connection.getEmail());
+                logger.info("Registration: " + (result ? "DONE, check your email for new password" : "FAIL"));
+                return result;
             }
         });
     }
 
     @Override
     public synchronized boolean emailAuthToken(final Connection connection) {
-        return establishJBossRemotingConnection(connection) && handleRemotingTaskExceptions(new RemotingTask() {
+        return doRemoteConnection(connection) && doRemoteWorkAndHandleErrors(new RemotingTask() {
             @Override
-            public boolean run() throws Throwable {
-                logger.info("Trying to ask for an auth token to " + getEmail() + " to XMAGE server at " + connection.getHost() + ':' + connection.getPort());
+            public boolean work() throws Throwable {
+                logger.info("Auth request: requesting auth token for username " + getUserName() + " to email " + getEmail());
                 boolean result = server.emailAuthToken(sessionId, connection.getEmail());
-                if (result) {
-                    logger.info("An auth token is emailed to " + getEmail() + " from MAGE server at " + connection.getHost() + ':' + connection.getPort());
-                }
+                logger.info("Auth request: " + (result ? "DONE, check your email for auth token" : "FAIL"));
                 return result;
             }
         });
@@ -179,14 +209,12 @@ public class SessionImpl implements Session {
 
     @Override
     public synchronized boolean resetPassword(final Connection connection) {
-        return establishJBossRemotingConnection(connection) && handleRemotingTaskExceptions(new RemotingTask() {
+        return doRemoteConnection(connection) && doRemoteWorkAndHandleErrors(new RemotingTask() {
             @Override
-            public boolean run() throws Throwable {
-                logger.info("Trying reset the password in XMAGE server at " + connection.getHost() + ':' + connection.getPort());
+            public boolean work() throws Throwable {
+                logger.info("Password reset: reseting password for username " + getUserName());
                 boolean result = server.resetPassword(sessionId, connection.getEmail(), connection.getAuthToken(), connection.getPassword());
-                if (result) {
-                    logger.info("Password is successfully reset in MAGE server at " + connection.getHost() + ':' + connection.getPort());
-                }
+                logger.info("Password reset: " + (result ? "DONE, check your email for new password" : "FAIL"));
                 return result;
             }
         });
@@ -194,39 +222,39 @@ public class SessionImpl implements Session {
 
     @Override
     public synchronized boolean connect(final Connection connection) {
-        return establishJBossRemotingConnection(connection)
-                && handleRemotingTaskExceptions(new RemotingTask() {
+        return doRemoteConnection(connection) && doRemoteWorkAndHandleErrors(new RemotingTask() {
             @Override
-            public boolean run() throws Throwable {
+            public boolean work() throws Throwable {
                 setLastError("");
-                logger.info("Trying to log-in as " + getUserName() + " to XMAGE server at " + connection.getHost() + ':' + connection.getPort());
-                boolean registerResult;
+                logger.info("Logging: as username " + getUserName() + " to server " + connection.getHost() + ':' + connection.getPort());
+                boolean result;
+
                 if (connection.getAdminPassword() == null) {
                     // for backward compatibility. don't remove twice call - first one does nothing but for version checking
-                    registerResult = server.connectUser(connection.getUsername(), connection.getPassword(), sessionId, client.getVersion(), connection.getUserIdStr());
+                    result = server.connectUser(connection.getUsername(), connection.getPassword(), sessionId, client.getVersion(), connection.getUserIdStr());
                 } else {
-                    registerResult = server.connectAdmin(connection.getAdminPassword(), sessionId, client.getVersion());
+                    result = server.connectAdmin(connection.getAdminPassword(), sessionId, client.getVersion());
                 }
-                if (registerResult) {
+
+                if (result) {
                     serverState = server.getServerState();
 
                     // client side check for incompatible versions
                     if (client.getVersion().compareTo(serverState.getVersion()) != 0) {
-                        String err = "Client and server versions are incompatible.";
-                        setLastError(err);
-                        logger.info(err);
-                        disconnect(false);
-                        return false;
+                        throw new MageVersionException(client.getVersion(), serverState.getVersion());
                     }
 
                     if (!connection.getUsername().equals("Admin")) {
                         server.setUserData(connection.getUsername(), sessionId, connection.getUserData(), client.getVersion().toString(), connection.getUserIdStr());
                         updateDatabase(connection.isForceDBComparison(), serverState);
                     }
-                    logger.info("Logged-in as " + getUserName() + " to MAGE server at " + connection.getHost() + ':' + connection.getPort());
+
+                    logger.info("Logging: DONE");
                     client.connected(getUserName() + '@' + connection.getHost() + ':' + connection.getPort() + ' ');
                     return true;
                 }
+
+                logger.info("Logging: FAIL");
                 disconnect(false);
                 return false;
             }
@@ -241,20 +269,24 @@ public class SessionImpl implements Session {
     @Override
     public boolean stopConnecting() {
         canceled = true;
+        if (lastRemotingTask != null) {
+            lastRemotingTask.cancel();
+        }
         return true;
     }
 
-    private boolean establishJBossRemotingConnection(final Connection connection) {
+    private boolean doRemoteConnection(final Connection connection) {
+        // connect to server and setup all data, can be canceled
         if (isConnected()) {
             disconnect(true);
         }
         this.connection = connection;
         this.canceled = false;
         sessionState = SessionState.CONNECTING;
-        boolean result = handleRemotingTaskExceptions(new RemotingTask() {
+        lastRemotingTask = new RemotingTask() {
             @Override
-            public boolean run() throws Throwable {
-                logger.info("Trying to connect to XMAGE server at " + connection.getHost() + ':' + connection.getPort());
+            public boolean work() throws Throwable {
+                logger.info("Connect: connecting to server " + connection.getHost() + ':' + connection.getPort());
 
                 System.setProperty("http.nonProxyHosts", "code.google.com");
                 System.setProperty("socksNonProxyHosts", "code.google.com");
@@ -265,6 +297,9 @@ public class SessionImpl implements Session {
                 System.clearProperty("http.proxyHost");
                 System.clearProperty("http.proxyPort");
 
+                if (connection.getProxyType() != Connection.ProxyType.NONE) {
+                    logger.info("Connect: using proxy " + connection.getProxyHost() + ":" + connection.getProxyPort());
+                }
                 switch (connection.getProxyType()) {
                     case SOCKS:
                         System.setProperty("socksProxyHost", connection.getProxyHost());
@@ -392,15 +427,24 @@ public class SessionImpl implements Session {
 
                 sessionId = callbackClient.getSessionId();
                 sessionState = SessionState.CONNECTED;
-                logger.info("Connected to MAGE server at " + connection.getHost() + ':' + connection.getPort());
+                logger.info("Connect: DONE");
                 return true;
             }
-        });
+        };
+
+        boolean result;
+        try {
+            result = doRemoteWorkAndHandleErrors(lastRemotingTask);
+        } finally {
+            lastRemotingTask = null;
+        }
+
         if (result) {
             return true;
+        } else {
+            disconnect(false);
+            return false;
         }
-        disconnect(false);
-        return false;
     }
 
     private void updateDatabase(boolean forceDBComparison, ServerState serverState) {
@@ -463,7 +507,7 @@ public class SessionImpl implements Session {
     @Override
     public synchronized void disconnect(boolean askForReconnect) {
         if (isConnected()) {
-            logger.info("DISCONNECT (still connected)");
+            logger.info("Disconnecting...");
             sessionState = SessionState.DISCONNECTING;
         }
         if (connection == null || sessionState == SessionState.DISCONNECTED) {
@@ -471,18 +515,20 @@ public class SessionImpl implements Session {
         }
 
         try {
-            callbackClient.removeListener(callbackHandler);
-            callbackClient.disconnect();
+            if (callbackClient.isConnected()) {
+                callbackClient.removeListener(callbackHandler);
+                callbackClient.disconnect();
+            }
             TransporterClient.destroyTransporterClient(server);
         } catch (Throwable ex) {
-            logger.fatal("Error disconnecting ...", ex);
+            logger.fatal("Disconnecting FAIL", ex);
         }
 
         if (sessionState == SessionState.DISCONNECTING || sessionState == SessionState.CONNECTING) {
             sessionState = SessionState.DISCONNECTED;
-            logger.info("Disconnected ... ");
+            logger.info("Disconnecting DONE");
             if (askForReconnect) {
-                client.showError("Network error.  You have been disconnected from " + connection.getHost());
+                client.showError("Network error. You have been disconnected from " + connection.getHost());
             }
             client.disconnected(askForReconnect); // MageFrame with check to reconnect
             pingTime.clear();
@@ -491,7 +537,6 @@ public class SessionImpl implements Session {
 
     @Override
     public synchronized void reconnect(Throwable throwable) {
-        logger.info("RECONNECT - Connected: " + isConnected());
         client.disconnected(true);
     }
 
@@ -522,7 +567,7 @@ public class SessionImpl implements Session {
 
         @Override
         public void handleConnectionException(Throwable throwable, Client client) {
-            logger.info("connection to server lost - " + throwable.getMessage(), throwable);
+            logger.info("Connect: lost connection to server.", throwable);
             reconnect(throwable);
         }
     }
@@ -1539,9 +1584,7 @@ public class SessionImpl implements Session {
 
     private void handleThrowable(Throwable t) {
         logger.fatal("Communication error", t);
-        if (t instanceof InterruptedException) {
-            logger.error("Was interrupted", new Throwable());
-        }
+
 
         // Probably this can cause hanging the client under certain circumstances as the disconnect method is synchronized
         // so check if it's needed

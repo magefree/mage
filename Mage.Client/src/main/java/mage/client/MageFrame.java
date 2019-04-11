@@ -580,8 +580,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 container.repaint();
             }
         } catch (InterruptedException e) {
-
+            LOGGER.fatal("MageFrame error", e);
+            Thread.currentThread().interrupt();
         }
+
         // Nothing to do
         if (activeFrame == frame) {
             return;
@@ -1403,22 +1405,24 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     @Override
-    public void disconnected(final boolean errorCall) {
+    public void disconnected(final boolean askToReconnect) {
         if (SwingUtilities.isEventDispatchThread()) { // Returns true if the current thread is an AWT event dispatching thread.
-            LOGGER.info("DISCONNECTED (Event Dispatch Thread)");
+            // REMOTE task, e.g. connecting
+            LOGGER.info("Disconnected from remote task");
             setConnectButtonText(NOT_CONNECTED_TEXT);
             disableButtons();
             hideGames();
             hideTables();
         } else {
-            LOGGER.info("DISCONNECTED (NO Event Dispatch Thread)");
+            // USER mode, e.g. user plays and got disconnect
+            LOGGER.info("Disconnected from user mode");
             SwingUtilities.invokeLater(() -> {
                         setConnectButtonText(NOT_CONNECTED_TEXT);
                         disableButtons();
                         hideGames();
                         hideTables();
                         SessionHandler.disconnect(false);
-                        if (errorCall) {
+                        if (askToReconnect) {
                             UserRequestMessage message = new UserRequestMessage("Connection lost", "The connection to server was lost. Reconnect?");
                             message.setButton1("No", null);
                             message.setButton2("Yes", PlayerAction.CLIENT_RECONNECT);

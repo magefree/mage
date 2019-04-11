@@ -71,7 +71,7 @@ public class MultiConnectTest {
         }
 
         @Override
-        public void disconnected(boolean errorCall) {
+        public void disconnected(boolean askToReconnect) {
             logger.info("disconnected");
         }
 
