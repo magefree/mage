@@ -150,6 +150,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Roalesk, Apex Hybrid", 213, Rarity.MYTHIC, mage.cards.r.RoaleskApexHybrid.class));
         cards.add(new SetCardInfo("Role Reversal", 214, Rarity.RARE, mage.cards.r.RoleReversal.class));
         cards.add(new SetCardInfo("Saheeli's Silverwing", 243, Rarity.COMMON, mage.cards.s.SaheelisSilverwing.class));
+        cards.add(new SetCardInfo("Saheeli, Sublime Artificer", 234, Rarity.UNCOMMON, mage.cards.s.SaheeliSublimeArtificer.class));
         cards.add(new SetCardInfo("Samut's Sprint", 142, Rarity.COMMON, mage.cards.s.SamutsSprint.class));
         cards.add(new SetCardInfo("Samut, Tyrant Smasher", 235, Rarity.UNCOMMON, mage.cards.s.SamutTyrantSmasher.class));
         cards.add(new SetCardInfo("Shriekdiver", 103, Rarity.COMMON, mage.cards.s.Shriekdiver.class));
