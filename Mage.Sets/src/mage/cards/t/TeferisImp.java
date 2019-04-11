@@ -1,8 +1,6 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.PhaseInTriggeredAbility;
 import mage.abilities.common.PhaseOutTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
