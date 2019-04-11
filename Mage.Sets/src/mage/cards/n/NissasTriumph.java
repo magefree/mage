@@ -43,10 +43,9 @@ public final class NissasTriumph extends CardImpl {
                         0, 2, filter
                 ), true, true),
                 new PermanentsOnTheBattlefieldCondition(filter2),
-                "Search your land for up to two basic Forest cards. " +
-                        "If you control a Nissa planeswalker, instead search your library " +
-                        "for up to three land cards. Reveal those cards, " +
-                        "put them into your hand, then shuffle your library."
+                "Search your library for up to two basic Forest cards. If you control a Nissa planeswalker, " +
+                        "instead search your library for up to three land cards. " +
+                        "Reveal those cards, put them into your hand, then shuffle your library."
         ));
     }
 
