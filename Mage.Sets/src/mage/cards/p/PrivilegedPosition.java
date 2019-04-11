@@ -10,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -23,7 +23,7 @@ public final class PrivilegedPosition extends CardImpl {
 
 
         // Other permanents you control have hexproof.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, new FilterPermanent(), true)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENTS, true)));
     }
 
     public PrivilegedPosition(final PrivilegedPosition card) {
