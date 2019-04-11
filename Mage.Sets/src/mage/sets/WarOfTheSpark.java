@@ -63,6 +63,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Dreadhorde Arcanist", 125, Rarity.RARE, mage.cards.d.DreadhordeArcanist.class));
         cards.add(new SetCardInfo("Dreadhorde Butcher", 194, Rarity.RARE, mage.cards.d.DreadhordeButcher.class));
         cards.add(new SetCardInfo("Dreadhorde Invasion", 86, Rarity.RARE, mage.cards.d.DreadhordeInvasion.class));
+        cards.add(new SetCardInfo("Dreadhorde Twins", 126, Rarity.UNCOMMON, mage.cards.d.DreadhordeTwins.class));
         cards.add(new SetCardInfo("Emergence Zone", 245, Rarity.UNCOMMON, mage.cards.e.EmergenceZone.class));
         cards.add(new SetCardInfo("Erratic Visionary", 48, Rarity.COMMON, mage.cards.e.ErraticVisionary.class));
         cards.add(new SetCardInfo("Eternal Skylord", 49, Rarity.UNCOMMON, mage.cards.e.EternalSkylord.class));
