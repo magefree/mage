@@ -1,4 +1,4 @@
-package mage.cards.f;
+package mage.cards.t;
 
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.keyword.ScryEffect;
@@ -9,23 +9,24 @@ import mage.constants.CardType;
 import java.util.UUID;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author TheElk801
  */
-public final class Foresee extends CardImpl {
+public final class TamiyosEpiphany extends CardImpl {
 
-    public Foresee(UUID ownerId, CardSetInfo setInfo) {
+    public TamiyosEpiphany(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");
 
+        // Scry 4, then draw two cards.
         this.getSpellAbility().addEffect(new ScryEffect(4).setText("scry 4,"));
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2).setText("then draw two cards"));
     }
 
-    public Foresee(final Foresee card) {
+    private TamiyosEpiphany(final TamiyosEpiphany card) {
         super(card);
     }
 
     @Override
-    public Foresee copy() {
-        return new Foresee(this);
+    public TamiyosEpiphany copy() {
+        return new TamiyosEpiphany(this);
     }
 }
