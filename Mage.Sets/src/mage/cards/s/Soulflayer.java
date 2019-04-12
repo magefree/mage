@@ -1,44 +1,26 @@
-
 package mage.cards.s;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.SourceEffect;
-import mage.abilities.keyword.DeathtouchAbility;
-import mage.abilities.keyword.DelveAbility;
-import mage.abilities.keyword.DoubleStrikeAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.HexproofAbility;
-import mage.abilities.keyword.IndestructibleAbility;
-import mage.abilities.keyword.LifelinkAbility;
-import mage.abilities.keyword.ReachAbility;
-import mage.abilities.keyword.TrampleAbility;
-import mage.abilities.keyword.VigilanceAbility;
+import mage.abilities.keyword.*;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class Soulflayer extends CardImpl {
@@ -82,7 +64,9 @@ class SoulflayerEffect extends ContinuousEffectImpl implements SourceEffect {
         super(effect);
         if (effect.abilitiesToAdd != null) {
             this.abilitiesToAdd = new HashSet<>();
-            this.abilitiesToAdd.addAll(effect.abilitiesToAdd);
+            for (Ability a : effect.abilitiesToAdd) {
+                this.abilitiesToAdd.add(a.copy());
+            }
         }
         this.objectReference = effect.objectReference;
     }
@@ -96,6 +80,7 @@ class SoulflayerEffect extends ContinuousEffectImpl implements SourceEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
+            // one time abilities collect
             if (objectReference == null || !objectReference.refersTo(permanent, game)) {
                 abilitiesToAdd = new HashSet<>();
                 this.objectReference = new MageObjectReference(permanent, game);
@@ -144,6 +129,8 @@ class SoulflayerEffect extends ContinuousEffectImpl implements SourceEffect {
                     }
                 }
             }
+
+            // all time abilities apply
             for (Ability ability : abilitiesToAdd) {
                 permanent.addAbility(ability, source.getSourceId(), game);
             }
