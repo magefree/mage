@@ -72,7 +72,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.prefs.Preferences;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class MageFrame extends javax.swing.JFrame implements MageClient {
 
@@ -353,61 +353,76 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 + ((SessionHandler.getSession() != null && SessionHandler.isConnected()) ? SessionHandler.getVersionInfo() : NOT_CONNECTED_TEXT));
     }
 
+    private void updateTooltipContainerSizes() {
+        JPanel cardPreviewContainer;
+        BigCard bigCard;
+        JPanel cardPreviewContainerRotated;
+        BigCard bigCardRotated;
+        try {
+            cardPreviewContainer = (JPanel) UI.getComponent(MageComponents.CARD_PREVIEW_CONTAINER);
+            bigCard = (BigCard) UI.getComponent(MageComponents.CARD_PREVIEW_PANE);
+            cardPreviewContainerRotated = (JPanel) UI.getComponent(MageComponents.CARD_PREVIEW_CONTAINER_ROTATED);
+            bigCardRotated = (BigCard) UI.getComponent(MageComponents.CARD_PREVIEW_PANE_ROTATED);
+        } catch (InterruptedException e) {
+            LOGGER.fatal("Can't update tooltip panel sizes");
+            Thread.currentThread().interrupt();
+            return;
+        }
+
+        int height = GUISizeHelper.enlargedImageHeight;
+        int width = (int) ((float) height * (float) 0.64);
+        bigCard.setSize(width, height);
+        cardPreviewContainer.setBounds(0, 0, width + 80, height + 30);
+        bigCardRotated.setSize(height, width + 30);
+        cardPreviewContainerRotated.setBounds(0, 0, height + 80, width + 100 + 30);
+    }
+
     private void addTooltipContainer() {
-        final JEditorPane cardInfoPane = (JEditorPane) Plugins.instance.getCardInfoPane();
+        JEditorPane cardInfoPane = (JEditorPane) Plugins.instance.getCardInfoPane();
         if (cardInfoPane == null) {
+            LOGGER.fatal("Can't find card tooltip plugin");
             return;
         }
         cardInfoPane.setLocation(40, 40);
         cardInfoPane.setBackground(new Color(0, 0, 0, 0));
+        UI.addComponent(MageComponents.CARD_INFO_PANE, cardInfoPane);
 
         MageRoundPane popupContainer = new MageRoundPane();
         popupContainer.setLayout(null);
-
         popupContainer.add(cardInfoPane);
         popupContainer.setVisible(false);
-
         desktopPane.add(popupContainer, JLayeredPane.POPUP_LAYER);
-
-        UI.addComponent(MageComponents.CARD_INFO_PANE, cardInfoPane);
         UI.addComponent(MageComponents.POPUP_CONTAINER, popupContainer);
-        // preview panel normal
+
+
         JPanel cardPreviewContainer = new JPanel();
         cardPreviewContainer.setOpaque(false);
         cardPreviewContainer.setLayout(null);
-        BigCard bigCard = new BigCard();
-        int height = GUISizeHelper.enlargedImageHeight;
-        int width = (int) ((float) height * (float) 0.64);
-        bigCard.setSize(width, height);
-        bigCard.setLocation(40, 40);
-        bigCard.setBackground(new Color(0, 0, 0, 0));
-
-        cardPreviewContainer.add(bigCard);
         cardPreviewContainer.setVisible(false);
-        cardPreviewContainer.setBounds(0, 0, width + 80, height + 30);
-
-        UI.addComponent(MageComponents.CARD_PREVIEW_PANE, bigCard);
+        desktopPane.add(cardPreviewContainer, JLayeredPane.POPUP_LAYER);
         UI.addComponent(MageComponents.CARD_PREVIEW_CONTAINER, cardPreviewContainer);
 
-        desktopPane.add(cardPreviewContainer, JLayeredPane.POPUP_LAYER);
+        BigCard bigCard = new BigCard();
+        bigCard.setLocation(40, 40);
+        bigCard.setBackground(new Color(0, 0, 0, 0));
+        cardPreviewContainer.add(bigCard);
+        UI.addComponent(MageComponents.CARD_PREVIEW_PANE, bigCard);
 
-        // preview panel rotated
         JPanel cardPreviewContainerRotated = new JPanel();
         cardPreviewContainerRotated.setOpaque(false);
         cardPreviewContainerRotated.setLayout(null);
-        bigCard = new BigCard(true);
-        bigCard.setSize(height, width + 30);
-        bigCard.setLocation(40, 40);
-        bigCard.setBackground(new Color(0, 0, 0, 0));
-        cardPreviewContainerRotated.add(bigCard);
         cardPreviewContainerRotated.setVisible(false);
-        cardPreviewContainerRotated.setBounds(0, 0, height + 80, width + 100 + 30);
-
-        UI.addComponent(MageComponents.CARD_PREVIEW_PANE_ROTATED, bigCard);
+        desktopPane.add(cardPreviewContainerRotated, JLayeredPane.POPUP_LAYER);
         UI.addComponent(MageComponents.CARD_PREVIEW_CONTAINER_ROTATED, cardPreviewContainerRotated);
 
-        desktopPane.add(cardPreviewContainerRotated, JLayeredPane.POPUP_LAYER);
 
+        BigCard bigCardRotated = new BigCard(true);
+        bigCardRotated.setLocation(40, 40);
+        bigCardRotated.setBackground(new Color(0, 0, 0, 0));
+        cardPreviewContainerRotated.add(bigCardRotated);
+        UI.addComponent(MageComponents.CARD_PREVIEW_PANE_ROTATED, bigCardRotated);
+
+        updateTooltipContainerSizes();
     }
 
     private void setGUISizeTooltipContainer() {
@@ -1586,7 +1601,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
         balloonTip.setFont(GUISizeHelper.balloonTooltipFont);
 
-        addTooltipContainer();
+        updateTooltipContainerSizes();
     }
 
     public void showWhatsNewDialog(boolean forceToShowPage) {

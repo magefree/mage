@@ -30,8 +30,8 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.image.BufferedImage;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -154,24 +154,22 @@ public class MageActionCallback implements ActionCallback {
 
                 try {
                     final Component popupContainer = MageFrame.getUI().getComponent(MageComponents.POPUP_CONTAINER);
-                    Component popup2 = MageFrame.getUI().getComponent(MageComponents.CARD_INFO_PANE);
-
-                    ((CardInfoPane) popup2).setCard(data.getCard(), popupContainer);
-
-                    showPopup(popupContainer, popup2);
-
+                    Component popupInfo = MageFrame.getUI().getComponent(MageComponents.CARD_INFO_PANE);
+                    ((CardInfoPane) popupInfo).setCard(data.getCard(), popupContainer);
+                    showPopup(popupContainer, popupInfo);
                 } catch (InterruptedException e) {
-                    LOGGER.warn(e.getMessage());
+                    LOGGER.error("Can't show card tooltip", e);
+                    Thread.currentThread().interrupt();
                 }
             }
 
             public void showPopup(final Component popupContainer, final Component infoPane) throws InterruptedException {
                 final Component c = MageFrame.getUI().getComponent(MageComponents.DESKTOP_PANE);
                 SwingUtilities.invokeLater(() -> {
-                            if (!popupTextWindowOpen
-                                    || enlargedWindowState != EnlargedWindowState.CLOSED) {
+                            if (!popupTextWindowOpen || enlargedWindowState != EnlargedWindowState.CLOSED) {
                                 return;
                             }
+
                             if (data.getLocationOnScreen() == null) {
                                 data.setLocationOnScreen(data.getComponent().getLocationOnScreen());
                             }
@@ -383,6 +381,7 @@ public class MageActionCallback implements ActionCallback {
         ArrowUtil.drawArrowsForPairedCards(data, parentPoint);
         ArrowUtil.drawArrowsForBandedCards(data, parentPoint);
         ArrowUtil.drawArrowsForEnchantPlayers(data, parentPoint);
+
         tooltipCard = data.getCard();
         showTooltipPopup(data, parentComponent, parentPoint);
     }
@@ -414,13 +413,9 @@ public class MageActionCallback implements ActionCallback {
 
     @Override
     public void hideOpenComponents() {
-        this.hideTooltipPopup();
-        this.hideEnlargedCard();
+        hideAll(null);
     }
 
-    /**
-     * Hides the text popup window
-     */
     public void hideTooltipPopup() {
         this.tooltipCard = null;
         if (tooltipPopup != null) {
@@ -433,11 +428,11 @@ public class MageActionCallback implements ActionCallback {
             if (SessionHandler.getSession() == null) {
                 return;
             }
-            // set enlarged card display to visible = false
             Component popupContainer = MageFrame.getUI().getComponent(MageComponents.POPUP_CONTAINER);
             popupContainer.setVisible(false);
-        } catch (Exception e2) {
-            LOGGER.warn("Can't set tooltip to visible = false", e2);
+        } catch (InterruptedException e) {
+            LOGGER.error("Can't hide card tooltip", e);
+            Thread.currentThread().interrupt();
         }
     }
 
