@@ -52,6 +52,10 @@ public final class Unstable extends ExpansionSet {
         cards.add(new SetCardInfo("Hydradoodle", 112, Rarity.RARE, mage.cards.h.Hydradoodle.class));
         cards.add(new SetCardInfo("Inhumaniac", 59, Rarity.UNCOMMON, mage.cards.i.Inhumaniac.class));
         cards.add(new SetCardInfo("Island", 213, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(FrameStyle.UST_FULL_ART_BASIC, false)));
+        cards.add(new SetCardInfo("Knight of the Kitchen Sink", "12a", Rarity.UNCOMMON, mage.cards.k.KnightOfTheKitchenSinkA.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Knight of the Kitchen Sink", "12b", Rarity.UNCOMMON, mage.cards.k.KnightOfTheKitchenSinkB.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Knight of the Kitchen Sink", "12d", Rarity.UNCOMMON, mage.cards.k.KnightOfTheKitchenSinkD.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Knight of the Kitchen Sink", "12e", Rarity.UNCOMMON, mage.cards.k.KnightOfTheKitchenSinkE.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Krark's Other Thumb", 151, Rarity.UNCOMMON, mage.cards.k.KrarksOtherThumb.class));
         cards.add(new SetCardInfo("Lobe Lobber", 153, Rarity.UNCOMMON, mage.cards.l.LobeLobber.class));
         cards.add(new SetCardInfo("Mad Science Fair Project", 154, Rarity.COMMON, mage.cards.m.MadScienceFairProject.class));
