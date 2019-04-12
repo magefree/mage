@@ -74,6 +74,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Flux Channeler", 52, Rarity.UNCOMMON, mage.cards.f.FluxChanneler.class));
         cards.add(new SetCardInfo("Forced Landing", 161, Rarity.COMMON, mage.cards.f.ForcedLanding.class));
         cards.add(new SetCardInfo("Forest", 262, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 263, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 264, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Giant Growth", 162, Rarity.COMMON, mage.cards.g.GiantGrowth.class));
         cards.add(new SetCardInfo("Gideon's Battle Cry", 267, Rarity.RARE, mage.cards.g.GideonsBattleCry.class));
@@ -95,6 +96,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Iron Bully", 240, Rarity.COMMON, mage.cards.i.IronBully.class));
         cards.add(new SetCardInfo("Island", 253, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 254, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 255, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jace, Wielder of Mysteries", 54, Rarity.RARE, mage.cards.j.JaceWielderOfMysteries.class));
         cards.add(new SetCardInfo("Jaya's Greeting", 136, Rarity.COMMON, mage.cards.j.JayasGreeting.class));
         cards.add(new SetCardInfo("Jaya, Venerated Firemage", 135, Rarity.UNCOMMON, mage.cards.j.JayaVeneratedFiremage.class));
@@ -124,6 +126,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Mayhem Devil", 204, Rarity.UNCOMMON, mage.cards.m.MayhemDevil.class));
         cards.add(new SetCardInfo("Merfolk Skydiver", 205, Rarity.UNCOMMON, mage.cards.m.MerfolkSkydiver.class));
         cards.add(new SetCardInfo("Mizzium Tank", 138, Rarity.RARE, mage.cards.m.MizziumTank.class));
+        cards.add(new SetCardInfo("Mountain", 259, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 260, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 261, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mowu, Loyal Companion", 167, Rarity.UNCOMMON, mage.cards.m.MowuLoyalCompanion.class));
@@ -139,6 +142,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Paradise Druid", 171, Rarity.UNCOMMON, mage.cards.p.ParadiseDruid.class));
         cards.add(new SetCardInfo("Parhelion II", 24, Rarity.RARE, mage.cards.p.ParhelionII.class));
         cards.add(new SetCardInfo("Plains", 250, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 251, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 252, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pollenbright Druid", 173, Rarity.COMMON, mage.cards.p.PollenbrightDruid.class));
         cards.add(new SetCardInfo("Pouncing Lynx", 25, Rarity.COMMON, mage.cards.p.PouncingLynx.class));
@@ -170,6 +174,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Storrev, Devkarin Lich", 219, Rarity.RARE, mage.cards.s.StorrevDevkarinLich.class));
         cards.add(new SetCardInfo("Sunblade Angel", 31, Rarity.UNCOMMON, mage.cards.s.SunbladeAngel.class));
         cards.add(new SetCardInfo("Swamp", 256, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 257, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 258, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tamiyo's Epiphany", 71, Rarity.COMMON, mage.cards.t.TamiyosEpiphany.class));
         cards.add(new SetCardInfo("Teferi, Time Raveler", 221, Rarity.RARE, mage.cards.t.TeferiTimeRaveler.class));
