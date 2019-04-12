@@ -88,6 +88,9 @@ public class ConnectDialog extends MageDialog {
         MagePreferences.setUserName(serverAddress, txtUserName.getText().trim());
         MagePreferences.setPassword(serverAddress, String.valueOf(txtPassword.getPassword()).trim());
         MageFrame.getPreferences().put(KEY_CONNECT_AUTO_CONNECT, Boolean.toString(chkAutoConnect.isSelected()));
+
+        // last settings for reconnect
+        MagePreferences.saveLastServer();
     }
 
     /**

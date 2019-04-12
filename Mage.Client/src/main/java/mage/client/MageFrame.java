@@ -246,8 +246,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         SessionHandler.startSession(this);
         callbackClient = new CallbackClientImpl(this);
         connectDialog = new ConnectDialog();
-        try
-        {
+        try {
             whatsNewDialog = new WhatsNewDialog();
         } catch (NoClassDefFoundError e) {
             // JavaFX is not supported on old MacOS with OpenJDK
@@ -760,10 +759,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     private boolean performConnect(boolean reconnect) {
         if (currentConnection == null || !reconnect) {
-            String server = MagePreferences.getServerAddress();
-            int port = MagePreferences.getServerPort();
-            String userName = MagePreferences.getUserName(server);
-            String password = MagePreferences.getPassword(server);
+            String server = MagePreferences.getLastServerAddress();
+            int port = MagePreferences.getLastServerPort();
+            String userName = MagePreferences.getLastServerUser();
+            String password = MagePreferences.getLastServerPassword();
             String proxyServer = PREFS.get("proxyAddress", "");
             int proxyPort = Integer.parseInt(PREFS.get("proxyPort", "0"));
             ProxyType proxyType = ProxyType.valueByText(PREFS.get("proxyType", "None"));
@@ -1423,7 +1422,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                         hideTables();
                         SessionHandler.disconnect(false);
                         if (askToReconnect) {
-                            UserRequestMessage message = new UserRequestMessage("Connection lost", "The connection to server was lost. Reconnect?");
+                            UserRequestMessage message = new UserRequestMessage("Connection lost", "The connection to server was lost. Reconnect to " + MagePreferences.getLastServerAddress() + "?");
                             message.setButton1("No", null);
                             message.setButton2("Yes", PlayerAction.CLIENT_RECONNECT);
                             showUserRequestDialog(message);
