@@ -1416,11 +1416,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             // USER mode, e.g. user plays and got disconnect
             LOGGER.info("Disconnected from user mode");
             SwingUtilities.invokeLater(() -> {
+                        SessionHandler.disconnect(false); // user already disconnected, can't do any online actions like quite chat
                         setConnectButtonText(NOT_CONNECTED_TEXT);
                         disableButtons();
                         hideGames();
                         hideTables();
-                        SessionHandler.disconnect(false);
                         if (askToReconnect) {
                             UserRequestMessage message = new UserRequestMessage("Connection lost", "The connection to server was lost. Reconnect to " + MagePreferences.getLastServerAddress() + "?");
                             message.setButton1("No", null);

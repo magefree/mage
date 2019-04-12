@@ -513,6 +513,7 @@ public class TablesPanel extends javax.swing.JPanel {
     public void cleanUp() {
         saveGuiSettings();
         chatPanelMain.cleanUp();
+        stopTasks();
     }
 
     public void changeGUISize() {

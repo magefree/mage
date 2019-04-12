@@ -1583,12 +1583,24 @@ public class SessionImpl implements Session {
     }
 
     private void handleThrowable(Throwable t) {
-        logger.fatal("Communication error", t);
 
+        // ignore interrupted exceptions -- it's connection problem or user's close
+        if (t instanceof InterruptedException) {
+            //logger.error("Connection error: was interrupted", t);
+            Thread.currentThread().interrupt();
+            return;
+        }
 
-        // Probably this can cause hanging the client under certain circumstances as the disconnect method is synchronized
-        // so check if it's needed
-        // disconnect(true);
+        if (t instanceof RuntimeException) {
+            RuntimeException re = (RuntimeException) t;
+            if (t.getCause() instanceof InterruptedException) {
+                //logger.error("Connection error: was interrupted by runtime exception", t.getCause());
+                Thread.currentThread().interrupt();
+                return;
+            }
+        }
+
+        logger.fatal("Connection error: other", t);
     }
 
     private void handleMageException(MageException ex) {
