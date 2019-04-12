@@ -96,7 +96,7 @@ class KarnTheGreatCreatorAnimateEffect extends ContinuousEffectImpl {
     KarnTheGreatCreatorAnimateEffect() {
         super(Duration.UntilYourNextTurn, Outcome.BecomeCreature);
         staticText = "Until your next turn, up to one target noncreature artifact becomes " +
-                "an artifact creature with power and toughness equal to its converted mana cost.";
+                "an artifact creature with power and toughness each equal to its converted mana cost.";
     }
 
     private KarnTheGreatCreatorAnimateEffect(final KarnTheGreatCreatorAnimateEffect effect) {
