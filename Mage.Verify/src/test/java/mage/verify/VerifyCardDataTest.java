@@ -195,6 +195,7 @@ public class VerifyCardDataTest {
                         // workaround to star wars and unstable set with same card names
                         if (!checkCard.getName().equals("Syndicate Enforcer")
                                 && !checkCard.getName().equals("Garbage Elemental")
+                                && !checkCard.getName().equals("Knight of the Kitchen Sink")
                                 && !checkCard.getName().equals("Very Cryptic Command")) {
                             errorsList.add("Error: found wrong class in set " + set.getCode() + " - " + checkCard.getName() + " (" + currentClass + " <> " + needClass + ")");
                         }
