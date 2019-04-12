@@ -76,6 +76,7 @@ public class VerifyCardDataTest {
         skipListAddName("COST", "M13", "Erase");
         skipListAddName("COST", "ULG", "Erase");
         skipListAddName("COST", "H17", "Grimlock, Dinobot Leader");
+        skipListAddName("COST", "UST", "Everythingamajig");
 
         // supertype
         skipListCreate("SUPERTYPE");
