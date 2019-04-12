@@ -136,7 +136,7 @@ public class DraftPanel extends javax.swing.JPanel {
 
         if (isLogging()) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
-            String logFilename = "Draft_" + sdf.format(new Date()) + '_' + draftId + ".txt";
+            String logFilename = "Draft_" + sdf.format(new Date()) + '_' + draftId + ".draft";
             draftLogger = new DraftPickLogger(new File("gamelogs"), logFilename);
         } else {
             draftLogger = new DraftPickLogger();
