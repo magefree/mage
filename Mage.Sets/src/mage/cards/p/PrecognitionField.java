@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import mage.MageObject;
@@ -7,8 +6,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -27,14 +26,13 @@ public final class PrecognitionField extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
 
         // You may look at the top card of your library.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PrecognitionFieldTopCardRevealedEffect()));
+        this.addAbility(new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect()));
 
         // You may cast the top card of your library if it's an instant or sorcery card.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PrecognitionFieldTopCardCastEffect()));
+        this.addAbility(new SimpleStaticAbility(new PrecognitionFieldTopCardCastEffect()));
 
         // {3}: Exile the top card of your library.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new PrecognitionFieldExileEffect(), new GenericManaCost(3)));
+        this.addAbility(new SimpleActivatedAbility(new PrecognitionFieldExileEffect(), new GenericManaCost(3)));
     }
 
     public PrecognitionField(final PrecognitionField card) {
@@ -44,38 +42,6 @@ public final class PrecognitionField extends CardImpl {
     @Override
     public PrecognitionField copy() {
         return new PrecognitionField(this);
-    }
-}
-
-class PrecognitionFieldTopCardRevealedEffect extends ContinuousEffectImpl {
-
-    public PrecognitionFieldTopCardRevealedEffect() {
-        super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
-        staticText = "You may look at the top card of your library any time.";
-    }
-
-    public PrecognitionFieldTopCardRevealedEffect(final PrecognitionFieldTopCardRevealedEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Card topCard = controller.getLibrary().getFromTop(game);
-            if (topCard != null) {
-                MageObject precognitionField = source.getSourceObject(game);
-                if (precognitionField != null) {
-                    controller.lookAtCards("Top card of " + precognitionField.getIdName() + " controller's library", topCard, game);
-                }
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public PrecognitionFieldTopCardRevealedEffect copy() {
-        return new PrecognitionFieldTopCardRevealedEffect(this);
     }
 }
 
