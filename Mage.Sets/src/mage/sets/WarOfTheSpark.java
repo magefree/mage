@@ -39,6 +39,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Blindblast", 114, Rarity.COMMON, mage.cards.b.Blindblast.class));
         cards.add(new SetCardInfo("Bloom Hulk", 154, Rarity.COMMON, mage.cards.b.BloomHulk.class));
         cards.add(new SetCardInfo("Bolt Bend", 115, Rarity.UNCOMMON, mage.cards.b.BoltBend.class));
+        cards.add(new SetCardInfo("Bond of Insight", 43, Rarity.UNCOMMON, mage.cards.b.BondOfInsight.class));
         cards.add(new SetCardInfo("Bulwark Giant", 7, Rarity.COMMON, mage.cards.b.BulwarkGiant.class));
         cards.add(new SetCardInfo("Burning Prophet", 117, Rarity.COMMON, mage.cards.b.BurningProphet.class));
         cards.add(new SetCardInfo("Chainwhip Cyclops", 118, Rarity.COMMON, mage.cards.c.ChainwhipCyclops.class));
