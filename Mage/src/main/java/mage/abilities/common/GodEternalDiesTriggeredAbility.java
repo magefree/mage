@@ -16,13 +16,13 @@ import mage.players.Player;
 /**
  * @author TheElk801
  */
-public class GodEternalTriggeredAbility extends TriggeredAbilityImpl {
+public class GodEternalDiesTriggeredAbility extends TriggeredAbilityImpl {
 
-    public GodEternalTriggeredAbility() {
+    public GodEternalDiesTriggeredAbility() {
         super(Zone.ALL, null, true);
     }
 
-    private GodEternalTriggeredAbility(GodEternalTriggeredAbility ability) {
+    private GodEternalDiesTriggeredAbility(GodEternalDiesTriggeredAbility ability) {
         super(ability);
     }
 
@@ -46,8 +46,8 @@ public class GodEternalTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public GodEternalTriggeredAbility copy() {
-        return new GodEternalTriggeredAbility(this);
+    public GodEternalDiesTriggeredAbility copy() {
+        return new GodEternalDiesTriggeredAbility(this);
     }
 
     @Override

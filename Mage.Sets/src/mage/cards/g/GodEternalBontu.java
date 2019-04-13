@@ -3,7 +3,7 @@ package mage.cards.g;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.GodEternalTriggeredAbility;
+import mage.abilities.common.GodEternalDiesTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
@@ -44,7 +44,7 @@ public final class GodEternalBontu extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GodEternalBontuEffect()));
 
         // When God-Eternal Bontu dies or is put into exile from the battlefield, you may put it into its owner's library third from the top.
-        this.addAbility(new GodEternalTriggeredAbility());
+        this.addAbility(new GodEternalDiesTriggeredAbility());
     }
 
     private GodEternalBontu(final GodEternalBontu card) {
