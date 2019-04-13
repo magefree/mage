@@ -72,6 +72,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Eternal Taskmaster", 90, Rarity.UNCOMMON, mage.cards.e.EternalTaskmaster.class));
         cards.add(new SetCardInfo("Evolution Sage", 159, Rarity.UNCOMMON, mage.cards.e.EvolutionSage.class));
         cards.add(new SetCardInfo("Fblthp, the Lost", 50, Rarity.RARE, mage.cards.f.FblthpTheLost.class));
+        cards.add(new SetCardInfo("Firemind Vessel", 237, Rarity.UNCOMMON, mage.cards.f.FiremindVessel.class));
         cards.add(new SetCardInfo("Flux Channeler", 52, Rarity.UNCOMMON, mage.cards.f.FluxChanneler.class));
         cards.add(new SetCardInfo("Forced Landing", 161, Rarity.COMMON, mage.cards.f.ForcedLanding.class));
         cards.add(new SetCardInfo("Forest", 262, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
