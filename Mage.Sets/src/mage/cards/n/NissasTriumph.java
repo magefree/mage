@@ -1,5 +1,6 @@
 package mage.cards.n;
 
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
@@ -30,6 +31,8 @@ public final class NissasTriumph extends CardImpl {
         filter.add(new SupertypePredicate(SuperType.BASIC));
         filter.add(new SubtypePredicate(SubType.FOREST));
     }
+
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter2);
 
     public NissasTriumph(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}{G}");
