@@ -139,6 +139,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Nahiri, Storm of Stone", 233, Rarity.UNCOMMON, mage.cards.n.NahiriStormOfStone.class));
         cards.add(new SetCardInfo("Neheb, Dreadhorde Champion", 140, Rarity.RARE, mage.cards.n.NehebDreadhordeChampion.class));
         cards.add(new SetCardInfo("Nissa's Triumph", 170, Rarity.UNCOMMON, mage.cards.n.NissasTriumph.class));
+        cards.add(new SetCardInfo("Nissa, Who Shakes the World", 169, Rarity.RARE, mage.cards.n.NissaWhoShakesTheWorld.class));
         cards.add(new SetCardInfo("Niv-Mizzet Reborn", 208, Rarity.MYTHIC, mage.cards.n.NivMizzetReborn.class));
         cards.add(new SetCardInfo("No Escape", 63, Rarity.COMMON, mage.cards.n.NoEscape.class));
         cards.add(new SetCardInfo("Ob Nixilis's Cruelty", 101, Rarity.COMMON, mage.cards.o.ObNixilissCruelty.class));
