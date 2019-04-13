@@ -85,6 +85,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Gleaming Overseer", 198, Rarity.UNCOMMON, mage.cards.g.GleamingOverseer.class));
         cards.add(new SetCardInfo("Goblin Assailant", 128, Rarity.COMMON, mage.cards.g.GoblinAssailant.class));
         cards.add(new SetCardInfo("Goblin Assault Team", 129, Rarity.COMMON, mage.cards.g.GoblinAssaultTeam.class));
+        cards.add(new SetCardInfo("God-Eternal Bontu", 92, Rarity.MYTHIC, mage.cards.g.GodEternalBontu.class));
         cards.add(new SetCardInfo("God-Pharaoh's Statue", 238, Rarity.UNCOMMON, mage.cards.g.GodPharaohsStatue.class));
         cards.add(new SetCardInfo("Grateful Apparition", 17, Rarity.UNCOMMON, mage.cards.g.GratefulApparition.class));
         cards.add(new SetCardInfo("Grim Initiate", 130, Rarity.COMMON, mage.cards.g.GrimInitiate.class));
