@@ -76,6 +76,7 @@ public class VerifyCardDataTest {
         skipListAddName("COST", "M13", "Erase");
         skipListAddName("COST", "ULG", "Erase");
         skipListAddName("COST", "H17", "Grimlock, Dinobot Leader");
+        skipListAddName("COST", "UST", "Everythingamajig");
 
         // supertype
         skipListCreate("SUPERTYPE");
@@ -194,6 +195,7 @@ public class VerifyCardDataTest {
                     if (!needClass.equals(currentClass)) {
                         // workaround to star wars and unstable set with same card names
                         if (!checkCard.getName().equals("Syndicate Enforcer")
+                                && !checkCard.getName().equals("Everythingamajig")
                                 && !checkCard.getName().equals("Garbage Elemental")
                                 && !checkCard.getName().equals("Very Cryptic Command")) {
                             errorsList.add("Error: found wrong class in set " + set.getCode() + " - " + checkCard.getName() + " (" + currentClass + " <> " + needClass + ")");
