@@ -82,6 +82,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Gideon's Battle Cry", 267, Rarity.RARE, mage.cards.g.GideonsBattleCry.class));
         cards.add(new SetCardInfo("Gideon's Company", 268, Rarity.UNCOMMON, mage.cards.g.GideonsCompany.class));
         cards.add(new SetCardInfo("Gideon's Triumph", 15, Rarity.UNCOMMON, mage.cards.g.GideonsTriumph.class));
+        cards.add(new SetCardInfo("Gideon, the Oathsworn", 265, Rarity.MYTHIC, mage.cards.g.GideonTheOathsworn.class));
         cards.add(new SetCardInfo("Gleaming Overseer", 198, Rarity.UNCOMMON, mage.cards.g.GleamingOverseer.class));
         cards.add(new SetCardInfo("Goblin Assailant", 128, Rarity.COMMON, mage.cards.g.GoblinAssailant.class));
         cards.add(new SetCardInfo("Goblin Assault Team", 129, Rarity.COMMON, mage.cards.g.GoblinAssaultTeam.class));
