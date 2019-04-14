@@ -83,6 +83,8 @@ public final class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Fyndhorn Druid", "90a", Rarity.COMMON, mage.cards.f.FyndhornDruid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fyndhorn Druid", "90b", Rarity.COMMON, mage.cards.f.FyndhornDruid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gargantuan Gorilla", 91, Rarity.RARE, mage.cards.g.GargantuanGorilla.class));
+        cards.add(new SetCardInfo("Gift of the Woods", "92a", Rarity.COMMON, mage.cards.g.GiftOfTheWoods.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gift of the Woods", "92b", Rarity.COMMON, mage.cards.g.GiftOfTheWoods.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gorilla Berserkers", "93a", Rarity.COMMON, mage.cards.g.GorillaBerserkers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gorilla Berserkers", "93b", Rarity.COMMON, mage.cards.g.GorillaBerserkers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gorilla Chieftain", "94a", Rarity.COMMON, mage.cards.g.GorillaChieftain.class, NON_FULL_USE_VARIOUS));
