@@ -460,6 +460,12 @@ public final class StaticFilters {
         FILTER_SPELL_NON_CREATURE.setLockedFilter(true);
     }
 
+    public static final FilterSpell FILTER_SPELL_A_NON_CREATURE = (FilterSpell) new FilterSpell("a noncreature spell").add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+
+    static {
+        FILTER_SPELL_A_NON_CREATURE.setLockedFilter(true);
+    }
+
     public static final FilterSpell FILTER_SPELL = new FilterSpell();
 
     static {

@@ -1,5 +1,6 @@
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
@@ -25,8 +26,6 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.functions.EmptyApplyToPermanent;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -56,7 +55,7 @@ public final class SaheeliSublimeArtificer extends CardImpl {
 
         // Whenever you cast a noncreature spell, create a 1/1 colorless Servo artifact creature token.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new CreateTokenEffect(new ServoToken()), StaticFilters.FILTER_SPELL_NON_CREATURE, false
+                new CreateTokenEffect(new ServoToken()), StaticFilters.FILTER_SPELL_A_NON_CREATURE, false
         ));
 
         // -2: Target artifact you control becomes a copy of another target artifact or creature you control until end of turn, except it's an artifact in addition to its other types.
@@ -84,8 +83,8 @@ class SaheeliSublimeArtificerEffect extends OneShotEffect {
 
     SaheeliSublimeArtificerEffect() {
         super(Outcome.Benefit);
-        staticText = "Target artifact you control becomes a copy of another target artifact or creature you control" +
-                " until end of turn, except it's an artifact in addition to its other types.";
+        staticText = "Target artifact you control becomes a copy of another target artifact or creature you control"
+                + " until end of turn, except it's an artifact in addition to its other types.";
     }
 
     private SaheeliSublimeArtificerEffect(final SaheeliSublimeArtificerEffect effect) {

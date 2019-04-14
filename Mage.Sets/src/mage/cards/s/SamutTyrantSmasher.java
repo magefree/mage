@@ -1,5 +1,6 @@
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
@@ -17,8 +18,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -44,7 +43,7 @@ public final class SamutTyrantSmasher extends CardImpl {
         ).setText("target creature gets +2/+1"), -1);
         ability.addEffect(new GainAbilityTargetEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn
-        ).setText("and gains haste until end of turn. "));
+        ).setText("and gains haste until end of turn"));
         ability.addEffect(new ScryEffect(1));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

@@ -1,5 +1,6 @@
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -9,8 +10,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -27,7 +26,7 @@ public final class SpellgorgerWeird extends CardImpl {
         // Whenever you cast a noncreature spell, put a +1/+1 counter on Spellgorger Weird.
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                StaticFilters.FILTER_SPELL_NON_CREATURE, false
+                StaticFilters.FILTER_SPELL_A_NON_CREATURE, false
         ));
     }
 

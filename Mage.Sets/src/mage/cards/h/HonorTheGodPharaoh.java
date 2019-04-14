@@ -1,13 +1,12 @@
 package mage.cards.h;
 
+import java.util.UUID;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.keyword.AmassEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -21,7 +20,7 @@ public final class HonorTheGodPharaoh extends CardImpl {
         this.getSpellAbility().addCost(new DiscardCardCost(false));
 
         // Draw two cards. Amass 1.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2).setText("draw two cards."));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2).setText("draw two cards"));
         this.getSpellAbility().addEffect(new AmassEffect(1));
     }
 
