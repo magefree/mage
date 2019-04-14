@@ -205,6 +205,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Time Wipe", 223, Rarity.RARE, mage.cards.t.TimeWipe.class));
         cards.add(new SetCardInfo("Toll of the Invasion", 108, Rarity.COMMON, mage.cards.t.TollOfTheInvasion.class));
         cards.add(new SetCardInfo("Tolsimir, Friend to Wolves", 224, Rarity.RARE, mage.cards.t.TolsimirFriendToWolves.class));
+        cards.add(new SetCardInfo("Tomik, Distinguished Advokist", 34, Rarity.RARE, mage.cards.t.TomikDistinguishedAdvokist.class));
         cards.add(new SetCardInfo("Topple the Statue", 35, Rarity.COMMON, mage.cards.t.ToppleTheStatue.class));
         cards.add(new SetCardInfo("Totally Lost", 74, Rarity.COMMON, mage.cards.t.TotallyLost.class));
         cards.add(new SetCardInfo("Turret Ogre", 148, Rarity.COMMON, mage.cards.t.TurretOgre.class));
