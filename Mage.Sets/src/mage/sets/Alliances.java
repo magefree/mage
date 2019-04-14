@@ -108,6 +108,8 @@ public final class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Keeper of Tresserhorn", 52, Rarity.RARE, mage.cards.k.KeeperOfTresserhorn.class));
         cards.add(new SetCardInfo("Kjeldoran Escort", "7a", Rarity.COMMON, mage.cards.k.KjeldoranEscort.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kjeldoran Escort", "7b", Rarity.COMMON, mage.cards.k.KjeldoranEscort.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kjeldoran Pride", "9a", Rarity.COMMON, mage.cards.k.KjeldoranPride.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kjeldoran Pride", "9b", Rarity.COMMON, mage.cards.k.KjeldoranPride.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kjeldoran Home Guard", 8, Rarity.UNCOMMON, mage.cards.k.KjeldoranHomeGuard.class));
         cards.add(new SetCardInfo("Kjeldoran Outpost", 139, Rarity.RARE, mage.cards.k.KjeldoranOutpost.class));
         cards.add(new SetCardInfo("Krovikan Horror", 53, Rarity.RARE, mage.cards.k.KrovikanHorror.class));
