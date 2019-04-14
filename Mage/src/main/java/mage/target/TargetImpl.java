@@ -293,22 +293,17 @@ public abstract class TargetImpl implements Target {
             return false;
         }
 
+        List<UUID> possibleTargets = new ArrayList<>(possibleTargets(source.getSourceId(), playerId, game));
         while (!isChosen() && !doneChosing()) {
             if (!player.canRespond()) {
                 return chosen = targets.size() >= getNumberOfTargets();
             }
             chosen = targets.size() >= getNumberOfTargets();
             if (isRandom()) {
-                Set<UUID> possibleTargets = possibleTargets(source.getSourceId(), playerId, game);
                 if (!possibleTargets.isEmpty()) {
-                    int i = 0;
-                    int rnd = RandomUtil.nextInt(possibleTargets.size());
-                    Iterator it = possibleTargets.iterator();
-                    while (i < rnd) {
-                        it.next();
-                        i++;
-                    }
-                    this.addTarget(((UUID) it.next()), source, game);
+                    int index = RandomUtil.nextInt(possibleTargets.size());
+                    this.addTarget(possibleTargets.get(index), source, game);
+                    possibleTargets.remove(index);
                 } else {
                     return chosen;
                 }
