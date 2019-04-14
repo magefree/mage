@@ -68,7 +68,7 @@ class MassacreGirlEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         game.addEffect(new BoostAllEffect(-1, -1, Duration.EndOfTurn, true), source);
-        game.addDelayedTriggeredAbility(new MassacreGirlDelayedTriggeredAbility());
+        game.addDelayedTriggeredAbility(new MassacreGirlDelayedTriggeredAbility(), source);
         return true;
     }
 }
