@@ -153,6 +153,7 @@ public final class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Reprisal", "13a", Rarity.COMMON, mage.cards.r.Reprisal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Reprisal", "13b", Rarity.COMMON, mage.cards.r.Reprisal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ritual of the Machine", 59, Rarity.RARE, mage.cards.r.RitualOfTheMachine.class));
+        cards.add(new SetCardInfo("Rogue Skycaptain", 79, Rarity.RARE, mage.cards.r.RogueSkycaptain.class));
         cards.add(new SetCardInfo("Royal Decree", 14, Rarity.RARE, mage.cards.r.RoyalDecree.class));
         cards.add(new SetCardInfo("Royal Herbalist", "15a", Rarity.COMMON, mage.cards.r.RoyalHerbalist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Royal Herbalist", "15b", Rarity.COMMON, mage.cards.r.RoyalHerbalist.class, NON_FULL_USE_VARIOUS));

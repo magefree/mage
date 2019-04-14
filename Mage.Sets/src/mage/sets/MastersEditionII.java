@@ -195,6 +195,7 @@ public final class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Ritual of Subdual", 174, Rarity.RARE, mage.cards.r.RitualOfSubdual.class));
         cards.add(new SetCardInfo("Ritual of the Machine", 109, Rarity.RARE, mage.cards.r.RitualOfTheMachine.class));
         cards.add(new SetCardInfo("Roterothopter", 218, Rarity.COMMON, mage.cards.r.Roterothopter.class));
+        cards.add(new SetCardInfo("Rogue Skycaptain", 149, Rarity.RARE, mage.cards.r.RogueSkycaptain.class));
         cards.add(new SetCardInfo("Royal Decree", 31, Rarity.RARE, mage.cards.r.RoyalDecree.class));
         cards.add(new SetCardInfo("Royal Trooper", 32, Rarity.COMMON, mage.cards.r.RoyalTrooper.class));
         cards.add(new SetCardInfo("Ruins of Trokair", 234, Rarity.UNCOMMON, mage.cards.r.RuinsOfTrokair.class));
