@@ -315,6 +315,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Unseen Walker", 249, Rarity.UNCOMMON, mage.cards.u.UnseenWalker.class));
         cards.add(new SetCardInfo("Unyaro Bee Sting", 250, Rarity.UNCOMMON, mage.cards.u.UnyaroBeeSting.class));
         cards.add(new SetCardInfo("Unyaro Griffin", 44, Rarity.UNCOMMON, mage.cards.u.UnyaroGriffin.class));
+        cards.add(new SetCardInfo("Urborg Panther", 150, Rarity.COMMON, mage.cards.u.UrborgPanther.class));
         cards.add(new SetCardInfo("Vaporous Djinn", 101, Rarity.UNCOMMON, mage.cards.v.VaporousDjinn.class));
         cards.add(new SetCardInfo("Ventifact Bottle", 323, Rarity.RARE, mage.cards.v.VentifactBottle.class));
         cards.add(new SetCardInfo("Viashino Warrior", 200, Rarity.COMMON, mage.cards.v.ViashinoWarrior.class));
