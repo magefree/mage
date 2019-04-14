@@ -171,6 +171,8 @@ public final class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Soldevi Heretic", "33b", Rarity.COMMON, mage.cards.s.SoldeviHeretic.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Soldevi Sage", "34a", Rarity.COMMON, mage.cards.s.SoldeviSage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Soldevi Sage", "34b", Rarity.COMMON, mage.cards.s.SoldeviSage.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Soldevi Sentry", "132a", Rarity.COMMON, mage.cards.s.SoldeviSentry.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Soldevi Sentry", "132b", Rarity.COMMON, mage.cards.s.SoldeviSentry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Soldevi Steam Beast", "133a", Rarity.COMMON, mage.cards.s.SoldeviSteamBeast.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Soldevi Steam Beast", "133b", Rarity.COMMON, mage.cards.s.SoldeviSteamBeast.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Soldier of Fortune", 80, Rarity.UNCOMMON, mage.cards.s.SoldierOfFortune.class));
