@@ -91,10 +91,18 @@ class NivMizzetRebornEffect extends OneShotEffect {
             String otherColors = "";
             for (char c : "WUBRG".toCharArray()) {
                 if (color1.charAt(0) == c || color2.charAt(0) == c) {
-                    otherColors += c;
+                    continue;
                 }
+                otherColors += c;
             }
             return otherColors;
+        }
+
+        private boolean isInCards(Cards cards, Game game) {
+            FilterCard filter = new FilterCard(getDescription());
+            filter.add(new ColorPredicate(new ObjectColor(color1 + color2)));
+            filter.add(Predicates.not(new ColorPredicate(new ObjectColor(getOtherColors()))));
+            return cards.getCards(game).stream().anyMatch(card -> filter.match(card, game));
         }
     }
 
@@ -127,6 +135,9 @@ class NivMizzetRebornEffect extends OneShotEffect {
         }
         player.revealCards(source, cards, game);
         for (Guild guild : Guild.values()) {
+            if (!guild.isInCards(cards, game)) {
+                continue;
+            }
             TargetCard target = guild.getTarget();
             if (player.choose(outcome, cards, target, game)) {
                 Card card = game.getCard(target.getFirstTarget());
