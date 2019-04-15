@@ -14,9 +14,9 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class SilentSubmarine extends CardImpl {
+public final class SilentSubmersible extends CardImpl {
 
-    public SilentSubmarine(UUID ownerId, CardSetInfo setInfo) {
+    public SilentSubmersible(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{U}{U}");
 
         this.subtype.add(SubType.VEHICLE);
@@ -32,12 +32,12 @@ public final class SilentSubmarine extends CardImpl {
         this.addAbility(new CrewAbility(2));
     }
 
-    private SilentSubmarine(final SilentSubmarine card) {
+    private SilentSubmersible(final SilentSubmersible card) {
         super(card);
     }
 
     @Override
-    public SilentSubmarine copy() {
-        return new SilentSubmarine(this);
+    public SilentSubmersible copy() {
+        return new SilentSubmersible(this);
     }
 }
