@@ -94,12 +94,12 @@ class BondOfPassionEffect extends OneShotEffect {
             effect.setTargetPointer(new FixedTarget(permanent, game));
             game.addEffect(effect, source);
         }
-        Permanent permanent2 = game.getPermanent(source.getTargets().get(0).getFirstTarget());
+        Permanent permanent2 = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (permanent2 != null) {
             permanent2.damage(2, source.getSourceId(), game);
             return true;
         }
-        Player player = game.getPlayer(source.getTargets().get(0).getFirstTarget());
+        Player player = game.getPlayer(source.getTargets().get(1).getFirstTarget());
         if (player != null) {
             player.damage(2, source.getSourceId(), game);
         }
