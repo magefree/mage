@@ -417,6 +417,12 @@ public final class StaticFilters {
         FILTER_PERMANENT_PLANESWALKER.setLockedFilter(true);
     }
 
+    public static final FilterPlaneswalkerPermanent FILTER_PERMANENT_PLANESWALKERS = new FilterPlaneswalkerPermanent("planeswalkers");
+
+    static {
+        FILTER_PERMANENT_PLANESWALKERS.setLockedFilter(true);
+    }
+
     public static final FilterNonlandPermanent FILTER_PERMANENT_NON_LAND = new FilterNonlandPermanent();
 
     static {

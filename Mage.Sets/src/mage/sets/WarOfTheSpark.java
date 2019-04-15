@@ -205,6 +205,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Teyo's Lightshield", 33, Rarity.COMMON, mage.cards.t.TeyosLightshield.class));
         cards.add(new SetCardInfo("Teyo, the Shieldmage", 32, Rarity.UNCOMMON, mage.cards.t.TeyoTheShieldmage.class));
         cards.add(new SetCardInfo("Tezzeret, Master of the Bridge", 275, Rarity.MYTHIC, mage.cards.t.TezzeretMasterOfTheBridge.class));
+        cards.add(new SetCardInfo("The Elderspell", 89, Rarity.RARE, mage.cards.t.TheElderspell.class));
         cards.add(new SetCardInfo("The Wanderer", 37, Rarity.UNCOMMON, mage.cards.t.TheWanderer.class));
         cards.add(new SetCardInfo("Thundering Ceratok", 179, Rarity.COMMON, mage.cards.t.ThunderingCeratok.class));
         cards.add(new SetCardInfo("Tibalt's Rager", 147, Rarity.UNCOMMON, mage.cards.t.TibaltsRager.class));
