@@ -113,7 +113,7 @@ class RenownedWeaponsmithEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (sourceObject != null && controller != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
-            if (controller.searchLibrary(target, game)) {
+            if (controller.searchLibrary(target, source, game)) {
                 if (!target.getTargets().isEmpty()) {
                     Cards revealed = new CardsImpl();
                     Card card = game.getCard(target.getFirstTarget());

@@ -82,7 +82,7 @@ class WildPairEffect extends OneShotEffect {
                 FilterCreatureCard filter = new FilterCreatureCard("creature card with total power and toughness " + totalPT);
                 filter.add(new TotalPowerAndToughnessPredicate(ComparisonType.EQUAL_TO, totalPT));
                 TargetCardInLibrary target = new TargetCardInLibrary(1, filter);
-                if (controller.searchLibrary(target, game)) {
+                if (controller.searchLibrary(target, source, game)) {
                     if (!target.getTargets().isEmpty()) {
                         controller.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
                     }

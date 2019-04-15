@@ -91,7 +91,7 @@ class SkyshipWeatherlightEffect extends SearchEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (sourceObject != null && controller != null) {
-            if (controller.searchLibrary(target, game)) {
+            if (controller.searchLibrary(target, source, game)) {
                 UUID exileZone = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
                 if (!target.getTargets().isEmpty()) {
                     for (UUID cardID : target.getTargets()) {

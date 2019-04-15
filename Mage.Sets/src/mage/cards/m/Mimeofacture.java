@@ -79,7 +79,7 @@ class MimeofactureEffect extends OneShotEffect {
         FilterCard filter = new FilterCard("card named " + permanent.getName());
         filter.add(new NamePredicate(permanent.getName()));
         TargetCardInLibrary target = new TargetCardInLibrary(0, 1, filter);
-        if (controller.searchLibrary(target, game, opponent.getId())) {
+        if (controller.searchLibrary(target, source, game, opponent.getId())) {
             Card card = opponent.getLibrary().getCard(target.getFirstTarget(), game);
             controller.moveCards(card, Zone.BATTLEFIELD, source, game);
         }

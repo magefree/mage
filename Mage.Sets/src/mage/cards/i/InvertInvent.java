@@ -114,14 +114,14 @@ class InventEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl();
         TargetCardInLibrary target = new TargetCardInLibrary(filter1);
-        if (player.searchLibrary(target, game, false)) {
+        if (player.searchLibrary(target, source, game, false)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 cards.add(card);
             }
         }
         target = new TargetCardInLibrary(filter2);
-        if (player.searchLibrary(target, game)) {
+        if (player.searchLibrary(target, source, game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 cards.add(card);

@@ -2634,23 +2634,23 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean searchLibrary(TargetCardInLibrary target, Game game) {
-        return computerPlayer.searchLibrary(target, game);
+    public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game) {
+        return computerPlayer.searchLibrary(target, source, game);
     }
 
     @Override
-    public boolean searchLibrary(TargetCardInLibrary target, Game game, boolean triggerEvents) {
-        return computerPlayer.searchLibrary(target, game, triggerEvents);
+    public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, boolean triggerEvents) {
+        return computerPlayer.searchLibrary(target, source, game, triggerEvents);
     }
 
     @Override
-    public boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId) {
-        return computerPlayer.searchLibrary(target, game, targetPlayerId);
+    public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, UUID targetPlayerId) {
+        return computerPlayer.searchLibrary(target, source, game, targetPlayerId);
     }
 
     @Override
-    public boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId, boolean triggerEvents) {
-        return computerPlayer.searchLibrary(target, game, targetPlayerId, triggerEvents);
+    public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, UUID targetPlayerId, boolean triggerEvents) {
+        return computerPlayer.searchLibrary(target, source, game, targetPlayerId, triggerEvents);
     }
 
     @Override

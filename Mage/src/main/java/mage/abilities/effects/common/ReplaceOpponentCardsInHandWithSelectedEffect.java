@@ -44,7 +44,7 @@ public class ReplaceOpponentCardsInHandWithSelectedEffect extends OneShotEffect 
                 
                 TargetCardInLibrary target = new TargetCardInLibrary(searchLibraryForNum, searchLibraryForNum, new FilterCard());
                 
-                controller.searchLibrary(target, game, targetOpponent.getId());
+                controller.searchLibrary(target, source, game, targetOpponent.getId());
                 
                 for (UUID cardId : target.getTargets()) {
                     Card targetCard = game.getCard(cardId);

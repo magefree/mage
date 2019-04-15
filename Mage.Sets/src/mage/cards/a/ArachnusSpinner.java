@@ -106,7 +106,7 @@ class ArachnusSpinnerEffect extends OneShotEffect {
         }
         if (card == null) {
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
-            if (controller.searchLibrary(target, game)) {
+            if (controller.searchLibrary(target, source, game)) {
                 card = game.getCard(target.getFirstTarget());
             }
             controller.shuffleLibrary(source, game);

@@ -80,7 +80,7 @@ class ClarionUltimatumEffect extends OneShotEffect {
                     FilterCard filter = new FilterCard("card named " + cardName);
                     filter.add(new NamePredicate(cardName));
                     TargetCardInLibrary target = new TargetCardInLibrary(filter);
-                    if (controller.searchLibrary(target, game)) {
+                    if (controller.searchLibrary(target, source, game)) {
                         Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
                         if (card != null) {
                             chosenCards.add(card);

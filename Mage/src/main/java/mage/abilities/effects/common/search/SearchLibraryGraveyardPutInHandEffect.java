@@ -59,7 +59,7 @@ public class SearchLibraryGraveyardPutInHandEffect extends OneShotEffect {
             if (forceToSearchBoth || controller.chooseUse(outcome, "Search your library for a card named " + filter.getMessage() + '?', source, game)) {
                 TargetCardInLibrary target = new TargetCardInLibrary(0, 1, filter);
                 target.clearChosen();
-                if (controller.searchLibrary(target, game)) {
+                if (controller.searchLibrary(target, source, game)) {
                     if (!target.getTargets().isEmpty()) {
                         cardFound = game.getCard(target.getFirstTarget());
                     }

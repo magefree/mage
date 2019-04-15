@@ -77,7 +77,7 @@ class NissasEncouragementEffect extends OneShotEffect {
         }
 
         NissasEncouragementTarget target = new NissasEncouragementTarget(filter);
-        if (player.searchLibrary(target, game)) {
+        if (player.searchLibrary(target, source, game)) {
             boolean searchGY = false;
 
             if (target.getTargets().size() < 3) {

@@ -81,7 +81,7 @@ class NissasPilgrimageEffect extends OneShotEffect {
                 number++;
             }
             TargetCardInLibrary target = new TargetCardInLibrary(0, number, filter);
-            controller.searchLibrary(target, game);
+            controller.searchLibrary(target, source, game);
             if (!target.getTargets().isEmpty()) {
                 Cards cards = new CardsImpl(target.getTargets());
                 controller.revealCards(sourceObject.getIdName(), cards, game);

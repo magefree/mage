@@ -110,7 +110,7 @@ class DarkSupplicantEffect extends OneShotEffect {
                 && controller.chooseUse(Outcome.Benefit, "Do you want to search your library for Scion of Darkness?", source, game)) {
             librarySearched = true;
             TargetCardInLibrary target = new TargetCardInLibrary(0, 1, filter);
-            if (controller.searchLibrary(target, game)) {
+            if (controller.searchLibrary(target, source, game)) {
                 if (!target.getTargets().isEmpty()) {
                     selectedCard = game.getCard(target.getFirstTarget());
                 }

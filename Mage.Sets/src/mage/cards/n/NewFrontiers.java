@@ -64,7 +64,7 @@ class NewFrontiersEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null && player.chooseUse(outcome, "Search your library for up to " + amount + " basic lands?", source, game)) {
                     TargetCardInLibrary target = new TargetCardInLibrary(0, amount, StaticFilters.FILTER_CARD_BASIC_LAND);
-                    if (player.searchLibrary(target, game)) {
+                    if (player.searchLibrary(target, source, game)) {
                         player.moveCards(new CardsImpl(target.getTargets()).getCards(game), Zone.BATTLEFIELD, source, game, true, false, false, null);
                         player.shuffleLibrary(source, game);
                     }

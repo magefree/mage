@@ -80,7 +80,7 @@ class ZirilanOfTheClawEffect extends OneShotEffect {
             FilterPermanentCard filter = new FilterPermanentCard("a Dragon permanent card");
             filter.add(new SubtypePredicate(SubType.DRAGON));
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
-            if (controller.searchLibrary(target, game)) {
+            if (controller.searchLibrary(target, source, game)) {
                 Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
                 if (card != null) {
                     controller.moveCards(card, Zone.BATTLEFIELD, source, game);

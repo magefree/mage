@@ -70,7 +70,7 @@ class PirsWhimEffect extends OneShotEffect {
         for (Player player : choice.getFriends()) {
             if (player != null) {
                 TargetCardInLibrary target = new TargetCardInLibrary(0, 1, StaticFilters.FILTER_CARD_LAND);
-                if (player.searchLibrary(target, game)) {
+                if (player.searchLibrary(target, source, game)) {
                     player.moveCards(new CardsImpl(target.getTargets()).getCards(game), Zone.BATTLEFIELD, source, game, true, false, true, null);
                     player.shuffleLibrary(source, game);
                 }

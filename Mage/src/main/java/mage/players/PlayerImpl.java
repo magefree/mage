@@ -2430,22 +2430,22 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean searchLibrary(TargetCardInLibrary target, Game game) {
-        return searchLibrary(target, game, playerId, true);
+    public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game) {
+        return searchLibrary(target, source, game, playerId, true);
     }
 
     @Override
-    public boolean searchLibrary(TargetCardInLibrary target, Game game, boolean triggerEvents) {
-        return searchLibrary(target, game, playerId, triggerEvents);
+    public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, boolean triggerEvents) {
+        return searchLibrary(target, source, game, playerId, triggerEvents);
     }
 
     @Override
-    public boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId) {
-        return searchLibrary(target, game, targetPlayerId, true);
+    public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, UUID targetPlayerId) {
+        return searchLibrary(target, source, game, targetPlayerId, true);
     }
 
     @Override
-    public boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId, boolean triggerEvents) {
+    public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, UUID targetPlayerId, boolean triggerEvents) {
         //20091005 - 701.14c
         Library searchedLibrary = null;
         String searchInfo = null;
@@ -2462,7 +2462,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (searchedLibrary == null) {
             return false;
         }
-        GameEvent event = GameEvent.getEvent(GameEvent.EventType.SEARCH_LIBRARY, targetPlayerId, playerId, playerId, Integer.MAX_VALUE);
+        GameEvent event = GameEvent.getEvent(GameEvent.EventType.SEARCH_LIBRARY, targetPlayerId, source.getSourceId(), playerId, Integer.MAX_VALUE);
         if (!game.replaceEvent(event)) {
             if (!game.isSimulation()) {
                 game.informPlayers(searchInfo);

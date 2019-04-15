@@ -70,7 +70,7 @@ class SearchLibraryPutInGraveyard extends SearchEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (controller.searchLibrary(target, game)) {
+            if (controller.searchLibrary(target, source, game)) {
                 if (!target.getTargets().isEmpty()) {
                     Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
                     if (card != null) {

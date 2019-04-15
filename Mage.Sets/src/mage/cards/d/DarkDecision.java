@@ -69,7 +69,7 @@ class DarkDecisionEffect extends OneShotEffect {
         if (controller != null && sourceObject != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(new FilterNonlandCard());
             target.setCardLimit(10);
-            if (controller.searchLibrary(target, game)) {
+            if (controller.searchLibrary(target, source, game)) {
                 UUID targetId = target.getFirstTarget();
                 Card card = game.getCard(targetId);
                 if (card != null) {

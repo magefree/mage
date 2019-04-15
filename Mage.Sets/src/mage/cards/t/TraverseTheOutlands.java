@@ -78,7 +78,7 @@ class TraverseTheOutlandsEffect extends OneShotEffect {
         }
 
         TargetCardInLibrary target = new TargetCardInLibrary(0, amount, StaticFilters.FILTER_CARD_BASIC_LAND);
-        if (controller.searchLibrary(target, game)) {
+        if (controller.searchLibrary(target, source, game)) {
             controller.moveCards(new CardsImpl(target.getTargets()).getCards(game), Zone.BATTLEFIELD, source, game, true, false, false, null);
         }
         controller.shuffleLibrary(source, game);
