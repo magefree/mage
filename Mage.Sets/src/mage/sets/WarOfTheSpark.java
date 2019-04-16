@@ -109,6 +109,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Heartfire", 131, Rarity.COMMON, mage.cards.h.Heartfire.class));
         cards.add(new SetCardInfo("Herald of the Dreadhorde", 93, Rarity.COMMON, mage.cards.h.HeraldOfTheDreadhorde.class));
         cards.add(new SetCardInfo("Honor the God-Pharaoh", 132, Rarity.COMMON, mage.cards.h.HonorTheGodPharaoh.class));
+        cards.add(new SetCardInfo("Huatli's Raptor", 200, Rarity.UNCOMMON, mage.cards.h.HuatlisRaptor.class));
         cards.add(new SetCardInfo("Huatli, the Sun's Heart", 230, Rarity.UNCOMMON, mage.cards.h.HuatliTheSunsHeart.class));
         cards.add(new SetCardInfo("Ignite the Beacon", 18, Rarity.RARE, mage.cards.i.IgniteTheBeacon.class));
         cards.add(new SetCardInfo("Ilharg, the Raze-Boar", 133, Rarity.MYTHIC, mage.cards.i.IlhargTheRazeBoar.class));
