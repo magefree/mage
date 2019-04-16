@@ -18,9 +18,9 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class HuatliHeartOfTheSun extends CardImpl {
+public final class HuatliTheSunsHeart extends CardImpl {
 
-    public HuatliHeartOfTheSun(UUID ownerId, CardSetInfo setInfo) {
+    public HuatliTheSunsHeart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G/W}");
 
         this.addSuperType(SuperType.LEGENDARY);
@@ -39,12 +39,12 @@ public final class HuatliHeartOfTheSun extends CardImpl {
         ), -3));
     }
 
-    private HuatliHeartOfTheSun(final HuatliHeartOfTheSun card) {
+    private HuatliTheSunsHeart(final HuatliTheSunsHeart card) {
         super(card);
     }
 
     @Override
-    public HuatliHeartOfTheSun copy() {
-        return new HuatliHeartOfTheSun(this);
+    public HuatliTheSunsHeart copy() {
+        return new HuatliTheSunsHeart(this);
     }
 }
