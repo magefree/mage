@@ -62,20 +62,24 @@ class FiremindVesselManaEffect extends ManaEffect {
         if (player == null) {
             return null;
         }
-        Mana mana = new Mana();
-        ChoiceColor color1 = new ChoiceColor();
-        ChoiceColor color2 = new ChoiceColor();
-        while (true) {
-            player.choose(outcome, color1, game);
-            player.choose(outcome, color2, game);
-            if (color1.getColor().equals(color2.getColor())) {
-                player.chooseUse(outcome, "Please choose two different colors", source, game);
-                color1.clearChoice();
-                color2.clearChoice();
-            } else {
-                break;
-            }
+
+        ChoiceColor color1 = new ChoiceColor(true, "Choose color 1");
+        if (!player.choose(outcome, color1, game) || color1.getColor() == null) {
+            return null;
         }
+
+        ChoiceColor color2 = new ChoiceColor(true, "Choose color 2");
+        color2.removeColorFromChoices(color1.getChoice());
+        if (!player.choose(outcome, color2, game) || color2.getColor() == null) {
+            return null;
+        }
+
+        if (color1.getColor().equals(color2.getColor())) {
+            game.informPlayers("Player " + player.getName() + " is cheating with mana choices.");
+            return null;
+        }
+
+        Mana mana = new Mana();
         mana.add(color1.getMana(1));
         mana.add(color2.getMana(1));
         return mana;
