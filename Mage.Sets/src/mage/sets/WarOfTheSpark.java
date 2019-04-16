@@ -117,6 +117,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Jace's Projection", 272, Rarity.UNCOMMON, mage.cards.j.JacesProjection.class));
         cards.add(new SetCardInfo("Jace's Ruse", 273, Rarity.RARE, mage.cards.j.JacesRuse.class));
         cards.add(new SetCardInfo("Jace's Triumph", 55, Rarity.UNCOMMON, mage.cards.j.JacesTriumph.class));
+        cards.add(new SetCardInfo("Jace, Arcane Strategist", 270, Rarity.MYTHIC, mage.cards.j.JaceArcaneStrategist.class));
         cards.add(new SetCardInfo("Jace, Wielder of Mysteries", 54, Rarity.RARE, mage.cards.j.JaceWielderOfMysteries.class));
         cards.add(new SetCardInfo("Jaya's Greeting", 136, Rarity.COMMON, mage.cards.j.JayasGreeting.class));
         cards.add(new SetCardInfo("Jaya, Venerated Firemage", 135, Rarity.UNCOMMON, mage.cards.j.JayaVeneratedFiremage.class));
