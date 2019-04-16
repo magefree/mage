@@ -32,6 +32,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Angrath, Captain of Chaos", 227, Rarity.UNCOMMON, mage.cards.a.AngrathCaptainOfChaos.class));
         cards.add(new SetCardInfo("Arlinn's Wolf", 151, Rarity.COMMON, mage.cards.a.ArlinnsWolf.class));
         cards.add(new SetCardInfo("Arlinn, Voice of the Pack", 150, Rarity.UNCOMMON, mage.cards.a.ArlinnVoiceOfThePack.class));
+        cards.add(new SetCardInfo("Ashiok's Skulker", 40, Rarity.COMMON, mage.cards.a.AshioksSkulker.class));
         cards.add(new SetCardInfo("Ashiok, Dream Render", 228, Rarity.UNCOMMON, mage.cards.a.AshiokDreamRender.class));
         cards.add(new SetCardInfo("Augur of Bolas", 41, Rarity.UNCOMMON, mage.cards.a.AugurOfBolas.class));
         cards.add(new SetCardInfo("Awakening of Vitu-Ghazi", 152, Rarity.RARE, mage.cards.a.AwakeningOfVituGhazi.class));
