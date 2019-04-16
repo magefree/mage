@@ -206,6 +206,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Spellkeeper Weird", 69, Rarity.COMMON, mage.cards.s.SpellkeeperWeird.class));
         cards.add(new SetCardInfo("Steady Aim", 177, Rarity.COMMON, mage.cards.s.SteadyAim.class));
         cards.add(new SetCardInfo("Stealth Mission", 70, Rarity.COMMON, mage.cards.s.StealthMission.class));
+        cards.add(new SetCardInfo("Storm the Citadel", 178, Rarity.UNCOMMON, mage.cards.s.StormTheCitadel.class));
         cards.add(new SetCardInfo("Storrev, Devkarin Lich", 219, Rarity.RARE, mage.cards.s.StorrevDevkarinLich.class));
         cards.add(new SetCardInfo("Sunblade Angel", 31, Rarity.UNCOMMON, mage.cards.s.SunbladeAngel.class));
         cards.add(new SetCardInfo("Swamp", 256, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
