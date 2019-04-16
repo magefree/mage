@@ -44,7 +44,7 @@ public final class Pteramander extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new AdaptEffect(4).setText("Adapt 4. This ability costs {1} less to activate for each instant and sorcery card in your graveyard."), new ManaCostsImpl("{7}{U}"));
         this.addAbility(ability);
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new PteramanderCostIncreasingEffect(ability.getOriginalId()))
-                .addHint(new ValueHint("Instant and sorcery card in your graveyard", cardsCount)));
+                .addHint(new ValueHint("Instant and sorcery cards in your graveyard", cardsCount)));
     }
 
     private Pteramander(final Pteramander card) {
