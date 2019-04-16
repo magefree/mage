@@ -7,12 +7,11 @@ import mage.abilities.effects.Effect;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
- * @author Styxo
+ * @author TheElk801
  */
-public enum GreatestPowerAmongControlledCreaturesValue implements DynamicValue {
+public enum GreatestToughnessAmongControlledCreaturesValue implements DynamicValue {
     instance;
 
     @Override
@@ -21,19 +20,19 @@ public enum GreatestPowerAmongControlledCreaturesValue implements DynamicValue {
         for (Permanent p : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_CREATURE, sourceAbility.getControllerId(), game
         )) {
-            amount = Math.max(p.getPower().getValue(), amount);
+            amount = Math.max(p.getToughness().getValue(), amount);
         }
         return amount;
     }
 
     @Override
-    public GreatestPowerAmongControlledCreaturesValue copy() {
-        return GreatestPowerAmongControlledCreaturesValue.instance;
+    public GreatestToughnessAmongControlledCreaturesValue copy() {
+        return GreatestToughnessAmongControlledCreaturesValue.instance;
     }
 
     @Override
     public String getMessage() {
-        return "the greatest power among creatures you control";
+        return "the greatest toughness among creatures you control";
     }
 
     @Override
