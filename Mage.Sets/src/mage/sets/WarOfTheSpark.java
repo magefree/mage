@@ -89,6 +89,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Evolution Sage", 159, Rarity.UNCOMMON, mage.cards.e.EvolutionSage.class));
         cards.add(new SetCardInfo("Fblthp, the Lost", 50, Rarity.RARE, mage.cards.f.FblthpTheLost.class));
         cards.add(new SetCardInfo("Feather, the Redeemed", 197, Rarity.RARE, mage.cards.f.FeatherTheRedeemed.class));
+        cards.add(new SetCardInfo("Finale of Eternity", 91, Rarity.MYTHIC, mage.cards.f.FinaleOfEternity.class));
         cards.add(new SetCardInfo("Finale of Glory", 12, Rarity.MYTHIC, mage.cards.f.FinaleOfGlory.class));
         cards.add(new SetCardInfo("Finale of Revelation", 51, Rarity.MYTHIC, mage.cards.f.FinaleOfRevelation.class));
         cards.add(new SetCardInfo("Firemind Vessel", 237, Rarity.UNCOMMON, mage.cards.f.FiremindVessel.class));
