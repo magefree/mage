@@ -34,7 +34,7 @@ public final class AshiokDreamRender extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new AshiokDreamRenderEffect()));
 
         // -1: Target player puts the top four cards of their library into their graveyard. Then exile each opponent's graveyard.
-        Ability ability = new LoyaltyAbility(new PutTopCardOfLibraryIntoGraveTargetEffect(2), -1);
+        Ability ability = new LoyaltyAbility(new PutTopCardOfLibraryIntoGraveTargetEffect(4), -1);
         ability.addEffect(new ExileGraveyardAllPlayersEffect(StaticFilters.FILTER_CARD, TargetController.OPPONENT).setText("Then exile each opponent's graveyard."));
         this.addAbility(ability);
     }

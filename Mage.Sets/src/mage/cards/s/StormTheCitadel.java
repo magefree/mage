@@ -49,7 +49,7 @@ public final class StormTheCitadel extends CardImpl {
 
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(
                 ability, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE
-        ).setText("and gain \"Whenever this creature deals combat damage to a creature or planeswalker, " +
+        ).setText("and gain \"Whenever this creature deals combat damage to a player or planeswalker, " +
                 "destroy target artifact or enchantment defending player controls.\""
         ));
     }

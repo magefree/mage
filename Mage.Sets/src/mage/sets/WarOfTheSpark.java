@@ -42,6 +42,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Blast Zone", 244, Rarity.RARE, mage.cards.b.BlastZone.class));
         cards.add(new SetCardInfo("Blindblast", 114, Rarity.COMMON, mage.cards.b.Blindblast.class));
         cards.add(new SetCardInfo("Bloom Hulk", 154, Rarity.COMMON, mage.cards.b.BloomHulk.class));
+        cards.add(new SetCardInfo("Bolas's Citadel", 79, Rarity.RARE, mage.cards.b.BolassCitadel.class));
         cards.add(new SetCardInfo("Bolt Bend", 115, Rarity.UNCOMMON, mage.cards.b.BoltBend.class));
         cards.add(new SetCardInfo("Bond of Discipline", 6, Rarity.UNCOMMON, mage.cards.b.BondOfDiscipline.class));
         cards.add(new SetCardInfo("Bond of Flourishing", 155, Rarity.UNCOMMON, mage.cards.b.BondOfFlourishing.class));
@@ -57,6 +58,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Chandra's Pyrohelix", 120, Rarity.COMMON, mage.cards.c.ChandrasPyrohelix.class));
         cards.add(new SetCardInfo("Chandra's Triumph", 121, Rarity.UNCOMMON, mage.cards.c.ChandrasTriumph.class));
         cards.add(new SetCardInfo("Chandra, Fire Artisan", 119, Rarity.RARE, mage.cards.c.ChandraFireArtisan.class));
+        cards.add(new SetCardInfo("Command the Dreadhorde", 82, Rarity.RARE, mage.cards.c.CommandTheDreadhorde.class));
         cards.add(new SetCardInfo("Commence the Endgame", 45, Rarity.RARE, mage.cards.c.CommenceTheEndgame.class));
         cards.add(new SetCardInfo("Contentious Plan", 46, Rarity.COMMON, mage.cards.c.ContentiousPlan.class));
         cards.add(new SetCardInfo("Courage in Crisis", 158, Rarity.COMMON, mage.cards.c.CourageInCrisis.class));
@@ -87,6 +89,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Evolution Sage", 159, Rarity.UNCOMMON, mage.cards.e.EvolutionSage.class));
         cards.add(new SetCardInfo("Fblthp, the Lost", 50, Rarity.RARE, mage.cards.f.FblthpTheLost.class));
         cards.add(new SetCardInfo("Feather, the Redeemed", 197, Rarity.RARE, mage.cards.f.FeatherTheRedeemed.class));
+        cards.add(new SetCardInfo("Finale of Glory", 12, Rarity.MYTHIC, mage.cards.f.FinaleOfGlory.class));
         cards.add(new SetCardInfo("Finale of Revelation", 51, Rarity.MYTHIC, mage.cards.f.FinaleOfRevelation.class));
         cards.add(new SetCardInfo("Firemind Vessel", 237, Rarity.UNCOMMON, mage.cards.f.FiremindVessel.class));
         cards.add(new SetCardInfo("Flux Channeler", 52, Rarity.UNCOMMON, mage.cards.f.FluxChanneler.class));
@@ -196,6 +199,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Saheeli, Sublime Artificer", 234, Rarity.UNCOMMON, mage.cards.s.SaheeliSublimeArtificer.class));
         cards.add(new SetCardInfo("Samut's Sprint", 142, Rarity.COMMON, mage.cards.s.SamutsSprint.class));
         cards.add(new SetCardInfo("Samut, Tyrant Smasher", 235, Rarity.UNCOMMON, mage.cards.s.SamutTyrantSmasher.class));
+        cards.add(new SetCardInfo("Sarkhan's Catharsis", 144, Rarity.COMMON, mage.cards.s.SarkhansCatharsis.class));
         cards.add(new SetCardInfo("Shriekdiver", 103, Rarity.COMMON, mage.cards.s.Shriekdiver.class));
         cards.add(new SetCardInfo("Silent Submersible", 66, Rarity.RARE, mage.cards.s.SilentSubmersible.class));
         cards.add(new SetCardInfo("Single Combat", 30, Rarity.RARE, mage.cards.s.SingleCombat.class));
