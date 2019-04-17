@@ -3,11 +3,15 @@ package mage.cards.b;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.Costs;
+import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -17,14 +21,11 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
+
 import java.util.UUID;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.CostsImpl;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.cards.Card;
 
 /**
- * @author TheElk801
+ * @author jeffwadsworth
  */
 public final class BolassCitadel extends CardImpl {
 
@@ -43,11 +44,10 @@ public final class BolassCitadel extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect()));
 
         // You may play the top card of your library. If you cast a spell this way, pay life equal to its converted mana cost rather than pay its mana cost.
-        Ability ability = new SimpleStaticAbility(new BolassCitadelPlayTheTopCardEffect());
-        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(new BolassCitadelPlayTheTopCardEffect()));
 
         // {T}, Sacrifice ten nonland permanents: Each opponent loses 10 life.
-        ability = new SimpleActivatedAbility(new LoseLifeOpponentsEffect(10), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new LoseLifeOpponentsEffect(10), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(
                 10, 10, filter, true
         )));
@@ -66,13 +66,14 @@ public final class BolassCitadel extends CardImpl {
 
 class BolassCitadelPlayTheTopCardEffect extends AsThoughEffectImpl {
 
-    public BolassCitadelPlayTheTopCardEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, 
+    BolassCitadelPlayTheTopCardEffect() {
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE,
                 Duration.WhileOnBattlefield, Outcome.AIDontUseIt); // AI will need help with this
-        staticText = "You may play the top card of your library";
+        staticText = "You may play the top card of your library. If you cast a spell this way, " +
+                "pay life equal to its converted mana cost rather than pay its mana cost.";
     }
 
-    public BolassCitadelPlayTheTopCardEffect(final BolassCitadelPlayTheTopCardEffect effect) {
+    private BolassCitadelPlayTheTopCardEffect(final BolassCitadelPlayTheTopCardEffect effect) {
         super(effect);
     }
 
