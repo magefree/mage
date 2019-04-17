@@ -51,12 +51,14 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Bulwark Giant", 7, Rarity.COMMON, mage.cards.b.BulwarkGiant.class));
         cards.add(new SetCardInfo("Burning Prophet", 117, Rarity.COMMON, mage.cards.b.BurningProphet.class));
         cards.add(new SetCardInfo("Casualties of War", 187, Rarity.RARE, mage.cards.c.CasualtiesOfWar.class));
+        cards.add(new SetCardInfo("Centaur Nurturer", 156, Rarity.COMMON, mage.cards.c.CentaurNurturer.class));
         cards.add(new SetCardInfo("Chainwhip Cyclops", 118, Rarity.COMMON, mage.cards.c.ChainwhipCyclops.class));
         cards.add(new SetCardInfo("Challenger Troll", 157, Rarity.UNCOMMON, mage.cards.c.ChallengerTroll.class));
         cards.add(new SetCardInfo("Chandra's Pyrohelix", 120, Rarity.COMMON, mage.cards.c.ChandrasPyrohelix.class));
         cards.add(new SetCardInfo("Chandra's Triumph", 121, Rarity.UNCOMMON, mage.cards.c.ChandrasTriumph.class));
         cards.add(new SetCardInfo("Chandra, Fire Artisan", 119, Rarity.RARE, mage.cards.c.ChandraFireArtisan.class));
         cards.add(new SetCardInfo("Commence the Endgame", 45, Rarity.RARE, mage.cards.c.CommenceTheEndgame.class));
+        cards.add(new SetCardInfo("Contentious Plan", 46, Rarity.COMMON, mage.cards.c.ContentiousPlan.class));
         cards.add(new SetCardInfo("Courage in Crisis", 158, Rarity.COMMON, mage.cards.c.CourageInCrisis.class));
         cards.add(new SetCardInfo("Cruel Celebrant", 188, Rarity.UNCOMMON, mage.cards.c.CruelCelebrant.class));
         cards.add(new SetCardInfo("Crush Dissent", 47, Rarity.COMMON, mage.cards.c.CrushDissent.class));

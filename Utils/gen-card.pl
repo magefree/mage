@@ -40,6 +40,7 @@ if (-e $authorFile) {
     $author = 'anonymous';
 }
 
+
 open (DATA, $dataFile) || die "can't open $dataFile";
 while(my $line = <DATA>) {
     my @data = split('\\|', $line);
