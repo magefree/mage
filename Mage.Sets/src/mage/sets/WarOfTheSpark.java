@@ -42,6 +42,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Blast Zone", 244, Rarity.RARE, mage.cards.b.BlastZone.class));
         cards.add(new SetCardInfo("Blindblast", 114, Rarity.COMMON, mage.cards.b.Blindblast.class));
         cards.add(new SetCardInfo("Bloom Hulk", 154, Rarity.COMMON, mage.cards.b.BloomHulk.class));
+        cards.add(new SetCardInfo("Bolas's Citadel", 79, Rarity.RARE, mage.cards.b.BolassCitadel.class));
         cards.add(new SetCardInfo("Bolt Bend", 115, Rarity.UNCOMMON, mage.cards.b.BoltBend.class));
         cards.add(new SetCardInfo("Bond of Discipline", 6, Rarity.UNCOMMON, mage.cards.b.BondOfDiscipline.class));
         cards.add(new SetCardInfo("Bond of Flourishing", 155, Rarity.UNCOMMON, mage.cards.b.BondOfFlourishing.class));
