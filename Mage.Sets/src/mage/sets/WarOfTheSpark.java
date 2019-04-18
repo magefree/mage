@@ -41,6 +41,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Banehound", 77, Rarity.COMMON, mage.cards.b.Banehound.class));
         cards.add(new SetCardInfo("Bioessence Hydra", 186, Rarity.RARE, mage.cards.b.BioessenceHydra.class));
         cards.add(new SetCardInfo("Blast Zone", 244, Rarity.RARE, mage.cards.b.BlastZone.class));
+        cards.add(new SetCardInfo("Bleeding Edge", 78, Rarity.UNCOMMON, mage.cards.b.BleedingEdge.class));
         cards.add(new SetCardInfo("Blindblast", 114, Rarity.COMMON, mage.cards.b.Blindblast.class));
         cards.add(new SetCardInfo("Bloom Hulk", 154, Rarity.COMMON, mage.cards.b.BloomHulk.class));
         cards.add(new SetCardInfo("Bolas's Citadel", 79, Rarity.RARE, mage.cards.b.BolassCitadel.class));
