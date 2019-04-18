@@ -147,6 +147,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Kaya, Bane of the Dead", 231, Rarity.UNCOMMON, mage.cards.k.KayaBaneOfTheDead.class));
         cards.add(new SetCardInfo("Kiora's Dambreaker", 58, Rarity.COMMON, mage.cards.k.KiorasDambreaker.class));
         cards.add(new SetCardInfo("Kiora, Behemoth Beckoner", 232, Rarity.UNCOMMON, mage.cards.k.KioraBehemothBeckoner.class));
+        cards.add(new SetCardInfo("Kraul Stinger", 165, Rarity.COMMON, mage.cards.k.KraulStinger.class));
         cards.add(new SetCardInfo("Krenko, Tin Street Kingpin", 137, Rarity.RARE, mage.cards.k.KrenkoTinStreetKingpin.class));
         cards.add(new SetCardInfo("Kronch Wrangler", 166, Rarity.COMMON, mage.cards.k.KronchWrangler.class));
         cards.add(new SetCardInfo("Law-Rune Enforcer", 20, Rarity.COMMON, mage.cards.l.LawRuneEnforcer.class));
