@@ -40,7 +40,7 @@ public final class NarsetParterOfVeils extends CardImpl {
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
 
         // Each opponent can't draw more than one card each turn.
-        this.addAbility(new SimpleStaticAbility(new NarsetParterOfVeilsEffect()));
+        this.addAbility(new SimpleStaticAbility(new NarsetParterOfVeilsEffect()), new CardsAmountDrawnThisTurnWatcher());
 
         // -2: Look at the top four cards of your library. You may reveal a noncreature, nonland card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
         this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(
