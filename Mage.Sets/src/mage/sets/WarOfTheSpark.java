@@ -39,6 +39,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Awakening of Vitu-Ghazi", 152, Rarity.RARE, mage.cards.a.AwakeningOfVituGhazi.class));
         cards.add(new SetCardInfo("Band Together", 153, Rarity.COMMON, mage.cards.b.BandTogether.class));
         cards.add(new SetCardInfo("Banehound", 77, Rarity.COMMON, mage.cards.b.Banehound.class));
+        cards.add(new SetCardInfo("Battlefield Promotion", 5, Rarity.COMMON, mage.cards.b.BattlefieldPromotion.class));
         cards.add(new SetCardInfo("Bioessence Hydra", 186, Rarity.RARE, mage.cards.b.BioessenceHydra.class));
         cards.add(new SetCardInfo("Blast Zone", 244, Rarity.RARE, mage.cards.b.BlastZone.class));
         cards.add(new SetCardInfo("Bleeding Edge", 78, Rarity.UNCOMMON, mage.cards.b.BleedingEdge.class));
