@@ -72,6 +72,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Defiant Strike", 9, Rarity.COMMON, mage.cards.d.DefiantStrike.class));
         cards.add(new SetCardInfo("Deliver Unto Evil", 85, Rarity.RARE, mage.cards.d.DeliverUntoEvil.class));
         cards.add(new SetCardInfo("Demolish", 123, Rarity.COMMON, mage.cards.d.Demolish.class));
+        cards.add(new SetCardInfo("Despark", 190, Rarity.UNCOMMON, mage.cards.d.Despark.class));
         cards.add(new SetCardInfo("Desperate Lunge", 266, Rarity.COMMON, mage.cards.d.DesperateLunge.class));
         cards.add(new SetCardInfo("Devouring Hellion", 124, Rarity.UNCOMMON, mage.cards.d.DevouringHellion.class));
         cards.add(new SetCardInfo("Divine Arrow", 10, Rarity.COMMON, mage.cards.d.DivineArrow.class));
