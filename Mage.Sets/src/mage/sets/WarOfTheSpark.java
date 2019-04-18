@@ -224,6 +224,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Shriekdiver", 103, Rarity.COMMON, mage.cards.s.Shriekdiver.class));
         cards.add(new SetCardInfo("Silent Submersible", 66, Rarity.RARE, mage.cards.s.SilentSubmersible.class));
         cards.add(new SetCardInfo("Single Combat", 30, Rarity.RARE, mage.cards.s.SingleCombat.class));
+        cards.add(new SetCardInfo("Snarespinner", 176, Rarity.COMMON, mage.cards.s.Snarespinner.class));
         cards.add(new SetCardInfo("Solar Blaze", 216, Rarity.RARE, mage.cards.s.SolarBlaze.class));
         cards.add(new SetCardInfo("Sorin's Thirst", 104, Rarity.COMMON, mage.cards.s.SorinsThirst.class));
         cards.add(new SetCardInfo("Sorin, Vengeful Bloodlord", 217, Rarity.RARE, mage.cards.s.SorinVengefulBloodlord.class));
