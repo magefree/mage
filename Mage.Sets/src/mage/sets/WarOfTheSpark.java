@@ -100,6 +100,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 263, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 264, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Giant Growth", 162, Rarity.COMMON, mage.cards.g.GiantGrowth.class));
+        cards.add(new SetCardInfo("Gideon Blackblade", 13, Rarity.MYTHIC, mage.cards.g.GideonBlackblade.class));
         cards.add(new SetCardInfo("Gideon's Battle Cry", 267, Rarity.RARE, mage.cards.g.GideonsBattleCry.class));
         cards.add(new SetCardInfo("Gideon's Company", 268, Rarity.UNCOMMON, mage.cards.g.GideonsCompany.class));
         cards.add(new SetCardInfo("Gideon's Triumph", 15, Rarity.UNCOMMON, mage.cards.g.GideonsTriumph.class));
