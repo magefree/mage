@@ -58,6 +58,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Chandra's Pyrohelix", 120, Rarity.COMMON, mage.cards.c.ChandrasPyrohelix.class));
         cards.add(new SetCardInfo("Chandra's Triumph", 121, Rarity.UNCOMMON, mage.cards.c.ChandrasTriumph.class));
         cards.add(new SetCardInfo("Chandra, Fire Artisan", 119, Rarity.RARE, mage.cards.c.ChandraFireArtisan.class));
+        cards.add(new SetCardInfo("Charity Extractor", 81, Rarity.COMMON, mage.cards.c.CharityExtractor.class));
         cards.add(new SetCardInfo("Command the Dreadhorde", 82, Rarity.RARE, mage.cards.c.CommandTheDreadhorde.class));
         cards.add(new SetCardInfo("Commence the Endgame", 45, Rarity.RARE, mage.cards.c.CommenceTheEndgame.class));
         cards.add(new SetCardInfo("Contentious Plan", 46, Rarity.COMMON, mage.cards.c.ContentiousPlan.class));
