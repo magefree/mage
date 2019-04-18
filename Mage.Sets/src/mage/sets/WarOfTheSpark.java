@@ -129,6 +129,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Invade the City", 201, Rarity.UNCOMMON, mage.cards.i.InvadeTheCity.class));
         cards.add(new SetCardInfo("Invading Manticore", 134, Rarity.COMMON, mage.cards.i.InvadingManticore.class));
         cards.add(new SetCardInfo("Iron Bully", 240, Rarity.COMMON, mage.cards.i.IronBully.class));
+        cards.add(new SetCardInfo("Ironclad Krovod", 19, Rarity.COMMON, mage.cards.i.IroncladKrovod.class));
         cards.add(new SetCardInfo("Island", 253, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 254, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 255, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
