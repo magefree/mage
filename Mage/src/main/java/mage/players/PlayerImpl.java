@@ -880,30 +880,27 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (!cardsToLibrary.isEmpty()) {
             Cards cards = new CardsImpl(cardsToLibrary); // prevent possible ConcurrentModificationException
             if (!anyOrder) {
-                while (!cards.isEmpty()) {
-                    Card card = cards.getRandom(game);
-                    if (card != null) {
-                        cards.remove(card);
-                        moveObjectToLibrary(card.getId(), source == null ? null : source.getSourceId(), game, false, false);
-                    } else {
-                        return false;// probably cards were removed because player left the game
-                    }
+                // random order
+                List<UUID> ids = new ArrayList<>(cards);
+                Collections.shuffle(ids);
+                for (UUID id : ids) {
+                    moveObjectToLibrary(id, source == null ? null : source.getSourceId(), game, false, false);
                 }
             } else {
+                // user defined order
                 TargetCard target = new TargetCard(Zone.ALL, new FilterCard("card ORDER to put on the BOTTOM of your library (last one chosen will be bottommost)"));
                 target.setRequired(true);
-                while (cards.size() > 1) {
-                    this.choose(Outcome.Neutral, cards, target, game);
-                    if (!canRespond()) {
-                        return false;
-                    }
+                while (cards.size() > 1 && this.canRespond() && this.choose(Outcome.Neutral, cards, target, game)) {
                     UUID targetObjectId = target.getFirstTarget();
+                    if (targetObjectId == null) {
+                        break;
+                    }
                     cards.remove(targetObjectId);
                     moveObjectToLibrary(targetObjectId, source == null ? null : source.getSourceId(), game, false, false);
                     target.clearChosen();
                 }
-                if (cards.size() == 1) {
-                    moveObjectToLibrary(cards.iterator().next(), source == null ? null : source.getSourceId(), game, false, false);
+                for (UUID c : cards) {
+                    moveObjectToLibrary(c, source == null ? null : source.getSourceId(), game, false, false);
                 }
             }
         }
@@ -945,30 +942,27 @@ public abstract class PlayerImpl implements Player, Serializable {
             Cards cards = new CardsImpl(cardsToLibrary); // prevent possible ConcurrentModificationException
             UUID sourceId = (source == null ? null : source.getSourceId());
             if (!anyOrder) {
-                while (!cards.isEmpty()) {
-                    Card card = cards.getRandom(game);
-                    if (card != null) {
-                        cards.remove(card.getId());
-                        moveObjectToLibrary(card.getId(), source == null ? null : source.getSourceId(), game, true, false);
-                    } else {
-                        return false; // probably cards were removed because player left the game
-                    }
+                // random order
+                List<UUID> ids = new ArrayList<>(cards);
+                Collections.shuffle(ids);
+                for (UUID id : ids) {
+                    moveObjectToLibrary(id, source == null ? null : source.getSourceId(), game, true, false);
                 }
             } else {
-                TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card ORDER to put on the TOP of your library (last one chosen will be topmost)"));
+                // user defined order
+                TargetCard target = new TargetCard(Zone.ALL, new FilterCard("card ORDER to put on the TOP of your library (last one chosen will be topmost)"));
                 target.setRequired(true);
-                while (cards.size() > 1) {
-                    this.choose(Outcome.Neutral, cards, target, game);
-                    if (!canRespond()) {
-                        return false;
-                    }
+                while (cards.size() > 1 && this.canRespond() && this.choose(Outcome.Neutral, cards, target, game)) {
                     UUID targetObjectId = target.getFirstTarget();
+                    if (targetObjectId == null) {
+                        break;
+                    }
                     cards.remove(targetObjectId);
-                    moveObjectToLibrary(targetObjectId, sourceId, game, true, false);
+                    moveObjectToLibrary(targetObjectId, source == null ? null : source.getSourceId(), game, true, false);
                     target.clearChosen();
                 }
-                if (cards.size() == 1) {
-                    moveObjectToLibrary(cards.iterator().next(), sourceId, game, true, false);
+                for (UUID c : cards) {
+                    moveObjectToLibrary(c, source == null ? null : source.getSourceId(), game, true, false);
                 }
             }
         }
