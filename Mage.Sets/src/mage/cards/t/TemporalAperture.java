@@ -52,7 +52,11 @@ class TemporalApertureEffect extends OneShotEffect {
 
     public TemporalApertureEffect() {
         super(Outcome.Neutral);
-        staticText = "Shuffle your library, then reveal the top card. Until end of turn, for as long as that card remains on top of your library, play with the top card of your library revealed and you may play that card without paying its mana cost";
+        staticText = "Shuffle your library, then reveal the top card. "
+                + "Until end of turn, for as long as that card remains on "
+                + "top of your library, play with the top card of your "
+                + "library revealed and you may play that card without "
+                + "paying its mana cost";
     }
 
     public TemporalApertureEffect(final TemporalApertureEffect effect) {
@@ -89,7 +93,8 @@ class TemporalApertureTopCardCastEffect extends AsThoughEffectImpl {
     public TemporalApertureTopCardCastEffect(Card card) {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         this.card = card;
-        staticText = "Until end of turn, for as long as that card is on top of your library, you may cast it without paying its mana costs";
+        staticText = "Until end of turn, for as long as that card is on top "
+                + "of your library, you may cast it without paying its mana costs";
     }
 
     public TemporalApertureTopCardCastEffect(final TemporalApertureTopCardCastEffect effect) {
@@ -118,7 +123,8 @@ class TemporalApertureTopCardCastEffect extends AsThoughEffectImpl {
                     if (controller.getLibrary().getFromTop(game).equals(card)) {
                         if (objectCard == card
                                 && objectCard.getSpellAbility() != null
-                                && objectCard.getSpellAbility().spellCanBeActivatedRegularlyNow(controller.getId(), game)) {
+                                && objectCard.getSpellAbility().spellCanBeActivatedRegularlyNow(controller.getId(), game)
+                                || objectCard.isLand()) {
                             controller.setCastSourceIdWithAlternateMana(objectId, null, null);
                             return true;
                         }
