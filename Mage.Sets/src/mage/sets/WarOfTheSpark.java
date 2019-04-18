@@ -103,6 +103,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 262, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 263, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 264, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gateway Plaza", 246, Rarity.COMMON, mage.cards.g.GatewayPlaza.class));
         cards.add(new SetCardInfo("Giant Growth", 162, Rarity.COMMON, mage.cards.g.GiantGrowth.class));
         cards.add(new SetCardInfo("Gideon Blackblade", 13, Rarity.MYTHIC, mage.cards.g.GideonBlackblade.class));
         cards.add(new SetCardInfo("Gideon's Battle Cry", 267, Rarity.RARE, mage.cards.g.GideonsBattleCry.class));
@@ -179,6 +180,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Narset, Parter of Veils", 61, Rarity.UNCOMMON, mage.cards.n.NarsetParterOfVeils.class));
         cards.add(new SetCardInfo("Neheb, Dreadhorde Champion", 140, Rarity.RARE, mage.cards.n.NehebDreadhordeChampion.class));
         cards.add(new SetCardInfo("Neoform", 206, Rarity.UNCOMMON, mage.cards.n.Neoform.class));
+        cards.add(new SetCardInfo("New Horizons", 168, Rarity.COMMON, mage.cards.n.NewHorizons.class));
         cards.add(new SetCardInfo("Nicol Bolas, Dragon-God", 207, Rarity.MYTHIC, mage.cards.n.NicolBolasDragonGod.class));
         cards.add(new SetCardInfo("Nissa's Triumph", 170, Rarity.UNCOMMON, mage.cards.n.NissasTriumph.class));
         cards.add(new SetCardInfo("Nissa, Who Shakes the World", 169, Rarity.RARE, mage.cards.n.NissaWhoShakesTheWorld.class));
