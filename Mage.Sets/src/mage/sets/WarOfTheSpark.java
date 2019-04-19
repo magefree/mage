@@ -188,6 +188,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Naga Eternal", 60, Rarity.COMMON, mage.cards.n.NagaEternal.class));
         cards.add(new SetCardInfo("Nahiri's Stoneblades", 139, Rarity.COMMON, mage.cards.n.NahirisStoneblades.class));
         cards.add(new SetCardInfo("Nahiri, Storm of Stone", 233, Rarity.UNCOMMON, mage.cards.n.NahiriStormOfStone.class));
+        cards.add(new SetCardInfo("Narset's Reversal", 62, Rarity.RARE, mage.cards.n.NarsetsReversal.class));
         cards.add(new SetCardInfo("Narset, Parter of Veils", 61, Rarity.UNCOMMON, mage.cards.n.NarsetParterOfVeils.class));
         cards.add(new SetCardInfo("Neheb, Dreadhorde Champion", 140, Rarity.RARE, mage.cards.n.NehebDreadhordeChampion.class));
         cards.add(new SetCardInfo("Neoform", 206, Rarity.UNCOMMON, mage.cards.n.Neoform.class));
@@ -197,6 +198,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Nissa, Who Shakes the World", 169, Rarity.RARE, mage.cards.n.NissaWhoShakesTheWorld.class));
         cards.add(new SetCardInfo("Niv-Mizzet Reborn", 208, Rarity.MYTHIC, mage.cards.n.NivMizzetReborn.class));
         cards.add(new SetCardInfo("No Escape", 63, Rarity.COMMON, mage.cards.n.NoEscape.class));
+        cards.add(new SetCardInfo("Oath of Kaya", 209, Rarity.RARE, mage.cards.o.OathOfKaya.class));
         cards.add(new SetCardInfo("Ob Nixilis's Cruelty", 101, Rarity.COMMON, mage.cards.o.ObNixilissCruelty.class));
         cards.add(new SetCardInfo("Ob Nixilis, the Hate-Twisted", 100, Rarity.UNCOMMON, mage.cards.o.ObNixilisTheHateTwisted.class));
         cards.add(new SetCardInfo("Orzhov Guildgate", 269, Rarity.COMMON, mage.cards.o.OrzhovGuildgate.class));
