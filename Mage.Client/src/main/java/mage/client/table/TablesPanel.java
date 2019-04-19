@@ -633,23 +633,31 @@ public class TablesPanel extends javax.swing.JPanel {
         }
     }
 
-    public void startTasks() {
+    public void startUpdateTasks(boolean refreshImmediately) {
         if (SessionHandler.getSession() != null) {
-            if (updateTablesTask == null || updateTablesTask.isDone()) {
+            // active tables and server messages
+            if (updateTablesTask == null || updateTablesTask.isDone() || refreshImmediately) {
+                if (updateTablesTask != null) updateTablesTask.cancel(true);
                 updateTablesTask = new UpdateTablesTask(roomId, this);
                 updateTablesTask.execute();
             }
-            if (updatePlayersTask == null || updatePlayersTask.isDone()) {
-                updatePlayersTask = new UpdatePlayersTask(roomId, this.chatPanelMain);
-                updatePlayersTask.execute();
-            }
+
+            // finished tables
             if (this.btnStateFinished.isSelected()) {
-                if (updateMatchesTask == null || updateMatchesTask.isDone()) {
+                if (updateMatchesTask == null || updateMatchesTask.isDone() || refreshImmediately) {
+                    if (updateMatchesTask != null) updateMatchesTask.cancel(true);
                     updateMatchesTask = new UpdateMatchesTask(roomId, this);
                     updateMatchesTask.execute();
                 }
-            } else if (updateMatchesTask != null) {
-                updateMatchesTask.cancel(true);
+            } else {
+                if (updateMatchesTask != null) updateMatchesTask.cancel(true);
+            }
+
+            // players list
+            if (updatePlayersTask == null || updatePlayersTask.isDone() || refreshImmediately) {
+                if (updatePlayersTask != null) updatePlayersTask.cancel(true);
+                updatePlayersTask = new UpdatePlayersTask(roomId, this.chatPanelMain);
+                updatePlayersTask.execute();
             }
         }
     }
@@ -688,7 +696,7 @@ public class TablesPanel extends javax.swing.JPanel {
         }
         if (chatRoomId != null) {
             this.chatPanelMain.getUserChatPanel().connect(chatRoomId);
-            startTasks();
+            startUpdateTasks(true);
             this.setVisible(true);
             this.repaint();
         } else {
@@ -696,7 +704,7 @@ public class TablesPanel extends javax.swing.JPanel {
         }
         //tableModel.setSession(session);
 
-        reloadMessages();
+        reloadServerMessages();
 
         MageFrame.getUI().addButton(MageComponents.NEW_GAME_BUTTON, btnNewTable);
 
@@ -705,7 +713,7 @@ public class TablesPanel extends javax.swing.JPanel {
 
     }
 
-    protected void reloadMessages() {
+    protected void reloadServerMessages() {
         // reload server messages
         java.util.List<String> serverMessages = SessionHandler.getServerMessages();
         synchronized (this) {
@@ -1581,7 +1589,7 @@ public class TablesPanel extends javax.swing.JPanel {
         } else {
             this.jSplitPaneTables.setDividerLocation(this.jPanelTables.getHeight());
         }
-        this.startTasks();
+        this.startUpdateTasks(true);
     }//GEN-LAST:event_btnStateFinishedActionPerformed
 
     private void btnRatedbtnFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRatedbtnFilterActionPerformed
@@ -1666,6 +1674,7 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
 
     private final UUID roomId;
     private final TablesPanel panel;
+    private boolean isFirstRun = true;
 
     private static final Logger logger = Logger.getLogger(UpdateTablesTask.class);
 
@@ -1693,10 +1702,13 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
     @Override
     protected void process(java.util.List<Collection<TableView>> view) {
         panel.updateTables(view.get(0));
+
+        // update server messages
         count++;
-        if (count > 60) {
+        if (isFirstRun || count > 60) {
             count = 0;
-            panel.reloadMessages();
+            isFirstRun = false;
+            panel.reloadServerMessages();
         }
     }
 
@@ -1766,10 +1778,7 @@ class UpdateMatchesTask extends SwingWorker<Void, Collection<MatchView>> {
     @Override
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
-            Collection<MatchView> matches = SessionHandler.getFinishedMatches(roomId);
-            if (!matches.isEmpty()) {
-                this.publish(matches);
-            }
+            this.publish(SessionHandler.getFinishedMatches(roomId));
             TimeUnit.SECONDS.sleep(TablesPanel.REFRESH_FINISHED_TABLES_SECS);
         }
         return null;

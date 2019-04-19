@@ -105,7 +105,7 @@ public class TablesPane extends MagePane {
 
     @Override
     public void activated() {
-        tablesPanel.startTasks();
+        tablesPanel.startUpdateTasks(false);
     }
 
     @Override
