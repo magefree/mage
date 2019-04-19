@@ -1,5 +1,6 @@
 package mage.cards.r;
 
+import java.util.Set;
 import java.util.UUID;
 
 import mage.MageInt;
@@ -19,7 +20,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -76,20 +76,24 @@ class RogueSkycaptainEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
-        if (permanent == null) {
-            permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        }
+        Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && permanent != null) {
             new AddCountersSourceEffect(CounterType.WAGE.createInstance(), true).apply(game, source);
             Cost cost = new GenericManaCost(2 * permanent.getCounters(game).getCount(CounterType.WAGE));
             if (!cost.pay(source, game, controller.getId(), controller.getId(), false)) {
                 new RemoveAllCountersSourceEffect(CounterType.WAGE).apply(game, source);
-                Target target = new TargetOpponent(true);
-                target.choose(Outcome.GainControl, source.getControllerId(), source.getSourceId(), game);
-                Player opponent = game.getPlayer(target.getFirstTarget());
+                Player opponent;
+                Set<UUID> opponents = game.getOpponents(controller.getId());
+                if (opponents.size() == 1) {
+                    opponent = game.getPlayer(opponents.iterator().next());
+                } else {
+                    Target target = new TargetOpponent(true);
+                    target.setNotTarget(true);
+                    target.choose(Outcome.GainControl, source.getControllerId(), source.getSourceId(), game);
+                    opponent = game.getPlayer(target.getFirstTarget());
+                }
                 if (opponent != null) {
-                    permanent.changeControllerId(controller.getId(), game);
+                    permanent.changeControllerId(opponent.getId(), game);
                 }
             }
             return true;
