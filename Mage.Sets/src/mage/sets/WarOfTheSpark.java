@@ -188,6 +188,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Naga Eternal", 60, Rarity.COMMON, mage.cards.n.NagaEternal.class));
         cards.add(new SetCardInfo("Nahiri's Stoneblades", 139, Rarity.COMMON, mage.cards.n.NahirisStoneblades.class));
         cards.add(new SetCardInfo("Nahiri, Storm of Stone", 233, Rarity.UNCOMMON, mage.cards.n.NahiriStormOfStone.class));
+        cards.add(new SetCardInfo("Narset's Reversal", 62, Rarity.RARE, mage.cards.n.NarsetsReversal.class));
         cards.add(new SetCardInfo("Narset, Parter of Veils", 61, Rarity.UNCOMMON, mage.cards.n.NarsetParterOfVeils.class));
         cards.add(new SetCardInfo("Neheb, Dreadhorde Champion", 140, Rarity.RARE, mage.cards.n.NehebDreadhordeChampion.class));
         cards.add(new SetCardInfo("Neoform", 206, Rarity.UNCOMMON, mage.cards.n.Neoform.class));
