@@ -230,6 +230,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Sarkhan's Catharsis", 144, Rarity.COMMON, mage.cards.s.SarkhansCatharsis.class));
         cards.add(new SetCardInfo("Shriekdiver", 103, Rarity.COMMON, mage.cards.s.Shriekdiver.class));
         cards.add(new SetCardInfo("Silent Submersible", 66, Rarity.RARE, mage.cards.s.SilentSubmersible.class));
+        cards.add(new SetCardInfo("Simic Guildgate", 274, Rarity.COMMON, mage.cards.s.SimicGuildgate.class));
         cards.add(new SetCardInfo("Single Combat", 30, Rarity.RARE, mage.cards.s.SingleCombat.class));
         cards.add(new SetCardInfo("Sky Theater Strix", 67, Rarity.COMMON, mage.cards.s.SkyTheaterStrix.class));
         cards.add(new SetCardInfo("Snarespinner", 176, Rarity.COMMON, mage.cards.s.Snarespinner.class));
