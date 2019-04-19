@@ -188,6 +188,11 @@ public abstract class StackObjImpl implements StackObject {
                                 newTarget.clearChosen();
                             }
                         }
+
+                        // workaround to stop infinite AI choose (remove after chooseTarget can be called with extra filter to disable some ids)
+                        if (iteration > 10) {
+                            break;
+                        }
                     }
                     while (targetController.canRespond() && (targetId.equals(newTarget.getFirstTarget()) || newTarget.getTargets().size() != 1));
                     // choose a new target
