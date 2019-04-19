@@ -16,6 +16,7 @@ import mage.constants.*;
 import mage.game.match.MatchOptions;
 import mage.players.PlayerType;
 import mage.remote.MageRemoteException;
+import mage.util.RandomUtil;
 import mage.view.MatchView;
 import mage.view.RoomUsersView;
 import mage.view.TableView;
@@ -65,6 +66,7 @@ public class TablesPanel extends javax.swing.JPanel {
     public static final int REFRESH_ACTIVE_TABLES_SECS = 5;
     public static final int REFRESH_FINISHED_TABLES_SECS = 30;
     public static final int REFRESH_PLAYERS_SECS = 10;
+    public static final double REFRESH_TIMEOUTS_INCREASE_FACTOR = 0.8; // can increase timeouts by 80% (0.8)
 
     private final TablesTableModel tableModel;
     private final MatchesTableModel matchesModel;
@@ -209,6 +211,12 @@ public class TablesPanel extends javax.swing.JPanel {
             res[1] = Integer.parseInt(valsList[1]);
         }
         return res;
+    }
+
+    public static int randomizeTimout(int minTimout) {
+        // randomize timeouts to fix calls waves -- slow server can creates queue and moves all clients to same call window
+        int increase = (int) (minTimout * REFRESH_TIMEOUTS_INCREASE_FACTOR);
+        return minTimout + RandomUtil.nextInt(increase);
     }
 
 
@@ -1693,8 +1701,7 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
             if (tables != null) {
                 this.publish(tables);
             }
-
-            TimeUnit.SECONDS.sleep(TablesPanel.REFRESH_ACTIVE_TABLES_SECS);
+            TimeUnit.SECONDS.sleep(TablesPanel.randomizeTimout(TablesPanel.REFRESH_ACTIVE_TABLES_SECS));
         }
         return null;
     }
@@ -1741,7 +1748,7 @@ class UpdatePlayersTask extends SwingWorker<Void, Collection<RoomUsersView>> {
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
             this.publish(SessionHandler.getRoomUsers(roomId));
-            TimeUnit.SECONDS.sleep(TablesPanel.REFRESH_PLAYERS_SECS);
+            TimeUnit.SECONDS.sleep(TablesPanel.randomizeTimout(TablesPanel.REFRESH_PLAYERS_SECS));
         }
         return null;
     }
@@ -1779,7 +1786,7 @@ class UpdateMatchesTask extends SwingWorker<Void, Collection<MatchView>> {
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
             this.publish(SessionHandler.getFinishedMatches(roomId));
-            TimeUnit.SECONDS.sleep(TablesPanel.REFRESH_FINISHED_TABLES_SECS);
+            TimeUnit.SECONDS.sleep(TablesPanel.randomizeTimout(TablesPanel.REFRESH_FINISHED_TABLES_SECS));
         }
         return null;
     }
