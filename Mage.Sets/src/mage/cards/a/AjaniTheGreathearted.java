@@ -44,7 +44,7 @@ public final class AjaniTheGreathearted extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 VigilanceAbility.getInstance(),
                 Duration.WhileOnBattlefield,
-                StaticFilters.FILTER_CONTROLLED_CREATURES
+                StaticFilters.FILTER_PERMANENT_CREATURES
         )));
 
         // +1: You gain 3 life.
