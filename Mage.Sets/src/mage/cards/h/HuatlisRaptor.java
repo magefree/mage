@@ -26,7 +26,7 @@ public final class HuatlisRaptor extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
 
-        // When Huatli's Raptor enters the battlefield, proliferate.
+        // When Huatli's Raptor enters the battlefield, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ProliferateEffect()));
     }
 

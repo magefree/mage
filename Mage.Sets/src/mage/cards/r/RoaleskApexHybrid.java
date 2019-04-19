@@ -55,12 +55,9 @@ public final class RoaleskApexHybrid extends CardImpl {
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
-        // When Roalsk dies, proliferate, then proliferate again.
-        ability = new DiesTriggeredAbility(new ProliferateEffect().setText("proliferate,"));
-        ability.addEffect(new ProliferateEffect().setText(
-                "then proliferate again <i>(Choose any number of permanents and/or players, " +
-                        "then give each another counter of each kind already there. Then do it again.)</i>"
-        ));
+        // When Roalsk dies, proliferate, then proliferate again. (Choose any number of permanents and/or players, then give each another counter of each kind already there. Then do it again.)
+        ability = new DiesTriggeredAbility(new ProliferateEffect(false));
+        ability.addEffect(new ProliferateEffect(" again", true).concatBy(", then"));
         this.addAbility(ability);
     }
 

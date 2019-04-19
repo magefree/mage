@@ -39,7 +39,7 @@ public final class PlanewideCelebration extends CardImpl {
         this.getSpellAbility().addMode(mode);
 
         // • Proliferate.
-        this.getSpellAbility().addMode(new Mode(new ProliferateEffect()));
+        this.getSpellAbility().addMode(new Mode(new ProliferateEffect(false)));
 
         // • You gain 4 life.
         this.getSpellAbility().addMode(new Mode(new GainLifeEffect(4)));

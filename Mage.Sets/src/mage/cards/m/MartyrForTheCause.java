@@ -23,7 +23,7 @@ public final class MartyrForTheCause extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // When Martyr for the Cause dies, proliferate.
+        // When Martyr for the Cause dies, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
         this.addAbility(new DiesTriggeredAbility(new ProliferateEffect()));
     }
 

@@ -22,7 +22,7 @@ public final class KiorasDambreaker extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
 
-        // When Kiora's Dreammaker enters the battlefield, proliferate.
+        // When Kiora's Dreammaker enters the battlefield, proliferate. (Choose any number of permanents and/or players, then give each a counter of each kind already there.)
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ProliferateEffect()));
     }
 
