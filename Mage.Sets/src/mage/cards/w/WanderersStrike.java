@@ -20,10 +20,7 @@ public final class WanderersStrike extends CardImpl {
 
         // Exile target creature, then proliferate.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addEffect(new ProliferateEffect().setText(
-                "then proliferate <i>(Choose any number of permanents and/or players, " +
-                        "then give each another counter of each kind already there.)</i>"
-        ));
+        this.getSpellAbility().addEffect(new ProliferateEffect().concatBy("then"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
