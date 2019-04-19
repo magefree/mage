@@ -87,8 +87,7 @@ class GodEternalRhonasEffect extends OneShotEffect {
             }
             ContinuousEffect effect = new BoostTargetEffect(
                     permanent.getPower().getValue(),
-                    permanent.getToughness().getValue(),
-                    Duration.EndOfTurn
+                    0, Duration.EndOfTurn
             );
             effect.setTargetPointer(new FixedTarget(permanent, game));
             game.addEffect(effect, source);
