@@ -229,6 +229,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Saheeli, Sublime Artificer", 234, Rarity.UNCOMMON, mage.cards.s.SaheeliSublimeArtificer.class));
         cards.add(new SetCardInfo("Samut's Sprint", 142, Rarity.COMMON, mage.cards.s.SamutsSprint.class));
         cards.add(new SetCardInfo("Samut, Tyrant Smasher", 235, Rarity.UNCOMMON, mage.cards.s.SamutTyrantSmasher.class));
+        cards.add(new SetCardInfo("Sarkhan the Masterless", 143, Rarity.RARE, mage.cards.s.SarkhanTheMasterless.class));
         cards.add(new SetCardInfo("Sarkhan's Catharsis", 144, Rarity.COMMON, mage.cards.s.SarkhansCatharsis.class));
         cards.add(new SetCardInfo("Shriekdiver", 103, Rarity.COMMON, mage.cards.s.Shriekdiver.class));
         cards.add(new SetCardInfo("Silent Submersible", 66, Rarity.RARE, mage.cards.s.SilentSubmersible.class));

@@ -1,17 +1,15 @@
-
-
 package mage.game.permanent.token;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class DragonToken extends TokenImpl {
@@ -19,7 +17,7 @@ public final class DragonToken extends TokenImpl {
     static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("DTK", "MMA", "ALA", "MM3", "C17"));
+        tokenImageSets.addAll(Arrays.asList("DTK", "MMA", "ALA", "MM3", "C17", "WAR"));
     }
 
     public DragonToken() {
