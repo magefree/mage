@@ -239,6 +239,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Topple the Statue", 35, Rarity.COMMON, mage.cards.t.ToppleTheStatue.class));
         cards.add(new SetCardInfo("Totally Lost", 74, Rarity.COMMON, mage.cards.t.TotallyLost.class));
         cards.add(new SetCardInfo("Turret Ogre", 148, Rarity.COMMON, mage.cards.t.TurretOgre.class));
+        cards.add(new SetCardInfo("Ugin's Conjurant", 3, Rarity.UNCOMMON, mage.cards.u.UginsConjurant.class));
         cards.add(new SetCardInfo("Vivien's Arkbow", 181, Rarity.RARE, mage.cards.v.ViviensArkbow.class));
         cards.add(new SetCardInfo("Vivien's Grizzly", 182, Rarity.COMMON, mage.cards.v.ViviensGrizzly.class));
         cards.add(new SetCardInfo("Vivien, Champion of the Wilds", 180, Rarity.RARE, mage.cards.v.VivienChampionOfTheWilds.class));
