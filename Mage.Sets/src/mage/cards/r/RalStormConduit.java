@@ -81,7 +81,7 @@ class RalStormConduitTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getSpell(event.getTargetId());
-        return spell != null && spell.isControlledBy(getSourceId()) && spell.isInstantOrSorcery();
+        return spell != null && spell.isControlledBy(getControllerId()) && spell.isInstantOrSorcery();
     }
 
     @Override
