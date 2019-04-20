@@ -63,7 +63,7 @@ public final class UginTheIneffable extends CardImpl {
 
         // -3: Destroy target permanent that's one or more colors.
         Ability ability = new LoyaltyAbility(new DestroyTargetEffect(), -3);
-        ability.addTarget(new TargetPermanent());
+        ability.addTarget(new TargetPermanent(filter2));
         this.addAbility(ability);
     }
 
@@ -139,7 +139,9 @@ class UginTheIneffableDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (tokenRef.refersTo(((ZoneChangeEvent) event).getTarget(), game)) {
+        ZoneChangeEvent zEvent = ((ZoneChangeEvent) event);
+        if (!(zEvent.getFromZone() == Zone.BATTLEFIELD)
+                || !tokenRef.refersTo(zEvent.getTarget(), game)) {
             this.getEffects().clear();
             Effect effect = new ReturnToHandTargetEffect();
             effect.setTargetPointer(new FixedTarget(cardRef));
