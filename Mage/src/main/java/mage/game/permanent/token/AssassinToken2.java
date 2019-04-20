@@ -40,7 +40,7 @@ public final class AssassinToken2 extends TokenImpl {
 class AssassinToken2TriggeredAbility extends TriggeredAbilityImpl {
 
     AssassinToken2TriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DestroyTargetEffect());
+        super(Zone.BATTLEFIELD, null);
     }
 
     private AssassinToken2TriggeredAbility(final AssassinToken2TriggeredAbility effect) {
@@ -60,9 +60,10 @@ class AssassinToken2TriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getSourceId().equals(getSourceId())) {
-            for (Effect effect : this.getAllEffects()) {
-                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-            }
+            Effect effect = new DestroyTargetEffect();
+            effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
+            this.getEffects().clear();
+            this.addEffect(effect);
             return true;
         }
         return false;
