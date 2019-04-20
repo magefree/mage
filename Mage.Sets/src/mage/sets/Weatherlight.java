@@ -159,6 +159,7 @@ public final class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Strands of Night", 82, Rarity.UNCOMMON, mage.cards.s.StrandsOfNight.class));
         cards.add(new SetCardInfo("Straw Golem", 158, Rarity.UNCOMMON, mage.cards.s.StrawGolem.class));
         cards.add(new SetCardInfo("Striped Bears", 140, Rarity.COMMON, mage.cards.s.StripedBears.class));
+        cards.add(new SetCardInfo("Sylvan Hierophant", 141, Rarity.UNCOMMON, mage.cards.s.SylvanHierophant.class));
         cards.add(new SetCardInfo("Tariff", 28, Rarity.RARE, mage.cards.t.Tariff.class));
         cards.add(new SetCardInfo("Teferi's Veil", 53, Rarity.UNCOMMON, mage.cards.t.TeferisVeil.class));
         cards.add(new SetCardInfo("Tendrils of Despair", 83, Rarity.COMMON, mage.cards.t.TendrilsOfDespair.class));
