@@ -34,6 +34,7 @@ public final class GideonsTriumph extends CardImpl {
         // Target opponent sacrifices a creature that attacked or blocked this turn. If you control a Gideon planeswalker, that player sacrifices two of those creatures instead.
         this.getSpellAbility().addEffect(new GideonsTriumphEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addWatcher(new GideonsTriumphWatcher());
     }
 
     private GideonsTriumph(final GideonsTriumph card) {

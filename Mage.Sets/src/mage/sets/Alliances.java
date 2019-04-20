@@ -83,6 +83,8 @@ public final class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Fyndhorn Druid", "90a", Rarity.COMMON, mage.cards.f.FyndhornDruid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fyndhorn Druid", "90b", Rarity.COMMON, mage.cards.f.FyndhornDruid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gargantuan Gorilla", 91, Rarity.RARE, mage.cards.g.GargantuanGorilla.class));
+        cards.add(new SetCardInfo("Gift of the Woods", "92a", Rarity.COMMON, mage.cards.g.GiftOfTheWoods.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gift of the Woods", "92b", Rarity.COMMON, mage.cards.g.GiftOfTheWoods.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gorilla Berserkers", "93a", Rarity.COMMON, mage.cards.g.GorillaBerserkers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gorilla Berserkers", "93b", Rarity.COMMON, mage.cards.g.GorillaBerserkers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gorilla Chieftain", "94a", Rarity.COMMON, mage.cards.g.GorillaChieftain.class, NON_FULL_USE_VARIOUS));
@@ -106,6 +108,8 @@ public final class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Keeper of Tresserhorn", 52, Rarity.RARE, mage.cards.k.KeeperOfTresserhorn.class));
         cards.add(new SetCardInfo("Kjeldoran Escort", "7a", Rarity.COMMON, mage.cards.k.KjeldoranEscort.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kjeldoran Escort", "7b", Rarity.COMMON, mage.cards.k.KjeldoranEscort.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kjeldoran Pride", "9a", Rarity.COMMON, mage.cards.k.KjeldoranPride.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kjeldoran Pride", "9b", Rarity.COMMON, mage.cards.k.KjeldoranPride.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kjeldoran Home Guard", 8, Rarity.UNCOMMON, mage.cards.k.KjeldoranHomeGuard.class));
         cards.add(new SetCardInfo("Kjeldoran Outpost", 139, Rarity.RARE, mage.cards.k.KjeldoranOutpost.class));
         cards.add(new SetCardInfo("Krovikan Horror", 53, Rarity.RARE, mage.cards.k.KrovikanHorror.class));
@@ -149,6 +153,7 @@ public final class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Reprisal", "13a", Rarity.COMMON, mage.cards.r.Reprisal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Reprisal", "13b", Rarity.COMMON, mage.cards.r.Reprisal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ritual of the Machine", 59, Rarity.RARE, mage.cards.r.RitualOfTheMachine.class));
+        cards.add(new SetCardInfo("Rogue Skycaptain", 79, Rarity.RARE, mage.cards.r.RogueSkycaptain.class));
         cards.add(new SetCardInfo("Royal Decree", 14, Rarity.RARE, mage.cards.r.RoyalDecree.class));
         cards.add(new SetCardInfo("Royal Herbalist", "15a", Rarity.COMMON, mage.cards.r.RoyalHerbalist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Royal Herbalist", "15b", Rarity.COMMON, mage.cards.r.RoyalHerbalist.class, NON_FULL_USE_VARIOUS));
@@ -166,6 +171,8 @@ public final class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Soldevi Heretic", "33b", Rarity.COMMON, mage.cards.s.SoldeviHeretic.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Soldevi Sage", "34a", Rarity.COMMON, mage.cards.s.SoldeviSage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Soldevi Sage", "34b", Rarity.COMMON, mage.cards.s.SoldeviSage.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Soldevi Sentry", "132a", Rarity.COMMON, mage.cards.s.SoldeviSentry.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Soldevi Sentry", "132b", Rarity.COMMON, mage.cards.s.SoldeviSentry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Soldevi Steam Beast", "133a", Rarity.COMMON, mage.cards.s.SoldeviSteamBeast.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Soldevi Steam Beast", "133b", Rarity.COMMON, mage.cards.s.SoldeviSteamBeast.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Soldier of Fortune", 80, Rarity.UNCOMMON, mage.cards.s.SoldierOfFortune.class));

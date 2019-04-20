@@ -56,9 +56,7 @@ class WidespreadBrutalityEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         AmassEffect amassEffect = new AmassEffect(2);
-        if (!amassEffect.apply(game, source)) {
-            return false;
-        }
+        amassEffect.apply(game, source);
         Permanent amassedArmy = game.getPermanent(amassEffect.getAmassedCreatureId());
         if (amassedArmy == null) {
             return false;

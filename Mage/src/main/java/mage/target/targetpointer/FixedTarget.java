@@ -1,14 +1,16 @@
 package mage.target.targetpointer;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
 
 public class FixedTarget implements TargetPointer {
 
@@ -19,6 +21,10 @@ public class FixedTarget implements TargetPointer {
     public FixedTarget(UUID target) {
         this.targetId = target;
         this.initialized = false;
+    }
+
+    public FixedTarget(MageObjectReference mor) {
+        this(mor.getSourceId(), mor.getZoneChangeCounter());
     }
 
     public FixedTarget(Card card, Game game) {

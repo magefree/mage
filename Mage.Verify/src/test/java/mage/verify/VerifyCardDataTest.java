@@ -602,7 +602,7 @@ public class VerifyCardDataTest {
         //checkNumbers(card, ref); // TODO: load data from allsets.json and check it (allcards.json do not have card numbers)
         checkBasicLands(card, ref);
         checkMissingAbilities(card, ref);
-        //checkWrongCosts(card, ref);
+        checkWrongAbilitiesText(card, ref);
     }
 
     private void checkColors(Card card, JsonCard ref) {
@@ -734,13 +734,23 @@ public class VerifyCardDataTest {
         card.getRules().stream().forEach(System.out::println);
     }
 
-    private void checkWrongCosts(Card card, JsonCard ref) {
-        // checks missing or wrong cost
-        if (!card.getExpansionSetCode().equals("RNA")) {
+    private void checkWrongAbilitiesText(Card card, JsonCard ref) {
+        // checks missing or wrong text
+        if (!card.getExpansionSetCode().equals("WAR")) {
             return;
         }
 
-        String[] refRules = ref.text.split("[\\$\\\n]"); // ref card's abilities can be splited by \n or $ chars
+        if (ref.text == null || ref.text.isEmpty()) {
+            return;
+        }
+
+        String refText = ref.text;
+        // lands fix
+        if (refText.startsWith("(") && refText.endsWith(")")) {
+            refText = refText.substring(1, refText.length() - 1);
+        }
+
+        String[] refRules = refText.split("[\\$\\\n]"); // ref card's abilities can be splited by \n or $ chars
         for (int i = 0; i < refRules.length; i++) {
             refRules[i] = prepareRule(card.getName(), refRules[i]);
         }
@@ -752,17 +762,15 @@ public class VerifyCardDataTest {
 
         for (String cardRule : cardRules) {
             boolean isAbilityFounded = false;
-            boolean isCostOk = false;
             for (String refRule : refRules) {
                 if (cardRule.equals(refRule)) {
                     isAbilityFounded = true;
-                    isCostOk = true;
                     break;
                 }
             }
 
-            if (!isCostOk) {
-                fail(card, "abilities", "card ability have cost, but can't find in ref [" + "xxx" + ": " + card.getRules() + "]");
+            if (!isAbilityFounded) {
+                warn(card, "card ability can't be found in ref [" + card.getName() + ": " + cardRule + "]");
             }
         }
     }

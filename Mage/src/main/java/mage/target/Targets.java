@@ -4,10 +4,7 @@ import mage.abilities.Ability;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.target.targetpointer.FirstTargetPointer;
-import mage.target.targetpointer.SecondTargetPointer;
-import mage.target.targetpointer.TargetPointer;
-import mage.target.targetpointer.ThirdTargetPointer;
+import mage.target.targetpointer.*;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
@@ -170,9 +167,13 @@ public class Targets extends ArrayList<Target> {
             }
         }
 
+        if (targetPointer instanceof FixedTarget || targetPointer instanceof FixedTargets) {
+            // fixed target = direct ID, you can't find target type and description
+            proccessed = true;
+        }
+
         if (!proccessed) {
             logger.error("Unknown target pointer " + (targetPointer != null ? targetPointer : "null"), new Throwable());
-            // TODO: add other target types?
         }
 
         return null;

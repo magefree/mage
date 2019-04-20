@@ -16,6 +16,7 @@ import mage.constants.*;
 import mage.game.match.MatchOptions;
 import mage.players.PlayerType;
 import mage.remote.MageRemoteException;
+import mage.util.RandomUtil;
 import mage.view.MatchView;
 import mage.view.RoomUsersView;
 import mage.view.TableView;
@@ -65,6 +66,7 @@ public class TablesPanel extends javax.swing.JPanel {
     public static final int REFRESH_ACTIVE_TABLES_SECS = 5;
     public static final int REFRESH_FINISHED_TABLES_SECS = 30;
     public static final int REFRESH_PLAYERS_SECS = 10;
+    public static final double REFRESH_TIMEOUTS_INCREASE_FACTOR = 0.8; // can increase timeouts by 80% (0.8)
 
     private final TablesTableModel tableModel;
     private final MatchesTableModel matchesModel;
@@ -209,6 +211,12 @@ public class TablesPanel extends javax.swing.JPanel {
             res[1] = Integer.parseInt(valsList[1]);
         }
         return res;
+    }
+
+    public static int randomizeTimout(int minTimout) {
+        // randomize timeouts to fix calls waves -- slow server can creates queue and moves all clients to same call window
+        int increase = (int) (minTimout * REFRESH_TIMEOUTS_INCREASE_FACTOR);
+        return minTimout + RandomUtil.nextInt(increase);
     }
 
 
@@ -633,23 +641,31 @@ public class TablesPanel extends javax.swing.JPanel {
         }
     }
 
-    public void startTasks() {
+    public void startUpdateTasks(boolean refreshImmediately) {
         if (SessionHandler.getSession() != null) {
-            if (updateTablesTask == null || updateTablesTask.isDone()) {
+            // active tables and server messages
+            if (updateTablesTask == null || updateTablesTask.isDone() || refreshImmediately) {
+                if (updateTablesTask != null) updateTablesTask.cancel(true);
                 updateTablesTask = new UpdateTablesTask(roomId, this);
                 updateTablesTask.execute();
             }
-            if (updatePlayersTask == null || updatePlayersTask.isDone()) {
-                updatePlayersTask = new UpdatePlayersTask(roomId, this.chatPanelMain);
-                updatePlayersTask.execute();
-            }
+
+            // finished tables
             if (this.btnStateFinished.isSelected()) {
-                if (updateMatchesTask == null || updateMatchesTask.isDone()) {
+                if (updateMatchesTask == null || updateMatchesTask.isDone() || refreshImmediately) {
+                    if (updateMatchesTask != null) updateMatchesTask.cancel(true);
                     updateMatchesTask = new UpdateMatchesTask(roomId, this);
                     updateMatchesTask.execute();
                 }
-            } else if (updateMatchesTask != null) {
-                updateMatchesTask.cancel(true);
+            } else {
+                if (updateMatchesTask != null) updateMatchesTask.cancel(true);
+            }
+
+            // players list
+            if (updatePlayersTask == null || updatePlayersTask.isDone() || refreshImmediately) {
+                if (updatePlayersTask != null) updatePlayersTask.cancel(true);
+                updatePlayersTask = new UpdatePlayersTask(roomId, this.chatPanelMain);
+                updatePlayersTask.execute();
             }
         }
     }
@@ -688,7 +704,7 @@ public class TablesPanel extends javax.swing.JPanel {
         }
         if (chatRoomId != null) {
             this.chatPanelMain.getUserChatPanel().connect(chatRoomId);
-            startTasks();
+            startUpdateTasks(true);
             this.setVisible(true);
             this.repaint();
         } else {
@@ -696,7 +712,7 @@ public class TablesPanel extends javax.swing.JPanel {
         }
         //tableModel.setSession(session);
 
-        reloadMessages();
+        reloadServerMessages();
 
         MageFrame.getUI().addButton(MageComponents.NEW_GAME_BUTTON, btnNewTable);
 
@@ -705,7 +721,7 @@ public class TablesPanel extends javax.swing.JPanel {
 
     }
 
-    protected void reloadMessages() {
+    protected void reloadServerMessages() {
         // reload server messages
         java.util.List<String> serverMessages = SessionHandler.getServerMessages();
         synchronized (this) {
@@ -1581,7 +1597,7 @@ public class TablesPanel extends javax.swing.JPanel {
         } else {
             this.jSplitPaneTables.setDividerLocation(this.jPanelTables.getHeight());
         }
-        this.startTasks();
+        this.startUpdateTasks(true);
     }//GEN-LAST:event_btnStateFinishedActionPerformed
 
     private void btnRatedbtnFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRatedbtnFilterActionPerformed
@@ -1666,6 +1682,7 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
 
     private final UUID roomId;
     private final TablesPanel panel;
+    private boolean isFirstRun = true;
 
     private static final Logger logger = Logger.getLogger(UpdateTablesTask.class);
 
@@ -1684,8 +1701,7 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
             if (tables != null) {
                 this.publish(tables);
             }
-
-            TimeUnit.SECONDS.sleep(TablesPanel.REFRESH_ACTIVE_TABLES_SECS);
+            TimeUnit.SECONDS.sleep(TablesPanel.randomizeTimout(TablesPanel.REFRESH_ACTIVE_TABLES_SECS));
         }
         return null;
     }
@@ -1693,10 +1709,13 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
     @Override
     protected void process(java.util.List<Collection<TableView>> view) {
         panel.updateTables(view.get(0));
+
+        // update server messages
         count++;
-        if (count > 60) {
+        if (isFirstRun || count > 60) {
             count = 0;
-            panel.reloadMessages();
+            isFirstRun = false;
+            panel.reloadServerMessages();
         }
     }
 
@@ -1729,7 +1748,7 @@ class UpdatePlayersTask extends SwingWorker<Void, Collection<RoomUsersView>> {
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
             this.publish(SessionHandler.getRoomUsers(roomId));
-            TimeUnit.SECONDS.sleep(TablesPanel.REFRESH_PLAYERS_SECS);
+            TimeUnit.SECONDS.sleep(TablesPanel.randomizeTimout(TablesPanel.REFRESH_PLAYERS_SECS));
         }
         return null;
     }
@@ -1766,11 +1785,8 @@ class UpdateMatchesTask extends SwingWorker<Void, Collection<MatchView>> {
     @Override
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
-            Collection<MatchView> matches = SessionHandler.getFinishedMatches(roomId);
-            if (!matches.isEmpty()) {
-                this.publish(matches);
-            }
-            TimeUnit.SECONDS.sleep(TablesPanel.REFRESH_FINISHED_TABLES_SECS);
+            this.publish(SessionHandler.getFinishedMatches(roomId));
+            TimeUnit.SECONDS.sleep(TablesPanel.randomizeTimout(TablesPanel.REFRESH_FINISHED_TABLES_SECS));
         }
         return null;
     }

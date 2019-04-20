@@ -23,7 +23,7 @@ public final class BloomHulk extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // When Bloom Hulk enters the battlefield, proliferate.
+        // When Bloom Hulk enters the battlefield, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ProliferateEffect()));
     }
 

@@ -1,4 +1,3 @@
-
 package mage.abilities.common;
 
 import mage.MageObjectReference;
@@ -28,10 +27,12 @@ public class GodEternalDiesTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        return zEvent.getFromZone() == Zone.BATTLEFIELD
-                && (zEvent.getToZone() == Zone.GRAVEYARD
-                || zEvent.getToZone() == Zone.EXILED);
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
+            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+            return zEvent.getFromZone() == Zone.BATTLEFIELD
+                    && (zEvent.getToZone() == Zone.GRAVEYARD || zEvent.getToZone() == Zone.EXILED);
+        }
+        return false;
     }
 
     @Override

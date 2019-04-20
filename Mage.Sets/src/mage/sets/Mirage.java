@@ -279,6 +279,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Soar", 93, Rarity.COMMON, mage.cards.s.Soar.class));
         cards.add(new SetCardInfo("Soul Echo", 40, Rarity.RARE, mage.cards.s.SoulEcho.class));
         cards.add(new SetCardInfo("Soul Rend", 144, Rarity.UNCOMMON, mage.cards.s.SoulRend.class));
+        cards.add(new SetCardInfo("Soulshriek", 145, Rarity.COMMON, mage.cards.s.Soulshriek.class));
         cards.add(new SetCardInfo("Spectral Guardian", 41, Rarity.RARE, mage.cards.s.SpectralGuardian.class));
         cards.add(new SetCardInfo("Spirit of the Night", 146, Rarity.RARE, mage.cards.s.SpiritOfTheNight.class));
         cards.add(new SetCardInfo("Spitting Earth", 193, Rarity.COMMON, mage.cards.s.SpittingEarth.class));
@@ -314,6 +315,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Unseen Walker", 249, Rarity.UNCOMMON, mage.cards.u.UnseenWalker.class));
         cards.add(new SetCardInfo("Unyaro Bee Sting", 250, Rarity.UNCOMMON, mage.cards.u.UnyaroBeeSting.class));
         cards.add(new SetCardInfo("Unyaro Griffin", 44, Rarity.UNCOMMON, mage.cards.u.UnyaroGriffin.class));
+        cards.add(new SetCardInfo("Urborg Panther", 150, Rarity.COMMON, mage.cards.u.UrborgPanther.class));
         cards.add(new SetCardInfo("Vaporous Djinn", 101, Rarity.UNCOMMON, mage.cards.v.VaporousDjinn.class));
         cards.add(new SetCardInfo("Ventifact Bottle", 323, Rarity.RARE, mage.cards.v.VentifactBottle.class));
         cards.add(new SetCardInfo("Viashino Warrior", 200, Rarity.COMMON, mage.cards.v.ViashinoWarrior.class));

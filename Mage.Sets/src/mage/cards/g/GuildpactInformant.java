@@ -27,7 +27,7 @@ public final class GuildpactInformant extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever Guildpact Informant deals combat damage to a player or planeswalker, proliferate.
+        // Whenever Guildpact Informant deals combat damage to a player or planeswalker, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
                 new ProliferateEffect(), false
         ).setOrPlaneswalker(true));

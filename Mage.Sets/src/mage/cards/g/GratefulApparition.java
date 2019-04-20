@@ -26,7 +26,7 @@ public final class GratefulApparition extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever Grateful Apparition deals combat damage to a player or planeswalker, proliferate.
+        // Whenever Grateful Apparition deals combat damage to a player or planeswalker, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
                 new ProliferateEffect(), false
         ).setOrPlaneswalker(true));

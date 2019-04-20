@@ -1,9 +1,5 @@
 package mage.abilities.effects.common.counter;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
@@ -14,14 +10,30 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetPermanentOrPlayerWithCounter;
 
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
  * @author nantuko
  */
 public class ProliferateEffect extends OneShotEffect {
 
     public ProliferateEffect() {
+        this("", true);
+    }
+
+    public ProliferateEffect(boolean showAbilityHint) {
+        this("", showAbilityHint);
+    }
+
+    public ProliferateEffect(String afterText, boolean showAbilityHint) {
         super(Outcome.Benefit);
-        staticText = "proliferate. <i>(You choose any number of permanents and/or players with counters on them, then give each another counter of each kind already there.)</i>";
+        staticText = "proliferate" + afterText;
+        if (showAbilityHint) {
+            staticText += ". <i>(You choose any number of permanents and/or players with counters on them, then give each another counter of each kind already there.)</i>";
+        }
     }
 
     public ProliferateEffect(ProliferateEffect effect) {

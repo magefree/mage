@@ -24,7 +24,7 @@ public final class FluxChanneler extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever you cast a noncreature spell, proliferate.
+        // Whenever you cast a noncreature spell, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new ProliferateEffect(), StaticFilters.FILTER_SPELL_NON_CREATURE, false
         ));

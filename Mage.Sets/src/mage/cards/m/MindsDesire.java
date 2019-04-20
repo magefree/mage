@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
@@ -19,8 +17,9 @@ import mage.players.Player;
 import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class MindsDesire extends CardImpl {
@@ -68,11 +67,14 @@ class MindsDesireEffect extends OneShotEffect {
             controller.shuffleLibrary(source, game);
             Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
-                UUID exileId = UUID.randomUUID();
-                controller.moveCardsToExile(card, source, game, true, exileId, CardUtil.createObjectRealtedWindowTitle(source, game, null));
-                ContinuousEffect effect = new MindsDesireCastFromExileEffect();
-                effect.setTargetPointer(new FixedTargets(game.getExile().getExileZone(exileId).getCards(game), game));
-                game.addEffect(effect, source);
+                UUID exileId = CardUtil.getExileZoneId(controller.getId().toString() + "-" + game.getState().getTurnNum() + "-" + MindsDesire.class.toString(), game);
+                String exileName = "Mind's Desire free cast on " + game.getState().getTurnNum() + " turn for " + controller.getName();
+                game.getExile().createZone(exileId, exileName).setCleanupOnEndTurn(true);
+                if (controller.moveCardsToExile(card, source, game, true, exileId, exileName)) {
+                    ContinuousEffect effect = new MindsDesireCastFromExileEffect();
+                    effect.setTargetPointer(new FixedTargets(game.getExile().getExileZone(exileId).getCards(game), game));
+                    game.addEffect(effect, source);
+                }
             }
             return true;
         }
