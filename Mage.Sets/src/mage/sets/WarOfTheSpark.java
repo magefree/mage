@@ -102,6 +102,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Evolution Sage", 159, Rarity.UNCOMMON, mage.cards.e.EvolutionSage.class));
         cards.add(new SetCardInfo("Fblthp, the Lost", 50, Rarity.RARE, mage.cards.f.FblthpTheLost.class));
         cards.add(new SetCardInfo("Feather, the Redeemed", 197, Rarity.RARE, mage.cards.f.FeatherTheRedeemed.class));
+        cards.add(new SetCardInfo("Finale of Devastation", 160, Rarity.MYTHIC, mage.cards.f.FinaleOfDevastation.class));
         cards.add(new SetCardInfo("Finale of Eternity", 91, Rarity.MYTHIC, mage.cards.f.FinaleOfEternity.class));
         cards.add(new SetCardInfo("Finale of Glory", 12, Rarity.MYTHIC, mage.cards.f.FinaleOfGlory.class));
         cards.add(new SetCardInfo("Finale of Revelation", 51, Rarity.MYTHIC, mage.cards.f.FinaleOfRevelation.class));
@@ -280,6 +281,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Trusted Pegasus", 36, Rarity.COMMON, mage.cards.t.TrustedPegasus.class));
         cards.add(new SetCardInfo("Turret Ogre", 148, Rarity.COMMON, mage.cards.t.TurretOgre.class));
         cards.add(new SetCardInfo("Tyrant's Scorn", 225, Rarity.UNCOMMON, mage.cards.t.TyrantsScorn.class));
+        cards.add(new SetCardInfo("Ugin's Conjurant", 3, Rarity.UNCOMMON, mage.cards.u.UginsConjurant.class));
         cards.add(new SetCardInfo("Ugin, the Ineffable", 2, Rarity.RARE, mage.cards.u.UginTheIneffable.class));
         cards.add(new SetCardInfo("Unlikely Aid", 109, Rarity.COMMON, mage.cards.u.UnlikelyAid.class));
         cards.add(new SetCardInfo("Vampire Opportunist", 110, Rarity.COMMON, mage.cards.v.VampireOpportunist.class));
