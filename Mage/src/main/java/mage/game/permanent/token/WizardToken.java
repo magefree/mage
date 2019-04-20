@@ -7,7 +7,7 @@ import mage.constants.SubType;
 public final class WizardToken extends TokenImpl {
 
     public WizardToken() {
-        super("Wizard", "2/2 blue Human Wizard creature token");
+        super("Wizard", "2/2 blue Wizard creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.WIZARD);
         color.setBlue(true);
