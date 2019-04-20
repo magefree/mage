@@ -86,6 +86,7 @@ class KayasGhostformTriggeredAbility extends TriggeredAbilityImpl {
         }
         if (zEvent.getTarget() != null && zEvent.getTarget().getAttachments() != null
                 && zEvent.getTarget().getAttachments().contains(this.getSourceId())) {
+            getEffects().get(0).setValue("attachedTo", zEvent.getTarget());
             return true;
         } else {
             // If both (attachment and attached went to graveyard at the same time, the attachemnets can be already removed from the attached object.)
@@ -97,6 +98,7 @@ class KayasGhostformTriggeredAbility extends TriggeredAbilityImpl {
                 Permanent attachedTo = game.getPermanentOrLKIBattlefield(attachment.getAttachedTo());
                 if (attachedTo != null
                         && attachment.getAttachedToZoneChangeCounter() == attachedTo.getZoneChangeCounter(game)) {  // zoneChangeCounter is stored in Permanent
+                    getEffects().get(0).setValue("attachedTo", attachedTo);
                     return true;
                 }
             }
