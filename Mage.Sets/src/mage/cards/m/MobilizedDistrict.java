@@ -54,9 +54,10 @@ public final class MobilizedDistrict extends CardImpl {
                 "It's still a land. This ability costs {1} less to activate " +
                 "for each legendary creature and planeswalker you control."
         ), new GenericManaCost(4));
+        this.addAbility(ability);
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new MobilizedDistrictCostIncreasingEffect(ability.getOriginalId())
-        ).addHint(new ValueHint("legendary creatures and planeswalkers you control", cardsCount)));
+        ).addHint(new ValueHint("Legendary creatures and planeswalkers you control", cardsCount)));
     }
 
     private MobilizedDistrict(final MobilizedDistrict card) {
