@@ -15,6 +15,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+import mage.target.TargetPlayer;
 
 import java.util.UUID;
 
@@ -36,6 +37,7 @@ public final class AshiokDreamRender extends CardImpl {
         // -1: Target player puts the top four cards of their library into their graveyard. Then exile each opponent's graveyard.
         Ability ability = new LoyaltyAbility(new PutTopCardOfLibraryIntoGraveTargetEffect(4), -1);
         ability.addEffect(new ExileGraveyardAllPlayersEffect(StaticFilters.FILTER_CARD, TargetController.OPPONENT).setText("Then exile each opponent's graveyard."));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 
