@@ -68,7 +68,7 @@ public class AmassEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        if (!game.getBattlefield().contains(filter, 1, game)) {
+        if (!game.getBattlefield().contains(filter, source.getControllerId(), 1, game)) {
             new CreateTokenEffect(new ZombieArmyToken()).apply(game, source);
         }
         Target target = new TargetPermanent(filter);
