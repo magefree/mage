@@ -75,6 +75,7 @@ class DomrisAmbushEffect extends OneShotEffect {
             return false;
         }
         permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
+        game.applyEffects();
         return new DamageWithPowerTargetEffect().apply(game, source);
     }
 }
