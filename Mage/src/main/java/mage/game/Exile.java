@@ -1,22 +1,15 @@
-
 package mage.game;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 import mage.cards.Card;
 import mage.filter.FilterCard;
 import mage.util.Copyable;
 
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class Exile implements Serializable, Copyable<Exile> {
@@ -112,6 +105,19 @@ public class Exile implements Serializable, Copyable<Exile> {
     public void clear() {
         for (ExileZone exile : exileZones.values()) {
             exile.clear();
+        }
+    }
+
+    public void cleanupEndOfTurnZones(Game game) {
+        // moves cards from outdated zone to main exile zone
+        ExileZone mainZone = getExileZone(PERMANENT);
+        for (ExileZone zone : exileZones.values()) {
+            if (zone.isCleanupOnEndTurn()) {
+                for (Card card : zone.getCards(game)) {
+                    mainZone.add(card);
+                    zone.remove(card);
+                }
+            }
         }
     }
 }

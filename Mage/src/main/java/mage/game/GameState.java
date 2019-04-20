@@ -579,6 +579,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     public void removeEotEffects(Game game) {
         effects.removeEndOfTurnEffects();
         delayed.removeEndOfTurnAbilities();
+        exile.cleanupEndOfTurnZones(game);
         game.applyEffects();
     }
 
