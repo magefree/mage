@@ -447,7 +447,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                         }
                     }
                 });
-        refreshDeck();
+        refreshDeck(true);
 
         if (mode == DeckEditorMode.FREE_BUILDING) {
             setDropTarget(new DropTarget(this, new DnDDeckTargetListener() {
