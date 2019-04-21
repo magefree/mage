@@ -43,7 +43,6 @@ public class ProliferateEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        int numberOfCounters = 0;
         Counter newCounter = null;
         if (controller == null) {
             return false;
@@ -60,14 +59,12 @@ public class ProliferateEffect extends OneShotEffect {
                     for (Counter counter : permanent.getCounters(game).values()) {
                         newCounter = new Counter(counter.getName());
                         permanent.addCounters(newCounter, source, game);
-                        numberOfCounters = numberOfCounters + 1;
                     }
                     if (newCounter != null) {
                         game.informPlayers(permanent.getName()
-                                + " had "
-                                + numberOfCounters
-                                + " " + newCounter.getName()
-                                + " counter(s) added to it.");
+                                + " had 1 "
+                                + newCounter.getName()
+                                + " counter added to it.");
                     }
                 }
             } else {
@@ -77,13 +74,12 @@ public class ProliferateEffect extends OneShotEffect {
                         for (Counter counter : player.getCounters().values()) {
                             newCounter = new Counter(counter.getName());
                             player.addCounters(newCounter, game);
-                            numberOfCounters = numberOfCounters + 1;
                         }
                         if (newCounter != null) {
-                            game.informPlayers(player.getName() + " had "
-                                    + numberOfCounters + " "
+                            game.informPlayers(player.getName()
+                                    + " had 1 "
                                     + newCounter.getName()
-                                    + " counter(s) added to him or her.");
+                                    + " counter added to them.");
                         }
                     }
                 }
