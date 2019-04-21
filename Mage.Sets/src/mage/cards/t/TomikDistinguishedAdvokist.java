@@ -1,6 +1,7 @@
 package mage.cards.t;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
@@ -13,9 +14,10 @@ import mage.constants.*;
 import mage.filter.FilterObject;
 import mage.filter.FilterStackObject;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 
@@ -25,13 +27,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class TomikDistinguishedAdvokist extends CardImpl {
-
-    private static final FilterObject filter
-            = new FilterStackObject();
-
-    static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
-    }
 
     public TomikDistinguishedAdvokist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{W}");
@@ -46,6 +41,8 @@ public final class TomikDistinguishedAdvokist extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Lands on the battlefield and land cards in graveyards can't be the targets of spells or abilities your opponents control.
+        FilterObject filter = new FilterStackObject();
+        filter.add(new TargetedByOpponentsPredicate(this.getId()));
         Ability ability = new SimpleStaticAbility(new CantBeTargetedAllEffect(
                 StaticFilters.FILTER_LANDS, filter, Duration.WhileOnBattlefield
         ).setText("lands on the battlefield"));
@@ -63,6 +60,31 @@ public final class TomikDistinguishedAdvokist extends CardImpl {
     @Override
     public TomikDistinguishedAdvokist copy() {
         return new TomikDistinguishedAdvokist(this);
+    }
+}
+
+class TargetedByOpponentsPredicate implements Predicate<MageObject> {
+
+    private final UUID sourceId;
+
+    public TargetedByOpponentsPredicate(UUID sourceId) {
+        this.sourceId = sourceId;
+    }
+
+    @Override
+    public boolean apply(MageObject input, Game game) {
+        StackObject stackObject = game.getStack().getStackObject(input.getId());
+        Permanent source = game.getPermanentOrLKIBattlefield(this.sourceId);
+        if (stackObject != null && source != null) {
+            Player controller = game.getPlayer(source.getControllerId());
+            return controller != null && game.isOpponent(controller, stackObject.getControllerId());
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return "targeted spells or abilities your opponents control";
     }
 }
 
