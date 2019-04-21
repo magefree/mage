@@ -7,7 +7,6 @@ import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.ExileGraveyardAllPlayersEffect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -17,6 +16,8 @@ import mage.game.events.GameEvent;
 import mage.players.Player;
 
 import java.util.UUID;
+import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.target.TargetPlayer;
 
 /**
  * @author TheElk801
@@ -34,7 +35,8 @@ public final class AshiokDreamRender extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new AshiokDreamRenderEffect()));
 
         // -1: Target player puts the top four cards of their library into their graveyard. Then exile each opponent's graveyard.
-        Ability ability = new LoyaltyAbility(new PutTopCardOfLibraryIntoGraveTargetEffect(4), -1);
+        Ability ability = new LoyaltyAbility(new PutLibraryIntoGraveTargetEffect(4), -1);
+        ability.addTarget(new TargetPlayer());
         ability.addEffect(new ExileGraveyardAllPlayersEffect(StaticFilters.FILTER_CARD, TargetController.OPPONENT).setText("Then exile each opponent's graveyard."));
         this.addAbility(ability);
     }
