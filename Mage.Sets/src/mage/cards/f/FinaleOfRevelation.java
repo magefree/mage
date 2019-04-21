@@ -64,16 +64,20 @@ class FinaleOfRevelationEffect extends OneShotEffect {
             return false;
         }
         int xValue = source.getManaCostsToPay().getX();
-        if (xValue <= 10) {
+
+        if (xValue < 10) {
+            player.drawCards(xValue, game);
+        } else {
+            player.putCardsOnTopOfLibrary(player.getGraveyard(), game, source, false);
+            player.shuffleLibrary(source, game);
+            player.drawCards(xValue, game);
+            new UntapLandsEffect(5).apply(game, source);
+            game.addEffect(new MaximumHandSizeControllerEffect(
+                    Integer.MAX_VALUE, Duration.EndOfGame,
+                    MaximumHandSizeControllerEffect.HandSizeModification.SET
+            ), source);
         }
-        player.putCardsOnTopOfLibrary(player.getGraveyard(), game, source, false);
-        player.shuffleLibrary(source, game);
-        player.drawCards(xValue, game);
-        new UntapLandsEffect(5).apply(game, source);
-        game.addEffect(new MaximumHandSizeControllerEffect(
-                Integer.MAX_VALUE, Duration.EndOfGame,
-                MaximumHandSizeControllerEffect.HandSizeModification.SET
-        ), source);
+
         return true;
     }
 }
