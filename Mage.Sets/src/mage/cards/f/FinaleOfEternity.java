@@ -11,6 +11,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -48,7 +49,7 @@ enum FinaleOfEternityAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         int xValue = ability.getManaCostsToPay().getX();
-        FilterPermanent filter = new FilterPermanent("creatures with toughness " + xValue + " or less");
+        FilterPermanent filter = new FilterCreaturePermanent("creatures with toughness " + xValue + " or less");
         filter.add(new ToughnessPredicate(ComparisonType.FEWER_THAN, xValue + 1));
         ability.getTargets().clear();
         ability.addTarget(new TargetPermanent(0, 3, filter, false));
