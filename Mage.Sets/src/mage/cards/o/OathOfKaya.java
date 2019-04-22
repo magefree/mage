@@ -14,6 +14,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 import mage.target.targetpointer.FixedTarget;
 
@@ -75,6 +76,10 @@ class OathOfKayaTriggeredAbility extends TriggeredAbilityImpl {
             this.attackedThisCombat.clear();
             return false;
         }
+        Player player = game.getPlayer(getSourceId());
+        if (player == null) {
+            return false;
+        }
         for (UUID attackerId : game.getCombat().getAttackers()) {
             Permanent attacker = game.getPermanent(attackerId);
             if (attacker == null) {
@@ -82,13 +87,15 @@ class OathOfKayaTriggeredAbility extends TriggeredAbilityImpl {
             }
             UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(attackerId, game);
             UUID defenderId = game.getCombat().getDefenderId(attackerId);
-            if (defendingPlayerId.equals(defenderId) || attackedThisCombat.contains(defenderId)) {
+            if (defendingPlayerId.equals(defenderId)
+                    || attackedThisCombat.contains(defenderId)
+                    || !player.hasOpponent(defendingPlayerId, game)) {
                 continue;
             }
             attackedThisCombat.add(defenderId);
             this.getEffects().clear();
             Effect effect = new DamageTargetEffect(2);
-            effect.setTargetPointer(new FixedTarget(defendingPlayerId, game));
+            effect.setTargetPointer(new FixedTarget(attacker.getControllerId(), game));
             this.addEffect(effect);
             this.addEffect(new GainLifeEffect(2));
             return true;
