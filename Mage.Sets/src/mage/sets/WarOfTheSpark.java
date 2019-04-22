@@ -105,6 +105,7 @@ public final class WarOfTheSpark extends ExpansionSet {
         cards.add(new SetCardInfo("Finale of Devastation", 160, Rarity.MYTHIC, mage.cards.f.FinaleOfDevastation.class));
         cards.add(new SetCardInfo("Finale of Eternity", 91, Rarity.MYTHIC, mage.cards.f.FinaleOfEternity.class));
         cards.add(new SetCardInfo("Finale of Glory", 12, Rarity.MYTHIC, mage.cards.f.FinaleOfGlory.class));
+        cards.add(new SetCardInfo("Finale of Promise", 127, Rarity.MYTHIC, mage.cards.f.FinaleOfPromise.class));
         cards.add(new SetCardInfo("Finale of Revelation", 51, Rarity.MYTHIC, mage.cards.f.FinaleOfRevelation.class));
         cards.add(new SetCardInfo("Firemind Vessel", 237, Rarity.UNCOMMON, mage.cards.f.FiremindVessel.class));
         cards.add(new SetCardInfo("Flux Channeler", 52, Rarity.UNCOMMON, mage.cards.f.FluxChanneler.class));
