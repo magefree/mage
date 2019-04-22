@@ -31,6 +31,16 @@ public enum CardType {
         return text;
     }
 
+    public static CardType fromString(String value) {
+        for (CardType ct : CardType.values()) {
+            if (ct.toString().equals(value)) {
+                return ct;
+            }
+        }
+
+        throw new IllegalArgumentException("Can't find card type enum value: " + value);
+    }
+
     public boolean isPermanentType() {
         return permanentType;
     }

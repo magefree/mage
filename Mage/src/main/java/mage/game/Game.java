@@ -134,7 +134,7 @@ public interface Game extends MageItem, Serializable {
 
 
     default boolean isActivePlayer(UUID playerId) {
-        return getActivePlayerId().equals(playerId);
+        return getActivePlayerId() != null && getActivePlayerId().equals(playerId);
     }
 
     /**

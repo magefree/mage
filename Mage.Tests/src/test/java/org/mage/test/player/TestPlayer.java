@@ -667,6 +667,13 @@ public class TestPlayer implements Player {
                             wasProccessed = true;
                         }
 
+                        // check type: card name, type, must have
+                        if (params[0].equals(CHECK_COMMAND_TYPE) && params.length == 4) {
+                            assertType(action, game, computerPlayer, params[1], CardType.fromString(params[2]), Boolean.parseBoolean(params[3]));
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
                         // check subtype: card name, subtype, must have
                         if (params[0].equals(CHECK_COMMAND_SUBTYPE) && params.length == 4) {
                             assertSubType(action, game, computerPlayer, params[1], SubType.fromString(params[2]), Boolean.parseBoolean(params[3]));
@@ -991,6 +998,25 @@ public class TestPlayer implements Player {
             Assert.assertEquals(action.getActionName() + " - must contain colors [" + searchColors.toString() + "] but found only [" + cardColor.toString() + "]", 0, colorsDontHave.size());
         } else {
             Assert.assertEquals(action.getActionName() + " - must not contain colors [" + searchColors.toString() + "] but found [" + cardColor.toString() + "]", 0, colorsHave.size());
+        }
+    }
+
+    private void assertType(PlayerAction action, Game game, Player player, String permanentName, CardType type, boolean mustHave) {
+
+        Permanent perm = findPermanentWithAssert(action, game, player, permanentName);
+
+        boolean founded = false;
+        for (CardType ct : perm.getCardType()) {
+            if (ct.equals(type)) {
+                founded = true;
+                break;
+            }
+        }
+
+        if (mustHave) {
+            Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must have type " + type, true, founded);
+        } else {
+            Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must have not type " + type, false, founded);
         }
     }
 
