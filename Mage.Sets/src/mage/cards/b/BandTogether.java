@@ -71,20 +71,28 @@ class BandTogetherEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (source.getTargets().size() < 2 || source.getTargets().get(0).getTargets().size() < 2) {
+        if (source.getTargets().size() < 2) {
             return false;
         }
-        Permanent permanent1 = game.getPermanent(source.getTargets().get(0).getTargets().get(0));
-        Permanent permanent2 = game.getPermanent(source.getTargets().get(0).getTargets().get(1));
-        Permanent permanent3 = game.getPermanent(source.getTargets().get(1).getTargets().get(0));
-        if (permanent3 == null) {
+
+        Target damageTarget = source.getTargets().get(0);
+        Target destTarget = source.getTargets().get(1);
+        if (damageTarget.getTargets().isEmpty() || destTarget.getTargets().isEmpty()) {
             return false;
         }
-        if (permanent1 != null) {
-            permanent3.damage(permanent1.getPower().getValue(), permanent1.getId(), game, false, true);
+
+        Permanent permanentDamage1 = damageTarget.getTargets().size() < 1 ? null : game.getPermanent(damageTarget.getTargets().get(0));
+        Permanent permanentDamage2 = damageTarget.getTargets().size() < 2 ? null : game.getPermanent(damageTarget.getTargets().get(1));
+        Permanent permanentDest = game.getPermanent(destTarget.getTargets().get(0));
+        if (permanentDest == null) {
+            return false;
         }
-        if (permanent2 != null) {
-            permanent3.damage(permanent2.getPower().getValue(), permanent2.getId(), game, false, true);
+
+        if (permanentDamage1 != null) {
+            permanentDest.damage(permanentDamage1.getPower().getValue(), permanentDamage1.getId(), game, false, true);
+        }
+        if (permanentDamage2 != null) {
+            permanentDest.damage(permanentDamage2.getPower().getValue(), permanentDamage2.getId(), game, false, true);
         }
         return true;
     }
