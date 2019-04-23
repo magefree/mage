@@ -28,7 +28,7 @@ public final class AwakeningOfVituGhazi extends CardImpl {
         // Put nine +1/+1 counters on target land you control. It becomes a legendary 0/0 Elemental creature with haste named Vitu-Ghazi. It's still a land.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(9)));
         this.getSpellAbility().addEffect(new BecomesCreatureTargetEffect(
-                new AwakeningOfVituGhaziToken(), false, true, Duration.Custom
+                new AwakeningOfVituGhaziToken(), false, true, Duration.Custom, true
         ).setText("It becomes a legendary 0/0 Elemental creature with haste named Vitu-Ghazi. It's still a land."));
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND));
     }
