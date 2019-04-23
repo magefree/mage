@@ -9,8 +9,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
@@ -25,9 +23,11 @@ import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
+import mage.MageObject;
+import mage.cards.Card;
 
 /**
  * @author TheElk801
@@ -111,7 +111,8 @@ class NicolBolasDragonGodPlusOneEffect extends OneShotEffect {
 
     NicolBolasDragonGodPlusOneEffect() {
         super(Outcome.Benefit);
-        staticText = "You draw a card. Each opponent exiles a card from their hand or a permanent they control.";
+        staticText = "You draw a card. Each opponent exiles a card from their "
+                + "hand or a permanent they control.";
     }
 
     private NicolBolasDragonGodPlusOneEffect(final NicolBolasDragonGodPlusOneEffect effect) {
@@ -125,13 +126,14 @@ class NicolBolasDragonGodPlusOneEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Boolean applied = false;
         Player player = game.getPlayer(source.getControllerId());
         if (player == null) {
             return false;
         }
         player.drawCards(1, game);
-        Set<UUID> perms = new HashSet();
-        Cards cards = new CardsImpl();
+        Set<Card> cardsOnBattlefield = new LinkedHashSet<>();
+        Set<Card> cards = new LinkedHashSet<>();
         for (UUID opponentId : game.getState().getPlayersInRange(player.getId(), game)) {
             if (!player.hasOpponent(opponentId, game)) {
                 continue;
@@ -140,24 +142,38 @@ class NicolBolasDragonGodPlusOneEffect extends OneShotEffect {
             if (opponent == null) {
                 continue;
             }
-            if (opponent.getHand().isEmpty() ||
-                    !opponent.chooseUse(outcome, "Exile a card in your hand or a permanent you control?",
+            if (opponent.getHand().isEmpty()
+                    || !opponent.chooseUse(outcome, "Exile a card in your hand or a permanent you control?",
                             null, "Card in hand", "Permanent", source, game)) {
                 TargetPermanent target = new TargetControlledPermanent();
                 target.setNotTarget(true);
                 target.setTargetController(opponentId);
                 if (opponent.choose(outcome, target, source.getSourceId(), game)) {
-                    perms.add(target.getFirstTarget());
+                    MageObject mageObject = game.getObject(target.getFirstTarget());
+                    if (mageObject != null
+                            && mageObject instanceof Permanent) {
+                        cardsOnBattlefield.add((Card) mageObject);
+                    }
                 }
             } else {
                 TargetCardInHand target = new TargetCardInHand();
-                if (opponent.choose(outcome, opponent.getHand(), target, game)) {
-                    cards.add(target.getFirstTarget());
+                if (opponent.choose(outcome, opponent.getHand(), target, game)
+                        && game.getCard(target.getFirstTarget()) != null) {
+                    cards.add(game.getCard(target.getFirstTarget()));
                 }
             }
         }
-        cards.addAll(perms);
-        return player.moveCards(cards, Zone.EXILED, source, game);
+        cards.addAll(cardsOnBattlefield);
+        for (Card card : cards) {
+            if (card != null) {
+                Player owner = game.getPlayer(card.getOwnerId());
+                if (owner != null
+                        && owner.moveCards(card, Zone.EXILED, source, game)) {
+                    applied = true;
+                }
+            }
+        }
+        return applied;
     }
 }
 
