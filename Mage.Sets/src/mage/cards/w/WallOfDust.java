@@ -75,7 +75,7 @@ class WallOfDustRestrictionEffect extends RestrictionEffect {
         if (targetPermanent == null) {
             return true;
         }
-        if (nextTurnTargetController == 0 && startingTurn != game.getTurnNum() && game.isActivePlayer(targetPermanent.getControllerId())) {
+        if (nextTurnTargetController == 0 && getStartingTurnNum() != game.getTurnNum() && game.isActivePlayer(targetPermanent.getControllerId())) {
             nextTurnTargetController = game.getTurnNum();
         }
         return game.getPhase().getType() == TurnPhase.END && nextTurnTargetController > 0 && game.getTurnNum() > nextTurnTargetController;

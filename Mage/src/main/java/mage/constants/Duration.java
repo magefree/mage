@@ -1,7 +1,6 @@
 package mage.constants;
 
 /**
- *
  * @author North
  */
 public enum Duration {
@@ -12,6 +11,7 @@ public enum Duration {
     WhileInGraveyard("", false),
     EndOfTurn("until end of turn", true),
     UntilYourNextTurn("until your next turn", true),
+    UntilEndOfYourNextTurn("until the end of your next turn", true),
     UntilSourceLeavesBattlefield("until {source} leaves the battlefield", true), // supported for continuous layered effects
     EndOfCombat("until end of combat", true),
     EndOfStep("until end of phase step", true),

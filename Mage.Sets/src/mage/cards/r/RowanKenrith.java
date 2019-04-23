@@ -101,7 +101,7 @@ class RowanKenrithAttackEffect extends RequirementEffect {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        return (startingTurn != game.getTurnNum()
+        return (getStartingTurnNum() != game.getTurnNum()
                 && (game.getPhase().getType() == TurnPhase.END
                 && game.isActivePlayer(source.getFirstTarget())))
                 || // 6/15/2010: If a creature controlled by the affected player can't attack Gideon Jura (because he's no longer on the battlefield, for example), that player may have it attack you, another one of your planeswalkers, or nothing at all.

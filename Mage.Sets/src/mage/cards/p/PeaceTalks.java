@@ -97,7 +97,7 @@ class PeaceTalksCantAttackEffect extends RestrictionEffect {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        if (startingTurn + 2 == game.getTurnNum()) {
+        if (getStartingTurnNum() + 2 <= game.getTurnNum()) {
             this.discard();
             return true;
         }
@@ -149,7 +149,7 @@ class PeaceTalksPlayersAndPermanentsCantBeTargetsOfSpellsOrActivatedAbilities ex
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        if (startingTurn + 2 == game.getTurnNum()) {
+        if (getStartingTurnNum() + 2 <= game.getTurnNum()) {
             this.discard();
             return true;
         }

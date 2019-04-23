@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
 import mage.cards.CardImpl;
@@ -13,14 +11,15 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class Taunt extends CardImpl {
 
     public Taunt(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}");
 
         // During target player's next turn, creatures that player controls attack you if able.
         this.getSpellAbility().addEffect(new TauntEffect());
@@ -60,9 +59,9 @@ class TauntEffect extends RequirementEffect {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        return startingTurn != game.getTurnNum() &&
+        return getStartingTurnNum() != game.getTurnNum() &&
                 (game.getPhase().getType() == TurnPhase.END &&
-                game.isActivePlayer(this.getTargetPointer().getFirst(game, source)));
+                        game.isActivePlayer(this.getTargetPointer().getFirst(game, source)));
     }
 
     @Override
