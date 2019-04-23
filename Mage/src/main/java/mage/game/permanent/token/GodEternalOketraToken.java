@@ -12,7 +12,7 @@ public final class GodEternalOketraToken extends TokenImpl {
 
     public GodEternalOketraToken() {
         super("Zombie Warrior", "4/4 black Zombie Warrior creature token with vigilance");
-        setExpansionSetCodeForImage("WAR"); // default
+        setOriginalExpansionSetCode("WAR"); // default
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.ZOMBIE);

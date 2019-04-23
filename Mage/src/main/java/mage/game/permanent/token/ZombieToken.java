@@ -18,7 +18,7 @@ public final class ZombieToken extends TokenImpl {
 
     static {
         tokenImageSets.addAll(Arrays.asList("10E", "M10", "M11", "M12", "M13", "M14", "M15", "MBS", "ALA", "ISD", "C14", "C15", "C16", "C17", "CNS",
-                "MMA", "BNG", "KTK", "DTK", "ORI", "OGW", "SOI", "EMN", "EMA", "MM3", "AKH", "CMA", "E01", "RNA"));
+                "MMA", "BNG", "KTK", "DTK", "ORI", "OGW", "SOI", "EMN", "EMA", "MM3", "AKH", "CMA", "E01", "RNA", "WAR"));
     }
 
     public ZombieToken() {

@@ -19,6 +19,8 @@ public final class SoldierVigilanceToken extends TokenImpl {
         power = new MageInt(2);
         toughness = new MageInt(2);
         addAbility(VigilanceAbility.getInstance());
+
+        setOriginalExpansionSetCode("WAR");
     }
 
     private SoldierVigilanceToken(final SoldierVigilanceToken token) {
