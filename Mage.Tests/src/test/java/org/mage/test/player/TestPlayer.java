@@ -1051,11 +1051,8 @@ public class TestPlayer implements Player {
         }
 
         Player itemPlayer = game.getPlayer(objectId);
-        if (itemPlayer != null) {
-            return itemPlayer;
-        }
+        return itemPlayer;
 
-        return null;
     }
 
     private void assertAliasZone(PlayerAction action, Game game, TestPlayer player, String aliasName, Zone needZone, boolean mustHave) {
@@ -1344,6 +1341,9 @@ public class TestPlayer implements Player {
 
     @Override
     public int chooseReplacementEffect(Map<String, String> rEffects, Game game) {
+        if (rEffects.size() <= 1) {
+            return 0;
+        }
         if (!choices.isEmpty()) {
             for (String choice : choices) {
                 for (int index = 0; index < rEffects.size(); index++) {

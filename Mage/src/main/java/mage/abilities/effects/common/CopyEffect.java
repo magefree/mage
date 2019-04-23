@@ -122,8 +122,12 @@ public class CopyEffect extends ContinuousEffectImpl {
                 permanent.addAbility(ability, getSourceId(), game, false); // no new Id so consumed replacement effects are known while new continuousEffects.apply happen.
             }
         }
-        permanent.getPower().setValue(copyFromObject.getPower().getValue());
-        permanent.getToughness().setValue(copyFromObject.getToughness().getValue());
+
+        // Primal Clay example:
+        // If a creature that’s already on the battlefield becomes a copy of this creature, it copies the power, toughness,
+        // and abilities that were chosen for this creature as it entered the battlefield. (2018-03-16)
+        permanent.getPower().setValue(copyFromObject.getPower().getBaseValueModified());
+        permanent.getToughness().setValue(copyFromObject.getToughness().getBaseValueModified());
         if (copyFromObject instanceof Permanent) {
             Permanent targetPermanent = (Permanent) copyFromObject;
             permanent.setTransformed(targetPermanent.isTransformed());

@@ -1,7 +1,5 @@
-
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -12,11 +10,7 @@ import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -28,8 +22,9 @@ import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class IdentityThief extends CardImpl {
@@ -114,11 +109,7 @@ class IdentityThiefEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && permanent != null && sourcePermanent != null) {
-            Permanent permanentReset = permanent.copy();
-            permanentReset.getCounters(game).clear();
-            permanentReset.getPower().resetToBaseValue();
-            permanentReset.getToughness().resetToBaseValue();
-            CopyEffect copyEffect = new CopyEffect(Duration.EndOfTurn, permanentReset, source.getSourceId());
+            CopyEffect copyEffect = new CopyEffect(Duration.EndOfTurn, permanent, source.getSourceId());
             if (controller.moveCardToExileWithInfo(permanent, source.getSourceId(), sourcePermanent.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true)) {
                 // Copy exiled permanent
                 game.addEffect(copyEffect, source);
