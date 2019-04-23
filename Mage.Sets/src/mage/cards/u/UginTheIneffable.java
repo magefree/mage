@@ -142,13 +142,13 @@ class UginTheIneffableDelayedTriggeredAbility extends DelayedTriggeredAbility {
         ZoneChangeEvent zEvent = ((ZoneChangeEvent) event);
         if (!(zEvent.getFromZone() == Zone.BATTLEFIELD)
                 || !tokenRef.refersTo(zEvent.getTarget(), game)) {
-            this.getEffects().clear();
-            Effect effect = new ReturnToHandTargetEffect();
-            effect.setTargetPointer(new FixedTarget(cardRef));
-            this.addEffect(effect);
-            return true;
+            return false;
         }
-        return false;
+        this.getEffects().clear();
+        Effect effect = new ReturnToHandTargetEffect();
+        effect.setTargetPointer(new FixedTarget(cardRef));
+        this.addEffect(effect);
+        return true;
     }
 
     @Override
