@@ -482,7 +482,7 @@ public class ModernCardRenderer extends CardRenderer {
         g.setPaint(borderPaint);
 
         if (cardView.getFrameStyle() == FrameStyle.KLD_INVENTION) {
-            g.drawImage(FRAME_INVENTION, 0, 0, cardWidth, cardHeight, null);
+            g.drawImage(FRAME_INVENTION, 3, 3, cardWidth - 6, cardHeight - 6, null);
             g.drawRect(
                     totalContentInset, typeLineY,
                     contentWidth - 1, cardHeight - borderWidth * 3 - typeLineY - 1);
