@@ -21,6 +21,7 @@ import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -57,7 +58,8 @@ public final class VivienChampionOfTheWilds extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);
 
-        // -2: Look at the top three cards of your library. Exile one face down and put the rest on the bottom of your library in any order. For as long as it remains exiled, you may look at that card and you may cast it if it's a creature card.
+        // -2: Look at the top three cards of your library. Exile one face down and put the rest on the bottom of your library in any order.
+        // For as long as it remains exiled, you may look at that card and you may cast it if it's a creature card.
         this.addAbility(new LoyaltyAbility(new VivienChampionOfTheWildsEffect(), -2));
     }
 
@@ -96,15 +98,25 @@ class VivienChampionOfTheWildsEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
+
+        // select
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 3));
-        TargetCard target = new TargetCardInLibrary();
+        FilterCard filter = new FilterCard("card to exile face down");
+        TargetCard target = new TargetCardInLibrary(filter);
         if (!player.choose(outcome, cards, target, game)) {
             return false;
         }
+
+        // exile
         Card card = game.getCard(target.getFirstTarget());
-        if (!player.moveCards(card, Zone.EXILED, source, game)) {
+        if (!player.moveCardsToExile(card, source, game, false,
+                CardUtil.getCardExileZoneId(game, source),
+                CardUtil.createObjectRealtedWindowTitle(source, game, " (look and cast)"))) {
             return false;
         }
+        card.setFaceDown(true, game);
+
+        // look and cast
         ContinuousEffect effect = new VivienChampionOfTheWildsLookEffect(player.getId());
         effect.setTargetPointer(new FixedTarget(card, game));
         game.addEffect(effect, source);
