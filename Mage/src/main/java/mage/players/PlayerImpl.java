@@ -3458,10 +3458,13 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean lookAtFaceDownCard(Card card, Game game
-    ) {
+    public boolean lookAtFaceDownCard(Card card, Game game, int abilitiesToActivate) {
         if (null != game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.LOOK_AT_FACE_DOWN, card.getSpellAbility(), this.getId(), game)) {
-            if (chooseUse(Outcome.Benefit, "Look at that card?", null, game)) {
+            // two modes: look at card or not to look and activate other abilities
+            String lookMessage = abilitiesToActivate > 0 ? "Look at that card (it's have " + abilitiesToActivate + " abilities to activate)?" : "Look at that card?";
+            String lookYes = "Yes, look at card";
+            String lookNo = abilitiesToActivate > 0 ? "No, activate ability" : "No";
+            if (chooseUse(Outcome.Benefit, lookMessage, "", lookYes, lookNo, null, game)) {
                 Cards cards = new CardsImpl(card);
                 this.lookAtCards(getName() + " - " + sdf.format(System.currentTimeMillis()), cards, game);
                 return true;

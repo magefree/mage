@@ -1092,7 +1092,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean lookAtFaceDownCard(Card card, Game game) {
+    public boolean lookAtFaceDownCard(Card card, Game game, int abilitiesToActivate) {
         return false;
     }
 

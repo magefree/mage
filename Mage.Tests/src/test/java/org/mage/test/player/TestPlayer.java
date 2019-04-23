@@ -2864,8 +2864,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean lookAtFaceDownCard(Card card, Game game) {
-        return computerPlayer.lookAtFaceDownCard(card, game);
+    public boolean lookAtFaceDownCard(Card card, Game game, int abilitiesToActivate) {
+        return computerPlayer.lookAtFaceDownCard(card, game, abilitiesToActivate);
     }
 
     @Override

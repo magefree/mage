@@ -654,9 +654,10 @@ public interface Player extends MageItem, Copyable<Player> {
      *
      * @param card
      * @param game
+     * @param abilitiesToActivate extra info about abilities that can be activated on NO option
      * @return player looked at the card
      */
-    boolean lookAtFaceDownCard(Card card, Game game);
+    boolean lookAtFaceDownCard(Card card, Game game, int abilitiesToActivate);
 
     /**
      * Set seconds left to play the game.
