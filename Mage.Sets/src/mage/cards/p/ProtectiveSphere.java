@@ -52,20 +52,20 @@ public final class ProtectiveSphere extends CardImpl {
 class ProtectiveSphereEffect extends PreventionEffectImpl {
 
     private final TargetSource target;
-    private Mana manaUsed;
-    private List<ObjectColor> colorsOfChosenSource = new ArrayList<>();
+    private static Mana manaUsed;
+    private static List<ObjectColor> colorsOfChosenSource = new ArrayList<>();
 
     public ProtectiveSphereEffect() {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, false, false);
-        this.staticText = "Prevent all damage that would be dealt to you this turn by a source of your choice that shares a color with the mana spent on this activation cost.";
+        this.staticText = "Prevent all damage that would be dealt to you "
+                + "this turn by a source of your choice that shares a color "
+                + "with the mana spent on this activation cost.";
         this.target = new TargetSource();
     }
 
     public ProtectiveSphereEffect(final ProtectiveSphereEffect effect) {
         super(effect);
         this.target = effect.target.copy();
-        manaUsed = effect.manaUsed.copy();
-        colorsOfChosenSource = effect.colorsOfChosenSource;
     }
 
     @Override
@@ -81,8 +81,12 @@ class ProtectiveSphereEffect extends PreventionEffectImpl {
         Permanent protectiveSphere = game.getPermanent(source.getSourceId());
         if (controller != null
                 && protectiveSphere != null) {
-            game.getState().setValue("ProtectiveSphere" + source.getSourceId().toString(), source.getManaCostsToPay().getUsedManaToPay()); //store the mana used to pay
-            protectiveSphere.addInfo("MANA USED", CardUtil.addToolTipMarkTags("Last mana used for protective ability: " + source.getManaCostsToPay().getUsedManaToPay()), game);
+            game.getState().setValue("ProtectiveSphere" 
+                    + source.getSourceId().toString(), 
+                    source.getManaCostsToPay().getUsedManaToPay()); //store the mana used to pay
+            protectiveSphere.addInfo("MANA USED", 
+                    CardUtil.addToolTipMarkTags("Last mana used for protective ability: " 
+                            + source.getManaCostsToPay().getUsedManaToPay()), game);
         }
         this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
         super.init(source, game);
