@@ -75,11 +75,18 @@ class NivMizzetRebornEffect extends OneShotEffect {
             this.color2 = color2;
         }
 
-        private TargetCard getTarget() {
+        private FilterCard makeFilter() {
             FilterCard filter = new FilterCard(getDescription());
-            filter.add(new ColorPredicate(new ObjectColor(color1 + color2)));
-            filter.add(Predicates.not(new ColorPredicate(new ObjectColor(getOtherColors()))));
-            return new TargetCardInLibrary(filter);
+            filter.add(new ColorPredicate(new ObjectColor(color1)));
+            filter.add(new ColorPredicate(new ObjectColor(color2)));
+            for (char c : getOtherColors().toCharArray()) {
+                filter.add(Predicates.not(new ColorPredicate(new ObjectColor("" + c))));
+            }
+            return filter;
+        }
+
+        private TargetCard getTarget() {
+            return new TargetCardInLibrary(makeFilter());
         }
 
         private String getDescription() {
@@ -99,9 +106,7 @@ class NivMizzetRebornEffect extends OneShotEffect {
         }
 
         private boolean isInCards(Cards cards, Game game) {
-            FilterCard filter = new FilterCard(getDescription());
-            filter.add(new ColorPredicate(new ObjectColor(color1 + color2)));
-            filter.add(Predicates.not(new ColorPredicate(new ObjectColor(getOtherColors()))));
+            FilterCard filter = makeFilter();
             return cards.getCards(game).stream().anyMatch(card -> filter.match(card, game));
         }
     }
