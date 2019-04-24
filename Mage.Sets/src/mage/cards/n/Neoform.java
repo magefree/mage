@@ -3,6 +3,8 @@ package mage.cards.n;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
@@ -21,6 +23,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -37,7 +40,8 @@ public final class Neoform extends CardImpl {
                 1, 1, StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT, true
         )));
 
-        // Search your library for a creature card with converted mana cost equal to 1 plus the sacrificed creature's converted mana cost, put that card onto the battlefield with an additional +1/+1 counter on it, then shuffle your library.
+        // Search your library for a creature card with converted mana cost equal to 1 plus the sacrificed creature's converted mana cost,
+        // put that card onto the battlefield with an additional +1/+1 counter on it, then shuffle your library.
         this.getSpellAbility().addEffect(new NeoformEffect());
     }
 
@@ -81,14 +85,20 @@ class NeoformEffect extends OneShotEffect {
             return false;
         }
         int newConvertedCost = sacrificedPermanent.getConvertedManaCost() + 1;
-        FilterCard filter = new FilterCard("creature card with converted mana cost " + newConvertedCost + " or less");
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, newConvertedCost + 1));
+        FilterCard filter = new FilterCard("creature card with converted mana cost " + newConvertedCost);
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, newConvertedCost));
         filter.add(new CardTypePredicate(CardType.CREATURE));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
         if (controller.searchLibrary(target, source, game)) {
             Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
-            game.addEffect(new NeoformReplacementEffect(), source);
-            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+            if (card != null) {
+                ContinuousEffectImpl effect = new NeoformReplacementEffect();
+                effect.setTargetPointer(new FixedTarget(card, game));
+                game.addEffect(effect, source);
+                if (!controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
+                    effect.discard();
+                }
+            }
         }
         controller.shuffleLibrary(source, game);
         return true;
