@@ -29,6 +29,8 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import static mage.constants.Outcome.Benefit;
@@ -108,8 +110,12 @@ class UginTheIneffableEffect extends OneShotEffect {
         card.turnFaceDown(game, source.getControllerId());
         Token token = new UginTheIneffableToken();
         token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+        Set<MageObjectReference> tokenObjs = new HashSet<>();
+        for (UUID tokenId : token.getLastAddedTokenIds()) {
+            tokenObjs.add(new MageObjectReference(tokenId, game));
+        }
         game.addDelayedTriggeredAbility(new UginTheIneffableDelayedTriggeredAbility(
-                new MageObjectReference(token.getLastAddedToken(), game), new MageObjectReference(card, game)
+                tokenObjs, new MageObjectReference(card, game)
         ), source);
         return true;
     }
@@ -117,18 +123,18 @@ class UginTheIneffableEffect extends OneShotEffect {
 
 class UginTheIneffableDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    private final MageObjectReference tokenRef;
+    private final Set<MageObjectReference> tokenRefs;
     private final MageObjectReference cardRef;
 
-    UginTheIneffableDelayedTriggeredAbility(MageObjectReference token, MageObjectReference card) {
+    UginTheIneffableDelayedTriggeredAbility(Set<MageObjectReference> tokens, MageObjectReference card) {
         super(null, Duration.Custom, true);
-        this.tokenRef = token;
+        this.tokenRefs = tokens;
         this.cardRef = card;
     }
 
     private UginTheIneffableDelayedTriggeredAbility(final UginTheIneffableDelayedTriggeredAbility ability) {
         super(ability);
-        this.tokenRef = ability.tokenRef;
+        this.tokenRefs = ability.tokenRefs;
         this.cardRef = ability.cardRef;
     }
 
@@ -140,8 +146,8 @@ class UginTheIneffableDelayedTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = ((ZoneChangeEvent) event);
-        if (!(zEvent.getFromZone() == Zone.BATTLEFIELD)
-                || !tokenRef.refersTo(zEvent.getTarget(), game)) {
+        if (zEvent.getToZone() == Zone.BATTLEFIELD
+                || tokenRefs.stream().noneMatch(tokenRef -> tokenRef.refersTo(zEvent.getTarget(), game))) {
             return false;
         }
         this.getEffects().clear();
