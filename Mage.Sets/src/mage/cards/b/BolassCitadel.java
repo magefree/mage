@@ -69,8 +69,8 @@ class BolassCitadelPlayTheTopCardEffect extends AsThoughEffectImpl {
     BolassCitadelPlayTheTopCardEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE,
                 Duration.WhileOnBattlefield, Outcome.AIDontUseIt); // AI will need help with this
-        staticText = "You may play the top card of your library. If you cast a spell this way, " +
-                "pay life equal to its converted mana cost rather than pay its mana cost.";
+        staticText = "You may play the top card of your library. If you cast a spell this way, "
+                + "pay life equal to its converted mana cost rather than pay its mana cost.";
     }
 
     private BolassCitadelPlayTheTopCardEffect(final BolassCitadelPlayTheTopCardEffect effect) {
@@ -90,10 +90,11 @@ class BolassCitadelPlayTheTopCardEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         Card cardOnTop = game.getCard(objectId);
-        if (cardOnTop != null
-                && affectedControllerId.equals(source.getControllerId())
-                && cardOnTop.isOwnedBy(source.getControllerId())
-                || cardOnTop.isLand()) {
+        if (cardOnTop == null) {
+            return false;
+        }
+        if (affectedControllerId.equals(source.getControllerId())
+                && cardOnTop.isOwnedBy(source.getControllerId())) {
             Player controller = game.getPlayer(cardOnTop.getOwnerId());
             if (controller != null
                     && cardOnTop.equals(controller.getLibrary().getFromTop(game))) {
