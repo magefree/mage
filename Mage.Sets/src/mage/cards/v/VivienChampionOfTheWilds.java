@@ -100,31 +100,37 @@ class VivienChampionOfTheWildsEffect extends OneShotEffect {
         }
 
         // select
-        Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 3));
+        Cards cardsToLook = new CardsImpl(player.getLibrary().getTopCards(game, 3));
         FilterCard filter = new FilterCard("card to exile face down");
         TargetCard target = new TargetCardInLibrary(filter);
-        if (!player.choose(outcome, cards, target, game)) {
+        if (!player.choose(outcome, cardsToLook, target, game)) {
             return false;
         }
 
         // exile
-        Card card = game.getCard(target.getFirstTarget());
-        if (!player.moveCardsToExile(card, source, game, false,
+        Card cardToExile = game.getCard(target.getFirstTarget());
+        if (!player.moveCardsToExile(cardToExile, source, game, false,
                 CardUtil.getCardExileZoneId(game, source),
                 CardUtil.createObjectRealtedWindowTitle(source, game, " (look and cast)"))) {
             return false;
         }
-        card.setFaceDown(true, game);
+        cardToExile.setFaceDown(true, game);
 
         // look and cast
         ContinuousEffect effect = new VivienChampionOfTheWildsLookEffect(player.getId());
-        effect.setTargetPointer(new FixedTarget(card, game));
+        effect.setTargetPointer(new FixedTarget(cardToExile, game));
         game.addEffect(effect, source);
-        if (card.isCreature()) {
+        if (cardToExile.isCreature()) {
             effect = new VivienChampionOfTheWildsCastFromExileEffect(player.getId());
-            effect.setTargetPointer(new FixedTarget(card, game));
+            effect.setTargetPointer(new FixedTarget(cardToExile, game));
             game.addEffect(effect, source);
         }
+
+        // put the rest on the bottom of your library in any order
+        Cards cardsToBottom = new CardsImpl(cardsToLook);
+        cardsToBottom.remove(cardToExile);
+        player.putCardsOnBottomOfLibrary(cardsToBottom, game, source, true);
+
         return true;
     }
 }
