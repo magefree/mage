@@ -75,12 +75,9 @@ class DovinHandOfControlEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        Card card = game.getCard(abilityToModify.getId());
-        if (card == null || (!card.isInstantOrSorcery() && !card.isArtifact())
-                || game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId())) {
-            return false;
-        }
-        return true;
+        Card card = game.getCard(abilityToModify.getSourceId());
+        return card != null && (card.isInstantOrSorcery() || card.isArtifact())
+                && game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId());
     }
 
     @Override
