@@ -1539,6 +1539,18 @@ public class Combat implements Serializable, Copyable<Combat> {
         return false;
     }
 
+    public boolean isPlaneswalkerAttacked(UUID defenderId, Game game) {
+        for (CombatGroup group : groups) {
+            if (group.defenderIsPlaneswalker) {
+                Permanent permanent = game.getPermanent(group.getDefenderId());
+                if (permanent.isControlledBy(defenderId)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     /**
      * @param attackerId
      * @return uuid of defending player or planeswalker

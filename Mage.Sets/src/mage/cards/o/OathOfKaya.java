@@ -3,7 +3,6 @@ package mage.cards.o;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
@@ -18,8 +17,6 @@ import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -38,7 +35,8 @@ public final class OathOfKaya extends CardImpl {
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
 
-        // Whenever an opponent attacks a planeswalker you control with one or more creatures, Oath of Kaya deals 2 damage to that player and you gain 2 life.
+        // Whenever an opponent attacks a planeswalker you control with one or more creatures,
+        // Oath of Kaya deals 2 damage to that player and you gain 2 life.
         this.addAbility(new OathOfKayaTriggeredAbility());
     }
 
@@ -53,54 +51,14 @@ public final class OathOfKaya extends CardImpl {
 }
 
 class OathOfKayaTriggeredAbility extends TriggeredAbilityImpl {
-    private final Set<UUID> attackedThisCombat = new HashSet();
 
-    OathOfKayaTriggeredAbility() {
-        super(Zone.BATTLEFIELD, null, false);
+    public OathOfKayaTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(2), false);
+        this.addEffect(new GainLifeEffect(2));
     }
 
-    private OathOfKayaTriggeredAbility(final OathOfKayaTriggeredAbility ability) {
+    public OathOfKayaTriggeredAbility(final OathOfKayaTriggeredAbility ability) {
         super(ability);
-        this.attackedThisCombat.addAll(ability.attackedThisCombat);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ATTACKER_DECLARED
-                || event.getType() == GameEvent.EventType.DECLARE_ATTACKERS_STEP_POST;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DECLARE_ATTACKERS_STEP_POST) {
-            this.attackedThisCombat.clear();
-            return false;
-        }
-        Player player = game.getPlayer(getSourceId());
-        if (player == null) {
-            return false;
-        }
-        for (UUID attackerId : game.getCombat().getAttackers()) {
-            Permanent attacker = game.getPermanent(attackerId);
-            if (attacker == null) {
-                continue;
-            }
-            UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(attackerId, game);
-            UUID defenderId = game.getCombat().getDefenderId(attackerId);
-            if (defendingPlayerId.equals(defenderId)
-                    || attackedThisCombat.contains(defenderId)
-                    || !player.hasOpponent(defendingPlayerId, game)) {
-                continue;
-            }
-            attackedThisCombat.add(defenderId);
-            this.getEffects().clear();
-            Effect effect = new DamageTargetEffect(2);
-            effect.setTargetPointer(new FixedTarget(attacker.getControllerId(), game));
-            this.addEffect(effect);
-            this.addEffect(new GainLifeEffect(2));
-            return true;
-        }
-        return false;
     }
 
     @Override
@@ -109,8 +67,32 @@ class OathOfKayaTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DECLARED_ATTACKERS;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        Player you = game.getPlayer(this.getControllerId());
+        if (you == null) {
+            return false;
+        }
+
+        if (game.getCombat().isPlaneswalkerAttacked(you.getId(), game)) {
+            for (UUID attacker : game.getCombat().getAttackers()) {
+                Permanent attackingPermanent = game.getPermanent(attacker);
+                if (attackingPermanent != null && attackingPermanent.isCreature()) {
+                    getEffects().setTargetPointer(new FixedTarget(attackingPermanent.getControllerId(), game));
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
     public String getRule() {
-        return "Whenever an opponent attacks a planeswalker you control with one or more creatures, " +
-                "{this} deals 2 damage to that player and you gain 2 life.";
+        return "Whenever an opponent attacks a planeswalker you control with one or more creatures, "
+                + "{this} deals 2 damage to that player and you gain 2 life.";
     }
 }
