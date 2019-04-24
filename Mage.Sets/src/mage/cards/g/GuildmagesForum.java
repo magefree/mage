@@ -58,7 +58,7 @@ class GuildmagesForumWatcher extends Watcher {
     private final Ability source;
 
     GuildmagesForumWatcher(Ability source) {
-        super(WatcherScope.CARD);
+        super("GuildmagesForumWatcher", WatcherScope.CARD);
         this.source = source;
     }
 
@@ -86,6 +86,11 @@ class GuildmagesForumWatcher extends Watcher {
                 }
             }
         }
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
     }
 
 }

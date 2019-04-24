@@ -1,5 +1,7 @@
+
 package mage.cards.e;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -12,23 +14,21 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
+ *
  * @author fireshoes
  */
 public final class EchoingRuin extends CardImpl {
-    private static final FilterPermanent filter = new FilterPermanent("artifact");
+        private static final FilterPermanent filter = new FilterPermanent("artifact");
 
-
+    
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public EchoingRuin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}");
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
         // Destroy target artifact and all other artifacts with the same name as that artifact.
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
@@ -66,9 +66,9 @@ class EchoingRuinEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (controller != null && permanent != null) {
             permanent.destroy(source.getSourceId(), game, false);
-            if (!CardUtil.haveEmptyName(permanent)) { // in case of face down artifact creature
+            if (!permanent.getName().isEmpty()) { // in case of face down artifact creature
                 for (Permanent perm : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-                    if (!perm.getId().equals(permanent.getId()) && CardUtil.haveSameNames(perm, permanent) && perm.isArtifact()) {
+                    if (!perm.getId().equals(permanent.getId()) && perm.getName().equals(permanent.getName()) && perm.isArtifact()) {
                         perm.destroy(source.getSourceId(), game, false);
                     }
                 }

@@ -1,14 +1,13 @@
+
 package mage.cards.g;
 
 import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.hint.common.DeliriumHint;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -18,12 +17,13 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 
 /**
+ *
  * @author fireshoes
  */
 public final class GnarlwoodDryad extends CardImpl {
 
     public GnarlwoodDryad(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
         this.subtype.add(SubType.DRYAD);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(1);
@@ -37,7 +37,6 @@ public final class GnarlwoodDryad extends CardImpl {
                 new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), DeliriumCondition.instance,
                 "<i>Delirium</i> &mdash; {this} gets +2/+2 as long as there are four or more card types among cards in your graveyard.");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        ability.addHint(DeliriumHint.instance);
         this.addAbility(ability);
     }
 

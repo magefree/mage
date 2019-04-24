@@ -52,7 +52,7 @@ class WinterSkyEffect extends OneShotEffect {
         
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (controller.flipCoin(source, game, true)) {
+            if (controller.flipCoin(game)) {
                 new DamageEverythingEffect(1).apply(game, source);
                 return true;
             } else {

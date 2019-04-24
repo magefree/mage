@@ -1,7 +1,9 @@
+
 package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MultikickerAbility;
@@ -14,7 +16,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+
 
 /**
  * @author noxx
@@ -22,7 +24,7 @@ import mage.target.targetadjustment.TargetAdjuster;
 public final class StrengthOfTheTajuru extends CardImpl {
 
     public StrengthOfTheTajuru(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{G}{G}");
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{G}{G}");
 
         // Multikicker (You may pay an additional {1} any number of times as you cast this spell.)
         this.addAbility(new MultikickerAbility("{1}"));
@@ -30,7 +32,15 @@ public final class StrengthOfTheTajuru extends CardImpl {
         // Choose target creature, then choose another target creature for each time Strength of the Tajuru was kicked. Put X +1/+1 counters on each of them.
         this.getSpellAbility().addEffect(new StrengthOfTheTajuruAddCountersTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE));
-        this.getSpellAbility().setTargetAdjuster(StrengthOfTheTajuruAdjuster.instance);
+    }
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability instanceof SpellAbility) {
+            ability.getTargets().clear();
+            int numbTargets = new MultikickerCount().calculate(game, ability, null) + 1;
+            ability.addTarget(new TargetCreaturePermanent(0, numbTargets));
+        }
     }
 
     public StrengthOfTheTajuru(final StrengthOfTheTajuru card) {
@@ -40,17 +50,6 @@ public final class StrengthOfTheTajuru extends CardImpl {
     @Override
     public StrengthOfTheTajuru copy() {
         return new StrengthOfTheTajuru(this);
-    }
-}
-
-enum StrengthOfTheTajuruAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        int numbTargets = MultikickerCount.instance.calculate(game, ability, null) + 1;
-        ability.addTarget(new TargetCreaturePermanent(0, numbTargets));
     }
 }
 
@@ -74,7 +73,7 @@ class StrengthOfTheTajuruAddCountersTargetEffect extends OneShotEffect {
             Permanent permanent = game.getPermanent(uuid);
             if (permanent != null) {
                 permanent.addCounters(counter.copy(), source, game);
-                affectedTargets++;
+                affectedTargets ++;
             }
         }
         return affectedTargets > 0;
@@ -84,5 +83,6 @@ class StrengthOfTheTajuruAddCountersTargetEffect extends OneShotEffect {
     public StrengthOfTheTajuruAddCountersTargetEffect copy() {
         return new StrengthOfTheTajuruAddCountersTargetEffect(this);
     }
+
 
 }

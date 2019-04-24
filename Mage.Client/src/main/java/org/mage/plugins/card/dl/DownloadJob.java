@@ -1,18 +1,28 @@
+/**
+ * DownloadJob.java
+ *
+ * Created on 25.08.2010
+ */
 package org.mage.plugins.card.dl;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.Proxy;
+import java.net.URL;
+import java.net.URLConnection;
+import javax.swing.BoundedRangeModel;
+import javax.swing.DefaultBoundedRangeModel;
 import org.mage.plugins.card.dl.beans.properties.Property;
 import org.mage.plugins.card.dl.lm.AbstractLaternaBean;
 import org.mage.plugins.card.utils.CardImageUtils;
 
-import javax.swing.*;
-import java.io.*;
-import java.net.Proxy;
-import java.net.URL;
-import java.net.URLConnection;
-
 /**
- * Downloader job to download one resource
+ * The class DownloadJob.
  *
+ * @version V0.0 25.08.2010
  * @author Clemens Koza, JayDi85
  */
 public class DownloadJob extends AbstractLaternaBean {
@@ -78,8 +88,11 @@ public class DownloadJob extends AbstractLaternaBean {
      */
     public void setError(String message, Exception error) {
         if (message == null) {
-            message = "Download of " + name + " from " + source.toString() + " caused error: " + error.toString();
+
+            message = "Download of " + name + "from " + source.toString() + " caused error: " + error.toString();
         }
+//        log.warn(message, error);
+        log.warn(message);
         this.state.setValue(State.ABORTED);
         this.error.setValue(error);
         this.message.setValue(message);
@@ -103,7 +116,7 @@ public class DownloadJob extends AbstractLaternaBean {
             return;
         }
 
-        // can continue
+        // change to working state on good prepare call
         this.state.setValue(State.WORKING);
     }
 

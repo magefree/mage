@@ -66,7 +66,7 @@ class HollowOneReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        CardsCycledOrDiscardedThisTurnWatcher watcher = game.getState().getWatcher(CardsCycledOrDiscardedThisTurnWatcher.class);
+        CardsCycledOrDiscardedThisTurnWatcher watcher = (CardsCycledOrDiscardedThisTurnWatcher) game.getState().getWatchers().get(CardsCycledOrDiscardedThisTurnWatcher.class.getSimpleName());
         if (watcher != null) {
             CardUtil.reduceCost(abilityToModify, watcher.getNumberOfCardsCycledOrDiscardedThisTurn(source.getControllerId()) * 2);
             return true;

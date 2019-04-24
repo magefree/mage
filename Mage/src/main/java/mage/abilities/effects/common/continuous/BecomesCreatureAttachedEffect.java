@@ -1,3 +1,4 @@
+
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
@@ -72,7 +73,7 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
                                 case ALL:
                                 case ALL_BUT_COLOR:
                                 case ABILITIES_SUBTYPE:
-                                    permanent.getSubtype(game).retainAll(SubType.getLandTypes());
+                                    permanent.getSubtype(game).retainAll(SubType.getLandTypes(false));
                                     break;
                             }
                             for (SubType t : token.getSubtype(game)) {

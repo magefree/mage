@@ -30,7 +30,7 @@ public final class MarduAscendancy extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures you control");
 
     static {
-        attackFilter.add(Predicates.not(TokenPredicate.instance));
+        attackFilter.add(Predicates.not(new TokenPredicate()));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

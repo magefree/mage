@@ -27,7 +27,7 @@ public final class WindbriskRaptor extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
     
     static {
-        filter.add(AttackingPredicate.instance);
+        filter.add(new AttackingPredicate());
     }
 
     public WindbriskRaptor(UUID ownerId, CardSetInfo setInfo) {

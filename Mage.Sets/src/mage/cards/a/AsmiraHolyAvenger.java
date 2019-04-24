@@ -56,7 +56,7 @@ class AsmiraHolyAvengerWatcher extends Watcher {
     private int creaturesCount = 0;
 
     public AsmiraHolyAvengerWatcher() {
-        super(WatcherScope.PLAYER);
+        super(AsmiraHolyAvengerWatcher.class.getSimpleName(), WatcherScope.PLAYER);
         condition = true;
     }
 
@@ -95,7 +95,7 @@ class AsmiraHolyAvengerDynamicValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        AsmiraHolyAvengerWatcher watcher = game.getState().getWatcher(AsmiraHolyAvengerWatcher.class, sourceAbility.getControllerId());
+        AsmiraHolyAvengerWatcher watcher = (AsmiraHolyAvengerWatcher) game.getState().getWatchers().get(AsmiraHolyAvengerWatcher.class.getSimpleName(), sourceAbility.getControllerId());
         if (watcher != null) {
             return watcher.getCreaturesCount();
         }

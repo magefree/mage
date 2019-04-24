@@ -1,5 +1,7 @@
+
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -8,23 +10,22 @@ import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
-import java.util.UUID;
-
 /**
+ *
  * @author North
  */
 public final class ChainedThroatseeker extends CardImpl {
 
     public ChainedThroatseeker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}");
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");
         this.subtype.add(SubType.HORROR);
 
         this.power = new MageInt(5);
@@ -64,10 +65,12 @@ class ChainedThroatseekerCantAttackEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
         Player targetPlayer = game.getPlayer(defenderId);
         if (targetPlayer != null) {
-            return targetPlayer.getCounters().containsKey(CounterType.POISON);
+            if (targetPlayer.getCounters().containsKey(CounterType.POISON)) {
+                return true;
+            }
         }
         return false;
     }

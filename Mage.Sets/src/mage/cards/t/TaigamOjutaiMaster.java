@@ -1,3 +1,4 @@
+
 package mage.cards.t;
 
 import mage.MageInt;
@@ -15,7 +16,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterSpell;
-import mage.filter.StaticFilters;
+import mage.filter.FilterStackObject;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -29,6 +30,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
 import java.util.UUID;
 
 /**
+ *
  * @author spjspj
  */
 public final class TaigamOjutaiMaster extends CardImpl {
@@ -55,8 +57,8 @@ public final class TaigamOjutaiMaster extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Instant, sorcery, and Dragon spells you control can't be countered.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeCounteredControlledEffect(filter, StaticFilters.FILTER_SPELL_OR_ABILITY, Duration.WhileOnBattlefield)));
-
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeCounteredControlledEffect(filter, new FilterStackObject(), Duration.WhileOnBattlefield)));
+        
         // Whenever you cast an instant or sorcery spell from your hand, if Taigam, Ojutai Master attacked this turn, that spell gains rebound.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(new TaigamOjutaiMasterTriggeredAbility(),
                 AttackedThisTurnSourceCondition.instance,

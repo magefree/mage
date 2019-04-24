@@ -40,11 +40,11 @@ public class AminatouTheFateShifter extends CardImpl {
 
     static {
         filter.add(new OwnerPredicate(TargetController.YOU));
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public AminatouTheFateShifter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{W}{U}{B}");
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{W}{U}{B}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.AMINATOU);
 
@@ -56,7 +56,7 @@ public class AminatouTheFateShifter extends CardImpl {
 
         // -1: Exile another target permanent you own, then return it to the battlefield under your control.
         ability = new LoyaltyAbility(new ExileTargetForSourceEffect(), -1);
-        ability.addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect(true));
+        ability.addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
@@ -68,7 +68,6 @@ public class AminatouTheFateShifter extends CardImpl {
         // Aminatou, the Fateshifter can be your commander.
         this.addAbility(CanBeYourCommanderAbility.getInstance());
     }
-
     public AminatouTheFateShifter(final AminatouTheFateShifter card) {
         super(card);
     }
@@ -80,7 +79,6 @@ public class AminatouTheFateShifter extends CardImpl {
 }
 
 class AminatouPlusEffect extends OneShotEffect {
-
     public AminatouPlusEffect() {
         super(Outcome.DrawCard);
         staticText = "draw a card, then put a card from your hand on top of your library";
@@ -120,11 +118,10 @@ class AminatouPlusEffect extends OneShotEffect {
 }
 
 class AminatouUltimateEffect extends OneShotEffect {
-
-    public AminatouUltimateEffect() {
+    public AminatouUltimateEffect (){
         super(Outcome.Benefit);
-        staticText = "Choose left or right. Each player gains control of all nonland permanents other than Aminatou,"
-                + " the Fateshifter controlled by the next player in the chosen direction.";
+        staticText = "Choose left or right. Each player gains control of all nonland permanents other than Aminatou," +
+                " the Fateshifter controlled by the next player in the chosen direction.";
     }
 
     public AminatouUltimateEffect(final AminatouUltimateEffect effect) {
@@ -132,9 +129,7 @@ class AminatouUltimateEffect extends OneShotEffect {
     }
 
     @Override
-    public AminatouUltimateEffect copy() {
-        return new AminatouUltimateEffect(this);
-    }
+    public AminatouUltimateEffect copy(){return new AminatouUltimateEffect(this);}
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -159,7 +154,7 @@ class AminatouUltimateEffect extends OneShotEffect {
                     return false;
                 }
                 // skip players out of range
-                if (!game.getState().getPlayersInRange(controller.getId(), game).contains(nextPlayer)) {
+                if (!game.getState().getPlayersInRange(controller.getId(), game).contains(nextPlayer)){
                     continue;
                 }
                 // save first next player to check for iteration stop
@@ -169,7 +164,7 @@ class AminatouUltimateEffect extends OneShotEffect {
                 FilterNonlandPermanent nextPlayerNonlandPermanentsFilter = new FilterNonlandPermanent();
                 nextPlayerNonlandPermanentsFilter.add(new ControllerIdPredicate(nextPlayer));
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(nextPlayerNonlandPermanentsFilter, game)) {
-                    if (permanent.getId().equals(source.getSourceId())) {
+                    if (permanent.getId().equals(source.getSourceId())){
                         continue;
                     }
                     ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfGame, currentPlayer);
@@ -193,3 +188,4 @@ class AminatouUltimateEffect extends OneShotEffect {
         return nextPlayerId;
     }
 }
+

@@ -28,7 +28,7 @@ public final class TradewindRider extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creatures you control");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public TradewindRider(UUID ownerId, CardSetInfo setInfo) {

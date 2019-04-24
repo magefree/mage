@@ -1,6 +1,7 @@
 
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
@@ -12,17 +13,24 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.cards.*;
-import mage.constants.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.Outcome;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.token.VampireKnightToken;
 import mage.players.Player;
 import mage.players.PlayerList;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 
-import java.util.UUID;
-
 /**
+ *
  * @author fireshoes
  */
 public final class SorinGrimNemesis extends CardImpl {
@@ -82,91 +90,90 @@ class SorinGrimNemesisRevealEffect extends OneShotEffect {
 
         if (player.getLibrary().hasCards()) {
             Card card = player.getLibrary().getFromTop(game);
-            if (card != null) {
-                Cards cards = new CardsImpl();
-                cards.add(card);
-                player.revealCards("Sorin, Grim Nemesis", cards, game);
+            Cards cards = new CardsImpl();
+            cards.add(card);
+            player.revealCards("Sorin, Grim Nemesis", cards, game);
 
-                if (card.moveToZone(Zone.HAND, source.getSourceId(), game, false)) {
-                    for (UUID playerId : game.getOpponents(source.getControllerId())) {
-                        if (card.getConvertedManaCost() > 0) {
-                            Player opponent = game.getPlayer(playerId);
-                            if (opponent != null) {
-                                opponent.loseLife(card.getConvertedManaCost(), game, false);
-                            }
+            if (card != null
+                    && card.moveToZone(Zone.HAND, source.getSourceId(), game, false)) {
+                for (UUID playerId : game.getOpponents(source.getControllerId())) {
+                    if (card.getConvertedManaCost() > 0) {
+                        Player opponent = game.getPlayer(playerId);
+                        if (opponent != null) {
+                            opponent.loseLife(card.getConvertedManaCost(), game, false);
                         }
                     }
-                    return true;
                 }
+                return true;
             }
         }
         return false;
     }
 }
 
-    class SorinXValue implements DynamicValue {
+class SorinXValue implements DynamicValue {
 
-        private static final SorinXValue defaultValue = new SorinXValue();
+    private static final SorinXValue defaultValue = new SorinXValue();
 
-        @Override
-        public int calculate(Game game, Ability sourceAbility, Effect effect) {
-            for (Cost cost : sourceAbility.getCosts()) {
-                if (cost instanceof PayVariableLoyaltyCost) {
-                    return ((PayVariableLoyaltyCost) cost).getAmount();
-                }
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        for (Cost cost : sourceAbility.getCosts()) {
+            if (cost instanceof PayVariableLoyaltyCost) {
+                return ((PayVariableLoyaltyCost) cost).getAmount();
             }
-            return 0;
         }
-
-        @Override
-        public DynamicValue copy() {
-            return defaultValue;
-        }
-
-        @Override
-        public String getMessage() {
-            return "";
-        }
-
-        @Override
-        public String toString() {
-            return "X";
-        }
-
-        public static SorinXValue getDefault() {
-            return defaultValue;
-        }
+        return 0;
     }
 
-    class SorinTokenEffect extends OneShotEffect {
+    @Override
+    public DynamicValue copy() {
+        return defaultValue;
+    }
 
-        SorinTokenEffect() {
-            super(Outcome.GainLife);
-            staticText = "Create a number of 1/1 black Vampire Knight creature tokens with lifelink equal to the highest life total among all players";
-        }
+    @Override
+    public String getMessage() {
+        return "";
+    }
 
-        SorinTokenEffect(final SorinTokenEffect effect) {
-            super(effect);
-        }
+    @Override
+    public String toString() {
+        return "X";
+    }
 
-        @Override
-        public boolean apply(Game game, Ability source) {
-            int maxLife = 0;
-            PlayerList playerList = game.getState().getPlayersInRange(source.getControllerId(), game);
-            for (UUID pid : playerList) {
-                Player p = game.getPlayer(pid);
-                if (p != null) {
-                    if (maxLife < p.getLife()) {
-                        maxLife = p.getLife();
-                    }
+    public static SorinXValue getDefault() {
+        return defaultValue;
+    }
+}
+
+class SorinTokenEffect extends OneShotEffect {
+
+    SorinTokenEffect() {
+        super(Outcome.GainLife);
+        staticText = "Create a number of 1/1 black Vampire Knight creature tokens with lifelink equal to the highest life total among all players";
+    }
+
+    SorinTokenEffect(final SorinTokenEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        int maxLife = 0;
+        PlayerList playerList = game.getState().getPlayersInRange(source.getControllerId(), game);
+        for (UUID pid : playerList) {
+            Player p = game.getPlayer(pid);
+            if (p != null) {
+                if (maxLife < p.getLife()) {
+                    maxLife = p.getLife();
                 }
             }
-            new CreateTokenEffect(new VampireKnightToken(), maxLife).apply(game, source);
-            return true;
         }
-
-        @Override
-        public SorinTokenEffect copy() {
-            return new SorinTokenEffect(this);
-        }
+        new CreateTokenEffect(new VampireKnightToken(), maxLife).apply(game, source);
+        return true;
     }
+
+    @Override
+    public SorinTokenEffect copy() {
+        return new SorinTokenEffect(this);
+    }
+}

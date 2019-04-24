@@ -1,5 +1,7 @@
+
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -23,9 +25,8 @@ import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 import mage.watchers.common.CreaturesDiedWatcher;
 
-import java.util.UUID;
-
 /**
+ *
  * @author jeffwadsworth
  */
 public final class BontuTheGlorified extends CardImpl {
@@ -84,12 +85,12 @@ class BontuTheGlorifiedRestrictionEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
+    public boolean canAttack(Game game) {
         return false;
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
         return false;
     }
 
@@ -97,7 +98,7 @@ class BontuTheGlorifiedRestrictionEffect extends RestrictionEffect {
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getId().equals(source.getSourceId())) {
             Player controller = game.getPlayer(source.getControllerId());
-            CreaturesDiedWatcher watcher = game.getState().getWatcher(CreaturesDiedWatcher.class);
+            CreaturesDiedWatcher watcher = (CreaturesDiedWatcher) game.getState().getWatchers().get(CreaturesDiedWatcher.class.getSimpleName());
             if (controller != null
                     && watcher != null) {
                 return (watcher.getAmountOfCreaturesDiedThisTurnByController(controller.getId()) == 0);

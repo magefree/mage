@@ -70,7 +70,7 @@ class AttackedLastCombatWatcher extends Watcher {
     public final Map<UUID, Map<MageObjectReference, UUID>> attackedLastCombatPlayers = new HashMap<>();
 
     public AttackedLastCombatWatcher() {
-        super(WatcherScope.GAME);
+        super(AttackedLastCombatWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public AttackedLastCombatWatcher(final AttackedLastCombatWatcher watcher) {
@@ -132,7 +132,7 @@ class AttackIfAbleTargetRandoOpponentSourceEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        AttackedLastCombatWatcher watcher = game.getState().getWatcher(AttackedLastCombatWatcher.class);
+        AttackedLastCombatWatcher watcher = (AttackedLastCombatWatcher) game.getState().getWatchers().get(AttackedLastCombatWatcher.class.getSimpleName());
         if (controller != null && sourcePermanent != null && watcher != null) {
             List<UUID> opponents = new ArrayList<>();
             Map<MageObjectReference, UUID> attackedPlayers = watcher.getAttackedLastCombatPlayers(source.getControllerId());

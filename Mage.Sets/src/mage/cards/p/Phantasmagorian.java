@@ -75,8 +75,7 @@ class CounterSourceEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayerList(source.getControllerId())) {
                 Player player = game.getPlayer(playerId);
                 cost.clearPaid();
-                if (player != null
-                 && cost.canPay(source, source.getSourceId(), player.getId(), game)
+                if (cost.canPay(source, source.getSourceId(), player.getId(), game)
                         && player.chooseUse(outcome, "Discard three cards to counter " + sourceObject.getIdName() + '?', source, game)) {
                     if (cost.pay(source, game, source.getSourceId(), playerId, false, null)) {
                         game.informPlayers(player.getLogName() + " discards 3 cards to counter " + sourceObject.getIdName() + '.');

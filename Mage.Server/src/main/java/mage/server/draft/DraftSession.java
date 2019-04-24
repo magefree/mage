@@ -24,7 +24,7 @@ import org.apache.log4j.Logger;
  */
 public class DraftSession {
 
-    protected static final Logger logger = Logger.getLogger(DraftSession.class);
+    protected final static Logger logger = Logger.getLogger(DraftSession.class);
 
     protected final UUID userId;
     protected final UUID playerId;
@@ -48,8 +48,7 @@ public class DraftSession {
             if (user.isPresent()) {
                 if (futureTimeout != null && !futureTimeout.isDone()) {
                     int remaining = (int) futureTimeout.getDelay(TimeUnit.SECONDS);
-                    user.get().fireCallback(new ClientCallback(ClientCallbackMethod.DRAFT_INIT, draft.getId(),
-                        new DraftClientMessage(getDraftView(), getDraftPickView(remaining))));
+                    user.get().fireCallback(new ClientCallback(ClientCallbackMethod.DRAFT_INIT, draft.getId(), new DraftClientMessage(getDraftPickView(remaining))));
                 }
                 return true;
             }
@@ -61,8 +60,8 @@ public class DraftSession {
         if (!killed) {
             UserManager.instance
                     .getUser(userId).
-                    ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.DRAFT_UPDATE, draft.getId(),
-                        new DraftClientMessage(getDraftView(), null))));
+                    ifPresent(user -> user.fireCallback(
+                    new ClientCallback(ClientCallbackMethod.DRAFT_UPDATE, draft.getId(), getDraftView())));
         }
     }
 
@@ -71,6 +70,7 @@ public class DraftSession {
             UserManager.instance
                     .getUser(userId)
                     .ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.DRAFT_OVER, draft.getId())));
+
         }
     }
 
@@ -79,8 +79,7 @@ public class DraftSession {
             setupTimeout(timeout);
             UserManager.instance
                     .getUser(userId)
-                    .ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.DRAFT_PICK, draft.getId(),
-                        new DraftClientMessage(getDraftView(), getDraftPickView(timeout)))));
+                    .ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.DRAFT_PICK, draft.getId(), new DraftClientMessage(getDraftPickView(timeout)))));
 
         }
     }

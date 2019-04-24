@@ -1,6 +1,7 @@
 
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -21,9 +22,8 @@ import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.watchers.common.CardsAmountDrawnThisTurnWatcher;
 
-import java.util.UUID;
-
 /**
+ *
  * @author jeffwadsworth
  */
 public final class ArchmageAscension extends CardImpl {
@@ -74,7 +74,7 @@ class ArchmageAscensionTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent archmage = game.getPermanent(super.getSourceId());
         CardsAmountDrawnThisTurnWatcher watcher
-                = game.getState().getWatcher(CardsAmountDrawnThisTurnWatcher.class);
+                = (CardsAmountDrawnThisTurnWatcher) game.getState().getWatchers().get(CardsAmountDrawnThisTurnWatcher.class.getSimpleName());
         return archmage != null && watcher != null && watcher.getAmountCardsDrawn(this.getControllerId()) >= 2;
     }
 
@@ -111,7 +111,7 @@ class ArchmageAscensionReplacementEffect extends ReplacementEffectImpl {
         Player player = game.getPlayer(event.getPlayerId());
         if (player != null) {
             TargetCardInLibrary target = new TargetCardInLibrary();
-            if (player.searchLibrary(target, source, game)) {
+            if (player.searchLibrary(target, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     card.moveToZone(Zone.HAND, source.getSourceId(), game, false);

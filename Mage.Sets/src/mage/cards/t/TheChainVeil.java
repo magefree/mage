@@ -60,7 +60,7 @@ class ActivatedLoyaltyAbilityWatcher extends Watcher {
     private final Set<UUID> playerIds = new HashSet<>();
 
     public ActivatedLoyaltyAbilityWatcher() {
-        super(WatcherScope.GAME);
+        super(ActivatedLoyaltyAbilityWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public ActivatedLoyaltyAbilityWatcher(final ActivatedLoyaltyAbilityWatcher watcher) {
@@ -139,7 +139,7 @@ enum TheChainVeilCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ActivatedLoyaltyAbilityWatcher watcher = game.getState().getWatcher(ActivatedLoyaltyAbilityWatcher.class);
+        ActivatedLoyaltyAbilityWatcher watcher = (ActivatedLoyaltyAbilityWatcher) game.getState().getWatchers().get(ActivatedLoyaltyAbilityWatcher.class.getSimpleName());
         if (watcher != null) {
             if (!watcher.activatedLoyaltyAbility(source.getControllerId())) {
                 return true;

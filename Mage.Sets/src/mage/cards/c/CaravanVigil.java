@@ -11,6 +11,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterBasicLandCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -62,7 +63,7 @@ class CaravanVigilEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (sourceObject != null && controller != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND);
-            if (controller.searchLibrary(target, source, game)) {
+            if (controller.searchLibrary(target, game)) {
                 Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
                 if (card != null) {
                     Cards cards = new CardsImpl(card);

@@ -22,7 +22,7 @@ public final class DecoratedChampion extends CardImpl {
     private static final FilterTeamPermanent filter = new FilterTeamPermanent(SubType.WARRIOR, "another Warrior");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public DecoratedChampion(UUID ownerId, CardSetInfo setInfo) {

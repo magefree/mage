@@ -1,3 +1,4 @@
+
 package mage.cards.p;
 
 import java.util.UUID;
@@ -10,8 +11,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.constants.Outcome;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -25,7 +26,7 @@ import mage.target.common.TargetControlledPermanent;
 public final class ProwlingPangolin extends CardImpl {
 
     public ProwlingPangolin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
         this.subtype.add(SubType.BEAST, SubType.PANGOLIN);
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);

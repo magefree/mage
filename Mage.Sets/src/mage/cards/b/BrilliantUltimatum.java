@@ -1,3 +1,4 @@
+
 package mage.cards.b;
 
 import java.util.ArrayList;
@@ -110,7 +111,6 @@ class BrilliantUltimatumEffect extends OneShotEffect {
                 TargetCard targetExiledCard = new TargetCard(Zone.EXILED, new FilterCard());
                 if (controller.chooseTarget(Outcome.PlayForFree, selectedPile, targetExiledCard, source, game)) {
                     Card card = selectedPile.get(targetExiledCard.getFirstTarget(), game);
-                    controller.canPlayLand();
                     if (controller.playCard(card, game, true, true, new MageObjectReference(source.getSourceObject(game), game))) {
                         selectedPileCards.remove(card);
                         selectedPile.remove(card);

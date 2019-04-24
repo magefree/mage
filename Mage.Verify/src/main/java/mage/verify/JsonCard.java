@@ -1,58 +1,40 @@
 package mage.verify;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import java.util.List;
 
-import static mage.verify.MtgJson.MTGJSON_IGNORE_NEW_PROPERTIES;
-
-@JsonIgnoreProperties(ignoreUnknown = MTGJSON_IGNORE_NEW_PROPERTIES)
 class JsonCard {
-    // docs: https://mtgjson.com/v4/docs.html
-
-    public String artist;
-    public String borderColor;
-    public List<String> colorIdentity;
-    public List<String> colorIndicator;
-    public List<String> colors;
-    public float convertedManaCost;
-    public float faceConvertedManaCost;
-    public String flavorText;
-    public List<JsonForeignData> foreignData;
-    public String frameVersion;
-    public boolean hasFoil;
-    public boolean hasNonFoil;
-    public boolean isOnlineOnly;
-    public boolean isOversized;
-    public boolean isReserved;
-    public boolean isTimeshifted;
     public String layout;
-    public JsonLegalities legalities;
-    public String loyalty;
-    public String manaCost;
-    public int multiverseId;
     public String name;
-    public List<String> names;
-    public String number;
-    public String originalText;
-    public String originalType;
-    public List<String> printings;
-    public String power;
-    public String rarity;
-    public boolean starter;
-    public String side;
-    public List<JsonRuling> rulings;
-    public List<String> subtypes;
-    public List<String> supertypes;
-    public String text;
-    public String toughness;
+    public List<String> names; // flip cards
+    public String manaCost;
+    public int cmc;
+    public List<String> colors;
+    public List<String> colorIdentity;
     public String type;
+    public List<String> supertypes;
     public List<String> types;
-    public String uuid;
-    public List<String> variations;
+    public List<String> subtypes;
+    public String text;
+    public String power;
+    public String toughness;
+    public String loyalty;
+    public String imageName;
+    public boolean starter; // only available in boxed sets and not in boosters
+    public int hand; // vanguard
+    public int life; // vanguard
+
+    // only available in AllSets.json
+    public String artist;
+    public String flavor;
+    public String id;
+    public int multiverseid;
+    public String rarity;
+    public boolean reserved;
+    public int[] variations;
+    public String number;
+    public String mciNumber;
+    public String releaseDate; // promos
+    public String border;
     public String watermark;
-    public String tcgplayerProductId;
-    public String scryfallId;
-    public boolean isAlternative;
-    public String frameEffect;
+    public boolean timeshifted;
 }

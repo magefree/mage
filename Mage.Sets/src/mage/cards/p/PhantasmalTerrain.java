@@ -125,8 +125,7 @@ class PhantasmalTerrainContinuousEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean hasLayer(Layer layer) {
-        return layer == Layer.AbilityAddingRemovingEffects_6 
-                || layer == Layer.TypeChangingEffects_4;
+        return layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.TypeChangingEffects_4;
     }
 
 }

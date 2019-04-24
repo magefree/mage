@@ -1,9 +1,26 @@
 package org.mage.plugins.card;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Frame;
+import java.awt.Rectangle;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
+import javax.swing.JComponent;
+import javax.swing.JDialog;
+import javax.swing.JLayeredPane;
 import mage.cards.MagePermanent;
 import mage.cards.action.ActionCallback;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.GUISizeHelper;
+import mage.constants.Rarity;
 import mage.interfaces.plugin.CardPlugin;
 import mage.view.CardView;
 import mage.view.CounterView;
@@ -24,21 +41,14 @@ import org.mage.plugins.card.dl.sources.ScryfallSymbolsSource;
 import org.mage.plugins.card.images.ImageCache;
 import org.mage.plugins.card.info.CardInfoPaneImpl;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.image.BufferedImage;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.util.List;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
-
 /**
  * {@link CardPlugin} implementation.
  *
- * @author nantuko, JayDi85
+ * @author nantuko
+ * @version 0.1 01.11.2010 Mage permanents. Sorting card layout.
+ * @version 0.6 17.07.2011 #sortPermanents got option to display non-land
+ * permanents in one pile
+ * @version 0.7 29.07.2011 face down cards support
  */
 @PluginImplementation
 @Author(name = "nantuko")
@@ -574,10 +584,6 @@ public class CardPluginImpl implements CardPlugin {
         }
     }
 
-    private void symbolsOnFinish() {
-
-    }
-
     /**
      * Download various symbols (mana, tap, set).
      *
@@ -585,25 +591,23 @@ public class CardPluginImpl implements CardPlugin {
      */
     @Override
     public void downloadSymbols(String imagesDir) {
-        final Downloader downloader = new Downloader();
-        final DownloadGui downloadGui = new DownloadGui(downloader);
+        final DownloadGui g = new DownloadGui(new Downloader());
 
-        LOGGER.info("Symbols download prepare...");
-        Iterable<DownloadJob> jobs;
+        Iterable<DownloadJob> it;
 
-        jobs = new GathererSymbols();
-        for (DownloadJob job : jobs) {
-            downloader.add(job);
+        it = new GathererSymbols();
+        for (DownloadJob job : it) {
+            g.getDownloader().add(job);
         }
 
-        jobs = new GathererSets();
-        for (DownloadJob job : jobs) {
-            downloader.add(job);
+        it = new GathererSets();
+        for (DownloadJob job : it) {
+            g.getDownloader().add(job);
         }
 
-        jobs = new ScryfallSymbolsSource();
-        for (DownloadJob job : jobs) {
-            downloader.add(job);
+        it = new ScryfallSymbolsSource();
+        for (DownloadJob job : it) {
+            g.getDownloader().add(job);
         }
 
         /*
@@ -611,56 +615,26 @@ public class CardPluginImpl implements CardPlugin {
         for (DownloadJob job : it) {
             g.getDownloader().add(job);
         }
-        */
-
-        jobs = new DirectLinksForDownload();
-        for (DownloadJob job : jobs) {
-            downloader.add(job);
+         */
+        it = new DirectLinksForDownload();
+        for (DownloadJob job : it) {
+            g.getDownloader().add(job);
         }
 
-        LOGGER.info("Symbols download needs " + downloader.getJobs().size() + " files");
-
-        // download GUI dialog
-        JDialog dialog = new JDialog((Frame) null, "Download symbols", false);
-        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        dialog.addWindowListener(new WindowAdapter() {
+        JDialog d = new JDialog((Frame) null, "Download symbols", false);
+        d.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        d.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                // user force to close window/downloader
-                downloader.cleanup();
+                g.getDownloader().dispose();
+                ManaSymbols.loadImages();
+                // TODO: check reload process after download (icons do not update)
             }
         });
-        dialog.setLayout(new BorderLayout());
-        dialog.add(downloadGui);
-        dialog.pack();
-        dialog.setVisible(true);
-
-        // downloader controller thread
-        SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
-            @Override
-            protected Void doInBackground() throws Exception {
-                downloader.publishAllJobs();
-                downloader.waitFinished();
-                downloader.cleanup();
-                return null;
-            }
-        };
-        // downloader finisher
-        worker.addPropertyChangeListener(new PropertyChangeListener() {
-            @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                if (evt.getPropertyName().equals("state")) {
-                    if (evt.getNewValue() == SwingWorker.StateValue.DONE) {
-                        // all done, can close dialog and refresh symbols for UI
-                        LOGGER.info("Symbols download finished");
-                        dialog.dispose();
-                        ManaSymbols.loadImages();
-                        ImageCache.clearCache();
-                    }
-                }
-            }
-        });
-        worker.execute();
+        d.setLayout(new BorderLayout());
+        d.add(g);
+        d.pack();
+        d.setVisible(true);
     }
 
     @Override

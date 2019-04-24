@@ -10,12 +10,11 @@ import mage.watchers.common.CreaturesDiedWatcher;
 /**
  * @author LoneFox
  */
-public enum CreaturesDiedThisTurnCount implements DynamicValue {
-    instance;
+public class CreaturesDiedThisTurnCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        CreaturesDiedWatcher watcher = game.getState().getWatcher(CreaturesDiedWatcher.class);
+        CreaturesDiedWatcher watcher = (CreaturesDiedWatcher) game.getState().getWatchers().get(CreaturesDiedWatcher.class.getSimpleName());
         if (watcher != null) {
             return watcher.getAmountOfCreaturesDiedThisTurn();
         }
@@ -24,7 +23,7 @@ public enum CreaturesDiedThisTurnCount implements DynamicValue {
 
     @Override
     public CreaturesDiedThisTurnCount copy() {
-        return CreaturesDiedThisTurnCount.instance;
+        return new CreaturesDiedThisTurnCount();
     }
 
     @Override

@@ -49,7 +49,7 @@ class MarshalingTheTroopsEffect extends OneShotEffect {
     
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public MarshalingTheTroopsEffect() {

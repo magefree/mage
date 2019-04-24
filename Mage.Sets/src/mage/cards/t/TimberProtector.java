@@ -34,7 +34,7 @@ public final class TimberProtector extends CardImpl {
         filterBoth.add(Predicates.or(
                 new SubtypePredicate(SubType.TREEFOLK),
                 new SubtypePredicate(SubType.FOREST)));
-        filterBoth.add(AnotherPredicate.instance);
+        filterBoth.add(new AnotherPredicate());
     }
 
     public TimberProtector(UUID ownerId, CardSetInfo setInfo) {

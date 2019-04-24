@@ -1,20 +1,23 @@
 package mage.cards.t;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseACardNameEffect;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
+ *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public final class TunnelVision extends CardImpl {
@@ -73,7 +76,7 @@ class TunnelVisionEffect extends OneShotEffect {
 
         for (Card card : targetPlayer.getLibrary().getCards(game)) {
             cardsToReveal.add(card);
-            if (CardUtil.haveSameNames(card.getName(), cardName)) {
+            if (card.getName().equals(cardName)) {
                 namedCard = card;
                 break;
             }

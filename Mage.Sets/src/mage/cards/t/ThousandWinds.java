@@ -25,8 +25,8 @@ public final class ThousandWinds extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other tapped creatures");
 
     static {
-        filter.add(AnotherPredicate.instance);
-        filter.add(TappedPredicate.instance);
+        filter.add(new AnotherPredicate());
+        filter.add(new TappedPredicate());
     }
 
     public ThousandWinds(UUID ownerId, CardSetInfo setInfo) {

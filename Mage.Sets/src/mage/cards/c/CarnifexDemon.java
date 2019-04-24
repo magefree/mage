@@ -28,7 +28,7 @@ public final class CarnifexDemon extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each other creature");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public CarnifexDemon(UUID ownerId, CardSetInfo setInfo) {

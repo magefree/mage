@@ -32,7 +32,7 @@ public final class BallynockCohort extends CardImpl {
     
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
     
     private String rule = "{this} gets +1/+1 as long as you control another white creature";

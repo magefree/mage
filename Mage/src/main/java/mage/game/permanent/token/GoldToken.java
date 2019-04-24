@@ -17,7 +17,7 @@ import mage.constants.Zone;
  */
 public final class GoldToken extends TokenImpl {
     
-    static final private List<String> tokenImageSets = new ArrayList<>();
+    final static private List<String> tokenImageSets = new ArrayList<>();
     static {
         tokenImageSets.addAll(Arrays.asList("BNG", "C17"));
     }

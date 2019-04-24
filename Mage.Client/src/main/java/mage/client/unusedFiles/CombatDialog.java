@@ -1,7 +1,7 @@
 
 
 /*
- * COMBAT.java
+ * CombatDialog.java
  *
  * Created on Feb 10, 2010, 3:35:02 PM
  */
@@ -33,7 +33,7 @@ public class CombatDialog extends MageDialog {
     private int lastX = 500;
     private int lastY = 300;
 
-    /** Creates new form COMBAT */
+    /** Creates new form CombatDialog */
     public CombatDialog() {
 
         JPanel contentPane = new JPanel() {

@@ -17,7 +17,7 @@ import mage.filter.predicate.permanent.CounterPredicate;
  */
 public class TargetPermanentOrPlayerWithCounter extends TargetPermanentOrPlayer {
 
-    protected final FilterPermanentOrPlayerWithCounter targetFilter;
+    protected final FilterPermanentOrPlayerWithCounter filter;
 
     public TargetPermanentOrPlayerWithCounter() {
         this(1, 1);
@@ -33,16 +33,16 @@ public class TargetPermanentOrPlayerWithCounter extends TargetPermanentOrPlayer 
 
     public TargetPermanentOrPlayerWithCounter(int minNumTargets, int maxNumTargets, boolean notTarget) {
         super(minNumTargets, maxNumTargets, notTarget);
-        this.targetFilter = new FilterPermanentOrPlayerWithCounter();
+        this.filter = new FilterPermanentOrPlayerWithCounter();
         this.filterPermanent = new FilterPermanent();
         this.filterPermanent.add(new CounterPredicate(null));
-        this.targetName = targetFilter.getMessage();
+        this.targetName = filter.getMessage();
     }
 
     public TargetPermanentOrPlayerWithCounter(final TargetPermanentOrPlayerWithCounter target) {
         super(target);
-        this.targetFilter = target.targetFilter.copy();
-        super.setFilter(this.targetFilter);
+        this.filter = target.filter.copy();
+        super.setFilter(this.filter);
     }
 
     @Override

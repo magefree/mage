@@ -1,5 +1,7 @@
+
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -13,22 +15,21 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.UUID;
-
 /**
+ *
  * @author LevelX2
  */
 public final class SkyblinderStaff extends CardImpl {
 
     public SkyblinderStaff(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+0 and can't be blocked by creatures with flying.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0));
         ability.addEffect(new CantBeBlockedByCreaturesWithFlyingAttachedEffect());
         this.addAbility(ability);
-
+        
         // Equip {3}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3)));
 
@@ -62,7 +63,7 @@ class CantBeBlockedByCreaturesWithFlyingAttachedEffect extends RestrictionEffect
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
         return !blocker.getAbilities().contains(FlyingAbility.getInstance());
     }
 

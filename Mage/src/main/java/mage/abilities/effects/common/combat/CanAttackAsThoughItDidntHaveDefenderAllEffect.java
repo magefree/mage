@@ -7,7 +7,7 @@ import mage.constants.AsThoughEffectType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -21,7 +21,7 @@ public class CanAttackAsThoughItDidntHaveDefenderAllEffect extends AsThoughEffec
     private final FilterPermanent filter;
 
     public CanAttackAsThoughItDidntHaveDefenderAllEffect(Duration duration) {
-        this(duration, StaticFilters.FILTER_PERMANENT_CREATURE);
+        this(duration, new FilterCreaturePermanent());
     }
 
     public CanAttackAsThoughItDidntHaveDefenderAllEffect(Duration duration, FilterPermanent filter) {
@@ -30,7 +30,7 @@ public class CanAttackAsThoughItDidntHaveDefenderAllEffect extends AsThoughEffec
         this.staticText = getText();
     }
 
-    private CanAttackAsThoughItDidntHaveDefenderAllEffect(final CanAttackAsThoughItDidntHaveDefenderAllEffect effect) {
+    public CanAttackAsThoughItDidntHaveDefenderAllEffect(final CanAttackAsThoughItDidntHaveDefenderAllEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
     }
@@ -48,8 +48,7 @@ public class CanAttackAsThoughItDidntHaveDefenderAllEffect extends AsThoughEffec
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         Permanent permanent = game.getPermanent(objectId);
-        return permanent != null 
-                && filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
+        return permanent != null && filter.match(permanent, game);
     }
 
     private String getText() {

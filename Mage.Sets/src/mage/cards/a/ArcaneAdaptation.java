@@ -1,5 +1,9 @@
+
 package mage.cards.a;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -16,11 +20,8 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
-
 /**
+ *
  * @author TheElk801
  */
 public final class ArcaneAdaptation extends CardImpl {
@@ -69,14 +70,14 @@ class ConspyEffect extends ContinuousEffectImpl {
             // in graveyard
             for (UUID cardId : controller.getGraveyard()) {
                 Card card = game.getCard(cardId);
-                if (card != null && card.isCreature() && !card.hasSubtype(subType, game)) {
+                if (card.isCreature() && !card.hasSubtype(subType, game)) {
                     game.getState().getCreateCardAttribute(card, game).getSubtype().add(subType);
                 }
             }
             // on Hand
             for (UUID cardId : controller.getHand()) {
                 Card card = game.getCard(cardId);
-                if (card != null && card.isCreature() && !card.hasSubtype(subType, game)) {
+                if (card.isCreature() && !card.hasSubtype(subType, game)) {
                     game.getState().getCreateCardAttribute(card, game).getSubtype().add(subType);
                 }
             }
@@ -96,13 +97,13 @@ class ConspyEffect extends ContinuousEffectImpl {
             for (UUID commanderId : controller.getCommandersIds()) {
                 if (game.getState().getZone(commanderId) == Zone.COMMAND) {
                     Card card = game.getCard(commanderId);
-                    if (card != null && card.isCreature() && !card.hasSubtype(subType, game)) {
+                    if (card.isCreature() && !card.hasSubtype(subType, game)) {
                         game.getState().getCreateCardAttribute(card, game).getSubtype().add(subType);
                     }
                 }
             }
             // creature spells you control
-            for (Iterator<StackObject> iterator = game.getStack().iterator(); iterator.hasNext(); ) {
+            for (Iterator<StackObject> iterator = game.getStack().iterator(); iterator.hasNext();) {
                 StackObject stackObject = iterator.next();
                 if (stackObject instanceof Spell
                         && stackObject.isControlledBy(source.getControllerId())

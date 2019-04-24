@@ -26,7 +26,7 @@ public final class AngelicCaptain extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.ALLY));
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public AngelicCaptain(UUID ownerId, CardSetInfo setInfo) {

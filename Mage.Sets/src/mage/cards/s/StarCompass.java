@@ -103,9 +103,6 @@ class StarCompassManaEffect extends ManaEffect {
         }
         if (!choice.getChoices().isEmpty()) {
             Player player = game.getPlayer(source.getControllerId());
-            if(player == null){
-                return false;
-            }
             if (choice.getChoices().size() == 1) {
                 choice.setChoice(choice.getChoices().iterator().next());
             } else {
@@ -178,9 +175,6 @@ class StarCompassManaEffect extends ManaEffect {
         }
         if (!choice.getChoices().isEmpty()) {
             Player player = game.getPlayer(source.getControllerId());
-            if(player == null){
-                return null;
-            }
             if (choice.getChoices().size() == 1) {
                 choice.setChoice(choice.getChoices().iterator().next());
             } else {

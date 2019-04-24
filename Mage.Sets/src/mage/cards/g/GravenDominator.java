@@ -23,7 +23,7 @@ public final class GravenDominator extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each other creature");
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public GravenDominator(UUID ownerId, CardSetInfo setInfo) {

@@ -26,7 +26,7 @@ public final class MazeBehemoth extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Multicolored creatures you control");
     static {
-        filter.add(MulticoloredPredicate.instance);
+        filter.add(new MulticoloredPredicate());
     }
 
     public MazeBehemoth (UUID ownerId, CardSetInfo setInfo) {

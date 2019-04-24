@@ -1,3 +1,4 @@
+
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
@@ -8,6 +9,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
+ *
  * @author LevelX2
  */
 public class CantBeBlockedByCreaturesSourceEffect extends RestrictionEffect {
@@ -17,8 +19,8 @@ public class CantBeBlockedByCreaturesSourceEffect extends RestrictionEffect {
     public CantBeBlockedByCreaturesSourceEffect(FilterCreaturePermanent filter, Duration duration) {
         super(duration);
         this.filter = filter;
-        staticText = "{this} can't be blocked " + (duration == Duration.EndOfTurn ? "this turn " : "")
-                + (filter.getMessage().startsWith("except by") ? "" : "by ") + filter.getMessage();
+        staticText = new StringBuilder("{this} can't be blocked ")
+                .append(filter.getMessage().startsWith("except by") ? "" : "by ").append(filter.getMessage()).toString();
     }
 
     public CantBeBlockedByCreaturesSourceEffect(final CantBeBlockedByCreaturesSourceEffect effect) {
@@ -32,7 +34,7 @@ public class CantBeBlockedByCreaturesSourceEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
         return !filter.match(blocker, source.getSourceId(), source.getControllerId(), game);
     }
 

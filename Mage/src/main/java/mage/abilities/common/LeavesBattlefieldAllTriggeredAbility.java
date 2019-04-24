@@ -40,7 +40,7 @@ public class LeavesBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         this.setTargetPointer = setTargetPointer;
     }
 
-    private LeavesBattlefieldAllTriggeredAbility(final LeavesBattlefieldAllTriggeredAbility ability) {
+    public LeavesBattlefieldAllTriggeredAbility(final LeavesBattlefieldAllTriggeredAbility ability) {
         super(ability);
         filter = ability.filter;
         setTargetPointer = ability.setTargetPointer;

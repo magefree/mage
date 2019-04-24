@@ -25,7 +25,7 @@ public final class ObscuringAether extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("Face-down creature spells");
 
     static {
-        filter.add(FaceDownPredicate.instance);
+        filter.add(new FaceDownPredicate());
     }
 
     public ObscuringAether(UUID ownerId, CardSetInfo setInfo) {

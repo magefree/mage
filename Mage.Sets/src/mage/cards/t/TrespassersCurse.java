@@ -86,7 +86,7 @@ class TrespassersCurseTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature enters the battlefield under enchanted player's control, " + super.getRule();
+        return new StringBuilder("Whenever a creature enters the battlefield under enchanted player's control, ").append(super.getRule()).toString();
     }
 
     @Override
@@ -116,7 +116,7 @@ class TrespassersCurseEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controllerOfCreature = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
-        if (controllerOfCreature != null && controller != null) {
+        if (controllerOfCreature != null) {
             controllerOfCreature.loseLife(1, game, false);
             controller.gainLife(1, game, source);
             return true;

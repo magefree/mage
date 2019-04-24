@@ -87,13 +87,13 @@ class SeasonOfTheWitchEffect extends OneShotEffect {
                     continue;
                 }
                 // Creatures that attacked are safe.
-                AttackedThisTurnWatcher watcher = game.getState().getWatcher(AttackedThisTurnWatcher.class);
+                AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getSimpleName());
                 if (watcher != null
                         && watcher.getAttackedThisTurnCreatures().contains(new MageObjectReference(permanent, game))) {
                     continue;
                 }
                 // Creatures that couldn't attack are safe.
-                CouldAttackThisTurnWatcher watcher2 = game.getState().getWatcher(CouldAttackThisTurnWatcher.class);
+                CouldAttackThisTurnWatcher watcher2 = (CouldAttackThisTurnWatcher) game.getState().getWatchers().get(CouldAttackThisTurnWatcher.class.getSimpleName());
                 if (watcher2 != null
                         && !watcher2.getCouldAttackThisTurnCreatures().contains(new MageObjectReference(permanent, game))) {
                     continue;
@@ -109,10 +109,10 @@ class SeasonOfTheWitchEffect extends OneShotEffect {
 
 class CouldAttackThisTurnWatcher extends Watcher {
 
-    private final Set<MageObjectReference> couldAttackThisTurnCreatures = new HashSet<>();
+    public final Set<MageObjectReference> couldAttackThisTurnCreatures = new HashSet<>();
 
     public CouldAttackThisTurnWatcher() {
-        super(WatcherScope.GAME);
+        super(CouldAttackThisTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public CouldAttackThisTurnWatcher(final CouldAttackThisTurnWatcher watcher) {
@@ -124,9 +124,6 @@ class CouldAttackThisTurnWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DECLARE_ATTACKERS_STEP_PRE) {
             Player activePlayer = game.getPlayer(game.getActivePlayerId());
-            if(activePlayer == null){
-                return;
-            }
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(activePlayer.getId())) {
                 if (permanent.isCreature()) {
                     for (UUID defender : game.getCombat().getDefenders()) {

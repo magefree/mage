@@ -64,8 +64,8 @@ enum PistonFistCyclopsCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         SpellsCastWatcher watcher
-                = game.getState().getWatcher(
-                        SpellsCastWatcher.class
+                = (SpellsCastWatcher) game.getState().getWatchers().get(
+                        SpellsCastWatcher.class.getSimpleName()
                 );
         if (watcher == null) {
             return false;

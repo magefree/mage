@@ -26,8 +26,8 @@ public final class IxidorRealitySculptor extends CardImpl {
     private static final FilterCreaturePermanent filterTarget = new FilterCreaturePermanent("face-down creature");
 
     static {
-        filter.add(FaceDownPredicate.instance);
-        filterTarget.add(FaceDownPredicate.instance);
+        filter.add(new FaceDownPredicate());
+        filterTarget.add(new FaceDownPredicate());
     }
 
     public IxidorRealitySculptor(UUID ownerId, CardSetInfo setInfo) {

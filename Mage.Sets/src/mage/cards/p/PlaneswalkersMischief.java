@@ -82,7 +82,8 @@ class PlaneswalkersMischiefEffect extends OneShotEffect {
             if (revealedCard == null) {
                 return false;
             }
-            Cards cards = new CardsImpl(revealedCard);
+            Cards cards = new CardsImpl();
+            cards.add(revealedCard);
             opponent.revealCards("Planeswalker's Mischief Reveal", cards, game);
             if (revealedCard.isInstant()
                     || revealedCard.isSorcery()) {
@@ -154,7 +155,7 @@ class PlaneswalkersMischiefCondition implements Condition {
         if (!game.getExile().getExileZone(exileId).contains(cardId)) {
             return false;
         }
-        SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class, source.getSourceId());
+        SpellsCastWatcher watcher = (SpellsCastWatcher) game.getState().getWatchers().get(SpellsCastWatcher.class.getSimpleName(), source.getSourceId());
         if (watcher != null) {
             List<Spell> spells = watcher.getSpellsCastThisTurn(source.getControllerId());
             if (spells != null) {

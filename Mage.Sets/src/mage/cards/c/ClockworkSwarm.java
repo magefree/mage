@@ -73,7 +73,7 @@ public final class ClockworkSwarm extends CardImpl {
                 Zone.BATTLEFIELD,
                 new SwarmAddCountersSourceEffect(
                         CounterType.P1P0.createInstance(),
-                        ManacostVariableValue.instance,
+                        new ManacostVariableValue(),
                         true, true
                 ),
                 new ManaCostsImpl("{X}"),

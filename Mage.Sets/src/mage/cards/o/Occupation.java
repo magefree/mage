@@ -1,12 +1,16 @@
 package mage.cards.o;
 
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.common.combat.CantAttackBlockTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -17,16 +21,15 @@ import mage.game.permanent.Permanent;
 import mage.game.turn.Step;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.UUID;
-
 /**
+ *
  * @author NinthWorld
  */
 public final class Occupation extends CardImpl {
 
     public Occupation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}{B}");
-
+        
 
         // Creatures your opponents control enter the battlefield tapped.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OccupationTapEffect()));
@@ -78,7 +81,9 @@ class OccupationTapEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-            return permanent != null && permanent.isCreature();
+            if (permanent != null && permanent.isCreature()) {
+                return true;
+            }
         }
         return false;
     }
@@ -159,21 +164,24 @@ class OccupationRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return this.targetPointer.getTargets(game, source).contains(permanent.getId());
-    }
-
-    @Override
-    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
+        if (this.targetPointer.getTargets(game, source).contains(permanent.getId())) {
+            return true;
+        }
         return false;
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canAttack(Game game) {
         return false;
     }
 
     @Override
-    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        return false;
+    }
+
+    @Override
+    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game) {
         return false;
     }
 

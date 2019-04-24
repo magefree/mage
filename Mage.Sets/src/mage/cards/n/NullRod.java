@@ -1,5 +1,7 @@
+
 package mage.cards.n;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
@@ -11,15 +13,14 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.UUID;
-
 /**
+ *
  * @author LevelX2
  */
 public final class NullRod extends CardImpl {
 
     public NullRod(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // Activated abilities of artifacts can't be activated.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NullRodCantActivateEffect()));
@@ -52,7 +53,7 @@ class NullRodCantActivateEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game) {
         return false;
     }
 

@@ -48,7 +48,7 @@ public final class GeneratorServant extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new GeneratorServantHasteEffect()), new GeneratorServantWatcher());
     }
 
-    private GeneratorServant(final GeneratorServant card) {
+    public GeneratorServant(final GeneratorServant card) {
         super(card);
     }
 
@@ -60,13 +60,13 @@ public final class GeneratorServant extends CardImpl {
 
 class GeneratorServantWatcher extends Watcher {
 
-    private List<UUID> creatures = new ArrayList<>();
+    public List<UUID> creatures = new ArrayList<>();
 
     public GeneratorServantWatcher() {
-        super(WatcherScope.CARD);
+        super(GeneratorServantWatcher.class.getSimpleName(), WatcherScope.CARD);
     }
 
-    private GeneratorServantWatcher(final GeneratorServantWatcher watcher) {
+    public GeneratorServantWatcher(final GeneratorServantWatcher watcher) {
         super(watcher);
         this.creatures.addAll(watcher.creatures);
     }
@@ -95,10 +95,6 @@ class GeneratorServantWatcher extends Watcher {
         creatures.clear();
     }
 
-    public boolean creatureCastWithServantsMana(UUID permanentId){
-        return creatures.contains(permanentId);
-    }
-
 }
 
 class GeneratorServantHasteEffect extends ContinuousEffectImpl {
@@ -118,10 +114,10 @@ class GeneratorServantHasteEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        GeneratorServantWatcher watcher = game.getState().getWatcher(GeneratorServantWatcher.class, source.getSourceId());
+        GeneratorServantWatcher watcher = (GeneratorServantWatcher) game.getState().getWatchers().get(GeneratorServantWatcher.class.getSimpleName(), source.getSourceId());
         if (watcher != null) {
             for (Permanent perm : game.getBattlefield().getAllActivePermanents()) {
-                if (watcher.creatureCastWithServantsMana(perm.getId())) {
+                if (watcher.creatures.contains(perm.getId())) {
                     perm.addAbility(HasteAbility.getInstance(), source.getSourceId(), game);
                 }
             }

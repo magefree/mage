@@ -91,7 +91,9 @@ class AvenEffect extends ContinuousEffectImpl {
 
     @Override
     public String getText(Mode mode) {
-        return "If you do, that creature has base power and toughness 3/1 and has flying for as long as it has a feather counter on it";
+        StringBuilder sb = new StringBuilder();
+        sb.append("If you do, that creature has base power and toughness 3/1 and has flying for as long as it has a feather counter on it");
+        return sb.toString();
     }
 }
 

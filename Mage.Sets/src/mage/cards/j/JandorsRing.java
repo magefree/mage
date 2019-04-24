@@ -71,7 +71,7 @@ class JandorsRingEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        JandorsRingWatcher watcher = game.getState().getWatcher(JandorsRingWatcher.class);
+        JandorsRingWatcher watcher = (JandorsRingWatcher) game.getState().getWatchers().get(JandorsRingWatcher.class.getSimpleName());
         if (watcher != null) {
             UUID cardId = watcher.getLastDrewCard(source.getControllerId());
             Card card = game.getCard(cardId);
@@ -81,9 +81,7 @@ class JandorsRingEffect extends OneShotEffect {
                 DiscardCardYouChooseTargetEffect effect = new DiscardCardYouChooseTargetEffect(filter, TargetController.YOU);
                 if (effect.apply(game, source)) {//Conditional was already checked, card should be in hand, but if for some weird reason it fails, the card won't be drawn, although the cost will already be paid
                     Player controller = game.getPlayer(source.getControllerId());
-                    if(controller != null) {
-                        controller.drawCards(1, game);
-                    }
+                    controller.drawCards(1, game);
                 }
             }
             return true;
@@ -94,10 +92,10 @@ class JandorsRingEffect extends OneShotEffect {
 
 class JandorsRingWatcher extends Watcher {
 
-    private Map<UUID, UUID> lastDrawnCards = new HashMap<>();
+    Map<UUID, UUID> lastDrawnCards = new HashMap<>();
 
     public JandorsRingWatcher() {
-        super(WatcherScope.GAME);
+        super(JandorsRingWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public JandorsRingWatcher(final JandorsRingWatcher watcher) {
@@ -134,10 +132,10 @@ enum WatchedCardInHandCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        JandorsRingWatcher watcher = game.getState().getWatcher(JandorsRingWatcher.class);
+        JandorsRingWatcher watcher = (JandorsRingWatcher) game.getState().getWatchers().get(JandorsRingWatcher.class.getSimpleName());
 
         return watcher != null
-                && game.getPlayer(source.getControllerId()).getHand().contains(watcher.getLastDrewCard(source.getControllerId()));
+                && watcher.lastDrawnCards != null && game.getPlayer(source.getControllerId()).getHand().contains(watcher.getLastDrewCard(source.getControllerId()));
     }
 
     @Override

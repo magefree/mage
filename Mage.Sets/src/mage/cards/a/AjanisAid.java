@@ -23,7 +23,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
  */
 public final class AjanisAid extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Ajani, Valiant Protector");
+    private final static FilterCard filter = new FilterCard("Ajani, Valiant Protector");
 
     static {
         filter.add(new NamePredicate("Ajani, Valiant Protector"));
@@ -42,7 +42,7 @@ public final class AjanisAid extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new SacrificeSourceCost()));
     }
 
-    private AjanisAid(final AjanisAid card) {
+    public AjanisAid(final AjanisAid card) {
         super(card);
     }
 

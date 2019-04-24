@@ -29,13 +29,13 @@ public final class GolgariCharm extends CardImpl {
 
         // or destroy target enchantment;
         Mode mode = new Mode();
-        mode.addEffect(new DestroyTargetEffect());
-        mode.addTarget(new TargetEnchantmentPermanent());
+        mode.getEffects().add(new DestroyTargetEffect());
+        mode.getTargets().add(new TargetEnchantmentPermanent());
         this.getSpellAbility().addMode(mode);
 
         // or regenerate each creature you control.
         mode = new Mode();
-        mode.addEffect(new RegenerateAllEffect(new FilterControlledCreaturePermanent()));
+        mode.getEffects().add(new RegenerateAllEffect(new FilterControlledCreaturePermanent()));
         this.getSpellAbility().addMode(mode);
     }
 

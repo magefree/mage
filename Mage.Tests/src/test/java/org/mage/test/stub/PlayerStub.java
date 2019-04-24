@@ -139,11 +139,6 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public int damage(int damage, UUID sourceId, Game game) {
-        return 0;
-    }
-
-    @Override
     public int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable) {
         return 0;
     }
@@ -583,27 +578,23 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game) {
+    public boolean searchLibrary(TargetCardInLibrary target, Game game) {
         return false;
     }
 
     @Override
-    public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, boolean triggerEvents) {
+    public boolean searchLibrary(TargetCardInLibrary target, Game game, boolean triggerEvents) {
         return false;
     }
 
     @Override
-    public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, UUID targetPlayerId) {
+    public boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId) {
         return false;
     }
 
     @Override
-    public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, UUID targetPlayerId, boolean triggerEvents) {
+    public boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId, boolean triggerEvents) {
         return false;
-    }
-
-    @Override
-    public void lookAtAllLibraries(Ability source, Game game) {
     }
 
     @Override
@@ -642,12 +633,12 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean flipCoin(Ability source, Game game, boolean winnable) {
+    public boolean flipCoin(Game game) {
         return false;
     }
 
     @Override
-    public boolean flipCoin(Ability source, Game game, boolean winnable, ArrayList<UUID> appliedEffects) {
+    public boolean flipCoin(Game game, ArrayList<UUID> appliedEffects) {
         return false;
     }
 
@@ -1092,7 +1083,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean lookAtFaceDownCard(Card card, Game game, int abilitiesToActivate) {
+    public boolean lookAtFaceDownCard(Card card, Game game) {
         return false;
     }
 

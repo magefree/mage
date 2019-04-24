@@ -1,6 +1,5 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -28,6 +27,8 @@ import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
  *
  * @author noahg
@@ -37,12 +38,12 @@ public final class GiantOyster extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(new TappedPredicate());
     }
 
     public GiantOyster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
-
+        
         this.subtype.add(SubType.OYSTER);
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
@@ -110,6 +111,7 @@ class GiantOysterCreateDelayedTriggerEffects extends OneShotEffect {
                 Effect addCountersEffect = new AddCountersTargetEffect(CounterType.M1M1.createInstance(1));
                 addCountersEffect.setTargetPointer(getTargetPointer().getFixedTarget(game, source));
                 DelayedTriggeredAbility drawStepAbility = new AtTheBeginOfYourNextDrawStepDelayedTriggeredAbility(addCountersEffect, Duration.Custom, false);
+                drawStepAbility.setSourceObject(oyster, game);
                 drawStepAbility.setControllerId(source.getControllerId());
                 UUID drawStepAbilityUUID = game.addDelayedTriggeredAbility(drawStepAbility, source);
 

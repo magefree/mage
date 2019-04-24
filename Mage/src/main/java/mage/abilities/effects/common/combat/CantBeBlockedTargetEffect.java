@@ -13,6 +13,7 @@ import mage.target.Target;
 import mage.util.CardUtil;
 
 /**
+ *
  * @author North
  */
 public class CantBeBlockedTargetEffect extends RestrictionEffect {
@@ -46,7 +47,7 @@ public class CantBeBlockedTargetEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
         return !filter.match(blocker, source.getSourceId(), source.getControllerId(), game);
     }
 

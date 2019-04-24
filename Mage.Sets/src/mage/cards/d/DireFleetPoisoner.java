@@ -30,7 +30,7 @@ public final class DireFleetPoisoner extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(AttackingPredicate.instance);
+        filter.add(new AttackingPredicate());
     }
 
     public DireFleetPoisoner(UUID ownerId, CardSetInfo setInfo) {

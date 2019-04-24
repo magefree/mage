@@ -26,7 +26,7 @@ public final class OrchardWarden extends CardImpl {
     
     static {
         filter.add(new SubtypePredicate(SubType.TREEFOLK));
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
     
     public OrchardWarden(UUID ownerId, CardSetInfo setInfo) {

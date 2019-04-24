@@ -40,7 +40,7 @@ public final class ChiefChirpa extends CardImpl {
         diedFilter.add(new ControllerPredicate(TargetController.YOU));
 
         ewokFilter.add(new SubtypePredicate(SubType.EWOK));
-        ewokFilter.add(AnotherPredicate.instance);
+        ewokFilter.add(new AnotherPredicate());
     }
 
     public ChiefChirpa(UUID ownerId, CardSetInfo setInfo) {

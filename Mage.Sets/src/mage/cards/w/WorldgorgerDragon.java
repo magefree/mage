@@ -70,7 +70,7 @@ class WorldgorgerDragonEntersEffect extends OneShotEffect {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public WorldgorgerDragonEntersEffect() {

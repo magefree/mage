@@ -19,7 +19,7 @@ public class SourceDidDamageWatcher extends Watcher {
     public final Set<UUID> damageSources = new HashSet<>();
 
     public SourceDidDamageWatcher() {
-        super(WatcherScope.GAME);
+        super(SourceDidDamageWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public SourceDidDamageWatcher(final SourceDidDamageWatcher watcher) {

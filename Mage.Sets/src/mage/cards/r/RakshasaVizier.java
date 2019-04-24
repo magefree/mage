@@ -1,6 +1,7 @@
 
 package mage.cards.r;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -13,28 +14,29 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeGroupEvent;
-
-import java.util.UUID;
+import mage.game.events.ZoneChangeEvent;
 
 /**
+ *
  * @author LevelX2
  */
 public final class RakshasaVizier extends CardImpl {
 
     public RakshasaVizier(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{G}{U}");
-
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{G}{U}");
         this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.DEMON);
+
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
         // Whenever one or more cards are put into exile from your graveyard, put that many +1/+1 counters on Rakshasa Vizier.
+        // TODO: Handle effects that move more than one card with one trigger (e.g. if opponent want to counter a trigger, he has now to counter multiple instead of one).
         this.addAbility(new RakshasaVizierTriggeredAbility());
     }
 
-    private RakshasaVizier(final RakshasaVizier card) {
+    public RakshasaVizier(final RakshasaVizier card) {
         super(card);
     }
 
@@ -46,38 +48,29 @@ public final class RakshasaVizier extends CardImpl {
 
 class RakshasaVizierTriggeredAbility extends TriggeredAbilityImpl {
 
-    RakshasaVizierTriggeredAbility() {
+    public RakshasaVizierTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
     }
 
-    private RakshasaVizierTriggeredAbility(final RakshasaVizierTriggeredAbility ability) {
+    public RakshasaVizierTriggeredAbility(final RakshasaVizierTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE_GROUP;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
-        if (zEvent != null
-                && Zone.GRAVEYARD == zEvent.getFromZone()
-                && Zone.EXILED == zEvent.getToZone()
-                && zEvent.getCards() != null) {
-            int cardCount = 0;
-            for (Card card : zEvent.getCards()) {
-                if (card != null && card.isOwnedBy(getControllerId())) {
-                    cardCount++;
-                }
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        if (zEvent.getFromZone() == Zone.GRAVEYARD
+                && zEvent.getToZone() == Zone.EXILED) {
+            Card card = game.getCard(event.getTargetId());
+            if (card != null && card.isOwnedBy(getControllerId())) {
+                return true;
             }
-            if (cardCount == 0) {
-                return false;
-            }
-            this.getEffects().clear();
-            this.getEffects().add(new AddCountersSourceEffect(CounterType.P1P1.createInstance(cardCount)));
-            return true;
+
         }
         return false;
     }

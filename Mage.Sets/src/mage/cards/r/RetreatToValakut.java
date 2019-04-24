@@ -27,8 +27,8 @@ public final class RetreatToValakut extends CardImpl {
 
         // or Target creature can't block this turn.
         Mode mode = new Mode();
-        mode.addEffect(new CantBlockTargetEffect(Duration.EndOfTurn));
-        mode.addTarget(new TargetCreaturePermanent());
+        mode.getEffects().add(new CantBlockTargetEffect(Duration.EndOfTurn));
+        mode.getTargets().add(new TargetCreaturePermanent());
         ability.addMode(mode);
         this.addAbility(ability);
     }

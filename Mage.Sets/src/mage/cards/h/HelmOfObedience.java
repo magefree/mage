@@ -49,7 +49,7 @@ public final class HelmOfObedience extends CardImpl {
 
 class HelmOfObedienceEffect extends OneShotEffect {
 
-    private static final ManacostVariableValue amount = ManacostVariableValue.instance;
+    private static final ManacostVariableValue amount = new ManacostVariableValue();
 
     public HelmOfObedienceEffect() {
         super(Outcome.Detriment);

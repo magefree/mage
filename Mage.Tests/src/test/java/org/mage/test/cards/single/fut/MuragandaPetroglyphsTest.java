@@ -1,6 +1,5 @@
 package org.mage.test.cards.single.fut;
 
-import mage.constants.EmptyNames;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.filter.Filter;
@@ -51,8 +50,8 @@ public class MuragandaPetroglyphsTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
-        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 4, 4);
+        assertPermanentCount(playerA, "", 1);
+        assertPowerToughness(playerA, "", 4, 4);
     }
 
     @Test
@@ -70,8 +69,8 @@ public class MuragandaPetroglyphsTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
-        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2);
+        assertPermanentCount(playerA, "", 1);
+        assertPowerToughness(playerA, "", 2, 2);
     }
 
     @Test
@@ -156,7 +155,7 @@ public class MuragandaPetroglyphsTest extends CardTestPlayerBase {
         // Enchanted creature doesn't untap during itscontroller's untap step.
         addCard(Zone.HAND, playerA, "Dehydration");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rancor", "Grizzly Bears");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA,"Rancor", "Grizzly Bears");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dehydration", "Runeclaw Bear");
 

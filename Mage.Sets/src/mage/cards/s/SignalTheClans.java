@@ -13,6 +13,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -65,10 +66,10 @@ class SignalTheClansEffect extends SearchEffect {
             return false;
         }
         //Search your library for three creature cards
-        if (player.searchLibrary(target, source, game)) {
+        if (player.searchLibrary(target, game)) {
             if (!target.getTargets().isEmpty()) {
                 Cards cards = new CardsImpl();
-                for (UUID cardId: target.getTargets()) {
+                for (UUID cardId: (List<UUID>)target.getTargets()) {
                     Card card = player.getLibrary().remove(cardId, game);
                     if (card != null){
                         cards.add(card);

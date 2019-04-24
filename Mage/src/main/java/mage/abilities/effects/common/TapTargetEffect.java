@@ -54,10 +54,6 @@ public class TapTargetEffect extends OneShotEffect {
             return "tap " + staticText;
         }
 
-        if (mode.getTargets().isEmpty()) {
-            return "tap target permanent";
-        }
-
         Target target = mode.getTargets().get(0);
         if (target.getMaxNumberOfTargets() > 1) {
             if (target.getMaxNumberOfTargets() == target.getNumberOfTargets()) {

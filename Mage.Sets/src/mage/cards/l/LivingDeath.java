@@ -2,7 +2,6 @@
 package mage.cards.l;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -66,9 +65,7 @@ class LivingDeathEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && sourceObject != null) {
             Map<UUID, Set<Card>> exiledCards = new HashMap<>();
-            
-            // Move creature cards from graveyard to exile
-            
+            // move creature cards from graveyard to exile
             for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
@@ -80,28 +77,21 @@ class LivingDeathEffect extends OneShotEffect {
                 }
             }
             game.applyEffects();
-            
-            // Sacrifice all creatures
-            
+            // sacrifice all creatures
             for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
                 permanent.sacrifice(source.getSourceId(), game);
             }
             game.applyEffects();
-            
-            // Exiled cards are put onto the battlefield at the same time under their owner's control
-            
-            Set<Card> cardsToReturnFromExile = new HashSet<>();
+            // put exiled cards to battlefield
             for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     Set<Card> cardsPlayer = exiledCards.get(playerId);
-                    if (cardsPlayer != null 
-                            && !cardsPlayer.isEmpty()) {
-                        cardsToReturnFromExile.addAll(cardsPlayer);
+                    if (cardsPlayer != null && !cardsPlayer.isEmpty()) {
+                        player.moveCards(cardsPlayer, Zone.BATTLEFIELD, source, game, false, false, false, null);
                     }
                 }
             }
-            controller.moveCards(cardsToReturnFromExile, Zone.BATTLEFIELD, source, game, false, false, true, null);
             return true;
         }
         return false;

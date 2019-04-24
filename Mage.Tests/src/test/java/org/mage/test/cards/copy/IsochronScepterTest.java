@@ -44,11 +44,9 @@ public class IsochronScepterTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Lightning Bolt");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Isochron Scepter");
-        setChoice(playerA, "Yes"); // use imprint
-        setChoice(playerA, "Lightning Bolt"); // target for imprint (excile from hand)
-
-        // copy and cast imprinted card
+        addTarget(playerA, "Lightning Bolt");
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2}, {T}:");
+        setChoice(playerA, "Yes");
         setChoice(playerA, "Yes");
 
         setStopAt(1, PhaseStep.END_TURN);

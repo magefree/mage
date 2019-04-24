@@ -16,7 +16,7 @@ public class FilterAttackingCreature extends FilterCreaturePermanent {
 
     public FilterAttackingCreature(String name) {
         super(name);
-        this.add(AttackingPredicate.instance);
+        this.add(new AttackingPredicate());
     }
 
     public FilterAttackingCreature(final FilterAttackingCreature filter) {

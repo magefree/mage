@@ -1,9 +1,26 @@
+/**
+ * Downloader.java
+ *
+ * Created on 25.08.2010
+ */
 package org.mage.plugins.card.dl;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.ConnectException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import javax.swing.BoundedRangeModel;
 import org.apache.log4j.Logger;
 import org.jetlang.channels.Channel;
 import org.jetlang.channels.MemoryChannel;
 import org.jetlang.core.Callback;
+import org.jetlang.core.Disposable;
 import org.jetlang.fibers.Fiber;
 import org.jetlang.fibers.PoolFiberFactory;
 import org.mage.plugins.card.dl.DownloadJob.Destination;
@@ -11,56 +28,41 @@ import org.mage.plugins.card.dl.DownloadJob.Source;
 import org.mage.plugins.card.dl.DownloadJob.State;
 import org.mage.plugins.card.dl.lm.AbstractLaternaBean;
 
-import javax.swing.*;
-import java.io.*;
-import java.net.ConnectException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-
 /**
- * Downloader
+ * The class Downloader.
  *
- * @author Clemens Koza, JayDi85
+ * @version V0.0 25.08.2010
+ * @author Clemens Koza
  */
-public class Downloader extends AbstractLaternaBean {
+public class Downloader extends AbstractLaternaBean implements Disposable {
 
     private static final Logger logger = Logger.getLogger(Downloader.class);
 
     private final List<DownloadJob> jobs = properties.list("jobs");
-    private final Channel<DownloadJob> jobsQueue = new MemoryChannel<>();
-    private CountDownLatch worksCount = null;
+    private final Channel<DownloadJob> channel = new MemoryChannel<>();
 
     private final ExecutorService pool = Executors.newCachedThreadPool();
     private final List<Fiber> fibers = new ArrayList<>();
 
     public Downloader() {
-        // prepare 10 threads and start to waiting new download jobs from queue
         PoolFiberFactory f = new PoolFiberFactory(pool);
+        //subscribe multiple fibers for parallel execution
         for (int i = 0, numThreads = 10; i < numThreads; i++) {
             Fiber fiber = f.create();
             fiber.start();
             fibers.add(fiber);
-            jobsQueue.subscribe(fiber, new DownloadCallback());
+            channel.subscribe(fiber, new DownloadCallback());
         }
     }
 
-    public void cleanup() {
-        // close all threads and jobs
+    @Override
+    public void dispose() {
         for (DownloadJob j : jobs) {
             switch (j.getState()) {
                 case NEW:
                 case PREPARING:
                 case WORKING:
                     j.setState(State.ABORTED);
-                    break;
-                case ABORTED:
-                case FINISHED:
-                    // don't change state
-                    break;
             }
         }
 
@@ -68,10 +70,16 @@ public class Downloader extends AbstractLaternaBean {
             f.dispose();
         }
         pool.shutdown();
+    }
 
-        while (worksCount.getCount() != 0) {
-            worksCount.countDown();
-        }
+    /**
+     *
+     * @throws Throwable
+     */
+    @Override
+    protected void finalize() throws Throwable {
+        dispose();
+        super.finalize();
     }
 
     public void add(DownloadJob job) {
@@ -86,27 +94,7 @@ public class Downloader extends AbstractLaternaBean {
         }
         job.setState(State.NEW);
         jobs.add(job);
-    }
-
-    public void publishAllJobs() {
-        worksCount = new CountDownLatch(jobs.size());
-        for (DownloadJob job : jobs) {
-            jobsQueue.publish(job);
-        }
-    }
-
-    public void waitFinished() {
-        try {
-            while (worksCount.getCount() != 0) {
-                worksCount.await(60, TimeUnit.SECONDS);
-
-                if (worksCount.getCount() != 0) {
-                    logger.warn("Symbols download too long...");
-                }
-            }
-        } catch (InterruptedException e) {
-            logger.error("Need to stop symbols download...");
-        }
+        channel.publish(job);
     }
 
     public List<DownloadJob> getJobs() {
@@ -123,23 +111,20 @@ public class Downloader extends AbstractLaternaBean {
         @Override
         public void onMessage(DownloadJob job) {
 
-            // each 10 threads gets same jobs, but take to work only one NEW
+            // start to work
+            // the job won't be processed by multiple threads
             synchronized (job) {
-                if (job.getState() == State.NEW) {
-                    // take new job
-                    job.doPrepareAndStartWork();
-                    if (job.getState() != State.WORKING) {
-                        logger.warn("Can't prepare symbols download job: " + job.getName());
-                        worksCount.countDown();
-                        return;
-                    }
-                } else {
-                    // skip job (other thread takes it)
+                if (job.getState() != State.NEW) {
+                    return;
+                }
+
+                job.doPrepareAndStartWork();
+
+                if (job.getState() != State.WORKING) {
                     return;
                 }
             }
 
-            // real work for new job
             // download and save data
             try {
                 Source src = job.getSource();
@@ -147,11 +132,9 @@ public class Downloader extends AbstractLaternaBean {
                 BoundedRangeModel progress = job.getProgress();
 
                 if (dst.isValid()) {
-                    // already done
                     progress.setMaximum(1);
                     progress.setValue(1);
                 } else {
-                    // downloading
                     if (dst.exists()) {
                         try {
                             dst.delete();
@@ -166,7 +149,7 @@ public class Downloader extends AbstractLaternaBean {
                         try {
                             byte[] buf = new byte[8 * 1024];
                             int total = 0;
-                            for (int len; (len = is.read(buf)) != -1; ) {
+                            for (int len; (len = is.read(buf)) != -1;) {
                                 if (job.getState() == State.ABORTED) {
                                     throw new IOException("Job was aborted");
                                 }
@@ -210,8 +193,6 @@ public class Downloader extends AbstractLaternaBean {
                 logger.warn("Error resource download " + job.getName() + " from " + job.getSource().toString() + ": " + message);
             } catch (IOException ex) {
                 job.setError(ex);
-            } finally {
-                worksCount.countDown();
             }
         }
     }

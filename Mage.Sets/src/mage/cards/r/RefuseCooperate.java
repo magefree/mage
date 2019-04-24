@@ -34,7 +34,7 @@ public final class RefuseCooperate extends SplitCard {
 
         // Cooperate
         // Aftermath
-        getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
+        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility().setRuleAtTheTop(true));
         // Copy target instant or sorcery spell. You may choose new targets for the copy.
         getRightHalfCard().getSpellAbility().addEffect(new CopyTargetSpellEffect());
         getRightHalfCard().getSpellAbility().addTarget(new TargetSpell(new FilterInstantOrSorcerySpell()));

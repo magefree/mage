@@ -11,6 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
+import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.Token;
 import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 
@@ -41,7 +43,7 @@ public final class BalduvianConjurer extends CardImpl {
         this.addAbility(ability);
     }
 
-    private BalduvianConjurer(final BalduvianConjurer card) {
+    public BalduvianConjurer(final BalduvianConjurer card) {
         super(card);
     }
 

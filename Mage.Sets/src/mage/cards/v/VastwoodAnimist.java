@@ -54,7 +54,7 @@ public final class VastwoodAnimist extends CardImpl {
 
 class VastwoodAnimistEffect extends OneShotEffect {
 
-    static final FilterControlledPermanent filterAllies = new FilterControlledPermanent("allies you control");
+    final static FilterControlledPermanent filterAllies = new FilterControlledPermanent("allies you control");
 
     static {
         filterAllies.add(new SubtypePredicate(SubType.ALLY));

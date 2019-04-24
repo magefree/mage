@@ -1,12 +1,12 @@
 
 package mage.abilities.keyword;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.effects.common.continuous.AddCardTypeSourceEffect;
-import mage.abilities.hint.HintUtils;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -19,10 +19,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
-
-import java.awt.*;
-import java.util.Objects;
-import java.util.UUID;
 
 /**
  * @author emerald000
@@ -58,7 +54,7 @@ class CrewCost extends CostImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     private final int value;
@@ -74,24 +70,7 @@ class CrewCost extends CostImpl {
 
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        Target target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true) {
-            @Override
-            public String getMessage() {
-                // shows selected power
-                int selectedPower = this.targets.entrySet().stream()
-                        .map(entry -> (game.getPermanent(entry.getKey())))
-                        .filter(Objects::nonNull)
-                        .mapToInt(p -> (p.getPower().getValue()))
-                        .sum();
-                String extraInfo = "(selected power " + selectedPower + " of " + value + ")";
-                if (selectedPower >= value) {
-                    extraInfo = HintUtils.prepareText(extraInfo, Color.GREEN);
-                }
-                return super.getMessage() + " " + extraInfo;
-            }
-        };
-
-        // can cancel
+        Target target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true);
         if (target.choose(Outcome.Tap, controllerId, sourceId, game)) {
             int sumPower = 0;
             for (UUID targetId : target.getTargets()) {
@@ -109,10 +88,7 @@ class CrewCost extends CostImpl {
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREWED_VEHICLE, targetId, sourceId, controllerId));
                 }
             }
-        } else {
-            return false;
         }
-
         return paid;
     }
 

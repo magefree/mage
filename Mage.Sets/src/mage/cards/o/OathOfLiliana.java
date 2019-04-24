@@ -57,7 +57,7 @@ enum OathOfLilianaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        OathOfLilianaWatcher watcher = game.getState().getWatcher(OathOfLilianaWatcher.class);
+        OathOfLilianaWatcher watcher = (OathOfLilianaWatcher) game.getState().getWatchers().get(OathOfLilianaWatcher.class.getSimpleName());
         return watcher != null && watcher.enteredPlaneswalkerForPlayer(source.getControllerId());
     }
 
@@ -73,7 +73,7 @@ class OathOfLilianaWatcher extends Watcher {
     private final Set<UUID> players = new HashSet<>();
 
     public OathOfLilianaWatcher() {
-        super(WatcherScope.GAME);
+        super(OathOfLilianaWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public OathOfLilianaWatcher(final OathOfLilianaWatcher watcher) {

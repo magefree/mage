@@ -29,7 +29,7 @@ public final class TitansPresence extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("a colorless creature card from your hand");
 
     static {
-        filter.add(ColorlessPredicate.instance);
+        filter.add(new ColorlessPredicate());
     }
 
     public TitansPresence(UUID ownerId, CardSetInfo setInfo) {

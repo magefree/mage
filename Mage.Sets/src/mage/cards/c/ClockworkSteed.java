@@ -70,7 +70,7 @@ public final class ClockworkSteed extends CardImpl {
                 Zone.BATTLEFIELD,
                 new ClockworkSteedAddCountersSourceEffect(
                         CounterType.P1P0.createInstance(),
-                        ManacostVariableValue.instance,
+                        new ManacostVariableValue(),
                         true, true
                 ),
                 new ManaCostsImpl("{X}"),

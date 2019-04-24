@@ -10,6 +10,7 @@ import mage.constants.SubType;
 import mage.target.TargetPermanent;
 
 /**
+ *
  * @author TheElk801
  */
 public final class MaskToken extends TokenImpl {
@@ -17,8 +18,8 @@ public final class MaskToken extends TokenImpl {
     public MaskToken() {
         super(
                 "Mask", "white Aura enchantment token named Mask "
-                        + "attached to another target permanent. "
-                        + "The token has enchant permanent and totem armor."
+                + "attached to another target permanent. "
+                + "The token has enchant permanent and totem armor."
         );
         cardType.add(CardType.ENCHANTMENT);
         color.setWhite(true);
@@ -30,7 +31,6 @@ public final class MaskToken extends TokenImpl {
         ability.addEffect(new AttachEffect(Outcome.BoostCreature));
         this.addAbility(ability);
 
-        // Totem armor
         this.addAbility(new TotemArmorAbility());
     }
 

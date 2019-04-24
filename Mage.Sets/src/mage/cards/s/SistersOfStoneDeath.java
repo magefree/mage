@@ -1,5 +1,8 @@
+
 package mage.cards.s;
 
+import java.util.LinkedList;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -11,7 +14,11 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.Outcome;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -23,10 +30,8 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.LinkedList;
-import java.util.UUID;
-
 /**
+ *
  * @author jeffwadsworth
  */
 public final class SistersOfStoneDeath extends CardImpl {
@@ -34,7 +39,7 @@ public final class SistersOfStoneDeath extends CardImpl {
     private UUID exileId = UUID.randomUUID();
 
     public SistersOfStoneDeath(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}{G}{G}");
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}{G}{G}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.GORGON);
 
@@ -95,9 +100,7 @@ class SistersOfStoneDeathEffect extends OneShotEffect {
                 LinkedList<UUID> cards = new LinkedList<>(exile);
                 for (UUID cardId : cards) {
                     Card card = game.getCard(cardId);
-                    if (card != null) {
-                        cardsInExile.add(card);
-                    }
+                    cardsInExile.add(card);
                 }
                 if (controller.choose(Outcome.PutCreatureInPlay, cardsInExile, target, game)) {
                     Card chosenCard = game.getCard(target.getFirstTarget());

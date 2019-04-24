@@ -52,7 +52,7 @@ class TangleEffect extends OneShotEffect {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creature");
 
     static {
-        filter.add(AttackingPredicate.instance);
+        filter.add(new AttackingPredicate());
     }
 
     public TangleEffect() {

@@ -30,7 +30,7 @@ public final class FacelessButcher extends CardImpl {
 
 
     static {
-         filter.add(AnotherPredicate.instance);
+         filter.add(new AnotherPredicate());
     }
 
 

@@ -28,8 +28,8 @@ public final class GrimHaruspex extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another nontoken creature you control");
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(AnotherPredicate.instance);
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(new AnotherPredicate());
+        filter.add(Predicates.not(new TokenPredicate()));
     }
 
     public GrimHaruspex(UUID ownerId, CardSetInfo setInfo) {

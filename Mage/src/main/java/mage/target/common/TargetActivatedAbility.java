@@ -50,7 +50,6 @@ public class TargetActivatedAbility extends TargetObject {
         return stackObject != null
                 && stackObject.getStackAbility() != null
                 && stackObject.getStackAbility().getAbilityType() == AbilityType.ACTIVATED
-                && source != null
                 && filter.match(stackObject, source.getSourceId(), source.getControllerId(), game);
     }
 

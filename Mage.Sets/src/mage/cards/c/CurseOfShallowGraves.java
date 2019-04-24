@@ -1,3 +1,4 @@
+
 package mage.cards.c;
 
 import mage.abilities.Ability;
@@ -26,6 +27,7 @@ import mage.target.targetpointer.FixedTarget;
 import java.util.UUID;
 
 /**
+ *
  * @author LevelX2
  */
 public final class CurseOfShallowGraves extends CardImpl {
@@ -78,7 +80,7 @@ class CurseOfShallowTriggeredAbility extends TriggeredAbilityImpl {
         Permanent enchantment = game.getPermanent(this.getSourceId());
         if (enchantment != null
                 && enchantment.getAttachedTo() != null
-                && game.getCombat().getPlayerDefenders(game, false).contains(enchantment.getAttachedTo())) {
+                && game.getCombat().getPlayerDefenders(game).contains(enchantment.getAttachedTo())) {
             for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackingPlayerId()));
             }

@@ -83,7 +83,7 @@ enum ScaleguardSentinelsCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = game.getPermanentEntering(source.getSourceId());
         if (sourcePermanent != null) {
-            DragonOnTheBattlefieldWhileSpellWasCastWatcher watcher = game.getState().getWatcher(DragonOnTheBattlefieldWhileSpellWasCastWatcher.class);
+            DragonOnTheBattlefieldWhileSpellWasCastWatcher watcher = (DragonOnTheBattlefieldWhileSpellWasCastWatcher) game.getState().getWatchers().get(DragonOnTheBattlefieldWhileSpellWasCastWatcher.class.getSimpleName());
             return (watcher != null && watcher.castWithConditionTrue(sourcePermanent.getSpellAbility().getId()));
         }
         return false;

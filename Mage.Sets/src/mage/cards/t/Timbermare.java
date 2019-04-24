@@ -23,7 +23,7 @@ public final class Timbermare extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creatures");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public Timbermare(UUID ownerId, CardSetInfo setInfo) {

@@ -49,7 +49,7 @@ class CardsDiscardedThisTurnWatcher extends Watcher {
     private final Map<UUID, Integer> amountOfCardsDiscardedThisTurn = new HashMap<>();
 
     public CardsDiscardedThisTurnWatcher() {
-        super(WatcherScope.GAME);
+        super(CardsDiscardedThisTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public CardsDiscardedThisTurnWatcher(final CardsDiscardedThisTurnWatcher watcher) {
@@ -102,7 +102,7 @@ class DreamSalvageEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        CardsDiscardedThisTurnWatcher watcher = game.getState().getWatcher(CardsDiscardedThisTurnWatcher.class);
+        CardsDiscardedThisTurnWatcher watcher = (CardsDiscardedThisTurnWatcher) game.getState().getWatchers().get(CardsDiscardedThisTurnWatcher.class.getSimpleName());
         Player targetOpponent = game.getPlayer(source.getFirstTarget());
         Player controller = game.getPlayer(source.getControllerId());
         if (targetOpponent != null

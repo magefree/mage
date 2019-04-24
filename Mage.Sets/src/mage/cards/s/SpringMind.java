@@ -29,7 +29,7 @@ public final class SpringMind extends SplitCard {
         // Mind
         // Aftermath
         // Draw two cards.
-        getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
+        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility().setRuleAtTheTop(true));
         getRightHalfCard().getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
     }
 

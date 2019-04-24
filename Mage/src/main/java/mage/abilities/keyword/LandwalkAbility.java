@@ -1,3 +1,4 @@
+
 package mage.abilities.keyword;
 
 import mage.abilities.Ability;
@@ -10,6 +11,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class LandwalkAbility extends EvasionAbility {
@@ -58,7 +60,7 @@ class LandwalkEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
         if (game.getBattlefield().contains(filter, blocker.getControllerId(), 1, game)
                 && null == game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_LANDWALK, source, blocker.getControllerId(), game)) {
             switch (filter.getMessage()) {

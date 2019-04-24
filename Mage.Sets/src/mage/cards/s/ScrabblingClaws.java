@@ -1,6 +1,7 @@
 
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -22,9 +23,8 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInGraveyard;
 
-import java.util.UUID;
-
 /**
+ *
  * @author fireshoes
  */
 public final class ScrabblingClaws extends CardImpl {
@@ -33,27 +33,18 @@ public final class ScrabblingClaws extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // {tap}: Target player exiles a card from their graveyard.
-        Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
-                new ScrabblingClawsEffect(), new
-                TapSourceCost()
-        );
-        ability.addTarget(new TargetPlayer());
-        this.addAbility(ability);
-
+        Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScrabblingClawsEffect(), new TapSourceCost());
+        firstAbility.addTarget(new TargetPlayer());
+        this.addAbility(firstAbility);
         // {1}, Sacrifice Scrabbling Claws: Exile target card from a graveyard. Draw a card.
-        ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
-                new ExileTargetEffect(),
-                new GenericManaCost(1)
-        );
-        ability.addCost(new SacrificeSourceCost());
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new SacrificeSourceCost());
+        ability.addCost(new GenericManaCost(1));
         ability.addTarget(new TargetCardInGraveyard());
         ability.addEffect(new DrawCardSourceControllerEffect(1));
         this.addAbility(ability);
     }
 
-    private ScrabblingClaws(final ScrabblingClaws card) {
+    public ScrabblingClaws(final ScrabblingClaws card) {
         super(card);
     }
 
@@ -65,12 +56,12 @@ public final class ScrabblingClaws extends CardImpl {
 
 class ScrabblingClawsEffect extends OneShotEffect {
 
-    ScrabblingClawsEffect() {
+    public ScrabblingClawsEffect() {
         super(Outcome.Exile);
         this.staticText = "Target player exiles a card from their graveyard";
     }
 
-    private ScrabblingClawsEffect(final ScrabblingClawsEffect effect) {
+    public ScrabblingClawsEffect(final ScrabblingClawsEffect effect) {
         super(effect);
     }
 
@@ -82,16 +73,18 @@ class ScrabblingClawsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if (targetPlayer == null) {
-            return false;
+        if (targetPlayer != null) {
+            FilterCard filter = new FilterCard("card from your graveyard");
+            filter.add(new OwnerIdPredicate(targetPlayer.getId()));
+            TargetCardInGraveyard target = new TargetCardInGraveyard(filter);
+            if (targetPlayer.chooseTarget(Outcome.Exile, target, source, game)) {
+                Card card = game.getCard(target.getFirstTarget());
+                if (card != null) {
+                    targetPlayer.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
+                }
+                return true;
+            }
         }
-        FilterCard filter = new FilterCard("card from your graveyard");
-        filter.add(new OwnerIdPredicate(targetPlayer.getId()));
-        TargetCardInGraveyard target = new TargetCardInGraveyard(filter);
-        if (!targetPlayer.chooseTarget(Outcome.Exile, target, source, game)) {
-            return false;
-        }
-        Card card = game.getCard(target.getFirstTarget());
-        return card != null && targetPlayer.moveCards(card, Zone.EXILED, source, game);
+        return false;
     }
 }

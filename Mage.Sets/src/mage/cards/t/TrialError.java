@@ -32,7 +32,7 @@ public final class TrialError extends SplitCard {
     private static final FilterSpell filter = new FilterSpell("multicolored spell");
 
     static {
-        filter.add(MulticoloredPredicate.instance);
+        filter.add(new MulticoloredPredicate());
     }
 
     public TrialError(UUID ownerId, CardSetInfo setInfo) {

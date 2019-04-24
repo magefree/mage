@@ -61,10 +61,6 @@ public class TargetCardInLibrary extends TargetCard {
             targetPlayer = player;
         }
 
-        if (player == null) {
-            return false;
-        }
-
         List<Card> cards;
         if (librarySearchLimit == Integer.MAX_VALUE) {
             cards = targetPlayer.getLibrary().getCards(game);
@@ -76,17 +72,14 @@ public class TargetCardInLibrary extends TargetCard {
         for (Card card : cards) {
             cardsId.add(card);
         }
-
         while (!isChosen() && !doneChosing()) {
-            if (!player.canRespond()) {
-                return chosen = targets.size() >= minNumberOfTargets;
-            }
             chosen = targets.size() >= minNumberOfTargets;
             if (!player.chooseTarget(outcome, cardsId, this, null, game)) {
                 return chosen;
             }
             chosen = targets.size() >= minNumberOfTargets;
         }
+
         return chosen = true;
     }
 

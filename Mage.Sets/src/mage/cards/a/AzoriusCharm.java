@@ -29,13 +29,13 @@ public final class AzoriusCharm extends CardImpl {
 
         // or draw a card;
         Mode mode = new Mode();
-        mode.addEffect(new DrawCardSourceControllerEffect(1));
+        mode.getEffects().add(new DrawCardSourceControllerEffect(1));
         this.getSpellAbility().addMode(mode);
 
         // or put target attacking or blocking creature on top of its owner's library.
         mode = new Mode();
-        mode.addTarget(new TargetAttackingOrBlockingCreature());
-        mode.addEffect(new PutOnLibraryTargetEffect(true));
+        mode.getTargets().add(new TargetAttackingOrBlockingCreature());
+        mode.getEffects().add(new PutOnLibraryTargetEffect(true));
         this.getSpellAbility().addMode(mode);
     }
 

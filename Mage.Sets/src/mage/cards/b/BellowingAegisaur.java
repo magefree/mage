@@ -27,7 +27,7 @@ public final class BellowingAegisaur extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public BellowingAegisaur(UUID ownerId, CardSetInfo setInfo) {

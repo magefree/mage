@@ -4,7 +4,6 @@ package mage.game;
 
 import mage.game.match.MatchImpl;
 import mage.game.match.MatchOptions;
-import mage.game.mulligan.Mulligan;
 
 /**
  *
@@ -24,8 +23,7 @@ public class CommanderFreeForAllMatch extends MatchImpl {
             startLife = 30;
             alsoHand = true;  // commander going to hand allowed to go to command zone effective July 17, 2015
         }
-        Mulligan mulligan = options.getMulliganType().getMulligan(options.getFreeMulligans());
-        CommanderFreeForAll game = new CommanderFreeForAll(options.getAttackOption(), options.getRange(), mulligan, startLife);
+        CommanderFreeForAll game = new CommanderFreeForAll(options.getAttackOption(), options.getRange(), options.getFreeMulligans(), startLife);
         game.setStartMessage(this.createGameStartMessage());
         game.setAlsoHand(alsoHand);
         game.setAlsoLibrary(true);

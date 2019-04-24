@@ -28,8 +28,8 @@ public final class Skitterskin extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("you control another colorless creature");
 
     static {
-        filter.add(AnotherPredicate.instance);
-        filter.add(ColorlessPredicate.instance);
+        filter.add(new AnotherPredicate());
+        filter.add(new ColorlessPredicate());
     }
 
     public Skitterskin(UUID ownerId, CardSetInfo setInfo) {

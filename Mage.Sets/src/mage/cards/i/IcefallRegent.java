@@ -143,7 +143,7 @@ class IcefallRegentEffect extends ContinuousRuleModifyingEffectImpl {
 class IcefallRegentWatcher extends Watcher {
 
     IcefallRegentWatcher() {
-        super(WatcherScope.CARD);
+        super("ControlLost", WatcherScope.CARD);
     }
 
     IcefallRegentWatcher(IcefallRegentWatcher watcher) {

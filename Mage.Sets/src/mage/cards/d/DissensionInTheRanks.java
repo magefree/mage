@@ -17,10 +17,10 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class DissensionInTheRanks extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("blocking creature");
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("blocking creature");
 
     static {
-        filter.add(BlockingPredicate.instance);
+        filter.add(new BlockingPredicate());
     }
 
     public DissensionInTheRanks(UUID ownerId, CardSetInfo setInfo) {
@@ -34,7 +34,7 @@ public final class DissensionInTheRanks extends CardImpl {
 
         FilterCreaturePermanent filter2 = new FilterCreaturePermanent("another target blocking creature");
         filter2.add(new AnotherTargetPredicate(2));
-        filter2.add(BlockingPredicate.instance);
+        filter2.add(new BlockingPredicate());
         TargetCreaturePermanent target2 = new TargetCreaturePermanent(filter2);
         target2.setTargetTag(2);
         this.getSpellAbility().addTarget(target2);

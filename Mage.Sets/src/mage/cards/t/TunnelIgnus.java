@@ -1,5 +1,10 @@
+
 package mage.cards.t;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -16,11 +21,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
 
 /**
  * @author Loki
@@ -53,7 +53,7 @@ class TunnelIgnusWatcher extends Watcher {
     protected Map<UUID, Integer> counts = new HashMap<>();
 
     public TunnelIgnusWatcher() {
-        super(WatcherScope.PLAYER);
+        super(TunnelIgnusWatcher.class.getSimpleName(), WatcherScope.PLAYER);
     }
 
     public TunnelIgnusWatcher(final TunnelIgnusWatcher watcher) {
@@ -72,7 +72,8 @@ class TunnelIgnusWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.isLand() && game.getOpponents(this.controllerId).contains(permanent.getControllerId())) {
+            if (permanent.isLand() && game.getOpponents(this.controllerId).contains(permanent.getControllerId())) {
+
                 int count = counts.getOrDefault(permanent.getControllerId(), 0);
                 counts.put(permanent.getControllerId(), count + 1);
             }
@@ -110,7 +111,7 @@ class TunnelIgnusTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null && permanent.isLand() && game.getOpponents(this.controllerId).contains(permanent.getControllerId())) {
-            TunnelIgnusWatcher watcher = game.getState().getWatcher(TunnelIgnusWatcher.class, this.controllerId);
+            TunnelIgnusWatcher watcher = (TunnelIgnusWatcher) game.getState().getWatchers().get(TunnelIgnusWatcher.class.getSimpleName(), this.controllerId);
             if (watcher != null && watcher.counts.get(permanent.getControllerId()) > 1) {
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(permanent.getControllerId()));

@@ -22,7 +22,7 @@ public final class RewardsOfDiversity extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
-        filter.add(MulticoloredPredicate.instance);
+        filter.add(new MulticoloredPredicate());
     }
 
     public RewardsOfDiversity(UUID ownerId, CardSetInfo setInfo) {

@@ -13,6 +13,7 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
+ *
  * @author TheElk801
  */
 public class MentorAbility extends AttacksTriggeredAbility {
@@ -20,8 +21,8 @@ public class MentorAbility extends AttacksTriggeredAbility {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creature with lesser power");
 
     static {
-        filter.add(AttackingPredicate.instance);
-        filter.add(MentorAbilityPredicate.instance);
+        filter.add(new AttackingPredicate());
+        filter.add(new MentorAbilityPredicate());
     }
 
     public MentorAbility() {
@@ -45,8 +46,7 @@ public class MentorAbility extends AttacksTriggeredAbility {
 
 }
 
-enum MentorAbilityPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Card>> {
-    instance;
+class MentorAbilityPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Card>> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {

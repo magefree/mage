@@ -51,7 +51,7 @@ public final class BalduvianWarlord extends CardImpl {
         this.addAbility(ability, new BlockedByOnlyOneCreatureThisCombatWatcher());
     }
 
-    private BalduvianWarlord(final BalduvianWarlord card) {
+    public BalduvianWarlord(final BalduvianWarlord card) {
         super(card);
     }
 
@@ -69,7 +69,7 @@ class BalduvianWarlordUnblockEffect extends OneShotEffect {
         this.staticText = " Remove target blocking creature from combat. Creatures it was blocking that hadn't become blocked by another creature this combat become unblocked, then it blocks an attacking creature of your choice";
     }
 
-    private BalduvianWarlordUnblockEffect(final BalduvianWarlordUnblockEffect effect) {
+    public BalduvianWarlordUnblockEffect(final BalduvianWarlordUnblockEffect effect) {
         super(effect);
     }
 
@@ -89,7 +89,7 @@ class BalduvianWarlordUnblockEffect extends OneShotEffect {
             effect.apply(game, source);
 
             // Make blocked creatures unblocked
-            BlockedByOnlyOneCreatureThisCombatWatcher watcher = game.getState().getWatcher(BlockedByOnlyOneCreatureThisCombatWatcher.class);
+            BlockedByOnlyOneCreatureThisCombatWatcher watcher = (BlockedByOnlyOneCreatureThisCombatWatcher) game.getState().getWatchers().get(BlockedByOnlyOneCreatureThisCombatWatcher.class.getSimpleName());
             if (watcher != null) {
                 Set<CombatGroup> combatGroups = watcher.getBlockedOnlyByCreature(permanent.getId());
                 if (combatGroups != null) {

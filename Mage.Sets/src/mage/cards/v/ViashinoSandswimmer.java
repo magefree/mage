@@ -61,7 +61,7 @@ class ViashinoSandswimmerEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (controller != null && permanent != null) {
-            if (controller.flipCoin(source, game, true)) {
+            if (controller.flipCoin(game)) {
                 new ReturnToHandSourceEffect().apply(game, source);
                 return true;
             } else {

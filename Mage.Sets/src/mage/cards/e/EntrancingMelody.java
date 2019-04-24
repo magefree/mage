@@ -1,7 +1,9 @@
 
 package mage.cards.e;
 
+import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -12,24 +14,19 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
-
-import java.util.UUID;
 
 /**
+ *
  * @author TheElk801
  */
 public final class EntrancingMelody extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost X");
 
     public EntrancingMelody(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{U}{U}");
 
         // Gain control of target creature with converted mana cost X.
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.Custom, true));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.getSpellAbility().setTargetAdjuster(EntrancingMelodyAdjuster.instance);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature with converted mana cost X")));
     }
 
     public EntrancingMelody(final EntrancingMelody card) {
@@ -37,20 +34,18 @@ public final class EntrancingMelody extends CardImpl {
     }
 
     @Override
-    public EntrancingMelody copy() {
-        return new EntrancingMelody(this);
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability instanceof SpellAbility) {
+            ability.getTargets().clear();
+            int xValue = ability.getManaCostsToPay().getX();
+            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost X");
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
+            ability.addTarget(new TargetCreaturePermanent(filter));
+        }
     }
-}
-
-enum EntrancingMelodyAdjuster implements TargetAdjuster {
-    instance;
 
     @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        int xValue = ability.getManaCostsToPay().getX();
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost " + xValue);
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+    public EntrancingMelody copy() {
+        return new EntrancingMelody(this);
     }
 }

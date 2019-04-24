@@ -59,7 +59,7 @@ class ManaCacheEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterControlledLandPermanent();
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public ManaCacheEffect() {

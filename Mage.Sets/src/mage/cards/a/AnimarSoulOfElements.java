@@ -69,7 +69,7 @@ class AnimarCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        Ability spellAbility = abilityToModify;
+        Ability spellAbility = (SpellAbility) abilityToModify;
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent != null && spellAbility != null) {
             int amount = sourcePermanent.getCounters(game).getCount(CounterType.P1P1);

@@ -11,7 +11,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.FrogLizardToken;
+import mage.game.permanent.token.RapidHybridizationToken;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -59,7 +59,7 @@ class RapidHybridizationEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(targetPointer.getFirst(game, source));
         if (permanent != null) {
-            FrogLizardToken token = new FrogLizardToken();
+            RapidHybridizationToken token = new RapidHybridizationToken();
             token.putOntoBattlefield(1, game, source.getSourceId(), permanent.getControllerId());
         }
         return true;

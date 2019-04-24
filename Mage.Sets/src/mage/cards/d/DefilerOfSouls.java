@@ -72,7 +72,7 @@ class DefilerOfSoulsEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        filter.add(MonocoloredPredicate.instance);
+        filter.add(new MonocoloredPredicate());
         
         int amount;
         int realCount = game.getBattlefield().countAll(filter, player.getId(), game);
@@ -90,7 +90,7 @@ class DefilerOfSoulsEffect extends OneShotEffect {
             }
 
             for ( int idx = 0; idx < target.getTargets().size(); idx++) {
-                Permanent permanent = game.getPermanent(target.getTargets().get(idx));
+                Permanent permanent = game.getPermanent((UUID)target.getTargets().get(idx));
 
                 if ( permanent != null ) {
                     abilityApplied |= permanent.sacrifice(source.getSourceId(), game);

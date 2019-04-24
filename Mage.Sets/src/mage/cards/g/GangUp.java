@@ -1,7 +1,9 @@
 
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.AssistAbility;
 import mage.cards.CardImpl;
@@ -12,11 +14,9 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
-
-import java.util.UUID;
 
 /**
+ *
  * @author TheElk801
  */
 public final class GangUp extends CardImpl {
@@ -28,8 +28,8 @@ public final class GangUp extends CardImpl {
         this.addAbility(new AssistAbility());
 
         // Destroy target creature with power X or less.
-        this.getSpellAbility().addEffect(new DestroyTargetEffect("destroy target creature with power X or less"));
-        this.getSpellAbility().setTargetAdjuster(GangUpAdjuster.instance);
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature with power X or less")));
     }
 
     public GangUp(final GangUp card) {
@@ -37,20 +37,18 @@ public final class GangUp extends CardImpl {
     }
 
     @Override
-    public GangUp copy() {
-        return new GangUp(this);
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability instanceof SpellAbility) {
+            int xValue = ability.getManaCostsToPay().getX();
+            ability.getTargets().clear();
+            FilterCreaturePermanent filter = new FilterCreaturePermanent(new StringBuilder("creature with power ").append(xValue).append(" or less").toString());
+            filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, xValue + 1));
+            ability.addTarget(new TargetCreaturePermanent(filter));
+        }
     }
-}
-
-enum GangUpAdjuster implements TargetAdjuster {
-    instance;
 
     @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
-        ability.getTargets().clear();
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power " + xValue + " or less");
-        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, xValue + 1));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+    public GangUp copy() {
+        return new GangUp(this);
     }
 }

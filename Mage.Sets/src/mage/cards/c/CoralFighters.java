@@ -64,7 +64,8 @@ class CoralFightersEffect extends OneShotEffect {
         if(controller != null && defendingPlayer != null) {
             Card card = defendingPlayer.getLibrary().getFromTop(game);
             if(card != null) {
-                Cards cards = new CardsImpl(card);
+                Cards cards = new CardsImpl();
+                cards.add(card);
                 controller.lookAtCards("Coral Fighters", cards, game);
                 if (controller.chooseUse(outcome, "Do you wish to put card on the bottom of player's library?", source, game)) {
                     controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, false, false);

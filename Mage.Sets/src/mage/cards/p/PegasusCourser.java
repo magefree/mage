@@ -25,7 +25,7 @@ public final class PegasusCourser extends CardImpl {
     static final FilterAttackingCreature filter = new FilterAttackingCreature("another target attacking creature");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public PegasusCourser(UUID ownerId, CardSetInfo setInfo) {

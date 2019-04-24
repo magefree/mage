@@ -63,7 +63,7 @@ class DracoplasmEffect extends ReplacementEffectImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public DracoplasmEffect() {

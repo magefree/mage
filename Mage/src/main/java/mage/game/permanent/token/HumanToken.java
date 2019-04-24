@@ -1,12 +1,14 @@
+
+
 package mage.game.permanent.token;
 
-import mage.MageInt;
+import java.util.Arrays;
 import mage.constants.CardType;
 import mage.constants.SubType;
-
-import java.util.Arrays;
+import mage.MageInt;
 
 /**
+ *
  * @author LoneFox
  */
 public final class HumanToken extends TokenImpl {
@@ -18,7 +20,7 @@ public final class HumanToken extends TokenImpl {
         subtype.add(SubType.HUMAN);
         power = new MageInt(1);
         toughness = new MageInt(1);
-        availableImageSetCodes.addAll(Arrays.asList("DKA", "AVR", "FNMP", "RNA"));
+        availableImageSetCodes.addAll(Arrays.asList("DKA", "AVR", "FNMP"));
     }
 
     public HumanToken(final HumanToken token) {
@@ -26,7 +28,7 @@ public final class HumanToken extends TokenImpl {
     }
 
     @Override
-    public HumanToken copy() {
+        public HumanToken copy() {
         return new HumanToken(this);
     }
 

@@ -1,7 +1,9 @@
 
 package mage.cards.r;
 
+import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -11,11 +13,9 @@ import mage.constants.CardType;
 import mage.game.Game;
 import mage.game.permanent.token.GremlinToken;
 import mage.target.common.TargetArtifactPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
-
-import java.util.UUID;
 
 /**
+ *
  * @author Styxo
  */
 public final class ReleaseTheGremlins extends CardImpl {
@@ -28,9 +28,17 @@ public final class ReleaseTheGremlins extends CardImpl {
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
 
         // Create X 2/2 red Gremlin creature tokens.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new GremlinToken(), ManacostVariableValue.instance));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new GremlinToken(), new ManacostVariableValue()));
 
-        this.getSpellAbility().setTargetAdjuster(ReleaseTheGremlinsAdjuster.instance);
+    }
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability instanceof SpellAbility) {
+            ability.getTargets().clear();
+            int xValue = ability.getManaCostsToPay().getX();
+            ability.addTarget(new TargetArtifactPermanent(xValue, xValue));
+        }
     }
 
     public ReleaseTheGremlins(final ReleaseTheGremlins card) {
@@ -40,15 +48,5 @@ public final class ReleaseTheGremlins extends CardImpl {
     @Override
     public ReleaseTheGremlins copy() {
         return new ReleaseTheGremlins(this);
-    }
-}
-
-enum ReleaseTheGremlinsAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        ability.addTarget(new TargetArtifactPermanent(ability.getManaCostsToPay().getX()));
     }
 }

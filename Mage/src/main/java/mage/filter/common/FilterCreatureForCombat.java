@@ -18,7 +18,7 @@ public class FilterCreatureForCombat extends FilterCreatureForCombatBase {
 
     public FilterCreatureForCombat(String name) {
         super(name);
-        this.add(Predicates.not(TappedPredicate.instance));
+        this.add(Predicates.not(new TappedPredicate()));
     }
 
     public FilterCreatureForCombat(final FilterCreatureForCombat filter) {

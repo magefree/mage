@@ -27,7 +27,7 @@ public final class GruesomeSlaughter extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("colorless creatures you control");
 
     static {
-        filter.add(ColorlessPredicate.instance);
+        filter.add(new ColorlessPredicate());
     }
 
     public GruesomeSlaughter(UUID ownerId, CardSetInfo setInfo) {

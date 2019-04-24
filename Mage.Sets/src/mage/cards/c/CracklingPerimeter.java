@@ -27,7 +27,7 @@ public final class CracklingPerimeter extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.GATE));
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public CracklingPerimeter(UUID ownerId, CardSetInfo setInfo) {

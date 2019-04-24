@@ -30,10 +30,10 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class SentinelOfThePearlTrident extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("historic permanent you control");
+    private final static FilterControlledPermanent filter = new FilterControlledPermanent("historic permanent you control");
 
     static {
-        filter.add(HistoricPredicate.instance);
+        filter.add(new HistoricPredicate());
     }
 
     public SentinelOfThePearlTrident(UUID ownerId, CardSetInfo setInfo) {

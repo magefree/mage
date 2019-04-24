@@ -52,7 +52,7 @@ class CastWhiteSpellThisTurnCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        PatriciansScornWatcher watcher = game.getState().getWatcher(PatriciansScornWatcher.class, source.getSourceId());
+        PatriciansScornWatcher watcher = (PatriciansScornWatcher) game.getState().getWatchers().get(PatriciansScornWatcher.class.getSimpleName(), source.getSourceId());
         if (watcher != null) {
             return watcher.conditionMet();
         }
@@ -73,7 +73,7 @@ class PatriciansScornWatcher extends Watcher {
     }
 
     public PatriciansScornWatcher() {
-        super(WatcherScope.CARD);
+        super(PatriciansScornWatcher.class.getSimpleName(), WatcherScope.CARD);
     }
 
     public PatriciansScornWatcher(final PatriciansScornWatcher watcher) {
@@ -98,4 +98,8 @@ class PatriciansScornWatcher extends Watcher {
         }
     }
 
+    @Override
+    public void reset() {
+        super.reset();
+    }
 }

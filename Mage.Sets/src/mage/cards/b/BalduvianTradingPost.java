@@ -34,7 +34,7 @@ public final class BalduvianTradingPost extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.MOUNTAIN));
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public BalduvianTradingPost(UUID ownerId, CardSetInfo setInfo) {

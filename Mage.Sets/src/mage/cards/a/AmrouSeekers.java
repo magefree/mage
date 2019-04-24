@@ -22,7 +22,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public final class AmrouSeekers extends CardImpl {
 
-    private static final FilterCreaturePermanent notArtificatOrWhite = new FilterCreaturePermanent("except by artifact creatures and/or white creatures");
+    private final static FilterCreaturePermanent notArtificatOrWhite = new FilterCreaturePermanent("except by artifact creatures and/or white creatures");
 
     static {
         notArtificatOrWhite.add(Predicates.not(

@@ -1,5 +1,7 @@
+
 package mage.cards.w;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -9,15 +11,14 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.constants.Duration;
 import mage.constants.TurnPhase;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.UUID;
-
 /**
+ *
  * @author L_J (based on LevelX2)
  */
 public final class WallOfDust extends CardImpl {
@@ -75,7 +76,7 @@ class WallOfDustRestrictionEffect extends RestrictionEffect {
         if (targetPermanent == null) {
             return true;
         }
-        if (nextTurnTargetController == 0 && getStartingTurnNum() != game.getTurnNum() && game.isActivePlayer(targetPermanent.getControllerId())) {
+        if (nextTurnTargetController == 0 && startingTurn != game.getTurnNum() && game.isActivePlayer(targetPermanent.getControllerId())) {
             nextTurnTargetController = game.getTurnNum();
         }
         return game.getPhase().getType() == TurnPhase.END && nextTurnTargetController > 0 && game.getTurnNum() > nextTurnTargetController;
@@ -94,12 +95,14 @@ class WallOfDustRestrictionEffect extends RestrictionEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getId().equals(getTargetPointer().getFirst(game, source))) {
-            return game.isActivePlayer(permanent.getControllerId());
+            if (game.isActivePlayer(permanent.getControllerId())) {
+                return true;
+            }
         }
         return false;
     }
 
-    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
+    public boolean canAttack(Game game) {
         return false;
     }
 }

@@ -33,7 +33,7 @@ public final class OverseerOfTheDamned extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(Predicates.not(new TokenPredicate()));
     }
 
     public OverseerOfTheDamned(UUID ownerId, CardSetInfo setInfo) {

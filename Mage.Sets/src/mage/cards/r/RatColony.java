@@ -28,7 +28,7 @@ public final class RatColony extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.RAT));
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public RatColony(UUID ownerId, CardSetInfo setInfo) {

@@ -64,12 +64,10 @@ class PowerSurgeDamageEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
-            PowerSurgeWatcher watcher = game.getState().getWatcher(PowerSurgeWatcher.class);
-            if(watcher != null) {
-                int damage = watcher.getUntappedLandCount();
-                player.damage(damage, source.getSourceId(), game, false, true);
-                return true;
-            }
+            PowerSurgeWatcher watcher = (PowerSurgeWatcher) game.getState().getWatchers().get(PowerSurgeWatcher.class.getSimpleName());
+            int damage = watcher.getUntappedLandCount();
+            player.damage(damage, source.getSourceId(), game, false, true);
+            return true;
         }
         return false;
     }
@@ -85,13 +83,13 @@ class PowerSurgeWatcher extends Watcher {
     private static final FilterPermanent filter = new FilterControlledLandPermanent();
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     private int untappedLandCount;
 
     public PowerSurgeWatcher() {
-        super(WatcherScope.GAME);
+        super(PowerSurgeWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public PowerSurgeWatcher(final PowerSurgeWatcher watcher) {

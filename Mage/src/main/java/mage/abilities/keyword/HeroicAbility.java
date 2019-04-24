@@ -1,6 +1,7 @@
 
 package mage.abilities.keyword;
 
+import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -11,33 +12,24 @@ import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.target.Target;
 
-import java.util.UUID;
-
 /**
  * Heroic
+ *
  *
  * @author LevelX2
  */
 public class HeroicAbility extends TriggeredAbilityImpl {
-
-    private final boolean isHeroic;
 
     public HeroicAbility(Effect effect) {
         this(effect, false);
     }
 
     public HeroicAbility(Effect effect, boolean optional) {
-        this(effect, optional, true);
-    }
-
-    public HeroicAbility(Effect effect, boolean optional, boolean isHeroic) {
         super(Zone.BATTLEFIELD, effect, optional);
-        this.isHeroic = isHeroic;
     }
 
     public HeroicAbility(final HeroicAbility ability) {
         super(ability);
-        this.isHeroic = ability.isHeroic;
     }
 
     @Override
@@ -85,6 +77,6 @@ public class HeroicAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return (isHeroic ? "<i>Heroic</i> &mdash; " : "") + "Whenever you cast a spell that targets {this}, " + super.getRule();
+        return new StringBuilder("<i>Heroic</i> &mdash; Whenever you cast a spell that targets {this}, ").append(super.getRule()).toString();
     }
 }

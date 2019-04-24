@@ -1,6 +1,6 @@
+
 package org.mage.test.cards.rules;
 
-import mage.constants.EmptyNames;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
+ *
  * @author LevelX2
  */
 public class CantCastTest extends CardTestPlayerBase {
@@ -112,7 +113,7 @@ public class CantCastTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+        assertPermanentCount(playerA, "", 0);
         assertHandCount(playerA, "Pine Walker", 1);
 
     }

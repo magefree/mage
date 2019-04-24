@@ -1,28 +1,26 @@
 
 package mage.watchers.common;
 
-import mage.MageObjectReference;
-import mage.constants.WatcherScope;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.watchers.Watcher;
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import mage.MageObjectReference;
+import mage.constants.WatcherScope;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.watchers.Watcher;
 
 /**
  * @author magenoxx_at_gmail.com
  */
 public class AttackedThisTurnWatcher extends Watcher {
 
-    private final Set<MageObjectReference> attackedThisTurnCreatures = new HashSet<>();
-    private final Map<MageObjectReference, Integer> attackedThisTurnCreaturesCounts = new HashMap<>();
+    protected final Set<MageObjectReference> attackedThisTurnCreatures = new HashSet<>();
+    protected final Map<MageObjectReference, Integer> attackedThisTurnCreaturesCounts = new HashMap<>();
 
     public AttackedThisTurnWatcher() {
-        super(WatcherScope.GAME);
+        super(AttackedThisTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public AttackedThisTurnWatcher(final AttackedThisTurnWatcher watcher) {
@@ -47,15 +45,6 @@ public class AttackedThisTurnWatcher extends Watcher {
 
     public Map<MageObjectReference, Integer> getAttackedThisTurnCreaturesCounts() {
         return this.attackedThisTurnCreaturesCounts;
-    }
-
-    public boolean checkIfAttacked(Permanent permanent, Game game) {
-        for (MageObjectReference mor : attackedThisTurnCreatures) {
-            if (mor.refersTo(permanent, game)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     @Override

@@ -22,7 +22,7 @@ public final class MoltenNursery extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("a colorless spell");
 
     static {
-        filter.add(ColorlessPredicate.instance);
+        filter.add(new ColorlessPredicate());
     }
 
     public MoltenNursery(UUID ownerId, CardSetInfo setInfo) {

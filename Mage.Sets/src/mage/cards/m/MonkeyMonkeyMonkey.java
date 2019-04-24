@@ -80,8 +80,8 @@ class ChooseLetterEffect extends OneShotEffect {
         ChoiceImpl choice = new ChoiceImpl(true);
         choice.setMessage("Choose letter");
         Set<String> choices = new HashSet<>();
-        for (char letter = 'A'; letter <= 'Z'; letter++) {
-            choices.add(Character.toString(letter));
+        for (Character letter = 'A'; letter <= 'Z'; letter++) {
+            choices.add(letter.toString());
         }
         choice.setChoices(choices);
 
@@ -122,8 +122,8 @@ class MonkeyMonkeyMonkeyCount implements DynamicValue {
             if (permanent != null && game.getState().getValue(mageObject.getId() + "_letter") != null) {
                 int letters = 0;
                 for (Permanent p : game.getBattlefield().getActivePermanents(new FilterNonlandPermanent(), sourceAbility.getControllerId(), sourceAbility.getSourceId(), game)) {
-                    char initial = Character.toUpperCase(p.getName().charAt(0));
-                    if (Character.toString(initial).equals(game.getState().getValue(mageObject.getId() + "_letter"))) {
+                    Character initial = Character.toUpperCase(p.getName().charAt(0));
+                    if (initial.toString().equals(game.getState().getValue(mageObject.getId() + "_letter"))) {
                         letters++;
                     }
                 }

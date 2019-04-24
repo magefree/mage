@@ -20,7 +20,7 @@ public final class Assassinate extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(new TappedPredicate());
     }
 
     public Assassinate(UUID ownerId, CardSetInfo setInfo) {

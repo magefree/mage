@@ -27,7 +27,7 @@ public final class LegionGuildmage extends CardImpl {
             = new FilterCreaturePermanent("another creature");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public LegionGuildmage(UUID ownerId, CardSetInfo setInfo) {

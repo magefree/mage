@@ -32,6 +32,7 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
      * Attention: This effect won't work with targets controlled by different
      * controllers If this is needed, the validForTurnNum has to be saved per
      * controller.
+     *
      */
     public DontUntapInControllersNextUntapStepTargetEffect() {
         this("");
@@ -42,9 +43,10 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
     }
 
     /**
-     * @param targetName               used as target text for the generated rule text
+     *
+     * @param targetName used as target text for the generated rule text
      * @param onlyIfControlledByPlayer the effect only works if the permanent is
-     *                                 controlled by that controller, null = it works for all players
+     * controlled by that controller, null = it works for all players
      */
     public DontUntapInControllersNextUntapStepTargetEffect(String targetName, UUID onlyIfControlledByPlayer) {
         this(targetName, false, onlyIfControlledByPlayer);
@@ -114,7 +116,7 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
                     }
                 }
             }
-
+            
             if (allHandled) {
                 discard();
             }
@@ -147,7 +149,8 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
             } else
                 return targetName + " doesn't untap during its controller's next " + (twoSteps ? "two " : "") + "untap step" + (twoSteps ? "s" : "");
         } else {
-            return "target " + (mode == null || mode.getTargets().isEmpty() ? "creature" : mode.getTargets().get(0).getTargetName()) + " doesn't untap during its controller's next " + (twoSteps ? "two " : "") + "untap step" + (twoSteps ? "s" : "");
+            return "target " + (mode == null ? "creature" : mode.getTargets().get(0).getTargetName()) + " doesn't untap during its controller's next " + (twoSteps ? "two " : "") + "untap step" + (twoSteps ? "s" : "");
         }
     }
+
 }

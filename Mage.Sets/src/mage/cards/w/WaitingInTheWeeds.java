@@ -48,7 +48,7 @@ class WaitingInTheWeedsEffect extends OneShotEffect {
 
     static {
         filter.add(new SubtypePredicate(SubType.FOREST));
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public WaitingInTheWeedsEffect() {

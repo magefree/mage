@@ -1,13 +1,15 @@
-package mage.game.tournament;
 
-import mage.cards.decks.Deck;
-import mage.game.draft.DraftCube;
+
+package mage.game.tournament;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import mage.cards.decks.Deck;
+import mage.game.draft.DraftCube;
 
 /**
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class LimitedOptions implements Serializable {
@@ -18,7 +20,6 @@ public class LimitedOptions implements Serializable {
     protected DraftCube draftCube;
     protected int numberBoosters;
     protected boolean isRandom;
-    protected boolean isRichMan;
     protected Deck cubeFromDeck = null;
 
     public List<String> getSetCodes() {
@@ -65,19 +66,11 @@ public class LimitedOptions implements Serializable {
         this.numberBoosters = numberBoosters;
     }
 
-    public boolean getIsRandom() {
+    public boolean getIsRandom(){
         return isRandom;
     }
-
-    public void setIsRandom(boolean isRandom) {
+    public void setIsRandom(boolean isRandom){
         this.isRandom = isRandom;
     }
 
-    public boolean getIsRichMan() {
-        return isRichMan;
-    }
-
-    public void setIsRichMan(boolean isRichMan) {
-        this.isRichMan = isRichMan;
-    }
 }

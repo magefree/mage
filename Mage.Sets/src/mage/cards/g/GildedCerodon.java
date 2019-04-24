@@ -1,3 +1,4 @@
+
 package mage.cards.g;
 
 import java.util.UUID;
@@ -65,8 +66,12 @@ class GildedCerodonCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        return (!game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game).isEmpty()
-                || !controller.getGraveyard().getCards(filter2, game).isEmpty());
+        if (controller != null
+                && (!game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game).isEmpty()
+                || controller.getGraveyard().count(filter2, game) > 0)) {
+            return true;
+        }
+        return false;
     }
 
     @Override

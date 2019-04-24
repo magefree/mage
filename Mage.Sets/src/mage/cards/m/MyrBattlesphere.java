@@ -105,7 +105,7 @@ class MyrBattlesphereEffect extends OneShotEffect {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Myr you control");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
         filter.add(new SubtypePredicate(SubType.MYR));
     }
 
@@ -125,7 +125,7 @@ class MyrBattlesphereEffect extends OneShotEffect {
             Permanent myr = game.getPermanentOrLKIBattlefield(source.getSourceId());
             int tappedAmount = 0;
             TargetPermanent target = new TargetPermanent(0, 1, filter, true);
-            while (controller.canRespond()) {
+            while (true && controller.canRespond()) {
                 target.clearChosen();
                 if (target.canChoose(source.getControllerId(), game)) {
                     Map<String, Serializable> options = new HashMap<>();
@@ -145,7 +145,7 @@ class MyrBattlesphereEffect extends OneShotEffect {
                 }
             }
             if (tappedAmount > 0) {
-                game.informPlayers(controller.getLogName() + " taps " + tappedAmount + " Myrs");
+                game.informPlayers(new StringBuilder(controller.getLogName()).append(" taps ").append(tappedAmount).append(" Myrs").toString());
                 // boost effect
                 game.addEffect(new BoostSourceEffect(tappedAmount, 0, Duration.EndOfTurn), source);
                 // damage to defender

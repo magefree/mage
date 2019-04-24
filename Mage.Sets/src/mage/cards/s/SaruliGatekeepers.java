@@ -1,12 +1,13 @@
+
+
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.hint.ConditionHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -15,9 +16,8 @@ import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
-import java.util.UUID;
-
 /**
+ *
  * @author LevelX2
  */
 
@@ -25,15 +25,12 @@ import java.util.UUID;
 public final class SaruliGatekeepers extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
-
     static {
         filter.add(new SubtypePredicate(SubType.GATE));
     }
 
-    private static final Condition gatesCondition = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1);
-
-    public SaruliGatekeepers(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
+    public SaruliGatekeepers (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.WARRIOR);
 
@@ -43,12 +40,11 @@ public final class SaruliGatekeepers extends CardImpl {
         // When Saruli Gatekeepers enters the battlefield, if you control two or more Gates, gain 7 life.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new GainLifeEffect(7)),
-                gatesCondition,
-                "When {this} enters the battlefield, if you control two or more Gates, gain 7 life.")
-                .addHint(new ConditionHint(gatesCondition, "You control two or more Gates")));
+                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1),
+                "When {this} enters the battlefield, if you control two or more Gates, gain 7 life."));
     }
 
-    public SaruliGatekeepers(final SaruliGatekeepers card) {
+    public SaruliGatekeepers (final SaruliGatekeepers card) {
         super(card);
     }
 

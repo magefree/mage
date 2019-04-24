@@ -1,3 +1,4 @@
+
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
@@ -9,6 +10,7 @@ import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
 /**
+ *
  * @author LevelX2
  */
 public class LoseCreatureTypeSourceEffect extends ContinuousEffectImpl implements SourceEffect {
@@ -63,7 +65,7 @@ public class LoseCreatureTypeSourceEffect extends ContinuousEffectImpl implement
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
                         permanent.getCardType().remove(CardType.CREATURE);
-                        permanent.getSubtype(game).retainAll(SubType.getLandTypes());
+                        permanent.getSubtype(game).retainAll(SubType.getLandTypes(false));
                         if (permanent.isAttacking() || permanent.getBlocking() > 0) {
                             permanent.removeFromCombat(game);
                         }

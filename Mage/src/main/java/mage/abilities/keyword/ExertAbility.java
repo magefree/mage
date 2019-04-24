@@ -109,7 +109,7 @@ class ExertReplacementEffect extends ReplacementEffectImpl {
         if (creature != null && controller != null) {
             if (exertOnlyOncePerTurn) {
                 MageObjectReference creatureReference = new MageObjectReference(creature.getId(), creature.getZoneChangeCounter(game), game);
-                ExertedThisTurnWatcher watcher = game.getState().getWatcher(ExertedThisTurnWatcher.class);
+                ExertedThisTurnWatcher watcher = (ExertedThisTurnWatcher) game.getState().getWatchers().get(ExertedThisTurnWatcher.class.getSimpleName());
                 if (watcher != null && watcher.getExertedThisTurnCreatures().contains(creatureReference)) {
                     return false;
                 }
@@ -145,7 +145,7 @@ class ExertedThisTurnWatcher extends Watcher {
     private final Set<MageObjectReference> exertedThisTurnCreatures;
 
     public ExertedThisTurnWatcher() {
-        super(WatcherScope.GAME);
+        super(ExertedThisTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
         exertedThisTurnCreatures = new HashSet<>();
     }
 

@@ -56,7 +56,7 @@ class VeteranBodyguardEffect extends ReplacementEffectImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("unblocked creatures");
 
     static {
-        filter.add(UnblockedPredicate.instance);
+        filter.add(new UnblockedPredicate());
     }
 
     VeteranBodyguardEffect() {

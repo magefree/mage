@@ -20,7 +20,7 @@ public final class Excise extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creature");
     static {
-        filter.add(AttackingPredicate.instance);
+        filter.add(new AttackingPredicate());
     }
 
     public Excise(UUID ownerId, CardSetInfo setInfo) {
@@ -28,7 +28,7 @@ public final class Excise extends CardImpl {
 
         // Excise target nonwhite attacking creature unless its controller pays {X}. 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.getSpellAbility().addEffect(new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new ExileTargetEffect(), ManacostVariableValue.instance));
+        this.getSpellAbility().addEffect(new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new ExileTargetEffect(), new ManacostVariableValue()));
     }
 
     public Excise(final Excise card) {

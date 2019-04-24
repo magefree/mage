@@ -135,7 +135,7 @@ class CelestialDawnToWhiteEffect extends ContinuousEffectImpl {
             // Command
             for (CommandObject commandObject : game.getState().getCommand()) {
                 if (commandObject instanceof Commander) {
-                    if (commandObject.isControlledBy(controller.getId())) {
+                    if (commandObject.getControllerId().equals(controller.getId())) {
                         setColor(commandObject.getColor(game), game);
                     }
                 }

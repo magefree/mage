@@ -63,7 +63,7 @@ class HarshJusticeTriggeredAbility extends DelayedTriggeredAbility {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creature");
 
     static {
-        filter.add(AttackingPredicate.instance);
+        filter.add(new AttackingPredicate());
     }
 
     public HarshJusticeTriggeredAbility() {

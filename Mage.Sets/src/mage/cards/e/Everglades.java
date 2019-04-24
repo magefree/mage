@@ -30,7 +30,7 @@ public final class Everglades extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.SWAMP));
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public Everglades(UUID ownerId, CardSetInfo setInfo) {

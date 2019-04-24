@@ -93,7 +93,7 @@ class GracefulReprieveDelayedTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (target.refersTo(((ZoneChangeEvent) event).getTarget(), game)) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.isDiesEvent()) {
+            if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
                 getEffects().setTargetPointer(new FixedTarget(target.getSourceId()));
                 return true;
             }

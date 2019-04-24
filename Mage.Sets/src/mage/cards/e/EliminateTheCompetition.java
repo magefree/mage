@@ -1,3 +1,4 @@
+
 package mage.cards.e;
 
 import java.util.UUID;
@@ -8,11 +9,11 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
 
 /**
  *
@@ -21,7 +22,7 @@ import mage.target.targetadjustment.TargetAdjuster;
 public final class EliminateTheCompetition extends CardImpl {
 
     public EliminateTheCompetition(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}");
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");
 
         // As an additional cost to cast Eliminate the Competition, sacrifice X creatures.
         this.getSpellAbility().addCost(new SacrificeXTargetCost(new FilterControlledCreaturePermanent("creatures"), true));
@@ -31,7 +32,6 @@ public final class EliminateTheCompetition extends CardImpl {
         effect.setText("Destroy X target creatures");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().setTargetAdjuster(EliminateTheCompetitionAdjuster.instance);
     }
 
     public EliminateTheCompetition(final EliminateTheCompetition card) {
@@ -39,18 +39,16 @@ public final class EliminateTheCompetition extends CardImpl {
     }
 
     @Override
-    public EliminateTheCompetition copy() {
-        return new EliminateTheCompetition(this);
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability.getAbilityType() == AbilityType.SPELL) {
+            ability.getTargets().clear();
+            int sac = new GetXValue().calculate(game, ability, null);
+            ability.addTarget(new TargetCreaturePermanent(sac, sac));
+        }
     }
-}
-
-enum EliminateTheCompetitionAdjuster implements TargetAdjuster {
-    instance;
 
     @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        int sac = GetXValue.instance.calculate(game, ability, null);
-        ability.addTarget(new TargetCreaturePermanent(sac, sac));
+    public EliminateTheCompetition copy() {
+        return new EliminateTheCompetition(this);
     }
 }

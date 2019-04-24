@@ -92,7 +92,7 @@ class MagisterOfWorthVoteEffect extends OneShotEffect {
                 new MagisterOfWorthReturnFromGraveyardEffect().apply(game, source);
             } else {
                 FilterPermanent filter = new FilterCreaturePermanent("creatures other than {this}");
-                filter.add(AnotherPredicate.instance);
+                filter.add(new AnotherPredicate());
                 new DestroyAllEffect(filter).apply(game, source);
             }
             return true;

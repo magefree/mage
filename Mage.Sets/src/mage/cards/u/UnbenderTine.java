@@ -26,7 +26,7 @@ public final class UnbenderTine extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("another target permanent");
     
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public UnbenderTine(UUID ownerId, CardSetInfo setInfo) {

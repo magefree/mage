@@ -1,5 +1,7 @@
+
 package mage.cards.e;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
@@ -13,16 +15,19 @@ import mage.abilities.effects.common.combat.CantAttackTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.turn.Step;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.UUID;
-
 /**
+ *
  * @author jeffwadsworth
  */
 public final class EdificeOfAuthority extends CardImpl {
@@ -128,21 +133,24 @@ class EdificeOfAuthorityRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return this.targetPointer.getTargets(game, source).contains(permanent.getId());
-    }
-
-    @Override
-    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
+        if (this.targetPointer.getTargets(game, source).contains(permanent.getId())) {
+            return true;
+        }
         return false;
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canAttack(Game game) {
         return false;
     }
 
     @Override
-    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        return false;
+    }
+
+    @Override
+    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game) {
         return false;
     }
 

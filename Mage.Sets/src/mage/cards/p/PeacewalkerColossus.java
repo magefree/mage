@@ -29,7 +29,7 @@ public final class PeacewalkerColossus extends CardImpl {
     private static final FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("another target vehicle");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
         filter.add(new SubtypePredicate(SubType.VEHICLE));
     }
 

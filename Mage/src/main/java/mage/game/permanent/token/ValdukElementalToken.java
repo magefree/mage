@@ -16,7 +16,7 @@ import mage.abilities.keyword.TrampleAbility;
  */
 public final class ValdukElementalToken extends TokenImpl {
 
-    static final private List<String> tokenImageSets = new ArrayList<>();
+    final static private List<String> tokenImageSets = new ArrayList<>();
     static {
         tokenImageSets.addAll(Arrays.asList("DOM"));
     }

@@ -6,10 +6,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
+ *
  * @author North
  */
-public enum BlockedPredicate implements Predicate<Permanent> {
-    instance;
+public class BlockedPredicate implements Predicate<Permanent> {
 
     @Override
     public boolean apply(Permanent input, Game game) {

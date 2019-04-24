@@ -1,5 +1,7 @@
+
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -23,9 +25,8 @@ import mage.target.TargetPermanent;
 import mage.util.CardUtil;
 import org.apache.log4j.Logger;
 
-import java.util.UUID;
-
 /**
+ *
  * @author LevelX2
  */
 public final class DetentionSphere extends CardImpl {
@@ -80,12 +81,12 @@ class DetentionSphereEntersEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (sourceObject != null && exileId != null && targetPermanent != null && controller != null) {
 
-            if (CardUtil.haveEmptyName(targetPermanent)) { // face down creature
+            if (targetPermanent.getName().isEmpty()) { // face down creature
                 controller.moveCardToExileWithInfo(targetPermanent, exileId, sourceObject.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true);
             } else {
                 String name = targetPermanent.getName();
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-                    if (permanent != null && CardUtil.haveSameNames(permanent.getName(), name)) {
+                    if (permanent != null && permanent.getName().equals(name)) {
                         controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true);
                     }
                 }

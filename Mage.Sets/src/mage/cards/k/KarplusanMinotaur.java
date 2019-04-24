@@ -1,11 +1,12 @@
 
 package mage.cards.k;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
@@ -15,17 +16,14 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.CoinFlippedEvent;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetOpponent;
-import mage.target.targetadjustment.TargetAdjuster;
-
-import java.util.UUID;
 
 /**
+ *
  * @author L_J
  */
 public final class KarplusanMinotaur extends CardImpl {
@@ -41,10 +39,36 @@ public final class KarplusanMinotaur extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new KarplusanMinotaurCost()));
 
         // Whenever you win a coin flip, Karplusan Minotaur deals 1 damage to any target.
-        this.addAbility(new KarplusanMinotaurFlipWinTriggeredAbility());
+        Ability abilityWin = new KarplusanMinotaurFlipWinTriggeredAbility();
+        abilityWin.addTarget(new TargetAnyTarget());
+        this.addAbility(abilityWin);
 
+        //TODO: Make ability properly copiable
         // Whenever you lose a coin flip, Karplusan Minotaur deals 1 damage to any target of an opponent's choice.
-        this.addAbility(new KarplusanMinotaurFlipLoseTriggeredAbility());
+        Ability abilityLose = new KarplusanMinotaurFlipLoseTriggeredAbility();
+        abilityLose.addTarget(new TargetAnyTarget());
+        this.addAbility(abilityLose);
+    }
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability instanceof KarplusanMinotaurFlipLoseTriggeredAbility) {
+            Player controller = game.getPlayer(ability.getControllerId());
+            if (controller != null) {
+                UUID opponentId = null;
+                if (game.getOpponents(controller.getId()).size() > 1) {
+                    Target target = new TargetOpponent(true);
+                    if (controller.chooseTarget(Outcome.Neutral, target, ability, game)) {
+                        opponentId = target.getFirstTarget();
+                    }
+                } else {
+                    opponentId = game.getOpponents(controller.getId()).iterator().next();
+                }
+                if (opponentId != null) {
+                    ability.getTargets().get(0).setTargetController(opponentId);
+                }
+            }
+        }
     }
 
     public KarplusanMinotaur(final KarplusanMinotaur card) {
@@ -61,7 +85,6 @@ class KarplusanMinotaurFlipWinTriggeredAbility extends TriggeredAbilityImpl {
 
     public KarplusanMinotaurFlipWinTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(1), false);
-        this.addTarget(new TargetAnyTarget());
     }
 
     public KarplusanMinotaurFlipWinTriggeredAbility(final KarplusanMinotaurFlipWinTriggeredAbility ability) {
@@ -80,10 +103,7 @@ class KarplusanMinotaurFlipWinTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        CoinFlippedEvent flipEvent = (CoinFlippedEvent) event;
-        return flipEvent.getPlayerId().equals(controllerId)
-                && flipEvent.isWinnable()
-                && (flipEvent.getChosen() == flipEvent.getResult());
+        return this.isControlledBy(event.getPlayerId()) && event.getFlag();
     }
 
     @Override
@@ -96,8 +116,6 @@ class KarplusanMinotaurFlipLoseTriggeredAbility extends TriggeredAbilityImpl {
 
     public KarplusanMinotaurFlipLoseTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(1), false);
-        this.addTarget(new TargetAnyTarget());
-        targetAdjuster = KarplusanMinotaurAdjuster.instance;
     }
 
     public KarplusanMinotaurFlipLoseTriggeredAbility(final KarplusanMinotaurFlipLoseTriggeredAbility ability) {
@@ -116,10 +134,7 @@ class KarplusanMinotaurFlipLoseTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        CoinFlippedEvent flipEvent = (CoinFlippedEvent) event;
-        return flipEvent.getPlayerId().equals(controllerId)
-                && flipEvent.isWinnable()
-                && (flipEvent.getChosen() != flipEvent.getResult());
+        return this.isControlledBy(event.getPlayerId()) && !event.getFlag();
     }
 
     @Override
@@ -138,7 +153,7 @@ class KarplusanMinotaurCost extends CostImpl {
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
-            controller.flipCoin(ability, game, true);
+            controller.flipCoin(game);
             this.paid = true;
             return true;
         }
@@ -159,29 +174,5 @@ class KarplusanMinotaurCost extends CostImpl {
     @Override
     public KarplusanMinotaurCost copy() {
         return new KarplusanMinotaurCost();
-    }
-}
-
-enum KarplusanMinotaurAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        Player controller = game.getPlayer(ability.getControllerId());
-        if (controller == null) {
-            return;
-        }
-        UUID opponentId = null;
-        if (game.getOpponents(controller.getId()).size() > 1) {
-            Target target = new TargetOpponent(true);
-            if (controller.chooseTarget(Outcome.Neutral, target, ability, game)) {
-                opponentId = target.getFirstTarget();
-            }
-        } else {
-            opponentId = game.getOpponents(controller.getId()).iterator().next();
-        }
-        if (opponentId != null) {
-            ability.getTargets().get(0).setTargetController(opponentId);
-        }
     }
 }

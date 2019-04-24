@@ -17,10 +17,10 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class SheerDrop extends CardImpl {
     
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
     
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(new TappedPredicate());
     }
 
     public SheerDrop(UUID ownerId, CardSetInfo setInfo) {

@@ -1,5 +1,10 @@
+
 package mage.game.stack;
 
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
@@ -34,12 +39,8 @@ import mage.players.Player;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.UUID;
-
 /**
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class Spell extends StackObjImpl implements Card {
@@ -62,8 +63,7 @@ public class Spell extends StackObjImpl implements Card {
     private final UUID id;
 
     private UUID controllerId;
-    private boolean copy;
-    private MageObject copyFrom; // copied card INFO (used to call original adjusters)
+    private boolean copiedSpell;
     private boolean faceDown;
     private boolean countered;
     private boolean resolving = false;
@@ -118,8 +118,7 @@ public class Spell extends StackObjImpl implements Card {
         this.frameStyle = spell.frameStyle;
 
         this.controllerId = spell.controllerId;
-        this.copy = spell.copy;
-        this.copyFrom = (spell.copyFrom != null ? spell.copyFrom.copy() : null);
+        this.copiedSpell = spell.copiedSpell;
         this.faceDown = spell.faceDown;
         this.countered = spell.countered;
         this.resolving = spell.resolving;
@@ -156,7 +155,7 @@ public class Spell extends StackObjImpl implements Card {
 
     public String getActivatedMessage(Game game) {
         StringBuilder sb = new StringBuilder();
-        if (isCopy()) {
+        if (isCopiedSpell()) {
             sb.append(" copies ");
         } else {
             sb.append(" casts ");
@@ -363,7 +362,7 @@ public class Spell extends StackObjImpl implements Card {
     @Override
     public void counter(UUID sourceId, Game game, Zone zone, boolean owner, ZoneDetail zoneDetail) {
         this.countered = true;
-        if (!isCopy()) {
+        if (!isCopiedSpell()) {
             Player player = game.getPlayer(game.getControllerId(sourceId));
             if (player == null) {
                 player = game.getPlayer(getControllerId());
@@ -707,7 +706,7 @@ public class Spell extends StackObjImpl implements Card {
             newAbility.newId();
             copy.addSpellAbility(newAbility);
         }
-        copy.setCopy(true, this);
+        copy.setCopy(true);
         copy.setControllerId(newController);
         return copy;
     }
@@ -741,7 +740,7 @@ public class Spell extends StackObjImpl implements Card {
         // 706.10a If a copy of a spell is in a zone other than the stack, it ceases to exist.
         // If a copy of a card is in any zone other than the stack or the battlefield, it ceases to exist.
         // These are state-based actions. See rule 704.
-        if (this.isCopy() && zone != Zone.STACK) {
+        if (this.isCopiedSpell() && zone != Zone.STACK) {
             return true;
         }
         return card.moveToZone(zone, sourceId, game, flag, appliedEffects);
@@ -754,7 +753,7 @@ public class Spell extends StackObjImpl implements Card {
 
     @Override
     public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, List<UUID> appliedEffects) {
-        if (this.isCopy()) {
+        if (this.isCopiedSpell()) {
             game.getStack().remove(this, game);
             return true;
         }
@@ -836,24 +835,26 @@ public class Spell extends StackObjImpl implements Card {
         // do nothing
     }
 
+    public void setCopiedSpell(boolean isCopied) {
+        this.copiedSpell = isCopied;
+    }
+
+    public boolean isCopiedSpell() {
+        return this.copiedSpell;
+    }
+
     public Zone getFromZone() {
         return this.fromZone;
     }
 
     @Override
-    public void setCopy(boolean isCopy, MageObject copyFrom) {
-        this.copy = isCopy;
-        this.copyFrom = (copyFrom != null ? copyFrom.copy() : null);
+    public void setCopy(boolean isCopy) {
+        setCopiedSpell(isCopy);
     }
 
     @Override
     public boolean isCopy() {
-        return this.copy;
-    }
-
-    @Override
-    public MageObject getCopyFrom() {
-        return this.copyFrom;
+        return isCopiedSpell();
     }
 
     @Override
@@ -989,7 +990,6 @@ public class Spell extends StackObjImpl implements Card {
     @Override
     public StackObject createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets) {
         Spell copy = this.copySpell(newControllerId);
-        game.getState().setZone(copy.getId(), Zone.STACK); // required for targeting ex: Nivmagus Elemental
         game.getStack().push(copy);
         if (chooseNewTargets) {
             copy.chooseNewTargets(game, newControllerId);

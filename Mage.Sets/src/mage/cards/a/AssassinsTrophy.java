@@ -1,7 +1,6 @@
 package mage.cards.a;
 
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -22,6 +21,7 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
 
 /**
+ *
  * @author TheElk801
  */
 public final class AssassinsTrophy extends CardImpl {
@@ -74,19 +74,17 @@ class AssassinsTrophyEffect extends OneShotEffect {
         Permanent permanent = game.getPermanentOrLKIBattlefield(source.getFirstTarget());
         if (permanent != null) {
             Player controller = game.getPlayer(permanent.getControllerId());
-            if (controller != null) {
-                if (controller.chooseUse(Outcome.PutLandInPlay, "Do you wish to search for a basic land, put it onto the battlefield and then shuffle your library?", source, game)) {
-                    TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND);
-                    if (controller.searchLibrary(target, source, game)) {
-                        Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
-                        if (card != null) {
-                            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                        }
+            if (controller.chooseUse(Outcome.PutLandInPlay, "Do you wish to search for a basic land, put it onto the battlefield and then shuffle your library?", source, game)) {
+                TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND);
+                if (controller.searchLibrary(target, game)) {
+                    Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
+                    if (card != null) {
+                        controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                     }
-                    controller.shuffleLibrary(source, game);
                 }
-                return true;
+                controller.shuffleLibrary(source, game);
             }
+            return true;
         }
         return false;
     }

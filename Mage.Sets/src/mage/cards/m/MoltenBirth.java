@@ -1,5 +1,7 @@
+
 package mage.cards.m;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -12,9 +14,8 @@ import mage.game.Game;
 import mage.game.permanent.token.MoltenBirthElementalToken;
 import mage.players.Player;
 
-import java.util.UUID;
-
 /**
+ *
  * @author jeffwadsworth
  */
 public final class MoltenBirth extends CardImpl {
@@ -56,15 +57,13 @@ class MoltenBirthEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
+        Card molten = game.getCard(source.getSourceId());
         if (controller != null) {
             MoltenBirthElementalToken token = new MoltenBirthElementalToken();
             token.putOntoBattlefield(2, game, source.getSourceId(), source.getControllerId());
-            if (controller.flipCoin(source, game, true)) {
-                Card molten = game.getCard(source.getSourceId());
-                if (molten != null) {
-                    molten.moveToZone(Zone.HAND, source.getSourceId(), game, true);
-                    game.informPlayers(controller.getLogName() + " won the flip.  " + molten.getLogName() + " is returned to " + controller.getLogName() + "'s hand.");
-                }
+            if (controller.flipCoin(game)) {
+                molten.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+                game.informPlayers(controller.getLogName() + " won the flip.  " + molten.getLogName() + " is returned to " + controller.getLogName() + "'s hand.");
             }
             return true;
         }

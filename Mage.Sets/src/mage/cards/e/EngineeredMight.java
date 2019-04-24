@@ -41,10 +41,10 @@ public final class EngineeredMight extends CardImpl {
         Mode mode = new Mode();
         effect = new BoostControlledEffect(2, 2, Duration.EndOfTurn);
         effect.setText("Creatures you control get +2/+2");
-        mode.addEffect(effect);
+        mode.getEffects().add(effect);
         effect = new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent());
         effect.setText("and gain vigilance until end of turn");
-        mode.addEffect(effect);
+        mode.getEffects().add(effect);
         this.getSpellAbility().addMode(mode);
     }
 

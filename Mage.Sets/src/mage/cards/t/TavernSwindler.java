@@ -62,7 +62,7 @@ class TavernSwindlerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (controller.flipCoin(source, game, true)) {
+            if (controller.flipCoin(game)) {
                 game.informPlayers(controller.getLogName() + " got " + controller.gainLife(6, game, source)+ " live");
             }
         }

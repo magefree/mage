@@ -1,5 +1,8 @@
+
 package mage.game.command.planes;
 
+import java.util.ArrayList;
+import java.util.List;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -22,10 +25,8 @@ import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.watchers.common.PlanarRollWatcher;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
+ *
  * @author spjspj
  */
 public class TazeemPlane extends Plane {
@@ -82,7 +83,7 @@ class TazeemCantBlockAllEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
         return false;
     }
 

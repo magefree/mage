@@ -23,7 +23,7 @@ public final class DAvenantTrapper extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("a historic spell");
 
     static {
-        filter.add(HistoricPredicate.instance);
+        filter.add(new HistoricPredicate());
     }
 
     public DAvenantTrapper(UUID ownerId, CardSetInfo setInfo) {

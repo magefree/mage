@@ -1,3 +1,4 @@
+
 package org.mage.test.cards.abilities.other;
 
 import mage.constants.PhaseStep;
@@ -168,13 +169,11 @@ public class LimitedCountedActivationsTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerB, "Terror", 1);
 
-        assertLife(playerA, 16);
-        assertLife(playerB, 15);
-
-        assertGraveyardCount(playerA, "Dragon Whelp", 0);
-
         assertPermanentCount(playerA, "Dragon Whelp", 1);
         assertPowerToughness(playerA, "Dragon Whelp", 2, 3);
+        assertGraveyardCount(playerA, "Dragon Whelp", 0);
 
+        assertLife(playerA, 16);
+        assertLife(playerB, 15);
     }
 }

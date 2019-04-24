@@ -16,7 +16,7 @@ public class FilterHistoricSpell extends FilterSpell {
 
     public FilterHistoricSpell(String name) {
         super(name);
-        this.add(HistoricPredicate.instance);
+        this.add(new HistoricPredicate());
     }
 
     public FilterHistoricSpell(final FilterHistoricSpell filter) {

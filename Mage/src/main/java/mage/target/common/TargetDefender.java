@@ -68,8 +68,7 @@ public class TargetDefender extends TargetImpl {
             }
         }
         for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_PLANESWALKER, sourceControllerId, game)) {
-            if ((notTarget 
-                    || permanent.canBeTargetedBy(targetSource, sourceControllerId, game))
+            if ((notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, game))
                     && filter.match(permanent, game)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {
@@ -85,8 +84,7 @@ public class TargetDefender extends TargetImpl {
         int count = 0;
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
-            if (player != null 
-                    && filter.match(player, game)) {
+            if (player != null && filter.match(player, game)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {
                     return true;
@@ -111,15 +109,13 @@ public class TargetDefender extends TargetImpl {
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
             if (player != null
-                    && (notTarget 
-                    || player.canBeTargetedBy(targetSource, sourceControllerId, game))
+                    && (notTarget || player.canBeTargetedBy(targetSource, sourceControllerId, game))
                     && filter.match(player, game)) {
                 possibleTargets.add(playerId);
             }
         }
         for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_PLANESWALKER, sourceControllerId, game)) {
-            if ((notTarget 
-                    || permanent.canBeTargetedBy(targetSource, sourceControllerId, game))
+            if ((notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, game))
                     && filter.match(permanent, game)) {
                 possibleTargets.add(permanent.getId());
             }
@@ -132,8 +128,7 @@ public class TargetDefender extends TargetImpl {
         Set<UUID> possibleTargets = new HashSet<>();
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
-            if (player != null 
-                    && filter.match(player, game)) {
+            if (player != null && filter.match(player, game)) {
                 possibleTargets.add(playerId);
             }
         }
@@ -167,8 +162,7 @@ public class TargetDefender extends TargetImpl {
             return filter.match(player, game);
         }
         Permanent permanent = game.getPermanent(id);
-        return permanent != null 
-                && filter.match(permanent, game);
+        return permanent != null && filter.match(permanent, game);
     }
 
     @Override
@@ -176,8 +170,7 @@ public class TargetDefender extends TargetImpl {
         Player player = game.getPlayer(id);
         MageObject targetSource = game.getObject(attackerId);
         if (player != null) {
-            return (notTarget 
-                    || player.canBeTargetedBy(targetSource, (source == null ? null : source.getControllerId()), game))
+            return (notTarget || player.canBeTargetedBy(targetSource, (source == null ? null : source.getControllerId()), game))
                     && filter.match(player, game);
         }
         Permanent permanent = game.getPermanent(id); // planeswalker
@@ -187,8 +180,7 @@ public class TargetDefender extends TargetImpl {
             if (source != null) {
                 controllerId = source.getControllerId();
             }
-            return (notTarget 
-                    || permanent.canBeTargetedBy(targetSource, controllerId, game))
+            return (notTarget || permanent.canBeTargetedBy(targetSource, controllerId, game))
                     && filter.match(permanent, game);
         }
         return false;

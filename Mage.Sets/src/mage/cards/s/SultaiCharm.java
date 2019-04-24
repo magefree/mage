@@ -25,7 +25,7 @@ public final class SultaiCharm extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("monocolored creature");
 
     static {
-        filter.add(MonocoloredPredicate.instance);
+        filter.add(new MonocoloredPredicate());
     }
 
     public SultaiCharm(UUID ownerId, CardSetInfo setInfo) {
@@ -38,13 +38,13 @@ public final class SultaiCharm extends CardImpl {
         
         // <strong>*</strong> Destroy target artifact or enchantment.
         Mode mode = new Mode();
-        mode.addEffect(new DestroyTargetEffect());
-        mode.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
+        mode.getEffects().add(new DestroyTargetEffect());
+        mode.getTargets().add(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
         this.getSpellAbility().addMode(mode);
         
         // <strong>*</strong> Draw two cards, then discard a card.
         mode = new Mode();
-        mode.addEffect(new DrawDiscardControllerEffect(2,1));
+        mode.getEffects().add(new DrawDiscardControllerEffect(2,1));
         this.getSpellAbility().addMode(mode);
     }
 

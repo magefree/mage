@@ -29,7 +29,7 @@ public final class DuneDiviner extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.DESERT));
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
     
     public DuneDiviner(UUID ownerId, CardSetInfo setInfo) {

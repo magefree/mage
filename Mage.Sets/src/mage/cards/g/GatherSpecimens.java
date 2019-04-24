@@ -1,5 +1,7 @@
+
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
@@ -14,15 +16,14 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 
-import java.util.UUID;
-
 /**
+ *
  * @author jeffwadsworth
  */
 public final class GatherSpecimens extends CardImpl {
 
     public GatherSpecimens(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}{U}{U}");
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{U}{U}");
 
         // If a creature would enter the battlefield under an opponent's control this turn, it enters the battlefield under your control instead.
         this.getSpellAbility().addEffect(new GatherSpecimensReplacementEffect());
@@ -69,7 +70,7 @@ class GatherSpecimensReplacementEffect extends ReplacementEffectImpl {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE
                 && ((ZoneChangeEvent) event).getToZone().match(Zone.BATTLEFIELD)) {
             Card card = game.getCard(event.getTargetId());
-            if (card != null && card.isCreature()) { // TODO: Bestow Card cast as Enchantment probably not handled correctly
+            if (card.isCreature()) { // TODO: Bestow Card cast as Enchantment probably not handled correctly
                 Player controller = game.getPlayer(source.getControllerId());
                 if (controller != null && controller.hasOpponent(event.getPlayerId(), game)) {
                     return true;
@@ -78,7 +79,9 @@ class GatherSpecimensReplacementEffect extends ReplacementEffectImpl {
         }
         if (event.getType() == GameEvent.EventType.CREATE_TOKEN && event.getFlag()) { // flag indicates if it's a creature token
             Player controller = game.getPlayer(source.getControllerId());
-            return controller != null && controller.hasOpponent(event.getPlayerId(), game);
+            if (controller != null && controller.hasOpponent(event.getPlayerId(), game)) {
+                return true;
+            }
         }
         return false;
     }

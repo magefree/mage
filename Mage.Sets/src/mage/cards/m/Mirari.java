@@ -1,5 +1,7 @@
+
 package mage.cards.m;
 
+import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
@@ -17,17 +19,17 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
+import mage.target.TargetSpell;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.UUID;
-
 /**
+ *
  * @author LevelX2
  */
 public final class Mirari extends CardImpl {
 
     public Mirari(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
         addSuperType(SuperType.LEGENDARY);
 
         // Whenever you cast an instant or sorcery spell, you may pay {3}. If you do, copy that spell. You may choose new targets for the copy.
@@ -56,9 +58,8 @@ class MirariTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     MirariTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DoIfCostPaid(
-                new CopyTargetSpellEffect(true),
-                new GenericManaCost(3)), false);
+        super(Zone.BATTLEFIELD, new DoIfCostPaid(new CopyTargetSpellEffect(true), new GenericManaCost(3)), false);
+        this.addTarget(new TargetSpell(filter));
     }
 
     MirariTriggeredAbility(final MirariTriggeredAbility ability) {
@@ -81,11 +82,7 @@ class MirariTriggeredAbility extends TriggeredAbilityImpl {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (isControlledInstantOrSorcery(spell)) {
                 for (Effect effect : getEffects()) {
-                    if (effect instanceof DoIfCostPaid) {
-                        for (Effect execEffect : ((DoIfCostPaid) effect).getExecutingEffects()) {
-                            execEffect.setTargetPointer(new FixedTarget(spell.getId()));
-                        }
-                    }
+                    effect.setTargetPointer(new FixedTarget(spell.getId()));
                 }
                 return true;
             }

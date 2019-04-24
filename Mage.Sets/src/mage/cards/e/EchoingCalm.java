@@ -1,5 +1,7 @@
+
 package mage.cards.e;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -10,9 +12,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetEnchantmentPermanent;
-import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
  * @author Loki
@@ -20,7 +19,7 @@ import java.util.UUID;
 public final class EchoingCalm extends CardImpl {
 
     public EchoingCalm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
 
         // Destroy target enchantment and all other enchantments with the same name as that enchantment.
@@ -59,9 +58,9 @@ class EchoingCalmEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (controller != null && permanent != null) {
             permanent.destroy(source.getSourceId(), game, false);
-            if (!CardUtil.haveEmptyName(permanent)) { // in case of face down enchantment creature
+            if (!permanent.getName().isEmpty()) { // in case of face down enchantment creature
                 for (Permanent perm : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-                    if (!perm.getId().equals(permanent.getId()) && CardUtil.haveSameNames(perm, permanent) && perm.isEnchantment()) {
+                    if (!perm.getId().equals(permanent.getId()) && perm.getName().equals(permanent.getName()) && perm.isEnchantment()) {
                         perm.destroy(source.getSourceId(), game, false);
                     }
                 }

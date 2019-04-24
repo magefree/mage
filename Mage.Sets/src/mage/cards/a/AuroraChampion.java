@@ -25,7 +25,7 @@ public final class AuroraChampion extends CardImpl {
     private static final FilterTeamPermanent filter = new FilterTeamPermanent(SubType.WARRIOR, "another Warrior");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public AuroraChampion(UUID ownerId, CardSetInfo setInfo) {

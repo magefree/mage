@@ -39,9 +39,9 @@ public final class ImpelledGiant extends CardImpl {
     static final private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("an untapped red creature you control other than Impelled Giant");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
         filter.add(new ColorPredicate(ObjectColor.RED));
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public ImpelledGiant(UUID ownerId, CardSetInfo setInfo) {
@@ -87,7 +87,7 @@ class ImpelledGiantCost extends CostImpl {
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         if (target.choose(Outcome.Tap, controllerId, sourceId, game)) {
-            for (UUID targetId: target.getTargets()) {
+            for (UUID targetId: (List<UUID>)target.getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent == null)
                     return false;

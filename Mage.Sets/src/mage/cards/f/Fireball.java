@@ -1,8 +1,8 @@
 
 package mage.cards.f;
 
+import java.util.*;
 import mage.abilities.Ability;
-import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -14,9 +14,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
-import java.util.*;
-
 /**
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public final class Fireball extends CardImpl {
@@ -28,7 +27,14 @@ public final class Fireball extends CardImpl {
         // Fireball costs 1 more to cast for each target beyond the first.
         this.getSpellAbility().addTarget(new FireballTargetCreatureOrPlayer(0, Integer.MAX_VALUE));
         this.getSpellAbility().addEffect(new FireballEffect());
-        this.getSpellAbility().setCostAdjuster(FireballAdjuster.instance);
+    }
+
+    @Override
+    public void adjustCosts(Ability ability, Game game) {
+        int numTargets = ability.getTargets().isEmpty() ? 0 : ability.getTargets().get(0).getTargets().size();
+        if (numTargets > 1) {
+            ability.getManaCostsToPay().add(new GenericManaCost(numTargets - 1));
+        }
     }
 
     public Fireball(final Fireball card) {
@@ -38,18 +44,6 @@ public final class Fireball extends CardImpl {
     @Override
     public Fireball copy() {
         return new Fireball(this);
-    }
-}
-
-enum FireballAdjuster implements CostAdjuster {
-    instance;
-
-    @Override
-    public void adjustCosts(Ability ability, Game game) {
-        int numTargets = ability.getTargets().isEmpty() ? 0 : ability.getTargets().get(0).getTargets().size();
-        if (numTargets > 1) {
-            ability.getManaCostsToPay().add(new GenericManaCost(numTargets - 1));
-        }
     }
 }
 

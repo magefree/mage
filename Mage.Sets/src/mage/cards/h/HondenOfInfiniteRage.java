@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 public final class HondenOfInfiniteRage extends CardImpl {
 
-    static final FilterControlledPermanent filter = new FilterControlledPermanent("Shrine");
+    final static FilterControlledPermanent filter = new FilterControlledPermanent("Shrine");
 
         static {
             filter.add(new SubtypePredicate(SubType.SHRINE));

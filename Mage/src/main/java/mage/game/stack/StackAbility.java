@@ -1,11 +1,14 @@
 package mage.game.stack;
 
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.*;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.mana.ManaCost;
@@ -13,7 +16,6 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
-import mage.abilities.hint.Hint;
 import mage.abilities.text.TextPart;
 import mage.cards.Card;
 import mage.cards.FrameStyle;
@@ -30,12 +32,8 @@ import mage.util.GameLog;
 import mage.util.SubTypeList;
 import mage.watchers.Watcher;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.UUID;
-
 /**
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class StackAbility extends StackObjImpl implements Ability {
@@ -49,12 +47,9 @@ public class StackAbility extends StackObjImpl implements Ability {
 
     private final Ability ability;
     private UUID controllerId;
-    private boolean copy;
-    private MageObject copyFrom; // copied card INFO (used to call original adjusters)
     private String name;
     private String expansionSetCode;
     private TargetAdjuster targetAdjuster = null;
-    private CostAdjuster costAdjuster = null;
 
     public StackAbility(Ability ability, UUID controllerId) {
         this.ability = ability;
@@ -65,13 +60,10 @@ public class StackAbility extends StackObjImpl implements Ability {
     public StackAbility(final StackAbility stackAbility) {
         this.ability = stackAbility.ability.copy();
         this.controllerId = stackAbility.controllerId;
-        this.copy = stackAbility.copy;
-        this.copyFrom = (stackAbility.copyFrom != null ? stackAbility.copyFrom.copy() : null);
         this.name = stackAbility.name;
         this.expansionSetCode = stackAbility.expansionSetCode;
         this.targetAdjuster = stackAbility.targetAdjuster;
         this.targetChanged = stackAbility.targetChanged;
-        this.costAdjuster = stackAbility.costAdjuster;
     }
 
     @Override
@@ -110,22 +102,6 @@ public class StackAbility extends StackObjImpl implements Ability {
         if (ability instanceof StateTriggeredAbility) {
             ((StateTriggeredAbility) ability).counter(game);
         }
-    }
-
-    @Override
-    public void setCopy(boolean isCopy, MageObject copyFrom) {
-        this.copy = isCopy;
-        this.copyFrom = (copyFrom != null ? copyFrom.copy() : null);
-    }
-
-    @Override
-    public boolean isCopy() {
-        return this.copy;
-    }
-
-    @Override
-    public MageObject getCopyFrom() {
-        return this.copyFrom;
     }
 
     @Override
@@ -174,7 +150,9 @@ public class StackAbility extends StackObjImpl implements Ability {
 
     @Override
     public Abilities<Ability> getAbilities() {
-        return new AbilitiesImpl<>(ability);
+        Abilities<Ability> abilities = new AbilitiesImpl<>();
+        abilities.add(ability);
+        return abilities;
     }
 
     @Override
@@ -431,6 +409,15 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
+    public void setCopy(boolean isCopy) {
+    }
+
+    @Override
+    public boolean isCopy() {
+        return false;
+    }
+
+    @Override
     public boolean getRuleAtTheTop() {
         return this.ability.getRuleAtTheTop();
     }
@@ -532,18 +519,13 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public void setSourceObjectZoneChangeCounter(int zoneChangeCounter) {
-        ability.setSourceObjectZoneChangeCounter(zoneChangeCounter);
-    }
-
-    @Override
     public int getSourceObjectZoneChangeCounter() {
         return ability.getSourceObjectZoneChangeCounter();
     }
 
     @Override
-    public Permanent getSourcePermanentOrLKI(Game game) {
-        return ability.getSourcePermanentOrLKI(game);
+    public void setSourceObject(MageObject sourceObject, Game game) {
+        throw new UnsupportedOperationException("Not supported.");
     }
 
     @Override
@@ -587,7 +569,7 @@ public class StackAbility extends StackObjImpl implements Ability {
             Outcome outcome = newAbility.getEffects().isEmpty() ? Outcome.Detriment : newAbility.getEffects().get(0).getOutcome();
             if (controller.chooseUse(outcome, "Choose new targets?", source, game)) {
                 newAbility.getTargets().clearChosen();
-                newAbility.getTargets().chooseTargets(outcome, newControllerId, newAbility, false, game, false);
+                newAbility.getTargets().chooseTargets(outcome, newControllerId, newAbility, false, game);
             }
         }
         game.fireEvent(new GameEvent(GameEvent.EventType.COPIED_STACKOBJECT, newStackAbility.getId(), this.getId(), newControllerId));
@@ -628,33 +610,5 @@ public class StackAbility extends StackObjImpl implements Ability {
         if (targetAdjuster != null) {
             targetAdjuster.adjustTargets(this, game);
         }
-    }
-
-    @Override
-    public void setCostAdjuster(CostAdjuster costAdjuster) {
-        this.costAdjuster = costAdjuster;
-    }
-
-    @Override
-    public CostAdjuster getCostAdjuster() {
-        return costAdjuster;
-    }
-
-    @Override
-    public void adjustCosts(Game game) {
-        if (costAdjuster != null) {
-            costAdjuster.adjustCosts(this, game);
-        }
-    }
-
-    @Override
-    public List<Hint> getHints() {
-        return this.ability.getHints();
-    }
-
-    @Override
-    public Ability addHint(Hint hint) {
-        // only abilities supports addhint
-        return null;
     }
 }

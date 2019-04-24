@@ -5,6 +5,7 @@
  */
 package mage.abilities.costs.common;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
@@ -15,9 +16,8 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
-import java.util.UUID;
-
 /**
+ *
  * @author jeffwadsworth
  */
 
@@ -40,7 +40,7 @@ public class PutCardFromHandOnTopOfLibraryCost extends CostImpl {
         if (targetCardInHand.canChoose(controllerId, game)
                 && controller.choose(Outcome.PreventDamage, targetCardInHand, sourceId, game)) {
             card = game.getCard(targetCardInHand.getFirstTarget());
-            paid = card != null && controller.moveCardToLibraryWithInfo(card, sourceId, game, Zone.HAND, true, true);
+            paid = controller.moveCardToLibraryWithInfo(card, sourceId, game, Zone.HAND, true, true);
         }
         return paid;
     }

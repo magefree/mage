@@ -1,6 +1,7 @@
 
 package mage.cards.m;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -11,22 +12,20 @@ import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
-import mage.constants.SubType;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
-
-import java.util.UUID;
 
 /**
+ *
  * @author LevelX2
  */
 public final class MogissMarauder extends CardImpl {
 
     public MogissMarauder(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.BERSERKER);
 
@@ -36,11 +35,22 @@ public final class MogissMarauder extends CardImpl {
         // When Mogis's Marauder enters the battlefield, up to X target creatures each gain intimidate and haste, where X is your devotion to black.
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new GainAbilityTargetEffect(IntimidateAbility.getInstance(), Duration.EndOfTurn,
-                        "up to X target creatures each gain intimidate"), false);
+                "up to X target creatures each gain intimidate"), false);
         ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn,
                 "and haste until end of turn, where X is your devotion to black"));
-        ability.setTargetAdjuster(MogissMarauderAdjuster.instance);
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
+    }
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability instanceof EntersBattlefieldTriggeredAbility) {
+            ability.getTargets().clear();
+            int numbTargets = new DevotionCount(ColoredManaSymbol.B).calculate(game, ability, null);
+            if (numbTargets > 0) {
+                ability.addTarget(new TargetCreaturePermanent(0,numbTargets));
+            }
+        }
     }
 
     public MogissMarauder(final MogissMarauder card) {
@@ -50,18 +60,5 @@ public final class MogissMarauder extends CardImpl {
     @Override
     public MogissMarauder copy() {
         return new MogissMarauder(this);
-    }
-}
-
-enum MogissMarauderAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        int numbTargets = new DevotionCount(ColoredManaSymbol.B).calculate(game, ability, null);
-        if (numbTargets > 0) {
-            ability.addTarget(new TargetCreaturePermanent(0, numbTargets));
-        }
     }
 }

@@ -1,5 +1,7 @@
+
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RestrictionEffect;
@@ -17,9 +19,8 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetOpponent;
 
-import java.util.UUID;
-
 /**
+ *
  * @author TheElk801 & L_J
  */
 public final class GoblinWarCry extends CardImpl {
@@ -82,7 +83,7 @@ class GoblinWarCryEffect extends OneShotEffect {
 }
 
 class GoblinWarCryRestrictionEffect extends RestrictionEffect {
-
+    
     protected UUID targetId;
 
     public GoblinWarCryRestrictionEffect(UUID targetId) {
@@ -102,11 +103,17 @@ class GoblinWarCryRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.isControlledBy(source.getFirstTarget());
+        if (permanent.isControlledBy(source.getFirstTarget())) {
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return targetId != null && blocker.getId().equals(targetId);
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        if (targetId != null && blocker.getId().equals(targetId)) {
+            return true;
+        }
+        return false;
     }
 }

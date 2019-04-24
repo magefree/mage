@@ -1,3 +1,5 @@
+
+
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
@@ -29,10 +31,7 @@ public class CanBlockOnlyFlyingAttachedEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        if (attacker == null) {
-            return true;
-        }
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
         return attacker.getAbilities().contains(FlyingAbility.getInstance());
     }
 

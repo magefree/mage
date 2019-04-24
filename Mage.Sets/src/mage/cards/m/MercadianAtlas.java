@@ -49,7 +49,7 @@ enum MercadianAtlasCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        PlayLandWatcher watcher = game.getState().getWatcher(PlayLandWatcher.class);
+        PlayLandWatcher watcher = (PlayLandWatcher) game.getState().getWatchers().get(PlayLandWatcher.class.getSimpleName());
         if (watcher != null) {
             return !watcher.landPlayed(source.getControllerId());
         }

@@ -50,7 +50,7 @@ class CalmingVerseEffect extends OneShotEffect {
 
     static {
         untappedLandFilter.add(new CardTypePredicate(CardType.LAND));
-        untappedLandFilter.add(Predicates.not(TappedPredicate.instance));
+        untappedLandFilter.add(Predicates.not(new TappedPredicate()));
     }
 
     private static final FilterEnchantmentPermanent opponentEnchantmentsFilter = new FilterEnchantmentPermanent("enchantments you don't control");

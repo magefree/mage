@@ -24,10 +24,10 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class HarbingerOfTheTides extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature an opponent controls");
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature an opponent controls");
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(new TappedPredicate());
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 

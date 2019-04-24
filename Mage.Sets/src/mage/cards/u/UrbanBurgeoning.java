@@ -1,5 +1,7 @@
+
 package mage.cards.u;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -9,15 +11,22 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.PhaseStep;
+import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
 
-import java.util.UUID;
-
 /**
+ *
  * @author LevelX2
  */
 public final class UrbanBurgeoning extends CardImpl {
@@ -25,7 +34,7 @@ public final class UrbanBurgeoning extends CardImpl {
     static final String rule = "Enchanted land has \"Untap this land during each other player's untap step.\"";
 
     public UrbanBurgeoning(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
         this.subtype.add(SubType.AURA);
 
         // Enchant land
@@ -78,7 +87,7 @@ class UrbanBurgeoningUntapEffect extends ContinuousEffectImpl {
                 Permanent land = game.getPermanent(source.getSourceId());
                 boolean untap = true;
                 for (RestrictionEffect effect : game.getContinuousEffects().getApplicableRestrictionEffects(land, game).keySet()) {
-                    untap &= effect.canBeUntapped(land, source, game, true);
+                    untap &= effect.canBeUntapped(land, source, game);
                 }
                 if (untap) {
                     land.untap(game);

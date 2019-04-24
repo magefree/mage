@@ -13,8 +13,7 @@ import mage.game.turn.Step;
  *
  * @author LevelX2
  */
-public enum UnblockedPredicate implements Predicate<Permanent> {
-    instance;
+public class UnblockedPredicate implements Predicate<Permanent> {
 
     @Override
     public boolean apply(Permanent input, Game game) {

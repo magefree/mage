@@ -24,7 +24,7 @@ public class CardsDrawnDuringDrawStepWatcher extends Watcher {
     private final Map<UUID, Integer> amountOfCardsDrawnThisTurn = new HashMap<>();
 
     public CardsDrawnDuringDrawStepWatcher() {
-        super(WatcherScope.GAME);
+        super(CardsDrawnDuringDrawStepWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public CardsDrawnDuringDrawStepWatcher(final CardsDrawnDuringDrawStepWatcher watcher) {

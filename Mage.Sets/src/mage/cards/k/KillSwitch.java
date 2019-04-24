@@ -29,7 +29,7 @@ public final class KillSwitch extends CardImpl {
 
     
     //static {
-    //    filter.add(AnotherPredicate.instance);
+    //    filter.add(new AnotherPredicate());
    // }
 
     public KillSwitch(UUID ownerId, CardSetInfo setInfo) {

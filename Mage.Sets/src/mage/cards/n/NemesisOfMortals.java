@@ -1,6 +1,7 @@
 
 package mage.cards.n;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -10,16 +11,19 @@ import mage.abilities.effects.common.cost.SourceCostReductionForEachCardInGravey
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.StaticFilters;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.CostModificationType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 
-import java.util.UUID;
-
 /**
+ *
  * @author LevelX2
  */
 public final class NemesisOfMortals extends CardImpl {
@@ -37,7 +41,6 @@ public final class NemesisOfMortals extends CardImpl {
         this.addAbility(ability);
 
         // {7}{G}{G}: Monstrosity 5.  This ability costs {1} less to activate for each creature card in your graveyard.
-        // TODO: Make ability properly copiable
         ability = new MonstrosityAbility("{7}{G}{G}", 5);
         for (Effect effect : ability.getEffects()) {
             effect.setText("Monstrosity 5.  This ability costs {1} less to activate for each creature card in your graveyard");
@@ -46,7 +49,7 @@ public final class NemesisOfMortals extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new NemesisOfMortalsCostReducingEffect(ability.getOriginalId())));
     }
 
-    private NemesisOfMortals(final NemesisOfMortals card) {
+    public NemesisOfMortals(final NemesisOfMortals card) {
         super(card);
     }
 
@@ -65,7 +68,7 @@ class NemesisOfMortalsCostReducingEffect extends CostModificationEffectImpl {
         this.originalId = originalId;
     }
 
-    private NemesisOfMortalsCostReducingEffect(final NemesisOfMortalsCostReducingEffect effect) {
+    NemesisOfMortalsCostReducingEffect(final NemesisOfMortalsCostReducingEffect effect) {
         super(effect);
         this.originalId = effect.originalId;
     }
@@ -74,7 +77,7 @@ class NemesisOfMortalsCostReducingEffect extends CostModificationEffectImpl {
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            CardUtil.reduceCost(abilityToModify, controller.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, game));
+            CardUtil.reduceCost(abilityToModify, controller.getGraveyard().getCards(new FilterCreatureCard(), game).size());
         }
         return true;
     }

@@ -41,7 +41,7 @@ public class DevourEffect extends ReplacementEffectImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures to devour");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
     private final DevourFactor devourFactor;
 

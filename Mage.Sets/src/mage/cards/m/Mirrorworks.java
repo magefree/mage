@@ -23,11 +23,11 @@ import mage.filter.predicate.permanent.TokenPredicate;
  */
 public final class Mirrorworks extends CardImpl {
 
-    private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("another nontoken artifact");
+    private final static FilterArtifactPermanent filter = new FilterArtifactPermanent("another nontoken artifact");
 
     static {
-        filter.add(AnotherPredicate.instance);
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(new AnotherPredicate());
+        filter.add(Predicates.not(new TokenPredicate()));
     }
 
     public Mirrorworks(UUID ownerId, CardSetInfo setInfo) {

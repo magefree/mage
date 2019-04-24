@@ -24,7 +24,7 @@ public final class GoldnightRedeemer extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creature you control");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public GoldnightRedeemer(UUID ownerId, CardSetInfo setInfo) {

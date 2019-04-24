@@ -22,7 +22,7 @@ public final class WretchedAnurid extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("another creature");
     
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public WretchedAnurid(UUID ownerId, CardSetInfo setInfo) {

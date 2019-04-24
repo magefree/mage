@@ -28,8 +28,8 @@ public final class SekKuarDeathkeeper extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(AnotherPredicate.instance);
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(new AnotherPredicate());
+        filter.add(Predicates.not(new TokenPredicate()));
     }
 
     public SekKuarDeathkeeper(UUID ownerId, CardSetInfo setInfo) {

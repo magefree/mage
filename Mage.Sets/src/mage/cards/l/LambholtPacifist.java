@@ -1,5 +1,7 @@
+
 package mage.cards.l;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
@@ -12,21 +14,25 @@ import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.ComparisonType;
+import mage.constants.Duration;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.UUID;
-
 /**
+ *
  * @author fireshoes
  */
 public final class LambholtPacifist extends CardImpl {
 
     public LambholtPacifist(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SHAMAN);
         this.subtype.add(SubType.WEREWOLF);
@@ -78,14 +84,17 @@ class LambholtPacifistEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
+    public boolean canAttack(Game game) {
         return false;
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getId().equals(source.getSourceId())) {
-            return game.getBattlefield().countAll(filter, source.getControllerId(), game) <= 0;
+            if (game.getBattlefield().countAll(filter, source.getControllerId(), game) > 0) {
+                return false;
+            }
+            return true;
         }  // do not apply to other creatures.
         return false;
     }

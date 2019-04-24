@@ -26,7 +26,7 @@ public final class TraitorsRoar extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("untapped creature");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public TraitorsRoar(UUID ownerId, CardSetInfo setInfo) {

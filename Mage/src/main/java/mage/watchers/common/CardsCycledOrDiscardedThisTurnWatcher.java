@@ -27,7 +27,7 @@ public class CardsCycledOrDiscardedThisTurnWatcher extends Watcher {
     private final Map<UUID, Set<MageObjectReference>> numberOfCycledOrDiscardedCardsThisTurn = new HashMap<>();
 
     public CardsCycledOrDiscardedThisTurnWatcher() {
-        super(WatcherScope.GAME);
+        super(CardsCycledOrDiscardedThisTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public CardsCycledOrDiscardedThisTurnWatcher(final CardsCycledOrDiscardedThisTurnWatcher watcher) {

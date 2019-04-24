@@ -1,14 +1,20 @@
+
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.RestrictionEffect;
-import mage.constants.*;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.PhaseStep;
+import mage.constants.SubLayer;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
+ *
  * @author LevelX2
  */
 public class UntapAllDuringEachOtherPlayersUntapStepEffect extends ContinuousEffectImpl {
@@ -43,7 +49,7 @@ public class UntapAllDuringEachOtherPlayersUntapStepEffect extends ContinuousEff
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                     boolean untap = true;
                     for (RestrictionEffect effect : game.getContinuousEffects().getApplicableRestrictionEffects(permanent, game).keySet()) {
-                        untap &= effect.canBeUntapped(permanent, source, game, true);
+                        untap &= effect.canBeUntapped(permanent, source, game);
                     }
                     if (untap) {
                         permanent.untap(game);

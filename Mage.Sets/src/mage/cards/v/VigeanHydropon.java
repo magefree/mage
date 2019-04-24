@@ -1,5 +1,7 @@
+
 package mage.cards.v;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -8,21 +10,20 @@ import mage.abilities.keyword.GraftAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.UUID;
-
 /**
+ *
  * @author JotaPeRL
  */
 public final class VigeanHydropon extends CardImpl {
 
     public VigeanHydropon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{U}");
         this.subtype.add(SubType.PLANT);
         this.subtype.add(SubType.MUTANT);
         this.power = new MageInt(0);
@@ -30,7 +31,7 @@ public final class VigeanHydropon extends CardImpl {
 
         // Graft 5
         this.addAbility(new GraftAbility(this, 5));
-
+        
         // Vigean Hydropon can't attack or block.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VigeanHydroponEffect()));
     }
@@ -62,17 +63,20 @@ class VigeanHydroponEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
+    public boolean canAttack(Game game) {
         return false;
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
         return false;
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getId().equals(source.getSourceId());
+        if (permanent.getId().equals(source.getSourceId())) {
+            return true;
+        }
+        return false;
     }
 }

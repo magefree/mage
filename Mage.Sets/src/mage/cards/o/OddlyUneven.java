@@ -28,7 +28,7 @@ public final class OddlyUneven extends CardImpl {
         this.getSpellAbility().addEffect(new OddOrEvenEffect(true));
         // * Destroy each creature with an even number of words in its name.
         Mode mode = new Mode();
-        mode.addEffect(new OddOrEvenEffect(false));
+        mode.getEffects().add(new OddOrEvenEffect(false));
         this.getSpellAbility().addMode(mode);
     }
 

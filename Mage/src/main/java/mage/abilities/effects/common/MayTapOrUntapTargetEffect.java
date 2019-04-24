@@ -14,7 +14,7 @@ import mage.players.Player;
 public class MayTapOrUntapTargetEffect extends OneShotEffect {
 
     public MayTapOrUntapTargetEffect() {
-        super(Outcome.AIDontUseIt);
+        super(Outcome.Benefit);
     }
 
     public MayTapOrUntapTargetEffect(final MayTapOrUntapTargetEffect effect) {

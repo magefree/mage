@@ -30,7 +30,7 @@ public final class JaceTheLivingGuildpact extends CardImpl {
     private static final FilterPermanent filter = new FilterNonlandPermanent("another target nonland permanent");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public JaceTheLivingGuildpact(UUID ownerId, CardSetInfo setInfo) {

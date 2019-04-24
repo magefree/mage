@@ -66,7 +66,7 @@ class ErdwalIlluminatorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        InvestigatedWatcher watcher = game.getState().getWatcher(InvestigatedWatcher.class);
+        InvestigatedWatcher watcher = (InvestigatedWatcher) game.getState().getWatchers().get(InvestigatedWatcher.class.getSimpleName());
         return watcher != null && watcher.getTimesInvestigated(getControllerId()) == 1;
     }
 
@@ -86,7 +86,7 @@ class InvestigatedWatcher extends Watcher {
     private final Map<UUID, Integer> timesInvestigated = new HashMap<>();
 
     public InvestigatedWatcher() {
-        super(WatcherScope.GAME);
+        super(InvestigatedWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public InvestigatedWatcher(final InvestigatedWatcher watcher) {

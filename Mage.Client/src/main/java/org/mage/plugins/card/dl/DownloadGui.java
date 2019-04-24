@@ -1,105 +1,113 @@
+/**
+ * DownloadGui.java
+ * 
+ * Created on 25.08.2010
+ */
+
 package org.mage.plugins.card.dl;
 
-import org.mage.plugins.card.dl.DownloadJob.State;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.beans.IndexedPropertyChangeEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.BorderFactory;
+import javax.swing.BoundedRangeModel;
+import javax.swing.BoxLayout;
+import javax.swing.DefaultBoundedRangeModel;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.JScrollPane;
+
+import org.mage.plugins.card.dl.DownloadJob.State;
+
 
 /**
- * Downloader GUI to control and show progress
- *
+ * The class DownloadGui.
+ * 
+ * @version V0.0 25.08.2010
  * @author Clemens Koza
  */
 public class DownloadGui extends JPanel {
-    private static final long serialVersionUID = -7346572382493844327L;
+    private static final long                     serialVersionUID = -7346572382493844327L;
 
-    private final Downloader downloader;
-    private final DownloadListener listener = new DownloadListener();
-    private final BoundedRangeModel progressModel = new DefaultBoundedRangeModel(0, 0, 0, 0);
-    private final JProgressBar progressBar = new JProgressBar(progressModel);
+    private final Downloader                      d;
+    private final DownloadListener                l                = new DownloadListener();
+    private final BoundedRangeModel               model            = new DefaultBoundedRangeModel(0, 0, 0, 0);
+    private final JProgressBar                    progress         = new JProgressBar(model);
 
-    private final Map<DownloadJob, DownloadPanel> jobPanels = new HashMap<>();
-    private final JPanel basicPanel = new JPanel();
+    private final Map<DownloadJob, DownloadPanel> progresses       = new HashMap<>();
+    private final JPanel                          panel            = new JPanel();
 
     public DownloadGui(Downloader downloader) {
         super(new BorderLayout());
-        this.downloader = downloader;
-        downloader.addPropertyChangeListener(listener);
+        this.d = downloader;
+        downloader.addPropertyChangeListener(l);
 
         JPanel p = new JPanel(new BorderLayout());
         p.setBorder(BorderFactory.createTitledBorder("Progress:"));
-        p.add(progressBar);
-        JButton closeButton = new JButton("X");
-        closeButton.addActionListener(e -> {
-            this.downloader.cleanup();
+        p.add(progress);
+        JButton b = new JButton("X");
+        b.addActionListener(e -> {
+            d.dispose();
         });
-        p.add(closeButton, BorderLayout.EAST);
+        p.add(b, BorderLayout.EAST);
         add(p, BorderLayout.NORTH);
 
-        basicPanel.setLayout(new BoxLayout(basicPanel, BoxLayout.Y_AXIS));
-        JScrollPane pane = new JScrollPane(basicPanel);
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        JScrollPane pane = new JScrollPane(panel);
         pane.setPreferredSize(new Dimension(500, 300));
         add(pane);
-        for (int i = 0; i < downloader.getJobs().size(); i++) {
+        for(int i = 0; i < downloader.getJobs().size(); i++) {
             addJob(i, downloader.getJobs().get(i));
         }
     }
 
     public Downloader getDownloader() {
-        return downloader;
+        return d;
     }
 
     private class DownloadListener implements PropertyChangeListener {
-
         @Override
         public void propertyChange(PropertyChangeEvent evt) {
             String name = evt.getPropertyName();
-            if (evt.getSource() instanceof DownloadJob) {
-                // one job changes
-                DownloadPanel panel = jobPanels.get(evt.getSource());
+            if(evt.getSource() instanceof DownloadJob) {
+                DownloadPanel p = progresses.get(evt.getSource());
                 switch (name) {
                     case "state":
-                        if (evt.getOldValue() == State.FINISHED || evt.getOldValue() == State.ABORTED) {
-                            // started
+                        if(evt.getOldValue() == State.FINISHED || evt.getOldValue() == State.ABORTED) {
                             changeProgress(-1, 0);
-                        }
-                        if (evt.getNewValue() == State.FINISHED || evt.getOldValue() == State.ABORTED) {
-                            // finished
-                            changeProgress(+1, 0);
-                        }
-                        if (panel != null) {
-                            panel.setVisible(panel.getJob().getState() != State.FINISHED);
-                            panel.revalidate();
-                        }
-                        break;
+                        }   if(evt.getNewValue() == State.FINISHED || evt.getOldValue() == State.ABORTED) {
+                        changeProgress(+1, 0);
+                    }   if(p != null) {
+                        p.setVisible(p.getJob().getState() != State.FINISHED);
+                        p.revalidate();
+                    }   break;
                     case "message":
-                        if (panel != null) {
-                            JProgressBar bar = panel.getBar();
-                            String message = panel.getJob().getMessage();
+                        if(p != null) {
+                            JProgressBar bar = p.getBar();
+                            String message = p.getJob().getMessage();
                             bar.setStringPainted(message != null);
                             bar.setString(message);
-                        }
-                        break;
+                        }   break;
                 }
-            } else if (evt.getSource() == downloader) {
-                // all jobs changes (add/delete)
-                if ("jobs".equals(name)) {
+            } else if(evt.getSource() == d) {
+                if("jobs".equals(name)) {
                     IndexedPropertyChangeEvent ev = (IndexedPropertyChangeEvent) evt;
                     int index = ev.getIndex();
 
                     DownloadJob oldValue = (DownloadJob) ev.getOldValue();
-                    if (oldValue != null) {
+                    if(oldValue != null) {
                         removeJob(index, oldValue);
                     }
 
                     DownloadJob newValue = (DownloadJob) ev.getNewValue();
-                    if (newValue != null) {
+                    if(newValue != null) {
                         addJob(index, newValue);
                     }
                 }
@@ -108,39 +116,39 @@ public class DownloadGui extends JPanel {
     }
 
     private synchronized void addJob(int index, DownloadJob job) {
-        job.addPropertyChangeListener(listener);
+        job.addPropertyChangeListener(l);
         changeProgress(0, +1);
         DownloadPanel p = new DownloadPanel(job);
-        jobPanels.put(job, p);
-        basicPanel.add(p, index);
-        basicPanel.revalidate();
+        progresses.put(job, p);
+        panel.add(p, index);
+        panel.revalidate();
     }
 
     private synchronized void removeJob(int index, DownloadJob job) {
-        assert jobPanels.get(job) == basicPanel.getComponent(index);
-        job.removePropertyChangeListener(listener);
+        assert progresses.get(job) == panel.getComponent(index);
+        job.removePropertyChangeListener(l);
         changeProgress(0, -1);
-        jobPanels.remove(job);
-        basicPanel.remove(index);
-        basicPanel.revalidate();
+        progresses.remove(job);
+        panel.remove(index);
+        panel.revalidate();
     }
 
     private synchronized void changeProgress(int progress, int total) {
-        progress += progressModel.getValue();
-        total += progressModel.getMaximum();
-        progressModel.setMaximum(total);
-        progressModel.setValue(progress);
-        this.progressBar.setStringPainted(true);
-        this.progressBar.setString(progress + "/" + total);
+        progress += model.getValue();
+        total += model.getMaximum();
+        model.setMaximum(total);
+        model.setValue(progress);
+        this.progress.setStringPainted(true);
+        this.progress.setString(progress + "/" + total);
     }
 
     private class DownloadPanel extends JPanel {
         private static final long serialVersionUID = 1187986738303477168L;
 
-        private final DownloadJob job;
-        private final JProgressBar bar;
+        private final DownloadJob       job;
+        private final JProgressBar      bar;
 
-        DownloadPanel(DownloadJob job) {
+        public DownloadPanel(DownloadJob job) {
             super(new BorderLayout());
             this.job = job;
 
@@ -148,7 +156,7 @@ public class DownloadGui extends JPanel {
             add(bar = new JProgressBar(job.getProgress()));
             JButton b = new JButton("X");
             b.addActionListener(e -> {
-                switch (this.job.getState()) {
+                switch(this.job.getState()) {
                     case NEW:
                     case PREPARING:
                     case WORKING:
@@ -157,7 +165,7 @@ public class DownloadGui extends JPanel {
             });
             add(b, BorderLayout.EAST);
 
-            if (job.getState() == State.FINISHED | job.getState() == State.ABORTED) {
+            if(job.getState() == State.FINISHED | job.getState() == State.ABORTED) {
                 changeProgress(+1, 0);
             }
             setVisible(job.getState() != State.FINISHED);
@@ -169,13 +177,15 @@ public class DownloadGui extends JPanel {
             Dimension d = getPreferredSize();
             d.width = Integer.MAX_VALUE;
             setMaximumSize(d);
+//            d.width = 500;
+//            setMinimumSize(d);
         }
 
-        DownloadJob getJob() {
+        public DownloadJob getJob() {
             return job;
         }
 
-        JProgressBar getBar() {
+        public JProgressBar getBar() {
             return bar;
         }
     }

@@ -57,7 +57,7 @@ class ThopterAssemblyTriggeredAbility extends TriggeredAbilityImpl {
     private static final FilterPermanent filter = new FilterPermanent();
     static {
         filter.add(new SubtypePredicate(SubType.THOPTER));
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     ThopterAssemblyTriggeredAbility() {

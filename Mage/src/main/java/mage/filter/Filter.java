@@ -2,7 +2,6 @@
 package mage.filter;
 
 import java.io.Serializable;
-import java.util.List;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 
@@ -29,5 +28,4 @@ public interface Filter<E> extends Serializable {
 
     Filter<E> copy();
 
-    List<Predicate<? super E>> getPredicates();
 }

@@ -53,10 +53,10 @@ public final class CrimsonHonorGuard extends CardImpl {
 
 class CrimsonHonorGuardEffect extends OneShotEffect {
 
-    private static final FilterPermanent filter = new FilterPermanent("Commander");
+    private final static FilterPermanent filter = new FilterPermanent("Commander");
 
     static {
-        filter.add(CommanderPredicate.instance);
+        filter.add(new CommanderPredicate());
     }
 
     public CrimsonHonorGuardEffect() {

@@ -1,8 +1,10 @@
 
 package mage.abilities.keyword;
 
-import java.util.*;
-
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -43,10 +45,10 @@ public class MeleeAbility extends AttacksTriggeredAbility {
 
 class MeleeWatcher extends Watcher {
 
-    private Map<UUID, Set<UUID>> playersAttacked = new HashMap<>(0);
+    private HashMap<UUID, Set<UUID>> playersAttacked = new HashMap<>(0);
 
     MeleeWatcher() {
-        super(WatcherScope.GAME);
+        super("MeleeWatcher", WatcherScope.GAME);
     }
 
     MeleeWatcher(final MeleeWatcher watcher) {
@@ -86,7 +88,7 @@ class MeleeDynamicValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        MeleeWatcher watcher = game.getState().getWatcher(MeleeWatcher.class);
+        MeleeWatcher watcher = (MeleeWatcher) game.getState().getWatchers().get(MeleeWatcher.class.getSimpleName());
         if (watcher != null) {
             if (!valueChecked) {
                 this.lockedInValue = watcher.getNumberOfAttackedPlayers(sourceAbility.getControllerId());

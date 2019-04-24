@@ -5,8 +5,10 @@
  */
 package mage.watchers.common;
 
-import java.util.*;
-
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 import mage.MageObject;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
@@ -23,11 +25,11 @@ import mage.watchers.Watcher;
  */
 public class SpellsCastWatcher extends Watcher {
 
-    private final Map<UUID, List<Spell>> spellsCast = new HashMap<>();
+    private final HashMap<UUID, List<Spell>> spellsCast = new HashMap<>();
     private int nonCreatureSpells;
 
     public SpellsCastWatcher() {
-        super(WatcherScope.GAME);
+        super(SpellsCastWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public SpellsCastWatcher(final SpellsCastWatcher watcher) {

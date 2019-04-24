@@ -20,7 +20,7 @@ public final class HourOfReckoning extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creatures");
     
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(Predicates.not(new TokenPredicate()));
     }
     
     public HourOfReckoning(UUID ownerId, CardSetInfo setInfo) {

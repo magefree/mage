@@ -25,7 +25,7 @@ public final class EnergyTap extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public EnergyTap(UUID ownerId, CardSetInfo setInfo) {

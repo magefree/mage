@@ -26,7 +26,7 @@ public final class BoltwingMarauder extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature under your control");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
     
     public BoltwingMarauder(UUID ownerId, CardSetInfo setInfo) {

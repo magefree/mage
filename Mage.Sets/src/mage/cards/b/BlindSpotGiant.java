@@ -25,7 +25,7 @@ public final class BlindSpotGiant extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.GIANT));
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public BlindSpotGiant(UUID ownerId, CardSetInfo setInfo) {

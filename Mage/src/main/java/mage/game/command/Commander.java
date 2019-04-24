@@ -1,7 +1,10 @@
+
 package mage.game.command;
 
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -21,15 +24,9 @@ import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
 
-import java.util.EnumSet;
-import java.util.List;
-import java.util.UUID;
-
 public class Commander implements CommandObject {
 
     private final Card sourceObject;
-    private boolean copy;
-    private MageObject copyFrom; // copied card INFO (used to call original adjusters)
     private final Abilities<Ability> abilities = new AbilitiesImpl<>();
 
     public Commander(Card card) {
@@ -43,10 +40,8 @@ public class Commander implements CommandObject {
         }
     }
 
-    private Commander(final Commander commander) {
-        this.sourceObject = commander.sourceObject;
-        this.copy = commander.copy;
-        this.copyFrom = (commander.copyFrom != null ? commander.copyFrom.copy() : null);
+    private Commander(Commander copy) {
+        this.sourceObject = copy.sourceObject;
     }
 
     @Override
@@ -71,22 +66,6 @@ public class Commander implements CommandObject {
     @Override
     public CommandObject copy() {
         return new Commander(this);
-    }
-
-    @Override
-    public void setCopy(boolean isCopy, MageObject copyFrom) {
-        this.copy = isCopy;
-        this.copyFrom = (copyFrom != null ? copyFrom.copy() : null);
-    }
-
-    @Override
-    public boolean isCopy() {
-        return this.copy;
-    }
-
-    @Override
-    public MageObject getCopyFrom() {
-        return this.copyFrom;
     }
 
     @Override
@@ -189,6 +168,15 @@ public class Commander implements CommandObject {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
+    }
+
+    @Override
+    public void setCopy(boolean isCopy) {
+    }
+
+    @Override
+    public boolean isCopy() {
+        return false;
     }
 
     @Override

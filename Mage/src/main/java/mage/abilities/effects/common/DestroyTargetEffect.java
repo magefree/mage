@@ -1,5 +1,7 @@
+
 package mage.abilities.effects.common;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -11,9 +13,8 @@ import mage.target.targetpointer.FirstTargetPointer;
 import mage.target.targetpointer.SecondTargetPointer;
 import mage.util.CardUtil;
 
-import java.util.UUID;
-
 /**
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class DestroyTargetEffect extends OneShotEffect {
@@ -26,16 +27,12 @@ public class DestroyTargetEffect extends OneShotEffect {
     }
 
     public DestroyTargetEffect(String ruleText) {
-        this(ruleText, false);
+        this(false);
+        staticText = ruleText;
     }
 
     public DestroyTargetEffect(boolean noRegen) {
         this(noRegen, false);
-    }
-
-    public DestroyTargetEffect(String ruleText, boolean noRegen) {
-        this(noRegen, false);
-        staticText = ruleText;
     }
 
     public DestroyTargetEffect(boolean noRegen, boolean multitargetHandling) {
@@ -58,15 +55,11 @@ public class DestroyTargetEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int affectedTargets = 0;
-        if (multitargetHandling
-                && source.getTargets().size() > 1
-                && targetPointer instanceof FirstTargetPointer) { // Decimate
+        if (multitargetHandling && source.getTargets().size() > 1 && targetPointer instanceof FirstTargetPointer) { // Decimate
             for (Target target : source.getTargets()) {
                 for (UUID permanentId : target.getTargets()) {
                     Permanent permanent = game.getPermanent(permanentId);
-                    if (permanent != null
-                            && permanent.isPhasedIn()
-                            && !permanent.isPhasedOutIndirectly()) {
+                    if (permanent != null) {
                         permanent.destroy(source.getSourceId(), game, noRegen);
                         affectedTargets++;
                     }
@@ -75,9 +68,7 @@ public class DestroyTargetEffect extends OneShotEffect {
         } else {
             for (UUID permanentId : targetPointer.getTargets(game, source)) {
                 Permanent permanent = game.getPermanent(permanentId);
-                if (permanent != null
-                        && permanent.isPhasedIn()
-                        && !permanent.isPhasedOutIndirectly()) {
+                if (permanent != null) {
                     permanent.destroy(source.getSourceId(), game, noRegen);
                     affectedTargets++;
                 }
@@ -109,12 +100,7 @@ public class DestroyTargetEffect extends OneShotEffect {
                 }
                 sb.append(targetName);
             } else {
-                if (target.getMaxNumberOfTargets() == target.getMinNumberOfTargets()) {
-                    sb.append("destroy ").append(CardUtil.numberToText(target.getNumberOfTargets()));
-                } else {
-                    sb.append("destroy up to ").append(CardUtil.numberToText(target.getMaxNumberOfTargets()));
-                }
-                sb.append(" target ").append(target.getTargetName());
+                sb.append("Destroy ").append(CardUtil.numberToText(target.getNumberOfTargets())).append(" target ").append(target.getTargetName());
             }
         }
         if (noRegen) {

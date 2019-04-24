@@ -23,7 +23,7 @@ public final class SurrakarBanisher extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(new TappedPredicate());
     }
 
     public SurrakarBanisher(UUID ownerId, CardSetInfo setInfo) {

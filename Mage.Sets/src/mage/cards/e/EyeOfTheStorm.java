@@ -1,5 +1,7 @@
+
 package mage.cards.e;
 
+import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -21,9 +23,8 @@ import mage.target.TargetCard;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
-import java.util.UUID;
-
 /**
+ *
  * @author spjspj
  */
 public final class EyeOfTheStorm extends CardImpl {
@@ -110,7 +111,7 @@ class EyeOfTheStormEffect1 extends OneShotEffect {
             Card card = spell.getCard();
             if (spellController == null
                     || card == null
-                    || !StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY.match(spell, game)) {
+                    || !StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY.match(spell, game)) {
                 return false;
             }
             if (!noLongerOnStack) {// the spell is still on the stack, so exile it
@@ -124,9 +125,11 @@ class EyeOfTheStormEffect1 extends OneShotEffect {
                     && !eyeOfTheStorm.getImprinted().isEmpty()) {
                 CardsImpl copiedCards = new CardsImpl();
                 for (UUID uuid : eyeOfTheStorm.getImprinted()) {
-                    // Check if owner of card is still in game
                     card = game.getCard(uuid);
-                    if (card != null && game.getPlayer(card.getOwnerId()) != null) {
+
+                    // Check if owner of card is still in game
+                    if (card != null
+                            && game.getPlayer(card.getOwnerId()) != null) {
                         if (card.isSplitCard()) {
                             copiedCards.add(((SplitCard) card).getLeftHalfCard());
                             copiedCards.add(((SplitCard) card).getRightHalfCard());

@@ -1,5 +1,7 @@
+
 package mage.cards.i;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
@@ -8,15 +10,19 @@ import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.UUID;
-
 /**
+ *
  * @author L_J
  */
 public final class IronclawCurse extends CardImpl {
@@ -66,10 +72,7 @@ class IronclawCurseEffect extends CantBlockAttachedEffect {
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        if (attacker == null) {
-            return true;
-        }
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
         Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (enchantment == null) {
             return false;

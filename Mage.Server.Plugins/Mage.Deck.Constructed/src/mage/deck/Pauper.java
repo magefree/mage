@@ -9,8 +9,10 @@ import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.Constructed;
 import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
+ *
  * @author LevelX2
  */
 public class Pauper extends Constructed {
@@ -20,7 +22,7 @@ public class Pauper extends Constructed {
 
         //TODO: Add only Magic Online sets for pauper
         for (ExpansionSet set : Sets.getInstance().values()) {
-            if (set.getSetType().isEternalLegal()) {
+            if (set.getSetType() != SetType.CUSTOM_SET) {
                 setCodes.add(set.getCode());
             }
         }

@@ -1,5 +1,7 @@
+
 package mage.cards.p;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -18,9 +20,8 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.util.CardUtil;
 
-import java.util.UUID;
-
 /**
+ *
  * @author BetaSteward_at_googlemail.com & L_J
  */
 public final class PetraSphinx extends CardImpl {
@@ -78,7 +79,7 @@ class PetraSphinxEffect extends OneShotEffect {
                 if (card != null) {
                     Cards cards = new CardsImpl(card);
                     player.revealCards(source, cards, game);
-                    if (CardUtil.haveSameNames(card.getName(), cardName)) {
+                    if (card.getName().equals(cardName)) {
                         player.moveCards(cards, Zone.HAND, source, game);
                     } else {
                         player.moveCards(cards, Zone.GRAVEYARD, source, game);

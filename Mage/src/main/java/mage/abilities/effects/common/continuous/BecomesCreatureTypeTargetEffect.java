@@ -15,6 +15,7 @@ import mage.util.SubTypeList;
 import java.util.UUID;
 
 /**
+ *
  * @author LevelX2
  */
 public class BecomesCreatureTypeTargetEffect extends ContinuousEffectImpl {
@@ -72,7 +73,7 @@ public class BecomesCreatureTypeTargetEffect extends ContinuousEffectImpl {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         if (loseOther) {
-                            permanent.getSubtype(game).retainAll(SubType.getLandTypes());
+                            permanent.getSubtype(game).retainAll(SubType.getLandTypes(false));
                             permanent.getSubtype(game).addAll(subtypes);
                         } else {
                             for (SubType subtype : subtypes) {

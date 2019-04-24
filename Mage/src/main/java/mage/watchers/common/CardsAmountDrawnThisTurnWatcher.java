@@ -22,7 +22,7 @@ public class CardsAmountDrawnThisTurnWatcher extends Watcher {
     private final Map<UUID, Integer> amountOfCardsDrawnThisTurn = new HashMap<>();
 
     public CardsAmountDrawnThisTurnWatcher() {
-        super(WatcherScope.GAME);
+        super(CardsAmountDrawnThisTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public CardsAmountDrawnThisTurnWatcher(final CardsAmountDrawnThisTurnWatcher watcher) {

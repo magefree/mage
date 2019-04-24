@@ -25,7 +25,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class MoonlightHunt extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
 
     static {
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
@@ -51,7 +51,7 @@ public final class MoonlightHunt extends CardImpl {
 
 class MoonlightHuntEffect extends OneShotEffect {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
         filter.add(Predicates.or(new SubtypePredicate(SubType.WOLF), new SubtypePredicate(SubType.WEREWOLF)));

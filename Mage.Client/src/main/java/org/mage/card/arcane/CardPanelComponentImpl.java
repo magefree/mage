@@ -1,11 +1,11 @@
 package org.mage.card.arcane;
 
+import com.google.common.base.Function;
+import com.google.common.collect.MapMaker;
 import mage.cards.action.ActionCallback;
-import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.ImageCaches;
 import mage.client.util.ImageHelper;
-import mage.client.util.SoftValuesLoadingCache;
 import mage.components.ImagePanel;
 import mage.components.ImagePanelStyle;
 import mage.constants.AbilityType;
@@ -17,10 +17,12 @@ import org.apache.log4j.Logger;
 import org.jdesktop.swingx.graphics.GraphicsUtilities;
 import org.mage.plugins.card.images.ImageCache;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
+import mage.client.constants.Constants;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.UUID;
 
@@ -50,12 +52,12 @@ public class CardPanelComponentImpl extends CardPanel {
     private static final int CARD_MAX_SIZE_FOR_ICONS = 200;
 
     public final ScaledImagePanel imagePanel;
-    private ImagePanel overlayPanel;
+    public ImagePanel overlayPanel;
 
-    private JPanel iconPanel;
+    public JPanel iconPanel;
     private JButton typeButton;
 
-    private JPanel counterPanel;
+    public JPanel counterPanel;
     private JLabel loyaltyCounterLabel;
     private JLabel plusCounterLabel;
     private JLabel otherCounterLabel;
@@ -76,31 +78,7 @@ public class CardPanelComponentImpl extends CardPanel {
     private boolean displayTitleAnyway;
     private boolean displayFullImagePath;
 
-    private final static SoftValuesLoadingCache<Key, BufferedImage> IMAGE_CACHE;
-
-    public ImagePanel getOverlayPanel() {
-        return overlayPanel;
-    }
-
-    public void setOverlayPanel(ImagePanel overlayPanel) {
-        this.overlayPanel = overlayPanel;
-    }
-
-    public JPanel getIconPanel() {
-        return iconPanel;
-    }
-
-    public void setIconPanel(JPanel iconPanel) {
-        this.iconPanel = iconPanel;
-    }
-
-    public JPanel getCounterPanel() {
-        return counterPanel;
-    }
-
-    public void setCounterPanel(JPanel counterPanel) {
-        this.counterPanel = counterPanel;
-    }
+    private final static Map<Key, BufferedImage> IMAGE_CACHE;
 
     static class Key {
 
@@ -115,9 +93,8 @@ public class CardPanelComponentImpl extends CardPanel {
         final boolean isChoosable;
         final boolean isPlayable;
         final boolean canAttack;
-        final boolean canBlock;
 
-        public Key(int width, int height, int cardWidth, int cardHeight, int cardXOffset, int cardYOffset, boolean hasImage, boolean isSelected, boolean isChoosable, boolean isPlayable, boolean canAttack, boolean canBlock) {
+        public Key(int width, int height, int cardWidth, int cardHeight, int cardXOffset, int cardYOffset, boolean hasImage, boolean isSelected, boolean isChoosable, boolean isPlayable, boolean canAttack) {
             this.width = width;
             this.height = height;
             this.cardWidth = cardWidth;
@@ -129,7 +106,6 @@ public class CardPanelComponentImpl extends CardPanel {
             this.isChoosable = isChoosable;
             this.isPlayable = isPlayable;
             this.canAttack = canAttack;
-            this.canBlock = canBlock;
         }
 
         @Override
@@ -146,7 +122,6 @@ public class CardPanelComponentImpl extends CardPanel {
             hash = 19 * hash + (this.isChoosable ? 1 : 0);
             hash = 19 * hash + (this.isPlayable ? 1 : 0);
             hash = 19 * hash + (this.canAttack ? 1 : 0);
-            hash = 19 * hash + (this.canBlock ? 1 : 0);
             return hash;
         }
 
@@ -195,28 +170,28 @@ public class CardPanelComponentImpl extends CardPanel {
             if (this.canAttack != other.canAttack) {
                 return false;
             }
-            return this.canBlock == other.canBlock;
+            return true;
         }
     }
 
     static {
-        IMAGE_CACHE = ImageCaches.register(SoftValuesLoadingCache.from(CardPanelComponentImpl::createImage));
+        IMAGE_CACHE = ImageCaches.register(new MapMaker().softValues().makeComputingMap((Function<Key, BufferedImage>) key -> createImage(key)));
     }
 
-    static private boolean canShowCardIcons(int cardFullWidth, boolean cardHasImage) {
+    static private boolean canShowCardIcons(int cardFullWidth, boolean cardHasImage){
         // cards without images show icons and text always
         // TODO: apply "card names on card" setting to icon too?
         // TODO: fix card min-max size to hide (compare to settings size, not direct 60 and 200)
         return ((cardFullWidth > 60) && (cardFullWidth < 200)) || (!cardHasImage);
     }
 
-    private static class CardSizes {
+    private static class CardSizes{
         Rectangle rectFull;
         Rectangle rectSelection;
         Rectangle rectBorder;
         Rectangle rectCard;
 
-        CardSizes(int offsetX, int offsetY, int fullWidth, int fullHeight) {
+        CardSizes(int offsetX, int offsetY, int fullWidth, int fullHeight){
 
             int realBorderSizeX = Math.round(fullWidth * BLACK_BORDER_SIZE);
             int realBorderSizeY = Math.round(fullWidth * BLACK_BORDER_SIZE);
@@ -238,27 +213,27 @@ public class CardPanelComponentImpl extends CardPanel {
         // Counter panel
         if (!newGameCard.isAbility()) {
             // panel to show counters on the card
-            setCounterPanel(new JPanel());
-            getCounterPanel().setLayout(null);
-            getCounterPanel().setOpaque(false);
-            add(getCounterPanel());
+            counterPanel = new JPanel();
+            counterPanel.setLayout(null);
+            counterPanel.setOpaque(false);
+            add(counterPanel);
 
             plusCounterLabel = new JLabel("");
             plusCounterLabel.setToolTipText("+1/+1");
-            getCounterPanel().add(plusCounterLabel);
+            counterPanel.add(plusCounterLabel);
 
             minusCounterLabel = new JLabel("");
             minusCounterLabel.setToolTipText("-1/-1");
-            getCounterPanel().add(minusCounterLabel);
+            counterPanel.add(minusCounterLabel);
 
             loyaltyCounterLabel = new JLabel("");
             loyaltyCounterLabel.setToolTipText("loyalty");
-            getCounterPanel().add(loyaltyCounterLabel);
+            counterPanel.add(loyaltyCounterLabel);
 
             otherCounterLabel = new JLabel("");
-            getCounterPanel().add(otherCounterLabel);
+            counterPanel.add(otherCounterLabel);
 
-            getCounterPanel().setVisible(false);
+            counterPanel.setVisible(false);
         }
 
         // Ability icon
@@ -271,7 +246,7 @@ public class CardPanelComponentImpl extends CardPanel {
         }
 
         // Token icon
-        if (this.getGameCard().isToken()) {
+        if (this.gameCard.isToken()) {
             setTypeIcon(ImageManagerImpl.instance.getTokenIconImage(), "Token Permanent");
         }
 
@@ -280,7 +255,7 @@ public class CardPanelComponentImpl extends CardPanel {
 
         // Title Text
         titleText = new GlowText();
-        setText(getGameCard());
+        setText(gameCard);
 //        int fontSize = (int) cardHeight / 11;
 //        titleText.setFont(getFont().deriveFont(Font.BOLD, fontSize));
         titleText.setForeground(Color.white);
@@ -296,10 +271,10 @@ public class CardPanelComponentImpl extends CardPanel {
 
         // PT Text
         ptText = new GlowText();
-        if (getGameCard().isCreature()) {
-            ptText.setText(getGameCard().getPower() + '/' + getGameCard().getToughness());
-        } else if (getGameCard().isPlanesWalker()) {
-            ptText.setText(getGameCard().getLoyalty());
+        if (gameCard.isCreature()) {
+            ptText.setText(gameCard.getPower() + '/' + gameCard.getToughness());
+        } else if (gameCard.isPlanesWalker()) {
+            ptText.setText(gameCard.getLoyalty());
         }
 //        ptText.setFont(getFont().deriveFont(Font.BOLD, fontSize));
         ptText.setForeground(Color.white);
@@ -308,9 +283,9 @@ public class CardPanelComponentImpl extends CardPanel {
 
         // Sickness overlay
         BufferedImage sickness = ImageManagerImpl.instance.getSicknessImage();
-        setOverlayPanel(new ImagePanel(sickness, ImagePanelStyle.SCALED));
-        getOverlayPanel().setOpaque(false);
-        add(getOverlayPanel());
+        overlayPanel = new ImagePanel(sickness, ImagePanelStyle.SCALED);
+        overlayPanel.setOpaque(false);
+        add(overlayPanel);
 
         // Imagel panel
         imagePanel = new ScaledImagePanel();
@@ -326,27 +301,27 @@ public class CardPanelComponentImpl extends CardPanel {
     }
 
     private void setTypeIcon(BufferedImage bufferedImage, String toolTipText) {
-        setIconPanel(new JPanel());
-        getIconPanel().setLayout(null);
-        getIconPanel().setOpaque(false);
-        add(getIconPanel());
+        iconPanel = new JPanel();
+        iconPanel.setLayout(null);
+        iconPanel.setOpaque(false);
+        add(iconPanel);
 
         typeButton = new JButton("");
         typeButton.setLocation(2, 2);
         typeButton.setSize(25, 25);
 
-        getIconPanel().setVisible(true);
+        iconPanel.setVisible(true);
         typeButton.setIcon(new ImageIcon(bufferedImage));
         if (toolTipText != null) {
             typeButton.setToolTipText(toolTipText);
         }
-        getIconPanel().add(typeButton);
+        iconPanel.add(typeButton);
     }
 
     @Override
     public void cleanUp() {
         super.cleanUp();
-        this.setCounterPanel(null);
+        this.counterPanel = null;
     }
 
     private void setText(CardView card) {
@@ -405,10 +380,9 @@ public class CardPanelComponentImpl extends CardPanel {
         }
 
         g2d.drawImage(
-                IMAGE_CACHE.getOrThrow(
+                IMAGE_CACHE.get(
                         new Key(getWidth(), getHeight(), getCardWidth(), getCardHeight(), getCardXOffset(), getCardYOffset(),
-                                hasImage, isSelected(), isChoosable(), getGameCard().isPlayable(), getGameCard().isCanAttack(),
-                                getGameCard().isCanBlock())),
+                                hasImage, isSelected(), isChoosable(), gameCard.isPlayable(), gameCard.isCanAttack())),
                 0, 0, null);
         g2d.dispose();
     }
@@ -444,12 +418,6 @@ public class CardPanelComponentImpl extends CardPanel {
             g2d.fillRoundRect(sizes.rectSelection.x, sizes.rectSelection.y, sizes.rectSelection.width, sizes.rectSelection.height, cornerSizeSelection, cornerSizeSelection);
         }
 
-        // draw attack or block border (?inner part of selection?)
-        if (key.canAttack || key.canBlock) {
-            g2d.setColor(new Color(255, 50, 50, 230));
-            g2d.fillRoundRect(sizes.rectSelection.x + 1, sizes.rectSelection.y + 1, sizes.rectSelection.width - 2, sizes.rectSelection.height - 2, cornerSizeSelection, cornerSizeSelection);
-        }
-
         // draw empty card with border
         if (!key.hasImage) {
             // gray 1 px border
@@ -457,6 +425,12 @@ public class CardPanelComponentImpl extends CardPanel {
             g2d.fillRoundRect(sizes.rectBorder.x, sizes.rectBorder.y, sizes.rectBorder.width, sizes.rectBorder.height, cornerSizeBorder, cornerSizeBorder);
             // color plate
             g2d.setColor(new Color(30, 200, 200, 200));
+            g2d.fillRoundRect(sizes.rectBorder.x + 1, sizes.rectBorder.y + 1, sizes.rectBorder.width - 2, sizes.rectBorder.height - 2, cornerSizeBorder, cornerSizeBorder);
+        }
+
+        // draw attack border (inner part of selection)
+        if (key.canAttack) {
+            g2d.setColor(new Color(0, 0, 255, 230));
             g2d.fillRoundRect(sizes.rectBorder.x + 1, sizes.rectBorder.y + 1, sizes.rectBorder.width - 2, sizes.rectBorder.height - 2, cornerSizeBorder, cornerSizeBorder);
         }
 
@@ -503,7 +477,7 @@ public class CardPanelComponentImpl extends CardPanel {
 
             int symbolMarginX = 2; // 2 px between icons
 
-            String manaCost = ManaSymbols.getStringManaCost(getGameCard().getManaCost());
+            String manaCost = ManaSymbols.getStringManaCost(gameCard.getManaCost());
             int manaWidth = getManaWidth(manaCost, symbolMarginX);
 
             // right top corner with margin (sizes from any sample card, length from black border to mana icon)
@@ -523,7 +497,7 @@ public class CardPanelComponentImpl extends CardPanel {
         StringTokenizer tok = new StringTokenizer(manaCost, " ");
         while (tok.hasMoreTokens()) {
             tok.nextToken();
-            if (width != 0) {
+            if(width != 0) {
                 width += symbolMarginX;
             }
             width += getSymbolWidth();
@@ -547,32 +521,32 @@ public class CardPanelComponentImpl extends CardPanel {
         imagePanel.setLocation(realCardSize.x, realCardSize.y);
         imagePanel.setSize(realCardSize.width, realCardSize.height);
 
-        if (hasSickness() && getGameCard().isCreature() && isPermanent()) {
-            getOverlayPanel().setLocation(realCardSize.x, realCardSize.y);
-            getOverlayPanel().setSize(realCardSize.width, realCardSize.height);
+        if (hasSickness() && gameCard.isCreature() && isPermanent()) {
+            overlayPanel.setLocation(realCardSize.x, realCardSize.y);
+            overlayPanel.setSize(realCardSize.width, realCardSize.height);
         } else {
-            getOverlayPanel().setVisible(false);
+            overlayPanel.setVisible(false);
         }
 
-        if (getIconPanel() != null) {
-            getIconPanel().setLocation(realCardSize.x, realCardSize.y);
-            getIconPanel().setSize(realCardSize.width, realCardSize.height);
+        if (iconPanel != null) {
+            iconPanel.setLocation(realCardSize.x, realCardSize.y);
+            iconPanel.setSize(realCardSize.width, realCardSize.height);
         }
-        if (getCounterPanel() != null) {
-            getCounterPanel().setLocation(realCardSize.x, realCardSize.y);
-            getCounterPanel().setSize(realCardSize.width, realCardSize.height);
+        if (counterPanel != null) {
+            counterPanel.setLocation(realCardSize.x, realCardSize.y);
+            counterPanel.setSize(realCardSize.width, realCardSize.height);
             int size = cardWidth > WIDTH_LIMIT ? 40 : 20;
 
-            minusCounterLabel.setLocation(getCounterPanel().getWidth() - size, getCounterPanel().getHeight() - size * 2);
+            minusCounterLabel.setLocation(counterPanel.getWidth() - size, counterPanel.getHeight() - size * 2);
             minusCounterLabel.setSize(size, size);
 
-            plusCounterLabel.setLocation(5, getCounterPanel().getHeight() - size * 2);
+            plusCounterLabel.setLocation(5, counterPanel.getHeight() - size * 2);
             plusCounterLabel.setSize(size, size);
 
-            loyaltyCounterLabel.setLocation(getCounterPanel().getWidth() - size, getCounterPanel().getHeight() - size);
+            loyaltyCounterLabel.setLocation(counterPanel.getWidth() - size, counterPanel.getHeight() - size);
             loyaltyCounterLabel.setSize(size, size);
 
-            otherCounterLabel.setLocation(5, getCounterPanel().getHeight() - size);
+            otherCounterLabel.setLocation(5, counterPanel.getHeight() - size);
             otherCounterLabel.setSize(size, size);
 
         }
@@ -627,7 +601,7 @@ public class CardPanelComponentImpl extends CardPanel {
 
     @Override
     public String toString() {
-        return getGameCard().toString();
+        return gameCard.toString();
     }
 
     @Override
@@ -661,8 +635,8 @@ public class CardPanelComponentImpl extends CardPanel {
 
     @Override
     public void updateArtImage() {
-        setTappedAngle(isTapped() ? CardPanel.TAPPED_ANGLE : 0);
-        setFlippedAngle(isFlipped() ? CardPanel.FLIPPED_ANGLE : 0);
+        tappedAngle = isTapped() ? CardPanel.TAPPED_ANGLE : 0;
+        flippedAngle = isFlipped() ? CardPanel.FLIPPED_ANGLE : 0;
 
         //final CardView gameCard = this.gameCard;
         final int stamp = ++updateArtImageStamp;
@@ -670,20 +644,20 @@ public class CardPanelComponentImpl extends CardPanel {
         Util.threadPool.submit(() -> {
             try {
                 final BufferedImage srcImage;
-                if (getGameCard().isFaceDown()) {
+                if (gameCard.isFaceDown()) {
                     srcImage = getFaceDownImage();
                 } else if (getCardWidth() > Constants.THUMBNAIL_SIZE_FULL.width) {
-                    srcImage = ImageCache.getImage(getGameCard(), getCardWidth(), getCardHeight());
+                    srcImage = ImageCache.getImage(gameCard, getCardWidth(), getCardHeight());
                 } else {
-                    srcImage = ImageCache.getThumbnail(getGameCard());
+                    srcImage = ImageCache.getThumbnail(gameCard);
                 }
                 if (srcImage == null) {
-                    setFullPath(ImageCache.getFilePath(getGameCard(), getCardWidth()));
+                    setFullPath(ImageCache.getFilePath(gameCard, getCardWidth()));
                 }
                 UI.invokeLater(() -> {
                     if (stamp == updateArtImageStamp) {
                         hasImage = srcImage != null;
-                        setText(getGameCard());
+                        setText(gameCard);
                         setImage(srcImage);
                     }
                 });
@@ -697,12 +671,12 @@ public class CardPanelComponentImpl extends CardPanel {
 
     private BufferedImage getFaceDownImage() {
         if (isPermanent()) {
-            if (((PermanentView) getGameCard()).isMorphed()) {
+            if (((PermanentView) gameCard).isMorphed()) {
                 return ImageCache.getMorphImage();
             } else {
                 return ImageCache.getManifestImage();
             }
-        } else if (this.getGameCard() instanceof StackAbilityView) {
+        } else if (this.gameCard instanceof StackAbilityView) {
             return ImageCache.getMorphImage();
         } else {
             return ImageCache.getCardbackImage();
@@ -712,7 +686,7 @@ public class CardPanelComponentImpl extends CardPanel {
     @Override
     public void showCardTitle() {
         displayTitleAnyway = true;
-        setText(getGameCard());
+        setText(gameCard);
     }
 
     @Override
@@ -734,13 +708,13 @@ public class CardPanelComponentImpl extends CardPanel {
 
         // Summoning Sickness overlay
         if (hasSickness() && card.isCreature() && isPermanent()) {
-            getOverlayPanel().setVisible(true);
+            overlayPanel.setVisible(true);
         } else {
-            getOverlayPanel().setVisible(false);
+            overlayPanel.setVisible(false);
         }
 
         // Update counters panel
-        if (getCounterPanel() != null) {
+        if (counterPanel != null) {
             updateCounters(card);
         }
 
@@ -799,13 +773,13 @@ public class CardPanelComponentImpl extends CardPanel {
                 }
             }
 
-            getCounterPanel().setVisible(true);
+            counterPanel.setVisible(true);
         } else {
             plusCounterLabel.setVisible(false);
             minusCounterLabel.setVisible(false);
             loyaltyCounterLabel.setVisible(false);
             otherCounterLabel.setVisible(false);
-            getCounterPanel().setVisible(false);
+            counterPanel.setVisible(false);
         }
 
     }
@@ -831,10 +805,10 @@ public class CardPanelComponentImpl extends CardPanel {
     @Override
     public Image getImage() {
         if (this.hasImage) {
-            if (getGameCard().isFaceDown()) {
+            if (gameCard.isFaceDown()) {
                 return getFaceDownImage();
             } else {
-                return ImageCache.getImageOriginal(getGameCard());
+                return ImageCache.getImageOriginal(gameCard);
             }
         }
         return null;

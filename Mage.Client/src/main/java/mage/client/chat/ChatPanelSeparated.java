@@ -55,7 +55,11 @@ public class ChatPanelSeparated extends ChatPanelBasic {
                 userColor = USER_INFO_COLOR;
                 break;
             default:
-                userColor = SessionHandler.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
+                if (parentChatRef != null) {
+                    userColor = SessionHandler.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
+                } else {
+                    userColor = SessionHandler.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
+                }
                 textColor = MESSAGE_COLOR;
                 userSeparator = ": ";
         }

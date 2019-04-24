@@ -90,8 +90,9 @@ class ConquerorsFlailColorCount implements DynamicValue {
                     count++;
                 }
             }
+            return count;
         }
-        return count;
+        return 0;
     }
 
     @Override

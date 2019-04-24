@@ -1,13 +1,10 @@
 package mage.cards;
 
-import com.google.common.collect.ImmutableList;
 import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.*;
-import mage.abilities.hint.Hint;
-import mage.abilities.hint.HintUtils;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.repository.PluginClassloaderRegistery;
 import mage.constants.*;
@@ -225,7 +222,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         game.getState().getCardState(objectId).addInfo(key, value);
     }
 
-    protected static final List<String> rulesError = ImmutableList.of("Exception occurred in rules generation");
+    protected static final ArrayList<String> rulesError = new ArrayList<String>() {
+        {
+            add("Exception occurred in rules generation");
+        }
+    };
 
     @Override
     public List<String> getRules() {
@@ -242,7 +243,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         try {
             List<String> rules = getRules();
             if (game != null) {
-                // debug state
                 CardState cardState = game.getState().getCardState(objectId);
                 if (cardState != null) {
                     for (String data : cardState.getInfo().values()) {
@@ -251,27 +251,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     for (Ability ability : cardState.getAbilities()) {
                         rules.add(ability.getRule());
                     }
-                }
-
-                // ability hints
-                List<String> abilityHints = new ArrayList<>();
-                if (HintUtils.ABILITY_HINTS_ENABLE) {
-                    for (Ability ability : abilities) {
-                        for (Hint hint : ability.getHints()) {
-                            String s = hint.getText(game, ability);
-                            if (s != null && !s.isEmpty()) {
-                                abilityHints.add(s);
-                            }
-                        }
-                    }
-                }
-
-                // restrict hints only for permanents, not cards
-
-                // total hints
-                if (!abilityHints.isEmpty()) {
-                    rules.add(HintUtils.HINT_START_MARK);
-                    HintUtils.appendHints(rules, abilityHints);
                 }
             }
             return rules;
@@ -348,11 +327,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         return spellAbility;
     }
 
-    @Override
-    public void adjustCosts(Ability ability, Game game) {
-        ability.adjustCosts(game);
-    }
-
+//    @Override
+//    public void adjustCosts(Ability ability, Game game) {
+//    }
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.adjustTargets(game);
@@ -383,7 +360,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public List<Mana> getMana() {
         List<Mana> mana = new ArrayList<>();
         for (ActivatedManaAbilityImpl ability : this.abilities.getActivatedManaAbilities(Zone.BATTLEFIELD)) {
-            mana.addAll(ability.getNetMana(null));
+            for (Mana netMana : ability.getNetMana(null)) {
+                mana.add(netMana);
+            }
         }
         return mana;
     }
@@ -507,7 +486,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     }
                 }
                 if (lkiObject != null) {
-                    removed = game.getState().getCommand().remove(lkiObject);
+                    removed = game.getState().getCommand().remove((CommandObject) lkiObject);
                 }
                 break;
             case OUTSIDE:
@@ -612,6 +591,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         }
 
         List<ExpansionSet.SetCardInfo> cardInfo = Sets.findSet(expansionSetCode).findCardInfoByClass(secondSideCardClazz);
+        assert cardInfo.size() == 1;    // should find 1 second side card
         if (cardInfo.isEmpty()) {
             return null;
         }
@@ -720,7 +700,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public void removeCounters(String name, int amount, Game game) {
-        int finalAmount = 0;
         for (int i = 0; i < amount; i++) {
             if (!getCounters(game).removeCounter(name, 1)) {
                 break;
@@ -728,12 +707,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTER_REMOVED, objectId, getControllerOrOwner());
             event.setData(name);
             game.fireEvent(event);
-            finalAmount++;
         }
-        GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTERS_REMOVED, objectId, getControllerOrOwner());
-        event.setData(name);
-        event.setAmount(finalAmount);
-        game.fireEvent(event);
     }
 
     @Override
@@ -746,7 +720,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public String getLogName() {
         if (name.isEmpty()) {
-            return GameLog.getNeutralColoredText(EmptyNames.FACE_DOWN_CREATURE.toString());
+            return GameLog.getNeutralColoredText("face down card");
         } else {
             return GameLog.getColoredObjectIdName(this);
         }

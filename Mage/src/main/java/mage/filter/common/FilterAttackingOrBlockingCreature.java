@@ -19,8 +19,8 @@ public class FilterAttackingOrBlockingCreature extends FilterCreaturePermanent {
     public FilterAttackingOrBlockingCreature(String name) {
         super(name);
         this.add(Predicates.or(
-                AttackingPredicate.instance,
-                BlockingPredicate.instance));
+                new AttackingPredicate(),
+                new BlockingPredicate()));
     }
 
     public FilterAttackingOrBlockingCreature(final FilterAttackingOrBlockingCreature filter) {

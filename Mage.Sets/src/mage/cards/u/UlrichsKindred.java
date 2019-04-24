@@ -30,7 +30,7 @@ public final class UlrichsKindred extends CardImpl {
 
     static {
         filter.add(Predicates.or(new SubtypePredicate(SubType.WOLF), new SubtypePredicate(SubType.WEREWOLF)));
-        filter.add(AttackingPredicate.instance);
+        filter.add(new AttackingPredicate());
     }
 
     public UlrichsKindred(UUID ownerId, CardSetInfo setInfo) {

@@ -27,7 +27,7 @@ public final class FloralSpuzzem extends CardImpl {
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
-        filter.add(DefendingPlayerControlsPredicate.instance);
+        filter.add(new DefendingPlayerControlsPredicate());
     }
 
     public FloralSpuzzem(UUID ownerId, CardSetInfo setInfo) {

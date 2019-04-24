@@ -22,7 +22,7 @@ public final class KederektLeviathan extends CardImpl {
     
     private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("all other nonland permanents");
     static{
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public KederektLeviathan(UUID ownerId, CardSetInfo setInfo) {

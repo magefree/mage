@@ -27,7 +27,7 @@ import java.util.UUID;
  */
 public final class GangrenousZombies extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent();
+    private final static FilterLandPermanent filter = new FilterLandPermanent();
 
     static {
         filter.add(new SupertypePredicate(SuperType.SNOW));

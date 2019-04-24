@@ -31,7 +31,7 @@ public final class ShimianNightStalker extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creature");
 
     static {
-        filter.add(AttackingPredicate.instance);
+        filter.add(new AttackingPredicate());
     }
 
     public ShimianNightStalker(UUID ownerId, CardSetInfo setInfo) {

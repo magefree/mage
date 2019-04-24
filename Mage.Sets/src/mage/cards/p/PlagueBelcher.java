@@ -32,7 +32,7 @@ public final class PlagueBelcher extends CardImpl {
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(new SubtypePredicate(SubType.ZOMBIE));
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public PlagueBelcher(UUID ownerId, CardSetInfo setInfo) {

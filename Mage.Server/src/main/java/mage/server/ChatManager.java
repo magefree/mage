@@ -1,5 +1,14 @@
+
 package mage.server;
 
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.server.exceptions.UserNotFoundException;
@@ -10,15 +19,6 @@ import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
 import mage.view.ChatMessage.SoundToPlay;
 import org.apache.log4j.Logger;
-
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -107,8 +107,7 @@ public enum ChatManager {
                 if (u.isPresent()) {
 
                     User user = u.get();
-                    String messageId = chatId.toString() + message;
-                    if (messageId.equals(userMessages.get(userName))) {
+                    if (message.equals(userMessages.get(userName))) {
                         // prevent identical messages
                         String informUser = "Your message appears to be identical to your last message";
                         chatSessions.get(chatId).broadcastInfoToUser(user, informUser);
@@ -145,7 +144,7 @@ public enum ChatManager {
                         }
                     }
 
-                    userMessages.put(userName, messageId);
+                    userMessages.put(userName, message);
 
                     if (messageType == MessageType.TALK) {
                         if (user.getChatLockedUntil() != null) {
@@ -173,8 +172,8 @@ public enum ChatManager {
             + "<br/>\\whisper or \\w [player name] [text] - whisper to the player with the given name"
             + "<br/>\\card Card Name - Print oracle text for card"
             + "<br/>[Card Name] - Show a highlighted card name"
-            + "<br/>\\ignore - shows your ignore list on this server."
-            + "<br/>\\ignore [username] - add username to ignore list (they won't be able to chat or join to your game)."
+            + "<br/>\\ignore - shows current ignore list on this server."
+            + "<br/>\\ignore [username] - add a username to your ignore list on this server."
             + "<br/>\\unignore [username] - remove a username from your ignore list on this server.";
 
     final Pattern getCardTextPattern = Pattern.compile("^.card *(.*)");
@@ -204,7 +203,7 @@ public enum ChatManager {
             if (session != null && session.getInfo() != null) {
                 String gameId = session.getInfo();
                 if (gameId.startsWith("Game ")) {
-                    UUID id = java.util.UUID.fromString(gameId.substring(5));
+                    UUID id = java.util.UUID.fromString(gameId.substring(5, gameId.length()));
                     for (Entry<UUID, GameController> entry : GameManager.instance.getGameController().entrySet()) {
                         if (entry.getKey().equals(id)) {
                             GameController controller = entry.getValue();
@@ -225,7 +224,7 @@ public enum ChatManager {
             if (session != null && session.getInfo() != null) {
                 String gameId = session.getInfo();
                 if (gameId.startsWith("Game ")) {
-                    UUID id = java.util.UUID.fromString(gameId.substring(5));
+                    UUID id = java.util.UUID.fromString(gameId.substring(5, gameId.length()));
                     for (Entry<UUID, GameController> entry : GameManager.instance.getGameController().entrySet()) {
                         if (entry.getKey().equals(id)) {
                             GameController controller = entry.getValue();
@@ -239,7 +238,7 @@ public enum ChatManager {
                 }
             }
             return true;
-        }
+        }        
         if (command.startsWith("CARD ")) {
             Matcher matchPattern = getCardTextPattern.matcher(message.toLowerCase(Locale.ENGLISH));
             if (matchPattern.find()) {

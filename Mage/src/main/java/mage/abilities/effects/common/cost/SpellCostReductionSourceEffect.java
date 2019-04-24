@@ -1,3 +1,4 @@
+
 package mage.abilities.effects.common.cost;
 
 import mage.abilities.Ability;
@@ -12,17 +13,14 @@ import mage.game.Game;
 import mage.util.CardUtil;
 
 /**
+ *
  * @author LevelX2
  */
 public class SpellCostReductionSourceEffect extends CostModificationEffectImpl {
 
     private final int amount;
     private ManaCosts<ManaCost> manaCostsToReduce = null;
-    private Condition condition;
-
-    public SpellCostReductionSourceEffect(ManaCosts<ManaCost> manaCostsToReduce) {
-        this(manaCostsToReduce, null);
-    }
+    private final Condition condition;
 
     public SpellCostReductionSourceEffect(ManaCosts<ManaCost> manaCostsToReduce, Condition condition) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
@@ -35,16 +33,8 @@ public class SpellCostReductionSourceEffect extends CostModificationEffectImpl {
         for (String manaSymbol : manaCostsToReduce.getSymbols()) {
             sb.append(manaSymbol);
         }
-        sb.append(" less");
-        if (this.condition != null) {
-            sb.append(" to if ").append(this.condition.toString());
-        }
-
+        sb.append(" less to if ").append(this.condition.toString());
         this.staticText = sb.toString();
-    }
-
-    public SpellCostReductionSourceEffect(int amount) {
-        this(amount, null);
     }
 
     public SpellCostReductionSourceEffect(int amount, Condition condition) {
@@ -52,11 +42,10 @@ public class SpellCostReductionSourceEffect extends CostModificationEffectImpl {
         this.amount = amount;
         this.condition = condition;
         StringBuilder sb = new StringBuilder();
-        sb.append("{this} costs {").append(amount).append("} less to cast");
-        if (this.condition != null) {
-            sb.append(" ").append(this.condition.toString().startsWith("if ") ? "" : "if ");
-            sb.append(this.condition.toString());
-        }
+        sb.append("{this} costs {")
+                .append(amount).append("} less to cast ")
+                .append((this.condition.toString().startsWith("if ") ? "" : "if "))
+                .append(this.condition.toString());
         this.staticText = sb.toString();
     }
 
@@ -80,7 +69,7 @@ public class SpellCostReductionSourceEffect extends CostModificationEffectImpl {
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify.getSourceId().equals(source.getSourceId()) && (abilityToModify instanceof SpellAbility)) {
-            return condition == null || condition.apply(game, source);
+            return condition.apply(game, source);
         }
         return false;
     }

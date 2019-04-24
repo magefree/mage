@@ -28,7 +28,7 @@ public final class GrimPoppet extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
     
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
     
     public GrimPoppet(UUID ownerId, CardSetInfo setInfo) {

@@ -33,7 +33,7 @@ public final class ShipwreckSinger extends CardImpl {
     private static final FilterCreaturePermanent filterAttacking = new FilterCreaturePermanent("Attacking creatures");
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
-        filterAttacking.add(AttackingPredicate.instance);
+        filterAttacking.add(new AttackingPredicate());
     }
 
     public ShipwreckSinger(UUID ownerId, CardSetInfo setInfo) {

@@ -1,27 +1,28 @@
-package mage.cards.decks.importer;
 
-import mage.cards.decks.DeckCardInfo;
-import mage.cards.decks.DeckCardLists;
-import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
+package mage.cards.decks.importer;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
+import mage.cards.decks.DeckCardInfo;
+import mage.cards.decks.DeckCardLists;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 
 /**
+ *
  * @author BetaSteward_at_googlemail.com
  */
-public class TxtDeckImporter extends PlainTextDeckImporter {
+public class TxtDeckImporter extends DeckImporter {
 
     private static final String[] SET_VALUES = new String[]{"lands", "creatures", "planeswalkers", "other spells", "sideboard cards",
-            "Instant", "Land", "Enchantment", "Artifact", "Sorcery", "Planeswalker", "Creature"};
+        "Instant", "Land", "Enchantment", "Artifact", "Sorcery", "Planeswalker", "Creature"};
     private static final Set<String> IGNORE_NAMES = new HashSet<>(Arrays.asList(SET_VALUES));
 
     private boolean sideboard = false;
     private boolean switchSideboardByEmptyLine = true; // all cards after first empty line will be sideboard (like mtgo format)
-    private boolean wasCardLines = false;
+    private int nonEmptyLinesTotal = 0;
 
     public TxtDeckImporter(boolean haveSideboardSection) {
         if (haveSideboardSection) {
@@ -55,16 +56,18 @@ public class TxtDeckImporter extends PlainTextDeckImporter {
         }
 
         // switch sideboard by empty line
-        if (switchSideboardByEmptyLine && line.isEmpty() && wasCardLines) {
+        if (switchSideboardByEmptyLine && line.isEmpty() && nonEmptyLinesTotal > 0) {
             if (!sideboard) {
                 sideboard = true;
             } else {
-                sbMessage.append("Found empty line at ").append(lineCount).append(", but sideboard already used. Use //sideboard switcher OR use only one empty line to devide your cards.").append('\n');
+                sbMessage.append("Found empty line at ").append(lineCount).append(", but sideboard already used. Use //sideboard switcher OR one empty line to devide your cards.").append('\n');
             }
 
             // skip empty line
             return;
         }
+
+        nonEmptyLinesTotal++;
 
         // single line sideboard card from deckstats.net
         // SB: 3 Carnage Tyrant
@@ -79,36 +82,8 @@ public class TxtDeckImporter extends PlainTextDeckImporter {
         if (delim < 0) {
             return;
         }
-
         String lineNum = line.substring(0, delim).trim();
-        if (IGNORE_NAMES.contains(lineNum)) {
-            return;
-        }
-
-        // amount
-        int cardAmount = 0;
-        boolean haveCardAmout;
-        try {
-            cardAmount = Integer.parseInt(lineNum.replaceAll("\\D+", ""));
-            if ((cardAmount <= 0) || (cardAmount >= 100)) {
-                sbMessage.append("Invalid number (too small or too big): ").append(lineNum).append(" at line ").append(lineCount).append('\n');
-                return;
-            }
-            haveCardAmout = true;
-        } catch (NumberFormatException nfe) {
-            haveCardAmout = false;
-            //sbMessage.append("Invalid number: ").append(lineNum).append(" at line ").append(lineCount).append('\n');
-            //return;
-        }
-
-        String lineName;
-        if (haveCardAmout) {
-            lineName = line.substring(delim).trim();
-        } else {
-            lineName = line.trim();
-            cardAmount = 1;
-        }
-
+        String lineName = line.substring(delim).replace("'", "\'").trim();
         lineName = lineName
                 .replace("&amp;", "//")
                 .replace("Ã†", "Ae")
@@ -122,25 +97,33 @@ public class TxtDeckImporter extends PlainTextDeckImporter {
         if (lineName.contains("//") && !lineName.contains(" // ")) {
             lineName = lineName.replace("//", " // ");
         }
-        lineName = lineName.replaceFirst("(?<=[^/])\\s*/\\s*(?=[^/])", " // ");
-
-        if (IGNORE_NAMES.contains(lineName)) {
+        if (lineName.contains(" / ")) {
+            lineName = lineName.replace(" / ", " // ");
+        }
+        if (IGNORE_NAMES.contains(lineName) || IGNORE_NAMES.contains(lineNum)) {
             return;
         }
+        try {
+            int num = Integer.parseInt(lineNum.replaceAll("\\D+", ""));
+            if ((num < 0) || (num > 100)) {
+                sbMessage.append("Invalid number (too small or too big): ").append(lineNum).append(" at line ").append(lineCount).append('\n');
+                return;
+            }
 
-        wasCardLines = true;
-
-        CardInfo cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(lineName, true);
-        if (cardInfo == null) {
-            sbMessage.append("Could not find card: '").append(lineName).append("' at line ").append(lineCount).append('\n');
-        } else {
-            for (int i = 0; i < cardAmount; i++) {
-                if (!sideboard && !singleLineSideBoard) {
-                    deckList.getCards().add(new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode()));
-                } else {
-                    deckList.getSideboard().add(new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode()));
+            CardInfo cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(lineName, true);
+            if (cardInfo == null) {
+                sbMessage.append("Could not find card: '").append(lineName).append("' at line ").append(lineCount).append('\n');
+            } else {
+                for (int i = 0; i < num; i++) {
+                    if (!sideboard && !singleLineSideBoard) {
+                        deckList.getCards().add(new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode()));
+                    } else {
+                        deckList.getSideboard().add(new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode()));
+                    }
                 }
             }
+        } catch (NumberFormatException nfe) {
+            sbMessage.append("Invalid number: ").append(lineNum).append(" at line ").append(lineCount).append('\n');
         }
     }
 }

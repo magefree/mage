@@ -32,7 +32,7 @@ public final class LightningCoils extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a nontoken creature you control");
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(Predicates.not(new TokenPredicate()));
     }
 
     public LightningCoils(UUID ownerId, CardSetInfo setInfo) {

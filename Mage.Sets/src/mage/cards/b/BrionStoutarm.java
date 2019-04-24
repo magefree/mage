@@ -30,7 +30,7 @@ public final class BrionStoutarm extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature other than Brion Stoutarm");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public BrionStoutarm(UUID ownerId, CardSetInfo setInfo) {

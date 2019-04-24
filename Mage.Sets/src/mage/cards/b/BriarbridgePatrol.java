@@ -56,7 +56,7 @@ enum BriarbridgePatrolCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        PermanentsSacrificedWatcher watcher = game.getState().getWatcher(PermanentsSacrificedWatcher.class);
+        PermanentsSacrificedWatcher watcher = (PermanentsSacrificedWatcher) game.getState().getWatchers().get(PermanentsSacrificedWatcher.class.getSimpleName());
         if (watcher != null) {
             List<Permanent> sacrificedPermanents = watcher.getThisTurnSacrificedPermanents(source.getControllerId());
             if (sacrificedPermanents != null && !sacrificedPermanents.isEmpty()) {

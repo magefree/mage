@@ -1,13 +1,17 @@
+
+
 package mage.deck;
 
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.Constructed;
+import mage.constants.SetType;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class Extended extends Constructed {
@@ -18,11 +22,13 @@ public class Extended extends Constructed {
         GregorianCalendar cutoff;
         if (current.get(Calendar.MONTH) > 9) {
             cutoff = new GregorianCalendar(current.get(Calendar.YEAR) - 3, Calendar.SEPTEMBER, 1);
-        } else {
+        }
+        else {
             cutoff = new GregorianCalendar(current.get(Calendar.YEAR) - 4, Calendar.SEPTEMBER, 1);
         }
-        for (ExpansionSet set : Sets.getInstance().values()) {
-            if (set.getSetType().isStandardLegal() && set.getReleaseDate().after(cutoff.getTime())) {
+        for (ExpansionSet set: Sets.getInstance().values()) {
+            if (set.getReleaseDate().after(cutoff.getTime()) && 
+                    (set.getSetType() == SetType.CORE || set.getSetType() == SetType.EXPANSION)) {
                 setCodes.add(set.getCode());
             }
         }
@@ -32,6 +38,6 @@ public class Extended extends Constructed {
         banned.add("Ponder");
         banned.add("Preordain");
         banned.add("Stoneforge Mystic");
-
+        
     }
 }

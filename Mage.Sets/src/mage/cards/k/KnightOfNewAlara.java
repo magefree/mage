@@ -55,7 +55,7 @@ class KnightOfNewAlaraEffect extends ContinuousEffectImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
     static {
-        filter.add(MulticoloredPredicate.instance);
+        filter.add(new MulticoloredPredicate());
     }
 
     public KnightOfNewAlaraEffect() {

@@ -1,5 +1,7 @@
+
 package mage.cards.m;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -14,9 +16,8 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.UUID;
-
 /**
+ *
  * @author LevelX2
  */
 public final class MagusOfTheMoon extends CardImpl {
@@ -28,7 +29,7 @@ public final class MagusOfTheMoon extends CardImpl {
     }
 
     public MagusOfTheMoon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
 
@@ -78,7 +79,7 @@ public final class MagusOfTheMoon extends CardImpl {
                         // 305.7 Note that this doesn't remove any abilities that were granted to the land by other effects
                         // So the ability removing has to be done before Layer 6
                         land.removeAllAbilities(source.getSourceId(), game);
-                        land.getSubtype(game).removeAll(SubType.getLandTypes());
+                        land.getSubtype(game).removeAll(SubType.getLandTypes(false));
                         land.getSubtype(game).add(SubType.MOUNTAIN);
                         break;
                     case AbilityAddingRemovingEffects_6:

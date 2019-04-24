@@ -95,10 +95,10 @@ class TuvasaTheSunlitTriggeredAbility extends SpellCastControllerTriggeredAbilit
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (super.checkTrigger(event, game)) {
-            TuvasaTheSunlitWatcher watcher = game.getState().getWatcher(
-                    TuvasaTheSunlitWatcher.class
+            TuvasaTheSunlitWatcher watcher = (TuvasaTheSunlitWatcher) game.getState().getWatchers().get(
+                    TuvasaTheSunlitWatcher.class.getSimpleName()
             );
-            return watcher != null && event.getTargetId().equals(watcher.getFirstEnchantmentThisTurn(this.getControllerId()));
+            return event.getTargetId().equals(watcher.getFirstEnchantmentThisTurn(this.getControllerId()));
         }
         return false;
     }
@@ -116,10 +116,10 @@ class TuvasaTheSunlitTriggeredAbility extends SpellCastControllerTriggeredAbilit
 
 class TuvasaTheSunlitWatcher extends Watcher {
 
-    private final Map<UUID, UUID> firstEnchantmentThisTurn = new HashMap<>();
+    private final Map<UUID, UUID> firstEnchantmentThisTurn = new HashMap();
 
     public TuvasaTheSunlitWatcher() {
-        super( WatcherScope.GAME);
+        super(TuvasaTheSunlitWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public TuvasaTheSunlitWatcher(final TuvasaTheSunlitWatcher watcher) {

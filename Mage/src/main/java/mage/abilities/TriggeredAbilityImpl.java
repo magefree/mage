@@ -1,3 +1,4 @@
+
 package mage.abilities;
 
 import java.util.Locale;
@@ -44,6 +45,9 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     @Override
     public void trigger(Game game, UUID controllerId) {
         //20091005 - 603.4
+        if (!(this instanceof DelayedTriggeredAbility)) {
+            setSourceObject(null, game);
+        }
         if (checkInterveningIfClause(game)) {
             game.addTriggeredAbility(this);
         }

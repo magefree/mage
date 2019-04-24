@@ -64,8 +64,7 @@ class IsolationCellTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.getOpponents(controllerId).contains(event.getPlayerId())) {
             Card card = game.getCard(event.getSourceId());
-            if (card != null 
-                    && card.isCreature()) {
+            if (card != null && card.isCreature()) {
                 this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
                 return true;
             }
@@ -101,7 +100,7 @@ class IsolationCellEffect extends OneShotEffect {
         if (player != null) {
             GenericManaCost cost = new GenericManaCost(2);
             if (!cost.pay(source, game, player.getId(), player.getId(), false)) {
-                player.loseLife(2, game, false);
+                player.damage(2, source.getSourceId(), game, false, true);
             }
             return true;
         }

@@ -68,7 +68,7 @@ class ZhurTaaDruidAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you tap {this} for mana, " + super.getRule();
+        return new StringBuilder("Whenever you tap {this} for mana, ").append(super.getRule()).toString() ;
     }
 
     @Override

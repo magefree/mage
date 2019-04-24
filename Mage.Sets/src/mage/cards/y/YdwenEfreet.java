@@ -60,12 +60,12 @@ class YdwenEfreetEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent creature = game.getPermanent(source.getSourceId());
         if (controller != null && creature != null) {
-            if (!controller.flipCoin(source, game, true)) {
+            if (!controller.flipCoin(game)) {
                 creature.removeFromCombat(game);
                 creature.setMaxBlocks(0);
                 
                 // Make blocked creatures unblocked
-                BlockedByOnlyOneCreatureThisCombatWatcher watcher = game.getState().getWatcher(BlockedByOnlyOneCreatureThisCombatWatcher.class);
+                BlockedByOnlyOneCreatureThisCombatWatcher watcher = (BlockedByOnlyOneCreatureThisCombatWatcher) game.getState().getWatchers().get(BlockedByOnlyOneCreatureThisCombatWatcher.class.getSimpleName());
                 if (watcher != null) {
                     Set<CombatGroup> combatGroups = watcher.getBlockedOnlyByCreature(creature.getId());
                     if (combatGroups != null) {

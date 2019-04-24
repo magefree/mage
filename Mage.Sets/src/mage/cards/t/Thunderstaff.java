@@ -28,7 +28,7 @@ public final class Thunderstaff extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Attacking creatures");
     static {
-        filter.add(AttackingPredicate.instance);
+        filter.add(new AttackingPredicate());
     }
 
     public Thunderstaff(UUID ownerId, CardSetInfo setInfo) {

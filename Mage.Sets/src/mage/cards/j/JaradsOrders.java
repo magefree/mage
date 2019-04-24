@@ -1,6 +1,7 @@
 
 package mage.cards.j;
 
+import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -64,10 +65,10 @@ class JaradsOrdersEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(0, 2, new FilterCreatureCard("creature cards"));
-            if (controller.searchLibrary(target, source, game)) {
+            if (controller.searchLibrary(target, game)) {
                 if (!target.getTargets().isEmpty()) {
                     Cards revealed = new CardsImpl();
-                    for (UUID cardId: target.getTargets()) {
+                    for (UUID cardId: (List<UUID>)target.getTargets()) {
                         Card card = controller.getLibrary().getCard(cardId, game);
                         revealed.add(card);
                     }

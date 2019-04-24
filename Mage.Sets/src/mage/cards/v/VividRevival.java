@@ -19,7 +19,7 @@ public final class VividRevival extends CardImpl {
     private static final FilterCard filter = new FilterCard("multicolored cards from your graveyard");
 
     static {
-        filter.add(MulticoloredPredicate.instance);
+        filter.add(new MulticoloredPredicate());
     }
 
     public VividRevival(UUID ownerId, CardSetInfo setInfo) {

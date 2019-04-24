@@ -21,11 +21,11 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public final class Bloodbriar extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("another permanent");
+    private final static FilterPermanent filter = new FilterPermanent("another permanent");
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public Bloodbriar(UUID ownerId, CardSetInfo setInfo) {

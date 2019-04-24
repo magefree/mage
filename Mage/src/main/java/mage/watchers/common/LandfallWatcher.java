@@ -15,14 +15,14 @@ import mage.watchers.Watcher;
  */
 public class LandfallWatcher extends Watcher {
 
-    private final Set<UUID> playerPlayedLand = new HashSet<>(); // player that had a land enter the battlefield
-    private final Set<UUID> landEnteredBattlefield = new HashSet<>(); // land played
+    final Set<UUID> playerPlayedLand = new HashSet<>(); // player that had a land enter the battlefield
+    final Set<UUID> landEnteredBattlefield = new HashSet<>(); // land played
 
     public LandfallWatcher() {
-        super(WatcherScope.GAME);
+        super(LandfallWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
-    private LandfallWatcher(final LandfallWatcher watcher) {
+    public LandfallWatcher(final LandfallWatcher watcher) {
         super(watcher);
         playerPlayedLand.addAll(watcher.playerPlayedLand);
         landEnteredBattlefield.addAll(watcher.landEnteredBattlefield);

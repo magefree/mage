@@ -28,7 +28,7 @@ public final class AbzanAscendancy extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(Predicates.not(new TokenPredicate()));
     }
 
     public AbzanAscendancy(UUID ownerId, CardSetInfo setInfo) {

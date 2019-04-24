@@ -27,7 +27,7 @@ public final class OblivionRing extends CardImpl {
     private static final FilterNonlandPermanent anotherNonlandPermanent = new FilterNonlandPermanent("another target nonland permanent");
 
     static {
-         anotherNonlandPermanent.add(AnotherPredicate.instance);
+         anotherNonlandPermanent.add(new AnotherPredicate());
     }
 
     public OblivionRing(UUID ownerId, CardSetInfo setInfo) {

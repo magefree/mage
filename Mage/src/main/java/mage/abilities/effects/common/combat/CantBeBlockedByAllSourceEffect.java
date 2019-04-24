@@ -1,3 +1,4 @@
+
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
@@ -8,6 +9,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
+ *
  * @author LevelX2
  */
 public class CantBeBlockedByAllSourceEffect extends RestrictionEffect {
@@ -34,7 +36,7 @@ public class CantBeBlockedByAllSourceEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
         return !filterBlockedBy.match(blocker, source.getSourceId(), source.getControllerId(), game);
     }
 

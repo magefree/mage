@@ -22,7 +22,7 @@ public final class TranquilGrove extends CardImpl {
     private static final FilterPermanent filter = new FilterEnchantmentPermanent("other enchantments");
     
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
     
     public TranquilGrove(UUID ownerId, CardSetInfo setInfo) {

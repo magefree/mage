@@ -14,11 +14,11 @@ import mage.watchers.Watcher;
  */
 public class PlayLandWatcher extends Watcher {
 
-    private final Set<UUID> playerPlayedLand = new HashSet<>(); // player that played land
-    private final Set<UUID> landPlayed = new HashSet<>(); // land played
+    final Set<UUID> playerPlayedLand = new HashSet<>(); // player that played land
+    final Set<UUID> landPlayed = new HashSet<>(); // land played
 
     public PlayLandWatcher() {
-        super(WatcherScope.GAME);
+        super(PlayLandWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public PlayLandWatcher(final PlayLandWatcher watcher) {

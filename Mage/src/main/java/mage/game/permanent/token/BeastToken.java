@@ -14,7 +14,7 @@ import mage.constants.SubType;
  */
 public final class BeastToken extends TokenImpl {
 
-    static final private List<String> tokenImageSets = new ArrayList<>();
+    final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
         tokenImageSets.addAll(Arrays.asList("C14", "LRW", "M15", "M14", "DDL", "M13", "M12", "DD3GVL", "NPH", "M11", "M10", "EVE", "MM3", "CMA", "E01"));

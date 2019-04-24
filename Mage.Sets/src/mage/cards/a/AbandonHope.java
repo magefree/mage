@@ -1,26 +1,26 @@
 
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
-import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.StaticFilters;
+import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInHand;
 
-import java.util.UUID;
-
 /**
+ *
  * @author fireshoes
  */
 public final class AbandonHope extends CardImpl {
@@ -29,19 +29,26 @@ public final class AbandonHope extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{1}{B}");
 
         // As an additional cost to cast Abandon Hope, discard X cards.
-        Ability ability = new SimpleStaticAbility(Zone.ALL, new InfoEffect("As an additional cost to cast this spell, discard X cards"));
+        Ability ability = new SimpleStaticAbility(Zone.ALL, new AbandonHopeRuleEffect());
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
 
         // Look at target opponent's hand and choose X cards from it. That player discards those cards.
-        ManacostVariableValue manaX = ManacostVariableValue.instance;
+        ManacostVariableValue manaX = new ManacostVariableValue();
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(manaX, TargetController.ANY));
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().setCostAdjuster(AbandonHopeAdjuster.instance);
     }
 
     public AbandonHope(final AbandonHope card) {
         super(card);
+    }
+
+    @Override
+    public void adjustCosts(Ability ability, Game game) {
+        int xValue = ability.getManaCostsToPay().getX();
+        if (xValue > 0) {
+            ability.addCost(new DiscardTargetCost(new TargetCardInHand(xValue, xValue, new FilterCard("cards"))));
+        }
     }
 
     @Override
@@ -50,14 +57,24 @@ public final class AbandonHope extends CardImpl {
     }
 }
 
-enum AbandonHopeAdjuster implements CostAdjuster {
-    instance;
+class AbandonHopeRuleEffect extends OneShotEffect {
+
+    public AbandonHopeRuleEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "As an additional cost to cast this spell, discard X cards";
+    }
+
+    public AbandonHopeRuleEffect(final AbandonHopeRuleEffect effect) {
+        super(effect);
+    }
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
-        if (xValue > 0) {
-            ability.addCost(new DiscardTargetCost(new TargetCardInHand(xValue, xValue, StaticFilters.FILTER_CARD_CARDS)));
-        }
+    public AbandonHopeRuleEffect copy() {
+        return new AbandonHopeRuleEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
     }
 }

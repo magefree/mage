@@ -1,12 +1,22 @@
+
 package mage.cards.s;
 
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
+import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
@@ -17,12 +27,8 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-
 /**
+ *
  * @author LevelX2
  */
 public final class SphinxOfTheChimes extends CardImpl {
@@ -85,9 +91,6 @@ class TargetTwoNonLandCardsWithSameNameInHand extends TargetCardInHand {
         Set<UUID> newPossibleTargets = new HashSet<>();
         Set<UUID> possibleTargets = new HashSet<>();
         Player player = game.getPlayer(sourceControllerId);
-        if (player == null) {
-            return newPossibleTargets;
-        }
         for (Card card : player.getHand().getCards(filter, game)) {
             possibleTargets.add(card.getId());
         }
@@ -110,11 +113,9 @@ class TargetTwoNonLandCardsWithSameNameInHand extends TargetCardInHand {
             for (UUID cardToCheck : cardsToCheck) {
                 FilterCard nameFilter = new FilterCard();
                 Card card = game.getCard(cardToCheck);
-                if (card != null) {
-                    nameFilter.add(new NamePredicate(card.isSplitCard() ? ((SplitCard) card).getLeftHalfCard().getName() : card.getName()));
-                    if (cardsToCheck.count(nameFilter, game) > 1) {
-                        newPossibleTargets.add(cardToCheck);
-                    }
+                nameFilter.add(new NamePredicate(card.isSplitCard() ? ((SplitCard) card).getLeftHalfCard().getName() : card.getName()));
+                if (cardsToCheck.count(nameFilter, game) > 1) {
+                    newPossibleTargets.add(cardToCheck);
                 }
             }
         }
@@ -125,9 +126,6 @@ class TargetTwoNonLandCardsWithSameNameInHand extends TargetCardInHand {
     public boolean canChoose(UUID sourceControllerId, Game game) {
         Cards cardsToCheck = new CardsImpl();
         Player player = game.getPlayer(sourceControllerId);
-        if (player == null) {
-            return false;
-        }
         for (Card card : player.getHand().getCards(filter, game)) {
             cardsToCheck.add(card.getId());
         }
@@ -149,12 +147,16 @@ class TargetTwoNonLandCardsWithSameNameInHand extends TargetCardInHand {
             if (card != null) {
                 if (targets.size() == 1) {
                     Card card2 = game.getCard(targets.entrySet().iterator().next().getKey());
-                    return card2 != null && card2.getName().equals(card.getName());
+                    if (card2 != null && card2.getName().equals(card.getName())) {
+                        return true;
+                    }
                 } else {
                     FilterCard nameFilter = new FilterCard();
                     nameFilter.add(new NamePredicate(card.isSplitCard() ? ((SplitCard) card).getLeftHalfCard().getName() : card.getName()));
                     Player player = game.getPlayer(card.getOwnerId());
-                    return player != null && player.getHand().getCards(nameFilter, game).size() > 1;
+                    if (player.getHand().getCards(nameFilter, game).size() > 1) {
+                        return true;
+                    }
                 }
             }
         }

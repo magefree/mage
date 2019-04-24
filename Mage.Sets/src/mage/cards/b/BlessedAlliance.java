@@ -1,5 +1,7 @@
+
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
@@ -18,9 +20,8 @@ import mage.filter.predicate.other.PlayerPredicate;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.UUID;
-
 /**
+ *
  * @author emerald000
  */
 public final class BlessedAlliance extends CardImpl {
@@ -34,7 +35,7 @@ public final class BlessedAlliance extends CardImpl {
     }
 
     public BlessedAlliance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
         // Escalate {2}
         this.addAbility(new EscalateAbility(new GenericManaCost(2)));
@@ -47,20 +48,20 @@ public final class BlessedAlliance extends CardImpl {
         Effect effect = new GainLifeTargetEffect(4);
         effect.setText("Target player gains 4 life");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetPlayer(1, 1, false, filterGainLife).withChooseHint("player gains 4 life"));
+        this.getSpellAbility().addTarget(new TargetPlayer(1, 1, false, filterGainLife));
 
         // Untap up to two target creatures.
         Mode mode = new Mode();
         effect = new UntapTargetEffect();
         effect.setText("Untap up to two target creatures");
-        mode.addEffect(effect);
-        mode.addTarget(new TargetCreaturePermanent(0, 2, filterCreature, false).withChooseHint("untap"));
+        mode.getEffects().add(effect);
+        mode.getTargets().add(new TargetCreaturePermanent(0, 2, filterCreature, false));
         this.getSpellAbility().addMode(mode);
 
         // Target opponent sacrifices an attacking creature.
         mode = new Mode();
-        mode.addEffect(new SacrificeEffect(new FilterAttackingCreature(), 1, "Target opponent"));
-        mode.addTarget(new TargetPlayer(1, 1, false, filterSacrifice).withChooseHint("sacrifices an attacking creature"));
+        mode.getEffects().add(new SacrificeEffect(new FilterAttackingCreature(), 1, "Target opponent"));
+        mode.getTargets().add(new TargetPlayer(1, 1, false, filterSacrifice));
         this.getSpellAbility().addMode(mode);
     }
 

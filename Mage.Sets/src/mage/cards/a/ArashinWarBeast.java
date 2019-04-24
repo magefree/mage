@@ -51,7 +51,7 @@ class ArashinWarBeastTriggeredAbility extends TriggeredAbilityImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("one or more blockers");
     
     static {
-        filter.add(BlockingPredicate.instance);
+        filter.add(new BlockingPredicate());
     }
     
     boolean usedForCombatDamageStep;

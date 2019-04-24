@@ -39,13 +39,13 @@ public final class DawnCharm extends CardImpl {
         this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true));
         // or regenerate target creature;
         Mode mode = new Mode();
-        mode.addEffect(new RegenerateTargetEffect());
-        mode.addTarget(new TargetCreaturePermanent());
+        mode.getEffects().add(new RegenerateTargetEffect());
+        mode.getTargets().add(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
         // or counter target spell that targets you.
         mode = new Mode();
-        mode.addEffect(new CounterTargetEffect());
-        mode.addTarget(new TargetSpell(filter));
+        mode.getEffects().add(new CounterTargetEffect());
+        mode.getTargets().add(new TargetSpell(filter));
         this.getSpellAbility().addMode(mode);
     }
 

@@ -1,6 +1,7 @@
 
 package mage.cards.e;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -18,9 +19,8 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.UUID;
-
 /**
+ *
  * @author jeffwadsworth
  */
 public final class EntropicSpecter extends CardImpl {
@@ -42,7 +42,7 @@ public final class EntropicSpecter extends CardImpl {
         // Entropic Specter's power and toughness are each equal to the number of cards in the chosen player's hand.
         this.addAbility(new SimpleStaticAbility(Zone.ALL,
                 // back to the graveyard or if the choosen player left the gane it's again a 0/0
-                new SetPowerToughnessSourceEffect(CardsInTargetPlayerHandCount.instance, Duration.WhileOnBattlefield, SubLayer.CharacteristicDefining_7a)));
+                new SetPowerToughnessSourceEffect(new CardsInTargetPlayerHandCount(), Duration.WhileOnBattlefield, SubLayer.CharacteristicDefining_7a)));
 
         // Whenever Entropic Specter deals damage to a player, that player discards a card.
         this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(1, false), false, true));
@@ -58,8 +58,7 @@ public final class EntropicSpecter extends CardImpl {
     }
 }
 
-enum CardsInTargetPlayerHandCount implements DynamicValue {
-    instance;
+class CardsInTargetPlayerHandCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -75,7 +74,7 @@ enum CardsInTargetPlayerHandCount implements DynamicValue {
 
     @Override
     public DynamicValue copy() {
-        return instance;
+        return new mage.abilities.dynamicvalue.common.CardsInControllerHandCount();
     }
 
     @Override

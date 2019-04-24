@@ -26,7 +26,7 @@ public final class SorceressQueen extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature other than {this}");
     
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public SorceressQueen(UUID ownerId, CardSetInfo setInfo) {

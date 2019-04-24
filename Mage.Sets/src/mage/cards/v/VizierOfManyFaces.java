@@ -72,7 +72,7 @@ class VizierOfManyFacesApplyToPermanent extends ApplyToPermanent {
         for (Permanent entering : game.getPermanentsEntering().values()) {
             if (entering.getId().equals(copyToObjectId) && entering instanceof PermanentToken) {
                 UUID originalCardId = ((PermanentToken) entering).getToken().getCopySourceCard().getId();
-                EmbalmedThisTurnWatcher watcher = game.getState().getWatcher(EmbalmedThisTurnWatcher.class);
+                EmbalmedThisTurnWatcher watcher = (EmbalmedThisTurnWatcher) game.getState().getWatchers().get(EmbalmedThisTurnWatcher.class.getSimpleName());
                 if (watcher != null) {
                     for (MageObjectReference mor : watcher.getEmbalmedThisTurnCards()) {
                         if (mor.getSourceId().equals(originalCardId) && game.getState().getZoneChangeCounter(originalCardId) == mor.getZoneChangeCounter()) {
@@ -97,7 +97,7 @@ class EmbalmedThisTurnWatcher extends Watcher {
     private final Set<MageObjectReference> embalmedThisTurnTokens;
 
     public EmbalmedThisTurnWatcher() {
-        super(WatcherScope.GAME);
+        super(EmbalmedThisTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
         embalmedThisTurnTokens = new HashSet<>();
     }
 

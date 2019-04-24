@@ -27,8 +27,8 @@ public final class SanctumOfUgin extends CardImpl {
     private static final FilterSpell filterSpells = new FilterSpell("colorless spell with converted mana cost 7 or greater");
 
     static {
-        filter.add(ColorlessPredicate.instance);
-        filterSpells.add(ColorlessPredicate.instance);
+        filter.add(new ColorlessPredicate());
+        filterSpells.add(new ColorlessPredicate());
         filterSpells.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, 6));
     }
 

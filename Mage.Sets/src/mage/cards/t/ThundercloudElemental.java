@@ -31,7 +31,7 @@ public final class ThundercloudElemental extends CardImpl {
 
     static {
         toughnessFilter.add(new ToughnessPredicate(ComparisonType.FEWER_THAN, 3));
-        flyingFilter.add(AnotherPredicate.instance);
+        flyingFilter.add(new AnotherPredicate());
     }
 
     public ThundercloudElemental(UUID ownerId, CardSetInfo setInfo) {

@@ -77,10 +77,10 @@ class StonewiseFortifierPreventAllDamageToEffect extends PreventionEffectImpl {
             MageObject damageSource = game.getObject(event.getSourceId());
             MageObject preventionSource = game.getObject(source.getSourceId());
             if (damageSource != null && preventionSource != null) {
-                String message = " damage from " +
-                        damageSource.getName() + " prevented " +
-                        '(' + preventionSource + ')';
-                game.informPlayers(message);
+                StringBuilder message = new StringBuilder(preventedDamage).append(" damage from ");
+                message.append(damageSource.getName()).append(" prevented ");
+                message.append('(').append(preventionSource).append(')');
+                game.informPlayers(message.toString());
             }
             event.setAmount(0);
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, event.getTargetId(), source.getSourceId(), source.getControllerId(), preventedDamage));

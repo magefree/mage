@@ -69,7 +69,7 @@ class GoblinKitesEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (controller != null && permanent != null) {
-            if (controller.flipCoin(source, game, true)) {
+            if (controller.flipCoin(game)) {
                 return true;
             } else {
                 new SacrificeSourceEffect().apply(game, source);

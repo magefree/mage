@@ -20,7 +20,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public final class Havoc extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("a white spell");
+    private final static FilterSpell filter = new FilterSpell("a white spell");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));

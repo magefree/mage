@@ -122,7 +122,7 @@ class RescueFromTheUnderworldCreateDelayedTriggeredAbilityEffect extends OneShot
 
     @Override
     public boolean apply(Game game, Ability source) {
-        DelayedTriggeredAbility delayedAbility = ability.copy();
+        DelayedTriggeredAbility delayedAbility = (DelayedTriggeredAbility) ability.copy();
         delayedAbility.getTargets().addAll(source.getTargets());
         for (Effect effect : delayedAbility.getEffects()) {
             effect.getTargetPointer().init(game, source);

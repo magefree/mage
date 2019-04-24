@@ -24,7 +24,7 @@ public final class GavonyUnhallowed extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature you control");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

@@ -1,3 +1,4 @@
+
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -11,6 +12,7 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 
 /**
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class ExileSpellEffect extends OneShotEffect implements MageSingleton {
@@ -36,7 +38,7 @@ public class ExileSpellEffect extends OneShotEffect implements MageSingleton {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Spell spell = game.getStack().getSpell(source.getId());
-            if (spell != null && !spell.isCopy()) {
+            if (spell != null && !spell.isCopiedSpell()) {
                 Card spellCard = spell.getCard();
                 if (spellCard != null) {
                     controller.moveCards(spellCard, Zone.EXILED, source, game);

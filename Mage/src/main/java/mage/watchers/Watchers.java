@@ -1,24 +1,22 @@
+
 package mage.watchers;
 
+import java.util.HashMap;
+import java.util.UUID;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
-import java.util.HashMap;
 
 /**
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class Watchers extends HashMap<String, Watcher> {
 
-    private static Logger logger = LogManager.getLogger(Watcher.class.getSimpleName());
-
     public Watchers() {
     }
 
-    private Watchers(final Watchers watchers) {
-        watchers.forEach((key, value) -> this.put(key, value.copy()));
+    public Watchers(final Watchers watchers) {
+        watchers.entrySet().forEach((entry) -> this.put(entry.getKey(), entry.getValue().copy()));
     }
 
     public Watchers copy() {
@@ -39,16 +37,7 @@ public class Watchers extends HashMap<String, Watcher> {
         this.values().forEach(Watcher::reset);
     }
 
-    public Watcher get(String key, String id) {
-        return get(id + key);
-    }
-
-    @Override
-    public Watcher get(Object key) {
-        if (containsKey(key)) {
-            return super.get(key);
-        }
-        logger.error(key + " not found in watchers", new Throwable());
-        return null;
+    public Watcher get(String key, UUID id) {
+        return this.get(id + key);
     }
 }

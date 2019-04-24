@@ -28,8 +28,8 @@ public final class EldraziMimic extends CardImpl {
     private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("another colorless creature");
 
     static {
-        FILTER.add(AnotherPredicate.instance);
-        FILTER.add(ColorlessPredicate.instance);
+        FILTER.add(new AnotherPredicate());
+        FILTER.add(new ColorlessPredicate());
     }
 
     public EldraziMimic(UUID ownerId, CardSetInfo setInfo) {

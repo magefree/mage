@@ -24,10 +24,10 @@ import mage.target.TargetPlayer;
  */
 public final class ExtractorDemon extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public ExtractorDemon(UUID ownerId, CardSetInfo setInfo) {

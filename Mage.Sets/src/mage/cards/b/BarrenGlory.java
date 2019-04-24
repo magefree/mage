@@ -24,7 +24,7 @@ public final class BarrenGlory extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public BarrenGlory(UUID ownerId, CardSetInfo setInfo) {

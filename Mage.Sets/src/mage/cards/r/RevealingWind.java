@@ -51,7 +51,7 @@ class RevealingWindEffect extends OneShotEffect {
     private static final FilterCreaturePermanent filter = new FilterAttackingOrBlockingCreature("face-down creature that's attacking or blocking");
 
     static {
-        filter.add(FaceDownPredicate.instance);
+        filter.add(new FaceDownPredicate());
     }
 
     public RevealingWindEffect() {
@@ -82,7 +82,8 @@ class RevealingWindEffect extends OneShotEffect {
                 if (controller.chooseTarget(outcome, target, source, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
-                        Cards cards = new CardsImpl(card);
+                        Cards cards = new CardsImpl();
+                        cards.add(card);
                         controller.lookAtCards(sourceObject.getName(), cards, game);
                         game.informPlayers(controller.getLogName() + " look at a face-down attacking creature");
                     }

@@ -55,7 +55,7 @@ class GrizzledAnglerEffect extends OneShotEffect {
     private static final FilterCreatureCard filter = new FilterCreatureCard("a colorless creature card in your graveyard");
 
     static {
-        filter.add(ColorlessPredicate.instance);
+        filter.add(new ColorlessPredicate());
     }
 
     public GrizzledAnglerEffect() {

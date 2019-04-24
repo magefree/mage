@@ -95,7 +95,7 @@ class WhimsOfTheFateEffect extends OneShotEffect {
                     playerPermanents.put(currentPlayer.getId(), playerPiles);
                     for (int i = 1; i < 3; i++) {
                         FilterPermanent filter = new FilterPermanent(
-                                "the permanents for the " + (i == 1 ? "first " : "second ") + "pile");
+                                new StringBuilder("the permanents for the ").append(i == 1 ? "first " : "second ").append("pile").toString());
                         filter.add(new ControllerIdPredicate(currentPlayer.getId()));
                         Target target;
                         if (i == 1) {
@@ -141,7 +141,7 @@ class WhimsOfTheFateEffect extends OneShotEffect {
                 if (player != null) {
                     // decide which pile to sacrifice
                     int sacrificePile = RandomUtil.nextInt(3) + 1; // random number from 1 - 3
-                    game.informPlayers(player.getLogName() + " sacrifices pile number " + sacrificePile);
+                    game.informPlayers(new StringBuilder(player.getLogName()).append(" sacrifices pile number ").append(sacrificePile).toString());
                     for (UUID permanentId : playerPiles.getValue().get(sacrificePile)) {
                         Permanent permanent = game.getPermanent(permanentId);
                         if (permanent != null) {

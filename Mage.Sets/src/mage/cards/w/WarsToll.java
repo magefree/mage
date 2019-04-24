@@ -1,3 +1,4 @@
+
 package mage.cards.w;
 
 import java.util.UUID;
@@ -25,8 +26,8 @@ import mage.players.Player;
  */
 public final class WarsToll extends CardImpl {
 
-    private static final FilterCreaturePermanent filterOpponentCreature = new FilterCreaturePermanent("creature an opponent controls");
-    private static final FilterLandPermanent filterOpponentLand = new FilterLandPermanent("an opponent taps a land");
+    private final static FilterCreaturePermanent filterOpponentCreature = new FilterCreaturePermanent("creature an opponent controls");
+    private final static FilterLandPermanent filterOpponentLand = new FilterLandPermanent("an opponent taps a land");
 
     static {
         filterOpponentCreature.add(new ControllerPredicate(TargetController.OPPONENT));
@@ -102,9 +103,7 @@ class WarsTollEffect extends OneShotEffect {
             filterOpponentCreatures.add(new ControllerIdPredicate(opponent.getId()));
             game.getBattlefield().getAllActivePermanents(CardType.CREATURE).stream().filter((permanent) -> (filterOpponentCreatures.match(permanent, source.getSourceId(), source.getControllerId(), game))).forEachOrdered((permanent) -> {
                 //TODO: allow the player to choose between a planeswalker and player
-                if (permanent.canAttack(source.getControllerId(), game)) {
-                    opponent.declareAttacker(permanent.getId(), source.getControllerId(), game, false);
-                }
+                opponent.declareAttacker(permanent.getId(), source.getControllerId(), game, false);
             });
             return true;
         }

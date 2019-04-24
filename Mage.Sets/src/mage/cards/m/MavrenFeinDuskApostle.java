@@ -57,7 +57,7 @@ class MavrenFeinDuskApostleTriggeredAbility extends TriggeredAbilityImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.VAMPIRE));
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(Predicates.not(new TokenPredicate()));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

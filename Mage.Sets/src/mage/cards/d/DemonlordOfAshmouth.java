@@ -24,7 +24,7 @@ public final class DemonlordOfAshmouth extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(" another creature");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public DemonlordOfAshmouth(UUID ownerId, CardSetInfo setInfo) {

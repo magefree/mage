@@ -35,7 +35,7 @@ public class AttacksFirstTimeTriggeredAbility extends TriggeredAbilityImpl {
         if (!event.getSourceId().equals(this.getSourceId())) {
             return false;
         }
-        AttackedThisTurnWatcher watcher = game.getState().getWatcher(AttackedThisTurnWatcher.class);
+        AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getSimpleName());
         if (watcher == null) {
             return false;
         }

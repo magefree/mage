@@ -1,5 +1,14 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package mage.designations;
 
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -19,18 +28,14 @@ import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.UUID;
-
 /**
+ *
  * @author LevelX2
  */
 public abstract class Designation implements MageObject {
 
     private static EnumSet emptySet = EnumSet.noneOf(CardType.class);
-    private static List emptyList = new ArrayList<>();
+    private static List emptyList = new ArrayList();
     private static ObjectColor emptyColor = new ObjectColor();
     private static ManaCostsImpl emptyCost = new ManaCostsImpl();
 
@@ -38,8 +43,6 @@ public abstract class Designation implements MageObject {
     private DesignationType designationType;
     private UUID id;
     private FrameStyle frameStyle;
-    private boolean copy;
-    private MageObject copyFrom; // copied card INFO (used to call original adjusters)
     private Abilities<Ability> abilites = new AbilitiesImpl<>();
     private String expansionSetCodeForImage;
     private final boolean unique; // can a designation be added multiple times (false) or only once to an object (true)
@@ -62,8 +65,6 @@ public abstract class Designation implements MageObject {
         this.name = designation.name;
         this.designationType = designation.designationType;
         this.frameStyle = designation.frameStyle;
-        this.copy = designation.copy;
-        this.copyFrom = (designation.copyFrom != null ? designation.copyFrom.copy() : null);
         this.abilites = designation.abilites.copy();
         this.unique = designation.unique;
     }
@@ -75,22 +76,6 @@ public abstract class Designation implements MageObject {
 
     public void assignNewId() {
         this.id = UUID.randomUUID();
-    }
-
-    @Override
-    public void setCopy(boolean isCopy, MageObject copyFrom) {
-        this.copy = isCopy;
-        this.copyFrom = (copyFrom != null ? copyFrom.copy() : null);
-    }
-
-    @Override
-    public boolean isCopy() {
-        return this.copy;
-    }
-
-    @Override
-    public MageObject getCopyFrom() {
-        return this.copyFrom;
     }
 
     @Override
@@ -214,6 +199,20 @@ public abstract class Designation implements MageObject {
     }
 
     @Override
+    public void setCopy(boolean isCopy) {
+    }
+
+    @Override
+    public boolean isCopy() {
+        return false;
+    }
+
+    @Override
+    public Designation copy() {
+        return this;
+    }
+
+    @Override
     public int getZoneChangeCounter(Game game) {
         return 1; // Emblems can't move zones until now so return always 1
     }
@@ -233,6 +232,7 @@ public abstract class Designation implements MageObject {
     }
 
     /**
+     *
      * @param game
      * @param controllerId
      */

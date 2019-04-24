@@ -27,7 +27,7 @@ public final class CoastalWizard extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public CoastalWizard(UUID ownerId, CardSetInfo setInfo) {

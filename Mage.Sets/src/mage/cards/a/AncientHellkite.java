@@ -29,7 +29,7 @@ public final class AncientHellkite extends CardImpl {
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(DefendingPlayerControlsPredicate.instance);
+        filter.add(new DefendingPlayerControlsPredicate());
     }
 
     public AncientHellkite(UUID ownerId, CardSetInfo setInfo) {

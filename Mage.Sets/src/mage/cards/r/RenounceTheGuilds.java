@@ -20,7 +20,7 @@ public final class RenounceTheGuilds extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("multicolored permanent");
     static {
-        filter.add(MulticoloredPredicate.instance);
+        filter.add(new MulticoloredPredicate());
     }
 
     public RenounceTheGuilds(UUID ownerId, CardSetInfo setInfo) {

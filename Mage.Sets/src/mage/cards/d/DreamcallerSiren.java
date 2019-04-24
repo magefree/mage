@@ -32,7 +32,7 @@ public final class DreamcallerSiren extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.PIRATE));
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

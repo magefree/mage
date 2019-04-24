@@ -29,7 +29,7 @@ public final class OrcSureshot extends CardImpl {
     private static final FilterCreaturePermanent filterOpponentCreature = new FilterCreaturePermanent("creature an opponent controls");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
         filterOpponentCreature.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 

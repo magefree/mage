@@ -39,7 +39,7 @@ public final class DanceOfMany extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(Predicates.not(new TokenPredicate()));
     }
 
     public DanceOfMany(UUID ownerId, CardSetInfo setInfo) {

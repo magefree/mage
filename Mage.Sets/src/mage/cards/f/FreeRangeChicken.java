@@ -75,7 +75,7 @@ class FreeRangeChickenEffect extends OneShotEffect {
             if (firstRoll == secondRoll) {
                 game.addEffect(new BoostSourceEffect(firstRoll, firstRoll, Duration.EndOfTurn), source);
             }
-            FreeRangeChickenWatcher watcher = game.getState().getWatcher(FreeRangeChickenWatcher.class);
+            FreeRangeChickenWatcher watcher = (FreeRangeChickenWatcher) game.getState().getWatchers().get(FreeRangeChickenWatcher.class.getSimpleName());
             if (watcher != null) {
                 int totalRoll = firstRoll + secondRoll;
                 Permanent sourcePermanent = game.getPermanent(source.getSourceId());
@@ -98,7 +98,7 @@ class FreeRangeChickenWatcher extends Watcher {
     private final Map<UUID, Integer> totalRolls = new HashMap<>();
 
     public FreeRangeChickenWatcher() {
-        super(WatcherScope.GAME);
+        super(FreeRangeChickenWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public FreeRangeChickenWatcher(final FreeRangeChickenWatcher watcher) {

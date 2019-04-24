@@ -1,3 +1,4 @@
+
 package mage.cards.r;
 
 import java.util.UUID;
@@ -50,16 +51,8 @@ class RivalsDuelFightTargetsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent creature1 = null;
-        Permanent creature2 = null;
-        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
-            if (creature1 == null) {
-                creature1 = game.getPermanent(targetId);
-            } else {
-                creature2 = game.getPermanent(targetId);
-            }
-        }
-
+        Permanent creature1 = game.getPermanent(source.getFirstTarget());
+        Permanent creature2 = game.getPermanent(source.getTargets().get(0).getTargets().get(1));
         // 20110930 - 701.10
         if (creature1 != null
                 && creature2 != null) {

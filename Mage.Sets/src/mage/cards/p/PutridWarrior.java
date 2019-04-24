@@ -38,7 +38,7 @@ public final class PutridWarrior extends CardImpl {
         // Whenever Putrid Warrior deals damage, choose one - Each player loses 1 life; or each player gains 1 life.
         Ability ability = new PutridWarriorDealsDamageTriggeredAbility(new LoseLifeAllPlayersEffect(1));
         Mode mode = new Mode();
-        mode.addEffect(new PutridWarriorGainLifeEffect());
+        mode.getEffects().add(new PutridWarriorGainLifeEffect());
         ability.addMode(mode);
         this.addAbility(ability);
     }

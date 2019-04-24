@@ -26,12 +26,10 @@ public class AuraPermanentCanAttachToPermanentId implements Predicate<Permanent>
     public boolean apply(Permanent input, Game game) {
         final Permanent permanent = game.getPermanent(toBeCheckedPermanentId);
         Filter filter;
-        if(input.getSpellAbility() != null && input.getSpellAbility().getTargets() != null) {
-            for (Target target : input.getSpellAbility().getTargets()) {
-                filter = target.getFilter();
-                if (filter.match(permanent, game)) {
-                    return true;
-                }
+        for (Target target : input.getSpellAbility().getTargets()) {
+            filter = target.getFilter();
+            if (filter.match(permanent, game)) {
+                return true;
             }
         }
         return false;

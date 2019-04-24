@@ -1,5 +1,7 @@
+
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -11,11 +13,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.UUID;
-
 /**
+ *
  * @author TheElk801
  */
 public final class CephalidPathmage extends CardImpl {
@@ -32,8 +35,8 @@ public final class CephalidPathmage extends CardImpl {
         this.addAbility(new CantBeBlockedSourceAbility());
 
         // {tap}, Sacrifice Cephalid Pathmage: Target creature is unblockable this turn.
-        Ability ability = new SimpleActivatedAbility(new CantBeBlockedTargetEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(Duration.EndOfTurn), new SacrificeSourceCost());
+        ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

@@ -1,3 +1,4 @@
+
 package mage.abilities.effects;
 
 import mage.MageObject;
@@ -46,7 +47,6 @@ public abstract class RedirectionEffect extends ReplacementEffectImpl {
         this.redirectTarget = effect.redirectTarget;
         this.amountToRedirect = effect.amountToRedirect;
         this.usageType = effect.usageType;
-        this.applyEffectsCounter = effect.applyEffectsCounter;
     }
 
     @Override
@@ -80,7 +80,6 @@ public abstract class RedirectionEffect extends ReplacementEffectImpl {
             if (applyEffectsCounter > 0) {
                 if (applyEffectsCounter < game.getState().getApplyEffectsCounter()) {
                     this.discard();
-                    return false;
                 }
             } else {
                 applyEffectsCounter = game.getState().getApplyEffectsCounter();

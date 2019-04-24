@@ -28,7 +28,7 @@ public class BlockedByIdPredicate implements Predicate<Permanent> {
         } // Check if the blockerId was blocked before, if it does no longer exists now but so the target attacking is still valid
         Permanent blocker = game.getPermanentOrLKIBattlefield(blockerId);
         if (blocker != null) {
-            BlockedAttackerWatcher watcher = game.getState().getWatcher(BlockedAttackerWatcher.class);
+            BlockedAttackerWatcher watcher = (BlockedAttackerWatcher) game.getState().getWatchers().get(BlockedAttackerWatcher.class.getSimpleName());
             if (watcher != null) {
                 return watcher.creatureHasBlockedAttacker(input, blocker, game);
             }

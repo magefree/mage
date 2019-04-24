@@ -59,7 +59,7 @@ class RoarOfJukaiEffect extends OneShotEffect {
 
     static {
         filter.add(new SubtypePredicate(SubType.FOREST));
-        filterBlocked.add(BlockedPredicate.instance);
+        filterBlocked.add(new BlockedPredicate());
     }
 
 

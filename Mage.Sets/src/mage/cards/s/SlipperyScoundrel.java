@@ -1,5 +1,7 @@
+
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -11,7 +13,6 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.hint.common.CitysBlessingHint;
 import mage.abilities.keyword.AscendAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
@@ -21,9 +22,8 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 
-import java.util.UUID;
-
 /**
+ *
  * @author LevelX2
  */
 public final class SlipperyScoundrel extends CardImpl {
@@ -48,7 +48,6 @@ public final class SlipperyScoundrel extends CardImpl {
         Effect effect2 = new ConditionalRestrictionEffect(restrictionEffect, CitysBlessingCondition.instance)
                 .setText("and can't be blocked");
         ability.addEffect(effect2);
-        ability.addHint(CitysBlessingHint.instance);
         this.addAbility(ability);
     }
 

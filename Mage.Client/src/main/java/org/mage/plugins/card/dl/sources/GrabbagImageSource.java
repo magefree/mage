@@ -1,7 +1,5 @@
-package org.mage.plugins.card.dl.sources;
 
-import org.apache.log4j.Logger;
-import org.mage.plugins.card.images.CardDownloadData;
+package org.mage.plugins.card.dl.sources;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,6 +8,9 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
+
+import org.apache.log4j.Logger;
+import org.mage.plugins.card.images.CardDownloadData;
 
 /**
  * @author spjspj
@@ -47,7 +48,7 @@ public enum GrabbagImageSource implements CardImageSource {
     }
 
     @Override
-    public CardImageUrls generateCardUrl(CardDownloadData card) throws Exception {
+    public CardImageUrls generateURL(CardDownloadData card) throws Exception {
         if (singleLinks == null) {
             setupLinks();
         }
@@ -449,7 +450,7 @@ public enum GrabbagImageSource implements CardImageSource {
     @Override
     public CardImageUrls generateTokenUrl(CardDownloadData card) throws IOException {
         try {
-            return generateCardUrl(card);
+            return generateURL(card);
         } catch (Exception ex) {
             java.util.logging.Logger.getLogger(GrabbagImageSource.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -500,7 +501,7 @@ public enum GrabbagImageSource implements CardImageSource {
     }
 
     @Override
-    public boolean isCardImageProvided(String setCode, String cardName) {
+    public boolean isImageProvided(String setCode, String cardName) {
         if (singleLinks == null) {
             setupLinks();
         }

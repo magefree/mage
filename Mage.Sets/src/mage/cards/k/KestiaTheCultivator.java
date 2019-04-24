@@ -33,7 +33,7 @@ public final class KestiaTheCultivator extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                EnchantedPredicate.instance,
+                new EnchantedPredicate(),
                 new CardTypePredicate(CardType.ENCHANTMENT)
         ));
         filter.add(new ControllerPredicate(TargetController.YOU));

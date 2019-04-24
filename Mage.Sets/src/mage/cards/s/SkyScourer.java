@@ -24,7 +24,7 @@ public final class SkyScourer extends CardImpl {
     private static final FilterSpell filterSpell = new FilterSpell("a colorless spell");
 
     static {
-        filterSpell.add(ColorlessPredicate.instance);
+        filterSpell.add(new ColorlessPredicate());
     }
 
     public SkyScourer(UUID ownerId, CardSetInfo setInfo) {

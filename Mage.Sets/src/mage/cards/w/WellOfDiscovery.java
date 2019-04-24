@@ -24,7 +24,7 @@ public final class WellOfDiscovery extends CardImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent();
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public WellOfDiscovery(UUID ownerId, CardSetInfo setInfo) {

@@ -16,7 +16,7 @@ import java.util.UUID;
  */
 public class BloodthirstWatcher extends Watcher {
     public BloodthirstWatcher(UUID controllerId) {
-        super(WatcherScope.PLAYER);
+        super(BloodthirstWatcher.class.getSimpleName(), WatcherScope.PLAYER);
         this.controllerId = controllerId;
     }
 
@@ -35,5 +35,10 @@ public class BloodthirstWatcher extends Watcher {
                 condition = true;
             }
         }
+    }
+
+    @Override
+    public BloodthirstWatcher copy() {
+        return new BloodthirstWatcher(this);
     }
 }

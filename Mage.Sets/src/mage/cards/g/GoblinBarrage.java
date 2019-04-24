@@ -1,6 +1,7 @@
 
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -18,28 +19,19 @@ import mage.game.Game;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
-import mage.target.targetadjustment.TargetAdjuster;
-
-import java.util.UUID;
 
 /**
+ *
  * @author LevelX2
  */
 public final class GoblinBarrage extends CardImpl {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact or Goblin");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new SubtypePredicate(SubType.GOBLIN)
-        ));
-    }
 
     public GoblinBarrage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}");
 
         // Kicker—Sacrifice an artifact or Goblin.
+        FilterControlledPermanent filter = new FilterControlledPermanent("an artifact or Goblin");
+        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new SubtypePredicate(SubType.GOBLIN)));
         this.addAbility(new KickerAbility(new SacrificeTargetCost(new TargetControlledPermanent(filter))));
 
         // Goblin Barrage deals 4 damage to target creature. If this spell was kicked, it also deals 4 damage to target player or planeswalker.
@@ -48,7 +40,13 @@ public final class GoblinBarrage extends CardImpl {
                         + "it also deals 4 damage to target player or planeswalker")
         );
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().setTargetAdjuster(GoblinBarrageAdjuster.instance);
+    }
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        if (KickedCondition.instance.apply(game, ability)) {
+            ability.addTarget(new TargetPlayerOrPlaneswalker());
+        }
     }
 
     public GoblinBarrage(final GoblinBarrage card) {
@@ -58,16 +56,5 @@ public final class GoblinBarrage extends CardImpl {
     @Override
     public GoblinBarrage copy() {
         return new GoblinBarrage(this);
-    }
-}
-
-enum GoblinBarrageAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (KickedCondition.instance.apply(game, ability)) {
-            ability.addTarget(new TargetPlayerOrPlaneswalker());
-        }
     }
 }

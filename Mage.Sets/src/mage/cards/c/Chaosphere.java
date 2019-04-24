@@ -1,5 +1,7 @@
+
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
@@ -18,9 +20,8 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.UUID;
-
 /**
+ *
  * @author jeffwadsworth
  */
 public final class Chaosphere extends CardImpl {
@@ -78,10 +79,7 @@ class ChaosphereEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        if (attacker == null) {
-            return true;
-        }
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
         return attacker.hasAbility(FlyingAbility.getInstance().getId(), game);
     }
 

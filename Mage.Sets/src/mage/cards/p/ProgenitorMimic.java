@@ -29,7 +29,7 @@ public final class ProgenitorMimic extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("no Token");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(Predicates.not(new TokenPredicate()));
     }
 
     public ProgenitorMimic(UUID ownerId, CardSetInfo setInfo) {

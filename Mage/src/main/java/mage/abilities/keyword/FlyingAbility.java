@@ -1,5 +1,7 @@
+
 package mage.abilities.keyword;
 
+import java.io.ObjectStreamException;
 import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
 import mage.abilities.MageSingleton;
@@ -10,9 +12,8 @@ import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.io.ObjectStreamException;
-
 /**
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class FlyingAbility extends EvasionAbility implements MageSingleton {
@@ -59,7 +60,7 @@ class FlyingEffect extends RestrictionEffect implements MageSingleton {
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
         return blocker.getAbilities().containsKey(FlyingAbility.getInstance().getId())
                 || blocker.getAbilities().containsKey(ReachAbility.getInstance().getId())
                 || (null != game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_DRAGON, source, blocker.getControllerId(), game)

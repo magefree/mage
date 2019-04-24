@@ -19,7 +19,7 @@ public final class Smite extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("blocked creature");
 
     static {
-        filter.add(BlockedPredicate.instance);
+        filter.add(new BlockedPredicate());
     }
 
     public Smite(UUID ownerId, CardSetInfo setInfo) {

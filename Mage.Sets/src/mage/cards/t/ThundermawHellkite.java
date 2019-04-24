@@ -27,7 +27,7 @@ import mage.game.permanent.Permanent;
  */
 public final class ThundermawHellkite extends CardImpl {
     
-    static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with flying your opponents control");
+    final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with flying your opponents control");
     
     static {
         filter.add(new AbilityPredicate(FlyingAbility.class));

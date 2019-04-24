@@ -30,7 +30,7 @@ public final class CoralAtoll extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.ISLAND));
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public CoralAtoll(UUID ownerId, CardSetInfo setInfo) {

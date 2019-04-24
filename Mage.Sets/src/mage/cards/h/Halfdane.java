@@ -27,7 +27,7 @@ public final class Halfdane extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("target creature other than Halfdane");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public Halfdane(UUID ownerId, CardSetInfo setInfo) {

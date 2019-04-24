@@ -31,7 +31,7 @@ public final class BloodChinFanatic extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another Warrior creature");
     
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
         filter.add(new SubtypePredicate(SubType.WARRIOR));
     }
 
@@ -42,9 +42,9 @@ public final class BloodChinFanatic extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {1}{B}, Sacrifice another Warrior creature: Target player loses X life and you gain X life, where X is the sacrificed creature's power.
-        Effect effect = new LoseLifeTargetEffect(SacrificeCostCreaturesPower.instance);
+        Effect effect = new LoseLifeTargetEffect(new SacrificeCostCreaturesPower());
         effect.setText("Target player loses X life");
-        Effect effect2 = new GainLifeEffect(SacrificeCostCreaturesPower.instance);
+        Effect effect2 = new GainLifeEffect(new SacrificeCostCreaturesPower());
         effect2.setText("and you gain X life, where X is the sacrificed creature's power");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{B}"));
         ability.addEffect(effect2);

@@ -32,7 +32,7 @@ public final class SporeCloud extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("blocking creatures");
     static {
-        filter.add(BlockingPredicate.instance);
+        filter.add(new BlockingPredicate());
     }
 
     public SporeCloud(UUID ownerId, CardSetInfo setInfo) {
@@ -60,7 +60,7 @@ class SporeCloudEffect extends OneShotEffect {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each attacking creature and each blocking creature");
     static {
-        filter.add(Predicates.or(AttackingPredicate.instance, BlockingPredicate.instance));
+        filter.add(Predicates.or(new AttackingPredicate(), new BlockingPredicate()));
     }
 
     public SporeCloudEffect() {

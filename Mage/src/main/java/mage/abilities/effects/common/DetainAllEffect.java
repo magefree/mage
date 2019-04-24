@@ -1,5 +1,9 @@
+
 package mage.abilities.effects.common;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RestrictionEffect;
@@ -12,11 +16,8 @@ import mage.game.permanent.Permanent;
 import mage.game.turn.Step;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 /**
+ *
  * @author LevelX2
  */
 public class DetainAllEffect extends OneShotEffect {
@@ -109,17 +110,17 @@ class DetainAllRestrictionEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
+    public boolean canAttack(Game game) {
         return false;
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
         return false;
     }
 
     @Override
-    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game) {
         return false;
     }
 

@@ -1,5 +1,9 @@
+
 package mage.cards.s;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
@@ -15,11 +19,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
 /**
+ *
  * @author LevelX2
  */
 public final class StorageMatrix extends CardImpl {
@@ -52,7 +53,6 @@ class StorageMatrixRestrictionEffect extends RestrictionEffect {
         choice.add(CardType.CREATURE.toString());
         choice.add(CardType.LAND.toString());
     }
-
     private CardType type;
 
     public StorageMatrixRestrictionEffect() {
@@ -104,7 +104,7 @@ class StorageMatrixRestrictionEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBeUntapped(Permanent permanent, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canBeUntapped(Permanent permanent, Ability source, Game game) {
         return false;
     }
 

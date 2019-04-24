@@ -15,7 +15,7 @@ import mage.constants.SubType;
  */
 public final class SnakeToken extends TokenImpl {
 
-    static final private List<String> tokenImageSets = new ArrayList<>();
+    final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
         tokenImageSets.addAll(Arrays.asList("ZEN", "KTK", "MM2", "C15"));

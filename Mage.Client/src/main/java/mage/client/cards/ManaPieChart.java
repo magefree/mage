@@ -5,13 +5,11 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JComponent;
 
-class Slice implements Serializable {
+class Slice {
 
     double value;
     Color color;
@@ -24,7 +22,7 @@ class Slice implements Serializable {
 
 public class ManaPieChart extends JComponent {
 
-   private List<Slice> slices = new ArrayList<>();
+    ArrayList<Slice> slices = new ArrayList<Slice>();
 
     ManaPieChart() {
     }

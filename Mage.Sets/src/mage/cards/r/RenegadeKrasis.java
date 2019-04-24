@@ -52,7 +52,7 @@ class RenegadeKrasisTriggeredAbility extends TriggeredAbilityImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
         filter.add(new CounterPredicate(CounterType.P1P1));
     }
 

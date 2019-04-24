@@ -1,3 +1,4 @@
+
 package org.mage.test.cards.abilities.equipped;
 
 import mage.constants.PhaseStep;
@@ -8,6 +9,7 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
+ *
  * @author LevelX2
  */
 public class EquipRestrictedTest extends CardTestPlayerBase {
@@ -19,7 +21,7 @@ public class EquipRestrictedTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Leonin Scimitar");
 
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{T}: Attach target Equipment you control to target creature you control.", "Leonin Scimitar");
-        addTarget(playerB, "Silvercoat Lion");
+        addTarget(playerB, "Silvercout Lion");
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -41,7 +43,7 @@ public class EquipRestrictedTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Konda's Banner");
 
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{T}: Attach target Equipment you control to target creature you control.", "Konda's Banner");
-        addTarget(playerB, "Silvercoat Lion");
+        addTarget(playerB, "Silvercout Lion");
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();

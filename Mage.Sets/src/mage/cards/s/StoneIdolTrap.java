@@ -51,7 +51,7 @@ class StoneIdolTrapCostReductionEffect extends CostModificationEffectImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(AttackingPredicate.instance);
+        filter.add(new AttackingPredicate());
     }
 
     public StoneIdolTrapCostReductionEffect() {

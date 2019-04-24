@@ -29,8 +29,8 @@ public final class EldraziAggressor extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another colorless creature");
 
     static {
-        filter.add(AnotherPredicate.instance);
-        filter.add(ColorlessPredicate.instance);
+        filter.add(new AnotherPredicate());
+        filter.add(new ColorlessPredicate());
     }
 
     public EldraziAggressor(UUID ownerId, CardSetInfo setInfo) {

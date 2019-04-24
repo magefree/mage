@@ -32,7 +32,7 @@ public class CastOnlyIfYouHaveCastAnotherSpellEffect extends ContinuousRuleModif
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getSourceId().equals(source.getSourceId())) {
-            CastSpellLastTurnWatcher watcher = game.getState().getWatcher(CastSpellLastTurnWatcher.class);
+            CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get(CastSpellLastTurnWatcher.class.getSimpleName());
             if (watcher != null && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(source.getControllerId()) == 0) {
                 return true;
             }

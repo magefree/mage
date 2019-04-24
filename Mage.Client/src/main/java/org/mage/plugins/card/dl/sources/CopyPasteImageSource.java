@@ -1,10 +1,6 @@
 package org.mage.plugins.card.dl.sources;
 
-import mage.cards.Sets;
-import org.mage.plugins.card.images.CardDownloadData;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.IOException;
@@ -14,8 +10,12 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
+import mage.cards.Sets;
+import org.mage.plugins.card.images.CardDownloadData;
 
 /**
+ *
  * @author spjspj
  */
 public enum CopyPasteImageSource implements CardImageSource {
@@ -74,7 +74,7 @@ public enum CopyPasteImageSource implements CardImageSource {
     }
 
     @Override
-    public CardImageUrls generateCardUrl(CardDownloadData card) throws Exception {
+    public CardImageUrls generateURL(CardDownloadData card) throws Exception {
         if (singleLinks == null) {
             setupLinks();
         }
@@ -198,7 +198,7 @@ public enum CopyPasteImageSource implements CardImageSource {
     @Override
     public CardImageUrls generateTokenUrl(CardDownloadData card) throws IOException {
         try {
-            return generateCardUrl(card);
+            return generateURL(card);
         } catch (Exception ex) {
         }
         return null;
@@ -239,17 +239,12 @@ public enum CopyPasteImageSource implements CardImageSource {
     }
 
     @Override
-    public boolean isCardImageProvided(String setCode, String cardName) {
+    public boolean isImageProvided(String setCode, String cardName) {
         missingCards.add(setCode + "/" + cardName);
 
         if (singleLinks != null) {
             return singleLinks.containsKey(setCode + "/" + cardName) || singleLinks.containsKey(setCode + "/" + cardName + "-a");
         }
-        return false;
-    }
-
-    @Override
-    public boolean isTokenImageProvided(String setCode, String cardName, Integer tokenNumber) {
         return false;
     }
 

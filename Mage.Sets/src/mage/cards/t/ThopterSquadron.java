@@ -34,7 +34,7 @@ public final class ThopterSquadron extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another Thopter");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
         filter.add(new SubtypePredicate(SubType.THOPTER));
     }
 

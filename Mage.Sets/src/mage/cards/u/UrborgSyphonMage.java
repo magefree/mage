@@ -40,7 +40,7 @@ public final class UrborgSyphonMage extends CardImpl {
         this.addAbility(ability);
     }
 
-    private UrborgSyphonMage(final UrborgSyphonMage card) {
+    public UrborgSyphonMage(final UrborgSyphonMage card) {
         super(card);
     }
 
@@ -57,7 +57,7 @@ class UrborgSyphonMageEffect extends OneShotEffect {
         staticText = "Each other player loses 2 life. You gain life equal to the life lost this way";
     }
 
-    private UrborgSyphonMageEffect(final UrborgSyphonMageEffect effect) {
+    public UrborgSyphonMageEffect(final UrborgSyphonMageEffect effect) {
         super(effect);
     }
 
@@ -67,10 +67,10 @@ class UrborgSyphonMageEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                if (!source.isControlledBy(playerId)) {
+                if (!Objects.equals(playerId, source.getControllerId())) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        damage += player.loseLife(2, game, false);
+                        damage += player.damage(2, source.getSourceId(), game, false, true);
                     }
                 }
             }

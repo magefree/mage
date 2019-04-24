@@ -23,7 +23,7 @@ public final class ItThatBetrays extends CardImpl {
     private static final FilterPermanent FILTER = new FilterPermanent("nontoken permanent");
 
     static {
-        FILTER.add(Predicates.not(TokenPredicate.instance));
+        FILTER.add(Predicates.not(new TokenPredicate()));
     }
 
     public ItThatBetrays(UUID ownerId, CardSetInfo setInfo) {

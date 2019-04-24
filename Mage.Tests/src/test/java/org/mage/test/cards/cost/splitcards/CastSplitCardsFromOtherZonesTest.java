@@ -1,3 +1,4 @@
+
 package org.mage.test.cards.cost.splitcards;
 
 import mage.constants.PhaseStep;
@@ -6,6 +7,7 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
+ *
  * @author LevelX2
  */
 public class CastSplitCardsFromOtherZonesTest extends CardTestPlayerBase {
@@ -25,7 +27,6 @@ public class CastSplitCardsFromOtherZonesTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Mindclaw Shaman"); // Creature {4}{R}
 
         addCard(Zone.BATTLEFIELD, playerB, "Sanguine Bond", 1); // Enchantment to destroy
-        addCard(Zone.BATTLEFIELD, playerB, "Icy Manipulator", 1); // Artifact to destroy
         // Wear
         // Destroy target artifact.
         // Tear
@@ -33,29 +34,24 @@ public class CastSplitCardsFromOtherZonesTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Wear // Tear"); // Instant {1}{R} // {W}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mindclaw Shaman");
-        addTarget(playerA, playerB);
-        setChoice(playerA, "Wear // Tear"); // select card
-        setChoice(playerA, "Yes"); // confirm to cast
-        setChoice(playerA, "Tear"); // select tear side
-        addTarget(playerA, "Sanguine Bond"); // target for tear
+        addTarget(playerA, "Sanguine Bond");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertPermanentCount(playerA, "Mindclaw Shaman", 1);
         assertGraveyardCount(playerB, "Wear // Tear", 1);
-        assertGraveyardCount(playerB, "Icy Manipulator", 0);
         assertGraveyardCount(playerB, "Sanguine Bond", 1);
+
     }
 
     @Test
-    public void testCastWearFromOpponentsHand() {
+    public void testCastFearFromOpponentsHand() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
         // When Mindclaw Shaman enters the battlefield, target opponent reveals their hand.
         // You may cast an instant or sorcery card from it without paying its mana cost.
         addCard(Zone.HAND, playerA, "Mindclaw Shaman"); // Creature {4}{R}
 
-        addCard(Zone.BATTLEFIELD, playerB, "Sanguine Bond", 1); // Enchantment to destroy
         addCard(Zone.BATTLEFIELD, playerB, "Icy Manipulator", 1); // Artifact to destroy
         // Wear
         // Destroy target artifact.
@@ -64,11 +60,7 @@ public class CastSplitCardsFromOtherZonesTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Wear // Tear"); // Instant {1}{R} // {W}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mindclaw Shaman");
-        addTarget(playerA, playerB);
-        setChoice(playerA, "Wear // Tear"); // select card
-        setChoice(playerA, "Yes"); // confirm to cast
-        setChoice(playerA, "Wear"); // select wear side
-        addTarget(playerA, "Icy Manipulator"); // target for wear
+        addTarget(playerA, "Icy Manipulator");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -76,7 +68,7 @@ public class CastSplitCardsFromOtherZonesTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Mindclaw Shaman", 1);
         assertGraveyardCount(playerB, "Wear // Tear", 1);
         assertGraveyardCount(playerB, "Icy Manipulator", 1);
-        assertGraveyardCount(playerB, "Sanguine Bond", 0);
+
     }
 
     @Test
@@ -95,20 +87,16 @@ public class CastSplitCardsFromOtherZonesTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Wear // Tear"); // Instant {1}{R} // {W}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mindclaw Shaman");
-        addTarget(playerA, playerB);
-        setChoice(playerA, "Wear // Tear"); // select card
-        setChoice(playerA, "Yes"); // confirm to cast
-        setChoice(playerA, "Wear // Tear"); // select fused
-        addTarget(playerA, "Icy Manipulator"); // target for wear
-        addTarget(playerA, "Sanguine Bond"); // target for tear
+        addTarget(playerA, "Sanguine Bond");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertPermanentCount(playerA, "Mindclaw Shaman", 1);
         assertGraveyardCount(playerB, "Wear // Tear", 1);
-        assertGraveyardCount(playerB, "Icy Manipulator", 1);
         assertGraveyardCount(playerB, "Sanguine Bond", 1);
+        assertGraveyardCount(playerB, "Icy Manipulator", 1);
+
     }
 
     /**
@@ -131,7 +119,7 @@ public class CastSplitCardsFromOtherZonesTest extends CardTestPlayerBase {
 
         attack(2, playerB, "Etali, Primal Storm");
         setChoice(playerB, "Yes");
-        setChoice(playerB, "Fire");
+        setChoice(playerB, "Cast Fire");
         addTarget(playerB, "Silvercoat Lion");
 
         setStopAt(2, PhaseStep.END_COMBAT);

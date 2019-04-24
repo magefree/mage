@@ -37,8 +37,8 @@ public final class SwordOfTheParuns extends CardImpl {
     private static final FilterCreaturePermanent filterTapped = new FilterCreaturePermanent();
     private static final FilterCreaturePermanent filterUntapped = new FilterCreaturePermanent();
     static {
-        filterTapped.add(TappedPredicate.instance);
-        filterUntapped.add(Predicates.not(TappedPredicate.instance));
+        filterTapped.add(new TappedPredicate());
+        filterUntapped.add(Predicates.not(new TappedPredicate()));
     }
 
     public SwordOfTheParuns(UUID ownerId, CardSetInfo setInfo) {

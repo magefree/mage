@@ -25,7 +25,7 @@ public final class DireFleetCaptain extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.PIRATE));
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public DireFleetCaptain(UUID ownerId, CardSetInfo setInfo) {

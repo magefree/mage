@@ -54,13 +54,13 @@ public final class FleshAllergy extends CardImpl {
 
 class FleshAllergyWatcher extends Watcher {
 
-    private int creaturesDiedThisTurn = 0;
+    public int creaturesDiedThisTurn = 0;
 
     public FleshAllergyWatcher() {
-        super(WatcherScope.GAME);
+        super(FleshAllergyWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
-    private FleshAllergyWatcher(final FleshAllergyWatcher watcher) {
+    public FleshAllergyWatcher(final FleshAllergyWatcher watcher) {
         super(watcher);
     }
 
@@ -79,10 +79,6 @@ class FleshAllergyWatcher extends Watcher {
         }
     }
 
-    public int getCreaturesDiedThisTurn(){
-        return creaturesDiedThisTurn;
-    }
-
     @Override
     public void reset() {
         super.reset();
@@ -98,7 +94,7 @@ class FleshAllergyEffect extends OneShotEffect {
         staticText = "Its controller loses life equal to the number of creatures that died this turn";
     }
 
-    private FleshAllergyEffect(final FleshAllergyEffect effect) {
+    public FleshAllergyEffect(final FleshAllergyEffect effect) {
         super(effect);
     }
 
@@ -109,12 +105,12 @@ class FleshAllergyEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        FleshAllergyWatcher watcher = game.getState().getWatcher(FleshAllergyWatcher.class);
+        FleshAllergyWatcher watcher = (FleshAllergyWatcher) game.getState().getWatchers().get(FleshAllergyWatcher.class.getSimpleName());
         Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
         if (permanent != null && watcher != null) {
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {
-                int amount = watcher.getCreaturesDiedThisTurn();
+                int amount = watcher.creaturesDiedThisTurn;
                 if (amount > 0) {
                     player.loseLife(amount, game, false);
                     return true;

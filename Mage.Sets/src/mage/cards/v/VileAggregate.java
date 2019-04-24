@@ -25,10 +25,10 @@ import mage.filter.predicate.mageobject.ColorlessPredicate;
  */
 public final class VileAggregate extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("colorless creatures you control");
+    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("colorless creatures you control");
 
     static {
-        filter.add(ColorlessPredicate.instance);
+        filter.add(new ColorlessPredicate());
     }
 
     public VileAggregate(UUID ownerId, CardSetInfo setInfo) {

@@ -10,7 +10,7 @@ import mage.client.dialog.PreferencesDialog;
 
 public class SortSettingDeck extends SortSetting {
 
-    private static final SortSettingDeck instance = new SortSettingDeck();
+    private final static SortSettingDeck instance = new SortSettingDeck();
 
     public static SortSettingDeck getInstance() {
         return instance;

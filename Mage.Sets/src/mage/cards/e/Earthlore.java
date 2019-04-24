@@ -43,7 +43,7 @@ public final class Earthlore extends CardImpl {
     private static final FilterPermanent filterUntapped = new FilterPermanent("enchanted land is untapped");
     
     static {
-        filterUntapped.add(Predicates.not(TappedPredicate.instance));
+        filterUntapped.add(Predicates.not(new TappedPredicate()));
     }
 
     public Earthlore(UUID ownerId, CardSetInfo setInfo) {

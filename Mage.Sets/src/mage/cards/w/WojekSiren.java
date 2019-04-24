@@ -1,20 +1,26 @@
+
 package mage.cards.w;
 
+import java.util.UUID;
 import mage.MageObjectReference;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.AbilityWord;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.UUID;
-
 /**
+ *
  * @author LevelX2
  */
 public final class WojekSiren extends CardImpl {
@@ -70,8 +76,7 @@ class WojekSirenBoostEffect extends ContinuousEffectImpl {
         for (MageObjectReference mageObjectReference : affectedObjectList) {
             Permanent permanent = mageObjectReference.getPermanent(game);
             if (permanent != null) {
-                permanent.addPower(1);
-                permanent.addToughness(1);
+                permanent.addPower(2);
             }
         }
         return true;

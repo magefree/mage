@@ -1,5 +1,13 @@
+
 package mage.cards.j;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -7,7 +15,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
@@ -18,9 +31,8 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPlayer;
 
-import java.util.*;
-
 /**
+ *
  * @author Quercitron
  */
 public final class Juxtapose extends CardImpl {
@@ -77,6 +89,7 @@ class JuxtaposeEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         Player you = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        MageObject sourceObject = game.getCard(source.getSourceId());
 
         if (you != null && targetPlayer != null) {
             Permanent permanent1 = chooseOnePermanentsWithTheHighestCMC(game, you, filter);
@@ -96,10 +109,9 @@ class JuxtaposeEffect extends ContinuousEffectImpl {
 
                 permanent1.changeControllerId(targetPlayer.getId(), game);
                 permanent2.changeControllerId(you.getId(), game);
-                MageObject sourceObject = game.getCard(source.getSourceId());
-                game.informPlayers((sourceObject != null ? sourceObject.getLogName() : "") + ": " + you.getLogName() +
-                        " and " + targetPlayer.getLogName() + " exchange control of " + permanent1.getLogName() +
-                        " and " + permanent2.getName());
+                game.informPlayers(new StringBuilder(sourceObject != null ? sourceObject.getLogName() : "").append(": ").append(you.getLogName())
+                        .append(" and ").append(targetPlayer.getLogName()).append(" exchange control of ").append(permanent1.getLogName())
+                        .append(" and ").append(permanent2.getName()).toString());
             } else {
                 // discard if there are less than 2 permanents
                 discard();

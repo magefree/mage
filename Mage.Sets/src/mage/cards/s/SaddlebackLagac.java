@@ -20,10 +20,10 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class SaddlebackLagac extends CardImpl {
 
-    private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("target creatures");
+    private final static FilterCreaturePermanent FILTER = new FilterCreaturePermanent("target creatures");
 
     static {
-        FILTER.add(AnotherPredicate.instance);
+        FILTER.add(new AnotherPredicate());
     }
 
     public SaddlebackLagac(UUID ownerId, CardSetInfo setInfo) {
@@ -39,7 +39,7 @@ public final class SaddlebackLagac extends CardImpl {
 
     }
 
-    private SaddlebackLagac(final SaddlebackLagac card) {
+    public SaddlebackLagac(final SaddlebackLagac card) {
         super(card);
     }
 

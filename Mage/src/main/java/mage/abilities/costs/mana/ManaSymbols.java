@@ -6,7 +6,6 @@ import mage.ManaSymbol;
 import mage.constants.ColoredManaSymbol;
 
 import java.util.ArrayList;
-import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,7 +16,7 @@ import java.util.Map;
  */
 public class ManaSymbols extends ArrayList<ManaSymbol> {
 
-    private static final Map<ColoredManaSymbol, ManaSymbol> coloredManaMap = new EnumMap<ColoredManaSymbol, ManaSymbol>(ColoredManaSymbol.class) {{
+    private final static Map<ColoredManaSymbol, ManaSymbol> coloredManaMap = new HashMap<ColoredManaSymbol, ManaSymbol>() {{
         put(ColoredManaSymbol.W, ManaSymbol.W);
         put(ColoredManaSymbol.U, ManaSymbol.U);
         put(ColoredManaSymbol.B, ManaSymbol.B);
@@ -29,22 +28,23 @@ public class ManaSymbols extends ArrayList<ManaSymbol> {
      * Contains all possible hybrid mana costs (each represents different hybrid mana symbol)
      * We'll use it for converting from hybrid mana cost to hybrid mana symbol.
      */
-    private static final Map<ManaSymbol, HybridManaCost> hybridManaMap = new EnumMap<ManaSymbol, HybridManaCost>(ManaSymbol.class) {{
+    private final static Map<ManaSymbol, HybridManaCost> hybridManaMap = new HashMap<>();
 
     /**
      *  Build map of all possible hybrid mana symbols assigning corresponding instance of hybrid mana cost.
      */
-        put(ManaSymbol.HYBRID_BG, new HybridManaCost(ColoredManaSymbol.B, ColoredManaSymbol.G));
-        put(ManaSymbol.HYBRID_BR, new HybridManaCost(ColoredManaSymbol.B, ColoredManaSymbol.R));
-        put(ManaSymbol.HYBRID_GU, new HybridManaCost(ColoredManaSymbol.G, ColoredManaSymbol.U));
-        put(ManaSymbol.HYBRID_GW, new HybridManaCost(ColoredManaSymbol.G, ColoredManaSymbol.W));
-        put(ManaSymbol.HYBRID_RG, new HybridManaCost(ColoredManaSymbol.R, ColoredManaSymbol.G));
-        put(ManaSymbol.HYBRID_RW, new HybridManaCost(ColoredManaSymbol.R, ColoredManaSymbol.W));
-        put(ManaSymbol.HYBRID_UB, new HybridManaCost(ColoredManaSymbol.U, ColoredManaSymbol.B));
-        put(ManaSymbol.HYBRID_UR, new HybridManaCost(ColoredManaSymbol.U, ColoredManaSymbol.R));
-        put(ManaSymbol.HYBRID_WB, new HybridManaCost(ColoredManaSymbol.W, ColoredManaSymbol.B));
-        put(ManaSymbol.HYBRID_WU, new HybridManaCost(ColoredManaSymbol.W, ColoredManaSymbol.U));
-    }};
+    static {
+        hybridManaMap.put(ManaSymbol.HYBRID_BG, new HybridManaCost(ColoredManaSymbol.B, ColoredManaSymbol.G));
+        hybridManaMap.put(ManaSymbol.HYBRID_BR, new HybridManaCost(ColoredManaSymbol.B, ColoredManaSymbol.R));
+        hybridManaMap.put(ManaSymbol.HYBRID_GU, new HybridManaCost(ColoredManaSymbol.G, ColoredManaSymbol.U));
+        hybridManaMap.put(ManaSymbol.HYBRID_GW, new HybridManaCost(ColoredManaSymbol.G, ColoredManaSymbol.W));
+        hybridManaMap.put(ManaSymbol.HYBRID_RG, new HybridManaCost(ColoredManaSymbol.R, ColoredManaSymbol.G));
+        hybridManaMap.put(ManaSymbol.HYBRID_RW, new HybridManaCost(ColoredManaSymbol.R, ColoredManaSymbol.W));
+        hybridManaMap.put(ManaSymbol.HYBRID_UB, new HybridManaCost(ColoredManaSymbol.U, ColoredManaSymbol.B));
+        hybridManaMap.put(ManaSymbol.HYBRID_UR, new HybridManaCost(ColoredManaSymbol.U, ColoredManaSymbol.R));
+        hybridManaMap.put(ManaSymbol.HYBRID_WB, new HybridManaCost(ColoredManaSymbol.W, ColoredManaSymbol.B));
+        hybridManaMap.put(ManaSymbol.HYBRID_WU, new HybridManaCost(ColoredManaSymbol.W, ColoredManaSymbol.U));
+    }
 
     /**
      * Extracts mana symbols from {@link ManaCost} using {@link mage.ManaSymbol} as a base class for the mana symbols.

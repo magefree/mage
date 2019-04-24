@@ -19,7 +19,7 @@ public final class BoardTheWeatherlight extends CardImpl {
     private static final FilterCard filter = new FilterCard("a historic card");
 
     static {
-        filter.add(HistoricPredicate.instance);
+        filter.add(new HistoricPredicate());
     }
 
     public BoardTheWeatherlight(UUID ownerId, CardSetInfo setInfo) {

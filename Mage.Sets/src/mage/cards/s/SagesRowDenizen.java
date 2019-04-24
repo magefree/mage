@@ -29,7 +29,7 @@ public final class SagesRowDenizen extends CardImpl {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

@@ -27,7 +27,7 @@ public final class PureSimple extends SplitCard {
 
     static {
         filterDestroy.add(Predicates.or(new SubtypePredicate(SubType.AURA), new SubtypePredicate(SubType.EQUIPMENT)));
-        filterMulticolor.add(MulticoloredPredicate.instance);
+        filterMulticolor.add(new MulticoloredPredicate());
     }
 
     public PureSimple(UUID ownerId, CardSetInfo setInfo) {

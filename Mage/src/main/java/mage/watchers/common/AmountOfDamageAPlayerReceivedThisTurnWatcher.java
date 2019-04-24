@@ -21,7 +21,7 @@ public class AmountOfDamageAPlayerReceivedThisTurnWatcher extends Watcher {
     private final Map<UUID, Integer> amountOfDamageReceivedThisTurn = new HashMap<>();
 
     public AmountOfDamageAPlayerReceivedThisTurnWatcher() {
-        super(WatcherScope.GAME);
+        super(AmountOfDamageAPlayerReceivedThisTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public AmountOfDamageAPlayerReceivedThisTurnWatcher(final AmountOfDamageAPlayerReceivedThisTurnWatcher watcher) {

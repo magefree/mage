@@ -32,7 +32,7 @@ public final class ZadasCommando extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.ALLY));
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public ZadasCommando(UUID ownerId, CardSetInfo setInfo) {

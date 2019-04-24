@@ -1,3 +1,4 @@
+
 package mage.cards.n;
 
 import java.util.UUID;
@@ -106,8 +107,7 @@ class NettlevineBlightEffect extends OneShotEffect {
                     if (chosenPermanent != null) {
                         Card nettlevineBlightCard = game.getCard(source.getSourceId());
                         if (nettlevineBlightCard != null) {
-                            game.getState().setValue("attachTo:" + nettlevineBlight.getId(), chosenPermanent);
-                            chosenPermanent.addAttachment(nettlevineBlight.getId(), game);
+                            nettlevineBlight.attachTo(chosenPermanent.getId(), game);
                             return true;
                         }
                     }

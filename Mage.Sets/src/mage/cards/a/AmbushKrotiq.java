@@ -22,7 +22,7 @@ public final class AmbushKrotiq extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature you control");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public AmbushKrotiq(UUID ownerId, CardSetInfo setInfo) {

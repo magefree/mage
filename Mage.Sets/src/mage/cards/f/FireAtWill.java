@@ -23,8 +23,8 @@ public final class FireAtWill extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                AttackingPredicate.instance,
-                BlockingPredicate.instance));
+                new AttackingPredicate(),
+                new BlockingPredicate()));
     }
 
     public FireAtWill(UUID ownerId, CardSetInfo setInfo) {

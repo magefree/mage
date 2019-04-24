@@ -25,7 +25,7 @@ public final class NephaliaSmuggler extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another target creature you control");
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public NephaliaSmuggler(UUID ownerId, CardSetInfo setInfo) {

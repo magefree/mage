@@ -120,8 +120,8 @@ class GisaAndGeralfCastFromGraveyardEffect extends AsThoughEffectImpl {
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         if (objectId.equals(getTargetPointer().getFirst(game, source))) {
             if (affectedControllerId.equals(source.getControllerId())) {
-                GisaAndGeralfWatcher watcher = game.getState().getWatcher(GisaAndGeralfWatcher.class, source.getSourceId());
-                return watcher != null && !watcher.isAbilityUsed();
+                GisaAndGeralfWatcher watcher = (GisaAndGeralfWatcher) game.getState().getWatchers().get(GisaAndGeralfWatcher.class.getSimpleName(), source.getSourceId());
+                return !watcher.isAbilityUsed();
             }
         }
         return false;
@@ -130,10 +130,10 @@ class GisaAndGeralfCastFromGraveyardEffect extends AsThoughEffectImpl {
 
 class GisaAndGeralfWatcher extends Watcher {
 
-   private boolean abilityUsed = false;
+    boolean abilityUsed = false;
 
     GisaAndGeralfWatcher() {
-        super(WatcherScope.CARD);
+        super("GisaAndGeralfWatcher", WatcherScope.CARD);
     }
 
     GisaAndGeralfWatcher(final GisaAndGeralfWatcher watcher) {
@@ -145,7 +145,7 @@ class GisaAndGeralfWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getZone() == Zone.GRAVEYARD) {
             Spell spell = (Spell) game.getObject(event.getTargetId());
-            if (spell != null && spell.isCreature() && spell.hasSubtype(SubType.ZOMBIE, game)) {
+            if (spell.isCreature() && spell.hasSubtype(SubType.ZOMBIE, game)) {
                 abilityUsed = true;
             }
         }

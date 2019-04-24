@@ -28,7 +28,7 @@ public final class HeraldOfDromoka extends CardImpl {
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
         filter.add(new SubtypePredicate(SubType.WARRIOR));
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public HeraldOfDromoka(UUID ownerId, CardSetInfo setInfo) {

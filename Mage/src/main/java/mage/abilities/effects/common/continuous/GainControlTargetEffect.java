@@ -1,3 +1,4 @@
+
 package mage.abilities.effects.common.continuous;
 
 import java.util.UUID;
@@ -97,14 +98,12 @@ public class GainControlTargetEffect extends ContinuousEffectImpl {
                     }
                 }
             }
-            // no valid target exists and the controller is no longer in the game, effect can be discarded
-            if (!targetStillExists
-                    || !controller.isInGame()) {
+            if (!targetStillExists) {
+                // no valid target exists, effect can be discarded
                 discard();
             }
             return true;
         }
-        discard(); // controller no longer exists
         return false;
     }
 
@@ -113,11 +112,6 @@ public class GainControlTargetEffect extends ContinuousEffectImpl {
         if (!staticText.isEmpty()) {
             return staticText;
         }
-
-        if (mode.getTargets().isEmpty()) {
-            return "gain control of target permanent";
-        }
-
         Target target = mode.getTargets().get(0);
         StringBuilder sb = new StringBuilder("gain control of ");
         if (target.getMaxNumberOfTargets() > 1) {

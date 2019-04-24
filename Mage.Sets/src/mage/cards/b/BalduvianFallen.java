@@ -3,6 +3,8 @@ package mage.cards.b;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.constants.Duration;
 import mage.constants.SubType;
@@ -36,7 +38,7 @@ public final class BalduvianFallen extends CardImpl {
         this.addAbility(new BalduvianFallenAbility());
     }
 
-    private BalduvianFallen(final BalduvianFallen card) {
+    public BalduvianFallen(final BalduvianFallen card) {
         super(card);
     }
 
@@ -52,7 +54,7 @@ class BalduvianFallenAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null, false);
     }
 
-    private BalduvianFallenAbility(final BalduvianFallenAbility ability) {
+    public BalduvianFallenAbility(final BalduvianFallenAbility ability) {
         super(ability);
     }
 

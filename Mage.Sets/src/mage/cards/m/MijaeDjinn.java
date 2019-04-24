@@ -57,7 +57,7 @@ class MijaeDjinnEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent creature = game.getPermanent(source.getSourceId());
         if (controller != null && creature != null) {
-            if (controller.flipCoin(source, game, true)) {
+            if (controller.flipCoin(game)) {
                 return true;
             } else {
                 creature.removeFromCombat(game);

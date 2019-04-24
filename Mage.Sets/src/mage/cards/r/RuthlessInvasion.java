@@ -1,5 +1,8 @@
+
+
 package mage.cards.r;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
@@ -9,20 +12,19 @@ import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.UUID;
-
 /**
+ *
  * @author Loki
  */
 public final class RuthlessInvasion extends CardImpl {
 
-    public RuthlessInvasion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R/P}");
+    public RuthlessInvasion (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R/P}");
 
         this.getSpellAbility().addEffect(new RuthlessInvasionEffect());
     }
 
-    public RuthlessInvasion(final RuthlessInvasion card) {
+    public RuthlessInvasion (final RuthlessInvasion card) {
         super(card);
     }
 
@@ -45,7 +47,10 @@ class RuthlessInvasionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return !permanent.isArtifact();
+        if (!permanent.isArtifact()) {
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -54,7 +59,7 @@ class RuthlessInvasionEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
         return false;
     }
 

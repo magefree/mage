@@ -26,7 +26,7 @@ public final class GodhunterOctopus extends CardImpl {
     static {
         filter.add(Predicates.or(
                 new CardTypePredicate(CardType.ENCHANTMENT),
-                EnchantedPredicate.instance));
+                new EnchantedPredicate()));
     }
 
     public GodhunterOctopus(UUID ownerId, CardSetInfo setInfo) {

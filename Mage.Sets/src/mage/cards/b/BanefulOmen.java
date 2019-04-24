@@ -1,6 +1,8 @@
 
 package mage.cards.b;
 
+import java.util.Set;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -13,16 +15,15 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
-import java.util.Set;
-import java.util.UUID;
-
 /**
+ *
  * @author jeffwadsworth
  */
 public final class BanefulOmen extends CardImpl {
 
     public BanefulOmen(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}{B}{B}");
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{B}{B}{B}");
+
 
         // At the beginning of your end step, you may reveal the top card of your library. If you do, each opponent loses life equal to that card's converted mana cost.
         this.addAbility(new BanefulOmenTriggeredAbility());
@@ -39,11 +40,11 @@ public final class BanefulOmen extends CardImpl {
 
     class BanefulOmenTriggeredAbility extends TriggeredAbilityImpl {
 
-        BanefulOmenTriggeredAbility() {
+        public BanefulOmenTriggeredAbility() {
             super(Zone.BATTLEFIELD, new BanefulOmenEffect(), true);
         }
 
-        private BanefulOmenTriggeredAbility(BanefulOmenTriggeredAbility ability) {
+        public BanefulOmenTriggeredAbility(BanefulOmenTriggeredAbility ability) {
             super(ability);
         }
 
@@ -70,11 +71,11 @@ public final class BanefulOmen extends CardImpl {
 
     static class BanefulOmenEffect extends OneShotEffect {
 
-        BanefulOmenEffect() {
+        public BanefulOmenEffect() {
             super(Outcome.Benefit);
         }
 
-        private BanefulOmenEffect(final BanefulOmenEffect effect) {
+        public BanefulOmenEffect(final BanefulOmenEffect effect) {
             super(effect);
         }
 
@@ -84,26 +85,24 @@ public final class BanefulOmen extends CardImpl {
             if (player == null) {
                 return false;
             }
-            if (!player.getLibrary().hasCards()) {
-                return false;
-            }
-            Card card = player.getLibrary().getFromTop(game);
-            if (card == null) {
-                return false;
-            }
-            Cards cards = new CardsImpl(card);
-            player.revealCards("Baneful Omen", cards, game);
+            if (player.getLibrary().hasCards()) {
+                Card card = player.getLibrary().getFromTop(game);
+                Cards cards = new CardsImpl();
+                cards.add(card);
+                player.revealCards("Baneful Omen", cards, game);
 
-
-            int loseLife = card.getConvertedManaCost();
-            Set<UUID> opponents = game.getOpponents(source.getControllerId());
-            for (UUID opponentUuid : opponents) {
-                Player opponent = game.getPlayer(opponentUuid);
-                if (opponent != null) {
-                    opponent.loseLife(loseLife, game, false);
+                if (card != null) {
+                    int loseLife = card.getConvertedManaCost();
+                    Set<UUID> opponents = game.getOpponents(source.getControllerId());
+                    for (UUID opponentUuid : opponents) {
+                        Player opponent = game.getPlayer(opponentUuid);
+                        if (opponent != null) {
+                            opponent.loseLife(loseLife, game, false);
+                        }
+                    }
                 }
             }
-            return true;
+            return false;
         }
 
         @Override

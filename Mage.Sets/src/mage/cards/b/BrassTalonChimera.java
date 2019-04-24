@@ -1,3 +1,4 @@
+
 package mage.cards.b;
 
 import mage.MageInt;
@@ -21,6 +22,7 @@ import mage.target.common.TargetCreaturePermanent;
 import java.util.UUID;
 
 /**
+ *
  * @author TheElk801
  */
 public final class BrassTalonChimera extends CardImpl {
@@ -41,9 +43,9 @@ public final class BrassTalonChimera extends CardImpl {
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
 
-        // Sacrifice Brass-Talon Chimera: Put a +2/+2 counter on target Chimera creature. It gains first strike. (This effect lasts indefinitely.)
+        // Sacrifice Brass-Talon Chimera: Put a +2/+2 counter on target Chimera creature. It gains first strike.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P2P2.createInstance()), new SacrificeSourceCost());
-        ability.addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield).setText("It gains first strike. <i>(This effect lasts indefinitely.)</i>"));
+        ability.addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield));
         ability.addTarget(new TargetCreaturePermanent(filter));
         addAbility(ability);
     }

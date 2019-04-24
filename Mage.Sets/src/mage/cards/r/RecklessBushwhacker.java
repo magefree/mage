@@ -24,10 +24,10 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  */
 public final class RecklessBushwhacker extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent FILTER = new FilterControlledCreaturePermanent("other creatures you control");
+    private final static FilterControlledCreaturePermanent FILTER = new FilterControlledCreaturePermanent("other creatures you control");
 
     static {
-        FILTER.add(AnotherPredicate.instance);
+        FILTER.add(new AnotherPredicate());
     }
 
     public RecklessBushwhacker(UUID ownerId, CardSetInfo setInfo) {

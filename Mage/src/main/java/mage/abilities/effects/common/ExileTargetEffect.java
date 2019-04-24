@@ -1,3 +1,4 @@
+
 package mage.abilities.effects.common;
 
 import java.util.LinkedHashSet;
@@ -92,8 +93,7 @@ public class ExileTargetEffect extends OneShotEffect {
                 for (Target target : source.getTargets()) {
                     for (UUID targetId : target.getTargets()) {
                         Permanent permanent = game.getPermanent(targetId);
-                        if (permanent != null
-                                && permanent.isPhasedIn()) {
+                        if (permanent != null) {
                             Zone currentZone = game.getState().getZone(permanent.getId());
                             if (currentZone != Zone.EXILED && (onlyFromZone == null || onlyFromZone == Zone.BATTLEFIELD)) {
                                 toExile.add(permanent);
@@ -117,8 +117,7 @@ public class ExileTargetEffect extends OneShotEffect {
             } else {
                 for (UUID targetId : getTargetPointer().getTargets(game, source)) {
                     Permanent permanent = game.getPermanent(targetId);
-                    if (permanent != null
-                            && permanent.isPhasedIn()) {
+                    if (permanent != null) {
                         Zone currentZone = game.getState().getZone(permanent.getId());
                         if (currentZone != Zone.EXILED && (onlyFromZone == null || onlyFromZone == Zone.BATTLEFIELD)) {
                             toExile.add(permanent);

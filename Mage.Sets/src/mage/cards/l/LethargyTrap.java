@@ -26,7 +26,7 @@ public final class LethargyTrap extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creatures");
 
     static {
-        filter.add(AttackingPredicate.instance);
+        filter.add(new AttackingPredicate());
     }
 
     public LethargyTrap(UUID ownerId, CardSetInfo setInfo) {

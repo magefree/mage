@@ -1,14 +1,13 @@
 
 package mage.server;
 
+import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
+import javax.annotation.Nonnull;
 import mage.MageException;
 import mage.players.net.UserData;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
-
-import javax.annotation.Nonnull;
-import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -30,7 +29,7 @@ public enum SessionManager {
         if (session.getUserId() != null && !UserManager.instance.getUser(session.getUserId()).isPresent()) {
             logger.error("User for session " + sessionId + " with userId " + session.getUserId() + " is missing. Session removed.");
             // can happen if user from same host signs in multiple time with multiple clients, after he disconnects with one client
-            disconnect(sessionId, DisconnectReason.ConnectingOtherInstance, session); // direct disconnect
+            disconnect(sessionId, DisconnectReason.ConnectingOtherInstance);
             return Optional.empty();
         }
         return Optional.of(session);
@@ -89,51 +88,44 @@ public enum SessionManager {
     }
 
     public boolean setUserData(String userName, String sessionId, UserData userData, String clientVersion, String userIdStr) throws MageException {
-      return getSession(sessionId)
-              .map(session -> session.setUserData(userName,userData, clientVersion, userIdStr))
-              .orElse(false);
-
+        Session session = sessions.get(sessionId);
+        if (session != null) {
+            session.setUserData(userName, userData, clientVersion, userIdStr);
+            return true;
+        }
+        return false;
     }
 
     public void disconnect(String sessionId, DisconnectReason reason) {
-        disconnect(sessionId, reason, null);
-    }
-
-    public void disconnect(String sessionId, DisconnectReason reason, Session directSession) {
-        if (directSession == null) {
-            // find real session to disconnects
-            getSession(sessionId).ifPresent(session -> {
-                if (!isValidSession(sessionId)) {
-                    // session was removed meanwhile by another thread so we can return
-                    return;
-                }
-                logger.debug("DISCONNECT  " + reason.toString() + " - sessionId: " + sessionId);
-                sessions.remove(sessionId);
-                switch (reason) {
-                    case AdminDisconnect:
-                        session.kill(reason);
-                        break;
-                    case ConnectingOtherInstance:
-                    case Disconnected: // regular session end or wrong client version
-                        UserManager.instance.disconnect(session.getUserId(), reason);
-                        break;
-                    case SessionExpired: // session ends after no reconnect happens in the defined time span
-                        break;
-                    case LostConnection: // user lost connection - session expires countdown starts
-                        session.userLostConnection();
-                        UserManager.instance.disconnect(session.getUserId(), reason);
-                        break;
-                    default:
-                        logger.trace("endSession: unexpected reason  " + reason.toString() + " - sessionId: " + sessionId);
-                }
-            });
-        } else {
-            // direct session to disconnects
+        Session session = sessions.get(sessionId);
+        if (session != null) {
+            if (!sessions.containsKey(sessionId)) {
+                // session was removed meanwhile by another thread so we can return
+                return;
+            }
+            logger.debug("DISCONNECT  " + reason.toString() + " - sessionId: " + sessionId);
             sessions.remove(sessionId);
-            directSession.kill(reason);
-        }
-    }
+            switch (reason) {
+                case AdminDisconnect:
+                    session.kill(reason);
+                    break;
+                case ConnectingOtherInstance:
+                case Disconnected: // regular session end or wrong client version
+                    UserManager.instance.disconnect(session.getUserId(), reason);
+                    break;
+                case SessionExpired: // session ends after no reconnect happens in the defined time span
+                    break;
+                case LostConnection: // user lost connection - session expires countdown starts
+                    session.userLostConnection();
+                    UserManager.instance.disconnect(session.getUserId(), reason);
+                    break;
+                default:
+                    logger.trace("endSession: unexpected reason  " + reason.toString() + " - sessionId: " + sessionId);
+            }
 
+        }
+
+    }
 
     /**
      * Admin requested the disconnect of a user
@@ -158,9 +150,11 @@ public enum SessionManager {
     }
 
     private Optional<User> getUserFromSession(String sessionId) {
-        return getSession(sessionId)
-                .flatMap(s -> UserManager.instance.getUser(s.getUserId()));
-
+        Optional<Session> session = getSession(sessionId);
+        if (!session.isPresent()) {
+            return Optional.empty();
+        }
+        return UserManager.instance.getUser(session.get().getUserId());
     }
 
     public void endUserSession(String sessionId, String userSessionId) {
@@ -170,8 +164,11 @@ public enum SessionManager {
     }
 
     public boolean isAdmin(String sessionId) {
-        return getSession(sessionId).map(Session::isAdmin).orElse(false);
-
+        Session admin = sessions.get(sessionId);
+        if (admin != null) {
+            return admin.isAdmin();
+        }
+        return false;
     }
 
     public boolean isValidSession(@Nonnull String sessionId) {
@@ -188,9 +185,11 @@ public enum SessionManager {
     }
 
     public boolean extendUserSession(String sessionId, String pingInfo) {
-        return getSession(sessionId)
-                .map(session -> UserManager.instance.extendUserSession(session.getUserId(), pingInfo))
-                .orElse(false);
+        Session session = sessions.get(sessionId);
+        if (session != null) {
+            return UserManager.instance.extendUserSession(session.getUserId(), pingInfo);
+        }
+        return false;
     }
 
     public void sendErrorMessageToClient(String sessionId, String message) {

@@ -1,5 +1,6 @@
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -19,9 +20,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.UUID;
-
 /**
+ *
  * @author spjspj
  */
 public final class GeodeGolem extends CardImpl {
@@ -68,6 +68,7 @@ class GeodeGolemEffect extends OneShotEffect {
             for (UUID commanderId : controller.getCommandersIds()) {
                 if (game.getState().getZone(commanderId) == Zone.COMMAND) {
                     Card commander = game.getCard(commanderId);
+
                     if (commander != null && game.getState().getZone(commanderId) == Zone.COMMAND) {
                         SpellAbility ability = commander.getSpellAbility();
                         SpellAbility newAbility = commander.getSpellAbility().copy();

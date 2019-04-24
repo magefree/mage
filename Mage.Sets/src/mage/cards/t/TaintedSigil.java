@@ -1,6 +1,7 @@
 
 package mage.cards.t;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -15,22 +16,23 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.watchers.common.PlayerLostLifeWatcher;
 
-import java.util.UUID;
-
 /**
+ *
  * @author jeffwadsworth
  */
 public final class TaintedSigil extends CardImpl {
-
-    private static final String rule = "You gain life equal to the total life lost by all players this turn";
+    
+    String rule = "You gain life equal to the total life lost by all players this turn";
 
     public TaintedSigil(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{W}{B}");
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}{W}{B}");
+
+        
+
 
         // {tap}, Sacrifice Tainted Sigil: You gain life equal to the total life lost by all players this turn.
-        Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD, new GainLifeEffect(AllPlayersLostLifeCount.instance, rule), new TapSourceCost()
-        );
+        AllPlayersLostLifeCount totalLifeLostThisTurn = new AllPlayersLostLifeCount();
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(totalLifeLostThisTurn, rule), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
 
@@ -46,8 +48,7 @@ public final class TaintedSigil extends CardImpl {
     }
 }
 
-enum AllPlayersLostLifeCount implements DynamicValue {
-    instance;
+class AllPlayersLostLifeCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -55,11 +56,11 @@ enum AllPlayersLostLifeCount implements DynamicValue {
     }
 
     public int calculate(Game game, UUID controllerId) {
-        PlayerLostLifeWatcher watcher = game.getState().getWatcher(PlayerLostLifeWatcher.class);
+        PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get(PlayerLostLifeWatcher.class.getSimpleName());
         if (watcher != null) {
             int amountLifeLost = 0;
             for (UUID playerId : game.getState().getPlayersInRange(controllerId, game)) {
-                amountLifeLost += watcher.getLifeLost(playerId);
+                amountLifeLost += watcher.getLiveLost(playerId);
             }
             return amountLifeLost;
         }
@@ -68,7 +69,7 @@ enum AllPlayersLostLifeCount implements DynamicValue {
 
     @Override
     public DynamicValue copy() {
-        return instance;
+        return new AllPlayersLostLifeCount();
     }
 
     @Override

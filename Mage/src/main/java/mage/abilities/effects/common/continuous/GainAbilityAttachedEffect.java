@@ -70,7 +70,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         if (affectedObjectsSet) {
-            Permanent equipment = game.getPermanentOrLKIBattlefield(source.getSourceId());
+            Permanent equipment = game.getPermanent(source.getSourceId());
             if (equipment != null && equipment.getAttachedTo() != null) {
                 this.setTargetPointer(new FixedTarget(equipment.getAttachedTo(), game.getState().getZoneChangeCounter(equipment.getAttachedTo())));
             }
@@ -107,7 +107,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
         } else {
             sb.append("gains ");
         }
-        sb.append('"' + ability.getRule("this creature") + '"');
+        sb.append(ability.getRule());
         if (!duration.toString().isEmpty()) {
             sb.append(' ').append(duration.toString());
         }

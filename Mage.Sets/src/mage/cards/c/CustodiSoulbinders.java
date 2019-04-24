@@ -29,7 +29,7 @@ public final class CustodiSoulbinders extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creatures");
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public CustodiSoulbinders(UUID ownerId, CardSetInfo setInfo) {

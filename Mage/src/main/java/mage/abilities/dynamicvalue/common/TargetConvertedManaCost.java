@@ -8,10 +8,10 @@ import mage.cards.Card;
 import mage.game.Game;
 
 /**
+ *
  * @author North
  */
-public enum TargetConvertedManaCost implements DynamicValue {
-    instance;
+public class TargetConvertedManaCost implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability source, Effect effect) {
@@ -24,7 +24,7 @@ public enum TargetConvertedManaCost implements DynamicValue {
 
     @Override
     public TargetConvertedManaCost copy() {
-        return instance;
+        return new TargetConvertedManaCost();
     }
 
     @Override

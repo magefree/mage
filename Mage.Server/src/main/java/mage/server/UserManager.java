@@ -1,17 +1,17 @@
-package mage.server;
 
-import mage.server.User.UserState;
-import mage.server.record.UserStats;
-import mage.server.record.UserStatsRepository;
-import mage.server.util.ThreadExecutor;
-import mage.view.UserView;
-import org.apache.log4j.Logger;
+package mage.server;
 
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
+import mage.server.User.UserState;
+import mage.server.record.UserStats;
+import mage.server.record.UserStatsRepository;
+import mage.server.util.ThreadExecutor;
+import mage.view.UserView;
+import org.apache.log4j.Logger;
 
 /**
  * manages users - if a user is disconnected and 10 minutes have passed with no
@@ -22,9 +22,6 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public enum UserManager {
     instance;
 
-    private static final int SERVER_TIMEOUTS_USER_DISCONNECT_FROM_SERVER_AFTER_SECS = 3 * 60; // removes from all games and chats too (can be seen in users list with disconnected status)
-    private static final int SERVER_TIMEOUTS_USER_REMOVE_FROM_SERVER_AFTER_SECS = 8 * 60; // removes from users list
-
     private static final Logger logger = Logger.getLogger(UserManager.class);
 
     protected final ScheduledExecutorService expireExecutor = Executors.newSingleThreadScheduledExecutor();
@@ -32,6 +29,7 @@ public enum UserManager {
 
     private List<UserView> userInfoList = new ArrayList<>();
 
+    private static final Logger LOGGER = Logger.getLogger(UserManager.class);
 
     private final ReadWriteLock lock = new ReentrantReadWriteLock();
     private final ConcurrentHashMap<UUID, User> users = new ConcurrentHashMap<>();
@@ -61,7 +59,7 @@ public enum UserManager {
 
     public Optional<User> getUser(UUID userId) {
         if (!users.containsKey(userId)) {
-            //logger.warn(String.format("User with id %s could not be found", userId), new Throwable()); // TODO: remove after session freezes fixed
+            LOGGER.trace(String.format("User with id %s could not be found", userId));
             return Optional.empty();
         } else {
             return Optional.of(users.get(userId));
@@ -72,8 +70,13 @@ public enum UserManager {
         final Lock r = lock.readLock();
         r.lock();
         try {
-            return users.values().stream().filter(user -> user.getName().equals(userName))
+            Optional<User> u = users.values().stream().filter(user -> user.getName().equals(userName))
                     .findFirst();
+            if (u.isPresent()) {
+                return u;
+            } else {
+                return Optional.empty();
+            }
         } finally {
             r.unlock();
         }
@@ -81,7 +84,7 @@ public enum UserManager {
     }
 
     public Collection<User> getUsers() {
-        List<User> userList = new ArrayList<>();
+        ArrayList<User> userList = new ArrayList<>();
         final Lock r = lock.readLock();
         r.lock();
         try {
@@ -130,17 +133,17 @@ public enum UserManager {
         if (userId != null) {
             getUser(userId).ifPresent(user
                     -> USER_EXECUTOR.execute(
-                    () -> {
-                        try {
-                            logger.info("USER REMOVE - " + user.getName() + " (" + reason.toString() + ")  userId: " + userId + " [" + user.getGameInfo() + ']');
-                            user.removeUserFromAllTables(reason);
-                            ChatManager.instance.removeUser(user.getId(), reason);
-                            logger.debug("USER REMOVE END - " + user.getName());
-                        } catch (Exception ex) {
-                            handleException(ex);
-                        }
-                    }
-            ));
+                            () -> {
+                                try {
+                                    LOGGER.info("USER REMOVE - " + user.getName() + " (" + reason.toString() + ")  userId: " + userId + " [" + user.getGameInfo() + ']');
+                                    user.removeUserFromAllTables(reason);
+                                    ChatManager.instance.removeUser(user.getId(), reason);
+                                    LOGGER.debug("USER REMOVE END - " + user.getName());
+                                } catch (Exception ex) {
+                                    handleException(ex);
+                                }
+                            }
+                    ));
 
         }
     }
@@ -158,15 +161,16 @@ public enum UserManager {
 
     /**
      * Is the connection lost for more than 3 minutes, the user will be set to
-     * offline status. The user will be removed in validity check after 8
+     * offline status. The user will be removed in validity check after 15
      * minutes of no activities
+     *
      */
     private void checkExpired() {
         try {
             Calendar calendarExp = Calendar.getInstance();
-            calendarExp.add(Calendar.SECOND, -1 * SERVER_TIMEOUTS_USER_DISCONNECT_FROM_SERVER_AFTER_SECS);
+            calendarExp.add(Calendar.MINUTE, -3);
             Calendar calendarRemove = Calendar.getInstance();
-            calendarRemove.add(Calendar.SECOND, -1 * SERVER_TIMEOUTS_USER_REMOVE_FROM_SERVER_AFTER_SECS);
+            calendarRemove.add(Calendar.MINUTE, -8);
             List<User> toRemove = new ArrayList<>();
             logger.debug("Start Check Expired");
             ArrayList<User> userList = new ArrayList<>();
@@ -181,18 +185,18 @@ public enum UserManager {
                 try {
                     if (user.getUserState() == UserState.Offline) {
                         if (user.isExpired(calendarRemove.getTime())) {
-                            // removes from users list
                             toRemove.add(user);
                         }
                     } else {
                         if (user.isExpired(calendarExp.getTime())) {
-                            // set disconnected status and removes from all activities (tourney/tables/games/drafts/chats)
                             if (user.getUserState() == UserState.Connected) {
                                 user.lostConnection();
                                 disconnect(user.getId(), DisconnectReason.BecameInactive);
                             }
                             removeUserFromAllTablesAndChat(user.getId(), DisconnectReason.SessionExpired);
                             user.setUserState(UserState.Offline);
+                            // Remove the user from all tournaments
+
                         }
                     }
                 } catch (Exception ex) {
@@ -217,6 +221,7 @@ public enum UserManager {
 
     /**
      * This method recreated the user list that will be send to all clients
+     *
      */
     private void updateUserInfoList() {
         try {
@@ -248,12 +253,12 @@ public enum UserManager {
 
     public void handleException(Exception ex) {
         if (ex != null) {
-            logger.fatal("User manager exception ", ex);
+            LOGGER.fatal("User manager exception ", ex);
             if (ex.getStackTrace() != null) {
-                logger.fatal(ex.getStackTrace());
+                LOGGER.fatal(ex.getStackTrace());
             }
         } else {
-            logger.fatal("User manager exception - null");
+            LOGGER.fatal("User manager exception - null");
         }
     }
 

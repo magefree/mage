@@ -23,7 +23,7 @@ public final class SwarmSurge extends CardImpl {
     private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("Colorless creatures you control");
 
     static {
-        FILTER.add(ColorlessPredicate.instance);
+        FILTER.add(new ColorlessPredicate());
     }
 
     public SwarmSurge(UUID ownerId, CardSetInfo setInfo) {

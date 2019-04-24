@@ -29,7 +29,7 @@ public final class ChiseiHeartOfOceans extends CardImpl {
     
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(CounterAnyPredicate.instance);
+        filter.add(new CounterAnyPredicate());
     }       
     
     public ChiseiHeartOfOceans(UUID ownerId, CardSetInfo setInfo) {

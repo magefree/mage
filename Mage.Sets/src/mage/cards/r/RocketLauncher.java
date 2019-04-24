@@ -52,18 +52,18 @@ public final class RocketLauncher extends CardImpl {
 
 class RocketLauncherWatcher extends Watcher {
 
-    private boolean changedControllerOR1stTurn;
-    private UUID cardId = null;
+    boolean changedControllerOR1stTurn;
+    UUID cardId = null;
 
     public RocketLauncherWatcher(UUID cardId) {
-        super(WatcherScope.GAME);
+        super(RocketLauncherWatcher.class.getSimpleName(), WatcherScope.GAME);
         this.changedControllerOR1stTurn = true;
         this.cardId = cardId;
     }
 
     public RocketLauncherWatcher(final RocketLauncherWatcher watcher) {
         super(watcher);        
-        this.changedControllerOR1stTurn = watcher.isChangedControllerOR1stTurn();
+        this.changedControllerOR1stTurn = watcher.changedControllerOR1stTurn;
         this.cardId = watcher.cardId;
     }
 
@@ -88,10 +88,6 @@ class RocketLauncherWatcher extends Watcher {
         super.reset();
         changedControllerOR1stTurn = true; //when is this reset called? may cause problems if in mid-life
     }
-
-    public boolean isChangedControllerOR1stTurn() {
-        return changedControllerOR1stTurn;
-    }
 }
 
 enum ControlledTurnCondition implements Condition {
@@ -101,9 +97,9 @@ enum ControlledTurnCondition implements Condition {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        RocketLauncherWatcher watcher = game.getState().getWatcher(RocketLauncherWatcher.class);
+        RocketLauncherWatcher watcher = (RocketLauncherWatcher) game.getState().getWatchers().get(RocketLauncherWatcher.class.getSimpleName());
         
-        return watcher != null && !watcher.isChangedControllerOR1stTurn();
+        return !watcher.changedControllerOR1stTurn;
     }
 
     @Override

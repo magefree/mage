@@ -1,6 +1,43 @@
 package org.mage.card.arcane;
 
-import mage.abilities.hint.HintUtils;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.awt.image.FilteredImageSource;
+import java.awt.image.ImageProducer;
+import java.awt.image.RGBImageFilter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.PathMatcher;
+import java.nio.file.Paths;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.StandardCopyOption;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.StringTokenizer;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.regex.Pattern;
+import java.util.stream.IntStream;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+
 import mage.cards.repository.ExpansionRepository;
 import mage.client.MageFrame;
 import mage.client.constants.Constants;
@@ -9,10 +46,8 @@ import mage.client.constants.Constants.ResourceSymbolSize;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
-import mage.client.util.gui.GuiDisplayUtil;
-import mage.constants.Rarity;
 import mage.utils.StreamUtils;
-import org.apache.batik.anim.dom.SVGDOMImplementation;
+import org.apache.batik.dom.svg.SVGDOMImplementation;
 import org.apache.batik.transcoder.TranscoderException;
 import org.apache.batik.transcoder.TranscoderInput;
 import org.apache.batik.transcoder.TranscoderOutput;
@@ -22,26 +57,6 @@ import org.apache.batik.util.SVGConstants;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.utils.CardImageUtils;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.awt.image.FilteredImageSource;
-import java.awt.image.ImageProducer;
-import java.awt.image.RGBImageFilter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.*;
-import java.nio.file.attribute.BasicFileAttributes;
-import java.util.List;
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.regex.Pattern;
-import java.util.stream.IntStream;
-
 import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
 
 public final class ManaSymbols {
@@ -49,10 +64,10 @@ public final class ManaSymbols {
     private static final Logger LOGGER = Logger.getLogger(ManaSymbols.class);
     private static final Map<Integer, Map<String, BufferedImage>> manaImages = new HashMap<>();
 
-    private static final Map<String, Map<Rarity, Image>> setImages = new ConcurrentHashMap<>();
+    private static final Map<String, Map<String, Image>> setImages = new ConcurrentHashMap<>();
 
-    private static final Set<String> onlyMythics = new HashSet<>();
-    private static final Set<String> withoutSymbols = new HashSet<>();
+    private static final HashSet<String> onlyMythics = new HashSet<>();
+    private static final HashSet<String> withoutSymbols = new HashSet<>();
 
     static {
         onlyMythics.add("DRB");
@@ -71,13 +86,11 @@ public final class ManaSymbols {
     private static final Map<String, Dimension> setImagesExist = new HashMap<>();
     private static final Pattern REPLACE_SYMBOLS_PATTERN = Pattern.compile("\\{([^}/]*)/?([^}]*)\\}");
 
-    private static final String[] symbols = new String[]{
-            "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
-            "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
+    private static final String[] symbols = new String[]{"0", "1", "10", "11", "12", "15", "16", "2", "3", "4", "5", "6", "7", "8", "9",
             "B", "BG", "BR", "BP", "2B",
             "G", "GU", "GW", "GP", "2G",
             "R", "RG", "RW", "RP", "2R",
-            "S", "T", "Q",
+            "S", "T",
             "U", "UB", "UR", "UP", "2U",
             "W", "WB", "WU", "WP", "2W",
             "X", "C", "E"};
@@ -173,19 +186,19 @@ public final class ManaSymbols {
                 continue;
             }
 
-            Set<Rarity> codes;
+            String[] codes;
             if (onlyMythics.contains(set)) {
-                codes = EnumSet.of(Rarity.MYTHIC);
+                codes = new String[]{"M"};
             } else {
-                codes = EnumSet.of(Rarity.COMMON, Rarity.UNCOMMON, Rarity.RARE, Rarity.MYTHIC);
+                codes = new String[]{"C", "U", "R", "M"};
             }
 
-            Map<Rarity, Image> rarityImages = new EnumMap<>(Rarity.class);
+            Map<String, Image> rarityImages = new HashMap<>();
             setImages.put(set, rarityImages);
 
             // load medium size
-            for (Rarity rarityCode : codes) {
-                File file = new File(getResourceSetsPath(ResourceSetSize.MEDIUM) + set + '-' + rarityCode.getCode() + ".jpg");
+            for (String rarityCode : codes) {
+                File file = new File(getResourceSetsPath(ResourceSetSize.MEDIUM) + set + '-' + rarityCode + ".jpg");
                 try {
                     Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
                     int width = image.getWidth(null);
@@ -210,7 +223,7 @@ public final class ManaSymbols {
                     file.mkdirs();
                 }
                 String pathRoot = getResourceSetsPath(ResourceSetSize.SMALL) + set;
-                for (Rarity code : codes) {
+                for (String code : codes) {
                     File newFile = new File(pathRoot + '-' + code + ".png");
                     if (!(MageFrame.isSkipSmallSymbolGenerationForExisting() && newFile.exists())) {// skip if option enabled and file already exists
                         file = new File(getResourceSetsPath(ResourceSetSize.MEDIUM) + set + '-' + code + ".png");
@@ -771,18 +784,7 @@ public final class ManaSymbols {
                 "<img src='" + filePathToUrl(htmlImagesPath) + "$1$2" + ".png' alt='$1$2' width="
                         + symbolSize + " height=" + symbolSize + '>');
 
-        // replace hint icons
-        if (replaced.contains(HintUtils.HINT_ICON_GOOD)) {
-            replaced = replaced.replace(HintUtils.HINT_ICON_GOOD, GuiDisplayUtil.getHintIconHtml("good", symbolSize) + "&nbsp;");
-        }
-        if (replaced.contains(HintUtils.HINT_ICON_BAD)) {
-            replaced = replaced.replace(HintUtils.HINT_ICON_BAD, GuiDisplayUtil.getHintIconHtml("bad", symbolSize) + "&nbsp;");
-        }
-        if (replaced.contains(HintUtils.HINT_ICON_RESTRICT)) {
-            replaced = replaced.replace(HintUtils.HINT_ICON_RESTRICT, GuiDisplayUtil.getHintIconHtml("restrict", symbolSize) + "&nbsp;");
-        }
-
-        // ignored data restore
+        // ignore data restore
         replaced = replaced
                 .replace("|source|", "{source}")
                 .replace("|this|", "{this}")
@@ -792,22 +794,23 @@ public final class ManaSymbols {
     }
 
     public static String replaceSetCodeWithHTML(String set, String rarity, int size) {
-        if (setImagesExist.containsKey(set)) {
+        String _set = set;
+        if (setImagesExist.containsKey(_set)) {
             int factor = size / 15 + 1;
-            Integer width = setImagesExist.get(set).width * factor;
-            Integer height = setImagesExist.get(set).height * factor;
-            return "<img src='" + filePathToUrl(getResourceSetsPath(ResourceSetSize.SMALL)) + set + '-' + rarity + ".png' alt='" + rarity + "' height='" + height + "' width='" + width + "' >";
+            Integer width = setImagesExist.get(_set).width * factor;
+            Integer height = setImagesExist.get(_set).height * factor;
+            return "<img src='" + filePathToUrl(getResourceSetsPath(ResourceSetSize.SMALL)) + _set + '-' + rarity + ".png' alt='" + rarity + "' height='" + height + "' width='" + width + "' >";
         } else {
             return set;
         }
     }
 
     public static Image getSetSymbolImage(String set) {
-        return getSetSymbolImage(set, Rarity.COMMON);
+        return getSetSymbolImage(set, "C");
     }
 
-    public static Image getSetSymbolImage(String set, Rarity rarity) {
-        Map<Rarity, Image> rarityImages = setImages.get(set);
+    public static Image getSetSymbolImage(String set, String rarity) {
+        Map<String, Image> rarityImages = setImages.get(set);
         if (rarityImages != null) {
             return rarityImages.get(rarity);
         } else {

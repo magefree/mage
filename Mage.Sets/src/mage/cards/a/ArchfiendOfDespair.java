@@ -79,12 +79,12 @@ class ArchfiendOfDespairEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        PlayerLostLifeWatcher watcher = game.getState().getWatcher(PlayerLostLifeWatcher.class);
+        PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get(PlayerLostLifeWatcher.class.getSimpleName());
         if (controller != null && watcher != null) {
             for (UUID playerId : game.getOpponents(controller.getId())) {
                 Player opponent = game.getPlayer(playerId);
                 if (opponent != null) {
-                    int lifeLost = watcher.getLifeLost(playerId);
+                    int lifeLost = watcher.getLiveLost(playerId);
                     if (lifeLost > 0) {
                         opponent.loseLife(lifeLost, game, false);
                     }

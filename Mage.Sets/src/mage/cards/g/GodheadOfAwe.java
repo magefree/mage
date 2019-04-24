@@ -27,7 +27,7 @@ public final class GodheadOfAwe extends CardImpl {
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public GodheadOfAwe(UUID ownerId, CardSetInfo setInfo) {

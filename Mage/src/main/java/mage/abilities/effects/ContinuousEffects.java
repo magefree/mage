@@ -494,11 +494,7 @@ public class ContinuousEffects implements Serializable {
             if (affectedAbility != null && affectedAbility.getSourceObject(game) instanceof SplitCardHalf) {
                 idToCheck = ((SplitCardHalf) affectedAbility.getSourceObject(game)).getParentCard().getId();
             } else {
-                if (game.getObject(objectId) instanceof SplitCardHalf) {
-                    idToCheck = ((SplitCardHalf) game.getObject(objectId)).getParentCard().getId();
-                } else {
-                    idToCheck = objectId;
-                }
+                idToCheck = objectId;
             }
             for (AsThoughEffect effect : asThoughEffectsList) {
                 Set<Ability> abilities = asThoughEffectsMap.get(type).getAbility(effect.getId());

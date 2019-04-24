@@ -37,7 +37,7 @@ public final class BloodTithe extends CardImpl {
 class BloodTitheEffect extends OneShotEffect {
 
     public BloodTitheEffect() {
-        super(Outcome.GainLife);
+        super(Outcome.Damage);
         staticText = "Each opponent loses 3 life. You gain life equal to the life lost this way";
     }
 
@@ -47,11 +47,11 @@ class BloodTitheEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int lifeLost = 0;
+        int damage = 0;
         for (UUID opponentId: game.getOpponents(source.getControllerId())) {
-            lifeLost += game.getPlayer(opponentId).loseLife(3, game, false);
+            damage += game.getPlayer(opponentId).damage(3, source.getSourceId(), game, false, true);
         }
-        game.getPlayer(source.getControllerId()).gainLife(lifeLost, game, source);
+        game.getPlayer(source.getControllerId()).gainLife(damage, game, source);
         return true;
     }
 

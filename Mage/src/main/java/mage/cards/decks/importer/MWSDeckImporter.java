@@ -14,7 +14,7 @@ import mage.util.RandomUtil;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MWSDeckImporter extends PlainTextDeckImporter {
+public class MWSDeckImporter extends DeckImporter {
 
     @Override
     protected void readLine(String line, DeckCardLists deckList) {
@@ -43,13 +43,13 @@ public class MWSDeckImporter extends PlainTextDeckImporter {
                 CardCriteria criteria = new CardCriteria();
                 criteria.name(lineName);
                 criteria.setCodes(setCode);
-                List<CardInfo> cards = getCardLookup().lookupCardInfo(criteria);
+                List<CardInfo> cards = CardRepository.instance.findCards(criteria);
                 if (!cards.isEmpty()) {
                     cardInfo = cards.get(RandomUtil.nextInt(cards.size()));
                 }
             } 
             if (cardInfo == null) {
-                cardInfo = getCardLookup().lookupCardInfo(lineName).orElse(null);
+                cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(lineName, true);
             }
 
             if (cardInfo == null) {

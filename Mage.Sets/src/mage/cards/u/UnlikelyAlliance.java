@@ -26,8 +26,8 @@ public final class UnlikelyAlliance extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonattacking, nonblocking creature");
 
     static {
-        filter.add(Predicates.not(AttackingPredicate.instance));
-        filter.add(Predicates.not(BlockingPredicate.instance));
+        filter.add(Predicates.not(new AttackingPredicate()));
+        filter.add(Predicates.not(new BlockingPredicate()));
     }
 
     public UnlikelyAlliance(UUID ownerId, CardSetInfo setInfo) {

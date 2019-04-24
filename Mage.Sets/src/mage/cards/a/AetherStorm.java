@@ -36,7 +36,7 @@ public final class AetherStorm extends CardImpl {
         this.addAbility(ability);
     }
 
-    private AetherStorm(final AetherStorm card) {
+    public AetherStorm(final AetherStorm card) {
         super(card);
     }
 
@@ -53,7 +53,7 @@ class AetherStormReplacementEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Creature spells can't be cast.";
     }
 
-    private AetherStormReplacementEffect(final AetherStormReplacementEffect effect) {
+    public AetherStormReplacementEffect(final AetherStormReplacementEffect effect) {
         super(effect);
     }
 
@@ -75,7 +75,10 @@ class AetherStormReplacementEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Card card = game.getCard(event.getSourceId());
-        return card != null && card.isCreature();
+        if (card != null && card.isCreature()) {
+            return true;
+        }
+        return false;
     }
 
 }

@@ -19,7 +19,7 @@ public final class CeremoniousRejection extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("colorless spell");
 
     static{
-        filter.add(ColorlessPredicate.instance);
+        filter.add(new ColorlessPredicate());
     }
 
     public CeremoniousRejection(UUID ownerId, CardSetInfo setInfo) {

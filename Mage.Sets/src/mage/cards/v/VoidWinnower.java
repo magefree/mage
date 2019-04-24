@@ -1,5 +1,7 @@
+
 package mage.cards.v;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -8,22 +10,25 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 
-import java.util.UUID;
-
 /**
+ *
  * @author LevelX2
  */
 public final class VoidWinnower extends CardImpl {
 
     public VoidWinnower(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{9}");
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{9}");
         this.subtype.add(SubType.ELDRAZI);
 
         this.power = new MageInt(11);
@@ -120,7 +125,7 @@ class VoidWinnowerCantBlockEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
         return false;
     }
 }

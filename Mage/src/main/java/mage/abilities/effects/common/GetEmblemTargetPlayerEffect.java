@@ -1,3 +1,4 @@
+
 package mage.abilities.effects.common;
 
 import mage.MageObject;
@@ -9,9 +10,8 @@ import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.players.Player;
 
-import java.util.stream.Collectors;
-
 /**
+ *
  * @author LevelX2
  */
 public class GetEmblemTargetPlayerEffect extends OneShotEffect {
@@ -53,6 +53,6 @@ public class GetEmblemTargetPlayerEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "Target " + mode.getTargets().get(0).getTargetName() + " gets an emblem with \"" + emblem.getAbilities().getRules(null).stream().collect(Collectors.joining("; ")) + "\"";
+        return "Target " + mode.getTargets().get(0).getTargetName() + " gets an emblem with \"" + emblem.getAbilities().getRules(null) + '"';
     }
 }

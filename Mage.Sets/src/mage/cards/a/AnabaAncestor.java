@@ -28,7 +28,7 @@ public final class AnabaAncestor extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.MINOTAUR));
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public AnabaAncestor(UUID ownerId, CardSetInfo setInfo) {

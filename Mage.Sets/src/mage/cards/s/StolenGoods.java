@@ -2,7 +2,6 @@
 package mage.cards.s;
 
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
@@ -22,6 +21,7 @@ import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 /**
+ *
  * @author noxx
  */
 public final class StolenGoods extends CardImpl {
@@ -111,10 +111,8 @@ class StolenGoodsCastFromExileEffect extends AsThoughEffectImpl {
             Card card = game.getCard(sourceId);
             if (card != null && game.getState().getZone(sourceId) == Zone.EXILED) {
                 Player player = game.getPlayer(affectedControllerId);
-                if (player != null) {
-                    player.setCastSourceIdWithAlternateMana(sourceId, null, card.getSpellAbility().getCosts());
-                    return true;
-                }
+                player.setCastSourceIdWithAlternateMana(sourceId, null, card.getSpellAbility().getCosts());
+                return true;
             }
         }
         return false;

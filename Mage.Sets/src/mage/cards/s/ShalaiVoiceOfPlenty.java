@@ -65,7 +65,7 @@ public final class ShalaiVoiceOfPlenty extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new AddCountersAllEffect(
                         CounterType.P1P1.createInstance(),
-                        StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED
+                        new FilterControlledCreaturePermanent("creature you control")
                 ),
                 new ManaCostsImpl("{4}{G}{G}")
         ));

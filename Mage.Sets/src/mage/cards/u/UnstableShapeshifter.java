@@ -27,10 +27,10 @@ import mage.util.functions.EmptyApplyToPermanent;
  */
 public final class UnstableShapeshifter extends CardImpl {
 
-    static final FilterCreaturePermanent filterAnotherCreature = new FilterCreaturePermanent("another creature");
+    final static FilterCreaturePermanent filterAnotherCreature = new FilterCreaturePermanent("another creature");
 
     static {
-        filterAnotherCreature.add(AnotherPredicate.instance);
+        filterAnotherCreature.add(new AnotherPredicate());
     }
 
     public UnstableShapeshifter(UUID ownerId, CardSetInfo setInfo) {

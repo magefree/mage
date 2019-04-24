@@ -28,7 +28,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class HordeAmbusher extends CardImpl {
     
-    private static final FilterCard filter = new FilterCard("a red card in your hand");
+    private final static FilterCard filter = new FilterCard("a red card in your hand");
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));
     }

@@ -24,7 +24,7 @@ public final class GolgariGermination extends CardImpl {
     
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(Predicates.not(new TokenPredicate()));
     }    
     
     public GolgariGermination(UUID ownerId, CardSetInfo setInfo) {

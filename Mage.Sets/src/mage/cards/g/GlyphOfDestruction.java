@@ -25,7 +25,7 @@ public final class GlyphOfDestruction extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.WALL));
-        filter.add(BlockingPredicate.instance);
+        filter.add(new BlockingPredicate());
     }
 
     public GlyphOfDestruction(UUID ownerId, CardSetInfo setInfo) {

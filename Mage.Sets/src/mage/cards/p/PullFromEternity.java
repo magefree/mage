@@ -26,7 +26,7 @@ public final class PullFromEternity extends CardImpl {
     private static final FilterCard filter = new FilterCard("face-up exiled card");
 
     static {
-        filter.add(Predicates.not(FaceDownPredicate.instance));
+        filter.add(Predicates.not(new FaceDownPredicate()));
     }
 
     public PullFromEternity(UUID ownerId, CardSetInfo setInfo) {

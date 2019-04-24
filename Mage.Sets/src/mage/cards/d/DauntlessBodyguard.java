@@ -65,7 +65,7 @@ class DauntlessBodyguardChooseCreatureEffect extends OneShotEffect {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature you control");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public DauntlessBodyguardChooseCreatureEffect() {
@@ -85,14 +85,16 @@ class DauntlessBodyguardChooseCreatureEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent mageObject = game.getPermanentEntering(source.getSourceId());
+        MageObject mageObject = game.getPermanentEntering(source.getSourceId());
         if (controller != null && mageObject != null) {
             TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent(1, 1, filter, true);
             if (controller.choose(this.outcome, target, source.getSourceId(), game)) {
                 Permanent chosenCreature = game.getPermanent(target.getFirstTarget());
                 if (chosenCreature != null) {
                     game.getState().setValue(mageObject.getId() + "_chosenCreature", new MageObjectReference(chosenCreature, game));
-                    mageObject.addInfo("chosen creature", CardUtil.addToolTipMarkTags("Chosen creature: " + chosenCreature.getIdName()), game);
+                    if (mageObject instanceof Permanent) {
+                        ((Permanent) mageObject).addInfo("chosen creature", CardUtil.addToolTipMarkTags("Chosen creature: " + chosenCreature.getIdName()), game);
+                    }
                 }
             }
             return true;

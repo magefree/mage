@@ -1,5 +1,7 @@
+
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -14,7 +16,12 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.Duration;
+import mage.constants.SuperType;
+import mage.constants.TargetController;
+import mage.constants.TurnPhase;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
@@ -22,21 +29,20 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TokenImpl;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.UUID;
-
 /**
+ *
  * @author LevelX2
  */
 public final class GideonBattleForged extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
     public GideonBattleForged(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.GIDEON);
 
@@ -92,7 +98,6 @@ class GideonBattleForgedToken extends TokenImpl {
         toughness = new MageInt(4);
         this.addAbility(IndestructibleAbility.getInstance());
     }
-
     public GideonBattleForgedToken(final GideonBattleForgedToken token) {
         super(token);
     }
@@ -104,6 +109,7 @@ class GideonBattleForgedToken extends TokenImpl {
 
 class GideonBattleForgedAttacksIfAbleTargetEffect extends RequirementEffect {
 
+    int nextTurnTargetController = 0;
     protected MageObjectReference targetPermanentReference;
 
     public GideonBattleForgedAttacksIfAbleTargetEffect(Duration duration) {
@@ -113,6 +119,7 @@ class GideonBattleForgedAttacksIfAbleTargetEffect extends RequirementEffect {
 
     public GideonBattleForgedAttacksIfAbleTargetEffect(final GideonBattleForgedAttacksIfAbleTargetEffect effect) {
         super(effect);
+        this.nextTurnTargetController = effect.nextTurnTargetController;
         this.targetPermanentReference = effect.targetPermanentReference;
     }
 
@@ -130,7 +137,10 @@ class GideonBattleForgedAttacksIfAbleTargetEffect extends RequirementEffect {
         if (targetPermanent == null) {
             return true;
         }
-        return game.getPhase().getType() == TurnPhase.END && game.getTurnNum() > getNextStartingControllerTurnNum();
+        if (nextTurnTargetController == 0 && startingTurn != game.getTurnNum() && game.isActivePlayer(targetPermanent.getControllerId())) {
+            nextTurnTargetController = game.getTurnNum();
+        }
+        return game.getPhase().getType() == TurnPhase.END && nextTurnTargetController > 0 && game.getTurnNum() > nextTurnTargetController;
     }
 
     @Override

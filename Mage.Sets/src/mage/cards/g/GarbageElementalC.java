@@ -37,7 +37,7 @@ public final class GarbageElementalC extends CardImpl {
         this.addAbility(new BattleCryAbility());
 
         // When Garbage Elemental enters the battlefield, roll two six-sided dice. Create a number of 1/1 red Goblin creature tokens equal to the difference between those results.
-        this.addAbility(new EntersBattlefieldAbility(new GarbageElementalCEffect(),
+        this.addAbility(new EntersBattlefieldAbility(new GarbageElementalEffect(),
                 null,
                 "When {this} enters the battlefield, roll two six-sided dice. Create a number of 1/1 red Goblin creature tokens equal to the difference between those results",
                 null));
@@ -54,20 +54,26 @@ public final class GarbageElementalC extends CardImpl {
     }
 }
 
-class GarbageElementalCEffect extends OneShotEffect {
+class GarbageElementalEffect extends OneShotEffect {
 
-    GarbageElementalCEffect() {
+    private static final FilterPermanent filter = new FilterPermanent("permanent with a counter");
+
+    static {
+        filter.add(new CounterPredicate(null));
+    }
+
+    GarbageElementalEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "roll two six-sided dice. Create a number of 1/1 red Goblin creature tokens equal to the difference between those results";
     }
 
-    GarbageElementalCEffect(final GarbageElementalCEffect effect) {
+    GarbageElementalEffect(final GarbageElementalEffect effect) {
         super(effect);
     }
 
     @Override
-    public GarbageElementalCEffect copy() {
-        return new GarbageElementalCEffect(this);
+    public GarbageElementalEffect copy() {
+        return new GarbageElementalEffect(this);
     }
 
     @Override

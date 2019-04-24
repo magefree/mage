@@ -36,7 +36,7 @@ public final class Opposition extends CardImpl {
     private static final FilterControlledCreaturePermanent untappedcreatureyoucontrol = new FilterControlledCreaturePermanent("untapped creature you control");
 
     static {
-        untappedcreatureyoucontrol.add(Predicates.not(TappedPredicate.instance));
+        untappedcreatureyoucontrol.add(Predicates.not(new TappedPredicate()));
     }
 
     public Opposition(UUID ownerId, CardSetInfo setInfo) {

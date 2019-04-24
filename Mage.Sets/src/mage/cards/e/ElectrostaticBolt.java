@@ -43,7 +43,7 @@ public final class ElectrostaticBolt extends CardImpl {
 
 class ElectrostaticBoltDamageValue implements DynamicValue {
 
-    static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));

@@ -1,5 +1,7 @@
+
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
@@ -10,17 +12,15 @@ import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
+ *
  * @author Quercitron
  */
 public final class BileBlight extends CardImpl {
 
     public BileBlight(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}{B}");
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}{B}");
 
 
         // Target creature and all creatures with the same name as that creature get -3/-3 until end of turn.
@@ -56,12 +56,12 @@ class BileBlightEffect extends BoostAllEffect {
         if (this.affectedObjectsSet) {
             Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (target != null) {
-                if (CardUtil.haveEmptyName(target)) { // face down creature
+                if (target.getName().isEmpty()) { // face down creature
                     affectedObjectList.add(new MageObjectReference(target, game));
                 } else {
                     String name = target.getName();
                     for (Permanent perm : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-                        if (CardUtil.haveSameNames(perm.getName(), name)) {
+                        if (perm.getName().equals(name)) {
                             affectedObjectList.add(new MageObjectReference(perm, game));
                         }
                     }

@@ -1,5 +1,7 @@
+
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -19,15 +21,14 @@ import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 
-import java.util.UUID;
-
 /**
+ *
  * @author jeffwadsworth
  */
 public final class CruelRevival extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Zombie creature");
-    private static final FilterCard filter2 = new FilterCard("Zombie card from your graveyard");
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Zombie creature");
+    private final static FilterCard filter2 = new FilterCard("Zombie card from your graveyard");
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
@@ -36,7 +37,7 @@ public final class CruelRevival extends CardImpl {
     }
 
     public CruelRevival(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{B}");
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{B}");
 
 
         // Destroy target non-Zombie creature. It can't be regenerated. Return up to one target Zombie card from your graveyard to your hand.
@@ -69,11 +70,10 @@ class CruelRevivalEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent targetDestroy = game.getPermanent(source.getFirstTarget());
+        Card targetRetrieve = game.getCard(source.getTargets().get(1).getFirstTarget());
         if (targetDestroy != null) {
             targetDestroy.destroy(source.getSourceId(), game, true);
         }
-
-        Card targetRetrieve = game.getCard(source.getTargets().get(1).getFirstTarget());
         if (targetRetrieve != null) {
             targetRetrieve.moveToZone(Zone.HAND, source.getSourceId(), game, true);
         }

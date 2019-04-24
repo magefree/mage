@@ -1,23 +1,31 @@
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.dynamicvalue.common.GateYouControlCount;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.hint.common.GateYouControlHint;
+import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.counters.CounterType;
-
-import java.util.UUID;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
+ *
  * @author TheElk801
  */
 public final class GatekeeperGargoyle extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterControlledPermanent();
+
+    static {
+        filter.add(new SubtypePredicate(SubType.GATE));
+    }
 
     public GatekeeperGargoyle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
@@ -33,9 +41,9 @@ public final class GatekeeperGargoyle extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(
                         CounterType.P1P1.createInstance(),
-                        GateYouControlCount.instance, true
+                        new PermanentsOnBattlefieldCount(filter), true
                 ), "with a +1/+1 counter on it for each Gate you control"
-        ).addHint(GateYouControlHint.instance));
+        ));
     }
 
     public GatekeeperGargoyle(final GatekeeperGargoyle card) {

@@ -1,8 +1,10 @@
 
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LookLibraryControllerEffect;
 import mage.abilities.keyword.EntwineAbility;
@@ -16,9 +18,8 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
-import java.util.UUID;
-
 /**
+ *
  * @author TheElk801
  */
 public final class SecondSight extends CardImpl {
@@ -31,17 +32,22 @@ public final class SecondSight extends CardImpl {
         this.getSpellAbility().getModes().setMaxModes(1);
 
         //Look at the top five cards of target opponent's library, then put them back in any order;
-        this.getSpellAbility().addEffect(new SecondSightEffect());
+        Effect effect = new SecondSightEffect();
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetOpponent());
 
         //or look at the top five cards of your library, then put them back in any order.
-        this.getSpellAbility().getModes().addMode(new Mode(new LookLibraryControllerEffect(5)));
+        effect = new LookLibraryControllerEffect(5);
+        Mode mode = new Mode();
+        mode.getEffects().add(effect);
+        this.getSpellAbility().getModes().addMode(mode);
 
         // Entwine {U}
         this.addAbility(new EntwineAbility("{U}"));
+
     }
 
-    private SecondSight(final SecondSight card) {
+    public SecondSight(final SecondSight card) {
         super(card);
     }
 
@@ -53,12 +59,12 @@ public final class SecondSight extends CardImpl {
 
 class SecondSightEffect extends OneShotEffect {
 
-    SecondSightEffect() {
+    public SecondSightEffect() {
         super(Outcome.DrawCard);
         this.staticText = "look at the top five cards of target opponent's library, then put them back in any order";
     }
 
-    private SecondSightEffect(final SecondSightEffect effect) {
+    public SecondSightEffect(final SecondSightEffect effect) {
         super(effect);
     }
 

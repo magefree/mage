@@ -1,3 +1,4 @@
+
 package mage.cards.e;
 
 import java.util.List;
@@ -56,12 +57,10 @@ class EssenceHarvestEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
+        Player player = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if (controller != null
-                && targetPlayer != null) {
-            List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(
-                    StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), game);
+        if (player != null && targetPlayer != null) {
+            List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game);
             int amount = 0;
             for (Permanent creature : creatures) {
                 int power = creature.getPower().getValue();
@@ -72,7 +71,7 @@ class EssenceHarvestEffect extends OneShotEffect {
 
             if (amount > 0) {
                 targetPlayer.loseLife(amount, game, false);
-                controller.gainLife(amount, game, source);
+                player.gainLife(amount, game, source);
             }
             return true;
         }

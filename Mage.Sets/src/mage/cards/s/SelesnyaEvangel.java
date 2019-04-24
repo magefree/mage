@@ -29,7 +29,7 @@ public final class SelesnyaEvangel extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public SelesnyaEvangel(UUID ownerId, CardSetInfo setInfo) {

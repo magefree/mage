@@ -27,7 +27,7 @@ public final class VoidGrafter extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another target creature you control");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public VoidGrafter(UUID ownerId, CardSetInfo setInfo) {

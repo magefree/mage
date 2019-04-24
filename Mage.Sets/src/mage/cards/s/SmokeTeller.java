@@ -32,7 +32,7 @@ public final class SmokeTeller extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("face down creature");
 
     static {
-        filter.add(FaceDownPredicate.instance);
+        filter.add(new FaceDownPredicate());
     }
 
     public SmokeTeller(UUID ownerId, CardSetInfo setInfo) {
@@ -86,7 +86,8 @@ class SmokeTellerLookFaceDownEffect extends OneShotEffect {
         if (faceDownCreature != null) {
             Permanent copyFaceDown = faceDownCreature.copy();
             copyFaceDown.setFaceDown(false, game);
-            Cards cards = new CardsImpl(copyFaceDown);
+            Cards cards = new CardsImpl();
+            cards.add(copyFaceDown);
             player.lookAtCards("face down card - " + mageObject.getName(), cards, game);
         } else {
             return false;

@@ -131,7 +131,7 @@ class DungeonGeistsEffect extends ContinuousRuleModifyingEffectImpl {
 class DungeonGeistsWatcher extends Watcher {
 
     DungeonGeistsWatcher() {
-        super(WatcherScope.CARD);
+        super("ControlLost", WatcherScope.CARD);
     }
 
     DungeonGeistsWatcher(DungeonGeistsWatcher watcher) {

@@ -12,6 +12,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
+ *
  * @author LevelX2
  */
 public class CantAttackAloneSourceEffect extends RestrictionEffect {
@@ -31,7 +32,7 @@ public class CantAttackAloneSourceEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttackCheckAfter(int numberOfAttackers, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canAttackCheckAfter(int numberOfAttackers, Ability source, Game game) {
         return numberOfAttackers > 1;
     }
 

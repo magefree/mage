@@ -1,6 +1,7 @@
 
 package mage.cards.b;
 
+import java.util.Iterator;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -13,6 +14,7 @@ import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
+import static mage.constants.Layer.AbilityAddingRemovingEffects_6;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
@@ -37,7 +39,7 @@ public final class BloodSun extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BloodSunEffect(Duration.WhileOnBattlefield)));
     }
 
-    private BloodSun(final BloodSun card) {
+    public BloodSun(final BloodSun card) {
         super(card);
     }
 
@@ -54,7 +56,7 @@ class BloodSunEffect extends ContinuousEffectImpl {
         staticText = "all lands lose all abilities except mana abilities";
     }
 
-    private BloodSunEffect(final BloodSunEffect effect) {
+    public BloodSunEffect(final BloodSunEffect effect) {
         super(effect);
     }
 

@@ -1,6 +1,7 @@
 
 package mage.cards.m;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -24,17 +25,17 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInASingleGraveyard;
 import mage.target.common.TargetCardInHand;
-import mage.target.targetadjustment.TargetAdjuster;
-
-import java.util.UUID;
 
 /**
+ *
  * @author emerald000
  */
 public final class MartyrOfBones extends CardImpl {
 
+    private final UUID originalId;
+
     public MartyrOfBones(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
 
@@ -48,33 +49,32 @@ public final class MartyrOfBones extends CardImpl {
         ability.addCost(new RevealVariableBlackCardsFromHandCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCardInASingleGraveyard(0, 1, new FilterCard("cards in a single graveyard")));
-        ability.setTargetAdjuster(MartyrOfBonesAdjuster.instance);
+        originalId = ability.getOriginalId();
         this.addAbility(ability);
     }
 
     public MartyrOfBones(final MartyrOfBones card) {
         super(card);
+        this.originalId = card.originalId;
+    }
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability.getOriginalId().equals(originalId)) {
+            int amount = 0;
+            for (Cost cost : ability.getCosts()) {
+                if (cost instanceof RevealVariableBlackCardsFromHandCost) {
+                    amount = ((VariableCost) cost).getAmount();
+                }
+            }
+            ability.getTargets().clear();
+            ability.addTarget(new TargetCardInASingleGraveyard(0, amount, new FilterCard()));
+        }
     }
 
     @Override
     public MartyrOfBones copy() {
         return new MartyrOfBones(this);
-    }
-}
-
-enum MartyrOfBonesAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int amount = 0;
-        for (Cost cost : ability.getCosts()) {
-            if (cost instanceof RevealVariableBlackCardsFromHandCost) {
-                amount = ((VariableCost) cost).getAmount();
-            }
-        }
-        ability.getTargets().clear();
-        ability.addTarget(new TargetCardInASingleGraveyard(0, amount, new FilterCard()));
     }
 }
 
@@ -88,7 +88,7 @@ class RevealVariableBlackCardsFromHandCost extends VariableCostImpl {
 
     RevealVariableBlackCardsFromHandCost() {
         super("black cards to reveal");
-        this.text = "Reveal " + xText + " black cards from {this}";
+        this.text = new StringBuilder("Reveal ").append(xText).append(" black cards from {this}").toString();
     }
 
     RevealVariableBlackCardsFromHandCost(final RevealVariableBlackCardsFromHandCost cost) {

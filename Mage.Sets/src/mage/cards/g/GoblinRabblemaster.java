@@ -32,11 +32,11 @@ public final class GoblinRabblemaster extends CardImpl {
     private static final FilterCreaturePermanent attackingFilter = new FilterCreaturePermanent(SubType.GOBLIN, "other attacking Goblin");
 
     static {
-        otherGoblinFilter.add(AnotherPredicate.instance);
+        otherGoblinFilter.add(new AnotherPredicate());
         otherGoblinFilter.add(new ControllerPredicate(TargetController.YOU));
 
-        attackingFilter.add(AttackingPredicate.instance);
-        attackingFilter.add(AnotherPredicate.instance);
+        attackingFilter.add(new AttackingPredicate());
+        attackingFilter.add(new AnotherPredicate());
     }
 
     public GoblinRabblemaster(UUID ownerId, CardSetInfo setInfo) {

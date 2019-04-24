@@ -21,7 +21,6 @@ public final class DevilToken extends TokenImpl {
     public DevilToken() {
         super("Devil", "1/1 red Devil creature with \"When this creature dies, it deals 1 damage to any target.\"");
         availableImageSetCodes.addAll(Collections.singletonList("SOI"));
-        availableImageSetCodes.addAll(Collections.singletonList("WAR"));
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.DEVIL);
         color.setRed(true);

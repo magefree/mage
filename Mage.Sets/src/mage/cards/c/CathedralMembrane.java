@@ -1,6 +1,7 @@
 
 package mage.cards.c;
 
+import java.util.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
@@ -13,10 +14,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.watchers.Watcher;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  * @author BetaSteward
@@ -38,7 +35,7 @@ public final class CathedralMembrane extends CardImpl {
 
     }
 
-    private CathedralMembrane(final CathedralMembrane card) {
+    public CathedralMembrane(final CathedralMembrane card) {
         super(card);
     }
 
@@ -50,11 +47,11 @@ public final class CathedralMembrane extends CardImpl {
 
 class CathedralMembraneAbility extends ZoneChangeTriggeredAbility {
 
-    CathedralMembraneAbility() {
+    public CathedralMembraneAbility() {
         super(Zone.BATTLEFIELD, Zone.GRAVEYARD, new CathedralMembraneEffect(), "When {this} dies during combat, ", false);
     }
 
-    private CathedralMembraneAbility(CathedralMembraneAbility ability) {
+    public CathedralMembraneAbility(CathedralMembraneAbility ability) {
         super(ability);
     }
 
@@ -77,12 +74,12 @@ class CathedralMembraneAbility extends ZoneChangeTriggeredAbility {
 
 class CathedralMembraneEffect extends OneShotEffect {
 
-    CathedralMembraneEffect() {
+    public CathedralMembraneEffect() {
         super(Outcome.Damage);
         staticText = "it deals 6 damage to each creature it blocked this combat";
     }
 
-    private CathedralMembraneEffect(final CathedralMembraneEffect effect) {
+    public CathedralMembraneEffect(final CathedralMembraneEffect effect) {
         super(effect);
     }
 
@@ -93,9 +90,9 @@ class CathedralMembraneEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        CathedralMembraneWatcher watcher = game.getState().getWatcher(CathedralMembraneWatcher.class, source.getSourceId());
+        CathedralMembraneWatcher watcher = (CathedralMembraneWatcher) game.getState().getWatchers().get(CathedralMembraneWatcher.class.getSimpleName(), source.getSourceId());
         if (watcher != null) {
-            for (UUID uuid : watcher.getBlockedCreatures()) {
+            for (UUID uuid : watcher.blockedCreatures) {
                 Permanent permanent = game.getPermanent(uuid);
                 if (permanent != null) {
                     permanent.damage(6, source.getSourceId(), game, false, true);
@@ -108,13 +105,13 @@ class CathedralMembraneEffect extends OneShotEffect {
 
 class CathedralMembraneWatcher extends Watcher {
 
-    private final Set<UUID> blockedCreatures = new HashSet<>();
+    public Set<UUID> blockedCreatures = new HashSet<>();
 
-    CathedralMembraneWatcher() {
-        super(WatcherScope.CARD);
+    public CathedralMembraneWatcher() {
+        super(CathedralMembraneWatcher.class.getSimpleName(), WatcherScope.CARD);
     }
 
-    private CathedralMembraneWatcher(final CathedralMembraneWatcher watcher) {
+    public CathedralMembraneWatcher(final CathedralMembraneWatcher watcher) {
         super(watcher);
         this.blockedCreatures.addAll(watcher.blockedCreatures);
     }
@@ -137,7 +134,4 @@ class CathedralMembraneWatcher extends Watcher {
         blockedCreatures.clear();
     }
 
-     Set<UUID> getBlockedCreatures() {
-        return blockedCreatures;
-    }
 }

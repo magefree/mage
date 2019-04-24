@@ -13,6 +13,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -47,12 +48,14 @@ public final class MissionBriefing extends CardImpl {
 
 class MissionBriefingEffect extends OneShotEffect {
 
+    public static final FilterCard filter = new FilterInstantOrSorceryCard("instant or sorcery card from your graveyard");
+
     public MissionBriefingEffect() {
         super(Outcome.Benefit);
         this.staticText = "Surveil 2, then choose an instant or sorcery card "
                 + "in your graveyard. You may cast that card this turn. "
                 + "If that card would be put into your graveyard this turn, "
-                + "exile it instead";
+                + "exile it instead.";
     }
 
     public MissionBriefingEffect(final MissionBriefingEffect effect) {
@@ -71,10 +74,9 @@ class MissionBriefingEffect extends OneShotEffect {
             return false;
         }
         player.surveil(2, source, game);
-        Target target = new TargetCardInYourGraveyard(
-                new FilterInstantOrSorceryCard("instant or sorcery card from your graveyard"));
+        Target target = new TargetCardInYourGraveyard(filter);
         if (!player.choose(outcome, target, source.getSourceId(), game)) {
-            return true;
+            return false;
         }
         Card card = game.getCard(target.getFirstTarget());
         if (card != null) {

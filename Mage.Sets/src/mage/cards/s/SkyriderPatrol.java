@@ -95,7 +95,7 @@ class SkyriderPatrolReflexiveTriggeredAbility extends DelayedTriggeredAbility {
             = new FilterControlledCreaturePermanent("another creature you control");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public SkyriderPatrolReflexiveTriggeredAbility() {

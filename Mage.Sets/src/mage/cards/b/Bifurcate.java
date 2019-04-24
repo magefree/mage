@@ -29,7 +29,7 @@ public final class Bifurcate extends CardImpl {
     private static FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creatures");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(Predicates.not(new TokenPredicate()));
     }
 
     public Bifurcate(UUID ownerId, CardSetInfo setInfo) {

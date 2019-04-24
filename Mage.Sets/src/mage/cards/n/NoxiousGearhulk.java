@@ -28,7 +28,7 @@ public final class NoxiousGearhulk extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public NoxiousGearhulk(UUID ownerId, CardSetInfo setInfo) {

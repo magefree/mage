@@ -1,5 +1,7 @@
+
 package mage.cards.v;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.SpecialAction;
@@ -15,7 +17,13 @@ import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import static mage.cards.v.VolrathsCurse.keyString;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -23,11 +31,8 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.UUID;
-
-import static mage.cards.v.VolrathsCurse.keyString;
-
 /**
+ *
  * @author LevelX2
  */
 public final class VolrathsCurse extends CardImpl {
@@ -35,7 +40,7 @@ public final class VolrathsCurse extends CardImpl {
     static final String keyString = "_ignoreEffectForTurn";
 
     public VolrathsCurse(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
@@ -89,12 +94,12 @@ class VolrathsCurseRestrictionEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
+    public boolean canAttack(Game game) {
         return false;
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
         return false;
     }
 
@@ -183,8 +188,8 @@ class VolrathsCurseIgnoreEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        String key = source.getSourceId().toString() + source.getSourceObjectZoneChangeCounter() + keyString + game.getTurnNum() + ((ActivatedAbilityImpl) source).getActivatorId();
-        game.getState().setValue(key, true);
+        String key = source.getSourceId().toString() + source.getSourceObjectZoneChangeCounter() + keyString + game.getTurnNum() + ((ActivatedAbilityImpl)source).getActivatorId();
+        game.getState().setValue(key,true);
         return true;
     }
 }

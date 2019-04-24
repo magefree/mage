@@ -115,9 +115,7 @@ class SpelljackCastFromExileEffect extends AsThoughEffectImpl {
                 if (card != null) {
                     if (game.getState().getZone(sourceId) == Zone.EXILED) {
                         Player player = game.getPlayer(affectedControllerId);
-                        if(player != null) {
-                            player.setCastSourceIdWithAlternateMana(sourceId, null, null);
-                        }
+                        player.setCastSourceIdWithAlternateMana(sourceId, null, null);
                         return true;
                     } else {
                         this.discard();

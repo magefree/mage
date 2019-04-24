@@ -1,5 +1,7 @@
+
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -11,18 +13,20 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.Duration;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
-import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
+ *
  * @author LevelX2
  */
 public final class DragonlordKolaghan extends CardImpl {
@@ -89,18 +93,16 @@ class DragonlordKolaghanTriggeredAbility extends TriggeredAbilityImpl {
             Spell spell = game.getStack().getSpell(event.getSourceId());
             if (spell != null && !spell.isFaceDown(game) && (spell.isCreature() || spell.isPlaneswalker())) {
                 Player opponent = game.getPlayer(event.getPlayerId());
-                if(opponent != null) {
-                    boolean sameName = false;
-                    for (Card graveCard : opponent.getGraveyard().getCards(game)) {
-                        if (CardUtil.haveSameNames(graveCard, spell)) {
-                            sameName = true;
-                            break;
-                        }
+                boolean sameName = false;
+                for (Card graveCard : opponent.getGraveyard().getCards(game)) {
+                    if (graveCard.getName().equals(spell.getName())) {
+                        sameName = true;
+                        break;
                     }
-                    if (sameName) {
-                        this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
-                        return true;
-                    }
+                }
+                if (sameName) {
+                    this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
+                    return true;
                 }
             }
         }

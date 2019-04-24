@@ -1,5 +1,6 @@
 package mage.client;
 
+import java.util.*;
 import mage.cards.decks.DeckCardLists;
 import mage.client.chat.LocalCommands;
 import mage.client.dialog.PreferencesDialog;
@@ -14,30 +15,20 @@ import mage.remote.MageRemoteException;
 import mage.remote.Session;
 import mage.remote.SessionImpl;
 import mage.view.*;
-import org.apache.log4j.Logger;
-
-import java.util.*;
 
 /**
  * Created by IGOUDT on 15-9-2016.
  */
 public final class SessionHandler {
 
-
-    private static final Logger logger = Logger.getLogger(SessionHandler.class);
-
     private static Session session;
-    private static String lastConnectError = "";
-
-    private SessionHandler(){
-    }
 
     public static void startSession(MageFrame mageFrame) {
 
         session = new SessionImpl(mageFrame);
         session.setJsonLogActive("true".equals(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_LOG_AUTO_SAVE, "true")));
     }
-
+    
     public static void ping() {
         session.ping();
     }
@@ -55,17 +46,7 @@ public final class SessionHandler {
     }
 
     public static boolean connect(Connection connection) {
-        lastConnectError = "";
-        if (session.connect(connection)) {
-            return true;
-        } else {
-            lastConnectError = session.getLastError();
-            return false;
-        }
-    }
-
-    public static String getLastConnectError() {
-        return lastConnectError;
+        return session.connect(connection);
     }
 
     public static boolean stopConnecting() {
@@ -188,7 +169,7 @@ public final class SessionHandler {
         try {
             return session.getTournament(tournamentId);
         } catch (MageRemoteException e) {
-            logger.info(e);
+            e.printStackTrace();
             return null;
         }
 
@@ -282,7 +263,7 @@ public final class SessionHandler {
         try {
             return session.getRoomUsers(roomId);
         } catch (MageRemoteException e) {
-            logger.info(e);
+            e.printStackTrace();
             return Collections.emptyList();
         }
     }
@@ -291,8 +272,8 @@ public final class SessionHandler {
         try {
             return session.getFinishedMatches(roomId);
         } catch (MageRemoteException e) {
-            logger.info(e);
-            return Collections.emptyList();
+            e.printStackTrace();
+            return new ArrayList<>();
         }
     }
 
@@ -308,8 +289,8 @@ public final class SessionHandler {
         try {
             return session.getTables(roomId);
         } catch (MageRemoteException e) {
-            logger.info(e);
-            return Collections.emptyList();
+            e.printStackTrace();
+            return new ArrayList<>();
         }
     }
 

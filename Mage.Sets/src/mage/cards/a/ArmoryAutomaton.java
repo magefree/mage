@@ -1,5 +1,7 @@
+
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
@@ -9,22 +11,16 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.AttachedToPredicate;
-import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
-import java.util.UUID;
-
 /**
+ *
  * @author spjspj
  */
 public final class ArmoryAutomaton extends CardImpl {
@@ -77,17 +73,9 @@ class ArmoryAutomatonEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (player != null && sourcePermanent != null) {
-
-            // dynamic filter (can't selects own attaches and can't selects twice)
-            FilterPermanent currentFilter = filter.copy();
-            FilterPermanent filterSourceId = new FilterPermanent();
-            filterSourceId.add(new CardIdPredicate(this.getId()));
-            currentFilter.add(Predicates.not(new AttachedToPredicate(filterSourceId)));
-
-            int countBattlefield = game.getBattlefield().getAllActivePermanents(currentFilter, game).size();
-            while (player.canRespond() && countBattlefield > 0 && player.chooseUse(Outcome.Benefit, "Select and attach a target Equipment?", source, game)) {
-                Target targetEquipment = new TargetPermanent(currentFilter);
-                targetEquipment.setRequired(false);
+            int countBattlefield = game.getBattlefield().getAllActivePermanents(filter, game).size() - sourcePermanent.getAttachments().size();
+            while (player.canRespond() && countBattlefield > 0 && player.chooseUse(Outcome.Benefit, "Attach a target Equipment?", source, game)) {
+                Target targetEquipment = new TargetPermanent(filter);
                 if (player.choose(Outcome.Benefit, targetEquipment, source.getSourceId(), game)) {
                     Permanent aura = game.getPermanent(targetEquipment.getFirstTarget());
                     if (aura != null) {
@@ -96,12 +84,9 @@ class ArmoryAutomatonEffect extends OneShotEffect {
                             attachedTo.removeAttachment(aura.getId(), game);
                         }
                         sourcePermanent.addAttachment(aura.getId(), game);
-
-                        // exclude selected
-                        currentFilter.add(Predicates.not(new PermanentIdPredicate(aura.getId())));
                     }
                 }
-                countBattlefield = game.getBattlefield().getAllActivePermanents(currentFilter, game).size();
+                countBattlefield = game.getBattlefield().getAllActivePermanents(filter, game).size() - sourcePermanent.getAttachments().size();
             }
             return true;
         }

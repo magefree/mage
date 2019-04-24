@@ -1,6 +1,7 @@
 
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -8,23 +9,26 @@ import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.VigilanceAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
-import java.util.UUID;
-
 /**
+ *
  * @author TheElk801
  */
 public final class ArchonOfValorsReach extends CardImpl {
@@ -52,7 +56,7 @@ public final class ArchonOfValorsReach extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ArchonOfValorsReachReplacementEffect()));
     }
 
-    private ArchonOfValorsReach(final ArchonOfValorsReach card) {
+    public ArchonOfValorsReach(final ArchonOfValorsReach card) {
         super(card);
     }
 
@@ -64,12 +68,14 @@ public final class ArchonOfValorsReach extends CardImpl {
 
 class ArchonOfValorsReachChooseEffect extends OneShotEffect {
 
-    ArchonOfValorsReachChooseEffect() {
+    public static String VALUE_KEY = "_cardtype";
+
+    public ArchonOfValorsReachChooseEffect() {
         super(Outcome.Benefit);
         this.staticText = "choose artifact, enchantment, instant, sorcery, or planeswalker";
     }
 
-    private ArchonOfValorsReachChooseEffect(final ArchonOfValorsReachChooseEffect effect) {
+    public ArchonOfValorsReachChooseEffect(final ArchonOfValorsReachChooseEffect effect) {
         super(effect);
     }
 
@@ -90,7 +96,7 @@ class ArchonOfValorsReachChooseEffect extends OneShotEffect {
             if (controller.choose(Outcome.Neutral, choices, game)) {
                 game.informPlayers(mageObject.getName() + ":  Chosen card type is " + choices.getChoice());
                 System.out.println(mageObject.getId());
-                game.getState().setValue(mageObject.getId().toString() + "_cardtype", choices.getChoice());
+                game.getState().setValue(mageObject.getId().toString() + VALUE_KEY, choices.getChoice());
                 if (mageObject instanceof Permanent) {
                     ((Permanent) mageObject).addInfo("chosen color", CardUtil.addToolTipMarkTags("Chosen card type: " + choices.getChoice()), game);
                 }
@@ -103,7 +109,7 @@ class ArchonOfValorsReachChooseEffect extends OneShotEffect {
 
 class ArchonOfValorsReachChoice extends ChoiceImpl {
 
-    ArchonOfValorsReachChoice() {
+    public ArchonOfValorsReachChoice() {
         super(true);
         this.choices.add("Artifact");
         this.choices.add("Enchantment");
@@ -113,7 +119,7 @@ class ArchonOfValorsReachChoice extends ChoiceImpl {
         this.message = "Choose artifact, enchantment, instant, sorcery, or planeswalker";
     }
 
-    private ArchonOfValorsReachChoice(final ArchonOfValorsReachChoice choice) {
+    public ArchonOfValorsReachChoice(final ArchonOfValorsReachChoice choice) {
         super(choice);
     }
 
@@ -148,7 +154,7 @@ class ArchonOfValorsReachReplacementEffect extends ContinuousRuleModifyingEffect
         staticText = "Players can't cast spells of the chosen type";
     }
 
-    private ArchonOfValorsReachReplacementEffect(final ArchonOfValorsReachReplacementEffect effect) {
+    ArchonOfValorsReachReplacementEffect(final ArchonOfValorsReachReplacementEffect effect) {
         super(effect);
     }
 

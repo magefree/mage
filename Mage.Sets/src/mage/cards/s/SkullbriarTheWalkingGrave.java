@@ -1,6 +1,7 @@
 
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
@@ -21,15 +22,15 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 
-import java.util.UUID;
-
 /**
+ *
  * @author anonymous
  */
 public final class SkullbriarTheWalkingGrave extends CardImpl {
+    private Counters counters;
 
     public SkullbriarTheWalkingGrave(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{G}");
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{G}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.ELEMENTAL);
@@ -45,9 +46,7 @@ public final class SkullbriarTheWalkingGrave extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SkullbriarEffect()));
     }
 
-    public SkullbriarTheWalkingGrave(SkullbriarTheWalkingGrave card) {
-        super(card);
-    }
+    public SkullbriarTheWalkingGrave(SkullbriarTheWalkingGrave card) { super(card); }
 
     @Override
     public SkullbriarTheWalkingGrave copy() {
@@ -59,7 +58,7 @@ public final class SkullbriarTheWalkingGrave extends CardImpl {
     public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
         boolean skullBriarEffectApplied = false;
         if (event.getToZone() != Zone.HAND && event.getToZone() != Zone.LIBRARY) {
-            for (StaticAbility ability : getAbilities(game).getStaticAbilities(event.getFromZone())) {
+            for (StaticAbility ability : getAbilities (game).getStaticAbilities(event.getFromZone())) {
                 for (Effect effect : ability.getEffects(game, EffectType.REPLACEMENT)) {
                     if (effect instanceof SkullbriarEffect && event.getAppliedEffects().contains(effect.getId())) {
                         skullBriarEffectApplied = true;
@@ -85,7 +84,7 @@ public final class SkullbriarTheWalkingGrave extends CardImpl {
             copyTo = this.getCounters(game);
         }
         if (copyTo != null && copyFrom != null) {
-            for (Counter counter : copyFrom.values()) {
+            for(Counter counter : copyFrom.values()) {
                 copyTo.addCounter(counter);
             }
         }

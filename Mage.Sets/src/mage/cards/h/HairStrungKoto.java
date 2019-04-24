@@ -52,7 +52,7 @@ public final class HairStrungKoto extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
         public HairStrungKoto (UUID ownerId, CardSetInfo setInfo) {

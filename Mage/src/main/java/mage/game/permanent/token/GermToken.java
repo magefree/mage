@@ -13,7 +13,7 @@ import mage.constants.SubType;
  */
 public final class GermToken extends TokenImpl {
 
-    static final private List<String> tokenImageSets = new ArrayList<>();
+    final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
         tokenImageSets.addAll(Arrays.asList("NPH", "MBS", "SOM", "EMA", "C16"));

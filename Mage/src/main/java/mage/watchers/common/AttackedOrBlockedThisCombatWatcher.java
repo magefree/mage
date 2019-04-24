@@ -19,29 +19,29 @@ import mage.watchers.Watcher;
  */
 public class AttackedOrBlockedThisCombatWatcher extends Watcher {
 
-    private final Set<MageObjectReference> attackedThisTurnCreatures = new HashSet<>();
-    private final Set<MageObjectReference> blockedThisTurnCreatures = new HashSet<>();
+    public final Set<MageObjectReference> attackedThisTurnCreatures = new HashSet<>();
+    public final Set<MageObjectReference> blockedThisTurnCreatures = new HashSet<>();
 
     public AttackedOrBlockedThisCombatWatcher() {
-        super(WatcherScope.GAME);
+        super(AttackedOrBlockedThisCombatWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public AttackedOrBlockedThisCombatWatcher(final AttackedOrBlockedThisCombatWatcher watcher) {
         super(watcher);
-        this.getAttackedThisTurnCreatures().addAll(watcher.getAttackedThisTurnCreatures());
-        this.getBlockedThisTurnCreatures().addAll(watcher.getBlockedThisTurnCreatures());
+        this.attackedThisTurnCreatures.addAll(watcher.attackedThisTurnCreatures);
+        this.blockedThisTurnCreatures.addAll(watcher.blockedThisTurnCreatures);
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.BEGIN_COMBAT_STEP_PRE) {
-            this.getAttackedThisTurnCreatures().clear();
+            this.attackedThisTurnCreatures.clear();
         }
         if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
-            this.getAttackedThisTurnCreatures().add(new MageObjectReference(event.getSourceId(), game));
+            this.attackedThisTurnCreatures.add(new MageObjectReference(event.getSourceId(), game));
         }
         if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
-            this.getBlockedThisTurnCreatures().add(new MageObjectReference(event.getSourceId(), game));
+            this.blockedThisTurnCreatures.add(new MageObjectReference(event.getSourceId(), game));
         }
     }
 

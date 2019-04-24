@@ -98,19 +98,19 @@ class AcolytesRewardEffect extends PreventionEffectImpl {
                     result = true;
                 }
                 if (toPrevent > 0) {
-                    game.informPlayers("Acolyte's Reward prevented " + toPrevent + " to " + targetCreature.getName());
+                    game.informPlayers(new StringBuilder("Acolyte's Reward ").append("prevented ").append(toPrevent).append(" to ").append(targetCreature.getName()).toString());
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE,
                             source.getControllerId(), source.getSourceId(), source.getControllerId(), toPrevent));
 
                     Player targetPlayer = game.getPlayer(source.getTargets().get(1).getFirstTarget());
                     if (targetPlayer != null) {
                         targetPlayer.damage(toPrevent, source.getSourceId(), game, false, true);
-                        game.informPlayers("Acolyte's Reward deals " + toPrevent + " damage to " + targetPlayer.getLogName());
+                        game.informPlayers(new StringBuilder("Acolyte's Reward ").append("deals ").append(toPrevent).append(" damage to ").append(targetPlayer.getLogName()).toString());
                     } else {
                         Permanent targetDamageCreature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
                         if (targetDamageCreature != null) {
                             targetDamageCreature.damage(toPrevent, source.getSourceId(), game, false, true);
-                            game.informPlayers("Acolyte's Reward deals " + toPrevent + " damage to " + targetDamageCreature.getName());
+                            game.informPlayers(new StringBuilder("Acolyte's Reward ").append("deals ").append(toPrevent).append(" damage to ").append(targetDamageCreature.getName()).toString());
                         }
                     }
                 }

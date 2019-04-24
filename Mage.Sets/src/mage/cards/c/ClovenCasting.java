@@ -27,7 +27,7 @@ public final class ClovenCasting extends CardImpl {
         filter.add(Predicates.or(
                 new CardTypePredicate(CardType.INSTANT),
                 new CardTypePredicate(CardType.SORCERY)));
-        filter.add(MulticoloredPredicate.instance);
+        filter.add(new MulticoloredPredicate());
     }
 
     public ClovenCasting(UUID ownerId, CardSetInfo setInfo) {

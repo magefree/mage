@@ -21,7 +21,7 @@ public final class Flicker extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("nontoken permanent");
     
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(Predicates.not(new TokenPredicate()));
     }
     
     public Flicker(UUID ownerId, CardSetInfo setInfo) {

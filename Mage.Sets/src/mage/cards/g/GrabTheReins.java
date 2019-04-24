@@ -48,10 +48,10 @@ public final class GrabTheReins extends CardImpl {
         this.getSpellAbility().addTarget(target);
         // or sacrifice a creature, then Grab the Reins deals damage equal to that creature's power to any target.
         Mode mode = new Mode();
-        mode.addEffect(new GrabTheReinsEffect());
+        mode.getEffects().add(new GrabTheReinsEffect());
         TargetAnyTarget target2 = new TargetAnyTarget();
         target2.setTargetName("a creature or player to damage");
-        mode.addTarget(target2);
+        mode.getTargets().add(target2);
         this.getSpellAbility().getModes().addMode(mode);
 
         // Entwine {2}{R}

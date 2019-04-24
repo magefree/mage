@@ -30,7 +30,7 @@ public final class LiquidFire extends CardImpl {
         // As an additional cost to cast Liquid Fire, choose a number between 0 and 5.
         this.getSpellAbility().addCost(new LiquidFireCost());
         // Liquid Fire deals X damage to target creature and 5 minus X damage to that creature's controller, where X is the chosen number.
-        DynamicValue choiceValue = GetXValue.instance;
+        DynamicValue choiceValue = new GetXValue();
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new LiquidFireEffect(choiceValue));
         

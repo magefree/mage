@@ -30,7 +30,7 @@ public final class AkoumFlameseeker extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.ALLY));
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public AkoumFlameseeker(UUID ownerId, CardSetInfo setInfo) {

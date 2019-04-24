@@ -1,5 +1,11 @@
+
 package mage.view;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 import mage.constants.SkillLevel;
 import mage.constants.TableState;
 import mage.game.Game;
@@ -8,12 +14,6 @@ import mage.game.Table;
 import mage.game.draft.Draft;
 import mage.game.match.MatchPlayer;
 import mage.game.tournament.TournamentPlayer;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -32,12 +32,10 @@ public class TableView implements Serializable {
     private TableState tableState;
     private final SkillLevel skillLevel;
     private final String tableStateText;
-    private final String seatsInfo;
     private boolean isTournament;
     private List<SeatView> seats = new ArrayList<>();
     private List<UUID> games = new ArrayList<>();
     private final String quitRatio;
-    private final String minimumRating;
     private final boolean limited;
     private final boolean rated;
     private final boolean passworded;
@@ -47,6 +45,10 @@ public class TableView implements Serializable {
         this.tableId = table.getId();
         this.gameType = table.getGameType();
         this.tableName = table.getName();
+        String tableNameInfo = null;
+        if (tableName != null && !tableName.isEmpty()) {
+            tableNameInfo = " [" + table.getName() + ']';
+        }
         this.controllerName = table.getControllerName();
         this.tableState = table.getState();
         if (table.getState() == TableState.WAITING
@@ -66,9 +68,8 @@ public class TableView implements Serializable {
         }
         if (!table.isTournament()) {
             // MATCH
-            seatsInfo = "" + table.getMatch().getPlayers().size() + '/' + table.getSeats().length;
             if (table.getState() == TableState.WAITING || table.getState() == TableState.READY_TO_START) {
-                tableStateText = table.getState().toString() + " (" + seatsInfo + ')';
+                tableStateText = table.getState().toString() + " (" + table.getMatch().getPlayers().size() + '/' + table.getSeats().length + ')';
             } else {
                 tableStateText = table.getState().toString();
             }
@@ -92,7 +93,7 @@ public class TableView implements Serializable {
                 sbScore.append(" Draws: ").append(table.getMatch().getDraws());
             }
             this.controllerName += sb.toString();
-            this.deckType = table.getDeckType();
+            this.deckType = table.getDeckType() + (tableNameInfo != null ? tableNameInfo : "");
             StringBuilder addInfo = new StringBuilder();
             if (table.getMatch().getGames().isEmpty()) {
                 addInfo.append("Wins:").append(table.getMatch().getWinsNeeded());
@@ -110,7 +111,6 @@ public class TableView implements Serializable {
             this.additionalInfo = addInfo.toString();
             this.skillLevel = table.getMatch().getOptions().getSkillLevel();
             this.quitRatio = Integer.toString(table.getMatch().getOptions().getQuitRatio());
-            this.minimumRating = Integer.toString(table.getMatch().getOptions().getMinimumRating());
             this.limited = table.getMatch().getOptions().isLimited();
             this.rated = table.getMatch().getOptions().isRated();
             this.passworded = !table.getMatch().getOptions().getPassword().isEmpty();
@@ -127,11 +127,10 @@ public class TableView implements Serializable {
                 }
             }
             this.controllerName += sb1.toString();
-            this.seatsInfo = "" + table.getTournament().getPlayers().size() + "/" + table.getNumberOfSeats();
             StringBuilder infoText = new StringBuilder();
             StringBuilder stateText = new StringBuilder(table.getState().toString());
             infoText.append("Wins:").append(table.getTournament().getOptions().getMatchOptions().getWinsNeeded());
-            infoText.append(" Seats: ").append(this.seatsInfo);
+            infoText.append(" Seats: ").append(table.getTournament().getPlayers().size()).append('/').append(table.getNumberOfSeats());
             switch (table.getState()) {
                 case WAITING:
                     stateText.append(" (").append(table.getTournament().getPlayers().size()).append('/').append(table.getNumberOfSeats()).append(')');
@@ -157,10 +156,9 @@ public class TableView implements Serializable {
             }
             this.additionalInfo = infoText.toString();
             this.tableStateText = stateText.toString();
-            this.deckType = table.getDeckType() + ' ' + table.getTournament().getBoosterInfo();
+            this.deckType = table.getDeckType() + ' ' + table.getTournament().getBoosterInfo() + (tableNameInfo != null ? tableNameInfo : "");
             this.skillLevel = table.getTournament().getOptions().getMatchOptions().getSkillLevel();
             this.quitRatio = Integer.toString(table.getTournament().getOptions().getQuitRatio());
-            this.minimumRating = Integer.toString(table.getTournament().getOptions().getMinimumRating());
             this.limited = table.getTournament().getOptions().getMatchOptions().isLimited();
             this.rated = table.getTournament().getOptions().getMatchOptions().isRated();
             this.passworded = !table.getTournament().getOptions().getPassword().isEmpty();
@@ -179,11 +177,11 @@ public class TableView implements Serializable {
     public String getControllerName() {
         return controllerName;
     }
-
+    
     public boolean getSpectatorsAllowed() {
         return spectatorsAllowed;
     }
-
+    
 
     public String getGameType() {
         return gameType;
@@ -209,10 +207,6 @@ public class TableView implements Serializable {
         return games;
     }
 
-    public String getSeatsInfo() {
-        return seatsInfo;
-    }
-
     public boolean isTournament() {
         return this.isTournament;
     }
@@ -231,10 +225,6 @@ public class TableView implements Serializable {
 
     public String getQuitRatio() {
         return quitRatio;
-    }
-
-    public String getMinimumRating() {
-        return minimumRating;
     }
 
     public boolean isLimited() {

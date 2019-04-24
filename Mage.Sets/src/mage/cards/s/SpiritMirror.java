@@ -29,7 +29,7 @@ public final class SpiritMirror extends CardImpl {
 
     static {
         filterToken.add(new SubtypePredicate(SubType.REFLECTION));
-        filterToken.add(TokenPredicate.instance);
+        filterToken.add(new TokenPredicate());
         filter.add(new SubtypePredicate(SubType.REFLECTION));
     }
 

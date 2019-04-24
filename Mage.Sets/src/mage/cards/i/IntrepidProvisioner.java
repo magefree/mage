@@ -25,7 +25,7 @@ public final class IntrepidProvisioner extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(SubType.HUMAN, "another target Human you control");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public IntrepidProvisioner(UUID ownerId, CardSetInfo setInfo) {

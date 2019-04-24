@@ -29,7 +29,7 @@ public final class RamosianRally extends CardImpl {
 
     static {
         plainsFilter.add(new SubtypePredicate(SubType.PLAINS));
-        creatureFilter.add(Predicates.not(TappedPredicate.instance));
+        creatureFilter.add(Predicates.not(new TappedPredicate()));
     }
 
     public RamosianRally(UUID ownerId, CardSetInfo setInfo) {

@@ -64,7 +64,8 @@ class MurmursFromBeyondEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (sourceObject != null && controller != null) {
-            Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 3));
+            Cards cards = new CardsImpl();
+            cards.addAll(controller.getLibrary().getTopCards(game, 3));
             if (!cards.isEmpty()) {
                 controller.revealCards(staticText, cards, game);
                 Card cardToGraveyard;

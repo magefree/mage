@@ -1,8 +1,14 @@
+
 package mage.cards.h;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
@@ -10,11 +16,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInHand;
-import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
+ *
  * @author jeffwadsworth
  */
 public final class HintOfInsanity extends CardImpl {
@@ -22,7 +26,7 @@ public final class HintOfInsanity extends CardImpl {
     public HintOfInsanity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
-        // Target player reveals their hand. That player discards all nonland cards with the same name as another card in their hand.
+        // Target player reveals his or her hand. That player discards all nonland cards with the same name as another card in his or her hand.
         this.getSpellAbility().addEffect(new HintOfInsanityEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
 
@@ -58,6 +62,7 @@ class HintOfInsanityEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         FilterCard filter = new FilterCard("card from your hand");
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
+        String nameOfChosenCard;
         Card chosenCard;
         if (targetPlayer != null) {
             TargetCardInHand targetCard = new TargetCardInHand(filter);
@@ -68,8 +73,10 @@ class HintOfInsanityEffect extends OneShotEffect {
             if (!cardsInHand.isEmpty()
                     && targetPlayer.choose(Outcome.Discard, targetCard, source.getSourceId(), game)) {
                 chosenCard = game.getCard(targetCard.getFirstTarget());
+                nameOfChosenCard = chosenCard.getName();
                 for (Card card : cardsInHand.getCards(game)) {
-                    if (CardUtil.haveSameNames(card, chosenCard) && !card.isLand()) {
+                    if (card.getName().equals(nameOfChosenCard)
+                            && !card.isLand()) {
                         targetPlayer.discard(card, source, game);
                     }
                 }

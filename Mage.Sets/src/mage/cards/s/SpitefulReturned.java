@@ -98,6 +98,6 @@ class SpitefulReturnedTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} or enchanted creature attacks, " + super.getRule();
+        return new StringBuilder("Whenever {this} or enchanted creature attacks, ").append(super.getRule()).toString();
     }
 }

@@ -29,7 +29,7 @@ public final class GoblinCratermaker extends CardImpl {
             = new FilterNonlandPermanent("colorless nonland permanent");
 
     static {
-        filter.add(ColorlessPredicate.instance);
+        filter.add(new ColorlessPredicate());
     }
 
     public GoblinCratermaker(UUID ownerId, CardSetInfo setInfo) {
@@ -50,8 +50,8 @@ public final class GoblinCratermaker extends CardImpl {
 
         // • Destroy target colorless nonland permanent.
         Mode mode = new Mode();
-        mode.addEffect(new DestroyTargetEffect());
-        mode.addTarget(new TargetPermanent(filter));
+        mode.getEffects().add(new DestroyTargetEffect());
+        mode.getTargets().add(new TargetPermanent(filter));
 
         ability.addMode(mode);
         this.addAbility(ability);

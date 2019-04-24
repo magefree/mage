@@ -30,7 +30,7 @@ public final class BeastsOfBogardan extends CardImpl {
 
     static {
         controlFilter.add(new ColorPredicate(ObjectColor.WHITE));
-        controlFilter.add(Predicates.not(TokenPredicate.instance));
+        controlFilter.add(Predicates.not(new TokenPredicate()));
     }
 
     public BeastsOfBogardan(UUID ownerId, CardSetInfo setInfo) {

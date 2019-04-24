@@ -1,7 +1,8 @@
 
 package mage.cards.s;
 
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import java.util.UUID;
+import mage.abilities.common.CreatureEntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.cards.CardImpl;
@@ -15,34 +16,30 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.SnakeToken;
 
-import java.util.UUID;
-
 /**
+ *
  * @author LevelX2
  */
 public final class SosukesSummons extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a nontoken Snake");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken Snake");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SNAKE));
-        filter.add(Predicates.not(TokenPredicate.instance));
+            filter.add(new SubtypePredicate(SubType.SNAKE));
+            filter.add(Predicates.not(new TokenPredicate()));
     }
 
     public SosukesSummons(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
 
 
         // Create two 1/1 green Snake creature tokens.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SnakeToken(), 2));
 
         // Whenever a nontoken Snake enters the battlefield under your control, you may return Sosuke's Summons from your graveyard to your hand.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
-                Zone.GRAVEYARD,
-                new ReturnSourceFromGraveyardToHandEffect(),
-                filter,
-                true)
-        );
+        this.addAbility(new CreatureEntersBattlefieldTriggeredAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), filter, true, false));
+
+
     }
 
     public SosukesSummons(final SosukesSummons card) {

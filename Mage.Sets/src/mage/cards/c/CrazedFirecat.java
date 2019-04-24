@@ -1,6 +1,7 @@
 
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -8,16 +9,15 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
-import java.util.UUID;
-
 /**
+ *
  * @author TheElk801
  */
 public final class CrazedFirecat extends CardImpl {
@@ -34,7 +34,7 @@ public final class CrazedFirecat extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CrazedFirecatEffect(), false));
     }
 
-    private CrazedFirecat(final CrazedFirecat card) {
+    public CrazedFirecat(final CrazedFirecat card) {
         super(card);
     }
 
@@ -46,12 +46,12 @@ public final class CrazedFirecat extends CardImpl {
 
 class CrazedFirecatEffect extends OneShotEffect {
 
-    CrazedFirecatEffect() {
+    public CrazedFirecatEffect() {
         super(Outcome.Benefit);
-        this.staticText = "flip a coin until you lose a flip. Put a +1/+1 counter on {this} for each flip you won.";
+        this.staticText = "flip a coin until you lose a flip. Put a +1/+1 counter on {this} for each flip you win.";
     }
 
-    private CrazedFirecatEffect(final CrazedFirecatEffect effect) {
+    public CrazedFirecatEffect(final CrazedFirecatEffect effect) {
         super(effect);
     }
 
@@ -66,7 +66,7 @@ class CrazedFirecatEffect extends OneShotEffect {
         Permanent sourceObject = game.getPermanent(source.getSourceId());
         if (controller != null && sourceObject != null) {
             int flipsWon = 0;
-            while (controller.flipCoin(source, game, true)) {
+            while (controller.flipCoin(game)) {
                 flipsWon++;
             }
             sourceObject.addCounters(CounterType.P1P1.createInstance(flipsWon), source, game);

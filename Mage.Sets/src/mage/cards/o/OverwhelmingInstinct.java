@@ -63,6 +63,6 @@ class OverwhelmingInstinctTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you attack with three or more creatures, " + super.getRule();
+        return new StringBuilder("Whenever you attack with three or more creatures, ").append(super.getRule()).toString();
     }
 }

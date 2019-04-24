@@ -26,7 +26,7 @@ public final class MazeAbomination extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Multicolored creatures you control");
     static {
-        filter.add(MulticoloredPredicate.instance);
+        filter.add(new MulticoloredPredicate());
     }
 
     public MazeAbomination (UUID ownerId, CardSetInfo setInfo) {

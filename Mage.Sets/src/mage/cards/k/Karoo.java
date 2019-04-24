@@ -30,7 +30,7 @@ public final class Karoo extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.PLAINS));
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public Karoo(UUID ownerId, CardSetInfo setInfo) {

@@ -35,7 +35,7 @@ import mage.util.CardUtil;
  */
 public final class PalaceJailer extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));

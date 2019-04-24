@@ -49,7 +49,7 @@ public final class GrothamaAllDevouring extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new GrothamaAllDevouringDrawCardsEffect(), false), new GrothamaAllDevouringWatcher());
     }
 
-    private GrothamaAllDevouring(final GrothamaAllDevouring card) {
+    public GrothamaAllDevouring(final GrothamaAllDevouring card) {
         super(card);
     }
 
@@ -61,16 +61,16 @@ public final class GrothamaAllDevouring extends CardImpl {
 
 class GrothamaAllDevouringGainAbilityEffect extends GainAbilityAllEffect {
 
-    private static final FilterCreaturePermanent otherCreatureFilter = new FilterCreaturePermanent("other creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creatures");
 
     static {
-        otherCreatureFilter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     GrothamaAllDevouringGainAbilityEffect() {
         super(new AttacksTriggeredAbility(
                 new GrothamaAllDevouringFightEffect(null, null), true
-        ), Duration.WhileOnBattlefield, otherCreatureFilter);
+        ), Duration.WhileOnBattlefield, filter);
         this.staticText = "Other creatures have \"Whenever this creature attacks, you may have it fight {this}.\"";
     }
 
@@ -148,7 +148,7 @@ class GrothamaAllDevouringDrawCardsEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        GrothamaAllDevouringWatcher watcher = game.getState().getWatcher(GrothamaAllDevouringWatcher.class);
+        GrothamaAllDevouringWatcher watcher = (GrothamaAllDevouringWatcher) game.getState().getWatchers().get(GrothamaAllDevouringWatcher.class.getSimpleName());
         if (watcher == null) {
             return false;
         }
@@ -168,10 +168,10 @@ class GrothamaAllDevouringDrawCardsEffect extends OneShotEffect {
 
 class GrothamaAllDevouringWatcher extends Watcher {
 
-    private Map<MageObjectReference, Map<UUID, Integer>> damageMap = new HashMap<>();
+    Map<MageObjectReference, Map<UUID, Integer>> damageMap = new HashMap<>();
 
     GrothamaAllDevouringWatcher() {
-        super(WatcherScope.GAME);
+        super(GrothamaAllDevouringWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     GrothamaAllDevouringWatcher(final GrothamaAllDevouringWatcher watcher) {

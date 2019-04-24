@@ -66,9 +66,8 @@ class HeatStrokeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        BlockedThisTurnWatcher blockedWatcher = game.getState().getWatcher(BlockedThisTurnWatcher.class);
-        WasBlockedThisTurnWatcher wasBlockedThisTurnWatcher = game.getState().getWatcher(WasBlockedThisTurnWatcher.class);
-
+        BlockedThisTurnWatcher blockedWatcher = (BlockedThisTurnWatcher) game.getState().getWatchers().get(BlockedThisTurnWatcher.class.getSimpleName());
+        WasBlockedThisTurnWatcher wasBlockedThisTurnWatcher = (WasBlockedThisTurnWatcher) game.getState().getWatchers().get(WasBlockedThisTurnWatcher.class.getSimpleName());
         Set<Permanent> inROI = new HashSet<>(game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game));
         boolean toRet = false;
         Set<MageObjectReference> toDestroy = new HashSet<>();

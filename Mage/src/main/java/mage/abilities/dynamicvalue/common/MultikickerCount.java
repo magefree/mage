@@ -9,17 +9,20 @@ import mage.cards.Card;
 import mage.game.Game;
 
 /**
+ *
  * @author LevelX2
  */
-public enum MultikickerCount implements DynamicValue {
-    instance;
+public class MultikickerCount implements DynamicValue {
+
+    public MultikickerCount() {
+    }
 
     @Override
     public int calculate(Game game, Ability source, Effect effect) {
         int count = 0;
         Card card = game.getCard(source.getSourceId());
         if (card != null) {
-            for (Ability ability : card.getAbilities()) {
+            for (Ability ability: card.getAbilities()) {
                 if (ability instanceof KickerAbility) {
                     count += ((KickerAbility) ability).getKickedCounter(game, source);
                 }
@@ -30,7 +33,7 @@ public enum MultikickerCount implements DynamicValue {
 
     @Override
     public MultikickerCount copy() {
-        return MultikickerCount.instance;
+        return new MultikickerCount();
     }
 
     @Override

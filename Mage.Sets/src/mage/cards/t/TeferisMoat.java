@@ -1,5 +1,7 @@
+
 package mage.cards.t;
 
+import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -16,17 +18,16 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.UUID;
-
 
 /**
+ *
  * @author Markedagain
  */
 public final class TeferisMoat extends CardImpl {
 
     public TeferisMoat(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{U}");
-
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}{U}");
+           
         // As Teferi's Moat enters the battlefield, choose a color.
         this.addAbility(new EntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));
         // Creatures of the chosen color without flying can't attack you.
@@ -45,15 +46,15 @@ public final class TeferisMoat extends CardImpl {
 
 class TeferisMoatRestrictionEffect extends RestrictionEffect {
 
-    TeferisMoatRestrictionEffect() {
+    TeferisMoatRestrictionEffect(){
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Creatures of the chosen color without flying can't attack you";
     }
-
+    
     TeferisMoatRestrictionEffect(final TeferisMoatRestrictionEffect effect) {
         super(effect);
     }
-
+    
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         ObjectColor chosenColor = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
@@ -62,15 +63,12 @@ class TeferisMoatRestrictionEffect extends RestrictionEffect {
                 permanent.getColor(game).shares(chosenColor) &&
                 permanent.isCreature();
     }
-
+    
     @Override
-    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game, boolean canUseChooseDialogs) {
-        if (defenderId == null) {
-            return true;
-        }
+    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
         return !defenderId.equals(source.getControllerId());
     }
-
+    
     @Override
     public TeferisMoatRestrictionEffect copy() {
         return new TeferisMoatRestrictionEffect(this);

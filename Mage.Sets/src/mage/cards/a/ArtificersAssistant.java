@@ -22,7 +22,7 @@ public final class ArtificersAssistant extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("a historic spell");
 
     static {
-        filter.add(HistoricPredicate.instance);
+        filter.add(new HistoricPredicate());
     }
 
     public ArtificersAssistant(UUID ownerId, CardSetInfo setInfo) {

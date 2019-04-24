@@ -60,8 +60,7 @@ class OpenTheVaultsEffect extends OneShotEffect {
         if (controller != null) {
             LinkedHashSet<Card> cardsToReturn = new LinkedHashSet<>();
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Player player = game.getPlayer(playerId);
-                Cards graveyard = player.getGraveyard();
+                Cards graveyard = game.getPlayer(playerId).getGraveyard();
                 for (UUID cardId : graveyard) {
                     Card card = game.getCard(cardId);
                     if (card != null

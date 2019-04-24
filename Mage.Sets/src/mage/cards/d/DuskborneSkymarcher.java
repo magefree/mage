@@ -28,7 +28,7 @@ public final class DuskborneSkymarcher extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.VAMPIRE, "attacking Vampire");
 
     static {
-        filter.add(AttackingPredicate.instance);
+        filter.add(new AttackingPredicate());
     }
 
     public DuskborneSkymarcher(UUID ownerId, CardSetInfo setInfo) {

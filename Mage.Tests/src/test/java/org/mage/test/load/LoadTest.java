@@ -1,11 +1,18 @@
 package org.mage.test.load;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
 import mage.cards.Card;
+import mage.cards.Sets;
 import mage.cards.decks.Deck;
+import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
-import mage.cards.repository.CardScanner;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.constants.*;
 import mage.game.match.MatchOptions;
+import mage.player.ai.ComputerPlayer;
 import mage.players.PlayerType;
 import mage.remote.Connection;
 import mage.remote.MageRemoteException;
@@ -15,22 +22,16 @@ import mage.util.RandomUtil;
 import mage.view.*;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.mage.test.utils.DeckTestUtils;
-
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.*;
 
 /**
  * Intended to test Mage server under different load patterns.
- * <p>
+ *
  * These tests do use server started separately, so Mage server should be
  * started before running them. In case you want to debug these tests, use
  * -Ddebug.mage that would disable client-server request timeout.
- * <p>
+ *
  * Then it's also better to use -Xms256M -Xmx512M JVM options for these stests.
  *
  * @author JayDi85
@@ -44,60 +45,47 @@ public class LoadTest {
     private static final String TEST_PROXY_TYPE = "None";
     private static final String TEST_USER_NAME = "user";
 
-    @BeforeClass
-    public static void initDatabase() {
-        // recreate missing cards db
-        CardScanner.scan();
-    }
-
     @Test
     public void test_CreateRandomDeck() {
 
         Deck deck;
 
-        deck = DeckTestUtils.buildRandomDeck("G", false);
+        deck = generateRandomDeck("G", false);
         for (Card card : deck.getCards()) {
             Assert.assertTrue("card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in G",
                     card.getColorIdentity().isGreen());
         }
 
-        deck = DeckTestUtils.buildRandomDeck("U", false);
+        deck = generateRandomDeck("U", false);
         for (Card card : deck.getCards()) {
             Assert.assertTrue("card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in U",
                     card.getColorIdentity().isBlue());
         }
 
-        deck = DeckTestUtils.buildRandomDeck("BR", false);
+        deck = generateRandomDeck("BR", false);
         for (Card card : deck.getCards()) {
             Assert.assertTrue("card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in BR",
                     card.getColorIdentity().isBlack() || card.getColorIdentity().isRed());
         }
 
-        deck = DeckTestUtils.buildRandomDeck("BUG", false);
+        deck = generateRandomDeck("BUG", false);
         for (Card card : deck.getCards()) {
             Assert.assertTrue("card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in BUG",
                     card.getColorIdentity().isBlack() || card.getColorIdentity().isBlue() || card.getColorIdentity().isGreen());
         }
 
         // lands
-        deck = DeckTestUtils.buildRandomDeck("UR", true);
+        deck = generateRandomDeck("UR", true);
         for (Card card : deck.getCards()) {
             Assert.assertTrue("card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in UR",
                     card.getColorIdentity().isBlue() || card.getColorIdentity().isRed());
             Assert.assertEquals("card " + card.getName() + " must be basic land ", Rarity.LAND, card.getRarity());
         }
 
-        deck = DeckTestUtils.buildRandomDeck("B", true);
+        deck = generateRandomDeck("B", true);
         for (Card card : deck.getCards()) {
             Assert.assertTrue("card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in B", card.getColorIdentity().isBlack());
             Assert.assertEquals("card " + card.getName() + " must be basic land ", Rarity.LAND, card.getRarity());
-        }
-
-        // allowed sets
-        deck = DeckTestUtils.buildRandomDeck("B", true, "GRN");
-        for (Card card : deck.getCards()) {
-            Assert.assertTrue("card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in B", card.getColorIdentity().isBlack());
-            Assert.assertEquals("card " + card.getName() + " have wrong set code " + card.getExpansionSetCode(), "GRN", card.getExpansionSetCode());
         }
     }
 
@@ -143,7 +131,7 @@ public class LoadTest {
         UUID tableId = game.getTableId();
         Assert.assertEquals(player1.userName, game.getControllerName());
 
-        DeckCardLists deckList = DeckTestUtils.buildRandomDeckAndInitCards("GR", true);
+        DeckCardLists deckList = createSimpleDeck("GR", true);
         Optional<TableView> checkGame;
 
         /*
@@ -188,9 +176,9 @@ public class LoadTest {
         }
     }
 
-    public void playTwoAIGame(String deckColors, String deckAllowedSets) {
-        Assert.assertFalse("need deck colors", deckColors.isEmpty());
-        Assert.assertFalse("need allowed sets", deckAllowedSets.isEmpty());
+    @Test
+    @Ignore
+    public void test_TwoAIPlayGameUntilEnd() {
 
         // monitor and game source
         LoadPlayer monitor = new LoadPlayer("monitor");
@@ -201,7 +189,7 @@ public class LoadTest {
         TableView game = monitor.session.createTable(monitor.roomID, gameOptions);
         UUID tableId = game.getTableId();
 
-        DeckCardLists deckList = DeckTestUtils.buildRandomDeckAndInitCards(deckColors, false, deckAllowedSets);
+        DeckCardLists deckList = createSimpleDeck("GR", false);
         Optional<TableView> checkGame;
 
         // join AI
@@ -232,6 +220,7 @@ public class LoadTest {
                 for (PlayerView p : gameView.getPlayers()) {
                     logger.info(p.getName() + " - Life=" + p.getLife() + "; Lib=" + p.getLibraryCount());
                 }
+
             }
 
             try {
@@ -244,39 +233,14 @@ public class LoadTest {
 
     @Test
     @Ignore
-    public void test_TwoAIPlayGame_One() {
-        playTwoAIGame("GR", "GRN");
-    }
-
-    @Test
-    @Ignore
-    public void test_TwoAIPlayGame_Multiple() {
-
-        // save random seeds for repeated results
-        Integer gamesAmount = 1000;
-        List<Integer> seedsList = new ArrayList<>();
-        for (int i = 1; i <= gamesAmount; i++) {
-            seedsList.add(RandomUtil.nextInt());
-        }
-
-        for (int i = 1; i <= 1000; i++) {
-            long randomSeed = seedsList.get(i);
-            logger.info("RANDOM seed: " + randomSeed);
-            RandomUtil.setSeed(randomSeed);
-            playTwoAIGame("WGUBR", "SWS");
-        }
-    }
-
-    @Test
-    @Ignore
     public void test_GameThread() {
         // simple game thread to the end
 
         LoadGame game = new LoadGame(
                 "game",
                 "thread",
-                DeckTestUtils.buildRandomDeckAndInitCards("GR", true, ""),
-                DeckTestUtils.buildRandomDeckAndInitCards("GR", true, "")
+                createSimpleDeck("GR", true),
+                createSimpleDeck("GR", true)
         );
         game.gameStart();
 
@@ -299,8 +263,8 @@ public class LoadTest {
         LoadGame game = new LoadGame(
                 "game",
                 "thread",
-                DeckTestUtils.buildRandomDeckAndInitCards("GR", true, ""),
-                DeckTestUtils.buildRandomDeckAndInitCards("GR", true, "")
+                createSimpleDeck("GR", true),
+                createSimpleDeck("GR", true)
         );
         game.gameStart();
         game.gameEnd(true); // abort -- close client thread
@@ -315,8 +279,8 @@ public class LoadTest {
         LoadGame game = new LoadGame(
                 "game",
                 "thread",
-                DeckTestUtils.buildRandomDeckAndInitCards("GR", false, ""),
-                DeckTestUtils.buildRandomDeckAndInitCards("GR", false, "")
+                createSimpleDeck("GR", false),
+                createSimpleDeck("GR", false)
         );
 
         game.gameStart();
@@ -332,8 +296,8 @@ public class LoadTest {
         LoadGame game = new LoadGame(
                 "game",
                 "thread",
-                DeckTestUtils.buildRandomDeckAndInitCards("GR", true, ""),
-                DeckTestUtils.buildRandomDeckAndInitCards("GR", true, "")
+                createSimpleDeck("GR", true),
+                createSimpleDeck("GR", true)
         );
         game.gameStart();
 
@@ -365,8 +329,8 @@ public class LoadTest {
             LoadGame game = new LoadGame(
                     "game" + i,
                     "game" + i,
-                    DeckTestUtils.buildRandomDeckAndInitCards("GR", true, ""),
-                    DeckTestUtils.buildRandomDeckAndInitCards("GR", true, "")
+                    createSimpleDeck("GR", true),
+                    createSimpleDeck("GR", true)
             );
             gamesList.add(game);
 
@@ -416,7 +380,7 @@ public class LoadTest {
         }
 
         if (errors.size() > 0) {
-            System.out.println("Not all games finished, found " + errors.size() + " errors: ");
+            System.out.println("Not all games finished, founded " + errors.size() + " errors: ");
             for (String s : errors) {
                 System.out.println(s);
             }
@@ -455,6 +419,31 @@ public class LoadTest {
 
     private MatchOptions createSimpleGameOptionsForAI(GameTypeView gameTypeView, Session session) {
         return createSimpleGameOptions("AI test game", gameTypeView, session, PlayerType.COMPUTER_MAD);
+    }
+
+    private Deck generateRandomDeck(String colors, boolean onlyBasicLands) {
+        logger.info("Building " + (onlyBasicLands ? "only lands" : "random") + " deck with colors: " + colors);
+
+        List<ColoredManaSymbol> allowedColors = new ArrayList<>();
+        for (int i = 0; i < colors.length(); i++) {
+            char c = colors.charAt(i);
+            allowedColors.add(ColoredManaSymbol.lookup(c));
+        }
+        List<Card> cardPool = Sets.generateRandomCardPool(45, allowedColors, onlyBasicLands);
+        return ComputerPlayer.buildDeck(cardPool, allowedColors, onlyBasicLands);
+    }
+
+    private DeckCardLists createSimpleDeck(String colors, boolean onlyBasicLands) {
+        Deck deck = generateRandomDeck(colors, onlyBasicLands);
+
+        DeckCardLists deckList = new DeckCardLists();
+        for (Card card : deck.getCards()) {
+            CardInfo cardInfo = CardRepository.instance.findCard(card.getExpansionSetCode(), card.getCardNumber());
+            if (cardInfo != null) {
+                deckList.getCards().add(new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode()));
+            }
+        }
+        return deckList;
     }
 
     private class LoadPlayer {
@@ -552,8 +541,8 @@ public class LoadTest {
 
         public LoadGame(String gameName, String playerPrefix) {
             this(gameName, playerPrefix,
-                    DeckTestUtils.buildRandomDeckAndInitCards("GR", true, ""),
-                    DeckTestUtils.buildRandomDeckAndInitCards("GR", true, "")
+                    createSimpleDeck("GR", true),
+                    createSimpleDeck("GR", true)
             );
         }
 

@@ -1,5 +1,7 @@
+
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -12,27 +14,28 @@ import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
-import java.util.UUID;
-
 /**
+ *
  * @author LevelX2
  */
 public final class DarkProphecy extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature you control");
-
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public DarkProphecy(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}{B}");
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{B}{B}");
+
 
         // Whenever a creature you control dies, you draw a card and you lose 1 life.
-        Effect effect = new DrawCardSourceControllerEffect(1, "you");
+        Effect effect = new DrawCardSourceControllerEffect(1);
+        effect.setText("you draw a card");
         Ability ability = new DiesCreatureTriggeredAbility(effect, false, filter);
         effect = new LoseLifeSourceControllerEffect(1);
-        ability.addEffect(effect.concatBy("and"));
+        effect.setText("and you lose 1 life");
+        ability.addEffect(effect);
         this.addAbility(ability);
     }
 

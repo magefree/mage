@@ -21,7 +21,7 @@ public final class AviaryMechanic extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another permanent you control");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public AviaryMechanic(UUID ownerId, CardSetInfo setInfo) {

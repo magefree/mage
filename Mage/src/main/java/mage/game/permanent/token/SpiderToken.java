@@ -19,7 +19,7 @@ import mage.constants.SubType;
  */
 public final class SpiderToken extends TokenImpl {
 
-    static final private List<String> tokenImageSets = new ArrayList<>();
+    final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
         tokenImageSets.addAll(Arrays.asList("ISD", "EMN", "C15", "SHM"));

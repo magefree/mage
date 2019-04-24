@@ -15,7 +15,7 @@ import mage.constants.SubType;
  */
 public final class ThrullToken extends TokenImpl {
 
-    static final private List<String> tokenImageSets = new ArrayList<>();
+    final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
         tokenImageSets.addAll(Collections.singletonList("MM2"));

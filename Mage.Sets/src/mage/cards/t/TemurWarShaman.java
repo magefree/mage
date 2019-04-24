@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -63,7 +62,7 @@ public final class TemurWarShaman extends CardImpl {
 class TemurWarShamanTriggeredAbility extends TurnedFaceUpAllTriggeredAbility {
 
     public TemurWarShamanTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new TemurWarShamanFightEffect(), new FilterControlledCreaturePermanent(), true, true);
+        super(new TemurWarShamanFightEffect(), new FilterControlledCreaturePermanent(), true);
     }
 
     public TemurWarShamanTriggeredAbility(final TemurWarShamanTriggeredAbility ability) {

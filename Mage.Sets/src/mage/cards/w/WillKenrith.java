@@ -1,5 +1,7 @@
+
 package mage.cards.w;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
@@ -14,7 +16,11 @@ import mage.abilities.effects.common.cost.SpellsCostReductionAllEffect;
 import mage.abilities.keyword.PartnerWithAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -23,9 +29,8 @@ import mage.game.command.emblems.WillKenrithEmblem;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.UUID;
-
 /**
+ *
  * @author TheElk801
  */
 public final class WillKenrith extends CardImpl {
@@ -55,6 +60,11 @@ public final class WillKenrith extends CardImpl {
 
         // -8: Target player gets an emblem with "Whenever you cast an instant or sorcery spell, copy it. You may choose new targets for the copy."
         Effect effect = new GetEmblemTargetPlayerEffect(new WillKenrithEmblem());
+        effect.setText(
+                "Target player gets an emblem with "
+                + "\"Whenever you cast an instant or sorcery spell, "
+                + "copy it. You may choose new targets for the copy.\""
+        );
         ability = new LoyaltyAbility(effect, -8);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

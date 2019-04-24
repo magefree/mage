@@ -10,10 +10,14 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 
 /**
+ *
  * @author Nicolas
  */
-public enum SunburstCount implements DynamicValue {
-    instance;
+public class SunburstCount implements DynamicValue {
+
+    public SunburstCount() {
+
+    }
 
     @Override
     public int calculate(Game game, Ability source, Effect effect) {
@@ -44,7 +48,7 @@ public enum SunburstCount implements DynamicValue {
 
     @Override
     public SunburstCount copy() {
-        return SunburstCount.instance;
+        return new SunburstCount();
     }
 
     @Override

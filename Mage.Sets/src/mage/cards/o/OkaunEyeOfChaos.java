@@ -1,6 +1,7 @@
 
 package mage.cards.o;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.WinsCoinFlipTriggeredAbility;
@@ -12,17 +13,17 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.PartnerWithAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-
-import java.util.UUID;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.TargetController;
 
 /**
+ *
  * @author TheElk801
  */
 public final class OkaunEyeOfChaos extends CardImpl {
-
-    private static final DynamicValue sourcePower = new SourcePermanentPowerCount();
-    private static final DynamicValue sourceToughness = new SourcePermanentToughnessValue();
 
     public OkaunEyeOfChaos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
@@ -40,6 +41,8 @@ public final class OkaunEyeOfChaos extends CardImpl {
         this.addAbility(new BeginningOfCombatTriggeredAbility(new FlipUntilLoseEffect(), TargetController.YOU, false));
 
         // Whenever a player wins a coin flip, double Okaun's power and toughness until end of turn.
+        DynamicValue sourcePower = new SourcePermanentPowerCount();
+        DynamicValue sourceToughness = new SourcePermanentToughnessValue();
         this.addAbility(new WinsCoinFlipTriggeredAbility(
                 new BoostSourceEffect(
                         sourcePower,

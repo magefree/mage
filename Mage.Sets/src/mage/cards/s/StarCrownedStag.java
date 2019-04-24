@@ -22,7 +22,7 @@ public final class StarCrownedStag extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
 
     static {
-        filter.add(DefendingPlayerControlsPredicate.instance);
+        filter.add(new DefendingPlayerControlsPredicate());
     }
 
     public StarCrownedStag(UUID ownerId, CardSetInfo setInfo) {

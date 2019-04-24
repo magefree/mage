@@ -1,13 +1,12 @@
+
 package mage.cards.i;
 
 import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.hint.common.DeliriumHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -15,6 +14,7 @@ import mage.constants.SubType;
 import mage.game.permanent.token.InexorableBlobOozeToken;
 
 /**
+ *
  * @author fireshoes
  */
 public final class InexorableBlob extends CardImpl {
@@ -30,8 +30,7 @@ public final class InexorableBlob extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new InexorableBlobOozeToken(), 1, true, true), false),
                 DeliriumCondition.instance,
                 "<i>Delirium</i> &mdash; Whenever {this} attacks and there are at least four card types among cards in your graveyard, "
-                        + "create a 3/3 green Ooze creature token tapped and attacking.")
-                .addHint(DeliriumHint.instance));
+                + "create a 3/3 green Ooze creature token tapped and attacking."));
     }
 
     public InexorableBlob(final InexorableBlob card) {

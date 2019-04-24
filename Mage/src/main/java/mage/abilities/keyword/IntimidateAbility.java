@@ -10,15 +10,18 @@ import mage.game.permanent.Permanent;
 
 /**
  * 702.13. Intimidate #
- * <p>
- * 702.13a Intimidate is an evasion ability.
- * <p>
- * 702.13b A creature with intimidate can't be blocked except by artifact creatures
- * and/or creatures that share a color with it. (See rule 509, "Declare Blockers Step.") #
- * <p>
- * 702.13c Multiple instances of intimidate on the same creature are redundant.
+ *
+ *  702.13a Intimidate is an evasion ability.
+ *
+ *  702.13b A creature with intimidate can't be blocked except by artifact creatures
+ *          and/or creatures that share a color with it. (See rule 509, "Declare Blockers Step.") #
+ *
+ *  702.13c Multiple instances of intimidate on the same creature are redundant.
+ *
+ *
+ *
  */
-public class IntimidateAbility extends EvasionAbility implements MageSingleton {
+public class IntimidateAbility extends EvasionAbility implements MageSingleton  {
     private static final IntimidateAbility instance = new IntimidateAbility();
 
     public static IntimidateAbility getInstance() {
@@ -55,7 +58,7 @@ class IntimidateEffect extends RestrictionEffect implements MageSingleton {
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
         boolean result = false;
         if (blocker.isArtifact() && (blocker.isCreature())) {
             result = true;

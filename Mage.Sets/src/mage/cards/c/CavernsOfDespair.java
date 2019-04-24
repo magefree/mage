@@ -1,5 +1,7 @@
+
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
@@ -8,13 +10,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.UUID;
+import mage.constants.Zone;
 
 /**
+ *
  * @author TheElk801
  */
 public final class CavernsOfDespair extends CardImpl {
@@ -63,7 +64,7 @@ class CavernsOfDespairAttackRestrictionEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
         return game.getCombat().getAttackers().size() < 2;
     }
 }
@@ -90,7 +91,7 @@ class CavernsOfDespairBlockRestrictionEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
         return game.getCombat().getBlockers().size() < 2;
     }
 }

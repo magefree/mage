@@ -1,5 +1,9 @@
+
 package mage.game.command.planes;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -20,11 +24,8 @@ import mage.target.Target;
 import mage.watchers.common.AttackedThisTurnWatcher;
 import mage.watchers.common.PlanarRollWatcher;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 /**
+ *
  * @author spjspj
  */
 public class AstralArenaPlane extends Plane {
@@ -80,11 +81,15 @@ class AstralArenaAttackRestrictionEffect extends RestrictionEffect {
         if (cPlane == null) {
             return false;
         }
-        return cPlane.getName().equalsIgnoreCase("Plane - Astral Arena");
+        if (!cPlane.getName().equalsIgnoreCase("Plane - Astral Arena")) {
+            return false;
+        }
+
+        return true;
     }
 
     @Override
-    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
         return game.getCombat().getAttackers().isEmpty();
     }
 }
@@ -111,11 +116,14 @@ class AstralArenaBlockRestrictionEffect extends RestrictionEffect {
         if (cPlane == null) {
             return false;
         }
-        return cPlane.getName().equalsIgnoreCase("Plane - Astral Arena");
+        if (!cPlane.getName().equalsIgnoreCase("Plane - Astral Arena")) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
         return game.getCombat().getBlockers().isEmpty();
     }
 }

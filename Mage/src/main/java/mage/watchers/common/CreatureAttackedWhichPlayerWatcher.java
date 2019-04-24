@@ -20,7 +20,7 @@ public class CreatureAttackedWhichPlayerWatcher extends Watcher {
     private final Map<UUID, UUID> getPlayerAttackedThisTurnByCreature = new HashMap<>();
 
     public CreatureAttackedWhichPlayerWatcher() {
-        super(WatcherScope.GAME);
+        super(CreatureAttackedWhichPlayerWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public CreatureAttackedWhichPlayerWatcher(final CreatureAttackedWhichPlayerWatcher watcher) {

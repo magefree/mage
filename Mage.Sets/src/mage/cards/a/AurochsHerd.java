@@ -33,7 +33,7 @@ public final class AurochsHerd extends CardImpl {
     static {
         filter1.add(new SubtypePredicate(SubType.AUROCHS));
         filter2.add(new SubtypePredicate(SubType.AUROCHS));
-        filter2.add(AnotherPredicate.instance);
+        filter2.add(new AnotherPredicate());
     }
 
     public AurochsHerd(UUID ownerId, CardSetInfo setInfo) {

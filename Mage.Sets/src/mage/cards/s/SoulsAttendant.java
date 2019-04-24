@@ -22,7 +22,7 @@ public final class SoulsAttendant extends CardImpl {
     private static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public SoulsAttendant(UUID ownerId, CardSetInfo setInfo) {

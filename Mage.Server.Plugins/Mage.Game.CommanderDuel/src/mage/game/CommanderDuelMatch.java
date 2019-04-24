@@ -3,7 +3,6 @@ package mage.game;
 
 import mage.game.match.MatchImpl;
 import mage.game.match.MatchOptions;
-import mage.game.mulligan.Mulligan;
 
 /**
  *
@@ -30,8 +29,7 @@ public class CommanderDuelMatch extends MatchImpl {
             startLife = 30;
             alsoHand = true;  // commander going to hand allowed to go to command zone effective July 17, 2015
         }
-        Mulligan mulligan = options.getMulliganType().getMulligan(options.getFreeMulligans());
-        CommanderDuel game = new CommanderDuel(options.getAttackOption(), options.getRange(), mulligan, startLife);
+        CommanderDuel game = new CommanderDuel(options.getAttackOption(), options.getRange(), options.getFreeMulligans(), startLife);
         game.setCheckCommanderDamage(checkCommanderDamage);
         game.setStartMessage(this.createGameStartMessage());
         game.setAlsoHand(alsoHand);

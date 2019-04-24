@@ -1,13 +1,15 @@
+
 package mage.abilities.effects.common.combat;
 
+import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.effects.RestrictionEffect;
-import mage.constants.Duration;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
+ *
  * @author North
  */
 public class CantBeBlockedAllEffect extends RestrictionEffect {
@@ -35,7 +37,7 @@ public class CantBeBlockedAllEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
         return false;
     }
 

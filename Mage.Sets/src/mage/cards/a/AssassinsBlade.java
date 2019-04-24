@@ -29,7 +29,7 @@ public final class AssassinsBlade extends CardImpl {
 
     static {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
-        filter.add(AttackingPredicate.instance);
+        filter.add(new AttackingPredicate());
     }
 
     public AssassinsBlade(UUID ownerId, CardSetInfo setInfo) {

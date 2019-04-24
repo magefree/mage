@@ -36,7 +36,7 @@ public final class OliviaVoldaren extends CardImpl {
     private static final FilterCreaturePermanent vampireFilter = new FilterCreaturePermanent("Vampire");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
         vampireFilter.add(new SubtypePredicate(SubType.VAMPIRE));
     }
 

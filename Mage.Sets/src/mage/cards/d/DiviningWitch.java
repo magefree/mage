@@ -1,5 +1,7 @@
+
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -19,11 +21,9 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
-import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
+ *
  * @author maxlebedev
  */
 public final class DiviningWitch extends CardImpl {
@@ -92,7 +92,7 @@ public final class DiviningWitch extends CardImpl {
                     if (card != null) {
                         cardsToReaveal.add(card);
                         // Put that card into your hand
-                        if (CardUtil.haveSameNames(card.getName(), name)) {
+                        if (card.getName().equals(name)) {
                             cardToHand = card;
                             break;
                         }

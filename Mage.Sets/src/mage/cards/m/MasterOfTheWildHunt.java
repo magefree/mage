@@ -69,7 +69,7 @@ class MasterOfTheWildHuntEffect extends OneShotEffect {
 
     static {
         filter.add(new SubtypePredicate(SubType.WOLF));
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public MasterOfTheWildHuntEffect() {
@@ -97,10 +97,8 @@ class MasterOfTheWildHuntEffect extends OneShotEffect {
                 wolves.add(permanent.getId());
             }
             Player player = game.getPlayer(target.getControllerId());
-            if(player != null) {
-                player.assignDamage(target.getPower().getValue(), wolves, "Wolf", target.getId(), game);
-                return true;
-            }
+            player.assignDamage(target.getPower().getValue(), wolves, "Wolf", target.getId(), game);
+            return true;
         }
         return false;
     }

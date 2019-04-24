@@ -121,9 +121,9 @@ class CurseOfEchoesEffect extends OneShotEffect {
         if (spell != null) {
             String chooseMessage = "Copy target spell?  You may choose new targets for the copy.";
             for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-                if (!spell.isControlledBy(playerId)) {
+                if (!playerId.equals(spell.getControllerId())) {
                     Player player = game.getPlayer(playerId);
-                    if (player != null && player.chooseUse(Outcome.Copy, chooseMessage, source, game)) {
+                    if (player.chooseUse(Outcome.Copy, chooseMessage, source, game)) {
                         spell.createCopyOnStack(game, source, player.getId(), true);
                     }
                 }

@@ -23,7 +23,7 @@ public final class AncientHolocron extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("multicolored spells");
 
     static {
-        filter.add(MulticoloredPredicate.instance);
+        filter.add(new MulticoloredPredicate());
     }
 
     public AncientHolocron(UUID ownerId, CardSetInfo setInfo) {

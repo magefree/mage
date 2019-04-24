@@ -38,7 +38,7 @@ public final class RageForger extends CardImpl {
     static {
         filter.add(new SubtypePredicate(SubType.SHAMAN));
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
         filterAttack.add(new CounterPredicate(CounterType.P1P1));
     }
 

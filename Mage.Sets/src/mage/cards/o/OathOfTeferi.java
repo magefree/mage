@@ -33,10 +33,10 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class OathOfTeferi extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("another target permanent you control");
+    private final static FilterControlledPermanent filter = new FilterControlledPermanent("another target permanent you control");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public OathOfTeferi(UUID ownerId, CardSetInfo setInfo) {

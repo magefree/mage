@@ -1,5 +1,7 @@
+
 package mage.cards.r;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -24,8 +26,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.UUID;
-
 /**
  * @author fireshoes
  */
@@ -34,7 +34,7 @@ public final class RhonasTheIndomitable extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public RhonasTheIndomitable(UUID ownerId, CardSetInfo setInfo) {
@@ -92,12 +92,12 @@ class RhonasTheIndomitableRestrictionEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
+    public boolean canAttack(Game game) {
         return false;
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
         return false;
     }
 
@@ -105,7 +105,7 @@ class RhonasTheIndomitableRestrictionEffect extends RestrictionEffect {
     public boolean applies(Permanent permanent, Ability source, Game game) {
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
         if (permanent.getId().equals(source.getSourceId())) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {

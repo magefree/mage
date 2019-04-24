@@ -1,18 +1,24 @@
+
 package mage.abilities.effects.common.continuous;
 
+import java.util.Locale;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
-import mage.constants.*;
+import mage.constants.DependencyType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.PhaseStep;
+import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 
-import java.util.Locale;
-import java.util.UUID;
-
 /**
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class GainAbilityTargetEffect extends ContinuousEffectImpl {
@@ -82,7 +88,9 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
             return true;
         }
         if (durationPhaseStep != null && durationPhaseStep == game.getPhase().getStep().getType()) {
-            return !sameStep && game.isActivePlayer(durationPlayerId) || game.getPlayer(durationPlayerId).hasReachedNextTurnAfterLeaving();
+            if (!sameStep && game.isActivePlayer(durationPlayerId) || game.getPlayer(durationPlayerId).hasReachedNextTurnAfterLeaving()) {
+                return true;
+            }
         } else {
             sameStep = false;
         }
@@ -129,26 +137,21 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
-
-        if (mode.getTargets().size() > 0) {
-            Target target = mode.getTargets().get(0);
-            if (target.getMaxNumberOfTargets() == Integer.MAX_VALUE) {
-                sb.append("any number of target ").append(target.getTargetName()).append(" gain ");
-            } else if (target.getMaxNumberOfTargets() > 1) {
-                if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
-                    sb.append("up to ");
-                }
-                sb.append(target.getMaxNumberOfTargets()).append(" target ").append(target.getTargetName()).append(" gain ");
-            } else {
-                if (!target.getTargetName().toUpperCase(Locale.ENGLISH).startsWith("ANOTHER")) {
-                    sb.append("target ");
-                }
-                sb.append(target.getTargetName()).append(" gains ");
+        Target target = mode.getTargets().get(0);
+        if (target.getMaxNumberOfTargets() == Integer.MAX_VALUE) {
+            sb.append("any number of target ").append(target.getTargetName()).append(" gain ");
+        } else if (target.getMaxNumberOfTargets() > 1) {
+            if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
+                sb.append("up to ");
             }
+            sb.append(target.getMaxNumberOfTargets()).append(" target ").append(target.getTargetName()).append(" gain ");
         } else {
-            sb.append("gains ");
-        }
+            if (!target.getTargetName().toUpperCase(Locale.ENGLISH).startsWith("ANOTHER")) {
+                sb.append("target ");
+            }
+            sb.append(target.getTargetName()).append(" gains ");
 
+        }
         sb.append(ability.getRule());
         if (durationPhaseStep != null) {
             sb.append(" until your next ").append(durationPhaseStep.toString().toLowerCase(Locale.ENGLISH));

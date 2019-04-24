@@ -1,23 +1,30 @@
+
 package mage.cards.w;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
-import mage.abilities.hint.common.CreaturesYouControlHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.Duration;
+import mage.constants.TargetController;
+import mage.constants.Zone;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.permanent.token.HumanClericToken;
 
-import java.util.UUID;
-
 /**
+ *
  * @author fireshoes
  */
 public final class WestvaleCultLeader extends CardImpl {
+
+    final private static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control");
 
     public WestvaleCultLeader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
@@ -31,8 +38,7 @@ public final class WestvaleCultLeader extends CardImpl {
         this.nightCard = true;
 
         // Westvale Cult Leader's power and toughness are each equal to the number of creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(CreaturesYouControlCount.instance, Duration.WhileOnBattlefield))
-                .addHint(CreaturesYouControlHint.instance));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.WhileOnBattlefield)));
 
         // At the beginning of your end step, create a 1/1 white and black Human Cleric creature token.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new CreateTokenEffect(new HumanClericToken()), TargetController.YOU, false));

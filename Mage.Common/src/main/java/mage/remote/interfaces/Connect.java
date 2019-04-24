@@ -1,3 +1,4 @@
+
 package mage.remote.interfaces;
 
 import mage.remote.Connection;
@@ -36,12 +37,10 @@ public interface Connect {
     boolean muteUserChat(String userName, long durationMinute);
 
     boolean setActivation(String userName, boolean active);
-
+    
     boolean toggleActivation(String userName);
 
     boolean lockUser(String userName, long durationMinute);
 
     String getSessionId();
-
-    String getLastError();
 }

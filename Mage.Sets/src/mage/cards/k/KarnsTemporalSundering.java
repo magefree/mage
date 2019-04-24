@@ -70,12 +70,8 @@ class KarnsTemporalSunderingEffect extends OneShotEffect {
 
         if (returnPermanent != null) {
             Card returnCard = returnPermanent.getMainCard();
-            if(returnCard != null) {
-                Player cardOwner = game.getPlayer(returnCard.getOwnerId());
-                if (cardOwner != null) {
-                    cardOwner.moveCards(returnCard, Zone.HAND, source, game);
-                }
-            }
+            Player cardOwner = game.getPlayer(returnCard.getOwnerId());
+            cardOwner.moveCards(returnCard, Zone.HAND, source, game);
         }
 
         return true;

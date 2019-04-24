@@ -5,7 +5,6 @@ import mage.constants.MatchTimeLimit;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 import mage.constants.SkillLevel;
-import mage.game.mulligan.MulliganType;
 import mage.game.result.ResultProtos;
 import mage.players.PlayerType;
 
@@ -38,7 +37,6 @@ public class MatchOptions implements Serializable {
     protected boolean spectatorsAllowed;
     protected boolean planeChase;
     protected int quitRatio;
-    protected int minimumRating;
     protected int edhPowerLevel;
     protected boolean rated;
     protected int numSeatsForMatch;
@@ -48,7 +46,6 @@ public class MatchOptions implements Serializable {
      * Time each player has during the game to play using his\her priority.
      */
     protected MatchTimeLimit matchTimeLimit; // 0 = no priorityTime handling
-    protected MulliganType mulliganType;
 
     /*public MatchOptions(String name, String gameType) {
         this.name = name;
@@ -208,10 +205,6 @@ public class MatchOptions implements Serializable {
         this.quitRatio = quitRatio;
     }
 
-    public int getMinimumRating() { return minimumRating; }
-
-    public void setMinimumRating(int minimumRating) { this.minimumRating = minimumRating; }
-
     public int getEdhPowerLevel() {
         return edhPowerLevel;
     }
@@ -259,16 +252,4 @@ public class MatchOptions implements Serializable {
 
         return builder.build();
     }
-
-    public void setMullgianType(MulliganType mulliganType) {
-        this.mulliganType = mulliganType;
-    }
-
-    public MulliganType getMulliganType() {
-        if (mulliganType == null) {
-            return MulliganType.GAME_DEFAULT;
-        }
-        return mulliganType;
-    }
-
 }

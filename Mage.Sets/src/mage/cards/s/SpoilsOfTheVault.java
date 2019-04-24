@@ -1,20 +1,23 @@
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseACardNameEffect;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
-import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
+ *
  * @author Plopman
  */
 public final class SpoilsOfTheVault extends CardImpl {
@@ -68,7 +71,7 @@ class SpoilsOfTheVaultEffect extends OneShotEffect {
         for (Card card : controller.getLibrary().getCards(game)) {
             if (card != null) {
                 cardsToReveal.add(card);
-                if (CardUtil.haveSameNames(card.getName(), cardName)) {
+                if (card.getName().equals(cardName)) {
                     controller.moveCards(card, Zone.HAND, source, game);
                     break;
                 } else {

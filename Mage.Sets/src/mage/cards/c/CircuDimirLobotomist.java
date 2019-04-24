@@ -1,3 +1,4 @@
+
 package mage.cards.c;
 
 import mage.MageInt;
@@ -135,7 +136,7 @@ class CircuDimirLobotomistRuleModifyingEffect extends ContinuousRuleModifyingEff
                 ExileZone exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
                 if ((exileZone != null)) {
                     for (Card card : exileZone.getCards(game)) {
-                        if (CardUtil.haveSameNames(card, object)) {
+                        if ((card.getName().equals(object.getName()))) {
                             return true;
                         }
                     }

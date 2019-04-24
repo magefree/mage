@@ -25,7 +25,7 @@ public final class SupplyCaravan extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a tapped creature");
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(new TappedPredicate());
     }
 
     public SupplyCaravan(UUID ownerId, CardSetInfo setInfo) {

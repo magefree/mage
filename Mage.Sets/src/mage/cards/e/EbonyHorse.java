@@ -30,7 +30,7 @@ public final class EbonyHorse extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creature you control");
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(AttackingPredicate.instance);
+        filter.add(new AttackingPredicate());
     }
 
     public EbonyHorse(UUID ownerId, CardSetInfo setInfo) {

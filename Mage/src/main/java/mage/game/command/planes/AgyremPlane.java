@@ -1,5 +1,9 @@
+
 package mage.game.command.planes;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -29,11 +33,8 @@ import mage.target.Target;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.PlanarRollWatcher;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 /**
+ *
  * @author spjspj
  */
 public class AgyremPlane extends Plane {
@@ -150,11 +151,7 @@ class AgyremRestrictionEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game, boolean canUseChooseDialogs) {
-        if (defenderId == null) {
-            return true;
-        }
-
+    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
         Plane cPlane = game.getState().getCurrentPlane();
         if (cPlane != null && cPlane.getName().equalsIgnoreCase("Plane - Agyrem")) {
             return !defenderId.equals(source.getControllerId());

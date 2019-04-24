@@ -33,13 +33,13 @@ public final class MysticConfluence extends CardImpl {
         
         //  Return target creature to its owner's hand;
         Mode mode = new Mode();
-        mode.addEffect(new ReturnToHandTargetEffect());
-        mode.addTarget(new TargetCreaturePermanent());
+        mode.getEffects().add(new ReturnToHandTargetEffect());
+        mode.getTargets().add(new TargetCreaturePermanent());
         this.getSpellAbility().getModes().addMode(mode);
         
          // Draw a card.
         mode = new Mode();
-        mode.addEffect(new DrawCardSourceControllerEffect(1));
+        mode.getEffects().add(new DrawCardSourceControllerEffect(1));
         this.getSpellAbility().getModes().addMode(mode);
     }
 

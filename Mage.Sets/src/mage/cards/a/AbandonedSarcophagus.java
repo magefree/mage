@@ -1,12 +1,25 @@
 package mage.cards.a;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneAllEffect;
 import mage.abilities.keyword.CyclingAbility;
-import mage.cards.*;
-import mage.constants.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
+import mage.constants.WatcherScope;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -18,12 +31,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.watchers.Watcher;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
-
 /**
+ *
  * @author jeffwadsworth
  */
 public final class AbandonedSarcophagus extends CardImpl {
@@ -46,7 +55,7 @@ public final class AbandonedSarcophagus extends CardImpl {
 
     }
 
-    private AbandonedSarcophagus(final AbandonedSarcophagus card) {
+    public AbandonedSarcophagus(final AbandonedSarcophagus card) {
         super(card);
     }
 
@@ -58,12 +67,15 @@ public final class AbandonedSarcophagus extends CardImpl {
 
 class AbandonedSarcophagusReplacementEffect extends ReplacementEffectImpl {
 
-    AbandonedSarcophagusReplacementEffect() {
+    boolean cardHasCycling;
+    boolean cardWasCycledThisTurn;
+
+    public AbandonedSarcophagusReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);
         staticText = "If a card with cycling would be put into your graveyard from anywhere and it wasn't cycled, exile it instead";
     }
 
-    private AbandonedSarcophagusReplacementEffect(final AbandonedSarcophagusReplacementEffect effect) {
+    public AbandonedSarcophagusReplacementEffect(final AbandonedSarcophagusReplacementEffect effect) {
         super(effect);
     }
 
@@ -100,33 +112,33 @@ class AbandonedSarcophagusReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        boolean cardWasCycledThisTurn = false;
-        boolean cardHasCycling = false;
-        if (!(((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) || game.isSimulation()) {
-            return false;
-        }
-        Player controller = game.getPlayer(source.getControllerId());
-        AbandonedSarcophagusWatcher watcher = game.getState().getWatcher(AbandonedSarcophagusWatcher.class);
-        Card card = game.getCard(event.getTargetId());
-        if (card == null
-                || controller == null
-                || watcher == null
-                || !card.isOwnedBy(controller.getId())) {
-            return false;
-        }
-        for (Ability ability : card.getAbilities()) {
-            if (ability instanceof CyclingAbility) {
-                cardHasCycling = true;
+        cardWasCycledThisTurn = false;
+        cardHasCycling = false;
+        if (((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD
+                && !game.isSimulation()) {
+            Player controller = game.getPlayer(source.getControllerId());
+            AbandonedSarcophagusWatcher watcher = (AbandonedSarcophagusWatcher) game.getState().getWatchers().get(AbandonedSarcophagusWatcher.class.getSimpleName());
+            Card card = game.getCard(event.getTargetId());
+            if (card != null
+                    && watcher != null
+                    && card.isOwnedBy(controller.getId())) {
+                for (Ability ability : card.getAbilities()) {
+                    if (ability instanceof CyclingAbility) {
+                        cardHasCycling = true;
+                    }
+                }
+                Cards cards = watcher.getCardsCycledThisTurn(controller.getId());
+                for (Card c : cards.getCards(game)) {
+                    if (c == card) {
+                        cardWasCycledThisTurn = true;
+                        watcher.getCardsCycledThisTurn(controller.getId()).remove(card); //remove reference to the card as it is no longer needed
+                    }
+                }
+                return (!cardWasCycledThisTurn
+                        && cardHasCycling);
             }
         }
-        Cards cards = watcher.getCardsCycledThisTurn(controller.getId());
-        for (Card c : cards.getCards(game)) {
-            if (c == card) {
-                cardWasCycledThisTurn = true;
-                watcher.getCardsCycledThisTurn(controller.getId()).remove(card); //remove reference to the card as it is no longer needed
-            }
-        }
-        return !cardWasCycledThisTurn && cardHasCycling;
+        return false;
     }
 }
 
@@ -134,11 +146,11 @@ class AbandonedSarcophagusWatcher extends Watcher {
 
     private final Map<UUID, Cards> cycledCardsThisTurn = new HashMap<>();
 
-    AbandonedSarcophagusWatcher() {
-        super(WatcherScope.GAME);
+    public AbandonedSarcophagusWatcher() {
+        super(AbandonedSarcophagusWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
-    private AbandonedSarcophagusWatcher(final AbandonedSarcophagusWatcher watcher) {
+    public AbandonedSarcophagusWatcher(final AbandonedSarcophagusWatcher watcher) {
         super(watcher);
         for (Entry<UUID, Cards> entry : watcher.cycledCardsThisTurn.entrySet()) {
             cycledCardsThisTurn.put(entry.getKey(), entry.getValue().copy());

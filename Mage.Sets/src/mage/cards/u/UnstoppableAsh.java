@@ -25,7 +25,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public final class UnstoppableAsh extends CardImpl {
 
-    static final private FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature you control");
+    final static private FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature you control");
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));

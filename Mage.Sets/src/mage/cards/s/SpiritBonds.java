@@ -39,7 +39,7 @@ public final class SpiritBonds extends CardImpl {
     static {
         filter.add(Predicates.not(new SubtypePredicate(SubType.SPIRIT)));
         filterSpirit.add(new SubtypePredicate(SubType.SPIRIT));
-        filterNontoken.add(Predicates.not(TokenPredicate.instance));
+        filterNontoken.add(Predicates.not(new TokenPredicate()));
     }
 
     public SpiritBonds(UUID ownerId, CardSetInfo setInfo) {

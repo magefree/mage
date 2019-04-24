@@ -4,6 +4,7 @@ package mage.cards.b;
 
 import java.util.UUID;
 
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -20,6 +21,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.Token;
 import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 
@@ -56,7 +59,7 @@ public final class BlinkmothNexus extends CardImpl {
 
     }
 
-    private BlinkmothNexus(final BlinkmothNexus card) {
+    public BlinkmothNexus(final BlinkmothNexus card) {
         super(card);
     }
 

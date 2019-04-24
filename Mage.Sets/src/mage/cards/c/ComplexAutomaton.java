@@ -1,30 +1,26 @@
 
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
 import mage.constants.SubType;
+import mage.constants.ComparisonType;
 import mage.constants.TargetController;
-import mage.filter.StaticFilters;
-
-import java.util.UUID;
+import mage.filter.common.FilterControlledPermanent;
 
 /**
+ *
  * @author TheElk801
  */
 public final class ComplexAutomaton extends CardImpl {
-
-    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
-            StaticFilters.FILTER_CONTROLLED_PERMANENT, ComparisonType.MORE_THAN, 6
-    );
 
     public ComplexAutomaton(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
@@ -34,16 +30,12 @@ public final class ComplexAutomaton extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of your upkeep, if you control seven or more permanents, return Complex Automaton to its owner's hand.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(
-                        new ReturnToHandSourceEffect(true),
-                        TargetController.YOU, false
-                ), condition, "At the beginning of your upkeep, " +
-                "if you control seven or more permanents, return {this} to its owner's hand."
-        ));
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new ReturnToHandSourceEffect(true), TargetController.YOU, false);
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new PermanentsOnTheBattlefieldCondition(new FilterControlledPermanent(), ComparisonType.MORE_THAN, 6),
+                "At the beginning of your upkeep, if you control seven or more permanents, return Complex Automaton to its owner's hand."));
     }
 
-    private ComplexAutomaton(final ComplexAutomaton card) {
+    public ComplexAutomaton(final ComplexAutomaton card) {
         super(card);
     }
 

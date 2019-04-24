@@ -1,5 +1,6 @@
 package mage.cards.l;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -19,9 +20,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 
-import java.util.UUID;
-
 /**
+ *
  * @author Plopman
  */
 public final class LegionLoyalist extends CardImpl {
@@ -75,12 +75,18 @@ class CantBeBlockedByTokenEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return affectedObjectList.contains(new MageObjectReference(permanent, game));
+        if (affectedObjectList.contains(new MageObjectReference(permanent, game))) {
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return !(blocker instanceof PermanentToken);
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        if (blocker instanceof PermanentToken) {
+            return false;
+        }
+        return true;
     }
 
     @Override

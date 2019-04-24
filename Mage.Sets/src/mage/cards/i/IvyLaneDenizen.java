@@ -27,7 +27,7 @@ public final class IvyLaneDenizen extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another green creature");
     static {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public IvyLaneDenizen(UUID ownerId, CardSetInfo setInfo) {

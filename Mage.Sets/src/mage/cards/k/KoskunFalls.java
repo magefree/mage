@@ -29,7 +29,7 @@ public final class KoskunFalls extends CardImpl {
     private static final FilterControlledCreaturePermanent filterCreature = new FilterControlledCreaturePermanent("untapped creature you control");
     
     static {
-        filterCreature.add(Predicates.not(TappedPredicate.instance));
+        filterCreature.add(Predicates.not(new TappedPredicate()));
     }
 
     public KoskunFalls(UUID ownerId, CardSetInfo setInfo) {

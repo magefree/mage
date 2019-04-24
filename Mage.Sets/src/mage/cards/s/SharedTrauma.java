@@ -99,7 +99,7 @@ class SharedTraumaEffect extends OneShotEffect {
                 payed = true;
             }
         }
-        game.informPlayers(player.getLogName() + " pays {" + xValue + "}.");
+        game.informPlayers(new StringBuilder(player.getLogName()).append(" pays {").append(xValue).append("}.").toString());
         return xValue;
     }
 }

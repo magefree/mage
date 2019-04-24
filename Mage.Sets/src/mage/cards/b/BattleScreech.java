@@ -27,7 +27,7 @@ public final class BattleScreech extends CardImpl {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public BattleScreech(UUID ownerId, CardSetInfo setInfo) {

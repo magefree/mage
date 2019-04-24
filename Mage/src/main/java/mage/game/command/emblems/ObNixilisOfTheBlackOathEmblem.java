@@ -24,7 +24,7 @@ public final class ObNixilisOfTheBlackOathEmblem extends Emblem {
     // You get an emblem with "{1}{B}, Sacrifice a creature: You gain X life and draw X cards, where X is the sacrificed creature's power."
     public ObNixilisOfTheBlackOathEmblem() {
         this.setName("Emblem Nixilis");
-        DynamicValue xValue = SacrificeCostCreaturesPower.instance;
+        DynamicValue xValue = new SacrificeCostCreaturesPower();
         Effect effect = new GainLifeEffect(xValue);
         effect.setText("You gain X life");
         Ability ability = new SimpleActivatedAbility(Zone.COMMAND, effect, new ManaCostsImpl("{1}{B}"));

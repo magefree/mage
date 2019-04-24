@@ -21,7 +21,7 @@ public final class CinderGiant extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("each other creature you control");
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public CinderGiant(UUID ownerId, CardSetInfo setInfo) {

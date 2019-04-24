@@ -23,7 +23,7 @@ public final class InfernalReckoning extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("colorless creature");
 
     static {
-        filter.add(ColorlessPredicate.instance);
+        filter.add(new ColorlessPredicate());
     }
 
     public InfernalReckoning(UUID ownerId, CardSetInfo setInfo) {

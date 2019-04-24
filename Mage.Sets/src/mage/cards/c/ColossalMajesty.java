@@ -1,18 +1,17 @@
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.FerociousCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.hint.common.FerociousHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 
-import java.util.UUID;
-
 /**
+ *
  * @author TheElk801
  */
 public final class ColossalMajesty extends CardImpl {
@@ -28,9 +27,9 @@ public final class ColossalMajesty extends CardImpl {
                 ),
                 FerociousCondition.instance,
                 "At the beginning of your upkeep, "
-                        + "if you control a creature with power 4 or greater, "
-                        + "draw a card."
-        ).addHint(FerociousHint.instance));
+                + "if you control a creature with power 4 or greater, "
+                + "draw a card."
+        ));
     }
 
     public ColossalMajesty(final ColossalMajesty card) {

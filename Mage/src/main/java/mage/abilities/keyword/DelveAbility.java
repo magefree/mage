@@ -1,5 +1,7 @@
+
 package mage.abilities.keyword;
 
+import java.util.List;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
@@ -22,8 +24,6 @@ import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.util.CardUtil;
 
-import java.util.List;
-
 /**
  * 702.65. Delve 702.65a Delve is a static ability that functions while the
  * spell with delve is on the stack. “Delve” means “For each generic mana in
@@ -31,7 +31,7 @@ import java.util.List;
  * pay that mana.” The delve ability isn't an additional or alternative cost and
  * applies only after the total cost of the spell with delve is determined.
  * 702.65b Multiple instances of delve on the same spell are redundant.
- * <p>
+ *
  * The rules for delve have changed slightly since it was last in an expansion.
  * Previously, delve reduced the cost to cast a spell. Under the current rules,
  * you exile cards from your graveyard at the same time you pay the spell's
@@ -45,7 +45,7 @@ import java.util.List;
  * it can be used in conjunction with alternative costs.
  *
  * @author LevelX2
- * <p>
+ *
  * TODO: Change card exiling to a way to pay mana costs, now it's maybe not
  * possible to pay costs from effects that increase the mana costs.
  */
@@ -83,8 +83,7 @@ public class DelveAbility extends SimpleStaticAbility implements AlternateManaPa
                     unpaidAmount = 1;
                 }
                 specialAction.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(
-                        0, Math.min(controller.getGraveyard().size(), unpaidAmount),
-                        new FilterCard("cards to exile for delve's pay from your graveyard"), true)));
+                        0, Math.min(controller.getGraveyard().size(), unpaidAmount), new FilterCard(), true)));
                 if (specialAction.canActivate(source.getControllerId(), game).canActivate()) {
                     game.getState().getSpecialActions().add(specialAction);
                 }

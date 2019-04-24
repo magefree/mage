@@ -7,7 +7,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 
 public class OfferingTest extends CardTestPlayerBase {
 
-    private static final String nezumiPatron = "Patron of the Nezumi";
+    private final static String nezumiPatron = "Patron of the Nezumi";
 
 
     @Test

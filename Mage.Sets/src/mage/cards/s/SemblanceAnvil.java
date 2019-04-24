@@ -1,5 +1,8 @@
+
 package mage.cards.s;
 
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -17,9 +20,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.util.CardUtil;
-
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author nantuko
@@ -62,7 +62,7 @@ class SemblanceAnvilEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null && !player.getHand().isEmpty()) {
+        if (!player.getHand().isEmpty()) {
             TargetCard target = new TargetCard(Zone.HAND, filter);
             player.choose(Outcome.Benefit, player.getHand(), target, game);
             Card card = player.getHand().get(target.getFirstTarget(), game);
@@ -113,9 +113,11 @@ class SemblanceAnvilCostReductionEffect extends CostModificationEffectImpl {
                 Permanent permanent = game.getPermanent(source.getSourceId());
                 if (permanent != null) {
                     List<UUID> imprinted = permanent.getImprinted();
-                    if (imprinted != null && !imprinted.isEmpty()) {
+                    if (!imprinted.isEmpty()) {
                         Card imprintedCard = game.getCard(imprinted.get(0));
-                        return imprintedCard != null && imprintedCard.shareTypes(sourceCard);
+                        if (imprintedCard != null && imprintedCard.shareTypes(sourceCard)) {
+                            return true;
+                        }
                     }
                 }
             }

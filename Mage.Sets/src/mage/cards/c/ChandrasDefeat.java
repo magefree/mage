@@ -26,7 +26,7 @@ import mage.target.TargetPermanent;
  */
 public final class ChandrasDefeat extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("creature or planeswalker");
+    private final static FilterPermanent filter = new FilterPermanent("creature or planeswalker");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));

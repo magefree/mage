@@ -60,7 +60,7 @@ class ExperimentKrajEffect extends ContinuousEffectImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     static {
         filter.add(new CounterPredicate(CounterType.P1P1));
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public ExperimentKrajEffect() {

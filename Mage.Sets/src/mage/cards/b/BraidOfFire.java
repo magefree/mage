@@ -49,12 +49,9 @@ class BraidOfFireCost extends CostImpl {
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         Player player = game.getPlayer(controllerId);
-        if(player != null) {
-            player.getManaPool().addMana(Mana.RedMana(1), game, ability);
-            paid = true;
-            return true;
-        }
-        return false;
+        player.getManaPool().addMana(Mana.RedMana(1), game, ability);
+        paid = true;
+        return true;
     }
 
     @Override

@@ -50,9 +50,6 @@ class MnemonicNexusEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player sourcePlayer = game.getPlayer(source.getControllerId());
-        if(sourcePlayer == null){
-            return false;
-        }
         for (UUID playerId: game.getState().getPlayersInRange(sourcePlayer.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {

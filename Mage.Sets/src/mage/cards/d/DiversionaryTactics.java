@@ -24,7 +24,7 @@ public final class DiversionaryTactics extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creatures you control");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public DiversionaryTactics(UUID ownerId, CardSetInfo setInfo) {

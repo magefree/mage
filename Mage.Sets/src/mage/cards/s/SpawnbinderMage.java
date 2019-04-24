@@ -31,7 +31,7 @@ public final class SpawnbinderMage extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.ALLY));
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public SpawnbinderMage(UUID ownerId, CardSetInfo setInfo) {

@@ -27,7 +27,7 @@ public final class NettleDrone extends CardImpl {
     private static final FilterSpell filterSpell = new FilterSpell("a colorless spell");
 
     static {
-        filterSpell.add(ColorlessPredicate.instance);
+        filterSpell.add(new ColorlessPredicate());
     }
 
     public NettleDrone(UUID ownerId, CardSetInfo setInfo) {

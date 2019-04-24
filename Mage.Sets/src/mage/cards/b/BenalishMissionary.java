@@ -27,7 +27,7 @@ public final class BenalishMissionary extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("blocked creature");
 
     static {
-        filter.add(BlockedPredicate.instance);
+        filter.add(new BlockedPredicate());
     }
 
     public BenalishMissionary(UUID ownerId, CardSetInfo setInfo) {

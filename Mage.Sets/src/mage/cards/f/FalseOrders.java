@@ -104,7 +104,7 @@ class FalseOrdersUnblockEffect extends OneShotEffect {
         effect.apply(game, source);
 
         // Make blocked creatures unblocked
-        BlockedByOnlyOneCreatureThisCombatWatcher watcher = game.getState().getWatcher(BlockedByOnlyOneCreatureThisCombatWatcher.class);
+        BlockedByOnlyOneCreatureThisCombatWatcher watcher = (BlockedByOnlyOneCreatureThisCombatWatcher) game.getState().getWatchers().get(BlockedByOnlyOneCreatureThisCombatWatcher.class.getSimpleName());
         if (watcher != null) {
             Set<CombatGroup> combatGroups = watcher.getBlockedOnlyByCreature(permanent.getId());
             if (combatGroups != null) {

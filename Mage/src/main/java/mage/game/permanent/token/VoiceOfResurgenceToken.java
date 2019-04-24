@@ -1,15 +1,18 @@
+
 package mage.game.permanent.token;
 
+import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
-import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
+ *
  * @author spjspj
  */
 public final class VoiceOfResurgenceToken extends TokenImpl {
@@ -25,9 +28,8 @@ public final class VoiceOfResurgenceToken extends TokenImpl {
         power = new MageInt(0);
         toughness = new MageInt(0);
 
-        // This creature's power and toughness are each equal to the number of creatures you control.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(
-                CreaturesYouControlCount.instance, Duration.EndOfGame)));
+                new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent()), Duration.EndOfGame)));
     }
 
     public VoiceOfResurgenceToken(final VoiceOfResurgenceToken token) {

@@ -1,3 +1,4 @@
+
 package mage.cards.g;
 
 import java.util.UUID;
@@ -5,7 +6,6 @@ import mage.MageInt;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DoUnlessControllerPaysEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -27,32 +27,22 @@ public final class GoblinFlotilla extends CardImpl {
     public GoblinFlotilla(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add(SubType.GOBLIN);
-
+        
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // Islandwalk
         this.addAbility(new IslandwalkAbility());
-
         // At the beginning of each combat, unless you pay {R}, whenever Goblin Flotilla blocks or becomes blocked by a creature this combat, that creature gains first strike until end of turn.
-        Effect effect = new DoUnlessControllerPaysEffect(
-                new GainAbilitySourceEffect(
-                        new BlocksOrBecomesBlockedTriggeredAbility(
-                                new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(),
-                                        Duration.EndOfTurn,
-                                        "Blocks or Blocked by Goblin Flotilla"),
-                                false),
-                        Duration.EndOfCombat),
-                new ManaCostsImpl("{R}"),
-                "Pay Goblin Flotilla combat effect?"
-        );
-        effect.setText("unless you pay {R}, whenever {this} blocks or becomes blocked by a creature this combat, that creature gains first strike until end of turn.");
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                effect,
+                new DoUnlessControllerPaysEffect(
+                        new GainAbilitySourceEffect(new BlocksOrBecomesBlockedTriggeredAbility(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, "Blocks or Blocked by Goblin Flotilla"), false), Duration.EndOfCombat),
+                        new ManaCostsImpl("{R}"),
+                        "Pay Goblin Flotilla combat effect?"
+                ),
                 TargetController.ANY,
                 false
         ));
-
     }
 
     public GoblinFlotilla(final GoblinFlotilla card) {

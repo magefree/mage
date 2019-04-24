@@ -87,7 +87,7 @@ class OdricMasterTacticianTriggeredAbility extends TriggeredAbilityImpl {
     
         @Override
         public boolean apply(Game game, Ability source) {
-            ChooseBlockersRedundancyWatcher watcher = game.getState().getWatcher(ChooseBlockersRedundancyWatcher.class);
+            ChooseBlockersRedundancyWatcher watcher = (ChooseBlockersRedundancyWatcher) game.getState().getWatchers().get(ChooseBlockersRedundancyWatcher.class.getSimpleName());
             if (watcher != null) {
                 watcher.increment();
                 return true;
@@ -130,10 +130,7 @@ class OdricMasterTacticianChooseBlockersEffect extends ContinuousRuleModifyingEf
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        ChooseBlockersRedundancyWatcher watcher = game.getState().getWatcher(ChooseBlockersRedundancyWatcher.class);
-        if(watcher == null){
-            return false;
-        }
+        ChooseBlockersRedundancyWatcher watcher = (ChooseBlockersRedundancyWatcher) game.getState().getWatchers().get(ChooseBlockersRedundancyWatcher.class.getSimpleName());
         watcher.decrement();
         watcher.copyCount--;
         if (watcher.copyCountApply > 0) {

@@ -35,7 +35,7 @@ public final class ThatWhichWasTaken extends CardImpl {
     private static final FilterPermanent filterIndestructible = new FilterPermanent("Each permanent with a divinity counter on it");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
         filterIndestructible.add(new CounterPredicate(CounterType.DIVINITY));
     }
 

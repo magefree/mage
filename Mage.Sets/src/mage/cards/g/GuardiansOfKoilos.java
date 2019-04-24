@@ -26,8 +26,8 @@ public final class GuardiansOfKoilos extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another historic permanent you control");
 
     static {
-        filter.add(AnotherPredicate.instance);
-        filter.add(HistoricPredicate.instance);
+        filter.add(new AnotherPredicate());
+        filter.add(new HistoricPredicate());
     }
 
     public GuardiansOfKoilos(UUID ownerId, CardSetInfo setInfo) {

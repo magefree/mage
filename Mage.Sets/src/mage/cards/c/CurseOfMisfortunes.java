@@ -87,7 +87,7 @@ class CurseOfMisfortunesEffect extends OneShotEffect {
                     }
                 }
                 TargetCardInLibrary targetCard = new TargetCardInLibrary(filter);
-                if (player.searchLibrary(targetCard, source, game)) {
+                if (player.searchLibrary(targetCard, game)) {
                     Card card = game.getCard(targetCard.getFirstTarget());
                     if (card != null) {
                         this.setTargetPointer(new FixedTarget(targetPlayer.getId()));

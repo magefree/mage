@@ -40,15 +40,15 @@ public final class OpenTheArmory extends CardImpl {
 
 class OpenTheArmoryTarget extends TargetCardInLibrary {
 
-    private static final FilterCard auraOrEquipmentTarget = new FilterCard("Aura or Equipment card");
+    private static final FilterCard filter = new FilterCard("Aura or Equipment card");
     static {
-        auraOrEquipmentTarget.add(Predicates.or(
+        filter.add(Predicates.or(
                 new SubtypePredicate(SubType.EQUIPMENT),
                 new SubtypePredicate(SubType.AURA)));
     }
 
     public OpenTheArmoryTarget() {
-        super(1, 1, auraOrEquipmentTarget.copy());
+        super(1, 1, filter.copy());
     }
 
     public OpenTheArmoryTarget(final OpenTheArmoryTarget target) {
@@ -64,7 +64,7 @@ class OpenTheArmoryTarget extends TargetCardInLibrary {
     public boolean canTarget(UUID id, Cards cards, Game game) {
         Card card = cards.get(id, game);
         if (card != null) {
-            return auraOrEquipmentTarget.match(card, game);
+            return filter.match(card, game);
         }
         return false;
     }

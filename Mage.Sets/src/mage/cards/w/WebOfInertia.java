@@ -1,5 +1,7 @@
+
 package mage.cards.w;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -10,15 +12,18 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
-import java.util.UUID;
-
 /**
+ *
  * @author Styxo
  */
 public final class WebOfInertia extends CardImpl {
@@ -104,10 +109,7 @@ class WebOfInertiaRestrictionEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game, boolean canUseChooseDialogs) {
-        if (defenderId == null) {
-            return true;
-        }
+    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
         return !defenderId.equals(source.getControllerId());
     }
 

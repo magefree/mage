@@ -30,8 +30,8 @@ public final class Hydroblast extends CardImpl {
         
         // or destroy target permanent if it's red.
         Mode mode = new Mode();
-        mode.addEffect(new HydroblastDestroyEffect());
-        mode.addTarget(new TargetPermanent());
+        mode.getEffects().add(new HydroblastDestroyEffect());
+        mode.getTargets().add(new TargetPermanent());
         this.getSpellAbility().addMode(mode);
     }
 

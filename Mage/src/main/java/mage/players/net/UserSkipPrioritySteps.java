@@ -1,8 +1,10 @@
+
 package mage.players.net;
 
 import java.io.Serializable;
 
 /**
+ *
  * @author LevelX2
  */
 public class UserSkipPrioritySteps implements Serializable {
@@ -10,12 +12,10 @@ public class UserSkipPrioritySteps implements Serializable {
     final SkipPrioritySteps yourTurn;
     final SkipPrioritySteps opponentTurn;
 
-    boolean stopOnDeclareAttackers = true;
-    boolean stopOnDeclareBlockersWithZeroPermanents = false;
-    boolean stopOnDeclareBlockersWithAnyPermanents = true;
+    boolean stopOnDeclareAttackersDuringSkipAction = true;
+    boolean stopOnDeclareBlockerIfNoneAvailable = true;
     boolean stopOnAllMainPhases = true;
     boolean stopOnAllEndPhases = true;
-    boolean stopOnStackNewObjects = true;
 
     public UserSkipPrioritySteps() {
         yourTurn = new SkipPrioritySteps();
@@ -30,28 +30,20 @@ public class UserSkipPrioritySteps implements Serializable {
         return opponentTurn;
     }
 
-    public boolean isStopOnDeclareBlockersWithZeroPermanents() {
-        return stopOnDeclareBlockersWithZeroPermanents;
+    public boolean isStopOnDeclareBlockerIfNoneAvailable() {
+        return stopOnDeclareBlockerIfNoneAvailable;
     }
 
-    public void setStopOnDeclareBlockersWithZeroPermanents(boolean stopOnDeclareBlockersWithZeroPermanents) {
-        this.stopOnDeclareBlockersWithZeroPermanents = stopOnDeclareBlockersWithZeroPermanents;
+    public void setStopOnDeclareBlockerIfNoneAvailable(boolean stopOnDeclareBlockerIfNoneAvailable) {
+        this.stopOnDeclareBlockerIfNoneAvailable = stopOnDeclareBlockerIfNoneAvailable;
     }
 
-    public boolean isStopOnDeclareAttackers() {
-        return stopOnDeclareAttackers;
+    public boolean isStopOnDeclareAttackersDuringSkipAction() {
+        return stopOnDeclareAttackersDuringSkipAction;
     }
 
     public void setStopOnDeclareAttackersDuringSkipActions(boolean stopOnDeclareAttackersDuringSkipActions) {
-        this.stopOnDeclareAttackers = stopOnDeclareAttackersDuringSkipActions;
-    }
-
-    public boolean isStopOnDeclareBlockersWithAnyPermanents() {
-        return stopOnDeclareBlockersWithAnyPermanents;
-    }
-
-    public void setStopOnDeclareBlockersWithAnyPermanents(boolean stopOnDeclareBlockersWithAnyPermanents) {
-        this.stopOnDeclareBlockersWithAnyPermanents = stopOnDeclareBlockersWithAnyPermanents;
+        this.stopOnDeclareAttackersDuringSkipAction = stopOnDeclareAttackersDuringSkipActions;
     }
 
     public boolean isStopOnAllMainPhases() {
@@ -70,11 +62,4 @@ public class UserSkipPrioritySteps implements Serializable {
         this.stopOnAllEndPhases = stopOnAllEndPhases;
     }
 
-    public boolean isStopOnStackNewObjects() {
-        return stopOnStackNewObjects;
-    }
-
-    public void setStopOnStackNewObjects(boolean stopOnStackNewObjects) {
-        this.stopOnStackNewObjects = stopOnStackNewObjects;
-    }
 }

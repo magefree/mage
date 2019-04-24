@@ -1,3 +1,4 @@
+
 package mage.cards.n;
 
 import mage.Mana;
@@ -22,12 +23,13 @@ import java.util.List;
 import java.util.UUID;
 
 /**
+ *
  * @author LevelX2
  */
 public final class NyleasPresence extends CardImpl {
 
     public NyleasPresence(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
         this.subtype.add(SubType.AURA);
 
 
@@ -60,7 +62,7 @@ class NyleasPresenceLandTypeEffect extends ContinuousEffectImpl {
 
     public NyleasPresenceLandTypeEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        landTypes.addAll(SubType.getBasicLands());
+        landTypes.addAll(SubType.getBasicLands(false));
         this.staticText = "Enchanted land is every basic land type in addition to its other types";
     }
 
@@ -88,11 +90,11 @@ class NyleasPresenceLandTypeEffect extends ContinuousEffectImpl {
                 switch (layer) {
                     case AbilityAddingRemovingEffects_6:
                         Mana mana = new Mana();
-                        for (Ability ability : land.getAbilities()) {
+                        for (Ability ability : land.getAbilities()){
                             if (ability instanceof BasicManaAbility) {
-                                for (Mana netMana : ((BasicManaAbility) ability).getNetMana(game)) {
+                                for (Mana netMana: ((BasicManaAbility)ability ).getNetMana(game)) {
                                     mana.add(netMana);
-                                }
+                                }                                   
                             }
                         }
                         if (mana.getGreen() == 0 && landTypes.contains(SubType.FOREST)) {

@@ -1,5 +1,8 @@
+
 package mage.cards.o;
 
+import java.util.List;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -15,7 +18,12 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.TurnPhase;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -27,10 +35,8 @@ import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
-import java.util.List;
-import java.util.UUID;
-
 /**
+ *
  * @author emerald000
  */
 public final class OracleEnVec extends CardImpl {
@@ -116,8 +122,7 @@ class OracleEnVecMustAttackRequirementEffect extends RequirementEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return this.getTargetPointer().getFirst(game, source) != null
-                && this.getTargetPointer().getFirst(game, source).equals(permanent.getId());
+        return this.getTargetPointer().getFirst(game, source).equals(permanent.getId());
     }
 
     @Override
@@ -132,7 +137,7 @@ class OracleEnVecMustAttackRequirementEffect extends RequirementEffect {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        return getStartingTurnNum() != game.getTurnNum()
+        return startingTurn != game.getTurnNum()
                 && (game.getPhase().getType() == TurnPhase.END
                 && game.isActivePlayer(this.getTargetPointer().getFirst(game, source)));
     }
@@ -160,18 +165,17 @@ class OracleEnVecCantAttackRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return this.getTargetPointer().getFirst(game, source) != null
-                && this.getTargetPointer().getFirst(game, source).equals(permanent.getId());
+        return this.getTargetPointer().getFirst(game, source).equals(permanent.getId());
     }
 
     @Override
-    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
+    public boolean canAttack(Game game) {
         return false;
     }
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        return getStartingTurnNum() != game.getTurnNum()
+        return startingTurn != game.getTurnNum()
                 && (game.getPhase().getType() == TurnPhase.END
                 && game.isActivePlayer(this.getTargetPointer().getFirst(game, source)));
     }
@@ -239,7 +243,7 @@ class OracleEnVecDestroyEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        AttackedThisTurnWatcher watcher = game.getState().getWatcher(AttackedThisTurnWatcher.class);
+        AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getSimpleName());
         if (watcher != null) {
             for (UUID targetId : chosenCreatures) {
                 Permanent permanent = game.getPermanent(targetId);

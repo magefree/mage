@@ -25,7 +25,7 @@ public final class ApocalypseDemon extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public ApocalypseDemon(UUID ownerId, CardSetInfo cardSetInfo) {

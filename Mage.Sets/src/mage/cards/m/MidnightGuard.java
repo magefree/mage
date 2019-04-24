@@ -21,7 +21,7 @@ public final class MidnightGuard extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("another creature");
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public MidnightGuard(UUID ownerId, CardSetInfo setInfo) {

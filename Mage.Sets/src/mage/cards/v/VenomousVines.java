@@ -19,7 +19,7 @@ public final class VenomousVines extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("enchanted permanent");
 
     static {
-        filter.add(EnchantedPredicate.instance);
+        filter.add(new EnchantedPredicate());
     }
 
     public VenomousVines(UUID ownerId, CardSetInfo setInfo) {

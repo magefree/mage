@@ -28,7 +28,7 @@ public final class GatewayShade extends CardImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("untapped Gate you control");
     static {
         filter.add(new SubtypePredicate(SubType.GATE));
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public GatewayShade(UUID ownerId, CardSetInfo setInfo) {

@@ -30,7 +30,7 @@ public final class TyrantsFamiliar extends CardImpl {
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(DefendingPlayerControlsPredicate.instance);
+        filter.add(new DefendingPlayerControlsPredicate());
     }
 
     public TyrantsFamiliar(UUID ownerId, CardSetInfo setInfo) {

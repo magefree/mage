@@ -70,7 +70,7 @@ class HallOfGemstoneEffect extends ReplacementEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        Permanent mageObject = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        MageObject mageObject = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (player != null && mageObject != null) {
             ChoiceColor choice = new ChoiceColor();
             if (!player.choose(outcome, choice, game)) {
@@ -81,7 +81,9 @@ class HallOfGemstoneEffect extends ReplacementEffectImpl {
                 game.informPlayers(mageObject.getLogName() + ": " + player.getLogName() + " has chosen " + choice.getChoice());
             }
             game.getState().setValue(mageObject.getId() + "_color", choice.getColor());
-            mageObject.addInfo("chosen color", CardUtil.addToolTipMarkTags("Chosen color: " + choice.getChoice()), game);
+            if (mageObject instanceof Permanent) {
+                ((Permanent) mageObject).addInfo("chosen color", CardUtil.addToolTipMarkTags("Chosen color: " + choice.getChoice()), game);
+            }
         }
     }
 

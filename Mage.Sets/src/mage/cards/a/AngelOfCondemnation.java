@@ -39,7 +39,7 @@ public final class AngelOfCondemnation extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public AngelOfCondemnation(UUID ownerId, CardSetInfo setInfo) {

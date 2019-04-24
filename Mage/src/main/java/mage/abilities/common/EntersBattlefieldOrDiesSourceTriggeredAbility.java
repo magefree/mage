@@ -43,7 +43,7 @@ public class EntersBattlefieldOrDiesSourceTriggeredAbility extends TriggeredAbil
         }
         if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId())) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-            if (zEvent.isDiesEvent()) {
+            if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
                 return true;
             }
         }

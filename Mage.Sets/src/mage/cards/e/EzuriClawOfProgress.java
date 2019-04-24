@@ -31,7 +31,7 @@ public final class EzuriClawOfProgress extends CardImpl {
 
     static {
         filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
-        filter2.add(AnotherPredicate.instance);
+        filter2.add(new AnotherPredicate());
     }
 
     String rule = "Whenever a creature with power 2 or less enters the battlefield under your control, you get an experience counter.";

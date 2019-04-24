@@ -25,7 +25,7 @@ public final class WormfangNewt extends CardImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent();
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public WormfangNewt(UUID ownerId, CardSetInfo setInfo) {

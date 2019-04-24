@@ -13,7 +13,7 @@ public enum PlayLandCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        PlayLandWatcher watcher = game.getState().getWatcher(PlayLandWatcher.class);
+        PlayLandWatcher watcher = (PlayLandWatcher) game.getState().getWatchers().get(PlayLandWatcher.class.getSimpleName());
         return watcher != null
                 && watcher.landPlayed(source.getControllerId());
     }

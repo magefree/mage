@@ -11,6 +11,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.TargetPermanent;
+import mage.target.common.TargetCreatureOrPlaneswalker;
 
 /**
  *
@@ -35,7 +36,7 @@ public final class SaiTok extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    private SaiTok(final SaiTok card) {
+    public SaiTok(final SaiTok card) {
         super(card);
     }
 

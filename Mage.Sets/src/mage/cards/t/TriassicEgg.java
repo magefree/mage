@@ -47,9 +47,9 @@ public final class TriassicEgg extends CardImpl {
 
         // or return target creature card from your graveyard to the battlefield. Activate this ability only if two or more hatchling counters are on Triassic Egg.
         Mode mode = new Mode();
-        mode.addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
+        mode.getEffects().add(new ReturnFromGraveyardToBattlefieldTargetEffect());
         Target target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
-        mode.addTarget(target);
+        mode.getTargets().add(target);
         ability.addMode(mode);
 
         this.addAbility(ability);

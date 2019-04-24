@@ -43,8 +43,8 @@ public final class DeceiverExarch extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new UntapTargetEffect());
         ability.addTarget(new TargetControlledPermanent());
         Mode mode = new Mode();
-        mode.addEffect(new TapTargetEffect());
-        mode.addTarget(new TargetPermanent(filter));
+        mode.getEffects().add(new TapTargetEffect());
+        mode.getTargets().add(new TargetPermanent(filter));
         ability.addMode(mode);
         this.addAbility(ability);
     }

@@ -25,7 +25,7 @@ public final class MarwynTheNurturer extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another Elf");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
         filter.add(new SubtypePredicate(SubType.ELF));
     }
 

@@ -1,14 +1,14 @@
 package mage.game.events;
 
-import mage.MageObjectReference;
-import mage.constants.Zone;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.MageObjectReference;
+import mage.constants.Zone;
 
 /**
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class GameEvent implements Serializable {
@@ -221,7 +221,6 @@ public class GameEvent implements Serializable {
         PLANESWALK, PLANESWALKED,
         PAID_CUMULATIVE_UPKEEP,
         DIDNT_PAY_CUMULATIVE_UPKEEP,
-        LIFE_PAID,
         //permanent events
         ENTERS_THE_BATTLEFIELD_SELF, /* 616.1a If any of the replacement and/or prevention effects are self-replacement effects (see rule 614.15),
                                         one of them must be chosen. If not, proceed to rule 616.1b. */
@@ -233,7 +232,6 @@ public class GameEvent implements Serializable {
         FLIP, FLIPPED,
         UNFLIP, UNFLIPPED,
         TRANSFORM, TRANSFORMED,
-        ADAPT,
         BECOMES_MONSTROUS,
         BECOMES_EXERTED,
         /* BECOMES_EXERTED
@@ -292,7 +290,7 @@ public class GameEvent implements Serializable {
         UNATTACH, UNATTACHED,
         ADD_COUNTER, COUNTER_ADDED,
         ADD_COUNTERS, COUNTERS_ADDED,
-        COUNTER_REMOVED, COUNTERS_REMOVED,
+        COUNTER_REMOVED,
         LOSE_CONTROL,
         /* LOST_CONTROL
          targetId    id of the creature that lost control
@@ -385,12 +383,12 @@ public class GameEvent implements Serializable {
     }
 
     private GameEvent(EventType type, UUID customEventType,
-                      UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag) {
+            UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag) {
         this(type, customEventType, targetId, sourceId, playerId, amount, flag, null);
     }
 
     private GameEvent(EventType type, UUID customEventType,
-                      UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag, MageObjectReference reference) {
+            UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag, MageObjectReference reference) {
         this.type = type;
         this.customEventType = customEventType;
         this.targetId = targetId;
@@ -468,7 +466,7 @@ public class GameEvent implements Serializable {
     /**
      * used to store which replacement effects were already applied to an event
      * or or any modified events that may replace it
-     * <p>
+     *
      * 614.5. A replacement effect doesn't invoke itself repeatedly; it gets
      * only one opportunity to affect an event or any modified events that may
      * replace it. Example: A player controls two permanents, each with an

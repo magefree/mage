@@ -31,7 +31,7 @@ public final class MagetaTheLion extends CardImpl {
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public MagetaTheLion(UUID ownerId, CardSetInfo setInfo) {

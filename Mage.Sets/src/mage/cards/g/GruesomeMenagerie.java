@@ -84,7 +84,6 @@ class GruesomeMenagerieEffect extends OneShotEffect {
         Cards cards = new CardsImpl();
         Target target;
         target = new TargetCardInYourGraveyard(filter1);
-        target.setNotTarget(true);
         if (player.choose(outcome, target, source.getSourceId(), game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
@@ -92,7 +91,6 @@ class GruesomeMenagerieEffect extends OneShotEffect {
             }
         }
         target = new TargetCardInYourGraveyard(filter2);
-        target.setNotTarget(true);
         if (player.choose(outcome, target, source.getSourceId(), game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
@@ -100,7 +98,6 @@ class GruesomeMenagerieEffect extends OneShotEffect {
             }
         }
         target = new TargetCardInYourGraveyard(filter3);
-        target.setNotTarget(true);
         if (player.choose(outcome, target, source.getSourceId(), game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {

@@ -56,7 +56,7 @@ class PhyrexianDreadnoughtSacrificeCost extends CostImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("any number of creatures with total power 12 or greater");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public PhyrexianDreadnoughtSacrificeCost() {
@@ -79,7 +79,7 @@ class PhyrexianDreadnoughtSacrificeCost extends CostImpl {
                 }
             }
         }
-        game.informPlayers("Sacrificed creatures with total power of " + sumPower);
+        game.informPlayers(new StringBuilder("Sacrificed creatures with total power of ").append(sumPower).toString());
         paid = sumPower >= 12;
         return paid;
     }

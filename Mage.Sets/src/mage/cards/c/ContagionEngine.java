@@ -1,5 +1,7 @@
+
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -19,9 +21,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
-import java.util.UUID;
-
 /**
+ *
  * @author Loki
  */
 public final class ContagionEngine extends CardImpl {
@@ -35,13 +36,13 @@ public final class ContagionEngine extends CardImpl {
         this.addAbility(ability);
 
         // {4}, {T}: Proliferate, then proliferate again. (You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there. Then do it again.)
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ProliferateEffect("", false), new GenericManaCost(4));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ProliferateEffect(), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
-        ability.addEffect(new ProliferateEffect(" again", true).concatBy(", then"));
+        ability.addEffect(new ProliferateEffect());
         this.addAbility(ability);
     }
 
-    private ContagionEngine(final ContagionEngine card) {
+    public ContagionEngine(final ContagionEngine card) {
         super(card);
     }
 
@@ -59,7 +60,7 @@ class ContagionEngineEffect extends OneShotEffect {
         staticText = "put a -1/-1 counter on each creature target player controls";
     }
 
-    private ContagionEngineEffect(final ContagionEngineEffect effect) {
+    ContagionEngineEffect(final ContagionEngineEffect effect) {
         super(effect);
     }
 

@@ -17,10 +17,10 @@ import mage.watchers.Watcher;
  */
 public class ManaSpentToCastWatcher extends Watcher {
 
-    private Mana payment = null;
+    Mana payment = null;
 
     public ManaSpentToCastWatcher() {
-        super(WatcherScope.CARD);
+        super(ManaSpentToCastWatcher.class.getSimpleName(), WatcherScope.CARD);
     }
 
     public ManaSpentToCastWatcher(final ManaSpentToCastWatcher watcher) {

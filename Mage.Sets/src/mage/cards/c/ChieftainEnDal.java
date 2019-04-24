@@ -1,20 +1,21 @@
 
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
-
-import java.util.UUID;
+import mage.constants.Duration;
+import mage.filter.common.FilterAttackingCreature;
 
 /**
+ *
  * @author TheElk801
  */
 public final class ChieftainEnDal extends CardImpl {
@@ -28,12 +29,11 @@ public final class ChieftainEnDal extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Chieftain en-Dal attacks, attacking creatures gain first strike until end of turn.
-        this.addAbility(new AttacksTriggeredAbility(new GainAbilityAllEffect(
-                FirstStrikeAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES
-        ), false));
+        Ability ability = new AttacksTriggeredAbility(new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, new FilterAttackingCreature()), false);
+        this.addAbility(ability);
     }
 
-    private ChieftainEnDal(final ChieftainEnDal card) {
+    public ChieftainEnDal(final ChieftainEnDal card) {
         super(card);
     }
 

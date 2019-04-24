@@ -1,3 +1,4 @@
+
 package mage.cards.m;
 
 import java.util.UUID;
@@ -43,7 +44,7 @@ class MindstormCrownEffect extends OneShotEffect {
 
     MindstormCrownEffect() {
         super(Outcome.Benefit);
-        this.staticText = "draw a card if you had no cards in hand at the beginning of this turn. If you had a card in hand, {this} deals 1 damage to you";
+        this.staticText = "";
     }
 
     MindstormCrownEffect(final MindstormCrownEffect effect) {
@@ -57,18 +58,17 @@ class MindstormCrownEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
+        Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (controller == null) {
+        if (player == null) {
             return false;
         }
-        MindstormCrownWatcher watcher = game.getState().getWatcher(MindstormCrownWatcher.class);
-        if (watcher != null
-                && watcher.getCardsInHandCount() == 0) {
-            controller.drawCards(1, game);
+        MindstormCrownWatcher watcher = (MindstormCrownWatcher) game.getState().getWatchers().get(MindstormCrownWatcher.class.getSimpleName());
+        if (watcher != null && watcher.getCardsInHandCount() == 0) {
+            player.drawCards(1, game);
         } else {
             if (permanent != null) {
-                controller.damage(1, permanent.getId(), game, false, true);
+                player.damage(2, permanent.getId(), game, false, true);
             }
         }
         return true;
@@ -80,7 +80,7 @@ class MindstormCrownWatcher extends Watcher {
     private int cardsInHandCount;
 
     public MindstormCrownWatcher() {
-        super(WatcherScope.GAME);
+        super(MindstormCrownWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public MindstormCrownWatcher(final MindstormCrownWatcher watcher) {

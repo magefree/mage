@@ -21,8 +21,8 @@ public final class Warpath extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                BlockingPredicate.instance,
-                BlockedPredicate.instance));
+                new BlockingPredicate(),
+                new BlockedPredicate()));
     }
 
     public Warpath(UUID ownerId, CardSetInfo setInfo) {

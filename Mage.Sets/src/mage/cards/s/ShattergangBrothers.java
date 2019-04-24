@@ -75,7 +75,7 @@ class ShattergangBrothersEffect extends OneShotEffect {
     public ShattergangBrothersEffect(FilterControlledPermanent filter) {
         super(Outcome.Sacrifice);
         this.filter = filter;
-        this.staticText = "Each other player sacrifices " + filter.getMessage();
+        this.staticText = new StringBuilder("Each other player sacrifices ").append(filter.getMessage()).toString();
     }
 
     public ShattergangBrothersEffect(final ShattergangBrothersEffect effect) {

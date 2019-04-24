@@ -65,7 +65,7 @@ class AncientStoneIdolCostReductionEffect extends CostModificationEffectImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(AttackingPredicate.instance);
+        filter.add(new AttackingPredicate());
     }
 
     public AncientStoneIdolCostReductionEffect() {

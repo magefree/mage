@@ -25,7 +25,7 @@ public final class VolrathsGardens extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public VolrathsGardens(UUID ownerId, CardSetInfo setInfo) {

@@ -30,7 +30,7 @@ public final class SkirsdagHighPriest extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creatures you control");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public SkirsdagHighPriest(UUID ownerId, CardSetInfo setInfo) {

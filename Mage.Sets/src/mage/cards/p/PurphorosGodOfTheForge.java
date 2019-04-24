@@ -27,7 +27,7 @@ public final class PurphorosGodOfTheForge extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public PurphorosGodOfTheForge(UUID ownerId, CardSetInfo setInfo) {

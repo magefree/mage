@@ -4,31 +4,35 @@ package mage.abilities.dynamicvalue.common;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
+ *
  * @author Styxo
  */
-public enum GreatestPowerAmongControlledCreaturesValue implements DynamicValue {
-    instance;
+public class GreatestPowerAmongControlledCreaturesValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int amount = 0;
-        for (Permanent p : game.getBattlefield().getActivePermanents(
-                StaticFilters.FILTER_CONTROLLED_CREATURE, sourceAbility.getControllerId(), game
-        )) {
-            amount = Math.max(p.getPower().getValue(), amount);
+        Player player = game.getPlayer(sourceAbility.getControllerId());
+        if (player != null) {
+            int amount = 0;
+            for (Permanent p : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), sourceAbility.getControllerId(), game)) {
+                if (p.getPower().getValue() > amount) {
+                    amount = p.getPower().getValue();
+                }
+            }
+            return amount;
         }
-        return amount;
+        return 0;
     }
 
     @Override
     public GreatestPowerAmongControlledCreaturesValue copy() {
-        return GreatestPowerAmongControlledCreaturesValue.instance;
+        return new GreatestPowerAmongControlledCreaturesValue();
     }
 
     @Override

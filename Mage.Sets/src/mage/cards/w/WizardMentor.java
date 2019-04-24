@@ -26,7 +26,7 @@ public final class WizardMentor extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another target creature");
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public WizardMentor(UUID ownerId, CardSetInfo setInfo) {

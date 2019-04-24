@@ -18,7 +18,7 @@ public final class NeutralizingBlast extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("multicolored spell");
     static {
-        filter.add(MulticoloredPredicate.instance);
+        filter.add(new MulticoloredPredicate());
     }
 
     public NeutralizingBlast(UUID ownerId, CardSetInfo setInfo) {

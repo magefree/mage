@@ -59,7 +59,7 @@ class FireAndBrimstonePredicate extends PlayerPredicate {
         if (player == null || playerId == null) {
             return false;
         }
-        AttackedThisTurnWatcher watcher = game.getState().getWatcher(AttackedThisTurnWatcher.class);
+        AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getSimpleName());
         if (watcher != null) {
             if (!watcher.getAttackedThisTurnCreatures().isEmpty()) {
                 return player.getId().equals(game.getActivePlayerId());

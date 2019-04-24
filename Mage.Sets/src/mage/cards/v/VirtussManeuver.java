@@ -69,7 +69,7 @@ class VirtussManeuverEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         ChooseFriendsAndFoes choice = new ChooseFriendsAndFoes();
-        if (controller != null && !choice.chooseFriendOrFoe(controller, source, game)) {
+        if (!choice.chooseFriendOrFoe(controller, source, game)) {
             return false;
         }
         Map<UUID, Card> getBackMap = new HashMap<>();

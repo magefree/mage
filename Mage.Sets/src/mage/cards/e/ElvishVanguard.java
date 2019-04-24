@@ -24,7 +24,7 @@ public final class ElvishVanguard extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.ELF));
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public ElvishVanguard(UUID ownerId, CardSetInfo setInfo) {

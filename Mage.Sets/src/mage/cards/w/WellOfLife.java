@@ -24,7 +24,7 @@ public final class WellOfLife extends CardImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent();
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public WellOfLife(UUID ownerId, CardSetInfo setInfo) {

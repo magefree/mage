@@ -12,6 +12,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
+ *
  * @author LevelX2
  */
 public class CantAttackYouUnlessPayManaAllEffect extends PayCostToAttackBlockEffectImpl {
@@ -36,7 +37,7 @@ public class CantAttackYouUnlessPayManaAllEffect extends PayCostToAttackBlockEff
                 + (payAlsoForAttackingPlaneswalker ? "or a planeswalker you control " : "")
                 + "unless their controller pays "
                 + (manaCosts == null ? "" : manaCosts.getText())
-                + " for each creature they controls that's attacking you";
+                + " for each creature he or she controls that's attacking you";
     }
 
     public CantAttackYouUnlessPayManaAllEffect(final CantAttackYouUnlessPayManaAllEffect effect) {

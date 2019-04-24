@@ -24,10 +24,10 @@ import mage.filter.predicate.permanent.CommanderPredicate;
  */
 public final class BastionProtector extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Commander creatures");
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Commander creatures");
 
     static {
-        filter.add(CommanderPredicate.instance);
+        filter.add(new CommanderPredicate());
     }
 
     public BastionProtector(UUID ownerId, CardSetInfo setInfo) {

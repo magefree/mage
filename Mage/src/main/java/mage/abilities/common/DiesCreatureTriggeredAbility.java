@@ -30,7 +30,7 @@ public class DiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
     public DiesCreatureTriggeredAbility(Effect effect, boolean optional, boolean another, boolean setTargetPointer) {
         this(effect, optional, new FilterCreaturePermanent(another ? "another creature" : "a creature"));
         if (another) {
-            filter.add(AnotherPredicate.instance);
+            filter.add(new AnotherPredicate());
         }
         this.setTargetPointer = setTargetPointer;
     }
@@ -68,7 +68,7 @@ public class DiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.isDiesEvent()) {
+        if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
             if (filter.match(zEvent.getTarget(), sourceId, controllerId, game) && zEvent.getTarget().isCreature()) {
                 if (setTargetPointer) {
                     for (Effect effect : this.getEffects()) {

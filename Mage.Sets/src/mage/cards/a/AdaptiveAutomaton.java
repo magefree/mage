@@ -20,7 +20,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public final class AdaptiveAutomaton extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control of the chosen type");
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control of the chosen type");
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));

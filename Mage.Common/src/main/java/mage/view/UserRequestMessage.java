@@ -1,18 +1,19 @@
-package mage.view;
 
-import mage.constants.PlayerAction;
+package mage.view;
 
 import java.io.Serializable;
 import java.util.UUID;
+import mage.constants.PlayerAction;
 
 /**
+ *
  * @author LevelX2
  */
 public class UserRequestMessage implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private final String title;
+    private final String titel;
     private final String message;
     private UUID relatedUserId;
     private String relatedUserName;
@@ -31,8 +32,8 @@ public class UserRequestMessage implements Serializable {
     private String button3Text;
     private PlayerAction button3Action;
 
-    public UserRequestMessage(String title, String message) {
-        this.title = title;
+    public UserRequestMessage(String titel, String message) {
+        this.titel = titel;
         this.message = message;
         this.button1Action = null;
         this.button2Action = null;
@@ -67,8 +68,8 @@ public class UserRequestMessage implements Serializable {
         this.button3Action = buttonAction;
     }
 
-    public String getTitle() {
-        return title;
+    public String getTitel() {
+        return titel;
     }
 
     public static long getSerialVersionUID() {

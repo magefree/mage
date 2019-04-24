@@ -46,11 +46,11 @@ public final class UphillBattle extends CardImpl {
 
 class PlayCreatureLandWatcher extends Watcher {
 
-    private final Set<UUID> playerPlayedLand = new HashSet<>(); // player that played land
-    private final Set<UUID> landPlayed = new HashSet<>(); // land played
+    final Set<UUID> playerPlayedLand = new HashSet<>(); // player that played land
+    final Set<UUID> landPlayed = new HashSet<>(); // land played
 
     public PlayCreatureLandWatcher() {
-        super(WatcherScope.GAME);
+        super(PlayCreatureLandWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public PlayCreatureLandWatcher(final PlayCreatureLandWatcher watcher) {
@@ -108,8 +108,8 @@ class UphillBattleTapEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent target = ((EntersTheBattlefieldEvent) event).getTarget();
-        CreatureWasCastWatcher creatureSpellWatcher = game.getState().getWatcher(CreatureWasCastWatcher.class);
-        PlayCreatureLandWatcher landWatcher = game.getState().getWatcher(PlayCreatureLandWatcher.class);
+        CreatureWasCastWatcher creatureSpellWatcher = (CreatureWasCastWatcher) game.getState().getWatchers().get(CreatureWasCastWatcher.class.getSimpleName());
+        PlayCreatureLandWatcher landWatcher = (PlayCreatureLandWatcher) game.getState().getWatchers().get(PlayCreatureLandWatcher.class.getSimpleName());
 
         if (target != null
                 && ((creatureSpellWatcher != null && creatureSpellWatcher.wasCreatureCastThisTurn(target.getId()))

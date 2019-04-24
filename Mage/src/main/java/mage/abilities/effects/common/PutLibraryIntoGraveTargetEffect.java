@@ -1,3 +1,4 @@
+
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -12,6 +13,7 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class PutLibraryIntoGraveTargetEffect extends OneShotEffect {
@@ -59,12 +61,7 @@ public class PutLibraryIntoGraveTargetEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder();
         String message = amount.getMessage();
 
-        if (!mode.getTargets().isEmpty()) {
-            sb.append("target ").append(mode.getTargets().get(0).getTargetName());
-        } else {
-            sb.append("that target");
-        }
-
+        sb.append("target ").append(mode.getTargets().get(0).getTargetName());
         sb.append(" puts the top ");
         if (message.isEmpty()) {
             if (amount.toString().equals("1")) {

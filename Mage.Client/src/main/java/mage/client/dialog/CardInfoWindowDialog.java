@@ -1,4 +1,22 @@
+
+
+ /*
+ * CardInfoWindowDialog.java
+ *
+ * Created on Feb 1, 2010, 3:00:35 PM
+ */
 package mage.client.dialog;
+
+import java.awt.Dimension;
+import java.awt.Point;
+import java.beans.PropertyVetoException;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
+import javax.swing.ImageIcon;
+import javax.swing.SwingUtilities;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 
 import mage.client.cards.BigCard;
 import mage.client.util.GUISizeHelper;
@@ -13,17 +31,8 @@ import mage.view.SimpleCardsView;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
-import javax.swing.*;
-import javax.swing.event.InternalFrameAdapter;
-import javax.swing.event.InternalFrameEvent;
-import java.awt.*;
-import java.beans.PropertyVetoException;
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
-
 /**
- * @author BetaSteward_at_googlemail.com, JayDi85
+ * @author BetaSteward_at_googlemail.com
  */
 public class CardInfoWindowDialog extends MageDialog {
 
@@ -142,7 +151,6 @@ public class CardInfoWindowDialog extends MageDialog {
                 return;
             }
         }
-
         super.show();
         if (positioned) { // check if in frame rectangle
             showAndPositionWindow();
@@ -193,10 +201,23 @@ public class CardInfoWindowDialog extends MageDialog {
 
         setIconifiable(true);
         setResizable(true);
-        setPreferredSize(new Dimension((int) Math.round(GUISizeHelper.otherZonesCardDimension.width * 1.4),
-                (int) Math.round(GUISizeHelper.otherZonesCardDimension.height * 1.4)));
-        getContentPane().setLayout(new java.awt.BorderLayout());
-        getContentPane().add(cards, java.awt.BorderLayout.CENTER);
+        setPreferredSize(new Dimension((int) Math.round(GUISizeHelper.otherZonesCardDimension.width * 1.3),
+                (int) Math.round(GUISizeHelper.otherZonesCardDimension.height * 1.2)));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(cards, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(0, 0, 0))
+        );
+        layout.setVerticalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(cards, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(0, 0, 0))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

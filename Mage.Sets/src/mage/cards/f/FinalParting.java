@@ -1,6 +1,7 @@
 
 package mage.cards.f;
 
+import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -65,10 +66,10 @@ class FinalPartingEffect extends OneShotEffect {
         if (controller != null) {
             // Unlike Jarad's Orders, which this mostly copies, you can't fail to find
             TargetCardInLibrary target = new TargetCardInLibrary(2, 2, new FilterCard());
-            if (controller.searchLibrary(target, source, game)) {
+            if (controller.searchLibrary(target, game)) {
                 if (!target.getTargets().isEmpty()) {
                     Cards searched = new CardsImpl();
-                    for (UUID cardId : target.getTargets()) {
+                    for (UUID cardId : (List<UUID>) target.getTargets()) {
                         Card card = controller.getLibrary().getCard(cardId, game);
                         searched.add(card);
                     }

@@ -1,5 +1,7 @@
+
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -19,9 +21,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.TargetPlayer;
 
-import java.util.UUID;
-
 /**
+ *
  * @author Styxo
  */
 public final class AAT1 extends CardImpl {
@@ -73,8 +74,7 @@ public final class AAT1 extends CardImpl {
         @Override
         public boolean checkTrigger(GameEvent event, Game game) {
             Card card = game.getCard(event.getTargetId());
-            if (card != null
-                    && event.getPlayerId().equals(game.getControllerId(sourceId))
+            if (event.getPlayerId().equals(game.getControllerId(sourceId))
                     && card.isCreature()
                     && game.getState().getZone(card.getId()) == Zone.GRAVEYARD
                     && event.getData().equals("repair")) {

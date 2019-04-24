@@ -83,6 +83,8 @@ class MorgueBurstEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        return "Return target creature card from your graveyard to your hand. Morgue Burst deals damage to any target equal to the power of the card returned this way";
+        StringBuilder sb = new StringBuilder();
+        sb.append("Return target creature card from your graveyard to your hand. Morgue Burst deals damage to any target equal to the power of the card returned this way");
+        return sb.toString();
     }
 }

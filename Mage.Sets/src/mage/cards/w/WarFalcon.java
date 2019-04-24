@@ -1,5 +1,7 @@
+
 package mage.cards.w;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -17,15 +19,14 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.UUID;
-
 /**
+ *
  * @author jeffwadsworth
  */
 public final class WarFalcon extends CardImpl {
 
     public WarFalcon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
         this.subtype.add(SubType.BIRD);
 
         this.power = new MageInt(2);
@@ -33,7 +34,7 @@ public final class WarFalcon extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-
+        
         // War Falcon can't attack unless you control a Knight or a Soldier.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WarFalconEffect()));
     }
@@ -51,11 +52,11 @@ public final class WarFalcon extends CardImpl {
 class WarFalconEffect extends RestrictionEffect {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Knight or a Soldier");
-
+    
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate(SubType.KNIGHT),
-                new SubtypePredicate(SubType.SOLDIER)));
+        new SubtypePredicate(SubType.KNIGHT),
+        new SubtypePredicate(SubType.SOLDIER)));
     }
 
     public WarFalconEffect() {
@@ -73,14 +74,17 @@ class WarFalconEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
+    public boolean canAttack(Game game) {
         return false;
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getId().equals(source.getSourceId())) {
-            return game.getBattlefield().countAll(filter, source.getControllerId(), game) <= 0;
+            if (game.getBattlefield().countAll(filter, source.getControllerId(), game) > 0) {
+                return false;
+            }
+            return true;
         }  // do not apply to other creatures.
         return false;
     }

@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class HondenOfLifesWeb extends CardImpl {
 
-    static final FilterControlledPermanent filter = new FilterControlledPermanent("Shrine");
+    final static FilterControlledPermanent filter = new FilterControlledPermanent("Shrine");
 
     static {
         filter.add(new SubtypePredicate(SubType.SHRINE));

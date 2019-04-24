@@ -17,7 +17,7 @@ import mage.target.common.TargetOpponent;
  */
 public final class VraskasScorn extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Vraska, Scheming Gorgon");
+    private final static FilterCard filter = new FilterCard("Vraska, Scheming Gorgon");
 
     static {
         filter.add(new NamePredicate(filter.getMessage()));

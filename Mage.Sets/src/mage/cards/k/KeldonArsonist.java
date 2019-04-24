@@ -33,9 +33,7 @@ public final class KeldonArsonist extends CardImpl {
         // {1}, Sacrifice two lands: Destroy target land.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new GenericManaCost(1));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent("two lands"), true)));
-        TargetLandPermanent target = new TargetLandPermanent();
-        target.setTargetName("land (to destroy)");
-        ability.addTarget(target);
+        ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
     }
 

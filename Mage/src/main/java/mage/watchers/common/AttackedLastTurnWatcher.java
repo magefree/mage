@@ -24,7 +24,7 @@ public class AttackedLastTurnWatcher extends Watcher {
     public final Map<UUID, Set<MageObjectReference>> attackedThisTurnCreatures = new HashMap<>(); // dummy map for beginning of turn iteration purposes
 
     public AttackedLastTurnWatcher() {
-        super(WatcherScope.GAME);
+        super(AttackedLastTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public AttackedLastTurnWatcher(final AttackedLastTurnWatcher watcher) {

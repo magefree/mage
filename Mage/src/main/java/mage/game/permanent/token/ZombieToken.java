@@ -1,24 +1,26 @@
+
 package mage.game.permanent.token;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.util.RandomUtil;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 /**
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public final class ZombieToken extends TokenImpl {
 
-    static final private List<String> tokenImageSets = new ArrayList<>();
+    final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
         tokenImageSets.addAll(Arrays.asList("10E", "M10", "M11", "M12", "M13", "M14", "M15", "MBS", "ALA", "ISD", "C14", "C15", "C16", "C17", "CNS",
-                "MMA", "BNG", "KTK", "DTK", "ORI", "OGW", "SOI", "EMN", "EMA", "MM3", "AKH", "CMA", "E01", "RNA", "WAR"));
+                "MMA", "BNG", "KTK", "DTK", "ORI", "OGW", "SOI", "EMN", "EMA", "MM3", "AKH", "CMA", "E01"));
     }
 
     public ZombieToken() {

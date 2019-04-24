@@ -1,7 +1,9 @@
 
 package mage.cards.t;
 
+import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.AssistAbility;
@@ -15,11 +17,9 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
-
-import java.util.UUID;
 
 /**
+ *
  * @author TheElk801
  */
 public final class TheCrowdGoesWild extends CardImpl {
@@ -41,7 +41,6 @@ public final class TheCrowdGoesWild extends CardImpl {
                 .setText("Support X <i>(Put a +1/+1 counter on each of up to X target creatures.)</i><br>")
         );
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().setTargetAdjuster(TheCrowdGoesWildAdjuster.instance);
 
         // Each creature with a +1/+1 counter on it gains trample until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, filter));
@@ -52,17 +51,16 @@ public final class TheCrowdGoesWild extends CardImpl {
     }
 
     @Override
-    public TheCrowdGoesWild copy() {
-        return new TheCrowdGoesWild(this);
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability instanceof SpellAbility) {
+            ability.getTargets().clear();
+            int xValue = ability.getManaCostsToPay().getX();
+            ability.addTarget(new TargetCreaturePermanent(0, xValue));
+        }
     }
-}
-
-enum TheCrowdGoesWildAdjuster implements TargetAdjuster {
-    instance;
 
     @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        ability.addTarget(new TargetCreaturePermanent(0, ability.getManaCostsToPay().getX()));
+    public TheCrowdGoesWild copy() {
+        return new TheCrowdGoesWild(this);
     }
 }

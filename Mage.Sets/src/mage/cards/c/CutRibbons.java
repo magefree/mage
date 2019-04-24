@@ -28,8 +28,8 @@ public final class CutRibbons extends SplitCard {
         // to
         // Ribbons
         // Each opponent loses X life.
-        getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
-        getRightHalfCard().getSpellAbility().addEffect(new LoseLifeOpponentsEffect(ManacostVariableValue.instance));
+        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility().setRuleAtTheTop(true));
+        getRightHalfCard().getSpellAbility().addEffect(new LoseLifeOpponentsEffect(new ManacostVariableValue()));
 
     }
 

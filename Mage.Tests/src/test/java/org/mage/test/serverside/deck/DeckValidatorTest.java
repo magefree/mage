@@ -59,9 +59,13 @@ public class DeckValidatorTest extends MageTestBase {
     }
 
     @Test
-    public void testStandardDeckCardsAmountValid() {
+    public void testStandardValid() {
         ArrayList<CardNameAmount> deck = new ArrayList<>();
-        deck.add(new CardNameAmount("Mountain", 60));
+
+        deck.add(new CardNameAmount("MPS-AKH", 28, 4)); // Rhonas the Indomitable
+        deck.add(new CardNameAmount("Built to Smash", 4));
+        deck.add(new CardNameAmount("Heroic Intervention", 4));
+        deck.add(new CardNameAmount("Mountain", 48));
 
         DeckValidator validator = new Standard();
         boolean validationSuccessful = testDeckValid(validator, deck);
@@ -69,9 +73,13 @@ public class DeckValidatorTest extends MageTestBase {
     }
 
     @Test
-    public void testStandardDeckCardsAmountNotValid() {
+    public void testStandardNotValid() {
         ArrayList<CardNameAmount> deck = new ArrayList<>();
-        deck.add(new CardNameAmount("Mountain", 59));
+
+        deck.add(new CardNameAmount("MPS-AKH", 28, 4)); // Rhonas the Indomitable
+        deck.add(new CardNameAmount("Built to Smash", 4));
+        deck.add(new CardNameAmount("Heroic Intervention", 4));
+        deck.add(new CardNameAmount("Mountain", 47));
 
         ArrayList<CardNameAmount> sideboard = new ArrayList<>();
         sideboard.add(new CardNameAmount("Mountain", 16));

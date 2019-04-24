@@ -29,7 +29,7 @@ public final class MirrorStrike extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("unblocked creature");
 
     static {
-        filter.add(UnblockedPredicate.instance);
+        filter.add(new UnblockedPredicate());
     }
 
     public MirrorStrike(UUID ownerId, CardSetInfo setInfo) {

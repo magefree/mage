@@ -1,6 +1,7 @@
 
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
@@ -22,12 +23,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
 import mage.util.CardUtil;
 
-import java.util.UUID;
-
 /**
+ *
  * @author fireshoes
  */
 public final class GraspOfFate extends CardImpl {
@@ -37,8 +36,8 @@ public final class GraspOfFate extends CardImpl {
 
         // When Grasp of Fate enters the battlefield, for each opponent, exile up to one target nonland permanent that player controls until Grasp of Fate leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new GraspOfFateExileEffect());
+        ability.addTarget(new TargetPermanent());
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
-        ability.setTargetAdjuster(GraspOfFateAdjuster.instance);
         this.addAbility(ability);
     }
 
@@ -47,28 +46,25 @@ public final class GraspOfFate extends CardImpl {
     }
 
     @Override
-    public GraspOfFate copy() {
-        return new GraspOfFate(this);
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability instanceof EntersBattlefieldTriggeredAbility) {
+            ability.getTargets().clear();
+            for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
+                Player opponent = game.getPlayer(opponentId);
+                if (opponent != null) {
+                    FilterPermanent filter = new FilterPermanent("nonland permanent from opponent " + opponent.getLogName());
+                    filter.add(new ControllerIdPredicate(opponentId));
+                    filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+                    TargetPermanent target = new TargetPermanent(0, 1, filter, false);
+                    ability.addTarget(target);
+                }
+            }
+        }
     }
-}
-
-enum GraspOfFateAdjuster implements TargetAdjuster {
-    instance;
 
     @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
-            Player opponent = game.getPlayer(opponentId);
-            if (opponent == null) {
-                continue;
-            }
-            FilterPermanent filter = new FilterPermanent("nonland permanent from opponent " + opponent.getLogName());
-            filter.add(new ControllerIdPredicate(opponentId));
-            filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
-            TargetPermanent target = new TargetPermanent(0, 1, filter, false);
-            ability.addTarget(target);
-        }
+    public GraspOfFate copy() {
+        return new GraspOfFate(this);
     }
 }
 

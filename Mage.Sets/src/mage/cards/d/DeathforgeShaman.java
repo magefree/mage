@@ -69,7 +69,7 @@ class DeathforgeShamanEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        DynamicValue value = MultikickerCount.instance;
+        DynamicValue value = new MultikickerCount();
         int damage = value.calculate(game, source, this) * 2;
         return new DamageTargetEffect(damage).apply(game, source);
     }

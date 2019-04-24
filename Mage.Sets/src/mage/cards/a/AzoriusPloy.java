@@ -2,9 +2,14 @@ package mage.cards.a;
 
 import java.util.UUID;
 
+import mage.abilities.Ability;
+import mage.abilities.AbilityImpl;
+import mage.abilities.SpellAbility;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.PreventCombatDamageBySourceEffect;
 import mage.abilities.effects.common.PreventDamageByTargetEffect;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -41,7 +46,7 @@ public final class AzoriusPloy extends CardImpl {
 
     }
 
-    private AzoriusPloy(final AzoriusPloy card) {
+    public AzoriusPloy(final AzoriusPloy card) {
         super(card);
     }
 

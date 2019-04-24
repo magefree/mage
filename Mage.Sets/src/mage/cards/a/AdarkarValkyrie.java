@@ -34,7 +34,7 @@ public final class AdarkarValkyrie extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public AdarkarValkyrie(UUID ownerId, CardSetInfo setInfo) {

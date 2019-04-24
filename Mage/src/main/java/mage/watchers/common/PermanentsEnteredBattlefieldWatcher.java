@@ -5,8 +5,10 @@
  */
 package mage.watchers.common;
 
-import java.util.*;
-
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -19,11 +21,11 @@ import mage.watchers.Watcher;
  */
 public class PermanentsEnteredBattlefieldWatcher extends Watcher {
 
-    private final Map<UUID, List<Permanent>> enteringBattlefield = new HashMap<>();
-    private final Map<UUID, List<Permanent>> enteringBattlefieldLastTurn = new HashMap<>();
+    private final HashMap<UUID, List<Permanent>> enteringBattlefield = new HashMap<>();
+    private final HashMap<UUID, List<Permanent>> enteringBattlefieldLastTurn = new HashMap<>();
 
     public PermanentsEnteredBattlefieldWatcher() {
-        super(WatcherScope.GAME);
+        super(PermanentsEnteredBattlefieldWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public PermanentsEnteredBattlefieldWatcher(final PermanentsEnteredBattlefieldWatcher watcher) {

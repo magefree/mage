@@ -28,7 +28,7 @@ public final class VoldarenPariah extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("three other creatures");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public VoldarenPariah(UUID ownerId, CardSetInfo setInfo) {

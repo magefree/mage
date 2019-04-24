@@ -1,7 +1,9 @@
 
 package mage.cards.n;
 
+import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.costs.common.DiscardXTargetCost;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
@@ -13,12 +15,11 @@ import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.TargetAdjuster;
-
-import java.util.UUID;
 
 /**
+ *
  * @author LevelX2
  */
 public final class NostalgicDreams extends CardImpl {
@@ -32,10 +33,9 @@ public final class NostalgicDreams extends CardImpl {
         Effect effect = new ReturnFromGraveyardToHandTargetEffect();
         effect.setText("Return X target cards from your graveyard to your hand");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().setTargetAdjuster(NostalgicDreamsAdjuster.instance);
-
         // Exile Nostalgic Dreams.
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+
     }
 
     public NostalgicDreams(final NostalgicDreams card) {
@@ -43,20 +43,17 @@ public final class NostalgicDreams extends CardImpl {
     }
 
     @Override
-    public NostalgicDreams copy() {
-        return new NostalgicDreams(this);
-    }
-}
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability instanceof SpellAbility) {
+            int xValue = new GetXValue().calculate(game, ability, null);
+            Target target = new TargetCardInYourGraveyard(xValue, StaticFilters.FILTER_CARD_FROM_YOUR_GRAVEYARD);
+            ability.addTarget(target);
+        }
 
-enum NostalgicDreamsAdjuster implements TargetAdjuster {
-    instance;
+    }
 
     @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        ability.addTarget(new TargetCardInYourGraveyard(
-                GetXValue.instance.calculate(game, ability, null),
-                StaticFilters.FILTER_CARD_FROM_YOUR_GRAVEYARD
-        ));
+    public NostalgicDreams copy() {
+        return new NostalgicDreams(this);
     }
 }

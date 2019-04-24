@@ -1,3 +1,5 @@
+
+
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -48,9 +50,8 @@ public class ZoneChangeAllTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if ((fromZone == null || fromZone.match(zEvent.getFromZone()))
-                && (toZone == null || toZone.match(zEvent.getToZone()))) {
+        ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+        if ((fromZone == null || zEvent.getFromZone() == fromZone) && (toZone == null || zEvent.getToZone() == toZone)) {
             Permanent perm;
             if (zEvent.getTarget() != null) {
                 perm = zEvent.getTarget();

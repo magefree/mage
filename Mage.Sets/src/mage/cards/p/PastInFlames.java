@@ -1,5 +1,7 @@
+
 package mage.cards.p;
 
+import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -8,19 +10,23 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
+import mage.constants.TimingRule;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.UUID;
-
 /**
+ *
  * @author BetaSteward
  */
 public final class PastInFlames extends CardImpl {
 
     public PastInFlames(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}");
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");
 
 
         // Each instant and sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.
@@ -66,7 +72,7 @@ class PastInFlamesEffect extends ContinuousEffectImpl {
                 player.getGraveyard().stream().map((cardId) -> game.getCard(cardId)).filter((card) -> (card.isInstant() || card.isSorcery())).forEachOrdered((card) -> {
                     affectedObjectList.add(new MageObjectReference(card, game));
                 });
-            }
+             }
         }
     }
 
@@ -76,18 +82,17 @@ class PastInFlamesEffect extends ContinuousEffectImpl {
         if (player != null) {
             player.getGraveyard().stream().filter((cardId) -> (affectedObjectList.contains(new MageObjectReference(cardId, game)))).forEachOrdered((cardId) -> {
                 Card card = game.getCard(cardId);
-                if (card != null) {
-                    FlashbackAbility ability = null;
-                    if (card.isInstant()) {
-                        ability = new FlashbackAbility(card.getManaCost(), TimingRule.INSTANT);
-                    } else if (card.isSorcery()) {
-                        ability = new FlashbackAbility(card.getManaCost(), TimingRule.SORCERY);
-                    }
-                    if (ability != null) {
-                        ability.setSourceId(cardId);
-                        ability.setControllerId(card.getOwnerId());
-                        game.getState().addOtherAbility(card, ability);
-                    }
+                FlashbackAbility ability = null;
+                if (card.isInstant()) {
+                    ability = new FlashbackAbility(card.getManaCost(), TimingRule.INSTANT);
+                }
+                else if (card.isSorcery()) {
+                    ability = new FlashbackAbility(card.getManaCost(), TimingRule.SORCERY);
+                }
+                if (ability != null) {
+                    ability.setSourceId(cardId);
+                    ability.setControllerId(card.getOwnerId());
+                    game.getState().addOtherAbility(card, ability);
                 }
             });
             return true;

@@ -9,10 +9,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
+ *
  * @author North
  */
-public enum TargetPermanentPowerCount implements DynamicValue {
-    instance;
+public class TargetPermanentPowerCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -29,7 +29,7 @@ public enum TargetPermanentPowerCount implements DynamicValue {
 
     @Override
     public TargetPermanentPowerCount copy() {
-        return TargetPermanentPowerCount.instance;
+        return new TargetPermanentPowerCount();
     }
 
     @Override

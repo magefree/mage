@@ -15,7 +15,7 @@ import mage.ObjectColor;
  */
 public final class TitaniaProtectorOfArgothElementalToken extends TokenImpl {
 
-    static final private List<String> tokenImageSets = new ArrayList<>();
+    final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
         tokenImageSets.addAll(Arrays.asList("C14", "CMA"));

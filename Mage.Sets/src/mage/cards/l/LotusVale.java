@@ -26,7 +26,7 @@ public final class LotusVale extends CardImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("two untapped lands");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public LotusVale(UUID ownerId, CardSetInfo setInfo) {

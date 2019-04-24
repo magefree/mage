@@ -25,7 +25,7 @@ public final class InnerCalmOuterStrength extends CardImpl {
         this.subtype.add(SubType.ARCANE);
 
         // Target creature gets +X/+X until end of turn, where X is the number of cards in your hand.
-        DynamicValue xValue= CardsInControllerHandCount.instance;
+        DynamicValue xValue= new CardsInControllerHandCount();
         Effect effect = new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn, true);
         effect.setText("Target creature gets +X/+X until end of turn, where X is the number of cards in your hand");
         this.getSpellAbility().addEffect(effect);

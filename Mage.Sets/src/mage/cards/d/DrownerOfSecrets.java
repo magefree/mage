@@ -29,7 +29,7 @@ public final class DrownerOfSecrets extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.MERFOLK));
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public DrownerOfSecrets(UUID ownerId, CardSetInfo setInfo) {

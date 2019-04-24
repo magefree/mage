@@ -29,17 +29,17 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  */
 public final class DauntlessDourbark extends CardImpl {
 
-    static final private FilterControlledPermanent filter = new FilterControlledPermanent("Forests you control plus the number of Treefolk you control");
-    static final private FilterControlledPermanent filter2 = new FilterControlledPermanent();
+    final static private FilterControlledPermanent filter = new FilterControlledPermanent("Forests you control plus the number of Treefolk you control");
+    final static private FilterControlledPermanent filter2 = new FilterControlledPermanent();
 
     static {
         filter.add(Predicates.or(new SubtypePredicate(SubType.FOREST),
                 new SubtypePredicate(SubType.TREEFOLK)));
         filter2.add(new SubtypePredicate(SubType.TREEFOLK));
-        filter2.add(AnotherPredicate.instance);
+        filter2.add(new AnotherPredicate());
     }
     
-    static final private String rule = "{this} has trample as long as you control another Treefolk";
+    final static private String rule = "{this} has trample as long as you control another Treefolk";
 
     public DauntlessDourbark(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

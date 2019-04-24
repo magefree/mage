@@ -29,7 +29,7 @@ public class MiracleWatcher extends Watcher {
     private final Map<UUID, Integer> amountOfCardsDrawnThisTurn = new HashMap<>();
 
     public MiracleWatcher() {
-        super(WatcherScope.GAME);
+        super(MiracleWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public MiracleWatcher(final MiracleWatcher watcher) {
@@ -65,7 +65,8 @@ public class MiracleWatcher extends Watcher {
                 if (ability instanceof MiracleAbility) {
                     Player controller = game.getPlayer(ability.getControllerId());
                     if (controller != null) {
-                        Cards cards = new CardsImpl(card);
+                        Cards cards = new CardsImpl();
+                        cards.add(card);
                         controller.lookAtCards("Miracle", cards, game);
                         if (controller.chooseUse(Outcome.Benefit, "Reveal " + card.getLogName() + " to be able to use Miracle?", ability, game)) {
                             controller.revealCards("Miracle", cards, game);

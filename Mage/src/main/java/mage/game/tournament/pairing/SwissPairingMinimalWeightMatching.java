@@ -9,6 +9,7 @@ import mage.game.tournament.TournamentPlayer;
 import java.util.*;
 
 /**
+ *
  * @author Quercitron
  */
 
@@ -22,7 +23,7 @@ public class SwissPairingMinimalWeightMatching {
 
     private final int playersCount;
 
-    private List<PlayerInfo> swissPlayers;
+    List<PlayerInfo> swissPlayers;
 
     // number of vertexes in graph
     private final int n;
@@ -36,8 +37,8 @@ public class SwissPairingMinimalWeightMatching {
         swissPlayers = new ArrayList<>();
         for (TournamentPlayer tournamentPlayer : players) {
             PlayerInfo swissPlayer = new PlayerInfo();
-            swissPlayer.setTournamentPlayer(tournamentPlayer);
-            swissPlayer.setPoints(tournamentPlayer.getPoints());
+            swissPlayer.tournamentPlayer = tournamentPlayer;
+            swissPlayer.points = tournamentPlayer.getPoints();
             swissPlayers.add(swissPlayer);
         }
 
@@ -45,8 +46,8 @@ public class SwissPairingMinimalWeightMatching {
         Collections.shuffle(swissPlayers);
         Map<TournamentPlayer, Integer> map = new HashMap<>();
         for (int i = 0; i < playersCount; i++) {
-            swissPlayers.get(i).setId(i);
-            map.put(swissPlayers.get(i).getTournamentPlayer(), i);
+            swissPlayers.get(i).id = i;
+            map.put(swissPlayers.get(i).tournamentPlayer, i);
         }
 
         // calculate Tie Breaker points -- Sum of Opponents' Scores (SOS)
@@ -61,10 +62,10 @@ public class SwissPairingMinimalWeightMatching {
 
                 // a player could have left the tournament, so we should check if id is not null
                 if (id1 != null) {
-                    swissPlayers.get(id1).setSosPoints(swissPlayers.get(id1).getSosPoints() + player2.getPoints());
+                    swissPlayers.get(id1).sosPoints += player2.getPoints();
                 }
                 if (id2 != null) {
-                    swissPlayers.get(id2).setSosPoints(swissPlayers.get(id2).getSosPoints() + player1.getPoints());
+                    swissPlayers.get(id2).sosPoints += player1.getPoints();
                 }
                 // todo: sos points for byes? maybe add player points?
             }
@@ -72,18 +73,18 @@ public class SwissPairingMinimalWeightMatching {
 
         // sort by points and then by sos points
         swissPlayers.sort((p1, p2) -> {
-            int result = p2.getPoints() - p1.getPoints();
+            int result = p2.points - p1.points;
             if (result != 0) {
                 return result;
             }
-            return p2.getSosPoints() - p1.getSosPoints();
+            return p2.sosPoints - p1.sosPoints;
         });
 
         // order could be changed, update ids and mapping
         map.clear();
         for (int i = 0; i < playersCount; i++) {
-            swissPlayers.get(i).setId(i);
-            map.put(swissPlayers.get(i).getTournamentPlayer(), i);
+            swissPlayers.get(i).id = i;
+            map.put(swissPlayers.get(i).tournamentPlayer, i);
         }
 
         // count ties and matches between players
@@ -124,18 +125,18 @@ public class SwissPairingMinimalWeightMatching {
             for (int i = 0; i < playersCount; i++) {
                 for (int j = 0; j < i; j++) {
                     w[i][j] = Math.abs(i - j) +
-                            pointsDiffMultiplier * Math.abs(swissPlayers.get(i).getPoints() - swissPlayers.get(j).getPoints());
+                            pointsDiffMultiplier * Math.abs(swissPlayers.get(i).points - swissPlayers.get(j).points);
                     w[j][i] = w[i][j];
                 }
             }
         } else {
             for (int i = 0; i < playersCount; i++) {
                 PlayerInfo player = swissPlayers.get(i);
-                for (int p = player.getPoints(); p >= 0; p--) {
+                for (int p = player.points; p >= 0; p--) {
                     int first = -1;
                     int last = -1;
                     for (int j = 0; j < playersCount; j++) {
-                        if (swissPlayers.get(j).getPoints() == p) {
+                        if (swissPlayers.get(j).points == p) {
                             if (first < 0) {
                                 first = j;
                             }
@@ -145,8 +146,8 @@ public class SwissPairingMinimalWeightMatching {
                     if (first < 0) {
                         continue;
                     }
-                    int self = (p == player.getPoints() ? i : first - 1);
-                    int diff = pointsDiffMultiplier * (player.getPoints() - p);
+                    int self = (p == player.points ? i : first - 1);
+                    int diff = pointsDiffMultiplier * (player.points - p);
                     for (int j = Math.max(first, i); j <= last; j++) {
                         w[i][j] = Math.abs(j - (last + first - self)) + diff;
                         w[j][i] = w[i][j];
@@ -167,7 +168,7 @@ public class SwissPairingMinimalWeightMatching {
         // try to avoid giving the same person multiple byes
         if (n > playersCount) {
             for (int i = 0; i < playersCount; i++) {
-                w[i][n - 1] = 10 * (swissPlayers.get(i).getPoints() - swissPlayers.get(playersCount - 1).getPoints()) + (playersCount - i - 1);
+                w[i][n - 1] = 10 * (swissPlayers.get(i).points - swissPlayers.get(playersCount - 1).points) + (playersCount - i - 1);
                 w[i][n - 1] += byes[i] * 2000;
                 w[n - 1][i] = w[i][n - 1];
             }
@@ -194,9 +195,9 @@ public class SwissPairingMinimalWeightMatching {
         List<TournamentPairing> pairings = new ArrayList<>();
         List<TournamentPlayer> playerByes = new ArrayList<>();
 
-        Map<Integer, TournamentPlayer> map = new HashMap<>();
+        Map<Integer, TournamentPlayer> map  = new HashMap<>();
         for (PlayerInfo player : swissPlayers) {
-            map.put(player.getId(), player.getTournamentPlayer());
+            map.put(player.id, player.tournamentPlayer);
         }
 
         if (n > playersCount) {
@@ -217,15 +218,15 @@ public class SwissPairingMinimalWeightMatching {
         return new RoundPairings(pairings, playerByes);
     }
 
-    private boolean[] used;
+    boolean[] used;
 
     // current pairs
-    private int[] pairs;
+    int[] pairs;
     // current weight
-    private int weight;
+    int weight;
 
-    private int[] result;
-    private int minCost;
+    int[] result;
+    int minCost;
 
     // backtrack all possible pairings and choose one with minimal weight
     private void makePairings(int t) {
@@ -261,45 +262,13 @@ public class SwissPairingMinimalWeightMatching {
     }
 
     static class PlayerInfo {
-        private int id;
+        public int id;
 
-        private TournamentPlayer tournamentPlayer;
+        public TournamentPlayer tournamentPlayer;
 
-        private int points;
+        public int points;
 
-        private int sosPoints;
-
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public TournamentPlayer getTournamentPlayer() {
-            return tournamentPlayer;
-        }
-
-        public void setTournamentPlayer(TournamentPlayer tournamentPlayer) {
-            this.tournamentPlayer = tournamentPlayer;
-        }
-
-        public int getPoints() {
-            return points;
-        }
-
-        public void setPoints(int points) {
-            this.points = points;
-        }
-
-        public int getSosPoints() {
-            return sosPoints;
-        }
-
-        public void setSosPoints(int sosPoints) {
-            this.sosPoints = sosPoints;
-        }
+        public int sosPoints;
     }
 }
 

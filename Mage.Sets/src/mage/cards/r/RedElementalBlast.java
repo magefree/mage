@@ -37,8 +37,8 @@ public final class RedElementalBlast extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(filterSpell));
         
         Mode mode = new Mode();
-        mode.addEffect(new DestroyTargetEffect());
-        mode.addTarget(new TargetPermanent(filterPermanent));
+        mode.getEffects().add(new DestroyTargetEffect());
+        mode.getTargets().add(new TargetPermanent(filterPermanent));
         
         this.getSpellAbility().addMode(mode);
     }

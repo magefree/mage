@@ -31,7 +31,7 @@ public final class RishkarPeemaRenegade extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each creature you control with a counter on it");
 
     static {
-        filter.add(CounterAnyPredicate.instance);
+        filter.add(new CounterAnyPredicate());
     }
 
     public RishkarPeemaRenegade(UUID ownerId, CardSetInfo setInfo) {

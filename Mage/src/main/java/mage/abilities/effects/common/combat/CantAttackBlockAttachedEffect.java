@@ -1,10 +1,10 @@
+
 package mage.abilities.effects.common.combat;
 
-import mage.abilities.Ability;
-import mage.abilities.effects.RestrictionEffect;
 import mage.constants.AttachmentType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
+import mage.abilities.Ability;
+import mage.abilities.effects.RestrictionEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -14,7 +14,7 @@ import mage.game.permanent.Permanent;
 public class CantAttackBlockAttachedEffect extends RestrictionEffect {
 
     public CantAttackBlockAttachedEffect(AttachmentType attachmentType) {
-        super(Duration.WhileOnBattlefield, Outcome.Removal);
+        super(Duration.WhileOnBattlefield);
         this.staticText = attachmentType.verb() + " creature can't attack or block";
     }
 
@@ -30,12 +30,12 @@ public class CantAttackBlockAttachedEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
+    public boolean canAttack(Game game) {
         return false;
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
         return false;
     }
 

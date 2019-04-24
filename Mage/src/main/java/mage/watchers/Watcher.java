@@ -2,13 +2,10 @@
 package mage.watchers;
 
 import java.io.Serializable;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.UUID;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -18,16 +15,14 @@ import org.apache.log4j.Logger;
  */
 public abstract class Watcher implements Serializable {
 
-    private static final Logger logger = Logger.getLogger(Watcher.class);
-
+    protected String basicKey;
     protected UUID controllerId;
     protected UUID sourceId;
     protected boolean condition;
     protected final WatcherScope scope;
 
-
-
-    public Watcher(WatcherScope scope) {
+    public Watcher(String basicKey, WatcherScope scope) {
+        this.basicKey = basicKey;
         this.scope = scope;
     }
 
@@ -36,6 +31,7 @@ public abstract class Watcher implements Serializable {
         this.controllerId = watcher.controllerId;
         this.sourceId = watcher.sourceId;
         this.scope = watcher.scope;
+        this.basicKey = watcher.basicKey;
     }
 
     public UUID getControllerId() {
@@ -57,14 +53,13 @@ public abstract class Watcher implements Serializable {
     public String getKey() {
         switch (scope) {
             case GAME:
-                return getBasicKey();
+                return basicKey;
             case PLAYER:
-                return controllerId + getBasicKey();
+                return controllerId + basicKey;
             case CARD:
-                return sourceId + getBasicKey();
-                default:
-                    return getBasicKey();
+                return sourceId + basicKey;
         }
+        return basicKey;
     }
 
     public boolean conditionMet() {
@@ -75,21 +70,8 @@ public abstract class Watcher implements Serializable {
         condition = false;
     }
 
-    protected String getBasicKey(){
-        return getClass().getSimpleName();
-    }
-
     public abstract void watch(GameEvent event, Game game);
 
-    public <T extends Watcher> T copy(){
-        try {
-            Constructor<? extends Watcher> constructor = this.getClass().getDeclaredConstructor(getClass());
-            constructor.setAccessible(true);
-            return (T) constructor.newInstance(this);
-        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-            logger.error("Can't copy watcher: " + e.getMessage(), e);
-        }
-        return null;
-    }
+    public abstract Watcher copy();
 
 }

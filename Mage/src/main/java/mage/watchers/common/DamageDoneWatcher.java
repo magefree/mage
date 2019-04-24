@@ -21,29 +21,26 @@ import java.util.UUID;
 public class DamageDoneWatcher extends Watcher {
 
     // which object did how much damage during the turn
-    private final Map<MageObjectReference, Integer> damagingObjects;
-
-    public Map<MageObjectReference, Integer> getDamagingObjects() {
-        return damagingObjects;
-    }
-
-    public Map<MageObjectReference, Integer> getDamagedObjects() {
-        return damagedObjects;
-    }
+    public final Map<MageObjectReference, Integer> damagingObjects;
 
     // which object received how much damage during the turn
-    private final Map<MageObjectReference, Integer> damagedObjects;
+    public final Map<MageObjectReference, Integer> damagedObjects;
 
     public DamageDoneWatcher() {
-        super(WatcherScope.GAME);
+        super(DamageDoneWatcher.class.getSimpleName(), WatcherScope.GAME);
         this.damagingObjects = new HashMap<>();
         this.damagedObjects = new HashMap<>();
     }
 
-    private DamageDoneWatcher(final DamageDoneWatcher watcher) {
+    public DamageDoneWatcher(final DamageDoneWatcher watcher) {
         super(watcher);
         this.damagingObjects = new HashMap<>(watcher.damagingObjects);
         this.damagedObjects = new HashMap<>(watcher.damagedObjects);
+    }
+
+    @Override
+    public DamageDoneWatcher copy() {
+        return new DamageDoneWatcher(this);
     }
 
     @Override

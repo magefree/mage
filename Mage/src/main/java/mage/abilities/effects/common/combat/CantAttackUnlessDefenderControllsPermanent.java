@@ -1,5 +1,8 @@
+
+
 package mage.abilities.effects.common.combat;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.RestrictionEffect;
 import mage.constants.Duration;
@@ -8,9 +11,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
-import java.util.UUID;
-
 /**
+ *
  * @author LevelX2
  */
 
@@ -35,11 +37,7 @@ public class CantAttackUnlessDefenderControllsPermanent extends RestrictionEffec
     }
 
     @Override
-    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game, boolean canUseChooseDialogs) {
-        if (defenderId == null) {
-            return true;
-        }
-
+    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
         UUID defendingPlayerId;
         Player player = game.getPlayer(defenderId);
         if (player == null) {
@@ -52,7 +50,10 @@ public class CantAttackUnlessDefenderControllsPermanent extends RestrictionEffec
         } else {
             defendingPlayerId = defenderId;
         }
-        return defendingPlayerId == null || game.getBattlefield().countAll(filter, defendingPlayerId, game) != 0;
+        if (defendingPlayerId != null && game.getBattlefield().countAll(filter, defendingPlayerId, game) == 0) {
+            return false;
+        }
+        return true;
     }
 
     @Override

@@ -21,10 +21,10 @@ import mage.game.permanent.token.TreasureToken;
  */
 public final class PitilessPlunderer extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature you control");
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature you control");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

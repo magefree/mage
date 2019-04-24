@@ -22,10 +22,10 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class InfernalTribute extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a nontoken permanent");
+    private final static FilterControlledPermanent filter = new FilterControlledPermanent("a nontoken permanent");
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(Predicates.not(new TokenPredicate()));
     }
 
     public InfernalTribute(UUID ownerId, CardSetInfo setInfo) {

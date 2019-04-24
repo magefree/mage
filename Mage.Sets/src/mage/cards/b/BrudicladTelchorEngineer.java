@@ -31,7 +31,7 @@ public final class BrudicladTelchorEngineer extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature tokens you control");
 
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(new TokenPredicate());
     }
 
     public BrudicladTelchorEngineer(UUID ownerId, CardSetInfo setInfo) {
@@ -64,7 +64,7 @@ class BrudicladTelchorEngineerEffect extends OneShotEffect {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("token you control");
 
     static {
-        filter.add(TokenPredicate.instance);
+        filter.add(new TokenPredicate());
     }
 
     public BrudicladTelchorEngineerEffect() {
@@ -84,9 +84,6 @@ class BrudicladTelchorEngineerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if(controller == null){
-            return false;
-        }
         CreateTokenEffect effect = new CreateTokenEffect(new BrudicladTelchorMyrToken(), 1);
 
         if (effect.apply(game, source)) {

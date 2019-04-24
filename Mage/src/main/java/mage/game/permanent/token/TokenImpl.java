@@ -1,5 +1,9 @@
 package mage.game.permanent.token;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.abilities.Ability;
@@ -13,11 +17,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.util.RandomUtil;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.UUID;
 
 public abstract class TokenImpl extends MageObjectImpl implements Token {
 
@@ -242,8 +241,6 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
 
     @Override
     public void setOriginalExpansionSetCode(String originalExpansionSetCode) {
-        // TODO: remove original set code at all... token image must be takes by card source or by latest set (on null source)
-        // TODO: if set have same tokens then selects it by random
         this.originalExpansionSetCode = originalExpansionSetCode;
         setTokenDescriptor();
     }

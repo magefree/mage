@@ -1,7 +1,9 @@
+
 package mage.cards.j;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
@@ -16,7 +18,6 @@ import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.SecondTargetPointer;
 
 /**
@@ -42,7 +43,18 @@ public final class Jilt extends CardImpl {
         Target target = new TargetCreaturePermanent();
         target.setTargetTag(1);
         this.getSpellAbility().addTarget(target);
-        this.getSpellAbility().setTargetAdjuster(JiltAdjuster.instance);
+    }
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability instanceof SpellAbility && KickedCondition.instance.apply(game, ability)) {
+            FilterCreaturePermanent filter = new FilterCreaturePermanent("Another creature: Damaged");
+            filter.add(new AnotherTargetPredicate(2));
+            Target target = new TargetCreaturePermanent(filter);
+            target.setTargetTag(2);
+            ability.addTarget(target);
+        }
+
     }
 
     public Jilt(final Jilt card) {
@@ -53,21 +65,4 @@ public final class Jilt extends CardImpl {
     public Jilt copy() {
         return new Jilt(this);
     }
-}
-
-enum JiltAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (!KickedCondition.instance.apply(game, ability)) {
-            return;
-        }
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("Another creature: Damaged");
-        filter.add(new AnotherTargetPredicate(2));
-        Target target = new TargetCreaturePermanent(filter);
-        target.setTargetTag(2);
-        ability.addTarget(target);
-    }
-
 }

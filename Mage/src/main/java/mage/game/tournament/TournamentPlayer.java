@@ -1,5 +1,7 @@
+
 package mage.game.tournament;
 
+import java.util.Set;
 import mage.cards.decks.Deck;
 import mage.constants.TournamentPlayerState;
 import mage.game.result.ResultProtos.TourneyPlayerProto;
@@ -8,9 +10,8 @@ import mage.players.Player;
 import mage.players.PlayerType;
 import mage.util.TournamentUtil;
 
-import java.util.Set;
-
 /**
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class TournamentPlayer {
@@ -92,9 +93,7 @@ public class TournamentPlayer {
         // Check if the cards included in the deck are the same as in the original deck
         boolean validDeck = (getDeck().getDeckCompleteHashCode() == deck.getDeckCompleteHashCode());
         if (validDeck == false) {
-            // Clear the deck so the player cheating looses the game
-            deck.getCards().clear();
-            deck.getSideboard().clear();
+            deck.getCards().clear(); // Clear the deck so the player cheating looses the game
         }
         this.deck = deck;
         return validDeck;
@@ -178,6 +177,7 @@ public class TournamentPlayer {
 
     /**
      * Free resources no longer needed if tournament has ended
+     *
      */
     public void cleanUpOnTournamentEnd() {
         this.deck = null;

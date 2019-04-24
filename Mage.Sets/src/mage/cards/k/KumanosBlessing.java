@@ -94,7 +94,7 @@ class KumanosBlessingEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zce = (ZoneChangeEvent) event;
         if (zce.isDiesEvent()) {
-            DamagedByEnchantedWatcher watcher = game.getState().getWatcher(DamagedByEnchantedWatcher.class, source.getSourceId());
+            DamagedByEnchantedWatcher watcher = (DamagedByEnchantedWatcher) game.getState().getWatchers().get(DamagedByEnchantedWatcher.class.getSimpleName(), source.getSourceId());
             if (watcher != null) {
                 return watcher.wasDamaged(zce.getTarget(), game);
             }
@@ -109,7 +109,7 @@ class DamagedByEnchantedWatcher extends Watcher {
     private final Set<MageObjectReference> damagedCreatures = new HashSet<>();
 
     public DamagedByEnchantedWatcher() {
-        super(WatcherScope.CARD);
+        super(DamagedByEnchantedWatcher.class.getSimpleName(), WatcherScope.CARD);
     }
 
     public DamagedByEnchantedWatcher(final DamagedByEnchantedWatcher watcher) {

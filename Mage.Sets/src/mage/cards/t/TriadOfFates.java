@@ -39,7 +39,7 @@ public final class TriadOfFates extends CardImpl {
     private static final FilterCreaturePermanent filterCounter = new FilterCreaturePermanent("creature that has a fate counter on it");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
         filterCounter.add(new CounterPredicate(CounterType.FATE));
     }
 

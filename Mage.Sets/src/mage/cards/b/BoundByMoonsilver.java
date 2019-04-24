@@ -26,10 +26,10 @@ import java.util.UUID;
  */
 public final class BoundByMoonsilver extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("another permanent");
+    private final static FilterControlledPermanent filter = new FilterControlledPermanent("another permanent");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public BoundByMoonsilver(UUID ownerId, CardSetInfo setInfo) {

@@ -1,3 +1,4 @@
+
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
@@ -7,6 +8,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
+ *
  * @author North
  */
 public class CantBeBlockedSourceEffect extends RestrictionEffect {
@@ -14,7 +16,6 @@ public class CantBeBlockedSourceEffect extends RestrictionEffect {
     public CantBeBlockedSourceEffect() {
         this(Duration.WhileOnBattlefield);
     }
-
     public CantBeBlockedSourceEffect(Duration duration) {
         super(duration);
         this.staticText = "{this} can't be blocked";
@@ -33,7 +34,7 @@ public class CantBeBlockedSourceEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
         return false;
     }
 

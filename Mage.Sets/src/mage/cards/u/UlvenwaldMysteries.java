@@ -34,7 +34,7 @@ public final class UlvenwaldMysteries extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(Predicates.not(new TokenPredicate()));
         filterClue.add(new SubtypePredicate(SubType.CLUE));
     }
 

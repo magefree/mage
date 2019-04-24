@@ -11,10 +11,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
+ *
  * @author LevelX2
  */
-public enum CommanderPredicate implements Predicate<Permanent> {
-    instance;
+public class CommanderPredicate implements Predicate<Permanent> {
 
     @Override
     public boolean apply(Permanent input, Game game) {

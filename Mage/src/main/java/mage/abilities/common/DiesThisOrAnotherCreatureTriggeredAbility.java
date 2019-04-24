@@ -66,7 +66,7 @@ public class DiesThisOrAnotherCreatureTriggeredAbility extends TriggeredAbilityI
             return false;
         }
 
-        if (zEvent.isDiesEvent()) {
+        if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
             if (zEvent.getTarget() != null) {
                 if (zEvent.getTarget().getId().equals(this.getSourceId())) {
                     return true;

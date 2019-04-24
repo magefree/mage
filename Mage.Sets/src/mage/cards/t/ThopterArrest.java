@@ -23,7 +23,7 @@ import mage.target.TargetPermanent;
  */
 public final class ThopterArrest extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
+    private final static FilterPermanent filter = new FilterPermanent("artifact or creature");
 
     static {
         filter.add(Predicates.or(

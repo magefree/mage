@@ -1,6 +1,7 @@
 
 package mage.cards.r;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,12 +17,13 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.permanent.token.RakkaMarElementalToken;
 
-import java.util.UUID;
-
 /**
+ *
  * @author Loki
  */
 public final class RakkaMar extends CardImpl {
+
+    private RakkaMarElementalToken token = new RakkaMarElementalToken();
 
     public RakkaMar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
@@ -32,12 +34,7 @@ public final class RakkaMar extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(HasteAbility.getInstance());
-
-        Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
-                new CreateTokenEffect(new RakkaMarElementalToken()),
-                new ManaCostsImpl("{R}")
-        );
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(token), new ManaCostsImpl("{R}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

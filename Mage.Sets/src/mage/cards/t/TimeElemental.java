@@ -34,7 +34,7 @@ public final class TimeElemental extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("permanent that isn't enchanted");
 
     static {
-        filter.add(Predicates.not(EnchantedPredicate.instance));
+        filter.add(Predicates.not(new EnchantedPredicate()));
     }
 
     public TimeElemental(UUID ownerId, CardSetInfo setInfo) {

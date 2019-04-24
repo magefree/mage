@@ -84,7 +84,7 @@ class SteelHellkiteDestroyEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        SteelHellkiteWatcher watcher = game.getState().getWatcher(SteelHellkiteWatcher.class);
+        SteelHellkiteWatcher watcher = (SteelHellkiteWatcher) game.getState().getWatchers().get(SteelHellkiteWatcher.class.getSimpleName());
         if (watcher == null || watcher.getDamagedPlayers(source.getSourceId()).isEmpty()) {
             return false;
         }
@@ -104,7 +104,7 @@ class SteelHellkiteWatcher extends Watcher {
     private final Map<UUID, Set<UUID>> damageMap = new HashMap<>();
 
     public SteelHellkiteWatcher() {
-        super(WatcherScope.GAME);
+        super(SteelHellkiteWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public SteelHellkiteWatcher(final SteelHellkiteWatcher watcher) {

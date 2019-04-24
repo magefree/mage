@@ -6,6 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
+import mage.abilities.costs.common.RemoveVariableCountersTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.EvolveAbility;
@@ -78,8 +79,8 @@ enum SimicManipulatorAdjuster implements TargetAdjuster {
         if (sourcePermanent != null) {
             int xValue = 0;
             for (Cost cost : ability.getCosts()) {
-                if (cost instanceof RemoveVariableCountersSourceCost) {
-                    xValue = ((RemoveVariableCountersSourceCost) cost).getAmount();
+                if (cost instanceof RemoveVariableCountersTargetCost) {
+                    xValue = ((RemoveVariableCountersTargetCost) cost).getAmount();
                     break;
                 }
             }

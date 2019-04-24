@@ -67,18 +67,16 @@ class BarrinsSpiteEffect extends OneShotEffect {
                 Permanent creature = game.getPermanent(targetId);
                 if (creature != null) {
                     Player controllerOfCreature = game.getPlayer(creature.getControllerId());
-                    if(controllerOfCreature != null) {
-                        if ((count == 0
-                                && controllerOfCreature.chooseUse(Outcome.Sacrifice, "Sacrifice " + creature.getLogName() + '?', source, game))
-                                || (count == 1
-                                && !sacrificeDone)) {
-                            creature.sacrifice(source.getId(), game);
-                            sacrificeDone = true;
-                        } else {
-                            creature.moveToZone(Zone.HAND, source.getId(), game, false);
-                        }
-                        count++;
+                    if ((count == 0
+                            && controllerOfCreature.chooseUse(Outcome.Sacrifice, "Sacrifice " + creature.getLogName() + '?', source, game))
+                            || (count == 1
+                            && !sacrificeDone)) {
+                        creature.sacrifice(source.getId(), game);
+                        sacrificeDone = true;
+                    } else {
+                        creature.moveToZone(Zone.HAND, source.getId(), game, false);
                     }
+                    count++;
                 }
             }
             return true;

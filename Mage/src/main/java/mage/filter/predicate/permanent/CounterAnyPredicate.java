@@ -1,15 +1,19 @@
 
 package mage.filter.predicate.permanent;
 
+import mage.counters.Counter;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
+ *
  * @author LevelX2
  */
-public enum CounterAnyPredicate implements Predicate<Permanent> {
-    instance;
+public class CounterAnyPredicate implements Predicate<Permanent> {
+
+    public CounterAnyPredicate() {
+    }
 
     @Override
     public boolean apply(Permanent input, Game game) {

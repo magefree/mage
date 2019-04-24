@@ -33,7 +33,7 @@ public final class PiousEvangel extends CardImpl {
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("another permanent");
 
     static {
-        filter2.add(AnotherPredicate.instance);
+        filter2.add(new AnotherPredicate());
     }
 
     public PiousEvangel(UUID ownerId, CardSetInfo setInfo) {

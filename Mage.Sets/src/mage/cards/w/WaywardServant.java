@@ -26,7 +26,7 @@ public final class WaywardServant extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.ZOMBIE));
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     private static final String rule = "Whenever another Zombie enters the battlefield under your control, each opponent loses 1 life and you gain 1 life.";

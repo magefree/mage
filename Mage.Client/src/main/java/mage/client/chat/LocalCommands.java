@@ -14,9 +14,6 @@ import java.util.UUID;
 
 public final class LocalCommands {
 
-
-    private LocalCommands(){}
-
     /**
      * Handler for commands that do not require server interaction, i.e settings etc
      * @param chatId

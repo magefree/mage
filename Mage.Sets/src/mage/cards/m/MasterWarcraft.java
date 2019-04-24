@@ -79,7 +79,7 @@ public final class MasterWarcraft extends CardImpl {
     
         @Override
         public boolean apply(Game game, Ability source) {
-            MasterWarcraftCastWatcher watcher = game.getState().getWatcher(MasterWarcraftCastWatcher.class);
+            MasterWarcraftCastWatcher watcher = (MasterWarcraftCastWatcher) game.getState().getWatchers().get(MasterWarcraftCastWatcher.class.getSimpleName());
             if (watcher != null) {
                 watcher.increment();
                 return true;
@@ -105,7 +105,7 @@ public final class MasterWarcraft extends CardImpl {
     
         @Override
         public boolean apply(Game game, Ability source) {
-            ChooseBlockersRedundancyWatcher watcher = game.getState().getWatcher(ChooseBlockersRedundancyWatcher.class);
+            ChooseBlockersRedundancyWatcher watcher = (ChooseBlockersRedundancyWatcher) game.getState().getWatchers().get(ChooseBlockersRedundancyWatcher.class.getSimpleName());
             if (watcher != null) {
                 watcher.increment();
                 return true;
@@ -153,10 +153,7 @@ class MasterWarcraftChooseAttackersEffect extends ContinuousRuleModifyingEffectI
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        MasterWarcraftCastWatcher watcher = game.getState().getWatcher(MasterWarcraftCastWatcher.class);
-        if(watcher == null){
-            return false;
-        }
+        MasterWarcraftCastWatcher watcher = (MasterWarcraftCastWatcher) game.getState().getWatchers().get(MasterWarcraftCastWatcher.class.getSimpleName());
         watcher.decrement();
         if (watcher.copyCountApply > 0) {
             game.informPlayers(source.getSourceObject(game).getIdName() + " didn't apply");
@@ -229,10 +226,7 @@ class MasterWarcraftChooseBlockersEffect extends ContinuousRuleModifyingEffectIm
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        ChooseBlockersRedundancyWatcher watcher = game.getState().getWatcher(ChooseBlockersRedundancyWatcher.class);
-        if(watcher == null){
-            return false;
-        }
+        ChooseBlockersRedundancyWatcher watcher = (ChooseBlockersRedundancyWatcher) game.getState().getWatchers().get(ChooseBlockersRedundancyWatcher.class.getSimpleName());
         watcher.decrement();
         if (watcher.copyCountApply > 0) {
             game.informPlayers(source.getSourceObject(game).getIdName() + " didn't apply");
@@ -254,7 +248,7 @@ class MasterWarcraftCastWatcher extends Watcher {
     public int copyCountApply = 0;
 
     public MasterWarcraftCastWatcher() {
-        super(WatcherScope.GAME);
+        super(MasterWarcraftCastWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public MasterWarcraftCastWatcher(final MasterWarcraftCastWatcher watcher) {

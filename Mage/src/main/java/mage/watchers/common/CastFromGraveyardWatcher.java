@@ -20,7 +20,7 @@ public class CastFromGraveyardWatcher extends Watcher {
     private final Map<UUID, HashSet<Integer>> spellsCastFromGraveyard = new HashMap<>();
 
     public CastFromGraveyardWatcher() {
-        super(WatcherScope.GAME);
+        super(CastFromGraveyardWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public CastFromGraveyardWatcher(final CastFromGraveyardWatcher watcher) {

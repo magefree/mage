@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -26,24 +25,28 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class MizziumSkin extends CardImpl {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
 
+    static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
+    }
 
     public MizziumSkin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
 
         // Target creature you control gets +0/+1 and gains hexproof until end of turn.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new BoostTargetEffect(0,1, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HexproofAbility.getInstance(), Duration.EndOfTurn));
 
         // Overload {1}{U} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
-        OverloadAbility ability = new OverloadAbility(this, new BoostAllEffect(0,1, Duration.EndOfTurn,StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED,false), new ManaCostsImpl("{1}{U}"));
-        ability.addEffect(new GainAbilityAllEffect(HexproofAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED));
+        OverloadAbility ability = new OverloadAbility(this, new BoostAllEffect(0,1, Duration.EndOfTurn,filter,false), new ManaCostsImpl("{1}{U}"));
+        ability.addEffect(new GainAbilityAllEffect(HexproofAbility.getInstance(), Duration.EndOfTurn, filter));
         this.addAbility(ability);
     }
 
-    private MizziumSkin(final MizziumSkin card) {
+    public MizziumSkin(final MizziumSkin card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class AweForTheGuilds extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Monocolored creatures");
     static {
-        filter.add(Predicates.not(MulticoloredPredicate.instance));
+        filter.add(Predicates.not(new MulticoloredPredicate()));
     }
 
     public AweForTheGuilds(UUID ownerId, CardSetInfo setInfo) {

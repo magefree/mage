@@ -9,21 +9,17 @@ import mage.watchers.common.ZuberasDiedWatcher;
 /**
  * Created by Eric on 9/24/2016.
  */
-public enum ZuberasDiedDynamicValue implements DynamicValue {
-    instance;
+public class ZuberasDiedDynamicValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        ZuberasDiedWatcher watcher = game.getState().getWatcher(ZuberasDiedWatcher.class);
-        if (watcher == null) {
-            return 0;
-        }
-        return watcher.getZuberasDiedThisTurn();
+        ZuberasDiedWatcher watcher = (ZuberasDiedWatcher) game.getState().getWatchers().get(ZuberasDiedWatcher.class.getSimpleName());
+        return watcher.zuberasDiedThisTurn;
     }
 
     @Override
     public ZuberasDiedDynamicValue copy() {
-        return ZuberasDiedDynamicValue.instance;
+        return new ZuberasDiedDynamicValue();
     }
 
     @Override

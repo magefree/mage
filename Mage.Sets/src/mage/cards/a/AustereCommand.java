@@ -37,15 +37,15 @@ public final class AustereCommand extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterArtifactPermanent("artifacts")));
         // or destroy all enchantments;
         Mode mode = new Mode();
-        mode.addEffect(new DestroyAllEffect(new FilterEnchantmentPermanent("enchantments")));
+        mode.getEffects().add(new DestroyAllEffect(new FilterEnchantmentPermanent("enchantments")));
         this.getSpellAbility().getModes().addMode(mode);
         // or destroy all creatures with converted mana cost 3 or less;
         mode = new Mode();
-        mode.addEffect(new DestroyAllEffect(filter3orLess));
+        mode.getEffects().add(new DestroyAllEffect(filter3orLess));
         this.getSpellAbility().getModes().addMode(mode);
         // or destroy all creatures with converted mana cost 4 or greater.
         mode = new Mode();
-        mode.addEffect(new DestroyAllEffect(filter4orMore));
+        mode.getEffects().add(new DestroyAllEffect(filter4orMore));
         this.getSpellAbility().getModes().addMode(mode);
     }
 

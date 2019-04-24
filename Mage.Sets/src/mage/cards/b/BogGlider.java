@@ -29,7 +29,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class BogGlider extends CardImpl {
 
-    static final FilterControlledPermanent landFilter = new FilterControlledLandPermanent("a land");
+    final static FilterControlledPermanent landFilter = new FilterControlledLandPermanent("a land");
     private static final FilterPermanentCard filter = new FilterPermanentCard("Mercenary permanent card with converted mana cost 2 or less");
 
     static {

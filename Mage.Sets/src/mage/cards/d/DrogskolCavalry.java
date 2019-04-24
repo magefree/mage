@@ -28,7 +28,7 @@ public final class DrogskolCavalry extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("another Spirit");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
         filter.add(new SubtypePredicate(SubType.SPIRIT));
     }
 

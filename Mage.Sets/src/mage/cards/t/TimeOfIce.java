@@ -37,7 +37,7 @@ public final class TimeOfIce extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creatures");
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(new TappedPredicate());
     }
 
     public TimeOfIce(UUID ownerId, CardSetInfo setInfo) {
@@ -141,7 +141,7 @@ class TimeOfIceEffect extends ContinuousRuleModifyingEffectImpl {
 class TimeOfIceWatcher extends Watcher {
 
     TimeOfIceWatcher() {
-        super(WatcherScope.CARD);
+        super("ControlLost", WatcherScope.CARD);
     }
 
     TimeOfIceWatcher(TimeOfIceWatcher watcher) {

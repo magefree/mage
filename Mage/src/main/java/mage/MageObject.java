@@ -64,14 +64,20 @@ public interface MageObject extends MageItem, Serializable {
 
     void adjustTargets(Ability ability, Game game);
 
-    // memory object copy (not mtg)
     MageObject copy();
 
-    // copied card info (mtg)
-    void setCopy(boolean isCopy, MageObject copiedFrom);
+    /**
+     * Defines that MageObject is a copy of another object
+     *
+     * @param isCopy
+     */
+    void setCopy(boolean isCopy);
 
-    MageObject getCopyFrom();
-
+    /**
+     * Checks if current MageObject is a copy of another object
+     *
+     * @return
+     */
     boolean isCopy();
 
     int getZoneChangeCounter(Game game);
@@ -153,18 +159,13 @@ public interface MageObject extends MageItem, Serializable {
      * @return
      */
     default boolean shareTypes(Card otherCard) {
-        return this.shareTypes(otherCard, false);
-    }
-
-    default boolean shareTypes(Card otherCard, boolean permanentOnly) {
 
         if (otherCard == null) {
             throw new IllegalArgumentException("Params can't be null");
         }
 
         for (CardType type : getCardType()) {
-            if (otherCard.getCardType().contains(type)
-                    && (!permanentOnly || type.isPermanentType())) {
+            if (otherCard.getCardType().contains(type)) {
                 return true;
             }
         }

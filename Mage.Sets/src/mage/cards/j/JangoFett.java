@@ -1,30 +1,37 @@
+
 package mage.cards.j;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.Outcome;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
-import java.util.UUID;
-
 /**
+ *
  * @author Styxo/spjspj
  */
 public final class JangoFett extends CardImpl {
@@ -48,7 +55,7 @@ public final class JangoFett extends CardImpl {
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability);
 
-        // Whenever Jango Fett attacks, it gets +X/+0, where X is the number of creatures defending player controls with a bounty counter on them
+        // Whenever Jango Fett attacks, it deals X damage to defending player and target creature he or she controls, where X is the number of creatures defending player controls with a bounty counter on them.
         this.addAbility(new JangoFettTriggeredAbility(new JangoFettEffect(), false));
     }
 
@@ -90,6 +97,11 @@ class JangoFettTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getSourceId().equals(this.getSourceId())) {
             UUID defenderId = game.getCombat().getDefendingPlayerId(getSourceId(), game);
             if (defenderId != null) {
+                this.getTargets().clear();
+                FilterCreaturePermanent filter = new FilterCreaturePermanent("target creature defending player controls");
+                filter.add(new ControllerIdPredicate(defenderId));
+                TargetPermanent target = new TargetPermanent(filter);
+                this.addTarget(target);
                 return true;
             }
         }
@@ -113,8 +125,8 @@ class JangoFettTriggeredAbility extends TriggeredAbilityImpl {
 class JangoFettEffect extends OneShotEffect {
 
     public JangoFettEffect() {
-        super(Outcome.BoostCreature);
-        this.staticText = "it gets +X/+0, where X is the number of creatures defending player controls with a bounty counter on them";
+        super(Outcome.Damage);
+        this.staticText = "it deals X damage to defending player and target creature he or she controls, where X is the number of creatures defending player controls with a bounty counter on them";
     }
 
     public JangoFettEffect(final JangoFettEffect ability) {
@@ -146,7 +158,14 @@ class JangoFettEffect extends OneShotEffect {
             return false;
         }
 
-        game.addEffect(new BoostSourceEffect(count, 0, Duration.WhileOnBattlefield), source);
+        Permanent targetCreature = game.getPermanent(source.getFirstTarget());
+        if (targetCreature != null) {
+            targetCreature.damage(count, source.getSourceId(), game, false, true);
+        }
+        Player defender = game.getPlayer(defenderId);
+        defender.damage(count, source.getSourceId(), game, false, true);
+
         return true;
     }
+
 }

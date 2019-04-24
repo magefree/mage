@@ -26,7 +26,7 @@ public final class MazeSentinel extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Multicolored creatures you control");
     static {
-        filter.add(MulticoloredPredicate.instance);
+        filter.add(new MulticoloredPredicate());
     }
 
     public MazeSentinel (UUID ownerId, CardSetInfo setInfo) {

@@ -15,7 +15,7 @@ public enum RaidCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        PlayerAttackedWatcher watcher = game.getState().getWatcher(PlayerAttackedWatcher.class);
+        PlayerAttackedWatcher watcher = (PlayerAttackedWatcher) game.getState().getWatchers().get(PlayerAttackedWatcher.class.getSimpleName());
         return watcher != null && watcher.getNumberOfAttackersCurrentTurn(source.getControllerId()) > 0;
     }
 

@@ -78,6 +78,8 @@ class StrionicResonatorEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        return "Copy " + mode.getTargets().get(0).getTargetName() + ". You may choose new targets for the copy";
+        StringBuilder sb = new StringBuilder();
+        sb.append("Copy ").append(mode.getTargets().get(0).getTargetName()).append(". You may choose new targets for the copy");
+        return sb.toString();
     }
 }

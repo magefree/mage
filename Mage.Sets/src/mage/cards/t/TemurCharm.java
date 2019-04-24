@@ -41,7 +41,7 @@ public final class TemurCharm extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}{U}{R}");
 
         // Choose one -
-        // Target creature you control gets +1/+1 until end of turn. That creature fights target creature you don't control.
+        // <strong>�</strong> Target creature you control gets +1/+1 until end of turn. That creature fights target creature you don't control.
         Effect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
         this.getSpellAbility().addEffect(effect);
         effect = new FightTargetsEffect();
@@ -51,20 +51,20 @@ public final class TemurCharm extends CardImpl {
         Target target = new TargetCreaturePermanent(filter);
         this.getSpellAbility().addTarget(target);
 
-        // Counter target spell unless its controller pays {3}.
+        // <strong>�</strong> Counter target spell unless its controller pays {3}.
         Mode mode = new Mode();
-        mode.addEffect(new CounterUnlessPaysEffect(new GenericManaCost(3)));
-        mode.addTarget(new TargetSpell());
+        mode.getEffects().add(new CounterUnlessPaysEffect(new GenericManaCost(3)));
+        mode.getTargets().add(new TargetSpell());
         this.getSpellAbility().addMode(mode);
 
-        // Creatures with power 3 or less can't block this turn.
+        // <strong>�</strong> Creatures with power 3 or less can't block this turn.
         mode = new Mode();
-        mode.addEffect(new CantBlockAllEffect(filterCantBlock, Duration.EndOfTurn));
+        mode.getEffects().add(new CantBlockAllEffect(filterCantBlock, Duration.EndOfTurn));
         this.getSpellAbility().addMode(mode);
 
     }
 
-    private TemurCharm(final TemurCharm card) {
+    public TemurCharm(final TemurCharm card) {
         super(card);
     }
 

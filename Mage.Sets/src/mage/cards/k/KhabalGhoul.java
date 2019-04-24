@@ -28,7 +28,7 @@ public final class KhabalGhoul extends CardImpl {
 
         // At the beginning of each end step, put a +1/+1 counter on Khabal Ghoul for each creature that died this turn.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(),
-            CreaturesDiedThisTurnCount.instance, true), TargetController.ANY, false), new CreaturesDiedWatcher());
+            new CreaturesDiedThisTurnCount(), true), TargetController.ANY, false), new CreaturesDiedWatcher());
     }
 
     public KhabalGhoul(final KhabalGhoul card) {

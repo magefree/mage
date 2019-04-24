@@ -28,7 +28,7 @@ public final class SetessanTactics extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public SetessanTactics(UUID ownerId, CardSetInfo setInfo) {

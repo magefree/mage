@@ -92,7 +92,7 @@ class MortalObstinacyAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever enchanted creature deals combat damage to a player, " + super.getRule();
+        return new StringBuilder("Whenever enchanted creature deals combat damage to a player, ").append(super.getRule()).toString();
     }
 }
 

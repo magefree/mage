@@ -1,5 +1,8 @@
+
 package mage.cards.g;
 
+import java.util.Set;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -15,10 +18,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.watchers.common.AttackedLastTurnWatcher;
 
-import java.util.Set;
-import java.util.UUID;
-
 /**
+ *
  * @author TheElk801
  */
 public final class GiantTurtle extends CardImpl {
@@ -61,12 +62,14 @@ class CantAttackIfAttackedLastTurnEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game, boolean canUseChooseDialogs) {
-        AttackedLastTurnWatcher watcher = game.getState().getWatcher(AttackedLastTurnWatcher.class);
+    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
+        AttackedLastTurnWatcher watcher = (AttackedLastTurnWatcher) game.getState().getWatchers().get(AttackedLastTurnWatcher.class.getSimpleName());
         if (watcher != null) {
             Set<MageObjectReference> attackingCreatures = watcher.getAttackedLastTurnCreatures(attacker.getControllerId());
             MageObjectReference mor = new MageObjectReference(attacker, game);
-            return !attackingCreatures.contains(mor);
+            if (attackingCreatures.contains(mor)) {
+                return false;
+            }
         }
         return true;
     }

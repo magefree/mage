@@ -26,8 +26,6 @@ import mage.view.CardView;
 import mage.view.PermanentView;
 import net.xeoh.plugins.base.PluginManager;
 import net.xeoh.plugins.base.impl.PluginManagerFactory;
-import net.xeoh.plugins.base.util.uri.ClassURI;
-
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.CardPluginImpl;
 import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
@@ -48,15 +46,13 @@ public enum Plugins implements MagePlugins {
 
     @Override
     public void loadPlugins() {
+
         LOGGER.info("Loading plugins...");
         pm = PluginManagerFactory.createPluginManager();
         pm.addPluginsFrom(new File(PLUGINS_DIRECTORY + File.separator).toURI());
-        pm.addPluginsFrom(new ClassURI(CardPluginImpl.class).toURI());
-        pm.addPluginsFrom(new ClassURI(ThemePluginImpl.class).toURI());
-
-        this.cardPlugin = pm.getPlugin(CardPlugin.class);
+        this.cardPlugin = new CardPluginImpl();
         this.counterPlugin = pm.getPlugin(CounterPlugin.class);
-        this.themePlugin = pm.getPlugin(ThemePlugin.class);
+        this.themePlugin = new ThemePluginImpl();
         LOGGER.info("Done.");
     }
 
@@ -69,11 +65,15 @@ public enum Plugins implements MagePlugins {
 
     @Override
     public void changeGUISize() {
+        setGUISize();
         if (this.cardPlugin != null) {
             cardPlugin.changeGUISize();
         }
     }
 
+    private void setGUISize() {
+
+    }
 
     @Override
     public void updateGamePanel(Map<String, JComponent> ui) {

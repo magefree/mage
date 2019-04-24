@@ -32,7 +32,7 @@ public final class Skullsnatcher extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("unblocked attacker you control");
 
     static {
-        filter.add(UnblockedPredicate.instance);
+        filter.add(new UnblockedPredicate());
     }
 
     public Skullsnatcher(UUID ownerId, CardSetInfo setInfo) {

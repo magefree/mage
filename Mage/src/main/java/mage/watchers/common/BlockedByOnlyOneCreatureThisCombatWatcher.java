@@ -18,7 +18,7 @@ public class BlockedByOnlyOneCreatureThisCombatWatcher extends Watcher {
     private final Map<CombatGroup, UUID> blockedByOneCreature = new HashMap<>();
 
     public BlockedByOnlyOneCreatureThisCombatWatcher() {
-        super(WatcherScope.GAME);
+        super(BlockedByOnlyOneCreatureThisCombatWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public BlockedByOnlyOneCreatureThisCombatWatcher(final BlockedByOnlyOneCreatureThisCombatWatcher watcher) {

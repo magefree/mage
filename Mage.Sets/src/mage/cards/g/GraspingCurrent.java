@@ -17,7 +17,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class GraspingCurrent extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Jace, Ingenious Mind-Mage");
+    private final static FilterCard filter = new FilterCard("Jace, Ingenious Mind-Mage");
 
     static {
         filter.add(new NamePredicate("Jace, Ingenious Mind-Mage"));

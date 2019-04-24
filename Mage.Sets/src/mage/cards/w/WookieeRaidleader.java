@@ -25,7 +25,7 @@ public final class WookieeRaidleader extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public WookieeRaidleader(UUID ownerId, CardSetInfo setInfo) {

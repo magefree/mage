@@ -1,6 +1,7 @@
 
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -21,9 +22,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.MaritLageToken;
 
-import java.util.UUID;
-
 /**
+ *
  * @author Plopman
  */
 public final class DarkDepths extends CardImpl {
@@ -106,8 +106,7 @@ class DarkDepthsAbility extends StateTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "When {this} has no ice counters on it, sacrifice it. If you do, " +
-                "create Marit Lage, a legendary 20/20 black Avatar creature token with flying and indestructible.";
+        return "When {this} has no ice counters on it, sacrifice it. If you do, create a legendary 20/20 black Avatar creature token with flying and indestructible named Marit Lage.";
     }
 
 }

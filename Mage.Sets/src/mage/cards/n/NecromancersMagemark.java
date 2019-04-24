@@ -36,7 +36,7 @@ public final class NecromancersMagemark extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control that are enchanted");
 
     static {
-        filter.add(EnchantedPredicate.instance);
+        filter.add(new EnchantedPredicate());
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
@@ -111,7 +111,7 @@ class NecromancersMagemarkEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.isDiesEvent()) {
+        if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
             Permanent permanent = ((ZoneChangeEvent) event).getTarget();
             if (permanent != null && permanent.isControlledBy(source.getControllerId())) {
                 for (UUID attachmentId : permanent.getAttachments()) {

@@ -43,7 +43,7 @@ public final class KiyomaroFirstToStand extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Kiyomaro, First to Stand's power and toughness are each equal to the number of cards in your hand.
-        DynamicValue xValue= CardsInControllerHandCount.instance;
+        DynamicValue xValue= new CardsInControllerHandCount();
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(xValue, Duration.EndOfGame)));
         
         // As long as you have four or more cards in hand, Kiyomaro has vigilance.

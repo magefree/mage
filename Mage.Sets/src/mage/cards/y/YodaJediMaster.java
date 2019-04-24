@@ -16,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -39,13 +38,12 @@ public final class YodaJediMaster extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("another target permanent you own");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
         filter.add(new OwnerPredicate(TargetController.YOU));
     }
 
     public YodaJediMaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{G}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.YODA);
 
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));

@@ -1,5 +1,7 @@
+
 package mage.cards.k;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -8,22 +10,25 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.WitherAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.Duration;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.UUID;
-
 /**
+ *
  * @author jeffwadsworth
  */
 public final class KulrathKnight extends CardImpl {
 
     public KulrathKnight(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B/R}{B/R}");
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B/R}{B/R}");
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.KNIGHT);
         this.power = new MageInt(3);
@@ -56,7 +61,7 @@ class KulrathKnightRestrictionEffect extends RestrictionEffect {
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
-        filter.add(CounterAnyPredicate.instance);
+        filter.add(new CounterAnyPredicate());
     }
 
     public KulrathKnightRestrictionEffect() {
@@ -74,12 +79,12 @@ class KulrathKnightRestrictionEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
+    public boolean canAttack(Game game) {
         return false;
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
         return false;
     }
 

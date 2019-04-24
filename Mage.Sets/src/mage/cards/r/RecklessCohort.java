@@ -21,10 +21,10 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  */
 public final class RecklessCohort extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another Ally");
+    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another Ally");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
         filter.add(new SubtypePredicate(SubType.ALLY));
     }
 

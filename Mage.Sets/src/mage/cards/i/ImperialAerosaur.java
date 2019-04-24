@@ -29,7 +29,7 @@ public final class ImperialAerosaur extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public ImperialAerosaur(UUID ownerId, CardSetInfo setInfo) {

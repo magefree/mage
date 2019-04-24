@@ -1,3 +1,4 @@
+
 package mage.cards.g;
 
 import java.util.HashSet;
@@ -154,8 +155,7 @@ class GontiLordOfLuxuryCastFromExileEffect extends AsThoughEffectImpl {
                 && affectedControllerId.equals(source.getControllerId())) {
             Card card = game.getCard(objectId);
             // TODO: Allow to cast Zoetic Cavern face down
-            return card != null
-                    && !card.isLand();
+            return card != null && !card.isLand();
         }
         return false;
     }
@@ -184,15 +184,16 @@ class GontiLordOfLuxurySpendAnyManaEffect extends AsThoughEffectImpl implements 
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        objectId = game.getCard(objectId).getMainCard().getId(); // for split cards
         if (objectId.equals(((FixedTarget) getTargetPointer()).getTarget())
                 && game.getState().getZoneChangeCounter(objectId) <= ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1) {
+
             if (affectedControllerId.equals(source.getControllerId())) {
                 // if the card moved from exile to spell the zone change counter is increased by 1
                 if (game.getState().getZoneChangeCounter(objectId) == ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1) {
                     return true;
                 }
             }
+
         } else if (((FixedTarget) getTargetPointer()).getTarget().equals(objectId)) {
             // object has moved zone so effect can be discarted
             this.discard();
@@ -229,18 +230,13 @@ class GontiLordOfLuxuryLookEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        objectId = game.getCard(objectId).getMainCard().getId(); // for split cards
-        if (affectedControllerId.equals(source.getControllerId())
-                && game.getState().getZone(objectId) == Zone.EXILED) {
+        if (affectedControllerId.equals(source.getControllerId()) && game.getState().getZone(objectId) == Zone.EXILED) {
             Player controller = game.getPlayer(source.getControllerId());
             MageObject sourceObject = source.getSourceObject(game);
-            if (controller != null
-                    && sourceObject != null) {
+            if (controller != null && sourceObject != null) {
                 Card card = game.getCard(objectId);
-                if (card != null
-                        && card.isFaceDown(game)) {
-                    Set<UUID> exileZones = (Set<UUID>) game.getState().getValue(
-                            GontiLordOfLuxury.VALUE_PREFIX + source.getSourceId().toString());
+                if (card != null && card.isFaceDown(game)) {
+                    Set<UUID> exileZones = (Set<UUID>) game.getState().getValue(GontiLordOfLuxury.VALUE_PREFIX + source.getSourceId().toString());
                     if (exileZones != null) {
                         for (ExileZone exileZone : game.getExile().getExileZones()) {
                             if (exileZone.contains(objectId)) {

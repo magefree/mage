@@ -60,7 +60,7 @@ class CallerOfTheClawWatcher extends Watcher {
     private int creaturesCount = 0;
 
     public CallerOfTheClawWatcher() {
-        super(WatcherScope.PLAYER);
+        super(CallerOfTheClawWatcher.class.getSimpleName(), WatcherScope.PLAYER);
         condition = true;
     }
 
@@ -114,7 +114,7 @@ class CallerOfTheClawDynamicValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        CallerOfTheClawWatcher watcher = game.getState().getWatcher(CallerOfTheClawWatcher.class, sourceAbility.getControllerId());
+        CallerOfTheClawWatcher watcher = (CallerOfTheClawWatcher) game.getState().getWatchers().get(CallerOfTheClawWatcher.class.getSimpleName(), sourceAbility.getControllerId());
         if (watcher != null) {
             return watcher.getCreaturesCount();
         }

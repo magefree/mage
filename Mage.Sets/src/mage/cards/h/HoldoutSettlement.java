@@ -23,7 +23,7 @@ public final class HoldoutSettlement extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("an untapped creature you control");
     
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public HoldoutSettlement(UUID ownerId, CardSetInfo setInfo) {

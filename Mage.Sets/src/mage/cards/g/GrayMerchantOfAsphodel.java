@@ -30,9 +30,7 @@ public final class GrayMerchantOfAsphodel extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Gray Merchant of Asphodel enters the battlefield, each opponent loses X life, where X is your devotion to black. You gain life equal to the life lost this way.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new GrayMerchantOfAsphodelEffect(), 
-                false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new GrayMerchantOfAsphodelEffect(), false));
     }
 
     public GrayMerchantOfAsphodel(final GrayMerchantOfAsphodel card) {
@@ -48,11 +46,8 @@ public final class GrayMerchantOfAsphodel extends CardImpl {
 class GrayMerchantOfAsphodelEffect extends OneShotEffect {
 
     public GrayMerchantOfAsphodelEffect() {
-        super(Outcome.GainLife);
-        this.staticText = "each opponent loses X life, where X is your devotion to black. "
-                + "You gain life equal to the life lost this way. "
-                + "<i>(Each {B} in the mana costs of permanents you control "
-                + "counts towards your devotion to black.)</i>";
+        super(Outcome.Benefit);
+        this.staticText = "each opponent loses X life, where X is your devotion to black. You gain life equal to the life lost this way. <i>(Each {B} in the mana costs of permanents you control counts towards your devotion to black.)</i>";
     }
 
     public GrayMerchantOfAsphodelEffect(final GrayMerchantOfAsphodelEffect effect) {
@@ -68,17 +63,17 @@ class GrayMerchantOfAsphodelEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int totalLifeLost = 0;
-            int lifeLost = new DevotionCount(ColoredManaSymbol.B).calculate(game, source, this);
-            if (lifeLost > 0) {
+            int lifeLost = 0;
+            int damage = new DevotionCount(ColoredManaSymbol.B).calculate(game, source, this);
+            if (damage > 0) {
                 for (UUID playerId : game.getOpponents(source.getControllerId())) {
                     Player opponent = game.getPlayer(playerId);
                     if (opponent != null) {
-                        totalLifeLost += opponent.loseLife(lifeLost, game, false);
+                        lifeLost += opponent.loseLife(damage, game, false);
                     }
                 }
             }
-            controller.gainLife(totalLifeLost, game, source);
+            controller.gainLife(lifeLost, game, source);
             return true;
         }
         return false;

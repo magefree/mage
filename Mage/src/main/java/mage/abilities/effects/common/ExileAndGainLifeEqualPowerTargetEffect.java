@@ -14,7 +14,7 @@ import mage.players.Player;
 public class ExileAndGainLifeEqualPowerTargetEffect extends OneShotEffect {
 
     public ExileAndGainLifeEqualPowerTargetEffect() {
-        super(Outcome.Removal);
+        super(Outcome.GainLife);
         staticText = "Exile target creature. Its controller gains life equal to its power";
     }
 

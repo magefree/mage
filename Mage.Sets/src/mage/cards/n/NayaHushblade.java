@@ -29,8 +29,8 @@ public final class NayaHushblade extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another multicolor permanent");
     
     static {
-        filter.add(MulticoloredPredicate.instance);
-        filter.add(AnotherPredicate.instance);
+        filter.add(new MulticoloredPredicate());
+        filter.add(new AnotherPredicate());
     }
 
     public NayaHushblade(UUID ownerId, CardSetInfo setInfo) {

@@ -28,7 +28,7 @@ public final class AvatarOfTheResolute extends CardImpl {
     
     static {
         filter.add(new CounterPredicate(CounterType.P1P1));
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public AvatarOfTheResolute(UUID ownerId, CardSetInfo setInfo) {

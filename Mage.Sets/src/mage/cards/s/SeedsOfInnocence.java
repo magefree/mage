@@ -61,9 +61,7 @@ class SeedsOfInnocenceEffect extends OneShotEffect {
                 Player artifactController = game.getPlayer(artifact.getControllerId());
                 int cmc = artifact.getConvertedManaCost();
                 if (artifact.destroy(source.getSourceId(), game, true)) {
-                    if(artifactController != null) {
-                        artifactController.gainLife(cmc, game, source);
-                    }
+                    artifactController.gainLife(cmc, game, source);
                 }
             }
             return true;

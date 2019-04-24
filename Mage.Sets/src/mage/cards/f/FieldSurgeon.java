@@ -28,7 +28,7 @@ public final class FieldSurgeon extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("an untapped creature you control");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public FieldSurgeon(UUID ownerId, CardSetInfo setInfo) {

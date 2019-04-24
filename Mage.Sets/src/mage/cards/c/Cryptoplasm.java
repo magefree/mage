@@ -25,10 +25,10 @@ import mage.util.functions.ApplyToPermanent;
  */
 public final class Cryptoplasm extends CardImpl {
 
-    static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public Cryptoplasm(UUID ownerId, CardSetInfo setInfo) {

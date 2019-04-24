@@ -24,7 +24,7 @@ public final class ChampionOfTheParish extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another Human");
     static {
         filter.add(new SubtypePredicate(SubType.HUMAN));
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public ChampionOfTheParish(UUID ownerId, CardSetInfo setInfo) {

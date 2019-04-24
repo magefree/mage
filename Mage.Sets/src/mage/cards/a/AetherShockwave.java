@@ -33,7 +33,7 @@ public final class AetherShockwave extends CardImpl {
         this.getSpellAbility().addEffect(new TapAllEffect(filterSpirit));
         
         Mode mode = new Mode();
-        mode.addEffect(new TapAllEffect(filterNonSpirit));
+        mode.getEffects().add(new TapAllEffect(filterNonSpirit));
         this.getSpellAbility().addMode(mode);
     }
 

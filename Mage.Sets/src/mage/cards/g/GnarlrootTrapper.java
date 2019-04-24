@@ -35,10 +35,10 @@ import java.util.UUID;
  */
 public final class GnarlrootTrapper extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("attacking ELf you control");
+    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("attacking ELf you control");
 
     static {
-        filter.add(AttackingPredicate.instance);
+        filter.add(new AttackingPredicate());
         filter.add(new SubtypePredicate(SubType.ELF));
     }
 
@@ -92,7 +92,7 @@ class GnarlrootTrapperManaCondition extends CreatureCastManaCondition {
     public boolean apply(Game game, Ability source) {
         if (super.apply(game, source)) {
             MageObject object = game.getObject(source.getSourceId());
-            if (object != null && object.hasSubtype(SubType.ELF, game)
+            if (object.hasSubtype(SubType.ELF, game)
                     && object.isCreature()) {
                 return true;
             }

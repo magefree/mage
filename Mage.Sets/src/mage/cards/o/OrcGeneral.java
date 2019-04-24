@@ -33,7 +33,7 @@ public final class OrcGeneral extends CardImpl {
     static {
         filterOrcOrGoblin.add(Predicates.or(new SubtypePredicate(SubType.ORC),
                 new SubtypePredicate(SubType.GOBLIN)));
-        filterOrcOrGoblin.add(AnotherPredicate.instance);
+        filterOrcOrGoblin.add(new AnotherPredicate()); 
         filterOrc.add(new SubtypePredicate(SubType.ORC));
     }
 

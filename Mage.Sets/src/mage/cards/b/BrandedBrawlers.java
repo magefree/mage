@@ -1,5 +1,7 @@
+
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -8,8 +10,8 @@ import mage.abilities.effects.common.combat.CantAttackIfDefenderControlsPermanen
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
@@ -19,20 +21,17 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
-import java.util.UUID;
-
 /**
  * @author L_J
  */
 public final class BrandedBrawlers extends CardImpl {
 
     static final private FilterLandPermanent filter = new FilterLandPermanent("an untapped land");
-
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
-
-    static final private String rule = "{this} can't block if you control an untapped land";
+    
+    final static private String rule = "{this} can't block if you control an untapped land";
 
     public BrandedBrawlers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
@@ -65,7 +64,7 @@ class BrandedBrawlersCantBlockEffect extends RestrictionEffect {
     public BrandedBrawlersCantBlockEffect(FilterPermanent filter) {
         super(Duration.WhileOnBattlefield);
         this.filter = filter;
-        staticText = "{this} can't attack if you control " + filter.getMessage();
+        staticText = new StringBuilder("{this} can't attack if you control ").append(filter.getMessage()).toString();
     }
 
     public BrandedBrawlersCantBlockEffect(final BrandedBrawlersCantBlockEffect effect) {
@@ -79,10 +78,12 @@ class BrandedBrawlersCantBlockEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
         Player player = game.getPlayer(blocker.getControllerId());
         if (player != null) {
-            return game.getBattlefield().countAll(filter, player.getId(), game) <= 0;
+            if (game.getBattlefield().countAll(filter, player.getId(), game) > 0) {
+                return false;
+            }
         }
         return true;
     }

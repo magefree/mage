@@ -27,7 +27,7 @@ public final class Riftsweeper extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("face-up exiled card");
     static {
-        filter.add(Predicates.not(FaceDownPredicate.instance));
+        filter.add(Predicates.not(new FaceDownPredicate()));
     }
 
     public Riftsweeper(UUID ownerId, CardSetInfo setInfo) {
@@ -79,7 +79,7 @@ class RiftsweeperEffect extends OneShotEffect {
             // move to exile
             card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
             game.getPlayer(card.getOwnerId()).shuffleLibrary(source, game);
-            game.informPlayers("Riftsweeper: Choosen card was " + card.getName());
+            game.informPlayers(new StringBuilder("Riftsweeper: Choosen card was ").append(card.getName()).toString());
             return true;
         }
         return false;

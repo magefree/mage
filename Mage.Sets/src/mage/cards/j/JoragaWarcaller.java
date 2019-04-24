@@ -32,7 +32,7 @@ public final class JoragaWarcaller extends CardImpl {
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(new SubtypePredicate(SubType.ELF));
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public JoragaWarcaller(UUID ownerId, CardSetInfo setInfo) {
@@ -48,7 +48,7 @@ public final class JoragaWarcaller extends CardImpl {
         
         // Joraga Warcaller enters the battlefield with a +1/+1 counter on it for each time it was kicked.
         this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), MultikickerCount.instance, true),
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), new MultikickerCount(), true),
                 "with a +1/+1 counter on it for each time it was kicked"));
 
         

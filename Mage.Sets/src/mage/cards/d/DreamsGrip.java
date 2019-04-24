@@ -33,9 +33,9 @@ public final class DreamsGrip extends CardImpl {
         //or untap target permanent.
         Mode mode = new Mode();
         TargetPermanent target2 = new TargetPermanent(new FilterPermanent("Permanent to untap"));
-        mode.addTarget(target2);
+        mode.getTargets().add(target2);
         Effect untapEffect = new UntapTargetEffect();
-        mode.addEffect(untapEffect);
+        mode.getEffects().add(untapEffect);
         this.getSpellAbility().addMode(mode);
         
         // Entwine {1}

@@ -107,7 +107,7 @@ class AvacynThePurifierEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         FilterCreaturePermanent filter = new FilterCreaturePermanent("each other creature");
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
         for (Permanent permanent : permanents) {
             permanent.damage(3, source.getSourceId(), game, false, true);

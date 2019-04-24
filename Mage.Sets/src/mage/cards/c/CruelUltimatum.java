@@ -1,5 +1,7 @@
+
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -19,9 +21,8 @@ import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetOpponent;
 
-import java.util.UUID;
-
 /**
+ *
  * @author North
  */
 public final class CruelUltimatum extends CardImpl {
@@ -79,8 +80,7 @@ class CruelUltimatumEffect extends OneShotEffect {
             if (card == null) {
                 return false;
             }
-
-            return controller.moveCards(card, Zone.HAND, source, game);
+            controller.moveCards(card, Zone.HAND, source, game);
         }
         return true;
     }

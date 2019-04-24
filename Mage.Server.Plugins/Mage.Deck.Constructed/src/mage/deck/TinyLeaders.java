@@ -1,5 +1,10 @@
+
 package mage.deck;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import mage.abilities.common.CanBeYourCommanderAbility;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
@@ -7,15 +12,12 @@ import mage.cards.Sets;
 import mage.cards.SplitCard;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
+import mage.constants.SetType;
 import mage.filter.FilterMana;
 import mage.game.GameTinyLeadersImpl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 /**
+ *
  * @author JRHerlehy
  */
 public class TinyLeaders extends Constructed {
@@ -25,7 +27,7 @@ public class TinyLeaders extends Constructed {
     public TinyLeaders() {
         this("Tiny Leaders");
         for (ExpansionSet set : Sets.getInstance().values()) {
-            if (set.getSetType().isEternalLegal()) {
+            if (set.getSetType() != SetType.CUSTOM_SET) {
                 setCodes.add(set.getCode());
             }
         }
@@ -82,17 +84,8 @@ public class TinyLeaders extends Constructed {
         super(name);
     }
 
-    @Override
-    public int getDeckMinSize() {
-        return 49; // commander gives from deck name
-    }
-
-    @Override
-    public int getSideboardMinSize() {
-        return 0;
-    }
-
     /**
+     *
      * @param deck
      * @return - True if deck is valid
      */
@@ -100,8 +93,8 @@ public class TinyLeaders extends Constructed {
     public boolean validate(Deck deck) {
         boolean valid = true;
 
-        if (deck.getCards().size() != getDeckMinSize()) {
-            invalid.put("Deck", "Must contain " + getDeckMinSize() + " cards: has " + deck.getCards().size() + " cards");
+        if (deck.getCards().size() != 49) {
+            invalid.put("Deck", "Must contain 49 cards: has " + deck.getCards().size() + " cards");
             valid = false;
         }
 
@@ -219,8 +212,9 @@ public class TinyLeaders extends Constructed {
     }
 
     /**
+     *
      * @param commander FilterMana object with Color Identity of Commander set
-     * @param card      Card to validate
+     * @param card Card to validate
      * @return True if card has a valid color identity
      */
     public boolean cardHasValideColor(FilterMana commander, Card card) {

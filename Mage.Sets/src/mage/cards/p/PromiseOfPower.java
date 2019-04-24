@@ -41,7 +41,7 @@ public final class PromiseOfPower extends CardImpl {
 
         // - Create an X/X black Demon creature token with flying, where X is the number of cards in your hand.
         Mode mode = new Mode();
-        mode.addEffect(new PromiseOfPowerEffect());
+        mode.getEffects().add(new PromiseOfPowerEffect());
         this.getSpellAbility().getModes().addMode(mode);
 
         // Entwine {4}

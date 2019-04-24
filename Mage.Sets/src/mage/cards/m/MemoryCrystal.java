@@ -61,7 +61,7 @@ class MemoryCrystalSpellsCostReductionEffect extends CostModificationEffectImpl 
         if (card != null) {
             for (Ability ability : card.getAbilities()) {
                 if (ability instanceof BuybackAbility) {
-                    if (ability.isActivated()) {
+                    if (((BuybackAbility) ability).isActivated()) {
                         int amountToReduce = ((BuybackAbility) ability).reduceCost(2);
                         CardUtil.reduceCost(abilityToModify, amountToReduce);
                     }

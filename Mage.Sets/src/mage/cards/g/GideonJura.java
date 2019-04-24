@@ -1,5 +1,6 @@
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -12,7 +13,11 @@ import mage.abilities.effects.common.PreventAllDamageToSourceEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.TurnPhase;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
@@ -21,9 +26,8 @@ import mage.game.permanent.token.TokenImpl;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponent;
 
-import java.util.UUID;
-
 /**
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public final class GideonJura extends CardImpl {
@@ -31,7 +35,7 @@ public final class GideonJura extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 
     static {
-        filter.add(TappedPredicate.instance);
+        filter.add(new TappedPredicate());
     }
 
     public GideonJura(UUID ownerId, CardSetInfo setInfo) {
@@ -123,7 +127,7 @@ class GideonJuraEffect extends RequirementEffect {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        return (getStartingTurnNum() != game.getTurnNum()
+        return (startingTurn != game.getTurnNum()
                 && (game.getPhase().getType() == TurnPhase.END
                 && game.isActivePlayer(source.getFirstTarget())))
                 || // 6/15/2010: If a creature controlled by the affected player can't attack Gideon Jura (because he's no longer on the battlefield, for example), that player may have it attack you, another one of your planeswalkers, or nothing at all.

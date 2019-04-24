@@ -74,10 +74,8 @@ class MyojinOfNightsReachEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             Player opponent = game.getPlayer(opponentId);
-            if(opponent != null) {
-                for (Card c : opponent.getHand().getCards(game)) {
-                    opponent.discard(c, source, game);
-                }
+            for (Card c : opponent.getHand().getCards(game)) {
+                opponent.discard(c, source, game);
             }
         }
         return true;

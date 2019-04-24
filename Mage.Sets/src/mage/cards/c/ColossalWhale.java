@@ -89,7 +89,7 @@ class ColossalWhaleAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} attacks, " + super.getRule();
+        return new StringBuilder("Whenever {this} attacks, ").append(super.getRule()).toString();
     }
 
     @Override

@@ -31,7 +31,7 @@ public final class DranasChosen extends CardImpl {
     
     static {
         filter.add(new SubtypePredicate(SubType.ALLY));
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public DranasChosen(UUID ownerId, CardSetInfo setInfo) {

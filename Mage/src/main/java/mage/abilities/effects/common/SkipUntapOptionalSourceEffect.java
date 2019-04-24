@@ -1,3 +1,4 @@
+
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -9,6 +10,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
+ *
  * @author LevelX2
  */
 public class SkipUntapOptionalSourceEffect extends RestrictionEffect {
@@ -30,15 +32,9 @@ public class SkipUntapOptionalSourceEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBeUntapped(Permanent permanent, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canBeUntapped(Permanent permanent, Ability source, Game game) {
         Player player = game.getPlayer(permanent.getControllerId());
-        if (canUseChooseDialogs) {
-            // calls on untap step
-            return player != null && player.chooseUse(Outcome.Benefit, "Untap " + permanent.getLogName() + '?', source, game);
-        } else {
-            // calcs on get cards info
-            return true;
-        }
+        return player != null && player.chooseUse(Outcome.Benefit, "Untap " + permanent.getLogName() + '?', source, game);
     }
 
     @Override

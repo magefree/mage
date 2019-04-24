@@ -1,5 +1,7 @@
+
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -15,11 +17,9 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
-import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
+ *
  * @author Styxo
  */
 public final class CandlesOfLeng extends CardImpl {
@@ -63,9 +63,6 @@ class CandlesOfLengEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if(controller == null || sourceObject == null){
-            return false;
-        }
         if (controller.getLibrary().hasCards()) {
             CardsImpl cards = new CardsImpl();
             Card card = controller.getLibrary().getFromTop(game);
@@ -76,7 +73,7 @@ class CandlesOfLengEffect extends OneShotEffect {
             controller.revealCards(sourceObject.getName(), cards, game);
             boolean hasTheSameName = false;
             for (UUID uuid : controller.getGraveyard()) {
-                if (CardUtil.haveSameNames(card, game.getCard(uuid))) {
+                if (card.getName().equals(game.getCard(uuid).getName())) {
                     hasTheSameName = true;
                 }
             }

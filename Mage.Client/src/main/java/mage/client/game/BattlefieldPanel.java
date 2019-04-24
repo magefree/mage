@@ -235,10 +235,14 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
 
     private void addPermanent(PermanentView permanent, final int count) {
         if (cardDimension == null) {
-            cardDimension = new Dimension(Config.dimensions.getFrameWidth(), Config.dimensions.getFrameHeight());
+            cardDimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
         }
         final MagePermanent perm = Plugins.instance.getMagePermanent(permanent, bigCard, cardDimension, gameId, true);
-
+        if (!Plugins.instance.isCardPluginLoaded()) {
+            //perm.setBounds(findEmptySpace(new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight)));
+        } else {
+            //perm.setAlpha(0);
+        }
         permanents.put(permanent.getId(), perm);
 
         BattlefieldPanel.this.jPanel.add(perm, 10);

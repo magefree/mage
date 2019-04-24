@@ -1,3 +1,4 @@
+
 package mage.cards.d;
 
 import java.util.UUID;
@@ -20,10 +21,13 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
+
+
 public final class DeadbridgeChant extends CardImpl {
 
     public DeadbridgeChant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}{G}");
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{B}{G}");
+
 
         // When Deadbridge Chant enters the battlefield, put the top ten cards of your library into your graveyard.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new PutTopCardOfLibraryIntoGraveControllerEffect(10)));
@@ -60,10 +64,9 @@ class DeadbridgeChantEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null
-                && !controller.getGraveyard().isEmpty()) {
-            Card card = controller.getGraveyard().getRandom(game);
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null && !player.getGraveyard().isEmpty()) {
+            Card card = player.getGraveyard().getRandom(game);
             if (card != null) {
                 Zone targetZone = Zone.HAND;
                 String text = " put into hand of ";
@@ -71,8 +74,8 @@ class DeadbridgeChantEffect extends OneShotEffect {
                     targetZone = Zone.BATTLEFIELD;
                     text = " put onto battlefield for ";
                 }
-                controller.moveCards(card, targetZone, source, game);
-                game.informPlayers("Deadbridge Chant: " + card.getName() + text + controller.getLogName());
+                card.moveToZone(targetZone, source.getSourceId(), game, false);
+                game.informPlayers(new StringBuilder("Deadbridge Chant: ").append(card.getName()).append(text).append(player.getLogName()).toString());
                 return true;
             }
         }

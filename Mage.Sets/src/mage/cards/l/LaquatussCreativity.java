@@ -57,11 +57,9 @@ class LaquatussCreativityEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getFirstTarget());
-        if(player != null) {
-            int handCount = player.getHand().count(new FilterCard(), game);
-            player.drawCards(handCount, game);
-            player.discard(handCount, false, source, game);
-        }
+        int handCount = player.getHand().count(new FilterCard(), game);
+        player.drawCards(handCount, game);
+        player.discard(handCount, false, source, game);
         return false;
     }
 }

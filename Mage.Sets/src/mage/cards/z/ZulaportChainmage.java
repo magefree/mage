@@ -30,7 +30,7 @@ public final class ZulaportChainmage extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.ALLY));
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public ZulaportChainmage(UUID ownerId, CardSetInfo setInfo) {

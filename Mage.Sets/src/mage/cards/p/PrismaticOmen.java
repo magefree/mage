@@ -1,3 +1,4 @@
+
 package mage.cards.p;
 
 import mage.Mana;
@@ -17,12 +18,13 @@ import java.util.List;
 import java.util.UUID;
 
 /**
+ *
  * @author LevelX2
  */
 public final class PrismaticOmen extends CardImpl {
 
     public PrismaticOmen(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
 
         // Lands you control are every basic land type in addition to their other types.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesBasicLandTypeAllEffect("Swamp", "Mountain", "Forest", "Island", "Plains")));
@@ -44,7 +46,7 @@ class BecomesBasicLandTypeAllEffect extends ContinuousEffectImpl {
 
     public BecomesBasicLandTypeAllEffect(String... landNames) {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        landTypes.addAll(SubType.getBasicLands());
+        landTypes.addAll(SubType.getBasicLands(false));
         this.staticText = "Lands you control are every basic land type in addition to their other types";
     }
 

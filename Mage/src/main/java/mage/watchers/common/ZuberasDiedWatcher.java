@@ -14,14 +14,10 @@ import mage.watchers.Watcher;
  */
 public class ZuberasDiedWatcher extends Watcher {
 
-    public int getZuberasDiedThisTurn() {
-        return zuberasDiedThisTurn;
-    }
-
-    private int zuberasDiedThisTurn = 0;
+    public int zuberasDiedThisTurn = 0;
 
     public ZuberasDiedWatcher() {
-        super(WatcherScope.GAME);
+        super(ZuberasDiedWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public ZuberasDiedWatcher(final ZuberasDiedWatcher watcher) {

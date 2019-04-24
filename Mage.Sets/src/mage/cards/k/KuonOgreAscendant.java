@@ -89,7 +89,7 @@ enum KuonOgreAscendantCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        CreaturesDiedWatcher watcher = game.getState().getWatcher(CreaturesDiedWatcher.class);
+        CreaturesDiedWatcher watcher = (CreaturesDiedWatcher) game.getState().getWatchers().get(CreaturesDiedWatcher.class.getSimpleName());
         if (watcher != null) {
             return watcher.getAmountOfCreaturesDiedThisTurn() > 2;
         }

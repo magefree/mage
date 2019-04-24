@@ -1,5 +1,7 @@
+
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -23,9 +25,8 @@ import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.permanent.token.ZombieToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 
-import java.util.UUID;
-
 /**
+ *
  * @author fireshoes
  */
 public final class Cryptbreaker extends CardImpl {
@@ -33,12 +34,12 @@ public final class Cryptbreaker extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Zombies you control");
 
     static {
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
         filter.add(new SubtypePredicate(SubType.ZOMBIE));
     }
 
     public Cryptbreaker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
         this.subtype.add(SubType.ZOMBIE);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -50,10 +51,12 @@ public final class Cryptbreaker extends CardImpl {
         this.addAbility(ability);
 
         // Tap three untapped Zombies you control: You draw a card and you lose 1 life.
-        Effect effect = new DrawCardSourceControllerEffect(1, "you");
+        Effect effect = new DrawCardSourceControllerEffect(1);
+        effect.setText("You draw a card");
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapTargetCost(new TargetControlledCreaturePermanent(3, 3, filter, true)));
         effect = new LoseLifeSourceControllerEffect(1);
-        ability.addEffect(effect.concatBy("and"));
+        effect.setText("and you lose 1 life");
+        ability.addEffect(effect);
         this.addAbility(ability);
     }
 

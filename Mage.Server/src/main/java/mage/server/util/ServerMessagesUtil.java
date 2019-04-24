@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.Executors;
@@ -53,6 +52,7 @@ public enum ServerMessagesUtil {
     }
 
 
+
     public List<String> getMessages() {
         lock.readLock().lock();
         try {
@@ -66,7 +66,9 @@ public enum ServerMessagesUtil {
         log.debug("Reading server messages...");
         List<String> motdMessages = readFromFile();
         List<String> newMessages = new ArrayList<>();
-        newMessages.addAll(motdMessages);
+        if (motdMessages != null) {
+            newMessages.addAll(motdMessages);
+        }
         newMessages.add(getServerStatistics());
         newMessages.add(getServerStatistics2());
 
@@ -81,7 +83,7 @@ public enum ServerMessagesUtil {
 
     private List<String> readFromFile() {
         if (ignore) {
-            return Collections.emptyList();
+            return null;
         }
         File externalFile = null;
         if (pathToExternalMessages != null) {
@@ -118,20 +120,23 @@ public enum ServerMessagesUtil {
         }
         if (is == null) {
             log.warn("Couldn't find server.msg");
-            return Collections.emptyList();
+            return null;
         }
 
+        Scanner scanner = null;
         List<String> newMessages = new ArrayList<>();
-        try(Scanner scanner = new Scanner(is)) {
+        try {
+            scanner = new Scanner(is);
             while (scanner.hasNextLine()) {
                 String message = scanner.nextLine();
                 if (!message.trim().isEmpty()) {
                     newMessages.add(message.trim());
                 }
             }
-        } catch (Exception e) {
-            log.error(e, e);
+        } catch(Exception e) {
+            log.error(e,e);
         } finally {
+            StreamUtils.closeQuietly(scanner);
             StreamUtils.closeQuietly(is);
         }
         return newMessages;
@@ -163,7 +168,7 @@ public enum ServerMessagesUtil {
         return statistics.toString();
     }
 
-    //    private Timer timer = new Timer(1000 * 60, new ActionListener() {
+//    private Timer timer = new Timer(1000 * 60, new ActionListener() {
 //        public void actionPerformed(ActionEvent e) {
 //            reloadMessages();
 //        }

@@ -334,10 +334,10 @@ public class User {
         }
         for (Iterator<Entry<UUID, UUID>> iterator = userTournaments.entrySet().iterator(); iterator.hasNext();) {
             Entry<UUID, UUID> next = iterator.next();
-            Optional<TournamentController> tournamentController = TournamentManager.instance.getTournamentController(next.getValue());
-            if (tournamentController.isPresent()) {
+            TournamentController tournamentController = TournamentManager.instance.getTournamentController(next.getValue());
+            if (tournamentController != null) {
                 ccTournamentStarted(next.getValue(), next.getKey());
-                tournamentController.get().rejoin(next.getKey());
+                tournamentController.rejoin(next.getKey());
             } else {
                 iterator.remove(); // tournament has ended meanwhile
             }

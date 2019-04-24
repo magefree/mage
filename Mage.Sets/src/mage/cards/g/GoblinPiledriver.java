@@ -28,7 +28,7 @@ public final class GoblinPiledriver extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.GOBLIN));
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public GoblinPiledriver(UUID ownerId, CardSetInfo setInfo) {

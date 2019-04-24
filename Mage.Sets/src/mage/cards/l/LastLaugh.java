@@ -27,7 +27,7 @@ public final class LastLaugh extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("a permanent other than Last Laugh");
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
     
     public LastLaugh(UUID ownerId, CardSetInfo setInfo) {
@@ -73,7 +73,7 @@ class LastLaughStateTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "When no creatures are on the battlefield, " + super.getRule();
+        return new StringBuilder("When no creatures are on the battlefield, ").append(super.getRule()).toString() ;
     }
 
 }

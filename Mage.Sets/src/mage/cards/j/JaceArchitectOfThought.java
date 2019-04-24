@@ -1,8 +1,7 @@
+
 package mage.cards.j;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageObjectReference;
@@ -10,6 +9,7 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.Card;
@@ -24,10 +24,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.FilterPlayer;
 import mage.filter.common.FilterNonlandCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.other.PlayerIdPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -35,7 +32,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
@@ -123,9 +119,9 @@ class JaceArchitectOfThoughtDelayedTriggeredAbility extends DelayedTriggeredAbil
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.getOpponents(getControllerId()).contains(event.getPlayerId())) {
-            getEffects().forEach((effect) -> {
+            for (Effect effect : getEffects()) {
                 effect.setTargetPointer(new FixedTarget(event.getSourceId()));
-            });
+            }
             return true;
         }
         return false;
@@ -184,6 +180,7 @@ class JaceArchitectOfThoughtEffect2 extends OneShotEffect {
             if (opponent == null) {
                 opponent = game.getPlayer(opponents.iterator().next());
             }
+
             TargetCard target = new TargetCard(0, allCards.size(), Zone.LIBRARY, new FilterCard("cards to put in the first pile"));
             target.setNotTarget(true);
             opponent.choose(Outcome.Neutral, allCards, target, game);
@@ -198,7 +195,7 @@ class JaceArchitectOfThoughtEffect2 extends OneShotEffect {
 
             boolean pileChoice = player.choosePile(Outcome.Neutral, "Choose a pile to to put into your hand.",
                     new ArrayList<>(pile1.getCards(game)),
-                    new ArrayList<>(pile2.getCards(game)), game);
+                    new ArrayList<>(allCards.getCards(game)), game);
             game.informPlayers(player.getLogName() + " chose pile" + (pileChoice ? "1" : "2"));
             player.moveCards(pileChoice ? pile1 : pile2, Zone.HAND, source, game);
             player.putCardsOnBottomOfLibrary(pileChoice ? pile2 : pile1, game, source, true);
@@ -209,9 +206,9 @@ class JaceArchitectOfThoughtEffect2 extends OneShotEffect {
 
     private void postPileToLog(String pileName, Set<Card> cards, Game game) {
         StringBuilder message = new StringBuilder(pileName).append(": ");
-        cards.forEach((card) -> {
+        for (Card card : cards) {
             message.append(card.getName()).append(' ');
-        });
+        }
         if (cards.isEmpty()) {
             message.append(" (empty)");
         }
@@ -242,65 +239,30 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect {
         if (controller == null || sourcePermanent == null) {
             return false;
         }
-        if (controller.chooseUse(Outcome.Benefit, "Look at all players' libraries before card select?", null, game)) {
-            game.informPlayers(controller.getLogName() + " is looking at all players' libraries.");
-            controller.lookAtAllLibraries(source, game);
-        }
-        List<UUID> playerList = new ArrayList<>();
-        playerList.addAll(game.getState().getPlayersInRange(controller.getId(), game));
-        Set<UUID> checkList = new HashSet<>();
-        while (!playerList.isEmpty()) {
-            FilterPlayer filter = new FilterPlayer();
-            List<PlayerIdPredicate> playerPredicates = new ArrayList<>();
-            playerList.forEach((playerId) -> {
-                playerPredicates.add(new PlayerIdPredicate(playerId));
-            });
-            filter.add(Predicates.or(playerPredicates));
-            TargetPlayer targetPlayer = new TargetPlayer(1, 1, true, filter);
-            targetPlayer.setRequired(!checkList.containsAll(playerList));
-            if (controller.chooseTarget(outcome, targetPlayer, source, game)) {
-                UUID playerId = targetPlayer.getFirstTarget();
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    String playerName = player.getLogName() + "'s";
-                    if (source.isControlledBy(player.getId())) {
-                        playerName = "your";
-                    }
-                    TargetCardInLibrary target = new TargetCardInLibrary(new FilterNonlandCard("nonland card from " + playerName + " library"));
-                    if (controller.searchLibrary(target, source, game, playerId, !checkList.contains(playerId))) {
-                        checkList.add(playerId);
-                        UUID targetId = target.getFirstTarget();
-                        Card card = player.getLibrary().remove(targetId, game);
-                        if (card != null) {
-                            controller.moveCardsToExile(card, source, game, true, CardUtil.getCardExileZoneId(game, source), sourcePermanent.getName());
-                            playerList.remove(playerId);
-                        }
-                    } else {
-                        playerList.remove(playerId);
-                    }
-                } else {
-                    playerList.remove(playerId);
-                }
-            } else {
-                break;
+        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+            Player player = game.getPlayer(playerId);
+            String playerName = new StringBuilder(player.getLogName()).append("'s").toString();
+            if (source.isControlledBy(player.getId())) {
+                playerName = "your";
             }
-            playerList.stream().map((playerId) -> game.getPlayer(playerId)).filter((player) -> (player == null
-                    || !player.canRespond())).forEachOrdered((player) -> {
-                playerList.remove(player.getId());
-            });
-        }
-        checkList.stream().map((playerId) -> game.getPlayer(playerId)).filter((player) -> (player != null)).forEachOrdered((player) -> {
+            TargetCardInLibrary target = new TargetCardInLibrary(new FilterNonlandCard(new StringBuilder("nonland card from ").append(playerName).append(" library").toString()));
+            if (controller.searchLibrary(target, game, playerId)) {
+                UUID targetId = target.getFirstTarget();
+                Card card = player.getLibrary().remove(targetId, game);
+                if (card != null) {
+                    controller.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source), sourcePermanent.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
+                }
+            }
             player.shuffleLibrary(source, game);
-        });
+        }
+
         ExileZone jaceExileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
         if (jaceExileZone == null) {
             return true;
         }
         FilterCard filter = new FilterCard("card to cast without mana costs");
         TargetCardInExile target = new TargetCardInExile(filter, source.getSourceId());
-        while (jaceExileZone.count(filter, game) > 0
-                && controller.chooseUse(Outcome.Benefit, "Cast another spell from exile zone for free?", source, game)) {
-            controller.choose(Outcome.PlayForFree, jaceExileZone, target, game);
+        while (jaceExileZone.count(filter, game) > 0 && controller.choose(Outcome.PlayForFree, jaceExileZone, target, game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 if (controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game))) {

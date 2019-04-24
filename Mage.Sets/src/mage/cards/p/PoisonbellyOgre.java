@@ -22,10 +22,10 @@ public final class PoisonbellyOgre extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
     
-    private static final String RULE = "Whenever another creature enters the battlefield, its controller loses 1 life.";
+    private final static String RULE = "Whenever another creature enters the battlefield, its controller loses 1 life.";
     
     public PoisonbellyOgre(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

@@ -19,7 +19,7 @@ public final class StormHerd extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{8}{W}{W}");
 
         // create X 1/1 white Pegasus creature tokens with flying, where X is your life total.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new PegasusToken(), ControllerLifeCount.instance));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new PegasusToken(), new ControllerLifeCount()));
     }
 
     public StormHerd(final StormHerd card) {

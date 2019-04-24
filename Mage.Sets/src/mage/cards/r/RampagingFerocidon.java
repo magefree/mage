@@ -34,7 +34,7 @@ public final class RampagingFerocidon extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("another creature");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public RampagingFerocidon(UUID ownerId, CardSetInfo setInfo) {

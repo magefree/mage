@@ -1,3 +1,5 @@
+
+
 package mage.choices;
 
 import mage.constants.SubType;
@@ -11,7 +13,7 @@ public class ChoiceLandType extends ChoiceImpl {
 
     public ChoiceLandType() {
         super(true);
-        this.setChoices(SubType.getLandTypes().stream().map(SubType::toString).collect(Collectors.toSet()));
+        this.setChoices(SubType.getLandTypes(false).stream().map(SubType::toString).collect(Collectors.toSet()));
         this.message = "Choose a land type";
     }
 

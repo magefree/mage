@@ -52,7 +52,7 @@ class OpalescenceEffect extends ContinuousEffectImpl {
 
     static {
         filter.add(Predicates.not(new SubtypePredicate(SubType.AURA)));
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
         checkDependencyTypes = EnumSet.of(DependencyType.AuraAddingRemoving, DependencyType.EnchantmentAddingRemoving);
     }
 

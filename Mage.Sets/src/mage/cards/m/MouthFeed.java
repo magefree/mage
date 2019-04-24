@@ -38,7 +38,7 @@ public final class MouthFeed extends SplitCard {
         // to
         // Feed
         // Draw a card for each creature you control with power 3 or greater
-        getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
+        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility().setRuleAtTheTop(true));
         Effect draw = new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filterCreaturesYouControlPower3orGreater));
         getRightHalfCard().getSpellAbility().addEffect(draw);
 

@@ -76,9 +76,6 @@ class DelverOfSecretsEffect extends OneShotEffect {
         if (player != null && sourcePermanent != null) {
             if (player.getLibrary().hasCards()) {
                 Card card = player.getLibrary().getFromTop(game);
-                if(card == null){
-                    return false;
-                }
                 Cards cards = new CardsImpl();
                 cards.add(card);
                 player.lookAtCards(sourcePermanent.getName(), cards, game);

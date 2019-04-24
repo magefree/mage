@@ -112,7 +112,7 @@ class SoulboundEntersSelfEffect extends OneShotEffect {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another not paired creature you control");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
         filter.add(Predicates.not(new PairedPredicate()));
     }
 
@@ -168,12 +168,12 @@ class SoulboundEntersSelfEffect extends OneShotEffect {
  */
 class SoulbondEntersOtherAbility extends EntersBattlefieldAllTriggeredAbility {
 
-    private static final FilterCreaturePermanent soulbondFilter = new FilterCreaturePermanent();
+    private final static FilterCreaturePermanent soulbondFilter = new FilterCreaturePermanent();
 
     static {
         soulbondFilter.add(Predicates.not(new PairedPredicate()));
         soulbondFilter.add(new ControllerPredicate(TargetController.YOU));
-        soulbondFilter.add(AnotherPredicate.instance);
+        soulbondFilter.add(new AnotherPredicate());
     }
 
     public SoulbondEntersOtherAbility() {
@@ -214,7 +214,7 @@ class SoulboundEntersOtherEffect extends OneShotEffect {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another not paired creature you control");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
         filter.add(Predicates.not(new PairedPredicate()));
     }
 

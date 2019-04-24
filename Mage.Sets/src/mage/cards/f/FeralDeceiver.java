@@ -78,9 +78,10 @@ class FeralDeceiverEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
+            Cards cards = new CardsImpl();
             Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
-                Cards cards = new CardsImpl(card);
+                cards.add(card);
                 controller.revealCards(sourceObject.getIdName(), cards, game);
                 if (card.isLand()) {
                     game.addEffect(new BoostSourceEffect(2, 2, Duration.EndOfTurn), source);

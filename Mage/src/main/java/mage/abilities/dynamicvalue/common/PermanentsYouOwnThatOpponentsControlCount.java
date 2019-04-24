@@ -1,17 +1,15 @@
 
 package mage.abilities.dynamicvalue.common;
 
+import java.util.Set;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.Set;
-import java.util.UUID;
-
-public enum PermanentsYouOwnThatOpponentsControlCount implements DynamicValue {
-    instance;
+public class PermanentsYouOwnThatOpponentsControlCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -30,7 +28,7 @@ public enum PermanentsYouOwnThatOpponentsControlCount implements DynamicValue {
 
     @Override
     public PermanentsYouOwnThatOpponentsControlCount copy() {
-        return PermanentsYouOwnThatOpponentsControlCount.instance;
+        return new PermanentsYouOwnThatOpponentsControlCount();
     }
 
     @Override

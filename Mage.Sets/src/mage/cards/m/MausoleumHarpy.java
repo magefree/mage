@@ -1,11 +1,12 @@
+
 package mage.cards.m;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.condition.common.CitysBlessingCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.hint.common.CitysBlessingHint;
 import mage.abilities.keyword.AscendAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -18,17 +19,16 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
-import java.util.UUID;
-
 /**
+ *
  * @author LevelX2
  */
 public final class MausoleumHarpy extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature you control");
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature you control");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
@@ -49,8 +49,7 @@ public final class MausoleumHarpy extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, filter),
                 CitysBlessingCondition.instance,
-                "Whenever another creature you control dies, if you have the city's blessing, put a +1/+1 counter on {this}. ")
-                .addHint(CitysBlessingHint.instance));
+                "Whenever another creature you control dies, if you have the city's blessing, put a +1/+1 counter on {this}. "));
 
     }
 

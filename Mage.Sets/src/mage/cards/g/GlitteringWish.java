@@ -19,7 +19,7 @@ public final class GlitteringWish extends CardImpl {
     private static final FilterCard filter = new FilterCard("a multicolored card");
 
     static {
-        filter.add(MulticoloredPredicate.instance);
+        filter.add(new MulticoloredPredicate());
     }
 
     public GlitteringWish(UUID ownerId, CardSetInfo setInfo) {

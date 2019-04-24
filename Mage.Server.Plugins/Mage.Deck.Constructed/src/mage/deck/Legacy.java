@@ -3,8 +3,10 @@ package mage.deck;
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.Constructed;
+import mage.constants.SetType;
 
 /**
+ *
  * LevelX2
  */
 public class Legacy extends Constructed {
@@ -12,7 +14,7 @@ public class Legacy extends Constructed {
     public Legacy() {
         super("Constructed - Legacy");
         for (ExpansionSet set : Sets.getInstance().values()) {
-            if (set.getSetType().isEternalLegal()) {
+            if (set.getSetType() != SetType.CUSTOM_SET) {
                 setCodes.add(set.getCode());
             }
         }

@@ -34,7 +34,7 @@ public final class WeaverOfLies extends CardImpl {
 
     static {
         filter.add(new AbilityPredicate(MorphAbility.class));
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public WeaverOfLies(UUID ownerId, CardSetInfo setInfo) {

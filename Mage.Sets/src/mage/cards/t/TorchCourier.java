@@ -27,7 +27,7 @@ public final class TorchCourier extends CardImpl {
             = new FilterCreaturePermanent("another target creature");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public TorchCourier(UUID ownerId, CardSetInfo setInfo) {

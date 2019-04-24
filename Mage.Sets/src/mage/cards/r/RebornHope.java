@@ -19,7 +19,7 @@ public final class RebornHope extends CardImpl {
     private static final FilterCard filter = new FilterCard("multicolored card from your graveyard");
     
     static {
-        filter.add(MulticoloredPredicate.instance);
+        filter.add(new MulticoloredPredicate());
     }
 
     public RebornHope(UUID ownerId, CardSetInfo setInfo) {

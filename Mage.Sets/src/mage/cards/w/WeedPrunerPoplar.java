@@ -25,7 +25,7 @@ public final class WeedPrunerPoplar extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature other than {this}");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public WeedPrunerPoplar(UUID ownerId, CardSetInfo setInfo) {

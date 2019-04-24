@@ -26,7 +26,7 @@ import mage.target.TargetSpell;
  */
 public final class RingOfImmortals extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("instant or Aura spell that targets a permanent you control");
+    private final static FilterSpell filter = new FilterSpell("instant or Aura spell that targets a permanent you control");
 
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.INSTANT), new SubtypePredicate(SubType.AURA)));

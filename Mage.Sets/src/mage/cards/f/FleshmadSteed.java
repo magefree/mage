@@ -20,7 +20,7 @@ public final class FleshmadSteed extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public FleshmadSteed(UUID ownerId, CardSetInfo setInfo) {

@@ -154,11 +154,9 @@ class KozilekDiscardCost extends CostImpl {
             }
         }
         Player controller = game.getPlayer(ability.getControllerId());
-        if(controller != null) {
-            for (Card card : controller.getHand().getCards(game)) {
-                if (stackCMC.contains(card.getConvertedManaCost())) {
-                    return true;
-                }
+        for (Card card : controller.getHand().getCards(game)) {
+            if (stackCMC.contains(card.getConvertedManaCost())) {
+                return true;
             }
         }
         return false;

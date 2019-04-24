@@ -121,7 +121,7 @@ class ShipbreakerKrakenReplacementEffect extends ContinuousRuleModifyingEffectIm
 class ShipbreakerKrakenWatcher extends Watcher {
 
     ShipbreakerKrakenWatcher () {
-        super(WatcherScope.CARD);
+        super("ControlLost", WatcherScope.CARD);
     }
 
     ShipbreakerKrakenWatcher(ShipbreakerKrakenWatcher watcher) {

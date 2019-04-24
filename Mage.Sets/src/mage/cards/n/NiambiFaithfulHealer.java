@@ -19,7 +19,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
  */
 public final class NiambiFaithfulHealer extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Teferi, Timebender");
+    private final static FilterCard filter = new FilterCard("Teferi, Timebender");
 
     static {
         filter.add(new NamePredicate("Teferi, Timebender"));

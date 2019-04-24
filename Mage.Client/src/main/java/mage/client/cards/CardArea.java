@@ -1,3 +1,4 @@
+
 package mage.client.cards;
 
 import mage.cards.MageCard;
@@ -70,14 +71,6 @@ public class CardArea extends JPanel implements MouseListener {
         this.verticalCardOffset = verticalCardOffset;
     }
 
-    private void fixDialogSize() {
-        // fix panel size (must include scrolls)
-        Dimension newSize = new Dimension(cardArea.getPreferredSize());
-        newSize.width += 20;
-        newSize.height += 20;
-        this.setPreferredSize(newSize);
-    }
-
     public void loadCards(CardsView showCards, BigCard bigCard, UUID gameId) {
         this.reloaded = true;
         cardArea.removeAll();
@@ -92,8 +85,6 @@ public class CardArea extends JPanel implements MouseListener {
 
         this.revalidate();
         this.repaint();
-
-        fixDialogSize();
     }
 
     public void loadCardsNarrow(CardsView showCards, BigCard bigCard, UUID gameId) {
@@ -107,8 +98,6 @@ public class CardArea extends JPanel implements MouseListener {
 
         this.revalidate();
         this.repaint();
-
-        fixDialogSize();
     }
 
     private void loadCardsFew(CardsView showCards, BigCard bigCard, UUID gameId) {
@@ -117,7 +106,7 @@ public class CardArea extends JPanel implements MouseListener {
             addCard(card, bigCard, gameId, rectangle);
             rectangle.translate(cardDimension.width, 0);
         }
-        cardArea.setPreferredSize(new Dimension(cardDimension.width * showCards.size(), cardDimension.height + verticalCardOffset));
+        cardArea.setPreferredSize(new Dimension(cardDimension.width * showCards.size(), cardDimension.height));
     }
 
     private void addCard(CardView card, BigCard bigCard, UUID gameId, Rectangle rectangle) {
@@ -232,7 +221,7 @@ public class CardArea extends JPanel implements MouseListener {
                     if (e.isAltDown()) {
                         cardEventSource.fireEvent(((MageCard) obj).getOriginal(), ClientEventType.ALT_DOUBLE_CLICK);
                     } else {
-                        cardEventSource.fireEvent(((MageCard) obj).getOriginal(), ClientEventType.DOUBLE_CLICK);
+                        cardEventSource.fireEvent(((MageCard) obj).getOriginal(),ClientEventType.DOUBLE_CLICK);
                     }
                 }
             }

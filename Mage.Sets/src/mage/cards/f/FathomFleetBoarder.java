@@ -26,7 +26,7 @@ public final class FathomFleetBoarder extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.PIRATE));
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public FathomFleetBoarder(UUID ownerId, CardSetInfo setInfo) {

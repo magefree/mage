@@ -19,7 +19,7 @@ public final class UltimatePrice extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("monocolored creature");
 
     static {
-        filter.add(MonocoloredPredicate.instance);
+        filter.add(new MonocoloredPredicate());
     }
 
     public UltimatePrice(UUID ownerId, CardSetInfo setInfo) {

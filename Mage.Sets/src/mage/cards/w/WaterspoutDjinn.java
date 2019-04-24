@@ -28,7 +28,7 @@ public final class WaterspoutDjinn extends CardImpl {
 
     static{
         filter.add(new SubtypePredicate(SubType.ISLAND));
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public WaterspoutDjinn(UUID ownerId, CardSetInfo setInfo) {

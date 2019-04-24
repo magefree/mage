@@ -1,5 +1,6 @@
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -18,9 +19,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.util.CardUtil;
 
-import java.util.UUID;
-
 /**
+ *
  * @author LevelX2
  */
 public final class CouncilOfTheAbsolute extends CardImpl {
@@ -92,8 +92,9 @@ class CouncilOfTheAbsoluteReplacementEffect extends ContinuousRuleModifyingEffec
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             MageObject object = game.getObject(event.getSourceId());
-            String needName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
-            return object != null && CardUtil.haveSameNames(object.getName(), needName);
+            if (object != null && object.getName().equals(game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY))) {
+                return true;
+            }
         }
         return false;
     }
@@ -121,10 +122,7 @@ class CouncilOfTheAbsoluteCostReductionEffect extends CostModificationEffectImpl
         if ((abilityToModify instanceof SpellAbility)
                 && abilityToModify.isControlledBy(source.getControllerId())) {
             Card card = game.getCard(abilityToModify.getSourceId());
-            if (card != null) {
-                String needName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
-                return CardUtil.haveSameNames(card.getName(), needName);
-            }
+            return card.getName().equals(game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY));
         }
         return false;
     }

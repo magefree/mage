@@ -19,7 +19,7 @@ import mage.target.common.TargetAnyTarget;
  */
 public final class CloseQuarters extends CardImpl {
     
-    static final private FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature you control");
+    final static private FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature you control");
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));

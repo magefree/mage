@@ -30,7 +30,7 @@ import mage.watchers.Watcher;
  */
 public final class OathOfChandra extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
@@ -69,7 +69,7 @@ enum OathOfChandraCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        OathOfChandraWatcher watcher = game.getState().getWatcher(OathOfChandraWatcher.class);
+        OathOfChandraWatcher watcher = (OathOfChandraWatcher) game.getState().getWatchers().get(OathOfChandraWatcher.class.getSimpleName());
         return watcher != null && watcher.enteredPlaneswalkerForPlayer(source.getControllerId());
     }
 
@@ -85,7 +85,7 @@ class OathOfChandraWatcher extends Watcher {
     private final Set<UUID> players = new HashSet<>();
 
     public OathOfChandraWatcher() {
-        super(WatcherScope.GAME);
+        super(OathOfChandraWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public OathOfChandraWatcher(final OathOfChandraWatcher watcher) {

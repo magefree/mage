@@ -25,7 +25,7 @@ public final class KiorasFollower extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("another target permanent");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
     public KiorasFollower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{U}");

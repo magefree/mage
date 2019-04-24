@@ -25,7 +25,7 @@ public final class LivingTotem extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public LivingTotem(UUID ownerId, CardSetInfo setInfo) {

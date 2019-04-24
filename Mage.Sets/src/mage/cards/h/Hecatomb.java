@@ -32,7 +32,7 @@ public final class Hecatomb extends CardImpl {
     
     static {
         filter.add(new SubtypePredicate(SubType.SWAMP));
-        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(new TappedPredicate()));
     }
     
     public Hecatomb(UUID ownerId, CardSetInfo setInfo) {

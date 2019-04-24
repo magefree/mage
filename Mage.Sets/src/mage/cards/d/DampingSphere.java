@@ -103,7 +103,7 @@ class DampingSphereIncreasementAllEffect extends SpellsCostIncreasementAllEffect
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        CastSpellLastTurnWatcher watcher = game.getState().getWatcher(CastSpellLastTurnWatcher.class);
+        CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get(CastSpellLastTurnWatcher.class.getSimpleName());
         if (watcher != null) {
             int additionalCost = watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(abilityToModify.getControllerId());
             CardUtil.increaseCost(abilityToModify, additionalCost);

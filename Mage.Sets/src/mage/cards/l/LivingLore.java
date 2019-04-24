@@ -14,7 +14,12 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -31,7 +36,7 @@ public final class LivingLore extends CardImpl {
 
     public LivingLore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.subtype.add(SubType.AVATAR);
+        this.subtype.add("Avatar");
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

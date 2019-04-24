@@ -38,7 +38,7 @@ public final class Lashknife extends CardImpl {
 
     static {
         plainsFilter.add(new SubtypePredicate(SubType.PLAINS));
-        creatureFilter.add(Predicates.not(TappedPredicate.instance));
+        creatureFilter.add(Predicates.not(new TappedPredicate()));
     }
 
     public Lashknife(UUID ownerId, CardSetInfo setInfo) {

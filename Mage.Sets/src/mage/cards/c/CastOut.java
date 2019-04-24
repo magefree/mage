@@ -24,7 +24,7 @@ import mage.target.TargetPermanent;
  */
 public final class CastOut extends CardImpl {
 
-    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent();
+    private final static FilterNonlandPermanent filter = new FilterNonlandPermanent();
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));

@@ -10,11 +10,10 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import mage.abilities.effects.AsThoughManaEffect;
-import mage.players.ManaPoolItem;
 
 /**
  * @author TheElk801
@@ -69,19 +68,18 @@ class MnemonicBetrayalExileEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl();
-        Map<UUID, Integer> cardMap = new HashMap<>();
-        game.getOpponents(source.getControllerId()).stream().map((playerId) -> game.getPlayer(playerId)).filter((player) -> (player != null)).forEachOrdered((player) -> {
-            cards.addAll(player.getGraveyard());
-        });
-        cards.getCards(game).stream().map((card) -> {
+        Map<UUID, Integer> cardMap = new HashMap();
+        for (UUID playerId : game.getOpponents(source.getControllerId())) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                cards.addAll(player.getGraveyard());
+            }
+        }
+        for (Card card : cards.getCards(game)) {
             cardMap.put(card.getId(), card.getZoneChangeCounter(game));
-            return card;
-        }).map((card) -> {
             game.addEffect(new MnemonicBetrayalCastFromExileEffect(card, game), source);
-            return card;
-        }).forEachOrdered((card) -> {
             game.addEffect(new MnemonicBetrayalAnyColorEffect(card, game), source);
-        });
+        }
         controller.moveCardsToExile(cards.getCards(game), source, game, true, source.getSourceId(), source.getSourceObjectIfItStillExists(game).getName());
         game.addDelayedTriggeredAbility(new MnemonicBetrayalDelayedTriggeredAbility(cards, cardMap), source);
         return true;
@@ -127,7 +125,7 @@ class MnemonicBetrayalCastFromExileEffect extends AsThoughEffectImpl {
     }
 }
 
-class MnemonicBetrayalAnyColorEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
+class MnemonicBetrayalAnyColorEffect extends AsThoughEffectImpl {
 
     private final Card card;
     private final int zoneCounter;
@@ -156,29 +154,20 @@ class MnemonicBetrayalAnyColorEffect extends AsThoughEffectImpl implements AsTho
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        objectId = game.getCard(objectId).getMainCard().getId(); // for split cards
-        if (objectId.equals(card.getId())
-                && card.getZoneChangeCounter(game) <= zoneCounter + 1
-                && affectedControllerId.equals(source.getControllerId())) {
-            return true;
-        } else {
-            if (objectId.equals(card.getId())) {
-                this.discard();
-            }
+        if (card.getZoneChangeCounter(game) != zoneCounter) {
+            this.discard();
+            return false;
         }
-        return false;
-    }
-
-    @Override
-    public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
-        return mana.getFirstAvailable();
+        return objectId.equals(card.getId())
+                && card.getZoneChangeCounter(game) == zoneCounter
+                && affectedControllerId.equals(source.getControllerId());
     }
 }
 
 class MnemonicBetrayalDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     private final Cards cards;
-    private final Map<UUID, Integer> cardMap = new HashMap<>();
+    private final Map<UUID, Integer> cardMap = new HashMap();
 
     public MnemonicBetrayalDelayedTriggeredAbility(Cards cards, Map<UUID, Integer> cardMap) {
         super(new MnemonicBetrayalReturnEffect(cards, cardMap));
@@ -225,7 +214,7 @@ class MnemonicBetrayalDelayedTriggeredAbility extends DelayedTriggeredAbility {
 class MnemonicBetrayalReturnEffect extends OneShotEffect {
 
     private final Cards cards;
-    private final Map<UUID, Integer> cardMap = new HashMap<>();
+    private final Map<UUID, Integer> cardMap = new HashMap();
 
     public MnemonicBetrayalReturnEffect(Cards cards, Map<UUID, Integer> cardMap) {
         super(Outcome.Benefit);
@@ -251,10 +240,12 @@ class MnemonicBetrayalReturnEffect extends OneShotEffect {
             return false;
         }
         Cards cardsToReturn = new CardsImpl();
-        cards.getCards(game).stream().filter((card) -> (game.getState().getZone(card.getId()) == Zone.EXILED
-                && card.getZoneChangeCounter(game) == cardMap.getOrDefault(card.getId(), -5) + 1)).forEachOrdered((card) -> {
-            cardsToReturn.add(card);
-        });
+        for (Card card : cards.getCards(game)) {
+            if (game.getState().getZone(card.getId()) == Zone.EXILED
+                    && card.getZoneChangeCounter(game) == cardMap.getOrDefault(card.getId(), -5) + 1) {
+                cardsToReturn.add(card);
+            }
+        }
         return player.moveCards(cardsToReturn, Zone.GRAVEYARD, source, game);
     }
 }

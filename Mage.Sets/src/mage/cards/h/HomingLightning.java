@@ -1,5 +1,7 @@
+
 package mage.cards.h;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -12,17 +14,15 @@ import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
+ *
  * @author jeffwadsworth
  */
 public final class HomingLightning extends CardImpl {
 
     public HomingLightning(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}{R}");
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}{R}");
 
 
         // Homing Lightning deals 4 damage to target creature and each other creature with the same name as that creature.
@@ -58,7 +58,7 @@ class HomingLightningEffect extends OneShotEffect {
             return false;
         }
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        if (CardUtil.haveEmptyName(targetPermanent)) {
+        if (targetPermanent.getName().isEmpty()) {
             filter.add(new PermanentIdPredicate(targetPermanent.getId()));  // if no name (face down creature) only the creature itself is selected
         } else {
             filter.add(new NamePredicate(targetPermanent.getName()));

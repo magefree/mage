@@ -28,7 +28,7 @@ public class DamagedByWatcher extends Watcher {
     }
 
     public DamagedByWatcher(boolean watchPlaneswalkers) {
-        super(WatcherScope.CARD);
+        super(DamagedByWatcher.class.getSimpleName(), WatcherScope.CARD);
         this.watchPlaneswalkers = watchPlaneswalkers;
     }
 

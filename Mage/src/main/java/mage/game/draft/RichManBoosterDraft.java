@@ -6,7 +6,6 @@ import java.util.Objects;
 import java.util.UUID;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -14,10 +13,7 @@ import org.apache.log4j.Logger;
  */
 public class RichManBoosterDraft extends DraftImpl {
 
-    private static final Logger logger = Logger.getLogger(RichManBoosterDraft.class);
-
-    //protected int[] richManTimes = {75, 70, 65, 60, 55, 50, 45, 40, 35, 35, 35, 35, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25};
-    protected int[] richManTimes = {70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40};
+    protected int[] richManTimes = {75, 70, 65, 60, 55, 50, 45, 40, 35, 35, 35, 35, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25};
 
     public RichManBoosterDraft(DraftOptions options, List<ExpansionSet> sets) {
         super(options, sets);

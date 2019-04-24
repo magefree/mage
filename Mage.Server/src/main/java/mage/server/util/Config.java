@@ -12,8 +12,6 @@ import org.apache.log4j.Logger;
  */
 public final class Config {
 
-    private Config(){}
-
     private static final Logger logger = Logger.getLogger(Config.class);
 
     static {

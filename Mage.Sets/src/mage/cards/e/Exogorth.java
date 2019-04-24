@@ -1,5 +1,7 @@
+
 package mage.cards.e;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -10,15 +12,14 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.UUID;
-
 /**
+ *
  * @author Styxo
  */
 public final class Exogorth extends CardImpl {
@@ -82,10 +83,7 @@ class CanBlockOnlySpaceflightEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        if (attacker == null) {
-            return true;
-        }
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
         return attacker.getAbilities().contains(SpaceflightAbility.getInstance());
     }
 

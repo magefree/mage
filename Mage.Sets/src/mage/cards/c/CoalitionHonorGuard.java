@@ -1,6 +1,7 @@
 
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.ruleModifying.TargetsHaveToTargetPermanentIfAbleEffect;
@@ -8,8 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-
-import java.util.UUID;
+import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 
 /**
  * Cardname: Coalition Honor Guard
@@ -27,7 +28,7 @@ public final class CoalitionHonorGuard extends CardImpl {
         this.toughness = new MageInt(4);
 
         // While choosing targets as part of casting a spell or activating an ability, your opponents must choose at least one Flagbearer on the battlefield if able.
-        this.addAbility(new SimpleStaticAbility(new TargetsHaveToTargetPermanentIfAbleEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TargetsHaveToTargetPermanentIfAbleEffect(new FilterPermanent(SubType.FLAGBEARER, "one Flagbearer"))));
     }
 
     public CoalitionHonorGuard(final CoalitionHonorGuard card) {

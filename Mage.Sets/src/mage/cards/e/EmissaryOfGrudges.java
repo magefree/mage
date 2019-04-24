@@ -94,11 +94,11 @@ class EmissaryOfGrudgesEffect extends OneShotEffect {
                         Mode mode = stackObject.getStackAbility().getModes().get(modeId);
                         for (Target target : mode.getTargets()) {
                             for (UUID targetId : target.getTargets()) {
-                                if (source.isControlledBy(targetId)) {
+                                if (source.getControllerId().equals(targetId)) {
                                     targetsYouOrAPermanentYouControl = true;
                                 }
                                 Permanent permanent = game.getPermanent(targetId);
-                                if (permanent != null && source.isControlledBy(permanent.getControllerId())) {
+                                if (permanent != null && source.getControllerId().equals(permanent.getControllerId())) {
                                     targetsYouOrAPermanentYouControl = true;
                                 }
                             }

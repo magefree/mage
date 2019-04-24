@@ -1,5 +1,7 @@
+
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -9,15 +11,14 @@ import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.UUID;
-
 /**
+ *
  * @author Styxo
  */
 public final class SithLord extends CardImpl {
@@ -25,7 +26,7 @@ public final class SithLord extends CardImpl {
     private static final String rule = "with X +1/+1 counters on it, where X is the total life lost by your opponents this turn";
 
     public SithLord(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SITH);
         this.power = new MageInt(2);
@@ -61,7 +62,7 @@ public final class SithLord extends CardImpl {
         public boolean apply(Game game, Ability source) {
             Permanent permanent = game.getPermanentEntering(source.getSourceId());
             if (permanent != null) {
-                int oll = OpponentsLostLifeCount.instance.calculate(game, source, this);
+                int oll = new OpponentsLostLifeCount().calculate(game, source, this);
                 if (oll > 0) {
                     permanent.addCounters(CounterType.P1P1.createInstance(oll), source, game);
                 }
@@ -75,5 +76,5 @@ public final class SithLord extends CardImpl {
             return new SithLordEffect(this);
         }
     }
-
+ 
 }

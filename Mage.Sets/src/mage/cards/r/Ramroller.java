@@ -27,7 +27,7 @@ public final class Ramroller extends CardImpl {
     private static final FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent();
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public Ramroller(UUID ownerId, CardSetInfo setInfo) {

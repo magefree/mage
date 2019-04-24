@@ -1,16 +1,15 @@
 package org.mage.plugins.card.dl.sources;
 
-import mage.client.util.CardLanguage;
+import java.util.ArrayList;
 import org.mage.plugins.card.images.CardDownloadData;
 
-import java.util.ArrayList;
-
 /**
- * @author North, JayDi85
+ *
+ * @author North
  */
 public interface CardImageSource {
 
-    CardImageUrls generateCardUrl(CardDownloadData card) throws Exception;
+    CardImageUrls generateURL(CardDownloadData card) throws Exception;
 
     CardImageUrls generateTokenUrl(CardDownloadData card) throws Exception;
 
@@ -32,32 +31,17 @@ public interface CardImageSource {
         return false;
     }
 
-    default boolean isLanguagesSupport() {
-        return false;
-    }
-
-    default void setCurrentLanguage(CardLanguage cardLanguage) {
-    }
-
-    default CardLanguage getCurrentLanguage() {
-        return CardLanguage.ENGLISH;
-    }
-
     void doPause(String httpImageUrl);
 
     default ArrayList<String> getSupportedSets() {
-        return new ArrayList<>();
+        return null;
     }
 
     default boolean isSetSupportedComplete(String setCode) {
         return true;
     }
 
-    default boolean isCardImageProvided(String setCode, String cardName) {
-        return false;
-    }
-
-    default boolean isTokenImageProvided(String setCode, String cardName, Integer tokenNumber) {
+    default boolean isImageProvided(String setCode, String cardName) {
         return false;
     }
 }

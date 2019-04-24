@@ -26,8 +26,8 @@ public final class WirewoodHivemaster extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another nontoken Elf");
     static {
         filter.add(new SubtypePredicate(SubType.ELF));
-        filter.add(AnotherPredicate.instance);
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(new AnotherPredicate());
+        filter.add(Predicates.not(new TokenPredicate()));
     }
     public WirewoodHivemaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

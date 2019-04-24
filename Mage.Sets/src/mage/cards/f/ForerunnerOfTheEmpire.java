@@ -1,26 +1,23 @@
 
 package mage.cards.f;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.CreatureEntersBattlefieldTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterBySubtypeCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCardInLibrary;
 
-import java.util.UUID;
-
 /**
+ *
  * @author JayDi85
  */
 public final class ForerunnerOfTheEmpire extends CardImpl {
@@ -52,11 +49,12 @@ public final class ForerunnerOfTheEmpire extends CardImpl {
         );
 
         // Whenever a Dinosaur enters the battlefield under your control, you may have Forerunner of the Empire deal 1 damage to each creature.
-        Ability ability = new EntersBattlefieldControlledTriggeredAbility(
+        Ability ability = new CreatureEntersBattlefieldTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new DamageAllEffect(1, new FilterCreaturePermanent()).setText("have {this} deal 1 damage to each creature"),
                 filterAnyDinosaur,
-                true);
+                true,
+                false);
         this.addAbility(ability);
     }
 

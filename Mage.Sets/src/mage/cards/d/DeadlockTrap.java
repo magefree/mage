@@ -1,5 +1,7 @@
+
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -18,15 +20,14 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 
-import java.util.UUID;
-
 /**
+ *
  * @author spjspj
  */
 public final class DeadlockTrap extends CardImpl {
 
     public DeadlockTrap(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // Deadlock Trap enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
@@ -69,7 +70,7 @@ class DeadlockTrapCantActivateEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game) {
         return false;
     }
 

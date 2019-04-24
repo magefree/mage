@@ -1,3 +1,4 @@
+
 package mage.cards.h;
 
 import java.util.UUID;
@@ -10,7 +11,6 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -23,7 +23,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -34,7 +33,7 @@ public final class HollowbornBarghest extends CardImpl {
     private static final String rule = "At the beginning of your upkeep, if you have no cards in hand, each opponent loses 2 life.";
 
     public HollowbornBarghest(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}");
         this.subtype.add(SubType.DEMON);
         this.subtype.add(SubType.HOUND);
 
@@ -43,14 +42,8 @@ public final class HollowbornBarghest extends CardImpl {
 
         // At the beginning of your upkeep, if you have no cards in hand, each opponent loses 2 life.
         Condition condition = new CardsInHandCondition(ComparisonType.EQUAL_TO, 0);
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(
-                new HollowbornBarghestEffect(),
-                TargetController.YOU,
-                false);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                ability,
-                condition,
-                rule));
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new HollowbornBarghestEffect(), TargetController.YOU, false);
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, condition, rule));
 
         // At the beginning of each opponent's upkeep, if that player has no cards in hand, he or she loses 2 life.
         this.addAbility(new HollowbornBarghestTriggeredAbility());
@@ -69,7 +62,7 @@ public final class HollowbornBarghest extends CardImpl {
 class HollowbornBarghestEffect extends OneShotEffect {
 
     public HollowbornBarghestEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.Damage);
         staticText = "Each opponent loses 2 life";
     }
 
@@ -80,10 +73,7 @@ class HollowbornBarghestEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-            Player opponent = game.getPlayer(opponentId);
-            if (opponent != null) {
-                game.getPlayer(opponentId).loseLife(2, game, false);
-            }
+            game.getPlayer(opponentId).loseLife(2, game, false);
         }
         return true;
     }
@@ -98,7 +88,7 @@ class HollowbornBarghestEffect extends OneShotEffect {
 class HollowbornBarghestTriggeredAbility extends TriggeredAbilityImpl {
 
     public HollowbornBarghestTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2));
+        super(Zone.BATTLEFIELD, null);
     }
 
     public HollowbornBarghestTriggeredAbility(final HollowbornBarghestTriggeredAbility ability) {
@@ -112,17 +102,17 @@ class HollowbornBarghestTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.UPKEEP_STEP_PRE
-                && game.getOpponents(controllerId).contains(event.getPlayerId());
+        return event.getType() == EventType.UPKEEP_STEP_PRE;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Player opponent = game.getPlayer(event.getPlayerId());
-        if (opponent != null
-                && opponent.getHand().isEmpty()) {
-            this.getEffects().get(0).setTargetPointer(new FixedTarget(opponent.getId()));
-            return true;
+        if (game.getOpponents(controllerId).contains(event.getPlayerId())) {
+            Player opponent = game.getPlayer(event.getPlayerId());
+            if (opponent != null && opponent.getHand().isEmpty()) {
+                opponent.loseLife(2, game, false);
+                return true;
+            }
         }
         return false;
     }

@@ -33,7 +33,7 @@ public final class StoneforgeAcolyte extends CardImpl {
 
     static {
         filterAlly.add(new SubtypePredicate(SubType.ALLY));
-        filterAlly.add(Predicates.not(TappedPredicate.instance));
+        filterAlly.add(Predicates.not(new TappedPredicate()));
         filterEquipment.add(new SubtypePredicate(SubType.EQUIPMENT));
     }
 

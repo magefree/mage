@@ -68,7 +68,7 @@ class GoblinFestivalChangeControlEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (controller != null) {
-            if (!controller.flipCoin(source, game, true)) {
+            if (!controller.flipCoin(game)) {
                 if (sourcePermanent != null) {
                     Target target = new TargetOpponent(true);
                     if (target.canChoose(source.getSourceId(), controller.getId(), game)) {

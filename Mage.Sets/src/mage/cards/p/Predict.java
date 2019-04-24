@@ -1,5 +1,6 @@
 package mage.cards.p;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseACardNameEffect;
@@ -12,11 +13,9 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
+ *
  * @author Quercitron
  */
 public final class Predict extends CardImpl {
@@ -67,7 +66,7 @@ class PredictEffect extends OneShotEffect {
             Card card = targetPlayer.getLibrary().getFromTop(game);
             if (card != null) {
                 controller.moveCards(card, Zone.GRAVEYARD, source, game);
-                if (CardUtil.haveSameNames(card.getName(), cardName)) {
+                if (card.getName().equals(cardName)) {
                     amount = 2;
                 }
             }

@@ -33,7 +33,7 @@ public final class AvacynGuardianAngel extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public AvacynGuardianAngel(UUID ownerId, CardSetInfo setInfo) {

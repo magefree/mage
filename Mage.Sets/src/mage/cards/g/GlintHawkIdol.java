@@ -28,7 +28,7 @@ public final class GlintHawkIdol extends CardImpl {
     private static final FilterPermanent filter = new FilterArtifactPermanent("another artifact");
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
     }
 
     public GlintHawkIdol (UUID ownerId, CardSetInfo setInfo) {

@@ -27,7 +27,7 @@ public final class StampedingHorncrest extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another Dinosaur");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(new AnotherPredicate());
         filter.add(new SubtypePredicate(SubType.DINOSAUR));
     }
 

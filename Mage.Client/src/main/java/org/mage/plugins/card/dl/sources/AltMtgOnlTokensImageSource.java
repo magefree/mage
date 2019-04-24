@@ -1,3 +1,4 @@
+
 package org.mage.plugins.card.dl.sources;
 
 import org.apache.log4j.Logger;
@@ -58,7 +59,7 @@ public enum AltMtgOnlTokensImageSource implements CardImageSource {
     }
 
     @Override
-    public CardImageUrls generateCardUrl(CardDownloadData card) throws Exception {
+    public CardImageUrls generateURL(CardDownloadData card) throws Exception {
         return null;
     }
 

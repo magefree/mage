@@ -28,7 +28,7 @@ public final class EldraziDisplacer extends CardImpl {
     private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("another target creature");
 
     static {
-        FILTER.add(AnotherPredicate.instance);
+        FILTER.add(new AnotherPredicate());
     }
 
     public EldraziDisplacer(UUID ownerId, CardSetInfo setInfo) {
