@@ -33,7 +33,8 @@ public final class ChandrasTriumph extends CardImpl {
     public ChandrasTriumph(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
 
-        // Chandra's Triumph deals 3 damage to target creature or planeswalker an opponent controls. Chandra's Triumph deals 5 damage to that permanent instead if you control a Chandra planeswalker.
+        // Chandra's Triumph deals 3 damage to target creature or planeswalker an opponent controls. Chandra's Triumph deals 5 damage to that permanent instead
+        // if you control a Chandra planeswalker.
         this.getSpellAbility().addEffect(new ChandrasTriumphEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
@@ -75,7 +76,7 @@ class ChandrasTriumphEffect extends OneShotEffect {
             return false;
         }
         int damage = 3;
-        if (!game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game).isEmpty()) {
+        if (!game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game).isEmpty()) {
             damage = 5;
         }
         return permanent.damage(damage, source.getSourceId(), game) > 0;
