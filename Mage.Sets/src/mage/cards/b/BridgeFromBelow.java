@@ -34,7 +34,7 @@ public final class BridgeFromBelow extends CardImpl {
     
     static{
         filter1.add(new ControllerPredicate(TargetController.YOU));
-        filter1.add(Predicates.not(new TokenPredicate()));
+        filter1.add(Predicates.not(TokenPredicate.instance));
         filter2.add(new ControllerPredicate(TargetController.OPPONENT));
     }
     
@@ -84,7 +84,7 @@ class BridgeFromBelowAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
+        if (zEvent.isDiesEvent()) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (permanent != null && filter.match(permanent, sourceId, controllerId, game)) {
                 return true;

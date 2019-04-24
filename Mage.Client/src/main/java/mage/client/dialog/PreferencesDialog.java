@@ -1,53 +1,13 @@
-
-
- /*
- * PreferencesDialog.java
- *
- * Created on 26.06.2011, 16:35:40
- */
 package mage.client.dialog;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.prefs.BackingStoreException;
-import java.util.prefs.Preferences;
-import javax.swing.BorderFactory;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JSlider;
-import javax.swing.JTextField;
-import javax.swing.KeyStroke;
-import javax.swing.border.Border;
-import javax.swing.filechooser.FileFilter;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.components.KeyBindButton;
-import static mage.client.constants.Constants.BATTLEFIELD_FEEDBACK_COLORIZING_MODE_ENABLE_BY_MULTICOLOR;
+import mage.client.util.CardLanguage;
 import mage.client.util.Config;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
-import static mage.constants.Constants.DEFAULT_AVATAR_ID;
-import static mage.constants.Constants.MAX_AVATAR_ID;
-import static mage.constants.Constants.MIN_AVATAR_ID;
 import mage.players.net.UserData;
 import mage.players.net.UserGroup;
 import mage.players.net.UserSkipPrioritySteps;
@@ -57,10 +17,25 @@ import mage.remote.Session;
 import mage.view.UserRequestMessage;
 import org.apache.log4j.Logger;
 
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.filechooser.FileFilter;
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.List;
+import java.util.*;
+import java.util.prefs.BackingStoreException;
+import java.util.prefs.Preferences;
+
+import static mage.client.constants.Constants.BATTLEFIELD_FEEDBACK_COLORIZING_MODE_ENABLE_BY_MULTICOLOR;
+import static mage.constants.Constants.*;
+
 /**
- * Preferences dialog.
- *
- * @author nantuko
+ * @author nantuko, JayDi85
  */
 public class PreferencesDialog extends javax.swing.JDialog {
 
@@ -144,9 +119,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String END_OF_TURN_OTHERS = "endOfTurnOthers";
 
     public static final String KEY_STOP_ATTACK = "stopDeclareAttacksStep";
-    public static final String KEY_STOP_BLOCK = "stopDeclareBlockersStep";
+    public static final String KEY_STOP_BLOCK_WITH_ANY = "stopDeclareBlockersStepWithAny";
+    public static final String KEY_STOP_BLOCK_WITH_ZERO = "stopDeclareBlockersStepWithZero";
     public static final String KEY_STOP_ALL_MAIN_PHASES = "stopOnAllMainPhases";
     public static final String KEY_STOP_ALL_END_PHASES = "stopOnAllEndPhases";
+    public static final String KEY_STOP_NEW_STACK_OBJECTS = "stopOnNewStackObjects";
     public static final String KEY_PASS_PRIORITY_CAST = "passPriorityCast";
     public static final String KEY_PASS_PRIORITY_ACTIVATION = "passPriorityActivation";
     public static final String KEY_AUTO_ORDER_TRIGGER = "autoOrderTrigger";
@@ -215,6 +192,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_NEW_TABLE_SPECTATORS_ALLOWED = "newTableSpectatorsAllowed";
     public static final String KEY_NEW_TABLE_PLANECHASE = "newTablePlaneChase";
     public static final String KEY_NEW_TABLE_NUMBER_OF_FREE_MULLIGANS = "newTableNumberOfFreeMulligans";
+    public static final String KEY_NEW_TABLE_MULLIGAN_TYPE = "newTableMulliganType";
     public static final String KEY_NEW_TABLE_DECK_FILE = "newTableDeckFile";
     public static final String KEY_NEW_TABLE_RANGE = "newTableRange";
     public static final String KEY_NEW_TABLE_ATTACK_OPTION = "newTableAttackOption";
@@ -222,7 +200,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_NEW_TABLE_NUMBER_PLAYERS = "newTableNumberPlayers";
     public static final String KEY_NEW_TABLE_PLAYER_TYPES = "newTablePlayerTypes";
     public static final String KEY_NEW_TABLE_QUIT_RATIO = "newTableQuitRatio";
+    public static final String KEY_NEW_TABLE_MINIMUM_RATING = "newTableMinimumRating";
     public static final String KEY_NEW_TABLE_RATED = "newTableRated";
+    public static final String KEY_NEW_TABLE_EDH_POWER_LEVEL = "newTableEdhPowerLevel";
 
     // pref setting for new tournament dialog
     public static final String KEY_NEW_TOURNAMENT_NAME = "newTournamentName";
@@ -231,6 +211,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_NEW_TOURNAMENT_CONSTR_TIME = "newTournamentConstructionTime";
     public static final String KEY_NEW_TOURNAMENT_TYPE = "newTournamentType";
     public static final String KEY_NEW_TOURNAMENT_NUMBER_OF_FREE_MULLIGANS = "newTournamentNumberOfFreeMulligans";
+    public static final String KEY_NEW_TOURNAMENT_MULLIGUN_TYPE = "newTournamentMulliganType";
     public static final String KEY_NEW_TOURNAMENT_NUMBER_OF_WINS = "newTournamentNumberOfWins";
     public static final String KEY_NEW_TOURNAMENT_PACKS_SEALED = "newTournamentPacksSealed";
     public static final String KEY_NEW_TOURNAMENT_PACKS_DRAFT = "newTournamentPacksDraft";
@@ -243,6 +224,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_NEW_TOURNAMENT_ALLOW_ROLLBACKS = "newTournamentAllowRollbacks";
     public static final String KEY_NEW_TOURNAMENT_DECK_FILE = "newTournamentDeckFile";
     public static final String KEY_NEW_TOURNAMENT_QUIT_RATIO = "newTournamentQuitRatio";
+    public static final String KEY_NEW_TOURNAMENT_MINIMUM_RATING = "newTournamentMinimumRating";
     public static final String KEY_NEW_TOURNAMENT_RATED = "newTournamentRated";
 
     // pref setting for deck generator
@@ -289,8 +271,14 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_PROXY_PSWD = "proxyPassword";
     public static final String KEY_CONNECTION_URL_SERVER_LIST = "connectionURLServerList";
 
+    // news
+    public static final String KEY_NEWS_PAGE_LAST_VERSION = "newsPageLastVersion";
+    public static final String KEY_NEWS_PAGE_COOKIES = "newsPageCookies";
+
     // controls
+    public static final String KEY_CONTROL_MODIFIER_POSTFIX = "_modifier";
     public static final String KEY_CONTROL_TOGGLE_MACRO = "controlToggleMacro";
+    public static final String KEY_CONTROL_SWITCH_CHAT = "controlSwitchChat";
     public static final String KEY_CONTROL_CONFIRM = "controlConfirm";
     public static final String KEY_CONTROL_CANCEL_SKIP = "controlCancelSkip";
     public static final String KEY_CONTROL_NEXT_TURN = "controlNextTurn";
@@ -336,6 +324,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         fc_i.addChoosableFileFilter(new ImageFileFilter());
     }
 
+    public static CardLanguage getPrefImagesLanguage() {
+        return CardLanguage.valueByCode(getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PREF_LANGUAGE, CardLanguage.ENGLISH.getCode()));
+    }
+
     private static class ImageFileFilter extends FileFilter {
 
         @Override
@@ -345,10 +337,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 return true;
             }
             if (filename != null) {
-                if (filename.endsWith(".jpg") || filename.endsWith(".jpeg")
-                        || filename.endsWith(".png") || filename.endsWith(".bmp")) {
-                    return true;
-                }
+                return filename.endsWith(".jpg") || filename.endsWith(".jpeg")
+                        || filename.endsWith(".png") || filename.endsWith(".bmp");
             }
             return false;
         }
@@ -372,7 +362,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbProxyType.setModel(new DefaultComboBoxModel<>(Connection.ProxyType.values()));
         addAvatars();
 
-        cbPreferedImageLanguage.setModel(new DefaultComboBoxModel<>(new String[]{"en", "de", "fr", "it", "es", "pt", "jp", "cn", "ru", "tw", "ko"}));
+        cbPreferedImageLanguage.setModel(new DefaultComboBoxModel<>(CardLanguage.toList()));
         cbNumberOfDownloadThreads.setModel(new DefaultComboBoxModel<>(new String[]{"10", "9", "8", "7", "6", "5", "4", "3", "2", "1"}));
     }
 
@@ -465,7 +455,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         checkBoxEndTurnOthers = new javax.swing.JCheckBox();
         phases_stopSettings = new javax.swing.JPanel();
         cbStopAttack = new javax.swing.JCheckBox();
-        cbStopBlock = new javax.swing.JCheckBox();
+        cbStopBlockWithAny = new javax.swing.JCheckBox();
+        cbStopBlockWithZero = new javax.swing.JCheckBox();
+        cbStopOnNewStackObjects = new javax.swing.JCheckBox();
         cbStopOnAllMain = new javax.swing.JCheckBox();
         cbStopOnAllEnd = new javax.swing.JCheckBox();
         cbPassPriorityCast = new javax.swing.JCheckBox();
@@ -576,6 +568,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         bttnResetControls = new javax.swing.JButton();
         labelToggleRecordMacro = new javax.swing.JLabel();
         keyToggleRecordMacro = new KeyBindButton(this, KEY_CONTROL_TOGGLE_MACRO);
+        labelSwitchChat = new javax.swing.JLabel();
+        keySwitchChat = new KeyBindButton(this, KEY_CONTROL_SWITCH_CHAT);
         saveButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
 
@@ -616,24 +610,24 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout main_gamelogLayout = new org.jdesktop.layout.GroupLayout(main_gamelog);
         main_gamelog.setLayout(main_gamelogLayout);
         main_gamelogLayout.setHorizontalGroup(
-            main_gamelogLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(main_gamelogLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(main_gamelogLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(cbDraftLogAutoSave)
-                    .add(cbGameJsonLogAutoSave)
-                    .add(cbGameLogAutoSave, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 505, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                main_gamelogLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(main_gamelogLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .add(main_gamelogLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                        .add(cbDraftLogAutoSave)
+                                        .add(cbGameJsonLogAutoSave)
+                                        .add(cbGameLogAutoSave, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 505, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         main_gamelogLayout.setVerticalGroup(
-            main_gamelogLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(main_gamelogLayout.createSequentialGroup()
-                .add(cbGameLogAutoSave)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(cbDraftLogAutoSave)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(cbGameJsonLogAutoSave)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                main_gamelogLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(main_gamelogLayout.createSequentialGroup()
+                                .add(cbGameLogAutoSave)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(cbDraftLogAutoSave)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(cbGameJsonLogAutoSave)
+                                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         main_card.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Card"));
@@ -675,29 +669,29 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout main_cardLayout = new org.jdesktop.layout.GroupLayout(main_card);
         main_card.setLayout(main_cardLayout);
         main_cardLayout.setHorizontalGroup(
-            main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(main_cardLayout.createSequentialGroup()
-                .add(6, 6, 6)
-                .add(main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                        .add(tooltipDelayLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(tooltipDelay, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .add(main_cardLayout.createSequentialGroup()
-                        .add(showCardName)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                        .add(showFullImagePath)))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(main_cardLayout.createSequentialGroup()
+                                .add(6, 6, 6)
+                                .add(main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                        .add(main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                                                .add(tooltipDelayLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .add(tooltipDelay, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .add(main_cardLayout.createSequentialGroup()
+                                                .add(showCardName)
+                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                                .add(showFullImagePath)))
+                                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         main_cardLayout.setVerticalGroup(
-            main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(main_cardLayout.createSequentialGroup()
-                .add(main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(showCardName)
-                    .add(showFullImagePath))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(tooltipDelayLabel)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(tooltipDelay, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(main_cardLayout.createSequentialGroup()
+                                .add(main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                        .add(showCardName)
+                                        .add(showFullImagePath))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(tooltipDelayLabel)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(tooltipDelay, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         main_game.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Game"));
@@ -784,48 +778,48 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout main_gameLayout = new org.jdesktop.layout.GroupLayout(main_game);
         main_game.setLayout(main_gameLayout);
         main_gameLayout.setHorizontalGroup(
-            main_gameLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(main_gameLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(main_gameLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(main_gameLayout.createSequentialGroup()
-                        .add(main_gameLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                            .add(showPlayerNamesPermanently, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(nonLandPermanentsInOnePile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(cbConfirmEmptyManaPool, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(cbAllowRequestToShowHandCards, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(cbShowStormCounter, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(cbAskMoveToGraveOrder, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(showAbilityPickerForced, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .add(0, 0, Short.MAX_VALUE))
-                    .add(displayLifeOnAvatar, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                main_gameLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(main_gameLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .add(main_gameLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                        .add(main_gameLayout.createSequentialGroup()
+                                                .add(main_gameLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                                                        .add(showPlayerNamesPermanently, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .add(nonLandPermanentsInOnePile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .add(cbConfirmEmptyManaPool, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .add(cbAllowRequestToShowHandCards, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .add(cbShowStormCounter, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .add(cbAskMoveToGraveOrder, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .add(showAbilityPickerForced, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .add(0, 0, Short.MAX_VALUE))
+                                        .add(displayLifeOnAvatar, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap())
         );
         main_gameLayout.setVerticalGroup(
-            main_gameLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(main_gameLayout.createSequentialGroup()
-                .add(nonLandPermanentsInOnePile)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(showPlayerNamesPermanently)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(displayLifeOnAvatar)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(showAbilityPickerForced)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(cbAllowRequestToShowHandCards)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(cbShowStormCounter)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(cbConfirmEmptyManaPool)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(cbAskMoveToGraveOrder))
+                main_gameLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(main_gameLayout.createSequentialGroup()
+                                .add(nonLandPermanentsInOnePile)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(showPlayerNamesPermanently)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(displayLifeOnAvatar)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(showAbilityPickerForced)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(cbAllowRequestToShowHandCards)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(cbShowStormCounter)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(cbConfirmEmptyManaPool)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(cbAskMoveToGraveOrder))
         );
 
         nonLandPermanentsInOnePile.getAccessibleContext().setAccessibleName("nonLandPermanentsInOnePile");
 
         main_battlefield.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Battlefield"));
 
-        cbBattlefieldFeedbackColorizingMode.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Disable colorizing", "Enable one color for all phases", "Enable multicolor for different phases" }));
+        cbBattlefieldFeedbackColorizingMode.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Disable colorizing", "Enable one color for all phases", "Enable multicolor for different phases"}));
         cbBattlefieldFeedbackColorizingMode.setToolTipText("Battlefield feedback panel colorizing on your turn (e.g. use green color if you must select card or answer to request)");
         cbBattlefieldFeedbackColorizingMode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -839,46 +833,46 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout main_battlefieldLayout = new org.jdesktop.layout.GroupLayout(main_battlefield);
         main_battlefield.setLayout(main_battlefieldLayout);
         main_battlefieldLayout.setHorizontalGroup(
-            main_battlefieldLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(main_battlefieldLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(lblBattlefieldFeedbackColorizingMode)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(cbBattlefieldFeedbackColorizingMode, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 278, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                main_battlefieldLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(main_battlefieldLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .add(lblBattlefieldFeedbackColorizingMode)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(cbBattlefieldFeedbackColorizingMode, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 278, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         main_battlefieldLayout.setVerticalGroup(
-            main_battlefieldLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(main_battlefieldLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                .add(lblBattlefieldFeedbackColorizingMode)
-                .add(cbBattlefieldFeedbackColorizingMode, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                main_battlefieldLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(main_battlefieldLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                .add(lblBattlefieldFeedbackColorizingMode)
+                                .add(cbBattlefieldFeedbackColorizingMode, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
 
         org.jdesktop.layout.GroupLayout tabMainLayout = new org.jdesktop.layout.GroupLayout(tabMain);
         tabMain.setLayout(tabMainLayout);
         tabMainLayout.setHorizontalGroup(
-            tabMainLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(tabMainLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(tabMainLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, main_card, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, main_gamelog, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(main_game, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, main_battlefield, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                tabMainLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(tabMainLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .add(tabMainLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                        .add(org.jdesktop.layout.GroupLayout.TRAILING, main_card, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .add(org.jdesktop.layout.GroupLayout.TRAILING, main_gamelog, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .add(main_game, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .add(org.jdesktop.layout.GroupLayout.TRAILING, main_battlefield, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap())
         );
         tabMainLayout.setVerticalGroup(
-            tabMainLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(tabMainLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(main_card, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(main_game, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(main_gamelog, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(main_battlefield, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                tabMainLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(tabMainLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .add(main_card, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(main_game, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(main_gamelog, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(main_battlefield, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         main_card.getAccessibleContext().setAccessibleName("Game panel");
@@ -888,18 +882,18 @@ public class PreferencesDialog extends javax.swing.JDialog {
         tabGuiSize.setMaximumSize(new java.awt.Dimension(527, 423));
         tabGuiSize.setMinimumSize(new java.awt.Dimension(527, 423));
         java.awt.GridBagLayout tabGuiSizeLayout = new java.awt.GridBagLayout();
-        tabGuiSizeLayout.columnWidths = new int[] {0};
-        tabGuiSizeLayout.rowHeights = new int[] {0, 20, 0};
-        tabGuiSizeLayout.columnWeights = new double[] {1.0};
-        tabGuiSizeLayout.rowWeights = new double[] {1.0, 0.0, 1.0};
+        tabGuiSizeLayout.columnWidths = new int[]{0};
+        tabGuiSizeLayout.rowHeights = new int[]{0, 20, 0};
+        tabGuiSizeLayout.columnWeights = new double[]{1.0};
+        tabGuiSizeLayout.rowWeights = new double[]{1.0, 0.0, 1.0};
         tabGuiSize.setLayout(tabGuiSizeLayout);
 
         guiSizeBasic.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Size basic elements"));
         guiSizeBasic.setMinimumSize(new java.awt.Dimension(600, 180));
         guiSizeBasic.setPreferredSize(new java.awt.Dimension(600, 180));
         java.awt.GridBagLayout guiSizeBasicLayout = new java.awt.GridBagLayout();
-        guiSizeBasicLayout.columnWeights = new double[] {1.0, 1.0, 1.0};
-        guiSizeBasicLayout.rowWeights = new double[] {1.0, 0.2, 1.0, 0.2};
+        guiSizeBasicLayout.columnWeights = new double[]{1.0, 1.0, 1.0};
+        guiSizeBasicLayout.rowWeights = new double[]{1.0, 0.2, 1.0, 0.2};
         guiSizeBasic.setLayout(guiSizeBasicLayout);
 
         sliderFontSize.setMajorTickSpacing(5);
@@ -1088,8 +1082,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         guiSizeGame.setMinimumSize(new java.awt.Dimension(600, 180));
         guiSizeGame.setPreferredSize(new java.awt.Dimension(600, 180));
         java.awt.GridBagLayout guiSizeGameLayout = new java.awt.GridBagLayout();
-        guiSizeGameLayout.columnWeights = new double[] {1.0, 1.0, 1.0, 1.0};
-        guiSizeGameLayout.rowWeights = new double[] {1.0, 0.2, 1.0, 0.2};
+        guiSizeGameLayout.columnWeights = new double[]{1.0, 1.0, 1.0, 1.0};
+        guiSizeGameLayout.rowWeights = new double[]{1.0, 0.2, 1.0, 0.2};
         guiSizeGame.setLayout(guiSizeGameLayout);
 
         sliderCardSizeHand.setMajorTickSpacing(5);
@@ -1310,7 +1304,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         tabsPanel.addTab("GUI Size", tabGuiSize);
 
-        jLabelHeadLine.setText("Choose phases your game will stop on if not skipped by a skip action (e.g. F6):");
+        jLabelHeadLine.setText("Default stop steps if not skip buttons activated (e.g. F6):");
 
         jLabelYourTurn.setText("Your turn");
 
@@ -1320,7 +1314,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         jLabelDraw.setText("Draw:");
 
-        jLabelMain1.setText("Main:");
+        jLabelMain1.setText("Main 1:");
 
         jLabelBeforeCombat.setText("Before combat:");
 
@@ -1330,12 +1324,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         jLabelEndOfTurn.setText("End of turn:");
 
-        phases_stopSettings.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Stop settings"));
-        phases_stopSettings.setLayout(new java.awt.GridLayout(7, 1));
+        phases_stopSettings.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "SKIP settings"));
+        phases_stopSettings.setLayout(new java.awt.GridLayout(9, 1));
 
         cbStopAttack.setSelected(true);
-        cbStopAttack.setText("Stop on declare attackers step if you skip steps (F4/F5/F7) and attackers are available");
-        cbStopAttack.setToolTipText("If you use F4, F5 or F7 to skip steps, you stop on declare attackers step if attackers are available. If this option is not activated, you also skip the declare attackers step with this actions. F9 does always skip the declare attackers step.");
+        cbStopAttack.setText("STOP skips on declare attackers if attackers are available");
+        cbStopAttack.setToolTipText("");
         cbStopAttack.setActionCommand("");
         cbStopAttack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1344,18 +1338,40 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
         phases_stopSettings.add(cbStopAttack);
 
-        cbStopBlock.setText("Stop on your declare blockers step also if no blockers available");
-        cbStopBlock.setToolTipText("Also if you have no blockers to declare, the game stops at the declare blockers step.");
-        cbStopBlock.setActionCommand("");
-        cbStopBlock.addActionListener(new java.awt.event.ActionListener() {
+        cbStopBlockWithAny.setSelected(true);
+        cbStopBlockWithAny.setText("STOP skips on declare blockers if ANY blockers are available");
+        cbStopBlockWithAny.setToolTipText("");
+        cbStopBlockWithAny.setActionCommand("");
+        cbStopBlockWithAny.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbStopBlockActionPerformed(evt);
+                cbStopBlockWithAnyActionPerformed(evt);
             }
         });
-        phases_stopSettings.add(cbStopBlock);
+        phases_stopSettings.add(cbStopBlockWithAny);
 
-        cbStopOnAllMain.setText("Skip with F7 to next main phase (if not activated skip always to your next main phase)");
-        cbStopOnAllMain.setToolTipText("If activated F7 skips to next main phases (regardless of the active players).");
+        cbStopBlockWithZero.setText("STOP skips on declare blockers if ZERO blockers are available");
+        cbStopBlockWithZero.setToolTipText("");
+        cbStopBlockWithZero.setActionCommand("");
+        cbStopBlockWithZero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbStopBlockWithZeroActionPerformed(evt);
+            }
+        });
+        phases_stopSettings.add(cbStopBlockWithZero);
+
+        cbStopOnNewStackObjects.setText("Skip to STACK resolved (F10): stop on new objects added (on) or stop until empty (off)");
+        cbStopOnNewStackObjects.setToolTipText("");
+        cbStopOnNewStackObjects.setActionCommand("");
+        cbStopOnNewStackObjects.setPreferredSize(new java.awt.Dimension(300, 25));
+        cbStopOnNewStackObjects.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbStopOnNewStackObjectsActionPerformed(evt);
+            }
+        });
+        phases_stopSettings.add(cbStopOnNewStackObjects);
+
+        cbStopOnAllMain.setText("Skip to MAIN step (F7): stop on any main steps (on) or stop on your main step (off)");
+        cbStopOnAllMain.setToolTipText("");
         cbStopOnAllMain.setActionCommand("");
         cbStopOnAllMain.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1364,8 +1380,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
         phases_stopSettings.add(cbStopOnAllMain);
 
-        cbStopOnAllEnd.setText("Skip with F5 to next end step (if not activated only to end steps of opponents)");
-        cbStopOnAllEnd.setToolTipText("If activated - F5 skips to the next end step (regardless of the current player)");
+        cbStopOnAllEnd.setText("Skip to END step (F5): stop on any end steps (on) or stop on opponents end step (off)");
+        cbStopOnAllEnd.setToolTipText("");
         cbStopOnAllEnd.setActionCommand("");
         cbStopOnAllEnd.setPreferredSize(new java.awt.Dimension(300, 25));
         cbStopOnAllEnd.addActionListener(new java.awt.event.ActionListener() {
@@ -1411,120 +1427,120 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout tabPhasesLayout = new org.jdesktop.layout.GroupLayout(tabPhases);
         tabPhases.setLayout(tabPhasesLayout);
         tabPhasesLayout.setHorizontalGroup(
-            tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(tabPhasesLayout.createSequentialGroup()
-                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(tabPhasesLayout.createSequentialGroup()
-                        .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(tabPhasesLayout.createSequentialGroup()
-                                .add(20, 20, 20)
+                tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(tabPhasesLayout.createSequentialGroup()
                                 .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                    .add(tabPhasesLayout.createSequentialGroup()
-                                        .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                            .add(jLabelUpkeep)
-                                            .add(jLabelBeforeCombat)
-                                            .add(jLabelEndofCombat)
-                                            .add(jLabelMain2)
-                                            .add(jLabelEndOfTurn))
-                                        .add(77, 77, 77)
-                                        .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                            .add(tabPhasesLayout.createSequentialGroup()
-                                                .add(2, 2, 2)
-                                                .add(jLabelYourTurn)
-                                                .add(32, 32, 32)
-                                                .add(jLabelOpponentsTurn))
-                                            .add(tabPhasesLayout.createSequentialGroup()
-                                                .add(13, 13, 13)
-                                                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                                                    .add(checkBoxDrawYou)
-                                                    .add(checkBoxUpkeepYou)
-                                                    .add(checkBoxMainYou)
-                                                    .add(checkBoxBeforeCYou)
-                                                    .add(checkBoxEndOfCYou)
-                                                    .add(checkBoxMain2You)
-                                                    .add(checkBoxEndTurnYou))
-                                                .add(78, 78, 78)
-                                                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                                                    .add(checkBoxUpkeepOthers)
-                                                    .add(checkBoxBeforeCOthers)
-                                                    .add(checkBoxMainOthers)
-                                                    .add(checkBoxEndOfCOthers)
-                                                    .add(checkBoxDrawOthers)
-                                                    .add(checkBoxMain2Others)
-                                                    .add(checkBoxEndTurnOthers)))))
-                                    .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                                        .add(org.jdesktop.layout.GroupLayout.LEADING, jLabelMain1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .add(org.jdesktop.layout.GroupLayout.LEADING, jLabelDraw, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                            .add(tabPhasesLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .add(jLabelHeadLine)))
-                        .add(0, 0, Short.MAX_VALUE))
-                    .add(tabPhasesLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .add(phases_stopSettings, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                                        .add(tabPhasesLayout.createSequentialGroup()
+                                                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                                        .add(tabPhasesLayout.createSequentialGroup()
+                                                                .add(20, 20, 20)
+                                                                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                                                        .add(tabPhasesLayout.createSequentialGroup()
+                                                                                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                                                                        .add(jLabelUpkeep)
+                                                                                        .add(jLabelBeforeCombat)
+                                                                                        .add(jLabelEndofCombat)
+                                                                                        .add(jLabelMain2)
+                                                                                        .add(jLabelEndOfTurn))
+                                                                                .add(77, 77, 77)
+                                                                                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                                                                        .add(tabPhasesLayout.createSequentialGroup()
+                                                                                                .add(2, 2, 2)
+                                                                                                .add(jLabelYourTurn)
+                                                                                                .add(32, 32, 32)
+                                                                                                .add(jLabelOpponentsTurn))
+                                                                                        .add(tabPhasesLayout.createSequentialGroup()
+                                                                                                .add(13, 13, 13)
+                                                                                                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                                                                                        .add(checkBoxDrawYou)
+                                                                                                        .add(checkBoxUpkeepYou)
+                                                                                                        .add(checkBoxMainYou)
+                                                                                                        .add(checkBoxBeforeCYou)
+                                                                                                        .add(checkBoxEndOfCYou)
+                                                                                                        .add(checkBoxMain2You)
+                                                                                                        .add(checkBoxEndTurnYou))
+                                                                                                .add(78, 78, 78)
+                                                                                                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                                                                                        .add(checkBoxUpkeepOthers)
+                                                                                                        .add(checkBoxBeforeCOthers)
+                                                                                                        .add(checkBoxMainOthers)
+                                                                                                        .add(checkBoxEndOfCOthers)
+                                                                                                        .add(checkBoxDrawOthers)
+                                                                                                        .add(checkBoxMain2Others)
+                                                                                                        .add(checkBoxEndTurnOthers)))))
+                                                                        .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                                                                                .add(org.jdesktop.layout.GroupLayout.LEADING, jLabelMain1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                                .add(org.jdesktop.layout.GroupLayout.LEADING, jLabelDraw, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                                        .add(tabPhasesLayout.createSequentialGroup()
+                                                                .addContainerGap()
+                                                                .add(jLabelHeadLine)))
+                                                .add(0, 0, Short.MAX_VALUE))
+                                        .add(tabPhasesLayout.createSequentialGroup()
+                                                .addContainerGap()
+                                                .add(phases_stopSettings, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addContainerGap())
         );
         tabPhasesLayout.setVerticalGroup(
-            tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(tabPhasesLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(tabPhasesLayout.createSequentialGroup()
-                        .add(jLabelOpponentsTurn)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                        .add(checkBoxUpkeepOthers))
-                    .add(tabPhasesLayout.createSequentialGroup()
-                        .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                            .add(tabPhasesLayout.createSequentialGroup()
-                                .add(jLabelHeadLine)
-                                .add(20, 20, 20))
-                            .add(jLabelYourTurn))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                        .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                            .add(checkBoxUpkeepYou)
-                            .add(jLabelUpkeep))))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(jLabelDraw)
-                    .add(checkBoxDrawYou)
-                    .add(checkBoxDrawOthers))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(jLabelMain1)
-                    .add(checkBoxMainYou)
-                    .add(checkBoxMainOthers))
-                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(tabPhasesLayout.createSequentialGroup()
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(org.jdesktop.layout.GroupLayout.TRAILING, jLabelBeforeCombat)
-                            .add(org.jdesktop.layout.GroupLayout.TRAILING, checkBoxBeforeCYou)))
-                    .add(tabPhasesLayout.createSequentialGroup()
-                        .add(6, 6, 6)
-                        .add(checkBoxBeforeCOthers)))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(jLabelEndofCombat)
-                    .add(checkBoxEndOfCYou)
-                    .add(checkBoxEndOfCOthers))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(jLabelMain2)
-                    .add(checkBoxMain2You)
-                    .add(checkBoxMain2Others))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(checkBoxEndTurnYou)
-                    .add(jLabelEndOfTurn)
-                    .add(checkBoxEndTurnOthers))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(phases_stopSettings, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(170, Short.MAX_VALUE))
+                tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(tabPhasesLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                        .add(tabPhasesLayout.createSequentialGroup()
+                                                .add(jLabelOpponentsTurn)
+                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                                .add(checkBoxUpkeepOthers))
+                                        .add(tabPhasesLayout.createSequentialGroup()
+                                                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                                        .add(tabPhasesLayout.createSequentialGroup()
+                                                                .add(jLabelHeadLine)
+                                                                .add(20, 20, 20))
+                                                        .add(jLabelYourTurn))
+                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                                        .add(checkBoxUpkeepYou)
+                                                        .add(jLabelUpkeep))))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                        .add(jLabelDraw)
+                                        .add(checkBoxDrawYou)
+                                        .add(checkBoxDrawOthers))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                        .add(jLabelMain1)
+                                        .add(checkBoxMainYou)
+                                        .add(checkBoxMainOthers))
+                                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                        .add(tabPhasesLayout.createSequentialGroup()
+                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                                        .add(org.jdesktop.layout.GroupLayout.TRAILING, jLabelBeforeCombat)
+                                                        .add(org.jdesktop.layout.GroupLayout.TRAILING, checkBoxBeforeCYou)))
+                                        .add(tabPhasesLayout.createSequentialGroup()
+                                                .add(6, 6, 6)
+                                                .add(checkBoxBeforeCOthers)))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                        .add(jLabelEndofCombat)
+                                        .add(checkBoxEndOfCYou)
+                                        .add(checkBoxEndOfCOthers))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                        .add(jLabelMain2)
+                                        .add(checkBoxMain2You)
+                                        .add(checkBoxMain2Others))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                        .add(checkBoxEndTurnYou)
+                                        .add(jLabelEndOfTurn)
+                                        .add(checkBoxEndTurnOthers))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                .add(phases_stopSettings, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(160, Short.MAX_VALUE))
         );
 
         tabsPanel.addTab("Phases & Priority", tabPhases);
 
-        panelCardImages.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Card images:"));
+        panelCardImages.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Card images"));
 
         cbUseDefaultImageFolder.setText("Use default location to save images");
         cbUseDefaultImageFolder.addActionListener(new java.awt.event.ActionListener() {
@@ -1556,73 +1572,75 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
-        cbPreferedImageLanguage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbPreferedImageLanguage.setMaximumRowCount(20);
+        cbPreferedImageLanguage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
 
         labelPreferedImageLanguage.setText("Prefered image language:");
         labelPreferedImageLanguage.setFocusable(false);
 
         labelNumberOfDownloadThreads.setText("Number of download threads:");
 
-        cbNumberOfDownloadThreads.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbNumberOfDownloadThreads.setMaximumRowCount(20);
+        cbNumberOfDownloadThreads.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
 
         org.jdesktop.layout.GroupLayout panelCardImagesLayout = new org.jdesktop.layout.GroupLayout(panelCardImages);
         panelCardImages.setLayout(panelCardImagesLayout);
         panelCardImagesLayout.setHorizontalGroup(
-            panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(panelCardImagesLayout.createSequentialGroup()
-                .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(panelCardImagesLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .add(txtImageFolderPath)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(btnBrowseImageLocation))
-                    .add(panelCardImagesLayout.createSequentialGroup()
-                        .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                                .add(panelCardImagesLayout.createSequentialGroup()
-                                    .add(cbCheckForNewImages)
-                                    .add(147, 147, 147))
-                                .add(org.jdesktop.layout.GroupLayout.LEADING, panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                                    .add(panelCardImagesLayout.createSequentialGroup()
-                                        .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                                            .add(org.jdesktop.layout.GroupLayout.LEADING, panelCardImagesLayout.createSequentialGroup()
+                panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(panelCardImagesLayout.createSequentialGroup()
+                                .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                        .add(panelCardImagesLayout.createSequentialGroup()
                                                 .addContainerGap()
-                                                .add(labelPreferedImageLanguage))
-                                            .add(org.jdesktop.layout.GroupLayout.LEADING, cbSaveToZipFiles))
-                                        .add(20, 20, 20)
-                                        .add(cbPreferedImageLanguage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 153, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                                    .add(panelCardImagesLayout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .add(labelNumberOfDownloadThreads)
-                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                        .add(cbNumberOfDownloadThreads, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 153, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
-                            .add(cbUseDefaultImageFolder))
-                        .add(0, 308, Short.MAX_VALUE)))
-                .addContainerGap())
+                                                .add(txtImageFolderPath)
+                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                                .add(btnBrowseImageLocation))
+                                        .add(panelCardImagesLayout.createSequentialGroup()
+                                                .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                                        .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                                                                .add(panelCardImagesLayout.createSequentialGroup()
+                                                                        .add(cbCheckForNewImages)
+                                                                        .add(147, 147, 147))
+                                                                .add(org.jdesktop.layout.GroupLayout.LEADING, panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                                                        .add(panelCardImagesLayout.createSequentialGroup()
+                                                                                .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                                                                                        .add(org.jdesktop.layout.GroupLayout.LEADING, panelCardImagesLayout.createSequentialGroup()
+                                                                                                .addContainerGap()
+                                                                                                .add(labelPreferedImageLanguage))
+                                                                                        .add(org.jdesktop.layout.GroupLayout.LEADING, cbSaveToZipFiles))
+                                                                                .add(20, 20, 20)
+                                                                                .add(cbPreferedImageLanguage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 153, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                                                        .add(panelCardImagesLayout.createSequentialGroup()
+                                                                                .addContainerGap()
+                                                                                .add(labelNumberOfDownloadThreads)
+                                                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                                                                .add(cbNumberOfDownloadThreads, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 153, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
+                                                        .add(cbUseDefaultImageFolder))
+                                                .add(0, 391, Short.MAX_VALUE)))
+                                .addContainerGap())
         );
         panelCardImagesLayout.setVerticalGroup(
-            panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(panelCardImagesLayout.createSequentialGroup()
-                .add(cbUseDefaultImageFolder)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(txtImageFolderPath, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(btnBrowseImageLocation))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(cbCheckForNewImages)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(cbSaveToZipFiles)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(labelNumberOfDownloadThreads)
-                    .add(cbNumberOfDownloadThreads, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(cbPreferedImageLanguage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(labelPreferedImageLanguage)))
+                panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(panelCardImagesLayout.createSequentialGroup()
+                                .add(cbUseDefaultImageFolder)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                        .add(txtImageFolderPath, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                        .add(btnBrowseImageLocation))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .add(cbCheckForNewImages)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(cbSaveToZipFiles)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                        .add(labelNumberOfDownloadThreads)
+                                        .add(cbNumberOfDownloadThreads, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                        .add(cbPreferedImageLanguage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                        .add(labelPreferedImageLanguage)))
         );
 
-        panelBackgroundImages.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Background images setting:"));
+        panelBackgroundImages.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Background images"));
 
         cbUseDefaultBackground.setText("Use default image");
         cbUseDefaultBackground.addActionListener(new java.awt.event.ActionListener() {
@@ -1678,57 +1696,57 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout panelBackgroundImagesLayout = new org.jdesktop.layout.GroupLayout(panelBackgroundImages);
         panelBackgroundImages.setLayout(panelBackgroundImagesLayout);
         panelBackgroundImagesLayout.setHorizontalGroup(
-            panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(panelBackgroundImagesLayout.createSequentialGroup()
-                .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(panelBackgroundImagesLayout.createSequentialGroup()
-                        .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(panelBackgroundImagesLayout.createSequentialGroup()
-                                .add(19, 19, 19)
-                                .add(jLabel14))
-                            .add(panelBackgroundImagesLayout.createSequentialGroup()
-                                .add(25, 25, 25)
-                                .add(jLabel15)))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(txtBackgroundImagePath)
-                            .add(txtBattlefieldImagePath))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(org.jdesktop.layout.GroupLayout.TRAILING, btnBrowseBackgroundImage)
-                            .add(org.jdesktop.layout.GroupLayout.TRAILING, btnBrowseBattlefieldImage)))
-                    .add(panelBackgroundImagesLayout.createSequentialGroup()
-                        .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(cbUseRandomBattleImage)
-                            .add(cbUseDefaultBattleImage)
-                            .add(cbUseDefaultBackground))
-                        .add(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(panelBackgroundImagesLayout.createSequentialGroup()
+                                .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                        .add(panelBackgroundImagesLayout.createSequentialGroup()
+                                                .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                                        .add(panelBackgroundImagesLayout.createSequentialGroup()
+                                                                .add(19, 19, 19)
+                                                                .add(jLabel14))
+                                                        .add(panelBackgroundImagesLayout.createSequentialGroup()
+                                                                .add(25, 25, 25)
+                                                                .add(jLabel15)))
+                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                                .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                                        .add(txtBackgroundImagePath)
+                                                        .add(txtBattlefieldImagePath))
+                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                                .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                                        .add(org.jdesktop.layout.GroupLayout.TRAILING, btnBrowseBackgroundImage)
+                                                        .add(org.jdesktop.layout.GroupLayout.TRAILING, btnBrowseBattlefieldImage)))
+                                        .add(panelBackgroundImagesLayout.createSequentialGroup()
+                                                .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                                        .add(cbUseRandomBattleImage)
+                                                        .add(cbUseDefaultBattleImage)
+                                                        .add(cbUseDefaultBackground))
+                                                .add(0, 0, Short.MAX_VALUE)))
+                                .addContainerGap())
         );
         panelBackgroundImagesLayout.setVerticalGroup(
-            panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(panelBackgroundImagesLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(cbUseDefaultBackground)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(txtBackgroundImagePath, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(btnBrowseBackgroundImage)
-                    .add(jLabel14))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(cbUseDefaultBattleImage)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(cbUseRandomBattleImage)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(txtBattlefieldImagePath, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(btnBrowseBattlefieldImage)
-                    .add(jLabel15)))
+                panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(panelBackgroundImagesLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .add(cbUseDefaultBackground)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                        .add(txtBackgroundImagePath, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                        .add(btnBrowseBackgroundImage)
+                                        .add(jLabel14))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                .add(cbUseDefaultBattleImage)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                .add(cbUseRandomBattleImage)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                        .add(txtBattlefieldImagePath, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                        .add(btnBrowseBattlefieldImage)
+                                        .add(jLabel15)))
         );
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Card rendering:"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Card styles (restart xmage to apply new settings)"));
 
-        cbCardRenderImageFallback.setText("Fall back to plain image based rendering");
+        cbCardRenderImageFallback.setText("Render mode: MTGO style (off) or IMAGE style (on)");
         cbCardRenderImageFallback.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbCardRenderImageFallbackActionPerformed(evt);
@@ -1752,47 +1770,47 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel1Layout.createSequentialGroup()
-                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(cbCardRenderImageFallback)
-                    .add(cbCardRenderShowReminderText)
-                    .add(cbCardRenderHideSetSymbol))
-                .add(0, 0, Short.MAX_VALUE))
+                jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(jPanel1Layout.createSequentialGroup()
+                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                        .add(cbCardRenderImageFallback)
+                                        .add(cbCardRenderShowReminderText)
+                                        .add(cbCardRenderHideSetSymbol))
+                                .add(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel1Layout.createSequentialGroup()
-                .add(cbCardRenderImageFallback)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(cbCardRenderShowReminderText)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(cbCardRenderHideSetSymbol)
-                .add(0, 0, Short.MAX_VALUE))
+                jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(jPanel1Layout.createSequentialGroup()
+                                .add(cbCardRenderImageFallback)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(cbCardRenderShowReminderText)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(cbCardRenderHideSetSymbol)
+                                .add(0, 0, Short.MAX_VALUE))
         );
 
         org.jdesktop.layout.GroupLayout tabImagesLayout = new org.jdesktop.layout.GroupLayout(tabImages);
         tabImages.setLayout(tabImagesLayout);
         tabImagesLayout.setHorizontalGroup(
-            tabImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(tabImagesLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(tabImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(panelCardImages, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(panelBackgroundImages, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                tabImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(tabImagesLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .add(tabImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                        .add(panelCardImages, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .add(jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .add(panelBackgroundImages, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap())
         );
         tabImagesLayout.setVerticalGroup(
-            tabImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(tabImagesLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(panelCardImages, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(panelBackgroundImages, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(133, Short.MAX_VALUE))
+                tabImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(tabImagesLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(panelCardImages, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(panelBackgroundImages, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(133, Short.MAX_VALUE))
         );
 
         tabsPanel.addTab("Images", tabImages);
@@ -1866,48 +1884,48 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout sounds_backgroundMusicLayout = new org.jdesktop.layout.GroupLayout(sounds_backgroundMusic);
         sounds_backgroundMusic.setLayout(sounds_backgroundMusicLayout);
         sounds_backgroundMusicLayout.setHorizontalGroup(
-            sounds_backgroundMusicLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(sounds_backgroundMusicLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(jLabel16)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(txtBattlefieldIBGMPath)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(btnBattlefieldBGMBrowse))
-            .add(sounds_backgroundMusicLayout.createSequentialGroup()
-                .add(cbEnableBattlefieldBGM)
-                .add(0, 0, Short.MAX_VALUE))
+                sounds_backgroundMusicLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(sounds_backgroundMusicLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .add(jLabel16)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(txtBattlefieldIBGMPath)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(btnBattlefieldBGMBrowse))
+                        .add(sounds_backgroundMusicLayout.createSequentialGroup()
+                                .add(cbEnableBattlefieldBGM)
+                                .add(0, 0, Short.MAX_VALUE))
         );
         sounds_backgroundMusicLayout.setVerticalGroup(
-            sounds_backgroundMusicLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(sounds_backgroundMusicLayout.createSequentialGroup()
-                .add(cbEnableBattlefieldBGM)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(sounds_backgroundMusicLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(txtBattlefieldIBGMPath, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(btnBattlefieldBGMBrowse)
-                    .add(jLabel16)))
+                sounds_backgroundMusicLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(sounds_backgroundMusicLayout.createSequentialGroup()
+                                .add(cbEnableBattlefieldBGM)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(sounds_backgroundMusicLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                        .add(txtBattlefieldIBGMPath, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                        .add(btnBattlefieldBGMBrowse)
+                                        .add(jLabel16)))
         );
 
         org.jdesktop.layout.GroupLayout tabSoundsLayout = new org.jdesktop.layout.GroupLayout(tabSounds);
         tabSounds.setLayout(tabSoundsLayout);
         tabSoundsLayout.setHorizontalGroup(
-            tabSoundsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(tabSoundsLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(tabSoundsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(sounds_clips, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, sounds_backgroundMusic, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                tabSoundsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(tabSoundsLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .add(tabSoundsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                        .add(sounds_clips, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .add(org.jdesktop.layout.GroupLayout.TRAILING, sounds_backgroundMusic, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap())
         );
         tabSoundsLayout.setVerticalGroup(
-            tabSoundsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(tabSoundsLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(sounds_clips, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(sounds_backgroundMusic, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                tabSoundsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(tabSoundsLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .add(sounds_clips, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(sounds_backgroundMusic, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         sounds_clips.getAccessibleContext().setAccessibleDescription("");
@@ -1931,12 +1949,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout jPanel10Layout = new org.jdesktop.layout.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel10Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
         jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel10Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel10);
@@ -1949,12 +1967,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout jPanel11Layout = new org.jdesktop.layout.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel11Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
         jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel11Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel11);
@@ -1967,12 +1985,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout jPanel12Layout = new org.jdesktop.layout.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel12Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
         jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel12Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel12);
@@ -1985,12 +2003,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout jPanel13Layout = new org.jdesktop.layout.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel13Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
         jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel13Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel13);
@@ -2003,12 +2021,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout jPanel14Layout = new org.jdesktop.layout.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
-            jPanel14Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel14Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
         jPanel14Layout.setVerticalGroup(
-            jPanel14Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel14Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel14);
@@ -2021,12 +2039,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout jPanel15Layout = new org.jdesktop.layout.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel15Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
         jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel15Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel15);
@@ -2039,12 +2057,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout jPanel16Layout = new org.jdesktop.layout.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
         jPanel16Layout.setHorizontalGroup(
-            jPanel16Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel16Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
         jPanel16Layout.setVerticalGroup(
-            jPanel16Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel16Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel16);
@@ -2057,12 +2075,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout jPanel17Layout = new org.jdesktop.layout.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
         jPanel17Layout.setHorizontalGroup(
-            jPanel17Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel17Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
         jPanel17Layout.setVerticalGroup(
-            jPanel17Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel17Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel17);
@@ -2075,12 +2093,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout jPanel18Layout = new org.jdesktop.layout.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
         jPanel18Layout.setHorizontalGroup(
-            jPanel18Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel18Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
         jPanel18Layout.setVerticalGroup(
-            jPanel18Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel18Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel18);
@@ -2093,12 +2111,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout jPanel19Layout = new org.jdesktop.layout.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
         jPanel19Layout.setHorizontalGroup(
-            jPanel19Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel19Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
         jPanel19Layout.setVerticalGroup(
-            jPanel19Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel19Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel19);
@@ -2111,12 +2129,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout jPanel20Layout = new org.jdesktop.layout.GroupLayout(jPanel20);
         jPanel20.setLayout(jPanel20Layout);
         jPanel20Layout.setHorizontalGroup(
-            jPanel20Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel20Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
         jPanel20Layout.setVerticalGroup(
-            jPanel20Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel20Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel20);
@@ -2129,12 +2147,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout jPanel21Layout = new org.jdesktop.layout.GroupLayout(jPanel21);
         jPanel21.setLayout(jPanel21Layout);
         jPanel21Layout.setHorizontalGroup(
-            jPanel21Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel21Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
         jPanel21Layout.setVerticalGroup(
-            jPanel21Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel21Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel21);
@@ -2147,12 +2165,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout jPanel22Layout = new org.jdesktop.layout.GroupLayout(jPanel22);
         jPanel22.setLayout(jPanel22Layout);
         jPanel22Layout.setHorizontalGroup(
-            jPanel22Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel22Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
         jPanel22Layout.setVerticalGroup(
-            jPanel22Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel22Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel22);
@@ -2165,12 +2183,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout jPanel23Layout = new org.jdesktop.layout.GroupLayout(jPanel23);
         jPanel23.setLayout(jPanel23Layout);
         jPanel23Layout.setHorizontalGroup(
-            jPanel23Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel23Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
         jPanel23Layout.setVerticalGroup(
-            jPanel23Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel23Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel23);
@@ -2183,12 +2201,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout jPanel24Layout = new org.jdesktop.layout.GroupLayout(jPanel24);
         jPanel24.setLayout(jPanel24Layout);
         jPanel24Layout.setHorizontalGroup(
-            jPanel24Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel24Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
         jPanel24Layout.setVerticalGroup(
-            jPanel24Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel24Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel24);
@@ -2201,12 +2219,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout jPanel25Layout = new org.jdesktop.layout.GroupLayout(jPanel25);
         jPanel25.setLayout(jPanel25Layout);
         jPanel25Layout.setHorizontalGroup(
-            jPanel25Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel25Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
         jPanel25Layout.setVerticalGroup(
-            jPanel25Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel25Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel25);
@@ -2219,12 +2237,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout jPanel26Layout = new org.jdesktop.layout.GroupLayout(jPanel26);
         jPanel26.setLayout(jPanel26Layout);
         jPanel26Layout.setHorizontalGroup(
-            jPanel26Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel26Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
         jPanel26Layout.setVerticalGroup(
-            jPanel26Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel26Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel26);
@@ -2237,12 +2255,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout jPanel27Layout = new org.jdesktop.layout.GroupLayout(jPanel27);
         jPanel27.setLayout(jPanel27Layout);
         jPanel27Layout.setHorizontalGroup(
-            jPanel27Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel27Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
         jPanel27Layout.setVerticalGroup(
-            jPanel27Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel27Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel27);
@@ -2255,12 +2273,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout jPanel28Layout = new org.jdesktop.layout.GroupLayout(jPanel28);
         jPanel28.setLayout(jPanel28Layout);
         jPanel28Layout.setHorizontalGroup(
-            jPanel28Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel28Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
         jPanel28Layout.setVerticalGroup(
-            jPanel28Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel28Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel28);
@@ -2273,12 +2291,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout jPanel29Layout = new org.jdesktop.layout.GroupLayout(jPanel29);
         jPanel29.setLayout(jPanel29Layout);
         jPanel29Layout.setHorizontalGroup(
-            jPanel29Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel29Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
         jPanel29Layout.setVerticalGroup(
-            jPanel29Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel29Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel29);
@@ -2291,12 +2309,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout jPanel30Layout = new org.jdesktop.layout.GroupLayout(jPanel30);
         jPanel30.setLayout(jPanel30Layout);
         jPanel30Layout.setHorizontalGroup(
-            jPanel30Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel30Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
         jPanel30Layout.setVerticalGroup(
-            jPanel30Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel30Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel30);
@@ -2309,12 +2327,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout jPanel31Layout = new org.jdesktop.layout.GroupLayout(jPanel31);
         jPanel31.setLayout(jPanel31Layout);
         jPanel31Layout.setHorizontalGroup(
-            jPanel31Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel31Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
         jPanel31Layout.setVerticalGroup(
-            jPanel31Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel31Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel31);
@@ -2327,12 +2345,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout jPanel32Layout = new org.jdesktop.layout.GroupLayout(jPanel32);
         jPanel32.setLayout(jPanel32Layout);
         jPanel32Layout.setHorizontalGroup(
-            jPanel32Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel32Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
         jPanel32Layout.setVerticalGroup(
-            jPanel32Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel32Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel32);
@@ -2344,12 +2362,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout jPanel33Layout = new org.jdesktop.layout.GroupLayout(jPanel33);
         jPanel33.setLayout(jPanel33Layout);
         jPanel33Layout.setHorizontalGroup(
-            jPanel33Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel33Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
         jPanel33Layout.setVerticalGroup(
-            jPanel33Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 0, Short.MAX_VALUE)
+                jPanel33Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel33);
@@ -2359,16 +2377,16 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout tabAvatarsLayout = new org.jdesktop.layout.GroupLayout(tabAvatars);
         tabAvatars.setLayout(tabAvatarsLayout);
         tabAvatarsLayout.setHorizontalGroup(
-            tabAvatarsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(tabAvatarsLayout.createSequentialGroup()
-                .add(avatarPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 528, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(0, 0, Short.MAX_VALUE))
+                tabAvatarsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(tabAvatarsLayout.createSequentialGroup()
+                                .add(avatarPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 528, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(0, 0, Short.MAX_VALUE))
         );
         tabAvatarsLayout.setVerticalGroup(
-            tabAvatarsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(tabAvatarsLayout.createSequentialGroup()
-                .add(avatarPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 620, Short.MAX_VALUE)
-                .addContainerGap())
+                tabAvatarsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(tabAvatarsLayout.createSequentialGroup()
+                                .add(avatarPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 620, Short.MAX_VALUE)
+                                .addContainerGap())
         );
 
         tabsPanel.addTab("Avatars", tabAvatars);
@@ -2391,27 +2409,27 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout connection_serversLayout = new org.jdesktop.layout.GroupLayout(connection_servers);
         connection_servers.setLayout(connection_serversLayout);
         connection_serversLayout.setHorizontalGroup(
-            connection_serversLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(connection_serversLayout.createSequentialGroup()
-                .add(connection_serversLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(connection_serversLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .add(lblURLServerList, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 96, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(txtURLServerList, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 370, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(connection_serversLayout.createSequentialGroup()
-                        .add(141, 141, 141)
-                        .add(jLabel17)))
-                .addContainerGap(201, Short.MAX_VALUE))
+                connection_serversLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(connection_serversLayout.createSequentialGroup()
+                                .add(connection_serversLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                        .add(connection_serversLayout.createSequentialGroup()
+                                                .addContainerGap()
+                                                .add(lblURLServerList, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 96, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                                .add(txtURLServerList, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 370, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                        .add(connection_serversLayout.createSequentialGroup()
+                                                .add(141, 141, 141)
+                                                .add(jLabel17)))
+                                .addContainerGap(251, Short.MAX_VALUE))
         );
         connection_serversLayout.setVerticalGroup(
-            connection_serversLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(connection_serversLayout.createSequentialGroup()
-                .add(connection_serversLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(lblURLServerList, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(txtURLServerList, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jLabel17))
+                connection_serversLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(connection_serversLayout.createSequentialGroup()
+                                .add(connection_serversLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                                        .add(lblURLServerList, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .add(txtURLServerList, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(jLabel17))
         );
 
         lblProxyType.setText("Proxy:");
@@ -2457,118 +2475,118 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout pnlProxyLayout = new org.jdesktop.layout.GroupLayout(pnlProxy);
         pnlProxy.setLayout(pnlProxyLayout);
         pnlProxyLayout.setHorizontalGroup(
-            pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(pnlProxyLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(pnlProxyLayout.createSequentialGroup()
-                        .add(rememberPswd)
-                        .add(47, 47, 47)
-                        .add(jLabel11)
-                        .add(34, 34, 34))
-                    .add(pnlProxyLayout.createSequentialGroup()
-                        .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(lblProxyPort)
-                            .add(lblProxyPassword)
-                            .add(lblProxyServer)
-                            .add(lblProxyUserName))
-                        .add(19, 19, 19)
-                        .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(txtProxyPort, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 58, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                                .add(org.jdesktop.layout.GroupLayout.LEADING, txtPasswordField)
-                                .add(org.jdesktop.layout.GroupLayout.LEADING, txtProxyUserName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 148, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                            .add(txtProxyServer))
-                        .addContainerGap())))
+                pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(pnlProxyLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                        .add(pnlProxyLayout.createSequentialGroup()
+                                                .add(rememberPswd)
+                                                .add(47, 47, 47)
+                                                .add(jLabel11)
+                                                .add(34, 34, 34))
+                                        .add(pnlProxyLayout.createSequentialGroup()
+                                                .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                                        .add(lblProxyPort)
+                                                        .add(lblProxyPassword)
+                                                        .add(lblProxyServer)
+                                                        .add(lblProxyUserName))
+                                                .add(19, 19, 19)
+                                                .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                                        .add(txtProxyPort, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 58, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                                        .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                                                                .add(org.jdesktop.layout.GroupLayout.LEADING, txtPasswordField)
+                                                                .add(org.jdesktop.layout.GroupLayout.LEADING, txtProxyUserName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 148, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                                        .add(txtProxyServer))
+                                                .addContainerGap())))
         );
         pnlProxyLayout.setVerticalGroup(
-            pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(pnlProxyLayout.createSequentialGroup()
-                .add(6, 6, 6)
-                .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(txtProxyServer, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(lblProxyServer))
-                .add(8, 8, 8)
-                .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(lblProxyPort)
-                    .add(txtProxyPort, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(txtProxyUserName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(lblProxyUserName))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(txtPasswordField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(lblProxyPassword))
-                .add(18, 18, 18)
-                .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(rememberPswd)
-                    .add(jLabel11))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(pnlProxyLayout.createSequentialGroup()
+                                .add(6, 6, 6)
+                                .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                        .add(txtProxyServer, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                        .add(lblProxyServer))
+                                .add(8, 8, 8)
+                                .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                        .add(lblProxyPort)
+                                        .add(txtProxyPort, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                        .add(txtProxyUserName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                        .add(lblProxyUserName))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                        .add(txtPasswordField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                        .add(lblProxyPassword))
+                                .add(18, 18, 18)
+                                .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                        .add(rememberPswd)
+                                        .add(jLabel11))
+                                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         org.jdesktop.layout.GroupLayout pnlProxySettingsLayout = new org.jdesktop.layout.GroupLayout(pnlProxySettings);
         pnlProxySettings.setLayout(pnlProxySettingsLayout);
         pnlProxySettingsLayout.setHorizontalGroup(
-            pnlProxySettingsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(pnlProxySettingsLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(pnlProxy, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                pnlProxySettingsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(pnlProxySettingsLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .add(pnlProxy, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap())
         );
         pnlProxySettingsLayout.setVerticalGroup(
-            pnlProxySettingsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(pnlProxySettingsLayout.createSequentialGroup()
-                .add(pnlProxy, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                pnlProxySettingsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(pnlProxySettingsLayout.createSequentialGroup()
+                                .add(pnlProxy, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap())
         );
 
         org.jdesktop.layout.GroupLayout tabConnectionLayout = new org.jdesktop.layout.GroupLayout(tabConnection);
         tabConnection.setLayout(tabConnectionLayout);
         tabConnectionLayout.setHorizontalGroup(
-            tabConnectionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, tabConnectionLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(tabConnectionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(pnlProxySettings, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, tabConnectionLayout.createSequentialGroup()
-                        .add(lblProxyType)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                        .add(cbProxyType, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 126, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(connection_servers, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                tabConnectionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(org.jdesktop.layout.GroupLayout.TRAILING, tabConnectionLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .add(tabConnectionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                        .add(pnlProxySettings, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .add(org.jdesktop.layout.GroupLayout.LEADING, tabConnectionLayout.createSequentialGroup()
+                                                .add(lblProxyType)
+                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                                .add(cbProxyType, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 126, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                        .add(connection_servers, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap())
         );
         tabConnectionLayout.setVerticalGroup(
-            tabConnectionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(tabConnectionLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(connection_servers, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(tabConnectionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(lblProxyType)
-                    .add(cbProxyType, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .add(18, 18, 18)
-                .add(pnlProxySettings, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                tabConnectionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(tabConnectionLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .add(connection_servers, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(tabConnectionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                        .add(lblProxyType)
+                                        .add(cbProxyType, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                .add(18, 18, 18)
+                                .add(pnlProxySettings, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnlProxySettings.getAccessibleContext().setAccessibleDescription("");
 
         tabsPanel.addTab("Connection", tabConnection);
 
-        labelNextTurn.setText("Next Turn");
+        labelNextTurn.setText("Next Turn:");
 
-        labelEndStep.setText("End Step");
+        labelEndStep.setText("End Step:");
 
-        labelMainStep.setText("Main Step");
+        labelMainStep.setText("Main Step:");
 
-        labelYourTurn.setText("Your Turn");
+        labelYourTurn.setText("Your Turn:");
 
-        lebelSkip.setText("Skip Stack");
+        lebelSkip.setText("Skip Stack:");
 
-        labelPriorEnd.setText("Prior End");
+        labelPriorEnd.setText("Prior End:");
 
-        labelCancel.setText("Cancel Skip");
+        labelCancel.setText("Cancel Skip:");
 
         keyCancelSkip.setText("keyBindButton1");
 
@@ -2586,13 +2604,13 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         keySkipStep.setText("keyBindButton1");
 
-        labelSkipStep.setText("Skip Step");
+        labelSkipStep.setText("Skip Step:");
 
         keyConfirm.setText("keyBindButton1");
 
-        labelConfirm.setText("Confirm");
+        labelConfirm.setText("Confirm:");
 
-        controlsDescriptionLabel.setText("<html>Click on a button and press a key to change a keybind.<br>Space and ESC are not available, and will set the keybind to nothing.<br>If you are currently playing a game, the changes will not take effect until you start a new game.");
+        controlsDescriptionLabel.setText("<html>Click on a button and press a KEY or a combination of CTRL/ALT/SHIF + KEY to change a keybind.\n<br>\nPress SPACE to clear binging.\n<br>\nPress ESC to cancel binding.\n<br>\nNew changes will be applied after new game start.");
         controlsDescriptionLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         bttnResetControls.setText("Reset to default");
@@ -2602,97 +2620,105 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
-        labelToggleRecordMacro.setText("Toggle Record Macro");
+        labelToggleRecordMacro.setText("Record Macro (unsupported):");
 
         keyToggleRecordMacro.setText("keyBindButton1");
+
+        labelSwitchChat.setText("Go in/out to chat:");
+
+        keySwitchChat.setText("keyBindButton1");
 
         org.jdesktop.layout.GroupLayout tabControlsLayout = new org.jdesktop.layout.GroupLayout(tabControls);
         tabControls.setLayout(tabControlsLayout);
         tabControlsLayout.setHorizontalGroup(
-            tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(tabControlsLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(tabControlsLayout.createSequentialGroup()
-                        .add(bttnResetControls)
-                        .add(0, 0, Short.MAX_VALUE))
-                    .add(tabControlsLayout.createSequentialGroup()
-                        .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(labelCancel)
-                            .add(labelNextTurn)
-                            .add(labelEndStep)
-                            .add(labelMainStep)
-                            .add(labelYourTurn)
-                            .add(lebelSkip)
-                            .add(labelPriorEnd)
-                            .add(labelSkipStep)
-                            .add(labelConfirm)
-                            .add(labelToggleRecordMacro))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                        .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(keyConfirm, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(keyCancelSkip, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(keyNextTurn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(keySkipStack, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(keyYourTurn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(keyMainStep, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(keyPriorEnd, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(keySkipStep, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(keyEndStep, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(keyToggleRecordMacro, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(controlsDescriptionLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)))
-                .addContainerGap())
+                tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(tabControlsLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                                        .add(bttnResetControls, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .add(tabControlsLayout.createSequentialGroup()
+                                                .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                                        .add(labelCancel)
+                                                        .add(labelNextTurn)
+                                                        .add(labelEndStep)
+                                                        .add(labelMainStep)
+                                                        .add(labelYourTurn)
+                                                        .add(lebelSkip)
+                                                        .add(labelPriorEnd)
+                                                        .add(labelSkipStep)
+                                                        .add(labelConfirm)
+                                                        .add(labelToggleRecordMacro)
+                                                        .add(labelSwitchChat))
+                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                                .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                                        .add(keyConfirm, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                                        .add(keyCancelSkip, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                                        .add(keyNextTurn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                                        .add(keySkipStack, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                                        .add(keyYourTurn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                                        .add(keyMainStep, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                                        .add(keyPriorEnd, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                                        .add(keySkipStep, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                                        .add(keyEndStep, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                                        .add(keyToggleRecordMacro, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                                        .add(keySwitchChat, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                .add(controlsDescriptionLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
+                                .addContainerGap())
         );
         tabControlsLayout.setVerticalGroup(
-            tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(tabControlsLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, controlsDescriptionLabel)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, tabControlsLayout.createSequentialGroup()
-                        .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                            .add(labelConfirm)
-                            .add(keyConfirm, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                        .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                            .add(labelCancel)
-                            .add(keyCancelSkip, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                        .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                            .add(labelNextTurn)
-                            .add(keyNextTurn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                        .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                            .add(labelEndStep)
-                            .add(keyEndStep, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                        .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                            .add(labelSkipStep)
-                            .add(keySkipStep, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                        .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                            .add(labelMainStep)
-                            .add(keyMainStep, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                        .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                            .add(labelYourTurn)
-                            .add(keyYourTurn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                        .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                            .add(lebelSkip)
-                            .add(keySkipStack, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                        .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                            .add(labelPriorEnd)
-                            .add(keyPriorEnd, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                        .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                            .add(labelToggleRecordMacro)
-                            .add(keyToggleRecordMacro, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(bttnResetControls)
-                .addContainerGap())
+                tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(tabControlsLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                                        .add(tabControlsLayout.createSequentialGroup()
+                                                .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                                        .add(labelConfirm)
+                                                        .add(keyConfirm, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                                .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                                        .add(labelCancel)
+                                                        .add(keyCancelSkip, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                                .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                                        .add(labelNextTurn)
+                                                        .add(keyNextTurn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                                .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                                        .add(labelEndStep)
+                                                        .add(keyEndStep, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                                .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                                        .add(labelSkipStep)
+                                                        .add(keySkipStep, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                                .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                                        .add(labelMainStep)
+                                                        .add(keyMainStep, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                                .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                                        .add(labelYourTurn)
+                                                        .add(keyYourTurn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                                .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                                        .add(lebelSkip)
+                                                        .add(keySkipStack, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                                .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                                        .add(labelPriorEnd)
+                                                        .add(keyPriorEnd, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                                .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                                        .add(labelToggleRecordMacro)
+                                                        .add(keyToggleRecordMacro, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                                .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                                        .add(labelSwitchChat)
+                                                        .add(keySwitchChat, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                                .add(bttnResetControls))
+                                        .add(controlsDescriptionLabel))
+                                .addContainerGap())
         );
 
         tabsPanel.addTab("Controls", tabControls);
@@ -2722,27 +2748,27 @@ public class PreferencesDialog extends javax.swing.JDialog {
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, tabsPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(layout.createSequentialGroup()
-                        .add(0, 0, Short.MAX_VALUE)
-                        .add(saveButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(exitButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                .add(6, 6, 6))
+                layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                        .add(org.jdesktop.layout.GroupLayout.LEADING, tabsPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .add(layout.createSequentialGroup()
+                                                .add(0, 0, Short.MAX_VALUE)
+                                                .add(saveButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                                .add(exitButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                                .add(6, 6, 6))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
-                .add(tabsPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(saveButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(exitButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(layout.createSequentialGroup()
+                                .add(tabsPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                        .add(saveButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                        .add(exitButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap())
         );
 
         pack();
@@ -2854,9 +2880,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS);
 
         save(prefs, dialog.cbStopAttack, KEY_STOP_ATTACK, "true", "false", UPDATE_CACHE_POLICY);
-        save(prefs, dialog.cbStopBlock, KEY_STOP_BLOCK, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.cbStopBlockWithAny, KEY_STOP_BLOCK_WITH_ANY, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.cbStopBlockWithZero, KEY_STOP_BLOCK_WITH_ZERO, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbStopOnAllMain, KEY_STOP_ALL_MAIN_PHASES, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbStopOnAllEnd, KEY_STOP_ALL_END_PHASES, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.cbStopOnNewStackObjects, KEY_STOP_NEW_STACK_OBJECTS, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbPassPriorityCast, KEY_PASS_PRIORITY_CAST, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbPassPriorityActivation, KEY_PASS_PRIORITY_ACTIVATION, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbAutoOrderTrigger, KEY_AUTO_ORDER_TRIGGER, "true", "false", UPDATE_CACHE_POLICY);
@@ -2909,6 +2937,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.keySkipStack);
         save(prefs, dialog.keyPriorEnd);
         save(prefs, dialog.keyToggleRecordMacro);
+        save(prefs, dialog.keySwitchChat);
 
         // Avatar
         if (selectedAvatarId < MIN_AVATAR_ID || selectedAvatarId > MAX_AVATAR_ID) {
@@ -2919,7 +2948,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         try {
             SessionHandler.updatePreferencesForServer(getUserData());
-
             prefs.flush();
         } catch (BackingStoreException ex) {
             logger.error("Error: couldn't save preferences", ex);
@@ -3110,9 +3138,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbStopAttackActionPerformed
 
-    private void cbStopBlockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbStopBlockActionPerformed
+    private void cbStopBlockWithAnyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbStopBlockWithAnyActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbStopBlockActionPerformed
+    }//GEN-LAST:event_cbStopBlockWithAnyActionPerformed
 
     private void cbStopOnAllMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbStopOnAllMainActionPerformed
         // TODO add your handling code here:
@@ -3203,7 +3231,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         getKeybindButtons().forEach((bttn) -> {
             String id = bttn.getKey();
             int keyCode = getDefaultControlKey(id);
+            int modCode = getDefaultControlMofier(id);
             bttn.setKeyCode(keyCode);
+            bttn.setModifierCode(modCode);
         });
     }//GEN-LAST:event_bttnResetControlsActionPerformed
 
@@ -3224,6 +3254,14 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private void displayLifeOnAvatarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_displayLifeOnAvatarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_displayLifeOnAvatarActionPerformed
+
+    private void cbStopOnNewStackObjectsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbStopOnNewStackObjectsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbStopOnNewStackObjectsActionPerformed
+
+    private void cbStopBlockWithZeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbStopBlockWithZeroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbStopBlockWithZeroActionPerformed
 
     private void showProxySettings() {
         Connection.ProxyType proxyType = (Connection.ProxyType) cbProxyType.getSelectedItem();
@@ -3275,7 +3313,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         int param = 0;
         if (args.length > 0) {
             String param1 = args[0];
@@ -3369,9 +3407,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS, "on", "on");
 
         load(prefs, dialog.cbStopAttack, KEY_STOP_ATTACK, "true", "true");
-        load(prefs, dialog.cbStopBlock, KEY_STOP_BLOCK, "true", "true");
+        load(prefs, dialog.cbStopBlockWithAny, KEY_STOP_BLOCK_WITH_ANY, "true", "true");
+        load(prefs, dialog.cbStopBlockWithZero, KEY_STOP_BLOCK_WITH_ZERO, "true", "false");
         load(prefs, dialog.cbStopOnAllMain, KEY_STOP_ALL_MAIN_PHASES, "true", "false");
         load(prefs, dialog.cbStopOnAllEnd, KEY_STOP_ALL_END_PHASES, "true", "false");
+        load(prefs, dialog.cbStopOnNewStackObjects, KEY_STOP_NEW_STACK_OBJECTS, "true", "false");
         load(prefs, dialog.cbPassPriorityCast, KEY_PASS_PRIORITY_CAST, "true", "false");
         load(prefs, dialog.cbPassPriorityActivation, KEY_PASS_PRIORITY_ACTIVATION, "true", "false");
         load(prefs, dialog.cbAutoOrderTrigger, KEY_AUTO_ORDER_TRIGGER, "true", "true");
@@ -3409,10 +3449,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.cbCheckForNewImages, KEY_CARD_IMAGES_CHECK, "true");
         load(prefs, dialog.cbSaveToZipFiles, KEY_CARD_IMAGES_SAVE_TO_ZIP, "true");
         dialog.cbNumberOfDownloadThreads.setSelectedItem(MageFrame.getPreferences().get(KEY_CARD_IMAGES_THREADS, "10"));
-        dialog.cbPreferedImageLanguage.setSelectedItem(MageFrame.getPreferences().get(KEY_CARD_IMAGES_PREF_LANGUAGE, "en"));
+        dialog.cbPreferedImageLanguage.setSelectedItem(MageFrame.getPreferences().get(KEY_CARD_IMAGES_PREF_LANGUAGE, CardLanguage.ENGLISH.getCode()));
 
         // rendering settings
-        load(prefs, dialog.cbCardRenderImageFallback, KEY_CARD_RENDERING_FALLBACK, "true");
+        load(prefs, dialog.cbCardRenderImageFallback, KEY_CARD_RENDERING_FALLBACK, "true", "false");
         load(prefs, dialog.cbCardRenderHideSetSymbol, KEY_CARD_RENDERING_SET_SYMBOL, "true");
         load(prefs, dialog.cbCardRenderShowReminderText, KEY_CARD_RENDERING_REMINDER_TEXT, "true");
 
@@ -3493,6 +3533,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.keySkipStack);
         load(prefs, dialog.keyPriorEnd);
         load(prefs, dialog.keyToggleRecordMacro);
+        load(prefs, dialog.keySwitchChat);
     }
 
     private static void loadSelectedAvatar(Preferences prefs) {
@@ -3536,9 +3577,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
         userSkipPrioritySteps.getOpponentTurn().setEndOfTurn(dialog.checkBoxEndTurnOthers.isSelected());
 
         userSkipPrioritySteps.setStopOnDeclareAttackersDuringSkipActions(dialog.cbStopAttack.isSelected());
-        userSkipPrioritySteps.setStopOnDeclareBlockerIfNoneAvailable(dialog.cbStopBlock.isSelected());
+        userSkipPrioritySteps.setStopOnDeclareBlockersWithAnyPermanents(dialog.cbStopBlockWithAny.isSelected());
+        userSkipPrioritySteps.setStopOnDeclareBlockersWithZeroPermanents(dialog.cbStopBlockWithZero.isSelected());
         userSkipPrioritySteps.setStopOnAllEndPhases(dialog.cbStopOnAllEnd.isSelected());
         userSkipPrioritySteps.setStopOnAllMainPhases(dialog.cbStopOnAllMain.isSelected());
+        userSkipPrioritySteps.setStopOnStackNewObjects(dialog.cbStopOnNewStackObjects.isSelected());
 
         return userSkipPrioritySteps;
     }
@@ -3621,8 +3664,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     private static void load(Preferences prefs, KeyBindButton button) {
         String key = button.getKey();
-        int prop = prefs.getInt(key, getDefaultControlKey(key));
-        button.setKeyCode(prop);
+
+        int code = prefs.getInt(key, getDefaultControlKey(key));
+        int mod = prefs.getInt(key + KEY_CONTROL_MODIFIER_POSTFIX, getDefaultControlMofier(key));
+        button.setKeyCode(code);
+        button.setModifierCode(mod);
     }
 
     private static void save(Preferences prefs, JCheckBox checkBox, String propName) {
@@ -3664,9 +3710,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     private static void save(Preferences prefs, KeyBindButton button) {
         int code = button.getKeyCode();
+        int mod = button.getModifierCode();
+
         String key = button.getKey();
+
         prefs.putInt(key, code);
         updateCache(key, Integer.toString(code));
+
+        prefs.putInt(key + KEY_CONTROL_MODIFIER_POSTFIX, mod);
+        updateCache(key + KEY_CONTROL_MODIFIER_POSTFIX, Integer.toString(mod));
     }
 
     public void reset() {
@@ -3699,6 +3751,13 @@ public class PreferencesDialog extends javax.swing.JDialog {
         }
     }
 
+    private static int getDefaultControlMofier(String key) {
+        switch (key) {
+            default:
+                return 0;
+        }
+    }
+
     private static int getDefaultControlKey(String key) {
         switch (key) {
             case KEY_CONTROL_CONFIRM:
@@ -3713,27 +3772,44 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 return KeyEvent.VK_F6;
             case KEY_CONTROL_MAIN_STEP:
                 return KeyEvent.VK_F7;
+            case KEY_CONTROL_TOGGLE_MACRO:
+                return KeyEvent.VK_F8;
             case KEY_CONTROL_YOUR_TURN:
                 return KeyEvent.VK_F9;
             case KEY_CONTROL_SKIP_STACK:
                 return KeyEvent.VK_F10;
             case KEY_CONTROL_PRIOR_END:
                 return KeyEvent.VK_F11;
-            case KEY_CONTROL_TOGGLE_MACRO:
-                return KeyEvent.VK_F8;
+            case KEY_CONTROL_SWITCH_CHAT:
+                return KeyEvent.VK_F12;
             default:
                 return 0;
         }
     }
 
+    public static int getCurrentControlKey(String key) {
+        return getCachedValue(key, getDefaultControlKey(key));
+    }
+
+    public static int getCurrentControlModifier(String key) {
+        return getCachedValue(key + KEY_CONTROL_MODIFIER_POSTFIX, getDefaultControlMofier(key));
+    }
+
     public static KeyStroke getCachedKeystroke(String key) {
         int code = getCachedValue(key, getDefaultControlKey(key));
-        return KeyStroke.getKeyStroke(code, 0);
+        int mod = getCachedValue(key + KEY_CONTROL_MODIFIER_POSTFIX, getDefaultControlMofier(key));
+
+        return KeyStroke.getKeyStroke(code, mod);
     }
 
     public static String getCachedKeyText(String key) {
         int code = getCachedValue(key, getDefaultControlKey(key));
-        return KeyEvent.getKeyText(code);
+        String codeStr = KeyEvent.getKeyText(code);
+
+        int mod = getCachedValue(key + KEY_CONTROL_MODIFIER_POSTFIX, getDefaultControlMofier(key));
+        String modStr = KeyEvent.getKeyModifiersText(mod);
+
+        return (modStr.isEmpty() ? "" : modStr + " + ") + codeStr;
     }
 
     private static void updateCache(String key, String value) {
@@ -3794,7 +3870,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     private void addAvatar(JPanel jPanel, final int id, boolean selected, boolean locked) {
-        String path = "/avatars/" + String.valueOf(id) + ".jpg";
+        String path = "/avatars/" + id + ".jpg";
         PANELS.put(id, jPanel);
         Image image = ImageHelper.getImageFromResources(path);
 
@@ -3868,7 +3944,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 keySkipStack,
                 keySkipStep,
                 keyYourTurn,
-                keyToggleRecordMacro
+                keyToggleRecordMacro,
+                keySwitchChat
         );
     }
 
@@ -3905,9 +3982,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox cbSaveToZipFiles;
     private javax.swing.JCheckBox cbShowStormCounter;
     private javax.swing.JCheckBox cbStopAttack;
-    private javax.swing.JCheckBox cbStopBlock;
+    private javax.swing.JCheckBox cbStopBlockWithAny;
+    private javax.swing.JCheckBox cbStopBlockWithZero;
     private javax.swing.JCheckBox cbStopOnAllEnd;
     private javax.swing.JCheckBox cbStopOnAllMain;
+    private javax.swing.JCheckBox cbStopOnNewStackObjects;
     private javax.swing.JCheckBox cbUseDefaultBackground;
     private javax.swing.JCheckBox cbUseDefaultBattleImage;
     private javax.swing.JCheckBox cbUseDefaultImageFolder;
@@ -3982,6 +4061,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private mage.client.components.KeyBindButton keyPriorEnd;
     private mage.client.components.KeyBindButton keySkipStack;
     private mage.client.components.KeyBindButton keySkipStep;
+    private mage.client.components.KeyBindButton keySwitchChat;
     private mage.client.components.KeyBindButton keyToggleRecordMacro;
     private mage.client.components.KeyBindButton keyYourTurn;
     private javax.swing.JLabel labelCancel;
@@ -4003,6 +4083,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel labelPriorEnd;
     private javax.swing.JLabel labelSkipStep;
     private javax.swing.JLabel labelStackWidth;
+    private javax.swing.JLabel labelSwitchChat;
     private javax.swing.JLabel labelToggleRecordMacro;
     private javax.swing.JLabel labelTooltipSize;
     private javax.swing.JLabel labelYourTurn;

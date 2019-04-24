@@ -1,8 +1,8 @@
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -13,12 +13,12 @@ import mage.players.Player;
 
 /**
  * @author BetaSteward_at_googlemail.com
- *
  */
 public class CopyTargetSpellEffect extends OneShotEffect {
 
     private final boolean useController;
     private final boolean useLKI;
+    private String copyThatSpellName = "that spell";
 
     public CopyTargetSpellEffect() {
         this(false);
@@ -38,6 +38,12 @@ public class CopyTargetSpellEffect extends OneShotEffect {
         super(effect);
         this.useLKI = effect.useLKI;
         this.useController = effect.useController;
+        this.copyThatSpellName = effect.copyThatSpellName;
+    }
+
+    public Effect withSpellName(String copyThatSpellName) {
+        this.copyThatSpellName = copyThatSpellName;
+        return this;
     }
 
     @Override
@@ -79,7 +85,14 @@ public class CopyTargetSpellEffect extends OneShotEffect {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
-        sb.append("copy target ").append(mode.getTargets().get(0).getTargetName()).append(". You may choose new targets for the copy");
+        sb.append("copy ");
+        if (!mode.getTargets().isEmpty()) {
+            sb.append("target ").append(mode.getTargets().get(0).getTargetName());
+        } else {
+            sb.append(copyThatSpellName);
+        }
+        sb.append(". You may choose new targets for the copy");
+
         return sb.toString();
     }
 }

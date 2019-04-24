@@ -35,7 +35,7 @@ public final class CreatureBond extends CardImpl {
         this.addAbility(ability);
 
         // When enchanted creature dies, Creature Bond deals damage equal to that creature's toughness to the creature's controller.
-	this.addAbility( new DiesAttachedTriggeredAbility(new DamageAttachedControllerEffect(new AttachedPermanentToughnessValue()), "enchanted creature"));
+	this.addAbility( new DiesAttachedTriggeredAbility(new DamageAttachedControllerEffect(AttachedPermanentToughnessValue.instance), "enchanted creature"));
     }
 
     public CreatureBond(final CreatureBond card) {

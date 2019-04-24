@@ -162,7 +162,7 @@ class GraveBetrayalReplacementEffect extends ReplacementEffectImpl {
             ContinuousEffect effect = new BecomesBlackZombieAdditionEffect();
             effect.setTargetPointer(new FixedTarget(creature.getId(), creature.getZoneChangeCounter(game) + 1));
             game.addEffect(effect, source);
-            discard();
+            //discard(); why?
         }
         return false;
     }

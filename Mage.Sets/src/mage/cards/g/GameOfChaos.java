@@ -63,7 +63,7 @@ class GameOfChaosEffect extends OneShotEffect {
         if (you != null && targetOpponent != null) {
 
             boolean continueFlipping = true;
-            boolean youWonFlip = you.flipCoin(game); // controller flips first
+            boolean youWonFlip = you.flipCoin(source, game, true); // controller flips first
             boolean youWonLastFlip = false; // tracks if you won the flip last, negation of it means opponent won last
             int lifeAmount = 1; // starts stakes with 1 life
 
@@ -88,7 +88,7 @@ class GameOfChaosEffect extends OneShotEffect {
 
                 if (continueFlipping) {
                     lifeAmount *= 2; // double the life each time
-                    youWonFlip = youWonLastFlip ? you.flipCoin(game) : !targetOpponent.flipCoin(game); // negate the opponent's results for proper evaluation of if you won in next iteration
+                    youWonFlip = youWonLastFlip ? you.flipCoin(source, game, true) : !targetOpponent.flipCoin(source, game, true); // negate the opponent's results for proper evaluation of if you won in next iteration
                 }
             }
 

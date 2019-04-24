@@ -95,12 +95,12 @@ class LinSivviDefiantHeroEffect extends OneShotEffect {
 
         int xCost = source.getManaCostsToPay().getX();
 
-        FilterPermanentCard filter = new FilterPermanentCard(new StringBuilder("Rebel permanent card with converted mana cost ").append(xCost).append(" or less").toString());
+        FilterPermanentCard filter = new FilterPermanentCard("Rebel permanent card with converted mana cost " + xCost + " or less");
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xCost + 1));
         filter.add(new SubtypePredicate(SubType.REBEL));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
 
-        if (controller.searchLibrary(target, game)) {
+        if (controller.searchLibrary(target, source, game)) {
             Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
             if (card != null) {
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game);

@@ -30,7 +30,7 @@ public final class FaerieMiscreant extends CardImpl {
 
     static {
         filter.add(new NamePredicate("Faerie Miscreant"));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

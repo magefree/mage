@@ -1,8 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.Objects;
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -11,21 +8,23 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
  * @author Derpthemeus
  */
 public final class ScarredPuma extends CardImpl {
 
     public ScarredPuma(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
         this.subtype.add(SubType.CAT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
@@ -62,7 +61,7 @@ public final class ScarredPuma extends CardImpl {
         }
 
         @Override
-        public boolean canAttackCheckAfter(int numberOfAttackers, Ability source, Game game) {
+        public boolean canAttackCheckAfter(int numberOfAttackers, Ability source, Game game, boolean canUseChooseDialogs) {
             return false;
         }
 

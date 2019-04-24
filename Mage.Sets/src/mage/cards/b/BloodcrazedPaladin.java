@@ -34,7 +34,7 @@ public final class BloodcrazedPaladin extends CardImpl {
 
         // Bloodcrazed Paladin enters the battlefield with a +1/+1 counter on it for each creature that died this turn.
         Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(0),
-                new CreaturesDiedThisTurnCount(), true);
+                CreaturesDiedThisTurnCount.instance, true);
         effect.setText("with a +1/+1 counter on it for each creature that died this turn.");
         this.addAbility(new EntersBattlefieldAbility(effect), new CreaturesDiedWatcher());
     }

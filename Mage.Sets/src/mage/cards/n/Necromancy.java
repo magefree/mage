@@ -138,7 +138,7 @@ class NecromancyLeavesBattlefieldTriggeredEffect extends OneShotEffect {
 
 class NecromancyChangeAbilityEffect extends ContinuousEffectImpl implements SourceEffect {
 
-    private final static Ability newAbility = new EnchantAbility("creature put onto the battlefield with Necromancy");
+    private static final Ability newAbility = new EnchantAbility("creature put onto the battlefield with Necromancy");
 
     static {
         newAbility.setRuleAtTheTop(true);

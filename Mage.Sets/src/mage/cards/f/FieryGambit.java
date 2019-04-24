@@ -64,10 +64,10 @@ class FieryGambitEffect extends OneShotEffect {
         if (controller != null && sourceObject != null) {
             int flipsWon = 0;
             boolean controllerStopped = false;
-            while (controller.flipCoin(game)) {
+            while (controller.flipCoin(source, game, true)) {
                 ++flipsWon;
-                if (!controller.chooseUse(outcome, new StringBuilder("You won ").append(flipsWon).append(flipsWon == 1 ? " flip." : " flips.")
-                        .append(" Flip another coin?").toString(), source, game)) {
+                if (!controller.chooseUse(outcome, "You won " + flipsWon + (flipsWon == 1 ? " flip." : " flips.") +
+                        " Flip another coin?", source, game)) {
                     controllerStopped = true;
                     break;
                 }

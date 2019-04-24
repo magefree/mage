@@ -37,7 +37,7 @@ public final class DestructiveTampering extends CardImpl {
 
         // * Creatures without flying can't block this turn.
         Mode mode = new Mode();
-        mode.getEffects().add(new CantBlockAllEffect(filter, Duration.EndOfTurn));
+        mode.addEffect(new CantBlockAllEffect(filter, Duration.EndOfTurn));
         this.getSpellAbility().addMode(mode);
     }
 

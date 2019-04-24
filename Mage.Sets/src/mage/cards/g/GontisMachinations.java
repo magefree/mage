@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.HashMap;
@@ -19,6 +18,7 @@ import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.players.Player;
 import mage.watchers.Watcher;
 
 /**
@@ -30,10 +30,14 @@ public final class GontisMachinations extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}");
 
         // Whenever you lose life for the first time each turn, you get {E}.
-        this.addAbility(new GontisMachinationsTriggeredAbility(), new GontisMachinationsFirstLostLifeThisTurnWatcher());
+        this.addAbility(new GontisMachinationsTriggeredAbility(),
+                new GontisMachinationsFirstLostLifeThisTurnWatcher());
 
         // Pay {E}{E}, Sacrifice Gonti's Machinations: Each opponent loses 3 life. You gain life equal to the life lost this way.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GontisMachinationsEffect(), new PayEnergyCost(2));
+        Ability ability = new SimpleActivatedAbility(
+                Zone.BATTLEFIELD,
+                new GontisMachinationsEffect(),
+                new PayEnergyCost(2));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
 
@@ -68,8 +72,9 @@ class GontisMachinationsTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(getControllerId())) {
             GontisMachinationsFirstLostLifeThisTurnWatcher watcher
-                    = (GontisMachinationsFirstLostLifeThisTurnWatcher) game.getState().getWatchers().get(GontisMachinationsFirstLostLifeThisTurnWatcher.class.getSimpleName());
-            if (watcher != null && watcher.timesLostLifeThisTurn(event.getTargetId()) < 2) {
+                    = game.getState().getWatcher(GontisMachinationsFirstLostLifeThisTurnWatcher.class);
+            if (watcher != null
+                    && watcher.timesLostLifeThisTurn(event.getTargetId()) < 2) {
                 return true;
             }
         }
@@ -92,7 +97,7 @@ class GontisMachinationsFirstLostLifeThisTurnWatcher extends Watcher {
     private final Map<UUID, Integer> playersLostLife = new HashMap<>();
 
     public GontisMachinationsFirstLostLifeThisTurnWatcher() {
-        super(GontisMachinationsFirstLostLifeThisTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public GontisMachinationsFirstLostLifeThisTurnWatcher(final GontisMachinationsFirstLostLifeThisTurnWatcher watcher) {
@@ -129,7 +134,7 @@ class GontisMachinationsFirstLostLifeThisTurnWatcher extends Watcher {
 class GontisMachinationsEffect extends OneShotEffect {
 
     public GontisMachinationsEffect() {
-        super(Outcome.Damage);
+        super(Outcome.GainLife);
         staticText = "Each opponent loses 3 life. You gain life equal to the life lost this way";
     }
 
@@ -139,12 +144,19 @@ class GontisMachinationsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int damage = 0;
-        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-            damage += game.getPlayer(opponentId).loseLife(3, game, false);
+        int totalLostLife = 0;
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+                Player opponent = game.getPlayer(opponentId);
+                if (opponent != null) {
+                    totalLostLife += game.getPlayer(opponentId).loseLife(3, game, false);
+                }
+            }
+            game.getPlayer(source.getControllerId()).gainLife(totalLostLife, game, source);
+            return true;
         }
-        game.getPlayer(source.getControllerId()).gainLife(damage, game, source);
-        return true;
+        return false;
     }
 
     @Override

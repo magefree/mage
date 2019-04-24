@@ -17,7 +17,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class LiberatingCombustion extends CardImpl {
 
-    private final static FilterCard filter = new FilterCard("Chandra, Pyrogenius");
+    private static final FilterCard filter = new FilterCard("Chandra, Pyrogenius");
 
     static {
         filter.add(new NamePredicate("Chandra, Pyrogenius"));

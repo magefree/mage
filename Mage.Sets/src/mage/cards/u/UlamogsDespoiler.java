@@ -54,7 +54,7 @@ public final class UlamogsDespoiler extends CardImpl {
 
 class UlamogsDespoilerEffect extends OneShotEffect {
 
-    private final static FilterCard filter = new FilterCard("cards your opponents own from exile");
+    private static final FilterCard filter = new FilterCard("cards your opponents own from exile");
 
     static {
         filter.add(new OwnerPredicate(TargetController.OPPONENT));

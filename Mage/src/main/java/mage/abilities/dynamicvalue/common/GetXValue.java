@@ -8,14 +8,15 @@ import mage.abilities.effects.Effect;
 import mage.game.Game;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
-public class GetXValue implements DynamicValue {
+public enum GetXValue implements DynamicValue {
+    instance;
+
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int amount = 0;
-        for (VariableCost cost: sourceAbility.getCosts().getVariableCosts()) {
+        for (VariableCost cost : sourceAbility.getCosts().getVariableCosts()) {
             amount += cost.getAmount();
         }
         return amount;
@@ -23,7 +24,7 @@ public class GetXValue implements DynamicValue {
 
     @Override
     public GetXValue copy() {
-        return new GetXValue();
+        return GetXValue.instance;
     }
 
     @Override

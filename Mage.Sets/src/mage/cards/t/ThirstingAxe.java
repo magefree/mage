@@ -72,8 +72,8 @@ class EquippedDealtCombatDamageToCreatureCondition implements Condition {
         Permanent equipment = game.getPermanent(source.getSourceId());
         if (equipment != null && equipment.getAttachedTo() != null) {
             CombatDamageToCreatureWatcher watcher =
-                    (CombatDamageToCreatureWatcher) game.getState().getWatchers().get(CombatDamageToCreatureWatcher.BASIC_KEY);
-            return watcher.dealtDamage(equipment.getAttachedTo(), equipment.getAttachedToZoneChangeCounter(), game);
+                    game.getState().getWatcher(CombatDamageToCreatureWatcher.class);
+            return watcher != null && watcher.dealtDamage(equipment.getAttachedTo(), equipment.getAttachedToZoneChangeCounter(), game);
         }
         return false;
     }
@@ -83,12 +83,11 @@ class EquippedDealtCombatDamageToCreatureCondition implements Condition {
 class CombatDamageToCreatureWatcher extends Watcher {
 
     // which objects dealt combat damage to creature during the turn
-    public final Set<MageObjectReference> dealtCombatDamageToCreature;
+    private final Set<MageObjectReference> dealtCombatDamageToCreature;
 
-    final static String BASIC_KEY = "CombatDamageToCreatureWatcher";
 
     public CombatDamageToCreatureWatcher() {
-        super(BASIC_KEY, WatcherScope.GAME);
+        super(WatcherScope.GAME);
         dealtCombatDamageToCreature = new HashSet<>();
     }
 

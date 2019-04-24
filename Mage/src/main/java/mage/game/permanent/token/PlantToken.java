@@ -11,7 +11,7 @@ import mage.constants.SubType;
 
 public final class PlantToken extends TokenImpl {
 
-    final static private List<String> tokenImageSets = new ArrayList<>();
+    static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
         tokenImageSets.addAll(Arrays.asList("WWK", "DDP", "OGW"));

@@ -81,7 +81,7 @@ class FromTheAshesEffect extends OneShotEffect {
                 Player player = game.getPlayer(entry.getKey());
                 if (player != null && player.chooseUse(outcome, "Search your library for up to " + entry.getValue() + " basic land card(s) to put it onto the battlefield?", source, game)) {
                     TargetCardInLibrary target = new TargetCardInLibrary(0, entry.getValue(), StaticFilters.FILTER_CARD_BASIC_LAND);
-                    if (player.searchLibrary(target, game)) {
+                    if (player.searchLibrary(target, source, game)) {
                         if (!target.getTargets().isEmpty()) {
                             player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
                         }

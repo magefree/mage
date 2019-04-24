@@ -24,7 +24,7 @@ public final class LoamDryad extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public LoamDryad(UUID ownerId, CardSetInfo setInfo) {

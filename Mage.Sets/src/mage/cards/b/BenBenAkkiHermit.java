@@ -30,7 +30,7 @@ public final class BenBenAkkiHermit extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("untapped Mountain you control");
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
         filter.add(new SubtypePredicate(SubType.MOUNTAIN));
     }
 

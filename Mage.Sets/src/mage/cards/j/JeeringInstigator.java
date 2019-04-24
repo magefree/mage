@@ -31,7 +31,7 @@ public final class JeeringInstigator extends CardImpl {
     
     static final private FilterCreaturePermanent filter = new FilterCreaturePermanent();
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public JeeringInstigator(UUID ownerId, CardSetInfo setInfo) {

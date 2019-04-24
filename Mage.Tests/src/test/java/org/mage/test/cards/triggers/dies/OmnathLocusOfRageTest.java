@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.triggers.dies;
 
 import mage.constants.PhaseStep;
@@ -7,7 +6,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class OmnathLocusOfRageTest extends CardTestPlayerBase {
@@ -27,10 +25,10 @@ public class OmnathLocusOfRageTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Diabolic Edict", playerA);
-        addTarget(playerA, playerB);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Diabolic Edict", 1);
         assertGraveyardCount(playerA, "Omnath, Locus of Rage", 1);
@@ -53,12 +51,11 @@ public class OmnathLocusOfRageTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 7);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Lightning Elemental"); // Dying Lightning Elemental does no longer trigger ability of Omnath
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Blastfire Bolt", "Omnath, Locus of Rage", "Lightning Bolt");
-        addTarget(playerA, playerB);
-        addTarget(playerA, playerB);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Blastfire Bolt", "Omnath, Locus of Rage");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
         assertGraveyardCount(playerB, "Blastfire Bolt", 1);

@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.Objects;
@@ -44,11 +43,20 @@ public final class CrownOfDoom extends CardImpl {
         // Whenever a creature attacks you or a planeswalker you control, it gets +2/+0 until end of turn.
         Effect effect = new BoostTargetEffect(2, 0, Duration.EndOfTurn);
         effect.setText("it gets +2/+0 until end of turn");
-        this.addAbility(new AttacksAllTriggeredAbility(effect, false, StaticFilters.FILTER_PERMANENT_CREATURE, SetTargetPointer.PERMANENT, true));
+        this.addAbility(new AttacksAllTriggeredAbility(
+                effect,
+                false,
+                StaticFilters.FILTER_PERMANENT_CREATURE,
+                SetTargetPointer.PERMANENT,
+                true));
 
         //TODO: Make ability properly copiable
         // {2}: Target player other than Crown of Doom's owner gains control of it. Activate this ability only during your turn.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new CrownOfDoomEffect(), new ManaCostsImpl("{2}"), MyTurnCondition.instance);
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                Zone.BATTLEFIELD,
+                new CrownOfDoomEffect(),
+                new ManaCostsImpl("{2}"),
+                MyTurnCondition.instance);
         ability.addTarget(new TargetPlayer(1, 1, false, filter));
         this.addAbility(ability);
     }
@@ -104,8 +112,9 @@ class CrownOfDoomEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player newController = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (controller != null && newController != null && !Objects.equals(controller.getId(), newController.getId())) {
-            // Duration.Custom = effect ends if Artifact leaves the current zone (battlefield)
+        if (controller != null
+                && newController != null
+                && !Objects.equals(controller.getId(), newController.getId())) {
             ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, newController.getId());
             effect.setTargetPointer(new FixedTarget(source.getSourceId()));
             game.addEffect(effect, source);

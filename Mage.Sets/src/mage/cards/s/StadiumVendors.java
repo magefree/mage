@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -65,21 +64,22 @@ class StadiumVendorsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getSourceId());
+        Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
             return false;
         }
         TargetPlayer target = new TargetPlayer(1, 1, true);
-        if (!controller.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
-            return false;
+        if (controller.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
+            Player player = game.getPlayer(target.getFirstTarget());
+            ChoiceColor colorChoice = new ChoiceColor(true);
+            if (player == null
+                    || !player.choose(Outcome.Benefit, colorChoice, game)) {
+                return false;
+            }
+            Effect effect = new AddManaToManaPoolTargetControllerEffect(colorChoice.getMana(2), "that player's");
+            effect.setTargetPointer(new FixedTarget(player.getId(), game));
+            return effect.apply(game, source);
         }
-        Player player = game.getPlayer(target.getFirstTarget());
-        ChoiceColor colorChoice = new ChoiceColor(true);
-        if (player == null || !player.choose(Outcome.Benefit, colorChoice, game)) {
-            return false;
-        }
-        Effect effect = new AddManaToManaPoolTargetControllerEffect(colorChoice.getMana(2), "that player's");
-        effect.setTargetPointer(new FixedTarget(player.getId(), game));
-        return effect.apply(game, source);
+        return false;
     }
 }

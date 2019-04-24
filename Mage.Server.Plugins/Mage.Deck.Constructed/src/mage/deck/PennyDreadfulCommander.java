@@ -1,8 +1,5 @@
-
 package mage.deck;
 
-import java.util.*;
-import java.util.Map.Entry;
 import mage.abilities.Ability;
 import mage.abilities.common.CanBeYourCommanderAbility;
 import mage.abilities.keyword.PartnerAbility;
@@ -12,11 +9,12 @@ import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
-import mage.constants.SetType;
 import mage.filter.FilterMana;
 
+import java.util.*;
+import java.util.Map.Entry;
+
 /**
- *
  * @author spjspj
  */
 public class PennyDreadfulCommander extends Constructed {
@@ -28,7 +26,7 @@ public class PennyDreadfulCommander extends Constructed {
     public PennyDreadfulCommander() {
         this("Penny Dreadful Commander");
         for (ExpansionSet set : Sets.getInstance().values()) {
-            if (set.getSetType() != SetType.CUSTOM_SET) {
+            if (set.getSetType().isEternalLegal()) {
                 setCodes.add(set.getCode());
             }
         }
@@ -39,12 +37,22 @@ public class PennyDreadfulCommander extends Constructed {
     }
 
     @Override
+    public int getDeckMinSize() {
+        return 98;
+    }
+
+    @Override
+    public int getSideboardMinSize() {
+        return 1;
+    }
+
+    @Override
     public boolean validate(Deck deck) {
         boolean valid = true;
         FilterMana colorIdentity = new FilterMana();
 
         if (deck.getCards().size() + deck.getSideboard().size() != 100) {
-            invalid.put("Deck", "Must contain 100 cards: has " + (deck.getCards().size() + deck.getSideboard().size()) + " cards");
+            invalid.put("Deck", "Must contain " + 100 + " cards: has " + (deck.getCards().size() + deck.getSideboard().size()) + " cards");
             valid = false;
         }
 

@@ -24,8 +24,8 @@ public final class ConsultTheNecrosages extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(2));
         Mode mode = new Mode();
-        mode.getTargets().add(new TargetPlayer());
-        mode.getEffects().add(new DiscardTargetEffect(2));
+        mode.addTarget(new TargetPlayer());
+        mode.addEffect(new DiscardTargetEffect(2));
         this.getSpellAbility().addMode(mode);
     }
 

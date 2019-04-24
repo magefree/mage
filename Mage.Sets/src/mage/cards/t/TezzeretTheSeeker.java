@@ -91,7 +91,7 @@ class TezzeretTheSeekerEffect2 extends OneShotEffect {
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, cmc + 1));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
 
-        if (controller.searchLibrary(target, game)) {
+        if (controller.searchLibrary(target, source, game)) {
             Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
             if (card != null) {
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game);

@@ -32,7 +32,7 @@ public final class ReasonBelieve extends SplitCard {
 
         // Believe
         // Aftermath
-        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility().setRuleAtTheTop(true));
+        getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
         // Look at the top card of your library. You may put it onto the battlefield if it's a creature card. If you don't, put it into your hand.
         getRightHalfCard().getSpellAbility().addEffect(new BelieveEffect());
 

@@ -1,17 +1,19 @@
 
 package mage.game;
 
-import java.util.UUID;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
 import mage.game.match.MatchType;
+import mage.game.mulligan.Mulligan;
 import mage.game.turn.TurnMod;
+
+import java.util.UUID;
 
 public class TwoPlayerDuel extends GameImpl {
 
-    public TwoPlayerDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans, int startLife) {
-        super(attackOption, range, freeMulligans, startLife);
+    public TwoPlayerDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
+        super(attackOption, range, mulligan, startLife);
     }
 
     public TwoPlayerDuel(final TwoPlayerDuel game) {

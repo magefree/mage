@@ -67,7 +67,7 @@ enum LilianasContractCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Set<String> demonNames = new HashSet();
+        Set<String> demonNames = new HashSet<>();
         for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
             if (permanent == null
                     || !permanent.isControlledBy(source.getControllerId())

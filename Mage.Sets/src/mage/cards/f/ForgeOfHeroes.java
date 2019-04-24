@@ -29,7 +29,7 @@ public final class ForgeOfHeroes extends CardImpl {
             = new FilterPermanent("commander that entered the battlefield this turn");
 
     static {
-        filter.add(new CommanderPredicate());
+        filter.add(CommanderPredicate.instance);
         filter.add(new EnteredThisTurnPredicate());
     }
 

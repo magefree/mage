@@ -103,7 +103,7 @@ class SpyNetworkFaceDownEffect extends OneShotEffect {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (controller != null && player != null && mageObject != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("face down creature controlled by " + player.getLogName());
-            filter.add(new FaceDownPredicate());
+            filter.add(FaceDownPredicate.instance);
             filter.add(new ControllerIdPredicate(player.getId()));
             TargetCreaturePermanent target = new TargetCreaturePermanent(1, 1, filter, true);
             if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
@@ -116,8 +116,7 @@ class SpyNetworkFaceDownEffect extends OneShotEffect {
                     if (faceDownCreature != null) {
                         Permanent copyFaceDown = faceDownCreature.copy();
                         copyFaceDown.setFaceDown(false, game);
-                        Cards cards = new CardsImpl();
-                        cards.add(copyFaceDown);
+                        Cards cards = new CardsImpl(copyFaceDown);
                         controller.lookAtCards("face down card - " + mageObject.getName(), cards, game);
                         game.informPlayers(controller.getLogName() + " looks at a face down creature controlled by " + player.getLogName());
                     }

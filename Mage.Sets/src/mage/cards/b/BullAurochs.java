@@ -27,7 +27,7 @@ public final class BullAurochs extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.AUROCHS));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public BullAurochs(UUID ownerId, CardSetInfo setInfo) {

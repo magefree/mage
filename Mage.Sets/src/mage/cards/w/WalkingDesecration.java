@@ -2,6 +2,7 @@
 package mage.cards.w;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -22,7 +23,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author fireshoes
  */
 public final class WalkingDesecration extends CardImpl {
@@ -64,14 +64,18 @@ class WalkingDesecrationEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        Choice typeChoice = new ChoiceCreatureType(sourceObject);
-        if (player != null && player.choose(outcome, typeChoice, game)) {
-            game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoice());
-            FilterCreaturePermanent filter = new FilterCreaturePermanent();
-            filter.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
-            RequirementEffect effect = new AttacksIfAbleAllEffect(filter, Duration.EndOfTurn);
-            game.addEffect(effect, source);
-            return true;
+        if (player != null) {
+            if (sourceObject != null) {
+                Choice typeChoice = new ChoiceCreatureType(sourceObject);
+                if (player.choose(outcome, typeChoice, game)) {
+                    game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoice());
+                    FilterCreaturePermanent filter = new FilterCreaturePermanent();
+                    filter.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
+                    RequirementEffect effect = new AttacksIfAbleAllEffect(filter, Duration.EndOfTurn);
+                    game.addEffect(effect, source);
+                    return true;
+                }
+            }
         }
         return false;
     }

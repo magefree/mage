@@ -19,7 +19,7 @@ public class CastSpellYourLastTurnWatcher extends Watcher {
     private UUID lastActivePlayer = null;
 
     public CastSpellYourLastTurnWatcher() {
-        super(CastSpellYourLastTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public CastSpellYourLastTurnWatcher(final CastSpellYourLastTurnWatcher watcher) {
@@ -60,9 +60,9 @@ public class CastSpellYourLastTurnWatcher extends Watcher {
     public Integer getAmountOfSpellsCastOnPlayersTurn(UUID playerId) {
         return amountOfSpellsCastOnPrevTurn.getOrDefault(playerId, 0);
     }
-
-    @Override
-    public CastSpellYourLastTurnWatcher copy() {
-        return new CastSpellYourLastTurnWatcher(this);
-    }
+//
+//    @Override
+//    public CastSpellYourLastTurnWatcher copy() {
+//        return new CastSpellYourLastTurnWatcher(this);
+//    }
 }

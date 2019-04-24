@@ -38,8 +38,8 @@ public final class ActiveVolcano extends CardImpl {
 
         // or return target Island to its owner's hand.
         Mode mode = new Mode();
-        mode.getEffects().add(new ReturnToHandTargetEffect());
-        mode.getTargets().add(new TargetPermanent(filterIsland));
+        mode.addEffect(new ReturnToHandTargetEffect());
+        mode.addTarget(new TargetPermanent(filterIsland));
         this.getSpellAbility().addMode(mode);
     }
 

@@ -35,7 +35,7 @@ public final class ParagonOfOpenGraves extends CardImpl {
 
     static {
         filterCreatures.add(new ColorPredicate(ObjectColor.BLACK));
-        filterCreature.add(new AnotherPredicate());
+        filterCreature.add(AnotherPredicate.instance);
         filterCreature.add(new ColorPredicate(ObjectColor.BLACK));
     }
 

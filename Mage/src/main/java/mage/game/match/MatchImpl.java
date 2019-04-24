@@ -1,11 +1,5 @@
-
 package mage.game.match;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
 import mage.cards.decks.Deck;
 import mage.game.Game;
 import mage.game.GameException;
@@ -21,8 +15,9 @@ import mage.util.DateFormat;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 
+import java.util.*;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class MatchImpl implements Match {
@@ -394,7 +389,9 @@ public abstract class MatchImpl implements Match {
             // Check if the cards included in the deck are the same as in the original deck
             validDeck = (player.getDeck().getDeckCompleteHashCode() == deck.getDeckCompleteHashCode());
             if (validDeck == false) {
-                deck.getCards().clear(); // Clear the deck so the player cheating looses the game
+                // clear the deck so the player cheating looses the game
+                deck.getCards().clear();
+                deck.getSideboard().clear();
             }
             player.updateDeck(deck);
         }
@@ -421,6 +418,8 @@ public abstract class MatchImpl implements Match {
         if (options.getRange() != null) {
             sb.append("   Range: ").append(options.getRange().toString()).append("<br/>");
         }
+        sb.append("   Mulligan type: ").append(options.getMulliganType().toString()).append("<br/>");
+        sb.append("   Free mulligans: ").append(options.getFreeMulligans()).append("<br/>");
         sb.append("<br/>").append("Match is ").append(this.getOptions().isRated() ? "" : "not ").append("rated<br/>");
         sb.append("You have to win ").append(this.getWinsNeeded()).append(this.getWinsNeeded() == 1 ? " game" : " games").append(" to win the complete match<br/>");
         sb.append("<br/>Game has started<br/><br/>");

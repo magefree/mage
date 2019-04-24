@@ -30,7 +30,7 @@ public final class PrincessLeia extends CardImpl {
 
     static {
         SubtypePredicate rebel = new SubtypePredicate(SubType.REBEL);
-        filter1.add(new AnotherPredicate());
+        filter1.add(AnotherPredicate.instance);
         filter1.add(rebel);
         filter2.add(rebel);
     }

@@ -77,7 +77,7 @@ class LegacyOfTheBelovedEffect extends OneShotEffect {
                         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, p.getConvertedManaCost()));
                         TargetCardInLibrary target = new TargetCardInLibrary(0, 2, filter);
                         Player player = game.getPlayer(source.getControllerId());
-                        if (player != null && player.searchLibrary(target, game)) {
+                        if (player != null && player.searchLibrary(target, source, game)) {
                             player.moveCards(new CardsImpl(target.getTargets()).getCards(game), Zone.BATTLEFIELD, source, game, false, false, false, null);
                             player.shuffleLibrary(source, game);
                             return true;

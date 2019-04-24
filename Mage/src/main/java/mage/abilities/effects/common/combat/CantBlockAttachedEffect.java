@@ -1,18 +1,17 @@
-
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.RestrictionEffect;
 import mage.constants.AttachmentType;
 import mage.constants.Duration;
-import static mage.constants.Duration.EndOfTurn;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
+import static mage.constants.Duration.EndOfTurn;
+
 /**
- *
  * @author North
  */
 public class CantBlockAttachedEffect extends RestrictionEffect {
@@ -69,7 +68,10 @@ public class CantBlockAttachedEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+        if (attacker == null) {
+            return true;
+        }
         return !filter.match(attacker, source.getSourceId(), source.getControllerId(), game);
     }
 

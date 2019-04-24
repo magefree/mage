@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -18,19 +16,23 @@ import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
  * @author nantuko
  */
 public final class BelltowerSphinx extends CardImpl {
 
     public BelltowerSphinx(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");
         this.subtype.add(SubType.SPHINX);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
 
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // Whenever a source deals damage to Belltower Sphinx, that source's controller puts that many cards from the top of their library into their graveyard.
         this.addAbility(new BelltowerSphinxEffect());
     }

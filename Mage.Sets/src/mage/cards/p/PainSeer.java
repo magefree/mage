@@ -1,31 +1,27 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.InspiredAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class PainSeer extends CardImpl {
 
     public PainSeer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
 
@@ -71,14 +67,14 @@ class PainSeerEffect extends OneShotEffect {
 
         if (player.getLibrary().hasCards()) {
             Card card = player.getLibrary().getFromTop(game);
-            Cards cards = new CardsImpl();
-            cards.add(card);
-            player.revealCards("Pain Seer", cards, game);
 
-            if (card != null &&
-                card.moveToZone(Zone.HAND, source.getSourceId(), game, false)) {
-                player.loseLife(card.getConvertedManaCost(), game, false);
-                return true;
+            if (card != null) {
+                Cards cards = new CardsImpl(card);
+                player.revealCards("Pain Seer", cards, game);
+                if(player.moveCards(card, Zone.HAND, source, game)) {
+                    player.loseLife(card.getConvertedManaCost(), game, false);
+                    return true;
+                }
             }
         }
         return false;

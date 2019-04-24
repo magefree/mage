@@ -32,8 +32,8 @@ public final class RimehornAurochs extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.AUROCHS, "other attacking Aurochs");
 
     static {
-        filter.add(new AttackingPredicate());
-        filter.add(new AnotherPredicate());
+        filter.add(AttackingPredicate.instance);
+        filter.add(AnotherPredicate.instance);
     }
 
     public RimehornAurochs(UUID ownerId, CardSetInfo setInfo) {
@@ -87,9 +87,9 @@ class RimehornAurochsEffect extends RequirementEffect {
             Permanent blocker = game.getPermanent(source.getTargets().get(0).getFirstTarget());
             if (blocker != null 
                     && blocker.canBlock(source.getTargets().get(1).getFirstTarget(), game)) {              
-                Permanent attacker = (Permanent) game.getPermanent(source.getTargets().get(1).getFirstTarget());
+                Permanent attacker = game.getPermanent(source.getTargets().get(1).getFirstTarget());
                 if (attacker != null) {
-                    BlockedAttackerWatcher blockedAttackerWatcher = (BlockedAttackerWatcher) game.getState().getWatchers().get(BlockedAttackerWatcher.class.getSimpleName());
+                    BlockedAttackerWatcher blockedAttackerWatcher = game.getState().getWatcher(BlockedAttackerWatcher.class);
                     if (blockedAttackerWatcher != null 
                             && blockedAttackerWatcher.creatureHasBlockedAttacker(attacker, blocker, game)) {
                         // has already blocked this turn, so no need to do again

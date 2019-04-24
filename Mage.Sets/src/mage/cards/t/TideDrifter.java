@@ -24,7 +24,7 @@ public final class TideDrifter extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("colorless creatures");
 
     static {
-        filter.add(new ColorlessPredicate());
+        filter.add(ColorlessPredicate.instance);
     }
 
     public TideDrifter(UUID ownerId, CardSetInfo setInfo) {

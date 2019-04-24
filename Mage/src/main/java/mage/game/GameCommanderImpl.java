@@ -1,8 +1,5 @@
-
 package mage.game;
 
-import java.util.Map;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.InfoEffect;
@@ -13,9 +10,13 @@ import mage.constants.MultiplayerAttackOption;
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
+import mage.game.mulligan.Mulligan;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.watchers.common.CommanderInfoWatcher;
+
+import java.util.Map;
+import java.util.UUID;
 
 public abstract class GameCommanderImpl extends GameImpl {
 
@@ -25,8 +26,8 @@ public abstract class GameCommanderImpl extends GameImpl {
     protected boolean alsoLibrary; // replace commander going to library
     protected boolean startingPlayerSkipsDraw = true;
 
-    public GameCommanderImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans, int startLife) {
-        super(attackOption, range, freeMulligans, startLife);
+    public GameCommanderImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
+        super(attackOption, range, mulligan, startLife);
     }
 
     public GameCommanderImpl(final GameCommanderImpl game) {
@@ -44,18 +45,20 @@ public abstract class GameCommanderImpl extends GameImpl {
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
             if (player != null) {
-                while (!player.getSideboard().isEmpty()) {
-                    Card commander = this.getCard(player.getSideboard().iterator().next());
-                    if (commander != null) {
-                        player.addCommanderId(commander.getId());
-                        commander.moveToZone(Zone.COMMAND, null, this, true);
-                        commander.getAbilities().setControllerId(player.getId());
-                        ability.addEffect(new CommanderReplacementEffect(commander.getId(), alsoHand, alsoLibrary));
-                        ability.addEffect(new CommanderCostModification(commander.getId()));
-                        getState().setValue(commander.getId() + "_castCount", 0);
-                        CommanderInfoWatcher watcher = new CommanderInfoWatcher(commander.getId(), checkCommanderDamage);
-                        getState().getWatchers().add(watcher);
-                        watcher.addCardInfoToCommander(this);
+                if (player.getSideboard().isEmpty()) { // needed for restart game of e.g. Karn Liberated
+                    for (UUID commanderId : player.getCommandersIds()) {
+                        Card commander = this.getCard(commanderId);
+                        if (commander != null) {
+                            initCommander(commander, ability, player);
+                        }
+                    }
+                } else {
+                    while (!player.getSideboard().isEmpty()) {
+                        Card commander = this.getCard(player.getSideboard().iterator().next());
+                        if (commander != null) {
+                            player.addCommanderId(commander.getId());
+                            initCommander(commander, ability, player);
+                        }
                     }
                 }
             }
@@ -65,6 +68,17 @@ public abstract class GameCommanderImpl extends GameImpl {
         if (startingPlayerSkipsDraw) {
             state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
         }
+    }
+
+    private void initCommander(Card commander, Ability ability, Player player) {
+        commander.moveToZone(Zone.COMMAND, null, this, true);
+        commander.getAbilities().setControllerId(player.getId());
+        ability.addEffect(new CommanderReplacementEffect(commander.getId(), alsoHand, alsoLibrary));
+        ability.addEffect(new CommanderCostModification(commander.getId()));
+        getState().setValue(commander.getId() + "_castCount", 0);
+        CommanderInfoWatcher watcher = new CommanderInfoWatcher(commander.getId(), checkCommanderDamage);
+        getState().addWatcher(watcher);
+        watcher.addCardInfoToCommander(this);
     }
 
     //20130711
@@ -155,7 +169,7 @@ public abstract class GameCommanderImpl extends GameImpl {
     protected boolean checkStateBasedActions() {
         for (Player player : getPlayers().values()) {
             for (UUID commanderId : player.getCommandersIds()) {
-                CommanderInfoWatcher damageWatcher = (CommanderInfoWatcher) getState().getWatchers().get(CommanderInfoWatcher.class.getSimpleName(), commanderId);
+                CommanderInfoWatcher damageWatcher = getState().getWatcher(CommanderInfoWatcher.class, commanderId);
                 if (damageWatcher == null) {
                     continue;
                 }

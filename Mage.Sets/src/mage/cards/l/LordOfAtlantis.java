@@ -1,7 +1,6 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -16,22 +15,18 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+
+import java.util.UUID;
 
 /**
- *
  * @author jonubuu
  */
 public final class LordOfAtlantis extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Merfolk creatures");
-
-    static {
-        filter.add(new SubtypePredicate(SubType.MERFOLK));
-    }
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.MERFOLK, "Merfolk");
 
     public LordOfAtlantis(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{U}");
         this.subtype.add(SubType.MERFOLK);
 
         this.power = new MageInt(2);
@@ -39,7 +34,7 @@ public final class LordOfAtlantis extends CardImpl {
 
         // Other Merfolk creatures get +1/+1 and have islandwalk.
         Effect effect = new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, true);
-        effect.setText("Other Merfolk creatures get +1/+1");
+        effect.setText("Other Merfolk get +1/+1");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         effect = new GainAbilityAllEffect(new IslandwalkAbility(), Duration.WhileOnBattlefield, filter, true);
         effect.setText("and have islandwalk");

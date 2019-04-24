@@ -1,13 +1,12 @@
-
 package org.mage.test.cards.continuous;
 
+import mage.abilities.keyword.VigilanceAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author JayDi85
  */
 public class MasterThiefTest extends CardTestPlayerBase {
@@ -42,7 +41,7 @@ public class MasterThiefTest extends CardTestPlayerBase {
 
         // cast and get control of shield
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Master Thief");
-        addTarget(playerB, "Accorder's Shield");
+        addTarget(playerA, "Accorder's Shield");
 
         // sacrifice Master Thief -- must lost control
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Sacrifice a creature");
@@ -72,11 +71,13 @@ public class MasterThiefTest extends CardTestPlayerBase {
 
         // cast and get control of shield
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Master Thief");
-        addTarget(playerB, "Accorder's Shield");
+        addTarget(playerA, "Accorder's Shield");
+        checkPermanentCount("must control shield", 1, PhaseStep.BEGIN_COMBAT, playerA, "Accorder's Shield", 1);
 
         // attach and boost
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Equip {3}");
         addTarget(playerA, "Bearer of the Heavens");
+        checkAbility("bear must have boost", 1, PhaseStep.END_TURN, playerA, "Bearer of the Heavens", VigilanceAbility.class, true);
 
         // sacrifice Master Thief -- must lost control, but attached and boosted
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Sacrifice a creature");

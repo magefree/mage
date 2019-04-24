@@ -36,7 +36,7 @@ public final class RedManaBattery extends CardImpl {
         // {tap}, Remove any number of charge counters from Red Mana Battery: Add {R}, then add an additional {R} for each charge counter removed this way.
         ability = new DynamicManaAbility(
                 Mana.RedMana(1),
-                new IntPlusDynamicValue(1, new RemovedCountersForCostValue()),
+                new IntPlusDynamicValue(1, RemovedCountersForCostValue.instance),
                 new TapSourceCost(),
                 "Add {R}, then add {R} for each charge counter removed this way",
                 true, new CountersSourceCount(CounterType.CHARGE));

@@ -59,7 +59,7 @@ class SelectiveMemoryEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(0, Integer.MAX_VALUE, new FilterNonlandCard());
-            if (player.searchLibrary(target, game)) {
+            if (player.searchLibrary(target, source, game)) {
                 for (UUID targetId : target.getTargets()) {
                     Card card = player.getLibrary().remove(targetId, game);
                     if (card != null) {

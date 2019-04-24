@@ -100,7 +100,7 @@ class MaralenOfTheMornsongEffect2 extends OneShotEffect {
         if (player != null) {
             player.loseLife(3, game, false);
             TargetCardInLibrary target = new TargetCardInLibrary();
-            if (player.searchLibrary(target, game)) {
+            if (player.searchLibrary(target, source, game)) {
                 player.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);
             }
             player.shuffleLibrary(source, game);

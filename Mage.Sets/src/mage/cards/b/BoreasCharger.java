@@ -114,7 +114,7 @@ class BoreasChargerEffect extends OneShotEffect {
         TargetCardInLibrary target2
                 = new TargetCardInLibrary(0, landDifference, filter2);
         Cards cardsToHand = new CardsImpl();
-        if (controller.searchLibrary(target2, game)) {
+        if (controller.searchLibrary(target2, source, game)) {
             for (UUID cardId : target2.getTargets()) {
                 Card card = game.getCard(cardId);
                 if (card != null) {

@@ -20,7 +20,7 @@ public final class SavageTwister extends CardImpl {
 
 
         // Savage Twister deals X damage to each creature.
-        this.getSpellAbility().addEffect(new DamageAllEffect(new ManacostVariableValue(), new FilterCreaturePermanent()));
+        this.getSpellAbility().addEffect(new DamageAllEffect(ManacostVariableValue.instance, new FilterCreaturePermanent()));
     }
 
     public SavageTwister(final SavageTwister card) {

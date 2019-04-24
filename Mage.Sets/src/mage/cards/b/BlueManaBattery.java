@@ -36,7 +36,7 @@ public final class BlueManaBattery extends CardImpl {
         // {tap}, Remove any number of charge counters from Blue Mana Battery: Add {U}, then add an additional {U} for each charge counter removed this way.
         ability = new DynamicManaAbility(
                 Mana.BlueMana(1),
-                new IntPlusDynamicValue(1, new RemovedCountersForCostValue()),
+                new IntPlusDynamicValue(1, RemovedCountersForCostValue.instance),
                 new TapSourceCost(),
                 "Add {U}, then add {U} for each charge counter removed this way",
                 true, new CountersSourceCount(CounterType.CHARGE));

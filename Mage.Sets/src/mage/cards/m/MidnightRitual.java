@@ -1,9 +1,7 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -17,9 +15,11 @@ import mage.game.Game;
 import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.targetadjustment.TargetAdjuster;
+
+import java.util.UUID;
 
 /**
- *
  * @author Skyler Sell
  */
 public final class MidnightRitual extends CardImpl {
@@ -31,14 +31,7 @@ public final class MidnightRitual extends CardImpl {
         // For each creature card exiled this way, create a 2/2 black Zombie creature token.
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.getSpellAbility().addEffect(new MidnightRitualEffect());
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SpellAbility) {
-            ability.getTargets().clear();
-            ability.addTarget(new TargetCardInYourGraveyard(ability.getManaCostsToPay().getX(), StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
-        }
+        this.getSpellAbility().setTargetAdjuster(MidnightRitualAdjuster.instance);
     }
 
     public MidnightRitual(final MidnightRitual card) {
@@ -48,6 +41,16 @@ public final class MidnightRitual extends CardImpl {
     @Override
     public MidnightRitual copy() {
         return new MidnightRitual(this);
+    }
+}
+
+enum MidnightRitualAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        ability.getTargets().clear();
+        ability.addTarget(new TargetCardInYourGraveyard(ability.getManaCostsToPay().getX(), StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
     }
 }
 

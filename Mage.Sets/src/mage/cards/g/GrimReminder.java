@@ -87,13 +87,13 @@ class GrimReminderEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_NON_LAND);
-            if (controller.searchLibrary(target, game)) {
+            if (controller.searchLibrary(target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     Cards cardsToReveal = new CardsImpl(card);
                     controller.revealCards(sourceObject.getIdName(), cardsToReveal, game);
                     String cardName = card.getName();
-                    GrimReminderWatcher watcher = (GrimReminderWatcher) game.getState().getWatchers().get(GrimReminderWatcher.class.getSimpleName());
+                    GrimReminderWatcher watcher = game.getState().getWatcher(GrimReminderWatcher.class);
                     if (watcher != null) {
                         for (UUID playerId : watcher.getPlayersCastSpell(cardName)) {
                             Player player = game.getPlayer(playerId);
@@ -116,7 +116,7 @@ class GrimReminderWatcher extends Watcher {
     private final Map<String, Set<UUID>> playersCastSpell = new HashMap<>();
 
     public GrimReminderWatcher() {
-        super(GrimReminderWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public GrimReminderWatcher(final GrimReminderWatcher watcher) {
@@ -132,7 +132,7 @@ class GrimReminderWatcher extends Watcher {
             MageObject spell = game.getObject(event.getTargetId());
             UUID playerId = event.getPlayerId();
             if (playerId != null && spell != null) {
-                playersCastSpell.putIfAbsent(spell.getName(), new HashSet());
+                playersCastSpell.putIfAbsent(spell.getName(), new HashSet<>());
                 playersCastSpell.get(spell.getName()).add(playerId);
             }
         }
@@ -144,7 +144,7 @@ class GrimReminderWatcher extends Watcher {
     }
 
     public Set<UUID> getPlayersCastSpell(String spellName) {
-        return playersCastSpell.getOrDefault(spellName, new HashSet());
+        return playersCastSpell.getOrDefault(spellName, new HashSet<>());
     }
 
     @Override

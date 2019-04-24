@@ -93,8 +93,7 @@ class LensOfClarityLookLibraryEffect extends OneShotEffect {
 
         Card card = controller.getLibrary().getFromTop(game);
         if (card != null) {
-            Cards cards = new CardsImpl();
-            cards.add(card);
+            Cards cards = new CardsImpl(card);
             controller.lookAtCards("top card of library - " + controller.getName(), cards, game);
             game.informPlayers(controller.getLogName() + " looks at the top card of their library");
         } else {
@@ -110,7 +109,7 @@ class LensOfClarityLookFaceDownAbility extends ActivatedAbilityImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("face down creature you don't control");
 
     static {
-        filter.add(new FaceDownPredicate());
+        filter.add(FaceDownPredicate.instance);
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 
@@ -158,8 +157,7 @@ class LensOfClarityLookFaceDownEffect extends OneShotEffect {
         if (faceDownCreature != null) {
             Permanent copyFaceDown = faceDownCreature.copy();
             copyFaceDown.setFaceDown(false, game);
-            Cards cards = new CardsImpl();
-            cards.add(copyFaceDown);
+            Cards cards = new CardsImpl(copyFaceDown);
             Player player = game.getPlayer(faceDownCreature.getControllerId());
             controller.lookAtCards("face down card - " + mageObject.getName(), cards, game);
             if (player != null) {

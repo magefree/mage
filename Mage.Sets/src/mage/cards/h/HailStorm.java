@@ -8,6 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -18,21 +19,16 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public final class HailStorm extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
-    static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
-    }
-    
     public HailStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}{G}");
 
         // Hail Storm deals 2 damage to each attacking creature and 1 damage to you and each creature you control.
         this.getSpellAbility().addEffect(new DamageAllEffect(2, new FilterAttackingCreature()));
         this.getSpellAbility().addEffect(new DamageControllerEffect(1).setText("and 1 damage to you "));
-        this.getSpellAbility().addEffect(new DamageAllEffect(1, filter).setText("and each creature you control."));
+        this.getSpellAbility().addEffect(new DamageAllEffect(1, StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED).setText("and each creature you control."));
     }
 
-    public HailStorm(final HailStorm card) {
+    private HailStorm(final HailStorm card) {
         super(card);
     }
 

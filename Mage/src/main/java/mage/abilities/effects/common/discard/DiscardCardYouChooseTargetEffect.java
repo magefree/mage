@@ -1,8 +1,5 @@
-
 package mage.abilities.effects.common.discard;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -20,8 +17,10 @@ import mage.target.TargetCard;
 import mage.target.common.TargetCardInHand;
 import mage.util.CardUtil;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author noxx
  */
 public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
@@ -98,7 +97,6 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
-        Card sourceCard = game.getCard(source.getSourceId());
         if (player != null && controller != null) {
             if (revealAllCards) {
                 this.numberCardsToReveal = new StaticValue(player.getHand().size());
@@ -125,6 +123,7 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
                     revealedCards.addAll(player.getHand());
                 }
 
+                Card sourceCard = game.getCard(source.getSourceId());
                 player.revealCards(sourceCard != null ? sourceCard.getIdName() + " (" + sourceCard.getZoneChangeCounter(game) + ')' : "Discard", revealedCards, game);
 
                 boolean result = true;

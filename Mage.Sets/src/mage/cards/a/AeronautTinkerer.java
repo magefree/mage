@@ -22,7 +22,7 @@ import mage.filter.common.FilterControlledArtifactPermanent;
  */
 public final class AeronautTinkerer extends CardImpl {
     
-    final static private String rule = "{this} has flying as long as you control an artifact";
+   private  static final String rule = "{this} has flying as long as you control an artifact";
 
     public AeronautTinkerer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
@@ -38,7 +38,7 @@ public final class AeronautTinkerer extends CardImpl {
 
     }
 
-    public AeronautTinkerer(final AeronautTinkerer card) {
+    private AeronautTinkerer(final AeronautTinkerer card) {
         super(card);
     }
 

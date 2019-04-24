@@ -74,7 +74,7 @@ class CurseOfVerbosityEffect extends OneShotEffect {
         if (enchantment != null) {
             Player enchantedPlayer = game.getPlayer(enchantment.getAttachedTo());
             if (enchantedPlayer != null) {
-                Set<UUID> players = new HashSet();
+                Set<UUID> players = new HashSet<>();
                 for (UUID attacker : game.getCombat().getAttackers()) {
                     UUID defender = game.getCombat().getDefenderId(attacker);
                     if (defender.equals(enchantedPlayer.getId())

@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -17,17 +16,18 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class AllSunsDawn extends CardImpl {
 
-    private final static FilterCard filterGreen = new FilterCard("green card from your graveyard");
-    private final static FilterCard filterRed = new FilterCard("red card from your graveyard");
-    private final static FilterCard filterBlue = new FilterCard("blue card from your graveyard");
-    private final static FilterCard filterBlack = new FilterCard("black card from your graveyard");
-    private final static FilterCard filterWhite = new FilterCard("white card from your graveyard");
+    private static final FilterCard filterGreen = new FilterCard("green card from your graveyard");
+    private static final FilterCard filterRed = new FilterCard("red card from your graveyard");
+    private static final FilterCard filterBlue = new FilterCard("blue card from your graveyard");
+    private static final FilterCard filterBlack = new FilterCard("black card from your graveyard");
+    private static final FilterCard filterWhite = new FilterCard("white card from your graveyard");
 
     static {
         filterGreen.add(new ColorPredicate(ObjectColor.GREEN));
@@ -38,7 +38,7 @@ public final class AllSunsDawn extends CardImpl {
     }
 
     public AllSunsDawn(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}");
 
         // For each color, return up to one target card of that color from your graveyard to your hand.
         this.getSpellAbility().addEffect(new AllSunsDawnEffect());
@@ -51,7 +51,7 @@ public final class AllSunsDawn extends CardImpl {
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
-    public AllSunsDawn(final AllSunsDawn card) {
+    private AllSunsDawn(final AllSunsDawn card) {
         super(card);
     }
 
@@ -68,7 +68,7 @@ class AllSunsDawnEffect extends OneShotEffect {
         this.staticText = "For each color, return up to one target card of that color from your graveyard to your hand";
     }
 
-    public AllSunsDawnEffect(final AllSunsDawnEffect effect) {
+    private AllSunsDawnEffect(final AllSunsDawnEffect effect) {
         super(effect);
     }
 
@@ -89,8 +89,7 @@ class AllSunsDawnEffect extends OneShotEffect {
                     cardsToHand.add(card);
                 }
             }
-            controller.moveCards(cardsToHand, Zone.HAND, source, game);
-            return true;
+            return controller.moveCards(cardsToHand, Zone.HAND, source, game);
         }
         return false;
     }

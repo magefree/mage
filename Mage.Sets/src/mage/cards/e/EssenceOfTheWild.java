@@ -1,7 +1,5 @@
-
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -9,25 +7,22 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.CopyEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward
  */
 public final class EssenceOfTheWild extends CardImpl {
 
     public EssenceOfTheWild(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{G}");
         this.subtype.add(SubType.AVATAR);
 
         this.power = new MageInt(6);
@@ -73,11 +68,7 @@ class EssenceOfTheWildEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent sourceObject = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (sourceObject != null) {
-            Permanent permanentReset = sourceObject.copy();
-            permanentReset.getCounters(game).clear();
-            permanentReset.getPower().resetToBaseValue();
-            permanentReset.getToughness().resetToBaseValue();
-            game.addEffect(new CopyEffect(Duration.Custom, permanentReset, event.getTargetId()), source);
+            game.addEffect(new CopyEffect(Duration.Custom, sourceObject, event.getTargetId()), source);
         }
         return false;
     }

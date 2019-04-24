@@ -32,7 +32,7 @@ public final class InfusedArrows extends CardImpl {
         // Sunburst
         this.addAbility(new SunburstAbility(this));
         // {tap}, Remove X charge counters from Infused Arrows: Target creature gets -X/-X until end of turn.
-        DynamicValue value = new SignInversionDynamicValue(new RemovedCountersForCostValue());
+        DynamicValue value = new SignInversionDynamicValue(RemovedCountersForCostValue.instance);
         Effect effect = new BoostTargetEffect(value, value, Duration.EndOfTurn);
         effect.setText("Target creature gets -X/-X until end of turn");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());

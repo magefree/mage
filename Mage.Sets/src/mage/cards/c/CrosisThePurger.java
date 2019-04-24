@@ -78,22 +78,24 @@ class CrosisThePurgerEffect extends OneShotEffect {
             ChoiceColor choice = new ChoiceColor();
             player.choose(outcome, choice, game);
             if (choice.isChosen()) {
-                game.informPlayers(new StringBuilder(player.getLogName()).append(" chooses ").append(choice.getColor()).toString());
+                game.informPlayers(player.getLogName() + " chooses " + choice.getColor());
                 Player damagedPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-                damagedPlayer.revealCards("hand of " + damagedPlayer.getName(), damagedPlayer.getHand(), game);
-                FilterCard filter = new FilterCard();
-                filter.add(new ColorPredicate(choice.getColor()));
-                List<Card> toDiscard = new ArrayList<>();
-                for (UUID cardId : damagedPlayer.getHand()) {
-                    Card card = game.getCard(cardId);
-                    if (filter.match(card, game)) {
-                        toDiscard.add(card);
+                if(damagedPlayer != null) {
+                    damagedPlayer.revealCards("hand of " + damagedPlayer.getName(), damagedPlayer.getHand(), game);
+                    FilterCard filter = new FilterCard();
+                    filter.add(new ColorPredicate(choice.getColor()));
+                    List<Card> toDiscard = new ArrayList<>();
+                    for (UUID cardId : damagedPlayer.getHand()) {
+                        Card card = game.getCard(cardId);
+                        if (filter.match(card, game)) {
+                            toDiscard.add(card);
+                        }
                     }
+                    for (Card card : toDiscard) {
+                        damagedPlayer.discard(card, source, game);
+                    }
+                    return true;
                 }
-                for (Card card : toDiscard) {
-                    damagedPlayer.discard(card, source, game);
-                }
-                return true;
             }
         }
         return false;

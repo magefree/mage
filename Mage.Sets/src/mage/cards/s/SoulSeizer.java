@@ -115,7 +115,7 @@ class SoulSeizerEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null && permanent.isTransformable()) {
             if (permanent.transform(game)) {
-                game.informPlayers(new StringBuilder(permanent.getName()).append(" transforms into ").append(permanent.getSecondCardFace().getName()).toString());
+                game.informPlayers(permanent.getName() + " transforms into " + permanent.getSecondCardFace().getName());
                 Permanent attachTo = game.getPermanent(targetPointer.getFirst(game, source));
                 if (attachTo != null) {
                     return attachTo.addAttachment(source.getSourceId(), game);

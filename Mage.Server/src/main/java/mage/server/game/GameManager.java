@@ -1,5 +1,11 @@
-
 package mage.server.game;
+
+import mage.cards.decks.DeckCardLists;
+import mage.constants.ManaType;
+import mage.constants.PlayerAction;
+import mage.game.Game;
+import mage.game.GameOptions;
+import mage.view.GameView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,15 +15,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-import mage.cards.decks.DeckCardLists;
-import mage.constants.ManaType;
-import mage.constants.PlayerAction;
-import mage.game.Game;
-import mage.game.GameOptions;
-import mage.view.GameView;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public enum GameManager {
@@ -38,15 +37,25 @@ public enum GameManager {
         return gameController.getSessionId();
     }
 
+    private GameController getGameControllerSafe(UUID gameId) {
+        final Lock r = gameControllersLock.readLock();
+        r.lock();
+        try {
+            return gameControllers.get(gameId);
+        } finally {
+            r.unlock();
+        }
+    }
+
     public void joinGame(UUID gameId, UUID userId) {
-        GameController gameController = gameControllers.get(gameId);
+        GameController gameController = getGameControllerSafe(gameId);
         if (gameController != null) {
             gameController.join(userId);
         }
     }
 
     public Optional<UUID> getChatId(UUID gameId) {
-        GameController gameController = gameControllers.get(gameId);
+        GameController gameController = getGameControllerSafe(gameId);
         if (gameController != null) {
             return Optional.of(gameController.getChatId());
         }
@@ -54,56 +63,56 @@ public enum GameManager {
     }
 
     public void sendPlayerUUID(UUID gameId, UUID userId, UUID data) {
-        GameController gameController = gameControllers.get(gameId);
+        GameController gameController = getGameControllerSafe(gameId);
         if (gameController != null) {
             gameController.sendPlayerUUID(userId, data);
         }
     }
 
     public void sendPlayerString(UUID gameId, UUID userId, String data) {
-        GameController gameController = gameControllers.get(gameId);
+        GameController gameController = getGameControllerSafe(gameId);
         if (gameController != null) {
             gameController.sendPlayerString(userId, data);
         }
     }
 
     public void sendPlayerManaType(UUID gameId, UUID playerId, UUID userId, ManaType data) {
-        GameController gameController = gameControllers.get(gameId);
+        GameController gameController = getGameControllerSafe(gameId);
         if (gameController != null) {
             gameController.sendPlayerManaType(userId, playerId, data);
         }
     }
 
     public void sendPlayerBoolean(UUID gameId, UUID userId, Boolean data) {
-        GameController gameController = gameControllers.get(gameId);
+        GameController gameController = getGameControllerSafe(gameId);
         if (gameController != null) {
             gameController.sendPlayerBoolean(userId, data);
         }
     }
 
     public void sendPlayerInteger(UUID gameId, UUID userId, Integer data) {
-        GameController gameController = gameControllers.get(gameId);
+        GameController gameController = getGameControllerSafe(gameId);
         if (gameController != null) {
             gameController.sendPlayerInteger(userId, data);
         }
     }
 
     public void quitMatch(UUID gameId, UUID userId) {
-        GameController gameController = gameControllers.get(gameId);
+        GameController gameController = getGameControllerSafe(gameId);
         if (gameController != null) {
             gameController.quitMatch(userId);
         }
     }
 
     public void sendPlayerAction(PlayerAction playerAction, UUID gameId, UUID userId, Object data) {
-        GameController gameController = gameControllers.get(gameId);
+        GameController gameController = getGameControllerSafe(gameId);
         if (gameController != null) {
             gameController.sendPlayerAction(playerAction, userId, data);
         }
     }
 
     public boolean watchGame(UUID gameId, UUID userId) {
-        GameController gameController = gameControllers.get(gameId);
+        GameController gameController = getGameControllerSafe(gameId);
         if (gameController != null) {
             return gameController.watch(userId);
         }
@@ -111,21 +120,21 @@ public enum GameManager {
     }
 
     public void stopWatching(UUID gameId, UUID userId) {
-        GameController gameController = gameControllers.get(gameId);
+        GameController gameController = getGameControllerSafe(gameId);
         if (gameController != null) {
             gameController.stopWatching(userId);
         }
     }
 
     public void cheat(UUID gameId, UUID userId, UUID playerId, DeckCardLists deckList) {
-        GameController gameController = gameControllers.get(gameId);
+        GameController gameController = getGameControllerSafe(gameId);
         if (gameController != null) {
             gameController.cheat(userId, playerId, deckList);
         }
     }
 
     public boolean cheat(UUID gameId, UUID userId, UUID playerId, String cardName) {
-        GameController gameController = gameControllers.get(gameId);
+        GameController gameController = getGameControllerSafe(gameId);
         if (gameController != null) {
             return gameController.cheat(userId, playerId, cardName);
         }
@@ -133,7 +142,7 @@ public enum GameManager {
     }
 
     public void removeGame(UUID gameId) {
-        GameController gameController = gameControllers.get(gameId);
+        GameController gameController = getGameControllerSafe(gameId);
         if (gameController != null) {
             gameController.cleanUp();
             final Lock w = gameControllersLock.writeLock();
@@ -147,15 +156,15 @@ public enum GameManager {
     }
 
     public boolean saveGame(UUID gameId) {
-        GameController gameController = gameControllers.get(gameId);
+        GameController gameController = getGameControllerSafe(gameId);
         if (gameController != null) {
             return gameController.saveGame();
         }
         return false;
     }
 
-    public GameView getGameView(UUID gameId, UUID userId, UUID playerId) {
-        GameController gameController = gameControllers.get(gameId);
+    public GameView getGameView(UUID gameId, UUID playerId) {
+        GameController gameController = getGameControllerSafe(gameId);
         if (gameController != null) {
             return gameController.getGameView(playerId);
         }
@@ -163,7 +172,7 @@ public enum GameManager {
     }
 
     public int getNumberActiveGames() {
-        return gameControllers.size();
+        return getGameController().size();
     }
 
     public Map<UUID, GameController> getGameController() {

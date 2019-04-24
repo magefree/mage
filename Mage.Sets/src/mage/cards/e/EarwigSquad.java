@@ -79,7 +79,7 @@ class EarwigSquadEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null && opponent != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(0, 3, new FilterCard("cards from opponents library to exile"));            
-            if (player.searchLibrary(target, game, opponent.getId())) {
+            if (player.searchLibrary(target, source, game, opponent.getId())) {
                 List<UUID> targets = target.getTargets();
                 for (UUID targetId : targets) {
                     Card card = opponent.getLibrary().remove(targetId, game);

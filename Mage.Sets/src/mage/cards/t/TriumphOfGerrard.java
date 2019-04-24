@@ -107,6 +107,9 @@ class TriumphOfGerrardTargetCreature extends TargetControlledCreaturePermanent {
         List<Permanent> activePermanents = game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game);
         Set<UUID> possibleTargets = new HashSet<>();
         MageObject targetSource = game.getObject(sourceId);
+        if(targetSource == null){
+            return possibleTargets;
+        }
         for (Permanent permanent : activePermanents) {
             if (permanent.getPower().getValue() > maxPower) {
                 maxPower = permanent.getPower().getValue();

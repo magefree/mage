@@ -34,7 +34,7 @@ public final class NuteGunray extends CardImpl {
     private static final FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("non-token artifact");
 
     static {
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public NuteGunray(UUID ownerId, CardSetInfo setInfo) {

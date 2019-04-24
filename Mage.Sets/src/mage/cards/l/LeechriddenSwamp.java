@@ -1,7 +1,7 @@
-
 package mage.cards.l;
 
 import java.util.UUID;
+
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -23,22 +23,21 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.players.Players;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class LeechriddenSwamp extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control two or more black permanents");
+    private static final FilterControlledPermanent filter = 
+            new FilterControlledPermanent("you control two or more black permanents");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
     public LeechriddenSwamp(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
         this.subtype.add(SubType.SWAMP);
 
         // ({tap}: Add {B}.)
@@ -48,10 +47,14 @@ public final class LeechriddenSwamp extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // {B}, {tap}: Each opponent loses 1 life. Activate this ability only if you control two or more black permanents.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                Zone.BATTLEFIELD,
                 new LeechriddenSwampLoseLifeEffect(),
                 new ManaCostsImpl("{B}"),
-                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1));
+                new PermanentsOnTheBattlefieldCondition(
+                        filter, 
+                        ComparisonType.MORE_THAN, 
+                        1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -68,30 +71,32 @@ public final class LeechriddenSwamp extends CardImpl {
 
 class LeechriddenSwampLoseLifeEffect extends OneShotEffect {
 
-    private static final String effectText = "each opponent loses 1 life";
-
-    LeechriddenSwampLoseLifeEffect ( ) {
-        super(Outcome.Damage);
-    staticText = effectText;
+    LeechriddenSwampLoseLifeEffect() {
+        super(Outcome.Benefit);
+        staticText = "each opponent loses 1 life";
     }
 
-    LeechriddenSwampLoseLifeEffect ( LeechriddenSwampLoseLifeEffect effect ) {
-    super(effect);
+    LeechriddenSwampLoseLifeEffect(LeechriddenSwampLoseLifeEffect effect) {
+        super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-    Players players = game.getPlayers();
-        for ( Player player : players.values() ) {
-            if ( !player.getId().equals(source.getControllerId()) ) {
-                player.loseLife(1, game, false);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            for (UUID opponentId : game.getOpponents(controller.getId())) {
+                Player opponent = game.getPlayer(opponentId);
+                if (opponent != null) {
+                    opponent.loseLife(1, game, false);
+                }
             }
-    }
-    return true;
+            return true;
+        }
+        return false;
     }
 
     @Override
     public LeechriddenSwampLoseLifeEffect copy() {
-    return new LeechriddenSwampLoseLifeEffect(this);
+        return new LeechriddenSwampLoseLifeEffect(this);
     }
 }

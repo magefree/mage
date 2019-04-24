@@ -31,7 +31,7 @@ public final class TropicalStorm extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{G}");
 
         // Tropical Storm deals X damage to each creature with flying and 1 additional damage to each blue creature.
-        this.getSpellAbility().addEffect(new DamageAllEffect(new ManacostVariableValue(), filter));
+        this.getSpellAbility().addEffect(new DamageAllEffect(ManacostVariableValue.instance, filter));
         this.getSpellAbility().addEffect(new DamageAllEffect(1, filter2).setText("and 1 additional damage to each blue creature"));
 
     }

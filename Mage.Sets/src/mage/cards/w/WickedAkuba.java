@@ -60,7 +60,7 @@ class WickedAkubaPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePl
 
     @Override
     public boolean apply(ObjectSourcePlayer<Player> input, Game game) {
-        PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get(PlayerDamagedBySourceWatcher.class.getSimpleName(), input.getObject().getId());
+        PlayerDamagedBySourceWatcher watcher = game.getState().getWatcher(PlayerDamagedBySourceWatcher.class, input.getObject().getId());
         if (watcher != null) {
             return watcher.hasSourceDoneDamage(input.getSourceId(), game);
         }

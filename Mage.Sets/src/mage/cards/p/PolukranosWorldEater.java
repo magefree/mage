@@ -1,9 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesMonstrousSourceTriggeredAbility;
@@ -12,47 +9,44 @@ import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanentAmount;
+import mage.target.targetadjustment.TargetAdjuster;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
- *
  * * The value of X in Polukranos's last ability is equal to the value chosen
- *   for X when its activated ability was activated.
- *
+ * for X when its activated ability was activated.
+ * <p>
  * * The number of targets chosen for the triggered ability must be at least one
- *   (if X wasn't 0) and at most X. You choose the division of damage as you put
- *   the ability on the stack, not as it resolves. Each target must be assigned
- *   at least 1 damage. In multiplayer games, you may choose creatures controlled
- *   by different opponents.
- *
+ * (if X wasn't 0) and at most X. You choose the division of damage as you put
+ * the ability on the stack, not as it resolves. Each target must be assigned
+ * at least 1 damage. In multiplayer games, you may choose creatures controlled
+ * by different opponents.
+ * <p>
  * * If some, but not all, of the ability's targets become illegal, you can't change
- *   the division of damage. Damage that would've been dealt to illegal targets
- *   simply isn't dealt.
- *
+ * the division of damage. Damage that would've been dealt to illegal targets
+ * simply isn't dealt.
+ * <p>
  * * As Polukranos's triggered ability resolves, Polukranos deals damage first, then
- *   the target creatures do. Although no creature will die until after the ability
- *   finishes resolving, the order could matter if Polukranos has wither or infect.
+ * the target creatures do. Although no creature will die until after the ability
+ * finishes resolving, the order could matter if Polukranos has wither or infect.
  *
  * @author LevelX2
  */
 public final class PolukranosWorldEater extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-    static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
-    }
-
     public PolukranosWorldEater(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HYDRA);
 
@@ -61,20 +55,11 @@ public final class PolukranosWorldEater extends CardImpl {
 
         // {X}{X}{G}: Monstrosity X.
         this.addAbility(new MonstrosityAbility("{X}{X}{G}", Integer.MAX_VALUE));
+
         // When Polukranos, World Eater becomes monstrous, it deals X damage divided as you choose among any number of target creatures your opponents control. Each of those creatures deals damage equal to its power to Polukranos.
         Ability ability = new BecomesMonstrousSourceTriggeredAbility(new PolukranosWorldEaterEffect());
-        ability.addTarget(new TargetCreaturePermanentAmount(1, filter));
+        ability.setTargetAdjuster(PolukranosWorldEaterAdjuster.instance);
         this.addAbility(ability);
-
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof BecomesMonstrousSourceTriggeredAbility) {
-            int xValue = ((BecomesMonstrousSourceTriggeredAbility) ability).getMonstrosityValue();
-            ability.getTargets().clear();
-            ability.addTarget(new TargetCreaturePermanentAmount(xValue, filter));
-        }
     }
 
     public PolukranosWorldEater(final PolukranosWorldEater card) {
@@ -84,6 +69,17 @@ public final class PolukranosWorldEater extends CardImpl {
     @Override
     public PolukranosWorldEater copy() {
         return new PolukranosWorldEater(this);
+    }
+}
+
+enum PolukranosWorldEaterAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        int xValue = ((BecomesMonstrousSourceTriggeredAbility) ability).getMonstrosityValue();
+        ability.getTargets().clear();
+        ability.addTarget(new TargetCreaturePermanentAmount(xValue, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
     }
 }
 
@@ -108,7 +104,7 @@ class PolukranosWorldEaterEffect extends OneShotEffect {
         if (!source.getTargets().isEmpty()) {
             Target multiTarget = source.getTargets().get(0);
             Set<Permanent> permanents = new HashSet<>();
-            for (UUID target: multiTarget.getTargets()) {
+            for (UUID target : multiTarget.getTargets()) {
                 Permanent permanent = game.getPermanent(target);
                 if (permanent != null) {
                     permanents.add(permanent);
@@ -118,7 +114,7 @@ class PolukranosWorldEaterEffect extends OneShotEffect {
             // Each of those creatures deals damage equal to its power to Polukranos
             Permanent sourceCreature = game.getPermanent(source.getSourceId());
             if (sourceCreature != null) {
-                for (Permanent permanent :permanents) {
+                for (Permanent permanent : permanents) {
                     sourceCreature.damage(permanent.getPower().getValue(), permanent.getId(), game, false, true);
                 }
             }

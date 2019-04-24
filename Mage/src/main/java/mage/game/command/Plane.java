@@ -1,12 +1,5 @@
-
 package mage.game.command;
 
-import static java.lang.Math.log;
-import java.lang.reflect.Constructor;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -28,7 +21,13 @@ import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
+import mage.util.RandomUtil;
 import mage.util.SubTypeList;
+
+import java.lang.reflect.Constructor;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author spjspj
@@ -43,6 +42,8 @@ public class Plane implements CommandObject {
     private UUID id;
     private UUID controllerId;
     private MageObject sourceObject;
+    private boolean copy;
+    private MageObject copyFrom; // copied card INFO (used to call original adjusters)
     private FrameStyle frameStyle;
     private Abilities<Ability> abilites = new AbilitiesImpl<>();
     private String expansionSetCodeForImage = "";
@@ -58,6 +59,8 @@ public class Plane implements CommandObject {
         this.frameStyle = plane.frameStyle;
         this.controllerId = plane.controllerId;
         this.sourceObject = plane.sourceObject;
+        this.copy = plane.copy;
+        this.copyFrom = (plane.copyFrom != null ? plane.copyFrom.copy() : null);
         this.abilites = plane.abilites.copy();
         this.expansionSetCodeForImage = plane.expansionSetCodeForImage;
     }
@@ -105,6 +108,22 @@ public class Plane implements CommandObject {
     public void setControllerId(UUID controllerId) {
         this.controllerId = controllerId;
         this.abilites.setControllerId(controllerId);
+    }
+
+    @Override
+    public void setCopy(boolean isCopy, MageObject copyFrom) {
+        this.copy = isCopy;
+        this.copyFrom = (copyFrom != null ? copyFrom.copy() : null);
+    }
+
+    @Override
+    public boolean isCopy() {
+        return this.copy;
+    }
+
+    @Override
+    public MageObject getCopyFrom() {
+        return this.copyFrom;
     }
 
     @Override
@@ -211,15 +230,6 @@ public class Plane implements CommandObject {
     }
 
     @Override
-    public void setCopy(boolean isCopy) {
-    }
-
-    @Override
-    public boolean isCopy() {
-        return false;
-    }
-
-    @Override
     public Plane copy() {
         return new Plane(this);
     }
@@ -279,7 +289,7 @@ public class Plane implements CommandObject {
     }
 
     public static Plane getRandomPlane() {
-        int pick = new Random().nextInt(Planes.values().length);
+        int pick = RandomUtil.nextInt(Planes.values().length);
         String planeName = Planes.values()[pick].toString();
         planeName = "mage.game.command.planes." + planeName;
         try {
@@ -289,7 +299,7 @@ public class Plane implements CommandObject {
             if (plane instanceof Plane) {
                 return (Plane) plane;
             }
-        } catch (Exception ex) {            
+        } catch (Exception ex) {
         }
         return null;
     }

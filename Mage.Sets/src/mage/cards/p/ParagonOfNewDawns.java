@@ -37,7 +37,7 @@ public final class ParagonOfNewDawns extends CardImpl {
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter2.add(new AnotherPredicate());
+        filter2.add(AnotherPredicate.instance);
         filter2.add(new ColorPredicate(ObjectColor.WHITE));
         filter2.add(new ControllerPredicate(TargetController.YOU));
     }

@@ -15,7 +15,7 @@ public enum ControllerAttackedThisTurnCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getSimpleName());
+        AttackedThisTurnWatcher watcher = game.getState().getWatcher(AttackedThisTurnWatcher.class);
         return source.isControlledBy(game.getActivePlayerId()) && watcher != null && !watcher.getAttackedThisTurnCreatures().isEmpty();
     }
 }

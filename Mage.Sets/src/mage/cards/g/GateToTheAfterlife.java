@@ -42,7 +42,7 @@ public final class GateToTheAfterlife extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public GateToTheAfterlife(UUID ownerId, CardSetInfo setInfo) {
@@ -123,7 +123,7 @@ class GateToTheAfterlifeEffect extends OneShotEffect {
         if (card == null && controller.chooseUse(Outcome.Benefit, "Do you want to search your library for " + cardName + "?", source, game)) {
             librarySearched = true;
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
-            if (controller.searchLibrary(target, game)) {
+            if (controller.searchLibrary(target, source, game)) {
                 card = game.getCard(target.getFirstTarget());
             }
             controller.shuffleLibrary(source, game);

@@ -29,7 +29,7 @@ public final class PsychicSurgery extends CardImpl {
     public PsychicSurgery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
 
-        // Whenever an opponent shuffles his or her library, you may look at the top two cards of that library.
+        // Whenever an opponent shuffles their library, you may look at the top two cards of that library.
         // You may exile one of those cards. Then put the rest on top of that library in any order.
         this.addAbility(new PsychicSurgeryTriggeredAbility());
     }
@@ -114,7 +114,7 @@ class PsychicSurgeryEffect extends OneShotEffect {
                     }
                 }
             }
-            controller.putCardsOnBottomOfLibrary(cards, game, source, true);
+            controller.putCardsOnTopOfLibrary(cards, game, source, true);
             return true;
         }
         return false;

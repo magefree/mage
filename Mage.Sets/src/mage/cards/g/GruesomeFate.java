@@ -8,6 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
@@ -21,12 +22,10 @@ public final class GruesomeFate extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
         // Each opponent loses 1 life for each creature you control.
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
-        filter.add(new ControllerPredicate(TargetController.YOU));
-        this.getSpellAbility().addEffect(new LoseLifeOpponentsEffect(new PermanentsOnBattlefieldCount(filter)));
+        this.getSpellAbility().addEffect(new LoseLifeOpponentsEffect(new PermanentsOnBattlefieldCount(StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED)));
     }
 
-    public GruesomeFate(final GruesomeFate card) {
+    private GruesomeFate(final GruesomeFate card) {
         super(card);
     }
 

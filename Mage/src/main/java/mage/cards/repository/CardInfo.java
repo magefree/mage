@@ -301,7 +301,7 @@ public class CardInfo {
             return sl;
         }
         for (String s : subtypes.split(SEPARATOR)) {
-            sl.add(s);
+            sl.add(SubType.fromString(s));
         }
         return sl;
     }

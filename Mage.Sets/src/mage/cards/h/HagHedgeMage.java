@@ -26,8 +26,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public final class HagHedgeMage extends CardImpl {
 
-    private final static FilterLandPermanent filter = new FilterLandPermanent();
-    private final static FilterLandPermanent filter2 = new FilterLandPermanent();
+    private static final FilterLandPermanent filter = new FilterLandPermanent();
+    private static final FilterLandPermanent filter2 = new FilterLandPermanent();
 
     static {
         filter.add(new SubtypePredicate(SubType.SWAMP));

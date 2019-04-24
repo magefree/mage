@@ -30,7 +30,7 @@ public final class SunbringersTouch extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}{G}");
 
         // Bolster X, where X is the number of cards in your hand. 
-        this.getSpellAbility().addEffect(new BolsterEffect(new CardsInControllerHandCount()));
+        this.getSpellAbility().addEffect(new BolsterEffect(CardsInControllerHandCount.instance));
         
         // Each creature you control with a +1/+1 counter on it gains trample until end of turn.
         Effect effect = new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, filter);

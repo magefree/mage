@@ -23,7 +23,7 @@ public final class FanningTheFlames extends CardImpl {
         this.addAbility(new BuybackAbility("{3}"));
         
         // Fanning the Flames deals X damage to any target.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.instance));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 

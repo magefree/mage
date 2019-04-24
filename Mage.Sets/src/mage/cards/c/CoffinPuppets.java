@@ -1,9 +1,7 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.Condition;
@@ -22,17 +20,27 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class CoffinPuppets extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control a Swamp");
+    private static final FilterControlledPermanent filter
+            = new FilterControlledPermanent("you control a Swamp");
+    private static final FilterControlledPermanent filter2
+            = new FilterControlledLandPermanent("two lands");
 
     static {
         filter.add(new SubtypePredicate(SubType.SWAMP));
     }
+
+    private static final Condition condition = new CompoundCondition(
+            "during your upkeep and only if you control a Swamp",
+            new PermanentsOnTheBattlefieldCondition(filter),
+            new IsStepCondition(PhaseStep.UPKEEP)
+    );
 
     public CoffinPuppets(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
@@ -42,12 +50,13 @@ public final class CoffinPuppets extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Sacrifice two lands: Return Coffin Puppets from your graveyard to the battlefield. Activate this ability only during your upkeep and only if you control a Swamp.
-        Condition condition = new CompoundCondition("during your upkeep and only if you control a Swamp",new PermanentsOnTheBattlefieldCondition(filter), new IsStepCondition(PhaseStep.UPKEEP));
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.GRAVEYARD,
+        this.addAbility(new ActivateIfConditionActivatedAbility(
+                Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToBattlefieldEffect(),
-                new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent("two lands"), true)),
-                condition);
-        this.addAbility(ability);
+                new SacrificeTargetCost(
+                        new TargetControlledPermanent(2, 2, filter2, true)
+                ), condition
+        ));
     }
 
     public CoffinPuppets(final CoffinPuppets card) {

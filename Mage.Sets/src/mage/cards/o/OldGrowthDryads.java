@@ -71,7 +71,7 @@ class OldGrowthDryadsEffect extends OneShotEffect {
             Player opponent = game.getPlayer(opponentId);
             if (opponent != null && opponent.chooseUse(Outcome.PutLandInPlay, "Search your library for a basic land card and put it onto the battlefield tapped?", source, game)) {
                 TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());
-                if (opponent.searchLibrary(target, game)) {
+                if (opponent.searchLibrary(target, source, game)) {
                     Card targetCard = opponent.getLibrary().getCard(target.getFirstTarget(), game);
                     if (targetCard != null) {
                         opponent.moveCards(targetCard, Zone.BATTLEFIELD, source, game, true, false, false, null);

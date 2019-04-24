@@ -29,7 +29,7 @@ public final class SupremeWill extends CardImpl {
 
         // or Look at the top four cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
         Mode mode = new Mode();
-        mode.getEffects().add(new LookLibraryAndPickControllerEffect(new StaticValue(4), false, new StaticValue(1), StaticFilters.FILTER_CARD, Zone.LIBRARY, false, false));
+        mode.addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(4), false, new StaticValue(1), StaticFilters.FILTER_CARD, Zone.LIBRARY, false, false));
         this.getSpellAbility().addMode(mode);
     }
 

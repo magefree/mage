@@ -20,7 +20,6 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.turn.Step;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
@@ -79,14 +78,14 @@ class GrinningTotemSearchAndExileEffect extends OneShotEffect {
         Player you = game.getPlayer(source.getControllerId());
         Player targetOpponent = game.getPlayer(source.getFirstTarget());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (you != null && targetOpponent != null) {
+        if (you != null && targetOpponent != null && sourceObject != null) {
             if (targetOpponent.getLibrary().hasCards()) {
                 TargetCardInLibrary targetCard = new TargetCardInLibrary();
-                if (you.searchLibrary(targetCard, game, targetOpponent.getId())) {
+                if (you.searchLibrary(targetCard, source, game, targetOpponent.getId())) {
                     Card card = targetOpponent.getLibrary().remove(targetCard.getFirstTarget(), game);
                     if (card != null) {
                         UUID exileZoneId = CardUtil.getCardExileZoneId(game, source);
-                        you.moveCardToExileWithInfo(card, exileZoneId, sourceObject != null ? sourceObject.getIdName() : "", source.getSourceId(), game, Zone.LIBRARY, true);
+                        you.moveCardToExileWithInfo(card, exileZoneId, sourceObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
                         ContinuousEffect effect = new GrinningTotemMayPlayEffect();
                         effect.setTargetPointer(new FixedTarget(card.getId()));
                         game.addEffect(effect, source);

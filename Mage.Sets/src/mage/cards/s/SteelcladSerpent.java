@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -9,8 +7,8 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -18,14 +16,15 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 public final class SteelcladSerpent extends CardImpl {
 
     public SteelcladSerpent(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}{U}");
         this.subtype.add(SubType.SERPENT);
 
         this.power = new MageInt(4);
@@ -48,10 +47,10 @@ public final class SteelcladSerpent extends CardImpl {
 class SteelcladSerpentEffect extends RestrictionEffect {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another artifact");
-    
+
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public SteelcladSerpentEffect() {
@@ -69,18 +68,15 @@ class SteelcladSerpentEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Game game) {
+    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
         return false;
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getId().equals(source.getSourceId())) {
-            if (!game.getBattlefield().getActivePermanents(filter, source.getControllerId(), permanent.getId(), game).isEmpty()) {
-                return false;
-            }
-            return true;
-        } 
+            return game.getBattlefield().getActivePermanents(filter, source.getControllerId(), permanent.getId(), game).isEmpty();
+        }
         return false;
     }
 }

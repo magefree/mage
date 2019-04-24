@@ -36,8 +36,8 @@ public final class SamutVoiceOfDissent extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("another target creature");
     
     static {
-        filter.add(new AnotherPredicate());
-        filter2.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
+        filter2.add(AnotherPredicate.instance);
     }
 
     public SamutVoiceOfDissent(UUID ownerId, CardSetInfo setInfo) {

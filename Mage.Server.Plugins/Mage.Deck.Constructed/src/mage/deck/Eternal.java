@@ -1,10 +1,8 @@
-
 package mage.deck;
 
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.Constructed;
-import mage.constants.SetType;
 
 /**
  * This class implements the new casual format "Eternal", which is legacy with
@@ -18,7 +16,7 @@ public class Eternal extends Constructed {
     public Eternal() {
         super("Constructed - Eternal");
         for (ExpansionSet set : Sets.getInstance().values()) {
-            if (set.getSetType() != SetType.CUSTOM_SET) {
+            if (set.getSetType().isEternalLegal()) {
                 setCodes.add(set.getCode());
             }
         }

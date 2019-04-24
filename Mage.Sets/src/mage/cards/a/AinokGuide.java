@@ -36,7 +36,7 @@ public final class AinokGuide extends CardImpl {
 
         // * Search your library for a basic land card, reveal it, then shuffle your library and put that card on top of it.
         Mode mode = new Mode();
-        mode.getEffects().add(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true));
+        mode.addEffect(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true));
         ability.addMode(mode);
         this.addAbility(ability);
 

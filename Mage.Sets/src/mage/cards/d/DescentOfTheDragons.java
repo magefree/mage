@@ -77,8 +77,8 @@ class DescentOfTheDragonsEffect extends OneShotEffect {
                 }
             }
             DragonToken dragonToken = new DragonToken();
-            for (UUID playerId : playersWithTargets.keySet()) {
-                dragonToken.putOntoBattlefield(playersWithTargets.get(playerId), game, source.getSourceId(), playerId);
+            for (Map.Entry<UUID, Integer> amountTokensPerPlayer : playersWithTargets.entrySet()) {
+                dragonToken.putOntoBattlefield(amountTokensPerPlayer.getValue(), game, source.getSourceId(), amountTokensPerPlayer.getKey());
             }
             return true;
         }

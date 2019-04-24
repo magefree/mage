@@ -80,12 +80,15 @@ class EpicExperimentEffect extends OneShotEffect {
                 if (controller.choose(Outcome.PlayForFree, cardsToCast, targetCard, game)) {
                     Card card = game.getCard(targetCard.getFirstTarget());
                     if (card != null) {
-                        if (controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game))) {
-                            cardsToCast.remove(card);
-                        } else {
+                        if (!controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game))) {
                             game.informPlayer(controller, "You're not able to cast " + card.getIdName() + " or you canceled the casting.");
                         }
+                        cardsToCast.remove(card);
+                    } else {
+                        break;
                     }
+                } else {
+                    break;
                 }
             }
             // move cards not cast to graveyard

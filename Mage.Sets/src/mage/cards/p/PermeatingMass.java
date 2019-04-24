@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
@@ -9,9 +8,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.functions.EmptyApplyToPermanent;
@@ -23,7 +22,7 @@ import mage.util.functions.EmptyApplyToPermanent;
 public final class PermeatingMass extends CardImpl {
 
     public PermeatingMass(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
@@ -62,7 +61,7 @@ class PermeatingMassEffect extends OneShotEffect {
     public boolean apply(Game game, Ability ability) {
         Permanent copyTo = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, ability));
         if (copyTo != null) {
-            Permanent copyFrom = (Permanent) ability.getSourceObject(game);
+            Permanent copyFrom = ability.getSourcePermanentOrLKI(game);
             if (copyFrom != null) {
                 game.copyPermanent(Duration.Custom, copyFrom, copyTo.getId(), ability, new EmptyApplyToPermanent());
             }

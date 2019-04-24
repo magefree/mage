@@ -23,10 +23,10 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class SwiftReckoning extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 
     static {
-        filter.add(new TappedPredicate());
+        filter.add(TappedPredicate.instance);
     }
 
     public SwiftReckoning(UUID ownerId, CardSetInfo setInfo) {

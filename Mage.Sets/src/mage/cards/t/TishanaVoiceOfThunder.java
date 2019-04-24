@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -14,15 +12,12 @@ import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.constants.*;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
- *
  * @author spjspj
  */
 public final class TishanaVoiceOfThunder extends CardImpl {
@@ -37,7 +32,7 @@ public final class TishanaVoiceOfThunder extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Tishana, Voice of Thunder's power and toughness are each equal to the number of cards in your hand.
-        DynamicValue xValue = new CardsInControllerHandCount();
+        DynamicValue xValue = CardsInControllerHandCount.instance;
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(xValue, Duration.EndOfGame)));
 
         // You have no maximum hand size.
@@ -45,7 +40,7 @@ public final class TishanaVoiceOfThunder extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
         // When Tishana enters the battlefield, draw a card for each creature you control.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent()))));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURE))));
     }
 
     public TishanaVoiceOfThunder(final TishanaVoiceOfThunder card) {

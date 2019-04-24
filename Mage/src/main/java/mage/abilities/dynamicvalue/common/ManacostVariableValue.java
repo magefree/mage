@@ -5,7 +5,8 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
 
-public class ManacostVariableValue implements DynamicValue {
+public enum ManacostVariableValue implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -14,7 +15,7 @@ public class ManacostVariableValue implements DynamicValue {
 
     @Override
     public ManacostVariableValue copy() {
-        return new ManacostVariableValue();
+        return ManacostVariableValue.instance;
     }
 
     @Override

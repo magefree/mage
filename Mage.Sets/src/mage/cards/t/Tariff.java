@@ -85,20 +85,18 @@ class TariffEffect extends OneShotEffect {
 
         Permanent creatureToPayFor = chooseOnePermanent(game, player, creatures);
 
-        if (creatureToPayFor != null) {
+        if (creatureToPayFor != null && sourceObject != null) {
             ManaCosts manaCost = ManaCosts.removeVariableManaCost(creatureToPayFor.getManaCost());
-            String message = new StringBuilder("Pay ").append(manaCost.getText()).append(" (otherwise sacrifice ")
-                    .append(creatureToPayFor.getName()).append(")?").toString();
+            String message = "Pay " + manaCost.getText() + " (otherwise sacrifice " +
+                    creatureToPayFor.getName() + ")?";
             if (player.chooseUse(Outcome.Benefit, message, source, game)) {
                 if (manaCost.pay(source, game, source.getSourceId(), player.getId(), false, null)) {
-                    game.informPlayers(new StringBuilder(sourceObject != null ? sourceObject.getName() : "")
-                            .append(": ").append(player.getLogName()).append(" has paid").toString());
+                    game.informPlayers(sourceObject.getName() + ": " + player.getLogName() + " has paid");
                     return;
                 }
             }
 
-            game.informPlayers(new StringBuilder(sourceObject != null ? sourceObject.getName() : "")
-                    .append(": ").append(player.getLogName()).append(" hasn't paid").toString());
+            game.informPlayers(sourceObject.getName() + ": " + player.getLogName() + " hasn't paid");
             creatureToPayFor.sacrifice(source.getSourceId(), game);
         }
     }

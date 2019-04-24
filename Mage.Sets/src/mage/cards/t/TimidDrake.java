@@ -23,7 +23,7 @@ public final class TimidDrake extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public TimidDrake(UUID ownerId, CardSetInfo setInfo) {

@@ -33,7 +33,7 @@ public final class MultaniMaroSorcerer extends CardImpl {
         this.addAbility(ShroudAbility.getInstance());
         
         // Multani, Maro-Sorcerer's power and toughness are each equal to the total number of cards in all players' hands.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInAllHandsCount(), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(CardsInAllHandsCount.instance, Duration.EndOfGame)));
     }
 
     public MultaniMaroSorcerer(final MultaniMaroSorcerer card) {

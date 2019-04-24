@@ -32,7 +32,7 @@ public final class LullmageMentor extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.MERFOLK));
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public LullmageMentor(UUID ownerId, CardSetInfo setInfo) {

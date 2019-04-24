@@ -43,7 +43,7 @@ public final class KnightExemplar extends CardImpl {
         // Other Knight creatures you control get +1/+1 and are indestructible.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
         FilterCreaturePermanent indestructibleFilter = filter.copy();
-        indestructibleFilter.add(new AnotherPredicate());
+        indestructibleFilter.add(AnotherPredicate.instance);
         indestructibleFilter.add(new ControllerPredicate(TargetController.YOU));
         indestructibleFilter.setMessage("Other Knight creatures you control");
         Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, indestructibleFilter, false);

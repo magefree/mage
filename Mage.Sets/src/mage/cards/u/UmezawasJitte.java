@@ -45,13 +45,13 @@ public final class UmezawasJitte extends CardImpl {
 
         // Target creature gets -1/-1 until end of turn.
         Mode mode = new Mode();
-        mode.getEffects().add(new BoostTargetEffect(-1, -1, Duration.EndOfTurn));
-        mode.getTargets().add(new TargetCreaturePermanent());
+        mode.addEffect(new BoostTargetEffect(-1, -1, Duration.EndOfTurn));
+        mode.addTarget(new TargetCreaturePermanent());
         ability.addMode(mode);
 
         // You gain 2 life.
         mode = new Mode();
-        mode.getEffects().add(new GainLifeEffect(2));
+        mode.addEffect(new GainLifeEffect(2));
         ability.addMode(mode);
         this.addAbility(ability);
 

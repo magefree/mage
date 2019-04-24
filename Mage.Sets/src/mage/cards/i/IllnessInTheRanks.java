@@ -20,7 +20,7 @@ public final class IllnessInTheRanks extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creature tokens");
     static {
-        filter.add(new TokenPredicate());
+        filter.add(TokenPredicate.instance);
     }
 
     public IllnessInTheRanks(UUID ownerId, CardSetInfo setInfo) {

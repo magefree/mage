@@ -28,7 +28,7 @@ public final class VintaraSnapper extends CardImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent();
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
    public VintaraSnapper(UUID ownerId, CardSetInfo setInfo) {

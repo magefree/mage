@@ -36,7 +36,7 @@ public final class GreelMindRaker extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {X}{B}, {tap}, Discard two cards: Target player discards X cards at random.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(new ManacostVariableValue(), true), new ManaCostsImpl("{X}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(ManacostVariableValue.instance, true), new ManaCostsImpl("{X}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, new FilterCard())));
         ability.addTarget(new TargetPlayer());

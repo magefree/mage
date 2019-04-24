@@ -1,5 +1,3 @@
-
-
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
@@ -10,7 +8,7 @@ import mage.game.permanent.Permanent;
 
 /**
  * The source of this effect can't attack any opponent
- * 
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class CantAttackAnyPlayerSourceEffect extends RestrictionEffect {
@@ -29,7 +27,7 @@ public class CantAttackAnyPlayerSourceEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Game game) {
+    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
         return false;
     }
 

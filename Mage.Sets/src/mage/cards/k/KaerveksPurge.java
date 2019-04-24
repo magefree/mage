@@ -1,9 +1,7 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -17,9 +15,11 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetadjustment.TargetAdjuster;
+
+import java.util.UUID;
 
 /**
- *
  * @author sinsedrix
  */
 public final class KaerveksPurge extends CardImpl {
@@ -28,19 +28,8 @@ public final class KaerveksPurge extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{R}");
 
         // Destroy target creature with converted mana cost X. If that creature dies this way, Kaervek's Purge deals damage equal to the creature's power to the creature's controller.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature with converted mana cost X")));
         this.getSpellAbility().addEffect(new KaerveksPurgeEffect());
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SpellAbility) {
-            ability.getTargets().clear();
-            int xValue = ability.getManaCostsToPay().getX();
-            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost X");
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
-            ability.addTarget(new TargetCreaturePermanent(filter));
-        }
+        this.getSpellAbility().setTargetAdjuster(KaerveksPurgeAdjuster.instance);
     }
 
     public KaerveksPurge(final KaerveksPurge card) {
@@ -53,11 +42,27 @@ public final class KaerveksPurge extends CardImpl {
     }
 }
 
+enum KaerveksPurgeAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        ability.getTargets().clear();
+        int xValue = ability.getManaCostsToPay().getX();
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost " + xValue);
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
+        ability.addTarget(new TargetCreaturePermanent(filter));
+    }
+}
+
 class KaerveksPurgeEffect extends OneShotEffect {
 
     public KaerveksPurgeEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Destroy target creature with converted mana cost X. If that creature dies this way, {this} deals damage equal to the creature's power to the creature's controller";
+        this.staticText = "Destroy target creature with converted mana cost X. " +
+                "If that creature dies this way, " +
+                "{this} deals damage equal to the creature's power" +
+                " to the creature's controller";
     }
 
     public KaerveksPurgeEffect(final KaerveksPurgeEffect effect) {

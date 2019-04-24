@@ -40,7 +40,7 @@ public final class CoralReef extends CardImpl {
     
     static {
         islandFilter.add(new SubtypePredicate(SubType.ISLAND));
-        untappedBlueCreatureFilter.add(Predicates.not(new TappedPredicate()));
+        untappedBlueCreatureFilter.add(Predicates.not(TappedPredicate.instance));
         untappedBlueCreatureFilter.add(new ColorPredicate(ObjectColor.BLUE));
     }
 

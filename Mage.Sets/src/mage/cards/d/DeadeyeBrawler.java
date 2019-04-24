@@ -1,21 +1,21 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.condition.common.CitysBlessingCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.constants.SubType;
-import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.hint.common.CitysBlessingHint;
 import mage.abilities.keyword.AscendAbility;
+import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class DeadeyeBrawler extends CardImpl {
@@ -37,7 +37,8 @@ public final class DeadeyeBrawler extends CardImpl {
         // Whenever Deadeye Brawler deals combat damage to a player, if you have the city's blessing, draw a card.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
                 new DrawCardSourceControllerEffect(1), false, false), CitysBlessingCondition.instance,
-                "Whenever {this} deals combat damage to a player, if you have the city's blessing, draw a card."));
+                "Whenever {this} deals combat damage to a player, if you have the city's blessing, draw a card.")
+                .addHint(CitysBlessingHint.instance));
 
     }
 

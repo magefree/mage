@@ -45,7 +45,7 @@ public final class ThornbowArcher extends CardImpl {
 
 class ThornbowArcherEffect extends OneShotEffect {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
         filter.add(new SubtypePredicate(SubType.ELF));

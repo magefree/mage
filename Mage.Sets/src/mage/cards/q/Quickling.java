@@ -60,7 +60,7 @@ class QuicklingEffect extends OneShotEffect {
     private static final String effectText = "sacrifice it unless you return another creature you control to its owner's hand";
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     QuicklingEffect() {

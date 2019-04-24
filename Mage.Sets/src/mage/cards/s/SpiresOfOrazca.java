@@ -28,7 +28,7 @@ public final class SpiresOfOrazca extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creature an opponent controls");
 
     static {
-        filter.add(new AttackingPredicate());
+        filter.add(AttackingPredicate.instance);
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 

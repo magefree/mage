@@ -35,7 +35,7 @@ public final class Painbringer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}, Exile any number of cards from your graveyard: Target creature gets -X/-X until end of turn, where X is the number of cards exiled this way.
-        DynamicValue X = new SignInversionDynamicValue(new GetXValue());
+        DynamicValue X = new SignInversionDynamicValue(GetXValue.instance);
         Effect effect = new BoostTargetEffect(X, X, Duration.EndOfTurn);
         effect.setText("Target creature gets -X/-X until end of turn, where X is the number of cards exiled this way");
         Ability ability = new SimpleActivatedAbility(effect, new TapSourceCost());

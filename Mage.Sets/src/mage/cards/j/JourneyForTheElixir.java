@@ -99,7 +99,7 @@ class JourneyForTheElixirEffect extends OneShotEffect {
         if (!walkerFound || !landFound) {
             TargetCardInLibrary targetWalker = new TargetCardInLibrary(0, 1, filter);
             targetWalker.setNotTarget(true);
-            if (!walkerFound && player.searchLibrary(targetWalker, game, false)) {
+            if (!walkerFound && player.searchLibrary(targetWalker, source, game, false)) {
                 Card card = game.getCard(targetWalker.getFirstTarget());
                 if (card != null) {
                     cardsToHand.add(card);
@@ -107,7 +107,7 @@ class JourneyForTheElixirEffect extends OneShotEffect {
             }
             TargetCardInLibrary targetLand = new TargetCardInLibrary(0, 1, StaticFilters.FILTER_CARD_BASIC_LAND_A);
             targetLand.setNotTarget(true);
-            if (!landFound && player.searchLibrary(targetLand, game, false)) {
+            if (!landFound && player.searchLibrary(targetLand, source, game, false)) {
                 Card card = game.getCard(targetLand.getFirstTarget());
                 if (card != null) {
                     cardsToHand.add(card);

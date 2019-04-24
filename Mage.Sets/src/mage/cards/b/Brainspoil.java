@@ -21,7 +21,7 @@ public final class Brainspoil extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that isn't enchanted");
 
     static {
-        filter.add(Predicates.not(new EnchantedPredicate()));
+        filter.add(Predicates.not(EnchantedPredicate.instance));
     }
 
     public Brainspoil(UUID ownerId, CardSetInfo setInfo) {

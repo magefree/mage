@@ -63,8 +63,8 @@ class TemporalExtortionCounterSourceEffect extends OneShotEffect {
         if (sourceObject != null) {
             for (UUID playerId : game.getState().getPlayerList(source.getControllerId())) {
                 Player player = game.getPlayer(playerId);
-                if (player.chooseUse(outcome, "Pay half your life, rounded up to counter " + sourceObject.getIdName() + '?', source, game)) {
-                    Integer amount = (int) Math.ceil(player.getLife() / 2f);
+                if (player != null && player.chooseUse(outcome, "Pay half your life, rounded up to counter " + sourceObject.getIdName() + '?', source, game)) {
+                    int amount = (int) Math.ceil(player.getLife() / 2f);
                     player.loseLife(amount, game, false);
                     game.informPlayers(player.getLogName() + " pays half their life, rounded up to counter " + sourceObject.getIdName() + '.');
                     Spell spell = game.getStack().getSpell(source.getSourceId());

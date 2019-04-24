@@ -28,7 +28,7 @@ public final class DeathsShadow extends CardImpl {
         this.toughness = new MageInt(13);
 
         // Death's Shadow gets -X/-X, where X is your life total.
-        SignInversionDynamicValue x = new SignInversionDynamicValue(new ControllerLifeCount(), false);
+        SignInversionDynamicValue x = new SignInversionDynamicValue(ControllerLifeCount.instance, false);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(x, x, Duration.WhileOnBattlefield)));
     }
 

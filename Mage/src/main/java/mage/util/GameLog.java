@@ -1,11 +1,9 @@
-
 package mage.util;
 
 import mage.MageObject;
 import mage.ObjectColor;
 
 /**
- *
  * @author LevelX2
  */
 public final class GameLog {
@@ -40,11 +38,11 @@ public final class GameLog {
     }
 
     public static String getColoredObjectIdName(MageObject mageObject) {
-        return "<font color=\'" + getColorName(mageObject.getColor(null)) + "\'>" + mageObject.getName() + " [" + mageObject.getId().toString().substring(0, 3) + "]</font>";
+        return "<font color=\'" + getColorName(mageObject.getColor(null)) + "\'>" + mageObject.getIdName() + "</font>";
     }
 
     public static String getColoredObjectIdNameForTooltip(MageObject mageObject) {
-        return "<font color=\'" + getTooltipColorName(mageObject.getColor(null)) + "\'>" + mageObject.getName() + " [" + mageObject.getId().toString().substring(0, 3) + "]</font>";
+        return "<font color=\'" + getTooltipColorName(mageObject.getColor(null)) + "\'>" + mageObject.getIdName() + "</font>";
     }
 
     public static String getNeutralColoredText(String text) {

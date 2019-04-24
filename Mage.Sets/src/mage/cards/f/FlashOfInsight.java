@@ -87,8 +87,7 @@ class FlashOfInsightEffect extends OneShotEffect {
             }
         }
 
-        Cards cards = new CardsImpl();
-        cards.addAll(controller.getLibrary().getTopCards(game, xValue));
+        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, xValue));
         controller.lookAtCards(sourceObject.getIdName(), cards, game);
 
         TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put into your hand"));

@@ -16,7 +16,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class RhythmicWaterVortex extends CardImpl {
 
-    private final static FilterCard filter = new FilterCard("Mu Yanling");
+    private static final FilterCard filter = new FilterCard("Mu Yanling");
 
     static {
         filter.add(new NamePredicate("Mu Yanling"));

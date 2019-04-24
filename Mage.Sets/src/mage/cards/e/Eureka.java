@@ -90,7 +90,7 @@ class EurekaEffect extends OneShotEffect {
                 playerList.getNext();
                 currentPlayer = game.getPlayer(playerList.get());
                 // if all player since this player didn't put permanent in play finish the process
-                if (currentPlayer.getId().equals(firstInactivePlayer)) {
+                if (currentPlayer != null &&currentPlayer.getId().equals(firstInactivePlayer)) {
                     break;
                 }
             }

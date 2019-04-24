@@ -1,4 +1,3 @@
-
 package mage.abilities.keyword;
 
 import mage.MageObjectReference;
@@ -21,7 +20,7 @@ import mage.players.Player;
 public class CascadeAbility extends TriggeredAbilityImpl {
     //20091005 - 702.82
 
-    private final static String REMINDERTEXT = " <i>(When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less."
+    private static final String REMINDERTEXT = " <i>(When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less."
             + " You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)</i>";
     private boolean withReminder;
 
@@ -84,7 +83,11 @@ class CascadeEffect extends OneShotEffect {
             return false;
         }
         ExileZone exile = game.getExile().createZone(source.getSourceId(), controller.getName() + " Cascade");
-        int sourceCost = game.getCard(source.getSourceId()).getConvertedManaCost();
+        card = game.getCard(source.getSourceId());
+        if (card == null) {
+            return false;
+        }
+        int sourceCost = card.getConvertedManaCost();
         do {
             card = controller.getLibrary().getFromTop(game);
             if (card == null) {

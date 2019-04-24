@@ -20,7 +20,7 @@ public final class ReachOfShadows extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that's one or more colors");
 
     static {
-        filter.add(Predicates.not(new ColorlessPredicate()));
+        filter.add(Predicates.not(ColorlessPredicate.instance));
     }
 
     public ReachOfShadows(UUID ownerId, CardSetInfo setInfo) {

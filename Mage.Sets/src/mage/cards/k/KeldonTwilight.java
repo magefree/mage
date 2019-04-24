@@ -54,7 +54,7 @@ class KeldonTwilightCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getSimpleName());
+        AttackedThisTurnWatcher watcher = game.getState().getWatcher(AttackedThisTurnWatcher.class);
         if (watcher != null) {
             return watcher.getAttackedThisTurnCreatures().isEmpty();
         }

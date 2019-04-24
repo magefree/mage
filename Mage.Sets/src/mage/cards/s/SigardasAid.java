@@ -25,7 +25,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class SigardasAid extends CardImpl {
 
-    private final static FilterArtifactPermanent filter = new FilterArtifactPermanent("an Equipment");
+    private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("an Equipment");
     private static final FilterCard filterCard = new FilterCard("Aura and Equipment spells");
 
     static {

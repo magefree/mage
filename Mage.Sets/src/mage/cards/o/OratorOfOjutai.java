@@ -95,7 +95,7 @@ class OratorOfOjutaiTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         //Intervening if must be checked
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(getSourceId());
-        DragonOnTheBattlefieldWhileSpellWasCastWatcher watcher = (DragonOnTheBattlefieldWhileSpellWasCastWatcher) game.getState().getWatchers().get(DragonOnTheBattlefieldWhileSpellWasCastWatcher.class.getSimpleName());
+        DragonOnTheBattlefieldWhileSpellWasCastWatcher watcher = game.getState().getWatcher(DragonOnTheBattlefieldWhileSpellWasCastWatcher.class);
         return event.getTargetId().equals(getSourceId())
                 && watcher != null
                 && watcher.castWithConditionTrue(sourcePermanent.getSpellAbility().getId());
@@ -135,7 +135,7 @@ class OratorOfOjutaiEffect extends OneShotEffect {
         if (controller != null) {
             Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
             if (sourcePermanent != null) {
-                DragonOnTheBattlefieldWhileSpellWasCastWatcher watcher = (DragonOnTheBattlefieldWhileSpellWasCastWatcher) game.getState().getWatchers().get(DragonOnTheBattlefieldWhileSpellWasCastWatcher.class.getSimpleName());
+                DragonOnTheBattlefieldWhileSpellWasCastWatcher watcher = game.getState().getWatcher(DragonOnTheBattlefieldWhileSpellWasCastWatcher.class);
                 if (watcher != null && watcher.castWithConditionTrue(sourcePermanent.getSpellAbility().getId())) {
                     controller.drawCards(1, game);
                     return true;

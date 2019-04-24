@@ -155,14 +155,13 @@ public final class NightDealings extends CardImpl {
             filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, cmc));
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
 
-            if (player.searchLibrary(target, game)) {
+            if (player.searchLibrary(target, source, game)) {
                 Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
                 if (card != null) {
                     card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
 
                     String name = "Reveal";
-                    Cards cards = new CardsImpl();
-                    cards.add(card);
+                    Cards cards = new CardsImpl(card);
                     Card sourceCard = game.getCard(source.getSourceId());
                     if (sourceCard != null) {
                         name = sourceCard.getName();

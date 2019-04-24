@@ -34,7 +34,7 @@ public final class SkeletalScrying extends CardImpl {
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
         // You draw X cards and you lose X life.
-        this.getSpellAbility().addEffect(new SkeletalScryingEffect(new ManacostVariableValue()));
+        this.getSpellAbility().addEffect(new SkeletalScryingEffect(ManacostVariableValue.instance));
 
     }
 

@@ -45,12 +45,14 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Barbed-Back Wurm", 105, Rarity.UNCOMMON, mage.cards.b.BarbedBackWurm.class));
         cards.add(new SetCardInfo("Bay Falcon", 54, Rarity.COMMON, mage.cards.b.BayFalcon.class));
         cards.add(new SetCardInfo("Bazaar of Wonders", 55, Rarity.RARE, mage.cards.b.BazaarOfWonders.class));
+        cards.add(new SetCardInfo("Benevolent Unicorn", 4, Rarity.COMMON, mage.cards.b.BenevolentUnicorn.class));
         cards.add(new SetCardInfo("Benthic Djinn", 257, Rarity.RARE, mage.cards.b.BenthicDjinn.class));
         cards.add(new SetCardInfo("Binding Agony", 106, Rarity.COMMON, mage.cards.b.BindingAgony.class));
         cards.add(new SetCardInfo("Blighted Shaman", 107, Rarity.UNCOMMON, mage.cards.b.BlightedShaman.class));
         cards.add(new SetCardInfo("Blinding Light", 5, Rarity.UNCOMMON, mage.cards.b.BlindingLight.class));
         cards.add(new SetCardInfo("Blistering Barrier", 159, Rarity.COMMON, mage.cards.b.BlisteringBarrier.class));
         cards.add(new SetCardInfo("Bone Harvest", 108, Rarity.COMMON, mage.cards.b.BoneHarvest.class));
+        cards.add(new SetCardInfo("Bone Mask", 295, Rarity.RARE, mage.cards.b.BoneMask.class));
         cards.add(new SetCardInfo("Boomerang", 56, Rarity.COMMON, mage.cards.b.Boomerang.class));
         cards.add(new SetCardInfo("Breathstealer", 109, Rarity.COMMON, mage.cards.b.Breathstealer.class));
         cards.add(new SetCardInfo("Brushwagg", 208, Rarity.RARE, mage.cards.b.Brushwagg.class));
@@ -61,6 +63,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Cadaverous Knight", 110, Rarity.COMMON, mage.cards.c.CadaverousKnight.class));
         cards.add(new SetCardInfo("Canopy Dragon", 209, Rarity.RARE, mage.cards.c.CanopyDragon.class));
         cards.add(new SetCardInfo("Carrion", 111, Rarity.RARE, mage.cards.c.Carrion.class));
+        cards.add(new SetCardInfo("Catacomb Dragon", 112, Rarity.RARE, mage.cards.c.CatacombDragon.class));
         cards.add(new SetCardInfo("Celestial Dawn", 6, Rarity.RARE, mage.cards.c.CelestialDawn.class));
         cards.add(new SetCardInfo("Cerulean Wyvern", 57, Rarity.UNCOMMON, mage.cards.c.CeruleanWyvern.class));
         cards.add(new SetCardInfo("Chaos Charm", 163, Rarity.COMMON, mage.cards.c.ChaosCharm.class));
@@ -102,9 +105,11 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Emberwilde Caliph", 322, Rarity.RARE, mage.cards.e.EmberwildeCaliph.class));
         cards.add(new SetCardInfo("Emberwilde Djinn", 172, Rarity.RARE, mage.cards.e.EmberwildeDjinn.class));
         cards.add(new SetCardInfo("Energy Bolt", 263, Rarity.RARE, mage.cards.e.EnergyBolt.class));
+        cards.add(new SetCardInfo("Energy Vortex", 64, Rarity.RARE, mage.cards.e.EnergyVortex.class));
         cards.add(new SetCardInfo("Enfeeblement", 121, Rarity.COMMON, mage.cards.e.Enfeeblement.class));
         cards.add(new SetCardInfo("Enlightened Tutor", 14, Rarity.UNCOMMON, mage.cards.e.EnlightenedTutor.class));
         cards.add(new SetCardInfo("Ersatz Gnomes", 301, Rarity.UNCOMMON, mage.cards.e.ErsatzGnomes.class));
+        cards.add(new SetCardInfo("Ether Well", 65, Rarity.UNCOMMON, mage.cards.e.EtherWell.class));
         cards.add(new SetCardInfo("Ethereal Champion", 15, Rarity.RARE, mage.cards.e.EtherealChampion.class));
         cards.add(new SetCardInfo("Fallow Earth", 214, Rarity.UNCOMMON, mage.cards.f.FallowEarth.class));
         cards.add(new SetCardInfo("Favorable Destiny", 16, Rarity.UNCOMMON, mage.cards.f.FavorableDestiny.class));
@@ -181,6 +186,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Lion's Eye Diamond", 307, Rarity.RARE, mage.cards.l.LionsEyeDiamond.class));
         cards.add(new SetCardInfo("Locust Swarm", 226, Rarity.UNCOMMON, mage.cards.l.LocustSwarm.class));
         cards.add(new SetCardInfo("Lure of Prey", 227, Rarity.RARE, mage.cards.l.LureOfPrey.class));
+        cards.add(new SetCardInfo("Malignant Growth", 272, Rarity.RARE, mage.cards.m.MalignantGrowth.class));
         cards.add(new SetCardInfo("Mana Prism", 308, Rarity.UNCOMMON, mage.cards.m.ManaPrism.class));
         cards.add(new SetCardInfo("Mangara's Tome", 309, Rarity.RARE, mage.cards.m.MangarasTome.class));
         cards.add(new SetCardInfo("Marble Diamond", 310, Rarity.UNCOMMON, mage.cards.m.MarbleDiamond.class));
@@ -206,6 +212,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Nettletooth Djinn", 232, Rarity.UNCOMMON, mage.cards.n.NettletoothDjinn.class));
         cards.add(new SetCardInfo("Noble Elephant", 30, Rarity.COMMON, mage.cards.n.NobleElephant.class));
         cards.add(new SetCardInfo("Nocturnal Raid", 132, Rarity.UNCOMMON, mage.cards.n.NocturnalRaid.class));
+        cards.add(new SetCardInfo("Null Chamber", 31, Rarity.RARE, mage.cards.n.NullChamber.class));
         cards.add(new SetCardInfo("Pacifism", 32, Rarity.COMMON, mage.cards.p.Pacifism.class));
         cards.add(new SetCardInfo("Painful Memories", 133, Rarity.UNCOMMON, mage.cards.p.PainfulMemories.class));
         cards.add(new SetCardInfo("Patagia Golem", 313, Rarity.UNCOMMON, mage.cards.p.PatagiaGolem.class));
@@ -222,6 +229,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Political Trickery", 81, Rarity.RARE, mage.cards.p.PoliticalTrickery.class));
         cards.add(new SetCardInfo("Polymorph", 82, Rarity.RARE, mage.cards.p.Polymorph.class));
         cards.add(new SetCardInfo("Power Sink", 83, Rarity.COMMON, mage.cards.p.PowerSink.class));
+        cards.add(new SetCardInfo("Prismatic Boon", 274, Rarity.UNCOMMON, mage.cards.p.PrismaticBoon.class));
         cards.add(new SetCardInfo("Prismatic Circle", 34, Rarity.COMMON, mage.cards.p.PrismaticCircle.class));
         cards.add(new SetCardInfo("Prismatic Lace", 84, Rarity.RARE, mage.cards.p.PrismaticLace.class));
         cards.add(new SetCardInfo("Psychic Transfer", 85, Rarity.RARE, mage.cards.p.PsychicTransfer.class));
@@ -235,6 +243,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Rashida Scalebane", 35, Rarity.RARE, mage.cards.r.RashidaScalebane.class));
         cards.add(new SetCardInfo("Ravenous Vampire", 136, Rarity.UNCOMMON, mage.cards.r.RavenousVampire.class));
         cards.add(new SetCardInfo("Ray of Command", 86, Rarity.COMMON, mage.cards.r.RayOfCommand.class));
+        cards.add(new SetCardInfo("Razor Pendulum", 317, Rarity.RARE, mage.cards.r.RazorPendulum.class));
         cards.add(new SetCardInfo("Reality Ripple", 87, Rarity.COMMON, mage.cards.r.RealityRipple.class));
         cards.add(new SetCardInfo("Reckless Embermage", 189, Rarity.RARE, mage.cards.r.RecklessEmbermage.class));
         cards.add(new SetCardInfo("Regeneration", 236, Rarity.COMMON, mage.cards.r.Regeneration.class));
@@ -270,6 +279,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Soar", 93, Rarity.COMMON, mage.cards.s.Soar.class));
         cards.add(new SetCardInfo("Soul Echo", 40, Rarity.RARE, mage.cards.s.SoulEcho.class));
         cards.add(new SetCardInfo("Soul Rend", 144, Rarity.UNCOMMON, mage.cards.s.SoulRend.class));
+        cards.add(new SetCardInfo("Soulshriek", 145, Rarity.COMMON, mage.cards.s.Soulshriek.class));
         cards.add(new SetCardInfo("Spectral Guardian", 41, Rarity.RARE, mage.cards.s.SpectralGuardian.class));
         cards.add(new SetCardInfo("Spirit of the Night", 146, Rarity.RARE, mage.cards.s.SpiritOfTheNight.class));
         cards.add(new SetCardInfo("Spitting Earth", 193, Rarity.COMMON, mage.cards.s.SpittingEarth.class));
@@ -278,6 +288,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Stupor", 147, Rarity.UNCOMMON, mage.cards.s.Stupor.class));
         cards.add(new SetCardInfo("Subterranean Spirit", 195, Rarity.RARE, mage.cards.s.SubterraneanSpirit.class));
         cards.add(new SetCardInfo("Sunweb", 42, Rarity.RARE, mage.cards.s.Sunweb.class));
+        cards.add(new SetCardInfo("Superior Numbers", 244, Rarity.UNCOMMON, mage.cards.s.SuperiorNumbers.class));
         cards.add(new SetCardInfo("Suq'Ata Firewalker", 94, Rarity.UNCOMMON, mage.cards.s.SuqAtaFirewalker.class));
         cards.add(new SetCardInfo("Swamp", 339, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 340, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
@@ -304,6 +315,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Unseen Walker", 249, Rarity.UNCOMMON, mage.cards.u.UnseenWalker.class));
         cards.add(new SetCardInfo("Unyaro Bee Sting", 250, Rarity.UNCOMMON, mage.cards.u.UnyaroBeeSting.class));
         cards.add(new SetCardInfo("Unyaro Griffin", 44, Rarity.UNCOMMON, mage.cards.u.UnyaroGriffin.class));
+        cards.add(new SetCardInfo("Urborg Panther", 150, Rarity.COMMON, mage.cards.u.UrborgPanther.class));
         cards.add(new SetCardInfo("Vaporous Djinn", 101, Rarity.UNCOMMON, mage.cards.v.VaporousDjinn.class));
         cards.add(new SetCardInfo("Ventifact Bottle", 323, Rarity.RARE, mage.cards.v.VentifactBottle.class));
         cards.add(new SetCardInfo("Viashino Warrior", 200, Rarity.COMMON, mage.cards.v.ViashinoWarrior.class));

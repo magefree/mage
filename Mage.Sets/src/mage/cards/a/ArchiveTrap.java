@@ -51,13 +51,13 @@ public final class ArchiveTrap extends CardImpl {
 
 class ArchiveTrapWatcher extends Watcher {
 
-    Set<UUID> playerIds = new HashSet<>();
+   private Set<UUID> playerIds = new HashSet<>();
 
     public ArchiveTrapWatcher() {
-        super(ArchiveTrapWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
-    public ArchiveTrapWatcher(final ArchiveTrapWatcher watcher) {
+    private ArchiveTrapWatcher(final ArchiveTrapWatcher watcher) {
         super(watcher);
         this.playerIds.addAll(watcher.playerIds);
     }
@@ -92,7 +92,7 @@ enum OpponentSearchesLibCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ArchiveTrapWatcher watcher = (ArchiveTrapWatcher) game.getState().getWatchers().get(ArchiveTrapWatcher.class.getSimpleName());
+        ArchiveTrapWatcher watcher = game.getState().getWatcher(ArchiveTrapWatcher.class);
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && watcher != null) {
             for (UUID playerId : watcher.getPlayersSearchedLibrary()) {

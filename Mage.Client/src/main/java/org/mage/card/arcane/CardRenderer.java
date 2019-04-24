@@ -5,6 +5,7 @@
  */
 package org.mage.card.arcane;
 
+import mage.abilities.hint.HintUtils;
 import mage.cards.ArtRect;
 import mage.client.dialog.PreferencesDialog;
 import mage.constants.AbilityType;
@@ -137,12 +138,18 @@ public abstract class CardRenderer {
     }
 
     protected void parseRules(List<String> stringRules, ArrayList<TextboxRule> keywords, ArrayList<TextboxRule> rules) {
-        // Translate the textbox text
+        // Translate the textbox text and remove card hints
         for (String rule : stringRules) {
+            // remove all card hints
+            if (rule.equals(HintUtils.HINT_START_MARK)) {
+                break;
+            }
+
             // Kill reminder text
             if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_RENDERING_REMINDER_TEXT, "false").equals("false")) {
                 rule = CardRendererUtils.killReminderText(rule).trim();
             }
+
             if (!rule.isEmpty()) {
                 TextboxRule tbRule = TextboxRuleParser.parse(cardView, rule);
                 if (tbRule.type == TextboxRuleType.SIMPLE_KEYWORD) {
@@ -388,7 +395,7 @@ public abstract class CardRenderer {
     // Return the width of the drawn symbol
     protected int drawExpansionSymbol(Graphics2D g, int x, int y, int w, int h) {
         // Draw the expansion symbol
-        Image setSymbol = ManaSymbols.getSetSymbolImage(cardView.getExpansionSetCode(), cardView.getRarity().getCode());
+        Image setSymbol = ManaSymbols.getSetSymbolImage(cardView.getExpansionSetCode(), cardView.getRarity());
         int setSymbolWidth;
         if (setSymbol == null) {
             // Don't draw anything when we don't have a set symbol

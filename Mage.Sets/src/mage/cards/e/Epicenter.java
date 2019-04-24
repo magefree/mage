@@ -1,8 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.Iterator;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
@@ -18,8 +16,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
 
+import java.util.Iterator;
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class Epicenter extends CardImpl {
@@ -31,12 +31,15 @@ public final class Epicenter extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new SacrificeEffect(StaticFilters.FILTER_LAND, 1, "Target player"),
                 new InvertCondition(new CardsInControllerGraveCondition(7)),
-                "Target player sacrifices a land"));
+                "Target player sacrifices a land"
+        ));
         // Threshold - Each player sacrifices all lands he or she controls instead if seven or more cards are in your graveyard.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new EpicenterEffect(),
                 new CardsInControllerGraveCondition(7),
-                "<br/><br/><i>Threshold</i> &mdash; Each player sacrifices all lands he or she controls instead if seven or more cards are in your graveyard."));
+                "<br/><br/><i>Threshold</i> &mdash; Each player sacrifices all lands they control instead " +
+                        "if seven or more cards are in your graveyard."
+        ));
 
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
@@ -55,10 +58,9 @@ class EpicenterEffect extends OneShotEffect {
 
     EpicenterEffect() {
         super(Outcome.DestroyPermanent);
-        staticText = "Each player sacrifices all lands he or she controls";
     }
 
-    EpicenterEffect(final EpicenterEffect effect) {
+    private EpicenterEffect(final EpicenterEffect effect) {
         super(effect);
     }
 

@@ -27,7 +27,7 @@ public final class BurnAtTheStake extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creatures you control");
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public BurnAtTheStake(UUID ownerId, CardSetInfo setInfo) {
@@ -69,7 +69,7 @@ class BurnAtTheStakeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int amount = (new GetXValue()).calculate(game, source, this) * 3;
+        int amount = (GetXValue.instance).calculate(game, source, this) * 3;
 
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         if (permanent != null) {

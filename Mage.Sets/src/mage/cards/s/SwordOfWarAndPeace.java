@@ -69,7 +69,7 @@ class SwordOfWarAndPeaceAbility extends TriggeredAbilityImpl {
 
     public SwordOfWarAndPeaceAbility() {
         super(Zone.BATTLEFIELD, new SwordOfWarAndPeaceDamageEffect());
-        this.addEffect(new GainLifeEffect(new CardsInControllerHandCount()));
+        this.addEffect(new GainLifeEffect(CardsInControllerHandCount.instance));
     }
 
     public SwordOfWarAndPeaceAbility(final SwordOfWarAndPeaceAbility ability) {

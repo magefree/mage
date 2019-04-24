@@ -1,18 +1,16 @@
-
 package mage.abilities.keyword;
 
-import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
 import mage.abilities.MageSingleton;
 import mage.abilities.effects.RestrictionEffect;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 import java.io.ObjectStreamException;
 
 /**
- *
  * @author Loki
  */
 public class FearAbility extends EvasionAbility implements MageSingleton {
@@ -59,7 +57,7 @@ class FearEffect extends RestrictionEffect implements MageSingleton {
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         return blocker.isArtifact() || blocker.getColor(game).isBlack();
     }
 

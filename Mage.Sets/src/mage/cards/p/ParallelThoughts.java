@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import java.util.Arrays;
@@ -78,7 +77,7 @@ class ParallelThoughtsSearchEffect extends OneShotEffect {
         if (controller != null
                 && permanent != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(7, new FilterCard());
-            if (controller.searchLibrary(target, game)) {
+            if (controller.searchLibrary(target, source, game)) {
                 for (UUID targetId : target.getTargets()) {
                     Card card = controller.getLibrary().getCard(targetId, game);
                     if (card != null) {
@@ -86,7 +85,7 @@ class ParallelThoughtsSearchEffect extends OneShotEffect {
                     }
                 }
                 // shuffle that exiled pile
-                
+
                 UUID[] shuffled = cardsInExilePile.toArray(new UUID[0]);
                 for (int n = shuffled.length - 1; n > 0; n--) {
                     int r = RandomUtil.nextInt(n + 1);
@@ -96,16 +95,15 @@ class ParallelThoughtsSearchEffect extends OneShotEffect {
                 }
                 cardsInExilePile.clear();
                 cardsInExilePile.addAll(Arrays.asList(shuffled));
-                
+
                 // move to exile zone and turn face down
-                
+                String exileName = permanent.getIdName() + " (" + game.getState().getZoneChangeCounter(source.getSourceId()) + ")";
                 for (Card card : cardsInExilePile.getCards(game)) {
-                    controller.moveCardsToExile(card, source, game, false, CardUtil.getCardExileZoneId(game, source), permanent.getLogName());
+                    controller.moveCardsToExile(card, source, game, false, CardUtil.getCardExileZoneId(game, source), exileName);
                     card.setFaceDown(true, game);
                 }
-                
+
                 // shuffle controller library
-                
                 controller.shuffleLibrary(source, game);
             }
             return true;
@@ -118,7 +116,7 @@ class ParallelThoughtsReplacementEffect extends ReplacementEffectImpl {
 
     ParallelThoughtsReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.DrawCard);
-        staticText = "If you would draw a card, you may instead put the top card of the pile you exiled with Parallel Thoughts into your hand";
+        staticText = "If you would draw a card, you may instead put the top card of the pile you exiled with {this} into your hand";
     }
 
     ParallelThoughtsReplacementEffect(final ParallelThoughtsReplacementEffect effect) {
@@ -135,12 +133,15 @@ class ParallelThoughtsReplacementEffect extends ReplacementEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null
                 && !game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source)).getCards(game).isEmpty()) {
-            Card card = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source)).getCards(game).iterator().next();
-            if (card != null) {
-                controller.moveCards(card, Zone.HAND, source, game);
+            if (controller.chooseUse(outcome, "Draw a card from the pile you exiled instead drawing from your library?", source, game)) {
+                Card card = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source)).getCards(game).iterator().next();
+                if (card != null) {
+                    controller.moveCards(card, Zone.HAND, source, game);
+                }
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     @Override

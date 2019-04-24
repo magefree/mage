@@ -58,7 +58,7 @@ public final class EtaliPrimalStorm extends CardImpl {
 
 class EtaliPrimalStormEffect extends OneShotEffect {
 
-    private final static FilterCard filter = new FilterCard("nonland cards");
+    private static final FilterCard filter = new FilterCard("nonland cards");
 
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
@@ -97,6 +97,7 @@ class EtaliPrimalStormEffect extends OneShotEffect {
                     }
                 }
             }
+
             // cast the possible cards without paying the mana
             Cards cardsToCast = new CardsImpl();
             cardsToCast.addAll(currentExiledCards);
@@ -105,17 +106,21 @@ class EtaliPrimalStormEffect extends OneShotEffect {
                 if (!controller.chooseUse(Outcome.PlayForFree, "Cast a" + (alreadyCast ? "nother" : "") + " card exiled with " + sourceObject.getLogName() + " without paying its mana cost?", source, game)) {
                     break;
                 }
+
                 TargetCard targetCard = new TargetCard(1, Zone.EXILED, new FilterCard("nonland card to cast for free"));
-                if (controller.choose(Outcome.PlayForFree, cardsToCast, targetCard, game)) {
-                    alreadyCast = true;
-                    Card card = game.getCard(targetCard.getFirstTarget());
-                    if (card != null) {
-                        if (controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game))) {
-                            cardsToCast.remove(card);
-                        } else {
+                if (!controller.choose(Outcome.PlayForFree, cardsToCast, targetCard, game)) {
+                    break;
+                }
+
+                alreadyCast = true;
+                Card card = game.getCard(targetCard.getFirstTarget());
+                if (card != null) {
+                    if (!controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game))) {
+                        if (!game.isSimulation()) {
                             game.informPlayer(controller, "You're not able to cast " + card.getIdName() + " or you canceled the casting.");
                         }
                     }
+                    cardsToCast.remove(card);
                 }
             }
             return true;

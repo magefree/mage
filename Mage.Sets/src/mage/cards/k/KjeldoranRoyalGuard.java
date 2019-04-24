@@ -55,7 +55,7 @@ class KjeldoranRoyalGuardEffect extends ReplacementEffectImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("unblocked creatures");
     
     static {
-        filter.add(new UnblockedPredicate());
+        filter.add(UnblockedPredicate.instance);
     }
     
     KjeldoranRoyalGuardEffect() {

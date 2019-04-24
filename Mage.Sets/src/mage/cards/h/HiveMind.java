@@ -68,7 +68,7 @@ class HiveMindTriggeredAbility extends TriggeredAbilityImpl {
                 || spell.isSorcery())) {
             for (Effect effect : getEffects()) {
                 if (effect instanceof HiveMindEffect) {
-                    ((HiveMindEffect) effect).setTargetPointer(new FixedTarget(spell.getId()));
+                    effect.setTargetPointer(new FixedTarget(spell.getId()));
                 }
             }
             return true;

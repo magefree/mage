@@ -27,7 +27,7 @@ public final class MycosynthFiend extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        DynamicValue value = new OpponentsPoisonCountersCount();
+        DynamicValue value = OpponentsPoisonCountersCount.instance;
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(value, value, Duration.WhileOnBattlefield)));
     }
 

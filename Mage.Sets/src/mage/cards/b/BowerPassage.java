@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
@@ -14,13 +12,15 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
  * @author noxx
  */
 public final class BowerPassage extends CardImpl {
 
     public BowerPassage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
 
 
         // Creatures with flying can't block creatures you control.
@@ -59,11 +59,8 @@ class BowerPassageEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        if (attacker != null && attacker.isControlledBy(source.getControllerId()) && blocker.getAbilities().contains(FlyingAbility.getInstance())) {
-            return false;
-        }
-        return true;
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+        return attacker == null || !attacker.isControlledBy(source.getControllerId()) || !blocker.getAbilities().contains(FlyingAbility.getInstance());
     }
 
 }

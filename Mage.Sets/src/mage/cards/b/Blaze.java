@@ -20,7 +20,7 @@ public final class Blaze extends CardImpl {
 
 
         // Blaze deals X damage to any target.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.instance));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 

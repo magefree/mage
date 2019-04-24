@@ -75,4 +75,8 @@ public abstract class FilterImpl<E> implements Filter<E> {
         this.lockedFilter = lockedFilter;
     }
 
+    public List<Predicate<? super E>> getPredicates() {
+        return predicates;
+    }
+
 }

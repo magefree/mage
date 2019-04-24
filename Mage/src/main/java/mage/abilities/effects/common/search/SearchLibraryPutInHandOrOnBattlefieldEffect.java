@@ -66,7 +66,7 @@ public class SearchLibraryPutInHandOrOnBattlefieldEffect extends SearchEffect {
             return false;
         }
         target.clearChosen();
-        if (controller.searchLibrary(target, game)) {
+        if (controller.searchLibrary(target, source, game)) {
             if (!target.getTargets().isEmpty()) {
                 Cards cards = new CardsImpl();
                 boolean askToPutOntoBf = false;

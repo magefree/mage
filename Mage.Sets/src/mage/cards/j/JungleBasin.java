@@ -30,7 +30,7 @@ public final class JungleBasin extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.FOREST));
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public JungleBasin(UUID ownerId, CardSetInfo setInfo) {

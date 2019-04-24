@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -17,6 +16,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
+
+import java.util.UUID;
 
 /**
  * @author Rystan
@@ -34,7 +35,7 @@ public final class MemorialToUnity extends CardImpl {
         // {2}{G}, {T}, Sacrifice Memorial to Unity: Look at the top five cards of your library. You may reveal a creature card from among them and put it into your hand. Then put the rest on the bottom of your library in a random order.
         Effect effect = new LookLibraryAndPickControllerEffect(
                 new StaticValue(5), false, new StaticValue(1), new FilterCreatureCard("a creature card"), false, true
-        );
+        ).setBackInRandomOrder(true);
 
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}{G}"));
         ability.addCost(new TapSourceCost());

@@ -90,7 +90,7 @@ class ArcumDagssonEffect extends OneShotEffect {
                 artifactCreature.sacrifice(source.getSourceId(), game);
                 if (player.chooseUse(Outcome.PutCardInPlay, "Search your library for a noncreature artifact card?", source, game)) {
                     TargetCardInLibrary target = new TargetCardInLibrary(filter);
-                    if (player.searchLibrary(target, game)) {
+                    if (player.searchLibrary(target, source, game)) {
                         Card card = game.getCard(target.getFirstTarget());
                         if (card != null) {
                             player.moveCards(card, Zone.BATTLEFIELD, source, game);

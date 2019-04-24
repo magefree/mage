@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
@@ -33,7 +32,7 @@ import mage.util.CardUtil;
 public final class PsychicIntrusion extends CardImpl {
 
     public PsychicIntrusion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}{B}");
 
         // Target opponent reveals their hand. You choose a nonland card from that player's graveyard or hand and exile it.
         // You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color
@@ -187,16 +186,15 @@ class PsychicIntrusionSpendAnyManaEffect extends AsThoughEffectImpl implements A
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        objectId = game.getCard(objectId).getMainCard().getId(); // for split cards
         if (objectId.equals(((FixedTarget) getTargetPointer()).getTarget())
                 && game.getState().getZoneChangeCounter(objectId) <= ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1) {
-
             if (affectedControllerId.equals(source.getControllerId())) {
                 // if the card moved from exile to spell the zone change counter is increased by 1
                 if (game.getState().getZoneChangeCounter(objectId) == ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1) {
                     return true;
                 }
             }
-
         } else {
             if (((FixedTarget) getTargetPointer()).getTarget().equals(objectId)) {
                 // object has moved zone so effect can be discarted

@@ -46,20 +46,20 @@ public final class SilumgarsCommand extends CardImpl {
         
         // or Return target permanent to its owner's hand; 
         Mode mode = new Mode();
-        mode.getEffects().add(new ReturnToHandTargetEffect());
-        mode.getTargets().add(new TargetPermanent());
+        mode.addEffect(new ReturnToHandTargetEffect());
+        mode.addTarget(new TargetPermanent());
         this.getSpellAbility().getModes().addMode(mode);        
      
         // or Target creature gets -3/-3 until end of turn;
         mode = new Mode();
-        mode.getEffects().add(new BoostTargetEffect(-3, -3, Duration.EndOfTurn));
-        mode.getTargets().add(new TargetCreaturePermanent());
+        mode.addEffect(new BoostTargetEffect(-3, -3, Duration.EndOfTurn));
+        mode.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().getModes().addMode(mode);        
 
         // or Destroy target planeswalker.
         mode = new Mode();
-        mode.getEffects().add(new DestroyTargetEffect());
-        mode.getTargets().add(new TargetPermanent(filter2));
+        mode.addEffect(new DestroyTargetEffect());
+        mode.addTarget(new TargetPermanent(filter2));
         this.getSpellAbility().getModes().addMode(mode);        
     }
 

@@ -6,8 +6,6 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAllTriggeredAbility;
 import mage.abilities.effects.PreventionEffectImpl;
-import mage.abilities.effects.common.PreventDamageBySourceEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -16,9 +14,7 @@ import mage.constants.SetTargetPointer;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.players.Player;
 import mage.util.CardUtil;
 
@@ -61,7 +57,7 @@ class ImpulsiveManeuversEffect extends PreventionEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        this.wonFlip = game.getPlayer(source.getControllerId()).flipCoin(game);
+        this.wonFlip = game.getPlayer(source.getControllerId()).flipCoin(source, game, true);
         super.init(source, game);
     }
 

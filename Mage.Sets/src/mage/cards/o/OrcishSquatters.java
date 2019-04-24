@@ -27,7 +27,7 @@ public final class OrcishSquatters extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("land defending player controls");
 
     static {
-        filter.add(new DefendingPlayerControlsPredicate());
+        filter.add(DefendingPlayerControlsPredicate.instance);
     }
 
     public OrcishSquatters(UUID ownerId, CardSetInfo setInfo) {

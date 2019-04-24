@@ -39,7 +39,7 @@ public final class MageRingNetwork extends CardImpl {
         // {T}, Remove any number of storage counters from Mage-Ring Network: Add {C} for each storage counter removed this way.
         ability = new DynamicManaAbility(
                 Mana.ColorlessMana(1),
-                new RemovedCountersForCostValue(),
+                RemovedCountersForCostValue.instance,
                 new TapSourceCost(),
                 "Add {C} for each storage counter removed this way",
                 true, new CountersSourceCount(CounterType.STORAGE));

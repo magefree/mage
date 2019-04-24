@@ -25,7 +25,7 @@ public final class CennsHeir extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.KITHKIN));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public CennsHeir(UUID ownerId, CardSetInfo setInfo) {

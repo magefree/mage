@@ -30,7 +30,7 @@ public final class PhyrexianSwarmlord extends CardImpl {
 
         this.addAbility(InfectAbility.getInstance());
         this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep",
-                new CreateTokenEffect(new InsectInfectToken(), new OpponentsPoisonCountersCount())));
+                new CreateTokenEffect(new InsectInfectToken(), OpponentsPoisonCountersCount.instance)));
     }
 
     public PhyrexianSwarmlord(final PhyrexianSwarmlord card) {

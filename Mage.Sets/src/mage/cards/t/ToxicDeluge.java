@@ -26,7 +26,7 @@ public final class ToxicDeluge extends CardImpl {
         // As an additional cost to cast Toxic Deluge, pay X life.
         this.getSpellAbility().addCost(new PayVariableLifeCost(true));
         // All creatures get -X/-X until end of turn.
-        DynamicValue xValue = new SignInversionDynamicValue(new GetXValue());
+        DynamicValue xValue = new SignInversionDynamicValue(GetXValue.instance);
         this.getSpellAbility().addEffect(new BoostAllEffect(xValue, xValue, Duration.EndOfTurn, new FilterCreaturePermanent("All creatures"), false,
                 null, true));
     }

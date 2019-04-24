@@ -100,8 +100,7 @@ class PriestOfTheWakeningSunEffect extends OneShotEffect {
                 if (controller.chooseUse(outcome, "Reveal a Dinosaur card?", source, game)) {
                     TargetCardInHand target = new TargetCardInHand(0, 1, filter);
                     if (controller.chooseTarget(outcome, target, source, game) && !target.getTargets().isEmpty()) {
-                        Cards cards = new CardsImpl();
-                        cards.addAll(target.getTargets());
+                        Cards cards = new CardsImpl(target.getTargets());
                         controller.revealCards(sourceObject.getIdName(), cards, game);
                         controller.gainLife(2, game, source);
                         return true;

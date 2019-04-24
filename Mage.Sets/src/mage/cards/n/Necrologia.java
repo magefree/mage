@@ -29,7 +29,7 @@ public final class Necrologia extends CardImpl {
         this.getSpellAbility().addCost(new PayVariableLifeCost(true));
 
         // Draw X cards.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new GetXValue()));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(GetXValue.instance));
     }
 
     public Necrologia(final Necrologia card) {

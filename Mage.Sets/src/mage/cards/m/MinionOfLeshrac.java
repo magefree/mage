@@ -92,7 +92,7 @@ class MinionLeshracEffect extends OneShotEffect {
                 && minionLeshrac != null) {
             FilterControlledPermanent filterCreature = new FilterControlledPermanent();
             filterCreature.add(new CardTypePredicate(CardType.CREATURE));
-            filterCreature.add(new AnotherPredicate());
+            filterCreature.add(AnotherPredicate.instance);
             TargetControlledPermanent target = new TargetControlledPermanent(filterCreature);
             SacrificeTargetCost cost = new SacrificeTargetCost(target);
             if (controller.chooseUse(Outcome.AIDontUseIt, "Do you wish to sacrifice another creature to prevent the 5 damage to you?", source, game)

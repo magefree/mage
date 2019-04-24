@@ -69,7 +69,7 @@ class LureOfPreyRestrictionEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getSourceId().equals(source.getSourceId())) {
-            CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get(CastSpellLastTurnWatcher.class.getSimpleName());
+            CastSpellLastTurnWatcher watcher = game.getState().getWatcher(CastSpellLastTurnWatcher.class);
             if (watcher != null) {
                 for (UUID playerId : game.getOpponents(source.getControllerId())) {
                     if (watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(playerId) != 0) {

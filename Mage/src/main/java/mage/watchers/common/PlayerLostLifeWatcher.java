@@ -23,7 +23,7 @@ public class PlayerLostLifeWatcher extends Watcher {
     private final Map<UUID, Integer> amountOfLifeLostLastTurn = new HashMap<>();
 
     public PlayerLostLifeWatcher() {
-        super(PlayerLostLifeWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public PlayerLostLifeWatcher(final PlayerLostLifeWatcher watcher) {
@@ -49,7 +49,7 @@ public class PlayerLostLifeWatcher extends Watcher {
         }
     }
 
-    public int getLiveLost(UUID playerId) {
+    public int getLifeLost(UUID playerId) {
         return amountOfLifeLostThisTurn.getOrDefault(playerId, 0);
     }
 
@@ -64,7 +64,7 @@ public class PlayerLostLifeWatcher extends Watcher {
         return amount;
     }
 
-    public int getLiveLostLastTurn(UUID playerId) {
+    public int getLifeLostLastTurn(UUID playerId) {
         return amountOfLifeLostLastTurn.getOrDefault(playerId, 0);
     }
 
@@ -75,8 +75,8 @@ public class PlayerLostLifeWatcher extends Watcher {
         amountOfLifeLostThisTurn.clear();
     }
 
-    @Override
-    public PlayerLostLifeWatcher copy() {
-        return new PlayerLostLifeWatcher(this);
-    }
+//    @Override
+//    public PlayerLostLifeWatcher copy() {
+//        return new PlayerLostLifeWatcher(this);
+//    }
 }

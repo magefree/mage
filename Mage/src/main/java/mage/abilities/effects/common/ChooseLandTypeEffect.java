@@ -5,7 +5,6 @@
  */
 package mage.abilities.effects.common;
 
-import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -18,8 +17,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.stream.Collectors;
+
 /**
- *
  * @author fireshoes
  */
 public class ChooseLandTypeEffect extends OneShotEffect {
@@ -43,7 +43,7 @@ public class ChooseLandTypeEffect extends OneShotEffect {
         if (controller != null && mageObject != null) {
             Choice typeChoice = new ChoiceImpl(true);
             typeChoice.setMessage("Choose land type");
-            typeChoice.setChoices(SubType.getLandTypes(false).stream().map(SubType::toString).collect(Collectors.toSet()));
+            typeChoice.setChoices(SubType.getLandTypes().stream().map(SubType::toString).collect(Collectors.toSet()));
             if (controller.choose(outcome, typeChoice, game)) {
                 if (!game.isSimulation()) {
                     game.informPlayers(mageObject.getName() + ": " + controller.getLogName() + " has chosen " + typeChoice.getChoice());

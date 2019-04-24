@@ -76,7 +76,7 @@ class AetherbornMarauderEffect extends OneShotEffect {
         Permanent sourceObject = game.getPermanent(source.getSourceId());
         if (controller != null && sourceObject != null) {
             FilterControlledPermanent filter = new FilterControlledPermanent("permanent you control to remove +1/+1 counters from");
-            filter.add(new AnotherPredicate());
+            filter.add(AnotherPredicate.instance);
             filter.add(new CounterPredicate(CounterType.P1P1));
             boolean firstRun = true;
             while (game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) > 0) {

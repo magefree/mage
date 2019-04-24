@@ -26,7 +26,7 @@ import mage.util.CardUtil;
  */
 public final class SuspensionField extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with toughness 3 or greater");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with toughness 3 or greater");
 
     static {
         filter.add(new ToughnessPredicate(ComparisonType.MORE_THAN, 2));

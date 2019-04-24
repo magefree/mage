@@ -1,13 +1,10 @@
-
 package mage.deck;
 
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.Constructed;
-import mage.constants.SetType;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class Vintage extends Constructed {
@@ -15,7 +12,7 @@ public class Vintage extends Constructed {
     public Vintage() {
         super("Constructed - Vintage");
         for (ExpansionSet set : Sets.getInstance().values()) {
-            if (set.getSetType() != SetType.CUSTOM_SET) {
+            if (set.getSetType().isEternalLegal()) {
                 setCodes.add(set.getCode());
             }
         }
@@ -91,6 +88,5 @@ public class Vintage extends Constructed {
         restricted.add("Wheel of Fortune");
         restricted.add("Windfall");
         restricted.add("Yawgmoth's Will");
-
     }
 }

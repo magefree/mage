@@ -29,7 +29,7 @@ import mage.target.TargetPermanent;
  */
 public final class VorelOfTheHullClade extends CardImpl {
     
-    final static private FilterPermanent filter = new FilterPermanent("artifact, creature, or land");
+    static final private FilterPermanent filter = new FilterPermanent("artifact, creature, or land");
     
     static {
         filter.add(Predicates.or(

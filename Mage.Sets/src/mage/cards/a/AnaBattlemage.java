@@ -34,7 +34,7 @@ public final class AnaBattlemage extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("untapped creature");
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public AnaBattlemage(UUID ownerId, CardSetInfo setInfo) {

@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
@@ -9,7 +8,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author emerald000
  */
 public class LoseAllCreatureTypesTargetEffect extends ContinuousEffectImpl {
@@ -32,7 +30,7 @@ public class LoseAllCreatureTypesTargetEffect extends ContinuousEffectImpl {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             permanent.setIsAllCreatureTypes(false);
-            return permanent.getSubtype(game).retainAll(SubType.getLandTypes(false));
+            return permanent.getSubtype(game).retainAll(SubType.getLandTypes());
         }
         return false;
     }

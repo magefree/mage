@@ -35,7 +35,7 @@ public final class MinionReflector extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
 
     static {
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public MinionReflector(UUID ownerId, CardSetInfo setInfo) {

@@ -26,7 +26,7 @@ public final class Temper extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{1}{W}");
 
         // Prevent the next X damage that would be dealt to target creature this turn. For each 1 damage prevented this way, put a +1/+1 counter on that creature.
-        this.getSpellAbility().addEffect(new TemperPreventDamageTargetEffect(new ManacostVariableValue(), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new TemperPreventDamageTargetEffect(ManacostVariableValue.instance, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
@@ -98,7 +98,7 @@ class TemperPreventDamageTargetEffect extends PreventionEffectImpl {
                 Permanent targetPermanent = game.getPermanent(source.getTargets().getFirstTarget());
                 if (targetPermanent != null) {
                     targetPermanent.addCounters(CounterType.P1P1.createInstance(prevented), source, game);
-                    game.informPlayers(new StringBuilder("Temper: Prevented ").append(prevented).append(" damage ").toString());
+                    game.informPlayers("Temper: Prevented " + prevented + " damage ");
                     game.informPlayers("Temper: Adding " + prevented + " +1/+1 counters to " + targetPermanent.getName());
                 }
             }

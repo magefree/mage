@@ -44,7 +44,7 @@ public final class DwarvenHold extends CardImpl {
         // {tap}, Remove any number of storage counters from Dwarven Hold: Add {R} for each storage counter removed this way.
         Ability ability = new DynamicManaAbility(
                 Mana.RedMana(1),
-                new RemovedCountersForCostValue(),
+                RemovedCountersForCostValue.instance,
                 new TapSourceCost(),
                 "Add {R} for each storage counter removed this way",
                 true, new CountersSourceCount(CounterType.STORAGE));

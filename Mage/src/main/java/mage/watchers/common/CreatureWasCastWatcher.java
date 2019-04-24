@@ -22,7 +22,7 @@ public class CreatureWasCastWatcher extends Watcher {
     private final Set<UUID> creaturesCasted = new HashSet<>();
 
     public CreatureWasCastWatcher() {
-        super(CreatureWasCastWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public CreatureWasCastWatcher(final CreatureWasCastWatcher watcher) {

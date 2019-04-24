@@ -1,7 +1,7 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -9,6 +9,7 @@ import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.hint.common.DeliriumHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -18,13 +19,12 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
- *
  * @author LevelX2
  */
 public final class BackwoodsSurvivalists extends CardImpl {
 
     public BackwoodsSurvivalists(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.subtype.add(SubType.HUMAN, SubType.WARRIOR);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
@@ -33,6 +33,7 @@ public final class BackwoodsSurvivalists extends CardImpl {
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), DeliriumCondition.instance, "<i>Delirium</i> &mdash; {this} gets +1/+1");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance()), DeliriumCondition.instance, "and has trample as long as there are four or more card types among cards in your graveyard."));
+        ability.addHint(DeliriumHint.instance);
         this.addAbility(ability);
     }
 

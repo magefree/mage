@@ -1,16 +1,15 @@
-
 package mage.abilities.effects;
+
+import mage.abilities.Mode;
+import mage.constants.Outcome;
+import mage.target.targetpointer.TargetPointer;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import mage.abilities.Mode;
-import mage.constants.Outcome;
-import mage.target.targetpointer.TargetPointer;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class Effects extends ArrayList<Effect> {
@@ -43,11 +42,25 @@ public class Effects extends ArrayList<Effect> {
     public String getText(Mode mode) {
         StringBuilder sbText = new StringBuilder();
         String lastRule = null;
+        int effectNum = 0;
         for (Effect effect : this) {
             String endString = "";
             String nextRule = effect.getText(mode);
+
+            // ignore empty rules
+            if (nextRule == null || nextRule.isEmpty()) {
+                continue;
+            }
+            effectNum++;
+
+            // concat effects (default: each effect with a new sentence)
+            String concatPrefix = effect.getConcatPrefix();
+            if (effectNum > 1 && !concatPrefix.isEmpty() && !concatPrefix.equals(".")) {
+                nextRule = concatPrefix + " " + nextRule;
+            }
+
             if (nextRule != null) {
-                if (nextRule.startsWith("and ") || nextRule.startsWith("with ")) {
+                if (nextRule.startsWith("and ") || nextRule.startsWith("with ") || nextRule.startsWith("then ")) {
                     endString = " ";
                 } else if (nextRule.startsWith(",") || nextRule.startsWith(" ")) {
                     endString = "";
@@ -63,6 +76,7 @@ public class Effects extends ArrayList<Effect> {
             }
             lastRule = nextRule;
         }
+
         if (lastRule != null && lastRule.length() > 3
                 && !lastRule.endsWith(".")
                 && !lastRule.endsWith("\"")
@@ -71,6 +85,7 @@ public class Effects extends ArrayList<Effect> {
                 && !lastRule.endsWith("</i>")) {
             sbText.append('.');
         }
+
         return sbText.toString();
     }
 

@@ -26,7 +26,7 @@ public final class NantukoShaman extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent();
     static {
-        filter.add(new TappedPredicate());
+        filter.add(TappedPredicate.instance);
     }
 
     public NantukoShaman(UUID ownerId, CardSetInfo setInfo) {

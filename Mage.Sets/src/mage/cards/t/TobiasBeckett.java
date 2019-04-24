@@ -81,7 +81,7 @@ class TobiasBeckettEffect extends OneShotEffect {
                     MageObject sourceObject = game.getObject(source.getSourceId());
                     UUID exileId = CardUtil.getCardExileZoneId(game, source);
                     Card card = opponent.getLibrary().getFromTop(game);
-                    if (card != null) {
+                    if (card != null && sourceObject != null) {
                         // move card to exile
                         controller.moveCardToExileWithInfo(card, exileId, sourceObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
                         // Add effects only if the card has a spellAbility (e.g. not for lands).
@@ -170,6 +170,7 @@ class TobiasBeckettSpendAnyManaEffect extends AsThoughEffectImpl implements AsTh
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        objectId = game.getCard(objectId).getMainCard().getId(); // for split cards
         return source.isControlledBy(affectedControllerId)
                 && Objects.equals(objectId, ((FixedTarget) getTargetPointer()).getTarget())
                 && ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(objectId)

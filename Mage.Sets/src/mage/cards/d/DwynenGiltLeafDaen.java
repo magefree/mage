@@ -24,7 +24,7 @@ public final class DwynenGiltLeafDaen extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(SubType.ELF, "attacking Elf you control");
     static {
-        filter.add(new AttackingPredicate());
+        filter.add(AttackingPredicate.instance);
     }
 
     public DwynenGiltLeafDaen(UUID ownerId, CardSetInfo setInfo) {

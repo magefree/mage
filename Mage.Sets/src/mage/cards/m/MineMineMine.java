@@ -33,7 +33,7 @@ public final class MineMineMine extends CardImpl {
     public MineMineMine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}{G}");
 
-        // When Mine, Mine, Mine enters the battlefield, each player puts his or her library into his or her hand.
+        // When Mine, Mine, Mine enters the battlefield, each player puts their library into their hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new MineMineMineDrawEffect()));
 
         // Players have no maximum hand size and don't lose the game for drawing from an empty library.
@@ -45,7 +45,7 @@ public final class MineMineMine extends CardImpl {
         // Each player can't cast more than one spell each turn.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantCastMoreThanOneSpellEffect(TargetController.ANY)));
 
-        // When Mine, Mine, Mine leaves the battlefield, each player shuffles his or her hand and graveyard into his or her library.
+        // When Mine, Mine, Mine leaves the battlefield, each player shuffles their hand and graveyard into their library.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new ShuffleHandGraveyardAllEffect(), false));
     }
 

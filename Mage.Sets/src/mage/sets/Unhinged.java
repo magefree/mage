@@ -27,6 +27,7 @@ public final class Unhinged extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodletter", 50, Rarity.COMMON, mage.cards.b.Bloodletter.class));
         cards.add(new SetCardInfo("Booster Tutor", 51, Rarity.UNCOMMON, mage.cards.b.BoosterTutor.class));
         cards.add(new SetCardInfo("Double Header", 31, Rarity.COMMON, mage.cards.d.DoubleHeader.class));
+        cards.add(new SetCardInfo("Elvish House Party", 94, Rarity.UNCOMMON, mage.cards.e.ElvishHouseParty.class));
         cards.add(new SetCardInfo("First Come, First Served", 12, Rarity.UNCOMMON, mage.cards.f.FirstComeFirstServed.class));
         cards.add(new SetCardInfo("Forest", 140, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(FrameStyle.UNH_FULL_ART_BASIC, false)));
         cards.add(new SetCardInfo("Form of the Squirrel", 96, Rarity.RARE, mage.cards.f.FormOfTheSquirrel.class));
@@ -39,8 +40,10 @@ public final class Unhinged extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 139, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(FrameStyle.UNH_FULL_ART_BASIC, false)));
         cards.add(new SetCardInfo("Mox Lotus", 124, Rarity.RARE, mage.cards.m.MoxLotus.class));
         cards.add(new SetCardInfo("Now I Know My ABC's", 41, Rarity.RARE, mage.cards.n.NowIKnowMyABCs.class));
+        cards.add(new SetCardInfo("Old Fogey", 106, Rarity.RARE, mage.cards.o.OldFogey.class));
         cards.add(new SetCardInfo("Plains", 136, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(FrameStyle.UNH_FULL_ART_BASIC, false)));
         cards.add(new SetCardInfo("Rare-B-Gone", 119, Rarity.RARE, mage.cards.r.RareBGone.class));
+        cards.add(new SetCardInfo("Rod of Spanking", 127, Rarity.UNCOMMON, mage.cards.r.RodOfSpanking.class));
         cards.add(new SetCardInfo("Six-y Beast", 89, Rarity.UNCOMMON, mage.cards.s.SixyBeast.class));
         cards.add(new SetCardInfo("Swamp", 138, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.UNH_FULL_ART_BASIC, false)));
         cards.add(new SetCardInfo("Symbol Status", 114, Rarity.UNCOMMON, mage.cards.s.SymbolStatus.class));

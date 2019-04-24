@@ -99,7 +99,7 @@ class OKagachiVengefulKamiTriggeredAbility extends TriggeredAbilityImpl {
             UUID you = this.getControllerId();
             Permanent p = game.getPermanent(event.getSourceId());
             if (damageEvent.isCombatDamage() && p != null && p.getId().equals(this.getSourceId())) {
-                PlayersAttackedLastTurnWatcher watcher = (PlayersAttackedLastTurnWatcher) game.getState().getWatchers().get(PlayersAttackedLastTurnWatcher.class.getSimpleName());
+                PlayersAttackedLastTurnWatcher watcher = game.getState().getWatcher(PlayersAttackedLastTurnWatcher.class);
                 if (watcher != null && watcher.attackedLastTurn(damagedPlayerId, you)) {
                     FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanent defending player controls");
                     filter.add(new ControllerIdPredicate(damagedPlayerId));

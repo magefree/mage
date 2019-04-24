@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -14,16 +13,18 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.TeysaEnvoyOfGhostsToken;
+import mage.game.permanent.token.WhiteBlackSpiritToken;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
+
 /**
- *
  * @author LevelX2
  */
 public final class TeysaEnvoyOfGhosts extends CardImpl {
@@ -60,7 +61,7 @@ class TeysaEnvoyOfGhostsTriggeredAbility extends TriggeredAbilityImpl {
 
     public TeysaEnvoyOfGhostsTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect());
-        this.addEffect(new CreateTokenEffect(new TeysaEnvoyOfGhostsToken(), 1));
+        this.addEffect(new CreateTokenEffect(new WhiteBlackSpiritToken(), 1));
 
     }
 

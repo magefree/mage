@@ -45,7 +45,7 @@ public final class CommitMemory extends SplitCard {
         // Memory
         // Aftermath
         // Each player shuffles their hand and graveyard into their library, then draws seven cards.
-        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility().setRuleAtTheTop(true));
+        getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
         getRightHalfCard().getSpellAbility().addEffect(new ShuffleHandGraveyardAllEffect());
         Effect effect = new DrawCardAllEffect(7);
         effect.setText(", then draws seven cards");
@@ -82,7 +82,7 @@ class CommitEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+            Permanent permanent = game.getPermanent(source.getFirstTarget());
             if (permanent != null) {
                 return controller.putCardOnTopXOfLibrary(permanent, game, source, 2);
             }

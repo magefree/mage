@@ -32,7 +32,7 @@ public final class MythUnbound extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent();
 
     static {
-        filter.add(new CommanderPredicate());
+        filter.add(CommanderPredicate.instance);
         filter.add(new OwnerPredicate(TargetController.YOU));
     }
 
@@ -78,9 +78,9 @@ class MythUnboundCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        Ability spellAbility = (SpellAbility) abilityToModify;
+        Ability spellAbility = abilityToModify;
         if (spellAbility != null) {
-            Integer amount = (Integer) game.getState().getValue(abilityToModify.getControllerId() + "_castCount");
+            Integer amount = (Integer) game.getState().getValue(abilityToModify.getSourceId() + "_castCount");
             if (amount != null && amount > 0) {
                 CardUtil.reduceCost(spellAbility, amount);
                 return true;
@@ -99,7 +99,7 @@ class MythUnboundCostReductionEffect extends CostModificationEffectImpl {
             if (abilityToModify.isControlledBy(source.getControllerId())) {
                 Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
                 if (spell != null) {
-                    return player.getCommandersIds().contains(spell.getId());
+                    return player.getCommandersIds().contains(spell.getSourceId());
                 }
             }
         }

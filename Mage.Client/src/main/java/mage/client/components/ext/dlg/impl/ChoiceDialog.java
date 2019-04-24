@@ -50,11 +50,12 @@ public class ChoiceDialog extends IDialogPanel {
     private boolean isCancelStopsPlaying = true;
 
     private final DlgParams params;
-    
+
     private final String title;
 
     /**
      * This is the default constructor
+     *
      * @param params
      * @param title
      */
@@ -130,18 +131,18 @@ public class ChoiceDialog extends IDialogPanel {
             return;
         }
 
-        ArrayList<Component> toRemove = new ArrayList<>();
+        java.util.List<Component> toRemove = new ArrayList<>();
         for (int i = getComponentCount() - 1; i > 0; i--) {
             Component o = getComponent(i);
             if (o instanceof MageCard) {
                 toRemove.add(o);
             }
         }
-        for (int i = 0; i < toRemove.size(); i++) {
-            remove(toRemove.get(i));
+        for (Component aToRemove : toRemove) {
+            remove(aToRemove);
         }
 
-        ArrayList<CardView> cardList = new ArrayList<>(cards.values());
+        java.util.List<CardView> cardList = new ArrayList<>(cards.values());
 
         int width = SettingsManager.instance.getCardSize().width;
         int height = SettingsManager.instance.getCardSize().height;
@@ -163,7 +164,7 @@ public class ChoiceDialog extends IDialogPanel {
             CardView card = cardList.get(i);
             MageCard cardImg = Plugins.instance.getMageCard(card, bigCard, getCardDimension(), gameId, true, true);
 
-            cardImg.setLocation(dx, dy + j*(height + 30));
+            cardImg.setLocation(dx, dy + j * (height + 30));
             add(cardImg);
 
             dx += (width + 20);
@@ -237,11 +238,8 @@ public class ChoiceDialog extends IDialogPanel {
             int h = getDlgParams().rect.height - 90;
             jButtonNextPage.setBounds(new Rectangle(w / 2 + 45, h - 50, 60, 60));
 
-            if (maxPages > 1) {
-                jButtonNextPage.setVisible(true);
-            } else {
-                jButtonNextPage.setVisible(false);
-            }
+            jButtonNextPage.setVisible(maxPages > 1);
+
 
             jButtonNextPage.setObserver(new Command() {
                 private static final long serialVersionUID = -3174360416099554104L;

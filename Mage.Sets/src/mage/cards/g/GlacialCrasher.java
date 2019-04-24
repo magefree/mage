@@ -1,7 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -18,14 +16,15 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class GlacialCrasher extends CardImpl {
 
     public GlacialCrasher(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
         this.subtype.add(SubType.ELEMENTAL);
 
         this.power = new MageInt(5);
@@ -71,16 +70,14 @@ class GlacialCrasherEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Game game) {
+    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
         return false;
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getId().equals(source.getSourceId())) {
-            if (game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) < 1) {
-                return true;
-            }
+            return game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) < 1;
         }
         return false;
     }

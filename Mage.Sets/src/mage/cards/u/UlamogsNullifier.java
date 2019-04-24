@@ -68,7 +68,7 @@ public final class UlamogsNullifier extends CardImpl {
 
 class UlamogsNullifierEffect extends OneShotEffect {
 
-    private final static FilterCard filter = new FilterCard("cards your opponents own from exile");
+    private static final FilterCard filter = new FilterCard("cards your opponents own from exile");
 
     static {
         filter.add(new OwnerPredicate(TargetController.OPPONENT));

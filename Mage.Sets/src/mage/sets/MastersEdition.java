@@ -175,6 +175,7 @@ public final class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Scryb Sprites", 128, Rarity.COMMON, mage.cards.s.ScrybSprites.class));
         cards.add(new SetCardInfo("Seasinger", 49, Rarity.UNCOMMON, mage.cards.s.Seasinger.class));
         cards.add(new SetCardInfo("Sea Sprite", 48, Rarity.COMMON, mage.cards.s.SeaSprite.class));
+        cards.add(new SetCardInfo("Seraph", 26, Rarity.RARE, mage.cards.s.Seraph.class));
         cards.add(new SetCardInfo("Serendib Efreet", 50, Rarity.RARE, mage.cards.s.SerendibEfreet.class));
         cards.add(new SetCardInfo("Serpent Generator", 164, Rarity.RARE, mage.cards.s.SerpentGenerator.class));
         cards.add(new SetCardInfo("Shambling Strider", 129, Rarity.COMMON, mage.cards.s.ShamblingStrider.class));

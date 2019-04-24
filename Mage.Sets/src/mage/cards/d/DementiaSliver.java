@@ -1,6 +1,5 @@
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -18,9 +17,11 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class DementiaSliver extends CardImpl {
@@ -44,9 +45,9 @@ public final class DementiaSliver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(gainedAbility, Duration.WhileOnBattlefield, filter,
                         "All Slivers have \"{T}: Choose a card name. "
-                        + "Target opponent reveals a card at random from their hand."
-                        + " If that card has the chosen name, that player discards it."
-                        + " Activate this ability only during your turn.\""
+                                + "Target opponent reveals a card at random from their hand."
+                                + " If that card has the chosen name, that player discards it."
+                                + " Activate this ability only during your turn.\""
                 )
         ));
     }
@@ -84,7 +85,7 @@ class DementiaSliverEffect extends OneShotEffect {
                 if (card != null) {
                     revealed.add(card);
                     opponent.revealCards(sourceObject.getName(), revealed, game);
-                    if (card.getName().equals(cardName)) {
+                    if (CardUtil.haveSameNames(card.getName(), cardName)) {
                         opponent.discard(card, source, game);
                     }
                 }

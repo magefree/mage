@@ -14,7 +14,7 @@ import mage.client.util.ClientEventType;
 import mage.client.util.Event;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.Listener;
-import mage.utils.CardUtil;
+import mage.utils.CardColorUtil;
 import mage.view.CardView;
 import mage.view.CardsView;
 import org.mage.card.arcane.CardPanel;
@@ -172,8 +172,8 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
                             }
                             break;
                         case COLOR_IDENTITY:
-                            if (CardUtil.getColorIdentitySortValue(cardImg.getOriginal().getManaCost(), cardImg.getOriginal().getColor(), cardImg.getOriginal().getRules())
-                                    != CardUtil.getColorIdentitySortValue(lastCard.getOriginal().getManaCost(), lastCard.getOriginal().getColor(), lastCard.getOriginal().getRules())) {
+                            if (CardColorUtil.getColorIdentitySortValue(cardImg.getOriginal().getManaCost(), cardImg.getOriginal().getColor(), cardImg.getOriginal().getRules())
+                                    != CardColorUtil.getColorIdentitySortValue(lastCard.getOriginal().getManaCost(), lastCard.getOriginal().getColor(), lastCard.getOriginal().getRules())) {
                                 curColumn++;
                                 curRow = 0;
                             }
@@ -404,8 +404,8 @@ class CardColorDetailedIdentity implements Comparator<MageCard> {
 
     @Override
     public int compare(MageCard o1, MageCard o2) {
-        int val = CardUtil.getColorIdentitySortValue(o1.getOriginal().getManaCost(), o1.getOriginal().getColor(), o1.getOriginal().getRules())
-                - CardUtil.getColorIdentitySortValue(o2.getOriginal().getManaCost(), o2.getOriginal().getColor(), o2.getOriginal().getRules());
+        int val = CardColorUtil.getColorIdentitySortValue(o1.getOriginal().getManaCost(), o1.getOriginal().getColor(), o1.getOriginal().getRules())
+                - CardColorUtil.getColorIdentitySortValue(o2.getOriginal().getManaCost(), o2.getOriginal().getColor(), o2.getOriginal().getRules());
         if (val == 0) {
             return o1.getOriginal().getName().compareTo(o2.getOriginal().getName());
         } else {

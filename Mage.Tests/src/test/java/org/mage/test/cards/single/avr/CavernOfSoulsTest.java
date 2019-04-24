@@ -2,6 +2,7 @@ package org.mage.test.cards.single.avr;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -197,6 +198,7 @@ public class CavernOfSoulsTest extends CardTestPlayerBase {
      *
      */
     @Test
+    @Ignore
     public void testCastWithColorlessManaCanBeCountered() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
         addCard(Zone.HAND, playerA, "Cavern of Souls");

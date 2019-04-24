@@ -27,7 +27,7 @@ public final class ConsumeTheMeek extends CardImpl {
 
 
         // Destroy each creature with converted mana cost 3 or less. They can't be regenerated.
-        this.getSpellAbility().addEffect(new DestroyAllEffect(filter, false));
+        this.getSpellAbility().addEffect(new DestroyAllEffect(filter, true));
     }
 
     public ConsumeTheMeek(final ConsumeTheMeek card) {

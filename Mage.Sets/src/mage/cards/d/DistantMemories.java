@@ -62,7 +62,7 @@ class DistantMemoriesEffect extends OneShotEffect {
         }
 
         TargetCardInLibrary target = new TargetCardInLibrary();
-        if (player.searchLibrary(target, game)) {
+        if (player.searchLibrary(target, source, game)) {
             Card card = player.getLibrary().remove(target.getFirstTarget(), game);
             if (card != null) {
                 card.moveToZone(Zone.EXILED, source.getSourceId(), game, false);

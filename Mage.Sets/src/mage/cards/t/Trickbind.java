@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RestrictionEffect;
@@ -17,14 +15,15 @@ import mage.game.stack.StackObject;
 import mage.target.common.TargetActivatedOrTriggeredAbility;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class Trickbind extends CardImpl {
 
     public Trickbind(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
 
         // Split second
@@ -64,7 +63,7 @@ class TrickbindCounterEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         StackObject stackObject = game.getStack().getStackObject(source.getFirstTarget());
-        if(stackObject != null && game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game)) {
+        if (stackObject != null && game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game)) {
             TrickbindCantActivateEffect effect = new TrickbindCantActivateEffect();
             effect.setTargetPointer(new FixedTarget(stackObject.getSourceId()));
             game.getContinuousEffects().addEffect(effect, source);
@@ -92,7 +91,7 @@ class TrickbindCantActivateEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game) {
+    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game, boolean canUseChooseDialogs) {
         return false;
     }
 

@@ -28,12 +28,12 @@ import mage.util.SubTypeList;
  */
 public final class EarlOfSquirrel extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Creature tokens you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creature tokens you control");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Other squirrels you control");
 
 
     static {
-        filter.add(new TokenPredicate());
+        filter.add(TokenPredicate.instance);
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter2.add(new SubtypePredicate(SubType.SQUIRREL));
     }

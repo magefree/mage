@@ -1,7 +1,5 @@
-
 package mage.abilities.costs.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
@@ -11,8 +9,9 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class TapTargetCost extends CostImpl {
@@ -22,6 +21,7 @@ public class TapTargetCost extends CostImpl {
     public TapTargetCost(TargetControlledPermanent target) {
         this.target = target;
         this.target.setNotTarget(true); // costs are never targeted
+        this.target.setRequired(false); // can be cancel by user
         this.text
                 = new StringBuilder("Tap ")
                 .append((target.getTargetName().startsWith("a ") || target.getTargetName().startsWith("an ") || target.getTargetName().startsWith("another"))
@@ -52,7 +52,7 @@ public class TapTargetCost extends CostImpl {
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         return target.canChoose(sourceId, controllerId, game);
     }
-    
+
     public TargetControlledPermanent getTarget() {
         return target;
     }

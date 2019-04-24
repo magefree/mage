@@ -1,4 +1,3 @@
-
 package mage.abilities.keyword;
 
 import mage.abilities.Ability;
@@ -110,15 +109,13 @@ class UnleashRestrictionEffect extends RestrictionEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent != null && permanent.getId().equals(source.getSourceId())) {
-            if (permanent.getCounters(game).getCount(CounterType.P1P1) > 0) {
-                return true;
-            }
+            return permanent.getCounters(game).getCount(CounterType.P1P1) > 0;
         }
         return false;
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         return false;
     }
 

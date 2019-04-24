@@ -29,7 +29,7 @@ public final class KarnConstructToken extends TokenImpl {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
-    final static private List<String> tokenImageSets = new ArrayList<>();
+    static final private List<String> tokenImageSets = new ArrayList<>();
     static {
         tokenImageSets.addAll(Arrays.asList("DOM"));
     }

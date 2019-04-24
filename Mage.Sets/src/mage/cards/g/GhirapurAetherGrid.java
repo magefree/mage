@@ -26,7 +26,7 @@ public final class GhirapurAetherGrid extends CardImpl {
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public GhirapurAetherGrid(UUID ownerId, CardSetInfo setInfo) {
@@ -36,7 +36,7 @@ public final class GhirapurAetherGrid extends CardImpl {
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DamageTargetEffect(1),
                 new TapTargetCost(new TargetControlledPermanent(2, 2, filter, true)));
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetAnyTarget().withChooseHint("deals 1 damage to"));
         this.addAbility(ability);
     }
 

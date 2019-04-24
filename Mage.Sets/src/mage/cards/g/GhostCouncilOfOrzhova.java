@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -43,8 +42,13 @@ public final class GhostCouncilOfOrzhova extends CardImpl {
         this.addAbility(ability);
 
         // {1}, Sacrifice a creature: Exile Ghost Council of Orzhova. Return it to the battlefield under its owner's control at the beginning of the next end step.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileReturnBattlefieldOwnerNextEndStepSourceEffect(true), new GenericManaCost(1));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        ability = new SimpleActivatedAbility(
+                Zone.BATTLEFIELD,
+                new ExileReturnBattlefieldOwnerNextEndStepSourceEffect(true),
+                new GenericManaCost(1));
+        ability.addCost(new SacrificeTargetCost(
+                new TargetControlledCreaturePermanent(
+                        FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.addAbility(ability);
     }
 
@@ -62,7 +66,7 @@ public final class GhostCouncilOfOrzhova extends CardImpl {
 class GhostCouncilOfOrzhovaEffect extends OneShotEffect {
 
     GhostCouncilOfOrzhovaEffect() {
-        super(Outcome.Damage);
+        super(Outcome.GainLife);
         staticText = "target opponent loses 1 life and you gain 1 life";
     }
 
@@ -73,10 +77,12 @@ class GhostCouncilOfOrzhovaEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        Player controllerPlayer = game.getPlayer(source.getControllerId());
-        if (targetPlayer != null && controllerPlayer != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (targetPlayer != null 
+                && controller != null) {
             targetPlayer.loseLife(1, game, false);
-            controllerPlayer.gainLife(1, game, source);
+            controller.gainLife(1, game, source);
+            return true;
         }
         return false;
     }

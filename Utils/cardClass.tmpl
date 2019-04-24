@@ -3,7 +3,7 @@ package mage.cards.[=$cardNameFirstLetter=];
 import java.util.UUID;[=
 if ($power || $power eq 0) {
     if ($planeswalker eq 'true') {
-        $OUT .= "\nimport mage.abilities.common.PlaneswalkerEntersWithLoyalityCountersAbility;"
+        $OUT .= "\nimport mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;"
     }else {
         $OUT .= "\nimport mage.MageInt;"
     }
@@ -30,7 +30,7 @@ public final class [=$className=] extends CardImpl {
         [=$subType=][=$colors=][=
 if ($power || $power eq 0) {
     if ($planeswalker eq 'true') {
-        $OUT .= "\n        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility($power));";
+        $OUT .= "\n        this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility($power));";
     } else {
         $OUT .= "\n        this.power = new MageInt($power);";
         $OUT .= "\n        this.toughness = new MageInt($toughness);";
@@ -39,7 +39,7 @@ if ($power || $power eq 0) {
 =][=$abilities=]
     }
 
-    public [=$className=](final [=$className=] card) {
+    private [=$className=](final [=$className=] card) {
         super(card);
     }
 

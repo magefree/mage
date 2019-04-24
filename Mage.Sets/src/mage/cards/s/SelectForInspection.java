@@ -20,7 +20,7 @@ public final class SelectForInspection extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 
     static {
-        filter.add(new TappedPredicate());
+        filter.add(TappedPredicate.instance);
     }
 
     public SelectForInspection(UUID ownerId, CardSetInfo setInfo) {

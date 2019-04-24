@@ -26,7 +26,7 @@ public final class Whetwheel extends CardImpl {
 
         // {X}{X}, {tap}: Target player puts the top X cards of their library into their graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(
-            new ManacostVariableValue()), new ManaCostsImpl("{X}{X}"));
+            ManacostVariableValue.instance), new ManaCostsImpl("{X}{X}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

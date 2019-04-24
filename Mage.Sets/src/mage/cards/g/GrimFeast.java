@@ -91,7 +91,7 @@ class GrimFeastEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent creature = game.getPermanentOrLKIBattlefield(source.getFirstTarget());
+        Permanent creature = game.getPermanentOrLKIBattlefield(targetPointer.getFirst(game, source));
         if (creature == null) {
             return false;
         }

@@ -7,10 +7,10 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 
 /**
- *
  * @author North
  */
-public class TokenPredicate implements Predicate<Permanent> {
+public enum TokenPredicate implements Predicate<Permanent> {
+    instance;
 
     @Override
     public boolean apply(Permanent input, Game game) {

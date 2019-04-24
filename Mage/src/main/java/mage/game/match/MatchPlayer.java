@@ -1,13 +1,13 @@
-
 package mage.game.match;
 
-import java.io.Serializable;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
+import mage.cards.decks.DeckValidator;
 import mage.players.Player;
 
+import java.io.Serializable;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class MatchPlayer implements Serializable {
@@ -78,9 +78,9 @@ public class MatchPlayer implements Serializable {
         this.deck = deck;
     }
 
-    public Deck generateDeck() {
-        //TODO: improve this
-        while (deck.getCards().size() < 40 && !deck.getSideboard().isEmpty()) {
+    public Deck generateDeck(DeckValidator deckValidator) {
+        // auto complete deck
+        while (deck.getCards().size() < deckValidator.getDeckMinSize() && !deck.getSideboard().isEmpty()) {
             Card card = deck.getSideboard().iterator().next();
             deck.getCards().add(card);
             deck.getSideboard().remove(card);

@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -21,8 +20,9 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class AquamorphEntity extends CardImpl {
@@ -42,7 +42,7 @@ public final class AquamorphEntity extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{U}")));
     }
 
-    public AquamorphEntity(final AquamorphEntity card) {
+    private AquamorphEntity(final AquamorphEntity card) {
         super(card);
     }
 
@@ -57,12 +57,12 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
     private static final String choice51 = "a 5/1 creature";
     private static final String choice15 = "a 1/5 creature";
 
-    public AquamorphEntityReplacementEffect() {
+    AquamorphEntityReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "as {this} enters the battlefield or is turned face up, it becomes your choice of 5/1 or 1/5";
     }
 
-    public AquamorphEntityReplacementEffect(AquamorphEntityReplacementEffect effect) {
+    private AquamorphEntityReplacementEffect(AquamorphEntityReplacementEffect effect) {
         super(effect);
     }
 
@@ -103,34 +103,32 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
         } else {
             permanent = game.getPermanent(event.getTargetId());
         }
-        if (permanent != null) {
-            Choice choice = new ChoiceImpl(true);
-            choice.setMessage("Choose what the creature becomes to");
-            choice.getChoices().add(choice51);
-            choice.getChoices().add(choice15);
-            Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null) {
-                if (!controller.choose(Outcome.Neutral, choice, game)) {
-                    discard();
-                    return false;
-                }
-            }
-            int power = 0;
-            int toughness = 0;
-            switch (choice.getChoice()) {
-                case choice51:
-                    power = 5;
-                    toughness = 1;
-                    break;
-                case choice15:
-                    power = 1;
-                    toughness = 5;
-                    break;
-            }
-            game.addEffect(new SetPowerToughnessSourceEffect(power, toughness, Duration.Custom, SubLayer.SetPT_7b), source);
+        if (permanent == null) {
+            return false;
         }
-        return false;
-
+        Choice choice = new ChoiceImpl(true);
+        choice.setMessage("Choose what the creature becomes to");
+        choice.getChoices().add(choice51);
+        choice.getChoices().add(choice15);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null && !controller.choose(Outcome.Neutral, choice, game)) {
+            discard();
+            return false;
+        }
+        int power = 0;
+        int toughness = 0;
+        switch (choice.getChoice()) {
+            case choice51:
+                power = 5;
+                toughness = 1;
+                break;
+            case choice15:
+                power = 1;
+                toughness = 5;
+                break;
+        }
+        game.addEffect(new SetPowerToughnessSourceEffect(power, toughness, Duration.Custom, SubLayer.SetPT_7b), source);
+        return true;
     }
 
     @Override

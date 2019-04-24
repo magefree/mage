@@ -26,7 +26,7 @@ public final class GruulWarChant extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creatures you control");
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new AttackingPredicate());
+        filter.add(AttackingPredicate.instance);
     }
 
     public GruulWarChant(UUID ownerId, CardSetInfo setInfo) {

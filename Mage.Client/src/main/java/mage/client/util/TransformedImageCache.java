@@ -5,16 +5,16 @@
  */
 package mage.client.util;
 
-import com.google.common.base.Function;
-import com.google.common.collect.MapMaker;
-import com.mortennobel.imagescaling.ResampleOp;
-import java.awt.Graphics2D;
-import java.awt.GraphicsConfiguration;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.Transparency;
+import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.Map;
+
+import javax.annotation.Nullable;
+
+import com.google.common.base.Function;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
+import com.mortennobel.imagescaling.ResampleOp;
 
 /**
  *
@@ -22,7 +22,7 @@ import java.util.Map;
  */
 public final class TransformedImageCache {
 
-    private final static class Key {
+    private static final class Key {
 
         final int width;
         final int height;
@@ -68,19 +68,23 @@ public final class TransformedImageCache {
         }
     }
 
-    private static final Map<Key, Map<BufferedImage, BufferedImage>> IMAGE_CACHE;
+    private static final SoftValuesLoadingCache<Key, SoftValuesLoadingCache<BufferedImage, BufferedImage>> IMAGE_CACHE;
 
     static {
         // TODO: can we use a single map?
-        IMAGE_CACHE = ImageCaches.register(new MapMaker().softValues().makeComputingMap((Function<Key, Map<BufferedImage, BufferedImage>>) key -> new MapMaker().weakKeys().softValues().makeComputingMap(image -> {
+        IMAGE_CACHE = ImageCaches.register(SoftValuesLoadingCache.from(TransformedImageCache::createTransformedImageCache));
+    }
+
+    private static SoftValuesLoadingCache<BufferedImage, BufferedImage> createTransformedImageCache(Key key) {
+        return SoftValuesLoadingCache.from(image -> {
             if (key.width != image.getWidth() || key.height != image.getHeight()) {
                 image = resizeImage(image, key.width, key.height);
             }
             if (key.angle != 0.0) {
                 image = rotateImage(image, key.angle);
             }
-            return image;
-        })));
+            return image;           
+        });
     }
 
     private static BufferedImage rotateImage(BufferedImage image, double angle) {
@@ -145,6 +149,6 @@ public final class TransformedImageCache {
         if (resHeight < 3) {
             resHeight = 3;
         }
-        return IMAGE_CACHE.get(new Key(resWidth, resHeight, angle)).get(image);
+        return IMAGE_CACHE.getOrThrow(new Key(resWidth, resHeight, angle)).getOrThrow(image);
     }
 }

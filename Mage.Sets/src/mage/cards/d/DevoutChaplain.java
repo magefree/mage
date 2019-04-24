@@ -30,7 +30,7 @@ public final class DevoutChaplain extends CardImpl {
     private static final FilterControlledPermanent humanFilter = new FilterControlledPermanent("untapped Human you control");
 
     static {
-        humanFilter.add(Predicates.not(new TappedPredicate()));
+        humanFilter.add(Predicates.not(TappedPredicate.instance));
         humanFilter.add(new SubtypePredicate(SubType.HUMAN));
     }
 

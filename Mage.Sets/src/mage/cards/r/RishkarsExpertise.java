@@ -19,7 +19,7 @@ public final class RishkarsExpertise extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}{G}");
 
         // Draw cards equal to the greatest power among creatures you control.
-        Effect effect = new DrawCardSourceControllerEffect(new GreatestPowerAmongControlledCreaturesValue());
+        Effect effect = new DrawCardSourceControllerEffect(GreatestPowerAmongControlledCreaturesValue.instance);
         effect.setText("Draw cards equal to the greatest power among creatures you control");
         this.getSpellAbility().addEffect(effect);
 

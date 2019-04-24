@@ -1,18 +1,18 @@
-
 package org.mage.test.serverside.base;
 
-import java.io.FileNotFoundException;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 import mage.game.Game;
 import mage.game.GameException;
 import mage.game.TwoPlayerDuel;
-import mage.player.ai.ComputerPlayer7;
+import mage.game.mulligan.VancouverMulligan;
+import org.mage.test.player.TestComputerPlayer7;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl;
 
+import java.io.FileNotFoundException;
+
 /**
- *
  * @author LevelX2
  */
 public abstract class CardTestPlayerBaseAI extends CardTestPlayerAPIImpl {
@@ -21,7 +21,7 @@ public abstract class CardTestPlayerBaseAI extends CardTestPlayerAPIImpl {
 
     @Override
     protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
-        Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ONE, 0, 20);
+        Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ONE, new VancouverMulligan(0), 20);
 
         playerA = createPlayer(game, playerA, "PlayerA");
         playerB = createPlayer(game, playerB, "PlayerB");
@@ -31,7 +31,7 @@ public abstract class CardTestPlayerBaseAI extends CardTestPlayerAPIImpl {
     @Override
     protected TestPlayer createPlayer(String name, RangeOfInfluence rangeOfInfluence) {
         if (name.equals("PlayerA")) {
-            TestPlayer testPlayer = new TestPlayer(new ComputerPlayer7("PlayerA", RangeOfInfluence.ONE, skill));
+            TestPlayer testPlayer = new TestPlayer(new TestComputerPlayer7("PlayerA", RangeOfInfluence.ONE, skill));
             testPlayer.setAIPlayer(true);
             return testPlayer;
         }

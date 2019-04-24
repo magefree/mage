@@ -21,7 +21,7 @@ public class PlayerDamagedBySourceWatcher extends Watcher {
     private final Set<String> damageSourceIds = new HashSet<>();
 
     public PlayerDamagedBySourceWatcher(UUID playerId) {
-        super(PlayerDamagedBySourceWatcher.class.getSimpleName(), WatcherScope.PLAYER);
+        super(WatcherScope.PLAYER);
         setControllerId(playerId);
     }
 
@@ -30,10 +30,6 @@ public class PlayerDamagedBySourceWatcher extends Watcher {
         this.damageSourceIds.addAll(watcher.damageSourceIds);
     }
 
-    @Override
-    public PlayerDamagedBySourceWatcher copy() {
-        return new PlayerDamagedBySourceWatcher(this);
-    }
 
     @Override
     public void watch(GameEvent event, Game game) {

@@ -66,7 +66,7 @@ class WingPunctureEffect extends OneShotEffect {
             sourcePermanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
         }
 
-        Permanent targetPermanent = (Permanent) game.getPermanent(source.getTargets().get(1).getFirstTarget());
+        Permanent targetPermanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (sourcePermanent != null && targetPermanent != null) {
             targetPermanent.damage(sourcePermanent.getPower().getValue(), sourcePermanent.getId(), game, false, true);
             return true;

@@ -40,7 +40,7 @@ public final class GhoulcallerGisa extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {B}, {tap}, Sacrifice another creature: create X 2/2 black Zombie creature tokens, where X is the sacrificed creature's power.
-        DynamicValue xValue = new SacrificeCostCreaturesPower();
+        DynamicValue xValue = SacrificeCostCreaturesPower.instance;
         Token zombie = new ZombieToken();
         zombie.setTokenType(2);
         Effect effect = new CreateTokenEffect(zombie, xValue);

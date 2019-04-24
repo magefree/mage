@@ -45,7 +45,7 @@ public final class RuinInTheirWake extends CardImpl {
 
 class RuinInTheirWakeEffect extends OneShotEffect {
 
-    private final static FilterLandPermanent filterWastes = new FilterLandPermanent();
+    private static final FilterLandPermanent filterWastes = new FilterLandPermanent();
 
     static {
         filterWastes.add(new NamePredicate("Wastes"));
@@ -71,7 +71,7 @@ class RuinInTheirWakeEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND);
-            if (controller.searchLibrary(target, game)) {
+            if (controller.searchLibrary(target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     Cards cardsToReveal = new CardsImpl(card);

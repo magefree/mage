@@ -27,7 +27,7 @@ public final class SummonTheSchool extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Merfolk you control");
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
         filter.add(new SubtypePredicate(SubType.MERFOLK));
     }
 

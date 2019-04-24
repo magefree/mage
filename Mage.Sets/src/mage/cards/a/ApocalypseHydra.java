@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -23,14 +22,15 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public final class ApocalypseHydra extends CardImpl {
 
     public ApocalypseHydra(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{X}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{X}{R}{G}");
         this.subtype.add(SubType.HYDRA);
 
         this.power = new MageInt(0);
@@ -46,7 +46,7 @@ public final class ApocalypseHydra extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ApocalypseHydra(final ApocalypseHydra card) {
+    private ApocalypseHydra(final ApocalypseHydra card) {
         super(card);
     }
 
@@ -63,28 +63,29 @@ class ApocalypseHydraEffect extends OneShotEffect {
         staticText = "with X +1/+1 counters on it. If X is 5 or more, it enters the battlefield with an additional X +1/+1 counters on it";
     }
 
-    ApocalypseHydraEffect(final ApocalypseHydraEffect effect) {
+    private ApocalypseHydraEffect(final ApocalypseHydraEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanentEntering(source.getSourceId());
-        if (permanent != null) {
-            SpellAbility spellAbility = (SpellAbility) getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-            if (spellAbility != null
-                    && spellAbility.getSourceId().equals(source.getSourceId())
-                    && permanent.getZoneChangeCounter(game) == spellAbility.getSourceObjectZoneChangeCounter()) {
-                int amount = spellAbility.getManaCostsToPay().getX();
-                if (amount > 0) {
-                    if (amount < 5) {
-                        permanent.addCounters(CounterType.P1P1.createInstance(amount), source, game);
-                    } else {
-                        permanent.addCounters(CounterType.P1P1.createInstance(amount * 2), source, game);
-                    }
-                }
+        if (permanent == null) {
+            return false;
+        }
+        SpellAbility spellAbility = (SpellAbility) getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
+        if (spellAbility == null
+                || !spellAbility.getSourceId().equals(source.getSourceId())
+                || permanent.getZoneChangeCounter(game) != spellAbility.getSourceObjectZoneChangeCounter()) {
+            return false;
+        }
+        int amount = spellAbility.getManaCostsToPay().getX();
+        if (amount > 0) {
+            if (amount < 5) {
+                permanent.addCounters(CounterType.P1P1.createInstance(amount), source, game);
+            } else {
+                permanent.addCounters(CounterType.P1P1.createInstance(amount * 2), source, game);
             }
-            return true;
         }
         return true;
     }

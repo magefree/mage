@@ -1,9 +1,7 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -17,23 +15,25 @@ import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetNonlandPermanent;
+import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.SecondTargetPointer;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class RushingRiver extends CardImpl {
 
     public RushingRiver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");
 
 
         // Kicker-Sacrifice a land.
         this.addAbility(new KickerAbility(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land")))));
 
         // Return target nonland permanent to its owner's hand. If Rushing River was kicked, return another target nonland permanent to its owner's hand.
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());        
+        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         Effect effect = new ConditionalOneShotEffect(
                 new ReturnToHandTargetEffect(),
                 KickedCondition.instance,
@@ -41,16 +41,7 @@ public final class RushingRiver extends CardImpl {
         effect.setTargetPointer(new SecondTargetPointer());
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
-
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SpellAbility && KickedCondition.instance.apply(game, ability)) {
-            ability.getTargets().clear();
-            ability.addTarget(new TargetNonlandPermanent(2));
-        }
-
+        this.getSpellAbility().setTargetAdjuster(RushingRiverAdjuster.instance);
     }
 
     public RushingRiver(final RushingRiver card) {
@@ -60,5 +51,17 @@ public final class RushingRiver extends CardImpl {
     @Override
     public RushingRiver copy() {
         return new RushingRiver(this);
+    }
+}
+
+enum RushingRiverAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        if (KickedCondition.instance.apply(game, ability)) {
+            ability.getTargets().clear();
+            ability.addTarget(new TargetNonlandPermanent(2));
+        }
     }
 }

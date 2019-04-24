@@ -38,7 +38,7 @@ public final class GoldenGuardian extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another target creature you control");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public GoldenGuardian(UUID ownerId, CardSetInfo setInfo) {

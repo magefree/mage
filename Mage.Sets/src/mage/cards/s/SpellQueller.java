@@ -37,7 +37,7 @@ import org.apache.log4j.Logger;
  */
 public final class SpellQueller extends CardImpl {
 
-    private final static FilterSpell filter = new FilterSpell("spell with converted mana cost 4 or less");
+    private static final FilterSpell filter = new FilterSpell("spell with converted mana cost 4 or less");
 
     static {
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 5));

@@ -24,7 +24,7 @@ public final class GlazeFiend extends CardImpl {
 
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("another artifact");
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
     

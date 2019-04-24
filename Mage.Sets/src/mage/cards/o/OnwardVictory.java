@@ -25,12 +25,12 @@ public final class OnwardVictory extends SplitCard {
         // Onward
         // Target creature gets +X/+0 until end of turn where X is its power.
         getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
-        getLeftHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(new TargetPermanentPowerCount(), new StaticValue(0), Duration.EndOfTurn, true));
+        getLeftHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(TargetPermanentPowerCount.instance, new StaticValue(0), Duration.EndOfTurn, true));
 
         // to
         // Victory
         // Target creature gains double strike until end of turn.
-        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility().setRuleAtTheTop(true));
+        getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
         Effect effect = new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn);
         getRightHalfCard().getSpellAbility().addEffect(effect);
         getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());

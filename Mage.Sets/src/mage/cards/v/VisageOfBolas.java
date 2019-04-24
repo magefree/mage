@@ -19,7 +19,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
  */
 public final class VisageOfBolas extends CardImpl {
 
-    private final static FilterCard filter = new FilterCard("Nicol Bolas, the Deceiver");
+    private static final FilterCard filter = new FilterCard("Nicol Bolas, the Deceiver");
 
     static {
         filter.add(new NamePredicate("Nicol Bolas, the Deceiver"));

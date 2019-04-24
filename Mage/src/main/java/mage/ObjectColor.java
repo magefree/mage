@@ -482,7 +482,7 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
     public ColoredManaSymbol getOneColoredManaSymbol() {
 
         if (isMulticolored()) {
-            throw new IllegalStateException("Founded multicolored object, but it's must call with single mana color.");
+            throw new IllegalStateException("Found multicolor object, but was waiting for simple color.");
         }
 
         if (isBlack()) {

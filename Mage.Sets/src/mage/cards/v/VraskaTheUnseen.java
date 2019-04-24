@@ -1,7 +1,5 @@
-
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -12,14 +10,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.DamagedPlaneswalkerEvent;
 import mage.game.events.GameEvent;
@@ -29,14 +20,14 @@ import mage.game.permanent.token.AssassinToken;
 import mage.target.common.TargetNonlandPermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * If an effect creates a copy of one of the Assassin creature tokens, the copy
  * will also have the triggered ability.
- *
+ * <p>
  * Each Assassin token's triggered ability will trigger whenever it deals combat
  * damage to any player, including you.
- *
  *
  * @author LevelX2
  */
@@ -74,24 +65,16 @@ public final class VraskaTheUnseen extends CardImpl {
 class VraskaTheUnseenGainAbilityEffect extends ContinuousEffectImpl {
 
     protected Ability ability;
-    protected int startingTurn;
 
     public VraskaTheUnseenGainAbilityEffect(Ability ability) {
         super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
         staticText = "Until your next turn, whenever a creature deals combat damage to {this}, destroy that creature";
-        startingTurn = 0;
     }
 
     public VraskaTheUnseenGainAbilityEffect(final VraskaTheUnseenGainAbilityEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
-    }
-
-    @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game); //To change body of generated methods, choose Tools | Templates.
-        startingTurn = game.getTurnNum();
     }
 
     @Override
@@ -111,10 +94,8 @@ class VraskaTheUnseenGainAbilityEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        if (startingTurn != 0 && game.getTurnNum() != startingTurn) {
-            if (game.isActivePlayer(source.getControllerId())) {
-                return true;
-            }
+        if (getStartingTurnNum() != 0 && game.getTurnNum() != getStartingTurnNum()) {
+            return game.isActivePlayer(source.getControllerId());
         }
         return false;
     }

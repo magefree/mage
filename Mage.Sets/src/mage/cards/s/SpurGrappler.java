@@ -27,7 +27,7 @@ public final class SpurGrappler extends CardImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent();
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public SpurGrappler(UUID ownerId, CardSetInfo setInfo) {

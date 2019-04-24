@@ -53,7 +53,7 @@ class JaddiLifestriderEffect extends OneShotEffect {
     
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public JaddiLifestriderEffect() {
@@ -78,7 +78,7 @@ class JaddiLifestriderEffect extends OneShotEffect {
                 }
             }
         }
-        if (tappedAmount > 0) {
+        if (tappedAmount > 0 && you != null) {
             you.gainLife(tappedAmount * 2, game, source);
             return true;
         }

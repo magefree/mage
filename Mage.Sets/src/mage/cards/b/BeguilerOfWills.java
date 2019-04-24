@@ -1,12 +1,11 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
+import mage.abilities.hint.common.CreaturesYouControlHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -18,14 +17,15 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class BeguilerOfWills extends CardImpl {
 
     public BeguilerOfWills(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         this.subtype.add(SubType.HUMAN, SubType.WIZARD);
 
         this.power = new MageInt(1);
@@ -36,6 +36,7 @@ public final class BeguilerOfWills extends CardImpl {
                 new GainControlTargetEffect(Duration.Custom),
                 new TapSourceCost());
         ability.addTarget(new BeguilerOfWillsTarget());
+        ability.addHint(CreaturesYouControlHint.instance);
         this.addAbility(ability);
     }
 

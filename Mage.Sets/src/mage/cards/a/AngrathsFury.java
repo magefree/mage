@@ -20,7 +20,7 @@ import mage.target.targetpointer.SecondTargetPointer;
  */
 public final class AngrathsFury extends CardImpl {
 
-    private final static FilterCard filter = new FilterCard("Angrath, Minotaur Pirate");
+    private static final FilterCard filter = new FilterCard("Angrath, Minotaur Pirate");
 
     static {
         filter.add(new NamePredicate(filter.getMessage()));

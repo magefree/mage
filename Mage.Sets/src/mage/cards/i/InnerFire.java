@@ -20,7 +20,7 @@ public final class InnerFire extends CardImpl {
 
 
         // Add {R} for each card in your hand.
-        this.getSpellAbility().addEffect(new DynamicManaEffect(Mana.RedMana(1), new CardsInControllerHandCount()));
+        this.getSpellAbility().addEffect(new DynamicManaEffect(Mana.RedMana(1), CardsInControllerHandCount.instance));
     }
 
     public InnerFire(final InnerFire card) {

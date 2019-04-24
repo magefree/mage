@@ -74,7 +74,7 @@ class SphinxAmbassadorEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && targetPlayer != null && sourcePermanent != null) {
             TargetCardInLibrary target = new TargetCardInLibrary();
-            controller.searchLibrary(target, game, targetPlayer.getId());
+            controller.searchLibrary(target, source, game, targetPlayer.getId());
 
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {

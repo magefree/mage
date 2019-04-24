@@ -21,7 +21,7 @@ public final class BlueSunsZenith extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{U}{U}{U}");
 
         // Target player draws X cards. Shuffle Blue Sun's Zenith into its owner's library.
-        this.getSpellAbility().addEffect(new DrawCardTargetEffect(new ManacostVariableValue()));
+        this.getSpellAbility().addEffect(new DrawCardTargetEffect(ManacostVariableValue.instance));
         this.getSpellAbility().addEffect(ShuffleSpellEffect.getInstance());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }

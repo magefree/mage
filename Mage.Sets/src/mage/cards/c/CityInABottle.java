@@ -139,7 +139,7 @@ class CityInABottleStateTriggeredAbility extends StateTriggeredAbility {
     private static final FilterPermanent filter = new FilterPermanent("a nontoken permanent originally printed in the Arabian Nights expansion other than City in a Bottle");
 
     static {
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
         filter.add(Predicates.or(getArabianNightsNamePredicates()));
 
     }
@@ -173,7 +173,7 @@ class CityInABottleSacrificeEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterPermanent("a nontoken permanent originally printed in the Arabian Nights expansion other than City in a Bottle");
 
     static {
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
         filter.add(Predicates.or(getArabianNightsNamePredicates()));
     }
 

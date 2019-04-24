@@ -19,7 +19,7 @@ public final class GoblinOffensive extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{1}{R}{R}");
 
         // create X 1/1 red Goblin creature tokens.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinToken(), new ManacostVariableValue()));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinToken(), ManacostVariableValue.instance));
     }
 
     public GoblinOffensive(final GoblinOffensive card) {

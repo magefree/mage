@@ -30,8 +30,8 @@ import org.jboss.remoting.callback.InvokerCallbackHandler;
 public class Session {
 
     private static final Logger logger = Logger.getLogger(Session.class);
-    private final static Pattern alphabetsPattern = Pattern.compile("[a-zA-Z]");
-    private final static Pattern digitsPattern = Pattern.compile("[0-9]");
+    private static final Pattern alphabetsPattern = Pattern.compile("[a-zA-Z]");
+    private static final Pattern digitsPattern = Pattern.compile("[0-9]");
 
     private final String sessionId;
     private UUID userId;

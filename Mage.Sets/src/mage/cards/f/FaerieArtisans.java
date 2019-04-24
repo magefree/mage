@@ -32,7 +32,7 @@ public final class FaerieArtisans extends CardImpl {
     private static final FilterCreaturePermanent filterNontoken = new FilterCreaturePermanent("nontoken creature");
 
     static {
-        filterNontoken.add(Predicates.not(new TokenPredicate()));
+        filterNontoken.add(Predicates.not(TokenPredicate.instance));
         filterNontoken.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 

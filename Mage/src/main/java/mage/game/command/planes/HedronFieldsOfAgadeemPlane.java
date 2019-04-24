@@ -1,8 +1,5 @@
-
 package mage.game.command.planes;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -21,12 +18,14 @@ import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.game.command.Plane;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.EldraziAnnihilatorToken;
 import mage.target.Target;
 import mage.watchers.common.PlanarRollWatcher;
-import mage.game.permanent.token.EldraziAnnihilatorToken;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- *
  * @author spjspj
  */
 public class HedronFieldsOfAgadeemPlane extends Plane {
@@ -80,12 +79,12 @@ class HedronFieldsOfAgadeemRestrictionEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Game game) {
+    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
         return false;
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         return false;
     }
 

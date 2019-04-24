@@ -26,7 +26,7 @@ public final class Hatred extends CardImpl {
         this.getSpellAbility().addCost(new PayVariableLifeCost(true));
 
         // Target creature gets +X/+0 until end of turn.
-        DynamicValue xValue = new GetXValue();
+        DynamicValue xValue = GetXValue.instance;
         this.getSpellAbility().addEffect(new BoostTargetEffect(xValue, new StaticValue(0), Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

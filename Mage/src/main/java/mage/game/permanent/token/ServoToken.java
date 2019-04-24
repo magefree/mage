@@ -15,10 +15,11 @@ import mage.util.RandomUtil;
  */
 public final class ServoToken extends TokenImpl {
 
-    final static private List<String> tokenImageSets = new ArrayList<>();
+    static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
         tokenImageSets.addAll(Collections.singletonList("KLD"));
+        tokenImageSets.addAll(Collections.singletonList("WAR"));
     }
 
     public ServoToken() {

@@ -112,7 +112,7 @@ public class SpliceOntoArcaneAbility extends SimpleStaticAbility {
     @Override
     public String getRule() {
         StringBuilder sb = new StringBuilder();
-        sb.append(KEYWORD_TEXT).append(nonManaCosts ? "-" : " ");
+        sb.append(KEYWORD_TEXT).append(nonManaCosts ? "&mdash;" : " ");
         sb.append(spliceCosts.getText()).append(nonManaCosts ? ". " : " ");
         sb.append("<i>(As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)</i>");
         return sb.toString();

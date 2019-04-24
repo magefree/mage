@@ -31,8 +31,8 @@ public final class PowerConduit extends CardImpl {
         ability.addCost(new RemoveCounterCost(new TargetControlledPermanent()));
         ability.addTarget(new TargetArtifactPermanent());
         Mode mode = new Mode();
-        mode.getEffects().add(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
-        mode.getTargets().add(new TargetCreaturePermanent());
+        mode.addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
+        mode.addTarget(new TargetCreaturePermanent());
         ability.addMode(mode);
         this.addAbility(ability);
     }

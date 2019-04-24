@@ -67,7 +67,7 @@ class InameDeathAspectEffect extends SearchEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null && player.searchLibrary(target, game)) {
+        if (player != null && player.searchLibrary(target, source, game)) {
             if (!target.getTargets().isEmpty()) {
                 player.moveCards(new CardsImpl(target.getTargets()), Zone.GRAVEYARD, source, game);
             }

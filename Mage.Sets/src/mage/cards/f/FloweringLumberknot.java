@@ -1,7 +1,5 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -10,11 +8,13 @@ import mage.abilities.keyword.SoulbondAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  * @author noxx
@@ -22,7 +22,7 @@ import mage.game.permanent.Permanent;
 public final class FloweringLumberknot extends CardImpl {
 
     public FloweringLumberknot(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.subtype.add(SubType.TREEFOLK);
 
         this.power = new MageInt(5);
@@ -66,9 +66,8 @@ class FloweringLumberknotEffect extends RestrictionEffect {
                             break;
                         }
                     }
-                    if (found) {
-                        return false;// paired => can attack or block
-                    }
+                    // paired => can attack or block
+                    return !found;
                 }
             }
             // can't attack or block 
@@ -79,12 +78,12 @@ class FloweringLumberknotEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         return false;
     }
 
     @Override
-    public boolean canAttack(Game game) {
+    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
         return false;
     }
 

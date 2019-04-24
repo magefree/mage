@@ -23,11 +23,11 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public final class PrimalForcemage extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     private static final String rule = "Whenever another creature enters the battlefield under your control, that creature gets +3/+3 until end of turn.";

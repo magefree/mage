@@ -88,7 +88,7 @@ class GrozothEffect extends SearchEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Card sourceCard = game.getCard(source.getSourceId());
-        if (sourceCard != null && player != null && player.searchLibrary(target, game)) {
+        if (sourceCard != null && player != null && player.searchLibrary(target, source, game)) {
             if (!target.getTargets().isEmpty()) {
                 Cards cards = new CardsImpl();
                 for (UUID cardId : target.getTargets()) {

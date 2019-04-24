@@ -1,9 +1,8 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.hint.common.CreaturesYouControlHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -12,8 +11,9 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author Derpthemeus
  */
 public final class MinionsMurmurs extends CardImpl {
@@ -23,6 +23,7 @@ public final class MinionsMurmurs extends CardImpl {
 
         // You draw X cards and you lose X life, where X is the number of creatures you control.
         this.getSpellAbility().addEffect(new MinionsMurmursEffect());
+        this.getSpellAbility().addHint(CreaturesYouControlHint.instance);
     }
 
     public MinionsMurmurs(final MinionsMurmurs card) {

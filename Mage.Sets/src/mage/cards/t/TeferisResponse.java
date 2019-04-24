@@ -23,7 +23,7 @@ import mage.target.TargetStackObject;
  */
 public final class TeferisResponse extends CardImpl {
 
-    private final static FilterStackObject filter = new FilterStackObject("spell or ability an opponent controls that targets a land you control");
+    private static final FilterStackObject filter = new FilterStackObject("spell or ability an opponent controls that targets a land you control");
 
     static {
         filter.add(new TargetsPermanentPredicate(new FilterControlledLandPermanent()));

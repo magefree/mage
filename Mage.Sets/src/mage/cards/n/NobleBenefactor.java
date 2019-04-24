@@ -71,7 +71,7 @@ class NobleBenefactorEffect extends OneShotEffect {
                 if (player != null) {
                     TargetCardInLibrary target = new TargetCardInLibrary();
                     if (player.chooseUse(Outcome.Benefit, "Search your library for a card to put into your hand?", source, game)) {
-                        player.searchLibrary(target, game);
+                        player.searchLibrary(target, source, game);
                         for (UUID cardId : target.getTargets()) {
                             Card card = player.getLibrary().getCard(cardId, game);
                             if (card != null) {

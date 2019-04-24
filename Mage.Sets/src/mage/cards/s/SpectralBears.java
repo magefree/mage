@@ -52,7 +52,7 @@ class SpectralBearsTriggeredAbility extends TriggeredAbilityImpl {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public SpectralBearsTriggeredAbility() {

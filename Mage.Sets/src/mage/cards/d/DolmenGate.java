@@ -21,7 +21,7 @@ public final class DolmenGate extends CardImpl {
     private static final FilterControlledCreatureInPlay filter = new FilterControlledCreatureInPlay("attacking creatures you control");
 
     static {
-        filter.getCreatureFilter().add(new AttackingPredicate());
+        filter.getCreatureFilter().add(AttackingPredicate.instance);
     }
 
     public DolmenGate(UUID ownerId, CardSetInfo setInfo) {

@@ -34,7 +34,7 @@ public final class SandsteppeOutcast extends CardImpl {
         
         // * Create a 1/1 white Spirit creature token with flying. 
         Mode mode = new Mode();
-        mode.getEffects().add(new CreateTokenEffect(new SpiritWhiteToken("FRF")));
+        mode.addEffect(new CreateTokenEffect(new SpiritWhiteToken("FRF")));
         ability.addMode(mode);
         this.addAbility(ability);  
     }

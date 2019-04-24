@@ -1,5 +1,3 @@
-
-
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
@@ -10,7 +8,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX2
  */
 public class CantAttackTargetEffect extends RestrictionEffect {
@@ -29,7 +26,7 @@ public class CantAttackTargetEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Game game) {
+    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
         return false;
     }
 
@@ -40,11 +37,11 @@ public class CantAttackTargetEffect extends RestrictionEffect {
 
     @Override
     public String getText(Mode mode) {
-        if(staticText != null && !staticText.isEmpty()) {
+        if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
         String text = "target " + mode.getTargets().get(0).getTargetName() + " can't attack";
-        if(this.duration == Duration.EndOfTurn) {
+        if (this.duration == Duration.EndOfTurn) {
             text += " this turn";
         }
         return text;

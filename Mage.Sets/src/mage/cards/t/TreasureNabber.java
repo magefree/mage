@@ -1,21 +1,12 @@
 package mage.cards.t;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.PhaseStep;
-import mage.constants.SubLayer;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -23,8 +14,10 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.FixedTargets;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class TreasureNabber extends CardImpl {
@@ -92,21 +85,10 @@ class TreasureNabberAbility extends TriggeredAbilityImpl {
 class TreasureNabberEffect extends ContinuousEffectImpl {
 
     protected FixedTargets fixedTargets;
-    protected int startingTurn;
 
     TreasureNabberEffect() {
-        super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
+        super(Duration.UntilEndOfYourNextTurn, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         this.staticText = "gain control of that artifact until the end of your next turn";
-        startingTurn = 0;
-    }
-
-    @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
-        startingTurn = game.getTurnNum();
-        if (game.getPhase().getStep().getType() == PhaseStep.END_TURN) {
-            startingTurn = game.getTurnNum() + 1;
-        }
     }
 
     TreasureNabberEffect(final TreasureNabberEffect effect) {
@@ -117,16 +99,6 @@ class TreasureNabberEffect extends ContinuousEffectImpl {
     @Override
     public TreasureNabberEffect copy() {
         return new TreasureNabberEffect(this);
-    }
-
-    @Override
-    public boolean isInactive(Ability source, Game game) {
-        if (startingTurn != 0 && game.getTurnNum() >= startingTurn && game.getPhase().getStep().getType() == PhaseStep.END_TURN) {
-            if (game.isActivePlayer(source.getControllerId())) {
-                return true;
-            }
-        }
-        return false;
     }
 
     @Override

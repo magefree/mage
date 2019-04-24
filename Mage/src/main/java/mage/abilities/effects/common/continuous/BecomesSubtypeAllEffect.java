@@ -70,7 +70,7 @@ public class BecomesSubtypeAllEffect extends ContinuousEffectImpl {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         if (loseOther) {
-                            permanent.getSubtype(game).retainAll(SubType.getLandTypes(false));
+                            permanent.getSubtype(game).retainAll(SubType.getLandTypes());
                             permanent.getSubtype(game).addAll(subtypes);
                         } else {
                             for (SubType subtype : subtypes) {

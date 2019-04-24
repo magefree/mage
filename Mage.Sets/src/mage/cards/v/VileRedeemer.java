@@ -79,7 +79,7 @@ class VileRedeemerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            VileRedeemerNonTokenCreaturesDiedWatcher watcher = (VileRedeemerNonTokenCreaturesDiedWatcher) game.getState().getWatchers().get(VileRedeemerNonTokenCreaturesDiedWatcher.class.getSimpleName());
+            VileRedeemerNonTokenCreaturesDiedWatcher watcher = game.getState().getWatcher(VileRedeemerNonTokenCreaturesDiedWatcher.class);
             if (watcher != null) {
                 int amount = watcher.getAmountOfNontokenCreatureDiedThisTurn(controller.getId());
                 if (amount > 0) {
@@ -97,7 +97,7 @@ class VileRedeemerNonTokenCreaturesDiedWatcher extends Watcher {
     private final Map<UUID, Integer> amountOfCreaturesThatDied = new HashMap<>();
 
     public VileRedeemerNonTokenCreaturesDiedWatcher() {
-        super(VileRedeemerNonTokenCreaturesDiedWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public VileRedeemerNonTokenCreaturesDiedWatcher(final VileRedeemerNonTokenCreaturesDiedWatcher watcher) {

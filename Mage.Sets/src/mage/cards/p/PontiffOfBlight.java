@@ -28,7 +28,7 @@ public final class PontiffOfBlight extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Other creatures you control");
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

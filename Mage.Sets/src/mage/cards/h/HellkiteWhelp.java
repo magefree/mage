@@ -25,7 +25,7 @@ public final class HellkiteWhelp extends CardImpl {
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(new DefendingPlayerControlsPredicate());
+        filter.add(DefendingPlayerControlsPredicate.instance);
     }
 
     public HellkiteWhelp(UUID ownerId, CardSetInfo setInfo) {

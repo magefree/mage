@@ -16,6 +16,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -33,7 +34,7 @@ public final class GraveUpheaval extends CardImpl {
 
         // Put target creature card from a graveyard onto the battlefield under your control. It gains haste.
         this.getSpellAbility().addEffect(new GraveUpheavalEffect());
-        this.getSpellAbility().addTarget(new TargetCardInGraveyard());
+        this.getSpellAbility().addTarget(new TargetCardInGraveyard(new FilterCreatureCard()));
 
         // Basic landcycling {2}
         this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl("{2}")));

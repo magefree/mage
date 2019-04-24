@@ -28,7 +28,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -37,8 +36,6 @@ import mage.game.permanent.Permanent;
  * @author spjspj
  */
 public final class ArixmethesSlumberingIsle extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("a spell");
 
     public ArixmethesSlumberingIsle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");

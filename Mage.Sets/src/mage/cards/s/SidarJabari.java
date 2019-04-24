@@ -24,7 +24,7 @@ public final class SidarJabari extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
 
     static {
-        filter.add(new DefendingPlayerControlsPredicate());
+        filter.add(DefendingPlayerControlsPredicate.instance);
     }
 
     public SidarJabari(UUID ownerId, CardSetInfo setInfo) {

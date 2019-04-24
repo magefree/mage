@@ -28,7 +28,7 @@ import mage.game.permanent.token.Token;
  */
 public final class ForiysianTotem extends CardImpl {
 
-    private final static String ruleText = "As long as {this} is a creature, it can block an additional creature each combat.";
+    private static final String ruleText = "As long as {this} is a creature, it can block an additional creature each combat.";
 
     public ForiysianTotem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

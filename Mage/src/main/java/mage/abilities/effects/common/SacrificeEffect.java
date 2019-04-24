@@ -1,6 +1,6 @@
-
 package mage.abilities.effects.common;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -46,34 +46,33 @@ public class SacrificeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (player == null) {
-            return false;
-        }
-
-        FilterPermanent newFilter = filter.copy(); // filter can be static, so it's important to copy here
-        newFilter.add(new ControllerIdPredicate(player.getId()));
-
-        int amount = count.calculate(game, source, this);
-        int realCount = game.getBattlefield().countAll(newFilter, player.getId(), game);
-        amount = Math.min(amount, realCount);
-
-        Target target = new TargetPermanent(amount, amount, newFilter, true);
-
-        if (amount > 0 && target.canChoose(source.getSourceId(), player.getId(), game)) {
-            while (!target.isChosen() && target.canChoose(player.getId(), game) && player.canRespond()) {
-                player.chooseTarget(Outcome.Sacrifice, target, source, game);
-            }
-
-            for (int idx = 0; idx < target.getTargets().size(); idx++) {
-                Permanent permanent = game.getPermanent(target.getTargets().get(idx));
-
-                if (permanent != null) {
-                    permanent.sacrifice(source.getSourceId(), game);
+        boolean applied = false;
+        for (UUID playerId : targetPointer.getTargets(game, source)) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                FilterPermanent newFilter = filter.copy(); // filter can be static, so it's important to copy here
+                newFilter.add(new ControllerIdPredicate(player.getId()));
+                int amount = count.calculate(game, source, this);
+                int realCount = game.getBattlefield().countAll(newFilter, player.getId(), game);
+                amount = Math.min(amount, realCount);
+                Target target = new TargetPermanent(amount, amount, newFilter, true);
+                if (amount > 0 && target.canChoose(source.getSourceId(), player.getId(), game)) {
+                    while (!target.isChosen()
+                            && target.canChoose(player.getId(), game)
+                            && player.canRespond()) {
+                        player.chooseTarget(Outcome.Sacrifice, target, source, game);
+                    }
+                    for (int idx = 0; idx < target.getTargets().size(); idx++) {
+                        Permanent permanent = game.getPermanent(target.getTargets().get(idx));
+                        if (permanent != null
+                                && permanent.sacrifice(source.getSourceId(), game)) {
+                            applied = true;
+                        }
+                    }
                 }
             }
         }
-        return true;
+        return applied;
     }
 
     public void setAmount(DynamicValue amount) {

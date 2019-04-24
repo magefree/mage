@@ -82,7 +82,7 @@ class VizkopaConfessorEffect extends OneShotEffect {
             int payLife = controller.getAmount(0, controller.getLife(),"Pay how many life?", game);
             if (payLife > 0) {
                 controller.loseLife(payLife, game, false);
-                game.informPlayers(new StringBuilder(sourceCard.getName()).append(": ").append(controller.getLogName()).append(" pays ").append(payLife).append(" life").toString());
+                game.informPlayers(sourceCard.getName() + ": " + controller.getLogName() + " pays " + payLife + " life");
 
                 Cards cardsInHand = new CardsImpl();
                 cardsInHand.addAll(targetPlayer.getHand());

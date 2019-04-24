@@ -22,11 +22,11 @@ public class ChoiceCreatureType extends ChoiceImpl {
         this(true, chooseMessage, source);
     }
 
-    public ChoiceCreatureType(boolean required, String chooseMessage, MageObject source){
+    public ChoiceCreatureType(boolean required, String chooseMessage, MageObject source) {
         super(required);
-        this.setChoices(SubType.getCreatureTypes(false).stream().map(SubType::toString).collect(Collectors.toCollection(LinkedHashSet::new)));
+        this.setChoices(SubType.getCreatureTypes().stream().map(SubType::toString).collect(Collectors.toCollection(LinkedHashSet::new)));
         this.setMessage(chooseMessage);
-        if(source != null) {
+        if (source != null) {
             this.setSubMessage(source.getIdName());
         }
         this.setSearchEnabled(true);

@@ -21,9 +21,9 @@ public final class PsychicDrain extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{U}{B}");
 
         // Target player puts the top X cards of their library into their graveyard and you gain X life.
-        this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(new ManacostVariableValue()));
+        this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(ManacostVariableValue.instance));
         this.getSpellAbility().addTarget(new TargetPlayer());
-        Effect effect = new GainLifeEffect(new ManacostVariableValue());
+        Effect effect = new GainLifeEffect(ManacostVariableValue.instance);
         effect.setText("and you gain X life");
         this.getSpellAbility().addEffect(effect);
     }

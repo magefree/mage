@@ -69,7 +69,7 @@ class PathToExileEffect extends OneShotEffect {
             controller.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, Zone.BATTLEFIELD, true);
             if (player.chooseUse(Outcome.PutCardInPlay, "Search your library for a basic land card?", source, game)) {
                 TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND);
-                if (player.searchLibrary(target, game)) {
+                if (player.searchLibrary(target, source, game)) {
                     Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
                     if (card != null) {
                         player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);

@@ -26,7 +26,7 @@ import mage.target.TargetPermanent;
  */
 public final class NissasDefeat extends CardImpl {
 
-    private final static FilterPermanent filter = new FilterPermanent("Forest, green enchantment, or green planeswalker");
+    private static final FilterPermanent filter = new FilterPermanent("Forest, green enchantment, or green planeswalker");
 
     static {
         filter.add(Predicates.or(new SubtypePredicate(SubType.FOREST),

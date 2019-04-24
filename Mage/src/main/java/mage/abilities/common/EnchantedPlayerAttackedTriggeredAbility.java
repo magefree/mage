@@ -1,4 +1,3 @@
-
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -10,7 +9,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class EnchantedPlayerAttackedTriggeredAbility extends TriggeredAbilityImpl {
@@ -35,7 +33,7 @@ public class EnchantedPlayerAttackedTriggeredAbility extends TriggeredAbilityImp
         Permanent enchantment = game.getPermanentOrLKIBattlefield(getSourceId());
         Player controller = game.getPlayer(getControllerId());
         if (controller != null && enchantment != null) {
-            return game.getCombat().getPlayerDefenders(game).contains(enchantment.getAttachedTo());
+            return game.getCombat().getPlayerDefenders(game, false).contains(enchantment.getAttachedTo());
         }
         return false;
     }

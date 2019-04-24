@@ -184,7 +184,7 @@ class BurningCinderFuryOfCrimsonChaosFireCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        BurningCinderFuryOfCrimsonChaosFireWatcher watcher = (BurningCinderFuryOfCrimsonChaosFireWatcher) game.getState().getWatchers().get(BurningCinderFuryOfCrimsonChaosFireWatcher.class.getSimpleName());
+        BurningCinderFuryOfCrimsonChaosFireWatcher watcher = game.getState().getWatcher(BurningCinderFuryOfCrimsonChaosFireWatcher.class);
         if (watcher != null) {
             return !watcher.tappedNonlandThisTurn(game.getActivePlayerId());
         }
@@ -201,7 +201,7 @@ class BurningCinderFuryOfCrimsonChaosFireWatcher extends Watcher {
     private final Set<UUID> tappedActivePlayerIds = new HashSet<>();
 
     public BurningCinderFuryOfCrimsonChaosFireWatcher() {
-        super(BurningCinderFuryOfCrimsonChaosFireWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public BurningCinderFuryOfCrimsonChaosFireWatcher(final BurningCinderFuryOfCrimsonChaosFireWatcher watcher) {

@@ -80,7 +80,7 @@ class SadisticSacramentEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null && targetPlayer != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(0, amount, new FilterCard("cards to exile"));
-            if (player.searchLibrary(target, game, targetPlayer.getId())) {
+            if (player.searchLibrary(target, source, game, targetPlayer.getId())) {
                 List<UUID> targets = target.getTargets();
                 for (UUID targetId : targets) {
                     Card card = targetPlayer.getLibrary().remove(targetId, game);

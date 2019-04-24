@@ -28,8 +28,8 @@ public final class DominatorDrone extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another colorless creature");
 
     static {
-        filter.add(new AnotherPredicate());
-        filter.add(new ColorlessPredicate());
+        filter.add(AnotherPredicate.instance);
+        filter.add(ColorlessPredicate.instance);
     }
 
     public DominatorDrone(UUID ownerId, CardSetInfo setInfo) {

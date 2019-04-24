@@ -1,9 +1,7 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -22,30 +20,22 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetOpponentsChoicePermanent;
+import mage.target.targetadjustment.TargetAdjuster;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class VolcanicOffering extends CardImpl {
 
-    private static final FilterLandPermanent filterLand = new FilterLandPermanent("nonbasic land you don't control");
-    private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creature you don't control");
-    static {
-        filterLand.add(new ControllerPredicate(TargetController.NOT_YOU));
-        filterLand.add(Predicates.not(new SupertypePredicate(SuperType.BASIC)));
-        filterCreature.add(new ControllerPredicate(TargetController.NOT_YOU));
-    }
     public VolcanicOffering(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{R}");
 
         // Destroy target nonbasic land you don't control and target nonbasic land of an opponent's choice you don't control.
         // Volcanic Offering deals 7 damage to target creature you don't control and 7 damage to target creature of an opponent's choice you don't control.
         this.getSpellAbility().addEffect(new VolcanicOfferingEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filterLand));
-        this.getSpellAbility().addTarget(new TargetPermanent(filterCreature));
-
+        this.getSpellAbility().setTargetAdjuster(VolcanicOfferingAdjuster.instance);
     }
 
     public VolcanicOffering(final VolcanicOffering card) {
@@ -53,27 +43,39 @@ public final class VolcanicOffering extends CardImpl {
     }
 
     @Override
-    public void adjustTargets(Ability ability, Game game) {
-        Player controller = game.getPlayer(ability.getControllerId());
-        if (controller != null && (ability instanceof SpellAbility)) {
-            ability.getTargets().clear();
-            ability.addTarget(new TargetPermanent(filterLand));
-            FilterLandPermanent filterLandForOpponent = new FilterLandPermanent("nonbasic land not controlled by " + controller.getLogName());
-            filterLandForOpponent.add(Predicates.not(new SupertypePredicate(SuperType.BASIC)));
-            filterLandForOpponent.add(Predicates.not(new ControllerIdPredicate(controller.getId())));
-            ability.addTarget(new TargetOpponentsChoicePermanent(1, 1, filterLandForOpponent, false, true));
+    public VolcanicOffering copy() {
+        return new VolcanicOffering(this);
+    }
+}
 
-            ability.addTarget(new TargetPermanent(filterCreature));
-            FilterCreaturePermanent filterCreatureForOpponent = new FilterCreaturePermanent("creature not controlled by " + controller.getLogName());
-            filterCreatureForOpponent.add(Predicates.not(new ControllerIdPredicate(controller.getId())));
-            ability.addTarget(new TargetOpponentsChoicePermanent(1, 1, filterCreatureForOpponent, false, true));
-        }
+enum VolcanicOfferingAdjuster implements TargetAdjuster {
+    instance;
+    private static final FilterLandPermanent filterLand = new FilterLandPermanent("nonbasic land you don't control");
+    private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creature you don't control");
 
+    static {
+        filterLand.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filterLand.add(Predicates.not(new SupertypePredicate(SuperType.BASIC)));
+        filterCreature.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 
     @Override
-    public VolcanicOffering copy() {
-        return new VolcanicOffering(this);
+    public void adjustTargets(Ability ability, Game game) {
+        Player controller = game.getPlayer(ability.getControllerId());
+        if (controller == null) {
+            return;
+        }
+        ability.getTargets().clear();
+        ability.addTarget(new TargetPermanent(filterLand));
+        FilterLandPermanent filterLandForOpponent = new FilterLandPermanent("nonbasic land not controlled by " + controller.getLogName());
+        filterLandForOpponent.add(Predicates.not(new SupertypePredicate(SuperType.BASIC)));
+        filterLandForOpponent.add(Predicates.not(new ControllerIdPredicate(controller.getId())));
+        ability.addTarget(new TargetOpponentsChoicePermanent(1, 1, filterLandForOpponent, false, true));
+
+        ability.addTarget(new TargetPermanent(filterCreature));
+        FilterCreaturePermanent filterCreatureForOpponent = new FilterCreaturePermanent("creature not controlled by " + controller.getLogName());
+        filterCreatureForOpponent.add(Predicates.not(new ControllerIdPredicate(controller.getId())));
+        ability.addTarget(new TargetOpponentsChoicePermanent(1, 1, filterCreatureForOpponent, false, true));
     }
 }
 

@@ -17,7 +17,7 @@ public class ChooseBlockersRedundancyWatcher extends Watcher { // workaround for
     public int copyCountApply = 0;
 
     public ChooseBlockersRedundancyWatcher() {
-        super(ChooseBlockersRedundancyWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public ChooseBlockersRedundancyWatcher(final ChooseBlockersRedundancyWatcher watcher) {

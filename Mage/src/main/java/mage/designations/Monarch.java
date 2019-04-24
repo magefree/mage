@@ -1,4 +1,3 @@
-
 package mage.designations;
 
 import mage.MageObject;
@@ -15,7 +14,6 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author LevelX2
  */
 public class Monarch extends Designation {
@@ -24,6 +22,15 @@ public class Monarch extends Designation {
         super(DesignationType.THE_MONARCH, "CN2");
         addAbility(new MonarchDrawTriggeredAbility());
         addAbility(new MonarchDealsCombatDamageToAPlayerTriggeredAbility());
+    }
+
+    private Monarch(final Monarch monarch) {
+        super(monarch);
+    }
+
+    @Override
+    public Monarch copy() {
+        return new Monarch(this);
     }
 }
 

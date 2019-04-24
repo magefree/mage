@@ -19,7 +19,7 @@ public class LifeLossOtherFromCombatWatcher extends Watcher {
     private final Set<UUID> players = new HashSet<>();
 
     public LifeLossOtherFromCombatWatcher() {
-        super(LifeLossOtherFromCombatWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public LifeLossOtherFromCombatWatcher(final LifeLossOtherFromCombatWatcher watcher) {

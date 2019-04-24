@@ -31,7 +31,7 @@ public final class UndercityNecrolisk extends CardImpl {
             = new FilterControlledCreaturePermanent("another creature");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public UndercityNecrolisk(UUID ownerId, CardSetInfo setInfo) {

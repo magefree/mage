@@ -30,7 +30,7 @@ public final class ThrashOfRaptors extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.DINOSAUR));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public ThrashOfRaptors(UUID ownerId, CardSetInfo setInfo) {

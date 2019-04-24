@@ -1,7 +1,6 @@
 
 package mage.cards.i;
 
-import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -75,9 +74,9 @@ class IncreasingAmbitionEffect extends SearchEffect {
                 else {
                     target = new TargetCardInLibrary();
                 }
-                if (player.searchLibrary(target, game)) {
+                if (player.searchLibrary(target, source, game)) {
                     if (!target.getTargets().isEmpty()) {
-                        for (UUID cardId: (List<UUID>)target.getTargets()) {
+                        for (UUID cardId: target.getTargets()) {
                             Card card = player.getLibrary().remove(cardId, game);
                             if (card != null) {
                                 card.moveToZone(Zone.HAND, source.getSourceId(), game, false);

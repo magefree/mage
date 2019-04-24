@@ -1,25 +1,25 @@
 
 package mage.watchers.common;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class PlayerCastCreatureWatcher extends Watcher {
 
-    final Set<UUID> playerIds = new HashSet<>();
+    private final Set<UUID> playerIds = new HashSet<>();
 
     public PlayerCastCreatureWatcher() {
-        super(PlayerCastCreatureWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public PlayerCastCreatureWatcher(final PlayerCastCreatureWatcher watcher) {

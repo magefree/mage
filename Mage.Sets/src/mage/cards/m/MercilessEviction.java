@@ -25,15 +25,15 @@ public final class MercilessEviction extends CardImpl {
         this.getSpellAbility().addEffect(new ExileAllEffect(new FilterArtifactPermanent("artifacts")));
         // or exile all creatures
         Mode mode = new Mode();
-        mode.getEffects().add(new ExileAllEffect(FILTER_PERMANENT_CREATURES));
+        mode.addEffect(new ExileAllEffect(FILTER_PERMANENT_CREATURES));
         this.getSpellAbility().addMode(mode);
         // or exile all enchantments
         Mode mode2 = new Mode();
-        mode2.getEffects().add(new ExileAllEffect(new FilterEnchantmentPermanent("enchantments")));
+        mode2.addEffect(new ExileAllEffect(new FilterEnchantmentPermanent("enchantments")));
         this.getSpellAbility().addMode(mode2);
         // or exile all planeswalkers.
         Mode mode3 = new Mode();
-        mode3.getEffects().add(new ExileAllEffect(new FilterPlaneswalkerPermanent("planeswalkers")));
+        mode3.addEffect(new ExileAllEffect(new FilterPlaneswalkerPermanent("planeswalkers")));
         this.getSpellAbility().addMode(mode3);
     }
 

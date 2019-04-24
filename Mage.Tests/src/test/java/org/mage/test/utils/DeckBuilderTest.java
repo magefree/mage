@@ -28,7 +28,7 @@ public class DeckBuilderTest {
     public void testAllArtifacts() {
         final List<Card> spellCardPool = new ArrayList<>();
         final UUID owner = UUID.randomUUID();
-        final List<ColoredManaSymbol> allowedColors = Arrays.asList(ColoredManaSymbol.U);
+        final List<ColoredManaSymbol> allowedColors = new ArrayList<>(Arrays.asList(ColoredManaSymbol.U));
         final List<String> setsToUse = new ArrayList<>();
         final List<Card> landCardPool = null;
         final RateCallback rateCallback = new RateCallback() {

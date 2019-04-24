@@ -30,7 +30,7 @@ public final class PatronWizard extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.WIZARD));
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public PatronWizard(UUID ownerId, CardSetInfo setInfo) {

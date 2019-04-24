@@ -29,8 +29,8 @@ public final class InquisitorExarch extends CardImpl {
 
         Ability ability = new EntersBattlefieldTriggeredAbility(new GainLifeEffect(2));
         Mode mode = new Mode();
-        mode.getEffects().add(new LoseLifeTargetEffect(2));
-        mode.getTargets().add(new TargetPlayer());
+        mode.addEffect(new LoseLifeTargetEffect(2));
+        mode.addTarget(new TargetPlayer());
         ability.addMode(mode);
         this.addAbility(ability);
     }

@@ -26,7 +26,7 @@ public final class RaffCapashenShipsMage extends CardImpl {
     private static final FilterCard filter = new FilterCard("historic spells");
 
     static {
-        filter.add(new HistoricPredicate());
+        filter.add(HistoricPredicate.instance);
     }
 
     public RaffCapashenShipsMage(UUID ownerId, CardSetInfo setInfo) {

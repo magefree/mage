@@ -39,7 +39,7 @@ public final class ArachnusSpinner extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.SPIDER));
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public ArachnusSpinner(UUID ownerId, CardSetInfo setInfo) {
@@ -106,7 +106,7 @@ class ArachnusSpinnerEffect extends OneShotEffect {
         }
         if (card == null) {
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
-            if (controller.searchLibrary(target, game)) {
+            if (controller.searchLibrary(target, source, game)) {
                 card = game.getCard(target.getFirstTarget());
             }
             controller.shuffleLibrary(source, game);

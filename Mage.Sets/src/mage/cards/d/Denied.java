@@ -1,7 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseACardNameEffect;
@@ -11,19 +9,21 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.players.Player;
 import mage.game.stack.Spell;
+import mage.players.Player;
 import mage.target.TargetSpell;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author L_J
  */
 public final class Denied extends CardImpl {
 
     public Denied(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
-        
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
+
         // Choose a card name, then target spell's controller reveals their hand. If a card with the chosen name is revealed this way, counter that spell.
         this.getSpellAbility().addEffect(new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.ALL));
         this.getSpellAbility().addEffect(new DeniedEffect());
@@ -58,12 +58,12 @@ class DeniedEffect extends OneShotEffect {
             return true;
         }
         Player player = game.getPlayer(targetSpell.getControllerId());
-        Object object = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
+        Object object = game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
         if (player != null && object instanceof String) {
             player.revealCards("Denied!", player.getHand(), game, true);
             String namedCard = (String) object;
             for (Card card : player.getHand().getCards(game)) {
-                if (card != null && card.getName().equals(namedCard)) {
+                if (card != null && CardUtil.haveSameNames(card.getName(), namedCard)) {
                     game.getStack().counter(targetSpell.getId(), source.getSourceId(), game);
                     break;
                 }

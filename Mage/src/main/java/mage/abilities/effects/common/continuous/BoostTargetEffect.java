@@ -1,8 +1,6 @@
 
 package mage.abilities.effects.common.continuous;
 
-import java.util.Locale;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -17,8 +15,10 @@ import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.util.CardUtil;
 
+import java.util.Locale;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class BoostTargetEffect extends ContinuousEffectImpl {
@@ -26,6 +26,10 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
     private DynamicValue power;
     private DynamicValue toughness;
     private boolean lockedIn;
+
+    public BoostTargetEffect(int power, int toughness) {
+        this(power, toughness, Duration.EndOfTurn);
+    }
 
     public BoostTargetEffect(int power, int toughness, Duration duration) {
         this(new StaticValue(power), new StaticValue(toughness), duration, false);
@@ -39,8 +43,8 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
      * @param power
      * @param toughness
      * @param duration
-     * @param lockedIn if true, power and toughness will be calculated only
-     * once, when the ability resolves
+     * @param lockedIn  if true, power and toughness will be calculated only
+     *                  once, when the ability resolves
      */
     public BoostTargetEffect(DynamicValue power, DynamicValue toughness, Duration duration, boolean lockedIn) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, isCanKill(toughness) ? Outcome.UnboostCreature : Outcome.BoostCreature);
@@ -95,7 +99,7 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
         Target target = mode.getTargets().get(0);
         StringBuilder sb = new StringBuilder();
         if (target.getMaxNumberOfTargets() > 1) {
-            if (target.getNumberOfTargets() < target.getNumberOfTargets()) {
+            if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
                 sb.append("up to ");
             }
             sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ").append(target.getTargetName()).append(" get ");

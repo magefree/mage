@@ -1,15 +1,7 @@
 package org.mage.test.serverside.base;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import mage.cards.Card;
+import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.PhaseStep;
@@ -19,7 +11,6 @@ import mage.game.Game;
 import mage.game.match.MatchType;
 import mage.game.permanent.PermanentCard;
 import mage.game.tournament.TournamentType;
-import mage.player.ai.ComputerPlayer;
 import mage.players.Player;
 import mage.server.game.GameFactory;
 import mage.server.util.ConfigSettings;
@@ -30,7 +21,14 @@ import mage.util.Copier;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.junit.BeforeClass;
+import org.mage.test.player.TestComputerPlayer;
 import org.mage.test.player.TestPlayer;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Base class for all tests.
@@ -53,6 +51,8 @@ public abstract class MageTestPlayerBase {
     protected Map<TestPlayer, List<Card>> libraryCards = new HashMap<>();
 
     protected Map<TestPlayer, Map<Zone, String>> commands = new HashMap<>();
+
+    protected static Map<String, DeckCardLists> loadedDeckCardLists = new HashMap<>(); // test decks buffer
 
     protected TestPlayer playerA;
     protected TestPlayer playerB;
@@ -330,7 +330,13 @@ public abstract class MageTestPlayerBase {
     }
 
     protected TestPlayer createPlayer(String name, RangeOfInfluence rangeOfInfluence) {
-        return new TestPlayer(new ComputerPlayer(name, rangeOfInfluence));
+        return new TestPlayer(new TestComputerPlayer(name, rangeOfInfluence));
     }
 
+    public void setStrictChooseMode(boolean enable) {
+        if (playerA != null) playerA.setChooseStrictMode(enable);
+        if (playerB != null) playerB.setChooseStrictMode(enable);
+        if (playerC != null) playerC.setChooseStrictMode(enable);
+        if (playerD != null) playerD.setChooseStrictMode(enable);
+    }
 }

@@ -8,6 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
@@ -21,7 +22,7 @@ public final class TitaniasBoon extends CardImpl {
 
 		
 		// Put a +1/+1 counter on each creature you control.
-		this.getSpellAbility().addEffect(new AddCountersAllEffect(CounterType.P1P1.createInstance(), new FilterControlledCreaturePermanent("creature you control")));
+		this.getSpellAbility().addEffect(new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED));
     }
 
     public TitaniasBoon(final TitaniasBoon card) {

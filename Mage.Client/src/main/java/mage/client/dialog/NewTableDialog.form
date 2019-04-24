@@ -1,6 +1,79 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
+  <NonVisualComponents>
+    <Container class="javax.swing.JPopupMenu" name="popupSaveSettings">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="true"/>
+      </Layout>
+      <SubComponents>
+        <MenuItem class="javax.swing.JMenuItem" name="menuSaveSettings1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Save to config 1"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuSaveSettings1ActionPerformed"/>
+          </Events>
+        </MenuItem>
+        <MenuItem class="javax.swing.JMenuItem" name="menuSaveSettings2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Save to config 2"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuSaveSettings2ActionPerformed"/>
+          </Events>
+        </MenuItem>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPopupMenu" name="popupLoadSettings">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="true"/>
+      </Layout>
+      <SubComponents>
+        <MenuItem class="javax.swing.JMenuItem" name="menuLoadSettingsLast">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Load from last time"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuLoadSettingsLastActionPerformed"/>
+          </Events>
+        </MenuItem>
+        <Component class="javax.swing.JPopupMenu$Separator" name="separator1">
+        </Component>
+        <MenuItem class="javax.swing.JMenuItem" name="menuLoadSettings1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Load from config 1"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuLoadSettings1ActionPerformed"/>
+          </Events>
+        </MenuItem>
+        <MenuItem class="javax.swing.JMenuItem" name="menuLoadSettings2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Load from config 2"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuLoadSettings2ActionPerformed"/>
+          </Events>
+        </MenuItem>
+        <Component class="javax.swing.JPopupMenu$Separator" name="separator2">
+        </Component>
+        <MenuItem class="javax.swing.JMenuItem" name="menuLoadSettingsDefault">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Load default settings"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuLoadSettingsDefaultActionPerformed"/>
+          </Events>
+        </MenuItem>
+      </SubComponents>
+    </Container>
+  </NonVisualComponents>
   <Properties>
     <Property name="title" type="java.lang.String" value="New Table"/>
   </Properties>
@@ -25,104 +98,123 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblName" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbDeckType" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblGameType" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="cbGameType" min="-2" pref="270" max="-2" attributes="1"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="chkRollbackTurnsAllowed" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                              <Component id="lblFreeMulligans" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="spnFreeMulligans" min="-2" pref="50" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="chkSpectatorsAllowed" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                              <Component id="chkPlaneChase" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="txtName" min="-2" pref="178" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lbTimeLimit" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="cbTimeLimit" min="-2" pref="102" max="-2" attributes="1"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lblPassword" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtPassword" min="-2" pref="125" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnPreviousConfiguration1" min="-2" pref="50" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnPreviousConfiguration2" min="-2" pref="50" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="cbDeckType" min="-2" pref="332" max="-2" attributes="1"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lblQuitRatio" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="spnQuitRatio" min="-2" pref="60" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lblEdhPowerLevel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="spnEdhPowerLevel" min="-2" pref="60" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
-                  <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="btnOK" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblSettings" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnCancel" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblNumPlayers" min="-2" max="-2" attributes="0"/>
-                          <Component id="spnNumPlayers" min="-2" pref="57" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblRange" min="-2" max="-2" attributes="1"/>
-                          <Component id="cbRange" min="-2" pref="117" max="-2" attributes="1"/>
-                      </Group>
+                      <Component id="btnSettingsLoad" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="lblAttack" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
-                              <Component id="lblSkillLevel" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="cbAttackOption" min="-2" pref="177" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="cbSkillLevel" min="-2" pref="148" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblNumWins" min="-2" max="-2" attributes="0"/>
-                          <Component id="spnNumWins" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="btnSettingsSave" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btnOK" min="-2" pref="100" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnCancel" min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jSeparator2" alignment="1" max="32767" attributes="0"/>
-                  <Component id="player1Panel" alignment="0" max="32767" attributes="0"/>
+                  <Component id="player1Panel" alignment="0" pref="863" max="32767" attributes="0"/>
                   <Component id="pnlOtherPlayers" alignment="1" max="32767" attributes="0"/>
                   <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbDeckType" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblGameType" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="txtName" min="-2" pref="178" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="lbTimeLimit" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="cbTimeLimit" min="-2" pref="102" max="-2" attributes="1"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="lblPassword" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="txtPassword" min="-2" pref="109" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="chkSpectatorsAllowed" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="cbDeckType" max="32767" attributes="1"/>
+                                          <Component id="cbGameType" pref="270" max="32767" attributes="1"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="chkRollbackTurnsAllowed" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="chkRated" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="lblMinimumRating" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="spnMinimumRating" min="-2" pref="70" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="lblQuitRatio" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="spnQuitRatio" min="-2" pref="60" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="lblEdhPowerLevel" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="spnEdhPowerLevel" min="-2" pref="60" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblNumPlayers" min="-2" max="-2" attributes="0"/>
+                                  <Component id="spnNumPlayers" min="-2" pref="57" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblRange" min="-2" max="-2" attributes="1"/>
+                                  <Component id="cbRange" min="-2" pref="117" max="-2" attributes="1"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="cbAttackOption" alignment="0" min="-2" pref="177" max="-2" attributes="0"/>
+                                  <Component id="lblAttack" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="cbSkillLevel" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
+                                  <Component id="lblSkillLevel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="spnNumWins" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
+                                  <Component id="lblNumWins" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblMullgian" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cbMulligan" min="-2" pref="149" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="spnFreeMulligans" min="-2" pref="72" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="chkPlaneChase" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="lblFreeMulligans" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jSeparator3" pref="660" max="32767" attributes="0"/>
+                  <Component id="jSeparator3" pref="863" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -131,66 +223,80 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtName" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblName" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnPreviousConfiguration1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnPreviousConfiguration2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtPassword" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblPassword" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lbTimeLimit" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cbTimeLimit" alignment="3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                      <Component id="txtName" alignment="3" max="32767" attributes="0"/>
+                      <Component id="lblName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="cbTimeLimit" alignment="3" max="32767" attributes="0"/>
+                      <Component id="lbTimeLimit" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtPassword" alignment="3" max="32767" attributes="0"/>
+                      <Component id="chkSpectatorsAllowed" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="cbDeckType" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lbDeckType" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblQuitRatio" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="spnQuitRatio" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblEdhPowerLevel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="spnEdhPowerLevel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="spnQuitRatio" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblMinimumRating" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="spnMinimumRating" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="chkRated" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="spnFreeMulligans" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblFreeMulligans" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="chkRollbackTurnsAllowed" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="chkSpectatorsAllowed" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="chkPlaneChase" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="cbGameType" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblGameType" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="cbGameType" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblGameType" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="chkRollbackTurnsAllowed" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                      <Component id="lblRange" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <Component id="cbRange" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
                       <Component id="lblNumPlayers" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                       <Component id="spnNumPlayers" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblSkillLevel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblNumWins" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lblRange" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblAttack" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <Component id="lblAttack" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <Component id="cbAttackOption" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="lblSkillLevel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <Component id="cbSkillLevel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="lblNumWins" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <Component id="spnNumWins" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="lblMullgian" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <Component id="cbMulligan" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="lblFreeMulligans" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="cbRange" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cbAttackOption" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cbSkillLevel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="spnNumWins" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="spnFreeMulligans" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="chkPlaneChase" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               <Component id="jSeparator2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -199,21 +305,24 @@
               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="pnlOtherPlayers" pref="105" max="32767" attributes="0"/>
-              <EmptySpace pref="7" max="32767" attributes="0"/>
+              <Component id="pnlOtherPlayers" pref="94" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnCancel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnOK" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnCancel" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="btnOK" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="btnSettingsLoad" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="btnSettingsSave" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="lblSettings" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="201" max="-2" attributes="0"/>
                   <Component id="jSeparator3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="167" max="32767" attributes="0"/>
+                  <EmptySpace pref="180" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -233,16 +342,12 @@
     <Component class="javax.swing.JLabel" name="lblPassword">
       <Properties>
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="txtName"/>
+          <ComponentRef name="txtPassword"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Password:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtPassword">
-    </Component>
-    <Component class="javax.swing.JButton" name="btnPreviousConfiguration1">
-    </Component>
-    <Component class="javax.swing.JButton" name="btnPreviousConfiguration2">
     </Component>
     <Component class="javax.swing.JLabel" name="lbDeckType">
       <Properties>
@@ -271,12 +376,15 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="chkRollbackTurnsAllowed">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Allow rollbacks"/>
+        <Property name="text" type="java.lang.String" value="Rollbacks"/>
         <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;Allow to rollback to the start of previous turns&lt;br&gt;&#xa;if all players agree.&#xa;"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblFreeMulligans">
       <Properties>
+        <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="spnFreeMulligans"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Free Mulligans:"/>
         <Property name="toolTipText" type="java.lang.String" value="The number of mulligans a player can use without decreasing the number of drawn cards."/>
       </Properties>
@@ -289,11 +397,10 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="chkPlaneChase">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Use PlaneChase"/>
+        <Property name="text" type="java.lang.String" value="PlaneChase"/>
         <Property name="toolTipText" type="java.lang.String" value="Use the PlaneChase variant for your game."/>
       </Properties>
     </Component>
-
     <Component class="javax.swing.JSpinner" name="spnFreeMulligans">
     </Component>
     <Component class="javax.swing.JLabel" name="lblNumPlayers">
@@ -301,7 +408,7 @@
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="spnNumPlayers"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Players"/>
+        <Property name="text" type="java.lang.String" value="Players:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JSpinner" name="spnNumPlayers">
@@ -314,7 +421,7 @@
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="cbRange"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Range of Influence"/>
+        <Property name="text" type="java.lang.String" value="Range of Influence:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbRange">
@@ -330,7 +437,7 @@
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="cbAttackOption"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Attack Option"/>
+        <Property name="text" type="java.lang.String" value="Attack Option:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbAttackOption">
@@ -346,7 +453,8 @@
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="cbAttackOption"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Skill Level"/>
+        <Property name="text" type="java.lang.String" value="Skill Level:"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbSkillLevel">
@@ -362,14 +470,11 @@
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="spnNumWins"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Wins"/>
+        <Property name="text" type="java.lang.String" value="Wins:"/>
         <Property name="toolTipText" type="java.lang.String" value="How many games has a player to win to win the match."/>
       </Properties>
     </Component>
     <Component class="javax.swing.JSpinner" name="spnNumWins">
-      <Events>
-        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="spnNumWinsnumPlayersChanged"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator2">
     </Component>
@@ -404,7 +509,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnOK">
       <Properties>
-        <Property name="text" type="java.lang.String" value="OK"/>
+        <Property name="text" type="java.lang.String" value="Create"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOKActionPerformed"/>
@@ -427,10 +532,76 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblEdhPowerLevel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="EDH power level"/>
+        <Property name="text" type="java.lang.String" value="EDH power level:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JSpinner" name="spnEdhPowerLevel">
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cbMulligan">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Selections the type of mulligan for games."/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMullgian">
+      <Properties>
+        <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="cbMulligan"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Mulligan type:"/>
+        <Property name="toolTipText" type="java.lang.String" value="What style of mulligan?"/>
+      </Properties>
+      <AccessibilityProperties>
+        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Mullgian"/>
+      </AccessibilityProperties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="NewTableDialog_lblMullgian"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMinimumRating">
+      <Properties>
+        <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="spnMinimumRating"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Minimum rating:"/>
+        <Property name="toolTipText" type="java.lang.String" value="Players with rating less than this value can&apos;t join this table"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="spnMinimumRating">
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="chkRated">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Rated game"/>
+        <Property name="toolTipText" type="java.lang.String" value="Indicates if matche will be rated"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnSettingsLoad">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Load..."/>
+        <Property name="toolTipText" type="java.lang.String" value="Load settings"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnSettingsLoadMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnSettingsSave">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Save..."/>
+        <Property name="toolTipText" type="java.lang.String" value="Save settings"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnSettingsSaveMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblSettings">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Settings"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

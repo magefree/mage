@@ -22,7 +22,7 @@ public final class Starstorm extends CardImpl {
 
 
         // Starstorm deals X damage to each creature.
-        this.getSpellAbility().addEffect(new DamageAllEffect(new ManacostVariableValue(), new FilterCreaturePermanent()));
+        this.getSpellAbility().addEffect(new DamageAllEffect(ManacostVariableValue.instance, new FilterCreaturePermanent()));
         // Cycling {3}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}")));
     }

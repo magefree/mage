@@ -22,7 +22,7 @@ public final class FiendBinder extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
 
     static {
-        filter.add(new DefendingPlayerControlsPredicate());
+        filter.add(DefendingPlayerControlsPredicate.instance);
     }
 
     public FiendBinder(UUID ownerId, CardSetInfo setInfo) {

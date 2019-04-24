@@ -27,8 +27,8 @@ public final class MartonStromgald extends CardImpl {
     private static final FilterBlockingCreature blockingFilter = new FilterBlockingCreature("blocking creature other than {this}");
     
     static {
-        attackingFilter.add(new AnotherPredicate());
-        blockingFilter.add(new AnotherPredicate());
+        attackingFilter.add(AnotherPredicate.instance);
+        blockingFilter.add(AnotherPredicate.instance);
     }
         
     public MartonStromgald(UUID ownerId, CardSetInfo setInfo) {

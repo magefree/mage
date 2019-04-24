@@ -41,10 +41,10 @@ public final class DelayTactic extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityAllEffect(HexproofAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent())
             .setText("Creatures you control gain hexproof until end of turn"));
 
-        //   Creatures target opponent controls don't untap during his or her next untap step.
+        //   Creatures target opponent controls don't untap during their next untap step.
         Mode mode = new Mode();
-        mode.getEffects().add(new DelayTacticEffect());
-        mode.getTargets().add(new TargetOpponent());
+        mode.addEffect(new DelayTacticEffect());
+        mode.addTarget(new TargetOpponent());
         this.getSpellAbility().addMode(mode);
     }
 
@@ -63,7 +63,7 @@ class DelayTacticEffect extends OneShotEffect {
 
     DelayTacticEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Creatures target opponent controls don't untap during his or her next untap step";
+        this.staticText = "Creatures target opponent controls don't untap during their next untap step";
     }
 
     DelayTacticEffect(final DelayTacticEffect effect) {

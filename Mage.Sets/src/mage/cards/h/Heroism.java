@@ -1,9 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -28,8 +25,11 @@ import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class Heroism extends CardImpl {
@@ -81,7 +81,6 @@ class HeroismEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.getPlayerList();
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Player player = game.getPlayer(game.getActivePlayerId());
@@ -90,17 +89,19 @@ class HeroismEffect extends OneShotEffect {
             for (Permanent permanent : game.getState().getBattlefield().getAllActivePermanents(filter, game.getActivePlayerId(), game)) {
                 cost.clearPaid();
                 String message = "Pay " + cost.getText() + "? If you don't, " + permanent.getLogName() + "'s combat damage will be prevented this turn.";
-                if (player != null && player.chooseUse(Outcome.Neutral, message, source, game)) {
-                    if (cost.pay(source, game, source.getSourceId(), player.getId(), false, null)) {
-                        game.informPlayers(player.getLogName() + " paid " + cost.getText() + " for " + permanent.getLogName());
-                        continue;
-                    } else {
+                if (player != null) {
+                    if (player.chooseUse(Outcome.Neutral, message, source, game)) {
+                        if (cost.pay(source, game, source.getSourceId(), player.getId(), false, null)) {
+                            game.informPlayers(player.getLogName() + " paid " + cost.getText() + " for " + permanent.getLogName());
+
+                        } else {
+                            game.informPlayers(player.getLogName() + " didn't pay " + cost.getText() + " for " + permanent.getLogName());
+                            permanentsToPrevent.add(permanent);
+                        }
+                    } else{
                         game.informPlayers(player.getLogName() + " didn't pay " + cost.getText() + " for " + permanent.getLogName());
                         permanentsToPrevent.add(permanent);
                     }
-                } else {
-                    game.informPlayers(player.getLogName() + " didn't pay " + cost.getText() + " for " + permanent.getLogName());
-                    permanentsToPrevent.add(permanent);
                 }
             }
 

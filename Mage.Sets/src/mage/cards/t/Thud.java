@@ -26,7 +26,7 @@ public final class Thud extends CardImpl {
         ));
 
         // Thud deals damage equal to the sacrificed creature's power to any target.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(new SacrificeCostCreaturesPower()));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(SacrificeCostCreaturesPower.instance));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 

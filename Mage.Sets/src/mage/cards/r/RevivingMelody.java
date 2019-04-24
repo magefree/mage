@@ -1,7 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
@@ -12,8 +10,9 @@ import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class RevivingMelody extends CardImpl {
@@ -33,11 +32,11 @@ public final class RevivingMelody extends CardImpl {
 
         //Return target creature card from your graveyard to your hand;
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD).withChooseHint("return to hand"));
         // and/or return target enchantment card from your graveyard to your hand.
         Mode mode = new Mode();
-        mode.getEffects().add(new ReturnFromGraveyardToHandTargetEffect());
-        mode.getTargets().add(new TargetCardInYourGraveyard(filterCard));
+        mode.addEffect(new ReturnFromGraveyardToHandTargetEffect());
+        mode.addTarget(new TargetCardInYourGraveyard(filterCard).withChooseHint("return to hand"));
         this.getSpellAbility().addMode(mode);
 
     }

@@ -32,7 +32,7 @@ public final class JunglePatrol extends CardImpl {
 
     static {
         filter.add(new NamePredicate("Wood"));
-        filter.add(new TokenPredicate());
+        filter.add(TokenPredicate.instance);
     }
 
     public JunglePatrol(UUID ownerId, CardSetInfo setInfo) {

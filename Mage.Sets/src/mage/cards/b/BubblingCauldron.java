@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -61,7 +60,7 @@ public final class BubblingCauldron extends CardImpl {
 class BubblingCauldronEffect extends OneShotEffect {
 
     public BubblingCauldronEffect() {
-        super(Outcome.Damage);
+        super(Outcome.GainLife);
         staticText = "Each opponent loses 4 life. You gain life equal to the life lost this way";
     }
 
@@ -71,12 +70,17 @@ class BubblingCauldronEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int damage = 0;
+        int lostLife = 0;
+        Player controller = game.getPlayer(source.getControllerId());
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             Player opponent = game.getPlayer(opponentId);
-            damage += opponent.loseLife(4, game, false);
+            if (opponent != null) {
+                lostLife += opponent.loseLife(4, game, false);
+            }
         }
-        game.getPlayer(source.getControllerId()).gainLife(damage, game, source);
+        if (controller != null) {
+            controller.gainLife(lostLife, game, source);
+        }
         return true;
     }
 

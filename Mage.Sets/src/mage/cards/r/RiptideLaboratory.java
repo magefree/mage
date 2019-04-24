@@ -23,7 +23,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class RiptideLaboratory extends CardImpl {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("Wizard you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Wizard you control");
 
     static {
         filter.add(new SubtypePredicate(SubType.WIZARD));

@@ -86,10 +86,9 @@ class GomazoaEffect extends OneShotEffect {
                 players.add(gomazoa.getOwnerId());
             }
 
-            BlockedByWatcher watcher = (BlockedByWatcher) game.getState().getWatchers().get(BlockedByWatcher.class.getSimpleName(), source.getSourceId());
-            creaturesBlocked = watcher.blockedByWatcher;
+            BlockedByWatcher watcher = game.getState().getWatcher(BlockedByWatcher.class, source.getSourceId());
 
-            for (UUID blockedById : creaturesBlocked) {
+            for (UUID blockedById : watcher.getBlockedByWatcher()) {
                 Permanent blockedByGomazoa = game.getPermanent(blockedById);
                 if (blockedByGomazoa != null && blockedByGomazoa.isAttacking()) {
                     players.add(blockedByGomazoa.getOwnerId());
@@ -114,13 +113,17 @@ class GomazoaEffect extends OneShotEffect {
 
 class BlockedByWatcher extends Watcher {
 
-    public List<UUID> blockedByWatcher = new ArrayList<>();
-
-    public BlockedByWatcher() {
-        super(BlockedByWatcher.class.getSimpleName(), WatcherScope.CARD);
+    public List<UUID> getBlockedByWatcher() {
+        return blockedByWatcher;
     }
 
-    public BlockedByWatcher(final BlockedByWatcher watcher) {
+    private List<UUID> blockedByWatcher = new ArrayList<>();
+
+    public BlockedByWatcher() {
+        super(WatcherScope.CARD);
+    }
+
+    private BlockedByWatcher(final BlockedByWatcher watcher) {
         super(watcher);
         this.blockedByWatcher.addAll(watcher.blockedByWatcher);
     }

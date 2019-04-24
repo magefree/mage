@@ -33,7 +33,7 @@ import mage.target.common.TargetOpponent;
  */
 public final class HungryLynx extends CardImpl {
     
-    private final static FilterControlledCreaturePermanent filterCat = new FilterControlledCreaturePermanent("Cats");
+    private static final FilterControlledCreaturePermanent filterCat = new FilterControlledCreaturePermanent("Cats");
     static {
         filterCat.add(new SubtypePredicate(SubType.CAT));
     }
@@ -43,7 +43,7 @@ public final class HungryLynx extends CardImpl {
         filterProRat.add(new SubtypePredicate(SubType.RAT));
     }
     
-    private final static FilterCreaturePermanent filterRat = new FilterCreaturePermanent("a Rat");
+    private static final FilterCreaturePermanent filterRat = new FilterCreaturePermanent("a Rat");
     static {
         filterRat.add(new SubtypePredicate(SubType.RAT));
     }

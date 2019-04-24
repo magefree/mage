@@ -63,16 +63,16 @@ class ForesightEffect extends SearchEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player.searchLibrary(target, game)) {
+        if (player != null && player.searchLibrary(target, source, game)) {
             for (UUID targetId : getTargets()) {
                 Card card = player.getLibrary().getCard(targetId, game);
                 if (card != null) {
                     card.moveToExile(null, null, targetId, game);
                 }
             }
+            player.shuffleLibrary(source, game);
             return true;
         }
-        player.shuffleLibrary(source, game);
         return false;
     }
 

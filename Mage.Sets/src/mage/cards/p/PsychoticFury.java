@@ -22,7 +22,7 @@ public final class PsychoticFury extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("multicolored creature");
 
     static {
-        filter.add(new MulticoloredPredicate());
+        filter.add(MulticoloredPredicate.instance);
     }
 
     public PsychoticFury(UUID ownerId, CardSetInfo setInfo) {

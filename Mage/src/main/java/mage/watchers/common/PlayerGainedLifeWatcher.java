@@ -21,10 +21,10 @@ public class PlayerGainedLifeWatcher extends Watcher {
     private final Map<UUID, Integer> amountOfLifeGainedThisTurn = new HashMap<>();
 
     public PlayerGainedLifeWatcher() {
-        super(PlayerGainedLifeWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
-    public PlayerGainedLifeWatcher(final PlayerGainedLifeWatcher watcher) {
+    private PlayerGainedLifeWatcher(final PlayerGainedLifeWatcher watcher) {
         super(watcher);
         for (Entry<UUID, Integer> entry : watcher.amountOfLifeGainedThisTurn.entrySet()) {
             amountOfLifeGainedThisTurn.put(entry.getKey(), entry.getValue());
@@ -45,7 +45,7 @@ public class PlayerGainedLifeWatcher extends Watcher {
         }
     }
 
-    public int getLiveGained(UUID playerId) {
+    public int getLifeGained(UUID playerId) {
         return amountOfLifeGainedThisTurn.getOrDefault(playerId, 0);
     }
 

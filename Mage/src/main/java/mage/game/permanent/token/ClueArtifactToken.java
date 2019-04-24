@@ -20,7 +20,7 @@ import java.util.List;
  */
 public final class ClueArtifactToken extends TokenImpl {
 
-    final static private List<String> tokenImageSets = new ArrayList<>();
+    static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
         tokenImageSets.addAll(Arrays.asList("SOI", "EDM"));

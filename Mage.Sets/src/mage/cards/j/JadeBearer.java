@@ -24,7 +24,7 @@ public final class JadeBearer extends CardImpl {
 
     private static final FilterCreaturePermanent filterYourAnotherMerfolk = new FilterCreaturePermanent();
     static {
-        filterYourAnotherMerfolk.add(new AnotherPredicate());
+        filterYourAnotherMerfolk.add(AnotherPredicate.instance);
         filterYourAnotherMerfolk.add(new SubtypePredicate(SubType.MERFOLK));
         filterYourAnotherMerfolk.add(new ControllerPredicate(TargetController.YOU));
         filterYourAnotherMerfolk.setMessage("another " + SubType.MERFOLK.toString() + " you control");

@@ -88,7 +88,7 @@ class CoverOfWinterEffect extends PreventionEffectImpl {
 
         if (event.getType() == GameEvent.EventType.DAMAGE_CREATURE) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.getControllerId().equals(source.getControllerId())) {
+            if (permanent != null && permanent.isControlledBy(source.getControllerId())) {
                 return super.applies(event, source, game);
             }
         }

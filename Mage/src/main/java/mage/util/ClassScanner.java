@@ -33,8 +33,8 @@ public final class ClassScanner {
             if(classLoader == null) classLoader = Thread.currentThread().getContextClassLoader();
             assert classLoader != null;
 
-            HashMap<String, String> dirs = new HashMap<>();
-            TreeSet<String> jars = new TreeSet<>();
+            Map<String, String> dirs = new HashMap<>();
+            Set<String> jars = new TreeSet<>();
             for (String packageName : packages) {
                 String path = packageName.replace('.', '/');
                 Enumeration<URL> resources = classLoader.getResources(path);
@@ -51,8 +51,8 @@ public final class ClassScanner {
                 }
             }
 
-            for (String filePath : dirs.keySet()) {
-                cards.addAll(findClasses(classLoader, new File(filePath), dirs.get(filePath), type));
+            for (Map.Entry<String, String> dir : dirs.entrySet()) {
+                cards.addAll(findClasses(classLoader, new File(dir.getKey()), dir.getValue(), type));
             }
 
             for (String filePath : jars) {
@@ -66,7 +66,7 @@ public final class ClassScanner {
 
     private static List<Class> findClasses(ClassLoader classLoader, File directory, String packageName, Class<?> type) {
         List<Class> cards = new ArrayList<>();
-        if (!directory.exists()) return cards;
+        if (directory == null || !directory.exists()) return cards;
 
         for (File file : directory.listFiles()) {
             if (file.getName().endsWith(".class")) {

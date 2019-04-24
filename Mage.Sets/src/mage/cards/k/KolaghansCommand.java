@@ -43,20 +43,20 @@ public final class KolaghansCommand extends CardImpl {
 
         // or Target player discards a card;
         Mode mode = new Mode();
-        mode.getEffects().add(new DiscardTargetEffect(1));
-        mode.getTargets().add(new TargetPlayer());
+        mode.addEffect(new DiscardTargetEffect(1));
+        mode.addTarget(new TargetPlayer());
         this.getSpellAbility().getModes().addMode(mode);
 
         // or Destroy target artifact;
         mode = new Mode();
-        mode.getEffects().add(new DestroyTargetEffect());
-        mode.getTargets().add(new TargetPermanent(filter));
+        mode.addEffect(new DestroyTargetEffect());
+        mode.addTarget(new TargetPermanent(filter));
         this.getSpellAbility().getModes().addMode(mode);
 
         // or Kolaghan's Command deals 2 damage to any target.
         mode = new Mode();
-        mode.getEffects().add(new DamageTargetEffect(2));
-        mode.getTargets().add(new TargetAnyTarget());
+        mode.addEffect(new DamageTargetEffect(2));
+        mode.addTarget(new TargetAnyTarget());
         this.getSpellAbility().getModes().addMode(mode);
     }
 

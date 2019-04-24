@@ -64,7 +64,7 @@ class AdviceFromTheFaeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject mageObject = game.getObject(source.getSourceId());
-        if (controller != null) {
+        if (controller != null && mageObject != null) {
             Set<Card> topCards = controller.getLibrary().getTopCards(game, 5);
             Cards cardsFromLibrary = new CardsImpl();
             for (Card card : topCards) {

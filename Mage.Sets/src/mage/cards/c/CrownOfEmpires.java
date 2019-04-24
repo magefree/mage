@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -17,6 +15,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -24,7 +25,7 @@ import mage.target.targetpointer.FixedTarget;
 public final class CrownOfEmpires extends CardImpl {
 
     public CrownOfEmpires(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {3}, {tap}: Tap target creature. Gain control of that creature instead if you control artifacts named Scepter of Empires and Throne of Empires.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CrownOfEmpiresEffect(), new GenericManaCost(3));
@@ -60,9 +61,9 @@ class CrownOfEmpiresEffect extends OneShotEffect {
         boolean scepter = false;
         boolean throne = false;
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
-            if (permanent.getName().equals("Scepter of Empires")) {
+            if (CardUtil.haveSameNames(permanent.getName(), "Scepter of Empires")) {
                 scepter = true;
-            } else if (permanent.getName().equals("Throne of Empires")) {
+            } else if (CardUtil.haveSameNames(permanent.getName(), "Throne of Empires")) {
                 throne = true;
             }
             if (scepter && throne) break;

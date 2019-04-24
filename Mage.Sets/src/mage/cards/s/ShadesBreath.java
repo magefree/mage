@@ -1,8 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.List;
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -12,20 +9,16 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.SubTypeList;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class ShadesBreath extends CardImpl {
@@ -102,7 +95,7 @@ class ShadesBreathSetSubtypeEffect extends ContinuousEffectImpl {
             if (permanent != null) {
                 SubTypeList subtype = permanent.getSubtype(game);
                 if (subtype != null && (subtype.size() != 1 || !subtype.contains(SubType.SHADE))) {
-                    subtype.removeAll(SubType.getCreatureTypes(false));
+                    subtype.clear();
                     subtype.add(SubType.SHADE);
                 }
             }

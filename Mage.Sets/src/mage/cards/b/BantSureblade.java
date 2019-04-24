@@ -29,8 +29,8 @@ public final class BantSureblade extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another multicolor permanent");
     
     static {
-        filter.add(new MulticoloredPredicate());
-        filter.add(new AnotherPredicate());
+        filter.add(MulticoloredPredicate.instance);
+        filter.add(AnotherPredicate.instance);
     }
 
     public BantSureblade(UUID ownerId, CardSetInfo setInfo) {

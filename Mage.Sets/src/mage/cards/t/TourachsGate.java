@@ -53,12 +53,12 @@ public final class TourachsGate extends CardImpl {
 
     private static final FilterPermanent filterUntapped = new FilterPermanent("enchanted land is untapped");
     static {
-        filterUntapped.add(Predicates.not(new TappedPredicate()));
+        filterUntapped.add(Predicates.not(TappedPredicate.instance));
     }
 
     private static final FilterCreaturePermanent filterAttackingCreatures = new FilterCreaturePermanent("attacking creatures you control");
     static {
-        filterAttackingCreatures.add(new AttackingPredicate());
+        filterAttackingCreatures.add(AttackingPredicate.instance);
         filterAttackingCreatures.add(new ControllerPredicate(TargetController.YOU));
     }
 

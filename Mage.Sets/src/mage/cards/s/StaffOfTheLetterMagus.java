@@ -129,7 +129,7 @@ class StaffOfTheLetterMagusEffect extends OneShotEffect {
                     int lifegainValue = 0;
                     String spellName = spell.getName();
                     for (int i = 0; i < spellName.length(); i++) {
-                        Character letter = spellName.charAt(i);
+                        char letter = spellName.charAt(i);
                         String chosenLetter = (String) game.getState().getValue(mageObject.getId() + "_letter");
                         if (Character.isLetter(letter) && Character.toUpperCase(letter) == chosenLetter.charAt(0)) {
                             lifegainValue++;

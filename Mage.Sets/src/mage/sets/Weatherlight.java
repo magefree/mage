@@ -49,6 +49,7 @@ public final class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Benalish Infantry", 8, Rarity.COMMON, mage.cards.b.BenalishInfantry.class));
         cards.add(new SetCardInfo("Benalish Knight", 9, Rarity.COMMON, mage.cards.b.BenalishKnight.class));
         cards.add(new SetCardInfo("Benalish Missionary", 10, Rarity.COMMON, mage.cards.b.BenalishMissionary.class));
+        cards.add(new SetCardInfo("Betrothed of Fire", 89, Rarity.COMMON, mage.cards.b.BetrothedOfFire.class));
         cards.add(new SetCardInfo("Bloodrock Cyclops", 90, Rarity.COMMON, mage.cards.b.BloodrockCyclops.class));
         cards.add(new SetCardInfo("Blossoming Wreath", 120, Rarity.COMMON, mage.cards.b.BlossomingWreath.class));
         cards.add(new SetCardInfo("Bogardan Firefiend", 91, Rarity.COMMON, mage.cards.b.BogardanFirefiend.class));
@@ -105,7 +106,9 @@ public final class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Infernal Tribute", 73, Rarity.RARE, mage.cards.i.InfernalTribute.class));
         cards.add(new SetCardInfo("Inner Sanctum", 18, Rarity.RARE, mage.cards.i.InnerSanctum.class));
         cards.add(new SetCardInfo("Jabari's Banner", 150, Rarity.UNCOMMON, mage.cards.j.JabarisBanner.class));
+        cards.add(new SetCardInfo("Kithkin Armor", 19, Rarity.COMMON, mage.cards.k.KithkinArmor.class));
         cards.add(new SetCardInfo("Lava Hounds", 109, Rarity.UNCOMMON, mage.cards.l.LavaHounds.class));
+        cards.add(new SetCardInfo("Lava Storm", 110, Rarity.COMMON, mage.cards.l.LavaStorm.class));
         cards.add(new SetCardInfo("Llanowar Behemoth", 132, Rarity.UNCOMMON, mage.cards.l.LlanowarBehemoth.class));
         cards.add(new SetCardInfo("Llanowar Druid", 133, Rarity.COMMON, mage.cards.l.LlanowarDruid.class));
         cards.add(new SetCardInfo("Llanowar Sentinel", 134, Rarity.COMMON, mage.cards.l.LlanowarSentinel.class));
@@ -156,6 +159,7 @@ public final class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Strands of Night", 82, Rarity.UNCOMMON, mage.cards.s.StrandsOfNight.class));
         cards.add(new SetCardInfo("Straw Golem", 158, Rarity.UNCOMMON, mage.cards.s.StrawGolem.class));
         cards.add(new SetCardInfo("Striped Bears", 140, Rarity.COMMON, mage.cards.s.StripedBears.class));
+        cards.add(new SetCardInfo("Sylvan Hierophant", 141, Rarity.UNCOMMON, mage.cards.s.SylvanHierophant.class));
         cards.add(new SetCardInfo("Tariff", 28, Rarity.RARE, mage.cards.t.Tariff.class));
         cards.add(new SetCardInfo("Teferi's Veil", 53, Rarity.UNCOMMON, mage.cards.t.TeferisVeil.class));
         cards.add(new SetCardInfo("Tendrils of Despair", 83, Rarity.COMMON, mage.cards.t.TendrilsOfDespair.class));

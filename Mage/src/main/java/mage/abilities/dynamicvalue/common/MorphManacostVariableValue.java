@@ -11,10 +11,10 @@ import mage.abilities.effects.Effect;
 import mage.game.Game;
 
 /**
- *
  * @author LevelX2
  */
-public class MorphManacostVariableValue implements DynamicValue {
+public enum MorphManacostVariableValue implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -27,7 +27,7 @@ public class MorphManacostVariableValue implements DynamicValue {
 
     @Override
     public MorphManacostVariableValue copy() {
-        return new MorphManacostVariableValue();
+        return MorphManacostVariableValue.instance;
     }
 
     @Override

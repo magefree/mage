@@ -1,25 +1,23 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponentOrPlaneswalker;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class GoblinLyre extends CardImpl {
@@ -65,8 +63,8 @@ class GoblinLyreEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Player opponent = game.getPlayerOrPlaneswalkerController(getTargetPointer().getFirst(game, source));
         if (controller != null) {
-            if (controller.flipCoin(game)) {
-                int damage = new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent()).calculate(game, source, this);
+            if (controller.flipCoin(source, game, true)) {
+                int damage = CreaturesYouControlCount.instance.calculate(game, source, this);
                 if (opponent != null) {
                     return game.damagePlayerOrPlaneswalker(source.getFirstTarget(), damage, source.getSourceId(), game, false, true) > 0;
                 }

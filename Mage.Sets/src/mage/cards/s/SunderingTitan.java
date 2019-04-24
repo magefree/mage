@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import mage.MageInt;
@@ -23,13 +22,12 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class SunderingTitan extends CardImpl {
 
     public SunderingTitan(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{8}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{8}");
         this.subtype.add(SubType.GOLEM);
 
         this.power = new MageInt(7);
@@ -71,7 +69,7 @@ class SunderingTitanDestroyLandEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         Set<UUID> lands = new HashSet<>();
         if (controller != null && sourcePermanent != null) {
-            for (SubType landName : SubType.getBasicLands(false)) {
+            for (SubType landName : SubType.getBasicLands()) {
                 FilterLandPermanent filter = new FilterLandPermanent(landName + " to destroy");
                 filter.add(new SubtypePredicate(landName));
                 Target target = new TargetLandPermanent(1, 1, filter, true);

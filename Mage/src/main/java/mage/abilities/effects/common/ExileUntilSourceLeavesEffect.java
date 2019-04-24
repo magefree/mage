@@ -19,7 +19,7 @@ import mage.util.CardUtil;
 public class ExileUntilSourceLeavesEffect extends OneShotEffect {
 
     public ExileUntilSourceLeavesEffect(String targetName) {
-        super(Outcome.Benefit);
+        super(Outcome.Removal);
         this.staticText = "exile target " + targetName + " an opponent controls until {this} leaves the battlefield";
     }
 

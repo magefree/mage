@@ -55,9 +55,9 @@ class HollowWarriorCostToAttackBlockEffect extends PayCostToAttackBlockEffectImp
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("an untapped creature you control not declared as an attacking or blocking creature");
     static {
-        filter.add(Predicates.not(new AttackingPredicate()));
-        filter.add(Predicates.not(new BlockingPredicate()));
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(AttackingPredicate.instance));
+        filter.add(Predicates.not(BlockingPredicate.instance));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     HollowWarriorCostToAttackBlockEffect() {

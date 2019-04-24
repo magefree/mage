@@ -5,11 +5,12 @@ package mage.game;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 import mage.game.match.MatchType;
+import mage.game.mulligan.Mulligan;
 
 public class BrawlDuel extends GameCommanderImpl {
    
-    public BrawlDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans, int startLife) {
-        super(attackOption, range, freeMulligans, startLife);
+    public BrawlDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
+        super(attackOption, range, mulligan, startLife);
     }
 
     public BrawlDuel(final BrawlDuel game) {
