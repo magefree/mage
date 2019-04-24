@@ -58,7 +58,7 @@ class BrutalSuppressionAdditionalCostEffect extends CostModificationEffectImpl {
     private static final FilterPermanent filter2 = new FilterPermanent("nontoken Rebels");
     static{
         filter2.add(new SubtypePredicate(SubType.REBEL));
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     BrutalSuppressionAdditionalCostEffect() {

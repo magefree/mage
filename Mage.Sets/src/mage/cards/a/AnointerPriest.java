@@ -24,7 +24,7 @@ public final class AnointerPriest extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("a creature token");
 
     static {
-        filter.add(new TokenPredicate());
+        filter.add(TokenPredicate.instance);
     }
 
     public AnointerPriest(UUID ownerId, CardSetInfo setInfo) {

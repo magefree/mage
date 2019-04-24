@@ -57,7 +57,7 @@ public class AudioManager {
         try {
             linePool = new LinePool();
         } catch (Exception e) {
-            log.warn("Failed to initialize AudioManager. No sounds will be played.", e);
+            log.warn("Failed to initialize AudioManager (can't find compatible sound device). No sounds will be played.");
         }
     }
 

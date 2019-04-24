@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -18,6 +17,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 
+import java.util.UUID;
+
 /**
  * @author nantuko
  */
@@ -31,7 +32,7 @@ public final class BloodlordOfVaasgoth extends CardImpl {
     }
 
     public BloodlordOfVaasgoth(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.subtype.add(SubType.VAMPIRE, SubType.WARRIOR);
 
         this.power = new MageInt(3);
@@ -47,7 +48,7 @@ public final class BloodlordOfVaasgoth extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new BloodlordOfVaasgothEffect(), filter, false, true));
     }
 
-    public BloodlordOfVaasgoth(final BloodlordOfVaasgoth card) {
+    private BloodlordOfVaasgoth(final BloodlordOfVaasgoth card) {
         super(card);
     }
 
@@ -63,12 +64,12 @@ class BloodlordOfVaasgothEffect extends ContinuousEffectImpl {
     private int zoneChangeCounter;
     private UUID permanentId;
 
-    public BloodlordOfVaasgothEffect() {
+    BloodlordOfVaasgothEffect() {
         super(Duration.OneUse, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         staticText = "it gains bloodthirst 3";
     }
 
-    public BloodlordOfVaasgothEffect(final BloodlordOfVaasgothEffect effect) {
+    private BloodlordOfVaasgothEffect(final BloodlordOfVaasgothEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
         this.zoneChangeCounter = effect.zoneChangeCounter;
@@ -95,7 +96,6 @@ class BloodlordOfVaasgothEffect extends ContinuousEffectImpl {
         Permanent permanent = game.getPermanent(permanentId);
         if (permanent != null && permanent.getZoneChangeCounter(game) <= zoneChangeCounter) {
             permanent.addAbility(ability, source.getSourceId(), game);
-            return true;
         } else {
             if (game.getState().getZoneChangeCounter(permanentId) >= zoneChangeCounter) {
                 discard();

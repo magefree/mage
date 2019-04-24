@@ -1,13 +1,12 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.CitysBlessingCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.hint.common.CitysBlessingHint;
 import mage.abilities.keyword.AscendAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
@@ -15,8 +14,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class ArchOfOrazca extends CardImpl {
@@ -36,6 +36,7 @@ public final class ArchOfOrazca extends CardImpl {
                 new GenericManaCost(5),
                 CitysBlessingCondition.instance);
         ability.addCost(new TapSourceCost());
+        ability.addHint(CitysBlessingHint.instance);
         this.addAbility(ability);
     }
 

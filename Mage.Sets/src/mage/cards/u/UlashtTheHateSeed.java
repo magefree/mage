@@ -57,7 +57,7 @@ public final class UlashtTheHateSeed extends CardImpl {
         Mode mode = new Mode();
         Effect effect = new CreateTokenEffect(new SaprolingToken());
         effect.setText("Create a 1/1 green Saproling creature token.");
-        mode.getEffects().add(effect);
+        mode.addEffect(effect);
         ability.addMode(mode);
         this.addAbility(ability);
     }
@@ -78,9 +78,9 @@ class UlashtTheHateSeedEffect extends OneShotEffect {
     private static final FilterControlledCreaturePermanent filterRed = new FilterControlledCreaturePermanent();
 
     static {
-        filterGreen.add(new AnotherPredicate());
+        filterGreen.add(AnotherPredicate.instance);
         filterGreen.add(new ColorPredicate(ObjectColor.GREEN));
-        filterRed.add(new AnotherPredicate());
+        filterRed.add(AnotherPredicate.instance);
         filterRed.add(new ColorPredicate(ObjectColor.RED));
     }
 

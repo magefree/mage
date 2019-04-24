@@ -32,7 +32,7 @@ sub fixCost {
 
 my $author;
 if (-e $authorFile) {
-    open (DATA, $authorFile);
+    open (DATA, $authorFile) || die "can't open $authorFile : $!";
     $author = <DATA>;
     chomp $author;
     close(DATA);
@@ -40,14 +40,14 @@ if (-e $authorFile) {
     $author = 'anonymous';
 }
 
-open (DATA, $dataFile) || die "can't open $dataFile";
+open (DATA, $dataFile) || die "can't open $dataFile : $!";
 while(my $line = <DATA>) {
     my @data = split('\\|', $line);
     $cards{$data[0]}{$data[1]} = \@data;
 }
 close(DATA);
 
-open (DATA, $setsFile) || die "can't open $setsFile";
+open (DATA, $setsFile) || die "can't open $setsFile : $!";
 while(my $line = <DATA>) {
     my @data = split('\\|', $line);
     $sets{$data[0]}= $data[1];
@@ -55,14 +55,14 @@ while(my $line = <DATA>) {
 }
 close(DATA);
 
-open (DATA, $knownSetsFile) || die "can't open $knownSetsFile";
+open (DATA, $knownSetsFile) || die "can't open $knownSetsFile : $!";
 while(my $line = <DATA>) {
     my @data = split('\\|', $line);
     $knownSets{$data[0]}= $data[1];
 }
 close(DATA);
 
-open (DATA, $keywordsFile) || die "can't open $keywordsFile";
+open (DATA, $keywordsFile) || die "can't open $keywordsFile : $!";
 while(my $line = <DATA>) {
     my @data = split('\\|', $line);
     $keywords{toCamelCase($data[0])}= $data[1];

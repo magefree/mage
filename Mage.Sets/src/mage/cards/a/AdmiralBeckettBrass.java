@@ -71,10 +71,10 @@ class DamagedByPiratesWatcher extends Watcher {
     private final Map<UUID, Set<UUID>> damageSourceIds = new HashMap<>();
 
     public DamagedByPiratesWatcher() {
-        super(DamagedByPiratesWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
-    public DamagedByPiratesWatcher(final DamagedByPiratesWatcher watcher) {
+    private DamagedByPiratesWatcher(final DamagedByPiratesWatcher watcher) {
         super(watcher);
         for (UUID playerId : watcher.damageSourceIds.keySet()) {
             Set<UUID> creatures = new HashSet<>();
@@ -106,7 +106,7 @@ class DamagedByPiratesWatcher extends Watcher {
         }
     }
 
-    public boolean damagedByEnoughPirates(UUID sourceId, Game game) {
+    public boolean damagedByEnoughPirates(UUID sourceId) {
         return damageSourceIds.keySet().contains(sourceId) && damageSourceIds.get(sourceId).size() > 2;
     }
 
@@ -119,14 +119,11 @@ class DamagedByPiratesWatcher extends Watcher {
 
 class ControllerDealtDamageByPiratesPredicate implements Predicate<Permanent> {
 
-    public ControllerDealtDamageByPiratesPredicate() {
-    }
-
     @Override
     public boolean apply(Permanent input, Game game) {
-        DamagedByPiratesWatcher watcher = (DamagedByPiratesWatcher) game.getState().getWatchers().get(DamagedByPiratesWatcher.class.getSimpleName());
+        DamagedByPiratesWatcher watcher = game.getState().getWatcher(DamagedByPiratesWatcher.class);
         if (watcher != null) {
-            return watcher.damagedByEnoughPirates(input.getControllerId(), game);
+            return watcher.damagedByEnoughPirates(input.getControllerId());
         }
         return false;
     }

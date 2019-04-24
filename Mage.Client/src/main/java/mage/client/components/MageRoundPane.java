@@ -1,19 +1,20 @@
 package mage.client.components;
 
-import com.google.common.base.Function;
-import com.google.common.collect.MapMaker;
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.Map;
 import java.util.Objects;
-import javax.swing.JPanel;
-import mage.client.util.ImageCaches;
+
+import javax.swing.*;
+
 import org.jdesktop.swingx.graphics.GraphicsUtilities;
 import org.jdesktop.swingx.graphics.ShadowRenderer;
+
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
+
+import mage.client.util.ImageCaches;
+import mage.client.util.SoftValuesLoadingCache;
 
 /**
  * Mage round pane with transparency. Used for tooltips.
@@ -26,17 +27,15 @@ public class MageRoundPane extends JPanel {
     private int Y_OFFSET = 30;
     private final Color defaultBackgroundColor = new Color(141, 130, 112, 200); // color of the frame of the popup window
     private Color backgroundColor = defaultBackgroundColor;
-    private static final int alpha = 0;
-    private static final Map<ShadowKey, BufferedImage> SHADOW_IMAGE_CACHE;
-    private static final Map<Key, BufferedImage> IMAGE_CACHE;
+    private static final SoftValuesLoadingCache<ShadowKey, BufferedImage> SHADOW_IMAGE_CACHE;
+    private static final SoftValuesLoadingCache<Key, BufferedImage> IMAGE_CACHE;
 
     static {
-        SHADOW_IMAGE_CACHE = ImageCaches.register(new MapMaker().softValues().makeComputingMap((Function<ShadowKey, BufferedImage>) key -> createShadowImage(key)));
-
-        IMAGE_CACHE = ImageCaches.register(new MapMaker().softValues().makeComputingMap((Function<Key, BufferedImage>) key -> createImage(key)));
+        SHADOW_IMAGE_CACHE = ImageCaches.register(SoftValuesLoadingCache.from(MageRoundPane::createShadowImage));
+        IMAGE_CACHE = ImageCaches.register(SoftValuesLoadingCache.from(MageRoundPane::createImage));
     }
 
-    private final static class ShadowKey {
+    private static final class ShadowKey {
 
         final int width;
         final int height;
@@ -76,7 +75,7 @@ public class MageRoundPane extends JPanel {
         }
     }
 
-    private final static class Key {
+    private static final class Key {
 
         final int width;
         final int height;
@@ -136,7 +135,7 @@ public class MageRoundPane extends JPanel {
 
     @Override
     protected void paintComponent(Graphics g) {
-        g.drawImage(IMAGE_CACHE.get(new Key(getWidth(), getHeight(), X_OFFSET, Y_OFFSET, backgroundColor)), 0, 0, null);
+        g.drawImage(IMAGE_CACHE.getOrThrow(new Key(getWidth(), getHeight(), X_OFFSET, Y_OFFSET, backgroundColor)), 0, 0, null);
     }
 
     private static BufferedImage createImage(Key key) {
@@ -150,7 +149,7 @@ public class MageRoundPane extends JPanel {
         Graphics2D g2 = image.createGraphics();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        BufferedImage shadow = SHADOW_IMAGE_CACHE.get(new ShadowKey(w, h));
+        BufferedImage shadow = SHADOW_IMAGE_CACHE.getOrThrow(new ShadowKey(w, h));
 
         {
             int xOffset = (shadow.getWidth() - w) / 2;
@@ -163,8 +162,8 @@ public class MageRoundPane extends JPanel {
         /**
          * Add white translucent substrate
          */
-        /*if (alpha != 0) {
-            g2.setColor(new Color(255, 255, 255, alpha));
+        /*if (ALPHA != 0) {
+            g2.setColor(new Color(255, 255, 255, ALPHA));
             g2.fillRoundRect(x, y, w, h, arc, arc);
         }*/
         g2.setColor(key.backgroundColor);

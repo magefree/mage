@@ -31,7 +31,7 @@ import mage.target.common.TargetActivatedOrTriggeredAbility;
  */
 public final class TawnosUrzasApprentice extends CardImpl {
 
-    private final static FilterStackObject filter = new FilterStackObject("activated or triggered ability you control from an artifact source");
+    private static final FilterStackObject filter = new FilterStackObject("activated or triggered ability you control from an artifact source");
 
     static {
         filter.add(new ArtifactSourcePredicate());

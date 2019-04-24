@@ -95,7 +95,7 @@ class ReincarnationDelayedTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(target)) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
+            if (zEvent.isDiesEvent()) {
                 return true;
             }
         }
@@ -143,6 +143,7 @@ class ReincarnationDelayedEffect extends OneShotEffect {
                 FilterCreatureCard filter = new FilterCreatureCard("a creature card from " + player.getName() + "'s graveyard");
                 filter.add(new OwnerIdPredicate(player.getId()));
                 Target targetCreature = new TargetCardInGraveyard(filter);
+                targetCreature.setNotTarget(true);
                 if (targetCreature.canChoose(source.getSourceId(), controller.getId(), game)
                         && controller.chooseTarget(outcome, targetCreature, source, game)) {
                     Card card = game.getCard(targetCreature.getFirstTarget());

@@ -22,10 +22,10 @@ public final class RavagingBlaze extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{R}{R}");
 
         // Ravaging Blaze deals X damage to target creature.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.instance));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // <i>Spell mastery</i> — If there are two or more instant and/or sorcery cards in your graveyard, Ravaging Blaze also deals X damage to that creature's controller.
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DamageTargetControllerEffect(new ManacostVariableValue()),
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DamageTargetControllerEffect(ManacostVariableValue.instance),
             SpellMasteryCondition.instance, "<br><i>Spell mastery</i> — If there are two or more instant and/or sorcery cards in your graveyard, Ravaging Blaze also deals X damage to that creature's controller."));
     }
 

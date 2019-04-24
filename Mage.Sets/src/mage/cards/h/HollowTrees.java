@@ -44,7 +44,7 @@ public final class HollowTrees extends CardImpl {
         // {tap}, Remove any number of storage counters from Hollow Trees: Add {G} for each storage counter removed this way.
         Ability ability = new DynamicManaAbility(
                 Mana.GreenMana(1),
-                new RemovedCountersForCostValue(),
+                RemovedCountersForCostValue.instance,
                 new TapSourceCost(),
                 "Add {G} for each storage counter removed this way",
                 true, new CountersSourceCount(CounterType.STORAGE));

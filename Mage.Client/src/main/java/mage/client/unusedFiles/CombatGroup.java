@@ -61,9 +61,9 @@ public class CombatGroup extends javax.swing.JPanel {
         attackers = new mage.client.cards.Cards();
         lblDefender = new javax.swing.JLabel();
 
-        blockers.setPreferredSize(new java.awt.Dimension(Config.dimensions.frameWidth + 8, Config.dimensions.frameHeight + 25));
+        blockers.setPreferredSize(new java.awt.Dimension(Config.dimensions.getFrameWidth() + 8, Config.dimensions.getFrameHeight() + 25));
 
-        attackers.setPreferredSize(new java.awt.Dimension(Config.dimensions.frameWidth + 8, Config.dimensions.frameHeight + 25));
+        attackers.setPreferredSize(new java.awt.Dimension(Config.dimensions.getFrameWidth() + 8, Config.dimensions.getFrameHeight() + 25));
 
         lblDefender.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDefender.setText("Defender");

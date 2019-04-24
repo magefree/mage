@@ -28,7 +28,7 @@ public final class GateToPhyrexia extends CardImpl {
         // Sacrifice a creature: Destroy target artifact. Activate this ability only during your upkeep and only once each turn.
         Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(),
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)),
-                1, new IsStepCondition(PhaseStep.UPKEEP, true));
+                1, new IsStepCondition(PhaseStep.UPKEEP));
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);
     }

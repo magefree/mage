@@ -26,7 +26,7 @@ public final class OakStreetInnkeeper extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("tapped creatures you control");
     static {
-        filter.add(new TappedPredicate());
+        filter.add(TappedPredicate.instance);
     }
 
     public OakStreetInnkeeper(UUID ownerId, CardSetInfo setInfo) {

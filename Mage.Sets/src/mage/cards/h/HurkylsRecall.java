@@ -1,22 +1,22 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.other.OwnerIdPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class HurkylsRecall extends CardImpl {
@@ -29,7 +29,7 @@ public final class HurkylsRecall extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public HurkylsRecall(final HurkylsRecall card) {
+    private HurkylsRecall(final HurkylsRecall card) {
         super(card);
     }
 
@@ -41,24 +41,21 @@ public final class HurkylsRecall extends CardImpl {
 
 class HurkylsRecallReturnToHandEffect extends OneShotEffect {
 
-    public HurkylsRecallReturnToHandEffect() {
+    HurkylsRecallReturnToHandEffect() {
         super(Outcome.ReturnToHand);
         staticText = "Return all artifacts target player owns to their hand";
     }
 
-    public HurkylsRecallReturnToHandEffect(final HurkylsRecallReturnToHandEffect effect) {
+    private HurkylsRecallReturnToHandEffect(final HurkylsRecallReturnToHandEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         if (targetPointer.getFirst(game, source) != null) {
-            FilterArtifactPermanent filter = new FilterArtifactPermanent();
+            FilterPermanent filter = new FilterArtifactPermanent();
             filter.add(new OwnerIdPredicate(targetPointer.getFirst(game, source)));
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                permanent.moveToZone(Zone.HAND, source.getSourceId(), game, true);
-            }
-            return true;
+            return new ReturnToHandFromBattlefieldAllEffect(filter).apply(game, source);
         }
         return false;
     }

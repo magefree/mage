@@ -1,9 +1,5 @@
-
 package mage.cards.v;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.CitysBlessingCondition;
@@ -11,6 +7,7 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeOpponentsEffect;
 import mage.abilities.effects.keyword.AscendEffect;
+import mage.abilities.hint.common.CitysBlessingHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -21,8 +18,11 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class VonasHunger extends CardImpl {
@@ -43,6 +43,7 @@ public final class VonasHunger extends CardImpl {
                 new VonasHungerEffect(),
                 CitysBlessingCondition.instance,
                 "If you have the city's blessing, instead each opponent sacrifices half the creatures he or she controls rounded up"));
+        this.getSpellAbility().addHint(CitysBlessingHint.instance);
     }
 
     public VonasHunger(final VonasHunger card) {

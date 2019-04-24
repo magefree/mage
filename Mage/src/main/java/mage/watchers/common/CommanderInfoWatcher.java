@@ -24,11 +24,11 @@ import mage.watchers.Watcher;
  */
 public class CommanderInfoWatcher extends Watcher {
 
-    public final Map<UUID, Integer> damageToPlayer = new HashMap<>();
-    public final boolean checkCommanderDamage;
+    private final Map<UUID, Integer> damageToPlayer = new HashMap<>();
+    private final boolean checkCommanderDamage;
 
     public CommanderInfoWatcher(UUID commander, boolean checkCommanderDamage) {
-        super(CommanderInfoWatcher.class.getSimpleName(), WatcherScope.CARD);
+        super(WatcherScope.CARD);
         this.sourceId = commander;
         this.checkCommanderDamage = checkCommanderDamage;
     }

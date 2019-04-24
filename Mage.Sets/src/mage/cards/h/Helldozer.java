@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import java.util.UUID;
@@ -33,7 +32,10 @@ public final class Helldozer extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {B}{B}{B}, {tap}: Destroy target land. If that land was nonbasic, untap Helldozer.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HelldozerEffect(), new ManaCostsImpl("{B}{B}{B}"));
+        Ability ability = new SimpleActivatedAbility(
+                Zone.BATTLEFIELD,
+                new HelldozerEffect(),
+                new ManaCostsImpl("{B}{B}{B}"));
         ability.addTarget(new TargetLandPermanent());
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -70,13 +72,13 @@ class HelldozerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent helldozer = game.getPermanent(source.getSourceId());
         Permanent landTarget = game.getPermanent(source.getFirstTarget());
-        if (landTarget == null) {
-            return false;
-        }
-        boolean wasNonBasic = !landTarget.isBasic();
-        landTarget.destroy(id, game, false);
-        if (wasNonBasic && helldozer != null) {
-            return helldozer.untap(game);
+        if (landTarget != null) {
+            boolean wasNonBasic = !landTarget.isBasic();
+            landTarget.destroy(source.getSourceId(), game, false);
+            if (wasNonBasic
+                    && helldozer != null) {
+                return helldozer.untap(game);
+            }
         }
         return false;
     }

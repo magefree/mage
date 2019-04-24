@@ -1,32 +1,20 @@
-
-
- /*
- * MageDialog.java
- *
- * Created on 15-Dec-2009, 10:28:27 PM
- */
 package mage.client.dialog;
 
-import java.awt.AWTEvent;
-import java.awt.ActiveEvent;
-import java.awt.Component;
-import java.awt.EventQueue;
-import java.awt.KeyboardFocusManager;
-import java.awt.MenuComponent;
-import java.awt.TrayIcon;
+import mage.client.MageFrame;
+import mage.client.util.SettingsManager;
+import mage.client.util.gui.GuiDisplayUtil;
+import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.InvocationEvent;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyVetoException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Level;
-import javax.swing.*;
-
-import mage.client.MageFrame;
-import org.apache.log4j.Logger;
 
 /**
- *
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class MageDialog extends javax.swing.JInternalFrame {
 
@@ -45,6 +33,34 @@ public class MageDialog extends javax.swing.JInternalFrame {
 
     }
 
+    public static boolean isModalDialogActivated() {
+        for (JInternalFrame frame : MageFrame.getDesktop().getAllFrames()) {
+            if (frame instanceof MageDialog) {
+                MageDialog md = (MageDialog) frame;
+                if (md.isVisible() && md.isModal()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static void printFramesOrder(String name) {
+        ///*
+        JInternalFrame[] frames = MageFrame.getDesktop().getAllFrames();
+        System.out.println("--- " + name + " ---");
+        int order = 0;
+        for (JInternalFrame frame : frames) {
+            order++;
+            int zorder = -1;
+            if (frame.getParent() != null) {
+                zorder = frame.getParent().getComponentZOrder(frame);
+            }
+            System.out.println(order + ". " + frame.getClass() + " (" + frame.getTitle() + ") : layer = " + frame.getLayer() + ", zorder = " + zorder);
+        }
+        //*/
+    }
+
     @Override
     public void show() {
         super.show();
@@ -57,17 +73,6 @@ public class MageDialog extends javax.swing.JInternalFrame {
         // - JLayeredPane.MODAL_LAYER: all modal dialogs (user required actions - select cards in game, new game window, error windows)
         // - JLayeredPane.POPUP_LAYER: hints and other top level graphics
         // - JLayeredPane.DRAG_LAYER: top most layer for critical actions and user controls
-        /*
-        JInternalFrame[] frames  = MageFrame.getDesktop().getAllFrames();
-        System.out.println("---");
-        for(JInternalFrame frame: frames){
-            int zorder = -1;
-            if (frame.getParent() != null){
-                frame.getParent().getComponentZOrder(frame);
-            }
-            System.out.println(frame.getClass() + " (" + frame.getTitle() + ") : layer = " + frame.getLayer() + ", zorder = " + zorder);
-        }
-        */
 
         if (modal) {
             this.setClosable(false);
@@ -75,7 +80,7 @@ public class MageDialog extends javax.swing.JInternalFrame {
 
         this.toFront();
 
-        if (modal){
+        if (modal) {
             startModal();
         }
     }
@@ -83,9 +88,16 @@ public class MageDialog extends javax.swing.JInternalFrame {
     @Override
     public void setVisible(boolean value) {
         super.setVisible(value);
+
         if (value) {
             this.toFront();
+            try {
+                this.setSelected(true);
+            } catch (PropertyVetoException e) {
+                //
+            }
         }
+
         if (modal) {
             this.setClosable(false);
             if (value) {
@@ -97,6 +109,7 @@ public class MageDialog extends javax.swing.JInternalFrame {
                     SwingUtilities.invokeAndWait(() -> stopModal());
                 } catch (InterruptedException ex) {
                     LOGGER.fatal("MageDialog error", ex);
+                    Thread.currentThread().interrupt();
                 } catch (InvocationTargetException ex) {
                     LOGGER.fatal("MageDialog error", ex);
                 }
@@ -105,6 +118,7 @@ public class MageDialog extends javax.swing.JInternalFrame {
     }
 
     private synchronized void startModal() {
+        // modal loop -- all mouse events must be ignored by other windows
         try {
             if (SwingUtilities.isEventDispatchThread()) {
                 EventQueue theQueue = getToolkit().getSystemEventQueue();
@@ -115,18 +129,47 @@ public class MageDialog extends javax.swing.JInternalFrame {
 
                     // https://github.com/magefree/mage/issues/584 - Let's hope this will fix the Linux window problem
                     if (event.getSource() != null && event.getSource() instanceof TrayIcon && !(event instanceof InvocationEvent)) {
-                        return;
+                        dispatch = false;
+                        //return; // JayDi85: users can move mouse over try icon to disable modal mode (it's a bug but can be used in the future)
                     }
+
+                    // ignore mouse events outside from panel, only drag and move allowed -- as example:
+                    // combobox's popup will be selectable outside
+                    // cards and button hints will be works
+                    Component popupComponent = null;
+                    MouseEvent popupEvent = null;
                     if (event instanceof MouseEvent && event.getSource() instanceof Component) {
                         MouseEvent e = (MouseEvent) event;
                         MouseEvent m = SwingUtilities.convertMouseEvent((Component) e.getSource(), e, this);
-                        if (!this.contains(m.getPoint()) && e.getID() != MouseEvent.MOUSE_DRAGGED) {
-                            dispatch = false;
+
+                        // disable all outer events (except some actions)
+                        if (!this.contains(m.getPoint())) {
+                            boolean allowedEvent = false;
+
+                            // need any mouse move (for hints)
+                            if (e.getID() == MouseEvent.MOUSE_DRAGGED || e.getID() == MouseEvent.MOUSE_MOVED) {
+                                allowedEvent = true;
+                            }
+
+                            // need popup clicks and mouse wheel (for out of bound actions)
+                            if (!allowedEvent) {
+                                popupComponent = SwingUtilities.getDeepestComponentAt(e.getComponent(), e.getX(), e.getY()); // show root component (popups creates at root)
+                                if (popupComponent != null && (popupComponent.getClass().getName().contains("BasicComboPopup")
+                                        || popupComponent.getClass().getName().contains("JMenuItem"))) {
+                                    popupEvent = SwingUtilities.convertMouseEvent((Component) e.getSource(), e, popupComponent);
+                                    allowedEvent = true;
+                                }
+                            }
+
+                            dispatch = allowedEvent;
                         }
                     }
 
                     if (dispatch) {
-                        if (event instanceof ActiveEvent) {
+                        if (popupEvent != null) {
+                            // process outer popup events, it's must be FIRST check
+                            popupComponent.dispatchEvent(popupEvent);
+                        } else if (event instanceof ActiveEvent) {
                             ((ActiveEvent) event).dispatch();
                         } else if (source instanceof Component) {
                             ((Component) source).dispatchEvent(event);
@@ -142,9 +185,10 @@ public class MageDialog extends javax.swing.JInternalFrame {
                     wait();
                 }
             }
-        } catch (InterruptedException ignored) {
+        } catch (InterruptedException e) {
+            LOGGER.fatal("MageDialog error", e);
+            Thread.currentThread().interrupt();
         }
-
     }
 
     private synchronized void stopModal() {
@@ -174,13 +218,20 @@ public class MageDialog extends javax.swing.JInternalFrame {
             java.util.logging.Logger.getLogger(MageDialog.class.getName()).log(Level.SEVERE, "setClosed(false) failed", ex);
         }
         MageFrame.getDesktop().remove(this);
+    }
 
+    public void makeWindowCentered() {
+        makeWindowCentered(this, this.getWidth(), this.getHeight());
+    }
+
+    public static void makeWindowCentered(Component component, int width, int height) {
+        Point centered = SettingsManager.instance.getComponentPosition(width, height);
+        component.setLocation(centered.x, centered.y);
+        GuiDisplayUtil.keepComponentInsideScreen(centered.x, centered.y, component);
     }
 
     /**
      * Used to set a tooltip text on icon and titel bar
-     *
-     * used in {@link ExileZoneDialog} and {@link ShowCardsDialog}
      *
      * @param text
      */
@@ -209,12 +260,12 @@ public class MageDialog extends javax.swing.JInternalFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 394, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 274, Short.MAX_VALUE)
         );
 
         pack();

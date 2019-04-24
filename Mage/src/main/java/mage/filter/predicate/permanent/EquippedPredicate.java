@@ -15,7 +15,8 @@ import java.util.Objects;
 /**
  * @author LevelX2
  */
-public class EquippedPredicate implements Predicate<Permanent> {
+public enum EquippedPredicate implements Predicate<Permanent> {
+    instance;
 
     @Override
     public boolean apply(Permanent input, Game game) {

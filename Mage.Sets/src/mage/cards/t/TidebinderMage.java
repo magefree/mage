@@ -130,7 +130,7 @@ class TidebinderMageEffect extends ContinuousRuleModifyingEffectImpl {
 class TidebinderMageWatcher extends Watcher {
 
     TidebinderMageWatcher () {
-        super("ControlLost", WatcherScope.CARD);
+        super(WatcherScope.CARD);
     }
 
     TidebinderMageWatcher(TidebinderMageWatcher watcher) {

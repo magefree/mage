@@ -23,8 +23,8 @@ public final class HarvesterOfSouls extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another nontoken creature");
 
     static {
-        filter.add(Predicates.not(new TokenPredicate()));
-        filter.add(new AnotherPredicate());
+        filter.add(Predicates.not(TokenPredicate.instance));
+        filter.add(AnotherPredicate.instance);
     }
 
     public HarvesterOfSouls(UUID ownerId, CardSetInfo setInfo) {

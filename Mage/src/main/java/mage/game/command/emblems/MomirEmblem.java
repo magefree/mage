@@ -1,7 +1,5 @@
-
 package mage.game.command.emblems;
 
-import java.util.List;
 import mage.abilities.Ability;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.costs.common.DiscardCardCost;
@@ -15,7 +13,6 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.SetType;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -24,8 +21,9 @@ import mage.game.permanent.token.EmptyToken;
 import mage.util.CardUtil;
 import mage.util.RandomUtil;
 
+import java.util.List;
+
 /**
- *
  * @author spjspj
  */
 public final class MomirEmblem extends Emblem {
@@ -69,22 +67,30 @@ class MomirEffect extends OneShotEffect {
             game.informPlayers("No random creature card with converted mana cost of " + value + " was found.");
             return false;
         }
-        EmptyToken token = new EmptyToken(); // search for a non custom set creature
-        while (token.getName().isEmpty() && !options.isEmpty()) {
+
+        // search for a random non custom set creature
+        EmptyToken token = null;
+        while (!options.isEmpty()) {
             int index = RandomUtil.nextInt(options.size());
             ExpansionSet expansionSet = Sets.findSet(options.get(index).getSetCode());
-            if (expansionSet == null || expansionSet.getSetType() == SetType.CUSTOM_SET) {
+            if (expansionSet == null || !expansionSet.getSetType().isEternalLegal()) {
                 options.remove(index);
             } else {
                 Card card = options.get(index).getCard();
                 if (card != null) {
+                    token = new EmptyToken();
                     CardUtil.copyTo(token).from(card);
+                    break;
                 } else {
                     options.remove(index);
                 }
             }
         }
-        token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId(), false, false);
-        return true;
+        if (token != null) {
+            token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId(), false, false);
+            return true;
+        }
+
+        return false;
     }
 }

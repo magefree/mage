@@ -22,7 +22,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  */
 public final class OrchardSpirit extends CardImpl {
 
-    private final static FilterCreaturePermanent notFlyingorReachCreatures = new FilterCreaturePermanent("except by creatures with flying or reach");
+    private static final FilterCreaturePermanent notFlyingorReachCreatures = new FilterCreaturePermanent("except by creatures with flying or reach");
 
     static {
         notFlyingorReachCreatures.add(Predicates.not(

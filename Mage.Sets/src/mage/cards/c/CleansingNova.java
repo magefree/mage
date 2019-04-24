@@ -27,7 +27,7 @@ public final class CleansingNova extends CardImpl {
 
         // • Destroy all artifacts and enchantments.
         Mode mode = new Mode();
-        mode.getEffects().add(new DestroyAllEffect(filter));
+        mode.addEffect(new DestroyAllEffect(filter));
         this.getSpellAbility().getModes().addMode(mode);
     }
 

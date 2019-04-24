@@ -34,13 +34,13 @@ public final class RakdosCharm extends CardImpl {
 
         // or destroy target artifact;
         Mode mode = new Mode();
-        mode.getEffects().add(new DestroyTargetEffect());
-        mode.getTargets().add(new TargetArtifactPermanent());
+        mode.addEffect(new DestroyTargetEffect());
+        mode.addTarget(new TargetArtifactPermanent());
         this.getSpellAbility().addMode(mode);
 
         // or each creature deals 1 damage to its controller.
         mode = new Mode();
-        mode.getEffects().add(new RakdosCharmDamageEffect());
+        mode.addEffect(new RakdosCharmDamageEffect());
         this.getSpellAbility().addMode(mode);
     }
 

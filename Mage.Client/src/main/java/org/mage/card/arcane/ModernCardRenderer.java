@@ -5,24 +5,6 @@
  */
 package org.mage.card.arcane;
 
-import java.awt.*;
-import java.awt.font.*;
-import java.awt.geom.Arc2D;
-import java.awt.geom.Area;
-import java.awt.geom.Path2D;
-import java.awt.geom.Rectangle2D;
-import java.awt.geom.RoundRectangle2D;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.text.AttributedCharacterIterator;
-import java.text.AttributedString;
-import java.text.CharacterIterator;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import javax.swing.*;
 import mage.ObjectColor;
 import mage.cards.ArtRect;
 import mage.cards.FrameStyle;
@@ -34,6 +16,22 @@ import mage.util.SubTypeList;
 import mage.view.CardView;
 import mage.view.PermanentView;
 import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.font.*;
+import java.awt.geom.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.text.AttributedCharacterIterator;
+import java.text.AttributedString;
+import java.text.CharacterIterator;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import static org.mage.card.arcane.ManaSymbols.getSizedManaSymbol;
 
 
@@ -56,14 +54,15 @@ import static org.mage.card.arcane.ManaSymbols.getSizedManaSymbol;
         render.draw(g, cardWidth, cardHeight);
     }
  */
+
 /**
  * @author stravant@gmail.com
- *
+ * <p>
  * Base rendering class for new border cards
  */
 public class ModernCardRenderer extends CardRenderer {
 
-    private final static Logger LOGGER = Logger.getLogger(ModernCardRenderer.class);
+    private static final Logger LOGGER = Logger.getLogger(ModernCardRenderer.class);
 
     ///////////////////////////////////////////////////////////////////////////
     // Textures for modern frame cards
@@ -98,6 +97,7 @@ public class ModernCardRenderer extends CardRenderer {
         }
         return new Font("Arial", Font.PLAIN, 1);
     }
+
     public static final Font BASE_BELEREN_FONT = loadFont("beleren-bold");
 
     public static final Paint BG_TEXTURE_WHITE = loadBackgroundTexture("white");
@@ -275,7 +275,9 @@ public class ModernCardRenderer extends CardRenderer {
         } else if (cardView.isPlayable()) {
             borderColor = new Color(153, 102, 204, 200);
         } else if (cardView.isCanAttack()) {
-            borderColor = new Color(0, 0, 255, 230);
+            borderColor = new Color(255, 50, 50, 230);
+        } else if (cardView.isCanBlock()) {
+            borderColor = new Color(255, 50, 50, 230);
         } else {
             borderColor = Color.BLACK;
         }
@@ -480,7 +482,7 @@ public class ModernCardRenderer extends CardRenderer {
         g.setPaint(borderPaint);
 
         if (cardView.getFrameStyle() == FrameStyle.KLD_INVENTION) {
-            g.drawImage(FRAME_INVENTION, 0, 0, cardWidth, cardHeight, null);
+            g.drawImage(FRAME_INVENTION, 3, 3, cardWidth - 6, cardHeight - 6, null);
             g.drawRect(
                     totalContentInset, typeLineY,
                     contentWidth - 1, cardHeight - borderWidth * 3 - typeLineY - 1);
@@ -659,7 +661,7 @@ public class ModernCardRenderer extends CardRenderer {
     }
 
     public void drawZendikarCurvedFace(Graphics2D g2, BufferedImage image, int x, int y, int x2, int y2,
-            Color boxColor, Paint paint) {
+                                       Color boxColor, Paint paint) {
 
         BufferedImage artToUse = faceArtImage;
         boolean hadToUseFullArt = false;
@@ -707,8 +709,8 @@ public class ModernCardRenderer extends CardRenderer {
     }
 
     public void drawBFZCurvedFace(Graphics2D g2, BufferedImage image, int x, int y, int x2, int y2,
-            int topxdelta, int endydelta,
-            Color boxColor, Paint paint) {
+                                  int topxdelta, int endydelta,
+                                  Color boxColor, Paint paint) {
         BufferedImage artToUse = faceArtImage;
         boolean hadToUseFullArt = false;
         if (faceArtImage == null) {
@@ -764,10 +766,10 @@ public class ModernCardRenderer extends CardRenderer {
     }
 
     public void drawUSTCurves(Graphics2D g2, BufferedImage image, int x, int y, int x2, int y2,
-            int topxdelta, int endydelta,
-            Color boxColor, Paint paint) {
+                              int topxdelta, int endydelta,
+                              Color boxColor, Paint paint) {
         BufferedImage artToUse = artImage;
-        
+
         int srcW = x2;
         int srcH = y2;
         if (artToUse != null) {
@@ -999,23 +1001,23 @@ public class ModernCardRenderer extends CardRenderer {
 
             Polygon symbol = new Polygon(
                     new int[]{
-                        x + w / 2,
-                        (int) (x + w * 0.9),
-                        x + w,
-                        (int) (x + w * 0.6),
-                        x + w / 2,
-                        (int) (x + w * 0.4),
-                        x,
-                        (int) (x + w * 0.1),},
+                            x + w / 2,
+                            (int) (x + w * 0.9),
+                            x + w,
+                            (int) (x + w * 0.6),
+                            x + w / 2,
+                            (int) (x + w * 0.4),
+                            x,
+                            (int) (x + w * 0.1),},
                     new int[]{
-                        y + h,
-                        (int) (y + 0.8 * h),
-                        y,
-                        (int) (y - 0.2 * h),
-                        y,
-                        (int) (y - 0.2 * h),
-                        y,
-                        (int) (y + 0.8 * h),},
+                            y + h,
+                            (int) (y + 0.8 * h),
+                            y,
+                            (int) (y - 0.2 * h),
+                            y,
+                            (int) (y - 0.2 * h),
+                            y,
+                            (int) (y + 0.8 * h),},
                     8);
 
             // Draw + stroke
@@ -1124,7 +1126,7 @@ public class ModernCardRenderer extends CardRenderer {
                 drawBasicManaTextbox(g, x, y, w, h, ((TextboxBasicManaRule) allRules.get(0)).getBasicManaSymbol());
                 return;
             } else // Big circle in the middle for Zendikar lands
-             if (allRules.size() == 1) {
+                if (allRules.size() == 1) {
                     // Size of mana symbol = 9/4 * h, 3/4h above line
                     if (allRules.get(0) instanceof TextboxBasicManaRule) {
                         drawBasicManaSymbol(g, x + w / 2 - 9 * h / 8 + 1, y - 3 * h / 4, 9 * h / 4, 9 * h / 4, ((TextboxBasicManaRule) allRules.get(0)).getBasicManaSymbol());
@@ -1278,45 +1280,45 @@ public class ModernCardRenderer extends CardRenderer {
                 if (loyaltyRule.loyaltyChange < 0 || loyaltyRule.loyaltyChange == TextboxLoyaltyRule.MINUS_X) {
                     symbol = new Polygon(
                             new int[]{
-                                symbolX,
-                                symbolX + symbolWidth,
-                                symbolX + symbolWidth,
-                                symbolX + symbolWidth / 2,
-                                symbolX,},
+                                    symbolX,
+                                    symbolX + symbolWidth,
+                                    symbolX + symbolWidth,
+                                    symbolX + symbolWidth / 2,
+                                    symbolX,},
                             new int[]{
-                                symbolY,
-                                symbolY,
-                                symbolY + symbolHeight - 3,
-                                symbolY + symbolHeight + 3,
-                                symbolY + symbolHeight - 3,},
+                                    symbolY,
+                                    symbolY,
+                                    symbolY + symbolHeight - 3,
+                                    symbolY + symbolHeight + 3,
+                                    symbolY + symbolHeight - 3,},
                             5);
                 } else if (loyaltyRule.loyaltyChange > 0) {
                     symbol = new Polygon(
                             new int[]{
-                                symbolX,
-                                symbolX + symbolWidth / 2,
-                                symbolX + symbolWidth,
-                                symbolX + symbolWidth,
-                                symbolX,},
+                                    symbolX,
+                                    symbolX + symbolWidth / 2,
+                                    symbolX + symbolWidth,
+                                    symbolX + symbolWidth,
+                                    symbolX,},
                             new int[]{
-                                symbolY + 3,
-                                symbolY - 3,
-                                symbolY + 3,
-                                symbolY + symbolHeight,
-                                symbolY + symbolHeight,},
+                                    symbolY + 3,
+                                    symbolY - 3,
+                                    symbolY + 3,
+                                    symbolY + symbolHeight,
+                                    symbolY + symbolHeight,},
                             5);
                 } else {
                     symbol = new Polygon(
                             new int[]{
-                                symbolX,
-                                symbolX + symbolWidth,
-                                symbolX + symbolWidth,
-                                symbolX,},
+                                    symbolX,
+                                    symbolX + symbolWidth,
+                                    symbolX + symbolWidth,
+                                    symbolX,},
                             new int[]{
-                                symbolY,
-                                symbolY,
-                                symbolY + symbolHeight,
-                                symbolY + symbolHeight,},
+                                    symbolY,
+                                    symbolY,
+                                    symbolY + symbolHeight,
+                                    symbolY + symbolHeight,},
                             4);
                 }
                 g.setColor(new Color(0, 0, 0, 128));
@@ -1610,13 +1612,13 @@ public class ModernCardRenderer extends CardRenderer {
                 Color[] translatedColors;
                 if (types.contains(CardType.LAND)) {
                     translatedColors = new Color[]{
-                        getLandTextboxColor(twoColors.get(0)),
-                        getLandTextboxColor(twoColors.get(1))
+                            getLandTextboxColor(twoColors.get(0)),
+                            getLandTextboxColor(twoColors.get(1))
                     };
                 } else {
                     translatedColors = new Color[]{
-                        getTextboxColor(twoColors.get(0)),
-                        getTextboxColor(twoColors.get(1))
+                            getTextboxColor(twoColors.get(0)),
+                            getTextboxColor(twoColors.get(1))
                     };
                 }
 

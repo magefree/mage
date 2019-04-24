@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
@@ -10,7 +9,6 @@ import mage.game.permanent.Permanent;
 import mage.target.Target;
 
 /**
- *
  * @author LevelX2
  */
 
@@ -18,7 +16,7 @@ public class CantBeBlockedByTargetSourceEffect extends RestrictionEffect {
 
     /**
      * Target creature(s) cant block the source creature
-     * 
+     *
      * @param duration
      */
 
@@ -36,7 +34,7 @@ public class CantBeBlockedByTargetSourceEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         return !this.getTargetPointer().getTargets(game, source).contains(blocker.getId());
     }
 
@@ -52,7 +50,7 @@ public class CantBeBlockedByTargetSourceEffect extends RestrictionEffect {
         }
         StringBuilder sb = new StringBuilder();
         Target target = mode.getTargets().get(0);
-        if(target.getNumberOfTargets() > 1){
+        if (target.getNumberOfTargets() > 1) {
             if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
                 sb.append("Up to");
             }

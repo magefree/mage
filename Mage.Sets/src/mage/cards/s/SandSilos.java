@@ -44,7 +44,7 @@ public final class SandSilos extends CardImpl {
         // {tap}, Remove any number of storage counters from Sand Silos: Add {U} for each storage counter removed this way.
         Ability ability = new DynamicManaAbility(
                 Mana.BlueMana(1),
-                new RemovedCountersForCostValue(),
+                RemovedCountersForCostValue.instance,
                 new TapSourceCost(),
                 "Add {U} for each storage counter removed this way",
                 true, new CountersSourceCount(CounterType.STORAGE));

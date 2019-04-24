@@ -39,7 +39,7 @@ public final class TerritorialAllosaurus extends CardImpl {
         Ability conditionalAbility = new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.instance,
                 "When {this} enters the battlefield, if it was kicked, it fights another target creature.");
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         conditionalAbility.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(conditionalAbility);
     }

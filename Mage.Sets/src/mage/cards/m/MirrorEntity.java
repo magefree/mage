@@ -40,7 +40,7 @@ public final class MirrorEntity extends CardImpl {
         // Changeling
         this.addAbility(ChangelingAbility.getInstance());
         // {X}: Until end of turn, creatures you control have base power and toughness X/X and gain all creature types.
-        DynamicValue variableMana = new ManacostVariableValue();
+        DynamicValue variableMana = ManacostVariableValue.instance;
         Effect effect = new SetPowerToughnessAllEffect(variableMana, variableMana, Duration.EndOfTurn, filter, true);
         effect.setText("Until end of turn, creatures you control have base power and toughness X/X");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new VariableManaCost());

@@ -1,22 +1,20 @@
-
 package mage.cards;
 
 import mage.ObjectColor;
+import mage.abilities.Ability;
+import mage.abilities.keyword.PartnerWithAbility;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import mage.abilities.Ability;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 import mage.util.CardUtil;
 import mage.util.RandomUtil;
+import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
-
-import mage.abilities.keyword.PartnerWithAbility;
-import org.apache.log4j.Logger;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -24,8 +22,8 @@ import org.apache.log4j.Logger;
 public abstract class ExpansionSet implements Serializable {
 
     private static final Logger logger = Logger.getLogger(ExpansionSet.class);
-    public final static CardGraphicInfo NON_FULL_USE_VARIOUS = new CardGraphicInfo(null, true);
-    public final static CardGraphicInfo FULL_ART_BFZ_VARIOUS = new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true);
+    public static final CardGraphicInfo NON_FULL_USE_VARIOUS = new CardGraphicInfo(null, true);
+    public static final CardGraphicInfo FULL_ART_BFZ_VARIOUS = new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true);
 
 
     public class SetCardInfo implements Serializable {
@@ -108,6 +106,7 @@ public abstract class ExpansionSet implements Serializable {
     protected boolean hasPartnerMechanic = false;
 
     protected boolean needsLegendCreature = false;
+    protected boolean needsPlaneswalker = false;
     protected boolean validateBoosterColors = true;
     protected double rejectMissingColorProbability = 0.8;
     protected double rejectSameColorUncommonsProbability = 0.8;
@@ -256,9 +255,10 @@ public abstract class ExpansionSet implements Serializable {
         }
 
         if (needsLegendCreature) {
-            if (booster.stream().noneMatch(card -> card.isLegendary() && card.isCreature())) {
-                return false;
-            }
+            return booster.stream().anyMatch(card -> card.isLegendary() && card.isCreature());
+        }
+        if (needsPlaneswalker) {
+            return booster.stream().filter(card -> card.isPlaneswalker()).count() == 1;
         }
 
         // TODO: add partner check
@@ -312,9 +312,7 @@ public abstract class ExpansionSet implements Serializable {
         // check that we don't have 3 or more uncommons/rares of the same color
         if (magicColors.stream().anyMatch(color -> uncommonWeight.get(color) >= 180)) {
             // reject only part of the boosters
-            if (RandomUtil.nextDouble() < rejectSameColorUncommonsProbability) {
-                return false;
-            }
+            return !(RandomUtil.nextDouble() < rejectSameColorUncommonsProbability);
         }
 
         return true;
@@ -604,10 +602,6 @@ public abstract class ExpansionSet implements Serializable {
 
     public List<CardInfo> getSpecialLand() {
         return new ArrayList<>();
-    }
-
-    public boolean isCustomSet() {
-        return setType == SetType.CUSTOM_SET;
     }
 
     public void removeSavedCards() {

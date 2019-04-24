@@ -1,13 +1,13 @@
-
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.hint.ConditionHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -18,8 +18,9 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class UbulSarGatekeepers extends CardImpl {
@@ -32,8 +33,10 @@ public final class UbulSarGatekeepers extends CardImpl {
         targetFilter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
+    private static final Condition gatesCondition = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1);
+
     public UbulSarGatekeepers(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.SOLDIER);
 
@@ -43,10 +46,11 @@ public final class UbulSarGatekeepers extends CardImpl {
         // Whenever Ubul Sar Gatekeepers enters the battlefield, if you control two or more Gates, target creature an opponent controls gets -2/-2 until end of turn.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(-2, -2, Duration.EndOfTurn)),
-                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1),
+                gatesCondition,
                 "Whenever {this} enters the battlefield, if you control two or more Gates, target creature an opponent controls gets -2/-2 until end of turn.");
         Target target = new TargetCreaturePermanent(targetFilter);
         ability.addTarget(target);
+        ability.addHint(new ConditionHint(gatesCondition, "You control two or more Gates"));
         this.addAbility(ability);
     }
 

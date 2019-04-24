@@ -64,13 +64,11 @@ class FortunesFavorEffect extends OneShotEffect {
         Player targetOpponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && targetOpponent != null && sourceObject != null) {
-            Cards cards = new CardsImpl();
-            cards.addAll(controller.getLibrary().getTopCards(game, 4));
+            Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 4));
 
             TargetCard target = new TargetCard(0, Integer.MAX_VALUE, Zone.LIBRARY, new FilterCard("cards for the face-down pile"));
             targetOpponent.choose(outcome, cards, target, game);
-            Cards faceDownPile = new CardsImpl();
-            faceDownPile.addAll(target.getTargets());
+            Cards faceDownPile = new CardsImpl(target.getTargets());
             cards.removeAll(target.getTargets());
             controller.revealCards(sourceObject.getIdName() + " - cards in face-up pile", cards, game);
             game.informPlayers(targetOpponent.getLogName() + " puts " + faceDownPile.size() + " card(s) into the face-down pile");

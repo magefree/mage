@@ -1,8 +1,4 @@
-
 package mage.util;
-
-import java.util.UUID;
-import java.util.stream.Stream;
 
 import mage.MageObject;
 import mage.Mana;
@@ -12,10 +8,13 @@ import mage.abilities.SpellAbility;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.*;
 import mage.cards.Card;
+import mage.constants.EmptyNames;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.util.functions.CopyTokenFunction;
+
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -25,10 +24,10 @@ public final class CardUtil {
     private static final String SOURCE_EXILE_ZONE_TEXT = "SourceExileZone";
 
     static final String[] numberStrings = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
-        "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"};
+            "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"};
 
     static final String[] ordinalStrings = {"first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eightth", "ninth",
-        "tenth", "eleventh", "twelfth", "thirteenth", "fourteenth", "fifteenth", "sixteenth", "seventeenth", "eighteenth", "nineteenth", "twentieth"};
+            "tenth", "eleventh", "twelfth", "thirteenth", "fourteenth", "fifteenth", "sixteenth", "seventeenth", "eighteenth", "nineteenth", "twentieth"};
 
     /**
      * Increase spell or ability cost to be paid.
@@ -57,7 +56,7 @@ public final class CardUtil {
      * @param reduceCount
      */
     public static void adjustCost(SpellAbility spellAbility, int reduceCount) {
-        CardUtil.adjustAbilityCost((Ability) spellAbility, reduceCount);
+        CardUtil.adjustAbilityCost(spellAbility, reduceCount);
     }
 
     public static ManaCosts<ManaCost> increaseCost(ManaCosts<ManaCost> manaCosts, int increaseCount) {
@@ -129,8 +128,8 @@ public final class CardUtil {
      *
      * @param spellAbility
      * @param manaCostsToReduce costs to reduce
-     * @param convertToGeneric colored mana does reduce generic mana if no
-     * appropriate colored mana is in the costs included
+     * @param convertToGeneric  colored mana does reduce generic mana if no
+     *                          appropriate colored mana is in the costs included
      */
     public static void adjustCost(SpellAbility spellAbility, ManaCosts<ManaCost> manaCostsToReduce, boolean convertToGeneric) {
         ManaCosts<ManaCost> previousCost = spellAbility.getManaCostsToPay();
@@ -315,7 +314,7 @@ public final class CardUtil {
      *
      * @param number number to convert to text
      * @param forOne if the number is 1, this string will be returnedinstead of
-     * "one".
+     *               "one".
      * @return
      */
     public static String numberToText(int number, String forOne) {
@@ -346,13 +345,20 @@ public final class CardUtil {
         if (number >= 1 && number < 21) {
             return ordinalStrings[number - 1];
         }
-        return Integer.toString(number) + "th";
+        return number + "th";
     }
 
     public static String replaceSourceName(String message, String sourceName) {
         message = message.replace("{this}", sourceName);
         message = message.replace("{source}", sourceName);
         return message;
+    }
+
+    public static String booleanToFlipName(boolean flip) {
+        if (flip) {
+            return "Heads";
+        }
+        return "Tails";
     }
 
     public static boolean checkNumeric(String s) {
@@ -362,7 +368,7 @@ public final class CardUtil {
 
     /**
      * Parse card number as int (support base [123] and alternative numbers
-     * [123b]).
+     * [123b], [U123]).
      *
      * @param cardNumber origin card number
      * @return int
@@ -373,17 +379,27 @@ public final class CardUtil {
             throw new IllegalArgumentException("Card number is empty.");
         }
 
-        if (Character.isDigit(cardNumber.charAt(cardNumber.length() - 1))) {
-            return Integer.parseInt(cardNumber);
-        } else {
-            return Integer.parseInt(cardNumber.substring(0, cardNumber.length() - 1));
+        try {
+            if (!Character.isDigit(cardNumber.charAt(0))) {
+                // U123
+                return Integer.parseInt(cardNumber.substring(1));
+            } else if (!Character.isDigit(cardNumber.charAt(cardNumber.length() - 1))) {
+                // 123b
+                return Integer.parseInt(cardNumber.substring(0, cardNumber.length() - 1));
+            } else {
+                // 123
+                return Integer.parseInt(cardNumber);
+            }
+        } catch (NumberFormatException e) {
+            // wrong numbers like RA5 and etc
+            return -1;
         }
     }
 
     /**
      * Creates and saves a (card + zoneChangeCounter) specific exileId.
      *
-     * @param game the current game
+     * @param game   the current game
      * @param source source ability
      * @return the specific UUID
      */
@@ -418,9 +434,9 @@ public final class CardUtil {
      * be specific to a permanent instance. So they won't match, if a permanent
      * was e.g. exiled and came back immediately.
      *
-     * @param text short value to describe the value
+     * @param text   short value to describe the value
      * @param cardId id of the card
-     * @param game the game
+     * @param game   the game
      * @return
      */
     public static String getCardZoneString(String text, UUID cardId, Game game) {
@@ -520,9 +536,38 @@ public final class CardUtil {
                 title = textSuffix == null ? "" : textSuffix;
             }
         } else {
-            title = textSuffix == null ? "" : textSuffix;;
+            title = textSuffix == null ? "" : textSuffix;
         }
         return title;
 
+    }
+
+    /**
+     * Face down cards and their copy tokens don't have names and that's "empty" names is not equals
+     */
+    public static boolean haveSameNames(String name1, String name2, Boolean ignoreMtgRuleForEmptyNames) {
+        if (ignoreMtgRuleForEmptyNames) {
+            // simple compare for tests and engine
+            return name1 != null && name2 != null && name1.equals(name2);
+        } else {
+            // mtg logic compare for game (empty names can't be same)
+            return !haveEmptyName(name1) && !haveEmptyName(name2) && name1.equals(name2);
+        }
+    }
+
+    public static boolean haveSameNames(String name1, String name2) {
+        return haveSameNames(name1, name2, false);
+    }
+
+    public static boolean haveSameNames(MageObject object1, MageObject object2) {
+        return object1 != null && object2 != null && haveSameNames(object1.getName(), object2.getName());
+    }
+
+    public static boolean haveEmptyName(String name) {
+        return name == null || name.isEmpty() || name.equals(EmptyNames.FACE_DOWN_CREATURE.toString()) || name.equals(EmptyNames.FACE_DOWN_TOKEN.toString());
+    }
+
+    public static boolean haveEmptyName(MageObject object) {
+        return object == null || haveEmptyName(object.getName());
     }
 }

@@ -1,9 +1,4 @@
-
 package mage.game;
-
-import java.io.Serializable;
-import java.util.*;
-import java.util.stream.Collectors;
 
 import mage.MageItem;
 import mage.MageObject;
@@ -30,7 +25,9 @@ import mage.game.events.GameEvent;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
 import mage.game.events.TableEvent;
+import mage.game.match.Match;
 import mage.game.match.MatchType;
+import mage.game.mulligan.Mulligan;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
@@ -44,6 +41,10 @@ import mage.players.PlayerList;
 import mage.players.Players;
 import mage.util.MessageToClient;
 import mage.util.functions.ApplyToPermanent;
+
+import java.io.Serializable;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public interface Game extends MageItem, Serializable {
 
@@ -98,6 +99,7 @@ public interface Game extends MageItem, Serializable {
 
     Map<Zone, HashMap<UUID, MageObject>> getLKI();
 
+    // Result must be checked for null. Possible errors search pattern: (\S*) = game.getCard.+\n(?!.+\1 != null)
     Card getCard(UUID cardId);
 
     Optional<Ability> getAbility(UUID abilityId, UUID sourceId);
@@ -106,6 +108,7 @@ public interface Game extends MageItem, Serializable {
 
     void addPlayer(Player player, Deck deck);
 
+    // Result must be checked for null. Possible errors search pattern: (\S*) = game.getPlayer.+\n(?!.+\1 != null)
     Player getPlayer(UUID playerId);
 
     Player getPlayerOrPlaneswalkerController(UUID playerId);
@@ -130,8 +133,8 @@ public interface Game extends MageItem, Serializable {
     }
 
 
-    default boolean isActivePlayer(UUID playerId){
-        return getActivePlayerId().equals(playerId);
+    default boolean isActivePlayer(UUID playerId) {
+        return getActivePlayerId() != null && getActivePlayerId().equals(playerId);
     }
 
     /**
@@ -294,9 +297,9 @@ public interface Game extends MageItem, Serializable {
     /**
      * Creates and fires an damage prevention event
      *
-     * @param damageEvent damage event that will be replaced (instanceof check
-     * will be done)
-     * @param source ability that's the source of the prevention effect
+     * @param damageEvent     damage event that will be replaced (instanceof check
+     *                        will be done)
+     * @param source          ability that's the source of the prevention effect
      * @param game
      * @param amountToPrevent max preventable amount
      * @return true prevention was successfull / false prevention was replaced
@@ -306,12 +309,12 @@ public interface Game extends MageItem, Serializable {
     /**
      * Creates and fires an damage prevention event
      *
-     * @param event damage event that will be replaced (instanceof check will be
-     * done)
-     * @param source ability that's the source of the prevention effect
+     * @param event            damage event that will be replaced (instanceof check will be
+     *                         done)
+     * @param source           ability that's the source of the prevention effect
      * @param game
      * @param preventAllDamage true if there is no limit to the damage that can
-     * be prevented
+     *                         be prevented
      * @return true prevention was successfull / false prevention was replaced
      */
     PreventionEffectData preventDamage(GameEvent event, Ability source, Game game, boolean preventAllDamage);
@@ -471,4 +474,7 @@ public interface Game extends MageItem, Serializable {
     int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable);
 
     int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects);
+
+    Mulligan getMulligan();
+
 }

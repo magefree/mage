@@ -139,6 +139,7 @@ Masters Edition|MED|
 Game Day|MGDC|
 Mirage|MIR|
 Launch Party|MLP|
+Modern Horizons|MH1|
 Modern Masters 2015|MM2|
 Modern Masters 2017|MM3|
 Modern Masters|MMA|
@@ -165,6 +166,7 @@ Planeshift|PLS|
 Portal|POR|
 Prerelease Events|PTC|
 Portal Three Kingdoms|PTK|
+Ravnica Allegiance|RNA|
 Ravnica: City of Guilds|RAV|
 Rivals of Ixalan|RIX|
 Rise of the Eldrazi|ROE|
@@ -208,6 +210,7 @@ Vanguard Set 4|VG4|
 MTGO Vanguard|VGO|
 Visions|VIS|
 Vintage Masters|VMA|
+War of the Spark|WAR|
 Welcome Deck 2016|W16|
 Welcome Deck 2017|W17|
 World Magic Cup Qualifier|WMCQ|

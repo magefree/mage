@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -15,8 +14,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author ciaccona007
  */
 public final class CinderCloud extends CardImpl {
@@ -43,7 +43,8 @@ class CinderCloudEffect extends OneShotEffect {
 
     public CinderCloudEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Destroy target creature. If a white creature dies this way, {this} deals damage to that creature's controller equal to the creature's power";
+        this.staticText = "Destroy target creature. If a white creature dies this way, " +
+                "{this} deals damage to that creature's controller equal to the creature's power";
     }
 
     public CinderCloudEffect(final CinderCloudEffect effect) {
@@ -71,6 +72,6 @@ class CinderCloudEffect extends OneShotEffect {
                 permanentController.damage(damage, source.getSourceId(), game, false, true);
             }
         }
-        return true;
+        return false;
     }
 }

@@ -25,7 +25,7 @@ public final class TelimTor extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("all attacking creatures with flanking");
 
     static {
-        filter.add(new AttackingPredicate());
+        filter.add(AttackingPredicate.instance);
         filter.add(new AbilityPredicate(FlankingAbility.class));
     }
 

@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.mage</groupId>
         <artifactId>mage-root</artifactId>
-        <version>1.4.31</version>
+        <version>1.4.35</version>
     </parent>
 
     <artifactId>mage-verify</artifactId>
@@ -32,7 +32,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.6.3</version>
+            <version>2.9.8</version>
         </dependency>
 
         <dependency>
@@ -49,7 +49,7 @@
         <dependency>
             <groupId>org.mage</groupId>
             <artifactId>mage-client</artifactId>
-            <version>1.4.31</version>
+            <version>1.4.35</version>
         </dependency>
 
     </dependencies>
@@ -67,7 +67,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-<!--                    <configuration>
+                    <!--                    <configuration>
                         <compilerArgument>-Xlint:unchecked</compilerArgument>
                     </configuration> -->
                 </plugin>

@@ -44,13 +44,13 @@ public final class VisionCharm extends CardImpl {
 
         // or choose a land type and a basic land type. Each land of the first chosen type becomes the second chosen type until end of turn;
         Mode mode = new Mode();
-        mode.getEffects().add(new VisionCharmEffect());
+        mode.addEffect(new VisionCharmEffect());
         this.getSpellAbility().addMode(mode);
 
         // or target artifact phases out.
         mode = new Mode();
-        mode.getEffects().add(new PhaseOutTargetEffect());
-        mode.getTargets().add(new TargetArtifactPermanent());
+        mode.addEffect(new PhaseOutTargetEffect());
+        mode.addTarget(new TargetArtifactPermanent());
         this.getSpellAbility().addMode(mode);
     }
 

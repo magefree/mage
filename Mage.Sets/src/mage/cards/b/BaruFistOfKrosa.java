@@ -70,7 +70,7 @@ public final class BaruFistOfKrosa extends CardImpl {
 
 class BaruFistOfKrosaEffect extends OneShotEffect {
 
-    final static FilterControlledPermanent filter = new FilterControlledLandPermanent("lands you control");
+    static final FilterControlledPermanent filter = new FilterControlledLandPermanent("lands you control");
 
     BaruFistOfKrosaEffect() {
         super(Outcome.PutCreatureInPlay);

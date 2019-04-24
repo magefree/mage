@@ -25,7 +25,7 @@ public final class ArcboundCrusher extends CardImpl {
     private static final FilterPermanent filter = new FilterArtifactPermanent("another artifact");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
     
     public ArcboundCrusher(UUID ownerId, CardSetInfo setInfo) {

@@ -105,7 +105,7 @@ class GrandArchitectManaAbility extends ActivatedManaAbilityImpl {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     GrandArchitectManaAbility() {

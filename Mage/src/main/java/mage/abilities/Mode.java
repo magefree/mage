@@ -1,14 +1,14 @@
 package mage.abilities;
 
-import java.io.Serializable;
-import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.target.Target;
 import mage.target.Targets;
 
+import java.io.Serializable;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class Mode implements Serializable {
@@ -53,7 +53,14 @@ public class Mode implements Serializable {
     }
 
     public void addTarget(Target target) {
+        this.addTarget(target, false);
+    }
+
+    public void addTarget(Target target, Boolean addChooseHintFromEffect) {
         targets.add(target);
+        if (addChooseHintFromEffect) {
+            target.withChooseHint(this.getEffects().getText(this));
+        }
     }
 
     public Effects getEffects() {

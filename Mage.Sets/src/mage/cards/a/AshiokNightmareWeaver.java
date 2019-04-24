@@ -222,8 +222,7 @@ class AshiokNightmareWeaverExileAllEffect extends OneShotEffect {
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             Player opponent = game.getPlayer(opponentId);
             if (opponent != null) {
-                Cards cards = new CardsImpl();
-                cards.addAll(opponent.getHand());
+                Cards cards = new CardsImpl(opponent.getHand());
                 for (UUID cardId : cards) {
                     Card card = game.getCard(cardId);
                     if (card != null) {

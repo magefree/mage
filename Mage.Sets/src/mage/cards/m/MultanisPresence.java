@@ -1,10 +1,8 @@
 
 package mage.cards.m;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
@@ -62,8 +60,8 @@ class MultanisPresenceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        MultanisPresenceWatcher watcher = (MultanisPresenceWatcher) game.getState().getWatchers().get(MultanisPresenceWatcher.class.getSimpleName());
-        return (watcher.getSpellsCastThisTurn(controllerId).contains(event.getTargetId()));
+        MultanisPresenceWatcher watcher = game.getState().getWatcher(MultanisPresenceWatcher.class);
+        return watcher != null && watcher.getSpellsCastThisTurn(controllerId).contains(event.getTargetId());
     }
 
     @Override
@@ -74,10 +72,10 @@ class MultanisPresenceTriggeredAbility extends TriggeredAbilityImpl {
 
 class MultanisPresenceWatcher extends Watcher {
 
-    private final HashMap<UUID, List<UUID>> spellsCast = new HashMap<>();
+    private final Map<UUID, List<UUID>> spellsCast = new HashMap<>();
 
     public MultanisPresenceWatcher() {
-        super(MultanisPresenceWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public MultanisPresenceWatcher(final MultanisPresenceWatcher watcher) {

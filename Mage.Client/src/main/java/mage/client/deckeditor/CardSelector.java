@@ -1,35 +1,21 @@
-
-
- /*
+/*
  * CardSelector.java
  *
  * Created on Feb 18, 2010, 2:49:03 PM
  */
 package mage.client.deckeditor;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-import java.util.Map.Entry;
-import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
-import mage.cards.repository.CardCriteria;
-import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
+import mage.cards.repository.*;
 import mage.client.MageFrame;
 import mage.client.cards.*;
 import mage.client.constants.Constants.SortBy;
 import mage.client.deckeditor.table.TableModel;
 import mage.client.dialog.CheckBoxList;
-import static mage.client.dialog.PreferencesDialog.KEY_DECK_EDITOR_SEARCH_NAMES;
-import static mage.client.dialog.PreferencesDialog.KEY_DECK_EDITOR_SEARCH_RULES;
-import static mage.client.dialog.PreferencesDialog.KEY_DECK_EDITOR_SEARCH_TYPES;
-import static mage.client.dialog.PreferencesDialog.KEY_DECK_EDITOR_SEARCH_UNIQUE;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.gui.FastSearchUtil;
 import mage.client.util.sets.ConstructedFormats;
@@ -43,12 +29,21 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.filter.predicate.other.CardTextPredicate;
 import mage.filter.predicate.other.ExpansionSetPredicate;
+import mage.game.events.Listener;
 import mage.view.CardView;
 import mage.view.CardsView;
 import org.mage.card.arcane.ManaSymbolsCellRenderer;
 
+import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+import java.util.Map.Entry;
+
+import static mage.client.dialog.PreferencesDialog.*;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com, nantuko
  */
 public class CardSelector extends javax.swing.JPanel implements ComponentListener, DragCardTarget {
@@ -58,6 +53,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private boolean limited = false;
     private final SortSetting sortSetting;
     private static final Map<String, Integer> pdAllowed = new HashMap<>();
+    private static Listener<RepositoryEvent> setsDbListener = null;
 
     private final String TEST_MULTI_SET = "Multiple Sets selected";
 
@@ -76,15 +72,12 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         currentView = mainModel; // by default we use List View
 
         listCodeSelected = new CheckBoxList();
-        // remove the all option
-        boolean is_removeFinish = false;
 
         String[] setCodes = ConstructedFormats.getTypes();
         java.util.List<String> result = new ArrayList<>();
 
-        for (int i = 0; (i < setCodes.length) && (!is_removeFinish); i++) {
-            String item = setCodes[i];
-            if (!item.equals(ConstructedFormats.ALL)) {
+        for (String item : setCodes) {
+            if (!item.equals(ConstructedFormats.ALL_SETS)) {
                 result.add(item);
             }
         }
@@ -165,7 +158,6 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
     /**
      * Free all references
-     *
      */
     public void cleanUp() {
         this.cardGrid.clear();
@@ -255,7 +247,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 predicates.add(new ColorPredicate(ObjectColor.WHITE));
             }
             if (this.tbColorless.isSelected()) {
-                predicates.add(new ColorlessPredicate());
+                predicates.add(ColorlessPredicate.instance);
             }
             filter.add(Predicates.or(predicates));
 
@@ -365,9 +357,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 for (int itemIndex : choiseValue) {
 
                     java.util.List<String> listReceived = ConstructedFormats.getSetsByFormat(x.getElementAt(itemIndex).toString());
-                    listReceived.stream().filter((item) -> (setCodes.contains(item) == false)).forEachOrdered((item) -> {
-                        setCodes.add(item);
-                    });
+                    listReceived.stream().filter(item -> !setCodes.contains(item)).forEachOrdered(setCodes::add);
                 }
                 criteria.setCodes(setCodes.toArray(new String[0]));
             }
@@ -505,6 +495,11 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         }
     }
 
+    private void reloadSetsCombobox() {
+        DefaultComboBoxModel model = new DefaultComboBoxModel<>(ConstructedFormats.getTypes());
+        cbExpansionSet.setModel(model);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -575,8 +570,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         tbRed.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/color_red_off.png"))); // NOI18N
         tbRed.setSelected(true);
-        tbRed.setToolTipText("<html><font color='red'><strong>Red</strong></font><br/>" 
-            + tbColor.getToolTipText());
+        tbRed.setToolTipText("<html><font color='red'><strong>Red</strong></font><br/>"
+                + tbColor.getToolTipText());
         tbRed.setActionCommand("Red");
         tbRed.setFocusable(false);
         tbRed.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -666,7 +661,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         tbColor.add(tbColorless);
         tbColor.add(jSeparator1);
 
-        cbExpansionSet.setModel(new DefaultComboBoxModel<>(ConstructedFormats.getTypes()));
+        reloadSetsCombobox();
         cbExpansionSet.setMaximumSize(new java.awt.Dimension(250, 25));
         cbExpansionSet.setMinimumSize(new java.awt.Dimension(250, 25));
         cbExpansionSet.setName("cbExpansionSet"); // NOI18N
@@ -676,6 +671,17 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 cbExpansionSetActionPerformed(evt);
             }
         });
+        // auto-update sets list on changes
+        setsDbListener = new Listener<RepositoryEvent>() {
+            @Override
+            public void event(RepositoryEvent event) {
+                if (event.getEventType().equals(RepositoryEvent.RepositoryEventType.DB_UPDATED)) {
+                    reloadSetsCombobox();
+                    // TODO: auto-refresh cards list
+                }
+            }
+        };
+        ExpansionRepository.instance.subscribe(setsDbListener);
         tbColor.add(cbExpansionSet);
 
         btnExpansionSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/search_32.png"))); // NOI18N
@@ -735,8 +741,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         tbLand.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/type_land.png"))); // NOI18N
         tbLand.setSelected(true);
-        tbLand.setToolTipText("<html><strong>Land</strong><br/>" 
-            + tbTypes.getToolTipText());
+        tbLand.setToolTipText("<html><strong>Land</strong><br/>"
+                + tbTypes.getToolTipText());
         tbLand.setActionCommand("Lands");
         tbLand.setFocusable(false);
         tbLand.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -750,8 +756,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         tbCreatures.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/type_creatures.png"))); // NOI18N
         tbCreatures.setSelected(true);
-        tbCreatures.setToolTipText("<html><strong>Creatures</strong><br/>" 
-            + tbTypes.getToolTipText());
+        tbCreatures.setToolTipText("<html><strong>Creatures</strong><br/>"
+                + tbTypes.getToolTipText());
         tbCreatures.setActionCommand("Creatures");
         tbCreatures.setFocusable(false);
         tbCreatures.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -765,8 +771,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         tbArifiacts.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/type_artifact.png"))); // NOI18N
         tbArifiacts.setSelected(true);
-        tbArifiacts.setToolTipText("<html><strong>Artifacts</strong><br/>" 
-            + tbTypes.getToolTipText());
+        tbArifiacts.setToolTipText("<html><strong>Artifacts</strong><br/>"
+                + tbTypes.getToolTipText());
         tbArifiacts.setActionCommand("Artifacts");
         tbArifiacts.setFocusable(false);
         tbArifiacts.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -780,8 +786,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         tbSorceries.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/type_sorcery.png"))); // NOI18N
         tbSorceries.setSelected(true);
-        tbSorceries.setToolTipText("<html><strong>Sorceries</strong><br/>" 
-            + tbTypes.getToolTipText());
+        tbSorceries.setToolTipText("<html><strong>Sorceries</strong><br/>"
+                + tbTypes.getToolTipText());
         tbSorceries.setActionCommand("Soceries");
         tbSorceries.setFocusable(false);
         tbSorceries.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -795,8 +801,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         tbInstants.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/type_instant.png"))); // NOI18N
         tbInstants.setSelected(true);
-        tbInstants.setToolTipText("<html><strong>Instants</strong><br/>" 
-            + tbTypes.getToolTipText());
+        tbInstants.setToolTipText("<html><strong>Instants</strong><br/>"
+                + tbTypes.getToolTipText());
         tbInstants.setActionCommand("Instants");
         tbInstants.setFocusable(false);
         tbInstants.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -810,8 +816,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         tbEnchantments.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/type_enchantment.png"))); // NOI18N
         tbEnchantments.setSelected(true);
-        tbEnchantments.setToolTipText("<html><strong>Enchantments</strong><br/>" 
-            + tbTypes.getToolTipText());
+        tbEnchantments.setToolTipText("<html><strong>Enchantments</strong><br/>"
+                + tbTypes.getToolTipText());
         tbEnchantments.setActionCommand("Enchantments");
         tbEnchantments.setFocusable(false);
         tbEnchantments.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -825,8 +831,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         tbPlaneswalkers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/type_planeswalker.png"))); // NOI18N
         tbPlaneswalkers.setSelected(true);
-        tbPlaneswalkers.setToolTipText("<html><strong>Planeswalker</strong><br/>" 
-            + tbTypes.getToolTipText());
+        tbPlaneswalkers.setToolTipText("<html><strong>Planeswalker</strong><br/>"
+                + tbTypes.getToolTipText());
         tbPlaneswalkers.setActionCommand("Planeswalkers");
         tbPlaneswalkers.setFocusable(false);
         tbPlaneswalkers.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -907,8 +913,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         tbCommon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/rarity_common_20.png"))); // NOI18N
         tbCommon.setSelected(true);
-        tbCommon.setToolTipText("<html><strong>Common</strong><br/>" 
-            + tbRarities.getToolTipText());
+        tbCommon.setToolTipText("<html><strong>Common</strong><br/>"
+                + tbRarities.getToolTipText());
         tbCommon.setActionCommand("Common");
         tbCommon.setFocusable(false);
         tbCommon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -922,8 +928,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         tbUncommon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/rarity_uncommon_20.png"))); // NOI18N
         tbUncommon.setSelected(true);
-        tbUncommon.setToolTipText("<html><strong>Uncommon</strong><br/>" 
-            + tbRarities.getToolTipText());
+        tbUncommon.setToolTipText("<html><strong>Uncommon</strong><br/>"
+                + tbRarities.getToolTipText());
         tbUncommon.setActionCommand("Uncommon");
         tbUncommon.setFocusable(false);
         tbUncommon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -937,8 +943,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         tbRare.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/rarity_rare_20.png"))); // NOI18N
         tbRare.setSelected(true);
-        tbRare.setToolTipText("<html><strong>Rare</strong><br/>" 
-            + tbRarities.getToolTipText());
+        tbRare.setToolTipText("<html><strong>Rare</strong><br/>"
+                + tbRarities.getToolTipText());
         tbRare.setActionCommand("Rare");
         tbRare.setFocusable(false);
         tbRare.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -952,8 +958,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         tbMythic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/rarity_mythic_20.png"))); // NOI18N
         tbMythic.setSelected(true);
-        tbMythic.setToolTipText("<html><strong>Mythic</strong><br/>" 
-            + tbRarities.getToolTipText());
+        tbMythic.setToolTipText("<html><strong>Mythic</strong><br/>"
+                + tbRarities.getToolTipText());
         tbMythic.setActionCommand("Mythic");
         tbMythic.setFocusable(false);
         tbMythic.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -967,8 +973,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         tbSpecial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/rarity_special_20.png"))); // NOI18N
         tbSpecial.setSelected(true);
-        tbSpecial.setToolTipText("<html><strong>Special</strong><br/>" 
-            + tbRarities.getToolTipText());
+        tbSpecial.setToolTipText("<html><strong>Special</strong><br/>"
+                + tbRarities.getToolTipText());
         tbSpecial.setActionCommand("Special");
         tbSpecial.setFocusable(false);
         tbSpecial.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1121,59 +1127,59 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         javax.swing.GroupLayout cardSelectorBottomPanelLayout = new javax.swing.GroupLayout(cardSelectorBottomPanel);
         cardSelectorBottomPanel.setLayout(cardSelectorBottomPanelLayout);
         cardSelectorBottomPanelLayout.setHorizontalGroup(
-            cardSelectorBottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(cardSelectorBottomPanelLayout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(jButtonAddToMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
-                .addComponent(jButtonRemoveFromMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
-                .addComponent(jButtonAddToSideboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
-                .addComponent(jButtonRemoveFromSideboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonSearch)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonClean)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(chkNames, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(chkTypes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(chkRules, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
-                .addComponent(chkUnique, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
-                .addComponent(cardCountLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cardCount, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                cardSelectorBottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(cardSelectorBottomPanelLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jButtonAddToMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(2, 2, 2)
+                                .addComponent(jButtonRemoveFromMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1)
+                                .addComponent(jButtonAddToSideboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(2, 2, 2)
+                                .addComponent(jButtonRemoveFromSideboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonSearch)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonClean)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(chkNames, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(chkTypes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(chkRules, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(5, 5, 5)
+                                .addComponent(chkUnique, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(5, 5, 5)
+                                .addComponent(cardCountLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cardCount, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         cardSelectorBottomPanelLayout.setVerticalGroup(
-            cardSelectorBottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(cardSelectorBottomPanelLayout.createSequentialGroup()
-                .addGap(4, 4, 4)
-                .addGroup(cardSelectorBottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(chkTypes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(chkRules, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(chkUnique, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(chkNames, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(cardSelectorBottomPanelLayout.createSequentialGroup()
-                        .addGroup(cardSelectorBottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonRemoveFromMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonAddToSideboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonRemoveFromSideboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(cardSelectorBottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButtonSearch)
-                                .addComponent(jButtonClean)
-                                .addComponent(cardCount)
-                                .addComponent(jButtonAddToMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(cardCountLabel)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                cardSelectorBottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(cardSelectorBottomPanelLayout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addGroup(cardSelectorBottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(chkTypes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(chkRules, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(chkUnique, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(chkNames, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(cardSelectorBottomPanelLayout.createSequentialGroup()
+                                                .addGroup(cardSelectorBottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jButtonRemoveFromMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jButtonAddToSideboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jButtonRemoveFromSideboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGroup(cardSelectorBottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(jButtonSearch)
+                                                                .addComponent(jButtonClean)
+                                                                .addComponent(cardCount)
+                                                                .addComponent(jButtonAddToMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(cardCountLabel)))
+                                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addContainerGap())
         );
 
         cardCountLabel.getAccessibleContext().setAccessibleName("cardCountLabel");
@@ -1182,22 +1188,22 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tbColor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(tbTypes, javax.swing.GroupLayout.DEFAULT_SIZE, 1057, Short.MAX_VALUE)
-            .addComponent(cardSelectorScrollPane)
-            .addComponent(cardSelectorBottomPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1057, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(tbColor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tbTypes, javax.swing.GroupLayout.DEFAULT_SIZE, 1057, Short.MAX_VALUE)
+                        .addComponent(cardSelectorScrollPane)
+                        .addComponent(cardSelectorBottomPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1057, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(tbColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(tbTypes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(cardSelectorScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(cardSelectorBottomPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(tbColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(tbTypes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(cardSelectorScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+                                .addGap(0, 0, 0)
+                                .addComponent(cardSelectorBottomPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

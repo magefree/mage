@@ -92,7 +92,7 @@ class PurgingScytheEffect extends OneShotEffect {
                 }
             }
             if (permanentToDamage != null) {
-                game.informPlayers(new StringBuilder(sourcePermanent.getName()).append(" chosen creature: ").append(permanentToDamage.getName()).toString());
+                game.informPlayers(sourcePermanent.getName() + " chosen creature: " + permanentToDamage.getName());
                 return permanentToDamage.damage(2, source.getSourceId(), game, false, true) > 0;
             }
             return true;

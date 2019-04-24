@@ -36,13 +36,13 @@ public final class BantCharm extends CardImpl {
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
         // or put target creature on the bottom of its owner's library;
         Mode mode = new Mode();
-        mode.getEffects().add(new PutOnLibraryTargetEffect(false));
-        mode.getTargets().add(new TargetCreaturePermanent());
+        mode.addEffect(new PutOnLibraryTargetEffect(false));
+        mode.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
         // or counter target instant spell.
         mode = new Mode();
-        mode.getEffects().add(new CounterTargetEffect());
-        mode.getTargets().add(new TargetSpell(filter));
+        mode.addEffect(new CounterTargetEffect());
+        mode.addTarget(new TargetSpell(filter));
         this.getSpellAbility().addMode(mode);
     }
 

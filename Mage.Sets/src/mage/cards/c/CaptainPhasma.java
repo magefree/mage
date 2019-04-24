@@ -32,7 +32,7 @@ public final class CaptainPhasma extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.TROOPER));
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
         filterCard.add(new SubtypePredicate(SubType.TROOPER));
     }
 

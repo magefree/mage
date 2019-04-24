@@ -82,7 +82,7 @@ class PardicDragonEffect extends OneShotEffect {
         Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         Card sourceCard = game.getCard(source.getSourceId());
         if (opponent != null && sourceCard != null) {
-            if (opponent.chooseUse(outcome, new StringBuilder("Put a time counter on ").append(sourceCard.getName()).append('?').toString(), source, game)) {
+            if (opponent.chooseUse(outcome, "Put a time counter on " + sourceCard.getName() + '?', source, game)) {
                 sourceCard.addCounters(CounterType.TIME.createInstance(), source, game);
             }
             return true;

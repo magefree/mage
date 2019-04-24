@@ -1,7 +1,6 @@
 
 package mage.cards.i;
 
-import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -74,13 +73,13 @@ class InsidiousDreamsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        int amount = new GetXValue().calculate(game, source, this);
+        int amount = GetXValue.instance.calculate(game, source, this);
 
         if (controller != null && sourceObject != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(0, amount, new FilterCard());
-            if (controller.searchLibrary(target, game)) {
+            if (controller.searchLibrary(target, source, game)) {
                 Cards chosen = new CardsImpl();
-                for (UUID cardId : (List<UUID>) target.getTargets()) {
+                for (UUID cardId : target.getTargets()) {
                     Card card = controller.getLibrary().remove(cardId, game);
                     chosen.add(card);
                 }

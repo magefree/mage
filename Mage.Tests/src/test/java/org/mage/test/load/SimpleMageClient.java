@@ -1,12 +1,13 @@
 package org.mage.test.load;
 
-import java.util.UUID;
 import mage.interfaces.MageClient;
 import mage.interfaces.callback.ClientCallback;
 import mage.remote.Session;
 import mage.utils.MageVersion;
 import mage.view.GameView;
 import org.apache.log4j.Logger;
+
+import java.util.UUID;
 
 /**
  * For tests only
@@ -16,7 +17,7 @@ import org.apache.log4j.Logger;
 public class SimpleMageClient implements MageClient {
 
     private final UUID clientId;
-    private static final MageVersion version = new MageVersion(MageVersion.MAGE_VERSION_MAJOR, MageVersion.MAGE_VERSION_MINOR, MageVersion.MAGE_VERSION_PATCH, MageVersion.MAGE_VERSION_MINOR_PATCH, MageVersion.MAGE_VERSION_INFO);
+    private static final MageVersion version = new MageVersion(MageClient.class);
 
     private static final Logger log = Logger.getLogger(SimpleMageClient.class);
 
@@ -38,7 +39,7 @@ public class SimpleMageClient implements MageClient {
     }
 
     @Override
-    public void disconnected(boolean errorCall) {
+    public void disconnected(boolean askToReconnect) {
         // do nothing
     }
 
@@ -62,11 +63,11 @@ public class SimpleMageClient implements MageClient {
     }
 
     public void setSession(Session session) {
-        ((LoadCallbackClient) callbackClient).setSession(session);
+        callbackClient.setSession(session);
     }
 
     public boolean isGameOver() {
-        return ((LoadCallbackClient) callbackClient).isGameOver();
+        return callbackClient.isGameOver();
     }
 
     public void setConcede(boolean needToConcede) {

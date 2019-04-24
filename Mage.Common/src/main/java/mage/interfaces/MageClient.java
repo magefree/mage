@@ -1,11 +1,9 @@
-
 package mage.interfaces;
 
 import mage.interfaces.callback.CallbackClient;
 import mage.utils.MageVersion;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public interface MageClient extends CallbackClient {
@@ -14,7 +12,7 @@ public interface MageClient extends CallbackClient {
 
     void connected(String message);
 
-    void disconnected(boolean errorCall);
+    void disconnected(boolean askToReconnect);
 
     void showMessage(String message);
 

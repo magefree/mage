@@ -62,8 +62,7 @@ class MolderBeastTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        return zEvent.getFromZone() == Zone.BATTLEFIELD
-                && zEvent.getToZone() == Zone.GRAVEYARD
+        return zEvent.isDiesEvent()
                 && zEvent.getTarget().isArtifact();
     }
 

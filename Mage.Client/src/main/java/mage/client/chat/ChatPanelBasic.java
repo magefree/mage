@@ -224,7 +224,6 @@ public class ChatPanelBasic extends javax.swing.JPanel {
         StringBuilder text = new StringBuilder();
         if (time != null) {
             text.append(getColoredText(TIMESTAMP_COLOR, timeFormatter.format(time) + ": "));
-            //this.txtConversation.append(TIMESTAMP_COLOR, time + " ");
         }
         String userColor;
         String textColor;
@@ -239,11 +238,7 @@ public class ChatPanelBasic extends javax.swing.JPanel {
                 userColor = USER_INFO_COLOR;
                 break;
             default:
-                if (parentChatRef != null) {
-                    userColor = SessionHandler.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
-                } else {
-                    userColor = SessionHandler.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
-                }
+                userColor = SessionHandler.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
                 textColor = MESSAGE_COLOR;
                 userSeparator = ": ";
         }
@@ -366,6 +361,7 @@ public class ChatPanelBasic extends javax.swing.JPanel {
         jScrollPaneTxt.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jScrollPaneTxt.setPreferredSize(new java.awt.Dimension(32767, 32767));
 
+        txtConversation.setEditable(false);
         txtConversation.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txtConversation.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtConversation.setFocusCycleRoot(false);

@@ -22,8 +22,8 @@ import mage.players.Player;
  */
 public class SunburstAbility extends EntersBattlefieldAbility {
 
-    private final static String ruleCreature = "Sunburst <i>(This enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.)</i>";
-    private final static String ruleNonCreature = "Sunburst <i>(This enters the battlefield with a charge counter on it for each color of mana spent to cast it.)</i>";
+    private static final String ruleCreature = "Sunburst <i>(This enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.)</i>";
+    private static final String ruleNonCreature = "Sunburst <i>(This enters the battlefield with a charge counter on it for each color of mana spent to cast it.)</i>";
     private boolean isCreature;
 
     public SunburstAbility(Card card) {
@@ -50,7 +50,7 @@ public class SunburstAbility extends EntersBattlefieldAbility {
 
 class SunburstEffect extends OneShotEffect {
 
-    private static final DynamicValue amount = new SunburstCount();
+    private static final DynamicValue amount = SunburstCount.instance;
 
     public SunburstEffect() {
         super(Outcome.Benefit);

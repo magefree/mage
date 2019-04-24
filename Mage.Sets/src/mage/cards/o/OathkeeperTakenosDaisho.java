@@ -1,7 +1,5 @@
-
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
@@ -22,33 +20,38 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class OathkeeperTakenosDaisho extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("it's a Samurai card");
+
     static {
         filter.add(new SubtypePredicate(SubType.SAMURAI));
     }
 
     public OathkeeperTakenosDaisho(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +3/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3,1, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 1, Duration.WhileOnBattlefield)));
+
         // Whenever equipped creature dies, return that card to the battlefield under your control if it's a Samurai card.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new DiesAttachedTriggeredAbility(new ReturnToBattlefieldUnderYourControlAttachedEffect(),"equipped creature", false),
+                new DiesAttachedTriggeredAbility(new ReturnToBattlefieldUnderYourControlAttachedEffect(), "equipped creature", false),
                 new OathkeeperEquippedMatchesFilterCondition(filter),
                 ""));
+
         // When Oathkeeper, Takeno's Daisho is put into a graveyard from the battlefield, exile equipped creature.
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ExileEquippedEffect()));
+
         // Equip {2}
-        this.addAbility(new EquipAbility( Outcome.BoostCreature, new ManaCostsImpl("{2}")));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl("{2}")));
     }
 
     public OathkeeperTakenosDaisho(final OathkeeperTakenosDaisho card) {
@@ -114,14 +117,12 @@ class OathkeeperEquippedMatchesFilterCondition implements Condition {
                 }
             }
             if (attachedTo == null) {
-                for (Effect effect :source.getEffects()) {
+                for (Effect effect : source.getEffects()) {
                     attachedTo = (Permanent) effect.getValue("attachedTo");
                 }
             }
             if (attachedTo != null) {
-                if (filter.match(attachedTo, attachedTo.getId(),attachedTo.getControllerId(), game)) {
-                    return true;
-                }
+                return filter.match(attachedTo, attachedTo.getId(), attachedTo.getControllerId(), game);
 
             }
         }

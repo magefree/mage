@@ -1,7 +1,7 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TapAllEffect;
@@ -22,7 +22,6 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 
 /**
- *
  * @author TheElk801
  */
 public final class RegnasSanction extends CardImpl {
@@ -48,7 +47,9 @@ class RegnasSanctionEffect extends OneShotEffect {
 
     RegnasSanctionEffect() {
         super(Outcome.Benefit);
-        this.staticText = "For each player, choose friend or foe. Each friend puts a +1/+1 counter on each creature they control. Each foe chooses one untapped creature they control, then taps the rest";
+        this.staticText = "For each player, choose friend or foe. "
+                + "Each friend puts a +1/+1 counter on each creature they control. "
+                + "Each foe chooses one untapped creature they control, then taps the rest";
     }
 
     RegnasSanctionEffect(final RegnasSanctionEffect effect) {
@@ -64,13 +65,16 @@ class RegnasSanctionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         ChooseFriendsAndFoes choice = new ChooseFriendsAndFoes();
+        if (controller == null) {
+            return false;
+        }
         if (!choice.chooseFriendOrFoe(controller, source, game)) {
             return false;
         }
         FilterCreaturePermanent filterToTap = new FilterCreaturePermanent();
         for (Player player : choice.getFoes()) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("untapped creature you control");
-            filter.add(Predicates.not(new TappedPredicate()));
+            filter.add(Predicates.not(TappedPredicate.instance));
             filter.add(new ControllerIdPredicate(player.getId()));
             TargetPermanent target = new TargetPermanent(1, 1, filter, true);
             if (player.choose(Outcome.Benefit, target, source.getSourceId(), game)) {

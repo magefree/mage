@@ -31,7 +31,7 @@ import mage.players.Player;
  */
 public final class KothophedSoulHoarder extends CardImpl {
 
-    private final static FilterPermanent filter = new FilterPermanent();
+    private static final FilterPermanent filter = new FilterPermanent();
 
     static {
         filter.add(new OwnerPredicate(TargetController.NOT_YOU));

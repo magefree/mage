@@ -64,13 +64,13 @@ class PirsWhimEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         ChooseFriendsAndFoes choice = new ChooseFriendsAndFoes();
-        if (!choice.chooseFriendOrFoe(controller, source, game)) {
+        if (controller != null && !choice.chooseFriendOrFoe(controller, source, game)) {
             return false;
         }
         for (Player player : choice.getFriends()) {
             if (player != null) {
                 TargetCardInLibrary target = new TargetCardInLibrary(0, 1, StaticFilters.FILTER_CARD_LAND);
-                if (player.searchLibrary(target, game)) {
+                if (player.searchLibrary(target, source, game)) {
                     player.moveCards(new CardsImpl(target.getTargets()).getCards(game), Zone.BATTLEFIELD, source, game, true, false, true, null);
                     player.shuffleLibrary(source, game);
                 }

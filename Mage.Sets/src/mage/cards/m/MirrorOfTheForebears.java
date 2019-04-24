@@ -1,34 +1,38 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
-import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
+import mage.abilities.effects.common.continuous.AddCardTypeSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.functions.EmptyApplyToPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class MirrorOfTheForebears extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
+
+    static {
+        filter.add(new ChosenSubtypePredicate());
+    }
 
     public MirrorOfTheForebears(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
@@ -37,14 +41,12 @@ public final class MirrorOfTheForebears extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.Copy)));
 
         // 1: Until end of turn, Mirror of the Forebears becomes a copy of target creature you control of the chosen type, except it's an artifact in addition to its other types.
-        FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-        filter.add(new ChosenSubtypePredicate());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MirrorOfTheForebearsCopyEffect(), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(new MirrorOfTheForebearsCopyEffect(), new GenericManaCost(1));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 
-    public MirrorOfTheForebears(final MirrorOfTheForebears card) {
+    private MirrorOfTheForebears(final MirrorOfTheForebears card) {
         super(card);
     }
 
@@ -56,12 +58,12 @@ public final class MirrorOfTheForebears extends CardImpl {
 
 class MirrorOfTheForebearsCopyEffect extends OneShotEffect {
 
-    public MirrorOfTheForebearsCopyEffect() {
+    MirrorOfTheForebearsCopyEffect() {
         super(Outcome.Copy);
         this.staticText = "until end of turn, {this} becomes a copy of target creature you control of the chosen type, except it's an artifact in addition to its other types";
     }
 
-    public MirrorOfTheForebearsCopyEffect(final MirrorOfTheForebearsCopyEffect effect) {
+    private MirrorOfTheForebearsCopyEffect(final MirrorOfTheForebearsCopyEffect effect) {
         super(effect);
     }
 
@@ -76,11 +78,7 @@ class MirrorOfTheForebearsCopyEffect extends OneShotEffect {
         Permanent copyFromPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (sourcePermanent != null && copyFromPermanent != null) {
             game.copyPermanent(Duration.EndOfTurn, copyFromPermanent, sourcePermanent.getId(), source, new EmptyApplyToPermanent());
-            if (!copyFromPermanent.isArtifact()) {
-                ContinuousEffect effect = new AddCardTypeTargetEffect(Duration.EndOfTurn, CardType.ARTIFACT);
-                effect.setTargetPointer(new FixedTarget(sourcePermanent, game));
-                game.addEffect(effect, source);
-            }
+            game.addEffect(new AddCardTypeSourceEffect(Duration.EndOfTurn, CardType.ARTIFACT), source);
             return true;
         }
         return false;

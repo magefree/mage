@@ -57,7 +57,7 @@ public final class GyrusWakerOfCorpses extends CardImpl {
         this.toughness = new MageInt(0);
         
         // Gyrus, Walker of Corpses enters the battlefield with a number of +1/+1 counters on it equal to the amount of mana spent to cast it.
-        Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), new ManaSpentToCastCount(), true);
+        Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), ManaSpentToCastCount.instance, true);
         effect.setText("with a number of +1/+1 counters on it equal to the amount of mana spent to cast it");
         this.addAbility(new EntersBattlefieldAbility(effect));
         

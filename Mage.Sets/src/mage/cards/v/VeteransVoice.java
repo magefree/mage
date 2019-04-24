@@ -35,7 +35,7 @@ public final class VeteransVoice extends CardImpl {
     private static final FilterCreaturePermanent filterUntapped = new FilterCreaturePermanent("enchanted creature is untapped");
     
     static {
-        filterUntapped.add(Predicates.not(new TappedPredicate()));
+        filterUntapped.add(Predicates.not(TappedPredicate.instance));
     }
 
     public VeteransVoice(UUID ownerId, CardSetInfo setInfo) {

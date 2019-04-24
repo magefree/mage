@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -11,8 +10,9 @@ import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class ArtfulTakedown extends CardImpl {
@@ -33,14 +33,14 @@ public final class ArtfulTakedown extends CardImpl {
         this.getSpellAbility().addEffect(
                 new TapTargetEffect().setText("target creature")
         );
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter1));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter1).withChooseHint("tap"));
 
         // • Target creature gets -2/-4 until end of turn.
         Mode mode = new Mode(
                 new BoostTargetEffect(-2, -4, Duration.EndOfTurn)
                         .setText("target creature gets -2/-4 until end of turn")
         );
-        mode.addTarget(new TargetCreaturePermanent(filter2));
+        mode.addTarget(new TargetCreaturePermanent(filter2).withChooseHint("gets -2/-4 until end of turn"));
         this.getSpellAbility().addMode(mode);
     }
 

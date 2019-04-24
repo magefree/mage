@@ -1,11 +1,10 @@
-
 package org.mage.plugins.card.dl.sources;
-
-import java.io.IOException;
-import java.util.HashMap;
 
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.images.CardDownloadData;
+
+import java.io.IOException;
+import java.util.HashMap;
 
 /**
  * @author spjspj
@@ -59,7 +58,7 @@ public enum MtgOnlTokensImageSource implements CardImageSource {
     }
 
     @Override
-    public CardImageUrls generateURL(CardDownloadData card) throws Exception {
+    public CardImageUrls generateCardUrl(CardDownloadData card) throws Exception {
         return null;
     }
 
@@ -352,8 +351,12 @@ public enum MtgOnlTokensImageSource implements CardImageSource {
     }
 
     @Override
-    public boolean isImageProvided(String setCode, String cardName) {
-        return true;
+    public boolean isCardImageProvided(String setCode, String cardName) {
+        return false;
     }
 
+    @Override
+    public boolean isTokenImageProvided(String setCode, String cardName, Integer tokenNumber) {
+        return true;
+    }
 }

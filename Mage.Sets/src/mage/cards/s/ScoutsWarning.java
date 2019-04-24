@@ -65,7 +65,7 @@ class ScoutsWarningAsThoughEffect extends AsThoughEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        watcher = (ScoutsWarningWatcher) game.getState().getWatchers().get(ScoutsWarningWatcher.class.getSimpleName(), source.getControllerId());
+        watcher = game.getState().getWatcher(ScoutsWarningWatcher.class, source.getControllerId());
         Card card = game.getCard(source.getSourceId());
         if (watcher != null && card != null) {
             zoneChangeCounter = card.getZoneChangeCounter(game);
@@ -98,10 +98,10 @@ class ScoutsWarningAsThoughEffect extends AsThoughEffectImpl {
 
 class ScoutsWarningWatcher extends Watcher {
 
-    public List<String> activeScoutsWarningSpells = new ArrayList<>();
+    private List<String> activeScoutsWarningSpells = new ArrayList<>();
 
     public ScoutsWarningWatcher() {
-        super(ScoutsWarningWatcher.class.getSimpleName(), WatcherScope.PLAYER);
+        super(WatcherScope.PLAYER);
     }
 
     public ScoutsWarningWatcher(final ScoutsWarningWatcher watcher) {
@@ -116,29 +116,36 @@ class ScoutsWarningWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-            if (!activeScoutsWarningSpells.isEmpty() && event.getPlayerId().equals(getControllerId())) {
+            if (!getActiveScoutsWarningSpells().isEmpty() && event.getPlayerId().equals(getControllerId())) {
                 Spell spell = game.getStack().getSpell(event.getTargetId());
                 if (spell != null && spell.isCreature()) {
-                    activeScoutsWarningSpells.clear();
+                    getActiveScoutsWarningSpells().clear();
                 }
             }
         }
     }
 
     public void addScoutsWarningSpell(UUID sourceId, int zoneChangeCounter) {
-        String spellKey = new StringBuilder(sourceId.toString()).append('_').append(zoneChangeCounter).toString();
-        activeScoutsWarningSpells.add(spellKey);
+        String spellKey = sourceId.toString() + '_' + zoneChangeCounter;
+        getActiveScoutsWarningSpells().add(spellKey);
     }
 
     public boolean isScoutsWarningSpellActive(UUID sourceId, int zoneChangeCounter) {
-        String spellKey = new StringBuilder(sourceId.toString()).append('_').append(zoneChangeCounter).toString();
-        return activeScoutsWarningSpells.contains(spellKey);
+        String spellKey = sourceId.toString() + '_' + zoneChangeCounter;
+        return getActiveScoutsWarningSpells().contains(spellKey);
     }
 
     @Override
     public void reset() {
         super.reset();
-        activeScoutsWarningSpells.clear();
+        getActiveScoutsWarningSpells().clear();
     }
 
+    public List<String> getActiveScoutsWarningSpells() {
+        return activeScoutsWarningSpells;
+    }
+
+    public void setActiveScoutsWarningSpells(List<String> activeScoutsWarningSpells) {
+        this.activeScoutsWarningSpells = activeScoutsWarningSpells;
+    }
 }

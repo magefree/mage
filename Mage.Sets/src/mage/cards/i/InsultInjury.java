@@ -38,7 +38,7 @@ public final class InsultInjury extends SplitCard {
         // to
         // Injury
         // Injury deals 2 damage to target creature and 2 damage to target player.
-        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility().setRuleAtTheTop(true));
+        getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
         getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
         getRightHalfCard().getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
         getRightHalfCard().getSpellAbility().addEffect(new InjuryEffect());

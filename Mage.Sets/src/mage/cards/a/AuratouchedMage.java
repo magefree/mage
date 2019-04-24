@@ -69,7 +69,7 @@ class AuratouchedMageEffect extends OneShotEffect {
             filter.add(new AuraCardCanAttachToLKIPermanentId(source.getSourceId()));
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
             target.setNotTarget(true);
-            if (controller.searchLibrary(target, game)) {
+            if (controller.searchLibrary(target, source, game)) {
                 if (target.getFirstTarget() != null) {
                     Card aura = game.getCard(target.getFirstTarget());
                     Permanent auratouchedMage = source.getSourcePermanentIfItStillExists(game);

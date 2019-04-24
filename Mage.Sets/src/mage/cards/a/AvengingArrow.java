@@ -53,7 +53,7 @@ class AvengingArrowTarget extends TargetPermanent {
 
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
-        SourceDidDamageWatcher watcher = (SourceDidDamageWatcher) game.getState().getWatchers().get(SourceDidDamageWatcher.class.getSimpleName());
+        SourceDidDamageWatcher watcher = game.getState().getWatcher(SourceDidDamageWatcher.class);
         if (watcher != null) {
             if (watcher.damageSources.contains(id)) {
                 return super.canTarget(id, source, game);
@@ -66,7 +66,7 @@ class AvengingArrowTarget extends TargetPermanent {
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         Set<UUID> availablePossibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
         Set<UUID> possibleTargets = new HashSet<>();
-        SourceDidDamageWatcher watcher = (SourceDidDamageWatcher) game.getState().getWatchers().get(SourceDidDamageWatcher.class.getSimpleName());
+        SourceDidDamageWatcher watcher = game.getState().getWatcher(SourceDidDamageWatcher.class);
         if (watcher != null) {
             for (UUID targetId : availablePossibleTargets) {
                 Permanent permanent = game.getPermanent(targetId);

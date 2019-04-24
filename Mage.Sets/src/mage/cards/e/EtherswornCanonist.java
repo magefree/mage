@@ -51,7 +51,7 @@ class EtherswornCanonistWatcher extends Watcher {
     private Set<UUID> castNonartifactSpell = new HashSet<>();
 
     public EtherswornCanonistWatcher() {
-        super(EtherswornCanonistWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public EtherswornCanonistWatcher(final EtherswornCanonistWatcher watcher) {
@@ -116,7 +116,7 @@ class EtherswornCanonistReplacementEffect extends ContinuousRuleModifyingEffectI
     public boolean applies(GameEvent event, Ability source, Game game) {
         Card card = game.getCard(event.getSourceId());
         if (card != null && !card.isArtifact()) {
-            EtherswornCanonistWatcher watcher = (EtherswornCanonistWatcher) game.getState().getWatchers().get(EtherswornCanonistWatcher.class.getSimpleName());
+            EtherswornCanonistWatcher watcher = game.getState().getWatcher(EtherswornCanonistWatcher.class);
             return watcher != null && watcher.castNonArtifactSpell(event.getPlayerId());
         }
         return false;

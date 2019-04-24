@@ -1,4 +1,3 @@
-
 package mage.cards.o;
 
 import java.util.UUID;
@@ -58,7 +57,8 @@ class OrimsPrayerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getCombat().getDefenders().contains(getControllerId());
+        return game.getCombat().getDefenders().contains(getControllerId())
+                && game.getCombat().getAttackers().size() > 0;
     }
 
     @Override

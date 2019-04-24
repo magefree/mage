@@ -58,7 +58,7 @@ class DiabolicRevelationEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int amount = new ManacostVariableValue().calculate(game, source, this);
+        int amount = ManacostVariableValue.instance.calculate(game, source, this);
         TargetCardInLibrary target = new TargetCardInLibrary(0, amount, new FilterCard());
 
         Player player = game.getPlayer(source.getControllerId());
@@ -66,7 +66,7 @@ class DiabolicRevelationEffect extends OneShotEffect {
             return false;
         }
 
-        if (player.searchLibrary(target, game)) {
+        if (player.searchLibrary(target, source, game)) {
             for (UUID cardId : target.getTargets()) {
                 Card card = player.getLibrary().remove(cardId, game);
                 if (card != null) {

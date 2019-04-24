@@ -1,9 +1,9 @@
-
 package mage.abilities.effects;
 
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
 import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.game.Game;
 import org.apache.log4j.Logger;
 
@@ -103,7 +103,13 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
                         break;
                     case Custom:
                     case UntilYourNextTurn:
+                    case UntilEndOfYourNextTurn:
                         if (effect.isInactive(ability, game)) {
+                            it.remove();
+                        }
+                        break;
+                    case UntilSourceLeavesBattlefield:
+                        if (Zone.BATTLEFIELD != game.getState().getZone(ability.getSourceId())) {
                             it.remove();
                         }
                 }

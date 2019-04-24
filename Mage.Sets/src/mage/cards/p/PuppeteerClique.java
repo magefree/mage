@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -17,12 +16,7 @@ import mage.abilities.keyword.PersistAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -31,15 +25,15 @@ import mage.target.Target;
 import mage.target.common.TargetCardInOpponentsGraveyard;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
- *
  */
 public final class PuppeteerClique extends CardImpl {
 
     public PuppeteerClique(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.subtype.add(SubType.FAERIE);
         this.subtype.add(SubType.WIZARD);
 
@@ -59,7 +53,7 @@ public final class PuppeteerClique extends CardImpl {
         this.addAbility(new PersistAbility());
     }
 
-    public PuppeteerClique(final PuppeteerClique card) {
+    private PuppeteerClique(final PuppeteerClique card) {
         super(card);
     }
 
@@ -71,12 +65,12 @@ public final class PuppeteerClique extends CardImpl {
 
 class PuppeteerCliqueEffect extends OneShotEffect {
 
-    public PuppeteerCliqueEffect() {
+    PuppeteerCliqueEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "put target creature card from an opponent's graveyard onto the battlefield under your control. It gains haste. At the beginning of your next end step, exile it";
     }
 
-    public PuppeteerCliqueEffect(final PuppeteerCliqueEffect effect) {
+    private PuppeteerCliqueEffect(final PuppeteerCliqueEffect effect) {
         super(effect);
     }
 
@@ -87,26 +81,25 @@ class PuppeteerCliqueEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean result = false;
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
-        if (card != null) {
-            Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null) {
-                if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                    Permanent permanent = game.getPermanent(card.getId());
-                    if (permanent != null) {
-                        ContinuousEffect hasteEffect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
-                        hasteEffect.setTargetPointer(new FixedTarget(permanent, game));
-                        game.addEffect(hasteEffect, source);
-                        ExileTargetEffect exileEffect = new ExileTargetEffect("exile " + permanent.getLogName());
-                        exileEffect.setTargetPointer(new FixedTarget(permanent, game));
-                        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect, TargetController.YOU);
-                        game.addDelayedTriggeredAbility(delayedAbility, source);
-                        result = true;
-                    }
-                }
-            }
+        if (card == null) {
+            return false;
         }
-        return result;
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null || !controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
+            return false;
+        }
+        Permanent permanent = game.getPermanent(card.getId());
+        if (permanent == null) {
+            return false;
+        }
+        ContinuousEffect hasteEffect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
+        hasteEffect.setTargetPointer(new FixedTarget(permanent, game));
+        game.addEffect(hasteEffect, source);
+        ExileTargetEffect exileEffect = new ExileTargetEffect("exile " + permanent.getLogName());
+        exileEffect.setTargetPointer(new FixedTarget(permanent, game));
+        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect, TargetController.YOU);
+        game.addDelayedTriggeredAbility(delayedAbility, source);
+        return true;
     }
 }

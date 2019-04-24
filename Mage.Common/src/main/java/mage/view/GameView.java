@@ -1,14 +1,7 @@
-
 package mage.view;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.costs.Cost;
 import mage.cards.Card;
@@ -32,8 +25,10 @@ import mage.players.Player;
 import mage.watchers.common.CastSpellLastTurnWatcher;
 import org.apache.log4j.Logger;
 
+import java.io.Serializable;
+import java.util.*;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class GameView implements Serializable {
@@ -90,7 +85,7 @@ public class GameView implements Serializable {
                     if (object != null) {
                         if (object instanceof Permanent) {
                             boolean controlled = ((Permanent) object).getControllerId().equals(createdForPlayerId);
-                            stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility) stackObject, ((Permanent) object).getName(), new CardView(((Permanent) object), game, controlled, false, false)));
+                            stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility) stackObject, object.getName(), new CardView(((Permanent) object), game, controlled, false, false)));
                         } else {
                             stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility) stackObject, card.getName(), new CardView(card, game, false, false, false)));
                         }
@@ -109,14 +104,14 @@ public class GameView implements Serializable {
                     } else if (object instanceof Emblem) {
                         CardView cardView = new CardView(new EmblemView((Emblem) object));
                         // Card sourceCard = (Card) ((Emblem) object).getSourceObject();
-                        ((StackAbility) stackObject).setName(((Emblem) object).getName());
+                        stackObject.setName(object.getName());
                         // ((StackAbility) stackObject).setExpansionSetCode(sourceCard.getExpansionSetCode());
                         stack.put(stackObject.getId(),
                                 new StackAbilityView(game, (StackAbility) stackObject, object.getName(), cardView));
                         checkPaid(stackObject.getId(), ((StackAbility) stackObject));
                     } else if (object instanceof Plane) {
                         CardView cardView = new CardView(new PlaneView((Plane) object));
-                        ((StackAbility) stackObject).setName(((Plane) object).getName());
+                        stackObject.setName(object.getName());
                         stack.put(stackObject.getId(),
                                 new StackAbilityView(game, (StackAbility) stackObject, object.getName(), cardView));
                         checkPaid(stackObject.getId(), ((StackAbility) stackObject));
@@ -131,7 +126,7 @@ public class GameView implements Serializable {
                     } else if (object instanceof StackAbility) {
                         StackAbility stackAbility = ((StackAbility) object);
                         stackAbility.newId();
-                        stack.put(stackObject.getId(), new CardView(((StackAbility) stackObject)));
+                        stack.put(stackObject.getId(), new CardView(stackObject));
                         checkPaid(stackObject.getId(), ((StackAbility) stackObject));
                     } else {
                         LOGGER.fatal("Object can't be cast to StackAbility: " + object.getName() + ' ' + object.toString() + ' ' + object.getClass().toString());
@@ -182,7 +177,7 @@ public class GameView implements Serializable {
             this.special = false;
         }
 
-        CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get(CastSpellLastTurnWatcher.class.getSimpleName());
+        CastSpellLastTurnWatcher watcher = game.getState().getWatcher(CastSpellLastTurnWatcher.class);
         if (watcher != null) {
             spellsCastCurrentTurn = watcher.getAmountOfSpellsAllPlayersCastOnCurrentTurn();
         } else {

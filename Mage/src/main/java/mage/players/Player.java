@@ -85,6 +85,8 @@ public interface Player extends MageItem, Copyable<Player> {
 
     int gainLife(int amount, Game game, UUID sourceId);
 
+    int damage(int damage, UUID sourceId, Game game);
+
     int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable);
 
     int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects);
@@ -335,20 +337,31 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean removeFromLibrary(Card card, Game game);
 
-    boolean searchLibrary(TargetCardInLibrary target, Game game);
+    boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game);
 
-    boolean searchLibrary(TargetCardInLibrary target, Game game, boolean triggerEvents);
+    boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, boolean triggerEvents);
 
-    boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId);
+    boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, UUID targetPlayerId);
 
     /**
      * @param target
+     * @param source
      * @param game
      * @param targetPlayerId player whose library will be searched
      * @param triggerEvents  whether searching will trigger any game events
      * @return true if search was successful
      */
-    boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId, boolean triggerEvents);
+    boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, UUID targetPlayerId, boolean triggerEvents);
+
+    /**
+     * Reveals all players' libraries. Useful for abilities like Jace, Architect of Thought's -8
+     * that have effects that require information from all libraries.
+     *
+     * @param source
+     * @param game
+     * @return
+     */
+    void lookAtAllLibraries(Ability source, Game game);
 
     boolean canPlayLand();
 
@@ -361,6 +374,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param ignoreTiming if it's cast during the resolution of another spell
      *                     no sorcery or play land timing restriction are checked. For a land it has
      *                     to be the turn of the player playing that card.
+     * @param reference    mage object that allows to play the card
      * @return
      */
     boolean playCard(Card card, Game game, boolean noMana, boolean ignoreTiming, MageObjectReference reference);
@@ -370,7 +384,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param game
      * @param ignoreTiming false - it won't be checked if the stack is empty and
      *                     you are able to play a Sorcery. It's still checked, if you are able to
-     *                     play a land concerning the numner of lands you already played.
+     *                     play a land concerning the number of lands you already played.
      * @return
      */
     boolean playLand(Card card, Game game, boolean ignoreTiming);
@@ -383,9 +397,9 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean hasProtectionFrom(MageObject source, Game game);
 
-    boolean flipCoin(Game game);
+    boolean flipCoin(Ability source, Game game, boolean winnable);
 
-    boolean flipCoin(Game game, ArrayList<UUID> appliedEffects);
+    boolean flipCoin(Ability source, Game game, boolean winnable, ArrayList<UUID> appliedEffects);
 
     int rollDice(Game game, int numSides);
 
@@ -640,9 +654,10 @@ public interface Player extends MageItem, Copyable<Player> {
      *
      * @param card
      * @param game
+     * @param abilitiesToActivate extra info about abilities that can be activated on NO option
      * @return player looked at the card
      */
-    boolean lookAtFaceDownCard(Card card, Game game);
+    boolean lookAtFaceDownCard(Card card, Game game, int abilitiesToActivate);
 
     /**
      * Set seconds left to play the game.

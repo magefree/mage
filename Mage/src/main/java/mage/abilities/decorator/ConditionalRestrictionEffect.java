@@ -1,4 +1,3 @@
-
 package mage.abilities.decorator;
 
 import mage.abilities.Ability;
@@ -11,7 +10,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX2
  */
 public class ConditionalRestrictionEffect extends RestrictionEffect {
@@ -86,51 +84,51 @@ public class ConditionalRestrictionEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Game game) {
+    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
         if (conditionState) {
-            return effect.canAttack(game);
+            return effect.canAttack(game, canUseChooseDialogs);
         } else if (otherwiseEffect != null) {
-            return otherwiseEffect.canAttack(game);
+            return otherwiseEffect.canAttack(game, canUseChooseDialogs);
         }
         return true;
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         if (conditionState) {
-            return effect.canBlock(attacker, blocker, source, game);
+            return effect.canBlock(attacker, blocker, source, game, canUseChooseDialogs);
         } else if (otherwiseEffect != null) {
-            return otherwiseEffect.canBlock(attacker, blocker, source, game);
+            return otherwiseEffect.canBlock(attacker, blocker, source, game, canUseChooseDialogs);
         }
         return true;
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         if (conditionState) {
-            return effect.canBeBlocked(attacker, blocker, source, game);
+            return effect.canBeBlocked(attacker, blocker, source, game, canUseChooseDialogs);
         } else if (otherwiseEffect != null) {
-            return otherwiseEffect.canBeBlocked(attacker, blocker, source, game);
+            return otherwiseEffect.canBeBlocked(attacker, blocker, source, game, canUseChooseDialogs);
         }
         return true;
     }
 
     @Override
-    public boolean canBeUntapped(Permanent permanent, Ability source, Game game) {
+    public boolean canBeUntapped(Permanent permanent, Ability source, Game game, boolean canUseChooseDialogs) {
         if (conditionState) {
-            return effect.canBeUntapped(permanent, source, game);
+            return effect.canBeUntapped(permanent, source, game, canUseChooseDialogs);
         } else if (otherwiseEffect != null) {
-            return otherwiseEffect.canBeUntapped(permanent, source, game);
+            return otherwiseEffect.canBeUntapped(permanent, source, game, canUseChooseDialogs);
         }
         return true;
     }
 
     @Override
-    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game) {
+    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game, boolean canUseChooseDialogs) {
         if (conditionState) {
-            return effect.canUseActivatedAbilities(permanent, source, game);
+            return effect.canUseActivatedAbilities(permanent, source, game, canUseChooseDialogs);
         } else if (otherwiseEffect != null) {
-            return otherwiseEffect.canUseActivatedAbilities(permanent, source, game);
+            return otherwiseEffect.canUseActivatedAbilities(permanent, source, game, canUseChooseDialogs);
         }
         return true;
     }

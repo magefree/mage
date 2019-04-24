@@ -31,7 +31,7 @@ public final class StalkingVengeance extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public StalkingVengeance(UUID ownerId, CardSetInfo setInfo) {

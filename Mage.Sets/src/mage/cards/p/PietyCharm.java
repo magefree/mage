@@ -43,12 +43,12 @@ public final class PietyCharm extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter1));
         // or target Soldier creature gets +2/+2 until end of turn
         Mode mode = new Mode();
-        mode.getEffects().add(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
-        mode.getTargets().add(new TargetCreaturePermanent(filter2));
+        mode.addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
+        mode.addTarget(new TargetCreaturePermanent(filter2));
         this.getSpellAbility().addMode(mode);
         // or creatures you control gain vigilance until end of turn.
         mode = new Mode();
-        mode.getEffects().add(new GainAbilityAllEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("creatures you control")));
+        mode.addEffect(new GainAbilityAllEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("creatures you control")));
         this.getSpellAbility().addMode(mode);
     }
 

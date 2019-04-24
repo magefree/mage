@@ -1,7 +1,5 @@
-
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -13,23 +11,22 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class IntimidationBolt extends CardImpl {
 
     public IntimidationBolt(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}{W}");
-
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}{W}");
 
 
         // Intimidation Bolt deals 3 damage to target creature. Other creatures can't attack this turn.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addEffect(new IntimidationEffect(Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        
+
     }
 
     public IntimidationBolt(final IntimidationBolt card) {
@@ -55,14 +52,11 @@ class IntimidationEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (!permanent.getId().equals(source.getFirstTarget())) {
-            return true;
-        }
-        return false;
+        return !permanent.getId().equals(source.getFirstTarget());
     }
 
     @Override
-    public boolean canAttack(Game game) {
+    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
         return false;
     }
 

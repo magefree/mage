@@ -22,7 +22,7 @@ public final class Thundermare extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creatures");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public Thundermare(UUID ownerId, CardSetInfo setInfo) {

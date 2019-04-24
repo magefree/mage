@@ -70,17 +70,14 @@ class TargetControlledCreatureWithPowerGreaterOrLessThanOpponentPermanent extend
     }
 
     @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        return super.canTarget(controllerId, id, source, game);
-    }
-
-    @Override
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         MageObject targetSource = game.getObject(sourceId);
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
-            if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
-                possibleTargets.add(permanent.getId());
+        if(targetSource != null) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
+                if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+                    possibleTargets.add(permanent.getId());
+                }
             }
         }
         return possibleTargets;
@@ -126,10 +123,12 @@ class SpawnbrokerSecondTarget extends TargetPermanent {
         Set<UUID> possibleTargets = new HashSet<>();
         if (firstTarget != null) {
             MageObject targetSource = game.getObject(sourceId);
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
-                if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
-                    if (firstTarget.getPower().getValue() >= permanent.getPower().getValue()) {
-                        possibleTargets.add(permanent.getId());
+            if(targetSource != null) {
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
+                    if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+                        if (firstTarget.getPower().getValue() >= permanent.getPower().getValue()) {
+                            possibleTargets.add(permanent.getId());
+                        }
                     }
                 }
             }

@@ -1,7 +1,7 @@
-
 package org.mage.test.cards.abilities.keywords;
 
 import mage.cards.Card;
+import mage.constants.EmptyNames;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
@@ -10,7 +10,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class ManifestTest extends CardTestPlayerBase {
@@ -34,15 +33,16 @@ public class ManifestTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         // no life gain
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         // a facedown creature is on the battlefield
-        assertPermanentCount(playerA, "", 1);
-        assertPowerToughness(playerA, "", 2, 2);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2);
         // not tapped
-        assertTapped("", false);
+        assertTapped(EmptyNames.FACE_DOWN_CREATURE.toString(), false);
     }
 
     /**
@@ -66,13 +66,14 @@ public class ManifestTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         // no life gain
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         // a facedown creature is on the battlefield
-        assertPermanentCount(playerA, "", 1);
-        assertPowerToughness(playerA, "", 2, 2);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2);
         // PlayerB's Silvercoat Lion should not have get -1/-1/
         assertPermanentCount(playerB, "Silvercoat Lion", 1);
         assertPowerToughness(playerB, "Silvercoat Lion", 2, 2);
@@ -101,6 +102,7 @@ public class ManifestTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         // no life gain
         assertLife(playerA, 20);
@@ -108,8 +110,8 @@ public class ManifestTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Reality Shift", 1);
         assertExileCount("Silvercoat Lion", 1);
         // a facedown creature is on the battlefield
-        assertPermanentCount(playerA, "", 1);
-        assertPowerToughness(playerA, "", 2, 2);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2);
         // PlayerA's Pillarfield Ox should not have get -1/-1/
         assertPermanentCount(playerB, "Pillarfield Ox", 1);
         assertPowerToughness(playerB, "Pillarfield Ox", 2, 4);
@@ -137,6 +139,7 @@ public class ManifestTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         // no life gain
         assertLife(playerA, 20);
@@ -144,8 +147,8 @@ public class ManifestTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Reality Shift", 1);
         assertExileCount("Silvercoat Lion", 1);
         // a facedown creature is on the battlefield
-        assertPermanentCount(playerA, "", 1);
-        assertPowerToughness(playerA, "", 2, 2);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2);
 
     }
 
@@ -173,6 +176,7 @@ public class ManifestTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         // no life gain
         assertLife(playerA, 20);
@@ -180,8 +184,8 @@ public class ManifestTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Reality Shift", 1);
         assertExileCount("Silvercoat Lion", 1);
         // a facedown creature is on the battlefield
-        assertPermanentCount(playerA, "", 1);
-        assertPowerToughness(playerA, "", 2, 2);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2);
         assertPowerToughness(playerA, "Foundry Street Denizen", 1, 1);
 
     }
@@ -199,7 +203,6 @@ public class ManifestTest extends CardTestPlayerBase {
         // Strive — Silence the Believers costs more to cast for each target beyond the first.
         // Exile any number of target creatures and all Auras attached to them.
         addCard(Zone.HAND, playerB, "Silence the Believers");
-        addTarget(playerB, "");
         // Gore Swine {2}{R}
         // 4/1
         addCard(Zone.LIBRARY, playerA, "Gore Swine");
@@ -210,10 +213,13 @@ public class ManifestTest extends CardTestPlayerBase {
         skipInitShuffling();
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Reality Shift", "Silvercoat Lion");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Silence the Believers", "");
+        showBattlefield("A battle", 1, PhaseStep.POSTCOMBAT_MAIN, playerA);
+        showBattlefield("B battle", 1, PhaseStep.POSTCOMBAT_MAIN, playerB);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Silence the Believers", EmptyNames.FACE_DOWN_CREATURE.toString());
 
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
         // no life gain
         assertLife(playerA, 20);
@@ -222,7 +228,7 @@ public class ManifestTest extends CardTestPlayerBase {
         assertExileCount("Silvercoat Lion", 1);
         assertExileCount("Gore Swine", 1);
         // no facedown creature is on the battlefield
-        assertPermanentCount(playerA, "", 0);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
 
         for (Card card : currentGame.getExile().getAllCards(currentGame)) {
             if (card.getName().equals("Gore Swine")) {
@@ -248,10 +254,11 @@ public class ManifestTest extends CardTestPlayerBase {
         skipInitShuffling();
 
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B}, {T}, Sacrifice another creature");
-        addTarget(playerB, "Silvercoat Lion");
+        setChoice(playerB, "Silvercoat Lion");
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         // no life gain
         assertLife(playerA, 20);
@@ -261,7 +268,7 @@ public class ManifestTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);
 
         // a facedown creature is on the battlefield
-        assertPermanentCount(playerB, "", 1);
+        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
 
     }
 
@@ -284,12 +291,13 @@ public class ManifestTest extends CardTestPlayerBase {
         skipInitShuffling();
 
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B}, {T}, Sacrifice another creature");
-        addTarget(playerB, "Silvercoat Lion");
+        setChoice(playerB, "Silvercoat Lion");
 
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{5}{G}: Turn");
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
         // no life gain
         assertLife(playerA, 20);
@@ -297,7 +305,7 @@ public class ManifestTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);
 
-        assertPermanentCount(playerB, "", 0);
+        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
         assertPermanentCount(playerB, "Aerie Bowmasters", 1);
         assertPowerToughness(playerB, "Aerie Bowmasters", 4, 5); // 3/4  and the +1/+1 counter from Megamorph
         Permanent aerie = getPermanent("Aerie Bowmasters", playerB);
@@ -308,7 +316,6 @@ public class ManifestTest extends CardTestPlayerBase {
     /**
      * When a Forest came manifested into play my Courser of Kruphix gained me a
      * life.
-     *
      */
     @Test
     public void testManifestForest() {
@@ -328,10 +335,11 @@ public class ManifestTest extends CardTestPlayerBase {
         skipInitShuffling();
 
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B}, {T}, Sacrifice another creature");
-        addTarget(playerB, "Silvercoat Lion");
+        setChoice(playerB, "Silvercoat Lion");
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
         // no life gain
         assertLife(playerA, 20);
@@ -339,13 +347,12 @@ public class ManifestTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);
 
-        assertPermanentCount(playerB, "", 1);
+        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
 
     }
 
     /**
      * Whisperwood Elemental - Its sacrifice ability doesn't work..
-     *
      */
     @Test
     public void testWhisperwoodElemental() {
@@ -365,6 +372,7 @@ public class ManifestTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
         // no life gain
         assertLife(playerA, 20);
@@ -374,14 +382,13 @@ public class ManifestTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Whisperwood Elemental", 1);
         assertGraveyardCount(playerB, "Silvercoat Lion", 2);
 
-        assertPermanentCount(playerB, "", 2);
+        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 2);
 
     }
 
     /**
      * I sacrificed a manifested face-down Smothering Abomination to Nantuko
      * Husk and it made me draw a card.
-     *
      */
     @Test
     public void testDiesTriggeredAbilitiesOfManifestedCreatures() {
@@ -409,10 +416,11 @@ public class ManifestTest extends CardTestPlayerBase {
         setChoice(playerB, "Silvercoat Lion");
 
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Sacrifice a creature");
-        setChoice(playerB, "");
+        setChoice(playerB, EmptyNames.FACE_DOWN_CREATURE.toString());
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
         // no life gain
         assertLife(playerA, 20);

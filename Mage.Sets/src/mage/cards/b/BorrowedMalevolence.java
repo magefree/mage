@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
@@ -14,8 +12,9 @@ import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class BorrowedMalevolence extends CardImpl {
@@ -24,7 +23,7 @@ public final class BorrowedMalevolence extends CardImpl {
     private static final FilterCreaturePermanent filterCreatureMinus = new FilterCreaturePermanent("creature to get -1/-1");
 
     public BorrowedMalevolence(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");
 
         // Escalate {2}
         this.addAbility(new EscalateAbility(new GenericManaCost(2)));
@@ -37,14 +36,14 @@ public final class BorrowedMalevolence extends CardImpl {
         Effect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
         effect.setText("Target creature gets +1/+1 until end of turn");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterCreaturePlus));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterCreaturePlus).withChooseHint("gets +1/+1 until end of turn"));
 
         // Target creature gets -1/-1 until end of turn.
         Mode mode = new Mode();
         effect = new BoostTargetEffect(-1, -1, Duration.EndOfTurn);
         effect.setText("Target creature gets -1/-1 until end of turn");
-        mode.getEffects().add(effect);
-        mode.getTargets().add(new TargetCreaturePermanent(filterCreatureMinus));
+        mode.addEffect(effect);
+        mode.addTarget(new TargetCreaturePermanent(filterCreatureMinus).withChooseHint("gets -1/-1 until end of turn"));
         this.getSpellAbility().addMode(mode);
     }
 

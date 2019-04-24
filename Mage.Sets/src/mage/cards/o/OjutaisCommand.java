@@ -43,18 +43,18 @@ public final class OjutaisCommand extends CardImpl {
 
         // or You gain 4 life;
         Mode mode = new Mode();
-        mode.getEffects().add(new GainLifeEffect(4));
+        mode.addEffect(new GainLifeEffect(4));
         this.getSpellAbility().getModes().addMode(mode);
 
         // or Counter target creature spell;
         mode = new Mode();
-        mode.getTargets().add(new TargetSpell(StaticFilters.FILTER_SPELL_CREATURE));
-        mode.getEffects().add(new CounterTargetEffect());
+        mode.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_CREATURE));
+        mode.addEffect(new CounterTargetEffect());
         this.getSpellAbility().getModes().addMode(mode);
 
         // or Draw a card
         mode = new Mode();
-        mode.getEffects().add(new DrawCardSourceControllerEffect(1));
+        mode.addEffect(new DrawCardSourceControllerEffect(1));
         this.getSpellAbility().getModes().addMode(mode);
     }
 

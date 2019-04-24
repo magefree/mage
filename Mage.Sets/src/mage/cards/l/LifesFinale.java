@@ -70,7 +70,7 @@ class LifesFinaleEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null && opponent != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(0, 3, new FilterCreatureCard("creature cards from his library to put in his graveyard"));
-            if (player.searchLibrary(target, game, opponent.getId())) {
+            if (player.searchLibrary(target, source, game, opponent.getId())) {
                 player.moveCards(new CardsImpl(target.getTargets()), Zone.GRAVEYARD, source, game);
             }
             opponent.shuffleLibrary(source, game);

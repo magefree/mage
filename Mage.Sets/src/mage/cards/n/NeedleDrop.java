@@ -58,7 +58,7 @@ class DamagedThisTurnPredicate implements Predicate<MageItem> {
 
     @Override
     public boolean apply(MageItem input, Game game) {
-        DamageDoneWatcher watcher = (DamageDoneWatcher) game.getState().getWatchers().get(DamageDoneWatcher.class.getSimpleName());
+        DamageDoneWatcher watcher = game.getState().getWatcher(DamageDoneWatcher.class);
         if (watcher != null) {
             if (input instanceof MageObject) {
                 return watcher.isDamaged(input.getId(), ((MageObject) input).getZoneChangeCounter(game), game);

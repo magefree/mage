@@ -15,7 +15,7 @@ public enum RevoltCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        RevoltWatcher watcher = (RevoltWatcher) game.getState().getWatchers().get(RevoltWatcher.class.getSimpleName());
+        RevoltWatcher watcher = game.getState().getWatcher(RevoltWatcher.class);
         return watcher != null && watcher.revoltActive(source.getControllerId());
     }
 

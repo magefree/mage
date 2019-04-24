@@ -31,7 +31,7 @@ public final class OrimsCure extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.PLAINS));
-        filterCreature.add(Predicates.not(new TappedPredicate()));
+        filterCreature.add(Predicates.not(TappedPredicate.instance));
     }
 
     public OrimsCure(UUID ownerId, CardSetInfo setInfo) {

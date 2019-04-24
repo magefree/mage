@@ -1,9 +1,7 @@
 
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -18,9 +16,11 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetPlayerOrPlaneswalker;
+import mage.target.targetadjustment.TargetAdjuster;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class UnstableFooting extends CardImpl {
@@ -36,18 +36,10 @@ public final class UnstableFooting extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageTargetEffect(5),
                 KickedCondition.instance,
-                "If this spell was kicked, it deals 5 damage to target player or planeswalker"));
+                "If this spell was kicked, it deals 5 damage to target player or planeswalker")
+        );
+        this.getSpellAbility().setTargetAdjuster(UnstableFootingAdjuster.instance);
 
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SpellAbility) {
-            ability.getTargets().clear();
-            if (KickedCondition.instance.apply(game, ability)) {
-                ability.addTarget(new TargetPlayerOrPlaneswalker());
-            }
-        }
     }
 
     public UnstableFooting(final UnstableFooting card) {
@@ -57,6 +49,18 @@ public final class UnstableFooting extends CardImpl {
     @Override
     public UnstableFooting copy() {
         return new UnstableFooting(this);
+    }
+}
+
+enum UnstableFootingAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        ability.getTargets().clear();
+        if (KickedCondition.instance.apply(game, ability)) {
+            ability.addTarget(new TargetPlayerOrPlaneswalker());
+        }
     }
 }
 

@@ -1,12 +1,5 @@
-
 package mage.abilities.effects;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
@@ -14,15 +7,11 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.constants.AbilityType;
-import mage.constants.DependencyType;
-import mage.constants.Duration;
-import mage.constants.EffectType;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -50,8 +39,9 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     protected boolean characterDefining = false;
 
     // until your next turn
-    protected int startingTurn;
-    protected UUID startingControllerId;
+    private int startingTurnNum;
+    private int yourNextTurnNum;
+    private UUID startingControllerId;
 
     public ContinuousEffectImpl(Duration duration, Outcome outcome) {
         super(outcome);
@@ -79,7 +69,8 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         this.affectedObjectsSet = effect.affectedObjectsSet;
         this.affectedObjectList.addAll(effect.affectedObjectList);
         this.temporary = effect.temporary;
-        this.startingTurn = effect.startingTurn;
+        this.startingTurnNum = effect.startingTurnNum;
+        this.yourNextTurnNum = effect.yourNextTurnNum;
         this.startingControllerId = effect.startingControllerId;
         this.dependencyTypes = effect.dependencyTypes;
         this.dependendToTypes = effect.dependendToTypes;
@@ -170,17 +161,44 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
                 this.affectedObjectsSet = true;
             }
         }
-        startingTurn = game.getTurnNum();
-        startingControllerId = source.getControllerId();
+        setStartingTurnNum(game, source.getControllerId());
+    }
+
+    @Override
+    public void setStartingTurnNum(Game game, UUID startingController) {
+        this.startingControllerId = startingController;
+        this.startingTurnNum = game.getTurnNum();
+        this.yourNextTurnNum = game.isActivePlayer(startingControllerId) ? startingTurnNum + 2 : startingTurnNum + 1;
+    }
+
+    public int getStartingTurnNum() {
+        return this.startingTurnNum;
+    }
+
+    public int getNextStartingControllerTurnNum() {
+        return this.yourNextTurnNum;
+    }
+
+    public UUID getStartingController() {
+        return this.startingControllerId;
     }
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        if (duration == Duration.UntilYourNextTurn) {
+        if (duration == Duration.UntilYourNextTurn || duration == Duration.UntilEndOfYourNextTurn) {
             Player player = game.getPlayer(startingControllerId);
             if (player != null) {
                 if (player.isInGame()) {
-                    return game.isActivePlayer(startingControllerId) && game.getTurnNum() != startingTurn;
+                    boolean canDelete = false;
+                    switch (duration) {
+                        case UntilYourNextTurn:
+                            canDelete = game.getTurnNum() >= yourNextTurnNum;
+                            break;
+                        case UntilEndOfYourNextTurn:
+                            canDelete = (game.getTurnNum() > yourNextTurnNum)
+                                    || (game.getTurnNum() == yourNextTurnNum && game.getStep().getType().isAfter(PhaseStep.END_TURN));
+                    }
+                    return canDelete;
                 }
                 return player.hasReachedNextTurnAfterLeaving();
             }

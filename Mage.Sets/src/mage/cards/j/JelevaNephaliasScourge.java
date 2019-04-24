@@ -1,4 +1,3 @@
-
 package mage.cards.j;
 
 import java.util.HashMap;
@@ -85,14 +84,13 @@ class JelevaNephaliasScourgeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
-        JelevaNephaliasWatcher watcher = (JelevaNephaliasWatcher) game.getState().getWatchers().get(JelevaNephaliasWatcher.class.getSimpleName());
+        JelevaNephaliasWatcher watcher = game.getState().getWatcher(JelevaNephaliasWatcher.class);
         if (controller != null && sourceObject != null && watcher != null) {
             int xValue = watcher.getManaSpentToCastLastTime(sourceObject.getId(), sourceObject.getZoneChangeCounter(game) - 1);
             if (xValue > 0) {
                 for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        //
                         player.moveCardsToExile(player.getLibrary().getTopCards(game, xValue), source, game, true, CardUtil.getCardExileZoneId(game, source), sourceObject.getIdName());
                     }
                 }
@@ -130,7 +128,7 @@ class JelevaNephaliasCastEffect extends OneShotEffect {
                     if (controller.choose(Outcome.PlayForFree, exileZone, target, game)) {
                         Card card = game.getCard(target.getFirstTarget());
                         if (card != null) {
-                            return controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                            return controller.playCard(card, game, true, false, new MageObjectReference(source.getSourceId(), game));
                         }
                     }
                 }
@@ -146,7 +144,7 @@ class JelevaNephaliasWatcher extends Watcher {
     private final Map<String, Integer> manaSpendToCast = new HashMap<>(); // cast
 
     public JelevaNephaliasWatcher() {
-        super(JelevaNephaliasWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public JelevaNephaliasWatcher(final JelevaNephaliasWatcher watcher) {

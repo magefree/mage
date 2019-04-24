@@ -25,7 +25,7 @@ public final class FiendHunter extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public FiendHunter(UUID ownerId, CardSetInfo setInfo) {

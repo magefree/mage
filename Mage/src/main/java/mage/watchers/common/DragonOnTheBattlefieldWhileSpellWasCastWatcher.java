@@ -26,7 +26,7 @@ public class DragonOnTheBattlefieldWhileSpellWasCastWatcher extends Watcher {
     private final Set<UUID> castWithDragonOnTheBattlefield = new HashSet<>();
 
     public DragonOnTheBattlefieldWhileSpellWasCastWatcher() {
-        super(DragonOnTheBattlefieldWhileSpellWasCastWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public DragonOnTheBattlefieldWhileSpellWasCastWatcher(final DragonOnTheBattlefieldWhileSpellWasCastWatcher watcher) {

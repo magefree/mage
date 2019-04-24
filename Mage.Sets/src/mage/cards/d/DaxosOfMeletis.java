@@ -89,7 +89,7 @@ class DaxosOfMeletisEffect extends OneShotEffect {
                 MageObject sourceObject = game.getObject(source.getSourceId());
                 UUID exileId = CardUtil.getCardExileZoneId(game, source);
                 Card card = damagedPlayer.getLibrary().getFromTop(game);
-                if (card != null) {
+                if (card != null && sourceObject != null) {
                     // move card to exile
                     controller.moveCardsToExile(card, source, game, true, exileId, sourceObject.getIdName());
                     // player gains life
@@ -177,6 +177,7 @@ class DaxosOfMeletisSpendAnyManaEffect extends AsThoughEffectImpl implements AsT
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        objectId = game.getCard(objectId).getMainCard().getId(); // for split cards
         return source.isControlledBy(affectedControllerId)
                 && Objects.equals(objectId, ((FixedTarget) getTargetPointer()).getTarget())
                 && ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(objectId)

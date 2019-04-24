@@ -18,7 +18,7 @@ public final class UnderworldDreams extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{B}{B}");
 
         // Whenever an opponent draws a card, Underworld Dreams deals 1 damage to him or her.
-        this.addAbility(new DrawCardOpponentTriggeredAbility(new DamageTargetEffect(1, true, "him or her"), false, true));
+        this.addAbility(new DrawCardOpponentTriggeredAbility(new DamageTargetEffect(1, true, "that player"), false, true));
     }
 
     public UnderworldDreams(final UnderworldDreams card) {

@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import java.util.UUID;
@@ -38,10 +37,10 @@ import mage.util.CardUtil;
  */
 public final class HostageTaker extends CardImpl {
 
-    private final static FilterPermanent filter = new FilterPermanent("another target artifact or creature");
+    private static final FilterPermanent filter = new FilterPermanent("another target artifact or creature");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(Predicates.or(
                 new CardTypePredicate(CardType.ARTIFACT),
                 new CardTypePredicate(CardType.CREATURE)));
@@ -174,16 +173,15 @@ class HostageTakerSpendAnyManaEffect extends AsThoughEffectImpl implements AsTho
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        objectId = game.getCard(objectId).getMainCard().getId(); // for split cards
         if (objectId.equals(((FixedTarget) getTargetPointer()).getTarget())
                 && game.getState().getZoneChangeCounter(objectId) <= ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1) {
-
             if (affectedControllerId.equals(source.getControllerId())) {
                 // if the card moved from exile to spell the zone change counter is increased by 1
                 if (game.getState().getZoneChangeCounter(objectId) == ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1) {
                     return true;
                 }
             }
-
         } else {
             if (((FixedTarget) getTargetPointer()).getTarget().equals(objectId)) {
                 // object has moved zone so effect can be discarted

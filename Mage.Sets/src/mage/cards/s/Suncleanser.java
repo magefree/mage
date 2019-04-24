@@ -45,9 +45,9 @@ public final class Suncleanser extends CardImpl {
 
         // • Target opponent loses all counters. That player can't get counters for as long as Suncleanser remains on the battlefield.
         Mode mode = new Mode();
-        mode.getEffects().add(new SuncleanserRemoveCountersEffect(true));
-        mode.getEffects().add(new SuncleanserPreventCountersEffect(true));
-        mode.getTargets().add(new TargetOpponent());
+        mode.addEffect(new SuncleanserRemoveCountersEffect(true));
+        mode.addEffect(new SuncleanserPreventCountersEffect(true));
+        mode.addTarget(new TargetOpponent());
         ability.addMode(mode);
         this.addAbility(ability);
     }

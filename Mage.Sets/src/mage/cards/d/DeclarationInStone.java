@@ -1,9 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -20,9 +16,13 @@ import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.ClueArtifactToken;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
- *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public final class DeclarationInStone extends CardImpl {
@@ -66,7 +66,7 @@ class DeclarationInStoneEffect extends OneShotEffect {
             if (targetPermanent != null) {
                 Set<Card> cardsToExile = new HashSet<>();
                 int nonTokenCount = 0;
-                if (targetPermanent.getName().isEmpty()) { // face down creature
+                if (CardUtil.haveEmptyName(targetPermanent)) { // face down creature
                     cardsToExile.add(targetPermanent);
                     if (!(targetPermanent instanceof PermanentToken)) {
                         nonTokenCount++;
@@ -78,7 +78,7 @@ class DeclarationInStoneEffect extends OneShotEffect {
                     }
                     for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES, targetPermanent.getControllerId(), game)) {
                         if (!permanent.getId().equals(targetPermanent.getId())
-                                && permanent.getName().equals(targetPermanent.getName())) {
+                                && CardUtil.haveSameNames(permanent, targetPermanent)) {
                             cardsToExile.add(permanent);
                             // exiled count only matters for non-tokens
                             if (!(permanent instanceof PermanentToken)) {

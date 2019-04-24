@@ -26,7 +26,7 @@ public final class ClockOfOmens extends CardImpl {
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public ClockOfOmens(UUID ownerId, CardSetInfo setInfo) {

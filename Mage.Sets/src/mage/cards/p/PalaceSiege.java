@@ -26,8 +26,8 @@ import java.util.UUID;
  */
 public final class PalaceSiege extends CardImpl {
 
-    private final static String ruleTrigger1 = "&bull Khans &mdash; At the beginning of your upkeep, return target creature card from your graveyard to your hand.";
-    private final static String ruleTrigger2 = "&bull Dragons &mdash; At the beginning of your upkeep, each opponent loses 2 life and you gain 2 life.";
+    private static final String ruleTrigger1 = "&bull Khans &mdash; At the beginning of your upkeep, return target creature card from your graveyard to your hand.";
+    private static final String ruleTrigger2 = "&bull Dragons &mdash; At the beginning of your upkeep, each opponent loses 2 life and you gain 2 life.";
     
     public PalaceSiege(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}{B}");

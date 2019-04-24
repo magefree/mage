@@ -45,7 +45,7 @@ public final class HisokasGuard extends CardImpl {
 
         // {1}{U}, {T}: Target creature you control other than Hisoka's Guard has shroud for as long as Hisoka's Guard remains tapped. (It can't be the target of spells or abilities.)
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HisokasGuardGainAbilityTargetEffect(), new ManaCostsImpl("{1}{U}"));
         ability.addCost(new TapSourceCost());
         Target target = new TargetControlledCreaturePermanent(1, 1, filter, true);

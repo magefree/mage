@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import mage.abilities.Ability;
@@ -24,13 +23,12 @@ import mage.target.targetpointer.FixedTarget;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class CurseOfChaos extends CardImpl {
 
     public CurseOfChaos(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
         this.subtype.add(SubType.AURA, SubType.CURSE);
 
 
@@ -74,9 +72,9 @@ class CurseOfChaosTriggeredAbility extends TriggeredAbilityImpl {
         Permanent enchantment = game.getPermanent(this.getSourceId());
         if (enchantment != null
                 && enchantment.getAttachedTo() != null
-                && game.getCombat().getPlayerDefenders(game).contains(enchantment.getAttachedTo())) {
-            for (Effect effect: this.getEffects()) {
-                effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackingPlayerId()));                    
+                && game.getCombat().getPlayerDefenders(game, false).contains(enchantment.getAttachedTo())) {
+            for (Effect effect : this.getEffects()) {
+                effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackingPlayerId()));
             }
             return true;
         }
@@ -85,7 +83,7 @@ class CurseOfChaosTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return new StringBuilder("Whenever a player attacks enchanted player with one or more creatures, ").append(super.getRule()).toString();
+        return "Whenever a player attacks enchanted player with one or more creatures, " + super.getRule();
     }
 
     @Override
@@ -115,7 +113,7 @@ class CurseOfChaosEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player attacker = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (attacker != null) {
-            if (!attacker.getHand().isEmpty() && attacker.chooseUse(outcome, "Discard a card and draw a card?", source, game)){
+            if (!attacker.getHand().isEmpty() && attacker.chooseUse(outcome, "Discard a card and draw a card?", source, game)) {
                 attacker.discard(1, false, source, game);
                 attacker.drawCards(1, game);
             }

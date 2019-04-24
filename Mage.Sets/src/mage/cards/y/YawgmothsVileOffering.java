@@ -1,7 +1,5 @@
 package mage.cards.y;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.LegendarySpellAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -9,7 +7,10 @@ import mage.abilities.effects.common.ExileSpellEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
@@ -19,6 +20,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCreatureOrPlaneswalker;
+
+import java.util.UUID;
 
 /**
  * @author JRHerlehy Created on 4/8/18.
@@ -78,7 +81,6 @@ class YawgmothsVileOfferingEffect extends OneShotEffect {
         }
 
         Card returnCard = game.getCard(source.getTargets().getFirstTarget());
-
         if (returnCard != null) {
             controller.moveCards(returnCard, Zone.BATTLEFIELD, source, game);
         }

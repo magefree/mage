@@ -71,8 +71,7 @@ class SatyrWayfinderEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && sourceObject != null) {
-            Cards cards = new CardsImpl();
-            cards.addAll(controller.getLibrary().getTopCards(game, 4));
+            Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 4));
             boolean properCardFound = cards.count(filterPutInHand, source.getControllerId(), source.getSourceId(), game) > 0;
             if (!cards.isEmpty()) {
                 controller.revealCards(sourceObject.getIdName(), cards, game);

@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
@@ -32,8 +30,9 @@ import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetEnchantmentPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class CollectiveEffort extends CardImpl {
@@ -44,7 +43,7 @@ public final class CollectiveEffort extends CardImpl {
     private static final FilterPlayer filterPlayer = new FilterPlayer("player whose creatures get +1/+1 counters");
 
     static {
-        filterUntapped.add(Predicates.not(new TappedPredicate()));
+        filterUntapped.add(Predicates.not(TappedPredicate.instance));
         filterDestroyCreature.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
     }
 
@@ -62,22 +61,22 @@ public final class CollectiveEffort extends CardImpl {
 
         // Destroy target creature with power 4 or greater.;
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterDestroyCreature));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterDestroyCreature).withChooseHint("destroy"));
 
         // Destroy target enchantment.;
         Mode mode = new Mode();
         Effect effect = new DestroyTargetEffect();
         effect.setText("Destroy target enchantment");
-        mode.getEffects().add(effect);
-        mode.getTargets().add(new TargetEnchantmentPermanent(filterDestroyEnchantment));
+        mode.addEffect(effect);
+        mode.addTarget(new TargetEnchantmentPermanent(filterDestroyEnchantment).withChooseHint("destroy"));
         this.getSpellAbility().addMode(mode);
 
         // Put a +1/+1 counter on each creature target player controls.
         mode = new Mode();
         effect = new CollectiveEffortEffect();
         effect.setText("Put a +1/+1 counter on each creature target player controls");
-        mode.getEffects().add(effect);
-        mode.getTargets().add(new TargetPlayer(1, 1, false, filterPlayer));
+        mode.addEffect(effect);
+        mode.addTarget(new TargetPlayer(1, 1, false, filterPlayer).withChooseHint("put +1/+1 counter on each creature"));
         this.getSpellAbility().addMode(mode);
     }
 

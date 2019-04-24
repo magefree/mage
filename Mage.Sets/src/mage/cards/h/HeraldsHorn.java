@@ -13,10 +13,11 @@ import mage.abilities.effects.common.cost.SpellsCostReductionAllOfChosenSubtypeE
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -72,22 +73,25 @@ class HeraldsHornEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
 
         // Look at the top card of your library.
-        if (controller.getLibrary().hasCards()) {
+        if (controller != null && controller.getLibrary().hasCards() && sourceObject != null) {
             Card card = controller.getLibrary().getFromTop(game);
             Cards cards = new CardsImpl(card);
             controller.lookAtCards(sourceObject.getIdName(), cards, game);
 
             // If it's a creature card of the chosen type, you may reveal it and put it into your hand.
             FilterCreatureCard filter = new FilterCreatureCard("creature card of the chosen type");
-            filter.add(new ChosenSubtypePredicate());
+            SubType subtype = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
+            filter.add(new SubtypePredicate(subtype));
             String message = "Reveal the top card of your library and put that card into your hand?";
             if (card != null) {
-                if (filter.match(card, game) && controller.chooseUse(Outcome.Benefit, message, source, game)) {
+                if (filter.match(card, game) 
+                        && controller.chooseUse(Outcome.Benefit, message, source, game)) {
                     controller.moveCards(card, Zone.HAND, source, game);
                     controller.revealCards(sourceObject.getIdName() + " put into hand", cards, game);
+                    return true;
                 }
             }
         }
-        return true;
+        return false;
     }
 }

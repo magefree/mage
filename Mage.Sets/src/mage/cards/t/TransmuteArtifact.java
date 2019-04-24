@@ -78,7 +78,7 @@ class TransmuteArtifactEffect extends SearchEffect {
             return true;
         }
         //If you do, search your library for an artifact card.
-        if (sacrifice && controller.searchLibrary(target, game)) {
+        if (sacrifice && controller.searchLibrary(target, source, game)) {
             if (!target.getTargets().isEmpty()) {
                 for (UUID cardId : target.getTargets()) {
                     Card card = controller.getLibrary().getCard(cardId, game);

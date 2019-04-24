@@ -13,7 +13,6 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author LevelX2
  */
 public class DealsDamageToAPlayerAllTriggeredAbility extends TriggeredAbilityImpl {
@@ -28,7 +27,11 @@ public class DealsDamageToAPlayerAllTriggeredAbility extends TriggeredAbilityImp
     }
 
     public DealsDamageToAPlayerAllTriggeredAbility(Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer, boolean onlyCombat, boolean affectsDefendingPlayer) {
-        super(Zone.BATTLEFIELD, effect, optional);
+        this(Zone.BATTLEFIELD, effect, filter, optional, setTargetPointer, onlyCombat, affectsDefendingPlayer);
+    }
+
+    public DealsDamageToAPlayerAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer, boolean onlyCombat, boolean affectsDefendingPlayer) {
+        super(zone, effect, optional);
         this.setTargetPointer = setTargetPointer;
         this.filter = filter;
         this.onlyCombat = onlyCombat;
@@ -57,27 +60,25 @@ public class DealsDamageToAPlayerAllTriggeredAbility extends TriggeredAbilityImp
     public boolean checkTrigger(GameEvent event, Game game) {
         if (!onlyCombat || ((DamagedPlayerEvent) event).isCombatDamage()) {
             Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null) {
-                if (filter.match(permanent, getSourceId(), getControllerId(), game)) {
-                    for (Effect effect : this.getEffects()) {
-                        effect.setValue("damage", event.getAmount());
-                        effect.setValue("sourceId", event.getSourceId());
-                        if (affectsDefendingPlayer) {
-                            effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                            continue;
-                        }
-                        switch (setTargetPointer) {
-                            case PLAYER:
-                                effect.setTargetPointer(new FixedTarget(permanent.getControllerId()));
-                                break;
-                            case PERMANENT:
-                                effect.setTargetPointer(new FixedTarget(permanent.getId(), permanent.getZoneChangeCounter(game)));
-                                break;
-                        }
-
+            if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
+                for (Effect effect : this.getEffects()) {
+                    effect.setValue("damage", event.getAmount());
+                    effect.setValue("sourceId", event.getSourceId());
+                    if (affectsDefendingPlayer) {
+                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                        continue;
                     }
-                    return true;
+                    switch (setTargetPointer) {
+                        case PLAYER:
+                            effect.setTargetPointer(new FixedTarget(permanent.getControllerId()));
+                            break;
+                        case PERMANENT:
+                            effect.setTargetPointer(new FixedTarget(permanent.getId(), permanent.getZoneChangeCounter(game)));
+                            break;
+                    }
+
                 }
+                return true;
             }
         }
         return false;

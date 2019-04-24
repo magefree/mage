@@ -4,7 +4,7 @@ package mage.cards.e;
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -29,7 +29,7 @@ public final class EarthSurge extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}");
 
         //Each land gets +2/+2 as long as it's a creature.
-        Effect effect = new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter, true);
+        Effect effect = new BoostAllEffect(2, 2, Duration.WhileOnBattlefield, filter, true);
         effect.setText("Each land gets +2/+2 as long as it\'s a creature");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }

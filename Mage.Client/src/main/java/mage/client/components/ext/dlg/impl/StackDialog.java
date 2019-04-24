@@ -85,11 +85,6 @@ public class StackDialog extends IDialogPanel {
         jTitle.setFont(new Font("Dialog", Font.BOLD, 14));
         jTitle.setText("Current stack: ");
 
-        /*jTitle2 = new CustomLabel();
-        jTitle2.setBounds(new Rectangle(5, 5 + SettingsManager.getInstance().getCardSize().height + 30, 129, 20));
-        jTitle2.setFont(new Font("Dialog", Font.BOLD, 14));
-        jTitle2.setText("Spell targets:");*/
-
         this.setLayout(null);
         jLayeredPane.setLayout(null);
 

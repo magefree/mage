@@ -32,10 +32,10 @@ public final class DevastatingDreams extends CardImpl {
         this.getSpellAbility().addCost(new DevastatingDreamsAdditionalCost());
         
         // Each player sacrifices X lands.
-        this.getSpellAbility().addEffect(new SacrificeAllEffect(new GetXValue(), new FilterControlledLandPermanent("lands")));
+        this.getSpellAbility().addEffect(new SacrificeAllEffect(GetXValue.instance, new FilterControlledLandPermanent("lands")));
         
         // Devastating Dreams deals X damage to each creature.
-        this.getSpellAbility().addEffect(new DamageAllEffect(new GetXValue(), new FilterCreaturePermanent()));
+        this.getSpellAbility().addEffect(new DamageAllEffect(GetXValue.instance, new FilterCreaturePermanent()));
     }
 
     public DevastatingDreams(final DevastatingDreams card) {

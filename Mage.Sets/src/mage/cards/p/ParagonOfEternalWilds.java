@@ -39,7 +39,7 @@ public final class ParagonOfEternalWilds extends CardImpl {
         filterGreen.add(new ColorPredicate(ObjectColor.GREEN));
         filterGreen.add(new ControllerPredicate(TargetController.YOU));
         filterGreen2.add(new ColorPredicate(ObjectColor.GREEN));        
-        filterGreen2.add(new AnotherPredicate());
+        filterGreen2.add(AnotherPredicate.instance);
     }
     
     public ParagonOfEternalWilds(UUID ownerId, CardSetInfo setInfo) {

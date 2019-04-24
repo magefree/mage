@@ -1,12 +1,8 @@
-
 package mage.client.deckeditor;
 
 import mage.cards.Card;
-import mage.cards.Sets;
-import mage.cards.decks.Deck;
-import mage.cards.decks.DeckCardLists;
+import mage.cards.decks.*;
 import mage.cards.decks.importer.DeckImporter;
-import mage.cards.decks.importer.DeckImporterUtil;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.client.MageFrame;
@@ -25,57 +21,63 @@ import mage.client.util.audio.AudioManager;
 import mage.components.CardInfoPane;
 import mage.game.GameException;
 import mage.remote.Session;
+import mage.util.DeckUtil;
 import mage.view.CardView;
 import mage.view.SimpleCardView;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
-import javax.swing.Timer;
 import javax.swing.filechooser.FileFilter;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.dnd.DropTarget;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.HierarchyEvent;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 import java.util.concurrent.*;
 
+import static mage.cards.decks.DeckFormats.XMAGE;
+
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class DeckEditorPanel extends javax.swing.JPanel {
 
     private static final Logger logger = Logger.getLogger(DeckEditorPanel.class);
     private final JFileChooser fcSelectDeck;
     private final JFileChooser fcImportDeck;
+    private final JFileChooser fcExportDeck;
     private Deck deck = new Deck();
     private final Map<UUID, Card> temporaryCards = new HashMap<>(); // Cards dragged out of one part of the view into another
     private boolean isShowCardInfo = false;
     private UUID tableId;
     private DeckEditorMode mode;
     private int timeout;
-    private Timer countdown;
+    private javax.swing.Timer countdown;
     private UpdateDeckTask updateDeckTask;
     private int timeToSubmit = -1;
+    private final String LAST_DECK_FOLDER = "lastDeckFolder";
 
-    /**
-     * Creates new form DeckEditorPanel
-     */
     public DeckEditorPanel() {
         initComponents();
+
         fcSelectDeck = new JFileChooser();
         fcSelectDeck.setAcceptAllFileFilterUsed(false);
-        fcSelectDeck.addChoosableFileFilter(new DeckFilter());
+        fcSelectDeck.addChoosableFileFilter(new DeckFileFilter("dck", "XMage's deck files (*.dck)"));
         fcImportDeck = new JFileChooser();
         fcImportDeck.setAcceptAllFileFilterUsed(false);
         fcImportDeck.addChoosableFileFilter(new ImportFilter());
+        fcExportDeck = new JFileChooser();
+        fcExportDeck.setAcceptAllFileFilterUsed(false);
 
         deckArea.setOpaque(false);
-        jPanel1.setOpaque(false);
-        jSplitPane1.setOpaque(false);
+        panelLeft.setOpaque(false);
+        panelRight.setOpaque(false);
         restoreDividerLocationsAndDeckAreaSettings();
-        countdown = new Timer(1000,
+        countdown = new javax.swing.Timer(1000,
                 e -> {
                     if (--timeout > 0) {
                         setTimeout(timeout);
@@ -123,7 +125,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     }
 
     private void saveDividerLocationsAndDeckAreaSettings() {
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_EDITOR_HORIZONTAL_DIVIDER_LOCATION, Integer.toString(jSplitPane1.getDividerLocation()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_EDITOR_HORIZONTAL_DIVIDER_LOCATION, Integer.toString(panelRight.getDividerLocation()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_EDITOR_DECKAREA_SETTINGS, this.deckArea.saveSettings().toString());
     }
 
@@ -131,7 +133,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         // Load horizontal split position setting
         String dividerLocation = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_EDITOR_HORIZONTAL_DIVIDER_LOCATION, "");
         if (!dividerLocation.isEmpty()) {
-            jSplitPane1.setDividerLocation(Integer.parseInt(dividerLocation));
+            panelRight.setDividerLocation(Integer.parseInt(dividerLocation));
         }
 
         // Load deck area settings
@@ -157,7 +159,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             case LIMITED_BUILDING:
                 this.btnAddLand.setVisible(true);
                 this.txtTimeRemaining.setVisible(true);
-            // Fall through to sideboarding
+                // Fall through to sideboarding
             case SIDEBOARDING:
                 this.btnSubmit.setVisible(true);
                 this.btnSubmitTimer.setVisible(true);
@@ -209,7 +211,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 this.btnGenDeck.setVisible(false);
                 this.btnImport.setVisible(false);
                 this.btnLoad.setVisible(false);
-                this.btnNew.setVisible(false);                
+                this.btnNew.setVisible(false);
                 this.btnSubmit.setVisible(false);
                 this.btnSubmitTimer.setVisible(false);
                 this.cardSelector.loadCards(this.bigCard);
@@ -244,32 +246,31 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
     private void init() {
         //this.cardSelector.setVisible(true);
-        this.jPanel1.setVisible(true);
+        this.panelLeft.setVisible(true);
         for (ICardGrid component : this.cardSelector.getCardGridComponents()) {
             component.clearCardEventListeners();
-            component.addCardEventListener(
-                    (Listener<Event>) event -> {
-                        switch (event.getEventType()) {
-                            case DOUBLE_CLICK:
-                                moveSelectorCardToDeck(event);
-                                break;
-                            case ALT_DOUBLE_CLICK:
-                                if (mode == DeckEditorMode.FREE_BUILDING) {
-                                    moveSelectorCardToSideboard(event);
-                                } else {
-                                    // because in match mode selector is used as sideboard the card goes to deck also for shift click
-                                    moveSelectorCardToDeck(event);
-                                }
-                                break;
-                            case REMOVE_MAIN:
-                                DeckEditorPanel.this.deckArea.getDeckList().removeSelection();
-                                break;
-                            case REMOVE_SIDEBOARD:
-                                DeckEditorPanel.this.deckArea.getSideboardList().removeSelection();
-                                break;
+            component.addCardEventListener((Listener<Event>) event -> {
+                switch (event.getEventType()) {
+                    case DOUBLE_CLICK:
+                        moveSelectorCardToDeck(event);
+                        break;
+                    case ALT_DOUBLE_CLICK:
+                        if (mode == DeckEditorMode.FREE_BUILDING) {
+                            moveSelectorCardToSideboard(event);
+                        } else {
+                            // because in match mode selector is used as sideboard the card goes to deck also for shift click
+                            moveSelectorCardToDeck(event);
                         }
-                        refreshDeck();
-                    });
+                        break;
+                    case REMOVE_MAIN:
+                        DeckEditorPanel.this.deckArea.getDeckList().removeSelection();
+                        break;
+                    case REMOVE_SIDEBOARD:
+                        DeckEditorPanel.this.deckArea.getSideboardList().removeSelection();
+                        break;
+                }
+                refreshDeck();
+            });
         }
         this.deckArea.clearDeckEventListeners();
         this.deckArea.addDeckEventListener(
@@ -446,7 +447,25 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                         }
                     }
                 });
-        refreshDeck();
+        refreshDeck(true);
+
+        if (mode == DeckEditorMode.FREE_BUILDING) {
+            setDropTarget(new DropTarget(this, new DnDDeckTargetListener() {
+
+                @Override
+                protected boolean handleFilesDrop(boolean move, List<File> files) {
+                    loadDeck(files.get(0).getAbsolutePath());
+                    return true;
+                }
+
+                @Override
+                protected boolean handlePlainTextDrop(boolean move, String text) {
+                    String tmpFile = DeckUtil.writeTextToTempFile(text);
+                    loadDeck(tmpFile);
+                    return true;
+                }
+            }));
+        }
 
         this.setVisible(true);
         this.repaint();
@@ -456,7 +475,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         CardView cardView = (CardView) event.getSource();
         int numberToSet = event.getNumber();
         int cardsFound = 0;
-        List<Card> toDelete = new ArrayList<>();
+        java.util.List<Card> toDelete = new ArrayList<>();
         for (Card card : cards) {
             if (card.getName().equals(cardView.getName())
                     && Objects.equals(card.getCardNumber(), cardView.getCardNumber())
@@ -575,9 +594,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             text = Integer.toString(minute) + ':';
         }
         if (second < 10) {
-            text = text + '0' + Integer.toString(second);
+            text = text + '0' + second;
         } else {
-            text = text + Integer.toString(second);
+            text = text + second;
         }
         this.txtTimeRemaining.setText(text);
         if (s == 60) {
@@ -590,33 +609,225 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         }
     }
 
+    private void importChoose(java.awt.event.ActionEvent evt) {
+
+        Object[] options = {"From file", "From clipboard (new deck)", "From clipboard (append cards)"};
+
+        int n = JOptionPane.showOptionDialog(MageFrame.getDesktop(),
+                "Where would you like to import from?",
+                "Deck import",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]
+        );
+
+        switch (n) {
+            case 0:
+                importFromFile(evt);
+                break;
+            case 1:
+                importFromClipboard(evt);
+                break;
+            case 2:
+                importFromClipboardWithAppend(evt);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void importFromFile(java.awt.event.ActionEvent evt) {
+        String lastFolder = MageFrame.getPreferences().get("lastImportFolder", "");
+        if (!lastFolder.isEmpty()) {
+            fcImportDeck.setCurrentDirectory(new File(lastFolder));
+        }
+        int ret = fcImportDeck.showOpenDialog(this);
+        if (ret == JFileChooser.APPROVE_OPTION) {
+            File file = fcImportDeck.getSelectedFile();
+            MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
+            try {
+                DeckImporter importer = DeckImporter.getDeckImporter(file.getPath());
+
+                if (importer != null) {
+                    StringBuilder errorMessages = new StringBuilder();
+                    Deck newDeck = null;
+
+                    newDeck = Deck.load(importer.importDeck(file.getPath(), errorMessages));
+                    processAndShowImportErrors(errorMessages);
+
+                    if (newDeck != null) {
+                        deck = newDeck;
+                        refreshDeck();
+                    }
+
+                    // save last deck import folder
+                    try {
+                        MageFrame.getPreferences().put("lastImportFolder", file.getCanonicalPath());
+                    } catch (IOException ex) {
+                        logger.error("Error on save last used import folder: " + ex.getMessage());
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Unknown deck format", "Error importing deck", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (Exception ex) {
+                logger.fatal(ex);
+            } finally {
+                MageFrame.getDesktop().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+            }
+        }
+        fcImportDeck.setSelectedFile(null);
+    }
+
+    private void importFromClipboard(ActionEvent evt) {
+        final DeckImportClipboardDialog dialog = new DeckImportClipboardDialog();
+        dialog.showDialog();
+
+        if (!dialog.getTmpPath().isEmpty()) {
+            loadDeck(dialog.getTmpPath());
+        }
+    }
+
+    private void importFromClipboardWithAppend(ActionEvent evt) {
+        final DeckImportClipboardDialog dialog = new DeckImportClipboardDialog();
+        dialog.showDialog();
+
+        if (!dialog.getTmpPath().isEmpty()) {
+            Deck deckToAppend = null;
+            StringBuilder errorMessages = new StringBuilder();
+
+            MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
+            try {
+                deckToAppend = Deck.load(DeckImporter.importDeckFromFile(dialog.getTmpPath(), errorMessages), true, true);
+                processAndShowImportErrors(errorMessages);
+
+                if (deckToAppend != null) {
+                    deck = Deck.append(deckToAppend, deck);
+                    refreshDeck();
+                }
+            } catch (GameException e1) {
+                JOptionPane.showMessageDialog(MageFrame.getDesktop(), e1.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE);
+            } finally {
+                MageFrame.getDesktop().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+            }
+        }
+    }
+
+    private void exportChoose(java.awt.event.ActionEvent evt) {
+
+        Object[] options = {"To file", "To clipboard"};
+
+        int n = JOptionPane.showOptionDialog(MageFrame.getDesktop(),
+                "Where would you like to export?",
+                "Deck export",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]
+        );
+
+        switch (n) {
+            case 0:
+                exportToFile(evt);
+                break;
+            case 1:
+                exportToClipboard(evt);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void exportToFile(java.awt.event.ActionEvent evt) {
+        // all available export formats
+        fcExportDeck.resetChoosableFileFilters();
+        for (FileFilter filter : DeckFormats.getFileFilters()) {
+            fcExportDeck.addChoosableFileFilter(filter);
+        }
+
+        String lastFolder = MageFrame.getPreferences().get("lastExportFolder", "");
+        if (!lastFolder.isEmpty()) {
+            fcExportDeck.setCurrentDirectory(new File(lastFolder));
+        }
+        int ret = fcExportDeck.showSaveDialog(this);
+        if (ret == JFileChooser.APPROVE_OPTION) {
+            File file = fcExportDeck.getSelectedFile();
+
+            // default ext for file
+            String needFileName = file.getAbsolutePath();
+            String needFileExt = DeckFormats.getDefaultFileExtForFilter(fcExportDeck.getFileFilter());
+            if (!needFileExt.isEmpty() && !needFileName.toLowerCase(Locale.ENGLISH).endsWith("." + needFileExt)) {
+                needFileName += "." + needFileExt;
+            }
+
+            MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
+            try {
+                DeckFormats.writeDeck(needFileName, deck.getDeckCardLists());
+
+                try {
+                    MageFrame.getPreferences().put("lastExportFolder", file.getCanonicalPath());
+                } catch (IOException ex) {
+                    logger.error("Error on save last used export folder: " + ex.getMessage());
+                }
+            } catch (Exception ex) {
+                logger.fatal(ex);
+            } finally {
+                MageFrame.getDesktop().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+            }
+        }
+        fcExportDeck.setSelectedFile(null);
+    }
+
+    private void exportToClipboard(java.awt.event.ActionEvent evt) {
+        final DeckExportClipboardDialog dialog = new DeckExportClipboardDialog();
+        dialog.showDialog(deck);
+    }
+
+    private void processAndShowImportErrors(StringBuilder errorMessages) {
+        // show up errors list
+        if (errorMessages.length() > 0) {
+            String mes = "Found problems with deck: \n\n" + errorMessages.toString();
+            JOptionPane.showMessageDialog(MageFrame.getDesktop(), mes.substring(0, Math.min(1000, mes.length())), "Errors while loading deck", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    private boolean loadDeck(String file) {
+        MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
+        try {
+            StringBuilder errorMessages = new StringBuilder();
+            Deck newDeck = Deck.load(DeckImporter.importDeckFromFile(file, errorMessages), true, true);
+            processAndShowImportErrors(errorMessages);
+
+            if (newDeck != null) {
+                deck = newDeck;
+                refreshDeck();
+                return true;
+            }
+
+        } catch (GameException e1) {
+            JOptionPane.showMessageDialog(MageFrame.getDesktop(), e1.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            MageFrame.getDesktop().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
+        return false;
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jSplitPane1 = new javax.swing.JSplitPane();
+        panelRight = new javax.swing.JSplitPane();
         cardSelector = new mage.client.deckeditor.CardSelector();
         deckArea = new mage.client.deckeditor.DeckArea();
-        jPanel1 = new javax.swing.JPanel();
-        bigCard = new mage.client.cards.BigCard();
-        txtDeckName = new javax.swing.JTextField();
-        lblDeckName = new javax.swing.JLabel();
-        btnSave = new javax.swing.JButton();
-        btnLoad = new javax.swing.JButton();
-        btnNew = new javax.swing.JButton();
-        btnExit = new javax.swing.JButton();
-        btnImport = new javax.swing.JButton();
-        btnSubmit = new javax.swing.JButton();
-        btnSubmitTimer = new javax.swing.JButton();
-        btnAddLand = new javax.swing.JButton();
-        btnGenDeck = new javax.swing.JButton();
-        txtTimeRemaining = new javax.swing.JTextField();
-
-        jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
-        jSplitPane1.setResizeWeight(0.5);
-        jSplitPane1.setTopComponent(cardSelector);
-        jSplitPane1.setBottomComponent(deckArea);
-
-        bigCard.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
+        panelLeft = new javax.swing.JPanel();
         cardInfoPane = Plugins.instance.getCardInfoPane();
         if (cardInfoPane != null && System.getProperty("testCardInfo") != null) {
             cardInfoPane.setPreferredSize(new Dimension(170, 150));
@@ -626,289 +837,348 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             cardInfoPane = new JLabel();
             cardInfoPane.setVisible(false);
         }
+        bigCard = new mage.client.cards.BigCard();
+        panelDeck = new javax.swing.JPanel();
+        panelDeckName = new javax.swing.JPanel();
+        lblDeckName = new javax.swing.JLabel();
+        txtDeckName = new javax.swing.JTextField();
+        panelDeckCreate = new javax.swing.JPanel();
+        btnNew = new javax.swing.JButton();
+        btnGenDeck = new javax.swing.JButton();
+        panelDeckLoad = new javax.swing.JPanel();
+        btnLoad = new javax.swing.JButton();
+        btnImport = new javax.swing.JButton();
+        panelDeckSave = new javax.swing.JPanel();
+        btnSave = new javax.swing.JButton();
+        btnExport = new javax.swing.JButton();
+        panelDeckDraft = new javax.swing.JPanel();
+        btnSubmit = new javax.swing.JButton();
+        btnSubmitTimer = new javax.swing.JButton();
+        panelDeckLands = new javax.swing.JPanel();
+        btnAddLand = new javax.swing.JButton();
+        panelDeckExit = new javax.swing.JPanel();
+        btnExit = new javax.swing.JButton();
+        txtTimeRemaining = new javax.swing.JTextField();
 
+        panelRight.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+        panelRight.setResizeWeight(0.5);
+        panelRight.setTopComponent(cardSelector);
+        panelRight.setBottomComponent(deckArea);
+
+        panelDeck.setOpaque(false);
+        panelDeck.setLayout(new javax.swing.BoxLayout(panelDeck, javax.swing.BoxLayout.Y_AXIS));
+
+        panelDeckName.setOpaque(false);
+
+        lblDeckName.setForeground(new java.awt.Color(255, 255, 255));
         lblDeckName.setLabelFor(txtDeckName);
         lblDeckName.setText("Deck Name:");
 
-        btnSave.setText("Save");
-        btnSave.addActionListener(evt -> btnSaveActionPerformed(evt));
+        javax.swing.GroupLayout panelDeckNameLayout = new javax.swing.GroupLayout(panelDeckName);
+        panelDeckName.setLayout(panelDeckNameLayout);
+        panelDeckNameLayout.setHorizontalGroup(
+                panelDeckNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelDeckNameLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(lblDeckName)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtDeckName, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                                .addContainerGap())
+        );
+        panelDeckNameLayout.setVerticalGroup(
+                panelDeckNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelDeckNameLayout.createSequentialGroup()
+                                .addGroup(panelDeckNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txtDeckName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblDeckName))
+                                .addGap(0, 0, 0))
+        );
 
-        btnLoad.setText("Load");
-        btnLoad.addActionListener(evt -> btnLoadActionPerformed(evt));
+        panelDeck.add(panelDeckName);
 
-        btnNew.setText("New");
-        btnNew.addActionListener(evt -> btnNewActionPerformed(evt));
+        panelDeckCreate.setOpaque(false);
 
-        btnExit.setText("Exit");
-        btnExit.addActionListener(evt -> btnExitActionPerformed(evt));
-
-        btnImport.setText("Import");
-        btnImport.setName("btnImport"); // NOI18N
-        btnImport.addActionListener(evt -> {
-            Object[] options = {"File", "Clipboard", "Append from Clipboard"};
-
-            int n = JOptionPane.showOptionDialog(MageFrame.getDesktop(),
-                    "Where would you like to import from?",
-                    "Deck import",
-                    JOptionPane.YES_NO_CANCEL_OPTION,
-                    JOptionPane.QUESTION_MESSAGE,
-                    null,
-                    options,
-                    options[0]
-            );
-
-            logger.info(n);
-
-            switch (n) {
-                case 0:
-                    btnImportActionPerformed(evt);
-                    break;
-                case 1:
-                    btnImportFromClipboardActionPerformed(evt);
-                    break;
-                case 2:
-                    btnImportFromClipboardActionWAppendPerformed(evt);
-                    break;
+        btnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/state_active.png"))); // NOI18N
+        btnNew.setText("NEW");
+        btnNew.setIconTextGap(2);
+        btnNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewActionPerformed(evt);
             }
         });
 
-        btnSubmit.setText("Submit");
-        btnSubmitTimer.setToolTipText("Submit your deck now!");
+        btnGenDeck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/card_panel.png"))); // NOI18N
+        btnGenDeck.setText("Random");
+        btnGenDeck.setIconTextGap(1);
+        btnGenDeck.setName("btnGenDeck"); // NOI18N
+        btnGenDeck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenDeckActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelDeckCreateLayout = new javax.swing.GroupLayout(panelDeckCreate);
+        panelDeckCreate.setLayout(panelDeckCreateLayout);
+        panelDeckCreateLayout.setHorizontalGroup(
+                panelDeckCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelDeckCreateLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnGenDeck, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(40, Short.MAX_VALUE))
+        );
+        panelDeckCreateLayout.setVerticalGroup(
+                panelDeckCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelDeckCreateLayout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addGroup(panelDeckCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(btnGenDeck, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                                        .addComponent(btnNew, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)))
+        );
+
+        panelDeck.add(panelDeckCreate);
+
+        panelDeckLoad.setOpaque(false);
+
+        btnLoad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/search_24.png"))); // NOI18N
+        btnLoad.setText("LOAD");
+        btnLoad.setIconTextGap(2);
+        btnLoad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoadActionPerformed(evt);
+            }
+        });
+
+        btnImport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/deck_in.png"))); // NOI18N
+        btnImport.setText("Import");
+        btnImport.setIconTextGap(2);
+        btnImport.setName("btnImport"); // NOI18N
+        btnImport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImportActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelDeckLoadLayout = new javax.swing.GroupLayout(panelDeckLoad);
+        panelDeckLoad.setLayout(panelDeckLoadLayout);
+        panelDeckLoadLayout.setHorizontalGroup(
+                panelDeckLoadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelDeckLoadLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnImport, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(40, Short.MAX_VALUE))
+        );
+        panelDeckLoadLayout.setVerticalGroup(
+                panelDeckLoadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelDeckLoadLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(panelDeckLoadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                        .addComponent(btnImport, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)))
+        );
+
+        panelDeck.add(panelDeckLoad);
+
+        panelDeckSave.setOpaque(false);
+
+        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/sideboard_out.png"))); // NOI18N
+        btnSave.setText("SAVE");
+        btnSave.setIconTextGap(2);
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
+
+        btnExport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/deck_out.png"))); // NOI18N
+        btnExport.setText("Export");
+        btnExport.setIconTextGap(2);
+        btnExport.setName("btnImport"); // NOI18N
+        btnExport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelDeckSaveLayout = new javax.swing.GroupLayout(panelDeckSave);
+        panelDeckSave.setLayout(panelDeckSaveLayout);
+        panelDeckSaveLayout.setHorizontalGroup(
+                panelDeckSaveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelDeckSaveLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnExport, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(40, Short.MAX_VALUE))
+        );
+        panelDeckSaveLayout.setVerticalGroup(
+                panelDeckSaveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelDeckSaveLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(panelDeckSaveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                                        .addComponent(btnExport, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)))
+        );
+
+        panelDeck.add(panelDeckSave);
+
+        panelDeckDraft.setOpaque(false);
+
+        btnSubmit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/state_finished.png"))); // NOI18N
+        btnSubmit.setText("SUBMIT");
+        btnSubmit.setIconTextGap(2);
         btnSubmit.setName("btnSubmit"); // NOI18N
-        btnSubmit.addActionListener(evt -> btnSubmitActionPerformed(evt));
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitActionPerformed(evt);
+            }
+        });
 
-        btnSubmitTimer.setText("Submit (60s)");
-        btnSubmitTimer.setToolTipText("Submit your deck in one minute!");
-        btnSubmitTimer.setName("btnSubmitTimer");
-        btnSubmitTimer.addActionListener(evt -> btnSubmitTimerActionPerformed(evt));
+        btnSubmitTimer.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
+        btnSubmitTimer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/state_finished.png"))); // NOI18N
+        btnSubmitTimer.setText("<html>Submit<br>in 1 min");
+        btnSubmitTimer.setIconTextGap(2);
+        btnSubmitTimer.setName("btnSubmitTimer"); // NOI18N
+        btnSubmitTimer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitTimerActionPerformed(evt);
+            }
+        });
 
-        btnAddLand.setText("Add Land");
+        javax.swing.GroupLayout panelDeckDraftLayout = new javax.swing.GroupLayout(panelDeckDraft);
+        panelDeckDraft.setLayout(panelDeckDraftLayout);
+        panelDeckDraftLayout.setHorizontalGroup(
+                panelDeckDraftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelDeckDraftLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnSubmitTimer, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(40, Short.MAX_VALUE))
+        );
+        panelDeckDraftLayout.setVerticalGroup(
+                panelDeckDraftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelDeckDraftLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(panelDeckDraftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(panelDeckDraftLayout.createSequentialGroup()
+                                                .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                        .addComponent(btnSubmitTimer, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                                .addGap(0, 0, 0))
+        );
+
+        panelDeck.add(panelDeckDraft);
+
+        panelDeckLands.setOpaque(false);
+
+        btnAddLand.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/type_land.png"))); // NOI18N
+        btnAddLand.setText("Lands");
+        btnAddLand.setIconTextGap(2);
         btnAddLand.setName("btnAddLand"); // NOI18N
-        btnAddLand.addActionListener(evt -> btnAddLandActionPerformed(evt));
+        btnAddLand.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddLandActionPerformed(evt);
+            }
+        });
 
-        btnGenDeck.setText("Generate");
-        btnGenDeck.setName("btnGenDeck");
-        btnGenDeck.addActionListener(evt -> btnGenDeckActionPerformed(evt));
+        javax.swing.GroupLayout panelDeckLandsLayout = new javax.swing.GroupLayout(panelDeckLands);
+        panelDeckLands.setLayout(panelDeckLandsLayout);
+        panelDeckLandsLayout.setHorizontalGroup(
+                panelDeckLandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelDeckLandsLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnAddLand, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(146, Short.MAX_VALUE))
+        );
+        panelDeckLandsLayout.setVerticalGroup(
+                panelDeckLandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelDeckLandsLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnAddLand, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                                .addGap(0, 0, 0))
+        );
 
-        txtTimeRemaining.setEditable(false);
-        txtTimeRemaining.setForeground(java.awt.Color.red);
-        txtTimeRemaining.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtTimeRemaining.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        panelDeck.add(panelDeckLands);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                /*.addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                 .addContainerGap()
-                                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE))*/
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(lblDeckName)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtDeckName, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))
-                                .addComponent(cardInfoPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        panelDeckExit.setOpaque(false);
+
+        btnExit.setText("Exit");
+        btnExit.setIconTextGap(2);
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
+
+        txtTimeRemaining.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTimeRemainingActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelDeckExitLayout = new javax.swing.GroupLayout(panelDeckExit);
+        panelDeckExit.setLayout(panelDeckExitLayout);
+        panelDeckExitLayout.setHorizontalGroup(
+                panelDeckExitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelDeckExitLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtTimeRemaining, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(40, Short.MAX_VALUE))
+        );
+        panelDeckExitLayout.setVerticalGroup(
+                panelDeckExitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDeckExitLayout.createSequentialGroup()
+                                .addGap(0, 11, Short.MAX_VALUE)
+                                .addGroup(panelDeckExitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtTimeRemaining, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
+        panelDeck.add(panelDeckExit);
+
+        javax.swing.GroupLayout panelLeftLayout = new javax.swing.GroupLayout(panelLeft);
+        panelLeft.setLayout(panelLeftLayout);
+        panelLeftLayout.setHorizontalGroup(
+                panelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelLeftLayout.createSequentialGroup()
+                                .addGap(0, 0, 0)
+                                .addGroup(panelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(panelDeck, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(bigCard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        panelLeftLayout.setVerticalGroup(
+                panelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelLeftLayout.createSequentialGroup()
+                                .addComponent(panelDeck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addComponent(btnSave)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnLoad)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnNew)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnExit))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addComponent(btnImport)
-                                        .addContainerGap()
-                                        .addComponent(btnGenDeck)
-                                        .addContainerGap()
-                                        .addComponent(btnAddLand)
-                                        .addContainerGap()
-                                        .addComponent(btnSubmit)
-                                        .addContainerGap()
-                                        .addComponent(btnSubmitTimer))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addComponent(txtTimeRemaining))
-                        )
-                        .addContainerGap()));
-        jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtDeckName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblDeckName))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(btnSave)
-                                .addComponent(btnLoad)
-                                .addComponent(btnNew)
-                                .addComponent(btnExit))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(btnImport)
-                                .addComponent(btnGenDeck)
-                                .addComponent(btnAddLand)
-                                .addComponent(btnSubmit)
-                                .addComponent(btnSubmitTimer))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtTimeRemaining))
-                        //.addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, isShowCardInfo ? 30 : 159, Short.MAX_VALUE)
-                        .addComponent(cardInfoPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
-                        .addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)));
+                                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE)));
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(panelLeft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(panelRight, javax.swing.GroupLayout.DEFAULT_SIZE, 890, Short.MAX_VALUE))
+        );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE));
-    }
-
-    private void processAndShowImportErrors(StringBuilder errorMessages){
-        // show up errors list
-        if (errorMessages.length() > 0){
-            String mes = "Founded problems with deck: \n\n" + errorMessages.toString();
-            JOptionPane.showMessageDialog(MageFrame.getDesktop(), mes.substring(0, Math.min(1000, mes.length())), "Errors while loading deck", JOptionPane.WARNING_MESSAGE);
-        }
-    }
-
-    /**
-     * @param evt ActionEvent
-     */
-    private void btnImportFromClipboardActionPerformed(ActionEvent evt) {
-        final DeckImportFromClipboardDialog dialog = new DeckImportFromClipboardDialog();
-        dialog.pack();
-        dialog.setVisible(true);
-
-        dialog.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                Deck newDeck = null;
-                StringBuilder errorMessages = new StringBuilder();
-
-                MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
-                try {
-                    newDeck = Deck.load(DeckImporterUtil.importDeck(dialog.getTmpPath(), errorMessages), true, true);
-                    processAndShowImportErrors(errorMessages);
-
-                    if (newDeck != null) {
-                        deck = newDeck;
-                        refreshDeck();
-                    }
-
-                } catch (GameException e1) {
-                    JOptionPane.showMessageDialog(MageFrame.getDesktop(), e1.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE);
-                }finally {
-                    MageFrame.getDesktop().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-                }
-            }
-        });
-    }
-
-    /**
-     * @param evt ActionEvent
-     */
-    private void btnImportFromClipboardActionWAppendPerformed(ActionEvent evt) {
-        final DeckImportFromClipboardDialog dialog = new DeckImportFromClipboardDialog();
-        dialog.pack();
-        dialog.setVisible(true);
-
-        dialog.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                Deck deckToAppend = null;
-                StringBuilder errorMessages = new StringBuilder();
-
-                MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
-                try {
-                    deckToAppend = Deck.load(DeckImporterUtil.importDeck(dialog.getTmpPath(), errorMessages), true, true);
-                    processAndShowImportErrors(errorMessages);
-
-                    if (deckToAppend != null) {
-                        deck = Deck.append(deckToAppend, deck);
-                        refreshDeck();
-                    }
-                } catch (GameException e1) {
-                    JOptionPane.showMessageDialog(MageFrame.getDesktop(), e1.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE);
-                }finally {
-                    MageFrame.getDesktop().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-                }
-            }
-        });
-    }
-
-    private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed
-        //fcSelectDeck.setCurrentDirectory(new File());
-        String lastFolder = MageFrame.getPreferences().get("lastDeckFolder", "");
-        if (!lastFolder.isEmpty()) {
-            fcSelectDeck.setCurrentDirectory(new File(lastFolder));
-        }
-        int ret = fcSelectDeck.showOpenDialog(this);
-        if (ret == JFileChooser.APPROVE_OPTION) {
-            File file = fcSelectDeck.getSelectedFile();
-            {
-                /**
-                 * Work around a JFileChooser bug on Windows 7-10 with JRT 7+ In
-                 * the case where the user selects the exact same file as was
-                 * previously selected without touching anything else in the
-                 * dialog, getSelectedFile() will erroneously return null due to
-                 * some combination of our settings.
-                 *
-                 * We manually sub in the last selected file in this case.
-                 */
-                if (file == null) {
-                    if (!lastFolder.isEmpty()) {
-                        file = new File(lastFolder);
-                    }
-                }
-            }
-
-            MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
-            try {
-                Deck newDeck = null;
-                StringBuilder errorMessages = new StringBuilder();
-
-                newDeck = Deck.load(DeckImporterUtil.importDeck(file.getPath(), errorMessages), true, true);
-                processAndShowImportErrors(errorMessages);
-
-                if (newDeck != null) {
-                    deck = newDeck;
-                    refreshDeck(true);
-                }
-
-                // save last deck history
-                try {
-                    MageFrame.getPreferences().put("lastDeckFolder", file.getCanonicalPath());
-                } catch (IOException ex) {
-                    logger.error("Error on save last load deck folder: " + ex.getMessage());
-                }
-
-            } catch (GameException ex) {
-                JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE);
-            } finally {
-                MageFrame.getDesktop().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-            }
-        }
-        fcSelectDeck.setSelectedFile(null);
-    }//GEN-LAST:event_btnLoadActionPerformed
+                        .addComponent(panelLeft, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panelRight, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 808, Short.MAX_VALUE)
+        );
+    }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        String lastFolder = MageFrame.getPreferences().get("lastDeckFolder", "");
+        String lastFolder = MageFrame.getPreferences().get(LAST_DECK_FOLDER, "");
         if (!lastFolder.isEmpty()) {
             fcSelectDeck.setCurrentDirectory(new File(lastFolder));
         }
@@ -941,19 +1211,74 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 DeckCardLists cardLists = deck.getDeckCardLists();
                 cardLists.setCardLayout(deckArea.getCardLayout());
                 cardLists.setSideboardLayout(deckArea.getSideboardLayout());
-                Sets.saveDeck(fileName, cardLists);
-            } catch (FileNotFoundException ex) {
+                XMAGE.getExporter().writeDeck(fileName, cardLists);
+            } catch (IOException ex) {
                 JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage() + "\nTry ensuring that the selected directory is writable.", "Error saving deck", JOptionPane.ERROR_MESSAGE);
             } finally {
                 MageFrame.getDesktop().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             }
             try {
-                MageFrame.getPreferences().put("lastDeckFolder", file.getCanonicalPath());
+                MageFrame.getPreferences().put(LAST_DECK_FOLDER, file.getCanonicalPath());
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
         }
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed
+        //fcSelectDeck.setCurrentDirectory(new File());
+        String lastFolder = MageFrame.getPreferences().get(LAST_DECK_FOLDER, "");
+        if (!lastFolder.isEmpty()) {
+            fcSelectDeck.setCurrentDirectory(new File(lastFolder));
+        }
+        int ret = fcSelectDeck.showOpenDialog(this);
+        if (ret == JFileChooser.APPROVE_OPTION) {
+            File file = fcSelectDeck.getSelectedFile();
+            {
+                /**
+                 * Work around a JFileChooser bug on Windows 7-10 with JRT 7+ In
+                 * the case where the user selects the exact same file as was
+                 * previously selected without touching anything else in the
+                 * dialog, getSelectedFile() will erroneously return null due to
+                 * some combination of our settings.
+                 *
+                 * We manually sub in the last selected file in this case.
+                 */
+                if (file == null) {
+                    if (!lastFolder.isEmpty()) {
+                        file = new File(lastFolder);
+                    }
+                }
+            }
+
+            MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
+            try {
+                Deck newDeck = null;
+                StringBuilder errorMessages = new StringBuilder();
+
+                newDeck = Deck.load(DeckImporter.importDeckFromFile(file.getPath(), errorMessages), true, true);
+                processAndShowImportErrors(errorMessages);
+
+                if (newDeck != null) {
+                    deck = newDeck;
+                    refreshDeck(true);
+                }
+
+                // save last deck history
+                try {
+                    MageFrame.getPreferences().put(LAST_DECK_FOLDER, file.getCanonicalPath());
+                } catch (IOException ex) {
+                    logger.error("Error on save last load deck folder: " + ex.getMessage());
+                }
+
+            } catch (GameException ex) {
+                JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE);
+            } finally {
+                MageFrame.getDesktop().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+            }
+        }
+        fcSelectDeck.setSelectedFile(null);
+    }//GEN-LAST:event_btnLoadActionPerformed
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
         if (mode == DeckEditorMode.SIDEBOARDING || mode == DeckEditorMode.LIMITED_BUILDING) {
@@ -972,48 +1297,26 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         removeDeckEditor();
     }//GEN-LAST:event_btnExitActionPerformed
 
-    private void btnImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportActionPerformed
-        String lastFolder = MageFrame.getPreferences().get("lastImportFolder", "");
-        if (!lastFolder.isEmpty()) {
-            fcImportDeck.setCurrentDirectory(new File(lastFolder));
-        }
-        int ret = fcImportDeck.showOpenDialog(this);
-        if (ret == JFileChooser.APPROVE_OPTION) {
-            File file = fcImportDeck.getSelectedFile();
+    private void btnAddLandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddLandActionPerformed
+        AddLandDialog addLand = new AddLandDialog();
+        addLand.showDialog(deck, mode);
+        refreshDeck();
+    }//GEN-LAST:event_btnAddLandActionPerformed
+
+    private void btnGenDeckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenDeckActionPerformed
+        try {
             MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
-            try {
-                DeckImporter importer = DeckImporterUtil.getDeckImporter(file.getPath());
-
-                if (importer != null) {
-                    StringBuilder errorMessages = new StringBuilder();
-                    Deck newDeck = null;
-
-                    newDeck = Deck.load(importer.importDeck(file.getPath(), errorMessages));
-                    processAndShowImportErrors(errorMessages);
-
-                    if (newDeck != null) {
-                        deck = newDeck;
-                        refreshDeck();
-                    }
-
-                    // save last deck import folder
-                    try {
-                        MageFrame.getPreferences().put("lastImportFolder", file.getCanonicalPath());
-                    } catch (IOException ex) {
-                        logger.error("Error on save last used import folder: " + ex.getMessage());
-                    }
-
-                } else {
-                    JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Unknown deck format", "Error importing deck", JOptionPane.ERROR_MESSAGE);
-                }
-            } catch (Exception ex) {
-                logger.fatal(ex);
-            } finally {
-                MageFrame.getDesktop().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-            }
+            String path = DeckGenerator.generateDeck();
+            deck = Deck.load(DeckImporter.importDeckFromFile(path), true, true);
+        } catch (GameException ex) {
+            JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage(), "Error loading generated deck", JOptionPane.ERROR_MESSAGE);
+        } catch (DeckGeneratorException ex) {
+            JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage(), "Generator error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            MageFrame.getDesktop().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
-        fcImportDeck.setSelectedFile(null);
-    }//GEN-LAST:event_btnImportActionPerformed
+        refreshDeck();
+    }//GEN-LAST:event_btnGenDeckActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         if (updateDeckTask != null) {
@@ -1043,71 +1346,51 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         }, 60, TimeUnit.SECONDS);
     }//GEN-LAST:event_btnSubmitTimerActionPerformed
 
-    private void btnAddLandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddLandActionPerformed
-        AddLandDialog addLand = new AddLandDialog();
-        addLand.showDialog(deck, mode);
-        refreshDeck();
-    }//GEN-LAST:event_btnAddLandActionPerformed
+    private void txtTimeRemainingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimeRemainingActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTimeRemainingActionPerformed
 
-    private void btnGenDeckActionPerformed(ActionEvent evt) {
-        try {
-            MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
-            String path = DeckGenerator.generateDeck();
-            deck = Deck.load(DeckImporterUtil.importDeck(path), true, true);
-        } catch (GameException ex) {
-            JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage(), "Error loading generated deck", JOptionPane.ERROR_MESSAGE);
-        } catch (DeckGeneratorException ex) {
-            JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage(), "Generator error", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            MageFrame.getDesktop().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-        }
-        refreshDeck();
-    }
+    private void btnImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportActionPerformed
+        importChoose(evt);
+    }//GEN-LAST:event_btnImportActionPerformed
+
+    private void btnExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportActionPerformed
+        exportChoose(evt);
+    }//GEN-LAST:event_btnExportActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private mage.client.cards.BigCard bigCard;
+    private javax.swing.JButton btnAddLand;
     private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnExport;
+    private javax.swing.JButton btnGenDeck;
     private javax.swing.JButton btnImport;
     private javax.swing.JButton btnLoad;
     private javax.swing.JButton btnNew;
     private javax.swing.JButton btnSave;
-    private mage.client.deckeditor.CardSelector cardSelector;
-    private mage.client.deckeditor.DeckArea deckArea;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JLabel lblDeckName;
-    private javax.swing.JTextField txtDeckName;
     private javax.swing.JButton btnSubmit;
     private javax.swing.JButton btnSubmitTimer;
-    private javax.swing.JButton btnAddLand;
-    private javax.swing.JButton btnGenDeck;
     private JComponent cardInfoPane;
+    /*
+    private org.mage.plugins.card.info.CardInfoPaneImpl cardInfoPane;
+    */
+    private mage.client.deckeditor.CardSelector cardSelector;
+    private mage.client.deckeditor.DeckArea deckArea;
+    private javax.swing.JLabel lblDeckName;
+    private javax.swing.JPanel panelDeck;
+    private javax.swing.JPanel panelDeckCreate;
+    private javax.swing.JPanel panelDeckDraft;
+    private javax.swing.JPanel panelDeckExit;
+    private javax.swing.JPanel panelDeckLands;
+    private javax.swing.JPanel panelDeckLoad;
+    private javax.swing.JPanel panelDeckName;
+    private javax.swing.JPanel panelDeckSave;
+    private javax.swing.JPanel panelLeft;
+    private javax.swing.JSplitPane panelRight;
+    private javax.swing.JTextField txtDeckName;
     private javax.swing.JTextField txtTimeRemaining;
     // End of variables declaration//GEN-END:variables
-}
-
-class DeckFilter extends FileFilter {
-
-    @Override
-    public boolean accept(File f) {
-        if (f.isDirectory()) {
-            return true;
-        }
-
-        String ext = null;
-        String s = f.getName();
-        int i = s.lastIndexOf('.');
-
-        if (i > 0 && i < s.length() - 1) {
-            ext = s.substring(i + 1).toLowerCase(Locale.ENGLISH);
-        }
-        return (ext == null) ? false : ext.equals("dck");
-    }
-
-    @Override
-    public String getDescription() {
-        return "Deck Files";
-    }
 }
 
 class ImportFilter extends FileFilter {
@@ -1126,16 +1409,20 @@ class ImportFilter extends FileFilter {
             ext = s.substring(i + 1).toLowerCase(Locale.ENGLISH);
         }
         if (ext != null) {
-            if (ext.toLowerCase(Locale.ENGLISH).equals("dec") || ext.toLowerCase(Locale.ENGLISH).equals("mwdeck") || ext.toLowerCase(Locale.ENGLISH).equals("txt") || ext.toLowerCase(Locale.ENGLISH).equals("dek")) {
-                return true;
-            }
+            return ext.equalsIgnoreCase("dec")
+                    || ext.equalsIgnoreCase("mwdeck")
+                    || ext.equalsIgnoreCase("txt")
+                    || ext.equalsIgnoreCase("dek")
+                    || ext.equalsIgnoreCase("cod")
+                    || ext.equalsIgnoreCase("o8d")
+                    || ext.equalsIgnoreCase("draft");
         }
         return false;
     }
 
     @Override
     public String getDescription() {
-        return "*.dec | *.mwDeck | *.txt | *.dek";
+        return "All formats (*.dec; *.mwDeck; *.txt; *.dek; *.cod; *.o8d; *.draft)";
     }
 }
 

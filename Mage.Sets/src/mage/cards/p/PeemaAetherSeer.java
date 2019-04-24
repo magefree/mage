@@ -34,7 +34,7 @@ public final class PeemaAetherSeer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Peema Aether-Seer enters the battlefield, you get an amount of {E} equal to the greatest power among creatures you control.
-        Effect effect = new GetEnergyCountersControllerEffect(new GreatestPowerAmongControlledCreaturesValue());
+        Effect effect = new GetEnergyCountersControllerEffect(GreatestPowerAmongControlledCreaturesValue.instance);
         effect.setText("you get an amount of {E} equal to the greatest power among creatures you control");
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect));
 

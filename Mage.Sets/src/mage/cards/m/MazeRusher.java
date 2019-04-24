@@ -26,7 +26,7 @@ public final class MazeRusher extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Multicolored creatures you control");
     static {
-        filter.add(new MulticoloredPredicate());
+        filter.add(MulticoloredPredicate.instance);
     }
 
     public MazeRusher (UUID ownerId, CardSetInfo setInfo) {

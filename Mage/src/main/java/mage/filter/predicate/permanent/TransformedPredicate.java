@@ -6,10 +6,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author Saga
  */
-public class TransformedPredicate implements Predicate<Permanent> {
+public enum TransformedPredicate implements Predicate<Permanent> {
+    instance;
 
     @Override
     public boolean apply(Permanent input, Game game) {
@@ -18,6 +18,6 @@ public class TransformedPredicate implements Predicate<Permanent> {
 
     @Override
     public String toString() {
-        return "Transformed" ;
+        return "Transformed";
     }
 }

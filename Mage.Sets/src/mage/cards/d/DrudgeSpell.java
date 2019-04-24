@@ -32,7 +32,7 @@ public final class DrudgeSpell extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.SKELETON));
-        filter.add(new TokenPredicate());
+        filter.add(TokenPredicate.instance);
     }
 
     public DrudgeSpell(UUID ownerId, CardSetInfo setInfo) {

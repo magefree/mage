@@ -121,6 +121,7 @@ public final class Judgment extends ExpansionSet {
         cards.add(new SetCardInfo("Prismatic Strands", 18, Rarity.COMMON, mage.cards.p.PrismaticStrands.class));
         cards.add(new SetCardInfo("Pulsemage Advocate", 19, Rarity.RARE, mage.cards.p.PulsemageAdvocate.class));
         cards.add(new SetCardInfo("Quiet Speculation", 49, Rarity.UNCOMMON, mage.cards.q.QuietSpeculation.class));
+        cards.add(new SetCardInfo("Rats' Feast", 71, Rarity.COMMON, mage.cards.r.RatsFeast.class));
         cards.add(new SetCardInfo("Ray of Revelation", 20, Rarity.COMMON, mage.cards.r.RayOfRevelation.class));
         cards.add(new SetCardInfo("Riftstone Portal", 143, Rarity.UNCOMMON, mage.cards.r.RiftstonePortal.class));
         cards.add(new SetCardInfo("Scalpelexis", 50, Rarity.RARE, mage.cards.s.Scalpelexis.class));

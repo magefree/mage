@@ -22,7 +22,7 @@ public final class SoulWarden extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("another creature");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public SoulWarden(UUID ownerId, CardSetInfo setInfo) {

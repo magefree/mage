@@ -102,8 +102,7 @@ class ThoughtLashExileLibraryEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Cards cards = new CardsImpl();
-            cards.addAll(controller.getLibrary().getTopCards(game, controller.getLibrary().size()));
+            Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, controller.getLibrary().size()));
             controller.moveCards(cards, Zone.EXILED, source, game);
             return true;
         }

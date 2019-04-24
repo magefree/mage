@@ -101,7 +101,7 @@ class BoonweaverGiantEffect extends OneShotEffect {
         }
         if (card == null) {
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
-            if (controller.searchLibrary(target, game)) {
+            if (controller.searchLibrary(target, source, game)) {
                 card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     zone = Zone.LIBRARY;

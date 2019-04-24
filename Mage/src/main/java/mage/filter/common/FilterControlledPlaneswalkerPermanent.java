@@ -6,13 +6,16 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
- *
  * @author LevelX2
  */
 public class FilterControlledPlaneswalkerPermanent extends FilterControlledPermanent {
 
     public FilterControlledPlaneswalkerPermanent() {
         this("planeswalker you control");
+    }
+
+    public FilterControlledPlaneswalkerPermanent(SubType subType) {
+        this(subType, "a " + subType + " planeswalker");
     }
 
     public FilterControlledPlaneswalkerPermanent(SubType subType, String name) {

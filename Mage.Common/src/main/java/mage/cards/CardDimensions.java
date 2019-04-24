@@ -9,19 +9,19 @@ import static mage.constants.Constants.*;
  */
 public class CardDimensions {
 
-    public int frameHeight;
-    public int frameWidth;
-    public int symbolHeight;
-    public int symbolWidth;
-    public int contentXOffset;
-    public int nameYOffset;
-    public int typeYOffset;
-    public int textYOffset;
-    public int textWidth;
-    public int textHeight;
-    public int powBoxTextTop;
-    public int powBoxTextLeft;
-    public int nameFontSize;
+    private final int frameHeight;
+    private final int frameWidth;
+    private final int symbolHeight;
+    private final int symbolWidth;
+    private final int contentXOffset;
+    private final int nameYOffset;
+    private final int typeYOffset;
+    private final int textYOffset;
+    private final int textWidth;
+    private final int textHeight;
+    private final int powBoxTextTop;
+    private final int powBoxTextLeft;
+    private final int nameFontSize;
 
     public CardDimensions(double scaleFactor) {
         frameHeight = (int) (FRAME_MAX_HEIGHT * scaleFactor);
@@ -39,4 +39,55 @@ public class CardDimensions {
         nameFontSize = Math.max(9, (int) (NAME_FONT_MAX_SIZE * scaleFactor));
     }
 
+    public int getFrameHeight() {
+        return frameHeight;
+    }
+
+    public int getFrameWidth() {
+        return frameWidth;
+    }
+
+    public int getSymbolHeight() {
+        return symbolHeight;
+    }
+
+    public int getSymbolWidth() {
+        return symbolWidth;
+    }
+
+    public int getContentXOffset() {
+        return contentXOffset;
+    }
+
+    public int getNameYOffset() {
+        return nameYOffset;
+    }
+
+    public int getTypeYOffset() {
+        return typeYOffset;
+    }
+
+    public int getTextYOffset() {
+        return textYOffset;
+    }
+
+    public int getTextWidth() {
+        return textWidth;
+    }
+
+    public int getTextHeight() {
+        return textHeight;
+    }
+
+    public int getPowBoxTextTop() {
+        return powBoxTextTop;
+    }
+
+    public int getPowBoxTextLeft() {
+        return powBoxTextLeft;
+    }
+
+    public int getNameFontSize() {
+        return nameFontSize;
+    }
 }

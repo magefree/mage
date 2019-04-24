@@ -51,7 +51,7 @@ public final class VishKalBloodArbiter extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
         // Sacrifice a creature: Put X +1/+1 counters on Vish Kal, Blood Arbiter, where X is the sacrificed creature's power.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), new SacrificeCostCreaturesPower(), true),
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), SacrificeCostCreaturesPower.instance, true),
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
         // Remove all +1/+1 counters from Vish Kal: Target creature gets -1/-1 until end of turn for each +1/+1 counter removed this way.
         DynamicValue removedCounters = new SignInversionDynamicValue(new VishKalBloodArbiterDynamicValue());

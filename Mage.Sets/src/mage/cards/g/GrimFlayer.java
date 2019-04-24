@@ -1,7 +1,7 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -11,6 +11,7 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.hint.common.DeliriumHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -21,13 +22,12 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 
 /**
- *
  * @author fireshoes
  */
 public final class GrimFlayer extends CardImpl {
 
     public GrimFlayer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{G}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(2);
@@ -47,7 +47,8 @@ public final class GrimFlayer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield),
                 DeliriumCondition.instance,
-                "<i>Delirium</i> &mdash; {this} gets +2/+2 as long as there are four or more card types among cards in your graveyard")));
+                "<i>Delirium</i> &mdash; {this} gets +2/+2 as long as there are four or more card types among cards in your graveyard"))
+                .addHint(DeliriumHint.instance));
     }
 
     public GrimFlayer(final GrimFlayer card) {

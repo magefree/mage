@@ -83,7 +83,7 @@ class XantidSwarmTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return new StringBuilder("Whenever {this} attacks, ").append(super.getRule()).toString();
+        return "Whenever {this} attacks, " + super.getRule();
     }
 }
 

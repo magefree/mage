@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -20,10 +19,11 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author jeffwadsworth
@@ -46,7 +46,7 @@ public final class CrownOfConvergence extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CrownOfConvergenceEffect(), new ManaCostsImpl("{G}{W}")));
     }
 
-    public CrownOfConvergence(final CrownOfConvergence card) {
+    private CrownOfConvergence(final CrownOfConvergence card) {
         super(card);
     }
 
@@ -58,8 +58,6 @@ public final class CrownOfConvergence extends CardImpl {
 
 class CrownOfConvergenceColorBoostEffect extends BoostAllEffect {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control");
-
     private static final String effectText = "creatures you control that share a color with that card get +1/+1";
 
     CrownOfConvergenceColorBoostEffect() {
@@ -67,7 +65,7 @@ class CrownOfConvergenceColorBoostEffect extends BoostAllEffect {
         staticText = effectText;
     }
 
-    CrownOfConvergenceColorBoostEffect(CrownOfConvergenceColorBoostEffect effect) {
+    private CrownOfConvergenceColorBoostEffect(CrownOfConvergenceColorBoostEffect effect) {
         super(effect);
     }
 
@@ -77,7 +75,7 @@ class CrownOfConvergenceColorBoostEffect extends BoostAllEffect {
         if (you != null) {
             Card topCard = you.getLibrary().getFromTop(game);
             if (topCard != null) {
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURE, source.getControllerId(), source.getSourceId(), game)) {
                     if (permanent.getColor(game).shares(topCard.getColor(game)) && !permanent.getColor(game).isColorless()) {
                         permanent.addPower(power.calculate(game, source, this));
                         permanent.addToughness(toughness.calculate(game, source, this));
@@ -97,12 +95,12 @@ class CrownOfConvergenceColorBoostEffect extends BoostAllEffect {
 
 class CrownOfConvergenceEffect extends OneShotEffect {
 
-    public CrownOfConvergenceEffect() {
+    CrownOfConvergenceEffect() {
         super(Outcome.Neutral);
         staticText = "Put the top card of your library on the bottom of your library";
     }
 
-    public CrownOfConvergenceEffect(final CrownOfConvergenceEffect effect) {
+    private CrownOfConvergenceEffect(final CrownOfConvergenceEffect effect) {
         super(effect);
     }
 

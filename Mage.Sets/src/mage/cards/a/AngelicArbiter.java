@@ -1,7 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -18,8 +16,9 @@ import mage.game.permanent.Permanent;
 import mage.watchers.common.CastSpellLastTurnWatcher;
 import mage.watchers.common.PlayerAttackedWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class AngelicArbiter extends CardImpl {
@@ -66,16 +65,14 @@ class AngelicArbiterCantAttackTargetEffect extends RestrictionEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (game.isActivePlayer(permanent.getControllerId()) && game.getOpponents(source.getControllerId()).contains(permanent.getControllerId())) {
-            CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get(CastSpellLastTurnWatcher.class.getSimpleName());
-            if (watcher != null && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(permanent.getControllerId()) > 0) {
-                return true;
-            }
+            CastSpellLastTurnWatcher watcher = game.getState().getWatcher(CastSpellLastTurnWatcher.class);
+            return watcher != null && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(permanent.getControllerId()) > 0;
         }
         return false;
     }
 
     @Override
-    public boolean canAttack(Game game) {
+    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
         return false;
     }
 
@@ -114,10 +111,8 @@ class AngelicArbiterEffect2 extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.isActivePlayer(event.getPlayerId()) && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-            PlayerAttackedWatcher watcher = (PlayerAttackedWatcher) game.getState().getWatchers().get(PlayerAttackedWatcher.class.getSimpleName());
-            if (watcher != null && watcher.getNumberOfAttackersCurrentTurn(event.getPlayerId()) > 0) {
-                return true;
-            }
+            PlayerAttackedWatcher watcher = game.getState().getWatcher(PlayerAttackedWatcher.class);
+            return watcher != null && watcher.getNumberOfAttackersCurrentTurn(event.getPlayerId()) > 0;
         }
         return false;
     }

@@ -36,7 +36,7 @@ public final class DrivenDespair extends SplitCard {
         // Despair {1}{B}
         // Sorcery
         // Aftermath
-        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility().setRuleAtTheTop(true));
+        getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
         // Until end of turn, creatures you control gain menace and "Whenever this creature deals combat damage to a player, that player discards a card."
         getRightHalfCard().getSpellAbility().addEffect(new GainAbilityControlledEffect(new MenaceAbility(), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES));
         ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(1), false, true);

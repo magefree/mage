@@ -1,8 +1,5 @@
-
 package mage.abilities.effects.common.counter;
 
-import java.util.Locale;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -19,8 +16,10 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.util.CardUtil;
 
+import java.util.Locale;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class AddCountersTargetEffect extends OneShotEffect {
@@ -121,8 +120,8 @@ public class AddCountersTargetEffect extends OneShotEffect {
         }
         sb.append(" on ");
 
-        if (!mode.getTargets().isEmpty()) {
-            Target target = mode.getTargets().get(0);
+        Target target = mode.getTargets().getEffectTarget(this.targetPointer);
+        if (target != null) {
             if (target.getNumberOfTargets() == 0) {
                 sb.append("up to ");
             }

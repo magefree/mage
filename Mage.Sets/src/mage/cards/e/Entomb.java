@@ -60,7 +60,7 @@ class SearchLibraryPutInGraveyard extends SearchEffect {
         if (controller == null) {
             return false;
         }
-        if (controller.searchLibrary(target, game)) {
+        if (controller.searchLibrary(target, source, game)) {
             controller.moveCards(game.getCard(target.getFirstTarget()), Zone.GRAVEYARD, source, game);
         }
         controller.shuffleLibrary(source, game);

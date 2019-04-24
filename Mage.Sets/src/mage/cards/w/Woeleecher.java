@@ -75,7 +75,7 @@ class WoeleecherEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent target = game.getPermanent(source.getFirstTarget());
         Player you = game.getPlayer(source.getControllerId());
-        if (target != null) {
+        if (target != null && you != null) {
             numberCountersOriginal = target.getCounters(game).getCount(CounterType.M1M1);
             target.removeCounters(CounterType.M1M1.createInstance(), game);
             numberCountersAfter = target.getCounters(game).getCount(CounterType.M1M1);

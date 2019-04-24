@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -27,6 +26,7 @@ public final class Stronghold extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Acidic Sliver", 126, Rarity.UNCOMMON, mage.cards.a.AcidicSliver.class));
         cards.add(new SetCardInfo("Amok", 76, Rarity.RARE, mage.cards.a.Amok.class));
         cards.add(new SetCardInfo("Awakening", 101, Rarity.RARE, mage.cards.a.Awakening.class));
@@ -42,6 +42,7 @@ public final class Stronghold extends ExpansionSet {
         cards.add(new SetCardInfo("Cloud Spirit", 26, Rarity.COMMON, mage.cards.c.CloudSpirit.class));
         cards.add(new SetCardInfo("Constant Mists", 104, Rarity.UNCOMMON, mage.cards.c.ConstantMists.class));
         cards.add(new SetCardInfo("Contemplation", 4, Rarity.UNCOMMON, mage.cards.c.Contemplation.class));
+        cards.add(new SetCardInfo("Contempt", 27, Rarity.COMMON, mage.cards.c.Contempt.class));
         cards.add(new SetCardInfo("Conviction", 5, Rarity.COMMON, mage.cards.c.Conviction.class));
         cards.add(new SetCardInfo("Convulsing Licid", 77, Rarity.UNCOMMON, mage.cards.c.ConvulsingLicid.class));
         cards.add(new SetCardInfo("Corrupting Licid", 54, Rarity.UNCOMMON, mage.cards.c.CorruptingLicid.class));
@@ -76,6 +77,7 @@ public final class Stronghold extends ExpansionSet {
         cards.add(new SetCardInfo("Hermit Druid", 108, Rarity.RARE, mage.cards.h.HermitDruid.class));
         cards.add(new SetCardInfo("Hesitation", 33, Rarity.UNCOMMON, mage.cards.h.Hesitation.class));
         cards.add(new SetCardInfo("Hibernation Sliver", 128, Rarity.UNCOMMON, mage.cards.h.HibernationSliver.class));
+        cards.add(new SetCardInfo("Hidden Retreat", 6, Rarity.RARE, mage.cards.h.HiddenRetreat.class));
         cards.add(new SetCardInfo("Honor Guard", 7, Rarity.COMMON, mage.cards.h.HonorGuard.class));
         cards.add(new SetCardInfo("Horn of Greed", 135, Rarity.RARE, mage.cards.h.HornOfGreed.class));
         cards.add(new SetCardInfo("Hornet Cannon", 136, Rarity.UNCOMMON, mage.cards.h.HornetCannon.class));
@@ -93,6 +95,7 @@ public final class Stronghold extends ExpansionSet {
         cards.add(new SetCardInfo("Mind Peel", 63, Rarity.UNCOMMON, mage.cards.m.MindPeel.class));
         cards.add(new SetCardInfo("Mindwarper", 64, Rarity.RARE, mage.cards.m.Mindwarper.class));
         cards.add(new SetCardInfo("Mob Justice", 90, Rarity.COMMON, mage.cards.m.MobJustice.class));
+        cards.add(new SetCardInfo("Mogg Bombers", 91, Rarity.COMMON, mage.cards.m.MoggBombers.class));
         cards.add(new SetCardInfo("Mogg Flunkies", 92, Rarity.COMMON, mage.cards.m.MoggFlunkies.class));
         cards.add(new SetCardInfo("Mogg Infestation", 93, Rarity.RARE, mage.cards.m.MoggInfestation.class));
         cards.add(new SetCardInfo("Mogg Maniac", 94, Rarity.UNCOMMON, mage.cards.m.MoggManiac.class));
@@ -107,11 +110,14 @@ public final class Stronghold extends ExpansionSet {
         cards.add(new SetCardInfo("Provoke", 113, Rarity.COMMON, mage.cards.p.Provoke.class));
         cards.add(new SetCardInfo("Pursuit of Knowledge", 10, Rarity.RARE, mage.cards.p.PursuitOfKnowledge.class));
         cards.add(new SetCardInfo("Rabid Rats", 67, Rarity.COMMON, mage.cards.r.RabidRats.class));
+        cards.add(new SetCardInfo("Ransack", 39, Rarity.UNCOMMON, mage.cards.r.Ransack.class));
+        cards.add(new SetCardInfo("Rebound", 40, Rarity.UNCOMMON, mage.cards.r.Rebound.class));
         cards.add(new SetCardInfo("Reins of Power", 41, Rarity.RARE, mage.cards.r.ReinsOfPower.class));
         cards.add(new SetCardInfo("Revenant", 68, Rarity.RARE, mage.cards.r.Revenant.class));
         cards.add(new SetCardInfo("Rolling Stones", 11, Rarity.RARE, mage.cards.r.RollingStones.class));
         cards.add(new SetCardInfo("Ruination", 95, Rarity.RARE, mage.cards.r.Ruination.class));
         cards.add(new SetCardInfo("Sacred Ground", 12, Rarity.RARE, mage.cards.s.SacredGround.class));
+        cards.add(new SetCardInfo("Samite Blessing", 13, Rarity.COMMON, mage.cards.s.SamiteBlessing.class));
         cards.add(new SetCardInfo("Scapegoat", 14, Rarity.UNCOMMON, mage.cards.s.Scapegoat.class));
         cards.add(new SetCardInfo("Seething Anger", 96, Rarity.COMMON, mage.cards.s.SeethingAnger.class));
         cards.add(new SetCardInfo("Serpent Warrior", 69, Rarity.COMMON, mage.cards.s.SerpentWarrior.class));
@@ -121,6 +127,7 @@ public final class Stronghold extends ExpansionSet {
         cards.add(new SetCardInfo("Shock", 98, Rarity.COMMON, mage.cards.s.Shock.class));
         cards.add(new SetCardInfo("Sift", 42, Rarity.COMMON, mage.cards.s.Sift.class));
         cards.add(new SetCardInfo("Silver Wyvern", 43, Rarity.RARE, mage.cards.s.SilverWyvern.class));
+        cards.add(new SetCardInfo("Skeleton Scavengers", 70, Rarity.RARE, mage.cards.s.SkeletonScavengers.class));
         cards.add(new SetCardInfo("Skyshroud Archer", 114, Rarity.COMMON, mage.cards.s.SkyshroudArcher.class));
         cards.add(new SetCardInfo("Skyshroud Falcon", 16, Rarity.COMMON, mage.cards.s.SkyshroudFalcon.class));
         cards.add(new SetCardInfo("Skyshroud Troopers", 115, Rarity.COMMON, mage.cards.s.SkyshroudTroopers.class));
@@ -154,6 +161,7 @@ public final class Stronghold extends ExpansionSet {
         cards.add(new SetCardInfo("Volrath's Laboratory", 142, Rarity.RARE, mage.cards.v.VolrathsLaboratory.class));
         cards.add(new SetCardInfo("Volrath's Shapeshifter", 48, Rarity.RARE, mage.cards.v.VolrathsShapeshifter.class));
         cards.add(new SetCardInfo("Volrath's Stronghold", 143, Rarity.RARE, mage.cards.v.VolrathsStronghold.class));
+        cards.add(new SetCardInfo("Walking Dream", 49, Rarity.UNCOMMON, mage.cards.w.WalkingDream.class));
         cards.add(new SetCardInfo("Wall of Blossoms", 125, Rarity.UNCOMMON, mage.cards.w.WallOfBlossoms.class));
         cards.add(new SetCardInfo("Wall of Essence", 22, Rarity.UNCOMMON, mage.cards.w.WallOfEssence.class));
         cards.add(new SetCardInfo("Wall of Razors", 100, Rarity.UNCOMMON, mage.cards.w.WallOfRazors.class));

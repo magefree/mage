@@ -1,11 +1,6 @@
 package mage.abilities;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
-import mage.MageObjectReference;
 import mage.Mana;
 import mage.abilities.costs.*;
 import mage.abilities.costs.common.PayLifeCost;
@@ -15,8 +10,9 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.mana.DynamicManaEffect;
 import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.mana.DynamicManaEffect;
+import mage.abilities.hint.Hint;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.Card;
 import mage.cards.SplitCard;
@@ -37,6 +33,11 @@ import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -67,12 +68,13 @@ public abstract class AbilityImpl implements Ability {
     protected boolean costModificationActive = true;
     protected boolean activated = false;
     protected boolean worksFaceDown = false;
-    protected MageObject sourceObject;
     protected int sourceObjectZoneChangeCounter;
     protected List<Watcher> watchers = new ArrayList<>();
     protected List<Ability> subAbilities = null;
     protected boolean canFizzle = true;
     protected TargetAdjuster targetAdjuster = null;
+    protected CostAdjuster costAdjuster = null;
+    protected List<Hint> hints = new ArrayList<>();
 
     public AbilityImpl(AbilityType abilityType, Zone zone) {
         this.id = UUID.randomUUID();
@@ -116,10 +118,13 @@ public abstract class AbilityImpl implements Ability {
         this.costModificationActive = ability.costModificationActive;
         this.worksFaceDown = ability.worksFaceDown;
         this.abilityWord = ability.abilityWord;
-        this.sourceObject = ability.sourceObject;
         this.sourceObjectZoneChangeCounter = ability.sourceObjectZoneChangeCounter;
         this.canFizzle = ability.canFizzle;
         this.targetAdjuster = ability.targetAdjuster;
+        this.costAdjuster = ability.costAdjuster;
+        for (Hint hint : ability.getHints()) {
+            this.hints.add(hint.copy());
+        }
     }
 
     @Override
@@ -131,8 +136,6 @@ public abstract class AbilityImpl implements Ability {
     public void newId() {
         if (!(this instanceof MageSingleton)) {
             this.id = UUID.randomUUID();
-//            this.sourceObject = null;
-//            this.sourceObjectZoneChangeCounter = -1;
         }
         getEffects().newId();
     }
@@ -226,8 +229,10 @@ public abstract class AbilityImpl implements Ability {
             return false;
         }
 
-        getSourceObject(game);
-
+        MageObject sourceObject = getSourceObject(game);
+        if (getSourceObjectZoneChangeCounter() == 0) {
+            setSourceObjectZoneChangeCounter(game.getState().getZoneChangeCounter(getSourceId()));
+        }
         if (controller.isTestMode()) {
             if (!controller.addTargets(this, game)) {
                 return false;
@@ -256,7 +261,7 @@ public abstract class AbilityImpl implements Ability {
             }
         }
         if (modes.getAdditionalCost() != null) {
-            ((OptionalAdditionalModeSourceCosts) modes.getAdditionalCost()).addOptionalAdditionalModeCosts(this, game);
+            modes.getAdditionalCost().addOptionalAdditionalModeCosts(this, game);
         }
         // 20130201 - 601.2b
         // If the spell has alternative or additional costs that will be paid as it's being cast such
@@ -320,11 +325,10 @@ public abstract class AbilityImpl implements Ability {
             }
             if (!getTargets().isEmpty()) {
                 Outcome outcome = getEffects().isEmpty() ? Outcome.Detriment : getEffects().get(0).getOutcome();
-                if (getTargets().chooseTargets(outcome, this.controllerId, this, noMana, game) == false) {
-                    if ((variableManaCost != null || announceString != null)) {
-                        game.informPlayer(controller, (sourceObject != null ? sourceObject.getIdName() : "") + ": no valid targets");
-                    }
-                    return false; // when activation of ability is canceled during target selection
+                // only activated abilities can be canceled by user (not triggered)
+                if (!getTargets().chooseTargets(outcome, this.controllerId, this, noMana, game, this instanceof ActivatedAbility)) {
+                    // was canceled during targer selection
+                    return false;
                 }
             }
         } // end modes
@@ -952,9 +956,7 @@ public abstract class AbilityImpl implements Ability {
             } else if (!object.getAbilities().contains(this)) {
                 // check if it's an ability that is temporary gained to a card
                 Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(this.getSourceId());
-                if (otherAbilities == null || !otherAbilities.contains(this)) {
-                    return false;
-                }
+                return otherAbilities != null && otherAbilities.contains(this);
             }
         }
         return true;
@@ -1160,58 +1162,44 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public MageObject getSourceObject(Game game) {
-        if (sourceObject == null) {
-            setSourceObject(null, game);
-            if (sourceObject == null) {
-                logger.warn("Source object could not be retrieved: " + this.getRule());
-            }
-        }
-        return sourceObject;
+        return game.getObject(getSourceId());
     }
 
     @Override
     public MageObject getSourceObjectIfItStillExists(Game game) {
-        MageObject currentObject = game.getObject(getSourceId());
-        if (currentObject != null) {
-            if (sourceObject == null) {
-                setSourceObject(currentObject, game);
-            }
-            MageObjectReference mor = new MageObjectReference(currentObject, game);
-            if (mor.getZoneChangeCounter() == getSourceObjectZoneChangeCounter()) {
-                // source object has meanwhile not changed zone
-                return currentObject;
-            }
+        if (getSourceObjectZoneChangeCounter() == 0
+                || getSourceObjectZoneChangeCounter() == game.getState().getZoneChangeCounter(getSourceId())) {
+            return game.getObject(getSourceId());
         }
         return null;
     }
 
     @Override
     public Permanent getSourcePermanentIfItStillExists(Game game) {
-        if (sourceObject == null || !sourceObject.getId().equals(getSourceId())) {
-            setSourceObject(game.getObject(getSourceId()), game);
-        }
-        if (sourceObject instanceof Permanent) {
-            if (game.getState().getZoneChangeCounter(getSourceId()) == getSourceObjectZoneChangeCounter()) {
-                return (Permanent) sourceObject;
-            }
+        MageObject mageObject = getSourceObjectIfItStillExists(game);
+        if (mageObject instanceof Permanent) {
+            return (Permanent) mageObject;
         }
         return null;
     }
 
     @Override
-    public int getSourceObjectZoneChangeCounter() {
-        return sourceObjectZoneChangeCounter;
+    public Permanent getSourcePermanentOrLKI(Game game) {
+        if (getSourceObjectZoneChangeCounter() == 0
+                || getSourceObjectZoneChangeCounter() == game.getState().getZoneChangeCounter(getSourceId())) {
+            return game.getPermanent(getSourceId());
+        }
+        return (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD, getSourceObjectZoneChangeCounter());
     }
 
     @Override
-    public void setSourceObject(MageObject sourceObject, Game game) {
-        if (sourceObject == null) {
-            this.sourceObject = game.getObject(sourceId);
-            this.sourceObjectZoneChangeCounter = game.getState().getZoneChangeCounter(sourceId);
-        } else {
-            this.sourceObject = sourceObject;
-            this.sourceObjectZoneChangeCounter = this.sourceObject.getZoneChangeCounter(game);
-        }
+    public void setSourceObjectZoneChangeCounter(int sourceObjectZoneChangeCounter) {
+        this.sourceObjectZoneChangeCounter = sourceObjectZoneChangeCounter;
+    }
+
+    @Override
+    public int getSourceObjectZoneChangeCounter() {
+        return sourceObjectZoneChangeCounter;
     }
 
     @Override
@@ -1239,5 +1227,33 @@ public abstract class AbilityImpl implements Ability {
         if (targetAdjuster != null) {
             targetAdjuster.adjustTargets(this, game);
         }
+    }
+
+    @Override
+    public void setCostAdjuster(CostAdjuster costAdjuster) {
+        this.costAdjuster = costAdjuster;
+    }
+
+    @Override
+    public CostAdjuster getCostAdjuster() {
+        return costAdjuster;
+    }
+
+    @Override
+    public void adjustCosts(Game game) {
+        if (costAdjuster != null) {
+            costAdjuster.adjustCosts(this, game);
+        }
+    }
+
+    @Override
+    public List<Hint> getHints() {
+        return this.hints;
+    }
+
+    @Override
+    public Ability addHint(Hint hint) {
+        this.hints.add(hint);
+        return this;
     }
 }

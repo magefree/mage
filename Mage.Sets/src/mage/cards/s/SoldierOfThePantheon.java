@@ -24,7 +24,7 @@ public final class SoldierOfThePantheon extends CardImpl {
     private static final FilterObject filter = new FilterObject("multicolored");
 
     static {
-        filter.add(new MulticoloredPredicate());
+        filter.add(MulticoloredPredicate.instance);
     }
 
     public SoldierOfThePantheon(UUID ownerId, CardSetInfo setInfo) {

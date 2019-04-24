@@ -42,8 +42,8 @@ public final class EntomberExarch extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         Mode mode = new Mode();
-        mode.getEffects().add(new EntomberExarchEffect());
-        mode.getTargets().add(new TargetOpponent());
+        mode.addEffect(new EntomberExarchEffect());
+        mode.addTarget(new TargetOpponent());
         ability.addMode(mode);
         this.addAbility(ability);
     }

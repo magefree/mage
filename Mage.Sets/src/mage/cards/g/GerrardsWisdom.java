@@ -20,7 +20,7 @@ public final class GerrardsWisdom extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}{W}");
 
         // You gain 2 life for each card in your hand.
-        this.getSpellAbility().addEffect(new GainLifeEffect(new MultipliedValue(new CardsInControllerHandCount(), 2),
+        this.getSpellAbility().addEffect(new GainLifeEffect(new MultipliedValue(CardsInControllerHandCount.instance, 2),
             "You gain 2 life for each card in your hand"));
     }
 

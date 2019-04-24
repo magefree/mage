@@ -29,8 +29,8 @@ public final class ArcadesSabboth extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(Predicates.not(new TappedPredicate()));
-        filter.add(Predicates.not(new AttackingPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
+        filter.add(Predicates.not(AttackingPredicate.instance));
     }
 
     public ArcadesSabboth(UUID ownerId, CardSetInfo setInfo) {

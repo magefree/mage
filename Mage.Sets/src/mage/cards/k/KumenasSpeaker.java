@@ -24,7 +24,7 @@ public final class KumenasSpeaker extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("another Merfolk or an Island");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(Predicates.or(
                 new SubtypePredicate(SubType.ISLAND),
                 new SubtypePredicate(SubType.MERFOLK)));

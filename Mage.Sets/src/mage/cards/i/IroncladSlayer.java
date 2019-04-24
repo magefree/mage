@@ -22,7 +22,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public final class IroncladSlayer extends CardImpl {
 
-    private final static FilterCard filter = new FilterCard("Aura or Equipment card from your graveyard");
+    private static final FilterCard filter = new FilterCard("Aura or Equipment card from your graveyard");
 
     static {
         filter.add(Predicates.or(new SubtypePredicate(SubType.AURA), new SubtypePredicate(SubType.EQUIPMENT)));

@@ -26,7 +26,7 @@ public final class KavuMauler extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.KAVU));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public KavuMauler(UUID ownerId, CardSetInfo setInfo) {

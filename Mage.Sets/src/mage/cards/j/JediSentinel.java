@@ -30,7 +30,7 @@ public final class JediSentinel extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature you don't control");
 
     static {
-        filter1.add(new AnotherPredicate());
+        filter1.add(AnotherPredicate.instance);
         filter2.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 

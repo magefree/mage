@@ -37,6 +37,7 @@ public final class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Angelic Chorus", 3, Rarity.RARE, mage.cards.a.AngelicChorus.class));
         cards.add(new SetCardInfo("Angelic Page", 4, Rarity.COMMON, mage.cards.a.AngelicPage.class));
         cards.add(new SetCardInfo("Annul", 59, Rarity.COMMON, mage.cards.a.Annul.class));
+        cards.add(new SetCardInfo("Antagonism", 173, Rarity.RARE, mage.cards.a.Antagonism.class));
         cards.add(new SetCardInfo("Arcane Laboratory", 60, Rarity.UNCOMMON, mage.cards.a.ArcaneLaboratory.class));
         cards.add(new SetCardInfo("Arc Lightning", 174, Rarity.COMMON, mage.cards.a.ArcLightning.class));
         cards.add(new SetCardInfo("Argothian Elder", 233, Rarity.UNCOMMON, mage.cards.a.ArgothianElder.class));
@@ -97,6 +98,7 @@ public final class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Diabolic Servitude", 130, Rarity.UNCOMMON, mage.cards.d.DiabolicServitude.class));
         cards.add(new SetCardInfo("Disciple of Grace", 10, Rarity.COMMON, mage.cards.d.DiscipleOfGrace.class));
         cards.add(new SetCardInfo("Disciple of Law", 11, Rarity.COMMON, mage.cards.d.DiscipleOfLaw.class));
+        cards.add(new SetCardInfo("Discordant Dirge", 131, Rarity.RARE, mage.cards.d.DiscordantDirge.class));
         cards.add(new SetCardInfo("Disenchant", 12, Rarity.COMMON, mage.cards.d.Disenchant.class));
         cards.add(new SetCardInfo("Disorder", 181, Rarity.UNCOMMON, mage.cards.d.Disorder.class));
         cards.add(new SetCardInfo("Disruptive Student", 69, Rarity.COMMON, mage.cards.d.DisruptiveStudent.class));
@@ -111,6 +113,7 @@ public final class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Elite Archers", 13, Rarity.RARE, mage.cards.e.EliteArchers.class));
         cards.add(new SetCardInfo("Elvish Herder", 247, Rarity.COMMON, mage.cards.e.ElvishHerder.class));
         cards.add(new SetCardInfo("Elvish Lyrist", 248, Rarity.COMMON, mage.cards.e.ElvishLyrist.class));
+        cards.add(new SetCardInfo("Enchantment Alteration", 72, Rarity.UNCOMMON, mage.cards.e.EnchantmentAlteration.class));
         cards.add(new SetCardInfo("Endless Wurm", 249, Rarity.RARE, mage.cards.e.EndlessWurm.class));
         cards.add(new SetCardInfo("Endoskeleton", 294, Rarity.UNCOMMON, mage.cards.e.Endoskeleton.class));
         cards.add(new SetCardInfo("Energy Field", 73, Rarity.RARE, mage.cards.e.EnergyField.class));
@@ -163,7 +166,9 @@ public final class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Hidden Ancients", 260, Rarity.UNCOMMON, mage.cards.h.HiddenAncients.class));
         cards.add(new SetCardInfo("Hidden Guerrillas", 261, Rarity.UNCOMMON, mage.cards.h.HiddenGuerrillas.class));
         cards.add(new SetCardInfo("Hidden Herd", 262, Rarity.RARE, mage.cards.h.HiddenHerd.class));
+        cards.add(new SetCardInfo("Hidden Predators", 263, Rarity.RARE, mage.cards.h.HiddenPredators.class));
         cards.add(new SetCardInfo("Hidden Spider", 264, Rarity.COMMON, mage.cards.h.HiddenSpider.class));
+        cards.add(new SetCardInfo("Hidden Stag", 265, Rarity.RARE, mage.cards.h.HiddenStag.class));
         cards.add(new SetCardInfo("Hollow Dogs", 137, Rarity.COMMON, mage.cards.h.HollowDogs.class));
         cards.add(new SetCardInfo("Hopping Automaton", 297, Rarity.UNCOMMON, mage.cards.h.HoppingAutomaton.class));
         cards.add(new SetCardInfo("Horseshoe Crab", 80, Rarity.COMMON, mage.cards.h.HorseshoeCrab.class));
@@ -204,11 +209,14 @@ public final class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("No Rest for the Wicked", 142, Rarity.UNCOMMON, mage.cards.n.NoRestForTheWicked.class));
         cards.add(new SetCardInfo("Noetic Scales", 304, Rarity.RARE, mage.cards.n.NoeticScales.class));
         cards.add(new SetCardInfo("Okk", 204, Rarity.RARE, mage.cards.o.Okk.class));
+        cards.add(new SetCardInfo("Opal Acrolith", 22, Rarity.UNCOMMON, mage.cards.o.OpalAcrolith.class));
         cards.add(new SetCardInfo("Opal Archangel", 23, Rarity.RARE, mage.cards.o.OpalArchangel.class));
         cards.add(new SetCardInfo("Opal Caryatid", 24, Rarity.COMMON, mage.cards.o.OpalCaryatid.class));
         cards.add(new SetCardInfo("Opal Gargoyle", 25, Rarity.COMMON, mage.cards.o.OpalGargoyle.class));
+        cards.add(new SetCardInfo("Opal Titan", 26, Rarity.RARE, mage.cards.o.OpalTitan.class));
         cards.add(new SetCardInfo("Oppression", 143, Rarity.RARE, mage.cards.o.Oppression.class));
         cards.add(new SetCardInfo("Order of Yawgmoth", 144, Rarity.UNCOMMON, mage.cards.o.OrderOfYawgmoth.class));
+        cards.add(new SetCardInfo("Outmaneuver", 205, Rarity.UNCOMMON, mage.cards.o.Outmaneuver.class));
         cards.add(new SetCardInfo("Pacifism", 27, Rarity.COMMON, mage.cards.p.Pacifism.class));
         cards.add(new SetCardInfo("Parasitic Bond", 145, Rarity.UNCOMMON, mage.cards.p.ParasiticBond.class));
         cards.add(new SetCardInfo("Pariah", 28, Rarity.RARE, mage.cards.p.Pariah.class));
@@ -233,6 +241,7 @@ public final class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Polluted Mire", 323, Rarity.COMMON, mage.cards.p.PollutedMire.class));
         cards.add(new SetCardInfo("Pouncing Jaguar", 269, Rarity.COMMON, mage.cards.p.PouncingJaguar.class));
         cards.add(new SetCardInfo("Power Sink", 89, Rarity.COMMON, mage.cards.p.PowerSink.class));
+        cards.add(new SetCardInfo("Power Taint", 90, Rarity.COMMON, mage.cards.p.PowerTaint.class));
         cards.add(new SetCardInfo("Presence of the Master", 32, Rarity.UNCOMMON, mage.cards.p.PresenceOfTheMaster.class));
         cards.add(new SetCardInfo("Priest of Gix", 150, Rarity.UNCOMMON, mage.cards.p.PriestOfGix.class));
         cards.add(new SetCardInfo("Priest of Titania", 270, Rarity.COMMON, mage.cards.p.PriestOfTitania.class));
@@ -272,6 +281,7 @@ public final class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Seasoned Marshal", 44, Rarity.UNCOMMON, mage.cards.s.SeasonedMarshal.class));
         cards.add(new SetCardInfo("Serra Avatar", 45, Rarity.RARE, mage.cards.s.SerraAvatar.class));
         cards.add(new SetCardInfo("Serra's Embrace", 47, Rarity.UNCOMMON, mage.cards.s.SerrasEmbrace.class));
+        cards.add(new SetCardInfo("Serra's Hymn", 48, Rarity.UNCOMMON, mage.cards.s.SerrasHymn.class));
         cards.add(new SetCardInfo("Serra's Liturgy", 49, Rarity.RARE, mage.cards.s.SerrasLiturgy.class));
         cards.add(new SetCardInfo("Serra's Sanctum", 325, Rarity.RARE, mage.cards.s.SerrasSanctum.class));
         cards.add(new SetCardInfo("Serra Zealot", 46, Rarity.COMMON, mage.cards.s.SerraZealot.class));
@@ -293,6 +303,7 @@ public final class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Sneak Attack", 218, Rarity.RARE, mage.cards.s.SneakAttack.class));
         cards.add(new SetCardInfo("Somnophore", 97, Rarity.RARE, mage.cards.s.Somnophore.class));
         cards.add(new SetCardInfo("Songstitcher", 52, Rarity.UNCOMMON, mage.cards.s.Songstitcher.class));
+        cards.add(new SetCardInfo("Soul Sculptor", 53, Rarity.RARE, mage.cards.s.SoulSculptor.class));
         cards.add(new SetCardInfo("Spined Fluke", 160, Rarity.UNCOMMON, mage.cards.s.SpinedFluke.class));
         cards.add(new SetCardInfo("Spire Owl", 98, Rarity.COMMON, mage.cards.s.SpireOwl.class));
         cards.add(new SetCardInfo("Sporogenesis", 273, Rarity.RARE, mage.cards.s.Sporogenesis.class));
@@ -328,6 +339,12 @@ public final class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Urza's Armor", 313, Rarity.UNCOMMON, mage.cards.u.UrzasArmor.class));
         cards.add(new SetCardInfo("Vampiric Embrace", 164, Rarity.UNCOMMON, mage.cards.v.VampiricEmbrace.class));
         cards.add(new SetCardInfo("Vebulid", 165, Rarity.RARE, mage.cards.v.Vebulid.class));
+        cards.add(new SetCardInfo("Veil of Birds", 106, Rarity.COMMON, mage.cards.v.VeilOfBirds.class));
+        cards.add(new SetCardInfo("Veiled Apparition", 107, Rarity.UNCOMMON, mage.cards.v.VeiledApparition.class));
+        cards.add(new SetCardInfo("Veiled Crocodile", 108, Rarity.RARE, mage.cards.v.VeiledCrocodile.class));
+        cards.add(new SetCardInfo("Veiled Sentry", 109, Rarity.UNCOMMON, mage.cards.v.VeiledSentry.class));
+        cards.add(new SetCardInfo("Veiled Serpent", 110, Rarity.COMMON, mage.cards.v.VeiledSerpent.class));
+        cards.add(new SetCardInfo("Venomous Fangs", 280, Rarity.COMMON, mage.cards.v.VenomousFangs.class));
         cards.add(new SetCardInfo("Vernal Bloom", 281, Rarity.RARE, mage.cards.v.VernalBloom.class));
         cards.add(new SetCardInfo("Viashino Outrider", 223, Rarity.COMMON, mage.cards.v.ViashinoOutrider.class));
         cards.add(new SetCardInfo("Viashino Runner", 224, Rarity.COMMON, mage.cards.v.ViashinoRunner.class));

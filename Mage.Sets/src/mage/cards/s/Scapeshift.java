@@ -66,8 +66,8 @@ class ScapeshiftEffect extends OneShotEffect {
         int amount = 0;
         TargetControlledPermanent sacrificeLand = new TargetControlledPermanent(0, Integer.MAX_VALUE, new FilterControlledLandPermanent("lands you control"), true);
         if (controller.chooseTarget(Outcome.Sacrifice, sacrificeLand, source, game)) {
-            for (Object uuid : sacrificeLand.getTargets()) {
-                Permanent land = game.getPermanent((UUID) uuid);
+            for (UUID uuid : sacrificeLand.getTargets()) {
+                Permanent land = game.getPermanent(uuid);
                 if (land != null) {
                     land.sacrifice(source.getSourceId(), game);
                     amount++;
@@ -75,7 +75,7 @@ class ScapeshiftEffect extends OneShotEffect {
             }
         }
         TargetCardInLibrary target = new TargetCardInLibrary(amount, new FilterLandCard("lands"));
-        if (controller.searchLibrary(target, game)) {
+        if (controller.searchLibrary(target, source, game)) {
             controller.moveCards(new CardsImpl(target.getTargets()).getCards(game),
                     Zone.BATTLEFIELD, source, game, true, false, false, null);
             controller.shuffleLibrary(source, game);

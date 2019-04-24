@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -26,8 +25,9 @@ import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class Berserk extends CardImpl {
@@ -43,7 +43,7 @@ public final class Berserk extends CardImpl {
         Effect effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("Target creature gains trample");
         this.getSpellAbility().addEffect(effect);
-        effect = new BoostTargetEffect(new TargetPermanentPowerCount(), new StaticValue(0), Duration.EndOfTurn, true);
+        effect = new BoostTargetEffect(TargetPermanentPowerCount.instance, new StaticValue(0), Duration.EndOfTurn, true);
         effect.setText("and gets +X/+0 until end of turn, where X is its power");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new BerserkDestroyEffect());
@@ -76,7 +76,7 @@ class BerserkReplacementEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL && event.getSourceId().equals(source.getSourceId())) {
-            CombatDamageStepStartedWatcher watcher = (CombatDamageStepStartedWatcher) game.getState().getWatchers().get(CombatDamageStepStartedWatcher.class.getSimpleName());
+            CombatDamageStepStartedWatcher watcher = game.getState().getWatcher(CombatDamageStepStartedWatcher.class);
             return watcher == null || watcher.conditionMet();
         }
         return false;
@@ -96,7 +96,7 @@ class BerserkReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 class CombatDamageStepStartedWatcher extends Watcher {
 
     public CombatDamageStepStartedWatcher() {
-        super(CombatDamageStepStartedWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public CombatDamageStepStartedWatcher(final CombatDamageStepStartedWatcher watcher) {
@@ -170,11 +170,9 @@ class BerserkDelayedDestroyEffect extends OneShotEffect {
         if (controller != null) {
             Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
             if (permanent != null) {
-                Watcher watcher = game.getState().getWatchers().get(AttackedThisTurnWatcher.class.getSimpleName());
-                if (watcher instanceof AttackedThisTurnWatcher) {
-                    if (((AttackedThisTurnWatcher) watcher).getAttackedThisTurnCreatures().contains(new MageObjectReference(permanent, game))) {
-                        return permanent.destroy(source.getSourceId(), game, false);
-                    }
+                AttackedThisTurnWatcher watcher = game.getState().getWatcher(AttackedThisTurnWatcher.class);
+                if (watcher.getAttackedThisTurnCreatures().contains(new MageObjectReference(permanent, game))) {
+                    return permanent.destroy(source.getSourceId(), game, false);
                 }
             }
         }

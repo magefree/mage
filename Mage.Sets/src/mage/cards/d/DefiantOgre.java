@@ -33,8 +33,8 @@ public final class DefiantOgre extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
         // * Destroy target artifact.
         Mode mode = new Mode();
-        mode.getEffects().add(new DestroyTargetEffect());
-        mode.getTargets().add(new TargetArtifactPermanent());
+        mode.addEffect(new DestroyTargetEffect());
+        mode.addTarget(new TargetArtifactPermanent());
         ability.addMode(mode);
         this.addAbility(ability);           
     }

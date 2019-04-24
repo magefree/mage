@@ -1,42 +1,46 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.token.MinionToken;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author FenrisulfrX
  */
 public final class PhyrexianProcessor extends CardImpl {
 
     public PhyrexianProcessor(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // As {this} enters the battlefield, pay any amount of life.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new PhyrexianProcessorEffect()));
+        this.addAbility(new AsEntersBattlefieldAbility(new PhyrexianProcessorPayLifeEffect()));
+
         // {4}, {tap}: Create an X/X black Minion creature token, where X is the life paid as {this} entered the battlefield.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PhyrexianProcessorCreateTokenEffect(), new ManaCostsImpl("{4}"));
+        Ability ability = new SimpleActivatedAbility(
+                new PhyrexianProcessorCreateTokenEffect(), new GenericManaCost(4)
+        );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
 
-    public PhyrexianProcessor(final PhyrexianProcessor card) {
+    private PhyrexianProcessor(final PhyrexianProcessor card) {
         super(card);
     }
 
@@ -46,50 +50,56 @@ public final class PhyrexianProcessor extends CardImpl {
     }
 }
 
-class PhyrexianProcessorEffect extends OneShotEffect {
+class PhyrexianProcessorPayLifeEffect extends OneShotEffect {
 
-    public PhyrexianProcessorEffect() {
+    PhyrexianProcessorPayLifeEffect() {
         super(Outcome.LoseLife);
-        staticText = "Pay any amount of life.";
+        staticText = "pay any amount of life.";
     }
 
-    public PhyrexianProcessorEffect(final PhyrexianProcessorEffect effect) {
+    private PhyrexianProcessorPayLifeEffect(final PhyrexianProcessorPayLifeEffect effect) {
         super(effect);
     }
 
     @Override
-    public PhyrexianProcessorEffect copy() {
-        return new PhyrexianProcessorEffect(this);
+    public PhyrexianProcessorPayLifeEffect copy() {
+        return new PhyrexianProcessorPayLifeEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if(controller != null) {
-            Card sourceCard = game.getCard(source.getSourceId());
-            int payAmount = controller.getAmount(0, controller.getLife(), staticText, game);
-            controller.loseLife(payAmount, game, false);
-            game.informPlayers(new StringBuilder(sourceCard.getName()).append(": ").append(controller.getLogName())
-                .append(" pays ").append(payAmount).append(" life.").toString());
-            String key = CardUtil.getCardZoneString("lifePaid", source.getSourceId(), game);
-            game.getState().setValue(key, payAmount);
-            return true;
+        Permanent permanent = game.getPermanentEntering(source.getSourceId());
+        if (controller == null || permanent == null) {
+            return false;
         }
-        return false;
+        int payAmount = controller.getAmount(0, controller.getLife(), "Pay any amount of life", game);
+        Cost cost = new PayLifeCost(payAmount);
+        if (!cost.pay(source, game, source.getSourceId(), source.getControllerId(), true)) {
+            return false;
+        }
+        Card sourceCard = game.getCard(source.getSourceId());
+        game.informPlayers((sourceCard != null ? sourceCard.getName() : "") + ": " + controller.getLogName() +
+                " pays " + payAmount + " life.");
+        String key = CardUtil.getCardZoneString("lifePaid", source.getSourceId(), game);
+        game.getState().setValue(key, payAmount);
+        permanent.addInfo("life paid", CardUtil.addToolTipMarkTags("Life paid: " + payAmount), game);
+        return true;
     }
 }
 
 class PhyrexianProcessorCreateTokenEffect extends OneShotEffect {
-    
-    public PhyrexianProcessorCreateTokenEffect() {
+
+    PhyrexianProcessorCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Create an X/X black Minion creature token";
+        staticText = "Create an X/X black Minion creature token, " +
+                "where X is the life paid as {this} entered the battlefield.";
     }
 
-    public PhyrexianProcessorCreateTokenEffect(PhyrexianProcessorCreateTokenEffect ability) {
+    private PhyrexianProcessorCreateTokenEffect(PhyrexianProcessorCreateTokenEffect ability) {
         super(ability);
     }
-    
+
     @Override
     public PhyrexianProcessorCreateTokenEffect copy() {
         return new PhyrexianProcessorCreateTokenEffect(this);
@@ -97,9 +107,9 @@ class PhyrexianProcessorCreateTokenEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        String key = CardUtil.getCardZoneString("lifePaid", source.getSourceId(), game);
+        String key = CardUtil.getCardZoneString("lifePaid", source.getSourceId(), game, true);
         Object object = game.getState().getValue(key);
-        if(object instanceof Integer) {
+        if (object instanceof Integer) {
             int lifePaid = (int) object;
             MinionToken token = new MinionToken();
             token.getPower().modifyBaseValue(lifePaid);

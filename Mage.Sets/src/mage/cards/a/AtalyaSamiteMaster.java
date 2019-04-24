@@ -41,7 +41,7 @@ public final class AtalyaSamiteMaster extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {X}, {tap}: Choose one - Prevent the next X damage that would be dealt to target creature this turn; or you gain X life. Spend only white mana on X. 
-        PreventDamageToTargetEffect effect = new PreventDamageToTargetEffect(Duration.EndOfTurn, false, true, new ManacostVariableValue());
+        PreventDamageToTargetEffect effect = new PreventDamageToTargetEffect(Duration.EndOfTurn, false, true, ManacostVariableValue.instance);
         effect.setText("Prevent the next X damage that would be dealt to target creature this turn. Spend only white mana on X.");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}"));
         ability.addCost(new TapSourceCost());
@@ -55,7 +55,7 @@ public final class AtalyaSamiteMaster extends CardImpl {
 
         // or you gain X life
         Mode mode = new Mode();
-        mode.getEffects().add(new GainLifeEffect(new ManacostVariableValue()).setText("You gain X life. Spend only white mana on X."));
+        mode.addEffect(new GainLifeEffect(ManacostVariableValue.instance).setText("You gain X life. Spend only white mana on X."));
         ability.addMode(mode);
 
         this.addAbility(ability);

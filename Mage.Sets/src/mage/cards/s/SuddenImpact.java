@@ -21,7 +21,7 @@ public final class SuddenImpact extends CardImpl {
 
 
         // Sudden Impact deals damage to target player equal to the number of cards in that player's hand.
-        Effect effect = new DamageTargetEffect(new CardsInTargetHandCount());
+        Effect effect = new DamageTargetEffect(CardsInTargetHandCount.instance);
         effect.setText("{this} deals damage to target player equal to the number of cards in that player's hand.");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetPlayer());

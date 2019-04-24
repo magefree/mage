@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -13,7 +12,6 @@ import mage.constants.SagaChapter;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -35,11 +33,12 @@ public final class TheEldestReborn extends CardImpl {
     }
 
     private static final FilterControlledPermanent filterSacrifice = new FilterControlledPermanent("creature or planeswalker");
+
     static {
         filterSacrifice.add(Predicates.or(
-                        new CardTypePredicate(CardType.CREATURE),
-                        new CardTypePredicate(CardType.PLANESWALKER)
-                ));
+                new CardTypePredicate(CardType.CREATURE),
+                new CardTypePredicate(CardType.PLANESWALKER)
+        ));
 
     }
 

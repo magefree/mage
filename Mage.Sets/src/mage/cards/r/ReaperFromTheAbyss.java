@@ -81,8 +81,8 @@ class ReaperFromTheAbyssAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Watcher watcher = game.getState().getWatchers().get(MorbidWatcher.class.getSimpleName());
-        return watcher.conditionMet();
+        Watcher watcher = game.getState().getWatcher(MorbidWatcher.class);
+        return  watcher != null && watcher.conditionMet();
     }
 
     @Override

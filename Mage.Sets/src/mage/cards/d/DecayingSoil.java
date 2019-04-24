@@ -40,7 +40,7 @@ public final class DecayingSoil extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
     static{
         filter.add(new OwnerPredicate(TargetController.YOU));
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public DecayingSoil(UUID ownerId, CardSetInfo setInfo) {
@@ -99,7 +99,7 @@ class DecayingSoilTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
+        if (zEvent.isDiesEvent()) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (permanent != null && filter.match(permanent, this.getSourceId(), this.getControllerId(), game)) {
                 getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
@@ -119,7 +119,7 @@ class DecayingSoilTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return new StringBuilder("Whenever a ").append(filter.getMessage()).append(" is put into your graveyard from the battlefield, ").append(super.getRule()).toString();
+        return "Whenever a " + filter.getMessage() + " is put into your graveyard from the battlefield, " + super.getRule();
     }
 }
 

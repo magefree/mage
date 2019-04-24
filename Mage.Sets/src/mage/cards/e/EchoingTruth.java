@@ -1,7 +1,5 @@
-
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -20,15 +18,17 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetNonlandPermanent;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class EchoingTruth extends CardImpl {
 
     public EchoingTruth(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Return target nonland permanent and all other permanents with the same name as that permanent to their owners' hands.
         Target target = new TargetNonlandPermanent();
@@ -67,7 +67,7 @@ class ReturnToHandAllNamedPermanentsEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (controller != null && permanent != null) {
             FilterPermanent filter = new FilterPermanent();
-            if (permanent.getName().isEmpty()) {
+            if (CardUtil.haveEmptyName(permanent)) {
                 filter.add(new PermanentIdPredicate(permanent.getId()));  // if no name (face down creature) only the creature itself is selected
             } else {
                 filter.add(new NamePredicate(permanent.getName()));

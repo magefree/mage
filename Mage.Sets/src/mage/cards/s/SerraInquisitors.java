@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public final class SerraInquisitors extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("black creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("black creatures");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));

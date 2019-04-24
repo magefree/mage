@@ -28,7 +28,7 @@ public final class CopperhoofVorrac extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("untapped permanent your opponents control");
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 

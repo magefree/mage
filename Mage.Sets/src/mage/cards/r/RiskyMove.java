@@ -76,8 +76,8 @@ class RiskyMoveGetControlEffect extends OneShotEffect {
             // remove old control effects of the same player
             for (ContinuousEffect effect : game.getState().getContinuousEffects().getLayeredEffects(game)) {
                 if (effect instanceof GainControlTargetEffect) {
-                    UUID checkId = (UUID) ((GainControlTargetEffect) effect).getValue("RiskyMoveSourceId");
-                    UUID controllerId = (UUID) ((GainControlTargetEffect) effect).getValue("RiskyMoveControllerId");
+                    UUID checkId = (UUID) effect.getValue("RiskyMoveSourceId");
+                    UUID controllerId = (UUID) effect.getValue("RiskyMoveControllerId");
                     if (source.getSourceId().equals(checkId) && newController.getId().equals(controllerId)) {
                         effect.discard();
                     }
@@ -162,7 +162,7 @@ class RiskyMoveFlipCoinEffect extends OneShotEffect {
             }
             Permanent permanent = game.getPermanent(target1.getFirstTarget());
             Player chosenOpponent = game.getPlayer(target2.getFirstTarget());
-            if (!controller.flipCoin(game)) {
+            if (!controller.flipCoin(source, game, true)) {
                 if (permanent != null && chosenOpponent != null) {
                     ContinuousEffect effect = new RiskyMoveCreatureGainControlEffect(Duration.Custom, chosenOpponent.getId());
                     effect.setTargetPointer(new FixedTarget(permanent.getId()));

@@ -71,7 +71,7 @@ class RealmsUnchartedEffect extends OneShotEffect {
         }
 
         RealmsUnchartedTarget target = new RealmsUnchartedTarget();
-        if (controller.searchLibrary(target, game)) {
+        if (controller.searchLibrary(target, source, game)) {
             if (!target.getTargets().isEmpty()) {
                 Cards cards = new CardsImpl();
                 for (UUID cardId : target.getTargets()) {

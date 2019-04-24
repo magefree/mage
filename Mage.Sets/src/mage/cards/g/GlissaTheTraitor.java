@@ -64,7 +64,7 @@ class GlissaTheTraitorTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     GlissaTheTraitorTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new ReturnToHandTargetEffect());
+        super(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), true);
         this.addTarget(new TargetCardInYourGraveyard(filter));
     }
 
@@ -95,6 +95,6 @@ class GlissaTheTraitorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature an opponent controls is put into a graveyard from the battlefield, you may " + super.getRule();
+        return "Whenever a creature an opponent controls is put into a graveyard from the battlefield, " + super.getRule();
     }
 }

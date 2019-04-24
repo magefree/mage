@@ -28,7 +28,7 @@ public final class BazaarKrovod extends CardImpl {
     static final FilterAttackingCreature filter = new FilterAttackingCreature("another target attacking creature");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public BazaarKrovod(UUID ownerId, CardSetInfo setInfo) {

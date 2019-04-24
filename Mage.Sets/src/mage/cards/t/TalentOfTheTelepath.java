@@ -75,10 +75,7 @@ class TalentOfTheTelepathEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (targetOpponent != null && sourceObject != null) {
             Set<Card> allCards = targetOpponent.getLibrary().getTopCards(game, 7);
-            Cards cards = new CardsImpl();
-            for (Card card : allCards) {
-                cards.add(card);
-            }
+            Cards cards = new CardsImpl(allCards);
             targetOpponent.revealCards(sourceObject.getIdName() + " - " + targetOpponent.getName() + "'s top library cards", cards, game);
             for (Card card : allCards) {
                 if (filter.match(card, game)) {

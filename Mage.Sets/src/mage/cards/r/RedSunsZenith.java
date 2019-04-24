@@ -26,7 +26,7 @@ public final class RedSunsZenith extends CardImpl {
         // If a creature dealt damage this way would die this turn, exile it instead.
         // Shuffle Red Sun's Zenith into its owner's library.
         this.getSpellAbility().addTarget(new TargetAnyTarget());
-        this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.instance));
         this.getSpellAbility().addEffect(new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(ShuffleSpellEffect.getInstance());
         this.getSpellAbility().addWatcher(new DamagedByWatcher());

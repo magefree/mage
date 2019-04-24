@@ -32,7 +32,7 @@ public final class CytoplastRootKin extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creature you control that has a +1/+1 counter on it");
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(new CounterPredicate(CounterType.P1P1));
     }
 

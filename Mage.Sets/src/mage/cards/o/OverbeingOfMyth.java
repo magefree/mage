@@ -33,7 +33,7 @@ public final class OverbeingOfMyth extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Overbeing of Myth's power and toughness are each equal to the number of cards in your hand.
-        DynamicValue number = new CardsInControllerHandCount();
+        DynamicValue number = CardsInControllerHandCount.instance;
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(number, Duration.EndOfGame)));
 
         // At the beginning of your draw step, draw an additional card.

@@ -24,11 +24,11 @@ import mage.target.TargetPermanent;
  */
 public final class SealAway extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
-        filter.add(new TappedPredicate());
+        filter.add(TappedPredicate.instance);
     }
 
     public SealAway(UUID ownerId, CardSetInfo setInfo) {

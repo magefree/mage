@@ -17,7 +17,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public final class PlanarOutburst extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("nonland creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonland creatures");
 
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));

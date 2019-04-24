@@ -24,7 +24,7 @@ public final class RetreatToCoralhelm extends CardImpl {
         LandfallAbility ability = new LandfallAbility(new MayTapOrUntapTargetEffect(), false);
         ability.addTarget(new TargetCreaturePermanent());
         Mode mode = new Mode();
-        mode.getEffects().add(new ScryEffect(1));
+        mode.addEffect(new ScryEffect(1));
         ability.addMode(mode);
         this.addAbility(ability);
     }

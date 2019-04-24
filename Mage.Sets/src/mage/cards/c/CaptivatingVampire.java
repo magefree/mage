@@ -34,7 +34,7 @@ public final class CaptivatingVampire extends CardImpl {
     static {
         filter1.add(new SubtypePredicate(SubType.VAMPIRE));
         filter2.add(new SubtypePredicate(SubType.VAMPIRE));
-        filter2.add(Predicates.not(new TappedPredicate()));
+        filter2.add(Predicates.not(TappedPredicate.instance));
     }
 
     public CaptivatingVampire(UUID ownerId, CardSetInfo setInfo) {

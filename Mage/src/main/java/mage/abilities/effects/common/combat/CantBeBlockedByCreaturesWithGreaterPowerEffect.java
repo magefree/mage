@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
@@ -8,7 +7,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX2
  */
 public class CantBeBlockedByCreaturesWithGreaterPowerEffect extends RestrictionEffect {
@@ -28,7 +26,7 @@ public class CantBeBlockedByCreaturesWithGreaterPowerEffect extends RestrictionE
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         return blocker.getPower().getValue() <= attacker.getPower().getValue();
     }
 

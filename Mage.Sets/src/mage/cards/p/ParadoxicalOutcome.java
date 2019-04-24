@@ -30,11 +30,11 @@ import mage.util.CardUtil;
  */
 public final class ParadoxicalOutcome extends CardImpl {
 
-    private static FilterControlledPermanent filter = new FilterControlledPermanent(new StringBuilder("any number of of target nonland, nontoken permanents you control").toString());
+    private static FilterControlledPermanent filter = new FilterControlledPermanent("any number of target nonland, nontoken permanents you control");
 
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public ParadoxicalOutcome(UUID ownerId, CardSetInfo setInfo) {
@@ -107,7 +107,7 @@ class ParadoxicalOutcomeNumber implements DynamicValue {
             }
         }
         int number = 0;
-        Integer sweepNumber = (Integer) game.getState().getValue(new StringBuilder("ParadoxicalOutcomeEffect").append(source.getSourceId()).append(zoneChangeCounter).toString());
+        Integer sweepNumber = (Integer) game.getState().getValue("ParadoxicalOutcomeEffect" + source.getSourceId() + zoneChangeCounter);
         if (sweepNumber != null) {
             number = sweepNumber;
         }

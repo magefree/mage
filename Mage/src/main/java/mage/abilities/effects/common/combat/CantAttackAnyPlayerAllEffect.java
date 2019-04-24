@@ -1,5 +1,3 @@
-
-
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
@@ -30,7 +28,7 @@ public class CantAttackAnyPlayerAllEffect extends RestrictionEffect {
                 sb.append(' ').append(duration.toString());
             }
         }
-        staticText = sb.toString();        
+        staticText = sb.toString();
     }
 
     public CantAttackAnyPlayerAllEffect(final CantAttackAnyPlayerAllEffect effect) {
@@ -44,7 +42,7 @@ public class CantAttackAnyPlayerAllEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Game game) {
+    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
         return false;
     }
 

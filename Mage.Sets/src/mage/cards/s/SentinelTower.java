@@ -1,9 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
@@ -20,8 +16,11 @@ import mage.game.events.GameEvent;
 import mage.target.common.TargetAnyTarget;
 import mage.watchers.Watcher;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class SentinelTower extends CardImpl {
@@ -46,7 +45,7 @@ public final class SentinelTower extends CardImpl {
 class SentinelTowerTriggeredAbility extends SpellCastAllTriggeredAbility {
 
     SentinelTowerTriggeredAbility() {
-        super(new DamageTargetEffect(0), StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY, false);
+        super(new DamageTargetEffect(0), StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false);
         this.addTarget(new TargetAnyTarget());
     }
 
@@ -63,7 +62,7 @@ class SentinelTowerTriggeredAbility extends SpellCastAllTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.isActivePlayer(getControllerId())
                 && super.checkTrigger(event, game)) {
-            SentinelTowerWatcher watcher = (SentinelTowerWatcher) game.getState().getWatchers().get(SentinelTowerWatcher.class.getSimpleName());
+            SentinelTowerWatcher watcher = game.getState().getWatcher(SentinelTowerWatcher.class);
             if (watcher == null) {
                 return false;
             }
@@ -102,7 +101,7 @@ class SentinelTowerWatcher extends Watcher {
     private final List<MageObjectReference> spellsThisTurn;
 
     SentinelTowerWatcher() {
-        super(SentinelTowerWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super( WatcherScope.GAME);
         this.spellsThisTurn = new ArrayList<>();
     }
 

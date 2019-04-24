@@ -48,7 +48,7 @@ public final class OathOfNissa extends CardImpl {
 
 class OathOfNissaEffect extends OneShotEffect {
 
-    private final static FilterCard filter = new FilterCard("a creature, land, or planeswalker card");
+    private static final FilterCard filter = new FilterCard("a creature, land, or planeswalker card");
 
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE),

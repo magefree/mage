@@ -27,7 +27,7 @@ public final class RequiemAngel extends CardImpl {
 
     static {
         filter.add(Predicates.not(new SubtypePredicate(SubType.SPIRIT)));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

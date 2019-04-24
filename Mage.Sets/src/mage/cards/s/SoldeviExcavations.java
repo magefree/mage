@@ -33,7 +33,7 @@ public final class SoldeviExcavations extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.ISLAND));
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public SoldeviExcavations(UUID ownerId, CardSetInfo setInfo) {

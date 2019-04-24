@@ -32,9 +32,9 @@ public final class Banshee extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {X}, {T}: Banshee deals half X damage, rounded down, to any target, and half X damage, rounded up, to you.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new HalfValue(new ManacostVariableValue(), false)).setText("Banshee deals half X damage, rounded down, to any target,"), new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new HalfValue(ManacostVariableValue.instance, false)).setText("Banshee deals half X damage, rounded down, to any target,"), new ManaCostsImpl("{X}"));
         ability.addCost(new TapSourceCost());
-        ability.addEffect(new DamageControllerEffect(new HalfValue(new ManacostVariableValue(), true)).setText(" and half X damage, rounded up, to you"));
+        ability.addEffect(new DamageControllerEffect(new HalfValue(ManacostVariableValue.instance, true)).setText(" and half X damage, rounded up, to you"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

@@ -32,7 +32,7 @@ public final class ConsecratedByBlood extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("two other creatures");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public ConsecratedByBlood(UUID ownerId, CardSetInfo setInfo) {

@@ -1,7 +1,5 @@
-
 package mage.cards.x;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -19,22 +17,23 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class XathridGorgon extends CardImpl {
 
     public XathridGorgon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}");
         this.subtype.add(SubType.GORGON);
 
         this.power = new MageInt(3);
@@ -42,7 +41,7 @@ public final class XathridGorgon extends CardImpl {
 
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());
-        
+
         // {2}{B}, {tap}: Put a petrification counter on target creature. It gains defender and becomes a colorless artifact in addition to its other types. Its activated abilities can't be activated.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.PETRIFICATION.createInstance()), new ManaCostsImpl("{2}{B}"));
         ability.addCost(new TapSourceCost());
@@ -56,7 +55,7 @@ public final class XathridGorgon extends CardImpl {
         ability.addEffect(new BecomesColorTargetEffect(new ObjectColor(), Duration.Custom, ""));
         ability.addEffect(new XathridGorgonCantActivateEffect());
         this.addAbility(ability);
-        
+
     }
 
     public XathridGorgon(final XathridGorgon card) {
@@ -91,7 +90,7 @@ class XathridGorgonCantActivateEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game) {
+    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game, boolean canUseChooseDialogs) {
         return false;
     }
 

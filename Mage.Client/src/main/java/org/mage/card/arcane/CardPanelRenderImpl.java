@@ -1,7 +1,9 @@
 package org.mage.card.arcane;
 
-import com.google.common.collect.MapMaker;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 import mage.cards.action.ActionCallback;
+import mage.client.constants.Constants;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
@@ -12,12 +14,11 @@ import mage.view.StackAbilityView;
 import org.apache.log4j.Logger;
 import org.jdesktop.swingx.graphics.GraphicsUtilities;
 import org.mage.plugins.card.images.ImageCache;
-import mage.client.constants.Constants;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 
 public class CardPanelRenderImpl extends CardPanel {
 
@@ -104,9 +105,7 @@ public class CardPanelRenderImpl extends CardPanel {
                 // are the same for a and b
                 return false;
             }
-            if (aa.getDamage() != bb.getDamage()) {
-                return false;
-            }
+            return aa.getDamage() == bb.getDamage();
         }
         return true;
     }
@@ -140,6 +139,7 @@ public class CardPanelRenderImpl extends CardPanel {
             sb.append((char) (isChoosable ? 1 : 0));
             sb.append((char) (this.view.isPlayable() ? 1 : 0));
             sb.append((char) (this.view.isCanAttack() ? 1 : 0));
+            sb.append((char) (this.view.isCanBlock() ? 1 : 0));
             sb.append((char) (this.view.isFaceDown() ? 1 : 0));
             sb.append((char) this.view.getFrameStyle().ordinal());
             if (this.view instanceof PermanentView) {
@@ -215,7 +215,7 @@ public class CardPanelRenderImpl extends CardPanel {
     }
 
     // Map of generated images
-    private final static Map<ImageKey, BufferedImage> IMAGE_CACHE = new MapMaker().softValues().makeMap();
+    private final static Cache<ImageKey, BufferedImage> IMAGE_CACHE = CacheBuilder.newBuilder().softValues().build();
 
     // The art image for the card, loaded in from the disk
     private BufferedImage artImage;
@@ -236,7 +236,7 @@ public class CardPanelRenderImpl extends CardPanel {
         super(newGameCard, gameId, loadImage, callback, foil, dimension);
 
         // Renderer
-        cardRenderer = cardRendererFactory.create(gameCard, isTransformed());
+        cardRenderer = cardRendererFactory.create(getGameCard(), isTransformed());
 
         // Draw the parts
         initialDraw();
@@ -262,10 +262,14 @@ public class CardPanelRenderImpl extends CardPanel {
         if (cardImage == null) {
             // Try to get card image from cache based on our card characteristics
             ImageKey key
-                    = new ImageKey(gameCard, artImage,
-                            getCardWidth(), getCardHeight(),
-                            isChoosable(), isSelected());
-            cardImage = IMAGE_CACHE.computeIfAbsent(key, k -> renderCard());
+                    = new ImageKey(getGameCard(), artImage,
+                    getCardWidth(), getCardHeight(),
+                    isChoosable(), isSelected());
+            try {
+                cardImage = IMAGE_CACHE.get(key, this::renderCard);
+            } catch (ExecutionException e) {
+                throw new RuntimeException(e);
+            }
 
             // No cached copy exists? Render one and cache it
         }
@@ -317,8 +321,8 @@ public class CardPanelRenderImpl extends CardPanel {
         cardRenderer.setFaceArtImage(null);
 
         // Stop animation
-        tappedAngle = isTapped() ? CardPanel.TAPPED_ANGLE : 0;
-        flippedAngle = isFlipped() ? CardPanel.FLIPPED_ANGLE : 0;
+        setTappedAngle(isTapped() ? CardPanel.TAPPED_ANGLE : 0);
+        setFlippedAngle(isFlipped() ? CardPanel.FLIPPED_ANGLE : 0);
 
         // Schedule a repaint
         repaint();
@@ -333,16 +337,16 @@ public class CardPanelRenderImpl extends CardPanel {
                 try {
                     final BufferedImage srcImage;
                     final BufferedImage faceArtSrcImage;
-                    if (gameCard.isFaceDown()) {
+                    if (getGameCard().isFaceDown()) {
                         // Nothing to do
                         srcImage = null;
                         faceArtSrcImage = null;
                     } else if (getCardWidth() > Constants.THUMBNAIL_SIZE_FULL.width) {
-                        srcImage = ImageCache.getImage(gameCard, getCardWidth(), getCardHeight());
-                        faceArtSrcImage = ImageCache.getFaceImage(gameCard, getCardWidth(), getCardHeight());
+                        srcImage = ImageCache.getImage(getGameCard(), getCardWidth(), getCardHeight());
+                        faceArtSrcImage = ImageCache.getFaceImage(getGameCard(), getCardWidth(), getCardHeight());
                     } else {
-                        srcImage = ImageCache.getThumbnail(gameCard);
-                        faceArtSrcImage = ImageCache.getFaceImage(gameCard, getCardWidth(), getCardHeight());
+                        srcImage = ImageCache.getThumbnail(getGameCard());
+                        faceArtSrcImage = ImageCache.getFaceImage(getGameCard(), getCardWidth(), getCardHeight());
                     }
 
                     UI.invokeLater(() -> {
@@ -375,7 +379,7 @@ public class CardPanelRenderImpl extends CardPanel {
 
         // Update renderer
         cardImage = null;
-        cardRenderer = cardRendererFactory.create(gameCard, isTransformed());
+        cardRenderer = cardRendererFactory.create(getGameCard(), isTransformed());
         cardRenderer.setArtImage(artImage);
         cardRenderer.setFaceArtImage(faceArtImage);
 
@@ -398,12 +402,12 @@ public class CardPanelRenderImpl extends CardPanel {
 
     private BufferedImage getFaceDownImage() {
         if (isPermanent()) {
-            if (((PermanentView) gameCard).isMorphed()) {
+            if (((PermanentView) getGameCard()).isMorphed()) {
                 return ImageCache.getMorphImage();
             } else {
                 return ImageCache.getManifestImage();
             }
-        } else if (this.gameCard instanceof StackAbilityView) {
+        } else if (this.getGameCard() instanceof StackAbilityView) {
             return ImageCache.getMorphImage();
         } else {
             return ImageCache.getCardbackImage();
@@ -433,10 +437,10 @@ public class CardPanelRenderImpl extends CardPanel {
     @Override
     public Image getImage() {
         if (artImage != null) {
-            if (gameCard.isFaceDown()) {
+            if (getGameCard().isFaceDown()) {
                 return getFaceDownImage();
             } else {
-                return ImageCache.getImageOriginal(gameCard);
+                return ImageCache.getImageOriginal(getGameCard());
             }
         }
         return null;

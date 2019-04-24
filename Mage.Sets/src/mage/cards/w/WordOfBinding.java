@@ -1,19 +1,18 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetadjustment.TargetAdjuster;
+
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class WordOfBinding extends CardImpl {
@@ -23,7 +22,7 @@ public final class WordOfBinding extends CardImpl {
 
         // Tap X target creatures.
         this.getSpellAbility().addEffect(new TapTargetEffect("X target creatures"));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1, FILTER_PERMANENT_CREATURES, false));
+        this.getSpellAbility().setTargetAdjuster(WordOfBindingAdjuster.instance);
     }
 
     public WordOfBinding(final WordOfBinding card) {
@@ -31,17 +30,17 @@ public final class WordOfBinding extends CardImpl {
     }
 
     @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SpellAbility) {
-            ability.getTargets().clear();
-            int numberToTap = ability.getManaCostsToPay().getX();
-            numberToTap = Math.min(game.getBattlefield().count(FILTER_PERMANENT_CREATURES, ability.getSourceId(), ability.getControllerId(), game), numberToTap);
-            ability.addTarget(new TargetCreaturePermanent(numberToTap, numberToTap, FILTER_PERMANENT_CREATURES, false));
-        }
-    }
-
-    @Override
     public WordOfBinding copy() {
         return new WordOfBinding(this);
+    }
+}
+
+enum WordOfBindingAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        ability.getTargets().clear();
+        ability.addTarget(new TargetCreaturePermanent(ability.getManaCostsToPay().getX()));
     }
 }

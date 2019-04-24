@@ -87,8 +87,6 @@ class SigilCaptainTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Whenever a creature enters the battlefield under your control, if that creature is 1/1, put two +1/+1 counters on it");
-        return sb.toString();
+        return "Whenever a creature enters the battlefield under your control, if that creature is 1/1, put two +1/+1 counters on it";
     }
 }

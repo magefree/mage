@@ -18,7 +18,7 @@ import mage.target.TargetSpell;
  */
 public final class Confound extends CardImpl {
 
-    private final static FilterSpell filter = new FilterSpell("spell that targets a creature");
+    private static final FilterSpell filter = new FilterSpell("spell that targets a creature");
 
     static {
         filter.add(new TargetsPermanentPredicate(new FilterCreaturePermanent()));

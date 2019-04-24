@@ -13,29 +13,42 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+import mage.target.targetadjustment.TargetAdjuster;
 
 import java.util.UUID;
 
 import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 
 /**
- *
  * @author magenoxx_at_gmail.com
  */
 public final class AetherBurst extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("cards named Aether Burst");
-
-    static {
-        filter.add(new NamePredicate("Aether Burst"));
-    }
-
     public AetherBurst(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Return up to X target creatures to their owners' hands, where X is one plus the number of cards named Aether Burst in all graveyards as you cast Aether Burst.
         this.getSpellAbility().addEffect(new DynamicReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new DynamicTargetCreaturePermanent());
+        this.getSpellAbility().setTargetAdjuster(AetherBurstAdjuster.instance);
+    }
+
+
+    public AetherBurst(final AetherBurst card) {
+        super(card);
+    }
+
+    @Override
+    public AetherBurst copy() {
+        return new AetherBurst(this);
+    }
+}
+
+enum AetherBurstAdjuster implements TargetAdjuster {
+    instance;
+    private static final FilterCard filter = new FilterCard("cards named Aether Burst");
+
+    static {
+        filter.add(new NamePredicate("Aether Burst"));
     }
 
     @Override
@@ -54,15 +67,6 @@ public final class AetherBurst extends CardImpl {
             }
             target.setMaxNumberOfTargets(amount + 1);
         }
-    }
-
-    public AetherBurst(final AetherBurst card) {
-        super(card);
-    }
-
-    @Override
-    public AetherBurst copy() {
-        return new AetherBurst(this);
     }
 }
 

@@ -15,6 +15,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.TargetPermanent;
 
@@ -34,13 +35,13 @@ public final class Quillspike extends CardImpl {
 
         // {BG}, Remove a -1/-1 counter from a creature you control: Quillspike gets +3/+3 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3, 3, Duration.EndOfTurn), new ManaCostsImpl("{B/G}"));
-        TargetPermanent target = new TargetPermanent(1, 1, new FilterControlledCreaturePermanent("creature you control"), true);
+        TargetPermanent target = new TargetPermanent(1, 1, StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED, true);
         ability.addCost(new RemoveCounterCost(target, CounterType.M1M1));
         this.addAbility(ability);
         
     }
 
-    public Quillspike(final Quillspike card) {
+    private Quillspike(final Quillspike card) {
         super(card);
     }
 

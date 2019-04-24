@@ -189,7 +189,7 @@ class AnimateDeadAttachEffect extends OneShotEffect {
 
 class AnimateDeadChangeAbilityEffect extends ContinuousEffectImpl implements SourceEffect {
 
-    private final static Ability newAbility = new EnchantAbility("creature put onto the battlefield with Animate Dead");
+    private static final Ability newAbility = new EnchantAbility("creature put onto the battlefield with Animate Dead");
 
     static {
         newAbility.setRuleAtTheTop(true);

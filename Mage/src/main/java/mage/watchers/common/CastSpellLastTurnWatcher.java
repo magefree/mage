@@ -20,7 +20,7 @@ public class CastSpellLastTurnWatcher extends Watcher {
     private final List<MageObjectReference> spellsCastThisTurnInOrder = new ArrayList<>();
 
     public CastSpellLastTurnWatcher() {
-        super(CastSpellLastTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public CastSpellLastTurnWatcher(final CastSpellLastTurnWatcher watcher) {
@@ -81,10 +81,10 @@ public class CastSpellLastTurnWatcher extends Watcher {
         }
         return 0;
     }
-
-    @Override
-    public CastSpellLastTurnWatcher copy() {
-        return new CastSpellLastTurnWatcher(this);
-    }
+//
+//    @Override
+//    public CastSpellLastTurnWatcher copy() {
+//        return new CastSpellLastTurnWatcher(this);
+//    }
 
 }

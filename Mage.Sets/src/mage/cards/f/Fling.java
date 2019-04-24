@@ -22,7 +22,7 @@ public final class Fling extends CardImpl {
     public Fling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
 
-        Effect effect = new DamageTargetEffect(new SacrificeCostCreaturesPower());
+        Effect effect = new DamageTargetEffect(SacrificeCostCreaturesPower.instance);
         effect.setText("{this} deals damage equal to the sacrificed creature's power to any target");
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.getSpellAbility().addTarget(new TargetAnyTarget());

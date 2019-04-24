@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import mage.MageInt;
@@ -7,6 +6,7 @@ import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.hint.common.CreaturesYouControlHint;
 import mage.abilities.meta.OrTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -19,7 +19,6 @@ import mage.game.permanent.token.VoiceOfResurgenceToken;
 import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class VoiceOfResurgence extends CardImpl {
@@ -39,6 +38,7 @@ public final class VoiceOfResurgence extends CardImpl {
                         "Whenever an opponent casts a spell during your turn, "),
                 new DiesTriggeredAbility(null, false));
         ability.setLeavesTheBattlefieldTrigger(true);
+        ability.addHint(CreaturesYouControlHint.instance);
         this.addAbility(ability);
 
     }

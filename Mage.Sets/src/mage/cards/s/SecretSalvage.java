@@ -76,7 +76,7 @@ class SecretSalvageEffect extends OneShotEffect {
                 String nameToSearch = targetCard.isSplitCard() ? ((SplitCard) targetCard).getLeftHalfCard().getName() : targetCard.getName();
                 nameFilter.add(new NamePredicate(nameToSearch));
                 TargetCardInLibrary target = new TargetCardInLibrary(0, Integer.MAX_VALUE, nameFilter);
-                if (controller.searchLibrary(target, game)) {
+                if (controller.searchLibrary(target, source, game)) {
                     if (!target.getTargets().isEmpty()) {
                         Cards cards = new CardsImpl();
                         for (UUID cardId : target.getTargets()) {

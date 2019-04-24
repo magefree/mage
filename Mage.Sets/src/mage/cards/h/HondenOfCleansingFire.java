@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public final class HondenOfCleansingFire extends CardImpl {
 
-    final static FilterControlledPermanent filter = new FilterControlledPermanent("Shrine");
+    static final FilterControlledPermanent filter = new FilterControlledPermanent("Shrine");
 
     static {
         filter.add(new SubtypePredicate(SubType.SHRINE));

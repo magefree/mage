@@ -49,7 +49,7 @@ public class Permanent extends Card {
         super(permanent, bigCard, dimensions, gameId);
         this.setSize(this.getPreferredSize());
         this.permanent = permanent;
-        tappedImage = new BufferedImage(Config.dimensions.frameHeight, Config.dimensions.frameWidth, BufferedImage.TYPE_INT_RGB);
+        tappedImage = new BufferedImage(Config.dimensions.getFrameHeight(), Config.dimensions.getFrameWidth(), BufferedImage.TYPE_INT_RGB);
     }
 
     public UUID getPermanentId() {
@@ -173,10 +173,10 @@ public class Permanent extends Card {
           g2.setColor(Color.BLACK);
         }
         if (permanent.isTapped()) {
-            g2.drawRect(0, 0, Config.dimensions.frameHeight - 1, Config.dimensions.frameWidth - 1);
+            g2.drawRect(0, 0, Config.dimensions.getFrameHeight() - 1, Config.dimensions.getFrameWidth() - 1);
         }
         else {
-            g2.drawRect(0, 0, Config.dimensions.frameWidth - 1, Config.dimensions.frameHeight - 1);
+            g2.drawRect(0, 0, Config.dimensions.getFrameWidth() - 1, Config.dimensions.getFrameHeight() - 1);
         }
 
     }
@@ -185,7 +185,7 @@ public class Permanent extends Card {
         Graphics2D g = (Graphics2D) tappedImage.getGraphics();
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        g.drawImage(TransformedImageCache.getRotatedResizedImage(small, dimension.frameWidth, dimension.frameHeight, Math.toRadians(90.0)), 0, 0, this);
+        g.drawImage(TransformedImageCache.getRotatedResizedImage(small, dimension.getFrameWidth(), dimension.getFrameHeight(), Math.toRadians(90.0)), 0, 0, this);
 
         g.dispose();
     }
@@ -206,10 +206,10 @@ public class Permanent extends Card {
     @Override
     public Dimension getPreferredSize() {
         if (permanent != null && permanent.isTapped()) {
-            return new Dimension(Config.dimensions.frameHeight, Config.dimensions.frameWidth);
+            return new Dimension(Config.dimensions.getFrameHeight(), Config.dimensions.getFrameWidth());
         }
         else {
-            return new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+            return new Dimension(Config.dimensions.getFrameWidth(), Config.dimensions.getFrameHeight());
         }
     }
 
@@ -229,7 +229,7 @@ public class Permanent extends Card {
                 tooltipPopup.hide();
             }
             PopupFactory factory = PopupFactory.getSharedInstance();
-            int x = (int) this.getLocationOnScreen().getX() + (permanent.isTapped()?Config.dimensions.frameHeight:Config.dimensions.frameWidth);
+            int x = (int) this.getLocationOnScreen().getX() + (permanent.isTapped()? Config.dimensions.getFrameHeight() : Config.dimensions.getFrameWidth());
             int y = (int) this.getLocationOnScreen().getY() + 40;
             tooltipPopup = factory.getPopup(this, tooltipText, x, y);
             tooltipPopup.show();

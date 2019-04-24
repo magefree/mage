@@ -1,9 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -24,8 +20,11 @@ import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class Tromokratis extends CardImpl {
@@ -78,7 +77,7 @@ class CantBeBlockedUnlessAllEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         // check if all creatures of defender are able to block this permanent
         // permanent.canBlock() can't be used because causing recursive call
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, blocker.getControllerId(), game)) {
@@ -88,7 +87,7 @@ class CantBeBlockedUnlessAllEffect extends RestrictionEffect {
             // check blocker restrictions
             for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(permanent, game).entrySet()) {
                 for (Ability ability : entry.getValue()) {
-                    if (!entry.getKey().canBlock(attacker, permanent, ability, game)) {
+                    if (!entry.getKey().canBlock(attacker, permanent, ability, game, canUseChooseDialogs)) {
                         return false;
                     }
                 }
@@ -97,7 +96,7 @@ class CantBeBlockedUnlessAllEffect extends RestrictionEffect {
             for (Map.Entry<RestrictionEffect, Set<Ability>> restrictionEntry : game.getContinuousEffects().getApplicableRestrictionEffects(attacker, game).entrySet()) {
                 for (Ability ability : restrictionEntry.getValue()) {
                     if (!(restrictionEntry.getKey() instanceof CantBeBlockedUnlessAllEffect)
-                            && !restrictionEntry.getKey().canBeBlocked(attacker, permanent, ability, game)) {
+                            && !restrictionEntry.getKey().canBeBlocked(attacker, permanent, ability, game, canUseChooseDialogs)) {
                         return false;
                     }
                 }
@@ -110,7 +109,7 @@ class CantBeBlockedUnlessAllEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBeBlockedCheckAfter(Permanent attacker, Ability source, Game game) {
+    public boolean canBeBlockedCheckAfter(Permanent attacker, Ability source, Game game, boolean canUseChooseDialogs) {
         for (CombatGroup combatGroup : game.getCombat().getGroups()) {
             if (combatGroup.getAttackers().contains(source.getSourceId())) {
                 for (UUID blockerId : combatGroup.getBlockers()) {

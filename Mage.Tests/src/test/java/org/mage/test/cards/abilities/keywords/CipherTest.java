@@ -37,32 +37,30 @@ public class CipherTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Pillarfield Ox");
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
 
+        // cast spell, create copy token, exile spell card and encode it to that token of Roil Elemental
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Stolen Identity", "Roil Elemental");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, "Yes"); // Cipher activate
+        addTarget(playerA, "Roil Elemental"); // Cipher target for encode
+        checkPermanentCount("playerA must have Roil Elemental", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Roil Elemental", 1);
+        checkPermanentCount("playerB must have Roil Elemental", 2, PhaseStep.PRECOMBAT_MAIN, playerB, "Roil Elemental", 1);
+        checkExileCount("Stolen Identity must be in exile zone", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Stolen Identity", 1);
 
+        // Roil Elemental must activated on new land
         playLand(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Mountain");
+        setChoice(playerA, "Yes"); // activate landfall to control opponent creature
         addTarget(playerA, "Silvercoat Lion"); // Triggered ability of copied Roil Elemental to gain control
+        checkPermanentCount("must gain control of Lion", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Silvercoat Lion", 1);
+        checkPermanentCount("must lose control of Lion", 3, PhaseStep.POSTCOMBAT_MAIN, playerB, "Silvercoat Lion", 0);
 
-        attack(3, playerA, "Roil Elemental"); // Creature 3/2
-        addTarget(playerA, "Pillarfield Ox");
+        // on attack must activated ability to free cast
+        attack(5, playerA, "Roil Elemental");
+        setChoice(playerA, "Yes"); // activate free cast of encoded card
+        checkPermanentCount("playerA must have 2 Roil Elemental", 5, PhaseStep.POSTCOMBAT_MAIN, playerA, "Roil Elemental", 2);
+        checkPermanentCount("playerB must have Roil Elemental", 5, PhaseStep.POSTCOMBAT_MAIN, playerB, "Roil Elemental", 1);
 
-        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        setStopAt(5, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertLife(playerB, 17);
-
-        assertExileCount(playerA, "Stolen Identity", 1);
-
-        assertPermanentCount(playerA, "Mountain", 1);
-
-        assertPermanentCount(playerB, "Pillarfield Ox", 1);
-        assertPermanentCount(playerA, "Pillarfield Ox", 1); // a copy from the cipered Stolen Identity caused by the Roil Elelemtal Attack
-
-        assertPermanentCount(playerB, "Silvercoat Lion", 0);
-        assertPermanentCount(playerA, "Silvercoat Lion", 1); // Gain control from triggered ability of the copied Roil Elemental ????? TARGET ???
-
-        assertPermanentCount(playerB, "Roil Elemental", 1);
-        assertPermanentCount(playerA, "Roil Elemental", 1);
-
+        assertLife(playerB, 17); // -3 by Roil
     }
 }

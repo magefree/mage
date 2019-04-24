@@ -88,7 +88,7 @@ class WeirdHarvestEffect extends OneShotEffect {
         if (player.chooseUse(Outcome.PutCardInPlay, "Search your library for up " + xValue + " creature cards and put them into your hand?", source, game)) {
             usingPlayers.add(player);
             TargetCardInLibrary target = new TargetCardInLibrary(0, xValue, new FilterCreatureCard());
-            if (player.searchLibrary(target, game)) {
+            if (player.searchLibrary(target, source, game)) {
                 if (!target.getTargets().isEmpty()) {
                     Cards cards = new CardsImpl(target.getTargets());
                     player.moveCards(cards, Zone.HAND, source, game);

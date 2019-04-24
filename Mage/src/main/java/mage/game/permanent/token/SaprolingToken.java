@@ -16,7 +16,7 @@ import mage.util.RandomUtil;
  */
 public final class SaprolingToken extends TokenImpl {
 
-    final static private List<String> tokenImageSets = new ArrayList<>();
+    static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
         tokenImageSets.addAll(Arrays.asList(

@@ -42,9 +42,13 @@ public final class Unstable extends ExpansionSet {
         cards.add(new SetCardInfo("Dr. Julius Jumblemorph", 130, Rarity.MYTHIC, mage.cards.d.DrJuliusJumblemorph.class));
         cards.add(new SetCardInfo("Enraged Killbot", "145d", Rarity.COMMON, mage.cards.e.EnragedKillbot.class));
         cards.add(new SetCardInfo("Earl of Squirrel", 108, Rarity.RARE, mage.cards.e.EarlOfSquirrel.class));
+        cards.add(new SetCardInfo("Everythingamajig", "147b", Rarity.UNCOMMON, mage.cards.e.EverythingamajigB.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Everythingamajig", "147c", Rarity.UNCOMMON, mage.cards.e.EverythingamajigC.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Everythingamajig", "147e", Rarity.UNCOMMON, mage.cards.e.EverythingamajigE.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 216, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(FrameStyle.UST_FULL_ART_BASIC, false)));
         cards.add(new SetCardInfo("GO TO JAIL", 8, Rarity.COMMON, mage.cards.g.GOTOJAIL.class));
-        cards.add(new SetCardInfo("Garbage Elemental", "82c", Rarity.UNCOMMON, mage.cards.g.GarbageElementalC.class));
+        cards.add(new SetCardInfo("Garbage Elemental", "82c", Rarity.UNCOMMON, mage.cards.g.GarbageElementalC.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Garbage Elemental", "82d", Rarity.UNCOMMON, mage.cards.g.GarbageElementalD.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ground Pounder", 110, Rarity.COMMON, mage.cards.g.GroundPounder.class));
         cards.add(new SetCardInfo("Hammer Helper", 85, Rarity.COMMON, mage.cards.h.HammerHelper.class));
         cards.add(new SetCardInfo("Hammer Jammer", 86, Rarity.UNCOMMON, mage.cards.h.HammerJammer.class));
@@ -76,6 +80,7 @@ public final class Unstable extends ExpansionSet {
         cards.add(new SetCardInfo("Target Minotaur", "98d", Rarity.COMMON, mage.cards.t.TargetMinotaur.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Big Idea", 76, Rarity.RARE, mage.cards.t.TheBigIdea.class));
         cards.add(new SetCardInfo("Time Out", 48, Rarity.COMMON, mage.cards.t.TimeOut.class));
+        cards.add(new SetCardInfo("Urza, Academy Headmaster", 136, Rarity.MYTHIC, mage.cards.u.UrzaAcademyHeadmaster.class));
         cards.add(new SetCardInfo("Very Cryptic Command", "49d", Rarity.RARE, mage.cards.v.VeryCrypticCommandD.class));
         cards.add(new SetCardInfo("Willing Test Subject", 126, Rarity.COMMON, mage.cards.w.WillingTestSubject.class));
         cards.add(new SetCardInfo("capital offense", 52, Rarity.COMMON, mage.cards.c.CapitalOffense.class));

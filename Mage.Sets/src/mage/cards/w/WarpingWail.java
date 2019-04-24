@@ -48,15 +48,15 @@ public final class WarpingWail extends CardImpl {
 
         // Counter target sorcery spell.
         Mode mode = new Mode();
-        mode.getEffects().add(new CounterTargetEffect());
-        mode.getTargets().add(new TargetSpell(filterSorcery));
+        mode.addEffect(new CounterTargetEffect());
+        mode.addTarget(new TargetSpell(filterSorcery));
         this.getSpellAbility().addMode(mode);
 
         // Create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."
         mode = new Mode();
         effect = new CreateTokenEffect(new EldraziScionToken());
         effect.setText("Create a 1/1 colorless Eldrazi Scion creature token. It has \"Sacrifice this creature: Add {C}.\"");
-        mode.getEffects().add(effect);
+        mode.addEffect(effect);
         this.getSpellAbility().addMode(mode);
     }
 

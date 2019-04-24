@@ -1,21 +1,24 @@
-
-
 package org.mage.test.serverside.tournament;
 
 
-import java.util.*;
-
-import mage.game.tournament.*;
+import mage.game.tournament.Round;
+import mage.game.tournament.TournamentPairing;
+import mage.game.tournament.TournamentPlayer;
 import mage.game.tournament.pairing.RoundPairings;
 import mage.game.tournament.pairing.SwissPairingMinimalWeightMatching;
+import mage.util.RandomUtil;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.stub.PlayerStub;
 import org.mage.test.stub.TournamentStub;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 
 /**
- *
  * @author Quercitron
  */
 public class SwissPairingMinimalWeightMatchingTest {
@@ -264,7 +267,6 @@ public class SwissPairingMinimalWeightMatchingTest {
     }
 
     private void SimulateTournament(int playersCount, int roundsCount) {
-        Random rnd = new Random();
 
         List<TournamentPlayer> players = new ArrayList<>();
         for (int i = 0; i < playersCount; i++) {
@@ -294,7 +296,7 @@ public class SwissPairingMinimalWeightMatchingTest {
                 playedPairs.add(pairing);
 
                 round.addPairing(pairing);
-                if (rnd.nextBoolean()) {
+                if (RandomUtil.nextBoolean()) {
                     pairing.getPlayer1().setPoints(pairing.getPlayer1().getPoints() + 3);
                 } else {
                     pairing.getPlayer2().setPoints(pairing.getPlayer2().getPoints() + 3);

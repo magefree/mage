@@ -127,11 +127,11 @@ class SageOfHoursEffect extends OneShotEffect {
             for (int i = 0; i < turns; i++) {
                 game.getState().getTurnMods().add(new TurnMod(player.getId(), false));
             }
-            game.informPlayers(new StringBuilder("Removed ").append(countersRemoved)
-                    .append(" +1/+1 counters: ").append(player.getLogName()).append(" takes ")
-                    .append(CardUtil.numberToText(turns, "an"))
-                    .append(turns > 1 ? " extra turns ":" extra turn ")
-                    .append("after this one").toString());
+            game.informPlayers("Removed " + countersRemoved +
+                    " +1/+1 counters: " + player.getLogName() + " takes " +
+                    CardUtil.numberToText(turns, "an") +
+                    (turns > 1 ? " extra turns " : " extra turn ") +
+                    "after this one");
             return true;
         }
         return false;

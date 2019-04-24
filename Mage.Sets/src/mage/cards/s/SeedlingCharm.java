@@ -44,13 +44,13 @@ public final class SeedlingCharm extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter1));
         // or regenerate target green creature
         Mode mode = new Mode();
-        mode.getEffects().add(new RegenerateTargetEffect());
-        mode.getTargets().add(new TargetPermanent(filter2));
+        mode.addEffect(new RegenerateTargetEffect());
+        mode.addTarget(new TargetPermanent(filter2));
         this.getSpellAbility().addMode(mode);
         // or target creature gains trample until end of turn.
         mode = new Mode();
-        mode.getEffects().add(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
-        mode.getTargets().add(new TargetCreaturePermanent());
+        mode.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
+        mode.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
     }
 

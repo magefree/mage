@@ -26,7 +26,7 @@ public final class NosyGoblin extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("face down creature");
 
     static {
-        filter.add(new FaceDownPredicate());
+        filter.add(FaceDownPredicate.instance);
     }
 
     public NosyGoblin(UUID ownerId, CardSetInfo setInfo) {

@@ -24,8 +24,8 @@ import mage.filter.common.FilterControlledEnchantmentPermanent;
  */
 public final class BloodCursedKnight extends CardImpl {
 
-    final static private String rule1 = "As long as you control an enchantment, {this} gets +1/+1";
-    final static private String rule2 = "and has lifelink";
+    static final private String rule1 = "As long as you control an enchantment, {this} gets +1/+1";
+    static final private String rule2 = "and has lifelink";
 
     public BloodCursedKnight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{B}");

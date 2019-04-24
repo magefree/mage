@@ -41,7 +41,7 @@ import mage.constants.SuperType;
  */
 public final class TamiyoFieldResearcher extends CardImpl {
 
-    private final static FilterPermanent filter = new FilterPermanent("nonland permanent");
+    private static final FilterPermanent filter = new FilterPermanent("nonland permanent");
 
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));

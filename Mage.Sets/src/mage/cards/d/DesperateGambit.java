@@ -8,7 +8,6 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
-import mage.abilities.effects.common.PreventDamageBySourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -21,7 +20,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.filter.FilterObject;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.players.Player;
 import mage.target.TargetSource;
 import mage.util.CardUtil;
@@ -68,8 +66,11 @@ class DesperateGambitEffect extends PreventionEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         this.target.choose(Outcome.Benefit, source.getControllerId(), source.getSourceId(), game);
-        this.wonFlip = game.getPlayer(source.getControllerId()).flipCoin(game);
-        super.init(source, game);
+        Player you = game.getPlayer(source.getControllerId());
+        if(you != null) {
+            wonFlip = you.flipCoin(source, game, true);
+            super.init(source, game);
+        }
     }
 
     @Override

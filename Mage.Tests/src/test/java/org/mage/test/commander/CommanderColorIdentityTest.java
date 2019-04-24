@@ -1,11 +1,9 @@
-
 package org.mage.test.commander;
 
 import mage.cards.Card;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.filter.FilterMana;
-import mage.util.CardUtil;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestCommander3PlayersFFA;

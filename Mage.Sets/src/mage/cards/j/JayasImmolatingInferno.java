@@ -25,7 +25,7 @@ public final class JayasImmolatingInferno extends CardImpl {
         this.addAbility(new LegendarySpellAbility());
 
         // Jaya's Immolating Inferno deals X damage to each of up to three targets.
-        Effect effect = new DamageTargetEffect(new ManacostVariableValue());
+        Effect effect = new DamageTargetEffect(ManacostVariableValue.instance);
         effect.setText("{this} deals X damage to each of up to three targets");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetAnyTarget(1, 3));

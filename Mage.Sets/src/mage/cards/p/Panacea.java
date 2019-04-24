@@ -25,7 +25,7 @@ public final class Panacea extends CardImpl {
 
         // {X}{X}, {tap}: Prevent the next X damage that would be dealt to any target this turn.
         Ability ability = new SimpleActivatedAbility(
-                new PreventDamageToTargetEffect(Duration.EndOfTurn, false, true, new ManacostVariableValue()),
+                new PreventDamageToTargetEffect(Duration.EndOfTurn, false, true, ManacostVariableValue.instance),
                 new ManaCostsImpl("{X}{X}")
         );
         ability.addCost(new TapSourceCost());

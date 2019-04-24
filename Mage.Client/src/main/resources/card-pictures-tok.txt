@@ -86,6 +86,8 @@
 |Generate|EMBLEM:MMA|Elspeth, Knight Errant||Emblem Elspeth|ElspethKnightErrantEmblem|
 |Generate|EMBLEM:SWS|Obi-Wan Kenobi||Emblem Obi-Wan Kenobi|ObiWanKenobiEmblem|
 |Generate|EMBLEM:RIX|Huatli, Radiant Champion||Emblem Huatli|HuatliRadiantChampionEmblem|
+|Generate|EMBLEM:RNA|Domri, Chaos Bringer||Emblem Domri|DomriChaosBringerEmblem|
+|Generate|EMBLEM:WAR|Nissa, Who Shakes the World||Emblem Nissa|NissaWhoShakesTheWorldEmblem|
 |Generate|PLANE:PCA|Plane - Academy At Tolaria West|||AcademyAtTolariaWestPlane|
 |Generate|PLANE:PCA|Plane - Agyrem|||AgyremPlane|
 |Generate|PLANE:PCA|Plane - Akoum|||AkoumPlane|
@@ -105,6 +107,8 @@
 |Generate|PLANE:PCA|Plane - Truga Jungle|||TrugaJunglePlane|
 |Generate|PLANE:PCA|Plane - Turri Island|||TurriIslandPlane|
 |Generate|PLANE:PCA|Plane - Undercity Reaches|||UndercityReachesPlane|
+|Generate|TOK:ANA|Goblin|||GoblinToken|
+|Generate|TOK:ANA|Spirit|||SpiritWhiteToken|
 |Generate|TOK:PCA|Eldrazi|||EldraziAnnihilatorToken|
 |Generate|TOK:10E|Ape|||PongifyApeToken|
 |Generate|TOK:10E|Dragon|||DragonToken2|
@@ -185,6 +189,7 @@
 |Generate|TOK:ALL|Graveborn|||SekKuarDeathkeeperGravebornToken|
 |Generate|TOK:ALL|Hippo|||HippoToken|
 |Generate|TOK:ALL|Soldier|||SoldierToken|
+|Generate|TOK:ALL|Starfish|||StarfishToken|
 |Generate|TOK:ALL|Zombie|||ZombieToken|
 |Generate|TOK:APC|Angel|||HauntedAngelToken|
 |Generate|TOK:APC|Cat|||PenumbraBobcatToken|
@@ -1182,3 +1187,39 @@
 |Generate|TOK:ZEN|Vampire||
 |Generate|TOK:ZEN|Wolf|||WolfToken|
 |Generate|TOK:ZEN|Zombie Giant|||QuestForTheGravelordZombieToken|
+|Generate|TOK:RNA|Beast|||RedGreenBeastToken|
+|Generate|TOK:RNA|Centaur|||CentaurToken|
+|Generate|TOK:RNA|Frog Lizard|||FrogLizardToken|
+|Generate|TOK:RNA|Goblin|||GoblinToken|
+|Generate|TOK:RNA|Human|||HumanToken|
+|Generate|TOK:RNA|Illusion|||MesmerizingBenthidToken|
+|Generate|TOK:RNA|Ooze|||BiogenicOozeToken|
+|Generate|TOK:RNA|Sphinx|||WardenSphinxToken|
+|Generate|TOK:RNA|Spirit|||SpiritWhiteToken|
+|Generate|TOK:RNA|Thopter|||ThopterToken|
+|Generate|TOK:RNA|Treasure|||TreasureToken|
+|Generate|TOK:RNA|Zombie|||ZombieToken|
+|Generate|TOK:WAR|Angel|||AngelVigilanceToken|
+|Generate|TOK:WAR|Assassin|||AssassinToken2|
+|Generate|TOK:WAR|Devil|||DevilToken|
+|Generate|TOK:WAR|Dragon|||DragonToken|
+|Generate|TOK:WAR|Goblin|||GoblinToken|
+|Generate|TOK:WAR|Servo|||ServoToken|
+|Generate|TOK:WAR|Soldier|||SoldierVigilanceToken|
+|Generate|TOK:WAR|Spirit|||UginTheIneffableToken|
+|Generate|TOK:WAR|Voja, Friend to Elves|||VojaFriendToElvesToken|
+|Generate|TOK:WAR|Wall|||TeyoToken|
+|Generate|TOK:WAR|Wizard|||WizardToken|
+|Generate|TOK:WAR|Wolf|||WolfToken|
+|Generate|TOK:WAR|Zombie|||ZombieToken|
+|Generate|TOK:WAR|Zombie Warrior|||GodEternalOketraToken|
+|Generate|TOK:WAR|Zombie Army|1||ZombieArmyToken|
+|Generate|TOK:WAR|Zombie Army|2||ZombieArmyToken|
+|Generate|TOK:WAR|Zombie Army|3||ZombieArmyToken|
+
+
+
+
+
+
+

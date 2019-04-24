@@ -25,7 +25,7 @@ public final class PoeDameron extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
         filterStarship.add(new ControllerPredicate(TargetController.YOU));
         filterStarship.add(new SubtypePredicate(SubType.STARSHIP));
     }

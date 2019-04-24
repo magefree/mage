@@ -1,7 +1,5 @@
-
 package mage.abilities.keyword;
 
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -19,18 +17,19 @@ import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * 702.46. Offering # 702.46a Offering is a static ability of a card that
  * functions in any zone from which the card can be cast. "[Subtype] offering"
  * means "You may cast this card any time you could cast an instant by
  * sacrificing a [subtype] permanent. If you do, the total cost to cast this
  * card is reduced by the sacrificed permanent's mana cost." #
- *
+ * <p>
  * 702.46b The permanent is sacrificed at the same time the spell is announced
  * (see rule 601.2a). The total cost of the spell is reduced by the sacrificed
  * permanent's mana cost (see rule 601.2e). #
- *
+ * <p>
  * 702.46c Generic mana in the sacrificed permanent's mana cost reduces generic
  * mana in the total cost to cast the card with offering. Colored mana in the
  * sacrificed permanent's mana cost reduces mana of the same color in the total
@@ -39,7 +38,6 @@ import mage.util.CardUtil;
  * cost of the card with offering, or is in excess of the card's colored mana
  * cost, reduces that much generic mana in the total cost. #
  *
- *
  * @author LevelX2
  */
 public class OfferingAbility extends StaticAbility {
@@ -47,7 +45,6 @@ public class OfferingAbility extends StaticAbility {
     private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     /**
-     *
      * @param subtype name of the subtype that can be offered
      */
     public OfferingAbility(SubType subtype) {
@@ -107,7 +104,7 @@ class OfferingAsThoughEffect extends AsThoughEffectImpl {
     public boolean applies(UUID sourceId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
         if (sourceId.equals(source.getSourceId())) {
             Card card = game.getCard(sourceId);
-            if (!card.isOwnedBy(source.getControllerId())) {
+            if (card == null || !card.isOwnedBy(source.getControllerId())) {
                 return false;
             }
             // because can activate is always called twice, result from first call will be used
@@ -129,6 +126,9 @@ class OfferingAsThoughEffect extends AsThoughEffectImpl {
                 }
                 FilterControlledCreaturePermanent filter = ((OfferingAbility) source).getFilter();
                 Card spellToCast = game.getCard(source.getSourceId());
+                if (spellToCast == null) {
+                    return false;
+                }
                 Player player = game.getPlayer(source.getControllerId());
                 if (player != null && !CardUtil.isCheckPlayableMode(affectedAbility)
                         && player.chooseUse(Outcome.Benefit, "Offer a " + filter.getMessage() + " to cast " + spellToCast.getName() + '?', source, game)) {
@@ -146,7 +146,6 @@ class OfferingAsThoughEffect extends AsThoughEffectImpl {
                         game.getState().setValue("offering_ok_" + card.getId(), true);
                         game.getState().setValue("offering_Id_" + card.getId(), activationId);
                         return true;
-
                     }
                 } else {
                     game.getState().setValue("offering_" + card.getId(), true);
@@ -201,7 +200,7 @@ class OfferingCostReductionEffect extends CostModificationEffectImpl {
             Card card = game.getCard(source.getSourceId());
             if (card != null) {
                 Object object = game.getState().getValue("offering_Id_" + card.getId());
-                if (object != null && ((UUID) object).equals(this.activationId) && offeredPermanent.getPermanent(game) != null) {
+                if (object != null && object.equals(this.activationId) && offeredPermanent.getPermanent(game) != null) {
                     return true;
                 }
             }

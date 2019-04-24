@@ -1,13 +1,12 @@
-
 package mage.abilities.effects.common;
 
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
 
 /**
  *
@@ -34,11 +33,9 @@ public class SacrificeSourceEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
         if (sourceObject == null) {
             // Check if the effect was installed by the spell the source was cast by (e.g. Necromancy), if not don't sacrifice the permanent
-            if (source.getSourceObject(game) instanceof Spell) {
+            if (game.getState().getZone(source.getSourceId()).equals(Zone.BATTLEFIELD)
+                    && source.getSourceObjectZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(source.getSourceId())) {
                 sourceObject = game.getPermanent(source.getSourceId());
-                if (sourceObject != null && sourceObject.getZoneChangeCounter(game) > source.getSourceObjectZoneChangeCounter() + 1) {
-                    return false;
-                }
             }
         }
         if (sourceObject instanceof Permanent) {

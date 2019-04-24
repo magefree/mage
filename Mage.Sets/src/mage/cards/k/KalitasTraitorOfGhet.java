@@ -37,7 +37,7 @@ public final class KalitasTraitorOfGhet extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another Vampire or Zombie");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(Predicates.or(new SubtypePredicate(SubType.VAMPIRE),
                 (new SubtypePredicate(SubType.ZOMBIE))));
     }

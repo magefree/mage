@@ -28,8 +28,8 @@ public class ReversalOfFortuneTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Lightning Bolt");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reversal of Fortune", playerB);
-        addTarget(playerA, "Lightning Bolt");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, "Lightning Bolt"); // select to copy
+        setChoice(playerA, "Yes"); // cast copy
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

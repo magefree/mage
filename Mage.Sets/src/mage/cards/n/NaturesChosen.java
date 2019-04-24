@@ -49,7 +49,7 @@ public final class NaturesChosen extends CardImpl {
     
     static {
         filterWhiteUntappedCreature.add(new ColorPredicate(ObjectColor.WHITE));
-        filterWhiteUntappedCreature.add(Predicates.not(new TappedPredicate()));
+        filterWhiteUntappedCreature.add(Predicates.not(TappedPredicate.instance));
     }
 
     public NaturesChosen(UUID ownerId, CardSetInfo setInfo) {

@@ -4,6 +4,7 @@ package mage.cards.d;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -28,7 +29,7 @@ import mage.target.common.TargetControlledPermanent;
 public final class DivineReckoning extends CardImpl {
 
     public DivineReckoning(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
 
         // Each player chooses a creature he or she controls. Destroy the rest.
         this.getSpellAbility().addEffect(new DivineReckoningEffect());
@@ -65,15 +66,16 @@ class DivineReckoningEffect extends OneShotEffect {
         if (controller != null) {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
-
-                Target target = new TargetControlledPermanent(1, 1, new FilterControlledCreaturePermanent(), true);
-                if (target.canChoose(player.getId(), game)) {
-                    while (player.canRespond() && !target.isChosen() && target.canChoose(player.getId(), game)) {
-                        player.chooseTarget(Outcome.Benefit, target, source, game);
-                    }
-                    Permanent permanent = game.getPermanent(target.getFirstTarget());
-                    if (permanent != null) {
-                        chosen.add(permanent);
+                if (player != null) {
+                    Target target = new TargetControlledPermanent(1, 1, new FilterControlledCreaturePermanent(), true);
+                    if (target.canChoose(player.getId(), game)) {
+                        while (player.canRespond() && !target.isChosen() && target.canChoose(player.getId(), game)) {
+                            player.chooseTarget(Outcome.Benefit, target, source, game);
+                        }
+                        Permanent permanent = game.getPermanent(target.getFirstTarget());
+                        if (permanent != null) {
+                            chosen.add(permanent);
+                        }
                     }
                 }
             }

@@ -75,6 +75,7 @@ public final class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Cho-Manno, Revolutionary", 11, Rarity.RARE, mage.cards.c.ChoMannoRevolutionary.class));
         cards.add(new SetCardInfo("Cho-Manno's Blessing", 12, Rarity.COMMON, mage.cards.c.ChoMannosBlessing.class));
         cards.add(new SetCardInfo("Cinder Elemental", 183, Rarity.UNCOMMON, mage.cards.c.CinderElemental.class));
+        cards.add(new SetCardInfo("Clear the Land", 235, Rarity.RARE, mage.cards.c.ClearTheLand.class));
         cards.add(new SetCardInfo("Close Quarters", 184, Rarity.UNCOMMON, mage.cards.c.CloseQuarters.class));
         cards.add(new SetCardInfo("Cloud Sprite", 67, Rarity.COMMON, mage.cards.c.CloudSprite.class));
         cards.add(new SetCardInfo("Coastal Piracy", 68, Rarity.UNCOMMON, mage.cards.c.CoastalPiracy.class));
@@ -174,6 +175,7 @@ public final class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 337, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 338, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ivory Mask", 24, Rarity.RARE, mage.cards.i.IvoryMask.class));
+        cards.add(new SetCardInfo("Jeweled Torque", 301, Rarity.UNCOMMON, mage.cards.j.JeweledTorque.class));
         cards.add(new SetCardInfo("Jhovall Queen", 25, Rarity.RARE, mage.cards.j.JhovallQueen.class));
         cards.add(new SetCardInfo("Jhovall Rider", 26, Rarity.UNCOMMON, mage.cards.j.JhovallRider.class));
         cards.add(new SetCardInfo("Karn's Touch", 86, Rarity.RARE, mage.cards.k.KarnsTouch.class));
@@ -201,6 +203,7 @@ public final class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Mercadia's Downfall", 205, Rarity.UNCOMMON, mage.cards.m.MercadiasDownfall.class));
         cards.add(new SetCardInfo("Mercadian Atlas", 305, Rarity.RARE, mage.cards.m.MercadianAtlas.class));
         cards.add(new SetCardInfo("Mercadian Bazaar", 321, Rarity.UNCOMMON, mage.cards.m.MercadianBazaar.class));
+        cards.add(new SetCardInfo("Mercadian Lift", 306, Rarity.RARE, mage.cards.m.MercadianLift.class));
         cards.add(new SetCardInfo("Midnight Ritual", 146, Rarity.RARE, mage.cards.m.MidnightRitual.class));
         cards.add(new SetCardInfo("Misdirection", 87, Rarity.RARE, mage.cards.m.Misdirection.class));
         cards.add(new SetCardInfo("Misshapen Fiend", 147, Rarity.COMMON, mage.cards.m.MisshapenFiend.class));

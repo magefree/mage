@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import mage.MageInt;
@@ -22,27 +21,26 @@ import mage.target.common.TargetCreaturePermanent;
 import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class BoldwyrIntimidator extends CardImpl {
 
     public BoldwyrIntimidator(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");
         this.subtype.add(SubType.GIANT, SubType.WARRIOR);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
         // Cowards can't block Warriors.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoldwyrIntimidatorEffect()));
-        
+
         // {R}: Target creature becomes a Coward until end of turn.
         Effect effect = new BecomesCreatureTypeTargetEffect(Duration.EndOfTurn, SubType.COWARD);
         effect.setText("Target creature becomes a Coward until end of turn");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{R}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-        
+
         // {2}{R}: Target creature becomes a Warrior until end of turn.
         effect = new BecomesCreatureTypeTargetEffect(Duration.EndOfTurn, SubType.WARRIOR);
         effect.setText("Target creature becomes a Warrior until end of turn");
@@ -75,14 +73,11 @@ class BoldwyrIntimidatorEffect extends RestrictionEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (sourcePermanent != null) {
-            return true;
-        }
-        return false;
+        return sourcePermanent != null;
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         if (attacker != null && blocker != null) {
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             if (sourcePermanent != null && attacker.hasSubtype(SubType.WARRIOR, game)) {

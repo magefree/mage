@@ -23,7 +23,7 @@ public final class SupplyDemand extends SplitCard {
     private static final FilterCard filter = new FilterCard("multicolored card");
 
     static {
-        filter.add(new MulticoloredPredicate());
+        filter.add(MulticoloredPredicate.instance);
     }
 
     public SupplyDemand(UUID ownerId, CardSetInfo setInfo) {
@@ -31,7 +31,7 @@ public final class SupplyDemand extends SplitCard {
 
         // Supply
         // create X 1/1 green Saproling creature tokens.
-        getLeftHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), new ManacostVariableValue()));
+        getLeftHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), ManacostVariableValue.instance));
 
         // Demand
         // Search your library for a multicolored card, reveal it, and put it into your hand. Then shuffle your library.

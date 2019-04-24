@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -35,15 +34,21 @@ public final class RunechantersPike extends CardImpl {
     }
 
     public RunechantersPike(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
 
         // Equipped creature has first strike and gets +X/+0 where X is the number of instant and sorcery cards in your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(new RunechantersPikeValue(), new StaticValue(0))));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        Effect effect = new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT);
+        Effect effect2 = new BoostEquippedEffect(new RunechantersPikeValue(), new StaticValue(0));
+        effect.setText("Equipped creature has first strike");
+        effect2.setText(" and gets +X/+0 where X is the number of instant and sorcery cards in your graveyard.");
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        ability.addEffect(effect2);
+        this.addAbility(ability);
+
     }
 
     public RunechantersPike(final RunechantersPike card) {

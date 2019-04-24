@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -64,10 +63,10 @@ class CongregationAtDawnEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && sourceObject != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(0, 3, new FilterCreatureCard("creature cards"));
-            if (controller.searchLibrary(target, game)) {
+            if (controller.searchLibrary(target, source, game)) {
                 if (!target.getTargets().isEmpty()) {
                     Cards revealed = new CardsImpl();
-                    for (UUID cardId : (List<UUID>) target.getTargets()) {
+                    for (UUID cardId : target.getTargets()) {
                         Card card = controller.getLibrary().remove(cardId, game);
                         revealed.add(card);
                     }

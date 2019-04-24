@@ -1,7 +1,5 @@
-
 package mage.abilities.effects.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -14,8 +12,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  * @author North
  */
@@ -161,11 +160,15 @@ public class DamageTargetEffect extends OneShotEffect {
         if (!targetDescription.isEmpty()) {
             sb.append(targetDescription);
         } else {
-            String targetName = mode.getTargets().get(0).getTargetName();
-            if (targetName.contains("any")) {
-                sb.append(targetName);
+            if (!mode.getTargets().isEmpty()) {
+                String targetName = mode.getTargets().get(0).getTargetName();
+                if (targetName.contains("any")) {
+                    sb.append(targetName);
+                } else {
+                    sb.append("target ").append(targetName);
+                }
             } else {
-                sb.append("target ").append(targetName);
+                sb.append("that target");
             }
         }
         if (!message.isEmpty()) {

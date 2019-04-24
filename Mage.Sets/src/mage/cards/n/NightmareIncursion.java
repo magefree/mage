@@ -80,7 +80,7 @@ class NightmareIncursionEffect extends OneShotEffect {
         if (controller != null && targetPlayer != null) {
             int amount = new PermanentsOnBattlefieldCount(filter).calculate(game, source, this);
             TargetCardInLibrary target = new TargetCardInLibrary(0, amount, new FilterCard());
-            if (controller.searchLibrary(target, game, targetPlayer.getId())) {
+            if (controller.searchLibrary(target, source, game, targetPlayer.getId())) {
                 List<UUID> targetId = target.getTargets();
                 for (UUID targetCard : targetId) {
                     Card card = targetPlayer.getLibrary().remove(targetCard, game);

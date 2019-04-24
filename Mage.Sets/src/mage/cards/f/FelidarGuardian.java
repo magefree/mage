@@ -25,7 +25,7 @@ public final class FelidarGuardian extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another target permanent you control");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public FelidarGuardian(UUID ownerId, CardSetInfo setInfo) {

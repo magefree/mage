@@ -27,7 +27,7 @@ public final class SylvanYeti extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Sylvan Yeti's power is equal to the number of cards in your hand.
-        Effect effect = new SetPowerSourceEffect(new CardsInControllerHandCount(), Duration.EndOfGame);
+        Effect effect = new SetPowerSourceEffect(CardsInControllerHandCount.instance, Duration.EndOfGame);
         this.addAbility(new SimpleStaticAbility(Zone.ALL, effect));
     }
 

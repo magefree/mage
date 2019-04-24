@@ -2,6 +2,7 @@ package mage.client.preference;
 
 import com.google.common.collect.Sets;
 import mage.client.MageFrame;
+import mage.client.util.Config;
 
 import java.util.Set;
 import java.util.prefs.BackingStoreException;
@@ -16,8 +17,12 @@ public final class MagePreferences {
     private static final String KEY_PASSWORD = "password";
     private static final String KEY_EMAIL = "email";
     private static final String KEY_AUTO_CONNECT = "autoConnect";
-
     private static final String NODE_KEY_IGNORE_LIST = "ignoreListString";
+
+    private static String lastServerAddress = "";
+    private static int lastServerPort = 0;
+    private static String lastServerUser = "";
+    private static String lastServerPassword = "";
 
     private static Preferences prefs() {
         // TODO: Move MageFrame.prefs to this class.
@@ -138,4 +143,26 @@ public final class MagePreferences {
         return prefs().node(NODE_KEY_IGNORE_LIST).node(serverAddress);
     }
 
+    public static void saveLastServer() {
+        lastServerAddress = getServerAddressWithDefault(Config.serverName);
+        lastServerPort = getServerPortWithDefault(Config.port);
+        lastServerUser = getUserName(lastServerAddress);
+        lastServerPassword = getPassword(lastServerAddress);
+    }
+
+    public static String getLastServerAddress() {
+        return lastServerAddress.isEmpty() ? getServerAddress() : lastServerAddress;
+    }
+
+    public static int getLastServerPort() {
+        return lastServerPort == 0 ? getServerPort() : lastServerPort;
+    }
+
+    public static String getLastServerUser() {
+        return lastServerUser.isEmpty() ? getUserName(getLastServerAddress()) : lastServerUser;
+    }
+
+    public static String getLastServerPassword() {
+        return lastServerPassword.isEmpty() ? getPassword(getLastServerAddress()) : lastServerPassword;
+    }
 }

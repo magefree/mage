@@ -39,7 +39,7 @@ public class ManaOptionsTestUtils {
         for(Mana mana: manaList){
             String s = mana.toString();
             if(list.contains(s)){
-                Assert.fail("Founded duplicated mana option " + s + " in " + manaList.toString());
+                Assert.fail("Found duplicated mana option " + s + " in " + manaList.toString());
             }else{
                 list.add(s);
             }

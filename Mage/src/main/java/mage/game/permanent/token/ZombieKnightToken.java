@@ -12,7 +12,7 @@ import mage.constants.SubType;
 
 public final class ZombieKnightToken extends TokenImpl {
 
-    final static private List<String> tokenImageSets = new ArrayList<>();
+    static final private List<String> tokenImageSets = new ArrayList<>();
     static {
         tokenImageSets.addAll(Arrays.asList("DOM"));
     }

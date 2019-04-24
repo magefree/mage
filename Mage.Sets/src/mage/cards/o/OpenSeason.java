@@ -1,7 +1,5 @@
-
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -22,10 +20,11 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetadjustment.TargetAdjuster;
+
+import java.util.UUID;
 
 /**
- *
  * @author Styxo
  */
 public final class OpenSeason extends CardImpl {
@@ -37,7 +36,7 @@ public final class OpenSeason extends CardImpl {
         Effect effect = new AddCountersTargetEffect(CounterType.BOUNTY.createInstance());
         effect.setText("for each opponent, put a bounty counter on target creature that player controls");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect);
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.setTargetAdjuster(OpenSeasonAdjuster.instance);
         this.addAbility(ability);
 
         // Creatures your opponent control with bounty counters on them can't activate abilities
@@ -48,19 +47,6 @@ public final class OpenSeason extends CardImpl {
 
     }
 
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof EntersBattlefieldTriggeredAbility) {
-            ability.getTargets().clear();
-            for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
-                Player opponent = game.getPlayer(opponentId);
-                if (opponent != null) {
-                    ability.addTarget(new TargetPermanent(new FilterCreaturePermanent("creature from opponent " + opponent.getLogName())));
-                }
-            }
-        }
-    }
-
     public OpenSeason(final OpenSeason card) {
         super(card);
     }
@@ -68,6 +54,21 @@ public final class OpenSeason extends CardImpl {
     @Override
     public OpenSeason copy() {
         return new OpenSeason(this);
+    }
+}
+
+enum OpenSeasonAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        ability.getTargets().clear();
+        for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
+            Player opponent = game.getPlayer(opponentId);
+            if (opponent != null) {
+                ability.addTarget(new TargetPermanent(new FilterCreaturePermanent("creature from opponent " + opponent.getLogName())));
+            }
+        }
     }
 }
 
@@ -90,7 +91,7 @@ class OpenSeasonRestrictionEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game) {
+    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game, boolean canUseChooseDialogs) {
         return false;
     }
 

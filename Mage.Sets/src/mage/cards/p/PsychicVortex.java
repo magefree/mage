@@ -72,7 +72,7 @@ class PsychicVortexCost extends CostImpl {
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         Player controller = game.getPlayer(controllerId);
-        return controller.getLibrary().hasCards();
+        return controller != null && controller.getLibrary().hasCards();
     }
     
     @Override

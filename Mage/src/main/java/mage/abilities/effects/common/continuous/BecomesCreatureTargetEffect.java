@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
@@ -7,7 +6,6 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.Target;
 import mage.util.CardUtil;
@@ -22,26 +20,34 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
     protected Token token;
     protected boolean loseAllAbilities;
     protected boolean addStillALandText;
+    protected boolean loseName;
+
+
+    public BecomesCreatureTargetEffect(Token token, boolean loseAllAbilities, boolean stillALand, Duration duration) {
+        this(token, loseAllAbilities, stillALand, duration, false);
+    }
 
     /**
-     *
      * @param token
      * @param loseAllAbilities loses all subtypes and colors
-     * @param stillALand add rule text, "it's still a land"
+     * @param stillALand       add rule text, "it's still a land"
+     * @param loseName         permanent lose name and get's it from token
      * @param duration
      */
-    public BecomesCreatureTargetEffect(Token token, boolean loseAllAbilities, boolean stillALand, Duration duration) {
+    public BecomesCreatureTargetEffect(Token token, boolean loseAllAbilities, boolean stillALand, Duration duration, boolean loseName) {
         super(duration, Outcome.BecomeCreature);
         this.token = token;
         this.loseAllAbilities = loseAllAbilities;
         this.addStillALandText = stillALand;
+        this.loseName = loseName;
     }
 
     public BecomesCreatureTargetEffect(final BecomesCreatureTargetEffect effect) {
         super(effect);
-        token = effect.token.copy();
+        this.token = effect.token.copy();
         this.loseAllAbilities = effect.loseAllAbilities;
         this.addStillALandText = effect.addStillALandText;
+        this.loseName = effect.loseName;
     }
 
     @Override
@@ -56,10 +62,17 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
             Permanent permanent = game.getPermanent(permanentId);
             if (permanent != null) {
                 switch (layer) {
+                    case TextChangingEffects_3:
+                        if (sublayer == SubLayer.NA) {
+                            if (loseName) {
+                                permanent.setName(token.getName());
+                            }
+                        }
+                        break;
                     case TypeChangingEffects_4:
                         if (sublayer == SubLayer.NA) {
                             if (loseAllAbilities) {
-                                permanent.getSubtype(game).retainAll(SubType.getLandTypes(false));
+                                permanent.getSubtype(game).retainAll(SubType.getLandTypes());
                                 permanent.getSubtype(game).addAll(token.getSubtype(game));
                             } else {
                                 if (!token.getSubtype(game).isEmpty()) {
@@ -128,7 +141,11 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean hasLayer(Layer layer) {
-        return layer == Layer.PTChangingEffects_7 || layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.ColorChangingEffects_5 || layer == Layer.TypeChangingEffects_4;
+        return layer == Layer.PTChangingEffects_7
+                || layer == Layer.AbilityAddingRemovingEffects_6
+                || layer == Layer.ColorChangingEffects_5
+                || layer == Layer.TypeChangingEffects_4
+                || layer == Layer.TextChangingEffects_3;
     }
 
     @Override

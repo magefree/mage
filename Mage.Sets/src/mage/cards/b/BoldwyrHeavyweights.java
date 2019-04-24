@@ -73,7 +73,7 @@ class BoldwyrHeavyweightsEffect extends OneShotEffect {
             Player opponent = game.getPlayer(opponentId);
             if (opponent != null && opponent.chooseUse(Outcome.PutCreatureInPlay, "Search your library for a creature card and put it onto the battlefield?", source, game)) {
                 TargetCardInLibrary target = new TargetCardInLibrary(new FilterCreatureCard());
-                if (opponent.searchLibrary(target, game)) {
+                if (opponent.searchLibrary(target, source, game)) {
                     Card targetCard = opponent.getLibrary().getCard(target.getFirstTarget(), game);
                     if (targetCard != null) {
                         opponent.moveCards(targetCard, Zone.BATTLEFIELD, source, game);

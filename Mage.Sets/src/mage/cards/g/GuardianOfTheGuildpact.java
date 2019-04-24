@@ -20,7 +20,7 @@ public final class GuardianOfTheGuildpact extends CardImpl {
     private static final FilterCard filter = new FilterCard("monocolored");
 
     static {
-        filter.add(new MonocoloredPredicate());
+        filter.add(MonocoloredPredicate.instance);
     }
 
     public GuardianOfTheGuildpact(UUID ownerId, CardSetInfo setInfo) {

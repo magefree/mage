@@ -29,7 +29,7 @@ public final class AshenmoorCohort extends CardImpl {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     private static final String rule = "Ashenmoor Cohort gets +1/+1 as long as you control another black creature";

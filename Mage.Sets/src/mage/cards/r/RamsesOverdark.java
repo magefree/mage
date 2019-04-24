@@ -26,7 +26,7 @@ public final class RamsesOverdark extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("enchanted creature");
 
     static {
-        filter.add(new EnchantedPredicate());
+        filter.add(EnchantedPredicate.instance);
     }
 
     public RamsesOverdark(UUID ownerId, CardSetInfo setInfo) {

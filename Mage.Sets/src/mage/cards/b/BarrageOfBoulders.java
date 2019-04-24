@@ -1,24 +1,25 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.FerociousCondition;
 import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.combat.CantBlockAllEffect;
+import mage.abilities.hint.common.FerociousHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
+import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
+
 /**
- *
  * @author LevelX2
  */
 public final class BarrageOfBoulders extends CardImpl {
@@ -41,6 +42,7 @@ public final class BarrageOfBoulders extends CardImpl {
                 new LockedInCondition(FerociousCondition.instance), null);
         effect.setText("<br/><i>Ferocious</i> &mdash; If you control a creature with power 4 or greater, creatures can't block this turn");
         this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addHint(FerociousHint.instance);
     }
 
     public BarrageOfBoulders(final BarrageOfBoulders card) {

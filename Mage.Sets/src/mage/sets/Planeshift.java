@@ -30,6 +30,7 @@ public final class Planeshift extends ExpansionSet {
 
         cards.add(new SetCardInfo("Allied Strategies", 20, Rarity.UNCOMMON, mage.cards.a.AlliedStrategies.class));
         cards.add(new SetCardInfo("Alpha Kavu", 77, Rarity.UNCOMMON, mage.cards.a.AlphaKavu.class));
+        cards.add(new SetCardInfo("Amphibious Kavu", 78, Rarity.COMMON, mage.cards.a.AmphibiousKavu.class));
         cards.add(new SetCardInfo("Ancient Spider", 96, Rarity.RARE, mage.cards.a.AncientSpider.class));
         cards.add(new SetCardInfo("Arctic Merfolk", 21, Rarity.COMMON, mage.cards.a.ArcticMerfolk.class));
         cards.add(new SetCardInfo("Aura Blast", 1, Rarity.COMMON, mage.cards.a.AuraBlast.class));
@@ -50,6 +51,7 @@ public final class Planeshift extends ExpansionSet {
         cards.add(new SetCardInfo("Destructive Flow", 102, Rarity.RARE, mage.cards.d.DestructiveFlow.class));
         cards.add(new SetCardInfo("Diabolic Intent", 42, Rarity.RARE, mage.cards.d.DiabolicIntent.class));
         cards.add(new SetCardInfo("Disciple of Kangee", 3, Rarity.COMMON, mage.cards.d.DiscipleOfKangee.class));
+        cards.add(new SetCardInfo("Dominaria's Judgment", 4, Rarity.RARE, mage.cards.d.DominariasJudgment.class));
         cards.add(new SetCardInfo("Doomsday Specter", 103, Rarity.RARE, mage.cards.d.DoomsdaySpecter.class));
         cards.add(new SetCardInfo("Draco", 131, Rarity.RARE, mage.cards.d.Draco.class));
         cards.add(new SetCardInfo("Dralnu's Crusade", 104, Rarity.RARE, mage.cards.d.DralnusCrusade.class));
@@ -71,6 +73,7 @@ public final class Planeshift extends ExpansionSet {
         cards.add(new SetCardInfo("Gainsay", 26, Rarity.UNCOMMON, mage.cards.g.Gainsay.class));
         cards.add(new SetCardInfo("Gerrard's Command", 109, Rarity.COMMON, mage.cards.g.GerrardsCommand.class));
         cards.add(new SetCardInfo("Goblin Game", 61, Rarity.RARE, mage.cards.g.GoblinGame.class));
+        cards.add(new SetCardInfo("Guard Dogs", 5, Rarity.UNCOMMON, mage.cards.g.GuardDogs.class));
         cards.add(new SetCardInfo("Heroic Defiance", 6, Rarity.COMMON, mage.cards.h.HeroicDefiance.class));
         cards.add(new SetCardInfo("Hobble", 7, Rarity.COMMON, mage.cards.h.Hobble.class));
         cards.add(new SetCardInfo("Honorable Scout", 8, Rarity.COMMON, mage.cards.h.HonorableScout.class));
@@ -95,6 +98,7 @@ public final class Planeshift extends ExpansionSet {
         cards.add(new SetCardInfo("Meddling Mage", 116, Rarity.RARE, mage.cards.m.MeddlingMage.class));
         cards.add(new SetCardInfo("Meteor Crater", 140, Rarity.RARE, mage.cards.m.MeteorCrater.class));
         cards.add(new SetCardInfo("Mire Kavu", 67, Rarity.COMMON, mage.cards.m.MireKavu.class));
+        cards.add(new SetCardInfo("Mirrorwood Treefolk", 83, Rarity.UNCOMMON, mage.cards.m.MirrorwoodTreefolk.class));
         cards.add(new SetCardInfo("Mogg Jailer", 68, Rarity.UNCOMMON, mage.cards.m.MoggJailer.class));
         cards.add(new SetCardInfo("Mogg Sentry", 69, Rarity.RARE, mage.cards.m.MoggSentry.class));
         cards.add(new SetCardInfo("Morgue Toad", 46, Rarity.COMMON, mage.cards.m.MorgueToad.class));
@@ -103,6 +107,7 @@ public final class Planeshift extends ExpansionSet {
         cards.add(new SetCardInfo("Nemata, Grove Guardian", 85, Rarity.RARE, mage.cards.n.NemataGroveGuardian.class));
         cards.add(new SetCardInfo("Nightscape Battlemage", 47, Rarity.UNCOMMON, mage.cards.n.NightscapeBattlemage.class));
         cards.add(new SetCardInfo("Nightscape Familiar", 48, Rarity.COMMON, mage.cards.n.NightscapeFamiliar.class));
+        cards.add(new SetCardInfo("Noxious Vapors", 49, Rarity.UNCOMMON, mage.cards.n.NoxiousVapors.class));
         cards.add(new SetCardInfo("Orim's Chant", 11, Rarity.RARE, mage.cards.o.OrimsChant.class));
         cards.add(new SetCardInfo("Phyrexian Bloodstock", 50, Rarity.COMMON, mage.cards.p.PhyrexianBloodstock.class));
         cards.add(new SetCardInfo("Phyrexian Scuta", 51, Rarity.RARE, mage.cards.p.PhyrexianScuta.class));

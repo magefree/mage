@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,12 +11,7 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -29,8 +22,9 @@ import mage.game.permanent.token.BrainiacToken;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class TheBigIdea extends CardImpl {
@@ -38,7 +32,7 @@ public final class TheBigIdea extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(SubType.BRAINIAC, "Brainiac creatures");
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public TheBigIdea(UUID ownerId, CardSetInfo setInfo) {
@@ -72,7 +66,7 @@ public final class TheBigIdea extends CardImpl {
 class TheBigIdeaReplacementEffect extends ReplacementEffectImpl {
 
     TheBigIdeaReplacementEffect() {
-        super(Duration.EndOfTurn, Outcome.Damage);
+        super(Duration.OneUse, Outcome.Damage);
         staticText = "The next time you would roll a six-sided die, instead roll two six-sided dice and use the total of those results";
     }
 

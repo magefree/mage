@@ -52,19 +52,19 @@ public final class DiscipleOfTheRing extends CardImpl {
         
         // or Disciple of the Ring gets +1/+1 until end of turn; 
         Mode mode = new Mode();
-        mode.getEffects().add(new BoostSourceEffect(1, 1, Duration.EndOfTurn));
+        mode.addEffect(new BoostSourceEffect(1, 1, Duration.EndOfTurn));
         ability.addMode(mode);
         
         // or Tap target creature;
         mode = new Mode();
-        mode.getEffects().add(new TapTargetEffect());
-        mode.getTargets().add(new TargetCreaturePermanent());
+        mode.addEffect(new TapTargetEffect());
+        mode.addTarget(new TargetCreaturePermanent());
         ability.addMode(mode);
         
         // or Untap target creature.
         mode = new Mode();
-        mode.getEffects().add(new UntapTargetEffect());
-        mode.getTargets().add(new TargetCreaturePermanent());
+        mode.addEffect(new UntapTargetEffect());
+        mode.addTarget(new TargetCreaturePermanent());
         ability.addMode(mode);
 
         this.addAbility(ability);

@@ -20,7 +20,7 @@ public class NumberOfTimesPermanentTargetedATurnWatcher extends Watcher {
     private final Map<MageObjectReference, Integer> permanentsTargeted = new HashMap<>();
 
     public NumberOfTimesPermanentTargetedATurnWatcher() {
-        super(NumberOfTimesPermanentTargetedATurnWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public NumberOfTimesPermanentTargetedATurnWatcher(final NumberOfTimesPermanentTargetedATurnWatcher watcher) {

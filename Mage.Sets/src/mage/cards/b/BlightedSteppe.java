@@ -14,6 +14,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
@@ -30,14 +31,14 @@ public final class BlightedSteppe extends CardImpl {
 
         // {3}{W}, {T}, Sacrifice Blighted Steppe: You gain 2 life for each creature you control.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new GainLifeEffect(new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent("creature you control"), 2)),
+                new GainLifeEffect(new PermanentsOnBattlefieldCount(StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED, 2)),
                 new ManaCostsImpl<>("{3}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
 
-    public BlightedSteppe(final BlightedSteppe card) {
+    private BlightedSteppe(final BlightedSteppe card) {
         super(card);
     }
 

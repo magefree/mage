@@ -108,6 +108,9 @@ class SquanderedResourcesEffect extends ManaEffect {
         Mana mana = new Mana();
         if (!choice.getChoices().isEmpty()) {
             Player player = game.getPlayer(source.getControllerId());
+            if(player == null){
+                return mana;
+            }
             if (choice.getChoices().size() == 1) {
                 choice.setChoice(choice.getChoices().iterator().next());
             } else {

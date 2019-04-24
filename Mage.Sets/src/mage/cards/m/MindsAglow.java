@@ -100,7 +100,7 @@ class MindsAglowEffect extends OneShotEffect {
                 payed = true;
             }
         }
-        game.informPlayers(new StringBuilder(player.getLogName()).append(" pays {").append(xValue).append("}.").toString());
+        game.informPlayers(player.getLogName() + " pays {" + xValue + "}.");
         return xValue;
     }
 }

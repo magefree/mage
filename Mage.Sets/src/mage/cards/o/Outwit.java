@@ -101,7 +101,7 @@ public final class Outwit extends CardImpl {
         public boolean canChoose(UUID sourceControllerId, Game game) {
             int count = 0;
             for (StackObject stackObject : game.getStack()) {
-                if (stackObject instanceof Spell && filter.match((Spell) stackObject, game)) {
+                if (stackObject instanceof Spell && filter.match(stackObject, game)) {
                     if (targetsPlayer(stackObject.getId(), game)) {
                         count++;
                         if (count >= this.minNumberOfTargets) {
@@ -117,7 +117,7 @@ public final class Outwit extends CardImpl {
         public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
             Set<UUID> possibleTargets = new HashSet<>();
             for (StackObject stackObject : game.getStack()) {
-                if (stackObject instanceof Spell && filter.match((Spell) stackObject, game)) {
+                if (stackObject instanceof Spell && filter.match(stackObject, game)) {
                     if (targetsPlayer(stackObject.getId(), game)) {
                         possibleTargets.add(stackObject.getId());
                     }

@@ -14,7 +14,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 public final class ChaosMaw extends CardImpl {
     private static FilterCreaturePermanent filter = new FilterCreaturePermanent("other creature");
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
     public ChaosMaw(UUID ownerId, CardSetInfo cardSetInfo){
         super(ownerId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");

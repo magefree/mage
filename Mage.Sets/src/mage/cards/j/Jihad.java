@@ -84,7 +84,7 @@ class JihadTriggeredAbility extends StateTriggeredAbility {
         UUID chosenOpponent = (UUID) game.getState().getValue(getSourceId().toString() + ChooseOpponentEffect.VALUE_KEY);
         FilterPermanent filter = new FilterPermanent();
         filter.add(new ColorPredicate((ObjectColor) game.getState().getValue(getSourceId() + "_color")));
-        filter.add(Predicates.not(new TokenPredicate()));        
+        filter.add(Predicates.not(TokenPredicate.instance));
         return game.getBattlefield().countAll(filter, chosenOpponent, game) == 0;
     }
     
@@ -101,7 +101,7 @@ class JihadOpponentCondition implements Condition {
         UUID chosenOpponent = (UUID) game.getState().getValue(source.getSourceId().toString() + ChooseOpponentEffect.VALUE_KEY);
         FilterPermanent filter = new FilterPermanent();
         filter.add(new ColorPredicate((ObjectColor) game.getState().getValue(source.getSourceId() + "_color")));
-        filter.add(Predicates.not(new TokenPredicate()));        
+        filter.add(Predicates.not(TokenPredicate.instance));
         return game.getBattlefield().countAll(filter, chosenOpponent, game) > 0;
     }
 }

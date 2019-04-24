@@ -18,7 +18,7 @@ public final class Vengeance extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 
     static {
-        filter.add(new TappedPredicate());
+        filter.add(TappedPredicate.instance);
     }
 
     public Vengeance(UUID ownerId, CardSetInfo setInfo) {

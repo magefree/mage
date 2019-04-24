@@ -32,7 +32,7 @@ public final class SunstrikeLegionnaire extends CardImpl {
     private static final FilterCreaturePermanent tapFilter = new FilterCreaturePermanent("creature with converted mana cost 3 or less");
 
     static {
-        untapFilter.add(new AnotherPredicate());
+        untapFilter.add(AnotherPredicate.instance);
         tapFilter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
     }
 

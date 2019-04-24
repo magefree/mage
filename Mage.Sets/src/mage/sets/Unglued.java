@@ -39,12 +39,14 @@ public final class Unglued extends ExpansionSet {
         cards.add(new SetCardInfo("Growth Spurt", 61, Rarity.COMMON, mage.cards.g.GrowthSpurt.class));
         cards.add(new SetCardInfo("Hungry Hungry Heifer", 63, Rarity.UNCOMMON, mage.cards.h.HungryHungryHeifer.class));
         cards.add(new SetCardInfo("Incoming!", 64, Rarity.RARE, mage.cards.i.Incoming.class));
+        cards.add(new SetCardInfo("Infernal Spawn of Evil", 33, Rarity.RARE, mage.cards.i.InfernalSpawnOfEvil.class));
         cards.add(new SetCardInfo("Island", 85, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(FrameStyle.UGL_FULL_ART_BASIC, false)));
         cards.add(new SetCardInfo("Jack-in-the-Mox", 75, Rarity.RARE, mage.cards.j.JackInTheMox.class));
         cards.add(new SetCardInfo("Jalum Grifter", 47, Rarity.RARE, mage.cards.j.JalumGrifter.class));
         cards.add(new SetCardInfo("Jumbo Imp", 34, Rarity.UNCOMMON, mage.cards.j.JumboImp.class));
         cards.add(new SetCardInfo("Krazy Kow", 48, Rarity.COMMON, mage.cards.k.KrazyKow.class));
         cards.add(new SetCardInfo("Mine, Mine, Mine!", 65, Rarity.RARE, mage.cards.m.MineMineMine.class));
+        cards.add(new SetCardInfo("Miss Demeanor", 10, Rarity.UNCOMMON, mage.cards.m.MissDemeanor.class));
         cards.add(new SetCardInfo("Mountain", 87, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(FrameStyle.UGL_FULL_ART_BASIC, false)));
         cards.add(new SetCardInfo("Once More with Feeling", 11, Rarity.RARE, mage.cards.o.OnceMoreWithFeeling.class));
         cards.add(new SetCardInfo("Paper Tiger", 78, Rarity.COMMON, mage.cards.p.PaperTiger.class));

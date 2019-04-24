@@ -9,12 +9,12 @@ import mage.view.ChatMessage;
 
 public final class IgnoreList {
 
-    private static final String USAGE = "<br/><font color=yellow>\\ignore - shows current ignore list on this server."
-            + "<br/>\\ignore [username] - add a username to your ignore list on this server."
+    private static final String USAGE = "<br/><font color=yellow>\\ignore - shows your ignore list on this server."
+            + "<br/>\\ignore [username] - add username to ignore list (they won't be able to chat or join to your game)."
             + "<br/>\\unignore [username] - remove a username from your ignore list on this server.</font>";
 
     public static final int MAX_IGNORE_LIST_SIZE = 50;
-    public static Set<ChatMessage.MessageType> IGNORED_MESSAGE_TYPES
+    public static final Set<ChatMessage.MessageType> IGNORED_MESSAGE_TYPES
             = ImmutableSet.of(ChatMessage.MessageType.TALK,
                     ChatMessage.MessageType.WHISPER_FROM);
 

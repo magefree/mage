@@ -1,4 +1,3 @@
-
 package mage.cards.i;
 
 import java.util.UUID;
@@ -39,7 +38,7 @@ public final class ImprisonedInTheMoon extends CardImpl {
     }
 
     public ImprisonedInTheMoon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature, land, or planeswalker
@@ -87,10 +86,18 @@ class BecomesColorlessLandEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null && enchantment.getAttachedTo() != null) {
+        if (enchantment != null 
+                && enchantment.getAttachedTo() != null) {
             Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
             if (permanent != null) {
                 switch (layer) {
+                    case TypeChangingEffects_4:
+                        // 305.7 Note that this doesn't remove any abilities that were granted to the land by other effects
+                        // So the ability removing has to be done before Layer 6
+                        permanent.removeAllAbilities(source.getSourceId(), game);
+                        permanent.getCardType().clear();
+                        permanent.addCardType(CardType.LAND);
+                        break;
                     case ColorChangingEffects_5:
                         permanent.getColor(game).setWhite(false);
                         permanent.getColor(game).setGreen(false);
@@ -102,14 +109,6 @@ class BecomesColorlessLandEffect extends ContinuousEffectImpl {
                         permanent.removeAllAbilities(source.getSourceId(), game);
                         permanent.addAbility(new ColorlessManaAbility(), source.getSourceId(), game);
                         break;
-                    case TypeChangingEffects_4:
-                        boolean isLand = permanent.isLand();
-                        permanent.getCardType().clear();
-                        permanent.addCardType(CardType.LAND);
-                        if (!isLand) {
-                            permanent.getSubtype(game).clear();
-                        }
-                        break;
                 }
                 return true;
             }
@@ -119,6 +118,8 @@ class BecomesColorlessLandEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean hasLayer(Layer layer) {
-        return layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.ColorChangingEffects_5 || layer == Layer.TypeChangingEffects_4;
+        return layer == Layer.AbilityAddingRemovingEffects_6 
+                || layer == Layer.ColorChangingEffects_5 
+                || layer == Layer.TypeChangingEffects_4;
     }
 }

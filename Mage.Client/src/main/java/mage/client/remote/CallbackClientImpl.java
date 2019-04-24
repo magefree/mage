@@ -1,10 +1,5 @@
-
 package mage.client.remote;
 
-import java.awt.event.KeyEvent;
-import java.util.List;
-import java.util.UUID;
-import javax.swing.*;
 import mage.cards.decks.Deck;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
@@ -28,8 +23,12 @@ import mage.view.*;
 import mage.view.ChatMessage.MessageType;
 import org.apache.log4j.Logger;
 
+import javax.swing.*;
+import java.awt.event.KeyEvent;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class CallbackClientImpl implements CallbackClient {
@@ -158,7 +157,7 @@ public class CallbackClientImpl implements CallbackClient {
                     case GAME_INIT: {
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
-                            appendJsonEvent("GAME_INIT", callback.getObjectId(), (GameView) callback.getData());
+                            appendJsonEvent("GAME_INIT", callback.getObjectId(), callback.getData());
                             panel.init((GameView) callback.getData());
                         }
                         break;
@@ -214,7 +213,7 @@ public class CallbackClientImpl implements CallbackClient {
                     case GAME_CHOOSE_ABILITY: {
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
-                            appendJsonEvent("GAME_CHOOSE_PILE", callback.getObjectId(), callback.getData());
+                            appendJsonEvent("GAME_CHOOSE_ABILITY", callback.getObjectId(), callback.getData());
                             panel.pickAbility((AbilityPickerView) callback.getData());
                         }
                         break;
@@ -353,8 +352,9 @@ public class CallbackClientImpl implements CallbackClient {
                     }
                     case DRAFT_UPDATE: {
                         DraftPanel panel = MageFrame.getDraft(callback.getObjectId());
+                        DraftClientMessage message = (DraftClientMessage) callback.getData();
                         if (panel != null) {
-                            panel.updateDraft((DraftView) callback.getData());
+                            panel.updateDraft(message.getDraftView());
                         }
                         break;
                     }
@@ -370,6 +370,8 @@ public class CallbackClientImpl implements CallbackClient {
                         break;
                     case USER_REQUEST_DIALOG:
                         frame.showUserRequestDialog((UserRequestMessage) callback.getData());
+                        break;
+                    default:
                         break;
                 }
                 messageId = callback.getMessageId();
@@ -399,36 +401,41 @@ public class CallbackClientImpl implements CallbackClient {
         switch (usedPanel.getChatType()) {
             case GAME:
                 usedPanel.receiveMessage("", new StringBuilder("You may use hot keys to play faster:")
-                        .append("<br/>Turn mousewheel up (ALT-e) - enlarge image of card the mousepointer hovers over")
-                        .append("<br/>Turn mousewheel down (ALT-s) - enlarge original/alternate image of card the mousepointer hovers over")
-                        .append("<br/><b>")
-                        .append(KeyEvent.getKeyText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_CONFIRM, 113)))
-                        .append("</b> - Confirm \"Ok\", \"Yes\" or \"Done\" button")
-                        .append("<br/><b>")
-                        .append(KeyEvent.getKeyText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_NEXT_TURN, 115)))
-                        .append("</b> - Skip current turn but stop on declare attackers/blockers and something on the stack")
-                        .append("<br/><b>")
-                        .append(KeyEvent.getKeyText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_END_STEP, 116)))
-                        .append("</b> - Skip to next end step but stop on declare attackers/blockers and something on the stack")
-                        .append("<br/><b>")
-                        .append(KeyEvent.getKeyText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_SKIP_STEP, 117)))
-                        .append("</b> - Skip current turn but stop on declare attackers/blockers")
-                        .append("<br/><b>")
-                        .append(KeyEvent.getKeyText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_MAIN_STEP, 118)))
-                        .append("</b> - Skip to next main phase but stop on declare attackers/blockers and something on the stack")
-                        .append("<br/><b>")
-                        .append(KeyEvent.getKeyText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_YOUR_TURN, 120)))
-                        .append("</b> - Skip everything until your next turn")
-                        .append("<br/><b>")
-                        .append(KeyEvent.getKeyText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_PRIOR_END, 122)))
-                        .append("</b> - Skip everything until the end step just prior to your turn")
-                        .append("<br/><b>")
-                        .append(KeyEvent.getKeyText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_CANCEL_SKIP, 114)))
-                        .append("</b> - Undo F4/F5/F7/F9/F11")
-                        .append("<br/><b>")
-                        .append(KeyEvent.getKeyText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_TOGGLE_MACRO, 119)))
-                        .append("</b> - Toggle recording a sequence of actions to repeat. Will not pause if interrupted and can fail if a selected card changes such as when scrying top card to bottom.")
-                        .append("<br/><b>").append(System.getProperty("os.name").contains("Mac OS X") ? "Cmd" : "Ctrl").append(" + click</b> - Hold priority while casting a spell or activating an ability").toString(),
+                                .append("<br/>Turn mousewheel up (ALT-e) - enlarge image of card the mousepointer hovers over")
+                                .append("<br/>Turn mousewheel down (ALT-s) - enlarge original/alternate image of card the mousepointer hovers over")
+                                .append("<br/><b>")
+                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_CONFIRM)))
+                                .append("</b> - Confirm \"Ok\", \"Yes\" or \"Done\" button")
+                                .append("<br/><b>")
+                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_NEXT_TURN)))
+                                .append("</b> - Skip current turn but stop on declare attackers/blockers and something on the stack")
+                                .append("<br/><b>")
+                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_END_STEP)))
+                                .append("</b> - Skip to next end step but stop on declare attackers/blockers and something on the stack")
+                                .append("<br/><b>")
+                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_SKIP_STEP)))
+                                .append("</b> - Skip current turn but stop on declare attackers/blockers")
+                                .append("<br/><b>")
+                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_MAIN_STEP)))
+                                .append("</b> - Skip to next main phase but stop on declare attackers/blockers and something on the stack")
+                                .append("<br/><b>")
+                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_YOUR_TURN)))
+                                .append("</b> - Skip everything until your next turn")
+                                .append("<br/><b>")
+                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_PRIOR_END)))
+                                .append("</b> - Skip everything until the end step just prior to your turn")
+                                .append("<br/><b>")
+                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_CANCEL_SKIP)))
+                                .append("</b> - Undo F4/F5/F7/F9/F11")
+                                .append("<br/><b>")
+                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_SWITCH_CHAT)))
+                                .append("</b> - Switth in/out to chat text field")
+                                .append("<br/><b>")
+                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_TOGGLE_MACRO)))
+                                .append("</b> - Toggle recording a sequence of actions to repeat. Will not pause if interrupted and can fail if a selected card changes such as when scrying top card to bottom.")
+                                .append("<br/><b>").append(System.getProperty("os.name").contains("Mac OS X") ? "Cmd" : "Ctrl").append(" + click</b> - Hold priority while casting a spell or activating an ability")
+                                .append("<br/>").append("Type <b>/FIX</b> message in chat to fix freezed game")
+                                .toString(),
                         null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
                 break;
             case TOURNAMENT:
@@ -437,11 +444,13 @@ public class CallbackClientImpl implements CallbackClient {
                 break;
             case TABLES:
                 usedPanel.receiveMessage("", new StringBuilder("Download card images by using the \"Images\" menu to the top right .")
-                        .append("<br/>Download icons and symbols by using the \"Symbols\" menu to the top right.")
-                        .append("<br/>\\list - Show a list of available chat commands.")
-                        .append("<br/>").append(IgnoreList.usage())
-                        .append("<br/>Type <font color=green>\\w yourUserName profanity 0 (or 1 or 2)</font> to turn off/on the profanity filter").toString(),
+                                .append("<br/>Download icons and symbols by using the \"Symbols\" menu to the top right.")
+                                .append("<br/>\\list - Show a list of available chat commands.")
+                                .append("<br/>").append(IgnoreList.usage())
+                                .append("<br/>Type <font color=green>\\w yourUserName profanity 0 (or 1 or 2)</font> to turn off/on the profanity filter").toString(),
                         null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
+                break;
+            default:
                 break;
 
         }

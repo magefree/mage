@@ -30,7 +30,7 @@ public final class DrillSkimmer extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("you control another artifact creature");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 

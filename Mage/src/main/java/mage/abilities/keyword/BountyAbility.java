@@ -19,23 +19,23 @@ import mage.filter.predicate.permanent.CounterPredicate;
  */
 public class BountyAbility extends DiesCreatureTriggeredAbility {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls with a bounty counter on it");
+    private static final FilterCreaturePermanent bountyCounterFilter = new FilterCreaturePermanent("creature an opponent controls with a bounty counter on it");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
-        filter.add(new CounterPredicate(CounterType.BOUNTY));
+        bountyCounterFilter.add(new ControllerPredicate(TargetController.OPPONENT));
+        bountyCounterFilter.add(new CounterPredicate(CounterType.BOUNTY));
     }
 
     public BountyAbility(Effect effect) {
-        super(effect, false, filter);
+        super(effect, false, bountyCounterFilter);
     }
 
     public BountyAbility(Effect effect, boolean optional) {
-        super(effect, optional, filter);
+        super(effect, optional, bountyCounterFilter);
     }
 
     public BountyAbility(Effect effect, boolean optional, boolean setTargetPointer) {
-        super(effect, optional, filter, setTargetPointer);
+        super(effect, optional, bountyCounterFilter, setTargetPointer);
     }
 
     public BountyAbility(final BountyAbility ability) {

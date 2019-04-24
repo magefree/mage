@@ -41,8 +41,8 @@ public final class ConsumingBonfire extends CardImpl {
                 
         //or Consuming Bonfire deals 7 damage to target Treefolk creature.
         Mode mode = new Mode();
-        mode.getEffects().add(new DamageTargetEffect(7));
-        mode.getTargets().add(new TargetPermanent(filter2));
+        mode.addEffect(new DamageTargetEffect(7));
+        mode.addTarget(new TargetPermanent(filter2));
         this.getSpellAbility().addMode(mode);
     }
 

@@ -77,6 +77,12 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
             for (MouseListener ml : cardArea.getMouseListeners()) {
                 cardArea.removeMouseListener(ml);
             }
+            for (Component comp : cardArea.getComponents()) {
+                if (comp instanceof CardPanel) {
+                    ((CardPanel) comp).cleanUp();
+                }
+            }
+            cardArea.removeAll();
         }
         if (mainTable != null) {
             for (MouseListener ml : mainTable.getMouseListeners()) {
@@ -86,13 +92,8 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         if (currentView != null) {
             currentView.clearCardEventListeners();
         }
-        for (Component comp : cardArea.getComponents()) {
-            if (comp instanceof CardPanel) {
-                ((CardPanel) comp).cleanUp();
-            }
-        }
+
         mageCards.clear();
-        cardArea.removeAll();
         this.bigCard = null;
 
     }
@@ -270,12 +271,14 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         mageCards = new LinkedHashMap<>();
 
         //Find card view
-        for (UUID uuid : cards.keySet()) {
+        for (Map.Entry<UUID, CardView> view : cards.entrySet()) {
+            UUID uuid = view.getKey();
+            CardView cardView = view.getValue();
             if (oldMageCards.containsKey(uuid)) {
                 mageCards.put(uuid, oldMageCards.get(uuid));
                 oldMageCards.remove(uuid);
             } else {
-                mageCards.put(uuid, addCard(cards.get(uuid), bigCard, gameId));
+                mageCards.put(uuid, addCard(cardView, bigCard, gameId));
             }
         }
         //Remove unused cards

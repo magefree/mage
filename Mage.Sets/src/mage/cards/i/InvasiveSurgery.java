@@ -1,12 +1,13 @@
-
 package mage.cards.i;
 
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.effects.common.search.SearchTargetGraveyardHandLibraryForCardNameAndExileEffect;
+import mage.abilities.hint.common.DeliriumHint;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -19,25 +20,24 @@ import mage.players.Player;
 import mage.target.TargetSpell;
 
 /**
- *
  * @author LevelX2
  */
 public final class InvasiveSurgery extends CardImpl {
 
-    private final static FilterSpell filter = new FilterSpell("sorcery spell");
+    private static final FilterSpell filter = new FilterSpell("sorcery spell");
 
     static {
         filter.add(new CardTypePredicate(CardType.SORCERY));
     }
 
     public InvasiveSurgery(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
         // Counter target sorcery spell.
         // <i>Delirium</i> &mdash; If there are four or more card types among cards in your graveyard, search the graveyard, hand, and library of that spell's controller for any number of cards with the same name as that spell, exile those cards, then that player shuffles their library.
         this.getSpellAbility().addEffect(new InvasiveSurgeryEffect());
         this.getSpellAbility().addTarget(new TargetSpell(filter));
-
+        this.getSpellAbility().addHint(DeliriumHint.instance);
     }
 
     public InvasiveSurgery(final InvasiveSurgery card) {

@@ -1,34 +1,39 @@
 package mage.cards.x;
 
-import java.util.Objects;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.*;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.Effect;
+import mage.abilities.common.AsEntersBattlefieldAbility;
+import mage.abilities.common.AttacksEachCombatStaticAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.LoseLifePermanentControllerEffect;
+import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
+import mage.target.Target;
 import mage.target.common.TargetOpponent;
+import mage.target.targetpointer.FixedTarget;
 
+import java.util.Objects;
+import java.util.UUID;
+
+import static mage.constants.Outcome.Benefit;
 
 
 /**
- *
  * @author jesusjbr
  */
 
 public final class XantchaSleeperAgent extends CardImpl {
-
-
 
     public XantchaSleeperAgent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
@@ -39,30 +44,26 @@ public final class XantchaSleeperAgent extends CardImpl {
         this.toughness = new MageInt(5);
 
         // As Xantcha, Sleeper Agent enters the battlefield, an opponent of your choice gains control of it.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new XantchaSleeperAgentChangeControlEffect()) ;
-        ability.addTarget(new TargetOpponent());
-        this.addAbility(ability);
+        this.addAbility(new AsEntersBattlefieldAbility(new XantchaSleeperAgentChangeControlEffect()));
 
         // Xantcha attacks each combat if able and can’t attack its owner or planeswalkers its owner controls.
-        ability = new AttacksEachCombatStaticAbility();
-        Effect effect = new XantchaSleeperAgentAttackRestrictionEffect();
-        ability.addEffect(effect);
+        Ability ability = new AttacksEachCombatStaticAbility();
+        ability.addEffect(new XantchaSleeperAgentAttackRestrictionEffect());
         this.addAbility(ability);
 
         // {3}: Xantcha’s controller loses 2 life and you draw a card. Any player may activate this ability.
-        effect = new LoseLifePermanentControllerEffect(2);
-        effect.setText("Xantcha’s controller loses 2 life");
-        SimpleActivatedAbility simpleAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{3}"));
-
+        SimpleActivatedAbility simpleAbility = new SimpleActivatedAbility(
+                new LoseLifePermanentControllerEffect(2)
+                        .setText("{this}’s controller loses 2 life"),
+                new GenericManaCost(3)
+        );
         simpleAbility.addEffect(new DrawCardSourceControllerEffect(1).setText("and you draw a card"));
         simpleAbility.addEffect(new InfoEffect("Any player may activate this ability"));
         simpleAbility.setMayActivate(TargetController.ANY);
         this.addAbility(simpleAbility);
-
-
     }
 
-    public XantchaSleeperAgent(final XantchaSleeperAgent card) {
+    private XantchaSleeperAgent(final XantchaSleeperAgent card) {
         super(card);
     }
 
@@ -72,16 +73,14 @@ public final class XantchaSleeperAgent extends CardImpl {
     }
 }
 
+class XantchaSleeperAgentChangeControlEffect extends OneShotEffect {
 
-
-class XantchaSleeperAgentChangeControlEffect extends ContinuousEffectImpl {
-
-    public XantchaSleeperAgentChangeControlEffect() {
-        super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
-        staticText = "an opponent of your choice gains control of it";
+    XantchaSleeperAgentChangeControlEffect() {
+        super(Benefit);
+        staticText = "an opponent of your choice gains control of it.";
     }
 
-    public XantchaSleeperAgentChangeControlEffect(final XantchaSleeperAgentChangeControlEffect effect) {
+    private XantchaSleeperAgentChangeControlEffect(final XantchaSleeperAgentChangeControlEffect effect) {
         super(effect);
     }
 
@@ -92,13 +91,27 @@ class XantchaSleeperAgentChangeControlEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) source.getSourceObjectIfItStillExists(game);
-        if (permanent != null) {
-            return permanent.changeControllerId(source.getFirstTarget(), game);
-        } else {
-            discard();
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
         }
-        return false;
+        Target target = new TargetOpponent();
+        target.setNotTarget(true);
+        if (!controller.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
+            return false;
+        }
+        Player player = game.getPlayer(target.getFirstTarget());
+        if (player == null) {
+            return false;
+        }
+        ContinuousEffect continuousEffect = new GainControlTargetEffect(
+                Duration.WhileOnBattlefield, true, player.getId()
+        );
+        continuousEffect.setTargetPointer(new FixedTarget(
+                source.getSourceId(), source.getSourceObjectZoneChangeCounter()
+        ));
+        game.addEffect(continuousEffect, source);
+        return true;
     }
 }
 
@@ -109,7 +122,7 @@ class XantchaSleeperAgentAttackRestrictionEffect extends RestrictionEffect {
         staticText = "and can't attack its owner or planeswalkers its owner controls.";
     }
 
-    XantchaSleeperAgentAttackRestrictionEffect(final XantchaSleeperAgentAttackRestrictionEffect effect) {
+    private XantchaSleeperAgentAttackRestrictionEffect(final XantchaSleeperAgentAttackRestrictionEffect effect) {
         super(effect);
     }
 
@@ -124,15 +137,17 @@ class XantchaSleeperAgentAttackRestrictionEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
+    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game, boolean canUseChooseDialogs) {
+        if (defenderId == null) {
+            return true;
+        }
 
         boolean allowAttack = true;
         UUID ownerPlayerId = source.getSourcePermanentIfItStillExists(game).getOwnerId();
 
         if (defenderId.equals(ownerPlayerId)) {
             allowAttack = false;
-        }
-        else {
+        } else {
             Permanent planeswalker = game.getPermanent(defenderId);
             if (planeswalker != null && planeswalker.isControlledBy(ownerPlayerId)) {
                 allowAttack = false;

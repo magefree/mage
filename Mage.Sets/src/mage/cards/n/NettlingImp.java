@@ -33,7 +33,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  */
 public final class NettlingImp extends CardImpl {
 
-    final static FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Wall");
+    static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Wall");
 
     static {
         filter.add(Predicates.not(new SubtypePredicate(SubType.WALL)));

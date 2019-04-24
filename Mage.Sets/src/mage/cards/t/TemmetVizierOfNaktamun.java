@@ -30,7 +30,7 @@ public final class TemmetVizierOfNaktamun extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature token you control");
 
     static {
-        filter.add(new TokenPredicate());
+        filter.add(TokenPredicate.instance);
     }
 
     public TemmetVizierOfNaktamun(UUID ownerId, CardSetInfo setInfo) {

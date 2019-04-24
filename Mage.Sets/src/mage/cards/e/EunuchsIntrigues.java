@@ -1,7 +1,5 @@
-
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RestrictionEffect;
@@ -19,8 +17,9 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801 & L_J
  */
 public final class EunuchsIntrigues extends CardImpl {
@@ -83,7 +82,7 @@ class EunuchsIntriguesEffect extends OneShotEffect {
 }
 
 class EunuchsIntriguesRestrictionEffect extends RestrictionEffect {
-    
+
     protected UUID targetId;
 
     public EunuchsIntriguesRestrictionEffect(UUID targetId) {
@@ -103,17 +102,11 @@ class EunuchsIntriguesRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.isControlledBy(source.getFirstTarget())) {
-            return true;
-        }
-        return false;
+        return permanent.isControlledBy(source.getFirstTarget());
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        if (targetId != null && blocker.getId().equals(targetId)) {
-            return true;
-        }
-        return false;
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+        return targetId != null && blocker.getId().equals(targetId);
     }
 }

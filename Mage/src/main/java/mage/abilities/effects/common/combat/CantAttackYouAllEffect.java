@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
@@ -13,7 +12,6 @@ import mage.game.permanent.Permanent;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public class CantAttackYouAllEffect extends RestrictionEffect {
@@ -35,7 +33,7 @@ public class CantAttackYouAllEffect extends RestrictionEffect {
         this.alsoPlaneswalker = alsoPlaneswalker;
         staticText = filterAttacker.getMessage() + " can't attack you"
                 + (alsoPlaneswalker ? " or a planeswalker you control" : "")
-                + (duration == Duration.UntilYourNextTurn ? " until your next turn" : "");
+                + (duration == Duration.UntilYourNextTurn || duration == Duration.UntilEndOfYourNextTurn ? " " + duration.toString() : "");
     }
 
     CantAttackYouAllEffect(final CantAttackYouAllEffect effect) {
@@ -50,7 +48,10 @@ public class CantAttackYouAllEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
+    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game, boolean canUseChooseDialogs) {
+        if (defenderId == null) {
+            return true;
+        }
         if (alsoPlaneswalker) {
             Permanent planeswalker = game.getPermanent(defenderId);
             if (planeswalker != null) {

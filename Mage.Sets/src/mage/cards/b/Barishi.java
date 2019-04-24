@@ -67,8 +67,7 @@ class BarishiEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Cards cards = new CardsImpl();
-        cards.addAll(controller.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game));
+        Cards cards = new CardsImpl(controller.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game));
         controller.putCardsOnTopOfLibrary(cards, game, source, false);
         controller.shuffleLibrary(source, game);
         return true;

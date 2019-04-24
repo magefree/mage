@@ -12,29 +12,29 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author MTGfan
  */
-public class AttachedPermanentToughnessValue implements DynamicValue {
-    
+public enum AttachedPermanentToughnessValue implements DynamicValue {
+    instance;
+
     @Override
     public int calculate(Game game, Ability source, Effect effect) {
         Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
         Permanent enchanted = game.getPermanentOrLKIBattlefield(enchantment.getAttachedTo());
         return enchanted.getToughness().getValue();
     }
-    
+
     @Override
-    public AttachedPermanentToughnessValue copy(){
-        return new AttachedPermanentToughnessValue();
+    public AttachedPermanentToughnessValue copy() {
+        return AttachedPermanentToughnessValue.instance;
     }
-    
+
     @Override
     public String toString() {
         return "equal to";
     }
-    
-     @Override
+
+    @Override
     public String getMessage() {
         return "that creature's toughness";
     }

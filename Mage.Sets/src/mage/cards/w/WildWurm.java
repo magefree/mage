@@ -58,7 +58,7 @@ class WildWurmEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (controller != null && permanent != null) {
-            if (controller.flipCoin(game)) {
+            if (controller.flipCoin(source, game, true)) {
                 return true;
             } else {
                 new ReturnToHandSourceEffect().apply(game, source);

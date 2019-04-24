@@ -21,7 +21,7 @@ public final class InvasiveSpecies extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another permanent you control");
     
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
     
     public InvasiveSpecies(UUID ownerId, CardSetInfo setInfo) {

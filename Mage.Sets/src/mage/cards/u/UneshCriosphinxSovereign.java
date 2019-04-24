@@ -108,7 +108,7 @@ class UneshCriosphinxSovereignTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return new StringBuilder("Whenever {this} or another Sphinx enters the battlefield under your control, ").append(super.getRule()).toString();
+        return "Whenever {this} or another Sphinx enters the battlefield under your control, " + super.getRule();
     }
 
     @Override
@@ -141,8 +141,7 @@ class UneshCriosphinxSovereignEffect extends OneShotEffect {
             return false;
         }
 
-        Cards cards = new CardsImpl();
-        cards.addAll(controller.getLibrary().getTopCards(game, 4));
+        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 4));
         controller.revealCards(sourceObject.getName(), cards, game);
 
         Set<UUID> opponents = game.getOpponents(source.getControllerId());
@@ -150,7 +149,7 @@ class UneshCriosphinxSovereignEffect extends OneShotEffect {
             Player opponent = game.getPlayer(opponents.iterator().next());
             TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY, new FilterCard("cards to put in the first pile"));
             List<Card> pile1 = new ArrayList<>();
-            if (opponent.choose(Outcome.Neutral, cards, target, game)) {
+            if (opponent != null && opponent.choose(Outcome.Neutral, cards, target, game)) {
                 List<UUID> targets = target.getTargets();
                 for (UUID targetId : targets) {
                     Card card = cards.get(targetId, game);

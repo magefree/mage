@@ -47,7 +47,7 @@ public class NinjutsuAbility extends ActivatedAbilityImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("unblocked attacker you control");
 
     static {
-        filter.add(new UnblockedPredicate());
+        filter.add(UnblockedPredicate.instance);
     }
 
     /**
@@ -199,8 +199,8 @@ class RevealNinjutsuCardCost extends CostImpl {
             for (CommandObject coj : game.getState().getCommand()) {
                 if (coj != null && coj.getId().equals(ability.getSourceId())) {
                     card = game.getCard(ability.getSourceId());
+                    break;
                 }
-                break;
             }
         }
         if (card != null) {

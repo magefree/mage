@@ -76,7 +76,7 @@ class IncreasingVengeanceEffect extends OneShotEffect {
             if (spell != null) {
                 StackObject stackObjectCopy = spell.createCopyOnStack(game, source, source.getControllerId(), true);
                 if (stackObjectCopy instanceof Spell) {
-                    game.informPlayers(new StringBuilder(controller.getLogName()).append(((Spell) stackObjectCopy).getActivatedMessage(game)).toString());
+                    game.informPlayers(controller.getLogName() + ((Spell) stackObjectCopy).getActivatedMessage(game));
                 }
                 Spell sourceSpell = (Spell) game.getStack().getStackObject(source.getSourceId());
                 if (sourceSpell != null) {

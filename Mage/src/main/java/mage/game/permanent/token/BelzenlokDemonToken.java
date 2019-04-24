@@ -29,7 +29,7 @@ import mage.players.Player;
  */
 public final class BelzenlokDemonToken extends TokenImpl {
 
-    final static private List<String> tokenImageSets = new ArrayList<>();
+    static final private List<String> tokenImageSets = new ArrayList<>();
     static {
         tokenImageSets.addAll(Arrays.asList("DOM"));
     }
@@ -72,7 +72,7 @@ class BelzenlokDemonTokenEffect extends OneShotEffect {
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     BelzenlokDemonTokenEffect() {

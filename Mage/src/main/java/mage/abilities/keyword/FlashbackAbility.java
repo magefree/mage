@@ -134,7 +134,7 @@ public class FlashbackAbility extends SpellAbility {
     public String getRule() {
         StringBuilder sbRule = new StringBuilder("Flashback");
         if (!costs.isEmpty()) {
-            sbRule.append(" - ");
+            sbRule.append("&mdash;");
         } else {
             sbRule.append(' ');
         }

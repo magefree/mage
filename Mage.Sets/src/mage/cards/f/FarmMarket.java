@@ -28,7 +28,7 @@ public final class FarmMarket extends SplitCard {
         // Market {2}{U}
         // Sorcery
         // Aftermath
-        ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility().setRuleAtTheTop(true));
+        getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
         // Draw two cards, then discard two cards
         getRightHalfCard().getSpellAbility().addEffect(new DrawDiscardControllerEffect(2, 2));
 

@@ -62,7 +62,7 @@ class GravebaneZombieEffect extends ReplacementEffectImpl {
         Permanent permanent = ((ZoneChangeEvent) event).getTarget();
         if (permanent != null) {
             if (permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true)) {
-                game.informPlayers(new StringBuilder(permanent.getName()).append(" was put on the top of its owner's library").toString());
+                game.informPlayers(permanent.getName() + " was put on the top of its owner's library");
                 return true;
             }
         }

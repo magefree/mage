@@ -70,7 +70,7 @@ enum HadAnotherCreatureEnterTheBattlefieldCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        PermanentsEnteredBattlefieldWatcher watcher = (PermanentsEnteredBattlefieldWatcher) game.getState().getWatchers().get(PermanentsEnteredBattlefieldWatcher.class.getSimpleName());
+        PermanentsEnteredBattlefieldWatcher watcher = game.getState().getWatcher(PermanentsEnteredBattlefieldWatcher.class);
         return sourcePermanent != null
                 && watcher != null
                 && watcher.anotherCreatureEnteredBattlefieldUnderPlayersControlLastTurn(sourcePermanent, game);

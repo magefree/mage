@@ -60,8 +60,7 @@ class RevivingVaporsEffect extends OneShotEffect {
             return false;
         }
 
-        Cards cards = new CardsImpl();
-        cards.addAll(controller.getLibrary().getTopCards(game, 3));
+        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 3));
         if (!cards.isEmpty()) {
             controller.revealCards(sourceObject.getName(), cards, game);
             Card card = null;

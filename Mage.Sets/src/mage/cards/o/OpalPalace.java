@@ -63,18 +63,22 @@ public final class OpalPalace extends CardImpl {
 
 class OpalPalaceWatcher extends Watcher {
 
-    public List<UUID> commanderId = new ArrayList<>();
+    private List<UUID> commanderId = new ArrayList<>();
     private final String originalId;
 
     public OpalPalaceWatcher(String originalId) {
-        super(OpalPalaceWatcher.class.getSimpleName(), WatcherScope.CARD);
+        super(WatcherScope.CARD);
         this.originalId = originalId;
     }
 
-    public OpalPalaceWatcher(final OpalPalaceWatcher watcher) {
+    private OpalPalaceWatcher(final OpalPalaceWatcher watcher) {
         super(watcher);
         this.commanderId.addAll(watcher.commanderId);
         this.originalId = watcher.originalId;
+    }
+
+    public boolean manaUsedToCastCommander(UUID id){
+        return commanderId.contains(id);
     }
 
     @Override
@@ -119,7 +123,7 @@ class OpalPalaceEntersBattlefieldEffect extends ReplacementEffectImpl {
         staticText = "If you spend this mana to cast your commander, it enters the battlefield with a number of +1/+1 counters on it equal to the number of times it's been cast from the command zone this game";
     }
 
-    public OpalPalaceEntersBattlefieldEffect(OpalPalaceEntersBattlefieldEffect effect) {
+    private OpalPalaceEntersBattlefieldEffect(OpalPalaceEntersBattlefieldEffect effect) {
         super(effect);
     }
 
@@ -130,9 +134,9 @@ class OpalPalaceEntersBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        OpalPalaceWatcher watcher = (OpalPalaceWatcher) game.getState().getWatchers().get(OpalPalaceWatcher.class.getSimpleName(), source.getSourceId());
+        OpalPalaceWatcher watcher = game.getState().getWatcher(OpalPalaceWatcher.class, source.getSourceId());
         return watcher != null
-                && watcher.commanderId.contains(event.getTargetId());
+                && watcher.manaUsedToCastCommander(event.getTargetId());
     }
 
     @Override

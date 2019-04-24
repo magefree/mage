@@ -75,7 +75,7 @@ class TrevaTheRenewerEffect extends OneShotEffect {
         }
         ChoiceColor choice = new ChoiceColor();
         if (controller.choose(outcome, choice, game)) {
-            game.informPlayers(new StringBuilder(controller.getLogName()).append(" chooses ").append(choice.getColor()).toString());
+            game.informPlayers(controller.getLogName() + " chooses " + choice.getColor());
             FilterPermanent filter = new FilterPermanent();
             filter.add(new ColorPredicate(choice.getColor()));
             int cardsWithColor = game.getBattlefield().count(filter, source.getSourceId(), controller.getId(), game);

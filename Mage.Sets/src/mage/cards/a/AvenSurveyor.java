@@ -38,8 +38,8 @@ public final class AvenSurveyor extends CardImpl {
         
         // * Return target creature to its owner's hand
         Mode mode = new Mode();
-        mode.getEffects().add(new ReturnToHandTargetEffect());
-        mode.getTargets().add(new TargetCreaturePermanent());
+        mode.addEffect(new ReturnToHandTargetEffect());
+        mode.addTarget(new TargetCreaturePermanent());
         ability.addMode(mode);
         this.addAbility(ability);  
     }

@@ -26,10 +26,10 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class EddytrailHawk extends CardImpl {
 
-    private final static FilterAttackingCreature filter = new FilterAttackingCreature();
+    private static final FilterAttackingCreature filter = new FilterAttackingCreature();
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public EddytrailHawk(UUID ownerId, CardSetInfo setInfo) {

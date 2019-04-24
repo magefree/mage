@@ -51,7 +51,7 @@ public class BuybackAbility extends StaticAbility implements OptionalAdditionalS
 
     public BuybackAbility(Cost cost) {
         super(Zone.STACK, new BuybackEffect());
-        this.buybackCost = new OptionalAdditionalCostImpl(keywordText, "-", reminderTextCost, cost);
+        this.buybackCost = new OptionalAdditionalCostImpl(keywordText, "&mdash;", reminderTextCost, cost);
         setRuleAtTheTop(true);
     }
 

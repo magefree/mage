@@ -21,7 +21,7 @@ import mage.target.TargetPermanent;
  */
 public final class LapisLazuliTalisman extends CardImpl {
     
-    private final static FilterSpell filter = new FilterSpell("a blue spell");
+    private static final FilterSpell filter = new FilterSpell("a blue spell");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLUE));

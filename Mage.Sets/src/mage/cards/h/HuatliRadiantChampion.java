@@ -1,13 +1,12 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.hint.common.CreaturesYouControlHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -19,8 +18,9 @@ import mage.filter.StaticFilters;
 import mage.game.command.emblems.HuatliRadiantChampionEmblem;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class HuatliRadiantChampion extends CardImpl {
@@ -41,6 +41,7 @@ public final class HuatliRadiantChampion extends CardImpl {
         LoyaltyAbility ability2 = new LoyaltyAbility(new BoostTargetEffect(amount, amount, Duration.EndOfTurn, true)
                 .setText("Target creature gets +X/+X until end of turn, where X is the number of creatures you control"), -1);
         ability2.addTarget(new TargetCreaturePermanent());
+        ability2.addHint(CreaturesYouControlHint.instance);
         this.addAbility(ability2);
 
         // -8: You get an emblem with "Whenever a creature enters the battlefield under your control, you may draw a card."

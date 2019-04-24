@@ -61,7 +61,7 @@ class UrborgJusticeDynamicValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        CreaturesDiedWatcher watcher = (CreaturesDiedWatcher) game.getState().getWatchers().get(CreaturesDiedWatcher.class.getSimpleName());
+        CreaturesDiedWatcher watcher = game.getState().getWatcher(CreaturesDiedWatcher.class);
         if (watcher != null) {
             return watcher.getAmountOfCreaturesDiedThisTurnByOwner(sourceAbility.getControllerId());
         }

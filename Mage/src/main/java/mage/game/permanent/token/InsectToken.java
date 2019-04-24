@@ -15,7 +15,7 @@ import mage.constants.SubType;
  */
 public final class InsectToken extends TokenImpl {
 
-    final static private List<String> tokenImageSets = new ArrayList<>();
+    static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
         tokenImageSets.addAll(Arrays.asList("M10", "MM2", "SOI"));

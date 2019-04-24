@@ -1,9 +1,7 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.keyword.BuybackAbility;
 import mage.cards.CardImpl;
@@ -14,6 +12,9 @@ import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.target.TargetSpell;
+import mage.target.targetadjustment.TargetAdjuster;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -23,23 +24,12 @@ public final class SpellBurst extends CardImpl {
     public SpellBurst(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{U}");
 
-
         // Buyback {3}
         this.addAbility(new BuybackAbility("{3}"));
 
         // Counter target spell with converted mana cost X.
-        this.getSpellAbility().addEffect(new CounterTargetEffect());
-        this.getSpellAbility().addTarget(new TargetSpell(new FilterSpell("spell with converted mana cost X")));
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SpellAbility) {
-            ability.getTargets().clear();
-            FilterSpell filter = new FilterSpell("spell with converted mana cost X");
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, ability.getManaCostsToPay().getX()));
-            ability.addTarget(new TargetSpell(filter));
-        }
+        this.getSpellAbility().addEffect(new CounterTargetEffect().setText("counter target spell with converted mana cost X"));
+        this.getSpellAbility().setTargetAdjuster(SpellBurstAdjuster.instance);
     }
 
     public SpellBurst(final SpellBurst card) {
@@ -49,5 +39,18 @@ public final class SpellBurst extends CardImpl {
     @Override
     public SpellBurst copy() {
         return new SpellBurst(this);
+    }
+}
+
+enum SpellBurstAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        int xValue = ability.getManaCostsToPay().getX();
+        ability.getTargets().clear();
+        FilterSpell filter = new FilterSpell("spell with converted mana cost " + xValue);
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, xValue));
+        ability.addTarget(new TargetSpell(filter));
     }
 }

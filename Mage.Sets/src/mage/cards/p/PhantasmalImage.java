@@ -21,14 +21,13 @@ import mage.util.functions.ApplyToPermanent;
 import java.util.UUID;
 
 /**
- *
  * @author North
  */
 public final class PhantasmalImage extends CardImpl {
 
     private static final String effectText = "a copy of any creature on the battlefield, except it's an Illusion in addition to its other types and it has \"When this creature becomes the target of a spell or ability, sacrifice it.\"";
 
-    ApplyToPermanent phantasmalImageApplier = new ApplyToPermanent() {
+    private static final ApplyToPermanent phantasmalImageApplier = new ApplyToPermanent() {
         @Override
         public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
             if (!permanent.hasSubtype(SubType.ILLUSION, game)) {

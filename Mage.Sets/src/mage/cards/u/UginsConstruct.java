@@ -22,7 +22,7 @@ public final class UginsConstruct extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("permanent that's one or more colors");
 
     static {
-        filter.add(Predicates.not(new ColorlessPredicate()));
+        filter.add(Predicates.not(ColorlessPredicate.instance));
     }
 
     public UginsConstruct(UUID ownerId, CardSetInfo setInfo) {

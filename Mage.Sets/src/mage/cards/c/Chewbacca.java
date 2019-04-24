@@ -26,7 +26,7 @@ public final class Chewbacca extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another target creature you control");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public Chewbacca(UUID ownerId, CardSetInfo setInfo) {

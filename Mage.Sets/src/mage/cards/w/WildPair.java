@@ -29,7 +29,7 @@ import mage.watchers.common.CastFromHandWatcher;
  */
 public final class WildPair extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature");
 
     static {
         filter.add(new OwnerPredicate(TargetController.YOU));
@@ -82,7 +82,7 @@ class WildPairEffect extends OneShotEffect {
                 FilterCreatureCard filter = new FilterCreatureCard("creature card with total power and toughness " + totalPT);
                 filter.add(new TotalPowerAndToughnessPredicate(ComparisonType.EQUAL_TO, totalPT));
                 TargetCardInLibrary target = new TargetCardInLibrary(1, filter);
-                if (controller.searchLibrary(target, game)) {
+                if (controller.searchLibrary(target, source, game)) {
                     if (!target.getTargets().isEmpty()) {
                         controller.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
                     }
@@ -135,7 +135,7 @@ class CastFromHandTargetCondition implements Condition {
                     return false;
                 }
             }
-            CastFromHandWatcher watcher = (CastFromHandWatcher) game.getState().getWatchers().get(CastFromHandWatcher.class.getSimpleName());
+            CastFromHandWatcher watcher = game.getState().getWatcher(CastFromHandWatcher.class);
             if (watcher != null && watcher.spellWasCastFromHand(targetId)) {
                 return true;
             }

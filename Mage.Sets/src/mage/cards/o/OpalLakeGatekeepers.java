@@ -1,13 +1,12 @@
-
-
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.hint.ConditionHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -16,8 +15,9 @@ import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 
@@ -25,12 +25,15 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 public final class OpalLakeGatekeepers extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
+
     static {
         filter.add(new SubtypePredicate(SubType.GATE));
     }
 
-    public OpalLakeGatekeepers (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
+    private static final Condition gatesCondition = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1);
+
+    public OpalLakeGatekeepers(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.subtype.add(SubType.VEDALKEN);
         this.subtype.add(SubType.SOLDIER);
 
@@ -40,11 +43,12 @@ public final class OpalLakeGatekeepers extends CardImpl {
         // When Opal Lake Gatekeepers enters the battlefield, if you control two or more Gates, you may draw a card.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)),
-                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1),
-                "When Opal Lake Gatekeepers enters the battlefield, if you control two or more Gates, you may draw a card."));
+                gatesCondition,
+                "When Opal Lake Gatekeepers enters the battlefield, if you control two or more Gates, you may draw a card.")
+                .addHint(new ConditionHint(gatesCondition, "You control two or more Gates")));
     }
 
-    public OpalLakeGatekeepers (final OpalLakeGatekeepers card) {
+    public OpalLakeGatekeepers(final OpalLakeGatekeepers card) {
         super(card);
     }
 

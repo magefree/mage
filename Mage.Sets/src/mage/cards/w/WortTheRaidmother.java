@@ -54,7 +54,7 @@ public final class WortTheRaidmother extends CardImpl {
 
 class WortGainConspireEffect extends ContinuousEffectImpl {
 
-    private final static FilterInstantOrSorcerySpell filter = new FilterInstantOrSorcerySpell();
+    private static final FilterInstantOrSorcerySpell filter = new FilterInstantOrSorcerySpell();
 
     static {
         filter.add(Predicates.or(new ColorPredicate(ObjectColor.RED), new ColorPredicate(ObjectColor.GREEN)));

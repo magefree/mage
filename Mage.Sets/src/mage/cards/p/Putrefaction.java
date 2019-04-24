@@ -41,13 +41,13 @@ public final class Putrefaction extends CardImpl {
 
 class PutrefactionTriggeredAbility extends SpellCastAllTriggeredAbility {
 
-    private static final FilterSpell filter = new FilterSpell("green or white spell");
+    private static final FilterSpell filterGreenOrWhiteSpell = new FilterSpell("green or white spell");
     static {
-        filter.add(Predicates.or(new ColorPredicate(ObjectColor.GREEN), new ColorPredicate(ObjectColor.WHITE)));
+        filterGreenOrWhiteSpell.add(Predicates.or(new ColorPredicate(ObjectColor.GREEN), new ColorPredicate(ObjectColor.WHITE)));
     }
 
     public PutrefactionTriggeredAbility() {
-        super(new DiscardTargetEffect(1), filter, false);
+        super(new DiscardTargetEffect(1), filterGreenOrWhiteSpell, false);
     }
 
     public PutrefactionTriggeredAbility(PutrefactionTriggeredAbility ability) {
@@ -58,7 +58,7 @@ class PutrefactionTriggeredAbility extends SpellCastAllTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && filter.match(spell, getSourceId(), getControllerId(), game)) {
+            if (spell != null && filterGreenOrWhiteSpell.match(spell, getSourceId(), getControllerId(), game)) {
                 this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
                 return true;
             }

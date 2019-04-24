@@ -63,7 +63,7 @@ class DenyingWindEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && player != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(0, 7, new FilterCard("cards from player's library to exile"));
-            if (controller.searchLibrary(target, game, player.getId())) {
+            if (controller.searchLibrary(target, source, game, player.getId())) {
                 List<UUID> targets = target.getTargets();
                 for (UUID targetId : targets) {
                     Card card = player.getLibrary().remove(targetId, game);

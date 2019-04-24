@@ -32,7 +32,7 @@ import mage.watchers.common.PlanarRollWatcher;
  */
 public class FieldsOfSummerPlane extends Plane {
 
-    private final static FilterSpell filter = new FilterSpell("a spell");
+    private static final FilterSpell filter = new FilterSpell("a spell");
 
     public FieldsOfSummerPlane() {
         this.setName("Plane - Fields of Summer");

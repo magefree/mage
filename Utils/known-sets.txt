@@ -137,6 +137,7 @@ Mercadian Masques|MercadianMasques|
 Mirage|Mirage|
 Mirrodin|Mirrodin|
 Mirrodin Besieged|MirrodinBesieged|
+Modern Horizons|ModernHorizons|
 Modern Masters|ModernMasters|
 Modern Masters 2015|ModernMasters2015|
 Modern Masters 2017|ModernMasters2017|
@@ -160,6 +161,7 @@ Premium Deck Series: Fire and Lightning|PremiumDeckSeriesFireAndLightning|
 Premium Deck Series: Slivers|PremiumDeckSeriesSlivers|
 Prerelease Events|PrereleaseEvents|
 Prophecy|Prophecy|
+Ravnica Allegiance|RavnicaAllegiance|
 Ravnica: City of Guilds|RavnicaCityOfGuilds|
 Return to Ravnica|ReturnToRavnica|
 Revised Edition|RevisedEdition|
@@ -195,6 +197,7 @@ Urza's Legacy|UrzasLegacy|
 Urza's Saga|UrzasSaga|
 Vintage Masters|VintageMasters|
 Visions|Visions|
+War of the Spark|WarOfTheSpark|
 Weatherlight|Weatherlight|
 Welcome Deck 2016|WelcomeDeck2016|
 Welcome Deck 2017|WelcomeDeck2017|

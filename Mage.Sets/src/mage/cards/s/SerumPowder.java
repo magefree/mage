@@ -65,10 +65,7 @@ class SerumPowderReplaceEffect extends ReplacementEffectImpl {
             }
             int cardsHand = controller.getHand().size();
             if (cardsHand > 0){
-                Cards cards = new CardsImpl();
-                for (UUID cardId: controller.getHand()) {
-                    cards.add(game.getCard(cardId));
-                }
+                Cards cards = new CardsImpl(controller.getHand());
                 for (Card card: cards.getCards(game)) {
                     card.moveToExile(null, null, source.getSourceId(), game);
                 }

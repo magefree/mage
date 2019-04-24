@@ -34,7 +34,7 @@ public class FlipUntilLoseEffect extends OneShotEffect {
             return false;
         }
         while (true) {
-            if (!player.flipCoin(game)) {
+            if (!player.flipCoin(source, game, true)) {
                 return true;
             }
         }

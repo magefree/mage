@@ -29,8 +29,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.common.TargetCardInOpponentsGraveyard;
@@ -81,7 +79,9 @@ class DireFleetDaredevilEffect extends OneShotEffect {
 
     public DireFleetDaredevilEffect() {
         super(Outcome.Benefit);
-        this.staticText = "exile target instant or sorcery card from an opponent's graveyard. You may cast that card this turn and you may spend mana as though it were mana of any color. If that card would be put into a graveyard this turn, exile it instead";
+        this.staticText = "exile target instant or sorcery card from an opponent's graveyard. "
+                + "You may cast that card this turn and you may spend mana as though it were mana of any color. "
+                + "If that card would be put into a graveyard this turn, exile it instead";
     }
 
     public DireFleetDaredevilEffect(final DireFleetDaredevilEffect effect) {
@@ -111,11 +111,10 @@ class DireFleetDaredevilEffect extends OneShotEffect {
                         effect = new DireFleetDaredevilReplacementEffect();
                         effect.setTargetPointer(new FixedTarget(targetCard, game));
                         game.addEffect(effect, source);
-
+                        return true;
                     }
                 }
             }
-            return true;
         }
         return false;
     }
@@ -144,6 +143,7 @@ class DireFleetDaredevilSpendAnyManaEffect extends AsThoughEffectImpl implements
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        objectId = game.getCard(objectId).getMainCard().getId(); // for split cards
         return source.isControlledBy(affectedControllerId)
                 && Objects.equals(objectId, ((FixedTarget) getTargetPointer()).getTarget())
                 && ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(objectId)
@@ -175,19 +175,9 @@ class DireFleetDaredevilReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        UUID eventObject = event.getTargetId();
-        StackObject stackObject = game.getStack().getStackObject(eventObject);
-        if (stackObject != null) {
-            if (stackObject instanceof Spell) {
-                game.rememberLKI(stackObject.getId(), Zone.STACK, (Spell) stackObject);
-            }
-            if (stackObject instanceof Card
-                    && stackObject.getSourceId().equals(((FixedTarget) getTargetPointer()).getTarget())
-                    && ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(stackObject.getSourceId())
-                    && game.getState().getZone(stackObject.getSourceId()) == Zone.STACK) {
-                ((Card) stackObject).moveToExile(null, null, source.getSourceId(), game);
-                return true;
-            }
+        Card card = game.getCard(event.getTargetId());
+        if (card != null) {
+            return card.moveToZone(Zone.EXILED, source.getSourceId(), game, false);
         }
         return false;
     }
@@ -201,6 +191,8 @@ class DireFleetDaredevilReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         return zEvent.getToZone() == Zone.GRAVEYARD
-                && ((ZoneChangeEvent) event).getTargetId().equals(((FixedTarget) getTargetPointer()).getTarget());
+                && event.getTargetId().equals(((FixedTarget) getTargetPointer()).getTarget())
+                && ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1 
+                == game.getState().getZoneChangeCounter(event.getTargetId());
     }
 }

@@ -27,7 +27,7 @@ public final class RazorfinAbolisher extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with a counter on it");
     
     static {
-        filter.add(new CounterAnyPredicate());
+        filter.add(CounterAnyPredicate.instance);
     }
 
     public RazorfinAbolisher(UUID ownerId, CardSetInfo setInfo) {

@@ -32,7 +32,7 @@ public final class DreadCacodemon extends CardImpl {
     private static final FilterCreaturePermanent otherCreaturesYouControl = new FilterCreaturePermanent("other creatures you control");
     static {
         otherCreaturesYouControl.add(new ControllerPredicate(TargetController.YOU));
-        otherCreaturesYouControl.add(new AnotherPredicate());
+        otherCreaturesYouControl.add(AnotherPredicate.instance);
     }
 	
     public DreadCacodemon(UUID ownerId, CardSetInfo setInfo) {        

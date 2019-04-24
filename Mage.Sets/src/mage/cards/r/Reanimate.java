@@ -25,7 +25,7 @@ public final class Reanimate extends CardImpl {
         // Put target creature card from a graveyard onto the battlefield under your control. You lose life equal to its converted mana cost.
         getSpellAbility().addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
         getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());  
-        Effect effect = new LoseLifeSourceControllerEffect(new TargetConvertedManaCost());
+        Effect effect = new LoseLifeSourceControllerEffect(TargetConvertedManaCost.instance);
         effect.setText("You lose life equal to its converted mana cost");
         getSpellAbility().addEffect(effect);  
     }

@@ -20,7 +20,7 @@ public final class AncientStirrings extends CardImpl {
     private static final FilterCard filter = new FilterCard("a colorless card");
 
     static {
-        filter.add(new ColorlessPredicate());
+        filter.add(ColorlessPredicate.instance);
     }
 
 

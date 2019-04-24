@@ -1,8 +1,5 @@
 package mage.client.game;
 
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
-import javax.swing.*;
 import mage.client.components.MageUI;
 import mage.interfaces.MageClient;
 import mage.interfaces.callback.ClientCallback;
@@ -12,6 +9,10 @@ import mage.remote.SessionImpl;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
 import org.junit.Ignore;
+
+import javax.swing.*;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Test for emulating the connection from multi mage clients.
@@ -30,7 +31,7 @@ public class MultiConnectTest {
 
     private static final CountDownLatch latch = new CountDownLatch(USER_CONNECT_COUNT);
 
-    private static final MageVersion version = new MageVersion(MageVersion.MAGE_VERSION_MAJOR, MageVersion.MAGE_VERSION_MINOR, MageVersion.MAGE_VERSION_PATCH, MageVersion.MAGE_VERSION_MINOR_PATCH, MageVersion.MAGE_VERSION_INFO);
+    private static final MageVersion version = new MageVersion(MultiConnectTest.class);
 
     private static volatile int connected;
 
@@ -70,7 +71,7 @@ public class MultiConnectTest {
         }
 
         @Override
-        public void disconnected(boolean errorCall) {
+        public void disconnected(boolean askToReconnect) {
             logger.info("disconnected");
         }
 

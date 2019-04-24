@@ -1,13 +1,6 @@
 
 package mage.abilities;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.costs.OptionalAdditionalModeSourceCosts;
 import mage.cards.Card;
 import mage.constants.Outcome;
@@ -18,8 +11,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
+import java.util.*;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class Modes extends LinkedHashMap<UUID, Mode> {
@@ -340,25 +334,32 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         StringBuilder sb = new StringBuilder();
         if (this.getMaxModesFilter() != null) {
             sb.append("choose one or more. Each mode must target ").append(getMaxModesFilter().getMessage());
-        } else if (this.getMinModes() == 1 && this.getMaxModes() == 3) {
-            sb.append("choose one or more ");
+        } else if (this.getMinModes() == 0 && this.getMaxModes() == 1) {
+            sb.append("choose up to one");
+        } else if (this.getMinModes() == 1 && this.getMaxModes() > 2) {
+            sb.append("choose one or more");
         } else if (this.getMinModes() == 1 && this.getMaxModes() == 2) {
-            sb.append("choose one or both ");
+            sb.append("choose one or both");
         } else if (this.getMinModes() == 2 && this.getMaxModes() == 2) {
-            sb.append("choose two ");
+            sb.append("choose two");
         } else if (this.getMinModes() == 3 && this.getMaxModes() == 3) {
-            sb.append("choose three ");
+            sb.append("choose three");
+        } else if (this.getMinModes() == 4 && this.getMaxModes() == 4) {
+            sb.append("choose four");
         } else {
-            sb.append("choose one ");
+            sb.append("choose one");
         }
+
         if (isEachModeOnlyOnce()) {
-            sb.append("that hasn't been chosen ");
+            sb.append(" that hasn't been chosen");
         }
+
         if (isEachModeMoreThanOnce()) {
             sb.append(". You may choose the same mode more than once.<br>");
         } else {
-            sb.append("&mdash;<br>");
+            sb.append(" &mdash;<br>");
         }
+
         for (Mode mode : this.values()) {
             sb.append("&bull  ");
             sb.append(mode.getEffects().getTextStartingUpperCase(mode));

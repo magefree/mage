@@ -74,8 +74,7 @@ class LordOfTheVoidEffect extends OneShotEffect {
             return false;
         }
 
-        Cards cards = new CardsImpl();
-        cards.addAll(player.getLibrary().getTopCards(game, 7));
+        Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 7));
         controller.moveCards(cards, Zone.EXILED, source, game);
         if (!cards.getCards(new FilterCreatureCard(), game).isEmpty()) {
             TargetCard target = new TargetCard(Zone.EXILED, new FilterCreatureCard());

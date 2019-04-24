@@ -60,7 +60,7 @@ public final class HazoretsUndyingFury extends CardImpl {
 
 class HazoretsUndyingFuryEffect extends OneShotEffect {
 
-    private final static FilterCard filter = new FilterCard("nonland cards with converted mana cost 5 or less");
+    private static final FilterCard filter = new FilterCard("nonland cards with converted mana cost 5 or less");
 
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));

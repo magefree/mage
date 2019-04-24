@@ -10,6 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -73,7 +74,7 @@ class HomicidalBruteTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(this.controllerId)) {
-            Watcher watcher = game.getState().getWatchers().get("HomicidalBruteWatcher", sourceId);
+            Watcher watcher = game.getState().getWatcher(HomicidalBruteWatcher.class, sourceId);
             if (watcher == null || !watcher.conditionMet()) {
                 return true;
             }
@@ -86,4 +87,6 @@ class HomicidalBruteTriggeredAbility extends TriggeredAbilityImpl {
         return "At the beginning of your end step, if {this} didn't attack this turn, tap {this}, then transform it";
     }
 }
+
+
 

@@ -61,7 +61,7 @@ class RaziasPurificationEffect extends OneShotEffect {
 
             Target target1 = new TargetControlledPermanent(1, 1, new FilterControlledPermanent(), true);
 
-            if (target1.canChoose(player.getId(), game)) {
+            if (player != null && target1.canChoose(player.getId(), game)) {
                 int chosenPermanents = 0;
                 while (player.canRespond() && !target1.isChosen() && target1.canChoose(player.getId(), game) && chosenPermanents < 3) {
                     player.chooseTarget(Outcome.Benefit, target1, source, game);

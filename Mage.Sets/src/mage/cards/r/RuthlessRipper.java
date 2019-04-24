@@ -26,7 +26,7 @@ import mage.target.common.TargetCardInHand;
  */
 public final class RuthlessRipper extends CardImpl {
     
-    private final static FilterCard filter = new FilterCard("a black card in your hand");
+    private static final FilterCard filter = new FilterCard("a black card in your hand");
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
     }

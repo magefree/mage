@@ -1,4 +1,3 @@
-
 package mage.game.permanent;
 
 import mage.MageObject;
@@ -9,6 +8,8 @@ import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.HintUtils;
 import mage.abilities.keyword.*;
 import mage.abilities.text.TextPart;
 import mage.cards.Card;
@@ -44,12 +45,13 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     private static final Logger logger = Logger.getLogger(PermanentImpl.class);
 
-    public class MarkedDamageInfo {
+    static class MarkedDamageInfo {
 
         public MarkedDamageInfo(Counter counter, MageObject sourceObject) {
             this.counter = counter;
             this.sourceObject = sourceObject;
         }
+
         Counter counter;
         MageObject sourceObject;
     }
@@ -164,7 +166,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public String toString() {
         StringBuilder sb = threadLocalBuilder.get();
-        sb.append(this.name).append('-').append(this.expansionSetCode);
+        sb.append(this.getName()).append('-').append(this.expansionSetCode);
         if (copy) {
             sb.append(" [Copy]");
         }
@@ -196,9 +198,22 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
+    public String getName() {
+        if (name.isEmpty()) {
+            if (faceDown) {
+                return EmptyNames.FACE_DOWN_CREATURE.toString();
+            } else {
+                return "";
+            }
+        } else {
+            return name;
+        }
+    }
+
+    @Override
     public String getValue(GameState state) {
         StringBuilder sb = threadLocalBuilder.get();
-        sb.append(controllerId).append(name).append(tapped).append(damage);
+        sb.append(controllerId).append(getName()).append(tapped).append(damage);
         sb.append(subtype).append(supertype).append(power.getValue()).append(toughness.getValue());
         sb.append(abilities.getValue());
         for (Counter counter : getCounters(state).values()) {
@@ -223,15 +238,81 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public List<String> getRules(Game game) {
         try {
             List<String> rules = getRules();
+
+            // info
             if (info != null) {
                 for (String data : info.values()) {
                     rules.add(data);
                 }
             }
+
+            // ability hints
+            List<String> abilityHints = new ArrayList<>();
+            if (HintUtils.ABILITY_HINTS_ENABLE) {
+                for (Ability ability : abilities) {
+                    for (Hint hint : ability.getHints()) {
+                        String s = hint.getText(game, ability);
+                        if (s != null && !s.isEmpty()) {
+                            abilityHints.add(s);
+                        }
+                    }
+                }
+            }
+
+            // restrict hints
+            List<String> restrictHints = new ArrayList<>();
+            if (HintUtils.RESTRICT_HINTS_ENABLE) {
+                for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
+                    for (Ability ability : entry.getValue()) {
+                        if (!entry.getKey().applies(this, ability, game)) {
+                            continue;
+                        }
+
+                        if (!entry.getKey().canAttack(game, false) || !entry.getKey().canAttack(this, null, ability, game, false)) {
+                            restrictHints.add(HintUtils.prepareText("Can't attack" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_RESTRICT));
+                        }
+
+                        if (!entry.getKey().canBlock(null, this, ability, game, false)) {
+                            restrictHints.add(HintUtils.prepareText("Can't block" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_RESTRICT));
+                        }
+
+                        if (!entry.getKey().canBeUntapped(this, ability, game, false)) {
+                            restrictHints.add(HintUtils.prepareText("Can't untapped" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_RESTRICT));
+                        }
+
+                        if (!entry.getKey().canUseActivatedAbilities(this, ability, game, false)) {
+                            restrictHints.add(HintUtils.prepareText("Can't use activated abilities" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_RESTRICT));
+                        }
+
+                        if (!entry.getKey().canTransform(this, ability, game, false)) {
+                            restrictHints.add(HintUtils.prepareText("Can't transform" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_RESTRICT));
+                        }
+                    }
+                }
+                restrictHints.sort(String::compareTo);
+            }
+
+            // total hints
+            if (!abilityHints.isEmpty() || !restrictHints.isEmpty()) {
+                rules.add(HintUtils.HINT_START_MARK);
+                HintUtils.appendHints(rules, abilityHints);
+                HintUtils.appendHints(rules, restrictHints);
+            }
+
             return rules;
         } catch (Exception e) {
             return rulesError;
         }
+    }
+
+    private String addSourceObjectName(Game game, Ability ability) {
+        if (ability != null) {
+            MageObject object = game.getObject(ability.getSourceId());
+            if (object != null) {
+                return " (" + object.getIdName() + ")";
+            }
+        }
+        return "";
     }
 
     @Override
@@ -245,7 +326,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     /**
-     *
      * @param ability
      * @param game
      */
@@ -378,11 +458,16 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean tap(Game game) {
+        return tap(false, game);
+    }
+
+    @Override
+    public boolean tap(boolean forCombat, Game game) {
         //20091005 - 701.15a
         if (!tapped) {
             if (!replaceEvent(EventType.TAP, game)) {
                 this.tapped = true;
-                fireEvent(EventType.TAPPED, game);
+                game.fireEvent(new GameEvent(EventType.TAPPED, objectId, ownerId, controllerId, 0, forCombat));
                 return true;
             }
         }
@@ -460,7 +545,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public boolean phaseIn(Game game, boolean onlyDirect) {
         if (!phasedIn) {
             if (!replaceEvent(EventType.PHASE_IN, game)
-                    && ((onlyDirect && !indirectPhase) || (!onlyDirect))) {
+                    && (!onlyDirect || !indirectPhase)) {
                 this.phasedIn = true;
                 this.indirectPhase = false;
                 if (!game.isSimulation()) {
@@ -665,7 +750,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.attachedTo = attachToObjectId;
         this.attachedToZoneChangeCounter = game.getState().getZoneChangeCounter(attachToObjectId);
         for (Ability ability : this.getAbilities()) {
-            for (Iterator<Effect> ite = ability.getEffects(game, EffectType.CONTINUOUS).iterator(); ite.hasNext();) {
+            for (Iterator<Effect> ite = ability.getEffects(game, EffectType.CONTINUOUS).iterator(); ite.hasNext(); ) {
                 ContinuousEffect effect = (ContinuousEffect) ite.next();
                 game.getContinuousEffects().setOrder(effect);
                 // It's important to update the timestamp of the copied effect in ContinuousEffects because it does the action
@@ -700,6 +785,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
+    public int damage(int damage, UUID sourceId, Game game) {
+        return damage(damage, sourceId, game, true, false, false, null);
+    }
+
+    @Override
     public int damage(int damage, UUID sourceId, Game game, boolean combat, boolean preventable) {
         return damage(damage, sourceId, game, preventable, combat, false, null);
     }
@@ -715,8 +805,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
      * @param game
      * @param preventable
      * @param combat
-     * @param markDamage If true, damage will be dealt later in applyDamage
-     * method
+     * @param markDamage   If true, damage will be dealt later in applyDamage
+     *                     method
      * @return
      */
     private int damage(int damageAmount, UUID sourceId, Game game, boolean preventable, boolean combat, boolean markDamage, List<UUID> appliedEffects) {
@@ -746,7 +836,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                         sourceControllerId = ((Card) source).getOwnerId();
                     } else if (source instanceof CommandObject) {
                         sourceControllerId = ((CommandObject) source).getControllerId();
-                        sourceAbilities = ((CommandObject) source).getAbilities();
+                        sourceAbilities = source.getAbilities();
                     } else {
                         source = null;
                     }
@@ -934,14 +1024,20 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 }
             }
 
+            if (abilities.containsKey(HexproofFromMonocoloredAbility.getInstance().getId())) {
+                if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
+                        && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game)
+                        && !source.getColor(game).isColorless() && !source.getColor(game).isMulticolored()) {
+                    return false;
+                }
+            }
+
             if (hasProtectionFrom(source, game)) {
                 return false;
             }
             // needed to get the correct possible targets if target rule modification effects are active
             // e.g. Fiendslayer Paladin tried to target with Ultimate Price
-            if (game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(EventType.TARGET, this.getId(), source.getId(), sourceControllerId), null, game, true)) {
-                return false;
-            }
+            return !game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(EventType.TARGET, this.getId(), source.getId(), sourceControllerId), null, game, true);
         }
 
         return true;
@@ -1094,11 +1190,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     private boolean canAttackCheckRestrictionEffects(UUID defenderId, Game game) {
         //20101001 - 508.1c
         for (Map.Entry<RestrictionEffect, Set<Ability>> effectEntry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
-            if (!effectEntry.getKey().canAttack(game)) {
+            if (!effectEntry.getKey().canAttack(game, true)) {
                 return false;
             }
             for (Ability ability : effectEntry.getValue()) {
-                if (!effectEntry.getKey().canAttack(this, defenderId, ability, game)) {
+                if (!effectEntry.getKey().canAttack(this, defenderId, ability, game, true)) {
                     return false;
                 }
             }
@@ -1123,7 +1219,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         // check blocker restrictions
         for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
             for (Ability ability : entry.getValue()) {
-                if (!entry.getKey().canBlock(attacker, this, ability, game)) {
+                if (!entry.getKey().canBlock(attacker, this, ability, game, true)) {
                     return false;
                 }
             }
@@ -1131,7 +1227,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         // check also attacker's restriction effects
         for (Map.Entry<RestrictionEffect, Set<Ability>> restrictionEntry : game.getContinuousEffects().getApplicableRestrictionEffects(attacker, game).entrySet()) {
             for (Ability ability : restrictionEntry.getValue()) {
-                if (!restrictionEntry.getKey().canBeBlocked(attacker, this, ability, game)) {
+                if (!restrictionEntry.getKey().canBeBlocked(attacker, this, ability, game, true)) {
                     return false;
                 }
             }
@@ -1149,7 +1245,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
             RestrictionEffect effect = entry.getKey();
             for (Ability ability : entry.getValue()) {
-                if (!effect.canBlock(null, this, ability, game)) {
+                if (!effect.canBlock(null, this, ability, game, true)) {
                     return false;
                 }
             }
@@ -1170,7 +1266,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
             RestrictionEffect effect = entry.getKey();
             for (Ability ability : entry.getValue()) {
-                if (!effect.canUseActivatedAbilities(this, ability, game)) {
+                if (!effect.canUseActivatedAbilities(this, ability, game, true)) {
                     return false;
                 }
             }
@@ -1184,7 +1280,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
                 RestrictionEffect effect = entry.getKey();
                 for (Ability ability : entry.getValue()) {
-                    if (!effect.canTransform(this, ability, game)) {
+                    if (!effect.canTransform(this, ability, game, true)) {
                         return false;
                     }
                 }
@@ -1441,20 +1537,20 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     //If an object leaves the zone it's in, all attached permanents become unattached
     //note that this code doesn't actually detach anything, and is a bit of a bandaid
     public void detachAllAttachments(Game game) {
-        for(UUID attachmentId : getAttachments()) {
+        for (UUID attachmentId : getAttachments()) {
             Permanent attachment = game.getPermanent(attachmentId);
             Card attachmentCard = game.getCard(attachmentId);
-            if(attachment != null && attachmentCard != null) {
+            if (attachment != null && attachmentCard != null) {
                 //make bestow cards and licids into creatures
                 //aura test to stop bludgeon brawl shenanigans from using this code
                 //consider adding code to handle that case?
-                if(attachment.hasSubtype(SubType.AURA, game) && attachmentCard.isCreature()) {
+                if (attachment.hasSubtype(SubType.AURA, game) && attachmentCard.isCreature()) {
                     BestowAbility.becomeCreature(attachment, game);
                 }
             }
         }
     }
-    
+
     @Override
     public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag, List<UUID> appliedEffects) {
         Zone fromZone = game.getState().getZone(objectId);
@@ -1480,7 +1576,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         Zone fromZone = game.getState().getZone(objectId);
         ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, ownerId, fromZone, Zone.EXILED, appliedEffects);
         ZoneChangeInfo.Exile info = new ZoneChangeInfo.Exile(event, exileId, name);
-        
+
         boolean successfullyMoved = ZonesHandler.moveCard(info, game);
         //20180810 - 701.3d
         detachAllAttachments(game);

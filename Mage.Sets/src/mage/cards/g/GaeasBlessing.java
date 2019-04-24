@@ -155,7 +155,7 @@ class GaeasBlessingGraveToLibraryEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            game.informPlayers(new StringBuilder(controller.getLogName()).append(" shuffle their graveyard into their library").toString());
+            game.informPlayers(controller.getLogName() + " shuffle their graveyard into their library");
             for (Card card : controller.getGraveyard().getCards(game)) {
                 controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD, true, true);
             }

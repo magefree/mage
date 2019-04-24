@@ -1,7 +1,7 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -9,6 +9,7 @@ import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.hint.common.DeliriumHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +25,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
- *
  * @author fireshoes
  */
 public final class AngelOfDeliverance extends CardImpl {
@@ -36,7 +36,7 @@ public final class AngelOfDeliverance extends CardImpl {
     }
 
     public AngelOfDeliverance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{W}{W}");
         this.subtype.add(SubType.ANGEL);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
@@ -52,6 +52,7 @@ public final class AngelOfDeliverance extends CardImpl {
                 "<i>Delirium</i> &mdash; Whenever {this} deals damage, if there are four or more card types among cards in your graveyard, exile target creature an opponent controls"
         );
         ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addHint(DeliriumHint.instance);
         this.addAbility(ability);
     }
 

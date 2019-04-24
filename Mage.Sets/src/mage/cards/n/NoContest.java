@@ -1,8 +1,5 @@
-
 package mage.cards.n;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.cards.Card;
@@ -18,6 +15,9 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author Styxo
@@ -56,8 +56,11 @@ class TargetCreatureWithLessPowerPermanent extends TargetPermanent {
 
     @Override
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        int maxPower = Integer.MIN_VALUE; // get the most poerful controlled creature that can be targeted
+        int maxPower = Integer.MIN_VALUE; // get the most powerful controlled creature that can be targeted
         Card sourceCard = game.getCard(sourceId);
+        if (sourceCard == null) {
+            return false;
+        }
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES, sourceControllerId, game)) {
             if (permanent.getPower().getValue() > maxPower && permanent.canBeTargetedBy(sourceCard, sourceControllerId, game)) {
                 maxPower = permanent.getPower().getValue();

@@ -38,7 +38,7 @@ public final class LenaSelflessChampion extends CardImpl {
             = new FilterControlledCreaturePermanent("nontoken creature you control");
 
     static {
-        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public LenaSelflessChampion(UUID ownerId, CardSetInfo setInfo) {

@@ -24,7 +24,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class DefiantSalvager extends CardImpl {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("an artifact or creature");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact or creature");
 
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.CREATURE)));

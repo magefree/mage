@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
@@ -17,19 +16,21 @@ import mage.abilities.effects.common.RemoveFromCombatTargetEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.TurnPhase;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
-import mage.watchers.Watcher;
 import mage.watchers.common.ChooseBlockersRedundancyWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class Melee extends CardImpl {
@@ -61,27 +62,27 @@ public final class Melee extends CardImpl {
     public Melee copy() {
         return new Melee(this);
     }
-    
+
     private class ChooseBlockersRedundancyWatcherIncrementEffect extends OneShotEffect {
-    
+
         ChooseBlockersRedundancyWatcherIncrementEffect() {
             super(Outcome.Neutral);
         }
-    
+
         ChooseBlockersRedundancyWatcherIncrementEffect(final ChooseBlockersRedundancyWatcherIncrementEffect effect) {
             super(effect);
         }
-    
+
         @Override
         public boolean apply(Game game, Ability source) {
-            ChooseBlockersRedundancyWatcher watcher = (ChooseBlockersRedundancyWatcher) game.getState().getWatchers().get(ChooseBlockersRedundancyWatcher.class.getSimpleName());
+            ChooseBlockersRedundancyWatcher watcher = game.getState().getWatcher(ChooseBlockersRedundancyWatcher.class);
             if (watcher != null) {
                 watcher.increment();
                 return true;
             }
             return false;
         }
-    
+
         @Override
         public ChooseBlockersRedundancyWatcherIncrementEffect copy() {
             return new ChooseBlockersRedundancyWatcherIncrementEffect(this);
@@ -117,7 +118,10 @@ class MeleeChooseBlockersEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        ChooseBlockersRedundancyWatcher watcher = (ChooseBlockersRedundancyWatcher) game.getState().getWatchers().get(ChooseBlockersRedundancyWatcher.class.getSimpleName());
+        ChooseBlockersRedundancyWatcher watcher = game.getState().getWatcher(ChooseBlockersRedundancyWatcher.class);
+        if (watcher == null) {
+            return false;
+        }
         watcher.decrement();
         watcher.copyCount--;
         if (watcher.copyCountApply > 0) {

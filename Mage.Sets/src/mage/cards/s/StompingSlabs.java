@@ -62,8 +62,7 @@ class StompingSlabsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Cards cards = new CardsImpl();
-            cards.addAll(controller.getLibrary().getTopCards(game, 7));
+            Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 7));
             if (!cards.isEmpty()) {
                 controller.revealCards("Stomping Slabs", cards, game);
                 boolean stompingSlabsFound = false;

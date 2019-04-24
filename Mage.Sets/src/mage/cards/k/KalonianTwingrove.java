@@ -26,7 +26,7 @@ import mage.game.permanent.token.KalonianTwingroveTreefolkWarriorToken;
  */
 public final class KalonianTwingrove extends CardImpl {
 
-    final static FilterControlledPermanent filterLands = new FilterControlledPermanent("Forests you control");
+    static final FilterControlledPermanent filterLands = new FilterControlledPermanent("Forests you control");
 
     static {
         filterLands.add(new SubtypePredicate(SubType.FOREST));

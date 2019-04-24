@@ -25,7 +25,7 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public final class BladewingsThrall extends CardImpl {
 
-    final static private String RULE = "{this} has flying as long as you control a Dragon";
+    static final private String RULE = "{this} has flying as long as you control a Dragon";
 
     public BladewingsThrall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

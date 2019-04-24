@@ -16,6 +16,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
@@ -35,13 +36,13 @@ public final class AetherwindBasker extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever Aetherwind Basker enters the battlefield or attacks, you get {E} for each creature you control.
-        this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new GetEnergyCountersControllerEffect(new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent("creature you control"), null))));
+        this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new GetEnergyCountersControllerEffect(new PermanentsOnBattlefieldCount(StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED, null))));
 
         // Pay {E}: Aetherwind Basker gets +1/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new PayEnergyCost(1)));
     }
 
-    public AetherwindBasker(final AetherwindBasker card) {
+    private AetherwindBasker(final AetherwindBasker card) {
         super(card);
     }
 

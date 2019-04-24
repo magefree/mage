@@ -93,8 +93,7 @@ class MerchantsDockhandEffect extends OneShotEffect {
             }
         }
 
-        Cards cards = new CardsImpl();
-        cards.addAll(controller.getLibrary().getTopCards(game, xValue));
+        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, xValue));
         controller.lookAtCards(sourceObject.getIdName(), cards, game);
 
         TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put into your hand"));
@@ -113,10 +112,10 @@ class MerchantsDockhandEffect extends OneShotEffect {
 
 class TapXTargetCost extends VariableCostImpl {
 
-    final static FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("untapped artifacts you control");
+    static final FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("untapped artifacts you control");
 
     static {
-        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.not(TappedPredicate.instance));
     }
 
     public TapXTargetCost() {

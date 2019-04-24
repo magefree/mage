@@ -119,10 +119,13 @@ class SarkhanTheMadSacEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getTargets().getFirstTarget());
         if (permanent != null) {
-            Player player = game.getPlayer(permanent.getControllerId());
             permanent.sacrifice(this.getId(), game);
-            Token dragonToken = new DragonToken2();
-            dragonToken.putOntoBattlefield(1, game, this.getId(), player.getId());
+
+            Player player = game.getPlayer(permanent.getControllerId());
+            if(player != null) {
+                Token dragonToken = new DragonToken2();
+                dragonToken.putOntoBattlefield(1, game, this.getId(), player.getId());
+            }
         }
         return false;
     }

@@ -26,7 +26,7 @@ public final class WarkiteMarauder extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
 
     static {
-        filter.add(new DefendingPlayerControlsPredicate());
+        filter.add(DefendingPlayerControlsPredicate.instance);
     }
 
     public WarkiteMarauder(UUID ownerId, CardSetInfo setInfo) {

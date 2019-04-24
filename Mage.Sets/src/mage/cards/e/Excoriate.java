@@ -19,7 +19,7 @@ public final class Excoriate extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 
     static {
-        filter.add(new TappedPredicate());
+        filter.add(TappedPredicate.instance);
     }
     
     public Excoriate(UUID ownerId, CardSetInfo setInfo) {

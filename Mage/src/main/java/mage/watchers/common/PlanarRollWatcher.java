@@ -21,7 +21,7 @@ public class PlanarRollWatcher extends Watcher {
     private final Map<UUID, Integer> numberTimesPlanarDieRolled = new HashMap<>();
 
     public PlanarRollWatcher() {
-        super(PlanarRollWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public PlanarRollWatcher(final PlanarRollWatcher watcher) {
@@ -56,8 +56,4 @@ public class PlanarRollWatcher extends Watcher {
         numberTimesPlanarDieRolled.clear();
     }
 
-    @Override
-    public PlanarRollWatcher copy() {
-        return new PlanarRollWatcher(this);
-    }
 }

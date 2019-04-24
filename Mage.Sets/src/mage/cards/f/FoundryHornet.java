@@ -28,7 +28,7 @@ import mage.filter.predicate.permanent.CounterPredicate;
 public final class FoundryHornet extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a creature with a +1/+1 counter on it");
-    private final static FilterCreaturePermanent filterOpponent = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filterOpponent = new FilterCreaturePermanent();
 
     static {
         filter.add(new CounterPredicate(CounterType.P1P1));

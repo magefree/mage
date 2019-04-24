@@ -1,14 +1,13 @@
-
 package org.mage.test.cards.copy;
 
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class CopySpellTest extends CardTestPlayerBase {
@@ -17,23 +16,38 @@ public class CopySpellTest extends CardTestPlayerBase {
     public void copyChainOfVapor() {
         // Return target nonland permanent to its owner's hand. Then that permanent's controller may sacrifice a land. If the player does, he or she may copy this spell and may choose a new target for that copy.
         addCard(Zone.HAND, playerA, "Chain of Vapor", 1);
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 10);
 
-        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 10);
 
-        addCard(Zone.BATTLEFIELD, playerB, "Pillarfield Ox", 1);
-        addCard(Zone.BATTLEFIELD, playerB, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Pillarfield Ox", 10);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 10);
 
+        // start chain from A - return pillar to hand
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chain of Vapor", "Pillarfield Ox");
-        setChoice(playerB, "Yes");
-        addTarget(playerB, "Silvercoat Lion");
+        // chain 1 - B can return
+        addTarget(playerB, "Island"); // select a land to sacrifice
+        setChoice(playerB, "Yes"); // want to copy spell
+        setChoice(playerB, "Yes"); // want to change target
+        addTarget(playerB, "Silvercoat Lion"); // new target after copy
+        // chain 2 - A can return
+        addTarget(playerA, "Island"); // select a land to sacrifice
+        setChoice(playerA, "Yes"); // want to copy spell
+        setChoice(playerA, "Yes"); // want to change target
+        addTarget(playerA, "Pillarfield Ox"); // new target after copy
+        // stop the chain by B
+        addTarget(playerB, TestPlayer.TARGET_SKIP);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
-        assertGraveyardCount(playerB, "Island", 1);
-        assertHandCount(playerB, "Pillarfield Ox", 1);
         assertHandCount(playerA, "Silvercoat Lion", 1);
+        assertHandCount(playerB, "Pillarfield Ox", 2);
+        assertPermanentCount(playerA, "Silvercoat Lion", 10 - 1);
+        assertPermanentCount(playerB, "Pillarfield Ox", 10 - 2);
+        assertGraveyardCount(playerA, "Island", 1);
+        assertGraveyardCount(playerB, "Island", 1);
     }
 
     @Test
@@ -135,7 +149,7 @@ public class CopySpellTest extends CardTestPlayerBase {
      * before it is cast and therefore before Zada's ability triggers, e.g.
      * Desperate Ritual spliced onto Into the Fray should generate 3 red mana
      * for every creature i control.
-     *
+     * <p>
      * 702.46a Splice is a static ability that functions while a card is in your
      * hand. “Splice onto [subtype] [cost]” means “You may reveal this card from
      * your hand as you cast a [subtype] spell. If you do, copy this card's text
@@ -184,7 +198,7 @@ public class CopySpellTest extends CardTestPlayerBase {
      * {4}{U} Enchantment (Enchant Player) Whenever enchanted player casts an
      * instant or sorcery spell, each other player may copy that spell and may
      * choose new targets for the copy he or she controls.
-     *
+     * <p>
      * Reported bug: "A player with Curse of Echoes attached to them played
      * Bribery and the player who controlled the curse had control of all 3
      * copies. This seems to be the case for all spells."

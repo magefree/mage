@@ -14,7 +14,7 @@ import mage.watchers.Watcher;
 public class MorbidWatcher extends Watcher {
 
     public MorbidWatcher() {
-        super(MorbidWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public MorbidWatcher(final MorbidWatcher watcher) {
@@ -33,9 +33,9 @@ public class MorbidWatcher extends Watcher {
         }
     }
 
-    @Override
-    public MorbidWatcher copy() {
-        return new MorbidWatcher(this);
-    }
+//    @Override
+//    public MorbidWatcher copy() {
+//        return new MorbidWatcher(this);
+//    }
 
 }

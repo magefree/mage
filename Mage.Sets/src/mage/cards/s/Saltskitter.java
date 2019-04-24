@@ -22,7 +22,7 @@ public final class Saltskitter extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("another creature");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public Saltskitter(UUID ownerId, CardSetInfo setInfo) {

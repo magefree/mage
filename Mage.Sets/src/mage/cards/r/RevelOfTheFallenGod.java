@@ -1,15 +1,15 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.RevelOfTheFallenGodSatyrToken;
+import mage.game.permanent.token.XenagosSatyrToken;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class RevelOfTheFallenGod extends CardImpl {
@@ -18,7 +18,7 @@ public final class RevelOfTheFallenGod extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}{G}{G}");
 
         // Create four 2/2 red and green Satyr creature tokens with haste.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new RevelOfTheFallenGodSatyrToken(), 4));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new XenagosSatyrToken(), 4));
 
     }
 

@@ -10,6 +10,7 @@ import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
@@ -62,23 +63,24 @@ class JacesArchivistEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int maxDiscarded = 0;
         Player controller = game.getPlayer(source.getControllerId());
-        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                int discarded = player.getHand().size();
-                player.discard(discarded, false, source, game);
-                if (discarded > maxDiscarded) {
-                    maxDiscarded = discarded;
+        if(controller != null) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    Cards discardedCards = player.discard(player.getHand().size(), false, source, game);
+                    if (discardedCards.size() > maxDiscarded) {
+                        maxDiscarded = discardedCards.size();
+                    }
+                }
+            }
+
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    player.drawCards(maxDiscarded, game);
                 }
             }
         }
-        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                player.drawCards(maxDiscarded, game);
-            }
-        }
-
         return true;
     }
 
