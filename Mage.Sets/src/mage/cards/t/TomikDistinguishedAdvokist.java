@@ -121,7 +121,8 @@ class TomikDistinguishedAdvokistTargetEffect extends ContinuousRuleModifyingEffe
         Player player = game.getPlayer(source.getControllerId());
         return targetCard != null && stackObject != null && player != null
                 && player.hasOpponent(stackObject.getControllerId(), game)
-                && game.getState().getZone(targetCard.getId()) == Zone.GRAVEYARD;
+                && game.getState().getZone(targetCard.getId()) == Zone.GRAVEYARD
+                && targetCard.isLand();
     }
 }
 
