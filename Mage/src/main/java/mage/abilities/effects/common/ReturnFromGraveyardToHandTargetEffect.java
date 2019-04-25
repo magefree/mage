@@ -1,9 +1,10 @@
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
+import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -34,8 +35,15 @@ public class ReturnFromGraveyardToHandTargetEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            return controller.moveCards(new CardsImpl(getTargetPointer().getTargets(game, source)), Zone.HAND, source, game);
+        if (controller == null) {
+            return false;
+        }
+        Cards cardsInGraveyard = new CardsImpl(getTargetPointer().getTargets(game, source));
+        for (Card card : cardsInGraveyard.getCards(game)) {
+            if (card != null
+                    && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
+                controller.moveCards(card, Zone.HAND, source, game); //verify the target card is still in the graveyard
+            }
         }
         return false;
     }
