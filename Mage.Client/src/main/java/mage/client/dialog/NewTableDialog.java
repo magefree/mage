@@ -686,6 +686,7 @@ public class NewTableDialog extends MageDialog {
             case "Freeform Commander Free For All":
                 if (!options.getDeckType().equals("Variant Magic - Freeform Commander")){
                     JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Deck type Freeform Commander needs also a Freeform Commander game type", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
                 }
                 break;
             case "Brawl Two Player Duel":
