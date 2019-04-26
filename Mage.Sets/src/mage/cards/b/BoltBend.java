@@ -8,18 +8,18 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.NumberOfTargetsPredicate;
-import mage.target.TargetSpell;
 
 import java.util.UUID;
+import mage.filter.FilterStackObject;
+import mage.target.TargetStackObject;
 
 /**
  * @author TheElk801
  */
 public final class BoltBend extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("spell with a single target");
+    private static final FilterStackObject filter = new FilterStackObject("spell or ability with a single target");
 
     static {
         filter.add(new NumberOfTargetsPredicate(1));
@@ -35,7 +35,7 @@ public final class BoltBend extends CardImpl {
 
         // Change the target of target spell or ability with a single target.
         this.getSpellAbility().addEffect(new ChooseNewTargetsTargetEffect(true, true));
-        this.getSpellAbility().addTarget(new TargetSpell(filter));
+        this.getSpellAbility().addTarget(new TargetStackObject(filter));
     }
 
     private BoltBend(final BoltBend card) {
