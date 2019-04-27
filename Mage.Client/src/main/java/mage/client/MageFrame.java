@@ -319,10 +319,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         setConnectButtonText(NOT_CONNECTED_TEXT);
         SwingUtilities.invokeLater(() -> {
             disableButtons();
-            if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_CHECK, "false").equals("true")) {
-                checkForNewImages();
-            }
-
             updateMemUsageTask.execute();
             LOGGER.info("Client start up time: " + ((System.currentTimeMillis() - startTime) / 1000 + " seconds"));
             if (autoConnect()) {
@@ -331,7 +327,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 connectDialog.showDialog();
             }
             setWindowTitle();
-
         });
 
         if (SystemUtil.isMacOSX()) {
@@ -575,10 +570,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         });
 
         menu.show(component, 0, component.getHeight());
-    }
-
-    private void checkForNewImages() {
-        // Removed TODO: Remove related pref code
     }
 
     public static void setActive(MagePane frame) {

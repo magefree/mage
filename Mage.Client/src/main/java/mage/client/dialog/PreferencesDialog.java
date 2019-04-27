@@ -78,7 +78,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_CARD_IMAGES_USE_DEFAULT = "cardImagesUseDefault";
     public static final String KEY_CARD_IMAGES_PATH = "cardImagesPath";
     public static final String KEY_CARD_IMAGES_THREADS = "cardImagesThreads";
-    public static final String KEY_CARD_IMAGES_CHECK = "cardImagesCheck";
     public static final String KEY_CARD_IMAGES_SAVE_TO_ZIP = "cardImagesSaveToZip";
     public static final String KEY_CARD_IMAGES_PREF_LANGUAGE = "cardImagesPreferedImageLaguage";
 
@@ -468,12 +467,16 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbUseDefaultImageFolder = new javax.swing.JCheckBox();
         txtImageFolderPath = new javax.swing.JTextField();
         btnBrowseImageLocation = new javax.swing.JButton();
-        cbCheckForNewImages = new javax.swing.JCheckBox();
         cbSaveToZipFiles = new javax.swing.JCheckBox();
         cbPreferedImageLanguage = new javax.swing.JComboBox<>();
         labelPreferedImageLanguage = new javax.swing.JLabel();
         labelNumberOfDownloadThreads = new javax.swing.JLabel();
         cbNumberOfDownloadThreads = new javax.swing.JComboBox();
+        labelHint1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        cbCardRenderImageFallback = new javax.swing.JCheckBox();
+        cbCardRenderShowReminderText = new javax.swing.JCheckBox();
+        cbCardRenderHideSetSymbol = new javax.swing.JCheckBox();
         panelBackgroundImages = new javax.swing.JPanel();
         cbUseDefaultBackground = new javax.swing.JCheckBox();
         txtBackgroundImagePath = new javax.swing.JTextField();
@@ -482,12 +485,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         btnBrowseBattlefieldImage = new javax.swing.JButton();
         cbUseDefaultBattleImage = new javax.swing.JCheckBox();
         cbUseRandomBattleImage = new javax.swing.JCheckBox();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        cbCardRenderImageFallback = new javax.swing.JCheckBox();
-        cbCardRenderShowReminderText = new javax.swing.JCheckBox();
-        cbCardRenderHideSetSymbol = new javax.swing.JCheckBox();
         tabSounds = new javax.swing.JPanel();
         sounds_clips = new javax.swing.JPanel();
         cbEnableGameSounds = new javax.swing.JCheckBox();
@@ -872,7 +869,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                                 .add(main_gamelog, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(main_battlefield, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         main_card.getAccessibleContext().setAccessibleName("Game panel");
@@ -1535,7 +1532,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                                         .add(checkBoxEndTurnOthers))
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                                 .add(phases_stopSettings, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(160, Short.MAX_VALUE))
+                                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tabsPanel.addTab("Phases & Priority", tabPhases);
@@ -1558,13 +1555,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
-        cbCheckForNewImages.setText("Check for new images on startup");
-        cbCheckForNewImages.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbCheckForNewImagesActionPerformed(evt);
-            }
-        });
-
         cbSaveToZipFiles.setText("Store images in zip files");
         cbSaveToZipFiles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1575,13 +1565,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbPreferedImageLanguage.setMaximumRowCount(20);
         cbPreferedImageLanguage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
 
-        labelPreferedImageLanguage.setText("Prefered image language:");
+        labelPreferedImageLanguage.setText("Default images language:");
         labelPreferedImageLanguage.setFocusable(false);
 
         labelNumberOfDownloadThreads.setText("Number of download threads:");
 
         cbNumberOfDownloadThreads.setMaximumRowCount(20);
         cbNumberOfDownloadThreads.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
+
+        labelHint1.setText("(change it to 1-3 if image source bans your IP for too many connections)");
 
         org.jdesktop.layout.GroupLayout panelCardImagesLayout = new org.jdesktop.layout.GroupLayout(panelCardImages);
         panelCardImages.setLayout(panelCardImagesLayout);
@@ -1590,158 +1582,46 @@ public class PreferencesDialog extends javax.swing.JDialog {
                         .add(panelCardImagesLayout.createSequentialGroup()
                                 .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                         .add(panelCardImagesLayout.createSequentialGroup()
-                                                .addContainerGap()
+                                                .add(cbUseDefaultImageFolder)
+                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                                 .add(txtImageFolderPath)
                                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                                 .add(btnBrowseImageLocation))
                                         .add(panelCardImagesLayout.createSequentialGroup()
                                                 .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                                        .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                                                                .add(panelCardImagesLayout.createSequentialGroup()
-                                                                        .add(cbCheckForNewImages)
-                                                                        .add(147, 147, 147))
-                                                                .add(org.jdesktop.layout.GroupLayout.LEADING, panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                                        .add(cbSaveToZipFiles)
+                                                        .add(panelCardImagesLayout.createSequentialGroup()
+                                                                .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                                                        .add(labelNumberOfDownloadThreads)
+                                                                        .add(labelPreferedImageLanguage))
+                                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                                                .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                                                        .add(cbPreferedImageLanguage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 153, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                                                         .add(panelCardImagesLayout.createSequentialGroup()
-                                                                                .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                                                                                        .add(org.jdesktop.layout.GroupLayout.LEADING, panelCardImagesLayout.createSequentialGroup()
-                                                                                                .addContainerGap()
-                                                                                                .add(labelPreferedImageLanguage))
-                                                                                        .add(org.jdesktop.layout.GroupLayout.LEADING, cbSaveToZipFiles))
-                                                                                .add(20, 20, 20)
-                                                                                .add(cbPreferedImageLanguage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 153, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                                                                        .add(panelCardImagesLayout.createSequentialGroup()
-                                                                                .addContainerGap()
-                                                                                .add(labelNumberOfDownloadThreads)
-                                                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                                                                .add(cbNumberOfDownloadThreads, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 153, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
-                                                        .add(cbUseDefaultImageFolder))
-                                                .add(0, 391, Short.MAX_VALUE)))
+                                                                                .add(cbNumberOfDownloadThreads, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 153, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                                                                .add(labelHint1)))))
+                                                .add(0, 0, Short.MAX_VALUE)))
                                 .addContainerGap())
         );
         panelCardImagesLayout.setVerticalGroup(
                 panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                         .add(panelCardImagesLayout.createSequentialGroup()
-                                .add(cbUseDefaultImageFolder)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                                 .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                        .add(cbUseDefaultImageFolder)
                                         .add(txtImageFolderPath, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                         .add(btnBrowseImageLocation))
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .add(cbCheckForNewImages)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                                 .add(cbSaveToZipFiles)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                                 .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                         .add(labelNumberOfDownloadThreads)
-                                        .add(cbNumberOfDownloadThreads, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                        .add(cbNumberOfDownloadThreads, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                        .add(labelHint1))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                                 .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                                        .add(cbPreferedImageLanguage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                        .add(labelPreferedImageLanguage)))
-        );
-
-        panelBackgroundImages.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Background images"));
-
-        cbUseDefaultBackground.setText("Use default image");
-        cbUseDefaultBackground.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbUseDefaultBackgroundActionPerformed(evt);
-            }
-        });
-
-        txtBackgroundImagePath.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBackgroundImagePathActionPerformed(evt);
-            }
-        });
-
-        btnBrowseBackgroundImage.setText("Browse...");
-        btnBrowseBackgroundImage.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBrowseBackgroundImageActionPerformed(evt);
-            }
-        });
-
-        txtBattlefieldImagePath.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBattlefieldImagePathActionPerformed(evt);
-            }
-        });
-
-        btnBrowseBattlefieldImage.setText("Browse...");
-        btnBrowseBattlefieldImage.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBrowseBattlefieldImageActionPerformed(evt);
-            }
-        });
-
-        cbUseDefaultBattleImage.setText("Use default battlefield image");
-        cbUseDefaultBattleImage.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbUseDefaultBattleImageActionPerformed(evt);
-            }
-        });
-
-        cbUseRandomBattleImage.setText("Select random battlefield image");
-        cbUseRandomBattleImage.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbUseRandomBattleImageActionPerformed(evt);
-            }
-        });
-
-        jLabel14.setText("Background:");
-
-        jLabel15.setText("Battlefield:");
-
-        org.jdesktop.layout.GroupLayout panelBackgroundImagesLayout = new org.jdesktop.layout.GroupLayout(panelBackgroundImages);
-        panelBackgroundImages.setLayout(panelBackgroundImagesLayout);
-        panelBackgroundImagesLayout.setHorizontalGroup(
-                panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(panelBackgroundImagesLayout.createSequentialGroup()
-                                .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                        .add(panelBackgroundImagesLayout.createSequentialGroup()
-                                                .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                                        .add(panelBackgroundImagesLayout.createSequentialGroup()
-                                                                .add(19, 19, 19)
-                                                                .add(jLabel14))
-                                                        .add(panelBackgroundImagesLayout.createSequentialGroup()
-                                                                .add(25, 25, 25)
-                                                                .add(jLabel15)))
-                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                                .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                                        .add(txtBackgroundImagePath)
-                                                        .add(txtBattlefieldImagePath))
-                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                                .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                                        .add(org.jdesktop.layout.GroupLayout.TRAILING, btnBrowseBackgroundImage)
-                                                        .add(org.jdesktop.layout.GroupLayout.TRAILING, btnBrowseBattlefieldImage)))
-                                        .add(panelBackgroundImagesLayout.createSequentialGroup()
-                                                .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                                        .add(cbUseRandomBattleImage)
-                                                        .add(cbUseDefaultBattleImage)
-                                                        .add(cbUseDefaultBackground))
-                                                .add(0, 0, Short.MAX_VALUE)))
-                                .addContainerGap())
-        );
-        panelBackgroundImagesLayout.setVerticalGroup(
-                panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(panelBackgroundImagesLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .add(cbUseDefaultBackground)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                                        .add(txtBackgroundImagePath, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                        .add(btnBrowseBackgroundImage)
-                                        .add(jLabel14))
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                                .add(cbUseDefaultBattleImage)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                                .add(cbUseRandomBattleImage)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                                .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                                        .add(txtBattlefieldImagePath, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                        .add(btnBrowseBattlefieldImage)
-                                        .add(jLabel15)))
+                                        .add(labelPreferedImageLanguage)
+                                        .add(cbPreferedImageLanguage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
         );
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Card styles (restart xmage to apply new settings)"));
@@ -1789,6 +1669,95 @@ public class PreferencesDialog extends javax.swing.JDialog {
                                 .add(0, 0, Short.MAX_VALUE))
         );
 
+        panelBackgroundImages.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Background images"));
+
+        cbUseDefaultBackground.setText("Use default location for backgrounds");
+        cbUseDefaultBackground.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbUseDefaultBackgroundActionPerformed(evt);
+            }
+        });
+
+        txtBackgroundImagePath.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBackgroundImagePathActionPerformed(evt);
+            }
+        });
+
+        btnBrowseBackgroundImage.setText("Browse...");
+        btnBrowseBackgroundImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBrowseBackgroundImageActionPerformed(evt);
+            }
+        });
+
+        txtBattlefieldImagePath.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBattlefieldImagePathActionPerformed(evt);
+            }
+        });
+
+        btnBrowseBattlefieldImage.setText("Browse...");
+        btnBrowseBattlefieldImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBrowseBattlefieldImageActionPerformed(evt);
+            }
+        });
+
+        cbUseDefaultBattleImage.setText("Use default battlefield image");
+        cbUseDefaultBattleImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbUseDefaultBattleImageActionPerformed(evt);
+            }
+        });
+
+        cbUseRandomBattleImage.setText("Use random background");
+        cbUseRandomBattleImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbUseRandomBattleImageActionPerformed(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout panelBackgroundImagesLayout = new org.jdesktop.layout.GroupLayout(panelBackgroundImages);
+        panelBackgroundImages.setLayout(panelBackgroundImagesLayout);
+        panelBackgroundImagesLayout.setHorizontalGroup(
+                panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(panelBackgroundImagesLayout.createSequentialGroup()
+                                .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                        .add(panelBackgroundImagesLayout.createSequentialGroup()
+                                                .add(cbUseDefaultBackground)
+                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                                .add(txtBackgroundImagePath)
+                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                                .add(btnBrowseBackgroundImage))
+                                        .add(panelBackgroundImagesLayout.createSequentialGroup()
+                                                .add(cbUseRandomBattleImage)
+                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                                .add(txtBattlefieldImagePath)
+                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                                .add(btnBrowseBattlefieldImage))
+                                        .add(panelBackgroundImagesLayout.createSequentialGroup()
+                                                .add(cbUseDefaultBattleImage)
+                                                .add(0, 0, Short.MAX_VALUE)))
+                                .addContainerGap())
+        );
+        panelBackgroundImagesLayout.setVerticalGroup(
+                panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(panelBackgroundImagesLayout.createSequentialGroup()
+                                .add(cbUseDefaultBattleImage)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                        .add(cbUseDefaultBackground)
+                                        .add(txtBackgroundImagePath, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                        .add(btnBrowseBackgroundImage))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                        .add(cbUseRandomBattleImage)
+                                        .add(txtBattlefieldImagePath, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                        .add(btnBrowseBattlefieldImage))
+                                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         org.jdesktop.layout.GroupLayout tabImagesLayout = new org.jdesktop.layout.GroupLayout(tabImages);
         tabImages.setLayout(tabImagesLayout);
         tabImagesLayout.setHorizontalGroup(
@@ -1810,7 +1779,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                                 .add(panelCardImages, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(panelBackgroundImages, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(133, Short.MAX_VALUE))
+                                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tabsPanel.addTab("Images", tabImages);
@@ -2385,7 +2354,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         tabAvatarsLayout.setVerticalGroup(
                 tabAvatarsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                         .add(tabAvatarsLayout.createSequentialGroup()
-                                .add(avatarPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 620, Short.MAX_VALUE)
+                                .add(avatarPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addContainerGap())
         );
 
@@ -2420,14 +2389,14 @@ public class PreferencesDialog extends javax.swing.JDialog {
                                         .add(connection_serversLayout.createSequentialGroup()
                                                 .add(141, 141, 141)
                                                 .add(jLabel17)))
-                                .addContainerGap(251, Short.MAX_VALUE))
+                                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         connection_serversLayout.setVerticalGroup(
                 connection_serversLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                         .add(connection_serversLayout.createSequentialGroup()
                                 .add(connection_serversLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                                         .add(lblURLServerList, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .add(txtURLServerList, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
+                                        .add(txtURLServerList, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(jLabel17))
         );
@@ -2663,7 +2632,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                                                         .add(keyToggleRecordMacro, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                                         .add(keySwitchChat, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                                .add(controlsDescriptionLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
+                                .add(controlsDescriptionLabel)
                                 .addContainerGap())
         );
         tabControlsLayout.setVerticalGroup(
@@ -2749,7 +2718,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                        .add(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                                         .add(org.jdesktop.layout.GroupLayout.LEADING, tabsPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -2763,7 +2732,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         layout.setVerticalGroup(
                 layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                         .add(layout.createSequentialGroup()
-                                .add(tabsPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .add(tabsPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 554, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                         .add(saveButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -2892,7 +2861,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         // images
         save(prefs, dialog.cbUseDefaultImageFolder, KEY_CARD_IMAGES_USE_DEFAULT, "true", "false", UPDATE_CACHE_POLICY);
         saveImagesPath(prefs);
-        save(prefs, dialog.cbCheckForNewImages, KEY_CARD_IMAGES_CHECK, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbSaveToZipFiles, KEY_CARD_IMAGES_SAVE_TO_ZIP, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbNumberOfDownloadThreads, KEY_CARD_IMAGES_THREADS);
         save(prefs, dialog.cbPreferedImageLanguage, KEY_CARD_IMAGES_PREF_LANGUAGE);
@@ -3198,31 +3166,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbCardRenderShowReminderTextActionPerformed
 
-    private void cbSaveToZipFilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSaveToZipFilesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbSaveToZipFilesActionPerformed
-
-    private void cbCheckForNewImagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCheckForNewImagesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbCheckForNewImagesActionPerformed
-
-    private void btnBrowseImageLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrowseImageLocationActionPerformed
-        int returnVal = fc.showOpenDialog(PreferencesDialog.this);
-
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = fc.getSelectedFile();
-            txtImageFolderPath.setText(file.getAbsolutePath());
-        }
-    }//GEN-LAST:event_btnBrowseImageLocationActionPerformed
-
-    private void cbUseDefaultImageFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbUseDefaultImageFolderActionPerformed
-        if (cbUseDefaultImageFolder.isSelected()) {
-            useDefaultPath();
-        } else {
-            useConfigurablePath();
-        }
-    }//GEN-LAST:event_cbUseDefaultImageFolderActionPerformed
-
     private void cbCardRenderHideSetSymbolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCardRenderHideSetSymbolActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbCardRenderHideSetSymbolActionPerformed
@@ -3262,6 +3205,27 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private void cbStopBlockWithZeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbStopBlockWithZeroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbStopBlockWithZeroActionPerformed
+
+    private void cbSaveToZipFilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSaveToZipFilesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbSaveToZipFilesActionPerformed
+
+    private void btnBrowseImageLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrowseImageLocationActionPerformed
+        int returnVal = fc.showOpenDialog(PreferencesDialog.this);
+
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+            txtImageFolderPath.setText(file.getAbsolutePath());
+        }
+    }//GEN-LAST:event_btnBrowseImageLocationActionPerformed
+
+    private void cbUseDefaultImageFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbUseDefaultImageFolderActionPerformed
+        if (cbUseDefaultImageFolder.isSelected()) {
+            useDefaultPath();
+        } else {
+            useConfigurablePath();
+        }
+    }//GEN-LAST:event_cbUseDefaultImageFolderActionPerformed
 
     private void showProxySettings() {
         Connection.ProxyType proxyType = (Connection.ProxyType) cbProxyType.getSelectedItem();
@@ -3446,7 +3410,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
             dialog.txtImageFolderPath.setText(path);
             updateCache(KEY_CARD_IMAGES_PATH, path);
         }
-        load(prefs, dialog.cbCheckForNewImages, KEY_CARD_IMAGES_CHECK, "true");
         load(prefs, dialog.cbSaveToZipFiles, KEY_CARD_IMAGES_SAVE_TO_ZIP, "true");
         dialog.cbNumberOfDownloadThreads.setSelectedItem(MageFrame.getPreferences().get(KEY_CARD_IMAGES_THREADS, "10"));
         dialog.cbPreferedImageLanguage.setSelectedItem(MageFrame.getPreferences().get(KEY_CARD_IMAGES_PREF_LANGUAGE, CardLanguage.ENGLISH.getCode()));
@@ -3964,7 +3927,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox cbCardRenderHideSetSymbol;
     private javax.swing.JCheckBox cbCardRenderImageFallback;
     private javax.swing.JCheckBox cbCardRenderShowReminderText;
-    private javax.swing.JCheckBox cbCheckForNewImages;
     private javax.swing.JCheckBox cbConfirmEmptyManaPool;
     private javax.swing.JCheckBox cbDraftLogAutoSave;
     private javax.swing.JCheckBox cbEnableBattlefieldBGM;
@@ -4014,8 +3976,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel guiSizeBasic;
     private javax.swing.JPanel guiSizeGame;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabelBeforeCombat;
@@ -4076,6 +4036,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel labelEndStep;
     private javax.swing.JLabel labelEnlargedImageSize;
     private javax.swing.JLabel labelGameFeedback;
+    private javax.swing.JLabel labelHint1;
     private javax.swing.JLabel labelMainStep;
     private javax.swing.JLabel labelNextTurn;
     private javax.swing.JLabel labelNumberOfDownloadThreads;
