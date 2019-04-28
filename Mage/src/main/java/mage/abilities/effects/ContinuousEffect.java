@@ -40,6 +40,8 @@ public interface ContinuousEffect extends Effect {
 
     void init(Ability source, Game game);
 
+    void init(Ability source, Game game, UUID activePlayerId);
+
     Layer getLayer();
 
     SubLayer getSublayer();
@@ -58,13 +60,13 @@ public interface ContinuousEffect extends Effect {
 
     void addDependedToType(DependencyType dependencyType);
 
-    void setStartingTurnNum(Game game, UUID startingController);
-
-    int getStartingTurnNum();
-
-    int getNextStartingControllerTurnNum();
+    void setStartingControllerAndTurnNum(Game game, UUID startingController, UUID activePlayerId);
 
     UUID getStartingController();
+
+    void incYourTurnNumPlayed();
+
+    boolean isYourNextTurn(Game game);
 
     @Override
     void newId();

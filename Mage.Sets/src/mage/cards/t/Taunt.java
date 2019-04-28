@@ -59,9 +59,7 @@ class TauntEffect extends RequirementEffect {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        return getStartingTurnNum() != game.getTurnNum() &&
-                (game.getPhase().getType() == TurnPhase.END &&
-                        game.isActivePlayer(this.getTargetPointer().getFirst(game, source)));
+        return game.getPhase().getType() == TurnPhase.END && this.isYourNextTurn(game);
     }
 
     @Override

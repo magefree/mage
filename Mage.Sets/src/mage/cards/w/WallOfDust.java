@@ -47,7 +47,6 @@ public final class WallOfDust extends CardImpl {
 
 class WallOfDustRestrictionEffect extends RestrictionEffect {
 
-    int nextTurnTargetController = 0;
     protected MageObjectReference targetPermanentReference;
 
     public WallOfDustRestrictionEffect() {
@@ -57,7 +56,6 @@ class WallOfDustRestrictionEffect extends RestrictionEffect {
 
     public WallOfDustRestrictionEffect(final WallOfDustRestrictionEffect effect) {
         super(effect);
-        this.nextTurnTargetController = effect.nextTurnTargetController;
         this.targetPermanentReference = effect.targetPermanentReference;
     }
 
@@ -68,26 +66,22 @@ class WallOfDustRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        if (targetPermanentReference == null) {
+        if (targetPermanentReference == null || targetPermanentReference.getPermanent(game) == null) {
             return true;
         }
-        Permanent targetPermanent = targetPermanentReference.getPermanent(game);
-        if (targetPermanent == null) {
-            return true;
-        }
-        if (nextTurnTargetController == 0 && getStartingTurnNum() != game.getTurnNum() && game.isActivePlayer(targetPermanent.getControllerId())) {
-            nextTurnTargetController = game.getTurnNum();
-        }
-        return game.getPhase().getType() == TurnPhase.END && nextTurnTargetController > 0 && game.getTurnNum() > nextTurnTargetController;
+
+        return game.getPhase().getType() == TurnPhase.END && this.isYourNextTurn(game);
     }
 
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (getTargetPointer().getFirst(game, source) == null) {
-            discard();
+        Permanent perm = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (perm != null) {
+            targetPermanentReference = new MageObjectReference(perm, game);
+            setStartingControllerAndTurnNum(game, perm.getControllerId(), game.getActivePlayerId());
         } else {
-            targetPermanentReference = new MageObjectReference(getTargetPointer().getFirst(game, source), game);
+            discard();
         }
     }
 

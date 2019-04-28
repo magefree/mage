@@ -130,7 +130,7 @@ class GideonBattleForgedAttacksIfAbleTargetEffect extends RequirementEffect {
         if (targetPermanent == null) {
             return true;
         }
-        return game.getPhase().getType() == TurnPhase.END && game.getTurnNum() > getNextStartingControllerTurnNum();
+        return game.getPhase().getType() == TurnPhase.END && this.isYourNextTurn(game); // discard on end of their next turn
     }
 
     @Override

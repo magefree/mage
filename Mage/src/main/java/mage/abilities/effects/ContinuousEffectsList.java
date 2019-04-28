@@ -41,10 +41,21 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
         return new ContinuousEffectsList<>(this);
     }
 
-    public void removeEndOfTurnEffects() {
+    public void removeEndOfTurnEffects(Game game) {
+        // calls every turn on cleanup step (only end of turn duration)
+        // rules 514.2
         for (Iterator<T> i = this.iterator(); i.hasNext(); ) {
             T entry = i.next();
-            if (entry.getDuration() == Duration.EndOfTurn) {
+            boolean canRemove = false;
+            switch (entry.getDuration()) {
+                case EndOfTurn:
+                    canRemove = true;
+                    break;
+                case UntilEndOfYourNextTurn:
+                    canRemove = entry.isYourNextTurn(game);
+                    break;
+            }
+            if (canRemove) {
                 i.remove();
                 effectAbilityMap.remove(entry.getId());
             }
@@ -68,6 +79,15 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
             if (isInactive(entry, game)) {
                 i.remove();
                 effectAbilityMap.remove(entry.getId());
+            }
+        }
+    }
+
+    public void incYourTurnNumPlayed(Game game) {
+        for (Iterator<T> i = this.iterator(); i.hasNext(); ) {
+            T entry = i.next();
+            if (game.isActivePlayer(entry.getStartingController())) {
+                entry.incYourTurnNumPlayed();
             }
         }
     }
