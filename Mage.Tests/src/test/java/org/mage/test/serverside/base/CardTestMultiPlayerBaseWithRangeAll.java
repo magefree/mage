@@ -11,17 +11,13 @@ import org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl;
 import java.io.FileNotFoundException;
 
 /**
- * Base class for testing single cards and effects in multiplayer game. For PvP
- * games {
- *
- * @author magenoxx_at_gmail.com
- * @see CardTestPlayerBase}
+ * @author JayDi82
  */
-public abstract class CardTestMultiPlayerBase extends CardTestPlayerAPIImpl {
+public abstract class CardTestMultiPlayerBaseWithRangeAll extends CardTestPlayerAPIImpl {
 
     @Override
     protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
-        Game game = new FreeForAll(MultiplayerAttackOption.LEFT, RangeOfInfluence.ONE, new VancouverMulligan(0), 20);
+        Game game = new FreeForAll(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, new VancouverMulligan(0), 20);
         // Player order: A -> D -> C -> B
         playerA = createPlayer(game, playerA, "PlayerA");
         playerB = createPlayer(game, playerB, "PlayerB");

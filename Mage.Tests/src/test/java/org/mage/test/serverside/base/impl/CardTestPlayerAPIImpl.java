@@ -55,6 +55,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public static final String CHECK_COMMAND_LIFE = "LIFE";
     public static final String CHECK_COMMAND_ABILITY = "ABILITY";
     public static final String CHECK_COMMAND_PERMANENT_COUNT = "PERMANENT_COUNT";
+    public static final String CHECK_COMMAND_PERMANENT_COUNTERS = "PERMANENT_COUNTERS";
     public static final String CHECK_COMMAND_EXILE_COUNT = "EXILE_COUNT";
     public static final String CHECK_COMMAND_HAND_COUNT = "HAND_COUNT";
     public static final String CHECK_COMMAND_HAND_CARD_COUNT = "HAND_CARD_COUNT";
@@ -232,10 +233,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                         + " (found actions after stop on " + maxTurn + " / " + maxPhase + ")",
                 (maxTurn > this.stopOnTurn) || (maxTurn == this.stopOnTurn && maxPhase > this.stopAtStep.getIndex()));
 
+
         for (Player player : currentGame.getPlayers().values()) {
             TestPlayer testPlayer = (TestPlayer) player;
             currentGame.cheat(player.getId(), getCommands(testPlayer));
-            currentGame.cheat(player.getId(), getLibraryCards(testPlayer), getHandCards(testPlayer),
+            currentGame.cheat(player.getId(), activePlayer.getId(), getLibraryCards(testPlayer), getHandCards(testPlayer),
                     getBattlefieldCards(testPlayer), getGraveCards(testPlayer));
         }
 
@@ -306,6 +308,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public void checkPermanentCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, Integer count) {
         //Assert.assertNotEquals("", permanentName);
         check(checkName, turnNum, step, player, CHECK_COMMAND_PERMANENT_COUNT, permanentName, count.toString());
+    }
+
+    public void checkPermanentCounters(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, CounterType counterType, Integer count) {
+        check(checkName, turnNum, step, player, CHECK_COMMAND_PERMANENT_COUNTERS, permanentName, counterType.toString(), count.toString());
     }
 
     public void checkExileCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, Integer count) {
@@ -1231,6 +1237,16 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 + "])", count, player.getActions().size());
     }
 
+    public void assertActionsMustBeEmpty(TestPlayer player) throws AssertionError {
+        if (!player.getActions().isEmpty()) {
+            System.out.println("Remaining actions for " + player.getName() + " (" + player.getActions().size() + "):");
+            player.getActions().stream().forEach(a -> {
+                System.out.println("* turn " + a.getTurnNum() + " - " + a.getStep() + ": " + a.getActionName());
+            });
+            Assert.fail("Player " + player.getName() + " must have 0 actions but found " + player.getActions().size());
+        }
+    }
+
     public void assertChoicesCount(TestPlayer player, int count) throws AssertionError {
         Assert.assertEquals("(Choices of " + player.getName() + ") Count are not equal (found " + player.getChoices() + ")", count, player.getChoices().size());
     }
@@ -1242,7 +1258,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public void assertAllCommandsUsed() throws AssertionError {
         for (Player player : currentGame.getPlayers().values()) {
             TestPlayer testPlayer = (TestPlayer) player;
-            assertActionsCount(testPlayer, 0);
+            assertActionsMustBeEmpty(testPlayer);
             assertChoicesCount(testPlayer, 0);
             assertTargetsCount(testPlayer, 0);
         }

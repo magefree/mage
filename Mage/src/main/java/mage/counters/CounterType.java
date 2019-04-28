@@ -194,6 +194,11 @@ public enum CounterType {
         }
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
+
     public static CounterType findByName(String name) {
         for (CounterType counterType : values()) {
             if (counterType.getName().equals(name)) {

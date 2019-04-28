@@ -19,6 +19,7 @@ import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.constants.*;
 import mage.counters.Counter;
+import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.designations.Designation;
 import mage.designations.DesignationType;
@@ -639,6 +640,13 @@ public class TestPlayer implements Player {
                             wasProccessed = true;
                         }
 
+                        // check permanent counters: card name, counter type, count
+                        if (params[0].equals(CHECK_COMMAND_PERMANENT_COUNTERS) && params.length == 4) {
+                            assertPermanentCounters(action, game, computerPlayer, params[1], CounterType.findByName(params[2]), Integer.parseInt(params[3]));
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
                         // check exile count: card name, count
                         if (params[0].equals(CHECK_COMMAND_EXILE_COUNT) && params.length == 3) {
                             assertExileCount(action, game, computerPlayer, params[1], Integer.parseInt(params[2]));
@@ -836,8 +844,8 @@ public class TestPlayer implements Player {
 
         List<String> data = cards.stream()
                 .map(c -> (c.getIdName()
-                        + " - " + c.getPower().getValue()
-                        + "/" + c.getToughness().getValue()
+                        + " - " + c.getPower().getValue() + "/" + c.getToughness().getValue()
+                        + (c.isPlaneswalker() ? " - L" + c.getCounters(game).getCount(CounterType.LOYALTY) : "")
                         + ", " + (c.isTapped() ? "Tapped" : "Untapped")
                         + (c.getAttachedTo() == null ? "" : ", attached to " + game.getPermanent(c.getAttachedTo()).getIdName())
                 ))
@@ -947,6 +955,17 @@ public class TestPlayer implements Player {
         }
 
         Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must exists in " + count + " instances", count, foundedCount);
+    }
+
+    private void assertPermanentCounters(PlayerAction action, Game game, Player player, String permanentName, CounterType counterType, int count) {
+        int foundedCount = 0;
+        for (Permanent perm : game.getBattlefield().getAllPermanents()) {
+            if (perm.getName().equals(permanentName) && perm.getControllerId().equals(player.getId())) {
+                foundedCount = perm.getCounters(game).getCount(counterType);
+            }
+        }
+
+        Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must have " + count + " " + counterType.toString(), count, foundedCount);
     }
 
     private void assertExileCount(PlayerAction action, Game game, Player player, String permanentName, int count) {
@@ -1151,10 +1170,12 @@ public class TestPlayer implements Player {
     public void selectAttackers(Game game, UUID attackingPlayerId) {
         // Loop through players and validate can attack/block this turn
         UUID defenderId = null;
-        //List<PlayerAction>
+        boolean mustAttackByAction = false;
+        boolean madeAttackByAction = false;
         for (Iterator<org.mage.test.player.PlayerAction> it = actions.iterator(); it.hasNext(); ) {
             PlayerAction action = it.next();
             if (action.getTurnNum() == game.getTurnNum() && action.getAction().startsWith("attack:")) {
+                mustAttackByAction = true;
                 String command = action.getAction();
                 command = command.substring(command.indexOf("attack:") + 7);
                 String[] groups = command.split("\\$");
@@ -1198,9 +1219,13 @@ public class TestPlayer implements Player {
                 if (attacker != null && attacker.canAttack(defenderId, game)) {
                     computerPlayer.declareAttacker(attacker.getId(), defenderId, game, false);
                     it.remove();
+                    madeAttackByAction = true;
                 }
             }
+        }
 
+        if (mustAttackByAction && !madeAttackByAction) {
+            this.chooseStrictModeFailed(game, "select attackers must use attack command but don't");
         }
     }
 
@@ -1212,10 +1237,12 @@ public class TestPlayer implements Player {
     @Override
     public void selectBlockers(Game game, UUID defendingPlayerId) {
 
+        List<PlayerAction> tempActions = new ArrayList<>(actions);
+
         UUID opponentId = game.getOpponents(computerPlayer.getId()).iterator().next();
         // Map of Blocker reference -> list of creatures blocked
         Map<MageObjectReference, List<MageObjectReference>> blockedCreaturesByCreature = new HashMap<>();
-        for (PlayerAction action : actions) {
+        for (PlayerAction action : tempActions) {
             if (action.getTurnNum() == game.getTurnNum() && action.getAction().startsWith("block:")) {
                 String command = action.getAction();
                 command = command.substring(command.indexOf("block:") + 6);
@@ -1226,6 +1253,7 @@ public class TestPlayer implements Player {
                 Permanent blocker = findPermanent(new FilterControlledPermanent(), blockerName, computerPlayer.getId(), game);
                 if (canBlockAnother(game, blocker, attacker, blockedCreaturesByCreature)) {
                     computerPlayer.declareBlocker(defendingPlayerId, blocker.getId(), attacker.getId(), game);
+                    actions.remove(action);
                 } else {
                     throw new UnsupportedOperationException(blockerName + " cannot block " + attackerName + " it is already blocking the maximum amount of creatures.");
                 }

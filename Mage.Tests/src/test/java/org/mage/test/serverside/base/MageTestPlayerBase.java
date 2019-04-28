@@ -1,12 +1,15 @@
 package org.mage.test.serverside.base;
 
+import mage.abilities.Abilities;
+import mage.abilities.AbilitiesImpl;
+import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import mage.constants.PhaseStep;
-import mage.constants.RangeOfInfluence;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.match.MatchType;
 import mage.game.permanent.PermanentCard;
@@ -33,7 +36,7 @@ import java.util.regex.Pattern;
 /**
  * Base class for all tests.
  *
- * @author ayratn
+ * @author ayratn, JayDi85
  */
 public abstract class MageTestPlayerBase {
 
@@ -333,10 +336,63 @@ public abstract class MageTestPlayerBase {
         return new TestPlayer(new TestComputerPlayer(name, rangeOfInfluence));
     }
 
-    public void setStrictChooseMode(boolean enable) {
+    protected void setStrictChooseMode(boolean enable) {
         if (playerA != null) playerA.setChooseStrictMode(enable);
         if (playerB != null) playerB.setChooseStrictMode(enable);
         if (playerC != null) playerC.setChooseStrictMode(enable);
         if (playerD != null) playerD.setChooseStrictMode(enable);
+    }
+
+    protected void addCustomCardWithAbility(String customName, TestPlayer controllerPlayer, Ability ability) {
+        // add custom card with selected ability to battlefield
+        CustomTestCard.clearCustomAbilities(customName);
+        CustomTestCard.addCustomAbility(customName, ability);
+        CardSetInfo testSet = new CardSetInfo(customName, "custom", "123", Rarity.COMMON);
+        PermanentCard card = new PermanentCard(new CustomTestCard(controllerPlayer.getId(), testSet), controllerPlayer.getId(), currentGame);
+        getBattlefieldCards(controllerPlayer).add(card);
+    }
+}
+
+// custom card with global abilities list to init (can contains abilities per card name)
+class CustomTestCard extends CardImpl {
+
+    static private Map<String, Abilities<Ability>> abilitiesList = new HashMap<>(); // card name -> abilities
+
+    static protected void addCustomAbility(String cardName, Ability ability) {
+        if (!abilitiesList.containsKey(cardName)) {
+            abilitiesList.put(cardName, new AbilitiesImpl<>());
+        }
+        Abilities<Ability> oldAbilities = abilitiesList.get(cardName);
+        oldAbilities.add(ability);
+    }
+
+    static protected void clearCustomAbilities(String cardName) {
+        abilitiesList.remove(cardName);
+    }
+
+    static public void clearCustomAbilities() {
+        abilitiesList.clear();
+    }
+
+
+    public CustomTestCard(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "");
+
+        // load dynamic abilities by card name
+        Abilities<Ability> extraAbitilies = abilitiesList.get(setInfo.getName());
+        if (extraAbitilies != null) {
+            for (Ability ability : extraAbitilies) {
+                this.addAbility(ability.copy());
+            }
+        }
+    }
+
+    private CustomTestCard(final CustomTestCard card) {
+        super(card);
+    }
+
+    @Override
+    public CustomTestCard copy() {
+        return new CustomTestCard(this);
     }
 }

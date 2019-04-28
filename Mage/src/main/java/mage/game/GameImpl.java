@@ -40,7 +40,6 @@ import mage.game.command.Emblem;
 import mage.game.command.Plane;
 import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
-import mage.game.mulligan.LondonMulligan;
 import mage.game.mulligan.Mulligan;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
@@ -128,7 +127,7 @@ public abstract class GameImpl implements Game, Serializable {
     private int priorityTime;
 
     private final int startLife;
-    protected PlayerList playerList;
+    protected PlayerList playerList; // auto-generated from state, don't copy
 
     // infinite loop check (no copy of this attributes neccessary)
     private int infiniteLoopCounter; // used to check if the game is in an infinite loop
@@ -138,8 +137,9 @@ public abstract class GameImpl implements Game, Serializable {
 
     // used to set the counters a permanent adds the battlefield (if no replacement effect is used e.g. Persist)
     protected Map<UUID, Counters> enterWithCounters = new HashMap<>();
-    // used to proceed player conceding requests
-    private final LinkedList<UUID> concedingPlayers = new LinkedList<>(); // used to handle asynchronous request of a player to leave the game
+
+    // temporary store for income concede commands, don't copy
+    private final LinkedList<UUID> concedingPlayers = new LinkedList<>();
 
     public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
         this.id = UUID.randomUUID();
@@ -2845,7 +2845,7 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<PermanentCard> battlefield, List<Card> graveyard) {
+    public void cheat(UUID ownerId, UUID activePlayerId, List<Card> library, List<Card> hand, List<PermanentCard> battlefield, List<Card> graveyard) {
         Player player = getPlayer(ownerId);
         if (player != null) {
             loadCards(ownerId, library);
@@ -2864,6 +2864,8 @@ public abstract class GameImpl implements Game, Serializable {
                 card.setZone(Zone.GRAVEYARD, this);
                 player.getGraveyard().add(card);
             }
+
+            // warning, permanents go to battlefield without resolve, continuus effects must be init
             for (PermanentCard permanentCard : battlefield) {
                 permanentCard.setZone(Zone.BATTLEFIELD, this);
                 permanentCard.setOwnerId(ownerId);
@@ -2875,6 +2877,14 @@ public abstract class GameImpl implements Game, Serializable {
                 newPermanent.removeSummoningSickness();
                 if (permanentCard.isTapped()) {
                     newPermanent.setTapped(true);
+                }
+
+                // init effects on static abilities (init continuous effects, warning, game state contains copy)
+                for (ContinuousEffect effect : this.getState().getContinuousEffects().getLayeredEffects(this)) {
+                    Optional<Ability> ability = this.getState().getContinuousEffects().getLayeredEffectAbilities(effect).stream().findFirst();
+                    if (ability.isPresent() && newPermanent.getId().equals(ability.get().getSourceId())) {
+                        effect.init(ability.get(), this, activePlayerId); // game is not setup yet, game.activePlayer is null -- need direct id
+                    }
                 }
             }
             applyEffects();
