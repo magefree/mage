@@ -626,6 +626,13 @@ public class TestPlayer implements Player {
                             wasProccessed = true;
                         }
 
+                        // check player in game: target player, must be in game
+                        if (params[0].equals(CHECK_COMMAND_PLAYER_IN_GAME) && params.length == 3) {
+                            assertPlayerInGame(action, game, game.getPlayer(UUID.fromString(params[1])), Boolean.parseBoolean(params[2]));
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
                         // check ability: card name, ability class, must have
                         if (params[0].equals(CHECK_COMMAND_ABILITY) && params.length == 4) {
                             assertAbility(action, game, computerPlayer, params[1], params[2], Boolean.parseBoolean(params[3]));
@@ -633,9 +640,9 @@ public class TestPlayer implements Player {
                             wasProccessed = true;
                         }
 
-                        // check battlefield count: card name, count
-                        if (params[0].equals(CHECK_COMMAND_PERMANENT_COUNT) && params.length == 3) {
-                            assertPermanentCount(action, game, computerPlayer, params[1], Integer.parseInt(params[2]));
+                        // check battlefield count: target player, card name, count
+                        if (params[0].equals(CHECK_COMMAND_PERMANENT_COUNT) && params.length == 4) {
+                            assertPermanentCount(action, game, game.getPlayer(UUID.fromString(params[1])), params[2], Integer.parseInt(params[3]));
                             actions.remove(action);
                             wasProccessed = true;
                         }
@@ -926,6 +933,18 @@ public class TestPlayer implements Player {
     private void assertLife(PlayerAction action, Game game, Player player, int Life) {
         Assert.assertEquals(action.getActionName() + " - " + player.getName() + " have wrong life: " + player.getLife() + " <> " + Life,
                 Life, player.getLife());
+    }
+
+    private void assertPlayerInGame(PlayerAction action, Game game, Player targetPlayer, boolean mustBeInGame) {
+        Assert.assertNotNull("Can't find target player", targetPlayer);
+
+        if (targetPlayer.isInGame() && !mustBeInGame) {
+            Assert.fail(action.getActionName() + " - player " + targetPlayer.getName() + " must NOT be in game");
+        }
+
+        if (!targetPlayer.isInGame() && mustBeInGame) {
+            Assert.fail(action.getActionName() + " - player " + targetPlayer.getName() + " must be in game");
+        }
     }
 
     private void assertAbility(PlayerAction action, Game game, Player player, String permanentName, String abilityClass, boolean mustHave) {

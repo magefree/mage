@@ -64,6 +64,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public static final String CHECK_COMMAND_SUBTYPE = "SUBTYPE";
     public static final String CHECK_COMMAND_MANA_POOL = "MANA_POOL";
     public static final String CHECK_COMMAND_ALIAS_ZONE = "ALIAS_ZONE";
+    public static final String CHECK_COMMAND_PLAYER_IN_GAME = "PLAYER_IN_GAME";
 
     // TODO: add target player param to commands
     public static final String SHOW_COMMAND_LIBRARY = "LIBRARY";
@@ -300,6 +301,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         check(checkName, turnNum, step, player, CHECK_COMMAND_LIFE, life.toString());
     }
 
+    public void checkPlayerInGame(String checkName, int turnNum, PhaseStep step, TestPlayer player, TestPlayer targetPlayer, Boolean mustBeInGame) {
+        check(checkName, turnNum, step, player, CHECK_COMMAND_PLAYER_IN_GAME, targetPlayer.getId().toString(), mustBeInGame.toString());
+    }
+
     public void checkAbility(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, Class<?> abilityClass, Boolean mustHave) {
         //Assert.assertNotEquals("", permanentName);
         check(checkName, turnNum, step, player, CHECK_COMMAND_ABILITY, permanentName, abilityClass.getName(), mustHave.toString());
@@ -307,7 +312,12 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     public void checkPermanentCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, Integer count) {
         //Assert.assertNotEquals("", permanentName);
-        check(checkName, turnNum, step, player, CHECK_COMMAND_PERMANENT_COUNT, permanentName, count.toString());
+        checkPermanentCount(checkName, turnNum, step, player, player, permanentName, count);
+    }
+
+    public void checkPermanentCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, TestPlayer targetPlayer, String permanentName, Integer count) {
+        //Assert.assertNotEquals("", permanentName);
+        check(checkName, turnNum, step, player, CHECK_COMMAND_PERMANENT_COUNT, targetPlayer.getId().toString(), permanentName, count.toString());
     }
 
     public void checkPermanentCounters(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, CounterType counterType, Integer count) {
