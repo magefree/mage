@@ -11,7 +11,7 @@ import org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl;
 import java.io.FileNotFoundException;
 
 /**
- * @author JayDi82
+ * @author JayDi85
  */
 public abstract class CardTestMultiPlayerBaseWithRangeAll extends CardTestPlayerAPIImpl {
 
