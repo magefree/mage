@@ -152,4 +152,5 @@ public class EndOfTurnMultiOpponentsTest extends CardTestMultiPlayerBaseWithRang
         execute();
         assertAllCommandsUsed();
     }
+
 }

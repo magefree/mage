@@ -17,7 +17,8 @@ public class EndOfTurnOneOpponentTest extends CardTestPlayerBase {
 
     public static String cardBear2 = "Balduvian Bears"; // 2/2
 
-    public static void prepareStepChecks(CardTestPlayerAPIImpl testEngine, String testName, int turnNum, TestPlayer player, boolean willBeBattle, PhaseStep mustExistUntilStep) {
+    public static void prepareStepChecks(CardTestPlayerAPIImpl testEngine, String testName, int turnNum, TestPlayer player,
+                                         boolean willBeBattle, PhaseStep mustExistUntilStep) {
         for (PhaseStep step : PhaseStep.values()) {
             // skip auto-steps without priority/checks
             switch (step) {
