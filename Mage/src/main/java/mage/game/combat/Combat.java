@@ -555,7 +555,8 @@ public class Combat implements Serializable, Copyable<Combat> {
         }
         for (UUID attackingCreatureID : game.getCombat().getAttackers()) {
             Permanent permanent = game.getPermanent(attackingCreatureID);
-            if (permanent != null && permanent.getBlocking() == 0) {
+            CombatGroup group = game.getCombat().findGroup(attackingCreatureID);
+            if (permanent != null && group != null && !group.getBlocked()) {
                 game.fireEvent(GameEvent.getEvent(EventType.UNBLOCKED_ATTACKER, attackingCreatureID, attackingPlayerId));
             }
         }
