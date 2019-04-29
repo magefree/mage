@@ -1,8 +1,10 @@
 package mage.abilities.effects.keyword;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -19,10 +21,10 @@ public class AdaptEffect extends OneShotEffect {
     public AdaptEffect(int adaptNumber) {
         super(Outcome.BoostCreature);
         this.adaptNumber = adaptNumber;
-        staticText = "Adapt " + adaptNumber +
-                " <i>(If this creature has no +1/+1 counters on it, put " +
-                CardUtil.numberToText(adaptNumber) + " +1/+1 counter" +
-                (adaptNumber > 1 ? "s" : "") + " on it.)</i>";
+        staticText = "Adapt " + adaptNumber
+                + " <i>(If this creature has no +1/+1 counters on it, put "
+                + CardUtil.numberToText(adaptNumber) + " +1/+1 counter"
+                + (adaptNumber > 1 ? "s" : "") + " on it.)</i>";
     }
 
     private AdaptEffect(final AdaptEffect effect) {
@@ -37,7 +39,15 @@ public class AdaptEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        // Verify source object did not change zone and is on the battlefield
+        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
+        if (sourceObject == null) {
+            if (game.getState().getZone(source.getSourceId()).equals(Zone.BATTLEFIELD)
+                    && source.getSourceObjectZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(source.getSourceId())) {
+                sourceObject = game.getPermanent(source.getSourceId());
+            }
+        }
+        Permanent permanent = ((Permanent) sourceObject);
         if (permanent == null) {
             return false;
         }
@@ -48,7 +58,8 @@ public class AdaptEffect extends OneShotEffect {
         if (game.replaceEvent(event)) {
             return false;
         }
-        if (permanent.getCounters(game).getCount(CounterType.P1P1) == 0 || event.getFlag()) {
+        if (permanent.getCounters(game).getCount(CounterType.P1P1) == 0
+                || event.getFlag()) {
             permanent.addCounters(CounterType.P1P1.createInstance(event.getAmount()), source, game);
         }
         return true;
