@@ -18,6 +18,8 @@ import mage.target.TargetPermanent;
 import mage.util.CardUtil;
 
 import java.util.UUID;
+import mage.abilities.mana.ManaAbility;
+import mage.game.stack.Spell;
 
 /**
  * @author TheElk801
@@ -76,7 +78,12 @@ class DovinHandOfControlEffect extends CostModificationEffectImpl {
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         Card card = game.getCard(abilityToModify.getSourceId());
-        return card != null && (card.isInstantOrSorcery() || card.isArtifact())
+        if (!(abilityToModify instanceof SpellAbility)) {
+            return false;
+        }
+        return card != null
+                && (card.isInstantOrSorcery()
+                || card.isArtifact())
                 && game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId());
     }
 
