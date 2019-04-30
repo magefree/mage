@@ -669,12 +669,26 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         if (target.getOriginalTarget() instanceof TargetPlayerOrPlaneswalker) {
             List<Permanent> targets;
             TargetPlayerOrPlaneswalker origTarget = ((TargetPlayerOrPlaneswalker) target);
+
+            // TODO: if effect is bad and no opponent's targets available then AI can't target yourself but must by rules
+            /*
+            battlefield:Computer:Mountain:5
+            hand:Computer:Viashino Pyromancer:3
+            battlefield:Human:Shalai, Voice of Plenty:1
+             */
+            // TODO: in multiplayer game there many opponents - if random opponents don't have targets then AI must use next opponent, but it skips
+            //  (e.g. you randomOpponentId must be replaced by List<UUID> randomOpponents)
+
+            // normal cycle (good for you, bad for opponents)
+
+            // possible good/bad permanents
             if (outcome.isGood()) {
                 targets = threats(abilityControllerId, source.getSourceId(), ((FilterPermanentOrPlayer) target.getFilter()).getPermanentFilter(), game, target.getTargets());
             } else {
                 targets = threats(randomOpponentId, source.getSourceId(), ((FilterPermanentOrPlayer) target.getFilter()).getPermanentFilter(), game, target.getTargets());
             }
 
+            // possible good/bad players
             if (targets.isEmpty()) {
                 if (outcome.isGood()) {
                     if (target.canTarget(getId(), abilityControllerId, source, game)) {
@@ -685,9 +699,12 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 }
             }
 
+            // can't find targets (e.g. effect is bad, but you need take targets from yourself)
             if (targets.isEmpty() && target.isRequired(source)) {
-                targets = game.getBattlefield().getActivePermanents(((TargetPlayerOrPlaneswalker) origTarget.getFilter()).getFilterPermanent(), playerId, game);
+                targets = game.getBattlefield().getActivePermanents(origTarget.getFilterPermanent(), playerId, game);
             }
+
+            // try target permanent
             for (Permanent permanent : targets) {
                 List<UUID> alreadyTargeted = target.getTargets();
                 if (target.canTarget(abilityControllerId, permanent.getId(), source, game)) {
@@ -697,6 +714,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 }
             }
 
+            // try target player as normal
             if (outcome.isGood()) {
                 if (target.canTarget(getId(), abilityControllerId, source, game)) {
                     return tryAddTarget(target, abilityControllerId, source, game);
