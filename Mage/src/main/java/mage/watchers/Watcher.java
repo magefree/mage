@@ -103,19 +103,7 @@ public abstract class Watcher implements Serializable {
             allFields.addAll(Arrays.asList(getClass().getSuperclass().getDeclaredFields()));
             for (Field field : allFields) {
                 field.setAccessible(true);
-                if (field.getType().isPrimitive()) {
-                    field.set(watcher, field.get(this));
-                }
-                else if(field.getType() == Step.class){
-                    field.set(watcher, field.get(this));
-                }
-                else if (field.getType() == Mana.class) {
-                    field.set(watcher, field.get(this));
-                } else if (field.getType() == UUID.class) {
-                    field.set(watcher, field.get(this));
-                } else if (field.getType().isEnum()) {
-                    field.set(watcher, field.get(this));
-                } else if (field.getType() == Set.class) {
+               if (field.getType() == Set.class) {
                     ((Set) field.get(watcher)).clear();
                     ((Set) field.get(watcher)).addAll((Set) field.get(this));
                 } else if (field.getType() == Map.class) {
@@ -126,7 +114,7 @@ public abstract class Watcher implements Serializable {
                     ((List) field.get(watcher)).addAll((List) field.get(this));
                 } else {
                     if (field.getType() != Logger.class) {
-                        logger.error(field.getType() + " can not be copied");
+                        field.set(watcher, field.get(this));
                     }
                 }
             }
