@@ -79,6 +79,7 @@
         <gameType name="Tiny Leaders Two Player Duel" jar="mage-game-tinyleadersduel.jar" className="mage.game.TinyLeadersDuelMatch" typeName="mage.game.TinyLeadersDuelType"/>
         <gameType name="Canadian Highlander Two Player Duel" jar="mage-game-canadianhighlanderduel.jar" className="mage.game.CanadianHighlanderDuelMatch" typeName="mage.game.CanadianHighlanderDuelType"/>
         <gameType name="Penny Dreadful Commander Free For All" jar="mage-game-pennydreadfulcommanderfreeforall.jar" className="mage.game.PennyDreadfulCommanderFreeForAllMatch" typeName="mage.game.PennyDreadfulCommanderFreeForAllType"/>
+        <gameType name="Freeform Commander Two Player Duel" jar="mage-game-freeformcommanderduel.jar" className="mage.game.FreeformCommanderDuelMatch" typeName="mage.game.FreeformCommanderDuelType"/>
         <gameType name="Freeform Commander Free For All" jar="mage-game-freeformcommanderfreeforall.jar" className="mage.game.FreeformCommanderFreeForAllMatch" typeName="mage.game.FreeformCommanderFreeForAllType"/>
         <gameType name="Brawl Two Player Duel" jar="mage-game-brawlduel.jar" className="mage.game.BrawlDuelMatch" typeName="mage.game.BrawlDuelType"/>
         <gameType name="Brawl Free For All" jar="mage-game-brawlfreeforall.jar" className="mage.game.BrawlFreeForAllMatch" typeName="mage.game.BrawlFreeForAllType"/>
