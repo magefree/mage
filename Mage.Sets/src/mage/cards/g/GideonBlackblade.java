@@ -96,7 +96,7 @@ class GideonBlackbladeToken extends TokenImpl {
         subtype.add(SubType.SOLDIER);
         power = new MageInt(4);
         toughness = new MageInt(4);
-        addAbility(IndestructibleAbility.getInstance());
+        addAbility(new SimpleStaticAbility(new PreventAllDamageToSourceEffect(Duration.WhileOnBattlefield)));
     }
 
     private GideonBlackbladeToken(final GideonBlackbladeToken token) {
