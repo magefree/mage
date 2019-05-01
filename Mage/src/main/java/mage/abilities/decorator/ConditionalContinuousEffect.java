@@ -1,9 +1,5 @@
 package mage.abilities.decorator;
 
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.condition.Condition;
@@ -11,11 +7,14 @@ import mage.abilities.condition.FixedCondition;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.constants.DependencyType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.game.Game;
+import org.junit.Assert;
+
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * Adds condition to {@link ContinuousEffect}. Acts as decorator.
@@ -48,6 +47,17 @@ public class ConditionalContinuousEffect extends ContinuousEffectImpl {
         this.otherwiseEffect = otherwiseEffect;
         this.baseCondition = condition;
         this.staticText = text;
+
+        // checks for compatibility
+        if (effect != null && !effect.getEffectType().equals(EffectType.CONTINUOUS)) {
+            Assert.fail("ConditionalContinuousEffect supports only " + EffectType.CONTINUOUS.toString() + " but found " + effect.getEffectType().toString());
+        }
+        if (otherwiseEffect != null && !otherwiseEffect.getEffectType().equals(EffectType.CONTINUOUS)) {
+            Assert.fail("ConditionalContinuousEffect supports only " + EffectType.CONTINUOUS.toString() + " but found " + effect.getEffectType().toString());
+        }
+        if (effect != null && otherwiseEffect != null && !effect.getEffectType().equals(otherwiseEffect.getEffectType())) {
+            Assert.fail("ConditionalContinuousEffect must be same but found " + effect.getEffectType().toString() + " and " + otherwiseEffect.getEffectType().toString());
+        }
     }
 
     public ConditionalContinuousEffect(final ConditionalContinuousEffect effect) {
@@ -68,6 +78,7 @@ public class ConditionalContinuousEffect extends ContinuousEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         if (baseCondition instanceof LockedInCondition) {
             condition = new FixedCondition(((LockedInCondition) baseCondition).getBaseCondition().apply(game, source));
         } else {

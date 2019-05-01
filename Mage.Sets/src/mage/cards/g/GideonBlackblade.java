@@ -7,6 +7,7 @@ import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.decorator.ConditionalPreventionEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.PreventAllDamageToSourceEffect;
@@ -61,7 +62,7 @@ public final class GideonBlackblade extends CardImpl {
         )));
 
         // Prevent all damage that would be dealt to Gideon Blackblade during your turn.
-        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalPreventionEffect(
                 new PreventAllDamageToSourceEffect(Duration.WhileOnBattlefield),
                 MyTurnCondition.instance, "Prevent all damage that would be dealt to {this} during your turn."
         )));
@@ -96,7 +97,7 @@ class GideonBlackbladeToken extends TokenImpl {
         subtype.add(SubType.SOLDIER);
         power = new MageInt(4);
         toughness = new MageInt(4);
-        addAbility(new SimpleStaticAbility(new PreventAllDamageToSourceEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(IndestructibleAbility.getInstance());
     }
 
     private GideonBlackbladeToken(final GideonBlackbladeToken token) {

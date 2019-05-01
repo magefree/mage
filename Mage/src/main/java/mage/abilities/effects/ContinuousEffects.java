@@ -369,6 +369,7 @@ public class ContinuousEffects implements Serializable {
                 replaceEffects.put(effect, applicableAbilities);
             }
         }
+
         for (Iterator<PreventionEffect> iterator = preventionEffects.iterator(); iterator.hasNext(); ) {
             PreventionEffect effect = iterator.next();
             if (!effect.checksEventType(event, game)) {
@@ -394,6 +395,7 @@ public class ContinuousEffects implements Serializable {
                 replaceEffects.put(effect, applicableAbilities);
             }
         }
+
         return replaceEffects;
     }
 
