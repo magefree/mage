@@ -52,6 +52,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     // TODO: add target player param to commands
     public static final String CHECK_COMMAND_PT = "PT";
+    public static final String CHECK_COMMAND_DAMAGE = "DAMAGE";
     public static final String CHECK_COMMAND_LIFE = "LIFE";
     public static final String CHECK_COMMAND_ABILITY = "ABILITY";
     public static final String CHECK_COMMAND_PERMANENT_COUNT = "PERMANENT_COUNT";
@@ -295,6 +296,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public void checkPT(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, Integer power, Integer toughness) {
         //Assert.assertNotEquals("", permanentName);
         check(checkName, turnNum, step, player, CHECK_COMMAND_PT, permanentName, power.toString(), toughness.toString());
+    }
+
+    public void checkDamage(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, Integer damage) {
+        //Assert.assertNotEquals("", permanentName);
+        check(checkName, turnNum, step, player, CHECK_COMMAND_DAMAGE, permanentName, damage.toString());
     }
 
     public void checkLife(String checkName, int turnNum, PhaseStep step, TestPlayer player, Integer life) {
@@ -1251,7 +1257,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         if (!player.getActions().isEmpty()) {
             System.out.println("Remaining actions for " + player.getName() + " (" + player.getActions().size() + "):");
             player.getActions().stream().forEach(a -> {
-                System.out.println("* turn " + a.getTurnNum() + " - " + a.getStep() + ": " + a.getActionName());
+                System.out.println("* turn " + a.getTurnNum() + " - " + a.getStep() + ": " + (a.getActionName().isEmpty() ? a.getAction() : a.getActionName()));
             });
             Assert.fail("Player " + player.getName() + " must have 0 actions but found " + player.getActions().size());
         }

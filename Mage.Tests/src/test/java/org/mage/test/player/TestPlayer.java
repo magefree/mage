@@ -619,6 +619,13 @@ public class TestPlayer implements Player {
                             wasProccessed = true;
                         }
 
+                        // check damage: card name, damage
+                        if (params[0].equals(CHECK_COMMAND_DAMAGE) && params.length == 3) {
+                            assertDamage(action, game, computerPlayer, params[1], Integer.parseInt(params[2]));
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
                         // check life: life
                         if (params[0].equals(CHECK_COMMAND_LIFE) && params.length == 2) {
                             assertLife(action, game, computerPlayer, Integer.parseInt(params[1]));
@@ -928,6 +935,12 @@ public class TestPlayer implements Player {
                 Power, perm.getPower().getValue());
         Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " have wrong toughness: " + perm.getToughness().getValue() + " <> " + Toughness,
                 Toughness, perm.getToughness().getValue());
+    }
+
+    private void assertDamage(PlayerAction action, Game game, Player player, String permanentName, int damage) {
+        Permanent perm = findPermanentWithAssert(action, game, player, permanentName);
+
+        Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " have wrong damage: " + perm.getDamage() + " <> " + damage, damage, perm.getDamage());
     }
 
     private void assertLife(PlayerAction action, Game game, Player player, int Life) {
