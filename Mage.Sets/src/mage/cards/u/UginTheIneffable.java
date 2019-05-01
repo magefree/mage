@@ -23,15 +23,17 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
 import mage.game.permanent.token.UginTheIneffableToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
-
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 
 import static mage.constants.Outcome.Benefit;
 
@@ -83,9 +85,9 @@ class UginTheIneffableEffect extends OneShotEffect {
 
     UginTheIneffableEffect() {
         super(Benefit);
-        staticText = "Exile the top card of your library face down and look at it. " +
-                "Create a 2/2 colorless Spirit creature token. When that token leaves the battlefield, " +
-                "put the exiled card into your hand.";
+        staticText = "Exile the top card of your library face down and look at it. "
+                + "Create a 2/2 colorless Spirit creature token. When that token leaves the battlefield, "
+                + "put the exiled card into your hand.";
     }
 
     private UginTheIneffableEffect(final UginTheIneffableEffect effect) {
@@ -108,15 +110,27 @@ class UginTheIneffableEffect extends OneShotEffect {
         player.lookAtCards(sourcePermanent.getIdName(), card, game);
         player.moveCards(card, Zone.EXILED, source, game);
         card.turnFaceDown(game, source.getControllerId());
-        Token token = new UginTheIneffableToken();
-        token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
         Set<MageObjectReference> tokenObjs = new HashSet<>();
-        for (UUID tokenId : token.getLastAddedTokenIds()) {
-            tokenObjs.add(new MageObjectReference(tokenId, game));
+        CreateTokenEffect effect = new CreateTokenEffect(new UginTheIneffableToken());
+        effect.apply(game, source);
+        for (UUID addedTokenId : effect.getLastAddedTokenIds()) {
+
+            // display referenced exiled face-down card on token
+            SimpleStaticAbility sa = new SimpleStaticAbility(Zone.BATTLEFIELD, new InfoEffect("Referenced object: " + card.getIdName()));
+            GainAbilityTargetEffect gainAbilityEffect = new GainAbilityTargetEffect(sa, Duration.WhileOnBattlefield);
+            gainAbilityEffect.setTargetPointer(new FixedTarget(addedTokenId));
+            game.addEffect(gainAbilityEffect, source);
+
+            // look at face-down card in exile
+            UginTheIneffableLookAtFaceDownEffect lookAtEffect = new UginTheIneffableLookAtFaceDownEffect();
+            lookAtEffect.setTargetPointer(new FixedTarget(card.getId()));
+            game.addEffect(lookAtEffect, source);
+
+            tokenObjs.add(new MageObjectReference(addedTokenId, game));
+            game.addDelayedTriggeredAbility(new UginTheIneffableDelayedTriggeredAbility(
+                    tokenObjs, new MageObjectReference(card, game)
+            ), source);
         }
-        game.addDelayedTriggeredAbility(new UginTheIneffableDelayedTriggeredAbility(
-                tokenObjs, new MageObjectReference(card, game)
-        ), source);
         return true;
     }
 }
@@ -165,5 +179,37 @@ class UginTheIneffableDelayedTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public String getRule() {
         return "When this token leaves the battlefield, put the exiled card into your hand.";
+    }
+}
+
+class UginTheIneffableLookAtFaceDownEffect extends AsThoughEffectImpl {
+
+    UginTheIneffableLookAtFaceDownEffect() {
+        super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
+    }
+
+    private UginTheIneffableLookAtFaceDownEffect(final UginTheIneffableLookAtFaceDownEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public UginTheIneffableLookAtFaceDownEffect copy() {
+        return new UginTheIneffableLookAtFaceDownEffect(this);
+    }
+
+    @Override
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        UUID cardId = getTargetPointer().getFirst(game, source);
+        if (cardId == null) {
+            this.discard();
+        }
+        return affectedControllerId.equals(source.getControllerId())
+                && objectId.equals(cardId)
+                && game.getState().getExile().containsId(cardId, game);
     }
 }
