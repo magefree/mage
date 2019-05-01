@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -70,8 +69,8 @@ public class PreventDamageToAttachedEffect extends PreventionEffectImpl {
             }
             sb.append("damage to ");
             sb.append(attachmentType.verb());
-            sb.append("creature, prevent ").append(amountToPrevent);;
-            sb.append("of that damage");
+            sb.append(" creature, prevent ").append(amountToPrevent);;
+            sb.append(" of that damage");
         }
         return sb.toString();
     }

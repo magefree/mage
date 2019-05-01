@@ -128,6 +128,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Freyalise's Charm", 240, Rarity.UNCOMMON, mage.cards.f.FreyalisesCharm.class));
         cards.add(new SetCardInfo("Freyalise's Winds", 241, Rarity.RARE, mage.cards.f.FreyalisesWinds.class));
         cards.add(new SetCardInfo("Fumarole", 291, Rarity.UNCOMMON, mage.cards.f.Fumarole.class));
+        cards.add(new SetCardInfo("Fylgja", 26, Rarity.COMMON, mage.cards.f.Fylgja.class));
         cards.add(new SetCardInfo("Fyndhorn Bow", 318, Rarity.UNCOMMON, mage.cards.f.FyndhornBow.class));
         cards.add(new SetCardInfo("Fyndhorn Brownie", 242, Rarity.COMMON, mage.cards.f.FyndhornBrownie.class));
         cards.add(new SetCardInfo("Fyndhorn Elder", 243, Rarity.UNCOMMON, mage.cards.f.FyndhornElder.class));
