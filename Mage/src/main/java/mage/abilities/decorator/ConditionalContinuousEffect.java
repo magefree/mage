@@ -49,11 +49,12 @@ public class ConditionalContinuousEffect extends ContinuousEffectImpl {
         this.staticText = text;
 
         // checks for compatibility
-        if (effect != null && !effect.getEffectType().equals(EffectType.CONTINUOUS)) {
-            Assert.fail("ConditionalContinuousEffect supports only " + EffectType.CONTINUOUS.toString() + " but found " + effect.getEffectType().toString());
+        EffectType needType = EffectType.CONTINUOUS;
+        if (effect != null && !effect.getEffectType().equals(needType)) {
+            Assert.fail("ConditionalContinuousEffect supports only " + needType.toString() + " but found " + effect.getEffectType().toString());
         }
-        if (otherwiseEffect != null && !otherwiseEffect.getEffectType().equals(EffectType.CONTINUOUS)) {
-            Assert.fail("ConditionalContinuousEffect supports only " + EffectType.CONTINUOUS.toString() + " but found " + effect.getEffectType().toString());
+        if (otherwiseEffect != null && !otherwiseEffect.getEffectType().equals(needType)) {
+            Assert.fail("ConditionalContinuousEffect supports only " + needType.toString() + " but found " + effect.getEffectType().toString());
         }
         if (effect != null && otherwiseEffect != null && !effect.getEffectType().equals(otherwiseEffect.getEffectType())) {
             Assert.fail("ConditionalContinuousEffect must be same but found " + effect.getEffectType().toString() + " and " + otherwiseEffect.getEffectType().toString());
