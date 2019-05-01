@@ -8,6 +8,7 @@ import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayVariableLoyaltyCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.decorator.ConditionalCostModificationEffect;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -56,7 +57,7 @@ public final class NahiriStormOfStone extends CardImpl {
                 ), MyTurnCondition.instance, "As long as it's your turn, " +
                 "creatures you control have first strike"
         ));
-        ability.addEffect(new ConditionalContinuousEffect(
+        ability.addEffect(new ConditionalCostModificationEffect(
                 new AbilitiesCostReductionControllerEffect(
                         EquipAbility.class, "Equip"
                 ), MyTurnCondition.instance, "and equip abilities you activate cost {1} less to activate"
