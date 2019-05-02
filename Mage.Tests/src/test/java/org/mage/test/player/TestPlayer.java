@@ -1406,11 +1406,13 @@ public class TestPlayer implements Player {
         }
         if (!choices.isEmpty()) {
             for (String choice : choices) {
-                for (int index = 0; index < rEffects.size(); index++) {
-                    if (choice.equals(rEffects.get(Integer.toString(index)))) {
+                int index = 0;
+                for (Map.Entry<String, String> entry : rEffects.entrySet()) {
+                    if (entry.getValue().startsWith(choice)) {
                         choices.remove(choice);
                         return index;
                     }
+                    index++;
                 }
             }
             // TODO: enable fail checks and fix tests
