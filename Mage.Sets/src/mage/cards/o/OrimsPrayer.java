@@ -2,7 +2,6 @@ package mage.cards.o;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.dynamicvalue.common.AttackingCreatureCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -11,6 +10,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -36,9 +37,11 @@ public final class OrimsPrayer extends CardImpl {
 }
 
 class OrimsPrayerTriggeredAbility extends TriggeredAbilityImpl {
+    
+    int numberAttackingController = 0;
 
     public OrimsPrayerTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new GainLifeEffect(new AttackingCreatureCount()));
+        super(Zone.BATTLEFIELD, null);
     }
 
     public OrimsPrayerTriggeredAbility(final OrimsPrayerTriggeredAbility ability) {
@@ -57,12 +60,28 @@ class OrimsPrayerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getCombat().getDefenders().contains(getControllerId())
-                && game.getCombat().getAttackers().size() > 0;
+        boolean applied = false;
+        Player controller = game.getPlayer(getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        for (UUID attackersId : game.getCombat().getAttackers()) {
+            Permanent attackingCreature = game.getPermanent(attackersId);
+            if (attackingCreature != null
+                    && game.getCombat().getDefenderId(attackersId) == this.getControllerId()) {
+                numberAttackingController += 1;
+                applied = true;
+            }
+        }
+        if (applied
+                && numberAttackingController > 0) {
+            this.getEffects().add(new GainLifeEffect(numberAttackingController));
+        }
+        return applied;
     }
 
     @Override
     public String getRule() {
-        return "Whenever one or more creatures attack you, " + super.getRule();
+        return "Whenever one or more creatures attack you, you gain 1 life for each attacking creature.";
     }
 }
