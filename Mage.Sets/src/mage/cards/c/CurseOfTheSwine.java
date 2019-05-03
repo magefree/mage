@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import mage.abilities.Ability;
@@ -29,8 +28,10 @@ public final class CurseOfTheSwine extends CardImpl {
 
         // Exile X target creatures. For each creature exiled this way, its controller creates a 2/2 green Boar creature token.
         this.getSpellAbility().addEffect(new CurseOfTheSwineEffect());
+
         // Correct number of targets will be set in adjustTargets
         this.getSpellAbility().setTargetAdjuster(CurseOfTheSwineAdjuster.instance);
+
     }
 
     public CurseOfTheSwine(final CurseOfTheSwine card) {
@@ -57,7 +58,8 @@ class CurseOfTheSwineEffect extends OneShotEffect {
 
     public CurseOfTheSwineEffect() {
         super(Outcome.Exile);
-        this.staticText = "Exile X target creatures. For each creature exiled this way, its controller creates a 2/2 green Boar creature token";
+        this.staticText = "Exile X target creatures. For each creature exiled this way, "
+                + "its controller creates a 2/2 green Boar creature token";
     }
 
     public CurseOfTheSwineEffect(final CurseOfTheSwineEffect effect) {
@@ -78,13 +80,15 @@ class CurseOfTheSwineEffect extends OneShotEffect {
                 Permanent creature = game.getPermanent(targetId);
                 if (creature != null) {
                     if (controller.moveCards(creature, Zone.EXILED, source, game)) {
-                        playersWithTargets.put(creature.getControllerId(), playersWithTargets.getOrDefault(creature.getControllerId(), 0) + 1);
+                        playersWithTargets.put(creature.getControllerId(),
+                                playersWithTargets.getOrDefault(creature.getControllerId(), 0) + 1);
                     }
                 }
             }
             CurseOfTheSwineBoarToken swineToken = new CurseOfTheSwineBoarToken();
             for (Map.Entry<UUID, Integer> exiledByController : playersWithTargets.entrySet()) {
-                swineToken.putOntoBattlefield(exiledByController.getValue(), game, source.getSourceId(), exiledByController.getKey());
+                swineToken.putOntoBattlefield(exiledByController.getValue(),
+                        game, source.getSourceId(), exiledByController.getKey());
             }
             return true;
         }
