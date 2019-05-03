@@ -104,8 +104,10 @@ class BolassCitadelPlayTheTopCardEffect extends AsThoughEffectImpl {
                 Costs costs = new CostsImpl();
                 costs.add(cost);
                 // check for additional costs that must be paid
-                for (Cost additionalCost : cardOnTop.getSpellAbility().getCosts()) {
-                    costs.add(additionalCost);
+                if (cardOnTop.getSpellAbility() != null) {
+                    for (Cost additionalCost : cardOnTop.getSpellAbility().getCosts()) {
+                        costs.add(additionalCost);
+                    }
                 }
                 controller.setCastSourceIdWithAlternateMana(cardOnTop.getId(), null, costs);
                 return true;
