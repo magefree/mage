@@ -1,5 +1,6 @@
 package mage.cards.decks.exporter;
 
+import com.google.common.collect.ImmutableMap;
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.DeckFileFilter;
@@ -13,9 +14,11 @@ import java.util.*;
  */
 public class MtgArenaDeckExporter extends DeckExporter {
 
-    private final String ext = "mtga";
-    private final String description = "MTG Arena's deck format (*.mtga)";
-    private final FileFilter fileFilter = new DeckFileFilter(ext, description);
+    private static final String ext = "mtga";
+    private static final String description = "MTG Arena's deck format (*.mtga)";
+    private static final FileFilter fileFilter = new DeckFileFilter(ext, description);
+
+    private static final Map<String, String> SET_CODE_REPLACEMENTS = ImmutableMap.of("DOM", "DAR");
 
     @Override
     public void writeDeck(PrintWriter out, DeckCardLists deck) {
@@ -33,7 +36,9 @@ public class MtgArenaDeckExporter extends DeckExporter {
     private List<String> prepareCardsList(List<DeckCardInfo> sourceCards, Map<String, Integer> amount, String prefix) {
         List<String> res = new ArrayList<>();
         for (DeckCardInfo card : sourceCards) {
-            String name = card.getCardName() + " (" + card.getSetCode().toUpperCase(Locale.ENGLISH) + ") " + card.getCardNum();
+            String setCode = card.getSetCode().toUpperCase(Locale.ENGLISH);
+            setCode = SET_CODE_REPLACEMENTS.getOrDefault(setCode, setCode);
+            String name = card.getCardName() + " (" + setCode + ") " + card.getCardNum();
             String code = prefix + name;
             int curAmount = amount.getOrDefault(code, 0);
             if (curAmount == 0) {
