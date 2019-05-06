@@ -113,9 +113,9 @@ class NivMizzetRebornEffect extends OneShotEffect {
 
     NivMizzetRebornEffect() {
         super(Outcome.Benefit);
-        staticText = "reveal the top ten cards of your library. For each color pair, " +
-                "choose a card that's exactly those colors from among them. " +
-                "Put the chosen cards into your hand and the rest on the bottom of your library in a random order.";
+        staticText = "reveal the top ten cards of your library. For each color pair, "
+                + "choose a card that's exactly those colors from among them. "
+                + "Put the chosen cards into your hand and the rest on the bottom of your library in a random order.";
     }
 
     private NivMizzetRebornEffect(final NivMizzetRebornEffect effect) {
@@ -153,7 +153,11 @@ class NivMizzetRebornEffect extends OneShotEffect {
         }
         cards.removeAll(cards2);
         player.putCardsOnBottomOfLibrary(cards, game, source, false);
-        player.moveCards(cards2, Zone.HAND, source, game);
+        if (player.moveCards(cards2, Zone.HAND, source, game)) {
+            for (Card card : cards2.getCards(game)) {
+                game.informPlayers(player.getName() + " chose " + card.getName() + " and put it into his or her hand.");
+            }
+        }
         return true;
     }
 }
