@@ -3714,6 +3714,14 @@ public class PreferencesDialog extends javax.swing.JDialog {
         }
     }
 
+    public static int getRenderMode() {
+        if (getCachedValue(PreferencesDialog.KEY_CARD_RENDERING_FALLBACK, "false").equals("false")) {
+            return 0; // mtgo
+        } else {
+            return 1; // image
+        }
+    }
+
     private static int getDefaultControlMofier(String key) {
         switch (key) {
             default:
