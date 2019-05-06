@@ -17,10 +17,12 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
+import mage.watchers.common.CastFromGraveyardWatcher;
 
 /**
  *
@@ -35,7 +37,7 @@ public final class BosiumStrip extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BosiumStripCastFromGraveyardEffect(), new ManaCostsImpl("{3}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new BosiumStripReplacementEffect());
-        this.addAbility(ability);
+        this.addAbility(ability, new CastFromGraveyardWatcher());
     }
 
     public BosiumStrip(final BosiumStrip card) {
@@ -78,9 +80,9 @@ class BosiumStripCastFromGraveyardEffect extends AsThoughEffectImpl {
             if (card != null
                     && player != null
                     && card.equals(player.getGraveyard().getTopCard(game))
-                    && (card.isInstant()
-                            || card.isSorcery())
-                    && game.getState().getZone(objectId).equals(Zone.GRAVEYARD)) {
+                    && StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY.match(card, game)
+                    && game.getState().getZone(objectId) == Zone.GRAVEYARD) {
+                game.getState().setValue("BosiumStrip", card);
                 return true;
             }
         }
@@ -107,10 +109,12 @@ class BosiumStripReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        Card card = game.getCard(event.getTargetId());
-        if (controller != null
-                && card != null) {
-            return controller.moveCards(card, Zone.EXILED, source, game);
+        if (controller != null) {
+            Card card = (Card) game.getState().getValue("BosiumStrip");
+            if (card != null) {
+                controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.STACK, true);
+                return true;
+            }
         }
         return false;
     }
@@ -123,7 +127,16 @@ class BosiumStripReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        return zEvent.getToZone() == Zone.GRAVEYARD
-                && ((ZoneChangeEvent) event).getTargetId().equals(getTargetPointer().getFirst(game, source));
+        if (zEvent.getToZone() == Zone.GRAVEYARD) {
+            Card card = game.getCard(event.getSourceId());
+            if (card != null
+                    && StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY.match(card, game)) {
+                CastFromGraveyardWatcher watcher = game.getState().getWatcher(CastFromGraveyardWatcher.class);
+                return watcher != null
+                        && watcher.spellWasCastFromGraveyard(event.getTargetId(),
+                                game.getState().getZoneChangeCounter(event.getTargetId()));
+            }
+        }
+        return false;
     }
 }
