@@ -91,10 +91,10 @@ enum PalladiaMorsTheRuinerCondition implements Condition {
 
 class PalladiaMorsTheRuinerWatcher extends Watcher {
 
-    private final Set<MageObjectReference> damagers = new HashSet();
+    private final Set<MageObjectReference> damagers = new HashSet<>();
 
     public PalladiaMorsTheRuinerWatcher() {
-        super(PalladiaMorsTheRuinerWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public PalladiaMorsTheRuinerWatcher(final PalladiaMorsTheRuinerWatcher watcher) {

@@ -1,15 +1,14 @@
-
 package mage.abilities.effects.common.combat;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.RestrictionEffect;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public class CantAttackYouEffect extends RestrictionEffect {
@@ -33,7 +32,10 @@ public class CantAttackYouEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
+    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game, boolean canUseChooseDialogs) {
+        if (defenderId == null) {
+            return true;
+        }
         return !defenderId.equals(source.getControllerId());
     }
 }

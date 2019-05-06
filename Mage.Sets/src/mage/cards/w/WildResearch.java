@@ -82,13 +82,12 @@ class WildResearchEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && sourceObject != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
-            if (controller.searchLibrary(target, game)) {
+            if (controller.searchLibrary(target, source, game)) {
                 if (!target.getTargets().isEmpty()) {
                     Card card = controller.getLibrary().remove(target.getFirstTarget(), game);
                     if (card != null) {
                         controller.moveCards(card, Zone.HAND, source, game);
-                        Cards cards = new CardsImpl();
-                        cards.add(card);
+                        Cards cards = new CardsImpl(card);
                         controller.revealCards(sourceObject.getIdName(), cards, game, true);
                     }
                 }

@@ -1,12 +1,13 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.hint.common.DeliriumHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -15,13 +16,12 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 
 /**
- *
  * @author LevelX2
  */
 public final class MoldgrafScavenger extends CardImpl {
 
     public MoldgrafScavenger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add(SubType.FUNGUS);
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
@@ -30,7 +30,8 @@ public final class MoldgrafScavenger extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostSourceEffect(3, 0, Duration.WhileOnBattlefield),
                 DeliriumCondition.instance,
-                "<i>Delirium</i> &mdash; {this} gets +3/+0 as long as there are four or more card types among cards in your graveyard")));
+                "<i>Delirium</i> &mdash; {this} gets +3/+0 as long as there are four or more card types among cards in your graveyard"))
+                .addHint(DeliriumHint.instance));
     }
 
     public MoldgrafScavenger(final MoldgrafScavenger card) {

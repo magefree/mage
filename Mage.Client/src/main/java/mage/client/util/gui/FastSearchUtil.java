@@ -14,8 +14,8 @@ import java.util.Map;
  */
 public class FastSearchUtil {
 
-    public static String DEFAULT_EXPANSION_SEARCH_MESSAGE = "Select set or expansion";
-    public static String DEFAULT_EXPANSION_TOOLTIP_MESSAGE = "Fast search set or expansion";
+    public static final String DEFAULT_EXPANSION_SEARCH_MESSAGE = "Select set or expansion";
+    public static final String DEFAULT_EXPANSION_TOOLTIP_MESSAGE = "Fast search set or expansion";
 
     public static void showFastSearchForStringComboBox(JComboBox combo, String chooseMessage) {
         showFastSearchForStringComboBox(combo, chooseMessage, 300, 500);

@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
@@ -78,7 +77,7 @@ public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl {
                         break;
                     case TypeChangingEffects_4:
                         // subtypes are all removed by changing the subtype to a land type.
-                        permanent.getSubtype(game).removeAll(SubType.getLandTypes(false));
+                        permanent.getSubtype(game).removeAll(SubType.getLandTypes());
                         permanent.getSubtype(game).addAll(landTypes);
                         break;
                 }

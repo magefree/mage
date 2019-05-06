@@ -1,13 +1,13 @@
-
 package mage.abilities.keyword;
 
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.dynamicvalue.common.OpponentsLostLifeCount;
+import mage.abilities.hint.common.SpectacleHint;
 import mage.cards.Card;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.watchers.common.PlayerLostLifeWatcher;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -31,6 +31,7 @@ public class SpectacleAbility extends SpellAbility {
         this.setRuleAtTheTop(true);
         this.rule = "Spectacle " + spectacleCosts.getText()
                 + " <i>(You may cast this spell for its spectacle cost rather than its mana cost if an opponent lost life this turn.)</i>";
+        this.addHint(SpectacleHint.instance);
     }
 
     public SpectacleAbility(final SpectacleAbility ability) {
@@ -40,8 +41,7 @@ public class SpectacleAbility extends SpellAbility {
 
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
-        PlayerLostLifeWatcher watcher = game.getState().getWatcher(PlayerLostLifeWatcher.class);
-        if (watcher != null && watcher.getAllOppLifeLost(playerId, game) > 0) {
+        if (OpponentsLostLifeCount.instance.calculate(game, playerId) > 0) {
             return super.canActivate(playerId, game);
         }
         return ActivationStatus.getFalse();

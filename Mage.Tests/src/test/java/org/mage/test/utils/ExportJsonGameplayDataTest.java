@@ -25,6 +25,7 @@ import java.util.List;
 public class ExportJsonGameplayDataTest {
 
     private static final Logger logger = Logger.getLogger(ExportJsonGameplayDataTest.class);
+    private static final boolean MTGJSON_WRITE_TO_FILES = false;
 
     @Test
     @Ignore
@@ -116,21 +117,24 @@ public class ExportJsonGameplayDataTest {
 
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-            String filePath = System.getProperty("user.dir") + "/json/" + set.getCode() + ".json";
-            File outputFile = new File(filePath);
-            final boolean mkdirs = outputFile.getParentFile().mkdirs();
-
-            try (Writer writer =
-                         new BufferedWriter(
-                                 new OutputStreamWriter(
-                                         new FileOutputStream(outputFile, false), StandardCharsets.UTF_8
-                                 )
-                         )
-            ) {
-                writer.write(gson.toJson(res));
-                System.out.println("Wrote " + set.getCode() + " to file");
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (MTGJSON_WRITE_TO_FILES) {
+                String filePath = System.getProperty("user.dir") + "/json/" + set.getCode() + ".json";
+                File outputFile = new File(filePath);
+                final boolean mkdirs = outputFile.getParentFile().mkdirs();
+                try (Writer writer =
+                             new BufferedWriter(
+                                     new OutputStreamWriter(
+                                             new FileOutputStream(outputFile, false), StandardCharsets.UTF_8
+                                     )
+                             )
+                ) {
+                    writer.write(gson.toJson(res));
+                    System.out.println("Wrote " + set.getCode() + " to file");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                //System.out.println(gson.toJson(res));
             }
         }
     }

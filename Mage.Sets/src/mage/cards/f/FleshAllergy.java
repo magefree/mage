@@ -57,7 +57,7 @@ class FleshAllergyWatcher extends Watcher {
     private int creaturesDiedThisTurn = 0;
 
     public FleshAllergyWatcher() {
-        super(FleshAllergyWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     private FleshAllergyWatcher(final FleshAllergyWatcher watcher) {

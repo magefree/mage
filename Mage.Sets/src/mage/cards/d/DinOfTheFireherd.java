@@ -48,8 +48,8 @@ public final class DinOfTheFireherd extends CardImpl {
 
 class DinOfTheFireherdEffect extends OneShotEffect {
 
-    private final static FilterControlledCreaturePermanent blackCreatureFilter = new FilterControlledCreaturePermanent("black creatures you control");
-    private final static FilterControlledCreaturePermanent redCreatureFilter = new FilterControlledCreaturePermanent("red creatures you control");
+    private static final FilterControlledCreaturePermanent blackCreatureFilter = new FilterControlledCreaturePermanent("black creatures you control");
+    private static final FilterControlledCreaturePermanent redCreatureFilter = new FilterControlledCreaturePermanent("red creatures you control");
 
     static {
         blackCreatureFilter.add(new ColorPredicate(ObjectColor.BLACK));

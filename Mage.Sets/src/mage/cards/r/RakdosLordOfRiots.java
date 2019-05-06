@@ -1,7 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -20,8 +18,9 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class RakdosLordOfRiots extends CardImpl {
@@ -84,9 +83,7 @@ class RakdosLordOfRiotsCantCastEffect extends ContinuousRuleModifyingEffectImpl 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getSourceId().equals(source.getSourceId())) {
-            if (new OpponentsLostLifeCount().calculate(game, source, this) == 0) {
-                return true;
-            }
+            return OpponentsLostLifeCount.instance.calculate(game, source, this) == 0;
         }
         return false;
     }
@@ -107,8 +104,7 @@ class RakdosLordOfRiotsCostReductionEffect extends CostModificationEffectImpl {
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         Ability spellAbility = abilityToModify;
         if (spellAbility != null) {
-            OpponentsLostLifeCount dynamicValue = new OpponentsLostLifeCount();
-            int amount = dynamicValue.calculate(game, source, this);
+            int amount = OpponentsLostLifeCount.instance.calculate(game, source, this);
             if (amount > 0) {
                 CardUtil.reduceCost(spellAbility, amount);
                 return true;

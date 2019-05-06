@@ -91,7 +91,7 @@ class BirthingPodEffect extends OneShotEffect {
         filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, newConvertedCost));
         filter.add(new CardTypePredicate(CardType.CREATURE));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
-        if (controller.searchLibrary(target, game)) {
+        if (controller.searchLibrary(target, source, game)) {
             Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
             controller.moveCards(card, Zone.BATTLEFIELD, source, game);
         }

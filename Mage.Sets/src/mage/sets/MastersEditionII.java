@@ -152,6 +152,7 @@ public final class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Leaping Lizard", 171, Rarity.COMMON, mage.cards.l.LeapingLizard.class));
         cards.add(new SetCardInfo("Lim-Dul's High Guard", 103, Rarity.UNCOMMON, mage.cards.l.LimDulsHighGuard.class));
         cards.add(new SetCardInfo("Lodestone Bauble", 213, Rarity.RARE, mage.cards.l.LodestoneBauble.class));
+        cards.add(new SetCardInfo("Lost Order of Jarkeld", 24, Rarity.RARE, mage.cards.l.LostOrderOfJarkeld.class));
         cards.add(new SetCardInfo("Magus of the Unseen", 53, Rarity.RARE, mage.cards.m.MagusOfTheUnseen.class));
         cards.add(new SetCardInfo("Mana Crypt", 214, Rarity.RARE, mage.cards.m.ManaCrypt.class));
         cards.add(new SetCardInfo("Marjhan", 54, Rarity.RARE, mage.cards.m.Marjhan.class));
@@ -194,6 +195,7 @@ public final class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Ritual of Subdual", 174, Rarity.RARE, mage.cards.r.RitualOfSubdual.class));
         cards.add(new SetCardInfo("Ritual of the Machine", 109, Rarity.RARE, mage.cards.r.RitualOfTheMachine.class));
         cards.add(new SetCardInfo("Roterothopter", 218, Rarity.COMMON, mage.cards.r.Roterothopter.class));
+        cards.add(new SetCardInfo("Rogue Skycaptain", 149, Rarity.RARE, mage.cards.r.RogueSkycaptain.class));
         cards.add(new SetCardInfo("Royal Decree", 31, Rarity.RARE, mage.cards.r.RoyalDecree.class));
         cards.add(new SetCardInfo("Royal Trooper", 32, Rarity.COMMON, mage.cards.r.RoyalTrooper.class));
         cards.add(new SetCardInfo("Ruins of Trokair", 234, Rarity.UNCOMMON, mage.cards.r.RuinsOfTrokair.class));

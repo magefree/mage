@@ -1,23 +1,22 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class DesperateCastaways extends CardImpl {
@@ -61,17 +60,14 @@ class DesperateCastawaysEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Game game) {
+    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
         return false;
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getId().equals(source.getSourceId())) {
-            if (game.getBattlefield().countAll(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT, source.getControllerId(), game) > 0) {
-                return false;
-            }
-            return true;
+            return game.getBattlefield().countAll(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT, source.getControllerId(), game) <= 0;
         }  // do not apply to other creatures.
         return false;
     }

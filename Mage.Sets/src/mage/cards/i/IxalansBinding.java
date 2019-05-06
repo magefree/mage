@@ -27,7 +27,7 @@ import java.util.UUID;
  */
 public final class IxalansBinding extends CardImpl {
 
-    private final static FilterNonlandPermanent filter = new FilterNonlandPermanent();
+    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent();
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));

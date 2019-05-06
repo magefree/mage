@@ -23,7 +23,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
  */
 public final class Mirrorworks extends CardImpl {
 
-    private final static FilterArtifactPermanent filter = new FilterArtifactPermanent("another nontoken artifact");
+    private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("another nontoken artifact");
 
     static {
         filter.add(AnotherPredicate.instance);

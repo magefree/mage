@@ -24,12 +24,11 @@ public class Standard extends Constructed {
         Calendar cal = Calendar.getInstance();
         cal.setTime(set.getReleaseDate());
         // Fall sets are normally released during or after September
-        return set.getSetType() == SetType.EXPANSION
-                && (cal.get(Calendar.MONTH) > 7);
+        return set.getSetType() == SetType.EXPANSION && (cal.get(Calendar.MONTH) > 7);
     }
 
     public static List<String> makeLegalSets() {
-        List<String> codes = new ArrayList();
+        List<String> codes = new ArrayList<>();
         GregorianCalendar current = new GregorianCalendar();
         List<ExpansionSet> sets = new ArrayList(Sets.getInstance().values());
         Collections.sort(sets, new Comparator<ExpansionSet>() {
@@ -53,13 +52,10 @@ public class Standard extends Constructed {
                 }
             }
         }
-        // Get all sets released on or after the second most recent fall set's release
+
         for (ExpansionSet set : sets) {
-            if ((set.getSetType() == SetType.CORE
-                    || set.getSetType() == SetType.EXPANSION
-                    || set.getSetType() == SetType.SUPPLEMENTAL_STANDARD_LEGAL)
-                    && !set.getReleaseDate().before(earliestDate)) {
-//                    && !set.getReleaseDate().after(current.getTime()))) {
+            boolean isDateCompatible = earliestDate != null && !set.getReleaseDate().before(earliestDate) /*!set.getReleaseDate().after(current.getTime())*/; // no after date restrict for early tests and beta
+            if (set.getSetType().isStandardLegal() && isDateCompatible) {
                 codes.add(set.getCode());
             }
         }

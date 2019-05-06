@@ -96,7 +96,7 @@ class ApproachOfTheSecondSunWatcher extends Watcher {
     private Map<UUID, Integer> approachesCast = new HashMap<>();
 
     public ApproachOfTheSecondSunWatcher() {
-        super(ApproachOfTheSecondSunWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public ApproachOfTheSecondSunWatcher(final ApproachOfTheSecondSunWatcher watcher) {

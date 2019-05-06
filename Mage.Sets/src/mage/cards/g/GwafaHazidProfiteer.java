@@ -1,7 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -21,20 +19,21 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class GwafaHazidProfiteer extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
-    
+
     static {
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 
     public GwafaHazidProfiteer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ROGUE);
@@ -47,10 +46,10 @@ public final class GwafaHazidProfiteer extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
-        
+
         // Creatures with bribery counters on them can't attack or block.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GwafaHazidProfiteerEffect2()));
-        
+
     }
 
     public GwafaHazidProfiteer(final GwafaHazidProfiteer card) {
@@ -64,7 +63,7 @@ public final class GwafaHazidProfiteer extends CardImpl {
 }
 
 class GwafaHazidProfiteerEffect1 extends OneShotEffect {
-    
+
     GwafaHazidProfiteerEffect1() {
         super(Outcome.Detriment);
         staticText = "Put a bribery counter on target creature you don't control. Its controller draws a card";
@@ -113,12 +112,12 @@ class GwafaHazidProfiteerEffect2 extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Game game) {
+    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
         return false;
     }
-    
+
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         return false;
     }
 

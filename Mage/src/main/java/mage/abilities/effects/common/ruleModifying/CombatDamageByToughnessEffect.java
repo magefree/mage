@@ -27,7 +27,7 @@ public class CombatDamageByToughnessEffect extends ContinuousEffectImpl {
                 " assigns combat damage equal to its toughness rather than its power";
     }
 
-    public CombatDamageByToughnessEffect(final CombatDamageByToughnessEffect effect) {
+    private CombatDamageByToughnessEffect(final CombatDamageByToughnessEffect effect) {
         super(effect);
         this.filter = effect.filter;
         this.onlyControlled = effect.onlyControlled;

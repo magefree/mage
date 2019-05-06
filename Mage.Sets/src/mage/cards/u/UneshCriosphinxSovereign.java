@@ -141,8 +141,7 @@ class UneshCriosphinxSovereignEffect extends OneShotEffect {
             return false;
         }
 
-        Cards cards = new CardsImpl();
-        cards.addAll(controller.getLibrary().getTopCards(game, 4));
+        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 4));
         controller.revealCards(sourceObject.getName(), cards, game);
 
         Set<UUID> opponents = game.getOpponents(source.getControllerId());

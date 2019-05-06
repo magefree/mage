@@ -12,6 +12,7 @@ import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.effects.mana.DynamicManaEffect;
+import mage.abilities.hint.Hint;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.Card;
 import mage.cards.SplitCard;
@@ -73,6 +74,7 @@ public abstract class AbilityImpl implements Ability {
     protected boolean canFizzle = true;
     protected TargetAdjuster targetAdjuster = null;
     protected CostAdjuster costAdjuster = null;
+    protected List<Hint> hints = new ArrayList<>();
 
     public AbilityImpl(AbilityType abilityType, Zone zone) {
         this.id = UUID.randomUUID();
@@ -120,6 +122,9 @@ public abstract class AbilityImpl implements Ability {
         this.canFizzle = ability.canFizzle;
         this.targetAdjuster = ability.targetAdjuster;
         this.costAdjuster = ability.costAdjuster;
+        for (Hint hint : ability.getHints()) {
+            this.hints.add(hint.copy());
+        }
     }
 
     @Override
@@ -256,7 +261,7 @@ public abstract class AbilityImpl implements Ability {
             }
         }
         if (modes.getAdditionalCost() != null) {
-            ((OptionalAdditionalModeSourceCosts) modes.getAdditionalCost()).addOptionalAdditionalModeCosts(this, game);
+            modes.getAdditionalCost().addOptionalAdditionalModeCosts(this, game);
         }
         // 20130201 - 601.2b
         // If the spell has alternative or additional costs that will be paid as it's being cast such
@@ -320,11 +325,10 @@ public abstract class AbilityImpl implements Ability {
             }
             if (!getTargets().isEmpty()) {
                 Outcome outcome = getEffects().isEmpty() ? Outcome.Detriment : getEffects().get(0).getOutcome();
-                if (getTargets().chooseTargets(outcome, this.controllerId, this, noMana, game) == false) {
-                    if ((variableManaCost != null || announceString != null)) {
-                        game.informPlayer(controller, (sourceObject != null ? sourceObject.getIdName() : "") + ": no valid targets");
-                    }
-                    return false; // when activation of ability is canceled during target selection
+                // only activated abilities can be canceled by user (not triggered)
+                if (!getTargets().chooseTargets(outcome, this.controllerId, this, noMana, game, this instanceof ActivatedAbility)) {
+                    // was canceled during targer selection
+                    return false;
                 }
             }
         } // end modes
@@ -952,9 +956,7 @@ public abstract class AbilityImpl implements Ability {
             } else if (!object.getAbilities().contains(this)) {
                 // check if it's an ability that is temporary gained to a card
                 Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(this.getSourceId());
-                if (otherAbilities == null || !otherAbilities.contains(this)) {
-                    return false;
-                }
+                return otherAbilities != null && otherAbilities.contains(this);
             }
         }
         return true;
@@ -1242,5 +1244,16 @@ public abstract class AbilityImpl implements Ability {
         if (costAdjuster != null) {
             costAdjuster.adjustCosts(this, game);
         }
+    }
+
+    @Override
+    public List<Hint> getHints() {
+        return this.hints;
+    }
+
+    @Override
+    public Ability addHint(Hint hint) {
+        this.hints.add(hint);
+        return this;
     }
 }

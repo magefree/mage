@@ -82,8 +82,7 @@ class PlaneswalkersMischiefEffect extends OneShotEffect {
             if (revealedCard == null) {
                 return false;
             }
-            Cards cards = new CardsImpl();
-            cards.add(revealedCard);
+            Cards cards = new CardsImpl(revealedCard);
             opponent.revealCards("Planeswalker's Mischief Reveal", cards, game);
             if (revealedCard.isInstant()
                     || revealedCard.isSorcery()) {

@@ -16,7 +16,7 @@ import mage.abilities.keyword.HasteAbility;
  */
 public final class SoldierTokenWithHaste extends TokenImpl {
 
-    final static private List<String> tokenImageSets = new ArrayList<>();
+    static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
         tokenImageSets.addAll(Arrays.asList("GTC", "MM3"));

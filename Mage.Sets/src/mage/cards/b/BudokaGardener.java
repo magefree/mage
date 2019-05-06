@@ -56,7 +56,7 @@ public final class BudokaGardener extends CardImpl {
 
 class BudokaGardenerEffect extends OneShotEffect {
 
-    final static FilterControlledPermanent filterLands = new FilterControlledLandPermanent("lands you control");
+    static final FilterControlledPermanent filterLands = new FilterControlledLandPermanent("lands you control");
 
     BudokaGardenerEffect() {
         super(Outcome.PutLandInPlay);

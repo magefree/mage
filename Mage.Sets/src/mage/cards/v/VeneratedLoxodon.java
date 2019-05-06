@@ -97,7 +97,7 @@ class VeneratedLoxodonWatcher extends Watcher {
     private final Map<MageObjectReference, Set<MageObjectReference>> convokingCreatures = new HashMap<>();
 
     public VeneratedLoxodonWatcher() {
-        super(VeneratedLoxodonWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public VeneratedLoxodonWatcher(final VeneratedLoxodonWatcher watcher) {

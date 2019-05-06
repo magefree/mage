@@ -58,7 +58,7 @@ class SeaTrollWatcher extends Watcher {
     private final Set<MageObjectReference> blockedOrBlockedByBlueThisTurnCreatures;
 
     public SeaTrollWatcher() {
-        super(SeaTrollWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super( WatcherScope.GAME);
         blockedOrBlockedByBlueThisTurnCreatures = new HashSet<>();
     }
 

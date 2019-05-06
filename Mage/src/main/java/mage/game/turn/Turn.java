@@ -1,11 +1,5 @@
-
 package mage.game.turn;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.constants.PhaseStep;
 import mage.constants.TurnPhase;
@@ -18,8 +12,13 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.util.ThreadLocalStringBuilder;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class Turn implements Serializable {
@@ -93,7 +92,6 @@ public class Turn implements Serializable {
     }
 
     /**
-     *
      * @param game
      * @param activePlayer
      * @return true if turn is skipped
@@ -104,6 +102,7 @@ public class Turn implements Serializable {
         if (game.isPaused() || game.checkIfGameIsOver()) {
             return false;
         }
+
 
         if (game.getState().getTurnMods().skipTurn(activePlayer.getId())) {
             game.informPlayers(activePlayer.getLogName() + " skips their turn.");
@@ -239,6 +238,7 @@ public class Turn implements Serializable {
      this.play(game, activePlayerId);
      }
      }*/
+
     /**
      * Used for some spells with end turn effect (e.g. Time Stop).
      *

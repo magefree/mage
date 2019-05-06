@@ -1,11 +1,12 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
+
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.SacrificeEffect;
+import mage.abilities.hint.common.DeliriumHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -14,7 +15,6 @@ import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
 import mage.target.TargetPlayer;
 
 /**
- *
  * @author fireshoes
  */
 public final class ToTheSlaughter extends CardImpl {
@@ -37,6 +37,7 @@ public final class ToTheSlaughter extends CardImpl {
                 new SacrificeEffect(StaticFilters.FILTER_PERMANENT_PLANESWALKER, 1, "Target player"),
                 DeliriumCondition.instance, "and a planeswalker."));
         this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addHint(DeliriumHint.instance);
     }
 
     public ToTheSlaughter(final ToTheSlaughter card) {

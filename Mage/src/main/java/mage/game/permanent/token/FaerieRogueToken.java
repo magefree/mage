@@ -17,7 +17,7 @@ import mage.abilities.keyword.FlyingAbility;
  */
 public final class FaerieRogueToken extends TokenImpl {
 
-    final static private List<String> tokenImageSets = new ArrayList<>();
+    static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
         tokenImageSets.addAll(Arrays.asList("SHM", "MOR", "MMA", "MM2"));

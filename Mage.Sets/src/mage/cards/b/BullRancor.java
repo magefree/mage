@@ -9,6 +9,7 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.MonstrosityAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -27,6 +28,9 @@ public final class BullRancor extends CardImpl {
         this.subtype.add(SubType.BEAST);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
+
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
 
         // {3}{R}{G}{G}{W}: Monstrosity 3.
         this.addAbility(new MonstrosityAbility("{3}{R}{G}{G}{W}", 3));

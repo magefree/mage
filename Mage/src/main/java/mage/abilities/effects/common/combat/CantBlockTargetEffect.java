@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
@@ -11,7 +10,6 @@ import mage.target.Target;
 import mage.util.CardUtil;
 
 /**
- *
  * @author North
  */
 public class CantBlockTargetEffect extends RestrictionEffect {
@@ -30,7 +28,7 @@ public class CantBlockTargetEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         return false;
     }
 

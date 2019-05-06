@@ -33,7 +33,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class HammerOfNazahn extends CardImpl {
     
-    private final static FilterEquipmentPermanent filter = new FilterEquipmentPermanent("{this} or another Equipment");
+    private static final FilterEquipmentPermanent filter = new FilterEquipmentPermanent("{this} or another Equipment");
 
     public HammerOfNazahn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

@@ -9,24 +9,21 @@ import java.io.Serializable;
  */
 public class MageVersion implements Serializable, Comparable<MageVersion> {
 
-    /**
-     *
-     */
-    public final static int MAGE_VERSION_MAJOR = 1;
-    public final static int MAGE_VERSION_MINOR = 4;
-    public final static int MAGE_VERSION_PATCH = 33;
-    public final static String MAGE_EDITION_INFO = ""; // set "-beta" for 1.4.32-betaV0
-    public final static String MAGE_VERSION_MINOR_PATCH = "V1"; // default V0
+    public static final int MAGE_VERSION_MAJOR = 1;
+    public static final int MAGE_VERSION_MINOR = 4;
+    public static final int MAGE_VERSION_PATCH = 35;
+    public static final String MAGE_EDITION_INFO = ""; // set "-beta" for 1.4.32-betaV0
+    public static final String MAGE_VERSION_MINOR_PATCH = "V4"; // default
     // strict mode
-    private final static boolean MAGE_VERSION_MINOR_PATCH_MUST_BE_SAME = true; // set true on uncompatible github changes, set false after new major release (after MAGE_VERSION_PATCH changes)
+    private static final boolean MAGE_VERSION_MINOR_PATCH_MUST_BE_SAME = true; // set true on uncompatible github changes, set false after new major release (after MAGE_VERSION_PATCH changes)
 
+    public static final boolean MAGE_VERSION_SHOW_BUILD_TIME = true;
     private final int major;
     private final int minor;
     private final int patch;
     private final String minorPatch; // doesn't matter for compatibility
     private final String buildTime;
     private String editionInfo;
-    private final boolean showBuildTime = true;
 
     public MageVersion(Class sourceClass) {
         this(MAGE_VERSION_MAJOR, MAGE_VERSION_MINOR, MAGE_VERSION_PATCH, MAGE_VERSION_MINOR_PATCH, MAGE_EDITION_INFO, sourceClass);
@@ -40,7 +37,7 @@ public class MageVersion implements Serializable, Comparable<MageVersion> {
         this.editionInfo = editionInfo;
 
         // build time
-        this.buildTime = showBuildTime ? JarVersion.getBuildTime(sourceClass) : "";
+        this.buildTime = JarVersion.getBuildTime(sourceClass);
     }
 
     public int getMajor() {
@@ -59,10 +56,18 @@ public class MageVersion implements Serializable, Comparable<MageVersion> {
         return minorPatch;
     }
 
+    public String toString(boolean showBuildTime) {
+        // 1.4.32-betaV0 (build: time)
+        String res = major + "." + minor + '.' + patch + editionInfo + minorPatch;
+        if (showBuildTime && !this.buildTime.isEmpty()) {
+            res += " (build: " + this.buildTime + ")";
+        }
+        return res;
+    }
+
     @Override
     public String toString() {
-        // 1.4.32-betaV0 (build: time)
-        return major + "." + minor + '.' + patch + editionInfo + minorPatch + (!this.buildTime.isEmpty() ? " (build: " + this.buildTime + ")" : "");
+        return toString(MAGE_VERSION_SHOW_BUILD_TIME);
     }
 
     @Override

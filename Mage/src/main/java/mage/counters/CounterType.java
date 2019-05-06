@@ -134,6 +134,9 @@ public enum CounterType {
     VELOCITY("velocity"),
     VERSE("verse"),
     VITALITY("vitality"),
+    VORTEX("vortex"),
+    WAGE("wage"),
+    WINCH("winch"),
     WIND("wind"),
     WISH("wish");
 
@@ -189,6 +192,11 @@ public enum CounterType {
             default:
                 return new Counter(name, amount);
         }
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 
     public static CounterType findByName(String name) {

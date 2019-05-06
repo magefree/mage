@@ -1,7 +1,5 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -11,14 +9,15 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.TurnPhase;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J (based on LevelX2)
  */
 public final class WallOfDust extends CardImpl {
@@ -48,7 +47,6 @@ public final class WallOfDust extends CardImpl {
 
 class WallOfDustRestrictionEffect extends RestrictionEffect {
 
-    int nextTurnTargetController = 0;
     protected MageObjectReference targetPermanentReference;
 
     public WallOfDustRestrictionEffect() {
@@ -58,7 +56,6 @@ class WallOfDustRestrictionEffect extends RestrictionEffect {
 
     public WallOfDustRestrictionEffect(final WallOfDustRestrictionEffect effect) {
         super(effect);
-        this.nextTurnTargetController = effect.nextTurnTargetController;
         this.targetPermanentReference = effect.targetPermanentReference;
     }
 
@@ -69,40 +66,34 @@ class WallOfDustRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        if (targetPermanentReference == null) {
+        if (targetPermanentReference == null || targetPermanentReference.getPermanent(game) == null) {
             return true;
         }
-        Permanent targetPermanent = targetPermanentReference.getPermanent(game);
-        if (targetPermanent == null) {
-            return true;
-        }
-        if (nextTurnTargetController == 0 && startingTurn != game.getTurnNum() && game.isActivePlayer(targetPermanent.getControllerId())) {
-            nextTurnTargetController = game.getTurnNum();
-        }
-        return game.getPhase().getType() == TurnPhase.END && nextTurnTargetController > 0 && game.getTurnNum() > nextTurnTargetController;
+
+        return game.getPhase().getType() == TurnPhase.END && this.isYourNextTurn(game);
     }
 
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (getTargetPointer().getFirst(game, source) == null) {
-            discard();
+        Permanent perm = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (perm != null) {
+            targetPermanentReference = new MageObjectReference(perm, game);
+            setStartingControllerAndTurnNum(game, perm.getControllerId(), game.getActivePlayerId());
         } else {
-            targetPermanentReference = new MageObjectReference(getTargetPointer().getFirst(game, source), game);
+            discard();
         }
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getId().equals(getTargetPointer().getFirst(game, source))) {
-            if (game.isActivePlayer(permanent.getControllerId())) {
-                return true;
-            }
+            return game.isActivePlayer(permanent.getControllerId());
         }
         return false;
     }
 
-    public boolean canAttack(Game game) {
+    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
         return false;
     }
 }

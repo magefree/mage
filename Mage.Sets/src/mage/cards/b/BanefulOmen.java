@@ -88,13 +88,13 @@ public final class BanefulOmen extends CardImpl {
                 return false;
             }
             Card card = player.getLibrary().getFromTop(game);
-            Cards cards = new CardsImpl();
-            cards.add(card);
-            player.revealCards("Baneful Omen", cards, game);
-
             if (card == null) {
                 return false;
             }
+            Cards cards = new CardsImpl(card);
+            player.revealCards("Baneful Omen", cards, game);
+
+
             int loseLife = card.getConvertedManaCost();
             Set<UUID> opponents = game.getOpponents(source.getControllerId());
             for (UUID opponentUuid : opponents) {

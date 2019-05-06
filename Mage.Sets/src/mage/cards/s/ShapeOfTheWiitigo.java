@@ -95,7 +95,7 @@ class AttackedOrBlockedSinceYourLastUpkeepWatcher extends Watcher{
     private final Map<UUID, Set<MageObjectReference>> attackedOrBlockedCreatures = new HashMap<>();
 
     public AttackedOrBlockedSinceYourLastUpkeepWatcher() {
-        super(AttackedOrBlockedSinceYourLastUpkeepWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public AttackedOrBlockedSinceYourLastUpkeepWatcher(AttackedOrBlockedSinceYourLastUpkeepWatcher watcher) {

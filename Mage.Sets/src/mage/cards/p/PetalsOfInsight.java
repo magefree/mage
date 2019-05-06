@@ -61,8 +61,7 @@ class PetalsOfInsightEffect extends OneShotEffect {
         if (controller == null || sourceObject == null) {
             return false;
         }
-        Cards cards = new CardsImpl();
-        cards.addAll(controller.getLibrary().getTopCards(game, 3));
+        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 3));
 
         controller.lookAtCards(sourceObject.getIdName(), cards, game);
         if (controller.chooseUse(outcome, "Put the cards on the bottom of your library in any order?", source, game)) {

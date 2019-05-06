@@ -17,7 +17,7 @@ import mage.util.SubTypeList;
  */
 public final class Hivestone extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures you control");
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));

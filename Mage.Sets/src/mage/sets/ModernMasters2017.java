@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -6,7 +5,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author fireshoes
  */
 public final class ModernMasters2017 extends ExpansionSet {
@@ -18,7 +16,7 @@ public final class ModernMasters2017 extends ExpansionSet {
     }
 
     private ModernMasters2017() {
-        super("Modern Masters 2017", "MM3", ExpansionSet.buildDate(2017, 3, 17), SetType.SUPPLEMENTAL);
+        super("Modern Masters 2017", "MM3", ExpansionSet.buildDate(2017, 3, 17), SetType.SUPPLEMENTAL_MODERN_LEGAL);
         this.blockName = "Reprint";
         this.hasBasicLands = false;
         this.hasBoosters = true;

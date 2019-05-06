@@ -1,7 +1,5 @@
-
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -20,11 +18,11 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.target.common.TargetActivatedAbility;
-import mage.target.common.TargetActivatedOrTriggeredAbility;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class Interdict extends CardImpl {
@@ -126,7 +124,7 @@ class InterdictCantActivateEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game) {
+    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game, boolean canUseChooseDialogs) {
         return false;
     }
 

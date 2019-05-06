@@ -97,7 +97,7 @@ class EmbalmedThisTurnWatcher extends Watcher {
     private final Set<MageObjectReference> embalmedThisTurnTokens;
 
     public EmbalmedThisTurnWatcher() {
-        super(EmbalmedThisTurnWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
         embalmedThisTurnTokens = new HashSet<>();
     }
 

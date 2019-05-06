@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import mage.abilities.Ability;
@@ -20,7 +19,6 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- *
  * @author Styxo
  */
 public final class PlanarOverlay extends CardImpl {
@@ -66,7 +64,7 @@ class PlanarOverlayEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    for (SubType landName : SubType.getBasicLands(false)) {
+                    for (SubType landName : SubType.getBasicLands()) {
                         FilterLandPermanent filter = new FilterLandPermanent(landName + " to return to hand");
                         filter.add(new SubtypePredicate(landName));
                         filter.add(new ControllerPredicate(TargetController.YOU));

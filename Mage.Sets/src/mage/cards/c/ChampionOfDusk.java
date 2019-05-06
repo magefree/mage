@@ -23,7 +23,7 @@ import java.util.UUID;
  */
 public final class ChampionOfDusk extends CardImpl {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("Vampires you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Vampires you control");
 
     static {
         filter.add(new SubtypePredicate(SubType.VAMPIRE));

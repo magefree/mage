@@ -8,7 +8,7 @@ import mage.watchers.Watcher;
 public class HomicidalBruteWatcher extends Watcher {
 
     public HomicidalBruteWatcher() {
-        super(HomicidalBruteWatcher.class.getSimpleName(), WatcherScope.CARD);
+        super(WatcherScope.CARD);
     }
 
     public HomicidalBruteWatcher(final HomicidalBruteWatcher watcher) {

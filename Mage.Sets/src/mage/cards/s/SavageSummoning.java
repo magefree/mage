@@ -122,7 +122,7 @@ class SavageSummoningWatcher extends Watcher {
     private Map<String, Set<String>> cardsCastWithSavageSummoning = new LinkedHashMap<>();
 
     public SavageSummoningWatcher() {
-        super(SavageSummoningWatcher.class, WatcherScope.PLAYER);
+        super(WatcherScope.PLAYER);
     }
 
     public SavageSummoningWatcher(final SavageSummoningWatcher watcher) {

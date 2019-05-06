@@ -8,6 +8,8 @@ import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.HintUtils;
 import mage.abilities.keyword.*;
 import mage.abilities.text.TextPart;
 import mage.cards.Card;
@@ -236,15 +238,81 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public List<String> getRules(Game game) {
         try {
             List<String> rules = getRules();
+
+            // info
             if (info != null) {
                 for (String data : info.values()) {
                     rules.add(data);
                 }
             }
+
+            // ability hints
+            List<String> abilityHints = new ArrayList<>();
+            if (HintUtils.ABILITY_HINTS_ENABLE) {
+                for (Ability ability : abilities) {
+                    for (Hint hint : ability.getHints()) {
+                        String s = hint.getText(game, ability);
+                        if (s != null && !s.isEmpty()) {
+                            abilityHints.add(s);
+                        }
+                    }
+                }
+            }
+
+            // restrict hints
+            List<String> restrictHints = new ArrayList<>();
+            if (HintUtils.RESTRICT_HINTS_ENABLE) {
+                for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
+                    for (Ability ability : entry.getValue()) {
+                        if (!entry.getKey().applies(this, ability, game)) {
+                            continue;
+                        }
+
+                        if (!entry.getKey().canAttack(game, false) || !entry.getKey().canAttack(this, null, ability, game, false)) {
+                            restrictHints.add(HintUtils.prepareText("Can't attack" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_RESTRICT));
+                        }
+
+                        if (!entry.getKey().canBlock(null, this, ability, game, false)) {
+                            restrictHints.add(HintUtils.prepareText("Can't block" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_RESTRICT));
+                        }
+
+                        if (!entry.getKey().canBeUntapped(this, ability, game, false)) {
+                            restrictHints.add(HintUtils.prepareText("Can't untapped" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_RESTRICT));
+                        }
+
+                        if (!entry.getKey().canUseActivatedAbilities(this, ability, game, false)) {
+                            restrictHints.add(HintUtils.prepareText("Can't use activated abilities" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_RESTRICT));
+                        }
+
+                        if (!entry.getKey().canTransform(this, ability, game, false)) {
+                            restrictHints.add(HintUtils.prepareText("Can't transform" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_RESTRICT));
+                        }
+                    }
+                }
+                restrictHints.sort(String::compareTo);
+            }
+
+            // total hints
+            if (!abilityHints.isEmpty() || !restrictHints.isEmpty()) {
+                rules.add(HintUtils.HINT_START_MARK);
+                HintUtils.appendHints(rules, abilityHints);
+                HintUtils.appendHints(rules, restrictHints);
+            }
+
             return rules;
         } catch (Exception e) {
             return rulesError;
         }
+    }
+
+    private String addSourceObjectName(Game game, Ability ability) {
+        if (ability != null) {
+            MageObject object = game.getObject(ability.getSourceId());
+            if (object != null) {
+                return " (" + object.getIdName() + ")";
+            }
+        }
+        return "";
     }
 
     @Override
@@ -477,7 +545,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public boolean phaseIn(Game game, boolean onlyDirect) {
         if (!phasedIn) {
             if (!replaceEvent(EventType.PHASE_IN, game)
-                    && ((onlyDirect && !indirectPhase) || (!onlyDirect))) {
+                    && (!onlyDirect || !indirectPhase)) {
                 this.phasedIn = true;
                 this.indirectPhase = false;
                 if (!game.isSimulation()) {
@@ -768,7 +836,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                         sourceControllerId = ((Card) source).getOwnerId();
                     } else if (source instanceof CommandObject) {
                         sourceControllerId = ((CommandObject) source).getControllerId();
-                        sourceAbilities = ((CommandObject) source).getAbilities();
+                        sourceAbilities = source.getAbilities();
                     } else {
                         source = null;
                     }
@@ -841,7 +909,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 if (countersToRemove > getCounters(game).getCount(CounterType.LOYALTY)) {
                     countersToRemove = getCounters(game).getCount(CounterType.LOYALTY);
                 }
-                getCounters(game).removeCounter(CounterType.LOYALTY, countersToRemove);
+                removeCounters(CounterType.LOYALTY.getName(), countersToRemove, game);
                 game.fireEvent(new DamagedPlaneswalkerEvent(objectId, sourceId, controllerId, actualDamage, combat));
                 return actualDamage;
             }
@@ -969,9 +1037,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             }
             // needed to get the correct possible targets if target rule modification effects are active
             // e.g. Fiendslayer Paladin tried to target with Ultimate Price
-            if (game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(EventType.TARGET, this.getId(), source.getId(), sourceControllerId), null, game, true)) {
-                return false;
-            }
+            return !game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(EventType.TARGET, this.getId(), source.getId(), sourceControllerId), null, game, true);
         }
 
         return true;
@@ -1124,11 +1190,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     private boolean canAttackCheckRestrictionEffects(UUID defenderId, Game game) {
         //20101001 - 508.1c
         for (Map.Entry<RestrictionEffect, Set<Ability>> effectEntry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
-            if (!effectEntry.getKey().canAttack(game)) {
+            if (!effectEntry.getKey().canAttack(game, true)) {
                 return false;
             }
             for (Ability ability : effectEntry.getValue()) {
-                if (!effectEntry.getKey().canAttack(this, defenderId, ability, game)) {
+                if (!effectEntry.getKey().canAttack(this, defenderId, ability, game, true)) {
                     return false;
                 }
             }
@@ -1153,7 +1219,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         // check blocker restrictions
         for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
             for (Ability ability : entry.getValue()) {
-                if (!entry.getKey().canBlock(attacker, this, ability, game)) {
+                if (!entry.getKey().canBlock(attacker, this, ability, game, true)) {
                     return false;
                 }
             }
@@ -1161,7 +1227,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         // check also attacker's restriction effects
         for (Map.Entry<RestrictionEffect, Set<Ability>> restrictionEntry : game.getContinuousEffects().getApplicableRestrictionEffects(attacker, game).entrySet()) {
             for (Ability ability : restrictionEntry.getValue()) {
-                if (!restrictionEntry.getKey().canBeBlocked(attacker, this, ability, game)) {
+                if (!restrictionEntry.getKey().canBeBlocked(attacker, this, ability, game, true)) {
                     return false;
                 }
             }
@@ -1179,7 +1245,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
             RestrictionEffect effect = entry.getKey();
             for (Ability ability : entry.getValue()) {
-                if (!effect.canBlock(null, this, ability, game)) {
+                if (!effect.canBlock(null, this, ability, game, true)) {
                     return false;
                 }
             }
@@ -1200,7 +1266,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
             RestrictionEffect effect = entry.getKey();
             for (Ability ability : entry.getValue()) {
-                if (!effect.canUseActivatedAbilities(this, ability, game)) {
+                if (!effect.canUseActivatedAbilities(this, ability, game, true)) {
                     return false;
                 }
             }
@@ -1214,7 +1280,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
                 RestrictionEffect effect = entry.getKey();
                 for (Ability ability : entry.getValue()) {
-                    if (!effect.canTransform(this, ability, game)) {
+                    if (!effect.canTransform(this, ability, game, true)) {
                         return false;
                     }
                 }

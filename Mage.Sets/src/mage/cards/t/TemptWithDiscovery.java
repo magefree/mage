@@ -66,7 +66,7 @@ class TemptWithDiscoveryEffect extends OneShotEffect {
             Set<UUID> playersShuffle = new LinkedHashSet<>();
             playersShuffle.add(controller.getId());
             TargetCardInLibrary target = new TargetCardInLibrary(new FilterLandCard());
-            if (controller.searchLibrary(target, game)) {
+            if (controller.searchLibrary(target, source, game)) {
                 for (UUID cardId : target.getTargets()) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
@@ -82,7 +82,7 @@ class TemptWithDiscoveryEffect extends OneShotEffect {
                         target.clearChosen();
                         opponentsUsedSearch++;
                         playersShuffle.add(playerId);
-                        if (opponent.searchLibrary(target, game)) {
+                        if (opponent.searchLibrary(target, source, game)) {
                             for (UUID cardId : target.getTargets()) {
                                 Card card = game.getCard(cardId);
                                 if (card != null) {
@@ -95,7 +95,7 @@ class TemptWithDiscoveryEffect extends OneShotEffect {
             }
             if (opponentsUsedSearch > 0) {
                 target = new TargetCardInLibrary(0, opponentsUsedSearch, new FilterLandCard());
-                if (controller.searchLibrary(target, game)) {
+                if (controller.searchLibrary(target, source, game)) {
                     for (UUID cardId : target.getTargets()) {
                         Card card = game.getCard(cardId);
                         if (card != null) {

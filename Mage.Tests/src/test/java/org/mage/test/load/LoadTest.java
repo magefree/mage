@@ -416,7 +416,7 @@ public class LoadTest {
         }
 
         if (errors.size() > 0) {
-            System.out.println("Not all games finished, founded " + errors.size() + " errors: ");
+            System.out.println("Not all games finished, found " + errors.size() + " errors: ");
             for (String s : errors) {
                 System.out.println(s);
             }

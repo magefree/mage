@@ -56,7 +56,7 @@ public final class CardUtil {
      * @param reduceCount
      */
     public static void adjustCost(SpellAbility spellAbility, int reduceCount) {
-        CardUtil.adjustAbilityCost((Ability) spellAbility, reduceCount);
+        CardUtil.adjustAbilityCost(spellAbility, reduceCount);
     }
 
     public static ManaCosts<ManaCost> increaseCost(ManaCosts<ManaCost> manaCosts, int increaseCount) {
@@ -379,15 +379,20 @@ public final class CardUtil {
             throw new IllegalArgumentException("Card number is empty.");
         }
 
-        if (!Character.isDigit(cardNumber.charAt(0))) {
-            // U123
-            return Integer.parseInt(cardNumber.substring(1, cardNumber.length()));
-        } else if (!Character.isDigit(cardNumber.charAt(cardNumber.length() - 1))) {
-            // 123b
-            return Integer.parseInt(cardNumber.substring(0, cardNumber.length() - 1));
-        } else {
-            // 123
-            return Integer.parseInt(cardNumber);
+        try {
+            if (!Character.isDigit(cardNumber.charAt(0))) {
+                // U123
+                return Integer.parseInt(cardNumber.substring(1));
+            } else if (!Character.isDigit(cardNumber.charAt(cardNumber.length() - 1))) {
+                // 123b
+                return Integer.parseInt(cardNumber.substring(0, cardNumber.length() - 1));
+            } else {
+                // 123
+                return Integer.parseInt(cardNumber);
+            }
+        } catch (NumberFormatException e) {
+            // wrong numbers like RA5 and etc
+            return -1;
         }
     }
 
@@ -532,7 +537,6 @@ public final class CardUtil {
             }
         } else {
             title = textSuffix == null ? "" : textSuffix;
-            ;
         }
         return title;
 

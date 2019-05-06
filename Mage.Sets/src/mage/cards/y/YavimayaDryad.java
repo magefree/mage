@@ -80,7 +80,7 @@ class YavimayaDryadEffect extends SearchEffect {
         if (controller == null || targetPlayer == null) {
             return false;
         }
-        if (controller.searchLibrary(target, game)) {
+        if (controller.searchLibrary(target, source, game)) {
             if (!target.getTargets().isEmpty()) {
                 targetPlayer.moveCards(new CardsImpl(target.getTargets()).getCards(game),
                         Zone.BATTLEFIELD, source, game, true, false, false, null);

@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.Set;
@@ -19,7 +18,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -29,7 +27,7 @@ import mage.target.common.TargetOpponent;
 public final class CombustibleGearhulk extends CardImpl {
 
     public CombustibleGearhulk(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{R}{R}");
         this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
@@ -75,29 +73,19 @@ class CombustibleGearhulkEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && sourcePermanent != null) {
-            UUID opponentId;
-            if (game.getOpponents(controller.getId()).size() == 1) {
-                opponentId = game.getOpponents(controller.getId()).iterator().next();
-            } else {
-                Target target = new TargetOpponent();
-                controller.choose(outcome, target, source.getSourceId(), game);
-                opponentId = target.getFirstTarget();
-            }
-            if (opponentId != null) {
-                Player opponent = game.getPlayer(opponentId);
-                if (opponent != null) {
-                    String questionDrawThree = "Have " + controller.getLogName() + " draw three cards?";
-                    if (opponent.chooseUse(outcome, questionDrawThree, source, game)) {
-                        if (!game.isSimulation()) {
-                            game.informPlayers(opponent.getLogName() + " lets " + controller.getLogName() + " draw three cards");
-                        }
-                        return new DrawCardSourceControllerEffect(3).apply(game, source);
-                    } else {
-                        if (!game.isSimulation()) {
-                            game.informPlayers(opponent.getLogName() + " does not let " + controller.getLogName() + " draw three cards");
-                        }
-                        return new CombustibleGearhulkMillAndDamageEffect().apply(game, source);
+            Player opponent = game.getPlayer(source.getFirstTarget());
+            if (opponent != null) {
+                String questionDrawThree = "Have " + controller.getLogName() + " draw three cards?";
+                if (opponent.chooseUse(outcome, questionDrawThree, source, game)) {
+                    if (!game.isSimulation()) {
+                        game.informPlayers(opponent.getLogName() + " lets " + controller.getLogName() + " draw three cards");
                     }
+                    return new DrawCardSourceControllerEffect(3).apply(game, source);
+                } else {
+                    if (!game.isSimulation()) {
+                        game.informPlayers(opponent.getLogName() + " does not let " + controller.getLogName() + " draw three cards");
+                    }
+                    return new CombustibleGearhulkMillAndDamageEffect().apply(game, source);
                 }
             }
         }

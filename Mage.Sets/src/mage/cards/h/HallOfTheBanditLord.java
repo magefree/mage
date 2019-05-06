@@ -66,7 +66,7 @@ class HallOfTheBanditLordWatcher extends Watcher {
     private final List<UUID> creatures = new ArrayList<>();
 
     HallOfTheBanditLordWatcher(Ability source) {
-        super("HallOfTheBanditLordWatcher", WatcherScope.CARD);
+        super(WatcherScope.CARD);
         this.source = source;
     }
 

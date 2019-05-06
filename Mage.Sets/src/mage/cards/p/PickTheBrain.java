@@ -1,11 +1,12 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.effects.common.search.SearchTargetGraveyardHandLibraryForCardNameAndExileEffect;
+import mage.abilities.hint.common.DeliriumHint;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -19,7 +20,6 @@ import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
 
 /**
- *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public final class PickTheBrain extends CardImpl {
@@ -31,6 +31,7 @@ public final class PickTheBrain extends CardImpl {
         // <i>Delirium</i> &mdash; If there are four or more card types among cards in your graveyard, search that player's graveyard, hand, and library for any number of cards with the same name as the exiled card, exile those cards, then that player shuffles their library.
         this.getSpellAbility().addEffect(new PickTheBrainEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addHint(DeliriumHint.instance);
     }
 
     public PickTheBrain(final PickTheBrain card) {

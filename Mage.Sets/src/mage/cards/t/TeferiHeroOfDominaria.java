@@ -19,11 +19,11 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.command.emblems.TeferiHeroOfDominariaEmblem;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetNonlandPermanent;
 
 import java.util.UUID;
+import mage.game.permanent.Permanent;
 
 /**
  * @author LevelX2

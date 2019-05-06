@@ -1,40 +1,23 @@
 
 package mage.client.game;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.ArrayList;
-import java.util.UUID;
-import javax.swing.JButton;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.ToolTipManager;
-import javax.swing.UIManager;
-import javax.swing.border.EmptyBorder;
-
 import mage.client.SessionHandler;
 import mage.client.components.MageTextArea;
 import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.game.FeedbackPanel.FeedbackMode;
-
-import static mage.client.game.FeedbackPanel.FeedbackMode.QUESTION;
 import mage.client.util.GUISizeHelper;
 import mage.constants.TurnPhase;
 
-import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_ID_NO;
-import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_ID_YES;
-import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
-import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_TEXT_NO;
-import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_TEXT_YES;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.UUID;
+
+import static mage.client.game.FeedbackPanel.FeedbackMode.QUESTION;
+import static mage.constants.PlayerAction.*;
 
 /**
  * Panel with buttons that copy the state of feedback panel.
@@ -326,10 +309,18 @@ public class HelperPanel extends JPanel {
         this.buttonGrid.setPreferredSize(null);
 
         ArrayList<JButton> buttons = new ArrayList<>();
-        if (this.btnSpecial.isVisible()) { buttons.add(this.btnSpecial); }
-        if (this.btnLeft.isVisible()) { buttons.add(this.btnLeft); }
-        if (this.btnRight.isVisible()) { buttons.add(this.btnRight); }
-        if (this.btnUndo.isVisible()) { buttons.add(this.btnUndo); }
+        if (this.btnSpecial.isVisible()) {
+            buttons.add(this.btnSpecial);
+        }
+        if (this.btnLeft.isVisible()) {
+            buttons.add(this.btnLeft);
+        }
+        if (this.btnRight.isVisible()) {
+            buttons.add(this.btnRight);
+        }
+        if (this.btnUndo.isVisible()) {
+            buttons.add(this.btnUndo);
+        }
 
         // color panel on player's feedback waiting
         if (this.gameNeedFeedback) {
@@ -360,9 +351,13 @@ public class HelperPanel extends JPanel {
                             case COMBAT:
                                 backColor = ACTIVE_FEEDBACK_BACKGROUND_COLOR_BATTLE;
                                 break;
+                            default:
+                                break;
                         }
                     }
                     this.mainPanel.setBackground(backColor);
+                    break;
+                default:
                     break;
             }
         } else {
@@ -499,6 +494,8 @@ public class HelperPanel extends JPanel {
                 break;
             case CMD_AUTO_ANSWER_RESET_ALL:
                 SessionHandler.sendPlayerAction(REQUEST_AUTO_ANSWER_RESET_ALL, gameId, null);
+                break;
+            default:
                 break;
         }
     }

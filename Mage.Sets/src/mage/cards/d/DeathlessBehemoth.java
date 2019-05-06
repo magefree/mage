@@ -23,7 +23,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class DeathlessBehemoth extends CardImpl {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("two Eldrazi Scions");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("two Eldrazi Scions");
 
     static {
         filter.add(Predicates.and(

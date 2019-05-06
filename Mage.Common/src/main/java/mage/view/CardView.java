@@ -1,9 +1,6 @@
-
 package mage.view;
 
 import com.google.gson.annotations.Expose;
-import java.util.*;
-import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
@@ -28,6 +25,9 @@ import mage.game.stack.StackAbility;
 import mage.target.Target;
 import mage.target.Targets;
 import mage.util.SubTypeList;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -108,7 +108,10 @@ public class CardView extends SimpleCardView {
     protected boolean isChoosable;
     protected boolean selected;
     protected boolean canAttack;
+    protected boolean canBlock;
     protected boolean inViewerOnly;
+
+    protected Card originalCard = null;
 
     public CardView(Card card) {
         this(card, null, false);
@@ -126,6 +129,7 @@ public class CardView extends SimpleCardView {
 
     public CardView(CardView cardView) {
         super(cardView.id, cardView.expansionSetCode, cardView.cardNumber, cardView.usesVariousArt, cardView.tokenSetCode, cardView.gameObject, cardView.tokenDescriptor);
+        this.originalCard = cardView.originalCard;
 
         this.id = UUID.randomUUID();
         this.parentId = cardView.parentId;
@@ -198,15 +202,17 @@ public class CardView extends SimpleCardView {
         this.isChoosable = cardView.isChoosable;
         this.selected = cardView.selected;
         this.canAttack = cardView.canAttack;
+        this.canBlock = cardView.canBlock;
         this.inViewerOnly = cardView.inViewerOnly;
+        this.originalCard = cardView.originalCard.copy();
     }
 
     /**
      * @param card
      * @param game
      * @param controlled is the card view created for the card controller - used
-     * for morph / face down cards to know which player may see information for
-     * the card
+     *                   for morph / face down cards to know which player may see information for
+     *                   the card
      */
     public CardView(Card card, Game game, boolean controlled) {
         this(card, game, controlled, false, false);
@@ -232,15 +238,17 @@ public class CardView extends SimpleCardView {
     /**
      * @param card
      * @param game
-     * @param controlled is the card view created for the card controller - used
-     * for morph / face down cards to know which player may see information for
-     * the card
+     * @param controlled       is the card view created for the card controller - used
+     *                         for morph / face down cards to know which player may see information for
+     *                         the card
      * @param showFaceDownCard if true and the card is not on the battlefield,
-     * also a face down card is shown in the view, face down cards will be shown
-     * @param storeZone if true the card zone will be set in the zone attribute.
+     *                         also a face down card is shown in the view, face down cards will be shown
+     * @param storeZone        if true the card zone will be set in the zone attribute.
      */
     public CardView(Card card, Game game, boolean controlled, boolean showFaceDownCard, boolean storeZone) {
         super(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), card.getTokenSetCode(), game != null, card.getTokenDescriptor());
+        this.originalCard = card;
+
         // no information available for face down cards as long it's not a controlled face down morph card
         // TODO: Better handle this in Framework (but currently I'm not sure how to do it there) LevelX2
         boolean showFaceUp = true;
@@ -279,7 +287,7 @@ public class CardView extends SimpleCardView {
                 this.power = Integer.toString(card.getPower().getValue());
                 this.toughness = Integer.toString(card.getToughness().getValue());
                 this.cardTypes = card.getCardType();
-                this.faceDown = ((Permanent) card).isFaceDown(game);
+                this.faceDown = card.isFaceDown(game);
             } else {
                 // this.hideInfo = true;
                 return;
@@ -289,9 +297,9 @@ public class CardView extends SimpleCardView {
         SplitCard splitCard = null;
         if (card.isSplitCard()) {
             splitCard = (SplitCard) card;
-            rotate = (((SplitCard) card).getSpellAbility().getSpellAbilityType()) != SpellAbilityType.SPLIT_AFTERMATH;
+            rotate = (card.getSpellAbility().getSpellAbilityType()) != SpellAbilityType.SPLIT_AFTERMATH;
         } else if (card instanceof Spell) {
-            switch (((Spell) card).getSpellAbility().getSpellAbilityType()) {
+            switch (card.getSpellAbility().getSpellAbilityType()) {
                 case SPLIT_FUSED:
                     splitCard = (SplitCard) ((Spell) card).getCard();
                     rotate = true;
@@ -383,12 +391,12 @@ public class CardView extends SimpleCardView {
                 this.cardNumber = ((PermanentToken) card).getToken().getOriginalCardNumber();
             } else {
                 // a created token
-                this.expansionSetCode = ((PermanentToken) card).getExpansionSetCode();
-                this.tokenDescriptor = ((PermanentToken) card).getTokenDescriptor();
+                this.expansionSetCode = card.getExpansionSetCode();
+                this.tokenDescriptor = card.getTokenDescriptor();
             }
             //
             // set code und card number for token copies to get the image
-            this.rules = ((PermanentToken) card).getRules(game);
+            this.rules = card.getRules(game);
             this.type = ((PermanentToken) card).getToken().getTokenType();
         } else {
             this.rarity = card.getRarity();
@@ -460,10 +468,14 @@ public class CardView extends SimpleCardView {
 
         // Get starting loyalty
         this.startingLoyalty = "" + card.getStartingLoyalty();
+
+
     }
 
     public CardView(MageObject object) {
         super(object.getId(), "", "0", false, "", true, "");
+        this.originalCard = null;
+
         this.name = object.getName();
         this.displayName = object.getName();
         if (object instanceof Permanent) {
@@ -984,6 +996,14 @@ public class CardView extends SimpleCardView {
         this.canAttack = canAttack;
     }
 
+    public boolean isCanBlock() {
+        return canBlock;
+    }
+
+    public void setCanBlock(boolean canBlock) {
+        this.canBlock = canBlock;
+    }
+
     public boolean isCreature() {
         return cardTypes.contains(CardType.CREATURE);
     }
@@ -1045,5 +1065,9 @@ public class CardView extends SimpleCardView {
 
     public boolean inViewerOnly() {
         return inViewerOnly;
+    }
+
+    public Card getOriginalCard() {
+        return this.originalCard;
     }
 }

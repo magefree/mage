@@ -24,6 +24,7 @@ public class Premodern extends Constructed {
         setCodes.add(mage.sets.Weatherlight.getInstance().getCode());
         setCodes.add(mage.sets.Tempest.getInstance().getCode());
         setCodes.add(mage.sets.Stronghold.getInstance().getCode());
+        setCodes.add(mage.sets.Exodus.getInstance().getCode());
         setCodes.add(mage.sets.UrzasSaga.getInstance().getCode());
         setCodes.add(mage.sets.UrzasLegacy.getInstance().getCode());
         setCodes.add(mage.sets.ClassicSixthEdition.getInstance().getCode());

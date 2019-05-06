@@ -2,8 +2,11 @@
 package mage.cards.b;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -65,13 +68,10 @@ class BaneOfBalaGedEffect extends OneShotEffect {
         if (defendingPlayer != null) {
             Target target = new TargetControlledPermanent(2);
             defendingPlayer.chooseTarget(outcome, target, source, game);
-            Set<Card> toExile = new HashSet<>();
-            target.getTargets().stream().map((targetId)
-                    -> game.getPermanent(targetId)).filter((permanent)
-                    -> (permanent != null)).forEach((permanent)
-                    -> {
-                toExile.add(permanent);
-            });
+            Set<Card> toExile = target.getTargets().stream()
+                    .map(game::getPermanent)
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toSet());
             defendingPlayer.moveCards(toExile, Zone.EXILED, source, game);
             return true;
         }

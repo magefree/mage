@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
@@ -9,7 +8,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX2
  */
 public class CantAttackBlockAllEffect extends RestrictionEffect {
@@ -42,12 +40,12 @@ public class CantAttackBlockAllEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Game game) {
+    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
         return false;
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         return false;
     }
 

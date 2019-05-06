@@ -22,7 +22,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public final class DoubtlessOne extends CardImpl {
     
-    final static FilterPermanent filter = new FilterPermanent("Clerics on the battlefield");
+    static final FilterPermanent filter = new FilterPermanent("Clerics on the battlefield");
 
         static {
             filter.add(new SubtypePredicate(SubType.CLERIC));

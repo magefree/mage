@@ -116,8 +116,7 @@ class SpyNetworkFaceDownEffect extends OneShotEffect {
                     if (faceDownCreature != null) {
                         Permanent copyFaceDown = faceDownCreature.copy();
                         copyFaceDown.setFaceDown(false, game);
-                        Cards cards = new CardsImpl();
-                        cards.add(copyFaceDown);
+                        Cards cards = new CardsImpl(copyFaceDown);
                         controller.lookAtCards("face down card - " + mageObject.getName(), cards, game);
                         game.informPlayers(controller.getLogName() + " looks at a face down creature controlled by " + player.getLogName());
                     }

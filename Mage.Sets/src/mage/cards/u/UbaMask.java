@@ -132,7 +132,7 @@ class UbaMaskExiledCardsWatcher extends Watcher {
     private final Map<UUID, List<MageObjectReference>> exiledCards = new HashMap<>();
 
     public UbaMaskExiledCardsWatcher() {
-        super(UbaMaskExiledCardsWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public UbaMaskExiledCardsWatcher(final UbaMaskExiledCardsWatcher watcher) {

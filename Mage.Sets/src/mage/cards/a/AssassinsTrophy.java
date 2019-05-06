@@ -77,7 +77,7 @@ class AssassinsTrophyEffect extends OneShotEffect {
             if (controller != null) {
                 if (controller.chooseUse(Outcome.PutLandInPlay, "Do you wish to search for a basic land, put it onto the battlefield and then shuffle your library?", source, game)) {
                     TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND);
-                    if (controller.searchLibrary(target, game)) {
+                    if (controller.searchLibrary(target, source, game)) {
                         Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
                         if (card != null) {
                             controller.moveCards(card, Zone.BATTLEFIELD, source, game);

@@ -20,7 +20,6 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.turn.Step;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
@@ -82,7 +81,7 @@ class GrinningTotemSearchAndExileEffect extends OneShotEffect {
         if (you != null && targetOpponent != null && sourceObject != null) {
             if (targetOpponent.getLibrary().hasCards()) {
                 TargetCardInLibrary targetCard = new TargetCardInLibrary();
-                if (you.searchLibrary(targetCard, game, targetOpponent.getId())) {
+                if (you.searchLibrary(targetCard, source, game, targetOpponent.getId())) {
                     Card card = targetOpponent.getLibrary().remove(targetCard.getFirstTarget(), game);
                     if (card != null) {
                         UUID exileZoneId = CardUtil.getCardExileZoneId(game, source);

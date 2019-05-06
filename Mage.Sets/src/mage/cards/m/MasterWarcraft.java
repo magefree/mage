@@ -254,7 +254,7 @@ class MasterWarcraftCastWatcher extends Watcher {
     public int copyCountApply = 0;
 
     public MasterWarcraftCastWatcher() {
-        super(MasterWarcraftCastWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public MasterWarcraftCastWatcher(final MasterWarcraftCastWatcher watcher) {

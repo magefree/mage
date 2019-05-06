@@ -25,7 +25,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class ForerunnerOfSlaughter extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("colorless creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("colorless creature");
 
     static {
         filter.add(ColorlessPredicate.instance);

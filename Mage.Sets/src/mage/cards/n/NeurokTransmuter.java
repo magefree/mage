@@ -31,7 +31,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class NeurokTransmuter extends CardImpl {
 
-    final static FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creature");
+    static final FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creature");
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));

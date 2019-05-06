@@ -83,10 +83,10 @@ class KamahlsSummonsEffect extends OneShotEffect {
                 }
             }
             Token token = new BearToken();
-            for (UUID playerId : revealedCards.keySet()) {
-                int value = revealedCards.get(playerId);
+            for (Map.Entry<UUID, Integer> revealedCardsByPlayer: revealedCards.entrySet()) {
+                int value = revealedCardsByPlayer.getValue();
                 if (value > 0) {
-                    token.putOntoBattlefield(value, game, source.getSourceId(), playerId);   
+                    token.putOntoBattlefield(value, game, source.getSourceId(), revealedCardsByPlayer.getKey());
                 }
             }
             return true;

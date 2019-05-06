@@ -100,7 +100,7 @@ class LinSivviDefiantHeroEffect extends OneShotEffect {
         filter.add(new SubtypePredicate(SubType.REBEL));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
 
-        if (controller.searchLibrary(target, game)) {
+        if (controller.searchLibrary(target, source, game)) {
             Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
             if (card != null) {
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game);

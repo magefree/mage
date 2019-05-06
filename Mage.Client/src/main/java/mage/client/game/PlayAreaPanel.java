@@ -168,6 +168,8 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                     SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_END_STEP_BEFORE_MY_NEXT_TURN, gameId, null);
                     break;
                 }
+                default:
+                    break;
             }
         };
 
@@ -409,6 +411,8 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                     MageFrame.getInstance().showUserRequestDialog(message);
                     break;
                 }
+                default:
+                    break;
             }
         };
 

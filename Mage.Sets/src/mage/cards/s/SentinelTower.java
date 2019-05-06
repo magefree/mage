@@ -101,7 +101,7 @@ class SentinelTowerWatcher extends Watcher {
     private final List<MageObjectReference> spellsThisTurn;
 
     SentinelTowerWatcher() {
-        super(SentinelTowerWatcher.class, WatcherScope.GAME);
+        super( WatcherScope.GAME);
         this.spellsThisTurn = new ArrayList<>();
     }
 

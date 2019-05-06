@@ -24,7 +24,7 @@ import mage.target.common.TargetAttackingCreature;
  */
 public final class AccursedHorde extends CardImpl {
 
-    private final static FilterAttackingCreature filter = new FilterAttackingCreature("attacking Zombie");
+    private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking Zombie");
 
     static {
         filter.add(new SubtypePredicate(SubType.ZOMBIE));
@@ -43,7 +43,7 @@ public final class AccursedHorde extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AccursedHorde(final AccursedHorde card) {
+    private AccursedHorde(final AccursedHorde card) {
         super(card);
     }
 

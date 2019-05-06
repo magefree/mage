@@ -14,6 +14,7 @@ import mage.remote.MageRemoteException;
 import mage.remote.Session;
 import mage.remote.SessionImpl;
 import mage.view.*;
+import org.apache.log4j.Logger;
 
 import java.util.*;
 
@@ -22,8 +23,14 @@ import java.util.*;
  */
 public final class SessionHandler {
 
+
+    private static final Logger logger = Logger.getLogger(SessionHandler.class);
+
     private static Session session;
     private static String lastConnectError = "";
+
+    private SessionHandler(){
+    }
 
     public static void startSession(MageFrame mageFrame) {
 
@@ -181,7 +188,7 @@ public final class SessionHandler {
         try {
             return session.getTournament(tournamentId);
         } catch (MageRemoteException e) {
-            e.printStackTrace();
+            logger.info(e);
             return null;
         }
 
@@ -275,7 +282,7 @@ public final class SessionHandler {
         try {
             return session.getRoomUsers(roomId);
         } catch (MageRemoteException e) {
-            e.printStackTrace();
+            logger.info(e);
             return Collections.emptyList();
         }
     }
@@ -284,8 +291,8 @@ public final class SessionHandler {
         try {
             return session.getFinishedMatches(roomId);
         } catch (MageRemoteException e) {
-            e.printStackTrace();
-            return new ArrayList<>();
+            logger.info(e);
+            return Collections.emptyList();
         }
     }
 
@@ -301,8 +308,8 @@ public final class SessionHandler {
         try {
             return session.getTables(roomId);
         } catch (MageRemoteException e) {
-            e.printStackTrace();
-            return new ArrayList<>();
+            logger.info(e);
+            return Collections.emptyList();
         }
     }
 

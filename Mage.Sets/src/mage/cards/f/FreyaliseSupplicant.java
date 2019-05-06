@@ -27,7 +27,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class FreyaliseSupplicant extends CardImpl {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("red or white creature");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("red or white creature");
 
     static {
         filter.add(Predicates.or(new ColorPredicate(ObjectColor.RED),

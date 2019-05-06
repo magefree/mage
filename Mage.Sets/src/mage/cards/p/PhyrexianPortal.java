@@ -69,8 +69,7 @@ class PhyrexianPortalEffect extends OneShotEffect {
         Player opponent = game.getPlayer(source.getFirstTarget());
         if (controller != null && opponent != null) {
             if (controller.getLibrary().size() >= 10) {
-                Cards cards = new CardsImpl();
-                cards.addAll(controller.getLibrary().getTopCards(game, 10));
+                Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 10));
                 
                 TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY, new FilterCard("cards to put in the first pile"));
                 List<Card> pile1 = new ArrayList<>();

@@ -77,7 +77,7 @@ class ParallelThoughtsSearchEffect extends OneShotEffect {
         if (controller != null
                 && permanent != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(7, new FilterCard());
-            if (controller.searchLibrary(target, game)) {
+            if (controller.searchLibrary(target, source, game)) {
                 for (UUID targetId : target.getTargets()) {
                     Card card = controller.getLibrary().getCard(targetId, game);
                     if (card != null) {

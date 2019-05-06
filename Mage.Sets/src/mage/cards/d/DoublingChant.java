@@ -78,7 +78,7 @@ class DoublingChantEffect extends OneShotEffect {
                 FilterCreatureCard filter = new FilterCreatureCard("nothing (no valid card available)");
                 filter.add(new NamePredicate("creatureName"));
                 TargetCardInLibrary target = new TargetCardInLibrary(0, 1, filter);
-                controller.searchLibrary(target, game);
+                controller.searchLibrary(target, source, game);
             }
         }
         for (Permanent creature : creatures) {
@@ -91,7 +91,7 @@ class DoublingChantEffect extends OneShotEffect {
                     filter.add(Predicates.not(Predicates.or(uuidPredicates)));
                 }
                 TargetCardInLibrary target = new TargetCardInLibrary(filter);
-                if (controller.searchLibrary(target, game)) {
+                if (controller.searchLibrary(target, source, game)) {
                     Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
                     if (card != null) {
                         chosenCards.add(card);

@@ -74,7 +74,7 @@ class UrzasMiterWatcher extends Watcher {
     List<UUID> cards;
 
     public UrzasMiterWatcher() {
-        super(UrzasMiterWatcher.class, WatcherScope.PLAYER);
+        super(WatcherScope.PLAYER);
         this.cards = new ArrayList<>();
     }
 

@@ -47,7 +47,7 @@ public final class IslandSanctuary extends CardImpl {
 
 class IslandSanctuaryEffect extends ReplacementEffectImpl {
 
-    private final static FilterCreaturePermanent notFlyingorIslandwalkCreatures = new FilterCreaturePermanent("except by creatures with flying and/or islandwalk");
+    private static final FilterCreaturePermanent notFlyingorIslandwalkCreatures = new FilterCreaturePermanent("except by creatures with flying and/or islandwalk");
 
     static {
         notFlyingorIslandwalkCreatures.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));

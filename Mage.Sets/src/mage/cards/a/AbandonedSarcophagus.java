@@ -135,7 +135,7 @@ class AbandonedSarcophagusWatcher extends Watcher {
     private final Map<UUID, Cards> cycledCardsThisTurn = new HashMap<>();
 
     AbandonedSarcophagusWatcher() {
-        super(AbandonedSarcophagusWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     private AbandonedSarcophagusWatcher(final AbandonedSarcophagusWatcher watcher) {

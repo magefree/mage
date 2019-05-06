@@ -10,7 +10,7 @@ import java.awt.*;
 /**
  * @author mw, noxx
  */
-abstract public class IDialogPanel extends JXPanel {
+public abstract class IDialogPanel extends JXPanel {
 
     private DlgParams params;
     private Dimension cardDimension;
@@ -71,7 +71,7 @@ abstract public class IDialogPanel extends JXPanel {
 
     protected Dimension getCardDimension() {
         if (cardDimension == null) {
-            cardDimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+            cardDimension = new Dimension(Config.dimensions.getFrameWidth(), Config.dimensions.getFrameHeight());
         }
         return cardDimension;
     }

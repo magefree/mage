@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.mage</groupId>
         <artifactId>mage-root</artifactId>
-        <version>1.4.33</version>
+        <version>1.4.35</version>
     </parent>
 
     <artifactId>mage</artifactId>
@@ -23,13 +23,17 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>1.4.187</version>
+            <version>1.4.197</version>
             <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
         </dependency>
         <dependency>
             <groupId>com.j256.ormlite</groupId>
             <artifactId>ormlite-jdbc</artifactId>
-            <version>4.48</version>
+            <version>5.1</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -38,7 +42,7 @@
         <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java</artifactId>
-            <version>3.6.0</version>
+            <version>3.7.0-rc1</version>
         </dependency>
     </dependencies>
 
@@ -104,10 +108,6 @@
                 </executions>
             </plugin>            
         </plugins>
-
-
-
-
 
         <finalName>mage</finalName>
 

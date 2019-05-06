@@ -28,7 +28,7 @@ import mage.game.events.GameEvent;
  */
 public final class PathOfMettle extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that doesn't have first strike, double strike, vigilance, or haste");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that doesn't have first strike, double strike, vigilance, or haste");
 
     static {
         filter.add(Predicates.not(Predicates.or(
@@ -67,7 +67,7 @@ public final class PathOfMettle extends CardImpl {
 
 class PathOfMettleTriggeredAbility extends TriggeredAbilityImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that doesn't have first strike, double strike, vigilance, or haste");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that doesn't have first strike, double strike, vigilance, or haste");
 
     static {
         filter.add(Predicates.or(

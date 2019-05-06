@@ -39,8 +39,8 @@ public final class FrontierSiege extends CardImpl {
         filter.add(new AbilityPredicate(FlyingAbility.class));
         filter2.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
-    private final static String ruleTrigger1 = "&bull Khans &mdash; At the beginning of each of your main phases, add {G}{G}.";
-    private final static String ruleTrigger2 = "&bull Dragons &mdash; Whenever a creature with flying enters the battlefield under your control, you may have it fight target creature you don't control.";
+    private static final String ruleTrigger1 = "&bull Khans &mdash; At the beginning of each of your main phases, add {G}{G}.";
+    private static final String ruleTrigger2 = "&bull Dragons &mdash; Whenever a creature with flying enters the battlefield under your control, you may have it fight target creature you don't control.";
 
     public FrontierSiege(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}");

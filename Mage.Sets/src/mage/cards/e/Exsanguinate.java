@@ -1,5 +1,3 @@
-
-
 package mage.cards.e;
 
 import java.util.UUID;
@@ -17,13 +15,13 @@ import mage.game.Game;
  */
 public final class Exsanguinate extends CardImpl {
 
-    public Exsanguinate (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}{B}");
+    public Exsanguinate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
 
         this.getSpellAbility().addEffect(new ExsanguinateEffect());
     }
 
-    public Exsanguinate (final Exsanguinate card) {
+    public Exsanguinate(final Exsanguinate card) {
         super(card);
     }
 
@@ -35,8 +33,9 @@ public final class Exsanguinate extends CardImpl {
 }
 
 class ExsanguinateEffect extends OneShotEffect {
+
     public ExsanguinateEffect() {
-        super(Outcome.Damage);
+        super(Outcome.GainLife);
         staticText = "Each opponent loses X life. You gain life equal to the life lost this way";
     }
 
@@ -46,13 +45,14 @@ class ExsanguinateEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int loseLife = 0;
-        int damage = source.getManaCostsToPay().getX();
+        int totalLostLife = 0;
+        int loseLife = source.getManaCostsToPay().getX();
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-            loseLife += game.getPlayer(opponentId).loseLife(damage, game, false);
+            totalLostLife += game.getPlayer(opponentId).loseLife(loseLife, game, false);
         }
-        if (loseLife > 0)
-            game.getPlayer(source.getControllerId()).gainLife(loseLife, game, source);
+        if (totalLostLife > 0) {
+            game.getPlayer(source.getControllerId()).gainLife(totalLostLife, game, source);
+        }
         return true;
     }
 

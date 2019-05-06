@@ -9,6 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
@@ -24,7 +25,7 @@ public final class GaeasCradle extends CardImpl {
         // {T}: Add {G} for each creature you control.
         DynamicManaAbility ability = new DynamicManaAbility(
                 Mana.GreenMana(1),
-                new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent("creature you control"))
+                new PermanentsOnBattlefieldCount(StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED)
         );
         this.addAbility(ability);
     }

@@ -19,7 +19,7 @@ import mage.game.permanent.token.DuneBroodNephilimToken;
  */
 public final class DuneBroodNephilim extends CardImpl {
 
-    final static FilterControlledPermanent filterLands = new FilterControlledLandPermanent();
+    static final FilterControlledPermanent filterLands = new FilterControlledLandPermanent();
 
     public DuneBroodNephilim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{R}{G}{W}");

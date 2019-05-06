@@ -125,16 +125,16 @@ public abstract class Animation {
             @Override
             protected void update(float percentage) {
                 if (tapped) {
-                    panel.tappedAngle = CardPanel.TAPPED_ANGLE * percentage;
+                    panel.setTappedAngle(CardPanel.TAPPED_ANGLE * percentage);
                     // reverse movement if untapping
                     if (!panel.isTapped()) {
-                        panel.tappedAngle = CardPanel.TAPPED_ANGLE - panel.tappedAngle;
+                        panel.setTappedAngle(CardPanel.TAPPED_ANGLE - panel.getTappedAngle());
                     }
                 }
                 if (flipped) {
-                    panel.flippedAngle = CardPanel.FLIPPED_ANGLE * percentage;
+                    panel.setFlippedAngle(CardPanel.FLIPPED_ANGLE * percentage);
                     if (!panel.isFlipped()) {
-                        panel.flippedAngle = CardPanel.FLIPPED_ANGLE - panel.flippedAngle;
+                        panel.setFlippedAngle(CardPanel.FLIPPED_ANGLE - panel.getFlippedAngle());
                     }
                 }
                 panel.repaint();
@@ -143,10 +143,10 @@ public abstract class Animation {
             @Override
             protected void end() {
                 if (tapped) {
-                    panel.tappedAngle = panel.isTapped() ? CardPanel.TAPPED_ANGLE : 0;
+                    panel.setTappedAngle(panel.isTapped() ? CardPanel.TAPPED_ANGLE : 0);
                 }
                 if (flipped) {
-                    panel.flippedAngle = panel.isFlipped() ? CardPanel.FLIPPED_ANGLE : 0;
+                    panel.setFlippedAngle(panel.isFlipped() ? CardPanel.FLIPPED_ANGLE : 0);
                 }
                 parent.onEndAnimation();
                 parent.repaint();
@@ -334,7 +334,7 @@ public abstract class Animation {
                 currentX = Math.min(currentX, layeredPane.getWidth() - currentWidth);
                 int currentY = Math.max(0, centerY - Math.round(currentHeight / 2f));
                 currentY = Math.min(currentY, layeredPane.getHeight() - currentHeight);
-                animationPanel.tappedAngle = overPanel.tappedAngle * percentage;
+                animationPanel.setTappedAngle(overPanel.getTappedAngle() * percentage);
                 animationPanel.setCardBounds(currentX, currentY, currentWidth, currentHeight);
             }
 

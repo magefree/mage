@@ -70,6 +70,16 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
                     }
                 }
                 return yours;
+            case NOT_YOU:
+                boolean notYours = !event.getPlayerId().equals(this.controllerId);
+                if (notYours && setTargetPointer) {
+                    if (getTargets().isEmpty()) {
+                        for (Effect effect : this.getEffects()) {
+                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                        }
+                    }
+                }
+                return notYours;
             case OPPONENT:
                 if (game.getPlayer(this.controllerId).hasOpponent(event.getPlayerId(), game)) {
                     if (setTargetPointer && getTargets().isEmpty()) {

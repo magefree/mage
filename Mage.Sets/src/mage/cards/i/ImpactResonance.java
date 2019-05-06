@@ -90,7 +90,7 @@ class GreatestAmountOfDamageWatcher extends Watcher {
     private int damageAmount;
 
     public GreatestAmountOfDamageWatcher() {
-        super(GreatestAmountOfDamageWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public GreatestAmountOfDamageWatcher(final GreatestAmountOfDamageWatcher watcher) {

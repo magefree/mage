@@ -51,14 +51,14 @@ public final class GuardianProject extends CardImpl {
 
 class GuardianProjectTriggeredAbility extends EntersBattlefieldAllTriggeredAbility {
 
-    public static final FilterPermanent filter = new FilterControlledCreaturePermanent();
+    public static final FilterPermanent filterNonTokenControlledCreature = new FilterControlledCreaturePermanent();
 
     static {
-        filter.add(Predicates.not(TokenPredicate.instance));
+        filterNonTokenControlledCreature.add(Predicates.not(TokenPredicate.instance));
     }
 
     GuardianProjectTriggeredAbility() {
-        super(new GuardianProjectEffect(null), filter);
+        super(new GuardianProjectEffect(null), filterNonTokenControlledCreature);
     }
 
     private GuardianProjectTriggeredAbility(final GuardianProjectTriggeredAbility ability) {
@@ -110,7 +110,7 @@ class GuardianProjectTriggeredAbility extends EntersBattlefieldAllTriggeredAbili
         filterPermanent.add(new NamePredicate(permanent.getName()));
         filterPermanent.add(Predicates.not(new CardIdPredicate(permanent.getId())));
         filterPermanent.add(new ControllerIdPredicate(controllerId));
-        if (game.getBattlefield().getActivePermanents(filterPermanent, controllerId, game).size() > 0) {
+        if (!game.getBattlefield().getActivePermanents(filterPermanent, controllerId, game).isEmpty()) {
             return false;
         }
         return true;

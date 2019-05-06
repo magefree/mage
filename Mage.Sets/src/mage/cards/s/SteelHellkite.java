@@ -104,7 +104,7 @@ class SteelHellkiteWatcher extends Watcher {
     private final Map<UUID, Set<UUID>> damageMap = new HashMap<>();
 
     public SteelHellkiteWatcher() {
-        super(SteelHellkiteWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public SteelHellkiteWatcher(final SteelHellkiteWatcher watcher) {

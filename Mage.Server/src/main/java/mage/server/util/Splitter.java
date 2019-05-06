@@ -11,6 +11,8 @@ import mage.players.Player;
  */
 public final class Splitter {
 
+    private Splitter(){}
+
     public static List<UUID> split(Game game, UUID playerId) {
         List<UUID> players = new ArrayList<>();
         //players.add(playerId); // add original player

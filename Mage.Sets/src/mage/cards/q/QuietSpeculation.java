@@ -73,7 +73,7 @@ class SearchLibraryPutInGraveEffect extends SearchEffect {
         if (controller == null) {
             return false;
         }
-        if (targetPlayerID != null && controller.searchLibrary(target, game, targetPlayerID)) {
+        if (targetPlayerID != null && controller.searchLibrary(target, source, game, targetPlayerID)) {
             if (!target.getTargets().isEmpty()) {
                 Cards cards = new CardsImpl(target.getTargets());
                 controller.revealCards("Quiet Speculation", cards, game);

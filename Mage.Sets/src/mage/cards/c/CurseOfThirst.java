@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import mage.abilities.Ability;
@@ -31,9 +30,8 @@ import java.util.UUID;
 public final class CurseOfThirst extends CardImpl {
 
     public CurseOfThirst(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}");
         this.subtype.add(SubType.AURA, SubType.CURSE);
-
 
         // Enchant player
         TargetPlayer auraTarget = new TargetPlayer();
@@ -91,7 +89,8 @@ class CurseOfThirstAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "At the beginning of enchanted player's upkeep, Curse of Thirst deals damage to that player equal to the number of Curses attached to him or her.";
+        return "At the beginning of enchanted player's upkeep, Curse of Thirst "
+                + "deals damage to that player equal to the number of Curses attached to him or her.";
     }
 
 }
@@ -108,10 +107,11 @@ class CursesAttachedCount implements DynamicValue {
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             Player player = game.getPlayer(enchantment.getAttachedTo());
             if (player != null) {
-                for (UUID attachmentId: player.getAttachments()) {
+                for (UUID attachmentId : player.getAttachments()) {
                     Permanent attachment = game.getPermanent(attachmentId);
-                    if (attachment != null && attachment.hasSubtype(SubType.CURSE, game))
+                    if (attachment != null && attachment.hasSubtype(SubType.CURSE, game)) {
                         count++;
+                    }
                 }
             }
         }

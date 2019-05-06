@@ -60,6 +60,7 @@ public final class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Blue Mana Battery", 275, Rarity.UNCOMMON, mage.cards.b.BlueManaBattery.class));
         cards.add(new SetCardInfo("Boomerang", 48, Rarity.COMMON, mage.cards.b.Boomerang.class));
         cards.add(new SetCardInfo("Boris Devilboon", 223, Rarity.RARE, mage.cards.b.BorisDevilboon.class));
+        cards.add(new SetCardInfo("Brine Hag", 49, Rarity.UNCOMMON, mage.cards.b.BrineHag.class));
         cards.add(new SetCardInfo("Bronze Horse", 276, Rarity.RARE, mage.cards.b.BronzeHorse.class));
         cards.add(new SetCardInfo("Carrion Ants", 90, Rarity.RARE, mage.cards.c.CarrionAnts.class));
         cards.add(new SetCardInfo("Cat Warriors", 177, Rarity.COMMON, mage.cards.c.CatWarriors.class));
@@ -300,6 +301,7 @@ public final class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Urborg", 310, Rarity.UNCOMMON, mage.cards.u.Urborg.class));
         cards.add(new SetCardInfo("Vaevictis Asmadi", 269, Rarity.RARE, mage.cards.v.VaevictisAsmadi.class));
         cards.add(new SetCardInfo("Vampire Bats", 125, Rarity.COMMON, mage.cards.v.VampireBats.class));
+        cards.add(new SetCardInfo("Venarian Gold", 83, Rarity.COMMON, mage.cards.v.VenarianGold.class));
         cards.add(new SetCardInfo("Visions", 41, Rarity.UNCOMMON, mage.cards.v.Visions.class));
         cards.add(new SetCardInfo("Voodoo Doll", 298, Rarity.RARE, mage.cards.v.VoodooDoll.class));
         cards.add(new SetCardInfo("Walking Dead", 126, Rarity.COMMON, mage.cards.w.WalkingDead.class));
@@ -310,6 +312,7 @@ public final class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Wall of Light", 43, Rarity.UNCOMMON, mage.cards.w.WallOfLight.class));
         cards.add(new SetCardInfo("Wall of Opposition", 171, Rarity.RARE, mage.cards.w.WallOfOpposition.class));
         cards.add(new SetCardInfo("Wall of Putrid Flesh", 127, Rarity.UNCOMMON, mage.cards.w.WallOfPutridFlesh.class));
+        cards.add(new SetCardInfo("Wall of Shadows", 128, Rarity.COMMON, mage.cards.w.WallOfShadows.class));
         cards.add(new SetCardInfo("Wall of Tombstones", 129, Rarity.UNCOMMON, mage.cards.w.WallOfTombstones.class));
         cards.add(new SetCardInfo("Wall of Vapor", 84, Rarity.COMMON, mage.cards.w.WallOfVapor.class));
         cards.add(new SetCardInfo("Wall of Wonder", 85, Rarity.UNCOMMON, mage.cards.w.WallOfWonder.class));

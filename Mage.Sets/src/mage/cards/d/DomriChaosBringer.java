@@ -96,7 +96,7 @@ class DomriChaosBringerEffect extends OneShotEffect {
         } else {
             manaEffect = new BasicManaEffect(Mana.GreenMana(1));
         }
-        game.addDelayedTriggeredAbility(new DomriChaosBringerTriggeredAbility(source.getSourceId()), source);
+        game.addDelayedTriggeredAbility(new DomriChaosBringerTriggeredAbility(source.getSourceId(), game.getTurnNum()), source);
         return manaEffect.apply(game, source);
     }
 }
@@ -104,16 +104,19 @@ class DomriChaosBringerEffect extends OneShotEffect {
 class DomriChaosBringerTriggeredAbility extends DelayedTriggeredAbility {
 
     private final UUID spellId;
+    private final int turnNumber;
 
-    DomriChaosBringerTriggeredAbility(UUID spellId) {
-        super(null, Duration.EndOfStep, true);
+    DomriChaosBringerTriggeredAbility(UUID spellId, int turnNumber) {
+        super(null, Duration.Custom, true);
         this.spellId = spellId;
+        this.turnNumber = turnNumber;
         this.usesStack = false;
     }
 
     private DomriChaosBringerTriggeredAbility(final DomriChaosBringerTriggeredAbility ability) {
         super(ability);
         this.spellId = ability.spellId;
+        this.turnNumber = ability.turnNumber;
     }
 
     @Override
@@ -124,6 +127,9 @@ class DomriChaosBringerTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (!event.getSourceId().equals(spellId)) {
+            return false;
+        }
+        if (game.getTurnNum() != turnNumber) {
             return false;
         }
         MageObject mo = game.getObject(event.getTargetId());

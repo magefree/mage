@@ -69,15 +69,11 @@ public enum Plugins implements MagePlugins {
 
     @Override
     public void changeGUISize() {
-        setGUISize();
         if (this.cardPlugin != null) {
             cardPlugin.changeGUISize();
         }
     }
 
-    private void setGUISize() {
-
-    }
 
     @Override
     public void updateGamePanel(Map<String, JComponent> ui) {

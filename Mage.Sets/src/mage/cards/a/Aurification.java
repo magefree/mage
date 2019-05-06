@@ -1,7 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
@@ -24,8 +22,9 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.SubTypeList;
 
+import java.util.UUID;
+
 /**
- *
  * @author andyfries
  */
 
@@ -40,7 +39,7 @@ public final class Aurification extends CardImpl {
     static final String rule = "Each creature with a gold counter on it is a Wall in addition to its other creature types and has defender.";
 
     public Aurification(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
 
         // Whenever a creature deals damage to you, put a gold counter on it.
         this.addAbility(new AddGoldCountersAbility());
@@ -127,8 +126,11 @@ public final class Aurification extends CardImpl {
         @Override
         public boolean apply(Game game, Ability source) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(CardType.CREATURE)) {
-                if (permanent != null){
-                    permanent.getCounters(game).removeAllCounters(CounterType.GOLD);
+                if (permanent != null) {
+                    int numToRemove = permanent.getCounters(game).getCount(CounterType.GOLD);
+                    if (numToRemove > 0) {
+                        permanent.removeCounters(CounterType.GOLD.getName(), numToRemove, game);
+                    }
                 }
             }
             return true;

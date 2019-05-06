@@ -68,8 +68,7 @@ class EpiphanyAtTheDrownyardEffect extends OneShotEffect {
             return false;
         }
 
-        Cards cards = new CardsImpl();
-        cards.addAll(controller.getLibrary().getTopCards(game, source.getManaCostsToPay().getX() + 1));
+        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, source.getManaCostsToPay().getX() + 1));
         controller.revealCards(sourceObject.getIdName(), cards, game);
 
         Player opponent;

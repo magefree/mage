@@ -87,7 +87,7 @@ class SupremeInquisitorEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null && targetPlayer != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(0, 5, filter);
-            if (player.searchLibrary(target, game, targetPlayer.getId())) {
+            if (player.searchLibrary(target, source, game, targetPlayer.getId())) {
                 List<UUID> targetId = target.getTargets();
                 for (UUID targetCard : targetId) {
                     Card card = targetPlayer.getLibrary().remove(targetCard, game);

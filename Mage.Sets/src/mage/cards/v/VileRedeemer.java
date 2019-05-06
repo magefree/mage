@@ -97,7 +97,7 @@ class VileRedeemerNonTokenCreaturesDiedWatcher extends Watcher {
     private final Map<UUID, Integer> amountOfCreaturesThatDied = new HashMap<>();
 
     public VileRedeemerNonTokenCreaturesDiedWatcher() {
-        super(VileRedeemerNonTokenCreaturesDiedWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public VileRedeemerNonTokenCreaturesDiedWatcher(final VileRedeemerNonTokenCreaturesDiedWatcher watcher) {

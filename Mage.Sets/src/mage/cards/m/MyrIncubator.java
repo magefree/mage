@@ -72,7 +72,7 @@ class MyrIncubatorEffect extends SearchEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null 
-                && controller.searchLibrary(target, game)) {
+                && controller.searchLibrary(target, source, game)) {
             if (!target.getTargets().isEmpty()) {
                 tokensToCreate = target.getTargets().size();
                 controller.moveCards(new CardsImpl(target.getTargets()), Zone.EXILED, source, game);

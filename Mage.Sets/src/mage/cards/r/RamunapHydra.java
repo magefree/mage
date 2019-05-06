@@ -68,7 +68,7 @@ public final class RamunapHydra extends CardImpl {
 
 class RamunapHydraBoostEffect extends WhileConditionContinuousEffect {
 
-    private final static FilterCard filter = new FilterCard("a Desert");
+    private static final FilterCard filter = new FilterCard("a Desert");
 
     static {
         filter.add(new SubtypePredicate(SubType.DESERT));

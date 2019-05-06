@@ -1,4 +1,3 @@
-
 package mage.cards.i;
 
 import mage.abilities.Ability;
@@ -8,6 +7,7 @@ import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
+import mage.abilities.hint.common.FerociousHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -35,6 +35,7 @@ public final class IcyBlast extends CardImpl {
         effect.setText("<br/><i>Ferocious</i> &mdash; If you control a creature with power 4 or greater, those creatures don't untap during their controllers' next untap steps");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().setTargetAdjuster(IcyBlastAdjuster.instance);
+        this.getSpellAbility().addHint(FerociousHint.instance);
     }
 
     public IcyBlast(final IcyBlast card) {

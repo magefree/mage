@@ -80,7 +80,7 @@ class TheFallenWatcher extends Watcher {
     private Map<UUID, Set<UUID>> playersAndWalkersDealtDamageThisGame = new HashMap<>(); // Map<creatureId, Set<playerId>>
 
     public TheFallenWatcher() {
-        super(TheFallenWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public TheFallenWatcher(final TheFallenWatcher watcher) {

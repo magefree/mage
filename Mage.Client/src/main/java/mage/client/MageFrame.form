@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Container class="javax.swing.JPopupMenu" name="popupDebug">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="true"/>
+      </Layout>
+      <SubComponents>
+        <MenuItem class="javax.swing.JMenuItem" name="menuDebugTestModalDialog">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Test Modal Dialogs"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuDebugTestModalDialogActionPerformed"/>
+          </Events>
+        </MenuItem>
+      </SubComponents>
+    </Container>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="0"/>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -26,7 +44,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="desktopPane" alignment="0" pref="769" max="32767" attributes="0"/>
+          <Component id="desktopPane" alignment="0" pref="838" max="32767" attributes="0"/>
           <Component id="mageToolbar" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
@@ -85,7 +103,6 @@
             <Property name="toolTipText" type="java.lang.String" value="By changing the settings in the preferences window you can adjust the look and behaviour of xmage."/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
-            <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPreferencesActionPerformed"/>
@@ -101,7 +118,6 @@
             <Property name="toolTipText" type="java.lang.String" value="Connect to or disconnect from a XMage server."/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
-            <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConnectActionPerformed"/>
@@ -118,7 +134,6 @@
             <Property name="toolTipText" type="java.lang.String" value="Start the deck editor to create or modify decks."/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
-            <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeckEditorActionPerformed"/>
@@ -131,11 +146,10 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/menu/collection.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Viewer"/>
+            <Property name="text" type="java.lang.String" value="Card Viewer"/>
             <Property name="toolTipText" type="java.lang.String" value="Card viewer to show the cards of sets. "/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
-            <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCollectionViewerActionPerformed"/>
@@ -152,7 +166,6 @@
             <Property name="toolTipText" type="java.lang.String" value="Send some feedback to the developers."/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
-            <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSendFeedbackActionPerformed"/>
@@ -169,7 +182,6 @@
             <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;Load the mana and other card symbols from the internet.&lt;br&gt;&#xa;Otherwise you only see the replacement sequence like {U} for blue mana symbol.&lt;br&gt;&#xa;You need to do that only once."/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
-            <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSymbolsActionPerformed"/>
@@ -186,7 +198,6 @@
             <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;Load card images from external sources."/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
-            <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnImagesActionPerformed"/>
@@ -200,16 +211,31 @@
               <Image iconType="3" name="/menu/about.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="About"/>
-            <Property name="toolTipText" type="java.lang.String" value="Some information about the developers."/>
+            <Property name="toolTipText" type="java.lang.String" value="About app"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
-            <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAboutActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JToolBar$Separator" name="jSeparator7">
+        </Component>
+        <Component class="javax.swing.JButton" name="btnDebug">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/menu/connect.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Debug"/>
+            <Property name="toolTipText" type="java.lang.String" value="Show debug tools"/>
+            <Property name="focusable" type="boolean" value="false"/>
+            <Property name="verticalTextPosition" type="int" value="3"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnDebugMouseClicked"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JToolBar$Separator" name="separatorDebug">
         </Component>
         <Component class="javax.swing.JLabel" name="jMemUsageLabel">
           <Properties>

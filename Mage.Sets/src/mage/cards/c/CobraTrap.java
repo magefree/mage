@@ -68,10 +68,10 @@ enum CobraTrapCondition implements Condition {
 
 class CobraTrapWatcher extends Watcher {
 
-    Set<UUID> players = new HashSet<>();
+    private Set<UUID> players = new HashSet<>();
 
     public CobraTrapWatcher() {
-        super(CobraTrapWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public CobraTrapWatcher(final CobraTrapWatcher watcher) {

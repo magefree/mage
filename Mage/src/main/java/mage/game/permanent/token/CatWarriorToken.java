@@ -14,7 +14,7 @@ import mage.constants.SubType;
  */
 public final class CatWarriorToken extends TokenImpl {
 
-    final static private List<String> tokenImageSets = new ArrayList<>();
+    static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
         tokenImageSets.addAll(Arrays.asList("PLC", "C17"));

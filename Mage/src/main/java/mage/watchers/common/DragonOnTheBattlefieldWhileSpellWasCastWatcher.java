@@ -26,7 +26,7 @@ public class DragonOnTheBattlefieldWhileSpellWasCastWatcher extends Watcher {
     private final Set<UUID> castWithDragonOnTheBattlefield = new HashSet<>();
 
     public DragonOnTheBattlefieldWhileSpellWasCastWatcher() {
-        super(DragonOnTheBattlefieldWhileSpellWasCastWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public DragonOnTheBattlefieldWhileSpellWasCastWatcher(final DragonOnTheBattlefieldWhileSpellWasCastWatcher watcher) {
@@ -42,10 +42,12 @@ public class DragonOnTheBattlefieldWhileSpellWasCastWatcher extends Watcher {
             // revealed a Dragon card or controlled a Dragon as you cast the spell
             if (spell != null) {
                 boolean revealedOrOnBattlefield = false;
-                for (Cost cost : spell.getSpellAbility().getCosts()) {
-                    if (cost instanceof RevealTargetFromHandCost) {
-                        revealedOrOnBattlefield = ((RevealTargetFromHandCost) cost).getNumberRevealedCards() > 0;
-                        break;
+                if (spell.getSpellAbility() != null) {
+                    for (Cost cost : spell.getSpellAbility().getCosts()) {
+                        if (cost instanceof RevealTargetFromHandCost) {
+                            revealedOrOnBattlefield = ((RevealTargetFromHandCost) cost).getNumberRevealedCards() > 0;
+                            break;
+                        }
                     }
                 }
                 if (!revealedOrOnBattlefield) {

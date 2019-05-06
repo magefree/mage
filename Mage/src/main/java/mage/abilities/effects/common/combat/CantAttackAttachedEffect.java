@@ -1,5 +1,3 @@
-
-
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
@@ -10,7 +8,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX2
  */
 
@@ -31,7 +28,7 @@ public class CantAttackAttachedEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Game game) {
+    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
         return false;
     }
 

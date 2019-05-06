@@ -24,7 +24,7 @@ import mage.target.common.TargetAttackingCreature;
  */
 public final class CrossroadsConsecrator extends CardImpl {
 
-    private final static FilterAttackingCreature filter = new FilterAttackingCreature("attacking Human");
+    private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking Human");
 
     static {
         filter.add(new SubtypePredicate(SubType.HUMAN));

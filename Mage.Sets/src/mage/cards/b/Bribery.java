@@ -62,7 +62,7 @@ class BriberyEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && opponent != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(0, 1, new FilterCreatureCard("creature card"));
-            if (controller.searchLibrary(target, game, opponent.getId())) {
+            if (controller.searchLibrary(target, source, game, opponent.getId())) {
                 Card card = opponent.getLibrary().getCard(target.getFirstTarget(), game);
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             }

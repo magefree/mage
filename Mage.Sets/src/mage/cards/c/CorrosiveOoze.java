@@ -122,7 +122,7 @@ class CorrosiveOozeCombatWatcher extends Watcher {
     private final Map<MageObjectReference, Set<MageObjectReference>> oozeEquipmentsToDestroy = new HashMap<>();
 
     public CorrosiveOozeCombatWatcher() {
-        super(CorrosiveOozeCombatWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public CorrosiveOozeCombatWatcher(final CorrosiveOozeCombatWatcher watcher) {
@@ -132,7 +132,7 @@ class CorrosiveOozeCombatWatcher extends Watcher {
             oozeBlocksOrBlocked.put(entry.getKey(), newSet);
         }
         for (Map.Entry<MageObjectReference, Set<MageObjectReference>> entry : watcher.oozeEquipmentsToDestroy.entrySet()) {
-            HashSet<MageObjectReference> newSet = new HashSet<>(entry.getValue());
+            Set<MageObjectReference> newSet = new HashSet<>(entry.getValue());
             oozeEquipmentsToDestroy.put(entry.getKey(), newSet);
         }
     }

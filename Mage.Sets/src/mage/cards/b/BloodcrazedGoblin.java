@@ -1,5 +1,3 @@
-
-
 package mage.cards.b;
 
 import mage.MageInt;
@@ -62,7 +60,7 @@ class BloodcrazedGoblinEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Game game) {
+    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
         return false;
     }
 

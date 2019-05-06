@@ -21,7 +21,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class WildInstincts extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));

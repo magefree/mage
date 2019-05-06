@@ -67,10 +67,10 @@ enum SummoningTrapCondition implements Condition {
 
 class SummoningTrapWatcher extends Watcher {
 
-    Set<UUID> players = new HashSet<>();
+    private Set<UUID> players = new HashSet<>();
 
     public SummoningTrapWatcher() {
-        super(SummoningTrapWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public SummoningTrapWatcher(final SummoningTrapWatcher watcher) {
@@ -133,8 +133,7 @@ class SummoningTrapEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Cards cards = new CardsImpl();
-        cards.addAll(controller.getLibrary().getTopCards(game, 7));
+        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 7));
         if (!cards.isEmpty()) {
             TargetCard target = new TargetCard(Zone.LIBRARY,
                     new FilterCreatureCard(

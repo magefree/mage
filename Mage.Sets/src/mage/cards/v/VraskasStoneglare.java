@@ -21,7 +21,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class VraskasStoneglare extends CardImpl {
 
-    private final static FilterCard filter = new FilterCard("Vraska, Regal Gorgon");
+    private static final FilterCard filter = new FilterCard("Vraska, Regal Gorgon");
 
     static {
         filter.add(new NamePredicate("Vraska, Regal Gorgon"));

@@ -24,7 +24,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="tabsPanel" alignment="0" max="32767" attributes="0"/>
@@ -42,7 +42,7 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="tabsPanel" max="32767" attributes="0"/>
+              <Component id="tabsPanel" min="-2" pref="554" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="saveButton" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
@@ -98,7 +98,7 @@
                       <Component id="main_gamelog" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="main_battlefield" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="39" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -4071,7 +4071,7 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="phases_stopSettings" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="170" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -4079,7 +4079,7 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabelHeadLine">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Choose phases your game will stop on if not skipped by a skip action (e.g. F6):"/>
+                <Property name="text" type="java.lang.String" value="Default stop steps if not skip buttons activated (e.g. F6):"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelYourTurn">
@@ -4112,7 +4112,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelMain1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Main:"/>
+                <Property name="text" type="java.lang.String" value="Main 1:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="checkBoxMainYou">
@@ -4159,7 +4159,7 @@
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Stop settings">
+                    <TitledBorder title="SKIP settings">
                       <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
                       </Border>
@@ -4170,34 +4170,58 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                 <Property name="columns" type="int" value="1"/>
-                <Property name="rows" type="int" value="7"/>
+                <Property name="rows" type="int" value="9"/>
               </Layout>
               <SubComponents>
                 <Component class="javax.swing.JCheckBox" name="cbStopAttack">
                   <Properties>
                     <Property name="selected" type="boolean" value="true"/>
-                    <Property name="text" type="java.lang.String" value="Stop on declare attackers step if you skip steps (F4/F5/F7) and attackers are available"/>
-                    <Property name="toolTipText" type="java.lang.String" value="If you use F4, F5 or F7 to skip steps, you stop on declare attackers step if attackers are available. If this option is not activated, you also skip the declare attackers step with this actions. F9 does always skip the declare attackers step."/>
+                    <Property name="text" type="java.lang.String" value="STOP skips on declare attackers if attackers are available"/>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
                     <Property name="actionCommand" type="java.lang.String" value=""/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbStopAttackActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JCheckBox" name="cbStopBlock">
+                <Component class="javax.swing.JCheckBox" name="cbStopBlockWithAny">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Stop on your declare blockers step also if no blockers available"/>
-                    <Property name="toolTipText" type="java.lang.String" value="Also if you have no blockers to declare, the game stops at the declare blockers step."/>
+                    <Property name="selected" type="boolean" value="true"/>
+                    <Property name="text" type="java.lang.String" value="STOP skips on declare blockers if ANY blockers are available"/>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
                     <Property name="actionCommand" type="java.lang.String" value=""/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbStopBlockActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbStopBlockWithAnyActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="cbStopBlockWithZero">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="STOP skips on declare blockers if ZERO blockers are available"/>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
+                    <Property name="actionCommand" type="java.lang.String" value=""/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbStopBlockWithZeroActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="cbStopOnNewStackObjects">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Skip to STACK resolved (F10): stop on new objects added (on) or stop until empty (off)"/>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
+                    <Property name="actionCommand" type="java.lang.String" value=""/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[300, 25]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbStopOnNewStackObjectsActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbStopOnAllMain">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Skip with F7 to next main phase (if not activated skip always to your next main phase)"/>
-                    <Property name="toolTipText" type="java.lang.String" value="If activated F7 skips to next main phases (regardless of the active players)."/>
+                    <Property name="text" type="java.lang.String" value="Skip to MAIN step (F7): stop on any main steps (on) or stop on your main step (off)"/>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
                     <Property name="actionCommand" type="java.lang.String" value=""/>
                   </Properties>
                   <Events>
@@ -4206,8 +4230,8 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbStopOnAllEnd">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Skip with F5 to next end step (if not activated only to end steps of opponents)"/>
-                    <Property name="toolTipText" type="java.lang.String" value="If activated - F5 skips to the next end step (regardless of the current player)"/>
+                    <Property name="text" type="java.lang.String" value="Skip to END step (F5): stop on any end steps (on) or stop on opponents end step (off)"/>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
                     <Property name="actionCommand" type="java.lang.String" value=""/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[300, 25]"/>
@@ -4272,12 +4296,12 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="panelCardImages" max="32767" attributes="0"/>
                           <Component id="jPanel1" max="32767" attributes="0"/>
-                          <Component id="panelBackgroundImages" max="32767" attributes="0"/>
+                          <Component id="panelBackgroundImages" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -4292,7 +4316,7 @@
                       <Component id="panelCardImages" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="panelBackgroundImages" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="133" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -4302,7 +4326,7 @@
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Card images:">
+                    <TitledBorder title="Card images">
                       <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
                       </Border>
@@ -4317,6 +4341,7 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
+                                  <Component id="cbUseDefaultImageFolder" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="txtImageFolderPath" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -4324,34 +4349,24 @@
                               </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Component id="cbCheckForNewImages" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="147" max="-2" attributes="0"/>
+                                      <Component id="cbSaveToZipFiles" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="labelNumberOfDownloadThreads" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="labelPreferedImageLanguage" alignment="0" max="-2" attributes="0"/>
                                           </Group>
-                                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                              <Group type="102" attributes="0">
-                                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                      <Group type="102" alignment="0" attributes="0">
-                                                          <EmptySpace max="-2" attributes="0"/>
-                                                          <Component id="labelPreferedImageLanguage" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <Component id="cbSaveToZipFiles" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                                                  <Component id="cbPreferedImageLanguage" min="-2" pref="153" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" attributes="0">
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="labelNumberOfDownloadThreads" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="cbPreferedImageLanguage" min="-2" pref="153" max="-2" attributes="0"/>
+                                              <Group type="102" alignment="0" attributes="0">
                                                   <Component id="cbNumberOfDownloadThreads" min="-2" pref="153" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="labelHint1" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
-                                      <Component id="cbUseDefaultImageFolder" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="0" pref="308" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -4361,25 +4376,23 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="cbUseDefaultImageFolder" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="cbUseDefaultImageFolder" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txtImageFolderPath" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnBrowseImageLocation" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="cbCheckForNewImages" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="cbSaveToZipFiles" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="labelNumberOfDownloadThreads" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="cbNumberOfDownloadThreads" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelHint1" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="cbPreferedImageLanguage" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="labelPreferedImageLanguage" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbPreferedImageLanguage" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -4405,14 +4418,6 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBrowseImageLocationActionPerformed"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JCheckBox" name="cbCheckForNewImages">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Check for new images on startup"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbCheckForNewImagesActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbSaveToZipFiles">
@@ -4441,7 +4446,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="labelPreferedImageLanguage">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Prefered image language:"/>
+                    <Property name="text" type="java.lang.String" value="Default images language:"/>
                     <Property name="focusable" type="boolean" value="false"/>
                   </Properties>
                 </Component>
@@ -4463,13 +4468,18 @@
                     </Property>
                   </Properties>
                 </Component>
+                <Component class="javax.swing.JLabel" name="labelHint1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="(change it to 1-3 if image source bans your IP for too many connections)"/>
+                  </Properties>
+                </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="panelBackgroundImages">
+            <Container class="javax.swing.JPanel" name="jPanel1">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Background images setting:">
+                    <TitledBorder title="Card styles (restart xmage to apply new settings)">
                       <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
                       </Border>
@@ -4483,34 +4493,88 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                                          <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" attributes="0">
-                                          <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                                          <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
+                              <Component id="cbCardRenderImageFallback" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbCardRenderShowReminderText" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbCardRenderHideSetSymbol" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="cbCardRenderImageFallback" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="cbCardRenderShowReminderText" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="cbCardRenderHideSetSymbol" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JCheckBox" name="cbCardRenderImageFallback">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Render mode: MTGO style (off) or IMAGE style (on)"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbCardRenderImageFallbackActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="cbCardRenderShowReminderText">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Show reminder text in rendered card textboxes"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbCardRenderShowReminderTextActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="cbCardRenderHideSetSymbol">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Hide set symbols on cards (more space on the type line for card types)"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbCardRenderHideSetSymbolActionPerformed"/>
+                  </Events>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="panelBackgroundImages">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Background images">
+                      <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                        <EtchetBorder/>
+                      </Border>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+              </Properties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="cbUseDefaultBackground" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="txtBackgroundImagePath" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txtBackgroundImagePath" max="32767" attributes="0"/>
-                                      <Component id="txtBattlefieldImagePath" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="btnBrowseBackgroundImage" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="cbUseRandomBattleImage" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="txtBattlefieldImagePath" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="btnBrowseBackgroundImage" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="btnBrowseBattlefieldImage" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="btnBrowseBattlefieldImage" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="cbUseRandomBattleImage" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="cbUseDefaultBattleImage" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="cbUseDefaultBackground" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="cbUseDefaultBattleImage" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -4521,24 +4585,20 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Component id="cbUseDefaultBackground" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbUseDefaultBattleImage" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="cbUseDefaultBackground" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txtBackgroundImagePath" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnBrowseBackgroundImage" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="cbUseDefaultBattleImage" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="cbUseRandomBattleImage" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="cbUseRandomBattleImage" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txtBattlefieldImagePath" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnBrowseBattlefieldImage" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -4546,7 +4606,7 @@
               <SubComponents>
                 <Component class="javax.swing.JCheckBox" name="cbUseDefaultBackground">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Use default image"/>
+                    <Property name="text" type="java.lang.String" value="Use default location for backgrounds"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbUseDefaultBackgroundActionPerformed"/>
@@ -4588,86 +4648,10 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbUseRandomBattleImage">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Select random battlefield image"/>
+                    <Property name="text" type="java.lang.String" value="Use random background"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbUseRandomBattleImageActionPerformed"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabel14">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Background:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabel15">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Battlefield:"/>
-                  </Properties>
-                </Component>
-              </SubComponents>
-            </Container>
-            <Container class="javax.swing.JPanel" name="jPanel1">
-              <Properties>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Card rendering:">
-                      <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
-                        <EtchetBorder/>
-                      </Border>
-                    </TitledBorder>
-                  </Border>
-                </Property>
-              </Properties>
-
-              <Layout>
-                <DimensionLayout dim="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="cbCardRenderImageFallback" min="-2" max="-2" attributes="0"/>
-                              <Component id="cbCardRenderShowReminderText" min="-2" max="-2" attributes="0"/>
-                              <Component id="cbCardRenderHideSetSymbol" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-                <DimensionLayout dim="1">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="cbCardRenderImageFallback" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="cbCardRenderShowReminderText" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="cbCardRenderHideSetSymbol" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-              </Layout>
-              <SubComponents>
-                <Component class="javax.swing.JCheckBox" name="cbCardRenderImageFallback">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Fall back to plain image based rendering"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbCardRenderImageFallbackActionPerformed"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JCheckBox" name="cbCardRenderShowReminderText">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Show reminder text in rendered card textboxes"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbCardRenderShowReminderTextActionPerformed"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JCheckBox" name="cbCardRenderHideSetSymbol">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Hide set symbols on cards (more space on the type line for card types)"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbCardRenderHideSetSymbolActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -4867,7 +4851,7 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="avatarPane" pref="620" max="32767" attributes="0"/>
+                      <Component id="avatarPane" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -5778,7 +5762,7 @@
                                   <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="201" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -5787,7 +5771,7 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="lblURLServerList" max="32767" attributes="0"/>
-                              <Component id="txtURLServerList" pref="28" max="32767" attributes="0"/>
+                              <Component id="txtURLServerList" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
@@ -6011,11 +5995,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="bttnResetControls" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="bttnResetControls" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="labelCancel" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -6028,24 +6009,26 @@
                                   <Component id="labelSkipStep" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="labelConfirm" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="labelToggleRecordMacro" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelSwitchChat" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="keyConfirm" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="keyCancelSkip" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="keyNextTurn" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="keySkipStack" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="keyYourTurn" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="keyMainStep" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="keyPriorEnd" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="keySkipStep" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="keyEndStep" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="keyToggleRecordMacro" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="keyConfirm" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="keyCancelSkip" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="keyNextTurn" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="keySkipStack" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="keyYourTurn" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="keyMainStep" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="keyPriorEnd" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="keySkipStep" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="keyEndStep" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="keyToggleRecordMacro" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="keySwitchChat" min="-2" pref="100" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="controlsDescriptionLabel" pref="478" max="32767" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="controlsDescriptionLabel" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -6054,9 +6037,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="controlsDescriptionLabel" alignment="0" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="labelConfirm" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="keyConfirm" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -6106,10 +6088,16 @@
                                   <Component id="labelToggleRecordMacro" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="keyToggleRecordMacro" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="labelSwitchChat" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="keySwitchChat" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                              <Component id="bttnResetControls" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="controlsDescriptionLabel" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="bttnResetControls" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -6118,37 +6106,37 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="labelNextTurn">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Next Turn"/>
+                <Property name="text" type="java.lang.String" value="Next Turn:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="labelEndStep">
               <Properties>
-                <Property name="text" type="java.lang.String" value="End Step"/>
+                <Property name="text" type="java.lang.String" value="End Step:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="labelMainStep">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Main Step"/>
+                <Property name="text" type="java.lang.String" value="Main Step:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="labelYourTurn">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Your Turn"/>
+                <Property name="text" type="java.lang.String" value="Your Turn:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lebelSkip">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Skip Stack"/>
+                <Property name="text" type="java.lang.String" value="Skip Stack:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="labelPriorEnd">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Prior End"/>
+                <Property name="text" type="java.lang.String" value="Prior End:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="labelCancel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Cancel Skip"/>
+                <Property name="text" type="java.lang.String" value="Cancel Skip:"/>
               </Properties>
             </Component>
             <Component class="mage.client.components.KeyBindButton" name="keyCancelSkip">
@@ -6217,7 +6205,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="labelSkipStep">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Skip Step"/>
+                <Property name="text" type="java.lang.String" value="Skip Step:"/>
               </Properties>
             </Component>
             <Component class="mage.client.components.KeyBindButton" name="keyConfirm">
@@ -6230,12 +6218,12 @@
             </Component>
             <Component class="javax.swing.JLabel" name="labelConfirm">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Confirm"/>
+                <Property name="text" type="java.lang.String" value="Confirm:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="controlsDescriptionLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&lt;html&gt;Click on a button and press a key to change a keybind.&lt;br&gt;Space and ESC are not available, and will set the keybind to nothing.&lt;br&gt;If you are currently playing a game, the changes will not take effect until you start a new game."/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;Click on a button and press a KEY or a combination of CTRL/ALT/SHIF + KEY to change a keybind.&#xa;&lt;br&gt;&#xa;Press SPACE to clear binging.&#xa;&lt;br&gt;&#xa;Press ESC to cancel binding.&#xa;&lt;br&gt;&#xa;New changes will be applied after new game start."/>
                 <Property name="verticalAlignment" type="int" value="1"/>
               </Properties>
             </Component>
@@ -6249,7 +6237,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="labelToggleRecordMacro">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Toggle Record Macro"/>
+                <Property name="text" type="java.lang.String" value="Record Macro (unsupported):"/>
               </Properties>
             </Component>
             <Component class="mage.client.components.KeyBindButton" name="keyToggleRecordMacro">
@@ -6258,6 +6246,19 @@
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new KeyBindButton(this, KEY_CONTROL_TOGGLE_MACRO)"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="labelSwitchChat">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Go in/out to chat:"/>
+              </Properties>
+            </Component>
+            <Component class="mage.client.components.KeyBindButton" name="keySwitchChat">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="keyBindButton1"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new KeyBindButton(this, KEY_CONTROL_SWITCH_CHAT)"/>
               </AuxValues>
             </Component>
           </SubComponents>

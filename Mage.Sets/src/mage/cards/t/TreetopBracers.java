@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
@@ -17,10 +16,10 @@ import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Jason E. Wall
- *
  */
 public final class TreetopBracers extends CardImpl {
 
@@ -67,15 +66,13 @@ class TreetopBracersRestrictEffect extends RestrictionEffect {
         Permanent equipment = game.getPermanent(source.getSourceId());
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent equipped = game.getPermanent(equipment.getAttachedTo());
-            if (permanent != null && permanent.getId().equals(equipped.getId())) {
-                return true;
-            }
+            return permanent != null && permanent.getId().equals(equipped.getId());
         }
         return false;
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         return blocker.getAbilities().contains(FlyingAbility.getInstance()) || blocker.getAbilities().contains(ReachAbility.getInstance());
     }
 

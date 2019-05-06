@@ -87,7 +87,7 @@ class OreskosExplorerEffect extends OneShotEffect {
             filterPlains.add(new ControllerPredicate(TargetController.YOU));
             filterPlains.add(new SubtypePredicate(SubType.PLAINS));
             TargetCardInLibrary target = new TargetCardInLibrary(0, landsToSearch, filterPlains);
-            if (controller.searchLibrary(target, game)) {
+            if (controller.searchLibrary(target, source, game)) {
                 Cards cards = new CardsImpl(target.getTargets());
                 controller.revealCards(sourceObject.getIdName(), cards, game);
                 controller.moveCards(cards.getCards(game), Zone.HAND, source, game);

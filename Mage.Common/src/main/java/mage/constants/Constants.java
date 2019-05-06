@@ -1,8 +1,6 @@
-
 package mage.constants;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class Constants {
@@ -50,19 +48,14 @@ public final class Constants {
      */
     public static final int PRIORITY_TIME_SEC = 1200;
 
-
-
     public enum Option {
-
         ;
-
         public static final String POSSIBLE_ATTACKERS = "possibleAttackers";
+        public static final String POSSIBLE_BLOCKERS = "possibleBlockers";
         public static final String SPECIAL_BUTTON = "specialButton";
         // used to control automatic answers of optional effects
         public static final String ORIGINAL_ID = "originalId";
         public static final String SECOND_MESSAGE = "secondMessage";
         public static final String HINT_TEXT = "hintText";
-
     }
-
 }

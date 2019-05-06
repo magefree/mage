@@ -164,6 +164,7 @@ class StolenStrategySpendAnyManaEffect extends AsThoughEffectImpl implements AsT
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        objectId = game.getCard(objectId).getMainCard().getId(); // for split cards
         return source.isControlledBy(affectedControllerId)
                 && Objects.equals(objectId, ((FixedTarget) getTargetPointer()).getTarget())
                 && ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(objectId)

@@ -29,7 +29,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class ConfiscationCoup extends CardImpl {
 
-    private final static FilterPermanent filter = new FilterPermanent("creature or artifact");
+    private static final FilterPermanent filter = new FilterPermanent("creature or artifact");
 
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.ARTIFACT)));

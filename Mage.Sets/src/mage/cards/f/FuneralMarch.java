@@ -1,7 +1,5 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -23,14 +21,15 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class FuneralMarch extends CardImpl {
 
     public FuneralMarch(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
@@ -73,17 +72,19 @@ class FuneralMarchTriggeredAbility extends ZoneChangeTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent enchantment = game.getPermanentOrLKIBattlefield(this.getSourceId());
         if (enchantment != null && enchantment.getAttachedTo() != null && event.getTargetId().equals(enchantment.getAttachedTo())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if ((fromZone == null || zEvent.getFromZone() == fromZone) && (toZone == null || zEvent.getToZone() == toZone)) {
-                for (Effect effect : getEffects()) {
-                    if (zEvent.getTarget() != null) {
-                        Permanent attachedTo = (Permanent) game.getLastKnownInformation(enchantment.getAttachedTo(), Zone.BATTLEFIELD, enchantment.getAttachedToZoneChangeCounter());
-                        if (attachedTo != null) {
-                            effect.setTargetPointer(new FixedTarget(attachedTo.getControllerId()));
+            if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
+                ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+                if ((fromZone == null || zEvent.getFromZone() == fromZone) && (toZone == null || zEvent.getToZone() == toZone)) {
+                    for (Effect effect : getEffects()) {
+                        if (zEvent.getTarget() != null) {
+                            Permanent attachedTo = (Permanent) game.getLastKnownInformation(enchantment.getAttachedTo(), Zone.BATTLEFIELD, enchantment.getAttachedToZoneChangeCounter());
+                            if (attachedTo != null) {
+                                effect.setTargetPointer(new FixedTarget(attachedTo.getControllerId()));
+                            }
                         }
-                    }  
+                    }
+                    return true;
                 }
-                return true;
             }
         }
         return false;

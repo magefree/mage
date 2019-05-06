@@ -114,7 +114,7 @@ class SovereignsOfLostAlaraEffect extends OneShotEffect {
             if (controller.chooseUse(Outcome.Benefit, "Do you want to search your library?", source, game)) {
                 TargetCardInLibrary target = new TargetCardInLibrary(filter);
                 target.setNotTarget(true);
-                if (controller.searchLibrary(target, game)) {
+                if (controller.searchLibrary(target, source, game)) {
                     if (target.getFirstTarget() != null) {
                         Card aura = game.getCard(target.getFirstTarget());
                         game.getState().setValue("attachTo:" + aura.getId(), attackingCreature);

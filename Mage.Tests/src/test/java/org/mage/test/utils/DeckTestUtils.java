@@ -18,6 +18,8 @@ import java.util.List;
  */
 public class DeckTestUtils {
 
+    private static final int DECK_SIZE = 40;
+
     public static Deck buildRandomDeck(String colors, boolean onlyBasicLands) {
         return buildRandomDeck(colors, onlyBasicLands, "");
     }
@@ -41,7 +43,7 @@ public class DeckTestUtils {
         }
 
         List<Card> cardPool = Sets.generateRandomCardPool(45, allowedColors, onlyBasicLands, allowedList);
-        return ComputerPlayer.buildDeck(cardPool, allowedColors, onlyBasicLands);
+        return ComputerPlayer.buildDeck(DECK_SIZE, cardPool, allowedColors, onlyBasicLands);
     }
 
     public static DeckCardLists buildRandomDeckAndInitCards(String colors, boolean onlyBasicLands) {

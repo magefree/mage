@@ -50,7 +50,7 @@ public class SearchLibraryPutOnLibraryEffect extends SearchEffect {
         if (controller == null || sourceObject == null) {
             return false;
         }
-        if (controller.searchLibrary(target, game)) {
+        if (controller.searchLibrary(target, source, game)) {
             Cards foundCards = new CardsImpl(target.getTargets());
             if (reveal && !foundCards.isEmpty()) {
                 controller.revealCards(sourceObject.getIdName(), foundCards, game);

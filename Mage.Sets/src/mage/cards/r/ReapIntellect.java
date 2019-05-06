@@ -128,7 +128,7 @@ class ReapIntellectEffect extends OneShotEffect {
 
                 // search cards in Library
                 TargetCardInLibrary targetCardsLibrary = new TargetCardInLibrary(0, Integer.MAX_VALUE, filterNamedCards);
-                controller.searchLibrary(targetCardsLibrary, game, targetPlayer.getId());
+                controller.searchLibrary(targetCardsLibrary, source, game, targetPlayer.getId());
                 for (UUID cardId : targetCardsLibrary.getTargets()) {
                     Card card = game.getCard(cardId);
                     if (card != null) {

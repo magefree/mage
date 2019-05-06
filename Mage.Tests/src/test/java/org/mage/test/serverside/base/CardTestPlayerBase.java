@@ -6,6 +6,7 @@ import mage.constants.RangeOfInfluence;
 import mage.game.Game;
 import mage.game.GameException;
 import mage.game.TwoPlayerDuel;
+import mage.game.mulligan.VancouverMulligan;
 import org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl;
 
 /**
@@ -22,7 +23,7 @@ public abstract class CardTestPlayerBase extends CardTestPlayerAPIImpl {
     
     @Override
     protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
-        Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ONE, 0, 20);
+        Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ONE, new VancouverMulligan(0), 20);
 
         playerA = createPlayer(game, playerA, "PlayerA", deckNameA);
         playerB = createPlayer(game, playerB, "PlayerB", deckNameB);

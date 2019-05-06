@@ -105,7 +105,7 @@ class MonarchAtTurnStartWatcher extends Watcher {
     private UUID monarchIdAtTurnStart;
 
     public MonarchAtTurnStartWatcher() {
-        super(MonarchAtTurnStartWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public MonarchAtTurnStartWatcher(final MonarchAtTurnStartWatcher watcher) {

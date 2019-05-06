@@ -65,8 +65,7 @@ class RootingKavuEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Cards cards = new CardsImpl();
-            cards.addAll(controller.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game));
+            Cards cards = new CardsImpl(controller.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game));
             controller.putCardsOnTopOfLibrary(cards, game, source, false);
             controller.shuffleLibrary(source, game);
             return true;

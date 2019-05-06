@@ -73,9 +73,9 @@ class LlanowarEmpathEffect extends OneShotEffect {
         if (controller == null || sourceObject == null) {
             return false;
         }
-        Cards cards = new CardsImpl();
         Card card = controller.getLibrary().getFromTop(game);
         if (card != null) {
+            Cards cards = new CardsImpl();
             cards.add(card);
             controller.revealCards(sourceObject.getName(), cards, game);
             if (card.isCreature()) {

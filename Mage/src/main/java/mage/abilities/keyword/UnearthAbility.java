@@ -1,4 +1,3 @@
-
 package mage.abilities.keyword;
 
 import mage.abilities.Ability;
@@ -19,19 +18,17 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
- *
- *
+ * <p>
+ * <p>
  * 702.82. Unearth
- *
+ * <p>
  * 702.82a Unearth is an activated ability that functions while the card with
  * unearth is in a graveyard. "Unearth [cost]" means "[Cost]: Return this card
  * from your graveyard to the battlefield. It gains haste. Exile it at the
  * beginning of the next end step. If it would leave the battlefield, exile it
  * instead of putting it anywhere else. Activate this ability only any time you
  * could cast a sorcery."
- *
  */
 public class UnearthAbility extends ActivatedAbilityImpl {
 
@@ -111,7 +108,7 @@ class UnearthLeavesBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return EventType.ZONE_CHANGE == event.getType();
+        return event.getType() == EventType.ZONE_CHANGE;
     }
 
     @Override

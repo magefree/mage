@@ -56,7 +56,7 @@ public class DckDeckImporter extends PlainTextDeckImporter {
             CardInfo foundedCard = CardRepository.instance.findCard(setCode, cardNum);
             boolean wasOutdated = false;
             if ((foundedCard != null) && !foundedCard.getName().equals(cardName)){
-                sbMessage.append("Line ").append(lineCount).append(": ").append("founded outdated card number or name, will try to replace: ").append(line).append('\n');
+                sbMessage.append("Line ").append(lineCount).append(": ").append("found outdated card number or name, will try to replace: ").append(line).append('\n');
                 wasOutdated = true;
                 foundedCard = null;
             }

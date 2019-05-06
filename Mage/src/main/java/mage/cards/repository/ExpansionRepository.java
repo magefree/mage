@@ -30,7 +30,7 @@ public enum ExpansionRepository {
     private static final String JDBC_URL = "jdbc:h2:file:./db/cards.h2;AUTO_SERVER=TRUE";
     private static final String VERSION_ENTITY_NAME = "expansion";
     private static final long EXPANSION_DB_VERSION = 5;
-    private static final long EXPANSION_CONTENT_VERSION = 17;
+    private static final long EXPANSION_CONTENT_VERSION = 18;
 
     private Dao<ExpansionInfo, Object> expansionDao;
     private RepositoryEventSource eventSource = new RepositoryEventSource();
@@ -70,7 +70,7 @@ public enum ExpansionRepository {
         try {
             expansionDao.callBatchTasks(() -> {
                 // add
-                if (newSets != null && newSets.size() > 0) {
+                if (newSets != null && !newSets.isEmpty()) {
                     logger.info("DB: need to add " + newSets.size() + " new sets");
                     try {
                         for (ExpansionInfo exp : newSets) {
@@ -82,7 +82,7 @@ public enum ExpansionRepository {
                 }
 
                 // update
-                if (updatedSets != null && updatedSets.size() > 0) {
+                if (updatedSets != null && !updatedSets.isEmpty()) {
                     logger.info("DB: need to update " + updatedSets.size() + " sets");
                     try {
                         for (ExpansionInfo exp : updatedSets) {

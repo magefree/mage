@@ -1,15 +1,12 @@
-
-
 package mage.abilities.effects.common.combat;
 
-import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.effects.RestrictionEffect;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com & L_J
  */
 public class CantAttackSourceEffect extends RestrictionEffect {
@@ -29,7 +26,7 @@ public class CantAttackSourceEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Game game) {
+    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
         return false;
     }
 

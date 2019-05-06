@@ -14,7 +14,7 @@ public final class IgnoreList {
             + "<br/>\\unignore [username] - remove a username from your ignore list on this server.</font>";
 
     public static final int MAX_IGNORE_LIST_SIZE = 50;
-    public static Set<ChatMessage.MessageType> IGNORED_MESSAGE_TYPES
+    public static final Set<ChatMessage.MessageType> IGNORED_MESSAGE_TYPES
             = ImmutableSet.of(ChatMessage.MessageType.TALK,
                     ChatMessage.MessageType.WHISPER_FROM);
 

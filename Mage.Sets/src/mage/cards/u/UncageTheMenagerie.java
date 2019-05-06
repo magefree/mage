@@ -75,7 +75,7 @@ class UncageTheMenagerieEffect extends OneShotEffect {
         int xValue = source.getManaCostsToPay().getX();
 
         UncageTheMenagerieTarget target = new UncageTheMenagerieTarget(xValue);
-        if (player.searchLibrary(target, game)) {
+        if (player.searchLibrary(target, source, game)) {
             if (!target.getTargets().isEmpty()) {
                 Cards cards = new CardsImpl();
                 for (UUID cardId : target.getTargets()) {

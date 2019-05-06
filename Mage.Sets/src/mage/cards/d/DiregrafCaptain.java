@@ -86,7 +86,7 @@ class DiregrafCaptainTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (!event.getTargetId().equals(this.getSourceId())) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
+            if (zEvent.isDiesEvent()) {
                 Permanent p = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
                 if (p != null && p.isControlledBy(this.controllerId) && filter.match(p, game)) {
                     return true;

@@ -35,13 +35,17 @@ public class ControlEnchantedEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null && enchantment.getAttachedTo() != null) {
+        if (enchantment != null
+                && enchantment.getAttachedTo() != null) {
             Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
             if (permanent != null) {
                 switch (layer) {
                     case ControlChangingEffects_2:
                         if (sublayer == SubLayer.NA) {
                             permanent.changeControllerId(enchantment.getControllerId(), game);
+                            permanent.getAbilities().forEach((ability) -> {
+                                ability.setControllerId(enchantment.getControllerId());
+                            });
                         }
                         break;
                 }

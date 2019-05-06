@@ -59,7 +59,7 @@ class SecondSunriseEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         SecondSunriseWatcher watcher = game.getState().getWatcher(SecondSunriseWatcher.class);
         if (watcher != null) {
-            for (UUID id : watcher.cards) {
+            for (UUID id : watcher.getCards()) {
                 Card c = game.getCard(id);
                 if (c != null && game.getState().getZone(id) == Zone.GRAVEYARD) {
                     if (c.isArtifact() || c.isCreature() ||
@@ -79,10 +79,10 @@ class SecondSunriseEffect extends OneShotEffect {
 }
 
 class SecondSunriseWatcher extends Watcher {
-    List<UUID> cards = new ArrayList<>();
+    private List<UUID> cards = new ArrayList<>();
 
     public SecondSunriseWatcher() {
-        super(SecondSunriseWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public SecondSunriseWatcher(final SecondSunriseWatcher watcher) {
@@ -106,5 +106,9 @@ class SecondSunriseWatcher extends Watcher {
     public void reset() {
         super.reset();
         cards.clear();
+    }
+
+    public List<UUID> getCards(){
+        return cards;
     }
 }

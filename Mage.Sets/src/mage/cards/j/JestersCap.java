@@ -70,7 +70,7 @@ class JestersCapEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null && targetPlayer != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(3, 3, new FilterCard());
-            player.searchLibrary(target, game, targetPlayer.getId());
+            player.searchLibrary(target, source, game, targetPlayer.getId());
             for (UUID cardId : target.getTargets()) {
                 final Card targetCard = game.getCard(cardId);
                 if (targetCard != null) {

@@ -109,7 +109,7 @@ class GarnaTheBloodflameWatcher extends Watcher {
     private final Set<UUID> cards = new HashSet<>();
 
     public GarnaTheBloodflameWatcher() {
-        super(GarnaTheBloodflameWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public GarnaTheBloodflameWatcher(final GarnaTheBloodflameWatcher watcher) {

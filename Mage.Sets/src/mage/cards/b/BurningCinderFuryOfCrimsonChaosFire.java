@@ -201,7 +201,7 @@ class BurningCinderFuryOfCrimsonChaosFireWatcher extends Watcher {
     private final Set<UUID> tappedActivePlayerIds = new HashSet<>();
 
     public BurningCinderFuryOfCrimsonChaosFireWatcher() {
-        super(BurningCinderFuryOfCrimsonChaosFireWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public BurningCinderFuryOfCrimsonChaosFireWatcher(final BurningCinderFuryOfCrimsonChaosFireWatcher watcher) {

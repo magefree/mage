@@ -22,7 +22,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public final class VelaTheNightClad extends CardImpl {
 
-    private final static String rule = "Whenever {this} or another creature you control leaves the battlefield, ";
+    private static final String rule = "Whenever {this} or another creature you control leaves the battlefield, ";
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {

@@ -13,6 +13,7 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
+import mage.abilities.hint.Hint;
 import mage.abilities.text.TextPart;
 import mage.cards.Card;
 import mage.cards.FrameStyle;
@@ -173,9 +174,7 @@ public class StackAbility extends StackObjImpl implements Ability {
 
     @Override
     public Abilities<Ability> getAbilities() {
-        Abilities<Ability> abilities = new AbilitiesImpl<>();
-        abilities.add(ability);
-        return abilities;
+        return new AbilitiesImpl<>(ability);
     }
 
     @Override
@@ -588,7 +587,7 @@ public class StackAbility extends StackObjImpl implements Ability {
             Outcome outcome = newAbility.getEffects().isEmpty() ? Outcome.Detriment : newAbility.getEffects().get(0).getOutcome();
             if (controller.chooseUse(outcome, "Choose new targets?", source, game)) {
                 newAbility.getTargets().clearChosen();
-                newAbility.getTargets().chooseTargets(outcome, newControllerId, newAbility, false, game);
+                newAbility.getTargets().chooseTargets(outcome, newControllerId, newAbility, false, game, false);
             }
         }
         game.fireEvent(new GameEvent(GameEvent.EventType.COPIED_STACKOBJECT, newStackAbility.getId(), this.getId(), newControllerId));
@@ -646,5 +645,16 @@ public class StackAbility extends StackObjImpl implements Ability {
         if (costAdjuster != null) {
             costAdjuster.adjustCosts(this, game);
         }
+    }
+
+    @Override
+    public List<Hint> getHints() {
+        return this.ability.getHints();
+    }
+
+    @Override
+    public Ability addHint(Hint hint) {
+        // only abilities supports addhint
+        return null;
     }
 }

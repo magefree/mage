@@ -88,10 +88,10 @@ class VengevineAbility extends TriggeredAbilityImpl {
 
 class VengevineWatcher extends Watcher {
 
-    int creatureSpellCount = 0;
+    private int creatureSpellCount = 0;
 
     public VengevineWatcher() {
-        super(VengevineWatcher.class, WatcherScope.PLAYER);
+        super(WatcherScope.PLAYER);
     }
 
     public VengevineWatcher(final VengevineWatcher watcher) {

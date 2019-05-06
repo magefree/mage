@@ -1,19 +1,13 @@
-
 package mage.abilities.effects.common.continuous;
 
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 import java.util.HashSet;
@@ -21,7 +15,6 @@ import java.util.Set;
 
 /**
  * @author LevelX2
- *
  */
 public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
 
@@ -29,13 +22,19 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
     protected String theyAreStillType;
     private final FilterPermanent filter;
     private boolean loseColor = true;
+    protected boolean loseName = false;
 
     public BecomesCreatureAllEffect(Token token, String theyAreStillType, FilterPermanent filter, Duration duration, boolean loseColor) {
+        this(token, theyAreStillType, filter, duration, loseColor, false);
+    }
+
+    public BecomesCreatureAllEffect(Token token, String theyAreStillType, FilterPermanent filter, Duration duration, boolean loseColor, boolean loseName) {
         super(duration, Outcome.BecomeCreature);
         this.token = token;
         this.theyAreStillType = theyAreStillType;
         this.filter = filter;
         this.loseColor = loseColor;
+        this.loseName = loseName;
     }
 
     public BecomesCreatureAllEffect(final BecomesCreatureAllEffect effect) {
@@ -44,6 +43,7 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
         this.theyAreStillType = effect.theyAreStillType;
         this.filter = effect.filter.copy();
         this.loseColor = effect.loseColor;
+        this.loseName = effect.loseName;
     }
 
     @Override
@@ -65,30 +65,47 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Set<Permanent> affectedPermanents = new HashSet<>();
         if (this.affectedObjectsSet) {
-            for(MageObjectReference ref : affectedObjectList) {
+            for (MageObjectReference ref : affectedObjectList) {
                 affectedPermanents.add(ref.getPermanent(game));
             }
         } else {
             affectedPermanents = new HashSet<>(game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game));
         }
 
-        for(Permanent permanent : affectedPermanents) {
+        for (Permanent permanent : affectedPermanents) {
             if (permanent != null) {
                 switch (layer) {
+                    case TextChangingEffects_3:
+                        if (sublayer == SubLayer.NA) {
+                            if (loseName) {
+                                permanent.setName(token.getName());
+                            }
+                        }
+                        break;
+
                     case TypeChangingEffects_4:
                         if (sublayer == SubLayer.NA) {
-                            if (!token.getCardType().isEmpty()) {
-                                for (CardType t : token.getCardType()) {
-                                    if (!permanent.getCardType().contains(t)) {
-                                        permanent.addCardType(t);
+                            if (theyAreStillType != null) {
+                                permanent.getSubtype(game).retainAll(SubType.getLandTypes());
+                                permanent.getSubtype(game).addAll(token.getSubtype(game));
+                            } else {
+                                for (SubType t : token.getSubtype(game)) {
+                                    if (!permanent.hasSubtype(t, game)) {
+                                        permanent.getSubtype(game).add(t);
                                     }
                                 }
                             }
-                            if (theyAreStillType == null) {
-                                permanent.getSubtype(game).clear();
+
+                            for (SuperType t : token.getSuperType()) {
+                                if (!permanent.getSuperType().contains(t)) {
+                                    permanent.addSuperType(t);
+                                }
                             }
-                            if (!token.getSubtype(game).isEmpty()) {
-                                permanent.getSubtype(game).addAll(token.getSubtype(game));
+
+                            for (CardType t : token.getCardType()) {
+                                if (!permanent.getCardType().contains(t)) {
+                                    permanent.addCardType(t);
+                                }
                             }
                         }
                         break;
@@ -141,7 +158,11 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean hasLayer(Layer layer) {
-        return layer == Layer.PTChangingEffects_7 || layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.ColorChangingEffects_5 || layer == Layer.TypeChangingEffects_4;
+        return layer == Layer.PTChangingEffects_7
+                || layer == Layer.AbilityAddingRemovingEffects_6
+                || layer == Layer.ColorChangingEffects_5
+                || layer == Layer.TypeChangingEffects_4
+                || layer == Layer.TextChangingEffects_3;
     }
 
     @Override

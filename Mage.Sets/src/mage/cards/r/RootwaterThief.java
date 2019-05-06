@@ -76,7 +76,7 @@ class RootwaterThiefEffect extends OneShotEffect {
         if(controller.chooseUse(Outcome.Benefit, message, source, game) && cost.pay(source, game, source.getSourceId(), controller.getId(), false, null))
         {
             TargetCardInLibrary target = new TargetCardInLibrary();
-            if (controller.searchLibrary(target, game, damagedPlayer.getId())) {
+            if (controller.searchLibrary(target, source, game, damagedPlayer.getId())) {
                 if (!target.getTargets().isEmpty()) {
                     Card card = damagedPlayer.getLibrary().remove(target.getFirstTarget(), game);
                     if (card != null) {

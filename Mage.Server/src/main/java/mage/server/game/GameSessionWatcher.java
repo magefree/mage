@@ -25,7 +25,7 @@ import java.util.UUID;
  */
 public class GameSessionWatcher {
 
-    protected final static Logger logger = Logger.getLogger(GameSessionWatcher.class);
+    protected static final Logger logger = Logger.getLogger(GameSessionWatcher.class);
 
     protected final UUID userId;
     protected final Game game;

@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -48,7 +47,9 @@ class RegnasSanctionEffect extends OneShotEffect {
 
     RegnasSanctionEffect() {
         super(Outcome.Benefit);
-        this.staticText = "For each player, choose friend or foe. Each friend puts a +1/+1 counter on each creature they control. Each foe chooses one untapped creature they control, then taps the rest";
+        this.staticText = "For each player, choose friend or foe. "
+                + "Each friend puts a +1/+1 counter on each creature they control. "
+                + "Each foe chooses one untapped creature they control, then taps the rest";
     }
 
     RegnasSanctionEffect(final RegnasSanctionEffect effect) {
@@ -64,7 +65,10 @@ class RegnasSanctionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         ChooseFriendsAndFoes choice = new ChooseFriendsAndFoes();
-        if (controller != null || !choice.chooseFriendOrFoe(controller, source, game)) {
+        if (controller == null) {
+            return false;
+        }
+        if (!choice.chooseFriendOrFoe(controller, source, game)) {
             return false;
         }
         FilterCreaturePermanent filterToTap = new FilterCreaturePermanent();

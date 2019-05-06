@@ -1,8 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -18,8 +15,10 @@ import mage.game.permanent.Permanent;
 import mage.watchers.common.AttackedThisTurnWatcher;
 import mage.watchers.common.BlockedThisTurnWatcher;
 
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author Quercitron
  */
 public final class DuelingGrounds extends CardImpl {
@@ -70,12 +69,12 @@ class NoMoreThanOneCreatureCanAttackEachTurnEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
+    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game, boolean canUseChooseDialogs) {
         if (!game.getCombat().getAttackers().isEmpty()) {
             return false;
         }
         AttackedThisTurnWatcher watcher = game.getState().getWatcher(AttackedThisTurnWatcher.class);
-        if(watcher == null){
+        if (watcher == null) {
             return false;
         }
         Set<MageObjectReference> attackedThisTurnCreatures = watcher.getAttackedThisTurnCreatures();
@@ -107,12 +106,12 @@ class NoMoreThanOneCreatureCanBlockEachTurnEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         if (!game.getCombat().getBlockers().isEmpty()) {
             return false;
         }
         BlockedThisTurnWatcher watcher = game.getState().getWatcher(BlockedThisTurnWatcher.class);
-        if(watcher == null){
+        if (watcher == null) {
             return false;
         }
         Set<MageObjectReference> blockedThisTurnCreatures = watcher.getBlockedThisTurnCreatures();

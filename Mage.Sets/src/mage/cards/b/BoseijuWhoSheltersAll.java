@@ -62,7 +62,7 @@ class BoseijuWhoSheltersAllWatcher extends Watcher {
     private final String originalId;
 
     public BoseijuWhoSheltersAllWatcher(UUID originalId) {
-        super(BoseijuWhoSheltersAllWatcher.class, WatcherScope.CARD);
+        super(WatcherScope.CARD);
         this.originalId = originalId.toString();
     }
 

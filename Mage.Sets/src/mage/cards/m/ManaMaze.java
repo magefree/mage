@@ -64,8 +64,8 @@ class ManaMazeEffect extends ContinuousRuleModifyingEffectImpl {
         Card card = game.getCard(event.getSourceId());
         if (card != null) {
             LastSpellCastWatcher watcher = game.getState().getWatcher(LastSpellCastWatcher.class);
-            if (watcher != null && watcher.lastSpellCast != null) {
-                return !card.getColor(game).intersection(watcher.lastSpellCast.getColor(game)).isColorless();
+            if (watcher != null && watcher.getLastSpellCast() != null) {
+                return !card.getColor(game).intersection(watcher.getLastSpellCast().getColor(game)).isColorless();
             }
         }
         return false;
@@ -84,15 +84,15 @@ class ManaMazeEffect extends ContinuousRuleModifyingEffectImpl {
 
 class LastSpellCastWatcher extends Watcher {
 
-    Spell lastSpellCast = null;
+    private Spell lastSpellCast = null;
 
     public LastSpellCastWatcher() {
-        super(LastSpellCastWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public LastSpellCastWatcher(final LastSpellCastWatcher watcher) {
         super(watcher);
-        this.lastSpellCast = watcher.lastSpellCast;
+        this.lastSpellCast = watcher.getLastSpellCast();
     }
 
     @Override
@@ -120,5 +120,9 @@ class LastSpellCastWatcher extends Watcher {
     public void reset() {
         super.reset();
         lastSpellCast = null;
+    }
+
+    public Spell getLastSpellCast() {
+        return lastSpellCast;
     }
 }

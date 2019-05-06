@@ -212,8 +212,7 @@ class ChandraPyromasterEffect3 extends OneShotEffect {
         if (controller == null || sourceObject == null) {
             return false;
         }
-        Cards cards = new CardsImpl();
-        cards.addAll(controller.getLibrary().getTopCards(game, 10));
+        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 10));
         controller.moveCardsToExile(cards.getCards(game), source, game, true, source.getSourceId(), sourceObject.getIdName());
 
         if (!cards.getCards(new FilterInstantOrSorceryCard(), game).isEmpty()) {

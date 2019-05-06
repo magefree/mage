@@ -29,7 +29,7 @@ import mage.game.stack.Spell;
  */
 public final class VanquishersBanner extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control of the chosen type");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control of the chosen type");
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));

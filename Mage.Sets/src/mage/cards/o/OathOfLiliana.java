@@ -73,7 +73,7 @@ class OathOfLilianaWatcher extends Watcher {
     private final Set<UUID> players = new HashSet<>();
 
     public OathOfLilianaWatcher() {
-        super(OathOfLilianaWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public OathOfLilianaWatcher(final OathOfLilianaWatcher watcher) {

@@ -232,7 +232,7 @@ public class RandomPlayer extends ComputerPlayer {
             }
         }
         if (possibleTargets.size() == 1) {
-            target.addTarget(possibleTargets.iterator().next(), source, game);
+            target.addTarget(possibleTargets.iterator().next(), source, game); // todo: addtryaddtarget or return type (see computerPlayer)
             return true;
         }
         Iterator<UUID> it = possibleTargets.iterator();
@@ -241,7 +241,7 @@ public class RandomPlayer extends ComputerPlayer {
         for (int i = 0; i < targetNum; i++) {
             targetId = it.next();
         }
-        target.addTarget(targetId, source, game);
+        target.addTarget(targetId, source, game); // todo: addtryaddtarget or return type (see computerPlayer)
         return true;
     }
 
@@ -286,7 +286,7 @@ public class RandomPlayer extends ComputerPlayer {
         }
         Card card = cards.getRandom(game);
         if (card != null) {
-            target.addTarget(card.getId(), source, game);
+            target.addTarget(card.getId(), source, game); // todo: addtryaddtarget or return type (see computerPlayer)
             return true;
         }
         return false;
@@ -304,7 +304,7 @@ public class RandomPlayer extends ComputerPlayer {
             }
         }
         if (possibleTargets.size() == 1) {
-            target.addTarget(possibleTargets.iterator().next(), target.getAmountRemaining(), source, game);
+            target.addTarget(possibleTargets.iterator().next(), target.getAmountRemaining(), source, game); // todo: addtryaddtarget or return type (see computerPlayer)
             return true;
         }
         Iterator<UUID> it = possibleTargets.iterator();
@@ -313,7 +313,7 @@ public class RandomPlayer extends ComputerPlayer {
         for (int i = 0; i < targetNum; i++) {
             targetId = it.next();
         }
-        target.addTarget(targetId, RandomUtil.nextInt(target.getAmountRemaining()) + 1, source, game);
+        target.addTarget(targetId, RandomUtil.nextInt(target.getAmountRemaining()) + 1, source, game); // todo: addtryaddtarget or return type (see computerPlayer)
         return true;
     }
 

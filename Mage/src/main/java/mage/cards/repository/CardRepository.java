@@ -12,7 +12,6 @@ import com.j256.ormlite.support.DatabaseConnection;
 import com.j256.ormlite.table.TableUtils;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SetType;
 import mage.constants.SuperType;
 import mage.game.events.Listener;
 import mage.util.RandomUtil;
@@ -36,7 +35,7 @@ public enum CardRepository {
     // raise this if db structure was changed
     private static final long CARD_DB_VERSION = 51;
     // raise this if new cards were added to the server
-    private static final long CARD_CONTENT_VERSION = 215;
+    private static final long CARD_CONTENT_VERSION = 222;
     private Dao<CardInfo, Object> cardDao;
     private Set<String> classNames;
     private RepositoryEventSource eventSource = new RepositoryEventSource();
@@ -73,7 +72,7 @@ public enum CardRepository {
         try {
             cardDao.callBatchTasks(() -> {
                 // add
-                if (newCards != null && newCards.size() > 0) {
+                if (newCards != null && !newCards.isEmpty()) {
                     logger.info("DB: need to add " + newCards.size() + " new cards");
                     try {
                         for (CardInfo card : newCards) {
@@ -329,7 +328,9 @@ public enum CardRepository {
     public CardInfo findCard(String setCode, String cardNumber) {
         try {
             QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
-            queryBuilder.limit(1L).where().eq("setCode", new SelectArg(setCode)).and().eq("cardNumber", cardNumber).and().eq("nightCard", false);
+            queryBuilder.limit(1L).where().eq("setCode", new SelectArg(setCode))
+                    .and().eq("cardNumber", new SelectArg(cardNumber))
+                    .and().eq("nightCard", new SelectArg(false));
             List<CardInfo> result = cardDao.query(queryBuilder.prepare());
             if (!result.isEmpty()) {
                 return result.get(0);
@@ -405,8 +406,7 @@ public enum CardRepository {
                         return cardinfo;
                     }
 
-                    if ((set.getType() == SetType.EXPANSION || set.getType() == SetType.CORE)
-                            && (lastExpansionDate == null || set.getReleaseDate().after(lastExpansionDate))) {
+                    if (set.getType().isStandardLegal() && (lastExpansionDate == null || set.getReleaseDate().after(lastExpansionDate))) {
                         cardToUse = cardinfo;
                         lastExpansionDate = set.getReleaseDate();
                     }
@@ -504,7 +504,7 @@ public enum CardRepository {
     public void closeDB() {
         try {
             if (cardDao != null && cardDao.getConnectionSource() != null) {
-                DatabaseConnection conn = cardDao.getConnectionSource().getReadWriteConnection();
+                DatabaseConnection conn = cardDao.getConnectionSource().getReadWriteConnection(cardDao.getTableName());
                 conn.executeStatement("shutdown compact", 0);
             }
         } catch (SQLException ex) {

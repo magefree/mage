@@ -1,12 +1,5 @@
-
 package mage.abilities.effects;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
@@ -14,18 +7,14 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.constants.AbilityType;
-import mage.constants.DependencyType;
-import mage.constants.Duration;
-import mage.constants.EffectType;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.*;
+
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public abstract class ContinuousEffectImpl extends EffectImpl implements ContinuousEffect {
 
@@ -49,9 +38,10 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
      */
     protected boolean characterDefining = false;
 
-    // until your next turn
-    protected int startingTurn;
-    protected UUID startingControllerId;
+    // until your next turn or until end of your next turn
+    private UUID startingControllerId; // player to checkss turns (can't different with real controller ability)
+    private boolean startingTurnWasActive;
+    private int yourTurnNumPlayed = 0; // turnes played after effect was created
 
     public ContinuousEffectImpl(Duration duration, Outcome outcome) {
         super(outcome);
@@ -79,8 +69,9 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         this.affectedObjectsSet = effect.affectedObjectsSet;
         this.affectedObjectList.addAll(effect.affectedObjectList);
         this.temporary = effect.temporary;
-        this.startingTurn = effect.startingTurn;
         this.startingControllerId = effect.startingControllerId;
+        this.startingTurnWasActive = effect.startingTurnWasActive;
+        this.yourTurnNumPlayed = effect.yourTurnNumPlayed;
         this.dependencyTypes = effect.dependencyTypes;
         this.dependendToTypes = effect.dependendToTypes;
         this.characterDefining = effect.characterDefining;
@@ -148,6 +139,11 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
 
     @Override
     public void init(Ability source, Game game) {
+        init(source, game, game.getActivePlayerId());
+    }
+
+    @Override
+    public void init(Ability source, Game game, UUID activePlayerId) {
         targetPointer.init(game, source);
         //20100716 - 611.2c
         if (AbilityType.ACTIVATED == source.getAbilityType()
@@ -170,23 +166,75 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
                 this.affectedObjectsSet = true;
             }
         }
-        startingTurn = game.getTurnNum();
-        startingControllerId = source.getControllerId();
+        setStartingControllerAndTurnNum(game, source.getControllerId(), activePlayerId);
+    }
+
+    @Override
+    public UUID getStartingController() {
+        return startingControllerId;
+    }
+
+    @Override
+    public void setStartingControllerAndTurnNum(Game game, UUID startingController, UUID activePlayerId) {
+        this.startingControllerId = startingController;
+        this.startingTurnWasActive = activePlayerId != null && activePlayerId.equals(startingController); // you can't use "game" for active player cause it's called from tests/cheat too
+        this.yourTurnNumPlayed = 0;
+    }
+
+    @Override
+    public void incYourTurnNumPlayed() {
+        yourTurnNumPlayed++;
+    }
+
+    @Override
+    public boolean isYourNextTurn(Game game) {
+        if (this.startingTurnWasActive) {
+            return yourTurnNumPlayed == 1 && game.isActivePlayer(startingControllerId);
+        } else {
+            return yourTurnNumPlayed == 0 && game.isActivePlayer(startingControllerId);
+        }
     }
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        if (duration == Duration.UntilYourNextTurn) {
-            Player player = game.getPlayer(startingControllerId);
-            if (player != null) {
-                if (player.isInGame()) {
-                    return game.isActivePlayer(startingControllerId) && game.getTurnNum() != startingTurn;
-                }
-                return player.hasReachedNextTurnAfterLeaving();
-            }
-            return true;
+        // YOUR turn checks
+        // until end of turn - must be checked on cleanup step, see rules 514.2
+        // other must checked here (active and leave players), see rules 800.4
+        switch (duration) {
+            case UntilYourNextTurn:
+            case UntilEndOfYourNextTurn:
+                break;
+            default:
+                return false;
         }
-        return false;
+
+        // cheat engine put cards without play and calls direct applyEffects with clean -- need to ignore it
+        if (game.getActivePlayerId() == null) {
+            return false;
+        }
+
+        boolean canDelete = false;
+        Player player = game.getPlayer(startingControllerId);
+
+        // discard on start of turn for leave player
+        // 800.4i When a player leaves the game, any continuous effects with durations that last until that player's next turn
+        // or until a specific point in that turn will last until that turn would have begun.
+        // They neither expire immediately nor last indefinitely.
+        switch (duration) {
+            case UntilYourNextTurn:
+            case UntilEndOfYourNextTurn:
+                canDelete = player == null || (!player.isInGame() && player.hasReachedNextTurnAfterLeaving());
+        }
+
+        // discard on another conditions (start of your turn)
+        switch (duration) {
+            case UntilYourNextTurn:
+                if (player != null && player.isInGame()) {
+                    canDelete = canDelete || this.isYourNextTurn(game);
+                }
+        }
+
+        return canDelete;
     }
 
     @Override
@@ -263,14 +311,6 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
             }
         }
         return dependentToEffects;
-        /*
-            return allEffectsInLayer.stream()
-                    .filter(effect -> effect.getDependencyTypes().contains(dependendToTypes))
-                    .map(Effect::getId)
-                    .collect(Collectors.toSet());
-
-        }
-        return new HashSet<>();*/
     }
 
     @Override

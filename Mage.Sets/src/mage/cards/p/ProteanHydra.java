@@ -3,12 +3,11 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.PreventionEffectImpl;
+import mage.abilities.effects.PreventDamageAndRemoveCountersEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -16,13 +15,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -41,7 +38,7 @@ public final class ProteanHydra extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
 
         // If damage would be dealt to Protean Hydra, prevent that damage and remove that many +1/+1 counters from it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ProteanHydraEffect2()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageAndRemoveCountersEffect()));
 
         // Whenever a +1/+1 counter is removed from Protean Hydra, put two +1/+1 counters on it at the beginning of the next end step.
         this.addAbility(new ProteanHydraAbility());
@@ -55,50 +52,6 @@ public final class ProteanHydra extends CardImpl {
     @Override
     public ProteanHydra copy() {
         return new ProteanHydra(this);
-    }
-
-    static class ProteanHydraEffect2 extends PreventionEffectImpl {
-
-        public ProteanHydraEffect2() {
-            super(Duration.WhileOnBattlefield, Integer.MAX_VALUE, false, false);
-            staticText = "If damage would be dealt to {this}, prevent that damage and remove that many +1/+1 counters from it";
-        }
-
-        public ProteanHydraEffect2(final ProteanHydraEffect2 effect) {
-            super(effect);
-        }
-
-        @Override
-        public ProteanHydraEffect2 copy() {
-            return new ProteanHydraEffect2(this);
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            return true;
-        }
-
-        @Override
-        public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-            int damage = event.getAmount();
-            preventDamageAction(event, source, game);
-            Permanent permanent = game.getPermanent(source.getSourceId());
-            if (permanent != null) {
-                permanent.removeCounters(CounterType.P1P1.createInstance(damage), game); //MTG ruling Protean Hydra loses counters even if the damage isn't prevented
-            }
-            return false;
-        }
-
-        @Override
-        public boolean applies(GameEvent event, Ability source, Game game) {
-            if (super.applies(event, source, game)) {
-                if (event.getTargetId().equals(source.getSourceId())) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
     }
 
     class ProteanHydraAbility extends TriggeredAbilityImpl {

@@ -86,7 +86,7 @@ class GlyphOfReincarnationEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent targetWall = game.getPermanentOrLKIBattlefield(source.getFirstTarget());
         if (controller != null && targetWall != null) {
-            BlockedAttackerWatcher watcher = (BlockedAttackerWatcher) game.getState().getWatchers().get(BlockedAttackerWatcher.class.getSimpleName());
+            BlockedAttackerWatcher watcher = game.getState().getWatcher(BlockedAttackerWatcher.class);
             if (watcher != null) {
                 Map<UUID, Player> destroyed = new HashMap<>();
                 for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game)) {

@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
@@ -13,32 +11,17 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
-import mage.abilities.keyword.DeathtouchAbility;
-import mage.abilities.keyword.DoubleStrikeAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.HexproofAbility;
-import mage.abilities.keyword.IndestructibleAbility;
-import mage.abilities.keyword.LifelinkAbility;
-import mage.abilities.keyword.MenaceAbility;
-import mage.abilities.keyword.ReachAbility;
-import mage.abilities.keyword.TrampleAbility;
-import mage.abilities.keyword.VigilanceAbility;
+import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class MajesticMyriarch extends CardImpl {
@@ -51,7 +34,7 @@ public final class MajesticMyriarch extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Majestic Myriarch's power and toughness are each equal to twice the number of creatures you control.
-        DynamicValue xValue= new MultipliedValue(new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent()), 2);
+        DynamicValue xValue = new MultipliedValue(new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent()), 2);
         Effect effect = new SetPowerToughnessSourceEffect(xValue, Duration.EndOfGame);
         effect.setText("{this}'s power and toughness are each equal to twice the number of creatures you control");
         this.addAbility(new SimpleStaticAbility(Zone.ALL, effect));
@@ -104,7 +87,7 @@ class MajesticMyriarchEffect extends OneShotEffect {
     MajesticMyriarchEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "if you control a creature with flying, Majestic Myriarch gains flying until end of turn. " +
-           "The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, reach, trample, and vigilance.";
+                "The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, reach, trample, and vigilance.";
     }
 
     MajesticMyriarchEffect(final MajesticMyriarchEffect effect) {

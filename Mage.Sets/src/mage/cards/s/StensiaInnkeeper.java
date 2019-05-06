@@ -22,7 +22,7 @@ import mage.target.TargetPermanent;
  */
 public final class StensiaInnkeeper extends CardImpl {
 
-    private final static FilterLandPermanent filter = new FilterLandPermanent("land an opponent controls");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("land an opponent controls");
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));

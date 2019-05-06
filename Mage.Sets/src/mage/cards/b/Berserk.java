@@ -96,7 +96,7 @@ class BerserkReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 class CombatDamageStepStartedWatcher extends Watcher {
 
     public CombatDamageStepStartedWatcher() {
-        super(CombatDamageStepStartedWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public CombatDamageStepStartedWatcher(final CombatDamageStepStartedWatcher watcher) {

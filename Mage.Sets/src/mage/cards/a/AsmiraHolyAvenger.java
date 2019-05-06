@@ -56,7 +56,7 @@ class AsmiraHolyAvengerWatcher extends Watcher {
     private int creaturesCount = 0;
 
     public AsmiraHolyAvengerWatcher() {
-        super(AsmiraHolyAvengerWatcher.class.getSimpleName(), WatcherScope.PLAYER);
+        super(WatcherScope.PLAYER);
         condition = true;
     }
 

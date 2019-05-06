@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -14,20 +12,14 @@ import mage.abilities.effects.common.AddContinuousEffectToGame;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class MirriWeatherlightDuelist extends CardImpl {
@@ -86,7 +78,10 @@ class MirriWeatherlightDuelistBlockRestrictionEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+        if (attacker == null) {
+            return true;
+        }
         for (UUID creature : game.getCombat().getBlockers()) {
             if (game.getPlayer(game.getPermanent(creature).getOwnerId()).hasOpponent(attacker.getControllerId(), game)) {
                 return false;

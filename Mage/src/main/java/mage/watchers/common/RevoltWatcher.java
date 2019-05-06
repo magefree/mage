@@ -22,7 +22,7 @@ public class RevoltWatcher extends Watcher {
     private final Set<UUID> revoltActivePlayerIds = new HashSet<>(0);
 
     public RevoltWatcher() {
-        super(RevoltWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public RevoltWatcher(final RevoltWatcher watcher) {

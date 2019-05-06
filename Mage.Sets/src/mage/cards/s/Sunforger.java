@@ -104,7 +104,7 @@ class SunforgerEffect extends OneShotEffect {
                 filter.add(new CardTypePredicate(CardType.INSTANT));
                 filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 5));
                 filter.add(new CardCanBeCastPredicate(source.getControllerId()));
-                if (controller.searchLibrary(target, game, controller.getId())) {
+                if (controller.searchLibrary(target, source, game, controller.getId())) {
                     UUID targetId = target.getFirstTarget();
                     Card card = game.getCard(targetId);
                     if (card != null) {

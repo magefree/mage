@@ -88,7 +88,7 @@ class SpinyStarfishWatcher extends Watcher {
     private final Map<UUID, Integer> regeneratedCount = new HashMap<>();
 
     public SpinyStarfishWatcher() {
-        super(SpinyStarfishWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public SpinyStarfishWatcher(final SpinyStarfishWatcher watcher) {

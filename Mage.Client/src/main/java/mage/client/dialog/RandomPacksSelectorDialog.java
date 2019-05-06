@@ -25,7 +25,7 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
     private boolean isRandomDraft;
     private boolean isRichManDraft;
     private String title = "";
-    public final static String randomDraftDescription = ("The selected packs will be randomly distributed to players. Each player may open different packs. Duplicates will be avoided.");
+    public static final String randomDraftDescription = ("The selected packs will be randomly distributed to players. Each player may open different packs. Duplicates will be avoided.");
 
     public RandomPacksSelectorDialog(boolean isRandomDraft, boolean isRichManDraft) {
         initComponents();

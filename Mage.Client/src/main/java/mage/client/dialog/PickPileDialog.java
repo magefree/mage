@@ -69,23 +69,20 @@ public class PickPileDialog extends MageDialog {
         this.pile1.loadCardsNarrow(pile1, bigCard, gameId);
         this.pile2.loadCardsNarrow(pile2, bigCard, gameId);
 
-        if (getParent() != MageFrame.getDesktop() /*|| this.isClosed*/) {
-            MageFrame.getDesktop().add(this, JLayeredPane.MODAL_LAYER);
-        }
+        this.setModal(true);
         pack();
 
-        this.makeWindowCentered();
-
-        this.revalidate();
-        this.repaint();
-        this.setModal(true);
-
-        // window settings
+        // windows settings
+        MageFrame.getDesktop().remove(this);
         if (this.isModal()) {
             MageFrame.getDesktop().add(this, JLayeredPane.MODAL_LAYER);
         } else {
             MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
         }
+        this.makeWindowCentered();
+
+        this.revalidate(); // TODO: remove?
+        this.repaint(); // TODO: remove?
 
         this.setVisible(true);
     }

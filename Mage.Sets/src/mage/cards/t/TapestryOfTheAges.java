@@ -68,10 +68,10 @@ enum PlayerCastNonCreatureSpellCondition implements Condition {
 
 class PlayerCastNonCreatureSpellWatcher extends Watcher {
 
-    Set<UUID> playerIds = new HashSet<>();
+    private Set<UUID> playerIds = new HashSet<>();
 
     public PlayerCastNonCreatureSpellWatcher() {
-        super(PlayerCastNonCreatureSpellWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public PlayerCastNonCreatureSpellWatcher(final PlayerCastNonCreatureSpellWatcher watcher) {

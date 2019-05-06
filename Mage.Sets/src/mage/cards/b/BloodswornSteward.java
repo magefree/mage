@@ -25,7 +25,7 @@ import mage.filter.predicate.permanent.CommanderPredicate;
  */
 public final class BloodswornSteward extends CardImpl {
     
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Commander creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Commander creatures");
     static {
         filter.add(CommanderPredicate.instance);
     }

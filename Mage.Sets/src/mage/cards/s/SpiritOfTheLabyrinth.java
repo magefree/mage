@@ -50,7 +50,7 @@ class SpiritOfTheLabyrinthWatcher extends Watcher {
     private final Set<UUID> playersThatDrewCard;
     
     public SpiritOfTheLabyrinthWatcher() {
-        super(SpiritOfTheLabyrinthWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
         this.playersThatDrewCard = new HashSet<>();
     }
 

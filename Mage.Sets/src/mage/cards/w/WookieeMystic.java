@@ -78,7 +78,7 @@ class WookieeMysticWatcher extends Watcher {
     private final List<UUID> creatures = new ArrayList<>();
 
     WookieeMysticWatcher(Ability source) {
-        super("HallOfTheBanditLordWatcher", WatcherScope.CARD);
+        super(WatcherScope.CARD);
         this.source = source;
     }
 

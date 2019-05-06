@@ -1,8 +1,5 @@
-
 package mage.cards.h;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -18,8 +15,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.watchers.common.AttackedLastTurnWatcher;
 
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class HallsOfMist extends CardImpl {
@@ -61,14 +60,12 @@ class CantAttackIfAttackedLastTurnAllEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
+    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game, boolean canUseChooseDialogs) {
         AttackedLastTurnWatcher watcher = game.getState().getWatcher(AttackedLastTurnWatcher.class);
         if (watcher != null) {
             Set<MageObjectReference> attackingCreatures = watcher.getAttackedLastTurnCreatures(attacker.getControllerId());
             MageObjectReference mor = new MageObjectReference(attacker, game);
-            if (attackingCreatures.contains(mor)) {
-                return false;
-            }
+            return !attackingCreatures.contains(mor);
         }
         return true;
     }

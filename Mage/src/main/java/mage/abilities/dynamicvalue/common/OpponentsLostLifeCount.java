@@ -1,18 +1,19 @@
-
 package mage.abilities.dynamicvalue.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.watchers.common.PlayerLostLifeWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
-public class OpponentsLostLifeCount implements DynamicValue {
+public enum OpponentsLostLifeCount implements DynamicValue {
+
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -29,7 +30,7 @@ public class OpponentsLostLifeCount implements DynamicValue {
 
     @Override
     public OpponentsLostLifeCount copy() {
-        return new OpponentsLostLifeCount();
+        return instance;
     }
 
     @Override

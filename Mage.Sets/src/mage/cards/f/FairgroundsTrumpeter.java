@@ -73,7 +73,7 @@ class FairgroundsTrumpeterWatcher extends Watcher {
     private final Set<UUID> players = new HashSet<>();
 
     public FairgroundsTrumpeterWatcher() {
-        super(FairgroundsTrumpeterWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public FairgroundsTrumpeterWatcher(final FairgroundsTrumpeterWatcher watcher) {

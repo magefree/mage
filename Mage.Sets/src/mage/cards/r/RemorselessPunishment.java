@@ -43,7 +43,7 @@ public final class RemorselessPunishment extends CardImpl {
 
 class RemorselessPunishmentEffect extends OneShotEffect {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("creature or planeswalker");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("creature or planeswalker");
 
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.PLANESWALKER)));

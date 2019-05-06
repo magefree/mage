@@ -22,15 +22,9 @@ public class MageJDesktop extends JDesktopPane {
     public void updateUI() {
         if ("Nimbus".equals(UIManager.getLookAndFeel().getName())) {
             UIDefaults map = new UIDefaults();
-            Painter painter = new Painter() {
-
-                final Color color = null;
-
-                @Override
-                public void paint(Graphics2D g, Object c, int w, int h) {
-                    g.setColor(color == null ? UIManager.getDefaults().getColor("desktop") : color);
-                    g.fillRect(0,0,w,h);
-                }
+            Painter painter = (g, c, w, h) -> {
+                g.setColor( UIManager.getDefaults().getColor("desktop") );
+                g.fillRect(0,0,w,h);
             };
             map.put("DesktopPane[Enabled].backgroundPainter", painter);
             putClientProperty("Nimbus.Overrides", map);

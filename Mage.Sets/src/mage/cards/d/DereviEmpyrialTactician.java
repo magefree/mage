@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -44,6 +43,7 @@ public final class DereviEmpyrialTactician extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+        
         // Whenever Derevi, Empyrial Tactician enters the battlefield or a creature you control deals combat damage to a player, you may tap or untap target permanent.
         Ability ability = new DereviEmpyrialTacticianTriggeredAbility(new MayTapOrUntapTargetEffect());
         ability.addTarget(new TargetPermanent());
@@ -75,7 +75,8 @@ class DereviEmpyrialTacticianTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD || event.getType() == EventType.DAMAGED_PLAYER;
+        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD 
+                || event.getType() == EventType.DAMAGED_PLAYER;
     }
 
     @Override
@@ -87,7 +88,8 @@ class DereviEmpyrialTacticianTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
             if (((DamagedPlayerEvent) event).isCombatDamage()) {
                 Permanent creature = game.getPermanent(event.getSourceId());
-                if (creature != null && creature.isControlledBy(controllerId)) {
+                if (creature != null 
+                        && creature.isControlledBy(controllerId)) {
                     return true;
                 }
             }

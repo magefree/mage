@@ -117,8 +117,7 @@ class SunbirdsInvocationEffect extends OneShotEffect {
             return false;
         }
         int xValue = spell.getConvertedManaCost();
-        Cards cards = new CardsImpl();
-        cards.addAll(controller.getLibrary().getTopCards(game, xValue));
+        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, xValue));
         if (!cards.isEmpty()) {
             controller.revealCards(sourceObject.getIdName(), cards, game);
 

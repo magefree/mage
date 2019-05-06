@@ -30,7 +30,7 @@ import mage.watchers.Watcher;
  */
 public final class OathOfChandra extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
@@ -85,7 +85,7 @@ class OathOfChandraWatcher extends Watcher {
     private final Set<UUID> players = new HashSet<>();
 
     public OathOfChandraWatcher() {
-        super(OathOfChandraWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public OathOfChandraWatcher(final OathOfChandraWatcher watcher) {

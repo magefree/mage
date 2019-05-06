@@ -153,13 +153,18 @@ public interface MageObject extends MageItem, Serializable {
      * @return
      */
     default boolean shareTypes(Card otherCard) {
+        return this.shareTypes(otherCard, false);
+    }
+
+    default boolean shareTypes(Card otherCard, boolean permanentOnly) {
 
         if (otherCard == null) {
             throw new IllegalArgumentException("Params can't be null");
         }
 
         for (CardType type : getCardType()) {
-            if (otherCard.getCardType().contains(type)) {
+            if (otherCard.getCardType().contains(type)
+                    && (!permanentOnly || type.isPermanentType())) {
                 return true;
             }
         }

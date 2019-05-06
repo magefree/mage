@@ -11,10 +11,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.watchers.Watcher;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  *
@@ -22,12 +19,12 @@ import java.util.UUID;
  */
 public class PermanentsEnteredBattlefieldYourLastTurnWatcher extends Watcher {
 
-    private final HashMap<UUID, List<Permanent>> enteringBattlefield = new HashMap<>();
-    private final HashMap<UUID, List<Permanent>> enteringBattlefieldLastTurn = new HashMap<>();
+    private final Map<UUID, List<Permanent>> enteringBattlefield = new HashMap<>();
+    private final Map<UUID, List<Permanent>> enteringBattlefieldLastTurn = new HashMap<>();
     private UUID lastActivePlayer = null;
 
     public PermanentsEnteredBattlefieldYourLastTurnWatcher() {
-        super(PermanentsEnteredBattlefieldYourLastTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public PermanentsEnteredBattlefieldYourLastTurnWatcher(final PermanentsEnteredBattlefieldYourLastTurnWatcher watcher) {

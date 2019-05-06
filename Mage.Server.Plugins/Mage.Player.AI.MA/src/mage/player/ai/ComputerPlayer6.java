@@ -36,6 +36,7 @@ import org.apache.log4j.Logger;
 import java.io.File;
 import java.util.*;
 import java.util.concurrent.*;
+import mage.abilities.StaticAbility;
 
 /**
  * @author nantuko
@@ -465,7 +466,8 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
             }
             Game sim = game.copy();
             sim.setSimulation(true);
-            if (sim.getPlayer(currentPlayer.getId()).activateAbility((ActivatedAbility) action.copy(), sim)) {
+            if (!(action instanceof StaticAbility) //for MorphAbility, etc
+                    && sim.getPlayer(currentPlayer.getId()).activateAbility((ActivatedAbility) action.copy(), sim)) {
                 sim.applyEffects();
                 if (checkForRepeatedAction(sim, node, action, currentPlayer.getId())) {
                     logger.debug("Sim Prio [" + depth + "] -- repeated action: " + action.toString());
@@ -598,28 +600,45 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
         }
         Collections.sort(allActions, new Comparator<Ability>() {
             @Override
-            public int compare(Ability ability, Ability ability1) {
-                String rule = ability.toString();
+            public int compare(Ability ability1, Ability ability2) {
                 String rule1 = ability1.toString();
-                if (rule.equals("Pass")) {
-                    return 1;
+                String rule2 = ability2.toString();
+
+                // pass
+                boolean pass1 = rule1.startsWith("Pass");
+                boolean pass2 = rule2.startsWith("Pass");
+                if (pass1 != pass2) {
+                    if (pass1) {
+                        return 1;
+                    } else {
+                        return -1;
+                    }
                 }
-                if (rule1.equals("Pass")) {
-                    return -1;
+
+                // play
+                boolean play1 = rule1.startsWith("Play");
+                boolean play2 = rule2.startsWith("Play");
+                if (play1 != play2) {
+                    if (play1) {
+                        return -1;
+                    } else {
+                        return 1;
+                    }
                 }
-                if (rule.startsWith("Play")) {
-                    return -1;
+
+                // cast
+                boolean cast1 = rule1.startsWith("Cast");
+                boolean cast2 = rule2.startsWith("Cast");
+                if (cast1 != cast2) {
+                    if (cast1) {
+                        return -1;
+                    } else {
+                        return 1;
+                    }
                 }
-                if (rule1.startsWith("Play")) {
-                    return 1;
-                }
-                if (rule.startsWith("Cast")) {
-                    return -1;
-                }
-                if (rule1.startsWith("Cast")) {
-                    return 1;
-                }
-                return ability.getRule().compareTo(ability1.getRule());
+
+                // default
+                return ability1.getRule().compareTo(ability2.getRule());
             }
         });
     }

@@ -1,4 +1,3 @@
-
 package mage.cards.k;
 
 import java.util.LinkedHashSet;
@@ -16,8 +15,8 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -74,7 +73,7 @@ class KindredSummonsEffect extends OneShotEffect {
             if (subType == null) {
                 return false;
             }
-            FilterCreaturePermanent filterPermanent = new FilterCreaturePermanent("creature you control of the chosen type");
+            FilterControlledCreaturePermanent filterPermanent = new FilterControlledCreaturePermanent("creature you control of the chosen type");
             filterPermanent.add(new SubtypePredicate(subType));
             int numberOfCards = game.getBattlefield().countAll(filterPermanent, source.getControllerId(), game);
             Cards revealed = new CardsImpl();
@@ -82,9 +81,14 @@ class KindredSummonsEffect extends OneShotEffect {
             Cards otherCards = new CardsImpl();
             FilterCreatureCard filterCard = new FilterCreatureCard("creature card of the chosen type");
             filterCard.add(new SubtypePredicate(subType));
+            if (numberOfCards == 0) { // no matches so nothing is revealed
+                game.informPlayers("There are 0 creature cards of the chosen type in " + controller.getName() + "'s library.");
+                return true;
+            }
             for (Card card : controller.getLibrary().getCards(game)) {
                 revealed.add(card);
-                if (card != null && filterCard.match(card, game)) {
+                if (card != null
+                        && filterCard.match(card, game)) {
                     chosenSubtypeCreatureCards.add(card);
                     if (chosenSubtypeCreatureCards.size() == numberOfCards) {
                         break;

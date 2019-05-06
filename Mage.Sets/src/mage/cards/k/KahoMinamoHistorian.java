@@ -88,7 +88,7 @@ class KahoMinamoHistorianEffect extends SearchEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && sourceObject != null) {
-            if (controller.searchLibrary(target, game)) {
+            if (controller.searchLibrary(target, source, game)) {
                 UUID exileZone = CardUtil.getCardExileZoneId(game, source);
                 if (!target.getTargets().isEmpty()) {
                     controller.moveCardsToExile(new CardsImpl(target.getTargets()).getCards(game), source, game, true, exileZone, sourceObject.getIdName());

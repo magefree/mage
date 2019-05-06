@@ -1,9 +1,5 @@
-
 package mage.cards.e;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -16,8 +12,11 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author Styxo
  */
 public final class EgoErasure extends CardImpl {
@@ -74,10 +73,10 @@ class EgoErasureLoseEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
+        for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) {
             Permanent permanent = it.next().getPermanent(game);
             if (permanent != null) {
-                permanent.getSubtype(game).retainAll(SubType.getLandTypes(false));
+                permanent.getSubtype(game).retainAll(SubType.getLandTypes());
             } else {
                 it.remove();
             }
@@ -115,7 +114,7 @@ class EgoErasureBoostEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
+        for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) {
             Permanent permanent = it.next().getPermanent(game);
             if (permanent != null) {
                 permanent.addPower(-2);

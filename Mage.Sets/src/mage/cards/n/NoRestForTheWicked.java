@@ -62,7 +62,7 @@ class NoRestForTheWickedEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (watcher != null && controller != null) {
             Cards cardsToHand = new CardsImpl();
-            for (UUID cardId : watcher.cards) {
+            for (UUID cardId : watcher.getCards()) {
                 Card c = game.getCard(cardId);
                 if (c != null) {
                     if (game.getState().getZone(cardId) == Zone.GRAVEYARD
@@ -87,10 +87,14 @@ class NoRestForTheWickedEffect extends OneShotEffect {
 
 class NoRestForTheWickedWatcher extends Watcher {
 
-    List<UUID> cards;
+    public List<UUID> getCards() {
+        return cards;
+    }
+
+    private List<UUID> cards;
 
     public NoRestForTheWickedWatcher() {
-        super(NoRestForTheWickedWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
         this.cards = new ArrayList<>();
     }
 

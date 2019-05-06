@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
@@ -33,7 +32,7 @@ public class CantBeBlockedByCreaturesSourceEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         return !filter.match(blocker, source.getSourceId(), source.getControllerId(), game);
     }
 

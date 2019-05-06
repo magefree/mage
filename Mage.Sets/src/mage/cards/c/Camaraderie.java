@@ -1,9 +1,9 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.hint.common.CreaturesYouControlHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -13,8 +13,9 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class Camaraderie extends CardImpl {
@@ -24,6 +25,7 @@ public final class Camaraderie extends CardImpl {
 
         // You gain X life and draw X cards, where X is the number of creatures you control. Creatures you control get +1/+1 until end of turn.
         this.getSpellAbility().addEffect(new CamaraderieEffect());
+        this.getSpellAbility().addHint(CreaturesYouControlHint.instance);
     }
 
     public Camaraderie(final Camaraderie card) {

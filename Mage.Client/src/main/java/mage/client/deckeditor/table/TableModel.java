@@ -1,4 +1,3 @@
-
 package mage.client.deckeditor.table;
 
 import mage.client.MageFrame;
@@ -13,6 +12,7 @@ import mage.client.util.Event;
 import mage.client.util.Listener;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.constants.EnlargeMode;
+import mage.game.draft.RateCard;
 import mage.view.CardView;
 import mage.view.CardsView;
 import org.apache.log4j.Logger;
@@ -25,8 +25,8 @@ import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 import java.util.Map.Entry;
 
 /**
@@ -51,8 +51,9 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
     private boolean displayNoCopies = false;
     private UpdateCountsCallback updateCountsCallback;
 
-    private final String column[] = {"Qty", "Name", "Cost", "Color", "Type", "Stats", "Rarity", "Set", "#"};
+    private final String[] column = {"Qty", "Name", "Cost", "Color", "Type", "Stats", "Rarity", "Set", "Card number", "Draft Rating"};
     public final int COLUMN_INDEX_COST = 2;
+    public final int COLUMN_INDEX_RATING = 9;
 
     private SortSetting sortSetting;
     private int recentSortedColumn;
@@ -239,6 +240,8 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
                 return c.getExpansionSetCode();
             case 8:
                 return c.getCardNumber();
+            case 9:
+                return RateCard.rateCard(c.getOriginalCard(), null);
             default:
                 return "error";
         }
@@ -246,8 +249,8 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 
     private void addCard(CardView card, BigCard bigCard, UUID gameId) {
         if (cardDimension == null) {
-            cardDimension = new Dimension(Config.dimensions.frameWidth,
-                    Config.dimensions.frameHeight);
+            cardDimension = new Dimension(Config.dimensions.getFrameWidth(),
+                    Config.dimensions.getFrameHeight());
         }
         cards.put(card.getId(), card);
 

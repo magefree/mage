@@ -17,7 +17,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  */
 public final class ChandrasOutburst extends CardImpl {
 
-    private final static FilterCard filter = new FilterCard("Chandra, Bold Pyromancer");
+    private static final FilterCard filter = new FilterCard("Chandra, Bold Pyromancer");
 
     static {
         filter.add(new NamePredicate("Chandra, Bold Pyromancer"));

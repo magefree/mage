@@ -51,7 +51,7 @@ class EtherswornCanonistWatcher extends Watcher {
     private Set<UUID> castNonartifactSpell = new HashSet<>();
 
     public EtherswornCanonistWatcher() {
-        super(EtherswornCanonistWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public EtherswornCanonistWatcher(final EtherswornCanonistWatcher watcher) {

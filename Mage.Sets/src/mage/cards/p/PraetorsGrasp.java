@@ -68,7 +68,7 @@ class PraetorsGraspEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && opponent != null && sourceObject != null) {
             TargetCardInLibrary target = new TargetCardInLibrary();
-            if (controller.searchLibrary(target, game, opponent.getId())) {
+            if (controller.searchLibrary(target, source, game, opponent.getId())) {
                 UUID targetId = target.getFirstTarget();
                 Card card = opponent.getLibrary().getCard(targetId, game);
                 UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());

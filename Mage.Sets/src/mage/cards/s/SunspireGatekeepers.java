@@ -1,12 +1,12 @@
-
-
 package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.hint.ConditionHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -19,7 +19,6 @@ import mage.game.permanent.token.KnightToken;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 
@@ -27,12 +26,15 @@ import java.util.UUID;
 public final class SunspireGatekeepers extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
+
     static {
         filter.add(new SubtypePredicate(SubType.GATE));
     }
 
-    public SunspireGatekeepers (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
+    private static final Condition gatesCondition = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1);
+
+    public SunspireGatekeepers(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
 
@@ -42,11 +44,12 @@ public final class SunspireGatekeepers extends CardImpl {
         // When Sunspire Gatekeepers enter the battlefield, if you control two or more Gates, create a 2/2 white Knight creature token with vigilance.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new KnightToken())),
-                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1),
-                "When {this} enters the battlefield, if you control two or more Gates, create a 2/2 white Knight creature token with vigilance."));
+                gatesCondition,
+                "When {this} enters the battlefield, if you control two or more Gates, create a 2/2 white Knight creature token with vigilance.")
+                .addHint(new ConditionHint(gatesCondition, "you control two or more Gates")));
     }
 
-    public SunspireGatekeepers (final SunspireGatekeepers card) {
+    public SunspireGatekeepers(final SunspireGatekeepers card) {
         super(card);
     }
 

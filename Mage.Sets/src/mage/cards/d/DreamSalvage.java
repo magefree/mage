@@ -49,7 +49,7 @@ class CardsDiscardedThisTurnWatcher extends Watcher {
     private final Map<UUID, Integer> amountOfCardsDiscardedThisTurn = new HashMap<>();
 
     public CardsDiscardedThisTurnWatcher() {
-        super(CardsDiscardedThisTurnWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public CardsDiscardedThisTurnWatcher(final CardsDiscardedThisTurnWatcher watcher) {

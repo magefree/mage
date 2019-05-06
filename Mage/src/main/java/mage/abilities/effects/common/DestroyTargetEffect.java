@@ -58,11 +58,15 @@ public class DestroyTargetEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int affectedTargets = 0;
-        if (multitargetHandling && source.getTargets().size() > 1 && targetPointer instanceof FirstTargetPointer) { // Decimate
+        if (multitargetHandling
+                && source.getTargets().size() > 1
+                && targetPointer instanceof FirstTargetPointer) { // Decimate
             for (Target target : source.getTargets()) {
                 for (UUID permanentId : target.getTargets()) {
                     Permanent permanent = game.getPermanent(permanentId);
-                    if (permanent != null) {
+                    if (permanent != null
+                            && permanent.isPhasedIn()
+                            && !permanent.isPhasedOutIndirectly()) {
                         permanent.destroy(source.getSourceId(), game, noRegen);
                         affectedTargets++;
                     }
@@ -71,7 +75,9 @@ public class DestroyTargetEffect extends OneShotEffect {
         } else {
             for (UUID permanentId : targetPointer.getTargets(game, source)) {
                 Permanent permanent = game.getPermanent(permanentId);
-                if (permanent != null) {
+                if (permanent != null
+                        && permanent.isPhasedIn()
+                        && !permanent.isPhasedOutIndirectly()) {
                     permanent.destroy(source.getSourceId(), game, noRegen);
                     affectedTargets++;
                 }

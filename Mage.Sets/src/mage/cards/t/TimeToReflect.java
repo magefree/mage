@@ -52,7 +52,7 @@ enum TimeToReflectAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         List<PermanentIdPredicate> creaturesThatBlockedOrWereBlockedByAZombie = new ArrayList<>();
         FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that blocked or was blocked by a Zombie this turn.").copy();
-        BlockedOrWasBlockedByAZombieWatcher watcher = (BlockedOrWasBlockedByAZombieWatcher) game.getState().getWatchers().get(BlockedOrWasBlockedByAZombieWatcher.class.getSimpleName());
+        BlockedOrWasBlockedByAZombieWatcher watcher = game.getState().getWatcher(BlockedOrWasBlockedByAZombieWatcher.class);
         if (watcher != null) {
             for (MageObjectReference mor : watcher.getBlockedThisTurnCreatures()) {
                 Permanent permanent = mor.getPermanent(game);
@@ -72,7 +72,7 @@ class BlockedOrWasBlockedByAZombieWatcher extends Watcher {
     private final Set<MageObjectReference> blockedOrWasBlockedByAZombieWatcher;
 
     public BlockedOrWasBlockedByAZombieWatcher() {
-        super(BlockedOrWasBlockedByAZombieWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
         blockedOrWasBlockedByAZombieWatcher = new HashSet<>();
     }
 

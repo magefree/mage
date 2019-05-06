@@ -1,10 +1,8 @@
 
 package mage.cards.h;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+
 import mage.MageInt;
 import mage.MageObject;
 import mage.MageObjectReference;
@@ -138,10 +136,10 @@ class HopeOfGhirapurPlayerLostLifePredicate implements ObjectSourcePlayerPredica
 
 class HopeOfGhirapurCombatDamageWatcher extends Watcher {
 
-    private final HashMap<MageObjectReference, Set<UUID>> combatDamagedPlayers = new HashMap<>();
+    private final Map<MageObjectReference, Set<UUID>> combatDamagedPlayers = new HashMap<>();
 
     public HopeOfGhirapurCombatDamageWatcher() {
-        super(HopeOfGhirapurCombatDamageWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public HopeOfGhirapurCombatDamageWatcher(final HopeOfGhirapurCombatDamageWatcher watcher) {

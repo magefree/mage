@@ -1,10 +1,8 @@
 
 package mage.abilities.keyword;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -45,10 +43,10 @@ public class MeleeAbility extends AttacksTriggeredAbility {
 
 class MeleeWatcher extends Watcher {
 
-    private HashMap<UUID, Set<UUID>> playersAttacked = new HashMap<>(0);
+    private Map<UUID, Set<UUID>> playersAttacked = new HashMap<>(0);
 
     MeleeWatcher() {
-        super("MeleeWatcher", WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     MeleeWatcher(final MeleeWatcher watcher) {

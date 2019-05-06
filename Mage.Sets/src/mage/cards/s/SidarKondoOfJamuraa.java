@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -13,19 +11,15 @@ import mage.abilities.keyword.PartnerAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.ComparisonType;
-import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class SidarKondoOfJamuraa extends CardImpl {
@@ -92,9 +86,12 @@ class SidarKondoOfJamuraaCantBlockCreaturesSourceEffect extends RestrictionEffec
         }
         return game.getOpponents(source.getControllerId()).contains(permanent.getControllerId());
     }
-    
+
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+        if (attacker == null) {
+            return true;
+        }
         return !filter.match(attacker, source.getSourceId(), source.getControllerId(), game);
     }
 

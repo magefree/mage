@@ -1,8 +1,5 @@
-
-
 package mage.abilities.keyword;
 
-import java.io.ObjectStreamException;
 import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
 import mage.abilities.MageSingleton;
@@ -11,13 +8,14 @@ import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.io.ObjectStreamException;
+
 /**
- *
  * @author LevelX2
  */
 
 public class HorsemanshipAbility extends EvasionAbility implements MageSingleton {
-    private static final HorsemanshipAbility instance =  new HorsemanshipAbility();
+    private static final HorsemanshipAbility instance = new HorsemanshipAbility();
 
     private Object readResolve() throws ObjectStreamException {
         return instance;
@@ -59,7 +57,7 @@ class Horsemanship extends RestrictionEffect implements MageSingleton {
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         return blocker.getAbilities().containsKey(HorsemanshipAbility.getInstance().getId());
     }
 

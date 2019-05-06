@@ -26,6 +26,7 @@ import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
 import mage.game.events.TableEvent;
 import mage.game.match.MatchType;
+import mage.game.mulligan.Mulligan;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
@@ -132,7 +133,7 @@ public interface Game extends MageItem, Serializable {
 
 
     default boolean isActivePlayer(UUID playerId) {
-        return getActivePlayerId().equals(playerId);
+        return getActivePlayerId() != null && getActivePlayerId().equals(playerId);
     }
 
     /**
@@ -431,7 +432,7 @@ public interface Game extends MageItem, Serializable {
     // game cheats (for tests only)
     void cheat(UUID ownerId, Map<Zone, String> commands);
 
-    void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<PermanentCard> battlefield, List<Card> graveyard);
+    void cheat(UUID ownerId, UUID activePlayerId, List<Card> library, List<Card> hand, List<PermanentCard> battlefield, List<Card> graveyard);
 
     // controlling the behaviour of replacement effects while permanents entering the battlefield
     void setScopeRelevant(boolean scopeRelevant);
@@ -472,4 +473,7 @@ public interface Game extends MageItem, Serializable {
     int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable);
 
     int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects);
+
+    Mulligan getMulligan();
+
 }

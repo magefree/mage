@@ -46,11 +46,11 @@ public final class UphillBattle extends CardImpl {
 
 class PlayCreatureLandWatcher extends Watcher {
 
-    final Set<UUID> playerPlayedLand = new HashSet<>(); // player that played land
-    final Set<UUID> landPlayed = new HashSet<>(); // land played
+    private final Set<UUID> playerPlayedLand = new HashSet<>(); // player that played land
+    private final Set<UUID> landPlayed = new HashSet<>(); // land played
 
     public PlayCreatureLandWatcher() {
-        super(PlayCreatureLandWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public PlayCreatureLandWatcher(final PlayCreatureLandWatcher watcher) {

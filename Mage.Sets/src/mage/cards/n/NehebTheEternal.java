@@ -1,7 +1,5 @@
-
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -18,8 +16,9 @@ import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class NehebTheEternal extends CardImpl {
@@ -74,7 +73,7 @@ class NehebTheEternalManaEffect extends ManaEffect {
 
     @Override
     public Mana produceMana(boolean netMana, Game game, Ability source) {
-        return Mana.RedMana(new OpponentsLostLifeCount().calculate(game, source, this));
+        return Mana.RedMana(OpponentsLostLifeCount.instance.calculate(game, source, this));
     }
 
     @Override

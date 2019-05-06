@@ -164,10 +164,7 @@ public final class DeckBuilder {
                         }
                     }
                     if (count > 0) {
-                        Integer typeCount = colorCount.get(symbol);
-                        if (typeCount == null) {
-                            typeCount = 0;
-                        }
+                        Integer typeCount = colorCount.getOrDefault(symbol, 0);
                         typeCount += 1;
                         colorCount.put(symbol, typeCount);
                     }
@@ -243,9 +240,9 @@ public final class DeckBuilder {
             int type;
             if (card.isCreature()) {
                 type = 10;
-            } else if (card.getSubtype(null).contains(SubType.EQUIPMENT)) {
+            } else if (card.hasSubtype(SubType.EQUIPMENT, null)) {
                 type = 8;
-            } else if (card.getSubtype(null).contains(SubType.AURA)) {
+            } else if (card.hasSubtype(SubType.AURA, null)) {
                 type = 5;
             } else if (card.isInstant()) {
                 type = 7;
@@ -283,10 +280,7 @@ public final class DeckBuilder {
                         multicolor += 1;
                         colors.add(symbol);
                     }
-                    Integer typeCount = singleCount.get(symbol);
-                    if (typeCount == null) {
-                        typeCount = 0;
-                    }
+                    Integer typeCount = singleCount.getOrDefault(symbol, 0);
                     typeCount += 1;
                     singleCount.put(symbol, typeCount);
                     maxSingleCount = Math.max(maxSingleCount, typeCount);

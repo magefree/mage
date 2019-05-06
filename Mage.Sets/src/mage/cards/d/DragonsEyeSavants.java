@@ -25,7 +25,7 @@ import mage.target.common.TargetOpponent;
  */
 public final class DragonsEyeSavants extends CardImpl {
     
-    private final static FilterCard filter = new FilterCard("a blue card in your hand");
+    private static final FilterCard filter = new FilterCard("a blue card in your hand");
     static {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
     }

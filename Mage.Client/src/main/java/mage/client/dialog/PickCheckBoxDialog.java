@@ -32,7 +32,7 @@ public class PickCheckBoxDialog extends MageDialog {
         if (!(obj instanceof java.awt.Component)) {
             throw new IllegalArgumentException("Must be a java.awt.Component!");
         }
-        this.scrollList.setViewportView((java.awt.Component) obj);
+        this.scrollList.setViewportView(obj);
     }
 
     private javax.swing.JList get_a_Jlist_from_ScrollListView() {
@@ -181,16 +181,14 @@ public class PickCheckBoxDialog extends MageDialog {
         }
 
         // window settings
+        MageFrame.getDesktop().remove(this);
         if (this.isModal()) {
             MageFrame.getDesktop().add(this, JLayeredPane.MODAL_LAYER);
         } else {
             MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
         }
-        if (mageDialogState != null) {
-            mageDialogState.setStateToDialog(this);
-        } else {
-            this.makeWindowCentered();
-        }
+        if (mageDialogState != null) mageDialogState.setStateToDialog(this);
+        else this.makeWindowCentered();
 
         // final load
         loadData();
@@ -366,7 +364,7 @@ public class PickCheckBoxDialog extends MageDialog {
         }
 
         public Object getObjectValue() {
-            return (CheckBoxList.CheckBoxListItem) this.objectValue;
+            return this.objectValue;
         }
 
         @Override

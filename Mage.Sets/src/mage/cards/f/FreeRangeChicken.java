@@ -98,7 +98,7 @@ class FreeRangeChickenWatcher extends Watcher {
     private final Map<UUID, Integer> totalRolls = new HashMap<>();
 
     public FreeRangeChickenWatcher() {
-        super(FreeRangeChickenWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public FreeRangeChickenWatcher(final FreeRangeChickenWatcher watcher) {

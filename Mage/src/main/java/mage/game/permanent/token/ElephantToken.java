@@ -15,7 +15,7 @@ import mage.constants.SubType;
  */
 public final class ElephantToken extends TokenImpl {
 
-    final static private List<String> tokenImageSets = new ArrayList<>();
+    static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
         tokenImageSets.addAll(Arrays.asList("C14", "CNS", "DDD", "MM2", "WWK", "OGW", "C15", "DD3GVL", "MM3", "CMA"));

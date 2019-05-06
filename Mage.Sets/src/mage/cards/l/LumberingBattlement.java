@@ -110,7 +110,7 @@ class LumberingBattlementEffect extends OneShotEffect {
         if (!player.choose(Outcome.Neutral, target, source.getSourceId(), game)) {
             return false;
         }
-        Set<Card> cards = new HashSet();
+        Set<Card> cards = new HashSet<>();
         for (UUID targetId : target.getTargets()) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {

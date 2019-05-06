@@ -91,7 +91,7 @@ class PowerSurgeWatcher extends Watcher {
     private int untappedLandCount;
 
     public PowerSurgeWatcher() {
-        super(PowerSurgeWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public PowerSurgeWatcher(final PowerSurgeWatcher watcher) {

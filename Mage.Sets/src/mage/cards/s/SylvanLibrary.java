@@ -119,7 +119,7 @@ class SylvanLibraryCardsDrawnThisTurnWatcher extends Watcher {
     private final Map<UUID, Set<UUID>> cardsDrawnThisTurn = new HashMap<>();
 
     public SylvanLibraryCardsDrawnThisTurnWatcher() {
-        super(SylvanLibraryCardsDrawnThisTurnWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public SylvanLibraryCardsDrawnThisTurnWatcher(final SylvanLibraryCardsDrawnThisTurnWatcher watcher) {

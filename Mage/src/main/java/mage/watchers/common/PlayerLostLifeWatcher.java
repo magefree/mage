@@ -23,7 +23,7 @@ public class PlayerLostLifeWatcher extends Watcher {
     private final Map<UUID, Integer> amountOfLifeLostLastTurn = new HashMap<>();
 
     public PlayerLostLifeWatcher() {
-        super(PlayerLostLifeWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public PlayerLostLifeWatcher(final PlayerLostLifeWatcher watcher) {
@@ -75,8 +75,8 @@ public class PlayerLostLifeWatcher extends Watcher {
         amountOfLifeLostThisTurn.clear();
     }
 
-    @Override
-    public PlayerLostLifeWatcher copy() {
-        return new PlayerLostLifeWatcher(this);
-    }
+//    @Override
+//    public PlayerLostLifeWatcher copy() {
+//        return new PlayerLostLifeWatcher(this);
+//    }
 }

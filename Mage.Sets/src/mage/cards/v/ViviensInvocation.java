@@ -67,8 +67,7 @@ class ViviensInvocationEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Cards cards = new CardsImpl();
-        cards.addAll(controller.getLibrary().getTopCards(game, 7));
+        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 7));
         if (!cards.isEmpty()) {
             TargetCard target = new TargetCard(
                     Zone.LIBRARY,

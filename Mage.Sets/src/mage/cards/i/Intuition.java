@@ -70,7 +70,7 @@ class IntuitionEffect extends SearchEffect {
         if (controller == null || opponent == null)
             return false;
 
-        if (controller.getLibrary().size() >= 3 && controller.searchLibrary(target, game)) {
+        if (controller.getLibrary().size() >= 3 && controller.searchLibrary(target, source, game)) {
 
             if (target.getTargets().size() == 3) {
                 Cards cards = new CardsImpl();

@@ -1,7 +1,5 @@
-
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -17,8 +15,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class Inhumaniac extends CardImpl {
@@ -71,7 +70,10 @@ class InhumaniacEffect extends OneShotEffect {
             } else if (amount >= 5) {
                 permanent.addCounters(CounterType.P1P1.createInstance(2), source, game);
             } else if (amount == 1) {
-                permanent.getCounters(game).removeAllCounters(CounterType.P1P1);
+                int numToRemove = permanent.getCounters(game).getCount(CounterType.P1P1);
+                if (numToRemove > 0) {
+                    permanent.removeCounters(CounterType.P1P1.getName(), numToRemove, game);
+                }
             }
             return true;
         }

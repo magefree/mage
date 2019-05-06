@@ -24,7 +24,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class AbunaAcolyte extends CardImpl {
 
-    final static FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creature");
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
@@ -45,7 +45,7 @@ public final class AbunaAcolyte extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public AbunaAcolyte(final AbunaAcolyte card) {
+    private AbunaAcolyte(final AbunaAcolyte card) {
         super(card);
     }
 

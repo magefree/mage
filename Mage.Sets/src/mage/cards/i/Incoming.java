@@ -74,7 +74,7 @@ class IncomingEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     TargetCardInLibrary target = new TargetCardInLibrary(0, Integer.MAX_VALUE, filter);
-                    if (player.searchLibrary(target, game)) {
+                    if (player.searchLibrary(target, source, game)) {
                         player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
                         player.shuffleLibrary(source, game);
                     }

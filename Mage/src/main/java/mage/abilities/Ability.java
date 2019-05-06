@@ -8,6 +8,7 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
+import mage.abilities.hint.Hint;
 import mage.constants.AbilityType;
 import mage.constants.AbilityWord;
 import mage.constants.EffectType;
@@ -525,4 +526,8 @@ public interface Ability extends Controllable, Serializable {
     CostAdjuster getCostAdjuster();
 
     void adjustCosts(Game game);
+
+    List<Hint> getHints();
+
+    Ability addHint(Hint hint);
 }

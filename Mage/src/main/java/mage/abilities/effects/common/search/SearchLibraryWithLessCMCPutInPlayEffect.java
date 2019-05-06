@@ -43,7 +43,7 @@ public class SearchLibraryWithLessCMCPutInPlayEffect extends OneShotEffect {
             FilterCard advancedFilter = filter.copy(); // never change static objects so copy the object here before
             advancedFilter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
             TargetCardInLibrary target = new TargetCardInLibrary(advancedFilter);
-            if (controller.searchLibrary(target, game)) {
+            if (controller.searchLibrary(target, source, game)) {
                 if (!target.getTargets().isEmpty()) {
                     Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
                     if (card != null) {

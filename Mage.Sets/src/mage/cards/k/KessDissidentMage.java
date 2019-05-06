@@ -159,10 +159,10 @@ class KessDissidentMageWatcher extends Watcher {
     private final Map<MageObjectReference, UUID> castSpells = new HashMap<>();
 
     KessDissidentMageWatcher() {
-        super(KessDissidentMageWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
-    KessDissidentMageWatcher(final KessDissidentMageWatcher watcher) {
+    private KessDissidentMageWatcher(final KessDissidentMageWatcher watcher) {
         super(watcher);
         this.allowingObjects.addAll(watcher.allowingObjects);
         this.castSpells.putAll(watcher.castSpells);
@@ -175,8 +175,8 @@ class KessDissidentMageWatcher extends Watcher {
             Spell spell = (Spell) game.getObject(event.getTargetId());
             if (event.getAdditionalReference() != null
                     && event.getAdditionalReference().getSourceId() != null
-                    && spell.isInstant()
-                    || spell.isSorcery()) {
+                    && (spell.isInstant()
+                    || spell.isSorcery())) {
                 allowingObjects.add(event.getAdditionalReference());
                 castSpells.put(new MageObjectReference(spell.getSourceId(), game),
                         event.getAdditionalReference().getSourceId());

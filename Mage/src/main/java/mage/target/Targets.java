@@ -4,10 +4,7 @@ import mage.abilities.Ability;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.target.targetpointer.FirstTargetPointer;
-import mage.target.targetpointer.SecondTargetPointer;
-import mage.target.targetpointer.TargetPointer;
-import mage.target.targetpointer.ThirdTargetPointer;
+import mage.target.targetpointer.*;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
@@ -64,28 +61,39 @@ public class Targets extends ArrayList<Target> {
         return true;
     }
 
-    public boolean chooseTargets(Outcome outcome, UUID playerId, Ability source, boolean noMana, Game game) {
+    public boolean chooseTargets(Outcome outcome, UUID playerId, Ability source, boolean noMana, Game game, boolean canCancel) {
         if (this.size() > 0) {
             if (!canChoose(source.getSourceId(), playerId, game)) {
                 return false;
             }
-            int state = game.bookmarkState();
+            //int state = game.bookmarkState();
             while (!isChosen()) {
                 Target target = this.getUnchosen().get(0);
                 UUID targetController = playerId;
-                if (target.getTargetController() != null) { // some targets can have controller different than ability controller
+
+                // some targets can have controller different than ability controller
+                if (target.getTargetController() != null) {
                     targetController = target.getTargetController();
                 }
-                if (noMana) { // if cast without mana (e.g. by suspend you may not be able to cancel the casting if you are able to cast it
+
+                // if cast without mana (e.g. by suspend you may not be able to cancel the casting if you are able to cast it
+                if (noMana) {
                     target.setRequired(true);
                 }
+
+                // can be cancel by user
+                if (canCancel) {
+                    target.setRequired(false);
+                }
+
+                // make response checks
                 if (!target.chooseTarget(outcome, targetController, source, game)) {
                     return false;
                 }
                 // Check if there are some rules for targets are violated, if so reset the targets and start again
                 if (this.getUnchosen().isEmpty()
                         && game.replaceEvent(new GameEvent(GameEvent.EventType.TARGETS_VALID, source.getSourceId(), source.getSourceId(), source.getControllerId()), source)) {
-                    game.restoreState(state, "Targets");
+                    //game.restoreState(state, "Targets");
                     clearChosen();
                 }
             }
@@ -159,9 +167,13 @@ public class Targets extends ArrayList<Target> {
             }
         }
 
+        if (targetPointer instanceof FixedTarget || targetPointer instanceof FixedTargets) {
+            // fixed target = direct ID, you can't find target type and description
+            proccessed = true;
+        }
+
         if (!proccessed) {
             logger.error("Unknown target pointer " + (targetPointer != null ? targetPointer : "null"), new Throwable());
-            // TODO: add other target types?
         }
 
         return null;

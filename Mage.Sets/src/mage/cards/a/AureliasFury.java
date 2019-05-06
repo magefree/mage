@@ -172,7 +172,7 @@ class AureliasFuryDamagedByWatcher extends Watcher {
     private final Set<UUID> damagedPlayers = new HashSet<>();
 
     AureliasFuryDamagedByWatcher() {
-        super(AureliasFuryDamagedByWatcher.class.getSimpleName(), WatcherScope.CARD);
+        super(WatcherScope.CARD);
     }
 
     private AureliasFuryDamagedByWatcher(final AureliasFuryDamagedByWatcher watcher) {

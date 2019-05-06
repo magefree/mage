@@ -38,7 +38,9 @@ public class DestroySourceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        if (permanent != null) {
+        if (permanent != null
+                && permanent.isPhasedIn()
+                && !permanent.isPhasedOutIndirectly()) {
             permanent.destroy(source.getSourceId(), game, noRegen);
             return true;
         }

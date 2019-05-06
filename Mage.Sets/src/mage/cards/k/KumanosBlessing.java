@@ -109,7 +109,7 @@ class DamagedByEnchantedWatcher extends Watcher {
     private final Set<MageObjectReference> damagedCreatures = new HashSet<>();
 
     public DamagedByEnchantedWatcher() {
-        super(DamagedByEnchantedWatcher.class, WatcherScope.CARD);
+        super(WatcherScope.CARD);
     }
 
     public DamagedByEnchantedWatcher(final DamagedByEnchantedWatcher watcher) {

@@ -51,7 +51,7 @@ class EndlessAtlasCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Map<String, Integer> landMap = new HashMap();
+        Map<String, Integer> landMap = new HashMap<>();
         for (Permanent land : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
                 source.getControllerId(), game

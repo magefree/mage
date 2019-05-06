@@ -25,7 +25,7 @@ import mage.game.Game;
  */
 public final class ImmobilizerEldrazi extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Each creature with toughness greater than its power");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each creature with toughness greater than its power");
 
     static {
         filter.add(new ImmobilizerEldraziPredicate());

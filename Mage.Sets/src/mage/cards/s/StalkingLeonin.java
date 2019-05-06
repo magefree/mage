@@ -17,7 +17,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.FilterCreatureAttackingYou;
+import mage.filter.common.FilterCreatureAttackingYou;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;

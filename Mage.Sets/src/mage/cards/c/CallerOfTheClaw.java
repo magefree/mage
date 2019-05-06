@@ -60,7 +60,7 @@ class CallerOfTheClawWatcher extends Watcher {
     private int creaturesCount = 0;
 
     public CallerOfTheClawWatcher() {
-        super(CallerOfTheClawWatcher.class.getSimpleName(), WatcherScope.PLAYER);
+        super(WatcherScope.PLAYER);
         condition = true;
     }
 

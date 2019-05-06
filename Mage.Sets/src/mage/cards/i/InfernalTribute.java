@@ -22,7 +22,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class InfernalTribute extends CardImpl {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("a nontoken permanent");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a nontoken permanent");
 
     static {
         filter.add(Predicates.not(TokenPredicate.instance));

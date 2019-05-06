@@ -84,7 +84,7 @@ class GlyphOfDelusionSecondTarget extends TargetPermanent {
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         if (firstTarget != null) {
-            BlockedAttackerWatcher watcher = (BlockedAttackerWatcher) game.getState().getWatchers().get(BlockedAttackerWatcher.class.getSimpleName());
+            BlockedAttackerWatcher watcher = game.getState().getWatcher(BlockedAttackerWatcher.class);
             if (watcher != null) {
                 MageObject targetSource = game.getObject(sourceId);
                 if (targetSource != null) {

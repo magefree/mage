@@ -74,7 +74,7 @@ class EndlessHorizonsEffect extends SearchEffect {
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
         if (you != null) {
-            if (you.searchLibrary(target, game)) {
+            if (you.searchLibrary(target, source, game)) {
                 UUID exileZone = CardUtil.getCardExileZoneId(game, source);
                 if (!target.getTargets().isEmpty()) {
                     for (UUID cardId : target.getTargets()) {

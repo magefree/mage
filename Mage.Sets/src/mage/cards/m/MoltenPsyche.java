@@ -111,7 +111,7 @@ class MoltenPsycheWatcher extends Watcher {
     private final Map<UUID, Integer> draws = new HashMap<>();
 
     public MoltenPsycheWatcher() {
-        super(MoltenPsycheWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public MoltenPsycheWatcher(final MoltenPsycheWatcher watcher) {

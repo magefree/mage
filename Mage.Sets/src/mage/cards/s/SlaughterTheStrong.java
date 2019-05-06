@@ -1,9 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -22,8 +19,11 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class SlaughterTheStrong extends CardImpl {
@@ -90,7 +90,19 @@ class SlaughterTheStrongEffect extends OneShotEffect {
                         } else {
                             currentFilter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 5 - powerSum));
                         }
-                        Target target = new TargetPermanent(0, 1, currentFilter, true);
+
+                        // human can de-select targets, but AI must choose only one time
+                        Target target;
+                        if (player.isHuman()) {
+                            target = new TargetPermanent(0, 1, currentFilter, true);
+                        } else {
+                            FilterControlledCreaturePermanent strictFilter = currentFilter.copy();
+                            selectedCreatures.stream().forEach(id -> {
+                                strictFilter.add(Predicates.not(new PermanentIdPredicate(id)));
+                            });
+                            target = new TargetPermanent(0, 1, strictFilter, true);
+                        }
+
                         player.chooseTarget(Outcome.BoostCreature, target, source, game);
                         if (target.getFirstTarget() != null) {
                             if (selectedCreatures.contains(target.getFirstTarget())) {

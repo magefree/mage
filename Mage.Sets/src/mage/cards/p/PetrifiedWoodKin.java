@@ -2,6 +2,7 @@
 package mage.cards.p;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
@@ -87,11 +88,11 @@ class PetrifiedWoodKinEffect extends OneShotEffect {
         if (player == null || watcher == null || permanent == null) {
             return false;
         }
-        ArrayList<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects"); // the basic event is the EntersBattlefieldEvent, so use already applied replacement effects from that event
+        List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects"); // the basic event is the EntersBattlefieldEvent, so use already applied replacement effects from that event
         int amount = 0;
         for (UUID opponentId : game.getOpponents(player.getId())) {
             MageObjectReference mor = new MageObjectReference(opponentId, game);
-            amount += watcher.damagedObjects.getOrDefault(mor, 0);
+            amount += watcher.getDamagedObjects().getOrDefault(mor, 0);
         }
         permanent.addCounters(CounterType.P1P1.createInstance(amount), source, game, appliedEffects);
         return true;

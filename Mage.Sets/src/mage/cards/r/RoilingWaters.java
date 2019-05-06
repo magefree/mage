@@ -21,7 +21,7 @@ import mage.target.targetpointer.SecondTargetPointer;
  */
 public final class RoilingWaters extends CardImpl {
 
-    private final static FilterCreaturePermanent FILTER = new FilterCreaturePermanent("creatures your opponents control");
+    private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("creatures your opponents control");
 
     static {
         FILTER.add(new ControllerPredicate(TargetController.OPPONENT));

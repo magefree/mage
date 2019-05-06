@@ -13,6 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
@@ -22,11 +23,6 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public final class ZulaportCutthroat extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
-
-    static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
-    }
 
     public ZulaportCutthroat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
@@ -35,7 +31,7 @@ public final class ZulaportCutthroat extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Zulaport Cutthroat or another creature you control dies, each opponent loses 1 life and you gain 1 life.
-        Ability ability = new DiesThisOrAnotherCreatureTriggeredAbility(new LoseLifeOpponentsEffect(1), false, filter);
+        Ability ability = new DiesThisOrAnotherCreatureTriggeredAbility(new LoseLifeOpponentsEffect(1), false, StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED);
         Effect effect = new GainLifeEffect(1);
         effect.setText("and you gain 1 life");
         ability.addEffect(effect);

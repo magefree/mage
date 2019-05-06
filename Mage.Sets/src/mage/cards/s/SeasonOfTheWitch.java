@@ -109,10 +109,10 @@ class SeasonOfTheWitchEffect extends OneShotEffect {
 
 class CouldAttackThisTurnWatcher extends Watcher {
 
-    public final Set<MageObjectReference> couldAttackThisTurnCreatures = new HashSet<>();
+    private final Set<MageObjectReference> couldAttackThisTurnCreatures = new HashSet<>();
 
     public CouldAttackThisTurnWatcher() {
-        super(CouldAttackThisTurnWatcher.class, WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     public CouldAttackThisTurnWatcher(final CouldAttackThisTurnWatcher watcher) {

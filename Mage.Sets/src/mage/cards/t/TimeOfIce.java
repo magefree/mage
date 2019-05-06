@@ -141,7 +141,7 @@ class TimeOfIceEffect extends ContinuousRuleModifyingEffectImpl {
 class TimeOfIceWatcher extends Watcher {
 
     TimeOfIceWatcher() {
-        super("ControlLost", WatcherScope.CARD);
+        super(WatcherScope.CARD);
     }
 
     TimeOfIceWatcher(TimeOfIceWatcher watcher) {

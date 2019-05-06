@@ -26,6 +26,7 @@ public class SacrificeTargetCost extends CostImpl {
     public SacrificeTargetCost(TargetControlledPermanent target) {
         this.addTarget(target);
         target.setNotTarget(true); // sacrifice is never targeted
+        target.setRequired(false); // can be canceled
         this.text = "sacrifice "
                 + ((target.getNumberOfTargets() != 1
                 || (target.getTargetName().startsWith("an")
@@ -55,6 +56,7 @@ public class SacrificeTargetCost extends CostImpl {
         if (ability.getAbilityType() == AbilityType.ACTIVATED || ability.getAbilityType() == AbilityType.SPECIAL_ACTION) {
             activator = ((ActivatedAbilityImpl) ability).getActivatorId();
         }
+        // can be cancel by user
         if (targets.choose(Outcome.Sacrifice, activator, sourceId, game)) {
             for (UUID targetId : targets.get(0).getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);

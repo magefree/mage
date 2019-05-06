@@ -1,4 +1,3 @@
-
 package mage.choices;
 
 import mage.MageObject;
@@ -8,14 +7,13 @@ import mage.ObjectColor;
 import java.util.ArrayList;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class ChoiceColor extends ChoiceImpl {
 
-    private static final ArrayList<String> colorChoices =  getBaseColors();
+    private static final ArrayList<String> colorChoices = getBaseColors();
 
-    public static ArrayList<String> getBaseColors(){
+    public static ArrayList<String> getBaseColors() {
         ArrayList<String> arr = new ArrayList<>();
         arr.add("Green");
         arr.add("Blue");
@@ -33,15 +31,15 @@ public class ChoiceColor extends ChoiceImpl {
         this(required, "Choose color");
     }
 
-    public ChoiceColor(boolean required, String chooseMessage){
+    public ChoiceColor(boolean required, String chooseMessage) {
         this(required, chooseMessage, "");
     }
 
-    public ChoiceColor(boolean required, String chooseMessage, MageObject source){
+    public ChoiceColor(boolean required, String chooseMessage, MageObject source) {
         this(required, chooseMessage, source.getIdName());
     }
 
-    public ChoiceColor(boolean required, String chooseMessage, String chooseSubMessage){
+    public ChoiceColor(boolean required, String chooseMessage, String chooseSubMessage) {
         super(required);
 
         this.choices.addAll(colorChoices);
@@ -57,6 +55,10 @@ public class ChoiceColor extends ChoiceImpl {
     @Override
     public ChoiceColor copy() {
         return new ChoiceColor(this);
+    }
+
+    public void removeColorFromChoices(String colorName) {
+        this.choices.remove(colorName);
     }
 
     public ObjectColor getColor() {

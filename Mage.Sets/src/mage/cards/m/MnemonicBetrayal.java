@@ -69,7 +69,7 @@ class MnemonicBetrayalExileEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl();
-        Map<UUID, Integer> cardMap = new HashMap();
+        Map<UUID, Integer> cardMap = new HashMap<>();
         game.getOpponents(source.getControllerId()).stream().map((playerId) -> game.getPlayer(playerId)).filter((player) -> (player != null)).forEachOrdered((player) -> {
             cards.addAll(player.getGraveyard());
         });
@@ -156,6 +156,7 @@ class MnemonicBetrayalAnyColorEffect extends AsThoughEffectImpl implements AsTho
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        objectId = game.getCard(objectId).getMainCard().getId(); // for split cards
         if (objectId.equals(card.getId())
                 && card.getZoneChangeCounter(game) <= zoneCounter + 1
                 && affectedControllerId.equals(source.getControllerId())) {
@@ -177,7 +178,7 @@ class MnemonicBetrayalAnyColorEffect extends AsThoughEffectImpl implements AsTho
 class MnemonicBetrayalDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     private final Cards cards;
-    private final Map<UUID, Integer> cardMap = new HashMap();
+    private final Map<UUID, Integer> cardMap = new HashMap<>();
 
     public MnemonicBetrayalDelayedTriggeredAbility(Cards cards, Map<UUID, Integer> cardMap) {
         super(new MnemonicBetrayalReturnEffect(cards, cardMap));
@@ -224,7 +225,7 @@ class MnemonicBetrayalDelayedTriggeredAbility extends DelayedTriggeredAbility {
 class MnemonicBetrayalReturnEffect extends OneShotEffect {
 
     private final Cards cards;
-    private final Map<UUID, Integer> cardMap = new HashMap();
+    private final Map<UUID, Integer> cardMap = new HashMap<>();
 
     public MnemonicBetrayalReturnEffect(Cards cards, Map<UUID, Integer> cardMap) {
         super(Outcome.Benefit);

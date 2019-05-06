@@ -191,8 +191,7 @@ class KarnLiberatedDelayedEffect extends OneShotEffect {
             if (exile != null) {
                 // Creatures put onto the battlefield due to Karn's ability will have been under their controller's control continuously
                 // since the beginning of the first turn. They can attack and their activated abilities with {T} in the cost can be activated.
-                Cards cards = new CardsImpl(); // needed because putOntoTheBattlefield removes from exile
-                cards.addAll(exile);
+                Cards cards = new CardsImpl(exile); // needed because putOntoTheBattlefield removes from exile
                 if (!cards.isEmpty()) {
                     controller.moveCards(cards, Zone.BATTLEFIELD, source, game);
                     for (Card card : cards.getCards(game)) {

@@ -25,7 +25,7 @@ import mage.players.Player;
  */
 public final class MoltenSentry extends CardImpl {
 
-    private final static String rule = "As {this} enters the battlefield, flip a coin. If the coin comes up heads, {this} enters the battlefield as a "
+    private static final String rule = "As {this} enters the battlefield, flip a coin. If the coin comes up heads, {this} enters the battlefield as a "
             + "5/2 creature with haste. If it comes up tails, {this} enters the battlefield as a 2/5 creature with defender.";
 
     public MoltenSentry(UUID ownerId, CardSetInfo setInfo) {

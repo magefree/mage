@@ -30,7 +30,7 @@ import java.util.UUID;
 public abstract class Designation implements MageObject {
 
     private static EnumSet emptySet = EnumSet.noneOf(CardType.class);
-    private static List emptyList = new ArrayList();
+    private static List emptyList = new ArrayList<>();
     private static ObjectColor emptyColor = new ObjectColor();
     private static ManaCostsImpl emptyCost = new ManaCostsImpl();
 

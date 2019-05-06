@@ -81,7 +81,7 @@ class HotHeadedGiantWatcher extends Watcher {
     private UUID cardId;
 
     public HotHeadedGiantWatcher(UUID cardId) {
-        super(HotHeadedGiantWatcher.class.getSimpleName(), WatcherScope.PLAYER);
+        super(WatcherScope.PLAYER);
         this.cardId = cardId;
     }
 
