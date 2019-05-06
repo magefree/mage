@@ -37,8 +37,16 @@ public class ExportJsonGameplayDataTest {
         Collection<ExpansionSet> sets = Sets.getInstance().values();
         for (ExpansionSet set : sets) {
             for (ExpansionSet.SetCardInfo setInfo : set.getSetCardInfo()) {
-                cards.add(CardImpl.createCard(setInfo.getCardClass(), new CardSetInfo(setInfo.getName(), set.getCode(),
-                        setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo())));
+                // catch cards creation errors and report (e.g. on wrong card code)
+                try {
+                    Card card = CardImpl.createCard(setInfo.getCardClass(), new CardSetInfo(setInfo.getName(), set.getCode(),
+                            setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()));
+                    if (card != null) {
+                        cards.add(card);
+                    }
+                } catch (Throwable e) {
+                    logger.error("Can't create card " + setInfo.getName() + ": " + e.getMessage(), e);
+                }
             }
 
             JsonObject res = new JsonObject();

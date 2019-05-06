@@ -15,6 +15,7 @@ import mage.game.draft.RateCard;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
 import mage.watchers.Watcher;
+import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -40,6 +41,8 @@ import java.util.stream.Collectors;
  * @author JayDi85
  */
 public class VerifyCardDataTest {
+
+    private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
     // right now this is very noisy, and not useful enough to make any assertions on
     private static final boolean CHECK_SOURCE_TOKENS = false;
@@ -969,6 +972,30 @@ public class VerifyCardDataTest {
                     Assert.fail("Card with same name have different ratings: " + card.getName());
                 }
             }
+        }
+    }
+
+    @Test
+    public void testCardsCreatingAndConstructorErrors() {
+        int errorsCount = 0;
+        Collection<ExpansionSet> sets = Sets.getInstance().values();
+        for (ExpansionSet set : sets) {
+            for (ExpansionSet.SetCardInfo setInfo : set.getSetCardInfo()) {
+                // catch cards creation errors and report (e.g. on wrong card code or construction checks fail)
+                try {
+                    Card card = CardImpl.createCard(setInfo.getCardClass(), new CardSetInfo(setInfo.getName(), set.getCode(),
+                            setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()));
+                    if (card == null) {
+                        errorsCount++;
+                    }
+                } catch (Throwable e) {
+                    logger.error("Can't create card " + setInfo.getName() + ": " + e.getMessage(), e);
+                }
+            }
+        }
+
+        if (errorsCount > 0) {
+            Assert.fail("Founded " + errorsCount + " broken cards, look at logs for stack error");
         }
     }
 }
