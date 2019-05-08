@@ -55,6 +55,7 @@ public final class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Bogardan Firefiend", 91, Rarity.COMMON, mage.cards.b.BogardanFirefiend.class));
         cards.add(new SetCardInfo("Boiling Blood", 92, Rarity.COMMON, mage.cards.b.BoilingBlood.class));
         cards.add(new SetCardInfo("Bone Dancer", 62, Rarity.RARE, mage.cards.b.BoneDancer.class));
+        cards.add(new SetCardInfo("Bosium Strip", 147, Rarity.RARE, mage.cards.b.BosiumStrip.class));
         cards.add(new SetCardInfo("Briar Shield", 121, Rarity.COMMON, mage.cards.b.BriarShield.class));
         cards.add(new SetCardInfo("Bubble Matrix", 146, Rarity.RARE, mage.cards.b.BubbleMatrix.class));
         cards.add(new SetCardInfo("Buried Alive", 63, Rarity.UNCOMMON, mage.cards.b.BuriedAlive.class));
