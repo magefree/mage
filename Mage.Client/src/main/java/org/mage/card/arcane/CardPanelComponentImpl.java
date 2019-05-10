@@ -1,5 +1,6 @@
 package org.mage.card.arcane;
 
+import mage.MageInt;
 import mage.cards.action.ActionCallback;
 import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
@@ -49,11 +50,16 @@ public class CardPanelComponentImpl extends CardPanel {
     private static final int CARD_MIN_SIZE_FOR_ICONS = 60;
     private static final int CARD_MAX_SIZE_FOR_ICONS = 200;
 
+    // text min size for image render mode
+    private static final int CARD_TITLE_FONT_MIN_SIZE = 13;
+    private static final int CARD_PT_FONT_MIN_SIZE = 17;
+
     public final ScaledImagePanel imagePanel;
     private ImagePanel overlayPanel;
 
     private JPanel iconPanel;
     private JButton typeButton;
+    private JPanel ptPanel;
 
     private JPanel counterPanel;
     private JLabel loyaltyCounterLabel;
@@ -67,7 +73,9 @@ public class CardPanelComponentImpl extends CardPanel {
     private int lastCardWidth;
 
     private final GlowText titleText;
-    private final GlowText ptText;
+    private final GlowText ptText1;
+    private final GlowText ptText2;
+    private final GlowText ptText3;
     private final JLabel fullImageText;
     private String fullImagePath = null;
 
@@ -280,7 +288,7 @@ public class CardPanelComponentImpl extends CardPanel {
 
         // Title Text
         titleText = new GlowText();
-        setText(getGameCard());
+        setTitle(getGameCard());
 //        int fontSize = (int) cardHeight / 11;
 //        titleText.setFont(getFont().deriveFont(Font.BOLD, fontSize));
         titleText.setForeground(Color.white);
@@ -295,16 +303,19 @@ public class CardPanelComponentImpl extends CardPanel {
         add(fullImageText);
 
         // PT Text
-        ptText = new GlowText();
-        if (getGameCard().isCreature()) {
-            ptText.setText(getGameCard().getPower() + '/' + getGameCard().getToughness());
-        } else if (getGameCard().isPlanesWalker()) {
-            ptText.setText(getGameCard().getLoyalty());
-        }
-//        ptText.setFont(getFont().deriveFont(Font.BOLD, fontSize));
-        ptText.setForeground(Color.white);
-        ptText.setGlow(Color.black, TEXT_GLOW_SIZE, TEXT_GLOW_INTENSITY);
-        add(ptText);
+        ptPanel = new JPanel();
+        ptPanel.setOpaque(false);
+        ptPanel.setLayout(new BoxLayout(ptPanel, BoxLayout.X_AXIS));
+        ptPanel.add(new Box.Filler(new Dimension(0, 0), new Dimension(0, 0), new Dimension(Integer.MAX_VALUE, 0)));
+        ptText1 = new GlowText();
+        ptText2 = new GlowText();
+        ptText3 = new GlowText();
+        updatePTTexts(getGameCard());
+        ptPanel.add(ptText1);
+        ptPanel.add(ptText2);
+        ptPanel.add(ptText3);
+        //
+        add(ptPanel);
 
         // Sickness overlay
         BufferedImage sickness = ImageManagerImpl.instance.getSicknessImage();
@@ -349,7 +360,7 @@ public class CardPanelComponentImpl extends CardPanel {
         this.setCounterPanel(null);
     }
 
-    private void setText(CardView card) {
+    private void setTitle(CardView card) {
         titleText.setText(!displayTitleAnyway && hasImage ? "" : card.getName());
     }
 
@@ -585,12 +596,14 @@ public class CardPanelComponentImpl extends CardPanel {
 
         boolean showText = !isAnimationPanel() && canShowCardIcons(cardWidth, hasImage);
         titleText.setVisible(showText);
-        ptText.setVisible(showText);
+        ptText1.setVisible(showText && !ptText1.getText().isEmpty());
+        ptText2.setVisible(showText && !ptText2.getText().isEmpty());
+        ptText3.setVisible(showText && !ptText3.getText().isEmpty());
         fullImageText.setVisible(fullImagePath != null);
 
         if (showText) {
             int fontSize = cardHeight / 13; // startup font size (it same size on all zoom levels)
-            titleText.setFont(getFont().deriveFont(Font.BOLD, fontSize));
+            titleText.setFont(getFont().deriveFont(Font.BOLD, Math.max(CARD_TITLE_FONT_MIN_SIZE, fontSize)));
 
             // margins from card black border to text, not need? text show up good without margins
             int titleMarginLeft = 0; //Math.round(28f / 672f * cardWidth);
@@ -607,22 +620,56 @@ public class CardPanelComponentImpl extends CardPanel {
             fullImageText.setFont(getFont().deriveFont(Font.PLAIN, 10));
             fullImageText.setBounds(titleText.getX(), titleText.getY(), titleText.getBounds().width, titleText.getBounds().height);
 
-            // life points location (font as title)
-            ptText.setFont(getFont().deriveFont(Font.BOLD, fontSize));
-            Dimension ptSize = ptText.getPreferredSize();
-            ptText.setSize(ptSize.width, ptSize.height);
+            // PT (font as title)
+            prepareGlowFont(ptText1, Math.max(CARD_PT_FONT_MIN_SIZE, fontSize), getGameCard().getOriginalCard().getPower(), false);
+            prepareGlowFont(ptText2, Math.max(CARD_PT_FONT_MIN_SIZE, fontSize), null, false);
+            prepareGlowFont(ptText3, Math.max(CARD_PT_FONT_MIN_SIZE, fontSize), getGameCard().getOriginalCard().getToughness(), CardRendererUtils.isCardWithDamage(getGameCard()));
 
             // right bottom corner with margin (sizes from any sample card)
             int ptMarginRight = Math.round(64f / 672f * cardWidth);
             int ptMarginBottom = Math.round(62f / 936f * cardHeight);
 
-            int ptX = cardXOffset + cardWidth - ptMarginRight - ptSize.width;
-            int ptY = cardYOffset + cardHeight - ptMarginBottom - ptSize.height;
-            ptText.setLocation(ptX, ptY);
+            int ptWidth = cardWidth - ptMarginRight * 2;
+            int ptHeight = ptText2.getHeight();
+            int ptX = cardXOffset + ptMarginRight;
+            int ptY = cardYOffset + cardHeight - ptMarginBottom - ptHeight;
+            ptPanel.setBounds(ptX, ptY, ptWidth, ptHeight);
 
             // old version was with TEXT_GLOW_SIZE
             //ptText.setLocation(cardXOffset + ptX - TEXT_GLOW_SIZE / 2 - offsetX, cardYOffset + ptY - TEXT_GLOW_SIZE / 2);
         }
+    }
+
+    private void prepareGlowFont(GlowText label, int fontSize, MageInt value, boolean drawAsDamaged) {
+        label.setFont(getFont().deriveFont(Font.BOLD, fontSize));
+        label.setForeground(CardRendererUtils.getCardTextColor(value, drawAsDamaged, titleText.getForeground(), true));
+        Dimension ptSize = label.getPreferredSize();
+        label.setSize(ptSize.width, ptSize.height);
+    }
+
+    private void updatePTTexts(CardView card) {
+        if (card.isCreature()) {
+            ptText1.setText(getGameCard().getPower());
+            ptText2.setText("/");
+            ptText3.setText(CardRendererUtils.getCardLifeWithDamage(getGameCard()));
+        } else if (card.isPlanesWalker()) {
+            ptText1.setText("");
+            ptText2.setText("");
+            ptText3.setText(getGameCard().getLoyalty());
+        } else {
+            ptText1.setText("");
+            ptText2.setText("");
+            ptText3.setText("");
+        }
+
+        ptText1.setForeground(Color.white);
+        ptText1.setGlow(Color.black, TEXT_GLOW_SIZE, TEXT_GLOW_INTENSITY);
+
+        ptText2.setForeground(Color.white);
+        ptText2.setGlow(Color.black, TEXT_GLOW_SIZE, TEXT_GLOW_INTENSITY);
+
+        ptText3.setForeground(Color.white);
+        ptText3.setGlow(Color.black, TEXT_GLOW_SIZE, TEXT_GLOW_INTENSITY);
     }
 
     @Override
@@ -647,10 +694,14 @@ public class CardPanelComponentImpl extends CardPanel {
 
         // Update components
         if (alpha == 0) {
-            this.ptText.setVisible(false);
+            this.ptText1.setVisible(false);
+            this.ptText2.setVisible(false);
+            this.ptText3.setVisible(false);
             this.titleText.setVisible(false);
         } else if (alpha == 1.0f) {
-            this.ptText.setVisible(true);
+            this.ptText1.setVisible(true);
+            this.ptText2.setVisible(true);
+            this.ptText3.setVisible(true);
             this.titleText.setVisible(true);
         }
     }
@@ -683,7 +734,7 @@ public class CardPanelComponentImpl extends CardPanel {
                 UI.invokeLater(() -> {
                     if (stamp == updateArtImageStamp) {
                         hasImage = srcImage != null;
-                        setText(getGameCard());
+                        setTitle(getGameCard());
                         setImage(srcImage);
                     }
                 });
@@ -712,7 +763,7 @@ public class CardPanelComponentImpl extends CardPanel {
     @Override
     public void showCardTitle() {
         displayTitleAnyway = true;
-        setText(getGameCard());
+        setTitle(getGameCard());
     }
 
     @Override
@@ -720,17 +771,8 @@ public class CardPanelComponentImpl extends CardPanel {
         // Super
         super.update(card);
 
-        // Update card text
-        if (card.isCreature() && card.isPlanesWalker()) {
-            ptText.setText(card.getPower() + '/' + card.getToughness() + " (" + card.getLoyalty() + ')');
-        } else if (card.isCreature()) {
-            ptText.setText(card.getPower() + '/' + card.getToughness());
-        } else if (card.isPlanesWalker()) {
-            ptText.setText(card.getLoyalty());
-        } else {
-            ptText.setText("");
-        }
-        setText(card);
+        updatePTTexts(card);
+        setTitle(card);
 
         // Summoning Sickness overlay
         if (hasSickness() && card.isCreature() && isPermanent()) {

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.mage.card.arcane;
 
 import mage.ObjectColor;
@@ -56,13 +51,14 @@ import static org.mage.card.arcane.ManaSymbols.getSizedManaSymbol;
  */
 
 /**
- * @author stravant@gmail.com
+ * @author stravant@gmail.com, JayDi85
  * <p>
  * Base rendering class for new border cards
  */
 public class ModernCardRenderer extends CardRenderer {
 
     private static final Logger LOGGER = Logger.getLogger(ModernCardRenderer.class);
+    private static final GlowText glowTextRenderer = new GlowText();
 
     ///////////////////////////////////////////////////////////////////////////
     // Textures for modern frame cards
@@ -261,7 +257,7 @@ public class ModernCardRenderer extends CardRenderer {
         ptTextHeight = getPTTextHeightForLineHeight(boxHeight);
         ptTextOffset = (boxHeight - ptTextHeight) / 2;
         // Beleren font does work well for numbers though
-        ptTextFont = BASE_BELEREN_FONT.deriveFont(Font.PLAIN, ptTextHeight);
+        ptTextFont = BASE_BELEREN_FONT.deriveFont(Font.BOLD, ptTextHeight);
     }
 
     @Override
@@ -933,6 +929,51 @@ public class ModernCardRenderer extends CardRenderer {
         }
     }
 
+    public void paintOutlineTextByGlow(Graphics2D g, String text, Color color, int x, int y) {
+        GlowText label = new GlowText();
+        label.setGlow(Color.black, 6, 3);
+        label.setText(text);
+        label.setFont(g.getFont().deriveFont(Font.BOLD));
+        label.setForeground(color);
+        Dimension ptSize = label.getPreferredSize();
+        label.setSize(ptSize.width, ptSize.height);
+        g.drawImage(label.getGlowImage(), x, y, null);
+    }
+
+    public void paintOutlineTextByStroke(Graphics2D g, String text, Color color, int x, int y) {
+        // https://stackoverflow.com/a/35222059/1276632
+        Color outlineColor = Color.black;
+        Color fillColor = color;
+        BasicStroke outlineStroke = new BasicStroke(1.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
+
+        // remember original settings
+        Color originalColor = g.getColor();
+        Stroke originalStroke = g.getStroke();
+        RenderingHints originalHints = g.getRenderingHints();
+
+        // create a glyph vector from your text
+        GlyphVector glyphVector = g.getFont().createGlyphVector(g.getFontRenderContext(), text);
+        // get the shape object
+        Shape textShape = glyphVector.getOutline(x, y);
+
+        // activate anti aliasing for text rendering (if you want it to look nice)
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+
+        g.setColor(outlineColor);
+        g.setStroke(outlineStroke);
+        g.draw(textShape); // draw outline
+
+        g.setColor(fillColor);
+        g.fill(textShape); // fill the shape
+
+        // reset to original settings after painting
+        g.setColor(originalColor);
+        g.setStroke(originalStroke);
+        g.setRenderingHints(originalHints);
+    }
+
     // Draw the P/T and/or Loyalty boxes
     protected void drawBottomRight(Graphics2D g, Paint borderPaint, Color fill) {
         // No bottom right for abilities
@@ -966,24 +1007,44 @@ public class ModernCardRenderer extends CardRenderer {
                     partWidth - 2 * contentInset, 1);
 
             // Draw text
-            Color textColor;
+            Color defaultTextColor;
+            boolean defaultTextLight;
             if (isVehicle) {
                 boolean isAnimated = !(cardView instanceof PermanentView) || cardView.isCreature();
                 if (isAnimated) {
-                    textColor = Color.white;
+                    defaultTextColor = Color.white;
                 } else {
-                    textColor = new Color(180, 180, 180);
+                    defaultTextColor = new Color(180, 180, 180);
                 }
-
+                defaultTextLight = true;
             } else {
-                textColor = getBoxTextColor();
+                defaultTextColor = getBoxTextColor();
+                defaultTextLight = !defaultTextColor.equals(Color.black);
             }
-            g.setColor(textColor);
+            g.setColor(defaultTextColor);
             g.setFont(ptTextFont);
-            String ptText = cardView.getPower() + '/' + cardView.getToughness();
-            int ptTextWidth = g.getFontMetrics().stringWidth(ptText);
-            g.drawString(ptText,
-                    x + (partWidth - ptTextWidth) / 2, curY - ptTextOffset - 1);
+
+            // draws p/t by parts
+            String ptText1 = cardView.getPower();
+            String ptText2 = "/";
+            String ptText3 = CardRendererUtils.getCardLifeWithDamage(cardView);
+
+            int ptTextWidth1 = g.getFontMetrics().stringWidth(ptText1);
+            int ptTextWidth2 = g.getFontMetrics().stringWidth(ptText2);
+
+            // draws / by center, P and T from left/right sides of /
+            int ptCenterX = x + partWidth / 2;
+            // p
+            g.setColor(CardRendererUtils.getCardTextColor(cardView.getOriginalCard().getPower(), false, defaultTextColor, defaultTextLight));
+            g.drawString(ptText1, ptCenterX - ptTextWidth2 / 2 - ptTextWidth1, curY - ptTextOffset - 1); // left
+            // /
+            g.setColor(defaultTextColor);
+            g.drawString(ptText2, ptCenterX - ptTextWidth2 / 2, curY - ptTextOffset - 1); // center
+            // t
+            g.setColor(CardRendererUtils.getCardTextColor(cardView.getOriginalCard().getPower(), CardRendererUtils.isCardWithDamage(cardView), defaultTextColor, defaultTextLight));
+            g.drawString(ptText3, ptCenterX + ptTextWidth2 / 2, curY - ptTextOffset - 1); // right
+            //
+            g.setColor(defaultTextColor);
 
             // Advance
             curY -= boxHeight;

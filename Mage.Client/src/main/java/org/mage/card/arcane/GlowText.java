@@ -1,5 +1,10 @@
 package org.mage.card.arcane;
 
+import mage.client.util.ImageCaches;
+import mage.client.util.SoftValuesLoadingCache;
+import org.jdesktop.swingx.graphics.GraphicsUtilities;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.font.LineBreakMeasurer;
@@ -13,17 +18,6 @@ import java.text.BreakIterator;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
-
-import javax.swing.*;
-
-import org.jdesktop.swingx.graphics.GraphicsUtilities;
-
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
-
-import mage.client.util.ImageCaches;
-import mage.client.util.SoftValuesLoadingCache;
 
 public class GlowText extends JLabel {
 
@@ -123,10 +117,7 @@ public class GlowText extends JLabel {
             if (!Objects.equals(this.color, other.color)) {
                 return false;
             }
-            if (!Objects.equals(this.glowColor, other.glowColor)) {
-                return false;
-            }
-            return true;
+            return Objects.equals(this.glowColor, other.glowColor);
         }
     }
 
@@ -158,7 +149,11 @@ public class GlowText extends JLabel {
             return;
         }
 
-        g.drawImage(IMAGE_CACHE.getOrThrow(new Key(getWidth(), getHeight(), getText(), getFont(), getForeground(), glowSize, glowIntensity, glowColor, wrap)), 0, 0, null);
+        g.drawImage(getGlowImage(), 0, 0, null);
+    }
+
+    public BufferedImage getGlowImage() {
+        return IMAGE_CACHE.getOrThrow(new Key(getWidth(), getHeight(), getText(), getFont(), getForeground(), glowSize, glowIntensity, glowColor, wrap));
     }
 
     private static BufferedImage createGlowImage(Key key) {

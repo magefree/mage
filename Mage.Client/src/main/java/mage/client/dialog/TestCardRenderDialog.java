@@ -29,6 +29,8 @@ import org.apache.log4j.Logger;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -67,18 +69,25 @@ public class TestCardRenderDialog extends MageDialog {
         this.removeDialog();
     }
 
-    private PermanentView createCard(Game game, UUID controllerId, String code, String cardNumber, int damage) {
+    private PermanentView createCard(Game game, UUID controllerId, String code, String cardNumber, int power, int toughness, int damage) {
         CardInfo cardInfo = CardRepository.instance.findCard(code, cardNumber);
         ExpansionInfo setInfo = ExpansionRepository.instance.getSetByCode(code);
         CardSetInfo testSet = new CardSetInfo(cardInfo.getName(), setInfo.getCode(), cardNumber, cardInfo.getRarity(),
                 new CardGraphicInfo(cardInfo.getFrameStyle(), cardInfo.usesVariousArt()));
         Card card = CardImpl.createCard(cardInfo.getClassName(), testSet);
 
+        Set<Card> cardsList = new HashSet<>();
+        cardsList.add(card);
+        game.loadCards(cardsList, controllerId);
+
         PermanentCard perm = new PermanentCard(card, controllerId, game);
-        if (damage > 0) {
-            perm.damage(damage, null, game);
-        }
+        if (damage > 0) perm.damage(damage, controllerId, game);
+        if (power > 0) perm.getPower().setValue(power);
+        if (toughness > 0) perm.getToughness().setValue(toughness);
         perm.removeSummoningSickness();
+        if (perm.isTransformable()) {
+            perm.setTransformed(true);
+        }
         PermanentView cardView = new PermanentView(perm, card, controllerId, game);
         cardView.setInViewerOnly(true);
 
@@ -97,11 +106,17 @@ public class TestCardRenderDialog extends MageDialog {
         BigCard big = new BigCard();
         CardsView view = new CardsView();
         PermanentView card;
-        card = createCard(game, player.getId(), "RNA", "263", 0); // mountain
+        card = createCard(game, player.getId(), "RNA", "263", 0, 0, 0); // mountain
         view.put(card.getId(), card);
-        card = createCard(game, player.getId(), "RNA", "185", 0); // Judith, the Scourge Diva
+        card = createCard(game, player.getId(), "RNA", "185", 0, 0, 0); // Judith, the Scourge Diva
         view.put(card.getId(), card);
-        card = createCard(game, player.getId(), "RNA", "14", 1); // Knight of Sorrows
+        card = createCard(game, player.getId(), "RNA", "78", 125, 89, 0); // Noxious Groodion
+        view.put(card.getId(), card);
+        card = createCard(game, player.getId(), "RNA", "14", 3, 5, 2); // Knight of Sorrows
+        view.put(card.getId(), card);
+        card = createCard(game, player.getId(), "DKA", "140", 5, 2, 2); // Huntmaster of the Fells, transforms
+        view.put(card.getId(), card);
+        card = createCard(game, player.getId(), "RNA", "221", 0, 0, 0); // Bedeck // Bedazzle
         view.put(card.getId(), card);
 
         cardsPanel.setCustomCardSize(new Dimension(getCardWidth(), getCardHeight()));
@@ -162,7 +177,6 @@ public class TestCardRenderDialog extends MageDialog {
             }
         });
 
-        sliderSize.setValue(25);
         sliderSize.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 sliderSizeStateChanged(evt);
