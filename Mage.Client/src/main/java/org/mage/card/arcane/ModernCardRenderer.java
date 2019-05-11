@@ -990,6 +990,18 @@ public class ModernCardRenderer extends CardRenderer {
         // Is it a creature?
         boolean isVehicle = cardView.getSubTypes().contains(SubType.VEHICLE);
         if (cardView.isCreature() || isVehicle) {
+
+            // draws p/t by parts
+            String ptText1 = cardView.getPower();
+            String ptText2 = "/";
+            String ptText3 = CardRendererUtils.getCardLifeWithDamage(cardView);
+            int ptTextWidth1 = g.getFontMetrics(ptTextFont).stringWidth(ptText1);
+            int ptTextWidth2 = g.getFontMetrics(ptTextFont).stringWidth(ptText2);
+
+            // PT max size
+            int partMinWidth = g.getFontMetrics(ptTextFont).stringWidth(ptText1 + ptText2 + ptText3) + 2 * contentInset;
+            partWidth = Math.max(partMinWidth, partWidth);
+
             int x = cardWidth - borderWidth - partWidth;
 
             // Draw PT box
@@ -1023,14 +1035,6 @@ public class ModernCardRenderer extends CardRenderer {
             }
             g.setColor(defaultTextColor);
             g.setFont(ptTextFont);
-
-            // draws p/t by parts
-            String ptText1 = cardView.getPower();
-            String ptText2 = "/";
-            String ptText3 = CardRendererUtils.getCardLifeWithDamage(cardView);
-
-            int ptTextWidth1 = g.getFontMetrics().stringWidth(ptText1);
-            int ptTextWidth2 = g.getFontMetrics().stringWidth(ptText2);
 
             // draws / by center, P and T from left/right sides of /
             int ptCenterX = x + partWidth / 2;

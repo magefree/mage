@@ -221,7 +221,7 @@ public final class GuiDisplayUtil {
         if (card.getMageObjectType().isPermanent() && card instanceof PermanentView) {
             int damage = ((PermanentView) card).getDamage();
             if (damage > 0) {
-                textLines.getLines().add("<span color='red'><b>Damage dealt:</b> " + damage + "</span>"); // TODO
+                textLines.getLines().add("<span color='red'><b>Damage dealt:</b> " + damage + "</span>");
                 textLines.setBasicTextLength(textLines.getBasicTextLength() + 50);
             }
         }
