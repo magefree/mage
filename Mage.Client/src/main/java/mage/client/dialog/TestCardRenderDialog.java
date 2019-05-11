@@ -118,6 +118,8 @@ public class TestCardRenderDialog extends MageDialog {
         view.put(card.getId(), card);
         card = createCard(game, player.getId(), "RNA", "221", 0, 0, 0); // Bedeck // Bedazzle
         view.put(card.getId(), card);
+        card = createCard(game, player.getId(), "XLN", "234", 0, 0, 0); // Conqueror's Galleon
+        view.put(card.getId(), card);
 
         cardsPanel.setCustomCardSize(new Dimension(getCardWidth(), getCardHeight()));
         cardsPanel.changeGUISize();

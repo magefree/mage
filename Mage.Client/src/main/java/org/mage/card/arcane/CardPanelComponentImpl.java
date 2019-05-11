@@ -10,6 +10,7 @@ import mage.client.util.SoftValuesLoadingCache;
 import mage.components.ImagePanel;
 import mage.components.ImagePanelStyle;
 import mage.constants.AbilityType;
+import mage.constants.SubType;
 import mage.view.CardView;
 import mage.view.CounterView;
 import mage.view.PermanentView;
@@ -648,7 +649,7 @@ public class CardPanelComponentImpl extends CardPanel {
     }
 
     private void updatePTTexts(CardView card) {
-        if (card.isCreature()) {
+        if (card.isCreature() || card.getSubTypes().contains(SubType.VEHICLE)) {
             ptText1.setText(getGameCard().getPower());
             ptText2.setText("/");
             ptText3.setText(CardRendererUtils.getCardLifeWithDamage(getGameCard()));
