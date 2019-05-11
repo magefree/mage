@@ -58,7 +58,7 @@ public final class TeferiTimeRaveler extends CardImpl {
         // -3: Return up to one target artifact, creature, or enchantment to its owner's hand. Draw a card.
         Ability ability = new LoyaltyAbility(new ReturnToHandTargetEffect(), -3);
         ability.addEffect(new DrawCardSourceControllerEffect(1).setText("Draw a card"));
-        ability.addTarget(new TargetPermanent(filter2));
+        ability.addTarget(new TargetPermanent(0, 1, filter2, false));
         this.addAbility(ability);
     }
 
