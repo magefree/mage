@@ -689,6 +689,7 @@ public class TablesPanel extends javax.swing.JPanel {
         UUID chatRoomId = null;
         if (SessionHandler.getSession() != null) {
             btnQuickStartDuel.setVisible(SessionHandler.isTestMode());
+            btnQuickStartCommander.setVisible(SessionHandler.isTestMode());
             gameChooser.init();
             chatRoomId = SessionHandler.getRoomChatId(roomId).orElse(null);
         }
