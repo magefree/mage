@@ -15,8 +15,15 @@ public class CastCommanderAbility extends SpellAbility {
 
     public CastCommanderAbility(Card card) {
         super(card.getManaCost(), card.getName(), Zone.COMMAND, SpellAbilityType.BASE);
-        this.costs = card.getSpellAbility() != null ? card.getSpellAbility().getCosts().copy() : new CostsImpl<>();
-        this.timing = TimingRule.SORCERY;
+        if (card.getSpellAbility() != null) {
+            this.getCosts().addAll(card.getSpellAbility().getCosts().copy());
+            this.getEffects().addAll(card.getSpellAbility().getEffects().copy());
+            this.getTargets().addAll(card.getSpellAbility().getTargets().copy());
+            this.timing = card.getSpellAbility().getTiming();
+        } else {
+            this.costs = new CostsImpl<>();
+            this.timing = TimingRule.SORCERY;
+        }
         this.usesStack = true;
         this.controllerId = card.getOwnerId();
         this.sourceId = card.getId();
