@@ -1,5 +1,6 @@
 package mage.client.table;
 
+import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.importer.DeckImporter;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
@@ -16,6 +17,7 @@ import mage.constants.*;
 import mage.game.match.MatchOptions;
 import mage.players.PlayerType;
 import mage.remote.MageRemoteException;
+import mage.util.DeckUtil;
 import mage.util.RandomUtil;
 import mage.view.MatchView;
 import mage.view.RoomUsersView;
@@ -1538,11 +1540,19 @@ public class TablesPanel extends javax.swing.JPanel {
     private void btnQuickStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickStartActionPerformed
         TableView table;
         try {
-            File f = new File("test.dck");
+            String testDeckFile = "test.dck";
+            File f = new File(testDeckFile);
             if (!f.exists()) {
-                JOptionPane.showMessageDialog(null, "Couldn't find test.dck file for quick game start", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
+                // default test deck
+                testDeckFile = DeckUtil.writeTextToTempFile(""
+                        + "5 Swamp" + System.lineSeparator()
+                        + "5 Forest" + System.lineSeparator()
+                        + "5 Island" + System.lineSeparator()
+                        + "5 Mountain" + System.lineSeparator()
+                        + "5 Plains");
             }
+
+            DeckCardLists testDeck = DeckImporter.importDeckFromFile(testDeckFile);
 
             MatchOptions options = new MatchOptions("1", "Two Player Duel", false, 2);
             options.getPlayerTypes().add(PlayerType.HUMAN);
@@ -1561,8 +1571,8 @@ public class TablesPanel extends javax.swing.JPanel {
             options.setBannedUsers(IgnoreList.ignoreList(serverAddress));
             table = SessionHandler.createTable(roomId, options);
 
-            SessionHandler.joinTable(roomId, table.getTableId(), "Human", PlayerType.HUMAN, 1, DeckImporter.importDeckFromFile("test.dck"), "");
-            SessionHandler.joinTable(roomId, table.getTableId(), "Computer", PlayerType.COMPUTER_MAD, 5, DeckImporter.importDeckFromFile("test.dck"), "");
+            SessionHandler.joinTable(roomId, table.getTableId(), "Human", PlayerType.HUMAN, 1, testDeck, "");
+            SessionHandler.joinTable(roomId, table.getTableId(), "Computer", PlayerType.COMPUTER_MAD, 5, testDeck, "");
             SessionHandler.startMatch(roomId, table.getTableId());
         } catch (HeadlessException ex) {
             handleError(ex);
