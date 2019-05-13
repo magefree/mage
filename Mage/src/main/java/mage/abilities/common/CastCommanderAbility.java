@@ -1,7 +1,7 @@
-
 package mage.abilities.common;
 
 import mage.abilities.SpellAbility;
+import mage.abilities.costs.CostsImpl;
 import mage.cards.Card;
 import mage.constants.SpellAbilityType;
 import mage.constants.TimingRule;
@@ -9,14 +9,13 @@ import mage.constants.Zone;
 import mage.game.Game;
 
 /**
- *
  * @author Plopman
  */
 public class CastCommanderAbility extends SpellAbility {
 
     public CastCommanderAbility(Card card) {
         super(card.getManaCost(), card.getName(), Zone.COMMAND, SpellAbilityType.BASE);
-        this.costs = card.getSpellAbility().getCosts().copy();
+        this.costs = card.getSpellAbility() != null ? card.getSpellAbility().getCosts().copy() : new CostsImpl<>();
         this.timing = TimingRule.SORCERY;
         this.usesStack = true;
         this.controllerId = card.getOwnerId();

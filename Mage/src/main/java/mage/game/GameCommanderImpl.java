@@ -40,7 +40,6 @@ public abstract class GameCommanderImpl extends GameImpl {
 
     @Override
     protected void init(UUID choosingPlayerId) {
-        Ability ability = new SimpleStaticAbility(Zone.COMMAND, new InfoEffect("Commander effects"));
         //Move commander to command zone
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
@@ -49,7 +48,7 @@ public abstract class GameCommanderImpl extends GameImpl {
                     for (UUID commanderId : player.getCommandersIds()) {
                         Card commander = this.getCard(commanderId);
                         if (commander != null) {
-                            initCommander(commander, ability, player);
+                            initCommander(commander, player);
                         }
                     }
                 } else {
@@ -57,20 +56,20 @@ public abstract class GameCommanderImpl extends GameImpl {
                         Card commander = this.getCard(player.getSideboard().iterator().next());
                         if (commander != null) {
                             player.addCommanderId(commander.getId());
-                            initCommander(commander, ability, player);
+                            initCommander(commander, player);
                         }
                     }
                 }
             }
         }
-        this.getState().addAbility(ability, null);
         super.init(choosingPlayerId);
         if (startingPlayerSkipsDraw) {
             state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
         }
     }
 
-    private void initCommander(Card commander, Ability ability, Player player) {
+    public void initCommander(Card commander, Player player) {
+        Ability ability = new SimpleStaticAbility(Zone.COMMAND, new InfoEffect("Commander effects"));
         commander.moveToZone(Zone.COMMAND, null, this, true);
         commander.getAbilities().setControllerId(player.getId());
         ability.addEffect(new CommanderReplacementEffect(commander.getId(), alsoHand, alsoLibrary));
@@ -79,6 +78,7 @@ public abstract class GameCommanderImpl extends GameImpl {
         CommanderInfoWatcher watcher = new CommanderInfoWatcher(commander.getId(), checkCommanderDamage);
         getState().addWatcher(watcher);
         watcher.addCardInfoToCommander(this);
+        this.getState().addAbility(ability, null);
     }
 
     //20130711
