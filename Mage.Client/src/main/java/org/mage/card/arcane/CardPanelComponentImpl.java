@@ -622,19 +622,21 @@ public class CardPanelComponentImpl extends CardPanel {
             fullImageText.setBounds(titleText.getX(), titleText.getY(), titleText.getBounds().width, titleText.getBounds().height);
 
             // PT (font as title)
-            prepareGlowFont(ptText1, Math.max(CARD_PT_FONT_MIN_SIZE, fontSize), getGameCard().getOriginalCard().getPower(), false);
-            prepareGlowFont(ptText2, Math.max(CARD_PT_FONT_MIN_SIZE, fontSize), null, false);
-            prepareGlowFont(ptText3, Math.max(CARD_PT_FONT_MIN_SIZE, fontSize), getGameCard().getOriginalCard().getToughness(), CardRendererUtils.isCardWithDamage(getGameCard()));
+            if (getGameCard().getOriginalCard() != null) {
+                prepareGlowFont(ptText1, Math.max(CARD_PT_FONT_MIN_SIZE, fontSize), getGameCard().getOriginalCard().getPower(), false);
+                prepareGlowFont(ptText2, Math.max(CARD_PT_FONT_MIN_SIZE, fontSize), null, false);
+                prepareGlowFont(ptText3, Math.max(CARD_PT_FONT_MIN_SIZE, fontSize), getGameCard().getOriginalCard().getToughness(), CardRendererUtils.isCardWithDamage(getGameCard()));
 
-            // right bottom corner with margin (sizes from any sample card)
-            int ptMarginRight = Math.round(64f / 672f * cardWidth);
-            int ptMarginBottom = Math.round(62f / 936f * cardHeight);
+                // right bottom corner with margin (sizes from any sample card)
+                int ptMarginRight = Math.round(64f / 672f * cardWidth);
+                int ptMarginBottom = Math.round(62f / 936f * cardHeight);
 
-            int ptWidth = cardWidth - ptMarginRight * 2;
-            int ptHeight = ptText2.getHeight();
-            int ptX = cardXOffset + ptMarginRight;
-            int ptY = cardYOffset + cardHeight - ptMarginBottom - ptHeight;
-            ptPanel.setBounds(ptX, ptY, ptWidth, ptHeight);
+                int ptWidth = cardWidth - ptMarginRight * 2;
+                int ptHeight = ptText2.getHeight();
+                int ptX = cardXOffset + ptMarginRight;
+                int ptY = cardYOffset + cardHeight - ptMarginBottom - ptHeight;
+                ptPanel.setBounds(ptX, ptY, ptWidth, ptHeight);
+            }
 
             // old version was with TEXT_GLOW_SIZE
             //ptText.setLocation(cardXOffset + ptX - TEXT_GLOW_SIZE / 2 - offsetX, cardYOffset + ptY - TEXT_GLOW_SIZE / 2);
