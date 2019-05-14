@@ -16,14 +16,15 @@ import java.util.UUID;
  */
 public final class ArrowUtil {
 
-    private ArrowUtil() {}
+    private ArrowUtil() {
+    }
 
     public static void drawArrowsForPairedCards(TransferData data, Point parentPoint) {
         if (data.getCard().getPairedCard() != null) {
             Point me = new Point(data.getLocationOnScreen());
             me.translate(-parentPoint.x, -parentPoint.y);
             UUID uuid = data.getCard().getPairedCard();
-            for (PlayAreaPanel pa : MageFrame.getGame(data.getGameId()).getPlayers().values()) {
+            for (PlayAreaPanel pa : MageFrame.getGamePlayers(data.getGameId()).values()) {
                 MagePermanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
                 if (permanent != null) {
                     Point target = permanent.getLocationOnScreen();
@@ -38,7 +39,7 @@ public final class ArrowUtil {
         if (data.getCard().getBandedCards() != null && !data.getCard().getBandedCards().isEmpty()) {
             Point me = new Point(data.getLocationOnScreen());
             me.translate(-parentPoint.x, -parentPoint.y);
-            for (PlayAreaPanel pa : MageFrame.getGame(data.getGameId()).getPlayers().values()) {
+            for (PlayAreaPanel pa : MageFrame.getGamePlayers(data.getGameId()).values()) {
                 for (UUID uuid : data.getCard().getBandedCards()) {
                     MagePermanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
                     if (permanent != null) {
@@ -53,7 +54,7 @@ public final class ArrowUtil {
 
     public static void drawArrowsForEnchantPlayers(TransferData data, Point parentPoint) {
         if (data.getGameId() != null && MageFrame.getGame(data.getGameId()) != null) {
-            for (PlayAreaPanel pa : MageFrame.getGame(data.getGameId()).getPlayers().values()) {
+            for (PlayAreaPanel pa : MageFrame.getGamePlayers(data.getGameId()).values()) {
                 PlayerPanelExt playAreaPanel = pa.getPlayerPanel();
                 if (playAreaPanel != null && playAreaPanel.getPlayer() != null && playAreaPanel.getPlayer().hasAttachments()) {
                     Point me = new Point(data.getLocationOnScreen());
@@ -62,7 +63,7 @@ public final class ArrowUtil {
                         if (attachmentId.equals(data.getCard().getId())) {
                             Point player = pa.getLocationOnScreen();
                             player.translate(-parentPoint.x, -parentPoint.y);
-                            ArrowBuilder.getBuilder().addArrow(data.getGameId(),(int) me.getX() + 35, (int) me.getY(), (int) player.getX() + 40, (int) player.getY() - 40, Color.magenta, ArrowBuilder.Type.ENCHANT_PLAYERS);
+                            ArrowBuilder.getBuilder().addArrow(data.getGameId(), (int) me.getX() + 35, (int) me.getY(), (int) player.getX() + 40, (int) player.getY() - 40, Color.magenta, ArrowBuilder.Type.ENCHANT_PLAYERS);
                         }
                     }
                 }
@@ -75,7 +76,7 @@ public final class ArrowUtil {
             Point me = new Point(data.getLocationOnScreen());
             me.translate(-parentPoint.x, -parentPoint.y);
             UUID uuid = data.getCard().getParentId();
-            for (PlayAreaPanel pa : MageFrame.getGame(data.getGameId()).getPlayers().values()) {
+            for (PlayAreaPanel pa : MageFrame.getGamePlayers(data.getGameId()).values()) {
                 MagePermanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
                 if (permanent != null) {
                     Point source = permanent.getLocationOnScreen();
@@ -96,7 +97,7 @@ public final class ArrowUtil {
         me.translate(-parentPoint.x, -parentPoint.y);
         for (UUID uuid : targets) {
 
-            PlayAreaPanel p = MageFrame.getGame(data.getGameId()).getPlayers().get(uuid);
+            PlayAreaPanel p = MageFrame.getGamePlayers(data.getGameId()).get(uuid);
             if (p != null) {
                 Point target = p.getLocationOnScreen();
                 target.translate(-parentPoint.x, -parentPoint.y);
@@ -104,7 +105,7 @@ public final class ArrowUtil {
                 continue;
             }
 
-            for (PlayAreaPanel panel : MageFrame.getGame(data.getGameId()).getPlayers().values()) {
+            for (PlayAreaPanel panel : MageFrame.getGamePlayers(data.getGameId()).values()) {
                 MagePermanent permanent = panel.getBattlefieldPanel().getPermanents().get(uuid);
                 if (permanent != null) {
                     Point target = permanent.getLocationOnScreen();
@@ -117,7 +118,7 @@ public final class ArrowUtil {
                 if (view != null) {
                     CardsView graveyard = view.getGraveyard();
                     if (graveyard.containsKey(uuid)) {
-                        p = MageFrame.getGame(data.getGameId()).getPlayers().get(view.getPlayerId());
+                        p = MageFrame.getGamePlayers(data.getGameId()).get(view.getPlayerId());
                         if (p != null) {
                             Point target = p.getLocationOnScreen();
                             target.translate(-parentPoint.x, -parentPoint.y);

@@ -16,14 +16,17 @@ import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 import mage.game.Game;
 import mage.game.GameImpl;
+import mage.game.command.Emblem;
+import mage.game.command.Plane;
+import mage.game.command.emblems.AjaniAdversaryOfTyrantsEmblem;
+import mage.game.command.planes.AkoumPlane;
 import mage.game.match.MatchType;
 import mage.game.mulligan.Mulligan;
 import mage.game.mulligan.VancouverMulligan;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.players.StubPlayer;
-import mage.view.CardsView;
-import mage.view.PermanentView;
+import mage.view.*;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
@@ -94,6 +97,18 @@ public class TestCardRenderDialog extends MageDialog {
         return cardView;
     }
 
+    private AbilityView createEmblem(Emblem emblem) {
+        AbilityView emblemView = new AbilityView(emblem.getAbilities().get(0), emblem.getName(), new CardView(new EmblemView(emblem)));
+        emblemView.setName(emblem.getName());
+        return emblemView;
+    }
+
+    private AbilityView createPlane(Plane plane) {
+        AbilityView planeView = new AbilityView(plane.getAbilities().get(0), plane.getName(), new CardView(new PlaneView(plane)));
+        planeView.setName(plane.getName());
+        return planeView;
+    }
+
     private void reloadCards() {
         cardsPanel.cleanUp();
         cardsPanel.setCustomRenderMode(comboRenderMode.getSelectedIndex());
@@ -105,7 +120,7 @@ public class TestCardRenderDialog extends MageDialog {
 
         BigCard big = new BigCard();
         CardsView view = new CardsView();
-        PermanentView card;
+        CardView card;
         card = createCard(game, player.getId(), "RNA", "263", 0, 0, 0); // mountain
         view.put(card.getId(), card);
         card = createCard(game, player.getId(), "RNA", "185", 0, 0, 0); // Judith, the Scourge Diva
@@ -120,11 +135,15 @@ public class TestCardRenderDialog extends MageDialog {
         view.put(card.getId(), card);
         card = createCard(game, player.getId(), "XLN", "234", 0, 0, 0); // Conqueror's Galleon
         view.put(card.getId(), card);
+        card = createEmblem(new AjaniAdversaryOfTyrantsEmblem()); // Emblem Ajani
+        view.put(card.getId(), card);
+        card = createPlane(new AkoumPlane()); // Plane - Akoum
+        view.put(card.getId(), card);
 
         cardsPanel.setCustomCardSize(new Dimension(getCardWidth(), getCardHeight()));
         cardsPanel.changeGUISize();
 
-        cardsPanel.loadCards(view, big, null);
+        cardsPanel.loadCards(view, big, game.getId());
     }
 
     private int getCardWidth() {
