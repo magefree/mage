@@ -137,6 +137,7 @@ public enum SubType {
     // F
     FAERIE("Faerie", SubTypeSet.CreatureType),
     FERRET("Ferret", SubTypeSet.CreatureType),
+    FIGHTER("Fighter", SubTypeSet.CreatureType),
     FISH("Fish", SubTypeSet.CreatureType),
     FLAGBEARER("Flagbearer", SubTypeSet.CreatureType),
     FOX("Fox", SubTypeSet.CreatureType),
@@ -385,6 +386,7 @@ public enum SubType {
     DOMRI("Domri", SubTypeSet.PlaneswalkerType),
     DOOKU("Dooku", SubTypeSet.PlaneswalkerType, true), // Star Wars
     DOVIN("Dovin", SubTypeSet.PlaneswalkerType),
+    DUNGEON_MASTER("Dungeon Master", SubTypeSet.PlaneswalkerType, true), // 2016 Heroes of the Realm
     ELSPETH("Elspeth", SubTypeSet.PlaneswalkerType),
     ESTRID("Estrid", SubTypeSet.PlaneswalkerType),
     FREYALISE("Freyalise", SubTypeSet.PlaneswalkerType),
