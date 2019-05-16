@@ -41,14 +41,15 @@ public class DidNotHaveHexproofTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, wOrb);
         
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shock", playerB);
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Shock", playerB);
         
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.END_COMBAT);
         execute();
-        
+                
         assertTappedCount("Mountain", true, 2);
         assertTapped(dTower, true);
         assertGraveyardCount(playerA, "Shock", 1);
         assertLife(playerB, 18);
+        assertAllCommandsUsed();
     }
 }
