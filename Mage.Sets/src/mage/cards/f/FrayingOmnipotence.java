@@ -82,7 +82,7 @@ class FrayingOmnipotenceEffect extends OneShotEffect {
                 player.discard(cardsToDiscard, false, source, game);
             }
         }
-        // then sacrifices half of the creatures they controls,
+        // then sacrifices half of the creatures they control,
         for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player == null) {
