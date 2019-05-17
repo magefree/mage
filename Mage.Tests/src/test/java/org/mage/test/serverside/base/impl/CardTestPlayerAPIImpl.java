@@ -70,6 +70,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     // TODO: add target player param to commands
     public static final String SHOW_COMMAND_LIBRARY = "LIBRARY";
     public static final String SHOW_COMMAND_HAND = "HAND";
+    public static final String SHOW_COMMAND_COMMAND = "COMMAND";
     public static final String SHOW_COMMAND_BATTLEFIELD = "BATTLEFIELD";
     public static final String SHOW_COMMAND_GRAVEYEARD = "GRAVEYARD";
     public static final String SHOW_COMMAND_EXILE = "EXILE";
@@ -240,7 +241,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             TestPlayer testPlayer = (TestPlayer) player;
             currentGame.cheat(player.getId(), getCommands(testPlayer));
             currentGame.cheat(player.getId(), activePlayer.getId(), getLibraryCards(testPlayer), getHandCards(testPlayer),
-                    getBattlefieldCards(testPlayer), getGraveCards(testPlayer));
+                    getBattlefieldCards(testPlayer), getGraveCards(testPlayer), getCommandCards(testPlayer));
         }
 
         long t1 = System.nanoTime();
@@ -387,6 +388,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     public void showHand(String showName, int turnNum, PhaseStep step, TestPlayer player) {
         show(showName, turnNum, step, player, SHOW_COMMAND_HAND);
+    }
+
+    public void showCommand(String showName, int turnNum, PhaseStep step, TestPlayer player) {
+        show(showName, turnNum, step, player, SHOW_COMMAND_COMMAND);
     }
 
     public void showBattlefield(String showName, int turnNum, PhaseStep step, TestPlayer player) {
@@ -536,6 +541,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 return getGraveCards(player);
             case LIBRARY:
                 return getLibraryCards(player);
+            case COMMAND:
+                return getCommandCards(player);
             default:
                 break;
         }

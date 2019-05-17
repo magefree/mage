@@ -15,6 +15,7 @@ import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.constants.*;
@@ -741,6 +742,16 @@ public class TestPlayer implements Player {
                         if (params[0].equals(SHOW_COMMAND_HAND) && params.length == 1) {
                             printStart(action.getActionName());
                             printCards(computerPlayer.getHand().getCards(game));
+                            printEnd();
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
+                        // show command
+                        if (params[0].equals(SHOW_COMMAND_COMMAND) && params.length == 1) {
+                            printStart(action.getActionName());
+                            CardsImpl cards = new CardsImpl(computerPlayer.getCommandersIds());
+                            printCards(cards.getCards(game));
                             printEnd();
                             actions.remove(action);
                             wasProccessed = true;
