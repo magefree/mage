@@ -1,29 +1,25 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
  * http://www.wizards.com/magic/magazine/article.aspx?x=mtg/faq/rtr
- *
+ * <p>
  * If a creature you control would enter the battlefield with a number of +1/+1
  * counters on it, it enters with twice that many instead.
- *
+ * <p>
  * If you control two Corpsejack Menaces, the number of +1/+1 counters placed is
  * four times the original number. Three Corpsejack Menaces multiplies the
  * original number by eight, and so on.
@@ -33,7 +29,7 @@ import mage.game.permanent.Permanent;
 public final class CorpsejackMenace extends CardImpl {
 
     public CorpsejackMenace(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{G}");
         this.subtype.add(SubType.FUNGUS);
 
         this.power = new MageInt(4);
@@ -67,7 +63,7 @@ class CorpsejackMenaceReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(event.getAmount() * 2);
+        event.setAmountForCounters(event.getAmount() * 2, true);
         return false;
     }
 
@@ -78,15 +74,13 @@ class CorpsejackMenaceReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getData().equals(CounterType.P1P1.getName())) {
+        if (event.getData().equals(CounterType.P1P1.getName()) && event.getAmount() > 0) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent == null) {
                 permanent = game.getPermanentEntering(event.getTargetId());
             }
-            if (permanent != null && permanent.isControlledBy(source.getControllerId())
-                    && permanent.isCreature()) {
-                return true;
-            }
+            return permanent != null && permanent.isControlledBy(source.getControllerId())
+                    && permanent.isCreature();
         }
         return false;
     }

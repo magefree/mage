@@ -1,25 +1,20 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class WindingConstrictor extends CardImpl {
@@ -32,7 +27,7 @@ public final class WindingConstrictor extends CardImpl {
         this.toughness = new MageInt(3);
 
         // If one or more counters would be put on an artifact or creature you control, that many plus one of each of those kinds of counters are put on that permanent instead.
-	this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WindingConstrictorPermanentEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WindingConstrictorPermanentEffect()));
 
         // If you would get one or more counters, you get that many plus one of each of those kinds of counters instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WindingConstrictorPlayerEffect()));
@@ -62,7 +57,7 @@ class WindingConstrictorPermanentEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(event.getAmount() + 1);
+        event.setAmountForCounters(event.getAmount() + 1, true);
         return false;
     }
 
@@ -78,6 +73,7 @@ class WindingConstrictorPermanentEffect extends ReplacementEffectImpl {
             permanent = game.getPermanentEntering(event.getTargetId());
         }
         return permanent != null
+                && event.getAmount() > 0
                 && (permanent.isCreature() || permanent.isArtifact())
                 && permanent.isControlledBy(source.getControllerId());
     }
@@ -106,7 +102,7 @@ class WindingConstrictorPlayerEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(event.getAmount() + 1);
+        event.setAmountForCounters(event.getAmount() + 1, true);
         return false;
     }
 
@@ -118,7 +114,7 @@ class WindingConstrictorPlayerEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getTargetId());
-        return player != null && player.getId().equals(source.getControllerId());
+        return player != null && player.getId().equals(source.getControllerId()) && event.getAmount() > 0;
     }
 
     @Override

@@ -1,27 +1,21 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.PartnerWithAbility;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class PirImaginativeRascal extends CardImpl {
@@ -65,10 +59,7 @@ class PirImaginativeRascalEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        int amount = event.getAmount();
-        if (amount >= 1) {
-            event.setAmount(amount + 1);
-        }
+        event.setAmountForCounters(event.getAmount() + 1, true);
         return false;
     }
 
@@ -84,7 +75,7 @@ class PirImaginativeRascalEffect extends ReplacementEffectImpl {
         if (permanent == null) {
             permanent = game.getPermanentEntering(event.getTargetId());
         }
-        return permanent != null && player != null
+        return permanent != null && player != null && event.getAmount() > 0
                 && !player.hasOpponent(permanent.getControllerId(), game);
     }
 

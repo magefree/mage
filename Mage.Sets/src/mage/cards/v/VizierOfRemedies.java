@@ -1,24 +1,19 @@
-
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Stravant
  */
 public final class VizierOfRemedies extends CardImpl {
@@ -64,7 +59,7 @@ class VizierOfRemediesReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(event.getAmount() - 1);
+        event.setAmountForCounters(event.getAmount() - 1, true);
         return false;
     }
 
@@ -76,11 +71,9 @@ class VizierOfRemediesReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (source != null && source.getControllerId() != null) {
-            if (source.isControlledBy(game.getControllerId(event.getTargetId()))
+            return source.isControlledBy(game.getControllerId(event.getTargetId()))
                     && event.getData() != null && event.getData().equals(CounterType.M1M1.getName())
-                    && event.getAmount() > 0) {
-                return true;
-            }
+                    && event.getAmount() > 0;
         }
         return false;
     }
