@@ -2874,7 +2874,7 @@ public abstract class GameImpl implements Game, Serializable {
                     player.addCommanderId(card.getId());
                     // no needs in initCommander call -- it's uses on game startup (init)
                 }
-            } else {
+            } else if (!command.isEmpty()) {
                 throw new IllegalArgumentException("Command zone supports in commander test games");
             }
 
