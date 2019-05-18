@@ -85,7 +85,7 @@ class GemOfBecomingEffect extends OneShotEffect {
         FilterLandCard filter = new FilterLandCard(subtype);
         filter.add(new SubtypePredicate(SubType.byDescription(subtype)));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
-        if (player.searchLibrary(target, game)) {
+        if (player.searchLibrary(target, source, game)) {
             Card card = player.getLibrary().remove(target.getFirstTarget(), game);
             if (card != null) {
                 card.moveToZone(Zone.HAND, source.getSourceId(), game, false);

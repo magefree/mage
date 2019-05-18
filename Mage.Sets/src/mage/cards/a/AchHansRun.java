@@ -81,7 +81,7 @@ class AchHansRunEffect extends OneShotEffect {
         FilterCard nameFilter = new FilterCard();
         nameFilter.add(new NamePredicate(cardName));
         TargetCardInLibrary target = new TargetCardInLibrary(1, 1, nameFilter);
-        if (!controller.searchLibrary(target, game)) {
+        if (!controller.searchLibrary(target, source, game)) {
             return false;
         }
         Card card = controller.getLibrary().remove(target.getFirstTarget(), game);

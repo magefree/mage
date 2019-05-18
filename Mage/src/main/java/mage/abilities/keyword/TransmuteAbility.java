@@ -80,7 +80,7 @@ class TransmuteEffect extends OneShotEffect {
             FilterCard filter = new FilterCard("card with converted mana cost " + sourceObject.getConvertedManaCost());
             filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, sourceObject.getConvertedManaCost()));
             TargetCardInLibrary target = new TargetCardInLibrary(1, filter);
-            if (controller.searchLibrary(target, game)) {
+            if (controller.searchLibrary(target, source, game)) {
                 if (!target.getTargets().isEmpty()) {
                     Cards revealed = new CardsImpl(target.getTargets());
                     controller.revealCards(sourceObject.getIdName(), revealed, game);

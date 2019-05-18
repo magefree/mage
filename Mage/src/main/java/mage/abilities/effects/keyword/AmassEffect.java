@@ -38,7 +38,7 @@ public class AmassEffect extends OneShotEffect {
     public AmassEffect(int amassNumber) {
         this(new StaticValue(amassNumber));
         staticText = "amass " + amassNumber + ". <i>(Put " + CardUtil.numberToText(amassNumber)
-                + " +1/+1 counter " + (amassNumber > 1 ? "s" : "")
+                + " +1/+1 counter" + (amassNumber > 1 ? "s " : " ")
                 + "on an Army you control. If you don’t control one, "
                 + "create a 0/0 black Zombie Army creature token first.)</i>";
     }
@@ -68,7 +68,7 @@ public class AmassEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        if (!game.getBattlefield().contains(filter, 1, game)) {
+        if (!game.getBattlefield().contains(filter, source.getControllerId(), 1, game)) {
             new CreateTokenEffect(new ZombieArmyToken()).apply(game, source);
         }
         Target target = new TargetPermanent(filter);

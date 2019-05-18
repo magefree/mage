@@ -15,6 +15,7 @@ import mage.game.draft.RateCard;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
 import mage.watchers.Watcher;
+import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -40,6 +41,8 @@ import java.util.stream.Collectors;
  * @author JayDi85
  */
 public class VerifyCardDataTest {
+
+    private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
     // right now this is very noisy, and not useful enough to make any assertions on
     private static final boolean CHECK_SOURCE_TOKENS = false;
@@ -76,6 +79,7 @@ public class VerifyCardDataTest {
         skipListAddName("COST", "M13", "Erase");
         skipListAddName("COST", "ULG", "Erase");
         skipListAddName("COST", "H17", "Grimlock, Dinobot Leader");
+        skipListAddName("COST", "UST", "Everythingamajig");
 
         // supertype
         skipListCreate("SUPERTYPE");
@@ -87,6 +91,7 @@ public class VerifyCardDataTest {
 
         // subtype
         skipListCreate("SUBTYPE");
+        skipListAddName("SUBTYPE", "UGL", "Miss Demeanor");
 
         // number
         skipListCreate("NUMBER");
@@ -193,6 +198,7 @@ public class VerifyCardDataTest {
                     if (!needClass.equals(currentClass)) {
                         // workaround to star wars and unstable set with same card names
                         if (!checkCard.getName().equals("Syndicate Enforcer")
+                                && !checkCard.getName().equals("Everythingamajig")
                                 && !checkCard.getName().equals("Garbage Elemental")
                                 && !checkCard.getName().equals("Very Cryptic Command")) {
                             errorsList.add("Error: found wrong class in set " + set.getCode() + " - " + checkCard.getName() + " (" + currentClass + " <> " + needClass + ")");
@@ -599,7 +605,7 @@ public class VerifyCardDataTest {
         //checkNumbers(card, ref); // TODO: load data from allsets.json and check it (allcards.json do not have card numbers)
         checkBasicLands(card, ref);
         checkMissingAbilities(card, ref);
-        //checkWrongCosts(card, ref);
+        checkWrongAbilitiesText(card, ref);
     }
 
     private void checkColors(Card card, JsonCard ref) {
@@ -731,13 +737,23 @@ public class VerifyCardDataTest {
         card.getRules().stream().forEach(System.out::println);
     }
 
-    private void checkWrongCosts(Card card, JsonCard ref) {
-        // checks missing or wrong cost
-        if (!card.getExpansionSetCode().equals("RNA")) {
+    private void checkWrongAbilitiesText(Card card, JsonCard ref) {
+        // checks missing or wrong text
+        if (!card.getExpansionSetCode().equals("WAR")) {
             return;
         }
 
-        String[] refRules = ref.text.split("[\\$\\\n]"); // ref card's abilities can be splited by \n or $ chars
+        if (ref.text == null || ref.text.isEmpty()) {
+            return;
+        }
+
+        String refText = ref.text;
+        // lands fix
+        if (refText.startsWith("(") && refText.endsWith(")")) {
+            refText = refText.substring(1, refText.length() - 1);
+        }
+
+        String[] refRules = refText.split("[\\$\\\n]"); // ref card's abilities can be splited by \n or $ chars
         for (int i = 0; i < refRules.length; i++) {
             refRules[i] = prepareRule(card.getName(), refRules[i]);
         }
@@ -749,17 +765,15 @@ public class VerifyCardDataTest {
 
         for (String cardRule : cardRules) {
             boolean isAbilityFounded = false;
-            boolean isCostOk = false;
             for (String refRule : refRules) {
                 if (cardRule.equals(refRule)) {
                     isAbilityFounded = true;
-                    isCostOk = true;
                     break;
                 }
             }
 
-            if (!isCostOk) {
-                fail(card, "abilities", "card ability have cost, but can't find in ref [" + "xxx" + ": " + card.getRules() + "]");
+            if (!isAbilityFounded) {
+                warn(card, "card ability can't be found in ref [" + card.getName() + ": " + cardRule + "]");
             }
         }
     }
@@ -958,6 +972,30 @@ public class VerifyCardDataTest {
                     Assert.fail("Card with same name have different ratings: " + card.getName());
                 }
             }
+        }
+    }
+
+    @Test
+    public void testCardsCreatingAndConstructorErrors() {
+        int errorsCount = 0;
+        Collection<ExpansionSet> sets = Sets.getInstance().values();
+        for (ExpansionSet set : sets) {
+            for (ExpansionSet.SetCardInfo setInfo : set.getSetCardInfo()) {
+                // catch cards creation errors and report (e.g. on wrong card code or construction checks fail)
+                try {
+                    Card card = CardImpl.createCard(setInfo.getCardClass(), new CardSetInfo(setInfo.getName(), set.getCode(),
+                            setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()));
+                    if (card == null) {
+                        errorsCount++;
+                    }
+                } catch (Throwable e) {
+                    logger.error("Can't create card " + setInfo.getName() + ": " + e.getMessage(), e);
+                }
+            }
+        }
+
+        if (errorsCount > 0) {
+            Assert.fail("Founded " + errorsCount + " broken cards, look at logs for stack error");
         }
     }
 }

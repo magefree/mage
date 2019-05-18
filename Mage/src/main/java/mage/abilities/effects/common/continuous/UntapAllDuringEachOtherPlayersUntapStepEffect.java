@@ -33,13 +33,13 @@ public class UntapAllDuringEachOtherPlayersUntapStepEffect extends ContinuousEff
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Boolean applied = (Boolean) game.getState().getValue(source.getSourceId() + "applied");
-        if (applied == null) {
-            applied = Boolean.FALSE;
-        }
-        if (!applied && layer == Layer.RulesEffects) {
-            if (!source.isControlledBy(game.getActivePlayerId()) && game.getStep().getType() == PhaseStep.UNTAP) {
-                game.getState().setValue(source.getSourceId() + "applied", true);
+        if (layer == Layer.RulesEffects && game.getStep().getType() == PhaseStep.UNTAP && !source.isControlledBy(game.getActivePlayerId())) {
+            Integer appliedTurn = (Integer) game.getState().getValue(source.getSourceId() + "appliedTurn");
+            if (appliedTurn == null) {
+                appliedTurn = 0;
+            }
+            if (appliedTurn < game.getTurnNum()) {
+                game.getState().setValue(source.getSourceId() + "appliedTurn", game.getTurnNum());
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                     boolean untap = true;
                     for (RestrictionEffect effect : game.getContinuousEffects().getApplicableRestrictionEffects(permanent, game).keySet()) {
@@ -49,10 +49,6 @@ public class UntapAllDuringEachOtherPlayersUntapStepEffect extends ContinuousEff
                         permanent.untap(game);
                     }
                 }
-            }
-        } else if (applied && layer == Layer.RulesEffects) {
-            if (game.getStep().getType() == PhaseStep.END_TURN) {
-                game.getState().setValue(source.getSourceId() + "applied", false);
             }
         }
         return true;

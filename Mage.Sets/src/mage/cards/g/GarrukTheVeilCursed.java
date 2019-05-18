@@ -145,7 +145,7 @@ class GarrukTheVeilCursedEffect extends OneShotEffect {
             FilterCreatureCard filter = new FilterCreatureCard();
             TargetCardInLibrary targetInLibrary = new TargetCardInLibrary(filter);
             Cards cards = new CardsImpl();
-            if (controller.searchLibrary(targetInLibrary, game)) {
+            if (controller.searchLibrary(targetInLibrary, source, game)) {
                 for (UUID cardId : targetInLibrary.getTargets()) {
                     Card card = controller.getLibrary().remove(cardId, game);
                     if (card != null) {

@@ -124,7 +124,7 @@ class TransmuteArtifactEffect extends SearchEffect {
                     sacrifice = permanent.sacrifice(source.getSourceId(), game);
                 }
             }
-            if (sacrifice && controller.searchLibrary(target, game)) {
+            if (sacrifice && controller.searchLibrary(target, source, game)) {
                 if (!target.getTargets().isEmpty()) {
                     for (UUID cardId : target.getTargets()) {
                         Card card = controller.getLibrary().getCard(cardId, game);

@@ -50,8 +50,25 @@ public class ScryfallImageSupportTokens {
             put("RNA/Zombie", "https://api.scryfall.com/cards/trna/3/en?format=image");
 
             // WAR
-            put("WAR/Zombie Army", "https://api.scryfall.com/cards/twar/8/en?format=image");
-
+            put("WAR/Angel", "https://api.scryfall.com/cards/twar/2/en?format=image");
+            put("WAR/Assassin", "https://api.scryfall.com/cards/twar/6/en?format=image");
+            put("WAR/Citizen", "https://api.scryfall.com/cards/twar/16/en?format=image");
+            put("WAR/Devil", "https://api.scryfall.com/cards/twar/12/en?format=image");
+            put("WAR/Dragon", "https://api.scryfall.com/cards/twar/13/en?format=image");
+            put("WAR/Goblin", "https://api.scryfall.com/cards/twar/14/en?format=image");
+            put("WAR/Emblem Nissa, Who Shakes the World", "https://api.scryfall.com/cards/twar/19/en?format=image");
+            put("WAR/Servo", "https://api.scryfall.com/cards/twar/18/en?format=image");
+            put("WAR/Soldier", "https://api.scryfall.com/cards/twar/3/en?format=image");
+            put("WAR/Spirit", "https://api.scryfall.com/cards/twar/1/en?format=image");
+            put("WAR/Voja, Friend to Elves", "https://api.scryfall.com/cards/twar/17/en?format=image");
+            put("WAR/Wall", "https://api.scryfall.com/cards/twar/4/en?format=image");
+            put("WAR/Wizard", "https://api.scryfall.com/cards/twar/5/en?format=image");
+            put("WAR/Wolf", "https://api.scryfall.com/cards/twar/15/en?format=image");
+            put("WAR/Zombie Army/1", "https://api.scryfall.com/cards/twar/10/en?format=image");
+            put("WAR/Zombie Army/2", "https://api.scryfall.com/cards/twar/8/en?format=image");
+            put("WAR/Zombie Army/3", "https://api.scryfall.com/cards/twar/9/en?format=image");
+            put("WAR/Zombie Warrior", "https://api.scryfall.com/cards/twar/11/en?format=image");
+            put("WAR/Zombie", "https://api.scryfall.com/cards/twar/7/en?format=image");
 
             // generate supported sets
             supportedSets.clear();

@@ -30,12 +30,12 @@ public final class AngrathCaptainOfChaos extends CardImpl {
 
         // Creatures you control have menace.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
-                new MenaceAbility(), Duration.WhileOnBattlefield,
+                new MenaceAbility(false), Duration.WhileOnBattlefield,
                 StaticFilters.FILTER_PERMANENT_CREATURES
         )));
 
-        // -2: Amass 2.
-        this.addAbility(new LoyaltyAbility(new AmassEffect(2)));
+        // -2: Amass 2. (Put two +1/+1 counters on an Army you control. If you don’t control one, create a 0/0 black Zombie Army creature token first.)
+        this.addAbility(new LoyaltyAbility(new AmassEffect(2), -2));
     }
 
     private AngrathCaptainOfChaos(final AngrathCaptainOfChaos card) {

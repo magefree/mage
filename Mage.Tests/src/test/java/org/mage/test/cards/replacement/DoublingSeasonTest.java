@@ -205,7 +205,7 @@ public class DoublingSeasonTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, "Doubling Season");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA,"+1: Draw a card, then discard a card at random.");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Draw a card, then discard a card at random.");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -215,5 +215,39 @@ public class DoublingSeasonTest extends CardTestPlayerBase {
 
         //Should not be doubled
         assertCounterCount("Tibalt, the Fiend-Blooded", CounterType.LOYALTY, 3);
+    }
+
+    /**
+     * +1 cost is not affected by double, but replace event like Pir, Imaginative Rascal will be affected
+     * https://github.com/magefree/mage/issues/5802
+     */
+    @Test
+    public void testPlaneswalkerWithoutReplacementEffect() {
+        //addCard(Zone.BATTLEFIELD, playerA, "Pir, Imaginative Rascal");
+        addCard(Zone.BATTLEFIELD, playerA, "Chandra, Fire Artisan");
+        addCard(Zone.BATTLEFIELD, playerA, "Doubling Season");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertCounterCount(playerA, "Chandra, Fire Artisan", CounterType.LOYALTY, 4 + 1);
+    }
+
+    @Test
+    public void testPlaneswalkerWithReplacementEffect() {
+        addCard(Zone.BATTLEFIELD, playerA, "Chandra, Fire Artisan");
+        addCard(Zone.BATTLEFIELD, playerA, "Doubling Season"); // x2 counters
+        addCard(Zone.BATTLEFIELD, playerA, "Pir, Imaginative Rascal"); // +1 counter
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertCounterCount(playerA, "Chandra, Fire Artisan", CounterType.LOYALTY, 4 + (1 + 1) * 2);
     }
 }

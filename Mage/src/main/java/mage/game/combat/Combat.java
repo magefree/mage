@@ -461,18 +461,14 @@ public class Combat implements Serializable, Copyable<Combat> {
                     creaturesForcedToAttack.put(creature.getId(), defendersForcedToAttack);
                     // No need to attack a special defender
                     if (defendersForcedToAttack.isEmpty()) {
-                        if (defenders.size() == 1) {
-                            player.declareAttacker(creature.getId(), defenders.iterator().next(), game, false);
+                        if (defendersCostlessAttackable.size() == 1) {
+                            player.declareAttacker(creature.getId(), defendersCostlessAttackable.iterator().next(), game, false);
                         } else {
-                            if (!player.isHuman()) { // computer only for multiple defenders
-                                player.declareAttacker(creature.getId(), defenders.iterator().next(), game, false);
-                            } else {  // human players only for multiple defenders
-                                TargetDefender target = new TargetDefender(defenders, creature.getId());
-                                target.setRequired(true);
-                                target.setTargetName("planeswalker or player for " + creature.getLogName() + " to attack");
-                                if (player.chooseTarget(Outcome.Damage, target, null, game)) {
-                                    player.declareAttacker(creature.getId(), target.getFirstTarget(), game, false);
-                                }
+                            TargetDefender target = new TargetDefender(defendersCostlessAttackable, creature.getId());
+                            target.setRequired(true);
+                            target.setTargetName("planeswalker or player for " + creature.getLogName() + " to attack (must attack effect)");
+                            if (player.chooseTarget(Outcome.Damage, target, null, game)) {
+                                player.declareAttacker(creature.getId(), target.getFirstTarget(), game, false);
                             }
                         }
                     } else {
@@ -481,6 +477,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                         } else {
                             TargetDefender target = new TargetDefender(defendersForcedToAttack, creature.getId());
                             target.setRequired(true);
+                            target.setTargetName("planeswalker or player for " + creature.getLogName() + " to attack (must attack effect)");
                             if (player.chooseTarget(Outcome.Damage, target, null, game)) {
                                 player.declareAttacker(creature.getId(), target.getFirstTarget(), game, false);
                             }
@@ -555,7 +552,8 @@ public class Combat implements Serializable, Copyable<Combat> {
         }
         for (UUID attackingCreatureID : game.getCombat().getAttackers()) {
             Permanent permanent = game.getPermanent(attackingCreatureID);
-            if (permanent != null && permanent.getBlocking() == 0) {
+            CombatGroup group = game.getCombat().findGroup(attackingCreatureID);
+            if (permanent != null && group != null && !group.getBlocked()) {
                 game.fireEvent(GameEvent.getEvent(EventType.UNBLOCKED_ATTACKER, attackingCreatureID, attackingPlayerId));
             }
         }
@@ -1529,6 +1527,18 @@ public class Combat implements Serializable, Copyable<Combat> {
             if (group.getDefenderId().equals(defenderId)) {
                 return true;
             }
+            if (group.defenderIsPlaneswalker) {
+                Permanent permanent = game.getPermanent(group.getDefenderId());
+                if (permanent.isControlledBy(defenderId)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean isPlaneswalkerAttacked(UUID defenderId, Game game) {
+        for (CombatGroup group : groups) {
             if (group.defenderIsPlaneswalker) {
                 Permanent permanent = game.getPermanent(group.getDefenderId());
                 if (permanent.isControlledBy(defenderId)) {

@@ -97,7 +97,7 @@ class SingleCombatEffect extends OneShotEffect {
 class SingleCombatRestrictionEffect extends ContinuousRuleModifyingEffectImpl {
 
     SingleCombatRestrictionEffect() {
-        super(Duration.UntilYourNextTurn, Outcome.Neutral);
+        super(Duration.UntilEndOfYourNextTurn, Outcome.Neutral);
         staticText = "Players can't cast creature or planeswalker spells until the end of your next turn.";
     }
 

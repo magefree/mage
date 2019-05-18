@@ -1,5 +1,6 @@
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.keyword.ScryEffect;
@@ -9,8 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -26,7 +25,7 @@ public final class SamutsSprint extends CardImpl {
         ).setText("target creature gets +2/+1"));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn
-        ).setText("and gains haste until end of turn."));
+        ).setText("and gains haste until end of turn"));
         this.getSpellAbility().addEffect(new ScryEffect(1));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

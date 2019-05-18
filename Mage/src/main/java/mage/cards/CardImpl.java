@@ -690,27 +690,33 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 sourceId = source.getSourceId();
             }
         }
-        GameEvent countersEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTERS, objectId, sourceId, getControllerOrOwner(), counter.getName(), counter.getCount());
-        countersEvent.setAppliedEffects(appliedEffects);
-        countersEvent.setFlag(isEffect);
-        if (!game.replaceEvent(countersEvent)) {
-            int amount = countersEvent.getAmount();
+        GameEvent addingAllEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTERS, objectId, sourceId, getControllerOrOwner(), counter.getName(), counter.getCount());
+        addingAllEvent.setAppliedEffects(appliedEffects);
+        addingAllEvent.setFlag(isEffect);
+        if (!game.replaceEvent(addingAllEvent)) {
+            int amount = addingAllEvent.getAmount();
+            boolean isEffectFlag = addingAllEvent.getFlag();
             int finalAmount = amount;
             for (int i = 0; i < amount; i++) {
                 Counter eventCounter = counter.copy();
                 eventCounter.remove(eventCounter.getCount() - 1);
-                GameEvent event = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, sourceId, getControllerOrOwner(), counter.getName(), 1);
-                event.setAppliedEffects(appliedEffects);
-                if (!game.replaceEvent(event)) {
+                GameEvent addingOneEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, sourceId, getControllerOrOwner(), counter.getName(), 1);
+                addingOneEvent.setAppliedEffects(appliedEffects);
+                addingOneEvent.setFlag(isEffectFlag);
+                if (!game.replaceEvent(addingOneEvent)) {
                     getCounters(game).addCounter(eventCounter);
-                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, sourceId, getControllerOrOwner(), counter.getName(), 1));
+                    GameEvent addedOneEvent = GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, sourceId, getControllerOrOwner(), counter.getName(), 1);
+                    addedOneEvent.setFlag(addingOneEvent.getFlag());
+                    game.fireEvent(addedOneEvent);
                 } else {
                     finalAmount--;
                     returnCode = false;
                 }
             }
             if (finalAmount > 0) {
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERS_ADDED, objectId, sourceId, getControllerOrOwner(), counter.getName(), amount));
+                GameEvent addedAllEvent = GameEvent.getEvent(GameEvent.EventType.COUNTERS_ADDED, objectId, sourceId, getControllerOrOwner(), counter.getName(), amount);
+                addedAllEvent.setFlag(isEffectFlag);
+                game.fireEvent(addedAllEvent);
             }
         } else {
             returnCode = false;
@@ -720,6 +726,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public void removeCounters(String name, int amount, Game game) {
+        int finalAmount = 0;
         for (int i = 0; i < amount; i++) {
             if (!getCounters(game).removeCounter(name, 1)) {
                 break;
@@ -727,7 +734,12 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTER_REMOVED, objectId, getControllerOrOwner());
             event.setData(name);
             game.fireEvent(event);
+            finalAmount++;
         }
+        GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTERS_REMOVED, objectId, getControllerOrOwner());
+        event.setData(name);
+        event.setAmount(finalAmount);
+        game.fireEvent(event);
     }
 
     @Override

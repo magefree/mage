@@ -1,10 +1,3 @@
-
-
- /*
- * Card.java
- *
- * Created on 17-Dec-2009, 9:20:50 PM
- */
 package mage.client.cards;
 
 import mage.cards.CardDimensions;
@@ -37,7 +30,6 @@ import java.util.UUID;
 import static mage.client.constants.Constants.*;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 @SuppressWarnings("serial")
@@ -132,7 +124,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
         gSmall.drawImage(ImageHelper.scaleImage(image, Config.dimensions.getFrameWidth(), Config.dimensions.getFrameHeight()), 0, 0, this);
 
         gImage.setFont(new Font("Arial", Font.PLAIN, NAME_FONT_MAX_SIZE));
-        gImage.drawString(card.getName()+"TEST", CONTENT_MAX_XOFFSET, NAME_MAX_YOFFSET);
+        gImage.drawString(card.getName() + "TEST", CONTENT_MAX_XOFFSET, NAME_MAX_YOFFSET);
         if (card.isCreature()) {
             gImage.drawString(card.getPower() + '/' + card.getToughness(), POWBOX_TEXT_MAX_LEFT, POWBOX_TEXT_MAX_TOP);
         } else if (card.isPlanesWalker()) {
@@ -146,7 +138,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
         gImage.dispose();
 
         gSmall.setFont(new Font("Arial", Font.PLAIN, Config.dimensions.getNameFontSize()));
-        gSmall.drawString(card.getName()+"TEST2", Config.dimensions.getContentXOffset(), Config.dimensions.getNameYOffset());
+        gSmall.drawString(card.getName() + "TEST2", Config.dimensions.getContentXOffset(), Config.dimensions.getNameYOffset());
         if (card.isCreature()) {
             gSmall.drawString(card.getPower() + "/-/" + card.getToughness(), Config.dimensions.getPowBoxTextLeft(), Config.dimensions.getPowBoxTextTop());
         } else if (card.isPlanesWalker()) {
@@ -259,12 +251,12 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 
         return sbType.toString();
     }
-    
+
     protected void drawDetailed(Graphics2D g) {
         // Get the size of the card
         int width = getWidth();
         int height = getHeight();
-        
+
         g.setColor(Color.black);
         g.drawRoundRect(0, 0, width, height, 4, 4);
         g.setColor(Color.white);
@@ -309,7 +301,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 
     @Override
     public void paintComponent(Graphics graphics) {
-        drawDetailed((Graphics2D)graphics);
+        drawDetailed((Graphics2D) graphics);
         /*
         Graphics2D g2 = (Graphics2D) graphics;
         g2.drawImage(small, 0, 0, this);
@@ -367,13 +359,13 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
             List<UUID> targets = card.getTargets();
             if (targets != null) {
                 for (UUID uuid : targets) {
-                    PlayAreaPanel playAreaPanel = MageFrame.getGame(gameId).getPlayers().get(uuid);
+                    PlayAreaPanel playAreaPanel = MageFrame.getGamePlayers(gameId).get(uuid);
                     if (playAreaPanel != null) {
                         Point target = playAreaPanel.getLocationOnScreen();
                         Point me = this.getLocationOnScreen();
                         ArrowBuilder.getBuilder().addArrow(gameId, (int) me.getX() + 35, (int) me.getY(), (int) target.getX() + 40, (int) target.getY() - 40, Color.red, ArrowBuilder.Type.TARGET);
                     } else {
-                        for (PlayAreaPanel pa : MageFrame.getGame(gameId).getPlayers().values()) {
+                        for (PlayAreaPanel pa : MageFrame.getGamePlayers(gameId).values()) {
                             MagePermanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
                             if (permanent != null) {
                                 Point target = permanent.getLocationOnScreen();

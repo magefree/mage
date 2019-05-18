@@ -25,7 +25,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
 import mage.game.events.TableEvent;
-import mage.game.match.Match;
 import mage.game.match.MatchType;
 import mage.game.mulligan.Mulligan;
 import mage.game.permanent.Battlefield;
@@ -134,7 +133,7 @@ public interface Game extends MageItem, Serializable {
 
 
     default boolean isActivePlayer(UUID playerId) {
-        return getActivePlayerId().equals(playerId);
+        return getActivePlayerId() != null && getActivePlayerId().equals(playerId);
     }
 
     /**
@@ -433,7 +432,7 @@ public interface Game extends MageItem, Serializable {
     // game cheats (for tests only)
     void cheat(UUID ownerId, Map<Zone, String> commands);
 
-    void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<PermanentCard> battlefield, List<Card> graveyard);
+    void cheat(UUID ownerId, UUID activePlayerId, List<Card> library, List<Card> hand, List<PermanentCard> battlefield, List<Card> graveyard, List<Card> command);
 
     // controlling the behaviour of replacement effects while permanents entering the battlefield
     void setScopeRelevant(boolean scopeRelevant);

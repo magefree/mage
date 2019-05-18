@@ -569,17 +569,20 @@ public class GameState implements Serializable, Copyable<GameState> {
         combat.checkForRemoveFromCombat(game);
     }
 
-    // Remove End of Combat effects
+    // remove end of combat effects
     public void removeEocEffects(Game game) {
         effects.removeEndOfCombatEffects();
         delayed.removeEndOfCombatAbilities();
         game.applyEffects();
     }
 
+    // remove end of turn effects
     public void removeEotEffects(Game game) {
-        effects.removeEndOfTurnEffects();
-        delayed.removeEndOfTurnAbilities();
+        effects.removeEndOfTurnEffects(game);
+        delayed.removeEndOfTurnAbilities(game);
+        exile.cleanupEndOfTurnZones(game);
         game.applyEffects();
+        effects.incYourTurnNumPlayed(game);
     }
 
     public void addEffect(ContinuousEffect effect, Ability source) {
@@ -787,7 +790,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     public void addCard(Card card) {
         setZone(card.getId(), Zone.OUTSIDE);
         for (Ability ability : card.getAbilities()) {
-            addAbility(ability, card);
+            addAbility(ability, null, card);
         }
     }
 

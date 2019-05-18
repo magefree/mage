@@ -79,8 +79,36 @@ public class TxtDeckImporter extends PlainTextDeckImporter {
         if (delim < 0) {
             return;
         }
+
         String lineNum = line.substring(0, delim).trim();
-        String lineName = line.substring(delim).replace("'", "\'").trim();
+        if (IGNORE_NAMES.contains(lineNum)) {
+            return;
+        }
+
+        // amount
+        int cardAmount = 0;
+        boolean haveCardAmout;
+        try {
+            cardAmount = Integer.parseInt(lineNum.replaceAll("\\D+", ""));
+            if ((cardAmount <= 0) || (cardAmount >= 100)) {
+                sbMessage.append("Invalid number (too small or too big): ").append(lineNum).append(" at line ").append(lineCount).append('\n');
+                return;
+            }
+            haveCardAmout = true;
+        } catch (NumberFormatException nfe) {
+            haveCardAmout = false;
+            //sbMessage.append("Invalid number: ").append(lineNum).append(" at line ").append(lineCount).append('\n');
+            //return;
+        }
+
+        String lineName;
+        if (haveCardAmout) {
+            lineName = line.substring(delim).trim();
+        } else {
+            lineName = line.trim();
+            cardAmount = 1;
+        }
+
         lineName = lineName
                 .replace("&amp;", "//")
                 .replace("Ã†", "Ae")
@@ -96,33 +124,23 @@ public class TxtDeckImporter extends PlainTextDeckImporter {
         }
         lineName = lineName.replaceFirst("(?<=[^/])\\s*/\\s*(?=[^/])", " // ");
 
-        if (IGNORE_NAMES.contains(lineName) || IGNORE_NAMES.contains(lineNum)) {
+        if (IGNORE_NAMES.contains(lineName)) {
             return;
         }
 
         wasCardLines = true;
 
-        try {
-            int num = Integer.parseInt(lineNum.replaceAll("\\D+", ""));
-            if ((num < 0) || (num > 100)) {
-                sbMessage.append("Invalid number (too small or too big): ").append(lineNum).append(" at line ").append(lineCount).append('\n');
-                return;
-            }
-
-            CardInfo cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(lineName, true);
-            if (cardInfo == null) {
-                sbMessage.append("Could not find card: '").append(lineName).append("' at line ").append(lineCount).append('\n');
-            } else {
-                for (int i = 0; i < num; i++) {
-                    if (!sideboard && !singleLineSideBoard) {
-                        deckList.getCards().add(new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode()));
-                    } else {
-                        deckList.getSideboard().add(new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode()));
-                    }
+        CardInfo cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(lineName, true);
+        if (cardInfo == null) {
+            sbMessage.append("Could not find card: '").append(lineName).append("' at line ").append(lineCount).append('\n');
+        } else {
+            for (int i = 0; i < cardAmount; i++) {
+                if (!sideboard && !singleLineSideBoard) {
+                    deckList.getCards().add(new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode()));
+                } else {
+                    deckList.getSideboard().add(new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode()));
                 }
             }
-        } catch (NumberFormatException nfe) {
-            sbMessage.append("Invalid number: ").append(lineNum).append(" at line ").append(lineCount).append('\n');
         }
     }
 }

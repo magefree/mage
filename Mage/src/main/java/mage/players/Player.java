@@ -337,20 +337,21 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean removeFromLibrary(Card card, Game game);
 
-    boolean searchLibrary(TargetCardInLibrary target, Game game);
+    boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game);
 
-    boolean searchLibrary(TargetCardInLibrary target, Game game, boolean triggerEvents);
+    boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, boolean triggerEvents);
 
-    boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId);
+    boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, UUID targetPlayerId);
 
     /**
      * @param target
+     * @param source
      * @param game
      * @param targetPlayerId player whose library will be searched
      * @param triggerEvents  whether searching will trigger any game events
      * @return true if search was successful
      */
-    boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId, boolean triggerEvents);
+    boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, UUID targetPlayerId, boolean triggerEvents);
 
     /**
      * Reveals all players' libraries. Useful for abilities like Jace, Architect of Thought's -8
@@ -568,6 +569,7 @@ public interface Player extends MageItem, Copyable<Player> {
     // set the value for non mana X costs
     int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variableCost);
 
+    // TODO: rework choose replacement effects to use array, not map (it'a random order now)
     int chooseReplacementEffect(Map<String, String> abilityMap, Game game);
 
     TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game);
@@ -653,9 +655,10 @@ public interface Player extends MageItem, Copyable<Player> {
      *
      * @param card
      * @param game
+     * @param abilitiesToActivate extra info about abilities that can be activated on NO option
      * @return player looked at the card
      */
-    boolean lookAtFaceDownCard(Card card, Game game);
+    boolean lookAtFaceDownCard(Card card, Game game, int abilitiesToActivate);
 
     /**
      * Set seconds left to play the game.

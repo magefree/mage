@@ -113,7 +113,7 @@ class GigantiformEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
-        if (controller != null && controller.searchLibrary(target, game)) {
+        if (controller != null && controller.searchLibrary(target, source, game)) {
             Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
             if (card != null) {
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game);

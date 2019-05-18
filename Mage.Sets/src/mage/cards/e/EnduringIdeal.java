@@ -68,7 +68,7 @@ class EnduringIdealEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
-            controller.searchLibrary(target, game);
+            controller.searchLibrary(target, source, game);
             Card targetCard = game.getCard(target.getFirstTarget());
             if (targetCard == null) {
                 applied = false;

@@ -1,9 +1,5 @@
-
 package mage.abilities.costs.common;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
@@ -18,8 +14,11 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.util.CardUtil;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX
  */
 public class RemoveCounterCost extends CostImpl {
@@ -102,10 +101,6 @@ public class RemoveCounterCost extends CostImpl {
                                             new StringBuilder("Remove how many counters from ").append(permanent.getIdName()).toString(), game);
                                 }
                                 permanent.removeCounters(counterName, numberOfCountersSelected, game);
-                                if (permanent.getCounters(game).getCount(counterName) == 0) {
-                                    // this removes only the item with number = 0 from the collection
-                                    permanent.getCounters(game).removeCounter(counterName);
-                                }
                                 countersRemoved += numberOfCountersSelected;
                                 if (!game.isSimulation()) {
                                     game.informPlayers(new StringBuilder(controller.getLogName())

@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesTappedTriggeredAbility;
@@ -12,11 +10,11 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterLandPermanent;
@@ -25,8 +23,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetLandPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class MineLayer extends CardImpl {
@@ -87,7 +86,10 @@ class RemoveAllMineCountersEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(CardType.LAND)) {
             if (permanent != null) {
-                permanent.getCounters(game).removeAllCounters(CounterType.MINE);
+                int numToRemove = permanent.getCounters(game).getCount(CounterType.MINE);
+                if (numToRemove > 0) {
+                    permanent.removeCounters(CounterType.MINE.getName(), numToRemove, game);
+                }
             }
         }
         return true;

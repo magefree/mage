@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -22,14 +20,15 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class CrovaxTheCursed extends CardImpl {
 
     public CrovaxTheCursed(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.power = new MageInt(0);
@@ -82,7 +81,7 @@ class CrovaxTheCursedEffect extends OneShotEffect {
             if (creatures > 0 && controller.chooseUse(outcome, "Sacrifice a creature?", source, game)) {
                 if (new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURES, 1, "").apply(game, source)) {
                     if (sourceObject != null) {
-                        sourceObject.getCounters(game).addCounter(CounterType.P1P1.createInstance());
+                        sourceObject.addCounters(CounterType.P1P1.createInstance(), source, game);
                         game.informPlayers(controller.getLogName() + " puts a +1/+1 counter on " + sourceObject.getName());
                     }
                 }

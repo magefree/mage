@@ -55,6 +55,7 @@ public final class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Bogardan Firefiend", 91, Rarity.COMMON, mage.cards.b.BogardanFirefiend.class));
         cards.add(new SetCardInfo("Boiling Blood", 92, Rarity.COMMON, mage.cards.b.BoilingBlood.class));
         cards.add(new SetCardInfo("Bone Dancer", 62, Rarity.RARE, mage.cards.b.BoneDancer.class));
+        cards.add(new SetCardInfo("Bosium Strip", 147, Rarity.RARE, mage.cards.b.BosiumStrip.class));
         cards.add(new SetCardInfo("Briar Shield", 121, Rarity.COMMON, mage.cards.b.BriarShield.class));
         cards.add(new SetCardInfo("Bubble Matrix", 146, Rarity.RARE, mage.cards.b.BubbleMatrix.class));
         cards.add(new SetCardInfo("Buried Alive", 63, Rarity.UNCOMMON, mage.cards.b.BuriedAlive.class));
@@ -159,6 +160,7 @@ public final class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Strands of Night", 82, Rarity.UNCOMMON, mage.cards.s.StrandsOfNight.class));
         cards.add(new SetCardInfo("Straw Golem", 158, Rarity.UNCOMMON, mage.cards.s.StrawGolem.class));
         cards.add(new SetCardInfo("Striped Bears", 140, Rarity.COMMON, mage.cards.s.StripedBears.class));
+        cards.add(new SetCardInfo("Sylvan Hierophant", 141, Rarity.UNCOMMON, mage.cards.s.SylvanHierophant.class));
         cards.add(new SetCardInfo("Tariff", 28, Rarity.RARE, mage.cards.t.Tariff.class));
         cards.add(new SetCardInfo("Teferi's Veil", 53, Rarity.UNCOMMON, mage.cards.t.TeferisVeil.class));
         cards.add(new SetCardInfo("Tendrils of Despair", 83, Rarity.COMMON, mage.cards.t.TendrilsOfDespair.class));

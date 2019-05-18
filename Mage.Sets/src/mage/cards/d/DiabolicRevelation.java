@@ -66,7 +66,7 @@ class DiabolicRevelationEffect extends OneShotEffect {
             return false;
         }
 
-        if (player.searchLibrary(target, game)) {
+        if (player.searchLibrary(target, source, game)) {
             for (UUID cardId : target.getTargets()) {
                 Card card = player.getLibrary().remove(cardId, game);
                 if (card != null) {

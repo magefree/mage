@@ -7,7 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.AsThoughManaEffect;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -31,7 +31,7 @@ public final class VizierOfTheMenagerie extends CardImpl {
         this.toughness = new MageInt(4);
 
         // You may look at the top card of your library. (You may do this at any time.)
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VizierOfTheMenagerieTopCardRevealedEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LookAtTopCardOfLibraryAnyTimeEffect()));
 
         // You may cast the top card of your library if it's a creature card.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VizierOfTheMenagerieTopCardCastEffect()));
@@ -48,38 +48,6 @@ public final class VizierOfTheMenagerie extends CardImpl {
     @Override
     public VizierOfTheMenagerie copy() {
         return new VizierOfTheMenagerie(this);
-    }
-}
-
-class VizierOfTheMenagerieTopCardRevealedEffect extends ContinuousEffectImpl {
-
-    public VizierOfTheMenagerieTopCardRevealedEffect() {
-        super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
-        staticText = "You may look at the top card of your library any time";
-    }
-
-    public VizierOfTheMenagerieTopCardRevealedEffect(final VizierOfTheMenagerieTopCardRevealedEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Card topCard = controller.getLibrary().getFromTop(game);
-            if (topCard != null) {
-                MageObject vizierOfTheMenagerie = source.getSourceObject(game);
-                if (vizierOfTheMenagerie != null) {
-                    controller.lookAtCards("Top card of " + vizierOfTheMenagerie.getIdName() + " controller's library", topCard, game);
-                }
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public VizierOfTheMenagerieTopCardRevealedEffect copy() {
-        return new VizierOfTheMenagerieTopCardRevealedEffect(this);
     }
 }
 

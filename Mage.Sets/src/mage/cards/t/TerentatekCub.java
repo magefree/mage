@@ -1,11 +1,12 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.OpponentControlsPermanentCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.decorator.ConditionalRequirementEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.AttacksIfAbleSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
@@ -18,8 +19,9 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author Styxo
  */
 public final class TerentatekCub extends CardImpl {
@@ -36,17 +38,15 @@ public final class TerentatekCub extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // As long as an opponent controls a Jedi or Sith, {this} gets +1/+1 and attacks each turn if able 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        // As long as an opponent controls a Jedi or Sith, {this} gets +1/+1 and attacks each turn if able
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostSourceEffect(1, 1, Duration.Custom),
                 new OpponentControlsPermanentCondition(filter),
-                "As long as an opponent controls a Jedi or Sith, {this} gets +1/+1 ")
-        ));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-                new AttacksIfAbleSourceEffect(Duration.Custom),
-                new OpponentControlsPermanentCondition(filter),
-                "and attacks each turn if able.")
-        ));
+                "As long as an opponent controls a Jedi or Sith, {this} gets +1/+1"));
+        Effect effect = new ConditionalRequirementEffect(new AttacksIfAbleSourceEffect(Duration.Custom), new OpponentControlsPermanentCondition(filter));
+        effect.setText("and attacks each turn if able");
+        ability.addEffect(effect);
+        this.addAbility(ability);
     }
 
     public TerentatekCub(final TerentatekCub card) {

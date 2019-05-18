@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.mage.card.arcane;
 
 import mage.ObjectColor;
@@ -56,13 +51,14 @@ import static org.mage.card.arcane.ManaSymbols.getSizedManaSymbol;
  */
 
 /**
- * @author stravant@gmail.com
+ * @author stravant@gmail.com, JayDi85
  * <p>
  * Base rendering class for new border cards
  */
 public class ModernCardRenderer extends CardRenderer {
 
     private static final Logger LOGGER = Logger.getLogger(ModernCardRenderer.class);
+    private static final GlowText glowTextRenderer = new GlowText();
 
     ///////////////////////////////////////////////////////////////////////////
     // Textures for modern frame cards
@@ -98,7 +94,7 @@ public class ModernCardRenderer extends CardRenderer {
         return new Font("Arial", Font.PLAIN, 1);
     }
 
-    public static final Font BASE_BELEREN_FONT = loadFont("beleren-bold");
+    // public static final Font BASE_BELEREN_FONT = loadFont("beleren-bold");
 
     public static final Paint BG_TEXTURE_WHITE = loadBackgroundTexture("white");
     public static final Paint BG_TEXTURE_BLUE = loadBackgroundTexture("blue");
@@ -252,16 +248,13 @@ public class ModernCardRenderer extends CardRenderer {
         // Box text height
         boxTextHeight = getTextHeightForBoxHeight(boxHeight);
         boxTextOffset = (boxHeight - boxTextHeight) / 2;
-        // Not using Beleren for now because it looks bad at small font sizes. Maybe we want to in the future?
-        //boxTextFont = BASE_BELEREN_FONT.deriveFont(Font.PLAIN, boxTextHeight);
         boxTextFont = new Font("Arial", Font.PLAIN, boxTextHeight);
         boxTextFontNarrow = new Font("Arial Narrow", Font.PLAIN, boxTextHeight);
 
         // Box text height
         ptTextHeight = getPTTextHeightForLineHeight(boxHeight);
         ptTextOffset = (boxHeight - ptTextHeight) / 2;
-        // Beleren font does work well for numbers though
-        ptTextFont = BASE_BELEREN_FONT.deriveFont(Font.PLAIN, ptTextHeight);
+        ptTextFont = new Font("Arial", Font.BOLD, ptTextHeight);
     }
 
     @Override
@@ -482,7 +475,7 @@ public class ModernCardRenderer extends CardRenderer {
         g.setPaint(borderPaint);
 
         if (cardView.getFrameStyle() == FrameStyle.KLD_INVENTION) {
-            g.drawImage(FRAME_INVENTION, 0, 0, cardWidth, cardHeight, null);
+            g.drawImage(FRAME_INVENTION, 3, 3, cardWidth - 6, cardHeight - 6, null);
             g.drawRect(
                     totalContentInset, typeLineY,
                     contentWidth - 1, cardHeight - borderWidth * 3 - typeLineY - 1);
@@ -933,6 +926,51 @@ public class ModernCardRenderer extends CardRenderer {
         }
     }
 
+    public void paintOutlineTextByGlow(Graphics2D g, String text, Color color, int x, int y) {
+        GlowText label = new GlowText();
+        label.setGlow(Color.black, 6, 3);
+        label.setText(text);
+        label.setFont(g.getFont().deriveFont(Font.BOLD));
+        label.setForeground(color);
+        Dimension ptSize = label.getPreferredSize();
+        label.setSize(ptSize.width, ptSize.height);
+        g.drawImage(label.getGlowImage(), x, y, null);
+    }
+
+    public void paintOutlineTextByStroke(Graphics2D g, String text, Color color, int x, int y) {
+        // https://stackoverflow.com/a/35222059/1276632
+        Color outlineColor = Color.black;
+        Color fillColor = color;
+        BasicStroke outlineStroke = new BasicStroke(1.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
+
+        // remember original settings
+        Color originalColor = g.getColor();
+        Stroke originalStroke = g.getStroke();
+        RenderingHints originalHints = g.getRenderingHints();
+
+        // create a glyph vector from your text
+        GlyphVector glyphVector = g.getFont().createGlyphVector(g.getFontRenderContext(), text);
+        // get the shape object
+        Shape textShape = glyphVector.getOutline(x, y);
+
+        // activate anti aliasing for text rendering (if you want it to look nice)
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+
+        g.setColor(outlineColor);
+        g.setStroke(outlineStroke);
+        g.draw(textShape); // draw outline
+
+        g.setColor(fillColor);
+        g.fill(textShape); // fill the shape
+
+        // reset to original settings after painting
+        g.setColor(originalColor);
+        g.setStroke(originalStroke);
+        g.setRenderingHints(originalHints);
+    }
+
     // Draw the P/T and/or Loyalty boxes
     protected void drawBottomRight(Graphics2D g, Paint borderPaint, Color fill) {
         // No bottom right for abilities
@@ -944,17 +982,31 @@ public class ModernCardRenderer extends CardRenderer {
         int curY = cardHeight - (int) (0.03f * cardHeight);
 
         // Width of the boxes
-        int partWidth = (int) Math.max(30, 0.20f * cardWidth);
+        int partBoxWidth = (int) Math.max(30, 0.20f * cardWidth);
 
         // Is it a creature?
         boolean isVehicle = cardView.getSubTypes().contains(SubType.VEHICLE);
         if (cardView.isCreature() || isVehicle) {
-            int x = cardWidth - borderWidth - partWidth;
+
+            // draws p/t by parts
+            int ptDeviderSpace = 1;  // Arial font is too narrow for devider (2/2) and needs extra space
+            String ptText1 = cardView.getPower();
+            String ptText2 = "/";
+            String ptText3 = CardRendererUtils.getCardLifeWithDamage(cardView);
+            int ptTextWidth1 = g.getFontMetrics(ptTextFont).stringWidth(ptText1);
+            int ptTextWidth2 = g.getFontMetrics(ptTextFont).stringWidth(ptText2) + 2 * ptDeviderSpace;
+            int ptTextWidth3 = g.getFontMetrics(ptTextFont).stringWidth(ptText3);
+
+            // PT max size
+            int ptContentWidth = contentInset + ptTextWidth1 + ptDeviderSpace + ptTextWidth2 + ptDeviderSpace + ptTextWidth3 + contentInset;
+            partBoxWidth = Math.max(ptContentWidth, partBoxWidth);
+
+            int x = cardWidth - borderWidth - partBoxWidth;
 
             // Draw PT box
             CardRendererUtils.drawRoundedBox(g,
                     x, curY - boxHeight,
-                    partWidth, boxHeight,
+                    partBoxWidth, boxHeight,
                     contentInset,
                     borderPaint,
                     isVehicle ? BOX_VEHICLE : fill);
@@ -963,27 +1015,42 @@ public class ModernCardRenderer extends CardRenderer {
             g.setColor(new Color(0, 0, 0, 150));
             g.fillRect(
                     x + contentInset, curY - boxHeight - 1,
-                    partWidth - 2 * contentInset, 1);
+                    partBoxWidth - 2 * contentInset, 1);
 
             // Draw text
-            Color textColor;
+            Color defaultTextColor;
+            boolean defaultTextLight;
             if (isVehicle) {
                 boolean isAnimated = !(cardView instanceof PermanentView) || cardView.isCreature();
                 if (isAnimated) {
-                    textColor = Color.white;
+                    defaultTextColor = Color.white;
                 } else {
-                    textColor = new Color(180, 180, 180);
+                    defaultTextColor = new Color(180, 180, 180);
                 }
-
+                defaultTextLight = true;
             } else {
-                textColor = getBoxTextColor();
+                defaultTextColor = getBoxTextColor();
+                defaultTextLight = !defaultTextColor.equals(Color.black);
             }
-            g.setColor(textColor);
+            g.setColor(defaultTextColor);
             g.setFont(ptTextFont);
-            String ptText = cardView.getPower() + '/' + cardView.getToughness();
-            int ptTextWidth = g.getFontMetrics().stringWidth(ptText);
-            g.drawString(ptText,
-                    x + (partWidth - ptTextWidth) / 2, curY - ptTextOffset - 1);
+
+            // draws
+            int ptEmptySpace = (partBoxWidth - ptContentWidth) / 2;
+            int ptPosStart1 = x + contentInset + ptEmptySpace;
+            int ptPosStart2 = ptPosStart1 + ptTextWidth1 + ptDeviderSpace;
+            int ptPosStart3 = ptPosStart2 + ptTextWidth2 + ptDeviderSpace;
+            // p
+            g.setColor(CardRendererUtils.getCardTextColor(cardView.getOriginalCard().getPower(), false, defaultTextColor, defaultTextLight));
+            g.drawString(ptText1, ptPosStart1, curY - ptTextOffset - 1); // left
+            // /
+            g.setColor(defaultTextColor);
+            g.drawString(ptText2, ptPosStart2, curY - ptTextOffset - 1); // center
+            // t
+            g.setColor(CardRendererUtils.getCardTextColor(cardView.getOriginalCard().getPower(), CardRendererUtils.isCardWithDamage(cardView), defaultTextColor, defaultTextLight));
+            g.drawString(ptText3, ptPosStart3, curY - ptTextOffset - 1); // right
+            //
+            g.setColor(defaultTextColor);
 
             // Advance
             curY -= boxHeight;
@@ -994,9 +1061,9 @@ public class ModernCardRenderer extends CardRenderer {
         if (cardView.isPlanesWalker()
                 && (cardView instanceof PermanentView || !cardView.getStartingLoyalty().equals("0"))) {
             // Draw the PW loyalty box
-            int w = partWidth;
-            int h = partWidth / 2;
-            int x = cardWidth - partWidth - borderWidth;
+            int w = partBoxWidth;
+            int h = partBoxWidth / 2;
+            int x = cardWidth - partBoxWidth - borderWidth;
             int y = curY - h;
 
             Polygon symbol = new Polygon(
@@ -1047,16 +1114,16 @@ public class ModernCardRenderer extends CardRenderer {
 
         // does it have damage on it?
         if ((cardView instanceof PermanentView) && ((PermanentView) cardView).getDamage() > 0) {
-            int x = cardWidth - partWidth - borderWidth;
+            int x = cardWidth - partBoxWidth - borderWidth;
             int y = curY - boxHeight;
             String damage = String.valueOf(((PermanentView) cardView).getDamage());
             g.setFont(ptTextFont);
             int txWidth = g.getFontMetrics().stringWidth(damage);
             g.setColor(Color.red);
-            g.fillRect(x, y, partWidth, boxHeight);
+            g.fillRect(x, y, partBoxWidth, boxHeight);
             g.setColor(Color.white);
-            g.drawRect(x, y, partWidth, boxHeight);
-            g.drawString(damage, x + (partWidth - txWidth) / 2, curY - 1);
+            g.drawRect(x, y, partBoxWidth, boxHeight);
+            g.drawString(damage, x + (partBoxWidth - txWidth) / 2, curY - 1);
         }
     }
 

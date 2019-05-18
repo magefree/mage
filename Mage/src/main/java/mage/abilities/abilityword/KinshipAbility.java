@@ -1,5 +1,3 @@
-
-
 package mage.abilities.abilityword;
 
 import mage.abilities.Ability;
@@ -21,28 +19,27 @@ import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author LevelX2
  */
 public class KinshipAbility extends TriggeredAbilityImpl {
-    
+
     public KinshipAbility(Effect kinshipEffect) {
-        super(Zone.BATTLEFIELD, new KinshipBaseEffect(kinshipEffect), true);        
+        super(Zone.BATTLEFIELD, new KinshipBaseEffect(kinshipEffect), true);
     }
-    
+
     public KinshipAbility(final KinshipAbility ability) {
-        super(ability);        
+        super(ability);
     }
 
     public void addKinshipEffect(Effect kinshipEffect) {
-        for (Effect effect: this.getEffects()) {
+        for (Effect effect : this.getEffects()) {
             if (effect instanceof KinshipBaseEffect) {
-               ((KinshipBaseEffect) effect).addEffect(kinshipEffect);
-               break;
+                ((KinshipBaseEffect) effect).addEffect(kinshipEffect);
+                break;
             }
-        }        
+        }
     }
-    
+
     @Override
     public KinshipAbility copy() {
         return new KinshipAbility(this);
@@ -62,33 +59,33 @@ public class KinshipAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return new StringBuilder("<i>Kinship</i> &mdash; At the beginning of your upkeep, ").append(super.getRule()).toString();
     }
-    
+
 }
 
 class KinshipBaseEffect extends OneShotEffect {
-    
+
     private final Effects kinshipEffects = new Effects();
-    
+
     public KinshipBaseEffect(Effect kinshipEffect) {
         super(kinshipEffect.getOutcome());
         this.kinshipEffects.add(kinshipEffect);
         this.staticText = "you may look at the top card of your library. If it shares a creature type with {this}, you may reveal it. If you do, ";
     }
-    
+
     public KinshipBaseEffect(final KinshipBaseEffect effect) {
         super(effect);
-        this.kinshipEffects.addAll(effect.kinshipEffects);
+        this.kinshipEffects.addAll(effect.kinshipEffects.copy());
     }
-    
+
     public void addEffect(Effect kinshipEffect) {
         this.kinshipEffects.add(kinshipEffect);
     }
-    
+
     @Override
     public KinshipBaseEffect copy() {
         return new KinshipBaseEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -100,22 +97,22 @@ class KinshipBaseEffect extends OneShotEffect {
                     Cards cards = new CardsImpl(card);
                     controller.lookAtCards(sourcePermanent.getName(), cards, game);
                     if (sourcePermanent.shareSubtypes(card, game)) {
-                        if (controller.chooseUse(outcome,new StringBuilder("Kinship - Reveal ").append(card.getLogName()).append('?').toString(), source, game)) {
+                        if (controller.chooseUse(outcome, new StringBuilder("Kinship - Reveal ").append(card.getLogName()).append('?').toString(), source, game)) {
                             controller.revealCards(sourcePermanent.getName(), cards, game);
-                            for (Effect effect: kinshipEffects) {
+                            for (Effect effect : kinshipEffects) {
                                 effect.setTargetPointer(new FixedTarget(card.getId()));
                                 if (effect.getEffectType() == EffectType.ONESHOT) {
                                     effect.apply(game, source);
                                 } else {
                                     if (effect instanceof ContinuousEffect) {
-                                        game.addEffect((ContinuousEffect)effect, source);
+                                        game.addEffect((ContinuousEffect) effect, source);
                                     } else {
                                         throw new UnsupportedOperationException("This kind of effect is not supported");
                                     }
                                 }
-                            }                            
+                            }
                         }
-                    }                    
+                    }
                 }
             }
             return true;
@@ -125,7 +122,7 @@ class KinshipBaseEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        return new StringBuilder(super.getText(mode)).append(kinshipEffects.getText(mode)).toString(); 
+        return new StringBuilder(super.getText(mode)).append(kinshipEffects.getText(mode)).toString();
     }
-        
+
 }

@@ -70,7 +70,6 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Map.Entry;
-import java.util.stream.Collectors;
 
 public abstract class PlayerImpl implements Player, Serializable {
 
@@ -182,8 +181,6 @@ public abstract class PlayerImpl implements Player, Serializable {
      */
     protected final Map<PhaseStep, Step.StepPart> silentPhaseSteps = ImmutableMap.<PhaseStep, Step.StepPart>builder().
             put(PhaseStep.DECLARE_ATTACKERS, Step.StepPart.PRE).build();
-
-
 
     public PlayerImpl(String name, RangeOfInfluence range) {
         this(UUID.randomUUID());
@@ -613,7 +610,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
             if (abilities.containsKey(HexproofAbility.getInstance().getId())) {
                 if (sourceControllerId != null && this.hasOpponent(sourceControllerId, game)
-                        && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, this.getId(), game)) {
+                        && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game)) {
                     return false;
                 }
             }
@@ -739,9 +736,9 @@ public abstract class PlayerImpl implements Player, Serializable {
             TargetDiscard target = new TargetDiscard(possibleAmount, possibleAmount, new FilterCard(CardUtil.numberToText(possibleAmount, "a") + " card" + (possibleAmount > 1 ? "s" : "")), playerId);
             choose(Outcome.Discard, target, source == null ? null : source.getSourceId(), game);
             for (UUID cardId : target.getTargets()) {
-                    if(discard(this.getHand().get(cardId, game), source, game)) {
-                        discardedCards.add(cardId);
-                    }
+                if (discard(this.getHand().get(cardId, game), source, game)) {
+                    discardedCards.add(cardId);
+                }
             }
         }
         return discardedCards;
@@ -882,30 +879,27 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (!cardsToLibrary.isEmpty()) {
             Cards cards = new CardsImpl(cardsToLibrary); // prevent possible ConcurrentModificationException
             if (!anyOrder) {
-                while (!cards.isEmpty()) {
-                    Card card = cards.getRandom(game);
-                    if (card != null) {
-                        cards.remove(card);
-                        moveObjectToLibrary(card.getId(), source == null ? null : source.getSourceId(), game, false, false);
-                    } else {
-                        return false;// probably cards were removed because player left the game
-                    }
+                // random order
+                List<UUID> ids = new ArrayList<>(cards);
+                Collections.shuffle(ids);
+                for (UUID id : ids) {
+                    moveObjectToLibrary(id, source == null ? null : source.getSourceId(), game, false, false);
                 }
             } else {
+                // user defined order
                 TargetCard target = new TargetCard(Zone.ALL, new FilterCard("card ORDER to put on the BOTTOM of your library (last one chosen will be bottommost)"));
                 target.setRequired(true);
-                while (cards.size() > 1) {
-                    this.choose(Outcome.Neutral, cards, target, game);
-                    if (!canRespond()) {
-                        return false;
-                    }
+                while (cards.size() > 1 && this.canRespond() && this.choose(Outcome.Neutral, cards, target, game)) {
                     UUID targetObjectId = target.getFirstTarget();
+                    if (targetObjectId == null) {
+                        break;
+                    }
                     cards.remove(targetObjectId);
                     moveObjectToLibrary(targetObjectId, source == null ? null : source.getSourceId(), game, false, false);
                     target.clearChosen();
                 }
-                if (cards.size() == 1) {
-                    moveObjectToLibrary(cards.iterator().next(), source == null ? null : source.getSourceId(), game, false, false);
+                for (UUID c : cards) {
+                    moveObjectToLibrary(c, source == null ? null : source.getSourceId(), game, false, false);
                 }
             }
         }
@@ -947,30 +941,27 @@ public abstract class PlayerImpl implements Player, Serializable {
             Cards cards = new CardsImpl(cardsToLibrary); // prevent possible ConcurrentModificationException
             UUID sourceId = (source == null ? null : source.getSourceId());
             if (!anyOrder) {
-                while (!cards.isEmpty()) {
-                    Card card = cards.getRandom(game);
-                    if (card != null) {
-                        cards.remove(card.getId());
-                        moveObjectToLibrary(card.getId(), source == null ? null : source.getSourceId(), game, true, false);
-                    } else {
-                        return false; // probably cards were removed because player left the game
-                    }
+                // random order
+                List<UUID> ids = new ArrayList<>(cards);
+                Collections.shuffle(ids);
+                for (UUID id : ids) {
+                    moveObjectToLibrary(id, source == null ? null : source.getSourceId(), game, true, false);
                 }
             } else {
-                TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card ORDER to put on the TOP of your library (last one chosen will be topmost)"));
+                // user defined order
+                TargetCard target = new TargetCard(Zone.ALL, new FilterCard("card ORDER to put on the TOP of your library (last one chosen will be topmost)"));
                 target.setRequired(true);
-                while (cards.size() > 1) {
-                    this.choose(Outcome.Neutral, cards, target, game);
-                    if (!canRespond()) {
-                        return false;
-                    }
+                while (cards.size() > 1 && this.canRespond() && this.choose(Outcome.Neutral, cards, target, game)) {
                     UUID targetObjectId = target.getFirstTarget();
+                    if (targetObjectId == null) {
+                        break;
+                    }
                     cards.remove(targetObjectId);
-                    moveObjectToLibrary(targetObjectId, sourceId, game, true, false);
+                    moveObjectToLibrary(targetObjectId, source == null ? null : source.getSourceId(), game, true, false);
                     target.clearChosen();
                 }
-                if (cards.size() == 1) {
-                    moveObjectToLibrary(cards.iterator().next(), sourceId, game, true, false);
+                for (UUID c : cards) {
+                    moveObjectToLibrary(c, source == null ? null : source.getSourceId(), game, true, false);
                 }
             }
         }
@@ -2019,24 +2010,30 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public boolean addCounters(Counter counter, Game game) {
         boolean returnCode = true;
-        GameEvent countersEvent = GameEvent.getEvent(EventType.ADD_COUNTERS, playerId, null, playerId, counter.getName(), counter.getCount());
-        if (!game.replaceEvent(countersEvent)) {
-            int amount = countersEvent.getAmount();
+        GameEvent addingAllEvent = GameEvent.getEvent(EventType.ADD_COUNTERS, playerId, null, playerId, counter.getName(), counter.getCount());
+        if (!game.replaceEvent(addingAllEvent)) {
+            int amount = addingAllEvent.getAmount();
             int finalAmount = amount;
+            boolean isEffectFlag = addingAllEvent.getFlag();
             for (int i = 0; i < amount; i++) {
                 Counter eventCounter = counter.copy();
                 eventCounter.remove(eventCounter.getCount() - 1);
-                GameEvent event = GameEvent.getEvent(EventType.ADD_COUNTER, playerId, null, playerId, counter.getName(), 1);
-                if (!game.replaceEvent(event)) {
+                GameEvent addingOneEvent = GameEvent.getEvent(EventType.ADD_COUNTER, playerId, null, playerId, counter.getName(), 1);
+                addingOneEvent.setFlag(isEffectFlag);
+                if (!game.replaceEvent(addingOneEvent)) {
                     getCounters().addCounter(eventCounter);
-                    game.fireEvent(GameEvent.getEvent(EventType.COUNTER_ADDED, playerId, null, playerId, counter.getName(), 1));
+                    GameEvent addedOneEvent = GameEvent.getEvent(EventType.COUNTER_ADDED, playerId, null, playerId, counter.getName(), 1);
+                    addedOneEvent.setFlag(addingOneEvent.getFlag());
+                    game.fireEvent(addedOneEvent);
                 } else {
                     finalAmount--;
                     returnCode = false;
                 }
             }
             if (finalAmount > 0) {
-                game.fireEvent(GameEvent.getEvent(EventType.COUNTERS_ADDED, playerId, null, playerId, counter.getName(), amount));
+                GameEvent addedAllEvent = GameEvent.getEvent(EventType.COUNTERS_ADDED, playerId, null, playerId, counter.getName(), amount);
+                addedAllEvent.setFlag(addingAllEvent.getFlag());
+                game.fireEvent(addedAllEvent);
             }
         } else {
             returnCode = false;
@@ -2046,6 +2043,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void removeCounters(String name, int amount, Ability source, Game game) {
+        int finalAmount = 0;
         for (int i = 0; i < amount; i++) {
             if (!counters.removeCounter(name, 1)) {
                 break;
@@ -2055,7 +2053,13 @@ public abstract class PlayerImpl implements Player, Serializable {
             event.setData(name);
             event.setAmount(1);
             game.fireEvent(event);
+            finalAmount++;
         }
+        GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTERS_REMOVED,
+                getId(), (source == null ? null : source.getSourceId()), (source == null ? null : source.getControllerId()));
+        event.setData(name);
+        event.setAmount(finalAmount);
+        game.fireEvent(event);
     }
 
     protected boolean canDamage(MageObject source, Game game) {
@@ -2425,22 +2429,22 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean searchLibrary(TargetCardInLibrary target, Game game) {
-        return searchLibrary(target, game, playerId, true);
+    public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game) {
+        return searchLibrary(target, source, game, playerId, true);
     }
 
     @Override
-    public boolean searchLibrary(TargetCardInLibrary target, Game game, boolean triggerEvents) {
-        return searchLibrary(target, game, playerId, triggerEvents);
+    public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, boolean triggerEvents) {
+        return searchLibrary(target, source, game, playerId, triggerEvents);
     }
 
     @Override
-    public boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId) {
-        return searchLibrary(target, game, targetPlayerId, true);
+    public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, UUID targetPlayerId) {
+        return searchLibrary(target, source, game, targetPlayerId, true);
     }
 
     @Override
-    public boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId, boolean triggerEvents) {
+    public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, UUID targetPlayerId, boolean triggerEvents) {
         //20091005 - 701.14c
         Library searchedLibrary = null;
         String searchInfo = null;
@@ -2457,7 +2461,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (searchedLibrary == null) {
             return false;
         }
-        GameEvent event = GameEvent.getEvent(GameEvent.EventType.SEARCH_LIBRARY, targetPlayerId, playerId, playerId, Integer.MAX_VALUE);
+        GameEvent event = GameEvent.getEvent(GameEvent.EventType.SEARCH_LIBRARY, targetPlayerId, source.getSourceId(), playerId, Integer.MAX_VALUE);
         if (!game.replaceEvent(event)) {
             if (!game.isSimulation()) {
                 game.informPlayers(searchInfo);
@@ -3459,10 +3463,13 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean lookAtFaceDownCard(Card card, Game game
-    ) {
+    public boolean lookAtFaceDownCard(Card card, Game game, int abilitiesToActivate) {
         if (null != game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.LOOK_AT_FACE_DOWN, card.getSpellAbility(), this.getId(), game)) {
-            if (chooseUse(Outcome.Benefit, "Look at that card?", null, game)) {
+            // two modes: look at card or not to look and activate other abilities
+            String lookMessage = abilitiesToActivate > 0 ? "Look at that card (it's have " + abilitiesToActivate + " abilities to activate)?" : "Look at that card?";
+            String lookYes = "Yes, look at card";
+            String lookNo = abilitiesToActivate > 0 ? "No, activate ability" : "No";
+            if (chooseUse(Outcome.Benefit, lookMessage, "", lookYes, lookNo, null, game)) {
                 Cards cards = new CardsImpl(card);
                 this.lookAtCards(getName() + " - " + sdf.format(System.currentTimeMillis()), cards, game);
                 return true;

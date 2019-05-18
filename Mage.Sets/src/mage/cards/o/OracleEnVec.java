@@ -42,7 +42,9 @@ public final class OracleEnVec extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {tap}: Target opponent chooses any number of creatures he or she controls. During that player's next turn, the chosen creatures attack if able, and other creatures can't attack. At the beginning of that turn's end step, destroy each of the chosen creatures that didn't attack. Activate this ability only during your turn.
+        // {T}: Target opponent chooses any number of creatures they control. During that player’s next turn, the chosen
+        // creatures attack if able, and other creatures can’t attack. At the beginning of that turn’s end step,
+        // destroy each of the chosen creatures that didn’t attack this turn. Activate this ability only during your turn.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new OracleEnVecEffect(), new TapSourceCost(), MyTurnCondition.instance);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability, new AttackedThisTurnWatcher());
@@ -62,7 +64,9 @@ class OracleEnVecEffect extends OneShotEffect {
 
     OracleEnVecEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Target opponent chooses any number of creatures he or she controls. During that player's next turn, the chosen creatures attack if able, and other creatures can't attack. At the beginning of that turn's end step, destroy each of the chosen creatures that didn't attack";
+        this.staticText = "Target opponent chooses any number of creatures he or she controls. During that player's next turn, " +
+                "the chosen creatures attack if able, and other creatures can't attack. At the beginning of that turn's end step, " +
+                "destroy each of the chosen creatures that didn't attack";
     }
 
     OracleEnVecEffect(final OracleEnVecEffect effect) {
@@ -102,7 +106,7 @@ class OracleEnVecEffect extends OneShotEffect {
 class OracleEnVecMustAttackRequirementEffect extends RequirementEffect {
 
     OracleEnVecMustAttackRequirementEffect() {
-        super(Duration.Custom);
+        super(Duration.UntilEndOfYourNextTurn);
     }
 
     OracleEnVecMustAttackRequirementEffect(final OracleEnVecMustAttackRequirementEffect effect) {
@@ -117,7 +121,8 @@ class OracleEnVecMustAttackRequirementEffect extends RequirementEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         return this.getTargetPointer().getFirst(game, source) != null
-                && this.getTargetPointer().getFirst(game, source).equals(permanent.getId());
+                && this.getTargetPointer().getFirst(game, source).equals(permanent.getId())
+                && this.isYourNextTurn(game);
     }
 
     @Override
@@ -131,10 +136,19 @@ class OracleEnVecMustAttackRequirementEffect extends RequirementEffect {
     }
 
     @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        Permanent perm = game.getPermanent(this.getTargetPointer().getFirst(game, source));
+        if (perm != null) {
+            setStartingControllerAndTurnNum(game, perm.getControllerId(), game.getActivePlayerId()); // setup startingController to calc isYourTurn calls
+        } else {
+            discard();
+        }
+    }
+
+    @Override
     public boolean isInactive(Ability source, Game game) {
-        return startingTurn != game.getTurnNum()
-                && (game.getPhase().getType() == TurnPhase.END
-                && game.isActivePlayer(this.getTargetPointer().getFirst(game, source)));
+        return game.getPhase().getType() == TurnPhase.END && this.isYourNextTurn(game);
     }
 
     @Override
@@ -170,10 +184,19 @@ class OracleEnVecCantAttackRestrictionEffect extends RestrictionEffect {
     }
 
     @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        Permanent perm = game.getPermanent(this.getTargetPointer().getFirst(game, source));
+        if (perm != null) {
+            setStartingControllerAndTurnNum(game, perm.getControllerId(), game.getActivePlayerId()); // setup startingController to calc isYourTurn calls
+        } else {
+            discard();
+        }
+    }
+
+    @Override
     public boolean isInactive(Ability source, Game game) {
-        return startingTurn != game.getTurnNum()
-                && (game.getPhase().getType() == TurnPhase.END
-                && game.isActivePlayer(this.getTargetPointer().getFirst(game, source)));
+        return game.getPhase().getType() == TurnPhase.END && this.isYourNextTurn(game);
     }
 
     @Override

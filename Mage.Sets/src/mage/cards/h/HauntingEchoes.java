@@ -69,7 +69,7 @@ class HauntingEchoesEffect extends OneShotEffect {
                     int count = targetPlayer.getLibrary().count(filterCard, game);
                     TargetCardInLibrary target = new TargetCardInLibrary(count, count, filterCard);
 
-                    player.searchLibrary(target, game, targetPlayer.getId());
+                    player.searchLibrary(target, source, game, targetPlayer.getId());
                     List<UUID> targets = target.getTargets();
                     for (UUID cardId : targets) {
                         Card libraryCard = game.getCard(cardId);

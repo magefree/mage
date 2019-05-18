@@ -200,8 +200,10 @@ public class WhatsNewDialog extends MageDialog {
             }.getType();
             try {
                 httpCookies = gson.fromJson(sourceValue, type);
-                for (HttpCookie cookie : httpCookies) {
-                    store.add(URI.create(cookie.getDomain()), cookie);
+                if (httpCookies != null) {
+                    for (HttpCookie cookie : httpCookies) {
+                        store.add(URI.create(cookie.getDomain()), cookie);
+                    }
                 }
             } catch (Exception e) {
                 logger.error("Wrong news page cookies", e);

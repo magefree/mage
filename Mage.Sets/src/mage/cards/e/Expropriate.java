@@ -1,8 +1,5 @@
 package mage.cards.e;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -22,6 +19,10 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
  * @author JRHerlehy
  */
@@ -30,7 +31,8 @@ public final class Expropriate extends CardImpl {
     public Expropriate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{7}{U}{U}");
 
-        // <i>Council's dilemma</i> &mdash; Starting with you, each player votes for time or money. For each time vote, take an extra turn after this one. For each money vote, choose a permanent owned by the voter and gain control of it. Exile Expropriate
+        // <i>Council's dilemma</i> &mdash; Starting with you, each player votes for time or money. For each time vote,
+        // take an extra turn after this one. For each money vote, choose a permanent owned by the voter and gain control of it. Exile Expropriate
         this.getSpellAbility().addEffect(new ExpropriateDilemmaEffect());
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }

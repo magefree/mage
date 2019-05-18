@@ -123,7 +123,7 @@ class GateToTheAfterlifeEffect extends OneShotEffect {
         if (card == null && controller.chooseUse(Outcome.Benefit, "Do you want to search your library for " + cardName + "?", source, game)) {
             librarySearched = true;
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
-            if (controller.searchLibrary(target, game)) {
+            if (controller.searchLibrary(target, source, game)) {
                 card = game.getCard(target.getFirstTarget());
             }
             controller.shuffleLibrary(source, game);

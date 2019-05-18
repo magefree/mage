@@ -174,7 +174,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         logger.info("Starting MAGE server console version " + version);
         logger.info("Logging level: " + logger.getEffectiveLevel());
 
@@ -210,7 +210,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
     }
 
     @Override
-    public void disconnected(boolean errorCall) {
+    public void disconnected(boolean askToReconnect) {
         if (SwingUtilities.isEventDispatchThread()) {
             consolePanel1.stop();
             setStatusText("Not connected");

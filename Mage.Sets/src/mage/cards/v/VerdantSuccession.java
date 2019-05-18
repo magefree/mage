@@ -127,7 +127,7 @@ class VerdantSuccessionEffect extends OneShotEffect {
                     FilterCard filterCard = new FilterCard("Card named " + permanent.getName());
                     filterCard.add(new NamePredicate(permanent.getName()));
                     TargetCardInLibrary target = new TargetCardInLibrary(filterCard);
-                    controller.searchLibrary(target, game);
+                    controller.searchLibrary(target, source, game);
                     if (!target.getTargets().isEmpty()) {
                         Card card = game.getCard(target.getFirstTarget());
                         if (card != null

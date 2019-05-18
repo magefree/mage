@@ -136,7 +136,7 @@ public class DeckGeneratorPool
         int cardCount = getCardCount((card.getName()));
         // No need to check if the land is valid for the colors chosen
         // They are all filtered before searching for lands to include in the deck.
-        return (cardCount < 4);
+        return (cardCount < (isSingleton ? 1 : 4));
     }
 
 

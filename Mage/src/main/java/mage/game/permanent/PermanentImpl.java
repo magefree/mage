@@ -909,7 +909,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 if (countersToRemove > getCounters(game).getCount(CounterType.LOYALTY)) {
                     countersToRemove = getCounters(game).getCount(CounterType.LOYALTY);
                 }
-                getCounters(game).removeCounter(CounterType.LOYALTY, countersToRemove);
+                removeCounters(CounterType.LOYALTY.getName(), countersToRemove, game);
                 game.fireEvent(new DamagedPlaneswalkerEvent(objectId, sourceId, controllerId, actualDamage, combat));
                 return actualDamage;
             }

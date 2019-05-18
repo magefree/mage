@@ -934,24 +934,27 @@ public class HumanPlayer extends PlayerImpl {
                 if (object != null) {
                     Zone zone = game.getState().getZone(object.getId());
                     if (zone != null) {
+                        // look at card or try to cast/activate abilities
+                        Player actingPlayer = null;
+                        LinkedHashMap<UUID, ActivatedAbility> useableAbilities = null;
+                        if (playerId.equals(game.getPriorityPlayerId())) {
+                            actingPlayer = this;
+                        } else if (getPlayersUnderYourControl().contains(game.getPriorityPlayerId())) {
+                            actingPlayer = game.getPlayer(game.getPriorityPlayerId());
+                        }
+                        if (actingPlayer != null) {
+                            useableAbilities = actingPlayer.getUseableActivatedAbilities(object, zone, game);
+                        }
+
                         if (object instanceof Card
                                 && ((Card) object).isFaceDown(game)
-                                && lookAtFaceDownCard((Card) object, game)) {
+                                && lookAtFaceDownCard((Card) object, game, useableAbilities == null ? 0 : useableAbilities.size())) {
                             result = true;
                         } else {
-                            Player actingPlayer = null;
-                            if (playerId.equals(game.getPriorityPlayerId())) {
-                                actingPlayer = this;
-                            } else if (getPlayersUnderYourControl().contains(game.getPriorityPlayerId())) {
-                                actingPlayer = game.getPlayer(game.getPriorityPlayerId());
-                            }
-                            if (actingPlayer != null) {
-                                LinkedHashMap<UUID, ActivatedAbility> useableAbilities = actingPlayer.getUseableActivatedAbilities(object, zone, game);
-                                if (useableAbilities != null
-                                        && !useableAbilities.isEmpty()) {
-                                    activateAbility(useableAbilities, object, game);
-                                    result = true;
-                                }
+                            if (useableAbilities != null
+                                    && !useableAbilities.isEmpty()) {
+                                activateAbility(useableAbilities, object, game);
+                                result = true;
                             }
                         }
                     }

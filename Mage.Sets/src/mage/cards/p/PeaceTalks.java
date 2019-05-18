@@ -71,13 +71,22 @@ class PeaceTalksEffect extends OneShotEffect {
 
 class PeaceTalksCantAttackEffect extends RestrictionEffect {
 
+    int startedTurnNum = 0;
+
     public PeaceTalksCantAttackEffect() {
         super(Duration.Custom);
         staticText = "Creatures can't attack this turn and next turn";
     }
 
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        startedTurnNum = game.getTurnNum();
+    }
+
     public PeaceTalksCantAttackEffect(final PeaceTalksCantAttackEffect effect) {
         super(effect);
+        this.startedTurnNum = effect.startedTurnNum;
     }
 
     @Override
@@ -97,7 +106,7 @@ class PeaceTalksCantAttackEffect extends RestrictionEffect {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        if (startingTurn + 2 == game.getTurnNum()) {
+        if (game.getTurnNum() > (startedTurnNum + 1)) {
             this.discard();
             return true;
         }
@@ -107,6 +116,8 @@ class PeaceTalksCantAttackEffect extends RestrictionEffect {
 
 class PeaceTalksPlayersAndPermanentsCantBeTargetsOfSpellsOrActivatedAbilities extends ContinuousRuleModifyingEffectImpl {
 
+    int startedTurnNum = 0;
+
     public PeaceTalksPlayersAndPermanentsCantBeTargetsOfSpellsOrActivatedAbilities() {
         super(Duration.Custom, Outcome.Neutral);
         staticText = "players and permanents can't be the targets of spells or activated abilities";
@@ -114,6 +125,13 @@ class PeaceTalksPlayersAndPermanentsCantBeTargetsOfSpellsOrActivatedAbilities ex
 
     public PeaceTalksPlayersAndPermanentsCantBeTargetsOfSpellsOrActivatedAbilities(final PeaceTalksPlayersAndPermanentsCantBeTargetsOfSpellsOrActivatedAbilities effect) {
         super(effect);
+        this.startedTurnNum = effect.startedTurnNum;
+    }
+
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        startedTurnNum = game.getTurnNum();
     }
 
     @Override
@@ -149,7 +167,7 @@ class PeaceTalksPlayersAndPermanentsCantBeTargetsOfSpellsOrActivatedAbilities ex
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        if (startingTurn + 2 == game.getTurnNum()) {
+        if (game.getTurnNum() > (startedTurnNum + 1)) {
             this.discard();
             return true;
         }

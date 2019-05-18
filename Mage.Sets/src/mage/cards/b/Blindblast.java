@@ -1,5 +1,6 @@
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
@@ -8,8 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -23,7 +22,7 @@ public final class Blindblast extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
         this.getSpellAbility().addEffect(new CantBlockTargetEffect(
                 Duration.EndOfTurn
-        ).setText("That creature can't block this turn."));
+        ).setText("That creature can't block this turn"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Draw a card.

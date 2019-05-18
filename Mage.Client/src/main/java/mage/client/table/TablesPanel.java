@@ -1,5 +1,6 @@
 package mage.client.table;
 
+import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.importer.DeckImporter;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
@@ -16,6 +17,8 @@ import mage.constants.*;
 import mage.game.match.MatchOptions;
 import mage.players.PlayerType;
 import mage.remote.MageRemoteException;
+import mage.util.DeckUtil;
+import mage.util.RandomUtil;
 import mage.view.MatchView;
 import mage.view.RoomUsersView;
 import mage.view.TableView;
@@ -65,6 +68,7 @@ public class TablesPanel extends javax.swing.JPanel {
     public static final int REFRESH_ACTIVE_TABLES_SECS = 5;
     public static final int REFRESH_FINISHED_TABLES_SECS = 30;
     public static final int REFRESH_PLAYERS_SECS = 10;
+    public static final double REFRESH_TIMEOUTS_INCREASE_FACTOR = 0.8; // can increase timeouts by 80% (0.8)
 
     private final TablesTableModel tableModel;
     private final MatchesTableModel matchesModel;
@@ -209,6 +213,12 @@ public class TablesPanel extends javax.swing.JPanel {
             res[1] = Integer.parseInt(valsList[1]);
         }
         return res;
+    }
+
+    public static int randomizeTimout(int minTimout) {
+        // randomize timeouts to fix calls waves -- slow server can creates queue and moves all clients to same call window
+        int increase = (int) (minTimout * REFRESH_TIMEOUTS_INCREASE_FACTOR);
+        return minTimout + RandomUtil.nextInt(increase);
     }
 
 
@@ -513,6 +523,7 @@ public class TablesPanel extends javax.swing.JPanel {
     public void cleanUp() {
         saveGuiSettings();
         chatPanelMain.cleanUp();
+        stopTasks();
     }
 
     public void changeGUISize() {
@@ -632,23 +643,31 @@ public class TablesPanel extends javax.swing.JPanel {
         }
     }
 
-    public void startTasks() {
+    public void startUpdateTasks(boolean refreshImmediately) {
         if (SessionHandler.getSession() != null) {
-            if (updateTablesTask == null || updateTablesTask.isDone()) {
+            // active tables and server messages
+            if (updateTablesTask == null || updateTablesTask.isDone() || refreshImmediately) {
+                if (updateTablesTask != null) updateTablesTask.cancel(true);
                 updateTablesTask = new UpdateTablesTask(roomId, this);
                 updateTablesTask.execute();
             }
-            if (updatePlayersTask == null || updatePlayersTask.isDone()) {
-                updatePlayersTask = new UpdatePlayersTask(roomId, this.chatPanelMain);
-                updatePlayersTask.execute();
-            }
+
+            // finished tables
             if (this.btnStateFinished.isSelected()) {
-                if (updateMatchesTask == null || updateMatchesTask.isDone()) {
+                if (updateMatchesTask == null || updateMatchesTask.isDone() || refreshImmediately) {
+                    if (updateMatchesTask != null) updateMatchesTask.cancel(true);
                     updateMatchesTask = new UpdateMatchesTask(roomId, this);
                     updateMatchesTask.execute();
                 }
-            } else if (updateMatchesTask != null) {
-                updateMatchesTask.cancel(true);
+            } else {
+                if (updateMatchesTask != null) updateMatchesTask.cancel(true);
+            }
+
+            // players list
+            if (updatePlayersTask == null || updatePlayersTask.isDone() || refreshImmediately) {
+                if (updatePlayersTask != null) updatePlayersTask.cancel(true);
+                updatePlayersTask = new UpdatePlayersTask(roomId, this.chatPanelMain);
+                updatePlayersTask.execute();
             }
         }
     }
@@ -669,7 +688,8 @@ public class TablesPanel extends javax.swing.JPanel {
         this.roomId = roomId;
         UUID chatRoomId = null;
         if (SessionHandler.getSession() != null) {
-            btnQuickStart.setVisible(SessionHandler.isTestMode());
+            btnQuickStartDuel.setVisible(SessionHandler.isTestMode());
+            btnQuickStartCommander.setVisible(SessionHandler.isTestMode());
             gameChooser.init();
             chatRoomId = SessionHandler.getRoomChatId(roomId).orElse(null);
         }
@@ -687,7 +707,7 @@ public class TablesPanel extends javax.swing.JPanel {
         }
         if (chatRoomId != null) {
             this.chatPanelMain.getUserChatPanel().connect(chatRoomId);
-            startTasks();
+            startUpdateTasks(true);
             this.setVisible(true);
             this.repaint();
         } else {
@@ -695,7 +715,7 @@ public class TablesPanel extends javax.swing.JPanel {
         }
         //tableModel.setSession(session);
 
-        reloadMessages();
+        reloadServerMessages();
 
         MageFrame.getUI().addButton(MageComponents.NEW_GAME_BUTTON, btnNewTable);
 
@@ -704,7 +724,7 @@ public class TablesPanel extends javax.swing.JPanel {
 
     }
 
-    protected void reloadMessages() {
+    protected void reloadServerMessages() {
         // reload server messages
         java.util.List<String> serverMessages = SessionHandler.getServerMessages();
         synchronized (this) {
@@ -954,7 +974,8 @@ public class TablesPanel extends javax.swing.JPanel {
         jSeparator5 = new javax.swing.JToolBar.Separator();
         btnOpen = new javax.swing.JToggleButton();
         btnPassword = new javax.swing.JToggleButton();
-        btnQuickStart = new javax.swing.JButton();
+        btnQuickStartDuel = new javax.swing.JButton();
+        btnQuickStartCommander = new javax.swing.JButton();
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanelTables = new javax.swing.JPanel();
         jSplitPaneTables = new javax.swing.JSplitPane();
@@ -1374,13 +1395,23 @@ public class TablesPanel extends javax.swing.JPanel {
         });
         filterBar2.add(btnPassword);
 
-        btnQuickStart.setText("Quick Start");
-        btnQuickStart.setFocusable(false);
-        btnQuickStart.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnQuickStart.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnQuickStart.addActionListener(new java.awt.event.ActionListener() {
+        btnQuickStartDuel.setText("Quick start duel");
+        btnQuickStartDuel.setFocusable(false);
+        btnQuickStartDuel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnQuickStartDuel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnQuickStartDuel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnQuickStartActionPerformed(evt);
+                btnQuickStartDuelActionPerformed(evt);
+            }
+        });
+
+        btnQuickStartCommander.setText("Quick start commander");
+        btnQuickStartCommander.setFocusable(false);
+        btnQuickStartCommander.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnQuickStartCommander.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnQuickStartCommander.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuickStartCommanderActionPerformed(evt);
             }
         });
 
@@ -1398,8 +1429,10 @@ public class TablesPanel extends javax.swing.JPanel {
                                         .addComponent(filterBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(filterBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnQuickStart)
-                                .addContainerGap(792, Short.MAX_VALUE))
+                                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(btnQuickStartDuel)
+                                        .addComponent(btnQuickStartCommander))
+                                .addContainerGap(734, Short.MAX_VALUE))
         );
         jPanelTopLayout.setVerticalGroup(
                 jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1412,9 +1445,13 @@ public class TablesPanel extends javax.swing.JPanel {
                                         .addGroup(jPanelTopLayout.createSequentialGroup()
                                                 .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addComponent(filterBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(btnQuickStart))
+                                                        .addComponent(btnQuickStartDuel))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(filterBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                                .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(filterBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addGroup(jPanelTopLayout.createSequentialGroup()
+                                                                .addComponent(btnQuickStartCommander)
+                                                                .addGap(0, 0, Short.MAX_VALUE)))))
                                 .addContainerGap())
         );
 
@@ -1518,16 +1555,23 @@ public class TablesPanel extends javax.swing.JPanel {
         newTournamentDialog.showDialog(roomId);
     }//GEN-LAST:event_btnNewTournamentActionPerformed
 
-    private void btnQuickStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickStartActionPerformed
+    private void createTestGame(String gameName, String gameType) {
         TableView table;
         try {
-            File f = new File("test.dck");
+            String testDeckFile = "test.dck";
+            File f = new File(testDeckFile);
             if (!f.exists()) {
-                JOptionPane.showMessageDialog(null, "Couldn't find test.dck file for quick game start", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
+                // default test deck
+                testDeckFile = DeckUtil.writeTextToTempFile(""
+                        + "5 Swamp" + System.lineSeparator()
+                        + "5 Forest" + System.lineSeparator()
+                        + "5 Island" + System.lineSeparator()
+                        + "5 Mountain" + System.lineSeparator()
+                        + "5 Plains");
             }
+            DeckCardLists testDeck = DeckImporter.importDeckFromFile(testDeckFile);
 
-            MatchOptions options = new MatchOptions("1", "Two Player Duel", false, 2);
+            MatchOptions options = new MatchOptions(gameName, gameType, false, 2);
             options.getPlayerTypes().add(PlayerType.HUMAN);
             options.getPlayerTypes().add(PlayerType.COMPUTER_MAD);
             options.setDeckType("Limited");
@@ -1544,13 +1588,17 @@ public class TablesPanel extends javax.swing.JPanel {
             options.setBannedUsers(IgnoreList.ignoreList(serverAddress));
             table = SessionHandler.createTable(roomId, options);
 
-            SessionHandler.joinTable(roomId, table.getTableId(), "Human", PlayerType.HUMAN, 1, DeckImporter.importDeckFromFile("test.dck"), "");
-            SessionHandler.joinTable(roomId, table.getTableId(), "Computer", PlayerType.COMPUTER_MAD, 5, DeckImporter.importDeckFromFile("test.dck"), "");
+            SessionHandler.joinTable(roomId, table.getTableId(), "Human", PlayerType.HUMAN, 1, testDeck, "");
+            SessionHandler.joinTable(roomId, table.getTableId(), "Computer", PlayerType.COMPUTER_MAD, 5, testDeck, "");
             SessionHandler.startMatch(roomId, table.getTableId());
         } catch (HeadlessException ex) {
             handleError(ex);
         }
-    }//GEN-LAST:event_btnQuickStartActionPerformed
+    }
+
+    private void btnQuickStartDuelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickStartDuelActionPerformed
+        createTestGame("Test duel", "Two Player Duel");
+    }//GEN-LAST:event_btnQuickStartDuelActionPerformed
 
     private void btnNewTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTableActionPerformed
         newTableDialog.showDialog(roomId);
@@ -1580,7 +1628,7 @@ public class TablesPanel extends javax.swing.JPanel {
         } else {
             this.jSplitPaneTables.setDividerLocation(this.jPanelTables.getHeight());
         }
-        this.startTasks();
+        this.startUpdateTasks(true);
     }//GEN-LAST:event_btnStateFinishedActionPerformed
 
     private void btnRatedbtnFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRatedbtnFilterActionPerformed
@@ -1603,6 +1651,10 @@ public class TablesPanel extends javax.swing.JPanel {
         MageFrame.getInstance().showWhatsNewDialog(true);
     }//GEN-LAST:event_buttonWhatsNewActionPerformed
 
+    private void btnQuickStartCommanderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickStartCommanderActionPerformed
+        createTestGame("Test commander", "Commander Two Player Duel");
+    }//GEN-LAST:event_btnQuickStartCommanderActionPerformed
+
     private void handleError(Exception ex) {
         LOGGER.fatal("Error loading deck: ", ex);
         JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error loading deck.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -1623,7 +1675,8 @@ public class TablesPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnNewTournament;
     private javax.swing.JToggleButton btnOpen;
     private javax.swing.JToggleButton btnPassword;
-    private javax.swing.JButton btnQuickStart;
+    private javax.swing.JButton btnQuickStartCommander;
+    private javax.swing.JButton btnQuickStartDuel;
     private javax.swing.JToggleButton btnRated;
     private javax.swing.JToggleButton btnSkillBeginner;
     private javax.swing.JToggleButton btnSkillCasual;
@@ -1665,6 +1718,7 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
 
     private final UUID roomId;
     private final TablesPanel panel;
+    private boolean isFirstRun = true;
 
     private static final Logger logger = Logger.getLogger(UpdateTablesTask.class);
 
@@ -1683,8 +1737,7 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
             if (tables != null) {
                 this.publish(tables);
             }
-
-            TimeUnit.SECONDS.sleep(TablesPanel.REFRESH_ACTIVE_TABLES_SECS);
+            TimeUnit.SECONDS.sleep(TablesPanel.randomizeTimout(TablesPanel.REFRESH_ACTIVE_TABLES_SECS));
         }
         return null;
     }
@@ -1692,10 +1745,13 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
     @Override
     protected void process(java.util.List<Collection<TableView>> view) {
         panel.updateTables(view.get(0));
+
+        // update server messages
         count++;
-        if (count > 60) {
+        if (isFirstRun || count > 60) {
             count = 0;
-            panel.reloadMessages();
+            isFirstRun = false;
+            panel.reloadServerMessages();
         }
     }
 
@@ -1728,7 +1784,7 @@ class UpdatePlayersTask extends SwingWorker<Void, Collection<RoomUsersView>> {
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
             this.publish(SessionHandler.getRoomUsers(roomId));
-            TimeUnit.SECONDS.sleep(TablesPanel.REFRESH_PLAYERS_SECS);
+            TimeUnit.SECONDS.sleep(TablesPanel.randomizeTimout(TablesPanel.REFRESH_PLAYERS_SECS));
         }
         return null;
     }
@@ -1765,11 +1821,8 @@ class UpdateMatchesTask extends SwingWorker<Void, Collection<MatchView>> {
     @Override
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
-            Collection<MatchView> matches = SessionHandler.getFinishedMatches(roomId);
-            if (!matches.isEmpty()) {
-                this.publish(matches);
-            }
-            TimeUnit.SECONDS.sleep(TablesPanel.REFRESH_FINISHED_TABLES_SECS);
+            this.publish(SessionHandler.getFinishedMatches(roomId));
+            TimeUnit.SECONDS.sleep(TablesPanel.randomizeTimout(TablesPanel.REFRESH_FINISHED_TABLES_SECS));
         }
         return null;
     }

@@ -1,16 +1,17 @@
 package mage.client.plugins;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.util.Map;
-import java.util.UUID;
-import javax.swing.*;
 import mage.cards.MageCard;
 import mage.cards.MagePermanent;
 import mage.cards.action.ActionCallback;
 import mage.client.cards.BigCard;
 import mage.view.CardView;
 import mage.view.PermanentView;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.Map;
+import java.util.UUID;
 
 public interface MagePlugins {
 
@@ -22,9 +23,9 @@ public interface MagePlugins {
 
     JComponent updateTablePanel(Map<String, JComponent> ui);
 
-    MagePermanent getMagePermanent(PermanentView card, BigCard bigCard, Dimension dimension, UUID gameId, boolean loadImage);
+    MagePermanent getMagePermanent(PermanentView card, BigCard bigCard, Dimension dimension, UUID gameId, boolean loadImage, int renderMode);
 
-    MageCard getMageCard(CardView card, BigCard bigCard, Dimension dimension, UUID gameId, boolean loadImage, boolean previewable);
+    MageCard getMageCard(CardView card, BigCard bigCard, Dimension dimension, UUID gameId, boolean loadImage, boolean previewable, int renderMode);
 
     boolean isThemePluginLoaded();
 

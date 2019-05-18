@@ -19,6 +19,7 @@ public final class ServoToken extends TokenImpl {
 
     static {
         tokenImageSets.addAll(Collections.singletonList("KLD"));
+        tokenImageSets.addAll(Collections.singletonList("WAR"));
     }
 
     public ServoToken() {

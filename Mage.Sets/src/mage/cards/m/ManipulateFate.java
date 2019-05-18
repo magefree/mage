@@ -67,7 +67,7 @@ class ManipulateFateEffect extends SearchEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if(player != null) {
-            if (player.searchLibrary(target, game)) {
+            if (player.searchLibrary(target, source, game)) {
                 for (UUID targetId : getTargets()) {
                     Card card = player.getLibrary().getCard(targetId, game);
                     if (card != null) {

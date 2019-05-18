@@ -447,7 +447,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                         }
                     }
                 });
-        refreshDeck();
+        refreshDeck(true);
 
         if (mode == DeckEditorMode.FREE_BUILDING) {
             setDropTarget(new DropTarget(this, new DnDDeckTargetListener() {
@@ -1414,14 +1414,15 @@ class ImportFilter extends FileFilter {
                     || ext.equalsIgnoreCase("txt")
                     || ext.equalsIgnoreCase("dek")
                     || ext.equalsIgnoreCase("cod")
-                    || ext.equalsIgnoreCase("o8d");
+                    || ext.equalsIgnoreCase("o8d")
+                    || ext.equalsIgnoreCase("draft");
         }
         return false;
     }
 
     @Override
     public String getDescription() {
-        return "All formats (*.dec; *.mwDeck; *.txt; *.dek; *.cod; *.o8d)";
+        return "All formats (*.dec; *.mwDeck; *.txt; *.dek; *.cod; *.o8d; *.draft)";
     }
 }
 

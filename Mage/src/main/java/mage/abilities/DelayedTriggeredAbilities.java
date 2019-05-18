@@ -1,5 +1,3 @@
-
-
 package mage.abilities;
 
 import mage.constants.Duration;
@@ -48,8 +46,8 @@ public class DelayedTriggeredAbilities extends AbilitiesImpl<DelayedTriggeredAbi
         }
     }
 
-    public void removeEndOfTurnAbilities() {
-        this.removeIf(ability -> ability.getDuration() == Duration.EndOfTurn);
+    public void removeEndOfTurnAbilities(Game game) {
+        this.removeIf(ability -> ability.getDuration() == Duration.EndOfTurn); // TODO: add Duration.EndOfYourTurn like effects
     }
 
     public void removeEndOfCombatAbilities() {

@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.mage</groupId>
         <artifactId>mage-root</artifactId>
-        <version>1.4.34</version>
+        <version>1.4.35</version>
     </parent>
 
     <artifactId>mage-server-plugins</artifactId>
@@ -25,8 +25,9 @@
         <module>Mage.Game.TinyLeadersDuel</module>
         <module>Mage.Game.CanadianHighlanderDuel</module>
         <module>Mage.Game.PennyDreadfulCommanderFreeForAll</module>
-        <module>Mage.Game.FreeformCommanderFreeForAll</module>
-        <module>Mage.Game.BrawlDuel</module>
+        <module>Mage.Game.FreeformCommanderDuel</module>
+		<module>Mage.Game.FreeformCommanderFreeForAll</module>
+		<module>Mage.Game.BrawlDuel</module>
         <module>Mage.Game.BrawlFreeForAll</module>
         <module>Mage.Game.TwoPlayerDuel</module>
         <module>Mage.Player.AI</module>

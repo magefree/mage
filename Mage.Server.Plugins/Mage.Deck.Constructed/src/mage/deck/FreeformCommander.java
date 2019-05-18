@@ -60,7 +60,7 @@ public class FreeformCommander extends Constructed {
 
         for (Map.Entry<String, Integer> entry : counts.entrySet()) {
             if (entry.getValue() > 1) {
-                if (!basicLandNames.contains(entry.getKey())) {
+                if (!basicLandNames.contains(entry.getKey()) && !anyNumberCardsAllowed.contains(entry.getKey())) {
                     invalid.put(entry.getKey(), "Too many: " + entry.getValue());
                     valid = false;
                 }

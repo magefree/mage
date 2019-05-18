@@ -1,8 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -19,14 +16,16 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward
  */
 public final class MeliraSylvokOutcast extends CardImpl {
 
     public MeliraSylvokOutcast(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SCOUT);
@@ -78,7 +77,7 @@ class MeliraSylvokOutcastEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ADD_COUNTER;
+        return event.getType() == EventType.ADD_COUNTERS;
     }
 
     @Override
@@ -111,7 +110,7 @@ class MeliraSylvokOutcastEffect2 extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ADD_COUNTER;
+        return event.getType() == EventType.ADD_COUNTERS;
     }
 
     @Override
@@ -121,13 +120,10 @@ class MeliraSylvokOutcastEffect2 extends ReplacementEffectImpl {
             if (perm == null) {
                 perm = game.getPermanentEntering(event.getTargetId());
             }
-            if (perm != null && perm.isCreature() && perm.isControlledBy(source.getControllerId())) {
-                return true;
-            }
+            return perm != null && perm.isCreature() && perm.isControlledBy(source.getControllerId());
         }
         return false;
     }
-
 }
 
 class MeliraSylvokOutcastEffect3 extends ContinuousEffectImpl {

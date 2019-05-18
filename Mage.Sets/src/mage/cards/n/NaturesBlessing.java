@@ -1,9 +1,5 @@
-
 package mage.cards.n;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardCardCost;
@@ -27,14 +23,17 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class NaturesBlessing extends CardImpl {
 
     public NaturesBlessing(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{W}");
 
         // {G}{W}, Discard a card: Put a +1/+1 counter on target creature or that creature gains banding, first strike, or trample.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NaturesBlessingEffect(), new ManaCostsImpl("{G}{W}"));
@@ -102,7 +101,7 @@ class NaturesBlessingEffect extends OneShotEffect {
             if (gainedAbility != null) {
                 game.addEffect(new GainAbilityTargetEffect(gainedAbility, Duration.Custom), source);
             } else {
-                targetPermanent.getCounters(game).addCounter(CounterType.P1P1.createInstance());
+                targetPermanent.addCounters(CounterType.P1P1.createInstance(), source, game);
                 game.informPlayers(controller.getLogName() + " puts a +1/+1 counter on " + targetPermanent.getLogName());
             }
             return true;

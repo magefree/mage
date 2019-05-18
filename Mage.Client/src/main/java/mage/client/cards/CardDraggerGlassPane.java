@@ -2,6 +2,7 @@ package mage.client.cards;
 
 import mage.cards.MageCard;
 import mage.client.MagePane;
+import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
 import mage.view.CardView;
 
@@ -45,7 +46,7 @@ public class CardDraggerGlassPane implements MouseListener, MouseMotionListener 
         currentRoot = SwingUtilities.getRootPane(c);
 
         // Pane
-        glassPane = (JComponent)currentRoot.getGlassPane();
+        glassPane = (JComponent) currentRoot.getGlassPane();
         glassPane.setLayout(null);
         glassPane.setOpaque(false);
         glassPane.setVisible(true);
@@ -58,7 +59,7 @@ public class CardDraggerGlassPane implements MouseListener, MouseMotionListener 
         if (rootMagePane == null) {
             throw new RuntimeException("CardDraggerGlassPane::beginDrag not in a MagePane?");
         } else {
-            currentEventRootMagePane = (MagePane)rootMagePane;
+            currentEventRootMagePane = (MagePane) rootMagePane;
         }
 
         // Hook up events
@@ -72,8 +73,8 @@ public class CardDraggerGlassPane implements MouseListener, MouseMotionListener 
         currentCards = new ArrayList<>(source.dragCardList());
 
         // Make a view for the first one and add it to us
-        dragView = Plugins.instance.getMageCard(currentCards.get(0), null, new Dimension(100, 140), null, true, false);
-        for (MouseListener l: dragView.getMouseListeners()) {
+        dragView = Plugins.instance.getMageCard(currentCards.get(0), null, new Dimension(100, 140), null, true, false, PreferencesDialog.getRenderMode());
+        for (MouseListener l : dragView.getMouseListeners()) {
             dragView.removeMouseListener(l);
         }
         for (MouseMotionListener l : dragView.getMouseMotionListeners()) {
@@ -95,7 +96,7 @@ public class CardDraggerGlassPane implements MouseListener, MouseMotionListener 
         Component mouseOver = SwingUtilities.getDeepestComponentAt(currentEventRootMagePane, e.getX(), e.getY());
         while (mouseOver != null) {
             if (mouseOver instanceof DragCardTarget) {
-                DragCardTarget target = (DragCardTarget)mouseOver;
+                DragCardTarget target = (DragCardTarget) mouseOver;
                 MouseEvent targetEvent = SwingUtilities.convertMouseEvent(currentEventRootMagePane, e, mouseOver);
                 if (target != currentDragTarget) {
                     if (currentDragTarget != null) {
@@ -116,7 +117,7 @@ public class CardDraggerGlassPane implements MouseListener, MouseMotionListener 
             mouseOver = mouseOver.getParent();
         }
         if (currentDragTarget != null) {
-            MouseEvent oldTargetEvent = SwingUtilities.convertMouseEvent(currentEventRootMagePane, e, (Component)currentDragTarget);
+            MouseEvent oldTargetEvent = SwingUtilities.convertMouseEvent(currentEventRootMagePane, e, (Component) currentDragTarget);
             currentDragTarget.dragCardExit(oldTargetEvent);
         }
         currentDragTarget = null;
@@ -164,13 +165,22 @@ public class CardDraggerGlassPane implements MouseListener, MouseMotionListener 
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {}
+    public void mouseClicked(MouseEvent e) {
+    }
+
     @Override
-    public void mousePressed(MouseEvent e) {}
+    public void mousePressed(MouseEvent e) {
+    }
+
     @Override
-    public void mouseEntered(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {
+    }
+
     @Override
-    public void mouseExited(MouseEvent e) {}
+    public void mouseExited(MouseEvent e) {
+    }
+
     @Override
-    public void mouseMoved(MouseEvent e) {}
+    public void mouseMoved(MouseEvent e) {
+    }
 }

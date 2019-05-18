@@ -12,6 +12,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.GameCommanderImpl;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.RandomUtil;
@@ -31,7 +32,8 @@ import java.util.stream.Collectors;
  */
 public final class SystemUtil {
 
-    private SystemUtil(){}
+    private SystemUtil() {
+    }
 
     public static final DateFormat dateFormat = new SimpleDateFormat("yy-M-dd HH:mm:ss");
 
@@ -485,6 +487,8 @@ public final class SystemUtil {
                     gameZone = Zone.COMMAND;
                 } else if ("plane".equalsIgnoreCase(command.zone)) {
                     gameZone = Zone.COMMAND;
+                } else if ("commander".equalsIgnoreCase(command.zone)) {
+                    gameZone = Zone.COMMAND;
                 } else {
                     logger.warn("Unknown zone [" + command.zone + "]: " + line);
                     continue;
@@ -513,8 +517,23 @@ public final class SystemUtil {
                     }
                 }
                 game.loadCards(cardsToLoad, player.getId());
-                for (Card card : cardsToLoad) {
-                    swapWithAnyCard(game, player, card, gameZone);
+
+                if ("commander".equalsIgnoreCase(command.zone) && cardsToLoad.size() > 0) {
+                    // as commander (only commander games, look at init code in GameCommanderImpl)
+                    if (game instanceof GameCommanderImpl) {
+                        GameCommanderImpl gameCommander = (GameCommanderImpl) game;
+                        for (Card card : cardsToLoad) {
+                            player.addCommanderId(card.getId());
+                            gameCommander.initCommander(card, player);
+                        }
+                    } else {
+                        logger.fatal("Commander card can be used in commander game only: " + command.cardName);
+                    }
+                } else {
+                    // as other card
+                    for (Card card : cardsToLoad) {
+                        swapWithAnyCard(game, player, card, gameZone);
+                    }
                 }
             }
         } catch (Exception e) {

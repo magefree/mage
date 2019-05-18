@@ -74,7 +74,7 @@ class FleshwritherEffect extends OneShotEffect {
             FilterCreatureCard filter = new FilterCreatureCard("creature with converted mana cost " + sourceObject.getConvertedManaCost());
             filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, sourceObject.getConvertedManaCost()));
             TargetCardInLibrary target = new TargetCardInLibrary(1, filter);
-            if (controller.searchLibrary(target, game)) {
+            if (controller.searchLibrary(target, source, game)) {
                 if (!target.getTargets().isEmpty()) {
                     Cards chosen = new CardsImpl(target.getTargets());
                     controller.moveCards(chosen, Zone.BATTLEFIELD, source, game);

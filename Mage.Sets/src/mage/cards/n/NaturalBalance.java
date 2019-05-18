@@ -92,7 +92,7 @@ public final class NaturalBalance extends CardImpl {
                         if (landCount < 5 && player.chooseUse(outcome, "Search your library for up to " + amount + " basic land cards and put them onto the battlefield?", source, game)) {
                             // Select lands and put them onto battlefield
                             TargetCardInLibrary target = new TargetCardInLibrary(0, amount, StaticFilters.FILTER_CARD_BASIC_LAND);
-                            if (player.searchLibrary(target, game)) {
+                            if (player.searchLibrary(target, source, game)) {
                                 player.moveCards(new CardsImpl(target.getTargets()).getCards(game), Zone.BATTLEFIELD, source, game);
                             }
                             toShuffle.add(player);

@@ -1,5 +1,6 @@
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -11,8 +12,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -32,7 +31,7 @@ public final class BurningProphet extends CardImpl {
                 new BoostSourceEffect(
                         1, 0, Duration.EndOfTurn
                 ).setText("{this} gets +1/+0 until end of turn, then"),
-                StaticFilters.FILTER_SPELL_NON_CREATURE, false
+                StaticFilters.FILTER_SPELL_A_NON_CREATURE, false
         );
         ability.addEffect(new ScryEffect(1));
         this.addAbility(ability);

@@ -35,7 +35,7 @@ public final class PollenbrightDruid extends CardImpl {
         );
         ability.addTarget(new TargetCreaturePermanent());
 
-        // • Proliferate.
+        // • Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
         ability.addMode(new Mode(new ProliferateEffect()));
         this.addAbility(ability);
     }

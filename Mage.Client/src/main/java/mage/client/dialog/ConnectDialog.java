@@ -88,6 +88,9 @@ public class ConnectDialog extends MageDialog {
         MagePreferences.setUserName(serverAddress, txtUserName.getText().trim());
         MagePreferences.setPassword(serverAddress, String.valueOf(txtPassword.getPassword()).trim());
         MageFrame.getPreferences().put(KEY_CONNECT_AUTO_CONNECT, Boolean.toString(chkAutoConnect.isSelected()));
+
+        // last settings for reconnect
+        MagePreferences.saveLastServer();
     }
 
     /**
@@ -517,7 +520,6 @@ public class ConnectDialog extends MageDialog {
 
         char[] input = new char[0];
         try {
-            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             connection = new Connection();
             connection.setHost(this.txtServer.getText().trim());
             connection.setPort(Integer.valueOf(this.txtPort.getText().trim()));
@@ -545,6 +547,12 @@ public class ConnectDialog extends MageDialog {
 
     }//GEN-LAST:event_btnConnectActionPerformed
 
+    private void setConnectButtonsState(boolean enable) {
+        btnConnect.setEnabled(enable);
+        btnRegister.setEnabled(enable);
+        btnForgotPassword.setEnabled(enable);
+    }
+
     private class ConnectTask extends SwingWorker<Boolean, Void> {
 
         private boolean result = false;
@@ -555,7 +563,7 @@ public class ConnectDialog extends MageDialog {
         @Override
         protected Boolean doInBackground() throws Exception {
             lblStatus.setText("Connecting...");
-            btnConnect.setEnabled(false);
+            setConnectButtonsState(false);
             result = MageFrame.connect(connection);
             lastConnectError = SessionHandler.getLastConnectError();
             return result;
@@ -565,7 +573,6 @@ public class ConnectDialog extends MageDialog {
         protected void done() {
             try {
                 get(CONNECTION_TIMEOUT_MS, TimeUnit.MILLISECONDS);
-                setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
                 if (result) {
                     lblStatus.setText("");
                     connected();
@@ -578,13 +585,13 @@ public class ConnectDialog extends MageDialog {
             } catch (ExecutionException ex) {
                 logger.fatal("Update Players Task error", ex);
             } catch (CancellationException ex) {
-                logger.info("Connect was canceled");
+                logger.info("Connect: canceled");
                 lblStatus.setText("Connect was canceled");
             } catch (TimeoutException ex) {
                 logger.fatal("Connection timeout: ", ex);
             } finally {
                 MageFrame.stopConnecting();
-                btnConnect.setEnabled(true);
+                setConnectButtonsState(true);
             }
         }
     }

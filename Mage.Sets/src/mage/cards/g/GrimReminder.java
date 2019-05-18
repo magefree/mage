@@ -87,7 +87,7 @@ class GrimReminderEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_NON_LAND);
-            if (controller.searchLibrary(target, game)) {
+            if (controller.searchLibrary(target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     Cards cardsToReveal = new CardsImpl(card);

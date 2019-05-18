@@ -1,6 +1,7 @@
 package mage.client.cards;
 
 import mage.cards.MageCard;
+import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.ClientEventType;
 import mage.client.util.Event;
@@ -29,6 +30,9 @@ public class CardArea extends JPanel implements MouseListener {
     private int yCardCaptionOffsetPercent = 0; // card caption offset (use for moving card caption view center, below mana icons -- for more good UI)
     private Dimension cardDimension;
     private int verticalCardOffset;
+
+    private int customRenderMode = -1; // custom render mode tests
+    private Dimension customCardSize = null; // custom size for tests
 
     /**
      * Create the panel.
@@ -62,7 +66,11 @@ public class CardArea extends JPanel implements MouseListener {
     }
 
     private void setGUISize() {
-        setCardDimension(GUISizeHelper.otherZonesCardDimension, GUISizeHelper.otherZonesCardVerticalOffset);
+        if (customCardSize != null) {
+            setCardDimension(customCardSize, GUISizeHelper.otherZonesCardVerticalOffset);
+        } else {
+            setCardDimension(GUISizeHelper.otherZonesCardDimension, GUISizeHelper.otherZonesCardVerticalOffset);
+        }
     }
 
     public void setCardDimension(Dimension dimension, int verticalCardOffset) {
@@ -129,7 +137,8 @@ public class CardArea extends JPanel implements MouseListener {
             tmp.setAbility(card); // cross-reference, required for ability picker
             card = tmp;
         }
-        MageCard cardPanel = Plugins.instance.getMageCard(card, bigCard, cardDimension, gameId, true, true);
+        MageCard cardPanel = Plugins.instance.getMageCard(card, bigCard, cardDimension, gameId, true, true,
+                customRenderMode != -1 ? customRenderMode : PreferencesDialog.getRenderMode());
 
         cardPanel.setBounds(rectangle);
         cardPanel.addMouseListener(this);
@@ -263,6 +272,14 @@ public class CardArea extends JPanel implements MouseListener {
             Me.consume();
             cardEventSource.fireEvent(card, Me.getComponent(), Me.getX(), Me.getY(), ClientEventType.SHOW_POP_UP_MENU);
         }
+    }
+
+    public void setCustomRenderMode(int customRenderMode) {
+        this.customRenderMode = customRenderMode;
+    }
+
+    public void setCustomCardSize(Dimension customCardSize) {
+        this.customCardSize = customCardSize;
     }
 
     @Override

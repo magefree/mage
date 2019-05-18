@@ -9,6 +9,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continuous.GainAbilityControllerEffect;
 
 /**
  * @author TheElk801
@@ -22,12 +24,16 @@ public final class LazotepPlating extends CardImpl {
         this.getSpellAbility().addEffect(new AmassEffect(1));
 
         // You and permanents you control gain hexproof until end of turn.
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(
+        Effect effect = new GainAbilityControllerEffect(
                 HexproofAbility.getInstance(), Duration.EndOfTurn
-        ).setText("<br>You and"));
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(
+        );
+        Effect effect2 = new GainAbilityControlledEffect(
                 HexproofAbility.getInstance(), Duration.EndOfTurn
-        ));
+        );
+        effect.setText("You and permanents you control gain hexproof until end of turn.");
+        effect2.setText("");
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(effect2);
     }
 
     private LazotepPlating(final LazotepPlating card) {

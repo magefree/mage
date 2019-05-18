@@ -90,7 +90,7 @@ class LilianaDreadhordeGeneralEffect extends OneShotEffect {
         keepFilter.add(new ControllerPredicate(TargetController.OPPONENT));
         for (UUID opponentId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player opponent = game.getPlayer(opponentId);
-            if (opponent == null) {
+            if (opponent == null || !opponent.hasOpponent(source.getControllerId(), game)) {
                 continue;
             }
             for (CardType cardType : CardType.values()) {

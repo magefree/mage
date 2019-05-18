@@ -18,7 +18,7 @@ public final class WolfToken extends TokenImpl {
     static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("BNG", "C14", "CNS", "FNMP", "ISD", "LRW", "M10", "M14", "MM2", "SHM", "SOM", "ZEN", "SOI", "C15", "M15"));
+        tokenImageSets.addAll(Arrays.asList("BNG", "C14", "CNS", "FNMP", "ISD", "LRW", "M10", "M14", "MM2", "SHM", "SOM", "ZEN", "SOI", "C15", "M15", "WAR"));
     }
 
     public WolfToken() {

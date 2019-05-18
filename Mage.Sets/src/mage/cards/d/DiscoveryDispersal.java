@@ -1,8 +1,5 @@
 package mage.cards.d;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
@@ -12,11 +9,7 @@ import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.abilities.effects.keyword.SurveilEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.Outcome;
-import mage.constants.SpellAbilityType;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.Predicates;
@@ -29,8 +22,11 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class DiscoveryDispersal extends SplitCard {
@@ -57,7 +53,7 @@ public final class DiscoveryDispersal extends SplitCard {
         this.getRightHalfCard().getSpellAbility().addEffect(new DispersalEffect());
     }
 
-    public DiscoveryDispersal(final DiscoveryDispersal card) {
+    private DiscoveryDispersal(final DiscoveryDispersal card) {
         super(card);
     }
 
@@ -69,7 +65,7 @@ public final class DiscoveryDispersal extends SplitCard {
 
 class DispersalEffect extends OneShotEffect {
 
-    public DispersalEffect() {
+    DispersalEffect() {
         super(Outcome.Benefit);
         this.staticText = "Each opponent returns a nonland permanent "
                 + "they control with the highest converted mana cost "
@@ -77,7 +73,7 @@ class DispersalEffect extends OneShotEffect {
                 + "then discards a card.";
     }
 
-    public DispersalEffect(final DispersalEffect effect) {
+    private DispersalEffect(final DispersalEffect effect) {
         super(effect);
     }
 
@@ -100,7 +96,7 @@ class DispersalEffect extends OneShotEffect {
             }
             int highestCMC = 0;
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(opponentId)) {
-                if (permanent != null && !permanent.isLand()) {
+                if (permanent != null) {
                     highestCMC = Math.max(highestCMC, permanent.getConvertedManaCost());
                 }
             }

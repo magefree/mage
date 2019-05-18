@@ -65,7 +65,7 @@ class NeverendingTormentEffect extends OneShotEffect {
         if (targetPlayer != null
                 && you != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(you.getHand().size(), new FilterCard());
-            you.searchLibrary(target, game, targetPlayer.getId());
+            you.searchLibrary(target, source, game, targetPlayer.getId());
             for (UUID cardId : target.getTargets()) {
                 final Card targetCard = game.getCard(cardId);
                 if (targetCard != null) {

@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import mage.abilities.Ability;
@@ -42,10 +41,13 @@ public final class CurseOfTheCabal extends CardImpl {
         // Target player sacrifices half the permanents he or she controls, rounded down.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new CurseOfTheCabalSacrificeEffect());
+
         // Suspend 2-{2}{B}{B}
         this.addAbility(new SuspendAbility(2, new ManaCostsImpl("{2}{B}{B}"), this));
+
         // At the beginning of each player's upkeep, if Curse of the Cabal is suspended, that player may sacrifice a permanent. If he or she does, put two time counters on Curse of the Cabal.
         this.addAbility(new CurseOfTheCabalInterveningIfTriggeredAbility());
+
     }
 
     public CurseOfTheCabal(final CurseOfTheCabal card) {
@@ -84,7 +86,8 @@ class CurseOfTheCabalSacrificeEffect extends OneShotEffect {
             }
             Target target = new TargetControlledPermanent(amount, amount, StaticFilters.FILTER_CONTROLLED_PERMANENT, true);
             if (target.canChoose(targetPlayer.getId(), game)) {
-                while (!target.isChosen() && target.canChoose(targetPlayer.getId(), game) && targetPlayer.canRespond()) {
+                while (!target.isChosen() 
+                        && target.canChoose(targetPlayer.getId(), game) && targetPlayer.canRespond()) {
                     targetPlayer.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
                 }
                 //sacrifice all chosen (non null) permanents
@@ -107,7 +110,9 @@ class CurseOfTheCabalInterveningIfTriggeredAbility extends ConditionalIntervenin
                 TargetController.ANY, false, true
         ),
                 SuspendedCondition.instance,
-                "At the beginning of each player's upkeep, if {this} is suspended, that player may sacrifice a permanent. If he or she does, put two time counters on {this}."
+                "At the beginning of each player's upkeep, if {this} is suspended, "
+                        + "that player may sacrifice a permanent. If he or she does, "
+                        + "put two time counters on {this}."
         );
         // controller has to sac a permanent
         // counters aren't placed

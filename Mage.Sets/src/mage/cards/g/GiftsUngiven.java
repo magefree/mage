@@ -67,7 +67,7 @@ class GiftsUngivenEffect extends OneShotEffect {
             return false;
         }
         GiftsUngivenTarget target = new GiftsUngivenTarget();
-        if (player.searchLibrary(target, game)) {
+        if (player.searchLibrary(target, source, game)) {
             if (!target.getTargets().isEmpty()) {
                 Cards cards = new CardsImpl();
                 for (UUID cardId : target.getTargets()) {

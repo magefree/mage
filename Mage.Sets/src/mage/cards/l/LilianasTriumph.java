@@ -1,5 +1,6 @@
 package mage.cards.l;
 
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -21,7 +22,8 @@ import java.util.UUID;
 public final class LilianasTriumph extends CardImpl {
 
     private static final FilterControlledPlaneswalkerPermanent filter
-            = new FilterControlledPlaneswalkerPermanent(SubType.LILIANA, "a Liliana planeswalker");
+            = new FilterControlledPlaneswalkerPermanent(SubType.LILIANA);
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
 
     public LilianasTriumph(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");
@@ -33,8 +35,7 @@ public final class LilianasTriumph extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DiscardEachPlayerEffect(
                         new StaticValue(1), false, TargetController.OPPONENT
-                ), new PermanentsOnTheBattlefieldCondition(filter),
-                "If you control a Liliana planeswalker, each opponent also discards a card."
+                ), condition, "If you control a Liliana planeswalker, each opponent also discards a card."
         ));
     }
 

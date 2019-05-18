@@ -23,7 +23,7 @@ public final class KarnsBastion extends CardImpl {
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
-        // {4}, {T}: Proliferate.
+        // {4}, {T}: Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
         Ability ability = new SimpleActivatedAbility(new ProliferateEffect(), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

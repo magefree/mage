@@ -15,10 +15,12 @@ import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.constants.*;
 import mage.counters.Counter;
+import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.designations.Designation;
 import mage.designations.DesignationType;
@@ -618,9 +620,23 @@ public class TestPlayer implements Player {
                             wasProccessed = true;
                         }
 
+                        // check damage: card name, damage
+                        if (params[0].equals(CHECK_COMMAND_DAMAGE) && params.length == 3) {
+                            assertDamage(action, game, computerPlayer, params[1], Integer.parseInt(params[2]));
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
                         // check life: life
                         if (params[0].equals(CHECK_COMMAND_LIFE) && params.length == 2) {
                             assertLife(action, game, computerPlayer, Integer.parseInt(params[1]));
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
+                        // check player in game: target player, must be in game
+                        if (params[0].equals(CHECK_COMMAND_PLAYER_IN_GAME) && params.length == 3) {
+                            assertPlayerInGame(action, game, game.getPlayer(UUID.fromString(params[1])), Boolean.parseBoolean(params[2]));
                             actions.remove(action);
                             wasProccessed = true;
                         }
@@ -632,9 +648,16 @@ public class TestPlayer implements Player {
                             wasProccessed = true;
                         }
 
-                        // check battlefield count: card name, count
-                        if (params[0].equals(CHECK_COMMAND_PERMANENT_COUNT) && params.length == 3) {
-                            assertPermanentCount(action, game, computerPlayer, params[1], Integer.parseInt(params[2]));
+                        // check battlefield count: target player, card name, count
+                        if (params[0].equals(CHECK_COMMAND_PERMANENT_COUNT) && params.length == 4) {
+                            assertPermanentCount(action, game, game.getPlayer(UUID.fromString(params[1])), params[2], Integer.parseInt(params[3]));
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
+                        // check permanent counters: card name, counter type, count
+                        if (params[0].equals(CHECK_COMMAND_PERMANENT_COUNTERS) && params.length == 4) {
+                            assertPermanentCounters(action, game, computerPlayer, params[1], CounterType.findByName(params[2]), Integer.parseInt(params[3]));
                             actions.remove(action);
                             wasProccessed = true;
                         }
@@ -663,6 +686,13 @@ public class TestPlayer implements Player {
                         // check color: card name, colors, must have
                         if (params[0].equals(CHECK_COMMAND_COLOR) && params.length == 4) {
                             assertColor(action, game, computerPlayer, params[1], params[2], Boolean.parseBoolean(params[3]));
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
+                        // check type: card name, type, must have
+                        if (params[0].equals(CHECK_COMMAND_TYPE) && params.length == 4) {
+                            assertType(action, game, computerPlayer, params[1], CardType.fromString(params[2]), Boolean.parseBoolean(params[3]));
                             actions.remove(action);
                             wasProccessed = true;
                         }
@@ -712,6 +742,16 @@ public class TestPlayer implements Player {
                         if (params[0].equals(SHOW_COMMAND_HAND) && params.length == 1) {
                             printStart(action.getActionName());
                             printCards(computerPlayer.getHand().getCards(game));
+                            printEnd();
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
+                        // show command
+                        if (params[0].equals(SHOW_COMMAND_COMMAND) && params.length == 1) {
+                            printStart(action.getActionName());
+                            CardsImpl cards = new CardsImpl(computerPlayer.getCommandersIds());
+                            printCards(cards.getCards(game));
                             printEnd();
                             actions.remove(action);
                             wasProccessed = true;
@@ -829,8 +869,8 @@ public class TestPlayer implements Player {
 
         List<String> data = cards.stream()
                 .map(c -> (c.getIdName()
-                        + " - " + c.getPower().getValue()
-                        + "/" + c.getToughness().getValue()
+                        + " - " + c.getPower().getValue() + "/" + c.getToughness().getValue()
+                        + (c.isPlaneswalker() ? " - L" + c.getCounters(game).getCount(CounterType.LOYALTY) : "")
                         + ", " + (c.isTapped() ? "Tapped" : "Untapped")
                         + (c.getAttachedTo() == null ? "" : ", attached to " + game.getPermanent(c.getAttachedTo()).getIdName())
                 ))
@@ -908,9 +948,27 @@ public class TestPlayer implements Player {
                 Toughness, perm.getToughness().getValue());
     }
 
+    private void assertDamage(PlayerAction action, Game game, Player player, String permanentName, int damage) {
+        Permanent perm = findPermanentWithAssert(action, game, player, permanentName);
+
+        Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " have wrong damage: " + perm.getDamage() + " <> " + damage, damage, perm.getDamage());
+    }
+
     private void assertLife(PlayerAction action, Game game, Player player, int Life) {
         Assert.assertEquals(action.getActionName() + " - " + player.getName() + " have wrong life: " + player.getLife() + " <> " + Life,
                 Life, player.getLife());
+    }
+
+    private void assertPlayerInGame(PlayerAction action, Game game, Player targetPlayer, boolean mustBeInGame) {
+        Assert.assertNotNull("Can't find target player", targetPlayer);
+
+        if (targetPlayer.isInGame() && !mustBeInGame) {
+            Assert.fail(action.getActionName() + " - player " + targetPlayer.getName() + " must NOT be in game");
+        }
+
+        if (!targetPlayer.isInGame() && mustBeInGame) {
+            Assert.fail(action.getActionName() + " - player " + targetPlayer.getName() + " must be in game");
+        }
     }
 
     private void assertAbility(PlayerAction action, Game game, Player player, String permanentName, String abilityClass, boolean mustHave) {
@@ -940,6 +998,17 @@ public class TestPlayer implements Player {
         }
 
         Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must exists in " + count + " instances", count, foundedCount);
+    }
+
+    private void assertPermanentCounters(PlayerAction action, Game game, Player player, String permanentName, CounterType counterType, int count) {
+        int foundedCount = 0;
+        for (Permanent perm : game.getBattlefield().getAllPermanents()) {
+            if (perm.getName().equals(permanentName) && perm.getControllerId().equals(player.getId())) {
+                foundedCount = perm.getCounters(game).getCount(counterType);
+            }
+        }
+
+        Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must have " + count + " " + counterType.toString(), count, foundedCount);
     }
 
     private void assertExileCount(PlayerAction action, Game game, Player player, String permanentName, int count) {
@@ -994,6 +1063,25 @@ public class TestPlayer implements Player {
         }
     }
 
+    private void assertType(PlayerAction action, Game game, Player player, String permanentName, CardType type, boolean mustHave) {
+
+        Permanent perm = findPermanentWithAssert(action, game, player, permanentName);
+
+        boolean founded = false;
+        for (CardType ct : perm.getCardType()) {
+            if (ct.equals(type)) {
+                founded = true;
+                break;
+            }
+        }
+
+        if (mustHave) {
+            Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must have type " + type, true, founded);
+        } else {
+            Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must have not type " + type, false, founded);
+        }
+    }
+
     private void assertSubType(PlayerAction action, Game game, Player player, String permanentName, SubType subType, boolean mustHave) {
 
         Permanent perm = findPermanentWithAssert(action, game, player, permanentName);
@@ -1025,11 +1113,8 @@ public class TestPlayer implements Player {
         }
 
         Player itemPlayer = game.getPlayer(objectId);
-        if (itemPlayer != null) {
-            return itemPlayer;
-        }
+        return itemPlayer;
 
-        return null;
     }
 
     private void assertAliasZone(PlayerAction action, Game game, TestPlayer player, String aliasName, Zone needZone, boolean mustHave) {
@@ -1128,10 +1213,12 @@ public class TestPlayer implements Player {
     public void selectAttackers(Game game, UUID attackingPlayerId) {
         // Loop through players and validate can attack/block this turn
         UUID defenderId = null;
-        //List<PlayerAction>
+        boolean mustAttackByAction = false;
+        boolean madeAttackByAction = false;
         for (Iterator<org.mage.test.player.PlayerAction> it = actions.iterator(); it.hasNext(); ) {
             PlayerAction action = it.next();
             if (action.getTurnNum() == game.getTurnNum() && action.getAction().startsWith("attack:")) {
+                mustAttackByAction = true;
                 String command = action.getAction();
                 command = command.substring(command.indexOf("attack:") + 7);
                 String[] groups = command.split("\\$");
@@ -1175,9 +1262,13 @@ public class TestPlayer implements Player {
                 if (attacker != null && attacker.canAttack(defenderId, game)) {
                     computerPlayer.declareAttacker(attacker.getId(), defenderId, game, false);
                     it.remove();
+                    madeAttackByAction = true;
                 }
             }
+        }
 
+        if (mustAttackByAction && !madeAttackByAction) {
+            this.chooseStrictModeFailed(game, "select attackers must use attack command but don't");
         }
     }
 
@@ -1189,10 +1280,12 @@ public class TestPlayer implements Player {
     @Override
     public void selectBlockers(Game game, UUID defendingPlayerId) {
 
+        List<PlayerAction> tempActions = new ArrayList<>(actions);
+
         UUID opponentId = game.getOpponents(computerPlayer.getId()).iterator().next();
         // Map of Blocker reference -> list of creatures blocked
         Map<MageObjectReference, List<MageObjectReference>> blockedCreaturesByCreature = new HashMap<>();
-        for (PlayerAction action : actions) {
+        for (PlayerAction action : tempActions) {
             if (action.getTurnNum() == game.getTurnNum() && action.getAction().startsWith("block:")) {
                 String command = action.getAction();
                 command = command.substring(command.indexOf("block:") + 6);
@@ -1203,6 +1296,7 @@ public class TestPlayer implements Player {
                 Permanent blocker = findPermanent(new FilterControlledPermanent(), blockerName, computerPlayer.getId(), game);
                 if (canBlockAnother(game, blocker, attacker, blockedCreaturesByCreature)) {
                     computerPlayer.declareBlocker(defendingPlayerId, blocker.getId(), attacker.getId(), game);
+                    actions.remove(action);
                 } else {
                     throw new UnsupportedOperationException(blockerName + " cannot block " + attackerName + " it is already blocking the maximum amount of creatures.");
                 }
@@ -1318,13 +1412,18 @@ public class TestPlayer implements Player {
 
     @Override
     public int chooseReplacementEffect(Map<String, String> rEffects, Game game) {
+        if (rEffects.size() <= 1) {
+            return 0;
+        }
         if (!choices.isEmpty()) {
             for (String choice : choices) {
-                for (int index = 0; index < rEffects.size(); index++) {
-                    if (choice.equals(rEffects.get(Integer.toString(index)))) {
+                int index = 0;
+                for (Map.Entry<String, String> entry : rEffects.entrySet()) {
+                    if (entry.getValue().startsWith(choice)) {
                         choices.remove(choice);
                         return index;
                     }
+                    index++;
                 }
             }
             // TODO: enable fail checks and fix tests
@@ -2634,23 +2733,23 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean searchLibrary(TargetCardInLibrary target, Game game) {
-        return computerPlayer.searchLibrary(target, game);
+    public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game) {
+        return computerPlayer.searchLibrary(target, source, game);
     }
 
     @Override
-    public boolean searchLibrary(TargetCardInLibrary target, Game game, boolean triggerEvents) {
-        return computerPlayer.searchLibrary(target, game, triggerEvents);
+    public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, boolean triggerEvents) {
+        return computerPlayer.searchLibrary(target, source, game, triggerEvents);
     }
 
     @Override
-    public boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId) {
-        return computerPlayer.searchLibrary(target, game, targetPlayerId);
+    public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, UUID targetPlayerId) {
+        return computerPlayer.searchLibrary(target, source, game, targetPlayerId);
     }
 
     @Override
-    public boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId, boolean triggerEvents) {
-        return computerPlayer.searchLibrary(target, game, targetPlayerId, triggerEvents);
+    public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, UUID targetPlayerId, boolean triggerEvents) {
+        return computerPlayer.searchLibrary(target, source, game, targetPlayerId, triggerEvents);
     }
 
     @Override
@@ -2838,8 +2937,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean lookAtFaceDownCard(Card card, Game game) {
-        return computerPlayer.lookAtFaceDownCard(card, game);
+    public boolean lookAtFaceDownCard(Card card, Game game, int abilitiesToActivate) {
+        return computerPlayer.lookAtFaceDownCard(card, game, abilitiesToActivate);
     }
 
     @Override

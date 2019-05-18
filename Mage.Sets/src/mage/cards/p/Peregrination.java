@@ -71,7 +71,7 @@ class PeregrinationEffect extends OneShotEffect {
             return false;
         }
         TargetCardInLibrary target = new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_BASIC_LAND);
-        if (controller.searchLibrary(target, game)) {
+        if (controller.searchLibrary(target, source, game)) {
             if (!target.getTargets().isEmpty()) {
                 Cards revealed = new CardsImpl();
                 for (UUID cardId : target.getTargets()) {

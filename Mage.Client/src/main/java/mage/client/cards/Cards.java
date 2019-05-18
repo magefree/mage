@@ -8,6 +8,7 @@
  package mage.client.cards;
 
  import mage.cards.MageCard;
+ import mage.client.dialog.PreferencesDialog;
  import mage.client.plugins.impl.Plugins;
  import mage.client.util.CardsViewUtil;
  import mage.client.util.Config;
@@ -227,7 +228,7 @@
      }
 
      private void addCard(CardView card, BigCard bigCard, UUID gameId) {
-         MageCard mageCard = Plugins.instance.getMageCard(card, bigCard, getCardDimension(), gameId, true, true);
+         MageCard mageCard = Plugins.instance.getMageCard(card, bigCard, getCardDimension(), gameId, true, true, PreferencesDialog.getRenderMode());
          if (zone != null) {
              mageCard.setZone(zone);
          }

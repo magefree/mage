@@ -34,6 +34,7 @@ public final class GideonsTriumph extends CardImpl {
         // Target opponent sacrifices a creature that attacked or blocked this turn. If you control a Gideon planeswalker, that player sacrifices two of those creatures instead.
         this.getSpellAbility().addEffect(new GideonsTriumphEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addWatcher(new GideonsTriumphWatcher());
     }
 
     private GideonsTriumph(final GideonsTriumph card) {
@@ -48,10 +49,14 @@ public final class GideonsTriumph extends CardImpl {
 
 class GideonsTriumphEffect extends OneShotEffect {
 
-    private static final FilterControlledPlaneswalkerPermanent filter
+    private static final FilterControlledPlaneswalkerPermanent filterGideon
             = new FilterControlledPlaneswalkerPermanent(SubType.GIDEON);
-    private static final FilterPermanent filter2
+    private static final FilterPermanent filterSacrifice
             = new FilterPermanent("creature that attacked or blocked this turn");
+
+    static {
+        filterSacrifice.add(GideonsTriumphPredicate.instance);
+    }
 
     GideonsTriumphEffect() {
         super(Outcome.Benefit);
@@ -71,14 +76,14 @@ class GideonsTriumphEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int count = 1;
-        if (!game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game).isEmpty()) {
+        if (!game.getBattlefield().getActivePermanents(filterGideon, source.getControllerId(), game).isEmpty()) {
             count++;
         }
-        return new SacrificeEffect(filter2, count, "Target opponent").apply(game, source);
+        return new SacrificeEffect(filterSacrifice, count, "Target opponent").apply(game, source);
     }
 }
 
-enum GideonsTriumphCondition implements Predicate<Permanent> {
+enum GideonsTriumphPredicate implements Predicate<Permanent> {
     instance;
 
     @Override
@@ -116,6 +121,11 @@ class GideonsTriumphWatcher extends Watcher {
     @Override
     public GideonsTriumphWatcher copy() {
         return new GideonsTriumphWatcher(this);
+    }
+
+    @Override
+    public void reset() {
+        attackedOrBlockedThisTurnCreatures.clear();
     }
 
 }

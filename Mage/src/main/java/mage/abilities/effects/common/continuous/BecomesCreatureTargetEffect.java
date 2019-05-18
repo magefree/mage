@@ -20,25 +20,34 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
     protected Token token;
     protected boolean loseAllAbilities;
     protected boolean addStillALandText;
+    protected boolean loseName;
+
+
+    public BecomesCreatureTargetEffect(Token token, boolean loseAllAbilities, boolean stillALand, Duration duration) {
+        this(token, loseAllAbilities, stillALand, duration, false);
+    }
 
     /**
      * @param token
      * @param loseAllAbilities loses all subtypes and colors
      * @param stillALand       add rule text, "it's still a land"
+     * @param loseName         permanent lose name and get's it from token
      * @param duration
      */
-    public BecomesCreatureTargetEffect(Token token, boolean loseAllAbilities, boolean stillALand, Duration duration) {
+    public BecomesCreatureTargetEffect(Token token, boolean loseAllAbilities, boolean stillALand, Duration duration, boolean loseName) {
         super(duration, Outcome.BecomeCreature);
         this.token = token;
         this.loseAllAbilities = loseAllAbilities;
         this.addStillALandText = stillALand;
+        this.loseName = loseName;
     }
 
     public BecomesCreatureTargetEffect(final BecomesCreatureTargetEffect effect) {
         super(effect);
-        token = effect.token.copy();
+        this.token = effect.token.copy();
         this.loseAllAbilities = effect.loseAllAbilities;
         this.addStillALandText = effect.addStillALandText;
+        this.loseName = effect.loseName;
     }
 
     @Override
@@ -53,30 +62,41 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
             Permanent permanent = game.getPermanent(permanentId);
             if (permanent != null) {
                 switch (layer) {
+                    case TextChangingEffects_3:
+                        if (sublayer == SubLayer.NA) {
+                            if (loseName) {
+                                permanent.setName(token.getName());
+                            }
+                        }
+                        break;
+
                     case TypeChangingEffects_4:
                         if (sublayer == SubLayer.NA) {
                             if (loseAllAbilities) {
                                 permanent.getSubtype(game).retainAll(SubType.getLandTypes());
                                 permanent.getSubtype(game).addAll(token.getSubtype(game));
                             } else {
-                                if (!token.getSubtype(game).isEmpty()) {
-                                    for (SubType subtype : token.getSubtype(game)) {
-                                        if (!permanent.hasSubtype(subtype, game)) {
-                                            permanent.getSubtype(game).add(subtype);
-                                        }
+                                for (SubType t : token.getSubtype(game)) {
+                                    if (!permanent.hasSubtype(t, game)) {
+                                        permanent.getSubtype(game).add(t);
                                     }
-
                                 }
                             }
-                            if (!token.getCardType().isEmpty()) {
-                                for (CardType t : token.getCardType()) {
-                                    if (!permanent.getCardType().contains(t)) {
-                                        permanent.addCardType(t);
-                                    }
+
+                            for (SuperType t : token.getSuperType()) {
+                                if (!permanent.getSuperType().contains(t)) {
+                                    permanent.addSuperType(t);
+                                }
+                            }
+
+                            for (CardType t : token.getCardType()) {
+                                if (!permanent.getCardType().contains(t)) {
+                                    permanent.addCardType(t);
                                 }
                             }
                         }
                         break;
+
                     case ColorChangingEffects_5:
                         if (sublayer == SubLayer.NA) {
                             if (loseAllAbilities) {
@@ -91,6 +111,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                             }
                         }
                         break;
+
                     case AbilityAddingRemovingEffects_6:
                         if (loseAllAbilities) {
                             permanent.removeAllAbilities(source.getSourceId(), game);
@@ -125,7 +146,11 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean hasLayer(Layer layer) {
-        return layer == Layer.PTChangingEffects_7 || layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.ColorChangingEffects_5 || layer == Layer.TypeChangingEffects_4;
+        return layer == Layer.PTChangingEffects_7
+                || layer == Layer.AbilityAddingRemovingEffects_6
+                || layer == Layer.ColorChangingEffects_5
+                || layer == Layer.TypeChangingEffects_4
+                || layer == Layer.TextChangingEffects_3;
     }
 
     @Override

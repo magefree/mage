@@ -4,21 +4,15 @@ import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -81,7 +75,7 @@ class DichotomancyEffect extends OneShotEffect {
                 FilterCard filterCard = new FilterCard("card named \""+name+'"');
                 filterCard.add(new NamePredicate(name));
                 TargetCardInLibrary target = new TargetCardInLibrary(0, 1, filterCard);
-                if (controller.searchLibrary(target, game, opponent.getId())) {
+                if (controller.searchLibrary(target, source, game, opponent.getId())) {
                     controller.moveCards(opponent.getLibrary().getCard(target.getFirstTarget(), game), Zone.BATTLEFIELD, source, game);
                 }
             }

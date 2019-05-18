@@ -18,7 +18,7 @@ public final class CourageInCrisis extends CardImpl {
     public CourageInCrisis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
 
-        // Put a +1/+1 counter on target creature, then proliferate.
+        // Put a +1/+1 counter on target creature, then proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         this.getSpellAbility().addEffect(new ProliferateEffect().concatBy(", then"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

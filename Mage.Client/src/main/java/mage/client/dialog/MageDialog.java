@@ -109,6 +109,7 @@ public class MageDialog extends javax.swing.JInternalFrame {
                     SwingUtilities.invokeAndWait(() -> stopModal());
                 } catch (InterruptedException ex) {
                     LOGGER.fatal("MageDialog error", ex);
+                    Thread.currentThread().interrupt();
                 } catch (InvocationTargetException ex) {
                     LOGGER.fatal("MageDialog error", ex);
                 }
@@ -184,9 +185,10 @@ public class MageDialog extends javax.swing.JInternalFrame {
                     wait();
                 }
             }
-        } catch (InterruptedException ignored) {
+        } catch (InterruptedException e) {
+            LOGGER.fatal("MageDialog error", e);
+            Thread.currentThread().interrupt();
         }
-
     }
 
     private synchronized void stopModal() {

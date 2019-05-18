@@ -118,7 +118,7 @@ class SurgicalExtractionEffect extends OneShotEffect {
                 // cards in Library
                 filterNamedCard.setMessage("card named " + nameToSearch + " in the library of " + owner.getName());
                 TargetCardInLibrary targetCardInLibrary = new TargetCardInLibrary(0, Integer.MAX_VALUE, filterNamedCard);
-                if (controller.searchLibrary(targetCardInLibrary, game, owner.getId())) {
+                if (controller.searchLibrary(targetCardInLibrary, source, game, owner.getId())) {
                     List<UUID> targets = targetCardInLibrary.getTargets();
                     for (UUID targetId : targets) {
                         Card targetCard = owner.getLibrary().getCard(targetId, game);

@@ -57,7 +57,7 @@ class LongTermPlansEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             TargetCardInLibrary target = new TargetCardInLibrary();
-            if (player.searchLibrary(target, game)) {
+            if (player.searchLibrary(target, source, game)) {
                 Card card = player.getLibrary().remove(target.getFirstTarget(), game);
                 if (card != null) {
                     player.shuffleLibrary(source, game);

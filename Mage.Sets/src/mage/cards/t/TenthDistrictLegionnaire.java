@@ -1,5 +1,6 @@
 package mage.cards.t;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -11,8 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -34,7 +33,7 @@ public final class TenthDistrictLegionnaire extends CardImpl {
         Ability ability = new HeroicAbility(new AddCountersSourceEffect(
                 CounterType.P1P1.createInstance()
         ), false, false);
-        ability.addEffect(new ScryEffect(1));
+        ability.addEffect(new ScryEffect(1).setText(", then scry 1"));
         this.addAbility(ability);
     }
 

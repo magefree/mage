@@ -52,7 +52,7 @@ public final class CardImageUtils {
                 return filePath;
             }
 
-            log.warn("Token image file not found. Set: " + card.getSet() + " Token Set Code: " + card.getTokenSetCode() + " Name: " + card.getName() + " File path: " + getTokenImagePath(card));
+            //log.warn("Token image file not found. Set: " + card.getSet() + " Token Set Code: " + card.getTokenSetCode() + " Name: " + card.getName() + " File path: " + getTokenImagePath(card));
         } else {
             log.warn("Trying to get token path for non token card. Set: " + card.getSet() + " Set Code: " + card.getTokenSetCode() + " Name: " + card.getName());
         }

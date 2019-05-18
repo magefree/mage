@@ -99,6 +99,7 @@ public final class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Knight of the Mists", 36, Rarity.COMMON, mage.cards.k.KnightOfTheMists.class));
         cards.add(new SetCardInfo("Knight of Valor", 11, Rarity.COMMON, mage.cards.k.KnightOfValor.class));
         cards.add(new SetCardInfo("Kookus", 86, Rarity.RARE, mage.cards.k.Kookus.class));
+        cards.add(new SetCardInfo("Kyscu Drake", 111, Rarity.RARE, mage.cards.k.KyscuDrake.class));
         cards.add(new SetCardInfo("Lead-Belly Chimera", 148, Rarity.UNCOMMON, mage.cards.l.LeadBellyChimera.class));
         cards.add(new SetCardInfo("Lichenthrope", 112, Rarity.RARE, mage.cards.l.Lichenthrope.class));
         cards.add(new SetCardInfo("Lightning Cloud", 87, Rarity.RARE, mage.cards.l.LightningCloud.class));
@@ -124,6 +125,7 @@ public final class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Prosperity", 40, Rarity.UNCOMMON, mage.cards.p.Prosperity.class));
         cards.add(new SetCardInfo("Python", 68, Rarity.COMMON, mage.cards.p.Python.class));
         cards.add(new SetCardInfo("Quicksand", 166, Rarity.UNCOMMON, mage.cards.q.Quicksand.class));
+        cards.add(new SetCardInfo("Quirion Druid", 116, Rarity.RARE, mage.cards.q.QuirionDruid.class));
         cards.add(new SetCardInfo("Quirion Ranger", 117, Rarity.COMMON, mage.cards.q.QuirionRanger.class));
         cards.add(new SetCardInfo("Raging Gorilla", 90, Rarity.COMMON, mage.cards.r.RagingGorilla.class));
         cards.add(new SetCardInfo("Rainbow Efreet", 41, Rarity.RARE, mage.cards.r.RainbowEfreet.class));

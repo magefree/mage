@@ -41,7 +41,7 @@ public class RecruiterEffect extends OneShotEffect {
         if (controller != null) {
             TargetCardInLibrary targetCards = new TargetCardInLibrary(0, Integer.MAX_VALUE, filter);
             Cards cards = new CardsImpl();
-            if (controller.searchLibrary(targetCards, game)) {
+            if (controller.searchLibrary(targetCards, source, game)) {
                 cards.addAll(targetCards.getTargets());
             }
             controller.revealCards(staticText, cards, game);

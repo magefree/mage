@@ -49,6 +49,9 @@ import java.util.zip.GZIPOutputStream;
  */
 public class GameController implements GameCallback {
 
+    private static final int GAME_TIMEOUTS_CHECK_JOINING_STATUS_EVERY_SECS = 15; // checks and inform players about joining status
+    private static final int GAME_TIMEOUTS_CANCEL_PLAYER_GAME_JOINING_AFTER_INACTIVE_SECS = 4 * 60; // leave player from game if it don't join and inactive on server
+
     private static final ExecutorService gameExecutor = ThreadExecutor.instance.getGameExecutor();
     private static final Logger logger = Logger.getLogger(GameController.class);
 
@@ -226,7 +229,7 @@ public class GameController implements GameCallback {
             } catch (Exception ex) {
                 logger.fatal("Send info about player not joined yet:", ex);
             }
-        }, 15, 15, TimeUnit.SECONDS);
+        }, GAME_TIMEOUTS_CHECK_JOINING_STATUS_EVERY_SECS, GAME_TIMEOUTS_CHECK_JOINING_STATUS_EVERY_SECS, TimeUnit.SECONDS);
         checkStart();
     }
 
@@ -320,6 +323,7 @@ public class GameController implements GameCallback {
     }
 
     private void sendInfoAboutPlayersNotJoinedYet() {
+        // runs every 15 secs untill all players join
         for (Player player : game.getPlayers().values()) {
             if (!player.hasLeft() && player.isHuman()) {
                 Optional<User> requestedUser = getUserByPlayerId(player.getId());
@@ -333,12 +337,12 @@ public class GameController implements GameCallback {
                             logger.debug("Player " + player.getName() + " (disconnected) has joined gameId: " + game.getId());
                         }
                         ChatManager.instance.broadcast(chatId, player.getName(), user.getPingInfo() + " is pending to join the game", MessageColor.BLUE, true, ChatMessage.MessageType.STATUS, null);
-                        if (user.getSecondsDisconnected() > 240) {
+                        if (user.getSecondsDisconnected() > GAME_TIMEOUTS_CANCEL_PLAYER_GAME_JOINING_AFTER_INACTIVE_SECS) {
+                            // TODO: 2019.04.22 - if user playing another game on server but not joining (that's the reason?), then that's check will never trigger
                             // Cancel player join possibility lately after 4 minutes
                             logger.debug("Player " + player.getName() + " - canceled game (after 240 seconds) gameId: " + game.getId());
                             player.leave();
                         }
-
                     }
                 } else if (!player.hasLeft()) {
                     logger.debug("Player " + player.getName() + " canceled game (no user) gameId: " + game.getId());

@@ -22,14 +22,25 @@ public class ConditionalRestrictionEffect extends RestrictionEffect {
     protected boolean initDone = false;
 
     public ConditionalRestrictionEffect(RestrictionEffect effect, Condition condition) {
-        this(Duration.WhileOnBattlefield, effect, condition, null);
+        this(effect, condition, null);
+    }
+
+    public ConditionalRestrictionEffect(RestrictionEffect effect, Condition condition, String text) {
+        this(effect.getDuration(), effect, condition, null, text);
     }
 
     public ConditionalRestrictionEffect(Duration duration, RestrictionEffect effect, Condition condition, RestrictionEffect otherwiseEffect) {
+        this(duration, effect, condition, otherwiseEffect, null);
+    }
+
+    public ConditionalRestrictionEffect(Duration duration, RestrictionEffect effect, Condition condition, RestrictionEffect otherwiseEffect, String text) {
         super(duration);
         this.effect = effect;
         this.baseCondition = condition;
         this.otherwiseEffect = otherwiseEffect;
+        if (text != null) {
+            this.setText(text);
+        }
     }
 
     public ConditionalRestrictionEffect(final ConditionalRestrictionEffect effect) {
