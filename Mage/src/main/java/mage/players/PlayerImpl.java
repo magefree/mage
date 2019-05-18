@@ -67,15 +67,12 @@ import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Map.Entry;
 
 public abstract class PlayerImpl implements Player, Serializable {
 
     private static final Logger logger = Logger.getLogger(PlayerImpl.class);
-
-    private static final SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");
 
     /**
      * Used to cancel waiting requests send to the player
@@ -3471,7 +3468,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             String lookNo = abilitiesToActivate > 0 ? "No, activate ability" : "No";
             if (chooseUse(Outcome.Benefit, lookMessage, "", lookYes, lookNo, null, game)) {
                 Cards cards = new CardsImpl(card);
-                this.lookAtCards(getName() + " - " + sdf.format(System.currentTimeMillis()), cards, game);
+                this.lookAtCards(getName() + " - " + card.getIdName() + " - " + CardUtil.sdf.format(System.currentTimeMillis()), cards, game);
                 return true;
             }
         }
