@@ -414,7 +414,7 @@ public class VerifyCardDataTest {
     }
 
     @Test
-    @Ignore // TODO: enable it on copy() methods removing
+    //@Ignore // TODO: enable it on copy() methods removing
     public void checkWatcherCopyMethods() {
 
         Collection<String> errorsList = new ArrayList<>();
@@ -424,6 +424,13 @@ public class VerifyCardDataTest {
         Set<Class<? extends Watcher>> watcherClassesList = reflections.getSubTypesOf(Watcher.class);
 
         for (Class<? extends Watcher> watcherClass : watcherClassesList) {
+
+            // only watcher class can be extended (e.g. final)
+            if (!watcherClass.getSuperclass().equals(Watcher.class)) {
+                errorsList.add("error, only Watcher class can be extended: " + watcherClass.getName());
+            }
+
+            // no copy methods
             try {
                 Method m = watcherClass.getMethod("copy");
                 if (!m.getGenericReturnType().getTypeName().equals("T")) {
@@ -432,6 +439,34 @@ public class VerifyCardDataTest {
             } catch (NoSuchMethodException e) {
                 errorsList.add("error, can't find copy() method in watcher class: " + watcherClass.getName());
             }
+
+            // no constructor for copy
+            try {
+                Constructor<? extends Watcher> constructor = watcherClass.getDeclaredConstructor(watcherClass);
+                errorsList.add("error, copy constructor is not allowed in watcher class: " + watcherClass.getName());
+            } catch (NoSuchMethodException e) {
+                // all fine, no needs in copy constructors
+            }
+
+            // errors on create
+            try {
+                Constructor<? extends Watcher> constructor = watcherClass.getDeclaredConstructor();
+                constructor.setAccessible(true);
+                Watcher w1 = constructor.newInstance();
+
+                // errors on copy
+                try {
+                    Watcher w2 = w1.copy();
+                    if (w2 == null) {
+                        errorsList.add("error, can't copy watcher with unknown error, look at error logs above: " + watcherClass.getName());
+                    }
+                } catch (Exception e) {
+                    errorsList.add("error, can't copy watcher: " + watcherClass.getName() + " (" + e.getMessage() + ")");
+                }
+            } catch (Exception e) {
+                errorsList.add("error, can't create watcher: " + watcherClass.getName() + " (" + e.getMessage() + ")");
+            }
+
         }
 
         printMessages(warningsList);

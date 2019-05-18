@@ -1,10 +1,7 @@
-
 package mage.watchers;
 
-import mage.Mana;
 import mage.constants.WatcherScope;
 import mage.game.Game;
-import mage.game.turn.Step;
 import mage.game.events.GameEvent;
 import org.apache.log4j.Logger;
 
@@ -26,8 +23,7 @@ public abstract class Watcher implements Serializable {
     protected UUID controllerId;
     protected UUID sourceId;
     protected boolean condition;
-    protected final WatcherScope scope;
-
+    protected WatcherScope scope;
 
     public Watcher(WatcherScope scope) {
         this.scope = scope;
@@ -81,11 +77,15 @@ public abstract class Watcher implements Serializable {
         return getClass().getSimpleName();
     }
 
+    public void setScope(WatcherScope scope) {
+        this.scope = scope;
+    }
+
     public abstract void watch(GameEvent event, Game game);
 
     public <T extends Watcher> T copy() {
         try {
-            List<?> constructors = Arrays.asList(this.getClass().getConstructors());
+            List<?> constructors = Arrays.asList(this.getClass().getDeclaredConstructors()); // needs private constructor
             if (constructors.size() > 1) {
                 logger.error(getClass().getSimpleName() + " has multiple constructors");
                 return null;
@@ -103,7 +103,7 @@ public abstract class Watcher implements Serializable {
             allFields.addAll(Arrays.asList(getClass().getSuperclass().getDeclaredFields()));
             for (Field field : allFields) {
                 field.setAccessible(true);
-               if (field.getType() == Set.class) {
+                if (field.getType() == Set.class) {
                     ((Set) field.get(watcher)).clear();
                     ((Set) field.get(watcher)).addAll((Set) field.get(this));
                 } else if (field.getType() == Map.class) {
