@@ -1,15 +1,20 @@
 package mage.cards.u;
 
+import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -27,13 +32,11 @@ import mage.game.permanent.token.UginTheIneffableToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.InfoEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 
 import static mage.constants.Outcome.Benefit;
 
@@ -101,20 +104,31 @@ class UginTheIneffableEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (player == null || sourceObject == null) {
             return false;
         }
+
         Card card = player.getLibrary().getFromTop(game);
-        player.lookAtCards(sourcePermanent.getIdName(), card, game);
-        player.moveCards(card, Zone.EXILED, source, game);
-        card.turnFaceDown(game, source.getControllerId());
+        if (card == null) {
+            return false;
+        }
+
+        // exile and look
+        UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+        if (player.moveCardsToExile(card, source, game, false, exileZoneId, sourceObject.getIdName() + " (" + player.getName() + ")")) {
+            card.turnFaceDown(game, source.getControllerId());
+            player.lookAtCards(player.getName() + " - " + card.getIdName() + " - " + CardUtil.sdf.format(System.currentTimeMillis()), card, game);
+        }
+
+        // create token
         Set<MageObjectReference> tokenObjs = new HashSet<>();
         CreateTokenEffect effect = new CreateTokenEffect(new UginTheIneffableToken());
         effect.apply(game, source);
-        for (UUID addedTokenId : effect.getLastAddedTokenIds()) {
 
+        // with return ability
+        for (UUID addedTokenId : effect.getLastAddedTokenIds()) {
             // display referenced exiled face-down card on token
             SimpleStaticAbility sa = new SimpleStaticAbility(Zone.BATTLEFIELD, new InfoEffect("Referenced object: "
                     + card.getId().toString().substring(0, 3)));

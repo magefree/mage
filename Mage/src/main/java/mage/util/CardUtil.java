@@ -14,6 +14,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.util.functions.CopyTokenFunction;
 
+import java.text.SimpleDateFormat;
 import java.util.UUID;
 
 /**
@@ -28,6 +29,8 @@ public final class CardUtil {
 
     static final String[] ordinalStrings = {"first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eightth", "ninth",
             "tenth", "eleventh", "twelfth", "thirteenth", "fourteenth", "fifteenth", "sixteenth", "seventeenth", "eighteenth", "nineteenth", "twentieth"};
+
+    public static final SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");
 
     /**
      * Increase spell or ability cost to be paid.

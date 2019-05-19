@@ -36,7 +36,7 @@ public class CantAttackYouUnlessPayManaAllEffect extends PayCostToAttackBlockEff
                 + (payAlsoForAttackingPlaneswalker ? "or a planeswalker you control " : "")
                 + "unless their controller pays "
                 + (manaCosts == null ? "" : manaCosts.getText())
-                + " for each creature they controls that's attacking you";
+                + " for each creature they control that's attacking you";
     }
 
     public CantAttackYouUnlessPayManaAllEffect(final CantAttackYouUnlessPayManaAllEffect effect) {

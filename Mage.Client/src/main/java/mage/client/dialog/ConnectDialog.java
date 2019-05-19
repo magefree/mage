@@ -287,6 +287,7 @@ public class ConnectDialog extends MageDialog {
         btnFindUs.setToolTipText("Connect to mtg.powersofwar.com (USA, use any username without registration)");
         btnFindUs.setActionCommand("connectXmageus");
         btnFindUs.setAlignmentY(0.0F);
+        btnFindUs.setEnabled(false);
         btnFindUs.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnFindUs.setName("connectXmageusBtn"); // NOI18N
         btnFindUs.setPreferredSize(new java.awt.Dimension(23, 23));
