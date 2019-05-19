@@ -194,7 +194,7 @@ public class CountryComboBox extends JComboBox {
         {"Portugal", "pt"},
         {"Puerto Rico", "pr"},
         {"Qatar", "qa"},
-        {"Réunion", "re"},
+        {"Reunion", "re"},
         {"Romania", "ro"},
         {"Russian Federation", "ru"},
         {"Rwanda", "rw"},

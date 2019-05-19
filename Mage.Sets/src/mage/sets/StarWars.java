@@ -290,7 +290,7 @@ public final class StarWars extends ExpansionSet {
         cards.add(new SetCardInfo("Senator Bail Organa", 209, Rarity.UNCOMMON, mage.cards.s.SenatorBailOrgana.class));
         cards.add(new SetCardInfo("Senator Lott Dod", 210, Rarity.UNCOMMON, mage.cards.s.SenatorLottDod.class));
         cards.add(new SetCardInfo("Senator Onaconda Farr", 211, Rarity.UNCOMMON, mage.cards.s.SenatorOnacondaFarr.class));
-        cards.add(new SetCardInfo("Senator Padmé Amidala", 212, Rarity.UNCOMMON, mage.cards.s.SenatorPadmeAmidala.class));
+        cards.add(new SetCardInfo("Senator Padme Amidala", 212, Rarity.UNCOMMON, mage.cards.s.SenatorPadmeAmidala.class));
         cards.add(new SetCardInfo("Senator Passel Argente", 213, Rarity.UNCOMMON, mage.cards.s.SenatorPasselArgente.class));
         cards.add(new SetCardInfo("Shaak Herd", 155, Rarity.COMMON, mage.cards.s.ShaakHerd.class));
         cards.add(new SetCardInfo("Shadow Trooper", 56, Rarity.COMMON, mage.cards.s.ShadowTrooper.class));

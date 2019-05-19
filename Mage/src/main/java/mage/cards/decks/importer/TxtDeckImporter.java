@@ -117,6 +117,8 @@ public class TxtDeckImporter extends PlainTextDeckImporter {
                 .replace("í", "i")
                 .replace("â", "a")
                 .replace("á", "a")
+                .replace("à", "a")
+                .replace("é", "e")
                 .replace("ú", "u")
                 .replace("\"", "'");
         if (lineName.contains("//") && !lineName.contains(" // ")) {
