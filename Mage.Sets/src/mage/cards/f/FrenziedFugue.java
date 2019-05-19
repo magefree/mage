@@ -1,7 +1,5 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -13,17 +11,15 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -77,8 +73,9 @@ class FrenziedFugueTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        this.getEffects().clear();
         boolean result;
-        if (event.getType()==EventType.ENTERS_THE_BATTLEFIELD) {
+        if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD) {
             result = event.getTargetId().equals(this.getSourceId());
         } else {
             result = event.getPlayerId().equals(this.getControllerId());
@@ -88,13 +85,13 @@ class FrenziedFugueTriggeredAbility extends TriggeredAbilityImpl {
             if (enchantment != null && enchantment.getAttachedTo() != null) {
                 Effect effect = new GainControlTargetEffect(Duration.EndOfTurn, true);
                 effect.setTargetPointer(new FixedTarget(enchantment.getAttachedTo(), game));
-                getEffects().add(effect);
+                this.getEffects().add(effect);
                 effect = new UntapTargetEffect();
                 effect.setTargetPointer(new FixedTarget(enchantment.getAttachedTo(), game));
-                getEffects().add(effect);
+                this.getEffects().add(effect);
                 effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
                 effect.setTargetPointer(new FixedTarget(enchantment.getAttachedTo(), game));
-                getEffects().add(effect);
+                this.getEffects().add(effect);
             } else {
                 result = false;
             }
