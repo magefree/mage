@@ -28,6 +28,18 @@ public final class ModernHorizons extends ExpansionSet {
         this.ratioBoosterMythic = 8;
 
         cards.add(new SetCardInfo("Cabal Therapist", 80, Rarity.RARE, mage.cards.c.CabalTherapist.class));
+        cards.add(new SetCardInfo("Choking Tethers", 44, Rarity.COMMON, mage.cards.c.ChokingTethers.class));
+        cards.add(new SetCardInfo("Elvish Fury", 162, Rarity.COMMON, mage.cards.e.ElvishFury.class));
+        cards.add(new SetCardInfo("Firebolt", 122, Rarity.UNCOMMON, mage.cards.f.Firebolt.class));
+        cards.add(new SetCardInfo("Goblin Matron", 129, Rarity.UNCOMMON, mage.cards.g.GoblinMatron.class));
+        cards.add(new SetCardInfo("Lava Dart", 134, Rarity.COMMON, mage.cards.l.LavaDart.class));
+        cards.add(new SetCardInfo("Prohibit", 64, Rarity.COMMON, mage.cards.p.Prohibit.class));
         cards.add(new SetCardInfo("Serra the Benevolent", 26, Rarity.MYTHIC, mage.cards.s.SerraTheBenevolent.class));
+        cards.add(new SetCardInfo("Snow-Covered Forest", 254, Rarity.COMMON, mage.cards.s.SnowCoveredForest.class));
+        cards.add(new SetCardInfo("Snow-Covered Island", 251, Rarity.COMMON, mage.cards.s.SnowCoveredIsland.class));
+        cards.add(new SetCardInfo("Snow-Covered Mountain", 253, Rarity.COMMON, mage.cards.s.SnowCoveredMountain.class));
+        cards.add(new SetCardInfo("Snow-Covered Plains", 250, Rarity.COMMON, mage.cards.s.SnowCoveredPlains.class));
+        cards.add(new SetCardInfo("Snow-Covered Swamp", 252, Rarity.COMMON, mage.cards.s.SnowCoveredSwamp.class));
+        cards.add(new SetCardInfo("Wing Shards", 38, Rarity.UNCOMMON, mage.cards.w.WingShards.class));
     }
 }
