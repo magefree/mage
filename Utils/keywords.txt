@@ -76,6 +76,7 @@ Prowess|new|
 Reach|instance|
 Rebound|new|
 Renown|number|
+Replicate|card, manaString|
 Riot|new|
 Scavenge|cost|
 Shadow|instance|
