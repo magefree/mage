@@ -17,12 +17,12 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class PrismaticView extends CardImpl {
+public final class PrismaticVista extends CardImpl {
 
-    public PrismaticView(UUID ownerId, CardSetInfo setInfo) {
+    public PrismaticVista(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        // {T}, Pay 1 life, Sacrifice Prismatic View: Search your library for a basic land card, put it onto the battlefield, then shuffle your library.
+        // {T}, Pay 1 life, Sacrifice Prismatic Vista: Search your library for a basic land card, put it onto the battlefield, then shuffle your library.
         Ability ability = new SimpleActivatedAbility(new SearchLibraryPutInPlayEffect(
                 new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND)), new TapSourceCost()
         );
@@ -31,12 +31,12 @@ public final class PrismaticView extends CardImpl {
         this.addAbility(ability);
     }
 
-    private PrismaticView(final PrismaticView card) {
+    private PrismaticVista(final PrismaticVista card) {
         super(card);
     }
 
     @Override
-    public PrismaticView copy() {
-        return new PrismaticView(this);
+    public PrismaticVista copy() {
+        return new PrismaticVista(this);
     }
 }
