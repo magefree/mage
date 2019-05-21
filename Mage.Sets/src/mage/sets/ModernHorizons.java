@@ -59,6 +59,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Snow-Covered Plains", 250, Rarity.COMMON, mage.cards.s.SnowCoveredPlains.class));
         cards.add(new SetCardInfo("Snow-Covered Swamp", 252, Rarity.COMMON, mage.cards.s.SnowCoveredSwamp.class));
         cards.add(new SetCardInfo("Stream of Thought", 71, Rarity.COMMON, mage.cards.s.StreamOfThought.class));
+        cards.add(new SetCardInfo("Sunbaked Canyon", 247, Rarity.RARE, mage.cards.s.SunbakedCanyon.class));
         cards.add(new SetCardInfo("Undead Augur", 112, Rarity.UNCOMMON, mage.cards.u.UndeadAugur.class));
         cards.add(new SetCardInfo("Venomous Changeling", 114, Rarity.COMMON, mage.cards.v.VenomousChangeling.class));
         cards.add(new SetCardInfo("Wall of One Thousand Cuts", 36, Rarity.COMMON, mage.cards.w.WallOfOneThousandCuts.class));
