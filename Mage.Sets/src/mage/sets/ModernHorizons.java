@@ -19,8 +19,8 @@ public final class ModernHorizons extends ExpansionSet {
         // TODO: update the set type closer to release (no point right now, the cards won't be legal for a while)
         super("Modern Horizons", "MH1", ExpansionSet.buildDate(2019, 6, 14), SetType.SUPPLEMENTAL_MODERN_LEGAL);
         this.blockName = "Modern Horizons";
-        this.hasBasicLands = false;
-        this.hasBoosters = false; // TODO: enable after more cards will be available
+        this.hasBasicLands = true;
+        this.hasBoosters = true;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
@@ -57,11 +57,11 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Seasoned Pyromancer", 145, Rarity.MYTHIC, mage.cards.s.SeasonedPyromancer.class));
         cards.add(new SetCardInfo("Serra the Benevolent", 26, Rarity.MYTHIC, mage.cards.s.SerraTheBenevolent.class));
         cards.add(new SetCardInfo("Silent Clearing", 246, Rarity.RARE, mage.cards.s.SilentClearing.class));
-        cards.add(new SetCardInfo("Snow-Covered Forest", 254, Rarity.COMMON, mage.cards.s.SnowCoveredForest.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Snow-Covered Island", 251, Rarity.COMMON, mage.cards.s.SnowCoveredIsland.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Snow-Covered Mountain", 253, Rarity.COMMON, mage.cards.s.SnowCoveredMountain.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Snow-Covered Plains", 250, Rarity.COMMON, mage.cards.s.SnowCoveredPlains.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Snow-Covered Swamp", 252, Rarity.COMMON, mage.cards.s.SnowCoveredSwamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Snow-Covered Forest", 254, Rarity.LAND, mage.cards.s.SnowCoveredForest.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Snow-Covered Island", 251, Rarity.LAND, mage.cards.s.SnowCoveredIsland.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Snow-Covered Mountain", 253, Rarity.LAND, mage.cards.s.SnowCoveredMountain.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Snow-Covered Plains", 250, Rarity.LAND, mage.cards.s.SnowCoveredPlains.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Snow-Covered Swamp", 252, Rarity.LAND, mage.cards.s.SnowCoveredSwamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Spore Frog", 180, Rarity.COMMON, mage.cards.s.SporeFrog.class));
         cards.add(new SetCardInfo("Stream of Thought", 71, Rarity.COMMON, mage.cards.s.StreamOfThought.class));
         cards.add(new SetCardInfo("Sunbaked Canyon", 247, Rarity.RARE, mage.cards.s.SunbakedCanyon.class));
