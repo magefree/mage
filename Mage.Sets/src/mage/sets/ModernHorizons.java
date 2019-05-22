@@ -46,6 +46,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Ice-Fang Coatl", 203, Rarity.RARE, mage.cards.i.IceFangCoatl.class));
         cards.add(new SetCardInfo("Impostor of the Sixth Pride", 14, Rarity.COMMON, mage.cards.i.ImpostorOfTheSixthPride.class));
         cards.add(new SetCardInfo("Lava Dart", 134, Rarity.COMMON, mage.cards.l.LavaDart.class));
+        cards.add(new SetCardInfo("Man-o'-War", 55, Rarity.COMMON, mage.cards.m.ManOWar.class));
         cards.add(new SetCardInfo("Martyr's Soul", 19, Rarity.COMMON, mage.cards.m.MartyrsSoul.class));
         cards.add(new SetCardInfo("Munitions Expert", 209, Rarity.UNCOMMON, mage.cards.m.MunitionsExpert.class));
         cards.add(new SetCardInfo("Nimble Mongoose", 174, Rarity.COMMON, mage.cards.n.NimbleMongoose.class));
@@ -53,6 +54,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Pondering Mage", 63, Rarity.COMMON, mage.cards.p.PonderingMage.class));
         cards.add(new SetCardInfo("Prismatic Vista", 244, Rarity.RARE, mage.cards.p.PrismaticVista.class));
         cards.add(new SetCardInfo("Prohibit", 64, Rarity.COMMON, mage.cards.p.Prohibit.class));
+        cards.add(new SetCardInfo("Regrowth", 175, Rarity.UNCOMMON, mage.cards.r.Regrowth.class));
         cards.add(new SetCardInfo("Scour All Possibilities", 67, Rarity.COMMON, mage.cards.s.ScourAllPossibilities.class));
         cards.add(new SetCardInfo("Seasoned Pyromancer", 145, Rarity.MYTHIC, mage.cards.s.SeasonedPyromancer.class));
         cards.add(new SetCardInfo("Serra the Benevolent", 26, Rarity.MYTHIC, mage.cards.s.SerraTheBenevolent.class));
