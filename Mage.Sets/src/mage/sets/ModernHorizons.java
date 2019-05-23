@@ -16,7 +16,6 @@ public final class ModernHorizons extends ExpansionSet {
     }
 
     private ModernHorizons() {
-        // TODO: update the set type closer to release (no point right now, the cards won't be legal for a while)
         super("Modern Horizons", "MH1", ExpansionSet.buildDate(2019, 6, 14), SetType.SUPPLEMENTAL_MODERN_LEGAL);
         this.blockName = "Modern Horizons";
         this.hasBasicLands = true;
