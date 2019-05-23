@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.CommanderReplacementEffect;
+import mage.abilities.effects.common.cost.CommanderCostModification;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -58,6 +59,7 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
                     commander.moveToZone(Zone.COMMAND, null, this, true);
                     Ability ability = new SimpleStaticAbility(Zone.COMMAND, new InfoEffect("Commander effects"));
                     ability.addEffect(new CommanderReplacementEffect(commander.getId(), alsoHand, alsoLibrary));
+                    ability.addEffect(new CommanderCostModification(commander.getId()));
                     // Commander rule #4 was removed Jan. 18, 2016
                     // ability.addEffect(new CommanderManaReplacementEffect(player.getId(), CardUtil.getColorIdentity(commander)));
                     CommanderInfoWatcher watcher = new CommanderInfoWatcher(commander.getId(), false);

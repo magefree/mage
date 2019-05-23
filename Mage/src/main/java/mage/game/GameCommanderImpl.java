@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.CommanderReplacementEffect;
+import mage.abilities.effects.common.cost.CommanderCostModification;
 import mage.cards.Card;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.PhaseStep;
@@ -78,6 +79,7 @@ public abstract class GameCommanderImpl extends GameImpl {
         commander.moveToZone(Zone.COMMAND, null, this, true);
         commander.getAbilities().setControllerId(player.getId());
         ability.addEffect(new CommanderReplacementEffect(commander.getId(), alsoHand, alsoLibrary));
+        ability.addEffect(new CommanderCostModification(commander.getId()));
         CommanderInfoWatcher watcher = new CommanderInfoWatcher(commander.getId(), checkCommanderDamage);
         getState().addWatcher(watcher);
         watcher.addCardInfoToCommander(this);

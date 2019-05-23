@@ -12,7 +12,6 @@ import mage.abilities.common.PlayLandAsCommanderAbility;
 import mage.abilities.common.WhileSearchingPlayFromLibraryAbility;
 import mage.abilities.common.delayed.AtTheEndOfTurnStepPostDelayedTriggeredAbility;
 import mage.abilities.costs.*;
-import mage.abilities.costs.common.CommanderAdditionalCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -1147,8 +1146,6 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
         }
 
-        // warning, if you change code here then fix it in activateAbility too (play commander as land)
-
         //20091005 - 305.1
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, card.getId(), card.getId(), playerId, activationStatus.getPermittingObject()))) {
             // int bookmark = game.bookmarkState();
@@ -1260,12 +1257,8 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         Card card = game.getCard(ability.getSourceId());
         if (ability instanceof PlayLandAsCommanderAbility) {
-            // LAND as commander:
-            // * first time - play without cost as land
-            // * second+ times -- cast as spell with cost and stack
 
-            // code from playLand
-
+            // LAND as commander: play land with cost, but without stack
             ActivationStatus activationStatus = ability.canActivate(this.playerId, game);
             if (!activationStatus.canActivate() || !this.canPlayLand()) {
                 return false;
@@ -1274,42 +1267,21 @@ public abstract class PlayerImpl implements Player, Serializable {
                 return false;
             }
 
-            // workaround to find out empty pay in commander land
-            boolean isEmptyPay = true;
-            Costs<Cost> costs = ability.getCosts().copy();
-            for (Cost cost : costs) {
-                if (!(cost instanceof CommanderAdditionalCost) || !((CommanderAdditionalCost) cost).isEmptyPay(ability, game)) {
-                    isEmptyPay = false;
-                }
-            }
-
-            if (isEmptyPay) {
-                // play as land
+            // as copy, tries to applie cost effects and pays
+            Ability activatingAbility = ability.copy();
+            if (activatingAbility.activate(game, false)) {
                 result = playLand(card, game, false);
             } else {
-                // cast as spell with cost, but with all land's restrictions and events like Damping Engine
-                // look at code in playLand
-                if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, card.getId(), card.getId(), playerId, activationStatus.getPermittingObject()))) {
-                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, card.getId(), card.getId(), playerId, activationStatus.getPermittingObject()));
-
-                    SpellAbility spellAbility = new SpellAbility(null, card.getName(), game.getState().getZone(card.getId()));
-                    spellAbility.addCost(costs);
-                    spellAbility.setControllerId(this.getId());
-                    spellAbility.setSourceId(card.getId());
-                    result = cast(spellAbility, game, false, activationStatus.getPermittingObject());
-
-                    if (result) {
-                        landsPlayed++;
-                        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LAND_PLAYED, card.getId(), card.getId(), playerId, activationStatus.getPermittingObject()));
-                    }
-                } else {
-                    result = false;
-                }
+                result = false;
             }
+
         } else if (ability instanceof PlayLandAbility) {
+
             // LAND as normal card: without cost and stack
             result = playLand(card, game, false);
+
         } else {
+
             // ABILITY
             ActivationStatus activationStatus = ability.canActivate(this.playerId, game);
             if (!activationStatus.canActivate()) {

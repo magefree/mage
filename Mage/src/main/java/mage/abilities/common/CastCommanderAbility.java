@@ -1,7 +1,6 @@
 package mage.abilities.common;
 
 import mage.abilities.SpellAbility;
-import mage.abilities.costs.common.CommanderAdditionalCost;
 import mage.cards.Card;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
@@ -18,9 +17,6 @@ public class CastCommanderAbility extends SpellAbility {
             this.getEffects().addAll(card.getSpellAbility().getEffects().copy());
             this.getTargets().addAll(card.getSpellAbility().getTargets().copy());
             this.timing = card.getSpellAbility().getTiming();
-
-            // extra cost
-            this.addCost(new CommanderAdditionalCost());
         } else {
             throw new IllegalStateException("Cast commander ability must be used with spell ability only: " + card.getName());
         }

@@ -1,7 +1,6 @@
 package mage.abilities.common;
 
 import mage.abilities.PlayLandAbility;
-import mage.abilities.costs.common.CommanderAdditionalCost;
 import mage.constants.Zone;
 
 /**
@@ -12,9 +11,6 @@ public class PlayLandAsCommanderAbility extends PlayLandAbility {
     public PlayLandAsCommanderAbility(PlayLandAbility originalAbility) {
         super(originalAbility);
         zone = Zone.COMMAND;
-
-        // extra cost
-        this.addCost(new CommanderAdditionalCost());
     }
 
     private PlayLandAsCommanderAbility(PlayLandAsCommanderAbility ability) {

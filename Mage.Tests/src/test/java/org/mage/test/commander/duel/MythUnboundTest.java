@@ -1,6 +1,5 @@
 package org.mage.test.commander.duel;
 
-import java.io.FileNotFoundException;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -8,8 +7,9 @@ import mage.game.GameException;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestCommanderDuelBase;
 
+import java.io.FileNotFoundException;
+
 /**
- *
  * @author LevelX2
  */
 public class MythUnboundTest extends CardTestCommanderDuelBase {
@@ -31,21 +31,28 @@ public class MythUnboundTest extends CardTestCommanderDuelBase {
         // Whenever your commander is put into the command zone from anywhere, draw a card.
         addCard(Zone.BATTLEFIELD, playerA, "Myth Unbound", 1); // Enchantment {2}{G}
 
-        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
         addCard(Zone.HAND, playerB, "Lightning Bolt", 1);
 
+        // cast 1 (G = 1 mana)
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Oviya Pashiri, Sage Lifecrafter");
 
+        // destroy
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, "Lightning Bolt", "Oviya Pashiri, Sage Lifecrafter");
+        setChoice(playerA, "Yes");
 
+        // cast 2 (G + 2 - 1 = 2 mana)
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Oviya Pashiri, Sage Lifecrafter");
+
         setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
         execute();
+        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Myth Unbound", 1);
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
         assertPermanentCount(playerA, "Oviya Pashiri, Sage Lifecrafter", 1);
         assertHandCount(playerA, 1);
-        assertTappedCount("Forest", false, 1);
+        assertTappedCount("Forest", false, 4 - 3); // 1 for first, 2 for second cast
     }
 }
