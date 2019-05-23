@@ -13,9 +13,9 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
+import mage.watchers.common.CommanderPlaysCountWatcher;
 
 /**
- *
  * @author Plopman
  */
 public class CommanderStormAbility extends TriggeredAbilityImpl {
@@ -83,9 +83,9 @@ class CommanderStormEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        stormCount = player.getCommandersIds().stream().map(
-                (commanderId) -> (Integer) game.getState().getValue(commanderId + "_castCount")
-        ).map((castCount) -> castCount).reduce(stormCount, Integer::sum);
+        stormCount = player.getCommandersIds().stream()
+                .map((commanderId) -> game.getState().getWatcher(CommanderPlaysCountWatcher.class).getPlaysCount(commanderId))
+                .reduce(stormCount, Integer::sum);
         if (stormCount == 0) {
             return true;
         }

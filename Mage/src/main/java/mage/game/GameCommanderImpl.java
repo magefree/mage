@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.CommanderReplacementEffect;
-import mage.abilities.effects.common.cost.CommanderCostModification;
 import mage.cards.Card;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.PhaseStep;
@@ -14,6 +13,7 @@ import mage.game.mulligan.Mulligan;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.watchers.common.CommanderInfoWatcher;
+import mage.watchers.common.CommanderPlaysCountWatcher;
 
 import java.util.Map;
 import java.util.UUID;
@@ -40,7 +40,11 @@ public abstract class GameCommanderImpl extends GameImpl {
 
     @Override
     protected void init(UUID choosingPlayerId) {
-        //Move commander to command zone
+
+        // plays watcher
+        state.addWatcher(new CommanderPlaysCountWatcher());
+
+        // move commanders to command zone
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
             if (player != null) {
@@ -62,6 +66,7 @@ public abstract class GameCommanderImpl extends GameImpl {
                 }
             }
         }
+
         super.init(choosingPlayerId);
         if (startingPlayerSkipsDraw) {
             state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
@@ -73,8 +78,6 @@ public abstract class GameCommanderImpl extends GameImpl {
         commander.moveToZone(Zone.COMMAND, null, this, true);
         commander.getAbilities().setControllerId(player.getId());
         ability.addEffect(new CommanderReplacementEffect(commander.getId(), alsoHand, alsoLibrary));
-        ability.addEffect(new CommanderCostModification(commander.getId()));
-        getState().setValue(commander.getId() + "_castCount", 0);
         CommanderInfoWatcher watcher = new CommanderInfoWatcher(commander.getId(), checkCommanderDamage);
         getState().addWatcher(watcher);
         watcher.addCardInfoToCommander(this);

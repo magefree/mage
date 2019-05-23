@@ -1,7 +1,7 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.PlayLandAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.ZoneChangeAllTriggeredAbility;
@@ -9,22 +9,18 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.other.OwnerPredicate;
 import mage.filter.predicate.permanent.CommanderPredicate;
 import mage.game.Game;
-import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.util.CardUtil;
+import mage.watchers.common.CommanderPlaysCountWatcher;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class MythUnbound extends CardImpl {
@@ -50,7 +46,7 @@ public final class MythUnbound extends CardImpl {
                 Zone.BATTLEFIELD, Zone.ALL, Zone.COMMAND,
                 new DrawCardSourceControllerEffect(1), filter,
                 "Whenever your commander is put into "
-                + "the command zone from anywhere, ", false
+                        + "the command zone from anywhere, ", false
         ));
     }
 
@@ -80,9 +76,10 @@ class MythUnboundCostReductionEffect extends CostModificationEffectImpl {
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         Ability spellAbility = abilityToModify;
         if (spellAbility != null) {
-            Integer amount = (Integer) game.getState().getValue(abilityToModify.getSourceId() + "_castCount");
-            if (amount != null && amount > 0) {
-                CardUtil.reduceCost(spellAbility, amount);
+            CommanderPlaysCountWatcher watcher = game.getState().getWatcher(CommanderPlaysCountWatcher.class);
+            int castCount = watcher.getPlaysCount(abilityToModify.getSourceId());
+            if (castCount > 0) {
+                CardUtil.reduceCost(spellAbility, castCount);
                 return true;
             }
         }
@@ -95,12 +92,10 @@ class MythUnboundCostReductionEffect extends CostModificationEffectImpl {
         if (player == null) {
             return false;
         }
-        if (abilityToModify instanceof SpellAbility) {
+
+        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof PlayLandAbility) {
             if (abilityToModify.isControlledBy(source.getControllerId())) {
-                Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
-                if (spell != null) {
-                    return player.getCommandersIds().contains(spell.getSourceId());
-                }
+                return player.getCommandersIds().contains(abilityToModify.getSourceId());
             }
         }
         return false;

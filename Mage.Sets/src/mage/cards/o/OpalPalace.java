@@ -1,9 +1,5 @@
-
 package mage.cards.o;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -14,11 +10,7 @@ import mage.abilities.mana.CommanderColorIdentityManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
@@ -28,15 +20,19 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.watchers.Watcher;
+import mage.watchers.common.CommanderPlaysCountWatcher;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class OpalPalace extends CardImpl {
 
     public OpalPalace(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
@@ -77,7 +73,7 @@ class OpalPalaceWatcher extends Watcher {
         this.originalId = watcher.originalId;
     }
 
-    public boolean manaUsedToCastCommander(UUID id){
+    public boolean manaUsedToCastCommander(UUID id) {
         return commanderId.contains(id);
     }
 
@@ -135,16 +131,16 @@ class OpalPalaceEntersBattlefieldEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         OpalPalaceWatcher watcher = game.getState().getWatcher(OpalPalaceWatcher.class, source.getSourceId());
-        return watcher != null
-                && watcher.manaUsedToCastCommander(event.getTargetId());
+        return watcher != null && watcher.manaUsedToCastCommander(event.getTargetId());
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
         if (permanent != null) {
-            Integer castCount = (Integer) game.getState().getValue(permanent.getId() + "_castCount");
-            if (castCount != null && castCount > 0) {
+            CommanderPlaysCountWatcher watcher = game.getState().getWatcher(CommanderPlaysCountWatcher.class);
+            int castCount = watcher.getPlaysCount(permanent.getId());
+            if (castCount > 0) {
                 permanent.addCounters(CounterType.P1P1.createInstance(castCount), source, game);
             }
         }

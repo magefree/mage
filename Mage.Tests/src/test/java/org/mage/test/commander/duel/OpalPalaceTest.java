@@ -1,4 +1,3 @@
-
 package org.mage.test.commander.duel;
 
 import mage.constants.PhaseStep;
@@ -8,7 +7,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestCommanderDuelBase;
 
 /**
- *
  * @author LevelX2
  */
 public class OpalPalaceTest extends CardTestCommanderDuelBase {
@@ -29,10 +27,19 @@ public class OpalPalaceTest extends CardTestCommanderDuelBase {
         // equal to the number of times it's been cast from the command zone this game.
         addCard(Zone.BATTLEFIELD, playerA, "Opal Palace", 1);
 
+        showHand("hand", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        showCommand("command", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        showAvaileableAbilities("abi", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}, {T}");
+        setChoice(playerA, "Opal Palace"); // activate mana replace effect first (+3 counters)
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ob Nixilis of the Black Oath"); // {3}{B}{B}
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertLife(playerA, 40);
         assertLife(playerB, 40);

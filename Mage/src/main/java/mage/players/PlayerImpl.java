@@ -8,9 +8,11 @@ import mage.Mana;
 import mage.abilities.*;
 import mage.abilities.ActivatedAbility.ActivationStatus;
 import mage.abilities.common.PassAbility;
+import mage.abilities.common.PlayLandAsCommanderAbility;
 import mage.abilities.common.WhileSearchingPlayFromLibraryAbility;
 import mage.abilities.common.delayed.AtTheEndOfTurnStepPostDelayedTriggeredAbility;
 import mage.abilities.costs.*;
+import mage.abilities.costs.common.CommanderAdditionalCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -1145,10 +1147,13 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
         }
 
+        // warning, if you change code here then fix it in activateAbility too (play commander as land)
+
         //20091005 - 305.1
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, card.getId(), card.getId(), playerId, activationStatus.getPermittingObject()))) {
             // int bookmark = game.bookmarkState();
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, card.getId(), card.getId(), playerId, activationStatus.getPermittingObject()));
+
             if (moveCards(card, Zone.BATTLEFIELD, playLandAbility, game, false, false, false, null)) {
                 landsPlayed++;
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LAND_PLAYED, card.getId(), card.getId(), playerId, activationStatus.getPermittingObject()));
@@ -1252,10 +1257,60 @@ public abstract class PlayerImpl implements Player, Serializable {
             pass(game);
             return true;
         }
-        if (ability instanceof PlayLandAbility) {
-            Card card = game.getCard(ability.getSourceId());
+
+        Card card = game.getCard(ability.getSourceId());
+        if (ability instanceof PlayLandAsCommanderAbility) {
+            // LAND as commander:
+            // * first time - play without cost as land
+            // * second+ times -- cast as spell with cost and stack
+
+            // code from playLand
+
+            ActivationStatus activationStatus = ability.canActivate(this.playerId, game);
+            if (!activationStatus.canActivate() || !this.canPlayLand()) {
+                return false;
+            }
+            if (card == null) {
+                return false;
+            }
+
+            // workaround to find out empty pay in commander land
+            boolean isEmptyPay = true;
+            Costs<Cost> costs = ability.getCosts().copy();
+            for (Cost cost : costs) {
+                if (!(cost instanceof CommanderAdditionalCost) || !((CommanderAdditionalCost) cost).isEmptyPay(ability, game)) {
+                    isEmptyPay = false;
+                }
+            }
+
+            if (isEmptyPay) {
+                // play as land
+                result = playLand(card, game, false);
+            } else {
+                // cast as spell with cost, but with all land's restrictions and events like Damping Engine
+                // look at code in playLand
+                if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, card.getId(), card.getId(), playerId, activationStatus.getPermittingObject()))) {
+                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, card.getId(), card.getId(), playerId, activationStatus.getPermittingObject()));
+
+                    SpellAbility spellAbility = new SpellAbility(null, card.getName(), game.getState().getZone(card.getId()));
+                    spellAbility.addCost(costs);
+                    spellAbility.setControllerId(this.getId());
+                    spellAbility.setSourceId(card.getId());
+                    result = cast(spellAbility, game, false, activationStatus.getPermittingObject());
+
+                    if (result) {
+                        landsPlayed++;
+                        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LAND_PLAYED, card.getId(), card.getId(), playerId, activationStatus.getPermittingObject()));
+                    }
+                } else {
+                    result = false;
+                }
+            }
+        } else if (ability instanceof PlayLandAbility) {
+            // LAND as normal card: without cost and stack
             result = playLand(card, game, false);
         } else {
+            // ABILITY
             ActivationStatus activationStatus = ability.canActivate(this.playerId, game);
             if (!activationStatus.canActivate()) {
                 return false;
@@ -3030,6 +3085,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             for (ConditionalMana conditionalMana : manaPool.getConditionalMana()) {
                 availableMana.addMana(conditionalMana);
             }
+
             if (hidden) {
                 for (Card card : hand.getUniqueCards(game)) {
                     for (Ability ability : card.getAbilities(game)) { // gets this activated ability from hand? (Morph?)
@@ -3058,6 +3114,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                 }
             }
+
             for (Card card : graveyard.getUniqueCards(game)) {
                 // Handle split cards in graveyard to support Aftermath
                 if (card instanceof SplitCard) {
@@ -3074,6 +3131,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 getOtherUseableActivatedAbilities(card, Zone.GRAVEYARD, game, useable);
                 playable.addAll(useable.values());
             }
+
             for (ExileZone exile : game.getExile().getExileZones()) {
                 for (Card card : exile.getCards(game)) {
                     if (null != game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, null, this.getId(), game)) {
@@ -3091,7 +3149,8 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                 }
             }
-            // Check to play revealed cards
+
+            // check to play revealed cards
             for (Cards cards : game.getState().getRevealed().values()) {
                 for (Card card : cards.getCards(game)) {
                     if (null != game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, null, this.getId(), game)) {
@@ -3103,6 +3162,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                 }
             }
+
             // check if it's possible to play the top card of a library
             for (UUID playerInRangeId : game.getState().getPlayersInRange(getId(), game)) {
                 Player player = game.getPlayer(playerInRangeId);
@@ -3119,6 +3179,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                 }
             }
+
             // eliminate duplicate activated abilities
             Map<String, Ability> playableActivated = new HashMap<>();
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(playerId)) {
@@ -3127,6 +3188,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     playableActivated.putIfAbsent(ability.toString(), ability);
                 }
             }
+
             // activated abilities from stack objects
             for (StackObject stackObject : game.getState().getStack()) {
                 for (ActivatedAbility ability : stackObject.getAbilities().getActivatedAbilities(Zone.STACK)) {
@@ -3136,15 +3198,16 @@ public abstract class PlayerImpl implements Player, Serializable {
 
                 }
             }
+
             // activated abilities from objects in the command zone (emblems or commanders)
             for (CommandObject commandObject : game.getState().getCommand()) {
                 for (ActivatedAbility ability : commandObject.getAbilities().getActivatedAbilities(Zone.COMMAND)) {
                     if (ability.isControlledBy(getId()) && canPlay(ability, availableMana, game.getObject(ability.getSourceId()), game)) {
                         playableActivated.put(ability.toString(), ability);
                     }
-
                 }
             }
+
             playable.addAll(playableActivated.values());
         }
 

@@ -3,11 +3,9 @@ package mage.game.command;
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
-import mage.abilities.Abilities;
-import mage.abilities.AbilitiesImpl;
-import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
+import mage.abilities.*;
 import mage.abilities.common.CastCommanderAbility;
+import mage.abilities.common.PlayLandAsCommanderAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.text.TextPart;
@@ -34,9 +32,23 @@ public class Commander implements CommandObject {
 
     public Commander(Card card) {
         this.sourceObject = card;
-        abilities.add(new CastCommanderAbility(card));
+
+        // replace spell ability by commander cast spell (to cast from command zone)
+        if (card.getSpellAbility() != null) {
+            abilities.add(new CastCommanderAbility(card));
+        }
+
+        // replace play land with commander play land (to play from command zone)
         for (Ability ability : card.getAbilities()) {
-            if (!(ability instanceof SpellAbility)) {
+            if (ability instanceof PlayLandAbility) {
+                Ability newAbility = new PlayLandAsCommanderAbility((PlayLandAbility) ability);
+                abilities.add(newAbility);
+            }
+        }
+
+        // other abilities
+        for (Ability ability : card.getAbilities()) {
+            if (!(ability instanceof SpellAbility) && !(ability instanceof PlayLandAbility)) {
                 Ability newAbility = ability.copy();
                 abilities.add(newAbility);
             }

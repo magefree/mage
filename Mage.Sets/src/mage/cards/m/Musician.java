@@ -1,17 +1,12 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.CostImpl;
+import mage.abilities.costs.common.DynamicValueGenericManaCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.constants.SubType;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroySourceEffect;
@@ -21,17 +16,13 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class Musician extends CardImpl {
@@ -51,8 +42,8 @@ public final class Musician extends CardImpl {
         Effect effect = new DoUnlessControllerPaysEffect(
                 new DestroySourceEffect(),
                 new DynamicValueGenericManaCost(
-                        new CountersSourceCount(
-                                CounterType.MUSIC)));
+                        new CountersSourceCount(CounterType.MUSIC),
+                        "{1} for each music counter on {this}"));
         effect.setText("destroy this creature unless you pay {1} for each music counter on it");
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
                 Zone.BATTLEFIELD,
@@ -87,48 +78,3 @@ public final class Musician extends CardImpl {
     }
 }
 
-class DynamicValueGenericManaCost extends CostImpl {
-
-    DynamicValue amount;
-
-    public DynamicValueGenericManaCost(DynamicValue amount) {
-        this.amount = amount;
-        setText();
-    }
-
-    public DynamicValueGenericManaCost(DynamicValueGenericManaCost cost) {
-        super(cost);
-        this.amount = cost.amount;
-    }
-
-    @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        Player controller = game.getPlayer(controllerId);
-        if (controller == null) {
-            return false;
-        }
-        int convertedCost = amount.calculate(game, ability, null);
-        Cost cost = new GenericManaCost(convertedCost);
-        return cost.canPay(ability, sourceId, controllerId, game);
-    }
-
-    @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        Player controller = game.getPlayer(controllerId);
-        int convertedCost = amount.calculate(game, ability, null);
-        Cost cost = new GenericManaCost(convertedCost);
-        if (controller != null) {
-            paid = cost.pay(ability, game, sourceId, controllerId, noMana);
-        }
-        return paid;
-    }
-
-    @Override
-    public DynamicValueGenericManaCost copy() {
-        return new DynamicValueGenericManaCost(this);
-    }
-
-    private void setText() {
-        text = ("{1} for each music counter on {this}");
-    }
-}
