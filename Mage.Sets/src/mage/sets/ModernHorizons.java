@@ -29,6 +29,7 @@ public final class ModernHorizons extends ExpansionSet {
 
         cards.add(new SetCardInfo("Abominable Treefolk", 194, Rarity.UNCOMMON, mage.cards.a.AbominableTreefolk.class));
         cards.add(new SetCardInfo("Altar of Dementia", 218, Rarity.RARE, mage.cards.a.AltarOfDementia.class));
+        cards.add(new SetCardInfo("Ayula's Influence", 156, Rarity.RARE, mage.cards.a.AyulasInfluence.class));
         cards.add(new SetCardInfo("Cabal Therapist", 80, Rarity.RARE, mage.cards.c.CabalTherapist.class));
         cards.add(new SetCardInfo("Chillerpillar", 43, Rarity.COMMON, mage.cards.c.Chillerpillar.class));
         cards.add(new SetCardInfo("Choking Tethers", 44, Rarity.COMMON, mage.cards.c.ChokingTethers.class));
