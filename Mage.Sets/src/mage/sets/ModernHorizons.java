@@ -71,6 +71,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Seasoned Pyromancer", 145, Rarity.MYTHIC, mage.cards.s.SeasonedPyromancer.class));
         cards.add(new SetCardInfo("Serra the Benevolent", 26, Rarity.MYTHIC, mage.cards.s.SerraTheBenevolent.class));
         cards.add(new SetCardInfo("Silent Clearing", 246, Rarity.RARE, mage.cards.s.SilentClearing.class));
+        cards.add(new SetCardInfo("Sisay, Weatherlight Captain", 29, Rarity.RARE, mage.cards.s.SisayWeatherlightCaptain.class));
         cards.add(new SetCardInfo("Snow-Covered Forest", 254, Rarity.LAND, mage.cards.s.SnowCoveredForest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Snow-Covered Island", 251, Rarity.LAND, mage.cards.s.SnowCoveredIsland.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Snow-Covered Mountain", 253, Rarity.LAND, mage.cards.s.SnowCoveredMountain.class, FULL_ART_BFZ_VARIOUS));
