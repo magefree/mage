@@ -1,5 +1,6 @@
 package mage.cards.s;
 
+import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -35,6 +36,8 @@ public final class SisayWeatherlightCaptain extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
         // Sisay, Weatherlight Captain gets +1/+1 for each color among other legendary permanents you control.
         this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(
