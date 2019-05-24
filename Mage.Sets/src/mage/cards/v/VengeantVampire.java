@@ -23,10 +23,10 @@ import java.util.UUID;
 public final class VengeantVampire extends CardImpl {
 
     public VengeantVampire(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
-        this.subtype.add(SubType.DINOSAUR);
-        this.power = new MageInt(7);
-        this.toughness = new MageInt(7);
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
+        this.subtype.add(SubType.VAMPIRE);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
