@@ -117,6 +117,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Sword of Truth and Justice", 229, Rarity.MYTHIC, mage.cards.s.SwordOfTruthAndJustice.class));
         cards.add(new SetCardInfo("Tempered Sliver", 183, Rarity.UNCOMMON, mage.cards.t.TemperedSliver.class));
         cards.add(new SetCardInfo("The First Sliver", 200, Rarity.MYTHIC, mage.cards.t.TheFirstSliver.class));
+        cards.add(new SetCardInfo("Thundering Djinn", 215, Rarity.UNCOMMON, mage.cards.t.ThunderingDjinn.class));
         cards.add(new SetCardInfo("Umezawa's Charm", 111, Rarity.COMMON, mage.cards.u.UmezawasCharm.class));
         cards.add(new SetCardInfo("Undead Augur", 112, Rarity.UNCOMMON, mage.cards.u.UndeadAugur.class));
         cards.add(new SetCardInfo("Urza, Lord High Artificer", 75, Rarity.MYTHIC, mage.cards.u.UrzaLordHighArtificer.class));
