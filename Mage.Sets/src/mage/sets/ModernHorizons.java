@@ -113,6 +113,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Squirrel Nest", 182, Rarity.UNCOMMON, mage.cards.s.SquirrelNest.class));
         cards.add(new SetCardInfo("Stream of Thought", 71, Rarity.COMMON, mage.cards.s.StreamOfThought.class));
         cards.add(new SetCardInfo("Sunbaked Canyon", 247, Rarity.RARE, mage.cards.s.SunbakedCanyon.class));
+        cards.add(new SetCardInfo("Sword of Truth and Justice", 229, Rarity.MYTHIC, mage.cards.s.SwordOfTruthAndJustice.class));
         cards.add(new SetCardInfo("Tempered Sliver", 183, Rarity.UNCOMMON, mage.cards.t.TemperedSliver.class));
         cards.add(new SetCardInfo("The First Sliver", 200, Rarity.MYTHIC, mage.cards.t.TheFirstSliver.class));
         cards.add(new SetCardInfo("Umezawa's Charm", 111, Rarity.COMMON, mage.cards.u.UmezawasCharm.class));
