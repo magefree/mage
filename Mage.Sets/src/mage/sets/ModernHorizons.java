@@ -43,6 +43,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Dismantling Blow", 5, Rarity.UNCOMMON, mage.cards.d.DismantlingBlow.class));
         cards.add(new SetCardInfo("Dregscape Sliver", 88, Rarity.UNCOMMON, mage.cards.d.DregscapeSliver.class));
         cards.add(new SetCardInfo("Elvish Fury", 162, Rarity.COMMON, mage.cards.e.ElvishFury.class));
+        cards.add(new SetCardInfo("Etchings of the Chosen", 198, Rarity.UNCOMMON, mage.cards.e.EtchingsOfTheChosen.class));
         cards.add(new SetCardInfo("Exclude", 48, Rarity.UNCOMMON, mage.cards.e.Exclude.class));
         cards.add(new SetCardInfo("Fact or Fiction", 50, Rarity.UNCOMMON, mage.cards.f.FactOrFiction.class));
         cards.add(new SetCardInfo("Farmstead Gleaner", 222, Rarity.UNCOMMON, mage.cards.f.FarmsteadGleaner.class));

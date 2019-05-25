@@ -31,7 +31,7 @@ public final class MirrorOfTheForebears extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
 
     static {
-        filter.add(new ChosenSubtypePredicate());
+        filter.add(ChosenSubtypePredicate.instance);
     }
 
     public MirrorOfTheForebears(UUID ownerId, CardSetInfo setInfo) {

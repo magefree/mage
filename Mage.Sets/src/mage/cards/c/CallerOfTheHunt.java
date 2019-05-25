@@ -61,7 +61,7 @@ enum CallerOfTheHuntAdjuster implements CostAdjuster {
         if (mageObject != null
                 && effect.apply(game, ability)) {
             FilterPermanent filter = new FilterPermanent();
-            filter.add(new ChosenSubtypePredicate());
+            filter.add(ChosenSubtypePredicate.instance);
             ContinuousEffect effectPower = new SetPowerSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.Custom);
             ContinuousEffect effectToughness = new SetToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.Custom);
             game.addEffect(effectPower, ability);

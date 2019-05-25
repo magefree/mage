@@ -27,7 +27,7 @@ public final class PlagueEngineer extends CardImpl {
             = new FilterOpponentsCreaturePermanent("creatures of the chosen type your opponents control");
 
     static {
-        filter.add(new ChosenSubtypePredicate());
+        filter.add(ChosenSubtypePredicate.instance);
     }
 
     public PlagueEngineer(UUID ownerId, CardSetInfo setInfo) {

@@ -28,7 +28,7 @@ public final class MorophonTheBoundless extends CardImpl {
             = new FilterCreaturePermanent("creatures you control of the chosen type");
 
     static {
-        filter.add(new ChosenSubtypePredicate());
+        filter.add(ChosenSubtypePredicate.instance);
         filter2.add(new ControllerPredicate(TargetController.YOU));
     }
 
