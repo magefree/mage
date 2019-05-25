@@ -72,7 +72,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("King of the Pride", 16, Rarity.UNCOMMON, mage.cards.k.KingOfThePride.class));
         cards.add(new SetCardInfo("Lava Dart", 134, Rarity.COMMON, mage.cards.l.LavaDart.class));
         cards.add(new SetCardInfo("Lavabelly Sliver", 207, Rarity.UNCOMMON, mage.cards.l.LavabellySliver.class));
-        cards.add(new SetCardInfo("Lesser Masticore", 225, Rarity.COMMON, mage.cards.l.LesserMasticore.class));
+        cards.add(new SetCardInfo("Lesser Masticore", 225, Rarity.UNCOMMON, mage.cards.l.LesserMasticore.class));
         cards.add(new SetCardInfo("Lightning Skelemental", 208, Rarity.RARE, mage.cards.l.LightningSkelemental.class));
         cards.add(new SetCardInfo("Man-o'-War", 55, Rarity.COMMON, mage.cards.m.ManOWar.class));
         cards.add(new SetCardInfo("Martyr's Soul", 19, Rarity.COMMON, mage.cards.m.MartyrsSoul.class));
@@ -84,6 +84,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Nimble Mongoose", 174, Rarity.COMMON, mage.cards.n.NimbleMongoose.class));
         cards.add(new SetCardInfo("Nurturing Peatland", 243, Rarity.RARE, mage.cards.n.NurturingPeatland.class));
         cards.add(new SetCardInfo("Orcish Hellraiser", 136, Rarity.COMMON, mage.cards.o.OrcishHellraiser.class));
+        cards.add(new SetCardInfo("Pillage", 139, Rarity.UNCOMMON, mage.cards.p.Pillage.class));
         cards.add(new SetCardInfo("Plague Engineer", 100, Rarity.RARE, mage.cards.p.PlagueEngineer.class));
         cards.add(new SetCardInfo("Planebound Accomplice", 140, Rarity.RARE, mage.cards.p.PlaneboundAccomplice.class));
         cards.add(new SetCardInfo("Pondering Mage", 63, Rarity.COMMON, mage.cards.p.PonderingMage.class));
@@ -101,11 +102,11 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Serra the Benevolent", 26, Rarity.MYTHIC, mage.cards.s.SerraTheBenevolent.class));
         cards.add(new SetCardInfo("Silent Clearing", 246, Rarity.RARE, mage.cards.s.SilentClearing.class));
         cards.add(new SetCardInfo("Sisay, Weatherlight Captain", 29, Rarity.RARE, mage.cards.s.SisayWeatherlightCaptain.class));
-        cards.add(new SetCardInfo("Snow-Covered Forest", 254, Rarity.LAND, mage.cards.s.SnowCoveredForest.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Snow-Covered Island", 251, Rarity.LAND, mage.cards.s.SnowCoveredIsland.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Snow-Covered Mountain", 253, Rarity.LAND, mage.cards.s.SnowCoveredMountain.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Snow-Covered Plains", 250, Rarity.LAND, mage.cards.s.SnowCoveredPlains.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Snow-Covered Swamp", 252, Rarity.LAND, mage.cards.s.SnowCoveredSwamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Snow-Covered Forest", 254, Rarity.COMMON, mage.cards.s.SnowCoveredForest.class));
+        cards.add(new SetCardInfo("Snow-Covered Island", 251, Rarity.COMMON, mage.cards.s.SnowCoveredIsland.class));
+        cards.add(new SetCardInfo("Snow-Covered Mountain", 253, Rarity.COMMON, mage.cards.s.SnowCoveredMountain.class));
+        cards.add(new SetCardInfo("Snow-Covered Plains", 250, Rarity.COMMON, mage.cards.s.SnowCoveredPlains.class));
+        cards.add(new SetCardInfo("Snow-Covered Swamp", 252, Rarity.COMMON, mage.cards.s.SnowCoveredSwamp.class));
         cards.add(new SetCardInfo("Spore Frog", 180, Rarity.COMMON, mage.cards.s.SporeFrog.class));
         cards.add(new SetCardInfo("Squirrel Nest", 182, Rarity.UNCOMMON, mage.cards.s.SquirrelNest.class));
         cards.add(new SetCardInfo("Stream of Thought", 71, Rarity.COMMON, mage.cards.s.StreamOfThought.class));
