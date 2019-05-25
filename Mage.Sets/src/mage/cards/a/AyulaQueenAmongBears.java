@@ -17,6 +17,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
@@ -34,6 +35,7 @@ public final class AyulaQueenAmongBears extends CardImpl {
     private static final FilterPermanent filter4 = new FilterCreaturePermanent("creature you don't control");
 
     static {
+        filter.add(AnotherPredicate.instance);
         filter3.add(new SubtypePredicate(SubType.BEAR));
         filter4.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
