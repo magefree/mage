@@ -29,6 +29,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Abominable Treefolk", 194, Rarity.UNCOMMON, mage.cards.a.AbominableTreefolk.class));
         cards.add(new SetCardInfo("Altar of Dementia", 218, Rarity.RARE, mage.cards.a.AltarOfDementia.class));
         cards.add(new SetCardInfo("Archmage's Charm", 40, Rarity.RARE, mage.cards.a.ArchmagesCharm.class));
+        cards.add(new SetCardInfo("Aria of Flame", 118, Rarity.RARE, mage.cards.a.AriaOfFlame.class));
         cards.add(new SetCardInfo("Ayula's Influence", 156, Rarity.RARE, mage.cards.a.AyulasInfluence.class));
         cards.add(new SetCardInfo("Ayula, Queen Among Bears", 155, Rarity.RARE, mage.cards.a.AyulaQueenAmongBears.class));
         cards.add(new SetCardInfo("Battle Screech", 4, Rarity.UNCOMMON, mage.cards.b.BattleScreech.class));
