@@ -70,6 +70,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("King of the Pride", 16, Rarity.UNCOMMON, mage.cards.k.KingOfThePride.class));
         cards.add(new SetCardInfo("Lava Dart", 134, Rarity.COMMON, mage.cards.l.LavaDart.class));
         cards.add(new SetCardInfo("Lavabelly Sliver", 207, Rarity.UNCOMMON, mage.cards.l.LavabellySliver.class));
+        cards.add(new SetCardInfo("Lesser Masticore", 225, Rarity.COMMON, mage.cards.l.LesserMasticore.class));
         cards.add(new SetCardInfo("Lightning Skelemental", 208, Rarity.RARE, mage.cards.l.LightningSkelemental.class));
         cards.add(new SetCardInfo("Man-o'-War", 55, Rarity.COMMON, mage.cards.m.ManOWar.class));
         cards.add(new SetCardInfo("Martyr's Soul", 19, Rarity.COMMON, mage.cards.m.MartyrsSoul.class));
