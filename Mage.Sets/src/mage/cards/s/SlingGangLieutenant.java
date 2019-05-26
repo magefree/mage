@@ -1,5 +1,6 @@
 package mage.cards.s;
 
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -33,6 +34,8 @@ public final class SlingGangLieutenant extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
 
         this.subtype.add(SubType.GOBLIN);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
         // When Sling-Gang Lieutenant enters the battlefield, create two 1/1 red Goblin creature tokens.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GoblinToken(), 2)));
