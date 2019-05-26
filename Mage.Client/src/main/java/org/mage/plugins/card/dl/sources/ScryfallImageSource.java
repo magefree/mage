@@ -1,8 +1,17 @@
 package org.mage.plugins.card.dl.sources;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import mage.client.util.CardLanguage;
 import org.mage.plugins.card.images.CardDownloadData;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
@@ -62,29 +71,16 @@ public enum ScryfallImageSource implements CardImageSource {
             alternativeUrl = null;
         }
 
-        // special card number like "103a" and "U123" already compatible
-        if (baseUrl == null && card.isCollectorIdWithStr()) {
-            // WARNING, after 2018 it's not compatible and some new sets have GUID files instead card numbers
-            // TODO: replace card number links to API calls (need test with lands, alternative images and double faces), replace not working images by direct links
-
-            if (card.getCollectorId().startsWith("U") || card.getCollectorIdAsInt() == -1) {
-                // fix for Ultimate Box Topper (PUMA) and Mythic Edition (MED) -- need to use API
-                // ignored and go to API call at the end
-            } else {
-                baseUrl = "https://img.scryfall.com/cards/large/" + localizedCode + "/" + formatSetName(card.getSet(), isToken) + "/"
-                        + card.getCollectorId() + ".jpg";
-                alternativeUrl = "https://img.scryfall.com/cards/large/" + defaultCode + "/" + formatSetName(card.getSet(), isToken) + "/"
-                        + card.getCollectorId() + ".jpg";
-            }
-        }
-
-        // double faced cards do not supports by API (need direct link for img)
-        // example: https://img.scryfall.com/cards/large/en/xln/173b.jpg
+        // double faced cards
+        // Scryfall doesn't support string collector ID's anymore (like "U123" or "176a")
+        // as such, we need to get the image URL's manually from their API
         if (baseUrl == null && card.isTwoFacedCard()) {
-            baseUrl = "https://img.scryfall.com/cards/large/" + localizedCode + "/" + formatSetName(card.getSet(), isToken) + "/"
-                    + card.getCollectorId() + (card.isSecondSide() ? "b" : "a") + ".jpg";
-            alternativeUrl = "https://img.scryfall.com/cards/large/" + defaultCode + "/" + formatSetName(card.getSet(), isToken) + "/"
-                    + card.getCollectorId() + (card.isSecondSide() ? "b" : "a") + ".jpg";
+            try {
+                baseUrl = getFaceImageUrl(card, isToken, localizedCode);
+                alternativeUrl = getFaceImageUrl(card, isToken, defaultCode);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         // basic cards by api call (redirect to img link)
@@ -97,6 +93,24 @@ public enum ScryfallImageSource implements CardImageSource {
         }
 
         return new CardImageUrls(baseUrl, alternativeUrl);
+    }
+
+    private String getFaceImageUrl(CardDownloadData card, boolean isToken, String localizationCode) throws IOException {
+        // connect to Scryfall API
+        URL cardUrl = new URL("https://api.scryfall.com/cards/" + formatSetName(card.getSet(), isToken) + "/"
+                + card.getCollectorIdAsInt() + "/" + localizationCode);
+        URLConnection request = cardUrl.openConnection();
+        request.connect();
+
+        // parse the response and return the image URI from the correct card face
+        JsonParser jp = new JsonParser();
+        JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
+        JsonObject jsonCard = root.getAsJsonObject();
+        JsonArray jsonCardFaces = jsonCard.getAsJsonArray("card_faces");
+        JsonObject jsonCardFace = jsonCardFaces.get(card.isSecondSide() ? 1 : 0).getAsJsonObject();
+        JsonObject jsonImageUris = jsonCardFace.getAsJsonObject("image_uris");
+
+        return jsonImageUris.get("png").getAsString();
     }
 
     @Override
