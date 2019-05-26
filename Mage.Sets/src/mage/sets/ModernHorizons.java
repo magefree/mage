@@ -58,6 +58,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Flusterstorm", 255, Rarity.RARE, mage.cards.f.Flusterstorm.class));
         cards.add(new SetCardInfo("Force of Despair", 92, Rarity.RARE, mage.cards.f.ForceOfDespair.class));
         cards.add(new SetCardInfo("Force of Negation", 52, Rarity.RARE, mage.cards.f.ForceOfNegation.class));
+        cards.add(new SetCardInfo("Force of Rage", 124, Rarity.RARE, mage.cards.f.ForceOfRage.class));
         cards.add(new SetCardInfo("Force of Vigor", 164, Rarity.RARE, mage.cards.f.ForceOfVigor.class));
         cards.add(new SetCardInfo("Force of Virtue", 10, Rarity.RARE, mage.cards.f.ForceOfVirtue.class));
         cards.add(new SetCardInfo("Frostwalk Bastion", 240, Rarity.UNCOMMON, mage.cards.f.FrostwalkBastion.class));
