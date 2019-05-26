@@ -1,7 +1,6 @@
-
-
 package mage.target.common;
 
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.target.TargetPermanent;
 
@@ -9,22 +8,22 @@ import mage.target.TargetPermanent;
  * @author ayratn
  */
 public class TargetArtifactPermanent extends TargetPermanent {
-    
+
     public TargetArtifactPermanent() {
-        this(1, 1, new FilterArtifactPermanent(), false);
+        this(1, 1, StaticFilters.FILTER_PERMANENT_ARTIFACT, false);
     }
 
-    
+
     public TargetArtifactPermanent(FilterArtifactPermanent filter) {
         this(1, 1, filter, false);
     }
 
     public TargetArtifactPermanent(int numTargets) {
-        this(numTargets, numTargets, new FilterArtifactPermanent(), false);
+        this(numTargets, numTargets, StaticFilters.FILTER_PERMANENT_ARTIFACT, false);
     }
 
     public TargetArtifactPermanent(int minNumTargets, int maxNumTargets) {
-        this(minNumTargets, maxNumTargets, new FilterArtifactPermanent(), false);
+        this(minNumTargets, maxNumTargets, StaticFilters.FILTER_PERMANENT_ARTIFACT, false);
     }
 
     public TargetArtifactPermanent(int minNumTargets, int maxNumTargets, FilterArtifactPermanent filter, boolean notTarget) {
