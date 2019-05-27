@@ -9,7 +9,6 @@ import org.apache.log4j.Logger;
 import org.mage.plugins.card.dl.DownloadServiceInfo;
 import org.mage.plugins.card.images.CardDownloadData;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.Proxy;
@@ -101,10 +100,10 @@ public enum ScryfallImageSource implements CardImageSource {
         return new CardImageUrls(baseUrl, alternativeUrl);
     }
 
-    private String getFaceImageUrl(CardDownloadData card, boolean isToken, String localizationCode) throws IOException {
+    private String getFaceImageUrl(CardDownloadData card, boolean isToken, String localizationCode) throws Exception {
         // connect to Scryfall API
-        URL cardUrl = new URL("https://api.scryfall.com/cards/" + formatSetName(card.getSet(), isToken) + "/"
-                + card.getCollectorIdAsInt() + "/" + localizationCode);
+        final URL cardUrl = new URL("https://api.scryfall.com/cards/" + formatSetName(card.getSet(), isToken) + "/"
+                + (card.getCollectorIdAsInt() % 1000) + "/" + localizationCode);
         URLConnection request = cardUrl.openConnection();
         request.connect();
 
@@ -112,6 +111,9 @@ public enum ScryfallImageSource implements CardImageSource {
         JsonParser jp = new JsonParser();
         JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
         JsonObject jsonCard = root.getAsJsonObject();
+        if (!jsonCard.has("card_faces")) {
+            throw new IllegalArgumentException("Couldn't find card_faces in Card JSON.");
+        }
         JsonArray jsonCardFaces = jsonCard.getAsJsonArray("card_faces");
         JsonObject jsonCardFace = jsonCardFaces.get(card.isSecondSide() ? 1 : 0).getAsJsonObject();
         JsonObject jsonImageUris = jsonCardFace.getAsJsonObject("image_uris");
@@ -133,14 +135,14 @@ public enum ScryfallImageSource implements CardImageSource {
 
             // prepare the back face URL
             if (card.isTwoFacedCard() && card.isSecondSide()) {
-                String defaultCode = CardLanguage.ENGLISH.getCode();
+                final String defaultCode = CardLanguage.ENGLISH.getCode();
                 final String localizedCode = languageAliases.getOrDefault(this.getCurrentLanguage(), defaultCode);
 
                 String url = null;
 
                 try {
                     url = getFaceImageUrl(card, card.isToken(), localizedCode);
-                } catch (IOException e) {
+                } catch (Exception e) {
                     logger.warn("Failed to prepare image URL for " + card.getName() + " (" + card.getSet() + ") #" + card.getCollectorId());
                     downloadServiceInfo.incErrorCount();
                     continue;
