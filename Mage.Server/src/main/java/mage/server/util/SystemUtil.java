@@ -522,10 +522,8 @@ public final class SystemUtil {
                     // as commander (only commander games, look at init code in GameCommanderImpl)
                     if (game instanceof GameCommanderImpl) {
                         GameCommanderImpl gameCommander = (GameCommanderImpl) game;
-                        for (Card card : cardsToLoad) {
-                            player.addCommanderId(card.getId());
-                            gameCommander.initCommander(card, player);
-                        }
+                        cardsToLoad.forEach(card -> gameCommander.addCommander(card, player));
+                        cardsToLoad.forEach(card -> gameCommander.initCommander(card, player));
                     } else {
                         logger.fatal("Commander card can be used in commander game only: " + command.cardName);
                     }

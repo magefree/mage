@@ -2871,7 +2871,7 @@ public abstract class GameImpl implements Game, Serializable {
             // as commander (only commander games, look at init code in GameCommanderImpl)
             if (this instanceof GameCommanderImpl) {
                 for (Card card : command) {
-                    player.addCommanderId(card.getId());
+                    ((GameCommanderImpl) this).addCommander(card, player);
                     // no needs in initCommander call -- it's uses on game startup (init)
                 }
             } else if (!command.isEmpty()) {

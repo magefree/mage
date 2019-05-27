@@ -178,6 +178,7 @@
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
+
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mage-game-freeformcommanderfreeforall</artifactId>
@@ -187,6 +188,13 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mage-game-freeformcommanderduel</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>mage-game-oathbreakerfreeforall</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>

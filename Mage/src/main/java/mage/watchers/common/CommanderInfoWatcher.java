@@ -26,17 +26,20 @@ public class CommanderInfoWatcher extends Watcher {
 
     private final Map<UUID, Integer> damageToPlayer = new HashMap<>();
     private final boolean checkCommanderDamage;
+    private final String commanderTypeName;
 
-    public CommanderInfoWatcher(UUID commander, boolean checkCommanderDamage) {
+    public CommanderInfoWatcher(String commanderTypeName, UUID commander, boolean checkCommanderDamage) {
         super(WatcherScope.CARD);
         this.sourceId = commander;
         this.checkCommanderDamage = checkCommanderDamage;
+        this.commanderTypeName = commanderTypeName;
     }
 
     public CommanderInfoWatcher(final CommanderInfoWatcher watcher) {
         super(watcher);
         this.damageToPlayer.putAll(watcher.damageToPlayer);
         this.checkCommanderDamage = watcher.checkCommanderDamage;
+        this.commanderTypeName = watcher.commanderTypeName;
     }
 
     @Override
@@ -78,7 +81,7 @@ public class CommanderInfoWatcher extends Watcher {
         }
         if (object != null) {
             StringBuilder sb = new StringBuilder();
-            sb.append("<b>Commander</b>");
+            sb.append("<b>" + commanderTypeName + "</b>");
             CommanderPlaysCountWatcher watcher = game.getState().getWatcher(CommanderPlaysCountWatcher.class);
             int playsCount = watcher.getPlaysCount(sourceId);
             if (playsCount > 0) {
@@ -89,9 +92,9 @@ public class CommanderInfoWatcher extends Watcher {
             if (checkCommanderDamage) {
                 for (Map.Entry<UUID, Integer> entry : damageToPlayer.entrySet()) {
                     Player damagedPlayer = game.getPlayer(entry.getKey());
-                    sb.append("<b>Commander</b> did ").append(entry.getValue()).append(" combat damage to player ").append(damagedPlayer.getLogName()).append('.');
+                    sb.append("<b>" + commanderTypeName + "</b> did ").append(entry.getValue()).append(" combat damage to player ").append(damagedPlayer.getLogName()).append('.');
                     this.addInfo(object, "Commander" + entry.getKey(),
-                            "<b>Commander</b> did " + entry.getValue() + " combat damage to player " + damagedPlayer.getLogName() + '.', game);
+                            "<b>" + commanderTypeName + "</b> did " + entry.getValue() + " combat damage to player " + damagedPlayer.getLogName() + '.', game);
                 }
             }
         }

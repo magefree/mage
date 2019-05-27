@@ -41,6 +41,7 @@ public abstract class GameCommanderImpl extends GameImpl {
 
     @Override
     protected void init(UUID choosingPlayerId) {
+        // Karn Liberated calls it to restart game, all data and commanders must be re-initialized
 
         // plays watcher
         state.addWatcher(new CommanderPlaysCountWatcher());
@@ -49,20 +50,19 @@ public abstract class GameCommanderImpl extends GameImpl {
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
             if (player != null) {
-                if (player.getSideboard().isEmpty()) { // needed for restart game of e.g. Karn Liberated
-                    for (UUID commanderId : player.getCommandersIds()) {
-                        Card commander = this.getCard(commanderId);
-                        if (commander != null) {
-                            initCommander(commander, player);
-                        }
+                // add new commanders
+                for (UUID id : player.getSideboard()) {
+                    Card commander = this.getCard(id);
+                    if (commander != null) {
+                        addCommander(commander, player);
                     }
-                } else {
-                    while (!player.getSideboard().isEmpty()) {
-                        Card commander = this.getCard(player.getSideboard().iterator().next());
-                        if (commander != null) {
-                            player.addCommanderId(commander.getId());
-                            initCommander(commander, player);
-                        }
+                }
+
+                // init commanders
+                for (UUID commanderId : player.getCommandersIds()) {
+                    Card commander = this.getCard(commanderId);
+                    if (commander != null) {
+                        initCommander(commander, player);
                     }
                 }
             }
@@ -75,15 +75,25 @@ public abstract class GameCommanderImpl extends GameImpl {
     }
 
     public void initCommander(Card commander, Player player) {
-        Ability ability = new SimpleStaticAbility(Zone.COMMAND, new InfoEffect("Commander effects"));
         commander.moveToZone(Zone.COMMAND, null, this, true);
         commander.getAbilities().setControllerId(player.getId());
-        ability.addEffect(new CommanderReplacementEffect(commander.getId(), alsoHand, alsoLibrary));
-        ability.addEffect(new CommanderCostModification(commander.getId()));
-        CommanderInfoWatcher watcher = new CommanderInfoWatcher(commander.getId(), checkCommanderDamage);
+
+        Ability ability = new SimpleStaticAbility(Zone.COMMAND, new InfoEffect("Commander effects"));
+        initCommanderEffects(commander, player, ability);
+        CommanderInfoWatcher watcher = initCommanderWatcher(commander, checkCommanderDamage);
         getState().addWatcher(watcher);
         watcher.addCardInfoToCommander(this);
         this.getState().addAbility(ability, null);
+    }
+
+    public CommanderInfoWatcher initCommanderWatcher(Card commander, boolean checkCommanderDamage) {
+        return new CommanderInfoWatcher("Commander", commander.getId(), checkCommanderDamage);
+    }
+
+    public void initCommanderEffects(Card commander, Player player, Ability commanderAbility) {
+        // all commander effects must be independent from sourceId or controllerId
+        commanderAbility.addEffect(new CommanderReplacementEffect(commander.getId(), alsoHand, alsoLibrary));
+        commanderAbility.addEffect(new CommanderCostModification(commander.getId()));
     }
 
     //20130711
@@ -205,6 +215,10 @@ public abstract class GameCommanderImpl extends GameImpl {
 
     public void setCheckCommanderDamage(boolean checkCommanderDamage) {
         this.checkCommanderDamage = checkCommanderDamage;
+    }
+
+    public void addCommander(Card card, Player player) {
+        player.addCommanderId(card.getId());
     }
 
 }
