@@ -117,6 +117,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Snow-Covered Mountain", 253, Rarity.LAND, mage.cards.s.SnowCoveredMountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Snow-Covered Plains", 250, Rarity.LAND, mage.cards.s.SnowCoveredPlains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Snow-Covered Swamp", 252, Rarity.LAND, mage.cards.s.SnowCoveredSwamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Splicer's Skill", 31, Rarity.UNCOMMON, mage.cards.s.SplicersSkill.class));
         cards.add(new SetCardInfo("Spore Frog", 180, Rarity.COMMON, mage.cards.s.SporeFrog.class));
         cards.add(new SetCardInfo("Springbloom Druid", 181, Rarity.COMMON, mage.cards.s.SpringbloomDruid.class));
         cards.add(new SetCardInfo("Squirrel Nest", 182, Rarity.UNCOMMON, mage.cards.s.SquirrelNest.class));
@@ -133,6 +134,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Venomous Changeling", 114, Rarity.COMMON, mage.cards.v.VenomousChangeling.class));
         cards.add(new SetCardInfo("Wall of One Thousand Cuts", 36, Rarity.COMMON, mage.cards.w.WallOfOneThousandCuts.class));
         cards.add(new SetCardInfo("Waterlogged Grove", 249, Rarity.RARE, mage.cards.w.WaterloggedGrove.class));
+        cards.add(new SetCardInfo("Winds of Abandon", 37, Rarity.RARE, mage.cards.w.WindsOfAbandon.class));
         cards.add(new SetCardInfo("Wing Shards", 38, Rarity.UNCOMMON, mage.cards.w.WingShards.class));
         cards.add(new SetCardInfo("Wrenn and Six", 217, Rarity.MYTHIC, mage.cards.w.WrennAndSix.class));
         cards.add(new SetCardInfo("Zhalfirin Decoy", 39, Rarity.UNCOMMON, mage.cards.z.ZhalfirinDecoy.class));

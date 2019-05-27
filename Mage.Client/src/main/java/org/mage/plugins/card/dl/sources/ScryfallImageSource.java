@@ -5,6 +5,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import mage.client.util.CardLanguage;
+import org.apache.log4j.Logger;
+import org.mage.plugins.card.dl.DownloadServiceInfo;
 import org.mage.plugins.card.images.CardDownloadData;
 
 import java.io.IOException;
@@ -16,6 +18,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.net.Proxy;
+import java.util.*;
 
 /**
  * @author JayDi85
@@ -24,8 +28,11 @@ public enum ScryfallImageSource implements CardImageSource {
 
     instance;
 
+    private static final Logger logger = Logger.getLogger(ScryfallImageSource.class);
+
     private final Map<CardLanguage, String> languageAliases;
     private CardLanguage currentLanguage = CardLanguage.ENGLISH; // working language
+    private Map<CardDownloadData, String> preparedUrls = new HashMap<>();
 
     ScryfallImageSource() {
         // LANGUAGES
@@ -45,6 +52,11 @@ public enum ScryfallImageSource implements CardImageSource {
     }
 
     private CardImageUrls innerGenerateURL(CardDownloadData card, boolean isToken) {
+        String prepared = preparedUrls.getOrDefault(card, null);
+        if (prepared != null) {
+            return new CardImageUrls(prepared, null);
+        }
+
         String defaultCode = CardLanguage.ENGLISH.getCode();
         String localizedCode = languageAliases.getOrDefault(this.getCurrentLanguage(), defaultCode);
         // loc example: https://api.scryfall.com/cards/xln/121/ru?format=image
@@ -111,6 +123,31 @@ public enum ScryfallImageSource implements CardImageSource {
         JsonObject jsonImageUris = jsonCardFace.getAsJsonObject("image_uris");
 
         return jsonImageUris.get("png").getAsString();
+    }
+
+    @Override
+    public boolean prepareDownloadList(DownloadServiceInfo downloadServiceInfo, List<CardDownloadData> downloadList) {
+        // prepare download list example (
+        Proxy proxy = downloadServiceInfo.getProxy();
+
+        preparedUrls.clear();
+        for (CardDownloadData card : downloadList) {
+            // need cancel
+            if (downloadServiceInfo.isNeedCancel()) {
+                return false;
+            }
+
+            // TODO: download faces info here
+            if (card.isTwoFacedCard()) {
+                String url = null;
+                preparedUrls.put(card, url);
+            }
+
+            // inc error count to stop on too many errors
+            // downloadServiceInfo.incErrorCount();
+        }
+
+        return true;
     }
 
     @Override
