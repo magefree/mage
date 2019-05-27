@@ -19,6 +19,7 @@ public class OathbreakerFreeForAllMatch extends MatchImpl {
         boolean alsoHand = true;
         Mulligan mulligan = options.getMulliganType().getMulligan(options.getFreeMulligans());
         OathbreakerFreeForAll game = new OathbreakerFreeForAll(options.getAttackOption(), options.getRange(), mulligan, startLife);
+        game.setCheckCommanderDamage(false);
         game.setStartMessage(this.createGameStartMessage());
         game.setAlsoHand(alsoHand);
         game.setAlsoLibrary(true);
