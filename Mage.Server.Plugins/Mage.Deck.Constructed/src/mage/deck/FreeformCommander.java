@@ -67,8 +67,6 @@ public class FreeformCommander extends Constructed {
             }
         }
 
-        generateFreeformHash();
-
         if (deck.getSideboard().size() < 1 || deck.getSideboard().size() > 2) {
             invalid.put("Commander", "Sideboard must contain only the commander(s)");
             valid = false;
@@ -116,6 +114,11 @@ public class FreeformCommander extends Constructed {
             }
         }
 
+        // no needs in cards check on wrong commanders
+        if (!valid) {
+            return false;
+        }
+
         for (Card card : deck.getCards()) {
             if (!cardHasValidColor(colorIdentity, card)) {
                 invalid.put(card.getName(), "Invalid color (" + colorIdentity.toString() + ')');
@@ -141,9 +144,5 @@ public class FreeformCommander extends Constructed {
                 || cardColor.isGreen() && !commander.isGreen()
                 || cardColor.isRed() && !commander.isRed()
                 || cardColor.isWhite() && !commander.isWhite());
-    }
-
-    public void generateFreeformHash() {
-        return;
     }
 }
