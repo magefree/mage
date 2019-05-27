@@ -110,6 +110,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Scrapyard Recombiner", 227, Rarity.RARE, mage.cards.s.ScrapyardRecombiner.class));
         cards.add(new SetCardInfo("Scuttling Sliver", 68, Rarity.UNCOMMON, mage.cards.s.ScuttlingSliver.class));
         cards.add(new SetCardInfo("Seasoned Pyromancer", 145, Rarity.MYTHIC, mage.cards.s.SeasonedPyromancer.class));
+        cards.add(new SetCardInfo("Segovian Angel", 25, Rarity.COMMON, mage.cards.s.SegovianAngel.class));
         cards.add(new SetCardInfo("Serra the Benevolent", 26, Rarity.MYTHIC, mage.cards.s.SerraTheBenevolent.class));
         cards.add(new SetCardInfo("Silent Clearing", 246, Rarity.RARE, mage.cards.s.SilentClearing.class));
         cards.add(new SetCardInfo("Sisay, Weatherlight Captain", 29, Rarity.RARE, mage.cards.s.SisayWeatherlightCaptain.class));
