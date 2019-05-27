@@ -47,6 +47,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Diabolic Edict", 87, Rarity.COMMON, mage.cards.d.DiabolicEdict.class));
         cards.add(new SetCardInfo("Dismantling Blow", 5, Rarity.UNCOMMON, mage.cards.d.DismantlingBlow.class));
         cards.add(new SetCardInfo("Dregscape Sliver", 88, Rarity.UNCOMMON, mage.cards.d.DregscapeSliver.class));
+        cards.add(new SetCardInfo("Eladamri's Call", 197, Rarity.RARE, mage.cards.e.EladamrisCall.class));
         cards.add(new SetCardInfo("Elvish Fury", 162, Rarity.COMMON, mage.cards.e.ElvishFury.class));
         cards.add(new SetCardInfo("Etchings of the Chosen", 198, Rarity.UNCOMMON, mage.cards.e.EtchingsOfTheChosen.class));
         cards.add(new SetCardInfo("Exclude", 48, Rarity.UNCOMMON, mage.cards.e.Exclude.class));
@@ -79,6 +80,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Hollowhead Sliver", 132, Rarity.UNCOMMON, mage.cards.h.HollowheadSliver.class));
         cards.add(new SetCardInfo("Ice-Fang Coatl", 203, Rarity.RARE, mage.cards.i.IceFangCoatl.class));
         cards.add(new SetCardInfo("Impostor of the Sixth Pride", 14, Rarity.COMMON, mage.cards.i.ImpostorOfTheSixthPride.class));
+        cards.add(new SetCardInfo("Kess, Dissident Mage", 206, Rarity.MYTHIC, mage.cards.k.KessDissidentMage.class));
         cards.add(new SetCardInfo("King of the Pride", 16, Rarity.UNCOMMON, mage.cards.k.KingOfThePride.class));
         cards.add(new SetCardInfo("Lava Dart", 134, Rarity.COMMON, mage.cards.l.LavaDart.class));
         cards.add(new SetCardInfo("Lavabelly Sliver", 207, Rarity.UNCOMMON, mage.cards.l.LavabellySliver.class));
