@@ -30,6 +30,7 @@
         <module>Mage.Game.FreeformCommanderFreeForAll</module>
         <module>Mage.Game.BrawlDuel</module>
         <module>Mage.Game.BrawlFreeForAll</module>
+        <module>Mage.Game.OathbreakerDuel</module>
         <module>Mage.Game.OathbreakerFreeForAll</module>
         <module>Mage.Game.TwoPlayerDuel</module>
         <module>Mage.Player.AI</module>

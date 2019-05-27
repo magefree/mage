@@ -40,34 +40,6 @@ public class OathbreakerFreeForAll extends GameCommanderImpl {
 
     @Override
     protected void init(UUID choosingPlayerId) {
-        /*
-        // prepare commanders and signature spells info
-        playerSignatureSpell.clear();
-        playerCommanders.clear();
-        for (UUID playerId : state.getPlayerList(startingPlayerId)) {
-            UUID signatureSpell = null;
-            List<UUID> commanders = new ArrayList<>();
-
-            Player player = getPlayer(playerId);
-            List<UUID> searchList = new ArrayList<>();
-            searchList.addAll(player.getCommandersIds());
-            searchList.addAll(new ArrayList<>(player.getSideboard()));
-            for (UUID id : searchList) {
-                Card commander = this.getCard(id);
-                if (commander != null) {
-                    if (commander.isInstantOrSorcery()) {
-                        signatureSpell = commander.getId();
-                    } else if (!commanders.contains(commander.getId())) {
-                        commanders.add(commander.getId());
-                    }
-                }
-            }
-
-            playerSignatureSpell.put(playerId, signatureSpell);
-            playerCommanders.put(playerId, commanders);
-        }
-         */
-
         // init base commander game
         startingPlayerSkipsDraw = false;
         super.init(choosingPlayerId);
