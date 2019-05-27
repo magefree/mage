@@ -3,26 +3,28 @@ package mage.cards.g;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.TargetCard;
+import mage.watchers.common.CommanderPlaysCountWatcher;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 /**
- * @author spjspj
+ * @author spjspj, JayDi85
  */
 public final class GeodeGolem extends CardImpl {
 
@@ -65,36 +67,53 @@ class GeodeGolemEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (UUID commanderId : controller.getCommandersIds()) {
-                if (game.getState().getZone(commanderId) == Zone.COMMAND) {
-                    Card commander = game.getCard(commanderId);
-                    if (commander != null && game.getState().getZone(commanderId) == Zone.COMMAND) {
-                        SpellAbility ability = commander.getSpellAbility();
-                        SpellAbility newAbility = commander.getSpellAbility().copy();
-                        newAbility.getCosts().clear();
+            UUID selectedCommanderId = null;
+            Set<UUID> possibleCommanders = new HashSet<>();
+            for (UUID id : game.getCommandersIds(controller)) {
+                if (game.getState().getZone(id) == Zone.COMMAND) {
+                    possibleCommanders.add(id);
+                }
+            }
 
-                        Integer castCount = (Integer) game.getState().getValue(commander.getId() + "_castCount");
-                        Cost cost = null;
-                        if (castCount > 0) {
-                            cost = new GenericManaCost(castCount * 2);
-                        }
+            if (possibleCommanders.size() == 0) {
+                return false;
+            }
 
-                        if ((castCount == 0 || castCount > 0 && cost.pay(source, game, source.getSourceId(), controller.getId(), false, null))
-                                && controller.cast(newAbility, game, true, new MageObjectReference(source.getSourceObject(game), game))) {
-                            // save amount of times commander was cast
-                            if (castCount == null) {
-                                castCount = 1;
-                            } else {
-                                castCount++;
-                            }
-                            game.getState().setValue(commander.getId() + "_castCount", castCount);
-                            return true;
-                        }
+            // select from commanders
+            if (possibleCommanders.size() == 1) {
+                selectedCommanderId = possibleCommanders.iterator().next();
+            } else {
+                TargetCard target = new TargetCard(Zone.COMMAND, new FilterCard("commander to cast without mana cost"));
+                Cards cards = new CardsImpl(possibleCommanders);
+                target.setNotTarget(true);
+                if (controller.canRespond() && controller.choose(Outcome.Benefit, cards, target, game)) {
+                    if (target.getFirstTarget() != null) {
+                        selectedCommanderId = target.getFirstTarget();
                     }
                 }
             }
 
-            return true;
+            Card commander = game.getCard(selectedCommanderId);
+            if (commander == null) {
+                return false;
+            }
+
+            // PAY
+            ManaCost cost = null;
+            CommanderPlaysCountWatcher watcher = game.getState().getWatcher(CommanderPlaysCountWatcher.class);
+            int castCount = watcher.getPlaysCount(commander.getId());
+            if (castCount > 0) {
+                cost = new GenericManaCost(castCount * 2);
+            }
+
+            // CAST: as spell or as land
+            if (cost == null || cost.pay(source, game, source.getSourceId(), controller.getId(), false, null)) {
+                if (commander.getSpellAbility() != null) {
+                    return controller.cast(commander.getSpellAbility().copy(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                } else {
+                    return controller.playLand(commander, game, true);
+                }
+            }
         }
         return false;
     }
