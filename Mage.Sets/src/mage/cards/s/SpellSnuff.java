@@ -26,7 +26,7 @@ public final class SpellSnuff extends CardImpl {
         // Fateful hour — If you have 5 or less life, draw a card.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(1), FatefulHourCondition.instance,
-                "<br><i>Fateful Hour</i> &mdash; If you have 5 or less life, draw a card."
+                "<br><i>Fateful hour</i> &mdash; If you have 5 or less life, draw a card."
         ));
     }
 
