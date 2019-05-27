@@ -137,7 +137,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Sword of Truth and Justice", 229, Rarity.MYTHIC, mage.cards.s.SwordOfTruthAndJustice.class));
         cards.add(new SetCardInfo("Talisman of Conviction", 230, Rarity.UNCOMMON, mage.cards.t.TalismanOfConviction.class));
         cards.add(new SetCardInfo("Talisman of Creativity", 231, Rarity.UNCOMMON, mage.cards.t.TalismanOfCreativity.class));
-        cards.add(new SetCardInfo("Talisman of Curiosity", 232, Rarity.COMMON, mage.cards.t.TalismanOfCuriosity.class));
+        cards.add(new SetCardInfo("Talisman of Curiosity", 232, Rarity.UNCOMMON, mage.cards.t.TalismanOfCuriosity.class));
         cards.add(new SetCardInfo("Talisman of Hierarchy", 233, Rarity.UNCOMMON, mage.cards.t.TalismanOfHierarchy.class));
         cards.add(new SetCardInfo("Talisman of Resilience", 234, Rarity.UNCOMMON, mage.cards.t.TalismanOfResilience.class));
         cards.add(new SetCardInfo("Tempered Sliver", 183, Rarity.UNCOMMON, mage.cards.t.TemperedSliver.class));
