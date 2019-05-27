@@ -8,6 +8,7 @@ import mage.abilities.condition.common.OathbreakerOnBattlefieldCondition;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.hint.ConditionHint;
 import mage.cards.Card;
+import mage.constants.CommanderCardType;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 import mage.game.match.MatchType;
@@ -137,5 +138,34 @@ public class OathbreakerFreeForAll extends GameCommanderImpl {
     @Override
     public OathbreakerFreeForAll copy() {
         return new OathbreakerFreeForAll(this);
+    }
+
+    @Override
+    public Set<UUID> getCommandersIds(Player player, CommanderCardType commanderCardType) {
+        Set<UUID> res = new HashSet<>();
+        if (player != null) {
+            List<UUID> commanders = this.playerCommanders.getOrDefault(player.getId(), new ArrayList<>());
+            UUID spell = this.playerSignatureSpell.getOrDefault(player.getId(), null);
+            for (UUID id : player.getCommandersIds()) {
+                switch (commanderCardType) {
+                    case ANY:
+                        res.add(id);
+                        break;
+                    case COMMANDER_OR_OATHBREAKER:
+                        if (commanders.contains(id)) {
+                            res.add(id);
+                        }
+                        break;
+                    case SIGNATURE_SPELL:
+                        if (id.equals(spell)) {
+                            res.add(id);
+                        }
+                        break;
+                    default:
+                        throw new IllegalStateException("Unknown commander type " + commanderCardType);
+                }
+            }
+        }
+        return res;
     }
 }

@@ -3193,4 +3193,9 @@ public abstract class GameImpl implements Game, Serializable {
         return mulligan;
     }
 
+    @Override
+    public Set<UUID> getCommandersIds(Player player, CommanderCardType commanderCardType) {
+        return player.getCommandersIds();
+    }
+
 }

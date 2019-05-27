@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.CommanderCardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -83,7 +84,7 @@ class CommanderStormEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        stormCount = player.getCommandersIds().stream()
+        stormCount = game.getCommandersIds(player, CommanderCardType.COMMANDER_OR_OATHBREAKER).stream()
                 .map((commanderId) -> game.getState().getWatcher(CommanderPlaysCountWatcher.class).getPlaysCount(commanderId))
                 .reduce(stormCount, Integer::sum);
         if (stormCount == 0) {

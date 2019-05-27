@@ -696,9 +696,11 @@ public interface Player extends MageItem, Copyable<Player> {
 
     /**
      * Get the commanderIds of the player
+     * Deprecated, use game.getCommandersIds(xxx) instead
      *
      * @return
      */
+    @Deprecated
     Set<UUID> getCommandersIds();
 
     /**

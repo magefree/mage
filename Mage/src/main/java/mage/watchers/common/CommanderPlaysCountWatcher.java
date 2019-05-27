@@ -43,7 +43,7 @@ public class CommanderPlaysCountWatcher extends Watcher {
         UUID possibleCommanderId = event.getSourceId();
         boolean isCommanderObject = false;
         for (Player player : game.getPlayers().values()) {
-            if (player.getCommandersIds().contains(possibleCommanderId)) {
+            if (game.getCommandersIds(player).contains(possibleCommanderId)) {
                 isCommanderObject = true;
                 break;
             }

@@ -476,4 +476,9 @@ public interface Game extends MageItem, Serializable {
 
     Mulligan getMulligan();
 
+    Set<UUID> getCommandersIds(Player player, CommanderCardType commanderCardType);
+
+    default Set<UUID> getCommandersIds(Player player) {
+        return getCommandersIds(player, CommanderCardType.ANY);
+    }
 }

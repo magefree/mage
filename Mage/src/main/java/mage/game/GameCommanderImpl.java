@@ -59,7 +59,7 @@ public abstract class GameCommanderImpl extends GameImpl {
                 }
 
                 // init commanders
-                for (UUID commanderId : player.getCommandersIds()) {
+                for (UUID commanderId : this.getCommandersIds(player)) {
                     Card commander = this.getCard(commanderId);
                     if (commander != null) {
                         initCommander(commander, player);
@@ -183,7 +183,7 @@ public abstract class GameCommanderImpl extends GameImpl {
     @Override
     protected boolean checkStateBasedActions() {
         for (Player player : getPlayers().values()) {
-            for (UUID commanderId : player.getCommandersIds()) {
+            for (UUID commanderId : this.getCommandersIds(player)) {
                 CommanderInfoWatcher damageWatcher = getState().getWatcher(CommanderInfoWatcher.class, commanderId);
                 if (damageWatcher == null) {
                     continue;

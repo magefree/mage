@@ -1,7 +1,5 @@
 package mage.cards.p;
 
-import java.util.Iterator;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -22,8 +20,11 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 
+import java.util.Iterator;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class PathOfAncestry extends CardImpl {
@@ -88,9 +89,10 @@ class PathOfAncestryTriggeredAbility extends TriggeredAbilityImpl {
                     Spell spell = game.getStack().getSpell(event.getTargetId());
                     if (spell != null && spell.isCreature()) {
                         Player controller = game.getPlayer(getControllerId());
-                        if (controller != null && controller.getCommandersIds() != null && !controller.getCommandersIds().isEmpty()) {
+                        Set<UUID> commanders = game.getCommandersIds(controller);
+                        if (controller != null && commanders != null && !commanders.isEmpty()) {
                             if (spell.getAbilities().contains(ChangelingAbility.getInstance())) {
-                                for (UUID cmdr : controller.getCommandersIds()) {
+                                for (UUID cmdr : commanders) {
                                     MageObject commander = game.getObject(cmdr);
                                     if (commander != null) {
                                         if (commander.getAbilities().contains(ChangelingAbility.getInstance())) {
@@ -110,7 +112,7 @@ class PathOfAncestryTriggeredAbility extends TriggeredAbilityImpl {
                             while (spellSubs.hasNext()) {
                                 SubType sType = spellSubs.next();
                                 if (sType.getSubTypeSet() == SubTypeSet.CreatureType) {
-                                    for (UUID cmdr : controller.getCommandersIds()) {
+                                    for (UUID cmdr : commanders) {
                                         MageObject commander = game.getObject(cmdr);
                                         if (commander != null && (commander.hasSubtype(sType, game) || commander.getAbilities().contains(ChangelingAbility.getInstance()))) {
                                             return true;

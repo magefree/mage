@@ -302,7 +302,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.sideboard = player.getSideboard().copy();
         this.hand = player.getHand().copy();
         this.graveyard = player.getGraveyard().copy();
-        this.commandersIds = player.getCommandersIds();
+        this.commandersIds = new HashSet<>(player.getCommandersIds());
         this.abilities = player.getAbilities().copy();
         this.counters = player.getCounters().copy();
 
