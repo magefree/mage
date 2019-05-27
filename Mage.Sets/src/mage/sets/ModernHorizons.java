@@ -132,6 +132,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Sunbaked Canyon", 247, Rarity.RARE, mage.cards.s.SunbakedCanyon.class));
         cards.add(new SetCardInfo("Sword of Sinew and Steel", 228, Rarity.MYTHIC, mage.cards.s.SwordOfSinewAndSteel.class));
         cards.add(new SetCardInfo("Sword of Truth and Justice", 229, Rarity.MYTHIC, mage.cards.s.SwordOfTruthAndJustice.class));
+        cards.add(new SetCardInfo("Talisman of Curiosity", 232, Rarity.COMMON, mage.cards.t.TalismanOfCuriosity.class));
         cards.add(new SetCardInfo("Tempered Sliver", 183, Rarity.UNCOMMON, mage.cards.t.TemperedSliver.class));
         cards.add(new SetCardInfo("The First Sliver", 200, Rarity.MYTHIC, mage.cards.t.TheFirstSliver.class));
         cards.add(new SetCardInfo("Thundering Djinn", 215, Rarity.UNCOMMON, mage.cards.t.ThunderingDjinn.class));
