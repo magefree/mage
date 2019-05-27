@@ -2,6 +2,7 @@ package org.mage.plugins.card.dl.sources;
 
 import mage.constants.SubType;
 import org.apache.log4j.Logger;
+import org.mage.plugins.card.dl.DownloadServiceInfo;
 import org.mage.plugins.card.images.CardDownloadData;
 import org.mage.plugins.card.images.DownloadPicturesService;
 import org.mage.plugins.card.utils.CardImageUtils;
@@ -48,6 +49,11 @@ public enum TokensMtgImageSource implements CardImageSource {
     @Override
     public String getFileForHttpImage(String httpImageUrl) {
         return null;
+    }
+
+    @Override
+    public boolean prepareDownloadList(DownloadServiceInfo downloadServiceInfo, List<CardDownloadData> downloadList) {
+        return true;
     }
 
     @Override
@@ -180,7 +186,7 @@ public enum TokensMtgImageSource implements CardImageSource {
     private HashMap<String, List<TokenData>> getTokensData() throws IOException {
         synchronized (tokensDataSync) {
             if (tokensData == null) {
-                DownloadPicturesService.getInstance().updateAndViewMessage("Find tokens data...");
+                DownloadPicturesService.getInstance().updateMessage("Find tokens data...");
                 tokensData = new HashMap<>();
 
                 // get tokens data from resource file
@@ -231,10 +237,11 @@ public enum TokensMtgImageSource implements CardImageSource {
                             }
                         }
                     }
-                    DownloadPicturesService.getInstance().updateAndViewMessage("");
+                    DownloadPicturesService.getInstance().updateMessage("");
+                    DownloadPicturesService.getInstance().showDownloadControls(true);
                 } catch (Exception ex) {
                     logger.warn("Failed to get tokens description from tokens.mtg.onl", ex);
-                    DownloadPicturesService.getInstance().updateAndViewMessage(ex.getMessage());
+                    DownloadPicturesService.getInstance().updateMessage(ex.getMessage());
                 }
             }
         }

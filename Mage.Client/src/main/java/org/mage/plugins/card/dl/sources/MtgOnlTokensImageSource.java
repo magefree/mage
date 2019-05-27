@@ -1,10 +1,12 @@
 package org.mage.plugins.card.dl.sources;
 
 import org.apache.log4j.Logger;
+import org.mage.plugins.card.dl.DownloadServiceInfo;
 import org.mage.plugins.card.images.CardDownloadData;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author spjspj
@@ -55,6 +57,11 @@ public enum MtgOnlTokensImageSource implements CardImageSource {
             return copyUrlToImage.get(httpImageUrl);
         }
         return null;
+    }
+
+    @Override
+    public boolean prepareDownloadList(DownloadServiceInfo downloadServiceInfo, List<CardDownloadData> downloadList) {
+        return true;
     }
 
     @Override

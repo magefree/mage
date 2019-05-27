@@ -1,9 +1,11 @@
 package org.mage.plugins.card.dl.sources;
 
 import mage.client.util.CardLanguage;
+import org.mage.plugins.card.dl.DownloadServiceInfo;
 import org.mage.plugins.card.images.CardDownloadData;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author North, JayDi85
@@ -13,6 +15,8 @@ public interface CardImageSource {
     CardImageUrls generateCardUrl(CardDownloadData card) throws Exception;
 
     CardImageUrls generateTokenUrl(CardDownloadData card) throws Exception;
+
+    boolean prepareDownloadList(DownloadServiceInfo downloadServiceInfo, List<CardDownloadData> downloadList);
 
     String getNextHttpImageUrl();
 
