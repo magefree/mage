@@ -41,6 +41,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Choking Tethers", 44, Rarity.COMMON, mage.cards.c.ChokingTethers.class));
         cards.add(new SetCardInfo("Cloudshredder Sliver", 195, Rarity.RARE, mage.cards.c.CloudshredderSliver.class));
         cards.add(new SetCardInfo("Collected Conjuring", 196, Rarity.RARE, mage.cards.c.CollectedConjuring.class));
+        cards.add(new SetCardInfo("Collector Ouphe", 158, Rarity.RARE, mage.cards.c.CollectorOuphe.class));
         cards.add(new SetCardInfo("Crypt Rats", 84, Rarity.UNCOMMON, mage.cards.c.CryptRats.class));
         cards.add(new SetCardInfo("Deep Forest Hermit", 161, Rarity.RARE, mage.cards.d.DeepForestHermit.class));
         cards.add(new SetCardInfo("Diabolic Edict", 87, Rarity.COMMON, mage.cards.d.DiabolicEdict.class));
@@ -68,6 +69,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Giver of Runes", 13, Rarity.RARE, mage.cards.g.GiverOfRunes.class));
         cards.add(new SetCardInfo("Glacial Revelation", 167, Rarity.UNCOMMON, mage.cards.g.GlacialRevelation.class));
         cards.add(new SetCardInfo("Goatnap", 126, Rarity.COMMON, mage.cards.g.Goatnap.class));
+        cards.add(new SetCardInfo("Goblin Champion", 127, Rarity.COMMON, mage.cards.g.GoblinChampion.class));
         cards.add(new SetCardInfo("Goblin Engineer", 128, Rarity.RARE, mage.cards.g.GoblinEngineer.class));
         cards.add(new SetCardInfo("Goblin Matron", 129, Rarity.UNCOMMON, mage.cards.g.GoblinMatron.class));
         cards.add(new SetCardInfo("Goblin War Party", 131, Rarity.COMMON, mage.cards.g.GoblinWarParty.class));
@@ -137,6 +139,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Winds of Abandon", 37, Rarity.RARE, mage.cards.w.WindsOfAbandon.class));
         cards.add(new SetCardInfo("Wing Shards", 38, Rarity.UNCOMMON, mage.cards.w.WingShards.class));
         cards.add(new SetCardInfo("Wrenn and Six", 217, Rarity.MYTHIC, mage.cards.w.WrennAndSix.class));
+        cards.add(new SetCardInfo("Yawgmoth, Thran Physician", 116, Rarity.MYTHIC, mage.cards.y.YawgmothThranPhysician.class));
         cards.add(new SetCardInfo("Zhalfirin Decoy", 39, Rarity.UNCOMMON, mage.cards.z.ZhalfirinDecoy.class));
     }
 }
