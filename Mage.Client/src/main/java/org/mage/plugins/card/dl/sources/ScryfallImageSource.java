@@ -12,13 +12,9 @@ import org.mage.plugins.card.images.CardDownloadData;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.net.Proxy;
 import java.util.*;
 
 /**
@@ -83,16 +79,14 @@ public enum ScryfallImageSource implements CardImageSource {
             alternativeUrl = null;
         }
 
-        // double faced cards
-        // Scryfall doesn't support string collector ID's anymore (like "U123" or "176a")
-        // as such, we need to get the image URL's manually from their API
-        if (baseUrl == null && card.isTwoFacedCard()) {
-            try {
-                baseUrl = getFaceImageUrl(card, isToken, localizedCode);
-                alternativeUrl = getFaceImageUrl(card, isToken, defaultCode);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        // double faced card
+        // the front face can be downloaded normally
+        // the back face is prepared beforehand
+        if(baseUrl == null && card.isTwoFacedCard() && !card.isSecondSide()) {
+            baseUrl = "https://api.scryfall.com/cards/" + formatSetName(card.getSet(), isToken) + "/"
+                    + card.getCollectorIdAsInt() + "/" + localizedCode + "?format=image";
+            alternativeUrl = "https://api.scryfall.com/cards/" + formatSetName(card.getSet(), isToken) + "/"
+                    + card.getCollectorIdAsInt() + "/" + defaultCode + "?format=image";
         }
 
         // basic cards by api call (redirect to img link)
@@ -122,7 +116,7 @@ public enum ScryfallImageSource implements CardImageSource {
         JsonObject jsonCardFace = jsonCardFaces.get(card.isSecondSide() ? 1 : 0).getAsJsonObject();
         JsonObject jsonImageUris = jsonCardFace.getAsJsonObject("image_uris");
 
-        return jsonImageUris.get("png").getAsString();
+        return jsonImageUris.get("large").getAsString();
     }
 
     @Override
@@ -137,9 +131,21 @@ public enum ScryfallImageSource implements CardImageSource {
                 return false;
             }
 
-            // TODO: download faces info here
-            if (card.isTwoFacedCard()) {
+            // prepare the back face URL
+            if (card.isTwoFacedCard() && card.isSecondSide()) {
+                String defaultCode = CardLanguage.ENGLISH.getCode();
+                final String localizedCode = languageAliases.getOrDefault(this.getCurrentLanguage(), defaultCode);
+
                 String url = null;
+
+                try {
+                    url = getFaceImageUrl(card, card.isToken(), localizedCode);
+                } catch (IOException e) {
+                    logger.warn("Failed to prepare image URL for " + card.getName() + " (" + card.getSet() + ") #" + card.getCollectorId());
+                    downloadServiceInfo.incErrorCount();
+                    continue;
+                }
+
                 preparedUrls.put(card, url);
             }
 
