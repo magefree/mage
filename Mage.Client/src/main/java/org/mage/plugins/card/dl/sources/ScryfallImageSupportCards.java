@@ -267,104 +267,109 @@ public class ScryfallImageSupportCards {
 
             // Duels of the Planeswalkers Promos -- xmage uses one set (DPAP), but scryfall store it by years
             // 2009 - https://scryfall.com/sets/pdtp
-            put("DPAP/Garruk Wildspeaker", "https://img.scryfall.com/cards/large/en/pdtp/1.jpg");
+            put("DPAP/Garruk Wildspeaker", "https://api.scryfall.com/cards/pdtp/1/en?format=image");
             // 2010 - https://scryfall.com/sets/pdp10
-            put("DPAP/Liliana Vess", "https://img.scryfall.com/cards/large/en/pdp10/1.jpg");
-            put("DPAP/Nissa Revane", "https://img.scryfall.com/cards/large/en/pdp10/2.jpg");
+            put("DPAP/Liliana Vess", "https://api.scryfall.com/cards/pdp10/1/en?format=image");
+            put("DPAP/Nissa Revane", "https://api.scryfall.com/cards/pdp10/2/en?format=image");
             // 2011 - https://scryfall.com/sets/pdp11
-            put("DPAP/Frost Titan", "https://img.scryfall.com/cards/large/en/pdp11/1.jpg");
-            put("DPAP/Grave Titan", "https://img.scryfall.com/cards/large/en/pdp11/2.jpg");
-            put("DPAP/Inferno Titan", "https://img.scryfall.com/cards/large/en/pdp11/3.jpg");
+            put("DPAP/Frost Titan", "https://api.scryfall.com/cards/pdp11/1/en?format=image");
+            put("DPAP/Grave Titan", "https://api.scryfall.com/cards/pdp11/2/en?format=image");
+            put("DPAP/Inferno Titan", "https://api.scryfall.com/cards/pdp11/3/en?format=image");
             // 2012 - https://scryfall.com/sets/pdp12
-            put("DPAP/Primordial Hydra", "https://img.scryfall.com/cards/large/en/pdp12/1.jpg");
-            put("DPAP/Serra Avatar", "https://img.scryfall.com/cards/large/en/pdp12/2.jpg");
-            put("DPAP/Vampire Nocturnus", "https://img.scryfall.com/cards/large/en/pdp12/3.jpg");
+            put("DPAP/Primordial Hydra", "https://api.scryfall.com/cards/pdp12/1/en?format=image");
+            put("DPAP/Serra Avatar", "https://api.scryfall.com/cards/pdp12/2/en?format=image");
+            put("DPAP/Vampire Nocturnus", "https://api.scryfall.com/cards/pdp12/3/en?format=image");
             // 2013 - https://scryfall.com/sets/pdp13
-            put("DPAP/Bonescythe Sliver", "https://img.scryfall.com/cards/large/en/pdp13/1.jpg");
-            put("DPAP/Ogre Battledriver", "https://img.scryfall.com/cards/large/en/pdp13/2.jpg");
-            put("DPAP/Scavenging Ooze", "https://img.scryfall.com/cards/large/en/pdp13/3.jpg");
+            put("DPAP/Bonescythe Sliver", "https://api.scryfall.com/cards/pdp13/1/en?format=image");
+            put("DPAP/Ogre Battledriver", "https://api.scryfall.com/cards/pdp13/2/en?format=image");
+            put("DPAP/Scavenging Ooze", "https://api.scryfall.com/cards/pdp13/3/en?format=image");
             // 2014 - https://scryfall.com/sets/pdp14
-            put("DPAP/Soul of Ravnica", "https://img.scryfall.com/cards/large/en/pdp14/1.jpg");
-            put("DPAP/Soul of Zendikar", "https://img.scryfall.com/cards/large/en/pdp14/2.jpg");
+            put("DPAP/Soul of Ravnica", "https://api.scryfall.com/cards/pdp14/1/en?format=image");
+            put("DPAP/Soul of Zendikar", "https://api.scryfall.com/cards/pdp14/2/en?format=image");
 
             // Gateway Promos -- xmage uses one set (GRC), but scryfall store it by years
             // 2006 - https://scryfall.com/sets/pgtw
-            put("GRC/Fiery Temper", "https://img.scryfall.com/cards/large/en/pgtw/3.jpg");
-            put("GRC/Icatian Javelineers", "https://img.scryfall.com/cards/large/en/pgtw/2.jpg");
-            put("GRC/Wood Elves", "https://img.scryfall.com/cards/large/en/pgtw/1.jpg");
+            put("GRC/Fiery Temper", "https://api.scryfall.com/cards/pgtw/3/en?format=image");
+            put("GRC/Icatian Javelineers", "https://api.scryfall.com/cards/pgtw/2/en?format=image");
+            put("GRC/Wood Elves", "https://api.scryfall.com/cards/pgtw/1/en?format=image");
             // 2007 - https://scryfall.com/sets/pg07
-            put("GRC/Boomerang", "https://img.scryfall.com/cards/large/en/pg07/4.jpg");
-            put("GRC/Calciderm", "https://img.scryfall.com/cards/large/en/pg07/5.jpg");
-            put("GRC/Dauntless Dourbark", "https://img.scryfall.com/cards/large/en/pg07/12.jpg");
-            put("GRC/Llanowar Elves", "https://img.scryfall.com/cards/large/en/pg07/9.jpg");
-            put("GRC/Mind Stone", "https://img.scryfall.com/cards/large/en/pg07/11.jpg");
-            put("GRC/Mogg Fanatic", "https://img.scryfall.com/cards/large/en/pg07/10.jpg");
-            put("GRC/Reckless Wurm", "https://img.scryfall.com/cards/large/en/pg07/6.jpg");
-            put("GRC/Yixlid Jailer", "https://img.scryfall.com/cards/large/en/pg07/7.jpg");
-            put("GRC/Zoetic Cavern", "https://img.scryfall.com/cards/large/en/pg07/8.jpg");
+            put("GRC/Boomerang", "https://api.scryfall.com/cards/pg07/4/en?format=image");
+            put("GRC/Calciderm", "https://api.scryfall.com/cards/pg07/5/en?format=image");
+            put("GRC/Dauntless Dourbark", "https://api.scryfall.com/cards/pg07/12/en?format=image");
+            put("GRC/Llanowar Elves", "https://api.scryfall.com/cards/pg07/9/en?format=image");
+            put("GRC/Mind Stone", "https://api.scryfall.com/cards/pg07/11/en?format=image");
+            put("GRC/Mogg Fanatic", "https://api.scryfall.com/cards/pg07/10/en?format=image");
+            put("GRC/Reckless Wurm", "https://api.scryfall.com/cards/pg07/6/en?format=image");
+            put("GRC/Yixlid Jailer", "https://api.scryfall.com/cards/pg07/7/en?format=image");
+            put("GRC/Zoetic Cavern", "https://api.scryfall.com/cards/pg07/8/en?format=image");
             // 2008a - https://scryfall.com/sets/pg08
-            put("GRC/Boggart Ram-Gang", "https://img.scryfall.com/cards/large/en/pg08/17.jpg");
-            put("GRC/Cenn's Tactician", "https://img.scryfall.com/cards/large/en/pg08/14.jpg");
-            put("GRC/Duergar Hedge-Mage", "https://img.scryfall.com/cards/large/en/pg08/19.jpg");
-            put("GRC/Gravedigger", "https://img.scryfall.com/cards/large/en/pg08/16.jpg");
-            put("GRC/Lava Axe", "https://img.scryfall.com/cards/large/en/pg08/13.jpg");
-            put("GRC/Oona's Blackguard", "https://img.scryfall.com/cards/large/en/pg08/15.jpg");
-            put("GRC/Selkie Hedge-Mage", "https://img.scryfall.com/cards/large/en/pg08/20.jpg");
-            put("GRC/Wilt-Leaf Cavaliers", "https://img.scryfall.com/cards/large/en/pg08/18.jpg");
+            put("GRC/Boggart Ram-Gang", "https://api.scryfall.com/cards/pg08/17/en?format=image");
+            put("GRC/Cenn's Tactician", "https://api.scryfall.com/cards/pg08/14/en?format=image");
+            put("GRC/Duergar Hedge-Mage", "https://api.scryfall.com/cards/pg08/19/en?format=image");
+            put("GRC/Gravedigger", "https://api.scryfall.com/cards/pg08/16/en?format=image");
+            put("GRC/Lava Axe", "https://api.scryfall.com/cards/pg08/13/en?format=image");
+            put("GRC/Oona's Blackguard", "https://api.scryfall.com/cards/pg08/15/en?format=image");
+            put("GRC/Selkie Hedge-Mage", "https://api.scryfall.com/cards/pg08/20/en?format=image");
+            put("GRC/Wilt-Leaf Cavaliers", "https://api.scryfall.com/cards/pg08/18/en?format=image");
 
             // Wizards Play Network Promos -- xmage uses one set (GRC), but scryfall store it by years
             // 2008b - https://scryfall.com/sets/pwpn
-            put("GRC/Sprouting Thrinax", "https://img.scryfall.com/cards/large/en/pwpn/21.jpg");
-            put("GRC/Woolly Thoctar", "https://img.scryfall.com/cards/large/en/pwpn/22.jpg");
+            put("GRC/Sprouting Thrinax", "https://api.scryfall.com/cards/pwpn/21/en?format=image");
+            put("GRC/Woolly Thoctar", "https://api.scryfall.com/cards/pwpn/22/en?format=image");
             // 2009 - https://scryfall.com/sets/pwp09
-            put("GRC/Hellspark Elemental", "https://img.scryfall.com/cards/large/en/pwp09/25.jpg");
-            put("GRC/Kor Duelist", "https://img.scryfall.com/cards/large/en/pwp09/32.jpg");
-            put("GRC/Marisi's Twinclaws", "https://img.scryfall.com/cards/large/en/pwp09/26.jpg");
-            put("GRC/Mind Control", "https://img.scryfall.com/cards/large/en/pwp09/30.jpg");
-            put("GRC/Path to Exile", "https://img.scryfall.com/cards/large/en/pwp09/24.jpg");
-            put("GRC/Rise from the Grave", "https://img.scryfall.com/cards/large/en/pwp09/31.jpg");
-            put("GRC/Slave of Bolas", "https://img.scryfall.com/cards/large/en/pwp09/27.jpg");
-            put("GRC/Vampire Nighthawk", "https://img.scryfall.com/cards/large/en/pwp09/33.jpg");
+            put("GRC/Hellspark Elemental", "https://api.scryfall.com/cards/pwp09/25/en?format=image");
+            put("GRC/Kor Duelist", "https://api.scryfall.com/cards/pwp09/32/en?format=image");
+            put("GRC/Marisi's Twinclaws", "https://api.scryfall.com/cards/pwp09/26/en?format=image");
+            put("GRC/Mind Control", "https://api.scryfall.com/cards/pwp09/30/en?format=image");
+            put("GRC/Path to Exile", "https://api.scryfall.com/cards/pwp09/24/en?format=image");
+            put("GRC/Rise from the Grave", "https://api.scryfall.com/cards/pwp09/31/en?format=image");
+            put("GRC/Slave of Bolas", "https://api.scryfall.com/cards/pwp09/27/en?format=image");
+            put("GRC/Vampire Nighthawk", "https://api.scryfall.com/cards/pwp09/33/en?format=image");
             // 2010 - https://scryfall.com/sets/pwp10
-            put("GRC/Kor Firewalker", "https://img.scryfall.com/cards/large/en/pwp10/36.jpg");
-            put("GRC/Leatherback Baloth", "https://img.scryfall.com/cards/large/en/pwp10/37.jpg");
-            put("GRC/Syphon Mind", "https://img.scryfall.com/cards/large/en/pwp10/40.jpg");
-            put("GRC/Pathrazer of Ulamog", "https://img.scryfall.com/cards/large/en/pwp10/46.jpg");
-            put("GRC/Curse of Wizardry", "https://img.scryfall.com/cards/large/en/pwp10/47.jpg");
-            put("GRC/Fling/50", "https://img.scryfall.com/cards/large/en/pwp10/50.jpg"); // same card but different year
-            put("GRC/Sylvan Ranger/51", "https://img.scryfall.com/cards/large/en/pwp10/51.jpg"); // same card but different year
-            put("GRC/Plague Stinger", "https://img.scryfall.com/cards/large/en/pwp10/59.jpg");
-            put("GRC/Golem's Heart", "https://img.scryfall.com/cards/large/en/pwp10/60.jpg");
-            put("GRC/Skinrender", "https://img.scryfall.com/cards/large/en/pwp10/63.jpg");
+            put("GRC/Kor Firewalker", "https://api.scryfall.com/cards/pwp10/36/en?format=image");
+            put("GRC/Leatherback Baloth", "https://api.scryfall.com/cards/pwp10/37/en?format=image");
+            put("GRC/Syphon Mind", "https://api.scryfall.com/cards/pwp10/40/en?format=image");
+            put("GRC/Pathrazer of Ulamog", "https://api.scryfall.com/cards/pwp10/46/en?format=image");
+            put("GRC/Curse of Wizardry", "https://api.scryfall.com/cards/pwp10/47/en?format=image");
+            put("GRC/Fling/50", "https://api.scryfall.com/cards/pwp10/50/en?format=image"); // same card but different year
+            put("GRC/Sylvan Ranger/51", "https://api.scryfall.com/cards/pwp10/51/en?format=image"); // same card but different year
+            put("GRC/Plague Stinger", "https://api.scryfall.com/cards/pwp10/59/en?format=image");
+            put("GRC/Golem's Heart", "https://api.scryfall.com/cards/pwp10/60/en?format=image");
+            put("GRC/Skinrender", "https://api.scryfall.com/cards/pwp10/63/en?format=image");
             // 2011 - https://scryfall.com/sets/pwp11
-            put("GRC/Auramancer", "https://img.scryfall.com/cards/large/en/pwp11/77.jpg");
-            put("GRC/Bloodcrazed Neonate", "https://img.scryfall.com/cards/large/en/pwp11/83.jpg");
-            put("GRC/Boneyard Wurm", "https://img.scryfall.com/cards/large/en/pwp11/84.jpg");
-            put("GRC/Circle of Flame", "https://img.scryfall.com/cards/large/en/pwp11/78.jpg");
-            put("GRC/Curse of the Bloody Tome", "https://img.scryfall.com/cards/large/en/pwp11/80.jpg");
-            put("GRC/Fling/69", "https://img.scryfall.com/cards/large/en/pwp11/69.jpg"); // same card but different year
-            put("GRC/Master's Call", "https://img.scryfall.com/cards/large/en/pwp11/64.jpg");
-            put("GRC/Maul Splicer", "https://img.scryfall.com/cards/large/en/pwp11/72.jpg");
-            put("GRC/Plague Myr", "https://img.scryfall.com/cards/large/en/pwp11/65.jpg");
-            put("GRC/Shrine of Burning Rage", "https://img.scryfall.com/cards/large/en/pwp11/73.jpg");
-            put("GRC/Signal Pest", "https://img.scryfall.com/cards/large/en/pwp11/66.jpg");
-            put("GRC/Sylvan Ranger/70", "https://img.scryfall.com/cards/large/en/pwp11/70.jpg"); // same card but different year
-            put("GRC/Tormented Soul", "https://img.scryfall.com/cards/large/en/pwp11/76.jpg");
-            put("GRC/Vault Skirge", "https://img.scryfall.com/cards/large/en/pwp11/71.jpg");
+            put("GRC/Auramancer", "https://api.scryfall.com/cards/pwp11/77/en?format=image");
+            put("GRC/Bloodcrazed Neonate", "https://api.scryfall.com/cards/pwp11/83/en?format=image");
+            put("GRC/Boneyard Wurm", "https://api.scryfall.com/cards/pwp11/84/en?format=image");
+            put("GRC/Circle of Flame", "https://api.scryfall.com/cards/pwp11/78/en?format=image");
+            put("GRC/Curse of the Bloody Tome", "https://api.scryfall.com/cards/pwp11/80/en?format=image");
+            put("GRC/Fling/69", "https://api.scryfall.com/cards/pwp11/69/en?format=image"); // same card but different year
+            put("GRC/Master's Call", "https://api.scryfall.com/cards/pwp11/64/en?format=image");
+            put("GRC/Maul Splicer", "https://api.scryfall.com/cards/pwp11/72/en?format=image");
+            put("GRC/Plague Myr", "https://api.scryfall.com/cards/pwp11/65/en?format=image");
+            put("GRC/Shrine of Burning Rage", "https://api.scryfall.com/cards/pwp11/73/en?format=image");
+            put("GRC/Signal Pest", "https://api.scryfall.com/cards/pwp11/66/en?format=image");
+            put("GRC/Sylvan Ranger/70", "https://api.scryfall.com/cards/pwp11/70/en?format=image"); // same card but different year
+            put("GRC/Tormented Soul", "https://api.scryfall.com/cards/pwp11/76/en?format=image");
+            put("GRC/Vault Skirge", "https://api.scryfall.com/cards/pwp11/71/en?format=image");
             // 2012 - https://scryfall.com/sets/pwp12
-            put("GRC/Curse of Thirst", "https://img.scryfall.com/cards/large/en/pwp12/81.jpg");
-            put("GRC/Gather the Townsfolk", "https://img.scryfall.com/cards/large/en/pwp12/79.jpg");
-            put("GRC/Nearheath Stalker", "https://img.scryfall.com/cards/large/en/pwp12/82.jpg");
+            put("GRC/Curse of Thirst", "https://api.scryfall.com/cards/pwp12/81/en?format=image");
+            put("GRC/Gather the Townsfolk", "https://api.scryfall.com/cards/pwp12/79/en?format=image");
+            put("GRC/Nearheath Stalker", "https://api.scryfall.com/cards/pwp12/82/en?format=image");
 
-            // TODO: remove Grand Prix fix after scryfall fix image's link (that's link must be work: https://img.scryfall.com/cards/large/en/pgpx/2016b.jpg )
-            put("GPX/Sword of Feast and Famine", "https://img.scryfall.com/cards/large/en/pgpx/1%E2%98%85.jpg");
-
-            // TODO: remove after scryfall add lands to RNA (that's link must works: https://api.scryfall.com/cards/rna/262/en?format=image)
-            put("RNA/Plains", "https://api.scryfall.com/cards/grn/260/en?format=image");
-            put("RNA/Island", "https://api.scryfall.com/cards/grn/261/en?format=image");
-            put("RNA/Swamp", "https://api.scryfall.com/cards/grn/262/en?format=image");
-            put("RNA/Mountain", "https://api.scryfall.com/cards/grn/263/en?format=image");
-            put("RNA/Forest", "https://api.scryfall.com/cards/grn/264/en?format=image");
+            // Spined Wurm print in Starter 2000 is actually from Magazine Inserts
+            put("S00/Spined Wurm", "https://api.scryfall.com/cards/pmei/11/en?format=image");
+            // Most of the other S00 cards are from 6ED
+            // We'll download lands manually because we have multiple arts and XMage has totally different ID's
+            put("S00/Forest/49", "https://api.scryfall.com/cards/6ed/347/en?format=image");
+            put("S00/Forest/50", "https://api.scryfall.com/cards/6ed/348/en?format=image");
+            put("S00/Island/51", "https://api.scryfall.com/cards/6ed/335/en?format=image");
+            put("S00/Island/52", "https://api.scryfall.com/cards/6ed/336/en?format=image");
+            put("S00/Mountain/53", "https://api.scryfall.com/cards/6ed/343/en?format=image");
+            put("S00/Mountain/54", "https://api.scryfall.com/cards/6ed/344/en?format=image");
+            put("S00/Plains/55", "https://api.scryfall.com/cards/6ed/331/en?format=image");
+            put("S00/Plains/56", "https://api.scryfall.com/cards/6ed/332/en?format=image");
+            put("S00/Swamp/57", "https://api.scryfall.com/cards/6ed/339/en?format=image");
+            put("S00/Swamp/58", "https://api.scryfall.com/cards/6ed/340/en?format=image");
         }
     };
 
