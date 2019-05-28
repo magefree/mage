@@ -52,6 +52,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Dregscape Sliver", 88, Rarity.UNCOMMON, mage.cards.d.DregscapeSliver.class));
         cards.add(new SetCardInfo("Eladamri's Call", 197, Rarity.RARE, mage.cards.e.EladamrisCall.class));
         cards.add(new SetCardInfo("Elvish Fury", 162, Rarity.COMMON, mage.cards.e.ElvishFury.class));
+        cards.add(new SetCardInfo("Endling", 89, Rarity.RARE, mage.cards.e.Endling.class));
         cards.add(new SetCardInfo("Enduring Sliver", 8, Rarity.COMMON, mage.cards.e.EnduringSliver.class));
         cards.add(new SetCardInfo("Etchings of the Chosen", 198, Rarity.UNCOMMON, mage.cards.e.EtchingsOfTheChosen.class));
         cards.add(new SetCardInfo("Exclude", 48, Rarity.UNCOMMON, mage.cards.e.Exclude.class));
