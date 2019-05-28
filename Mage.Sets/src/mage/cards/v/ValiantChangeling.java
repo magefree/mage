@@ -82,7 +82,7 @@ class ValiantChangelingCostReductionEffect extends CostModificationEffectImpl {
                 break;
             }
         }
-        CardUtil.reduceCost(abilityToModify, Math.max(reductionAmount, 5));
+        CardUtil.reduceCost(abilityToModify, Math.min(reductionAmount, 5));
         return true;
     }
 
