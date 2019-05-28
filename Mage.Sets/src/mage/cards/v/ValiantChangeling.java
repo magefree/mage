@@ -76,6 +76,7 @@ class ValiantChangelingCostReductionEffect extends CostModificationEffectImpl {
                 break;
             }
             subTypes.addAll(permanent.getSubtype(game));
+            subTypes.removeIf(subType -> (subType.getSubTypeSet() != SubTypeSet.CreatureType));
             reductionAmount = subTypes.size();
             if (reductionAmount > 4) {
                 break;
