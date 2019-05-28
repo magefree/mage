@@ -355,16 +355,6 @@ public class ScryfallImageSupportCards {
             put("GRC/Curse of Thirst", "https://img.scryfall.com/cards/large/en/pwp12/81.jpg");
             put("GRC/Gather the Townsfolk", "https://img.scryfall.com/cards/large/en/pwp12/79.jpg");
             put("GRC/Nearheath Stalker", "https://img.scryfall.com/cards/large/en/pwp12/82.jpg");
-
-            // TODO: remove Grand Prix fix after scryfall fix image's link (that's link must be work: https://img.scryfall.com/cards/large/en/pgpx/2016b.jpg )
-            put("GPX/Sword of Feast and Famine", "https://img.scryfall.com/cards/large/en/pgpx/1%E2%98%85.jpg");
-
-            // TODO: remove after scryfall add lands to RNA (that's link must works: https://api.scryfall.com/cards/rna/262/en?format=image)
-            put("RNA/Plains", "https://api.scryfall.com/cards/grn/260/en?format=image");
-            put("RNA/Island", "https://api.scryfall.com/cards/grn/261/en?format=image");
-            put("RNA/Swamp", "https://api.scryfall.com/cards/grn/262/en?format=image");
-            put("RNA/Mountain", "https://api.scryfall.com/cards/grn/263/en?format=image");
-            put("RNA/Forest", "https://api.scryfall.com/cards/grn/264/en?format=image");
         }
     };
 
