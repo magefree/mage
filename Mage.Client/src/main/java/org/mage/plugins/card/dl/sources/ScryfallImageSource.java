@@ -188,7 +188,6 @@ public enum ScryfallImageSource implements CardImageSource {
 
                 try {
                     url = searchCard(proxy, "6ED", card.getName());
-
                 } catch (Exception e) {
                     logger.warn("Failed to prepare image URL for " + card.getName() + " (" + card.getSet() + ") #" + card.getCollectorId());
                     downloadServiceInfo.incErrorCount();
@@ -204,7 +203,6 @@ public enum ScryfallImageSource implements CardImageSource {
 
                 try {
                     url = searchCard(proxy, "AKH", card.getName());
-
                 } catch (Exception e) {
                     logger.warn("Failed to prepare image URL for " + card.getName() + " (" + card.getSet() + ") #" + card.getCollectorId());
                     downloadServiceInfo.incErrorCount();
