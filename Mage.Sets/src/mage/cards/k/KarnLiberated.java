@@ -109,8 +109,9 @@ class KarnLiberatedEffect extends OneShotEffect {
                     if (card.isOwnedBy(player.getId()) && !card.isCopy() // no copies
                             && !player.getSideboard().contains(card.getId())
                             && !cards.contains(card)) { // not the exiled cards
-                        if (player.getCommandersIds().contains(card.getId())) {
-                            game.addCommander(new Commander(card));
+                        if (game.getCommandersIds(player).contains(card.getId())) {
+                            game.addCommander(new Commander(card)); // TODO: check restart and init
+                            // no needs in initCommander call -- it's uses on game startup (init)
                             game.setZone(card.getId(), Zone.COMMAND);
                         } else {
                             player.getLibrary().putOnTop(card, game);

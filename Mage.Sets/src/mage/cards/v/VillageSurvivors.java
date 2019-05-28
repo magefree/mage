@@ -1,7 +1,5 @@
-
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.FatefulHourCondition;
@@ -11,13 +9,14 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public final class VillageSurvivors extends CardImpl {
@@ -34,7 +33,7 @@ public final class VillageSurvivors extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, true),
                 FatefulHourCondition.instance,
-                "Fateful hour - As long as you have 5 or less life, other creatures you control have vigilance")));
+                "<br><i>Fateful hour</i> &mdash; As long as you have 5 or less life, other creatures you control have vigilance")));
     }
 
     public VillageSurvivors(final VillageSurvivors card) {

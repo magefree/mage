@@ -124,6 +124,12 @@ public class PennyDreadfulCommander extends Constructed {
                 }
             }
         }
+
+        // no needs in cards check on wrong commanders
+        if (!valid) {
+            return false;
+        }
+
         for (Card card : deck.getCards()) {
             if (!cardHasValidColor(colorIdentity, card)) {
                 invalid.put(card.getName(), "Invalid color (" + colorIdentity.toString() + ')');

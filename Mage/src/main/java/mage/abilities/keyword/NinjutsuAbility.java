@@ -1,6 +1,5 @@
 package mage.abilities.keyword;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
@@ -21,23 +20,24 @@ import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
  * 702.47. Ninjutsu
- *
+ * <p>
  * 702.47a Ninjutsu is an activated ability that functions only while the card
  * with ninjutsu is in a player's hand. "Ninjutsu [cost]" means "[Cost], Reveal
  * this card from your hand, Return an unblocked attacking creature you control
  * to its owner's hand: Put this card onto the battlefield from your hand tapped
  * and attacking."
- *
+ * <p>
  * 702.47b The card with ninjutsu remains revealed from the time the ability is
  * announced until the ability leaves the stack.
- *
+ * <p>
  * 702.47c A ninjutsu ability may be activated only while a creature on the
  * battlefield is unblocked (see rule 509.1h). The creature with ninjutsu is put
  * onto the battlefield unblocked. It will be attacking the same player or
  * planeswalker as the creature that was returned to its owner's hand.
- *
  *
  * @author LevelX2
  */
@@ -51,7 +51,6 @@ public class NinjutsuAbility extends ActivatedAbilityImpl {
     }
 
     /**
-     *
      * @param manaCost ninjutsu mana cost
      */
     public NinjutsuAbility(ManaCost manaCost) {
@@ -195,7 +194,7 @@ class RevealNinjutsuCardCost extends CostImpl {
 
         Card card = player.getHand().get(ability.getSourceId(), game);
         if (card == null && commander
-                && player.getCommandersIds().contains(ability.getSourceId())) {
+                && game.getCommandersIds(player).contains(ability.getSourceId())) {
             for (CommandObject coj : game.getState().getCommand()) {
                 if (coj != null && coj.getId().equals(ability.getSourceId())) {
                     card = game.getCard(ability.getSourceId());

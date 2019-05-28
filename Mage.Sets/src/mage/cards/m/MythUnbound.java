@@ -95,7 +95,7 @@ class MythUnboundCostReductionEffect extends CostModificationEffectImpl {
 
         if (abilityToModify instanceof SpellAbility || abilityToModify instanceof PlayLandAbility) {
             if (abilityToModify.isControlledBy(source.getControllerId())) {
-                return player.getCommandersIds().contains(abilityToModify.getSourceId());
+                return game.getCommandersIds(player).contains(abilityToModify.getSourceId());
             }
         }
         return false;

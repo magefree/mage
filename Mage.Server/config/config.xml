@@ -81,6 +81,8 @@
         <gameType name="Penny Dreadful Commander Free For All" jar="mage-game-pennydreadfulcommanderfreeforall.jar" className="mage.game.PennyDreadfulCommanderFreeForAllMatch" typeName="mage.game.PennyDreadfulCommanderFreeForAllType"/>
         <gameType name="Freeform Commander Two Player Duel" jar="mage-game-freeformcommanderduel.jar" className="mage.game.FreeformCommanderDuelMatch" typeName="mage.game.FreeformCommanderDuelType"/>
         <gameType name="Freeform Commander Free For All" jar="mage-game-freeformcommanderfreeforall.jar" className="mage.game.FreeformCommanderFreeForAllMatch" typeName="mage.game.FreeformCommanderFreeForAllType"/>
+        <gameType name="Oathbreaker Two Player Duel" jar="mage-game-oathbreakerduel.jar" className="mage.game.OathbreakerDuelMatch" typeName="mage.game.OathbreakerDuelType"/>
+        <gameType name="Oathbreaker Free For All" jar="mage-game-oathbreakerfreeforall.jar" className="mage.game.OathbreakerFreeForAllMatch" typeName="mage.game.OathbreakerFreeForAllType"/>
         <gameType name="Brawl Two Player Duel" jar="mage-game-brawlduel.jar" className="mage.game.BrawlDuelMatch" typeName="mage.game.BrawlDuelType"/>
         <gameType name="Brawl Free For All" jar="mage-game-brawlfreeforall.jar" className="mage.game.BrawlFreeForAllMatch" typeName="mage.game.BrawlFreeForAllType"/>
         <gameType name="Momir Basic Two Player Duel" jar="mage-game-momirduel.jar" className="mage.game.MomirDuelMatch" typeName="mage.game.MomirDuelType"/>
@@ -160,7 +162,7 @@
         <deckType name="Constructed - Old School 93/94 - Channel Fireball Rules" jar="mage-deck-constructed.jar" className="mage.deck.OldSchool9394CFB"/>
         <deckType name="Constructed - Old School 93/94 - EudoGames Rules" jar="mage-deck-constructed.jar" className="mage.deck.OldSchool9394EG"/>
         <deckType name="Constructed - Old School 93/94 - EC Rules" jar="mage-deck-constructed.jar" className="mage.deck.OldSchool9394EC"/>
-        <deckType name="Constructed - Premodern" jar="mage-deck-constructed.jar" className="mage.deck.Premodern"/> 
+        <deckType name="Constructed - Premodern" jar="mage-deck-constructed.jar" className="mage.deck.Premodern"/>
         <deckType name="Constructed - Freeform" jar="mage-deck-constructed.jar" className="mage.deck.Freeform"/>
         <deckType name="Variant Magic - Commander" jar="mage-deck-constructed.jar" className="mage.deck.Commander"/>
         <deckType name="Variant Magic - Duel Commander" jar="mage-deck-constructed.jar" className="mage.deck.DuelCommander"/>
@@ -170,6 +172,7 @@
         <deckType name="Variant Magic - Penny Dreadful Commander" jar="mage-deck-constructed.jar" className="mage.deck.PennyDreadfulCommander"/>
         <deckType name="Variant Magic - Freeform Commander" jar="mage-deck-constructed.jar" className="mage.deck.FreeformCommander"/>
         <deckType name="Variant Magic - Brawl" jar="mage-deck-constructed.jar" className="mage.deck.Brawl"/>
+        <deckType name="Variant Magic - Oathbreaker" jar="mage-deck-constructed.jar" className="mage.deck.Oathbreaker"/>
         <deckType name="Block Constructed - Amonkhet" jar="mage-deck-constructed.jar" className="mage.deck.AmonkhetBlock"/>
         <deckType name="Block Constructed - Battle for Zendikar" jar="mage-deck-constructed.jar" className="mage.deck.BattleForZendikarBlock"/>
         <deckType name="Block Constructed - Innistrad" jar="mage-deck-constructed.jar" className="mage.deck.InnistradBlock"/>

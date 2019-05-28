@@ -1,8 +1,5 @@
 package mage.abilities.mana;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
@@ -17,8 +14,11 @@ import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class CommanderColorIdentityManaAbility extends ActivatedManaAbilityImpl {
@@ -46,7 +46,7 @@ public class CommanderColorIdentityManaAbility extends ActivatedManaAbilityImpl 
         if (netMana.isEmpty() && game != null) {
             Player controller = game.getPlayer(getControllerId());
             if (controller != null) {
-                for (UUID commanderId : controller.getCommandersIds()) {
+                for (UUID commanderId : game.getCommandersIds(controller)) {
                     Card commander = game.getCard(commanderId);
                     if (commander != null) {
                         FilterMana commanderMana = commander.getColorIdentity();
@@ -114,7 +114,7 @@ class CommanderIdentityManaEffect extends ManaEffect {
         if (controller != null) {
             Choice choice = new ChoiceImpl();
             choice.setMessage("Pick a mana color");
-            for (UUID commanderId : controller.getCommandersIds()) {
+            for (UUID commanderId : game.getCommandersIds(controller)) {
                 Card commander = game.getCard(commanderId);
                 if (commander != null) {
                     FilterMana commanderMana = commander.getColorIdentity();

@@ -302,7 +302,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.sideboard = player.getSideboard().copy();
         this.hand = player.getHand().copy();
         this.graveyard = player.getGraveyard().copy();
-        this.commandersIds = player.getCommandersIds();
+        this.commandersIds = new HashSet<>(player.getCommandersIds());
         this.abilities = player.getAbilities().copy();
         this.counters = player.getCounters().copy();
 
@@ -2284,6 +2284,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 break;
             case PERMISSION_REQUESTS_ALLOWED_ON:
                 userData.setAllowRequestShowHandCards(true);
+                userData.resetRequestedHandPlayersList(game.getId()); // users can send request again
                 break;
         }
         logger.trace("PASS Priority: " + playerAction.toString());
@@ -3969,8 +3970,13 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean isRequestToShowHandCardsAllowed() {
-        return userData.isAllowRequestShowHandCards();
+    public boolean isPlayerAllowedToRequestHand(UUID gameId, UUID requesterPlayerId) {
+        return userData.isAllowRequestHandToPlayer(gameId, requesterPlayerId);
+    }
+
+    @Override
+    public void addPlayerToRequestedHandList(UUID gameId, UUID requesterPlayerId) {
+        userData.addPlayerToRequestedHandList(gameId, requesterPlayerId);
     }
 
     @Override

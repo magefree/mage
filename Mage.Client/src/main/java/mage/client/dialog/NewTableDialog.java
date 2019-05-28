@@ -668,6 +668,12 @@ public class NewTableDialog extends MageDialog {
                     return false;
                 }
                 break;
+            case "Variant Magic - Oathbreaker":
+                if (!options.getGameType().startsWith("Oathbreaker")) {
+                    JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Deck type Oathbreaker needs also a Oathbreaker game type", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+                break;
         }
 
         // game => deck
@@ -701,6 +707,13 @@ public class NewTableDialog extends MageDialog {
             case "Tiny Leaders Two Player Duel":
                 if (!options.getDeckType().equals("Variant Magic - Tiny Leaders")) {
                     JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Deck type Tiny Leaders needs also a Tiny Leaders game type", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+                break;
+            case "Oathbreaker Two Player Duel":
+            case "Oathbreaker Free For All":
+                if (!options.getDeckType().equals("Variant Magic - Oathbreaker")) {
+                    JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Deck type Oathbreaker needs also a Oathbreaker game type", "Error", JOptionPane.ERROR_MESSAGE);
                     return false;
                 }
                 break;

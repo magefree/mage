@@ -750,7 +750,7 @@ public class TestPlayer implements Player {
                         // show command
                         if (params[0].equals(SHOW_COMMAND_COMMAND) && params.length == 1) {
                             printStart(action.getActionName());
-                            CardsImpl cards = new CardsImpl(computerPlayer.getCommandersIds());
+                            CardsImpl cards = new CardsImpl(game.getCommandersIds(computerPlayer));
                             printCards(cards.getCards(game));
                             printEnd();
                             actions.remove(action);
@@ -3077,8 +3077,13 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean isRequestToShowHandCardsAllowed() {
-        return computerPlayer.isRequestToShowHandCardsAllowed();
+    public boolean isPlayerAllowedToRequestHand(UUID gameId, UUID requesterPlayerId) {
+        return computerPlayer.isPlayerAllowedToRequestHand(gameId, requesterPlayerId);
+    }
+
+    @Override
+    public void addPlayerToRequestedHandList(UUID gameId, UUID requesterPlayerId) {
+        computerPlayer.addPlayerToRequestedHandList(gameId, requesterPlayerId);
     }
 
     @Override

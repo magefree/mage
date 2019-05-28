@@ -93,7 +93,7 @@ class OpalPalaceWatcher extends Watcher {
                         for (UUID playerId : game.getPlayerList()) {
                             Player player = game.getPlayer(playerId);
                             if (player != null) {
-                                if (player.getCommandersIds().contains(card.getId())) {
+                                if (game.getCommandersIds(player).contains(card.getId())) {
                                     commanderId.add(card.getId());
                                     break;
                                 }
