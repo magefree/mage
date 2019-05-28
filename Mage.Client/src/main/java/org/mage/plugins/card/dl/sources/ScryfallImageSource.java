@@ -78,6 +78,29 @@ public enum ScryfallImageSource implements CardImageSource {
             alternativeUrl = null;
         }
 
+        // art variation cards
+        // ARN and POR use † notation
+        // PLS uses ★ notation
+        // BFZ and OGW use a notation
+        if (baseUrl == null && card.getUsesVariousArt() && card.getSet().matches("ARN|POR|PLS|BFZ|OGW")) {
+            String scryfallCollectorId = card.getCollectorIdAsInt().toString();
+
+            if (card.getCollectorId().endsWith("b")) {
+                if (card.getSet().matches("ARN|POR")) {
+                    scryfallCollectorId += "†";
+                } else if (card.getSet().matches("PLS")) {
+                    scryfallCollectorId += "★";
+                } else if (card.getSet().matches("BFZ|OGW")) {
+                    scryfallCollectorId += "a";
+                }
+            }
+
+            baseUrl = "https://api.scryfall.com/cards/" + formatSetName(card.getSet(), isToken) + "/"
+                    + scryfallCollectorId + "/" + localizedCode + "?format=image";
+            alternativeUrl = "https://api.scryfall.com/cards/" + formatSetName(card.getSet(), isToken) + "/"
+                    + scryfallCollectorId + "/" + defaultCode + "?format=image";
+        }
+
         // double faced card
         // the front face can be downloaded normally
         // the back face is prepared beforehand
