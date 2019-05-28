@@ -185,9 +185,9 @@ public final class OathOfTheGatewatch extends ExpansionSet {
         cards.add(new SetCardInfo("Sphinx of the Final Word", 63, Rarity.MYTHIC, mage.cards.s.SphinxOfTheFinalWord.class));
         cards.add(new SetCardInfo("Stalking Drone", 124, Rarity.COMMON, mage.cards.s.StalkingDrone.class));
         cards.add(new SetCardInfo("Steppe Glider", 36, Rarity.UNCOMMON, mage.cards.s.SteppeGlider.class));
+        cards.add(new SetCardInfo("Stone Haven Outfitter", 37, Rarity.RARE, mage.cards.s.StoneHavenOutfitter.class));
         cards.add(new SetCardInfo("Stoneforge Acolyte", 38, Rarity.UNCOMMON, mage.cards.s.StoneforgeAcolyte.class));
         cards.add(new SetCardInfo("Stoneforge Masterwork", 166, Rarity.RARE, mage.cards.s.StoneforgeMasterwork.class));
-        cards.add(new SetCardInfo("Stone Haven Outfitter", 37, Rarity.RARE, mage.cards.s.StoneHavenOutfitter.class));
         cards.add(new SetCardInfo("Stormchaser Mage", 159, Rarity.UNCOMMON, mage.cards.s.StormchaserMage.class));
         cards.add(new SetCardInfo("Strider Harness", 167, Rarity.UNCOMMON, mage.cards.s.StriderHarness.class));
         cards.add(new SetCardInfo("Submerged Boneyard", 178, Rarity.UNCOMMON, mage.cards.s.SubmergedBoneyard.class));
@@ -218,9 +218,9 @@ public final class OathOfTheGatewatch extends ExpansionSet {
         cards.add(new SetCardInfo("Warden of Geometries", 11, Rarity.COMMON, mage.cards.w.WardenOfGeometries.class));
         cards.add(new SetCardInfo("Warping Wail", 12, Rarity.UNCOMMON, mage.cards.w.WarpingWail.class));
         cards.add(new SetCardInfo("Wastes", "183a", Rarity.LAND, mage.cards.w.Wastes.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Wastes", "183b", Rarity.LAND, mage.cards.w.Wastes.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Wastes", "184a", Rarity.LAND, mage.cards.w.Wastes.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Wastes", "184b", Rarity.LAND, mage.cards.w.Wastes.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Wastes", 183, Rarity.LAND, mage.cards.w.Wastes.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Wastes", 184, Rarity.LAND, mage.cards.w.Wastes.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Weapons Trainer", 160, Rarity.UNCOMMON, mage.cards.w.WeaponsTrainer.class));
         cards.add(new SetCardInfo("Witness the End", 82, Rarity.COMMON, mage.cards.w.WitnessTheEnd.class));
         cards.add(new SetCardInfo("World Breaker", 126, Rarity.MYTHIC, mage.cards.w.WorldBreaker.class));
