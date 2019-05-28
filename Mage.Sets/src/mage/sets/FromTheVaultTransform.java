@@ -30,7 +30,6 @@ public final class FromTheVaultTransform extends ExpansionSet {
         cards.add(new SetCardInfo("Lord of Lineage", "4b", Rarity.MYTHIC, mage.cards.l.LordOfLineage.class));
         cards.add(new SetCardInfo("Bruna, the Fading Light", "5a", Rarity.MYTHIC, mage.cards.b.BrunaTheFadingLight.class));
         cards.add(new SetCardInfo("Brisela, Voice of Nightmares", "5b", Rarity.MYTHIC, mage.cards.b.BriselaVoiceOfNightmares.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Brisela, Voice of Nightmares", "5c", Rarity.MYTHIC, mage.cards.b.BriselaVoiceOfNightmares.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chandra, Fire of Kaladesh", "6a", Rarity.MYTHIC, mage.cards.c.ChandraFireOfKaladesh.class));
         cards.add(new SetCardInfo("Chandra, Roaring Flame", "6b", Rarity.MYTHIC, mage.cards.c.ChandraRoaringFlame.class));
         cards.add(new SetCardInfo("Delver of Secrets", "7a", Rarity.MYTHIC, mage.cards.d.DelverOfSecrets.class));
@@ -39,7 +38,7 @@ public final class FromTheVaultTransform extends ExpansionSet {
         cards.add(new SetCardInfo("Withengar Unbound", "8b", Rarity.MYTHIC, mage.cards.w.WithengarUnbound.class));
         cards.add(new SetCardInfo("Garruk Relentless", "9a", Rarity.MYTHIC, mage.cards.g.GarrukRelentless.class));
         cards.add(new SetCardInfo("Garruk, the Veil-Cursed", "9b", Rarity.MYTHIC, mage.cards.g.GarrukTheVeilCursed.class));
-        cards.add(new SetCardInfo("Gisela, the Broken Blade", 10, Rarity.MYTHIC, mage.cards.g.GiselaTheBrokenBlade.class));
+        cards.add(new SetCardInfo("Gisela, the Broken Blade", "10a", Rarity.MYTHIC, mage.cards.g.GiselaTheBrokenBlade.class));
         cards.add(new SetCardInfo("Huntmaster of the Fells", "11a", Rarity.MYTHIC, mage.cards.h.HuntmasterOfTheFells.class));
         cards.add(new SetCardInfo("Ravager of the Fells", "11b", Rarity.MYTHIC, mage.cards.r.RavagerOfTheFells.class));
         cards.add(new SetCardInfo("Jace, Vryn's Prodigy", "12a", Rarity.MYTHIC, mage.cards.j.JaceVrynsProdigy.class));

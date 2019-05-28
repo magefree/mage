@@ -179,6 +179,11 @@ public enum ScryfallImageSource implements CardImageSource {
 
             // if a S00 card is in 6ED, it's actually a 6ED card
             if (card.getSet().equals("S00") && sixthEditionCards.stream().anyMatch(sixthEditionCard -> sixthEditionCard.getName().equals(card.getName()))) {
+                // we have direct links for the lands because there are multiple search results
+                if (card.getUsesVariousArt()) { // lands are the only defined multiple art cards in S00 in XMage
+                    continue;
+                }
+
                 String url = null;
 
                 try {

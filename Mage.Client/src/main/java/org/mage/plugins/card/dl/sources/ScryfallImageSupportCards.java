@@ -358,6 +358,18 @@ public class ScryfallImageSupportCards {
 
             // Spined Wurm print in Starter 2000 is actually from Magazine Inserts
             put("S00/Spined Wurm", "https://api.scryfall.com/cards/pmei/11/en?format=image");
+            // Most of the other S00 cards are from 6ED
+            // We'll download lands manually because we have multiple arts and XMage has totally different ID's
+            put("S00/Forest/49", "https://api.scryfall.com/cards/6ed/347/en?format=image");
+            put("S00/Forest/50", "https://api.scryfall.com/cards/6ed/348/en?format=image");
+            put("S00/Island/51", "https://api.scryfall.com/cards/6ed/335/en?format=image");
+            put("S00/Island/52", "https://api.scryfall.com/cards/6ed/336/en?format=image");
+            put("S00/Mountain/53", "https://api.scryfall.com/cards/6ed/343/en?format=image");
+            put("S00/Mountain/54", "https://api.scryfall.com/cards/6ed/344/en?format=image");
+            put("S00/Plains/55", "https://api.scryfall.com/cards/6ed/331/en?format=image");
+            put("S00/Plains/56", "https://api.scryfall.com/cards/6ed/332/en?format=image");
+            put("S00/Swamp/57", "https://api.scryfall.com/cards/6ed/339/en?format=image");
+            put("S00/Swamp/58", "https://api.scryfall.com/cards/6ed/340/en?format=image");
         }
     };
 
