@@ -855,7 +855,9 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void revokePermissionToSeeHandCards();
 
-    boolean isRequestToShowHandCardsAllowed();
+    boolean isPlayerAllowedToRequestHand(UUID gameId, UUID requesterPlayerId);
+
+    void addPlayerToRequestedHandList(UUID gameId, UUID requesterPlayerId);
 
     Set<UUID> getUsersAllowedToSeeHandCards();
 

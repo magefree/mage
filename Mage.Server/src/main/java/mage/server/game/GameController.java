@@ -596,7 +596,9 @@ public class GameController implements GameCallback {
                     if (gameSession != null) {
                         UUID requestingPlayerId = getPlayerId(userIdRequester);
                         if (requestingPlayerId == null || !requestingPlayerId.equals(grantingPlayer.getId())) { // don't allow request for your own cards
-                            if (grantingPlayer.isRequestToShowHandCardsAllowed()) {
+                            if (grantingPlayer.isPlayerAllowedToRequestHand(game.getId(), requestingPlayerId)) {
+                                // one time request per user restrict, enable request will reset users list and allows again
+                                grantingPlayer.addPlayerToRequestedHandList(game.getId(), requestingPlayerId);
                                 gameSession.requestPermissionToSeeHandCards(userIdRequester);
                             } else {
                                 // player does not allow the request

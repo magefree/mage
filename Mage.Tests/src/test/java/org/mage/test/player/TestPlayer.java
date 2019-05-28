@@ -3077,8 +3077,13 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean isRequestToShowHandCardsAllowed() {
-        return computerPlayer.isRequestToShowHandCardsAllowed();
+    public boolean isPlayerAllowedToRequestHand(UUID gameId, UUID requesterPlayerId) {
+        return computerPlayer.isPlayerAllowedToRequestHand(gameId, requesterPlayerId);
+    }
+
+    @Override
+    public void addPlayerToRequestedHandList(UUID gameId, UUID requesterPlayerId) {
+        computerPlayer.addPlayerToRequestedHandList(gameId, requesterPlayerId);
     }
 
     @Override

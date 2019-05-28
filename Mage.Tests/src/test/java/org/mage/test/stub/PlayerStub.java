@@ -1242,8 +1242,13 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean isRequestToShowHandCardsAllowed() {
+    public boolean isPlayerAllowedToRequestHand(UUID gameId, UUID requesterPlayerId) {
         return false;
+    }
+
+    @Override
+    public void addPlayerToRequestedHandList(UUID gameId, UUID requesterPlayerId) {
+        //
     }
 
     @Override

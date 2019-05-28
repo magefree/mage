@@ -1,6 +1,7 @@
 package mage.players.net;
 
 import java.io.Serializable;
+import java.util.*;
 
 /**
  * User data that is passed during connection to the server.
@@ -24,6 +25,7 @@ public class UserData implements Serializable {
     protected boolean autoOrderTrigger;
     protected boolean useFirstManaAbility = false;
     private String userIdStr;
+    protected Map<UUID, Set<UUID>> requestedHandPlayersList; // game -> players list
 
     protected String matchHistory;
     protected int matchQuitRatio;
@@ -35,9 +37,9 @@ public class UserData implements Serializable {
     private int limitedRating;
 
     public UserData(UserGroup userGroup, int avatarId, boolean showAbilityPickerForced,
-            boolean allowRequestShowHandCards, boolean confirmEmptyManaPool, UserSkipPrioritySteps userSkipPrioritySteps,
-            String flagName, boolean askMoveToGraveOrder, boolean manaPoolAutomatic, boolean manaPoolAutomaticRestricted,
-            boolean passPriorityCast, boolean passPriorityActivation, boolean autoOrderTrigger, boolean useFirstManaAbility, String userIdStr) {
+                    boolean allowRequestShowHandCards, boolean confirmEmptyManaPool, UserSkipPrioritySteps userSkipPrioritySteps,
+                    String flagName, boolean askMoveToGraveOrder, boolean manaPoolAutomatic, boolean manaPoolAutomaticRestricted,
+                    boolean passPriorityCast, boolean passPriorityActivation, boolean autoOrderTrigger, boolean useFirstManaAbility, String userIdStr) {
         this.groupId = userGroup.getGroupId();
         this.avatarId = avatarId;
         this.showAbilityPickerForced = showAbilityPickerForced;
@@ -57,6 +59,7 @@ public class UserData implements Serializable {
         this.tourneyHistory = "";
         this.tourneyQuitRatio = 0;
         this.userIdStr = userIdStr;
+        this.requestedHandPlayersList = new HashMap<>();
     }
 
     public void update(UserData userData) {
@@ -106,12 +109,33 @@ public class UserData implements Serializable {
         this.showAbilityPickerForced = showAbilityPickerForced;
     }
 
-    public boolean isAllowRequestShowHandCards() {
+    public boolean isAllowRequestHandToAll() {
         return allowRequestShowHandCards;
+    }
+
+    public boolean isAllowRequestHandToPlayer(UUID gameId, UUID requesterPlayerId) {
+        // once per game
+        boolean allowToPlayer = true;
+        if (requestedHandPlayersList.containsKey(gameId) && requestedHandPlayersList.get(gameId).contains(requesterPlayerId)) {
+            allowToPlayer = false;
+        }
+        return isAllowRequestHandToAll() && allowToPlayer;
+    }
+
+    public void addPlayerToRequestedHandList(UUID gameId, UUID requesterPlayerId) {
+        if (!requestedHandPlayersList.containsKey(gameId)) {
+            requestedHandPlayersList.put(gameId, new HashSet<>());
+        }
+        Set<UUID> requestedPlayers = requestedHandPlayersList.get(gameId);
+        requestedPlayers.add(requesterPlayerId);
     }
 
     public void setAllowRequestShowHandCards(boolean allowRequestShowHandCards) {
         this.allowRequestShowHandCards = allowRequestShowHandCards;
+    }
+
+    public void resetRequestedHandPlayersList(UUID gameId) {
+        this.requestedHandPlayersList.remove(gameId);
     }
 
     public UserSkipPrioritySteps getUserSkipPrioritySteps() {
