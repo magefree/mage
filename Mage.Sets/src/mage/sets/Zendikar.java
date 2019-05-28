@@ -1,15 +1,12 @@
-
 package mage.sets;
 
 import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
-import mage.cards.FrameStyle;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class Zendikar extends ExpansionSet {
@@ -29,6 +26,7 @@ public final class Zendikar extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+
         cards.add(new SetCardInfo("Adventuring Gear", 195, Rarity.COMMON, mage.cards.a.AdventuringGear.class));
         cards.add(new SetCardInfo("Aether Figment", 40, Rarity.UNCOMMON, mage.cards.a.AetherFigment.class));
         cards.add(new SetCardInfo("Akoum Refuge", 210, Rarity.UNCOMMON, mage.cards.a.AkoumRefuge.class));
@@ -45,10 +43,10 @@ public final class Zendikar extends ExpansionSet {
         cards.add(new SetCardInfo("Blade of the Bloodchief", 196, Rarity.RARE, mage.cards.b.BladeOfTheBloodchief.class));
         cards.add(new SetCardInfo("Bladetusk Boar", 118, Rarity.COMMON, mage.cards.b.BladetuskBoar.class));
         cards.add(new SetCardInfo("Blazing Torch", 197, Rarity.UNCOMMON, mage.cards.b.BlazingTorch.class));
-        cards.add(new SetCardInfo("Bloodchief Ascension", 82, Rarity.RARE, mage.cards.b.BloodchiefAscension.class));
-        cards.add(new SetCardInfo("Bloodghast", 83, Rarity.RARE, mage.cards.b.Bloodghast.class));
         cards.add(new SetCardInfo("Blood Seeker", 80, Rarity.COMMON, mage.cards.b.BloodSeeker.class));
         cards.add(new SetCardInfo("Blood Tribute", 81, Rarity.RARE, mage.cards.b.BloodTribute.class));
+        cards.add(new SetCardInfo("Bloodchief Ascension", 82, Rarity.RARE, mage.cards.b.BloodchiefAscension.class));
+        cards.add(new SetCardInfo("Bloodghast", 83, Rarity.RARE, mage.cards.b.Bloodghast.class));
         cards.add(new SetCardInfo("Bog Tatters", 84, Rarity.COMMON, mage.cards.b.BogTatters.class));
         cards.add(new SetCardInfo("Bold Defense", 3, Rarity.COMMON, mage.cards.b.BoldDefense.class));
         cards.add(new SetCardInfo("Brave the Elements", 4, Rarity.UNCOMMON, mage.cards.b.BraveTheElements.class));
@@ -80,14 +78,14 @@ public final class Zendikar extends ExpansionSet {
         cards.add(new SetCardInfo("Explorer's Scope", 202, Rarity.COMMON, mage.cards.e.ExplorersScope.class));
         cards.add(new SetCardInfo("Feast of Blood", 88, Rarity.UNCOMMON, mage.cards.f.FeastOfBlood.class));
         cards.add(new SetCardInfo("Felidar Sovereign", 12, Rarity.MYTHIC, mage.cards.f.FelidarSovereign.class));
-        cards.add(new SetCardInfo("Forest", 246, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Forest", 247, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Forest", 248, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Forest", 249, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Forest", 266, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Forest", 267, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Forest", 268, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Forest", 269, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "246a", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "247a", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "248a", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", "249a", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 246, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_ZEN_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 247, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_ZEN_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 248, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_ZEN_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 249, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_ZEN_VARIOUS));
         cards.add(new SetCardInfo("Frontier Guide", 161, Rarity.UNCOMMON, mage.cards.f.FrontierGuide.class));
         cards.add(new SetCardInfo("Gatekeeper of Malakir", 89, Rarity.UNCOMMON, mage.cards.g.GatekeeperOfMalakir.class));
         cards.add(new SetCardInfo("Geyser Glider", 124, Rarity.UNCOMMON, mage.cards.g.GeyserGlider.class));
@@ -121,14 +119,14 @@ public final class Zendikar extends ExpansionSet {
         cards.add(new SetCardInfo("Into the Roil", 48, Rarity.COMMON, mage.cards.i.IntoTheRoil.class));
         cards.add(new SetCardInfo("Iona, Shield of Emeria", 13, Rarity.MYTHIC, mage.cards.i.IonaShieldOfEmeria.class));
         cards.add(new SetCardInfo("Ior Ruin Expedition", 49, Rarity.COMMON, mage.cards.i.IorRuinExpedition.class));
-        cards.add(new SetCardInfo("Island", 234, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Island", 235, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Island", 236, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Island", 237, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Island", 254, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Island", 255, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Island", 256, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Island", 257, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", "234a", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", "235a", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", "236a", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", "237a", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 234, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_ZEN_VARIOUS));
+        cards.add(new SetCardInfo("Island", 235, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_ZEN_VARIOUS));
+        cards.add(new SetCardInfo("Island", 236, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_ZEN_VARIOUS));
+        cards.add(new SetCardInfo("Island", 237, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_ZEN_VARIOUS));
         cards.add(new SetCardInfo("Joraga Bard", 166, Rarity.COMMON, mage.cards.j.JoragaBard.class));
         cards.add(new SetCardInfo("Journey to Nowhere", 14, Rarity.COMMON, mage.cards.j.JourneyToNowhere.class));
         cards.add(new SetCardInfo("Jwar Isle Refuge", 215, Rarity.UNCOMMON, mage.cards.j.JwarIsleRefuge.class));
@@ -165,22 +163,21 @@ public final class Zendikar extends ExpansionSet {
         cards.add(new SetCardInfo("Marsh Flats", 219, Rarity.RARE, mage.cards.m.MarshFlats.class, new CardGraphicInfo(new ObjectColor("WB"), null, false)));
         cards.add(new SetCardInfo("Merfolk Seastalkers", 55, Rarity.UNCOMMON, mage.cards.m.MerfolkSeastalkers.class));
         cards.add(new SetCardInfo("Merfolk Wayfinder", 56, Rarity.UNCOMMON, mage.cards.m.MerfolkWayfinder.class));
+        cards.add(new SetCardInfo("Mind Sludge", 102, Rarity.UNCOMMON, mage.cards.m.MindSludge.class));
         cards.add(new SetCardInfo("Mindbreak Trap", 57, Rarity.MYTHIC, mage.cards.m.MindbreakTrap.class));
         cards.add(new SetCardInfo("Mindless Null", 103, Rarity.COMMON, mage.cards.m.MindlessNull.class));
-        cards.add(new SetCardInfo("Mind Sludge", 102, Rarity.UNCOMMON, mage.cards.m.MindSludge.class));
         cards.add(new SetCardInfo("Mire Blight", 104, Rarity.COMMON, mage.cards.m.MireBlight.class));
-        cards.add(new SetCardInfo("Misty Rainforest", 220, Rarity.RARE, mage.cards.m.MistyRainforest.class, new CardGraphicInfo(new ObjectColor("UG"), null,
-                false)));
+        cards.add(new SetCardInfo("Misty Rainforest", 220, Rarity.RARE, mage.cards.m.MistyRainforest.class, new CardGraphicInfo(new ObjectColor("UG"), null, false)));
         cards.add(new SetCardInfo("Mold Shambler", 169, Rarity.COMMON, mage.cards.m.MoldShambler.class));
         cards.add(new SetCardInfo("Molten Ravager", 138, Rarity.COMMON, mage.cards.m.MoltenRavager.class));
-        cards.add(new SetCardInfo("Mountain", 242, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Mountain", 243, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Mountain", 244, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Mountain", 245, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Mountain", 262, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Mountain", 263, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Mountain", 264, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Mountain", 265, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", "242a", Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", "243a", Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", "244a", Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", "245a", Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 242, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_ZEN_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 243, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_ZEN_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 244, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_ZEN_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 245, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_ZEN_VARIOUS));
         cards.add(new SetCardInfo("Murasa Pyromancer", 139, Rarity.UNCOMMON, mage.cards.m.MurasaPyromancer.class));
         cards.add(new SetCardInfo("Narrow Escape", 27, Rarity.COMMON, mage.cards.n.NarrowEscape.class));
         cards.add(new SetCardInfo("Needlebite Trap", 105, Rarity.UNCOMMON, mage.cards.n.NeedlebiteTrap.class));
@@ -200,14 +197,14 @@ public final class Zendikar extends ExpansionSet {
         cards.add(new SetCardInfo("Pillarfield Ox", 31, Rarity.COMMON, mage.cards.p.PillarfieldOx.class));
         cards.add(new SetCardInfo("Piranha Marsh", 222, Rarity.COMMON, mage.cards.p.PiranhaMarsh.class));
         cards.add(new SetCardInfo("Pitfall Trap", 32, Rarity.UNCOMMON, mage.cards.p.PitfallTrap.class));
-        cards.add(new SetCardInfo("Plains", 230, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Plains", 231, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Plains", 232, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Plains", 233, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Plains", 250, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Plains", 251, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Plains", 252, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Plains", 253, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", "230a", Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", "231a", Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", "232a", Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", "233a", Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 230, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_ZEN_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 231, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_ZEN_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 232, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_ZEN_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 233, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_ZEN_VARIOUS));
         cards.add(new SetCardInfo("Plated Geopede", 141, Rarity.COMMON, mage.cards.p.PlatedGeopede.class));
         cards.add(new SetCardInfo("Predatory Urge", 175, Rarity.RARE, mage.cards.p.PredatoryUrge.class));
         cards.add(new SetCardInfo("Primal Bellow", 176, Rarity.UNCOMMON, mage.cards.p.PrimalBellow.class));
@@ -257,14 +254,14 @@ public final class Zendikar extends ExpansionSet {
         cards.add(new SetCardInfo("Summoning Trap", 184, Rarity.RARE, mage.cards.s.SummoningTrap.class));
         cards.add(new SetCardInfo("Sunspring Expedition", 37, Rarity.COMMON, mage.cards.s.SunspringExpedition.class));
         cards.add(new SetCardInfo("Surrakar Marauder", 113, Rarity.COMMON, mage.cards.s.SurrakarMarauder.class));
-        cards.add(new SetCardInfo("Swamp", 238, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Swamp", 239, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Swamp", 240, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Swamp", 241, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Swamp", 258, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Swamp", 259, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Swamp", 260, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Swamp", 261, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", "238a", Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", "239a", Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", "240a", Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", "241a", Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 238, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_ZEN_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 239, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_ZEN_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 240, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_ZEN_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 241, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_ZEN_VARIOUS));
         cards.add(new SetCardInfo("Tajuru Archer", 185, Rarity.UNCOMMON, mage.cards.t.TajuruArcher.class));
         cards.add(new SetCardInfo("Tanglesap", 186, Rarity.COMMON, mage.cards.t.Tanglesap.class));
         cards.add(new SetCardInfo("Teetering Peaks", 226, Rarity.COMMON, mage.cards.t.TeeteringPeaks.class));
@@ -289,8 +286,7 @@ public final class Zendikar extends ExpansionSet {
         cards.add(new SetCardInfo("Vampire Nighthawk", 116, Rarity.UNCOMMON, mage.cards.v.VampireNighthawk.class));
         cards.add(new SetCardInfo("Vampire's Bite", 117, Rarity.COMMON, mage.cards.v.VampiresBite.class));
         cards.add(new SetCardInfo("Vastwood Gorger", 192, Rarity.COMMON, mage.cards.v.VastwoodGorger.class));
-        cards.add(new SetCardInfo("Verdant Catacombs", 229, Rarity.RARE, mage.cards.v.VerdantCatacombs.class, new CardGraphicInfo(new ObjectColor("BG"), null,
-                false)));
+        cards.add(new SetCardInfo("Verdant Catacombs", 229, Rarity.RARE, mage.cards.v.VerdantCatacombs.class, new CardGraphicInfo(new ObjectColor("BG"), null, false)));
         cards.add(new SetCardInfo("Vines of Vastwood", 193, Rarity.COMMON, mage.cards.v.VinesOfVastwood.class));
         cards.add(new SetCardInfo("Warren Instigator", 154, Rarity.MYTHIC, mage.cards.w.WarrenInstigator.class));
         cards.add(new SetCardInfo("Welkin Tern", 76, Rarity.COMMON, mage.cards.w.WelkinTern.class));

@@ -24,7 +24,7 @@ public abstract class ExpansionSet implements Serializable {
     private static final Logger logger = Logger.getLogger(ExpansionSet.class);
     public static final CardGraphicInfo NON_FULL_USE_VARIOUS = new CardGraphicInfo(null, true);
     public static final CardGraphicInfo FULL_ART_BFZ_VARIOUS = new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true);
-
+    public static final CardGraphicInfo FULL_ART_ZEN_VARIOUS = new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true);
 
     public class SetCardInfo implements Serializable {
 
