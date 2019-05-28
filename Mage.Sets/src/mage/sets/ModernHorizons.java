@@ -69,6 +69,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Force of Vigor", 164, Rarity.RARE, mage.cards.f.ForceOfVigor.class));
         cards.add(new SetCardInfo("Force of Virtue", 10, Rarity.RARE, mage.cards.f.ForceOfVirtue.class));
         cards.add(new SetCardInfo("Frostwalk Bastion", 240, Rarity.UNCOMMON, mage.cards.f.FrostwalkBastion.class));
+        cards.add(new SetCardInfo("Future Sight", 53, Rarity.RARE, mage.cards.f.FutureSight.class));
         cards.add(new SetCardInfo("Generous Gift", 11, Rarity.UNCOMMON, mage.cards.g.GenerousGift.class));
         cards.add(new SetCardInfo("Genesis", 166, Rarity.RARE, mage.cards.g.Genesis.class));
         cards.add(new SetCardInfo("Giver of Runes", 13, Rarity.RARE, mage.cards.g.GiverOfRunes.class));
@@ -101,6 +102,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Munitions Expert", 209, Rarity.UNCOMMON, mage.cards.m.MunitionsExpert.class));
         cards.add(new SetCardInfo("Nantuko Cultivator", 173, Rarity.UNCOMMON, mage.cards.n.NantukoCultivator.class));
         cards.add(new SetCardInfo("Nature's Chant", 210, Rarity.COMMON, mage.cards.n.NaturesChant.class));
+        cards.add(new SetCardInfo("Nether Spirit", 98, Rarity.RARE, mage.cards.n.NetherSpirit.class));
         cards.add(new SetCardInfo("Nimble Mongoose", 174, Rarity.COMMON, mage.cards.n.NimbleMongoose.class));
         cards.add(new SetCardInfo("Nurturing Peatland", 243, Rarity.RARE, mage.cards.n.NurturingPeatland.class));
         cards.add(new SetCardInfo("Orcish Hellraiser", 136, Rarity.COMMON, mage.cards.o.OrcishHellraiser.class));
@@ -150,6 +152,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Thundering Djinn", 215, Rarity.UNCOMMON, mage.cards.t.ThunderingDjinn.class));
         cards.add(new SetCardInfo("Umezawa's Charm", 111, Rarity.COMMON, mage.cards.u.UmezawasCharm.class));
         cards.add(new SetCardInfo("Undead Augur", 112, Rarity.UNCOMMON, mage.cards.u.UndeadAugur.class));
+        cards.add(new SetCardInfo("Unearth", 113, Rarity.COMMON, mage.cards.u.Unearth.class));
         cards.add(new SetCardInfo("Urza, Lord High Artificer", 75, Rarity.MYTHIC, mage.cards.u.UrzaLordHighArtificer.class));
         cards.add(new SetCardInfo("Valiant Changeling", 34, Rarity.UNCOMMON, mage.cards.v.ValiantChangeling.class));
         cards.add(new SetCardInfo("Venomous Changeling", 114, Rarity.COMMON, mage.cards.v.VenomousChangeling.class));
