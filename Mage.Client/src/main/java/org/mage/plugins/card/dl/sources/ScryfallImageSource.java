@@ -84,8 +84,7 @@ public enum ScryfallImageSource implements CardImageSource {
         // art variation cards
         // ARN and POR use † notation
         // PLS uses ★ notation
-        // BFZ and OGW use a notation
-        if (baseUrl == null && card.getUsesVariousArt() && card.getSet().matches("ARN|POR|PLS|BFZ|OGW")) {
+        if (baseUrl == null && card.getUsesVariousArt() && card.getSet().matches("ARN|POR|PLS")) {
             String scryfallCollectorId = card.getCollectorIdAsInt().toString();
 
             if (card.getCollectorId().endsWith("b")) {
@@ -93,8 +92,6 @@ public enum ScryfallImageSource implements CardImageSource {
                     scryfallCollectorId += "†";
                 } else if (card.getSet().matches("PLS")) {
                     scryfallCollectorId += "★";
-                } else if (card.getSet().matches("BFZ|OGW")) {
-                    scryfallCollectorId += "a";
                 }
             }
 
