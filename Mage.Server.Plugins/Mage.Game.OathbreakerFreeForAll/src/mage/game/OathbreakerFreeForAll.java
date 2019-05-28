@@ -3,7 +3,6 @@ package mage.game;
 import mage.abilities.Ability;
 import mage.abilities.common.SignatureSpellCastOnlyWithOathbreakerEffect;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.OathbreakerOnBattlefieldCondition;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.hint.ConditionHint;
@@ -24,8 +23,8 @@ import java.util.*;
 public class OathbreakerFreeForAll extends GameCommanderImpl {
 
     private int numPlayers;
-    private Map<UUID, UUID> playerSignatureSpell = new HashMap<>();
-    private Map<UUID, List<UUID>> playerCommanders = new HashMap<>();
+    private Map<UUID, Set<UUID>> playerSignatureSpells = new HashMap<>();
+    private Map<UUID, Set<UUID>> playerOathbreakers = new HashMap<>();
 
     public OathbreakerFreeForAll(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
         super(attackOption, range, mulligan, startLife);
@@ -34,8 +33,8 @@ public class OathbreakerFreeForAll extends GameCommanderImpl {
     public OathbreakerFreeForAll(final OathbreakerFreeForAll game) {
         super(game);
         this.numPlayers = game.numPlayers;
-        this.playerSignatureSpell.putAll(game.playerSignatureSpell);
-        game.playerCommanders.forEach((key, value) -> this.playerCommanders.put(key, new ArrayList<>(value)));
+        game.playerSignatureSpells.forEach((key, value) -> this.playerSignatureSpells.put(key, new HashSet<>(value)));
+        game.playerOathbreakers.forEach((key, value) -> this.playerOathbreakers.put(key, new HashSet<>(value)));
     }
 
     @Override
@@ -58,20 +57,30 @@ public class OathbreakerFreeForAll extends GameCommanderImpl {
 
     @Override
     public void initCommanderEffects(Card commander, Player player, Ability commanderAbility) {
-        // all commander effects must be independent from sourceId or controllerId
+        // all commander effects must be independent from sourceId or controllerId (it's limitation of current commander effects)
         super.initCommanderEffects(commander, player, commanderAbility);
 
         // signature spell restrict (spell can be casted on player's commander on battlefield)
-        if (commander.getId().equals(this.playerSignatureSpell.getOrDefault(player.getId(), null))) {
-            Condition condition = new OathbreakerOnBattlefieldCondition(player.getId(), this.playerCommanders.getOrDefault(player.getId(), null));
+        if (this.playerSignatureSpells.getOrDefault(player.getId(), new HashSet<>()).contains(commander.getId())) {
+            OathbreakerOnBattlefieldCondition condition = new OathbreakerOnBattlefieldCondition(this, player.getId(), commander.getId(),
+                    this.playerOathbreakers.getOrDefault(player.getId(), new HashSet<>()));
             commanderAbility.addEffect(new SignatureSpellCastOnlyWithOathbreakerEffect(condition, commander.getId()));
 
             // hint must be added to card, not global ability
             Ability ability = new SimpleStaticAbility(new InfoEffect("Signature spell hint"));
-            ability.addHint(new ConditionHint(condition, "Oathbreaker on battlefield"));
+            ability.addHint(new ConditionHint(condition, "Oathbreaker on battlefield (" + condition.getCompatibleNames() + ")"));
             ability.setRuleVisible(false);
             commander.addAbility(ability);
         }
+    }
+
+    private void addInnerCommander(Map<UUID, Set<UUID>> destList, UUID playerId, UUID cardId) {
+        Set<UUID> list = destList.getOrDefault(playerId, null);
+        if (list == null) {
+            list = new HashSet<>();
+            destList.put(playerId, list);
+        }
+        list.add(cardId);
     }
 
     @Override
@@ -80,16 +89,9 @@ public class OathbreakerFreeForAll extends GameCommanderImpl {
 
         // prepare signature and commanders info
         if (card.isInstantOrSorcery()) {
-            this.playerSignatureSpell.put(player.getId(), card.getId());
+            addInnerCommander(this.playerSignatureSpells, player.getId(), card.getId());
         } else {
-            List<UUID> list = this.playerCommanders.getOrDefault(player.getId(), null);
-            if (list == null) {
-                list = new ArrayList<>();
-                this.playerCommanders.put(player.getId(), list);
-            }
-            if (!list.contains(card.getId())) {
-                list.add(card.getId());
-            }
+            addInnerCommander(this.playerOathbreakers, player.getId(), card.getId());
         }
     }
 
@@ -116,8 +118,8 @@ public class OathbreakerFreeForAll extends GameCommanderImpl {
     public Set<UUID> getCommandersIds(Player player, CommanderCardType commanderCardType) {
         Set<UUID> res = new HashSet<>();
         if (player != null) {
-            List<UUID> commanders = this.playerCommanders.getOrDefault(player.getId(), new ArrayList<>());
-            UUID spell = this.playerSignatureSpell.getOrDefault(player.getId(), null);
+            Set<UUID> commanders = this.playerOathbreakers.getOrDefault(player.getId(), new HashSet<>());
+            Set<UUID> spells = this.playerSignatureSpells.getOrDefault(player.getId(), new HashSet<>());
             for (UUID id : player.getCommandersIds()) {
                 switch (commanderCardType) {
                     case ANY:
@@ -129,7 +131,7 @@ public class OathbreakerFreeForAll extends GameCommanderImpl {
                         }
                         break;
                     case SIGNATURE_SPELL:
-                        if (id.equals(spell)) {
+                        if (spells.contains(id)) {
                             res.add(id);
                         }
                         break;

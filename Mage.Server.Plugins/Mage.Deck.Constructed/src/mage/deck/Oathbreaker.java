@@ -6,6 +6,7 @@ import mage.abilities.keyword.PartnerWithAbility;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.filter.FilterMana;
+import mage.util.ManaUtil;
 
 import java.util.*;
 
@@ -71,7 +72,7 @@ public class Oathbreaker extends Vintage {
 
     @Override
     public int getDeckMinSize() {
-        return 60 - (1 + 2); // spell + 2 x partner oathbreakers
+        return 60 - (2 + 2); // 2 x spells + 2 x partner oathbreakers
     }
 
     @Override
@@ -82,7 +83,6 @@ public class Oathbreaker extends Vintage {
     @Override
     public boolean validate(Deck deck) {
         boolean valid = true;
-        FilterMana colorIdentity = new FilterMana();
 
         if (deck.getCards().size() + deck.getSideboard().size() != 60) {
             invalid.put("Deck", "Must contain " + 60 + " cards: has " + (deck.getCards().size() + deck.getSideboard().size()) + " cards");
@@ -103,22 +103,22 @@ public class Oathbreaker extends Vintage {
         }
 
         Set<String> commanderNames = new HashSet<>();
-        String signatureSpell = null;
-        if (deck.getSideboard().size() < 2 || deck.getSideboard().size() > 3) {
-            invalid.put("Oathbreaker", "Sideboard must contain only the oathbreaker(s) with signature spell");
+        Set<String> signatureSpells = new HashSet<>();
+        FilterMana allCommandersColor = new FilterMana();
+        if (deck.getSideboard().size() < 2 || deck.getSideboard().size() > 4) {
+            invalid.put("Oathbreaker", "Sideboard must contain only 2 or 4 cards (oathbreaker + signature spell)");
             valid = false;
         } else {
+            // collect data
             for (Card commander : deck.getSideboard()) {
                 if (commander.isInstantOrSorcery()) {
-                    if (signatureSpell == null) {
-                        signatureSpell = commander.getName();
-                    } else {
-                        invalid.put("Signature spell", "Only one signature spell allows, but found: " + signatureSpell + " and " + commander.getName());
-                        valid = false;
-                    }
+                    signatureSpells.add(commander.getName());
                 } else {
                     if (commander.isPlaneswalker()) {
                         commanderNames.add(commander.getName());
+
+                        // color identity from commanders only, not spell
+                        ManaUtil.collectColorIdentity(allCommandersColor, commander.getColorIdentity());
                     } else {
                         invalid.put("Oathbreaker", "Only planeswalker can be Oathbreaker, not " + commander.getName());
                         valid = false;
@@ -126,6 +126,21 @@ public class Oathbreaker extends Vintage {
                 }
             }
 
+            // check size (1+1 or 2+2 allows)
+            if (commanderNames.size() == 0 || commanderNames.size() > 2) {
+                invalid.put("Oathbreaker", "Sideboard must contains 1 or 2 oathbreakers, but found: " + commanderNames.size());
+                valid = false;
+            }
+            if (signatureSpells.size() == 0 || signatureSpells.size() > 2) {
+                invalid.put("Signature Spell", "Sideboard must contains 1 or 2 signature spells, but found: " + signatureSpells.size());
+                valid = false;
+            }
+            if (signatureSpells.size() != commanderNames.size()) {
+                invalid.put("Oathbreaker", "Sideboard must contains 1 + 1 or 2 + 2 cards, but found: " + commanderNames.size() + " + " + signatureSpells.size());
+                valid = false;
+            }
+
+            // check partners
             for (Card commander : deck.getSideboard()) {
                 if (commanderNames.contains(commander.getName())) {
                     // partner checks
@@ -142,42 +157,28 @@ public class Oathbreaker extends Vintage {
                             valid = false;
                         }
                     }
-
-                    // color identity from commanders only, not spell
-                    FilterMana commanderColor = commander.getColorIdentity();
-                    if (commanderColor.isWhite()) {
-                        colorIdentity.setWhite(true);
-                    }
-                    if (commanderColor.isBlue()) {
-                        colorIdentity.setBlue(true);
-                    }
-                    if (commanderColor.isBlack()) {
-                        colorIdentity.setBlack(true);
-                    }
-                    if (commanderColor.isRed()) {
-                        colorIdentity.setRed(true);
-                    }
-                    if (commanderColor.isGreen()) {
-                        colorIdentity.setGreen(true);
-                    }
                 }
             }
 
-            if (commanderNames.size() == 0) {
-                invalid.put("Sideboard", "Can't find any oathbreaker");
-                valid = false;
-            }
-            if (signatureSpell == null) {
-                invalid.put("Sideboard", "Can't find signature spell");
-                valid = false;
-            }
-        }
-
-        // signature spell color
-        for (Card card : deck.getSideboard()) {
-            if (card.getName().equals(signatureSpell) && !cardHasValidColor(colorIdentity, card)) {
-                invalid.put(card.getName(), "Invalid color for signature spell (" + colorIdentity.toString() + ')');
-                valid = false;
+            // check spell color (one spell must be used by one oathbreaker)
+            // xmage doesn't allows to select pairs of spell + oathbreaker, what's why it requires one color combo minimum
+            for (Card spell : deck.getSideboard()) {
+                if (signatureSpells.contains(spell.getName())) {
+                    FilterMana spellColor = spell.getColorIdentity();
+                    boolean haveSameColor = false;
+                    for (Card commander : deck.getSideboard()) {
+                        if (commanderNames.contains(commander.getName())) {
+                            FilterMana commanderColor = commander.getColorIdentity();
+                            if (ManaUtil.isColorIdentityCompatible(commanderColor, spellColor)) {
+                                haveSameColor = true;
+                            }
+                        }
+                    }
+                    if (!haveSameColor) {
+                        invalid.put("Signature Spell", "Can't find oathbreaker with compatible color identity (" + spell.getName() + " - " + spellColor + ")");
+                        valid = false;
+                    }
+                }
             }
         }
 
@@ -187,8 +188,8 @@ public class Oathbreaker extends Vintage {
         }
 
         for (Card card : deck.getCards()) {
-            if (!cardHasValidColor(colorIdentity, card)) {
-                invalid.put(card.getName(), "Invalid color (" + colorIdentity.toString() + ')');
+            if (!ManaUtil.isColorIdentityCompatible(allCommandersColor, card.getColorIdentity())) {
+                invalid.put(card.getName(), "Invalid color (" + card.getColorIdentity() + ')');
                 valid = false;
             }
         }
@@ -202,14 +203,5 @@ public class Oathbreaker extends Vintage {
             }
         }
         return valid;
-    }
-
-    public boolean cardHasValidColor(FilterMana commander, Card card) {
-        FilterMana cardColor = card.getColorIdentity();
-        return !(cardColor.isBlack() && !commander.isBlack()
-                || cardColor.isBlue() && !commander.isBlue()
-                || cardColor.isGreen() && !commander.isGreen()
-                || cardColor.isRed() && !commander.isRed()
-                || cardColor.isWhite() && !commander.isWhite());
     }
 }
