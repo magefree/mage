@@ -160,6 +160,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("The First Sliver", 200, Rarity.MYTHIC, mage.cards.t.TheFirstSliver.class));
         cards.add(new SetCardInfo("Throes of Chaos", 150, Rarity.UNCOMMON, mage.cards.t.ThroesOfChaos.class));
         cards.add(new SetCardInfo("Thundering Djinn", 215, Rarity.UNCOMMON, mage.cards.t.ThunderingDjinn.class));
+        cards.add(new SetCardInfo("Tribute Mage", 73, Rarity.UNCOMMON, mage.cards.t.TributeMage.class));
         cards.add(new SetCardInfo("Twisted Reflection", 74, Rarity.UNCOMMON, mage.cards.t.TwistedReflection.class));
         cards.add(new SetCardInfo("Umezawa's Charm", 111, Rarity.COMMON, mage.cards.u.UmezawasCharm.class));
         cards.add(new SetCardInfo("Undead Augur", 112, Rarity.UNCOMMON, mage.cards.u.UndeadAugur.class));
