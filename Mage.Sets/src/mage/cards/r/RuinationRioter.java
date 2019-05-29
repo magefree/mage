@@ -11,6 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
+import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
 
@@ -34,6 +35,8 @@ public final class RuinationRioter extends CardImpl {
                 new DamageTargetEffect(xValue).setText("you may have it deal damage to any target " +
                         "equal to the number of land cards in your graveyard."), true
         );
+        ability.addTarget(new TargetAnyTarget());
+        this.addAbility(ability);
     }
 
     private RuinationRioter(final RuinationRioter card) {
