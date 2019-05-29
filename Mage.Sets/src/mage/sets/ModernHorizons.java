@@ -46,12 +46,14 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Collector Ouphe", 158, Rarity.RARE, mage.cards.c.CollectorOuphe.class));
         cards.add(new SetCardInfo("Crashing Footfalls", 160, Rarity.RARE, mage.cards.c.CrashingFootfalls.class));
         cards.add(new SetCardInfo("Crypt Rats", 84, Rarity.UNCOMMON, mage.cards.c.CryptRats.class));
+        cards.add(new SetCardInfo("Dead of Winter", 85, Rarity.RARE, mage.cards.d.DeadOfWinter.class));
         cards.add(new SetCardInfo("Deep Forest Hermit", 161, Rarity.RARE, mage.cards.d.DeepForestHermit.class));
         cards.add(new SetCardInfo("Diabolic Edict", 87, Rarity.COMMON, mage.cards.d.DiabolicEdict.class));
         cards.add(new SetCardInfo("Dismantling Blow", 5, Rarity.UNCOMMON, mage.cards.d.DismantlingBlow.class));
         cards.add(new SetCardInfo("Dregscape Sliver", 88, Rarity.UNCOMMON, mage.cards.d.DregscapeSliver.class));
         cards.add(new SetCardInfo("Eladamri's Call", 197, Rarity.RARE, mage.cards.e.EladamrisCall.class));
         cards.add(new SetCardInfo("Elvish Fury", 162, Rarity.COMMON, mage.cards.e.ElvishFury.class));
+        cards.add(new SetCardInfo("Endling", 89, Rarity.RARE, mage.cards.e.Endling.class));
         cards.add(new SetCardInfo("Enduring Sliver", 8, Rarity.COMMON, mage.cards.e.EnduringSliver.class));
         cards.add(new SetCardInfo("Etchings of the Chosen", 198, Rarity.UNCOMMON, mage.cards.e.EtchingsOfTheChosen.class));
         cards.add(new SetCardInfo("Exclude", 48, Rarity.UNCOMMON, mage.cards.e.Exclude.class));
@@ -85,6 +87,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Hexdrinker", 168, Rarity.MYTHIC, mage.cards.h.Hexdrinker.class));
         cards.add(new SetCardInfo("Hollowhead Sliver", 132, Rarity.UNCOMMON, mage.cards.h.HollowheadSliver.class));
         cards.add(new SetCardInfo("Ice-Fang Coatl", 203, Rarity.RARE, mage.cards.i.IceFangCoatl.class));
+        cards.add(new SetCardInfo("Ice-Skin Golem", 224, Rarity.UNCOMMON, mage.cards.i.IceSkinGolem.class));
         cards.add(new SetCardInfo("Impostor of the Sixth Pride", 14, Rarity.COMMON, mage.cards.i.ImpostorOfTheSixthPride.class));
         cards.add(new SetCardInfo("Ingenious Infiltrator", 204, Rarity.UNCOMMON, mage.cards.i.IngeniousInfiltrator.class));
         cards.add(new SetCardInfo("Kaya's Guile", 205, Rarity.RARE, mage.cards.k.KayasGuile.class));
@@ -94,6 +97,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Lavabelly Sliver", 207, Rarity.UNCOMMON, mage.cards.l.LavabellySliver.class));
         cards.add(new SetCardInfo("Lesser Masticore", 225, Rarity.UNCOMMON, mage.cards.l.LesserMasticore.class));
         cards.add(new SetCardInfo("Lightning Skelemental", 208, Rarity.RARE, mage.cards.l.LightningSkelemental.class));
+        cards.add(new SetCardInfo("Llanowar Tribe", 170, Rarity.UNCOMMON, mage.cards.l.LlanowarTribe.class));
         cards.add(new SetCardInfo("Man-o'-War", 55, Rarity.COMMON, mage.cards.m.ManOWar.class));
         cards.add(new SetCardInfo("Martyr's Soul", 19, Rarity.COMMON, mage.cards.m.MartyrsSoul.class));
         cards.add(new SetCardInfo("Morophon, the Boundless", 1, Rarity.MYTHIC, mage.cards.m.MorophonTheBoundless.class));
@@ -105,7 +109,10 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Nether Spirit", 98, Rarity.RARE, mage.cards.n.NetherSpirit.class));
         cards.add(new SetCardInfo("Nimble Mongoose", 174, Rarity.COMMON, mage.cards.n.NimbleMongoose.class));
         cards.add(new SetCardInfo("Nurturing Peatland", 243, Rarity.RARE, mage.cards.n.NurturingPeatland.class));
+        cards.add(new SetCardInfo("On Thin Ice", 20, Rarity.RARE, mage.cards.o.OnThinIce.class));
         cards.add(new SetCardInfo("Orcish Hellraiser", 136, Rarity.COMMON, mage.cards.o.OrcishHellraiser.class));
+        cards.add(new SetCardInfo("Ore-Scale Guardian", 137, Rarity.UNCOMMON, mage.cards.o.OreScaleGuardian.class));
+        cards.add(new SetCardInfo("Pashalik Mons", 138, Rarity.RARE, mage.cards.p.PashalikMons.class));
         cards.add(new SetCardInfo("Pillage", 139, Rarity.UNCOMMON, mage.cards.p.Pillage.class));
         cards.add(new SetCardInfo("Plague Engineer", 100, Rarity.RARE, mage.cards.p.PlagueEngineer.class));
         cards.add(new SetCardInfo("Planebound Accomplice", 140, Rarity.RARE, mage.cards.p.PlaneboundAccomplice.class));
@@ -116,6 +123,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Ranger-Captain of Eos", 21, Rarity.MYTHIC, mage.cards.r.RangerCaptainOfEos.class));
         cards.add(new SetCardInfo("Ravenous Giant", 143, Rarity.UNCOMMON, mage.cards.r.RavenousGiant.class));
         cards.add(new SetCardInfo("Regrowth", 175, Rarity.UNCOMMON, mage.cards.r.Regrowth.class));
+        cards.add(new SetCardInfo("Ruination Rioter", 213, Rarity.UNCOMMON, mage.cards.r.RuinationRioter.class));
         cards.add(new SetCardInfo("Savage Swipe", 178, Rarity.COMMON, mage.cards.s.SavageSwipe.class));
         cards.add(new SetCardInfo("Scale Up", 179, Rarity.UNCOMMON, mage.cards.s.ScaleUp.class));
         cards.add(new SetCardInfo("Scour All Possibilities", 67, Rarity.COMMON, mage.cards.s.ScourAllPossibilities.class));
@@ -149,13 +157,16 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Talisman of Resilience", 234, Rarity.UNCOMMON, mage.cards.t.TalismanOfResilience.class));
         cards.add(new SetCardInfo("Tempered Sliver", 183, Rarity.UNCOMMON, mage.cards.t.TemperedSliver.class));
         cards.add(new SetCardInfo("The First Sliver", 200, Rarity.MYTHIC, mage.cards.t.TheFirstSliver.class));
+        cards.add(new SetCardInfo("Throes of Chaos", 150, Rarity.UNCOMMON, mage.cards.t.ThroesOfChaos.class));
         cards.add(new SetCardInfo("Thundering Djinn", 215, Rarity.UNCOMMON, mage.cards.t.ThunderingDjinn.class));
+        cards.add(new SetCardInfo("Twisted Reflection", 74, Rarity.UNCOMMON, mage.cards.t.TwistedReflection.class));
         cards.add(new SetCardInfo("Umezawa's Charm", 111, Rarity.COMMON, mage.cards.u.UmezawasCharm.class));
         cards.add(new SetCardInfo("Undead Augur", 112, Rarity.UNCOMMON, mage.cards.u.UndeadAugur.class));
         cards.add(new SetCardInfo("Unearth", 113, Rarity.COMMON, mage.cards.u.Unearth.class));
         cards.add(new SetCardInfo("Urza, Lord High Artificer", 75, Rarity.MYTHIC, mage.cards.u.UrzaLordHighArtificer.class));
         cards.add(new SetCardInfo("Valiant Changeling", 34, Rarity.UNCOMMON, mage.cards.v.ValiantChangeling.class));
         cards.add(new SetCardInfo("Venomous Changeling", 114, Rarity.COMMON, mage.cards.v.VenomousChangeling.class));
+        cards.add(new SetCardInfo("Vesperlark", 35, Rarity.UNCOMMON, mage.cards.v.Vesperlark.class));
         cards.add(new SetCardInfo("Wall of One Thousand Cuts", 36, Rarity.COMMON, mage.cards.w.WallOfOneThousandCuts.class));
         cards.add(new SetCardInfo("Waterlogged Grove", 249, Rarity.RARE, mage.cards.w.WaterloggedGrove.class));
         cards.add(new SetCardInfo("Weather the Storm", 191, Rarity.COMMON, mage.cards.w.WeatherTheStorm.class));
