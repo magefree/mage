@@ -129,6 +129,10 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
     public void incErrorCount() {
         this.errorCount = this.errorCount + 1;
+
+        if (this.errorCount == MAX_ERRORS_COUNT_BEFORE_CANCEL + 1) {
+            logger.warn("Too many errors (> " + MAX_ERRORS_COUNT_BEFORE_CANCEL + ") in images download");
+        }
     }
 
     private void resetErrorCount() {
@@ -571,6 +575,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
     @Override
     public void run() {
         this.cardIndex = 0;
+        this.resetErrorCount();
 
         File base = new File(getImagesDir());
         if (!base.exists()) {
