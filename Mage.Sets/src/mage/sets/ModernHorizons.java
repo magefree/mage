@@ -35,10 +35,12 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Astral Drift", 3, Rarity.RARE, mage.cards.a.AstralDrift.class));
         cards.add(new SetCardInfo("Ayula's Influence", 156, Rarity.RARE, mage.cards.a.AyulasInfluence.class));
         cards.add(new SetCardInfo("Ayula, Queen Among Bears", 155, Rarity.RARE, mage.cards.a.AyulaQueenAmongBears.class));
+        cards.add(new SetCardInfo("Barren Moor", 236, Rarity.UNCOMMON, mage.cards.b.BarrenMoor.class));
         cards.add(new SetCardInfo("Battle Screech", 4, Rarity.UNCOMMON, mage.cards.b.BattleScreech.class));
         cards.add(new SetCardInfo("Bazaar Trademage", 41, Rarity.RARE, mage.cards.b.BazaarTrademage.class));
         cards.add(new SetCardInfo("Bladeback Sliver", 119, Rarity.COMMON, mage.cards.b.BladebackSliver.class));
         cards.add(new SetCardInfo("Cabal Therapist", 80, Rarity.RARE, mage.cards.c.CabalTherapist.class));
+        cards.add(new SetCardInfo("Carrion Feeder", 81, Rarity.UNCOMMON, mage.cards.c.CarrionFeeder.class));
         cards.add(new SetCardInfo("Changeling Outcast", 82, Rarity.COMMON, mage.cards.c.ChangelingOutcast.class));
         cards.add(new SetCardInfo("Chillerpillar", 43, Rarity.COMMON, mage.cards.c.Chillerpillar.class));
         cards.add(new SetCardInfo("Choking Tethers", 44, Rarity.COMMON, mage.cards.c.ChokingTethers.class));
@@ -71,6 +73,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Force of Rage", 124, Rarity.RARE, mage.cards.f.ForceOfRage.class));
         cards.add(new SetCardInfo("Force of Vigor", 164, Rarity.RARE, mage.cards.f.ForceOfVigor.class));
         cards.add(new SetCardInfo("Force of Virtue", 10, Rarity.RARE, mage.cards.f.ForceOfVirtue.class));
+        cards.add(new SetCardInfo("Forgotten Cave", 239, Rarity.UNCOMMON, mage.cards.f.ForgottenCave.class));
         cards.add(new SetCardInfo("Frostwalk Bastion", 240, Rarity.UNCOMMON, mage.cards.f.FrostwalkBastion.class));
         cards.add(new SetCardInfo("Future Sight", 53, Rarity.RARE, mage.cards.f.FutureSight.class));
         cards.add(new SetCardInfo("Generous Gift", 11, Rarity.UNCOMMON, mage.cards.g.GenerousGift.class));
@@ -88,7 +91,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Hexdrinker", 168, Rarity.MYTHIC, mage.cards.h.Hexdrinker.class));
         cards.add(new SetCardInfo("Hollowhead Sliver", 132, Rarity.UNCOMMON, mage.cards.h.HollowheadSliver.class));
         cards.add(new SetCardInfo("Ice-Fang Coatl", 203, Rarity.RARE, mage.cards.i.IceFangCoatl.class));
-        cards.add(new SetCardInfo("Ice-Skin Golem", 224, Rarity.UNCOMMON, mage.cards.i.IceSkinGolem.class));
+        cards.add(new SetCardInfo("Icehide Golem", 224, Rarity.UNCOMMON, mage.cards.i.IcehideGolem.class));
         cards.add(new SetCardInfo("Impostor of the Sixth Pride", 14, Rarity.COMMON, mage.cards.i.ImpostorOfTheSixthPride.class));
         cards.add(new SetCardInfo("Ingenious Infiltrator", 204, Rarity.UNCOMMON, mage.cards.i.IngeniousInfiltrator.class));
         cards.add(new SetCardInfo("Kaya's Guile", 205, Rarity.RARE, mage.cards.k.KayasGuile.class));
@@ -99,6 +102,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Lesser Masticore", 225, Rarity.UNCOMMON, mage.cards.l.LesserMasticore.class));
         cards.add(new SetCardInfo("Lightning Skelemental", 208, Rarity.RARE, mage.cards.l.LightningSkelemental.class));
         cards.add(new SetCardInfo("Llanowar Tribe", 170, Rarity.UNCOMMON, mage.cards.l.LlanowarTribe.class));
+        cards.add(new SetCardInfo("Lonely Sandbar", 242, Rarity.UNCOMMON, mage.cards.l.LonelySandbar.class));
         cards.add(new SetCardInfo("Man-o'-War", 55, Rarity.COMMON, mage.cards.m.ManOWar.class));
         cards.add(new SetCardInfo("Martyr's Soul", 19, Rarity.COMMON, mage.cards.m.MartyrsSoul.class));
         cards.add(new SetCardInfo("Morophon, the Boundless", 1, Rarity.MYTHIC, mage.cards.m.MorophonTheBoundless.class));
@@ -123,6 +127,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Pyrophobia", 141, Rarity.COMMON, mage.cards.p.Pyrophobia.class));
         cards.add(new SetCardInfo("Ranger-Captain of Eos", 21, Rarity.MYTHIC, mage.cards.r.RangerCaptainOfEos.class));
         cards.add(new SetCardInfo("Ravenous Giant", 143, Rarity.UNCOMMON, mage.cards.r.RavenousGiant.class));
+        cards.add(new SetCardInfo("Rebuild", 66, Rarity.UNCOMMON, mage.cards.r.Rebuild.class));
         cards.add(new SetCardInfo("Reckless Charge", 144, Rarity.COMMON, mage.cards.r.RecklessCharge.class));
         cards.add(new SetCardInfo("Regrowth", 175, Rarity.UNCOMMON, mage.cards.r.Regrowth.class));
         cards.add(new SetCardInfo("Ruination Rioter", 213, Rarity.UNCOMMON, mage.cards.r.RuinationRioter.class));
@@ -132,6 +137,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Scrapyard Recombiner", 227, Rarity.RARE, mage.cards.s.ScrapyardRecombiner.class));
         cards.add(new SetCardInfo("Scuttling Sliver", 68, Rarity.UNCOMMON, mage.cards.s.ScuttlingSliver.class));
         cards.add(new SetCardInfo("Seasoned Pyromancer", 145, Rarity.MYTHIC, mage.cards.s.SeasonedPyromancer.class));
+        cards.add(new SetCardInfo("Secluded Steppe", 245, Rarity.UNCOMMON, mage.cards.s.SecludedSteppe.class));
         cards.add(new SetCardInfo("Segovian Angel", 25, Rarity.COMMON, mage.cards.s.SegovianAngel.class));
         cards.add(new SetCardInfo("Serra the Benevolent", 26, Rarity.MYTHIC, mage.cards.s.SerraTheBenevolent.class));
         cards.add(new SetCardInfo("Silent Clearing", 246, Rarity.RARE, mage.cards.s.SilentClearing.class));
@@ -161,6 +167,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("The First Sliver", 200, Rarity.MYTHIC, mage.cards.t.TheFirstSliver.class));
         cards.add(new SetCardInfo("Throes of Chaos", 150, Rarity.UNCOMMON, mage.cards.t.ThroesOfChaos.class));
         cards.add(new SetCardInfo("Thundering Djinn", 215, Rarity.UNCOMMON, mage.cards.t.ThunderingDjinn.class));
+        cards.add(new SetCardInfo("Tranquil Thicket", 248, Rarity.UNCOMMON, mage.cards.t.TranquilThicket.class));
         cards.add(new SetCardInfo("Tribute Mage", 73, Rarity.UNCOMMON, mage.cards.t.TributeMage.class));
         cards.add(new SetCardInfo("Twisted Reflection", 74, Rarity.UNCOMMON, mage.cards.t.TwistedReflection.class));
         cards.add(new SetCardInfo("Umezawa's Charm", 111, Rarity.COMMON, mage.cards.u.UmezawasCharm.class));

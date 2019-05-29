@@ -14,9 +14,9 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class IceSkinGolem extends CardImpl {
+public final class IcehideGolem extends CardImpl {
 
-    public IceSkinGolem(UUID ownerId, CardSetInfo setInfo) {
+    public IcehideGolem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{S}");
 
         this.addSuperType(SuperType.SNOW);
@@ -30,12 +30,12 @@ public final class IceSkinGolem extends CardImpl {
         ));
     }
 
-    private IceSkinGolem(final IceSkinGolem card) {
+    private IcehideGolem(final IcehideGolem card) {
         super(card);
     }
 
     @Override
-    public IceSkinGolem copy() {
-        return new IceSkinGolem(this);
+    public IcehideGolem copy() {
+        return new IcehideGolem(this);
     }
 }
