@@ -1,6 +1,5 @@
 package mage.cards.mock;
 
-import java.util.List;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.cards.CardSetInfo;
@@ -11,8 +10,9 @@ import mage.cards.repository.CardRepository;
 import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
 
+import java.util.List;
+
 /**
- *
  * @author North
  */
 public class MockSplitCard extends SplitCard {
@@ -41,7 +41,7 @@ public class MockSplitCard extends SplitCard {
         this.transformable = card.isDoubleFaced();
         this.nightCard = card.isNightCard();
         if (card.getSecondSideName() != null && !card.getSecondSideName().isEmpty()) {
-            this.secondSideCard = new MockCard(CardRepository.instance.findCard(card.getSecondSideName()));
+            this.secondSideCard = new MockCard(CardRepository.instance.findCardWPreferredSet(card.getSecondSideName(), card.getSetCode(), false));
         }
 
         this.flipCardName = card.getFlipCardName();
@@ -50,16 +50,16 @@ public class MockSplitCard extends SplitCard {
             this.addAbility(textAbilityFromString(ruleText));
         }
 
-        CardInfo leftHalf = CardRepository.instance.findCard(getLeftHalfName(card));
+        CardInfo leftHalf = CardRepository.instance.findCardWPreferredSet(getLeftHalfName(card), card.getSetCode(), false);
         if (leftHalf != null) {
             this.leftHalfCard = new MockSplitCardHalf(leftHalf);
-            ((SplitCardHalf)this.leftHalfCard).setParentCard(this);
+            ((SplitCardHalf) this.leftHalfCard).setParentCard(this);
         }
 
-        CardInfo rightHalf = CardRepository.instance.findCard(getRightHalfName(card));
+        CardInfo rightHalf = CardRepository.instance.findCardWPreferredSet(getRightHalfName(card), card.getSetCode(), false);
         if (rightHalf != null) {
             this.rightHalfCard = new MockSplitCardHalf(rightHalf);
-            ((SplitCardHalf)this.rightHalfCard).setParentCard(this);
+            ((SplitCardHalf) this.rightHalfCard).setParentCard(this);
         }
     }
 

@@ -188,13 +188,16 @@ public abstract class ExpansionSet implements Serializable {
 
     protected int addMissingPartner(List<Card> booster, boolean partnerAllowed, int max, int i) {
 
-        for (Ability ability : booster.get(booster.size() - 1).getAbilities()) {
+        Card sourceCard = booster.get(booster.size() - 1);
+        for (Ability ability : sourceCard.getAbilities()) {
+
             //Check if fetched card has the PartnerWithAbility
             if (ability instanceof PartnerWithAbility) {
+                String partnerName = ((PartnerWithAbility) ability).getPartnerName();
                 //Check if the pack already contains a partner pair
                 if (partnerAllowed) {
                     //Added card always replaces an uncommon card
-                    Card card = CardRepository.instance.findCard(((PartnerWithAbility) ability).getPartnerName()).getCard();
+                    Card card = CardRepository.instance.findCardWPreferredSet(partnerName, sourceCard.getExpansionSetCode(), false).getCard();
                     if (i < max) {
                         booster.add(card);
                     } else {

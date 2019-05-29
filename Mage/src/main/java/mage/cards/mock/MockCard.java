@@ -1,6 +1,5 @@
 package mage.cards.mock;
 
-import java.util.List;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -8,6 +7,8 @@ import mage.cards.CardImpl;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import org.apache.log4j.Logger;
+
+import java.util.List;
 
 /**
  * @author North
@@ -45,7 +46,7 @@ public class MockCard extends CardImpl {
         this.transformable = card.isDoubleFaced();
         this.nightCard = card.isNightCard();
         if (card.getSecondSideName() != null && !card.getSecondSideName().isEmpty()) {
-            this.secondSideCard = new MockCard(CardRepository.instance.findCard(card.getSecondSideName()));
+            this.secondSideCard = new MockCard(CardRepository.instance.findCardWPreferredSet(card.getSecondSideName(), card.getSetCode(), false));
         }
 
         if (this.isPlaneswalker()) {
