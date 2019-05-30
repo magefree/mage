@@ -1,5 +1,6 @@
 package mage.cards.decks.importer;
 
+import mage.cards.decks.CardNameUtil;
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
@@ -109,18 +110,7 @@ public class TxtDeckImporter extends PlainTextDeckImporter {
             cardAmount = 1;
         }
 
-        lineName = lineName
-                .replace("&amp;", "//")
-                .replace("Ã†", "Ae")
-                .replace("Ã¶", "o")
-                .replace("û", "u")
-                .replace("í", "i")
-                .replace("â", "a")
-                .replace("á", "a")
-                .replace("à", "a")
-                .replace("é", "e")
-                .replace("ú", "u")
-                .replace("\"", "'");
+        lineName = CardNameUtil.normalizeCardName(lineName);
         if (lineName.contains("//") && !lineName.contains(" // ")) {
             lineName = lineName.replace("//", " // ");
         }
