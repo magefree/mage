@@ -27,8 +27,8 @@ public final class RuinationRioter extends CardImpl {
 
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.BERSERKER);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
         // When Ruination Rioter dies, you may have it deal damage to any target equal to the number of land cards in your graveyard.
         Ability ability = new DiesTriggeredAbility(
