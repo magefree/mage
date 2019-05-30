@@ -76,6 +76,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Force of Virtue", 10, Rarity.RARE, mage.cards.f.ForceOfVirtue.class));
         cards.add(new SetCardInfo("Forgotten Cave", 239, Rarity.UNCOMMON, mage.cards.f.ForgottenCave.class));
         cards.add(new SetCardInfo("Frostwalk Bastion", 240, Rarity.UNCOMMON, mage.cards.f.FrostwalkBastion.class));
+        cards.add(new SetCardInfo("Frostwalla", 165, Rarity.COMMON, mage.cards.f.Frostwalla.class));
         cards.add(new SetCardInfo("Future Sight", 53, Rarity.RARE, mage.cards.f.FutureSight.class));
         cards.add(new SetCardInfo("Generous Gift", 11, Rarity.UNCOMMON, mage.cards.g.GenerousGift.class));
         cards.add(new SetCardInfo("Genesis", 166, Rarity.RARE, mage.cards.g.Genesis.class));
