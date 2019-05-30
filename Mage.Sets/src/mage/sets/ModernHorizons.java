@@ -115,6 +115,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Lonely Sandbar", 242, Rarity.UNCOMMON, mage.cards.l.LonelySandbar.class));
         cards.add(new SetCardInfo("Magmatic Sinkhole", 135, Rarity.COMMON, mage.cards.m.MagmaticSinkhole.class));
         cards.add(new SetCardInfo("Man-o'-War", 55, Rarity.COMMON, mage.cards.m.ManOWar.class));
+        cards.add(new SetCardInfo("Marit Lage's Slumber", 56, Rarity.RARE, mage.cards.m.MaritLagesSlumber.class));
         cards.add(new SetCardInfo("Martyr's Soul", 19, Rarity.COMMON, mage.cards.m.MartyrsSoul.class));
         cards.add(new SetCardInfo("Mind Rake", 96, Rarity.COMMON, mage.cards.m.MindRake.class));
         cards.add(new SetCardInfo("Mirrodin Besieged", 57, Rarity.RARE, mage.cards.m.MirrodinBesieged.class));
