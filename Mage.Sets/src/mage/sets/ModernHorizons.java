@@ -51,6 +51,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Crypt Rats", 84, Rarity.UNCOMMON, mage.cards.c.CryptRats.class));
         cards.add(new SetCardInfo("Dead of Winter", 85, Rarity.RARE, mage.cards.d.DeadOfWinter.class));
         cards.add(new SetCardInfo("Deep Forest Hermit", 161, Rarity.RARE, mage.cards.d.DeepForestHermit.class));
+        cards.add(new SetCardInfo("Defile", 86, Rarity.COMMON, mage.cards.d.Defile.class));
         cards.add(new SetCardInfo("Diabolic Edict", 87, Rarity.COMMON, mage.cards.d.DiabolicEdict.class));
         cards.add(new SetCardInfo("Dismantling Blow", 5, Rarity.UNCOMMON, mage.cards.d.DismantlingBlow.class));
         cards.add(new SetCardInfo("Dregscape Sliver", 88, Rarity.UNCOMMON, mage.cards.d.DregscapeSliver.class));
