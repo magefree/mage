@@ -62,6 +62,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Etchings of the Chosen", 198, Rarity.UNCOMMON, mage.cards.e.EtchingsOfTheChosen.class));
         cards.add(new SetCardInfo("Exclude", 48, Rarity.UNCOMMON, mage.cards.e.Exclude.class));
         cards.add(new SetCardInfo("Fact or Fiction", 50, Rarity.UNCOMMON, mage.cards.f.FactOrFiction.class));
+        cards.add(new SetCardInfo("Faerie Seer", 51, Rarity.COMMON, mage.cards.f.FaerieSeer.class));
         cards.add(new SetCardInfo("Fallen Shinobi", 199, Rarity.RARE, mage.cards.f.FallenShinobi.class));
         cards.add(new SetCardInfo("Farmstead Gleaner", 222, Rarity.UNCOMMON, mage.cards.f.FarmsteadGleaner.class));
         cards.add(new SetCardInfo("Feaster of Fools", 90, Rarity.UNCOMMON, mage.cards.f.FeasterOfFools.class));
