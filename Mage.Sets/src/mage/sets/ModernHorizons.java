@@ -167,6 +167,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Talisman of Curiosity", 232, Rarity.UNCOMMON, mage.cards.t.TalismanOfCuriosity.class));
         cards.add(new SetCardInfo("Talisman of Hierarchy", 233, Rarity.UNCOMMON, mage.cards.t.TalismanOfHierarchy.class));
         cards.add(new SetCardInfo("Talisman of Resilience", 234, Rarity.UNCOMMON, mage.cards.t.TalismanOfResilience.class));
+        cards.add(new SetCardInfo("Tectonic Reformation", 149, Rarity.RARE, mage.cards.t.TectonicReformation.class));
         cards.add(new SetCardInfo("Tempered Sliver", 183, Rarity.UNCOMMON, mage.cards.t.TemperedSliver.class));
         cards.add(new SetCardInfo("The First Sliver", 200, Rarity.MYTHIC, mage.cards.t.TheFirstSliver.class));
         cards.add(new SetCardInfo("Throes of Chaos", 150, Rarity.UNCOMMON, mage.cards.t.ThroesOfChaos.class));
