@@ -60,6 +60,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Endling", 89, Rarity.RARE, mage.cards.e.Endling.class));
         cards.add(new SetCardInfo("Enduring Sliver", 6, Rarity.COMMON, mage.cards.e.EnduringSliver.class));
         cards.add(new SetCardInfo("Etchings of the Chosen", 198, Rarity.UNCOMMON, mage.cards.e.EtchingsOfTheChosen.class));
+        cards.add(new SetCardInfo("Everdream", 47, Rarity.UNCOMMON, mage.cards.e.Everdream.class));
         cards.add(new SetCardInfo("Exclude", 48, Rarity.UNCOMMON, mage.cards.e.Exclude.class));
         cards.add(new SetCardInfo("Fact or Fiction", 50, Rarity.UNCOMMON, mage.cards.f.FactOrFiction.class));
         cards.add(new SetCardInfo("Faerie Seer", 51, Rarity.COMMON, mage.cards.f.FaerieSeer.class));
