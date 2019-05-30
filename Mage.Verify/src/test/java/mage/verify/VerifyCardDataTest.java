@@ -69,6 +69,7 @@ public class VerifyCardDataTest {
         skipListAddName("PT", "UST", "Garbage Elemental");
         skipListAddName("PT", "UST", "Infinity Elemental");
         skipListAddName("PT", "UNH", "Old Fogey");
+        skipListAddName("PT", "MH1", "Ruination Rioter");
 
         // color
         skipListCreate("COLOR");
