@@ -110,6 +110,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Lightning Skelemental", 208, Rarity.RARE, mage.cards.l.LightningSkelemental.class));
         cards.add(new SetCardInfo("Llanowar Tribe", 170, Rarity.UNCOMMON, mage.cards.l.LlanowarTribe.class));
         cards.add(new SetCardInfo("Lonely Sandbar", 242, Rarity.UNCOMMON, mage.cards.l.LonelySandbar.class));
+        cards.add(new SetCardInfo("Magmatic Sinkhole", 135, Rarity.COMMON, mage.cards.m.MagmaticSinkhole.class));
         cards.add(new SetCardInfo("Man-o'-War", 55, Rarity.COMMON, mage.cards.m.ManOWar.class));
         cards.add(new SetCardInfo("Martyr's Soul", 19, Rarity.COMMON, mage.cards.m.MartyrsSoul.class));
         cards.add(new SetCardInfo("Mist-Syndicate Naga", 58, Rarity.RARE, mage.cards.m.MistSyndicateNaga.class));
