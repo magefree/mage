@@ -49,6 +49,12 @@ class CollectedConjuringEffect extends OneShotEffect {
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
     }
 
+    private static final FilterCard filter2 = filter.copy();
+
+    static {
+        filter2.setMessage("sorcery card with converted mana cost 3 or less");
+    }
+
     CollectedConjuringEffect() {
         super(Outcome.Benefit);
         this.staticText = "Exile the top six cards of your library. " +
@@ -80,7 +86,7 @@ class CollectedConjuringEffect extends OneShotEffect {
             if (!controller.chooseUse(Outcome.PlayForFree, "Cast a card exiled with " + sourceObject.getLogName() + " without paying its mana cost?", source, game)) {
                 break;
             }
-            TargetCard targetCard = new TargetCard(1, Zone.EXILED, new FilterCard("nonland card to cast for free"));
+            TargetCard targetCard = new TargetCard(1, Zone.EXILED, filter2);
             if (!controller.choose(Outcome.PlayForFree, cards, targetCard, game)) {
                 continue;
             }
