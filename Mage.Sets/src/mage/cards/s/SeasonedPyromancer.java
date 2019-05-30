@@ -83,14 +83,13 @@ class SeasonedPyromancerEffect extends OneShotEffect {
             return false;
         }
         TargetCard target = new TargetCardInHand(2, StaticFilters.FILTER_CARD);
-        if (!player.choose(outcome, player.getHand(), target, game)) {
-            return false;
-        }
-        Cards cards = new CardsImpl(target.getTargets());
         int nonlands = 0;
-        for (Card card : cards.getCards(game)) {
-            if (player.discard(card, source, game) && !card.isLand()) {
-                nonlands++;
+        if (player.choose(outcome, player.getHand(), target, game)) {
+            Cards cards = new CardsImpl(target.getTargets());
+            for (Card card : cards.getCards(game)) {
+                if (player.discard(card, source, game) && !card.isLand()) {
+                    nonlands++;
+                }
             }
         }
         player.drawCards(2, game);
