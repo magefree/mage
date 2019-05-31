@@ -128,6 +128,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Nature's Chant", 210, Rarity.COMMON, mage.cards.n.NaturesChant.class));
         cards.add(new SetCardInfo("Nether Spirit", 98, Rarity.RARE, mage.cards.n.NetherSpirit.class));
         cards.add(new SetCardInfo("Nimble Mongoose", 174, Rarity.COMMON, mage.cards.n.NimbleMongoose.class));
+        cards.add(new SetCardInfo("Ninja of the New Moon", 99, Rarity.COMMON, mage.cards.n.NinjaOfTheNewMoon.class));
         cards.add(new SetCardInfo("Nurturing Peatland", 243, Rarity.RARE, mage.cards.n.NurturingPeatland.class));
         cards.add(new SetCardInfo("On Thin Ice", 20, Rarity.RARE, mage.cards.o.OnThinIce.class));
         cards.add(new SetCardInfo("Orcish Hellraiser", 136, Rarity.COMMON, mage.cards.o.OrcishHellraiser.class));

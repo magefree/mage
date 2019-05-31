@@ -65,6 +65,7 @@ Mountaincycling|cost|
 Mountainwalk|new|
 Morph|card, cost|
 Myriad|new|
+Ninjutsu|cost|
 Outlast|cost|
 Persist|new|
 Phasing|instance|
