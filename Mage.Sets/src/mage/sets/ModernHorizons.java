@@ -163,6 +163,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Secluded Steppe", 245, Rarity.UNCOMMON, mage.cards.s.SecludedSteppe.class));
         cards.add(new SetCardInfo("Segovian Angel", 25, Rarity.COMMON, mage.cards.s.SegovianAngel.class));
         cards.add(new SetCardInfo("Serra the Benevolent", 26, Rarity.MYTHIC, mage.cards.s.SerraTheBenevolent.class));
+        cards.add(new SetCardInfo("Shelter", 28, Rarity.COMMON, mage.cards.s.Shelter.class));
         cards.add(new SetCardInfo("Shenanigans", 146, Rarity.COMMON, mage.cards.s.Shenanigans.class));
         cards.add(new SetCardInfo("Silent Clearing", 246, Rarity.RARE, mage.cards.s.SilentClearing.class));
         cards.add(new SetCardInfo("Sisay, Weatherlight Captain", 29, Rarity.RARE, mage.cards.s.SisayWeatherlightCaptain.class));
@@ -208,6 +209,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Valiant Changeling", 34, Rarity.UNCOMMON, mage.cards.v.ValiantChangeling.class));
         cards.add(new SetCardInfo("Venomous Changeling", 114, Rarity.COMMON, mage.cards.v.VenomousChangeling.class));
         cards.add(new SetCardInfo("Vesperlark", 35, Rarity.UNCOMMON, mage.cards.v.Vesperlark.class));
+        cards.add(new SetCardInfo("Wall of Blossoms", 190, Rarity.UNCOMMON, mage.cards.w.WallOfBlossoms.class));
         cards.add(new SetCardInfo("Wall of One Thousand Cuts", 36, Rarity.COMMON, mage.cards.w.WallOfOneThousandCuts.class));
         cards.add(new SetCardInfo("Waterlogged Grove", 249, Rarity.RARE, mage.cards.w.WaterloggedGrove.class));
         cards.add(new SetCardInfo("Weather the Storm", 191, Rarity.COMMON, mage.cards.w.WeatherTheStorm.class));
