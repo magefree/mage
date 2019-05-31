@@ -85,6 +85,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Future Sight", 53, Rarity.RARE, mage.cards.f.FutureSight.class));
         cards.add(new SetCardInfo("Generous Gift", 11, Rarity.UNCOMMON, mage.cards.g.GenerousGift.class));
         cards.add(new SetCardInfo("Genesis", 166, Rarity.RARE, mage.cards.g.Genesis.class));
+        cards.add(new SetCardInfo("Geomancer's Gambit", 125, Rarity.COMMON, mage.cards.g.GeomancersGambit.class));
         cards.add(new SetCardInfo("Gilded Light", 12, Rarity.COMMON, mage.cards.g.GildedLight.class));
         cards.add(new SetCardInfo("Giver of Runes", 13, Rarity.RARE, mage.cards.g.GiverOfRunes.class));
         cards.add(new SetCardInfo("Glacial Revelation", 167, Rarity.UNCOMMON, mage.cards.g.GlacialRevelation.class));
