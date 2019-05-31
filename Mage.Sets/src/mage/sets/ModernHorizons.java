@@ -36,6 +36,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Astral Drift", 3, Rarity.RARE, mage.cards.a.AstralDrift.class));
         cards.add(new SetCardInfo("Ayula's Influence", 156, Rarity.RARE, mage.cards.a.AyulasInfluence.class));
         cards.add(new SetCardInfo("Ayula, Queen Among Bears", 155, Rarity.RARE, mage.cards.a.AyulaQueenAmongBears.class));
+        cards.add(new SetCardInfo("Azra Smokeshaper", 79, Rarity.COMMON, mage.cards.a.AzraSmokeshaper.class));
         cards.add(new SetCardInfo("Barren Moor", 236, Rarity.UNCOMMON, mage.cards.b.BarrenMoor.class));
         cards.add(new SetCardInfo("Battle Screech", 4, Rarity.UNCOMMON, mage.cards.b.BattleScreech.class));
         cards.add(new SetCardInfo("Bazaar Trademage", 41, Rarity.RARE, mage.cards.b.BazaarTrademage.class));
