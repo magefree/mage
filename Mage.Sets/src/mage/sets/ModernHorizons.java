@@ -186,6 +186,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Tectonic Reformation", 149, Rarity.RARE, mage.cards.t.TectonicReformation.class));
         cards.add(new SetCardInfo("Tempered Sliver", 183, Rarity.UNCOMMON, mage.cards.t.TemperedSliver.class));
         cards.add(new SetCardInfo("The First Sliver", 200, Rarity.MYTHIC, mage.cards.t.TheFirstSliver.class));
+        cards.add(new SetCardInfo("Thornado", 184, Rarity.COMMON, mage.cards.t.Thornado.class));
         cards.add(new SetCardInfo("Throes of Chaos", 150, Rarity.UNCOMMON, mage.cards.t.ThroesOfChaos.class));
         cards.add(new SetCardInfo("Thundering Djinn", 215, Rarity.UNCOMMON, mage.cards.t.ThunderingDjinn.class));
         cards.add(new SetCardInfo("Tranquil Thicket", 248, Rarity.UNCOMMON, mage.cards.t.TranquilThicket.class));
