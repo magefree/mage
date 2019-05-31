@@ -117,6 +117,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("King of the Pride", 16, Rarity.UNCOMMON, mage.cards.k.KingOfThePride.class));
         cards.add(new SetCardInfo("Knight of Old Benalia", 17, Rarity.COMMON, mage.cards.k.KnightOfOldBenalia.class));
         cards.add(new SetCardInfo("Krosan Tusker", 169, Rarity.COMMON, mage.cards.k.KrosanTusker.class));
+        cards.add(new SetCardInfo("Lancer Sliver", 18, Rarity.COMMON, mage.cards.l.LancerSliver.class));
         cards.add(new SetCardInfo("Lava Dart", 134, Rarity.COMMON, mage.cards.l.LavaDart.class));
         cards.add(new SetCardInfo("Lavabelly Sliver", 207, Rarity.UNCOMMON, mage.cards.l.LavabellySliver.class));
         cards.add(new SetCardInfo("Lesser Masticore", 225, Rarity.UNCOMMON, mage.cards.l.LesserMasticore.class));
