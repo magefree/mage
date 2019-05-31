@@ -151,6 +151,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Rebuild", 66, Rarity.UNCOMMON, mage.cards.r.Rebuild.class));
         cards.add(new SetCardInfo("Reckless Charge", 144, Rarity.COMMON, mage.cards.r.RecklessCharge.class));
         cards.add(new SetCardInfo("Regrowth", 175, Rarity.UNCOMMON, mage.cards.r.Regrowth.class));
+        cards.add(new SetCardInfo("Rotwidow Pack", 212, Rarity.UNCOMMON, mage.cards.r.RotwidowPack.class));
         cards.add(new SetCardInfo("Ruination Rioter", 213, Rarity.UNCOMMON, mage.cards.r.RuinationRioter.class));
         cards.add(new SetCardInfo("Savage Swipe", 178, Rarity.COMMON, mage.cards.s.SavageSwipe.class));
         cards.add(new SetCardInfo("Scale Up", 179, Rarity.UNCOMMON, mage.cards.s.ScaleUp.class));

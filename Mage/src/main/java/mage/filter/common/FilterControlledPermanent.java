@@ -1,13 +1,12 @@
-
-
 package mage.filter.common;
 
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class FilterControlledPermanent extends FilterPermanent {
@@ -17,8 +16,19 @@ public class FilterControlledPermanent extends FilterPermanent {
     }
 
     public FilterControlledPermanent(String name) {
+        this(null, name);
+    }
+
+    public FilterControlledPermanent(SubType subtype) {
+        this(subtype, subtype.toString() + " you control");
+    }
+
+    public FilterControlledPermanent(SubType subtype, String name) {
         super(name);
         this.add(new ControllerPredicate(TargetController.YOU));
+        if (subtype != null) {
+            this.add(new SubtypePredicate(subtype));
+        }
     }
 
     public FilterControlledPermanent(final FilterControlledPermanent filter) {
