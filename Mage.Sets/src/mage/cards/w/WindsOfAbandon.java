@@ -86,7 +86,7 @@ class WindsOfAbandonEffect extends OneShotEffect {
         if (player.searchLibrary(target, source, game)) {
             Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
             if (card != null) {
-                player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
+                player.moveCards(card, Zone.EXILED, source, game, true, false, false, null);
             }
         }
         player.shuffleLibrary(source, game);
