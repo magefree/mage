@@ -77,6 +77,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Fiery Islet", 238, Rarity.RARE, mage.cards.f.FieryIslet.class));
         cards.add(new SetCardInfo("Firebolt", 122, Rarity.UNCOMMON, mage.cards.f.Firebolt.class));
         cards.add(new SetCardInfo("First Sliver's Chosen", 9, Rarity.UNCOMMON, mage.cards.f.FirstSliversChosen.class));
+        cards.add(new SetCardInfo("First-Sphere Gargantua", 91, Rarity.COMMON, mage.cards.f.FirstSphereGargantua.class));
         cards.add(new SetCardInfo("Fists of Flame", 123, Rarity.COMMON, mage.cards.f.FistsOfFlame.class));
         cards.add(new SetCardInfo("Flusterstorm", 255, Rarity.RARE, mage.cards.f.Flusterstorm.class));
         cards.add(new SetCardInfo("Force of Despair", 92, Rarity.RARE, mage.cards.f.ForceOfDespair.class));
