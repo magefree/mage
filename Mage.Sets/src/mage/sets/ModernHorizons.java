@@ -47,6 +47,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Changeling Outcast", 82, Rarity.COMMON, mage.cards.c.ChangelingOutcast.class));
         cards.add(new SetCardInfo("Chillerpillar", 43, Rarity.COMMON, mage.cards.c.Chillerpillar.class));
         cards.add(new SetCardInfo("Choking Tethers", 44, Rarity.COMMON, mage.cards.c.ChokingTethers.class));
+        cards.add(new SetCardInfo("Cleaving Sliver", 121, Rarity.COMMON, mage.cards.c.CleavingSliver.class));
         cards.add(new SetCardInfo("Cloudshredder Sliver", 195, Rarity.RARE, mage.cards.c.CloudshredderSliver.class));
         cards.add(new SetCardInfo("Collected Conjuring", 196, Rarity.RARE, mage.cards.c.CollectedConjuring.class));
         cards.add(new SetCardInfo("Collector Ouphe", 158, Rarity.RARE, mage.cards.c.CollectorOuphe.class));
