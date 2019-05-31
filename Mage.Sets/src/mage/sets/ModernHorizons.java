@@ -43,6 +43,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Bladeback Sliver", 119, Rarity.COMMON, mage.cards.b.BladebackSliver.class));
         cards.add(new SetCardInfo("Cabal Therapist", 80, Rarity.RARE, mage.cards.c.CabalTherapist.class));
         cards.add(new SetCardInfo("Carrion Feeder", 81, Rarity.UNCOMMON, mage.cards.c.CarrionFeeder.class));
+        cards.add(new SetCardInfo("Cave of Temptation", 237, Rarity.COMMON, mage.cards.c.CaveOfTemptation.class));
         cards.add(new SetCardInfo("Changeling Outcast", 82, Rarity.COMMON, mage.cards.c.ChangelingOutcast.class));
         cards.add(new SetCardInfo("Chillerpillar", 43, Rarity.COMMON, mage.cards.c.Chillerpillar.class));
         cards.add(new SetCardInfo("Choking Tethers", 44, Rarity.COMMON, mage.cards.c.ChokingTethers.class));
