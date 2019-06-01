@@ -189,6 +189,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Secluded Steppe", 245, Rarity.UNCOMMON, mage.cards.s.SecludedSteppe.class));
         cards.add(new SetCardInfo("Segovian Angel", 25, Rarity.COMMON, mage.cards.s.SegovianAngel.class));
         cards.add(new SetCardInfo("Serra the Benevolent", 26, Rarity.MYTHIC, mage.cards.s.SerraTheBenevolent.class));
+        cards.add(new SetCardInfo("Shatter Assumptions", 106, Rarity.UNCOMMON, mage.cards.s.ShatterAssumptions.class));
         cards.add(new SetCardInfo("Shelter", 28, Rarity.COMMON, mage.cards.s.Shelter.class));
         cards.add(new SetCardInfo("Shenanigans", 146, Rarity.COMMON, mage.cards.s.Shenanigans.class));
         cards.add(new SetCardInfo("Silent Clearing", 246, Rarity.RARE, mage.cards.s.SilentClearing.class));
