@@ -131,6 +131,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Mind Rake", 96, Rarity.COMMON, mage.cards.m.MindRake.class));
         cards.add(new SetCardInfo("Mirrodin Besieged", 57, Rarity.RARE, mage.cards.m.MirrodinBesieged.class));
         cards.add(new SetCardInfo("Mist-Syndicate Naga", 58, Rarity.RARE, mage.cards.m.MistSyndicateNaga.class));
+        cards.add(new SetCardInfo("Mob", 97, Rarity.COMMON, mage.cards.m.Mob.class));
         cards.add(new SetCardInfo("Moonblade Shinobi", 59, Rarity.COMMON, mage.cards.m.MoonbladeShinobi.class));
         cards.add(new SetCardInfo("Morophon, the Boundless", 1, Rarity.MYTHIC, mage.cards.m.MorophonTheBoundless.class));
         cards.add(new SetCardInfo("Mother Bear", 171, Rarity.COMMON, mage.cards.m.MotherBear.class));
