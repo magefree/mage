@@ -243,6 +243,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Vengeful Devil", 152, Rarity.UNCOMMON, mage.cards.v.VengefulDevil.class));
         cards.add(new SetCardInfo("Venomous Changeling", 114, Rarity.COMMON, mage.cards.v.VenomousChangeling.class));
         cards.add(new SetCardInfo("Vesperlark", 35, Rarity.UNCOMMON, mage.cards.v.Vesperlark.class));
+        cards.add(new SetCardInfo("Viashino Sandsprinter", 153, Rarity.COMMON, mage.cards.v.ViashinoSandsprinter.class));
         cards.add(new SetCardInfo("Wall of Blossoms", 190, Rarity.UNCOMMON, mage.cards.w.WallOfBlossoms.class));
         cards.add(new SetCardInfo("Wall of One Thousand Cuts", 36, Rarity.COMMON, mage.cards.w.WallOfOneThousandCuts.class));
         cards.add(new SetCardInfo("Waterlogged Grove", 249, Rarity.RARE, mage.cards.w.WaterloggedGrove.class));
