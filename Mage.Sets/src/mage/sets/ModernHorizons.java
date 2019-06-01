@@ -240,6 +240,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Urza's Rage", 151, Rarity.UNCOMMON, mage.cards.u.UrzasRage.class));
         cards.add(new SetCardInfo("Urza, Lord High Artificer", 75, Rarity.MYTHIC, mage.cards.u.UrzaLordHighArtificer.class));
         cards.add(new SetCardInfo("Valiant Changeling", 34, Rarity.UNCOMMON, mage.cards.v.ValiantChangeling.class));
+        cards.add(new SetCardInfo("Vengeful Devil", 152, Rarity.UNCOMMON, mage.cards.v.VengefulDevil.class));
         cards.add(new SetCardInfo("Venomous Changeling", 114, Rarity.COMMON, mage.cards.v.VenomousChangeling.class));
         cards.add(new SetCardInfo("Vesperlark", 35, Rarity.UNCOMMON, mage.cards.v.Vesperlark.class));
         cards.add(new SetCardInfo("Wall of Blossoms", 190, Rarity.UNCOMMON, mage.cards.w.WallOfBlossoms.class));
