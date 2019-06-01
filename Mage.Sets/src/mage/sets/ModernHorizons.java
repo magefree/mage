@@ -53,6 +53,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Cloudshredder Sliver", 195, Rarity.RARE, mage.cards.c.CloudshredderSliver.class));
         cards.add(new SetCardInfo("Collected Conjuring", 196, Rarity.RARE, mage.cards.c.CollectedConjuring.class));
         cards.add(new SetCardInfo("Collector Ouphe", 158, Rarity.RARE, mage.cards.c.CollectorOuphe.class));
+        cards.add(new SetCardInfo("Conifer Wurm", 159, Rarity.UNCOMMON, mage.cards.c.ConiferWurm.class));
         cards.add(new SetCardInfo("Cordial Vampire", 83, Rarity.RARE, mage.cards.c.CordialVampire.class));
         cards.add(new SetCardInfo("Crashing Footfalls", 160, Rarity.RARE, mage.cards.c.CrashingFootfalls.class));
         cards.add(new SetCardInfo("Crypt Rats", 84, Rarity.UNCOMMON, mage.cards.c.CryptRats.class));
