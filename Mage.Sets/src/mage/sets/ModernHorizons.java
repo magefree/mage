@@ -196,6 +196,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Spore Frog", 180, Rarity.COMMON, mage.cards.s.SporeFrog.class));
         cards.add(new SetCardInfo("Springbloom Druid", 181, Rarity.COMMON, mage.cards.s.SpringbloomDruid.class));
         cards.add(new SetCardInfo("Squirrel Nest", 182, Rarity.UNCOMMON, mage.cards.s.SquirrelNest.class));
+        cards.add(new SetCardInfo("Stirring Address", 32, Rarity.COMMON, mage.cards.s.StirringAddress.class));
         cards.add(new SetCardInfo("Stream of Thought", 71, Rarity.COMMON, mage.cards.s.StreamOfThought.class));
         cards.add(new SetCardInfo("String of Disappearances", 72, Rarity.COMMON, mage.cards.s.StringOfDisappearances.class));
         cards.add(new SetCardInfo("Sunbaked Canyon", 247, Rarity.RARE, mage.cards.s.SunbakedCanyon.class));
