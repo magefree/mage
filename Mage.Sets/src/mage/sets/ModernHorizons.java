@@ -118,6 +118,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Ice-Fang Coatl", 203, Rarity.RARE, mage.cards.i.IceFangCoatl.class));
         cards.add(new SetCardInfo("Iceberg Cancrix", 54, Rarity.COMMON, mage.cards.i.IcebergCancrix.class));
         cards.add(new SetCardInfo("Icehide Golem", 224, Rarity.UNCOMMON, mage.cards.i.IcehideGolem.class));
+        cards.add(new SetCardInfo("Igneous Elemental", 133, Rarity.COMMON, mage.cards.i.IgneousElemental.class));
         cards.add(new SetCardInfo("Impostor of the Sixth Pride", 14, Rarity.COMMON, mage.cards.i.ImpostorOfTheSixthPride.class));
         cards.add(new SetCardInfo("Ingenious Infiltrator", 204, Rarity.UNCOMMON, mage.cards.i.IngeniousInfiltrator.class));
         cards.add(new SetCardInfo("Irregular Cohort", 15, Rarity.COMMON, mage.cards.i.IrregularCohort.class));
