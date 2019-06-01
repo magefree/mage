@@ -188,6 +188,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Snow-Covered Mountain", 253, Rarity.LAND, mage.cards.s.SnowCoveredMountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Snow-Covered Plains", 250, Rarity.LAND, mage.cards.s.SnowCoveredPlains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Snow-Covered Swamp", 252, Rarity.LAND, mage.cards.s.SnowCoveredSwamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Soul-Strike Technique", 30, Rarity.COMMON, mage.cards.s.SoulStrikeTechnique.class));
         cards.add(new SetCardInfo("Spell Snuff", 70, Rarity.COMMON, mage.cards.s.SpellSnuff.class));
         cards.add(new SetCardInfo("Splicer's Skill", 31, Rarity.UNCOMMON, mage.cards.s.SplicersSkill.class));
         cards.add(new SetCardInfo("Spore Frog", 180, Rarity.COMMON, mage.cards.s.SporeFrog.class));
