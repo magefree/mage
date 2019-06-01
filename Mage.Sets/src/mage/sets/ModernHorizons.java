@@ -105,6 +105,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin Oriflamme", 130, Rarity.UNCOMMON, mage.cards.g.GoblinOriflamme.class));
         cards.add(new SetCardInfo("Goblin War Party", 131, Rarity.COMMON, mage.cards.g.GoblinWarParty.class));
         cards.add(new SetCardInfo("Good-Fortune Unicorn", 201, Rarity.UNCOMMON, mage.cards.g.GoodFortuneUnicorn.class));
+        cards.add(new SetCardInfo("Graveshifter", 94, Rarity.UNCOMMON, mage.cards.g.Graveshifter.class));
         cards.add(new SetCardInfo("Hall of Heliod's Generosity", 241, Rarity.RARE, mage.cards.h.HallOfHeliodsGenerosity.class));
         cards.add(new SetCardInfo("Headless Specter", 95, Rarity.COMMON, mage.cards.h.HeadlessSpecter.class));
         cards.add(new SetCardInfo("Hexdrinker", 168, Rarity.MYTHIC, mage.cards.h.Hexdrinker.class));
