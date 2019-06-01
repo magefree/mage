@@ -166,6 +166,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Prohibit", 64, Rarity.COMMON, mage.cards.p.Prohibit.class));
         cards.add(new SetCardInfo("Putrid Goblin", 101, Rarity.COMMON, mage.cards.p.PutridGoblin.class));
         cards.add(new SetCardInfo("Pyrophobia", 141, Rarity.COMMON, mage.cards.p.Pyrophobia.class));
+        cards.add(new SetCardInfo("Quakefoot Cyclops", 142, Rarity.COMMON, mage.cards.q.QuakefootCyclops.class));
         cards.add(new SetCardInfo("Rain of Revelation", 65, Rarity.COMMON, mage.cards.r.RainOfRevelation.class));
         cards.add(new SetCardInfo("Ranger-Captain of Eos", 21, Rarity.MYTHIC, mage.cards.r.RangerCaptainOfEos.class));
         cards.add(new SetCardInfo("Rank Officer", 102, Rarity.COMMON, mage.cards.r.RankOfficer.class));
