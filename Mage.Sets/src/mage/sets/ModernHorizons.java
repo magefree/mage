@@ -145,6 +145,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Mother Bear", 171, Rarity.COMMON, mage.cards.m.MotherBear.class));
         cards.add(new SetCardInfo("Mox Tantalite", 226, Rarity.MYTHIC, mage.cards.m.MoxTantalite.class));
         cards.add(new SetCardInfo("Munitions Expert", 209, Rarity.UNCOMMON, mage.cards.m.MunitionsExpert.class));
+        cards.add(new SetCardInfo("Murasa Behemoth", 172, Rarity.COMMON, mage.cards.m.MurasaBehemoth.class));
         cards.add(new SetCardInfo("Nantuko Cultivator", 173, Rarity.UNCOMMON, mage.cards.n.NantukoCultivator.class));
         cards.add(new SetCardInfo("Nature's Chant", 210, Rarity.COMMON, mage.cards.n.NaturesChant.class));
         cards.add(new SetCardInfo("Nether Spirit", 98, Rarity.RARE, mage.cards.n.NetherSpirit.class));
