@@ -259,6 +259,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Weather the Storm", 191, Rarity.COMMON, mage.cards.w.WeatherTheStorm.class));
         cards.add(new SetCardInfo("Webweaver Changeling", 192, Rarity.UNCOMMON, mage.cards.w.WebweaverChangeling.class));
         cards.add(new SetCardInfo("Windcaller Aven", 77, Rarity.COMMON, mage.cards.w.WindcallerAven.class));
+        cards.add(new SetCardInfo("Winding Way", 193, Rarity.COMMON, mage.cards.w.WindingWay.class));
         cards.add(new SetCardInfo("Winds of Abandon", 37, Rarity.RARE, mage.cards.w.WindsOfAbandon.class));
         cards.add(new SetCardInfo("Wing Shards", 38, Rarity.UNCOMMON, mage.cards.w.WingShards.class));
         cards.add(new SetCardInfo("Winter's Rest", 78, Rarity.COMMON, mage.cards.w.WintersRest.class));
