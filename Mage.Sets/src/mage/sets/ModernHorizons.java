@@ -167,6 +167,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Rhox Veteran", 24, Rarity.COMMON, mage.cards.r.RhoxVeteran.class));
         cards.add(new SetCardInfo("Rotwidow Pack", 212, Rarity.UNCOMMON, mage.cards.r.RotwidowPack.class));
         cards.add(new SetCardInfo("Ruination Rioter", 213, Rarity.UNCOMMON, mage.cards.r.RuinationRioter.class));
+        cards.add(new SetCardInfo("Sadistic Obsession", 105, Rarity.UNCOMMON, mage.cards.s.SadisticObsession.class));
         cards.add(new SetCardInfo("Savage Swipe", 178, Rarity.COMMON, mage.cards.s.SavageSwipe.class));
         cards.add(new SetCardInfo("Scale Up", 179, Rarity.UNCOMMON, mage.cards.s.ScaleUp.class));
         cards.add(new SetCardInfo("Scour All Possibilities", 67, Rarity.COMMON, mage.cards.s.ScourAllPossibilities.class));
