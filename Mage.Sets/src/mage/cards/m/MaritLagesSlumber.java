@@ -49,7 +49,8 @@ public final class MaritLagesSlumber extends CardImpl {
         // At the beginning of your upkeep, if you control ten or more snow permanents, sacrifice Marit Lage's Slumber. If you do, create Marit Lage, a legendary 20/20 black Avatar creature token with flying and indestructible.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(
-                        new CreateTokenEffect(new MaritLageToken()), new SacrificeSourceCost()
+                        new CreateTokenEffect(new MaritLageToken()),
+                        new SacrificeSourceCost(), "", false
                 ), TargetController.YOU, false), condition, "At the beginning of your upkeep, " +
                 "if you control ten or more snow permanents, sacrifice {this}. If you do, create Marit Lage, " +
                 "a legendary 20/20 black Avatar creature token with flying and indestructible."
