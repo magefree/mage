@@ -40,7 +40,7 @@ public final class WrennAndSix extends CardImpl {
 
         // +1: Return up to one target land card from your graveyard to your hand.
         Ability ability = new LoyaltyAbility(new ReturnFromGraveyardToHandTargetEffect(), 1);
-        ability.addTarget(new TargetCardInYourGraveyard(filter));
+        ability.addTarget(new TargetCardInYourGraveyard(0, 1, filter));
         this.addAbility(ability);
 
         // -1: Wrenn and Six deals 1 damage to any target.
