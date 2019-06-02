@@ -29,6 +29,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Abominable Treefolk", 194, Rarity.UNCOMMON, mage.cards.a.AbominableTreefolk.class));
         cards.add(new SetCardInfo("Alpine Guide", 117, Rarity.UNCOMMON, mage.cards.a.AlpineGuide.class));
         cards.add(new SetCardInfo("Altar of Dementia", 218, Rarity.RARE, mage.cards.a.AltarOfDementia.class));
+        cards.add(new SetCardInfo("Amorphous Axe", 219, Rarity.COMMON, mage.cards.a.AmorphousAxe.class));
         cards.add(new SetCardInfo("Answered Prayers", 2, Rarity.COMMON, mage.cards.a.AnsweredPrayers.class));
         cards.add(new SetCardInfo("Archmage's Charm", 40, Rarity.RARE, mage.cards.a.ArchmagesCharm.class));
         cards.add(new SetCardInfo("Arcum's Astrolabe", 220, Rarity.COMMON, mage.cards.a.ArcumsAstrolabe.class));
