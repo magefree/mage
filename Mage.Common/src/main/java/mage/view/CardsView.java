@@ -1,11 +1,5 @@
-
 package mage.view;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
@@ -20,8 +14,9 @@ import mage.game.permanent.PermanentToken;
 import mage.target.targetpointer.TargetPointer;
 import mage.util.GameLog;
 
+import java.util.*;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class CardsView extends LinkedHashMap<UUID, CardView> {
@@ -91,11 +86,11 @@ public class CardsView extends LinkedHashMap<UUID, CardView> {
 //                            throw new IllegalArgumentException("Source card for emblem not found.");
 //                        }
                         abilityView = new AbilityView(ability, sourceObject.getName(), new CardView(new EmblemView((Emblem) sourceObject)));
-                        abilityView.setName(((Emblem) sourceObject).getName());
+                        abilityView.setName(sourceObject.getName());
                         // abilityView.setExpansionSetCode(sourceCard.getExpansionSetCode());
                     } else if (sourceObject instanceof Plane) {
                         abilityView = new AbilityView(ability, sourceObject.getName(), new CardView(new PlaneView((Plane) sourceObject)));
-                        abilityView.setName(((Plane) sourceObject).getName());
+                        abilityView.setName(sourceObject.getName());
                     }
                     break;
             }
@@ -131,7 +126,10 @@ public class CardsView extends LinkedHashMap<UUID, CardView> {
                                 if ((mageObject instanceof Card) && ((Card) mageObject).isFaceDown(game)) {
                                     continue;
                                 }
-                                names.add(GameLog.getColoredObjectIdNameForTooltip(mageObject));
+                                String newName = GameLog.getColoredObjectIdNameForTooltip(mageObject);
+                                if (!names.contains(newName)) {
+                                    names.add(newName);
+                                }
                             }
                         }
                         if (!names.isEmpty()) {
