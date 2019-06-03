@@ -13,7 +13,8 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 
 import java.util.UUID;
@@ -23,7 +24,7 @@ import java.util.UUID;
  */
 public final class MartyrsSoul extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent();
+    private static final FilterPermanent filter = new FilterControlledLandPermanent();
 
     static {
         filter.add(TappedPredicate.instance);
