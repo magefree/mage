@@ -220,6 +220,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Soulherder", 214, Rarity.UNCOMMON, mage.cards.s.Soulherder.class));
         cards.add(new SetCardInfo("Spell Snuff", 70, Rarity.COMMON, mage.cards.s.SpellSnuff.class));
         cards.add(new SetCardInfo("Spinehorn Minotaur", 147, Rarity.COMMON, mage.cards.s.SpinehornMinotaur.class));
+        cards.add(new SetCardInfo("Spiteful Sliver", 148, Rarity.RARE, mage.cards.s.SpitefulSliver.class));
         cards.add(new SetCardInfo("Splicer's Skill", 31, Rarity.UNCOMMON, mage.cards.s.SplicersSkill.class));
         cards.add(new SetCardInfo("Spore Frog", 180, Rarity.COMMON, mage.cards.s.SporeFrog.class));
         cards.add(new SetCardInfo("Springbloom Druid", 181, Rarity.COMMON, mage.cards.s.SpringbloomDruid.class));
