@@ -207,6 +207,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Shelter", 28, Rarity.COMMON, mage.cards.s.Shelter.class));
         cards.add(new SetCardInfo("Shenanigans", 146, Rarity.COMMON, mage.cards.s.Shenanigans.class));
         cards.add(new SetCardInfo("Silent Clearing", 246, Rarity.RARE, mage.cards.s.SilentClearing.class));
+        cards.add(new SetCardInfo("Silumgar Scavenger", 107, Rarity.COMMON, mage.cards.s.SilumgarScavenger.class));
         cards.add(new SetCardInfo("Sisay, Weatherlight Captain", 29, Rarity.RARE, mage.cards.s.SisayWeatherlightCaptain.class));
         cards.add(new SetCardInfo("Sling-Gang Lieutenant", 108, Rarity.UNCOMMON, mage.cards.s.SlingGangLieutenant.class));
         cards.add(new SetCardInfo("Smiting Helix", 109, Rarity.UNCOMMON, mage.cards.s.SmitingHelix.class));
