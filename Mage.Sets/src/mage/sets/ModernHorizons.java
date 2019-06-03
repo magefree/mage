@@ -185,6 +185,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Reckless Charge", 144, Rarity.COMMON, mage.cards.r.RecklessCharge.class));
         cards.add(new SetCardInfo("Recruit the Worthy", 22, Rarity.COMMON, mage.cards.r.RecruitTheWorthy.class));
         cards.add(new SetCardInfo("Regrowth", 175, Rarity.UNCOMMON, mage.cards.r.Regrowth.class));
+        cards.add(new SetCardInfo("Reprobation", 23, Rarity.COMMON, mage.cards.r.Reprobation.class));
         cards.add(new SetCardInfo("Return from Extinction", 104, Rarity.COMMON, mage.cards.r.ReturnFromExtinction.class));
         cards.add(new SetCardInfo("Rhox Veteran", 24, Rarity.COMMON, mage.cards.r.RhoxVeteran.class));
         cards.add(new SetCardInfo("Rime Tender", 176, Rarity.COMMON, mage.cards.r.RimeTender.class));
