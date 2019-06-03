@@ -29,7 +29,7 @@ public final class DeadOfWinter extends CardImpl {
         filter2.add(new SupertypePredicate(SuperType.SNOW));
     }
 
-    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter, -1);
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter2, -1);
 
     public DeadOfWinter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
