@@ -78,6 +78,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Excavating Anurid", 163, Rarity.COMMON, mage.cards.e.ExcavatingAnurid.class));
         cards.add(new SetCardInfo("Exclude", 48, Rarity.UNCOMMON, mage.cards.e.Exclude.class));
         cards.add(new SetCardInfo("Eyekite", 49, Rarity.COMMON, mage.cards.e.Eyekite.class));
+        cards.add(new SetCardInfo("Face of Divinity", 8, Rarity.UNCOMMON, mage.cards.f.FaceOfDivinity.class));
         cards.add(new SetCardInfo("Fact or Fiction", 50, Rarity.UNCOMMON, mage.cards.f.FactOrFiction.class));
         cards.add(new SetCardInfo("Faerie Seer", 51, Rarity.COMMON, mage.cards.f.FaerieSeer.class));
         cards.add(new SetCardInfo("Fallen Shinobi", 199, Rarity.RARE, mage.cards.f.FallenShinobi.class));
