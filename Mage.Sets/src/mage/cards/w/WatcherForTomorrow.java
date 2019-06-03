@@ -72,7 +72,7 @@ class WatcherForTomorrowEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        ExileZone zone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
+        ExileZone zone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source.getSourceId(), true));
         if (zone == null) {
             return false;
         }
