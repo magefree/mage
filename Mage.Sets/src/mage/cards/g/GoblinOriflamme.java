@@ -20,7 +20,7 @@ public final class GoblinOriflamme extends CardImpl {
 
         // Attacking creatures you control get +1/+0.
         this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(
-                1, 0, Duration.EndOfTurn,
+                1, 0, Duration.WhileOnBattlefield,
                 StaticFilters.FILTER_ATTACKING_CREATURES
         )));
     }
