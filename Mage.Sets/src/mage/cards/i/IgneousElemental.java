@@ -31,7 +31,7 @@ public final class IgneousElemental extends CardImpl {
 
         // This spell costs {2} less to cast if there is a land card in your graveyard.
         Ability ability = new SimpleStaticAbility(Zone.STACK, new SpellCostReductionSourceEffect(
-                1, new CardsInControllerGraveCondition(1, StaticFilters.FILTER_CARD_LAND)
+                2, new CardsInControllerGraveCondition(1, StaticFilters.FILTER_CARD_LAND)
         ).setText("This spell costs {2} less to cast if there is a land card in your graveyard."));
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
