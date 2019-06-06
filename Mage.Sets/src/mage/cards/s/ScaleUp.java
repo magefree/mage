@@ -31,11 +31,11 @@ public final class ScaleUp extends CardImpl {
         this.getSpellAbility().addEffect(new BecomesCreatureTargetEffect(
                 new CreatureToken(6, 4, "green Wurm with base power and toughness 6/4")
                         .withColor("G").withSubType(SubType.WURM),
-                false, false, Duration.EndOfTurn
+                true, false, Duration.EndOfTurn
         ).setText("Until end of turn, target creature you control " +
                 "becomes a green Wurm with base power and toughness 6/4."));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-
+        
         // Overload {4}{G}{G}
         this.addAbility(new OverloadAbility(this, new BecomesCreatureAllEffect(
                 new CreatureToken(6, 4, "green Wurm with base power and toughness 6/4")
