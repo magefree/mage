@@ -37,6 +37,10 @@ public class AddLandDialog extends MageDialog {
         this.setModal(true);
     }
 
+    private boolean setHaveSnowLands(ExpansionInfo exp) {
+        return CardRepository.instance.haveSnowLands(exp.getCode());
+    }
+
     public void showDialog(Deck deck, DeckEditorMode mode) {
         this.deck = deck;
         SortedSet<String> landSetNames = new TreeSet<>();
@@ -45,7 +49,7 @@ public class AddLandDialog extends MageDialog {
             // decide from which sets basic lands are taken from
             for (String setCode : deck.getExpansionSetCodes()) {
                 ExpansionInfo expansionInfo = ExpansionRepository.instance.getSetByCode(setCode);
-                if (expansionInfo != null && expansionInfo.hasBasicLands()) {
+                if (expansionInfo != null && expansionInfo.hasBasicLands() && !setHaveSnowLands(expansionInfo)) {
                     defaultSetName = expansionInfo.getName();
                     break;
                 }
@@ -58,7 +62,7 @@ public class AddLandDialog extends MageDialog {
                     if (expansionInfo != null) {
                         List<ExpansionInfo> blockSets = ExpansionRepository.instance.getSetsFromBlock(expansionInfo.getBlockName());
                         for (ExpansionInfo blockSet : blockSets) {
-                            if (blockSet.hasBasicLands()) {
+                            if (blockSet.hasBasicLands() && !setHaveSnowLands(expansionInfo)) {
                                 defaultSetName = expansionInfo.getName();
                                 break;
                             }
@@ -70,6 +74,10 @@ public class AddLandDialog extends MageDialog {
         // if still no set with lands found, add list of all available
         List<ExpansionInfo> basicLandSets = ExpansionRepository.instance.getSetsWithBasicLandsByReleaseDate();
         for (ExpansionInfo expansionInfo : basicLandSets) {
+            // snow lands only in free mode
+            if (mode != DeckEditorMode.FREE_BUILDING && setHaveSnowLands(expansionInfo)) {
+                continue;
+            }
             landSetNames.add(expansionInfo.getName());
         }
         if (landSetNames.isEmpty()) {

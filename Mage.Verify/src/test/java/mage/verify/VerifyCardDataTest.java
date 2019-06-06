@@ -358,6 +358,23 @@ public class VerifyCardDataTest {
             // TODO: add test to check num cards (hasBasicLands and numLand > 0)
         }
 
+        // 3. wrong snow land info
+        for (ExpansionSet set : sets) {
+            boolean needSnow = CardRepository.instance.haveSnowLands(set.getCode());
+            boolean haveSnow = false;
+            for (ExpansionSet.SetCardInfo card : set.getSetCardInfo()) {
+                if (card.getName().startsWith("Snow-Covered ")) {
+                    haveSnow = true;
+                    break;
+                }
+            }
+            if (needSnow != haveSnow) {
+                errorsList.add("error, found wrong snow lands info in set " + set.getCode() + ": "
+                        + (haveSnow ? "set have snow card" : "set haven't snow card")
+                        + ", but xmage think that it " + (needSnow ? "have" : "haven't"));
+            }
+        }
+
         // TODO: add test to check num cards for rarity (rarityStats > 0 and numRarity > 0)
         printMessages(warningsList);
         printMessages(errorsList);
@@ -740,7 +757,7 @@ public class VerifyCardDataTest {
 
     private void checkWrongAbilitiesText(Card card, JsonCard ref) {
         // checks missing or wrong text
-        if (!card.getExpansionSetCode().equals("WAR")) {
+        if (!card.getExpansionSetCode().equals("MH1")) {
             return;
         }
 

@@ -176,6 +176,13 @@ public enum CardRepository {
         return names;
     }
 
+    public Boolean haveSnowLands(String setCode) {
+        return setCode.equals("CSP")
+                || setCode.equals("MH1")
+                || setCode.equals("ME2")
+                || setCode.equals("ICE");
+    }
+
     public Set<String> getNonbasicLandNames() {
         Set<String> names = new TreeSet<>();
         try {
