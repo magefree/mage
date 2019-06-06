@@ -256,7 +256,7 @@ public abstract class AbilityImpl implements Ability {
                 VariableManaCost xCosts = new VariableManaCost();
                 // no x events - rules from Unbound Flourishing:
                 // - Spells with additional costs that include X won't be affected by Unbound Flourishing. X must be in the spell's mana cost.
-                xCosts.setAmount(xValue);
+                xCosts.setAmount(xValue, xValue);
                 this.getManaCostsToPay().add(xCosts);
             } else {
                 this.getManaCostsToPay().clear();
@@ -505,7 +505,7 @@ public abstract class AbilityImpl implements Ability {
                 // set the xcosts to paid
                 // no x events - rules from Unbound Flourishing:
                 // - Spells with additional costs that include X won't be affected by Unbound Flourishing. X must be in the spell's mana cost.
-                variableCost.setAmount(xValue); //
+                variableCost.setAmount(xValue, xValue);
                 ((Cost) variableCost).setPaid();
                 String message = controller.getLogName() + " announces a value of " + xValue + " (" + variableCost.getActionText() + ')';
                 announceString.append(message);
@@ -574,7 +574,7 @@ public abstract class AbilityImpl implements Ability {
                 if (!noMana) {
                     xValue = controller.announceXMana(variableManaCost.getMinX(), variableManaCost.getMaxX(), xValueMultiplier,
                             "Announce the value for " + variableManaCost.getText(), game, this);
-                    int amountMana = xValue * variableManaCost.getMultiplier();
+                    int amountMana = xValue * variableManaCost.getXInstancesCount();
                     StringBuilder manaString = threadLocalBuilder.get();
                     if (variableManaCost.getFilter() == null || variableManaCost.getFilter().isGeneric()) {
                         manaString.append('{').append(amountMana).append('}');
@@ -603,7 +603,7 @@ public abstract class AbilityImpl implements Ability {
                         }
                     }
                     manaCostsToPay.add(new ManaCostsImpl(manaString.toString()));
-                    manaCostsToPay.setX(xValue, xValueMultiplier);
+                    manaCostsToPay.setX(xValue * xValueMultiplier, amountMana);
                 }
                 variableManaCost.setPaid();
             }

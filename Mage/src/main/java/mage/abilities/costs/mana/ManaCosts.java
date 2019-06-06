@@ -24,10 +24,10 @@ public interface ManaCosts<T extends ManaCost> extends List<T>, ManaCost {
     int getX();
 
     /**
-     * @param xValue      announced X value
-     * @param xMultiplier special X multiplier to change announced X value without pay increase, see Unbound Flourishing
+     * @param xValue final X value -- announced X * xMultiplier, where xMultiplier can be changed by replace events like Unbound Flourishing)
+     * @param xPay   real number of pay amount (x * xMultiplier * xInstances, where xInstances is number of {X} in pay like 1, 2, 3)
      */
-    void setX(int xValue, int xMultiplier);
+    void setX(int xValue, int xPay);
 
     void load(String mana);
 

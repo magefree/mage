@@ -1,7 +1,5 @@
-
 package mage.abilities.costs;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.mana.ManaAbility;
 import mage.game.Game;
@@ -10,8 +8,9 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public abstract class VariableCostImpl implements Cost, VariableCost {
@@ -29,10 +28,9 @@ public abstract class VariableCostImpl implements Cost, VariableCost {
     }
 
     /**
-     *
-     * @param xText string for the defined value
+     * @param xText      string for the defined value
      * @param actionText what happens with the value (e.g. "to tap", "to exile
-     * from your graveyard")
+     *                   from your graveyard")
      */
     public VariableCostImpl(String xText, String actionText) {
         id = UUID.randomUUID();
@@ -125,8 +123,8 @@ public abstract class VariableCostImpl implements Cost, VariableCost {
     }
 
     @Override
-    public void setAmount(int amount) {
-        amountPaid = amount;
+    public void setAmount(int xValue, int xPay) {
+        amountPaid = xPay;
     }
 
     @Override

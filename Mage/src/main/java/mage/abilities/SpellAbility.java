@@ -162,13 +162,15 @@ public class SpellAbility extends ActivatedAbilityImpl {
             return 0;
         }
 
+        // mana cost instances
         for (ManaCost manaCost : card.getManaCost()) {
             if (manaCost instanceof VariableManaCost) {
-                xMultiplier = ((VariableManaCost) manaCost).getMultiplier();
+                xMultiplier = ((VariableManaCost) manaCost).getXInstancesCount();
                 break;
             }
         }
 
+        // mana cost final X value
         boolean hasNonManaXCost = false;
         for (Cost cost : getCosts()) {
             if (cost instanceof VariableCost) {

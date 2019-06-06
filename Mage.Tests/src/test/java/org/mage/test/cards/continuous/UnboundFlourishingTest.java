@@ -1,8 +1,10 @@
 package org.mage.test.cards.continuous;
 
+import mage.abilities.costs.mana.VariableManaCost;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -163,6 +165,44 @@ public class UnboundFlourishingTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_VariableManaCost() {
+        // VariableManaCost contains:
+        // - number of {X} instances (1, 2, 3)
+        // - final X value after all replace events
+        // - total number of pays
+        // getAmount() must return final X value
+        // setAmount() must setup final X value
+
+        // test example: {X}{X}, X=3, double X effect from replace event
+        int xInstancesCount = 2;
+        int xAnnouncedValue = 3;
+        int xMultiplier = 2;
+        VariableManaCost cost = new VariableManaCost(xInstancesCount);
+        cost.setAmount(xAnnouncedValue * xMultiplier, xAnnouncedValue * xInstancesCount);
+
+        Assert.assertEquals("instances count", xInstancesCount, cost.getXInstancesCount());
+        Assert.assertEquals("boosted X value", xAnnouncedValue * xMultiplier, cost.getAmount());
+    }
+
+
+    @Test
+    public void test_MultipleXInstances() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        // Chalice of the Void enters the battlefield with X charge counters on it.
+        // Whenever a player casts a spell with converted mana cost equal to the number of charge counters on Chalice of the Void, counter that spell.
+        addCard(Zone.HAND, playerA, "Chalice of the Void", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chalice of the Void");
+        setChoice(playerA, "X=1");
+        checkPermanentCounters("after", 1, PhaseStep.BEGIN_COMBAT, playerA, "Chalice of the Void", CounterType.CHARGE, 1);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
         assertAllCommandsUsed();
     }

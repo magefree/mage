@@ -1,4 +1,3 @@
-
 package mage.abilities.costs.mana;
 
 import mage.Mana;
@@ -11,12 +10,12 @@ import mage.game.Game;
 import mage.players.ManaPool;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class VariableManaCost extends ManaCostImpl implements VariableCost {
 
-    protected int multiplier;
+    protected int xInstancesCount; // number of {X}
+    protected int xValue = 0; // final X value after announce and replace events
     protected FilterMana filter;
     protected int minX = 0;
     protected int maxX = Integer.MAX_VALUE;
@@ -25,15 +24,16 @@ public class VariableManaCost extends ManaCostImpl implements VariableCost {
         this(1);
     }
 
-    public VariableManaCost(int multiplier) {
-        this.multiplier = multiplier;
+    public VariableManaCost(int xInstancesCount) {
+        this.xInstancesCount = xInstancesCount;
         this.cost = new Mana();
         options.add(new Mana());
     }
 
     public VariableManaCost(final VariableManaCost manaCost) {
         super(manaCost);
-        this.multiplier = manaCost.multiplier;
+        this.xInstancesCount = manaCost.xInstancesCount;
+        this.xValue = manaCost.xValue;
         if (manaCost.filter != null) {
             this.filter = manaCost.filter.copy();
         }
@@ -55,9 +55,9 @@ public class VariableManaCost extends ManaCostImpl implements VariableCost {
 
     @Override
     public String getText() {
-        if (multiplier > 1) {
-            StringBuilder symbol = new StringBuilder(multiplier);
-            for (int i = 0; i < multiplier; i++) {
+        if (xInstancesCount > 1) {
+            StringBuilder symbol = new StringBuilder(xInstancesCount);
+            for (int i = 0; i < xInstancesCount; i++) {
                 symbol.append("{X}");
             }
             return symbol.toString();
@@ -73,12 +73,15 @@ public class VariableManaCost extends ManaCostImpl implements VariableCost {
 
     @Override
     public int getAmount() {
-        return payment.count() / multiplier;
+        // must return X value
+        //return payment.count() / multiplier;
+        return this.xValue;
     }
 
     @Override
-    public void setAmount(int amount) {
-        payment.setGeneric(amount);
+    public void setAmount(int xValue, int xPay) {
+        this.xValue = xValue;
+        payment.setGeneric(xPay);
     }
 
     @Override
@@ -91,8 +94,8 @@ public class VariableManaCost extends ManaCostImpl implements VariableCost {
         return new VariableManaCost(this);
     }
 
-    public int getMultiplier() {
-        return multiplier;
+    public int getXInstancesCount() {
+        return this.xInstancesCount;
     }
 
     public int getMinX() {
