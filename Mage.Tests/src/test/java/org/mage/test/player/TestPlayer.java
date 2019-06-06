@@ -1994,7 +1994,7 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public int announceXMana(int min, int max, int multilier, String message, Game game, Ability ability) {
+    public int announceXMana(int min, int max, int multiplier, String message, Game game, Ability ability) {
         if (!choices.isEmpty()) {
             for (String choice : choices) {
                 if (choice.startsWith("X=")) {
@@ -2006,7 +2006,7 @@ public class TestPlayer implements Player {
         }
 
         this.chooseStrictModeFailed(game, getInfo(ability) + "; " + message);
-        return computerPlayer.announceXMana(min, max, multilier, message, game, ability);
+        return computerPlayer.announceXMana(min, max, multiplier, message, game, ability);
     }
 
     @Override

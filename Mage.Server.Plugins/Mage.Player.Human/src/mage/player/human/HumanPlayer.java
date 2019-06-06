@@ -1128,12 +1128,12 @@ public class HumanPlayer extends PlayerImpl {
     /**
      * Gets the amount of mana the player want to spent for a x spell
      *
-     * @param multilier - X multiplier after replace events
+     * @param multiplier - X multiplier after replace events
      */
     @Override
-    public int announceXMana(int min, int max, int multilier, String message, Game game, Ability ability) {
+    public int announceXMana(int min, int max, int multiplier, String message, Game game, Ability ability) {
         int xValue = 0;
-        String extraMessage = (multilier == 1 ? "" : ", X will be increased by " + multilier + " times");
+        String extraMessage = (multiplier == 1 ? "" : ", X will be increased by " + multiplier + " times");
         updateGameStatePriority("announceXMana", game);
         do {
             prepareForResponse(game);

@@ -1502,11 +1502,11 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     @Override
-    public int announceXMana(int min, int max, int multilier, String message, Game game, Ability ability) {
+    public int announceXMana(int min, int max, int multiplier, String message, Game game, Ability ability) {
         log.debug("announceXMana");
         //TODO: improve this
-        int xMin = min * multilier;
-        int xMax = (max == Integer.MAX_VALUE ? max : max * multilier);
+        int xMin = min * multiplier;
+        int xMax = (max == Integer.MAX_VALUE ? max : max * multiplier);
         int numAvailable = getAvailableManaProducers(game).size() - ability.getManaCosts().convertedManaCost();
         if (numAvailable < 0) {
             numAvailable = 0;
