@@ -12,6 +12,7 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;
@@ -24,6 +25,7 @@ public final class IcebergCancrix extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent();
 
     static {
+        filter.add(AnotherPredicate.instance);
         filter.add(new SupertypePredicate(SuperType.SNOW));
     }
 
