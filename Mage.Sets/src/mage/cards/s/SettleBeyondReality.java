@@ -31,6 +31,9 @@ public final class SettleBeyondReality extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{W}");
 
         // Choose one or both —
+        this.getSpellAbility().getModes().setMinModes(1);
+        this.getSpellAbility().getModes().setMaxModes(2);
+
         // • Exile target creature you don't control.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
