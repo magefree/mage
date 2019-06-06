@@ -253,6 +253,7 @@ public final class ModernHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Twin-Silk Spider", 188, Rarity.COMMON, mage.cards.t.TwinSilkSpider.class));
         cards.add(new SetCardInfo("Twisted Reflection", 74, Rarity.UNCOMMON, mage.cards.t.TwistedReflection.class));
         cards.add(new SetCardInfo("Umezawa's Charm", 111, Rarity.COMMON, mage.cards.u.UmezawasCharm.class));
+        cards.add(new SetCardInfo("Unbound Flourishing", 189, Rarity.MYTHIC, mage.cards.u.UnboundFlourishing.class));
         cards.add(new SetCardInfo("Undead Augur", 112, Rarity.UNCOMMON, mage.cards.u.UndeadAugur.class));
         cards.add(new SetCardInfo("Unearth", 113, Rarity.COMMON, mage.cards.u.Unearth.class));
         cards.add(new SetCardInfo("Universal Automaton", 235, Rarity.COMMON, mage.cards.u.UniversalAutomaton.class));

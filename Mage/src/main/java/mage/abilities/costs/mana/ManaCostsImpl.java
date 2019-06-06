@@ -1,7 +1,5 @@
-
 package mage.abilities.costs.mana;
 
-import java.util.*;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
@@ -20,9 +18,11 @@ import mage.players.Player;
 import mage.target.Targets;
 import mage.util.ManaUtil;
 
+import java.util.*;
+
 /**
- * @author BetaSteward_at_googlemail.com
  * @param <T>
+ * @author BetaSteward_at_googlemail.com
  */
 public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements ManaCosts<T> {
 
@@ -214,6 +214,11 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     }
 
     @Override
+    public boolean containsX() {
+        return !getVariableCosts().isEmpty();
+    }
+
+    @Override
     public int getX() {
         int amount = 0;
         List<VariableCost> variableCosts = getVariableCosts();
@@ -224,10 +229,10 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     }
 
     @Override
-    public void setX(int x) {
+    public void setX(int xValue, int xMultiplier) {
         List<VariableCost> variableCosts = getVariableCosts();
         if (!variableCosts.isEmpty()) {
-            variableCosts.get(0).setAmount(x);
+            variableCosts.get(0).setAmount(xValue * xMultiplier);
         }
     }
 
@@ -339,7 +344,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                 if (player != null) {
                     game.undo(playerId);
                     this.clearPaid();
-                    this.setX(referenceCosts.getX());
+                    this.setX(referenceCosts.getX(), 1); // TODO: checks Word of Command with Unbound Flourishing's X multiplier
                     player.getManaPool().restoreMana(pool.getPoolBookmark());
                     game.bookmarkState();
                 }
@@ -378,15 +383,15 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                         } else if (!symbol.equals("X")) {
                             this.add(new ColoredManaCost(ColoredManaSymbol.lookup(symbol.charAt(0))));
                         } else // check X wasn't added before
-                        if (modifierForX == 0) {
-                            // count X occurence
-                            for (String s : symbols) {
-                                if (s.equals("X")) {
-                                    modifierForX++;
+                            if (modifierForX == 0) {
+                                // count X occurence
+                                for (String s : symbols) {
+                                    if (s.equals("X")) {
+                                        modifierForX++;
+                                    }
                                 }
-                            }
-                            this.add(new VariableManaCost(modifierForX));
-                        } //TODO: handle multiple {X} and/or {Y} symbols
+                                this.add(new VariableManaCost(modifierForX));
+                            } //TODO: handle multiple {X} and/or {Y} symbols
                     } else if (Character.isDigit(symbol.charAt(0))) {
                         this.add(new MonoHybridManaCost(ColoredManaSymbol.lookup(symbol.charAt(2))));
                     } else if (symbol.contains("P")) {

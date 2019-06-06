@@ -254,6 +254,8 @@ public abstract class AbilityImpl implements Ability {
                 int xValue = this.getManaCostsToPay().getX();
                 this.getManaCostsToPay().clear();
                 VariableManaCost xCosts = new VariableManaCost();
+                // no x events - rules from Unbound Flourishing:
+                // - Spells with additional costs that include X won't be affected by Unbound Flourishing. X must be in the spell's mana cost.
                 xCosts.setAmount(xValue);
                 this.getManaCostsToPay().add(xCosts);
             } else {
@@ -288,11 +290,13 @@ public abstract class AbilityImpl implements Ability {
         if (getAbilityType() == AbilityType.SPELL && (getManaCostsToPay().isEmpty() && getCosts().isEmpty()) && !noMana) {
             return false;
         }
+
         // 20121001 - 601.2b
         // If the spell has a variable cost that will be paid as it's being cast (such as an {X} in
         // its mana cost; see rule 107.3), the player announces the value of that variable.
         VariableManaCost variableManaCost = handleManaXCosts(game, noMana, controller);
         String announceString = handleOtherXCosts(game, controller);
+
         // For effects from cards like Void Winnower x costs have to be set
         if (this.getAbilityType() == AbilityType.SPELL
                 && game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL_LATE, getId(), getSourceId(), getControllerId()), this)) {
@@ -499,7 +503,9 @@ public abstract class AbilityImpl implements Ability {
                     costs.add(fixedCost);
                 }
                 // set the xcosts to paid
-                variableCost.setAmount(xValue);
+                // no x events - rules from Unbound Flourishing:
+                // - Spells with additional costs that include X won't be affected by Unbound Flourishing. X must be in the spell's mana cost.
+                variableCost.setAmount(xValue); //
                 ((Cost) variableCost).setPaid();
                 String message = controller.getLogName() + " announces a value of " + xValue + " (" + variableCost.getActionText() + ')';
                 announceString.append(message);
@@ -530,6 +536,13 @@ public abstract class AbilityImpl implements Ability {
         }
     }
 
+    public int handleManaXMultiplier(Game game, int value) {
+        // some spells can change X value without new pays (Unbound Flourishing doubles X)
+        GameEvent xEvent = GameEvent.getEvent(GameEvent.EventType.X_MANA_ANNOUNCE, getId(), getSourceId(), getControllerId(), value);
+        game.replaceEvent(xEvent, this);
+        return xEvent.getAmount();
+    }
+
     /**
      * Handles X mana costs and sets manaCostsToPay.
      *
@@ -546,15 +559,21 @@ public abstract class AbilityImpl implements Ability {
         VariableManaCost variableManaCost = null;
         for (ManaCost cost : manaCostsToPay) {
             if (cost instanceof VariableManaCost) {
-                variableManaCost = (VariableManaCost) cost;
-                break; // only one VariableManCost per spell (or is it possible to have more?)
+                if (variableManaCost == null) {
+                    variableManaCost = (VariableManaCost) cost;
+                } else {
+                    // only one VariableManCost per spell (or is it possible to have more?)
+                    logger.error("Variable mana cost allowes only in one instance per ability: " + this);
+                }
             }
         }
         if (variableManaCost != null) {
-            int xValue;
             if (!variableManaCost.isPaid()) { // should only happen for human players
+                int xValue;
+                int xValueMultiplier = handleManaXMultiplier(game, 1);
                 if (!noMana) {
-                    xValue = controller.announceXMana(variableManaCost.getMinX(), variableManaCost.getMaxX(), "Announce the value for " + variableManaCost.getText(), game, this);
+                    xValue = controller.announceXMana(variableManaCost.getMinX(), variableManaCost.getMaxX(), xValueMultiplier,
+                            "Announce the value for " + variableManaCost.getText(), game, this);
                     int amountMana = xValue * variableManaCost.getMultiplier();
                     StringBuilder manaString = threadLocalBuilder.get();
                     if (variableManaCost.getFilter() == null || variableManaCost.getFilter().isGeneric()) {
@@ -584,7 +603,7 @@ public abstract class AbilityImpl implements Ability {
                         }
                     }
                     manaCostsToPay.add(new ManaCostsImpl(manaString.toString()));
-                    manaCostsToPay.setX(amountMana);
+                    manaCostsToPay.setX(xValue, xValueMultiplier);
                 }
                 variableManaCost.setPaid();
             }

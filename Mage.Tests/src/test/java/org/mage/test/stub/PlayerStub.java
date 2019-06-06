@@ -912,7 +912,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public int announceXMana(int min, int max, String message, Game game, Ability ability) {
+    public int announceXMana(int min, int max, int multilier, String message, Game game, Ability ability) {
         return min;
     }
 
