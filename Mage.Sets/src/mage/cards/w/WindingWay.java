@@ -69,7 +69,7 @@ class WindingWayEffect extends OneShotEffect {
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 4));
         player.revealCards(source, cards, game);
         Cards cardsToKeep = new CardsImpl(cards.getCards(filter, game));
-        cards.remove(cardsToKeep);
+        cards.removeAll(cardsToKeep);
         player.moveCards(cardsToKeep, Zone.HAND, source, game);
         player.moveCards(cards, Zone.GRAVEYARD, source, game);
         return true;
