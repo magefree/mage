@@ -21,6 +21,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -62,6 +63,8 @@ public final class BlizzardStrix extends CardImpl {
                         "exile target permanent other than {this}. Return that card to the battlefield " +
                         "under its owner's control at the beginning of the next end step."
         );
+        ability.addTarget(new TargetPermanent(filter));
+        this.addAbility(ability);
     }
 
     private BlizzardStrix(final BlizzardStrix card) {
