@@ -21,6 +21,7 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
@@ -57,6 +58,7 @@ public final class EtchingsOfTheChosen extends CardImpl {
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn
         ), new GenericManaCost(1));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter2)));
+        ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }
 
