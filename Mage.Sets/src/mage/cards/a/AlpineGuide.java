@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 public final class AlpineGuide extends CardImpl {
 
-    private static final FilterCard filter = new FilterBySubtypeCard(SubType.PLAINS);
+    private static final FilterCard filter = new FilterBySubtypeCard(SubType.MOUNTAIN);
     private static final FilterPermanent filter2 = new FilterControlledPermanent(SubType.MOUNTAIN, "Mountain");
 
     public AlpineGuide(UUID ownerId, CardSetInfo setInfo) {
