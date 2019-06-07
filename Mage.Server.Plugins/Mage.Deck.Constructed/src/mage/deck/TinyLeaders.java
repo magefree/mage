@@ -1,6 +1,5 @@
 package mage.deck;
 
-import mage.abilities.common.CanBeYourCommanderAbility;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
@@ -150,8 +149,7 @@ public class TinyLeaders extends Constructed {
                 }
                 return false;
             }
-            if ((commander.isCreature() && commander.isLegendary())
-                    || (commander.isPlaneswalker() && commander.getAbilities().contains(CanBeYourCommanderAbility.getInstance()))) {
+            if ((commander.isCreature() && commander.isLegendary()) || commander.isPlaneswalker()) {
                 if (!bannedCommander.contains(commander.getName())) {
                     FilterMana color = commander.getColorIdentity();
                     for (Card card : deck.getCards()) {
