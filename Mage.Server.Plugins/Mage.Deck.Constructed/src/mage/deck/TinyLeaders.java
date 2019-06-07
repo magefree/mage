@@ -33,6 +33,7 @@ public class TinyLeaders extends Constructed {
         banned.add("Ancestral Recall");
         banned.add("Balance");
         banned.add("Black Lotus");
+        banned.add("Black Vise");
         banned.add("Channel");
         banned.add("Counterbalance");
         banned.add("Demonic Tutor");
@@ -40,15 +41,16 @@ public class TinyLeaders extends Constructed {
         banned.add("Edric, Spymaster of Trest");
         banned.add("Fastbond");
         banned.add("Goblin Recruiter");
-        banned.add("Grindstone"); // banned effective July 13, 2015
+        banned.add("Grindstone");
         banned.add("Hermit Druid");
+        banned.add("High Tide");
         banned.add("Imperial Seal");
         banned.add("Library of Alexandria");
         banned.add("Karakas");
         banned.add("Mana Crypt");
         banned.add("Mana Drain");
         banned.add("Mana Vault");
-        banned.add("metalworker");
+        banned.add("Metalworker");
         banned.add("Mind Twist");
         banned.add("Mishra's Workshop");
         banned.add("Mox Emerald");
@@ -56,6 +58,7 @@ public class TinyLeaders extends Constructed {
         banned.add("Mox Pearl");
         banned.add("Mox Ruby");
         banned.add("Mox Sapphire");
+        banned.add("Najeela, the Blade Blossom");
         banned.add("Necropotence");
         banned.add("Shahrazad");
         banned.add("Skullclamp");
@@ -63,12 +66,14 @@ public class TinyLeaders extends Constructed {
         banned.add("Strip Mine");
         banned.add("Survival of the Fittest");
         banned.add("Sword of Body and Mind");
+        banned.add("The Tabernacle at Pendrell Vale");
         banned.add("Time Vault");
         banned.add("Time Walk");
         banned.add("Timetwister");
         banned.add("Tolarian Academy");
         banned.add("Umezawa's Jitte");
         banned.add("Vampiric Tutor");
+        banned.add("Wheel of Fortune");
         banned.add("Yawgmoth's Will");
 
         //Additionally, these Legendary creatures cannot be used as Commanders
