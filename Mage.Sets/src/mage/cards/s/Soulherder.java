@@ -19,6 +19,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -88,7 +89,9 @@ class SoulherderTriggeredAbility extends ZoneChangeTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
         if (permanent != null && permanent.isCreature()) {
-            return super.checkTrigger(event, game);
+            // custom check cause ZoneChangeTriggeredAbility for source object only
+            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+            return (fromZone == null || zEvent.getFromZone() == fromZone) && (toZone == null || zEvent.getToZone() == toZone);
         }
         return false;
     }
