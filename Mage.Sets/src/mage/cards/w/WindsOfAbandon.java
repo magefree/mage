@@ -4,7 +4,10 @@ import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.OverloadAbility;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
@@ -20,6 +23,7 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -78,7 +82,10 @@ class WindsOfAbandonEffect extends OneShotEffect {
         }
         Player player = game.getPlayer(permanent.getControllerId());
         // if the zone change to exile gets replaced does not prevent the target controller to be able to search
-        controller.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, Zone.BATTLEFIELD, true);
+        if (!controller.moveCards(permanent, Zone.EXILED, source, game)) {
+            return true;
+        }
+
         if (!player.chooseUse(Outcome.PutCardInPlay, "Search your library for a basic land card?", source, game)) {
             return true;
         }
@@ -86,7 +93,7 @@ class WindsOfAbandonEffect extends OneShotEffect {
         if (player.searchLibrary(target, source, game)) {
             Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
             if (card != null) {
-                player.moveCards(card, Zone.EXILED, source, game, true, false, false, null);
+                player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
             }
         }
         player.shuffleLibrary(source, game);
@@ -124,14 +131,17 @@ class WindsOfAbandonOverloadEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Map<UUID, Integer> playerMap = new HashMap();
-        Cards cards = new CardsImpl();
+        Map<UUID, Integer> playerMap = new HashMap<>();
+        CardsImpl cards = new CardsImpl();
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
             int count = playerMap.getOrDefault(permanent.getControllerId(), 0);
             playerMap.put(permanent.getControllerId(), count + 1);
             cards.add(permanent);
         }
-        controller.moveCards(cards, Zone.EXILED, source, game);
+        if (!controller.moveCards(cards, Zone.EXILED, source, game)) {
+            return true;
+        }
+
         for (UUID playerId : game.getOpponents(source.getControllerId())) {
             Player player = game.getPlayer(playerId);
             int count = playerMap.getOrDefault(playerId, 0);
@@ -139,13 +149,21 @@ class WindsOfAbandonOverloadEffect extends OneShotEffect {
                 continue;
             }
             TargetCardInLibrary target = new TargetCardInLibrary(0, count, StaticFilters.FILTER_CARD_BASIC_LAND);
+            boolean moved = false;
             if (player.searchLibrary(target, source, game)) {
-                Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
-                if (card != null) {
-                    player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
+                List<UUID> targets = target.getTargets();
+                for (UUID targetId : targets) {
+                    Card card = player.getLibrary().getCard(targetId, game);
+                    if (card != null) {
+                        if (player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null)) {
+                            moved = true;
+                        }
+                    }
                 }
             }
-            player.shuffleLibrary(source, game);
+            if (moved) {
+                player.shuffleLibrary(source, game);
+            }
         }
         return true;
     }
