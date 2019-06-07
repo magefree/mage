@@ -22,19 +22,25 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
     protected String theyAreStillType;
     private final FilterPermanent filter;
     private boolean loseColor = true;
+    private boolean loseTypes = false;
     protected boolean loseName = false;
 
     public BecomesCreatureAllEffect(Token token, String theyAreStillType, FilterPermanent filter, Duration duration, boolean loseColor) {
-        this(token, theyAreStillType, filter, duration, loseColor, false);
+        this(token, theyAreStillType, filter, duration, loseColor, false, false);
     }
 
     public BecomesCreatureAllEffect(Token token, String theyAreStillType, FilterPermanent filter, Duration duration, boolean loseColor, boolean loseName) {
+        this(token, theyAreStillType, filter, duration, loseColor, loseName, false);
+    }
+
+    public BecomesCreatureAllEffect(Token token, String theyAreStillType, FilterPermanent filter, Duration duration, boolean loseColor, boolean loseName, boolean loseTypes) {
         super(duration, Outcome.BecomeCreature);
         this.token = token;
         this.theyAreStillType = theyAreStillType;
         this.filter = filter;
         this.loseColor = loseColor;
         this.loseName = loseName;
+        this.loseTypes = loseTypes;
     }
 
     public BecomesCreatureAllEffect(final BecomesCreatureAllEffect effect) {
@@ -44,6 +50,7 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
         this.filter = effect.filter.copy();
         this.loseColor = effect.loseColor;
         this.loseName = effect.loseName;
+        this.loseTypes = effect.loseTypes;
     }
 
     @Override
@@ -89,6 +96,10 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
                                 permanent.getSubtype(game).retainAll(SubType.getLandTypes());
                                 permanent.getSubtype(game).addAll(token.getSubtype(game));
                             } else {
+                                if (loseTypes) {
+                                    permanent.getSubtype(game).retainAll(SubType.getLandTypes());
+                                }
+
                                 for (SubType t : token.getSubtype(game)) {
                                     if (!permanent.hasSubtype(t, game)) {
                                         permanent.getSubtype(game).add(t);
