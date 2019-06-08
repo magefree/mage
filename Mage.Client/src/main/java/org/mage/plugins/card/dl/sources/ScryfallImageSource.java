@@ -13,6 +13,7 @@ import org.mage.plugins.card.images.CardDownloadData;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
@@ -93,6 +94,12 @@ public enum ScryfallImageSource implements CardImageSource {
                 } else if (card.getSet().matches("PLS")) {
                     scryfallCollectorId += "★";
                 }
+            }
+
+            try {
+                scryfallCollectorId = URLEncoder.encode(scryfallCollectorId, "utf-8");
+            } catch (UnsupportedEncodingException e) {
+                // URL failed to encode, this will cause download to miss in certain environments
             }
 
             baseUrl = "https://api.scryfall.com/cards/" + formatSetName(card.getSet(), isToken) + "/"
