@@ -93,6 +93,13 @@ public class Oathbreaker extends Vintage {
         countCards(counts, deck.getCards());
         countCards(counts, deck.getSideboard());
 
+        for (String bannedCard : banned) {
+            if (counts.containsKey(bannedCard)) {
+                invalid.put(bannedCard, "Banned");
+                valid = false;
+            }
+        }
+
         for (Map.Entry<String, Integer> entry : counts.entrySet()) {
             if (entry.getValue() > 1) {
                 if (!basicLandNames.contains(entry.getKey()) && !anyNumberCardsAllowed.contains(entry.getKey())) {
