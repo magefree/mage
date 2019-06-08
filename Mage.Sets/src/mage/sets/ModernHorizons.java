@@ -25,6 +25,7 @@ public final class ModernHorizons extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        this.maxCardNumberInBooster = 254;
 
         cards.add(new SetCardInfo("Abominable Treefolk", 194, Rarity.UNCOMMON, mage.cards.a.AbominableTreefolk.class));
         cards.add(new SetCardInfo("Alpine Guide", 117, Rarity.UNCOMMON, mage.cards.a.AlpineGuide.class));
