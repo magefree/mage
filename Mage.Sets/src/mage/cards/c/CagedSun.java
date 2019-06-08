@@ -133,7 +133,6 @@ class CagedSunEffect extends ManaEffect {
 
     public CagedSunEffect() {
         super();
-        staticText = "add one additional mana of that color";
     }
 
     public CagedSunEffect(final CagedSunEffect effect) {
