@@ -5,7 +5,6 @@ import mage.MageObjectReference;
 import mage.abilities.*;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.effects.common.continuous.CommanderReplacementEffect;
-import mage.abilities.keyword.SpliceOntoArcaneAbility;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
@@ -663,12 +662,12 @@ public class ContinuousEffects implements Serializable {
         }
         List<SpliceCardEffect> spliceEffects = getApplicableSpliceCardEffects(game, abilityToModify.getControllerId());
         // get the applyable splice abilities
-        List<SpliceOntoArcaneAbility> spliceAbilities = new ArrayList<>();
+        List<Ability> spliceAbilities = new ArrayList<>();
         for (SpliceCardEffect effect : spliceEffects) {
             Set<Ability> abilities = spliceCardEffects.getAbility(effect.getId());
             for (Ability ability : abilities) {
                 if (effect.applies(abilityToModify, ability, game)) {
-                    spliceAbilities.add((SpliceOntoArcaneAbility) ability);
+                    spliceAbilities.add(ability);
                 }
             }
         }
@@ -681,7 +680,7 @@ public class ContinuousEffects implements Serializable {
                 do {
                     FilterCard filter = new FilterCard("a card to splice");
                     ArrayList<Predicate<MageObject>> idPredicates = new ArrayList<>();
-                    for (SpliceOntoArcaneAbility ability : spliceAbilities) {
+                    for (Ability ability : spliceAbilities) {
                         idPredicates.add(new CardIdPredicate((ability.getSourceId())));
                     }
                     filter.add(Predicates.or(idPredicates));
@@ -689,8 +688,8 @@ public class ContinuousEffects implements Serializable {
                     controller.chooseTarget(Outcome.Benefit, target, abilityToModify, game);
                     UUID cardId = target.getFirstTarget();
                     if (cardId != null) {
-                        SpliceOntoArcaneAbility selectedAbility = null;
-                        for (SpliceOntoArcaneAbility ability : spliceAbilities) {
+                        Ability selectedAbility = null;
+                        for (Ability ability : spliceAbilities) {
                             if (ability.getSourceId().equals(cardId)) {
                                 selectedAbility = ability;
                                 break;
