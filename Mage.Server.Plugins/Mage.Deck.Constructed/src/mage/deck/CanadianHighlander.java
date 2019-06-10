@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public class CanadianHighlander extends Constructed {
 
-    public static final Map<String, Integer> pointMap = new HashMap<>();
+    private static final Map<String, Integer> pointMap = new HashMap<>();
 
     static {
         pointMap.put("Ancestral Recall", 7);
@@ -23,8 +23,7 @@ public class CanadianHighlander extends Constructed {
         pointMap.put("Demonic Tutor", 3);
         pointMap.put("Dig Through Time", 1);
         pointMap.put("Enlightened Tutor", 1);
-        pointMap.put("Fastbond", 1);
-        pointMap.put("Flash", 7);
+        pointMap.put("Flash", 6);
         pointMap.put("Gifts Ungiven", 2);
         pointMap.put("Imperial Seal", 1);
         pointMap.put("Intuition", 1);
@@ -56,7 +55,7 @@ public class CanadianHighlander extends Constructed {
         pointMap.put("Treasure Cruise", 1);
         pointMap.put("True-Name Nemesis", 1);
         pointMap.put("Umezawa's Jitte", 2);
-        pointMap.put("Vampiric Tutor", 3);
+        pointMap.put("Vampiric Tutor", 2);
     }
 
     public CanadianHighlander() {
