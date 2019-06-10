@@ -47,7 +47,6 @@ public class AusHighlander extends Constructed {
         pointMap.put("Enlightened Tutor", 1);
         pointMap.put("Fastbond", 1);
         pointMap.put("Force of Will", 1);
-        pointMap.put("Gifts Ungiven", 1);
         pointMap.put("Green Sun's Zenith", 1);
         pointMap.put("Hermit Druid", 1);
         pointMap.put("Intuition", 1);
