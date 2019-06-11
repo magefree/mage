@@ -32,6 +32,7 @@ Commander's Arsenal|CommandersArsenal|
 Conflux|Conflux|
 Conspiracy: Take the Crown|ConspiracyTakeTheCrown|
 Core Set 2019|CoreSet2019|
+Core Set 2020|CoreSet2020|
 Dark Ascension|DarkAscension|
 Darksteel|Darksteel|
 Dissension|Dissension|
