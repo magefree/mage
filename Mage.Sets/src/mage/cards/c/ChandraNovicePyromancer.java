@@ -35,7 +35,7 @@ public final class ChandraNovicePyromancer extends CardImpl {
 
         // +1: Elementals you control get +2/+0 until end of turn.
         this.addAbility(new LoyaltyAbility(
-                new BoostControlledEffect(2, 0, Duration.EndOfTurn, filter)
+                new BoostControlledEffect(2, 0, Duration.EndOfTurn, filter), 1
         ));
 
         // -1: Add {R}{R}.
