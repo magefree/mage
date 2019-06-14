@@ -92,7 +92,7 @@ public abstract class GameCommanderImpl extends GameImpl {
 
     public void initCommanderEffects(Card commander, Player player, Ability commanderAbility) {
         // all commander effects must be independent from sourceId or controllerId
-        commanderAbility.addEffect(new CommanderReplacementEffect(commander.getId(), alsoHand, alsoLibrary));
+        commanderAbility.addEffect(new CommanderReplacementEffect(commander.getId(), alsoHand, alsoLibrary, false, "Commander"));
         commanderAbility.addEffect(new CommanderCostModification(commander.getId()));
     }
 

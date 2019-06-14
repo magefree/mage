@@ -5,6 +5,8 @@ import mage.abilities.common.SignatureSpellCastOnlyWithOathbreakerEffect;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.OathbreakerOnBattlefieldCondition;
 import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.effects.common.continuous.CommanderReplacementEffect;
+import mage.abilities.effects.common.cost.CommanderCostModification;
 import mage.abilities.hint.ConditionHint;
 import mage.cards.Card;
 import mage.constants.CommanderCardType;
@@ -26,6 +28,9 @@ public class OathbreakerFreeForAll extends GameCommanderImpl {
     private Map<UUID, Set<UUID>> playerSignatureSpells = new HashMap<>();
     private Map<UUID, Set<UUID>> playerOathbreakers = new HashMap<>();
 
+    private static final String COMMANDER_NAME_OATHBREAKER = "Oathbreaker";
+    private static final String COMMANDER_NAME_SIGNATURE_SPELL = "Signature Spell";
+
     public OathbreakerFreeForAll(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
         super(attackOption, range, mulligan, startLife);
     }
@@ -44,24 +49,27 @@ public class OathbreakerFreeForAll extends GameCommanderImpl {
         super.init(choosingPlayerId);
     }
 
+    private String getCommanderTypeName(Card commander) {
+        return commander.isInstantOrSorcery() ? COMMANDER_NAME_SIGNATURE_SPELL : COMMANDER_NAME_OATHBREAKER;
+    }
+
     @Override
     public CommanderInfoWatcher initCommanderWatcher(Card commander, boolean checkCommanderDamage) {
-        String commanderType;
-        if (commander.isInstantOrSorcery()) {
-            commanderType = "Signature Spell";
-        } else {
-            commanderType = "Oathbreaker";
-        }
-        return new CommanderInfoWatcher(commanderType, commander.getId(), checkCommanderDamage);
+        return new CommanderInfoWatcher(getCommanderTypeName(commander), commander.getId(), checkCommanderDamage);
     }
 
     @Override
     public void initCommanderEffects(Card commander, Player player, Ability commanderAbility) {
         // all commander effects must be independent from sourceId or controllerId (it's limitation of current commander effects)
-        super.initCommanderEffects(commander, player, commanderAbility);
+
+        boolean isSignatureSpell = this.playerSignatureSpells.getOrDefault(player.getId(), new HashSet<>()).contains(commander.getId());
+
+        // basic commmander restrict (oathbreaker may ask to move, signature force to move)
+        commanderAbility.addEffect(new CommanderReplacementEffect(commander.getId(), alsoHand, alsoLibrary, isSignatureSpell, getCommanderTypeName(commander)));
+        commanderAbility.addEffect(new CommanderCostModification(commander.getId()));
 
         // signature spell restrict (spell can be casted on player's commander on battlefield)
-        if (this.playerSignatureSpells.getOrDefault(player.getId(), new HashSet<>()).contains(commander.getId())) {
+        if (isSignatureSpell) {
             OathbreakerOnBattlefieldCondition condition = new OathbreakerOnBattlefieldCondition(this, player.getId(), commander.getId(),
                     this.playerOathbreakers.getOrDefault(player.getId(), new HashSet<>()));
             commanderAbility.addEffect(new SignatureSpellCastOnlyWithOathbreakerEffect(condition, commander.getId()));

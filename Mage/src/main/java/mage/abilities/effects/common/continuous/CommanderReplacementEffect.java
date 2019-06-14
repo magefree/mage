@@ -1,7 +1,5 @@
-
 package mage.abilities.effects.common.continuous;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
@@ -15,8 +13,9 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 //20130711
@@ -27,19 +26,31 @@ import mage.players.Player;
 library from anywhere, its owner may put it into the command zone instead. This replacement effect
 may apply more than once to the same event. This is an exception to rule 614.5.
  */
+
+// Oathbreaker mode: If your Oathbreaker changes zones, you may return it to the Command Zone. The Signature Spell must return to the Command Zone.
+
 public class CommanderReplacementEffect extends ReplacementEffectImpl {
 
     private final UUID commanderId;
     private final boolean alsoHand;
     private final boolean alsoLibrary;
+    private final boolean forceToMove;
+    private final String commanderTypeName;
 
-    public CommanderReplacementEffect(UUID commanderId, boolean alsoHand, boolean alsoLibrary) {
+    public CommanderReplacementEffect(UUID commanderId, boolean alsoHand, boolean alsoLibrary, boolean forceToMove, String commanderTypeName) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "If a commander would be put into its owner's graveyard from anywhere, that player may put it into the command zone instead. If a commander would be put into the exile zone from anywhere, its owner may put it into the command zone instead.";
+        String mayStr = forceToMove ? " " : " may ";
+
+        staticText = "If a " + commanderTypeName + " would be put into its owner's graveyard from anywhere, "
+                + "that player" + mayStr + "put it into the command zone instead. "
+                + "If a " + commanderTypeName + " would be put into the exile zone from anywhere, "
+                + "its owner" + mayStr + "put it into the command zone instead.";
         this.commanderId = commanderId;
         this.duration = Duration.EndOfGame;
         this.alsoHand = alsoHand;
         this.alsoLibrary = alsoLibrary;
+        this.forceToMove = forceToMove;
+        this.commanderTypeName = commanderTypeName;
     }
 
     public CommanderReplacementEffect(final CommanderReplacementEffect effect) {
@@ -47,6 +58,8 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
         this.commanderId = effect.commanderId;
         this.alsoHand = effect.alsoHand;
         this.alsoLibrary = effect.alsoLibrary;
+        this.forceToMove = effect.forceToMove;
+        this.commanderTypeName = effect.commanderTypeName;
     }
 
     @Override
@@ -114,10 +127,10 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
             Permanent permanent = ((ZoneChangeEvent) event).getTarget();
             if (permanent != null) {
                 Player player = game.getPlayer(permanent.getOwnerId());
-                if (player != null && player.chooseUse(Outcome.Benefit, "Move commander to command zone?", source, game)) {
+                if (player != null && (forceToMove || player.chooseUse(Outcome.Benefit, "Move " + commanderTypeName + " to command zone?", source, game))) {
                     ((ZoneChangeEvent) event).setToZone(Zone.COMMAND);
                     if (!game.isSimulation()) {
-                        game.informPlayers(player.getLogName() + " has moved their commander to the command zone");
+                        game.informPlayers(player.getLogName() + " has moved their " + commanderTypeName + " to the command zone");
                     }
                 }
             }
@@ -134,10 +147,10 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
             }
             if (card != null) {
                 Player player = game.getPlayer(card.getOwnerId());
-                if (player != null && player.chooseUse(Outcome.Benefit, "Move commander to command zone?", source, game)) {
+                if (player != null && (forceToMove || player.chooseUse(Outcome.Benefit, "Move " + commanderTypeName + " to command zone?", source, game))) {
                     ((ZoneChangeEvent) event).setToZone(Zone.COMMAND);
                     if (!game.isSimulation()) {
-                        game.informPlayers(player.getLogName() + " has moved their commander to the command zone");
+                        game.informPlayers(player.getLogName() + " has moved their " + commanderTypeName + " to the command zone");
                     }
                 }
             }
