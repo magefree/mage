@@ -16,6 +16,8 @@ public class CastCommanderAbility extends SpellAbility {
             this.getCosts().addAll(card.getSpellAbility().getCosts().copy());
             this.getEffects().addAll(card.getSpellAbility().getEffects().copy());
             this.getTargets().addAll(card.getSpellAbility().getTargets().copy());
+            this.setTargetAdjuster(card.getSpellAbility().getTargetAdjuster());
+            this.setCostAdjuster(card.getSpellAbility().getCostAdjuster());
             this.timing = card.getSpellAbility().getTiming();
         } else {
             throw new IllegalStateException("Cast commander ability must be used with spell ability only: " + card.getName());
