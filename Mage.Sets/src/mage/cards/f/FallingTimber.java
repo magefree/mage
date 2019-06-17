@@ -1,6 +1,5 @@
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -17,10 +16,10 @@ import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
 
+import java.util.UUID;
+
 /**
- *
  * @author LoneFox
- *
  */
 public final class FallingTimber extends CardImpl {
 
@@ -28,11 +27,14 @@ public final class FallingTimber extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");
 
         // Kicker-Sacrifice a land.
-        this.addAbility(new KickerAbility(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, new FilterControlledLandPermanent("a land"), true))));
+        this.addAbility(new KickerAbility(new SacrificeTargetCost(new TargetControlledPermanent(1, 1,
+                new FilterControlledLandPermanent("a land"), true))));
 
-        // Prevent all combat damage target creature would deal this turn. If Falling Timber was kicked, prevent all combat damage another target creature would deal this turn.
+        // Prevent all combat damage target creature would deal this turn. If Falling Timber was kicked,
+        // prevent all combat damage another target creature would deal this turn.
         Effect effect = new PreventDamageByTargetEffect(Duration.EndOfTurn, true);
-        effect.setText("Prevent all combat damage target creature would deal this turn. if this spell was kicked, prevent all combat damage another target creature would deal this turn.");
+        effect.setText("Prevent all combat damage target creature would deal this turn. if this spell was kicked, " +
+                "prevent all combat damage another target creature would deal this turn.");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().setTargetAdjuster(FallingTimberAdjuster.instance);
     }
