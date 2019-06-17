@@ -432,13 +432,30 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public boolean activateAlternateOrAdditionalCosts(MageObject sourceObject, boolean noMana, Player controller, Game game) {
+        boolean canUseAlternativeCost = true;
+        boolean canUseAdditionalCost = true;
+
         if (this instanceof SpellAbility) {
-            if (((SpellAbility) this).getSpellAbilityCastMode() != SpellAbilityCastMode.NORMAL) {
-                // A player can't apply two alternative methods of casting or two alternative costs to a single spell.
-                // So can only use alternate costs if the spell is cast in normal mode
-                return false;
+            // A player can't apply two alternative methods of casting or two alternative costs to a single spell.
+            switch (((SpellAbility) this).getSpellAbilityCastMode()) {
+                case NORMAL:
+                case MADNESS:
+                default:
+                    canUseAlternativeCost = true;
+                    canUseAdditionalCost = true;
+                    break;
+                case FLASHBACK:
+                    // from Snapcaster Mage:
+                    // If you cast a spell from a graveyard using its flashback ability, you can’t pay other alternative costs
+                    // (such as that of Foil). (2018-12-07)
+                    canUseAlternativeCost = false;
+                    // You may pay any optional additional costs the spell has, such as kicker costs. You must pay any
+                    // mandatory additional costs the spell has, such as that of Tormenting Voice. (2018-12-07)
+                    canUseAdditionalCost = true;
+                    break;
             }
         }
+
         boolean alternativeCostisUsed = false;
         if (sourceObject != null && !(sourceObject instanceof Permanent)) {
             Abilities<Ability> abilities = null;
@@ -447,10 +464,11 @@ public abstract class AbilityImpl implements Ability {
             } else {
                 sourceObject.getAbilities();
             }
+
             if (abilities != null) {
                 for (Ability ability : abilities) {
                     // if cast for noMana no Alternative costs are allowed
-                    if (!noMana && ability instanceof AlternativeSourceCosts) {
+                    if (canUseAlternativeCost && !noMana && ability instanceof AlternativeSourceCosts) {
                         AlternativeSourceCosts alternativeSpellCosts = (AlternativeSourceCosts) ability;
                         if (alternativeSpellCosts.isAvailable(this, game)) {
                             if (alternativeSpellCosts.askToActivateAlternativeCosts(this, game)) {
@@ -460,13 +478,14 @@ public abstract class AbilityImpl implements Ability {
                             }
                         }
                     }
-                    if (ability instanceof OptionalAdditionalSourceCosts) {
+                    if (canUseAdditionalCost && ability instanceof OptionalAdditionalSourceCosts) {
                         ((OptionalAdditionalSourceCosts) ability).addOptionalAdditionalCosts(this, game);
                     }
                 }
             }
+
             // controller specific alternate spell costs
-            if (!noMana && !alternativeCostisUsed) {
+            if (canUseAlternativeCost && !noMana && !alternativeCostisUsed) {
                 if (this.getAbilityType() == AbilityType.SPELL
                         // 117.9a Only one alternative cost can be applied to any one spell as it's being cast.
                         // So an alternate spell ability can't be paid with Omniscience
@@ -483,6 +502,7 @@ public abstract class AbilityImpl implements Ability {
                 }
             }
         }
+
         return alternativeCostisUsed;
     }
 

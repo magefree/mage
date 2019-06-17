@@ -835,7 +835,7 @@ public class TestPlayer implements Player {
                 return perm;
             }
         }
-        Assert.assertNotNull(action.getActionName() + " - can''t find permanent to check PT: " + cardName, founded);
+        Assert.assertNotNull(action.getActionName() + " - can''t find permanent to check: " + cardName, founded);
         return null;
     }
 
