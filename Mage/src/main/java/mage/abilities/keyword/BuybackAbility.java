@@ -122,7 +122,7 @@ public class BuybackAbility extends StaticAbility implements OptionalAdditionalS
     }
 
     public boolean isBuybackActivated(Game game) {
-        return (Boolean) game.getState().getValue(this.getSourceId().toString() + "_activatedBuyback");
+        return Boolean.TRUE.equals(game.getState().getValue(this.getSourceId().toString() + "_activatedBuyback"));
     }
 
     @Override

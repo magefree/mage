@@ -108,7 +108,7 @@ class TogglodyteToggleEffect extends OneShotEffect {
             if (game.getState().getValue(mageObject.getId() + "_toggle") == null) {
                 return false;
             }
-            boolean toggled = (Boolean) game.getState().getValue(mageObject.getId() + "_toggle");
+            boolean toggled = Boolean.TRUE.equals(game.getState().getValue(mageObject.getId() + "_toggle"));
             game.getState().setValue(mageObject.getId() + "_toggle", !toggled);
             ((Permanent) mageObject).addInfo("toggle", CardUtil.addToolTipMarkTags("Switch: " + (!toggled ? "ON" : "OFF")), game);
             return true;
@@ -184,8 +184,8 @@ class TogglodyteCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject mageObject = game.getObject(source.getSourceId());
-        if (mageObject != null && game.getState().getValue(mageObject.getId() + "_toggle") != null) {
-            return !((Boolean) game.getState().getValue(mageObject.getId() + "_toggle"));
+        if (mageObject != null) {
+            return !Boolean.TRUE.equals(game.getState().getValue(mageObject.getId() + "_toggle"));
         }
         return false;
     }

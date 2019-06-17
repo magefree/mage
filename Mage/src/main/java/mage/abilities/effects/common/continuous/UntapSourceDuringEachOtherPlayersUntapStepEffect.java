@@ -28,10 +28,7 @@ public class UntapSourceDuringEachOtherPlayersUntapStepEffect extends Continuous
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Boolean applied = (Boolean) game.getState().getValue(source.getSourceId() + "applied");
-        if (applied == null) {
-            applied = Boolean.FALSE;
-        }
+        boolean applied = Boolean.TRUE.equals(game.getState().getValue(source.getSourceId() + "applied"));
         if (!applied && layer == Layer.RulesEffects) {
             if (!source.isControlledBy(game.getActivePlayerId())
                     && game.getStep() != null
