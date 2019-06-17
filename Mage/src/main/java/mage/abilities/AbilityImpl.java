@@ -439,12 +439,12 @@ public abstract class AbilityImpl implements Ability {
             // A player can't apply two alternative methods of casting or two alternative costs to a single spell.
             switch (((SpellAbility) this).getSpellAbilityCastMode()) {
                 case NORMAL:
-                case MADNESS:
                 default:
                     canUseAlternativeCost = true;
                     canUseAdditionalCost = true;
                     break;
                 case FLASHBACK:
+                case MADNESS:
                     // from Snapcaster Mage:
                     // If you cast a spell from a graveyard using its flashback ability, you can’t pay other alternative costs
                     // (such as that of Foil). (2018-12-07)
