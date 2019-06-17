@@ -16,7 +16,7 @@ import java.util.UUID;
 public final class Octoprophet extends CardImpl {
 
     public Octoprophet(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "3U");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
 
         this.subtype.add(SubType.OCTOPUS);
         this.power = new MageInt(3);
