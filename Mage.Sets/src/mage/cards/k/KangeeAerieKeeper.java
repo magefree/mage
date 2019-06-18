@@ -1,22 +1,17 @@
-
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.GetKickerXValue;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.KickerAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -24,10 +19,10 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.game.Game;
+
+import java.util.UUID;
 
 /**
- *
  * @author emerald000
  */
 public final class KangeeAerieKeeper extends CardImpl {
@@ -55,7 +50,7 @@ public final class KangeeAerieKeeper extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Kangee, Aerie Keeper enters the battlefield, if it was kicked, put X feather counters on it.
-        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.FEATHER.createInstance(), new KangeeAerieKeeperGetKickerXValue(), true));
+        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.FEATHER.createInstance(), GetKickerXValue.instance, true));
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.instance, "When {this} enters the battlefield, if it was kicked, put X feather counters on it."));
 
         // Other Bird creatures get +1/+1 for each feather counter on Kangee, Aerie Keeper.
@@ -69,40 +64,5 @@ public final class KangeeAerieKeeper extends CardImpl {
     @Override
     public KangeeAerieKeeper copy() {
         return new KangeeAerieKeeper(this);
-    }
-}
-
-class KangeeAerieKeeperGetKickerXValue implements DynamicValue {
-
-    public KangeeAerieKeeperGetKickerXValue() {
-    }
-
-    @Override
-    public int calculate(Game game, Ability source, Effect effect) {
-        int count = 0;
-        Card card = game.getCard(source.getSourceId());
-        if (card != null) {
-            for (Ability ability : card.getAbilities()) {
-                if (ability instanceof KickerAbility) {
-                    count += ((KickerAbility) ability).getXManaValue();
-                }
-            }
-        }
-        return count;
-    }
-
-    @Override
-    public KangeeAerieKeeperGetKickerXValue copy() {
-        return new KangeeAerieKeeperGetKickerXValue();
-    }
-
-    @Override
-    public String toString() {
-        return "X";
-    }
-
-    @Override
-    public String getMessage() {
-        return "X";
     }
 }

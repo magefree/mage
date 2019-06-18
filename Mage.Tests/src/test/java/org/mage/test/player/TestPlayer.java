@@ -1129,7 +1129,9 @@ public class TestPlayer implements Player {
     }
 
     private void assertManaPoolInner(PlayerAction action, Player player, ManaType manaType, Integer amount) {
-        Integer current = player.getManaPool().get(manaType);
+        Integer normal = player.getManaPool().getMana().get(manaType);
+        Integer conditional = player.getManaPool().getConditionalMana().stream().mapToInt(a -> a.get(manaType)).sum(); // calcs FULL conditional mana, not real conditions
+        Integer current = normal + conditional;
         Assert.assertEquals(action.getActionName() + " - mana pool must contain [" + amount.toString() + " " + manaType.toString() + "], but found [" + current.toString() + "]", amount, current);
     }
 
