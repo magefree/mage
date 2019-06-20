@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -18,14 +16,15 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class CutTheTethers extends CardImpl {
 
     public CutTheTethers(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
 
 
         // For each Spirit, return it to its owner's hand unless that player pays {3}.
@@ -45,6 +44,7 @@ public final class CutTheTethers extends CardImpl {
 class CutTheTethersEffect extends OneShotEffect {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Spirit creatures");
+
     static {
         filter.add(new SubtypePredicate(SubType.SPIRIT));
     }
@@ -65,18 +65,16 @@ class CutTheTethersEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent creature: game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent creature : game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
             Player player = game.getPlayer(creature.getControllerId());
             if (player != null) {
                 boolean paid = false;
-                if (player.chooseUse(outcome, "Pay {3} to keep " + creature.getName() + " on the battlefield?", source, game)) {
+                if (player.chooseUse(Outcome.Benefit, "Pay {3} to keep " + creature.getName() + " on the battlefield?", source, game)) {
                     Cost cost = new GenericManaCost(3);
-                    if (!cost.pay(source, game, source.getSourceId(), creature.getControllerId(), false, null)) {
-                        paid = true;
-                    }
-                    if (!paid) {
-                        creature.moveToZone(Zone.HAND, source.getSourceId(), game, true);
-                    }
+                    paid = cost.pay(source, game, source.getSourceId(), creature.getControllerId(), false, null);
+                }
+                if (!paid) {
+                    creature.moveToZone(Zone.HAND, source.getSourceId(), game, true);
                 }
             }
         }
