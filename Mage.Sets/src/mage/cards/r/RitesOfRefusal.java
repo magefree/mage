@@ -1,9 +1,7 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.Cost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -14,9 +12,11 @@ import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetSpell;
+import mage.util.ManaUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class RitesOfRefusal extends CardImpl {
@@ -62,16 +62,16 @@ class RitesOfRefusalEffect extends OneShotEffect {
         Spell targetSpell = game.getStack().getSpell(source.getFirstTarget());
         if (targetSpell != null) {
             Player controllerOfTargetedSpell = game.getPlayer(targetSpell.getControllerId());
-            if (controller != null
-                    && controllerOfTargetedSpell != null) {
+            if (controller != null && controllerOfTargetedSpell != null) {
                 int numToDiscard = controller.getAmount(0, controller.getHand().size(), "How many cards do you want to discard?", game);
                 Cards discardedCards = controller.discard(numToDiscard, false, source, game);
                 int actualNumberDiscarded = discardedCards.size();
-                GenericManaCost cost = new GenericManaCost(actualNumberDiscarded * 3);
-                if (controllerOfTargetedSpell.chooseUse(Outcome.AIDontUseIt, "Do you want to pay " + cost.convertedManaCost() + " to prevent " + targetSpell.getName() + " from gettting countered?", source, game)
-                        && cost.pay(source, game, source.getSourceId(), controllerOfTargetedSpell.getId(), false)) {
-                    return true;
-                } else {
+                if (actualNumberDiscarded > 0) {
+                    Cost cost = ManaUtil.createManaCost(actualNumberDiscarded * 3, false);
+                    if (controllerOfTargetedSpell.chooseUse(Outcome.Benefit, "Do you want to pay " + cost.getText() + " to prevent " + targetSpell.getName() + " from gettting countered?", source, game)
+                            && cost.pay(source, game, source.getSourceId(), controllerOfTargetedSpell.getId(), false)) {
+                        return true;
+                    }
                     targetSpell.counter(source.getSourceId(), game);
                     return true;
                 }
