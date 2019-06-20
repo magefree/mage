@@ -18,6 +18,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
+import mage.util.ManaUtil;
 
 /**
  *
@@ -78,7 +79,7 @@ class CrookedScalesEffect extends OneShotEffect {
                     }
                     keepGoing = false;
                 } else {
-                    cost = new GenericManaCost(3);
+                    cost = ManaUtil.createManaCost(3, false);
                     if (!(controller.chooseUse(Outcome.Benefit, message, source, game) && cost.pay(source, game, controller.getId(), controller.getId(), false, null))) {
                         if (yourGuy != null) {
                             yourGuy.destroy(controller.getId(), game, false);
@@ -88,7 +89,7 @@ class CrookedScalesEffect extends OneShotEffect {
                         keepGoing = true;
                     }
                 }
-            } while (keepGoing && controller.isInGame());
+            } while (keepGoing && controller.canRespond());
             return true;
         }
         return false;
