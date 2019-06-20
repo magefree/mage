@@ -85,6 +85,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Scholar of the Ages", 74, Rarity.UNCOMMON, mage.cards.s.ScholarOfTheAges.class));
         cards.add(new SetCardInfo("Scuttlemutt", 238, Rarity.UNCOMMON, mage.cards.s.Scuttlemutt.class));
         cards.add(new SetCardInfo("Silverback Shaman", 195, Rarity.COMMON, mage.cards.s.SilverbackShaman.class));
+        cards.add(new SetCardInfo("Sorin, Imperious Bloodlord", 115, Rarity.MYTHIC, mage.cards.s.SorinImperiousBloodlord.class));
         cards.add(new SetCardInfo("Starfield Mystic", 39, Rarity.RARE, mage.cards.s.StarfieldMystic.class));
         cards.add(new SetCardInfo("Temple of Epiphany", 253, Rarity.RARE, mage.cards.t.TempleOfEpiphany.class));
         cards.add(new SetCardInfo("Temple of Malady", 254, Rarity.RARE, mage.cards.t.TempleOfMalady.class));
