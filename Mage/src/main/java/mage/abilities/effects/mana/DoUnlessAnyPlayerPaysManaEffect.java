@@ -5,9 +5,6 @@
  */
 package mage.abilities.effects.mana;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -19,8 +16,11 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class DoUnlessAnyPlayerPaysManaEffect extends ManaEffect {
@@ -53,13 +53,16 @@ public class DoUnlessAnyPlayerPaysManaEffect extends ManaEffect {
             // check if any player is willing to pay
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
-                if (player != null && cost.canPay(source, source.getSourceId(), player.getId(), game) && player.chooseUse(Outcome.Detriment, message, source, game)) {
+                if (player != null && player.canRespond()
+                        && cost.canPay(source, source.getSourceId(), player.getId(), game)
+                        && player.chooseUse(Outcome.Detriment, message, source, game)) {
                     cost.clearPaid();
                     if (cost.pay(source, game, source.getSourceId(), player.getId(), false, null)) {
                         if (!game.isSimulation()) {
                             game.informPlayers(player.getLogName() + " pays the cost to prevent the effect");
                         }
                         doEffect = false;
+                        break;
                     }
                 }
             }

@@ -1,7 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
@@ -15,8 +13,9 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class RhysticScrying extends CardImpl {
@@ -61,13 +60,16 @@ class RhysticScryingEffect extends OneShotEffect {
             // check if any player is willing to pay
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
-                if (player != null && cost.canPay(source, source.getSourceId(), player.getId(), game) && player.chooseUse(Outcome.Detriment, "Pay " + cost.getText() + " for " + sourceObject.getLogName() + "?", source, game)) {
+                if (player != null && player.canRespond()
+                        && cost.canPay(source, source.getSourceId(), player.getId(), game)
+                        && player.chooseUse(Outcome.Benefit, "Pay " + cost.getText() + " for " + sourceObject.getLogName() + "?", source, game)) {
                     cost.clearPaid();
                     if (cost.pay(source, game, source.getSourceId(), player.getId(), false, null)) {
                         if (!game.isSimulation()) {
                             game.informPlayers(player.getLogName() + " pays the cost for " + sourceObject.getLogName());
                         }
                         doEffect = true;
+                        break;
                     }
                 }
             }
