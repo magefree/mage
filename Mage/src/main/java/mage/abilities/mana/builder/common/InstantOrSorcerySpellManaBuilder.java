@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.abilities.mana.builder.common;
 
-import java.util.UUID;
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
@@ -17,8 +11,9 @@ import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.ManaCondition;
 import mage.game.Game;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class InstantOrSorcerySpellManaBuilder extends ConditionalManaBuilder {
@@ -49,9 +44,7 @@ class InstantOrSorceryCastManaCondition extends ManaCondition implements Conditi
     public boolean apply(Game game, Ability source) {
         if (source instanceof SpellAbility) {
             MageObject object = game.getObject(source.getSourceId());
-            if (object != null && (object.isInstant() || object.isSorcery())) {
-                return true;
-            }
+            return object != null && (object.isInstant() || object.isSorcery());
         }
         return false;
     }

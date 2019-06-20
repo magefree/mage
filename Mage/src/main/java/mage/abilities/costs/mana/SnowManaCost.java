@@ -1,4 +1,3 @@
-
 package mage.abilities.costs.mana;
 
 import mage.Mana;
@@ -36,7 +35,7 @@ public class SnowManaCost extends ManaCostImpl {
 
     @Override
     public void assignPayment(Game game, Ability ability, ManaPool pool, Cost costToPay) {
-        this.assignGeneric(ability, game, pool, 1, costToPay);
+        this.assignGeneric(ability, game, pool, 1, null, costToPay);
     }
 
     @Override

@@ -1,9 +1,5 @@
-
 package mage.abilities.costs.mana;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
@@ -12,10 +8,15 @@ import mage.abilities.mana.ManaOptions;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
 import mage.filter.Filter;
+import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.players.ManaPool;
 import mage.players.Player;
 import mage.util.ManaUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public abstract class ManaCostImpl extends CostImpl implements ManaCost {
 
@@ -143,33 +144,49 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
         }
     }
 
-    protected boolean assignGeneric(Ability ability, Game game, ManaPool pool, int mana, Cost costToPay) {
-        int conditionalCount = pool.getConditionalCount(ability, game, null, costToPay);
+    protected boolean assignGeneric(Ability ability, Game game, ManaPool pool, int mana, FilterMana filterMana, Cost costToPay) {
+        int conditionalCount = pool.getConditionalCount(ability, game, filterMana, costToPay);
         while (mana > payment.count() && (pool.count() > 0 || conditionalCount > 0)) {
-            if (pool.pay(ManaType.COLORLESS, ability, sourceFilter, game, costToPay, usedManaToPay)) {
+            // try to use different mana to pay (conditional mana will used in pool.pay)
+            // filterMana can be null, uses for spells like "spend only black mana on X"
+
+            // {C}
+            if ((filterMana == null || filterMana.isColorless()) && pool.pay(ManaType.COLORLESS, ability, sourceFilter, game, costToPay, usedManaToPay)) {
                 this.payment.increaseColorless();
                 continue;
             }
-            if (pool.pay(ManaType.BLACK, ability, sourceFilter, game, costToPay, usedManaToPay)) {
+
+            // {B}
+            if ((filterMana == null || filterMana.isBlack()) && pool.pay(ManaType.BLACK, ability, sourceFilter, game, costToPay, usedManaToPay)) {
                 this.payment.increaseBlack();
                 continue;
             }
-            if (pool.pay(ManaType.BLUE, ability, sourceFilter, game, costToPay, usedManaToPay)) {
+
+            // {U}
+            if ((filterMana == null || filterMana.isBlue()) && pool.pay(ManaType.BLUE, ability, sourceFilter, game, costToPay, usedManaToPay)) {
                 this.payment.increaseBlue();
                 continue;
             }
-            if (pool.pay(ManaType.WHITE, ability, sourceFilter, game, costToPay, usedManaToPay)) {
+
+            // {W}
+            if ((filterMana == null || filterMana.isWhite()) && pool.pay(ManaType.WHITE, ability, sourceFilter, game, costToPay, usedManaToPay)) {
                 this.payment.increaseWhite();
                 continue;
             }
-            if (pool.pay(ManaType.GREEN, ability, sourceFilter, game, costToPay, usedManaToPay)) {
+
+            // {G}
+            if ((filterMana == null || filterMana.isGreen()) && pool.pay(ManaType.GREEN, ability, sourceFilter, game, costToPay, usedManaToPay)) {
                 this.payment.increaseGreen();
                 continue;
             }
-            if (pool.pay(ManaType.RED, ability, sourceFilter, game, costToPay, usedManaToPay)) {
+
+            // {R}
+            if ((filterMana == null || filterMana.isRed()) && pool.pay(ManaType.RED, ability, sourceFilter, game, costToPay, usedManaToPay)) {
                 this.payment.increaseRed();
                 continue;
             }
+
+            // nothing to pay
             break;
         }
         return mana > payment.count();
@@ -208,14 +225,14 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
         }
         Player player = game.getPlayer(controllerId);
         if (!player.getManaPool().isForcedToPay()) {
-            assignPayment(game, ability, player.getManaPool(), costToPay);
+            assignPayment(game, ability, player.getManaPool(), costToPay != null ? costToPay : this);
         }
         game.getState().getSpecialActions().removeManaActions();
         while (!isPaid()) {
             ManaCost unpaid = this.getUnpaid();
             String promptText = ManaUtil.addSpecialManaPayAbilities(ability, game, unpaid);
             if (player.playMana(ability, unpaid, promptText, game)) {
-                assignPayment(game, ability, player.getManaPool(), costToPay);
+                assignPayment(game, ability, player.getManaPool(), costToPay != null ? costToPay : this);
             } else {
                 return false;
             }

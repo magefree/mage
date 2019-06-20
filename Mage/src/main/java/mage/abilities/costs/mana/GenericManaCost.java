@@ -1,4 +1,3 @@
-
 package mage.abilities.costs.mana;
 
 import mage.Mana;
@@ -42,7 +41,7 @@ public class GenericManaCost extends ManaCostImpl {
 
     @Override
     public void assignPayment(Game game, Ability ability, ManaPool pool, Cost costsToPay) {
-        this.assignGeneric(ability, game, pool, mana, costsToPay);
+        this.assignGeneric(ability, game, pool, mana, null, costsToPay);
     }
 
     @Override

@@ -123,7 +123,7 @@ public abstract class VariableCostImpl implements Cost, VariableCost {
     }
 
     @Override
-    public void setAmount(int xValue, int xPay) {
+    public void setAmount(int xValue, int xPay, boolean isPayed) {
         amountPaid = xPay;
     }
 

@@ -10,13 +10,20 @@ import mage.game.Game;
 import mage.players.ManaPool;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
-public class VariableManaCost extends ManaCostImpl implements VariableCost {
+public final class VariableManaCost extends ManaCostImpl implements VariableCost {
 
-    protected int xInstancesCount; // number of {X}
+    // variable mana cost usage on 2019-06-20:
+    // 1. as X value in spell/ability cast (announce X, set VariableManaCost as paid and add generic mana to pay instead)
+    // 2. as X value in direct pay (X already announced, cost is unpaid, need direct pay)
+
+    protected int xInstancesCount; // number of {X} instances in cost like {X} or {X}{X}
     protected int xValue = 0; // final X value after announce and replace events
-    protected FilterMana filter;
+    protected int xPay = 0; // final/total need pay after announce and replace events (example: {X}{X}, X=3, xPay = 6)
+    protected boolean wasAnnounced = false;
+
+    protected FilterMana filter; // mana filter that can be used for that cost
     protected int minX = 0;
     protected int maxX = Integer.MAX_VALUE;
 
@@ -34,6 +41,8 @@ public class VariableManaCost extends ManaCostImpl implements VariableCost {
         super(manaCost);
         this.xInstancesCount = manaCost.xInstancesCount;
         this.xValue = manaCost.xValue;
+        this.xPay = manaCost.xPay;
+        this.wasAnnounced = manaCost.wasAnnounced;
         if (manaCost.filter != null) {
             this.filter = manaCost.filter.copy();
         }
@@ -48,9 +57,8 @@ public class VariableManaCost extends ManaCostImpl implements VariableCost {
 
     @Override
     public void assignPayment(Game game, Ability ability, ManaPool pool, Cost costToPay) {
-        payment.add(pool.getMana(filter));
-        payment.add(pool.getAllConditionalMana(ability, game, filter));
-        pool.payX(ability, game, filter);
+        // X mana cost always pays as generic mana
+        this.assignGeneric(ability, game, pool, xPay, filter, costToPay);
     }
 
     @Override
@@ -67,6 +75,14 @@ public class VariableManaCost extends ManaCostImpl implements VariableCost {
     }
 
     @Override
+    public boolean isPaid() {
+        if (!wasAnnounced) return false;
+        if (paid) return true;
+
+        return this.isColorlessPaid(xPay);
+    }
+
+    @Override
     public VariableManaCost getUnpaid() {
         return this;
     }
@@ -74,19 +90,23 @@ public class VariableManaCost extends ManaCostImpl implements VariableCost {
     @Override
     public int getAmount() {
         // must return X value
-        //return payment.count() / multiplier;
         return this.xValue;
     }
 
     @Override
-    public void setAmount(int xValue, int xPay) {
+    public void setAmount(int xValue, int xPay, boolean isPayed) {
+        // xPay is total pay value (X * instances)
         this.xValue = xValue;
-        payment.setGeneric(xPay);
+        this.xPay = xPay;
+        if (isPayed) {
+            payment.setGeneric(xPay);
+        }
+        this.wasAnnounced = true;
     }
 
     @Override
     public boolean testPay(Mana testMana) {
-        return true;
+        return true; // TODO: need rework to generic mana style?
     }
 
     @Override
@@ -121,27 +141,27 @@ public class VariableManaCost extends ManaCostImpl implements VariableCost {
 
     @Override
     public int announceXValue(Ability source, Game game) {
-        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported.");
     }
 
     @Override
     public Cost getFixedCostsFromAnnouncedValue(int xValue) {
-        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported.");
     }
 
     @Override
     public String getActionText() {
-        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported.");
     }
 
     @Override
     public int getMinValue(Ability source, Game game) {
-        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported.");
     }
 
     @Override
     public int getMaxValue(Ability source, Game game) {
-        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported.");
     }
 
     public FilterMana getFilter() {

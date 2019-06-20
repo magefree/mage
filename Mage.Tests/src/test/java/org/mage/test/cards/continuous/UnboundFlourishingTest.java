@@ -183,7 +183,7 @@ public class UnboundFlourishingTest extends CardTestPlayerBase {
         int xAnnouncedValue = 3;
         int xMultiplier = 2;
         VariableManaCost cost = new VariableManaCost(xInstancesCount);
-        cost.setAmount(xAnnouncedValue * xMultiplier, xAnnouncedValue * xInstancesCount);
+        cost.setAmount(xAnnouncedValue * xMultiplier, xAnnouncedValue * xInstancesCount, false);
 
         Assert.assertEquals("instances count", xInstancesCount, cost.getXInstancesCount());
         Assert.assertEquals("boosted X value", xAnnouncedValue * xMultiplier, cost.getAmount());

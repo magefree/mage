@@ -256,7 +256,7 @@ public abstract class AbilityImpl implements Ability {
                 VariableManaCost xCosts = new VariableManaCost();
                 // no x events - rules from Unbound Flourishing:
                 // - Spells with additional costs that include X won't be affected by Unbound Flourishing. X must be in the spell's mana cost.
-                xCosts.setAmount(xValue, xValue);
+                xCosts.setAmount(xValue, xValue, false);
                 this.getManaCostsToPay().add(xCosts);
             } else {
                 this.getManaCostsToPay().clear();
@@ -525,7 +525,7 @@ public abstract class AbilityImpl implements Ability {
                 // set the xcosts to paid
                 // no x events - rules from Unbound Flourishing:
                 // - Spells with additional costs that include X won't be affected by Unbound Flourishing. X must be in the spell's mana cost.
-                variableCost.setAmount(xValue, xValue);
+                variableCost.setAmount(xValue, xValue, false);
                 ((Cost) variableCost).setPaid();
                 String message = controller.getLogName() + " announces a value of " + xValue + " (" + variableCost.getActionText() + ')';
                 announceString.append(message);

@@ -17,10 +17,11 @@ public interface VariableCost {
     /**
      * Sets the variable amount
      *
-     * @param xValue - value of X
-     * @param xPay   - total value of pays for X (X * xMultiplier * xInstancesCount)
+     * @param xValue  - value of X
+     * @param xPay    - total value of pays for X (X * xMultiplier * xInstancesCount)
+     * @param isPayed - is that was real payed or just value setup
      */
-    void setAmount(int xValue, int xPay);
+    void setAmount(int xValue, int xPay, boolean isPayed);
 
     /**
      * returns the action text (e.g. "creature cards to exile from your hand", "life to pay")

@@ -4,9 +4,10 @@ import mage.MageObject;
 import mage.Mana;
 import mage.ManaSymbol;
 import mage.abilities.Ability;
-import mage.abilities.costs.mana.AlternateManaPaymentAbility;
-import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaSymbols;
+import mage.abilities.costs.mana.*;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.mana.*;
 import mage.cards.Card;
 import mage.choices.Choice;
@@ -492,6 +493,23 @@ public final class ManaUtil {
         }
         if (newColors.isGreen()) {
             destColors.setGreen(true);
+        }
+    }
+
+    public static ManaCost createManaCost(int manaValue) {
+        return new GenericManaCost(manaValue);
+    }
+
+    public static ManaCost createManaCost(DynamicValue manaValue, Game game, Ability sourceAbility, Effect effect) {
+        int costValue = manaValue.calculate(game, sourceAbility, effect);
+        if (manaValue instanceof ManacostVariableValue) {
+            // variable (X must be final value after all events and effects)
+            VariableManaCost xCost = new VariableManaCost();
+            xCost.setAmount(costValue, costValue, false);
+            return xCost;
+        } else {
+            // static/generic
+            return new GenericManaCost(costValue);
         }
     }
 }

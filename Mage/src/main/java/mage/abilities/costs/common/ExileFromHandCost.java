@@ -69,7 +69,7 @@ public class ExileFromHandCost extends CostImpl {
                 VariableManaCost vmc = new VariableManaCost();
                 // no x events - rules from Unbound Flourishing:
                 // - Spells with additional costs that include X won't be affected by Unbound Flourishing. X must be in the spell's mana cost.
-                vmc.setAmount(cmc, cmc);
+                vmc.setAmount(cmc, cmc, false);
                 vmc.setPaid();
                 ability.getManaCostsToPay().add(vmc);
             }

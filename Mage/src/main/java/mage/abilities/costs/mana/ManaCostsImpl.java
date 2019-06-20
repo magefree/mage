@@ -232,7 +232,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     public void setX(int xValue, int xPay) {
         List<VariableCost> variableCosts = getVariableCosts();
         if (!variableCosts.isEmpty()) {
-            variableCosts.get(0).setAmount(xValue, xPay);
+            variableCosts.get(0).setAmount(xValue, xPay, false);
         }
     }
 

@@ -4,9 +4,12 @@ import mage.ConditionalMana;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.mana.BasicManaAbility;
+import mage.abilities.mana.conditional.ManaCondition;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -70,7 +73,7 @@ class RosheenMeandererConditionalMana extends ConditionalMana {
     }
 }
 
-class RosheenMeandererManaCondition implements Condition {
+class RosheenMeandererManaCondition extends ManaCondition {
 
     /*
     A “cost that contains {X}” may be a spell’s total cost, an activated ability’s cost, a suspend cost, or a cost you’re
@@ -81,7 +84,11 @@ class RosheenMeandererManaCondition implements Condition {
     */
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return source.getManaCostsToPay().containsX();
+    public boolean apply(Game game, Ability source, UUID originalId, Cost costToPay) {
+        if (costToPay instanceof ManaCosts) {
+            return !((ManaCosts) costToPay).getVariableCosts().isEmpty();
+        } else {
+            return costToPay instanceof VariableManaCost;
+        }
     }
 }

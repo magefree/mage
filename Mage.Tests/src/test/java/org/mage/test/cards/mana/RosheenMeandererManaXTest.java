@@ -93,4 +93,92 @@ public class RosheenMeandererManaXTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
     }
 
+    // https://github.com/magefree/mage/issues/5206
+
+    // Flameblast Dragon {4}{R}{R}
+    // 5/5
+    // Flying
+    // Whenever Flameblast Dragon attacks, you may pay {X}{R}. If you do, Flameblast Dragon deals X damage to any target.
+
+    @Test
+    public void test_SimpleDragon() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Flameblast Dragon");
+
+        // attack (-5)
+        attack(1, playerA, "Flameblast Dragon", playerB);
+
+        // with extra damage (-3)
+        setChoice(playerA, "Yes");
+        setChoice(playerA, "X=3");
+        addTarget(playerA, playerB);
+
+        checkLife("after", 1, PhaseStep.POSTCOMBAT_MAIN, playerB, 20 - 5 - 3);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_PayXForDragonAbility() {
+        addCard(Zone.BATTLEFIELD, playerA, "Flameblast Dragon");
+        addCard(Zone.BATTLEFIELD, playerA, "Rosheen Meanderer");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+
+        // make 4 mana for X pay
+        activateAbility(1, PhaseStep.DECLARE_ATTACKERS, playerA, "{T}: Add {C}");
+        checkManaPool("mana", 1, PhaseStep.DECLARE_ATTACKERS, playerA, "C", 4);
+
+        // attack (-5)
+        attack(1, playerA, "Flameblast Dragon", playerB);
+
+        // with extra damage (-3)
+        setChoice(playerA, "Yes");
+        setChoice(playerA, "X=3"); // need to pay {3}{R}
+        addTarget(playerA, playerB);
+
+        checkLife("after", 1, PhaseStep.POSTCOMBAT_MAIN, playerB, 20 - 5 - 3);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    // Condescend {X}{U}
+    // Counter target spell unless its controller pays {X}. Scry 2.
+
+    @Test
+    public void test_PayXForCondescendPrevent() {
+        addCard(Zone.HAND, playerB, "Condescend");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 3);
+        //
+        addCard(Zone.BATTLEFIELD, playerA, "Rosheen Meanderer");
+        //
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+
+        // cast bolt
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        // counter with condescend
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Condescend");
+        setChoice(playerB, "X=2");
+        addTarget(playerB, "Lightning Bolt");
+        // make 4 mana for X pay
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {C}");
+        checkManaPool("mana", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "C", 4);
+        // pay to prevent
+        setChoice(playerA, "Yes"); // pay 2 to prevent counter
+
+        checkLife("after", 1, PhaseStep.POSTCOMBAT_MAIN, playerB, 20 - 3);
+        checkHandCardCount("after", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", 0);
+        checkHandCardCount("after", 1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Condescend", 0);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+        assertAllCommandsUsed();
+    }
 }
