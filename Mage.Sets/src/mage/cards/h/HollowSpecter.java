@@ -1,31 +1,25 @@
-
 package mage.cards.h;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.util.ManaUtil;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class HollowSpecter extends CardImpl {
@@ -76,16 +70,15 @@ class HollowSpecterEffect extends OneShotEffect {
 
         Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
-        if (targetPlayer != null && controller != null && controller.chooseUse(Outcome.BoostCreature, "Do you want to to pay {X}?", source, game)) {
-            int costX = controller.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
-            Cost cost = new GenericManaCost(costX);
-            int amountToReveal = costX;
-            Cards revealedCards = new CardsImpl();
-            if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
-                if (amountToReveal > 0 && targetPlayer.getHand().size() > amountToReveal) {
+        if (targetPlayer != null && controller != null && controller.chooseUse(Outcome.Benefit, "Do you want to to pay {X}?", source, game)) {
+            int payCount = ManaUtil.playerPaysXGenericMana(true, "Hollow Specter", controller, source, game);
+            if (payCount > 0) {
+                // find to reveal
+                Cards revealedCards = new CardsImpl();
+                if (targetPlayer.getHand().size() > payCount) {
                     Cards cardsInHand = new CardsImpl();
                     cardsInHand.addAll(targetPlayer.getHand());
-                    TargetCard target = new TargetCard(amountToReveal, Zone.HAND, new FilterCard());
+                    TargetCard target = new TargetCard(payCount, Zone.HAND, new FilterCard());
                     if (targetPlayer.choose(Outcome.Discard, cardsInHand, target, game)) {
                         List<UUID> targets = target.getTargets();
                         for (UUID targetId : targets) {
@@ -94,25 +87,32 @@ class HollowSpecterEffect extends OneShotEffect {
                                 revealedCards.add(card);
                             }
                         }
+                    } else {
+                        // take any cards on disconnect
+                        targetPlayer.getHand().stream().limit(payCount).forEach(revealedCards::add);
                     }
                 } else {
                     revealedCards.addAll(targetPlayer.getHand());
                 }
+
+                // select to discard
                 TargetCard targetInHand = new TargetCard(Zone.HAND, new FilterCard("card to discard"));
                 if (!revealedCards.isEmpty()) {
                     targetPlayer.revealCards("Hollow Specter", revealedCards, game);
-                    Card card = null;
-                    if(revealedCards.size() > 1) {
+                    Card card;
+                    if (revealedCards.size() > 1) {
                         controller.choose(Outcome.Discard, revealedCards, targetInHand, game);
                         card = revealedCards.get(targetInHand.getFirstTarget(), game);
                     } else {
                         card = revealedCards.getRandom(game);
                     }
+
                     if (card != null) {
                         targetPlayer.discard(card, source, game);
                     }
                 }
             }
+
             return true;
         }
         return false;
