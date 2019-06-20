@@ -1,21 +1,15 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.Cost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -26,9 +20,11 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.util.ManaUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author spjspj
  */
 public final class Mudslide extends CardImpl {
@@ -89,15 +85,18 @@ class MudslideEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (player != null && sourcePermanent != null) {
             int countBattlefield = game.getBattlefield().getAllActivePermanents(filter, game.getActivePlayerId(), game).size();
-            while (player.canRespond() && countBattlefield > 0 && player.chooseUse(Outcome.AIDontUseIt, "Pay {2} and untap a tapped creature without flying under your control?", source, game)) {
+            while (player.canRespond() && countBattlefield > 0 && player.chooseUse(Outcome.Benefit, "Pay {2} and untap a tapped creature without flying under your control?", source, game)) {
                 Target tappedCreatureTarget = new TargetControlledCreaturePermanent(1, 1, filter, true);
-                if (player.choose(Outcome.Detriment, tappedCreatureTarget, source.getSourceId(), game)) {
-                    GenericManaCost cost = new GenericManaCost(2);
+                if (player.choose(Outcome.Untap, tappedCreatureTarget, source.getSourceId(), game)) {
+                    Cost cost = ManaUtil.createManaCost(2, false);
                     Permanent tappedCreature = game.getPermanent(tappedCreatureTarget.getFirstTarget());
-
-                    if (cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
+                    if (tappedCreature != null && cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
                         tappedCreature.untap(game);
+                    } else {
+                        break;
                     }
+                } else {
+                    break;
                 }
                 countBattlefield = game.getBattlefield().getAllActivePermanents(filter, game.getActivePlayerId(), game).size();
             }
