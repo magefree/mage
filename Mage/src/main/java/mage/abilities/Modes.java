@@ -1,4 +1,3 @@
-
 package mage.abilities;
 
 import mage.abilities.costs.OptionalAdditionalModeSourceCosts;
@@ -45,22 +44,23 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
             this.put(entry.getKey(), entry.getValue().copy());
         }
         for (Map.Entry<UUID, Mode> entry : modes.duplicateModes.entrySet()) {
-            this.put(entry.getKey(), entry.getValue().copy());
+            duplicateModes.put(entry.getKey(), entry.getValue().copy());
         }
         this.minModes = modes.minModes;
         this.maxModes = modes.maxModes;
         this.selectedModes.addAll(modes.getSelectedModes());
+
+        this.modeChooser = modes.modeChooser;
+        this.eachModeOnlyOnce = modes.eachModeOnlyOnce;
+        this.eachModeMoreThanOnce = modes.eachModeMoreThanOnce;
+        this.optionalAdditionalModeSourceCosts = modes.optionalAdditionalModeSourceCosts;
+        this.maxModesFilter = modes.maxModesFilter; // can't change so no copy needed
 
         if (modes.getSelectedModes().isEmpty()) {
             this.currentMode = values().iterator().next();
         } else {
             this.currentMode = get(modes.getMode().getId());
         }
-        this.modeChooser = modes.modeChooser;
-        this.eachModeOnlyOnce = modes.eachModeOnlyOnce;
-        this.eachModeMoreThanOnce = modes.eachModeMoreThanOnce;
-        this.optionalAdditionalModeSourceCosts = modes.optionalAdditionalModeSourceCosts;
-        this.maxModesFilter = modes.maxModesFilter; // can't change so no copy needed
     }
 
     public Modes copy() {

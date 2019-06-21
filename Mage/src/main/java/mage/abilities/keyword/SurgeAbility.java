@@ -1,8 +1,5 @@
-
 package mage.abilities.keyword;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.cards.Card;
@@ -12,8 +9,10 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.watchers.common.CastSpellLastTurnWatcher;
 
+import java.util.ArrayList;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class SurgeAbility extends SpellAbility {
@@ -23,12 +22,15 @@ public class SurgeAbility extends SpellAbility {
     private String rule;
 
     public SurgeAbility(Card card, String surgeCosts) {
-        super(new ManaCostsImpl<>(surgeCosts), card.getName() + " with surge", Zone.HAND, SpellAbilityType.BASE_ALTERNATE);
-        this.getCosts().addAll(card.getSpellAbility().getCosts().copy());
-        this.getEffects().addAll(card.getSpellAbility().getEffects().copy());
-        this.getTargets().addAll(card.getSpellAbility().getTargets().copy());
-        this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
-        this.timing = card.getSpellAbility().getTiming();
+        super(card.getSpellAbility());
+        this.setCardName(card.getName() + " with surge");
+        zone = Zone.HAND;
+        spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
+
+        this.getManaCosts().clear();
+        this.getManaCostsToPay().clear();
+        this.addManaCost(new ManaCostsImpl<>(surgeCosts));
+
         this.setRuleAtTheTop(true);
         this.rule = "Surge " + surgeCosts
                 + " <i>(You may cast this spell for its surge cost if you or a teammate has cast another spell this turn.)</i>";

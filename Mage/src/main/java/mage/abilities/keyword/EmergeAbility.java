@@ -1,7 +1,5 @@
-
 package mage.abilities.keyword;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -21,8 +19,9 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public class EmergeAbility extends SpellAbility {
@@ -30,11 +29,15 @@ public class EmergeAbility extends SpellAbility {
     private final ManaCosts<ManaCost> emergeCost;
 
     public EmergeAbility(Card card, ManaCosts<ManaCost> emergeCost) {
-        super(emergeCost, card.getName() + " with emerge", Zone.HAND, SpellAbilityType.BASE_ALTERNATE);
-        this.getCosts().addAll(card.getSpellAbility().getCosts().copy());
-        this.getEffects().addAll(card.getSpellAbility().getEffects().copy());
-        this.getTargets().addAll(card.getSpellAbility().getTargets().copy());
-        this.timing = card.getSpellAbility().getTiming();
+        super(card.getSpellAbility());
+        this.setCardName(card.getName() + " with emerge");
+        zone = Zone.HAND;
+        spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
+
+        this.getManaCosts().clear();
+        this.getManaCostsToPay().clear();
+        this.addManaCost(emergeCost.copy());
+
         this.setRuleAtTheTop(true);
         this.emergeCost = emergeCost.copy();
     }

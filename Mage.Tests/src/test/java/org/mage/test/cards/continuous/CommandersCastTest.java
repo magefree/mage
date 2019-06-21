@@ -126,4 +126,61 @@ public class CommandersCastTest extends CardTestCommander4Players {
         assertTappedCount("Forest", true, 2);
         assertTappedCount("Mountain", true, 3);
     }
+
+    @Test
+    public void test_ModesNormal() {
+        // Player order: A -> D -> C -> B
+
+        // Choose four. You may choose the same mode more than once.
+        // • Create a 2/2 Citizen creature token that’s all colors.
+        // • Return target permanent card from your graveyard to your hand.
+        // • Proliferate.
+        // • You gain 4 life.
+        addCard(Zone.HAND, playerA, "Planewide Celebration", 1); // {5}{G}{G}
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 7);
+
+        // cast (3 tokens + 4 life)
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Planewide Celebration");
+        setModeChoice(playerA, "1");
+        setModeChoice(playerA, "1");
+        setModeChoice(playerA, "1");
+        setModeChoice(playerA, "4");
+
+        checkPermanentCount("after", 1, PhaseStep.BEGIN_COMBAT, playerA, "Citizen", 3);
+        checkLife("after", 1, PhaseStep.BEGIN_COMBAT, playerA, 20 + 4);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_ModesCommander() {
+        // Player order: A -> D -> C -> B
+
+        // Choose four. You may choose the same mode more than once.
+        // • Create a 2/2 Citizen creature token that’s all colors.
+        // • Return target permanent card from your graveyard to your hand.
+        // • Proliferate.
+        // • You gain 4 life.
+        addCard(Zone.COMMAND, playerA, "Planewide Celebration", 1); // {5}{G}{G}
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 7);
+
+        // cast (3 tokens + 4 life)
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Planewide Celebration");
+        setModeChoice(playerA, "1");
+        setModeChoice(playerA, "1");
+        setModeChoice(playerA, "1");
+        setModeChoice(playerA, "4");
+        setChoice(playerA, "Yes"); // return commander
+
+        checkPermanentCount("after", 1, PhaseStep.BEGIN_COMBAT, playerA, "Citizen", 3);
+        checkLife("after", 1, PhaseStep.BEGIN_COMBAT, playerA, 20 + 4);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+        assertAllCommandsUsed();
+    }
 }

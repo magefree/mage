@@ -186,6 +186,11 @@ public class SpellAbility extends ActivatedAbilityImpl {
         return amount * xMultiplier;
     }
 
+    public void setCardName(String cardName) {
+        this.cardName = cardName;
+        setSpellName();
+    }
+
     private void setSpellName() {
         switch (spellAbilityType) {
             case SPLIT_FUSED:

@@ -36,16 +36,14 @@ public class JumpStartAbility extends SpellAbility {
     private boolean replacementEffectAdded = false;
 
     public JumpStartAbility(Card card) {
-        super(card.getManaCost(), card.getName() + " with jump-start", Zone.GRAVEYARD, SpellAbilityType.BASE_ALTERNATE);
-        this.getCosts().addAll(card.getSpellAbility().getCosts().copy());
+        super(card.getSpellAbility());
+        this.setCardName(card.getName() + " with jump-start");
+        zone = Zone.GRAVEYARD;
+        spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
+
         Cost cost = new DiscardTargetCost(new TargetCardInHand());
         cost.setText("");
         this.addCost(cost);
-        this.getEffects().addAll(card.getSpellAbility().getEffects().copy());
-        this.getTargets().addAll(card.getSpellAbility().getTargets().copy());
-        this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
-        this.timing = card.getSpellAbility().getTiming();
-
     }
 
     public JumpStartAbility(final JumpStartAbility ability) {
@@ -132,9 +130,7 @@ class JumpStartReplacementEffect extends ReplacementEffectImpl {
         if (event.getTargetId().equals(source.getSourceId())
                 && ((ZoneChangeEvent) event).getFromZone() == Zone.STACK
                 && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED) {
-            if (game.getState().getZoneChangeCounter(source.getSourceId()) == source.getSourceObjectZoneChangeCounter() + 1) {
-                return true;
-            }
+            return game.getState().getZoneChangeCounter(source.getSourceId()) == source.getSourceObjectZoneChangeCounter() + 1;
 
         }
         return false;

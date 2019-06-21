@@ -11,20 +11,10 @@ import mage.constants.Zone;
 public class CastCommanderAbility extends SpellAbility {
 
     public CastCommanderAbility(Card card) {
-        super(card.getManaCost(), card.getName(), Zone.COMMAND, SpellAbilityType.BASE);
-        if (card.getSpellAbility() != null) {
-            this.getCosts().addAll(card.getSpellAbility().getCosts().copy());
-            this.getEffects().addAll(card.getSpellAbility().getEffects().copy());
-            this.getTargets().addAll(card.getSpellAbility().getTargets().copy());
-            this.setTargetAdjuster(card.getSpellAbility().getTargetAdjuster());
-            this.setCostAdjuster(card.getSpellAbility().getCostAdjuster());
-            this.timing = card.getSpellAbility().getTiming();
-        } else {
-            throw new IllegalStateException("Cast commander ability must be used with spell ability only: " + card.getName());
-        }
-        this.usesStack = true;
-        this.controllerId = card.getOwnerId();
-        this.sourceId = card.getId();
+        super(card.getSpellAbility());
+        this.setCardName(cardName = card.getName());
+        zone = Zone.COMMAND;
+        spellAbilityType = SpellAbilityType.BASE;
     }
 
     public CastCommanderAbility(final CastCommanderAbility ability) {
