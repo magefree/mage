@@ -4,6 +4,7 @@ import mage.MageObject;
 import mage.Mana;
 import mage.ManaSymbol;
 import mage.abilities.Ability;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.*;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
@@ -14,6 +15,7 @@ import mage.choices.Choice;
 import mage.constants.ColoredManaSymbol;
 import mage.filter.FilterMana;
 import mage.game.Game;
+import mage.players.Player;
 
 import java.util.*;
 
@@ -496,20 +498,63 @@ public final class ManaUtil {
         }
     }
 
-    public static ManaCost createManaCost(int manaValue) {
-        return new GenericManaCost(manaValue);
-    }
-
-    public static ManaCost createManaCost(DynamicValue manaValue, Game game, Ability sourceAbility, Effect effect) {
-        int costValue = manaValue.calculate(game, sourceAbility, effect);
-        if (manaValue instanceof ManacostVariableValue) {
-            // variable (X must be final value after all events and effects)
+    /**
+     * all ability/effect code with "new GenericManaCost" must be replaced by createManaCost call
+     */
+    public static ManaCost createManaCost(int genericManaCount, boolean payAsX) {
+        if (payAsX) {
             VariableManaCost xCost = new VariableManaCost();
-            xCost.setAmount(costValue, costValue, false);
+            xCost.setAmount(genericManaCount, genericManaCount, false);
             return xCost;
         } else {
-            // static/generic
-            return new GenericManaCost(costValue);
+            return new GenericManaCost(genericManaCount);
         }
+    }
+
+    public static ManaCost createManaCost(DynamicValue genericManaCount, Game game, Ability sourceAbility, Effect effect) {
+        int costValue = genericManaCount.calculate(game, sourceAbility, effect);
+        if (genericManaCount instanceof ManacostVariableValue) {
+            // variable (X must be final value after all events and effects)
+            return createManaCost(costValue, true);
+        } else {
+            // static/generic
+            return createManaCost(costValue, false);
+        }
+    }
+
+    public static int playerPaysXGenericMana(boolean payAsX, String restoreContextName, Player player, Ability source, Game game) {
+        // payAsX - if your cost is X value (some mana can be used for X cost only)
+        // false: "you may pay any amount of mana"
+        // true: "counter that spell unless that player pays {X}"
+
+        int wantToPay = 0;
+        boolean payed = false;
+        while (player.canRespond() && !payed) {
+            int bookmark = game.bookmarkState();
+            player.resetStoredBookmark(game);
+
+            wantToPay = player.announceXMana(0, Integer.MAX_VALUE, "How much mana will you pay?", game, source);
+            if (wantToPay > 0) {
+                Cost cost = ManaUtil.createManaCost(wantToPay, payAsX);
+                payed = cost.pay(source, game, source.getSourceId(), player.getId(), false, null);
+            } else {
+                payed = true;
+            }
+
+            if (!payed) {
+                game.restoreState(bookmark, restoreContextName);
+                game.fireUpdatePlayersEvent();
+            } else {
+                game.removeBookmark(bookmark);
+            }
+        }
+
+        if (payed) {
+            game.informPlayers(player.getLogName() + " pays {" + wantToPay + "}.");
+            return wantToPay;
+        } else {
+            return 0;
+        }
+
     }
 }

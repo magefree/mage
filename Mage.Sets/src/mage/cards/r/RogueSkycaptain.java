@@ -1,13 +1,9 @@
 package mage.cards.r;
 
-import java.util.Set;
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.RemoveAllCountersSourceEffect;
@@ -26,15 +22,18 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
+import mage.util.ManaUtil;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
- *
  * @author Ketsuban
  */
 public class RogueSkycaptain extends CardImpl {
 
     public RogueSkycaptain(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[] { CardType.CREATURE }, "{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ROGUE);
         this.subtype.add(SubType.MERCENARY);
@@ -79,7 +78,7 @@ class RogueSkycaptainEffect extends OneShotEffect {
         Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && permanent != null) {
             new AddCountersSourceEffect(CounterType.WAGE.createInstance(), true).apply(game, source);
-            Cost cost = new GenericManaCost(2 * permanent.getCounters(game).getCount(CounterType.WAGE));
+            Cost cost = ManaUtil.createManaCost(2 * permanent.getCounters(game).getCount(CounterType.WAGE), false);
             if (!cost.pay(source, game, controller.getId(), controller.getId(), false)) {
                 new RemoveAllCountersSourceEffect(CounterType.WAGE).apply(game, source);
                 Player opponent;

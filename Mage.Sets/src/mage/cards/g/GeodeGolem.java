@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -17,6 +16,7 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.util.ManaUtil;
 import mage.watchers.common.CommanderPlaysCountWatcher;
 
 import java.util.HashSet;
@@ -99,11 +99,12 @@ class GeodeGolemEffect extends OneShotEffect {
             }
 
             // PAY
+            // TODO: it's can be broken with commander cost reduction effect
             ManaCost cost = null;
             CommanderPlaysCountWatcher watcher = game.getState().getWatcher(CommanderPlaysCountWatcher.class);
             int castCount = watcher.getPlaysCount(commander.getId());
             if (castCount > 0) {
-                cost = new GenericManaCost(castCount * 2);
+                cost = ManaUtil.createManaCost(castCount * 2, false);
             }
 
             // CAST: as spell or as land

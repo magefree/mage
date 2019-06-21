@@ -1,11 +1,8 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -18,9 +15,11 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.ManaUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author emerald000
  */
 public final class PhyrexianTyranny extends CardImpl {
@@ -98,7 +97,7 @@ class PhyrexianTyrannyEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
-            Cost cost = new GenericManaCost(2);
+            Cost cost = ManaUtil.createManaCost(2, false);
             if (!cost.pay(source, game, player.getId(), player.getId(), false, null)) {
                 player.loseLife(2, game, false);
             }

@@ -3,11 +3,11 @@ package mage.abilities.effects.common.cost;
 import mage.abilities.Ability;
 import mage.abilities.common.CastCommanderAbility;
 import mage.abilities.common.PlayLandAsCommanderAbility;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
+import mage.util.ManaUtil;
 import mage.watchers.common.CommanderPlaysCountWatcher;
 
 import java.util.UUID;
@@ -39,7 +39,7 @@ public class CommanderCostModification extends CostModificationEffectImpl {
         CommanderPlaysCountWatcher watcher = game.getState().getWatcher(CommanderPlaysCountWatcher.class);
         int castCount = watcher.getPlaysCount(commanderId);
         if (castCount > 0) {
-            abilityToModify.getManaCostsToPay().add(new GenericManaCost(2 * castCount));
+            abilityToModify.getManaCostsToPay().add(ManaUtil.createManaCost(2 * castCount, false));
         }
         return true;
     }

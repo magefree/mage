@@ -1,29 +1,28 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.common.FilterArtifactSpell;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.ManaUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author Loki
  */
 public final class Lifesmith extends CardImpl {
-    public Lifesmith (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+    public Lifesmith(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
 
@@ -34,7 +33,7 @@ public final class Lifesmith extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new LifesmithEffect(), filter, false));
     }
 
-    public Lifesmith (final Lifesmith card) {
+    public Lifesmith(final Lifesmith card) {
         super(card);
     }
 
@@ -56,8 +55,7 @@ class LifesmithEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Cost cost = new GenericManaCost(1);
-        cost.clearPaid();
+        Cost cost = ManaUtil.createManaCost(1, false);
         if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {

@@ -1,13 +1,10 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -21,15 +18,17 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+import mage.util.ManaUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author North
  */
 public final class SilvergillAdept extends CardImpl {
 
     public SilvergillAdept(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.WIZARD);
 
@@ -55,7 +54,7 @@ public final class SilvergillAdept extends CardImpl {
 class SilvergillAdeptCost extends CostImpl {
 
     private static final FilterCard filter = new FilterCard("Merfolk card");
-    private GenericManaCost mana = new GenericManaCost(3);
+    private Cost mana = ManaUtil.createManaCost(3, false);
 
     static {
         filter.add(new SubtypePredicate(SubType.MERFOLK));
@@ -67,7 +66,7 @@ class SilvergillAdeptCost extends CostImpl {
 
     public SilvergillAdeptCost(SilvergillAdeptCost cost) {
         super(cost);
-        this.mana = cost.mana;
+        this.mana = cost.mana.copy();
     }
 
     @Override
@@ -106,11 +105,8 @@ class SilvergillAdeptCost extends CostImpl {
             return true;
         }
 
-        if (mana.canPay(ability, sourceId, controllerId, game)) {
-            return true;
-        }
+        return mana.canPay(ability, sourceId, controllerId, game);
 
-        return false;
     }
 
     @Override

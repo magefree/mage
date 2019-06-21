@@ -1,7 +1,4 @@
-
 package mage.cards.n;
-
-import java.util.UUID;
 
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -19,12 +16,7 @@ import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -33,9 +25,11 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.ManaUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author nantuko
  */
 public final class NimDeathmantle extends CardImpl {
@@ -111,7 +105,7 @@ class NimDeathmantleTriggeredAbility extends TriggeredAbilityImpl {
 
 class NimDeathmantleEffect extends OneShotEffect {
 
-    private final Cost cost = new GenericManaCost(4);
+    private final Cost cost = ManaUtil.createManaCost(4, false);
 
     public NimDeathmantleEffect() {
         super(Outcome.Benefit);

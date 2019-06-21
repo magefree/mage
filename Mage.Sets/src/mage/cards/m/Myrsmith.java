@@ -1,12 +1,9 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -15,9 +12,11 @@ import mage.constants.SubType;
 import mage.filter.common.FilterArtifactSpell;
 import mage.game.Game;
 import mage.game.permanent.token.MyrToken;
+import mage.util.ManaUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author Loki, North
  */
 public final class Myrsmith extends CardImpl {
@@ -58,8 +57,7 @@ class MyrsmithEffect extends CreateTokenEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Cost cost = new GenericManaCost(1);
-        cost.clearPaid();
+        Cost cost = ManaUtil.createManaCost(1, false);
         if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
             super.apply(game, source);
         }

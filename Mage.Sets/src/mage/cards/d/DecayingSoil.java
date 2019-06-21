@@ -1,14 +1,11 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -30,21 +27,24 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.ManaUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author cbt33, Nantuko (Nim Deathmantle)
  */
 public final class DecayingSoil extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
-    static{
+
+    static {
         filter.add(new OwnerPredicate(TargetController.YOU));
         filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public DecayingSoil(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
 
 
         // At the beginning of your upkeep, exile a card from your graveyard.
@@ -55,9 +55,9 @@ public final class DecayingSoil extends CardImpl {
 
         // Threshold - As long as seven or more cards are in your graveyard, Decaying Soil has "Whenever a nontoken creature is put into your graveyard from the battlefield, you may pay {1}. If you do, return that card to your hand."
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD,
-            new ConditionalContinuousEffect(new GainAbilitySourceEffect(new DecayingSoilTriggeredAbility(new DecayingSoilEffect(), filter)),
-            new CardsInControllerGraveCondition(7),
-            "As long as seven or more cards are in your graveyard, {this} has \"Whenever a nontoken creature is put into your graveyard from the battlefield, you may pay {1}. If you do, return that card to your hand.\""));
+                new ConditionalContinuousEffect(new GainAbilitySourceEffect(new DecayingSoilTriggeredAbility(new DecayingSoilEffect(), filter)),
+                        new CardsInControllerGraveCondition(7),
+                        "As long as seven or more cards are in your graveyard, {this} has \"Whenever a nontoken creature is put into your graveyard from the battlefield, you may pay {1}. If you do, return that card to your hand.\""));
         ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);
     }
@@ -116,7 +116,6 @@ class DecayingSoilTriggeredAbility extends TriggeredAbilityImpl {
     }
 
 
-
     @Override
     public String getRule() {
         return "Whenever a " + filter.getMessage() + " is put into your graveyard from the battlefield, " + super.getRule();
@@ -126,7 +125,7 @@ class DecayingSoilTriggeredAbility extends TriggeredAbilityImpl {
 
 class DecayingSoilEffect extends OneShotEffect {
 
-    private final Cost cost = new GenericManaCost(1);
+    private final Cost cost = ManaUtil.createManaCost(1, false);
 
     public DecayingSoilEffect() {
         super(Outcome.Benefit);
@@ -146,7 +145,7 @@ class DecayingSoilEffect extends OneShotEffect {
                 cost.clearPaid();
                 if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
                     UUID target = this.getTargetPointer().getFirst(game, source);
-                      if (target != null) {
+                    if (target != null) {
                         Card card = game.getCard(target);
                         // check if it's still in graveyard
                         if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {

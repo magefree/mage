@@ -1,10 +1,7 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -14,15 +11,17 @@ import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetSpell;
+import mage.util.ManaUtil;
+
+import java.util.UUID;
 
 /**
- * 
  * @author Rafbill
  */
 public final class FrightfulDelusion extends CardImpl {
 
     public FrightfulDelusion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");
 
 
         // Counter target spell unless its controller pays {1}. That player discards a card.
@@ -60,7 +59,7 @@ class FrightfulDelusionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         StackObject spell = game.getStack().getStackObject(
                 targetPointer.getFirst(game, source));
-        Cost cost = new GenericManaCost(1);
+        Cost cost = ManaUtil.createManaCost(1, false);
         if (spell != null) {
             Player player = game.getPlayer(spell.getControllerId());
             if (player != null) {

@@ -1,9 +1,7 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.Cost;
 import mage.abilities.effects.SearchEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -18,15 +16,17 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
+import mage.util.ManaUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author Plopman
  */
 public final class TransmuteArtifact extends CardImpl {
 
     public TransmuteArtifact(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}{U}");
 
         // Sacrifice an artifact. If you do, search your library for an artifact card. If that card's converted mana cost is less than or equal to the sacrificed artifact's converted mana cost, put it onto the battlefield. If it's greater, you may pay {X}, where X is the difference. If you do, put it onto the battlefield. If you don't, put it into its owner's graveyard. Then shuffle your library.
         this.getSpellAbility().addEffect(new TransmuteArtifactEffect());
@@ -88,8 +88,14 @@ class TransmuteArtifactEffect extends SearchEffect {
                             controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                         } else {
                             //If it's greater, you may pay {X}, where X is the difference. If you do, put it onto the battlefield.
-                            GenericManaCost cost = new GenericManaCost(card.getConvertedManaCost() - convertedManaCost);
-                            if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
+                            Cost cost = ManaUtil.createManaCost(card.getConvertedManaCost() - convertedManaCost, true);
+                            boolean payed = false;
+                            if (controller.chooseUse(Outcome.Benefit, "Do you want to pay " + cost.getText() + " to put it onto the battlefield?", source, game)
+                                    && cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
+                                payed = true;
+                            }
+
+                            if (payed) {
                                 controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                             } else {
                                 //If you don't, put it into its owner's graveyard. Then shuffle your library

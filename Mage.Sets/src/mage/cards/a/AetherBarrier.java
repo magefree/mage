@@ -1,10 +1,8 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.Cost;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -15,9 +13,11 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.ManaUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public final class AetherBarrier extends CardImpl {
@@ -60,7 +60,7 @@ class AetherBarrierEffect extends SacrificeEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (player != null) {
-            GenericManaCost cost = new GenericManaCost(1);
+            Cost cost = ManaUtil.createManaCost(1, false);
             if (!cost.pay(source, game, player.getId(), player.getId(), false)) {
                 super.apply(game, source);
             }

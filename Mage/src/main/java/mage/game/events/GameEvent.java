@@ -128,7 +128,7 @@ public class GameEvent implements Serializable {
         /* X_MANA_ANNOUNCE
          mana x-costs announced by players (X value can be changed by replace events like Unbound Flourishing)
          targetId    id of the spell that's cast
-         playerId    player that casts the spell
+         playerId    player that casts the spell or ability
          amount      X multiplier to change X value, default 1
         */
         CAST_SPELL,

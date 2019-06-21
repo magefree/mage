@@ -1,11 +1,9 @@
-
 package mage.abilities.effects.common;
 
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
@@ -16,9 +14,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
+import mage.util.ManaUtil;
 
 /**
- *
  * @author MarcoMarin & L_J
  */
 public class DoUnlessTargetPlayerOrTargetsControllerPaysEffect extends OneShotEffect {
@@ -70,62 +68,65 @@ public class DoUnlessTargetPlayerOrTargetsControllerPaysEffect extends OneShotEf
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetController = game.getPlayer(this.getTargetPointer().getFirst(game, source));
+        Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         Permanent targetPermanent = game.getPermanentOrLKIBattlefield(this.getTargetPointer().getFirst(game, source));
         if (targetPermanent != null) {
-            targetController = game.getPlayer(targetPermanent.getControllerId());
+            player = game.getPlayer(targetPermanent.getControllerId());
         }
-        if (targetController != null) {
-            MageObject sourceObject = game.getObject(source.getSourceId());
-            if (sourceObject != null) {
-                Cost costToPay;
-                if (cost != null) {
-                    costToPay = cost.copy();
-                } else {
-                    costToPay = new GenericManaCost(genericMana.calculate(game, source, this));
-                }
-                String message;
-                if (chooseUseText == null) {
-                    String effectText = executingEffects.getText(source.getModes().getMode());
-                    message = "Pay " + costToPay.getText() + " to prevent (" + effectText.substring(0, effectText.length() - 1) + ")?";
-                } else {
-                    message = chooseUseText;
-                }
-                message = CardUtil.replaceSourceName(message, sourceObject.getName());
-                boolean result = true;
-                boolean doEffect = true;
-
-                // check if targetController is willing to pay
-                if (costToPay.canPay(source, source.getSourceId(), targetController.getId(), game) && targetController.chooseUse(Outcome.Detriment, message, source, game)) {
-                    costToPay.clearPaid();
-                    if (costToPay.pay(source, game, source.getSourceId(), targetController.getId(), false, null)) {
-                        if (!game.isSimulation()) {
-                            game.informPlayers(targetController.getLogName() + " pays the cost to prevent the effect");
-                        }
-                        doEffect = false;
-                    }
-                }
-
-                // do the effects if not paid
-                if (doEffect) {
-                    for (Effect effect : executingEffects) {
-                        effect.setTargetPointer(this.targetPointer);
-                        if (effect instanceof OneShotEffect) {
-                            result &= effect.apply(game, source);
-                        } else {
-                            game.addEffect((ContinuousEffect) effect, source);
-                        }
-                    }
-                } else if (otherwiseEffect != null) {
-                    otherwiseEffect.setTargetPointer(this.targetPointer);
-                    if (otherwiseEffect instanceof OneShotEffect) {
-                        result &= otherwiseEffect.apply(game, source);
-                    } else {
-                        game.addEffect((ContinuousEffect) otherwiseEffect, source);
-                    }
-                }
-                return result;
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (player != null && sourceObject != null) {
+            Cost costToPay;
+            String costValueMessage;
+            if (cost != null) {
+                costToPay = cost.copy();
+                costValueMessage = costToPay.getText();
+            } else {
+                costToPay = ManaUtil.createManaCost(genericMana, game, source, this);
+                costValueMessage = "{" + genericMana.calculate(game, source, this) + "}";
             }
+            String message;
+            if (chooseUseText == null) {
+                String effectText = executingEffects.getText(source.getModes().getMode());
+                message = "Pay " + costValueMessage + " to prevent (" + effectText.substring(0, effectText.length() - 1) + ")?";
+            } else {
+                message = chooseUseText;
+            }
+            message = CardUtil.replaceSourceName(message, sourceObject.getName());
+            boolean result = true;
+            boolean doEffect = true;
+
+            // check if targetController is willing to pay
+            if (costToPay.canPay(source, source.getSourceId(), player.getId(), game)
+                    && player.chooseUse(Outcome.Detriment, message, source, game)) {
+                costToPay.clearPaid();
+                if (costToPay.pay(source, game, source.getSourceId(), player.getId(), false, null)) {
+                    if (!game.isSimulation()) {
+                        game.informPlayers(player.getLogName() + " pays the cost to prevent the effect");
+                    }
+                    doEffect = false;
+                }
+            }
+
+            // do the effects if not paid
+            if (doEffect) {
+                for (Effect effect : executingEffects) {
+                    effect.setTargetPointer(this.targetPointer);
+                    if (effect instanceof OneShotEffect) {
+                        result &= effect.apply(game, source);
+                    } else {
+                        game.addEffect((ContinuousEffect) effect, source);
+                    }
+                }
+            } else if (otherwiseEffect != null) {
+                otherwiseEffect.setTargetPointer(this.targetPointer);
+                if (otherwiseEffect instanceof OneShotEffect) {
+                    result &= otherwiseEffect.apply(game, source);
+                } else {
+                    game.addEffect((ContinuousEffect) otherwiseEffect, source);
+                }
+            }
+            return result;
+
         }
         return false;
     }

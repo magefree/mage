@@ -11,6 +11,9 @@ public class GenericManaCost extends ManaCostImpl {
 
     protected int mana;
 
+    /**
+     * warning, use ManaUtil.createManaCost to create generic cost
+     */
     public GenericManaCost(int mana) {
         this.mana = mana;
         this.cost = Mana.GenericMana(mana);

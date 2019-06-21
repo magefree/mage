@@ -2,7 +2,6 @@ package mage.cards.c;
 
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -15,6 +14,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.ManaUtil;
 
 import java.util.UUID;
 
@@ -70,7 +70,7 @@ class CutTheTethersEffect extends OneShotEffect {
             if (player != null) {
                 boolean paid = false;
                 if (player.chooseUse(Outcome.Benefit, "Pay {3} to keep " + creature.getName() + " on the battlefield?", source, game)) {
-                    Cost cost = new GenericManaCost(3);
+                    Cost cost = ManaUtil.createManaCost(3, false);
                     paid = cost.pay(source, game, source.getSourceId(), creature.getControllerId(), false, null);
                 }
                 if (!paid) {

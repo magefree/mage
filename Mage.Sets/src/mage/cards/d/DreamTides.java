@@ -1,21 +1,15 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.Cost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -26,9 +20,11 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.util.ManaUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author spjspj & L_J
  */
 public final class DreamTides extends CardImpl {
@@ -86,7 +82,7 @@ class DreamTidesEffect extends OneShotEffect {
             while (player.canRespond() && countBattlefield > 0 && player.chooseUse(Outcome.AIDontUseIt, "Pay {2} and untap a tapped nongreen creature under your control?", source, game)) {
                 Target tappedCreatureTarget = new TargetControlledCreaturePermanent(1, 1, filter, true);
                 if (player.choose(Outcome.Detriment, tappedCreatureTarget, source.getSourceId(), game)) {
-                    GenericManaCost cost = new GenericManaCost(2);
+                    Cost cost = ManaUtil.createManaCost(2, false);
                     Permanent tappedCreature = game.getPermanent(tappedCreatureTarget.getFirstTarget());
 
                     if (cost.pay(source, game, source.getSourceId(), player.getId(), false)) {

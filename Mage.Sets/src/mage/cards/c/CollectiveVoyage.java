@@ -1,11 +1,6 @@
-
 package mage.cards.c;
 
-import java.util.Objects;
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -17,9 +12,12 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.ManaUtil;
+
+import java.util.Objects;
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class CollectiveVoyage extends CardImpl {
@@ -62,13 +60,12 @@ class CollectiveVoyageEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int xSum = 0;
-            xSum += playerPaysXGenericMana(controller, source, game);
+            xSum += ManaUtil.playerPaysXGenericMana(false, "Collective Voyage", controller, source, game);
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 if (!Objects.equals(playerId, controller.getId())) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        xSum += playerPaysXGenericMana(player, source, game);
-
+                        xSum += ManaUtil.playerPaysXGenericMana(false, "Collective Voyage", player, source, game);
                     }
                 }
             }
@@ -88,29 +85,5 @@ class CollectiveVoyageEffect extends OneShotEffect {
             return true;
         }
         return false;
-    }
-
-    protected static int playerPaysXGenericMana(Player player, Ability source, Game game) {
-        int xValue = 0;
-        boolean payed = false;
-        while (player.canRespond() && !payed) {
-            int bookmark = game.bookmarkState();
-            player.resetStoredBookmark(game);
-            xValue = player.announceXMana(0, Integer.MAX_VALUE, "How much mana will you pay?", game, source);
-            if (xValue > 0) {
-                Cost cost = new GenericManaCost(xValue);
-                payed = cost.pay(source, game, source.getSourceId(), player.getId(), false, null);
-            } else {
-                payed = true;
-            }
-            if (!payed) {
-                game.restoreState(bookmark, "Collective Voyage");
-                game.fireUpdatePlayersEvent();
-            } else {
-                game.removeBookmark(bookmark);
-            }
-        }
-        game.informPlayers(player.getLogName() + " pays {" + xValue + "}.");
-        return xValue;
     }
 }

@@ -1,12 +1,10 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.Cost;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
@@ -18,15 +16,17 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
+import mage.util.ManaUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author Simown
  */
 public final class Draco extends CardImpl {
 
     public Draco(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{16}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{16}");
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(9);
         this.toughness = new MageInt(9);
@@ -82,12 +82,12 @@ class DracoSacrificeUnlessPaysEffect extends OneShotEffect {
 
     static final int MAX_DOMAIN_VALUE = 10;
 
-    public DracoSacrificeUnlessPaysEffect () {
+    public DracoSacrificeUnlessPaysEffect() {
         super(Outcome.Sacrifice);
         staticText = "sacrifice {this} unless you pay {10}. This cost is reduced by {2} for each basic land type among lands you control.";
     }
 
-    public DracoSacrificeUnlessPaysEffect (final DracoSacrificeUnlessPaysEffect effect) {
+    public DracoSacrificeUnlessPaysEffect(final DracoSacrificeUnlessPaysEffect effect) {
         super(effect);
     }
 
@@ -98,9 +98,9 @@ class DracoSacrificeUnlessPaysEffect extends OneShotEffect {
         if (player != null && permanent != null) {
             // The cost is reduced by {2} for each basic land type.
             int domainValueReduction = new DomainValue(2).calculate(game, source, this);
-            int count = MAX_DOMAIN_VALUE - domainValueReduction;
+            int count = Math.max(0, MAX_DOMAIN_VALUE - domainValueReduction);
             if (player.chooseUse(Outcome.Benefit, "Pay {" + count + "}? Or " + permanent.getName() + " will be sacrificed.", source, game)) {
-                GenericManaCost cost = new GenericManaCost(count);
+                Cost cost = ManaUtil.createManaCost(count, false);
                 if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
                     return true;
                 }
@@ -113,7 +113,7 @@ class DracoSacrificeUnlessPaysEffect extends OneShotEffect {
 
     @Override
     public DracoSacrificeUnlessPaysEffect copy() {
-        return new DracoSacrificeUnlessPaysEffect (this);
+        return new DracoSacrificeUnlessPaysEffect(this);
     }
 
 }

@@ -1,11 +1,8 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.LeylineAbility;
 import mage.cards.CardImpl;
@@ -14,9 +11,11 @@ import mage.constants.CardType;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetPlayerOrPlaneswalker;
+import mage.util.ManaUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author emerald000
  */
 public final class LeylineOfLightning extends CardImpl {
@@ -63,7 +62,7 @@ class LeylineOfLightningEffect extends DamageTargetEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            Cost cost = new GenericManaCost(1);
+            Cost cost = ManaUtil.createManaCost(1, false);
             if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
                 super.apply(game, source);
             }
