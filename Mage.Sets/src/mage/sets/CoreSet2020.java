@@ -36,6 +36,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodthirsty Aerialist", 91, Rarity.UNCOMMON, mage.cards.b.BloodthirstyAerialist.class));
         cards.add(new SetCardInfo("Bone Splinters", 92, Rarity.COMMON, mage.cards.b.BoneSplinters.class));
         cards.add(new SetCardInfo("Captivating Gyre", 51, Rarity.UNCOMMON, mage.cards.c.CaptivatingGyre.class));
+        cards.add(new SetCardInfo("Cerulean Drake", 53, Rarity.UNCOMMON, mage.cards.c.CeruleanDrake.class));
         cards.add(new SetCardInfo("Chandra's Embercat", 129, Rarity.COMMON, mage.cards.c.ChandrasEmbercat.class));
         cards.add(new SetCardInfo("Chandra's Spitfire", 132, Rarity.UNCOMMON, mage.cards.c.ChandrasSpitfire.class));
         cards.add(new SetCardInfo("Chandra, Acolyte of Flame", 126, Rarity.RARE, mage.cards.c.ChandraAcolyteOfFlame.class));
