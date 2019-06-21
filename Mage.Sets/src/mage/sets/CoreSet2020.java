@@ -89,6 +89,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Manifold Key", 230, Rarity.UNCOMMON, mage.cards.m.ManifoldKey.class));
         cards.add(new SetCardInfo("Moldervine Reclamation", 214, Rarity.UNCOMMON, mage.cards.m.MoldervineReclamation.class));
         cards.add(new SetCardInfo("Mu Yanling, Sky Dancer", 68, Rarity.MYTHIC, mage.cards.m.MuYanlingSkyDancer.class));
+        cards.add(new SetCardInfo("Murder", 109, Rarity.COMMON, mage.cards.m.Murder.class));
         cards.add(new SetCardInfo("Negate", 69, Rarity.COMMON, mage.cards.n.Negate.class));
         cards.add(new SetCardInfo("Octoprophet", 70, Rarity.COMMON, mage.cards.o.Octoprophet.class));
         cards.add(new SetCardInfo("Ogre Siegebreaker", 215, Rarity.UNCOMMON, mage.cards.o.OgreSiegebreaker.class));
