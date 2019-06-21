@@ -499,7 +499,7 @@ public final class ManaUtil {
     }
 
     /**
-     * all ability/effect code with "new GenericManaCost" must be replaced by createManaCost call
+     * all ability/effect code with "= new GenericManaCost" must be replaced by createManaCost call
      */
     public static ManaCost createManaCost(int genericManaCount, boolean payAsX) {
         if (payAsX) {
