@@ -80,6 +80,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Hard Cover", 63, Rarity.UNCOMMON, mage.cards.h.HardCover.class));
         cards.add(new SetCardInfo("Heart-Piercer Bow", 228, Rarity.COMMON, mage.cards.h.HeartPiercerBow.class));
         cards.add(new SetCardInfo("Herald of the Sun", 23, Rarity.UNCOMMON, mage.cards.h.HeraldOfTheSun.class));
+        cards.add(new SetCardInfo("Icon of Ancestry", 229, Rarity.RARE, mage.cards.i.IconOfAncestry.class));
         cards.add(new SetCardInfo("Infuriate", 145, Rarity.COMMON, mage.cards.i.Infuriate.class));
         cards.add(new SetCardInfo("Ironroot Warlord", 209, Rarity.UNCOMMON, mage.cards.i.IronrootWarlord.class));
         cards.add(new SetCardInfo("Jungle Hollow", 248, Rarity.COMMON, mage.cards.j.JungleHollow.class));
