@@ -99,6 +99,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Reckless Air Strike", 154, Rarity.COMMON, mage.cards.r.RecklessAirStrike.class));
         cards.add(new SetCardInfo("Renowned Weaponsmith", 72, Rarity.UNCOMMON, mage.cards.r.RenownedWeaponsmith.class));
         cards.add(new SetCardInfo("Retributive Wand", 236, Rarity.UNCOMMON, mage.cards.r.RetributiveWand.class));
+        cards.add(new SetCardInfo("Risen Reef", 217, Rarity.UNCOMMON, mage.cards.r.RisenReef.class));
         cards.add(new SetCardInfo("Rotting Regisaur", 111, Rarity.RARE, mage.cards.r.RottingRegisaur.class));
         cards.add(new SetCardInfo("Rule of Law", 35, Rarity.UNCOMMON, mage.cards.r.RuleOfLaw.class));
         cards.add(new SetCardInfo("Scholar of the Ages", 74, Rarity.UNCOMMON, mage.cards.s.ScholarOfTheAges.class));
