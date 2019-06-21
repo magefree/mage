@@ -52,6 +52,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Cryptic Caves", 244, Rarity.UNCOMMON, mage.cards.c.CrypticCaves.class));
         cards.add(new SetCardInfo("Destructive Digger", 134, Rarity.COMMON, mage.cards.d.DestructiveDigger.class));
         cards.add(new SetCardInfo("Devout Decree", 13, Rarity.UNCOMMON, mage.cards.d.DevoutDecree.class));
+        cards.add(new SetCardInfo("Diamond Knight", 224, Rarity.UNCOMMON, mage.cards.d.DiamondKnight.class));
         cards.add(new SetCardInfo("Disenchant", 14, Rarity.COMMON, mage.cards.d.Disenchant.class));
         cards.add(new SetCardInfo("Disfigure", 95, Rarity.UNCOMMON, mage.cards.d.Disfigure.class));
         cards.add(new SetCardInfo("Dragon Mage", 135, Rarity.UNCOMMON, mage.cards.d.DragonMage.class));
