@@ -105,6 +105,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Ironroot Warlord", 209, Rarity.UNCOMMON, mage.cards.i.IronrootWarlord.class));
         cards.add(new SetCardInfo("Jungle Hollow", 248, Rarity.COMMON, mage.cards.j.JungleHollow.class));
         cards.add(new SetCardInfo("Kaalia, Zenith Seeker", 210, Rarity.MYTHIC, mage.cards.k.KaaliaZenithSeeker.class));
+        cards.add(new SetCardInfo("Knight of the Ebon Legion", 105, Rarity.RARE, mage.cards.k.KnightOfTheEbonLegion.class));
         cards.add(new SetCardInfo("Kykar, Wind's Fury", 212, Rarity.MYTHIC, mage.cards.k.KykarWindsFury.class));
         cards.add(new SetCardInfo("Lavakin Brawler", 147, Rarity.COMMON, mage.cards.l.LavakinBrawler.class));
         cards.add(new SetCardInfo("Leafkin Druid", 178, Rarity.COMMON, mage.cards.l.LeafkinDruid.class));
