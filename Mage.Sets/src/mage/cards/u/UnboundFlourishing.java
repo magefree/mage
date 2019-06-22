@@ -129,8 +129,10 @@ class UnboundFlourishingCopyAbility extends TriggeredAbilityImpl {
             if (event.getType() == GameEvent.EventType.SPELL_CAST) {
                 Spell spell = game.getStack().getSpell(event.getTargetId());
                 if (spell != null && spell.isInstantOrSorcery()) {
-                    game.getState().setValue(this.getSourceId() + UnboundFlourishing.needPrefix, spell);
-                    return true;
+                    if (spell.getSpellAbility().getManaCostsToPay().containsX()) {
+                        game.getState().setValue(this.getSourceId() + UnboundFlourishing.needPrefix, spell);
+                        return true;
+                    }
                 }
             }
 
