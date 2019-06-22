@@ -42,7 +42,7 @@ class SharedSummonsTarget extends TargetCardInLibrary {
     private static final FilterCard filter2 = new FilterCreatureCard("creature cards with different names");
 
     SharedSummonsTarget() {
-        super(0, 4, filter2);
+        super(0, 2, filter2);
     }
 
     private SharedSummonsTarget(final SharedSummonsTarget target) {
