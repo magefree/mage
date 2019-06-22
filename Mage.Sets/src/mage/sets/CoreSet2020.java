@@ -100,6 +100,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Loxodon Lifechanter", 27, Rarity.RARE, mage.cards.l.LoxodonLifechanter.class));
         cards.add(new SetCardInfo("Loyal Pegasus", 28, Rarity.UNCOMMON, mage.cards.l.LoyalPegasus.class));
         cards.add(new SetCardInfo("Manifold Key", 230, Rarity.UNCOMMON, mage.cards.m.ManifoldKey.class));
+        cards.add(new SetCardInfo("Marauding Raptor", 150, Rarity.RARE, mage.cards.m.MaraudingRaptor.class));
         cards.add(new SetCardInfo("Mask of Immolation", 151, Rarity.UNCOMMON, mage.cards.m.MaskOfImmolation.class));
         cards.add(new SetCardInfo("Moat Piranhas", 67, Rarity.COMMON, mage.cards.m.MoatPiranhas.class));
         cards.add(new SetCardInfo("Moldervine Reclamation", 214, Rarity.UNCOMMON, mage.cards.m.MoldervineReclamation.class));
