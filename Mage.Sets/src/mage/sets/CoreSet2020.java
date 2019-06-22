@@ -120,6 +120,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Scholar of the Ages", 74, Rarity.UNCOMMON, mage.cards.s.ScholarOfTheAges.class));
         cards.add(new SetCardInfo("Scoured Barrens", 251, Rarity.COMMON, mage.cards.s.ScouredBarrens.class));
         cards.add(new SetCardInfo("Scuttlemutt", 238, Rarity.UNCOMMON, mage.cards.s.Scuttlemutt.class));
+        cards.add(new SetCardInfo("Shared Summons", 193, Rarity.RARE, mage.cards.s.SharedSummons.class));
         cards.add(new SetCardInfo("Silverback Shaman", 195, Rarity.COMMON, mage.cards.s.SilverbackShaman.class));
         cards.add(new SetCardInfo("Sorin, Imperious Bloodlord", 115, Rarity.MYTHIC, mage.cards.s.SorinImperiousBloodlord.class));
         cards.add(new SetCardInfo("Spectral Sailor", 76, Rarity.UNCOMMON, mage.cards.s.SpectralSailor.class));
