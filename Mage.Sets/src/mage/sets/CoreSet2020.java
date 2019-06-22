@@ -172,6 +172,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Unsummon", 78, Rarity.COMMON, mage.cards.u.Unsummon.class));
         cards.add(new SetCardInfo("Vampire of the Dire Moon", 120, Rarity.UNCOMMON, mage.cards.v.VampireOfTheDireMoon.class));
         cards.add(new SetCardInfo("Vial of Dragonfire", 241, Rarity.COMMON, mage.cards.v.VialOfDragonfire.class));
+        cards.add(new SetCardInfo("Vilis, Broker of Blood", 122, Rarity.RARE, mage.cards.v.VilisBrokerOfBlood.class));
         cards.add(new SetCardInfo("Vivien, Nature's Avenger", 298, Rarity.MYTHIC, mage.cards.v.VivienNaturesAvenger.class));
         cards.add(new SetCardInfo("Voracious Hydra", 200, Rarity.RARE, mage.cards.v.VoraciousHydra.class));
         cards.add(new SetCardInfo("Wakeroot Elemental", 202, Rarity.RARE, mage.cards.w.WakerootElemental.class));
