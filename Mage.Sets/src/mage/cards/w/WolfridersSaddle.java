@@ -68,7 +68,7 @@ class WolfridersSaddleEffect extends CreateTokenEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null == !super.apply(game, source)) {
+        if (controller == null || !super.apply(game, source)) {
             return false;
         }
         Permanent p = game.getPermanent(this.getLastAddedTokenId());
