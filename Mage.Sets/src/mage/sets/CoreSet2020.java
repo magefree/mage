@@ -54,6 +54,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Blood Burglar", 88, Rarity.COMMON, mage.cards.b.BloodBurglar.class));
         cards.add(new SetCardInfo("Blood for Bones", 89, Rarity.UNCOMMON, mage.cards.b.BloodForBones.class));
         cards.add(new SetCardInfo("Bloodfell Caves", 242, Rarity.COMMON, mage.cards.b.BloodfellCaves.class));
+        cards.add(new SetCardInfo("Bloodsoaked Altar", 90, Rarity.UNCOMMON, mage.cards.b.BloodsoakedAltar.class));
         cards.add(new SetCardInfo("Bloodthirsty Aerialist", 91, Rarity.UNCOMMON, mage.cards.b.BloodthirstyAerialist.class));
         cards.add(new SetCardInfo("Blossoming Sands", 243, Rarity.COMMON, mage.cards.b.BlossomingSands.class));
         cards.add(new SetCardInfo("Bone Splinters", 92, Rarity.COMMON, mage.cards.b.BoneSplinters.class));
