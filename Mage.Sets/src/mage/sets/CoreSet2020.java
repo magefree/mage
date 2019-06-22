@@ -168,6 +168,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Thornwood Falls", 258, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
         cards.add(new SetCardInfo("Thought Distortion", 117, Rarity.UNCOMMON, mage.cards.t.ThoughtDistortion.class));
         cards.add(new SetCardInfo("Thrashing Brontodon", 197, Rarity.UNCOMMON, mage.cards.t.ThrashingBrontodon.class));
+        cards.add(new SetCardInfo("Tomebound Lich", 219, Rarity.UNCOMMON, mage.cards.t.TomeboundLich.class));
         cards.add(new SetCardInfo("Tranquil Cove", 259, Rarity.COMMON, mage.cards.t.TranquilCove.class));
         cards.add(new SetCardInfo("Uncaged Fury", 163, Rarity.UNCOMMON, mage.cards.u.UncagedFury.class));
         cards.add(new SetCardInfo("Unchained Berserker", 164, Rarity.UNCOMMON, mage.cards.u.UnchainedBerserker.class));
