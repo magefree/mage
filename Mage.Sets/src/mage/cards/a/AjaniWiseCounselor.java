@@ -15,6 +15,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -44,6 +45,7 @@ public final class AjaniWiseCounselor extends CardImpl {
                 CounterType.P1P1.createInstance(),
                 ControllerLifeCount.instance
         ).setText("put X +1/+1 counters on target creature, where X is your life total"), -9);
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
