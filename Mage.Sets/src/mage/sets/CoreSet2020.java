@@ -147,6 +147,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Scoured Barrens", 251, Rarity.COMMON, mage.cards.s.ScouredBarrens.class));
         cards.add(new SetCardInfo("Scuttlemutt", 238, Rarity.UNCOMMON, mage.cards.s.Scuttlemutt.class));
         cards.add(new SetCardInfo("Season of Growth", 191, Rarity.UNCOMMON, mage.cards.s.SeasonOfGrowth.class));
+        cards.add(new SetCardInfo("Sephara, Sky's Blade", 36, Rarity.RARE, mage.cards.s.SepharaSkysBlade.class));
         cards.add(new SetCardInfo("Shared Summons", 193, Rarity.RARE, mage.cards.s.SharedSummons.class));
         cards.add(new SetCardInfo("Shifting Ceratops", 194, Rarity.RARE, mage.cards.s.ShiftingCeratops.class));
         cards.add(new SetCardInfo("Silverback Shaman", 195, Rarity.COMMON, mage.cards.s.SilverbackShaman.class));
