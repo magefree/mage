@@ -122,6 +122,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Mask of Immolation", 151, Rarity.UNCOMMON, mage.cards.m.MaskOfImmolation.class));
         cards.add(new SetCardInfo("Moat Piranhas", 67, Rarity.COMMON, mage.cards.m.MoatPiranhas.class));
         cards.add(new SetCardInfo("Moldervine Reclamation", 214, Rarity.UNCOMMON, mage.cards.m.MoldervineReclamation.class));
+        cards.add(new SetCardInfo("Mu Yanling, Celestial Wind", 286, Rarity.MYTHIC, mage.cards.m.MuYanlingCelestialWind.class));
         cards.add(new SetCardInfo("Mu Yanling, Sky Dancer", 68, Rarity.MYTHIC, mage.cards.m.MuYanlingSkyDancer.class));
         cards.add(new SetCardInfo("Murder", 109, Rarity.COMMON, mage.cards.m.Murder.class));
         cards.add(new SetCardInfo("Negate", 69, Rarity.COMMON, mage.cards.n.Negate.class));
