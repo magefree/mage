@@ -58,6 +58,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Disenchant", 14, Rarity.COMMON, mage.cards.d.Disenchant.class));
         cards.add(new SetCardInfo("Disfigure", 95, Rarity.UNCOMMON, mage.cards.d.Disfigure.class));
         cards.add(new SetCardInfo("Dismal Backwater", 245, Rarity.COMMON, mage.cards.d.DismalBackwater.class));
+        cards.add(new SetCardInfo("Diviner's Lockbox", 225, Rarity.UNCOMMON, mage.cards.d.DivinersLockbox.class));
         cards.add(new SetCardInfo("Dragon Mage", 135, Rarity.UNCOMMON, mage.cards.d.DragonMage.class));
         cards.add(new SetCardInfo("Drawn from Dreams", 56, Rarity.RARE, mage.cards.d.DrawnFromDreams.class));
         cards.add(new SetCardInfo("Dread Presence", 96, Rarity.RARE, mage.cards.d.DreadPresence.class));
