@@ -122,6 +122,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Legion's End", 106, Rarity.RARE, mage.cards.l.LegionsEnd.class));
         cards.add(new SetCardInfo("Leyline of Abundance", 179, Rarity.RARE, mage.cards.l.LeylineOfAbundance.class));
         cards.add(new SetCardInfo("Leyline of Anticipation", 64, Rarity.RARE, mage.cards.l.LeylineOfAnticipation.class));
+        cards.add(new SetCardInfo("Leyline of Combustion", 148, Rarity.RARE, mage.cards.l.LeylineOfCombustion.class));
         cards.add(new SetCardInfo("Leyline of Sanctity", 26, Rarity.RARE, mage.cards.l.LeylineOfSanctity.class));
         cards.add(new SetCardInfo("Leyline of the Void", 107, Rarity.RARE, mage.cards.l.LeylineOfTheVoid.class));
         cards.add(new SetCardInfo("Loaming Shaman", 180, Rarity.UNCOMMON, mage.cards.l.LoamingShaman.class));
