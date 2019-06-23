@@ -30,7 +30,7 @@ public final class QuakefootCyclops extends CardImpl {
 
         // When Quakefoot Cyclops enters the battlefield, up to two target creatures can't block this turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(new CantBlockTargetEffect(Duration.EndOfTurn));
-        ability.addTarget(new TargetCreaturePermanent(0, 1));
+        ability.addTarget(new TargetCreaturePermanent(0, 2));
         this.addAbility(ability);
 
         // Cycling {1}{R}
