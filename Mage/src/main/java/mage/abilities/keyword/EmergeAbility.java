@@ -30,6 +30,7 @@ public class EmergeAbility extends SpellAbility {
 
     public EmergeAbility(Card card, ManaCosts<ManaCost> emergeCost) {
         super(card.getSpellAbility());
+        this.newId();
         this.setCardName(card.getName() + " with emerge");
         zone = Zone.HAND;
         spellAbilityType = SpellAbilityType.BASE_ALTERNATE;

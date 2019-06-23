@@ -37,6 +37,7 @@ public class JumpStartAbility extends SpellAbility {
 
     public JumpStartAbility(Card card) {
         super(card.getSpellAbility());
+        this.newId();
         this.setCardName(card.getName() + " with jump-start");
         zone = Zone.GRAVEYARD;
         spellAbilityType = SpellAbilityType.BASE_ALTERNATE;

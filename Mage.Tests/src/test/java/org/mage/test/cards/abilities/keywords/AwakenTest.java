@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
@@ -8,7 +7,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class AwakenTest extends CardTestPlayerBase {
@@ -122,4 +120,59 @@ public class AwakenTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * Select spell ability with different targets
+     */
+    @Test
+    public void test_CastNormalSpell() {
+        // Counter target spell.
+        // Awaken 3—{4}{U}{U} (If you cast this spell for {4}{U}{U}, also put three +1/+1 counters on target land you control
+        // and it becomes a 0/0 Elemental creature with haste. It’s still a land.)
+        addCard(Zone.HAND, playerA, "Scatter to the Winds", 1);  // {1}{U}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+        //
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+
+        // cast
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+
+        // counter by normal cast
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Scatter to the Winds", "Lightning Bolt");
+
+        checkLife("after", 1, PhaseStep.BEGIN_COMBAT, playerB, 20);
+        checkHandCardCount("after", 1, PhaseStep.BEGIN_COMBAT, playerA, "Lightning Bolt", 0);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_CastAwakenSpell() {
+        // Counter target spell.
+        // Awaken 3—{4}{U}{U} (If you cast this spell for {4}{U}{U}, also put three +1/+1 counters on target land you control
+        // and it becomes a 0/0 Elemental creature with haste. It’s still a land.)
+        addCard(Zone.HAND, playerA, "Scatter to the Winds", 1);  // {1}{U}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+        //
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+
+        // cast
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+
+        // counter by normal cast
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Scatter to the Winds with awaken", "Lightning Bolt");
+        addTarget(playerA, "Island");
+
+        checkLife("after", 1, PhaseStep.BEGIN_COMBAT, playerB, 20);
+        checkHandCardCount("after", 1, PhaseStep.BEGIN_COMBAT, playerA, "Lightning Bolt", 0);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
 }

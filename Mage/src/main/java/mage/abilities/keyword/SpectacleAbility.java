@@ -23,6 +23,7 @@ public class SpectacleAbility extends SpellAbility {
 
     public SpectacleAbility(Card card, ManaCost spectacleCosts) {
         super(card.getSpellAbility());
+        this.newId();
         this.setCardName(card.getName() + " with spectacle");
         zone = Zone.HAND;
         spellAbilityType = SpellAbilityType.BASE_ALTERNATE;

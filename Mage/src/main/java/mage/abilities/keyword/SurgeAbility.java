@@ -23,6 +23,7 @@ public class SurgeAbility extends SpellAbility {
 
     public SurgeAbility(Card card, String surgeCosts) {
         super(card.getSpellAbility());
+        this.newId();
         this.setCardName(card.getName() + " with surge");
         zone = Zone.HAND;
         spellAbilityType = SpellAbilityType.BASE_ALTERNATE;

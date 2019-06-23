@@ -12,6 +12,7 @@ public class CastCommanderAbility extends SpellAbility {
 
     public CastCommanderAbility(Card card) {
         super(card.getSpellAbility());
+        this.newId();
         this.setCardName(cardName = card.getName());
         zone = Zone.COMMAND;
         spellAbilityType = SpellAbilityType.BASE;

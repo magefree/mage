@@ -38,6 +38,7 @@ public class AwakenAbility extends SpellAbility {
 
     public AwakenAbility(Card card, int awakenValue, String awakenCosts) {
         super(card.getSpellAbility());
+        this.newId();
         this.setCardName(card.getName() + " with awaken");
         zone = Zone.HAND;
         spellAbilityType = SpellAbilityType.BASE_ALTERNATE;

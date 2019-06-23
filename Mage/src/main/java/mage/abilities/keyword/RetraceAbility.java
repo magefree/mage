@@ -16,6 +16,7 @@ public class RetraceAbility extends SpellAbility {
 
     public RetraceAbility(Card card) {
         super(card.getSpellAbility());
+        this.newId();
         this.setCardName(card.getName() + " with retrace");
         zone = Zone.GRAVEYARD;
         spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
