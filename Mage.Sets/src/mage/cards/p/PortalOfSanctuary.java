@@ -36,6 +36,7 @@ public final class PortalOfSanctuary extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());
+        this.addAbility(ability);
     }
 
     private PortalOfSanctuary(final PortalOfSanctuary card) {
