@@ -143,6 +143,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Octoprophet", 70, Rarity.COMMON, mage.cards.o.Octoprophet.class));
         cards.add(new SetCardInfo("Ogre Siegebreaker", 215, Rarity.UNCOMMON, mage.cards.o.OgreSiegebreaker.class));
         cards.add(new SetCardInfo("Omnath, Locus of the Roil", 216, Rarity.MYTHIC, mage.cards.o.OmnathLocusOfTheRoil.class));
+        cards.add(new SetCardInfo("Overgrowth Elemental", 187, Rarity.UNCOMMON, mage.cards.o.OvergrowthElemental.class));
         cards.add(new SetCardInfo("Pacifism", 32, Rarity.COMMON, mage.cards.p.Pacifism.class));
         cards.add(new SetCardInfo("Planar Cleansing", 33, Rarity.RARE, mage.cards.p.PlanarCleansing.class));
         cards.add(new SetCardInfo("Portal of Sanctuary", 71, Rarity.UNCOMMON, mage.cards.p.PortalOfSanctuary.class));
