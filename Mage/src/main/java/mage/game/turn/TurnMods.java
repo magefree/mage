@@ -118,7 +118,7 @@ public class TurnMods extends ArrayList<TurnMod> {
         ListIterator<TurnMod> it = this.listIterator(this.size());
         while (it.hasPrevious()) {
             TurnMod turnMod = it.previous();
-            if (turnMod.getExtraPhase() != null && turnMod.getPlayerId().equals(playerId) && turnMod.getExtraPhase() != null && (turnMod.getAfterPhase() == null || turnMod.getAfterPhase() == afterPhase)) {
+            if (turnMod.getExtraPhase() != null && turnMod.getPlayerId().equals(playerId) && (turnMod.getAfterPhase() == null || turnMod.getAfterPhase() == afterPhase)) {
                 it.remove();
                 return turnMod;
             }

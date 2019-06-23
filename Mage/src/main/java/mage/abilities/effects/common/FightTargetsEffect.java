@@ -1,6 +1,5 @@
 package mage.abilities.effects.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -9,8 +8,9 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class FightTargetsEffect extends OneShotEffect {
@@ -57,27 +57,23 @@ public class FightTargetsEffect extends OneShotEffect {
                     return creature1.fight(creature2, source, game);
                 }
             }
+            if (!game.isSimulation()) {
+                game.informPlayers(card.getName() + " has been fizzled.");
+            }
         }
-        if (!game.isSimulation()) {
-            game.informPlayers(card.getName() + " has been fizzled.");
-        }
+
         return false;
     }
 
     @Override
-    public FightTargetsEffect
-            copy() {
+    public FightTargetsEffect copy() {
         return new FightTargetsEffect(this);
 
     }
 
     @Override
-    public String
-            getText(Mode mode
-            ) {
-        if (staticText
-                != null && !staticText
-                        .isEmpty()) {
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
             return staticText;
 
         }

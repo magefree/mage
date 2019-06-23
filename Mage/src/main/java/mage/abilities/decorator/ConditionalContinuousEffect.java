@@ -50,13 +50,13 @@ public class ConditionalContinuousEffect extends ContinuousEffectImpl {
 
         // checks for compatibility
         EffectType needType = EffectType.CONTINUOUS;
-        if (effect != null && !effect.getEffectType().equals(needType)) {
+        if (effect.getEffectType() != needType) {
             Assert.fail("ConditionalContinuousEffect supports only " + needType.toString() + " but found " + effect.getEffectType().toString());
         }
-        if (otherwiseEffect != null && !otherwiseEffect.getEffectType().equals(needType)) {
+        if (otherwiseEffect != null && otherwiseEffect.getEffectType() != needType) {
             Assert.fail("ConditionalContinuousEffect supports only " + needType.toString() + " but found " + effect.getEffectType().toString());
         }
-        if (effect != null && otherwiseEffect != null && !effect.getEffectType().equals(otherwiseEffect.getEffectType())) {
+        if (otherwiseEffect != null && effect.getEffectType() != otherwiseEffect.getEffectType()) {
             Assert.fail("ConditionalContinuousEffect must be same but found " + effect.getEffectType().toString() + " and " + otherwiseEffect.getEffectType().toString());
         }
     }
@@ -119,7 +119,7 @@ public class ConditionalContinuousEffect extends ContinuousEffectImpl {
         if (condition == null && baseCondition != null) {
             condition = baseCondition;
         }
-        boolean conditionState = condition.apply(game, source);
+        boolean conditionState = condition != null && condition.apply(game, source);
         if (conditionState) {
             effect.setTargetPointer(this.targetPointer);
             return effect.apply(game, source);
@@ -127,10 +127,10 @@ public class ConditionalContinuousEffect extends ContinuousEffectImpl {
             otherwiseEffect.setTargetPointer(this.targetPointer);
             return otherwiseEffect.apply(game, source);
         }
-        if (!conditionState && effect.getDuration() == Duration.OneUse) {
+        if (effect.getDuration() == Duration.OneUse) {
             used = true;
         }
-        if (!conditionState && effect.getDuration() == Duration.Custom) {
+        if (effect.getDuration() == Duration.Custom) {
             this.discard();
         }
         return false;

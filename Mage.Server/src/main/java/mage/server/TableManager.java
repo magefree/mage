@@ -40,7 +40,7 @@ public enum TableManager {
 
     // protected static ScheduledExecutorService expireExecutor = ThreadExecutor.getInstance().getExpireExecutor();
     private final Logger logger = Logger.getLogger(TableManager.class);
-    private static final DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
+    private final DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
 
     private final ConcurrentHashMap<UUID, TableController> controllers = new ConcurrentHashMap<>();
     private final ReadWriteLock controllersLock = new ReentrantReadWriteLock();
