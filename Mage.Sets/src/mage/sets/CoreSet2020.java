@@ -201,6 +201,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Winged Words", 80, Rarity.COMMON, mage.cards.w.WingedWords.class));
         cards.add(new SetCardInfo("Wolfkin Bond", 203, Rarity.COMMON, mage.cards.w.WolfkinBond.class));
         cards.add(new SetCardInfo("Wolfrider's Saddle", 204, Rarity.UNCOMMON, mage.cards.w.WolfridersSaddle.class));
+        cards.add(new SetCardInfo("Woodland Champion", 205, Rarity.UNCOMMON, mage.cards.w.WoodlandChampion.class));
         cards.add(new SetCardInfo("Yarok's Fenlurker", 123, Rarity.UNCOMMON, mage.cards.y.YaroksFenlurker.class));
         cards.add(new SetCardInfo("Yarok, the Desecrated", 220, Rarity.MYTHIC, mage.cards.y.YarokTheDesecrated.class));
     }
