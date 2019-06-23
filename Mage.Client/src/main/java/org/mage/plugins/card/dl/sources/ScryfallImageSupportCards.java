@@ -25,8 +25,6 @@ public class ScryfallImageSupportCards {
             put("MED", "me1").
             put("MEDM", "med").build();
 
-
-
     private static final Set<String> supportedSets = new ArraySet<String>() {
         {
             // xmage set codes
@@ -239,6 +237,7 @@ public class ScryfallImageSupportCards {
             add("GK2");
             add("MH1");
             add("WAR");
+            add("M20");
             //
             add("EURO");
             add("GPX");
