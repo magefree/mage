@@ -62,7 +62,7 @@ class CreepingDreadEffect extends OneShotEffect {
     each player selects a card from their hand without revealing it,
     sets it aside, and then all of those cards are revealed and discarded at once.
     
-    http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=409851
+    https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=409851
     */
     @Override
     public boolean apply(Game game, Ability source) {

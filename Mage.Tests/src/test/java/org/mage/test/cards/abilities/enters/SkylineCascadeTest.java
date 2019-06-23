@@ -51,7 +51,7 @@ public class SkylineCascadeTest extends CardTestPlayerBase {
      * 
      * "Skyline Cascade's triggered ability doesn't tap the creature. It can target any creature, tapped or untapped. 
      * If that creature is already untapped at the beginning of its controller's next untap step, the effect won't do anything."
-     * http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=402038
+     * https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=402038
      * 
      * An untapped creature will remain untapped.
      */
