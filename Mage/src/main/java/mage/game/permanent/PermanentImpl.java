@@ -1008,18 +1008,26 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 }
             }
 
-            if (abilities.containsKey(HexproofFromBlackAbility.getInstance().getId())) {
-                if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
-                        && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game)
-                        && source.getColor(game).isBlack()) {
-                    return false;
-                }
-            }
-
             if (abilities.containsKey(HexproofFromWhiteAbility.getInstance().getId())) {
                 if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
                         && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game)
                         && source.getColor(game).isWhite()) {
+                    return false;
+                }
+            }
+
+            if (abilities.containsKey(HexproofFromBlueAbility.getInstance().getId())) {
+                if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
+                        && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game)
+                        && source.getColor(game).isBlue()) {
+                    return false;
+                }
+            }
+
+            if (abilities.containsKey(HexproofFromBlackAbility.getInstance().getId())) {
+                if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
+                        && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game)
+                        && source.getColor(game).isBlack()) {
                     return false;
                 }
             }
