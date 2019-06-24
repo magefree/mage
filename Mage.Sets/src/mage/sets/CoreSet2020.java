@@ -75,6 +75,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Chandra, Flame's Fury", 294, Rarity.MYTHIC, mage.cards.c.ChandraFlamesFury.class));
         cards.add(new SetCardInfo("Chandra, Novice Pyromancer", 128, Rarity.UNCOMMON, mage.cards.c.ChandraNovicePyromancer.class));
         cards.add(new SetCardInfo("Cloudkin Seer", 54, Rarity.COMMON, mage.cards.c.CloudkinSeer.class));
+        cards.add(new SetCardInfo("Colossus Hammer", 223, Rarity.UNCOMMON, mage.cards.c.ColossusHammer.class));
         cards.add(new SetCardInfo("Convolute", 55, Rarity.COMMON, mage.cards.c.Convolute.class));
         cards.add(new SetCardInfo("Corpse Knight", 206, Rarity.UNCOMMON, mage.cards.c.CorpseKnight.class));
         cards.add(new SetCardInfo("Creeping Trailblazer", 207, Rarity.UNCOMMON, mage.cards.c.CreepingTrailblazer.class));
