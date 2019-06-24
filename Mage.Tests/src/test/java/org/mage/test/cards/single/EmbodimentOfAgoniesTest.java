@@ -11,7 +11,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class EmbodimentOfAgoniesTest extends CardTestPlayerBase {
 
     @Test
-    public void testCard() {
+    public void testHybridAndPhyrexian() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
         addCard(Zone.HAND, playerA, "Embodiment of Agonies");
         addCard(Zone.GRAVEYARD, playerA, "Rakdos Cackler"); // Mana Cost: {B/R}
@@ -31,7 +31,7 @@ public class EmbodimentOfAgoniesTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void testCard2() {
+    public void testSplitCards() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
         addCard(Zone.HAND, playerA, "Embodiment of Agonies");
         addCard(Zone.GRAVEYARD, playerA, "Turn // Burn"); // Mana Cost: {3}{U}{R}
@@ -48,7 +48,7 @@ public class EmbodimentOfAgoniesTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void testCard3() {
+    public void testSplitCards2() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
         addCard(Zone.HAND, playerA, "Embodiment of Agonies");
         addCard(Zone.GRAVEYARD, playerA, "Turn // Burn"); // Mana Cost: {3}{U}{R}
@@ -66,7 +66,7 @@ public class EmbodimentOfAgoniesTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void testCard4() {
+    public void testEmptyManaCosts() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
         addCard(Zone.HAND, playerA, "Embodiment of Agonies");
         addCard(Zone.GRAVEYARD, playerA, "Ancestral Vision"); // No Mana Cost
@@ -82,7 +82,7 @@ public class EmbodimentOfAgoniesTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void testCard5() {
+    public void testXCosts() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
         addCard(Zone.HAND, playerA, "Embodiment of Agonies");
         addCard(Zone.GRAVEYARD, playerA, "Lightning Bolt"); // Mana Cost: {R}
@@ -94,7 +94,7 @@ public class EmbodimentOfAgoniesTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
 
-        // Creature should be dead as there are no mana costs in graveyards
-        assertGraveyardCount(playerA, "Embodiment of Agonies", 1);
+        // Creature should be 2/2 as there are 2 distinct mana costs in graveyard
+        assertPowerToughness(playerA, "Embodiment of Agonies", 2, 2);
     }
 }
