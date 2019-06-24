@@ -3,6 +3,8 @@ package mage.cards.e;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -16,9 +18,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author TheElk801
@@ -68,11 +68,7 @@ enum EmbodimentOfAgoniesValue implements DynamicValue {
                 .getCards(game)
                 .stream()
                 .filter(card -> !card.isLand())
-                .forEach(card -> card
-                        .getManaCost()
-                        .stream()
-                        .forEach(manaCost -> stringSet.add(manaCost.getText()))
-                );
+                .forEach(card -> stringSet.add(getCosts(card.getManaCost())));
         stringSet.removeIf(s -> s == null || s.equals(""));
         return stringSet.size();
     }
@@ -85,5 +81,24 @@ enum EmbodimentOfAgoniesValue implements DynamicValue {
     @Override
     public String getMessage() {
         return "";
+    }
+
+    private static String getCosts(ManaCosts<ManaCost> costs) {
+        List<String> newList = new ArrayList();
+        int generic = 0;
+        boolean hasGeneric = false;
+        for (String s : costs.getSymbols()) {
+            if (s.matches("\\{\\d*\\}")) {
+                generic += Integer.parseInt(s.substring(1, s.length() - 1));
+                hasGeneric = true;
+            } else {
+                newList.add(s);
+            }
+        }
+        Collections.sort(newList);
+        if (hasGeneric) {
+            newList.add("{" + generic + "}");
+        }
+        return String.join("", newList);
     }
 }
