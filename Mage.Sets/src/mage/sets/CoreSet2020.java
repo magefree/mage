@@ -51,6 +51,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Angel of Vitality", 4, Rarity.UNCOMMON, mage.cards.a.AngelOfVitality.class));
         cards.add(new SetCardInfo("Apostle of Purifying Light", 6, Rarity.UNCOMMON, mage.cards.a.ApostleOfPurifyingLight.class));
         cards.add(new SetCardInfo("Atemsis, All-Seeing", 46, Rarity.RARE, mage.cards.a.AtemsisAllSeeing.class));
+        cards.add(new SetCardInfo("Audacious Thief", 84, Rarity.COMMON, mage.cards.a.AudaciousThief.class));
         cards.add(new SetCardInfo("Barkhide Troll", 165, Rarity.UNCOMMON, mage.cards.b.BarkhideTroll.class));
         cards.add(new SetCardInfo("Bishop of Wings", 8, Rarity.RARE, mage.cards.b.BishopOfWings.class));
         cards.add(new SetCardInfo("Blightbeetle", 87, Rarity.UNCOMMON, mage.cards.b.Blightbeetle.class));
