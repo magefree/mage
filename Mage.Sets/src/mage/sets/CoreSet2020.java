@@ -71,6 +71,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Cavalier of Gales", 52, Rarity.MYTHIC, mage.cards.c.CavalierOfGales.class));
         cards.add(new SetCardInfo("Cavalier of Night", 94, Rarity.MYTHIC, mage.cards.c.CavalierOfNight.class));
         cards.add(new SetCardInfo("Cavalier of Thorns", 167, Rarity.MYTHIC, mage.cards.c.CavalierOfThorns.class));
+        cards.add(new SetCardInfo("Celestial Messenger", 287, Rarity.COMMON, mage.cards.c.CelestialMessenger.class));
         cards.add(new SetCardInfo("Cerulean Drake", 53, Rarity.UNCOMMON, mage.cards.c.CeruleanDrake.class));
         cards.add(new SetCardInfo("Chandra's Embercat", 129, Rarity.COMMON, mage.cards.c.ChandrasEmbercat.class));
         cards.add(new SetCardInfo("Chandra's Regulator", 131, Rarity.RARE, mage.cards.c.ChandrasRegulator.class));
