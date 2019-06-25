@@ -219,6 +219,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Negate", 69, Rarity.COMMON, mage.cards.n.Negate.class));
         cards.add(new SetCardInfo("Netcaster Spider", 184, Rarity.COMMON, mage.cards.n.NetcasterSpider.class));
         cards.add(new SetCardInfo("Nightpack Ambusher", 185, Rarity.RARE, mage.cards.n.NightpackAmbusher.class));
+        cards.add(new SetCardInfo("Nimble Birdsticker", 333, Rarity.COMMON, mage.cards.n.NimbleBirdsticker.class));
         cards.add(new SetCardInfo("Noxious Grasp", 110, Rarity.UNCOMMON, mage.cards.n.NoxiousGrasp.class));
         cards.add(new SetCardInfo("Octoprophet", 70, Rarity.COMMON, mage.cards.o.Octoprophet.class));
         cards.add(new SetCardInfo("Ogre Siegebreaker", 215, Rarity.UNCOMMON, mage.cards.o.OgreSiegebreaker.class));
