@@ -114,6 +114,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin Ringleader", 143, Rarity.UNCOMMON, mage.cards.g.GoblinRingleader.class));
         cards.add(new SetCardInfo("Goblin Smuggler", 144, Rarity.COMMON, mage.cards.g.GoblinSmuggler.class));
         cards.add(new SetCardInfo("Gods Willing", 19, Rarity.UNCOMMON, mage.cards.g.GodsWilling.class));
+        cards.add(new SetCardInfo("Goldmane Griffin", 283, Rarity.RARE, mage.cards.g.GoldmaneGriffin.class));
         cards.add(new SetCardInfo("Golos, Tireless Pilgrim", 226, Rarity.RARE, mage.cards.g.GolosTirelessPilgrim.class));
         cards.add(new SetCardInfo("Grafdigger's Cage", 227, Rarity.RARE, mage.cards.g.GrafdiggersCage.class));
         cards.add(new SetCardInfo("Growth Cycle", 175, Rarity.COMMON, mage.cards.g.GrowthCycle.class));
