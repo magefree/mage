@@ -59,6 +59,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Audacious Thief", 84, Rarity.COMMON, mage.cards.a.AudaciousThief.class));
         cards.add(new SetCardInfo("Barkhide Troll", 165, Rarity.UNCOMMON, mage.cards.b.BarkhideTroll.class));
         cards.add(new SetCardInfo("Barony Vampire", 85, Rarity.COMMON, mage.cards.b.BaronyVampire.class));
+        cards.add(new SetCardInfo("Battalion Foot Soldier", 7, Rarity.COMMON, mage.cards.b.BattalionFootSoldier.class));
         cards.add(new SetCardInfo("Befuddle", 47, Rarity.COMMON, mage.cards.b.Befuddle.class));
         cards.add(new SetCardInfo("Bishop of Wings", 8, Rarity.RARE, mage.cards.b.BishopOfWings.class));
         cards.add(new SetCardInfo("Bladebrand", 86, Rarity.COMMON, mage.cards.b.Bladebrand.class));
