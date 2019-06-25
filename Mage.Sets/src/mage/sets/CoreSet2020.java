@@ -28,7 +28,7 @@ public final class CoreSet2020 extends ExpansionSet {
     private CoreSet2020() {
         super("Core Set 2020", "M20", ExpansionSet.buildDate(2019, 7, 12), SetType.CORE);
         this.hasBoosters = true;
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
         this.numBoosterSpecial = 0;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
