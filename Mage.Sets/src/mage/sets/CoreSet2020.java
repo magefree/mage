@@ -46,6 +46,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Aerial Assault", 1, Rarity.COMMON, mage.cards.a.AerialAssault.class));
         cards.add(new SetCardInfo("Aether Gust", 42, Rarity.UNCOMMON, mage.cards.a.AetherGust.class));
         cards.add(new SetCardInfo("Agent of Treachery", 43, Rarity.RARE, mage.cards.a.AgentOfTreachery.class));
+        cards.add(new SetCardInfo("Agonizing Syphon", 83, Rarity.COMMON, mage.cards.a.AgonizingSyphon.class));
         cards.add(new SetCardInfo("Air Elemental", 44, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));
         cards.add(new SetCardInfo("Ajani, Inspiring Leader", 282, Rarity.MYTHIC, mage.cards.a.AjaniInspiringLeader.class));
         cards.add(new SetCardInfo("Ajani, Strength of the Pride", 2, Rarity.MYTHIC, mage.cards.a.AjaniStrengthOfThePride.class));
