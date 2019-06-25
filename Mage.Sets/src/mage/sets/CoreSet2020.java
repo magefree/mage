@@ -122,6 +122,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Engulfing Eruption", 328, Rarity.COMMON, mage.cards.e.EngulfingEruption.class));
         cards.add(new SetCardInfo("Epicure of Blood", 99, Rarity.COMMON, mage.cards.e.EpicureOfBlood.class));
         cards.add(new SetCardInfo("Eternal Isolation", 15, Rarity.UNCOMMON, mage.cards.e.EternalIsolation.class));
+        cards.add(new SetCardInfo("Ethereal Elk", 299, Rarity.RARE, mage.cards.e.EtherealElk.class));
         cards.add(new SetCardInfo("Evolving Wilds", 246, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Faerie Miscreant", 58, Rarity.COMMON, mage.cards.f.FaerieMiscreant.class));
         cards.add(new SetCardInfo("Fathom Fleet Cutthroat", 100, Rarity.COMMON, mage.cards.f.FathomFleetCutthroat.class));
