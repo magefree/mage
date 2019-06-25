@@ -67,6 +67,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Captivating Gyre", 51, Rarity.UNCOMMON, mage.cards.c.CaptivatingGyre.class));
         cards.add(new SetCardInfo("Cavalier of Dawn", 10, Rarity.MYTHIC, mage.cards.c.CavalierOfDawn.class));
         cards.add(new SetCardInfo("Cavalier of Flame", 125, Rarity.MYTHIC, mage.cards.c.CavalierOfFlame.class));
+        cards.add(new SetCardInfo("Cavalier of Gales", 52, Rarity.MYTHIC, mage.cards.c.CavalierOfGales.class));
         cards.add(new SetCardInfo("Cavalier of Night", 94, Rarity.MYTHIC, mage.cards.c.CavalierOfNight.class));
         cards.add(new SetCardInfo("Cavalier of Thorns", 167, Rarity.MYTHIC, mage.cards.c.CavalierOfThorns.class));
         cards.add(new SetCardInfo("Cerulean Drake", 53, Rarity.UNCOMMON, mage.cards.c.CeruleanDrake.class));
