@@ -52,7 +52,7 @@ public final class CavalierOfThorns extends CardImpl {
         // When Cavalier of Thorns dies, you may exile it. If you do, put another target card from your graveyard on top of your library.
         Ability ability = new DiesTriggeredAbility(new DoIfCostPaid(
                 new PutOnLibraryTargetEffect(true), new ExileSourceFromGraveCost()
-         ).setText("you may exile it. If you do, put another target card from your graveyard on top of your library."));
+        ).setText("you may exile it. If you do, put another target card from your graveyard on top of your library."));
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }
@@ -74,7 +74,7 @@ class CavalierOfThornsEffect extends OneShotEffect {
     CavalierOfThornsEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "reveal the top five cards of your library. " +
-                "You may put a land card from among them onto the battlefield. Put the rest into your graveyard.";
+                "Put a land card from among them onto the battlefield and the rest into your graveyard.";
     }
 
     private CavalierOfThornsEffect(final CavalierOfThornsEffect effect) {
@@ -92,8 +92,9 @@ class CavalierOfThornsEffect extends OneShotEffect {
             return true;
         }
         controller.revealCards(source, cards, game);
-        TargetCard target = new TargetCard(0, 1, Zone.LIBRARY, filter);
-        if (controller.choose(Outcome.PutCardInPlay, cards, target, game)) {
+        TargetCard target = new TargetCard(1, 1, Zone.LIBRARY, filter);
+        if (cards.getCards(game).stream().anyMatch(Card::isLand)
+                && controller.choose(Outcome.PutCardInPlay, cards, target, game)) {
             Card card = cards.get(target.getFirstTarget(), game);
             if (card != null) {
                 cards.remove(card);
