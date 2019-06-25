@@ -237,6 +237,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Portal of Sanctuary", 71, Rarity.UNCOMMON, mage.cards.p.PortalOfSanctuary.class));
         cards.add(new SetCardInfo("Prismite", 235, Rarity.COMMON, mage.cards.p.Prismite.class));
         cards.add(new SetCardInfo("Pulse of Murasa", 189, Rarity.UNCOMMON, mage.cards.p.PulseOfMurasa.class));
+        cards.add(new SetCardInfo("Pyroclastic Elemental", 296, Rarity.UNCOMMON, mage.cards.p.PyroclasticElemental.class));
         cards.add(new SetCardInfo("Rabid Bite", 190, Rarity.COMMON, mage.cards.r.RabidBite.class));
         cards.add(new SetCardInfo("Raise the Alarm", 34, Rarity.COMMON, mage.cards.r.RaiseTheAlarm.class));
         cards.add(new SetCardInfo("Rapacious Dragon", 153, Rarity.UNCOMMON, mage.cards.r.RapaciousDragon.class));
