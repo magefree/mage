@@ -112,10 +112,11 @@ public class ArrowBuilder {
      * Removes all arrows from the screen.
      */
     public void removeAllArrows(UUID gameId) {
-        if (map.containsKey(gameId)) {
-            Map<Type, List<Arrow>> innerMap = map.get(gameId);
-            JPanel p = getArrowsPanel(gameId);
-            synchronized (map) {
+        synchronized (map) {
+            if (map.containsKey(gameId)) {
+                Map<Type, List<Arrow>> innerMap = map.get(gameId);
+                JPanel p = getArrowsPanel(gameId);
+
                 if (p != null && p.getComponentCount() > 0) {
                     p.removeAll();
                     p.revalidate();
