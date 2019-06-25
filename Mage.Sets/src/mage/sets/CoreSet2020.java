@@ -100,6 +100,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Creeping Trailblazer", 207, Rarity.UNCOMMON, mage.cards.c.CreepingTrailblazer.class));
         cards.add(new SetCardInfo("Cryptic Caves", 244, Rarity.UNCOMMON, mage.cards.c.CrypticCaves.class));
         cards.add(new SetCardInfo("Daggersail Aeronaut", 133, Rarity.COMMON, mage.cards.d.DaggersailAeronaut.class));
+        cards.add(new SetCardInfo("Dark Remedy", 321, Rarity.COMMON, mage.cards.d.DarkRemedy.class));
         cards.add(new SetCardInfo("Daybreak Chaplain", 12, Rarity.COMMON, mage.cards.d.DaybreakChaplain.class));
         cards.add(new SetCardInfo("Destructive Digger", 134, Rarity.COMMON, mage.cards.d.DestructiveDigger.class));
         cards.add(new SetCardInfo("Devout Decree", 13, Rarity.UNCOMMON, mage.cards.d.DevoutDecree.class));
