@@ -291,6 +291,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Temple of Silence", 256, Rarity.RARE, mage.cards.t.TempleOfSilence.class));
         cards.add(new SetCardInfo("Temple of Triumph", 257, Rarity.RARE, mage.cards.t.TempleOfTriumph.class));
         cards.add(new SetCardInfo("Thicket Crasher", 196, Rarity.COMMON, mage.cards.t.ThicketCrasher.class));
+        cards.add(new SetCardInfo("Thirsting Bloodlord", 293, Rarity.UNCOMMON, mage.cards.t.ThirstingBloodlord.class));
         cards.add(new SetCardInfo("Thornwood Falls", 258, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
         cards.add(new SetCardInfo("Thought Distortion", 117, Rarity.UNCOMMON, mage.cards.t.ThoughtDistortion.class));
         cards.add(new SetCardInfo("Thrashing Brontodon", 197, Rarity.UNCOMMON, mage.cards.t.ThrashingBrontodon.class));
