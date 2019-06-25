@@ -276,6 +276,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Spectral Sailor", 76, Rarity.UNCOMMON, mage.cards.s.SpectralSailor.class));
         cards.add(new SetCardInfo("Squad Captain", 38, Rarity.COMMON, mage.cards.s.SquadCaptain.class));
         cards.add(new SetCardInfo("Starfield Mystic", 39, Rarity.RARE, mage.cards.s.StarfieldMystic.class));
+        cards.add(new SetCardInfo("Steadfast Sentry", 40, Rarity.COMMON, mage.cards.s.SteadfastSentry.class));
         cards.add(new SetCardInfo("Steel Overseer", 239, Rarity.RARE, mage.cards.s.SteelOverseer.class));
         cards.add(new SetCardInfo("Stone Golem", 240, Rarity.COMMON, mage.cards.s.StoneGolem.class));
         cards.add(new SetCardInfo("Swamp", 269, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
