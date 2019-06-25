@@ -265,6 +265,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Shifting Ceratops", 194, Rarity.RARE, mage.cards.s.ShiftingCeratops.class));
         cards.add(new SetCardInfo("Shock", 160, Rarity.COMMON, mage.cards.s.Shock.class));
         cards.add(new SetCardInfo("Silverback Shaman", 195, Rarity.COMMON, mage.cards.s.SilverbackShaman.class));
+        cards.add(new SetCardInfo("Skyknight Vanguard", 218, Rarity.UNCOMMON, mage.cards.s.SkyknightVanguard.class));
         cards.add(new SetCardInfo("Sleep Paralysis", 75, Rarity.COMMON, mage.cards.s.SleepParalysis.class));
         cards.add(new SetCardInfo("Sorin, Imperious Bloodlord", 115, Rarity.MYTHIC, mage.cards.s.SorinImperiousBloodlord.class));
         cards.add(new SetCardInfo("Sorin, Vampire Lord", 290, Rarity.MYTHIC, mage.cards.s.SorinVampireLord.class));
