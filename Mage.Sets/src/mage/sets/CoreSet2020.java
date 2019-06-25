@@ -119,6 +119,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Ember Hauler", 137, Rarity.UNCOMMON, mage.cards.e.EmberHauler.class));
         cards.add(new SetCardInfo("Embodiment of Agonies", 98, Rarity.RARE, mage.cards.e.EmbodimentOfAgonies.class));
         cards.add(new SetCardInfo("Empyrean Eagle", 208, Rarity.UNCOMMON, mage.cards.e.EmpyreanEagle.class));
+        cards.add(new SetCardInfo("Engulfing Eruption", 328, Rarity.COMMON, mage.cards.e.EngulfingEruption.class));
         cards.add(new SetCardInfo("Epicure of Blood", 99, Rarity.COMMON, mage.cards.e.EpicureOfBlood.class));
         cards.add(new SetCardInfo("Eternal Isolation", 15, Rarity.UNCOMMON, mage.cards.e.EternalIsolation.class));
         cards.add(new SetCardInfo("Evolving Wilds", 246, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
