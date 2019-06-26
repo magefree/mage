@@ -144,6 +144,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Frilled Sea Serpent", 61, Rarity.COMMON, mage.cards.f.FrilledSeaSerpent.class));
         cards.add(new SetCardInfo("Frost Lynx", 62, Rarity.COMMON, mage.cards.f.FrostLynx.class));
         cards.add(new SetCardInfo("Fry", 140, Rarity.UNCOMMON, mage.cards.f.Fry.class));
+        cards.add(new SetCardInfo("Gauntlets of Light", 17, Rarity.UNCOMMON, mage.cards.g.GauntletsOfLight.class));
         cards.add(new SetCardInfo("Gift of Paradise", 173, Rarity.COMMON, mage.cards.g.GiftOfParadise.class));
         cards.add(new SetCardInfo("Glaring Aegis", 18, Rarity.COMMON, mage.cards.g.GlaringAegis.class));
         cards.add(new SetCardInfo("Glint-Horn Buccaneer", 141, Rarity.RARE, mage.cards.g.GlintHornBuccaneer.class));
