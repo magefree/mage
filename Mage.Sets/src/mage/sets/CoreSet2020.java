@@ -145,6 +145,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Fry", 140, Rarity.UNCOMMON, mage.cards.f.Fry.class));
         cards.add(new SetCardInfo("Gift of Paradise", 173, Rarity.COMMON, mage.cards.g.GiftOfParadise.class));
         cards.add(new SetCardInfo("Glaring Aegis", 18, Rarity.COMMON, mage.cards.g.GlaringAegis.class));
+        cards.add(new SetCardInfo("Gnarlback Rhino", 300, Rarity.UNCOMMON, mage.cards.g.GnarlbackRhino.class));
         cards.add(new SetCardInfo("Goblin Bird-Grabber", 142, Rarity.COMMON, mage.cards.g.GoblinBirdGrabber.class));
         cards.add(new SetCardInfo("Goblin Ringleader", 143, Rarity.UNCOMMON, mage.cards.g.GoblinRingleader.class));
         cards.add(new SetCardInfo("Goblin Smuggler", 144, Rarity.COMMON, mage.cards.g.GoblinSmuggler.class));
