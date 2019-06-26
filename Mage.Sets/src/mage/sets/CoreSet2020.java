@@ -87,6 +87,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Centaur Courser", 168, Rarity.COMMON, mage.cards.c.CentaurCourser.class));
         cards.add(new SetCardInfo("Cerulean Drake", 53, Rarity.UNCOMMON, mage.cards.c.CeruleanDrake.class));
         cards.add(new SetCardInfo("Chandra's Embercat", 129, Rarity.COMMON, mage.cards.c.ChandrasEmbercat.class));
+        cards.add(new SetCardInfo("Chandra's Flame Wave", 295, Rarity.RARE, mage.cards.c.ChandrasFlameWave.class));
         cards.add(new SetCardInfo("Chandra's Outrage", 130, Rarity.COMMON, mage.cards.c.ChandrasOutrage.class));
         cards.add(new SetCardInfo("Chandra's Regulator", 131, Rarity.RARE, mage.cards.c.ChandrasRegulator.class));
         cards.add(new SetCardInfo("Chandra's Spitfire", 132, Rarity.UNCOMMON, mage.cards.c.ChandrasSpitfire.class));
