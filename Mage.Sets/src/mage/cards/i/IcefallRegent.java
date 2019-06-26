@@ -1,7 +1,5 @@
-
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -14,15 +12,7 @@ import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.PhaseStep;
-import mage.constants.TargetController;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
@@ -34,8 +24,9 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class IcefallRegent extends CardImpl {
@@ -47,7 +38,7 @@ public final class IcefallRegent extends CardImpl {
     }
 
     public IcefallRegent(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
@@ -179,14 +170,13 @@ class IcefallRegentWatcher extends Watcher {
 
 class IcefallRegentCostIncreaseEffect extends CostModificationEffectImpl {
 
-    private static final String effectText = "Spells your opponents cast that target Icefall Regent cost {2} more to cast";
 
     IcefallRegentCostIncreaseEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
-        staticText = effectText;
+        staticText = "Spells your opponents cast that target {this} cost {2} more to cast";
     }
 
-    IcefallRegentCostIncreaseEffect(IcefallRegentCostIncreaseEffect effect) {
+    private IcefallRegentCostIncreaseEffect(IcefallRegentCostIncreaseEffect effect) {
         super(effect);
     }
 
