@@ -257,6 +257,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Rule of Law", 35, Rarity.UNCOMMON, mage.cards.r.RuleOfLaw.class));
         cards.add(new SetCardInfo("Sage's Row Denizen", 73, Rarity.COMMON, mage.cards.s.SagesRowDenizen.class));
         cards.add(new SetCardInfo("Sanitarium Skeleton", 112, Rarity.COMMON, mage.cards.s.SanitariumSkeleton.class));
+        cards.add(new SetCardInfo("Savage Gorger", 291, Rarity.COMMON, mage.cards.s.SavageGorger.class));
         cards.add(new SetCardInfo("Savannah Sage", 284, Rarity.COMMON, mage.cards.s.SavannahSage.class));
         cards.add(new SetCardInfo("Scheming Symmetry", 113, Rarity.RARE, mage.cards.s.SchemingSymmetry.class));
         cards.add(new SetCardInfo("Scholar of the Ages", 74, Rarity.UNCOMMON, mage.cards.s.ScholarOfTheAges.class));
