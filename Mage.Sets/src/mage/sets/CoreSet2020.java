@@ -54,7 +54,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Angel of Vitality", 4, Rarity.UNCOMMON, mage.cards.a.AngelOfVitality.class));
         cards.add(new SetCardInfo("Angelic Gift", 5, Rarity.COMMON, mage.cards.a.AngelicGift.class));
         cards.add(new SetCardInfo("Anticipate", 45, Rarity.COMMON, mage.cards.a.Anticipate.class));
-        cards.add(new SetCardInfo("Anvilwrought Raptor", 221, Rarity.UNCOMMON, mage.cards.a.AnvilwroughtRaptor.class));
+        cards.add(new SetCardInfo("Anvilwrought Raptor", 221, Rarity.COMMON, mage.cards.a.AnvilwroughtRaptor.class));
         cards.add(new SetCardInfo("Apostle of Purifying Light", 6, Rarity.UNCOMMON, mage.cards.a.ApostleOfPurifyingLight.class));
         cards.add(new SetCardInfo("Atemsis, All-Seeing", 46, Rarity.RARE, mage.cards.a.AtemsisAllSeeing.class));
         cards.add(new SetCardInfo("Audacious Thief", 84, Rarity.COMMON, mage.cards.a.AudaciousThief.class));
@@ -72,7 +72,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodthirsty Aerialist", 91, Rarity.UNCOMMON, mage.cards.b.BloodthirstyAerialist.class));
         cards.add(new SetCardInfo("Blossoming Sands", 243, Rarity.COMMON, mage.cards.b.BlossomingSands.class));
         cards.add(new SetCardInfo("Bone Splinters", 92, Rarity.COMMON, mage.cards.b.BoneSplinters.class));
-        cards.add(new SetCardInfo("Bone to Ash", 48, Rarity.UNCOMMON, mage.cards.b.BoneToAsh.class));
+        cards.add(new SetCardInfo("Bone to Ash", 48, Rarity.COMMON, mage.cards.b.BoneToAsh.class));
         cards.add(new SetCardInfo("Boneclad Necromancer", 93, Rarity.COMMON, mage.cards.b.BonecladNecromancer.class));
         cards.add(new SetCardInfo("Brineborn Cutthroat", 50, Rarity.UNCOMMON, mage.cards.b.BrinebornCutthroat.class));
         cards.add(new SetCardInfo("Brought Back", 9, Rarity.RARE, mage.cards.b.BroughtBack.class));
