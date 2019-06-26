@@ -335,6 +335,19 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         ability.addWatcher(watcher);
     }
 
+    public void replaceSpellAbility(SpellAbility newAbility) {
+        SpellAbility oldAbility = this.getSpellAbility();
+        while (oldAbility != null) {
+            abilities.remove(oldAbility);
+            spellAbility = null;
+            oldAbility = this.getSpellAbility();
+        }
+
+        if (newAbility != null) {
+            addAbility(newAbility);
+        }
+    }
+
     @Override
     public SpellAbility getSpellAbility() {
         if (spellAbility == null) {
