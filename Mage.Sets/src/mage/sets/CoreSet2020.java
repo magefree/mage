@@ -258,6 +258,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Savannah Sage", 284, Rarity.COMMON, mage.cards.s.SavannahSage.class));
         cards.add(new SetCardInfo("Scheming Symmetry", 113, Rarity.RARE, mage.cards.s.SchemingSymmetry.class));
         cards.add(new SetCardInfo("Scholar of the Ages", 74, Rarity.UNCOMMON, mage.cards.s.ScholarOfTheAges.class));
+        cards.add(new SetCardInfo("Scorch Spitter", 159, Rarity.COMMON, mage.cards.s.ScorchSpitter.class));
         cards.add(new SetCardInfo("Scoured Barrens", 251, Rarity.COMMON, mage.cards.s.ScouredBarrens.class));
         cards.add(new SetCardInfo("Scuttlemutt", 238, Rarity.UNCOMMON, mage.cards.s.Scuttlemutt.class));
         cards.add(new SetCardInfo("Season of Growth", 191, Rarity.UNCOMMON, mage.cards.s.SeasonOfGrowth.class));
