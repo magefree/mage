@@ -1,7 +1,6 @@
 package mage.constants;
 
 /**
- *
  * @author North
  */
 public enum Outcome {
@@ -41,7 +40,7 @@ public enum Outcome {
     Removal(false),
     AIDontUseIt(false),
     Vote(true);
-    private final boolean good;
+    private final boolean good; // good or bad for targets in current effect
     private boolean canTargetAll;
 
     Outcome(boolean good) {
