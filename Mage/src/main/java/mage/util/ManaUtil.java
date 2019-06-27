@@ -529,7 +529,7 @@ public final class ManaUtil {
 
         int wantToPay = 0;
         boolean payed = false;
-        while (player.canRespond() && !payed) {
+        if (player.canRespond()) {
             int bookmark = game.bookmarkState();
             player.resetStoredBookmark(game);
 
