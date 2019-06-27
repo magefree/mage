@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class CardView extends SimpleCardView {
+public class CardView extends SimpleCardView implements SelectableObjectView {
 
     private static final long serialVersionUID = 1L;
 

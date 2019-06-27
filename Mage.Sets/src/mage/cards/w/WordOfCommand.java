@@ -169,7 +169,7 @@ class WordOfCommandEffect extends OneShotEffect {
     private boolean checkPlayability(Card card, Player targetPlayer, Game game, Ability source) {
         // check for card playability
         boolean canPlay = false;
-        if (card.isLand()) { // we can't use getPlayableInHand(game) in here because it disallows playing lands outside the main step
+        if (card.isLand()) { // we can't use getPlayableObjects(game) in here because it disallows playing lands outside the main step // TODO: replace to getPlayable() checks with disable step condition?
             if (targetPlayer.canPlayLand()
                     && game.getActivePlayerId().equals(targetPlayer.getId())) {
                 canPlay = true;
@@ -182,7 +182,7 @@ class WordOfCommandEffect extends OneShotEffect {
         } else { // Word of Command allows the chosen card to be played "as if it had flash" so we need to invoke such effect to bypass the check
             AsThoughEffectImpl effect2 = new WordOfCommandTestFlashEffect();
             game.addEffect(effect2, source);
-            if (targetPlayer.getPlayableInHand(game).contains(card.getId())) {
+            if (targetPlayer.getPlayableObjects(game, Zone.HAND).contains(card.getId())) {
                 canPlay = true;
             }
             for (AsThoughEffect eff : game.getContinuousEffects().getApplicableAsThoughEffects(AsThoughEffectType.CAST_AS_INSTANT, game)) {

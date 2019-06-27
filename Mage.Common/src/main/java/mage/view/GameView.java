@@ -39,7 +39,7 @@ public class GameView implements Serializable {
     private final int priorityTime;
     private final List<PlayerView> players = new ArrayList<>();
     private CardsView hand;
-    private Set<UUID> canPlayInHand;
+    private Set<UUID> canPlayObjects;
     private Map<String, SimpleCardsView> opponentHands;
     private Map<String, SimpleCardsView> watchedHands;
     private final CardsView stack = new CardsView();
@@ -300,12 +300,12 @@ public class GameView implements Serializable {
         return isPlayer;
     }
 
-    public Set<UUID> getCanPlayInHand() {
-        return canPlayInHand;
+    public Set<UUID> getCanPlayObjects() {
+        return canPlayObjects;
     }
 
-    public void setCanPlayInHand(Set<UUID> canPlayInHand) {
-        this.canPlayInHand = canPlayInHand;
+    public void setCanPlayObjects(Set<UUID> canPlayObjects) {
+        this.canPlayObjects = canPlayObjects;
     }
 
     public int getSpellsCastCurrentTurn() {

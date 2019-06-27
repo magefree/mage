@@ -2809,8 +2809,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public Set<UUID> getPlayableInHand(Game game) {
-        return computerPlayer.getPlayableInHand(game);
+    public Set<UUID> getPlayableObjects(Game game, Zone zone) {
+        return computerPlayer.getPlayableObjects(game, zone);
     }
 
     @Override

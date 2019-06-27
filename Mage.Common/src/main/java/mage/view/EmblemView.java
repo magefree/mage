@@ -1,10 +1,11 @@
 package mage.view;
 
+import mage.cards.Card;
+import mage.game.command.Emblem;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
-import mage.cards.Card;
-import mage.game.command.Emblem;
 
 /**
  * @author noxx
@@ -15,24 +16,24 @@ public class EmblemView implements CommandObjectView, Serializable {
     protected String name;
     protected String expansionSetCode;
     protected List<String> rules;
+    protected boolean isPlayable = false;
 
     public EmblemView(Emblem emblem, Card sourceCard) {
-        id = emblem.getId();
-        name = "Emblem " + sourceCard.getName();
+        this.id = emblem.getId();
+        this.name = "Emblem " + sourceCard.getName();
         if (emblem.getExpansionSetCodeForImage() == null) {
-            expansionSetCode = sourceCard.getExpansionSetCode();
+            this.expansionSetCode = sourceCard.getExpansionSetCode();
         } else {
-            expansionSetCode = emblem.getExpansionSetCodeForImage();
+            this.expansionSetCode = emblem.getExpansionSetCodeForImage();
         }
-
-        rules = emblem.getAbilities().getRules(sourceCard.getName());
+        this.rules = emblem.getAbilities().getRules(sourceCard.getName());
     }
 
     public EmblemView(Emblem emblem) {
-        id = emblem.getId();
-        name = emblem.getName();
-        expansionSetCode = emblem.getExpansionSetCodeForImage();
-        rules = emblem.getAbilities().getRules(emblem.getName());
+        this.id = emblem.getId();
+        this.name = emblem.getName();
+        this.expansionSetCode = emblem.getExpansionSetCodeForImage();
+        this.rules = emblem.getAbilities().getRules(emblem.getName());
     }
 
     @Override
@@ -53,5 +54,38 @@ public class EmblemView implements CommandObjectView, Serializable {
     @Override
     public List<String> getRules() {
         return rules;
+    }
+
+
+    @Override
+    public boolean isPlayable() {
+        return isPlayable;
+    }
+
+    @Override
+    public void setPlayable(boolean isPlayable) {
+        this.isPlayable = isPlayable;
+    }
+
+    @Override
+    public boolean isChoosable() {
+        // unsupported
+        return false;
+    }
+
+    @Override
+    public void setChoosable(boolean isChoosable) {
+        // unsupported
+    }
+
+    @Override
+    public boolean isSelected() {
+        // unsupported
+        return false;
+    }
+
+    @Override
+    public void setSelected(boolean selected) {
+        // unsupported
     }
 }
