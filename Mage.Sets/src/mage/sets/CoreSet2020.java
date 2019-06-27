@@ -75,6 +75,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Bone to Ash", 48, Rarity.COMMON, mage.cards.b.BoneToAsh.class));
         cards.add(new SetCardInfo("Boneclad Necromancer", 93, Rarity.COMMON, mage.cards.b.BonecladNecromancer.class));
         cards.add(new SetCardInfo("Boreal Elemental", 49, Rarity.COMMON, mage.cards.b.BorealElemental.class));
+        cards.add(new SetCardInfo("Brightwood Tracker", 166, Rarity.COMMON, mage.cards.b.BrightwoodTracker.class));
         cards.add(new SetCardInfo("Brineborn Cutthroat", 50, Rarity.UNCOMMON, mage.cards.b.BrinebornCutthroat.class));
         cards.add(new SetCardInfo("Brought Back", 9, Rarity.RARE, mage.cards.b.BroughtBack.class));
         cards.add(new SetCardInfo("Captivating Gyre", 51, Rarity.UNCOMMON, mage.cards.c.CaptivatingGyre.class));
