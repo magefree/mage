@@ -65,7 +65,7 @@ enum AgentOfTreacheryCondition implements Condition {
         return game.getBattlefield()
                 .getAllActivePermanents(source.getControllerId())
                 .stream()
-                .map(permanent -> !permanent.getOwnerId().equals(source.getControllerId()))
+                .filter(permanent -> !permanent.getOwnerId().equals(source.getControllerId()))
                 .count() > 2;
     }
 }
