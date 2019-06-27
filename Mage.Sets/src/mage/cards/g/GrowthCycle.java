@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -14,7 +13,6 @@ import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -52,15 +50,14 @@ enum GrowthCycleValue implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Player player = game.getPlayer(sourceAbility.getControllerId());
         if (player == null) {
-            return 0;
+            return 3;
         }
-        return player
+        return 3 + player
                 .getGraveyard()
                 .getCards(game)
                 .stream()
-                .map(Card::getName)
-                .filter(s -> s.equals("Growth Cycle"))
-                .collect(Collectors.reducing(0, e -> 1, Integer::sum));
+                .mapToInt(card -> "Growth Cycle".equals(card.getName()) ? 2 : 0)
+                .sum();
     }
 
     @Override
