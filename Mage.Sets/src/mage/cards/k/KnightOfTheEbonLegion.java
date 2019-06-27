@@ -76,7 +76,7 @@ enum KnightOfTheEbonLegionCondition implements Condition {
         }
         return game
                 .getState()
-                .getPlayersInRange(source.getSourceId(), game)
+                .getPlayersInRange(source.getControllerId(), game)
                 .stream()
                 .anyMatch(uuid -> watcher.getLifeLost(uuid) > 3);
     }
