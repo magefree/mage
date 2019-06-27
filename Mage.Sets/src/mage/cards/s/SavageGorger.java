@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -35,9 +35,9 @@ public final class SavageGorger extends CardImpl {
 
         // At the beginning of your upkeep, if an opponent lost life this turn, put a +1/+1 counter on Savage Gorger.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(
+                new BeginningOfEndStepTriggeredAbility(new AddCountersSourceEffect(
                         CounterType.P1P1.createInstance()), TargetController.YOU, false
-                ), SavageGorgerCondition.instance, "At the beginning of your upkeep, " +
+                ), SavageGorgerCondition.instance, "At the beginning of your end step, " +
                 "if an opponent lost life this turn, put a +1/+1 counter on {this}"
         ));
     }
