@@ -34,7 +34,7 @@ public final class HangedExecutioner extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Hanged Executioner enters the battlefield, create a 1/1 white Spirit creature token with flying.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken(), 2)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken())));
 
         // {3}{W}, Exile Hanged Executioner: Exile target creature.
         Ability ability = new SimpleActivatedAbility(new ExileTargetEffect(), new ManaCostsImpl("{3}{W}"));
