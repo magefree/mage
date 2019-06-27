@@ -328,6 +328,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Wakeroot Elemental", 202, Rarity.RARE, mage.cards.w.WakerootElemental.class));
         cards.add(new SetCardInfo("Warden of Evos Isle", 79, Rarity.UNCOMMON, mage.cards.w.WardenOfEvosIsle.class));
         cards.add(new SetCardInfo("Waterkin Shaman", 288, Rarity.UNCOMMON, mage.cards.w.WaterkinShaman.class));
+        cards.add(new SetCardInfo("Wildfire Elemental", 297, Rarity.COMMON, mage.cards.w.WildfireElemental.class));
         cards.add(new SetCardInfo("Wind-Scarred Crag", 260, Rarity.COMMON, mage.cards.w.WindScarredCrag.class));
         cards.add(new SetCardInfo("Winged Words", 80, Rarity.COMMON, mage.cards.w.WingedWords.class));
         cards.add(new SetCardInfo("Wolfkin Bond", 203, Rarity.COMMON, mage.cards.w.WolfkinBond.class));
