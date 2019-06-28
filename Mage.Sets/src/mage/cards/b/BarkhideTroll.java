@@ -32,7 +32,7 @@ public final class BarkhideTroll extends CardImpl {
 
         // Barkhide Troll enters the battlefield with a +1/+1 counter on it.
         this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
                 "{this} enters the battlefield with a +1/+1 counter on it"
         ));
 
