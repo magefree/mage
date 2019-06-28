@@ -2,6 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -44,7 +45,7 @@ public final class ScorchSpitter extends CardImpl {
 class ScorchSpitterTriggeredAbility extends TriggeredAbilityImpl {
 
     ScorchSpitterTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(1));
+        super(Zone.BATTLEFIELD, null);
     }
 
     private ScorchSpitterTriggeredAbility(final ScorchSpitterTriggeredAbility ability) {
@@ -63,10 +64,11 @@ class ScorchSpitterTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (sourceId.equals(event.getSourceId())) {
-            this.getEffects().get(0).setTargetPointer(
-                    new FixedTarget(game.getCombat().getDefenderId(event.getTargetId()), game)
-            );
+        if (this.getSourceId().equals(event.getSourceId())) {
+            this.getEffects().clear();
+            Effect effect = new DamageTargetEffect(1);
+            effect.setTargetPointer(new FixedTarget(game.getCombat().getDefenderId(event.getSourceId()), game));
+            this.addEffect(effect);
             return true;
         }
         return false;
