@@ -2,7 +2,7 @@ package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.condition.common.MyTurnCondition;
+import mage.abilities.condition.common.NotMyTurnCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlashAbility;
@@ -34,7 +34,7 @@ public final class BrinebornCutthroat extends CardImpl {
         this.addAbility(new ConditionalTriggeredAbility(
                 new SpellCastControllerTriggeredAbility(
                         new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false
-                ), MyTurnCondition.instance, "Whenever you cast a spell during an opponent's turn, " +
+                ), NotMyTurnCondition.instance, "Whenever you cast a spell during an opponent's turn, " +
                 "put a +1/+1 counter on {this}"
         ));
     }
