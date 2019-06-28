@@ -46,7 +46,7 @@ public final class MuYanlingSkyDancer extends CardImpl {
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new MuYanlingSkyDancerToken()), -3));
 
         // −8: You get an emblem with "Islands you control have '{T}: Draw a card'."
-        this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new MuYanlingSkyDancerEmblem())));
+        this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new MuYanlingSkyDancerEmblem()), -8));
     }
 
     private MuYanlingSkyDancer(final MuYanlingSkyDancer card) {
