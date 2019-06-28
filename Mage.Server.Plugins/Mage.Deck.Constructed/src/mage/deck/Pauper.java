@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.deck;
 
 import mage.cards.ExpansionSet;
@@ -18,7 +13,6 @@ public class Pauper extends Constructed {
     public Pauper() {
         super("Constructed - Pauper");
 
-        //TODO: Add only Magic Online sets for pauper
         for (ExpansionSet set : Sets.getInstance().values()) {
             if (set.getSetType().isEternalLegal()) {
                 setCodes.add(set.getCode());
@@ -30,11 +24,17 @@ public class Pauper extends Constructed {
         banned.add("Cloud of Faeries");
         banned.add("Cloudpost");
         banned.add("Cranial Plating");
+        banned.add("Daze");
         banned.add("Empty the Warrens");
         banned.add("Frantic Search");
+        banned.add("Gitaxian Probe");
         banned.add("Grapeshot");
+        banned.add("Gush");
+        banned.add("Hight Tide");
+        banned.add("Hymn to Tourach");
         banned.add("Invigorate");
         banned.add("Peregrine Drake");
+        banned.add("Sinkhole");
         banned.add("Temporal Fissure");
         banned.add("Treasure Cruise");
     }
