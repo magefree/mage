@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -33,7 +34,7 @@ public final class LavakinBrawler extends CardImpl {
 
         // Whenever Lavakin Brawler attacks, it gets +1/+0 until end of turn for each Elemental you control.
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(
-                xValue, xValue, Duration.EndOfTurn, true
+                xValue, StaticValue.getZeroValue(), Duration.EndOfTurn, true
         ), false));
     }
 
