@@ -337,6 +337,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Woodland Mystic", 344, Rarity.COMMON, mage.cards.w.WoodlandMystic.class));
         cards.add(new SetCardInfo("Yanling's Harbinger", 289, Rarity.RARE, mage.cards.y.YanlingsHarbinger.class));
         cards.add(new SetCardInfo("Yarok's Fenlurker", 123, Rarity.UNCOMMON, mage.cards.y.YaroksFenlurker.class));
+        cards.add(new SetCardInfo("Yarok's Wavecrasher", 81, Rarity.UNCOMMON, mage.cards.y.YaroksWavecrasher.class));
         cards.add(new SetCardInfo("Yarok, the Desecrated", 220, Rarity.MYTHIC, mage.cards.y.YarokTheDesecrated.class));
         cards.add(new SetCardInfo("Yoked Ox", 41, Rarity.COMMON, mage.cards.y.YokedOx.class));
         cards.add(new SetCardInfo("Zephyr Charge", 82, Rarity.COMMON, mage.cards.z.ZephyrCharge.class));
