@@ -15,18 +15,16 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.mageobject.ToughnessPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -35,6 +33,13 @@ import java.util.UUID;
  * @author JayDi85
  */
 public final class ThunderkinAwakener extends CardImpl {
+
+    private static final FilterCard filter
+            = new FilterCreatureCard("creature card in your graveyard with lesser toughness");
+
+    static {
+        filter.add(ThunderkinAwakenerPredicate.instance);
+    }
 
     public ThunderkinAwakener(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
@@ -50,11 +55,11 @@ public final class ThunderkinAwakener extends CardImpl {
         // with toughness less than Thunderkin Awakener’s toughness. Return that card to the battlefield tapped and attacking.
         // Sacrifice it at the beginning of the next end step.
         Ability ability = new AttacksTriggeredAbility(new ThunderkinAwakenerEffect(), false);
-        ability.setTargetAdjuster(ThunderkinAwakenerAdjuster.instance);
+        ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }
 
-    public ThunderkinAwakener(final ThunderkinAwakener card) {
+    private ThunderkinAwakener(final ThunderkinAwakener card) {
         super(card);
     }
 
@@ -64,34 +69,26 @@ public final class ThunderkinAwakener extends CardImpl {
     }
 }
 
-enum ThunderkinAwakenerAdjuster implements TargetAdjuster {
+enum ThunderkinAwakenerPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Card>> {
     instance;
 
     @Override
-    public void adjustTargets(Ability ability, Game game) {
-        // target Elemental creature card in your graveyard with toughness less than Thunderkin Awakener’s toughness
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(ability.getSourceId());
-        if (sourcePermanent != null) {
-            int xValue = sourcePermanent.getToughness().getValue();
-            FilterCard filter = new FilterCreatureCard("creature card in your graveyard with toughness less than Thunderkin Awakener’s toughness");
-            filter.add(new SubtypePredicate(SubType.ELEMENTAL));
-            filter.add(new ToughnessPredicate(ComparisonType.FEWER_THAN, xValue + 1));
-
-            ability.getTargets().clear();
-            ability.addTarget(new TargetCardInYourGraveyard(filter));
-        }
+    public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(input.getSourceId());
+        return sourcePermanent != null
+                & input.getObject().getToughness().getValue() < sourcePermanent.getToughness().getValue();
     }
 }
 
 class ThunderkinAwakenerEffect extends OneShotEffect {
 
-    public ThunderkinAwakenerEffect() {
+    ThunderkinAwakenerEffect() {
         super(Outcome.Benefit);
-        staticText = "choose target Elemental creature card in your graveyard with toughness less than Thunderkin Awakener’s toughness."
+        staticText = "choose target Elemental creature card in your graveyard with toughness less than {this}’s toughness."
                 + " Return that card to the battlefield tapped and attacking. Sacrifice it at the beginning of the next end step";
     }
 
-    public ThunderkinAwakenerEffect(final ThunderkinAwakenerEffect effect) {
+    private ThunderkinAwakenerEffect(final ThunderkinAwakenerEffect effect) {
         super(effect);
     }
 
