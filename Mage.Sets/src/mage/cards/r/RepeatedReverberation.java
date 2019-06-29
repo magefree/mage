@@ -30,7 +30,7 @@ public final class RepeatedReverberation extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}{R}");
 
         // When you next cast an instant spell, cast a sorcery spell, or activate a loyalty ability this turn, copy that spell or ability twice. You may choose new targets for the copies.
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new ChandraTheFirebrandAbility()));
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new RepeatedReverberationTriggeredAbility()));
     }
 
     private RepeatedReverberation(final RepeatedReverberation card) {
@@ -43,19 +43,19 @@ public final class RepeatedReverberation extends CardImpl {
     }
 }
 
-class ChandraTheFirebrandAbility extends DelayedTriggeredAbility {
+class RepeatedReverberationTriggeredAbility extends DelayedTriggeredAbility {
 
-    ChandraTheFirebrandAbility() {
+    RepeatedReverberationTriggeredAbility() {
         super(null, Duration.EndOfTurn);
     }
 
-    private ChandraTheFirebrandAbility(final ChandraTheFirebrandAbility ability) {
+    private RepeatedReverberationTriggeredAbility(final RepeatedReverberationTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public ChandraTheFirebrandAbility copy() {
-        return new ChandraTheFirebrandAbility(this);
+    public RepeatedReverberationTriggeredAbility copy() {
+        return new RepeatedReverberationTriggeredAbility(this);
     }
 
     @Override
@@ -85,7 +85,7 @@ class ChandraTheFirebrandAbility extends DelayedTriggeredAbility {
         if (stackAbility != null && stackAbility.getStackAbility() instanceof LoyaltyAbility) {
             this.getEffects().clear();
             this.addEffect(
-                    new StrionicResonatorEffect()
+                    new RepeatedReverberationEffect()
                             .setTargetPointer(new FixedTarget(event.getTargetId(), game))
             );
             return true;
@@ -100,13 +100,13 @@ class ChandraTheFirebrandAbility extends DelayedTriggeredAbility {
     }
 }
 
-class StrionicResonatorEffect extends OneShotEffect {
+class RepeatedReverberationEffect extends OneShotEffect {
 
-    StrionicResonatorEffect() {
+    RepeatedReverberationEffect() {
         super(Outcome.Copy);
     }
 
-    private StrionicResonatorEffect(final StrionicResonatorEffect effect) {
+    private RepeatedReverberationEffect(final RepeatedReverberationEffect effect) {
         super(effect);
     }
 
@@ -128,7 +128,7 @@ class StrionicResonatorEffect extends OneShotEffect {
     }
 
     @Override
-    public StrionicResonatorEffect copy() {
-        return new StrionicResonatorEffect(this);
+    public RepeatedReverberationEffect copy() {
+        return new RepeatedReverberationEffect(this);
     }
 }
