@@ -30,10 +30,7 @@ import mage.game.permanent.token.YoungPyromancerElementalToken;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
-import mage.target.targetpointer.FixedTargets;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 import static mage.constants.Outcome.Benefit;
@@ -104,16 +101,20 @@ class ChandraAcolyteOfFlameEffect extends OneShotEffect {
         Token token = new YoungPyromancerElementalToken();
         token.putOntoBattlefield(2, game, source.getSourceId(), source.getControllerId());
 
-        List<Permanent> perms = new ArrayList();
-        token.getLastAddedTokenIds().stream().map(permId -> perms.add(game.getPermanent(permId)));
+        token.getLastAddedTokenIds().stream().forEach(permId -> {
+            Permanent permanent = game.getPermanent(permId);
+            if (permanent == null) {
+                return;
+            }
 
-        ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
-        effect.setTargetPointer(new FixedTargets(perms, game));
-        game.addEffect(effect, source);
+            ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
+            effect.setTargetPointer(new FixedTarget(permId, game));
+            game.addEffect(effect, source);
 
-        Effect effect2 = new SacrificeTargetEffect();
-        effect.setTargetPointer(new FixedTargets(perms, game));
-        game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect2), source);
+            Effect effect2 = new SacrificeTargetEffect();
+            effect.setTargetPointer(new FixedTarget(permId, game));
+            game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect2), source);
+        });
 
         return true;
     }
