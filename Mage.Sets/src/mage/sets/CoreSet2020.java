@@ -237,6 +237,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Overgrowth Elemental", 187, Rarity.UNCOMMON, mage.cards.o.OvergrowthElemental.class));
         cards.add(new SetCardInfo("Pacifism", 32, Rarity.COMMON, mage.cards.p.Pacifism.class));
         cards.add(new SetCardInfo("Pack Mastiff", 152, Rarity.COMMON, mage.cards.p.PackMastiff.class));
+        cards.add(new SetCardInfo("Pattern Matcher", 234, Rarity.UNCOMMON, mage.cards.p.PatternMatcher.class));
         cards.add(new SetCardInfo("Plains", 261, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 262, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 263, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
