@@ -315,6 +315,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Uncaged Fury", 163, Rarity.UNCOMMON, mage.cards.u.UncagedFury.class));
         cards.add(new SetCardInfo("Unchained Berserker", 164, Rarity.UNCOMMON, mage.cards.u.UnchainedBerserker.class));
         cards.add(new SetCardInfo("Undead Servant", 118, Rarity.COMMON, mage.cards.u.UndeadServant.class));
+        cards.add(new SetCardInfo("Unholy Indenture", 119, Rarity.COMMON, mage.cards.u.UnholyIndenture.class));
         cards.add(new SetCardInfo("Unsummon", 78, Rarity.COMMON, mage.cards.u.Unsummon.class));
         cards.add(new SetCardInfo("Vampire of the Dire Moon", 120, Rarity.UNCOMMON, mage.cards.v.VampireOfTheDireMoon.class));
         cards.add(new SetCardInfo("Veil of Summer", 198, Rarity.UNCOMMON, mage.cards.v.VeilOfSummer.class));
