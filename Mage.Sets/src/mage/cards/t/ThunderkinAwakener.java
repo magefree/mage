@@ -21,6 +21,7 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -35,9 +36,10 @@ import java.util.UUID;
 public final class ThunderkinAwakener extends CardImpl {
 
     private static final FilterCard filter
-            = new FilterCreatureCard("creature card in your graveyard with lesser toughness");
+            = new FilterCreatureCard("Elemental creature card in your graveyard with lesser toughness");
 
     static {
+        filter.add(new SubtypePredicate(SubType.ELEMENTAL));
         filter.add(ThunderkinAwakenerPredicate.instance);
     }
 
