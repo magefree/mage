@@ -256,6 +256,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Reckless Air Strike", 154, Rarity.COMMON, mage.cards.r.RecklessAirStrike.class));
         cards.add(new SetCardInfo("Reduce to Ashes", 155, Rarity.COMMON, mage.cards.r.ReduceToAshes.class));
         cards.add(new SetCardInfo("Renowned Weaponsmith", 72, Rarity.UNCOMMON, mage.cards.r.RenownedWeaponsmith.class));
+        cards.add(new SetCardInfo("Repeated Reverberation", 156, Rarity.RARE, mage.cards.r.RepeatedReverberation.class));
         cards.add(new SetCardInfo("Retributive Wand", 236, Rarity.UNCOMMON, mage.cards.r.RetributiveWand.class));
         cards.add(new SetCardInfo("Rienne, Angel of Rebirth", 281, Rarity.MYTHIC, mage.cards.r.RienneAngelOfRebirth.class));
         cards.add(new SetCardInfo("Ripscale Predator", 157, Rarity.COMMON, mage.cards.r.RipscalePredator.class));
