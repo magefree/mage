@@ -6,7 +6,6 @@ import mage.constants.SubType;
 import mage.util.RandomUtil;
 
 /**
- *
  * @author spjspj
  */
 public final class YoungPyromancerElementalToken extends TokenImpl {
@@ -17,6 +16,12 @@ public final class YoungPyromancerElementalToken extends TokenImpl {
             setTokenType(RandomUtil.nextInt(2) + 1);
         }
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("EMA")) {
+            setTokenType(1);
+        }
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("SHM")) {
+            setTokenType(2);
+        }
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("MH1")) {
             setTokenType(1);
         }
         cardType.add(CardType.CREATURE);

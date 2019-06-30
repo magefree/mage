@@ -88,6 +88,8 @@
 |Generate|EMBLEM:RIX|Huatli, Radiant Champion||Emblem Huatli|HuatliRadiantChampionEmblem|
 |Generate|EMBLEM:RNA|Domri, Chaos Bringer||Emblem Domri|DomriChaosBringerEmblem|
 |Generate|EMBLEM:WAR|Nissa, Who Shakes the World||Emblem Nissa|NissaWhoShakesTheWorldEmblem|
+|Generate|EMBLEM:MH1|Serra the Benevolent||Emblem Serra|SerraTheBenevolentEmblem|
+|Generate|EMBLEM:MH1|Wrenn and Six||Emblem Wrenn|WrennAndSixEmblem|
 |Generate|EMBLEM:M20|Chandra, Awakened Inferno||Emblem Chandra|ChandraAwakenedInfernoEmblem|
 |Generate|EMBLEM:M20|Mu Yanling, Sky Dancer||Emblem Yanling|MuYanlingSkyDancerEmblem|
 |Generate|PLANE:PCA|Plane - Academy At Tolaria West|||AcademyAtTolariaWestPlane|
@@ -1218,6 +1220,25 @@
 |Generate|TOK:WAR|Zombie Army|1||ZombieArmyToken|
 |Generate|TOK:WAR|Zombie Army|2||ZombieArmyToken|
 |Generate|TOK:WAR|Zombie Army|3||ZombieArmyToken|
+|Generate|TOK:MH1|Shapeshifter|||ShapeshifterToken|
+|Generate|TOK:MH1|Angel|||AngelVigilanceToken|
+|Generate|TOK:MH1|Bear|||BearToken|
+|Generate|TOK:MH1|Bird|||BirdToken|
+|Generate|TOK:MH1|Construct|||KarnConstructToken|
+|Generate|TOK:MH1|Elemental|1||YoungPyromancerElementalToken|
+|Generate|TOK:MH1|Elemental|2||AkoumStonewakerElementalToken|
+|Generate|TOK:MH1|Elephant|||ElephantToken|
+|Generate|TOK:MH1|Goblin|||GoblinToken|
+|Generate|TOK:MH1|Golem|||GolemToken|
+|Generate|TOK:MH1|Illusion|||MelokuTheCloudedMirrorToken|
+|Generate|TOK:MH1|Marit Lage|||MaritLageToken|
+|Generate|TOK:MH1|Myr|||MyrToken|
+|Generate|TOK:MH1|Rhino|||RhinoToken|
+|Generate|TOK:MH1|Soldier|||SoldierToken|
+|Generate|TOK:MH1|Spider|||SpiderToken|
+|Generate|TOK:MH1|Spirit|||WhiteBlackSpiritToken|
+|Generate|TOK:MH1|Squirrel|||SquirrelToken|
+|Generate|TOK:MH1|Zombie|||ZombieToken|
 |Generate|TOK:M20|Ajani's Pridemate|||AjanisPridemateToken|
 |Generate|TOK:M20|Demon|||DemonToken|
 |Generate|TOK:M20|Elemental|||YoungPyromancerElementalToken|
@@ -1228,9 +1249,3 @@
 |Generate|TOK:M20|Treasure|||TreasureToken|
 |Generate|TOK:M20|Wolf|||WolfToken|
 |Generate|TOK:M20|Zombie|||ZombieToken|
-
-
-
-
-
-

@@ -1,26 +1,13 @@
-
 package mage.cards.k;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.cards.*;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.other.CounterCardPredicate;
@@ -32,8 +19,12 @@ import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class KarnScionOfUrza extends CardImpl {
@@ -215,7 +206,7 @@ class KarnConstructEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            CreateTokenEffect effect = new CreateTokenEffect(new KarnConstructToken("DOM"), 1);
+            CreateTokenEffect effect = new CreateTokenEffect(new KarnConstructToken(), 1);
             effect.apply(game, source);
             return true;
         }

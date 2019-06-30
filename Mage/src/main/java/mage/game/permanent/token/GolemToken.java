@@ -16,7 +16,7 @@ public final class GolemToken extends TokenImpl {
     static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("MM2", "NPH", "SOM", "MM3", "M20"));
+        tokenImageSets.addAll(Arrays.asList("MM2", "NPH", "SOM", "MM3", "MH1", "M20"));
     }
 
     public GolemToken() {

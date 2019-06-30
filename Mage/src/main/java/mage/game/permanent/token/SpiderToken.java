@@ -5,16 +5,16 @@
  */
 package mage.game.permanent.token;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import mage.MageInt;
 import mage.abilities.keyword.ReachAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
- *
  * @author fireshoes
  */
 public final class SpiderToken extends TokenImpl {
@@ -22,7 +22,7 @@ public final class SpiderToken extends TokenImpl {
     static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("ISD", "EMN", "C15", "SHM"));
+        tokenImageSets.addAll(Arrays.asList("ISD", "EMN", "C15", "SHM", "MH1"));
     }
 
     public SpiderToken() {

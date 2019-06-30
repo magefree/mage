@@ -70,6 +70,29 @@ public class ScryfallImageSupportTokens {
             put("WAR/Zombie Warrior", "https://api.scryfall.com/cards/twar/11/en?format=image");
             put("WAR/Zombie", "https://api.scryfall.com/cards/twar/7/en?format=image");
 
+            // MH1
+            put("MH1/Angel", "https://api.scryfall.com/cards/tmh1/2/en?format=image");
+            put("MH1/Bear", "https://api.scryfall.com/cards/tmh1/11/en?format=image");
+            put("MH1/Bird", "https://api.scryfall.com/cards/tmh1/3/en?format=image");
+            put("MH1/Construct", "https://api.scryfall.com/cards/tmh1/17/en?format=image");
+            put("MH1/Elemental/1", "https://api.scryfall.com/cards/tmh1/8/en?format=image");
+            put("MH1/Elemental/2", "https://api.scryfall.com/cards/tmh1/9/en?format=image");
+            put("MH1/Elephant", "https://api.scryfall.com/cards/tmh1/12/en?format=image");
+            put("MH1/Goblin", "https://api.scryfall.com/cards/tmh1/10/en?format=image");
+            put("MH1/Golem", "https://api.scryfall.com/cards/tmh1/18/en?format=image");
+            put("MH1/Illusion", "https://api.scryfall.com/cards/tmh1/5/en?format=image");
+            put("MH1/Marit Lage", "https://api.scryfall.com/cards/tmh1/6/en?format=image");
+            put("MH1/Myr", "https://api.scryfall.com/cards/tmh1/19/en?format=image");
+            put("MH1/Rhino", "https://api.scryfall.com/cards/tmh1/13/en?format=image");
+            put("MH1/Emblem Serra the Benevolent", "https://api.scryfall.com/cards/tmh1/20/en?format=image");
+            put("MH1/Shapeshifter", "https://api.scryfall.com/cards/tmh1/1/en?format=image");
+            put("MH1/Soldier", "https://api.scryfall.com/cards/tmh1/4/en?format=image");
+            put("MH1/Spider", "https://api.scryfall.com/cards/tmh1/14/en?format=image");
+            put("MH1/Spirit", "https://api.scryfall.com/cards/tmh1/16/en?format=image");
+            put("MH1/Squirrel", "https://api.scryfall.com/cards/tmh1/15/en?format=image");
+            put("MH1/Emblem Wrenn and Six", "https://api.scryfall.com/cards/tmh1/21/en?format=image");
+            put("MH1/Zombie", "https://api.scryfall.com/cards/tmh1/7/en?format=image");
+
             // M20
             put("M20/Ajani's Pridemate", "https://api.scryfall.com/cards/tm20/1/en?format=image");
             put("M20/Emblem Chandra, Awakened Inferno", "https://api.scryfall.com/cards/tm20/11/en?format=image");

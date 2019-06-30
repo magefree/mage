@@ -1,15 +1,14 @@
-
-
 package mage.game.permanent.token;
 
-import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
+
+import java.util.Arrays;
 
 /**
- *
  * @author spjspj
  */
 public final class AkoumStonewakerElementalToken extends TokenImpl {
@@ -23,8 +22,11 @@ public final class AkoumStonewakerElementalToken extends TokenImpl {
         toughness = new MageInt(1);
         this.addAbility(TrampleAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
-        this.setOriginalExpansionSetCode("BFZ");
-        this.setTokenType(1);
+        availableImageSetCodes.addAll(Arrays.asList("BFZ", "MH1"));
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("MH1")) {
+            setTokenType(2);
+        }
     }
 
     public AkoumStonewakerElementalToken(final AkoumStonewakerElementalToken token) {

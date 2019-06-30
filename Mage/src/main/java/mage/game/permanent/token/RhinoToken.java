@@ -1,13 +1,13 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.keyword.TrampleAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
+
+import java.util.Arrays;
 
 /**
- *
  * @author spjspj
  */
 public final class RhinoToken extends TokenImpl {
@@ -20,6 +20,8 @@ public final class RhinoToken extends TokenImpl {
         power = new MageInt(4);
         toughness = new MageInt(4);
         addAbility(TrampleAbility.getInstance());
+
+        availableImageSetCodes.addAll(Arrays.asList("DGM", "RTR", "MH1"));
     }
 
     public RhinoToken(final RhinoToken token) {

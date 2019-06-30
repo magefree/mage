@@ -1,11 +1,11 @@
-
-
 package mage.game.permanent.token;
 
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.Arrays;
 
 /**
  * @author spjspj
@@ -21,6 +21,8 @@ public final class WhiteBlackSpiritToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
+
+        availableImageSetCodes.addAll(Arrays.asList("MH1"));
     }
 
     public WhiteBlackSpiritToken(final WhiteBlackSpiritToken token) {
