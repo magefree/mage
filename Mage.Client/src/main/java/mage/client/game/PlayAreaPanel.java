@@ -7,6 +7,7 @@ import mage.client.cards.BigCard;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.GUISizeHelper;
 import mage.constants.PlayerAction;
+import mage.view.GameView;
 import mage.view.PlayerView;
 import mage.view.UserRequestMessage;
 
@@ -17,6 +18,7 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.lang.reflect.Field;
+import java.util.Set;
 import java.util.UUID;
 
 import static mage.client.dialog.PreferencesDialog.*;
@@ -70,7 +72,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         setGUISize();
 
         init(player, bigCard, gameId, priorityTime);
-        update(player);
+        update(null, player, null);
     }
 
     public void CleanUp() {
@@ -503,8 +505,8 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         }
     }
 
-    public final void update(PlayerView player) {
-        this.playerPanel.update(player);
+    public final void update(GameView game, PlayerView player, Set<UUID> possibleTargets) {
+        this.playerPanel.update(game, player, possibleTargets);
         this.battlefieldPanel.update(player.getBattlefield());
         if (this.allowViewHandCardsMenuItem != null) {
             this.allowViewHandCardsMenuItem.setSelected(player.getUserData().isAllowRequestHandToAll());

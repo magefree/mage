@@ -714,7 +714,7 @@ public final class GamePanel extends javax.swing.JPanel {
                         }
                     }
                 }
-                players.get(player.getPlayerId()).update(player);
+                players.get(player.getPlayerId()).update(game, player, targets);
                 if (player.getPlayerId().equals(playerId)) {
                     skipButtons.updateFromPlayer(player);
                 }
