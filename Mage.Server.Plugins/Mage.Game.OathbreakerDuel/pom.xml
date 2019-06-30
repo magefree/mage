@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.mage</groupId>
         <artifactId>mage-server-plugins</artifactId>
-        <version>1.4.36</version>
+        <version>1.4.37</version>
     </parent>
 
     <artifactId>mage-game-oathbreakerduel</artifactId>
@@ -22,7 +22,7 @@
         <dependency>
             <groupId>org.mage</groupId>
             <artifactId>mage-game-oathbreakerfreeforall</artifactId>
-            <version>1.4.36</version>
+            <version>1.4.37</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
