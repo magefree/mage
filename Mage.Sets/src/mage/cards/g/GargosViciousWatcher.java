@@ -46,7 +46,7 @@ public final class GargosViciousWatcher extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Hydra spells you cast cost {4} less to cast.
-        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 4)));
 
         // Whenever a creature you control becomes the target of a spell, Gargos, Vicious Watcher fights up to one target creature you don't control.
         this.addAbility(new GargosViciousWatcherTriggeredAbility());
