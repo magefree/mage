@@ -33,7 +33,7 @@ public final class BarkhideTroll extends CardImpl {
         // Barkhide Troll enters the battlefield with a +1/+1 counter on it.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                "{this} enters the battlefield with a +1/+1 counter on it"
+                "with a +1/+1 counter on it"
         ));
 
         // {1}, Remove a +1/+1 counter from Barkhide Troll: Barkhide Troll gains hexproof until end of turn.

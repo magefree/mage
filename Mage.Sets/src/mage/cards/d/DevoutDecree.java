@@ -20,7 +20,7 @@ import java.util.UUID;
 public final class DevoutDecree extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterCreatureOrPlaneswalkerPermanent("creature or planeswalker that's black or red.");
+            = new FilterCreatureOrPlaneswalkerPermanent("creature or planeswalker that's black or red");
 
     static {
         filter.add(Predicates.or(

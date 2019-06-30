@@ -55,8 +55,7 @@ class DivinersLockboxEffect extends OneShotEffect {
     DivinersLockboxEffect() {
         super(Outcome.Benefit);
         staticText = "Choose a card name, then reveal the top card of your library. " +
-                "If that card has the chosen name, sacrifice {this} and draw three cards. " +
-                "Activate this ability only any time you could cast a sorcery.";
+                "If that card has the chosen name, sacrifice {this} and draw three cards.";
     }
 
     private DivinersLockboxEffect(final DivinersLockboxEffect effect) {

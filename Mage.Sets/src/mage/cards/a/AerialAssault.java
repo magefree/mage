@@ -23,7 +23,7 @@ import java.util.UUID;
 public final class AerialAssault extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterCreaturePermanent("tapped creature.");
+            = new FilterCreaturePermanent("tapped creature");
     private static final FilterPermanent filter2
             = new FilterControlledCreaturePermanent("creature you control with flying");
 

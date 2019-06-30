@@ -45,10 +45,9 @@ public final class BorealElemental extends CardImpl {
 
 class BorealElementalCostIncreaseEffect extends CostModificationEffectImpl {
 
-
     BorealElementalCostIncreaseEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
-        staticText = "Spells your opponents cast that target Icefall Regent cost {2} more to cast";
+        staticText = "Spells your opponents cast that target {this} cost {2} more to cast";
     }
 
     private BorealElementalCostIncreaseEffect(BorealElementalCostIncreaseEffect effect) {
