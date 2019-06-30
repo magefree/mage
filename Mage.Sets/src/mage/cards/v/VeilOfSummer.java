@@ -38,11 +38,11 @@ public final class VeilOfSummer extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(1),
                 VeilOfSummerCondition.instance, "Draw a card " +
-                "if an opponent has cast a blue or black spell this turn."
+                "if an opponent has cast a blue or black spell this turn"
         ));
         this.getSpellAbility().addEffect(new CantBeCounteredControlledEffect(
                 StaticFilters.FILTER_SPELL, Duration.EndOfTurn
-        ).setText("Spells you control can't be countered this turn."));
+        ).setText("Spells you control can't be countered this turn"));
         this.getSpellAbility().addEffect(new VeilOfSummerEffect());
         this.getSpellAbility().addWatcher(new VeilOfSummerWatcher());
     }

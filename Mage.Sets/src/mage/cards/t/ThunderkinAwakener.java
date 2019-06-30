@@ -54,7 +54,7 @@ public final class ThunderkinAwakener extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Whenever Thunderkin Awakener attacks, choose target Elemental creature card in your graveyard
-        // with toughness less than Thunderkin Awakener’s toughness. Return that card to the battlefield tapped and attacking.
+        // with toughness less than Thunderkin Awakener's toughness. Return that card to the battlefield tapped and attacking.
         // Sacrifice it at the beginning of the next end step.
         Ability ability = new AttacksTriggeredAbility(new ThunderkinAwakenerEffect(), false);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
@@ -86,7 +86,7 @@ class ThunderkinAwakenerEffect extends OneShotEffect {
 
     ThunderkinAwakenerEffect() {
         super(Outcome.Benefit);
-        staticText = "choose target Elemental creature card in your graveyard with toughness less than {this}’s toughness."
+        staticText = "choose target Elemental creature card in your graveyard with toughness less than {this}'s toughness."
                 + " Return that card to the battlefield tapped and attacking. Sacrifice it at the beginning of the next end step";
     }
 

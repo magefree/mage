@@ -76,6 +76,6 @@ class ScorchSpitterTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} attacks, it deals 1 damage to the player or planeswalker it’s attacking";
+        return "Whenever {this} attacks, it deals 1 damage to the player or planeswalker it's attacking.";
     }
 }

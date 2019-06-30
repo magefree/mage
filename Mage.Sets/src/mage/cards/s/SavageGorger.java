@@ -38,7 +38,7 @@ public final class SavageGorger extends CardImpl {
                 new BeginningOfEndStepTriggeredAbility(new AddCountersSourceEffect(
                         CounterType.P1P1.createInstance()), TargetController.YOU, false
                 ), SavageGorgerCondition.instance, "At the beginning of your end step, " +
-                "if an opponent lost life this turn, put a +1/+1 counter on {this}"
+                "if an opponent lost life this turn, put a +1/+1 counter on {this}."
         ));
     }
 
