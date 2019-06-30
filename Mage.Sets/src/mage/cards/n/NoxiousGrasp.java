@@ -2,6 +2,7 @@ package mage.cards.n;
 
 import mage.ObjectColor;
 import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -34,6 +35,7 @@ public final class NoxiousGrasp extends CardImpl {
         // Destroy target creature or planeswalker that's green or white. You gain 1 life.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addEffect(new GainLifeEffect(1));
     }
 
     private NoxiousGrasp(final NoxiousGrasp card) {
