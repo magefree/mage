@@ -9,7 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -27,7 +27,7 @@ public final class YaroksWavecrasher extends CardImpl {
 
         // When Yarok’s Wavecrasher enters the battlefield, return another creature you control to its owner’s hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
-        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
+        ability.addTarget(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(ability);
     }
 

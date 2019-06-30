@@ -86,6 +86,6 @@ class WoodlandChampionTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever one or more tokens enter the battlefield under your control, " +
-                "put that many +1/+1 counters on {this}";
+                "put that many +1/+1 counters on {this}.";
     }
 }
