@@ -6,6 +6,7 @@ import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.*;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
@@ -114,6 +115,9 @@ class ChandraAcolyteOfFlameEffect extends OneShotEffect {
             Effect effect2 = new SacrificeTargetEffect();
             effect.setTargetPointer(new FixedTarget(permId, game));
             game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect2), source);
+
+            // extra info
+            InfoEffect.addInfoToPermanent(game, source, permanent, "<i><b>Warning</b>: It will be sacrificed at the beginning of the next end step<i>");
         });
 
         return true;

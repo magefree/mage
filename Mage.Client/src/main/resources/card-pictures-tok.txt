@@ -88,6 +88,8 @@
 |Generate|EMBLEM:RIX|Huatli, Radiant Champion||Emblem Huatli|HuatliRadiantChampionEmblem|
 |Generate|EMBLEM:RNA|Domri, Chaos Bringer||Emblem Domri|DomriChaosBringerEmblem|
 |Generate|EMBLEM:WAR|Nissa, Who Shakes the World||Emblem Nissa|NissaWhoShakesTheWorldEmblem|
+|Generate|EMBLEM:M20|Chandra, Awakened Inferno||Emblem Chandra|ChandraAwakenedInfernoEmblem|
+|Generate|EMBLEM:M20|Mu Yanling, Sky Dancer||Emblem Yanling|MuYanlingSkyDancerEmblem|
 |Generate|PLANE:PCA|Plane - Academy At Tolaria West|||AcademyAtTolariaWestPlane|
 |Generate|PLANE:PCA|Plane - Agyrem|||AgyremPlane|
 |Generate|PLANE:PCA|Plane - Akoum|||AkoumPlane|
@@ -1216,7 +1218,16 @@
 |Generate|TOK:WAR|Zombie Army|1||ZombieArmyToken|
 |Generate|TOK:WAR|Zombie Army|2||ZombieArmyToken|
 |Generate|TOK:WAR|Zombie Army|3||ZombieArmyToken|
-
+|Generate|TOK:M20|Ajani's Pridemate|||AjanisPridemateToken|
+|Generate|TOK:M20|Demon|||DemonToken|
+|Generate|TOK:M20|Elemental|||YoungPyromancerElementalToken|
+|Generate|TOK:M20|Elemental Bird|||MuYanlingSkyDancerToken|
+|Generate|TOK:M20|Golem|||GolemToken|
+|Generate|TOK:M20|Soldier|||SoldierToken|
+|Generate|TOK:M20|Spirit|||SpiritWhiteToken|
+|Generate|TOK:M20|Treasure|||TreasureToken|
+|Generate|TOK:M20|Wolf|||WolfToken|
+|Generate|TOK:M20|Zombie|||ZombieToken|
 
 
 

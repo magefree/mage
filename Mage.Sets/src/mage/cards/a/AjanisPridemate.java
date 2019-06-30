@@ -1,5 +1,3 @@
-
-
 package mage.cards.a;
 
 import mage.MageInt;

@@ -70,6 +70,21 @@ public class ScryfallImageSupportTokens {
             put("WAR/Zombie Warrior", "https://api.scryfall.com/cards/twar/11/en?format=image");
             put("WAR/Zombie", "https://api.scryfall.com/cards/twar/7/en?format=image");
 
+            // M20
+            put("M20/Ajani's Pridemate", "https://api.scryfall.com/cards/tm20/1/en?format=image");
+            put("M20/Emblem Chandra, Awakened Inferno", "https://api.scryfall.com/cards/tm20/11/en?format=image");
+            put("M20/Demon", "https://api.scryfall.com/cards/tm20/5/en?format=image");
+            put("M20/Elemental Bird", "https://api.scryfall.com/cards/tm20/4/en?format=image");
+            put("M20/Elemental", "https://api.scryfall.com/cards/tm20/7/en?format=image");
+            put("M20/Golem", "https://api.scryfall.com/cards/tm20/9/en?format=image");
+            put("M20/Emblem Mu Yanling, Sky Dancer", "https://api.scryfall.com/cards/tm20/12/en?format=image");
+            put("M20/Soldier", "https://api.scryfall.com/cards/tm20/2/en?format=image");
+            put("M20/Spirit", "https://api.scryfall.com/cards/tm20/3/en?format=image");
+            put("M20/Treasure", "https://api.scryfall.com/cards/tm20/10/en?format=image");
+            put("M20/Wolf", "https://api.scryfall.com/cards/tm20/8/en?format=image");
+            put("M20/Zombie", "https://api.scryfall.com/cards/tm20/6/en?format=image");
+
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

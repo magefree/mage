@@ -21,7 +21,7 @@ public final class TreasureToken extends TokenImpl {
     static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("XLN", "RNA"));
+        tokenImageSets.addAll(Arrays.asList("XLN", "RNA", "M20"));
     }
 
     public TreasureToken() {
