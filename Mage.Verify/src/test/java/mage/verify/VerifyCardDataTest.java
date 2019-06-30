@@ -728,12 +728,15 @@ public class VerifyCardDataTest {
         String newRule = rule;
 
         // remove reminder text
-        newRule = newRule.replaceAll("(?i)<i>\\(.+\\)</i>", "");
+        newRule = newRule.replaceAll("(?i) <i>\\(.+\\)</i>", "");
+        newRule = newRule.replaceAll("(?i) \\(.+\\)", "");
 
         // replace special text and symbols
         newRule = newRule
                 .replace("{this}", cardName)
-                .replace("&mdash;", "—");
+                .replace("{source}", cardName)
+                .replace("−", "-")
+                .replace("&mdash;", "-");
 
         // remove html marks
         newRule = newRule
@@ -757,7 +760,7 @@ public class VerifyCardDataTest {
 
     private void checkWrongAbilitiesText(Card card, JsonCard ref) {
         // checks missing or wrong text
-        if (!card.getExpansionSetCode().equals("MH1")) {
+        if (!card.getExpansionSetCode().equals("M20")) {
             return;
         }
 
@@ -781,6 +784,7 @@ public class VerifyCardDataTest {
             cardRules[i] = prepareRule(card.getName(), cardRules[i]);
         }
 
+        boolean isFine = true;
         for (String cardRule : cardRules) {
             boolean isAbilityFounded = false;
             for (String refRule : refRules) {
@@ -791,8 +795,28 @@ public class VerifyCardDataTest {
             }
 
             if (!isAbilityFounded) {
+                isFine = false;
                 warn(card, "card ability can't be found in ref [" + card.getName() + ": " + cardRule + "]");
             }
+        }
+
+        // extra message for easy checks
+        if (!isFine) {
+            System.out.println();
+
+            System.out.println("Wrong card " + card.getName());
+            Arrays.sort(cardRules);
+            for (String s : cardRules) {
+                System.out.println(s);
+            }
+
+            System.out.println("ref:");
+            Arrays.sort(refRules);
+            for (String s : refRules) {
+                System.out.println(s);
+            }
+
+            System.out.println();
         }
     }
 
