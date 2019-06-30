@@ -7,6 +7,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -33,7 +34,7 @@ public final class AjaniInspiringLeader extends CardImpl {
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
 
         // +2: You gain 2 life. Put two +1/+1 counters on up to one target creature.
-        Ability ability = new LoyaltyAbility(new GainLifeEffect(2).setText("You gain 2 life."), 2);
+        Ability ability = new LoyaltyAbility(new GainLifeEffect(2), 2);
         ability.addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)));
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);
@@ -46,11 +47,11 @@ public final class AjaniInspiringLeader extends CardImpl {
         // −10: Creatures you control gain flying and double strike until end of turn.
         ability = new LoyaltyAbility(new GainAbilityControlledEffect(
                 FlyingAbility.getInstance(), Duration.EndOfTurn,
-                StaticFilters.FILTER_PERMANENT_CREATURE
+                StaticFilters.FILTER_PERMANENT_CREATURES
         ).setText("Creatures you control gain flying"), -10);
         ability.addEffect(new GainAbilityControlledEffect(
-                FlyingAbility.getInstance(), Duration.EndOfTurn,
-                StaticFilters.FILTER_PERMANENT_CREATURE
+                DoubleStrikeAbility.getInstance(), Duration.EndOfTurn,
+                StaticFilters.FILTER_PERMANENT_CREATURES
         ).setText("and double strike until end of turn"));
         this.addAbility(ability);
     }
