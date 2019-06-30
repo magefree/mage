@@ -27,7 +27,8 @@ public final class FloodOfTears extends CardImpl {
     public FloodOfTears(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");
 
-        // Return all nonland permanents to their owners' hands. If you return four or more nontoken permanents you control this way, you may put a permanent card from your hand onto the battlefield.
+        // Return all nonland permanents to their owners' hands. If you return four or more nontoken permanents you control this way,
+        // you may put a permanent card from your hand onto the battlefield.
         this.getSpellAbility().addEffect(new FloodOfTearsEffect());
     }
 
@@ -45,7 +46,8 @@ class FloodOfTearsEffect extends OneShotEffect {
 
     FloodOfTearsEffect() {
         super(Outcome.Benefit);
-        staticText = "";
+        staticText = "Return all nonland permanents to their owners' hands. If you return four or more nontoken permanents you control this way,"
+                + " you may put a permanent card from your hand onto the battlefield.";
     }
 
     private FloodOfTearsEffect(final FloodOfTearsEffect effect) {
@@ -67,12 +69,18 @@ class FloodOfTearsEffect extends OneShotEffect {
                 StaticFilters.FILTER_PERMANENT_NON_LAND, source.getControllerId(), source.getSourceId(), game
         );
         Cards cards = new CardsImpl();
-        nonlands.stream().forEach(permanent -> cards.add(permanent));
-        boolean putIntoPlay = nonlands.stream().filter(permanent -> !(permanent instanceof Token)).count() > 3;
-        player.moveCards(cards, Zone.HAND, source, game);
-        if (putIntoPlay) {
-            return new PutCardFromHandOntoBattlefieldEffect().apply(game, source);
+        if (cards.size() > 0) {
+            nonlands.stream().forEach(permanent -> cards.add(permanent));
+            boolean putIntoPlay = nonlands.stream()
+                    .filter(permanent -> permanent.isControlledBy(player.getId()))
+                    .filter(permanent -> !(permanent instanceof Token))
+                    .count() > 3;
+            player.moveCards(cards, Zone.HAND, source, game);
+            if (putIntoPlay) {
+                new PutCardFromHandOntoBattlefieldEffect().apply(game, source);
+            }
+            return true;
         }
-        return true;
+        return false;
     }
 }
