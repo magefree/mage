@@ -25,7 +25,7 @@ import java.util.UUID;
 public final class GoblinBirdGrabber extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("if you control a creature with flying");
+            = new FilterControlledCreaturePermanent("you control a creature with flying");
 
     static {
         filter.add(new AbilityPredicate(FlyingAbility.class));

@@ -18,7 +18,7 @@ import mage.game.command.Emblem;
 public final class MuYanlingSkyDancerEmblem extends Emblem {
 
     private static final FilterPermanent filter
-            = new FilterControlledPermanent(SubType.ISLAND, "Islands you control");
+            = new FilterControlledPermanent(SubType.ISLAND, "islands");
 
     // "Islands you control have '{T}: Draw a card'."
     public MuYanlingSkyDancerEmblem() {

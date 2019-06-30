@@ -51,7 +51,7 @@ public final class KnightOfTheEbonLegion extends CardImpl {
                         new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
                         TargetController.YOU, false
                 ), KnightOfTheEbonLegionCondition.instance, "At the beginning of your end step, " +
-                "if a player lost 4 or more life this turn, put a +1/+1 counter on {this}"
+                "if a player lost 4 or more life this turn, put a +1/+1 counter on {this}."
         ));
     }
 
