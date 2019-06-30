@@ -33,13 +33,13 @@ public final class VivienNaturesAvenger extends CardImpl {
         Ability ability = new LoyaltyAbility(new AddCountersTargetEffect(
                 CounterType.P1P1.createInstance(3)
         ), 1);
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);
 
         // −1: Reveal cards from the top of your library until you reveal a creature card. Put that card into your hand and the rest on the bottom of your library in a random order.
         this.addAbility(new LoyaltyAbility(new RevealCardsFromLibraryUntilEffect(
                 StaticFilters.FILTER_CARD_CREATURE_A, Zone.HAND, Zone.HAND, false, false
-        )));
+        ), -1));
 
         // −6: Target creature gets +10/+10 and gains trample until end of turn.
         ability = new LoyaltyAbility(
