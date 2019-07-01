@@ -19,6 +19,7 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.events.ZoneChangeGroupEvent;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
 import mage.game.stack.SpellStack;
 import mage.game.stack.StackObject;
 import mage.game.turn.Turn;
@@ -769,18 +770,21 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
         for (Map.Entry<ZoneChangeData, List<GameEvent>> entry : eventsByKey.entrySet()) {
             Set<Card> movedCards = new LinkedHashSet<>();
+            Set<PermanentToken> movedTokens = new LinkedHashSet<>();
             for (Iterator<GameEvent> it = entry.getValue().iterator(); it.hasNext(); ) {
                 GameEvent event = it.next();
                 ZoneChangeEvent castEvent = (ZoneChangeEvent) event;
                 UUID targetId = castEvent.getTargetId();
-                Card card = game.getCard(targetId);
-                if (card != null) {
+                Card card = ZonesHandler.getTargetCard(game, targetId);
+                if (card instanceof PermanentToken) {
+                    movedTokens.add((PermanentToken) card);
+                } else if (card != null) {
                     movedCards.add(card);
                 }
             }
             ZoneChangeData eventData = entry.getKey();
-            if (!movedCards.isEmpty()) {
-                ZoneChangeGroupEvent event = new ZoneChangeGroupEvent(movedCards, eventData.sourceId, eventData.playerId, eventData.fromZone, eventData.toZone);
+            if (!movedCards.isEmpty() || !movedTokens.isEmpty()) {
+                ZoneChangeGroupEvent event = new ZoneChangeGroupEvent(movedCards, movedTokens, eventData.sourceId, eventData.playerId, eventData.fromZone, eventData.toZone);
                 groupEvents.add(event);
             }
         }

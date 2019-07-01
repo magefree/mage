@@ -1,6 +1,5 @@
 package mage.game;
 
-import java.util.*;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
@@ -14,9 +13,12 @@ import mage.game.events.ZoneChangeGroupEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentMeld;
+import mage.game.permanent.PermanentToken;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetCard;
+
+import java.util.*;
 
 /**
  * Created by samuelsandeen on 9/6/16.
@@ -28,9 +30,14 @@ public final class ZonesHandler {
             placeInDestinationZone(info, game);
             // create a group zone change event if a card is moved to stack for casting (it's always only one card, but some effects check for group events (one or more xxx))
             Set<Card> cards = new HashSet<>();
+            Set<PermanentToken> tokens = new HashSet<>();
             Card targetCard = getTargetCard(game, info.event.getTargetId());
-            cards.add(targetCard);
-            game.fireEvent(new ZoneChangeGroupEvent(cards, info.event.getSourceId(), info.event.getPlayerId(), info.event.getFromZone(), info.event.getToZone()));
+            if (targetCard instanceof PermanentToken) {
+                tokens.add((PermanentToken) targetCard);
+            } else {
+                cards.add(targetCard);
+            }
+            game.fireEvent(new ZoneChangeGroupEvent(cards, tokens, info.event.getSourceId(), info.event.getPlayerId(), info.event.getFromZone(), info.event.getToZone()));
             // normal movement
             game.fireEvent(info.event);
             return true;
@@ -46,7 +53,7 @@ public final class ZonesHandler {
 
     public static List<ZoneChangeInfo> moveCards(List<ZoneChangeInfo> zoneChangeInfos, Game game) {
         // Handle Unmelded Meld Cards
-        for (ListIterator<ZoneChangeInfo> itr = zoneChangeInfos.listIterator(); itr.hasNext();) {
+        for (ListIterator<ZoneChangeInfo> itr = zoneChangeInfos.listIterator(); itr.hasNext(); ) {
             ZoneChangeInfo info = itr.next();
             MeldCard card = game.getMeldCard(info.event.getTargetId());
             // Copies should be handled as normal cards.
@@ -172,7 +179,7 @@ public final class ZonesHandler {
         }
     }
 
-    private static Card getTargetCard(Game game, UUID targetId) {
+    public static Card getTargetCard(Game game, UUID targetId) {
         if (game.getCard(targetId) != null) {
             return game.getCard(targetId);
         }
@@ -190,7 +197,7 @@ public final class ZonesHandler {
         if (info instanceof ZoneChangeInfo.Unmelded) {
             ZoneChangeInfo.Unmelded unmelded = (ZoneChangeInfo.Unmelded) info;
             MeldCard meld = game.getMeldCard(info.event.getTargetId());
-            for (Iterator<ZoneChangeInfo> itr = unmelded.subInfo.iterator(); itr.hasNext();) {
+            for (Iterator<ZoneChangeInfo> itr = unmelded.subInfo.iterator(); itr.hasNext(); ) {
                 ZoneChangeInfo subInfo = itr.next();
                 if (!maybeRemoveFromSourceZone(subInfo, game)) {
                     itr.remove();

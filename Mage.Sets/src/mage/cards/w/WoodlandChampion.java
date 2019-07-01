@@ -12,7 +12,6 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeGroupEvent;
-import mage.game.permanent.PermanentToken;
 
 import java.util.UUID;
 
@@ -62,12 +61,11 @@ class WoodlandChampionTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
         if (zEvent != null && Zone.BATTLEFIELD == zEvent.getToZone()
-                && zEvent.getCards() != null) {
+                && zEvent.getTokens() != null) {
             int tokenCount = zEvent
-                    .getCards()
+                    .getTokens()
                     .stream()
-                    .filter(card -> card instanceof PermanentToken)
-                    .mapToInt(card -> ((PermanentToken) card).isControlledBy(this.getControllerId()) ? 1 : 0)
+                    .mapToInt(card -> card.isControlledBy(this.getControllerId()) ? 1 : 0)
                     .sum();
             if (tokenCount > 0) {
                 this.getEffects().clear();
