@@ -33,7 +33,7 @@ public final class BroughtBack extends CardImpl {
 
         // Choose up to two target permanent cards in your graveyard that were put there from the battlefield this turn. Return them to the battlefield tapped.
         this.getSpellAbility().addEffect(
-                new ReturnFromGraveyardToBattlefieldTargetEffect()
+                new ReturnFromGraveyardToBattlefieldTargetEffect(true)
                         .setText("Choose up to two target permanent cards in your graveyard " +
                                 "that were put there from the battlefield this turn. " +
                                 "Return them to the battlefield tapped.")
