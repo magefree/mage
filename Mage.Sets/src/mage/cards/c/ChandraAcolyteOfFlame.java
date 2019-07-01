@@ -113,7 +113,7 @@ class ChandraAcolyteOfFlameEffect extends OneShotEffect {
             game.addEffect(effect, source);
 
             Effect effect2 = new SacrificeTargetEffect();
-            effect.setTargetPointer(new FixedTarget(permId, game));
+            effect2.setTargetPointer(new FixedTarget(permId, game));
             game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect2), source);
 
             // extra info
