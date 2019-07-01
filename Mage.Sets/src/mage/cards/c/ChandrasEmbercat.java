@@ -64,14 +64,15 @@ class ChandrasEmbercatManaCondition extends CreatureCastManaCondition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (super.apply(game, source)) {
-            MageObject object = game.getObject(source.getSourceId());
-            if (object != null && object.hasSubtype(SubType.ELEMENTAL, game)
-                    || (object.hasSubtype(SubType.CHANDRA, game) && object.isPlaneswalker())) {
-                return true;
-            }
+        if (!super.apply(game, source)) {
+            return false;
         }
-        return false;
+        MageObject object = game.getObject(source.getSourceId());
+        if (object == null) {
+            return false;
+        }
+        return object.hasSubtype(SubType.ELEMENTAL, game)
+                || (object.hasSubtype(SubType.CHANDRA, game) && object.isPlaneswalker());
     }
 }
 
