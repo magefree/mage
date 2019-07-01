@@ -55,8 +55,13 @@ public class TxtDeckImporter extends PlainTextDeckImporter {
             line = line.substring(0, commentDelim).trim();
         }
 
+        // ignore all empty lines until real cards starts
+        if (line.isEmpty() && !wasCardLines) {
+            return;
+        }
+
         // switch sideboard by empty line
-        if (switchSideboardByEmptyLine && line.isEmpty() && wasCardLines) {
+        if (switchSideboardByEmptyLine && line.isEmpty()) {
             if (!sideboard) {
                 sideboard = true;
             } else {
@@ -77,29 +82,28 @@ public class TxtDeckImporter extends PlainTextDeckImporter {
 
         line = line.replace("\t", " "); // changing tabs to blanks as delimiter
         int delim = line.indexOf(' ');
-        if (delim < 0) {
-            return;
-        }
-
-        String lineNum = line.substring(0, delim).trim();
-        if (IGNORE_NAMES.contains(lineNum)) {
-            return;
+        String lineNum = "";
+        if (delim > 0) {
+            lineNum = line.substring(0, delim).trim();
+            if (IGNORE_NAMES.contains(lineNum)) {
+                return;
+            }
         }
 
         // amount
         int cardAmount = 0;
-        boolean haveCardAmout;
-        try {
-            cardAmount = Integer.parseInt(lineNum.replaceAll("\\D+", ""));
-            if ((cardAmount <= 0) || (cardAmount >= 100)) {
-                sbMessage.append("Invalid number (too small or too big): ").append(lineNum).append(" at line ").append(lineCount).append('\n');
-                return;
+        boolean haveCardAmout = false;
+        if (!lineNum.isEmpty()) {
+            try {
+                cardAmount = Integer.parseInt(lineNum.replaceAll("\\D+", ""));
+                if ((cardAmount <= 0) || (cardAmount >= 100)) {
+                    sbMessage.append("Invalid number (too small or too big): ").append(lineNum).append(" at line ").append(lineCount).append('\n');
+                    return;
+                }
+                haveCardAmout = true;
+            } catch (NumberFormatException nfe) {
+                // card without amount
             }
-            haveCardAmout = true;
-        } catch (NumberFormatException nfe) {
-            haveCardAmout = false;
-            //sbMessage.append("Invalid number: ").append(lineNum).append(" at line ").append(lineCount).append('\n');
-            //return;
         }
 
         String lineName;
