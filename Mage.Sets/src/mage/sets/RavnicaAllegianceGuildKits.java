@@ -151,7 +151,7 @@ public final class RavnicaAllegianceGuildKits extends ExpansionSet {
         cards.add(new SetCardInfo("Zameck Guildmage", 129, Rarity.UNCOMMON, mage.cards.z.ZameckGuildmage.class));
         cards.add(new SetCardInfo("Simic Signet", 130, Rarity.UNCOMMON, mage.cards.s.SimicSignet.class));
         cards.add(new SetCardInfo("Simic Growth Chamber", 131, Rarity.UNCOMMON, mage.cards.s.SimicGrowthChamber.class));
-        cards.add(new SetCardInfo("Forest", 132, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Island", 133, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 133, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 132, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
     }
 }
