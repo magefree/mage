@@ -19,10 +19,11 @@ Servers status:
 
 ## Features
 
-* Deck editor (load and save decks);
-* Computer AI opponents;
-* Glicko rating system;
+* Multiplatform app: Windows, Linux, MacOS;
+* Deck editor (support multiple deck formats and deck sources);
 * Two player duel or a multiplayer free-for-all game with up to 10 players;
+* Computer AI opponents;
+* Players rating system (Glicko);
 * Supports special formats like Commander (up to 10 players), Oathbreaker, Cube, Tiny Leaders, Super Standard, Historic Standard and more;
 * Single matches or tournaments supported (elimination or swiss type handling), which can be played with up to 16 players:
     * Booster (also Cube) draft tournaments (4-16)
