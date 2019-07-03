@@ -4,7 +4,7 @@
 
 XMage allows you to play Magic against one or more online players or computer opponents. It includes full rules enforcement for over **19.200** unique cards (over 37.400 counting all cards from different editions, you can find event custom sets like Star Wars). All regular sets have nearly all the cards implemented. A more detailed information which cards are implemented can be found [here](https://github.com/magefree/mage/wiki/Set-implementation-list). 
 
-It's support dozens game modes like duel, multiplayer, standard, modern, commander, pauper, oathbreaker, freeform and much more.
+It's support single matches and tournaments with dozens game modes like duel, multiplayer, standard, modern, commander, pauper, oathbreaker, freeform and much more.
 
 There are [public servers](http://xmageservers.online/) where you can play XMage against other players. You can also host your own server to play against the AI and/or your friends.
 
@@ -19,11 +19,12 @@ Servers status:
 
 ## Features
 
-* Deck editor (load and save decks)
-* Simple computer AI opponent
-* Two player duel or a multiplayer free-for-all game with up to 10 players
-* Supports special formats like Commander (up to 10 players), Cube, Tiny Leaders, Super Standard, Historic Standard
-* There are two tournament types supported (elimination or swiss type handling), which can be played with up to 16 players:
+* Deck editor (load and save decks);
+* Computer AI opponents;
+* Glicko rating system;
+* Two player duel or a multiplayer free-for-all game with up to 10 players;
+* Supports special formats like Commander (up to 10 players), Oathbreaker, Cube, Tiny Leaders, Super Standard, Historic Standard and more;
+* Single matches or tournaments supported (elimination or swiss type handling), which can be played with up to 16 players:
     * Booster (also Cube) draft tournaments (4-16)
     * Sealed (also from Cube) tournaments (2-16)
 
