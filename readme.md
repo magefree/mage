@@ -35,8 +35,10 @@ Also there is always a bug thread in the [Official XMage forum](http://www.sligh
 
 ## Installation
 
-Download and install the [latest XMage release](http://XMage.de).
-You will need to have Version 7 or later of the [Java Runtime Environment](http://java.com/en/).
+* Download [latest XMage launcher file](http://xmage.de) and put it to any folder like `D:\games\xmage`;
+* You need to have [Java version 8 or later](http://java.com/) to run it;
+* If you can't run it then create `run-LAUNCHER.cmd` text file in launcher folder and put that line to it and save as ANSI format:
+  * `java -Djava.net.preferIPv4Stack=true -jar XMageLauncher-0.3.8.jar` 
 
 Look [here](http://www.slightlymagic.net/forum/viewtopic.php?f=70&t=13632) for more detailed instructions.
 [Here](http://github.com/magefree/mage/wiki/Release-changes) you can find a log of the latest changes.
