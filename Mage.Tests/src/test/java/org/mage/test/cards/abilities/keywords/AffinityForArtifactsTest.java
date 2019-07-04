@@ -6,7 +6,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author noxx
  */
 public class AffinityForArtifactsTest extends CardTestPlayerBase {
@@ -22,7 +21,10 @@ public class AffinityForArtifactsTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Myr Enforcer");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
+
+        setStrictChooseMode(true);
         execute();
+        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Myr Enforcer", 4);
     }

@@ -1,24 +1,19 @@
-
 package mage.abilities.keyword;
 
-import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.AdjustingSourceCosts;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.AffinityEffect;
+import mage.abilities.hint.ValueHint;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
-import mage.util.CardUtil;
 
 /**
- *
  * @author LevelX2
  */
 
-public class AffinityForLandTypeAbility extends SimpleStaticAbility implements AdjustingSourceCosts {
+public class AffinityForLandTypeAbility extends SimpleStaticAbility {
 
     private final FilterControlledPermanent filter;
 
@@ -26,14 +21,16 @@ public class AffinityForLandTypeAbility extends SimpleStaticAbility implements A
     SubType landType;
 
     public AffinityForLandTypeAbility(SubType landType, String text) {
-        super(Zone.OUTSIDE, new AffinityEffect(getFilter(landType)));
+        super(Zone.ALL, new AffinityEffect(getFilter(landType)));
         this.filter = getFilter(landType);
         setRuleAtTheTop(true);
         this.text = text;
         this.landType = landType;
+
+        this.addHint(new ValueHint(landType + " you control", new PermanentsOnBattlefieldCount(filter)));
     }
 
-   private static FilterControlledPermanent getFilter(SubType landType) {
+    private static FilterControlledPermanent getFilter(SubType landType) {
         FilterControlledPermanent affinityfilter = new FilterControlledPermanent();
         affinityfilter.add(new SubtypePredicate(landType));
         return affinityfilter;
@@ -54,15 +51,5 @@ public class AffinityForLandTypeAbility extends SimpleStaticAbility implements A
     @Override
     public String getRule() {
         return "Affinity for " + text + " <i>(This spell costs 1 less to cast for each " + landType + " you control.)</i>";
-    }
-
-    @Override
-    public void adjustCosts(Ability ability, Game game) {
-        if (ability instanceof SpellAbility) {
-            int count = game.getBattlefield().getAllActivePermanents(filter, ability.getControllerId(), game).size();
-            if (count > 0) {
-                CardUtil.adjustCost((SpellAbility)ability, count);
-            }
-        }
     }
 }

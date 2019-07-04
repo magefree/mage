@@ -683,6 +683,13 @@ public class TestPlayer implements Player {
                             wasProccessed = true;
                         }
 
+                        // check command card count: card name, count
+                        if (params[0].equals(CHECK_COMMAND_COMMAND_CARD_COUNT) && params.length == 3) {
+                            assertCommandCardCount(action, game, computerPlayer, params[1], Integer.parseInt(params[2]));
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
                         // check color: card name, colors, must have
                         if (params[0].equals(CHECK_COMMAND_COLOR) && params.length == 4) {
                             assertColor(action, game, computerPlayer, params[1], params[2], Boolean.parseBoolean(params[3]));
@@ -1036,6 +1043,18 @@ public class TestPlayer implements Player {
         }
 
         Assert.assertEquals(action.getActionName() + " - hand must contain " + count + " cards of " + cardName, count, realCount);
+    }
+
+    private void assertCommandCardCount(PlayerAction action, Game game, Player player, String cardName, int count) {
+        int realCount = 0;
+        for (UUID cardId : game.getCommandersIds(player)) {
+            Card card = game.getCard(cardId);
+            if (card != null && card.getName().equals(cardName) && Zone.COMMAND.equals(game.getState().getZone(cardId))) {
+                realCount++;
+            }
+        }
+
+        Assert.assertEquals(action.getActionName() + " - command zone must contain " + count + " cards of " + cardName, count, realCount);
     }
 
     private void assertColor(PlayerAction action, Game game, Player player, String permanentName, String colors, boolean mustHave) {
