@@ -3097,9 +3097,11 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
 
             boolean fromAll = fromZone.equals(Zone.ALL);
+            Collection<Card> cards;
 
             if (hidden && (fromAll || fromZone == Zone.HAND)) {
-                for (Card card : hand.getUniqueCards(game)) {
+                cards = hideDuplicatedAbilities ? hand.getUniqueCards(game) : hand.getCards(game);
+                for (Card card : cards) {
                     for (Ability ability : card.getAbilities(game)) { // gets this activated ability from hand? (Morph?)
                         if (ability.getZone().match(Zone.HAND)) {
                             if (ability instanceof ActivatedAbility) {
@@ -3128,7 +3130,8 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
 
             if (fromAll || fromZone == Zone.GRAVEYARD) {
-                for (Card card : graveyard.getUniqueCards(game)) {
+                cards = hideDuplicatedAbilities ? graveyard.getUniqueCards(game) : graveyard.getCards(game);
+                for (Card card : cards) {
                     // Handle split cards in graveyard to support Aftermath
                     if (card instanceof SplitCard) {
                         SplitCard splitCard = (SplitCard) card;
@@ -3168,8 +3171,8 @@ public abstract class PlayerImpl implements Player, Serializable {
 
             // check to play revealed cards
             if (fromAll) {
-                for (Cards cards : game.getState().getRevealed().values()) {
-                    for (Card card : cards.getCards(game)) {
+                for (Cards revealedCards : game.getState().getRevealed().values()) {
+                    for (Card card : revealedCards.getCards(game)) {
                         if (null != game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, null, this.getId(), game)) {
                             for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.HAND)) {
                                 if (ability instanceof SpellAbility || ability instanceof PlayLandAbility) {
