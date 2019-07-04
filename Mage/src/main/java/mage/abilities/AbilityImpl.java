@@ -346,23 +346,6 @@ public abstract class AbilityImpl implements Ability {
                 }
             }
         }
-        //20100716 - 601.2e
-        if (sourceObject != null) {
-            sourceObject.adjustCosts(this, game);
-            if (sourceObject instanceof Card) {
-                for (Ability ability : ((Card) sourceObject).getAbilities(game)) {
-                    if (ability instanceof AdjustingSourceCosts) {
-                        ((AdjustingSourceCosts) ability).adjustCosts(this, game);
-                    }
-                }
-            } else {
-                for (Ability ability : sourceObject.getAbilities()) {
-                    if (ability instanceof AdjustingSourceCosts) {
-                        ((AdjustingSourceCosts) ability).adjustCosts(this, game);
-                    }
-                }
-            }
-        }
 
         // this is a hack to prevent mana abilities with mana costs from causing endless loops - pay other costs first
         if (this instanceof ActivatedManaAbilityImpl && !costs.pay(this, game, sourceId, controllerId, noMana, null)) {
@@ -372,6 +355,26 @@ public abstract class AbilityImpl implements Ability {
 
         //20101001 - 601.2e
         if (costModificationActive) {
+
+            // TODO: replace all AdjustingSourceCosts abilities to continuus effect, see Affinity example
+            //20100716 - 601.2e
+            if (sourceObject != null) {
+                sourceObject.adjustCosts(this, game);
+                if (sourceObject instanceof Card) {
+                    for (Ability ability : ((Card) sourceObject).getAbilities(game)) {
+                        if (ability instanceof AdjustingSourceCosts) {
+                            ((AdjustingSourceCosts) ability).adjustCosts(this, game);
+                        }
+                    }
+                } else {
+                    for (Ability ability : sourceObject.getAbilities()) {
+                        if (ability instanceof AdjustingSourceCosts) {
+                            ((AdjustingSourceCosts) ability).adjustCosts(this, game);
+                        }
+                    }
+                }
+            }
+
             game.getContinuousEffects().costModification(this, game);
         } else {
             costModificationActive = true;
