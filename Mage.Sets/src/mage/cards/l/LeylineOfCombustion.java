@@ -64,7 +64,7 @@ class LeylineOfCombustionTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
-        if (sourceObject == null) {
+        if (sourceObject == null || this.controllerId.equals(sourceObject.getControllerId())) {
             return false;
         }
         if (sourceObject
