@@ -55,17 +55,23 @@ public class SpellAbility extends ActivatedAbilityImpl {
         this.cardName = ability.cardName;
     }
 
+    /*
+     * 7/5/19 - jgray1206 - Moved null != game.getContinuesEffects()... into this method instead of having it in
+     *                      canActivate. There are abilities that directly use this method that should know when spells
+     *                      can be casted that are affected by the CastAsInstant effect.
+     *                      (i.e. Vizier of the Menagerie and issue #5816)
+     */
     public boolean spellCanBeActivatedRegularlyNow(UUID playerId, Game game) {
         MageObject object = game.getObject(sourceId);
-        return timing == TimingRule.INSTANT
+        return null != game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game) // check this first to allow Offering in main phase
+                || timing == TimingRule.INSTANT
                 || object.hasAbility(FlashAbility.getInstance().getId(), game)
                 || game.canPlaySorcery(playerId);
     }
 
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
-        if (null != game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game) // check this first to allow Offering in main phase
-                || this.spellCanBeActivatedRegularlyNow(playerId, game)) {
+        if (this.spellCanBeActivatedRegularlyNow(playerId, game)) {
             if (spellAbilityType == SpellAbilityType.SPLIT || spellAbilityType == SpellAbilityType.SPLIT_AFTERMATH) {
                 return ActivationStatus.getFalse();
             }
