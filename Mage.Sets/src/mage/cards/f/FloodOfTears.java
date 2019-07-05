@@ -45,7 +45,7 @@ public final class FloodOfTears extends CardImpl {
 class FloodOfTearsEffect extends OneShotEffect {
 
     FloodOfTearsEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.Detriment);
         staticText = "Return all nonland permanents to their owners' hands. If you return four or more nontoken permanents you control this way,"
                 + " you may put a permanent card from your hand onto the battlefield.";
     }
@@ -69,7 +69,7 @@ class FloodOfTearsEffect extends OneShotEffect {
                 StaticFilters.FILTER_PERMANENT_NON_LAND, source.getControllerId(), source.getSourceId(), game
         );
         Cards cards = new CardsImpl();
-        if (cards.size() > 0) {
+        if (nonlands.size() > 0) {
             nonlands.stream().forEach(permanent -> cards.add(permanent));
             boolean putIntoPlay = nonlands.stream()
                     .filter(permanent -> permanent.isControlledBy(player.getId()))
