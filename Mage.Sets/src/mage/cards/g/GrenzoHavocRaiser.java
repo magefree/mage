@@ -1,30 +1,16 @@
-
 package mage.cards.g;
 
-import java.util.Objects;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.AsThoughManaEffect;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.*;
 import mage.abilities.effects.common.combat.GoadTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.ManaType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.ExileZone;
@@ -38,11 +24,15 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801, LevelX2
  */
 public final class GrenzoHavocRaiser extends CardImpl {
+
+    static final String goadEffectName = "goad target creature that player controls";
 
     public GrenzoHavocRaiser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{R}");
@@ -56,7 +46,7 @@ public final class GrenzoHavocRaiser extends CardImpl {
         // Whenever a creature you control deals combat damage to a player, choose one &mdash;
         //Goad target creature that player controls;
         Effect effect = new GoadTargetEffect();
-        effect.setText("goad target creature that player controls");
+        effect.setText(goadEffectName);
         Ability ability = new GrenzoHavocRaiserTriggeredAbility(effect);
         //or Exile the top card of that player's library. Until end of turn, you may cast that card and you may spend mana as though it were mana of any color to cast it.
         Mode mode = new Mode();
@@ -77,12 +67,15 @@ public final class GrenzoHavocRaiser extends CardImpl {
 
 class GrenzoHavocRaiserTriggeredAbility extends TriggeredAbilityImpl {
 
+    String damagedPlayerName = null;
+
     public GrenzoHavocRaiserTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
     }
 
     public GrenzoHavocRaiserTriggeredAbility(final GrenzoHavocRaiserTriggeredAbility ability) {
         super(ability);
+        this.damagedPlayerName = ability.damagedPlayerName;
     }
 
     @Override
@@ -97,11 +90,22 @@ class GrenzoHavocRaiserTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        this.damagedPlayerName = null;
+        this.getEffects().get(0).setText(GrenzoHavocRaiser.goadEffectName);
+
         Player damagedPlayer = game.getPlayer(event.getPlayerId());
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        if (damagedPlayer != null && permanent != null
-                && ((DamagedEvent) event).isCombatDamage()
-                && isControlledBy(permanent.getControllerId())) {
+        Permanent abilitySourcePermanent = this.getSourcePermanentIfItStillExists(game);
+        if (damagedPlayer == null || permanent == null || abilitySourcePermanent == null) {
+            return false;
+        }
+
+        if (((DamagedEvent) event).isCombatDamage() && isControlledBy(permanent.getControllerId())) {
+
+            this.damagedPlayerName = damagedPlayer.getLogName();
+            this.getEffects().get(0).setText(GrenzoHavocRaiser.goadEffectName + " (" + this.damagedPlayerName + ")");
+            game.informPlayers(abilitySourcePermanent.getLogName() + " triggered for damaged " + this.damagedPlayerName);
+
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature " + damagedPlayer.getLogName() + " controls");
             filter.add(new ControllerIdPredicate(damagedPlayer.getId()));
             this.getTargets().clear();

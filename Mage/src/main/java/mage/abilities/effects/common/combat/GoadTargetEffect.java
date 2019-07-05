@@ -62,6 +62,11 @@ public class GoadTargetEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        return "goad target " + mode.getTargets().get(0).getTargetName() + ". <i>(Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)</i>";
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+
+        return "goad target " + (!mode.getTargets().isEmpty() ? mode.getTargets().get(0).getTargetName() : " creature")
+                + ". <i>(Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)</i>";
     }
 }
