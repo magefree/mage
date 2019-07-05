@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import mage.MageInt;
@@ -35,7 +34,7 @@ public final class GoblinRacketeer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Goblin Racketeer attacks, you may goad target creature defending player controls.
-        Ability ability = new AttacksTriggeredAbility(new GoadTargetEffect(), true, "Whenever {this} attacks, you may goad target creature defending player controls");
+        Ability ability = new AttacksTriggeredAbility(new GoadTargetEffect(), true);
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

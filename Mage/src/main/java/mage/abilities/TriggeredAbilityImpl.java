@@ -1,7 +1,5 @@
 package mage.abilities;
 
-import java.util.Locale;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.effects.Effect;
 import mage.constants.AbilityType;
@@ -13,8 +11,10 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 
+import java.util.Locale;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class TriggeredAbilityImpl extends AbilityImpl implements TriggeredAbility {
@@ -111,7 +111,8 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                         || ruleLow.startsWith("untap")
                         || ruleLow.startsWith("put")
                         || ruleLow.startsWith("remove")
-                        || ruleLow.startsWith("counter")) {
+                        || ruleLow.startsWith("counter")
+                        || ruleLow.startsWith("goad")) {
                     sb.append("you may ");
                 } else if (!ruleLow.startsWith("its controller may")) {
                     sb.append("you may have ");
@@ -164,7 +165,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                         } else if (((ZoneChangeEvent) event).getTarget() != null) {
                             source = ((ZoneChangeEvent) event).getTarget();
                         } else {
-                            source = game.getLastKnownInformation(getSourceId(), ((ZoneChangeEvent) event).getZone());
+                            source = game.getLastKnownInformation(getSourceId(), event.getZone());
                         }
                     }
 

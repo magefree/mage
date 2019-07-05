@@ -1,6 +1,7 @@
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Duration;
@@ -24,7 +25,6 @@ public class GoadTargetEffect extends OneShotEffect {
      */
     public GoadTargetEffect() {
         super(Outcome.Detriment);
-        staticText = "you may goad target creature. <i>(Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)</i>";
     }
 
     public GoadTargetEffect(final GoadTargetEffect effect) {
@@ -58,5 +58,10 @@ public class GoadTargetEffect extends OneShotEffect {
             game.informPlayers(controller.getLogName() + " is goading " + targetCreature.getLogName());
         }
         return true;
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        return "goad target " + mode.getTargets().get(0).getTargetName() + ". <i>(Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)</i>";
     }
 }

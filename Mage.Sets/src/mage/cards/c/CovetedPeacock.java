@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import mage.MageInt;
@@ -39,7 +38,7 @@ public final class CovetedPeacock extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Coveted Peacock attacks, you may goad target creature defending player controls.
-        Ability ability = new AttacksTriggeredAbility(new GoadTargetEffect(), true, "Whenever {this} attacks, you may goad target creature defending player controls.");
+        Ability ability = new AttacksTriggeredAbility(new GoadTargetEffect(), true);
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
