@@ -17,8 +17,8 @@ import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetAnyTarget;
+import mage.util.SubTypeList;
 
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -67,7 +67,7 @@ class TwiceDevouredGoblins implements DynamicValue {
                         if (abilityEffect instanceof DevourEffect) {
                             DevourEffect devourEffect = (DevourEffect) abilityEffect;
                             int amountGoblins = 0;
-                            for (List<String> subtypesItem : devourEffect.getSubtypes(game, sourcePermanent.getId())) {
+                            for (SubTypeList subtypesItem : devourEffect.getSubtypes(game, sourcePermanent.getId())) {
                                 if (subtypesItem.contains(SubType.GOBLIN)) {
                                     ++amountGoblins;
                                 }
