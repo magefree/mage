@@ -92,7 +92,7 @@ class VeilOfSummerWatcher extends Watcher {
             if (spell == null) {
                 return;
             }
-            if (spell.getColor(game).isBlack() || spell.getColor(game).isBlack()) {
+            if (spell.getColor(game).isBlack() || spell.getColor(game).isBlue()) {
                 opponentsCastBlueBlackSpell.addAll(game.getOpponents(spell.getControllerId()));
             }
         }
