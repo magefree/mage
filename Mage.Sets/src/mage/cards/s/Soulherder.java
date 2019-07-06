@@ -30,7 +30,7 @@ import java.util.UUID;
  */
 public final class Soulherder extends CardImpl {
 
-    private static final FilterPermanent filter
+    private static final FilterControlledCreaturePermanent filter
             = new FilterControlledCreaturePermanent("another target creature you control");
 
     static {
@@ -52,7 +52,7 @@ public final class Soulherder extends CardImpl {
                 new ExileTargetForSourceEffect(), TargetController.YOU, true
         );
         ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect().concatBy("then"));
-        ability.addTarget(new TargetControlledCreaturePermanent());
+        ability.addTarget(new TargetControlledCreaturePermanent(filter));
         this.addAbility(ability);
     }
 
