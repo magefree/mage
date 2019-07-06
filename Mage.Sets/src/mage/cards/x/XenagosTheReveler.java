@@ -11,8 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -23,8 +21,6 @@ import mage.game.permanent.token.XenagosSatyrToken;
 import mage.players.Player;
 import mage.target.TargetCard;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -82,32 +78,19 @@ class XenagosManaEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             int x = game.getBattlefield().count(new FilterControlledCreaturePermanent(), source.getSourceId(), source.getControllerId(), game);
-            Choice manaChoice = new ChoiceImpl();
-            Set<String> choices = new LinkedHashSet<>();
-            choices.add("Red");
-            choices.add("Green");
-            manaChoice.setChoices(choices);
-            manaChoice.setMessage("Select color of mana to add");
-
-            for (int i = 0; i < x; i++) {
-                Mana mana = new Mana();
-                if (!player.choose(Outcome.Benefit, manaChoice, game)) {
-                    return false;
-                }
-                if (manaChoice.getChoice() == null) {  // can happen if player leaves game
-                    return false;
-                }
-                switch (manaChoice.getChoice()) {
-                    case "Green":
-                        mana.increaseGreen();
-                        break;
-                    case "Red":
-                        mana.increaseRed();
-                        break;
-                }
-                player.getManaPool().addMana(mana, game, source);
+            if (x == 0) {
+                return false;
             }
-            return true;
+
+            Mana mana = new Mana();
+            int redCount = player.getAmount(0, x, "How much <b>RED</b> mana add to pool? (available: " + x + ", another mana goes to <b>GREEN</b>)?", game);
+            int greenCount = Math.max(0, x - redCount);
+            mana.setRed(redCount);
+            mana.setGreen(greenCount);
+            if (mana.count() > 0) {
+                player.getManaPool().addMana(mana, game, source);
+                return true;
+            }
         }
         return false;
     }
