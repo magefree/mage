@@ -67,10 +67,10 @@ class MasterfulReplicationEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent copyFromArtifact = game.getPermanent(source.getFirstTarget());
         if (copyFromArtifact == null) {
-            return true;
+            return false;
         }
         for (Permanent copyToArtifact : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
-            if (copyToArtifact.isArtifact() && copyFromArtifact.getId().equals(copyToArtifact.getId())) {
+            if (copyToArtifact.isArtifact() && !copyToArtifact.getId().equals(copyFromArtifact.getId())) {
                 game.copyPermanent(Duration.EndOfTurn, copyFromArtifact, copyToArtifact.getId(), source, new EmptyApplyToPermanent());
             }
         }
