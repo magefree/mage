@@ -9,10 +9,12 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.mana.ConditionalColoredManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.CreatureCastManaCondition;
+import mage.abilities.mana.conditional.PlaneswalkerCastManaCondition;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.filter.Filter;
 import mage.game.Game;
 
 import java.util.UUID;
@@ -60,7 +62,7 @@ class ChandrasEmbercatManaBuilder extends ConditionalManaBuilder {
     }
 }
 
-class ChandrasEmbercatManaCondition extends CreatureCastManaCondition {
+class ChandrasEmbercatElementalManaCondition extends CreatureCastManaCondition {
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -71,8 +73,22 @@ class ChandrasEmbercatManaCondition extends CreatureCastManaCondition {
         if (object == null) {
             return false;
         }
-        return object.hasSubtype(SubType.ELEMENTAL, game)
-                || (object.hasSubtype(SubType.CHANDRA, game) && object.isPlaneswalker());
+        return object.hasSubtype(SubType.ELEMENTAL, game);
+    }
+}
+
+class ChandrasEmbercatPlaneswalkerManaCondition extends PlaneswalkerCastManaCondition {
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        if (!super.apply(game, source)) {
+            return false;
+        }
+        MageObject object = game.getObject(source.getSourceId());
+        if (object == null) {
+            return false;
+        }
+        return object.hasSubtype(SubType.CHANDRA, game);
     }
 }
 
@@ -80,6 +96,8 @@ class ChandrasEmbercatConditionalMana extends ConditionalMana {
 
     ChandrasEmbercatConditionalMana(Mana mana) {
         super(mana);
-        addCondition(new ChandrasEmbercatManaCondition());
+        setComparisonScope(Filter.ComparisonScope.Any);
+        addCondition(new ChandrasEmbercatElementalManaCondition());
+        addCondition(new ChandrasEmbercatPlaneswalkerManaCondition());
     }
 }
