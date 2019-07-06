@@ -1999,8 +1999,10 @@ public class HumanPlayer extends PlayerImpl {
                     tResponse.setString("resolveStack");
                     actionQueueSaved.add(tResponse);
                 }
+                break;
             default:
                 super.sendPlayerAction(playerAction, game, data);
+                break;
         }
     }
 

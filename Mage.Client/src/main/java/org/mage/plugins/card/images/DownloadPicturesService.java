@@ -848,7 +848,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                 }
 
                 // can save result
-                if (isDownloadOK & httpConn != null) {
+                if (isDownloadOK && httpConn != null) {
                     // save data to temp
                     try (InputStream in = new BufferedInputStream(httpConn.getInputStream());
                          OutputStream tfileout = new TFileOutputStream(fileTempImage);

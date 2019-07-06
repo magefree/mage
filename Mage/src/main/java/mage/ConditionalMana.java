@@ -1,10 +1,5 @@
-
 package mage;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
@@ -13,6 +8,11 @@ import mage.constants.ManaType;
 import mage.filter.Filter;
 import mage.filter.FilterMana;
 import mage.game.Game;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -192,6 +192,7 @@ public class ConditionalMana extends Mana implements Serializable {
                 break;
             case COLORLESS:
                 colorless += amount;
+                break;
             case GENERIC:
                 generic += amount;
                 break;
