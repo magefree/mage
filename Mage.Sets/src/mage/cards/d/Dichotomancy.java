@@ -1,12 +1,11 @@
 package mage.cards.d;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.SuspendAbility;
-import mage.cards.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -20,15 +19,16 @@ import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author noahg
  */
 public final class Dichotomancy extends CardImpl {
 
     public Dichotomancy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{7}{U}{U}");
-        
+
 
         // For each tapped nonland permanent target opponent controls, search that player’s library for a card with the same name as that permanent and put it onto the battlefield under your control. Then that player shuffles their library.
         this.getSpellAbility().addEffect(new DichotomancyEffect());
@@ -38,7 +38,7 @@ public final class Dichotomancy extends CardImpl {
         this.addAbility(new SuspendAbility(3, new ManaCostsImpl("{1}{U}{U}"), this));
     }
 
-    public Dichotomancy(final Dichotomancy card) {
+    private Dichotomancy(final Dichotomancy card) {
         super(card);
     }
 
@@ -56,12 +56,14 @@ class DichotomancyEffect extends OneShotEffect {
         filter.add(TappedPredicate.instance);
     }
 
-    public DichotomancyEffect() {
+    DichotomancyEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "For each tapped nonland permanent target opponent controls, search that player’s library for a card with the same name as that permanent and put it onto the battlefield under your control. Then that player shuffles their library";
+        this.staticText = "For each tapped nonland permanent target opponent controls, " +
+                "search that player's library for a card with the same name as that permanent. " +
+                "Put those cards onto the battlefield under your control, then that player shuffles their library.";
     }
 
-    public DichotomancyEffect(DichotomancyEffect effect) {
+    private DichotomancyEffect(DichotomancyEffect effect) {
         super(effect);
     }
 
@@ -72,7 +74,7 @@ class DichotomancyEffect extends OneShotEffect {
         if (controller != null && opponent != null) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, opponent.getId(), game)) {
                 String name = permanent.getName();
-                FilterCard filterCard = new FilterCard("card named \""+name+'"');
+                FilterCard filterCard = new FilterCard("card named \"" + name + '"');
                 filterCard.add(new NamePredicate(name));
                 TargetCardInLibrary target = new TargetCardInLibrary(0, 1, filterCard);
                 if (controller.searchLibrary(target, source, game, opponent.getId())) {
