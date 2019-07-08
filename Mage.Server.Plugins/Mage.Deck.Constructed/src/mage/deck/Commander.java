@@ -43,6 +43,7 @@ public class Commander extends Constructed {
         banned.add("Fastbond");
         banned.add("Gifts Ungiven");
         banned.add("Griselbrand");
+        banned.add("Iona, Shield of Emeria");
         banned.add("Karakas");
         banned.add("Leovold, Emissary of Trest");
         banned.add("Library of Alexandria");
@@ -52,8 +53,8 @@ public class Commander extends Constructed {
         banned.add("Mox Pearl");
         banned.add("Mox Ruby");
         banned.add("Mox Sapphire");
-        banned.add("Painter's Servant");
         banned.add("Panoptic Mirror");
+        banned.add("Paradox Engine");
         banned.add("Primeval Titan");
         banned.add("Prophet of Kruphix");
         banned.add("Recurring Nightmare");
