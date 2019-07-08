@@ -9,7 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterCard;
+import mage.filter.common.FilterCreatureCard;
 import mage.game.permanent.token.ZombieToken;
 import mage.target.common.TargetCardInGraveyard;
 
@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public final class BonecladNecromancer extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("creature card from a graveyard");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("creature card from a graveyard");
 
     public BonecladNecromancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
