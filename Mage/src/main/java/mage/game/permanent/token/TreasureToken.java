@@ -33,7 +33,7 @@ public final class TreasureToken extends TokenImpl {
     }
 
     public TreasureToken(String setCode, int tokenType) {
-        super("Treasure", "colorless Treasure artifact token with \"{T}, Sacrifice this artifact: Add one mana of any color.\"");
+        super("Treasure", "Treasure token");
         availableImageSetCodes = tokenImageSets;
         setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.ARTIFACT);
