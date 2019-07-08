@@ -29,7 +29,7 @@ public final class MaraudingRaptor extends CardImpl {
     private static final FilterPermanent filter2 = new FilterCreaturePermanent("another creature");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter2.add(AnotherPredicate.instance);
     }
 
     public MaraudingRaptor(UUID ownerId, CardSetInfo setInfo) {
