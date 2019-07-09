@@ -18,6 +18,7 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPlaneswalkerPermanent;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -42,7 +43,7 @@ import static mage.constants.Outcome.Benefit;
 public final class ChandraAcolyteOfFlame extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterCreatureOrPlaneswalkerPermanent("red planeswalker you control");
+            = new FilterControlledPlaneswalkerPermanent("red planeswalker you control");
     private static final FilterCard filter2
             = new FilterInstantOrSorceryCard("instant or sorcery card with converted mana cost 3 or less");
 
