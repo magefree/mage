@@ -66,7 +66,7 @@ public final class ChandraAcolyteOfFlame extends CardImpl {
         this.addAbility(new LoyaltyAbility(new ChandraAcolyteOfFlameEffect(), 0));
 
         // -2: You may cast target instant or sorcery card with converted mana cost 3 or less from your graveyard. If that card would be put into your graveyard this turn, exile it instead.
-        Ability ability = new LoyaltyAbility(new ChandraAcolyteOfFlameGraveyardEffect(), -3);
+        Ability ability = new LoyaltyAbility(new ChandraAcolyteOfFlameGraveyardEffect(), -2);
         ability.addTarget(new TargetCardInYourGraveyard(filter2));
         this.addAbility(ability);
     }
