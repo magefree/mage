@@ -1,7 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -25,8 +24,9 @@ import mage.target.TargetCard;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public final class EntomberExarch extends CardImpl {
@@ -85,9 +85,8 @@ class EntomberExarchEffect extends OneShotEffect {
                 TargetCard target = new TargetCard(Zone.HAND, filter);
                 if (you.choose(Outcome.Benefit, player.getHand(), target, game)) {
                     Card card = player.getHand().get(target.getFirstTarget(), game);
-                    if (card != null) {
-                        return player.discard(card, source, game);
-                    }
+                    return player.discard(card, source, game);
+
                 }
             }
         }

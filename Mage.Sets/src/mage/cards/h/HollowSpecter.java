@@ -107,9 +107,8 @@ class HollowSpecterEffect extends OneShotEffect {
                         card = revealedCards.getRandom(game);
                     }
 
-                    if (card != null) {
-                        targetPlayer.discard(card, source, game);
-                    }
+                    targetPlayer.discard(card, source, game);
+
                 }
             }
 

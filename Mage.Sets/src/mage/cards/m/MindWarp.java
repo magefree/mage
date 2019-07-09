@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
@@ -18,8 +17,9 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author Quercitron
  */
 public final class MindWarp extends CardImpl {
@@ -71,9 +71,8 @@ class MindWarpEffect extends OneShotEffect {
             target.setNotTarget(true);
             if (you.choose(Outcome.Benefit, targetPlayer.getHand(), target, game)) {
                 Card card = targetPlayer.getHand().get(target.getFirstTarget(), game);
-                if (card != null) {
-                    return targetPlayer.discard(card, source, game);
-                }
+                return targetPlayer.discard(card, source, game);
+
             }
 
         }

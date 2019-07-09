@@ -109,7 +109,7 @@ class BalancingActEffect extends OneShotEffect {
                         Cards cards =  player.getHand().copy();
                         for(UUID cardUUID : cards){
                             Card card = player.getHand().get(cardUUID, game);
-                            if(card != null && !target.getTargets().contains(cardUUID)){
+                            if(!target.getTargets().contains(cardUUID)){
                                 player.discard(card, source, game);
                             }
                         }

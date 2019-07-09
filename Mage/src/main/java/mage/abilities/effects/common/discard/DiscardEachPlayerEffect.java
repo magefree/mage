@@ -1,7 +1,5 @@
 package mage.abilities.effects.common.discard;
 
-import java.util.HashMap;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -18,6 +16,9 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetDiscard;
 import mage.util.CardUtil;
+
+import java.util.HashMap;
+import java.util.UUID;
 
 public class DiscardEachPlayerEffect extends OneShotEffect {
 
@@ -102,9 +103,8 @@ public class DiscardEachPlayerEffect extends OneShotEffect {
                     if (cardsPlayer != null) {
                         for (UUID cardId : cardsPlayer) {
                             Card card = game.getCard(cardId);
-                            if (card != null) {
-                                player.discard(card, source, game);
-                            }
+                            player.discard(card, source, game);
+
                         }
                     }
                 }

@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.CastOnlyIfConditionIsTrueAbility;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
@@ -19,14 +18,15 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class ChecksAndBalances extends CardImpl {
 
     public ChecksAndBalances(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
         // Cast this spell only if there are three or more players in the game.
         this.addAbility(new CastOnlyIfConditionIsTrueAbility(ChecksAndBalancesCondition.instance, "Cast this spell only if there are three or more players in the game"));
@@ -105,10 +105,9 @@ class ChecksAndBalancesEffect extends OneShotEffect {
                     TargetCardInHand target = new TargetCardInHand();
                     if (player.choose(Outcome.Discard, target, source.getSourceId(), game)) {
                         Card card = game.getCard(target.getFirstTarget());
-                        if (card != null) {
-                            player.discard(card, source, game);
-                        }
+                        player.discard(card, source, game);
                     }
+
                 }
             }
             game.getStack().counter(spell.getId(), source.getSourceId(), game);

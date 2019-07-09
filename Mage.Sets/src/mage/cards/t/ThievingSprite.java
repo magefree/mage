@@ -1,18 +1,12 @@
 
 package mage.cards.t;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -25,14 +19,16 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPlayer;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class ThievingSprite extends CardImpl {
 
     public ThievingSprite(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.subtype.add(SubType.FAERIE);
         this.subtype.add(SubType.ROGUE);
 
@@ -41,7 +37,7 @@ public final class ThievingSprite extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // When Thieving Sprite enters the battlefield, target player reveals X cards from their hand, where X is the number of Faeries you control.
         // You choose one of those cards. That player discards that card.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ThievingSpriteEffect(), false);
@@ -115,16 +111,13 @@ class ThievingSpriteEffect extends OneShotEffect {
         if (!revealedCards.isEmpty()) {
             targetPlayer.revealCards("Thieving Sprite", revealedCards, game);
             Card card = null;
-            if(revealedCards.size() > 1) {
+            if (revealedCards.size() > 1) {
                 controller.choose(Outcome.Discard, revealedCards, targetInHand, game);
                 card = revealedCards.get(targetInHand.getFirstTarget(), game);
             } else {
                 card = revealedCards.getRandom(game);
             }
-
-            if (card != null) {
-                targetPlayer.discard(card, source, game);
-            }
+            targetPlayer.discard(card, source, game);
         }
         return true;
     }

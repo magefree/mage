@@ -40,9 +40,8 @@ public class DiscardSourceCost extends CostImpl {
         Player player = game.getPlayer(controllerId);
         if (player != null) {
             Card card = player.getHand().get(sourceId, game);
-            if (card != null) {
-                paid = player.discard(card, null, game);
-            }
+            paid = player.discard(card, null, game);
+
         }
         return paid;
     }

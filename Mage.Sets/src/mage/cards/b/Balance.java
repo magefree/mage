@@ -19,7 +19,6 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- *
  * @author emerald000
  */
 public final class Balance extends CardImpl {
@@ -166,9 +165,8 @@ class BalanceEffect extends OneShotEffect {
                 if (player != null && cardsToDiscard.get(playerId) != null) {
                     for (UUID cardId : cardsToDiscard.get(playerId)) {
                         Card card = game.getCard(cardId);
-                        if (card != null) {
-                            player.discard(card, source, game);
-                        }
+                        player.discard(card, source, game);
+
                     }
                 }
             }

@@ -116,7 +116,7 @@ class CreepingDreadEffect extends OneShotEffect {
                 for (Map.Entry<Player, Card> entry : cardsChosen.entrySet()) {
                     Player player = entry.getKey();
                     Card cardChosen = entry.getValue();
-                    if (player != null && cardChosen != null) {
+                    if (player != null) {
                         player.discard(cardChosen, source, game);
                     }
                 }

@@ -12,7 +12,6 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class DiscardControllerEffect extends OneShotEffect {
@@ -59,9 +58,8 @@ public class DiscardControllerEffect extends OneShotEffect {
                 int maxAmount = Math.min(amount.calculate(game, source, this), player.getHand().size());
                 for (int i = 0; i < maxAmount; i++) {
                     Card card = player.getHand().getRandom(game);
-                    if (card != null) {
-                        result |= player.discard(card, source, game);
-                    }
+                    result |= player.discard(card, source, game);
+
                 }
             } else {
                 player.discard(amount.calculate(game, source, this), false, source, game);

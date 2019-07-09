@@ -1,7 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -16,8 +15,9 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class Extortion extends CardImpl {
@@ -61,9 +61,8 @@ class ExtortionEffect extends OneShotEffect {
             target.setNotTarget(true);
             if (you.choose(Outcome.Benefit, targetPlayer.getHand(), target, game)) {
                 Card card = targetPlayer.getHand().get(target.getFirstTarget(), game);
-                if (card != null) {
-                    return targetPlayer.discard(card, source, game);
-                }
+                return targetPlayer.discard(card, source, game);
+
             }
 
         }

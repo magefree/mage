@@ -83,9 +83,8 @@ class MindBombEffect extends OneShotEffect {
                     if (cardsPlayer != null) {
                         for (UUID cardId : cardsPlayer) {
                             Card card = game.getCard(cardId);
-                            if (card != null) {
-                                player.discard(card, source, game);
-                            }
+                            player.discard(card, source, game);
+
                         }
                     }
                 }

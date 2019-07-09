@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -24,8 +23,9 @@ import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.ManaSpentToCastWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class RiversGrasp extends CardImpl {
@@ -86,9 +86,8 @@ class RiversGraspEffect extends OneShotEffect {
                 TargetCard target = new TargetCard(Zone.HAND, StaticFilters.FILTER_CARD_A_NON_LAND);
                 if (controller.choose(Outcome.Benefit, player.getHand(), target, game)) {
                     Card card = player.getHand().get(target.getFirstTarget(), game);
-                    if (card != null) {
-                        return player.discard(card, source, game);
-                    }
+                    return player.discard(card, source, game);
+
                 }
             }
         }

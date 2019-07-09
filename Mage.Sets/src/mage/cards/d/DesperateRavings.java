@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -16,14 +15,15 @@ import mage.constants.TimingRule;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class DesperateRavings extends CardImpl {
 
     public DesperateRavings(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
 
 
         // Draw two cards, then discard a card at random.
@@ -65,9 +65,7 @@ class DesperateRavingsEffect extends OneShotEffect {
             player.drawCards(2, game);
             Cards hand = player.getHand();
             Card card = hand.getRandom(game);
-            if (card != null) {
-                player.discard(card, source, game);
-            }
+            player.discard(card, source, game);
             return true;
         }
         return false;
