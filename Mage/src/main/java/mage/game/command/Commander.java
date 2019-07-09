@@ -21,6 +21,7 @@ import mage.util.SubTypeList;
 
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 public class Commander implements CommandObject {
@@ -122,7 +123,7 @@ public class Commander implements CommandObject {
     }
 
     @Override
-    public EnumSet<CardType> getCardType() {
+    public Set<CardType> getCardType() {
         return sourceObject.getCardType();
     }
 
@@ -137,7 +138,7 @@ public class Commander implements CommandObject {
     }
 
     @Override
-    public EnumSet<SuperType> getSuperType() {
+    public Set<SuperType> getSuperType() {
         return sourceObject.getSuperType();
     }
 

@@ -134,6 +134,7 @@ class CurseOfTheCabalTriggeredAbilityConditionalDelay extends AddCountersSourceE
         super(CounterType.TIME.createInstance(), new StaticValue(2), false, true);
     }
 
+    @Override
     public boolean apply(Game game, Ability source) {
         UUID activePlayerId = game.getActivePlayerId();
         Player target = game.getPlayer(activePlayerId);

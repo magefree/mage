@@ -34,10 +34,7 @@ import mage.players.Player;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -458,7 +455,7 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public EnumSet<CardType> getCardType() {
+    public Set<CardType> getCardType() {
         if (faceDown) {
             EnumSet<CardType> cardTypes = EnumSet.noneOf(CardType.class);
             cardTypes.add(CardType.CREATURE);
@@ -500,7 +497,7 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public EnumSet<SuperType> getSuperType() {
+    public Set<SuperType> getSuperType() {
         return card.getSuperType();
     }
 

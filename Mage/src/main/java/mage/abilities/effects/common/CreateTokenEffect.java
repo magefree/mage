@@ -2,6 +2,7 @@
 package mage.abilities.effects.common;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -84,7 +85,7 @@ public class CreateTokenEffect extends OneShotEffect {
         return lastAddedTokenId;
     }
 
-    public ArrayList<UUID> getLastAddedTokenIds() {
+    public List<UUID> getLastAddedTokenIds() {
         return lastAddedTokenIds;
     }
 

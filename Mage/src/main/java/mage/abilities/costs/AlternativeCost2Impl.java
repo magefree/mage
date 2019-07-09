@@ -27,7 +27,7 @@ public class AlternativeCost2Impl<T extends AlternativeCost2Impl<T>> extends Cos
         this.name = name;
         this.delimiter = delimiter;
         if (reminderText != null) {
-            this.reminderText = new StringBuilder("<i>").append(reminderText).append("</i>").toString();
+            this.reminderText = "<i>" + reminderText + "</i>";
         }
         this.add(cost);
     }

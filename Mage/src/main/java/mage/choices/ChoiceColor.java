@@ -5,15 +5,16 @@ import mage.Mana;
 import mage.ObjectColor;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class ChoiceColor extends ChoiceImpl {
 
-    private static final ArrayList<String> colorChoices = getBaseColors();
+    private static final List<String> colorChoices = getBaseColors();
 
-    public static ArrayList<String> getBaseColors() {
+    public static List<String> getBaseColors() {
         ArrayList<String> arr = new ArrayList<>();
         arr.add("Green");
         arr.add("Blue");

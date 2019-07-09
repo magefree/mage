@@ -64,10 +64,11 @@ class MuscleBurstCount extends CardsInAllGraveyardsCount {
         super(filter);
     }
 
-    public MuscleBurstCount(MuscleBurstCount value) {
+    private MuscleBurstCount(MuscleBurstCount value) {
         super(value);
     }
 
+    @Override
     public MuscleBurstCount copy() {
         return new MuscleBurstCount(this);
     }
@@ -85,7 +86,7 @@ class CountAsMuscleBurstAbility extends SimpleStaticAbility {
         super(Zone.GRAVEYARD, new InfoEffect("If {this} is in a graveyard, effects from spells named Muscle Burst count it as a card named Muscle Burst"));
     }
 
-    public CountAsMuscleBurstAbility(CountAsMuscleBurstAbility ability) {
+    private CountAsMuscleBurstAbility(CountAsMuscleBurstAbility ability) {
         super(ability);
     }
 

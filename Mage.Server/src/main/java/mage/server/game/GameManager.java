@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -22,7 +23,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public enum GameManager {
     instance;
 
-    private final ConcurrentHashMap<UUID, GameController> gameControllers = new ConcurrentHashMap<>();
+    private final ConcurrentMap<UUID, GameController> gameControllers = new ConcurrentHashMap<>();
     private final ReadWriteLock gameControllersLock = new ReentrantReadWriteLock();
 
     public UUID createGameSession(Game game, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId, UUID choosingPlayerId, GameOptions gameOptions) {

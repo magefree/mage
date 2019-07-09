@@ -19,6 +19,7 @@ public enum RaidCondition implements Condition {
         return watcher != null && watcher.getNumberOfAttackersCurrentTurn(source.getControllerId()) > 0;
     }
 
+    @Override
     public String toString() {
         return "if you attacked with a creature this turn";
     }

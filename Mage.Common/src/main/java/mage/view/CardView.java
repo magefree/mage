@@ -50,9 +50,9 @@ public class CardView extends SimpleCardView implements SelectableObjectView {
     @Expose
     protected String loyalty = "";
     protected String startingLoyalty;
-    protected EnumSet<CardType> cardTypes;
+    protected Set<CardType> cardTypes;
     protected SubTypeList subTypes;
-    protected EnumSet<SuperType> superTypes;
+    protected Set<SuperType> superTypes;
     protected ObjectColor color;
     protected ObjectColor frameColor;
     protected FrameStyle frameStyle;
@@ -731,7 +731,7 @@ public class CardView extends SimpleCardView implements SelectableObjectView {
         return subTypes;
     }
 
-    public EnumSet<SuperType> getSuperTypes() {
+    public Set<SuperType> getSuperTypes() {
         return superTypes;
     }
 

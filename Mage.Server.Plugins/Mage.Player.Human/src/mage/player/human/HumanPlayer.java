@@ -1642,7 +1642,7 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     protected void specialAction(Game game) {
-        LinkedHashMap<UUID, SpecialAction> specialActions = game.getState().getSpecialActions().getControlledBy(playerId, false);
+        Map<UUID, SpecialAction> specialActions = game.getState().getSpecialActions().getControlledBy(playerId, false);
         if (!specialActions.isEmpty()) {
             updateGameStatePriority("specialAction", game);
             prepareForResponse(game);
@@ -1659,7 +1659,7 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     protected void specialManaAction(ManaCost unpaid, Game game) {
-        LinkedHashMap<UUID, SpecialAction> specialActions = game.getState().getSpecialActions().getControlledBy(playerId, true);
+        Map<UUID, SpecialAction> specialActions = game.getState().getSpecialActions().getControlledBy(playerId, true);
         if (!specialActions.isEmpty()) {
             updateGameStatePriority("specialAction", game);
             prepareForResponse(game);

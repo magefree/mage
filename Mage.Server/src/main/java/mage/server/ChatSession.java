@@ -4,6 +4,7 @@ package mage.server;
 import java.text.DateFormat;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -25,7 +26,7 @@ public class ChatSession {
 
     private final ReadWriteLock lock = new ReentrantReadWriteLock();
 
-    private final ConcurrentHashMap<UUID, String> clients = new ConcurrentHashMap<>();
+    private final ConcurrentMap<UUID, String> clients = new ConcurrentHashMap<>();
     private final UUID chatId;
     private final Date createTime;
     private final String info;
@@ -148,7 +149,7 @@ public class ChatSession {
         return clients.containsKey(userId);
     }
 
-    public ConcurrentHashMap<UUID, String> getClients() {
+    public ConcurrentMap<UUID, String> getClients() {
         return clients;
     }
 

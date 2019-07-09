@@ -3,6 +3,7 @@
 package mage.abilities;
 
 import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -24,7 +25,7 @@ public class SpecialActions extends AbilitiesImpl<SpecialAction> {
      *                   false = only non mana actions get returned
      * @return
      */
-    public LinkedHashMap<UUID, SpecialAction> getControlledBy(UUID controllerId, boolean manaAction) {
+    public Map<UUID, SpecialAction> getControlledBy(UUID controllerId, boolean manaAction) {
         LinkedHashMap<UUID, SpecialAction> controlledBy = new LinkedHashMap<>();
         for (SpecialAction action: this) {
             if (action.isControlledBy(controllerId) && action.isManaAction() == manaAction) {

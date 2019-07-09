@@ -22,7 +22,7 @@ import mage.util.CardUtil;
  */
 public class AlternativeCostSourceAbility extends StaticAbility implements AlternativeSourceCosts {
 
-    Costs<AlternativeCost2> alternateCosts = new CostsImpl<>();
+    private Costs<AlternativeCost2> alternateCosts = new CostsImpl<>();
     protected Condition condition;
     protected String rule;
     protected FilterCard filter;
@@ -149,8 +149,7 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
                     if (!onlyMana) {
                         ability.getCosts().clear();
                     }
-                    for (Cost cost : alternativeCostsToCheck) {
-                        AlternativeCost2 alternateCost = (AlternativeCost2) cost;
+                    for (AlternativeCost2 alternateCost : alternativeCostsToCheck) {
                         alternateCost.activate();
                         for (Iterator it = ((Costs) alternateCost).iterator(); it.hasNext();) {
                             Cost costDeailed = (Cost) it.next();

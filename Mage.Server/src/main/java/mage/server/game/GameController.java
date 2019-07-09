@@ -60,15 +60,15 @@ public class GameController implements GameCallback {
     private ScheduledFuture<?> futureTimeout;
     protected static final ScheduledExecutorService timeoutIdleExecutor = ThreadExecutor.instance.getTimeoutIdleExecutor();
 
-    private final ConcurrentHashMap<UUID, GameSessionPlayer> gameSessions = new ConcurrentHashMap<>();
+    private final ConcurrentMap<UUID, GameSessionPlayer> gameSessions = new ConcurrentHashMap<>();
     private final ReadWriteLock gameSessionsLock = new ReentrantReadWriteLock();
 
-    private final ConcurrentHashMap<UUID, GameSessionWatcher> watchers = new ConcurrentHashMap<>();
+    private final ConcurrentMap<UUID, GameSessionWatcher> watchers = new ConcurrentHashMap<>();
     private final ReadWriteLock gameWatchersLock = new ReentrantReadWriteLock();
 
-    private final ConcurrentHashMap<UUID, PriorityTimer> timers = new ConcurrentHashMap<>();
+    private final ConcurrentMap<UUID, PriorityTimer> timers = new ConcurrentHashMap<>();
 
-    private final ConcurrentHashMap<UUID, UUID> userPlayerMap;
+    private final ConcurrentMap<UUID, UUID> userPlayerMap;
     private final UUID gameSessionId;
     private final Game game;
     private final UUID chatId;
@@ -82,7 +82,7 @@ public class GameController implements GameCallback {
     private int turnsToRollback;
     private int requestsOpen;
 
-    public GameController(Game game, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId, UUID choosingPlayerId, GameOptions gameOptions) {
+    public GameController(Game game, ConcurrentMap<UUID, UUID> userPlayerMap, UUID tableId, UUID choosingPlayerId, GameOptions gameOptions) {
         gameSessionId = UUID.randomUUID();
         this.userPlayerMap = userPlayerMap;
         chatId = ChatManager.instance.createChatSession("Game " + game.getId());
