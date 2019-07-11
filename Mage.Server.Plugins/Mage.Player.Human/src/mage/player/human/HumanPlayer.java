@@ -1993,12 +1993,14 @@ public class HumanPlayer extends PlayerImpl {
                 }
                 break;
             case PASS_PRIORITY_UNTIL_STACK_RESOLVED:
+                // stop recording only, real stack processing in PlayerImpl
                 if (recordingMacro) {
                     logger.debug("Adding a resolveStack");
                     PlayerResponse tResponse = new PlayerResponse();
                     tResponse.setString("resolveStack");
                     actionQueueSaved.add(tResponse);
                 }
+                super.sendPlayerAction(playerAction, game, data);
                 break;
             default:
                 super.sendPlayerAction(playerAction, game, data);
