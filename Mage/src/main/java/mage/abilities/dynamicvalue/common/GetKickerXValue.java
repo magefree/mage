@@ -35,14 +35,10 @@ public enum GetKickerXValue implements DynamicValue {
 
                     // search that kicker used X value
                     KickerAbility kickerAbility = (KickerAbility) ability;
-                    boolean haveVarCost = false;
-                    for (OptionalAdditionalCost cost : kickerAbility.getKickerCosts()) {
-                        List<VariableCost> varCosts = ((OptionalAdditionalCostImpl) cost).getVariableCosts();
-                        if (!varCosts.isEmpty()) {
-                            haveVarCost = true;
-                            break;
-                        }
-                    }
+                    boolean haveVarCost = kickerAbility.getKickerCosts()
+                            .stream()
+                            .anyMatch(varCost -> !((OptionalAdditionalCostImpl) varCost).getVariableCosts().isEmpty());
+
 
                     if (haveVarCost) {
                         int kickedCount = ((KickerAbility) ability).getKickedCounter(game, source);

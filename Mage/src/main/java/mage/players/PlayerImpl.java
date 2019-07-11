@@ -3049,13 +3049,10 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected boolean canLandPlayAlternateSourceCostsAbility(Card sourceObject, ManaOptions available, Ability
             ability, Game game) {
         if (!(sourceObject instanceof Permanent)) {
-            Ability sourceAbility = null;
-            for (Ability landAbility : sourceObject.getAbilities()) {
-                if (landAbility.getAbilityType() == AbilityType.PLAY_LAND) {
-                    sourceAbility = landAbility;
-                    break;
-                }
-            }
+            Ability sourceAbility = sourceObject.getAbilities().stream()
+                    .filter(landAbility -> landAbility.getAbilityType() == AbilityType.PLAY_LAND)
+                    .findFirst().orElse(null);
+
             if (sourceAbility != null && ((AlternativeSourceCosts) ability).isAvailable(sourceAbility, game)) {
                 if (ability.getCosts().canPay(ability, sourceObject.getId(), this.getId(), game)) {
                     ManaCostsImpl manaCosts = new ManaCostsImpl();
