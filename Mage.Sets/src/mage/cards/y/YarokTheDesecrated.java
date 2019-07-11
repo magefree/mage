@@ -88,7 +88,6 @@ class YarokTheDesecratedEffect extends ReplacementEffectImpl {
                 || !(sourceEvent instanceof EntersTheBattlefieldEvent)) {
             return false;
         }
-        EntersTheBattlefieldEvent entersTheBattlefieldEvent = (EntersTheBattlefieldEvent) sourceEvent;
         // Only for triggers of permanents
         return game.getPermanent(numberOfTriggersEvent.getSourceId()) != null;
     }
