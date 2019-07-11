@@ -441,11 +441,7 @@ public abstract class AbilityImpl implements Ability {
         if (this instanceof SpellAbility) {
             // A player can't apply two alternative methods of casting or two alternative costs to a single spell.
             switch (((SpellAbility) this).getSpellAbilityCastMode()) {
-                case NORMAL:
-                default:
-                    canUseAlternativeCost = true;
-                    canUseAdditionalCost = true;
-                    break;
+
                 case FLASHBACK:
                 case MADNESS:
                     // from Snapcaster Mage:
@@ -454,6 +450,11 @@ public abstract class AbilityImpl implements Ability {
                     canUseAlternativeCost = false;
                     // You may pay any optional additional costs the spell has, such as kicker costs. You must pay any
                     // mandatory additional costs the spell has, such as that of Tormenting Voice. (2018-12-07)
+                    canUseAdditionalCost = true;
+                    break;
+                case NORMAL:
+                default:
+                    canUseAlternativeCost = true;
                     canUseAdditionalCost = true;
                     break;
             }
