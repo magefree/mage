@@ -841,10 +841,14 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                     int attackerValue = eval.evaluate(attacker, game);
                     for (Permanent blocker : possibleBlockers) {
                         int blockerValue = eval.evaluate(blocker, game);
+
+                        // blocker can kill attacker
                         if (attacker.getPower().getValue() <= blocker.getToughness().getValue()
                                 && attacker.getToughness().getValue() <= blocker.getPower().getValue()) {
                             safeToAttack = false;
                         }
+
+                        // kill each other
                         if (attacker.getToughness().getValue() == blocker.getPower().getValue()
                                 && attacker.getPower().getValue() == blocker.getToughness().getValue()) {
                             if (attackerValue > blockerValue
@@ -859,19 +863,26 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                                 safeToAttack = false;
                             }
                         }
+
+                        // attacker can kill by deathtouch
                         if (attacker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())
                                 || attacker.getAbilities().containsKey(IndestructibleAbility.getInstance().getId())) {
                             safeToAttack = true;
                         }
+
+                        // attacker can ignore blocker
                         if (attacker.getAbilities().containsKey(FlyingAbility.getInstance().getId())
                                 && !blocker.getAbilities().containsKey(FlyingAbility.getInstance().getId())
                                 && !blocker.getAbilities().containsKey(ReachAbility.getInstance().getId())) {
                             safeToAttack = true;
                         }
                     }
+
+                    // 0 damage
                     if (attacker.getPower().getValue() == 0) {
                         safeToAttack = false;
                     }
+
                     if (safeToAttack) {
                         // undo has to be possible e.g. if not able to pay a attack fee (e.g. Ghostly Prison)
                         attackingPlayer.declareAttacker(attacker.getId(), defenderId, game, true);

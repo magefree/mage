@@ -204,4 +204,19 @@ public class AttackAndBlockByAITest extends CardTestPlayerBaseAI {
         assertLife(playerA, 20);
         assertLife(playerB, 20);
     }
+
+    @Test
+    public void test_Attack_1_with_counters_vs_1() {
+        // chainbreaker real stats is 1/1, it's can be saftly attacked
+        addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 1); // 2/2
+        addCard(Zone.BATTLEFIELD, playerB, "Chainbreaker", 1); // 3/3, but with 2x -1/-1 counters
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+        assertAllCommandsUsed();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20 - 2);
+    }
 }
