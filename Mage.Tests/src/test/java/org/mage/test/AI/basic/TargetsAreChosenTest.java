@@ -1,4 +1,3 @@
-
 package org.mage.test.AI.basic;
 
 import mage.constants.PhaseStep;
@@ -9,7 +8,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseAI;
 
 /**
- *
  * @author LevelX2
  */
 public class TargetsAreChosenTest extends CardTestPlayerBaseAI {
@@ -158,6 +156,7 @@ public class TargetsAreChosenTest extends CardTestPlayerBaseAI {
         // Whenever a creature an opponent controls dies, put a +1/+1 counter on Malakir Cullblade.
         addCard(Zone.BATTLEFIELD, playerA, "Malakir Cullblade", 5);
 
+        attackSkip(1, playerA);
         attack(3, playerA, "Nefashu");
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();

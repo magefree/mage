@@ -1527,10 +1527,18 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         player.addAction(turnNum, PhaseStep.DECLARE_ATTACKERS, new StringBuilder("attack:").append(attacker).append("$planeswalker=").append(planeswalker).toString());
     }
 
+    public void attackSkip(int turnNum, TestPlayer player) {
+        attack(turnNum, player, TestPlayer.ATTACK_SKIP);
+    }
+
     public void block(int turnNum, TestPlayer player, String blocker, String attacker) {
         //Assert.assertNotEquals("", blocker);
         //Assert.assertNotEquals("", attacker);
         player.addAction(turnNum, PhaseStep.DECLARE_BLOCKERS, "block:" + blocker + '$' + attacker);
+    }
+
+    public void blockSkip(int turnNum, TestPlayer player) {
+        block(turnNum, player, TestPlayer.BLOCK_SKIP, "");
     }
 
     /**

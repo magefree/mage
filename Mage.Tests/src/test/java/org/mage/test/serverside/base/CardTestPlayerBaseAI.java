@@ -37,8 +37,4 @@ public abstract class CardTestPlayerBaseAI extends CardTestPlayerAPIImpl {
         }
         return super.createPlayer(name, rangeOfInfluence);
     }
-
-    public void setAISkill(int skill) {
-        this.skill = skill;
-    }
 }
