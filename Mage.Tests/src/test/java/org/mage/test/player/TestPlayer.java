@@ -576,7 +576,8 @@ public class TestPlayer implements Player {
                         if (permanent.getName().equals(groups[0])) {
                             Counter counter = new Counter(groups[1], Integer.parseInt(groups[2]));
                             permanent.addCounters(counter, null, game);
-                            break;
+                            actions.remove(action);
+                            return true;
                         }
                     }
                 } else if (action.getAction().startsWith("waitStackResolved")) {
