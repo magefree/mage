@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
@@ -9,11 +8,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
@@ -21,14 +16,15 @@ import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward
  */
 public final class PraetorsGrasp extends CardImpl {
 
     public PraetorsGrasp(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
 
         // Search target opponent's library for a card and exile it face down. Then that player shuffles their library. You may look at and play that card for as long as it remains exiled.
         this.getSpellAbility().addEffect(new PraetorsGraspEffect());
@@ -120,11 +116,7 @@ class PraetorsGraspPlayEffect extends AsThoughEffectImpl {
             if (exileId != null && controller != null) {
                 ExileZone exileZone = game.getExile().getExileZone(exileId);
                 if (exileZone != null && exileZone.contains(cardId)) {
-                    if (controller.chooseUse(outcome, "Play the exiled card?", source, game)) {
-                        return true;
-                    }
-                } else {
-                    discard();
+                    return true;
                 }
             }
         }
