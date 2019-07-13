@@ -9,21 +9,30 @@ import mage.constants.Zone;
  */
 public class CastCommanderAbility extends SpellAbility {
 
+    private String ruleText;
+
     public CastCommanderAbility(Card card, SpellAbility spellTemplate) {
         super(spellTemplate);
         this.newId();
         this.setCardName(spellTemplate.getCardName());
-        zone = Zone.COMMAND;
-        spellAbilityType = spellTemplate.getSpellAbilityType();
+        this.zone = Zone.COMMAND;
+        this.spellAbilityType = spellTemplate.getSpellAbilityType();
+        this.ruleText = spellTemplate.getRule(); // need to support custom rule texts like OverloadAbility
     }
 
     public CastCommanderAbility(final CastCommanderAbility ability) {
         super(ability);
+        this.ruleText = ability.ruleText;
     }
 
     @Override
     public CastCommanderAbility copy() {
         return new CastCommanderAbility(this);
+    }
+
+    @Override
+    public String getRule() {
+        return ruleText;
     }
 
 }
