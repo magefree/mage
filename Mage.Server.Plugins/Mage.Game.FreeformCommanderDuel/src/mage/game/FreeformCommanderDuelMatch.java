@@ -16,15 +16,11 @@ public class FreeformCommanderDuelMatch extends MatchImpl {
     @Override
     public void startGame() throws GameException {
         int startLife = 20;
-        boolean alsoHand = true;
-        boolean checkCommanderDamage = true;
 
         Mulligan mulligan = options.getMulliganType().getMulligan(options.getFreeMulligans());
         FreeformCommanderDuel game = new FreeformCommanderDuel(options.getAttackOption(), options.getRange(), mulligan, startLife);
-        game.setCheckCommanderDamage(checkCommanderDamage);
+        game.setCheckCommanderDamage(true);
         game.setStartMessage(this.createGameStartMessage());
-        game.setAlsoHand(alsoHand);
-        game.setAlsoLibrary(true);
         initGame(game);
         games.add(game);
     }

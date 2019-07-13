@@ -1,6 +1,7 @@
 package mage.watchers.common;
 
 import mage.constants.WatcherScope;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -12,7 +13,8 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * Calcs commanders play count (spell or land)
+ * Calcs commanders play count only from command zone (spell or land)
+ * Cards like Remand can put command to hand and cast it without commander tax increase
  *
  * @author JayDi85
  */
@@ -49,7 +51,7 @@ public class CommanderPlaysCountWatcher extends Watcher {
             }
         }
 
-        if (isCommanderObject) {
+        if (isCommanderObject && event.getZone() == Zone.COMMAND) {
             int count = playsCount.getOrDefault(possibleCommanderId, 0);
             count++;
             playsCount.put(possibleCommanderId, count);
