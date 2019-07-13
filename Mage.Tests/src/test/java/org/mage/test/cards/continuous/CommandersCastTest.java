@@ -1,5 +1,6 @@
 package org.mage.test.cards.continuous;
 
+import mage.abilities.keyword.FirstStrikeAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
@@ -221,6 +222,52 @@ public class CommandersCastTest extends CardTestCommander4Players {
 
         setStrictChooseMode(true);
         setStopAt(9, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_AlternativeSpellNormal() {
+        // Player order: A -> D -> C -> B
+
+        // Weapon Surge
+        // Target creature you control gets +1/+0 and gains first strike until end of turn.
+        // Overload {1}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of “target” with “each.”)
+        addCard(Zone.HAND, playerA, "Weapon Surge", 1); // {R} or {1}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        //
+        addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 2);
+
+        // cast overload
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Weapon Surge with overload");
+        checkAbility("after", 1, PhaseStep.BEGIN_COMBAT, playerA, "Balduvian Bears", FirstStrikeAbility.class, true);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_AlternativeSpellCommander() {
+        // Player order: A -> D -> C -> B
+
+        // Weapon Surge
+        // Target creature you control gets +1/+0 and gains first strike until end of turn.
+        // Overload {1}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of “target” with “each.”)
+        addCard(Zone.COMMAND, playerA, "Weapon Surge", 1); // {R} or {1}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        //
+        addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 2);
+
+        // cast overload
+        showAvaileableAbilities("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Weapon Surge with overload");
+        setChoice(playerA, "Yes"); // move to command zone
+        checkAbility("after", 1, PhaseStep.BEGIN_COMBAT, playerA, "Balduvian Bears", FirstStrikeAbility.class, true);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
         execute();
         assertAllCommandsUsed();
     }

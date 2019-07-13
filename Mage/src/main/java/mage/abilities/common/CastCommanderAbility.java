@@ -2,7 +2,6 @@ package mage.abilities.common;
 
 import mage.abilities.SpellAbility;
 import mage.cards.Card;
-import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 
 /**
@@ -10,12 +9,12 @@ import mage.constants.Zone;
  */
 public class CastCommanderAbility extends SpellAbility {
 
-    public CastCommanderAbility(Card card) {
-        super(card.getSpellAbility());
+    public CastCommanderAbility(Card card, SpellAbility spellTemplate) {
+        super(spellTemplate);
         this.newId();
-        this.setCardName(card.getName());
+        this.setCardName(spellTemplate.getCardName());
         zone = Zone.COMMAND;
-        spellAbilityType = SpellAbilityType.BASE;
+        spellAbilityType = spellTemplate.getSpellAbilityType();
     }
 
     public CastCommanderAbility(final CastCommanderAbility ability) {

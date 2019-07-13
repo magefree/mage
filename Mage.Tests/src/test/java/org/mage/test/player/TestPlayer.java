@@ -904,8 +904,8 @@ public class TestPlayer implements Player {
                 .map(a -> (
                         a.getZone() + " -> "
                                 + a.getSourceObject(game).getIdName() + " -> "
-                                + (a.getRule().length() > 0
-                                ? a.getRule().substring(0, Math.min(20, a.getRule().length()) - 1)
+                                + (a.toString().length() > 0
+                                ? a.toString().substring(0, Math.min(20, a.toString().length()) - 1)
                                 : a.getClass().getSimpleName())
                                 + "..."
                 ))
