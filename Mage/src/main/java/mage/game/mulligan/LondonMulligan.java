@@ -91,6 +91,7 @@ public class LondonMulligan extends Mulligan {
             }
         }
         openingHandSizes.put(playerId, openingHandSizes.get(playerId) - deduction);
+        int newHandSize = openingHandSizes.get(player.getId());
         if (deduction == 0) {
             game.fireInformEvent(new StringBuilder(player.getLogName())
                     .append(" mulligans for free.")
@@ -99,14 +100,13 @@ public class LondonMulligan extends Mulligan {
             game.fireInformEvent(new StringBuilder(player.getLogName())
                     .append(" mulligans")
                     .append(" down to ")
-                    .append((numCards - deduction))
-                    .append(numCards - deduction == 1 ? " card" : " cards").toString());
+                    .append(newHandSize)
+                    .append(newHandSize == 1 ? " card" : " cards").toString());
         }
         player.drawCards(numCards, game);
 
-        int handSize = openingHandSizes.get(player.getId());
-        if (player.getHand().size() > handSize) {
-            int cardsToDiscard = player.getHand().size() - handSize;
+        if (player.getHand().size() > newHandSize) {
+            int cardsToDiscard = player.getHand().size() - newHandSize;
             Cards cards = new CardsImpl();
             cards.addAll(player.getHand());
             TargetCard target = new TargetCard(cardsToDiscard, cardsToDiscard, Zone.HAND,
@@ -118,7 +118,8 @@ public class LondonMulligan extends Mulligan {
     }
 
     @Override
-    public void endMulligan(Game game, UUID playerId) {}
+    public void endMulligan(Game game, UUID playerId) {
+    }
 
     @Override
     public LondonMulligan copy() {
