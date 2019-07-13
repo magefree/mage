@@ -1,7 +1,5 @@
-
 package org.mage.test.multiplayer;
 
-import java.io.FileNotFoundException;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
@@ -10,14 +8,15 @@ import mage.counters.CounterType;
 import mage.game.FreeForAll;
 import mage.game.Game;
 import mage.game.GameException;
-import mage.game.mulligan.VancouverMulligan;
+import mage.game.mulligan.MulliganType;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestMultiPlayerBase;
 
+import java.io.FileNotFoundException;
+
 /**
- *
  * @author LevelX2
  */
 public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
@@ -25,7 +24,7 @@ public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
     @Override
     protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
         // Start Life = 2
-        Game game = new FreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ONE, new VancouverMulligan(0), 2);
+        Game game = new FreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ONE, MulliganType.GAME_DEFAULT.getMulligan(0), 2);
         // Player order: A -> D -> C -> B
         playerA = createPlayer(game, playerA, "PlayerA");
         playerB = createPlayer(game, playerB, "PlayerB");
@@ -131,7 +130,7 @@ public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
      * player concedes the game and removes the Planeswalker. Once it becomes an
      * opponent of the original player's turn and that opponent plays a spell,
      * Xmage throws an error and rollsback the turn.
-     *
+     * <p>
      * I don't have the actual error report on my due to negligence, but what I
      * can recollect is that the error message was along the lines of "The
      * emblem cannot find the original source. This turn will be rolled back".
@@ -278,7 +277,7 @@ public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
     /**
      * Pithing Needle keeps the named card's abilities disabled even after the
      * player controlling the Needle loses the game.
-     *
+     * <p>
      * I saw it happen during a Commander game. A player cast Pithing Needle
      * targeting my Proteus Staff. After I killed him, I still couldn't activate
      * the Staff.

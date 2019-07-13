@@ -5,7 +5,7 @@ import mage.constants.RangeOfInfluence;
 import mage.game.CommanderFreeForAll;
 import mage.game.Game;
 import mage.game.GameException;
-import mage.game.mulligan.VancouverMulligan;
+import mage.game.mulligan.MulliganType;
 import org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl;
 
 import java.io.FileNotFoundException;
@@ -17,7 +17,7 @@ public abstract class CardTestCommander4Players extends CardTestPlayerAPIImpl {
 
     @Override
     protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
-        Game game = new CommanderFreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, new VancouverMulligan(0), 20);
+        Game game = new CommanderFreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20);
         // Player order: A -> D -> C -> B
         playerA = createPlayer(game, playerA, "PlayerA");
         playerB = createPlayer(game, playerB, "PlayerB");
