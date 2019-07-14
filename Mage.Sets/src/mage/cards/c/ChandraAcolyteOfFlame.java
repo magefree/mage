@@ -118,7 +118,7 @@ class ChandraAcolyteOfFlameEffect extends OneShotEffect {
             game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect2), source);
 
             // extra info
-            InfoEffect.addInfoToPermanent(game, source, permanent, "<i><b>Warning</b>: It will be sacrificed at the beginning of the next end step<i>");
+            InfoEffect.addInfoToPermanent(game, source, permanent, "<i><b>Warning</b>: It will be sacrificed at the beginning of the next end step</i>");
         });
 
         return true;
