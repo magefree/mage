@@ -22,7 +22,7 @@ import mage.game.command.emblems.AjaniAdversaryOfTyrantsEmblem;
 import mage.game.command.planes.AkoumPlane;
 import mage.game.match.MatchType;
 import mage.game.mulligan.Mulligan;
-import mage.game.mulligan.VancouverMulligan;
+import mage.game.mulligan.MulliganType;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.players.StubPlayer;
@@ -113,7 +113,7 @@ public class TestCardRenderDialog extends MageDialog {
         cardsPanel.cleanUp();
         cardsPanel.setCustomRenderMode(comboRenderMode.getSelectedIndex());
 
-        Game game = new TestGame(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, new VancouverMulligan(0), 20);
+        Game game = new TestGame(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20);
         Player player = new StubPlayer("player1", RangeOfInfluence.ALL);
         Deck deck = new Deck();
         game.addPlayer(player, deck);

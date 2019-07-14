@@ -3,6 +3,7 @@ package mage.player.ai;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
+import mage.abilities.StaticAbility;
 import mage.abilities.common.PassAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.SearchEffect;
@@ -36,7 +37,6 @@ import org.apache.log4j.Logger;
 import java.io.File;
 import java.util.*;
 import java.util.concurrent.*;
-import mage.abilities.StaticAbility;
 
 /**
  * @author nantuko
@@ -794,71 +794,99 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
     private void declareAttackers(Game game, UUID activePlayerId) {
         game.fireEvent(new GameEvent(GameEvent.EventType.DECLARE_ATTACKERS_STEP_PRE, null, null, activePlayerId));
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_ATTACKERS, activePlayerId, activePlayerId))) {
-
             Player attackingPlayer = game.getPlayer(activePlayerId);
-            // TODO: this works only in two player game, also no attack of Planeswalker
-            UUID defenderId = game.getOpponents(playerId).iterator().next();
-            Player defender = game.getPlayer(defenderId);
 
-            List<Permanent> attackersList = super.getAvailableAttackers(defenderId, game);
-            if (attackersList.isEmpty()) {
-                return;
-            }
+            // TODO: add attack of Planeswalker
 
-            List<Permanent> possibleBlockers = defender.getAvailableBlockers(game);
-
-            List<Permanent> killers = CombatUtil.canKillOpponent(game, attackersList, possibleBlockers, defender);
-            if (!killers.isEmpty()) {
-                for (Permanent attacker : killers) {
-                    attackingPlayer.declareAttacker(attacker.getId(), defenderId, game, false);
+            // 1. check alpha strike first (all in attack to kill)
+            for (UUID defenderId : game.getOpponents(playerId)) {
+                Player defender = game.getPlayer(defenderId);
+                if (!defender.isInGame()) {
+                    continue;
                 }
-                return;
+
+                List<Permanent> attackersList = super.getAvailableAttackers(defenderId, game);
+                if (attackersList.isEmpty()) {
+                    continue;
+                }
+                List<Permanent> possibleBlockers = defender.getAvailableBlockers(game);
+                List<Permanent> killers = CombatUtil.canKillOpponent(game, attackersList, possibleBlockers, defender);
+                if (!killers.isEmpty()) {
+                    for (Permanent attacker : killers) {
+                        attackingPlayer.declareAttacker(attacker.getId(), defenderId, game, false);
+                    }
+                    return;
+                }
             }
 
-            // The AI will now attack more sanely.  Simple, but good enough for now.
-            // The sim minmax does not work at the moment.
-            boolean safeToAttack;
-            CombatEvaluator eval = new CombatEvaluator();
+            // 2. check all other actions
+            for (UUID defenderId : game.getOpponents(playerId)) {
+                Player defender = game.getPlayer(defenderId);
+                if (!defender.isInGame()) {
+                    continue;
+                }
+                List<Permanent> attackersList = super.getAvailableAttackers(defenderId, game);
+                if (attackersList.isEmpty()) {
+                    continue;
+                }
+                List<Permanent> possibleBlockers = defender.getAvailableBlockers(game);
 
-            for (Permanent attacker : attackersList) {
-                safeToAttack = true;
-                int attackerValue = eval.evaluate(attacker, game);
-                for (Permanent blocker : possibleBlockers) {
-                    int blockerValue = eval.evaluate(blocker, game);
-                    if (attacker.getPower().getValue() <= blocker.getToughness().getValue()
-                            && attacker.getToughness().getValue() <= blocker.getPower().getValue()) {
-                        safeToAttack = false;
-                    }
-                    if (attacker.getToughness().getValue() == blocker.getPower().getValue()
-                            && attacker.getPower().getValue() == blocker.getToughness().getValue()) {
-                        if (attackerValue > blockerValue
-                                || blocker.getAbilities().containsKey(FirstStrikeAbility.getInstance().getId())
-                                || blocker.getAbilities().containsKey(DoubleStrikeAbility.getInstance().getId())
-                                || blocker.getAbilities().contains(new ExaltedAbility())
-                                || blocker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())
-                                || blocker.getAbilities().containsKey(IndestructibleAbility.getInstance().getId())
-                                || !attacker.getAbilities().containsKey(FirstStrikeAbility.getInstance().getId())
-                                || !attacker.getAbilities().containsKey(DoubleStrikeAbility.getInstance().getId())
-                                || !attacker.getAbilities().contains(new ExaltedAbility())) {
+                // The AI will now attack more sanely.  Simple, but good enough for now.
+                // The sim minmax does not work at the moment.
+                boolean safeToAttack;
+                CombatEvaluator eval = new CombatEvaluator();
+
+                for (Permanent attacker : attackersList) {
+                    safeToAttack = true;
+                    int attackerValue = eval.evaluate(attacker, game);
+                    for (Permanent blocker : possibleBlockers) {
+                        int blockerValue = eval.evaluate(blocker, game);
+
+                        // blocker can kill attacker
+                        if (attacker.getPower().getValue() <= blocker.getToughness().getValue()
+                                && attacker.getToughness().getValue() <= blocker.getPower().getValue()) {
                             safeToAttack = false;
                         }
+
+                        // kill each other
+                        if (attacker.getToughness().getValue() == blocker.getPower().getValue()
+                                && attacker.getPower().getValue() == blocker.getToughness().getValue()) {
+                            if (attackerValue > blockerValue
+                                    || blocker.getAbilities().containsKey(FirstStrikeAbility.getInstance().getId())
+                                    || blocker.getAbilities().containsKey(DoubleStrikeAbility.getInstance().getId())
+                                    || blocker.getAbilities().contains(new ExaltedAbility())
+                                    || blocker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())
+                                    || blocker.getAbilities().containsKey(IndestructibleAbility.getInstance().getId())
+                                    || !attacker.getAbilities().containsKey(FirstStrikeAbility.getInstance().getId())
+                                    || !attacker.getAbilities().containsKey(DoubleStrikeAbility.getInstance().getId())
+                                    || !attacker.getAbilities().contains(new ExaltedAbility())) {
+                                safeToAttack = false;
+                            }
+                        }
+
+                        // attacker can kill by deathtouch
+                        if (attacker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())
+                                || attacker.getAbilities().containsKey(IndestructibleAbility.getInstance().getId())) {
+                            safeToAttack = true;
+                        }
+
+                        // attacker can ignore blocker
+                        if (attacker.getAbilities().containsKey(FlyingAbility.getInstance().getId())
+                                && !blocker.getAbilities().containsKey(FlyingAbility.getInstance().getId())
+                                && !blocker.getAbilities().containsKey(ReachAbility.getInstance().getId())) {
+                            safeToAttack = true;
+                        }
                     }
-                    if (attacker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())
-                            || attacker.getAbilities().containsKey(IndestructibleAbility.getInstance().getId())) {
-                        safeToAttack = true;
+
+                    // 0 damage
+                    if (attacker.getPower().getValue() == 0) {
+                        safeToAttack = false;
                     }
-                    if (attacker.getAbilities().containsKey(FlyingAbility.getInstance().getId())
-                            && !blocker.getAbilities().containsKey(FlyingAbility.getInstance().getId())
-                            && !blocker.getAbilities().containsKey(ReachAbility.getInstance().getId())) {
-                        safeToAttack = true;
+
+                    if (safeToAttack) {
+                        // undo has to be possible e.g. if not able to pay a attack fee (e.g. Ghostly Prison)
+                        attackingPlayer.declareAttacker(attacker.getId(), defenderId, game, true);
                     }
-                }
-                if (attacker.getPower().getValue() == 0) {
-                    safeToAttack = false;
-                }
-                if (safeToAttack) {
-                    // undo has to be possible e.g. if not able to pay a attack fee (e.g. Ghostly Prison)
-                    attackingPlayer.declareAttacker(attacker.getId(), defenderId, game, true);
                 }
             }
         }

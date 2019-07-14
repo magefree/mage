@@ -1,6 +1,5 @@
 package org.mage.test.multiplayer;
 
-import java.io.FileNotFoundException;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
@@ -9,13 +8,14 @@ import mage.counters.CounterType;
 import mage.game.FreeForAll;
 import mage.game.Game;
 import mage.game.GameException;
-import mage.game.mulligan.VancouverMulligan;
+import mage.game.mulligan.MulliganType;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestMultiPlayerBase;
 
+import java.io.FileNotFoundException;
+
 /**
- *
  * @author LevelX2
  */
 public class PlayerLeftGameRangeAllTest extends CardTestMultiPlayerBase {
@@ -23,7 +23,7 @@ public class PlayerLeftGameRangeAllTest extends CardTestMultiPlayerBase {
     @Override
     protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
         // Start Life = 2
-        Game game = new FreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, new VancouverMulligan(0), 2);
+        Game game = new FreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 2);
         // Player order: A -> D -> C -> B
         playerA = createPlayer(game, playerA, "PlayerA");
         playerB = createPlayer(game, playerB, "PlayerB");
@@ -129,7 +129,7 @@ public class PlayerLeftGameRangeAllTest extends CardTestMultiPlayerBase {
      * player concedes the game and removes the Planeswalker. Once it becomes an
      * opponent of the original player's turn and that opponent plays a spell,
      * Xmage throws an error and rollsback the turn.
-     *
+     * <p>
      * I don't have the actual error report on my due to negligence, but what I
      * can recollect is that the error message was along the lines of "The
      * emblem cannot find the original source. This turn will be rolled back".
@@ -283,7 +283,7 @@ public class PlayerLeftGameRangeAllTest extends CardTestMultiPlayerBase {
     }
 
     /**
-     *  * 11/4/2015: In a multiplayer game, if Grasp of Fate's owner leaves the
+     * * 11/4/2015: In a multiplayer game, if Grasp of Fate's owner leaves the
      * game, the exiled cards will return to the battlefield. Because the
      * one-shot effect that returns the cards isn't an ability that goes on the
      * stack, it won't cease to exist along with the leaving player's spells and

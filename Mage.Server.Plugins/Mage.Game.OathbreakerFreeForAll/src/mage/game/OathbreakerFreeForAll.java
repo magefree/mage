@@ -33,6 +33,7 @@ public class OathbreakerFreeForAll extends GameCommanderImpl {
 
     public OathbreakerFreeForAll(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
         super(attackOption, range, mulligan, startLife);
+        this.startingPlayerSkipsDraw = false;
     }
 
     public OathbreakerFreeForAll(final OathbreakerFreeForAll game) {
@@ -40,13 +41,6 @@ public class OathbreakerFreeForAll extends GameCommanderImpl {
         this.numPlayers = game.numPlayers;
         game.playerSignatureSpells.forEach((key, value) -> this.playerSignatureSpells.put(key, new HashSet<>(value)));
         game.playerOathbreakers.forEach((key, value) -> this.playerOathbreakers.put(key, new HashSet<>(value)));
-    }
-
-    @Override
-    protected void init(UUID choosingPlayerId) {
-        // init base commander game
-        startingPlayerSkipsDraw = false;
-        super.init(choosingPlayerId);
     }
 
     private String getCommanderTypeName(Card commander) {

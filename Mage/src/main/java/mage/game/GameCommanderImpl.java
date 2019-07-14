@@ -23,8 +23,11 @@ public abstract class GameCommanderImpl extends GameImpl {
 
     // private final Map<UUID, Cards> mulliganedCards = new HashMap<>();
     protected boolean checkCommanderDamage = true;
-    protected boolean alsoHand;    // replace commander going to hand
-    protected boolean alsoLibrary; // replace commander going to library
+
+    // old commander's versions (before 2017) restrict return from hand or library to command zone
+    protected boolean alsoHand = true;    // replace commander going to hand
+    protected boolean alsoLibrary = true; // replace commander going to library
+
     protected boolean startingPlayerSkipsDraw = true;
 
     public GameCommanderImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {

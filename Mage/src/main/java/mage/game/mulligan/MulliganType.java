@@ -22,11 +22,11 @@ public enum MulliganType {
                 return new ParisMulligan(freeMulligans);
             case CANADIAN_HIGHLANDER:
                 return new CanadianHighlanderMulligan(freeMulligans);
-            case LONDON:
-                return new LondonMulligan(freeMulligans);
-            default:
             case VANCOUVER:
                 return new VancouverMulligan(freeMulligans);
+            default:
+            case LONDON:
+                return new LondonMulligan(freeMulligans);
         }
     }
 
@@ -47,7 +47,6 @@ public enum MulliganType {
         }
         return res;
     }
-
 
     public MulliganType orDefault(MulliganType defaultMulligan) {
         if (this == GAME_DEFAULT) {

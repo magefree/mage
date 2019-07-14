@@ -1,7 +1,5 @@
-
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -16,6 +14,8 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterNonlandCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -26,8 +26,9 @@ import mage.target.common.TargetCardInExile;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class KnowledgePool extends CardImpl {
@@ -148,13 +149,15 @@ class KnowledgePoolEffect2 extends OneShotEffect {
             if (controller.moveCardsToExile(spell, source, game, true, exileZoneId, sourceObject.getIdName())) {
                 Player player = game.getPlayer(spell.getControllerId());
                 if (player != null && player.chooseUse(Outcome.PlayForFree, "Cast another nonland card exiled with " + sourceObject.getLogName() + " without paying that card's mana cost?", source, game)) {
-                    TargetCardInExile target = new TargetCardInExile(filter, source.getSourceId());
-                    while (player.choose(Outcome.PlayForFree, game.getExile().getExileZone(exileZoneId), target, game)) {
+                    FilterNonlandCard realFilter = filter.copy();
+                    realFilter.add(Predicates.not(new CardIdPredicate(spell.getSourceId())));
+                    TargetCardInExile target = new TargetCardInExile(0, 1, realFilter, source.getSourceId());
+                    target.setNotTarget(true);
+                    if (player.choose(Outcome.PlayForFree, game.getExile().getExileZone(exileZoneId), target, game)) {
                         Card card = game.getCard(target.getFirstTarget());
                         if (card != null && !card.getId().equals(spell.getSourceId())) {
-                            return player.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                            player.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
                         }
-                        target.clearChosen();
                     }
                 }
                 return true;

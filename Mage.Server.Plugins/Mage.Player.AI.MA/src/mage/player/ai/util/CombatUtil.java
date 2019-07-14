@@ -32,7 +32,7 @@ public final class CombatUtil {
 
     public static List<Permanent> canKillOpponent(Game game, List<Permanent> attackersList, List<Permanent> blockersList,
                                                   Player defender) {
-        List<Permanent> blockableAttackers = new ArrayList<>(blockersList);
+        List<Permanent> blockableAttackers = new ArrayList<>(attackersList);
         List<Permanent> unblockableAttackers = new ArrayList<>();
         for (Permanent attacker : attackersList) {
             if (!canBeBlocked(game, attacker, blockersList)) {
@@ -292,7 +292,7 @@ public final class CombatUtil {
         }
         return canBlock;
     }
-    
+
     public static CombatInfo blockWithGoodTrade2(Game game, List<Permanent> attackers, List<Permanent> blockers) {
 
         UUID attackerId = game.getCombat().getAttackingPlayerId();
@@ -319,7 +319,7 @@ public final class CombatUtil {
 
         return combatInfo;
     }
-    
+
     private static List<Permanent> getBlockersThatWillSurvive2(Game game, UUID attackerId, UUID defenderId, Permanent attacker, List<Permanent> possibleBlockers) {
         List<Permanent> blockers = new ArrayList<>();
         for (Permanent blocker : possibleBlockers) {
@@ -335,9 +335,9 @@ public final class CombatUtil {
         }
         return blockers;
     }
-    
+
     public static SurviveInfo willItSurvive2(Game game, UUID attackingPlayerId, UUID defendingPlayerId, Permanent attacker, Permanent blocker) {
-        
+
         Game sim = game.copy();
 
         Combat combat = sim.getCombat();
@@ -347,7 +347,7 @@ public final class CombatUtil {
         if (blocker == null || attacker == null || sim.getPlayer(defendingPlayerId) == null) {
             return null;
         }
-        
+
         if (attacker.getPower().getValue() >= blocker.getToughness().getValue()) {
             sim.getBattlefield().removePermanent(blocker.getId());
         }

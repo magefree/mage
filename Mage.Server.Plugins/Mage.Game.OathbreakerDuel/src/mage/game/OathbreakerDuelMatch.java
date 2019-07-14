@@ -16,13 +16,10 @@ public class OathbreakerDuelMatch extends MatchImpl {
     @Override
     public void startGame() throws GameException {
         int startLife = 20;
-        boolean alsoHand = true;
         Mulligan mulligan = options.getMulliganType().getMulligan(options.getFreeMulligans());
         OathbreakerDuel game = new OathbreakerDuel(options.getAttackOption(), options.getRange(), mulligan, startLife);
         game.setCheckCommanderDamage(false);
         game.setStartMessage(this.createGameStartMessage());
-        game.setAlsoHand(alsoHand);
-        game.setAlsoLibrary(true);
         initGame(game);
         games.add(game);
     }

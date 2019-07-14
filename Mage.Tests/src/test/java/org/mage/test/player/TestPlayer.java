@@ -72,7 +72,9 @@ public class TestPlayer implements Player {
 
     private static final Logger logger = Logger.getLogger(TestPlayer.class);
 
-    public static final String TARGET_SKIP = "[skip]";
+    public static final String TARGET_SKIP = "[target_skip]";
+    public static final String BLOCK_SKIP = "[block_skip]";
+    public static final String ATTACK_SKIP = "[attack_skip]";
 
     private int maxCallsWithoutAction = 100;
     private int foundNoAction = 0;
@@ -574,7 +576,8 @@ public class TestPlayer implements Player {
                         if (permanent.getName().equals(groups[0])) {
                             Counter counter = new Counter(groups[1], Integer.parseInt(groups[2]));
                             permanent.addCounters(counter, null, game);
-                            break;
+                            actions.remove(action);
+                            return true;
                         }
                     }
                 } else if (action.getAction().startsWith("waitStackResolved")) {
@@ -901,8 +904,8 @@ public class TestPlayer implements Player {
                 .map(a -> (
                         a.getZone() + " -> "
                                 + a.getSourceObject(game).getIdName() + " -> "
-                                + (a.getRule().length() > 0
-                                ? a.getRule().substring(0, Math.min(20, a.getRule().length()) - 1)
+                                + (a.toString().length() > 0
+                                ? a.toString().substring(0, Math.min(20, a.toString().length()) - 1)
                                 : a.getClass().getSimpleName())
                                 + "..."
                 ))
@@ -1242,6 +1245,14 @@ public class TestPlayer implements Player {
                 mustAttackByAction = true;
                 String command = action.getAction();
                 command = command.substring(command.indexOf("attack:") + 7);
+
+                // skip attack
+                if (command.startsWith(ATTACK_SKIP)) {
+                    it.remove();
+                    madeAttackByAction = true;
+                    break;
+                }
+
                 String[] groups = command.split("\\$");
                 for (int i = 1; i < groups.length; i++) {
                     String group = groups[i];
@@ -1291,6 +1302,11 @@ public class TestPlayer implements Player {
         if (mustAttackByAction && !madeAttackByAction) {
             this.chooseStrictModeFailed(game, "select attackers must use attack command but don't");
         }
+
+        // AI play if no actions available
+        if (!mustAttackByAction && this.AIPlayer) {
+            this.computerPlayer.selectAttackers(game, attackingPlayerId);
+        }
     }
 
     @Override
@@ -1306,10 +1322,19 @@ public class TestPlayer implements Player {
         UUID opponentId = game.getOpponents(computerPlayer.getId()).iterator().next();
         // Map of Blocker reference -> list of creatures blocked
         Map<MageObjectReference, List<MageObjectReference>> blockedCreaturesByCreature = new HashMap<>();
+        boolean mustBlockByAction = false;
         for (PlayerAction action : tempActions) {
             if (action.getTurnNum() == game.getTurnNum() && action.getAction().startsWith("block:")) {
+                mustBlockByAction = true;
                 String command = action.getAction();
                 command = command.substring(command.indexOf("block:") + 6);
+
+                // skip block
+                if (command.startsWith(BLOCK_SKIP)) {
+                    actions.remove(action);
+                    break;
+                }
+
                 String[] groups = command.split("\\$");
                 String blockerName = groups[0];
                 String attackerName = groups[1];
@@ -1324,6 +1349,11 @@ public class TestPlayer implements Player {
             }
         }
         checkMultipleBlockers(game, blockedCreaturesByCreature);
+
+        // AI play if no actions available
+        if (!mustBlockByAction && this.AIPlayer) {
+            this.computerPlayer.selectBlockers(game, defendingPlayerId);
+        }
     }
 
     // Checks if a creature can block at least one more creature

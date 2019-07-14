@@ -1,17 +1,23 @@
 package mage.cards.t;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.WatcherScope;
+import mage.constants.Zone;
 import mage.filter.common.FilterInstantOrSorcerySpell;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
+import mage.players.Player;
 import mage.watchers.Watcher;
 
 import java.util.HashMap;
@@ -28,9 +34,7 @@ public final class ThousandYearStorm extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}{R}");
 
         // Whenever you cast an instant or sorcery spell, copy it for each other instant and sorcery spell you've cast before it this turn. You may choose new targets for the copies.
-        this.addAbility(new SpellCastControllerTriggeredAbility(
-                new ThousandYearStormEffect(), new FilterInstantOrSorcerySpell(), false, true
-        ), new ThousandYearWatcher());
+        this.addAbility(new ThousandYearStormAbility());
     }
 
     public ThousandYearStorm(final ThousandYearStorm card) {
@@ -43,11 +47,48 @@ public final class ThousandYearStorm extends CardImpl {
     }
 }
 
+class ThousandYearStormAbility extends SpellCastControllerTriggeredAbility {
+
+    String stormCountInfo = null;
+
+    public ThousandYearStormAbility() {
+        super(Zone.BATTLEFIELD, new ThousandYearStormEffect(), new FilterInstantOrSorcerySpell(), false, true);
+        this.addHint(new ValueHint("You've cast instant and sorcery this turn", ThousandYearSpellsCastThatTurnValue.instance));
+        this.addWatcher(new ThousandYearWatcher());
+    }
+
+    public ThousandYearStormAbility(final ThousandYearStormAbility ability) {
+        super(ability);
+        this.stormCountInfo = ability.stormCountInfo;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        // save storm count info, real count will be calculated to stack ability in resolve effect only
+        if (super.checkTrigger(event, game)) {
+            int stormCount = ThousandYearSpellsCastThatTurnValue.instance.calculate(game, this, null);
+            stormCountInfo = " (<b>storm count: " + Math.max(0, stormCount - 1) + "</b>) ";
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever you cast an instant or sorcery spell, copy it for each other instant and sorcery spell you've cast before it this turn"
+                + (stormCountInfo != null ? stormCountInfo : "") + ". You may choose new targets for the copies.";
+    }
+
+    @Override
+    public ThousandYearStormAbility copy() {
+        return new ThousandYearStormAbility(this);
+    }
+}
+
 class ThousandYearStormEffect extends OneShotEffect {
 
     public ThousandYearStormEffect() {
         super(Outcome.Benefit);
-        this.staticText = "copy it for each other instant and sorcery spell you've cast before it this turn. You may choose new targets for the copies";
     }
 
     public ThousandYearStormEffect(final ThousandYearStormEffect effect) {
@@ -62,7 +103,8 @@ class ThousandYearStormEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getSpellOrLKIStack(getTargetPointer().getFirst(game, source));
-        if (spell != null) {
+        Player controller = spell != null ? game.getPlayer(spell.getControllerId()) : null;
+        if (spell != null && controller != null) {
             ThousandYearWatcher watcher = game.getState().getWatcher(ThousandYearWatcher.class);
             if (watcher != null) {
                 String stateSearchId = spell.getId().toString() + source.getSourceId().toString();
@@ -80,6 +122,11 @@ class ThousandYearStormEffect extends OneShotEffect {
             }
         }
         return false;
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        return "copy it for each other instant and sorcery spell you've cast before it this turn. You may choose new targets for the copies";
     }
 }
 
@@ -130,4 +177,33 @@ class ThousandYearWatcher extends Watcher {
         return new ThousandYearWatcher(this);
     }
 
+}
+
+enum ThousandYearSpellsCastThatTurnValue implements DynamicValue {
+
+    instance;
+
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        ThousandYearWatcher watcher = game.getState().getWatcher(ThousandYearWatcher.class);
+        if (watcher == null) {
+            return 0;
+        }
+        return watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(sourceAbility.getControllerId());
+    }
+
+    @Override
+    public ThousandYearSpellsCastThatTurnValue copy() {
+        return instance;
+    }
+
+    @Override
+    public String toString() {
+        return "X";
+    }
+
+    @Override
+    public String getMessage() {
+        return "You cast an instant or sorcery spell in this turn";
+    }
 }

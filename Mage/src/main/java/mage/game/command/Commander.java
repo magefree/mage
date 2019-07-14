@@ -12,6 +12,7 @@ import mage.abilities.text.TextPart;
 import mage.cards.Card;
 import mage.cards.FrameStyle;
 import mage.constants.CardType;
+import mage.constants.SpellAbilityType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
@@ -19,7 +20,6 @@ import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
 
-import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -36,7 +36,17 @@ public class Commander implements CommandObject {
 
         // replace spell ability by commander cast spell (to cast from command zone)
         if (card.getSpellAbility() != null) {
-            abilities.add(new CastCommanderAbility(card));
+            abilities.add(new CastCommanderAbility(card, card.getSpellAbility()));
+        }
+
+        // replace alternative spell abilities by commander cast spell (to cast from command zone)
+        for (Ability ability : card.getAbilities()) {
+            if (ability instanceof SpellAbility) {
+                SpellAbility spellAbility = (SpellAbility) ability;
+                if (spellAbility.getSpellAbilityType() == SpellAbilityType.BASE_ALTERNATE) {
+                    abilities.add(new CastCommanderAbility(card, spellAbility));
+                }
+            }
         }
 
         // replace play land with commander play land (to play from command zone)

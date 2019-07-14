@@ -20,6 +20,9 @@ import java.util.UUID;
     command zone costs an additional {2} for each previous time the player casting it has cast it from
     the command zone that game. This additional cost is informally known as the “commander tax.”
      */
+
+// cast from hand like Remand do not increase commander tax
+
 public class CommanderCostModification extends CostModificationEffectImpl {
 
     private final UUID commanderId;
