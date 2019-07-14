@@ -78,7 +78,7 @@ enum ThunderkinAwakenerPredicate implements ObjectSourcePlayerPredicate<ObjectSo
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(input.getSourceId());
         return sourcePermanent != null
-                & input.getObject().getToughness().getValue() < sourcePermanent.getToughness().getValue();
+                && input.getObject().getToughness().getValue() < sourcePermanent.getToughness().getValue();
     }
 }
 
