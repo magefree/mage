@@ -198,7 +198,7 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
     public void doApply() {
         if (getSelectedPacks().size() < 2 && isRandomDraft) {
             JOptionPane.showMessageDialog(this, "At least 2 sets must be selected", "Error", JOptionPane.ERROR_MESSAGE);
-        } else if (getSelectedPacks().size() < 1 && isRichManDraft) {
+        } else if (getSelectedPacks().isEmpty() && isRichManDraft) {
             JOptionPane.showMessageDialog(this, "At least 1 set must be selected", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             this.setVisible(false);

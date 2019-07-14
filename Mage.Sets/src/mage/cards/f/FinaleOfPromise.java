@@ -120,7 +120,7 @@ class FinaleOfPromiseEffect extends OneShotEffect {
         }
 
         // ask to cast order
-        if (cardsToCast.size() > 0) {
+        if (!cardsToCast.isEmpty()) {
             String cardsOrder = cardsToCast.stream()
                     .map(game::getCard)
                     .filter(Objects::nonNull)

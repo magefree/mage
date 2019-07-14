@@ -134,11 +134,11 @@ public class Oathbreaker extends Vintage {
             }
 
             // check size (1+1 or 2+2 allows)
-            if (commanderNames.size() == 0 || commanderNames.size() > 2) {
+            if (commanderNames.isEmpty() || commanderNames.size() > 2) {
                 invalid.put("Oathbreaker", "Sideboard must contains 1 or 2 oathbreakers, but found: " + commanderNames.size());
                 valid = false;
             }
-            if (signatureSpells.size() == 0 || signatureSpells.size() > 2) {
+            if (signatureSpells.isEmpty() || signatureSpells.size() > 2) {
                 invalid.put("Signature Spell", "Sideboard must contains 1 or 2 signature spells, but found: " + signatureSpells.size());
                 valid = false;
             }

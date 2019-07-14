@@ -77,7 +77,7 @@ class ElementalAppealEffect extends OneShotEffect {
                 for (UUID tokenId : effect.getLastAddedTokenIds()) {
                     predList.add(new CardIdPredicate(tokenId));
                 }
-                if (predList.size() > 0) {
+                if (!predList.isEmpty()) {
                     FilterCreaturePermanent filter = new FilterCreaturePermanent();
                     filter.add(Predicates.or(predList));
                     game.addEffect(new BoostAllEffect(7, 0, Duration.EndOfTurn, filter, false), source);

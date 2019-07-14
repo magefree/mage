@@ -115,7 +115,7 @@ public class Commander extends Constructed {
             }
         }
 
-        if (deck.getSideboard().size() < 1 || deck.getSideboard().size() > 2) {
+        if (deck.getSideboard().isEmpty() || deck.getSideboard().size() > 2) {
             if ((deck.getSideboard().size() > 1 && !partnerAllowed)) {
                 invalid.put("Commander", "You may only have one commander");
             }

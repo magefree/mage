@@ -1960,7 +1960,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         final int DECK_SIZE = deckMinSize != 0 ? deckMinSize : 40;
 
         List<Card> sortedCards = new ArrayList<>(cardPool);
-        if (sortedCards.size() > 0) {
+        if (!sortedCards.isEmpty()) {
             while (deck.getCards().size() < DECK_SIZE) {
                 deck.getCards().add(sortedCards.get(RandomUtil.nextInt(sortedCards.size())));
             }

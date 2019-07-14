@@ -75,7 +75,7 @@ class GeodeGolemEffect extends OneShotEffect {
                 }
             }
 
-            if (possibleCommanders.size() == 0) {
+            if (possibleCommanders.isEmpty()) {
                 return false;
             }
 

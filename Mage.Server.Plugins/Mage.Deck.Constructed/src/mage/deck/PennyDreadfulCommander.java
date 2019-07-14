@@ -79,7 +79,7 @@ public class PennyDreadfulCommander extends Constructed {
             }
         }
 
-        if (deck.getSideboard().size() < 1 || deck.getSideboard().size() > 2) {
+        if (deck.getSideboard().isEmpty() || deck.getSideboard().size() > 2) {
             invalid.put("Commander", "Sideboard must contain only the commander(s)");
             valid = false;
         } else {

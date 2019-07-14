@@ -140,7 +140,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private boolean isCardsPlayable(Collection<CardView> cards, GameView gameView, Set<UUID> possibleTargets) {
         if (cards != null) {
             // can play
-            if (gameView != null && gameView.getCanPlayObjects() != null && gameView.getCanPlayObjects().size() > 0) {
+            if (gameView != null && gameView.getCanPlayObjects() != null && !gameView.getCanPlayObjects().isEmpty()) {
                 for (CardView card : cards) {
                     if (gameView.getCanPlayObjects().contains(card.getId())) {
                         return true;
@@ -148,7 +148,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                 }
             }
             // can select
-            if (possibleTargets != null && possibleTargets.size() > 0) {
+            if (possibleTargets != null && !possibleTargets.isEmpty()) {
                 for (CardView card : cards) {
                     if (possibleTargets.contains(card.getId())) {
                         return true;

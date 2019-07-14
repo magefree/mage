@@ -68,7 +68,7 @@ class AncestralKnowledgeEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 10));
-            if (cards.size() > 0) {
+            if (!cards.isEmpty()) {
                 controller.lookAtCards(source, null, cards, game);
                 TargetCard target = new TargetCard(0, Integer.MAX_VALUE, Zone.LIBRARY, new FilterCard("cards to exile"));
                 controller.choose(Outcome.Exile, cards, target, game);

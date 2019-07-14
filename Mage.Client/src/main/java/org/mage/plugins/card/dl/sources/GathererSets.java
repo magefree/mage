@@ -238,16 +238,16 @@ public class GathererSets implements Iterable<DownloadJob> {
                 // 2. missing rarity icon:
                 // WARNING, need too much time (60+ secs), only for debug mode
                 ///*
-                if ((set.getCardsByRarity(Rarity.COMMON).size() > 0) && !res.haveCommon) {
+                if (!set.getCardsByRarity(Rarity.COMMON).isEmpty() && !res.haveCommon) {
                     logger.error(String.format("Symbols: set have common cards, but don't download icon: %s (%s)", set.getCode(), set.getName()));
                 }
-                if ((set.getCardsByRarity(Rarity.UNCOMMON).size() > 0) && !res.haveUncommon) {
+                if (!set.getCardsByRarity(Rarity.UNCOMMON).isEmpty() && !res.haveUncommon) {
                     logger.error(String.format("Symbols: set have uncommon cards, but don't download icon: %s (%s)", set.getCode(), set.getName()));
                 }
-                if ((set.getCardsByRarity(Rarity.RARE).size() > 0) && !res.haveRare) {
+                if (!set.getCardsByRarity(Rarity.RARE).isEmpty() && !res.haveRare) {
                     logger.error(String.format("Symbols: set have rare cards, but don't download icon: %s (%s)", set.getCode(), set.getName()));
                 }
-                if ((set.getCardsByRarity(Rarity.MYTHIC).size() > 0) && !res.haveMyth) {
+                if (!set.getCardsByRarity(Rarity.MYTHIC).isEmpty() && !res.haveMyth) {
                     logger.error(String.format("Symbols: set have mythic cards, but don't download icon: %s (%s)", set.getCode(), set.getName()));
                 }
                 //*/

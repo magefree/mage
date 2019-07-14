@@ -125,7 +125,7 @@ class CurseOfThePiercedHeartEffect extends OneShotEffect {
         if (opponent == null) {
             return false;
         }
-        if (game.getBattlefield().getAllActivePermanents(new FilterPlaneswalkerPermanent(), opponentId, game).size() > 0) {
+        if (!game.getBattlefield().getAllActivePermanents(new FilterPlaneswalkerPermanent(), opponentId, game).isEmpty()) {
             if (controller.chooseUse(Outcome.Damage, "Redirect to a planeswalker controlled by " + opponent.getLogName() + "?", source, game)) {
                 FilterPlaneswalkerPermanent filter = new FilterPlaneswalkerPermanent("a planeswalker controlled by " + opponent.getLogName());
                 filter.add(new ControllerIdPredicate(opponentId));

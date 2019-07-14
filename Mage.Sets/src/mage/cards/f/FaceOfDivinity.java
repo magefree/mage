@@ -70,7 +70,7 @@ enum FaceOfDivinityCondition implements Condition {
         Permanent currentAura = game.getPermanent(source.getSourceId());
         if (currentAura != null && currentAura.getAttachedTo() != null) {
             Permanent permanent = game.getPermanent(currentAura.getAttachedTo());
-            if (permanent != null && permanent.getAttachments().size() > 0) {
+            if (permanent != null && !permanent.getAttachments().isEmpty()) {
                 for (UUID id : permanent.getAttachments()) {
                     Permanent otherAura = game.getPermanent(id);
                     if (otherAura != null && !otherAura.getId().equals(currentAura.getId())

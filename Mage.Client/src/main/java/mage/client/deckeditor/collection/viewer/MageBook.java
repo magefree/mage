@@ -352,7 +352,7 @@ public class MageBook extends JComponent {
         List<Plane> planes = getPlanes(currentPage, currentSet, numTokensEmblems);
         int numPlanes = 0;
 
-        if (planes != null && planes.size() > 0) {
+        if (!planes.isEmpty()) {
             int size = planes.size();
             numPlanes = size;
             Rectangle rectangle = new Rectangle();
@@ -523,7 +523,7 @@ public class MageBook extends JComponent {
         // second run for empty numbers
         int countHave = haveNumbers.size();
         int countNotHave = 0;
-        if (cards.size() > 0) {
+        if (!cards.isEmpty()) {
             for (int i = startNumber; i <= endNumber; i++) {
                 if (!haveNumbers.contains(i)) {
                     countNotHave++;
@@ -593,8 +593,8 @@ public class MageBook extends JComponent {
     }
 
     private List<Emblem> getEmblems(int page, String set, int numTokensEmblems) {
-        ArrayList<CardDownloadData> allEmblems = getTokenCardUrls();
-        ArrayList<Emblem> emblems = new ArrayList<>();
+        List<CardDownloadData> allEmblems = getTokenCardUrls();
+        List<Emblem> emblems = new ArrayList<>();
 
         for (CardDownloadData emblem : allEmblems) {
             if (emblem.getSet().equals(set)) {
@@ -650,8 +650,8 @@ public class MageBook extends JComponent {
     }
 
     private List<Plane> getPlanes(int page, String set, int numTokensEmblems) {
-        ArrayList<CardDownloadData> allPlanes = getTokenCardUrls();
-        ArrayList<Plane> planes = new ArrayList<>();
+        List<CardDownloadData> allPlanes = getTokenCardUrls();
+        List<Plane> planes = new ArrayList<>();
 
         for (CardDownloadData plane : allPlanes) {
             if (plane.getSet().equals(set)) {

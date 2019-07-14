@@ -69,8 +69,8 @@ class FloodOfTearsEffect extends OneShotEffect {
                 StaticFilters.FILTER_PERMANENT_NON_LAND, source.getControllerId(), source.getSourceId(), game
         );
         Cards cards = new CardsImpl();
-        if (nonlands.size() > 0) {
-            nonlands.stream().forEach(permanent -> cards.add(permanent));
+        if (!nonlands.isEmpty()) {
+            nonlands.forEach(cards::add);
             boolean putIntoPlay = nonlands.stream()
                     .filter(permanent -> permanent.isControlledBy(player.getId()))
                     .filter(permanent -> !(permanent instanceof Token))

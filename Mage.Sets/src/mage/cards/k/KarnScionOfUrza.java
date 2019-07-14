@@ -106,7 +106,7 @@ class KarnPlus1Effect extends OneShotEffect {
                     cards.remove(cardToHand);
                 }
 
-                if (cards.size() > 0) {
+                if (!cards.isEmpty()) {
                     controller.moveCards(cards, Zone.EXILED, source, game);
                     for (Card c : cards.getCards(game)) {
                         c.addCounters(CounterType.SILVER.createInstance(1), source, game);
@@ -156,7 +156,6 @@ class KarnMinus1Effect extends OneShotEffect {
                     return true;
                 }
 
-                Set<Card> filtered = new HashSet<Card>();
                 Cards filteredCards = new CardsImpl();
 
                 for (Card exileCard : exile) {

@@ -1212,7 +1212,7 @@ public final class GamePanel extends javax.swing.JPanel {
             needPlayable = new HashSet<>();
         }
 
-        if (needChoosen.size() == 0 && needSelectable.size() == 0 && needPlayable.size() == 0) {
+        if (needChoosen.isEmpty() && needSelectable.isEmpty() && needPlayable.isEmpty()) {
             return;
         }
 

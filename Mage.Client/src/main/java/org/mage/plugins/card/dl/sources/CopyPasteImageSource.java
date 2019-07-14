@@ -145,7 +145,7 @@ public enum CopyPasteImageSource implements CardImageSource {
         final CopyPasteImageSourceDialog dialog = new CopyPasteImageSourceDialog();
         dialog.pack();
         int count = 0;
-        if (viewMissingCards && missingCards.size() > 0 && singleLinks.size() == 0) {
+        if (viewMissingCards && !missingCards.isEmpty() && singleLinks.isEmpty()) {
             viewMissingCards = false;
             String displayMissingCardsStr = "Up to the first 20 cards are:\n";
             String missingCardsStr = "";
@@ -228,7 +228,7 @@ public enum CopyPasteImageSource implements CardImageSource {
     public ArrayList<String> getSupportedSets() {
         setupLinks();
         ArrayList<String> supportedSetsCopy = new ArrayList<>();
-        if (supportedSets.size() == 0) {
+        if (supportedSets.isEmpty()) {
             for (String setCode : Sets.getInstance().keySet()) {
                 supportedSets.add(setCode);
             }
