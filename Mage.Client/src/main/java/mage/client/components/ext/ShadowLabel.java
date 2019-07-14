@@ -60,6 +60,8 @@ public class ShadowLabel extends JLabel {
 		this.invertColors = invertColors;
 	}
 
+
+    @Override
 	public void setText(String text) {
         this.text = text;
         repaint();

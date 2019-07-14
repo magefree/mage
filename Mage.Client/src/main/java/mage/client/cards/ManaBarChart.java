@@ -9,6 +9,7 @@ import java.awt.Rectangle;
 import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,12 +17,12 @@ import javax.swing.JComponent;
 
 public class ManaBarChart extends JComponent {
 
-    HashMap<String, Integer> pips_at_cmcs = new HashMap<String, Integer>();
+    Map<String, Integer> pips_at_cmcs = new HashMap<String, Integer>();
 
     ManaBarChart() {
     }
 
-    ManaBarChart(HashMap<String, Integer> pips_at_cmcs) {
+    ManaBarChart(Map<String, Integer> pips_at_cmcs) {
         this.pips_at_cmcs = pips_at_cmcs;
     }
 
@@ -35,6 +36,7 @@ public class ManaBarChart extends JComponent {
         return preferred;
     }
 
+    @Override
     public void paint(Graphics g) {
         drawBar((Graphics2D) g, getBounds());
     }

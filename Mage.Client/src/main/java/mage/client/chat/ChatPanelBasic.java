@@ -374,6 +374,7 @@ public class ChatPanelBasic extends javax.swing.JPanel {
         txtMessage.setName(""); // NOI18N
         txtMessage.setPreferredSize(new java.awt.Dimension(6, 70));
         txtMessage.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtMessageKeyTyped(evt);
             }

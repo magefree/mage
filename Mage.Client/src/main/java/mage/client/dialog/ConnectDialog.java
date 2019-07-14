@@ -338,6 +338,8 @@ public class ConnectDialog extends MageDialog {
         );
 
         txtPort.addKeyListener(new java.awt.event.KeyAdapter() {
+
+            @Override
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 ConnectDialog.this.keyTyped(evt);
             }

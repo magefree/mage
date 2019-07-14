@@ -60,6 +60,7 @@ public class ManaPieChart extends JComponent {
         return preferred;
     }
 
+    @Override
     public void paint(Graphics g) {
         drawPie((Graphics2D) g, getBounds(), slices.toArray(new Slice[slices.size()]));
     }

@@ -952,13 +952,16 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             searchByTextField = new JTextField();
             searchByTextField.setToolTipText("Searches for card names, types, rarity, casting cost and rules text.  NB: Mana symbols are written like {W},{U},{C} etc");
             searchByTextField.addKeyListener(new KeyAdapter() {
+                @Override
                 public void keyReleased(KeyEvent e) {
                     reselectBy();
                 }
 
+                @Override
                 public void keyTyped(KeyEvent e) {
                 }
 
+                @Override
                 public void keyPressed(KeyEvent e) {
                 }
             });

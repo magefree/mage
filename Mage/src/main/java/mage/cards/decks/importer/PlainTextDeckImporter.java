@@ -59,6 +59,8 @@ public abstract class PlainTextDeckImporter extends DeckImporter {
         return deckList;
     }
 
+
+    @Override
     public DeckCardLists importDeck(String file) {
         return importDeck(file, null);
     }

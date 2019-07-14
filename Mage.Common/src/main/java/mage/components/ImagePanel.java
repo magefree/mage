@@ -56,6 +56,8 @@ public class ImagePanel extends JPanel {
         super.add(component, constraints);
     }
 
+
+    @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 

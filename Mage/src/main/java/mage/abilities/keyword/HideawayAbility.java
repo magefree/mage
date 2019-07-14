@@ -39,8 +39,6 @@ import java.util.UUID;
  */
 public class HideawayAbility extends StaticAbility {
 
-    private final String name;
-
     public HideawayAbility() {
         this("land");
     }
@@ -126,7 +124,7 @@ class HideawayLookAtFaceDownCardEffect extends AsThoughEffectImpl {
         staticText = "You may look at cards exiled with {this}";
     }
 
-    public HideawayLookAtFaceDownCardEffect(final HideawayLookAtFaceDownCardEffect effect) {
+    private HideawayLookAtFaceDownCardEffect(final HideawayLookAtFaceDownCardEffect effect) {
         super(effect);
     }
 
