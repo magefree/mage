@@ -155,7 +155,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 279, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 280, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fortress Crab", 60, Rarity.COMMON, mage.cards.f.FortressCrab.class));
-        cards.add(new SetCardInfo("Frilled Sandwalla", 339, Rarity.COMMON, mage.cards.f.FrilledSandwalla.class));
+        cards.add(new SetCardInfo("Frilled Sandwalla", 340, Rarity.COMMON, mage.cards.f.FrilledSandwalla.class));
         cards.add(new SetCardInfo("Frilled Sea Serpent", 61, Rarity.COMMON, mage.cards.f.FrilledSeaSerpent.class));
         cards.add(new SetCardInfo("Frost Lynx", 62, Rarity.COMMON, mage.cards.f.FrostLynx.class));
         cards.add(new SetCardInfo("Fry", 140, Rarity.UNCOMMON, mage.cards.f.Fry.class));
