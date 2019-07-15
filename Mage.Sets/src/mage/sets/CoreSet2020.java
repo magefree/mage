@@ -181,7 +181,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Griffin Sentinel", 21, Rarity.COMMON, mage.cards.g.GriffinSentinel.class));
         cards.add(new SetCardInfo("Growth Cycle", 175, Rarity.COMMON, mage.cards.g.GrowthCycle.class));
         cards.add(new SetCardInfo("Gruesome Scourger", 104, Rarity.UNCOMMON, mage.cards.g.GruesomeScourger.class));
-        cards.add(new SetCardInfo("Haazda Officer", 305, Rarity.UNCOMMON, mage.cards.h.HaazdaOfficer.class));
+        cards.add(new SetCardInfo("Haazda Officer", 305, Rarity.COMMON, mage.cards.h.HaazdaOfficer.class));
         cards.add(new SetCardInfo("Hanged Executioner", 22, Rarity.RARE, mage.cards.h.HangedExecutioner.class));
         cards.add(new SetCardInfo("Hard Cover", 63, Rarity.UNCOMMON, mage.cards.h.HardCover.class));
         cards.add(new SetCardInfo("Healer of the Glade", 176, Rarity.COMMON, mage.cards.h.HealerOfTheGlade.class));
