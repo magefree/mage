@@ -53,7 +53,7 @@ public class LondonMulligan extends Mulligan {
         Player player = game.getPlayer(playerId);
         int deduction = 1;
         if (freeMulligans > 0) {
-            if (usedFreeMulligans != null && usedFreeMulligans.containsKey(player.getId())) {
+            if (usedFreeMulligans.containsKey(player.getId())) {
                 int used = usedFreeMulligans.get(player.getId());
                 if (used < freeMulligans) {
                     deduction = 0;
@@ -110,7 +110,7 @@ public class LondonMulligan extends Mulligan {
             Cards cards = new CardsImpl();
             cards.addAll(player.getHand());
             TargetCard target = new TargetCard(cardsToDiscard, cardsToDiscard, Zone.HAND,
-                    new FilterCard("cards to PUT on the BOTTOM of your library (Discard for Mulligan)"));
+                    new FilterCard("card" + (cardsToDiscard > 1 ? "s" : "") + " to PUT on the BOTTOM of your library (Discard for Mulligan)"));
             player.chooseTarget(Outcome.Neutral, cards, target, null, game);
             player.putCardsOnBottomOfLibrary(new CardsImpl(target.getTargets()), game, null, true);
             cards.removeAll(target.getTargets());
