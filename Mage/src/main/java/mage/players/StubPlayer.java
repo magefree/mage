@@ -53,7 +53,7 @@ public class StubPlayer extends PlayerImpl implements Player {
 
     @Override
     public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
-        if ("cards to PUT on the BOTTOM of your library (Discard for Mulligan)".equals(target.getFilter().getMessage())) {
+        if (target.getFilter().getMessage() != null && target.getFilter().getMessage().endsWith("(Discard for Mulligan)")) {
             chooseDiscardBottom(game, target.getMinNumberOfTargets(), cards.getCards(game)
                     .stream().map(MageItem::getId).collect(toList())).forEach(cardId -> target.add(cardId, game));
         } else {
