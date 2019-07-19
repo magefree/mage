@@ -12,7 +12,7 @@ public class BattleForZendikarBlock extends Constructed {
 
     public BattleForZendikarBlock() {
         super("Constructed - Battle for Zendikar Block");
-        setCodes.add("BFZ");
-        setCodes.add("OGW");
+        setCodes.add(mage.sets.BattleForZendikar.getInstance().getCode());
+        setCodes.add(mage.sets.OathOfTheGatewatch.getInstance().getCode());
     }
 }

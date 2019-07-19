@@ -13,10 +13,6 @@ public final class Starter2000 extends ExpansionSet {
 
     private static final Starter2000 instance = new Starter2000();
 
-    /**
-     *
-     * @return
-     */
     public static Starter2000 getInstance() {
         return instance;
     }

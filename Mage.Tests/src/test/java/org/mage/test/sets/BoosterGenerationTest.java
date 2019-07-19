@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.keyword.PartnerWithAbility;
 import mage.cards.Card;
@@ -144,6 +145,15 @@ public class BoosterGenerationTest extends MageTestBase {
     }
 
     @Test
+    public void testWarOfTheSpark_EveryBoosterContainsPlaneswalker() {
+        for (int i = 0; i < 10; i++) {
+            List<Card> booster = WarOfTheSpark.getInstance().createBooster();
+            // check that booster contains a planeswalker
+            assertTrue(booster.stream().anyMatch(MageObject::isPlaneswalker));
+        }
+    }
+
+    @Test
     public void testDominaria_EveryBoosterContainsLegendaryCreature() {
         for (int i = 0; i < 10; i++) {
             List<Card> booster = Dominaria.getInstance().createBooster();
@@ -161,6 +171,14 @@ public class BoosterGenerationTest extends MageTestBase {
     }
 
     @Test
+    public void testModernHorizons_BoosterMustHaveOneSnowLand() {
+        for (int i = 0; i < 10; i++) {
+            List<Card> booster = ModernHorizons.getInstance().createBooster();
+            assertTrue("Modern Horizon's booster must contain 1 snow covered land", booster.stream().anyMatch(card -> card.isBasic() && card.getName().startsWith("Snow-Covered ")));
+        }
+    }
+
+    @Test
     public void testMastersEditionII_BoosterMustHaveOneSnowLand() {
         for (int i = 0; i < 10; i++) {
             List<Card> booster = MastersEditionII.getInstance().createBooster();
@@ -171,7 +189,7 @@ public class BoosterGenerationTest extends MageTestBase {
     @Test
     public void testBattlebond_BoosterMustHaveOneLand() {
         for (int i = 0; i < 10; i++) {
-            List<Card> booster = Coldsnap.getInstance().createBooster();
+            List<Card> booster = Battlebond.getInstance().createBooster();
             assertTrue("battlebond's booster must contain 1 land", booster.stream().anyMatch(card -> card.isBasic() && card.isLand()));
         }
     }

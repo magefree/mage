@@ -19,8 +19,8 @@ public final class FateReforged extends ExpansionSet {
 
     private static final FateReforged instance = new FateReforged();
 
-    List<CardInfo> savedSpecialRares = new ArrayList<>();
-    List<CardInfo> savedSpecialCommon = new ArrayList<>();
+    private List<CardInfo> savedSpecialRares = new ArrayList<>();
+    private List<CardInfo> savedSpecialCommon = new ArrayList<>();
 
     public static FateReforged getInstance() {
         return instance;
@@ -238,7 +238,7 @@ public final class FateReforged extends ExpansionSet {
                 criteria.setCodes(this.code).notTypes(CardType.LAND);
                 savedCardsInfos = CardRepository.instance.findCards(criteria);
                 if (maxCardNumberInBooster != Integer.MAX_VALUE) {
-                    savedCardsInfos.removeIf(next -> next.getCardNumberAsInt() > maxCardNumberInBooster && rarity != Rarity.LAND);
+                    savedCardsInfos.removeIf(next -> next.getCardNumberAsInt() > maxCardNumberInBooster);
                 }
                 savedCards.put(rarity, savedCardsInfos);
             }
@@ -251,7 +251,6 @@ public final class FateReforged extends ExpansionSet {
 
     @Override
     public List<CardInfo> getSpecialCommon() {
-        List<CardInfo> specialCommons = new ArrayList<>();
         if (savedSpecialCommon.isEmpty()) {
             // the 10 common lands from Fate Reforged can show up in the basic lands slot
             // http://magic.wizards.com/en/articles/archive/feature/fetching-look-fate-reforged-2014-12-24
@@ -261,13 +260,11 @@ public final class FateReforged extends ExpansionSet {
             criteria.rarities(Rarity.LAND).setCodes(this.code);
             savedSpecialCommon.addAll(CardRepository.instance.findCards(criteria));
         }
-        specialCommons.addAll(savedSpecialCommon);
-        return specialCommons;
+        return new ArrayList<>(savedSpecialCommon);
     }
 
     @Override
     public List<CardInfo> getSpecialRare() {
-        List<CardInfo> specialRares = new ArrayList<>();
         if (savedSpecialRares.isEmpty()) {
             CardCriteria criteria = new CardCriteria();
             criteria.setCodes("KTK").name("Bloodstained Mire");
@@ -285,7 +282,6 @@ public final class FateReforged extends ExpansionSet {
             criteria.setCodes("KTK").name("Wooded Foothills");
             savedSpecialRares.addAll(CardRepository.instance.findCards(criteria));
         }
-        specialRares.addAll(savedSpecialRares);
-        return specialRares;
+        return new ArrayList<>(savedSpecialRares);
     }
 }

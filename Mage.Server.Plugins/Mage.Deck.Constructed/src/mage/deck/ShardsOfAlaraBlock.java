@@ -12,9 +12,9 @@ public class ShardsOfAlaraBlock extends Constructed {
 
     public ShardsOfAlaraBlock() {
         super("Constructed - Shards of Alara Block");
-        setCodes.add("ALA");
-        setCodes.add("CON");
-        setCodes.add("ARB");
+        setCodes.add(mage.sets.ShardsOfAlara.getInstance().getCode());
+        setCodes.add(mage.sets.Conflux.getInstance().getCode());
+        setCodes.add(mage.sets.AlaraReborn.getInstance().getCode());
     }
 
 }

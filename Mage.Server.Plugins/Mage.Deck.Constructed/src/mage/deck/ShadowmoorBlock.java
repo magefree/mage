@@ -12,8 +12,8 @@ public class ShadowmoorBlock extends Constructed {
 
     public ShadowmoorBlock() {
         super("Constructed - Shadowmoor Block");
-        setCodes.add("SHM");
-        setCodes.add("EVE");
+        setCodes.add(mage.sets.Shadowmoor.getInstance().getCode());
+        setCodes.add(mage.sets.Eventide.getInstance().getCode());
     }
 
 }

@@ -26,7 +26,7 @@ public final class OathOfTheGatewatch extends ExpansionSet {
         return instance;
     }
 
-    protected final List<CardInfo> savedSpecialLand = new ArrayList<>();
+    private final List<CardInfo> savedSpecialLand = new ArrayList<>();
 
     private OathOfTheGatewatch() {
         super("Oath of the Gatewatch", "OGW", ExpansionSet.buildDate(2016, 1, 22), SetType.EXPANSION);

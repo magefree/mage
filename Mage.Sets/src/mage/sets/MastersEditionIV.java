@@ -22,7 +22,7 @@ public final class MastersEditionIV extends ExpansionSet {
         return instance;
     }
 
-    protected final List<CardInfo> savedSpecialLand = new ArrayList<>();
+    private final List<CardInfo> savedSpecialLand = new ArrayList<>();
 
     private MastersEditionIV() {
         super("Masters Edition IV", "ME4", ExpansionSet.buildDate(2011, 1, 10), SetType.MAGIC_ONLINE);
