@@ -234,6 +234,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         }
     }
 
+    /**
+     * @param game can be null, e.g. for cards viewer
+     * @return
+     */
     @Override
     public List<String> getRules(Game game) {
         try {
@@ -261,7 +265,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
             // restrict hints
             List<String> restrictHints = new ArrayList<>();
-            if (HintUtils.RESTRICT_HINTS_ENABLE) {
+            if (game != null && HintUtils.RESTRICT_HINTS_ENABLE) {
                 for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
                     for (Ability ability : entry.getValue()) {
                         if (!entry.getKey().applies(this, ability, game)) {
