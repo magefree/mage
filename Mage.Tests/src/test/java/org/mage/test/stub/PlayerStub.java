@@ -1207,24 +1207,15 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public UUID getCastSourceIdWithAlternateMana() {
-        return null;
-    }
-
-    @Override
     public void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts<ManaCost> manaCosts, Costs<Cost> costs) {
 
     }
 
     @Override
-    public ManaCosts getCastSourceIdManaCosts() {
+    public Map<UUID, AlternateManaCosts> getCastSourceIdWithAlternateManaMap() {
         return null;
     }
 
-    @Override
-    public Costs<Cost> getCastSourceIdCosts() {
-        return null;
-    }
 
     @Override
     public void addPermissionToShowHandCards(UUID watcherUserId) {

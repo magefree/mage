@@ -162,9 +162,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected boolean reachedNextTurnAfterLeaving = false;
 
     // indicates that the spell with the set sourceId can be cast with an alternate mana costs (can also be no mana costs)
-    protected UUID castSourceIdWithAlternateMana;
-    protected ManaCosts<ManaCost> castSourceIdManaCosts;
-    protected Costs<Cost> castSourceIdCosts;
+    protected Map<UUID, AlternateManaCosts> castSourceIdWithAlternateManaMap = new HashMap<>();
 
     // indicates that the player is in mana payment phase
     protected boolean payManaMode = false;
@@ -270,9 +268,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.priorityTimeLeft = player.getPriorityTimeLeft();
         this.reachedNextTurnAfterLeaving = player.reachedNextTurnAfterLeaving;
 
-        this.castSourceIdWithAlternateMana = player.castSourceIdWithAlternateMana;
-        this.castSourceIdManaCosts = player.castSourceIdManaCosts;
-        this.castSourceIdCosts = player.castSourceIdCosts;
+        this.castSourceIdWithAlternateManaMap.putAll(player.castSourceIdWithAlternateManaMap);
         this.payManaMode = player.payManaMode;
 
         this.designations.addAll(player.designations);
@@ -337,9 +333,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.turnControllers.clear();
         this.turnControllers.addAll(player.getTurnControllers());
         this.reachedNextTurnAfterLeaving = player.hasReachedNextTurnAfterLeaving();
-        this.castSourceIdWithAlternateMana = player.getCastSourceIdWithAlternateMana();
-        this.castSourceIdManaCosts = player.getCastSourceIdManaCosts();
-        this.castSourceIdCosts = player.getCastSourceIdCosts();
+        this.castSourceIdWithAlternateManaMap.putAll(player.getCastSourceIdWithAlternateManaMap());
 
         this.designations.clear();
         this.designations.addAll(player.getDesignations());
@@ -413,9 +407,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.setLife(game.getLife(), game, (UUID) null);
         this.setReachedNextTurnAfterLeaving(false);
 
-        this.castSourceIdWithAlternateMana = null;
-        this.castSourceIdManaCosts = null;
-        this.castSourceIdCosts = null;
+        this.castSourceIdWithAlternateManaMap.clear();
         this.getManaPool().init(); // needed to remove mana that not empties on step change from previous game if left
 
         this.designations.clear();
@@ -439,9 +431,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.canPlayCardsFromGraveyard = false;
         this.topCardRevealed = false;
         this.alternativeSourceCosts.clear();
-        this.castSourceIdWithAlternateMana = null;
-        this.castSourceIdManaCosts = null;
-        this.castSourceIdCosts = null;
+        this.castSourceIdWithAlternateManaMap.clear();
         this.getManaPool().clearEmptyManaPoolRules();
     }
 
@@ -1019,24 +1009,15 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void setCastSourceIdWithAlternateMana(UUID
                                                          sourceId, ManaCosts<ManaCost> manaCosts, Costs<Cost> costs) {
-        castSourceIdWithAlternateMana = sourceId;
-        castSourceIdManaCosts = manaCosts;
-        castSourceIdCosts = costs;
+        AlternateManaCosts alternateManaCosts = new AlternateManaCosts();
+        alternateManaCosts.castSourceIdCosts = costs;
+        alternateManaCosts.castSourceIdManaCosts = manaCosts;
+        castSourceIdWithAlternateManaMap.put(sourceId, alternateManaCosts);
     }
 
     @Override
-    public UUID getCastSourceIdWithAlternateMana() {
-        return castSourceIdWithAlternateMana;
-    }
-
-    @Override
-    public Costs<Cost> getCastSourceIdCosts() {
-        return castSourceIdCosts;
-    }
-
-    @Override
-    public ManaCosts getCastSourceIdManaCosts() {
-        return castSourceIdManaCosts;
+    public Map<UUID, AlternateManaCosts> getCastSourceIdWithAlternateManaMap() {
+        return castSourceIdWithAlternateManaMap;
     }
 
     @Override
@@ -1104,10 +1085,11 @@ public abstract class PlayerImpl implements Player, Serializable {
                 // Update the zcc to the stack
                 ability.setSourceObjectZoneChangeCounter(game.getState().getZoneChangeCounter(ability.getSourceId()));
                 // some effects set sourceId to cast without paying mana costs or other costs
-                if (ability.getSourceId().equals(getCastSourceIdWithAlternateMana())) {
+                if (castSourceIdWithAlternateManaMap.containsKey(ability.getSourceId())) {
                     Ability spellAbility = spell.getSpellAbility();
-                    ManaCosts alternateCosts = getCastSourceIdManaCosts();
-                    Costs<Cost> costs = getCastSourceIdCosts();
+                    AlternateManaCosts alternateManaCosts = castSourceIdWithAlternateManaMap.get(ability.getSourceId());
+                    ManaCosts alternateCosts = alternateManaCosts.castSourceIdManaCosts;
+                    Costs<Cost> costs = alternateManaCosts.castSourceIdCosts;
                     if (alternateCosts == null) {
                         noMana = true;
                     } else {
@@ -1121,7 +1103,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         spellAbility.getCosts().addAll(costs);
                     }
                 }
-                setCastSourceIdWithAlternateMana(null, null, null);
+                castSourceIdWithAlternateManaMap.clear();
                 GameEvent event = GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, spell.getSpellAbility().getId(), spell.getSpellAbility().getSourceId(), playerId, permittingObject);
                 game.fireEvent(event);
                 if (spell.activate(game, noMana)) {

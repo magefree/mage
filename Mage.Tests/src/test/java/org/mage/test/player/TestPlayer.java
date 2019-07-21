@@ -2341,19 +2341,10 @@ public class TestPlayer implements Player {
         computerPlayer.setCastSourceIdWithAlternateMana(sourceId, manaCosts, costs);
     }
 
-    @Override
-    public UUID getCastSourceIdWithAlternateMana() {
-        return computerPlayer.getCastSourceIdWithAlternateMana();
-    }
 
     @Override
-    public ManaCosts getCastSourceIdManaCosts() {
-        return computerPlayer.getCastSourceIdManaCosts();
-    }
-
-    @Override
-    public Costs<Cost> getCastSourceIdCosts() {
-        return computerPlayer.getCastSourceIdCosts();
+    public Map<UUID, AlternateManaCosts> getCastSourceIdWithAlternateManaMap() {
+        return computerPlayer.getCastSourceIdWithAlternateManaMap();
     }
 
     @Override

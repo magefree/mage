@@ -846,11 +846,12 @@ public interface Player extends MageItem, Copyable<Player> {
      */
     void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts<ManaCost> manaCosts, Costs<Cost> costs);
 
-    UUID getCastSourceIdWithAlternateMana();
+    class AlternateManaCosts {
+        ManaCosts<ManaCost> castSourceIdManaCosts;
+        Costs<Cost> castSourceIdCosts;
+    }
 
-    ManaCosts<ManaCost> getCastSourceIdManaCosts();
-
-    Costs<Cost> getCastSourceIdCosts();
+    Map<UUID, AlternateManaCosts> getCastSourceIdWithAlternateManaMap();
 
     // permission handling to show hand cards
     void addPermissionToShowHandCards(UUID watcherUserId);

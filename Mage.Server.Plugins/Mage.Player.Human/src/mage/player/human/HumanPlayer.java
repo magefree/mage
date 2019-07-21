@@ -1726,7 +1726,7 @@ public class HumanPlayer extends PlayerImpl {
             if (ability instanceof PlayLandAbility) {
                 return true;
             }
-            if (!ability.getSourceId().equals(getCastSourceIdWithAlternateMana())
+            if (!getCastSourceIdWithAlternateManaMap().containsKey(ability.getSourceId())
                     && ability.getManaCostsToPay().convertedManaCost() > 0) {
                 return true;
             }

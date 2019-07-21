@@ -11,9 +11,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
+import mage.cards.*;
 import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -99,20 +97,32 @@ class BolassCitadelPlayTheTopCardEffect extends AsThoughEffectImpl {
             Player controller = game.getPlayer(cardOnTop.getOwnerId());
             if (controller != null
                     && cardOnTop.equals(controller.getLibrary().getFromTop(game))) {
-                // add the life cost first
-                PayLifeCost cost = new PayLifeCost(cardOnTop.getManaCost().convertedManaCost());
-                Costs costs = new CostsImpl();
-                costs.add(cost);
-                // check for additional costs that must be paid
-                if (cardOnTop.getSpellAbility() != null) {
-                    for (Cost additionalCost : cardOnTop.getSpellAbility().getCosts()) {
-                        costs.add(additionalCost);
-                    }
+                if (cardOnTop.isSplitCard()) {
+                    SplitCardHalf left = ((SplitCard)cardOnTop).getLeftHalfCard();
+                    SplitCardHalf right = ((SplitCard)cardOnTop).getRightHalfCard();
+                    controller.setCastSourceIdWithAlternateMana(left.getId(), null, getCostsFromCard(left));
+                    controller.setCastSourceIdWithAlternateMana(right.getId(), null, getCostsFromCard(right));
+                    return true;
+                } else {
+                    controller.setCastSourceIdWithAlternateMana(cardOnTop.getId(), null, getCostsFromCard(cardOnTop));
+                    return true;
                 }
-                controller.setCastSourceIdWithAlternateMana(cardOnTop.getId(), null, costs);
-                return true;
             }
         }
         return false;
     }
+
+    private Costs getCostsFromCard(Card card) {
+        PayLifeCost cost = new PayLifeCost(card.getConvertedManaCost());
+        Costs costs = new CostsImpl();
+        costs.add(cost);
+        // check for additional costs that must be paid for the half card
+        if (card.getSpellAbility() != null) {
+            for (Cost additionalCost : card.getSpellAbility().getCosts()) {
+                costs.add(additionalCost);
+            }
+        }
+        return costs;
+    }
+
 }
