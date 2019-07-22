@@ -43,7 +43,7 @@ public final class CelestialMessenger extends CardImpl {
         // Celestial Messenger gets +1/+1 as long as you control a Yanling planeswalker.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield),
-                condition, "gets +1/+1 as long as you control a Yanling planeswalker"
+                condition, "{this} gets +1/+1 as long as you control a Yanling planeswalker"
         )));
     }
 

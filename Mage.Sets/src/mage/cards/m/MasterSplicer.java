@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -14,23 +13,19 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.GolemToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author North, Loki
  */
 public final class MasterSplicer extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Golem creatures");
-
-    static {
-        filter.add(new SubtypePredicate(SubType.GOLEM));
-    }
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.GOLEM, "Golems");
 
     public MasterSplicer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
 

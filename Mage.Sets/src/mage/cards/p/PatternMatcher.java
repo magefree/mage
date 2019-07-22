@@ -12,7 +12,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
@@ -54,7 +53,7 @@ class RegularExpression extends OneShotEffect {
 
     RegularExpression() {
         super(Outcome.Benefit);
-        staticText = "search your library for a creature card with the same name as another creature you control, " +
+        staticText = "search your library for a card with the same name as another creature you control, " +
                 "reveal it, put it into your hand, then shuffle your library.";
     }
 
@@ -82,7 +81,7 @@ class RegularExpression extends OneShotEffect {
                 .filter(s -> !"".equals(s))
                 .forEach(s -> predicates.add(new NamePredicate(s)));
         FilterCard filter
-                = new FilterCreatureCard("a creature card with the same name as another creature you control");
+                = new FilterCard("a creature card with the same name as another creature you control");
         filter.add(Predicates.or(predicates));
         return new SearchLibraryPutInHandEffect(
                 new TargetCardInLibrary(filter), true, true

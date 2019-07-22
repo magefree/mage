@@ -1,21 +1,20 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class SerrasGuardian extends CardImpl {
@@ -35,11 +34,10 @@ public final class SerrasGuardian extends CardImpl {
 
         // Other creatures you control have vigilance.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(
                         VigilanceAbility.getInstance(),
                         Duration.WhileOnBattlefield,
-                        StaticFilters.FILTER_CONTROLLED_CREATURES,
+                        StaticFilters.FILTER_PERMANENT_CREATURES,
                         true
                 )
         ));

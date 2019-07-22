@@ -48,13 +48,13 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Agent of Treachery", 43, Rarity.RARE, mage.cards.a.AgentOfTreachery.class));
         cards.add(new SetCardInfo("Aggressive Mammoth", 337, Rarity.RARE, mage.cards.a.AggressiveMammoth.class));
         cards.add(new SetCardInfo("Agonizing Syphon", 83, Rarity.COMMON, mage.cards.a.AgonizingSyphon.class));
-        cards.add(new SetCardInfo("Angelic Guardian", 302, Rarity.RARE, mage.cards.a.AngelicGuardian.class));
         cards.add(new SetCardInfo("Air Elemental", 44, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));
         cards.add(new SetCardInfo("Ajani, Inspiring Leader", 282, Rarity.MYTHIC, mage.cards.a.AjaniInspiringLeader.class));
         cards.add(new SetCardInfo("Ajani, Strength of the Pride", 2, Rarity.MYTHIC, mage.cards.a.AjaniStrengthOfThePride.class));
         cards.add(new SetCardInfo("Ancestral Blade", 3, Rarity.UNCOMMON, mage.cards.a.AncestralBlade.class));
         cards.add(new SetCardInfo("Angel of Vitality", 4, Rarity.UNCOMMON, mage.cards.a.AngelOfVitality.class));
         cards.add(new SetCardInfo("Angelic Gift", 5, Rarity.COMMON, mage.cards.a.AngelicGift.class));
+        cards.add(new SetCardInfo("Angelic Guardian", 302, Rarity.RARE, mage.cards.a.AngelicGuardian.class));
         cards.add(new SetCardInfo("Anticipate", 45, Rarity.COMMON, mage.cards.a.Anticipate.class));
         cards.add(new SetCardInfo("Anvilwrought Raptor", 221, Rarity.COMMON, mage.cards.a.AnvilwroughtRaptor.class));
         cards.add(new SetCardInfo("Apostle of Purifying Light", 6, Rarity.UNCOMMON, mage.cards.a.ApostleOfPurifyingLight.class));
@@ -175,7 +175,7 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Gorging Vulture", 102, Rarity.COMMON, mage.cards.g.GorgingVulture.class));
         cards.add(new SetCardInfo("Grafdigger's Cage", 227, Rarity.RARE, mage.cards.g.GrafdiggersCage.class));
         cards.add(new SetCardInfo("Gravedigger", 103, Rarity.UNCOMMON, mage.cards.g.Gravedigger.class));
-        cards.add(new SetCardInfo("Gravewalker", 323, Rarity.RARE, mage.cards.g.Gravewaker.class));
+        cards.add(new SetCardInfo("Gravewaker", 323, Rarity.RARE, mage.cards.g.Gravewaker.class));
         cards.add(new SetCardInfo("Greenwood Sentinel", 174, Rarity.COMMON, mage.cards.g.GreenwoodSentinel.class));
         cards.add(new SetCardInfo("Griffin Protector", 20, Rarity.COMMON, mage.cards.g.GriffinProtector.class));
         cards.add(new SetCardInfo("Griffin Sentinel", 21, Rarity.COMMON, mage.cards.g.GriffinSentinel.class));
@@ -357,8 +357,8 @@ public final class CoreSet2020 extends ExpansionSet {
         cards.add(new SetCardInfo("Undead Servant", 118, Rarity.COMMON, mage.cards.u.UndeadServant.class));
         cards.add(new SetCardInfo("Unholy Indenture", 119, Rarity.COMMON, mage.cards.u.UnholyIndenture.class));
         cards.add(new SetCardInfo("Unsummon", 78, Rarity.COMMON, mage.cards.u.Unsummon.class));
-        cards.add(new SetCardInfo("Vampire of the Dire Moon", 120, Rarity.UNCOMMON, mage.cards.v.VampireOfTheDireMoon.class));
         cards.add(new SetCardInfo("Vampire Opportunist", 326, Rarity.COMMON, mage.cards.v.VampireOpportunist.class));
+        cards.add(new SetCardInfo("Vampire of the Dire Moon", 120, Rarity.UNCOMMON, mage.cards.v.VampireOfTheDireMoon.class));
         cards.add(new SetCardInfo("Veil of Summer", 198, Rarity.UNCOMMON, mage.cards.v.VeilOfSummer.class));
         cards.add(new SetCardInfo("Vengeful Warchief", 121, Rarity.UNCOMMON, mage.cards.v.VengefulWarchief.class));
         cards.add(new SetCardInfo("Vial of Dragonfire", 241, Rarity.COMMON, mage.cards.v.VialOfDragonfire.class));

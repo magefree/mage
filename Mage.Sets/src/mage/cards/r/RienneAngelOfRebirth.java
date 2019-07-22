@@ -108,8 +108,8 @@ class RienneAngelOfRebirthTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever another multicolored creature you control is put into a graveyard from the battlefield, " +
-                "return that card to its owner's hand at the beginning of the next end step";
+        return "Whenever another multicolored creature you control dies, " +
+                "return it to its owner’s hand at the beginning of the next end step.";
     }
 }
 

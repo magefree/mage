@@ -19,7 +19,8 @@ import java.util.UUID;
  */
 public final class ScholarOfTheAges extends CardImpl {
 
-    private static final FilterCard filter = new FilterInstantOrSorceryCard("instant and/or sorcery cards");
+    private static final FilterCard filter
+            = new FilterInstantOrSorceryCard("instant and/or sorcery cards from your graveyard");
 
     public ScholarOfTheAges(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
