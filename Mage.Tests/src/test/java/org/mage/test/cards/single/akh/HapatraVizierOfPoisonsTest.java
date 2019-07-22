@@ -98,4 +98,39 @@ public class HapatraVizierOfPoisonsTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Snake", 1);
         assertAbility(playerA, "Snake", DeathtouchAbility.getInstance(), true);
     }
+
+    /**
+     * Testing fix for issue #5886
+     * Tokens with wither/infect that deal damage were not triggering Hapatra's snake creating ability
+     * @author jgray1206
+     */
+    @Test
+    public void testTokensWithInfectTriggerHapatra() {
+        String concordantCrossroads = "Concordant Crossroads"; //All creatures have haste
+        String krakenHatchling = "Kraken Hatchling"; //Arbitrary creature to defend
+        String triumphOfTheHordes = "Triumph of the Hordes"; //Creatures you control gain infect
+        String sprout = "Sprout"; //Create a 1/1 Saproling creature token
+        
+        addCard(Zone.HAND, playerA, sprout, 1);
+        addCard(Zone.HAND, playerA, triumphOfTheHordes, 1);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
+        addCard(Zone.BATTLEFIELD, playerA, hapatra, 1);
+        addCard(Zone.BATTLEFIELD, playerA, concordantCrossroads, 1);
+        addCard(Zone.BATTLEFIELD, playerB, krakenHatchling, 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, sprout);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, triumphOfTheHordes);
+
+        attack(1, playerA, "Saproling");
+        block(1, playerB, krakenHatchling, "Saproling");
+        setStopAt(1, PhaseStep.END_COMBAT);
+        setStrictChooseMode(true);
+        execute();
+
+        assertPowerToughness(playerB, krakenHatchling, -2, 2);
+        assertCounterCount(playerB, krakenHatchling, CounterType.M1M1, 2);
+        assertPermanentCount(playerA, "Snake", 1); //Should have triggered when Saproling added -1/-1 counter
+        assertAllCommandsUsed();
+    }
 }
