@@ -32,7 +32,7 @@ public final class GruesomeScourger extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Gruesome Scourger enters the battlefield, it deals damage to target opponent or planeswalker equal to the number of creatures you control.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(xValue));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(xValue, "it"));
         ability.addTarget(new TargetOpponentOrPlaneswalker());
         this.addAbility(ability);
     }

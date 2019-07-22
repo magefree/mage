@@ -109,7 +109,7 @@ class RienneAngelOfRebirthTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever another multicolored creature you control dies, " +
-                "return it to its owner’s hand at the beginning of the next end step.";
+                "return it to its owner's hand at the beginning of the next end step.";
     }
 }
 

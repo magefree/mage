@@ -31,7 +31,7 @@ public final class ChandrasFlameWave extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addEffect(new DamageAllControlledTargetEffect(
                 2, StaticFilters.FILTER_PERMANENT_CREATURE
-        ).setText("and each creature that player controls"));
+        ).setText("and each creature that player controls."));
         this.getSpellAbility().addEffect(
                 new SearchLibraryGraveyardPutInHandEffect(filter, false, false)
         );

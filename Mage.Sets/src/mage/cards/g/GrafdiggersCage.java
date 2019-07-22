@@ -82,7 +82,7 @@ class GrafdiggersCageEffect2 extends ContinuousRuleModifyingEffectImpl {
 
     public GrafdiggersCageEffect2() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "Players can't cast cards in graveyards or libraries";
+        staticText = "Players can't cast spells from graveyards or libraries";
     }
 
     public GrafdiggersCageEffect2(final GrafdiggersCageEffect2 effect) {
@@ -104,7 +104,7 @@ class GrafdiggersCageEffect2 extends ContinuousRuleModifyingEffectImpl {
         Card card = game.getCard(event.getSourceId());
         if (card != null) {
             Zone zone = game.getState().getZone(card.getId());
-            if (zone != null && (zone == Zone.GRAVEYARD || zone == Zone.LIBRARY)) {
+            if (zone == Zone.GRAVEYARD || zone == Zone.LIBRARY) {
                 return true;
             }
         }

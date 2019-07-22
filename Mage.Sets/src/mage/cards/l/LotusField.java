@@ -31,7 +31,7 @@ public final class LotusField extends CardImpl {
 
         // When Lotus Field enters the battlefield, sacrifice two lands.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new SacrificeControllerEffect(StaticFilters.FILTER_LAND, 2, "")
+                new SacrificeControllerEffect(StaticFilters.FILTER_LANDS, 2, "")
         ));
 
         // {T}: Add three mana of any color.

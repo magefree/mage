@@ -1,7 +1,6 @@
 
 package mage.abilities.costs;
 
-import java.util.Iterator;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
@@ -16,8 +15,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.Iterator;
+
 /**
- *
  * @author LevelX2
  */
 public class AlternativeCostSourceAbility extends StaticAbility implements AlternativeSourceCosts {
@@ -46,14 +46,13 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
     }
 
     /**
-     *
-     * @param cost alternate cost to pay
+     * @param cost      alternate cost to pay
      * @param condition only if the condition is true it's possible to use the
-     * alternate costs
-     * @param rule if != null used as rule text
-     * @param filter filters the cards this alternate cost can be applied to
-     * @param onlyMana if true only the mana costs are replaced by this costs,
-     * other costs stay untouched
+     *                  alternate costs
+     * @param rule      if != null used as rule text
+     * @param filter    filters the cards this alternate cost can be applied to
+     * @param onlyMana  if true only the mana costs are replaced by this costs,
+     *                  other costs stay untouched
      */
     public AlternativeCostSourceAbility(Cost cost, Condition condition, String rule, FilterCard filter, boolean onlyMana) {
         super(Zone.ALL, null);
@@ -151,7 +150,7 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
                     }
                     for (AlternativeCost2 alternateCost : alternativeCostsToCheck) {
                         alternateCost.activate();
-                        for (Iterator it = ((Costs) alternateCost).iterator(); it.hasNext();) {
+                        for (Iterator it = ((Costs) alternateCost).iterator(); it.hasNext(); ) {
                             Cost costDeailed = (Cost) it.next();
                             if (costDeailed instanceof ManaCost) {
                                 ability.getManaCostsToPay().add((ManaCost) costDeailed.copy());
@@ -222,7 +221,8 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
                 if (alternativeCost.getCost() instanceof ManaCost) {
                     sb.append("pay ");
                 }
-                sb.append(alternativeCost.getText(true));
+                String text = alternativeCost.getText(true);
+                sb.append(Character.toLowerCase(text.charAt(0)) + text.substring(1));
             }
             ++numberCosts;
         }
