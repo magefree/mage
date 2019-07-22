@@ -42,6 +42,7 @@ public class RepeatedReverberationTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: You gain 2 life");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStrictChooseMode(true);
         execute();
 
         assertPermanentCount(playerA, ajani, 1);
@@ -49,6 +50,7 @@ public class RepeatedReverberationTest extends CardTestPlayerBase {
         assertCounterCount(ajani, CounterType.LOYALTY, 5);  // 4 + 1 = 5
 
         assertLife(playerA, 26);
+        assertAllCommandsUsed();
     }
 
     @Test
@@ -68,10 +70,13 @@ public class RepeatedReverberationTest extends CardTestPlayerBase {
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, soothingBalm);
         addTarget(playerA, playerA);
-        addTarget(playerA, playerB); //Should be able to choose new targets for each copy
+        setChoice(playerA, "Yes"); //Choose new targets?
+        addTarget(playerA, playerB);
+        setChoice(playerA, "Yes"); //Choose new targets?
         addTarget(playerA, playerA);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStrictChooseMode(true);
         execute();
 
         assertGraveyardCount(playerA, soothingBalm, 1);
@@ -79,6 +84,7 @@ public class RepeatedReverberationTest extends CardTestPlayerBase {
 
         assertLife(playerA, 30);
         assertLife(playerB, 25);
+        assertAllCommandsUsed();
     }
 
     @Test
@@ -97,8 +103,11 @@ public class RepeatedReverberationTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, repeatedReverb);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, soulFeast);
         addTarget(playerA, playerB);
+        setChoice(playerA, "No"); //Choose new targets?
+        setChoice(playerA, "No"); //Choose new targets?
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStrictChooseMode(true);
         execute();
 
         assertGraveyardCount(playerA, soulFeast, 1);
@@ -106,5 +115,6 @@ public class RepeatedReverberationTest extends CardTestPlayerBase {
 
         assertLife(playerA, 32);
         assertLife(playerB, 8);
+        assertAllCommandsUsed();
     }
 }
