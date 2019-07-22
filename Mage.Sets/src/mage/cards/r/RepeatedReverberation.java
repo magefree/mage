@@ -60,7 +60,8 @@ class RepeatedReverberationTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SPELL_CAST;
+        return event.getType() == GameEvent.EventType.SPELL_CAST
+                || event.getType() == GameEvent.EventType.ACTIVATED_ABILITY;
     }
 
     @Override
@@ -117,7 +118,7 @@ class RepeatedReverberationEffect extends OneShotEffect {
             return false;
         }
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = game.getPermanent(stackAbility.getStackAbility().getSourceId());
         if (controller == null || sourcePermanent == null) {
             return false;
         }
