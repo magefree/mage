@@ -110,6 +110,7 @@ public class HapatraVizierOfPoisonsTest extends CardTestPlayerBase {
         String krakenHatchling = "Kraken Hatchling"; //Arbitrary creature to defend
         String triumphOfTheHordes = "Triumph of the Hordes"; //Creatures you control gain infect
         String sprout = "Sprout"; //Create a 1/1 Saproling creature token
+        
         addCard(Zone.HAND, playerA, sprout, 1);
         addCard(Zone.HAND, playerA, triumphOfTheHordes, 1);
 
@@ -124,10 +125,12 @@ public class HapatraVizierOfPoisonsTest extends CardTestPlayerBase {
         attack(1, playerA, "Saproling");
         block(1, playerB, krakenHatchling, "Saproling");
         setStopAt(1, PhaseStep.END_COMBAT);
+        setStrictChooseMode(true);
         execute();
 
         assertPowerToughness(playerB, krakenHatchling, -2, 2);
         assertCounterCount(playerB, krakenHatchling, CounterType.M1M1, 2);
         assertPermanentCount(playerA, "Snake", 1); //Should have triggered when Saproling added -1/-1 counter
+        assertAllCommandsUsed();
     }
 }
