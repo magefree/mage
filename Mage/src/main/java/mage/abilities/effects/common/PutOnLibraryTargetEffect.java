@@ -62,10 +62,15 @@ public class PutOnLibraryTargetEffect extends OneShotEffect {
                         }
                         break;
                     case GRAVEYARD:
+                        Card graveyardCard = game.getCard(targetId);
+                        if (graveyardCard != null) {
+                            cards.add(graveyardCard);
+                        }
+                        break;
                     case STACK:
-                        Card card = game.getCard(targetId);
-                        if (card != null) {
-                            cards.add(card);
+                        Card stackSpellCard = game.getSpell(targetId).getCard();
+                        if (stackSpellCard != null) {
+                            cards.add(stackSpellCard);
                         }
                         break;
                 }
