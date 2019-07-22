@@ -37,13 +37,14 @@ public class BolassCitadelTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Revival", snubhorn);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStrictChooseMode(true);
         execute();
 
         assertLife(playerA, 18);
         assertGraveyardCount(playerA, snubhorn, 0);
         assertPermanentCount(playerA, snubhorn, 1);
         assertGraveyardCount(playerA, revivalRevenge, 1);
-
+        assertAllCommandsUsed();
     }
 
     /*
@@ -58,10 +59,12 @@ public class BolassCitadelTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, krakenHatchling);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStrictChooseMode(true);
         execute();
 
         assertLife(playerA, 19);
         assertPermanentCount(playerA, krakenHatchling, 1);
+        assertAllCommandsUsed();
     }
 
 }
