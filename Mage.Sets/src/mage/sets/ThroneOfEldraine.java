@@ -27,5 +27,6 @@ public final class ThroneOfEldraine extends ExpansionSet {
         this.maxCardNumberInBooster = 269; // unconfirmed for now
 
         cards.add(new SetCardInfo("Arcane Signet", 331, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
+        cards.add(new SetCardInfo("Chulane, Teller of Tales", 326, Rarity.MYTHIC, mage.cards.c.ChulaneTellerOfTales.class));
     }
 }
