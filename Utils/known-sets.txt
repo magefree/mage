@@ -185,6 +185,7 @@ Tempest Remastered|TempestRemastered|
 Tenth Edition|TenthEdition|
 The Dark|TheDark|
 Theros|Theros|
+Throne of Eldraine|ThroneOfEldraine|
 Time Spiral|TimeSpiral|
 Time Spiral "Timeshifted"|TimeSpiralTimeshifted|
 Torment|Torment|

@@ -183,6 +183,7 @@ Stronghold|STH|
 Super Series|SUS|
 Theros|THS|
 Tempest|TMP|
+Throne of Eldraine|ELD|
 Torment|TOR|
 Tempest Remastered|TPR|
 Time Spiral "Timeshifted"|TSB|
