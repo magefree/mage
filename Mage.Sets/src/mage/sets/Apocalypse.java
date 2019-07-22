@@ -99,6 +99,7 @@ public final class Apocalypse extends ExpansionSet {
         cards.add(new SetCardInfo("Manacles of Decay", 14, Rarity.COMMON, mage.cards.m.ManaclesOfDecay.class));
         cards.add(new SetCardInfo("Martyrs' Tomb", 110, Rarity.UNCOMMON, mage.cards.m.MartyrsTomb.class));
         cards.add(new SetCardInfo("Mask of Intolerance", 138, Rarity.RARE, mage.cards.m.MaskOfIntolerance.class));
+        cards.add(new SetCardInfo("Mind Extraction", 42, Rarity.COMMON, mage.cards.m.MindExtraction.class));
         cards.add(new SetCardInfo("Minotaur Illusionist", 111, Rarity.UNCOMMON, mage.cards.m.MinotaurIllusionist.class));
         cards.add(new SetCardInfo("Minotaur Tactician", 65, Rarity.COMMON, mage.cards.m.MinotaurTactician.class));
         cards.add(new SetCardInfo("Mournful Zombie", 43, Rarity.COMMON, mage.cards.m.MournfulZombie.class));
