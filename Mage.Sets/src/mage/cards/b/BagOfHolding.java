@@ -100,7 +100,7 @@ class BagOfHoldingEffect extends OneShotEffect {
 
     BagOfHoldingEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "return all cards exiled with {this} into their owner's hand";
+        this.staticText = "return all cards exiled with {this} to their owner's hand";
     }
 
     private BagOfHoldingEffect(final BagOfHoldingEffect effect) {

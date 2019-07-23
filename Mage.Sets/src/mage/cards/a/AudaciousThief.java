@@ -27,7 +27,7 @@ public final class AudaciousThief extends CardImpl {
 
         // Whenever Audacious Thief attacks, you draw a card and you lose 1 life.
         Ability ability = new AttacksTriggeredAbility(
-                new DrawCardSourceControllerEffect(1).concatBy("you"), false
+                new DrawCardSourceControllerEffect(1).setText("you draw a card"), false
         );
         ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);

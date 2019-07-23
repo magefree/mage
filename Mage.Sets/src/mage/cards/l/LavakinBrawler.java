@@ -35,7 +35,7 @@ public final class LavakinBrawler extends CardImpl {
         // Whenever Lavakin Brawler attacks, it gets +1/+0 until end of turn for each Elemental you control.
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(
                 xValue, StaticValue.getZeroValue(), Duration.EndOfTurn, true
-        ), false));
+        ).setText("it gets +1/+0 until end of turn for each Elemental you control"), false));
     }
 
     private LavakinBrawler(final LavakinBrawler card) {

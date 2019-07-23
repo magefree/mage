@@ -135,7 +135,7 @@ public class CreateTokenEffect extends OneShotEffect {
         }
         if (attacking) {
             if (amount.toString().equals("1")) {
-                sb.append("that's");
+                sb.append(" that's");
             } else {
                 sb.append(" that are");
             }

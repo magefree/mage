@@ -35,7 +35,7 @@ public final class BrinebornCutthroat extends CardImpl {
                 new SpellCastControllerTriggeredAbility(
                         new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false
                 ), NotMyTurnCondition.instance, "Whenever you cast a spell during an opponent's turn, " +
-                "put a +1/+1 counter on {this}"
+                "put a +1/+1 counter on {this}."
         ));
     }
 
