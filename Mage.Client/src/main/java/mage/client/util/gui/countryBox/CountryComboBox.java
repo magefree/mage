@@ -228,7 +228,7 @@ public class CountryComboBox extends JComboBox {
         {"Sweden", "se"},
         {"Switzerland", "ch"},
         {"Syrian Arab Republic", "sy"},
-        {"Taiwan, Province of China", "tw"},
+        {"Taiwan", "tw"},
         {"Tajikistan", "tj"},
         {"Tanzania, United Republic of", "tz"},
         {"Thailand", "th"},
