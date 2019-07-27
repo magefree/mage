@@ -34,16 +34,17 @@ public class AetherGustTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, aetherGust);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, barkhide);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, aetherGust);
-        setChoice(playerA, barkhide);
-        setChoice(playerA, "Top");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, aetherGust, barkhide);
+        setChoice(playerA, "Yes");
 
         setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
         execute();
 
         assertGraveyardCount(playerA, aetherGust, 1);
         assertPermanentCount(playerA, barkhide, 0);
         assertLibraryCount(playerA, 1);
+        assertAllCommandsUsed();
     }
 
     @Test
@@ -57,16 +58,17 @@ public class AetherGustTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, aetherGust);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, barkhide);
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, aetherGust);
-        setChoice(playerA, barkhide);
-        setChoice(playerA, "Top");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, aetherGust, barkhide);
+        setChoice(playerA, "Yes");
 
         setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
         execute();
 
         assertGraveyardCount(playerA, aetherGust, 1);
         assertPermanentCount(playerA, barkhide, 0);
         assertLibraryCount(playerA, 1);
+        assertAllCommandsUsed();
     }
 
 }
