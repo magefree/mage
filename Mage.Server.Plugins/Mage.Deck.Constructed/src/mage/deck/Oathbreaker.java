@@ -23,7 +23,7 @@ public class Oathbreaker extends Vintage {
         this.name = "Oathbreaker";
 
         // banned = vintage + oathbreaker's list: https://weirdcards.org/oathbreaker-ban-list
-        // last updated 4/4/19 - High Tide banned
+        // last updated 8/2/19 - Primeval Titan unbanned
         banned.add("Ad Nauseam");
         banned.add("Ancestral Recall");
         banned.add("Balance");
@@ -52,7 +52,6 @@ public class Oathbreaker extends Vintage {
         banned.add("Painter's Servant");
         banned.add("Panoptic Mirror");
         banned.add("Primal Surge");
-        banned.add("Primeval Titan");
         banned.add("Recurring Nightmare");
         banned.add("Saheeli, the Gifted");
         banned.add("Sol Ring");
