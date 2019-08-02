@@ -1,10 +1,4 @@
-
 package mage.watchers.common;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.keyword.MiracleAbility;
@@ -17,6 +11,11 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.watchers.Watcher;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.UUID;
 
 /**
  * Counts amount of cards drawn this turn by players. Asks players about Miracle
@@ -80,6 +79,7 @@ public class MiracleWatcher extends Watcher {
 
     @Override
     public void reset() {
+        super.reset();
         amountOfCardsDrawnThisTurn.clear();
     }
 

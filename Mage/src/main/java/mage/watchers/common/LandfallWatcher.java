@@ -1,13 +1,14 @@
 package mage.watchers.common;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.watchers.Watcher;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -48,9 +49,9 @@ public class LandfallWatcher extends Watcher {
 
     @Override
     public void reset() {
+        super.reset();
         playerPlayedLand.clear();
         landEnteredBattlefield.clear();
-        super.reset();
     }
 
     public boolean landPlayed(UUID playerId) {

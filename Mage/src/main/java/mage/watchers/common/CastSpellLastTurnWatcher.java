@@ -1,4 +1,3 @@
-
 package mage.watchers.common;
 
 import mage.MageObjectReference;
@@ -49,6 +48,7 @@ public class CastSpellLastTurnWatcher extends Watcher {
 
     @Override
     public void reset() {
+        super.reset();
         amountOfSpellsCastOnPrevTurn.clear();
         amountOfSpellsCastOnPrevTurn.putAll(amountOfSpellsCastOnCurrentTurn);
         amountOfSpellsCastOnCurrentTurn.clear();

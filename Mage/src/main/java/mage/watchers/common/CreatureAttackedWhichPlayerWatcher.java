@@ -1,19 +1,19 @@
-
 package mage.watchers.common;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.UUID;
+
 /**
  * @author jeffwadsworth
- *
- *    Return the last player that was attacked by specified creature this turn
+ * <p>
+ * Return the last player that was attacked by specified creature this turn
  */
 public class CreatureAttackedWhichPlayerWatcher extends Watcher {
 
@@ -48,6 +48,7 @@ public class CreatureAttackedWhichPlayerWatcher extends Watcher {
 
     @Override
     public void reset() {
+        super.reset();
         getPlayerAttackedThisTurnByCreature.clear();
     }
 

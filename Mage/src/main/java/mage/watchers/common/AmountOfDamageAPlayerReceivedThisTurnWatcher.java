@@ -1,20 +1,19 @@
-
 package mage.watchers.common;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
 
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.UUID;
+
 /**
  * @author jeffwadsworth
- *
- *         Amount of damage received by a player this turn
+ * <p>
+ * Amount of damage received by a player this turn
  */
 public class AmountOfDamageAPlayerReceivedThisTurnWatcher extends Watcher {
 
@@ -48,6 +47,7 @@ public class AmountOfDamageAPlayerReceivedThisTurnWatcher extends Watcher {
 
     @Override
     public void reset() {
+        super.reset();
         amountOfDamageReceivedThisTurn.clear();
     }
 

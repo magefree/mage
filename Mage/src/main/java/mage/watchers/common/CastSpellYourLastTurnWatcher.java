@@ -1,4 +1,3 @@
-
 package mage.watchers.common;
 
 import mage.constants.WatcherScope;
@@ -6,8 +5,10 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.UUID;
 
 /**
  * @author nantuko, BetaSteward_at_googlemail.com (spjspj)
@@ -46,6 +47,7 @@ public class CastSpellYourLastTurnWatcher extends Watcher {
 
     @Override
     public void reset() {
+        super.reset();
         if (amountOfSpellsCastOnPrevTurn != null
                 && lastActivePlayer != null
                 && amountOfSpellsCastOnPrevTurn.get(lastActivePlayer) != null) {

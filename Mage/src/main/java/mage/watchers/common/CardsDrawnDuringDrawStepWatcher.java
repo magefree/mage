@@ -1,11 +1,4 @@
-
-
 package mage.watchers.common;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
 
 import mage.constants.PhaseStep;
 import mage.constants.WatcherScope;
@@ -13,10 +6,15 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.UUID;
+
 /**
  * @author LevelX2
- *
- *         Counts cards drawn during draw step
+ * <p>
+ * Counts cards drawn during draw step
  */
 
 public class CardsDrawnDuringDrawStepWatcher extends Watcher {
@@ -54,6 +52,7 @@ public class CardsDrawnDuringDrawStepWatcher extends Watcher {
 
     @Override
     public void reset() {
+        super.reset();
         amountOfCardsDrawnThisTurn.clear();
     }
 

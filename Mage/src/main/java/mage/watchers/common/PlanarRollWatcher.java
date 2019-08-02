@@ -1,14 +1,14 @@
-
 package mage.watchers.common;
+
+import mage.constants.WatcherScope;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.watchers.Watcher;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
-import mage.constants.WatcherScope;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.watchers.Watcher;
 
 /*
  * Counts the number of times the planar die has been rolled per player per turn
@@ -40,7 +40,7 @@ public class PlanarRollWatcher extends Watcher {
                 if (amount == null) {
                     amount = 1;
                 } else {
-                    amount ++;
+                    amount++;
                 }
                 numberTimesPlanarDieRolled.put(playerId, amount);
             }
@@ -53,6 +53,7 @@ public class PlanarRollWatcher extends Watcher {
 
     @Override
     public void reset() {
+        super.reset();
         numberTimesPlanarDieRolled.clear();
     }
 

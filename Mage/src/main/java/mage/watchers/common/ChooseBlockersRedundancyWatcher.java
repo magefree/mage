@@ -1,4 +1,3 @@
-
 package mage.watchers.common;
 
 import mage.constants.WatcherScope;
@@ -7,7 +6,6 @@ import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
 
 /**
- *
  * @author L_J
  */
 
@@ -28,6 +26,7 @@ public class ChooseBlockersRedundancyWatcher extends Watcher { // workaround for
 
     @Override
     public void reset() {
+        super.reset();
         copyCount = 0;
         copyCountApply = 0;
     }
@@ -44,7 +43,7 @@ public class ChooseBlockersRedundancyWatcher extends Watcher { // workaround for
     public void increment() {
         copyCount++;
         copyCountApply = copyCount;
-    }    
+    }
 
     public void decrement() {
         if (copyCountApply > 0) {

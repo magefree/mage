@@ -14,7 +14,6 @@ import mage.watchers.Watcher;
 import java.util.*;
 
 /**
- *
  * @author LevelX2 (spjspj)
  */
 public class PermanentsEnteredBattlefieldYourLastTurnWatcher extends Watcher {
@@ -62,6 +61,7 @@ public class PermanentsEnteredBattlefieldYourLastTurnWatcher extends Watcher {
 
     @Override
     public void reset() {
+        super.reset();
         if (enteringBattlefieldLastTurn != null
                 && lastActivePlayer != null
                 && enteringBattlefieldLastTurn.get(lastActivePlayer) != null) {
