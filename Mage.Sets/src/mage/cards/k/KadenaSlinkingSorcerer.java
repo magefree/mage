@@ -80,7 +80,7 @@ enum KadenaSlinkingSorcererPredicate implements ObjectPlayerPredicate<ObjectPlay
                 && ((Spell) input.getObject()).isCreature()
                 && ((Spell) input.getObject()).isFaceDown(game)) {
             KadenaSlinkingSorcererWatcher watcher = game.getState().getWatcher(KadenaSlinkingSorcererWatcher.class);
-            return watcher != null && watcher.castFaceDownThisTurn(input.getPlayerId());
+            return watcher != null && !watcher.castFaceDownThisTurn(input.getPlayerId());
         }
         return false;
     }
