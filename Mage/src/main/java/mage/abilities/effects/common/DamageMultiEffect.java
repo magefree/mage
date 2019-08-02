@@ -1,6 +1,6 @@
 package mage.abilities.effects.common;
 
-import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -12,14 +12,18 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class DamageMultiEffect extends OneShotEffect {
 
     protected DynamicValue amount;
     private String sourceName = "{source}";
+    private final Set<MageObjectReference> damagedSet = new HashSet<>();
 
     public DamageMultiEffect(int amount) {
         this(new StaticValue(amount));
@@ -37,6 +41,7 @@ public class DamageMultiEffect extends OneShotEffect {
 
     public DamageMultiEffect(final DamageMultiEffect effect) {
         super(effect);
+        this.damagedSet.addAll(effect.damagedSet);
         this.amount = effect.amount;
         this.sourceName = effect.sourceName;
     }
@@ -48,17 +53,21 @@ public class DamageMultiEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (!source.getTargets().isEmpty()) {
-            Target multiTarget = source.getTargets().get(0);
-            for (UUID target : multiTarget.getTargets()) {
-                Permanent permanent = game.getPermanent(target);
-                if (permanent != null) {
-                    permanent.damage(multiTarget.getTargetAmount(target), source.getSourceId(), game, false, true);
-                } else {
-                    Player player = game.getPlayer(target);
-                    if (player != null) {
-                        player.damage(multiTarget.getTargetAmount(target), source.getSourceId(), game, false, true);
-                    }
+        this.damagedSet.clear();
+        if (source.getTargets().isEmpty()) {
+            return true;
+        }
+        Target multiTarget = source.getTargets().get(0);
+        for (UUID target : multiTarget.getTargets()) {
+            Permanent permanent = game.getPermanent(target);
+            if (permanent != null) {
+                if (permanent.damage(multiTarget.getTargetAmount(target), source.getSourceId(), game, false, true) > 0) {
+                    damagedSet.add(new MageObjectReference(permanent, game));
+                } ;
+            } else {
+                Player player = game.getPlayer(target);
+                if (player != null) {
+                    player.damage(multiTarget.getTargetAmount(target), source.getSourceId(), game, false, true);
                 }
             }
         }
@@ -82,5 +91,9 @@ public class DamageMultiEffect extends OneShotEffect {
 
     public void setSourceName(String sourceName) {
         this.sourceName = sourceName;
+    }
+
+    public Set<MageObjectReference> getDamagedSet() {
+        return damagedSet;
     }
 }
