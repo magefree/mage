@@ -45,7 +45,7 @@ public final class DeathBaron extends CardImpl {
         ).setText("Skeletons you control"));
         ability.addEffect(new GainAbilityControlledEffect(
                 DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield, filterSkeletons, false
-        ).setText("and other Zombues you control"));
+        ).setText("and other Zombies you control"));
         ability.addEffect(new BoostControlledEffect(
                 1, 1, Duration.WhileOnBattlefield, filterZombie, true
         ).setText("get +1/+1"));
