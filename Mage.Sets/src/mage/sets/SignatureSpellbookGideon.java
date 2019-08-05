@@ -16,7 +16,7 @@ public final class SignatureSpellbookGideon extends ExpansionSet {
     }
 
     private SignatureSpellbookGideon() {
-        super("Signature Spellbook: Gideon", "SS2", ExpansionSet.buildDate(2019, 6, 28), SetType.PROMOTIONAL);
+        super("Signature Spellbook: Gideon", "SS2", ExpansionSet.buildDate(2019, 6, 28), SetType.SUPPLEMENTAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
