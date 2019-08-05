@@ -252,6 +252,7 @@ public class ScryfallImageSupportCards {
             add("SS1");
             add("SS2");
             add("PPP1");
+            add("PF19");
         }
     };
 
