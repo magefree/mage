@@ -239,6 +239,7 @@ public class ScryfallImageSupportCards {
             add("WAR");
             add("M20");
             add("C19");
+            add("ELD");
             //
             add("EURO");
             add("GPX");
