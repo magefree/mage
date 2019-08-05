@@ -247,6 +247,7 @@ public class ScryfallImageSupportCards {
             add("GRC");
             add("ANA");
             add("G18");
+            add("PS19");
         }
     };
 
