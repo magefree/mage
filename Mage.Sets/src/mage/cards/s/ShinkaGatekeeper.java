@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -30,7 +29,7 @@ public final class ShinkaGatekeeper extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Shinka Gatekeeper is dealt damage, it deals that much damage to you.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new ShinkaGatekeeperDealDamageEffect(), false, false, true));
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(new ShinkaGatekeeperDealDamageEffect(), false, false, true));
     }
 
     public ShinkaGatekeeper(final ShinkaGatekeeper card) {

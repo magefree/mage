@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 
 /**
  *
@@ -26,7 +25,7 @@ public final class RipjawRaptor extends CardImpl {
         this.toughness = new MageInt(5);
 
         // <i>Enrage</i> &mdash; Whenever Ripjaw Raptor is dealt damage, draw a card.
-        Ability ability = new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false, true);
+        Ability ability = new DealtDamageToSourceTriggeredAbility(new DrawCardSourceControllerEffect(1), false, true);
         this.addAbility(ability);
     }
 

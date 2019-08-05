@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.token.InsectToken;
 import mage.players.Player;
@@ -32,7 +31,7 @@ public final class BroodhatchNantuko extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Broodhatch Nantuko is dealt damage, you may create that many 1/1 green Insect creature tokens.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new BroodhatchNantukoDealDamageEffect(), true, false, true));
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(new BroodhatchNantukoDealDamageEffect(), true, false, true));
         // Morph {2}{G}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{G}")));
     }

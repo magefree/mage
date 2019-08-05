@@ -37,7 +37,7 @@ public final class FungusSliver extends CardImpl {
 
         // All Sliver creatures have "Whenever this creature is dealt damage, put a +1/+1 counter on it."
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
-                new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), false),
+                new DealtDamageToSourceTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), false),
                 Duration.WhileOnBattlefield,
                 filter,
                 "All Sliver creatures have \"Whenever this creature is dealt damage, put a +1/+1 counter on it.\""))); 

@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 
 /**
@@ -25,7 +24,7 @@ public final class SilvercladFerocidons extends CardImpl {
         this.toughness = new MageInt(5);
 
         // <i>Enrage</i> &mdash; Whenever Silverclad Ferocidon is dealt damage, each opponent sacrifices a permanent.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new SacrificeOpponentsEffect(new FilterPermanent()), false, true));
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(new SacrificeOpponentsEffect(new FilterPermanent()), false, true));
     }
 
     public SilvercladFerocidons(final SilvercladFerocidons card) {

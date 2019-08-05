@@ -32,7 +32,7 @@ public final class BorosReckoner extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever Boros Reckoner is dealt damage, it deals that much damage to any target.
-        Ability ability = new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new BorosReckonerDealDamageEffect(), false, false, true);
+        Ability ability = new DealtDamageToSourceTriggeredAbility(new BorosReckonerDealDamageEffect(), false, false, true);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
 

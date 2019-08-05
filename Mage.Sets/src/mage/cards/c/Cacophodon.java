@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.target.TargetPermanent;
 
 /**
@@ -27,7 +26,7 @@ public final class Cacophodon extends CardImpl {
         this.toughness = new MageInt(5);
 
         // <i>Enrage</i> — Whenever Cacophodon is dealt damage, untap target permanent.
-        Ability ability = new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), false, true);
+        Ability ability = new DealtDamageToSourceTriggeredAbility(new UntapTargetEffect(), false, true);
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
     }

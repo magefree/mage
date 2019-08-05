@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -31,7 +30,7 @@ public final class ThrashingMudspawn extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever Thrashing Mudspawn is dealt damage, you lose that much life.
-        Ability ability = new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new ThrashingMudspawnEffect(), false);
+        Ability ability = new DealtDamageToSourceTriggeredAbility(new ThrashingMudspawnEffect(), false);
         this.addAbility(ability);
 
         // Morph {1}{B}{B}

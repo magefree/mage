@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 
 /**
  *
@@ -31,7 +30,7 @@ public final class SproutingPhytohydra extends CardImpl {
         // Whenever Sprouting Phytohydra is dealt damage, you may create a token that's a copy of Sprouting Phytohydra.
         Effect effect = new CreateTokenCopySourceEffect();
         effect.setText("you may create a token that's a copy of {this}");
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, effect, true));
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(effect, true));
     }
 
     public SproutingPhytohydra(final SproutingPhytohydra card) {

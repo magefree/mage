@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.game.permanent.token.DinosaurToken;
 
 /**
@@ -27,7 +26,7 @@ public final class RaptorHatchling extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Enrage - Whenever Raptor Hatchling is dealt damage, create a 3/3 green Dinosaur creature token with trample.
-        Ability ability = new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DinosaurToken()), false, true);
+        Ability ability = new DealtDamageToSourceTriggeredAbility(new CreateTokenEffect(new DinosaurToken()), false, true);
         this.addAbility(ability);    }
 
     public RaptorHatchling(final RaptorHatchling card) {

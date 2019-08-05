@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 
 /**
@@ -30,7 +29,7 @@ public final class SnappingSailback extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // Enrage — Whenever Snapping Sailback is dealt damage, put a +1/+1 counter on it.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD,
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(1))
                         .setText("put a +1/+1 counter on it"), false, true));
     }

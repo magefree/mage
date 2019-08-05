@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -33,7 +32,7 @@ public final class IllusoryAmbusher extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // Whenever Illusory Ambusher is dealt damage, draw that many cards.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new IllusoryAmbusherDealtDamageEffect(), false, false, true));
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(new IllusoryAmbusherDealtDamageEffect(), false, false, true));
     }
 
     public IllusoryAmbusher(final IllusoryAmbusher card) {

@@ -36,7 +36,7 @@ public final class DeepSlumberTitan extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
         
         // Whenever Deep-Slumber Titan is dealt damage, untap it.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), false));
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(new UntapSourceEffect(), false));
         
     }
 

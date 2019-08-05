@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -30,7 +29,7 @@ public final class CoalhaulerSwine extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever Coalhauler Swine is dealt damage, it deals that much damage to each player.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new CoalhaulerSwineEffect(), false, false, true));
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(new CoalhaulerSwineEffect(), false, false, true));
     }
 
     public CoalhaulerSwine(final CoalhaulerSwine card) {

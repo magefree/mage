@@ -30,7 +30,7 @@ public final class SpitefulSliver extends CardImpl {
 
         // Sliver creatures you control have "Whenever this creature is dealt damage, it deals that much damage to target player or planeswalker."
         Ability ability = new DealtDamageToSourceTriggeredAbility(
-                Zone.BATTLEFIELD, new SpitefulSliverEffect(),
+                new SpitefulSliverEffect(),
                 false, false, true
         );
         ability.addTarget(new TargetPlayer());

@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.target.common.TargetOpponentOrPlaneswalker;
 
@@ -28,7 +27,7 @@ public final class MoggManiac extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Mogg Maniac is dealt damage, it deals that much damage to target opponent.
-        Ability ability = new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new MoggManiacDealDamageEffect(), false, false, true);
+        Ability ability = new DealtDamageToSourceTriggeredAbility(new MoggManiacDealDamageEffect(), false, false, true);
         ability.addTarget(new TargetOpponentOrPlaneswalker());
         this.addAbility(ability);
     }
