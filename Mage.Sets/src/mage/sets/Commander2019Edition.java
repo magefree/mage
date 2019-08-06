@@ -50,6 +50,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Strionic Resonator", 224, Rarity.RARE, mage.cards.s.StrionicResonator.class));
         cards.add(new SetCardInfo("Sungrass Prairie", 277, Rarity.RARE, mage.cards.s.SungrassPrairie.class));
         cards.add(new SetCardInfo("Sunken Hollow", 278, Rarity.RARE, mage.cards.s.SunkenHollow.class));
+        cards.add(new SetCardInfo("Thalia's Geistcaller", 7, Rarity.RARE, mage.cards.t.ThaliasGeistcaller.class));
         cards.add(new SetCardInfo("Thespian's Stage", 282, Rarity.RARE, mage.cards.t.ThespiansStage.class));
         cards.add(new SetCardInfo("Thran Dynamo", 223, Rarity.UNCOMMON, mage.cards.t.ThranDynamo.class));
         cards.add(new SetCardInfo("Trail of Mystery", 186, Rarity.RARE, mage.cards.t.TrailOfMystery.class));

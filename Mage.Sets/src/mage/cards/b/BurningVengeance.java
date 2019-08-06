@@ -38,7 +38,7 @@ public final class BurningVengeance extends CardImpl {
 
 class BurningVengeanceOnCastAbility extends TriggeredAbilityImpl {
 
-    private static final String abilityText = "Whenever you cast a spell from your graveyard, Burning Vengeance deals 2 damage to any target";
+    private static final String abilityText = "Whenever you cast a spell from your graveyard, {this} deals 2 damage to any target";
 
     BurningVengeanceOnCastAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2), false);
