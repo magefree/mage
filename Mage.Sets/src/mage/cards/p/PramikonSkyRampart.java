@@ -1,12 +1,13 @@
-package mage.cards.m;
+package mage.cards.p;
 
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.ChooseModeEffect;
-import mage.abilities.meta.OrTriggeredAbility;
+import mage.abilities.keyword.DefenderAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -19,46 +20,56 @@ import mage.players.PlayerList;
 import java.util.UUID;
 
 /**
- * @author LevelX2
+ * @author TheElk801
  */
-public final class MysticBarrier extends CardImpl {
+public final class PramikonSkyRampart extends CardImpl {
 
     static final String ALLOW_ATTACKING_LEFT = "Allow attacking left";
     static final String ALLOW_ATTACKING_RIGHT = "Allow attacking right";
 
-    public MysticBarrier(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");
+    public PramikonSkyRampart(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{R}{W}");
 
-        // When Mystic Barrier enters the battlefield or at the beginning of your upkeep, choose left or right.
-        this.addAbility(new OrTriggeredAbility(Zone.BATTLEFIELD, new ChooseModeEffect(
+        this.addSuperType(SuperType.LEGENDARY);
+        this.subtype.add(SubType.WALL);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(5);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+
+        // Defender
+        this.addAbility(DefenderAbility.getInstance());
+
+        // As Pramikon, Sky Rampart enters the battlefield, choose left or right.
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseModeEffect(
                 "Choose a direction to allow attacking in.",
-                ALLOW_ATTACKING_LEFT, ALLOW_ATTACKING_RIGHT),
-                new EntersBattlefieldTriggeredAbility(null, false),
-                new BeginningOfUpkeepTriggeredAbility(null, TargetController.YOU, false)));
+                ALLOW_ATTACKING_LEFT, ALLOW_ATTACKING_RIGHT
+        )));
 
-        // Each player may attack only the opponent seated nearest him or her in the last chosen direction and planeswalkers controlled by that player.
-        this.addAbility(new SimpleStaticAbility(new MysticBarrierReplacementEffect()));
+        // Each player may attack only the nearest opponent in the chosen direction and planeswalkers controlled by that opponent.
+        this.addAbility(new SimpleStaticAbility(new PramikonSkyRampartReplacementEffect()));
     }
 
-    private MysticBarrier(final MysticBarrier card) {
+    private PramikonSkyRampart(final PramikonSkyRampart card) {
         super(card);
     }
 
     @Override
-    public MysticBarrier copy() {
-        return new MysticBarrier(this);
+    public PramikonSkyRampart copy() {
+        return new PramikonSkyRampart(this);
     }
 }
 
-class MysticBarrierReplacementEffect extends ReplacementEffectImpl {
+class PramikonSkyRampartReplacementEffect extends ReplacementEffectImpl {
 
-    MysticBarrierReplacementEffect() {
+    PramikonSkyRampartReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "Each player may attack only the nearest opponent in the " +
-                "last chosen direction and planeswalkers controlled by that player.";
+        staticText = "Each player may attack only the nearest opponent " +
+                "in the chosen direction and planeswalkers controlled by that opponent.";
     }
 
-    private MysticBarrierReplacementEffect(MysticBarrierReplacementEffect effect) {
+    private PramikonSkyRampartReplacementEffect(PramikonSkyRampartReplacementEffect effect) {
         super(effect);
     }
 
@@ -97,7 +108,7 @@ class MysticBarrierReplacementEffect extends ReplacementEffectImpl {
                 return false;
             }
             PlayerList playerList = game.getState().getPlayerList(event.getPlayerId());
-            if (allowedDirection.equals(MysticBarrier.ALLOW_ATTACKING_LEFT)
+            if (allowedDirection.equals(PramikonSkyRampart.ALLOW_ATTACKING_LEFT)
                     && !playerList.getNext().equals(defender.getId())) {
                 // the defender is not the player to the left
                 Player attacker = game.getPlayer(event.getPlayerId());
@@ -106,7 +117,7 @@ class MysticBarrierReplacementEffect extends ReplacementEffectImpl {
                 }
                 return true;
             }
-            if (allowedDirection.equals(MysticBarrier.ALLOW_ATTACKING_RIGHT)
+            if (allowedDirection.equals(PramikonSkyRampart.ALLOW_ATTACKING_RIGHT)
                     && !playerList.getPrevious().equals(defender.getId())) {
                 // the defender is not the player to the right
                 Player attacker = game.getPlayer(event.getPlayerId());
@@ -120,8 +131,7 @@ class MysticBarrierReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public MysticBarrierReplacementEffect copy() {
-        return new MysticBarrierReplacementEffect(this);
+    public PramikonSkyRampartReplacementEffect copy() {
+        return new PramikonSkyRampartReplacementEffect(this);
     }
-
 }

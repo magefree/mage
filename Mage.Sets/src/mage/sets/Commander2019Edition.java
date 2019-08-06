@@ -50,6 +50,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Nantuko Vigilante", 174, Rarity.COMMON, mage.cards.n.NantukoVigilante.class));
         cards.add(new SetCardInfo("Plains", 288, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Prairie Stream", 265, Rarity.RARE, mage.cards.p.PrairieStream.class));
+        cards.add(new SetCardInfo("Pramikon, Sky Rampart", 47, Rarity.MYTHIC, mage.cards.p.PramikonSkyRampart.class));
         cards.add(new SetCardInfo("Prismatic Strands", 69, Rarity.COMMON, mage.cards.p.PrismaticStrands.class));
         cards.add(new SetCardInfo("Ral Zarek", 198, Rarity.MYTHIC, mage.cards.r.RalZarek.class));
         cards.add(new SetCardInfo("Reality Shift", 92, Rarity.UNCOMMON, mage.cards.r.RealityShift.class));
