@@ -74,6 +74,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Thran Dynamo", 223, Rarity.UNCOMMON, mage.cards.t.ThranDynamo.class));
         cards.add(new SetCardInfo("Trail of Mystery", 186, Rarity.RARE, mage.cards.t.TrailOfMystery.class));
         cards.add(new SetCardInfo("Vesuvan Shapeshifter", 101, Rarity.RARE, mage.cards.v.VesuvanShapeshifter.class));
+        cards.add(new SetCardInfo("Volrath, the Shapestealer", 51, Rarity.MYTHIC, mage.cards.v.VolrathTheShapestealer.class));
         cards.add(new SetCardInfo("Vraska the Unseen", 207, Rarity.MYTHIC, mage.cards.v.VraskaTheUnseen.class));
     }
 }
