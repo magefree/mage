@@ -131,6 +131,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Trostani, Selesnya's Voice", 204, Rarity.MYTHIC, mage.cards.t.TrostaniSelesnyasVoice.class));
         cards.add(new SetCardInfo("Urban Evolution", 205, Rarity.UNCOMMON, mage.cards.u.UrbanEvolution.class));
         cards.add(new SetCardInfo("Vesuvan Shapeshifter", 101, Rarity.RARE, mage.cards.v.VesuvanShapeshifter.class));
+        cards.add(new SetCardInfo("Voice of the Many", 36, Rarity.UNCOMMON, mage.cards.v.VoiceOfTheMany.class));
         cards.add(new SetCardInfo("Volrath, the Shapestealer", 51, Rarity.MYTHIC, mage.cards.v.VolrathTheShapestealer.class));
         cards.add(new SetCardInfo("Vraska the Unseen", 207, Rarity.MYTHIC, mage.cards.v.VraskaTheUnseen.class));
         cards.add(new SetCardInfo("Willbender", 102, Rarity.UNCOMMON, mage.cards.w.Willbender.class));
