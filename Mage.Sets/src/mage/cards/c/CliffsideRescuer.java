@@ -116,16 +116,16 @@ class CliffsideRescuerProtectionAbility extends ProtectionAbility {
             return true;
         }
         if (source instanceof Permanent) {
-            playerSet.stream().noneMatch(((Permanent) source)::isControlledBy);
+            return playerSet.stream().noneMatch(((Permanent) source)::isControlledBy);
         }
         if (source instanceof Spell) {
-            playerSet.stream().noneMatch(((Spell) source)::isControlledBy);
+            return playerSet.stream().noneMatch(((Spell) source)::isControlledBy);
         }
         if (source instanceof StackObject) {
-            playerSet.stream().noneMatch(((StackObject) source)::isControlledBy);
+            return playerSet.stream().noneMatch(((StackObject) source)::isControlledBy);
         }
         if (source instanceof Card) { // e.g. for Vengeful Pharaoh
-            playerSet.stream().noneMatch(((Card) source)::isOwnedBy);
+            return playerSet.stream().noneMatch(((Card) source)::isOwnedBy);
         }
         return true;
     }
