@@ -20,6 +20,7 @@ public final class Commander2019Edition extends ExpansionSet {
         this.blockName = "Command Zone";
 
         cards.add(new SetCardInfo("Ainok Survivalist", 156, Rarity.COMMON, mage.cards.a.AinokSurvivalist.class));
+        cards.add(new SetCardInfo("Angel of Sanctions", 61, Rarity.MYTHIC, mage.cards.a.AngelOfSanctions.class));
         cards.add(new SetCardInfo("Anje Falkenrath", 37, Rarity.MYTHIC, mage.cards.a.AnjeFalkenrath.class));
         cards.add(new SetCardInfo("Anje's Ravager", 22, Rarity.RARE, mage.cards.a.AnjesRavager.class));
         cards.add(new SetCardInfo("Apex Altisaur", 31, Rarity.RARE, mage.cards.a.ApexAltisaur.class));
@@ -122,6 +123,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Thousand Winds", 100, Rarity.RARE, mage.cards.t.ThousandWinds.class));
         cards.add(new SetCardInfo("Thran Dynamo", 225, Rarity.UNCOMMON, mage.cards.t.ThranDynamo.class));
         cards.add(new SetCardInfo("Trail of Mystery", 186, Rarity.RARE, mage.cards.t.TrailOfMystery.class));
+        cards.add(new SetCardInfo("Trostani, Selesnya's Voice", 204, Rarity.COMMON, mage.cards.t.TrostaniSelesnyasVoice.class));
         cards.add(new SetCardInfo("Urban Evolution", 205, Rarity.UNCOMMON, mage.cards.u.UrbanEvolution.class));
         cards.add(new SetCardInfo("Vesuvan Shapeshifter", 101, Rarity.RARE, mage.cards.v.VesuvanShapeshifter.class));
         cards.add(new SetCardInfo("Volrath, the Shapestealer", 51, Rarity.MYTHIC, mage.cards.v.VolrathTheShapestealer.class));
