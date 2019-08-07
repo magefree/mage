@@ -30,6 +30,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Deathmist Raptor", 160, Rarity.MYTHIC, mage.cards.d.DeathmistRaptor.class));
         cards.add(new SetCardInfo("Den Protector", 161, Rarity.RARE, mage.cards.d.DenProtector.class));
         cards.add(new SetCardInfo("Dockside Extortionist", 24, Rarity.RARE, mage.cards.d.DocksideExtortionist.class));
+        cards.add(new SetCardInfo("Empowered Autogenerator", 54, Rarity.RARE, mage.cards.e.EmpoweredAutogenerator.class));
         cards.add(new SetCardInfo("Farseek", 165, Rarity.COMMON, mage.cards.f.Farseek.class));
         cards.add(new SetCardInfo("Forest", 300, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gerrard, Weatherlight Hero", 41, Rarity.RARE, mage.cards.g.GerrardWeatherlightHero.class));
