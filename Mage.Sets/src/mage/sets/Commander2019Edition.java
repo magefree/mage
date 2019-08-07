@@ -62,8 +62,10 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Great Oak Guardian", 170, Rarity.UNCOMMON, mage.cards.g.GreatOakGuardian.class));
         cards.add(new SetCardInfo("Grim Haruspex", 118, Rarity.RARE, mage.cards.g.GrimHaruspex.class));
         cards.add(new SetCardInfo("Grismold, the Dreadsower", 44, Rarity.RARE, mage.cards.g.GrismoldTheDreadsower.class));
+        cards.add(new SetCardInfo("Growing Ranks", 193, Rarity.RARE, mage.cards.g.GrowingRanks.class));
         cards.add(new SetCardInfo("Hex", 120, Rarity.RARE, mage.cards.h.Hex.class));
         cards.add(new SetCardInfo("Hooded Hydra", 172, Rarity.MYTHIC, mage.cards.h.HoodedHydra.class));
+        cards.add(new SetCardInfo("Hour of Reckoning", 65, Rarity.RARE, mage.cards.h.HourOfReckoning.class));
         cards.add(new SetCardInfo("Icefeather Aven", 194, Rarity.UNCOMMON, mage.cards.i.IcefeatherAven.class));
         cards.add(new SetCardInfo("Ignite the Future", 27, Rarity.RARE, mage.cards.i.IgniteTheFuture.class));
         cards.add(new SetCardInfo("Island", 291, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
@@ -73,7 +75,6 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Kadena, Slinking Sorcerer", 45, Rarity.MYTHIC, mage.cards.k.KadenaSlinkingSorcerer.class));
         cards.add(new SetCardInfo("Kheru Spellsnatcher", 89, Rarity.RARE, mage.cards.k.KheruSpellsnatcher.class));
         cards.add(new SetCardInfo("Leadership Vacuum", 9, Rarity.UNCOMMON, mage.cards.l.LeadershipVacuum.class));
-        cards.add(new SetCardInfo("Lightning Greaves", 260, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
         cards.add(new SetCardInfo("Llanowar Wastes", 258, Rarity.RARE, mage.cards.l.LlanowarWastes.class));
         cards.add(new SetCardInfo("Mountain", 297, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Myriad Landscape", 261, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
@@ -90,6 +91,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Reality Shift", 92, Rarity.UNCOMMON, mage.cards.r.RealityShift.class));
         cards.add(new SetCardInfo("Reliquary Tower", 268, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
         cards.add(new SetCardInfo("River Kelpie", 93, Rarity.RARE, mage.cards.r.RiverKelpie.class));
+        cards.add(new SetCardInfo("Roc Egg", 73, Rarity.UNCOMMON, mage.cards.r.RocEgg.class));
         cards.add(new SetCardInfo("Runic Repetition", 94, Rarity.UNCOMMON, mage.cards.r.RunicRepetition.class));
         cards.add(new SetCardInfo("Sagu Mauler", 200, Rarity.RARE, mage.cards.s.SaguMauler.class));
         cards.add(new SetCardInfo("Sakura-Tribe Elder", 177, Rarity.COMMON, mage.cards.s.SakuraTribeElder.class));
@@ -101,6 +103,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Seedborn Muse", 179, Rarity.RARE, mage.cards.s.SeedbornMuse.class));
         cards.add(new SetCardInfo("Sevinne's Reclamation", 5, Rarity.RARE, mage.cards.s.SevinnesReclamation.class));
         cards.add(new SetCardInfo("Sevinne, the Chronoclasm", 49, Rarity.MYTHIC, mage.cards.s.SevinneTheChronoclasm.class));
+        cards.add(new SetCardInfo("Shamanic Revelation", 180, Rarity.RARE, mage.cards.s.ShamanicRevelation.class));
         cards.add(new SetCardInfo("Shrine of the Forsaken Gods", 273, Rarity.RARE, mage.cards.s.ShrineOfTheForsakenGods.class));
         cards.add(new SetCardInfo("Silumgar Assassin", 128, Rarity.RARE, mage.cards.s.SilumgarAssassin.class));
         cards.add(new SetCardInfo("Simic Growth Chamber", 274, Rarity.UNCOMMON, mage.cards.s.SimicGrowthChamber.class));
@@ -125,7 +128,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Thousand Winds", 100, Rarity.RARE, mage.cards.t.ThousandWinds.class));
         cards.add(new SetCardInfo("Thran Dynamo", 225, Rarity.UNCOMMON, mage.cards.t.ThranDynamo.class));
         cards.add(new SetCardInfo("Trail of Mystery", 186, Rarity.RARE, mage.cards.t.TrailOfMystery.class));
-        cards.add(new SetCardInfo("Trostani, Selesnya's Voice", 204, Rarity.COMMON, mage.cards.t.TrostaniSelesnyasVoice.class));
+        cards.add(new SetCardInfo("Trostani, Selesnya's Voice", 204, Rarity.MYTHIC, mage.cards.t.TrostaniSelesnyasVoice.class));
         cards.add(new SetCardInfo("Urban Evolution", 205, Rarity.UNCOMMON, mage.cards.u.UrbanEvolution.class));
         cards.add(new SetCardInfo("Vesuvan Shapeshifter", 101, Rarity.RARE, mage.cards.v.VesuvanShapeshifter.class));
         cards.add(new SetCardInfo("Volrath, the Shapestealer", 51, Rarity.MYTHIC, mage.cards.v.VolrathTheShapestealer.class));
