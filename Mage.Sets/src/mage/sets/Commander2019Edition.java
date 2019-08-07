@@ -44,8 +44,10 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Explore", 164, Rarity.COMMON, mage.cards.e.Explore.class));
         cards.add(new SetCardInfo("Faithless Looting", 140, Rarity.COMMON, mage.cards.f.FaithlessLooting.class));
         cards.add(new SetCardInfo("Farseek", 165, Rarity.COMMON, mage.cards.f.Farseek.class));
+        cards.add(new SetCardInfo("Feldon of the Third Path", 141, Rarity.MYTHIC, mage.cards.f.FeldonOfTheThirdPath.class));
         cards.add(new SetCardInfo("Forest", 300, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forgotten Cave", 243, Rarity.UNCOMMON, mage.cards.f.ForgottenCave.class));
+        cards.add(new SetCardInfo("Garruk, Primal Hunter", 167, Rarity.MYTHIC, mage.cards.g.GarrukPrimalHunter.class));
         cards.add(new SetCardInfo("Gerrard, Weatherlight Hero", 41, Rarity.RARE, mage.cards.g.GerrardWeatherlightHero.class));
         cards.add(new SetCardInfo("Ghastly Conscription", 115, Rarity.MYTHIC, mage.cards.g.GhastlyConscription.class));
         cards.add(new SetCardInfo("Ghired's Belligerence", 25, Rarity.RARE, mage.cards.g.GhiredsBelligerence.class));
@@ -67,6 +69,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Kadena, Slinking Sorcerer", 45, Rarity.MYTHIC, mage.cards.k.KadenaSlinkingSorcerer.class));
         cards.add(new SetCardInfo("Kheru Spellsnatcher", 89, Rarity.RARE, mage.cards.k.KheruSpellsnatcher.class));
         cards.add(new SetCardInfo("Leadership Vacuum", 9, Rarity.UNCOMMON, mage.cards.l.LeadershipVacuum.class));
+        cards.add(new SetCardInfo("Lightning Greaves", 260, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
         cards.add(new SetCardInfo("Llanowar Wastes", 258, Rarity.RARE, mage.cards.l.LlanowarWastes.class));
         cards.add(new SetCardInfo("Mountain", 297, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Myriad Landscape", 261, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
@@ -116,7 +119,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Thespian's Stage", 282, Rarity.RARE, mage.cards.t.ThespiansStage.class));
         cards.add(new SetCardInfo("Thornwood Falls", 283, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
         cards.add(new SetCardInfo("Thousand Winds", 100, Rarity.RARE, mage.cards.t.ThousandWinds.class));
-        cards.add(new SetCardInfo("Thran Dynamo", 223, Rarity.UNCOMMON, mage.cards.t.ThranDynamo.class));
+        cards.add(new SetCardInfo("Thran Dynamo", 225, Rarity.UNCOMMON, mage.cards.t.ThranDynamo.class));
         cards.add(new SetCardInfo("Trail of Mystery", 186, Rarity.RARE, mage.cards.t.TrailOfMystery.class));
         cards.add(new SetCardInfo("Urban Evolution", 205, Rarity.UNCOMMON, mage.cards.u.UrbanEvolution.class));
         cards.add(new SetCardInfo("Vesuvan Shapeshifter", 101, Rarity.RARE, mage.cards.v.VesuvanShapeshifter.class));
