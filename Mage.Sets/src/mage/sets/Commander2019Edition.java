@@ -34,6 +34,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Cinder Glade", 236, Rarity.RARE, mage.cards.c.CinderGlade.class));
         cards.add(new SetCardInfo("Clever Impersonator", 82, Rarity.MYTHIC, mage.cards.c.CleverImpersonator.class));
         cards.add(new SetCardInfo("Command Tower", 237, Rarity.COMMON, mage.cards.c.CommandTower.class));
+        cards.add(new SetCardInfo("Commander's Insignia", 2, Rarity.RARE, mage.cards.c.CommandersInsignia.class));
         cards.add(new SetCardInfo("Cultivate", 159, Rarity.COMMON, mage.cards.c.Cultivate.class));
         cards.add(new SetCardInfo("Darkwater Catacombs", 238, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class));
         cards.add(new SetCardInfo("Deathmist Raptor", 160, Rarity.MYTHIC, mage.cards.d.DeathmistRaptor.class));
