@@ -292,6 +292,7 @@ public enum SubType {
     SCION("Scion", SubTypeSet.CreatureType),
     SCORPION("Scorpion", SubTypeSet.CreatureType),
     SCOUT("Scout", SubTypeSet.CreatureType),
+    SCULPTURE("Sculpture", SubTypeSet.CreatureType),
     SERF("Serf", SubTypeSet.CreatureType),
     SERPENT("Serpent", SubTypeSet.CreatureType),
     SERVO("Servo", SubTypeSet.CreatureType),
