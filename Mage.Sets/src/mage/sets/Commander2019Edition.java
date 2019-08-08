@@ -46,6 +46,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Divine Reckoning", 62, Rarity.RARE, mage.cards.d.DivineReckoning.class));
         cards.add(new SetCardInfo("Dockside Extortionist", 24, Rarity.RARE, mage.cards.d.DocksideExtortionist.class));
         cards.add(new SetCardInfo("Doomed Artisan", 3, Rarity.RARE, mage.cards.d.DoomedArtisan.class));
+        cards.add(new SetCardInfo("Dusk // Dawn", 63, Rarity.RARE, mage.cards.d.DuskDawn.class));
         cards.add(new SetCardInfo("Echoing Truth", 84, Rarity.COMMON, mage.cards.e.EchoingTruth.class));
         cards.add(new SetCardInfo("Evolving Wilds", 241, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Explore", 164, Rarity.COMMON, mage.cards.e.Explore.class));
