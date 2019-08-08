@@ -1,6 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
@@ -24,9 +25,9 @@ public final class CommandersInsignia extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
 
         // Creatures you control get +1/+1 for each time you've cast your commander from the command zone this game.
-        this.getSpellAbility().addEffect(new BoostControlledEffect(
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(
                 CommandersInsigniaValue.instance, CommandersInsigniaValue.instance, Duration.WhileOnBattlefield
-        ).setText("Creatures you control get +1/+1 for each time you've cast your commander from the command zone this game."));
+        ).setText("Creatures you control get +1/+1 for each time you've cast your commander from the command zone this game.")));
     }
 
     private CommandersInsignia(final CommandersInsignia card) {
