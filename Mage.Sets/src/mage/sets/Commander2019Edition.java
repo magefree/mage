@@ -111,6 +111,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Lightning Greaves", 217, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
         cards.add(new SetCardInfo("Llanowar Wastes", 258, Rarity.RARE, mage.cards.l.LlanowarWastes.class));
         cards.add(new SetCardInfo("Magmaquake", 148, Rarity.RARE, mage.cards.m.Magmaquake.class));
+        cards.add(new SetCardInfo("Mass Diminish", 10, Rarity.RARE, mage.cards.m.MassDiminish.class));
         cards.add(new SetCardInfo("Mimic Vat", 219, Rarity.RARE, mage.cards.m.MimicVat.class));
         cards.add(new SetCardInfo("Momentous Fall", 173, Rarity.RARE, mage.cards.m.MomentousFall.class));
         cards.add(new SetCardInfo("Mountain", 297, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
