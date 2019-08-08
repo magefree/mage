@@ -18,9 +18,9 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class VoiceOfTheMany extends CardImpl {
+public final class VoiceOfMany extends CardImpl {
 
-    public VoiceOfTheMany(UUID ownerId, CardSetInfo setInfo) {
+    public VoiceOfMany(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
 
         this.subtype.add(SubType.ELF);
@@ -28,34 +28,34 @@ public final class VoiceOfTheMany extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // When Voice of the Many enters the battlefield, draw a card for each opponent who controls fewer creatures than you do.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new VoiceOfTheManyEffect()));
+        // When Voice of Many enters the battlefield, draw a card for each opponent who controls fewer creatures than you do.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new VoiceOfManyEffect()));
     }
 
-    private VoiceOfTheMany(final VoiceOfTheMany card) {
+    private VoiceOfMany(final VoiceOfMany card) {
         super(card);
     }
 
     @Override
-    public VoiceOfTheMany copy() {
-        return new VoiceOfTheMany(this);
+    public VoiceOfMany copy() {
+        return new VoiceOfMany(this);
     }
 }
 
-class VoiceOfTheManyEffect extends OneShotEffect {
+class VoiceOfManyEffect extends OneShotEffect {
 
-    VoiceOfTheManyEffect() {
+    VoiceOfManyEffect() {
         super(Outcome.Benefit);
-        staticText = "draw a card for each opponent who controls fewer creatures than you do";
+        staticText = "draw a card for each opponent who controls fewer creatures than you";
     }
 
-    private VoiceOfTheManyEffect(final VoiceOfTheManyEffect effect) {
+    private VoiceOfManyEffect(final VoiceOfManyEffect effect) {
         super(effect);
     }
 
     @Override
-    public VoiceOfTheManyEffect copy() {
-        return new VoiceOfTheManyEffect(this);
+    public VoiceOfManyEffect copy() {
+        return new VoiceOfManyEffect(this);
     }
 
     @Override
