@@ -31,6 +31,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Backdraft Hellkite", 23, Rarity.RARE, mage.cards.b.BackdraftHellkite.class));
         cards.add(new SetCardInfo("Bane of the Living", 104, Rarity.RARE, mage.cards.b.BaneOfTheLiving.class));
         cards.add(new SetCardInfo("Beast Within", 157, Rarity.UNCOMMON, mage.cards.b.BeastWithin.class));
+        cards.add(new SetCardInfo("Big Game Hunter", 106, Rarity.UNCOMMON, mage.cards.b.BigGameHunter.class));
         cards.add(new SetCardInfo("Biomass Mutation", 187, Rarity.RARE, mage.cards.b.BiomassMutation.class));
         cards.add(new SetCardInfo("Bojuka Bog", 232, Rarity.COMMON, mage.cards.b.BojukaBog.class));
         cards.add(new SetCardInfo("Boros Garrison", 233, Rarity.COMMON, mage.cards.b.BorosGarrison.class));
@@ -107,6 +108,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Kadena, Slinking Sorcerer", 45, Rarity.MYTHIC, mage.cards.k.KadenaSlinkingSorcerer.class));
         cards.add(new SetCardInfo("Kheru Spellsnatcher", 89, Rarity.RARE, mage.cards.k.KheruSpellsnatcher.class));
         cards.add(new SetCardInfo("Leadership Vacuum", 9, Rarity.UNCOMMON, mage.cards.l.LeadershipVacuum.class));
+        cards.add(new SetCardInfo("Lightning Greaves", 217, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
         cards.add(new SetCardInfo("Llanowar Wastes", 258, Rarity.RARE, mage.cards.l.LlanowarWastes.class));
         cards.add(new SetCardInfo("Magmaquake", 148, Rarity.RARE, mage.cards.m.Magmaquake.class));
         cards.add(new SetCardInfo("Mimic Vat", 219, Rarity.RARE, mage.cards.m.MimicVat.class));
