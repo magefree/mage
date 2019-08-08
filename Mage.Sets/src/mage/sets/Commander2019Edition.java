@@ -151,6 +151,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Secret Plans", 201, Rarity.UNCOMMON, mage.cards.s.SecretPlans.class));
         cards.add(new SetCardInfo("Secrets of the Dead", 95, Rarity.UNCOMMON, mage.cards.s.SecretsOfTheDead.class));
         cards.add(new SetCardInfo("Seedborn Muse", 179, Rarity.RARE, mage.cards.s.SeedbornMuse.class));
+        cards.add(new SetCardInfo("Selesnya Eulogist", 35, Rarity.RARE, mage.cards.s.SelesnyaEulogist.class));
         cards.add(new SetCardInfo("Sevinne's Reclamation", 5, Rarity.RARE, mage.cards.s.SevinnesReclamation.class));
         cards.add(new SetCardInfo("Sevinne, the Chronoclasm", 49, Rarity.MYTHIC, mage.cards.s.SevinneTheChronoclasm.class));
         cards.add(new SetCardInfo("Shamanic Revelation", 180, Rarity.RARE, mage.cards.s.ShamanicRevelation.class));
