@@ -122,6 +122,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Simic Guildgate", 275, Rarity.COMMON, mage.cards.s.SimicGuildgate.class));
         cards.add(new SetCardInfo("Skinthinner", 129, Rarity.COMMON, mage.cards.s.Skinthinner.class));
         cards.add(new SetCardInfo("Sol Ring", 221, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
+        cards.add(new SetCardInfo("Song of the Worldsoul", 6, Rarity.RARE, mage.cards.s.SongOfTheWorldsoul.class));
         cards.add(new SetCardInfo("Storm Herd", 75, Rarity.RARE, mage.cards.s.StormHerd.class));
         cards.add(new SetCardInfo("Stratus Dancer", 96, Rarity.RARE, mage.cards.s.StratusDancer.class));
         cards.add(new SetCardInfo("Strionic Resonator", 224, Rarity.RARE, mage.cards.s.StrionicResonator.class));
