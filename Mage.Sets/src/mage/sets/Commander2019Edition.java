@@ -94,6 +94,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Hooded Hydra", 172, Rarity.MYTHIC, mage.cards.h.HoodedHydra.class));
         cards.add(new SetCardInfo("Hour of Reckoning", 65, Rarity.RARE, mage.cards.h.HourOfReckoning.class));
         cards.add(new SetCardInfo("Icefeather Aven", 194, Rarity.UNCOMMON, mage.cards.i.IcefeatherAven.class));
+        cards.add(new SetCardInfo("Idol of Oblivion", 55, Rarity.RARE, mage.cards.i.IdolOfOblivion.class));
         cards.add(new SetCardInfo("Ignite the Future", 27, Rarity.RARE, mage.cards.i.IgniteTheFuture.class));
         cards.add(new SetCardInfo("Increasing Devotion", 66, Rarity.RARE, mage.cards.i.IncreasingDevotion.class));
         cards.add(new SetCardInfo("Increasing Vengeance", 147, Rarity.RARE, mage.cards.i.IncreasingVengeance.class));
