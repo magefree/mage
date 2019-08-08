@@ -138,6 +138,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Refuse // Cooperate", 199, Rarity.RARE, mage.cards.r.RefuseCooperate.class));
         cards.add(new SetCardInfo("Reliquary Tower", 268, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
         cards.add(new SetCardInfo("River Kelpie", 93, Rarity.RARE, mage.cards.r.RiverKelpie.class));
+        cards.add(new SetCardInfo("Road of Return", 34, Rarity.RARE, mage.cards.r.RoadOfReturn.class));
         cards.add(new SetCardInfo("Roc Egg", 73, Rarity.UNCOMMON, mage.cards.r.RocEgg.class));
         cards.add(new SetCardInfo("Rolling Temblor", 151, Rarity.UNCOMMON, mage.cards.r.RollingTemblor.class));
         cards.add(new SetCardInfo("Runic Repetition", 94, Rarity.UNCOMMON, mage.cards.r.RunicRepetition.class));
