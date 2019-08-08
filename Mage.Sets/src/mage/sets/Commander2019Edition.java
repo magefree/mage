@@ -60,6 +60,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Full Flowering", 32, Rarity.RARE, mage.cards.f.FullFlowering.class));
         cards.add(new SetCardInfo("Garruk, Primal Hunter", 167, Rarity.MYTHIC, mage.cards.g.GarrukPrimalHunter.class));
         cards.add(new SetCardInfo("Gerrard, Weatherlight Hero", 41, Rarity.RARE, mage.cards.g.GerrardWeatherlightHero.class));
+        cards.add(new SetCardInfo("Geth, Lord of the Vault", 114, Rarity.MYTHIC, mage.cards.g.GethLordOfTheVault.class));
         cards.add(new SetCardInfo("Ghastly Conscription", 115, Rarity.MYTHIC, mage.cards.g.GhastlyConscription.class));
         cards.add(new SetCardInfo("Ghired's Belligerence", 25, Rarity.RARE, mage.cards.g.GhiredsBelligerence.class));
         cards.add(new SetCardInfo("Ghired, Conclave Exile", 42, Rarity.MYTHIC, mage.cards.g.GhiredConclaveExile.class));
