@@ -90,6 +90,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Golgari Guildgate", 247, Rarity.COMMON, mage.cards.g.GolgariGuildgate.class));
         cards.add(new SetCardInfo("Golgari Rot Farm", 248, Rarity.UNCOMMON, mage.cards.g.GolgariRotFarm.class));
         cards.add(new SetCardInfo("Great Oak Guardian", 170, Rarity.UNCOMMON, mage.cards.g.GreatOakGuardian.class));
+        cards.add(new SetCardInfo("Greven, Predator Captain", 43, Rarity.MYTHIC, mage.cards.g.GrevenPredatorCaptain.class));
         cards.add(new SetCardInfo("Grim Haruspex", 118, Rarity.RARE, mage.cards.g.GrimHaruspex.class));
         cards.add(new SetCardInfo("Grimoire of the Dead", 213, Rarity.MYTHIC, mage.cards.g.GrimoireOfTheDead.class));
         cards.add(new SetCardInfo("Grismold, the Dreadsower", 44, Rarity.RARE, mage.cards.g.GrismoldTheDreadsower.class));
