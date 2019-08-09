@@ -77,7 +77,7 @@ class TectonicHellionEffect extends OneShotEffect {
         int max = landMap
                 .values()
                 .stream()
-                .max(Math::max)
+                .max(Integer::compare)
                 .get();
         Effect effect = new SacrificeEffect(StaticFilters.FILTER_LANDS, 2, "");
         game.getState()

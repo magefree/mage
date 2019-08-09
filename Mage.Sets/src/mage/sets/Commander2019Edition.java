@@ -197,6 +197,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Thespian's Stage", 282, Rarity.RARE, mage.cards.t.ThespiansStage.class));
         cards.add(new SetCardInfo("Think Twice", 99, Rarity.COMMON, mage.cards.t.ThinkTwice.class));
         cards.add(new SetCardInfo("Thornwood Falls", 283, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
+        cards.add(new SetCardInfo("Thought Sponge", 12, Rarity.RARE, mage.cards.t.ThoughtSponge.class));
         cards.add(new SetCardInfo("Thousand Winds", 100, Rarity.RARE, mage.cards.t.ThousandWinds.class));
         cards.add(new SetCardInfo("Thragtusk", 185, Rarity.RARE, mage.cards.t.Thragtusk.class));
         cards.add(new SetCardInfo("Thran Dynamo", 225, Rarity.UNCOMMON, mage.cards.t.ThranDynamo.class));
