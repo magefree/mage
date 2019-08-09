@@ -30,14 +30,17 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Azorius Locket", 210, Rarity.COMMON, mage.cards.a.AzoriusLocket.class));
         cards.add(new SetCardInfo("Backdraft Hellkite", 23, Rarity.RARE, mage.cards.b.BackdraftHellkite.class));
         cards.add(new SetCardInfo("Bane of the Living", 104, Rarity.RARE, mage.cards.b.BaneOfTheLiving.class));
+        cards.add(new SetCardInfo("Beacon of Unrest", 105, Rarity.RARE, mage.cards.b.BeaconOfUnrest.class));
         cards.add(new SetCardInfo("Beast Within", 157, Rarity.UNCOMMON, mage.cards.b.BeastWithin.class));
         cards.add(new SetCardInfo("Big Game Hunter", 106, Rarity.UNCOMMON, mage.cards.b.BigGameHunter.class));
         cards.add(new SetCardInfo("Biomass Mutation", 187, Rarity.RARE, mage.cards.b.BiomassMutation.class));
         cards.add(new SetCardInfo("Bojuka Bog", 232, Rarity.COMMON, mage.cards.b.BojukaBog.class));
+        cards.add(new SetCardInfo("Boneyard Parley", 107, Rarity.MYTHIC, mage.cards.b.BoneyardParley.class));
         cards.add(new SetCardInfo("Boros Garrison", 233, Rarity.COMMON, mage.cards.b.BorosGarrison.class));
         cards.add(new SetCardInfo("Boros Guildgate", 234, Rarity.COMMON, mage.cards.b.BorosGuildgate.class));
         cards.add(new SetCardInfo("Bounty of the Luxa", 189, Rarity.RARE, mage.cards.b.BountyOfTheLuxa.class));
         cards.add(new SetCardInfo("Burnished Hart", 211, Rarity.UNCOMMON, mage.cards.b.BurnishedHart.class));
+        cards.add(new SetCardInfo("Chaos Warp", 136, Rarity.RARE, mage.cards.c.ChaosWarp.class));
         cards.add(new SetCardInfo("Chemister's Insight", 80, Rarity.UNCOMMON, mage.cards.c.ChemistersInsight.class));
         cards.add(new SetCardInfo("Chromeshell Crab", 81, Rarity.RARE, mage.cards.c.ChromeshellCrab.class));
         cards.add(new SetCardInfo("Cinder Glade", 236, Rarity.RARE, mage.cards.c.CinderGlade.class));
@@ -59,6 +62,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Dockside Extortionist", 24, Rarity.RARE, mage.cards.d.DocksideExtortionist.class));
         cards.add(new SetCardInfo("Doomed Artisan", 3, Rarity.RARE, mage.cards.d.DoomedArtisan.class));
         cards.add(new SetCardInfo("Dusk // Dawn", 63, Rarity.RARE, mage.cards.d.DuskDawn.class));
+        cards.add(new SetCardInfo("Doomed Necromancer", 111, Rarity.RARE, mage.cards.d.DoomedNecromancer.class));
         cards.add(new SetCardInfo("Dragonmaster Outcast", 139, Rarity.MYTHIC, mage.cards.d.DragonmasterOutcast.class));
         cards.add(new SetCardInfo("Echoing Truth", 84, Rarity.COMMON, mage.cards.e.EchoingTruth.class));
         cards.add(new SetCardInfo("Evolving Wilds", 241, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
@@ -70,10 +74,12 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Farseek", 165, Rarity.COMMON, mage.cards.f.Farseek.class));
         cards.add(new SetCardInfo("Feldon of the Third Path", 141, Rarity.MYTHIC, mage.cards.f.FeldonOfTheThirdPath.class));
         cards.add(new SetCardInfo("Fervent Denial", 86, Rarity.UNCOMMON, mage.cards.f.FerventDenial.class));
+        cards.add(new SetCardInfo("Flayer of the Hatebound", 144, Rarity.RARE, mage.cards.f.FlayerOfTheHatebound.class));
         cards.add(new SetCardInfo("Forest", 300, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forgotten Cave", 243, Rarity.COMMON, mage.cards.f.ForgottenCave.class));
         cards.add(new SetCardInfo("Full Flowering", 32, Rarity.RARE, mage.cards.f.FullFlowering.class));
         cards.add(new SetCardInfo("Garruk, Primal Hunter", 167, Rarity.MYTHIC, mage.cards.g.GarrukPrimalHunter.class));
+        cards.add(new SetCardInfo("Geier Reach Sanitarium", 246, Rarity.RARE, mage.cards.g.GeierReachSanitarium.class));
         cards.add(new SetCardInfo("Gerrard, Weatherlight Hero", 41, Rarity.RARE, mage.cards.g.GerrardWeatherlightHero.class));
         cards.add(new SetCardInfo("Geth, Lord of the Vault", 114, Rarity.MYTHIC, mage.cards.g.GethLordOfTheVault.class));
         cards.add(new SetCardInfo("Ghastly Conscription", 115, Rarity.MYTHIC, mage.cards.g.GhastlyConscription.class));
@@ -121,9 +127,11 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Mystic Retrieval", 90, Rarity.UNCOMMON, mage.cards.m.MysticRetrieval.class));
         cards.add(new SetCardInfo("Nantuko Vigilante", 174, Rarity.COMMON, mage.cards.n.NantukoVigilante.class));
         cards.add(new SetCardInfo("Nightmare Unmaking", 20, Rarity.RARE, mage.cards.n.NightmareUnmaking.class));
+        cards.add(new SetCardInfo("Ob Nixilis Reignited", 124, Rarity.MYTHIC, mage.cards.o.ObNixilisReignited.class));
         cards.add(new SetCardInfo("Ohran Frostfang", 33, Rarity.RARE, mage.cards.o.OhranFrostfang.class));
         cards.add(new SetCardInfo("Oona's Grace", 91, Rarity.COMMON, mage.cards.o.OonasGrace.class));
         cards.add(new SetCardInfo("Opulent Palace", 264, Rarity.UNCOMMON, mage.cards.o.OpulentPalace.class));
+        cards.add(new SetCardInfo("Overseer of the Damned", 125, Rarity.RARE, mage.cards.o.OverseerOfTheDamned.class));
         cards.add(new SetCardInfo("Overwhelming Stampede", 175, Rarity.RARE, mage.cards.o.OverwhelmingStampede.class));
         cards.add(new SetCardInfo("Plains", 288, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Prairie Stream", 265, Rarity.RARE, mage.cards.p.PrairieStream.class));
@@ -162,7 +170,9 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Simic Guildgate", 275, Rarity.COMMON, mage.cards.s.SimicGuildgate.class));
         cards.add(new SetCardInfo("Skinthinner", 129, Rarity.COMMON, mage.cards.s.Skinthinner.class));
         cards.add(new SetCardInfo("Sol Ring", 221, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
+        cards.add(new SetCardInfo("Solemn Simulacrum", 222, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
         cards.add(new SetCardInfo("Song of the Worldsoul", 6, Rarity.RARE, mage.cards.s.SongOfTheWorldsoul.class));
+        cards.add(new SetCardInfo("Squee, Goblin Nabob", 152, Rarity.RARE, mage.cards.s.SqueeGoblinNabob.class));
         cards.add(new SetCardInfo("Stone Quarry", 276, Rarity.UNCOMMON, mage.cards.s.StoneQuarry.class));
         cards.add(new SetCardInfo("Storm Herd", 75, Rarity.RARE, mage.cards.s.StormHerd.class));
         cards.add(new SetCardInfo("Stratus Dancer", 96, Rarity.RARE, mage.cards.s.StratusDancer.class));
@@ -195,6 +205,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Voice of Many", 36, Rarity.UNCOMMON, mage.cards.v.VoiceOfMany.class));
         cards.add(new SetCardInfo("Volrath, the Shapestealer", 51, Rarity.MYTHIC, mage.cards.v.VolrathTheShapestealer.class));
         cards.add(new SetCardInfo("Vraska the Unseen", 207, Rarity.MYTHIC, mage.cards.v.VraskaTheUnseen.class));
+        cards.add(new SetCardInfo("Warstorm Surge", 155, Rarity.RARE, mage.cards.w.WarstormSurge.class));
         cards.add(new SetCardInfo("Willbender", 102, Rarity.UNCOMMON, mage.cards.w.Willbender.class));
         cards.add(new SetCardInfo("Wind-Scarred Crag", 285, Rarity.COMMON, mage.cards.w.WindScarredCrag.class));
         cards.add(new SetCardInfo("Woodland Stream", 286, Rarity.COMMON, mage.cards.w.WoodlandStream.class));
