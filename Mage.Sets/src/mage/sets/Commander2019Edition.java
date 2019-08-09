@@ -86,6 +86,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Ghired's Belligerence", 25, Rarity.RARE, mage.cards.g.GhiredsBelligerence.class));
         cards.add(new SetCardInfo("Ghired, Conclave Exile", 42, Rarity.MYTHIC, mage.cards.g.GhiredConclaveExile.class));
         cards.add(new SetCardInfo("Ghostly Prison", 64, Rarity.UNCOMMON, mage.cards.g.GhostlyPrison.class));
+        cards.add(new SetCardInfo("Gift of Doom", 17, Rarity.RARE, mage.cards.g.GiftOfDoom.class));
         cards.add(new SetCardInfo("Golgari Guildgate", 247, Rarity.COMMON, mage.cards.g.GolgariGuildgate.class));
         cards.add(new SetCardInfo("Golgari Rot Farm", 248, Rarity.UNCOMMON, mage.cards.g.GolgariRotFarm.class));
         cards.add(new SetCardInfo("Great Oak Guardian", 170, Rarity.UNCOMMON, mage.cards.g.GreatOakGuardian.class));
