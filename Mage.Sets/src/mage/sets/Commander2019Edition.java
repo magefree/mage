@@ -207,6 +207,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Ral Zarek", 198, Rarity.MYTHIC, mage.cards.r.RalZarek.class));
         cards.add(new SetCardInfo("Rampaging Baloths", 176, Rarity.RARE, mage.cards.r.RampagingBaloths.class));
         cards.add(new SetCardInfo("Ray of Distortion", 72, Rarity.COMMON, mage.cards.r.RayOfDistortion.class));
+        cards.add(new SetCardInfo("Rayami, First of the Fallen", 48, Rarity.MYTHIC, mage.cards.r.RayamiFirstOfTheFallen.class));
         cards.add(new SetCardInfo("Reality Shift", 92, Rarity.UNCOMMON, mage.cards.r.RealityShift.class));
         cards.add(new SetCardInfo("Refuse // Cooperate", 199, Rarity.RARE, mage.cards.r.RefuseCooperate.class));
         cards.add(new SetCardInfo("Reliquary Tower", 268, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
