@@ -190,6 +190,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Opulent Palace", 264, Rarity.UNCOMMON, mage.cards.o.OpulentPalace.class));
         cards.add(new SetCardInfo("Overseer of the Damned", 125, Rarity.RARE, mage.cards.o.OverseerOfTheDamned.class));
         cards.add(new SetCardInfo("Overwhelming Stampede", 175, Rarity.RARE, mage.cards.o.OverwhelmingStampede.class));
+        cards.add(new SetCardInfo("Pendant of Prosperity", 56, Rarity.RARE, mage.cards.p.PendantOfProsperity.class));
         cards.add(new SetCardInfo("Phyrexian Rebirth", 68, Rarity.RARE, mage.cards.p.PhyrexianRebirth.class));
         cards.add(new SetCardInfo("Plaguecrafter", 126, Rarity.UNCOMMON, mage.cards.p.Plaguecrafter.class));
         cards.add(new SetCardInfo("Plains", 288, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
