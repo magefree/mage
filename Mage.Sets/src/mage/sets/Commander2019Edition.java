@@ -29,6 +29,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Armillary Sphere", 209, Rarity.COMMON, mage.cards.a.ArmillarySphere.class));
         cards.add(new SetCardInfo("Ash Barrens", 227, Rarity.COMMON, mage.cards.a.AshBarrens.class));
         cards.add(new SetCardInfo("Asylum Visitor", 103, Rarity.RARE, mage.cards.a.AsylumVisitor.class));
+        cards.add(new SetCardInfo("Atla Palani, Nest Tender", 38, Rarity.MYTHIC, mage.cards.a.AtlaPalaniNestTender.class));
         cards.add(new SetCardInfo("Avacyn's Judgment", 134, Rarity.RARE, mage.cards.a.AvacynsJudgment.class));
         cards.add(new SetCardInfo("Azorius Chancery", 228, Rarity.UNCOMMON, mage.cards.a.AzoriusChancery.class));
         cards.add(new SetCardInfo("Azorius Locket", 210, Rarity.COMMON, mage.cards.a.AzoriusLocket.class));
