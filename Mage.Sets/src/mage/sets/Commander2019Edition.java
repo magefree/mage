@@ -43,6 +43,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodhall Priest", 188, Rarity.RARE, mage.cards.b.BloodhallPriest.class));
         cards.add(new SetCardInfo("Blossoming Sands", 231, Rarity.COMMON, mage.cards.b.BlossomingSands.class));
         cards.add(new SetCardInfo("Bojuka Bog", 232, Rarity.COMMON, mage.cards.b.BojukaBog.class));
+        cards.add(new SetCardInfo("Bone Miser", 15, Rarity.RARE, mage.cards.b.BoneMiser.class));
         cards.add(new SetCardInfo("Boneyard Parley", 107, Rarity.MYTHIC, mage.cards.b.BoneyardParley.class));
         cards.add(new SetCardInfo("Boros Garrison", 233, Rarity.COMMON, mage.cards.b.BorosGarrison.class));
         cards.add(new SetCardInfo("Boros Guildgate", 234, Rarity.COMMON, mage.cards.b.BorosGuildgate.class));

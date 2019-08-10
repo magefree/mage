@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.abilities.effects.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -13,31 +8,30 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author jeffwadsworth
  */
 
- public class DiscardsACardPlayerTriggeredAbility extends TriggeredAbilityImpl {
+public class DiscardCardPlayerTriggeredAbility extends TriggeredAbilityImpl {
 
     private SetTargetPointer setTargetPointer;
 
-    public DiscardsACardPlayerTriggeredAbility(Effect effect, boolean isOptional) {
+    public DiscardCardPlayerTriggeredAbility(Effect effect, boolean isOptional) {
         this(effect, isOptional, SetTargetPointer.NONE);
     }
 
-    public DiscardsACardPlayerTriggeredAbility(Effect effect, boolean isOptional, SetTargetPointer setTargetPointer) {
+    public DiscardCardPlayerTriggeredAbility(Effect effect, boolean isOptional, SetTargetPointer setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, isOptional);
         this.setTargetPointer = setTargetPointer;
     }
 
-    public DiscardsACardPlayerTriggeredAbility(final DiscardsACardPlayerTriggeredAbility ability) {
+    private DiscardCardPlayerTriggeredAbility(final DiscardCardPlayerTriggeredAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
     }
 
     @Override
-    public DiscardsACardPlayerTriggeredAbility copy() {
-        return new DiscardsACardPlayerTriggeredAbility(this);
+    public DiscardCardPlayerTriggeredAbility copy() {
+        return new DiscardCardPlayerTriggeredAbility(this);
     }
 
     @Override
@@ -52,6 +46,6 @@ import mage.game.events.GameEvent;
 
     @Override
     public String getRule() {
-        return "Whenever player discards a card, " + super.getRule();
+        return "Whenever a player discards a card, " + super.getRule();
     }
 }
