@@ -237,6 +237,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Simic Growth Chamber", 274, Rarity.UNCOMMON, mage.cards.s.SimicGrowthChamber.class));
         cards.add(new SetCardInfo("Simic Guildgate", 275, Rarity.COMMON, mage.cards.s.SimicGuildgate.class));
         cards.add(new SetCardInfo("Skinthinner", 129, Rarity.COMMON, mage.cards.s.Skinthinner.class));
+        cards.add(new SetCardInfo("Skyfire Phoenix", 28, Rarity.RARE, mage.cards.s.SkyfirePhoenix.class));
         cards.add(new SetCardInfo("Slice in Twain", 181, Rarity.UNCOMMON, mage.cards.s.SliceInTwain.class));
         cards.add(new SetCardInfo("Sol Ring", 221, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 222, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
