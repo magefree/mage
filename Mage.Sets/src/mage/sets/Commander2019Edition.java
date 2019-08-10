@@ -183,7 +183,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Naya Charm", 195, Rarity.UNCOMMON, mage.cards.n.NayaCharm.class));
         cards.add(new SetCardInfo("Naya Panorama", 263, Rarity.COMMON, mage.cards.n.NayaPanorama.class));
         cards.add(new SetCardInfo("Nightmare Unmaking", 20, Rarity.RARE, mage.cards.n.NightmareUnmaking.class));
-        cards.add(new SetCardInfo("Nightshade Assassin", 123, Rarity.COMMON, mage.cards.n.NightshadeAssassin.class));
+        cards.add(new SetCardInfo("Nightshade Assassin", 123, Rarity.UNCOMMON, mage.cards.n.NightshadeAssassin.class));
         cards.add(new SetCardInfo("Ob Nixilis Reignited", 124, Rarity.MYTHIC, mage.cards.o.ObNixilisReignited.class));
         cards.add(new SetCardInfo("Ohran Frostfang", 33, Rarity.RARE, mage.cards.o.OhranFrostfang.class));
         cards.add(new SetCardInfo("Oona's Grace", 91, Rarity.COMMON, mage.cards.o.OonasGrace.class));
