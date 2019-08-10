@@ -64,6 +64,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Commander's Sphere", 212, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
         cards.add(new SetCardInfo("Crackling Drake", 190, Rarity.UNCOMMON, mage.cards.c.CracklingDrake.class));
         cards.add(new SetCardInfo("Cultivate", 159, Rarity.COMMON, mage.cards.c.Cultivate.class));
+        cards.add(new SetCardInfo("Curse of Fool's Wisdom", 16, Rarity.RARE, mage.cards.c.CurseOfFoolsWisdom.class));
         cards.add(new SetCardInfo("Dark Withering", 110, Rarity.COMMON, mage.cards.d.DarkWithering.class));
         cards.add(new SetCardInfo("Darkwater Catacombs", 238, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class));
         cards.add(new SetCardInfo("Deathmist Raptor", 160, Rarity.MYTHIC, mage.cards.d.DeathmistRaptor.class));
