@@ -42,6 +42,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Biomass Mutation", 187, Rarity.RARE, mage.cards.b.BiomassMutation.class));
         cards.add(new SetCardInfo("Bloodfell Caves", 230, Rarity.COMMON, mage.cards.b.BloodfellCaves.class));
         cards.add(new SetCardInfo("Bloodhall Priest", 188, Rarity.RARE, mage.cards.b.BloodhallPriest.class));
+        cards.add(new SetCardInfo("Bloodthirsty Blade", 53, Rarity.UNCOMMON, mage.cards.b.BloodthirstyBlade.class));
         cards.add(new SetCardInfo("Blossoming Sands", 231, Rarity.COMMON, mage.cards.b.BlossomingSands.class));
         cards.add(new SetCardInfo("Bojuka Bog", 232, Rarity.COMMON, mage.cards.b.BojukaBog.class));
         cards.add(new SetCardInfo("Bone Miser", 15, Rarity.RARE, mage.cards.b.BoneMiser.class));
