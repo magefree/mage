@@ -26,6 +26,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Anje Falkenrath", 37, Rarity.MYTHIC, mage.cards.a.AnjeFalkenrath.class));
         cards.add(new SetCardInfo("Anje's Ravager", 22, Rarity.RARE, mage.cards.a.AnjesRavager.class));
         cards.add(new SetCardInfo("Apex Altisaur", 31, Rarity.RARE, mage.cards.a.ApexAltisaur.class));
+        cards.add(new SetCardInfo("Archfiend of Spite", 14, Rarity.RARE, mage.cards.a.ArchfiendOfSpite.class));
         cards.add(new SetCardInfo("Armillary Sphere", 209, Rarity.COMMON, mage.cards.a.ArmillarySphere.class));
         cards.add(new SetCardInfo("Ash Barrens", 227, Rarity.COMMON, mage.cards.a.AshBarrens.class));
         cards.add(new SetCardInfo("Asylum Visitor", 103, Rarity.RARE, mage.cards.a.AsylumVisitor.class));
