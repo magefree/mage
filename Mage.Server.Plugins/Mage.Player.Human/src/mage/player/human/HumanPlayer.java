@@ -911,7 +911,7 @@ public class HumanPlayer extends PlayerImpl {
                 }
                 if (response.getBoolean() != null
                         || response.getInteger() != null) {
-                    if (passWithManaPoolCheck(game) && !activatingMacro) {
+                    if (!activatingMacro && passWithManaPoolCheck(game)) {
                         return false;
                     } else {
                         if (activatingMacro) {
