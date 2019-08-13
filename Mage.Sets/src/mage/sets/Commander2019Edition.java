@@ -134,6 +134,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Gruul Turf", 250, Rarity.UNCOMMON, mage.cards.g.GruulTurf.class));
         cards.add(new SetCardInfo("Guttersnipe", 145, Rarity.UNCOMMON, mage.cards.g.Guttersnipe.class));
         cards.add(new SetCardInfo("Harmonize", 171, Rarity.UNCOMMON, mage.cards.h.Harmonize.class));
+        cards.add(new SetCardInfo("Hate Mirage", 26, Rarity.UNCOMMON, mage.cards.h.HateMirage.class));
         cards.add(new SetCardInfo("Heart-Piercer Manticore", 146, Rarity.RARE, mage.cards.h.HeartPiercerManticore.class));
         cards.add(new SetCardInfo("Hedonist's Trove", 119, Rarity.RARE, mage.cards.h.HedonistsTrove.class));
         cards.add(new SetCardInfo("Hedron Archive", 214, Rarity.UNCOMMON, mage.cards.h.HedronArchive.class));
