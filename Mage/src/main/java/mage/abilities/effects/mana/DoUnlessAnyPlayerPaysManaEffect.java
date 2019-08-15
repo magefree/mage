@@ -43,58 +43,30 @@ public class DoUnlessAnyPlayerPaysManaEffect extends ManaEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
+    public List<Mana> getNetMana(Game game, Ability source) {
+        return manaEffect.getNetMana(game, source);
+    }
+
+    @Override
+    public Mana produceMana(Game game, Ability source) {
+        Player controller = getPlayer(game, source);
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null && sourceObject != null) {
-            String message = CardUtil.replaceSourceName(chooseUseText, sourceObject.getName());
-            boolean result = true;
-            boolean doEffect = true;
-            // check if any player is willing to pay
-            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null && player.canRespond()
-                        && cost.canPay(source, source.getSourceId(), player.getId(), game)
-                        && player.chooseUse(Outcome.Detriment, message, source, game)) {
-                    cost.clearPaid();
-                    if (cost.pay(source, game, source.getSourceId(), player.getId(), false, null)) {
-                        if (!game.isSimulation()) {
-                            game.informPlayers(player.getLogName() + " pays the cost to prevent the effect");
-                        }
-                        doEffect = false;
-                        break;
+        String message = CardUtil.replaceSourceName(chooseUseText, sourceObject.getName());
+        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player != null && player.canRespond()
+                    && cost.canPay(source, source.getSourceId(), player.getId(), game)
+                    && player.chooseUse(Outcome.Detriment, message, source, game)) {
+                cost.clearPaid();
+                if (cost.pay(source, game, source.getSourceId(), player.getId(), false, null)) {
+                    if (!game.isSimulation()) {
+                        game.informPlayers(player.getLogName() + " pays the cost to prevent the effect");
                     }
+                    return null;
                 }
             }
-            // do the effects if nobody paid
-            if (doEffect) {
-                return manaEffect.apply(game, source);
-            }
-            return result;
         }
-        return false;
-    }
-
-    @Override
-    public List<Mana> getNetMana(Game game, Ability source) {
-        if (cost.canPay(source, source.getSourceId(), source.getControllerId(), game)) {
-            return manaEffect.getNetMana(game, source);
-        }
-        return new ArrayList<>();
-    }
-
-    @Override
-    public Mana getMana(Game game, Ability source) {
-        return manaEffect.getMana(game, source);
-    }
-
-    @Override
-    public Mana produceMana(boolean netMana, Game game, Ability source) {
-        return manaEffect.produceMana(netMana, game, source);
-    }
-
-    protected Player getPayingPlayer(Game game, Ability source) {
-        return game.getPlayer(source.getControllerId());
+        return manaEffect.produceMana(game, source);
     }
 
     @Override

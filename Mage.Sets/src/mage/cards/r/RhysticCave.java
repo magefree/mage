@@ -1,6 +1,8 @@
 
 package mage.cards.r;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -15,6 +17,7 @@ import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
+import mage.choices.ManaChoice;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -92,42 +95,16 @@ class RhysticCaveManaEffect extends ManaEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            checkToFirePossibleEvents(getMana(game, source), game, source);
-            controller.getManaPool().addMana(getMana(game, source), game, source);
-            return true;
-        }
-        return false;
+    public Mana produceMana(Game game, Ability source) {
+        Player controller = getPlayer(game, source);
+        return ManaChoice.chooseAnyColor(controller, game, 1);
     }
 
     @Override
-    public Mana produceMana(boolean netMana, Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        ChoiceColor choice = new ChoiceColor(true);
-        if (controller != null && controller.choose(outcome, choice, game)) {
-            Mana chosenMana = new Mana();
-            switch (choice.getColor().toString()) {
-                case "R":
-                    chosenMana.setRed(1);
-                    break;
-                case "U":
-                    chosenMana.setBlue(1);
-                    break;
-                case "W":
-                    chosenMana.setWhite(1);
-                    break;
-                case "B":
-                    chosenMana.setBlack(1);
-                    break;
-                case "G":
-                    chosenMana.setGreen(1);
-                    break;
-            }
-            return chosenMana;
-        }
-        return null;
+    public List<Mana> getNetMana(Game game, Ability source) {
+        List<Mana> netMana = new ArrayList<>();
+        netMana.add(new Mana(0, 0, 0, 0, 0, 0, 1, 0));
+        return netMana;
     }
 
     @Override

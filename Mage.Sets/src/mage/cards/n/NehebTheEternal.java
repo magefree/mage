@@ -6,6 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfPostCombatMainTriggeredAbility;
 import mage.abilities.dynamicvalue.common.OpponentsLostLifeCount;
 import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.mana.DynamicManaEffect;
 import mage.abilities.keyword.AfflictAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -37,7 +38,14 @@ public final class NehebTheEternal extends CardImpl {
         addAbility(new AfflictAbility(3));
 
         // At the beginning of your postcombat main phase, add {R} for each 1 life your opponents have lost this turn.
-        this.addAbility(new BeginningOfPostCombatMainTriggeredAbility(new NehebTheEternalManaEffect(), TargetController.YOU, false));
+        this.addAbility(
+                new BeginningOfPostCombatMainTriggeredAbility(
+                        new DynamicManaEffect(
+                                Mana.RedMana(1),
+                                OpponentsLostLifeCount.instance,
+                                "add {R} for each 1 life your opponents have lost this turn"),
+                        TargetController.YOU,
+                        false));
     }
 
     public NehebTheEternal(final NehebTheEternal card) {
@@ -47,37 +55,5 @@ public final class NehebTheEternal extends CardImpl {
     @Override
     public NehebTheEternal copy() {
         return new NehebTheEternal(this);
-    }
-}
-
-class NehebTheEternalManaEffect extends ManaEffect {
-
-    NehebTheEternalManaEffect() {
-        super();
-        this.staticText = "add {R} for each 1 life your opponents have lost this turn";
-    }
-
-    NehebTheEternalManaEffect(final NehebTheEternalManaEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            controller.getManaPool().addMana(getMana(game, source), game, source);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public Mana produceMana(boolean netMana, Game game, Ability source) {
-        return Mana.RedMana(OpponentsLostLifeCount.instance.calculate(game, source, this));
-    }
-
-    @Override
-    public NehebTheEternalManaEffect copy() {
-        return new NehebTheEternalManaEffect(this);
     }
 }

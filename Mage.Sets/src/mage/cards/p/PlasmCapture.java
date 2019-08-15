@@ -1,6 +1,8 @@
 
 package mage.cards.p;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -11,6 +13,7 @@ import mage.abilities.effects.common.ManaEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
+import mage.choices.ManaChoice;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
@@ -96,35 +99,15 @@ class PlasmCaptureManaEffect extends ManaEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            controller.getManaPool().addMana(getMana(game, source), game, source);
-            return true;
-        }
-        return false;
+    public Mana produceMana(Game game, Ability source) {
+        Player player = getPlayer(game, source);
+        return ManaChoice.chooseAnyColor(player, game, amountOfMana);
     }
 
     @Override
-    public Mana produceMana(boolean netMana, Game game, Ability source) {
-        if (netMana) {
-            return new Mana(0, 0, 0, 0, 0, 0, amountOfMana, 0);
-        }
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            Mana mana = new Mana();
-            for (int i = 0; i < amountOfMana; i++) {
-                ChoiceColor choiceColor = new ChoiceColor();
-                if (!player.choose(Outcome.Benefit, choiceColor, game)) {
-                    return null;
-                }
-                choiceColor.increaseMana(mana);
-            }
-            player.getManaPool().addMana(mana, game, source);
-            return mana;
-
-        }
-        return null;
+    public List<Mana> getNetMana(Game game, Ability source) {
+        List<Mana> netMana = new ArrayList<>();
+        netMana.add(new Mana(0, 0, 0, 0, 0, 0, amountOfMana, 0));
+        return netMana;
     }
-
 }

@@ -1,13 +1,17 @@
 
 package mage.cards.s;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -18,6 +22,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
@@ -71,24 +76,17 @@ class SacellumGodspeakerEffect extends ManaEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        TargetCardInHand target = new TargetCardInHand(0, Integer.MAX_VALUE, filter);
-        if (target.choose(Outcome.Benefit, source.getControllerId(), source.getSourceId(), game)) {
-            checkToFirePossibleEvents(getMana(game, source), game, source);
-            game.getPlayer(source.getControllerId()).getManaPool().addMana(getMana(game, source), game, source);
-            return true;
+    public List<Mana> getNetMana(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            List<Mana> netMana = new ArrayList<>();
+            netMana.add(Mana.GreenMana(controller.getHand().count(filter, game)));
+            return netMana;
         }
-        return false;
+        return null;
     }
-
     @Override
-    public Mana produceMana(boolean netMana, Game game, Ability source) {
-        if (netMana) {
-            Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null) {
-                return Mana.GreenMana(controller.getHand().count(filter, game));
-            }
-        }
+    public Mana produceMana(Game game, Ability source) {
         TargetCardInHand target = new TargetCardInHand(0, Integer.MAX_VALUE, filter);
         if (target.choose(Outcome.Benefit, source.getControllerId(), source.getSourceId(), game)) {
             return Mana.GreenMana(target.getTargets().size());

@@ -42,27 +42,8 @@ public class ConditionalManaEffect extends ManaEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        Mana mana = getMana(game, source);
-        if (produceMana(true, game, source).getAny() > 0) {
-            checkToFirePossibleEvents(mana, game, source);
-        }
-        controller.getManaPool().addMana(mana, game, source);
-        return true;
-    }
-
-    @Override
     public ConditionalManaEffect copy() {
         return new ConditionalManaEffect(this);
-    }
-
-    @Override
-    public Mana getMana(Game game, Ability source) {
-        return produceMana(false, game, source);
     }
 
     @Override
@@ -76,7 +57,7 @@ public class ConditionalManaEffect extends ManaEffect {
     }
 
     @Override
-    public Mana produceMana(boolean netMana, Game game, Ability source) {
+    public Mana produceMana(Game game, Ability source) {
         Mana mana = new Mana();
         if (condition.apply(game, source)) {
             mana = effect.getManaTemplate().copy();

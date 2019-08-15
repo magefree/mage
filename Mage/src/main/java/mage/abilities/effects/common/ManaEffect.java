@@ -13,6 +13,8 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
+import mage.players.ManaPool;
+import mage.players.Player;
 
 /**
  *
@@ -32,19 +34,26 @@ public abstract class ManaEffect extends OneShotEffect {
         this.createdMana = effect.createdMana == null ? null : effect.createdMana.copy();
     }
 
-    /**
-     * Creates the mana the effect can produce or if that already has happened
-     * returns the mana the effect has created during its process of resolving
-     *
-     * @param game
-     * @param source
-     * @return
-     */
-    public Mana getMana(Game game, Ability source) {
-        if (createdMana == null) {
-            return createdMana = produceMana(false, game, source);
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = getPlayer(game, source);
+        if (player == null) {
+            return false;
         }
-        return createdMana;
+        Mana manaToAdd = produceMana(game, source);
+        if (manaToAdd.count() > 0) {
+            checkToFirePossibleEvents(manaToAdd, game, source);
+            addManaToPool(player, manaToAdd, game, source);
+        }
+        return true;
+    }
+
+    protected Player getPlayer(Game game, Ability source) {
+        return game.getPlayer(source.getControllerId());
+    }
+
+    protected void addManaToPool(Player player, Mana manaToAdd, Game game, Ability source) {
+        player.getManaPool().addMana(manaToAdd, game, source);
     }
 
     /**
@@ -57,7 +66,7 @@ public abstract class ManaEffect extends OneShotEffect {
      */
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netMana = new ArrayList<>();
-        Mana mana = produceMana(true, game, source);
+        Mana mana = produceMana(game, source);
         if (mana != null) {
             netMana.add(mana);
         }
@@ -67,13 +76,11 @@ public abstract class ManaEffect extends OneShotEffect {
     /**
      * Produced the mana the effect can produce
      *
-     * @param netMana true - produce the hypotetical possible mana for check of
-     * possible castable spells
      * @param game
      * @param source
      * @return
      */
-    public abstract Mana produceMana(boolean netMana, Game game, Ability source);
+    public abstract Mana produceMana(Game game, Ability source);
 
     /**
      * Only used for mana effects that decide which kind of mana is produced

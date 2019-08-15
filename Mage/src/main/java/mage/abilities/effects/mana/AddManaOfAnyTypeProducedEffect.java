@@ -10,6 +10,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.List;
+
 /**
  *
  * @author LevelX2
@@ -26,25 +28,16 @@ public class AddManaOfAnyTypeProducedEffect extends ManaEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public Player getPlayer(Game game, Ability source) {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
-            Player targetController = game.getPlayer(permanent.getControllerId());
-            if (targetController == null) {
-                return false;
-            }
-            checkToFirePossibleEvents(getMana(game, source), game, source);
-            targetController.getManaPool().addMana(getMana(game, source), game, source);
-            return true;
+            return game.getPlayer(permanent.getControllerId());
         }
-        return false;
+        return null;
     }
 
     @Override
-    public Mana produceMana(boolean netMana, Game game, Ability source) {
-        if (netMana) {
-            return null;
-        }
+    public Mana produceMana(Game game, Ability source) {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             Player targetController = game.getPlayer(permanent.getControllerId());
@@ -106,6 +99,11 @@ public class AddManaOfAnyTypeProducedEffect extends ManaEffect {
             }
             return newMana;
         }
+        return null;
+    }
+
+    @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
         return null;
     }
 

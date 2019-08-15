@@ -5,20 +5,25 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.common.ManaEffect;
 import mage.choices.ChoiceColor;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author North
  */
-public class DynamicManaEffect extends BasicManaEffect {
+public class DynamicManaEffect extends ManaEffect {
 
+    private Mana baseMana;
     private final DynamicValue amount;
     private final DynamicValue netAmount;
-    private String text = null;
+    private String text;
     private boolean oneChoice;
 
     public DynamicManaEffect(Mana mana, DynamicValue amount) {
@@ -38,13 +43,14 @@ public class DynamicManaEffect extends BasicManaEffect {
      * @param mana
      * @param amount
      * @param text
-     * @param oneChoice is all manaTemplate from the same colour or if false the
+     * @param oneChoice is all mana from the same colour or if false the
      * player can choose different colours
      * @param netAmount a dynamic value that calculates the possible available
-     * manaTemplate (e.g. if you have to pay by removing counters from source)
+     * mana (e.g. if you have to pay by removing counters from source)
      */
     public DynamicManaEffect(Mana mana, DynamicValue amount, String text, boolean oneChoice, DynamicValue netAmount) {
-        super(mana);
+        super();
+        this.baseMana = mana;
         this.amount = amount;
         this.text = text;
         this.oneChoice = oneChoice;
@@ -53,6 +59,7 @@ public class DynamicManaEffect extends BasicManaEffect {
 
     public DynamicManaEffect(final DynamicManaEffect effect) {
         super(effect);
+        this.baseMana = effect.baseMana.copy();
         this.amount = effect.amount.copy();
         this.text = effect.text;
         this.oneChoice = effect.oneChoice;
@@ -69,13 +76,6 @@ public class DynamicManaEffect extends BasicManaEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        checkToFirePossibleEvents(getMana(game, source), game, source);
-        game.getPlayer(source.getControllerId()).getManaPool().addMana(getMana(game, source), game, source);
-        return true;
-    }
-
-    @Override
     public String getText(Mode mode) {
         if (text != null && !text.isEmpty()) {
             return text;
@@ -84,45 +84,68 @@ public class DynamicManaEffect extends BasicManaEffect {
     }
 
     @Override
-    public Mana produceMana(boolean netMana, Game game, Ability source) {
+    public List<Mana> getNetMana(Game game, Ability source) {
         Mana computedMana = new Mana();
         int count;
-        if (netMana && netAmount != null) {
-            // calculate the maximum available manaTemplate
+        if (netAmount != null) {
+            // calculate the maximum available mana
             count = netAmount.calculate(game, source, this);
         } else {
             count = amount.calculate(game, source, this);
         }
 
-        if (manaTemplate.getBlack() > 0) {
+        if (baseMana.getBlack() > 0) {
             computedMana.setBlack(count);
-        } else if (manaTemplate.getBlue() > 0) {
+        } else if (baseMana.getBlue() > 0) {
             computedMana.setBlue(count);
-        } else if (manaTemplate.getGreen() > 0) {
+        } else if (baseMana.getGreen() > 0) {
             computedMana.setGreen(count);
-        } else if (manaTemplate.getRed() > 0) {
+        } else if (baseMana.getRed() > 0) {
             computedMana.setRed(count);
-        } else if (manaTemplate.getWhite() > 0) {
+        } else if (baseMana.getWhite() > 0) {
             computedMana.setWhite(count);
-        } else if (manaTemplate.getColorless() > 0) {
+        } else if (baseMana.getColorless() > 0) {
             computedMana.setColorless(count);
-        } else if (manaTemplate.getAny() > 0) {
-            if (netMana) {
-                computedMana.setAny(count);
-            } else {
-                Player controller = game.getPlayer(source.getControllerId());
-                if (controller != null) {
-                    ChoiceColor choiceColor = new ChoiceColor(true);
-                    for (int i = 0; i < count; i++) {
-                        if (!choiceColor.isChosen()) {
-                            if (!controller.choose(Outcome.Benefit, choiceColor, game)) {
-                                return computedMana;
-                            }
+        } else if (baseMana.getAny() > 0) {
+            computedMana.setAny(count);
+        } else {
+            computedMana.setGeneric(count);
+        }
+        List<Mana> netMana = new ArrayList<>();
+        netMana.add(computedMana);
+        return netMana;
+    }
+
+    @Override
+    public Mana produceMana(Game game, Ability source) {
+        Mana computedMana = new Mana();
+        int count = amount.calculate(game, source, this);
+
+        if (baseMana.getBlack() > 0) {
+            computedMana.setBlack(count);
+        } else if (baseMana.getBlue() > 0) {
+            computedMana.setBlue(count);
+        } else if (baseMana.getGreen() > 0) {
+            computedMana.setGreen(count);
+        } else if (baseMana.getRed() > 0) {
+            computedMana.setRed(count);
+        } else if (baseMana.getWhite() > 0) {
+            computedMana.setWhite(count);
+        } else if (baseMana.getColorless() > 0) {
+            computedMana.setColorless(count);
+        } else if (baseMana.getAny() > 0) {
+            Player controller = game.getPlayer(source.getControllerId());
+            if (controller != null) {
+                ChoiceColor choiceColor = new ChoiceColor(true);
+                for (int i = 0; i < count; i++) {
+                    if (!choiceColor.isChosen()) {
+                        if (!controller.choose(Outcome.Benefit, choiceColor, game)) {
+                            return computedMana;
                         }
-                        choiceColor.increaseMana(computedMana);
-                        if (!oneChoice) {
-                            choiceColor.clearChoice();
-                        }
+                    }
+                    choiceColor.increaseMana(computedMana);
+                    if (!oneChoice) {
+                        choiceColor.clearChoice();
                     }
                 }
             }

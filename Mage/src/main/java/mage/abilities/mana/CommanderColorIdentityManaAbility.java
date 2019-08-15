@@ -14,9 +14,7 @@ import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author LevelX2
@@ -38,39 +36,6 @@ public class CommanderColorIdentityManaAbility extends ActivatedManaAbilityImpl 
     @Override
     public CommanderColorIdentityManaAbility copy() {
         return new CommanderColorIdentityManaAbility(this);
-    }
-
-    @Override
-    public List<Mana> getNetMana(Game game) {
-        List<Mana> netManas = new ArrayList<>();
-        if (netMana.isEmpty() && game != null) {
-            Player controller = game.getPlayer(getControllerId());
-            if (controller != null) {
-                for (UUID commanderId : game.getCommandersIds(controller)) {
-                    Card commander = game.getCard(commanderId);
-                    if (commander != null) {
-                        FilterMana commanderMana = commander.getColorIdentity();
-                        if (commanderMana.isBlack()) {
-                            netMana.add(new Mana(ColoredManaSymbol.B));
-                        }
-                        if (commanderMana.isBlue()) {
-                            netMana.add(new Mana(ColoredManaSymbol.U));
-                        }
-                        if (commanderMana.isGreen()) {
-                            netMana.add(new Mana(ColoredManaSymbol.G));
-                        }
-                        if (commanderMana.isRed()) {
-                            netMana.add(new Mana(ColoredManaSymbol.R));
-                        }
-                        if (commanderMana.isWhite()) {
-                            netMana.add(new Mana(ColoredManaSymbol.W));
-                        }
-                    }
-                }
-            }
-        }
-        netManas.addAll(netMana);
-        return netManas;
     }
 
     @Override
@@ -97,18 +62,7 @@ class CommanderIdentityManaEffect extends ManaEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            checkToFirePossibleEvents(getMana(game, source), game, source);
-            controller.getManaPool().addMana(getMana(game, source), game, source);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public Mana produceMana(boolean netMana, Game game, Ability source) {
+    public Mana produceMana(Game game, Ability source) {
         Mana mana = new Mana();
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
@@ -165,6 +119,36 @@ class CommanderIdentityManaEffect extends ManaEffect {
             }
         }
         return mana;
+    }
+
+    @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
+        List<Mana> netMana = new ArrayList<>();
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            for (UUID commanderId : game.getCommandersIds(controller)) {
+                Card commander = game.getCard(commanderId);
+                if (commander != null) {
+                    FilterMana commanderMana = commander.getColorIdentity();
+                    if (commanderMana.isBlack()) {
+                        netMana.add(new Mana(ColoredManaSymbol.B));
+                    }
+                    if (commanderMana.isBlue()) {
+                        netMana.add(new Mana(ColoredManaSymbol.U));
+                    }
+                    if (commanderMana.isGreen()) {
+                        netMana.add(new Mana(ColoredManaSymbol.G));
+                    }
+                    if (commanderMana.isRed()) {
+                        netMana.add(new Mana(ColoredManaSymbol.R));
+                    }
+                    if (commanderMana.isWhite()) {
+                        netMana.add(new Mana(ColoredManaSymbol.W));
+                    }
+                }
+            }
+        }
+        return netMana;
     }
 
 }

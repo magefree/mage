@@ -1,6 +1,8 @@
 
 package mage.cards.a;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -66,27 +68,12 @@ class AstralCornucopiaManaEffect extends ManaEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            checkToFirePossibleEvents(getMana(game, source), game, source);
-            controller.getManaPool().addMana(getMana(game, source), game, source);
-            return true;
-
-        }
-        return false;
-    }
-
-    @Override
-    public Mana produceMana(boolean netMana, Game game, Ability source) {
+    public Mana produceMana(Game game, Ability source) {
         Mana mana = new Mana();
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent != null) {
             int counters = sourcePermanent.getCounters(game).getCount(CounterType.CHARGE.getName());
             if (counters > 0) {
-                if (netMana) {
-                    return new Mana(0, 0, 0, 0, 0, 0, counters, 0);
-                }
                 Player controller = game.getPlayer(source.getControllerId());
                 if (controller != null) {
                     ChoiceColor choice = new ChoiceColor();
@@ -118,6 +105,18 @@ class AstralCornucopiaManaEffect extends ManaEffect {
         }
 
         return mana;
+    }
+
+    @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        if (sourcePermanent != null) {
+            int counters = sourcePermanent.getCounters(game).getCount(CounterType.CHARGE.getName());
+            List<Mana> netMana = new ArrayList<>();
+            netMana.add(new Mana(0, 0, 0, 0, 0, 0, counters, 0));
+            return netMana;
+        }
+        return null;
     }
 
 }
