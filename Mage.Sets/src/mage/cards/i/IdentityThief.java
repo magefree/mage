@@ -62,7 +62,7 @@ public final class IdentityThief extends CardImpl {
 class IdentityThiefAbility extends TriggeredAbilityImpl {
 
     public IdentityThiefAbility() {
-        super(Zone.BATTLEFIELD, null);
+        super(Zone.BATTLEFIELD, null, true);
         this.addEffect(new IdentityThiefEffect());
     }
 
