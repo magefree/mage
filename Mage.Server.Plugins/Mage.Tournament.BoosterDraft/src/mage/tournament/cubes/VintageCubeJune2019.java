@@ -444,7 +444,7 @@ public class VintageCubeJune2019 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Tropical Island", ""));
         cubeCards.add(new DraftCube.CardIdentity("Goblin Electromancer", ""));
         cubeCards.add(new DraftCube.CardIdentity("Dack Fayden", ""));
-        cubeCards.add(new DraftCube.CardIdentity("Expansion", ""));
+        cubeCards.add(new DraftCube.CardIdentity("Expansion // Explosion", ""));
         cubeCards.add(new DraftCube.CardIdentity("Thousand-Year Storm", ""));
         cubeCards.add(new DraftCube.CardIdentity("Scalding Tarn", ""));
         cubeCards.add(new DraftCube.CardIdentity("Spirebluff Canal", ""));
