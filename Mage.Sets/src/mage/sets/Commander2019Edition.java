@@ -275,6 +275,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("The Eldest Reborn", 131, Rarity.UNCOMMON, mage.cards.t.TheEldestReborn.class));
         cards.add(new SetCardInfo("Thelonite Hermit", 184, Rarity.RARE, mage.cards.t.TheloniteHermit.class));
         cards.add(new SetCardInfo("Thespian's Stage", 282, Rarity.RARE, mage.cards.t.ThespiansStage.class));
+        cards.add(new SetCardInfo("Thieving Amalgam", 21, Rarity.RARE, mage.cards.t.ThievingAmalgam.class));
         cards.add(new SetCardInfo("Think Twice", 99, Rarity.COMMON, mage.cards.t.ThinkTwice.class));
         cards.add(new SetCardInfo("Thornwood Falls", 283, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
         cards.add(new SetCardInfo("Thought Sponge", 12, Rarity.RARE, mage.cards.t.ThoughtSponge.class));
