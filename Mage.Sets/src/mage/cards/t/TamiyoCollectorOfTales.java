@@ -145,6 +145,12 @@ class TamiyoCollectorOfTalesEffect extends OneShotEffect {
         Cards cards2 = new CardsImpl();
         player.revealCards(source, cards, game);
         for (Card card : cards.getCards(game)) {
+            if(card.isSplitCard()){
+                if(((SplitCard) card).getLeftHalfCard().getName().equals(choice.getChoice()) ||
+                        ((SplitCard) card).getRightHalfCard().getName().equals(choice.getChoice())){
+                    cards2.add(card);
+                }
+            }
             if (card.getName().equals(choice.getChoice())) {
                 cards2.add(card);
             }
