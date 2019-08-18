@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class MasterSplicer extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.GOLEM, "Golems");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.GOLEM, "Golem creatures");
 
     public MasterSplicer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
