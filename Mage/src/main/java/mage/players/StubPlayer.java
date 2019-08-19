@@ -32,7 +32,7 @@ import java.util.UUID;
 import static com.google.common.collect.Iterables.getOnlyElement;
 import static java.util.stream.Collectors.toList;
 
-public class StubPlayer extends PlayerImpl implements Player {
+public class StubPlayer extends PlayerImpl {
 
     public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game) {
         if (target instanceof TargetPlayer) {

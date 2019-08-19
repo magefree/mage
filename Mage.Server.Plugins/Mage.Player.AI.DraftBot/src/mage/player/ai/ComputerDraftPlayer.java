@@ -12,7 +12,7 @@ import mage.players.Player;
  *
  * @author nantuko
  */
-public class ComputerDraftPlayer extends ComputerPlayer implements Player {
+public class ComputerDraftPlayer extends ComputerPlayer {
 
     public ComputerDraftPlayer(String name, RangeOfInfluence range) {
         super(name, range);

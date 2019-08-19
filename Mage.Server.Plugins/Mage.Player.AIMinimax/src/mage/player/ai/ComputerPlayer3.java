@@ -20,7 +20,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
+public class ComputerPlayer3 extends ComputerPlayer2 {
 
     private static final Logger logger = Logger.getLogger(ComputerPlayer3.class);
 

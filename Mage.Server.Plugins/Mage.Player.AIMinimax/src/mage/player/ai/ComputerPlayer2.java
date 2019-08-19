@@ -32,7 +32,7 @@ import java.util.concurrent.*;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ComputerPlayer2 extends ComputerPlayer implements Player {
+public class ComputerPlayer2 extends ComputerPlayer {
 
     private static final Logger logger = Logger.getLogger(ComputerPlayer2.class);
     private static final ExecutorService pool = Executors.newFixedThreadPool(1);

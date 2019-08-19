@@ -67,7 +67,7 @@ import java.util.Map.Entry;
  *
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
-public class ComputerPlayer extends PlayerImpl implements Player {
+public class ComputerPlayer extends PlayerImpl {
 
     private static final Logger log = Logger.getLogger(ComputerPlayer.class);
 
