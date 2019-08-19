@@ -41,8 +41,8 @@ public class TargetCardInGraveyardOrBattlefield extends TargetCard {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        if (!super.canChoose(sourceId, sourceControllerId, game)) {
+    public boolean hasPossibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+        if (!super.hasPossibleTargets(sourceId, sourceControllerId, game)) {
             MageObject targetSource = game.getObject(sourceId);
             for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterPermanent(), sourceControllerId, game)) {
                 if ((notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) && filter.match(permanent, sourceControllerId, game)) {
@@ -66,9 +66,9 @@ public class TargetCardInGraveyardOrBattlefield extends TargetCard {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-        //return super.possibleTargets(sourceControllerId, game); //To change body of generated methods, choose Tools | Templates.
-        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, game);
+    public Set<UUID> possibleChoices(UUID sourceControllerId, Game game) {
+        //return super.possibleChoices(sourceControllerId, game); //To change body of generated methods, choose Tools | Templates.
+        Set<UUID> possibleTargets = super.possibleChoices(sourceControllerId, game);
         for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterPermanent(), sourceControllerId, game)) {
             if (filter.match(permanent, sourceControllerId, game)) {
                 possibleTargets.add(permanent.getId());

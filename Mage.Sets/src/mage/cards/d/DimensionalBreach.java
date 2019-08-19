@@ -108,7 +108,7 @@ class DimensionalBreachReturnFromExileEffect extends OneShotEffect {
             TargetCardInExile target = new TargetCardInExile(filter, CardUtil.getExileZoneId(game, source.getSourceId(), 0));
             target.setNotTarget(true);
             
-            if (target.canChoose(source.getSourceId(), player.getId(), game)) {
+            if (target.hasPossibleTargets(source.getSourceId(), player.getId(), game)) {
                 if (player.chooseTarget(Outcome.PutCardInPlay, target, source, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null

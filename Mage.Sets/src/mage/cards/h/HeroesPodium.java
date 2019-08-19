@@ -134,7 +134,7 @@ class HeroesPodiumEffect extends OneShotEffect {
                 return true;
             } else {
                 TargetCard target = new TargetCard(Zone.LIBRARY, filter);
-                if (controller.choose(outcome, cards, target, game)) {
+                if (controller.choose(outcome, cards, target, source, game)) {
                     Card card = cards.get(target.getFirstTarget(), game);
                     if (card != null) {
                         cards.remove(card);

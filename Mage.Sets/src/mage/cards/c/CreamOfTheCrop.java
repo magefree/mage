@@ -69,7 +69,7 @@ class CreamOfTheCropEffect extends OneShotEffect {
             Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, permanent.getPower().getValue()));
             if (!cards.isEmpty()) {
                 TargetCard target = new TargetCardInHand(new FilterCard("card to put on top of your library"));
-                controller.choose(Outcome.Benefit, cards, target, game);
+                controller.choose(Outcome.Benefit, cards, target, source, game);
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);

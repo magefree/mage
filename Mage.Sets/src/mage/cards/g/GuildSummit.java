@@ -83,7 +83,7 @@ class GuildSummitEffect extends OneShotEffect {
         int tappedAmount = 0;
         Player you = game.getPlayer(source.getControllerId());
         TargetPermanent target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
-        if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Tap, source.getControllerId(), source.getSourceId(), game)) {
+        if (target.hasPossibleChoices(source.getControllerId(), game) && target.choose(Outcome.Tap, source.getControllerId(), source.getSourceId(), game)) {
             for (UUID creature : target.getTargets()) {
                 if (creature != null) {
                     game.getPermanent(creature).tap(game);

@@ -74,7 +74,7 @@ class SerendibDjinnEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Target target = new TargetControlledPermanent(1, 1, new FilterControlledLandPermanent(), true);
-            if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
+            if (target.hasPossibleTargets(source.getSourceId(), controller.getId(), game)) {
                 controller.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {

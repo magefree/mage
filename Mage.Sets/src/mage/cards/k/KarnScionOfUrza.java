@@ -166,7 +166,7 @@ class KarnMinus1Effect extends OneShotEffect {
 
                 TargetCard target = new TargetCard(Zone.EXILED, filter);
                 target.setNotTarget(true);
-                if (controller.choose(Outcome.Benefit, filteredCards, target, game)) {
+                if (controller.choose(Outcome.Benefit, filteredCards, target, source, game)) {
                     if (card == null) {
                         card = game.getCard(target.getFirstTarget());
                     }

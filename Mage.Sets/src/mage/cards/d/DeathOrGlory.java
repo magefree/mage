@@ -72,7 +72,7 @@ class DeathOrGloryEffect extends OneShotEffect {
             if (!cards.isEmpty()) {
                 TargetCard targetCards = new TargetCard(0, cards.size(), Zone.EXILED, new FilterCard("cards to put in the first pile"));
                 List<Card> pile1 = new ArrayList<>();
-                if (controller.choose(Outcome.Neutral, cards, targetCards, game)) {
+                if (controller.choose(Outcome.Neutral, cards, targetCards, source, game)) {
                     List<UUID> targets = targetCards.getTargets();
                     for (UUID targetId : targets) {
                         Card card = cards.get(targetId, game);

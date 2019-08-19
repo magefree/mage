@@ -69,7 +69,7 @@ class StreamOfThoughtEffect extends OneShotEffect {
         }
         TargetCard target = new TargetCardInYourGraveyard(0, 4);
         target.setNotTarget(true);
-        if (!player.choose(outcome, player.getGraveyard(), target, game)) {
+        if (!player.choose(outcome, player.getGraveyard(), target, source, game)) {
             return false;
         }
         Cards cards = new CardsImpl(target.getTargets());

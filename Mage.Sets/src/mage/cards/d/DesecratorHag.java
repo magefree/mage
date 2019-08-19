@@ -86,7 +86,7 @@ class DesecratorHagEffect extends OneShotEffect {
                 return true;
             }
             if (cards.size() > 1
-                    && you.choose(Outcome.DrawCard, cards, target, game)) {
+                    && you.choose(Outcome.DrawCard, cards, target, source, game)) {
                 if (target != null) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {

@@ -103,7 +103,7 @@ class ExtirpateEffect extends OneShotEffect {
             // search cards in hand
             filterNamedCard.setMessage("card named " + chosenCard.getLogName() + " in the hand of " + owner.getLogName());
             TargetCardInHand targetCardInHand = new TargetCardInHand(0, Integer.MAX_VALUE, filterNamedCard);
-            if (controller.choose(Outcome.Exile, owner.getHand(), targetCardInHand, game)) {
+            if (controller.choose(Outcome.Exile, owner.getHand(), targetCardInHand, source, game)) {
                 List<UUID> targets = targetCardInHand.getTargets();
                 for (UUID targetId : targets) {
                     Card targetCard = owner.getHand().get(targetId, game);

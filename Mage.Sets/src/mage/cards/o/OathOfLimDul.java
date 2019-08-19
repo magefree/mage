@@ -111,7 +111,7 @@ class OathOfLimDulEffect extends OneShotEffect {
             for (int i = 0; i < amount; i++) {
                 TargetControlledPermanent target = new TargetControlledPermanent(filter);
                 target.setNotTarget(true);
-                if (target.canChoose(controller.getId(), game)
+                if (target.hasPossibleChoices(controller.getId(), game)
                         && controller.choose(Outcome.Sacrifice, target, source.getSourceId(), game)) {
                     Cost cost = new DiscardTargetCost(new TargetCardInHand());
                     if (cost.canPay(source, source.getSourceId(), controller.getId(), game)

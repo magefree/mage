@@ -101,8 +101,8 @@ class CataclysmicGearhulkEffect extends OneShotEffect {
             Target target3 = new TargetControlledPermanent(1, 1, filterEnchantment, true);
             Target target4 = new TargetControlledPermanent(1, 1, filterPlaneswalker, true);
 
-            if (target1.canChoose(player.getId(), game)) {
-                while (player.canRespond() && !target1.isChosen() && target1.canChoose(player.getId(), game)) {
+            if (target1.hasPossibleChoices(player.getId(), game)) {
+                while (player.canRespond() && !target1.isChosen() && target1.hasPossibleChoices(player.getId(), game)) {
                     player.chooseTarget(Outcome.Benefit, target1, source, game);
                 }
                 Permanent artifact = game.getPermanent(target1.getFirstTarget());
@@ -112,8 +112,8 @@ class CataclysmicGearhulkEffect extends OneShotEffect {
                 target1.clearChosen();
             }
 
-            if (target2.canChoose(player.getId(), game)) {
-                while (player.canRespond() && !target2.isChosen() && target2.canChoose(player.getId(), game)) {
+            if (target2.hasPossibleChoices(player.getId(), game)) {
+                while (player.canRespond() && !target2.isChosen() && target2.hasPossibleChoices(player.getId(), game)) {
                     player.chooseTarget(Outcome.Benefit, target2, source, game);
                 }
                 Permanent creature = game.getPermanent(target2.getFirstTarget());
@@ -123,8 +123,8 @@ class CataclysmicGearhulkEffect extends OneShotEffect {
                 target2.clearChosen();
             }
 
-            if (target3.canChoose(player.getId(), game)) {
-                while (player.canRespond() && !target3.isChosen() && target3.canChoose(player.getId(), game)) {
+            if (target3.hasPossibleChoices(player.getId(), game)) {
+                while (player.canRespond() && !target3.isChosen() && target3.hasPossibleChoices(player.getId(), game)) {
                     player.chooseTarget(Outcome.Benefit, target3, source, game);
                 }
                 Permanent enchantment = game.getPermanent(target3.getFirstTarget());
@@ -134,8 +134,8 @@ class CataclysmicGearhulkEffect extends OneShotEffect {
                 target3.clearChosen();
             }
 
-            if (target4.canChoose(player.getId(), game)) {
-                while (player.canRespond() && !target4.isChosen() && target4.canChoose(player.getId(), game)) {
+            if (target4.hasPossibleChoices(player.getId(), game)) {
+                while (player.canRespond() && !target4.isChosen() && target4.hasPossibleChoices(player.getId(), game)) {
                     player.chooseTarget(Outcome.Benefit, target4, source, game);
                 }
                 Permanent planeswalker = game.getPermanent(target4.getFirstTarget());

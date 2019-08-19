@@ -86,7 +86,7 @@ class SeasonedPyromancerEffect extends OneShotEffect {
         int toDiscard = Math.min(player.getHand().size(), 2);
         if (toDiscard > 0) {
             TargetCard target = new TargetCardInHand(toDiscard, StaticFilters.FILTER_CARD);
-            if (player.choose(outcome, player.getHand(), target, game)) {
+            if (player.choose(outcome, player.getHand(), target, source, game)) {
                 Cards cards = new CardsImpl(target.getTargets());
                 for (Card card : cards.getCards(game)) {
                     if (player.discard(card, source, game) && !card.isLand()) {

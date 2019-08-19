@@ -79,7 +79,7 @@ class HitEffect extends OneShotEffect {
                     new CardTypePredicate(CardType.CREATURE)));
             TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
 
-            if (target.canChoose(targetPlayer.getId(), game)) {
+            if (target.hasPossibleChoices(targetPlayer.getId(), game)) {
                 targetPlayer.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {

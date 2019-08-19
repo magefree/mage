@@ -86,7 +86,7 @@ class RagingRiverEffect extends OneShotEffect {
                     FilterControlledCreaturePermanent filterBlockers = new FilterControlledCreaturePermanent("creatures without flying you control to assign to the \"left\" pile (creatures not chosen will be assigned to the \"right\" pile)");
                     filterBlockers.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
                     Target target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filterBlockers, true);
-                    if (target.canChoose(source.getSourceId(), defenderId, game)) {
+                    if (target.hasPossibleTargets(source.getSourceId(), defenderId, game)) {
                         if (defender.chooseTarget(Outcome.Neutral, target, source, game)) {
                             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), defenderId, game)) {
                                 if (target.getTargets().contains(permanent.getId())) {

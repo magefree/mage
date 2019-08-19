@@ -24,7 +24,6 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.GoblinRogueToken;
-import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -86,7 +85,7 @@ class WarrenWeirdingEffect extends OneShotEffect {
 
         //A spell or ability could have removed the only legal target this player
         //had, if thats the case this ability should fizzle.
-        if (target.canChoose(player.getId(), game)) {
+        if (target.hasPossibleChoices(player.getId(), game)) {
             player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {

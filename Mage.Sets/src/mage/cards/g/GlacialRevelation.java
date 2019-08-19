@@ -74,7 +74,7 @@ class GlacialRevelationEffect extends OneShotEffect {
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 6));
         player.revealCards(source, cards, game);
         TargetCard targetCard = new TargetCardInHand(0, Integer.MAX_VALUE, filter);
-        if (player.choose(outcome, cards, targetCard, game)) {
+        if (player.choose(outcome, cards, targetCard, source, game)) {
             Cards toHand = new CardsImpl(targetCard.getTargets());
             cards.removeAll(targetCard.getTargets());
             player.moveCards(toHand, Zone.HAND, source, game);

@@ -581,7 +581,7 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     @Override
-    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
+    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
         // choose one or multiple cards
         if (cards == null) {
             return false;
@@ -600,14 +600,9 @@ public class HumanPlayer extends PlayerImpl {
             Map<String, Serializable> options = getOptions(target, null);
             List<UUID> chosen = target.getTargets();
             options.put("chosen", (Serializable) chosen);
-            List<UUID> choosable = new ArrayList<>();
-            for (UUID cardId : cards) {
-                if (target.canTarget(cardId, cards, game)) {
-                    choosable.add(cardId);
-                }
-            }
+            Set<UUID> choosable = target.possibleChoices(source.getSourceId(), source.getControllerId(), cards, game);
             if (!choosable.isEmpty()) {
-                options.put("choosable", (Serializable) choosable);
+                options.put("choosable", new ArrayList<>(choosable));
             }
 
             prepareForResponse(game);
@@ -616,7 +611,7 @@ public class HumanPlayer extends PlayerImpl {
             }
             waitForResponse(game);
             if (response.getUUID() != null) {
-                if (target.canTarget(response.getUUID(), cards, game)) {
+                if (target.canTarget(response.getUUID(), cards, source, game)) {
                     if (target.getTargets().contains(response.getUUID())) { // if already included remove it with
                         target.remove(response.getUUID());
                     } else {
@@ -666,7 +661,7 @@ public class HumanPlayer extends PlayerImpl {
             options.put("chosen", (Serializable) chosen);
             List<UUID> choosable = new ArrayList<>();
             for (UUID cardId : cards) {
-                if (target.canTarget(cardId, cards, game)) {
+                if (target.canTarget(cardId, cards, source, game)) {
                     choosable.add(cardId);
                 }
             }
@@ -683,7 +678,7 @@ public class HumanPlayer extends PlayerImpl {
             if (response.getUUID() != null) {
                 if (target.getTargets().contains(response.getUUID())) { // if already included remove it
                     target.remove(response.getUUID());
-                } else if (target.canTarget(response.getUUID(), cards, game)) {
+                } else if (target.canTarget(response.getUUID(), cards, source, game)) {
                     target.addTarget(response.getUUID(), source, game);
                     if (target.doneChosing()) {
                         return true;

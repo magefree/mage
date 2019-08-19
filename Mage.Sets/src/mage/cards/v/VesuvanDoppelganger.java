@@ -82,7 +82,7 @@ class VesuvanDoppelgangerCopyEffect extends OneShotEffect {
                 target.setRequired(false);
                 target.setNotTarget(true);
             }
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+            if (target.hasPossibleTargets(source.getSourceId(), source.getControllerId(), game)) {
                 controller.choose(Outcome.Copy, target, source.getSourceId(), game);
                 Permanent copyFromPermanent = game.getPermanent(target.getFirstTarget());
                 if (copyFromPermanent != null) {

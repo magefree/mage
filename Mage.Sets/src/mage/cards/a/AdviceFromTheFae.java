@@ -83,7 +83,7 @@ class AdviceFromTheFaeEffect extends OneShotEffect {
             }
             boolean moreCreatures = game.getBattlefield().countAll(new FilterControlledCreaturePermanent(), controller.getId(), game) > max;
             TargetCard target = new TargetCard(moreCreatures ? 2 : 1, Zone.LIBRARY, new FilterCard());
-            if (controller.choose(Outcome.DrawCard, cardsFromLibrary, target, game)) {
+            if (controller.choose(Outcome.DrawCard, cardsFromLibrary, target, source, game)) {
                 cardsFromLibrary.removeAll(target.getTargets());
                 controller.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);
             }

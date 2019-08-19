@@ -23,7 +23,6 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.ArrayList;
@@ -111,7 +110,7 @@ class CrypticGatewayCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        return target.canChoose(controllerId, game);
+        return target.hasPossibleChoices(controllerId, game);
     }
 
     @Override

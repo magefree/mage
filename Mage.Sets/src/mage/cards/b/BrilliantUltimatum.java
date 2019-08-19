@@ -77,7 +77,7 @@ class BrilliantUltimatumEffect extends OneShotEffect {
             Cards pile1 = new CardsImpl();
             List<Card> pileOne = new ArrayList<>();
             List<Card> pileTwo = new ArrayList<>();
-            if (opponent.choose(Outcome.Neutral, pile2, target, game)) {
+            if (opponent.choose(Outcome.Neutral, pile2, target, source, game)) {
                 List<UUID> targets = target.getTargets();
                 for (UUID targetId : targets) {
                     Card card = pile2.get(targetId, game);

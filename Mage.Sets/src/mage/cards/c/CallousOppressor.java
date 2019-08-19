@@ -117,8 +117,8 @@ class CallousOppressorChooseCreatureTypeEffect extends OneShotEffect {
         }
         if (controller != null) {
             TargetOpponent target = new TargetOpponent(true);
-            if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
-                while (!target.isChosen() && target.canChoose(controller.getId(), game) && controller.canRespond()) {
+            if (target.hasPossibleTargets(source.getSourceId(), controller.getId(), game)) {
+                while (!target.isChosen() && target.hasPossibleChoices(controller.getId(), game) && controller.canRespond()) {
                     controller.chooseTarget(outcome, target, source, game);
                 }
             } else {

@@ -73,7 +73,7 @@ class ScoutTheBordersEffect extends OneShotEffect {
             if (!cards.isEmpty()) {
                 controller.revealCards(source, cards, game);
                 TargetCard target = new TargetCard(Zone.LIBRARY, filterPutInHand);
-                if (properCardFound && controller.choose(Outcome.DrawCard, cards, target, game)) {
+                if (properCardFound && controller.choose(Outcome.DrawCard, cards, target, source, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
                         controller.moveCards(card, Zone.HAND, source, game);

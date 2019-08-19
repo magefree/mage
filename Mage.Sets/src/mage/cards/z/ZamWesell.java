@@ -71,7 +71,7 @@ class ZamWesselEffect extends OneShotEffect {
             Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
             if (targetPlayer != null) {
                 TargetCard targetCard = new TargetCard(0, 1, Zone.HAND, new FilterCreatureCard());
-                controller.choose(outcome, targetPlayer.getHand(), targetCard, game);
+                controller.choose(outcome, targetPlayer.getHand(), targetCard, source, game);
                 Card copyFromCard = game.getCard(targetCard.getFirstTarget());
                 if (copyFromCard != null) {
                     game.informPlayers(controller.getLogName() + " chooses to copy " + copyFromCard.getName());

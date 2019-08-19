@@ -126,7 +126,7 @@ class KahoMinamoHistorianCastEffect extends OneShotEffect {
             filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, source.getManaCostsToPay().getX()));
             TargetCardInExile target = new TargetCardInExile(filter, CardUtil.getCardExileZoneId(game, source));
             Cards cards = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
-            if (!cards.isEmpty() && controller.choose(Outcome.PlayForFree, cards, target, game)) {
+            if (!cards.isEmpty() && controller.choose(Outcome.PlayForFree, cards, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));

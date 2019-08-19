@@ -32,7 +32,7 @@ import java.util.concurrent.*;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ComputerPlayer2 extends ComputerPlayer implements Player {
+public class ComputerPlayer2 extends ComputerPlayer {
 
     private static final Logger logger = Logger.getLogger(ComputerPlayer2.class);
     private static final ExecutorService pool = Executors.newFixedThreadPool(1);
@@ -478,9 +478,9 @@ public class ComputerPlayer2 extends ComputerPlayer implements Player {
     }
 
     @Override
-    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game)  {
+    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game)  {
         if (targets.isEmpty())
-            return super.choose(outcome, cards, target, game);
+            return super.choose(outcome, cards, target, source, game);
         if (!target.doneChosing()) {
             for (UUID targetId: targets) {
                 target.add(targetId, game);

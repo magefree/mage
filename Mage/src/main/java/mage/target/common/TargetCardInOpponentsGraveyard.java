@@ -51,8 +51,8 @@ public class TargetCardInOpponentsGraveyard extends TargetCard {
     }
 
     @Override
-    public boolean canChoose(UUID sourceControllerId, Game game) {
-        return canChoose(null, sourceControllerId, game);
+    public boolean hasPossibleChoices(UUID sourceControllerId, Game game) {
+        return hasPossibleTargets(null, sourceControllerId, game);
     }
 
    /**
@@ -64,9 +64,9 @@ public class TargetCardInOpponentsGraveyard extends TargetCard {
      * @return - true if enough valid {@link Card} exist
      */
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean hasPossibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         int possibleTargets = 0;
-        if (getNumberOfTargets() == 0) { // if 0 target is valid, the canChoose is always true
+        if (getNumberOfTargets() == 0) { // if 0 target is valid, the hasPossibleTargets is always true
             return true;
         }
         for (UUID playerId: game.getState().getPlayersInRange(sourceControllerId, game)) {

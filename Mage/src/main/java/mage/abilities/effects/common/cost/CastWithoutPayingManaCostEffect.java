@@ -60,7 +60,7 @@ public class CastWithoutPayingManaCostEffect extends OneShotEffect {
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, cmc + 1));
 
         Target target = new TargetCardInHand(filter);
-        if (target.canChoose(source.getSourceId(), controller.getId(), game)
+        if (target.hasPossibleTargets(source.getSourceId(), controller.getId(), game)
                 && controller.chooseUse(outcome, "Cast a card with converted mana cost " + cmc
                 + " or less from your hand without paying its mana cost?", source, game)) {
             Card cardToCast = null;

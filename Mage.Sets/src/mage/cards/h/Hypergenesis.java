@@ -89,7 +89,7 @@ class HypergenesisEffect extends OneShotEffect {
                         firstInactivePlayer = currentPlayer.getId();
                     }
                     target.clearChosen();
-                    if (target.canChoose(source.getSourceId(), currentPlayer.getId(), game)
+                    if (target.hasPossibleTargets(source.getSourceId(), currentPlayer.getId(), game)
                             && currentPlayer.chooseUse(outcome, "Put card from your hand to play?", source, game)) {
                         if (target.chooseTarget(outcome, currentPlayer.getId(), source, game)) {
                             Card card = game.getCard(target.getFirstTarget());

@@ -84,7 +84,7 @@ class RiversGraspEffect extends OneShotEffect {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
                 TargetCard target = new TargetCard(Zone.HAND, StaticFilters.FILTER_CARD_A_NON_LAND);
-                if (controller.choose(Outcome.Benefit, player.getHand(), target, game)) {
+                if (controller.choose(Outcome.Benefit, player.getHand(), target, source, game)) {
                     Card card = player.getHand().get(target.getFirstTarget(), game);
                     return player.discard(card, source, game);
 

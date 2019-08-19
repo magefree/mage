@@ -83,7 +83,7 @@ class EyeOfYawgmothEffect extends OneShotEffect {
             Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, power));
             controller.revealCards(source, cards, game);
             TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put into your hand"));
-            if (controller.choose(Outcome.DrawCard, cards, target, game)) {
+            if (controller.choose(Outcome.DrawCard, cards, target, source, game)) {
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
                     controller.moveCards(card, Zone.HAND, source, game);

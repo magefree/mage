@@ -89,7 +89,7 @@ class PhyrexianGrimoireEffect extends OneShotEffect {
                 
                 TargetCard target = new TargetCard(Zone.GRAVEYARD, new FilterCard());
                 target.setRequired(true);
-                if(opponent.choose(Outcome.Exile, cards, target, game))
+                if(opponent.choose(Outcome.Exile, cards, target, source, game))
                 {
                     Card card = game.getCard(target.getFirstTarget()); 
                     cards.remove(target.getFirstTarget());

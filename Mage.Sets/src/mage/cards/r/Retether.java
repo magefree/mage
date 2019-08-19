@@ -90,7 +90,7 @@ class RetetherEffect extends OneShotEffect {
                                 for (Ability ability : aura.getAbilities()) {
                                     if (ability instanceof SpellAbility) {
                                         for (Target abilityTarget : ability.getTargets()) {
-                                            if (abilityTarget.possibleTargets(controller.getId(), game).contains(permanent.getId())) {
+                                            if (abilityTarget.possibleChoices(controller.getId(), game).contains(permanent.getId())) {
                                                 target = abilityTarget.copy();
                                                 break auraLegalitySearch;
                                             }
@@ -103,7 +103,7 @@ class RetetherEffect extends OneShotEffect {
                     if (target != null) {
                         target.getFilter().add(new CardTypePredicate(CardType.CREATURE));
                         target.setNotTarget(true);
-                        if (target.canChoose(controller.getId(), game)) {
+                        if (target.hasPossibleChoices(controller.getId(), game)) {
                             target.setTargetName("creature to enchant (" + aura.getLogName() + ')');
                             if (controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
                                 Permanent permanent = game.getPermanent(target.getFirstTarget());

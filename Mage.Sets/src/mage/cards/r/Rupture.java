@@ -65,8 +65,8 @@ class RuptureEffect extends OneShotEffect {
         if (player != null) {
             int power = 0;
             TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent("creature to sacrifice"), true);
-            if (target.canChoose(source.getSourceId(), player.getId(), game)) {
-                while (!target.isChosen() && target.canChoose(player.getId(), game) && player.canRespond()) {
+            if (target.hasPossibleTargets(source.getSourceId(), player.getId(), game)) {
+                while (!target.isChosen() && target.hasPossibleChoices(player.getId(), game) && player.canRespond()) {
                     player.chooseTarget(Outcome.Sacrifice, target, source, game);
                 }
                 Permanent permanent = game.getPermanent(target.getFirstTarget());

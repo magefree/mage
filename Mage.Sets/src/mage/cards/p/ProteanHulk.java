@@ -89,7 +89,7 @@ class ProteanHulkEffect extends OneShotEffect {
                 TargetCardInLibrary target = new TargetCardInLibrary(0, 1, filter);
                 target.setCardLimit(librarySearchLimit);
 
-                while (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+                while (target.hasPossibleTargets(source.getSourceId(), source.getControllerId(), game)) {
                     target.choose(Outcome.PutCreatureInPlay, source.getControllerId(), source.getControllerId(), game);
                     Card card = player.getLibrary().remove(target.getFirstTarget(), game);
                     if (card == null) {

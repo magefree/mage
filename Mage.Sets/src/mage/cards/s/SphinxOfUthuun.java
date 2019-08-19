@@ -86,7 +86,7 @@ class SphinxOfUthuunEffect extends OneShotEffect {
             target.setRequired(false);
             List<Card> pile1 = new ArrayList<>();
             Cards pile1CardsIds = new CardsImpl();
-            if (opponent.choose(Outcome.Neutral, cards, target, game)) {
+            if (opponent.choose(Outcome.Neutral, cards, target, source, game)) {
                 pile1CardsIds.addAll(target.getTargets());
                 pile1.addAll(pile1CardsIds.getCards(game));
             }

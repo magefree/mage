@@ -9,7 +9,6 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -78,7 +77,7 @@ class OrcishSettlersEffect extends OneShotEffect {
         TargetLandPermanent target = new TargetLandPermanent(amount);
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null
-                && target.canChoose(controller.getId(), game)
+                && target.hasPossibleChoices(controller.getId(), game)
                 && controller.choose(Outcome.DestroyPermanent, target, source.getSourceId(), game)) {
             List<UUID> targets = target.getTargets();
             targets.forEach((landId) -> {

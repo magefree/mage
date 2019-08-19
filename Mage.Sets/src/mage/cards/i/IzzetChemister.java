@@ -116,7 +116,7 @@ class IzzetChemisterCastFromExileEffect extends OneShotEffect {
                 }
                 TargetCardInExile target = new TargetCardInExile(0, 1, filter, exileId, false);
                 target.setNotTarget(true);
-                while (cardsToExile.count(filter, game) > 0 && controller.choose(Outcome.PlayForFree, cardsToExile, target, game)) {
+                while (cardsToExile.count(filter, game) > 0 && controller.choose(Outcome.PlayForFree, cardsToExile, target, source, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
                         controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));

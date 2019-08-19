@@ -102,7 +102,7 @@ class RiftElementalCost extends CostImpl {
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         Target target = new TargetPermanentOrSuspendedCard(filter, true);
-        return target.canChoose(sourceId, controllerId, game);
+        return target.hasPossibleTargets(sourceId, controllerId, game);
     }
 
     @Override

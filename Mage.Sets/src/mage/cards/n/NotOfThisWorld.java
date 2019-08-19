@@ -81,12 +81,12 @@ class TargetStackObjectTargetingControlledPermanent extends TargetObject {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        return canChoose(sourceControllerId, game);
+    public boolean hasPossibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+        return hasPossibleChoices(sourceControllerId, game);
     }
 
     @Override
-    public boolean canChoose(UUID sourceControllerId, Game game) {
+    public boolean hasPossibleChoices(UUID sourceControllerId, Game game) {
         for (StackObject stackObject : game.getStack()) {
             if ((stackObject instanceof Spell) || (stackObject instanceof StackAbility)) {
                 Targets objectTargets = stackObject.getStackAbility().getTargets();
@@ -108,11 +108,11 @@ class TargetStackObjectTargetingControlledPermanent extends TargetObject {
     @Override
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId,
                                      Game game) {
-        return possibleTargets(sourceControllerId, game);
+        return possibleChoices(sourceControllerId, game);
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleChoices(UUID sourceControllerId, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         for (StackObject stackObject : game.getStack()) {
             if ((stackObject instanceof Spell) || (stackObject instanceof StackAbility)) {

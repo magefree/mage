@@ -153,7 +153,7 @@ class TargetCardInBaneAlleyBrokerExile extends TargetCardInExile {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean hasPossibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         Card sourceCard = game.getCard(sourceId);
         if (sourceCard != null) {
             UUID exileId = CardUtil.getCardExileZoneId(game, sourceId);

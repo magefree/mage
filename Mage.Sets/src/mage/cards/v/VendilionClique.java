@@ -78,7 +78,7 @@ class VendilionCliqueEffect extends OneShotEffect {
         if (player != null && controller != null && sourceObject != null) {
             TargetCard targetCard = new TargetCard(Zone.ALL, new FilterNonlandCard());
             targetCard.setRequired(false);
-            if (controller.choose(Outcome.Discard, player.getHand(), targetCard, game)) {
+            if (controller.choose(Outcome.Discard, player.getHand(), targetCard, source, game)) {
                 Card card = game.getCard(targetCard.getFirstTarget());
                 if (card != null) {
                     CardsImpl cards = new CardsImpl();

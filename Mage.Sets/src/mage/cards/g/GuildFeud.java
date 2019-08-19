@@ -76,7 +76,7 @@ class GuildFeudEffect extends OneShotEffect {
                         TargetCard target = new TargetCard(Zone.LIBRARY,
                                 new FilterCreatureCard(
                                         "creature card to put on the battlefield"));
-                        if (player.choose(Outcome.PutCreatureInPlay, topThreeCards, target, game)) {
+                        if (player.choose(Outcome.PutCreatureInPlay, topThreeCards, target, source, game)) {
                             creatureToBattlefield = topThreeCards.get(target.getFirstTarget(), game);
                             if (creatureToBattlefield != null) {
                                 topThreeCards.remove(creatureToBattlefield);

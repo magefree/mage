@@ -95,7 +95,7 @@ class DawnbreakReclaimerEffect extends OneShotEffect {
             Player opponent = null;
             Card cardOpponentGraveyard = null;
             chosenCreatureOpponentGraveyard.setNotTarget(true);
-            if (chosenCreatureOpponentGraveyard.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+            if (chosenCreatureOpponentGraveyard.hasPossibleTargets(source.getSourceId(), source.getControllerId(), game)) {
                 controller.choose(Outcome.Detriment, chosenCreatureOpponentGraveyard, source.getSourceId(), game);
                 cardOpponentGraveyard = game.getCard(chosenCreatureOpponentGraveyard.getFirstTarget());
                 if (cardOpponentGraveyard != null) {
@@ -127,7 +127,7 @@ class DawnbreakReclaimerEffect extends OneShotEffect {
                 TargetCardInGraveyard targetControllerGaveyard = new TargetCardInGraveyard(filterCreatureCard);
                 targetControllerGaveyard.setNotTarget(true);
                 Card controllerCreatureCard = null;
-                if (targetControllerGaveyard.canChoose(source.getSourceId(), opponent.getId(), game)
+                if (targetControllerGaveyard.hasPossibleTargets(source.getSourceId(), opponent.getId(), game)
                         && opponent.choose(outcome, targetControllerGaveyard, source.getSourceId(), game)) {
                     controllerCreatureCard = game.getCard(targetControllerGaveyard.getFirstTarget());
                     if (controllerCreatureCard != null) {

@@ -139,7 +139,7 @@ class VoidMawCost extends CostImpl {
             target.setNotTarget(true);
             Cards cards = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, ability));
             if (!cards.isEmpty()
-                    && controller.choose(Outcome.Benefit, cards, target, game)) {
+                    && controller.choose(Outcome.Benefit, cards, target, ability, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     if (controller.moveCardToGraveyardWithInfo(card, sourceId, game, Zone.EXILED)) {

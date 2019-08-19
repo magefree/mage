@@ -73,7 +73,7 @@ class PhyrexianPortalEffect extends OneShotEffect {
                 
                 TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY, new FilterCard("cards to put in the first pile"));
                 List<Card> pile1 = new ArrayList<>();
-                if (opponent.choose(Outcome.Neutral, cards, target, game)) {
+                if (opponent.choose(Outcome.Neutral, cards, target, source, game)) {
                     List<UUID> targets = target.getTargets();
                     for (UUID targetId : targets) {
                         Card card = cards.get(targetId, game);
@@ -100,7 +100,7 @@ class PhyrexianPortalEffect extends OneShotEffect {
                 chosenPile.addAll(choice ? pile1 : pile2);
                 
                 TargetCard target2 = new TargetCard(Zone.HAND, new FilterCard("card to put into your hand"));
-                if (controller.choose(outcome, chosenPile, target2, game)) {
+                if (controller.choose(outcome, chosenPile, target2, source, game)) {
                     Card card = chosenPile.get(target2.getFirstTarget(), game);
                     if (card != null) {
                         controller.moveCards(card, Zone.HAND, source, game);

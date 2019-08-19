@@ -87,7 +87,7 @@ class OathOfNissaEffect extends OneShotEffect {
                             card = topCards.getCards(filter, source.getSourceId(), source.getControllerId(), game).iterator().next();
                         } else {
                             TargetCard target = new TargetCard(Zone.LIBRARY, filter);
-                            controller.choose(outcome, topCards, target, game);
+                            controller.choose(outcome, topCards, target, source, game);
                             card = topCards.get(target.getFirstTarget(), game);
                         }
                         if (card != null) {

@@ -48,7 +48,7 @@ public class TargetActivatedOrTriggeredAbilityOrLegendarySpell extends TargetObj
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean hasPossibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         for (StackObject stackObject : game.getStack()) {
             if (isActivatedOrTriggeredAbilityOrLegendarySpell(stackObject)
                     && filter.match(stackObject, sourceId, sourceControllerId, game)) {
@@ -59,7 +59,7 @@ public class TargetActivatedOrTriggeredAbilityOrLegendarySpell extends TargetObj
     }
 
     @Override
-    public boolean canChoose(UUID sourceControllerId, Game game) {
+    public boolean hasPossibleChoices(UUID sourceControllerId, Game game) {
         return game.getStack()
                 .stream()
                 .anyMatch(TargetActivatedOrTriggeredAbilityOrLegendarySpell::isActivatedOrTriggeredAbilityOrLegendarySpell);
@@ -67,11 +67,11 @@ public class TargetActivatedOrTriggeredAbilityOrLegendarySpell extends TargetObj
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        return possibleTargets(sourceControllerId, game);
+        return possibleChoices(sourceControllerId, game);
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleChoices(UUID sourceControllerId, Game game) {
         return game.getStack().stream()
                 .filter(TargetActivatedOrTriggeredAbilityOrLegendarySpell::isActivatedOrTriggeredAbilityOrLegendarySpell)
                 .map(stackObject -> stackObject.getStackAbility().getId())

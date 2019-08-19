@@ -79,7 +79,7 @@ class GruesomeDiscoveryEffect extends OneShotEffect {
             }
 
             TargetCard target = new TargetCard(2, Zone.HAND, new FilterCard());
-            if (player.choose(Outcome.Benefit, targetPlayer.getHand(), target, game)) {
+            if (player.choose(Outcome.Benefit, targetPlayer.getHand(), target, source, game)) {
                 List<UUID> targets = target.getTargets();
                 for (UUID targetId : targets) {
                     Card card = targetPlayer.getHand().get(targetId, game);

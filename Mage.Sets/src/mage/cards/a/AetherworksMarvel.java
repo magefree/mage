@@ -75,7 +75,7 @@ class AetherworksMarvelEffect extends OneShotEffect {
             Set<Card> cardsSet = controller.getLibrary().getTopCards(game, 6);
             Cards cards = new CardsImpl(cardsSet);
             TargetCard target = new TargetCardInLibrary(0, 1, new FilterNonlandCard("card to cast without paying its mana cost"));
-            if (controller.choose(Outcome.PlayForFree, cards, target, game)) {
+            if (controller.choose(Outcome.PlayForFree, cards, target, source, game)) {
                 Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
                 if (card != null && controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game))) {
                     cards.remove(card);

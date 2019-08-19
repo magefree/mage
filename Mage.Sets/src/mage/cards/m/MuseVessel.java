@@ -80,7 +80,7 @@ class MuseVesselExileEffect extends OneShotEffect {
             return false;
         }
         TargetCardInHand target = new TargetCardInHand();
-        if (target.canChoose(source.getSourceId(), player.getId(), game)
+        if (target.hasPossibleTargets(source.getSourceId(), player.getId(), game)
                 && target.chooseTarget(Outcome.Exile, player.getId(), source, game)) {
             UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
             return player.moveCardsToExile(new CardsImpl(target.getTargets()).getCards(game), source, game, true, exileId, sourceObject.getIdName());
@@ -149,7 +149,7 @@ class TargetCardInMuseVesselExile extends TargetCardInExile {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean hasPossibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         Card sourceCard = game.getCard(sourceId);
         if (sourceCard != null) {
             UUID exileId = CardUtil.getCardExileZoneId(game, sourceId);

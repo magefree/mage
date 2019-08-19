@@ -88,8 +88,8 @@ class TargetCardInLibrarySharingLandType extends TargetCardInLibrary {
     }
 
     @Override
-    public boolean canTarget(UUID id, Cards cards, Game game) {
-        if (super.canTarget(id, cards, game)) {
+    public boolean canTarget(UUID id, Cards cards, Ability source, Game game) {
+        if (super.canTarget(id, cards, source, game)) {
             if (!getTargets().isEmpty()) {
                 // check if new target shares a Land Type
                 SubTypeList landTypes = new SubTypeList();

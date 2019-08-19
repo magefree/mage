@@ -98,7 +98,7 @@ class DiseasedVerminEffect extends OneShotEffect {
         if (sourcePermanent != null
                 && controller != null) {
             TargetPlayer targetOpponent = new TargetPlayer(1, 1, false, filter);
-            if (targetOpponent.canChoose(controller.getId(), game)
+            if (targetOpponent.hasPossibleChoices(controller.getId(), game)
                     && controller.choose(Outcome.Damage, targetOpponent, source.getSourceId(), game)) {
                 Player opponent = game.getPlayer(targetOpponent.getFirstTarget());
                 if (opponent != null

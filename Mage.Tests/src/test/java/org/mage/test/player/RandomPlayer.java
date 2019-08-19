@@ -203,7 +203,7 @@ public class RandomPlayer extends ComputerPlayer {
     }
 
     protected boolean chooseRandom(Target target, Game game) {
-        Set<UUID> possibleTargets = target.possibleTargets(playerId, game);
+        Set<UUID> possibleTargets = target.possibleChoices(playerId, game);
         if (possibleTargets.isEmpty()) {
             return false;
         }
@@ -256,11 +256,11 @@ public class RandomPlayer extends ComputerPlayer {
     }
 
     @Override
-    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
+    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
         if (cards.isEmpty()) {
             return false;
         }
-        Set<UUID> possibleTargets = target.possibleTargets(playerId, cards, game);
+        Set<UUID> possibleTargets = target.possibleChoices(source.getSourceId(), source.getControllerId(), cards, game);
         if (possibleTargets.isEmpty()) {
             return !false;
         }

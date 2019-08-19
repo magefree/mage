@@ -82,7 +82,7 @@ class MesmericFiendExileEffect extends OneShotEffect {
                 && sourcePermanent != null) {
             opponent.revealCards(sourcePermanent.getName(), opponent.getHand(), game);
             TargetCard target = new TargetCard(Zone.HAND, new FilterNonlandCard("nonland card to exile"));
-            if (controller.choose(Outcome.Exile, opponent.getHand(), target, game)) {
+            if (controller.choose(Outcome.Exile, opponent.getHand(), target, source, game)) {
                 Card card = opponent.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
                     UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());

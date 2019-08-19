@@ -66,7 +66,7 @@ class DarkBargainEffect extends OneShotEffect {
                 Cards cardsToHand = new CardsImpl();
                 player.lookAtCards(sourceOject.getIdName(), cards, game);
                 TargetCard target = new TargetCard(Math.min(2, cards.size()), Zone.LIBRARY, new FilterCard("two cards to put in your hand"));
-                if (player.choose(Outcome.DrawCard, cards, target, game)) {
+                if (player.choose(Outcome.DrawCard, cards, target, source, game)) {
                     for (UUID targetId : target.getTargets()) {
                         Card card = cards.get(targetId, game);
                         if (card != null) {

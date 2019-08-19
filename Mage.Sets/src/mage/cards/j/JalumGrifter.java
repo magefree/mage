@@ -94,8 +94,8 @@ class JalumGrifterEffect extends OneShotEffect {
             }
             
             Target target = new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent(), true);
-            if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
-                while (!target.isChosen() && target.canChoose(controller.getId(), game) && controller.canRespond()) {
+            if (target.hasPossibleTargets(source.getSourceId(), controller.getId(), game)) {
+                while (!target.isChosen() && target.hasPossibleChoices(controller.getId(), game) && controller.canRespond()) {
                     controller.chooseTarget(outcome, target, source, game);
                 }
             }
@@ -117,7 +117,7 @@ class JalumGrifterEffect extends OneShotEffect {
             TargetCard targetCard = new TargetCard(Zone.HAND, new FilterCard());
             CardsImpl cards = new CardsImpl();
             cards.addAll(shellGamePile);
-            if (opponent.choose(Outcome.Sacrifice, cards, targetCard, game)) {
+            if (opponent.choose(Outcome.Sacrifice, cards, targetCard, source, game)) {
                 Card card = game.getCard(targetCard.getFirstTarget());
                 if (card != null) {
                     card.setFaceDown(false, game);

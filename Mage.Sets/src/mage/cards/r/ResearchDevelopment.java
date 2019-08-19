@@ -93,7 +93,7 @@ class ResearchEffect extends OneShotEffect {
                 }
 
                 TargetCard target = new TargetCard(Zone.OUTSIDE, filter);
-                if (player.choose(Outcome.Benefit, filteredCards, target, game)) {
+                if (player.choose(Outcome.Benefit, filteredCards, target, source, game)) {
                     Card card = player.getSideboard().get(target.getFirstTarget(), game);
                     if (card != null) {
                         card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);

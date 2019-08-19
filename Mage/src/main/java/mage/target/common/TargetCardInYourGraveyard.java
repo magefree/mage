@@ -103,12 +103,12 @@ public class TargetCardInYourGraveyard extends TargetCard {
      * @return - true if enough valid {@link Card} exist
      */
     @Override
-    public boolean canChoose(UUID sourceControllerId, Game game) {
+    public boolean hasPossibleChoices(UUID sourceControllerId, Game game) {
         return game.getPlayer(sourceControllerId).getGraveyard().count(filter, game) >= this.minNumberOfTargets;
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean hasPossibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         Player player = game.getPlayer(sourceControllerId);
         if (player != null) {
             if (this.minNumberOfTargets == 0) {

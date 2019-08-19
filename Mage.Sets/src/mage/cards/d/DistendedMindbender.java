@@ -93,7 +93,7 @@ class DistendedMindbenderEffect extends OneShotEffect {
             opponent.revealCards("Distended Mindbender", opponent.getHand(), game);
             TargetCard targetThreeOrLess = new TargetCard(1, Zone.HAND, filterThreeOrLess);
             TargetCard targetFourOrGreater = new TargetCard(1, Zone.HAND, filterFourOrGreater);
-            if (controller.choose(Outcome.Benefit, opponent.getHand(), targetThreeOrLess, game)) {
+            if (controller.choose(Outcome.Benefit, opponent.getHand(), targetThreeOrLess, source, game)) {
                 List<UUID> targets = targetThreeOrLess.getTargets();
                 for (UUID targetId : targets) {
                     Card card = opponent.getHand().get(targetId, game);
@@ -102,7 +102,7 @@ class DistendedMindbenderEffect extends OneShotEffect {
                     }
                 }
             }
-            if (controller.choose(Outcome.Benefit, opponent.getHand(), targetFourOrGreater, game)) {
+            if (controller.choose(Outcome.Benefit, opponent.getHand(), targetFourOrGreater, source, game)) {
                 List<UUID> targets = targetFourOrGreater.getTargets();
                 for (UUID targetId : targets) {
                     Card card = opponent.getHand().get(targetId, game);

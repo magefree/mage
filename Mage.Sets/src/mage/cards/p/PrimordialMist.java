@@ -84,7 +84,7 @@ class PrimordialMistCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        return target.canChoose(controllerId, game);
+        return target.hasPossibleChoices(controllerId, game);
     }
 
     @Override

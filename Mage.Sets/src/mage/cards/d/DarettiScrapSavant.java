@@ -129,7 +129,7 @@ class DarettiSacrificeEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Target target = new TargetControlledPermanent(1, 1, new FilterControlledArtifactPermanent(), true);
-            if (target.canChoose(source.getSourceId(), controller.getId(), game)
+            if (target.hasPossibleTargets(source.getSourceId(), controller.getId(), game)
                     && controller.chooseTarget(outcome, target, source, game)) {
                 Permanent artifact = game.getPermanent(target.getFirstTarget());
                 if (artifact != null && artifact.sacrifice(source.getSourceId(), game)) {

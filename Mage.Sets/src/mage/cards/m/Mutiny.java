@@ -127,8 +127,8 @@ class MutinyFirstTarget extends TargetCreaturePermanent {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        if (super.canChoose(sourceId, sourceControllerId, game)) {
+    public boolean hasPossibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+        if (super.hasPossibleTargets(sourceId, sourceControllerId, game)) {
             UUID controllingPlayerId = game.getControllerId(sourceId);
             for (UUID playerId : game.getOpponents(controllingPlayerId)) {
                 int possibleTargets = 0;

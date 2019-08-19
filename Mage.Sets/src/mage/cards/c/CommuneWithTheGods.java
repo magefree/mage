@@ -66,7 +66,7 @@ class CommuneWithTheGodsEffect extends OneShotEffect {
                 controller.revealCards(source, cards, game);
                 if (cards.count(filterPutInHand, source.getSourceId(), source.getControllerId(), game) > 0) {
                     TargetCard target = new TargetCard(0, 1, Zone.LIBRARY, filterPutInHand);
-                    if (controller.choose(Outcome.DrawCard, cards, target, game)) {
+                    if (controller.choose(Outcome.DrawCard, cards, target, source, game)) {
                         Card card = game.getCard(target.getFirstTarget());
                         if (card != null) {
                             cards.remove(card);

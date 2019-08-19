@@ -112,7 +112,7 @@ class CallToTheKindredEffect extends OneShotEffect {
         if (cards.count(filter, game) > 0 && controller.chooseUse(Outcome.DrawCard, "Do you wish to put a creature card onto the battlefield?", source, game)) {
             TargetCard target = new TargetCard(Zone.LIBRARY, filter);
 
-            if (controller.choose(Outcome.PutCreatureInPlay, cards, target, game)) {
+            if (controller.choose(Outcome.PutCreatureInPlay, cards, target, source, game)) {
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);

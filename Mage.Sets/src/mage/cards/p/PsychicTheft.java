@@ -85,7 +85,7 @@ class PsychicTheftEffect extends OneShotEffect {
                 Card chosenCard = null;
                 if (cardsHand > 0) {
                     TargetCard target = new TargetCard(Zone.HAND, filter);
-                    if (controller.choose(Outcome.Benefit, opponent.getHand(), target, game)) {
+                    if (controller.choose(Outcome.Benefit, opponent.getHand(), target, source, game)) {
                         chosenCard = opponent.getHand().get(target.getFirstTarget(), game);
                     }
                 }

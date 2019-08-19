@@ -5,7 +5,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
+
 import mage.MageItem;
+import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.constants.Zone;
@@ -59,9 +61,9 @@ public class TargetCard extends TargetObject {
      * @return - true if enough valid {@link Card} exist
      */
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean hasPossibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         int possibleTargets = 0;
-        if (getNumberOfTargets() == 0) { // if 0 target is valid, the canChoose is always true
+        if (getNumberOfTargets() == 0) { // if 0 target is valid, the hasPossibleTargets is always true
             return true;
         }
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
@@ -129,8 +131,8 @@ public class TargetCard extends TargetObject {
      * @return - true if enough valid {@link Card} exist
      */
     @Override
-    public boolean canChoose(UUID sourceControllerId, Game game) {
-        return canChoose(null, sourceControllerId, game);
+    public boolean hasPossibleChoices(UUID sourceControllerId, Game game) {
+        return hasPossibleTargets(null, sourceControllerId, game);
     }
 
     @Override
@@ -182,14 +184,18 @@ public class TargetCard extends TargetObject {
         return cards.getCards(filter,game).stream().map(MageItem::getId).collect(Collectors.toSet());
     }
 
+    public Set<UUID> possibleChoices(UUID sourceId, UUID sourceControllerId, Cards cards, Game game) {
+        return cards.getCards(filter, sourceId, sourceControllerId, game).stream().map(MageItem::getId).collect(Collectors.toSet());
+    }
+
     @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleChoices(UUID sourceControllerId, Game game) {
         return possibleTargets(null, sourceControllerId, game);
     }
 
-    public boolean canTarget(UUID id, Cards cards, Game game) {
+    public boolean canTarget(UUID id, Cards cards, Ability source, Game game) {
         Card card = cards.get(id, game);
-        return card != null && filter.match(card, game);
+        return card != null && filter.match(card, source.getSourceId(), source.getControllerId(), game);
     }
 
     @Override

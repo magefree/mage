@@ -137,7 +137,7 @@ class SoulboundEntersSelfEffect extends OneShotEffect {
             if (controller != null) {
                 TargetControlledPermanent target = new TargetControlledPermanent(filter);
                 target.setNotTarget(true);
-                if (target.canChoose(permanent.getId(), controller.getId(), game)) {
+                if (target.hasPossibleTargets(permanent.getId(), controller.getId(), game)) {
                     if (controller.choose(Outcome.Benefit, target, permanent.getId(), game)) {
                         Permanent chosen = game.getPermanent(target.getFirstTarget());
                         if (chosen != null) {

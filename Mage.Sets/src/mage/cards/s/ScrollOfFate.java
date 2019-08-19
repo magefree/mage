@@ -69,7 +69,7 @@ class ScrollOfFateEffect extends OneShotEffect {
             return false;
         }
         TargetCard targetCard = new TargetCardInHand();
-        if (!controller.choose(outcome, controller.getHand(), targetCard, game)) {
+        if (!controller.choose(outcome, controller.getHand(), targetCard, source, game)) {
             return false;
         }
         Ability newSource = source.copy();

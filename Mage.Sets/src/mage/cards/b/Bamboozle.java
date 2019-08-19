@@ -69,7 +69,7 @@ class BamboozleEffect extends OneShotEffect {
             }
             targetPlayer.revealCards("Bamboozle Reveal", putOnTopLibrary, game);
             TargetCard target = new TargetCard(2, Zone.LIBRARY, new FilterCard("2 cards out of this stack to put into their graveyard"));
-            if (controller.choose(Outcome.Discard, putOnTopLibrary, target, game)) {
+            if (controller.choose(Outcome.Discard, putOnTopLibrary, target, source, game)) {
                 for (UUID cardId : target.getTargets()) {
                     putInGraveyard.add(game.getCard(cardId));
                     putOnTopLibrary.remove(game.getCard(cardId));

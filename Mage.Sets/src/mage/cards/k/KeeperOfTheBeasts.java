@@ -80,7 +80,7 @@ class KeeperOfTheBeastsTarget extends TargetPlayer {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean hasPossibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         int count = 0;
         MageObject targetSource = game.getObject(sourceId);
         Player controller = game.getPlayer(sourceControllerId);

@@ -80,7 +80,7 @@ class FactOrFictionEffect extends OneShotEffect {
             }
             TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY, new FilterCard("cards to put in the first pile"));
             List<Card> pile1 = new ArrayList<>();
-            if (opponent.choose(Outcome.Neutral, cards, target, game)) {
+            if (opponent.choose(Outcome.Neutral, cards, target, source, game)) {
                 List<UUID> targets = target.getTargets();
                 for (UUID targetId : targets) {
                     Card card = cards.get(targetId, game);

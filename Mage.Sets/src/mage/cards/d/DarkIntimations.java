@@ -104,7 +104,7 @@ class DarkIntimationsEffect extends OneShotEffect {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 TargetPermanent target = new TargetPermanent(1, 1, filter, true);
-                if (target.canChoose(player.getId(), game)) {
+                if (target.hasPossibleChoices(player.getId(), game)) {
                     player.chooseTarget(Outcome.Sacrifice, target, source, game);
                     perms.addAll(target.getTargets());
                 }
@@ -123,7 +123,7 @@ class DarkIntimationsEffect extends OneShotEffect {
             }
         }
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filterCard);
-        if (target.canChoose(source.getSourceId(), source.getControllerId(), game) 
+        if (target.hasPossibleTargets(source.getSourceId(), source.getControllerId(), game)
                 && controller.choose(Outcome.ReturnToHand, target, source.getSourceId(), game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card == null) {

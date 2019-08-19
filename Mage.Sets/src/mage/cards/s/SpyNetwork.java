@@ -106,10 +106,10 @@ class SpyNetworkFaceDownEffect extends OneShotEffect {
             filter.add(FaceDownPredicate.instance);
             filter.add(new ControllerIdPredicate(player.getId()));
             TargetCreaturePermanent target = new TargetCreaturePermanent(1, 1, filter, true);
-            if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
+            if (target.hasPossibleTargets(source.getSourceId(), controller.getId(), game)) {
                 while (controller.chooseUse(outcome, "Look at a face down creature controlled by " + player.getLogName() + "?", source, game)) {
                     target.clearChosen();
-                    while (!target.isChosen() && target.canChoose(controller.getId(), game) && controller.canRespond()) {
+                    while (!target.isChosen() && target.hasPossibleChoices(controller.getId(), game) && controller.canRespond()) {
                         controller.chooseTarget(outcome, target, source, game);
                     }
                     Permanent faceDownCreature = game.getPermanent(target.getFirstTarget());

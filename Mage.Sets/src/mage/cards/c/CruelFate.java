@@ -73,7 +73,7 @@ class CruelFateEffect extends OneShotEffect {
                 TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put into target opponent's graveyard"));
                 if (targetOpponent.isInGame()) {
                     if (cards.size() > 1) {
-                        controller.choose(Outcome.Detriment, cards, target, game);
+                        controller.choose(Outcome.Detriment, cards, target, source, game);
                         Card card = cards.get(target.getFirstTarget(), game);
                         if (card != null) {
                             cards.remove(card);

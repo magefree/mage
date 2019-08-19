@@ -102,7 +102,7 @@ class GoblinAssassinTriggeredEffect extends OneShotEffect {
                 if (player != null && !player.flipCoin(source, game, false)) {
                     TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
                     target.setNotTarget(true);
-                    if (target.canChoose(player.getId(), game)) {
+                    if (target.hasPossibleChoices(player.getId(), game)) {
                         player.chooseTarget(Outcome.Sacrifice, target, source, game);
                         perms.addAll(target.getTargets());
                     }
