@@ -67,8 +67,8 @@ class SunkenHopeReturnToHandEffect extends OneShotEffect {
         }
 
         Target target = new TargetControlledPermanent(1, 1, new FilterControlledCreaturePermanent(), true);
-        if (target.canChoose(player.getId(), game)) {
-            while (player.canRespond() && !target.isChosen() && target.canChoose(player.getId(), game)) {
+        if (target.hasPossibleChoices(player.getId(), game)) {
+            while (player.canRespond() && !target.isChosen() && target.hasPossibleChoices(player.getId(), game)) {
                 player.chooseTarget(Outcome.ReturnToHand, target, source, game);
             }
 

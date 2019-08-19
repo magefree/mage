@@ -81,7 +81,7 @@ class LordOfThePitEffect extends OneShotEffect {
         filter.add(AnotherPredicate.instance);
 
         Target target = new TargetControlledCreaturePermanent(1, 1, filter, true);
-        if (target.canChoose(source.getSourceId(), player.getId(), game)) {
+        if (target.hasPossibleTargets(source.getSourceId(), player.getId(), game)) {
             player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {

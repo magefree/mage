@@ -76,7 +76,7 @@ class DiscipleOfPhenaxEffect extends OneShotEffect {
                 FilterCard filter = new FilterCard("card in target player's hand");
                 TargetCardInHand chosenCards = new TargetCardInHand(amount, amount, filter);
                 chosenCards.setNotTarget(true);
-                if (chosenCards.canChoose(targetPlayer.getId(), game) && targetPlayer.choose(Outcome.Discard, targetPlayer.getHand(), chosenCards, game)) {
+                if (chosenCards.hasPossibleChoices(targetPlayer.getId(), game) && targetPlayer.choose(Outcome.Discard, targetPlayer.getHand(), chosenCards, game)) {
                     if (!chosenCards.getTargets().isEmpty()) {
                         List<UUID> targets = chosenCards.getTargets();
                         for (UUID targetid : targets) {

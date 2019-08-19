@@ -81,7 +81,7 @@ public class DevourEffect extends ReplacementEffectImpl {
         if (creature != null && controller != null) {
             Target target = new TargetControlledCreaturePermanent(1, Integer.MAX_VALUE, filter, true);
             target.setRequired(false);
-            if (!target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+            if (!target.hasPossibleTargets(source.getSourceId(), source.getControllerId(), game)) {
                 return false;
             }
             if (controller.chooseUse(Outcome.Detriment, "Devour creatures?", source, game)) {

@@ -69,7 +69,7 @@ class ExhumeEffect extends OneShotEffect {
                 filterCreatureCard.add(new OwnerIdPredicate(playerId));
                 TargetCardInGraveyard target = new TargetCardInGraveyard(filterCreatureCard);
                 target.setNotTarget(true);
-                if (target.canChoose(playerId, game)
+                if (target.hasPossibleChoices(playerId, game)
                         && player.chooseTarget(outcome, target, source, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {

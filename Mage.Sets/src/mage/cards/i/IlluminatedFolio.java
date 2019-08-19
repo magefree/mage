@@ -79,7 +79,7 @@ class TargetTwoCardsWithTheSameColorInHand extends TargetCardInHand {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleChoices(UUID sourceControllerId, Game game) {
         Set<UUID> newPossibleTargets = new HashSet<>();
         Set<UUID> possibleTargets = new HashSet<>();
         Player player = game.getPlayer(sourceControllerId);
@@ -114,7 +114,7 @@ class TargetTwoCardsWithTheSameColorInHand extends TargetCardInHand {
     }
 
     @Override
-    public boolean canChoose(UUID sourceControllerId, Game game) {
+    public boolean hasPossibleChoices(UUID sourceControllerId, Game game) {
         Cards cardsToCheck = new CardsImpl();
         Player player = game.getPlayer(sourceControllerId);
         for (Card card : player.getHand().getCards(filter, game)) {

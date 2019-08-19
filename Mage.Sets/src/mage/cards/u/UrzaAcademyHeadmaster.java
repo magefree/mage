@@ -433,7 +433,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
 
                 game.informPlayers(sb.toString());
                 if (target != null) {
-                    if (target.canChoose(source.getSourceId(), controller.getId(), game) && controller.canRespond()) {
+                    if (target.hasPossibleTargets(source.getSourceId(), controller.getId(), game) && controller.canRespond()) {
                         target.chooseTarget(outcome, controller.getId(), source, game);
                     } else {
                         // 1/19/2018 	(...) If the ability that comes up requires a target and there are no legal targets available, click again until that’s not true.
@@ -561,7 +561,7 @@ class UrzaAcademyHeadmasterBrainstormEffect extends OneShotEffect {
 
     private boolean putOnLibrary(Player player, Ability source, Game game) {
         TargetCardInHand target = new TargetCardInHand();
-        if (target.canChoose(source.getSourceId(), player.getId(), game)) {
+        if (target.hasPossibleTargets(source.getSourceId(), player.getId(), game)) {
             player.chooseTarget(Outcome.ReturnToHand, target, source, game);
             Card card = player.getHand().get(target.getFirstTarget(), game);
             if (card != null) {

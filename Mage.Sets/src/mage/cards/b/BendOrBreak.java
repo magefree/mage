@@ -99,7 +99,7 @@ class BendOrBreakEffect extends OneShotEffect {
                     List<Permanent> secondPile = new ArrayList<>();
                     FilterControlledLandPermanent filter = new FilterControlledLandPermanent("lands you control to assign to the first pile (lands not chosen will be assigned to the second pile)");
                     TargetPermanent target = new TargetControlledPermanent(0, Integer.MAX_VALUE, filter, true);
-                    if (target.canChoose(source.getSourceId(), currentPlayer.getId(), game)) {
+                    if (target.hasPossibleTargets(source.getSourceId(), currentPlayer.getId(), game)) {
                         if (currentPlayer.chooseTarget(Outcome.Neutral, target, source, game)) {
                             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, currentPlayer.getId(), game)) {
                                 if (target.getTargets().contains(permanent.getId())) {

@@ -65,7 +65,7 @@ class ETBSinceYourLastTurnTarget extends TargetCreaturePermanent {
 
     @Override
     public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        System.out.println("canTarget called");
+        System.out.println("hasPossibleTargets called");
         ETBSinceYourLastTurnWatcher watcher = game.getState().getWatcher(ETBSinceYourLastTurnWatcher.class);
         if (watcher != null){
             if (watcher.enteredSinceLastTurn(controllerId, new MageObjectReference(id, game))){
@@ -77,7 +77,7 @@ class ETBSinceYourLastTurnTarget extends TargetCreaturePermanent {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean hasPossibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         MageObject targetSource = game.getObject(sourceId);
         ETBSinceYourLastTurnWatcher watcher = game.getState().getWatcher(ETBSinceYourLastTurnWatcher.class);
         if(targetSource != null) {

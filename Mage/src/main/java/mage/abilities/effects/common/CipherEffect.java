@@ -6,7 +6,6 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.cards.Card;
@@ -66,7 +65,7 @@ public class CipherEffect extends OneShotEffect {
         if (controller != null) {
             TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
             target.setNotTarget(true);
-            if (target.canChoose(source.getControllerId(), game)
+            if (target.hasPossibleChoices(source.getControllerId(), game)
                     && controller.chooseUse(outcome, "Cipher this spell to a creature?", source, game)) {
                 controller.chooseTarget(outcome, target, source, game);
                 Card sourceCard = game.getCard(source.getSourceId());

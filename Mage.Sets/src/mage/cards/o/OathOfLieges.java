@@ -106,7 +106,7 @@ class OathOfLiegesPredicate implements ObjectSourcePlayerPredicate<ObjectSourceP
     @Override
     public boolean apply(ObjectSourcePlayer<Player> input, Game game) {
         Player targetPlayer = input.getObject();
-        //Get active input.playerId because adjust target is used after canTarget function
+        //Get active input.playerId because adjust target is used after hasPossibleTargets function
         UUID activePlayerId = game.getActivePlayerId();
         if (targetPlayer == null || activePlayerId == null) {
             return false;

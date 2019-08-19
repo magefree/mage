@@ -130,7 +130,7 @@ class TargetControlledSource extends TargetSource {
     }
 
     @Override
-    public boolean canChoose(UUID sourceControllerId, Game game) {
+    public boolean hasPossibleChoices(UUID sourceControllerId, Game game) {
         int count = 0;
         for (StackObject stackObject: game.getStack()) {
             if (game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getControllerId()) 
@@ -172,7 +172,7 @@ class TargetControlledSource extends TargetSource {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleChoices(UUID sourceControllerId, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         for (StackObject stackObject: game.getStack()) {
             if (game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getControllerId()) 

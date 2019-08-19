@@ -126,7 +126,7 @@ class TriumphOfGerrardTargetCreature extends TargetControlledCreaturePermanent {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean hasPossibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         return !possibleTargets(sourceId, sourceControllerId, game).isEmpty();
     }
 

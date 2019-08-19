@@ -95,7 +95,7 @@ public class TargetPermanent extends TargetObject {
      * @return true if enough valid {@link Permanent} exist
      */
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean hasPossibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         int remainingTargets = this.minNumberOfTargets - targets.size();
         if (remainingTargets <= 0) {
             return true;
@@ -125,7 +125,7 @@ public class TargetPermanent extends TargetObject {
      * @return - true if enough valid {@link Permanent} exist
      */
     @Override
-    public boolean canChoose(UUID sourceControllerId, Game game) {
+    public boolean hasPossibleChoices(UUID sourceControllerId, Game game) {
         int remainingTargets = this.minNumberOfTargets - targets.size();
         if (remainingTargets == 0) {
             // if we return true, then AnowonTheRuinSage will hang for AI when no targets in play
@@ -159,7 +159,7 @@ public class TargetPermanent extends TargetObject {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleChoices(UUID sourceControllerId, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, game)) {
             if (!targets.containsKey(permanent.getId())) {

@@ -150,13 +150,13 @@ class RiskyMoveFlipCoinEffect extends OneShotEffect {
             Target target1 = new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent(), true);
             Target target2 = new TargetOpponent(true);
             
-            if (target1.canChoose(source.getSourceId(), controller.getId(), game)) {
-                while (!target1.isChosen() && target1.canChoose(controller.getId(), game) && controller.canRespond()) {
+            if (target1.hasPossibleTargets(source.getSourceId(), controller.getId(), game)) {
+                while (!target1.isChosen() && target1.hasPossibleChoices(controller.getId(), game) && controller.canRespond()) {
                     controller.chooseTarget(outcome, target1, source, game);
                 }
             }
-            if (target2.canChoose(source.getSourceId(), controller.getId(), game)) {
-                while (!target2.isChosen() && target2.canChoose(controller.getId(), game) && controller.canRespond()) {
+            if (target2.hasPossibleTargets(source.getSourceId(), controller.getId(), game)) {
+                while (!target2.isChosen() && target2.hasPossibleChoices(controller.getId(), game) && controller.canRespond()) {
                     controller.chooseTarget(outcome, target2, source, game);
                 }
             }

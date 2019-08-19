@@ -55,7 +55,7 @@ class TargetCreatureWithLessPowerPermanent extends TargetPermanent {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean hasPossibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         int maxPower = Integer.MIN_VALUE; // get the most powerful controlled creature that can be targeted
         Card sourceCard = game.getCard(sourceId);
         if (sourceCard == null) {

@@ -85,7 +85,7 @@ class PurgingScytheEffect extends OneShotEffect {
                 filter.add(new ToughnessPredicate(ComparisonType.EQUAL_TO, leastToughness));
                 Target target = new TargetPermanent(filter);
                 target.setNotTarget(true);
-                if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+                if (target.hasPossibleTargets(source.getSourceId(), source.getControllerId(), game)) {
                     if (controller.choose(outcome, target, source.getSourceId(), game)) {
                         permanentToDamage = game.getPermanent(target.getFirstTarget());
                     }

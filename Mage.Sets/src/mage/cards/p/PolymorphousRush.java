@@ -10,10 +10,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -74,7 +72,7 @@ class PolymorphousRushCopyEffect extends OneShotEffect {
             Target target = new TargetCreaturePermanent(new FilterCreaturePermanent(""));
             target.setNotTarget(true);
             target.setTargetName("a creature on the battlefield (creature to copy)");
-            if (target.canChoose(source.getId(), controller.getId(), game) && controller.chooseTarget(outcome, target, source, game)) {
+            if (target.hasPossibleTargets(source.getId(), controller.getId(), game) && controller.chooseTarget(outcome, target, source, game)) {
                 Permanent copyFromCreature = game.getPermanent(target.getFirstTarget());
                 if (copyFromCreature != null) {
                     for (UUID copyToId : getTargetPointer().getTargets(game, source)) {

@@ -69,7 +69,7 @@ class TargetPermanentsThatShareCardType extends TargetPermanent {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean hasPossibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         Set<CardType> cardTypes = new HashSet<>();
         MageObject targetSource = game.getObject(sourceId);
         if (targetSource != null) {

@@ -100,7 +100,7 @@ class NettlevineBlightEffect extends OneShotEffect {
                 filter.add(new CanBeEnchantedByPredicate(nettlevineBlight));
                 Target target = new TargetPermanent(filter);
                 target.setNotTarget(true);
-                if (target.canChoose(source.getSourceId(), newController.getId(), game)
+                if (target.hasPossibleTargets(source.getSourceId(), newController.getId(), game)
                         && newController.choose(outcome, target, source.getSourceId(), game)) {
                     Permanent chosenPermanent = game.getPermanent(target.getFirstTarget());
                     if (chosenPermanent != null) {

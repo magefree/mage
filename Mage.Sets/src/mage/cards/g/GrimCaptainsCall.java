@@ -73,7 +73,7 @@ class GrimCaptainsCallEffect extends OneShotEffect {
         FilterCreatureCard filter = new FilterCreatureCard(subType.getDescription() + " card");
         filter.add(new SubtypePredicate(subType));
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(new FilterCreatureCard(filter));
-        if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+        if (target.hasPossibleTargets(source.getSourceId(), source.getControllerId(), game)) {
             if (controller.chooseTarget(outcome, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {

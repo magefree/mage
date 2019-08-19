@@ -85,7 +85,7 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
             sampleTarget.setNotTarget(true);
 
             Map<UUID, Map<UUID, Spell>> playerTargetCopyMap = new HashMap<>();
-            for (UUID objId : sampleTarget.possibleTargets(actingPlayer.getId(), game)) {
+            for (UUID objId : sampleTarget.possibleChoices(actingPlayer.getId(), game)) {
                 MageItem obj = game.getObject(objId);
                 if (obj == null) {
                     obj = game.getPlayer(objId);
@@ -148,7 +148,7 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
 
                             // shortcut if there's only one possible target remaining
                             if (targetCopyMap.size() > 1
-                                    && target.canChoose(spell.getId(), player.getId(), game)) {
+                                    && target.hasPossibleTargets(spell.getId(), player.getId(), game)) {
                                 player.choose(Outcome.Neutral, target, spell.getId(), game);
                             }
                             Collection<UUID> chosenIds = target.getTargets();
@@ -327,7 +327,7 @@ class TargetWithAdditionalFilter<T extends MageItem> extends TargetImpl {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean hasPossibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         int remainingTargets = getNumberOfTargets() - targets.size();
         if (remainingTargets <= 0) {
             return true;
@@ -355,14 +355,14 @@ class TargetWithAdditionalFilter<T extends MageItem> extends TargetImpl {
     }
 
     @Override
-    public boolean canChoose(UUID sourceControllerId, Game game) {
+    public boolean hasPossibleChoices(UUID sourceControllerId, Game game) {
         int remainingTargets = getNumberOfTargets() - targets.size();
         if (remainingTargets <= 0) {
             return true;
         }
 
         int count = 0;
-        for (UUID objId : originalTarget.possibleTargets(sourceControllerId, game)) {
+        for (UUID objId : originalTarget.possibleChoices(sourceControllerId, game)) {
             MageItem obj = game.getObject(objId);
             if (obj == null) {
                 obj = game.getPlayer(objId);
@@ -402,9 +402,9 @@ class TargetWithAdditionalFilter<T extends MageItem> extends TargetImpl {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleChoices(UUID sourceControllerId, Game game) {
         Set<UUID> ret = new HashSet<>();
-        for (UUID id : originalTarget.possibleTargets(sourceControllerId, game)) {
+        for (UUID id : originalTarget.possibleChoices(sourceControllerId, game)) {
             MageItem obj = game.getObject(id);
             if (obj == null) {
                 obj = game.getPlayer(id);

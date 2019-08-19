@@ -100,7 +100,7 @@ class SpellweaverVoluteEffect extends OneShotEffect {
                                     FilterCard filter = new FilterCard("instant card in a graveyard");
                                     filter.add(new CardTypePredicate(CardType.INSTANT));
                                     TargetCardInGraveyard auraTarget = new TargetCardInGraveyard(filter);
-                                    if (auraTarget.canChoose(source.getSourceId(), controller.getId(), game)) {
+                                    if (auraTarget.hasPossibleTargets(source.getSourceId(), controller.getId(), game)) {
                                         controller.choose(outcome, auraTarget, source.getSourceId(), game);
                                         Card newAuraTarget = game.getCard(auraTarget.getFirstTarget());
                                         if (newAuraTarget != null) {

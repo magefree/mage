@@ -90,7 +90,7 @@ class ExtractFromDarknessReturnFromGraveyardToBattlefieldEffect extends OneShotE
         if (controller != null) {
             Target target = new TargetCardInGraveyard(new FilterCreatureCard());
             target.setNotTarget(true);
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
+            if (target.hasPossibleTargets(source.getSourceId(), source.getControllerId(), game)
                     && controller.chooseTarget(outcome, target, source, game)) {
                 return controller.moveCards(game.getCard(target.getFirstTarget()), Zone.BATTLEFIELD, source, game);
             }

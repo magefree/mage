@@ -69,7 +69,7 @@ class ForbiddenCryptDrawCardReplacementEffect extends ReplacementEffectImpl {
             boolean cardReturned = false;
             TargetCardInYourGraveyard target = new TargetCardInYourGraveyard();
             target.setNotTarget(true);
-            if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
+            if (target.hasPossibleTargets(source.getSourceId(), controller.getId(), game)) {
                 if (target.choose(Outcome.ReturnToHand, controller.getId(), source.getSourceId(), game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {

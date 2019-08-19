@@ -108,7 +108,7 @@
         }
 
         @Override
-        public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+        public boolean hasPossibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
             int count = 0;
             MageObject targetSource = game.getObject(sourceId);
             for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreatureOrPlaneswalkerPermanent(), sourceControllerId, game)) {
@@ -123,7 +123,7 @@
         }
 
         @Override
-        public boolean canChoose(UUID sourceControllerId, Game game) {
+        public boolean hasPossibleChoices(UUID sourceControllerId, Game game) {
             int count = 0;
             for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreatureOrPlaneswalkerPermanent(), sourceControllerId, game)) {
                 if (filter.match(permanent, null, sourceControllerId, game)) {
@@ -149,7 +149,7 @@
         }
 
         @Override
-        public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
+        public Set<UUID> possibleChoices(UUID sourceControllerId, Game game) {
             Set<UUID> possibleTargets = new HashSet<>();
             for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreatureOrPlaneswalkerPermanent(), sourceControllerId, game)) {
                 if (filter.match(permanent, null, sourceControllerId, game)) {

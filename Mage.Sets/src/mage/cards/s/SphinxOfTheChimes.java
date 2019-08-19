@@ -81,7 +81,7 @@ class TargetTwoNonLandCardsWithSameNameInHand extends TargetCardInHand {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleChoices(UUID sourceControllerId, Game game) {
         Set<UUID> newPossibleTargets = new HashSet<>();
         Set<UUID> possibleTargets = new HashSet<>();
         Player player = game.getPlayer(sourceControllerId);
@@ -122,7 +122,7 @@ class TargetTwoNonLandCardsWithSameNameInHand extends TargetCardInHand {
     }
 
     @Override
-    public boolean canChoose(UUID sourceControllerId, Game game) {
+    public boolean hasPossibleChoices(UUID sourceControllerId, Game game) {
         Cards cardsToCheck = new CardsImpl();
         Player player = game.getPlayer(sourceControllerId);
         if (player == null) {

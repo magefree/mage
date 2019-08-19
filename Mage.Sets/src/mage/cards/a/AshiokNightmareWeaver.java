@@ -128,7 +128,7 @@ class AshiokNightmareWeaverPutIntoPlayEffect extends OneShotEffect {
 
         Target target = new TargetCardInExile(filter, CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()));
 
-        if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
+        if (target.hasPossibleTargets(source.getSourceId(), controller.getId(), game)) {
             if (controller.chooseTarget(Outcome.PutCreatureInPlay, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null

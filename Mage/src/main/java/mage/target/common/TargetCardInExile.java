@@ -74,7 +74,7 @@ public class TargetCardInExile extends TargetCard {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean hasPossibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         if (allExileZones) {
             int numberTargets = 0;
             for(ExileZone exileZone : game.getExile().getExileZones()) {

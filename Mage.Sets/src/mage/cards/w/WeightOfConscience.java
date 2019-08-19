@@ -139,7 +139,7 @@ class WeightOfConscienceTarget extends TargetControlledCreaturePermanent {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean hasPossibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         for (Permanent permanent1 : game.getBattlefield().getActivePermanents(filterUntapped, sourceControllerId, game)) {
             for (Permanent permanent2 : game.getBattlefield().getActivePermanents(filterUntapped, sourceControllerId, game)) {
                 if (!Objects.equals(permanent1, permanent2) && permanent1.shareSubtypes(permanent2, game)) {

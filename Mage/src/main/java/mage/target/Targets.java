@@ -120,7 +120,7 @@ public class Targets extends ArrayList<Target> {
      * @return - true if enough valid targets exist
      */
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        return stream().allMatch(target -> target.canChoose(sourceId, sourceControllerId, game));
+        return stream().allMatch(target -> target.hasPossibleTargets(sourceId, sourceControllerId, game));
     }
 
     /**
@@ -133,7 +133,7 @@ public class Targets extends ArrayList<Target> {
      * @return - true if enough valid objects exist
      */
     public boolean canChoose(UUID sourceControllerId, Game game) {
-        return stream().allMatch(target -> target.canChoose(sourceControllerId, game));
+        return stream().allMatch(target -> target.hasPossibleChoices(sourceControllerId, game));
     }
 
     public UUID getFirstTarget() {

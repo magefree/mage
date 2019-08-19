@@ -69,7 +69,7 @@ class HarmonyOfNatureEffect extends OneShotEffect {
             TargetPermanent target = new TargetPermanent(0, 1, filter, false);
             while (true) {
                 target.clearChosen();
-                if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Tap, source.getControllerId(), source.getSourceId(), game)) {
+                if (target.hasPossibleChoices(source.getControllerId(), game) && target.choose(Outcome.Tap, source.getControllerId(), source.getSourceId(), game)) {
                     Map<String, Serializable> options = new HashMap<>();
                     options.put("UI.right.btn.text", "Tapping complete");
                     controller.choose(outcome, target, source.getControllerId(), game, options);

@@ -77,7 +77,7 @@ class ReturnFromExtinctionTarget extends TargetCardInYourGraveyard {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean hasPossibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         Set<SubType> subTypes = new HashSet<>();
         MageObject targetSource = game.getObject(sourceId);
         Player player = game.getPlayer(sourceControllerId);

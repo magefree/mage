@@ -64,7 +64,7 @@ class CorpseChurnEffect extends OneShotEffect {
         }
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
         target.setNotTarget(true);
-        if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
+        if (target.hasPossibleTargets(source.getSourceId(), source.getControllerId(), game)
                 && controller.chooseUse(outcome, "Return a creature card from your graveyard to hand?", source, game)
                 && controller.choose(Outcome.ReturnToHand, target, source.getSourceId(), game)) {
             Card card = game.getCard(target.getFirstTarget());

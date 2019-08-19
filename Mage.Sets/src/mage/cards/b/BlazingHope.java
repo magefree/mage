@@ -67,7 +67,7 @@ class BlazingHopeTarget extends TargetCreaturePermanent {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean hasPossibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         int remainingTargets = this.minNumberOfTargets - targets.size();
         if (remainingTargets <= 0) {
             return true;

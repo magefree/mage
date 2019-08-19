@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
+
 import mage.MageItem;
 import mage.cards.Card;
 import mage.cards.Cards;
@@ -59,9 +60,9 @@ public class TargetCard extends TargetObject {
      * @return - true if enough valid {@link Card} exist
      */
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean hasPossibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         int possibleTargets = 0;
-        if (getNumberOfTargets() == 0) { // if 0 target is valid, the canChoose is always true
+        if (getNumberOfTargets() == 0) { // if 0 target is valid, the hasPossibleTargets is always true
             return true;
         }
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
@@ -129,8 +130,8 @@ public class TargetCard extends TargetObject {
      * @return - true if enough valid {@link Card} exist
      */
     @Override
-    public boolean canChoose(UUID sourceControllerId, Game game) {
-        return canChoose(null, sourceControllerId, game);
+    public boolean hasPossibleChoices(UUID sourceControllerId, Game game) {
+        return hasPossibleTargets(null, sourceControllerId, game);
     }
 
     @Override
@@ -183,7 +184,7 @@ public class TargetCard extends TargetObject {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleChoices(UUID sourceControllerId, Game game) {
         return possibleTargets(null, sourceControllerId, game);
     }
 

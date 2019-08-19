@@ -72,7 +72,7 @@ public class TargetOpponentsChoicePermanent extends TargetPermanent {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean hasPossibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         MageObject sourceObject = game.getObject(sourceId);
         Player player = game.getPlayer(sourceControllerId);
         if (sourceObject == null || player == null) {

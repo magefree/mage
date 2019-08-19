@@ -93,7 +93,7 @@ class PorphyryNodesEffect extends OneShotEffect {
                 filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, leastPower));
                 Target target = new TargetPermanent(filter);
                 target.setNotTarget(true);
-                if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+                if (target.hasPossibleTargets(source.getSourceId(), source.getControllerId(), game)) {
                     if (controller.choose(outcome, target, source.getSourceId(), game)) {
                         permanentToDestroy = game.getPermanent(target.getFirstTarget());
                     }

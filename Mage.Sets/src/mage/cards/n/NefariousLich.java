@@ -77,7 +77,7 @@ class NefariousLichDamageReplacementEffect extends ReplacementEffectImpl {
         Player controller = game.getPlayer(event.getPlayerId());
         if (controller != null) {
             Target target = new TargetCardInYourGraveyard(amount, new FilterCard("card in your graveyard"));
-            if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
+            if (target.hasPossibleTargets(source.getSourceId(), controller.getId(), game)) {
                 if (controller.choose(Outcome.Exile, target, source.getSourceId(), game)) {
                     Set<Card> cards = new HashSet<>(amount);
                     for (UUID targetId : target.getTargets()) {

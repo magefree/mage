@@ -67,7 +67,7 @@ class LandslideEffect extends OneShotEffect {
         Player you = game.getPlayer(source.getControllerId());
         if (you != null) {
             Target target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
-            if (!target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+            if (!target.hasPossibleTargets(source.getSourceId(), source.getControllerId(), game)) {
                 return false;
             }
             you.chooseTarget(Outcome.Detriment, target, source, game);

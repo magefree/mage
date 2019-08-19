@@ -148,7 +148,7 @@ class DescentIntoMadnessEffect extends OneShotEffect {
                 filter.add(Predicates.not(Predicates.or(uuidPredicates)));                    
                 
                 target = new TargetControlledPermanent(0, 1, filter, true);
-                if (target.canChoose(player.getId(), game)
+                if (target.hasPossibleChoices(player.getId(), game)
                         && player.choose(Outcome.Exile, target, source.getSourceId(), game)) {                
                     for (UUID targetId : target.getTargets()) {
                         if (!selectedObjects.contains(targetId)) {
@@ -172,8 +172,8 @@ class DescentIntoMadnessEffect extends OneShotEffect {
                     for (UUID uuid :selectedObjects) {
                         uuidPredicates.add(new CardIdPredicate(uuid));
                     }
-                    filterInHand.add(Predicates.not(Predicates.or(uuidPredicates)));                    
-                    if (targetInHand.canChoose(player.getId(), game) &&
+                    filterInHand.add(Predicates.not(Predicates.or(uuidPredicates)));
+                    if (targetInHand.hasPossibleChoices(player.getId(), game) &&
                             player.choose(Outcome.Exile, player.getHand(), targetInHand, game)) {
 
                         Card card = player.getHand().get(targetInHand.getFirstTarget(), game);

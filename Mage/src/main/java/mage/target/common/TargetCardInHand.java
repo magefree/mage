@@ -66,7 +66,7 @@ public class TargetCardInHand extends TargetCard {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean hasPossibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         int possibleTargets = 0;
         Player player = game.getPlayer(sourceControllerId);
         if (player != null) {

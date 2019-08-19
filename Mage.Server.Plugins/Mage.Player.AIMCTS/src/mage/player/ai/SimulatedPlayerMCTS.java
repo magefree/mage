@@ -205,7 +205,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
     }
 
     protected boolean chooseRandom(Target target, Game game) {
-        Set<UUID> possibleTargets = target.possibleTargets(playerId, game);
+        Set<UUID> possibleTargets = target.possibleChoices(playerId, game);
         if (possibleTargets.isEmpty()) {
             return false;
         }

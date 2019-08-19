@@ -83,9 +83,9 @@ class DefilerOfSoulsEffect extends OneShotEffect {
 
         //A spell or ability could have removed the only legal target this player
         //had, if thats the case this ability should fizzle.
-        if (amount > 0 && target.canChoose(source.getSourceId(), player.getId(), game)) {
+        if (amount > 0 && target.hasPossibleTargets(source.getSourceId(), player.getId(), game)) {
             boolean abilityApplied = false;
-            while (player.canRespond() && !target.isChosen() && target.canChoose(player.getId(), game)) {
+            while (player.canRespond() && !target.isChosen() && target.hasPossibleChoices(player.getId(), game)) {
                 player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
             }
 

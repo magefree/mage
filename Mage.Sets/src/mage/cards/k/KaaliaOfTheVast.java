@@ -124,7 +124,7 @@ class KaaliaOfTheVastEffect extends OneShotEffect {
             return false;
         }
         TargetCardInHand target = new TargetCardInHand(filter);
-        if (target.canChoose(controller.getId(), game) && target.choose(getOutcome(), controller.getId(), source.getSourceId(), game)) {
+        if (target.hasPossibleChoices(controller.getId(), game) && target.choose(getOutcome(), controller.getId(), source.getSourceId(), game)) {
             if (!target.getTargets().isEmpty()) {
                 UUID cardId = target.getFirstTarget();
                 Card card = game.getCard(cardId);

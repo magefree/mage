@@ -75,7 +75,7 @@ class SelfInflictedWoundEffect extends OneShotEffect {
         filter.add(Predicates.or(new ColorPredicate(ObjectColor.GREEN), new ColorPredicate(ObjectColor.WHITE)));
         TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
 
-        if (target.canChoose(source.getSourceId(), targetOpponent.getId(), game)) {
+        if (target.hasPossibleTargets(source.getSourceId(), targetOpponent.getId(), game)) {
             targetOpponent.chooseTarget(Outcome.Sacrifice, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {

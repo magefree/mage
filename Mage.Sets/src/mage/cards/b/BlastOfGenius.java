@@ -62,7 +62,7 @@ class BlastOfGeniusEffect extends OneShotEffect {
         if (player != null) {
             player.drawCards(3, game);
             TargetDiscard target = new TargetDiscard(player.getId());
-            if (target.canChoose(source.getSourceId(), player.getId(), game)) {
+            if (target.hasPossibleTargets(source.getSourceId(), player.getId(), game)) {
                 player.choose(Outcome.Discard, target, source.getSourceId(), game);
                 Card card = player.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {

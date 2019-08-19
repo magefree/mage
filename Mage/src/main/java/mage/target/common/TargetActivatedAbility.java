@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.constants.AbilityType;
 import mage.constants.Zone;
 import mage.filter.Filter;
@@ -55,12 +54,12 @@ public class TargetActivatedAbility extends TargetObject {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        return canChoose(sourceControllerId, game);
+    public boolean hasPossibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+        return hasPossibleChoices(sourceControllerId, game);
     }
 
     @Override
-    public boolean canChoose(UUID sourceControllerId, Game game) {
+    public boolean hasPossibleChoices(UUID sourceControllerId, Game game) {
         for (StackObject stackObject : game.getStack()) {
             if (stackObject.getStackAbility() != null
                     && stackObject.getStackAbility().getAbilityType() == AbilityType.ACTIVATED
@@ -73,11 +72,11 @@ public class TargetActivatedAbility extends TargetObject {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        return possibleTargets(sourceControllerId, game);
+        return possibleChoices(sourceControllerId, game);
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleChoices(UUID sourceControllerId, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         for (StackObject stackObject : game.getStack()) {
             if (stackObject.getStackAbility().getAbilityType() == AbilityType.ACTIVATED

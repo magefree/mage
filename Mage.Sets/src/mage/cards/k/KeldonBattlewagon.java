@@ -1,7 +1,6 @@
 	
 package mage.cards.k;
 
-import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -105,7 +104,7 @@ class KeldonBattlewagonCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        return target.canChoose(controllerId, game);
+        return target.hasPossibleChoices(controllerId, game);
     }
 
     @Override

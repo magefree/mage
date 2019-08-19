@@ -88,7 +88,7 @@ class CryptChampionEffect extends OneShotEffect {
                     filter.add(new OwnerIdPredicate(playerId));
                     filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
                     Target target = new TargetCardInGraveyard(filter);
-                    if (target.canChoose(playerId, game) && player.chooseTarget(outcome, target, source, game)) {
+                    if (target.hasPossibleChoices(playerId, game) && player.chooseTarget(outcome, target, source, game)) {
                         Card card = game.getCard(target.getFirstTarget());
                         if (card != null) {
                             player.moveCards(card, Zone.BATTLEFIELD, source, game);

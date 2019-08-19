@@ -102,7 +102,7 @@ public class TargetAnyTarget extends TargetImpl {
      * @return - true if enough valid {@link Permanent} or {@link Player} exist
      */
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean hasPossibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         int count = 0;
 
         MageObject targetSource = game.getObject(sourceId);
@@ -147,7 +147,7 @@ public class TargetAnyTarget extends TargetImpl {
      * @return - true if enough valid {@link Permanent} or {@link Player} exist
      */
     @Override
-    public boolean canChoose(UUID sourceControllerId, Game game) {
+    public boolean hasPossibleChoices(UUID sourceControllerId, Game game) {
         int count = 0;
 
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
@@ -213,7 +213,7 @@ public class TargetAnyTarget extends TargetImpl {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleChoices(UUID sourceControllerId, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
 
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {

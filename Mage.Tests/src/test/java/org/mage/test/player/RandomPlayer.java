@@ -203,7 +203,7 @@ public class RandomPlayer extends ComputerPlayer {
     }
 
     protected boolean chooseRandom(Target target, Game game) {
-        Set<UUID> possibleTargets = target.possibleTargets(playerId, game);
+        Set<UUID> possibleTargets = target.possibleChoices(playerId, game);
         if (possibleTargets.isEmpty()) {
             return false;
         }

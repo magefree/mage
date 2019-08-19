@@ -7,10 +7,8 @@ import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
-import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.condition.common.AfterCombatCondition;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.InfoEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -112,7 +110,7 @@ class GlyphOfReincarnationEffect extends OneShotEffect {
                         filter.add(new OwnerIdPredicate(player.getId()));
                         Target targetCreature = new TargetCardInGraveyard(filter);
                         targetCreature.setNotTarget(true);
-                        if (targetCreature.canChoose(source.getSourceId(), controller.getId(), game)
+                        if (targetCreature.hasPossibleTargets(source.getSourceId(), controller.getId(), game)
                                 && controller.chooseTarget(outcome, targetCreature, source, game)) {
                             Card card = game.getCard(targetCreature.getFirstTarget());
                             if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {

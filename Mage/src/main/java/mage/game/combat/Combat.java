@@ -337,8 +337,8 @@ public class Combat implements Serializable, Copyable<Combat> {
                     while (player.canRespond()) {
                         TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
                         target.setRequired(false);
-                        canBand &= target.canChoose(attackingPlayerId, game);
-                        canBandWithOther &= target.canChoose(attackingPlayerId, game);
+                        canBand &= target.hasPossibleChoices(attackingPlayerId, game);
+                        canBandWithOther &= target.hasPossibleChoices(attackingPlayerId, game);
                         if (game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_ATTACKERS, attackingPlayerId, attackingPlayerId))
                                 || (!canBand && !canBandWithOther)
                                 || !player.chooseUse(Outcome.Benefit,

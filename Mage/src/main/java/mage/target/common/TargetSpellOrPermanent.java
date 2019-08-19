@@ -142,7 +142,7 @@ public class TargetSpellOrPermanent extends TargetImpl {
      * {@link mage.game.stack.Spell} exist
      */
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean hasPossibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         int count = 0;
         MageObject targetSource = game.getObject(sourceId);
         for (StackObject stackObject : game.getStack()) {
@@ -178,7 +178,7 @@ public class TargetSpellOrPermanent extends TargetImpl {
      * {@link mage.game.stack.Spell} exist
      */
     @Override
-    public boolean canChoose(UUID sourceControllerId, Game game) {
+    public boolean hasPossibleChoices(UUID sourceControllerId, Game game) {
         int count = 0;
         for (StackObject stackObject : game.getStack()) {
             Spell spell = game.getStack().getSpell(stackObject.getId());
@@ -222,7 +222,7 @@ public class TargetSpellOrPermanent extends TargetImpl {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleChoices(UUID sourceControllerId, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         for (StackObject stackObject : game.getStack()) {
             Spell spell = game.getStack().getSpell(stackObject.getId());

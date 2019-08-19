@@ -79,7 +79,7 @@ public class TargetPermanentOrSuspendedCard extends TargetImpl {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean hasPossibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         MageObject sourceObject = game.getObject(sourceId);
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter.getPermanentFilter(), sourceControllerId, game)) {
             if (permanent.canBeTargetedBy(sourceObject, sourceControllerId, game) && filter.match(permanent, sourceId, sourceControllerId, game)) {
@@ -143,12 +143,12 @@ public class TargetPermanentOrSuspendedCard extends TargetImpl {
     }
 
     @Override
-    public boolean canChoose(UUID sourceControllerId, Game game) {
-        return this.canChoose(null, sourceControllerId, game);
+    public boolean hasPossibleChoices(UUID sourceControllerId, Game game) {
+        return this.hasPossibleTargets(null, sourceControllerId, game);
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleChoices(UUID sourceControllerId, Game game) {
         return this.possibleTargets(null, sourceControllerId, game);
     }
 
