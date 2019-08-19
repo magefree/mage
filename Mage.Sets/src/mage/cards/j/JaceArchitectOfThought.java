@@ -186,7 +186,7 @@ class JaceArchitectOfThoughtEffect2 extends OneShotEffect {
             }
             TargetCard target = new TargetCard(0, allCards.size(), Zone.LIBRARY, new FilterCard("cards to put in the first pile"));
             target.setNotTarget(true);
-            opponent.choose(Outcome.Neutral, allCards, target, game);
+            opponent.choose(Outcome.Neutral, allCards, target, source, game);
             Cards pile1 = new CardsImpl(target.getTargets());
             Cards pile2 = new CardsImpl(allCards);
             pile2.removeAll(pile1);
@@ -300,7 +300,7 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect {
         TargetCardInExile target = new TargetCardInExile(filter, source.getSourceId());
         while (jaceExileZone.count(filter, game) > 0
                 && controller.chooseUse(Outcome.Benefit, "Cast another spell from exile zone for free?", source, game)) {
-            controller.choose(Outcome.PlayForFree, jaceExileZone, target, game);
+            controller.choose(Outcome.PlayForFree, jaceExileZone, target, source, game);
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 if (controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game))) {

@@ -214,7 +214,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
                 pickFilter.setMessage(getPickText());
                 int number = min(cards.size(), numberToPick.calculate(game, source, this));
                 TargetCard target = new TargetCard((upTo ? 0 : number), number, Zone.LIBRARY, pickFilter);
-                if (player.choose(Outcome.DrawCard, cards, target, game)) {
+                if (player.choose(Outcome.DrawCard, cards, target, source, game)) {
                     Cards pickedCards = new CardsImpl(target.getTargets());
                     cards.removeAll(pickedCards);
                     if (targetPickedCards == Zone.LIBRARY && !putOnTopSelected) {

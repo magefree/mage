@@ -72,7 +72,7 @@ class AshnodsCylixEffect extends OneShotEffect {
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 3));
         player.lookAtCards(source, null, cards, game);
         TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put on top of your library"));
-        if (player.choose(Outcome.Benefit, cards, target, game)) {
+        if (player.choose(Outcome.Benefit, cards, target, source, game)) {
             Card card = cards.get(target.getFirstTarget(), game);
             if (card != null) {
                 cards.remove(card);

@@ -87,7 +87,7 @@ class CollectedConjuringEffect extends OneShotEffect {
                 break;
             }
             TargetCard targetCard = new TargetCard(1, Zone.EXILED, filter2);
-            if (!controller.choose(Outcome.PlayForFree, cards, targetCard, game)) {
+            if (!controller.choose(Outcome.PlayForFree, cards, targetCard, source, game)) {
                 continue;
             }
             Card card = game.getCard(targetCard.getFirstTarget());

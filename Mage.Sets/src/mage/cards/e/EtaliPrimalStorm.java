@@ -108,7 +108,7 @@ class EtaliPrimalStormEffect extends OneShotEffect {
                 }
 
                 TargetCard targetCard = new TargetCard(1, Zone.EXILED, new FilterCard("nonland card to cast for free"));
-                if (!controller.choose(Outcome.PlayForFree, cardsToCast, targetCard, game)) {
+                if (!controller.choose(Outcome.PlayForFree, cardsToCast, targetCard, source, game)) {
                     break;
                 }
 

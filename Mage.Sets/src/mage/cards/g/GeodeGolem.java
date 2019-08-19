@@ -86,7 +86,7 @@ class GeodeGolemEffect extends OneShotEffect {
                 TargetCard target = new TargetCard(Zone.COMMAND, new FilterCard("commander to cast without mana cost"));
                 Cards cards = new CardsImpl(possibleCommanders);
                 target.setNotTarget(true);
-                if (controller.canRespond() && controller.choose(Outcome.Benefit, cards, target, game)) {
+                if (controller.canRespond() && controller.choose(Outcome.Benefit, cards, target, source, game)) {
                     if (target.getFirstTarget() != null) {
                         selectedCommanderId = target.getFirstTarget();
                     }

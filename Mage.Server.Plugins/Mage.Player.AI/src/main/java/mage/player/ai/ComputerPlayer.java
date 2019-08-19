@@ -1746,7 +1746,7 @@ public class ComputerPlayer extends PlayerImpl {
     }
 
     @Override
-    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
+    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
         log.debug("choose 2");
         if (cards == null || cards.isEmpty()) {
             return true;
@@ -1754,7 +1754,7 @@ public class ComputerPlayer extends PlayerImpl {
 
         ArrayList<Card> cardChoices = new ArrayList<>(cards.getCards(target.getFilter(), game));
         while (!target.doneChosing()) {
-            Card card = pickTarget(cardChoices, outcome, target, null, game);
+            Card card = pickTarget(cardChoices, outcome, target, source, game);
             if (card != null) {
                 target.add(card.getId(), game);
                 cardChoices.remove(card);

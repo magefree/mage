@@ -73,7 +73,7 @@ class ViviensInvocationEffect extends OneShotEffect {
                     Zone.LIBRARY,
                     new FilterCreatureCard("creature card to put on the battlefield")
             );
-            if (controller.choose(Outcome.PutCreatureInPlay, cards, target, game)) {
+            if (controller.choose(Outcome.PutCreatureInPlay, cards, target, source, game)) {
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);

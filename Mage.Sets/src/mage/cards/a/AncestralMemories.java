@@ -64,7 +64,7 @@ class AncestralMemoriesEffect extends OneShotEffect {
             if (!cards.isEmpty()) {
                 controller.lookAtCards(source, null, cards, game);
                 TargetCard target = new TargetCard(Math.min(2, cards.size()), Zone.LIBRARY, new FilterCard("two cards to put in your hand"));
-                if (controller.choose(Outcome.DrawCard, cards, target, game)) {
+                if (controller.choose(Outcome.DrawCard, cards, target, source, game)) {
                     Cards toHand = new CardsImpl(target.getTargets());
                     controller.moveCards(cards, Zone.HAND, source, game);
                     cards.removeAll(toHand);

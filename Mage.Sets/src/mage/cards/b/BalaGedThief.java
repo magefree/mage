@@ -88,7 +88,7 @@ class BalaGedThiefEffect extends OneShotEffect {
         TargetCard target = new TargetCard(count, Zone.HAND, new FilterCard());
         Cards revealedCards = new CardsImpl();
 
-        if (targetPlayer.choose(Outcome.DrawCard, cardsInHand, target, game)) {
+        if (targetPlayer.choose(Outcome.DrawCard, cardsInHand, target, source, game)) {
             List<UUID> targets = target.getTargets();
             for (UUID targetId : targets) {
                 Card card = game.getCard(targetId);
@@ -102,7 +102,7 @@ class BalaGedThiefEffect extends OneShotEffect {
 
         if (!revealedCards.isEmpty()) {
             targetPlayer.revealCards("Bala Ged Thief", revealedCards, game);
-            you.choose(Outcome.Neutral, revealedCards, targetInHand, game);
+            you.choose(Outcome.Neutral, revealedCards, targetInHand, source, game);
             Card card = revealedCards.get(targetInHand.getFirstTarget(), game);
             if (card != null) {
                 targetPlayer.discard(card, source, game);

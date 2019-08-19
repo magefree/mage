@@ -507,7 +507,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean choose(Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options);
 
-    boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game);
+    boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game);
 
     boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game);
 

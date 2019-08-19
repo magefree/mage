@@ -73,7 +73,7 @@ class DeployTheGatewatchEffect extends OneShotEffect {
         // Put up to two planeswalker cards from among them onto the battlefield.
         if (cards.count(filter, game) > 0) {
             TargetCard target = new TargetCard(0, 2, Zone.LIBRARY, filter);
-            if (controller.choose(Outcome.DrawCard, cards, target, game)) {
+            if (controller.choose(Outcome.DrawCard, cards, target, source, game)) {
                 Cards pickedCards = new CardsImpl(target.getTargets());
                 cards.removeAll(pickedCards);
                 controller.moveCards(pickedCards.getCards(game), Zone.BATTLEFIELD, source, game);

@@ -70,7 +70,7 @@ class AladdinsLampEffect extends ReplacementEffectImpl {
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, source.getManaCostsToPay().getX()));
         controller.lookAtCards(source, null, cards, game);
         TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to stay at the top of library"));
-        if (controller.choose(outcome, cards, target, game)) {
+        if (controller.choose(outcome, cards, target, source, game)) {
             cards.remove(target.getFirstTarget());
         }
         controller.putCardsOnBottomOfLibrary(cards, game, source, false);

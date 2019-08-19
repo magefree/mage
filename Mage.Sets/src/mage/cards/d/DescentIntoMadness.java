@@ -174,7 +174,7 @@ class DescentIntoMadnessEffect extends OneShotEffect {
                     }
                     filterInHand.add(Predicates.not(Predicates.or(uuidPredicates)));
                     if (targetInHand.hasPossibleChoices(player.getId(), game) &&
-                            player.choose(Outcome.Exile, player.getHand(), targetInHand, game)) {
+                            player.choose(Outcome.Exile, player.getHand(), targetInHand, source, game)) {
 
                         Card card = player.getHand().get(targetInHand.getFirstTarget(), game);
                         if (card != null) {

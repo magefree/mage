@@ -118,7 +118,7 @@ class EndlessHorizonsEffect2 extends OneShotEffect {
                 Card card = null;
                 if (exZone.size() > 1) {
                     TargetCard target = new TargetCard(Zone.EXILED, new FilterCard());
-                    controller.choose(outcome, exZone, target, game);
+                    controller.choose(outcome, exZone, target, source, game);
                     card = game.getCard(target.getFirstTarget());
                 } else {
                     card = exZone.getRandom(game);

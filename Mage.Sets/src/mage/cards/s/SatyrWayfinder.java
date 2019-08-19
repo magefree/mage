@@ -78,7 +78,7 @@ class SatyrWayfinderEffect extends OneShotEffect {
                 TargetCard target = new TargetCard(Zone.LIBRARY, filterPutInHand);
                 if (properCardFound
                         && controller.chooseUse(outcome, "Put a land card into your hand?", source, game)
-                        && controller.choose(Outcome.DrawCard, cards, target, game)) {
+                        && controller.choose(Outcome.DrawCard, cards, target, source, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
                         cards.remove(card);

@@ -117,7 +117,7 @@ class JalumGrifterEffect extends OneShotEffect {
             TargetCard targetCard = new TargetCard(Zone.HAND, new FilterCard());
             CardsImpl cards = new CardsImpl();
             cards.addAll(shellGamePile);
-            if (opponent.choose(Outcome.Sacrifice, cards, targetCard, game)) {
+            if (opponent.choose(Outcome.Sacrifice, cards, targetCard, source, game)) {
                 Card card = game.getCard(targetCard.getFirstTarget());
                 if (card != null) {
                     card.setFaceDown(false, game);

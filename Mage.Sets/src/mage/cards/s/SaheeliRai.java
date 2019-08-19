@@ -121,7 +121,7 @@ class SaheeliRaiTarget extends TargetCardInLibrary {
     }
 
     @Override
-    public boolean canTarget(UUID id, Cards cards, Game game) {
+    public boolean canTarget(UUID id, Cards cards, Ability source, Game game) {
         Card card = cards.get(id, game);
         if (card != null) {
             for (UUID targetId : this.getTargets()) {
@@ -130,7 +130,7 @@ class SaheeliRaiTarget extends TargetCardInLibrary {
                     return false;
                 }
             }
-            return filter.match(card, game);
+            return filter.match(card, source.getSourceId(), source.getControllerId(), game);
         }
         return false;
     }

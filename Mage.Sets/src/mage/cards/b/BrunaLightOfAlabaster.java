@@ -124,7 +124,7 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
                 && countHand > 0
                 && controller.chooseUse(Outcome.Benefit, "Attach an Aura from your hand?", source, game)) {
             TargetCard targetAura = new TargetCard(Zone.HAND, filterAuraCard);
-            if (controller.choose(Outcome.Benefit, controller.getHand(), targetAura, game)) {
+            if (controller.choose(Outcome.Benefit, controller.getHand(), targetAura, source, game)) {
                 Card aura = game.getCard(targetAura.getFirstTarget());
                 if (aura != null) {
                     Target target = aura.getSpellAbility().getTargets().get(0);
@@ -142,7 +142,7 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
                 && countGraveyard > 0
                 && controller.chooseUse(Outcome.Benefit, "Attach an Aura from your graveyard?", source, game)) {
             TargetCard targetAura = new TargetCard(Zone.GRAVEYARD, filterAuraCard);
-            if (controller.choose(Outcome.Benefit, controller.getGraveyard(), targetAura, game)) {
+            if (controller.choose(Outcome.Benefit, controller.getGraveyard(), targetAura, source, game)) {
                 Card aura = game.getCard(targetAura.getFirstTarget());
                 if (aura != null) {
                     Target target = aura.getSpellAbility().getTargets().get(0);

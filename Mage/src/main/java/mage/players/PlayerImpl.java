@@ -924,7 +924,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 // user defined order
                 TargetCard target = new TargetCard(Zone.ALL, new FilterCard("card ORDER to put on the BOTTOM of your library (last one chosen will be bottommost)"));
                 target.setRequired(true);
-                while (cards.size() > 1 && this.canRespond() && this.choose(Outcome.Neutral, cards, target, game)) {
+                while (cards.size() > 1 && this.canRespond() && this.choose(Outcome.Neutral, cards, target, source, game)) {
                     UUID targetObjectId = target.getFirstTarget();
                     if (targetObjectId == null) {
                         break;
@@ -986,7 +986,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 // user defined order
                 TargetCard target = new TargetCard(Zone.ALL, new FilterCard("card ORDER to put on the TOP of your library (last one chosen will be topmost)"));
                 target.setRequired(true);
-                while (cards.size() > 1 && this.canRespond() && this.choose(Outcome.Neutral, cards, target, game)) {
+                while (cards.size() > 1 && this.canRespond() && this.choose(Outcome.Neutral, cards, target, source, game)) {
                     UUID targetObjectId = target.getFirstTarget();
                     if (targetObjectId == null) {
                         break;

@@ -107,7 +107,7 @@ class GoblinArtisansEffect extends OneShotEffect {
                         cards.add(perm.getId());
                     }
                     TargetCard target = new TargetCard(Zone.BATTLEFIELD, new FilterCard());
-                    controller.choose(Outcome.Sacrifice, cards, target, game);
+                    controller.choose(Outcome.Sacrifice, cards, target, source, game);
                     game.getPermanent(target.getFirstTarget()).sacrifice(source.getSourceId(), game);
                 }
                 return true;

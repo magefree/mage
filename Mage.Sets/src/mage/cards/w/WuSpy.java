@@ -77,7 +77,7 @@ class WuSpyEffect extends OneShotEffect {
             Cards cards = new CardsImpl(opponent.getLibrary().getTopCards(game, 2));
             if (!cards.isEmpty()) {
                 TargetCard target = new TargetCardInLibrary(new FilterCard("card to put into graveyard"));
-                controller.choose(Outcome.Benefit, cards, target, game);
+                controller.choose(Outcome.Benefit, cards, target, source, game);
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);

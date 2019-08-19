@@ -104,7 +104,7 @@ class JaceMindseekerEffect extends OneShotEffect {
                     TargetCard target = new TargetCard(Zone.GRAVEYARD, filter); // zone should be ignored here
                     target.setNotTarget(true);
                     if (controller.chooseUse(outcome, "Cast an instant or sorcery card from among them for free?", source, game)
-                            && controller.choose(outcome, cardsToCast, target, game)) {
+                            && controller.choose(outcome, cardsToCast, target, source, game)) {
                         Card card = cardsToCast.get(target.getFirstTarget(), game);
                         if (card != null) {
                             controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));

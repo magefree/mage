@@ -96,7 +96,7 @@ class TalentOfTheTelepathEffect extends OneShotEffect {
                     while (numberOfSpells > 0
                             && !cardsToCast.isEmpty()
                             && controller.chooseUse(outcome, "Cast an instant or sorcery card from among them for free?", source, game)
-                            && controller.choose(outcome, cardsToCast, target, game)) {
+                            && controller.choose(outcome, cardsToCast, target, source, game)) {
                         Card card = cardsToCast.get(target.getFirstTarget(), game);
                         if (card != null) {
                             controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));

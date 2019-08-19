@@ -104,7 +104,7 @@ class SoulFoundryImprintEffect extends OneShotEffect {
             if (!controller.getHand().isEmpty()) {
                 TargetCard target = new TargetCard(Zone.HAND, filter);
                 if (target.hasPossibleTargets(source.getSourceId(), source.getControllerId(), game)
-                        && controller.choose(Outcome.Benefit, controller.getHand(), target, game)) {
+                        && controller.choose(Outcome.Benefit, controller.getHand(), target, source, game)) {
                     Card card = controller.getHand().get(target.getFirstTarget(), game);
                     if (card != null) {
                         controller.moveCardToExileWithInfo(card, source.getSourceId(), sourcePermanent.getIdName() + " (Imprint)", source.getSourceId(), game, Zone.HAND, true);

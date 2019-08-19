@@ -83,7 +83,7 @@ class TariffEffect extends OneShotEffect {
 
         List<Permanent> creatures = getPermanentsWithTheHighestCMC(game, player.getId(), new FilterControlledCreaturePermanent());
 
-        Permanent creatureToPayFor = chooseOnePermanent(game, player, creatures);
+        Permanent creatureToPayFor = chooseOnePermanent(game, source, player, creatures);
 
         if (creatureToPayFor != null && sourceObject != null) {
             ManaCosts manaCost = ManaCosts.removeVariableManaCost(creatureToPayFor.getManaCost());
@@ -118,7 +118,7 @@ class TariffEffect extends OneShotEffect {
         return result;
     }
 
-    private Permanent chooseOnePermanent(Game game, Player player, List<Permanent> permanents) {
+    private Permanent chooseOnePermanent(Game game, Ability source, Player player, List<Permanent> permanents) {
         Permanent permanent = null;
         if (permanents.size() == 1) {
             permanent = permanents.iterator().next();
@@ -129,7 +129,7 @@ class TariffEffect extends OneShotEffect {
             }
 
             TargetCard targetCard = new TargetCard(Zone.BATTLEFIELD, new FilterCard());
-            if (player.choose(Outcome.Benefit, cards, targetCard, game)) {
+            if (player.choose(Outcome.Benefit, cards, targetCard, source, game)) {
                 permanent = game.getPermanent(targetCard.getFirstTarget());
             }
         }

@@ -78,7 +78,7 @@ class ForkInTheRoadEffect extends OneShotEffect {
                 controller.revealCards(sourceObject.getIdName(), revealed, game);
                 if (!target.getTargets().isEmpty()) {
                     TargetCard target2 = new TargetCard(Zone.LIBRARY, filter);
-                    controller.choose(Outcome.Benefit, revealed, target2, game);
+                    controller.choose(Outcome.Benefit, revealed, target2, source, game);
                     Card card = revealed.get(target2.getFirstTarget(), game);
                     if (card != null) {
                         controller.moveCards(card, Zone.HAND, source, game);

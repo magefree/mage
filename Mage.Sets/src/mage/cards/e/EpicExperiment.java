@@ -77,7 +77,7 @@ class EpicExperimentEffect extends OneShotEffect {
                     break;
                 }
                 TargetCard targetCard = new TargetCard(1, Zone.EXILED, new FilterCard("instant or sorcery card to cast for free"));
-                if (controller.choose(Outcome.PlayForFree, cardsToCast, targetCard, game)) {
+                if (controller.choose(Outcome.PlayForFree, cardsToCast, targetCard, source, game)) {
                     Card card = game.getCard(targetCard.getFirstTarget());
                     if (card != null) {
                         if (!controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game))) {

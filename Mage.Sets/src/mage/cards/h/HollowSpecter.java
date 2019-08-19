@@ -79,7 +79,7 @@ class HollowSpecterEffect extends OneShotEffect {
                     Cards cardsInHand = new CardsImpl();
                     cardsInHand.addAll(targetPlayer.getHand());
                     TargetCard target = new TargetCard(payCount, Zone.HAND, new FilterCard());
-                    if (targetPlayer.choose(Outcome.Discard, cardsInHand, target, game)) {
+                    if (targetPlayer.choose(Outcome.Discard, cardsInHand, target, source, game)) {
                         List<UUID> targets = target.getTargets();
                         for (UUID targetId : targets) {
                             Card card = game.getCard(targetId);
@@ -101,7 +101,7 @@ class HollowSpecterEffect extends OneShotEffect {
                     targetPlayer.revealCards("Hollow Specter", revealedCards, game);
                     Card card;
                     if (revealedCards.size() > 1) {
-                        controller.choose(Outcome.Discard, revealedCards, targetInHand, game);
+                        controller.choose(Outcome.Discard, revealedCards, targetInHand, source, game);
                         card = revealedCards.get(targetInHand.getFirstTarget(), game);
                     } else {
                         card = revealedCards.getRandom(game);

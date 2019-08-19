@@ -478,9 +478,9 @@ public class ComputerPlayer2 extends ComputerPlayer {
     }
 
     @Override
-    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game)  {
+    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game)  {
         if (targets.isEmpty())
-            return super.choose(outcome, cards, target, game);
+            return super.choose(outcome, cards, target, source, game);
         if (!target.doneChosing()) {
             for (UUID targetId: targets) {
                 target.add(targetId, game);

@@ -46,7 +46,7 @@ public class StubPlayer extends PlayerImpl {
         return false;
     }
 
-    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
+    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
         cards.getCards(game).stream().map(MageItem::getId).forEach(cardId -> target.add(cardId, game));
         return true;
     }

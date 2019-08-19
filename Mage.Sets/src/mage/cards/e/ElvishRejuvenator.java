@@ -73,7 +73,7 @@ class ElvishRejuvenatorEffect extends OneShotEffect {
                     0, 1, Zone.LIBRARY,
                     new FilterLandCard("land card to put on the battlefield")
             );
-            if (controller.choose(Outcome.PutCardInPlay, cards, target, game)) {
+            if (controller.choose(Outcome.PutCardInPlay, cards, target, source, game)) {
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);

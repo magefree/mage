@@ -82,7 +82,7 @@ class GiftsUngivenEffect extends OneShotEffect {
                 if (cards.size() > 2) {
                     cardsToKeep.addAll(cards);
                     TargetCard targetDiscard = new TargetCard(2, Zone.LIBRARY, new FilterCard("cards to put in graveyard"));
-                    if (opponent.choose(Outcome.Discard, cards, targetDiscard, game)) {
+                    if (opponent.choose(Outcome.Discard, cards, targetDiscard, source, game)) {
                         cardsToKeep.removeAll(targetDiscard.getTargets());
                         cards.removeAll(cardsToKeep);
                     }
@@ -115,7 +115,7 @@ class GiftsUngivenTarget extends TargetCardInLibrary {
     }
 
     @Override
-    public boolean canTarget(UUID id, Cards cards, Game game) {
+    public boolean canTarget(UUID id, Cards cards, Ability source, Game game) {
         Card card = cards.get(id, game);
         if (card != null) {
             for (UUID targetId : this.getTargets()) {
@@ -124,7 +124,7 @@ class GiftsUngivenTarget extends TargetCardInLibrary {
                     return false;
                 }
             }
-            return filter.match(card, game);
+            return filter.match(card, source.getSourceId(), source.getControllerId(), game);
         }
         return false;
     }

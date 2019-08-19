@@ -89,7 +89,7 @@ class SteamAuguryEffect extends OneShotEffect {
             List<Card> pile1 = new ArrayList<>();
             Cards pile1CardsIds = new CardsImpl();
             target.setRequired(false);
-            if (controller.choose(Outcome.Neutral, cards, target, game)) {
+            if (controller.choose(Outcome.Neutral, cards, target, source, game)) {
                 List<UUID> targets = target.getTargets();
                 for (UUID targetId : targets) {
                     Card card = game.getCard(targetId);

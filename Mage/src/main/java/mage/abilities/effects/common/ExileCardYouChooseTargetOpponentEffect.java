@@ -44,7 +44,7 @@ public class ExileCardYouChooseTargetOpponentEffect extends OneShotEffect {
             if (!opponent.getHand().isEmpty()) {
                 opponent.revealCards(sourceCard != null ? sourceCard.getIdName() + " (" + sourceCard.getZoneChangeCounter(game) + ')' : "Exile", opponent.getHand(), game);
                 TargetCard target = new TargetCard(Zone.HAND, filter);
-                if (controller.choose(Outcome.Exile, opponent.getHand(), target, game)) {
+                if (controller.choose(Outcome.Exile, opponent.getHand(), target, source, game)) {
                     Card card = opponent.getHand().get(target.getFirstTarget(), game);
                     if (card != null) {
                         controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.HAND, true);

@@ -88,7 +88,7 @@ class InsidiousDreamsEffect extends OneShotEffect {
                 TargetCard targetToLib = new TargetCard(Zone.LIBRARY, new FilterCard(textTop));
 
                 while (chosen.size() > 1 && controller.canRespond()) {
-                    controller.choose(Outcome.Neutral, chosen, targetToLib, game);
+                    controller.choose(Outcome.Neutral, chosen, targetToLib, source, game);
                     Card card = chosen.get(targetToLib.getFirstTarget(), game);
                     if (card != null) {
                         chosen.remove(card);

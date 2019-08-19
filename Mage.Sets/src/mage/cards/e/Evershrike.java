@@ -91,7 +91,7 @@ class EvershrikeEffect extends OneShotEffect {
                 int count = controller.getHand().count(filterAuraCard, game);
                 if (count > 0 && controller.chooseUse(Outcome.Benefit, "Do you wish to put an Aura card from your hand onto " + evershrikeCard.getIdName() + "?", source, game)) {
                     TargetCard targetAura = new TargetCard(Zone.HAND, filterAuraCard);
-                    if (controller.choose(Outcome.Benefit, controller.getHand(), targetAura, game)) {
+                    if (controller.choose(Outcome.Benefit, controller.getHand(), targetAura, source, game)) {
                         Card aura = game.getCard(targetAura.getFirstTarget());
                         if (aura != null) {
                             game.getState().setValue("attachTo:" + aura.getId(), evershrikePermanent);

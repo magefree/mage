@@ -80,7 +80,7 @@ class NeverHappenedEffect extends OneShotEffect {
             target.setNotTarget(true);
             cards = opponent.getGraveyard();
         }
-        if (controller.choose(outcome, cards, target, game)) {
+        if (controller.choose(outcome, cards, target, source, game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 controller.moveCards(card, Zone.EXILED, source, game);

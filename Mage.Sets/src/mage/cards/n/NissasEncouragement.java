@@ -111,7 +111,7 @@ class NissasEncouragementEffect extends OneShotEffect {
                     namedFilterGY.add(new NamePredicate(name));
                     if (player.getGraveyard().count(namedFilterGY, game) > 0) {
                         TargetCard targetGY = new TargetCard(0, 1, Zone.GRAVEYARD, namedFilterGY);
-                        if (player.choose(Outcome.ReturnToHand, player.getGraveyard(), targetGY, game)) {
+                        if (player.choose(Outcome.ReturnToHand, player.getGraveyard(), targetGY, source, game)) {
                             for (UUID cardIdGY : targetGY.getTargets()) {
                                 Card cardGY = player.getGraveyard().get(cardIdGY, game);
                                 cards.add(cardGY);
@@ -149,7 +149,7 @@ class NissasEncouragementTarget extends TargetCardInLibrary {
     }
 
     @Override
-    public boolean canTarget(UUID id, Cards cards, Game game) {
+    public boolean canTarget(UUID id, Cards cards, Ability source, Game game) {
         Card card = cards.get(id, game);
         if (card != null) {
             for (UUID targetId : this.getTargets()) {
@@ -158,7 +158,7 @@ class NissasEncouragementTarget extends TargetCardInLibrary {
                     return false;
                 }
             }
-            return filter.match(card, game);
+            return filter.match(card, source.getSourceId(), source.getControllerId(), game);
         }
         return false;
     }

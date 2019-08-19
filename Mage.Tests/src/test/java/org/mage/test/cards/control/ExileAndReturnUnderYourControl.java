@@ -57,7 +57,7 @@ public class ExileAndReturnUnderYourControl extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Villainous Wealth", playerB);
         setChoice(playerA, "X=3");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Courser of Kruphix");
+        setChoice(playerA, "Courser of Kruphix");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -94,7 +94,7 @@ public class ExileAndReturnUnderYourControl extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Villainous Wealth", playerB);
         setChoice(playerA, "X=3");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Secret Plans");
+        setChoice(playerA, "Secret Plans");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -132,7 +132,7 @@ public class ExileAndReturnUnderYourControl extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Villainous Wealth", playerB);
         setChoice(playerA, "X=3");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sylvan Library");
+        setChoice(playerA, "Sylvan Library");
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
@@ -180,9 +180,9 @@ public class ExileAndReturnUnderYourControl extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Villainous Wealth", playerB);
         setChoice(playerA, "X=3");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mox Emerald");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Quicken");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mox Sapphire");
+        setChoice(playerA, "Mox Emerald");
+        setChoice(playerA, "Quicken");
+        setChoice(playerA, "Mox Sapphire");
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();

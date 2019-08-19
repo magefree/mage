@@ -128,7 +128,7 @@ class ShellOfTheLastKappaCastEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             TargetCardInExile target = new TargetCardInExile(new FilterCard(), CardUtil.getCardExileZoneId(game, source));
-            if (controller.choose(Outcome.PlayForFree, game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source)), target, game)) {
+            if (controller.choose(Outcome.PlayForFree, game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source)), target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     game.getExile().removeCard(card, game);

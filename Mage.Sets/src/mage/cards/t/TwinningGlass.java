@@ -92,7 +92,7 @@ class TwinningGlassEffect extends OneShotEffect {
                 }
             }
             TargetCardInHand target = new TargetCardInHand(0, 1, filterCard);
-            if (controller.choose(Outcome.Benefit, controller.getHand(), target, game)) {
+            if (controller.choose(Outcome.Benefit, controller.getHand(), target, source, game)) {
                 Card chosenCard = game.getCard(target.getFirstTarget());
                 if (chosenCard != null) {
                     if (controller.chooseUse(outcome, "Cast the card without paying mana cost?", source, game)) {

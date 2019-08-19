@@ -153,7 +153,7 @@ class KnowledgePoolEffect2 extends OneShotEffect {
                     realFilter.add(Predicates.not(new CardIdPredicate(spell.getSourceId())));
                     TargetCardInExile target = new TargetCardInExile(0, 1, realFilter, source.getSourceId());
                     target.setNotTarget(true);
-                    if (player.choose(Outcome.PlayForFree, game.getExile().getExileZone(exileZoneId), target, game)) {
+                    if (player.choose(Outcome.PlayForFree, game.getExile().getExileZone(exileZoneId), target, source, game)) {
                         Card card = game.getCard(target.getFirstTarget());
                         if (card != null && !card.getId().equals(spell.getSourceId())) {
                             player.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));

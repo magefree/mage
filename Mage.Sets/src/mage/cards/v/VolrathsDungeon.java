@@ -125,7 +125,7 @@ class VolrathsDungeonEffect extends OneShotEffect {
         Player targetedPlayer = game.getPlayer(source.getFirstTarget());
         if (targetedPlayer != null) {
             TargetCardInHand target = new TargetCardInHand();
-            if (targetedPlayer.choose(Outcome.Detriment, targetedPlayer.getHand(), target, game)) {
+            if (targetedPlayer.choose(Outcome.Detriment, targetedPlayer.getHand(), target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 return card != null && targetedPlayer.putCardOnTopXOfLibrary(card, game, source, 0);
             }

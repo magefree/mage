@@ -7,6 +7,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import mage.MageItem;
+import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.constants.Zone;
@@ -183,14 +184,18 @@ public class TargetCard extends TargetObject {
         return cards.getCards(filter,game).stream().map(MageItem::getId).collect(Collectors.toSet());
     }
 
+    public Set<UUID> possibleChoices(UUID sourceId, UUID sourceControllerId, Cards cards, Game game) {
+        return cards.getCards(filter, sourceId, sourceControllerId, game).stream().map(MageItem::getId).collect(Collectors.toSet());
+    }
+
     @Override
     public Set<UUID> possibleChoices(UUID sourceControllerId, Game game) {
         return possibleTargets(null, sourceControllerId, game);
     }
 
-    public boolean canTarget(UUID id, Cards cards, Game game) {
+    public boolean canTarget(UUID id, Cards cards, Ability source, Game game) {
         Card card = cards.get(id, game);
-        return card != null && filter.match(card, game);
+        return card != null && filter.match(card, source.getSourceId(), source.getControllerId(), game);
     }
 
     @Override

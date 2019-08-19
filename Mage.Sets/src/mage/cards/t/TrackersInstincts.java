@@ -71,7 +71,7 @@ class TrackersInstinctsEffect extends OneShotEffect {
             if (!cards.isEmpty()) {
                 controller.revealCards(source, cards, game);
                 TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCreatureCard("creature card to put in hand"));
-                if (creaturesFound && controller.choose(Outcome.DrawCard, cards, target, game)) {
+                if (creaturesFound && controller.choose(Outcome.DrawCard, cards, target, source, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
                         controller.moveCards(card, Zone.HAND, source, game);

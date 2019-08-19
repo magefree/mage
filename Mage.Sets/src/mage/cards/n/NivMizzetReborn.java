@@ -144,7 +144,7 @@ class NivMizzetRebornEffect extends OneShotEffect {
                 continue;
             }
             TargetCard target = guild.getTarget();
-            if (player.choose(outcome, cards, target, game)) {
+            if (player.choose(outcome, cards, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     cards2.add(card);
