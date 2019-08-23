@@ -367,6 +367,25 @@
 |Generate|TOK:C17|Vampire|||EdgarMarkovToken|
 |Generate|TOK:C17|Zombie||
 |Generate|TOK:C18|Myr|||BrudicladTelchorMyrToken|
+|Generate|TOK:C18|Angel|||AngelToken|
+|Generate|TOK:C18|Cat|||CatToken|
+|Generate|TOK:C18|Cat Warrior||
+|Generate|TOK:C18|Clue|||ClueArtifactToken|
+|Generate|TOK:C18|Construct|1||RetrofitterFoundryToken|
+|Generate|TOK:C18|Construct|2||StoneTrapIdolToken|
+|Generate|TOK:C18|Dragon|||DragonEggDragonToken|
+|Generate|TOK:C18|DragonEgg|||NestingDragonToken|
+|Generate|TOK:C18|Elemental|||DokaiWeaverofLifeToken|
+|Generate|TOK:C18|Horror|||PhyrexianRebirthHorrorToken|
+|Generate|TOK:C18|Mask||
+|Generate|TOK:C18|Plant|||PlantToken|
+|Generate|TOK:C18|Servo|||ServoToken|
+|Generate|TOK:C18|Survivor|||SurvivorToken|
+|Generate|TOK:C18|Thopter|1||ThopterColorlessToken|
+|Generate|TOK:C18|Thopter|2||ThopterColorlessToken|
+|Generate|TOK:C18|Thopter|3||ThopterColorlessToken|
+|Generate|TOK:C18|Worm||
+|Generate|TOK:C18|Zombie||
 |Generate|TOK:CHK|Dragon Spirit|||TatsumaDragonToken|
 |Generate|TOK:CHK|Elemental|||SeedGuardianToken|
 |Generate|TOK:CHK|Illusion|||MelokuTheCloudedMirrorToken|
