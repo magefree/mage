@@ -384,7 +384,7 @@
 |Generate|TOK:C18|Thopter|1||ThopterColorlessToken|
 |Generate|TOK:C18|Thopter|2||ThopterColorlessToken|
 |Generate|TOK:C18|Thopter|3||ThopterColorlessToken|
-|Generate|TOK:C18|Worm||
+|Generate|TOK:C18|Worm|||WormHarvestToken|
 |Generate|TOK:C18|Zombie||
 |Generate|TOK:CHK|Dragon Spirit|||TatsumaDragonToken|
 |Generate|TOK:CHK|Elemental|||SeedGuardianToken|
