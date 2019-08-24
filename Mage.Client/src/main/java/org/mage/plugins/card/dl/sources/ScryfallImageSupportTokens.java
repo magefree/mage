@@ -106,6 +106,29 @@ public class ScryfallImageSupportTokens {
             put("M20/Treasure", "https://api.scryfall.com/cards/tm20/10/en?format=image");
             put("M20/Wolf", "https://api.scryfall.com/cards/tm20/8/en?format=image");
             put("M20/Zombie", "https://api.scryfall.com/cards/tm20/6/en?format=image");
+            
+            //C18
+            put("C18/Angel", "https://api.scryfall.com/cards/tc18/3/en?format=image");
+            put("C18/Cat Warrior", "https://api.scryfall.com/cards/tc18/15/en?format=image");
+            put("C18/Cat", "https://api.scryfall.com/cards/tc18/5/en?format=image");
+            put("C18/Clue", "https://api.scryfall.com/cards/tc18/19/en?format=image");
+            put("C18/Construct/1", "https://api.scryfall.com/cards/tc18/20/en?format=image");
+            put("C18/Construct/2", "https://api.scryfall.com/cards/tc18/21/en?format=image");
+            put("C18/Dragon Egg", "https://api.scryfall.com/cards/tc18/10/en?format=image");
+            put("C18/Dragon", "https://api.scryfall.com/cards/tc18/11/en?format=image");
+            put("C18/Elemental", "https://api.scryfall.com/cards/tc18/16/en?format=image");
+            put("C18/Horror", "https://api.scryfall.com/cards/tc18/22/en?format=image");
+            put("C18/Manifest", "https://api.scryfall.com/cards/tc18/1/en?format=image");
+            put("C18/Mask", "https://api.scryfall.com/cards/tc18/4/en?format=image");
+            put("C18/Myr", "https://api.scryfall.com/cards/tc18/7/en?format=image");
+            put("C18/Plant", "https://api.scryfall.com/cards/tc18/17/en?format=image");
+            put("C18/Servo", "https://api.scryfall.com/cards/tc18/24/en?format=image");
+            put("C18/Survivor", "https://api.scryfall.com/cards/tc18/12/en?format=image");
+            put("C18/Thopter/1", "https://api.scryfall.com/cards/tc18/25/en?format=image");
+            put("C18/Thopter/2", "https://api.scryfall.com/cards/tc18/26/en?format=image");
+            put("C18/Thopter/3", "https://api.scryfall.com/cards/tc18/8/en?format=image");
+            put("C18/Worm", "https://api.scryfall.com/cards/tc18/18/en?format=image");
+            put("C18/Zombie", "https://api.scryfall.com/cards/tc18/9/en?format=image");
 
 
             // generate supported sets
