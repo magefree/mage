@@ -374,7 +374,7 @@
 |Generate|TOK:C18|Construct|1||RetrofitterFoundryToken|
 |Generate|TOK:C18|Construct|2||StoneTrapIdolToken|
 |Generate|TOK:C18|Dragon|||DragonEggDragonToken|
-|Generate|TOK:C18|DragonEgg|||NestingDragonToken|
+|Generate|TOK:C18|Dragon Egg|||NestingDragonToken|
 |Generate|TOK:C18|Elemental|||DokaiWeaverofLifeToken|
 |Generate|TOK:C18|Horror|||PhyrexianRebirthHorrorToken|
 |Generate|TOK:C18|Mask|||MaskToken|
