@@ -266,6 +266,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Sunken Hollow", 278, Rarity.RARE, mage.cards.s.SunkenHollow.class));
         cards.add(new SetCardInfo("Swamp", 294, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swiftwater Cliffs", 279, Rarity.COMMON, mage.cards.s.SwiftwaterCliffs.class));
+        cards.add(new SetCardInfo("Tahngarth, First Mate", 50, Rarity.RARE, mage.cards.t.TahngarthFirstMate.class));
         cards.add(new SetCardInfo("Talrand, Sky Summoner", 97, Rarity.RARE, mage.cards.t.TalrandSkySummoner.class));
         cards.add(new SetCardInfo("Tectonic Hellion", 29, Rarity.RARE, mage.cards.t.TectonicHellion.class));
         cards.add(new SetCardInfo("Temple of the False God", 280, Rarity.UNCOMMON, mage.cards.t.TempleOfTheFalseGod.class));
