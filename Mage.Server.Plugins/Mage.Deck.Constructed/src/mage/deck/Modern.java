@@ -33,11 +33,13 @@ public class Modern extends Constructed {
         banned.add("Dig Through Time");
         banned.add("Dread Return");
         banned.add("Eye of Ugin");
+        banned.add("Faithless Looting");
         banned.add("Gitaxian Probe");
         banned.add("Glimpse of Nature");
         banned.add("Golgari Grave-Troll");
         banned.add("Great Furnace");
         banned.add("Green Sun's Zenith");
+        banned.add("Hogaak, Arisen Necropolis");
         banned.add("Hypergenesis");
         banned.add("Krark-Clan Ironworks");
         banned.add("Mental Misstep");
@@ -49,7 +51,6 @@ public class Modern extends Constructed {
         banned.add("Second Sunrise");
         banned.add("Seething Song");
         banned.add("Sensei's Divining Top");
-        banned.add("Stoneforge Mystic");
         banned.add("Skullclamp");
         banned.add("Splinter Twin");
         banned.add("Summer Bloom");
