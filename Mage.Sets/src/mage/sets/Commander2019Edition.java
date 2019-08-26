@@ -296,6 +296,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Vraska the Unseen", 207, Rarity.MYTHIC, mage.cards.v.VraskaTheUnseen.class));
         cards.add(new SetCardInfo("Warstorm Surge", 155, Rarity.RARE, mage.cards.w.WarstormSurge.class));
         cards.add(new SetCardInfo("Wayfaring Temple", 208, Rarity.RARE, mage.cards.w.WayfaringTemple.class));
+        cards.add(new SetCardInfo("Wildfire Devils", 30, Rarity.RARE, mage.cards.w.WildfireDevils.class));
         cards.add(new SetCardInfo("Willbender", 102, Rarity.UNCOMMON, mage.cards.w.Willbender.class));
         cards.add(new SetCardInfo("Wind-Scarred Crag", 285, Rarity.COMMON, mage.cards.w.WindScarredCrag.class));
         cards.add(new SetCardInfo("Wingmate Roc", 78, Rarity.MYTHIC, mage.cards.w.WingmateRoc.class));
