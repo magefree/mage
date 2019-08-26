@@ -65,7 +65,7 @@ class RangerCaptainOfEosEffect extends ContinuousRuleModifyingEffectImpl {
 
     RangerCaptainOfEosEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "Your opponents can't noncreature cast spells this turn.";
+        staticText = "Your opponents can't cast noncreature spells this turn.";
     }
 
     private RangerCaptainOfEosEffect(final RangerCaptainOfEosEffect effect) {
