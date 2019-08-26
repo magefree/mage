@@ -329,6 +329,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Ward of Lights", 47, Rarity.COMMON, mage.cards.w.WardOfLights.class));
         cards.add(new SetCardInfo("Warping Wurm", 287, Rarity.RARE, mage.cards.w.WarpingWurm.class));
         cards.add(new SetCardInfo("Wave Elemental", 102, Rarity.UNCOMMON, mage.cards.w.WaveElemental.class));
+        cards.add(new SetCardInfo("Wellspring", 348, Rarity.RARE, mage.cards.w.Wellspring.class));
         cards.add(new SetCardInfo("Wild Elephant", 254, Rarity.COMMON, mage.cards.w.WildElephant.class));
         cards.add(new SetCardInfo("Wildfire Emissary", 203, Rarity.UNCOMMON, mage.cards.w.WildfireEmissary.class));
         cards.add(new SetCardInfo("Windreaper Falcon", 289, Rarity.UNCOMMON, mage.cards.w.WindreaperFalcon.class));
