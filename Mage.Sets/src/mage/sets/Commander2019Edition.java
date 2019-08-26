@@ -90,6 +90,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Elemental Bond", 163, Rarity.UNCOMMON, mage.cards.e.ElementalBond.class));
         cards.add(new SetCardInfo("Elsha of the Infinite", 40, Rarity.MYTHIC, mage.cards.e.ElshaOfTheInfinite.class));
         cards.add(new SetCardInfo("Emmara Tandris", 191, Rarity.RARE, mage.cards.e.EmmaraTandris.class));
+        cards.add(new SetCardInfo("Empowered Autogenerator", 54, Rarity.RARE, mage.cards.e.EmpoweredAutogenerator.class));
         cards.add(new SetCardInfo("Evolving Wilds", 241, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Exotic Orchard", 242, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Explore", 164, Rarity.COMMON, mage.cards.e.Explore.class));
