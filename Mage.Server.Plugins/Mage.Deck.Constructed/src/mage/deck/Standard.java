@@ -16,8 +16,6 @@ public class Standard extends Constructed {
         super("Constructed - Standard");
 
         setCodes.addAll(makeLegalSets());
-
-        banned.add("Rampaging Ferocidon"); // since 2018-01-15
     }
 
     private static boolean isFallSet(ExpansionSet set) {
