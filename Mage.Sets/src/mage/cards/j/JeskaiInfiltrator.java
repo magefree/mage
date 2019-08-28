@@ -95,8 +95,8 @@ class JeskaiInfiltratorEffect extends OneShotEffect {
 
             Ability newSource = source.copy();
             newSource.setWorksFaceDown(true);
-            while (!exileZone.isEmpty()) {
-                Card card = exileZone.getRandom(game);
+            //the Set will mimic the Shuffling
+            exileZone.getCards(game).forEach(card -> {
                 ManaCosts manaCosts = null;
                 if (card.isCreature()) {
                     manaCosts = card.getSpellAbility().getManaCosts();
@@ -106,7 +106,7 @@ class JeskaiInfiltratorEffect extends OneShotEffect {
                 }
                 MageObjectReference objectReference = new MageObjectReference(card.getId(), card.getZoneChangeCounter(game) + 1, game);
                 game.addEffect(new BecomesFaceDownCreatureEffect(manaCosts, objectReference, Duration.Custom, FaceDownType.MANIFESTED), newSource);
-            }
+            });
             controller.moveCards(exileZone.getCards(game), Zone.BATTLEFIELD, source, game, false, true, false, null);
             return true;
         }
