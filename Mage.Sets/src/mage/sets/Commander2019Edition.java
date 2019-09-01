@@ -295,6 +295,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Voice of Many", 36, Rarity.UNCOMMON, mage.cards.v.VoiceOfMany.class));
         cards.add(new SetCardInfo("Volrath, the Shapestealer", 51, Rarity.MYTHIC, mage.cards.v.VolrathTheShapestealer.class));
         cards.add(new SetCardInfo("Vraska the Unseen", 207, Rarity.MYTHIC, mage.cards.v.VraskaTheUnseen.class));
+        cards.add(new SetCardInfo("Wall of Stolen Identity", 13, Rarity.RARE, mage.cards.w.WallOfStolenIdentity.class));
         cards.add(new SetCardInfo("Warstorm Surge", 155, Rarity.RARE, mage.cards.w.WarstormSurge.class));
         cards.add(new SetCardInfo("Wayfaring Temple", 208, Rarity.RARE, mage.cards.w.WayfaringTemple.class));
         cards.add(new SetCardInfo("Wildfire Devils", 30, Rarity.RARE, mage.cards.w.WildfireDevils.class));
