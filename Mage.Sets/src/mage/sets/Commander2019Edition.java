@@ -259,6 +259,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Stratus Dancer", 96, Rarity.RARE, mage.cards.s.StratusDancer.class));
         cards.add(new SetCardInfo("Strionic Resonator", 224, Rarity.RARE, mage.cards.s.StrionicResonator.class));
         cards.add(new SetCardInfo("Stromkirk Occultist", 153, Rarity.RARE, mage.cards.s.StromkirkOccultist.class));
+        cards.add(new SetCardInfo("Sudden Substitution", 11, Rarity.RARE, mage.cards.s.SuddenSubstitution.class));
         cards.add(new SetCardInfo("Sultai Charm", 202, Rarity.UNCOMMON, mage.cards.s.SultaiCharm.class));
         cards.add(new SetCardInfo("Sun Titan", 76, Rarity.MYTHIC, mage.cards.s.SunTitan.class));
         cards.add(new SetCardInfo("Sundering Growth", 203, Rarity.COMMON, mage.cards.s.SunderingGrowth.class));
