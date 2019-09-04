@@ -44,6 +44,7 @@ public final class FoodToken extends TokenImpl {
 
         // {2}, {T}, Sacrifice this artifact: You gain 3 life.”
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(3), new GenericManaCost(2));
+        ability.addCost(new TapSourceCost());
         SacrificeSourceCost cost = new SacrificeSourceCost();
         cost.setText("Sacrifice this artifact");
         ability.addCost(cost);
