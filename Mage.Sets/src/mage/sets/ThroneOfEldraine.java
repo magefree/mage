@@ -31,6 +31,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Bake into a Pie", 76, Rarity.COMMON, mage.cards.b.BakeIntoAPie.class));
         cards.add(new SetCardInfo("Chittering Witch", 319, Rarity.RARE, mage.cards.c.ChitteringWitch.class));
         cards.add(new SetCardInfo("Chulane, Teller of Tales", 326, Rarity.MYTHIC, mage.cards.c.ChulaneTellerOfTales.class));
+        cards.add(new SetCardInfo("Command Tower", 333, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Crystal Slipper", 119, Rarity.COMMON, mage.cards.c.CrystalSlipper.class));
         cards.add(new SetCardInfo("Embereth Skyblazer", 321, Rarity.RARE, mage.cards.e.EmberethSkyblazer.class));
         cards.add(new SetCardInfo("Eye Collector", 86, Rarity.COMMON, mage.cards.e.EyeCollector.class));
@@ -39,10 +40,10 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Golden Egg", 220, Rarity.COMMON, mage.cards.g.GoldenEgg.class));
         cards.add(new SetCardInfo("Heraldic Banner", 222, Rarity.UNCOMMON, mage.cards.h.HeraldicBanner.class));
         cards.add(new SetCardInfo("Maraleaf Pixie", 196, Rarity.UNCOMMON, mage.cards.m.MaraleafPixie.class));
-        cards.add(new SetCardInfo("Rankle, Master of Pranks", 356, Rarity.MYTHIC, mage.cards.r.RankleMasterOfPranks.class));
+        cards.add(new SetCardInfo("Rankle, Master of Pranks", 101, Rarity.MYTHIC, mage.cards.r.RankleMasterOfPranks.class));
         cards.add(new SetCardInfo("Run Away Together", 62, Rarity.COMMON, mage.cards.r.RunAwayTogether.class));
         cards.add(new SetCardInfo("Silverflame Ritual", 30, Rarity.COMMON, mage.cards.s.SilverflameRitual.class));
-        cards.add(new SetCardInfo("Slaying Fire", 143, Rarity.COMMON, mage.cards.s.SlayingFire.class));
+        cards.add(new SetCardInfo("Slaying Fire", 143, Rarity.UNCOMMON, mage.cards.s.SlayingFire.class));
         cards.add(new SetCardInfo("Tome Raider", 68, Rarity.COMMON, mage.cards.t.TomeRaider.class));
         cards.add(new SetCardInfo("Wishful Merfolk", 73, Rarity.COMMON, mage.cards.w.WishfulMerfolk.class));
         cards.add(new SetCardInfo("Witching Well", 74, Rarity.COMMON, mage.cards.w.WitchingWell.class));
