@@ -32,6 +32,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Chittering Witch", 319, Rarity.RARE, mage.cards.c.ChitteringWitch.class));
         cards.add(new SetCardInfo("Chulane, Teller of Tales", 326, Rarity.MYTHIC, mage.cards.c.ChulaneTellerOfTales.class));
         cards.add(new SetCardInfo("Crystal Slipper", 119, Rarity.COMMON, mage.cards.c.CrystalSlipper.class));
+        cards.add(new SetCardInfo("Embereth Skyblazer", 321, Rarity.RARE, mage.cards.e.EmberethSkyblazer.class));
         cards.add(new SetCardInfo("Eye Collector", 86, Rarity.COMMON, mage.cards.e.EyeCollector.class));
         cards.add(new SetCardInfo("Fireborn Knight", 210, Rarity.UNCOMMON, mage.cards.f.FirebornKnight.class));
         cards.add(new SetCardInfo("Gilded Goose", 160, Rarity.RARE, mage.cards.g.GildedGoose.class));
