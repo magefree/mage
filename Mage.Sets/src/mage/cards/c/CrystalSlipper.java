@@ -1,5 +1,6 @@
 package mage.cards.c;
 
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
@@ -8,12 +9,14 @@ import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
 /**
- *
  * @author jmharmon
  */
 
@@ -24,8 +27,10 @@ public final class CrystalSlipper extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+0 and has haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(1, 0));
+        ability.addEffect(new GainAbilityAttachedEffect(
+                HasteAbility.getInstance(), AttachmentType.EQUIPMENT).setText("and has haste")
+        );
 
         // Equip {1}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
