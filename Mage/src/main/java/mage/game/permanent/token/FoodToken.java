@@ -1,4 +1,4 @@
-package mage.game.permanent.token.custom;
+package mage.game.permanent.token;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
