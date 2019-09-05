@@ -27,8 +27,11 @@ public final class CrystalSlipper extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+0 and has haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(1, 0));
+        ability.addEffect(new GainAbilityAttachedEffect(
+                HasteAbility.getInstance(), AttachmentType.EQUIPMENT).setText("and has haste")
+        );
+        this.addAbility(ability);
 
         // Equip {1}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
