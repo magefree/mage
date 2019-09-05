@@ -353,6 +353,7 @@ public enum SubType {
     VOLVER("Volver", SubTypeSet.CreatureType),
     // W
     WALL("Wall", SubTypeSet.CreatureType),
+    WARLOCK("Warlock", SubTypeSet.CreatureType),
     WARRIOR("Warrior", SubTypeSet.CreatureType),
     WEEQUAY("Weequay", SubTypeSet.CreatureType, true),
     WEIRD("Weird", SubTypeSet.CreatureType),
