@@ -1,13 +1,12 @@
-
 package mage.constants;
 
 /**
- *
  * @author LevelX2
  */
 public enum AbilityWord {
 
     ADDENDUM("Addendum"),
+    ADAMANT("Adamant"),
     BATTALION("Battalion"),
     BLOODRUSH("Bloodrush"),
     CHANNEL("Channel"),
