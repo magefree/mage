@@ -18,13 +18,12 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.permanent.token.custom.FoodToken;
+import mage.game.permanent.token.FoodToken;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
 /**
- *
  * @author jmharmon
  */
 
