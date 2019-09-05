@@ -2,6 +2,8 @@
 package mage.cards.k;
 
 import java.util.UUID;
+
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
@@ -22,8 +24,14 @@ public final class Kitesail extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
         this.subtype.add(SubType.EQUIPMENT);
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        // Equipped creature gets +1/+0 and has flying.
+        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(1, 0));
+        ability.addEffect(new GainAbilityAttachedEffect(
+                FlyingAbility.getInstance(), AttachmentType.EQUIPMENT).setText("and has flying")
+        );
+        this.addAbility(ability);
+
+        // Equip {2}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
