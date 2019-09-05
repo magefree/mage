@@ -31,6 +31,7 @@ public final class CrystalSlipper extends CardImpl {
         ability.addEffect(new GainAbilityAttachedEffect(
                 HasteAbility.getInstance(), AttachmentType.EQUIPMENT).setText("and has haste")
         );
+        this.addAbility(ability);
 
         // Equip {1}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
