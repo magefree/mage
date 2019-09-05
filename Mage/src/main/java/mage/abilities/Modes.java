@@ -336,6 +336,8 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
             sb.append("choose one or more. Each mode must target ").append(getMaxModesFilter().getMessage());
         } else if (this.getMinModes() == 0 && this.getMaxModes() == 1) {
             sb.append("choose up to one");
+        } else if (this.getMinModes() == 0 && this.getMaxModes() == 3) {
+            sb.append("choose any number");
         } else if (this.getMinModes() == 1 && this.getMaxModes() > 2) {
             sb.append("choose one or more");
         } else if (this.getMinModes() == 1 && this.getMaxModes() == 2) {

@@ -1,9 +1,6 @@
 
 package mage.abilities.effects.common;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -16,8 +13,11 @@ import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 import mage.util.CardUtil;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class SacrificeAllEffect extends OneShotEffect {
@@ -86,10 +86,10 @@ public class SacrificeAllEffect extends OneShotEffect {
         sb.append("each player sacrifices ");
         if (amount.toString().equals("X")) {
             sb.append(amount.toString());
-        } else {
-            sb.append(CardUtil.numberToText(amount.toString(), "a"));
+            sb.append(' ');
+        } else if (!filter.getMessage().startsWith("a ")) {
+            sb.append(CardUtil.numberToText(amount.toString(), "a "));
         }
-        sb.append(' ');
         sb.append(filter.getMessage());
         staticText = sb.toString();
     }
