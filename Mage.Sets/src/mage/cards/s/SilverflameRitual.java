@@ -15,6 +15,7 @@ import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.watchers.common.ManaSpentToCastWatcher;
 
 import java.util.UUID;
 
@@ -37,6 +38,7 @@ public final class SilverflameRitual extends CardImpl {
                 "<br><i>Adamant</i> &mdash; If at least three white mana was spent to cast this spell, " +
                         "creatures you control gain vigilance until end of turn."
         ));
+        this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
     }
 
     private SilverflameRitual(final SilverflameRitual card) {
