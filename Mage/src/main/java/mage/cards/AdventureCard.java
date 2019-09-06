@@ -10,7 +10,7 @@ import java.util.UUID;
  */
 public abstract class AdventureCard extends CardImpl {
 
-   protected SpellAbility adventureSpellAbility = new SpellAbility(null, null);
+    protected SpellAbility adventureSpellAbility = new SpellAbility(null, null);
 
     public AdventureCard(UUID ownerId, CardSetInfo setInfo, CardType[] typesLeft, CardType[] typesRight, String costsLeft, String costsRight) {
         super(ownerId, setInfo, typesLeft, costsLeft);
@@ -18,5 +18,9 @@ public abstract class AdventureCard extends CardImpl {
 
     public AdventureCard(AdventureCard card) {
         super(card);
+    }
+
+    public SpellAbility getAdventureSpellAbility() {
+        return adventureSpellAbility;
     }
 }

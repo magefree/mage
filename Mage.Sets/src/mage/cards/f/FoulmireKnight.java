@@ -29,8 +29,8 @@ public final class FoulmireKnight extends AdventureCard {
 
         // Profane Insight
         // You draw a card and you lose 1 life.
-        adventureSpellAbility.addEffect(new DrawCardSourceControllerEffect(1).setText("You draw a card and"));
-        adventureSpellAbility.addEffect(new LoseLifeSourceControllerEffect(1));
+        this.getAdventureSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).setText("You draw a card and"));
+        this.getAdventureSpellAbility().addEffect(new LoseLifeSourceControllerEffect(1));
     }
 
     private FoulmireKnight(final FoulmireKnight card) {
