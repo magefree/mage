@@ -16,7 +16,7 @@ import java.util.UUID;
 public final class RosethornAcolyte extends AdventureCard {
 
     public RosethornAcolyte(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{2}{G}", "{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{2}{G}", "Seasonal Ritual", "{G}");
 
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.DRUID);

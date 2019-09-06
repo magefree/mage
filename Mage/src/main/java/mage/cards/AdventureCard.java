@@ -12,7 +12,7 @@ public abstract class AdventureCard extends CardImpl {
 
     protected SpellAbility adventureSpellAbility = new SpellAbility(null, null);
 
-    public AdventureCard(UUID ownerId, CardSetInfo setInfo, CardType[] typesLeft, CardType[] typesRight, String costsLeft, String costsRight) {
+    public AdventureCard(UUID ownerId, CardSetInfo setInfo, CardType[] typesLeft, CardType[] typesRight, String costsLeft, String adventureName, String costsRight) {
         super(ownerId, setInfo, typesLeft, costsLeft);
     }
 

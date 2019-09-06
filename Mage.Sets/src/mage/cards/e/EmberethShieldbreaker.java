@@ -16,7 +16,7 @@ import java.util.UUID;
 public final class EmberethShieldbreaker extends AdventureCard {
 
     public EmberethShieldbreaker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{1}{R}", "{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{1}{R}", "Battle Display", "{R}");
 
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.KNIGHT);

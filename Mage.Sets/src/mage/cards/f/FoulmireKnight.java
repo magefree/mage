@@ -17,7 +17,7 @@ import java.util.UUID;
 public final class FoulmireKnight extends AdventureCard {
 
     public FoulmireKnight(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{B}", "{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{B}", "Profane Insight", "{2}{B}");
 
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.KNIGHT);

@@ -27,7 +27,7 @@ import java.util.UUID;
 public final class LovestruckBeast extends AdventureCard {
 
     public LovestruckBeast(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{2}{G}", "{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{2}{G}", "Heart's Desire", "{G}");
 
         this.subtype.add(SubType.BEAST);
         this.subtype.add(SubType.NOBLE);

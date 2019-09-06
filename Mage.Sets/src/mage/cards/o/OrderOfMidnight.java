@@ -19,7 +19,7 @@ import java.util.UUID;
 public final class OrderOfMidnight extends AdventureCard {
 
     public OrderOfMidnight(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{1}{B}", "{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{1}{B}","Alter Fate", "{1}{B}");
 
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.KNIGHT);
