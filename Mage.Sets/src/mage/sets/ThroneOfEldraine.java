@@ -47,7 +47,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Fireborn Knight", 210, Rarity.UNCOMMON, mage.cards.f.FirebornKnight.class));
         cards.add(new SetCardInfo("Flaxen Intruder", 155, Rarity.UNCOMMON, mage.cards.f.FlaxenIntruder.class));
         cards.add(new SetCardInfo("Foulmire Knight", 90, Rarity.UNCOMMON, mage.cards.f.FoulmireKnight.class));
-        cards.add(new SetCardInfo("Garruk, Cursed Huntsman", 270, Rarity.MYTHIC, mage.cards.g.GarrukCursedHuntsman.class));
+        cards.add(new SetCardInfo("Garruk, Cursed Huntsman", 191, Rarity.MYTHIC, mage.cards.g.GarrukCursedHuntsman.class));
         cards.add(new SetCardInfo("Gilded Goose", 160, Rarity.RARE, mage.cards.g.GildedGoose.class));
         cards.add(new SetCardInfo("Gluttonous Troll", 327, Rarity.RARE, mage.cards.g.GluttonousTroll.class));
         cards.add(new SetCardInfo("Golden Egg", 220, Rarity.COMMON, mage.cards.g.GoldenEgg.class));
@@ -69,8 +69,10 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Steelbane Hydra", 322, Rarity.RARE, mage.cards.s.SteelbaneHydra.class));
         cards.add(new SetCardInfo("Taste of Death", 320, Rarity.RARE, mage.cards.t.TasteOfDeath.class));
         cards.add(new SetCardInfo("The Circle of Loyalty", 9, Rarity.MYTHIC, mage.cards.t.TheCircleOfLoyalty.class));
+        cards.add(new SetCardInfo("Thornwood Falls", 313, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
         cards.add(new SetCardInfo("Tome Raider", 68, Rarity.COMMON, mage.cards.t.TomeRaider.class));
         cards.add(new SetCardInfo("Tome of Legends", 332, Rarity.RARE, mage.cards.t.TomeOfLegends.class));
+        cards.add(new SetCardInfo("Wind-Scarred Crag", 308, Rarity.COMMON, mage.cards.w.WindScarredCrag.class));
         cards.add(new SetCardInfo("Wishful Merfolk", 73, Rarity.COMMON, mage.cards.w.WishfulMerfolk.class));
         cards.add(new SetCardInfo("Witching Well", 74, Rarity.COMMON, mage.cards.w.WitchingWell.class));
 
