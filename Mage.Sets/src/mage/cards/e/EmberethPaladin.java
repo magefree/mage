@@ -10,6 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
+import mage.watchers.common.ManaSpentToCastWatcher;
 
 import java.util.UUID;
 
@@ -34,7 +35,7 @@ public final class EmberethPaladin extends CardImpl {
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, AdamantCondition.RED,
                 "<br><i>Adamant</i> &mdash; If at least three red mana was spent to cast this spell, " +
                         "{this} enters the battlefield with a +1/+1 counter on it.", ""
-        ));
+        ), new ManaSpentToCastWatcher());
     }
 
     private EmberethPaladin(final EmberethPaladin card) {
