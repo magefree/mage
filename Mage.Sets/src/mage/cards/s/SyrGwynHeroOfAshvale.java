@@ -27,7 +27,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class SyrGwynHeroOfAshenvale extends CardImpl {
+public final class SyrGwynHeroOfAshvale extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter
             = new FilterControlledCreaturePermanent("an equipped creature you control");
@@ -40,7 +40,7 @@ public final class SyrGwynHeroOfAshenvale extends CardImpl {
         filter.add(EquippedPredicate.instance);
     }
 
-    public SyrGwynHeroOfAshenvale(UUID ownerId, CardSetInfo setInfo) {
+    public SyrGwynHeroOfAshvale(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{W}{B}");
 
         this.addSuperType(SuperType.LEGENDARY);
@@ -68,12 +68,12 @@ public final class SyrGwynHeroOfAshenvale extends CardImpl {
         )));
     }
 
-    private SyrGwynHeroOfAshenvale(final SyrGwynHeroOfAshenvale card) {
+    private SyrGwynHeroOfAshvale(final SyrGwynHeroOfAshvale card) {
         super(card);
     }
 
     @Override
-    public SyrGwynHeroOfAshenvale copy() {
-        return new SyrGwynHeroOfAshenvale(this);
+    public SyrGwynHeroOfAshvale copy() {
+        return new SyrGwynHeroOfAshvale(this);
     }
 }
