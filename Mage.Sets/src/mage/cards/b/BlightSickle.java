@@ -2,6 +2,8 @@
 package mage.cards.b;
 
 import java.util.UUID;
+
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
@@ -23,8 +25,13 @@ public final class BlightSickle extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+0 and has wither.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(WitherAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(1, 0));
+        ability.addEffect(new GainAbilityAttachedEffect(
+                WitherAbility.getInstance(), AttachmentType.EQUIPMENT).setText("and has wither")
+        );
+        this.addAbility(ability);
+
+        // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }
 

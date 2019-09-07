@@ -4,8 +4,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.combat.AttacksIfAbleAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.cards.CardImpl;
@@ -16,8 +16,6 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
 import java.util.UUID;
-
-import static mage.constants.Outcome.Benefit;
 
 /**
  * @author TheElk801
@@ -39,7 +37,10 @@ public final class BloodthirstyBlade extends CardImpl {
 
         // {1}: Attach Bloodthirsty Blade to target creature an opponent controls. Active this ability only any time you could cast a sorcery.
         ability = new ActivateAsSorceryActivatedAbility(
-                Zone.BATTLEFIELD, new BloodthirstyBladeEffect(), new GenericManaCost(1)
+                Zone.BATTLEFIELD,
+                new AttachEffect(
+                        Outcome.Benefit, "Attach {this} to target creature an opponent controls"
+                ), new GenericManaCost(1)
         );
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability);
@@ -84,32 +85,5 @@ class BloodthirstyBladeAttackEffect extends RestrictionEffect {
             return true;
         }
         return !defenderId.equals(source.getControllerId());
-    }
-}
-
-class BloodthirstyBladeEffect extends OneShotEffect {
-
-    BloodthirstyBladeEffect() {
-        super(Benefit);
-        staticText = "attach {this} to target creature an opponent controls";
-    }
-
-    private BloodthirstyBladeEffect(final BloodthirstyBladeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BloodthirstyBladeEffect copy() {
-        return new BloodthirstyBladeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null) {
-            return false;
-        }
-        permanent.attachTo(source.getFirstTarget(), game);
-        return true;
     }
 }

@@ -240,6 +240,7 @@ public enum SubType {
     NIGHTMARE("Nightmare", SubTypeSet.CreatureType),
     NIGHTSTALKER("Nightstalker", SubTypeSet.CreatureType),
     NINJA("Ninja", SubTypeSet.CreatureType),
+    NOBLE("Noble", SubTypeSet.CreatureType),
     NOGGLE("Noggle", SubTypeSet.CreatureType),
     NOMAD("Nomad", SubTypeSet.CreatureType),
     NYMPH("Nymph", SubTypeSet.CreatureType),

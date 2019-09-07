@@ -144,6 +144,6 @@ class RayamiFirstOfTheFallenReplacementEffect extends ReplacementEffectImpl {
         ZoneChangeEvent zce = (ZoneChangeEvent) event;
         return zce.isDiesEvent()
                 && zce.getTarget().isCreature()
-                && zce.getTarget() instanceof PermanentToken;
+                && !(zce.getTarget() instanceof PermanentToken);
     }
 }

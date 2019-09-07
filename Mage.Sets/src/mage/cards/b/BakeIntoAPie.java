@@ -5,7 +5,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.custom.FoodToken;
+import mage.game.permanent.token.FoodToken;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;

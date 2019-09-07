@@ -5,21 +5,24 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetPermanent;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class TargetControlledPermanent extends TargetPermanent {
 
     public TargetControlledPermanent() {
-        this(1, 1, StaticFilters.FILTER_CONTROLLED_PERMANENT, false);
+        this(1);
     }
 
     public TargetControlledPermanent(int numTargets) {
-        this(numTargets, numTargets, StaticFilters.FILTER_CONTROLLED_PERMANENT, false);
+        this(numTargets, StaticFilters.FILTER_CONTROLLED_PERMANENT);
     }
 
     public TargetControlledPermanent(FilterControlledPermanent filter) {
-        this(1, 1, filter, false);
+        this(1, filter);
+    }
+
+    public TargetControlledPermanent(int numTargets, FilterControlledPermanent filter) {
+        this(numTargets, numTargets, filter, false);
     }
 
     public TargetControlledPermanent(int minNumTargets, int maxNumTargets, FilterControlledPermanent filter, boolean notTarget) {

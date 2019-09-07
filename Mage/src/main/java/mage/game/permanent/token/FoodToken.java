@@ -1,4 +1,4 @@
-package mage.game.permanent.token.custom;
+package mage.game.permanent.token;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -9,14 +9,12 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.game.permanent.token.TokenImpl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 /**
- *
  * @author jmharmon
  */
 
