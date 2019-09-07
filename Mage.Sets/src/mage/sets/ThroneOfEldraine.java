@@ -62,6 +62,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Lovestruck Beast", 165, Rarity.RARE, mage.cards.l.LovestruckBeast.class));
         cards.add(new SetCardInfo("Mace of the Valiant", 314, Rarity.RARE, mage.cards.m.MaceOfTheValiant.class));
         cards.add(new SetCardInfo("Maraleaf Pixie", 196, Rarity.UNCOMMON, mage.cards.m.MaraleafPixie.class));
+        cards.add(new SetCardInfo("Midnight Clock", 54, Rarity.RARE, mage.cards.m.MidnightClock.class));
         cards.add(new SetCardInfo("Oko, Thief of Crowns", 197, Rarity.MYTHIC, mage.cards.o.OkoThiefOfCrowns.class));
         cards.add(new SetCardInfo("Order of Midnight", 99, Rarity.UNCOMMON, mage.cards.o.OrderOfMidnight.class));
         cards.add(new SetCardInfo("Piper of the Swarm", 100, Rarity.RARE, mage.cards.p.PiperOfTheSwarm.class));
