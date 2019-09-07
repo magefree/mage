@@ -407,6 +407,7 @@ public enum SubType {
     NISSA("Nissa", SubTypeSet.PlaneswalkerType),
     NIXILIS("Nixilis", SubTypeSet.PlaneswalkerType),
     OBI_WAN("Obi-Wan", SubTypeSet.PlaneswalkerType, true), // Star Wars
+    OKO("Oko", SubTypeSet.PlaneswalkerType),
     RAL("Ral", SubTypeSet.PlaneswalkerType),
     ROWAN("Rowan", SubTypeSet.PlaneswalkerType),
     SAHEELI("Saheeli", SubTypeSet.PlaneswalkerType),
