@@ -30,6 +30,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
 
         cards.add(new SetCardInfo("Alela, Artful Provocateur", 324, Rarity.MYTHIC, mage.cards.a.AlelaArtfulProvocateur.class));
         cards.add(new SetCardInfo("All That Glitters", 2, Rarity.UNCOMMON, mage.cards.a.AllThatGlitters.class));
+        cards.add(new SetCardInfo("Animating Faerie", 38, Rarity.UNCOMMON, mage.cards.a.AnimatingFaerie.class));
         cards.add(new SetCardInfo("Arcane Signet", 331, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Arcanist's Owl", 206, Rarity.UNCOMMON, mage.cards.a.ArcanistsOwl.class));
         cards.add(new SetCardInfo("Bake into a Pie", 76, Rarity.COMMON, mage.cards.b.BakeIntoAPie.class));
