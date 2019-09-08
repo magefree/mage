@@ -81,6 +81,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Steelbane Hydra", 322, Rarity.RARE, mage.cards.s.SteelbaneHydra.class));
         cards.add(new SetCardInfo("Steelclaw Lance", 202, Rarity.UNCOMMON, mage.cards.s.SteelclawLance.class));
         cards.add(new SetCardInfo("Syr Gwyn, Hero of Ashvale", 330, Rarity.MYTHIC, mage.cards.s.SyrGwynHeroOfAshvale.class));
+        cards.add(new SetCardInfo("Syr Konrad, the Grim", 107, Rarity.UNCOMMON, mage.cards.s.SyrKonradTheGrim.class));
         cards.add(new SetCardInfo("Taste of Death", 320, Rarity.RARE, mage.cards.t.TasteOfDeath.class));
         cards.add(new SetCardInfo("The Circle of Loyalty", 9, Rarity.MYTHIC, mage.cards.t.TheCircleOfLoyalty.class));
         cards.add(new SetCardInfo("Thorn Mammoth", 323, Rarity.RARE, mage.cards.t.ThornMammoth.class));
