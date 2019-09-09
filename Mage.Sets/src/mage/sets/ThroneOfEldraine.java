@@ -86,6 +86,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Rosethorn Acolyte", 174, Rarity.COMMON, mage.cards.r.RosethornAcolyte.class));
         cards.add(new SetCardInfo("Rowan's Battleguard", 306, Rarity.UNCOMMON, mage.cards.r.RowansBattleguard.class));
         cards.add(new SetCardInfo("Rowan's Stalwarts", 307, Rarity.RARE, mage.cards.r.RowansStalwarts.class));
+        cards.add(new SetCardInfo("Rowan, Fearless Sparkmage", 304, Rarity.MYTHIC, mage.cards.r.RowanFearlessSparkmage.class));
         cards.add(new SetCardInfo("Run Away Together", 62, Rarity.COMMON, mage.cards.r.RunAwayTogether.class));
         cards.add(new SetCardInfo("Savvy Hunter", 200, Rarity.UNCOMMON, mage.cards.s.SavvyHunter.class));
         cards.add(new SetCardInfo("Shimmer Dragon", 317, Rarity.RARE, mage.cards.s.ShimmerDragon.class));
