@@ -71,6 +71,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Mystical Dispute", 58, Rarity.UNCOMMON, mage.cards.m.MysticalDispute.class));
         cards.add(new SetCardInfo("Oko's Accomplices", 310, Rarity.COMMON, mage.cards.o.OkosAccomplices.class));
         cards.add(new SetCardInfo("Oko, Thief of Crowns", 197, Rarity.MYTHIC, mage.cards.o.OkoThiefOfCrowns.class));
+        cards.add(new SetCardInfo("Once Upon a Time", 169, Rarity.RARE, mage.cards.o.OnceUponATime.class));
         cards.add(new SetCardInfo("Order of Midnight", 99, Rarity.UNCOMMON, mage.cards.o.OrderOfMidnight.class));
         cards.add(new SetCardInfo("Piper of the Swarm", 100, Rarity.RARE, mage.cards.p.PiperOfTheSwarm.class));
         cards.add(new SetCardInfo("Rankle, Master of Pranks", 101, Rarity.MYTHIC, mage.cards.r.RankleMasterOfPranks.class));
