@@ -59,6 +59,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Inspiring Veteran", 194, Rarity.UNCOMMON, mage.cards.i.InspiringVeteran.class));
         cards.add(new SetCardInfo("Keeper of Fables", 163, Rarity.UNCOMMON, mage.cards.k.KeeperOfFables.class));
         cards.add(new SetCardInfo("Knights' Charge", 328, Rarity.RARE, mage.cards.k.KnightsCharge.class));
+        cards.add(new SetCardInfo("Korvold, Fae-Cursed King", 329, Rarity.MYTHIC, mage.cards.k.KorvoldFaeCursedKing.class));
         cards.add(new SetCardInfo("Lovestruck Beast", 165, Rarity.RARE, mage.cards.l.LovestruckBeast.class));
         cards.add(new SetCardInfo("Mace of the Valiant", 314, Rarity.RARE, mage.cards.m.MaceOfTheValiant.class));
         cards.add(new SetCardInfo("Maraleaf Pixie", 196, Rarity.UNCOMMON, mage.cards.m.MaraleafPixie.class));
@@ -80,6 +81,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Steelbane Hydra", 322, Rarity.RARE, mage.cards.s.SteelbaneHydra.class));
         cards.add(new SetCardInfo("Steelclaw Lance", 202, Rarity.UNCOMMON, mage.cards.s.SteelclawLance.class));
         cards.add(new SetCardInfo("Syr Gwyn, Hero of Ashvale", 330, Rarity.MYTHIC, mage.cards.s.SyrGwynHeroOfAshvale.class));
+        cards.add(new SetCardInfo("Syr Konrad, the Grim", 107, Rarity.UNCOMMON, mage.cards.s.SyrKonradTheGrim.class));
         cards.add(new SetCardInfo("Taste of Death", 320, Rarity.RARE, mage.cards.t.TasteOfDeath.class));
         cards.add(new SetCardInfo("The Circle of Loyalty", 9, Rarity.MYTHIC, mage.cards.t.TheCircleOfLoyalty.class));
         cards.add(new SetCardInfo("Thorn Mammoth", 323, Rarity.RARE, mage.cards.t.ThornMammoth.class));
@@ -90,6 +92,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Wind-Scarred Crag", 308, Rarity.COMMON, mage.cards.w.WindScarredCrag.class));
         cards.add(new SetCardInfo("Wintermoor Commander", 205, Rarity.UNCOMMON, mage.cards.w.WintermoorCommander.class));
         cards.add(new SetCardInfo("Wishful Merfolk", 73, Rarity.COMMON, mage.cards.w.WishfulMerfolk.class));
+        cards.add(new SetCardInfo("Witch's Cottage", 249, Rarity.COMMON, mage.cards.w.WitchsCottage.class));
         cards.add(new SetCardInfo("Witching Well", 74, Rarity.COMMON, mage.cards.w.WitchingWell.class));
         cards.add(new SetCardInfo("Workshop Elders", 318, Rarity.RARE, mage.cards.w.WorkshopElders.class));
 
