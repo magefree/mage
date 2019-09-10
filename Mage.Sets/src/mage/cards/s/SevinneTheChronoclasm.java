@@ -54,7 +54,7 @@ public final class SevinneTheChronoclasm extends CardImpl {
 class SevinneTheChronoclasmTriggeredAbility extends SpellCastControllerTriggeredAbility {
 
     SevinneTheChronoclasmTriggeredAbility() {
-        super(Zone.BATTLEFIELD, null, StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY, false, true);
+        super(Zone.BATTLEFIELD, null, StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY, false, false);
     }
 
     private SevinneTheChronoclasmTriggeredAbility(final SevinneTheChronoclasmTriggeredAbility ability) {
