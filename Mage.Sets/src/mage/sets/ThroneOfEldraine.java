@@ -114,6 +114,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Tome of Legends", 332, Rarity.RARE, mage.cards.t.TomeOfLegends.class));
         cards.add(new SetCardInfo("Tournament Grounds", 248, Rarity.UNCOMMON, mage.cards.t.TournamentGrounds.class));
         cards.add(new SetCardInfo("Turn into a Pumpkin", 69, Rarity.UNCOMMON, mage.cards.t.TurnIntoAPumpkin.class));
+        cards.add(new SetCardInfo("Venerable Knight", 35, Rarity.UNCOMMON, mage.cards.v.VenerableKnight.class));
         cards.add(new SetCardInfo("Weaselback Redcap", 148, Rarity.COMMON, mage.cards.w.WeaselbackRedcap.class));
         cards.add(new SetCardInfo("Wicked Guardian", 109, Rarity.COMMON, mage.cards.w.WickedGuardian.class));
         cards.add(new SetCardInfo("Wicked Wolf", 181, Rarity.RARE, mage.cards.w.WickedWolf.class));
