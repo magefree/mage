@@ -77,6 +77,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Midnight Clock", 54, Rarity.RARE, mage.cards.m.MidnightClock.class));
         cards.add(new SetCardInfo("Mystical Dispute", 58, Rarity.UNCOMMON, mage.cards.m.MysticalDispute.class));
         cards.add(new SetCardInfo("Oko's Accomplices", 310, Rarity.COMMON, mage.cards.o.OkosAccomplices.class));
+        cards.add(new SetCardInfo("Oko's Hospitality", 312, Rarity.RARE, mage.cards.o.OkosHospitality.class));
         cards.add(new SetCardInfo("Oko, Thief of Crowns", 197, Rarity.MYTHIC, mage.cards.o.OkoThiefOfCrowns.class));
         cards.add(new SetCardInfo("Once Upon a Time", 169, Rarity.RARE, mage.cards.o.OnceUponATime.class));
         cards.add(new SetCardInfo("Order of Midnight", 99, Rarity.UNCOMMON, mage.cards.o.OrderOfMidnight.class));
