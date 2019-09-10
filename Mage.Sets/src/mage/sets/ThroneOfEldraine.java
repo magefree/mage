@@ -116,6 +116,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Wildwood Tracker", 183, Rarity.COMMON, mage.cards.w.WildwoodTracker.class));
         cards.add(new SetCardInfo("Wind-Scarred Crag", 308, Rarity.COMMON, mage.cards.w.WindScarredCrag.class));
         cards.add(new SetCardInfo("Wintermoor Commander", 205, Rarity.UNCOMMON, mage.cards.w.WintermoorCommander.class));
+        cards.add(new SetCardInfo("Wishclaw Talisman", 110, Rarity.RARE, mage.cards.w.WishclawTalisman.class));
         cards.add(new SetCardInfo("Wishful Merfolk", 73, Rarity.COMMON, mage.cards.w.WishfulMerfolk.class));
         cards.add(new SetCardInfo("Witch's Cottage", 249, Rarity.COMMON, mage.cards.w.WitchsCottage.class));
         cards.add(new SetCardInfo("Witch's Vengeance", 111, Rarity.RARE, mage.cards.w.WitchsVengeance.class));
