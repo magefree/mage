@@ -128,6 +128,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Wishclaw Talisman", 110, Rarity.RARE, mage.cards.w.WishclawTalisman.class));
         cards.add(new SetCardInfo("Wishful Merfolk", 73, Rarity.COMMON, mage.cards.w.WishfulMerfolk.class));
         cards.add(new SetCardInfo("Witch's Cottage", 249, Rarity.COMMON, mage.cards.w.WitchsCottage.class));
+        cards.add(new SetCardInfo("Witch's Oven", 237, Rarity.UNCOMMON, mage.cards.w.WitchsOven.class));
         cards.add(new SetCardInfo("Witch's Vengeance", 111, Rarity.RARE, mage.cards.w.WitchsVengeance.class));
         cards.add(new SetCardInfo("Witching Well", 74, Rarity.COMMON, mage.cards.w.WitchingWell.class));
         cards.add(new SetCardInfo("Workshop Elders", 318, Rarity.RARE, mage.cards.w.WorkshopElders.class));
