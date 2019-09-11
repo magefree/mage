@@ -13,6 +13,7 @@ import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -39,13 +40,16 @@ public final class TheRoyalScions extends CardImpl {
         // +1: Draw a card, then discard a card.
         this.addAbility(new LoyaltyAbility(new DrawDiscardControllerEffect(1, 1), 1));
 
-        // +1: Target creature gets +2/+0 and gains first strike until end of turn.
+        // +1: Target creature gets +2/+0 and gains first strike and trample until end of turn.
         Ability ability = new LoyaltyAbility(new BoostTargetEffect(
                 2, 0, Duration.EndOfTurn
         ).setText("Target creature gets +2/+0"), 1);
         ability.addEffect(new GainAbilityTargetEffect(
                 FirstStrikeAbility.getInstance(), Duration.EndOfTurn
-        ).setText("and gains first strike until end of turn"));
+        ).setText("and gains first strike"));
+        ability.addEffect(new GainAbilityTargetEffect(
+                TrampleAbility.getInstance(), Duration.EndOfTurn
+        ).setText("and trample until end of turn"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
