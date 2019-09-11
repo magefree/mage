@@ -39,7 +39,7 @@ public final class OkoThiefOfCrowns extends CardImpl {
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
 
         // +2: Create a Food token.
-        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new FoodToken(), 2)));
+        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new FoodToken()), 2));
 
         // +1: Target artifact or creature loses all abilities and becomes a green Elk creature with base power and toughness 3/3.
         Ability ability = new LoyaltyAbility(new BecomesCreatureTargetEffect(
