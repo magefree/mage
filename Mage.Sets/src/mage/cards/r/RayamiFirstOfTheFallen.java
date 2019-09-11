@@ -18,6 +18,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 
+import java.util.Collection;
 import java.util.UUID;
 
 /**
@@ -76,25 +77,24 @@ class RayamiFirstOfTheFallenEffect extends ContinuousEffectImpl {
                 .stream()
                 .filter(Card::isCreature)
                 .filter(card -> card.getCounters(game).getCount(CounterType.BLOOD) > 0)
-                .forEach(card -> {
-                    card.getAbilities(game).stream().forEach(ability -> {
-                        if (ability instanceof FlyingAbility
-                                || ability instanceof FirstStrikeAbility
-                                || ability instanceof DoubleStrikeAbility
-                                || ability instanceof DeathtouchAbility
-                                || ability instanceof HasteAbility
-                                || ability instanceof HexproofAbility
-                                || ability instanceof IndestructibleAbility
-                                || ability instanceof LifelinkAbility
-                                || ability instanceof MenaceAbility
-                                || ability instanceof ReachAbility
-                                || ability instanceof TrampleAbility
-                                || ability instanceof VigilanceAbility) {
-                            sourcePermanent.addAbility(ability, source.getSourceId(), game);
-                        } else if (ability instanceof ProtectionAbility) {
-                            sourcePermanent.addAbility(ability, source.getSourceId(), game);
-                        }
-                    });
+                .map(card -> card.getAbilities(game))
+                .flatMap(Collection::stream)
+                .forEach(ability -> {
+                    if (ability instanceof FlyingAbility
+                            || ability instanceof FirstStrikeAbility
+                            || ability instanceof DoubleStrikeAbility
+                            || ability instanceof DeathtouchAbility
+                            || ability instanceof HasteAbility
+                            || ability instanceof HexproofAbility
+                            || ability instanceof IndestructibleAbility
+                            || ability instanceof LifelinkAbility
+                            || ability instanceof MenaceAbility
+                            || ability instanceof ReachAbility
+                            || ability instanceof TrampleAbility
+                            || ability instanceof VigilanceAbility
+                            || ability instanceof ProtectionAbility) {
+                        sourcePermanent.addAbility(ability, source.getSourceId(), game);
+                    }
                 });
         return true;
     }
@@ -108,7 +108,7 @@ class RayamiFirstOfTheFallenEffect extends ContinuousEffectImpl {
 class RayamiFirstOfTheFallenReplacementEffect extends ReplacementEffectImpl {
 
     RayamiFirstOfTheFallenReplacementEffect() {
-        super(Duration.EndOfTurn, Outcome.Exile);
+        super(Duration.WhileOnBattlefield, Outcome.Exile);
         staticText = "If a nontoken creature would die, exile that card with a blood counter on it instead";
     }
 
