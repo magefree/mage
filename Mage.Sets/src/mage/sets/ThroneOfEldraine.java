@@ -84,6 +84,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Mace of the Valiant", 314, Rarity.RARE, mage.cards.m.MaceOfTheValiant.class));
         cards.add(new SetCardInfo("Maraleaf Pixie", 196, Rarity.UNCOMMON, mage.cards.m.MaraleafPixie.class));
         cards.add(new SetCardInfo("Midnight Clock", 54, Rarity.RARE, mage.cards.m.MidnightClock.class));
+        cards.add(new SetCardInfo("Murderous Rider", 97, Rarity.RARE, mage.cards.m.MurderousRider.class));
         cards.add(new SetCardInfo("Mystical Dispute", 58, Rarity.UNCOMMON, mage.cards.m.MysticalDispute.class));
         cards.add(new SetCardInfo("Oakhame Ranger", 212, Rarity.UNCOMMON, mage.cards.o.OakhameRanger.class));
         cards.add(new SetCardInfo("Oko's Accomplices", 310, Rarity.COMMON, mage.cards.o.OkosAccomplices.class));
