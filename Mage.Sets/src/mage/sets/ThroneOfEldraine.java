@@ -98,6 +98,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Questing Beast", 171, Rarity.MYTHIC, mage.cards.q.QuestingBeast.class));
         cards.add(new SetCardInfo("Rankle, Master of Pranks", 101, Rarity.MYTHIC, mage.cards.r.RankleMasterOfPranks.class));
         cards.add(new SetCardInfo("Return to Nature", 173, Rarity.COMMON, mage.cards.r.ReturnToNature.class));
+        cards.add(new SetCardInfo("Robber of the Rich", 138, Rarity.MYTHIC, mage.cards.r.RobberOfTheRich.class));
         cards.add(new SetCardInfo("Rosethorn Acolyte", 174, Rarity.COMMON, mage.cards.r.RosethornAcolyte.class));
         cards.add(new SetCardInfo("Roving Keep", 228, Rarity.COMMON, mage.cards.r.RovingKeep.class));
         cards.add(new SetCardInfo("Rowan's Battleguard", 306, Rarity.UNCOMMON, mage.cards.r.RowansBattleguard.class));
