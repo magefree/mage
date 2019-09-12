@@ -80,6 +80,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Giant Killer", 14, Rarity.RARE, mage.cards.g.GiantKiller.class));
         cards.add(new SetCardInfo("Gilded Goose", 160, Rarity.RARE, mage.cards.g.GildedGoose.class));
         cards.add(new SetCardInfo("Gingerbrute", 219, Rarity.COMMON, mage.cards.g.Gingerbrute.class));
+        cards.add(new SetCardInfo("Glass Casket", 15, Rarity.UNCOMMON, mage.cards.g.GlassCasket.class));
         cards.add(new SetCardInfo("Gluttonous Troll", 327, Rarity.RARE, mage.cards.g.GluttonousTroll.class));
         cards.add(new SetCardInfo("Golden Egg", 220, Rarity.COMMON, mage.cards.g.GoldenEgg.class));
         cards.add(new SetCardInfo("Harmonious Archon", 17, Rarity.MYTHIC, mage.cards.h.HarmoniousArchon.class));
