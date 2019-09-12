@@ -43,7 +43,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Bramblefort Fink", 311, Rarity.UNCOMMON, mage.cards.b.BramblefortFink.class));
         cards.add(new SetCardInfo("Brimstone Trebuchet", 116, Rarity.COMMON, mage.cards.b.BrimstoneTrebuchet.class));
         cards.add(new SetCardInfo("Burning-Yard Trainer", 117, Rarity.UNCOMMON, mage.cards.b.BurningYardTrainer.class));
-        cards.add(new SetCardInfo("Charming Prince", 335, Rarity.RARE, mage.cards.c.CharmingPrince.class));
+        cards.add(new SetCardInfo("Charming Prince", 8, Rarity.RARE, mage.cards.c.CharmingPrince.class));
         cards.add(new SetCardInfo("Chittering Witch", 319, Rarity.RARE, mage.cards.c.ChitteringWitch.class));
         cards.add(new SetCardInfo("Chulane, Teller of Tales", 326, Rarity.MYTHIC, mage.cards.c.ChulaneTellerOfTales.class));
         cards.add(new SetCardInfo("Clackbridge Troll", 84, Rarity.RARE, mage.cards.c.ClackbridgeTroll.class));
@@ -108,6 +108,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Piper of the Swarm", 100, Rarity.RARE, mage.cards.p.PiperOfTheSwarm.class));
         cards.add(new SetCardInfo("Questing Beast", 171, Rarity.MYTHIC, mage.cards.q.QuestingBeast.class));
         cards.add(new SetCardInfo("Rankle, Master of Pranks", 101, Rarity.MYTHIC, mage.cards.r.RankleMasterOfPranks.class));
+        cards.add(new SetCardInfo("Reave Soul", 103, Rarity.COMMON, mage.cards.r.ReaveSoul.class));
         cards.add(new SetCardInfo("Return to Nature", 173, Rarity.COMMON, mage.cards.r.ReturnToNature.class));
         cards.add(new SetCardInfo("Righteousness", 27, Rarity.UNCOMMON, mage.cards.r.Righteousness.class));
         cards.add(new SetCardInfo("Robber of the Rich", 138, Rarity.MYTHIC, mage.cards.r.RobberOfTheRich.class));
@@ -128,6 +129,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Skullknocker Ogre", 142, Rarity.UNCOMMON, mage.cards.s.SkullknockerOgre.class));
         cards.add(new SetCardInfo("Slaying Fire", 143, Rarity.UNCOMMON, mage.cards.s.SlayingFire.class));
         cards.add(new SetCardInfo("Smitten Swordmaster", 105, Rarity.COMMON, mage.cards.s.SmittenSwordmaster.class));
+        cards.add(new SetCardInfo("Sorcerous Spyglass", 233, Rarity.RARE, mage.cards.s.SorcerousSpyglass.class));
         cards.add(new SetCardInfo("Spinning Wheel", 234, Rarity.UNCOMMON, mage.cards.s.SpinningWheel.class));
         cards.add(new SetCardInfo("Steelbane Hydra", 322, Rarity.RARE, mage.cards.s.SteelbaneHydra.class));
         cards.add(new SetCardInfo("Steelclaw Lance", 202, Rarity.UNCOMMON, mage.cards.s.SteelclawLance.class));

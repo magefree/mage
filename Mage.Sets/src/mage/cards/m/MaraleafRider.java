@@ -1,5 +1,6 @@
 package mage.cards.m;
 
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -26,6 +27,8 @@ public final class MaraleafRider extends CardImpl {
 
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.KNIGHT);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(1);
 
         // Sacrifice a Food: Target creature blocks Maraleaf Rider this turn if able.
         Ability ability = new SimpleActivatedAbility(
