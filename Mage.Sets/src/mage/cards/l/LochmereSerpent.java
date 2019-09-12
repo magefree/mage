@@ -58,7 +58,7 @@ public final class LochmereSerpent extends CardImpl {
 
         // {U}{B}: Exile five target cards from an opponent's graveyard. Return Lochmere Serpent from your graveyard to your hand. Activate this ability only any time you could cast a sorcery.
         ability = new ActivateAsSorceryActivatedAbility(
-                Zone.BATTLEFIELD,
+                Zone.GRAVEYARD,
                 new ExileTargetEffect().setText("Exile five target cards from an opponent's graveyard."),
                 new ManaCostsImpl("{U}{B}")
         );
