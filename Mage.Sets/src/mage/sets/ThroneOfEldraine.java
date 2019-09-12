@@ -39,6 +39,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Belle of the Brawl", 78, Rarity.UNCOMMON, mage.cards.b.BelleOfTheBrawl.class));
         cards.add(new SetCardInfo("Beloved Princess", 7, Rarity.COMMON, mage.cards.b.BelovedPrincess.class));
         cards.add(new SetCardInfo("Blow Your House Down", 114, Rarity.COMMON, mage.cards.b.BlowYourHouseDown.class));
+        cards.add(new SetCardInfo("Bog Naughty", 80, Rarity.UNCOMMON, mage.cards.b.BogNaughty.class));
         cards.add(new SetCardInfo("Bramblefort Fink", 311, Rarity.UNCOMMON, mage.cards.b.BramblefortFink.class));
         cards.add(new SetCardInfo("Brimstone Trebuchet", 116, Rarity.COMMON, mage.cards.b.BrimstoneTrebuchet.class));
         cards.add(new SetCardInfo("Burning-Yard Trainer", 117, Rarity.UNCOMMON, mage.cards.b.BurningYardTrainer.class));
