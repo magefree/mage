@@ -54,6 +54,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Corridor Monitor", 41, Rarity.COMMON, mage.cards.c.CorridorMonitor.class));
         cards.add(new SetCardInfo("Crystal Slipper", 119, Rarity.COMMON, mage.cards.c.CrystalSlipper.class));
         cards.add(new SetCardInfo("Curious Pair", 150, Rarity.COMMON, mage.cards.c.CuriousPair.class));
+        cards.add(new SetCardInfo("Deafening Silence", 10, Rarity.UNCOMMON, mage.cards.d.DeafeningSilence.class));
         cards.add(new SetCardInfo("Doom Foretold", 187, Rarity.RARE, mage.cards.d.DoomForetold.class));
         cards.add(new SetCardInfo("Edgewall Innkeeper", 151, Rarity.UNCOMMON, mage.cards.e.EdgewallInnkeeper.class));
         cards.add(new SetCardInfo("Elite Headhunter", 209, Rarity.UNCOMMON, mage.cards.e.EliteHeadhunter.class));
