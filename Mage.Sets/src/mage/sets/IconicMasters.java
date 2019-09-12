@@ -120,8 +120,8 @@ public final class IconicMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Festering Newt", 90, Rarity.COMMON, mage.cards.f.FesteringNewt.class));
         cards.add(new SetCardInfo("Foul-Tongue Invocation", 91, Rarity.COMMON, mage.cards.f.FoulTongueInvocation.class));
         cards.add(new SetCardInfo("Grisly Spectacle", 92, Rarity.COMMON, mage.cards.g.GrislySpectacle.class));
-        cards.add(new SetCardInfo("Indulgent Tormentor", 93, Rarity.UNCOMMON, mage.cards.i.IndulgentTormentor.class));
-        cards.add(new SetCardInfo("Haunting Hymn", 94, Rarity.UNCOMMON, mage.cards.h.HauntingHymn.class));
+        cards.add(new SetCardInfo("Haunting Hymn", 93, Rarity.UNCOMMON, mage.cards.h.HauntingHymn.class));
+        cards.add(new SetCardInfo("Indulgent Tormentor", 94, Rarity.UNCOMMON, mage.cards.i.IndulgentTormentor.class));
         cards.add(new SetCardInfo("Kokusho, the Evening Star", 95, Rarity.RARE, mage.cards.k.KokushoTheEveningStar.class));
         cards.add(new SetCardInfo("Lord of the Pit", 96, Rarity.RARE, mage.cards.l.LordOfThePit.class));
         cards.add(new SetCardInfo("Mer-Ek Nightblade", 97, Rarity.UNCOMMON, mage.cards.m.MerEkNightblade.class));
@@ -139,9 +139,9 @@ public final class IconicMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Tavern Swindler", 109, Rarity.UNCOMMON, mage.cards.t.TavernSwindler.class));
         cards.add(new SetCardInfo("Thoughtseize", 110, Rarity.RARE, mage.cards.t.Thoughtseize.class));
         cards.add(new SetCardInfo("Thrill-Kill Assassin", 111, Rarity.COMMON, mage.cards.t.ThrillKillAssassin.class));
-        cards.add(new SetCardInfo("Virulent Swipe", 112, Rarity.COMMON, mage.cards.v.VirulentSwipe.class));
-        cards.add(new SetCardInfo("Wight of Precinct Six", 113, Rarity.COMMON, mage.cards.w.WightOfPrecinctSix.class));
-        cards.add(new SetCardInfo("Ulcerate", 114, Rarity.UNCOMMON, mage.cards.u.Ulcerate.class));
+        cards.add(new SetCardInfo("Ulcerate", 112, Rarity.UNCOMMON, mage.cards.u.Ulcerate.class));
+        cards.add(new SetCardInfo("Virulent Swipe", 113, Rarity.COMMON, mage.cards.v.VirulentSwipe.class));
+        cards.add(new SetCardInfo("Wight of Precinct Six", 114, Rarity.COMMON, mage.cards.w.WightOfPrecinctSix.class));
         cards.add(new SetCardInfo("Wrench Mind", 115, Rarity.COMMON, mage.cards.w.WrenchMind.class));
         cards.add(new SetCardInfo("Anger of the Gods", 116, Rarity.RARE, mage.cards.a.AngerOfTheGods.class));
         cards.add(new SetCardInfo("Battle-Rattle Shaman", 117, Rarity.COMMON, mage.cards.b.BattleRattleShaman.class));
@@ -165,8 +165,8 @@ public final class IconicMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Keldon Halberdier", 135, Rarity.COMMON, mage.cards.k.KeldonHalberdier.class));
         cards.add(new SetCardInfo("Kiki-Jiki, Mirror Breaker", 136, Rarity.MYTHIC, mage.cards.k.KikiJikiMirrorBreaker.class));
         cards.add(new SetCardInfo("Kiln Fiend", 137, Rarity.COMMON, mage.cards.k.KilnFiend.class));
-        cards.add(new SetCardInfo("Mark of Mutiny", 138, Rarity.COMMON, mage.cards.m.MarkOfMutiny.class));
-        cards.add(new SetCardInfo("Magus of the Moon", 139, Rarity.RARE, mage.cards.m.MagusOfTheMoon.class));
+        cards.add(new SetCardInfo("Magus of the Moon", 138, Rarity.RARE, mage.cards.m.MagusOfTheMoon.class));
+        cards.add(new SetCardInfo("Mark of Mutiny", 139, Rarity.COMMON, mage.cards.m.MarkOfMutiny.class));
         cards.add(new SetCardInfo("Monastery Swiftspear", 140, Rarity.UNCOMMON, mage.cards.m.MonasterySwiftspear.class));
         cards.add(new SetCardInfo("Pillar of Flame", 141, Rarity.COMMON, mage.cards.p.PillarOfFlame.class));
         cards.add(new SetCardInfo("Prodigal Pyromancer", 142, Rarity.UNCOMMON, mage.cards.p.ProdigalPyromancer.class));
@@ -194,8 +194,8 @@ public final class IconicMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Genesis Wave", 164, Rarity.RARE, mage.cards.g.GenesisWave.class));
         cards.add(new SetCardInfo("Greater Basilisk", 165, Rarity.COMMON, mage.cards.g.GreaterBasilisk.class));
         cards.add(new SetCardInfo("Heroes' Bane", 166, Rarity.UNCOMMON, mage.cards.h.HeroesBane.class));
-        cards.add(new SetCardInfo("Hunting Pack", 167, Rarity.UNCOMMON, mage.cards.h.HuntingPack.class));
-        cards.add(new SetCardInfo("Hunt the Weak", 168, Rarity.COMMON, mage.cards.h.HuntTheWeak.class));
+        cards.add(new SetCardInfo("Hunt the Weak", 167, Rarity.COMMON, mage.cards.h.HuntTheWeak.class));
+        cards.add(new SetCardInfo("Hunting Pack", 168, Rarity.UNCOMMON, mage.cards.h.HuntingPack.class));
         cards.add(new SetCardInfo("Inspiring Call", 169, Rarity.UNCOMMON, mage.cards.i.InspiringCall.class));
         cards.add(new SetCardInfo("Ivy Elemental", 170, Rarity.COMMON, mage.cards.i.IvyElemental.class));
         cards.add(new SetCardInfo("Jaddi Offshoot", 171, Rarity.COMMON, mage.cards.j.JaddiOffshoot.class));
