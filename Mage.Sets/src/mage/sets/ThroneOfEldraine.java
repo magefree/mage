@@ -130,6 +130,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Raging Redcap", 134, Rarity.COMMON, mage.cards.r.RagingRedcap.class));
         cards.add(new SetCardInfo("Rankle, Master of Pranks", 101, Rarity.MYTHIC, mage.cards.r.RankleMasterOfPranks.class));
         cards.add(new SetCardInfo("Reave Soul", 103, Rarity.COMMON, mage.cards.r.ReaveSoul.class));
+        cards.add(new SetCardInfo("Redcap Melee", 135, Rarity.UNCOMMON, mage.cards.r.RedcapMelee.class));
         cards.add(new SetCardInfo("Return to Nature", 173, Rarity.COMMON, mage.cards.r.ReturnToNature.class));
         cards.add(new SetCardInfo("Righteousness", 27, Rarity.UNCOMMON, mage.cards.r.Righteousness.class));
         cards.add(new SetCardInfo("Robber of the Rich", 138, Rarity.MYTHIC, mage.cards.r.RobberOfTheRich.class));
