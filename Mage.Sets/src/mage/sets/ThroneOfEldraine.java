@@ -36,6 +36,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Ardenvale Tactician", 5, Rarity.COMMON, mage.cards.a.ArdenvaleTactician.class));
         cards.add(new SetCardInfo("Bake into a Pie", 76, Rarity.COMMON, mage.cards.b.BakeIntoAPie.class));
         cards.add(new SetCardInfo("Banish into Fable", 325, Rarity.RARE, mage.cards.b.BanishIntoFable.class));
+        cards.add(new SetCardInfo("Barge In", 112, Rarity.COMMON, mage.cards.b.BargeIn.class));
         cards.add(new SetCardInfo("Beanstalk Giant", 149, Rarity.UNCOMMON, mage.cards.b.BeanstalkGiant.class));
         cards.add(new SetCardInfo("Belle of the Brawl", 78, Rarity.UNCOMMON, mage.cards.b.BelleOfTheBrawl.class));
         cards.add(new SetCardInfo("Beloved Princess", 7, Rarity.COMMON, mage.cards.b.BelovedPrincess.class));
