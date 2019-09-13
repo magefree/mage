@@ -1,6 +1,7 @@
 package mage.cards.a;
 
 import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -32,7 +33,7 @@ public final class ArcanistsOwl extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Arcanist's Owl enters the battlefield, look at the top four cards of your library. You may reveal an artifact or enchantment card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
-        this.getSpellAbility().addEffect(
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new LookLibraryAndPickControllerEffect(
                         new StaticValue(4), false, new StaticValue(1), filter,
                         Zone.LIBRARY, false, true, false, Zone.HAND,
@@ -40,7 +41,7 @@ public final class ArcanistsOwl extends CardImpl {
                 ).setBackInRandomOrder(true).setText("Look at the top four cards of your library. " +
                         "You may reveal an artifact or enchantment from among them and put it into your hand. " +
                         "Put the rest on the bottom of your library in a random order.")
-        );
+        ));
     }
 
     private ArcanistsOwl(final ArcanistsOwl card) {
