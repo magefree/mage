@@ -163,6 +163,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Tome of Legends", 332, Rarity.RARE, mage.cards.t.TomeOfLegends.class));
         cards.add(new SetCardInfo("Tournament Grounds", 248, Rarity.UNCOMMON, mage.cards.t.TournamentGrounds.class));
         cards.add(new SetCardInfo("Trail of Crumbs", 179, Rarity.UNCOMMON, mage.cards.t.TrailOfCrumbs.class));
+        cards.add(new SetCardInfo("Trapped in the Tower", 33, Rarity.COMMON, mage.cards.t.TrappedInTheTower.class));
         cards.add(new SetCardInfo("True Love's Kiss", 34, Rarity.COMMON, mage.cards.t.TrueLovesKiss.class));
         cards.add(new SetCardInfo("Turn into a Pumpkin", 69, Rarity.UNCOMMON, mage.cards.t.TurnIntoAPumpkin.class));
         cards.add(new SetCardInfo("Venerable Knight", 35, Rarity.UNCOMMON, mage.cards.v.VenerableKnight.class));
