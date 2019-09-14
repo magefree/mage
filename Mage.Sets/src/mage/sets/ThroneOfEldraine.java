@@ -84,6 +84,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Folio of Fancies", 46, Rarity.RARE, mage.cards.f.FolioOfFancies.class));
         cards.add(new SetCardInfo("Foulmire Knight", 90, Rarity.UNCOMMON, mage.cards.f.FoulmireKnight.class));
         cards.add(new SetCardInfo("Frogify", 47, Rarity.UNCOMMON, mage.cards.f.Frogify.class));
+        cards.add(new SetCardInfo("Gadwick, the Wizened", 48, Rarity.RARE, mage.cards.g.GadwickTheWizened.class));
         cards.add(new SetCardInfo("Garenbrig Paladin", 157, Rarity.COMMON, mage.cards.g.GarenbrigPaladin.class));
         cards.add(new SetCardInfo("Garrison Griffin", 305, Rarity.COMMON, mage.cards.g.GarrisonGriffin.class));
         cards.add(new SetCardInfo("Garruk, Cursed Huntsman", 191, Rarity.MYTHIC, mage.cards.g.GarrukCursedHuntsman.class));
