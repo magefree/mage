@@ -162,6 +162,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Slaying Fire", 143, Rarity.UNCOMMON, mage.cards.s.SlayingFire.class));
         cards.add(new SetCardInfo("Smitten Swordmaster", 105, Rarity.COMMON, mage.cards.s.SmittenSwordmaster.class));
         cards.add(new SetCardInfo("Sorcerous Spyglass", 233, Rarity.RARE, mage.cards.s.SorcerousSpyglass.class));
+        cards.add(new SetCardInfo("Specter's Shriek", 106, Rarity.UNCOMMON, mage.cards.s.SpectersShriek.class));
         cards.add(new SetCardInfo("Spinning Wheel", 234, Rarity.UNCOMMON, mage.cards.s.SpinningWheel.class));
         cards.add(new SetCardInfo("Steelbane Hydra", 322, Rarity.RARE, mage.cards.s.SteelbaneHydra.class));
         cards.add(new SetCardInfo("Steelclaw Lance", 202, Rarity.UNCOMMON, mage.cards.s.SteelclawLance.class));
