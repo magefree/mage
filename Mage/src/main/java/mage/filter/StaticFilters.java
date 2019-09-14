@@ -139,6 +139,12 @@ public final class StaticFilters {
         FILTER_CARD_INSTANT_OR_SORCERY.setLockedFilter(true);
     }
 
+    public static final FilterInstantOrSorceryCard FILTER_CARD_INSTANT_AND_SORCERY = new FilterInstantOrSorceryCard("instant and sorcery card");
+
+    static {
+        FILTER_CARD_INSTANT_AND_SORCERY.setLockedFilter(true);
+    }
+
     public static final FilterPermanent FILTER_PERMANENT = new FilterPermanent();
 
     static {
