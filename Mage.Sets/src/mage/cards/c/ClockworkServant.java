@@ -1,9 +1,7 @@
 package mage.cards.c;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.AdamantCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -11,10 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.Game;
 import mage.watchers.common.ManaSpentToCastWatcher;
 
-import java.util.Arrays;
 import java.util.UUID;
 
 /**
@@ -32,7 +28,7 @@ public final class ClockworkServant extends CardImpl {
         // Adamant - When Clockwork Servant enters the battlefield, if at least three mana of the same color was spent to cast it, draw a card.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)),
-                ClockworkServantCondition.instance, "<br><i>Adamant</i> &mdash; When {this} enters the battlefield, " +
+                AdamantCondition.ALL, "<br><i>Adamant</i> &mdash; When {this} enters the battlefield, " +
                 "if at least three mana of the same color was spent to cast it, draw a card."
         ), new ManaSpentToCastWatcher());
     }
@@ -44,16 +40,5 @@ public final class ClockworkServant extends CardImpl {
     @Override
     public ClockworkServant copy() {
         return new ClockworkServant(this);
-    }
-}
-
-enum ClockworkServantCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return Arrays
-                .stream(AdamantCondition.values())
-                .anyMatch(adamantCondition -> adamantCondition.apply(game, source));
     }
 }

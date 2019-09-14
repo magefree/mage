@@ -8,6 +8,8 @@ import mage.constants.ColoredManaSymbol;
 import mage.game.Game;
 import mage.watchers.common.ManaSpentToCastWatcher;
 
+import java.util.Arrays;
+
 /**
  * @author TheElk801
  */
@@ -16,7 +18,8 @@ public enum AdamantCondition implements Condition {
     BLUE(ColoredManaSymbol.U),
     BLACK(ColoredManaSymbol.B),
     RED(ColoredManaSymbol.R),
-    GREEN(ColoredManaSymbol.G);
+    GREEN(ColoredManaSymbol.G),
+    ALL(null);
 
     private final ColoredManaSymbol coloredManaSymbol;
 
@@ -27,6 +30,12 @@ public enum AdamantCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         if (source.getAbilityType() == AbilityType.SPELL) {
+            if (coloredManaSymbol == null) {
+                return Arrays
+                        .stream(ColoredManaSymbol.values())
+                        .map(source.getManaCostsToPay().getPayment()::getColor)
+                        .anyMatch(i -> i > 2);
+            }
             return source.getManaCostsToPay().getPayment().getColor(coloredManaSymbol) > 2;
         }
         ManaSpentToCastWatcher watcher = game.getState().getWatcher(ManaSpentToCastWatcher.class, source.getSourceId());
@@ -36,6 +45,12 @@ public enum AdamantCondition implements Condition {
         Mana payment = watcher.getAndResetLastPayment();
         if (payment == null) {
             return false;
+        }
+        if (coloredManaSymbol == null) {
+            return Arrays
+                    .stream(ColoredManaSymbol.values())
+                    .map(payment::getColor)
+                    .anyMatch(i -> i > 2);
         }
         return payment.getColor(coloredManaSymbol) > 2;
     }
