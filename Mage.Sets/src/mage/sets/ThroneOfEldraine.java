@@ -99,6 +99,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Insatiable Appetite", 162, Rarity.COMMON, mage.cards.i.InsatiableAppetite.class));
         cards.add(new SetCardInfo("Inspiring Veteran", 194, Rarity.UNCOMMON, mage.cards.i.InspiringVeteran.class));
         cards.add(new SetCardInfo("Into the Story", 50, Rarity.UNCOMMON, mage.cards.i.IntoTheStory.class));
+        cards.add(new SetCardInfo("Irencrag Feat", 127, Rarity.RARE, mage.cards.i.IrencragFeat.class));
         cards.add(new SetCardInfo("Joust", 129, Rarity.UNCOMMON, mage.cards.j.Joust.class));
         cards.add(new SetCardInfo("Jousting Dummy", 224, Rarity.COMMON, mage.cards.j.JoustingDummy.class));
         cards.add(new SetCardInfo("Keeper of Fables", 163, Rarity.UNCOMMON, mage.cards.k.KeeperOfFables.class));
