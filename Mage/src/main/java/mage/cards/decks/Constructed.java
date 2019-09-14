@@ -16,8 +16,8 @@ public class Constructed extends DeckValidator {
 
     private static final Logger logger = Logger.getLogger(DeckValidator.class);
 
-    protected static final List<String> anyNumberCardsAllowed = new ArrayList<>(Arrays.asList(
-            "Relentless Rats", "Shadowborn Apostle", "Rat Colony", "Persistent Petitioners"
+    private static final List<String> anyNumberCardsAllowed = new ArrayList<>(Arrays.asList(
+            "Relentless Rats", "Shadowborn Apostle", "Rat Colony", "Persistent Petitioners", "Seven Dwarves"
     ));
     protected static final List<String> basicLandNames = new ArrayList<>(Arrays.asList(
             "Forest", "Island", "Mountain", "Swamp", "Plains", "Wastes", "Snow-Covered Forest",
@@ -67,14 +67,8 @@ public class Constructed extends DeckValidator {
         Map<String, Integer> counts = new HashMap<>();
         countCards(counts, deck.getCards());
         countCards(counts, deck.getSideboard());
-        for (Entry<String, Integer> entry : counts.entrySet()) {
-            if (entry.getValue() > 4) {
-                if (!basicLandNames.contains(entry.getKey()) && !anyNumberCardsAllowed.contains(entry.getKey())) {
-                    invalid.put(entry.getKey(), "Too many: " + entry.getValue());
-                    valid = false;
-                }
-            }
-        }
+        valid = checkCounts(4, counts) && valid;
+
         for (String bannedCard : banned) {
             if (counts.containsKey(bannedCard)) {
                 invalid.put(bannedCard, "Banned");
@@ -178,5 +172,22 @@ public class Constructed extends DeckValidator {
             invalid.put(card.getName(), "Invalid set: " + card.getExpansionSetCode());
         }
         return legal;
+    }
+
+    protected boolean checkCounts(int maxCopies, Map<String, Integer> counts) {
+        boolean valid = true;
+        for (Entry<String, Integer> entry : counts.entrySet()) {
+            if (entry.getValue() > maxCopies
+                    && !basicLandNames.contains(entry.getKey())
+                    && !anyNumberCardsAllowed.contains(entry.getKey())) {
+                invalid.put(entry.getKey(), "Too many: " + entry.getValue());
+                valid = false;
+            }
+            if (entry.getValue() > 7 && entry.getKey().equals("Seven Dwarves")) {
+                invalid.put(entry.getKey(), "Too many: " + entry.getValue());
+                valid = false;
+            }
+        }
+        return valid;
     }
 }
