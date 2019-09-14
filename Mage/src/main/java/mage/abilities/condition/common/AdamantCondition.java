@@ -11,8 +11,6 @@ import mage.watchers.common.ManaSpentToCastWatcher;
 /**
  * @author TheElk801
  */
-
-
 public enum AdamantCondition implements Condition {
     WHITE(ColoredManaSymbol.W),
     BLUE(ColoredManaSymbol.U),
@@ -20,7 +18,7 @@ public enum AdamantCondition implements Condition {
     RED(ColoredManaSymbol.R),
     GREEN(ColoredManaSymbol.G);
 
-    protected ColoredManaSymbol coloredManaSymbol;
+    private final ColoredManaSymbol coloredManaSymbol;
 
     private AdamantCondition(ColoredManaSymbol coloredManaSymbol) {
         this.coloredManaSymbol = coloredManaSymbol;
@@ -29,7 +27,7 @@ public enum AdamantCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         if (source.getAbilityType() == AbilityType.SPELL) {
-            return (source.getManaCostsToPay().getPayment().getColor(coloredManaSymbol) > 0);
+            return source.getManaCostsToPay().getPayment().getColor(coloredManaSymbol) > 2;
         }
         ManaSpentToCastWatcher watcher = game.getState().getWatcher(ManaSpentToCastWatcher.class, source.getSourceId());
         if (watcher == null) {
