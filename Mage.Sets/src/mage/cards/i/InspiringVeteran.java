@@ -30,7 +30,7 @@ public final class InspiringVeteran extends CardImpl {
 
         // Other Knights you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(
-                new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter)
+                new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)
         ));
     }
 
