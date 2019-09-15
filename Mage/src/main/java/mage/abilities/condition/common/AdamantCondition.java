@@ -19,7 +19,7 @@ public enum AdamantCondition implements Condition {
     BLACK(ColoredManaSymbol.B),
     RED(ColoredManaSymbol.R),
     GREEN(ColoredManaSymbol.G),
-    ALL(null);
+    ANY(null);
 
     private final ColoredManaSymbol coloredManaSymbol;
 

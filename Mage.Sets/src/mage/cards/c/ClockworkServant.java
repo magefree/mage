@@ -28,7 +28,7 @@ public final class ClockworkServant extends CardImpl {
         // Adamant - When Clockwork Servant enters the battlefield, if at least three mana of the same color was spent to cast it, draw a card.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)),
-                AdamantCondition.ALL, "<br><i>Adamant</i> &mdash; When {this} enters the battlefield, " +
+                AdamantCondition.ANY, "<br><i>Adamant</i> &mdash; When {this} enters the battlefield, " +
                 "if at least three mana of the same color was spent to cast it, draw a card."
         ), new ManaSpentToCastWatcher());
     }
