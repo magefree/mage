@@ -33,6 +33,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Animating Faerie", 38, Rarity.UNCOMMON, mage.cards.a.AnimatingFaerie.class));
         cards.add(new SetCardInfo("Arcane Signet", 331, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Arcanist's Owl", 206, Rarity.UNCOMMON, mage.cards.a.ArcanistsOwl.class));
+        cards.add(new SetCardInfo("Ardenvale Paladin", 4, Rarity.COMMON, mage.cards.a.ArdenvalePaladin.class));
         cards.add(new SetCardInfo("Ardenvale Tactician", 5, Rarity.COMMON, mage.cards.a.ArdenvaleTactician.class));
         cards.add(new SetCardInfo("Ayara, First of Locthwain", 75, Rarity.RARE, mage.cards.a.AyaraFirstOfLocthwain.class));
         cards.add(new SetCardInfo("Bake into a Pie", 76, Rarity.COMMON, mage.cards.b.BakeIntoAPie.class));
@@ -114,6 +115,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Knight of the Keep", 19, Rarity.COMMON, mage.cards.k.KnightOfTheKeep.class));
         cards.add(new SetCardInfo("Knights' Charge", 328, Rarity.RARE, mage.cards.k.KnightsCharge.class));
         cards.add(new SetCardInfo("Korvold, Fae-Cursed King", 329, Rarity.MYTHIC, mage.cards.k.KorvoldFaeCursedKing.class));
+        cards.add(new SetCardInfo("Linden, the Steadfast Queen", 20, Rarity.RARE, mage.cards.l.LindenTheSteadfastQueen.class));
         cards.add(new SetCardInfo("Loch Dragon", 211, Rarity.UNCOMMON, mage.cards.l.LochDragon.class));
         cards.add(new SetCardInfo("Lochmere Serpent", 195, Rarity.RARE, mage.cards.l.LochmereSerpent.class));
         cards.add(new SetCardInfo("Lost Legion", 94, Rarity.COMMON, mage.cards.l.LostLegion.class));
@@ -143,6 +145,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Piper of the Swarm", 100, Rarity.RARE, mage.cards.p.PiperOfTheSwarm.class));
         cards.add(new SetCardInfo("Questing Beast", 171, Rarity.MYTHIC, mage.cards.q.QuestingBeast.class));
         cards.add(new SetCardInfo("Raging Redcap", 134, Rarity.COMMON, mage.cards.r.RagingRedcap.class));
+        cards.add(new SetCardInfo("Rally for the Throne", 25, Rarity.UNCOMMON, mage.cards.r.RallyForTheThrone.class));
         cards.add(new SetCardInfo("Rankle, Master of Pranks", 101, Rarity.MYTHIC, mage.cards.r.RankleMasterOfPranks.class));
         cards.add(new SetCardInfo("Reave Soul", 103, Rarity.COMMON, mage.cards.r.ReaveSoul.class));
         cards.add(new SetCardInfo("Redcap Melee", 135, Rarity.UNCOMMON, mage.cards.r.RedcapMelee.class));
