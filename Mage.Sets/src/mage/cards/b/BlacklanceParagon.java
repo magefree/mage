@@ -20,7 +20,7 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author Tsirides
  */
 public final class BlacklanceParagon extends CardImpl {
 
