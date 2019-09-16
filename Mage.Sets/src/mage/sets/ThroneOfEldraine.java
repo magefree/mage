@@ -42,6 +42,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Beanstalk Giant", 149, Rarity.UNCOMMON, mage.cards.b.BeanstalkGiant.class));
         cards.add(new SetCardInfo("Belle of the Brawl", 78, Rarity.UNCOMMON, mage.cards.b.BelleOfTheBrawl.class));
         cards.add(new SetCardInfo("Beloved Princess", 7, Rarity.COMMON, mage.cards.b.BelovedPrincess.class));
+        cards.add(new SetCardInfo("Blacklance Paragon", 79, Rarity.RARE, mage.cards.b.BlacklanceParagon.class));        
         cards.add(new SetCardInfo("Blow Your House Down", 114, Rarity.COMMON, mage.cards.b.BlowYourHouseDown.class));
         cards.add(new SetCardInfo("Bog Naughty", 80, Rarity.UNCOMMON, mage.cards.b.BogNaughty.class));
         cards.add(new SetCardInfo("Bonecrusher Giant", 115, Rarity.RARE, mage.cards.b.BonecrusherGiant.class));
