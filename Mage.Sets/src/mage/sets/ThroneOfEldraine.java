@@ -103,6 +103,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Henge Walker", 221, Rarity.COMMON, mage.cards.h.HengeWalker.class));
         cards.add(new SetCardInfo("Heraldic Banner", 222, Rarity.UNCOMMON, mage.cards.h.HeraldicBanner.class));
         cards.add(new SetCardInfo("Hypnotic Sprite", 49, Rarity.UNCOMMON, mage.cards.h.HypnoticSprite.class));
+        cards.add(new SetCardInfo("Idyllic Grange", 246, Rarity.COMMON, mage.cards.i.IdyllicGrange.class));
         cards.add(new SetCardInfo("Inquisitive Puppet", 223, Rarity.UNCOMMON, mage.cards.i.InquisitivePuppet.class));
         cards.add(new SetCardInfo("Insatiable Appetite", 162, Rarity.COMMON, mage.cards.i.InsatiableAppetite.class));
         cards.add(new SetCardInfo("Inspiring Veteran", 194, Rarity.UNCOMMON, mage.cards.i.InspiringVeteran.class));
