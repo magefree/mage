@@ -133,6 +133,13 @@ public final class StaticFilters {
         FILTER_CARD_A_NON_LAND.setLockedFilter(true);
     }
 
+
+    public static final FilterNonlandCard FILTER_CARDS_NON_LAND = new FilterNonlandCard("nonland cards");
+
+    static {
+        FILTER_CARDS_NON_LAND.setLockedFilter(true);
+    }
+
     public static final FilterInstantOrSorceryCard FILTER_CARD_INSTANT_OR_SORCERY = new FilterInstantOrSorceryCard();
 
     static {

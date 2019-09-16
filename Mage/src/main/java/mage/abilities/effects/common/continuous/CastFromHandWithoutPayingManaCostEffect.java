@@ -10,7 +10,8 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
 import mage.cards.SplitCardHalf;
 import mage.constants.*;
-import mage.filter.common.FilterNonlandCard;
+import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -19,13 +20,26 @@ import java.util.UUID;
 
 public class CastFromHandWithoutPayingManaCostEffect extends ContinuousEffectImpl {
 
+    private final FilterCard filter;
+    private final boolean fromHand;
+
     public CastFromHandWithoutPayingManaCostEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "You may cast nonland cards from your hand without paying their mana costs";
+        this(StaticFilters.FILTER_CARDS_NON_LAND, true);
     }
 
-    public CastFromHandWithoutPayingManaCostEffect(final CastFromHandWithoutPayingManaCostEffect effect) {
+    public CastFromHandWithoutPayingManaCostEffect(FilterCard filter, boolean fromHand) {
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        this.filter = filter;
+        this.fromHand = fromHand;
+        staticText = "You may cast " + filter.getMessage()
+                + (fromHand ? " from your hand" : "")
+                + " without paying their mana costs";
+    }
+
+    private CastFromHandWithoutPayingManaCostEffect(final CastFromHandWithoutPayingManaCostEffect effect) {
         super(effect);
+        this.filter = effect.filter;
+        this.fromHand = effect.fromHand;
     }
 
     @Override
@@ -36,12 +50,19 @@ public class CastFromHandWithoutPayingManaCostEffect extends ContinuousEffectImp
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            controller.getAlternativeSourceCosts().add(new AlternativeCostSourceAbility(
-                    null, new CompoundCondition(SourceIsSpellCondition.instance, new IsBeingCastFromHandCondition()), null, new FilterNonlandCard(), true));
-            return true;
+        if (controller == null) {
+            return false;
         }
-        return false;
+        Condition condition;
+        if (fromHand) {
+            condition = new CompoundCondition(SourceIsSpellCondition.instance, IsBeingCastFromHandCondition.instance);
+        } else {
+            condition = SourceIsSpellCondition.instance;
+        }
+        controller.getAlternativeSourceCosts().add(new AlternativeCostSourceAbility(
+                null, condition, null, filter, true
+        ));
+        return true;
     }
 
     @Override
@@ -55,7 +76,8 @@ public class CastFromHandWithoutPayingManaCostEffect extends ContinuousEffectImp
     }
 }
 
-class IsBeingCastFromHandCondition implements Condition {
+enum IsBeingCastFromHandCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
