@@ -21,7 +21,7 @@ public final class WorthyKnight extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("a Knight spell");
 
     static {
-        filter.add(new SubtypePredicate(SubType.HUMAN));
+        filter.add(new SubtypePredicate(SubType.KNIGHT));
     }
 
     public WorthyKnight(UUID ownerId, CardSetInfo setInfo) {
