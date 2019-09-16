@@ -61,6 +61,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Dance of the Manse", 186, Rarity.RARE, mage.cards.d.DanceOfTheManse.class));
         cards.add(new SetCardInfo("Deafening Silence", 10, Rarity.UNCOMMON, mage.cards.d.DeafeningSilence.class));
         cards.add(new SetCardInfo("Doom Foretold", 187, Rarity.RARE, mage.cards.d.DoomForetold.class));
+        cards.add(new SetCardInfo("Drown in the Loch", 188, Rarity.UNCOMMON, mage.cards.d.DrownInTheLoch.class));
         cards.add(new SetCardInfo("Edgewall Innkeeper", 151, Rarity.UNCOMMON, mage.cards.e.EdgewallInnkeeper.class));
         cards.add(new SetCardInfo("Elite Headhunter", 209, Rarity.UNCOMMON, mage.cards.e.EliteHeadhunter.class));
         cards.add(new SetCardInfo("Embercleave", 120, Rarity.MYTHIC, mage.cards.e.Embercleave.class));
