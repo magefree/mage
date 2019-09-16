@@ -24,7 +24,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class BlacklanceParagon extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.KNIGHT, "knight");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.KNIGHT, "Knight");
 
     public BlacklanceParagon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
@@ -40,7 +40,7 @@ public final class BlacklanceParagon extends CardImpl {
      
         // When Blacklance Paragon enters the battlefield, target Knight gains deathtouch and lifelink until end of turn. 
         Effect effect = new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("target knight gains deathtouch");
+        effect.setText("target Knight gains deathtouch");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect);
         effect = new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and lifelink until end of turn");
