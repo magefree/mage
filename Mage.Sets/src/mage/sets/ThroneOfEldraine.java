@@ -89,6 +89,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Flaxen Intruder", 155, Rarity.UNCOMMON, mage.cards.f.FlaxenIntruder.class));
         cards.add(new SetCardInfo("Folio of Fancies", 46, Rarity.RARE, mage.cards.f.FolioOfFancies.class));
         cards.add(new SetCardInfo("Forever Young", 89, Rarity.COMMON, mage.cards.f.ForeverYoung.class));
+        cards.add(new SetCardInfo("Fortifying Provisions", 13, Rarity.COMMON, mage.cards.f.FortifyingProvisions.class));
         cards.add(new SetCardInfo("Foulmire Knight", 90, Rarity.UNCOMMON, mage.cards.f.FoulmireKnight.class));
         cards.add(new SetCardInfo("Frogify", 47, Rarity.UNCOMMON, mage.cards.f.Frogify.class));
         cards.add(new SetCardInfo("Gadwick, the Wizened", 48, Rarity.RARE, mage.cards.g.GadwickTheWizened.class));
