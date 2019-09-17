@@ -42,13 +42,14 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Beanstalk Giant", 149, Rarity.UNCOMMON, mage.cards.b.BeanstalkGiant.class));
         cards.add(new SetCardInfo("Belle of the Brawl", 78, Rarity.UNCOMMON, mage.cards.b.BelleOfTheBrawl.class));
         cards.add(new SetCardInfo("Beloved Princess", 7, Rarity.COMMON, mage.cards.b.BelovedPrincess.class));
-        cards.add(new SetCardInfo("Blacklance Paragon", 79, Rarity.RARE, mage.cards.b.BlacklanceParagon.class));        
+        cards.add(new SetCardInfo("Blacklance Paragon", 79, Rarity.RARE, mage.cards.b.BlacklanceParagon.class));
         cards.add(new SetCardInfo("Blow Your House Down", 114, Rarity.COMMON, mage.cards.b.BlowYourHouseDown.class));
         cards.add(new SetCardInfo("Bog Naughty", 80, Rarity.UNCOMMON, mage.cards.b.BogNaughty.class));
         cards.add(new SetCardInfo("Bonecrusher Giant", 115, Rarity.RARE, mage.cards.b.BonecrusherGiant.class));
         cards.add(new SetCardInfo("Bramblefort Fink", 311, Rarity.UNCOMMON, mage.cards.b.BramblefortFink.class));
         cards.add(new SetCardInfo("Brimstone Trebuchet", 116, Rarity.COMMON, mage.cards.b.BrimstoneTrebuchet.class));
         cards.add(new SetCardInfo("Burning-Yard Trainer", 117, Rarity.UNCOMMON, mage.cards.b.BurningYardTrainer.class));
+        cards.add(new SetCardInfo("Castle Vantress", 242, Rarity.RARE, mage.cards.c.CastleVantress.class));
         cards.add(new SetCardInfo("Cauldron Familiar", 81, Rarity.UNCOMMON, mage.cards.c.CauldronFamiliar.class));
         cards.add(new SetCardInfo("Charming Prince", 8, Rarity.RARE, mage.cards.c.CharmingPrince.class));
         cards.add(new SetCardInfo("Chittering Witch", 319, Rarity.RARE, mage.cards.c.ChitteringWitch.class));
@@ -189,7 +190,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Steelbane Hydra", 322, Rarity.RARE, mage.cards.s.SteelbaneHydra.class));
         cards.add(new SetCardInfo("Steelclaw Lance", 202, Rarity.UNCOMMON, mage.cards.s.SteelclawLance.class));
         cards.add(new SetCardInfo("Stolen by the Fae", 66, Rarity.RARE, mage.cards.s.StolenByTheFae.class));
-        cards.add(new SetCardInfo("Stonecoil Serpent", 235, Rarity.RARE, mage.cards.s.StonecoilSerpent.class));        
+        cards.add(new SetCardInfo("Stonecoil Serpent", 235, Rarity.RARE, mage.cards.s.StonecoilSerpent.class));
         cards.add(new SetCardInfo("Syr Alin, the Lion's Claw", 32, Rarity.UNCOMMON, mage.cards.s.SyrAlinTheLionsClaw.class));
         cards.add(new SetCardInfo("Syr Carah, the Bold", 145, Rarity.UNCOMMON, mage.cards.s.SyrCarahTheBold.class));
         cards.add(new SetCardInfo("Syr Elenora, the Discerning", 67, Rarity.UNCOMMON, mage.cards.s.SyrElenoraTheDiscerning.class));
