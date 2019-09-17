@@ -148,6 +148,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Opt", 59, Rarity.COMMON, mage.cards.o.Opt.class));
         cards.add(new SetCardInfo("Order of Midnight", 99, Rarity.UNCOMMON, mage.cards.o.OrderOfMidnight.class));
         cards.add(new SetCardInfo("Outmuscle", 170, Rarity.COMMON, mage.cards.o.Outmuscle.class));
+        cards.add(new SetCardInfo("Overwhelmed Apprentice", 60, Rarity.UNCOMMON, mage.cards.o.OverwhelmedApprentice.class));
         cards.add(new SetCardInfo("Piper of the Swarm", 100, Rarity.RARE, mage.cards.p.PiperOfTheSwarm.class));
         cards.add(new SetCardInfo("Questing Beast", 171, Rarity.MYTHIC, mage.cards.q.QuestingBeast.class));
         cards.add(new SetCardInfo("Raging Redcap", 134, Rarity.COMMON, mage.cards.r.RagingRedcap.class));
