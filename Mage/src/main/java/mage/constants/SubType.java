@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 public enum SubType {
 
     //205.3k Instants and sorceries share their lists of subtypes; these subtypes are called spell types.
+    ADVENTURE("Adventure", SubTypeSet.SpellType),
     ARCANE("Arcane", SubTypeSet.SpellType),
     TRAP("Trap", SubTypeSet.SpellType),
     // 205.3i: Lands have their own unique set of subtypes; these subtypes are called land types.
