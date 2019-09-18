@@ -8,7 +8,7 @@ import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
+import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
@@ -53,8 +53,8 @@ public final class FeastingTrollKing extends CardImpl {
 
         // Sacrifice three Foods: Return Feasting Troll King from your graveyard to the battlefield. Activate this ability only during your turn.
         this.addAbility(new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD,
-                new ReturnSourceFromGraveyardToHandEffect(),
+                Zone.GRAVEYARD,
+                new ReturnSourceFromGraveyardToBattlefieldEffect(),
                 new SacrificeTargetCost(new TargetControlledPermanent(3, filter)),
                 MyTurnCondition.instance
         ));
