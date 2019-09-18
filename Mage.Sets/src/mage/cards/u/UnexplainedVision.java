@@ -7,6 +7,7 @@ import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.watchers.common.ManaSpentToCastWatcher;
 
 import java.util.UUID;
 
@@ -26,6 +27,7 @@ public final class UnexplainedVision extends CardImpl {
                 new ScryEffect(3), AdamantCondition.BLUE, "<br><i>Adamant</i> &mdash; " +
                 "If at least three blue mana was spent to cast this spell, scry 3."
         ));
+        this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
     }
 
     private UnexplainedVision(final UnexplainedVision card) {
