@@ -184,6 +184,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Searing Barrage", 140, Rarity.COMMON, mage.cards.s.SearingBarrage.class));
         cards.add(new SetCardInfo("Seven Dwarves", 141, Rarity.COMMON, mage.cards.s.SevenDwarves.class));
         cards.add(new SetCardInfo("Shambling Suit", 230, Rarity.UNCOMMON, mage.cards.s.ShamblingSuit.class));
+        cards.add(new SetCardInfo("Shepherd of the Flock", 28, Rarity.UNCOMMON, mage.cards.s.ShepherdOfTheFlock.class));
         cards.add(new SetCardInfo("Shimmer Dragon", 317, Rarity.RARE, mage.cards.s.ShimmerDragon.class));
         cards.add(new SetCardInfo("Shinechaser", 201, Rarity.UNCOMMON, mage.cards.s.Shinechaser.class));
         cards.add(new SetCardInfo("Shining Armor", 29, Rarity.COMMON, mage.cards.s.ShiningArmor.class));
