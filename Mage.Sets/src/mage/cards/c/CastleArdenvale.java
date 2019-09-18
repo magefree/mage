@@ -37,7 +37,7 @@ public final class CastleArdenvale extends CardImpl {
         // Castle Ardenvale enters the battlefield tapped unless you control a Plains.
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(
                 new TapSourceEffect(), condition
-        ), "tapped unless you control an Plains"));
+        ), "tapped unless you control a Plains"));
 
         // {T}: Add {W}.
         this.addAbility(new WhiteManaAbility());

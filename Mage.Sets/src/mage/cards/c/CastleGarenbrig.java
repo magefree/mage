@@ -40,7 +40,7 @@ public final class CastleGarenbrig extends CardImpl {
         // Castle Garenbrig enters the battlefield tapped unless you control a Forest.
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(
                 new TapSourceEffect(), condition
-        ), "tapped unless you control an Forest"));
+        ), "tapped unless you control a Forest"));
 
         // {T}: Add {G}.
         this.addAbility(new GreenManaAbility());
