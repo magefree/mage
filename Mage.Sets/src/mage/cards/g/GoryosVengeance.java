@@ -16,6 +16,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -35,6 +37,7 @@ public final class GoryosVengeance extends CardImpl {
 
     static {
         filter.add(new SupertypePredicate(SuperType.LEGENDARY));
+        filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
     public GoryosVengeance(UUID ownerId, CardSetInfo setInfo) {
