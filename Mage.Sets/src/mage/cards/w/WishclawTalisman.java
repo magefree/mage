@@ -48,7 +48,7 @@ public final class WishclawTalisman extends CardImpl {
                 Zone.BATTLEFIELD, new WishclawTalismanEffect(), new GenericManaCost(1), MyTurnCondition.instance
         );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new RemoveCountersSourceCost(CounterType.WISH.createInstance(3)));
+        ability.addCost(new RemoveCountersSourceCost(CounterType.WISH.createInstance()));
         this.addAbility(ability);
     }
 
