@@ -8,13 +8,15 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
+import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.RatToken;
@@ -28,7 +30,7 @@ import java.util.UUID;
  */
 public final class PiperOfTheSwarm extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.RAT, "Rats");
+    private static final FilterPermanent filter = new FilterCreaturePermanent(SubType.RAT, "Rats");
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent(SubType.RAT, "Rats");
 
     public PiperOfTheSwarm(UUID ownerId, CardSetInfo setInfo) {
@@ -41,7 +43,7 @@ public final class PiperOfTheSwarm extends CardImpl {
 
         // Rats you control have menace.
         this.addAbility(new SimpleStaticAbility(
-                new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter)
+                new GainAbilityControlledEffect(new MenaceAbility(), Duration.WhileOnBattlefield, filter)
         ));
 
         // {1}{B}, {T}: Create a 1/1 black Rat creature token.
