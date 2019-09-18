@@ -50,6 +50,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Brimstone Trebuchet", 116, Rarity.COMMON, mage.cards.b.BrimstoneTrebuchet.class));
         cards.add(new SetCardInfo("Burning-Yard Trainer", 117, Rarity.UNCOMMON, mage.cards.b.BurningYardTrainer.class));
         cards.add(new SetCardInfo("Castle Embereth", 239, Rarity.RARE, mage.cards.c.CastleEmbereth.class));
+        cards.add(new SetCardInfo("Castle Garenbrig", 240, Rarity.RARE, mage.cards.c.CastleGarenbrig.class));
         cards.add(new SetCardInfo("Castle Vantress", 242, Rarity.RARE, mage.cards.c.CastleVantress.class));
         cards.add(new SetCardInfo("Cauldron Familiar", 81, Rarity.UNCOMMON, mage.cards.c.CauldronFamiliar.class));
         cards.add(new SetCardInfo("Charming Prince", 8, Rarity.RARE, mage.cards.c.CharmingPrince.class));
