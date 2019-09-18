@@ -1,8 +1,11 @@
 package mage.cards.i;
 
+import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.mana.BasicManaEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -38,6 +41,8 @@ public final class IrencragFeat extends CardImpl {
 
 class IrencragFeatEffect extends OneShotEffect {
 
+    private static final Effect effect = new BasicManaEffect(Mana.RedMana(7));
+
     IrencragFeatEffect() {
         super(Outcome.Benefit);
         staticText = "Add seven {R}. You can cast only one more spell this turn.";
@@ -60,7 +65,7 @@ class IrencragFeatEffect extends OneShotEffect {
         }
         int spellsCast = watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(source.getControllerId());
         game.addEffect(new IrencragFeatCantCastEffect(spellsCast), source);
-        return true;
+        return effect.apply(game, source);
     }
 }
 
