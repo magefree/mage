@@ -221,6 +221,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Tuinvale Treefolk", 180, Rarity.COMMON, mage.cards.t.TuinvaleTreefolk.class));
         cards.add(new SetCardInfo("Turn into a Pumpkin", 69, Rarity.UNCOMMON, mage.cards.t.TurnIntoAPumpkin.class));
         cards.add(new SetCardInfo("Vantress Gargoyle", 71, Rarity.RARE, mage.cards.v.VantressGargoyle.class));
+        cards.add(new SetCardInfo("Vantress Paladin", 72, Rarity.COMMON, mage.cards.v.VantressPaladin.class));
         cards.add(new SetCardInfo("Venerable Knight", 35, Rarity.UNCOMMON, mage.cards.v.VenerableKnight.class));
         cards.add(new SetCardInfo("Wandermare", 204, Rarity.UNCOMMON, mage.cards.w.Wandermare.class));
         cards.add(new SetCardInfo("Weaselback Redcap", 148, Rarity.COMMON, mage.cards.w.WeaselbackRedcap.class));
