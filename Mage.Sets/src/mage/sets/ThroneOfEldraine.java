@@ -213,7 +213,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Thunderous Snapper", 215, Rarity.UNCOMMON, mage.cards.t.ThunderousSnapper.class));
         cards.add(new SetCardInfo("Tome Raider", 68, Rarity.COMMON, mage.cards.t.TomeRaider.class));
         cards.add(new SetCardInfo("Tome of Legends", 332, Rarity.RARE, mage.cards.t.TomeOfLegends.class));
-        cards.add(new SetCardInfo("Torbran, Thane of Red Fell", 367, Rarity.RARE, mage.cards.t.TorbranThaneOfRedFell.class));
+        cards.add(new SetCardInfo("Torbran, Thane of Red Fell", 147, Rarity.RARE, mage.cards.t.TorbranThaneOfRedFell.class));
         cards.add(new SetCardInfo("Tournament Grounds", 248, Rarity.UNCOMMON, mage.cards.t.TournamentGrounds.class));
         cards.add(new SetCardInfo("Trail of Crumbs", 179, Rarity.UNCOMMON, mage.cards.t.TrailOfCrumbs.class));
         cards.add(new SetCardInfo("Trapped in the Tower", 33, Rarity.COMMON, mage.cards.t.TrappedInTheTower.class));
