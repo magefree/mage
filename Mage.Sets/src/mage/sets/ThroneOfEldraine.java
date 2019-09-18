@@ -198,6 +198,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Steelclaw Lance", 202, Rarity.UNCOMMON, mage.cards.s.SteelclawLance.class));
         cards.add(new SetCardInfo("Stolen by the Fae", 66, Rarity.RARE, mage.cards.s.StolenByTheFae.class));
         cards.add(new SetCardInfo("Stonecoil Serpent", 235, Rarity.RARE, mage.cards.s.StonecoilSerpent.class));
+        cards.add(new SetCardInfo("Stormfist Crusader", 203, Rarity.RARE, mage.cards.s.StormfistCrusader.class));
         cards.add(new SetCardInfo("Syr Alin, the Lion's Claw", 32, Rarity.UNCOMMON, mage.cards.s.SyrAlinTheLionsClaw.class));
         cards.add(new SetCardInfo("Syr Carah, the Bold", 145, Rarity.UNCOMMON, mage.cards.s.SyrCarahTheBold.class));
         cards.add(new SetCardInfo("Syr Elenora, the Discerning", 67, Rarity.UNCOMMON, mage.cards.s.SyrElenoraTheDiscerning.class));
