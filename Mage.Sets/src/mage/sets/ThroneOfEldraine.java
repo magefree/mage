@@ -215,6 +215,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Taste of Death", 320, Rarity.RARE, mage.cards.t.TasteOfDeath.class));
         cards.add(new SetCardInfo("Tempting Witch", 108, Rarity.COMMON, mage.cards.t.TemptingWitch.class));
         cards.add(new SetCardInfo("The Circle of Loyalty", 9, Rarity.MYTHIC, mage.cards.t.TheCircleOfLoyalty.class));
+        cards.add(new SetCardInfo("The Great Henge", 161, Rarity.MYTHIC, mage.cards.t.TheGreatHenge.class));
         cards.add(new SetCardInfo("The Magic Mirror", 51, Rarity.MYTHIC, mage.cards.t.TheMagicMirror.class));
         cards.add(new SetCardInfo("The Royal Scions", 199, Rarity.MYTHIC, mage.cards.t.TheRoyalScions.class));
         cards.add(new SetCardInfo("Thorn Mammoth", 323, Rarity.RARE, mage.cards.t.ThornMammoth.class));
