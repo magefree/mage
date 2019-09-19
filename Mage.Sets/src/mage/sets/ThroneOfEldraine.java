@@ -118,6 +118,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Gluttonous Troll", 327, Rarity.RARE, mage.cards.g.GluttonousTroll.class));
         cards.add(new SetCardInfo("Golden Egg", 220, Rarity.COMMON, mage.cards.g.GoldenEgg.class));
         cards.add(new SetCardInfo("Grumgully, the Generous", 192, Rarity.UNCOMMON, mage.cards.g.GrumgullyTheGenerous.class));
+        cards.add(new SetCardInfo("Happily Ever After", 16, Rarity.RARE, mage.cards.h.HappilyEverAfter.class));
         cards.add(new SetCardInfo("Harmonious Archon", 17, Rarity.MYTHIC, mage.cards.h.HarmoniousArchon.class));
         cards.add(new SetCardInfo("Henge Walker", 221, Rarity.COMMON, mage.cards.h.HengeWalker.class));
         cards.add(new SetCardInfo("Heraldic Banner", 222, Rarity.UNCOMMON, mage.cards.h.HeraldicBanner.class));
