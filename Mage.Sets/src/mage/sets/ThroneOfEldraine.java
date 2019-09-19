@@ -137,6 +137,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Linden, the Steadfast Queen", 20, Rarity.RARE, mage.cards.l.LindenTheSteadfastQueen.class));
         cards.add(new SetCardInfo("Loch Dragon", 211, Rarity.UNCOMMON, mage.cards.l.LochDragon.class));
         cards.add(new SetCardInfo("Lochmere Serpent", 195, Rarity.RARE, mage.cards.l.LochmereSerpent.class));
+        cards.add(new SetCardInfo("Locthwain Paladin", 93, Rarity.COMMON, mage.cards.l.LocthwainPaladin.class));
         cards.add(new SetCardInfo("Lonesome Unicorn", 21, Rarity.COMMON, mage.cards.l.LonesomeUnicorn.class));
         cards.add(new SetCardInfo("Lost Legion", 94, Rarity.COMMON, mage.cards.l.LostLegion.class));
         cards.add(new SetCardInfo("Lovestruck Beast", 165, Rarity.RARE, mage.cards.l.LovestruckBeast.class));
