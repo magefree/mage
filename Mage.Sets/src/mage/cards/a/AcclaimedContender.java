@@ -1,0 +1,79 @@
+package mage.cards.a;
+
+import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
+import mage.filter.FilterCard;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.mageobject.SupertypePredicate;
+import mage.filter.predicate.permanent.AnotherPredicate;
+
+import java.util.UUID;
+
+/**
+ * @author TheElk801
+ */
+public final class AcclaimedContender extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.KNIGHT);
+    private static final FilterCard filter2
+            = new FilterCard("a Knight, Aura, Equipment, or legendary artifact card");
+
+    static {
+        filter.add(AnotherPredicate.instance);
+        filter2.add(Predicates.or(
+                new SubtypePredicate(SubType.KNIGHT),
+                new SubtypePredicate(SubType.AURA),
+                new SubtypePredicate(SubType.EQUIPMENT),
+                Predicates.and(
+                        new SupertypePredicate(SuperType.LEGENDARY),
+                        new CardTypePredicate(CardType.ARTIFACT)
+                )
+        ));
+    }
+
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
+
+    public AcclaimedContender(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
+
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.KNIGHT);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // When Acclaimed Contender enters the battlefield, if you control another Knight, look at the top five cards of your library. You may reveal a Knight, Aura, Equipment, or legendary artifact card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
+                new EntersBattlefieldTriggeredAbility(new LookLibraryAndPickControllerEffect(
+                        new StaticValue(5), false, new StaticValue(1), filter2, Zone.LIBRARY, false,
+                        true, false, Zone.HAND, true, false, false
+                ).setBackInRandomOrder(true)), condition, "When {this} enters the battlefield, " +
+                "if you control another Knight, look at the top five cards of your library. " +
+                "You may reveal a Knight, Aura, Equipment, or legendary artifact card from among them " +
+                "and put it into your hand. Put the rest on the bottom of your library in a random order."
+        ));
+    }
+
+    private AcclaimedContender(final AcclaimedContender card) {
+        super(card);
+    }
+
+    @Override
+    public AcclaimedContender copy() {
+        return new AcclaimedContender(this);
+    }
+}

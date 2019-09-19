@@ -28,6 +28,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         this.ratioBoosterMythic = 8;
         this.maxCardNumberInBooster = 269; // unconfirmed for now
 
+        cards.add(new SetCardInfo("Acclaimed Contender", 1, Rarity.RARE, mage.cards.a.AcclaimedContender.class));
         cards.add(new SetCardInfo("Alela, Artful Provocateur", 324, Rarity.MYTHIC, mage.cards.a.AlelaArtfulProvocateur.class));
         cards.add(new SetCardInfo("All That Glitters", 2, Rarity.UNCOMMON, mage.cards.a.AllThatGlitters.class));
         cards.add(new SetCardInfo("Animating Faerie", 38, Rarity.UNCOMMON, mage.cards.a.AnimatingFaerie.class));
