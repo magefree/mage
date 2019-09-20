@@ -232,6 +232,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Shimmer Dragon", 317, Rarity.RARE, mage.cards.s.ShimmerDragon.class));
         cards.add(new SetCardInfo("Shinechaser", 201, Rarity.UNCOMMON, mage.cards.s.Shinechaser.class));
         cards.add(new SetCardInfo("Shining Armor", 29, Rarity.COMMON, mage.cards.s.ShiningArmor.class));
+        cards.add(new SetCardInfo("Signpost Scarecrow", 231, Rarity.COMMON, mage.cards.s.SignpostScarecrow.class));
         cards.add(new SetCardInfo("Silverflame Ritual", 30, Rarity.COMMON, mage.cards.s.SilverflameRitual.class));
         cards.add(new SetCardInfo("Silverflame Squire", 31, Rarity.COMMON, mage.cards.s.SilverflameSquire.class));
         cards.add(new SetCardInfo("Silverwing Squadron", 315, Rarity.RARE, mage.cards.s.SilverwingSquadron.class));
