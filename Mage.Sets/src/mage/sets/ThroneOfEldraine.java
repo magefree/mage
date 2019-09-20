@@ -100,8 +100,13 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Fireborn Knight", 210, Rarity.UNCOMMON, mage.cards.f.FirebornKnight.class));
         cards.add(new SetCardInfo("Fires of Invention", 125, Rarity.RARE, mage.cards.f.FiresOfInvention.class));
         cards.add(new SetCardInfo("Flaxen Intruder", 155, Rarity.UNCOMMON, mage.cards.f.FlaxenIntruder.class));
+        cards.add(new SetCardInfo("Fling", 126, Rarity.COMMON, mage.cards.f.Fling.class));
         cards.add(new SetCardInfo("Folio of Fancies", 46, Rarity.RARE, mage.cards.f.FolioOfFancies.class));
         cards.add(new SetCardInfo("Foreboding Fruit", 88, Rarity.COMMON, mage.cards.f.ForebodingFruit.class));
+        cards.add(new SetCardInfo("Forest", 266, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 267, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 268, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 269, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forever Young", 89, Rarity.COMMON, mage.cards.f.ForeverYoung.class));
         cards.add(new SetCardInfo("Fortifying Provisions", 13, Rarity.COMMON, mage.cards.f.FortifyingProvisions.class));
         cards.add(new SetCardInfo("Foulmire Knight", 90, Rarity.UNCOMMON, mage.cards.f.FoulmireKnight.class));
@@ -135,6 +140,10 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Into the Story", 50, Rarity.UNCOMMON, mage.cards.i.IntoTheStory.class));
         cards.add(new SetCardInfo("Irencrag Feat", 127, Rarity.RARE, mage.cards.i.IrencragFeat.class));
         cards.add(new SetCardInfo("Irencrag Pyromancer", 128, Rarity.RARE, mage.cards.i.IrencragPyromancer.class));
+        cards.add(new SetCardInfo("Island", 254, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 255, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 256, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 257, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Joust", 129, Rarity.UNCOMMON, mage.cards.j.Joust.class));
         cards.add(new SetCardInfo("Jousting Dummy", 224, Rarity.COMMON, mage.cards.j.JoustingDummy.class));
         cards.add(new SetCardInfo("Keeper of Fables", 163, Rarity.UNCOMMON, mage.cards.k.KeeperOfFables.class));
@@ -159,6 +168,10 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Midnight Clock", 54, Rarity.RARE, mage.cards.m.MidnightClock.class));
         cards.add(new SetCardInfo("Mirrormade", 55, Rarity.RARE, mage.cards.m.Mirrormade.class));
         cards.add(new SetCardInfo("Mistford River Turtle", 56, Rarity.COMMON, mage.cards.m.MistfordRiverTurtle.class));
+        cards.add(new SetCardInfo("Mountain", 262, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 263, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 264, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 265, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Murderous Rider", 97, Rarity.RARE, mage.cards.m.MurderousRider.class));
         cards.add(new SetCardInfo("Mysterious Pathlighter", 22, Rarity.UNCOMMON, mage.cards.m.MysteriousPathlighter.class));
         cards.add(new SetCardInfo("Mystic Sanctuary", 247, Rarity.COMMON, mage.cards.m.MysticSanctuary.class));
@@ -179,6 +192,10 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Outmuscle", 170, Rarity.COMMON, mage.cards.o.Outmuscle.class));
         cards.add(new SetCardInfo("Overwhelmed Apprentice", 60, Rarity.UNCOMMON, mage.cards.o.OverwhelmedApprentice.class));
         cards.add(new SetCardInfo("Piper of the Swarm", 100, Rarity.RARE, mage.cards.p.PiperOfTheSwarm.class));
+        cards.add(new SetCardInfo("Plains", 250, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 251, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 252, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 253, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Questing Beast", 171, Rarity.MYTHIC, mage.cards.q.QuestingBeast.class));
         cards.add(new SetCardInfo("Raging Redcap", 134, Rarity.COMMON, mage.cards.r.RagingRedcap.class));
         cards.add(new SetCardInfo("Rally for the Throne", 25, Rarity.UNCOMMON, mage.cards.r.RallyForTheThrone.class));
@@ -222,12 +239,17 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Sorcerous Spyglass", 233, Rarity.RARE, mage.cards.s.SorcerousSpyglass.class));
         cards.add(new SetCardInfo("Specter's Shriek", 106, Rarity.UNCOMMON, mage.cards.s.SpectersShriek.class));
         cards.add(new SetCardInfo("Spinning Wheel", 234, Rarity.UNCOMMON, mage.cards.s.SpinningWheel.class));
+        cards.add(new SetCardInfo("Sporecap Spider", 176, Rarity.COMMON, mage.cards.s.SporecapSpider.class));
         cards.add(new SetCardInfo("Steelbane Hydra", 322, Rarity.RARE, mage.cards.s.SteelbaneHydra.class));
         cards.add(new SetCardInfo("Steelclaw Lance", 202, Rarity.UNCOMMON, mage.cards.s.SteelclawLance.class));
         cards.add(new SetCardInfo("Steelgaze Griffin", 65, Rarity.COMMON, mage.cards.s.SteelgazeGriffin.class));
         cards.add(new SetCardInfo("Stolen by the Fae", 66, Rarity.RARE, mage.cards.s.StolenByTheFae.class));
         cards.add(new SetCardInfo("Stonecoil Serpent", 235, Rarity.RARE, mage.cards.s.StonecoilSerpent.class));
         cards.add(new SetCardInfo("Stormfist Crusader", 203, Rarity.RARE, mage.cards.s.StormfistCrusader.class));
+        cards.add(new SetCardInfo("Swamp", 258, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 259, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 260, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 261, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Syr Alin, the Lion's Claw", 32, Rarity.UNCOMMON, mage.cards.s.SyrAlinTheLionsClaw.class));
         cards.add(new SetCardInfo("Syr Carah, the Bold", 145, Rarity.UNCOMMON, mage.cards.s.SyrCarahTheBold.class));
         cards.add(new SetCardInfo("Syr Elenora, the Discerning", 67, Rarity.UNCOMMON, mage.cards.s.SyrElenoraTheDiscerning.class));
@@ -277,6 +299,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Workshop Elders", 318, Rarity.RARE, mage.cards.w.WorkshopElders.class));
         cards.add(new SetCardInfo("Worthy Knight", 36, Rarity.RARE, mage.cards.w.WorthyKnight.class));
         cards.add(new SetCardInfo("Yorvo, Lord of Garenbrig", 185, Rarity.RARE, mage.cards.y.YorvoLordOfGarenbrig.class));
+        cards.add(new SetCardInfo("Youthful Knight", 37, Rarity.COMMON, mage.cards.y.YouthfulKnight.class));
 
         // This is here to prevent the incomplete adventure implementation from causing problems and will be removed
         cards.removeIf(setCardInfo -> AdventureCard.class.isAssignableFrom(setCardInfo.getCardClass()));
