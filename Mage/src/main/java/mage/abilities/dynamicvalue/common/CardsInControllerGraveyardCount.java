@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -17,7 +18,7 @@ public class CardsInControllerGraveyardCount implements DynamicValue {
     private Integer amount;
 
     public CardsInControllerGraveyardCount() {
-        this(new FilterCard(), 1);
+        this(StaticFilters.FILTER_CARD, 1);
     }
 
     public CardsInControllerGraveyardCount(FilterCard filter) {

@@ -93,6 +93,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Fell the Pheasant", 153, Rarity.COMMON, mage.cards.f.FellThePheasant.class));
         cards.add(new SetCardInfo("Ferocity of the Wilds", 123, Rarity.UNCOMMON, mage.cards.f.FerocityOfTheWilds.class));
         cards.add(new SetCardInfo("Fervent Champion", 124, Rarity.RARE, mage.cards.f.FerventChampion.class));
+        cards.add(new SetCardInfo("Festive Funeral", 87, Rarity.COMMON, mage.cards.f.FestiveFuneral.class));
         cards.add(new SetCardInfo("Fierce Witchstalker", 154, Rarity.COMMON, mage.cards.f.FierceWitchstalker.class));
         cards.add(new SetCardInfo("Fireborn Knight", 210, Rarity.UNCOMMON, mage.cards.f.FirebornKnight.class));
         cards.add(new SetCardInfo("Fires of Invention", 125, Rarity.RARE, mage.cards.f.FiresOfInvention.class));
