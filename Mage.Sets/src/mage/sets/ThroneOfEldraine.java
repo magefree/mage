@@ -60,6 +60,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Castle Vantress", 242, Rarity.RARE, mage.cards.c.CastleVantress.class));
         cards.add(new SetCardInfo("Cauldron Familiar", 81, Rarity.UNCOMMON, mage.cards.c.CauldronFamiliar.class));
         cards.add(new SetCardInfo("Cauldron's Gift", 83, Rarity.UNCOMMON, mage.cards.c.CauldronsGift.class));
+        cards.add(new SetCardInfo("Charmed Sleep", 40, Rarity.COMMON, mage.cards.c.CharmedSleep.class));
         cards.add(new SetCardInfo("Charming Prince", 8, Rarity.RARE, mage.cards.c.CharmingPrince.class));
         cards.add(new SetCardInfo("Chittering Witch", 319, Rarity.RARE, mage.cards.c.ChitteringWitch.class));
         cards.add(new SetCardInfo("Chulane, Teller of Tales", 326, Rarity.MYTHIC, mage.cards.c.ChulaneTellerOfTales.class));
