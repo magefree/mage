@@ -20,13 +20,12 @@ public final class ThroneOfEldraine extends ExpansionSet {
         super("Throne of Eldraine", "ELD", ExpansionSet.buildDate(2019, 10, 4), SetType.EXPANSION);
         this.blockName = "Throne of Eldraine";
         this.hasBoosters = true;
-        this.hasBasicLands = false;// false until basics officially spoiled
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
-        this.maxCardNumberInBooster = 269; // unconfirmed for now
+        this.maxCardNumberInBooster = 269;
 
         cards.add(new SetCardInfo("Acclaimed Contender", 1, Rarity.RARE, mage.cards.a.AcclaimedContender.class));
         cards.add(new SetCardInfo("Alela, Artful Provocateur", 324, Rarity.MYTHIC, mage.cards.a.AlelaArtfulProvocateur.class));
