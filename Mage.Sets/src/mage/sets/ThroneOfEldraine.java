@@ -220,6 +220,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Return to Nature", 173, Rarity.COMMON, mage.cards.r.ReturnToNature.class));
         cards.add(new SetCardInfo("Revenge of Ravens", 104, Rarity.UNCOMMON, mage.cards.r.RevengeOfRavens.class));
         cards.add(new SetCardInfo("Righteousness", 27, Rarity.UNCOMMON, mage.cards.r.Righteousness.class));
+        cards.add(new SetCardInfo("Rimrock Knight", 137, Rarity.COMMON, mage.cards.r.RimrockKnight.class));
         cards.add(new SetCardInfo("Robber of the Rich", 138, Rarity.MYTHIC, mage.cards.r.RobberOfTheRich.class));
         cards.add(new SetCardInfo("Rosethorn Acolyte", 174, Rarity.COMMON, mage.cards.r.RosethornAcolyte.class));
         cards.add(new SetCardInfo("Rosethorn Halberd", 175, Rarity.COMMON, mage.cards.r.RosethornHalberd.class));
