@@ -102,6 +102,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Fires of Invention", 125, Rarity.RARE, mage.cards.f.FiresOfInvention.class));
         cards.add(new SetCardInfo("Flaxen Intruder", 155, Rarity.UNCOMMON, mage.cards.f.FlaxenIntruder.class));
         cards.add(new SetCardInfo("Fling", 126, Rarity.COMMON, mage.cards.f.Fling.class));
+        cards.add(new SetCardInfo("Flutterfox", 12, Rarity.COMMON, mage.cards.f.Flutterfox.class));
         cards.add(new SetCardInfo("Folio of Fancies", 46, Rarity.RARE, mage.cards.f.FolioOfFancies.class));
         cards.add(new SetCardInfo("Foreboding Fruit", 88, Rarity.COMMON, mage.cards.f.ForebodingFruit.class));
         cards.add(new SetCardInfo("Forest", 266, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
