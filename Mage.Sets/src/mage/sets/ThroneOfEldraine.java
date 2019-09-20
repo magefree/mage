@@ -158,6 +158,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Mirrormade", 55, Rarity.RARE, mage.cards.m.Mirrormade.class));
         cards.add(new SetCardInfo("Mistford River Turtle", 56, Rarity.COMMON, mage.cards.m.MistfordRiverTurtle.class));
         cards.add(new SetCardInfo("Murderous Rider", 97, Rarity.RARE, mage.cards.m.MurderousRider.class));
+        cards.add(new SetCardInfo("Mysterious Pathlighter", 22, Rarity.UNCOMMON, mage.cards.m.MysteriousPathlighter.class));
         cards.add(new SetCardInfo("Mystic Sanctuary", 247, Rarity.COMMON, mage.cards.m.MysticSanctuary.class));
         cards.add(new SetCardInfo("Mystical Dispute", 58, Rarity.UNCOMMON, mage.cards.m.MysticalDispute.class));
         cards.add(new SetCardInfo("Oakhame Adversary", 167, Rarity.UNCOMMON, mage.cards.o.OakhameAdversary.class));
