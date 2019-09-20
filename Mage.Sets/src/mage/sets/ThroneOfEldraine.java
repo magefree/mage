@@ -84,6 +84,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Epic Downfall", 85, Rarity.UNCOMMON, mage.cards.e.EpicDownfall.class));
         cards.add(new SetCardInfo("Escape to the Wilds", 189, Rarity.RARE, mage.cards.e.EscapeToTheWilds.class));
         cards.add(new SetCardInfo("Eye Collector", 86, Rarity.COMMON, mage.cards.e.EyeCollector.class));
+        cards.add(new SetCardInfo("Fabled Passage", 244, Rarity.RARE, mage.cards.f.FabledPassage.class));
         cards.add(new SetCardInfo("Fae of Wishes", 44, Rarity.RARE, mage.cards.f.FaeOfWishes.class));
         cards.add(new SetCardInfo("Faeburrow Elder", 190, Rarity.RARE, mage.cards.f.FaeburrowElder.class));
         cards.add(new SetCardInfo("Faerie Formation", 316, Rarity.RARE, mage.cards.f.FaerieFormation.class));
