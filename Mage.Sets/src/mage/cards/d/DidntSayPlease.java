@@ -1,4 +1,4 @@
-package mage.cards.t;
+package mage.cards.d;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
@@ -18,43 +18,43 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class ThoughtCollapse extends CardImpl {
+public final class DidntSayPlease extends CardImpl {
 
-    public ThoughtCollapse(UUID ownerId, CardSetInfo setInfo) {
+    public DidntSayPlease(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
 
         // Counter target spell. Its controller puts the top three cards of their library into their graveyard.
-        this.getSpellAbility().addEffect(new ThoughtCollapseEffect());
+        this.getSpellAbility().addEffect(new DidntSayPleaseEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    private ThoughtCollapse(final ThoughtCollapse card) {
+    private DidntSayPlease(final DidntSayPlease card) {
         super(card);
     }
 
     @Override
-    public ThoughtCollapse copy() {
-        return new ThoughtCollapse(this);
+    public DidntSayPlease copy() {
+        return new DidntSayPlease(this);
     }
 }
 
-class ThoughtCollapseEffect extends OneShotEffect {
+class DidntSayPleaseEffect extends OneShotEffect {
 
     private static final Effect effect = new CounterTargetEffect();
 
-    ThoughtCollapseEffect() {
+    DidntSayPleaseEffect() {
         super(Outcome.Benefit);
         staticText = "Counter target spell. Its controller puts " +
                 "the top three cards of their library into their graveyard.";
     }
 
-    private ThoughtCollapseEffect(final ThoughtCollapseEffect effect) {
+    private DidntSayPleaseEffect(final DidntSayPleaseEffect effect) {
         super(effect);
     }
 
     @Override
-    public ThoughtCollapseEffect copy() {
-        return new ThoughtCollapseEffect(this);
+    public DidntSayPleaseEffect copy() {
+        return new DidntSayPleaseEffect(this);
     }
 
     @Override
