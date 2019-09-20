@@ -199,6 +199,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Rowan's Stalwarts", 307, Rarity.RARE, mage.cards.r.RowansStalwarts.class));
         cards.add(new SetCardInfo("Rowan, Fearless Sparkmage", 304, Rarity.MYTHIC, mage.cards.r.RowanFearlessSparkmage.class));
         cards.add(new SetCardInfo("Run Away Together", 62, Rarity.COMMON, mage.cards.r.RunAwayTogether.class));
+        cards.add(new SetCardInfo("Sage of the Falls", 63, Rarity.UNCOMMON, mage.cards.s.SageOfTheFalls.class));
         cards.add(new SetCardInfo("Savvy Hunter", 200, Rarity.UNCOMMON, mage.cards.s.SavvyHunter.class));
         cards.add(new SetCardInfo("Scorching Dragonfire", 139, Rarity.COMMON, mage.cards.s.ScorchingDragonfire.class));
         cards.add(new SetCardInfo("Searing Barrage", 140, Rarity.COMMON, mage.cards.s.SearingBarrage.class));
