@@ -18,6 +18,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.game.Game;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -48,13 +49,9 @@ public final class OpportunisticDragon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Opportunistic Dragon enters the battlefield, choose target Human or artifact an opponent controls. For as long as Opportunistic Dragon remains on the battlefield, gain control of that permanent, it loses all abilities, and it can't attack or block.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new GainControlTargetEffect(Duration.WhileOnBattlefield)
-                .setText("choose target Human or artifact an opponent controls. " +
-                        "For as long as {this} remains on the battlefield, gain control of that permanent,"));
-        ability.addEffect(new LoseAllAbilitiesTargetEffect(Duration.WhileOnBattlefield)
-                .setText("it loses all abilities,"));
-        ability.addEffect(new CantAttackBlockTargetEffect(Duration.WhileOnBattlefield)
-                .setText("and it can't attack or block"));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new OpportunisticDragonControlEffect());
+        ability.addEffect(new OpportunisticDragonLoseAbilitiesEffect());
+        ability.addEffect(new OpportunisticDragonAttackBlockEffect());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
@@ -66,5 +63,84 @@ public final class OpportunisticDragon extends CardImpl {
     @Override
     public OpportunisticDragon copy() {
         return new OpportunisticDragon(this);
+    }
+}
+
+class OpportunisticDragonControlEffect extends GainControlTargetEffect {
+
+    OpportunisticDragonControlEffect() {
+        super(Duration.Custom);
+        staticText = "choose target Human or artifact an opponent controls. " +
+                "For as long as {this} remains on the battlefield, gain control of that permanent,";
+    }
+
+    private OpportunisticDragonControlEffect(final OpportunisticDragonControlEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public OpportunisticDragonControlEffect copy() {
+        return new OpportunisticDragonControlEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        if (source.getSourcePermanentIfItStillExists(game) == null) {
+            discard();
+            return false;
+        }
+        return super.apply(game, source);
+    }
+}
+
+class OpportunisticDragonLoseAbilitiesEffect extends LoseAllAbilitiesTargetEffect {
+
+    OpportunisticDragonLoseAbilitiesEffect() {
+        super(Duration.Custom);
+        staticText = "it loses all abilities,";
+    }
+
+    private OpportunisticDragonLoseAbilitiesEffect(final OpportunisticDragonLoseAbilitiesEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public OpportunisticDragonLoseAbilitiesEffect copy() {
+        return new OpportunisticDragonLoseAbilitiesEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        if (source.getSourcePermanentIfItStillExists(game) == null) {
+            discard();
+            return false;
+        }
+        return super.apply(game, source);
+    }
+}
+
+class OpportunisticDragonAttackBlockEffect extends CantAttackBlockTargetEffect {
+
+    OpportunisticDragonAttackBlockEffect() {
+        super(Duration.Custom);
+        staticText = "and it can't attack or block";
+    }
+
+    private OpportunisticDragonAttackBlockEffect(final OpportunisticDragonAttackBlockEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public OpportunisticDragonAttackBlockEffect copy() {
+        return new OpportunisticDragonAttackBlockEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        if (source.getSourcePermanentIfItStillExists(game) == null) {
+            discard();
+            return false;
+        }
+        return super.apply(game, source);
     }
 }
