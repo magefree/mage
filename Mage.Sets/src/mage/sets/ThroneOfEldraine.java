@@ -152,6 +152,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Joust", 129, Rarity.UNCOMMON, mage.cards.j.Joust.class));
         cards.add(new SetCardInfo("Jousting Dummy", 224, Rarity.COMMON, mage.cards.j.JoustingDummy.class));
         cards.add(new SetCardInfo("Keeper of Fables", 163, Rarity.UNCOMMON, mage.cards.k.KeeperOfFables.class));
+        cards.add(new SetCardInfo("Kenrith's Transformation", 164, Rarity.UNCOMMON, mage.cards.k.KenrithsTransformation.class));
         cards.add(new SetCardInfo("Kenrith, the Returned King", 303, Rarity.MYTHIC, mage.cards.k.KenrithTheReturnedKing.class));
         cards.add(new SetCardInfo("Knight of the Keep", 19, Rarity.COMMON, mage.cards.k.KnightOfTheKeep.class));
         cards.add(new SetCardInfo("Knights' Charge", 328, Rarity.RARE, mage.cards.k.KnightsCharge.class));
