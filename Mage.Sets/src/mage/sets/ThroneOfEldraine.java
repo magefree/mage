@@ -199,6 +199,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Opportunistic Dragon", 133, Rarity.RARE, mage.cards.o.OpportunisticDragon.class));
         cards.add(new SetCardInfo("Opt", 59, Rarity.COMMON, mage.cards.o.Opt.class));
         cards.add(new SetCardInfo("Order of Midnight", 99, Rarity.UNCOMMON, mage.cards.o.OrderOfMidnight.class));
+        cards.add(new SetCardInfo("Outflank", 23, Rarity.COMMON, mage.cards.o.Outflank.class));
         cards.add(new SetCardInfo("Outmuscle", 170, Rarity.COMMON, mage.cards.o.Outmuscle.class));
         cards.add(new SetCardInfo("Overwhelmed Apprentice", 60, Rarity.UNCOMMON, mage.cards.o.OverwhelmedApprentice.class));
         cards.add(new SetCardInfo("Piper of the Swarm", 100, Rarity.RARE, mage.cards.p.PiperOfTheSwarm.class));
