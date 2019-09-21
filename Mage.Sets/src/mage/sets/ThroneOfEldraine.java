@@ -209,6 +209,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 253, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Prized Griffin", 24, Rarity.COMMON, mage.cards.p.PrizedGriffin.class));
         cards.add(new SetCardInfo("Prophet of the Peak", 227, Rarity.COMMON, mage.cards.p.ProphetOfThePeak.class));
+        cards.add(new SetCardInfo("Queen of Ice", 61, Rarity.COMMON, mage.cards.q.QueenOfIce.class));
         cards.add(new SetCardInfo("Questing Beast", 171, Rarity.MYTHIC, mage.cards.q.QuestingBeast.class));
         cards.add(new SetCardInfo("Raging Redcap", 134, Rarity.COMMON, mage.cards.r.RagingRedcap.class));
         cards.add(new SetCardInfo("Rally for the Throne", 25, Rarity.UNCOMMON, mage.cards.r.RallyForTheThrone.class));
