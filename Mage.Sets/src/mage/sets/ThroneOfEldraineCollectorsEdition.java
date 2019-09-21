@@ -18,6 +18,7 @@ public final class ThroneOfEldraineCollectorsEdition extends ExpansionSet {
 
     private ThroneOfEldraineCollectorsEdition() {
         super("Throne of Eldraine Collector's Edition", "CELD", ExpansionSet.buildDate(2019, 10, 4), SetType.PROMOTIONAL);
+        this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Acclaimed Contender", 334, Rarity.RARE, mage.cards.a.AcclaimedContender.class));
         cards.add(new SetCardInfo("Animating Faerie", 280, Rarity.UNCOMMON, mage.cards.a.AnimatingFaerie.class));
