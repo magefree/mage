@@ -12,6 +12,7 @@ public class EntersBattlefieldUntappedTriggeredAbility extends EntersBattlefield
 
     public EntersBattlefieldUntappedTriggeredAbility(Effect effect, boolean optional) {
         super(effect, optional);
+        this.noRule = true;
     }
 
     private EntersBattlefieldUntappedTriggeredAbility(final EntersBattlefieldUntappedTriggeredAbility ability) {
@@ -29,7 +30,7 @@ public class EntersBattlefieldUntappedTriggeredAbility extends EntersBattlefield
             return false;
         }
         Permanent permanent = game.getPermanent(event.getTargetId());
-        return permanent != null && permanent.isTapped();
+        return permanent != null && !permanent.isTapped();
     }
 
     @Override
