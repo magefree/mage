@@ -70,6 +70,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Clockwork Servant", 216, Rarity.UNCOMMON, mage.cards.c.ClockworkServant.class));
         cards.add(new SetCardInfo("Command Tower", 333, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Corridor Monitor", 41, Rarity.COMMON, mage.cards.c.CorridorMonitor.class));
+        cards.add(new SetCardInfo("Covetous Urge", 207, Rarity.UNCOMMON, mage.cards.c.CovetousUrge.class));
         cards.add(new SetCardInfo("Crashing Drawbridge", 217, Rarity.COMMON, mage.cards.c.CrashingDrawbridge.class));
         cards.add(new SetCardInfo("Crystal Slipper", 119, Rarity.COMMON, mage.cards.c.CrystalSlipper.class));
         cards.add(new SetCardInfo("Curious Pair", 150, Rarity.COMMON, mage.cards.c.CuriousPair.class));
