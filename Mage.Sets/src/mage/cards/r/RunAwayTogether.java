@@ -5,11 +5,12 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -21,7 +22,10 @@ public final class RunAwayTogether extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Choose two target creatures controlled by different players. Return those creatures to their owners' hands.
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect(true));
+        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect(true)
+                .setText("Choose two target creatures controlled by different players. " +
+                        "Return those creatures to their owners' hands.")
+        );
         this.getSpellAbility().addTarget(new RunAwayTogetherTarget());
     }
 
@@ -37,8 +41,11 @@ public final class RunAwayTogether extends CardImpl {
 
 class RunAwayTogetherTarget extends TargetCreaturePermanent {
 
+    private static final FilterCreaturePermanent filter
+            = new FilterCreaturePermanent("creatures controlled by different players");
+
     RunAwayTogetherTarget() {
-        super(2, 2, StaticFilters.FILTER_PERMANENT_CREATURE, false);
+        super(2, 2, filter, false);
     }
 
     private RunAwayTogetherTarget(final RunAwayTogetherTarget target) {
@@ -59,12 +66,12 @@ class RunAwayTogetherTarget extends TargetCreaturePermanent {
         if (creature == null) {
             return false;
         }
-        return !this.getTargets()
+        return this.getTargets()
                 .stream()
                 .map(game::getPermanent)
-                .anyMatch(permanent -> permanent != null
-                        && !creature.getId().equals(permanent.getId())
-                        && !creature.isControlledBy(permanent.getControllerId())
+                .filter(Objects::nonNull)
+                .noneMatch(permanent -> creature.getId().equals(permanent.getId())
+                        || creature.isControlledBy(permanent.getControllerId())
                 );
     }
 }
