@@ -59,6 +59,7 @@ public final class ThroneOfEldraineCollectorsEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Gilded Goose", 369, Rarity.RARE, mage.cards.g.GildedGoose.class));
         cards.add(new SetCardInfo("Happily Ever After", 337, Rarity.RARE, mage.cards.h.HappilyEverAfter.class));
         cards.add(new SetCardInfo("Harmonious Archon", 338, Rarity.MYTHIC, mage.cards.h.HarmoniousArchon.class));
+        cards.add(new SetCardInfo("Hushbringer", 339, Rarity.RARE, mage.cards.h.Hushbringer.class));
         cards.add(new SetCardInfo("Hypnotic Sprite", 283, Rarity.UNCOMMON, mage.cards.h.HypnoticSprite.class));
         cards.add(new SetCardInfo("Irencrag Feat", 362, Rarity.RARE, mage.cards.i.IrencragFeat.class));
         cards.add(new SetCardInfo("Irencrag Pyromancer", 363, Rarity.RARE, mage.cards.i.IrencragPyromancer.class));
