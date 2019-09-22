@@ -80,7 +80,7 @@ class CauldronsGiftEffect extends OneShotEffect {
             return false;
         }
         Card card = game.getCard(target.getFirstTarget());
-        if (card == null || player.moveCards(card, Zone.BATTLEFIELD, source, game)) {
+        if (card == null || !player.moveCards(card, Zone.BATTLEFIELD, source, game)) {
             return false;
         }
         Permanent permanent = game.getPermanent(card.getId());
