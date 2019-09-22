@@ -70,7 +70,7 @@ class JoustEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent creature1 = game.getPermanent(source.getTargets().get(0).getFirstTarget());
-        Permanent creature2 = game.getPermanent(source.getTargets().get(0).getFirstTarget());
+        Permanent creature2 = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (creature1 == null) {
             return false;
         }
