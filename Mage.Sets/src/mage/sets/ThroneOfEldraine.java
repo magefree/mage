@@ -175,6 +175,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Mantle of Tides", 52, Rarity.COMMON, mage.cards.m.MantleOfTides.class));
         cards.add(new SetCardInfo("Maraleaf Pixie", 196, Rarity.UNCOMMON, mage.cards.m.MaraleafPixie.class));
         cards.add(new SetCardInfo("Maraleaf Rider", 166, Rarity.COMMON, mage.cards.m.MaraleafRider.class));
+        cards.add(new SetCardInfo("Memory Theft", 96, Rarity.COMMON, mage.cards.m.MemoryTheft.class));
         cards.add(new SetCardInfo("Merchant of the Vale", 131, Rarity.COMMON, mage.cards.m.MerchantOfTheVale.class));
         cards.add(new SetCardInfo("Merfolk Secretkeeper", 53, Rarity.COMMON, mage.cards.m.MerfolkSecretkeeper.class));
         cards.add(new SetCardInfo("Midnight Clock", 54, Rarity.RARE, mage.cards.m.MidnightClock.class));
