@@ -26,7 +26,7 @@ public final class SearingBarrage extends CardImpl {
 
         // Adamant — If at least three red mana was spent to cast this spell, Searing Barrage deals 3 damage to that creature's controller.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new DamageTargetControllerEffect(5), AdamantCondition.RED,
+                new DamageTargetControllerEffect(3), AdamantCondition.RED,
                 "<br><i>Adamant</i> &mdash; If at least three red mana was spent to cast this spell, " +
                         "{this} deals 3 damage to that creature's controller."
         ));
