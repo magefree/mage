@@ -92,7 +92,7 @@ class FiresOfInventionCastEffect extends ContinuousRuleModifyingEffectImpl {
         if (watcher == null) {
             return false;
         }
-        return watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(source.getControllerId()) > 2
+        return watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(source.getControllerId()) > 1
                 || !game.getActivePlayerId().equals(source.getControllerId());
     }
 
