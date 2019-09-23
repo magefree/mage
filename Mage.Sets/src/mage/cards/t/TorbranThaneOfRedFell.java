@@ -78,7 +78,7 @@ class TorbranThaneOfRedFellEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(source.getControllerId());
         if (player == null
-                || !player.hasOpponent(game.getControllerId(event.getTargetId()), game)
+                || !player.hasOpponent(getControllerOrSelf(event.getTargetId(), game), game)
                 || !source.isControlledBy(game.getControllerId(event.getSourceId()))) {
             return false;
         }
@@ -90,8 +90,12 @@ class TorbranThaneOfRedFellEffect extends ReplacementEffectImpl {
             sourceObject = sourcePermanent;
         }
         return sourceObject != null
-                && sourceObject.getColor(game).isRed()
-                && !sourceObject.getId().equals(source.getSourceId());
+                && sourceObject.getColor(game).isRed();
+    }
+
+    private static UUID getControllerOrSelf(UUID id, Game game) {
+        UUID outId = game.getControllerId(id);
+        return outId == null ? id : outId;
     }
 
     @Override
