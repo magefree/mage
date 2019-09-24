@@ -708,7 +708,11 @@ public class HumanPlayer extends PlayerImpl {
         while (!abort) {
             prepareForResponse(game);
             if (!isExecutingMacro()) {
-                game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage() + "\n Amount remaining:" + target.getAmountRemaining(), getRelatedObjectName(source, game)),
+                String selectedNames = target.getTargetedName(game);
+                game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage()
+                                + "<br> Amount remaining: " + target.getAmountRemaining()
+                                + (selectedNames.isEmpty() ? "" : ", selected: " + selectedNames),
+                                getRelatedObjectName(source, game)),
                         target.possibleTargets(source == null ? null : source.getSourceId(), playerId, game),
                         target.isRequired(source),
                         getOptions(target, null));
