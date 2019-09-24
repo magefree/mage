@@ -1,5 +1,3 @@
-
-
 package mage.target;
 
 import mage.abilities.Ability;
@@ -7,11 +5,14 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.constants.Outcome;
 import mage.game.Game;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class TargetAmount extends TargetImpl {
@@ -63,8 +64,8 @@ public abstract class TargetAmount extends TargetImpl {
 
     public void setAmountDefinition(DynamicValue amount) {
         this.amount = amount;
-    } 
-    
+    }
+
     public void setAmount(Ability source, Game game) {
         remainingAmount = amount.calculate(game, source, null);
         amountWasSet = true;
@@ -80,6 +81,13 @@ public abstract class TargetAmount extends TargetImpl {
             super.addTarget(id, amount, source, game, skipEvent);
             remainingAmount -= amount;
         }
+    }
+
+    @Override
+    public void remove(UUID id) {
+        int amount = getTargetAmount(id);
+        super.remove(id);
+        this.remainingAmount += amount;
     }
 
     @Override
@@ -111,7 +119,7 @@ public abstract class TargetAmount extends TargetImpl {
         if (!amountWasSet) {
             setAmount(source, game);
         }
-        for (UUID targetId: targets) {
+        for (UUID targetId : targets) {
             for (int n = 1; n <= target.remainingAmount; n++) {
                 TargetAmount t = target.copy();
                 t.addTarget(targetId, n, source, game, true);
@@ -120,8 +128,7 @@ public abstract class TargetAmount extends TargetImpl {
                         Set<UUID> newTargets = targets.stream().filter(newTarget -> !newTarget.equals(targetId)).collect(Collectors.toSet());
                         addTargets(t, newTargets, options, source, game);
                     }
-                }
-                else {
+                } else {
                     options.add(t);
                 }
             }

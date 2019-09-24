@@ -721,8 +721,19 @@ public class HumanPlayer extends PlayerImpl {
             if (response.getUUID() != null) {
                 if (target.canTarget(response.getUUID(), source, game)) {
                     UUID targetId = response.getUUID();
-                    int amountSelected = getAmount(1, target.getAmountRemaining(), "Select amount", game);
-                    target.addTarget(targetId, amountSelected, source, game);
+                    MageObject targetObject = game.getObject(targetId);
+
+                    boolean removeMode = target.getTargets().contains(targetId)
+                            && chooseUse(outcome, "What do you want to do with " + (targetObject != null ? targetObject.getLogName() : "target") + "?", "",
+                            "Remove from selected", "Add extra amount", source, game);
+
+                    if (removeMode) {
+                        target.remove(targetId);
+                    } else {
+                        int amountSelected = getAmount(1, target.getAmountRemaining(), "Select amount", game);
+                        target.addTarget(targetId, amountSelected, source, game);
+                    }
+
                     return true;
                 }
             } else if (!target.isRequired(source)) {
