@@ -270,6 +270,7 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Stolen by the Fae", 66, Rarity.RARE, mage.cards.s.StolenByTheFae.class));
         cards.add(new SetCardInfo("Stonecoil Serpent", 235, Rarity.RARE, mage.cards.s.StonecoilSerpent.class));
         cards.add(new SetCardInfo("Stormfist Crusader", 203, Rarity.RARE, mage.cards.s.StormfistCrusader.class));
+        cards.add(new SetCardInfo("Sundering Stroke", 144, Rarity.RARE, mage.cards.s.SunderingStroke.class));
         cards.add(new SetCardInfo("Swamp", 258, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 259, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 260, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));

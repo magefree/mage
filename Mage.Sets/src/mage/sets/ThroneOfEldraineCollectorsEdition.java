@@ -95,6 +95,7 @@ public final class ThroneOfEldraineCollectorsEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Stolen by the Fae", 348, Rarity.RARE, mage.cards.s.StolenByTheFae.class));
         cards.add(new SetCardInfo("Stonecoil Serpent", 385, Rarity.RARE, mage.cards.s.StonecoilSerpent.class));
         cards.add(new SetCardInfo("Stormfist Crusader", 383, Rarity.RARE, mage.cards.s.StormfistCrusader.class));
+        cards.add(new SetCardInfo("Sundering Stroke", 366, Rarity.RARE, mage.cards.s.SunderingStroke.class));
         cards.add(new SetCardInfo("The Cauldron of Eternity", 352, Rarity.MYTHIC, mage.cards.t.TheCauldronOfEternity.class));
         cards.add(new SetCardInfo("The Circle of Loyalty", 336, Rarity.MYTHIC, mage.cards.t.TheCircleOfLoyalty.class));
         cards.add(new SetCardInfo("The Great Henge", 370, Rarity.MYTHIC, mage.cards.t.TheGreatHenge.class));
