@@ -106,6 +106,7 @@ public final class Portal extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 213, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 214, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 215, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forked Lightning", 135, Rarity.RARE, mage.cards.f.ForkedLightning.class));
         cards.add(new SetCardInfo("Fruition", 166, Rarity.COMMON, mage.cards.f.Fruition.class));
         cards.add(new SetCardInfo("Giant Octopus", 56, Rarity.COMMON, mage.cards.g.GiantOctopus.class));
         cards.add(new SetCardInfo("Giant Spider", 167, Rarity.COMMON, mage.cards.g.GiantSpider.class));

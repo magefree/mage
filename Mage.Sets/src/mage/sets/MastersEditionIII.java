@@ -96,6 +96,7 @@ public final class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 228, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 229, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 230, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forked Lightning", 100, Rarity.UNCOMMON, mage.cards.f.ForkedLightning.class));
         cards.add(new SetCardInfo("Freyalise's Winds", 119, Rarity.RARE, mage.cards.f.FreyalisesWinds.class));
         cards.add(new SetCardInfo("Frost Giant", 101, Rarity.UNCOMMON, mage.cards.f.FrostGiant.class));
         cards.add(new SetCardInfo("Gabriel Angelfire", 148, Rarity.RARE, mage.cards.g.GabrielAngelfire.class));
