@@ -20,5 +20,7 @@ public final class HeroesOfTheRealm extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Chandra, Gremlin Wrangler", 1, Rarity.MYTHIC, mage.cards.c.ChandraGremlinWrangler.class));
+        cards.add(new SetCardInfo("Dungeon Master", 2, Rarity.MYTHIC, mage.cards.d.DungeonMaster.class));
+        cards.add(new SetCardInfo("Nira, Hellkite Duelist", 3,Rarity.MYTHIC, mage.cards.n.NiraHellkiteDuelist.class));
     }
 }
