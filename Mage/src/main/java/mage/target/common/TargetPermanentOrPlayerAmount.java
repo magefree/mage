@@ -4,7 +4,6 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.filter.Filter;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterPermanentOrPlayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -24,7 +23,12 @@ public abstract class TargetPermanentOrPlayerAmount extends TargetAmount {
     protected FilterPermanentOrPlayer filter;
 
     TargetPermanentOrPlayerAmount(DynamicValue amount) {
+        this(amount, 0);
+    }
+
+    TargetPermanentOrPlayerAmount(DynamicValue amount, int maxNumberOfTargets) {
         super(amount);
+        this.maxNumberOfTargets = maxNumberOfTargets;
     }
 
     TargetPermanentOrPlayerAmount(final TargetPermanentOrPlayerAmount target) {
@@ -39,6 +43,12 @@ public abstract class TargetPermanentOrPlayerAmount extends TargetAmount {
 
     @Override
     public boolean canTarget(UUID objectId, Game game) {
+
+        // max targets limit reached (only selected can be choosen again)
+        if (getMaxNumberOfTargets() > 0 && getTargets().size() >= getMaxNumberOfTargets()) {
+            return getTargets().contains(objectId);
+        }
+
         Permanent permanent = game.getPermanent(objectId);
         if (permanent != null) {
             return filter.match(permanent, game);
@@ -49,6 +59,12 @@ public abstract class TargetPermanentOrPlayerAmount extends TargetAmount {
 
     @Override
     public boolean canTarget(UUID objectId, Ability source, Game game) {
+
+        // max targets limit reached (only selected can be choosen again)
+        if (getMaxNumberOfTargets() > 0 && getTargets().size() >= getMaxNumberOfTargets()) {
+            return getTargets().contains(objectId);
+        }
+
         Permanent permanent = game.getPermanent(objectId);
         Player player = game.getPlayer(objectId);
 
@@ -77,6 +93,7 @@ public abstract class TargetPermanentOrPlayerAmount extends TargetAmount {
 
     @Override
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+        // no max targets limit here
         int count = 0;
         MageObject targetSource = game.getObject(sourceId);
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
@@ -105,6 +122,7 @@ public abstract class TargetPermanentOrPlayerAmount extends TargetAmount {
 
     @Override
     public boolean canChoose(UUID sourceControllerId, Game game) {
+        // no max targets limit here
         int count = 0;
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
@@ -128,6 +146,13 @@ public abstract class TargetPermanentOrPlayerAmount extends TargetAmount {
     @Override
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
+
+        // max targets limit reached (only selected can be choosen again)
+        if (getMaxNumberOfTargets() > 0 && getTargets().size() >= getMaxNumberOfTargets()) {
+            possibleTargets.addAll(getTargets());
+            return possibleTargets;
+        }
+
         MageObject targetSource = game.getObject(sourceId);
 
         game.getState()
@@ -155,6 +180,13 @@ public abstract class TargetPermanentOrPlayerAmount extends TargetAmount {
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
+
+        // max targets limit reached (only selected can be choosen again)
+        if (getMaxNumberOfTargets() > 0 && getTargets().size() >= getMaxNumberOfTargets()) {
+            possibleTargets.addAll(getTargets());
+            return possibleTargets;
+        }
+
         game.getState()
                 .getPlayersInRange(sourceControllerId, game)
                 .stream()
