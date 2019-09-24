@@ -1,0 +1,31 @@
+package mage.game.permanent.token;
+
+import mage.MageInt;
+import mage.abilities.keyword.LifelinkAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
+
+/**
+ * @author jmharmon
+ */
+
+public final class ClericToken extends TokenImpl {
+
+    public ClericToken() {
+        super("Cleric", "1/1 white Cleric creature token with lifelink");
+        cardType.add(CardType.CREATURE);
+        color.setWhite(true);
+        subtype.add(SubType.CLERIC);
+        power = new MageInt(1);
+        toughness = new MageInt(1);
+        addAbility(LifelinkAbility.getInstance());
+    }
+
+    public ClericToken(final ClericToken token) {
+        super(token);
+    }
+
+    public ClericToken copy() {
+        return new ClericToken(this);
+    }
+}
