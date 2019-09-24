@@ -75,7 +75,7 @@ class FabledPassageEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        if (!player.moveCards(card, Zone.BATTLEFIELD, source, game)) {
+        if (!player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null)) {
             return false;
         }
         if (game.getBattlefield().countAll(StaticFilters.FILTER_LAND, source.getControllerId(), game) < 4) {
