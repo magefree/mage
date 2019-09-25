@@ -78,6 +78,7 @@ public final class ThroneOfEldraineCollectorsEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Once Upon a Time", 371, Rarity.RARE, mage.cards.o.OnceUponATime.class));
         cards.add(new SetCardInfo("Opportunistic Dragon", 364, Rarity.RARE, mage.cards.o.OpportunisticDragon.class));
         cards.add(new SetCardInfo("Order of Midnight", 288, Rarity.UNCOMMON, mage.cards.o.OrderOfMidnight.class));
+        cards.add(new SetCardInfo("Outlaws' Merriment", 382, Rarity.MYTHIC, mage.cards.o.OutlawsMerriment.class));
         cards.add(new SetCardInfo("Piper of the Swarm", 355, Rarity.RARE, mage.cards.p.PiperOfTheSwarm.class));
         cards.add(new SetCardInfo("Queen of Ice", 285, Rarity.COMMON, mage.cards.q.QueenOfIce.class));
         cards.add(new SetCardInfo("Questing Beast", 372, Rarity.MYTHIC, mage.cards.q.QuestingBeast.class));

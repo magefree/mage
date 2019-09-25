@@ -9,6 +9,7 @@ import mage.filter.FilterPlayer;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+import mage.util.RandomUtil;
 
 import java.util.*;
 
@@ -27,6 +28,8 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
     private final Map<UUID, Mode> duplicateModes = new LinkedHashMap<>();
     private OptionalAdditionalModeSourceCosts optionalAdditionalModeSourceCosts = null; // only set if costs have to be paid
     private Filter maxModesFilter = null; // calculates the max number of available modes
+    private boolean isRandom = false;
+    private String chooseText = null;
 
     public Modes() {
         this.currentMode = new Mode();
@@ -56,6 +59,8 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         this.optionalAdditionalModeSourceCosts = modes.optionalAdditionalModeSourceCosts;
         this.maxModesFilter = modes.maxModesFilter; // can't change so no copy needed
 
+        this.isRandom = modes.isRandom;
+        this.chooseText = modes.chooseText;
         if (modes.getSelectedModes().isEmpty()) {
             this.currentMode = values().iterator().next();
         } else {
@@ -163,6 +168,12 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         if (this.size() > 1) {
             this.selectedModes.clear();
             this.duplicateModes.clear();
+            if (this.isRandom) {
+                List<Mode> modes = getAvailableModes(source, game);
+                int r = RandomUtil.nextInt(modes.size());
+                this.addSelectedMode(modes.get(r).getId());
+                return true;
+            }
             // check if mode modifying abilities exist
             Card card = game.getCard(source.getSourceId());
             if (card != null) {
@@ -332,7 +343,9 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
             return this.getMode().getEffects().getText(this.getMode());
         }
         StringBuilder sb = new StringBuilder();
-        if (this.getMaxModesFilter() != null) {
+        if (this.chooseText != null) {
+            sb.append(chooseText);
+        } else if (this.getMaxModesFilter() != null) {
             sb.append("choose one or more. Each mode must target ").append(getMaxModesFilter().getMessage());
         } else if (this.getMinModes() == 0 && this.getMaxModes() == 1) {
             sb.append("choose up to one");
@@ -357,10 +370,12 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         }
 
         if (isEachModeMoreThanOnce()) {
-            sb.append(". You may choose the same mode more than once.<br>");
-        } else {
-            sb.append(" &mdash;<br>");
+            sb.append(". You may choose the same mode more than once.");
+        } else if (chooseText == null) {
+            sb.append(" &mdash;");
         }
+
+        sb.append("<br>");
 
         for (Mode mode : this.values()) {
             sb.append("&bull  ");
@@ -401,4 +416,11 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         this.optionalAdditionalModeSourceCosts = optionalAdditionalModeSourceCosts;
     }
 
+    public void setRandom(boolean isRandom) {
+        this.isRandom = isRandom;
+    }
+
+    public void setChooseText(String chooseText) {
+        this.chooseText = chooseText;
+    }
 }
