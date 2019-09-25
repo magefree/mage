@@ -70,8 +70,8 @@ class RunAwayTogetherTarget extends TargetCreaturePermanent {
                 .stream()
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
-                .noneMatch(permanent -> creature.getId().equals(permanent.getId())
-                        || creature.isControlledBy(permanent.getControllerId())
+                .noneMatch(permanent -> !creature.getId().equals(permanent.getId())
+                        && creature.isControlledBy(permanent.getControllerId())
                 );
     }
 }
