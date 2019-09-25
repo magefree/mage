@@ -93,6 +93,7 @@ public class VerifyCardDataTest {
         // subtype
         skipListCreate("SUBTYPE");
         skipListAddName("SUBTYPE", "UGL", "Miss Demeanor");
+        skipListAddName("SUBTYPE", "M10", "Dread Warlock");
 
         // number
         skipListCreate("NUMBER");
