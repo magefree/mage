@@ -65,12 +65,12 @@ class SyrKonradTheGrimTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
+    public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
     @Override
-    public boolean checkEventType(GameEvent event, Game game) {
+    public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.isDiesEvent()
                 && zEvent.getTarget() != null
