@@ -170,8 +170,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
             this.duplicateModes.clear();
             if (this.isRandom) {
                 List<Mode> modes = getAvailableModes(source, game);
-                int r = RandomUtil.nextInt(modes.size());
-                this.addSelectedMode(modes.get(r).getId());
+                this.addSelectedMode(modes.get(RandomUtil.nextInt(modes.size())).getId());
                 return true;
             }
             // check if mode modifying abilities exist
