@@ -69,7 +69,7 @@ enum ReturnOfTheWildspeakerValue implements DynamicValue {
                 .map(MageObject::getPower)
                 .mapToInt(MageInt::getValue)
                 .max()
-                .getAsInt();
+                .orElse(0);
     }
 
     @Override

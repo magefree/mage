@@ -91,8 +91,8 @@ class TheGreatHengeCostReductionEffect extends CostModificationEffectImpl {
                 .map(Permanent::getPower)
                 .mapToInt(MageInt::getValue)
                 .max()
-                .getAsInt();
-        CardUtil.reduceCost(abilityToModify, reductionAmount);
+                .orElse(0);
+        CardUtil.reduceCost(abilityToModify, Math.max(0, reductionAmount));
         return true;
     }
 
