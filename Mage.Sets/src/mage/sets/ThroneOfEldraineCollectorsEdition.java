@@ -1,6 +1,5 @@
 package mage.sets;
 
-import mage.cards.AdventureCard;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -111,8 +110,5 @@ public final class ThroneOfEldraineCollectorsEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Witch's Vengeance", 358, Rarity.RARE, mage.cards.w.WitchsVengeance.class));
         cards.add(new SetCardInfo("Worthy Knight", 341, Rarity.RARE, mage.cards.w.WorthyKnight.class));
         cards.add(new SetCardInfo("Yorvo, Lord of Garenbrig", 376, Rarity.RARE, mage.cards.y.YorvoLordOfGarenbrig.class));
-
-        // This is here to prevent the incomplete adventure implementation from causing problems and will be removed
-        cards.removeIf(setCardInfo -> AdventureCard.class.isAssignableFrom(setCardInfo.getCardClass()));
     }
 }
