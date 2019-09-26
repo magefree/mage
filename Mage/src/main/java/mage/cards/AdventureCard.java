@@ -15,9 +15,9 @@ import java.util.UUID;
  */
 public abstract class AdventureCard extends CardImpl {
 
-    protected SpellAbility adventureSpellAbility;
+    private SpellAbility adventureSpellAbility;
 
-    public AdventureCard(UUID ownerId, CardSetInfo setInfo, CardType[] mainTypes, CardType[] adventureTypes, String mainCosts, String adventureName, String adventureCosts) {
+    protected AdventureCard(UUID ownerId, CardSetInfo setInfo, CardType[] mainTypes, CardType[] adventureTypes, String mainCosts, String adventureName, String adventureCosts) {
         super(ownerId, setInfo, mainTypes, mainCosts);
         adventureSpellAbility = new SpellAbility(new ManaCostsImpl(adventureCosts), adventureName, Zone.HAND, SpellAbilityType.ADVENTURE);
         if (Arrays.stream(adventureTypes).anyMatch(CardType.INSTANT::equals)) {
@@ -26,7 +26,7 @@ public abstract class AdventureCard extends CardImpl {
         adventureSpellAbility.setSourceId(this.getId());
     }
 
-    public AdventureCard(AdventureCard card) {
+    protected AdventureCard(final AdventureCard card) {
         super(card);
         this.adventureSpellAbility = card.getAdventureSpellAbility().copy();
     }
