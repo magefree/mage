@@ -63,7 +63,7 @@ class KeeperOfFablesTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DAMAGED_PLAYER
-                || event.getType() == GameEvent.EventType.END_COMBAT_STEP_POST;
+                || event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST;
     }
 
     @Override
@@ -80,7 +80,7 @@ class KeeperOfFablesTriggeredAbility extends TriggeredAbilityImpl {
                 }
             }
         }
-        if (event.getType() == GameEvent.EventType.END_COMBAT_STEP_POST) {
+        if (event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST) {
             damagedPlayerIds.clear();
         }
         return false;

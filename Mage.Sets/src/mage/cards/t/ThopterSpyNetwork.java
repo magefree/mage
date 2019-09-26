@@ -1,9 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -18,8 +15,11 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ThopterColorlessToken;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class ThopterSpyNetwork extends CardImpl {
@@ -34,7 +34,7 @@ public final class ThopterSpyNetwork extends CardImpl {
         this.addAbility(new ThopterSpyNetworkDamageTriggeredAbility());
     }
 
-    public ThopterSpyNetwork(final ThopterSpyNetwork card) {
+    private ThopterSpyNetwork(final ThopterSpyNetwork card) {
         super(card);
     }
 
@@ -46,11 +46,11 @@ public final class ThopterSpyNetwork extends CardImpl {
 
 class ThopterSpyNetworkUpkeepTriggeredAbility extends TriggeredAbilityImpl {
 
-    public ThopterSpyNetworkUpkeepTriggeredAbility() {
+    ThopterSpyNetworkUpkeepTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new ThopterColorlessToken(), 1), false);
     }
 
-    public ThopterSpyNetworkUpkeepTriggeredAbility(final ThopterSpyNetworkUpkeepTriggeredAbility ability) {
+    private ThopterSpyNetworkUpkeepTriggeredAbility(final ThopterSpyNetworkUpkeepTriggeredAbility ability) {
         super(ability);
     }
 
@@ -82,13 +82,13 @@ class ThopterSpyNetworkUpkeepTriggeredAbility extends TriggeredAbilityImpl {
 
 class ThopterSpyNetworkDamageTriggeredAbility extends TriggeredAbilityImpl {
 
-    List<UUID> damagedPlayerIds = new ArrayList<>();
+    private final List<UUID> damagedPlayerIds = new ArrayList<>();
 
-    public ThopterSpyNetworkDamageTriggeredAbility() {
+    ThopterSpyNetworkDamageTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
     }
 
-    public ThopterSpyNetworkDamageTriggeredAbility(final ThopterSpyNetworkDamageTriggeredAbility ability) {
+    private ThopterSpyNetworkDamageTriggeredAbility(final ThopterSpyNetworkDamageTriggeredAbility ability) {
         super(ability);
     }
 
@@ -100,7 +100,7 @@ class ThopterSpyNetworkDamageTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DAMAGED_PLAYER
-                || event.getType() == GameEvent.EventType.END_COMBAT_STEP_POST;
+                || event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST;
     }
 
     @Override
@@ -115,7 +115,7 @@ class ThopterSpyNetworkDamageTriggeredAbility extends TriggeredAbilityImpl {
                 }
             }
         }
-        if (event.getType() == GameEvent.EventType.END_COMBAT_STEP_POST) {
+        if (event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST) {
             damagedPlayerIds.clear();
         }
         return false;
