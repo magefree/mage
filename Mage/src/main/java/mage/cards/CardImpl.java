@@ -401,7 +401,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 .getActivatedManaAbilities(Zone.BATTLEFIELD)
                 .stream()
                 .map(ability -> ability.getNetMana(null))
-                .map(mana::addAll);
+                .forEach(mana::addAll);
         return mana;
     }
 
