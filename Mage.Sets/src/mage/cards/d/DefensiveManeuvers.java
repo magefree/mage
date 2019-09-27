@@ -1,7 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -19,8 +17,9 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class DefensiveManeuvers extends CardImpl {
@@ -45,7 +44,7 @@ public final class DefensiveManeuvers extends CardImpl {
 class DefensiveManeuversEffect extends OneShotEffect {
 
     DefensiveManeuversEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.BoostCreature);
         this.staticText = "Creatures of the creature type of your choice get +0/+4 until end of turn.";
     }
 

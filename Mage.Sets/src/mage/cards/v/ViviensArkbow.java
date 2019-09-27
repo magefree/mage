@@ -50,7 +50,7 @@ public final class ViviensArkbow extends CardImpl {
 class ViviensArkbowEffect extends OneShotEffect {
 
     ViviensArkbowEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.PutCardInPlay);
         staticText = "Look at the top X cards of your library. " +
                 "You may put a creature card with converted mana cost X or less " +
                 "from among them onto the battlefield. Put the rest on the bottom of your library in a random order.";
