@@ -695,13 +695,13 @@ public class MageBook extends JComponent {
         int totalTokensEmblems = totalTokens + getTotalNumEmblems(set);
         int start = 0;
         if (!(page * conf.CARDS_PER_PAGE <= totalTokensEmblems && (page + 1) * conf.CARDS_PER_PAGE >= totalTokensEmblems)) {
-            start = page * conf.CARDS_PER_PAGE - totalTokensEmblems;
+            start = Math.max(0, page * conf.CARDS_PER_PAGE - totalTokensEmblems);
             pageRight.setVisible(true);
         }
 
         int end = planes.size();
         if ((page + 1) * conf.CARDS_PER_PAGE < totalTokensEmblems + planes.size()) {
-            end = (page + 1) * conf.CARDS_PER_PAGE - totalTokensEmblems;
+            end = Math.max(0, (page + 1) * conf.CARDS_PER_PAGE - totalTokensEmblems);
             pageRight.setVisible(true);
         } else {
             pageRight.setVisible(false);
