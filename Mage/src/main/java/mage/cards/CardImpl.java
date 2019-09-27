@@ -8,7 +8,6 @@ import mage.ObjectColor;
 import mage.abilities.*;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.HintUtils;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.repository.PluginClassloaderRegistery;
 import mage.constants.*;
 import mage.counters.Counter;
@@ -89,18 +88,19 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             abilities.add(ability);
         }
 
-        CardGraphicInfo graphicInfo = setInfo.getGraphicInfo();
-        if (graphicInfo != null) {
-            this.usesVariousArt = graphicInfo.getUsesVariousArt();
-            if (graphicInfo.getFrameColor() != null) {
-                this.frameColor = graphicInfo.getFrameColor().copy();
-            }
-            if (graphicInfo.getFrameStyle() != null) {
-                this.frameStyle = graphicInfo.getFrameStyle();
-            }
-        }
-
         this.morphCard = false;
+
+        CardGraphicInfo graphicInfo = setInfo.getGraphicInfo();
+        if (graphicInfo == null) {
+            return;
+        }
+        this.usesVariousArt = graphicInfo.getUsesVariousArt();
+        if (graphicInfo.getFrameColor() != null) {
+            this.frameColor = graphicInfo.getFrameColor().copy();
+        }
+        if (graphicInfo.getFrameStyle() != null) {
+            this.frameStyle = graphicInfo.getFrameStyle();
+        }
     }
 
     private void setDefaultColor() {
@@ -350,15 +350,17 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public SpellAbility getSpellAbility() {
-        if (spellAbility == null) {
-            for (Ability ability : abilities.getActivatedAbilities(Zone.HAND)) {
-                if (ability instanceof SpellAbility
-                        && ((SpellAbility) ability).getSpellAbilityType() != SpellAbilityType.BASE_ALTERNATE) {
-                    return spellAbility = (SpellAbility) ability;
-                }
-            }
+        if (spellAbility != null) {
+            return spellAbility;
         }
-        return spellAbility;
+        return spellAbility = abilities
+                .getActivatedAbilities(Zone.HAND)
+                .stream()
+                .filter(SpellAbility.class::isInstance)
+                .map(SpellAbility.class::cast)
+                .filter(ability -> ability.getSpellAbilityType() != SpellAbilityType.BASE_ALTERNATE)
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
@@ -395,9 +397,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public List<Mana> getMana() {
         List<Mana> mana = new ArrayList<>();
-        for (ActivatedManaAbilityImpl ability : this.abilities.getActivatedManaAbilities(Zone.BATTLEFIELD)) {
-            mana.addAll(ability.getNetMana(null));
-        }
+        this.abilities
+                .getActivatedManaAbilities(Zone.BATTLEFIELD)
+                .stream()
+                .map(ability -> ability.getNetMana(null))
+                .map(mana::addAll);
         return mana;
     }
 
@@ -411,21 +415,21 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         Zone fromZone = game.getState().getZone(objectId);
         ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, sourceId, ownerId, fromZone, toZone, appliedEffects);
         ZoneChangeInfo zoneChangeInfo;
-        if (null != toZone) {
-            switch (toZone) {
-                case LIBRARY:
-                    zoneChangeInfo = new ZoneChangeInfo.Library(event, flag /* put on top */);
-                    break;
-                case BATTLEFIELD:
-                    zoneChangeInfo = new ZoneChangeInfo.Battlefield(event, flag /* comes into play tapped */);
-                    break;
-                default:
-                    zoneChangeInfo = new ZoneChangeInfo(event);
-                    break;
-            }
-            return ZonesHandler.moveCard(zoneChangeInfo, game);
+        if (null == toZone) {
+            return false;
         }
-        return false;
+        switch (toZone) {
+            case LIBRARY:
+                zoneChangeInfo = new ZoneChangeInfo.Library(event, flag /* put on top */);
+                break;
+            case BATTLEFIELD:
+                zoneChangeInfo = new ZoneChangeInfo.Battlefield(event, flag /* comes into play tapped */);
+                break;
+            default:
+                zoneChangeInfo = new ZoneChangeInfo(event);
+                break;
+        }
+        return ZonesHandler.moveCard(zoneChangeInfo, game);
     }
 
     @Override
@@ -559,12 +563,13 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public void checkForCountersToAdd(Permanent permanent, Game game) {
         Counters countersToAdd = game.getEnterWithCounters(permanent.getId());
-        if (countersToAdd != null) {
-            for (Counter counter : countersToAdd.values()) {
-                permanent.addCounters(counter, null, game);
-            }
-            game.setEnterWithCounters(permanent.getId(), null);
+        if (countersToAdd == null) {
+            return;
         }
+        for (Counter counter : countersToAdd.values()) {
+            permanent.addCounters(counter, null, game);
+        }
+        game.setEnterWithCounters(permanent.getId(), null);
     }
 
     @Override
@@ -580,28 +585,28 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public boolean turnFaceUp(Game game, UUID playerId) {
         GameEvent event = GameEvent.getEvent(GameEvent.EventType.TURNFACEUP, getId(), playerId);
-        if (!game.replaceEvent(event)) {
-            setFaceDown(false, game);
-            for (Ability ability : abilities) { // abilities that were set to not visible face down must be set to visible again
-                if (ability.getWorksFaceDown() && !ability.getRuleVisible()) {
-                    ability.setRuleVisible(true);
-                }
-            }
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.TURNEDFACEUP, getId(), playerId));
-            return true;
+        if (game.replaceEvent(event)) {
+            return false;
         }
-        return false;
+        setFaceDown(false, game);
+        for (Ability ability : abilities) { // abilities that were set to not visible face down must be set to visible again
+            if (ability.getWorksFaceDown() && !ability.getRuleVisible()) {
+                ability.setRuleVisible(true);
+            }
+        }
+        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.TURNEDFACEUP, getId(), playerId));
+        return true;
     }
 
     @Override
     public boolean turnFaceDown(Game game, UUID playerId) {
         GameEvent event = GameEvent.getEvent(GameEvent.EventType.TURNFACEDOWN, getId(), playerId);
-        if (!game.replaceEvent(event)) {
-            setFaceDown(true, game);
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.TURNEDFACEDOWN, getId(), playerId));
-            return true;
+        if (game.replaceEvent(event)) {
+            return false;
         }
-        return false;
+        setFaceDown(true, game);
+        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.TURNEDFACEDOWN, getId(), playerId));
+        return true;
     }
 
     @Override
@@ -706,34 +711,34 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         GameEvent addingAllEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTERS, objectId, sourceId, getControllerOrOwner(), counter.getName(), counter.getCount());
         addingAllEvent.setAppliedEffects(appliedEffects);
         addingAllEvent.setFlag(isEffect);
-        if (!game.replaceEvent(addingAllEvent)) {
-            int amount = addingAllEvent.getAmount();
-            boolean isEffectFlag = addingAllEvent.getFlag();
-            int finalAmount = amount;
-            for (int i = 0; i < amount; i++) {
-                Counter eventCounter = counter.copy();
-                eventCounter.remove(eventCounter.getCount() - 1);
-                GameEvent addingOneEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, sourceId, getControllerOrOwner(), counter.getName(), 1);
-                addingOneEvent.setAppliedEffects(appliedEffects);
-                addingOneEvent.setFlag(isEffectFlag);
-                if (!game.replaceEvent(addingOneEvent)) {
-                    getCounters(game).addCounter(eventCounter);
-                    GameEvent addedOneEvent = GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, sourceId, getControllerOrOwner(), counter.getName(), 1);
-                    addedOneEvent.setFlag(addingOneEvent.getFlag());
-                    game.fireEvent(addedOneEvent);
-                } else {
-                    finalAmount--;
-                    returnCode = false;
-                }
-            }
-            if (finalAmount > 0) {
-                GameEvent addedAllEvent = GameEvent.getEvent(GameEvent.EventType.COUNTERS_ADDED, objectId, sourceId, getControllerOrOwner(), counter.getName(), amount);
-                addedAllEvent.setFlag(isEffectFlag);
-                game.fireEvent(addedAllEvent);
-            }
-        } else {
-            returnCode = false;
+        if (game.replaceEvent(addingAllEvent)) {
+            return returnCode = false;
         }
+        int amount = addingAllEvent.getAmount();
+        boolean isEffectFlag = addingAllEvent.getFlag();
+        int finalAmount = amount;
+        for (int i = 0; i < amount; i++) {
+            Counter eventCounter = counter.copy();
+            eventCounter.remove(eventCounter.getCount() - 1);
+            GameEvent addingOneEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, sourceId, getControllerOrOwner(), counter.getName(), 1);
+            addingOneEvent.setAppliedEffects(appliedEffects);
+            addingOneEvent.setFlag(isEffectFlag);
+            if (!game.replaceEvent(addingOneEvent)) {
+                getCounters(game).addCounter(eventCounter);
+                GameEvent addedOneEvent = GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, sourceId, getControllerOrOwner(), counter.getName(), 1);
+                addedOneEvent.setFlag(addingOneEvent.getFlag());
+                game.fireEvent(addedOneEvent);
+            } else {
+                finalAmount--;
+                returnCode = false;
+            }
+        }
+        if (finalAmount == 0) {
+            return returnCode;
+        }
+        GameEvent addedAllEvent = GameEvent.getEvent(GameEvent.EventType.COUNTERS_ADDED, objectId, sourceId, getControllerOrOwner(), counter.getName(), amount);
+        addedAllEvent.setFlag(isEffectFlag);
+        game.fireEvent(addedAllEvent);
         return returnCode;
     }
 
@@ -766,9 +771,8 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public String getLogName() {
         if (name.isEmpty()) {
             return GameLog.getNeutralColoredText(EmptyNames.FACE_DOWN_CREATURE.toString());
-        } else {
-            return GameLog.getColoredObjectIdName(this);
         }
+        return GameLog.getColoredObjectIdName(this);
     }
 
     @Override
@@ -803,31 +807,32 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 mana.setWhite(true);
             }
         }
-        if (isTransformable()) {
-            Card secondCard = getSecondCardFace();
-            ObjectColor color = secondCard.getColor(null);
-            mana.setBlack(mana.isBlack() || color.isBlack());
-            mana.setGreen(mana.isGreen() || color.isGreen());
-            mana.setRed(mana.isRed() || color.isRed());
-            mana.setBlue(mana.isBlue() || color.isBlue());
-            mana.setWhite(mana.isWhite() || color.isWhite());
-            for (String rule : secondCard.getRules()) {
-                rule = rule.replaceAll("(?i)<i.*?</i>", ""); // Ignoring reminder text in italic
-                if (!mana.isBlack() && rule.matches(regexBlack)) {
-                    mana.setBlack(true);
-                }
-                if (!mana.isBlue() && rule.matches(regexBlue)) {
-                    mana.setBlue(true);
-                }
-                if (!mana.isGreen() && rule.matches(regexGreen)) {
-                    mana.setGreen(true);
-                }
-                if (!mana.isRed() && rule.matches(regexRed)) {
-                    mana.setRed(true);
-                }
-                if (!mana.isWhite() && rule.matches(regexWhite)) {
-                    mana.setWhite(true);
-                }
+        if (!isTransformable()) {
+            return mana;
+        }
+        Card secondCard = getSecondCardFace();
+        ObjectColor color = secondCard.getColor(null);
+        mana.setBlack(mana.isBlack() || color.isBlack());
+        mana.setGreen(mana.isGreen() || color.isGreen());
+        mana.setRed(mana.isRed() || color.isRed());
+        mana.setBlue(mana.isBlue() || color.isBlue());
+        mana.setWhite(mana.isWhite() || color.isWhite());
+        for (String rule : secondCard.getRules()) {
+            rule = rule.replaceAll("(?i)<i.*?</i>", ""); // Ignoring reminder text in italic
+            if (!mana.isBlack() && rule.matches(regexBlack)) {
+                mana.setBlack(true);
+            }
+            if (!mana.isBlue() && rule.matches(regexBlue)) {
+                mana.setBlue(true);
+            }
+            if (!mana.isGreen() && rule.matches(regexGreen)) {
+                mana.setGreen(true);
+            }
+            if (!mana.isRed() && rule.matches(regexRed)) {
+                mana.setRed(true);
+            }
+            if (!mana.isWhite() && rule.matches(regexWhite)) {
+                mana.setWhite(true);
             }
         }
 
@@ -846,22 +851,24 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public ObjectColor getColor(Game game) {
-        if (game != null) {
-            CardAttribute cardAttribute = game.getState().getCardAttribute(getId());
-            if (cardAttribute != null) {
-                return cardAttribute.getColor();
-            }
+        if (game == null) {
+            return super.getColor(game);
         }
-        return super.getColor(game);
+        CardAttribute cardAttribute = game.getState().getCardAttribute(getId());
+        if (cardAttribute == null) {
+            return super.getColor(game);
+        }
+        return cardAttribute.getColor();
     }
 
     @Override
     public SubTypeList getSubtype(Game game) {
-        if (game != null) {
-            CardAttribute cardAttribute = game.getState().getCardAttribute(getId());
-            if (cardAttribute != null) {
-                return cardAttribute.getSubtype();
-            }
+        if (game == null) {
+            return super.getSubtype(game);
+        }
+        CardAttribute cardAttribute = game.getState().getCardAttribute(getId());
+        if (cardAttribute != null) {
+            return cardAttribute.getSubtype();
         }
         return super.getSubtype(game);
     }
@@ -873,36 +880,39 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public boolean addAttachment(UUID permanentId, Game game) {
-        if (!this.attachments.contains(permanentId)) {
-            Permanent attachment = game.getPermanent(permanentId);
-            if (attachment == null) {
-                attachment = game.getPermanentEntering(permanentId);
-            }
-            if (attachment != null) {
-                if (!game.replaceEvent(new GameEvent(GameEvent.EventType.ATTACH, objectId, permanentId, attachment.getControllerId()))) {
-                    this.attachments.add(permanentId);
-                    attachment.attachTo(objectId, game);
-                    game.fireEvent(new GameEvent(GameEvent.EventType.ATTACHED, objectId, permanentId, attachment.getControllerId()));
-                    return true;
-                }
-            }
+        if (this.attachments.contains(permanentId)) {
+            return false;
         }
-        return false;
+        Permanent attachment = game.getPermanent(permanentId);
+        if (attachment == null) {
+            attachment = game.getPermanentEntering(permanentId);
+        }
+        if (attachment == null) {
+            return false;
+        }
+        if (game.replaceEvent(new GameEvent(GameEvent.EventType.ATTACH, objectId, permanentId, attachment.getControllerId()))) {
+            return false;
+        }
+        this.attachments.add(permanentId);
+        attachment.attachTo(objectId, game);
+        game.fireEvent(new GameEvent(GameEvent.EventType.ATTACHED, objectId, permanentId, attachment.getControllerId()));
+        return true;
     }
 
     @Override
     public boolean removeAttachment(UUID permanentId, Game game) {
-        if (this.attachments.contains(permanentId)) {
-            Permanent attachment = game.getPermanent(permanentId);
-            if (attachment != null) {
-                attachment.unattach(game);
-            }
-            if (!game.replaceEvent(new GameEvent(GameEvent.EventType.UNATTACH, objectId, permanentId, attachment != null ? attachment.getControllerId() : null))) {
-                this.attachments.remove(permanentId);
-                game.fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED, objectId, permanentId, attachment != null ? attachment.getControllerId() : null));
-                return true;
-            }
+        if (!this.attachments.contains(permanentId)) {
+            return false;
         }
-        return false;
+        Permanent attachment = game.getPermanent(permanentId);
+        if (attachment != null) {
+            attachment.unattach(game);
+        }
+        if (game.replaceEvent(new GameEvent(GameEvent.EventType.UNATTACH, objectId, permanentId, attachment != null ? attachment.getControllerId() : null))) {
+            return false;
+        }
+        this.attachments.remove(permanentId);
+        game.fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED, objectId, permanentId, attachment != null ? attachment.getControllerId() : null));
+        return true;
     }
 }
