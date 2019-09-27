@@ -1,7 +1,6 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
@@ -16,8 +15,9 @@ import mage.constants.SuperType;
 import mage.game.permanent.token.GoldToken;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class KingMacarTheGoldCursed extends CardImpl {
@@ -25,7 +25,7 @@ public final class KingMacarTheGoldCursed extends CardImpl {
     public KingMacarTheGoldCursed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.HUMAN, SubType.NOBLE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

@@ -1,7 +1,6 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -23,8 +22,9 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class LlawanCephalidEmpress extends CardImpl {
@@ -38,9 +38,9 @@ public final class LlawanCephalidEmpress extends CardImpl {
     }
 
     public LlawanCephalidEmpress(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.CEPHALID);
+        this.subtype.add(SubType.CEPHALID, SubType.NOBLE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
@@ -90,7 +90,7 @@ class LlawanCephalidRuleModifyingEffect extends ContinuousRuleModifyingEffectImp
     public boolean apply(Game game, Ability source) {
         return true;
     }
-    
+
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
@@ -99,12 +99,12 @@ class LlawanCephalidRuleModifyingEffect extends ContinuousRuleModifyingEffectImp
         }
         return null;
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.CAST_SPELL;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());

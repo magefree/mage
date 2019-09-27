@@ -1,7 +1,5 @@
-
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -17,8 +15,9 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author KholdFuzion
  */
 public final class KingSuleiman extends CardImpl {
@@ -26,14 +25,15 @@ public final class KingSuleiman extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Djinn or Efreet");
 
     static {
-        filter.add( Predicates.or(
+        filter.add(Predicates.or(
                 new SubtypePredicate(SubType.DJINN),
-                new SubtypePredicate(SubType.EFREET)));
+                new SubtypePredicate(SubType.EFREET)
+        ));
     }
 
     public KingSuleiman(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
-        this.subtype.add(SubType.HUMAN);
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        this.subtype.add(SubType.HUMAN, SubType.NOBLE);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

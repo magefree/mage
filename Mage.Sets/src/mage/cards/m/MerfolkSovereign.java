@@ -1,8 +1,5 @@
-
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -20,8 +17,9 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class MerfolkSovereign extends CardImpl {
@@ -35,8 +33,8 @@ public final class MerfolkSovereign extends CardImpl {
     }
 
     public MerfolkSovereign(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
-        this.subtype.add(SubType.MERFOLK);
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
+        this.subtype.add(SubType.MERFOLK, SubType.NOBLE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
