@@ -95,6 +95,7 @@
 |Generate|EMBLEM:M19|Vivien Reid||Emblem Vivien|VivienReidEmblem|
 |Generate|EMBLEM:M20|Chandra, Awakened Inferno||Emblem Chandra|ChandraAwakenedInfernoEmblem|
 |Generate|EMBLEM:M20|Mu Yanling, Sky Dancer||Emblem Yanling|MuYanlingSkyDancerEmblem|
+|Generate|EMBLEM:ELD|Garruk, Cursed Huntsman||Emblem Garruk|GarrukCursedHuntsmanEmblem|
 |Generate|PLANE:PCA|Plane - Academy At Tolaria West|||AcademyAtTolariaWestPlane|
 |Generate|PLANE:PCA|Plane - Agyrem|||AgyremPlane|
 |Generate|PLANE:PCA|Plane - Akoum|||AkoumPlane|
@@ -1285,3 +1286,21 @@
 |Generate|TOK:M20|Treasure|||TreasureToken|
 |Generate|TOK:M20|Wolf|||WolfToken|
 |Generate|TOK:M20|Zombie|||ZombieToken|
+|Generate|TOK:ELD|Bear|||BearToken|
+|Generate|TOK:ELD|Boar|||WolfsQuarryToken|
+|Generate|TOK:ELD|Dwarf|||DwarfToken|
+|Generate|TOK:ELD|Faerie|||FaerieToken|
+|Generate|TOK:ELD|Food|1||FoodToken|
+|Generate|TOK:ELD|Food|2||FoodToken|
+|Generate|TOK:ELD|Food|3||FoodToken|
+|Generate|TOK:ELD|Food|4||FoodToken|
+|Generate|TOK:ELD|Giant|||GiantOpportunityToken|
+|Generate|TOK:ELD|Goat|||GoatToken|
+|Generate|TOK:ELD|Human|||HumanToken|
+|Generate|TOK:ELD|Human Cleric|||OutlawsMerrimentClericToken|
+|Generate|TOK:ELD|Human Rogue|||OutlawsMerrimentRogueToken|
+|Generate|TOK:ELD|Human Warrior|||OutlawsMerrimentWarriorToken|
+|Generate|TOK:ELD|Knight|||KnightToken|
+|Generate|TOK:ELD|Mouse|||MouseToken|
+|Generate|TOK:ELD|Rat|||RatToken|
+|Generate|TOK:ELD|Wolf|||GarrukCursedHuntsmanToken|

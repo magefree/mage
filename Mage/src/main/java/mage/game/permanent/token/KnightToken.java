@@ -1,16 +1,16 @@
 package mage.game.permanent.token;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import mage.MageInt;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.util.RandomUtil;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
- *
  * @author LevelX2
  */
 public final class KnightToken extends TokenImpl {
@@ -18,7 +18,7 @@ public final class KnightToken extends TokenImpl {
     static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("ORI", "RTR", "C15", "CMA", "DOM"));
+        tokenImageSets.addAll(Arrays.asList("ORI", "RTR", "C15", "CMA", "DOM", "ELD"));
     }
 
     public KnightToken() {
