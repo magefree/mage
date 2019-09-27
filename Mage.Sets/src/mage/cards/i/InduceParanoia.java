@@ -31,7 +31,7 @@ public final class InduceParanoia extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new InduceParanoiaEffect(), 
                 new CounterTargetEffect(),
-                new ManaWasSpentCondition(ColoredManaSymbol.B), "Counter target spell. If {B} was spent to cast {this}, that spell's controller puts the top X cards of their library into their graveyard, where X is the spell's converted mana cost."));
+                new ManaWasSpentCondition(ColoredManaSymbol.B), "Counter target spell. If {B} was spent to cast this spell, that spell's controller puts the top X cards of their library into their graveyard, where X is the spell's converted mana cost."));
                 
         // Counter target spell. 
         this.getSpellAbility().addTarget(new TargetSpell());
@@ -51,7 +51,7 @@ class InduceParanoiaEffect extends OneShotEffect {
 
     InduceParanoiaEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Counter target spell. If {B} was spent to cast {this}, that spell's controller puts the top X cards of their library into their graveyard, where X is the spell's converted mana cost.";
+        this.staticText = "Counter target spell. If {B} was spent to cast this spell, that spell's controller puts the top X cards of their library into their graveyard, where X is the spell's converted mana cost.";
     }
 
     InduceParanoiaEffect(final InduceParanoiaEffect effect) {
