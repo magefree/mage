@@ -33,7 +33,7 @@ public final class TheCauldronOfEternity extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
 
-        // This spell costs {2} less for each creature card in your graveyard.
+        // This spell costs {2} less to cast for each creature card in your graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new TheCauldronOfEternityCostReductionEffect()));
 
         // Whenever a creature you control dies, put it on the bottom of its owner's library.
@@ -66,7 +66,7 @@ class TheCauldronOfEternityCostReductionEffect extends CostModificationEffectImp
 
     TheCauldronOfEternityCostReductionEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "This spell costs {2} less for each creature card in your graveyard";
+        staticText = "This spell costs {2} less to cast for each creature card in your graveyard";
     }
 
     private TheCauldronOfEternityCostReductionEffect(final TheCauldronOfEternityCostReductionEffect effect) {
