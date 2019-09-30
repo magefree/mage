@@ -95,9 +95,6 @@ public class VerifyCardDataTest {
         skipListCreate("SUBTYPE");
         skipListAddName("SUBTYPE", "UGL", "Miss Demeanor");
 
-        subtypesToIgnore.add("Noble");
-        subtypesToIgnore.add("Warlock");
-
         // number
         skipListCreate("NUMBER");
 
