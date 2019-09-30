@@ -5,6 +5,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.hint.StaticHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -30,6 +31,9 @@ public final class SunderingStroke extends CardImpl {
                         "instead {this} deals 7 damage to each of those permanents and/or players"
         ));
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(7, 3));
+        this.getSpellAbility().addHint(new StaticHint(
+                "(You have to choose how 7 damage is divided even if you spend seven red mana)"
+        ));
     }
 
     private SunderingStroke(final SunderingStroke card) {
