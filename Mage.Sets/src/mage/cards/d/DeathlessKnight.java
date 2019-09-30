@@ -59,23 +59,26 @@ class DeathlessKnightTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.GAINED_LIFE;
+        return event.getType() == GameEvent.EventType.GAINED_LIFE
+                || event.getType() == GameEvent.EventType.END_PHASE_POST;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!event.getPlayerId().equals(controllerId)
-                || game.getState().getZone(this.getSourceId()) == Zone.GRAVEYARD
-                || triggeredOnce) {
+        if (event.getType() == GameEvent.EventType.END_PHASE_POST) {
+            triggeredOnce = false;
+            return false;
+        }
+        if (event.getType() != GameEvent.EventType.GAINED_LIFE
+                || !event.getPlayerId().equals(controllerId)
+                || game.getState().getZone(this.getSourceId()) == Zone.GRAVEYARD) {
+            return false;
+        }
+        if (triggeredOnce) {
             return false;
         }
         triggeredOnce = true;
         return true;
-    }
-
-    @Override
-    public void reset(Game game) {
-        triggeredOnce = false;
     }
 
     @Override

@@ -26,14 +26,22 @@ public class DrawSecondCardTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DREW_CARD;
+        return event.getType() == GameEvent.EventType.DREW_CARD
+                || event.getType() == GameEvent.EventType.END_PHASE_POST;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!event.getPlayerId().equals(controllerId)
-                || game.getPermanent(sourceId) == null
-                || triggeredOnce) {
+        if (event.getType() == GameEvent.EventType.END_PHASE_POST) {
+            triggeredOnce = false;
+            return false;
+        }
+        if (event.getType() != GameEvent.EventType.DREW_CARD
+                || !event.getPlayerId().equals(controllerId)
+                || game.getPermanent(sourceId) == null) {
+            return false;
+        }
+        if (triggeredOnce) {
             return false;
         }
         CardsAmountDrawnThisTurnWatcher watcher = game.getState().getWatcher(CardsAmountDrawnThisTurnWatcher.class);
@@ -45,11 +53,6 @@ public class DrawSecondCardTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public void reset(Game game) {
-        triggeredOnce = false;
     }
 
     @Override
