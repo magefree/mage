@@ -126,12 +126,11 @@ class CovetousUrgeCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        Card card = mor.getCard(game);
-        if (card == null) {
+        if (mor.getCard(game) == null) {
             discard();
             return false;
         }
-        return source.isControlledBy(affectedControllerId);
+        return mor.refersTo(sourceId, game) && source.isControlledBy(affectedControllerId);
     }
 }
 
