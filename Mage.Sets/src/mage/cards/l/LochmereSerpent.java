@@ -18,7 +18,9 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
+import mage.target.common.TargetCardInOpponentsGraveyard;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
@@ -63,6 +65,9 @@ public final class LochmereSerpent extends CardImpl {
                 new ManaCostsImpl("{U}{B}")
         );
         ability.addEffect(new ReturnSourceFromGraveyardToHandEffect());
+        ability.addTarget(new TargetCardInOpponentsGraveyard(
+                5, 5, StaticFilters.FILTER_CARD, true
+        ));
         this.addAbility(ability);
     }
 
