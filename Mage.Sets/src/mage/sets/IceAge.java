@@ -108,6 +108,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Errantry", 183, Rarity.COMMON, mage.cards.e.Errantry.class));
         cards.add(new SetCardInfo("Essence Filter", 233, Rarity.COMMON, mage.cards.e.EssenceFilter.class));
         cards.add(new SetCardInfo("Essence Flare", 69, Rarity.COMMON, mage.cards.e.EssenceFlare.class));
+        cards.add(new SetCardInfo("Essence Vortex", 287, Rarity.UNCOMMON, mage.cards.e.EssenceVortex.class));
         cards.add(new SetCardInfo("Fanatical Fever", 234, Rarity.UNCOMMON, mage.cards.f.FanaticalFever.class));
         cards.add(new SetCardInfo("Fear", 124, Rarity.COMMON, mage.cards.f.Fear.class));
         cards.add(new SetCardInfo("Fiery Justice", 288, Rarity.RARE, mage.cards.f.FieryJustice.class));
