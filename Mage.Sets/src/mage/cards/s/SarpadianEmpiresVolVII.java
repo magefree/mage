@@ -21,7 +21,6 @@ import mage.game.permanent.token.CitizenToken;
 import mage.game.permanent.token.GoblinToken;
 import mage.game.permanent.token.SaprolingToken;
 import mage.game.permanent.token.ThrullToken;
-import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 
@@ -29,9 +28,9 @@ import mage.players.Player;
  *
  * @author LoneFox
  */
-public final class SarpadianEmpiresVolVii extends CardImpl {
+public final class SarpadianEmpiresVolVII extends CardImpl {
 
-    public SarpadianEmpiresVolVii(UUID ownerId, CardSetInfo setInfo) {
+    public SarpadianEmpiresVolVII(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // As Sarpadian Empires, Vol. VII enters the battlefield, choose white Citizen, blue Camarid, black Thrull, red Goblin, or green Saproling.
@@ -42,13 +41,13 @@ public final class SarpadianEmpiresVolVii extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SarpadianEmpiresVolVii(final SarpadianEmpiresVolVii card) {
+    public SarpadianEmpiresVolVII(final SarpadianEmpiresVolVII card) {
         super(card);
     }
 
     @Override
-    public SarpadianEmpiresVolVii copy() {
-        return new SarpadianEmpiresVolVii(this);
+    public SarpadianEmpiresVolVII copy() {
+        return new SarpadianEmpiresVolVII(this);
     }
 }
 

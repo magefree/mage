@@ -1,12 +1,13 @@
 package mage.sets;
 
-import java.util.List;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+
+import java.util.List;
 
 public final class TimeSpiral extends ExpansionSet {
 
@@ -233,7 +234,7 @@ public final class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Sage of Epityr", 74, Rarity.COMMON, mage.cards.s.SageOfEpityr.class));
         cards.add(new SetCardInfo("Saltcrusted Steppe", 277, Rarity.UNCOMMON, mage.cards.s.SaltcrustedSteppe.class));
         cards.add(new SetCardInfo("Sangrophage", 127, Rarity.COMMON, mage.cards.s.Sangrophage.class));
-        cards.add(new SetCardInfo("Sarpadian Empires, Vol. VII", 263, Rarity.RARE, mage.cards.s.SarpadianEmpiresVolVii.class));
+        cards.add(new SetCardInfo("Sarpadian Empires, Vol. VII", 263, Rarity.RARE, mage.cards.s.SarpadianEmpiresVolVII.class));
         cards.add(new SetCardInfo("Savage Thallid", 213, Rarity.COMMON, mage.cards.s.SavageThallid.class));
         cards.add(new SetCardInfo("Scarwood Treefolk", 214, Rarity.COMMON, mage.cards.s.ScarwoodTreefolk.class));
         cards.add(new SetCardInfo("Scion of the Ur-Dragon", 246, Rarity.RARE, mage.cards.s.ScionOfTheUrDragon.class));

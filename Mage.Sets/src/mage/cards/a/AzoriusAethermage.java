@@ -23,11 +23,11 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public final class AzoriusAEthermage extends CardImpl {
+public final class AzoriusAethermage extends CardImpl {
 
     private static final String rule = "Whenever a permanent is returned to your hand, ";
 
-    public AzoriusAEthermage(UUID ownerId, CardSetInfo setInfo) {
+    public AzoriusAethermage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
 
         this.subtype.add(SubType.HUMAN);
@@ -40,13 +40,13 @@ public final class AzoriusAEthermage extends CardImpl {
         this.addAbility(new AzoriusAEthermageAbility(Zone.BATTLEFIELD, Zone.BATTLEFIELD, Zone.HAND, effect, new FilterPermanent(), rule, true));
     }
 
-    public AzoriusAEthermage(final AzoriusAEthermage card) {
+    public AzoriusAethermage(final AzoriusAethermage card) {
         super(card);
     }
 
     @Override
-    public AzoriusAEthermage copy() {
-        return new AzoriusAEthermage(this);
+    public AzoriusAethermage copy() {
+        return new AzoriusAethermage(this);
     }
 }
 
