@@ -66,6 +66,7 @@ public final class Apocalypse extends ExpansionSet {
         cards.add(new SetCardInfo("Flowstone Charger", 99, Rarity.UNCOMMON, mage.cards.f.FlowstoneCharger.class));
         cards.add(new SetCardInfo("Foul Presence", 39, Rarity.UNCOMMON, mage.cards.f.FoulPresence.class));
         cards.add(new SetCardInfo("Fungal Shambler", 100, Rarity.RARE, mage.cards.f.FungalShambler.class));
+        cards.add(new SetCardInfo("Gaea's Balance", 77, Rarity.UNCOMMON, mage.cards.g.GaeasBalance.class));
         cards.add(new SetCardInfo("Gaea's Skyfolk", 101, Rarity.COMMON, mage.cards.g.GaeasSkyfolk.class));
         cards.add(new SetCardInfo("Gerrard Capashen", 11, Rarity.RARE, mage.cards.g.GerrardCapashen.class));
         cards.add(new SetCardInfo("Gerrard's Verdict", 102, Rarity.UNCOMMON, mage.cards.g.GerrardsVerdict.class));
