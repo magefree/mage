@@ -68,7 +68,7 @@ public final class KenrithTheReturnedKing extends CardImpl {
         this.addAbility(ability);
 
         // {4}{B}: Put target creature card from a graveyard onto the battlefield under its owner's control.
-        ability = new SimpleActivatedAbility(new GainLifeTargetEffect(5), new ManaCostsImpl("{4}{B}"));
+        ability = new SimpleActivatedAbility(new KenrithTheReturnedKingEffect(), new ManaCostsImpl("{4}{B}"));
         ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE));
         this.addAbility(ability);
     }
