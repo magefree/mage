@@ -208,6 +208,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 346, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mtenda Griffin", 28, Rarity.UNCOMMON, mage.cards.m.MtendaGriffin.class));
         cards.add(new SetCardInfo("Mtenda Herder", 29, Rarity.COMMON, mage.cards.m.MtendaHerder.class));
+        cards.add(new SetCardInfo("Mtenda Lion", 128, Rarity.COMMON, mage.cards.m.MtendaLion.class));
         cards.add(new SetCardInfo("Mystical Tutor", 80, Rarity.UNCOMMON, mage.cards.m.MysticalTutor.class));
         cards.add(new SetCardInfo("Natural Balance", 231, Rarity.RARE, mage.cards.n.NaturalBalance.class));
         cards.add(new SetCardInfo("Nettletooth Djinn", 232, Rarity.UNCOMMON, mage.cards.n.NettletoothDjinn.class));
