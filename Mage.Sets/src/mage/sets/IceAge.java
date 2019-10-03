@@ -100,7 +100,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Elder Druid", 232, Rarity.RARE, mage.cards.e.ElderDruid.class));
         cards.add(new SetCardInfo("Elemental Augury", 286, Rarity.RARE, mage.cards.e.ElementalAugury.class));
         cards.add(new SetCardInfo("Elkin Bottle", 317, Rarity.RARE, mage.cards.e.ElkinBottle.class));
-        cards.add(new SetCardInfo("Elvish Healer", 246, Rarity.COMMON, mage.cards.e.ElvishHealer.class));
+        cards.add(new SetCardInfo("Elvish Healer", 22, Rarity.COMMON, mage.cards.e.ElvishHealer.class));
         cards.add(new SetCardInfo("Enduring Renewal", 23, Rarity.RARE, mage.cards.e.EnduringRenewal.class));
         cards.add(new SetCardInfo("Energy Storm", 24, Rarity.RARE, mage.cards.e.EnergyStorm.class));
         cards.add(new SetCardInfo("Enervate", 67, Rarity.COMMON, mage.cards.e.Enervate.class));
@@ -120,8 +120,6 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Forbidden Lore", 236, Rarity.RARE, mage.cards.f.ForbiddenLore.class));
         cards.add(new SetCardInfo("Force Void", 70, Rarity.UNCOMMON, mage.cards.f.ForceVoid.class));
         cards.add(new SetCardInfo("Forest", 380, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Forest", 381, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Forest", 382, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forgotten Lore", 237, Rarity.UNCOMMON, mage.cards.f.ForgottenLore.class));
         cards.add(new SetCardInfo("Formation", 25, Rarity.RARE, mage.cards.f.Formation.class));
         cards.add(new SetCardInfo("Foul Familiar", 126, Rarity.COMMON, mage.cards.f.FoulFamiliar.class));
@@ -311,6 +309,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Snow-Covered Mountain", 379, Rarity.LAND, mage.cards.s.SnowCoveredMountain.class));
         cards.add(new SetCardInfo("Snow-Covered Plains", 367, Rarity.LAND, mage.cards.s.SnowCoveredPlains.class));
         cards.add(new SetCardInfo("Snow-Covered Swamp", 372, Rarity.LAND, mage.cards.s.SnowCoveredSwamp.class));
+        cards.add(new SetCardInfo("Snowblind", 264, Rarity.RARE, mage.cards.s.Snowblind.class));
         cards.add(new SetCardInfo("Soldevi Golem", 338, Rarity.RARE, mage.cards.s.SoldeviGolem.class));
         cards.add(new SetCardInfo("Soldevi Machinist", 102, Rarity.UNCOMMON, mage.cards.s.SoldeviMachinist.class));
         cards.add(new SetCardInfo("Soldevi Simulacrum", 339, Rarity.UNCOMMON, mage.cards.s.SoldeviSimulacrum.class));
