@@ -49,6 +49,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Benthic Djinn", 257, Rarity.RARE, mage.cards.b.BenthicDjinn.class));
         cards.add(new SetCardInfo("Binding Agony", 106, Rarity.COMMON, mage.cards.b.BindingAgony.class));
         cards.add(new SetCardInfo("Blighted Shaman", 107, Rarity.UNCOMMON, mage.cards.b.BlightedShaman.class));
+        cards.add(new SetCardInfo("Blind Fury", 158, Rarity.UNCOMMON, mage.cards.b.BlindFury.class));
         cards.add(new SetCardInfo("Blinding Light", 5, Rarity.UNCOMMON, mage.cards.b.BlindingLight.class));
         cards.add(new SetCardInfo("Blistering Barrier", 159, Rarity.COMMON, mage.cards.b.BlisteringBarrier.class));
         cards.add(new SetCardInfo("Bone Harvest", 108, Rarity.COMMON, mage.cards.b.BoneHarvest.class));
