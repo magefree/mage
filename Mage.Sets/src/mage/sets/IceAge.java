@@ -150,6 +150,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Gorilla Pack", 247, Rarity.COMMON, mage.cards.g.GorillaPack.class));
         cards.add(new SetCardInfo("Gravebind", 129, Rarity.RARE, mage.cards.g.Gravebind.class));
         cards.add(new SetCardInfo("Green Scarab", 28, Rarity.UNCOMMON, mage.cards.g.GreenScarab.class));
+        cards.add(new SetCardInfo("Grizzled Wolverine", 192, Rarity.COMMON, mage.cards.g.GrizzledWolverine.class));
         cards.add(new SetCardInfo("Hallowed Ground", 29, Rarity.UNCOMMON, mage.cards.h.HallowedGround.class));
         cards.add(new SetCardInfo("Halls of Mist", 354, Rarity.RARE, mage.cards.h.HallsOfMist.class));
         cards.add(new SetCardInfo("Heal", 30, Rarity.COMMON, mage.cards.h.Heal.class));
