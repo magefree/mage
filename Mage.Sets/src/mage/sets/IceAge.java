@@ -100,6 +100,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Elder Druid", 232, Rarity.RARE, mage.cards.e.ElderDruid.class));
         cards.add(new SetCardInfo("Elemental Augury", 286, Rarity.RARE, mage.cards.e.ElementalAugury.class));
         cards.add(new SetCardInfo("Elkin Bottle", 317, Rarity.RARE, mage.cards.e.ElkinBottle.class));
+        cards.add(new SetCardInfo("Elvish Healer", 246, Rarity.COMMON, mage.cards.e.ElvishHealer.class));
         cards.add(new SetCardInfo("Enduring Renewal", 23, Rarity.RARE, mage.cards.e.EnduringRenewal.class));
         cards.add(new SetCardInfo("Energy Storm", 24, Rarity.RARE, mage.cards.e.EnergyStorm.class));
         cards.add(new SetCardInfo("Enervate", 67, Rarity.COMMON, mage.cards.e.Enervate.class));
