@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -37,7 +37,7 @@ public final class ArcticFoxes extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Creatures with power 2 or greater can't block Arctic Foxes as long as defending player controls a snow land.
-        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalRestrictionEffect(
                 new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield),
                 ArcticFoxesCondition.instance, "creatures with power 2 or greater can't block {this}" +
                 " as long as defending player controls a snow land"
