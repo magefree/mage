@@ -250,6 +250,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Reckless Embermage", 189, Rarity.RARE, mage.cards.r.RecklessEmbermage.class));
         cards.add(new SetCardInfo("Regeneration", 236, Rarity.COMMON, mage.cards.r.Regeneration.class));
         cards.add(new SetCardInfo("Reign of Chaos", 190, Rarity.UNCOMMON, mage.cards.r.ReignOfChaos.class));
+        cards.add(new SetCardInfo("Reign of Terror", 35, Rarity.UNCOMMON, mage.cards.r.ReignOfTerror.class));
         cards.add(new SetCardInfo("Reparations", 278, Rarity.RARE, mage.cards.r.Reparations.class));
         cards.add(new SetCardInfo("Restless Dead", 138, Rarity.COMMON, mage.cards.r.RestlessDead.class));
         cards.add(new SetCardInfo("Ritual of Steel", 36, Rarity.COMMON, mage.cards.r.RitualOfSteel.class));
