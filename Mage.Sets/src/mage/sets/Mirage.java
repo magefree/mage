@@ -208,7 +208,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 346, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mtenda Griffin", 28, Rarity.UNCOMMON, mage.cards.m.MtendaGriffin.class));
         cards.add(new SetCardInfo("Mtenda Herder", 29, Rarity.COMMON, mage.cards.m.MtendaHerder.class));
-        cards.add(new SetCardInfo("Mtenda Lion", 128, Rarity.COMMON, mage.cards.m.MtendaLion.class));
+        cards.add(new SetCardInfo("Mtenda Lion", 230, Rarity.COMMON, mage.cards.m.MtendaLion.class));
         cards.add(new SetCardInfo("Mystical Tutor", 80, Rarity.UNCOMMON, mage.cards.m.MysticalTutor.class));
         cards.add(new SetCardInfo("Natural Balance", 231, Rarity.RARE, mage.cards.n.NaturalBalance.class));
         cards.add(new SetCardInfo("Nettletooth Djinn", 232, Rarity.UNCOMMON, mage.cards.n.NettletoothDjinn.class));
@@ -250,7 +250,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Reckless Embermage", 189, Rarity.RARE, mage.cards.r.RecklessEmbermage.class));
         cards.add(new SetCardInfo("Regeneration", 236, Rarity.COMMON, mage.cards.r.Regeneration.class));
         cards.add(new SetCardInfo("Reign of Chaos", 190, Rarity.UNCOMMON, mage.cards.r.ReignOfChaos.class));
-        cards.add(new SetCardInfo("Reign of Terror", 35, Rarity.UNCOMMON, mage.cards.r.ReignOfTerror.class));
+        cards.add(new SetCardInfo("Reign of Terror", 137, Rarity.UNCOMMON, mage.cards.r.ReignOfTerror.class));
         cards.add(new SetCardInfo("Reparations", 278, Rarity.RARE, mage.cards.r.Reparations.class));
         cards.add(new SetCardInfo("Restless Dead", 138, Rarity.COMMON, mage.cards.r.RestlessDead.class));
         cards.add(new SetCardInfo("Ritual of Steel", 36, Rarity.COMMON, mage.cards.r.RitualOfSteel.class));
