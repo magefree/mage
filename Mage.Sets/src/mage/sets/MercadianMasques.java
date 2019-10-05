@@ -235,6 +235,7 @@ public final class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 334, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Power Matrix", 309, Rarity.RARE, mage.cards.p.PowerMatrix.class));
         cards.add(new SetCardInfo("Primeval Shambler", 152, Rarity.UNCOMMON, mage.cards.p.PrimevalShambler.class));
+        cards.add(new SetCardInfo("Puffer Extract", 310, Rarity.UNCOMMON, mage.cards.p.PufferExtract.class));
         cards.add(new SetCardInfo("Pulverize", 207, Rarity.RARE, mage.cards.p.Pulverize.class));
         cards.add(new SetCardInfo("Putrefaction", 153, Rarity.UNCOMMON, mage.cards.p.Putrefaction.class));
         cards.add(new SetCardInfo("Puppet's Verdict", 208, Rarity.RARE, mage.cards.p.PuppetsVerdict.class));
