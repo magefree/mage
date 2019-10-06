@@ -52,7 +52,7 @@ public final class Embercleave extends CardImpl {
         ability = new SimpleStaticAbility(new BoostEquippedEffect(1, 1));
         ability.addEffect(new GainAbilityAttachedEffect(
                 DoubleStrikeAbility.getInstance(), AttachmentType.EQUIPMENT
-        ).setText("and has first strike"));
+        ).setText("and has double strike strike"));
         ability.addEffect(new GainAbilityAttachedEffect(
                 TrampleAbility.getInstance(), AttachmentType.EQUIPMENT
         ).setText("and trample"));
