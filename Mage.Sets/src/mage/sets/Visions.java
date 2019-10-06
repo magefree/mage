@@ -86,6 +86,7 @@ public final class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Hulking Cyclops", 84, Rarity.UNCOMMON, mage.cards.h.HulkingCyclops.class));
         cards.add(new SetCardInfo("Impulse", 34, Rarity.COMMON, mage.cards.i.Impulse.class));
         cards.add(new SetCardInfo("Infantry Veteran", 9, Rarity.COMMON, mage.cards.i.InfantryVeteran.class));
+        cards.add(new SetCardInfo("Infernal Harvest", 62, Rarity.COMMON, mage.cards.i.InfernalHarvest.class));
         cards.add(new SetCardInfo("Inspiration", 35, Rarity.COMMON, mage.cards.i.Inspiration.class));
         cards.add(new SetCardInfo("Iron-Heart Chimera", 146, Rarity.UNCOMMON, mage.cards.i.IronHeartChimera.class));
         cards.add(new SetCardInfo("Jamuraan Lion", 10, Rarity.COMMON, mage.cards.j.JamuraanLion.class));
