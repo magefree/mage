@@ -43,7 +43,7 @@ public final class SyrFarenTheHengehammer extends CardImpl {
 
         // Whenever Syr Faren, the Hengehammer attacks, another target attacking creature gets +X/+X until end of turn, where X is Syr Faren's power.
         Ability ability = new AttacksTriggeredAbility(
-                new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn), false
+                new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn, true), false
         );
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
