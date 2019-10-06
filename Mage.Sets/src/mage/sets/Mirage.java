@@ -79,6 +79,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Coral Fighters", 59, Rarity.UNCOMMON, mage.cards.c.CoralFighters.class));
         cards.add(new SetCardInfo("Crash of Rhinos", 210, Rarity.COMMON, mage.cards.c.CrashOfRhinos.class));
         cards.add(new SetCardInfo("Crimson Hellkite", 167, Rarity.RARE, mage.cards.c.CrimsonHellkite.class));
+        cards.add(new SetCardInfo("Crimson Roc", 168, Rarity.UNCOMMON, mage.cards.c.CrimsonRoc.class));
         cards.add(new SetCardInfo("Crypt Cobra", 114, Rarity.UNCOMMON, mage.cards.c.CryptCobra.class));
         cards.add(new SetCardInfo("Crystal Golem", 298, Rarity.UNCOMMON, mage.cards.c.CrystalGolem.class));
         cards.add(new SetCardInfo("Crystal Vein", 325, Rarity.UNCOMMON, mage.cards.c.CrystalVein.class));
