@@ -39,7 +39,7 @@ public final class Embercleave extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // This spell costs {1} less to cast for each attacking creature you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new AncientStoneIdolCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new EmbercleaveCostReductionEffect()));
 
         // When Embercleave enters the battlefield, attach it to target creature you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new AttachEffect(
@@ -72,7 +72,7 @@ public final class Embercleave extends CardImpl {
     }
 }
 
-class AncientStoneIdolCostReductionEffect extends CostModificationEffectImpl {
+class EmbercleaveCostReductionEffect extends CostModificationEffectImpl {
 
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
 
@@ -80,12 +80,12 @@ class AncientStoneIdolCostReductionEffect extends CostModificationEffectImpl {
         filter.add(AttackingPredicate.instance);
     }
 
-    AncientStoneIdolCostReductionEffect() {
+    EmbercleaveCostReductionEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
         staticText = "This spell costs {1} less to cast for each attacking creature you control";
     }
 
-    private AncientStoneIdolCostReductionEffect(AncientStoneIdolCostReductionEffect effect) {
+    private EmbercleaveCostReductionEffect(EmbercleaveCostReductionEffect effect) {
         super(effect);
     }
 
@@ -105,7 +105,7 @@ class AncientStoneIdolCostReductionEffect extends CostModificationEffectImpl {
     }
 
     @Override
-    public AncientStoneIdolCostReductionEffect copy() {
-        return new AncientStoneIdolCostReductionEffect(this);
+    public EmbercleaveCostReductionEffect copy() {
+        return new EmbercleaveCostReductionEffect(this);
     }
 }
