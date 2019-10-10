@@ -1,9 +1,9 @@
 package mage.cards.d;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -69,17 +69,12 @@ class DeafeningSilenceEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Spell spell = game.getSpell(event.getTargetId());
-        if (spell == null || spell.isCreature()) {
+        Card card = game.getCard(event.getTargetId());
+        if (card == null || card.isCreature()) {
             return false;
         }
         DeafeningSilenceWatcher watcher = game.getState().getWatcher(DeafeningSilenceWatcher.class);
         return watcher != null && watcher.castSpell(event.getPlayerId());
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Each player can't cast more than one noncreature spell each turn.";
     }
 }
 
