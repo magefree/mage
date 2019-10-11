@@ -8,11 +8,13 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class SyrKonradTheGrimTest extends CardTestPlayerBase {
 
     @Test
-    public void ownGraveyardTriggerTest() {
+    public void leavesOwnGraveyardTriggerTest() {
         addCard(Zone.HAND, playerA, "Rest in Peace");
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Syr Konrad, the Grim");
+        // These leaving the graveyard *should* cause loss of life
         addCard(Zone.GRAVEYARD, playerA, "Grizzly Bears", 2);
+        // These ones *shouldn't*
         addCard(Zone.GRAVEYARD, playerB, "Grizzly Bears");
         setStopAt(1, PhaseStep.UNTAP);
         execute();
