@@ -72,6 +72,7 @@ class SyrKonradTheGrimTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        // Whenever another creature dies
         if (zEvent.isDiesEvent()
                 && zEvent.getTarget() != null
                 && !zEvent.getTargetId().equals(this.getSourceId())
@@ -79,6 +80,7 @@ class SyrKonradTheGrimTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         Card card = game.getCard(zEvent.getTargetId());
+        // Or a creature card is put into a graveyard from anywhere other than the battlefield
         if (card == null || !card.isCreature()) {
             return false;
         }
@@ -86,7 +88,9 @@ class SyrKonradTheGrimTriggeredAbility extends TriggeredAbilityImpl {
                 && zEvent.getFromZone() != Zone.BATTLEFIELD) {
             return true;
         }
-        return zEvent.getFromZone() == Zone.GRAVEYARD;
+        // Or a creature card leaves your graveyard
+        return zEvent.getFromZone() == Zone.GRAVEYARD
+                && zEvent.getPlayerId() == this.getControllerId();
     }
 
     @Override
