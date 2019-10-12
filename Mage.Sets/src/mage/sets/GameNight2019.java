@@ -19,6 +19,7 @@ public final class GameNight2019 extends ExpansionSet {
         super("Game Night 2019", "GN2", ExpansionSet.buildDate(2019, 11, 15), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false; // TODO: change when spoiled
 
+        cards.add(new SetCardInfo("Calculating Lich", 3, Rarity.MYTHIC, mage.cards.c.CalculatingLich.class));
         cards.add(new SetCardInfo("Earthshaker Giant", 5, Rarity.MYTHIC, mage.cards.e.EarthshakerGiant.class));
         cards.add(new SetCardInfo("Fiendish Duo", 4, Rarity.MYTHIC, mage.cards.f.FiendishDuo.class));
         cards.add(new SetCardInfo("Highcliff Felidar", 1, Rarity.MYTHIC, mage.cards.h.HighcliffFelidar.class));

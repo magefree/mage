@@ -33,7 +33,7 @@ public final class FiendishDuo extends CardImpl {
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
 
-        // If a source would deal damage to an opponent, it deals double that damage that player instead.
+        // If a source would deal damage to an opponent, it deals double that damage to that player instead.
         this.addAbility(new SimpleStaticAbility(new FiendishDuoEffect()));
     }
 
