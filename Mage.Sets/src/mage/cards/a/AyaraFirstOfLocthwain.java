@@ -18,6 +18,7 @@ import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetControlledPermanent;
 
@@ -29,7 +30,7 @@ import java.util.UUID;
 public final class AyaraFirstOfLocthwain extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterPermanent("{this} or another black creature");
+            = new FilterCreaturePermanent("{this} or another black creature");
     private static final FilterControlledPermanent filter2
             = new FilterControlledCreaturePermanent("another black creature");
 
