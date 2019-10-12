@@ -52,7 +52,6 @@ public class Oathbreaker extends Vintage {
         banned.add("Painter's Servant");
         banned.add("Panoptic Mirror");
         banned.add("Primal Surge");
-        banned.add("Recurring Nightmare");
         banned.add("Saheeli, the Gifted");
         banned.add("Sol Ring");
         banned.add("Sundering Titan");
