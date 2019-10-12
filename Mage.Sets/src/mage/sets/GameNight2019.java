@@ -20,6 +20,7 @@ public final class GameNight2019 extends ExpansionSet {
         this.hasBasicLands = false; // TODO: change when spoiled
 
         cards.add(new SetCardInfo("Earthshaker Giant", 5, Rarity.MYTHIC, mage.cards.e.EarthshakerGiant.class));
+        cards.add(new SetCardInfo("Fiendish Duo", 4, Rarity.MYTHIC, mage.cards.f.FiendishDuo.class));
         cards.add(new SetCardInfo("Highcliff Felidar", 1, Rarity.MYTHIC, mage.cards.h.HighcliffFelidar.class));
         cards.add(new SetCardInfo("Sphinx of Enlightenment", 2, Rarity.MYTHIC, mage.cards.s.SphinxOfEnlightenment.class));
     }
