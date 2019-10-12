@@ -139,6 +139,8 @@ Masters Edition III|ME3|
 Masters Edition IV|ME4|
 Masters Edition|MED|
 Game Day|MGDC|
+Game Night|GNT|
+Game Night 2019|GN2|
 Mirage|MIR|
 Launch Party|MLP|
 Modern Horizons|MH1|
