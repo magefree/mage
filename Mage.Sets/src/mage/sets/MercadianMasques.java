@@ -287,6 +287,7 @@ public final class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Sever Soul", 159, Rarity.COMMON, mage.cards.s.SeverSoul.class));
         cards.add(new SetCardInfo("Shock Troops", 212, Rarity.COMMON, mage.cards.s.ShockTroops.class));
         cards.add(new SetCardInfo("Shoving Match", 103, Rarity.UNCOMMON, mage.cards.s.ShovingMatch.class));
+        cards.add(new SetCardInfo("Silent Assassin", 160, Rarity.RARE, mage.cards.s.SilentAssassin.class));
         cards.add(new SetCardInfo("Silverglade Elemental", 269, Rarity.COMMON, mage.cards.s.SilvergladeElemental.class));
         cards.add(new SetCardInfo("Silverglade Pathfinder", 270, Rarity.UNCOMMON, mage.cards.s.SilvergladePathfinder.class));
         cards.add(new SetCardInfo("Sizzle", 213, Rarity.COMMON, mage.cards.s.Sizzle.class));
