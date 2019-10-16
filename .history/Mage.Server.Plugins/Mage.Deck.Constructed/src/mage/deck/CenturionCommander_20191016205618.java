@@ -79,8 +79,12 @@ public class CenturionCommander extends Commander {
 
         bannedPartner.add("Rowan Kenrith");
         bannedPartner.add("Tymna the Weaver");
-        bannedPartner.add("Will Kenrith");
-        bannedPartner.add("Vial Smasher The Fierce");
+        bannedPartner.add("");
+        bannedPartner.add("");
+         
+ 
+Will Kenrith
+Vial Smasher The Fierce
     }
 
 }
