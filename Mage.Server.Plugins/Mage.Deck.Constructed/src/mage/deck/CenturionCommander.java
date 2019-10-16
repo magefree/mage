@@ -76,11 +76,6 @@ public class CenturionCommander extends Commander {
         bannedCommander.add("Edgar Markov");
         bannedCommander.add("Kess, Dissident Mage");
         bannedCommander.add("Rofellos, Llanowar Emissary");
-
-        bannedCommander.add("Rowan Kenrith");
-        bannedCommander.add("Tymna the Weaver");
-        bannedCommander.add("Will Kenrith");
-        bannedCommander.add("Vial Smasher The Fierce");
     }
 
 }
