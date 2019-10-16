@@ -21,7 +21,8 @@ import java.util.*;
  */
 public class Commander extends Constructed {
 
-    protected List<String> bannedCommander = new ArrayList<>();
+    protected final List<String> bannedCommander = new ArrayList<>();
+    protected final List<String> bannedPartner = new ArrayList<>();
     protected boolean partnerAllowed = true;
 
     public Commander() {
@@ -129,18 +130,23 @@ public class Commander extends Constructed {
                     invalid.put("Commander", "Commander invalid (" + commander.getName() + ')');
                     valid = false;
                 }
-                if (deck.getSideboard().size() == 2 && !commander.getAbilities().contains(PartnerAbility.getInstance())) {
-                    boolean partnersWith = false;
-                    for (Ability ability : commander.getAbilities()) {
-                        if (ability instanceof PartnerWithAbility
-                                && commanderNames.contains(((PartnerWithAbility) ability).getPartnerName())) {
-                            partnersWith = true;
-                            break;
+                if (deck.getSideboard().size() == 2) {
+                    if (commander.getAbilities().contains(PartnerAbility.getInstance())) {
+                        if (bannedPartner.contains(commander.getName())) {
+                            invalid.put("Commander", "Partner banned (" + commander.getName() + ')');
+                            valid = false;
                         }
-                    }
-                    if (!partnersWith) {
-                        invalid.put("Commander", "Commander without Partner (" + commander.getName() + ')');
-                        valid = false;
+                    } else {
+                        boolean partnersWith = commander.getAbilities()
+                                .stream()
+                                .filter(PartnerWithAbility.class::isInstance)
+                                .map(PartnerWithAbility.class::cast)
+                                .map(PartnerWithAbility::getPartnerName)
+                                .anyMatch(commanderNames::contains);
+                        if (!partnersWith) {
+                            invalid.put("Commander", "Commander without Partner (" + commander.getName() + ')');
+                            valid = false;
+                        }
                     }
                 }
                 ManaUtil.collectColorIdentity(colorIdentity, commander.getColorIdentity());
