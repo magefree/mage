@@ -152,3 +152,6 @@ mage-bundle
 # build-tools config and log files when building client/server with Atom
 .build-tools.cson
 build-output.log
+
+# Visual Studio Code
+.history
