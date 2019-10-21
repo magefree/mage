@@ -16,6 +16,8 @@ public class Standard extends Constructed {
         super("Constructed - Standard");
 
         setCodes.addAll(makeLegalSets());
+
+        banned.add("Field of the Dead"); // since 2019-10-21
     }
 
     private static boolean isFallSet(ExpansionSet set) {
