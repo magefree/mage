@@ -21,6 +21,7 @@ public class Pauper extends Constructed {
         rarities.add(Rarity.COMMON);
         rarities.add(Rarity.LAND);
 
+        banned.add("Arcum's Astrolabe");
         banned.add("Cloud of Faeries");
         banned.add("Cloudpost");
         banned.add("Cranial Plating");
