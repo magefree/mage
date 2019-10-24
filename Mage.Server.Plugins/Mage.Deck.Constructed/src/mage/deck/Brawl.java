@@ -22,8 +22,6 @@ public class Brawl extends Constructed {
         // Copy of standard sets
         setCodes.addAll(Standard.makeLegalSets());
 
-        banned.add("Baral, Chief of Compliance");
-        banned.add("Smuggler's Copter");
         banned.add("Sorcerous Spyglass");
     }
 
