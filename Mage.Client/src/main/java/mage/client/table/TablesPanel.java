@@ -967,6 +967,7 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar2 = new javax.swing.JToolBar();
         btnFormatBlock = new javax.swing.JToggleButton();
         btnFormatStandard = new javax.swing.JToggleButton();
+        btnFormatPioneer = new javax.swing.JToggleButton();
         btnFormatModern = new javax.swing.JToggleButton();
         btnFormatLegacy = new javax.swing.JToggleButton();
         btnFormatVintage = new javax.swing.JToggleButton();
@@ -1244,6 +1245,18 @@ public class TablesPanel extends javax.swing.JPanel {
             }
         });
         filterBar2.add(btnFormatStandard);
+
+        btnFormatPioneer.setSelected(true);
+        btnFormatPioneer.setText("Pioneer");
+        btnFormatPioneer.setToolTipText("Pioneer format.");
+        btnFormatPioneer.setFocusPainted(false);
+        btnFormatPioneer.setFocusable(false);
+        btnFormatPioneer.setRequestFocusEnabled(false);
+        btnFormatPioneer.setVerifyInputWhenFocusTarget(false);
+        btnFormatPioneer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) { btnFilterActionPerformed(evt); }
+        });
+        filterBar2.add(btnFormatPioneer);
 
         btnFormatModern.setSelected(true);
         btnFormatModern.setText("Modern");
