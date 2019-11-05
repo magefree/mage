@@ -333,7 +333,7 @@ public class TablesPanel extends javax.swing.JPanel {
         filterButtons = new JToggleButton[]{btnStateWaiting, btnStateActive, btnStateFinished,
                 btnTypeMatch, btnTypeTourneyConstructed, btnTypeTourneyLimited,
                 btnFormatBlock, btnFormatStandard, btnFormatModern, btnFormatLegacy, btnFormatVintage, btnFormatPremodern, btnFormatCommander, btnFormatTinyLeader, btnFormatLimited, btnFormatOther,
-                btnSkillBeginner, btnSkillCasual, btnSkillSerious, btnRated, btnUnrated, btnOpen, btnPassword, btnFormatOathbreaker};
+                btnSkillBeginner, btnSkillCasual, btnSkillSerious, btnRated, btnUnrated, btnOpen, btnPassword, btnFormatOathbreaker, btnFormatPioneer};
 
         JComponent[] components = new JComponent[]{chatPanelMain, jSplitPane1, jScrollPaneTablesActive, jScrollPaneTablesFinished, jPanelTop, jPanelTables};
         for (JComponent component : components) {
@@ -968,6 +968,7 @@ public class TablesPanel extends javax.swing.JPanel {
         btnFormatBlock = new javax.swing.JToggleButton();
         btnFormatStandard = new javax.swing.JToggleButton();
         btnFormatModern = new javax.swing.JToggleButton();
+        btnFormatPioneer = new javax.swing.JToggleButton();
         btnFormatLegacy = new javax.swing.JToggleButton();
         btnFormatVintage = new javax.swing.JToggleButton();
         btnFormatPremodern = new javax.swing.JToggleButton();
@@ -1258,6 +1259,20 @@ public class TablesPanel extends javax.swing.JPanel {
             }
         });
         filterBar2.add(btnFormatModern);
+
+        btnFormatPioneer.setSelected(true);
+        btnFormatPioneer.setText("Pioneer");
+        btnFormatPioneer.setToolTipText("Pioneer format.");
+        btnFormatPioneer.setFocusPainted(false);
+        btnFormatPioneer.setFocusable(false);
+        btnFormatPioneer.setRequestFocusEnabled(false);
+        btnFormatPioneer.setVerifyInputWhenFocusTarget(false);
+        btnFormatPioneer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFilterActionPerformed(evt);
+            }
+        });
+        filterBar2.add(btnFormatPioneer);
 
         btnFormatLegacy.setSelected(true);
         btnFormatLegacy.setText("Legacy");
