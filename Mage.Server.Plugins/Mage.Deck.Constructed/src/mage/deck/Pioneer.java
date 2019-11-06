@@ -27,5 +27,8 @@ public class Pioneer extends Constructed {
         banned.add("Polluted Delta");
         banned.add("Windswept Heath");
         banned.add("Wooded Foothills");
+        banned.add("Felidar Guardian");
+        banned.add("Leyline of Abundance");
+        banned.add("Oath of Nissa");
     }
 }
