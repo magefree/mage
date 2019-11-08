@@ -12,7 +12,7 @@ import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -31,13 +31,13 @@ public final class HeraldicBanner extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Benefit)));
 
         // Creatures you control of the chosen color get +1/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HeraldicBannerEffect()));
+        this.addAbility(new SimpleStaticAbility(new HeraldicBannerEffect()));
 
         // {T}: Add one mana of the chosen color.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaChosenColorEffect(), new TapSourceCost()));
     }
 
-    public HeraldicBanner(final HeraldicBanner card) {
+    private HeraldicBanner(final HeraldicBanner card) {
         super(card);
     }
 
@@ -49,14 +49,12 @@ public final class HeraldicBanner extends CardImpl {
 
 class HeraldicBannerEffect extends ContinuousEffectImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
-    public HeraldicBannerEffect() {
+    HeraldicBannerEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         staticText = "Creatures you control of the chosen color get +1/+0";
     }
 
-    public HeraldicBannerEffect(final HeraldicBannerEffect effect) {
+    private HeraldicBannerEffect(final HeraldicBannerEffect effect) {
         super(effect);
     }
 
@@ -68,14 +66,18 @@ class HeraldicBannerEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            ObjectColor color = (ObjectColor) game.getState().getValue(permanent.getId() + "_color");
-            if (color != null) {
-                for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
-                    if (perm.getColor(game).contains(color)) {
-                        perm.addPower(1);
-                    }
-                }
+        if (permanent == null) {
+            return false;
+        }
+        ObjectColor color = (ObjectColor) game.getState().getValue(permanent.getId() + "_color");
+        if (color == null) {
+            return false;
+        }
+        for (Permanent perm : game.getBattlefield().getActivePermanents(
+                StaticFilters.FILTER_CONTROLLED_CREATURE, source.getControllerId(), source.getSourceId(), game
+        )) {
+            if (perm.getColor(game).contains(color)) {
+                perm.addPower(1);
             }
         }
         return true;

@@ -20,6 +20,7 @@ public final class ConstructedFormats {
     public static final String STANDARD = "- Standard";
     public static final String EXTENDED = "- Extended";
     public static final String FRONTIER = "- Frontier";
+    public static final String PIONEER = "- Pioneer";
     public static final String MODERN = "- Modern";
     public static final String VINTAGE_LEGACY = "- Vintage / Legacy";
     public static final String JOKE = "- Joke Sets";
@@ -29,6 +30,7 @@ public final class ConstructedFormats {
     // Attention -Month is 0 Based so Feb = 1 for example. //
     private static final Date extendedDate = new GregorianCalendar(2009, 7, 20).getTime();
     private static final Date frontierDate = new GregorianCalendar(2014, 6, 17).getTime();
+    private static final Date pioneerDate = new GregorianCalendar(2012, 10, 5).getTime();
     private static final Date modernDate = new GregorianCalendar(2003, 6, 20).getTime();
 
     // for all sets just return empty list
@@ -82,6 +84,7 @@ public final class ConstructedFormats {
         underlyingSetCodesPerFormat.put(STANDARD, new ArrayList<>());
         underlyingSetCodesPerFormat.put(EXTENDED, new ArrayList<>());
         underlyingSetCodesPerFormat.put(FRONTIER, new ArrayList<>());
+        underlyingSetCodesPerFormat.put(PIONEER, new ArrayList<>());
         underlyingSetCodesPerFormat.put(MODERN, new ArrayList<>());
         underlyingSetCodesPerFormat.put(VINTAGE_LEGACY, new ArrayList<>());
         underlyingSetCodesPerFormat.put(JOKE, new ArrayList<>());
@@ -132,6 +135,11 @@ public final class ConstructedFormats {
             // frontier
             if (set.getType().isStandardLegal() && set.getReleaseDate().after(frontierDate)) {
                 underlyingSetCodesPerFormat.get(FRONTIER).add(set.getCode());
+            }
+
+            // frontier
+            if (set.getType().isStandardLegal() && set.getReleaseDate().after(pioneerDate)) {
+                underlyingSetCodesPerFormat.get(PIONEER).add(set.getCode());
             }
 
             // modern
@@ -251,6 +259,7 @@ public final class ConstructedFormats {
             formats.add(0, JOKE);
             formats.add(0, VINTAGE_LEGACY);
             formats.add(0, MODERN);
+            formats.add(0, PIONEER);
             formats.add(0, FRONTIER);
             formats.add(0, EXTENDED);
             formats.add(0, STANDARD);

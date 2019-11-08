@@ -38,7 +38,7 @@ public final class FlashConscription extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new GainAbilityTargetEffect(new FlashConscriptionTriggeredAbility(), Duration.EndOfTurn),
                 new ManaWasSpentCondition(ColoredManaSymbol.W),
-                "If {W} was spent to cast {this}, the creature gains "
+                "If {W} was spent to cast this spell, the creature gains "
                 + "\"Whenever this creature deals combat damage, you gain that much life\" until end of turn"
         ));
 

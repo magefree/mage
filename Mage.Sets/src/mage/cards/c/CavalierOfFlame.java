@@ -103,7 +103,7 @@ class CavalierOfFlameEffect extends OneShotEffect {
             return false;
         }
         TargetCardInHand target = new TargetCardInHand(0, player.getHand().size(), StaticFilters.FILTER_CARD);
-        if (player.choose(outcome, player.getHand(), target, game)) {
+        if (player.choose(Outcome.Discard, player.getHand(), target, game)) {
             int counter = target
                     .getTargets()
                     .stream()

@@ -19,9 +19,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -72,14 +72,16 @@ class RegularExpression extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        List<NamePredicate> predicates = new ArrayList();
-        game.getBattlefield()
-                .getAllActivePermanents(
-                        StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, source.getControllerId(), game
+        List<NamePredicate> predicates = game
+                .getBattlefield()
+                .getActivePermanents(
+                        StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE,
+                        source.getControllerId(), source.getSourceId(), game
                 ).stream()
                 .map(Permanent::getName)
                 .filter(s -> !"".equals(s))
-                .forEach(s -> predicates.add(new NamePredicate(s)));
+                .map(NamePredicate::new)
+                .collect(Collectors.toList());
         FilterCard filter
                 = new FilterCard("a creature card with the same name as another creature you control");
         filter.add(Predicates.or(predicates));

@@ -1,19 +1,17 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class FaerieToken extends TokenImpl {
 
     public FaerieToken() {
-        super("Faerie", "1/1 blue Faerie creature tokens with flying");
+        super("Faerie", "1/1 blue Faerie creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.FAERIE);

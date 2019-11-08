@@ -38,6 +38,7 @@ public final class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Alms", 3, Rarity.COMMON, mage.cards.a.Alms.class));
         cards.add(new SetCardInfo("Ancestral Knowledge", 32, Rarity.RARE, mage.cards.a.AncestralKnowledge.class));
         cards.add(new SetCardInfo("Angelic Renewal", 4, Rarity.COMMON, mage.cards.a.AngelicRenewal.class));
+        cards.add(new SetCardInfo("Apathy", 33, Rarity.COMMON, mage.cards.a.Apathy.class));
         cards.add(new SetCardInfo("Arctic Wolves", 118, Rarity.UNCOMMON, mage.cards.a.ArcticWolves.class));
         cards.add(new SetCardInfo("Ardent Militia", 5, Rarity.COMMON, mage.cards.a.ArdentMilitia.class));
         cards.add(new SetCardInfo("Argivian Find", 6, Rarity.UNCOMMON, mage.cards.a.ArgivianFind.class));

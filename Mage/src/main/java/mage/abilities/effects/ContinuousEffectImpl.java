@@ -10,6 +10,7 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.targetpointer.TargetPointer;
 
 import java.util.*;
 
@@ -332,6 +333,12 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     @Override
     public void addDependedToType(DependencyType dependencyType) {
         dependendToTypes.add(dependencyType);
+    }
+
+    @Override
+    public ContinuousEffect setTargetPointer(TargetPointer targetPointer) {
+        super.setTargetPointer(targetPointer);
+        return this;
     }
 
 }

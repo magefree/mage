@@ -22,8 +22,6 @@ public class Brawl extends Constructed {
         // Copy of standard sets
         setCodes.addAll(Standard.makeLegalSets());
 
-        banned.add("Baral, Chief of Compliance");
-        banned.add("Smuggler's Copter");
         banned.add("Sorcerous Spyglass");
     }
 
@@ -49,14 +47,7 @@ public class Brawl extends Constructed {
         Map<String, Integer> counts = new HashMap<>();
         countCards(counts, deck.getCards());
         countCards(counts, deck.getSideboard());
-        for (Map.Entry<String, Integer> entry : counts.entrySet()) {
-            if (entry.getValue() > 1) {
-                if (!basicLandNames.contains(entry.getKey()) && !anyNumberCardsAllowed.contains(entry.getKey())) {
-                    invalid.put(entry.getKey(), "Too many: " + entry.getValue());
-                    valid = false;
-                }
-            }
-        }
+        valid = checkCounts(1, counts) && valid;
 
         for (String bannedCard : banned) {
             if (counts.containsKey(bannedCard)) {

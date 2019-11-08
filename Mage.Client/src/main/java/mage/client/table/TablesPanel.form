@@ -367,6 +367,20 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFilterActionPerformed"/>
               </Events>
             </Component>
+			<Component class="javax.swing.JToggleButton" name="btnFormatPioneer">
+              <Properties>
+                <Property name="selected" type="boolean" value="true"/>
+                <Property name="text" type="java.lang.String" value="Pioneer"/>
+                <Property name="toolTipText" type="java.lang.String" value="Pioneer format."/>
+                <Property name="focusPainted" type="boolean" value="false"/>
+                <Property name="focusable" type="boolean" value="false"/>
+                <Property name="requestFocusEnabled" type="boolean" value="false"/>
+                <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFilterActionPerformed"/>
+              </Events>
+            </Component>
             <Component class="javax.swing.JToggleButton" name="btnFormatLegacy">
               <Properties>
                 <Property name="selected" type="boolean" value="true"/>

@@ -9,12 +9,14 @@ import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.*;
 import mage.cards.Card;
 import mage.constants.EmptyNames;
+import mage.filter.Filter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.util.functions.CopyTokenFunction;
 
 import java.text.SimpleDateFormat;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -87,6 +89,10 @@ public final class CardUtil {
         ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<>();
         boolean updated = false;
         for (ManaCost manaCost : manaCosts) {
+            if (manaCost instanceof SnowManaCost) {
+                adjustedCost.add(manaCost);
+                continue;
+            }
             Mana mana = manaCost.getOptions().get(0);
             int colorless = mana != null ? mana.getGeneric() : 0;
             if (restToReduce != 0 && colorless > 0) {
@@ -107,7 +113,15 @@ public final class CardUtil {
         if (!updated && reduceCount < 0) {
             adjustedCost.add(new GenericManaCost(-reduceCount));
         }
-        adjustedCost.setSourceFilter(manaCosts.getSourceFilter());
+        Filter filter = manaCosts.stream()
+                .filter(manaCost -> !(manaCost instanceof SnowManaCost))
+                .map(ManaCost::getSourceFilter)
+                .filter(Objects::nonNull)
+                .findFirst()
+                .orElse(null);
+        if (filter != null) {
+            adjustedCost.setSourceFilter(filter);
+        }
         return adjustedCost;
     }
 

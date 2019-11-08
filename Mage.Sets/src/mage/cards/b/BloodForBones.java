@@ -56,7 +56,7 @@ class BloodForBonesEffect extends OneShotEffect {
             = new FilterCreatureCard("creature card in your graveyard (to put into your hand");
 
     BloodForBonesEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.PutCardInPlay);
         staticText = "Return a creature card from your graveyard to the battlefield, " +
                 "then return another creature card from your graveyard to your hand.";
     }

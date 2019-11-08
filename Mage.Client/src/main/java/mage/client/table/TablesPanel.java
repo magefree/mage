@@ -333,7 +333,7 @@ public class TablesPanel extends javax.swing.JPanel {
         filterButtons = new JToggleButton[]{btnStateWaiting, btnStateActive, btnStateFinished,
                 btnTypeMatch, btnTypeTourneyConstructed, btnTypeTourneyLimited,
                 btnFormatBlock, btnFormatStandard, btnFormatModern, btnFormatLegacy, btnFormatVintage, btnFormatPremodern, btnFormatCommander, btnFormatTinyLeader, btnFormatLimited, btnFormatOther,
-                btnSkillBeginner, btnSkillCasual, btnSkillSerious, btnRated, btnUnrated, btnOpen, btnPassword, btnFormatOathbreaker};
+                btnSkillBeginner, btnSkillCasual, btnSkillSerious, btnRated, btnUnrated, btnOpen, btnPassword, btnFormatOathbreaker, btnFormatPioneer};
 
         JComponent[] components = new JComponent[]{chatPanelMain, jSplitPane1, jScrollPaneTablesActive, jScrollPaneTablesFinished, jPanelTop, jPanelTables};
         for (JComponent component : components) {
@@ -802,6 +802,9 @@ public class TablesPanel extends javax.swing.JPanel {
         if (btnFormatModern.isSelected()) {
             formatFilterList.add(RowFilter.regexFilter("^Constructed - Modern", TablesTableModel.COLUMN_DECK_TYPE));
         }
+        if (btnFormatPioneer.isSelected()) {
+            formatFilterList.add(RowFilter.regexFilter("^Constructed - Pioneer", TablesTableModel.COLUMN_DECK_TYPE));
+        }
         if (btnFormatLegacy.isSelected()) {
             formatFilterList.add(RowFilter.regexFilter("^Constructed - Legacy", TablesTableModel.COLUMN_DECK_TYPE));
         }
@@ -812,7 +815,7 @@ public class TablesPanel extends javax.swing.JPanel {
             formatFilterList.add(RowFilter.regexFilter("^Constructed - Premodern", TablesTableModel.COLUMN_DECK_TYPE));
         }
         if (btnFormatCommander.isSelected()) {
-            formatFilterList.add(RowFilter.regexFilter("^Commander|^Duel Commander|^Penny Dreadful Commander|^Freeform Commander|^MTGO 1v1 Commander|^Duel Brawl|^Brawl", TablesTableModel.COLUMN_DECK_TYPE));
+            formatFilterList.add(RowFilter.regexFilter("^Commander|^Duel Commander|^Centurion Commander|^Penny Dreadful Commander|^Freeform Commander|^MTGO 1v1 Commander|^Duel Brawl|^Brawl", TablesTableModel.COLUMN_DECK_TYPE));
         }
         if (btnFormatTinyLeader.isSelected()) {
             formatFilterList.add(RowFilter.regexFilter("^Tiny", TablesTableModel.COLUMN_DECK_TYPE));
@@ -965,6 +968,7 @@ public class TablesPanel extends javax.swing.JPanel {
         btnFormatBlock = new javax.swing.JToggleButton();
         btnFormatStandard = new javax.swing.JToggleButton();
         btnFormatModern = new javax.swing.JToggleButton();
+        btnFormatPioneer = new javax.swing.JToggleButton();
         btnFormatLegacy = new javax.swing.JToggleButton();
         btnFormatVintage = new javax.swing.JToggleButton();
         btnFormatPremodern = new javax.swing.JToggleButton();
@@ -1255,6 +1259,20 @@ public class TablesPanel extends javax.swing.JPanel {
             }
         });
         filterBar2.add(btnFormatModern);
+
+        btnFormatPioneer.setSelected(true);
+        btnFormatPioneer.setText("Pioneer");
+        btnFormatPioneer.setToolTipText("Pioneer format.");
+        btnFormatPioneer.setFocusPainted(false);
+        btnFormatPioneer.setFocusable(false);
+        btnFormatPioneer.setRequestFocusEnabled(false);
+        btnFormatPioneer.setVerifyInputWhenFocusTarget(false);
+        btnFormatPioneer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFilterActionPerformed(evt);
+            }
+        });
+        filterBar2.add(btnFormatPioneer);
 
         btnFormatLegacy.setSelected(true);
         btnFormatLegacy.setText("Legacy");
@@ -1670,6 +1688,7 @@ public class TablesPanel extends javax.swing.JPanel {
     private javax.swing.JToggleButton btnFormatLegacy;
     private javax.swing.JToggleButton btnFormatLimited;
     private javax.swing.JToggleButton btnFormatModern;
+    private javax.swing.JToggleButton btnFormatPioneer;
     private javax.swing.JToggleButton btnFormatOathbreaker;
     private javax.swing.JToggleButton btnFormatOther;
     private javax.swing.JToggleButton btnFormatPremodern;

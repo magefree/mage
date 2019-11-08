@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -34,10 +33,10 @@ public final class ChainedThroatseeker extends CardImpl {
         this.addAbility(InfectAbility.getInstance());
 
         // Chained Throatseeker can't attack unless defending player is poisoned.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ChainedThroatseekerCantAttackEffect()));
+        this.addAbility(new SimpleStaticAbility(new ChainedThroatseekerCantAttackEffect()));
     }
 
-    public ChainedThroatseeker(final ChainedThroatseeker card) {
+    private ChainedThroatseeker(final ChainedThroatseeker card) {
         super(card);
     }
 
@@ -49,12 +48,12 @@ public final class ChainedThroatseeker extends CardImpl {
 
 class ChainedThroatseekerCantAttackEffect extends RestrictionEffect {
 
-    public ChainedThroatseekerCantAttackEffect() {
+    ChainedThroatseekerCantAttackEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack unless defending player is poisoned";
     }
 
-    public ChainedThroatseekerCantAttackEffect(final ChainedThroatseekerCantAttackEffect effect) {
+    private ChainedThroatseekerCantAttackEffect(final ChainedThroatseekerCantAttackEffect effect) {
         super(effect);
     }
 
@@ -65,16 +64,12 @@ class ChainedThroatseekerCantAttackEffect extends RestrictionEffect {
 
     @Override
     public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game, boolean canUseChooseDialogs) {
-        Player targetPlayer = game.getPlayer(defenderId);
-        if (targetPlayer != null) {
-            return targetPlayer.getCounters().containsKey(CounterType.POISON);
-        }
-        return false;
+        Player targetPlayer = game.getPlayerOrPlaneswalkerController(defenderId);
+        return targetPlayer != null && targetPlayer.getCounters().containsKey(CounterType.POISON);
     }
 
     @Override
     public ChainedThroatseekerCantAttackEffect copy() {
         return new ChainedThroatseekerCantAttackEffect(this);
     }
-
 }

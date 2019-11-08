@@ -31,6 +31,7 @@ public final class DreadWarlock extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
+        this.subtype.add(SubType.WARLOCK);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

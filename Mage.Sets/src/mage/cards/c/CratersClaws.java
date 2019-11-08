@@ -28,7 +28,7 @@ public final class CratersClaws extends CardImpl {
                 new DamageTargetEffect(ManacostVariableValue.instance),
                 FerociousCondition.instance,
                 "{this} deals X damage to any target."
-                        + "<br><i>Ferocious</i> &mdash; {this} deals X plus 2 damage to that permanent or player instead if you control a creature with power 4 or greater"));
+                        + "<br><i>Ferocious</i> &mdash; {this} deals X plus 2 damage instead if you control a creature with power 4 or greater"));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addHint(FerociousHint.instance);
     }

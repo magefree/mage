@@ -1,7 +1,5 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -19,15 +17,16 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class FalkenrathNoble extends CardImpl {
 
     public FalkenrathNoble(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
-        this.subtype.add(SubType.VAMPIRE);
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
+        this.subtype.add(SubType.VAMPIRE, SubType.NOBLE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -72,19 +71,17 @@ class FalkenrathNobleTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.isDiesEvent()) {
-            Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (permanent != null) {
-                if (permanent.getId().equals(this.getSourceId())) {
-                    return true;
-                } else {
-                    if (permanent.isCreature()) {
-                        return true;
-                    }
-                }
-            }
+        if (!zEvent.isDiesEvent()) {
+            return false;
         }
-        return false;
+        Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
+        if (permanent == null) {
+            return false;
+        }
+        if (permanent.getId().equals(this.getSourceId())) {
+            return true;
+        }
+        return permanent.isCreature();
     }
 
     @Override

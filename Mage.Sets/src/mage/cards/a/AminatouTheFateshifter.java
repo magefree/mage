@@ -34,7 +34,7 @@ import java.util.UUID;
  *
  * @author Colin Redman
  */
-public class AminatouTheFateShifter extends CardImpl {
+public class AminatouTheFateshifter extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("permanent you own");
 
@@ -43,7 +43,7 @@ public class AminatouTheFateShifter extends CardImpl {
         filter.add(AnotherPredicate.instance);
     }
 
-    public AminatouTheFateShifter(UUID ownerId, CardSetInfo setInfo) {
+    public AminatouTheFateshifter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{W}{U}{B}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.AMINATOU);
@@ -69,13 +69,13 @@ public class AminatouTheFateShifter extends CardImpl {
         this.addAbility(CanBeYourCommanderAbility.getInstance());
     }
 
-    public AminatouTheFateShifter(final AminatouTheFateShifter card) {
+    public AminatouTheFateshifter(final AminatouTheFateshifter card) {
         super(card);
     }
 
     @Override
-    public AminatouTheFateShifter copy() {
-        return new AminatouTheFateShifter(this);
+    public AminatouTheFateshifter copy() {
+        return new AminatouTheFateshifter(this);
     }
 }
 

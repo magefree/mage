@@ -9,6 +9,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.util.RandomUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,17 +28,8 @@ public final class FoodToken extends TokenImpl {
     }
 
     public FoodToken() {
-        this(null, 0);
-    }
-
-    public FoodToken(String setCode) {
-        this(setCode, 0);
-    }
-
-    public FoodToken(String setCode, int tokenType) {
         super("Food", "Food token");
         availableImageSetCodes = tokenImageSets;
-        setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.ARTIFACT);
         subtype.add(SubType.FOOD);
 
@@ -48,6 +40,15 @@ public final class FoodToken extends TokenImpl {
         cost.setText("Sacrifice this artifact");
         ability.addCost(cost);
         this.addAbility(ability);
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("ELD")) {
+            setTokenType(RandomUtil.nextInt(4) + 1); // 1...4
+        }
     }
 
     public FoodToken(final FoodToken token) {

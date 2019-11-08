@@ -235,6 +235,7 @@ public final class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 334, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Power Matrix", 309, Rarity.RARE, mage.cards.p.PowerMatrix.class));
         cards.add(new SetCardInfo("Primeval Shambler", 152, Rarity.UNCOMMON, mage.cards.p.PrimevalShambler.class));
+        cards.add(new SetCardInfo("Puffer Extract", 310, Rarity.UNCOMMON, mage.cards.p.PufferExtract.class));
         cards.add(new SetCardInfo("Pulverize", 207, Rarity.RARE, mage.cards.p.Pulverize.class));
         cards.add(new SetCardInfo("Putrefaction", 153, Rarity.UNCOMMON, mage.cards.p.Putrefaction.class));
         cards.add(new SetCardInfo("Puppet's Verdict", 208, Rarity.RARE, mage.cards.p.PuppetsVerdict.class));
@@ -286,6 +287,7 @@ public final class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Sever Soul", 159, Rarity.COMMON, mage.cards.s.SeverSoul.class));
         cards.add(new SetCardInfo("Shock Troops", 212, Rarity.COMMON, mage.cards.s.ShockTroops.class));
         cards.add(new SetCardInfo("Shoving Match", 103, Rarity.UNCOMMON, mage.cards.s.ShovingMatch.class));
+        cards.add(new SetCardInfo("Silent Assassin", 160, Rarity.RARE, mage.cards.s.SilentAssassin.class));
         cards.add(new SetCardInfo("Silverglade Elemental", 269, Rarity.COMMON, mage.cards.s.SilvergladeElemental.class));
         cards.add(new SetCardInfo("Silverglade Pathfinder", 270, Rarity.UNCOMMON, mage.cards.s.SilvergladePathfinder.class));
         cards.add(new SetCardInfo("Sizzle", 213, Rarity.COMMON, mage.cards.s.Sizzle.class));

@@ -1,6 +1,5 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -16,13 +15,15 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class BlindZealot extends CardImpl {
@@ -42,7 +43,7 @@ public final class BlindZealot extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BlindZealot(final BlindZealot card) {
+    private BlindZealot(final BlindZealot card) {
         super(card);
     }
 
@@ -54,11 +55,11 @@ public final class BlindZealot extends CardImpl {
 
 class BlindZealotTriggeredAbility extends TriggeredAbilityImpl {
 
-    public BlindZealotTriggeredAbility() {
+     BlindZealotTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new DestroyTargetEffect(), new SacrificeSourceCost()), true);
     }
 
-    public BlindZealotTriggeredAbility(final BlindZealotTriggeredAbility ability) {
+    private BlindZealotTriggeredAbility(final BlindZealotTriggeredAbility ability) {
         super(ability);
     }
 
@@ -75,14 +76,16 @@ class BlindZealotTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Player opponent = game.getPlayer(event.getPlayerId());
-        if (opponent != null && event.getSourceId().equals(this.sourceId)) {
-            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature " + opponent.getLogName() + " controls");
-            filter.add(new ControllerIdPredicate(opponent.getId()));
-            this.getTargets().clear();
-            this.addTarget(new TargetCreaturePermanent(filter));
-            return true;
+        if (opponent == null
+                || !event.getSourceId().equals(this.sourceId)
+                || !((DamagedEvent) event).isCombatDamage()) {
+            return false;
         }
-        return false;
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature " + opponent.getLogName() + " controls");
+        filter.add(new ControllerIdPredicate(opponent.getId()));
+        this.getTargets().clear();
+        this.addTarget(new TargetCreaturePermanent(filter));
+        return true;
     }
 
     @Override

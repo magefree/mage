@@ -143,6 +143,7 @@
         <deckType name="Constructed - Standard" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Standard"/>
         <deckType name="Constructed - Extended" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Extended"/>
         <deckType name="Constructed - Frontier" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Frontier"/>
+        <deckType name="Constructed - Pioneer" jar="mage-deck-constructed.jar" className="mage.deck.Pioneer"/>
         <deckType name="Constructed - Modern" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Modern"/>
         <deckType name="Constructed - Modern - No Banned List" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.ModernNoBannedList"/>
         <deckType name="Constructed - Eternal" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Eternal"/>
@@ -163,6 +164,7 @@
         <deckType name="Variant Magic - Commander" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Commander"/>
         <deckType name="Variant Magic - Duel Commander" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.DuelCommander"/>
         <deckType name="Variant Magic - MTGO 1v1 Commander" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.MTGO1v1Commander"/>
+        <deckType name="Variant Magic - Centurion Commander" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.CenturionCommander"/>
         <deckType name="Variant Magic - Tiny Leaders" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.TinyLeaders"/>
         <deckType name="Variant Magic - Momir Basic" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Momir"/>
         <deckType name="Variant Magic - Penny Dreadful Commander" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.PennyDreadfulCommander"/>

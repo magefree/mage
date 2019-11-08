@@ -32,7 +32,7 @@ public final class SteamcoreWeird extends CardImpl {
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2, "it"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new ManaWasSpentCondition(ColoredManaSymbol.R),
-                "if {R} was spent to cast {this}, it deals 2 damage to any target."),
+                "if {R} was spent to cast this spell, it deals 2 damage to any target."),
                 new ManaSpentToCastWatcher());        
     }
 

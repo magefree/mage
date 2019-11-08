@@ -708,7 +708,11 @@ public class HumanPlayer extends PlayerImpl {
         while (!abort) {
             prepareForResponse(game);
             if (!isExecutingMacro()) {
-                game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage() + "\n Amount remaining:" + target.getAmountRemaining(), getRelatedObjectName(source, game)),
+                String selectedNames = target.getTargetedName(game);
+                game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage()
+                                + "<br> Amount remaining: " + target.getAmountRemaining()
+                                + (selectedNames.isEmpty() ? "" : ", selected: " + selectedNames),
+                                getRelatedObjectName(source, game)),
                         target.possibleTargets(source == null ? null : source.getSourceId(), playerId, game),
                         target.isRequired(source),
                         getOptions(target, null));
@@ -717,8 +721,19 @@ public class HumanPlayer extends PlayerImpl {
             if (response.getUUID() != null) {
                 if (target.canTarget(response.getUUID(), source, game)) {
                     UUID targetId = response.getUUID();
-                    int amountSelected = getAmount(1, target.getAmountRemaining(), "Select amount", game);
-                    target.addTarget(targetId, amountSelected, source, game);
+                    MageObject targetObject = game.getObject(targetId);
+
+                    boolean removeMode = target.getTargets().contains(targetId)
+                            && chooseUse(outcome, "What do you want to do with " + (targetObject != null ? targetObject.getLogName() : "target") + "?", "",
+                            "Remove from selected", "Add extra amount", source, game);
+
+                    if (removeMode) {
+                        target.remove(targetId);
+                    } else {
+                        int amountSelected = getAmount(1, target.getAmountRemaining(), "Select amount", game);
+                        target.addTarget(targetId, amountSelected, source, game);
+                    }
+
                     return true;
                 }
             } else if (!target.isRequired(source)) {

@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealtDamageAndDiedTriggeredAbility;
@@ -22,12 +20,13 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class BaronSengir extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target Vampire");
 
     static {
@@ -36,18 +35,18 @@ public final class BaronSengir extends CardImpl {
     }
 
     public BaronSengir(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.VAMPIRE, SubType.NOBLE);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // Whenever a creature dealt damage by Baron Sengir this turn dies, put a +2/+2 counter on Baron Sengir.
         this.addAbility(new DealtDamageAndDiedTriggeredAbility(new AddCountersSourceEffect(CounterType.P2P2.createInstance()), false));
-        
+
         // {tap}: Regenerate another target Vampire.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
