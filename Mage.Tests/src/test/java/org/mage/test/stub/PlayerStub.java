@@ -20,6 +20,7 @@ import mage.counters.Counters;
 import mage.designations.Designation;
 import mage.designations.DesignationType;
 import mage.filter.FilterPermanent;
+import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.game.Graveyard;
 import mage.game.Table;
@@ -1369,6 +1370,21 @@ public class PlayerStub implements Player {
         int hash = 5;
         hash = 41 * hash + Objects.hashCode(this.id);
         return hash;
+    }
+
+    @Override
+    public void addPhyrexianToColors(FilterMana colors) {
+        
+    }
+
+    @Override
+    public void removePhyrexianFromColors(FilterMana colors) {
+       
+    }
+
+    @Override
+    public FilterMana getPhyrexianColors() {
+        return (new FilterMana());
     }
 
 }

@@ -31,6 +31,7 @@ import java.util.UUID;
 
 import static com.google.common.collect.Iterables.getOnlyElement;
 import static java.util.stream.Collectors.toList;
+import mage.filter.FilterMana;
 
 public class StubPlayer extends PlayerImpl implements Player {
 
@@ -217,5 +218,19 @@ public class StubPlayer extends PlayerImpl implements Player {
     public void pickCard(List<Card> cards, Deck deck, Draft draft) {
 
     }
+    
+    @Override
+    public void addPhyrexianToColors(FilterMana colors) {
+        
+    }
 
+    @Override
+    public void removePhyrexianFromColors(FilterMana colors) {
+        
+    }
+
+    @Override
+    public FilterMana getPhyrexianColors() {
+        return (new FilterMana());
+    }
 }

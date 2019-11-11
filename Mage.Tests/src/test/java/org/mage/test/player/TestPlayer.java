@@ -59,6 +59,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import mage.filter.FilterMana;
 
 import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
 
@@ -3461,5 +3462,20 @@ public class TestPlayer implements Player {
 
     public void setChooseStrictMode(boolean enable) {
         this.strictChooseMode = enable;
+    }
+    
+    @Override
+    public void addPhyrexianToColors(FilterMana colors) {
+        computerPlayer.addPhyrexianToColors(colors);
+    }
+
+    @Override
+    public void removePhyrexianFromColors(FilterMana colors) {
+        computerPlayer.removePhyrexianFromColors(colors);
+    }
+
+    @Override
+    public FilterMana getPhyrexianColors() {
+        return computerPlayer.getPhyrexianColors();
     }
 }

@@ -36,6 +36,7 @@ import mage.designations.Designation;
 import mage.designations.DesignationType;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
+import mage.filter.FilterMana;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreatureForCombat;
 import mage.filter.common.FilterCreatureForCombatBlock;
@@ -174,6 +175,8 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     protected List<Designation> designations = new ArrayList<>();
 
+    protected FilterMana phyrexianColors = new FilterMana();
+
     /**
      * During some steps we can't play anything
      */
@@ -276,6 +279,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.payManaMode = player.payManaMode;
 
         this.designations.addAll(player.designations);
+        
+        this.phyrexianColors = player.phyrexianColors;
     }
 
     @Override
@@ -4159,5 +4164,49 @@ public abstract class PlayerImpl implements Player, Serializable {
         int hash = 7;
         hash = 89 * hash + Objects.hashCode(this.playerId);
         return hash;
+    }
+
+
+    @Override
+    public void addPhyrexianToColors(FilterMana colors) {
+        if (colors.isWhite()) {
+            this.phyrexianColors.setWhite(true);
+        }
+        if (colors.isBlue()) {
+            this.phyrexianColors.setBlue(true);
+        }
+        if (colors.isBlack()) {
+            this.phyrexianColors.setBlack(true);
+        }
+        if (colors.isRed()) {
+            this.phyrexianColors.setRed(true);
+        }
+        if (colors.isGreen()) {
+            this.phyrexianColors.setGreen(true);
+        }
+    }
+
+    @Override
+    public void removePhyrexianFromColors(FilterMana colors) {
+        if (colors.isWhite()) {
+            this.phyrexianColors.setWhite(false);
+        }
+        if (colors.isBlue()) {
+            this.phyrexianColors.setBlue(false);
+        }
+        if (colors.isBlack()) {
+            this.phyrexianColors.setBlack(false);
+        }
+        if (colors.isRed()) {
+            this.phyrexianColors.setRed(false);
+        }
+        if (colors.isGreen()) {
+            this.phyrexianColors.setGreen(false);
+        }
+    }
+    
+    @Override
+    public FilterMana getPhyrexianColors() {
+        return this.phyrexianColors.copy();
     }
 }
