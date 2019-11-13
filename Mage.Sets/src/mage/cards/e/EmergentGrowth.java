@@ -23,9 +23,7 @@ public final class EmergentGrowth extends CardImpl {
         // Target creature gets +5/+5 until end of turn and must be blocked this turn if able.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(5, 5, Duration.EndOfTurn));
-        Effect effect = new MustBeBlockedByAtLeastOneTargetEffect();
-        effect.setText("and must be blocked this turn if able");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new MustBeBlockedByAtLeastOneTargetEffect(Duration.EndOfTurn));
     }
 
     public EmergentGrowth(final EmergentGrowth card) {

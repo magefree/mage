@@ -27,11 +27,9 @@ public final class ElementalUprising extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
 
         // Target land you control becomes a 4/4 Elemental creature with haste until end of turn. It's still a land. It must be blocked this turn if able.
-        getSpellAbility().addEffect(new BecomesCreatureTargetEffect(new ElementalUprisingToken(), false, true, Duration.EndOfTurn));
-        getSpellAbility().addTarget(new TargetPermanent(new FilterControlledLandPermanent()));
-        Effect effect = new MustBeBlockedByAtLeastOneTargetEffect(Duration.EndOfTurn);
-        effect.setText("It must be blocked this turn if able");
-        getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new BecomesCreatureTargetEffect(new ElementalUprisingToken(), false, true, Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetPermanent(new FilterControlledLandPermanent()));
+        this.getSpellAbility().addEffect(new MustBeBlockedByAtLeastOneTargetEffect(Duration.EndOfTurn));
     }
 
     public ElementalUprising(final ElementalUprising card) {
