@@ -21,6 +21,7 @@ import mage.counters.Counters;
 import mage.designations.Designation;
 import mage.designations.DesignationType;
 import mage.filter.FilterPermanent;
+import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.game.Graveyard;
 import mage.game.Table;
@@ -894,4 +895,9 @@ public interface Player extends MageItem, Copyable<Player> {
 
     List<Designation> getDesignations();
 
+    void addPhyrexianToColors(FilterMana colors);
+
+    void removePhyrexianFromColors(FilterMana colors);
+
+    FilterMana getPhyrexianColors();
 }

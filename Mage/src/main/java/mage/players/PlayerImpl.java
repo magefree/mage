@@ -36,6 +36,7 @@ import mage.designations.Designation;
 import mage.designations.DesignationType;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
+import mage.filter.FilterMana;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreatureForCombat;
 import mage.filter.common.FilterCreatureForCombatBlock;
@@ -174,6 +175,8 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     protected List<Designation> designations = new ArrayList<>();
 
+    protected FilterMana phyrexianColors;
+
     /**
      * During some steps we can't play anything
      */
@@ -191,6 +194,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         manaPool = new ManaPool(playerId);
         library = new Library(playerId);
         sideboard = new CardsImpl();
+        phyrexianColors = new FilterMana();
     }
 
     protected PlayerImpl(UUID id) {
@@ -274,6 +278,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.castSourceIdManaCosts = player.castSourceIdManaCosts;
         this.castSourceIdCosts = player.castSourceIdCosts;
         this.payManaMode = player.payManaMode;
+        this.phyrexianColors = player.phyrexianColors.copy();
 
         this.designations.addAll(player.designations);
     }
@@ -340,6 +345,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.castSourceIdWithAlternateMana = player.getCastSourceIdWithAlternateMana();
         this.castSourceIdManaCosts = player.getCastSourceIdManaCosts();
         this.castSourceIdCosts = player.getCastSourceIdCosts();
+        this.phyrexianColors = player.getPhyrexianColors().copy();
 
         this.designations.clear();
         this.designations.addAll(player.getDesignations());
@@ -417,6 +423,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.castSourceIdManaCosts = null;
         this.castSourceIdCosts = null;
         this.getManaPool().init(); // needed to remove mana that not empties on step change from previous game if left
+        this.phyrexianColors = new FilterMana();
 
         this.designations.clear();
     }
@@ -443,6 +450,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.castSourceIdManaCosts = null;
         this.castSourceIdCosts = null;
         this.getManaPool().clearEmptyManaPoolRules();
+        this.phyrexianColors = new FilterMana();
     }
 
     @Override
@@ -4159,5 +4167,49 @@ public abstract class PlayerImpl implements Player, Serializable {
         int hash = 7;
         hash = 89 * hash + Objects.hashCode(this.playerId);
         return hash;
+    }
+
+
+    @Override
+    public void addPhyrexianToColors(FilterMana colors) {
+        if (colors.isWhite()) {
+            this.phyrexianColors.setWhite(true);
+        }
+        if (colors.isBlue()) {
+            this.phyrexianColors.setBlue(true);
+        }
+        if (colors.isBlack()) {
+            this.phyrexianColors.setBlack(true);
+        }
+        if (colors.isRed()) {
+            this.phyrexianColors.setRed(true);
+        }
+        if (colors.isGreen()) {
+            this.phyrexianColors.setGreen(true);
+        }
+    }
+
+    @Override
+    public void removePhyrexianFromColors(FilterMana colors) {
+        if (colors.isWhite()) {
+            this.phyrexianColors.setWhite(false);
+        }
+        if (colors.isBlue()) {
+            this.phyrexianColors.setBlue(false);
+        }
+        if (colors.isBlack()) {
+            this.phyrexianColors.setBlack(false);
+        }
+        if (colors.isRed()) {
+            this.phyrexianColors.setRed(false);
+        }
+        if (colors.isGreen()) {
+            this.phyrexianColors.setGreen(false);
+        }
+    }
+    
+    @Override
+    public FilterMana getPhyrexianColors() {
+        return this.phyrexianColors;
     }
 }
