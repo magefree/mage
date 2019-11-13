@@ -54,6 +54,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Burning Vengeance", 135, Rarity.UNCOMMON, mage.cards.b.BurningVengeance.class));
         cards.add(new SetCardInfo("Burnished Hart", 211, Rarity.UNCOMMON, mage.cards.b.BurnishedHart.class));
         cards.add(new SetCardInfo("Call to the Netherworld", 108, Rarity.COMMON, mage.cards.c.CallToTheNetherworld.class));
+        cards.add(new SetCardInfo("Chainer, Nightmare Adept", 39, Rarity.MYTHIC, mage.cards.c.ChainerNightmareAdept.class));
         cards.add(new SetCardInfo("Champion of Stray Souls", 109, Rarity.MYTHIC, mage.cards.c.ChampionOfStraySouls.class));
         cards.add(new SetCardInfo("Chaos Warp", 136, Rarity.RARE, mage.cards.c.ChaosWarp.class));
         cards.add(new SetCardInfo("Chemister's Insight", 80, Rarity.UNCOMMON, mage.cards.c.ChemistersInsight.class));
