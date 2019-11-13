@@ -175,7 +175,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     protected List<Designation> designations = new ArrayList<>();
 
-    protected FilterMana phyrexianColors = new FilterMana();
+    protected FilterMana phyrexianColors;
 
     /**
      * During some steps we can't play anything
@@ -194,6 +194,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         manaPool = new ManaPool(playerId);
         library = new Library(playerId);
         sideboard = new CardsImpl();
+        phyrexianColors = new FilterMana();
     }
 
     protected PlayerImpl(UUID id) {
@@ -277,10 +278,9 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.castSourceIdManaCosts = player.castSourceIdManaCosts;
         this.castSourceIdCosts = player.castSourceIdCosts;
         this.payManaMode = player.payManaMode;
+        this.phyrexianColors = player.phyrexianColors.copy();
 
         this.designations.addAll(player.designations);
-        
-        this.phyrexianColors = player.phyrexianColors;
     }
 
     @Override
@@ -345,6 +345,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.castSourceIdWithAlternateMana = player.getCastSourceIdWithAlternateMana();
         this.castSourceIdManaCosts = player.getCastSourceIdManaCosts();
         this.castSourceIdCosts = player.getCastSourceIdCosts();
+        this.phyrexianColors = player.getPhyrexianColors().copy();
 
         this.designations.clear();
         this.designations.addAll(player.getDesignations());
@@ -422,6 +423,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.castSourceIdManaCosts = null;
         this.castSourceIdCosts = null;
         this.getManaPool().init(); // needed to remove mana that not empties on step change from previous game if left
+        this.phyrexianColors = new FilterMana();
 
         this.designations.clear();
     }
@@ -448,6 +450,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.castSourceIdManaCosts = null;
         this.castSourceIdCosts = null;
         this.getManaPool().clearEmptyManaPoolRules();
+        this.phyrexianColors = new FilterMana();
     }
 
     @Override
@@ -4207,6 +4210,6 @@ public abstract class PlayerImpl implements Player, Serializable {
     
     @Override
     public FilterMana getPhyrexianColors() {
-        return this.phyrexianColors.copy();
+        return this.phyrexianColors;
     }
 }

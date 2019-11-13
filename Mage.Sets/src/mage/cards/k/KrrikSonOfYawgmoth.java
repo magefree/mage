@@ -24,6 +24,7 @@ import mage.filter.FilterMana;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -73,7 +74,7 @@ class KrrikSonOfYawgmothPhyrexianEffect extends ContinuousEffectImpl {
 
     public KrrikSonOfYawgmothPhyrexianEffect() {
         super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
-        this.staticText = "For each {B} in a cost, you may pay 2 life rather than pay that mana.";
+        this.staticText = "for each {B} in a cost, you may pay 2 life rather than pay that mana";
     }
 
     public KrrikSonOfYawgmothPhyrexianEffect(final KrrikSonOfYawgmothPhyrexianEffect effect) {
@@ -87,10 +88,12 @@ class KrrikSonOfYawgmothPhyrexianEffect extends ContinuousEffectImpl {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        FilterMana phyrexianBlack = new FilterMana();
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
+        FilterMana phyrexianBlack = new FilterMana();
+
         phyrexianBlack.setBlack(true);
-        if (controller != null) {
+        if (controller != null && sourcePermanent != null) {
             for (UUID playerId: game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null)
