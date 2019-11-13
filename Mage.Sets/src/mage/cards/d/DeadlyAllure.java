@@ -26,7 +26,9 @@ public final class DeadlyAllure extends CardImpl {
 
         // Target creature gains deathtouch until end of turn and must be blocked this turn if able.        
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new MustBeBlockedByAtLeastOneTargetEffect(Duration.EndOfTurn));
+        Effect effect = new MustBeBlockedByAtLeastOneTargetEffect(Duration.EndOfTurn);
+        effect.setText("and must be blocked this turn if able");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Flashback {G}
