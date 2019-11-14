@@ -173,6 +173,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Magmaquake", 148, Rarity.RARE, mage.cards.m.Magmaquake.class));
         cards.add(new SetCardInfo("Magus of the Wheel", 149, Rarity.RARE, mage.cards.m.MagusOfTheWheel.class));
         cards.add(new SetCardInfo("Malevolent Whispers", 150, Rarity.UNCOMMON, mage.cards.m.MalevolentWhispers.class));
+        cards.add(new SetCardInfo("Mandate of Peace", 4, Rarity.RARE, mage.cards.m.MandateOfPeace.class));
         cards.add(new SetCardInfo("Marisi, Breaker of the Coil", 46, Rarity.MYTHIC, mage.cards.m.MarisiBreakerOfTheCoil.class));
         cards.add(new SetCardInfo("Mass Diminish", 10, Rarity.RARE, mage.cards.m.MassDiminish.class));
         cards.add(new SetCardInfo("Memorial to Folly", 259, Rarity.UNCOMMON, mage.cards.m.MemorialToFolly.class));
