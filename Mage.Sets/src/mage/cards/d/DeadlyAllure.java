@@ -3,6 +3,7 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.MustBeBlockedByAtLeastOneTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;

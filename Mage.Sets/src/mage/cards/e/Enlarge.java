@@ -2,6 +2,7 @@
 package mage.cards.e;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.MustBeBlockedByAtLeastOneTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
