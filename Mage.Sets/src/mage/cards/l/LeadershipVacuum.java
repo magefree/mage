@@ -71,9 +71,9 @@ class LeadershipVacuumEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        return player.moveCards(game.getBattlefield()
-                .getAllActivePermanents(filter, source.getFirstTarget(), game)
-                .stream()
-                .collect(Collectors.toSet()), Zone.COMMAND, source, game);
+
+        return game.getBattlefield().getAllActivePermanents(filter, source.getFirstTarget(), game).stream()
+                .map(commander -> commander.moveToZone(Zone.COMMAND, source.getId(), game, true))
+                .reduce(true, Boolean::logicalAnd);
     }
 }
