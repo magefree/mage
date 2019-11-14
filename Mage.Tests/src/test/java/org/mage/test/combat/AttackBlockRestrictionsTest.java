@@ -542,4 +542,31 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 20);
     }
+    
+    @Test
+    public void irresistiblePreyMustBeBlockedTest() {
+        addCard(Zone.BATTLEFIELD, playerA, "Llanowar Elves");
+        addCard(Zone.BATTLEFIELD, playerA, "Alpha Myr");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest");
+        addCard(Zone.HAND, playerA, "Irresistible Prey");
+        
+        addCard(Zone.BATTLEFIELD, playerB, "Bronze Sable");
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Irresistible Prey", "Llanowar Elves"); // must be blocked
+        
+        attack(1, playerA, "Llanowar Elves");
+        attack(1, playerA, "Alpha Myr");
+        
+        // attempt to block the creature that doesn't have "must be blocked"
+        block(1, playerB, "Bronze Sable", "Alpha Myr");
+        
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerA, "Irresistible Prey", 1);
+        assertGraveyardCount(playerA, "Llanowar Elves", 1);
+        assertGraveyardCount(playerB, "Bronze Sable", 1);
+        assertTapped("Alpha Myr", true);
+        assertLife(playerB, 18);
+    }
 }

@@ -3,6 +3,7 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.MustBeBlockedByAtLeastOneTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
@@ -26,7 +27,9 @@ public final class DeadlyAllure extends CardImpl {
 
         // Target creature gains deathtouch until end of turn and must be blocked this turn if able.        
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new MustBeBlockedByAtLeastOneTargetEffect(Duration.EndOfTurn));
+        Effect effect = new MustBeBlockedByAtLeastOneTargetEffect(Duration.EndOfTurn);
+        effect.setText("and must be blocked this turn if able");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Flashback {G}
