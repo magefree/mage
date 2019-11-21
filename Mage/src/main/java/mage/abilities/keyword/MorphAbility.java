@@ -186,6 +186,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
                 spell.setFaceDown(true, game); // so only the back is visible
                 if (alternateCosts.canPay(ability, sourceId, controllerId, game)) {
                     if (player.chooseUse(Outcome.Benefit, "Cast this card as a 2/2 face-down creature for " + getCosts().getText() + " ?", ability, game)) {
+                        game.getState().setValue("MorphAbility" + ability.getSourceId(), "activated"); // Gift of Doom
                         activateMorph(game);
                         // change mana costs
                         ability.getManaCostsToPay().clear();
