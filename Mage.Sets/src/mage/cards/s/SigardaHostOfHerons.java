@@ -1,10 +1,10 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
@@ -14,10 +14,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
+import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
+import mage.players.Player;
 
 /**
  * @author noxx
@@ -72,8 +75,11 @@ class SigardaHostOfHeronsEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getPlayerId().equals(source.getControllerId())) {
-            MageObject object = game.getObject(event.getSourceId());
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject object = game.getObject(event.getSourceId());
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (controller != null
+                && permanent.getControllerId() == source.getControllerId()) {
             if (object instanceof PermanentCard) {
                 if (game.getOpponents(source.getControllerId()).contains(((PermanentCard) object).getControllerId())) {
                     return true;
@@ -84,13 +90,28 @@ class SigardaHostOfHeronsEffect extends ContinuousRuleModifyingEffectImpl {
                     return true;
                 }
             }
-            if (object instanceof Card) {
-                if (game.getOpponents(source.getControllerId()).contains(((Card) object).getOwnerId())) {
+            if (object instanceof Emblem) {
+                if (game.getOpponents(source.getControllerId()).contains(((Emblem) object).getControllerId())) {
+                    return true;
+                }
+            }
+            if (object instanceof Ability) {
+                if (game.getOpponents(source.getControllerId()).contains(((Ability) object).getControllerId())) {
+                    return true;
+                }
+            }
+            if (object instanceof SpellAbility) {
+                if (game.getOpponents(source.getControllerId()).contains(((SpellAbility) object).getControllerId())) {
                     return true;
                 }
             }
             if (object instanceof StackAbility) {
                 if (game.getOpponents(source.getControllerId()).contains(((StackAbility) object).getControllerId())) {
+                    return true;
+                }
+            }
+            if (object instanceof Card) {
+                if (game.getOpponents(source.getControllerId()).contains(((Card) object).getOwnerId())) {
                     return true;
                 }
             }
