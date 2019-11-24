@@ -96,8 +96,8 @@ class RepeatedReverberationTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "When you next cast an instant spell, cast a sorcery spell, or activate a loyalty ability this turn, " +
-                "copy that spell or ability twice. You may choose new targets for the copies.";
+        return "When you next cast an instant spell, cast a sorcery spell, or activate a loyalty ability this turn, "
+                + "copy that spell or ability twice. You may choose new targets for the copies.";
     }
 }
 
@@ -118,7 +118,7 @@ class RepeatedReverberationEffect extends OneShotEffect {
             return false;
         }
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(stackAbility.getStackAbility().getSourceId());
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(stackAbility.getStackAbility().getSourceId());
         if (controller == null || sourcePermanent == null) {
             return false;
         }
