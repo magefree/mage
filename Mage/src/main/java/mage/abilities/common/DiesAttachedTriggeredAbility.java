@@ -81,6 +81,7 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
                         && zEvent.getTargetId().equals(attachment.getAttachedTo())) {
                     Permanent attachedTo = game.getPermanentOrLKIBattlefield(attachment.getAttachedTo());
                     if (attachedTo != null
+                            && game.getState().getZone(attachedTo.getId()) == (Zone.GRAVEYARD)  // Demonic Vigor
                             && attachmentCard != null
                             && attachment.getAttachedToZoneChangeCounter() == attachedTo.getZoneChangeCounter(game)
                             && attachment.getZoneChangeCounter(game) == attachmentCard.getZoneChangeCounter(game)) {
@@ -92,6 +93,7 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
                 for (Effect effect : getEffects()) {
                     if (zEvent.getTarget() != null) {
                         effect.setValue("attachedTo", zEvent.getTarget());
+                        effect.setValue("zcc", zEvent.getTarget().getZoneChangeCounter(game) + 1); // zone change info from battlefield
                         if (setTargetPointer == SetTargetPointer.ATTACHED_TO_CONTROLLER) {
                             Permanent attachment = game.getPermanentOrLKIBattlefield(getSourceId());
                             if (attachment != null 
