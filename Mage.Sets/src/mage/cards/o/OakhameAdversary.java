@@ -5,7 +5,6 @@ import mage.ObjectColor;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
 import mage.abilities.keyword.DeathtouchAbility;
@@ -13,13 +12,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
-
 import java.util.UUID;
+import mage.abilities.condition.common.OpponentControlsPermanentCondition;
+import mage.constants.ComparisonType;
 
 /**
  * @author TheElk801
@@ -30,11 +28,10 @@ public final class OakhameAdversary extends CardImpl {
             = new FilterPermanent("your opponent controls a green permanent");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
         filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
-    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
+    private static final Condition condition = new OpponentControlsPermanentCondition(filter, ComparisonType.MORE_THAN, 0);
 
     public OakhameAdversary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
