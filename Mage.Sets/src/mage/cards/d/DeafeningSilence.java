@@ -1,5 +1,6 @@
 package mage.cards.d;
 
+import java.util.HashMap;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
@@ -15,8 +16,7 @@ import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -45,11 +45,16 @@ class DeafeningSilenceEffect extends ContinuousRuleModifyingEffectImpl {
 
     DeafeningSilenceEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "each player can't cast more than one noncreature spell each turn";
+        staticText = "Each player can't cast more than one noncreature spell each turn";
     }
 
     private DeafeningSilenceEffect(final DeafeningSilenceEffect effect) {
         super(effect);
+    }
+
+    @Override
+    public String getInfoMessage(Ability source, GameEvent event, Game game) {
+        return "Each player can't cast more than one noncreature spell each turn";
     }
 
     @Override
@@ -69,18 +74,20 @@ class DeafeningSilenceEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Card card = game.getCard(event.getTargetId());
-        if (card == null || card.isCreature()) {
+        Card card = game.getCard(event.getSourceId());
+        if (card == null
+                || card.isCreature()) {
             return false;
         }
         DeafeningSilenceWatcher watcher = game.getState().getWatcher(DeafeningSilenceWatcher.class);
-        return watcher != null && watcher.castSpell(event.getPlayerId());
+        return watcher != null
+                && watcher.spellsCastByPlayerThisTurnNonCreature(event.getPlayerId()) > 1;
     }
 }
 
 class DeafeningSilenceWatcher extends Watcher {
 
-    private final Set<UUID> castSpell = new HashSet<>();
+    private final Map<UUID, Integer> spellsCastByPlayerThisTurnNonCreature = new HashMap<>();
 
     DeafeningSilenceWatcher() {
         super(WatcherScope.GAME);
@@ -88,7 +95,9 @@ class DeafeningSilenceWatcher extends Watcher {
 
     private DeafeningSilenceWatcher(final DeafeningSilenceWatcher watcher) {
         super(watcher);
-        this.castSpell.addAll(watcher.castSpell);
+        for (Map.Entry<UUID, Integer> entry : watcher.spellsCastByPlayerThisTurnNonCreature.entrySet()) {
+            spellsCastByPlayerThisTurnNonCreature.put(entry.getKey(), entry.getValue());
+        }
     }
 
     @Override
@@ -97,19 +106,29 @@ class DeafeningSilenceWatcher extends Watcher {
             return;
         }
         Spell spell = game.getSpell(event.getTargetId());
-        if (spell == null || spell.isCreature()) {
+        if (spell == null
+                || spell.isCreature()) {
             return;
         }
-        castSpell.add(event.getPlayerId());
+        UUID playerId = event.getPlayerId();
+        if (playerId != null) {
+            spellsCastByPlayerThisTurnNonCreature.putIfAbsent(playerId, 0);
+            spellsCastByPlayerThisTurnNonCreature.compute(playerId, (k, v) -> v + 1);
+        }
     }
 
     @Override
     public void reset() {
         super.reset();
-        castSpell.clear();
+        spellsCastByPlayerThisTurnNonCreature.clear();
     }
 
-    boolean castSpell(UUID playerId) {
-        return castSpell.contains(playerId);
+    public int spellsCastByPlayerThisTurnNonCreature(UUID playerId) {
+        return spellsCastByPlayerThisTurnNonCreature.getOrDefault(playerId, 0);
+    }
+
+    @Override
+    public DeafeningSilenceWatcher copy() {
+        return new DeafeningSilenceWatcher(this);
     }
 }
