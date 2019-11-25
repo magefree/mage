@@ -15,7 +15,7 @@ import mage.constants.SetTargetPointer;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 import java.util.UUID;
 
@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 public final class LeylineOfAbundance extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("you tap a creature");
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("you tap a creature");
 
     public LeylineOfAbundance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
