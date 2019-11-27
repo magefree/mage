@@ -122,7 +122,10 @@ class WallOfStolenIdentityCopyEffect extends OneShotEffect {
                     Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
                     ContinuousEffect effect2 = new GainAbilityTargetEffect(ability, Duration.Custom);
                     ConditionalContinuousEffect conditionalEffect = new ConditionalContinuousEffect(
-                            effect2, new WallOfStolenIdentityCondition(source, source.getControllerId()), "");
+                            effect2, new WallOfStolenIdentityCondition(
+                                    source, 
+                                    source.getControllerId(), 
+                                    sourcePermanent.getZoneChangeCounter(game)), "");
                     conditionalEffect.setTargetPointer(new FixedTarget(target.getFirstTarget()));
                     game.addEffect(conditionalEffect, source);
                     return true;
@@ -143,17 +146,20 @@ class WallOfStolenIdentityCondition implements Condition {
     // Checks for when it leaves play or changes control
     private final Ability ability;
     private final UUID controllerId;
+    private final int zcc;
 
-    public WallOfStolenIdentityCondition(Ability ability, UUID controllerId) {
+    public WallOfStolenIdentityCondition(Ability ability, UUID controllerId, int zcc) {
         this.ability = ability;
         this.controllerId = controllerId;
+        this.zcc = zcc;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanentSource = game.getPermanent(ability.getSourceId());
         if (permanentSource != null) {
-            return permanentSource.getControllerId() == controllerId;
+            return permanentSource.getZoneChangeCounter(game) == zcc + 1
+                    && permanentSource.getControllerId() == controllerId;
         }
         return false;
     }
