@@ -1,17 +1,15 @@
-
-
 package mage.game.permanent.token;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.util.RandomUtil;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class SaprolingToken extends TokenImpl {
@@ -39,7 +37,8 @@ public final class SaprolingToken extends TokenImpl {
                 "VMA", // 2 different token, one with DIFFERENT stats, "Saproling Burst" create different token, see https://scryfall.com/card/tvma/12
                 "E02",
                 "RIX",
-                "DOM" // 3 different token images
+                "DOM", // 3 different token images
+                "C19"
         ));
     }
 
