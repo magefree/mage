@@ -1,4 +1,3 @@
-
 package mage.abilities.keyword;
 
 import mage.abilities.Ability;
@@ -105,7 +104,8 @@ class HideawayExileEffect extends OneShotEffect {
                 Card card = cards.get(target1.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);
-                    controller.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source),
+                    UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+                    controller.moveCardToExileWithInfo(card, exileId,
                             "Hideaway (" + hideawaySource.getIdName() + ')', source.getSourceId(), game, Zone.LIBRARY, false);
                     card.setFaceDown(true, game);
                 }
