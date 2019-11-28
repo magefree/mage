@@ -48,12 +48,13 @@
 |Generate|EMBLEM!:BFZ|Emblem Gideon|||GideonAllyOfZendikarEmblem|
 |Generate|EMBLEM!:BFZ|Emblem Kiora|||KioraMasterOfTheDepthsEmblem|
 |Generate|EMBLEM!:BFZ|Emblem Nixilis|||ObNixilisReignitedEmblem|
-|Generate|EMBLEM!:AKH|Emblem Gideon|||GideonOfTheTrialsEmblem|
+|Generate|EMBLEM!:AKH|Emblem - Gideon|||GideonOfTheTrialsEmblem|
 |Generate|EMBLEM!:C14|Emblem Daretti|||DarettiScrapSavantEmblem|
 |Generate|EMBLEM!:C14|Emblem Daretti||Emblem Daretti|DarettiScrapSavantEmblem|
 |Generate|EMBLEM!:C14|Emblem Nixilis|||ObNixilisOfTheBlackOathEmblem|
 |Generate|EMBLEM!:C14|Emblem Teferi|||TeferiTemporalArchmageEmblem|
 |Generate|EMBLEM!:C16|Emblem Daretti|||DarettiScrapSavantEmblem|
+|Generate|EMBLEM:C19|Ob Nixilis Reignited||Emblem Nixilis|ObNixilisReignitedEmblem|
 |Generate|EMBLEM!:CNS|Emblem Dack Fayden||Emblem Dack|DackFaydenEmblem|
 |Generate|EMBLEM!:DTK|Emblem Narset|||NarsetTranscendentEmblem|
 |Generate|EMBLEM!:EMA|Emblem Dack Fayden||Emblem Dack|DackFaydenEmblem|
@@ -62,7 +63,6 @@
 |Generate|EMBLEM!:KLD|Emblem Chandra|||ChandraTorchOfDefianceEmblem|
 |Generate|EMBLEM!:KLD|Emblem Dovin|||DovinBaanEmblem|
 |Generate|EMBLEM!:KLD|Emblem Nissa|||NissaVitalForceEmblem|
-|Generate|EMBLEM!:KLD|Emblem Tezzeret|||TezzeretTheSchemerEmblem|
 |Generate|EMBLEM!:KTK|Emblem Sarkhan|||SarkhanTheDragonspeakerEmblem|
 |Generate|EMBLEM!:KTK|Emblem Sorin|||SorinSolemnVisitorEmblem|
 |Generate|EMBLEM!:M15|Emblem Ajani|||AjaniSteadfastEmblem|
@@ -95,6 +95,11 @@
 |Generate|EMBLEM:M19|Vivien Reid||Emblem Vivien|VivienReidEmblem|
 |Generate|EMBLEM:M20|Chandra, Awakened Inferno||Emblem Chandra|ChandraAwakenedInfernoEmblem|
 |Generate|EMBLEM:M20|Mu Yanling, Sky Dancer||Emblem Yanling|MuYanlingSkyDancerEmblem|
+|Generate|EMBLEM:GRN|Ral, Izzet Viceroy||Emblem Ral|RalIzzetViceroyEmblem|
+|Generate|EMBLEM:GRN|Vraska, Golgari Queen||Emblem Vraska|VraskaGolgariQueenEmblem|
+|Generate|EMBLEM:DOM|Jaya Ballard||Emblem Jaya Ballard|JayaBallardEmblem|
+|Generate|EMBLEM:DOM|Teferi, Hero of Dominaria||Emblem Teferi|TeferiHeroOfDominariaEmblem|
+|Generate|EMBLEM:AER|Tezzeret the Schemer||Emblem Tezzeret|TezzeretTheSchemerEmblem|
 |Generate|EMBLEM:ELD|Garruk, Cursed Huntsman||Emblem Garruk|GarrukCursedHuntsmanEmblem|
 |Generate|PLANE:PCA|Plane - Academy At Tolaria West|||AcademyAtTolariaWestPlane|
 |Generate|PLANE:PCA|Plane - Agyrem|||AgyremPlane|
@@ -157,16 +162,16 @@
 |Generate|TOK:8ED|Rukh||
 |Generate|TOK:9ED|Bird|||RukhEggBirdToken|
 |Generate|TOK:9ED|Saproling|||SaprolingToken|
-|Generate|TOK:AER|Etherium Cell||
-|Generate|TOK:AER|Gremlin||
-|Generate|TOK:AER|Ragavan||
+|Generate|TOK:AER|Etherium Cell|||EtheriumCellToken|
+|Generate|TOK:AER|Gremlin|||GremlinToken|
+|Generate|TOK:AER|Ragavan|||RagavanToken|
 |Generate|TOK:AKH|Angel of Sanctions||
 |Generate|TOK:AKH|Anointer Priest||
 |Generate|TOK:AKH|Aven Initiate||
 |Generate|TOK:AKH|Aven Wind Guide||
 |Generate|TOK:AKH|Beast|||BeastToken3|
 |Generate|TOK:AKH|Cat|||CatToken2|
-|Generate|TOK:AKH|Drake||
+|Generate|TOK:AKH|Drake|||DrakeToken|
 |Generate|TOK:AKH|Glyph Keeper||
 |Generate|TOK:AKH|Heart-Piercer Manticore||
 |Generate|TOK:AKH|Hippo|||HippoToken2|
@@ -182,7 +187,7 @@
 |Generate|TOK:AKH|Vizier of Many Faces||
 |Generate|TOK:AKH|Warrior|||WarriorVigilantToken|
 |Generate|TOK:AKH|Wurm|||WurmToken3|
-|Generate|TOK:AKH|Zombie||
+|Generate|TOK:AKH|Zombie|||ZombieToken
 |Generate|TOK:ALA|Beast|||GodSireBeastToken|
 |Generate|TOK:ALA|Dragon|||DragonToken|
 |Generate|TOK:ALA|Goblin|||GoblinTokenWithHaste|
@@ -390,6 +395,30 @@
 |Generate|TOK:C18|Thopter|3||ThopterColorlessToken|
 |Generate|TOK:C18|Worm|||WormHarvestToken|
 |Generate|TOK:C18|Zombie|||ZombieToken|
+|Generate|TOK:C19|Assassin|||AssassinToken|
+|Generate|TOK:C19|Beast|1||BeastToken|
+|Generate|TOK:C19|Beast|2||BeastToken2|
+|Generate|TOK:C19|Bird|1||RocEggToken|
+|Generate|TOK:C19|Bird|2||WingmateRocToken|
+|Generate|TOK:C19|Centaur|||CentaurToken|
+|Generate|TOK:C19|Dragon|||DragonToken2|
+|Generate|TOK:C19|Drake|||DrakeToken|
+|Generate|TOK:C19|Egg|||AtlaPalaniToken|
+|Generate|TOK:C19|Eldrazi|||EldraziToken|
+|Generate|TOK:C19|Gargoyle|||GargoyleToken|
+|Generate|TOK:C19|Horror|||PhyrexianRebirthHorrorToken|
+|Generate|TOK:C19|Human|||HumanToken|
+|Generate|TOK:C19|Pegasus|||PegasusToken|
+|Generate|TOK:C19|Plant|||GrismoldPlantToken|
+|Generate|TOK:C19|Rhino|||RhinoToken|
+|Generate|TOK:C19|Saproling|||SaprolingToken|
+|Generate|TOK:C19|Sculpture|||DoomedArtisanToken|
+|Generate|TOK:C19|Snake|||SnakeToken|
+|Generate|TOK:C19|Spirit|||SpiritToken|
+|Generate|TOK:C19|Treasure|||TreasureToken|
+|Generate|TOK:C19|Wurm|||WurmToken|
+|Generate|TOK:C19|Zombie|1||ZombieToken|
+|Generate|TOK:C19|Zombie|2||ZombieToken|
 |Generate|TOK:CHK|Dragon Spirit|||TatsumaDragonToken|
 |Generate|TOK:CHK|Elemental|||SeedGuardianToken|
 |Generate|TOK:CHK|Illusion|||MelokuTheCloudedMirrorToken|
@@ -551,16 +580,16 @@
 |Generate|TOK:DOM|Construct|||KarnConstructToken|
 |Generate|TOK:DOM|Demon|||BelzenlokDemonToken|
 |Generate|TOK:DOM|Elemental|||ValdukElementalToken|
-|Gererate|TOK:DOM|Goblin||
+|Gererate|TOK:DOM|Goblin|||GoblinToken|
 |Generate|TOK:DOM|Karox Bladewing|||KaroxBladewingDragonToken|
-|Generate|TOK:DOM|Knight|1|
-|Generate|TOK:DOM|Knight|2|
+|Generate|TOK:DOM|Knight|1||KnightToken|
+|Generate|TOK:DOM|Knight|2||KnightToken|
 |Generate|TOK:DOM|Nightmare Horror|||ChainersTormentNightmareToken|
-|Generate|TOK:DOM|Saproling|1|
-|Generate|TOK:DOM|Saproling|2|
-|Generate|TOK:DOM|Saproling|3|
-|Generate|TOK:DOM|Soldier||
-|Generate|TOK:DOM|Zombie Knight||
+|Generate|TOK:DOM|Saproling|1||SaprolingToken|
+|Generate|TOK:DOM|Saproling|2||SaprolingToken|
+|Generate|TOK:DOM|Saproling|3||SaprolingToken|
+|Generate|TOK:DOM|Soldier|||SoldierToken|
+|Generate|TOK:DOM|Zombie Knight|||ZombieKnightToken|
 |Generate|TOK:DRB|Saproling|||SaprolingToken|
 |Generate|TOK:DST|Beast|||BeastToken|
 |Generate|TOK:DST|Elemental|1||WandOfTheElementsFirstToken|
@@ -1226,6 +1255,11 @@
 |Generate|TOK:RNA|Thopter|||ThopterToken|
 |Generate|TOK:RNA|Treasure|||TreasureToken|
 |Generate|TOK:RNA|Zombie|||ZombieToken|
+|Generate|TOK:GRN|Angel|||AngelVigilanceToken|
+|Generate|TOK:GRN|Elf Knight|||ElfKnightToken|
+|Generate|TOK:GRN|Goblin|||GoblinToken|
+|Generate|TOK:GRN|Insect|||IzoniInsectToken|
+|Generate|TOK:GRN|Soldier|||SoldierLifelinkToken|
 |Generate|TOK:WAR|Angel|||AngelVigilanceToken|
 |Generate|TOK:WAR|Assassin|||AssassinToken2|
 |Generate|TOK:WAR|Devil|||DevilToken|
