@@ -1,5 +1,3 @@
-
-
 package mage.abilities.effects.common;
 
 import mage.constants.Outcome;
@@ -34,8 +32,9 @@ public class ReturnToHandAttachedEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Object object = getValue("attachedTo");
         if (object instanceof Permanent) {
-            Card card = game.getCard(((Permanent)object).getId());
-            if (card != null) {
+            Card card = game.getCard(((Permanent) object).getId());
+            if (card != null
+                    && getValue("zcc").equals(game.getState().getZoneChangeCounter(card.getId()))) { // Necrogenesis, etc.
                 if (card.moveToZone(Zone.HAND, source.getSourceId(), game, false)) {
                     return true;
                 }

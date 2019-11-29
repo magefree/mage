@@ -83,6 +83,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                         if (sublayer == SubLayer.NA) {
                             if (loseAllAbilities) {
                                 permanent.getSubtype(game).retainAll(SubType.getLandTypes());
+                                permanent.getCardType().clear(); // remove all CardTypes
                                 permanent.getSubtype(game).addAll(token.getSubtype(game));
                             } else {
                                 for (SubType t : token.getSubtype(game)) {

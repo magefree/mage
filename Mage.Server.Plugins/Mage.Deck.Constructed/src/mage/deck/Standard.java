@@ -17,7 +17,10 @@ public class Standard extends Constructed {
 
         setCodes.addAll(makeLegalSets());
 
-        banned.add("Field of the Dead"); // since 2019-10-21
+        banned.add("Field of the Dead");
+        banned.add("Oko, Thief of Crowns");
+        banned.add("Once Upon a Time");
+        banned.add("Veil of Summer");
     }
 
     private static boolean isFallSet(ExpansionSet set) {

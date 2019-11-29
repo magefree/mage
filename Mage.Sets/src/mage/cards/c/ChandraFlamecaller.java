@@ -1,8 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
@@ -17,22 +14,24 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.ElementalToken;
 import mage.players.Player;
 
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class ChandraFlamecaller extends CardImpl {
 
     public ChandraFlamecaller(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{4}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{R}{R}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
 
@@ -78,7 +77,7 @@ class ChandraElementalEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            CreateTokenEffect effect = new CreateTokenEffect(new ElementalToken("OGW", 1, true), 2);
+            CreateTokenEffect effect = new CreateTokenEffect(new ElementalToken("OGW", 2, true), 2);
             effect.apply(game, source);
             effect.exileTokensCreatedAtNextEndStep(game, source);
             return true;

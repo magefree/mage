@@ -7,7 +7,6 @@ import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashAllEffect;
 import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
 import mage.abilities.effects.common.continuous.PlayTheTopCardEffect;
 import mage.abilities.keyword.ProwessAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -16,11 +15,8 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
-import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.players.Player;
 
 import java.util.UUID;
 
@@ -33,7 +29,6 @@ public final class ElshaOfTheInfinite extends CardImpl {
 
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
-        filter.add(ElshaOfTheInfinitePredicate.instance);
     }
 
     public ElshaOfTheInfinite(UUID ownerId, CardSetInfo setInfo) {
@@ -70,15 +65,5 @@ public final class ElshaOfTheInfinite extends CardImpl {
     @Override
     public ElshaOfTheInfinite copy() {
         return new ElshaOfTheInfinite(this);
-    }
-}
-
-enum ElshaOfTheInfinitePredicate implements Predicate<Card> {
-    instance;
-
-    @Override
-    public boolean apply(Card input, Game game) {
-        Player player = game.getPlayer(input.getOwnerId());
-        return player != null && player.getLibrary().getFromTop(game).equals(input);
     }
 }

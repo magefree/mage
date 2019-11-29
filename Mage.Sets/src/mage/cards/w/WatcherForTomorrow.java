@@ -19,6 +19,7 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 import java.util.UUID;
+import mage.game.permanent.Permanent;
 
 /**
  * @author TheElk801
@@ -72,7 +73,11 @@ class WatcherForTomorrowEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        ExileZone zone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source.getSourceId(), true));
+        Permanent permanentLeftBattlefield = (Permanent) getValue("permanentLeftBattlefield");
+        if (permanentLeftBattlefield == null) {
+            return false;
+        }
+        ExileZone zone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), permanentLeftBattlefield.getZoneChangeCounter(game)));
         if (zone == null) {
             return false;
         }

@@ -547,9 +547,11 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                             CardDownloadData card = new CardDownloadData(params[3], set, "0", false, type, "", "", true, fileName);
                             card.setTokenClassName(tokenClassName);
                             list.add(card);
+                        } else {
+                            logger.error("wrong line format in tokens file: " + line);
                         }
                     } else {
-                        logger.error("wrong format for image urls: " + line);
+                        logger.error("wrong line data in tokens file: " + line);
                     }
                 }
                 line = reader.readLine();

@@ -1,16 +1,14 @@
-
-
 package mage.game.permanent.token;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class SnakeToken extends TokenImpl {
@@ -18,11 +16,11 @@ public final class SnakeToken extends TokenImpl {
     static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("ZEN", "KTK", "MM2", "C15"));
+        tokenImageSets.addAll(Arrays.asList("ZEN", "KTK", "MM2", "C15", "C19"));
     }
 
     public SnakeToken() {
-        this((String)null);
+        this((String) null);
     }
 
     public SnakeToken(String setCode) {

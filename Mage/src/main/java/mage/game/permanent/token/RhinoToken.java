@@ -21,7 +21,7 @@ public final class RhinoToken extends TokenImpl {
         toughness = new MageInt(4);
         addAbility(TrampleAbility.getInstance());
 
-        availableImageSetCodes.addAll(Arrays.asList("DGM", "RTR", "MH1"));
+        availableImageSetCodes.addAll(Arrays.asList("DGM", "RTR", "MH1", "C19"));
     }
 
     public RhinoToken(final RhinoToken token) {

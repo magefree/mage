@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
@@ -15,9 +14,7 @@ import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.PermanentCard;
-import mage.game.stack.Spell;
-import mage.game.stack.StackAbility;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -63,8 +60,8 @@ class TamiyoCollectorOfTalesRuleEffect extends ContinuousRuleModifyingEffectImpl
 
     TamiyoCollectorOfTalesRuleEffect() {
         super(Duration.WhileOnBattlefield, Benefit);
-        staticText = "Spells and abilities your opponents control can't " +
-                "cause you to discard cards or sacrifice permanents";
+        staticText = "Spells and abilities your opponents control can't "
+                + "cause you to discard cards or sacrifice permanents";
     }
 
     private TamiyoCollectorOfTalesRuleEffect(final TamiyoCollectorOfTalesRuleEffect effect) {
@@ -84,28 +81,17 @@ class TamiyoCollectorOfTalesRuleEffect extends ContinuousRuleModifyingEffectImpl
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getPlayerId().equals(source.getControllerId())) {
-            MageObject object = game.getObject(event.getSourceId());
-            if (object instanceof PermanentCard) {
-                if (game.getOpponents(source.getControllerId()).contains(((PermanentCard) object).getControllerId())) {
-                    return true;
-                }
-            }
-            if (object instanceof Spell) {
-                if (game.getOpponents(source.getControllerId()).contains(((Spell) object).getControllerId())) {
-                    return true;
-                }
-            }
-            if (object instanceof Card) {
-                if (game.getOpponents(source.getControllerId()).contains(((Card) object).getOwnerId())) {
-                    return true;
-                }
-            }
-            if (object instanceof StackAbility) {
-                if (game.getOpponents(source.getControllerId()).contains(((StackAbility) object).getControllerId())) {
-                    return true;
-                }
-            }
+        Player controller = game.getPlayer(source.getControllerId());
+        UUID eventSourceControllerId = game.getControllerId(event.getSourceId());
+
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (controller != null && permanent != null && permanent.getControllerId() == source.getControllerId()) {
+            return game.getOpponents(source.getControllerId()).contains(eventSourceControllerId);
+        }
+
+        Card cardInHand = game.getCard(event.getTargetId());
+        if (controller != null && cardInHand != null && cardInHand.getOwnerId() == source.getControllerId()) {
+            return game.getOpponents(source.getControllerId()).contains(eventSourceControllerId);
         }
         return false;
     }
@@ -115,8 +101,8 @@ class TamiyoCollectorOfTalesEffect extends OneShotEffect {
 
     TamiyoCollectorOfTalesEffect() {
         super(Outcome.Benefit);
-        staticText = "Choose a nonland card name, then reveal the top four cards of your library. " +
-                "Put all cards with the chosen name from among them into your hand and the rest into your graveyard.";
+        staticText = "Choose a nonland card name, then reveal the top four cards of your library. "
+                + "Put all cards with the chosen name from among them into your hand and the rest into your graveyard.";
     }
 
     private TamiyoCollectorOfTalesEffect(final TamiyoCollectorOfTalesEffect effect) {
@@ -145,9 +131,9 @@ class TamiyoCollectorOfTalesEffect extends OneShotEffect {
         Cards cards2 = new CardsImpl();
         player.revealCards(source, cards, game);
         for (Card card : cards.getCards(game)) {
-            if(card.isSplitCard()){
-                if(((SplitCard) card).getLeftHalfCard().getName().equals(choice.getChoice()) ||
-                        ((SplitCard) card).getRightHalfCard().getName().equals(choice.getChoice())){
+            if (card.isSplitCard()) {
+                if (((SplitCard) card).getLeftHalfCard().getName().equals(choice.getChoice())
+                        || ((SplitCard) card).getRightHalfCard().getName().equals(choice.getChoice())) {
                     cards2.add(card);
                 }
             }
@@ -160,4 +146,5 @@ class TamiyoCollectorOfTalesEffect extends OneShotEffect {
         player.moveCards(cards2, Zone.HAND, source, game);
         return true;
     }
+
 }

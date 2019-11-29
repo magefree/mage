@@ -75,6 +75,7 @@ public class Vintage extends Constructed {
         restricted.add("Mox Sapphire");
         restricted.add("Mystic Forge");
         restricted.add("Mystical Tutor");
+        restricted.add("Narset, Parter of Veils");
         restricted.add("Necropotence");
         restricted.add("Ponder");
         restricted.add("Sol Ring");
