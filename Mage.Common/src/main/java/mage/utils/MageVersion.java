@@ -11,7 +11,7 @@ public class MageVersion implements Serializable, Comparable<MageVersion> {
 
     public static final int MAGE_VERSION_MAJOR = 1;
     public static final int MAGE_VERSION_MINOR = 4;
-    public static final int MAGE_VERSION_PATCH = 39;
+    public static final int MAGE_VERSION_PATCH = 40;
     public static final String MAGE_EDITION_INFO = ""; // set "-beta" for 1.4.32-betaV0
     public static final String MAGE_VERSION_MINOR_PATCH = "V0"; // default
     // strict mode
