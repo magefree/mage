@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
@@ -15,18 +14,13 @@ import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.PermanentCard;
-import mage.game.stack.Spell;
-import mage.game.stack.StackAbility;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
-import mage.abilities.SpellAbility;
 
 import static mage.constants.Outcome.Benefit;
-import mage.game.command.Emblem;
-import mage.game.permanent.Permanent;
 
 /**
  * @author TheElk801
@@ -88,51 +82,16 @@ class TamiyoCollectorOfTalesRuleEffect extends ContinuousRuleModifyingEffectImpl
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject object = game.getObject(event.getSourceId());
-        Permanent permanent = game.getPermanent(event.getTargetId());
-        Card cardInHand = game.getCard(event.getTargetId());
-        if (controller != null) {
-            if (permanent != null
-                    && permanent.getControllerId() == source.getControllerId()
-                    || cardInHand != null
-                    && cardInHand.getOwnerId() == source.getControllerId()) {
+        UUID eventSourceControllerId = game.getControllerId(event.getSourceId());
 
-                if (object instanceof PermanentCard) {
-                    if (game.getOpponents(source.getControllerId()).contains(((PermanentCard) object).getControllerId())) {
-                        return true;
-                    }
-                }
-                if (object instanceof Spell) {
-                    if (game.getOpponents(source.getControllerId()).contains(((Spell) object).getControllerId())) {
-                        return true;
-                    }
-                }
-                if (object instanceof Emblem) {
-                    if (game.getOpponents(source.getControllerId()).contains(((Emblem) object).getControllerId())) {
-                        return true;
-                    }
-                }
-                if (object instanceof Ability) {
-                    if (game.getOpponents(source.getControllerId()).contains(((Ability) object).getControllerId())) {
-                        return true;
-                    }
-                }
-                if (object instanceof SpellAbility) {
-                    if (game.getOpponents(source.getControllerId()).contains(((SpellAbility) object).getControllerId())) {
-                        return true;
-                    }
-                }
-                if (object instanceof StackAbility) {
-                    if (game.getOpponents(source.getControllerId()).contains(((StackAbility) object).getControllerId())) {
-                        return true;
-                    }
-                }
-                if (object instanceof Card) {
-                    if (game.getOpponents(source.getControllerId()).contains(((Card) object).getOwnerId())) {
-                        return true;
-                    }
-                }
-            }
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (controller != null && permanent != null && permanent.getControllerId() == source.getControllerId()) {
+            return game.getOpponents(source.getControllerId()).contains(eventSourceControllerId);
+        }
+
+        Card cardInHand = game.getCard(event.getTargetId());
+        if (controller != null && cardInHand != null && cardInHand.getOwnerId() == source.getControllerId()) {
+            return game.getOpponents(source.getControllerId()).contains(eventSourceControllerId);
         }
         return false;
     }
