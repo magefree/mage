@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
@@ -9,20 +8,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
-import mage.cards.Card;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import static mage.constants.Layer.TypeChangingEffects_4;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.cards.*;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -32,8 +19,9 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInHand;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class TezzeretCruelMachinist extends CardImpl {
@@ -188,9 +176,8 @@ class TezzeretCruelMachinistPowerToughnessEffect extends SetPowerToughnessTarget
                     && target.isFaceDown(game)) {
                 target.getPower().setValue(5);
                 target.getToughness().setValue(5);
-                break;
+                return true;
             }
-            return true;
         }
         return false;
     }
