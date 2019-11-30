@@ -29,7 +29,6 @@ import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -69,6 +68,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
+import mage.filter.common.FilterControlledPermanent;
 
 public abstract class GameImpl implements Game, Serializable {
 
@@ -1011,7 +1011,6 @@ public abstract class GameImpl implements Game, Serializable {
         }
     }
 
-
     public void initGameDefaultWatchers() {
         getState().addWatcher(new MorbidWatcher());
         getState().addWatcher(new CastSpellLastTurnWatcher());
@@ -1465,7 +1464,7 @@ public abstract class GameImpl implements Game, Serializable {
     /**
      * @param emblem
      * @param sourceObject
-     * @param toPlayerId   controller and owner of the emblem
+     * @param toPlayerId controller and owner of the emblem
      */
     @Override
     public void addEmblem(Emblem emblem, MageObject sourceObject, UUID toPlayerId) {
@@ -1483,8 +1482,8 @@ public abstract class GameImpl implements Game, Serializable {
     /**
      * @param plane
      * @param sourceObject
-     * @param toPlayerId   controller and owner of the plane (may only be one per
-     *                     game..)
+     * @param toPlayerId controller and owner of the plane (may only be one per
+     * game..)
      * @return boolean - whether the plane was added successfully or not
      */
     @Override
@@ -1713,7 +1712,7 @@ public abstract class GameImpl implements Game, Serializable {
                     break;
                 }
                 // triggered abilities that don't use the stack have to be executed first (e.g. Banisher Priest Return exiled creature
-                for (Iterator<TriggeredAbility> it = abilities.iterator(); it.hasNext(); ) {
+                for (Iterator<TriggeredAbility> it = abilities.iterator(); it.hasNext();) {
                     TriggeredAbility triggeredAbility = it.next();
                     if (!triggeredAbility.isUsesStack()) {
                         state.removeTriggeredAbility(triggeredAbility);
@@ -1924,8 +1923,8 @@ public abstract class GameImpl implements Game, Serializable {
                                 }
                             } else {
                                 Filter auraFilter = spellAbility.getTargets().get(0).getFilter();
-                                if (auraFilter instanceof FilterControlledCreaturePermanent) {
-                                    if (!((FilterControlledCreaturePermanent) auraFilter).match(attachedTo, perm.getId(), perm.getControllerId(), this)
+                                if (auraFilter instanceof FilterControlledPermanent) {
+                                    if (!((FilterControlledPermanent) auraFilter).match(attachedTo, perm.getId(), perm.getControllerId(), this)
                                             || attachedTo.cantBeAttachedBy(perm, this)) {
                                         if (movePermanentToGraveyardWithInfo(perm)) {
                                             somethingHappened = true;
@@ -2448,7 +2447,7 @@ public abstract class GameImpl implements Game, Serializable {
         }
         //20100423 - 800.4a
         Set<Card> toOutside = new HashSet<>();
-        for (Iterator<Permanent> it = getBattlefield().getAllPermanents().iterator(); it.hasNext(); ) {
+        for (Iterator<Permanent> it = getBattlefield().getAllPermanents().iterator(); it.hasNext();) {
             Permanent perm = it.next();
             if (perm.isOwnedBy(playerId)) {
                 if (perm.getAttachedTo() != null) {
@@ -2491,7 +2490,7 @@ public abstract class GameImpl implements Game, Serializable {
         player.moveCards(toOutside, Zone.OUTSIDE, null, this);
         // triggered abilities that don't use the stack have to be executed
         List<TriggeredAbility> abilities = state.getTriggered(player.getId());
-        for (Iterator<TriggeredAbility> it = abilities.iterator(); it.hasNext(); ) {
+        for (Iterator<TriggeredAbility> it = abilities.iterator(); it.hasNext();) {
             TriggeredAbility triggeredAbility = it.next();
             if (!triggeredAbility.isUsesStack()) {
                 state.removeTriggeredAbility(triggeredAbility);
@@ -2511,7 +2510,7 @@ public abstract class GameImpl implements Game, Serializable {
 
         // Remove cards from the player in all exile zones
         for (ExileZone exile : this.getExile().getExileZones()) {
-            for (Iterator<UUID> it = exile.iterator(); it.hasNext(); ) {
+            for (Iterator<UUID> it = exile.iterator(); it.hasNext();) {
                 Card card = this.getCard(it.next());
                 if (card != null && card.isOwnedBy(playerId)) {
                     it.remove();
@@ -2521,7 +2520,7 @@ public abstract class GameImpl implements Game, Serializable {
 
         //Remove all commander/emblems/plane the player controls
         boolean addPlaneAgain = false;
-        for (Iterator<CommandObject> it = this.getState().getCommand().iterator(); it.hasNext(); ) {
+        for (Iterator<CommandObject> it = this.getState().getCommand().iterator(); it.hasNext();) {
             CommandObject obj = it.next();
             if (obj.isControlledBy(playerId)) {
                 if (obj instanceof Emblem) {
