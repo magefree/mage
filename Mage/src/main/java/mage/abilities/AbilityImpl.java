@@ -229,6 +229,7 @@ public abstract class AbilityImpl implements Ability {
         if (!getModes().choose(game, this)) {
             return false;
         }
+        
 
         MageObject sourceObject = getSourceObject(game);
         if (getSourceObjectZoneChangeCounter() == 0) {
@@ -1192,7 +1193,7 @@ public abstract class AbilityImpl implements Ability {
 
     protected String getTargetDescriptionForLog(Targets targets, Game game) {
         StringBuilder sb = new StringBuilder(); // threadLocal StringBuilder can't be used because calling method already uses it
-        if (!targets.isEmpty()) {
+        if (targets != null && !targets.isEmpty()) {
             String usedVerb = null;
             for (Target target : targets) {
                 if (!target.getTargets().isEmpty()) {
