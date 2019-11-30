@@ -229,7 +229,6 @@ public abstract class AbilityImpl implements Ability {
         if (!getModes().choose(game, this)) {
             return false;
         }
-        
 
         MageObject sourceObject = getSourceObject(game);
         if (getSourceObjectZoneChangeCounter() == 0) {
