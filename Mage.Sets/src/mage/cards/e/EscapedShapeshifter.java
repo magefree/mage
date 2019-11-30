@@ -72,7 +72,7 @@ class EscapedShapeshifterEffect extends ContinuousEffectImpl {
                         source.getControllerId(), source.getSourceId(), game
                 ).stream()
                 .filter(Objects::nonNull)
-                .filter(permanent -> !permanent.getName().equals(sourcePermanent.getName()))
+                .filter(permanent -> !permanent.getName().equals("Escaped Shapeshifter"))
                 .map(Permanent::getAbilities)
                 .flatMap(Collection::stream).filter(EscapedShapeshifterEffect::checkAbility)
                 .forEach(ability -> sourcePermanent.addAbility(ability, source.getSourceId(), game));

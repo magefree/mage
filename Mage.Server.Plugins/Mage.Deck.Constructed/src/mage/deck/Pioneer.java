@@ -15,7 +15,7 @@ public class Pioneer extends Constructed {
     public Pioneer() {
         super("Constructed - Pioneer");
 
-        Date cutoff = new GregorianCalendar(2012, 10, 5).getTime(); // M15 release date
+        Date cutoff = new GregorianCalendar(2012, 10, 5).getTime(); // RTR release date
         for (ExpansionSet set : Sets.getInstance().values()) {
             if (set.getSetType().isStandardLegal() && (set.getReleaseDate().after(cutoff) || set.getReleaseDate().equals(cutoff))) {
                 setCodes.add(set.getCode());
