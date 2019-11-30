@@ -18,9 +18,10 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlaneswalker;
-import mage.target.common.TargetCreaturePermanentAmount;
 
 import java.util.UUID;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -42,13 +43,13 @@ public final class VivienArkbowRanger extends CardImpl {
                 TrampleAbility.getInstance(), Duration.EndOfTurn,
                 "They gain trample until end of turn"
         ));
-        ability.addTarget(new TargetCreaturePermanentAmount(2));
+        ability.addTarget(new TargetCreaturePermanent(0, 2, new FilterCreaturePermanent(), false));
         this.addAbility(ability);
 
         // −3: Target creature you control deals damage equal to its power to target creature or planeswalker.
         ability = new LoyaltyAbility(
-                new DamageWithPowerTargetEffect().setText("Target creature you control deals damage " +
-                        "equal to its power to target creature or planeswalker."), -3
+                new DamageWithPowerTargetEffect().setText("Target creature you control deals damage "
+                        + "equal to its power to target creature or planeswalker."), -3
         );
         ability.addTarget(new TargetControlledCreaturePermanent());
         ability.addTarget(new TargetCreatureOrPlaneswalker());
