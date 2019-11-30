@@ -549,10 +549,6 @@ public abstract class AbilityImpl implements Ability {
         Iterator<ManaCost> costIterator = manaCostsToPay.iterator();
         while (costIterator.hasNext()) {
             ManaCost cost = costIterator.next();
-            PhyrexianManaCost tempPhyrexianCost = null;
-            Mana mana = cost.getMana();
-
-            FilterMana phyrexianColors = controller.getPhyrexianColors();
             
             if (cost instanceof PhyrexianManaCost) {
                 PhyrexianManaCost phyrexianManaCost = (PhyrexianManaCost) cost;
@@ -561,37 +557,6 @@ public abstract class AbilityImpl implements Ability {
                         && controller.chooseUse(Outcome.LoseLife, "Pay 2 life instead of " + phyrexianManaCost.getBaseText() + '?', this, game)) {
                     costIterator.remove();
                     costs.add(payLifeCost);
-                }
-            }
-            /* K'rrik, Son of Yawgmoth ability check */
-            else if (phyrexianColors != null) {
-                int phyrexianEnabledPips = mana.count(phyrexianColors);
-                if (phyrexianEnabledPips > 0) {
-                    /* find which color mana is in the cost and set it in the temp Phyrexian cost */
-                    if (phyrexianColors.isWhite() && mana.getWhite() > 0) {
-                        tempPhyrexianCost = new PhyrexianManaCost(ColoredManaSymbol.W);
-                    }
-                    else if (phyrexianColors.isBlue() && mana.getBlue() > 0) {
-                        tempPhyrexianCost = new PhyrexianManaCost(ColoredManaSymbol.U);
-                    }
-                    else if (phyrexianColors.isBlack() && mana.getBlack() > 0) {
-                        tempPhyrexianCost = new PhyrexianManaCost(ColoredManaSymbol.B);
-                    }
-                    else if (phyrexianColors.isRed() && mana.getRed() > 0) {
-                        tempPhyrexianCost = new PhyrexianManaCost(ColoredManaSymbol.R);
-                    }
-                    else if (phyrexianColors.isGreen() && mana.getGreen() > 0) {
-                        tempPhyrexianCost = new PhyrexianManaCost(ColoredManaSymbol.G);
-                    }
-                    
-                    if (tempPhyrexianCost != null) {
-                        PayLifeCost payLifeCost = new PayLifeCost(2);
-                        if (payLifeCost.canPay(this, sourceId, controller.getId(), game)
-                                && controller.chooseUse(Outcome.LoseLife, "Pay 2 life instead of " + tempPhyrexianCost.getBaseText() + '?', this, game)) {
-                            costIterator.remove();
-                            costs.add(payLifeCost);
-                        }
-                    }
                 }
             }
         }
