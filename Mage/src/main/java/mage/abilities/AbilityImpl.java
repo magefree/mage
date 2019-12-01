@@ -924,7 +924,7 @@ public abstract class AbilityImpl implements Ability {
         if (getModes().getMode() != null) {
             return getModes().getMode().getTargets();
         }
-        return null;
+        return new Targets();
     }
 
     @Override
@@ -1192,7 +1192,7 @@ public abstract class AbilityImpl implements Ability {
 
     protected String getTargetDescriptionForLog(Targets targets, Game game) {
         StringBuilder sb = new StringBuilder(); // threadLocal StringBuilder can't be used because calling method already uses it
-        if (targets != null && !targets.isEmpty()) {
+        if (!targets.isEmpty()) {
             String usedVerb = null;
             for (Target target : targets) {
                 if (!target.getTargets().isEmpty()) {
