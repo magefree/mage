@@ -1830,8 +1830,7 @@ public class HumanPlayer extends PlayerImpl {
                             }
                         }
                     }
-                    else if (modes.getSelectedModes().size() >= modes.getMinModes() &&
-                             modes.getSelectedModes().size() <= modes.getMaxModes()) {
+                    else if (modes.getSelectedModes().size() >= modes.getMinModes()) {
                         /* let the player cancel mode selection if they do not need to select any further modes */
                         done = true;
                     }
