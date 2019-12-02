@@ -1462,6 +1462,12 @@ public abstract class PlayerImpl implements Player, Serializable {
         for (Ability ability : object.getAbilities()) {
             if (ability instanceof SpellAbility) {
                 switch (((SpellAbility) ability).getSpellAbilityType()) {
+                    case BASE_ALTERNATE:
+                        ActivationStatus as = ((SpellAbility) ability).canActivate(playerId, game);
+                        if (as.canActivate()) {
+                            useable.put(ability.getId(), (SpellAbility) ability);  // example: Chandra, Torch of Defiance +1 loyal ability
+                        }
+                        return useable;
                     case SPLIT_FUSED:
                         if (zone == Zone.HAND) {
                             if (ability.canChooseTarget(game)) {
@@ -1502,7 +1508,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     // Get the usable activated abilities for a *single card object*, that is, either a card or half of a split card.
     // Also called on the whole split card but only passing the fuse ability and other whole-split-card shared abilities
     // as candidates.
-    private void getUseableActivatedAbilitiesHalfImpl(MageObject object, Zone zone, Game game, Abilities<Ability> candidateAbilites, 
+    private void getUseableActivatedAbilitiesHalfImpl(MageObject object, Zone zone, Game game, Abilities<Ability> candidateAbilites,
             LinkedHashMap<UUID, ActivatedAbility> output) {
         boolean canUse = !(object instanceof Permanent) || ((Permanent) object).canUseActivatedAbilities(game);
         ManaOptions availableMana = null;
@@ -4344,5 +4350,10 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public FilterMana getPhyrexianColors() {
         return this.phyrexianColors;
+    }
+
+    @Override
+    public SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana) {
+        return card.getSpellAbility();
     }
 }

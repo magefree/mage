@@ -710,9 +710,9 @@ public class HumanPlayer extends PlayerImpl {
             if (!isExecutingMacro()) {
                 String selectedNames = target.getTargetedName(game);
                 game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage()
-                                + "<br> Amount remaining: " + target.getAmountRemaining()
-                                + (selectedNames.isEmpty() ? "" : ", selected: " + selectedNames),
-                                getRelatedObjectName(source, game)),
+                        + "<br> Amount remaining: " + target.getAmountRemaining()
+                        + (selectedNames.isEmpty() ? "" : ", selected: " + selectedNames),
+                        getRelatedObjectName(source, game)),
                         target.possibleTargets(source == null ? null : source.getSourceId(), playerId, game),
                         target.isRequired(source),
                         getOptions(target, null));
@@ -725,7 +725,7 @@ public class HumanPlayer extends PlayerImpl {
 
                     boolean removeMode = target.getTargets().contains(targetId)
                             && chooseUse(outcome, "What do you want to do with " + (targetObject != null ? targetObject.getLogName() : "target") + "?", "",
-                            "Remove from selected", "Add extra amount", source, game);
+                                    "Remove from selected", "Add extra amount", source, game);
 
                     if (removeMode) {
                         target.remove(targetId);
@@ -862,9 +862,9 @@ public class HumanPlayer extends PlayerImpl {
                             if (!skippedAtLeastOnce
                                     || (playerId.equals(game.getActivePlayerId())
                                     && !controllingPlayer
-                                    .getUserData()
-                                    .getUserSkipPrioritySteps()
-                                    .isStopOnAllEndPhases())) {
+                                            .getUserData()
+                                            .getUserSkipPrioritySteps()
+                                            .isStopOnAllEndPhases())) {
                                 skippedAtLeastOnce = true;
                                 if (passWithManaPoolCheck(game)) {
                                     return false;
@@ -896,9 +896,9 @@ public class HumanPlayer extends PlayerImpl {
                         if (haveNewObjectsOnStack
                                 && (playerId.equals(game.getActivePlayerId())
                                 && controllingPlayer
-                                .getUserData()
-                                .getUserSkipPrioritySteps()
-                                .isStopOnStackNewObjects())) {
+                                        .getUserData()
+                                        .getUserSkipPrioritySteps()
+                                        .isStopOnStackNewObjects())) {
                             // new objects on stack -- disable "pass until stack resolved"
                             passedUntilStackResolved = false;
                         } else {
@@ -975,7 +975,9 @@ public class HumanPlayer extends PlayerImpl {
                     }
                 }
                 return result;
-            } else return response.getManaType() == null;
+            } else {
+                return response.getManaType() == null;
+            }
             return true;
         }
         return false;
@@ -1233,8 +1235,8 @@ public class HumanPlayer extends PlayerImpl {
             if (passedAllTurns
                     || passedUntilEndStepBeforeMyTurn
                     || (!getControllingPlayersUserData(game)
-                    .getUserSkipPrioritySteps()
-                    .isStopOnDeclareAttackers()
+                            .getUserSkipPrioritySteps()
+                            .isStopOnDeclareAttackers()
                     && (passedTurn
                     || passedTurnSkipStack
                     || passedUntilEndOfTurn
@@ -1255,8 +1257,7 @@ public class HumanPlayer extends PlayerImpl {
                     return;
                 }
             }
-            */
-
+             */
             Map<String, Serializable> options = new HashMap<>();
             options.put(Constants.Option.POSSIBLE_ATTACKERS, (Serializable) possibleAttackers);
             if (!possibleAttackers.isEmpty()) {
@@ -1418,7 +1419,7 @@ public class HumanPlayer extends PlayerImpl {
     /**
      * Selects a defender for an attacker and adds the attacker to combat
      *
-     * @param defenders  - list of possible defender
+     * @param defenders - list of possible defender
      * @param attackerId - UUID of attacker
      * @param game
      * @return
@@ -1783,6 +1784,31 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     @Override
+    public SpellAbility chooseAbilityForCast(Card card, Game game, boolean nonMana) {
+        MageObject object = game.getObject(card.getId());
+        if (object != null) {
+            LinkedHashMap<UUID, ActivatedAbility> useableAbilities = getSpellAbilities(object, game.getState().getZone(object.getId()), game);
+            if (useableAbilities != null
+                    && useableAbilities.size() == 1) {
+                return (SpellAbility) useableAbilities.values().iterator().next();
+            } else if (useableAbilities != null
+                    && !useableAbilities.isEmpty()) {
+                prepareForResponse(game);
+                if (!isExecutingMacro()) {
+                    game.fireGetChoiceEvent(playerId, name, object, new ArrayList<>(useableAbilities.values()));
+                }
+                waitForResponse(game);
+                if (response.getUUID() != null) {
+                    if (useableAbilities.containsKey(response.getUUID())) {
+                        return (SpellAbility) useableAbilities.get(response.getUUID());
+                    }
+                }
+            }
+        }
+        return card.getSpellAbility();
+    }
+
+    @Override
     public Mode chooseMode(Modes modes, Ability source, Game game) {
         // choose mode to activate
         updateGameStatePriority("chooseMode", game);
@@ -2115,4 +2141,5 @@ public class HumanPlayer extends PlayerImpl {
     public String getHistory() {
         return "no available";
     }
+
 }

@@ -3478,4 +3478,9 @@ public class TestPlayer implements Player {
     public FilterMana getPhyrexianColors() {
         return computerPlayer.getPhyrexianColors();
     }
+    
+    @Override
+    public SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana) {
+        return card.getSpellAbility();
+    }
 }
