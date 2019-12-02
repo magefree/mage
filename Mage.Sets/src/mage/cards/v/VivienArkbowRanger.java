@@ -18,10 +18,13 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlaneswalker;
+import mage.target.common.TargetCreaturePermanentAmount;
 
 import java.util.UUID;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetadjustment.TargetAdjuster;
 
 /**
  * @author TheElk801
@@ -37,13 +40,13 @@ public final class VivienArkbowRanger extends CardImpl {
 
         // +1: Distribute two +1/+1 counters among up to two target creatures. They gain trample until end of turn.
         Ability ability = new LoyaltyAbility(new DistributeCountersEffect(
-                CounterType.P1P1, 2, false, "up to two target creatures"
-        ), 1);
+                CounterType.P1P1, 2, false, "up to two target creatures"), 1);
         ability.addEffect(new GainAbilityTargetEffect(
                 TrampleAbility.getInstance(), Duration.EndOfTurn,
                 "They gain trample until end of turn"
         ));
         ability.addTarget(new TargetCreaturePermanent(0, 2, new FilterCreaturePermanent(), false));
+        ability.setTargetAdjuster(VivienArkbowRangerAdjuster.instance);
         this.addAbility(ability);
 
         // −3: Target creature you control deals damage equal to its power to target creature or planeswalker.
@@ -66,5 +69,18 @@ public final class VivienArkbowRanger extends CardImpl {
     @Override
     public VivienArkbowRanger copy() {
         return new VivienArkbowRanger(this);
+    }
+
+    enum VivienArkbowRangerAdjuster implements TargetAdjuster {
+        instance;
+
+        @Override
+        public void adjustTargets(Ability ability, Game game) {
+            // if targets are available, switch over to a working target method
+            if (game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), game).size() > 0) {
+                ability.getTargets().clear();
+                ability.addTarget(new TargetCreaturePermanentAmount(2));
+            }
+        }
     }
 }
