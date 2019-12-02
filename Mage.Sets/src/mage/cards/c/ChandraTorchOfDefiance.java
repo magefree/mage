@@ -99,7 +99,7 @@ class ChandraTorchOfDefianceEffect extends OneShotEffect {
                         game.getState().setValue("CastFromExileEnabled" + card.getId(), Boolean.TRUE);  // enable the card to be cast from the exile zone
                         exiledCardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, false),
                                 game, false, new MageObjectReference(sourceObject, game));
-                        game.getState().setValue("CastFromExileEnabled" + card.getId(), Boolean.FALSE);  // reset to false
+                        game.getState().setValue("CastFromExileEnabled" + card.getId(), null);  // reset to null
                     }
                 }
                 if (!exiledCardWasCast) {
