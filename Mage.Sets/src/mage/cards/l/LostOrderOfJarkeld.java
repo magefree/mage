@@ -1,25 +1,29 @@
 package mage.cards.l;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ChooseOpponentEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.StaticFilters;
-import mage.game.Game;
-
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.AdditiveDynamicValue;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.Effect;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
  * @author TheElk801
  */
 public final class LostOrderOfJarkeld extends CardImpl {
+
+    protected FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     public LostOrderOfJarkeld(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
@@ -36,8 +40,7 @@ public final class LostOrderOfJarkeld extends CardImpl {
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
                 new SetPowerToughnessSourceEffect(
-                        LostOrderOfJarkeldValue.instance, Duration.Custom, SubLayer.CharacteristicDefining_7a
-                )
+                        new AdditiveDynamicValue(new CreaturesControlledByChosenPlayer(), new StaticValue(1)), Duration.EndOfGame)
         ));
     }
 
@@ -51,28 +54,32 @@ public final class LostOrderOfJarkeld extends CardImpl {
     }
 }
 
-enum LostOrderOfJarkeldValue implements DynamicValue {
-    instance;
+class CreaturesControlledByChosenPlayer implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        if (game.getPermanent(sourceAbility.getSourceId()) == null) {
-            return 1;
+        if (sourceAbility != null) {
+            UUID playerId = (UUID) game.getState().getValue(sourceAbility.getSourceId() + ChooseOpponentEffect.VALUE_KEY);
+            Player chosenPlayer = game.getPlayer(playerId);
+            if (chosenPlayer != null) {
+                return game.getBattlefield().countAll(new FilterCreaturePermanent(), chosenPlayer.getId(), game);
+            }
         }
-        Object obj = game.getState().getValue(sourceAbility.getSourceId().toString() + ChooseOpponentEffect.VALUE_KEY);
-        if (!(obj instanceof UUID)) {
-            return 1;
-        }
-        return 1 + game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, (UUID) obj, game).size();
+        return 0;
     }
 
     @Override
     public DynamicValue copy() {
-        return instance;
+        return new CreaturesControlledByChosenPlayer();
     }
 
     @Override
     public String getMessage() {
-        return "1 plus the number of creatures the chosen player controls.";
+        return "creatures controlled by chosen player";
+    }
+
+    @Override
+    public String toString() {
+        return "1";
     }
 }
