@@ -75,7 +75,7 @@ class CreaturesControlledByChosenPlayer implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "creatures controlled by chosen player";
+        return "1 plus the number of creatures controlled by chosen player";
     }
 
     @Override
