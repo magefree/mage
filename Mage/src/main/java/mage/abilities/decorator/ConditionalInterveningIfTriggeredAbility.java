@@ -37,6 +37,7 @@ public class ConditionalInterveningIfTriggeredAbility extends TriggeredAbilityIm
         this.modes = ability.getModes();
         this.condition = condition;
         this.abilityText = text;
+        this.watchers = ability.getWatchers();
     }
 
     public ConditionalInterveningIfTriggeredAbility(final ConditionalInterveningIfTriggeredAbility triggered) {
@@ -44,6 +45,7 @@ public class ConditionalInterveningIfTriggeredAbility extends TriggeredAbilityIm
         this.ability = triggered.ability.copy();
         this.condition = triggered.condition;
         this.abilityText = triggered.abilityText;
+        this.watchers = triggered.watchers;
     }
 
     @Override
@@ -100,5 +102,4 @@ public class ConditionalInterveningIfTriggeredAbility extends TriggeredAbilityIm
     public boolean isOptional() {
         return ability.isOptional();
     }
-
 }
