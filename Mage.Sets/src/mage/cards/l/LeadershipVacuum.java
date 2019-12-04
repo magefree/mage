@@ -15,7 +15,6 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -52,7 +51,7 @@ class LeadershipVacuumEffect extends OneShotEffect {
     }
 
     LeadershipVacuumEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.Detriment);
         staticText = "Target player returns each commander they control from the battlefield to the command zone.";
     }
 
