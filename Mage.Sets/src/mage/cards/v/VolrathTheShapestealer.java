@@ -48,7 +48,7 @@ public final class VolrathTheShapestealer extends CardImpl {
 
         // At the beginning of combat on your turn, put a -1/-1 counter on up to one target creature.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.M1M1.createInstance()), TargetController.YOU, false
+                new AddCountersTargetEffect(CounterType.M1M1.createInstance(), Outcome.Detriment), TargetController.YOU, false
         );
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);
@@ -73,8 +73,8 @@ class VolrathTheShapestealerEffect extends OneShotEffect {
 
     VolrathTheShapestealerEffect() {
         super(Outcome.Copy);
-        staticText = "Until your next turn, {this} becomes a copy of target creature with a counter on it, " +
-                "except it's 7/5 and it has this ability.";
+        staticText = "Until your next turn, {this} becomes a copy of target creature with a counter on it, "
+                + "except it's 7/5 and it has this ability.";
     }
 
     private VolrathTheShapestealerEffect(final VolrathTheShapestealerEffect effect) {
