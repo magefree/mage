@@ -94,13 +94,7 @@ class KrrikSonOfYawgmothPhyrexianEffect extends ContinuousEffectImpl {
 
         phyrexianBlack.setBlack(true);
         if (controller != null && sourcePermanent != null) {
-            for (UUID playerId: game.getState().getPlayersInRange(controller.getId(), game)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null)
-                {
-                    player.addPhyrexianToColors(phyrexianBlack);
-                }
-            }
+            controller.addPhyrexianToColors(phyrexianBlack);
             return true;
         }
         return false;
