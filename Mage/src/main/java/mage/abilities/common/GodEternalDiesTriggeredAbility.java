@@ -10,12 +10,15 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
  * @author TheElk801
  */
 public class GodEternalDiesTriggeredAbility extends TriggeredAbilityImpl {
+    
+    Boolean applied;
 
     public GodEternalDiesTriggeredAbility() {
         super(Zone.ALL, null, true);
@@ -30,20 +33,32 @@ public class GodEternalDiesTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             return zEvent.getFromZone() == Zone.BATTLEFIELD
-                    && (zEvent.getToZone() == Zone.GRAVEYARD || zEvent.getToZone() == Zone.EXILED);
+                    && (zEvent.getToZone() == Zone.GRAVEYARD 
+                    || zEvent.getToZone() == Zone.EXILED);
         }
         return false;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        applied = false;
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.getTargetId().equals(this.getSourceId())) {
+            Permanent permanent = game.getPermanentOrLKIBattlefield(this.getSourceId());
+            // for cases where its triggered ability is removed, ex: Kasmina's Transmutation
+            if (permanent != null) {
+                for (Ability a : permanent.getAbilities()) {
+                    if (a instanceof GodEternalDiesTriggeredAbility) {
+                        applied = true;
+                    }
+                }
+            }
+            if (applied) {
             this.getEffects().clear();
             this.addEffect(new GodEternalEffect(new MageObjectReference(zEvent.getTarget(), game)));
-            return true;
+            }
         }
-        return false;
+        return applied;
     }
 
     @Override
