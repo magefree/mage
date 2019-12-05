@@ -1856,6 +1856,10 @@ public class HumanPlayer extends PlayerImpl {
                             }
                         }
                     }
+                    else if (modes.getSelectedModes().size() >= modes.getMinModes()) {
+                        /* let the player cancel mode selection if they do not need to select any further modes */
+                        done = true;
+                    }
                     if (source.getAbilityType() != AbilityType.TRIGGERED) {
                         done = true;
                     }
