@@ -37,7 +37,6 @@ public class ConditionalInterveningIfTriggeredAbility extends TriggeredAbilityIm
     public ConditionalInterveningIfTriggeredAbility(TriggeredAbility ability, Condition condition, String text) {
         super(ability.getZone(), null);
         this.ability = ability;
-        this.modes = ability.getModes();
         this.condition = condition;
         this.abilityText = text;
     }
