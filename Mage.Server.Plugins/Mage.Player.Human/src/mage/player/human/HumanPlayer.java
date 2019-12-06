@@ -710,9 +710,9 @@ public class HumanPlayer extends PlayerImpl {
             if (!isExecutingMacro()) {
                 String selectedNames = target.getTargetedName(game);
                 game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage()
-                        + "<br> Amount remaining: " + target.getAmountRemaining()
-                        + (selectedNames.isEmpty() ? "" : ", selected: " + selectedNames),
-                        getRelatedObjectName(source, game)),
+                                + "<br> Amount remaining: " + target.getAmountRemaining()
+                                + (selectedNames.isEmpty() ? "" : ", selected: " + selectedNames),
+                                getRelatedObjectName(source, game)),
                         target.possibleTargets(source == null ? null : source.getSourceId(), playerId, game),
                         target.isRequired(source),
                         getOptions(target, null));
@@ -725,7 +725,7 @@ public class HumanPlayer extends PlayerImpl {
 
                     boolean removeMode = target.getTargets().contains(targetId)
                             && chooseUse(outcome, "What do you want to do with " + (targetObject != null ? targetObject.getLogName() : "target") + "?", "",
-                                    "Remove from selected", "Add extra amount", source, game);
+                            "Remove from selected", "Add extra amount", source, game);
 
                     if (removeMode) {
                         target.remove(targetId);
@@ -862,9 +862,9 @@ public class HumanPlayer extends PlayerImpl {
                             if (!skippedAtLeastOnce
                                     || (playerId.equals(game.getActivePlayerId())
                                     && !controllingPlayer
-                                            .getUserData()
-                                            .getUserSkipPrioritySteps()
-                                            .isStopOnAllEndPhases())) {
+                                    .getUserData()
+                                    .getUserSkipPrioritySteps()
+                                    .isStopOnAllEndPhases())) {
                                 skippedAtLeastOnce = true;
                                 if (passWithManaPoolCheck(game)) {
                                     return false;
@@ -896,9 +896,9 @@ public class HumanPlayer extends PlayerImpl {
                         if (haveNewObjectsOnStack
                                 && (playerId.equals(game.getActivePlayerId())
                                 && controllingPlayer
-                                        .getUserData()
-                                        .getUserSkipPrioritySteps()
-                                        .isStopOnStackNewObjects())) {
+                                .getUserData()
+                                .getUserSkipPrioritySteps()
+                                .isStopOnStackNewObjects())) {
                             // new objects on stack -- disable "pass until stack resolved"
                             passedUntilStackResolved = false;
                         } else {
@@ -1235,8 +1235,8 @@ public class HumanPlayer extends PlayerImpl {
             if (passedAllTurns
                     || passedUntilEndStepBeforeMyTurn
                     || (!getControllingPlayersUserData(game)
-                            .getUserSkipPrioritySteps()
-                            .isStopOnDeclareAttackers()
+                    .getUserSkipPrioritySteps()
+                    .isStopOnDeclareAttackers()
                     && (passedTurn
                     || passedTurnSkipStack
                     || passedUntilEndOfTurn
@@ -1419,7 +1419,7 @@ public class HumanPlayer extends PlayerImpl {
     /**
      * Selects a defender for an attacker and adds the attacker to combat
      *
-     * @param defenders - list of possible defender
+     * @param defenders  - list of possible defender
      * @param attackerId - UUID of attacker
      * @param game
      * @return
@@ -1817,17 +1817,20 @@ public class HumanPlayer extends PlayerImpl {
             Map<UUID, String> modeMap = new LinkedHashMap<>();
             AvailableModes:
             for (Mode mode : modes.getAvailableModes(source, game)) {
-                int timesSelected = 0;
+                int timesSelected = modes.getSelectedStats(mode.getId());
                 for (UUID selectedModeId : modes.getSelectedModes()) {
                     Mode selectedMode = modes.get(selectedModeId);
                     if (mode.getId().equals(selectedMode.getId())) {
+                        // mode selected
                         if (modes.isEachModeMoreThanOnce()) {
-                            timesSelected++;
+                            // can select again
                         } else {
-                            continue AvailableModes;
+                            // hide mode from dialog
+                            continue AvailableModes; // TODO: test 2x cheat here
                         }
                     }
                 }
+
                 if (mode.getTargets().canChoose(source.getSourceId(), source.getControllerId(), game)) { // and needed targets have to be available
                     String modeText = mode.getEffects().getText(mode);
                     if (obj != null) {
@@ -1852,11 +1855,12 @@ public class HumanPlayer extends PlayerImpl {
                     if (response.getUUID() != null) {
                         for (Mode mode : modes.getAvailableModes(source, game)) {
                             if (mode.getId().equals(response.getUUID())) {
+                                // TODO: add checks on 2x selects (cheaters can rewrite client side code and select same mode multiple times)
+                                // reason: wrong setup eachModeMoreThanOnce and eachModeOnlyOnce in many cards
                                 return mode;
                             }
                         }
-                    }
-                    else if (modes.getSelectedModes().size() >= modes.getMinModes()) {
+                    } else if (modes.getSelectedModes().size() >= modes.getMinModes()) {
                         /* let the player cancel mode selection if they do not need to select any further modes */
                         done = true;
                     }

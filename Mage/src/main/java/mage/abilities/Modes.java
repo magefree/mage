@@ -19,13 +19,15 @@ import java.util.*;
 public class Modes extends LinkedHashMap<UUID, Mode> {
 
     private Mode currentMode; // the current mode of the selected modes
-    private final List<UUID> selectedModes = new ArrayList<>();
+    private final List<UUID> selectedModes = new ArrayList<>(); // all selected modes (this + duplicate)
+    private final Map<UUID, Mode> duplicateModes = new LinkedHashMap<>(); // for 2x selects: copy mode and put it to duplicate list
+    private final Map<UUID, UUID> duplicateToOriginalModeRefs = new LinkedHashMap<>(); // for 2x selects: stores ref from duplicate to original mode
+
     private int minModes;
     private int maxModes;
     private TargetController modeChooser;
     private boolean eachModeMoreThanOnce; // each mode can be selected multiple times during one choice
     private boolean eachModeOnlyOnce; // state if each mode can be chosen only once as long as the source object exists
-    private final Map<UUID, Mode> duplicateModes = new LinkedHashMap<>();
     private OptionalAdditionalModeSourceCosts optionalAdditionalModeSourceCosts = null; // only set if costs have to be paid
     private Filter maxModesFilter = null; // calculates the max number of available modes
     private boolean isRandom = false;
@@ -49,6 +51,8 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         for (Map.Entry<UUID, Mode> entry : modes.duplicateModes.entrySet()) {
             duplicateModes.put(entry.getKey(), entry.getValue().copy());
         }
+        duplicateToOriginalModeRefs.putAll(modes.duplicateToOriginalModeRefs);
+
         this.minModes = modes.minModes;
         this.maxModes = modes.maxModes;
         this.selectedModes.addAll(modes.getSelectedModes());
@@ -116,6 +120,32 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         return selectedModes;
     }
 
+    public int getSelectedStats(UUID modeId) {
+        int count = 0;
+        if (this.selectedModes.contains(modeId)) {
+
+            // single select
+            count++;
+
+            // multiple select (all 2x select generate new duplicate mode)
+            UUID originalId;
+            if (this.duplicateModes.containsKey(modeId)) {
+                // modeId is duplicate
+                originalId = this.duplicateToOriginalModeRefs.get(modeId);
+            } else {
+                // modeId is original
+                originalId = modeId;
+            }
+            for (UUID id : this.duplicateToOriginalModeRefs.values()) {
+                if (id.equals(originalId)) {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+
     public void setMinModes(int minModes) {
         this.minModes = minModes;
     }
@@ -168,6 +198,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         if (this.size() > 1) {
             this.selectedModes.clear();
             this.duplicateModes.clear();
+            this.duplicateToOriginalModeRefs.clear();
             if (this.isRandom) {
                 List<Mode> modes = getAvailableModes(source, game);
                 this.addSelectedMode(modes.get(RandomUtil.nextInt(modes.size())).getId());
@@ -286,9 +317,11 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
     private void addSelectedMode(UUID modeId) {
         if (selectedModes.contains(modeId) && eachModeMoreThanOnce) {
             Mode duplicateMode = get(modeId).copy();
+            UUID originalId = modeId;
             duplicateMode.setRandomId();
             modeId = duplicateMode.getId();
             duplicateModes.put(modeId, duplicateMode);
+            duplicateToOriginalModeRefs.put(duplicateMode.getId(), originalId);
 
         }
         this.selectedModes.add(modeId);
@@ -329,7 +362,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
             nonAvailableModes = getAlreadySelectedModes(source, game);
         }
         for (Mode mode : this.values()) {
-            if (isEachModeOnlyOnce() && nonAvailableModes != null && nonAvailableModes.contains(mode.getId())) {
+            if (isEachModeOnlyOnce() && nonAvailableModes.contains(mode.getId())) {
                 continue;
             }
             availableModes.add(mode);
