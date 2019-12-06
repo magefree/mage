@@ -28,8 +28,6 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class CallerOfTheHunt extends CardImpl {
 
-    FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
     public CallerOfTheHunt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
 
@@ -72,10 +70,10 @@ enum CallerOfTheHuntAdjuster implements CostAdjuster {
                 ContinuousEffect effectPowerToughness = new SetPowerToughnessSourceEffect(
                         new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame);
                 effectPowerToughness.setText("");
-                SimpleStaticAbility sa = new SimpleStaticAbility(Zone.ALL, effectPowerToughness);
-                GainAbilityTargetEffect effectTest = new GainAbilityTargetEffect(sa, Duration.EndOfGame);
-                effectTest.setTargetPointer(new FixedTarget(ability.getSourceId()));
-                game.getState().addEffect(effectTest, ability);
+                SimpleStaticAbility setPT = new SimpleStaticAbility(Zone.ALL, effectPowerToughness);
+                GainAbilityTargetEffect gainAbility = new GainAbilityTargetEffect(setPT, Duration.EndOfGame);
+                gainAbility.setTargetPointer(new FixedTarget(ability.getSourceId()));
+                game.getState().addEffect(gainAbility, ability);
             }
         }
     }
