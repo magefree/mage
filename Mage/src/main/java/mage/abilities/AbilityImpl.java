@@ -58,7 +58,7 @@ public abstract class AbilityImpl implements Ability {
     protected ManaCosts<ManaCost> manaCostsToPay;
     protected Costs<Cost> costs;
     protected Costs<Cost> optionalCosts;
-    protected Modes modes;
+    protected Modes modes; // access to it by GetModes only (it's can be override by some abilities)
     protected Zone zone;
     protected String name;
     protected AbilityWord abilityWord;
@@ -70,7 +70,7 @@ public abstract class AbilityImpl implements Ability {
     protected boolean activated = false;
     protected boolean worksFaceDown = false;
     protected int sourceObjectZoneChangeCounter;
-    protected List<Watcher> watchers = new ArrayList<>();
+    protected List<Watcher> watchers = new ArrayList<>(); // access to it by GetWatchers only (it's can be override by some abilities)
     protected List<Ability> subAbilities = null;
     protected boolean canFizzle = true;
     protected TargetAdjuster targetAdjuster = null;
@@ -102,7 +102,7 @@ public abstract class AbilityImpl implements Ability {
         this.manaCostsToPay = ability.manaCostsToPay.copy();
         this.costs = ability.costs.copy();
         this.optionalCosts = ability.optionalCosts.copy();
-        for (Watcher watcher : ability.watchers) {
+        for (Watcher watcher : ability.getWatchers()) {
             watchers.add(watcher.copy());
         }
 
@@ -263,8 +263,9 @@ public abstract class AbilityImpl implements Ability {
                 this.getManaCostsToPay().clear();
             }
         }
-        if (modes.getAdditionalCost() != null) {
-            modes.getAdditionalCost().addOptionalAdditionalModeCosts(this, game);
+
+        if (getModes().getAdditionalCost() != null) {
+            getModes().getAdditionalCost().addOptionalAdditionalModeCosts(this, game);
         }
         // 20130201 - 601.2b
         // If the spell has alternative or additional costs that will be paid as it's being cast such
@@ -656,7 +657,7 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public void setControllerId(UUID controllerId) {
         this.controllerId = controllerId;
-        for (Watcher watcher : watchers) {
+        for (Watcher watcher : getWatchers()) {
             watcher.setControllerId(controllerId);
         }
 
@@ -684,7 +685,7 @@ public abstract class AbilityImpl implements Ability {
                 subAbility.setSourceId(sourceId);
             }
         }
-        for (Watcher watcher : watchers) {
+        for (Watcher watcher : getWatchers()) {
             watcher.setSourceId(sourceId);
         }
 
@@ -757,7 +758,7 @@ public abstract class AbilityImpl implements Ability {
 
         watcher.setSourceId(this.sourceId);
         watcher.setControllerId(this.controllerId);
-        watchers.add(watcher);
+        getWatchers().add(watcher);
     }
 
     @Override

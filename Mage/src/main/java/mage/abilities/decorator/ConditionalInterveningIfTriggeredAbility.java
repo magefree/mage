@@ -9,6 +9,9 @@ import mage.abilities.effects.Effects;
 import mage.constants.EffectType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.watchers.Watcher;
+
+import java.util.List;
 
 /**
  * Adds condition to {@link mage.abilities.effects.ContinuousEffect}. Acts as
@@ -37,7 +40,6 @@ public class ConditionalInterveningIfTriggeredAbility extends TriggeredAbilityIm
         this.modes = ability.getModes();
         this.condition = condition;
         this.abilityText = text;
-        this.watchers = ability.getWatchers();
     }
 
     public ConditionalInterveningIfTriggeredAbility(final ConditionalInterveningIfTriggeredAbility triggered) {
@@ -45,7 +47,6 @@ public class ConditionalInterveningIfTriggeredAbility extends TriggeredAbilityIm
         this.ability = triggered.ability.copy();
         this.condition = triggered.condition;
         this.abilityText = triggered.abilityText;
-        this.watchers = triggered.watchers;
     }
 
     @Override
@@ -91,6 +92,16 @@ public class ConditionalInterveningIfTriggeredAbility extends TriggeredAbilityIm
     @Override
     public Modes getModes() {
         return ability.getModes();
+    }
+
+    @Override
+    public List<Watcher> getWatchers() {
+        return ability.getWatchers();
+    }
+
+    @Override
+    public void addWatcher(Watcher watcher) {
+        ability.addWatcher(watcher);
     }
 
     @Override
