@@ -70,7 +70,7 @@ class DistantMemoriesEffect extends OneShotEffect {
 
                 StringBuilder sb = new StringBuilder();
                 sb.append("Have ").append(player.getLogName()).append(" put ").append(card.getName());
-                sb.append(" in his hand? If none of his opponents says yes, he'll draw three cards.");
+                sb.append(" in their hand? If none of their opponents says yes, they will draw three cards.");
 
                 boolean putInHand = false;
                 Set<UUID> opponents = game.getOpponents(source.getControllerId());

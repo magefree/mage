@@ -73,7 +73,7 @@ class EunuchsIntriguesEffect extends OneShotEffect {
             }
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {
-                game.informPlayers(player.getLogName() + " has chosen " + permanent.getLogName() + " as his only creature able to block this turn");
+                game.informPlayers(player.getLogName() + " has chosen " + permanent.getLogName() + " as their only creature able to block this turn");
             }
         }
         game.addEffect(new EunuchsIntriguesRestrictionEffect(target.getFirstTarget()), source);

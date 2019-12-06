@@ -100,7 +100,7 @@ class DeathOrGloryEffect extends OneShotEffect {
                         Target targetOpponent = new TargetOpponent(true);
                         if (controller.chooseTarget(Outcome.Neutral, targetOpponent, source, game)) {
                             opponent = game.getPlayer(targetOpponent.getFirstTarget());
-                            game.informPlayers(controller.getLogName() + " chose " + opponent.getLogName() + " to choose his pile");
+                            game.informPlayers(controller.getLogName() + " chose " + opponent.getLogName() + " to choose their pile");
                         }
                     }
                     if (opponent != null) {

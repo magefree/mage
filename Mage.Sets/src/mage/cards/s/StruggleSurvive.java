@@ -40,7 +40,7 @@ public final class StruggleSurvive extends SplitCard {
         // Survive
         // Aftermath
         getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
-        // Each player shuffles his or graveyard into their library.
+        // Each player shuffles their graveyard into their library.
         getRightHalfCard().getSpellAbility().addEffect(new SurviveEffect());
 
     }

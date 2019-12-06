@@ -98,7 +98,7 @@ class WordOfCommandEffect extends OneShotEffect {
             controller.controlPlayersTurn(game, targetPlayer.getId());
             while (controller.canRespond()) {
                 if (controller.chooseUse(Outcome.Benefit, "Resolve " + sourceObject.getLogName() + " now" + (card != null ? " and play " + card.getLogName() : "") + '?', source, game)) {
-                    // this is used to give the controller a little space to utilize his player controlling effect (look at face down creatures, hand, etc.)
+                    // this is used to give the controller a little space to utilize their player controlling effect (look at face down creatures, hand, etc.)
                     break;
                 }
             }

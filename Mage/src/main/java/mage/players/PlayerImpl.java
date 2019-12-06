@@ -112,7 +112,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected boolean passedUntilEndStepBeforeMyTurn; // F11
     protected boolean skippedAtLeastOnce; // used to track if passed started in specific phase
     /**
-     * This indicates that player passed all turns until his own turn starts
+     * This indicates that player passed all turns until their own turn starts
      * (F9). Note! This differs from passedTurn as it doesn't care about spells
      * and abilities in the stack and will pass them as well.
      */

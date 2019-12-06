@@ -140,7 +140,7 @@ public class ProgenitorMimicTest extends CardTestPlayerBase {
      * In a Commander FFA game, I controlled 5 vampires (one of which was
      * Captivating Vampire). My opponent cast Progenitor Mimic, copying
      * Captivating Vampire. I used the ability of my Captivating Vampire to gain
-     * control of his Mimic/Vampire but the buff didn't switch control. His
+     * control of their Mimic/Vampire but the buff didn't switch control. Their
      * other vampire still got the buff even after I gained control of the
      * Mimic/Vampire.
      *

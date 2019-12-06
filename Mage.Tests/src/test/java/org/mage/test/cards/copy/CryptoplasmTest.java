@@ -80,17 +80,17 @@ public class CryptoplasmTest extends CardTestPlayerBase {
      * that ETB copying the first Cryptoplasm and is currently also a copy of
      * the Divinity.
      *
-     * Opponent attacks with his only Divinity of Pride (4/4) and a Serra
+     * Opponent attacks with their only Divinity of Pride (4/4) and a Serra
      * Avenger (3/3). I block the Divinity with two of my Divinity copies (the
      * Clever Impersonator and unenchanted Cryptoplasm) and the Avenger with the
      * enchanted Divinity (originally a Cryptoplasm). My opponent's Divinity
-     * kills my two copies and dies, and then his Avenger dies and kills the
+     * kills my two copies and dies, and then their Avenger dies and kills the
      * Divinity blocking it, also sending my Followed Footsteps down with it.
      *
-     * How does any of that add up? Not only should his Divinity only kill one
+     * How does any of that add up? Not only should their Divinity only kill one
      * of mine since it was a 4/4 and only becomes an 8/8 after dealing its
      * damage (at which point it should be too late to go back and say the 4
-     * damage are now 8, since it was that exact damage that put him at 25
+     * damage are now 8, since it was that exact damage that put them at 25
      * life), but even more confusing is how the Serra Avenger, which is a 3/3,
      * somehow kills my 4/4 that had suffered no other damage that turn.
      *

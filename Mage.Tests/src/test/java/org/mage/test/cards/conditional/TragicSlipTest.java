@@ -76,7 +76,7 @@ public class TragicSlipTest extends CardTestPlayerBase {
     }
 
     /*
-        Killed an opponent's Young Pyromancer with Ulcerate then flashed back Tragic Slip with Snapcaster Mage targeting his Tarmogoyf.
+        Killed an opponent's Young Pyromancer with Ulcerate then flashed back Tragic Slip with Snapcaster Mage targeting their Tarmogoyf.
         Morbid didn't seem to work and only applied -1/-1 to the Tarmogoyf.
     */
     @Test
