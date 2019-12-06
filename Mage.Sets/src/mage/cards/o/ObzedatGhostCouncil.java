@@ -1,7 +1,6 @@
 package mage.cards.o;
 
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
@@ -43,7 +42,8 @@ public final class ObzedatGhostCouncil extends CardImpl {
         ability.addEffect(new GainLifeEffect(2).concatBy("and"));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
-        //At the beginning of your end step you may exile Obzedat. If you do, return it to the battlefield under its owner's control at the beginning of your next upkeep. It gains haste.
+        //At the beginning of your end step you may exile Obzedat. If you do, return it to the battlefield under its owner's 
+        //control at the beginning of your next upkeep. It gains haste.
         Ability ability2 = new BeginningOfYourEndStepTriggeredAbility(new ObzedatGhostCouncilExileSourceEffect(), true);
         this.addAbility(ability2);
     }
@@ -62,8 +62,8 @@ class ObzedatGhostCouncilExileSourceEffect extends OneShotEffect {
 
     ObzedatGhostCouncilExileSourceEffect() {
         super(Outcome.Exile);
-        staticText = "exile {this}. If you do, return it to the battlefield under its owner's control " +
-                "at the beginning of your next upkeep. It gains haste.";
+        staticText = "exile {this}. If you do, return it to the battlefield under its owner's control "
+                + "at the beginning of your next upkeep. It gains haste.";
     }
 
     private ObzedatGhostCouncilExileSourceEffect(final ObzedatGhostCouncilExileSourceEffect effect) {
@@ -77,13 +77,14 @@ class ObzedatGhostCouncilExileSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null || player == null
-                || !player.moveCards(permanent, Zone.EXILED, source, game)) {
+        if (permanent == null
+                || controller == null
+                || !controller.moveCards(permanent, Zone.EXILED, source, game)) {
             return false;
         }
-        game.addDelayedTriggeredAbility(new ObzedatGhostCouncilDelayedTriggeredAbility(new MageObjectReference(permanent, game)), source);
+        game.addDelayedTriggeredAbility(new ObzedatGhostCouncilDelayedTriggeredAbility(permanent), source);
         return true;
     }
 
@@ -91,8 +92,8 @@ class ObzedatGhostCouncilExileSourceEffect extends OneShotEffect {
 
 class ObzedatGhostCouncilDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    ObzedatGhostCouncilDelayedTriggeredAbility(MageObjectReference mor) {
-        super(new ObzedatGhostCouncilReturnEffect(mor));
+    ObzedatGhostCouncilDelayedTriggeredAbility(Card card) {
+        super(new ObzedatGhostCouncilReturnEffect(card));
     }
 
     private ObzedatGhostCouncilDelayedTriggeredAbility(ObzedatGhostCouncilDelayedTriggeredAbility ability) {
@@ -106,7 +107,7 @@ class ObzedatGhostCouncilDelayedTriggeredAbility extends DelayedTriggeredAbility
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(this.controllerId);
+        return event.getPlayerId().equals(this.controllerId); // must be the controller who chooses
     }
 
     @Override
@@ -122,16 +123,16 @@ class ObzedatGhostCouncilDelayedTriggeredAbility extends DelayedTriggeredAbility
 
 class ObzedatGhostCouncilReturnEffect extends OneShotEffect {
 
-    private final MageObjectReference mor;
+    private final Card card;
 
-    ObzedatGhostCouncilReturnEffect(MageObjectReference mor) {
+    ObzedatGhostCouncilReturnEffect(Card card) {
         super(Outcome.Benefit);
-        this.mor = mor;
+        this.card = card;
     }
 
     private ObzedatGhostCouncilReturnEffect(final ObzedatGhostCouncilReturnEffect effect) {
         super(effect);
-        this.mor = effect.mor;
+        this.card = effect.card;
     }
 
     @Override
@@ -141,17 +142,12 @@ class ObzedatGhostCouncilReturnEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = mor.getCard(game);
         if (card == null) {
             return false;
         }
-        Zone zone = game.getState().getZone(source.getSourceId());
-        // return it from every public zone - http://www.mtgsalvation.com/forums/magic-fundamentals/magic-rulings/magic-rulings-archives/513186-obzedat-gc-as-edh-commander
-        if (zone == Zone.BATTLEFIELD || zone == Zone.LIBRARY || zone == Zone.HAND) {
-            return false;
-        }
         Player owner = game.getPlayer(card.getOwnerId());
-        if (owner == null || !owner.moveCards(card, Zone.BATTLEFIELD, source, game)) {
+        if (owner == null
+                || !owner.moveCards(card, Zone.BATTLEFIELD, source, game)) { // comes back from any zone
             return false;
         }
         game.addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield), source);

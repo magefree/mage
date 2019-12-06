@@ -63,6 +63,9 @@ public class SpellAbility extends ActivatedAbilityImpl {
      */
     public boolean spellCanBeActivatedRegularlyNow(UUID playerId, Game game) {
         MageObject object = game.getObject(sourceId);
+        if ((Boolean) game.getState().getValue("CastFromExileEnabled" + object.getId()) != null) {
+            return (Boolean) game.getState().getValue("CastFromExileEnabled" + object.getId());  // card like Chandra, Torch of Defiance +1 loyal ability)
+        }
         return null != game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game) // check this first to allow Offering in main phase
                 || timing == TimingRule.INSTANT
                 || object.hasAbility(FlashAbility.getInstance().getId(), game)
@@ -72,7 +75,8 @@ public class SpellAbility extends ActivatedAbilityImpl {
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
         if (this.spellCanBeActivatedRegularlyNow(playerId, game)) {
-            if (spellAbilityType == SpellAbilityType.SPLIT || spellAbilityType == SpellAbilityType.SPLIT_AFTERMATH) {
+            if (spellAbilityType == SpellAbilityType.SPLIT
+                    || spellAbilityType == SpellAbilityType.SPLIT_AFTERMATH) {
                 return ActivationStatus.getFalse();
             }
             // fix for Gitaxian Probe and casting opponent's spells
@@ -93,7 +97,8 @@ public class SpellAbility extends ActivatedAbilityImpl {
             // Alternate spell abilities (Flashback, Overload) can't be cast with no mana to pay option
             if (getSpellAbilityType() == SpellAbilityType.BASE_ALTERNATE) {
                 Player player = game.getPlayer(playerId);
-                if (player != null && getSourceId().equals(player.getCastSourceIdWithAlternateMana())) {
+                if (player != null
+                        && getSourceId().equals(player.getCastSourceIdWithAlternateMana())) {
                     return ActivationStatus.getFalse();
                 }
             }

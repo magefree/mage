@@ -118,6 +118,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         }
 
         Player player = game.getPlayer(controllerId);
+        handleKrrikPhyrexianManaCosts(controllerId, ability, game);
         if (!player.getManaPool().isForcedToPay()) {
             assignPayment(game, ability, player.getManaPool(), this);
         }
@@ -181,8 +182,27 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                     tempCosts.add(payLifeCost);
                 }
             }
+        }
+
+        tempCosts.pay(source, game, source.getSourceId(), player.getId(), false, null);
+    }
+    
+    private void handleKrrikPhyrexianManaCosts(UUID payingPlayerId, Ability source, Game game) {
+        Player player = game.getPlayer(payingPlayerId);
+        if (this == null || player == null) {
+            return; // nothing to be done without any mana costs. prevents NRE from occurring here
+        }
+        Iterator<T> manaCostIterator = this.iterator();
+        Costs<PayLifeCost> tempCosts = new CostsImpl<>();
+
+        while (manaCostIterator.hasNext()) {
+            ManaCost manaCost = manaCostIterator.next();
+            Mana mana = manaCost.getMana();
+            PhyrexianManaCost tempPhyrexianCost = null;
+            FilterMana phyrexianColors = player.getPhyrexianColors();
+
             /* K'rrik, Son of Yawgmoth ability check */
-            else if (phyrexianColors != null) {
+            if (phyrexianColors != null) {
                 int phyrexianEnabledPips = mana.count(phyrexianColors);
                 if (phyrexianEnabledPips > 0) {
                     /* find which color mana is in the cost and set it in the temp Phyrexian cost */
@@ -205,7 +225,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                     if (tempPhyrexianCost != null) {
                         PayLifeCost payLifeCost = new PayLifeCost(2);
                         if (payLifeCost.canPay(source, source.getSourceId(), player.getId(), game)
-                                && player.chooseUse(Outcome.LoseLife, "Pay 2 life instead of " + tempPhyrexianCost.getBaseText() + '?', source, game)) {
+                                && player.chooseUse(Outcome.LoseLife, "Pay 2 life (using an active ability) instead of " + tempPhyrexianCost.getBaseText() + '?', source, game)) {
                             manaCostIterator.remove();
                             tempCosts.add(payLifeCost);
                         }

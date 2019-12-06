@@ -1386,5 +1386,10 @@ public class PlayerStub implements Player {
     public FilterMana getPhyrexianColors() {
         return (new FilterMana());
     }
+    
+    @Override
+    public SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana) {
+        return card.getSpellAbility();
+    }
 
 }
