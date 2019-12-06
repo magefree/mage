@@ -29,7 +29,7 @@ public final class FortunateFew extends CardImpl {
     public FortunateFew(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");
 
-        // Choose a nonland permanent you don't control, then each other player chooses a nonland permanent he or she doesn't control that hasn't been chosen this way. Destroy all other nonland permanents.
+        // Choose a nonland permanent you don't control, then each other player chooses a nonland permanent they don't control that hasn't been chosen this way. Destroy all other nonland permanents.
         this.getSpellAbility().addEffect(new FortunateFewEffect());
     }
 
@@ -47,7 +47,7 @@ class FortunateFewEffect extends OneShotEffect {
 
     public FortunateFewEffect() {
         super(Outcome.DestroyPermanent);
-        staticText = "Choose a nonland permanent you don't control, then each other player chooses a nonland permanent he or she doesn't control that hasn't been chosen this way. Destroy all other nonland permanents";
+        staticText = "Choose a nonland permanent you don't control, then each other player chooses a nonland permanent they don't control that hasn't been chosen this way. Destroy all other nonland permanents";
     }
 
     public FortunateFewEffect(FortunateFewEffect effect) {

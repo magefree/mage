@@ -40,7 +40,7 @@ public class AttackRequirementTest extends CardTestPlayerBase {
         // {G}: Wall of Tanglecord gains reach until end of turn. (It can block creatures with flying.)
         addCard(Zone.BATTLEFIELD, playerA, "Wall of Tanglecord"); // 0/6
 
-        // Creatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you
+        // Creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you
         addCard(Zone.HAND, playerA, "Ghostly Prison");
 
         // Juggernaut attacks each turn if able.

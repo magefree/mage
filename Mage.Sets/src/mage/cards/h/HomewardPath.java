@@ -35,7 +35,7 @@ public final class HomewardPath extends CardImpl {
 
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
-        // {tap}: Each player gains control of all creatures he or she owns.
+        // {tap}: Each player gains control of all creatures they own.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new HomewardPathControlEffect(), new TapSourceCost()));
 
     }
@@ -56,7 +56,7 @@ class HomewardPathControlEffect extends ContinuousEffectImpl {
 
     public HomewardPathControlEffect() {
         super(Duration.EndOfGame, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
-        this.staticText = "Each player gains control of all creatures he or she owns";
+        this.staticText = "Each player gains control of all creatures they own";
     }
 
     public HomewardPathControlEffect(final HomewardPathControlEffect effect) {

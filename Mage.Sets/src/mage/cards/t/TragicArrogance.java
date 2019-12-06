@@ -32,7 +32,7 @@ public final class TragicArrogance extends CardImpl {
     public TragicArrogance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");
 
-        // For each player, you choose from among the permanents that player controls an artifact, a creature, an enchantment, and a planeswalker. Then each player sacrifices all other nonland permanents he or she controls.
+        // For each player, you choose from among the permanents that player controls an artifact, a creature, an enchantment, and a planeswalker. Then each player sacrifices all other nonland permanents they control.
         this.getSpellAbility().addEffect(new TragicArroganceffect());
     }
 
@@ -50,7 +50,7 @@ class TragicArroganceffect extends OneShotEffect {
 
     public TragicArroganceffect() {
         super(Outcome.Benefit);
-        this.staticText = "For each player, you choose from among the permanents that player controls an artifact, a creature, an enchantment, and a planeswalker. Then each player sacrifices all other nonland permanents he or she controls";
+        this.staticText = "For each player, you choose from among the permanents that player controls an artifact, a creature, an enchantment, and a planeswalker. Then each player sacrifices all other nonland permanents they control";
     }
 
     public TragicArroganceffect(final TragicArroganceffect effect) {
@@ -123,7 +123,7 @@ class TragicArroganceffect extends OneShotEffect {
                     }
                 }
             }
-            // Then each player sacrifices all other nonland permanents he or she controls
+            // Then each player sacrifices all other nonland permanents they control
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {

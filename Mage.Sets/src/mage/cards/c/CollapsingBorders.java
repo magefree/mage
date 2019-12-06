@@ -24,12 +24,12 @@ public final class CollapsingBorders extends CardImpl {
     public CollapsingBorders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
 
-        // Domain - At the beginning of each player's upkeep, that player gains 1 life for each basic land type among lands he or she controls. Then Collapsing Borders deals 3 damage to him or her.
+        // Domain - At the beginning of each player's upkeep, that player gains 1 life for each basic land type among lands they control. Then Collapsing Borders deals 3 damage to that player.
         Effect effect = new GainLifeTargetEffect(new DomainValue(true));
-        effect.setText("that player gains 1 life for each basic land type among lands he or she controls.");
+        effect.setText("that player gains 1 life for each basic land type among lands they control.");
         Ability ability = new BeginningOfUpkeepTriggeredAbility(effect, TargetController.ANY, false);
         effect = new DamageTargetEffect(3);
-        effect.setText("Then {this} deals 3 damage to him or her.");
+        effect.setText("Then {this} deals 3 damage to that player.");
         ability.addEffect(effect);
         ability.setAbilityWord(AbilityWord.DOMAIN);
         this.addAbility(ability);

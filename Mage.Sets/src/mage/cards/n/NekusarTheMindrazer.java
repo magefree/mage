@@ -35,7 +35,7 @@ public final class NekusarTheMindrazer extends CardImpl {
         effect.setText("that player draws an additional card");
         this.addAbility(new BeginningOfDrawTriggeredAbility(effect , TargetController.ANY, false));
         // Whenever an opponent draws a card, Nekusar, the Mindrazer deals 1 damage to that player.
-        this.addAbility(new DrawCardOpponentTriggeredAbility(new DamageTargetEffect(1, true, "him or her"), false, true));
+        this.addAbility(new DrawCardOpponentTriggeredAbility(new DamageTargetEffect(1, true, "that player"), false, true));
     }
 
     public NekusarTheMindrazer(final NekusarTheMindrazer card) {

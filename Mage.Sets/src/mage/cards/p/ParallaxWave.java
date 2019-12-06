@@ -40,7 +40,7 @@ public final class ParallaxWave extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
-        // When Parallax Wave leaves the battlefield, each player returns to the battlefield all cards he or she owns exiled with Parallax Wave.
+        // When Parallax Wave leaves the battlefield, each player returns to the battlefield all cards they own exiled with Parallax Wave.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new ParallaxWaveEffect(), false));
 
     }
@@ -59,7 +59,7 @@ class ParallaxWaveEffect extends OneShotEffect {
 
     public ParallaxWaveEffect() {
         super(Outcome.Benefit);
-        this.staticText = "each player returns to the battlefield all cards he or she owns exiled with {this}";
+        this.staticText = "each player returns to the battlefield all cards they own exiled with {this}";
     }
 
     public ParallaxWaveEffect(final ParallaxWaveEffect effect) {

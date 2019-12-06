@@ -30,7 +30,7 @@ public class ControllerDivideCombatDamageAbility extends StaticAbility implement
 
     @Override
     public String getRule() {
-        return "You may assign {this}'s combat damage divided as you choose among defending player and/or any number of creatures he or she controls.";
+        return "You may assign {this}'s combat damage divided as you choose among defending player and/or any number of creatures they control.";
     }
 
     @Override

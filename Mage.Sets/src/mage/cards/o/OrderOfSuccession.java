@@ -34,7 +34,7 @@ public final class OrderOfSuccession extends CardImpl {
     public OrderOfSuccession(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");
 
-        // Choose left or right. Starting with you and proceeding in the chosen direction, each player chooses a creature controlled by the next player in that direction. Each player gains control of the creature he or she chose.
+        // Choose left or right. Starting with you and proceeding in the chosen direction, each player chooses a creature controlled by the next player in that direction. Each player gains control of the creature they chose.
         this.getSpellAbility().addEffect(new OrderOfSuccessionEffect());
     }
 
@@ -52,7 +52,7 @@ class OrderOfSuccessionEffect extends OneShotEffect {
 
     public OrderOfSuccessionEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Starting with you and proceeding in the chosen direction, each player chooses a creature controlled by the next player in that direction. Each player gains control of the creature he or she chose";
+        this.staticText = "Starting with you and proceeding in the chosen direction, each player chooses a creature controlled by the next player in that direction. Each player gains control of the creature they chose";
     }
 
     public OrderOfSuccessionEffect(final OrderOfSuccessionEffect effect) {
@@ -95,7 +95,7 @@ class OrderOfSuccessionEffect extends OneShotEffect {
                 if (!nextPlayer.canRespond()) {
                     continue;
                 }
-                // if player is in range he chooses a creature to control
+                // if player is in range they choose a creature to control
                 if (currentPlayer != null && game.getState().getPlayersInRange(controller.getId(), game).contains(currentPlayer.getId())) {
                     FilterCreaturePermanent filter = new FilterCreaturePermanent("creature controlled by " + nextPlayer.getLogName());
                     filter.add(new ControllerIdPredicate(nextPlayer.getId()));

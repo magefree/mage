@@ -182,7 +182,7 @@ public class PhyrexianMetamorphTest extends CardTestPlayerBase {
 
     /**
      * I cast Show and Tell, and put Sheoldred, Whispering One into play and my
-     * opponent put Phyrexian Metamorph into play and he was able to clone my
+     * opponent put Phyrexian Metamorph into play and they were able to clone my
      * Sheoldred, Whispering One.
      *
      * 6/1/2011 If Phyrexian Metamorph somehow enters the battlefield at the

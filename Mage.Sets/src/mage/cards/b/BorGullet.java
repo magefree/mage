@@ -25,7 +25,7 @@ public final class BorGullet extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // When Bor Gullet enters the battlefield, target opponent reveals his or her hand. You choose a card from it. That player discards that card.
+        // When Bor Gullet enters the battlefield, target opponent reveals their hand. You choose a card from it. That player discards that card.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DiscardCardYouChooseTargetEffect());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

@@ -36,7 +36,7 @@ public final class BlizzardSpecter extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Blizzard Specter deals combat damage to a player, choose one
-        // - That player returns a permanent he or she controls to its owner's hand;
+        // - That player returns a permanent they control to its owner's hand;
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new ReturnToHandEffect(), false, true);
 
         // or that player discards a card.
@@ -61,7 +61,7 @@ class ReturnToHandEffect extends OneShotEffect {
 
     public ReturnToHandEffect() {
         super(Outcome.ReturnToHand);
-        staticText = "That player returns a permanent he or she controls to its owner's hand";
+        staticText = "That player returns a permanent they control to its owner's hand";
     }
 
     public ReturnToHandEffect(final ReturnToHandEffect effect) {

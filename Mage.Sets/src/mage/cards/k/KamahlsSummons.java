@@ -31,7 +31,7 @@ public final class KamahlsSummons extends CardImpl {
     public KamahlsSummons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
 
-        // Each player may reveal any number of creature cards from their hand. Then each player creates a 2/2 green Bear creature token for each card he or she revealed this way.
+        // Each player may reveal any number of creature cards from their hand. Then each player creates a 2/2 green Bear creature token for each card they revealed this way.
         getSpellAbility().addEffect(new KamahlsSummonsEffect());
     }
 
@@ -51,7 +51,7 @@ class KamahlsSummonsEffect extends OneShotEffect {
 
     public KamahlsSummonsEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Each player may reveal any number of creature cards from their hand. Then each player creates a 2/2 green Bear creature token for each card he or she revealed this way";
+        this.staticText = "Each player may reveal any number of creature cards from their hand. Then each player creates a 2/2 green Bear creature token for each card they revealed this way";
     }
 
     public KamahlsSummonsEffect(final KamahlsSummonsEffect effect) {

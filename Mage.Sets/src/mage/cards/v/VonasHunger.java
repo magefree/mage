@@ -41,11 +41,11 @@ public final class VonasHunger extends CardImpl {
                 new SacrificeOpponentsEffect(StaticFilters.FILTER_PERMANENT_A_CREATURE),
                 new InvertCondition(CitysBlessingCondition.instance),
                 "Each opponent sacrifices a creature"));
-        // If you have the city's blessing, instead each opponent sacrifices half the creatures he or she controls rounded up.
+        // If you have the city's blessing, instead each opponent sacrifices half the creatures they control rounded up.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new VonasHungerEffect(),
                 CitysBlessingCondition.instance,
-                "If you have the city's blessing, instead each opponent sacrifices half the creatures he or she controls rounded up"));
+                "If you have the city's blessing, instead each opponent sacrifices half the creatures they control rounded up"));
     }
 
     public VonasHunger(final VonasHunger card) {

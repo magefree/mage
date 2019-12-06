@@ -24,7 +24,7 @@ public final class EndbringersRevel extends CardImpl {
     public EndbringersRevel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
 
-        // {4}: Return target creature card from a graveyard to its owner's hand. Any player may activate this ability but only any time he or she could cast a sorcery.
+        // {4}: Return target creature card from a graveyard to its owner's hand. Any player may activate this ability but only any time they could cast a sorcery.
         ActivateAsSorceryActivatedAbility ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{4}"));
         ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card in a graveyard")));
         ability.setMayActivate(TargetController.ANY);

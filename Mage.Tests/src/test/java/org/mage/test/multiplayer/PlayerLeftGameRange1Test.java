@@ -293,7 +293,7 @@ public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerD, "Island", 3);
         // {2}{U}, {T}: Put target creature on the bottom of its owner's library. That creature's controller reveals cards from the
-        // top of their library until he or she reveals a creature card. The player puts that card onto the battlefield and the
+        // top of their library until they reveal a creature card. The player puts that card onto the battlefield and the
         // rest on the bottom of their library in any order. Activate this ability only any time you could cast a sorcery.
         addCard(Zone.BATTLEFIELD, playerD, "Proteus Staff", 1);
 

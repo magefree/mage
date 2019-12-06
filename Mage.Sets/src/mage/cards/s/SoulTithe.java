@@ -26,7 +26,7 @@ import java.util.UUID;
  */
 public final class SoulTithe extends CardImpl {
 
-    static final String rule = "At the beginning of the upkeep of enchanted permanent's controller, that player sacrifices it unless he or she pays {X}, where X is its converted mana cost";
+    static final String rule = "At the beginning of the upkeep of enchanted permanent's controller, that player sacrifices it unless they pay {X}, where X is its converted mana cost";
 
     public SoulTithe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
@@ -40,7 +40,7 @@ public final class SoulTithe extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of the upkeep of enchanted permanent's controller,
-        // that player sacrifices it unless he or she pays {X},
+        // that player sacrifices it unless they pay {X},
         // where X is its converted mana cost.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SoulTitheEffect(), TargetController.CONTROLLER_ATTACHED_TO, false));
     }
@@ -59,7 +59,7 @@ class SoulTitheEffect extends OneShotEffect {
 
     public SoulTitheEffect() {
         super(Outcome.Sacrifice);
-        staticText = "that player sacrifices it unless he or she pays {X}, where X is its converted mana cost";
+        staticText = "that player sacrifices it unless they pay {X}, where X is its converted mana cost";
     }
 
     public SoulTitheEffect(final SoulTitheEffect effect) {

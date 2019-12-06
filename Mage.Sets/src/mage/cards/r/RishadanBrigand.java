@@ -28,7 +28,7 @@ public final class RishadanBrigand extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         
-        // When Rishadan Brigand enters the battlefield, each opponent sacrifices a permanent unless he or she pays {3}.
+        // When Rishadan Brigand enters the battlefield, each opponent sacrifices a permanent unless they pay {3}.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeOpponentsUnlessPayEffect(3)));
         
         // Rishadan Brigand can block only creatures with flying.

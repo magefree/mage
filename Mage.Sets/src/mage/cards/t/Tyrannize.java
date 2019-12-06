@@ -26,7 +26,7 @@ public final class Tyrannize extends CardImpl {
     public Tyrannize(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B/R}{B/R}");
 
-        // Target player discards their hand unless he or she pays 7 life.
+        // Target player discards their hand unless they pay 7 life.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new TyrannizeEffect());
         
@@ -46,7 +46,7 @@ class TyrannizeEffect extends OneShotEffect {
     
     TyrannizeEffect() {
         super(Outcome.Discard);
-        this.staticText = "Target player discards their hand unless he or she pays 7 life";
+        this.staticText = "Target player discards their hand unless they pay 7 life";
     }
     
     TyrannizeEffect(final TyrannizeEffect effect) {

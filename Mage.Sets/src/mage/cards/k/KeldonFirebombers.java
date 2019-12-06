@@ -35,7 +35,7 @@ public final class KeldonFirebombers extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // When Keldon Firebombers enters the battlefield, each player sacrifices all lands he or she controls except for three.
+        // When Keldon Firebombers enters the battlefield, each player sacrifices all lands they control except for three.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new KeldonFirebombersEffect()));
 
     }
@@ -56,7 +56,7 @@ class KeldonFirebombersEffect extends OneShotEffect {
 
     public KeldonFirebombersEffect() {
         super(Outcome.AIDontUseIt);
-        this.staticText = "each player sacrifices all lands he or she controls except for three";
+        this.staticText = "each player sacrifices all lands they control except for three";
     }
 
     public KeldonFirebombersEffect(final KeldonFirebombersEffect effect) {

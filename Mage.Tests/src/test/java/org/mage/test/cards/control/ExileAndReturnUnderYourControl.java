@@ -110,7 +110,7 @@ public class ExileAndReturnUnderYourControl extends CardTestPlayerBase {
 
     /**
      * My opponent cast Villainous Wealth and took control of my Sylvan Library.
-     * On his next turn, when Sylvan Library's trigger resolved, he kept the two
+     * On their next turn, when Sylvan Library's trigger resolved, they kept the two
      * extra cards without paying life.
      */
     @Test

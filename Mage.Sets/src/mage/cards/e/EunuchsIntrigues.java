@@ -27,7 +27,7 @@ public final class EunuchsIntrigues extends CardImpl {
     public EunuchsIntrigues(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");
 
-        // Target opponent chooses a creature he or she controls. Other creatures he or she controls can't block this turn.
+        // Target opponent chooses a creature they control. Other creatures they control can't block this turn.
         this.getSpellAbility().addEffect(new EunuchsIntriguesEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
@@ -46,7 +46,7 @@ class EunuchsIntriguesEffect extends OneShotEffect {
 
     EunuchsIntriguesEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Target opponent chooses a creature he or she controls. Other creatures he or she controls can't block this turn.";
+        this.staticText = "Target opponent chooses a creature they control. Other creatures they control can't block this turn.";
     }
 
     EunuchsIntriguesEffect(final EunuchsIntriguesEffect effect) {

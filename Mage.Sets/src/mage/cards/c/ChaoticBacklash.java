@@ -26,7 +26,7 @@ public final class ChaoticBacklash extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{R}");
 
 
-        // Chaotic Backlash deals damage to target player equal to twice the number of white and/or blue permanents he or she controls.
+        // Chaotic Backlash deals damage to target player equal to twice the number of white and/or blue permanents they control.
         this.getSpellAbility().addEffect(new ChaoticBacklashEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
         
@@ -44,7 +44,7 @@ public final class ChaoticBacklash extends CardImpl {
 
 class ChaoticBacklashEffect extends OneShotEffect {
     
-    private static final FilterPermanent filter = new FilterPermanent("white and/or blue permanents he or she controls");
+    private static final FilterPermanent filter = new FilterPermanent("white and/or blue permanents they control");
     
     static {
         filter.add(Predicates.or(
@@ -54,7 +54,7 @@ class ChaoticBacklashEffect extends OneShotEffect {
 
     public ChaoticBacklashEffect() {
         super(Outcome.Detriment);
-        this.staticText = "{this} deals damage to target player equal to twice the number of white and/or blue permanents he or she controls";
+        this.staticText = "{this} deals damage to target player equal to twice the number of white and/or blue permanents they control";
     }
 
     public ChaoticBacklashEffect(final ChaoticBacklashEffect effect) {

@@ -36,7 +36,7 @@ public final class LivingEnd extends CardImpl {
         // Suspend 3-{2}{B}{B}
         this.addAbility(new SuspendAbility(3, new ManaCostsImpl("{2}{B}{B}"), this));
         // Each player exiles all creature cards from their graveyard, then sacrifices all creatures
-        // he or she controls, then puts all cards he or she exiled this way onto the battlefield.
+        // they control, then puts all cards they exiled this way onto the battlefield.
         this.getSpellAbility().addEffect(new LivingEndEffect());
 
     }
@@ -55,7 +55,7 @@ class LivingEndEffect extends OneShotEffect {
 
     public LivingEndEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Each player exiles all creature cards from their graveyard, then sacrifices all creatures he or she controls, then puts all cards he or she exiled this way onto the battlefield";
+        this.staticText = "Each player exiles all creature cards from their graveyard, then sacrifices all creatures they control, then puts all cards they exiled this way onto the battlefield";
     }
 
     public LivingEndEffect(final LivingEndEffect effect) {

@@ -32,7 +32,7 @@ public final class DimensionalBreach extends CardImpl {
     public DimensionalBreach(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{W}{W}");
 
-        // Exile all permanents. For as long as any of those cards remain exiled, at the beginning of each player's upkeep, that player returns one of the exiled cards he or she owns to the battlefield.
+        // Exile all permanents. For as long as any of those cards remain exiled, at the beginning of each player's upkeep, that player returns one of the exiled cards they own to the battlefield.
         this.getSpellAbility().addEffect(new DimensionalBreachExileEffect());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(Zone.ALL, new DimensionalBreachReturnFromExileEffect(), TargetController.ANY, false, true, null), new CardsStillInExileCondition(), null));
 
@@ -86,7 +86,7 @@ class DimensionalBreachReturnFromExileEffect extends OneShotEffect {
 
     public DimensionalBreachReturnFromExileEffect() {
         super(Outcome.PutCardInPlay);
-        staticText = "For as long as any of those cards remain exiled, at the beginning of each player's upkeep, that player returns one of the exiled cards he or she owns to the battlefield.";
+        staticText = "For as long as any of those cards remain exiled, at the beginning of each player's upkeep, that player returns one of the exiled cards they own to the battlefield.";
     }
 
     public DimensionalBreachReturnFromExileEffect(final DimensionalBreachReturnFromExileEffect effect) {

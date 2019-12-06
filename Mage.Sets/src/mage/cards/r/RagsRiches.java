@@ -31,7 +31,7 @@ public final class RagsRiches extends SplitCard {
 
         // to
         // Riches
-        // Each opponent chooses a creature he or she controls. You gain control of each of those creatures.
+        // Each opponent chooses a creature they control. You gain control of each of those creatures.
         getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
         getRightHalfCard().getSpellAbility().addEffect(new RichesEffect());
     }
@@ -50,7 +50,7 @@ class RichesEffect extends OneShotEffect {
 
     public RichesEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Each opponent chooses a creature he or she controls. You gain control of each of those creatures.";
+        this.staticText = "Each opponent chooses a creature they control. You gain control of each of those creatures.";
     }
 
     public RichesEffect(final RichesEffect effect) {

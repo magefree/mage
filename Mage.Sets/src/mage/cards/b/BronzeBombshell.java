@@ -31,7 +31,7 @@ public final class BronzeBombshell extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(1);
 
-        // When a player other than Bronze Bombshell's owner controls it, that player sacrifices it. If the player does, Bronze Bombshell deals 7 damage to him or her.
+        // When a player other than Bronze Bombshell's owner controls it, that player sacrifices it. If the player does, Bronze Bombshell deals 7 damage to the player.
         this.addAbility(new LoseControlTriggeredAbility(new BronzeBombshellEffect(), false));
 
     }
@@ -88,7 +88,7 @@ class BronzeBombshellEffect extends OneShotEffect {
 
     public BronzeBombshellEffect() {
         super(Outcome.Damage);
-        this.staticText = "that player sacrifices it. If the player does, {this} deals 7 damage to him or her.";
+        this.staticText = "that player sacrifices it. If the player does, {this} deals 7 damage to the player.";
     }
 
     public BronzeBombshellEffect(final BronzeBombshellEffect effect) {

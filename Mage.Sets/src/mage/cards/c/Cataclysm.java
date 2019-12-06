@@ -30,7 +30,7 @@ public final class Cataclysm extends CardImpl {
     public Cataclysm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}{W}");
 
-        // Each player chooses from the permanents he or she controls an artifact, a creature, an enchantment, and a land, then sacrifices the rest.
+        // Each player chooses from the permanents they control an artifact, a creature, an enchantment, and a land, then sacrifices the rest.
         this.getSpellAbility().addEffect(new CataclysmEffect());
     }
 
@@ -48,7 +48,7 @@ class CataclysmEffect extends OneShotEffect {
 
     public CataclysmEffect() {
         super(Outcome.DestroyPermanent);
-        staticText = "Each player chooses from among the permanents he or she controls an artifact, a creature, an enchantment, and a land, then sacrifices the rest";
+        staticText = "Each player chooses from among the permanents they control an artifact, a creature, an enchantment, and a land, then sacrifices the rest";
     }
 
     public CataclysmEffect(CataclysmEffect effect) {

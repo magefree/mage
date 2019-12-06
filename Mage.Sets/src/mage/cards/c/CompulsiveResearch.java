@@ -25,7 +25,7 @@ public final class CompulsiveResearch extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");
 
 
-        // Target player draws three cards. Then that player discards two cards unless he or she discards a land card.
+        // Target player draws three cards. Then that player discards two cards unless they discard a land card.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(3));
         this.getSpellAbility().addEffect(new CompulsiveResearchDiscardEffect());
@@ -44,7 +44,7 @@ class CompulsiveResearchDiscardEffect extends OneShotEffect {
 
     public CompulsiveResearchDiscardEffect() {
         super(Outcome.Discard);
-        this.staticText = "Then that player discards two cards unless he or she discards a land card";
+        this.staticText = "Then that player discards two cards unless they discard a land card";
     }
 
     public CompulsiveResearchDiscardEffect(final CompulsiveResearchDiscardEffect effect) {

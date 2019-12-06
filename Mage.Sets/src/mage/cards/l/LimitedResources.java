@@ -31,7 +31,7 @@ public final class LimitedResources extends CardImpl {
     public LimitedResources(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");
 
-        // When Limited Resources enters the battlefield, each player chooses five lands he or she controls and sacrifices the rest.
+        // When Limited Resources enters the battlefield, each player chooses five lands they control and sacrifices the rest.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LimitedResourcesEffect(), false));
 
         // Players can't play lands as long as ten or more lands are on the battlefield.
@@ -59,7 +59,7 @@ class LimitedResourcesEffect extends OneShotEffect {
 
     public LimitedResourcesEffect() {
         super(Outcome.Benefit);
-        this.staticText = "each player chooses five lands he or she controls and sacrifices the rest";
+        this.staticText = "each player chooses five lands they control and sacrifices the rest";
     }
 
     public LimitedResourcesEffect(final LimitedResourcesEffect effect) {

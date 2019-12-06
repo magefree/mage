@@ -188,7 +188,7 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
 
-        // At the beginning of each player's upkeep, that player puts a flood counter on target non-Island land he or she controls of their choice.
+        // At the beginning of each player's upkeep, that player puts a flood counter on target non-Island land they control of their choice.
         //  That land is an Island for as long as it has a flood counter on it.
         // At the beginning of each end step, if all lands on the battlefield are Islands, remove all flood counters from them.
         addCard(Zone.HAND, playerB, "Quicksilver Fountain", 1); // Artifact {3}

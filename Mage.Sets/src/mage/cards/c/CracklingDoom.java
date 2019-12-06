@@ -32,7 +32,7 @@ public final class CracklingDoom extends CardImpl {
     public CracklingDoom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}{W}{B}");
 
-        // Crackling Doom deals 2 damage to each opponent. Each opponent sacrifices a creature with the greatest power among creatures he or she controls.
+        // Crackling Doom deals 2 damage to each opponent. Each opponent sacrifices a creature with the greatest power among creatures they control.
         this.getSpellAbility().addEffect(new DamagePlayersEffect(2, TargetController.OPPONENT));
         this.getSpellAbility().addEffect(new CracklingDoomEffect());
 
@@ -52,7 +52,7 @@ class CracklingDoomEffect extends OneShotEffect {
 
     public CracklingDoomEffect() {
         super(Outcome.Sacrifice);
-        this.staticText = "Each opponent sacrifices a creature with the greatest power among creatures he or she controls";
+        this.staticText = "Each opponent sacrifices a creature with the greatest power among creatures they control";
     }
 
     public CracklingDoomEffect(final CracklingDoomEffect effect) {

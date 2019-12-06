@@ -19,8 +19,8 @@ public final class ForceTelepathy extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U/B}");
         
 
-        // Target player reveals his or her hand.
-        this.getSpellAbility().addEffect(new RevealHandTargetEffect().setText("Target player reveals his or her hand"));
+        // Target player reveals their hand.
+        this.getSpellAbility().addEffect(new RevealHandTargetEffect().setText("Target player reveals their hand"));
         this.getSpellAbility().addTarget(new TargetPlayer());
 
         // Scry 2

@@ -41,7 +41,7 @@ public final class RagingRiver extends CardImpl {
     public RagingRiver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}{R}");
 
-        // Whenever one or more creatures you control attack, each defending player divides all creatures without flying he or she controls into a "left" pile and a "right" pile. Then, for each attacking creature you control, choose "left" or "right." That creature can't be blocked this combat except by creatures with flying and creatures in a pile with the chosen label.
+        // Whenever one or more creatures you control attack, each defending player divides all creatures without flying they control into a "left" pile and a "right" pile. Then, for each attacking creature you control, choose "left" or "right." That creature can't be blocked this combat except by creatures with flying and creatures in a pile with the chosen label.
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(new RagingRiverEffect(), 1));
     }
 
@@ -59,7 +59,7 @@ class RagingRiverEffect extends OneShotEffect {
 
     public RagingRiverEffect() {
         super(Outcome.Detriment);
-        staticText = "each defending player divides all creatures without flying he or she controls into a \"left\" pile and a \"right\" pile. Then, for each attacking creature you control, choose \"left\" or \"right.\" That creature can't be blocked this combat except by creatures with flying and creatures in a pile with the chosen label";
+        staticText = "each defending player divides all creatures without flying they control into a \"left\" pile and a \"right\" pile. Then, for each attacking creature you control, choose \"left\" or \"right.\" That creature can't be blocked this combat except by creatures with flying and creatures in a pile with the chosen label";
     }
 
     public RagingRiverEffect(final RagingRiverEffect effect) {

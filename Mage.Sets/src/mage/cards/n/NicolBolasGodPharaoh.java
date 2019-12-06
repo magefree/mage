@@ -45,7 +45,7 @@ public final class NicolBolasGodPharaoh extends CardImpl {
 
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(7));
 
-        // +2: Target opponent exiles cards from the top of their library until he or she exiles a nonland card. Until end of turn, you may cast that card without paying its mana cost.
+        // +2: Target opponent exiles cards from the top of their library until they exile a nonland card. Until end of turn, you may cast that card without paying its mana cost.
         LoyaltyAbility ability = new LoyaltyAbility(new NicolBolasGodPharaohPlusTwoEffect(), 2);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
@@ -125,7 +125,7 @@ class NicolBolasGodPharaohPlusTwoEffect extends OneShotEffect {
     public NicolBolasGodPharaohPlusTwoEffect() {
         super(Outcome.Detriment);
         this.staticText = "Target opponent exiles cards from the top of their "
-                + "library until he or she exiles a nonland card. Until end of turn, "
+                + "library until they exile a nonland card. Until end of turn, "
                 + "you may cast that card without paying its mana cost";
     }
 

@@ -40,7 +40,7 @@ public final class AwesomePresence extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // Enchanted creature can't be blocked unless defending player pays {3} for each creature he or she controls that's blocking it.
+        // Enchanted creature can't be blocked unless defending player pays {3} for each creature they control that's blocking it.
         this.addAbility(new SimpleStaticAbility(new AwesomePresenceRestrictionEffect(new ManaCostsImpl("{3}"))));
 
     }
@@ -63,7 +63,7 @@ class AwesomePresenceRestrictionEffect extends PayCostToAttackBlockEffectImpl {
                 + " can't be blocked "
                 + "unless defending player pays "
                 + (manaCosts == null ? "" : manaCosts.getText()
-                        + " for each creature he or she controls that's blocking it");
+                        + " for each creature they control that's blocking it");
     }
 
     public AwesomePresenceRestrictionEffect(AwesomePresenceRestrictionEffect effect) {

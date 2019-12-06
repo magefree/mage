@@ -502,7 +502,7 @@ public class SessionImpl implements Session {
 
     /**
      * @param askForReconnect - true = connection was lost because of error and
-     *                        ask the user if he want to try to reconnect
+     *                        ask the user if they want to try to reconnect
      */
     @Override
     public synchronized void disconnect(boolean askForReconnect) {

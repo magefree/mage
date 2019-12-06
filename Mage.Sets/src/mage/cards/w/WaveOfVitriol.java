@@ -31,7 +31,7 @@ public final class WaveOfVitriol extends CardImpl {
     public WaveOfVitriol(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{G}{G}");
 
-        // Each player sacrifices all artifacts, enchantments, and nonbasic lands he or she controls. For each land sacrificed this way, its controller may search their library for a basic land card and put it onto the battlefield tapped. Then each player who searched their library this way shuffles it.
+        // Each player sacrifices all artifacts, enchantments, and nonbasic lands they control. For each land sacrificed this way, its controller may search their library for a basic land card and put it onto the battlefield tapped. Then each player who searched their library this way shuffles it.
         this.getSpellAbility().addEffect(new WaveOfVitriolEffect());
 
     }
@@ -63,7 +63,7 @@ class WaveOfVitriolEffect extends OneShotEffect {
 
     public WaveOfVitriolEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Each player sacrifices all artifacts, enchantments, and nonbasic lands he or she controls. For each land sacrificed this way, its controller may search their library for a basic land card and put it onto the battlefield tapped. Then each player who searched their library this way shuffles it";
+        this.staticText = "Each player sacrifices all artifacts, enchantments, and nonbasic lands they control. For each land sacrificed this way, its controller may search their library for a basic land card and put it onto the battlefield tapped. Then each player who searched their library this way shuffles it";
     }
 
     public WaveOfVitriolEffect(final WaveOfVitriolEffect effect) {

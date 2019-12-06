@@ -43,7 +43,7 @@ public final class CruelReality extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Damage));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
-        //At the beginning of enchanted player's upkeep, that player sacrifices a creature or planeswalker. If the player can't, he or she loses 5 life.
+        //At the beginning of enchanted player's upkeep, that player sacrifices a creature or planeswalker. If the player can't, they lose 5 life.
         this.addAbility(new CruelRealityTriggeredAbiilty());
 
     }
@@ -103,7 +103,7 @@ class CruelRealityEffect extends OneShotEffect {
 
     public CruelRealityEffect() {
         super(Outcome.LoseLife);
-        staticText = "that player sacrifices a creature or planeswalker. If the player can't, he or she loses 5 life";
+        staticText = "that player sacrifices a creature or planeswalker. If the player can't, they lose 5 life";
     }
 
     public CruelRealityEffect(final CruelRealityEffect effect) {

@@ -38,10 +38,10 @@ import java.util.UUID;
  * <p>
  * Aurelia's Fury can't deal damage to both a planeswalker and that
  * planeswalker's controller. If damage dealt by Aurelia's Fury is redirected
- * from a player to a planeswalker he or she controls, that player will be able
+ * from a player to a planeswalker they control, that player will be able
  * to cast noncreature spells that turn. If you want to stop a player from
  * casting noncreature spells this turn, you can't choose to redirect the
- * damage to a planeswalker he or she controls.
+ * damage to a planeswalker they control.
  * <p>
  * If Aurelia's Fury has multiple targets, and some but not all of them are
  * illegal targets when Aurelia's Fury resolves, Aurelia's Fury will still

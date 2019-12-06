@@ -23,7 +23,7 @@ public final class TradeSecrets extends CardImpl {
     public TradeSecrets(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}{U}");
 
-        // Target opponent draws two cards, then you draw up to four cards. That opponent may repeat this process as many times as he or she chooses.
+        // Target opponent draws two cards, then you draw up to four cards. That opponent may repeat this process as many times as they choose.
         this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().addEffect(new TradeSecretsEffect());
 
@@ -43,7 +43,7 @@ class TradeSecretsEffect extends OneShotEffect {
 
     public TradeSecretsEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Target opponent draws two cards, then you draw up to four cards. That opponent may repeat this process as many times as he or she chooses";
+        this.staticText = "Target opponent draws two cards, then you draw up to four cards. That opponent may repeat this process as many times as they choose";
     }
 
     public TradeSecretsEffect(final TradeSecretsEffect effect) {

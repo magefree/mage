@@ -35,7 +35,7 @@ public final class ConsumingAberration extends CardImpl {
 
         //Consuming Aberration's power and toughness are each equal to the number of cards in your opponents' graveyards.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInOpponentsGraveyardsCount(), Duration.EndOfGame)));
-        //Whenever you cast a spell, each opponent reveals cards from the top of their library until he or she reveals a land card, then puts those cards into their graveyard.
+        //Whenever you cast a spell, each opponent reveals cards from the top of their library until they reveal a land card, then puts those cards into their graveyard.
         this.addAbility(new SpellCastControllerTriggeredAbility(new ConsumingAberrationEffect(), false));
     }
 
@@ -53,7 +53,7 @@ class ConsumingAberrationEffect extends OneShotEffect {
 
     public ConsumingAberrationEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "each opponent reveals cards from the top of their library until he or she reveals a land card, then puts those cards into their graveyard";
+        this.staticText = "each opponent reveals cards from the top of their library until they reveal a land card, then puts those cards into their graveyard";
     }
 
     public ConsumingAberrationEffect(final ConsumingAberrationEffect effect) {

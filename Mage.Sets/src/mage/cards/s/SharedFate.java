@@ -35,7 +35,7 @@ public final class SharedFate extends CardImpl {
         // If a player would draw a card, that player exiles the top card of one of their opponents' libraries face down instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SharedFateReplacementEffect()));
 
-        // Each player may look at and play cards he or she exiled with Shared Fate.
+        // Each player may look at and play cards they exiled with Shared Fate.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SharedFatePlayEffect()));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SharedFateLookEffect()));
     }
@@ -107,7 +107,7 @@ class SharedFatePlayEffect extends AsThoughEffectImpl {
 
     SharedFatePlayEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "Each player may look at and play cards he or she exiled with {this}";
+        staticText = "Each player may look at and play cards they exiled with {this}";
     }
 
     SharedFatePlayEffect(final SharedFatePlayEffect effect) {

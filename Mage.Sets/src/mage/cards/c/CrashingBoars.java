@@ -35,7 +35,7 @@ public final class CrashingBoars extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // Whenever Crashing Boars attacks, defending player chooses an untapped creature he or she controls. That creature block Crashing Boars this turn if able.
+        // Whenever Crashing Boars attacks, defending player chooses an untapped creature they control. That creature block Crashing Boars this turn if able.
         this.addAbility(new AttacksTriggeredAbility(new CrashingBoarsEffect(), false, "", SetTargetPointer.PLAYER));
     }
 
@@ -58,7 +58,7 @@ class CrashingBoarsEffect extends OneShotEffect {
     
     CrashingBoarsEffect() {
         super(Outcome.Benefit);
-        this.staticText = "defending player chooses an untapped creature he or she controls. That creature blocks {this} this turn if able";
+        this.staticText = "defending player chooses an untapped creature they control. That creature blocks {this} this turn if able";
     }
     
     CrashingBoarsEffect(final CrashingBoarsEffect effect) {

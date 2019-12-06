@@ -25,10 +25,10 @@ public final class GlassAsp extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // Whenever Glass Asp deals combat damage to a player, that player loses 2 life at the beginning of their next draw step unless he or she pays {2} before that step.
+        // Whenever Glass Asp deals combat damage to a player, that player loses 2 life at the beginning of their next draw step unless they pay {2} before that step.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new UnlessPaysDelayedEffect(
                 new ManaCostsImpl("{2}"), new LoseLifeTargetEffect(2), PhaseStep.DRAW, true,
-                "that player loses 2 life at the beginning of their next draw step unless he or she pays {2} before that draw step."),
+                "that player loses 2 life at the beginning of their next draw step unless they pay {2} before that draw step."),
                 false, true));
     }
 

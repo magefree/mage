@@ -32,7 +32,7 @@ public final class BaneOfBalaGed extends CardImpl {
         this.power = new MageInt(7);
         this.toughness = new MageInt(5);
 
-        // Whenever Bane of Bala Ged attacks, defending player exiles two permanents he or she controls.
+        // Whenever Bane of Bala Ged attacks, defending player exiles two permanents they control.
         this.addAbility(new AttacksTriggeredAbility(new BaneOfBalaGedEffect(), false, "", SetTargetPointer.PLAYER));
     }
 
@@ -50,7 +50,7 @@ class BaneOfBalaGedEffect extends OneShotEffect {
 
     public BaneOfBalaGedEffect() {
         super(Outcome.Benefit);
-        this.staticText = "defending player exiles two permanents he or she controls";
+        this.staticText = "defending player exiles two permanents they control";
     }
 
     public BaneOfBalaGedEffect(final BaneOfBalaGedEffect effect) {

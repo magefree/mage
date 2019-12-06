@@ -110,7 +110,7 @@ class WordOfCommandEffect extends OneShotEffect {
                 effect.setTargetPointer(new FixedTarget(targetPlayer.getId()));
                 game.addEffect(effect, source);
 
-                // and only if mana they produce is spent to activate other mana abilities of lands he or she controls and/or play that card
+                // and only if mana they produce is spent to activate other mana abilities of lands they control and/or play that card
                 ManaPool manaPool = targetPlayer.getManaPool();
                 manaPool.setForcedToPay(true);
                 manaPool.storeMana();

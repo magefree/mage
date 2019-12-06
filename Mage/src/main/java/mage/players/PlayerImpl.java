@@ -1823,7 +1823,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         }
                         // while targets left and there is still allowed to untap
                         while (canRespond() && !leftForUntap.isEmpty() && numberToUntap > 0) {
-                            // player has to select the permanent he wants to untap for this restriction
+                            // player has to select the permanent they want to untap for this restriction
                             Ability ability = handledEntry.getKey().getValue().iterator().next();
                             if (ability != null) {
                                 StringBuilder sb = new StringBuilder(message).append(" to untap").append(" (").append(Math.min(leftForUntap.size(),
@@ -2489,7 +2489,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean canLose(Game game) {
-        return hasLeft() // If a player concedes or has left the match he loses also if effect would say otherwise
+        return hasLeft() // If a player concedes or has left the match they lose also if effect would say otherwise
                 || !game.replaceEvent(new GameEvent(GameEvent.EventType.LOSES, null, null, playerId));
     }
 

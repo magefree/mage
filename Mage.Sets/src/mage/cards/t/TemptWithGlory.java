@@ -24,7 +24,7 @@ public final class TemptWithGlory extends CardImpl {
     public TemptWithGlory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{W}");
 
-        // Tempting offer - Put a +1/+1 counter on each creature you control. Each opponent may put a +1/+1 counter on each creature he or she controls. For each opponent who does, put a +1/+1 counter on each creature you control.
+        // Tempting offer - Put a +1/+1 counter on each creature you control. Each opponent may put a +1/+1 counter on each creature they control. For each opponent who does, put a +1/+1 counter on each creature you control.
         this.getSpellAbility().addEffect(new TemptWithGloryEffect());
     }
 
@@ -45,7 +45,7 @@ class TemptWithGloryEffect extends OneShotEffect {
 
     public TemptWithGloryEffect() {
         super(Outcome.PutLandInPlay);
-        this.staticText = "<i>Tempting offer</i> &mdash; Put a +1/+1 counter on each creature you control. Each opponent may put a +1/+1 counter on each creature he or she controls. For each opponent who does, put a +1/+1 counter on each creature you control";
+        this.staticText = "<i>Tempting offer</i> &mdash; Put a +1/+1 counter on each creature you control. Each opponent may put a +1/+1 counter on each creature they control. For each opponent who does, put a +1/+1 counter on each creature you control";
     }
 
     public TemptWithGloryEffect(final TemptWithGloryEffect effect) {

@@ -29,7 +29,7 @@ public enum SessionManager {
         }
         if (session.getUserId() != null && !UserManager.instance.getUser(session.getUserId()).isPresent()) {
             logger.error("User for session " + sessionId + " with userId " + session.getUserId() + " is missing. Session removed.");
-            // can happen if user from same host signs in multiple time with multiple clients, after he disconnects with one client
+            // can happen if user from same host signs in multiple time with multiple clients, after they disconnect with one client
             disconnect(sessionId, DisconnectReason.ConnectingOtherInstance, session); // direct disconnect
             return Optional.empty();
         }

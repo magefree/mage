@@ -27,7 +27,7 @@ public final class WarCadence extends CardImpl {
     public WarCadence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
-        // {X}{R}: This turn, creatures can't block unless their controller pays {X} for each blocking creature he or she controls.
+        // {X}{R}: This turn, creatures can't block unless their controller pays {X} for each blocking creature they control.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WarCadenceReplacementEffect(), new ManaCostsImpl("{X}{R}")));
 
     }
@@ -48,7 +48,7 @@ class WarCadenceReplacementEffect extends ReplacementEffectImpl {
 
     WarCadenceReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Neutral);
-        staticText = "This turn, creatures can't block unless their controller pays {X} for each blocking creature he or she controls";
+        staticText = "This turn, creatures can't block unless their controller pays {X} for each blocking creature they control";
     }
 
     WarCadenceReplacementEffect(WarCadenceReplacementEffect effect) {

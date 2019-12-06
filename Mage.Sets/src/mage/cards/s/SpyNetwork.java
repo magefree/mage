@@ -31,7 +31,7 @@ public final class SpyNetwork extends CardImpl {
     public SpyNetwork(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
-        // Look at target player's hand, the top card of that player's library, and any face-down creatures he or she controls. Look at the top four cards of your library, then put them back in any order.
+        // Look at target player's hand, the top card of that player's library, and any face-down creatures they control. Look at the top four cards of your library, then put them back in any order.
         this.getSpellAbility().addEffect(new SpyNetworkLookAtTargetPlayerHandEffect());
         this.getSpellAbility().addEffect(new LookLibraryTopCardTargetPlayerEffect().setText(" the top card of that player's library"));
         this.getSpellAbility().addEffect(new SpyNetworkFaceDownEffect());
@@ -84,7 +84,7 @@ class SpyNetworkFaceDownEffect extends OneShotEffect {
 
     public SpyNetworkFaceDownEffect() {
         super(Outcome.Benefit);
-        this.staticText = "and any face-down creatures he or she controls";
+        this.staticText = "and any face-down creatures they control";
     }
 
     public SpyNetworkFaceDownEffect(final SpyNetworkFaceDownEffect effect) {

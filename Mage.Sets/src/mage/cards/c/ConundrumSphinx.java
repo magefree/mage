@@ -35,7 +35,7 @@ public final class ConundrumSphinx extends CardImpl {
         //Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Conundrum Sphinx attacks, each player names a card. Then each player reveals the top card of their library.
-        // If the card a player revealed is the card he or she named, that player puts it into their hand.
+        // If the card a player revealed is the card they named, that player puts it into their hand.
         // If it's not, that player puts it on the bottom of their library.
         this.addAbility(new AttacksTriggeredAbility(new ConundrumSphinxEffect(), false));
     }
@@ -55,7 +55,7 @@ class ConundrumSphinxEffect extends OneShotEffect {
 
     public ConundrumSphinxEffect() {
         super(Outcome.DrawCard);
-        staticText = "each player names a card. Then each player reveals the top card of their library. If the card a player revealed is the card he or she named, that player puts it into their hand. If it's not, that player puts it on the bottom of their library";
+        staticText = "each player names a card. Then each player reveals the top card of their library. If the card a player revealed is the card they named, that player puts it into their hand. If it's not, that player puts it on the bottom of their library";
     }
 
     public ConundrumSphinxEffect(final ConundrumSphinxEffect effect) {

@@ -31,7 +31,7 @@ public final class SpiritualSanctuary extends CardImpl {
     public SpiritualSanctuary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
 
-        // At the beginning of each player's upkeep, if that player controls a Plains, he or she gains 1 life.
+        // At the beginning of each player's upkeep, if that player controls a Plains, they gain 1 life.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
                         new GainLifeTargetEffect(1).setText("they gain 1 life"),
@@ -39,7 +39,7 @@ public final class SpiritualSanctuary extends CardImpl {
                 ),
                 new PermanentsOnTheBattlefieldCondition(filter),
                 "at the beginning of each player's upkeep, "
-                + "if that player controls a Plains, they gains 1 life"
+                + "if that player controls a Plains, they gain 1 life"
         ));
     }
 

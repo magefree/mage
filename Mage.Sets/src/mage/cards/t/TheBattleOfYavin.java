@@ -26,7 +26,7 @@ public final class TheBattleOfYavin extends CardImpl {
     public TheBattleOfYavin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
 
-        // For each nonland permanent target opponent controls, that player sacrificies it unless he or she pays X life.
+        // For each nonland permanent target opponent controls, that player sacrificies it unless they pay X life.
         this.getSpellAbility().addEffect(new TheBattleOfYavinEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
 
@@ -46,7 +46,7 @@ class TheBattleOfYavinEffect extends OneShotEffect {
 
     public TheBattleOfYavinEffect() {
         super(Outcome.Sacrifice);
-        this.staticText = "For each nonland permanent target opponent controls, that player sacrificies it unless he or she pays X life";
+        this.staticText = "For each nonland permanent target opponent controls, that player sacrificies it unless they pay X life";
     }
 
     public TheBattleOfYavinEffect(final TheBattleOfYavinEffect effect) {
@@ -77,7 +77,7 @@ class TheBattleOfYavinEffect extends OneShotEffect {
             for (Permanent permanent : permanents) {
                 String message = "Pay " + amount + " life? If you don't, " + permanent.getName() + " will be sacrificed.";
                 if (playerLife - amount - lifePaid >= 0 && opponent.chooseUse(Outcome.Neutral, message, source, game)) {
-                    game.informPlayers(opponent.getLogName() + " pays " + amount + " life. He will not sacrifice " + permanent.getName());
+                    game.informPlayers(opponent.getLogName() + " pays " + amount + " life. They will not sacrifice " + permanent.getName());
                     lifePaid += amount;
                 } else {
                     game.informPlayers(opponent.getLogName() + " will sacrifice " + permanent.getName());

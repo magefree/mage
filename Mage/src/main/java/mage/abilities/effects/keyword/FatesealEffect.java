@@ -93,7 +93,7 @@ public class FatesealEffect extends OneShotEffect {
     private void setText() {
         StringBuilder sb = new StringBuilder("fateseal ").append(fatesealNumber);
         if (fatesealNumber == 1) {
-            sb.append(". <i>(To fateseal 1, its controller looks at the top card of an opponent's library, then he or she may put that card on the bottom of that library.)</i>");
+            sb.append(". <i>(To fateseal 1, its controller looks at the top card of an opponent's library, then they may put that card on the bottom of that library.)</i>");
         } else {
             sb.append(". <i>(To fateseal ");
             sb.append(CardUtil.numberToText(fatesealNumber));
