@@ -47,6 +47,7 @@ public class DuelCommander extends Commander {
         banned.add("Polymorph");
         banned.add("Price of Progress");
         banned.add("Protean Hulk");
+        banned.add("Scapeshift");
         banned.add("Sensei's Divining Top");
         banned.add("Shahrazad");
         banned.add("Sol Ring");
@@ -66,6 +67,8 @@ public class DuelCommander extends Commander {
         bannedCommander.add("Bruse Tarl, Boorish Herder");
         bannedCommander.add("Derevi, Empyrial Tactician");
         bannedCommander.add("Edgar Markov");
+        bannedCommander.add("Edric, Spymaster of Trest");
+        bannedCommander.add("Emry, Lurker of the Loch");
         bannedCommander.add("Geist of Saint Traft");
         bannedCommander.add("Jace, Vryn's Prodigy");
         bannedCommander.add("Marath, Will of the Wild");
