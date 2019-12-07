@@ -119,7 +119,7 @@ public class CantAttackTest extends CardTestPlayerBase {
     @Test
     public void testOrzhovAdvokist() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
-        // At the beginning of your upkeep, each player may put two +1/+1 counters on a creature he or she controls.
+        // At the beginning of your upkeep, each player may put two +1/+1 counters on a creature they control.
         // If a player does, creatures that player controls can't attack you or a planeswalker you control until your next turn.
         addCard(Zone.HAND, playerA, "Orzhov Advokist"); // Creature {2}{W} 1/4
 
@@ -281,7 +281,7 @@ public class CantAttackTest extends CardTestPlayerBase {
         /*
         Collective Restraint {3}{U}
         Enchantment
-        Domain — Creatures can't attack you unless their controller pays {X} for each creature he or she controls that's attacking you, where X is the number of basic land types among lands you control.
+        Domain — Creatures can't attack you unless their controller pays {X} for each creature they control that's attacking you, where X is the number of basic land types among lands you control.
         */
         String cRestraint = "Collective Restraint";
         String memnite = "Memnite";
@@ -308,7 +308,7 @@ public class CantAttackTest extends CardTestPlayerBase {
         /*
         Collective Restraint {3}{U}
         Enchantment
-        Domain — Creatures can't attack you unless their controller pays {X} for each creature he or she controls that's attacking you, where X is the number of basic land types among lands you control.
+        Domain — Creatures can't attack you unless their controller pays {X} for each creature they control that's attacking you, where X is the number of basic land types among lands you control.
         */
         String cRestraint = "Collective Restraint";
         String memnite = "Memnite";
@@ -334,7 +334,7 @@ public class CantAttackTest extends CardTestPlayerBase {
         /*
         Ghostly Prison {2}{W}
         Enchantment
-        Creatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you.
+        Creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you.
         */
         String gPrison = "Ghostly Prison";
         String memnite = "Memnite";
@@ -359,7 +359,7 @@ public class CantAttackTest extends CardTestPlayerBase {
         /*
         Ghostly Prison {2}{W}
         Enchantment
-        Creatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you.
+        Creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you.
         */
         String gPrison = "Ghostly Prison";
         String memnite = "Memnite";

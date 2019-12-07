@@ -29,7 +29,7 @@ public final class CerebralVortex extends CardImpl {
     public CerebralVortex(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{R}");
 
-        // Target player draws two cards, then Cerebral Vortex deals damage to that player equal to the number of cards he or she has drawn this turn.
+        // Target player draws two cards, then Cerebral Vortex deals damage to that player equal to the number of cards they have drawn this turn.
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(2));
         this.getSpellAbility().addEffect(new CerebralVortexEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
@@ -50,7 +50,7 @@ class CerebralVortexEffect extends OneShotEffect {
     
     CerebralVortexEffect() {
         super(Outcome.Damage);
-        this.staticText = ", then Cerebral Vortex deals damage to that player equal to the number of cards he or she has drawn this turn";
+        this.staticText = ", then Cerebral Vortex deals damage to that player equal to the number of cards they have drawn this turn";
     }
     
     CerebralVortexEffect(final CerebralVortexEffect effect) {

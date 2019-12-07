@@ -27,7 +27,7 @@ public final class BonfireOfTheDamned extends CardImpl {
     public BonfireOfTheDamned(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{R}");
 
-        // Bonfire of the Damned deals X damage to target player and each creature he or she controls.
+        // Bonfire of the Damned deals X damage to target player and each creature they control.
         this.getSpellAbility().addEffect(new BonfireOfTheDamnedEffect());
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
 

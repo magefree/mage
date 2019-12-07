@@ -31,7 +31,7 @@ public final class ChainStasis extends CardImpl {
     public ChainStasis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
-        // You may tap or untap target creature. Then that creature's controller may pay {2}{U}. If the player does, he or she may copy this spell and may choose a new target for that copy.
+        // You may tap or untap target creature. Then that creature's controller may pay {2}{U}. If the player does, they may copy this spell and may choose a new target for that copy.
         this.getSpellAbility().addEffect(new ChainStasisEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
@@ -102,7 +102,7 @@ class ChainStasisEffect extends OneShotEffect {
     @Override
     public String getText(Mode mode
     ) {
-        return "You may tap or untap target creature. Then that creature's controller may pay {2}{U}. If the player does, he or she may copy this spell and may choose a new target for that copy";
+        return "You may tap or untap target creature. Then that creature's controller may pay {2}{U}. If the player does, they may copy this spell and may choose a new target for that copy";
     }
 
 }

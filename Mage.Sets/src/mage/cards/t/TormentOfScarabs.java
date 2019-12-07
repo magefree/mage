@@ -42,7 +42,7 @@ public final class TormentOfScarabs extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // At the beginning of enchanted player's upkeep, that player loses 3 life unless he or she sacrifices a nonland permanent or discards a card.
+        // At the beginning of enchanted player's upkeep, that player loses 3 life unless they sacrifice a nonland permanent or discards a card.
         this.addAbility(new TormentOfScarabsAbility());
     }
 
@@ -89,7 +89,7 @@ class TormentOfScarabsAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "At the beginning of enchanted player's upkeep, that player loses 3 life unless he or she sacrifices a nonland permanent or discards a card.";
+        return "At the beginning of enchanted player's upkeep, that player loses 3 life unless they sacrifice a nonland permanent or discards a card.";
     }
 
 }
@@ -98,7 +98,7 @@ class TormentOfScarabsEffect extends OneShotEffect {
 
     public TormentOfScarabsEffect() {
         super(Outcome.LoseLife);
-        this.staticText = "that player loses 3 life unless he or she sacrifices a nonland permanent or discards a card";
+        this.staticText = "that player loses 3 life unless they sacrifice a nonland permanent or discards a card";
     }
 
     public TormentOfScarabsEffect(final TormentOfScarabsEffect effect) {

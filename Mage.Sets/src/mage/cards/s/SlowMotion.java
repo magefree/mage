@@ -40,7 +40,7 @@ public final class SlowMotion extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // At the beginning of the upkeep of enchanted creature's controller, that player sacrifices that creature unless he or she pays {2}.
+        // At the beginning of the upkeep of enchanted creature's controller, that player sacrifices that creature unless they pay {2}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeEquipedUnlessPaysEffect(new GenericManaCost(2)), TargetController.CONTROLLER_ATTACHED_TO, false));
 
         // When Slow Motion is put into a graveyard from the battlefield, return Slow Motion to its owner's hand.
@@ -64,7 +64,7 @@ class SacrificeEquipedUnlessPaysEffect extends OneShotEffect {
     public SacrificeEquipedUnlessPaysEffect(Cost cost) {
         super(Outcome.Sacrifice);
         this.cost = cost;
-        staticText = "that player sacrifices that creature unless he or she pays {2}";
+        staticText = "that player sacrifices that creature unless they pay {2}";
     }
 
     public SacrificeEquipedUnlessPaysEffect(final SacrificeEquipedUnlessPaysEffect effect) {

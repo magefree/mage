@@ -55,8 +55,8 @@ public class BlockRequirementTest extends CardTestPlayerBase {
     }
 
     /**
-     * Joraga Invocation is bugged big time. He cast it with 2 creatures out. I
-     * only had one untapped creature. Blocked one of his, hit Done, error
+     * Joraga Invocation is bugged big time. They cast it with 2 creatures out.
+     * I only had one untapped creature. Blocked one of theirs, hit Done, error
      * message popped up saying the other one needed to be blocked in an
      * infinite loop. Had to shut down the program via Task Manager.
      */
@@ -93,12 +93,12 @@ public class BlockRequirementTest extends CardTestPlayerBase {
      * Elemental Uprising - "it must be blocked this turn if able", not working
      *
      * The bug just happened for me today as well - the problem is "must be
-     * blocked" is not being enforced correctly. During opponent's main phase he
-     * casted Elemental Uprising targeting an untapped land. He attacked with
-     * two creatures, I had one creature to block with, and did not block the
-     * land-creature targeted by Elemental Uprising. Instead I blocked a 2/2 of
-     * his with my 2/3. I should have been forced to block the land targeted by
-     * Elemental Uprising.
+     * blocked" is not being enforced correctly. During opponent's main phase
+     * they cast Elemental Uprising targeting an untapped land. They attacked
+     * with two creatures, I had one creature to block with, and did not block
+     * the land-creature targeted by Elemental Uprising. Instead I blocked a 2/2
+     * of theirs with my 2/3. I should have been forced to block the land
+     * targeted by Elemental Uprising.
      */
     @Test
     public void testElementalUprising() {

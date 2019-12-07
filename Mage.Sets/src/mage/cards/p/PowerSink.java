@@ -82,7 +82,7 @@ class PowerSinkCounterUnlessPaysEffect extends OneShotEffect {
                     // Counter target spell unless its controller pays {X}
                     game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
 
-                    // that player taps all lands with mana abilities he or she controls...
+                    // that player taps all lands with mana abilities they control...
                     List<Permanent> lands = game.getBattlefield().getAllActivePermanents(new FilterLandPermanent(), player.getId(), game);
                     for (Permanent land : lands) {
                         Abilities<Ability> landAbilities = land.getAbilities();

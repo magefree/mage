@@ -204,7 +204,7 @@ public class TargetsAreChosenTest extends CardTestPlayerBaseAI {
     @Test
     public void testArchfiendOfDepravity() {
         // Flying
-        // At the beginning of each opponent's end step, that player chooses up to two creatures he or she controls, then sacrifices the rest.
+        // At the beginning of each opponent's end step, that player chooses up to two creatures they control, then sacrifices the rest.
         addCard(Zone.BATTLEFIELD, playerB, "Archfiend of Depravity");
 
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 3);

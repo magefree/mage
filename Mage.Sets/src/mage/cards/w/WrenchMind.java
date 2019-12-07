@@ -24,7 +24,7 @@ public final class WrenchMind extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}{B}");
 
 
-        // Target player discards two cards unless he or she discards an artifact card.
+        // Target player discards two cards unless they discard an artifact card.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new WrenchMindEffect());
 
@@ -44,7 +44,7 @@ class WrenchMindEffect extends OneShotEffect {
 
     public WrenchMindEffect() {
         super(Outcome.Discard);
-        this.staticText = "Target player discards two cards unless he or she discards an artifact card";
+        this.staticText = "Target player discards two cards unless they discard an artifact card";
     }
 
     public WrenchMindEffect(final WrenchMindEffect effect) {

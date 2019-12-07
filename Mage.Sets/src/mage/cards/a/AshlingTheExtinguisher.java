@@ -31,7 +31,7 @@ public final class AshlingTheExtinguisher extends CardImpl {
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.SHAMAN);
 
-        // Whenever Ashling, the Extinguisher deals combat damage to a player, choose target creature that player controls. He or she sacrifices that creature.
+        // Whenever Ashling, the Extinguisher deals combat damage to a player, choose target creature that player controls. they sacrifice that creature.
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.addAbility(new AshlingTheExtinguisherTriggeredAbility());

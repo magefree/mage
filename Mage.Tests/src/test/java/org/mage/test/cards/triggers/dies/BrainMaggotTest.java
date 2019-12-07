@@ -11,8 +11,8 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class BrainMaggotTest extends CardTestPlayerBase {
 
     /**
-     * When Brain Maggot enters the battlefield, target opponent reveals his or
-     * her hand and you choose a nonland card from it. Exile that card until
+     * When Brain Maggot enters the battlefield, target opponent reveals their
+     * hand and you choose a nonland card from it. Exile that card until
      * Brain Maggot leaves the battlefield.
      */
     @Test

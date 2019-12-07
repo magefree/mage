@@ -32,7 +32,7 @@ public final class BarbarianBully extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Discard a card at random: Barbarian Bully gets +2/+2 until end of turn unless a player has Barbarian Bully deal 4 damage to him or her. Activate this ability only once each turn.
+        // Discard a card at random: Barbarian Bully gets +2/+2 until end of turn unless a player has Barbarian Bully deal 4 damage to them. Activate this ability only once each turn.
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BarbarianBullyEffect(), new DiscardCardCost(true)));
     }
 

@@ -29,7 +29,7 @@ public final class VexingDevil extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 
-        // When Vexing Devil enters the battlefield, any opponent may have it deal 4 damage to him or her. If a player does, sacrifice Vexing Devil.
+        // When Vexing Devil enters the battlefield, any opponent may have it deal 4 damage to them. If a player does, sacrifice Vexing Devil.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new VexingDevilEffect(), false));
     }
 
@@ -47,7 +47,7 @@ class VexingDevilEffect extends OneShotEffect {
 
     public VexingDevilEffect() {
         super(Outcome.Neutral);
-        staticText = "any opponent may have it deal 4 damage to him or her. If a player does, sacrifice {this}";
+        staticText = "any opponent may have it deal 4 damage to them. If a player does, sacrifice {this}";
     }
 
     VexingDevilEffect(final VexingDevilEffect effect) {

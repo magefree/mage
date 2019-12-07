@@ -31,7 +31,7 @@ public final class SpelltitheEnforcer extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever an opponent casts a spell, that player sacrifices a permanent unless he or she pays {1}.
+        // Whenever an opponent casts a spell, that player sacrifices a permanent unless they pay {1}.
         this.addAbility(new SpellCastOpponentTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new SpelltitheEnforcerEffect(),
@@ -55,7 +55,7 @@ class SpelltitheEnforcerEffect extends SacrificeEffect {
 
     SpelltitheEnforcerEffect() {
         super(new FilterPermanent("permanent to sacrifice"), 1, "that player");
-        this.staticText = "that player sacrifices a permanent unless he or she pays {1}";
+        this.staticText = "that player sacrifices a permanent unless they pay {1}";
     }
 
     SpelltitheEnforcerEffect(final SpelltitheEnforcerEffect effect) {

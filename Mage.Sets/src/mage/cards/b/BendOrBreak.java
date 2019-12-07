@@ -146,7 +146,7 @@ class BendOrBreakEffect extends OneShotEffect {
                         if (chosenOpponent != null) {
                             List<Permanent> firstPile = playerPiles.getValue().get(0);
                             List<Permanent> secondPile = playerPiles.getValue().get(1);
-                            game.informPlayers(player.getLogName() + " chose " + chosenOpponent.getLogName() + " to choose his pile");
+                            game.informPlayers(player.getLogName() + " chose " + chosenOpponent.getLogName() + " to choose their pile");
                             if (chosenOpponent.choosePile(outcome, "Piles of " + player.getName(), firstPile, secondPile, game)) {
                                 List<List<Permanent>> lists = playerPiles.getValue();
                                 lists.clear();

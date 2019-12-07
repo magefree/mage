@@ -1177,7 +1177,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     @Override
     public boolean activateAbility(ActivatedAbility ability, Game game) {
-        if (!isTestMode()) { // Test player already sends target event as he selects the target
+        if (!isTestMode()) { // Test player already sends target event as they select the target
             for (Target target : ability.getModes().getMode().getTargets()) {
                 for (UUID targetId : target.getTargets()) {
                     game.fireEvent(GameEvent.getEvent(EventType.TARGETED, targetId, ability.getId(), ability.getControllerId()));

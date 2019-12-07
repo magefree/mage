@@ -1034,11 +1034,11 @@ public abstract class GameImpl implements Game, Serializable {
             message.append(choosingPlayer.getLogName()).append(" chooses that ");
         }
         if (choosingPlayer != null && choosingPlayer.getId().equals(startingPlayer.getId())) {
-            message.append("he or she");
+            message.append("they");
         } else {
             message.append(startingPlayer.getLogName());
         }
-        message.append(" takes the first turn");
+        message.append(" take the first turn");
 
         this.informPlayers(message.toString());
     }
@@ -1052,7 +1052,7 @@ public abstract class GameImpl implements Game, Serializable {
                 break;
             }
             if (!player.hasLost() && !player.hasLeft()) {
-                logger.debug(player.getName() + " has not lost so he won gameId: " + this.getId());
+                logger.debug(player.getName() + " has not lost so they won gameId: " + this.getId());
                 player.won(this);
                 winnerIdFound = player.getId();
                 break;
@@ -2428,7 +2428,7 @@ public abstract class GameImpl implements Game, Serializable {
      * exist. Then, if there are any objects still controlled by that player,
      * those objects are exiled. This is not a state-based action. It happens as
      * soon as the player leaves the game. If the player who left the game had
-     * priority at the time he or she left, priority passes to the next player
+     * priority at the time they left, priority passes to the next player
      * in turn order who's still in the game. #
      *
      * @param playerId

@@ -31,7 +31,7 @@ public final class SternJudge extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {tap}: Each player loses 1 life for each Swamp he or she controls.
+        // {tap}: Each player loses 1 life for each Swamp they control.
         this.addAbility(new SimpleActivatedAbility(new SternJudgeEffect(), new TapSourceCost()));
     }
 
@@ -55,7 +55,7 @@ class SternJudgeEffect extends OneShotEffect {
 
     SternJudgeEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Each player loses 1 life for each Swamp he or she controls.";
+        this.staticText = "Each player loses 1 life for each Swamp they control.";
     }
 
     SternJudgeEffect(final SternJudgeEffect effect) {

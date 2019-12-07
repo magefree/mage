@@ -14,7 +14,7 @@ public class CantCastTest extends CardTestPlayerBase {
 
     /**
      * I control Void Winnower. But my opponent can cast Jayemdae Tome (that's
-     * converted mana cost is even) He can cast other even spell. Test casting
+     * converted mana cost is even) They can cast other even spell. Test casting
      * cost 4
      */
     @Test

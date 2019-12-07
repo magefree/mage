@@ -25,7 +25,7 @@ public final class StenchOfEvil extends CardImpl {
     public StenchOfEvil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
 
-        // Destroy all Plains. For each land destroyed this way, Stench of Evil deals 1 damage to that land's controller unless he or she pays {2}.
+        // Destroy all Plains. For each land destroyed this way, Stench of Evil deals 1 damage to that land's controller unless they pay {2}.
         this.getSpellAbility().addEffect(new StenchOfEvilEffect());
 
     }
@@ -50,7 +50,7 @@ class StenchOfEvilEffect extends OneShotEffect {
 
     public StenchOfEvilEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Destroy all Plains. For each land destroyed this way, {this} deals 1 damage to that land's controller unless he or she pays {2}";
+        this.staticText = "Destroy all Plains. For each land destroyed this way, {this} deals 1 damage to that land's controller unless they pay {2}";
     }
 
     public StenchOfEvilEffect(final StenchOfEvilEffect effect) {

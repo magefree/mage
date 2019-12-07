@@ -41,7 +41,7 @@ public final class ChandraPyrogenius extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
-        // -10: Chandra, Pyrogenius deals 6 damage to target player and each creature he or she controls.
+        // -10: Chandra, Pyrogenius deals 6 damage to target player and each creature they control.
         Effects effects = new Effects();
         effects.add(new DamageTargetEffect(6));
         effects.add(new DamageAllControlledTargetEffect(6, new FilterCreaturePermanent())

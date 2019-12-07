@@ -22,7 +22,7 @@ public final class MisersCage extends CardImpl {
     public MisersCage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        // At the beginning of each opponent's upkeep, if that player has five or more cards in hand, Misers' Cage deals 2 damage to him or her.
+        // At the beginning of each opponent's upkeep, if that player has five or more cards in hand, Misers' Cage deals 2 damage to that player.
         this.addAbility(new MisersCageTriggeredAbility());
     }
 

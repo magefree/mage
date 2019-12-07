@@ -43,9 +43,9 @@ public final class ThelonsChant extends CardImpl {
         // At the beginning of your upkeep, sacrifice Thelon's Chant unless you pay {G}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{G}")), TargetController.YOU, false));
 
-        // Whenever a player puts a Swamp onto the battlefield, Thelon's Chant deals 3 damage to that player unless he or she puts a -1/-1 counter on a creature he or she controls.
+        // Whenever a player puts a Swamp onto the battlefield, Thelon's Chant deals 3 damage to that player unless they put a -1/-1 counter on a creature they control.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new ThelonsChantEffect(), filter, false, SetTargetPointer.PLAYER, 
-                "Whenever a player puts a Swamp onto the battlefield, {this} deals 3 damage to that player unless he or she puts a -1/-1 counter on a creature he or she controls."));
+                "Whenever a player puts a Swamp onto the battlefield, {this} deals 3 damage to that player unless they put a -1/-1 counter on a creature they control."));
     }
 
     public ThelonsChant(final ThelonsChant card) {
@@ -62,7 +62,7 @@ class ThelonsChantEffect extends OneShotEffect {
 
     public ThelonsChantEffect() {
         super(Outcome.Damage);
-        staticText = "{this} deals 3 damage to that player unless he or she puts a -1/-1 counter on a creature he or she controls";
+        staticText = "{this} deals 3 damage to that player unless they put a -1/-1 counter on a creature they control";
     }
 
     public ThelonsChantEffect(final ThelonsChantEffect effect) {

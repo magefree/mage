@@ -52,9 +52,9 @@ public class PhyrexianMetamorphTest extends CardTestPlayerBase {
      * An opponent cast Phyrexian Metamorph and cloned another opponent's
      * Maelstrom Wanderer(his Commander). The first opponent then dealt combat
      * damage with Brago, King Eternal and chose to flicker several permanents,
-     * including the Phyrexian Metamorph/Maelstrom Wanderer, but he was not able
-     * to choose a new creature to clone when the Phyrexian Metamorph re-entered
-     * the battlefield.
+     * including the Phyrexian Metamorph/Maelstrom Wanderer, but that player was
+     * not able to choose a new creature to clone when the Phyrexian Metamorph
+     * re-entered the battlefield.
      */
     @Test
     public void testFlickerWithBrago() {
@@ -182,7 +182,7 @@ public class PhyrexianMetamorphTest extends CardTestPlayerBase {
 
     /**
      * I cast Show and Tell, and put Sheoldred, Whispering One into play and my
-     * opponent put Phyrexian Metamorph into play and he was able to clone my
+     * opponent put Phyrexian Metamorph into play and they were able to clone my
      * Sheoldred, Whispering One.
      *
      * 6/1/2011 If Phyrexian Metamorph somehow enters the battlefield at the

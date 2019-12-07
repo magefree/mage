@@ -32,7 +32,7 @@ public final class RisingWaters extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
                 new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, StaticFilters.FILTER_LANDS)));
         
-        // At the beginning of each player's upkeep, that player untaps a land he or she controls.
+        // At the beginning of each player's upkeep, that player untaps a land they control.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new RisingWatersUntapEffect(), TargetController.ANY, false));
     }
 
@@ -50,7 +50,7 @@ class RisingWatersUntapEffect extends OneShotEffect {
 
     public RisingWatersUntapEffect() {
         super(Outcome.Untap);
-        this.staticText = "that player untaps a land he or she controls";
+        this.staticText = "that player untaps a land they control";
     }
 
     public RisingWatersUntapEffect(final RisingWatersUntapEffect effect) {

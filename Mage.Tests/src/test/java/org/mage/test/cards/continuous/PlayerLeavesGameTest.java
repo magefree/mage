@@ -18,7 +18,7 @@ public class PlayerLeavesGameTest extends CardTestMultiPlayerBaseWithRangeAll {
     which give that player control of any objects or players end. Then, if that player controlled any objects on the stack
     not represented by cards, those objects cease to exist. Then, if there are any objects still controlled by that player,
     those objects are exiled. This is not a state-based action. It happens as soon as the player leaves the game.
-    If the player who left the game had priority at the time he or she left, priority passes to the next player in turn
+    If the player who left the game had priority at the time they left, priority passes to the next player in turn
     order who’s still in the game.
      */
 

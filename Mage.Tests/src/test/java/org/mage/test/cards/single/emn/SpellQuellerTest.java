@@ -99,7 +99,7 @@ public class SpellQuellerTest extends CardTestPlayerBase {
     }
     
     /*
-     Reported bug: "...Spell Queller exiled my Nissa, Vastwood Seeker. Next turn he processed Nissa with Wasteland Strangler and killed my Tireless Tracker. 
+     Reported bug: "...Spell Queller exiled my Nissa, Vastwood Seeker. Next turn they processed Nissa with Wasteland Strangler and killed my Tireless Tracker. 
     I then cast Quarantine Field, targeting Spell Queller and Wasteland Strangler. That's when the error message occurred. (fatal exception)"
     */
     @Test

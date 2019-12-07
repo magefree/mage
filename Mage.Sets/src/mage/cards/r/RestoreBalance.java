@@ -34,7 +34,7 @@ public final class RestoreBalance extends CardImpl {
 
         // Suspend 6-{W}
         this.addAbility(new SuspendAbility(6, new ColoredManaCost(ColoredManaSymbol.W), this));
-        // Each player chooses a number of lands he or she controls equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players sacrifice creatures and discard cards the same way.
+        // Each player chooses a number of lands they control equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players sacrifice creatures and discard cards the same way.
         this.getSpellAbility().addEffect(new RestoreBalanceEffect());
     }
 
@@ -53,7 +53,7 @@ class RestoreBalanceEffect extends OneShotEffect {
 
     RestoreBalanceEffect() {
         super(Outcome.Sacrifice);
-        staticText = "Each player chooses a number of lands he or she controls equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players sacrifice creatures and discard cards the same way";
+        staticText = "Each player chooses a number of lands they control equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players sacrifice creatures and discard cards the same way";
     }
 
     RestoreBalanceEffect(final RestoreBalanceEffect effect) {

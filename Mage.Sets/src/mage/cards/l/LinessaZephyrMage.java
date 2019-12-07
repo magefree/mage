@@ -57,7 +57,7 @@ public final class LinessaZephyrMage extends CardImpl {
         ability.setTargetAdjuster(XCMCPermanentAdjuster.instance);
         this.addAbility(ability);
 
-        // Grandeur - Discard another card named Linessa, Zephyr Mage: Target player returns a creature he or she controls to its owner's hand, then repeats this process for an artifact, an enchantment, and a land.
+        // Grandeur - Discard another card named Linessa, Zephyr Mage: Target player returns a creature they control to its owner's hand, then repeats this process for an artifact, an enchantment, and a land.
         ability = new GrandeurAbility(new LinessaZephyrMageEffect(), "Linessa, Zephyr Mage");
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
@@ -77,7 +77,7 @@ class LinessaZephyrMageEffect extends OneShotEffect {
 
     LinessaZephyrMageEffect() {
         super(Outcome.ReturnToHand);
-        this.staticText = "Target player returns a creature he or she controls to its owner's hand, then repeats this process for an artifact, an enchantment, and a land";
+        this.staticText = "Target player returns a creature they control to its owner's hand, then repeats this process for an artifact, an enchantment, and a land";
     }
 
     LinessaZephyrMageEffect(final LinessaZephyrMageEffect effect) {
@@ -95,7 +95,7 @@ class LinessaZephyrMageEffect extends OneShotEffect {
         if (controller != null) {
             Player targetPlayer = game.getPlayer(source.getFirstTarget());
             if (targetPlayer != null) {
-                // Target player returns a creature he or she controls to its owner's hand,
+                // Target player returns a creature they control to its owner's hand,
                 Target target = new TargetControlledCreaturePermanent();
                 target.setNotTarget(true);
                 if (target.choose(Outcome.ReturnToHand, targetPlayer.getId(), source.getSourceId(), game)) {

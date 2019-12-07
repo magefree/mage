@@ -22,7 +22,7 @@ public final class LavaBlister extends CardImpl {
     public LavaBlister(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}");
 
-        // Destroy target nonbasic land unless its controller has Lava Blister deal 6 damage to him or her.
+        // Destroy target nonbasic land unless its controller has Lava Blister deal 6 damage to them.
         this.getSpellAbility().addTarget(new TargetNonBasicLandPermanent());
         this.getSpellAbility().addEffect(new LavaBlisterEffect());
     }
@@ -41,7 +41,7 @@ class LavaBlisterEffect extends OneShotEffect {
 
     public LavaBlisterEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Destroy target nonbasic land unless its controller has {this} deal 6 damage to him or her";
+        this.staticText = "Destroy target nonbasic land unless its controller has {this} deal 6 damage to them";
     }
 
     public LavaBlisterEffect(final LavaBlisterEffect effect) {

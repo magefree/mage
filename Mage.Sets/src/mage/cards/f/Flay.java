@@ -20,10 +20,10 @@ public final class Flay extends CardImpl {
     public Flay(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");
 
-        // Target player discards a card at random. Then that player discards another card at random unless he or she pays {1}.
+        // Target player discards a card at random. Then that player discards another card at random unless they pay {1}.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(1, true));
         Effect effect = new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new DiscardTargetEffect(1, true), new ManaCostsImpl("{1}"));
-        effect.setText("Then that player discards another card at random unless he or she pays {1}");
+        effect.setText("Then that player discards another card at random unless they pay {1}");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetPlayer());
     }

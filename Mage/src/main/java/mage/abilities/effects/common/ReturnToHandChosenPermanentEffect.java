@@ -65,7 +65,7 @@ public class ReturnToHandChosenPermanentEffect extends OneShotEffect {
             sb.append(CardUtil.numberToText(number, "a"));
         }
         sb.append(' ').append(filter.getMessage());
-        sb.append(" he or she controls");
+        sb.append(" they control");
         if (number > 1) {
             sb.append(" to their owner's hand");
         } else {

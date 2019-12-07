@@ -46,7 +46,7 @@ public final class PsychicAllergy extends CardImpl {
         // As Psychic Allergy enters the battlefield, choose a color.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Damage)));
 
-        // At the beginning of each opponent's upkeep, Psychic Allergy deals X damage to that player, where X is the number of nontoken permanents of the chosen color he or she controls.
+        // At the beginning of each opponent's upkeep, Psychic Allergy deals X damage to that player, where X is the number of nontoken permanents of the chosen color they control.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new PsychicAllergyEffect(), TargetController.OPPONENT, false));
 
         // At the beginning of your upkeep, destroy Psychic Allergy unless you sacrifice two Islands.
@@ -71,7 +71,7 @@ class PsychicAllergyEffect extends OneShotEffect {
     
     public PsychicAllergyEffect() {
         super(Outcome.Damage);
-        this.staticText = "{this} deals X damage to that player, where X is the number of nontoken permanents of the chosen color he or she controls";
+        this.staticText = "{this} deals X damage to that player, where X is the number of nontoken permanents of the chosen color they control";
     }
     
     public PsychicAllergyEffect(PsychicAllergyEffect copy) {

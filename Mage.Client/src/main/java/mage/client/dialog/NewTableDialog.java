@@ -187,7 +187,7 @@ public class NewTableDialog extends MageDialog {
         lbDeckType.setText("Deck Type:");
 
         lbTimeLimit.setText("Time Limit:");
-        lbTimeLimit.setToolTipText("The active time a player may use to finish the match. If his or her time runs out, the player looses the current game.");
+        lbTimeLimit.setToolTipText("The active time a player may use to finish the match. If their time runs out, the player looses the current game.");
 
         lblGameType.setText("Game Type:");
 

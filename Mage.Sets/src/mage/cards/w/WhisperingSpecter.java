@@ -51,7 +51,7 @@ public final class WhisperingSpecter extends CardImpl {
 class WhisperingSpecterEffect extends OneShotEffect {
     WhisperingSpecterEffect() {
         super(Outcome.Discard);
-        staticText = "If you do, that player discards a card for each poison counter he or she has";
+        staticText = "If you do, that player discards a card for each poison counter they have";
     }
 
     WhisperingSpecterEffect(final WhisperingSpecterEffect effect) {

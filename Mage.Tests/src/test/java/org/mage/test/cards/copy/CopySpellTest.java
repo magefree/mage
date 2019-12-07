@@ -14,7 +14,7 @@ public class CopySpellTest extends CardTestPlayerBase {
 
     @Test
     public void copyChainOfVapor() {
-        // Return target nonland permanent to its owner's hand. Then that permanent's controller may sacrifice a land. If the player does, he or she may copy this spell and may choose a new target for that copy.
+        // Return target nonland permanent to its owner's hand. Then that permanent's controller may sacrifice a land. If the player does, they may copy this spell and may choose a new target for that copy.
         addCard(Zone.HAND, playerA, "Chain of Vapor", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 10);
 
@@ -157,14 +157,14 @@ public class CopySpellTest extends CardTestPlayerBase {
      * spell.” Paying a card's splice cost follows the rules for paying
      * additional costs in rules 601.2b and 601.2e–g. 601.2b If the spell is
      * modal the player announces the mode choice (see rule 700.2). If the
-     * player wishes to splice any cards onto the spell (see rule 702.46), he or
-     * she reveals those cards in their hand. 706.10. To copy a spell,
-     * activated ability, or triggered ability means to put a copy of it onto
-     * the stack; a copy of a spell isn't cast and a copy of an activated
-     * ability isn't activated. A copy of a spell or ability copies both the
-     * characteristics of the spell or ability and all decisions made for it,
-     * including modes, targets, the value of X, and additional or alternative
-     * costs. (See rule 601, “Casting Spells.”)
+     * player wishes to splice any cards onto the spell (see rule 702.46), they
+     * reveal those cards in their hand. 706.10. To copy a spell, activated
+     * ability, or triggered ability means to put a copy of it onto the stack;
+     * a copy of a spell isn't cast and a copy of an activated ability isn't
+     * activated. A copy of a spell or ability copies both the characteristics
+     * of the spell or ability and all decisions made for it, including modes,
+     * targets, the value of X, and additional or alternative costs.
+     * (See rule 601, “Casting Spells.”)
      */
     @Test
     public void ZadaHedronGrinderAndSplicedSpell() {
@@ -197,7 +197,7 @@ public class CopySpellTest extends CardTestPlayerBase {
     /**
      * {4}{U} Enchantment (Enchant Player) Whenever enchanted player casts an
      * instant or sorcery spell, each other player may copy that spell and may
-     * choose new targets for the copy he or she controls.
+     * choose new targets for the copy they control.
      * <p>
      * Reported bug: "A player with Curse of Echoes attached to them played
      * Bribery and the player who controlled the curse had control of all 3

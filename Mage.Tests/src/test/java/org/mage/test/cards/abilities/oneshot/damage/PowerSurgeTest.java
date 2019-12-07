@@ -15,7 +15,7 @@ public class PowerSurgeTest extends CardTestPlayerBase {
     @Test
     public void testDamageInPlayer() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
-        // At the beginning of each player's upkeep, Power Surge deals X damage to that player, where X is the number of untapped lands he or she controlled at the beginning of this turn.
+        // At the beginning of each player's upkeep, Power Surge deals X damage to that player, where X is the number of untapped lands they controlled at the beginning of this turn.
         addCard(Zone.HAND, playerA, "Power Surge");
 
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 3);

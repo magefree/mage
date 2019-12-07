@@ -29,7 +29,7 @@ public final class TyrantOfDiscord extends CardImpl {
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 
-        // When Tyrant of Discord enters the battlefield, target opponent chooses a permanent he or she controls at random and sacrifices it. If a nonland permanent is sacrificed this way, repeat this process.
+        // When Tyrant of Discord enters the battlefield, target opponent chooses a permanent they control at random and sacrifices it. If a nonland permanent is sacrificed this way, repeat this process.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TyrantOfDiscordEffect());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
@@ -49,7 +49,7 @@ class TyrantOfDiscordEffect extends OneShotEffect {
 
     public TyrantOfDiscordEffect() {
         super(Outcome.Benefit);
-        this.staticText = "target opponent chooses a permanent he or she controls at random and sacrifices it. If a nonland permanent is sacrificed this way, repeat this process";
+        this.staticText = "target opponent chooses a permanent they control at random and sacrifices it. If a nonland permanent is sacrificed this way, repeat this process";
     }
 
     public TyrantOfDiscordEffect(final TyrantOfDiscordEffect effect) {

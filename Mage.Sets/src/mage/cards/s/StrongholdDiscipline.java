@@ -21,7 +21,7 @@ public final class StrongholdDiscipline extends CardImpl {
     public StrongholdDiscipline(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
 
-        // Each player loses 1 life for each creature he or she controls.
+        // Each player loses 1 life for each creature they control.
         this.getSpellAbility().addEffect(new StrongholdDisciplineEffect());
     }
 
@@ -39,7 +39,7 @@ class StrongholdDisciplineEffect extends OneShotEffect {
 
     StrongholdDisciplineEffect() {
         super(Outcome.Sacrifice);
-        this.staticText = "Each player loses 1 life for each creature he or she controls";
+        this.staticText = "Each player loses 1 life for each creature they control";
     }
 
     StrongholdDisciplineEffect(final StrongholdDisciplineEffect effect) {

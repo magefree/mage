@@ -39,7 +39,7 @@ public class ParallaxWaveTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
         // Fading 5 (This enchantment enters the battlefield with five fade counters on it. At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it.)
         // Remove a fade counter from Parallax Wave: Exile target creature.
-        // When Parallax Wave leaves the battlefield, each player returns to the battlefield all cards he or she owns exiled with Parallax Wave.
+        // When Parallax Wave leaves the battlefield, each player returns to the battlefield all cards they own exiled with Parallax Wave.
         addCard(Zone.HAND, playerA, "Parallax Wave");
 
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);

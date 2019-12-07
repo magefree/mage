@@ -171,7 +171,7 @@ public class SacrificeOpponentsUnlessPayEffect extends OneShotEffect {
         sb.append(' ');
         sb.append(filter.getMessage());
 
-        sb.append(" unless he or she pays ");
+        sb.append(" unless they pay ");
 
         if (cost != null) {
             sb.append(cost.getText());

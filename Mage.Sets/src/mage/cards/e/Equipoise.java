@@ -32,7 +32,7 @@ public final class Equipoise extends CardImpl {
     public Equipoise(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 
-        // At the beginning of your upkeep, for each land target player controls in excess of the number you control, choose a land he or she controls, then the chosen permanents phase out. Repeat this process for artifacts and creatures.
+        // At the beginning of your upkeep, for each land target player controls in excess of the number you control, choose a land they control, then the chosen permanents phase out. Repeat this process for artifacts and creatures.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new EquipoiseEffect(), TargetController.YOU, false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
@@ -52,7 +52,7 @@ class EquipoiseEffect extends OneShotEffect {
 
     public EquipoiseEffect() {
         super(Outcome.Benefit);
-        this.staticText = "for each land target player controls in excess of the number you control, choose a land he or she controls, then the chosen permanents phase out. Repeat this process for artifacts and creatures";
+        this.staticText = "for each land target player controls in excess of the number you control, choose a land they control, then the chosen permanents phase out. Repeat this process for artifacts and creatures";
     }
 
     public EquipoiseEffect(final EquipoiseEffect effect) {

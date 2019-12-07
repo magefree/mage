@@ -187,7 +187,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 effects.add(new mage.cards.j.JaceArchitectOfThought(controller.getId(), setInfo).getAbilities().get(2).getEffects().get(0));
                                 break;
                             case 11: // KARN LIBERATED 1
-                                sb.append("Target player exiles a card from his or her hand.");
+                                sb.append("Target player exiles a card from their hand.");
                                 effects.add(new ExileFromZoneTargetEffect(Zone.HAND, null, "", new FilterCard()));
                                 target = new TargetPlayer();
                                 break;
@@ -270,7 +270,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 effects.add(new UrzaAcademyHeadmasterBrainstormEffect());
                                 break;
                             case 8: // JACE MEMORY ADEPT 2
-                                sb.append("Target player puts the top ten cards of his or her library into his or her graveyard.");
+                                sb.append("Target player puts the top ten cards of their library into their graveyard.");
                                 effects.add(new PutLibraryIntoGraveTargetEffect(10));
                                 target = new TargetPlayer();
                                 break;
@@ -360,7 +360,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 effects.add(new GainLifeEffect(100));
                                 break;
                             case 6: // CHANDRA NALAAR 3
-                                sb.append("Urza deals 10 damage to target player and each creature he or she controls.");
+                                sb.append("Urza deals 10 damage to target player and each creature they control.");
                                 effects.add(new DamageTargetEffect(10));
                                 effects.add(new DamageAllControlledTargetEffect(10, new FilterCreaturePermanent()));
                                 target = new TargetPlayerOrPlaneswalker();
@@ -378,7 +378,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 effects.add(new CreateTokenEffect(new WurmToken(), new PermanentsOnBattlefieldCount(new FilterControlledLandPermanent())));
                                 break;
                             case 10: // JACE THE LIVING GUILDPACT 3
-                                sb.append("Each player shuffles his or her hand and graveyard into his or her library. You draw seven cards.");
+                                sb.append("Each player shuffles their hand and graveyard into their library. You draw seven cards.");
                                 effects.add(new ShuffleHandGraveyardAllEffect());
                                 effects.add(new DrawCardSourceControllerEffect(7));
                                 break;
@@ -402,7 +402,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 target = new TargetPlayer();
                                 break;
                             case 15: // JACE THE MIND SCULPTOR 4
-                                sb.append("Exile all cards from target player’s library, then that player shuffles his or her hand into his or her library.");
+                                sb.append("Exile all cards from target player’s library, then that player shuffles their hand into their library.");
                                 effects.add(new mage.cards.j.JaceTheMindSculptor(controller.getId(), setInfo).getAbilities().get(5).getEffects().get(0));
                                 target = new TargetPlayer();
                                 break;

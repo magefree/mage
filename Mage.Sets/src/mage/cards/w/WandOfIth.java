@@ -31,7 +31,7 @@ public final class WandOfIth extends CardImpl {
     public WandOfIth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
-        // {3}, {T}: Target player reveals a card at random from their hand. If it's a land card, that player discards it unless he or she pays 1 life. If it isn't a land card, the player discards it unless he or she pays life equal to its converted mana cost. Activate this ability only during your turn.
+        // {3}, {T}: Target player reveals a card at random from their hand. If it's a land card, that player discards it unless they pay 1 life. If it isn't a land card, the player discards it unless they pay life equal to its converted mana cost. Activate this ability only during your turn.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new WandOfIthEffect(), new GenericManaCost(3), MyTurnCondition.instance);
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
@@ -52,7 +52,7 @@ class WandOfIthEffect extends OneShotEffect {
 
     public WandOfIthEffect() {
         super(Outcome.Discard);
-        staticText = "Target player reveals a card at random from their hand. If it's a land card, that player discards it unless he or she pays 1 life. If it isn't a land card, the player discards it unless he or she pays life equal to its converted mana cost";
+        staticText = "Target player reveals a card at random from their hand. If it's a land card, that player discards it unless they pay 1 life. If it isn't a land card, the player discards it unless they pay life equal to its converted mana cost";
     }
 
     public WandOfIthEffect(final WandOfIthEffect effect) {

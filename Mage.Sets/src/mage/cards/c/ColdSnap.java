@@ -28,7 +28,7 @@ public final class ColdSnap extends CardImpl {
         // Cumulative upkeep {2}
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{2}")));
         
-        // At the beginning of each player's upkeep, Cold Snap deals damage to that player equal to the number of snow lands he or she controls.
+        // At the beginning of each player's upkeep, Cold Snap deals damage to that player equal to the number of snow lands they control.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ColdSnapDamageTargetEffect(), TargetController.ANY, false, true));
     }
 
@@ -62,7 +62,7 @@ class ColdSnapDamageTargetEffect extends OneShotEffect{
         
     @Override
     public String getText(Mode mode) {
-        return "{this} deals damage to that player equal to the number of snow lands he or she controls";
+        return "{this} deals damage to that player equal to the number of snow lands they control";
     }
 
     @Override

@@ -33,7 +33,7 @@ public final class Epicenter extends CardImpl {
                 new InvertCondition(new CardsInControllerGraveCondition(7)),
                 "Target player sacrifices a land"
         ));
-        // Threshold - Each player sacrifices all lands he or she controls instead if seven or more cards are in your graveyard.
+        // Threshold - Each player sacrifices all lands they control instead if seven or more cards are in your graveyard.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new EpicenterEffect(),
                 new CardsInControllerGraveCondition(7),

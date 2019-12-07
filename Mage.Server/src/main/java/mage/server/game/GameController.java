@@ -235,7 +235,7 @@ public class GameController implements GameCallback {
 
     /**
      * We create a timer that will run every 250 ms individually for a player
-     * decreasing his internal game counter. Later on this counter is used to
+     * decreasing their internal game counter. Later on this counter is used to
      * get time left to play the whole match.
      * <p>
      * What we also do here is passing Action to PriorityTimer that is the

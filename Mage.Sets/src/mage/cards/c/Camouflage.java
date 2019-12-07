@@ -41,7 +41,7 @@ public final class Camouflage extends CardImpl {
         // Cast Camouflage only during your declare attackers step.
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, PhaseStep.DECLARE_ATTACKERS, MyTurnCondition.instance, "Cast this spell only during your declare attackers step"));
 
-        // This turn, instead of declaring blockers, each defending player chooses any number of creatures he or she controls and divides them into a number of piles equal to the number of attacking creatures for whom that player is the defending player. Creatures he or she controls that can block additional creatures may likewise be put into additional piles. Assign each pile to a different one of those attacking creatures at random. Each creature in a pile that can block the creature that pile is assigned to does so. (Piles can be empty.)
+        // This turn, instead of declaring blockers, each defending player chooses any number of creatures they control and divides them into a number of piles equal to the number of attacking creatures for whom that player is the defending player. Creatures they control that can block additional creatures may likewise be put into additional piles. Assign each pile to a different one of those attacking creatures at random. Each creature in a pile that can block the creature that pile is assigned to does so. (Piles can be empty.)
         this.getSpellAbility().addEffect(new CamouflageEffect());
     }
 
@@ -59,7 +59,7 @@ class CamouflageEffect extends ContinuousRuleModifyingEffectImpl {
 
     public CamouflageEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit, false, false);
-        staticText = "This turn, instead of declaring blockers, each defending player chooses any number of creatures he or she controls and divides them into a number of piles equal to the number of attacking creatures for whom that player is the defending player. Creatures he or she controls that can block additional creatures may likewise be put into additional piles. Assign each pile to a different one of those attacking creatures at random. Each creature in a pile that can block the creature that pile is assigned to does so";
+        staticText = "This turn, instead of declaring blockers, each defending player chooses any number of creatures they control and divides them into a number of piles equal to the number of attacking creatures for whom that player is the defending player. Creatures they control that can block additional creatures may likewise be put into additional piles. Assign each pile to a different one of those attacking creatures at random. Each creature in a pile that can block the creature that pile is assigned to does so";
     }
 
     public CamouflageEffect(final CamouflageEffect effect) {
@@ -81,7 +81,7 @@ class CamouflageEffect extends ContinuousRuleModifyingEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Map<UUID, List<List<Permanent>>> masterMap = new HashMap<>();
-            // Each defending player chooses any number of creatures he or she controls
+            // Each defending player chooses any number of creatures they control
             // and divides them into a number of piles equal to the number of attacking creatures for whom that player is the defending player (piles can be empty)
             for (UUID defenderId : game.getCombat().getPlayerDefenders(game)) {
                 Player defender = game.getPlayer(defenderId);
@@ -104,7 +104,7 @@ class CamouflageEffect extends ContinuousRuleModifyingEffectImpl {
                         if (!declinedChoice) {
                             FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control not yet assigned to a pile");
                             for (List<Permanent> list : masterList) {
-                                // Creatures he or she controls that can block additional creatures may likewise be put into additional piles.
+                                // Creatures they control that can block additional creatures may likewise be put into additional piles.
                                 // (This temporarily manipulates Blocking values to "test" how many blockers the creature has still left to assign)
                                 List<Permanent> spentBlockers = new ArrayList<>();
                                 for (Permanent possibleBlocker : list) {

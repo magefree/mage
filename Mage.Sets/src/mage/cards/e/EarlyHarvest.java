@@ -25,7 +25,7 @@ public final class EarlyHarvest extends CardImpl {
     public EarlyHarvest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}{G}");
 
-        // Target player untaps all basic lands he or she controls.
+        // Target player untaps all basic lands they control.
         this.getSpellAbility().addEffect(new UntapAllLandsTargetEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
@@ -49,7 +49,7 @@ class UntapAllLandsTargetEffect extends OneShotEffect {
     
     public UntapAllLandsTargetEffect() {
         super(Outcome.Untap);
-        staticText = "Target player untaps all basic lands he or she controls";
+        staticText = "Target player untaps all basic lands they control";
     }
 
     public UntapAllLandsTargetEffect(final UntapAllLandsTargetEffect effect) {

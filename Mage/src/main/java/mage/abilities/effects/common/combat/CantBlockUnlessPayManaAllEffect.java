@@ -34,7 +34,7 @@ public class CantBlockUnlessPayManaAllEffect extends PayCostToAttackBlockEffectI
                 + " can't block "
                 + "unless their controller pays "
                 + (manaCosts == null ? "" : manaCosts.getText())
-                + " for each blocking creature he or she controls";
+                + " for each blocking creature they control";
     }
 
     public CantBlockUnlessPayManaAllEffect(CantBlockUnlessPayManaAllEffect effect) {

@@ -32,7 +32,7 @@ public final class OathOfLieges extends CardImpl {
     public OathOfLieges(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 
-        // At the beginning of each player's upkeep, that player chooses target player who controls more lands than he or she does and is their opponent. The first player may search their library for a basic land card, put that card onto the battlefield, then shuffle their library.
+        // At the beginning of each player's upkeep, that player chooses target player who controls more lands than they do and is their opponent. The first player may search their library for a basic land card, put that card onto the battlefield, then shuffle their library.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new OathOfLiegesEffect(), TargetController.ANY, false);
         ability.setTargetAdjuster(OathOfLiegesAdjuster.instance);
         this.addAbility(ability);
@@ -72,7 +72,7 @@ class OathOfLiegesEffect extends OneShotEffect {
 
     public OathOfLiegesEffect() {
         super(Outcome.Benefit);
-        this.staticText = "that player chooses target player who controls more lands than he or she does and is their opponent. "
+        this.staticText = "that player chooses target player who controls more lands than they do and is their opponent. "
                 + "The first player may search their library for a basic land card, put that card onto the battlefield, then shuffle their library";
     }
 
@@ -122,6 +122,6 @@ class OathOfLiegesPredicate implements ObjectSourcePlayerPredicate<ObjectSourceP
 
     @Override
     public String toString() {
-        return "player who controls more lands than he or she does and is their opponent";
+        return "player who controls more lands than they do and is their opponent";
     }
 }

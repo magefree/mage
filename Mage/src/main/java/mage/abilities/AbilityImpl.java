@@ -314,12 +314,12 @@ public abstract class AbilityImpl implements Ability {
             // each target the spell requires. A spell may require some targets only if an alternative or
             // additional cost (such as a buyback or kicker cost), or a particular mode, was chosen for it;
             // otherwise, the spell is cast as though it did not require those targets. If the spell has a
-            // variable number of targets, the player announces how many targets he or she will choose before
-            // he or she announces those targets. The same target can't be chosen multiple times for any one
+            // variable number of targets, the player announces how many targets they will choose before
+            // they announce those targets. The same target can't be chosen multiple times for any one
             // instance of the word "target" on the spell. However, if the spell uses the word "target" in
             // multiple places, the same object, player, or zone can be chosen once for each instance of the
             // word "target" (as long as it fits the targeting criteria). If any effects say that an object
-            // or player must be chosen as a target, the player chooses targets so that he or she obeys the
+            // or player must be chosen as a target, the player chooses targets so that they obey the
             // maximum possible number of such effects without violating any rules or effects that say that
             // an object or player can't be chosen as a target. The chosen players, objects, and/or zones
             // each become a target of that spell. (Any abilities that trigger when those players, objects,
@@ -542,7 +542,7 @@ public abstract class AbilityImpl implements Ability {
 
     /**
      * 601.2b If a cost that will be paid as the spell is being cast includes
-     * Phyrexian mana symbols, the player announces whether he or she intends to
+     * Phyrexian mana symbols, the player announces whether they intend to
      * pay 2 life or the corresponding colored mana cost for each of those
      * symbols.
      */

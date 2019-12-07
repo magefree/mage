@@ -63,7 +63,7 @@ public final class HeraldOfLeshrac extends CardImpl {
         // Herald of Leshrac gets +1/+1 for each land you control but don't own.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter), new PermanentsOnBattlefieldCount(filter), Duration.WhileOnBattlefield)));
 
-        // When Herald of Leshrac leaves the battlefield, each player gains control of each land he or she owns that you control.
+        // When Herald of Leshrac leaves the battlefield, each player gains control of each land they own that you control.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new HeraldOfLeshracLeavesEffect(), false));
     }
 
@@ -120,7 +120,7 @@ class HeraldOfLeshracLeavesEffect extends OneShotEffect {
 
     HeraldOfLeshracLeavesEffect() {
         super(Outcome.Detriment);
-        this.staticText = "each player gains control of each land he or she owns that you control";
+        this.staticText = "each player gains control of each land they own that you control";
     }
 
     HeraldOfLeshracLeavesEffect(final HeraldOfLeshracLeavesEffect effect) {

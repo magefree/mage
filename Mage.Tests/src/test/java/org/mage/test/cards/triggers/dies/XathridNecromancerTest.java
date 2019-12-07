@@ -16,7 +16,7 @@ public class XathridNecromancerTest extends CardTestPlayerBase {
     /**
      * My opponent had 2 Human Tokens from Gather the Townsfolk and a Xathrid Necromancer.
      * ( Whenever Xathrid Necromancer or another Human creature you control dies, put a 2/2 black Zombie creature token onto the battlefield tapped. )
-     * All 3 of them died in combat but he only got 1 Zombie token.
+     * All 3 of them died in combat but they only got 1 Zombie token.
      * There was no first strike damage involved.
      * 
      */

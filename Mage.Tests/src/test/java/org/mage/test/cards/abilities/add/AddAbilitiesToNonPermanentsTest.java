@@ -24,7 +24,7 @@ public class AddAbilitiesToNonPermanentsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
         // Flash
         // Creature cards you own that aren't on the battlefield have flash.
-        // Each opponent can cast spells only any time he or she could cast a sorcery.        
+        // Each opponent can cast spells only any time they could cast a sorcery.        
         addCard(Zone.BATTLEFIELD, playerA, "Teferi, Mage of Zhalfir");
 
         // Search your library for an instant card or a card with flash, reveal it, and put it into your hand. Then shuffle your library.

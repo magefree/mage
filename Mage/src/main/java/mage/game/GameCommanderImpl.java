@@ -102,9 +102,9 @@ public abstract class GameCommanderImpl extends GameImpl {
     //20130711
     /*903.8. The Commander variant uses an alternate mulligan rule.
      * Each time a player takes a mulligan, rather than shuffling their entire hand of cards into their library, that player exiles any number of cards from their hand face down.
-     * Then the player draws a number of cards equal to one less than the number of cards he or she exiled this way.
+     * Then the player draws a number of cards equal to one less than the number of cards they exiled this way.
      * That player may look at all cards exiled this way while taking mulligans.
-     * Once a player keeps an opening hand, that player shuffles all cards he or she exiled this way into their library.
+     * Once a player keeps an opening hand, that player shuffles all cards they exiled this way into their library.
      * */
     //TODO implement may look at exile cards
     @Override
