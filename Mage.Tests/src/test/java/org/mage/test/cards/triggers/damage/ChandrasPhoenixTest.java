@@ -44,7 +44,7 @@ public class ChandrasPhoenixTest extends CardTestPlayerBase {
 
         // +1: Chandra Nalaar deals 1 damage to target player.
         // -X: Chandra Nalaar deals X damage to target creature.
-        // -8: Chandra Nalaar deals 10 damage to target player and each creature he or she controls.
+        // -8: Chandra Nalaar deals 10 damage to target player and each creature they control.
         addCard(Zone.BATTLEFIELD, playerA, "Chandra Nalaar", 1);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1", playerB);

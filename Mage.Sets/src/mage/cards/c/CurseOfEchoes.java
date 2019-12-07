@@ -41,7 +41,7 @@ public final class CurseOfEchoes extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Damage));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
-        // Whenever enchanted player casts an instant or sorcery spell, each other player may copy that spell and may choose new targets for the copy he or she controls.
+        // Whenever enchanted player casts an instant or sorcery spell, each other player may copy that spell and may choose new targets for the copy they control.
         this.addAbility(new CurseOfEchoesCopyTriggeredAbility());
     }
 
@@ -101,7 +101,7 @@ class CurseOfEchoesCopyTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever enchanted player casts an instant or sorcery spell, each other player may copy that spell and may choose new targets for the copy he or she controls.";
+        return "Whenever enchanted player casts an instant or sorcery spell, each other player may copy that spell and may choose new targets for the copy they control.";
     }
 }
 

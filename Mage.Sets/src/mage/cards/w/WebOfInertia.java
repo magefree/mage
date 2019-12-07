@@ -26,7 +26,7 @@ public final class WebOfInertia extends CardImpl {
     public WebOfInertia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
-        // At the beginning of combat on each opponent's turn, that player may exile a card from their graveyard. If the player doesn't, creatures he or she controls can't attack you this turn.
+        // At the beginning of combat on each opponent's turn, that player may exile a card from their graveyard. If the player doesn't, creatures they control can't attack you this turn.
         this.addAbility(new BeginningOfCombatTriggeredAbility(Zone.BATTLEFIELD, new WebOfInertiaEffect(), TargetController.OPPONENT, false, true));
     }
 
@@ -44,7 +44,7 @@ class WebOfInertiaEffect extends OneShotEffect {
 
     public WebOfInertiaEffect() {
         super(Outcome.Detriment);
-        staticText = "that player may exile a card from their graveyard. If the player doesn't, creatures he or she controls can't attack you this turn";
+        staticText = "that player may exile a card from their graveyard. If the player doesn't, creatures they control can't attack you this turn";
     }
 
     public WebOfInertiaEffect(final WebOfInertiaEffect effect) {

@@ -34,7 +34,7 @@ public final class Tariff extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");
 
 
-        // Each player sacrifices the creature he or she controls with the highest converted mana cost unless he or she pays that creature's mana cost. If two or more creatures a player controls are tied for highest cost, that player chooses one.
+        // Each player sacrifices the creature they control with the highest converted mana cost unless they pay that creature's mana cost. If two or more creatures a player controls are tied for highest cost, that player chooses one.
         this.getSpellAbility().addEffect(new TariffEffect());
     }
 
@@ -52,7 +52,7 @@ class TariffEffect extends OneShotEffect {
     
     public TariffEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Each player sacrifices the creature he or she controls with the highest converted mana cost unless he or she pays that creature's mana cost. If two or more creatures a player controls are tied for highest cost, that player chooses one.";
+        this.staticText = "Each player sacrifices the creature they control with the highest converted mana cost unless they pay that creature's mana cost. If two or more creatures a player controls are tied for highest cost, that player chooses one.";
     }
     
     public TariffEffect(final TariffEffect effect) {

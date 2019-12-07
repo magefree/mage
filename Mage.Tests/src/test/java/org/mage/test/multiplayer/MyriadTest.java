@@ -35,7 +35,7 @@ public class MyriadTest extends CardTestMultiPlayerBase {
     @Test
     public void CallerOfThePackTest() {
         // Trample
-        // Myriad (Whenever this creature attacks, for each opponent other than the defending player, put a token that's a copy of this creature onto the battlefield tapped and attacking that player or a planeswalker he or she controls. Exile those tokens at the end of combat.)
+        // Myriad (Whenever this creature attacks, for each opponent other than the defending player, put a token that's a copy of this creature onto the battlefield tapped and attacking that player or a planeswalker they control. Exile those tokens at the end of combat.)
         addCard(Zone.BATTLEFIELD, playerD, "Caller of the Pack"); // 8/6
 
         attack(2, playerD, "Caller of the Pack", playerA);
@@ -49,7 +49,7 @@ public class MyriadTest extends CardTestMultiPlayerBase {
     @Test
     public void CallerOfThePackTestExile() {
         // Trample
-        // Myriad (Whenever this creature attacks, for each opponent other than the defending player, put a token that's a copy of this creature onto the battlefield tapped and attacking that player or a planeswalker he or she controls. Exile those tokens at the end of combat.)
+        // Myriad (Whenever this creature attacks, for each opponent other than the defending player, put a token that's a copy of this creature onto the battlefield tapped and attacking that player or a planeswalker they control. Exile those tokens at the end of combat.)
         addCard(Zone.BATTLEFIELD, playerD, "Caller of the Pack"); // 8/6
 
         attack(2, playerD, "Caller of the Pack", playerA);
@@ -69,7 +69,7 @@ public class MyriadTest extends CardTestMultiPlayerBase {
     @Test
     public void CallerOfThePackTestExilePlaneswalker() {
         // Trample
-        // Myriad (Whenever this creature attacks, for each opponent other than the defending player, put a token that's a copy of this creature onto the battlefield tapped and attacking that player or a planeswalker he or she controls. Exile those tokens at the end of combat.)
+        // Myriad (Whenever this creature attacks, for each opponent other than the defending player, put a token that's a copy of this creature onto the battlefield tapped and attacking that player or a planeswalker they control. Exile those tokens at the end of combat.)
         addCard(Zone.BATTLEFIELD, playerD, "Caller of the Pack"); // 8/6
 
         // turns: A, D, C, B
@@ -113,7 +113,7 @@ public class MyriadTest extends CardTestMultiPlayerBase {
 
         // Equipped creature has myriad.(Whenever this creature attacks, for each opponent other than the defending player,
         // put a token that's a copy of this creature onto the battlefield tapped and attacking that player or a planeswalker
-        // he or she controls. Exile those tokens at the end of combat.)
+        // they control. Exile those tokens at the end of combat.)
         // Equip {4}
         addCard(Zone.BATTLEFIELD, playerD, "Blade of Selves");
         addCard(Zone.BATTLEFIELD, playerD, "Island", 4);

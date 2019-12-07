@@ -40,7 +40,7 @@ public class DrawEffectsTest extends CardTestPlayerBase {
     public void testNotionThief() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
         // Flash
-        // If an opponent would draw a card except the first one he or she draws in each of their draw steps, instead that player skips that draw and you draw a card.
+        // If an opponent would draw a card except the first one they draw in each of their draw steps, instead that player skips that draw and you draw a card.
         addCard(Zone.BATTLEFIELD, playerA, "Notion Thief", 1);
 
         // Target player draws four cards.
@@ -66,7 +66,7 @@ public class DrawEffectsTest extends CardTestPlayerBase {
         skipInitShuffling();
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
         // Flash
-        // If an opponent would draw a card except the first one he or she draws in each of their draw steps, instead that player skips that draw and you draw a card.
+        // If an opponent would draw a card except the first one they draw in each of their draw steps, instead that player skips that draw and you draw a card.
         addCard(Zone.BATTLEFIELD, playerA, "Notion Thief", 1);
         // Each player discards their hand, then draws seven cards.
         // Miracle {1}{R}

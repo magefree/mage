@@ -23,7 +23,7 @@ public final class RishadanFootpad extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // When Rishadan Footpad enters the battlefield, each opponent sacrifices a permanent unless he or she pays {2}.
+        // When Rishadan Footpad enters the battlefield, each opponent sacrifices a permanent unless they pay {2}.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeOpponentsUnlessPayEffect(2)));
     }
 

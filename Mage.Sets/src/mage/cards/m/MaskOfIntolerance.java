@@ -26,10 +26,10 @@ public final class MaskOfIntolerance extends CardImpl {
     public MaskOfIntolerance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
-        // At the beginning of each player's upkeep, if there are four or more basic land types among lands that player controls, Mask of Intolerance deals 3 damage to him or her.
+        // At the beginning of each player's upkeep, if there are four or more basic land types among lands that player controls, Mask of Intolerance deals 3 damage to that player.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), TargetController.ANY, false);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new MaskOfIntoleranceCondition(),
-            "At the beginning of each player's upkeep, if there are four or more basic land types among lands that player controls, {this} deals 3 damage to him or her."));
+            "At the beginning of each player's upkeep, if there are four or more basic land types among lands that player controls, {this} deals 3 damage to that player."));
     }
 
     public MaskOfIntolerance(final MaskOfIntolerance card) {

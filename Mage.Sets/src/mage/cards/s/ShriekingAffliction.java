@@ -23,7 +23,7 @@ public final class ShriekingAffliction extends CardImpl {
     public ShriekingAffliction(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}");
 
-        // At the beginning of each opponent's upkeep, if that player has one or fewer cards in hand, he or she loses 3 life.
+        // At the beginning of each opponent's upkeep, if that player has one or fewer cards in hand, they lose 3 life.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
                         Zone.BATTLEFIELD, new LoseLifeTargetEffect(3),

@@ -28,13 +28,13 @@ import mage.target.common.TargetOpponent;
  * their revealed card on either the top or bottom of their library.
  * (Note that the player whose turn it is does this first, not necessarily the
  * controller of the clash spell or ability.) When the second player makes this
- * decision, he or she will know what the first player chose. Then all cards are
+ * decision, they will know what the first player chose. Then all cards are
  * moved at the same time. 5. The clash is over. If one player in the clash
  * revealed a card with a higher converted mana cost than all other cards
  * revealed in the clash, that player wins the clash. 6. If any abilities
  * trigger when a player clashes, they trigger and wait to be put on the stack.
  * 7. The clash spell or ability finishes resolving. That usually involves a
- * bonus gained by the controller of the clash spell or ability if he or she won
+ * bonus gained by the controller of the clash spell or ability if they won
  * the clash. 8. Abilities that triggered during the clash are put on the stack.
  *
  * There are no draws or losses in a clash. Either you win it or you don't. Each

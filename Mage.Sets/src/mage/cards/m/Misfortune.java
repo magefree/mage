@@ -26,7 +26,7 @@ public final class Misfortune extends CardImpl {
     public Misfortune(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}{R}{G}");
 
-        // An opponent chooses one - You put a +1/+1 counter on each creature you control and gain 4 life; or you put a -1/-1 counter on each creature that player controls and Misfortune deals 4 damage to him or her.
+        // An opponent chooses one - You put a +1/+1 counter on each creature you control and gain 4 life; or you put a -1/-1 counter on each creature that player controls and Misfortune deals 4 damage to that player.
         this.getSpellAbility().addEffect(new MisfortuneEffect());
         this.getSpellAbility().addTarget(new TargetOpponent(true));
     }
@@ -48,7 +48,7 @@ class MisfortuneEffect extends OneShotEffect {
         staticText = "An opponent chooses one - "
                 + "You put a +1/+1 counter on each creature you control and gain "
                 + "4 life; or you put a -1/-1 counter on each creature that player "
-                + "controls and Misfortune deals 4 damage to him or her";
+                + "controls and Misfortune deals 4 damage to that player";
     }
 
     public MisfortuneEffect(final MisfortuneEffect effect) {

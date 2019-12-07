@@ -42,7 +42,7 @@ public final class OrzhovAdvokist extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 
-        // At the beginning of your upkeep, each player may put two +1/+1 counters on a creature he or she controls. If a player does, creatures that player controls can't attack you or a planeswalker you control until your next turn.
+        // At the beginning of your upkeep, each player may put two +1/+1 counters on a creature they control. If a player does, creatures that player controls can't attack you or a planeswalker you control until your next turn.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new OrzhovAdvokistEffect(), TargetController.YOU, false));
     }
 
@@ -60,7 +60,7 @@ class OrzhovAdvokistEffect extends OneShotEffect {
 
     public OrzhovAdvokistEffect() {
         super(Outcome.Benefit);
-        this.staticText = "each player may put two +1/+1 counters on a creature he or she controls. "
+        this.staticText = "each player may put two +1/+1 counters on a creature they control. "
                 + "If a player does, creatures that player controls can't attack you or a planeswalker you control until your next turn";
     }
 

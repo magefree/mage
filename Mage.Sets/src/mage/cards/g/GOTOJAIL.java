@@ -48,7 +48,7 @@ public final class GOTOJAIL extends CardImpl {
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);
 
-        // At the beginning of the upkeep of the exiled card's owner, that player rolls two six-sided dice. If he or she rolls doubles, sacrifice GO TO JAIL.
+        // At the beginning of the upkeep of the exiled card's owner, that player rolls two six-sided dice. If they roll doubles, sacrifice GO TO JAIL.
         this.addAbility(new GoToJailTriggeredAbility());
     }
 
@@ -131,7 +131,7 @@ class GoToJailUpkeepEffect extends OneShotEffect {
 
     public GoToJailUpkeepEffect() {
         super(Outcome.Sacrifice);
-        this.staticText = "that player rolls two six-sided dice. If he or she rolls doubles, sacrifice {this}";
+        this.staticText = "that player rolls two six-sided dice. If they roll doubles, sacrifice {this}";
     }
 
     public GoToJailUpkeepEffect(final GoToJailUpkeepEffect effect) {

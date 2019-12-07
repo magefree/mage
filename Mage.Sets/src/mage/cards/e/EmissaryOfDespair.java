@@ -31,7 +31,7 @@ public final class EmissaryOfDespair extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // Whenever Emissary of Despair deals combat damage to a player, that player loses 1 life for each artifact he or she controls.
+        // Whenever Emissary of Despair deals combat damage to a player, that player loses 1 life for each artifact they control.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new LoseLifeTargetEffect(new EmissaryOfDespairCount()), false, true));
     }
 
@@ -69,6 +69,6 @@ class EmissaryOfDespairCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "artifact he or she controls";
+        return "artifact they control";
     }
 }

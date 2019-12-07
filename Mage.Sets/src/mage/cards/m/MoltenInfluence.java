@@ -23,7 +23,7 @@ public final class MoltenInfluence extends CardImpl {
     public MoltenInfluence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
 
-        // Counter target instant or sorcery spell unless its controller has Molten Influence deal 4 damage to him or her.
+        // Counter target instant or sorcery spell unless its controller has Molten Influence deal 4 damage to them.
         this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY));
         this.getSpellAbility().addEffect(new MoltenInfluenceEffect());
 
@@ -43,7 +43,7 @@ class MoltenInfluenceEffect extends OneShotEffect {
 
     public MoltenInfluenceEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Counter target instant or sorcery spell unless its controller has {this} deal 4 damage to him or her";
+        this.staticText = "Counter target instant or sorcery spell unless its controller has {this} deal 4 damage to them";
     }
 
     public MoltenInfluenceEffect(final MoltenInfluenceEffect effect) {

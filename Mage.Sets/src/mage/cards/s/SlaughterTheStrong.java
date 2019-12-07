@@ -31,7 +31,7 @@ public final class SlaughterTheStrong extends CardImpl {
     public SlaughterTheStrong(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{W}{W}");
 
-        // Each player chooses any number of creatures he or she controls with total power 4 or less, then sacrifices all other creatures he or she controls.
+        // Each player chooses any number of creatures they control with total power 4 or less, then sacrifices all other creatures they control.
         this.getSpellAbility().addEffect(new SlaughterTheStrongEffect());
     }
 
@@ -49,7 +49,7 @@ class SlaughterTheStrongEffect extends OneShotEffect {
 
     public SlaughterTheStrongEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Each player chooses any number of creatures he or she controls with total power 4 or less, then sacrifices all other creatures he or she controls";
+        this.staticText = "Each player chooses any number of creatures they control with total power 4 or less, then sacrifices all other creatures they control";
     }
 
     public SlaughterTheStrongEffect(final SlaughterTheStrongEffect effect) {

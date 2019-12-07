@@ -30,12 +30,12 @@ public final class ImaginaryThreats extends CardImpl {
     public ImaginaryThreats(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
 
-        // Creatures target opponent controls attack this turn if able. During that player's next untap step, creatures he or she controls don't untap.
+        // Creatures target opponent controls attack this turn if able. During that player's next untap step, creatures they control don't untap.
         getSpellAbility().addEffect(new ImaginaryThreatsEffect());
         getSpellAbility().addWatcher(new AttackedThisTurnWatcher());
         getSpellAbility().addTarget(new TargetOpponent());
         getSpellAbility().addEffect(new DontUntapInPlayersNextUntapStepAllEffect(new FilterCreaturePermanent())
-                .setText("During that player's next untap step, creatures he or she controls don't untap"));
+                .setText("During that player's next untap step, creatures they control don't untap"));
         // Cycling {2}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
 

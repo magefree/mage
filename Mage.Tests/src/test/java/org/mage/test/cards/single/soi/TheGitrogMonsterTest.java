@@ -122,7 +122,7 @@ public class TheGitrogMonsterTest extends CardTestPlayerBase {
         // Rags Sorcery {2}{B}{B}
         // All creatures get -2/-2 until end of turn.
         // Riches Sorcery {5}{U}{U}
-        // Each opponent chooses a creature he or she controls. You gain control of each of those creatures.
+        // Each opponent chooses a creature they control. You gain control of each of those creatures.
         addCard(Zone.GRAVEYARD, playerB, "Rags // Riches", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Island", 7);
 

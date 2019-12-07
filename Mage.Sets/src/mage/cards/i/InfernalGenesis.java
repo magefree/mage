@@ -23,7 +23,7 @@ public final class InfernalGenesis extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}{B}");
 
         // At the beginning of each player's upkeep, that player puts the top card of their library into their graveyard.
-        // Then he or she creates X 1/1 black Minion creature tokens, where X is that card's converted mana cost.
+        // Then they create X 1/1 black Minion creature tokens, where X is that card's converted mana cost.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new InfernalGenesisEffect(), TargetController.ANY, false));
     }
 
@@ -42,7 +42,7 @@ class InfernalGenesisEffect extends OneShotEffect {
     InfernalGenesisEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "that player puts the top card of their library into their graveyard. " +
-                "Then he or she creates X 1/1 black Minion creature tokens, where X is that card's converted mana cost";
+                "Then they create X 1/1 black Minion creature tokens, where X is that card's converted mana cost";
     }
 
     InfernalGenesisEffect(final InfernalGenesisEffect effect) {

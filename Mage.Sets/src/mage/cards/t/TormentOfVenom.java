@@ -32,7 +32,7 @@ public final class TormentOfVenom extends CardImpl {
     public TormentOfVenom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}{B}");
 
-        // Put three -1/-1 counters on target creature. Its controller loses 3 life unless he or she sacrifices another nonland permanent or discards a card.
+        // Put three -1/-1 counters on target creature. Its controller loses 3 life unless they sacrifice another nonland permanent or discards a card.
         this.getSpellAbility().addEffect(new TormentOfVenomEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
@@ -51,7 +51,7 @@ class TormentOfVenomEffect extends OneShotEffect {
 
     public TormentOfVenomEffect() {
         super(Outcome.LoseLife);
-        this.staticText = "Put three -1/-1 counters on target creature. Its controller loses 3 life unless he or she sacrifices another nonland permanent or discards a card";
+        this.staticText = "Put three -1/-1 counters on target creature. Its controller loses 3 life unless they sacrifice another nonland permanent or discards a card";
     }
 
     public TormentOfVenomEffect(final TormentOfVenomEffect effect) {

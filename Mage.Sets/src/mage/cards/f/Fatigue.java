@@ -13,13 +13,13 @@ import mage.target.TargetPlayer;
  */
 public final class Fatigue extends CardImpl {
     
-    private static final String rule = "Target player skips his or her next draw step.";
+    private static final String rule = "Target player skips their next draw step.";
 
     public Fatigue(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}");
         
 
-        // Target player skips his or her next draw step.
+        // Target player skips their next draw step.
         this.getSpellAbility().addEffect(new SkipNextDrawStepTargetEffect().setText(rule));
         this.getSpellAbility().addTarget(new TargetPlayer());
         

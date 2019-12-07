@@ -28,7 +28,7 @@ public final class NetherbornPhalanx extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
-        // When Netherborn Phalanx enters the battlefield, each opponent loses 1 life for each creature he or she controls.
+        // When Netherborn Phalanx enters the battlefield, each opponent loses 1 life for each creature they control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new NetherbornPhalanxEffect());
         this.addAbility(ability);
 
@@ -50,7 +50,7 @@ class NetherbornPhalanxEffect extends OneShotEffect {
 
     NetherbornPhalanxEffect() {
         super(Outcome.Sacrifice);
-        this.staticText = "each opponent loses 1 life for each creature he or she controls";
+        this.staticText = "each opponent loses 1 life for each creature they control";
     }
 
     NetherbornPhalanxEffect(final NetherbornPhalanxEffect effect) {

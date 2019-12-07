@@ -32,7 +32,7 @@ public interface ContinuousRuleModifyingEffect extends ContinuousEffect {
  
     /**
      * Defines if the user should get a message about the rule modifying effect
-     * if he was applied
+     * if it was applied
      * 
      * @return true if user should be informed
      */
@@ -40,13 +40,13 @@ public interface ContinuousRuleModifyingEffect extends ContinuousEffect {
 
     /**
      * Defines if the a message should be send to game log about the rule modifying effect
-     * if he was applied
+     * if it was applied
      * 
      * @return true if message should go to game log
      */
     boolean sendMessageToGameLog();
     /**
-     * Returns a message text that informs the player why he can't do something.
+     * Returns a message text that informs the player why they can't do something.
      * 
      * @param source the ability of the effect
      * @param event

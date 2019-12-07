@@ -16,7 +16,7 @@ public class AngelicDestinyTest extends CardTestPlayerBase {
 
     /**
      * I killed my opponent's Champion of the Parish, which was enchanted with Angelic Destiny. 
-     * However the Angelic Destiny went to the graveyard instead of returning his hand.
+     * However the Angelic Destiny went to the graveyard instead of returning to their hand.
      * 
      */
     @Test

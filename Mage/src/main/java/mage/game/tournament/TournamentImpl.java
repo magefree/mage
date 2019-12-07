@@ -259,7 +259,7 @@ public abstract class TournamentImpl implements Tournament {
                     TournamentPlayer tp2 = pair.getPlayer2();
                     MatchPlayer mp1 = match.getPlayer(pair.getPlayer1().getPlayer().getId());
                     MatchPlayer mp2 = match.getPlayer(pair.getPlayer2().getPlayer().getId());
-                    // set player state if he finished the round
+                    // set player state if they finished the round
                     if (round.getRoundNumber() == rounds.size()) { // for elimination getRoundNumber = 0 so never true here
                         match.setTournamentRound(round.getRoundNumber());
                         if (tp1.getState() == TournamentPlayerState.DUELING) {

@@ -39,7 +39,7 @@ public final class KnowledgePool extends CardImpl {
         // Imprint - When Knowledge Pool enters the battlefield, each player exiles the top three cards of their library
         this.addAbility(new EntersBattlefieldTriggeredAbility(new KnowledgePoolEffect1(), false));
 
-        // Whenever a player casts a spell from their hand, that player exiles it. If the player does, he or she may cast another nonland card exiled with Knowledge Pool without paying that card's mana cost.
+        // Whenever a player casts a spell from their hand, that player exiles it. If the player does, they may cast another nonland card exiled with Knowledge Pool without paying that card's mana cost.
         this.addAbility(new KnowledgePoolAbility());
     }
 
@@ -132,7 +132,7 @@ class KnowledgePoolEffect2 extends OneShotEffect {
 
     public KnowledgePoolEffect2() {
         super(Outcome.Neutral);
-        staticText = "Whenever a player casts a spell from their hand, that player exiles it. If the player does, he or she may cast another nonland card exiled with {this} without paying that card's mana cost";
+        staticText = "Whenever a player casts a spell from their hand, that player exiles it. If the player does, they may cast another nonland card exiled with {this} without paying that card's mana cost";
     }
 
     public KnowledgePoolEffect2(final KnowledgePoolEffect2 effect) {

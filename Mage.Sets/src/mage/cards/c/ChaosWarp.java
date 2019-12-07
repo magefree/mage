@@ -29,7 +29,7 @@ public final class ChaosWarp extends CardImpl {
         this.getSpellAbility().addEffect(new ChaosWarpShuffleIntoLibraryEffect());
         this.getSpellAbility().addTarget(new TargetPermanent());
         //then reveals the top card of their library.
-        //If it's a permanent card, he or she puts it onto the battlefield.
+        //If it's a permanent card, they put it onto the battlefield.
         this.getSpellAbility().addEffect(new ChaosWarpRevealEffect());
 
     }
@@ -79,7 +79,7 @@ class ChaosWarpRevealEffect extends OneShotEffect {
 
     public ChaosWarpRevealEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "then reveals the top card of their library. If it's a permanent card, he or she puts it onto the battlefield";
+        this.staticText = "then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield";
     }
 
     public ChaosWarpRevealEffect(final ChaosWarpRevealEffect effect) {

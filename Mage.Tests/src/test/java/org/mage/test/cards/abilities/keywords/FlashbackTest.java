@@ -128,7 +128,7 @@ public class FlashbackTest extends CardTestPlayerBase {
 
     /**
      * My opponent put Iona on the battlefield using Unburial Rites, but my game
-     * log didn't show me the color he has chosen.
+     * log didn't show me the color they chose.
      */
     @Test
     public void testUnburialRites() {

@@ -30,7 +30,7 @@ public final class Karma extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{W}");
 
 
-        // At the beginning of each player's upkeep, Karma deals damage to that player equal to the number of Swamps he or she controls.
+        // At the beginning of each player's upkeep, Karma deals damage to that player equal to the number of Swamps they control.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new KarmaDamageTargetEffect(), TargetController.ANY, false));
     }
 
@@ -63,7 +63,7 @@ class KarmaDamageTargetEffect extends OneShotEffect{
         
     @Override
     public String getText(Mode mode) {
-        return "{this} deals damage to that player equal to the number of Swamps he or she controls";
+        return "{this} deals damage to that player equal to the number of Swamps they control";
     }
 
     @Override

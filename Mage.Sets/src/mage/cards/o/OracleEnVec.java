@@ -64,7 +64,7 @@ class OracleEnVecEffect extends OneShotEffect {
 
     OracleEnVecEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Target opponent chooses any number of creatures he or she controls. During that player's next turn, " +
+        this.staticText = "Target opponent chooses any number of creatures they control. During that player's next turn, " +
                 "the chosen creatures attack if able, and other creatures can't attack. At the beginning of that turn's end step, " +
                 "destroy each of the chosen creatures that didn't attack";
     }

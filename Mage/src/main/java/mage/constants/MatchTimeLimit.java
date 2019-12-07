@@ -2,7 +2,7 @@ package mage.constants;
 
 /**
  * The time per player to have activity in a match.
- * If time runs out for a player, he looses the currently running game of a match.
+ * If time runs out for a player, they loose the currently running game of a match.
  *
  * @author LevelX2
  */

@@ -30,7 +30,7 @@ public final class SelfInflictedWound extends CardImpl {
     public SelfInflictedWound(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
 
-        // Target opponent sacrifices a green or white creature. If that player does, he or she loses 2 life.
+        // Target opponent sacrifices a green or white creature. If that player does, they lose 2 life.
         this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().addEffect(new SelfInflictedWoundEffect());        
         
@@ -50,7 +50,7 @@ class SelfInflictedWoundEffect extends OneShotEffect {
 
     SelfInflictedWoundEffect() {
         super(Outcome.Sacrifice);
-        staticText = "Target opponent sacrifices a green or white creature. If that player does, he or she loses 2 life";
+        staticText = "Target opponent sacrifices a green or white creature. If that player does, they lose 2 life";
     }
 
     SelfInflictedWoundEffect(SelfInflictedWoundEffect effect) {

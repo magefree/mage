@@ -133,12 +133,12 @@ public class SpliceOnArcaneTest extends CardTestPlayerBase {
      * The scenario was that I cast a Nourishing Shoal with a Goryo's Vengeance
      * spliced to it targeting Griselbrand in my graveyard and exiling
      * Worldspine Wurm. My opponent responded with a Snapcaster Mage, so to
-     * deprive him of his ability to reuse his counterspell, I cast the Goryo's
-     * Vengeance on the Griselbrand. This one resolved. He then used Terminate
-     * on the Griselbrand after I had activated it once. When the Shoal tried to
-     * resolve, it should have been countered due to no legal target. However,
-     * it caused me to gain 11 life. It did not resurrect Griselbrand
-     * (correctly), but it should have done nothing at all.
+     * deprive them of their ability to reuse their counterspell, I cast the
+     * Goryo's Vengeance on the Griselbrand. This one resolved. They then used
+     * Terminate on the Griselbrand after I had activated it once. When the
+     * Shoal tried to resolve, it should have been countered due to no legal
+     * target. However, it caused me to gain 11 life. It did not resurrect
+     * Griselbrand (correctly), but it should have done nothing at all.
      * <p>
      * I include the info about the Terminate because thinking through, it could
      * be pertinent. I would guess what is going on here is one of two things.

@@ -31,7 +31,7 @@ public final class PowerSurge extends CardImpl {
     public PowerSurge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}{R}");
 
-        // At the beginning of each player's upkeep, Power Surge deals X damage to that player, where X is the number of untapped lands he or she controlled at the beginning of this turn.
+        // At the beginning of each player's upkeep, Power Surge deals X damage to that player, where X is the number of untapped lands they controlled at the beginning of this turn.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new PowerSurgeDamageEffect(), TargetController.ANY, false, true), new PowerSurgeWatcher());
     }
 
@@ -57,7 +57,7 @@ class PowerSurgeDamageEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        return "{this} deals X damage to that player where X is the number of untapped lands he or she controlled at the beginning of this turn";
+        return "{this} deals X damage to that player where X is the number of untapped lands they controlled at the beginning of this turn";
     }
 
     @Override

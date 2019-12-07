@@ -31,7 +31,7 @@ public final class WordsOfWind extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
 
 
-        // {1}: The next time you would draw a card this turn, each player returns a permanent he or she controls to its owner's hand instead.
+        // {1}: The next time you would draw a card this turn, each player returns a permanent they control to its owner's hand instead.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WordsOfWindEffect(), new ManaCostsImpl("{1}")));
     }
 
@@ -49,7 +49,7 @@ class WordsOfWindEffect extends ReplacementEffectImpl {
 
     public WordsOfWindEffect() {
         super(Duration.EndOfTurn, Outcome.ReturnToHand);
-        staticText = "The next time you would draw a card this turn, each player returns a permanent he or she controls to its owner's hand instead";
+        staticText = "The next time you would draw a card this turn, each player returns a permanent they control to its owner's hand instead";
     }
 
     public WordsOfWindEffect(final WordsOfWindEffect effect) {
@@ -63,7 +63,7 @@ class WordsOfWindEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {        
-        game.informPlayers("Each player returns a permanent he or she controls to its owner's hand instead");
+        game.informPlayers("Each player returns a permanent they control to its owner's hand instead");
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {

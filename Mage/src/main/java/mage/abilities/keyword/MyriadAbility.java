@@ -25,7 +25,7 @@ public class MyriadAbility extends AttacksTriggeredAbility {
         super(new MyriadEffect(), false,
                 "Myriad <i>(Whenever this creature attacks, for each opponent other than the defending player, "
                 + "put a token that's a copy of this creature onto the battlefield tapped and attacking "
-                + "that player or a planeswalker he or she controls. Exile those tokens at the end of combat.)</i>",
+                + "that player or a planeswalker they control. Exile those tokens at the end of combat.)</i>",
                 SetTargetPointer.PLAYER
         );
     }
@@ -47,7 +47,7 @@ class MyriadEffect extends OneShotEffect {
         super(Outcome.Benefit);
         this.staticText = "for each opponent other than the defending player, you may put a token "
                 + "that's a copy of this creature onto the battlefield tapped and attacking that "
-                + "player or a planeswalker he or she controls. "
+                + "player or a planeswalker they control. "
                 + "Exile the tokens at the end of combat";
     }
 

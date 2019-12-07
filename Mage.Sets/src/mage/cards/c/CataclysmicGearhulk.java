@@ -42,7 +42,7 @@ public final class CataclysmicGearhulk extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
 
-        // When Cataclysmic Gearhulk enters the battlefield, each player chooses from among the non-land permanents he or she controls an artifact, a creature,
+        // When Cataclysmic Gearhulk enters the battlefield, each player chooses from among the non-land permanents they control an artifact, a creature,
         // an enchantment, and a planeswalker, then sacrifices the rest.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CataclysmicGearhulkEffect(), false));
     }
@@ -81,7 +81,7 @@ class CataclysmicGearhulkEffect extends OneShotEffect {
 
     public CataclysmicGearhulkEffect() {
         super(Outcome.DestroyPermanent);
-        staticText = "Each player chooses from among the non-land permanents he or she controls an artifact, a creature, an enchantment, and a planeswalker, "
+        staticText = "Each player chooses from among the non-land permanents they control an artifact, a creature, an enchantment, and a planeswalker, "
                 + "then sacrifices the rest";
     }
 

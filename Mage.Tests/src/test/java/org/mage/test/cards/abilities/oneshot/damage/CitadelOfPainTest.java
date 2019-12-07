@@ -14,7 +14,7 @@ public class CitadelOfPainTest extends CardTestPlayerBase {
     public void testDamage() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
         // At the beginning of each player's end step, Citadel of Pain deals X damage to that
-        // player, where X is the number of untapped lands he or she controls.
+        // player, where X is the number of untapped lands they control.
         addCard(Zone.BATTLEFIELD, playerA, "Citadel of Pain");
 
         setStopAt(1, PhaseStep.END_TURN);

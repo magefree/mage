@@ -25,7 +25,7 @@ public final class ChainLightning extends CardImpl {
     public ChainLightning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
 
-        // Chain Lightning deals 3 damage to any target. Then that player or that creature's controller may pay {R}{R}. If the player does, he or she may copy this spell and may choose a new target for that copy.
+        // Chain Lightning deals 3 damage to any target. Then that player or that creature's controller may pay {R}{R}. If the player does, they may copy this spell and may choose a new target for that copy.
         this.getSpellAbility().addEffect(new ChainLightningEffect());
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }

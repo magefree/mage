@@ -37,11 +37,11 @@ public final class IG88B extends CardImpl {
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());
 
-        // <i>Bounty</i> &mdash; Whenever IF-88B deals combat damage to a player, that player loses life equal to the number of bounty counters on creatures he or she controls.
+        // <i>Bounty</i> &mdash; Whenever IF-88B deals combat damage to a player, that player loses life equal to the number of bounty counters on creatures they control.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
                 new LoseLifeTargetEffect(new CountersOnDefendingPlayerCreaturesCount(CounterType.BOUNTY)),
                 false,
-                "<i>Bounty</i> &mdash; Whenever {this} deals combat damage to a player, that player loses life equal to the number of bounty counters on creatures he or she controls",
+                "<i>Bounty</i> &mdash; Whenever {this} deals combat damage to a player, that player loses life equal to the number of bounty counters on creatures they control",
                 true)
         );
 
@@ -84,6 +84,6 @@ class CountersOnDefendingPlayerCreaturesCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "the number of " + counterType.getName() + " counters on creatures he or she controls";
+        return "the number of " + counterType.getName() + " counters on creatures they control";
     }
 }

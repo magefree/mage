@@ -23,7 +23,7 @@ public final class Skullcage extends CardImpl {
     public Skullcage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
-        // At the beginning of each opponent's upkeep, Skullcage deals 2 damage to that player unless he or she has exactly three or exactly four cards in hand.
+        // At the beginning of each opponent's upkeep, Skullcage deals 2 damage to that player unless they have exactly three or exactly four cards in hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SkullcageEffect(), TargetController.OPPONENT, false, true));
     }
  
@@ -42,7 +42,7 @@ class SkullcageEffect extends OneShotEffect {
     
     public SkullcageEffect() {
         super(Outcome.Damage);
-        staticText = "{source} deals 2 damage to that player unless he or she has exactly three or exactly four cards in hand";
+        staticText = "{source} deals 2 damage to that player unless they have exactly three or exactly four cards in hand";
     }
 
     public SkullcageEffect(final SkullcageEffect effect) {

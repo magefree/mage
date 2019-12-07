@@ -25,7 +25,7 @@ public final class AetherBarrier extends CardImpl {
     public AetherBarrier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
-        // Whenever a player casts a creature spell, that player sacrifices a permanent unless he or she pays {1}.
+        // Whenever a player casts a creature spell, that player sacrifices a permanent unless they pay {1}.
         this.addAbility(new SpellCastAllTriggeredAbility(Zone.BATTLEFIELD, new AetherBarrierEffect(),
                 StaticFilters.FILTER_SPELL_A_CREATURE, false, SetTargetPointer.PLAYER));
     }
@@ -44,7 +44,7 @@ class AetherBarrierEffect extends SacrificeEffect {
 
     AetherBarrierEffect() {
         super(new FilterPermanent("permanent to sacrifice"), 1, "that player");
-        this.staticText = "that player sacrifices a permanent unless he or she pays {1}";
+        this.staticText = "that player sacrifices a permanent unless they pay {1}";
     }
 
     AetherBarrierEffect(final AetherBarrierEffect effect) {

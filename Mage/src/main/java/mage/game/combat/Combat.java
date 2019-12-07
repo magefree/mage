@@ -742,7 +742,7 @@ public class Combat implements Serializable, Copyable<Combat> {
     }
 
     /**
-     * 509.1c The defending player checks each creature he or she controls to
+     * 509.1c The defending player checks each creature they control to
      * see whether it's affected by any requirements (effects that say a
      * creature must block, or that it must block if some condition is met). If
      * the number of requirements that are being obeyed is fewer than the
@@ -1063,7 +1063,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 }
             } else {
                 blockIsValid = false;
-                // which attacker is he blocking
+                // which attacker is the creature blocking
                 CombatGroups:
                 for (CombatGroup combatGroup : game.getCombat().getGroups()) {
                     if (combatGroup.getBlockers().contains(creatureForcedToBlock.getId())) {

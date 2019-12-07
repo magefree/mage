@@ -18,7 +18,7 @@ public class AuraTargetRemovedTest extends CardTestPlayerBase {
 
     /**
      * Spreading Seas is bugged, opp casted it on my Field of Ruin, I sacced
-     * with the spell on stack but it resolved anyway and let him draw.
+     * with the spell on stack but it resolved anyway and let them draw.
      *
      * 303.4. Some enchantments have the subtype “Aura.” An Aura enters the
      * battlefield attached to an object or player. What an Aura can be attached

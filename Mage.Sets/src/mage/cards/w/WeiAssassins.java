@@ -35,7 +35,7 @@ public final class WeiAssassins extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // When Wei Assassins enters the battlefield, target opponent chooses a creature he or she controls. Destroy it.
+        // When Wei Assassins enters the battlefield, target opponent chooses a creature they control. Destroy it.
         Ability ability = new EntersBattlefieldTriggeredAbility(new WeiAssassinsEffect(), false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
@@ -55,7 +55,7 @@ class WeiAssassinsEffect extends OneShotEffect {
 
     WeiAssassinsEffect() {
         super(Outcome.Benefit);
-        this.staticText = "target opponent chooses a creature he or she controls. Destroy it.";
+        this.staticText = "target opponent chooses a creature they control. Destroy it.";
     }
 
     WeiAssassinsEffect(final WeiAssassinsEffect effect) {

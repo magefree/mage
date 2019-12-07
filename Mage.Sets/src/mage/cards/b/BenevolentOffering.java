@@ -31,7 +31,7 @@ public final class BenevolentOffering extends CardImpl {
         // Choose an opponent. You and that player each create three 1/1 white Spirit creature tokens with flying.
         this.getSpellAbility().addEffect(new BenevolentOfferingEffect1());
 
-        // Choose an opponent. You gain 2 life for each creature you control and that player gains 2 life for each creature he or she controls.
+        // Choose an opponent. You gain 2 life for each creature you control and that player gains 2 life for each creature they control.
         this.getSpellAbility().addEffect(new BenevolentOfferingEffect2());
     }
 
@@ -84,7 +84,7 @@ class BenevolentOfferingEffect2 extends OneShotEffect {
 
     BenevolentOfferingEffect2() {
         super(Outcome.Sacrifice);
-        this.staticText = "Choose an opponent. You gain 2 life for each creature you control and that player gains 2 life for each creature he or she controls";
+        this.staticText = "Choose an opponent. You gain 2 life for each creature you control and that player gains 2 life for each creature they control";
     }
 
     BenevolentOfferingEffect2(final BenevolentOfferingEffect2 effect) {

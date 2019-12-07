@@ -14,12 +14,12 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class SerraAscendantTest extends CardTestPlayerBase {
 
     /**
-     * The game goes on; he plays his Serra Ascendant on turn one, passes the
+     * The game goes on; they play Serra Ascendant on turn one, pass the
      * turn, you play your newly unbanned Wild Nacatl with a Stomping Ground and
-     * also pass the turn. On turn 2, he casts a Martyr of Sands and sacrifices
-     * it, revealing 3 white cards to gain 9 life and end up at 29. He goes to
-     * the combat phase, declares Serra as an attacker, and you happily block
-     * him, thinking that this is such a bad move from him. After the damage is
+     * also pass the turn. On turn 2, they cast a Martyr of Sands and sacrifice
+     * it, revealing 3 white cards to gain 9 life and end up at 29. They go to
+     * the combat phase, declare Serra as an attacker, and you happily block
+     * him, thinking that this is such a bad move from them. After the damage is
      * dealt, the Serra is still there, bigger than ever.
      */
     @Test

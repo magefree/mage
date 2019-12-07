@@ -78,7 +78,7 @@ public class DamageEffectsTest extends CardTestPlayerBase {
         /*
     Vexing Devil {R}
     Creature — Devil
-    When Vexing Devil enters the battlefield, any opponent may have it deal 4 damage to him or her. If a player does, sacrifice Vexing Devil.
+    When Vexing Devil enters the battlefield, any opponent may have it deal 4 damage to them. If a player does, sacrifice Vexing Devil.
          */
         String vDevil = "Vexing Devil";
 

@@ -33,7 +33,7 @@ public final class Spellshift extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(new FilterInstantOrSorcerySpell()));
         this.getSpellAbility().addEffect(new CounterTargetEffect());
 
-        // Its controller reveals cards from the top of their library until he or she reveals an instant or sorcery card. That player may cast that card without paying its mana cost. Then he or she shuffles their library.
+        // Its controller reveals cards from the top of their library until they reveal an instant or sorcery card. That player may cast that card without paying its mana cost. Then they shuffle their library.
         this.getSpellAbility().addEffect(new SpellshiftEffect());
     }
 
@@ -51,7 +51,7 @@ class SpellshiftEffect extends OneShotEffect {
 
     public SpellshiftEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Its controller reveals cards from the top of their library until he or she reveals an instant or sorcery card. That player may cast that card without paying its mana cost. Then he or she shuffles their library";
+        this.staticText = "Its controller reveals cards from the top of their library until they reveal an instant or sorcery card. That player may cast that card without paying its mana cost. Then they shuffle their library";
     }
 
     public SpellshiftEffect(final SpellshiftEffect effect) {

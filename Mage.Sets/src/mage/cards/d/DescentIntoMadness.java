@@ -52,7 +52,7 @@ public final class DescentIntoMadness extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}{B}");
 
 
-        // At the beginning of your upkeep, put a despair counter on Descent into Madness, then each player exiles X permanents he or she controls and/or cards from their hand, where X is the number of despair counters on Descent into Madness.
+        // At the beginning of your upkeep, put a despair counter on Descent into Madness, then each player exiles X permanents they control and/or cards from their hand, where X is the number of despair counters on Descent into Madness.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DescentIntoMadnessEffect(), TargetController.YOU, false));
     }
 
@@ -70,7 +70,7 @@ class DescentIntoMadnessEffect extends OneShotEffect {
 
     public DescentIntoMadnessEffect() {
         super(Outcome.Sacrifice);
-        this.staticText = "put a despair counter on {this}, then each player exiles X permanents he or she controls and/or cards from their hand, where X is the number of despair counters on {this}";
+        this.staticText = "put a despair counter on {this}, then each player exiles X permanents they control and/or cards from their hand, where X is the number of despair counters on {this}";
     }
 
     public DescentIntoMadnessEffect(final DescentIntoMadnessEffect effect) {

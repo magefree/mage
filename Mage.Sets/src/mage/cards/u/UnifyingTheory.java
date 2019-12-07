@@ -27,7 +27,7 @@ public final class UnifyingTheory extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
 
 
-        // Whenever a player casts a spell, that player may pay {2}. If the player does, he or she draws a card.
+        // Whenever a player casts a spell, that player may pay {2}. If the player does, they draw a card.
         this.addAbility(new SpellCastAllTriggeredAbility(new UnifyingTheoryEffect() , new FilterSpell("a spell"), false, SetTargetPointer.PLAYER));
     }
 
@@ -45,7 +45,7 @@ class UnifyingTheoryEffect extends OneShotEffect {
 
     public UnifyingTheoryEffect() {
         super(Outcome.Detriment);
-        this.staticText = "that player may pay {2}. If the player does, he or she draws a card";
+        this.staticText = "that player may pay {2}. If the player does, they draw a card";
     }
 
     public UnifyingTheoryEffect(final UnifyingTheoryEffect effect) {

@@ -29,7 +29,7 @@ import mage.players.Player;
  * you can't cast spells,” and “At the beginning of each of your upkeeps for the
  * rest of the game, copy this spell except for its epic ability. If the spell
  * has any targets, you may choose new targets for the copy.” See rule 706.10.
- * 702.49b A player can't cast spells once a spell with epic he or she controls
+ * 702.49b A player can't cast spells once a spell with epic they control
  * resolves, but effects (such as the epic ability itself) can still put copies
  * of spells onto the stack. *
  */

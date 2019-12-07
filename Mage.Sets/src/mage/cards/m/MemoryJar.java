@@ -34,7 +34,7 @@ public final class MemoryJar extends CardImpl {
 
         // {T}, Sacrifice Memory Jar: Each player exiles all cards from their hand face down and draws seven cards.
         // At the beginning of the next end step, each player discards their hand and returns to their hand each
-        //card he or she exiled this way.
+        //card they exiled this way.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MemoryJarEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
@@ -55,7 +55,7 @@ class MemoryJarEffect extends OneShotEffect {
 
     public MemoryJarEffect() {
         super(Outcome.DrawCard);
-        staticText = "Each player exiles all cards from their hand face down and draws seven cards. At the beginning of the next end step, each player discards their hand and returns to their hand each card he or she exiled this way.";
+        staticText = "Each player exiles all cards from their hand face down and draws seven cards. At the beginning of the next end step, each player discards their hand and returns to their hand each card they exiled this way.";
     }
 
     public MemoryJarEffect(final MemoryJarEffect effect) {
@@ -104,7 +104,7 @@ class MemoryJarDelayedEffect extends OneShotEffect {
 
     public MemoryJarDelayedEffect() {
         super(Outcome.DrawCard);
-        staticText = "At the beginning of the next end step, each player discards their hand and returns to their hand each card he or she exiled this way";
+        staticText = "At the beginning of the next end step, each player discards their hand and returns to their hand each card they exiled this way";
     }
 
     public MemoryJarDelayedEffect(final MemoryJarDelayedEffect effect) {

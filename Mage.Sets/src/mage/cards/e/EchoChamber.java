@@ -34,7 +34,7 @@ public final class EchoChamber extends CardImpl {
     public EchoChamber(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
-        // {4}, {tap}: An opponent chooses target creature he or she controls. Create a token that's a copy of that creature. That token gains haste until end of turn. Exile the token at the beginning of the next end step. Activate this ability only any time you could cast a sorcery.
+        // {4}, {tap}: An opponent chooses target creature they control. Create a token that's a copy of that creature. That token gains haste until end of turn. Exile the token at the beginning of the next end step. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new EchoChamberCreateTokenEffect(), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetOpponentsChoicePermanent(1, 1, filter, false, true));
@@ -55,7 +55,7 @@ class EchoChamberCreateTokenEffect extends OneShotEffect {
 
     EchoChamberCreateTokenEffect() {
         super(Outcome.Copy);
-        this.staticText = "An opponent chooses target creature he or she controls. Create a token that's a copy of that creature. That token gains haste until end of turn. Exile the token at the beginning of the next end step";
+        this.staticText = "An opponent chooses target creature they control. Create a token that's a copy of that creature. That token gains haste until end of turn. Exile the token at the beginning of the next end step";
     }
 
     EchoChamberCreateTokenEffect(final EchoChamberCreateTokenEffect effect) {

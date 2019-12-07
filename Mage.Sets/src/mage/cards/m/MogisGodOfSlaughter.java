@@ -47,11 +47,11 @@ public final class MogisGodOfSlaughter extends CardImpl {
         effect.setText("As long as your devotion to black and red is less than seven, Mogis isn't a creature");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
-        // At the beginning of each opponent's upkeep, Mogis deals 2 damage to that player unless he or she sacrifices a creature.
+        // At the beginning of each opponent's upkeep, Mogis deals 2 damage to that player unless they sacrifice a creature.
         effect = new DoUnlessTargetPaysCost(new DamageTargetEffect(2, true, "that player"),
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)),
                 "Sacrifice a creature? (otherwise you get 2 damage)");
-        effect.setText("Mogis deals 2 damage to that player unless he or she sacrifices a creature");
+        effect.setText("Mogis deals 2 damage to that player unless they sacrifice a creature");
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.OPPONENT, false, true);
         this.addAbility(ability);
     }

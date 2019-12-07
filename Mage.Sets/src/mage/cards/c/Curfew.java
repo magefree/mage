@@ -25,7 +25,7 @@ public final class Curfew extends CardImpl {
     public Curfew(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
-        // Each player returns a creature he or she controls to its owner's hand.
+        // Each player returns a creature they control to its owner's hand.
         this.getSpellAbility().addEffect(new CurfewEffect());
     }
 
@@ -43,12 +43,12 @@ class CurfewEffect extends OneShotEffect {
 
     public CurfewEffect() {
         super(Outcome.ReturnToHand);
-        staticText = "Each player returns a creature he or she controls to its owner's hand";
+        staticText = "Each player returns a creature they control to its owner's hand";
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.informPlayers("Each player returns a creature he or she controls to its owner's hand");
+        game.informPlayers("Each player returns a creature they control to its owner's hand");
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null && game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, playerId, game) > 0) {

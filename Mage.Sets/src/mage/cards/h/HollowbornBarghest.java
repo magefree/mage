@@ -52,7 +52,7 @@ public final class HollowbornBarghest extends CardImpl {
                 condition,
                 rule));
 
-        // At the beginning of each opponent's upkeep, if that player has no cards in hand, he or she loses 2 life.
+        // At the beginning of each opponent's upkeep, if that player has no cards in hand, they lose 2 life.
         this.addAbility(new HollowbornBarghestTriggeredAbility());
     }
 
@@ -129,6 +129,6 @@ class HollowbornBarghestTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "At the beginning of each opponent's upkeep, if that player has no cards in hand, he or she loses 2 life.";
+        return "At the beginning of each opponent's upkeep, if that player has no cards in hand, they lose 2 life.";
     }
 }

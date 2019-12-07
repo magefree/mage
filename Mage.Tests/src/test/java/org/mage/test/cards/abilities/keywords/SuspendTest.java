@@ -177,7 +177,7 @@ public class SuspendTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         addCard(Zone.LIBRARY, playerA, "Silvercoat Lion", 3);
         // Imprint - When Knowledge Pool enters the battlefield, each player exiles the top three cards of their library
-        // Whenever a player casts a spell from their hand, that player exiles it. If the player does, he or she may cast another nonland card
+        // Whenever a player casts a spell from their hand, that player exiles it. If the player does, they may cast another nonland card
         // exiled with Knowledge Pool without paying that card's mana cost.
         addCard(Zone.HAND, playerB, "Knowledge Pool", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 6);

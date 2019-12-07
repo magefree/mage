@@ -38,7 +38,7 @@ public final class TidalFlats extends CardImpl {
     public TidalFlats(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}");
 
-        // {U}{U}: For each attacking creature without flying, its controller may pay {1}. If he or she doesn't, creatures you control blocking that creature gain first strike until end of turn.
+        // {U}{U}: For each attacking creature without flying, its controller may pay {1}. If they don't, creatures you control blocking that creature gain first strike until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TidalFlatsEffect(), new ManaCostsImpl("{U}{U}")));
     }
 
@@ -62,7 +62,7 @@ class TidalFlatsEffect extends OneShotEffect {
 
     public TidalFlatsEffect() {
         super(Outcome.Benefit);
-        this.staticText = "For each attacking creature without flying, its controller may pay {1}. If he or she doesn't, creatures you control blocking that creature gain first strike until end of turn";
+        this.staticText = "For each attacking creature without flying, its controller may pay {1}. If they don't, creatures you control blocking that creature gain first strike until end of turn";
     }
 
     public TidalFlatsEffect(final TidalFlatsEffect effect) {

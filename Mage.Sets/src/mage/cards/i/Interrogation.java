@@ -24,7 +24,7 @@ public final class Interrogation extends CardImpl {
     public Interrogation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
 
-        // Target player discards a card. Then that player discards another card unless he or she pays 3 life.
+        // Target player discards a card. Then that player discards another card unless they pay 3 life.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new DiscardTargetEffect(1));
         this.getSpellAbility().addEffect(new InterrogationEffect());
@@ -44,7 +44,7 @@ class InterrogationEffect extends OneShotEffect {
 
     InterrogationEffect() {
         super(Outcome.Discard);
-        this.staticText = "Then that player discards another card unless he or she pays 3 life";
+        this.staticText = "Then that player discards another card unless they pay 3 life";
     }
 
     InterrogationEffect(final InterrogationEffect effect) {

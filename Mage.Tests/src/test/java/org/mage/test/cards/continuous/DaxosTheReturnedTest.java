@@ -29,7 +29,7 @@ public class DaxosTheReturnedTest extends CardTestPlayerBase {
         // "This creature's power and toughness are each equal to the number of experience counters you have."
         addCard(Zone.BATTLEFIELD, playerA, "Daxos the Returned");
 
-        // Whenever an opponent draws a card, Underworld Dreams deals 1 damage to him or her.
+        // Whenever an opponent draws a card, Underworld Dreams deals 1 damage to that player.
         addCard(Zone.HAND, playerA, "Underworld Dreams", 2); // {B}{B}{B}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Underworld Dreams");

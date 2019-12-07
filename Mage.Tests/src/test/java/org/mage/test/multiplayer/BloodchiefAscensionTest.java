@@ -62,9 +62,9 @@ public class BloodchiefAscensionTest extends CardTestMultiPlayerBase {
 
     /**
      * One of my opponents in a multiplayer game had a Bloodchief Ascension in
-     * play. I took lethal damage on my turn, but he didn't get a counter on
-     * Bloodchief Ascension at my end step. I think he should, even though I had
-     * left the game from dying, because of:
+     * play. I took lethal damage on my turn, but they didn't get a counter on
+     * Bloodchief Ascension at my end step. I think they should, even though I
+     * had left the game from dying, because of:
      *
      * 800.4g. If a player leaves the game during their turn, that turn
      * continues to its completion without an active player. If the active

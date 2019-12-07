@@ -28,7 +28,7 @@ public final class TheGreatAurora extends CardImpl {
     public TheGreatAurora(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{G}{G}{G}");
 
-        // Each player shuffles all cards from their hand and all permanents he or she owns into their library, then draws that many cards. Each player may put any number of land cards from their hand onto the battlefield. Exile The Great Aurora.
+        // Each player shuffles all cards from their hand and all permanents they own into their library, then draws that many cards. Each player may put any number of land cards from their hand onto the battlefield. Exile The Great Aurora.
         this.getSpellAbility().addEffect(new TheGreatAuroraEffect());
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
@@ -47,7 +47,7 @@ class TheGreatAuroraEffect extends OneShotEffect {
 
     public TheGreatAuroraEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Each player shuffles all cards from their hand and all permanents he or she owns into their library, then draws that many cards. Each player may put any number of land cards from their hand onto the battlefield";
+        this.staticText = "Each player shuffles all cards from their hand and all permanents they own into their library, then draws that many cards. Each player may put any number of land cards from their hand onto the battlefield";
     }
 
     public TheGreatAuroraEffect(final TheGreatAuroraEffect effect) {

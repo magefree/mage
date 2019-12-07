@@ -25,7 +25,7 @@ public final class Rivalry extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
 
 
-        // At the beginning of each player's upkeep, if that player controls more lands than each other player, Rivalry deals 2 damage to him or her.
+        // At the beginning of each player's upkeep, if that player controls more lands than each other player, Rivalry deals 2 damage to them.
         this.addAbility(new RivalryTriggeredAbility());
         
     }
@@ -87,6 +87,6 @@ class RivalryTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "At the beginning of each player's upkeep, if that player controls more lands than each other player, Rivalry deals 2 damage to him or her.";
+        return "At the beginning of each player's upkeep, if that player controls more lands than each other player, Rivalry deals 2 damage to them.";
     }
 }

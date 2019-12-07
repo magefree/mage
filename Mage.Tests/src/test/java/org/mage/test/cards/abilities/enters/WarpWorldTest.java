@@ -23,7 +23,7 @@ public class WarpWorldTest extends CardTestPlayerBase {
      */
     @Test
     public void testWarpWorld() {
-        // Each player shuffles all permanents he or she owns into their library, then reveals that many cards from the top of their library.
+        // Each player shuffles all permanents they own into their library, then reveals that many cards from the top of their library.
         // Each player puts all artifact, creature, and land cards revealed this way onto the battlefield, then does the same for enchantment cards,
         // then puts all cards revealed this way that weren't put onto the battlefield on the bottom of their library.
         addCard(Zone.HAND, playerA, "Warp World"); // Sorcery {5}{R}{R}{R}

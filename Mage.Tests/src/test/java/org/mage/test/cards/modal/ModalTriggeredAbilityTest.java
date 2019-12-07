@@ -16,7 +16,7 @@ public class ModalTriggeredAbilityTest extends CardTestPlayerBase {
     public void testBlizzardSpecterReturn() {
         // Flying
         // Whenever Blizzard Specter deals combat damage to a player, choose one
-        // - That player returns a permanent he or she controls to its owner's hand;
+        // - That player returns a permanent they control to its owner's hand;
         // or that player discards a card.
         addCard(Zone.BATTLEFIELD, playerB, "Blizzard Specter");
 
@@ -41,7 +41,7 @@ public class ModalTriggeredAbilityTest extends CardTestPlayerBase {
     public void testBlizzardSpecterDiscard() {
         // Flying
         // Whenever Blizzard Specter deals combat damage to a player, choose one
-        // - That player returns a permanent he or she controls to its owner's hand;
+        // - That player returns a permanent they control to its owner's hand;
         // or that player discards a card.
         addCard(Zone.BATTLEFIELD, playerB, "Blizzard Specter");
 

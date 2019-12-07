@@ -24,7 +24,7 @@ public final class CovenantOfMinds extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}");
 
         // Reveal the top three cards of your library. Target opponent may choose to put those cards into your hand.
-        // If he or she doesn't, put those cards into your graveyard and draw five cards.
+        // If they don't, put those cards into your graveyard and draw five cards.
         this.getSpellAbility().addEffect(new CovenantOfMindsEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
@@ -43,7 +43,7 @@ class CovenantOfMindsEffect extends OneShotEffect {
 
     public CovenantOfMindsEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Reveal the top three cards of your library. Target opponent may choose to put those cards into your hand. If he or she doesn't, put those cards into your graveyard and draw five cards";
+        this.staticText = "Reveal the top three cards of your library. Target opponent may choose to put those cards into your hand. If they don't, put those cards into your graveyard and draw five cards";
     }
 
     public CovenantOfMindsEffect(final CovenantOfMindsEffect effect) {
@@ -68,7 +68,7 @@ class CovenantOfMindsEffect extends OneShotEffect {
             player.revealCards(source, cards, game);
             StringBuilder sb = new StringBuilder();
             sb.append("Put the revealed cards into ").append(player.getLogName()).append("'s hand?");
-            sb.append(" If you don't, those cards are put into his graveyard and he will draw five cards.");
+            sb.append(" If you don't, those cards are put into their graveyard and they will draw five cards.");
 
             if (opponent.chooseUse(Outcome.Neutral, sb.toString(), source, game)) {
                 player.moveCards(cards, Zone.HAND, source, game);
@@ -78,7 +78,7 @@ class CovenantOfMindsEffect extends OneShotEffect {
             }
 
         } else {
-            if (!opponent.chooseUse(Outcome.Benefit, player.getLogName() + "'s library is empty? Do you want him to draw five cards?", source, game)) {
+            if (!opponent.chooseUse(Outcome.Benefit, player.getLogName() + "'s library is empty? Do you want them to draw five cards?", source, game)) {
                 player.drawCards(5, game);
             }
         }

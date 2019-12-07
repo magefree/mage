@@ -13,7 +13,7 @@ public class PaupersCageTest extends CardTestPlayerBase {
 
     // Paupers' Cage
     // At the beginning of each opponent's upkeep, if that player has two or fewer cards in hand,
-    // Paupers' Cage deals 2 damage to him or her.
+    // Paupers' Cage deals 2 damage to that player.
 
     @Test
     public void test_TooManyCards() {

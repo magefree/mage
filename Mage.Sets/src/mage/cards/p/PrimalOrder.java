@@ -25,7 +25,7 @@ public final class PrimalOrder extends CardImpl {
     public PrimalOrder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}{G}");
 
-        // At the beginning of each player's upkeep, Primal Order deals damage to that player equal to the number of nonbasic lands he or she controls.
+        // At the beginning of each player's upkeep, Primal Order deals damage to that player equal to the number of nonbasic lands they control.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new PrimalOrderDamageTargetEffect(), TargetController.ANY, false, true));
     }
 
@@ -55,7 +55,7 @@ class PrimalOrderDamageTargetEffect extends OneShotEffect{
         
     @Override
     public String getText(Mode mode) {
-        return "{this} deals damage to that player equal to the number of nonbasic lands he or she controls";
+        return "{this} deals damage to that player equal to the number of nonbasic lands they control";
     }
 
     @Override

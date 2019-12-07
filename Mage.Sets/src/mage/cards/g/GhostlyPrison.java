@@ -19,7 +19,7 @@ public final class GhostlyPrison extends CardImpl {
     public GhostlyPrison(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
 
-        // Creatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you
+        // Creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouUnlessPayManaAllEffect(new ManaCostsImpl("{2}"))));
 
     }

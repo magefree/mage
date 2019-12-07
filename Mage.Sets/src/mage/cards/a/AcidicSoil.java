@@ -24,7 +24,7 @@ public final class AcidicSoil extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
 
-        //Acidic Soil deals damage to each player equal to the number of lands he or she controls.
+        //Acidic Soil deals damage to each player equal to the number of lands they control.
         this.getSpellAbility().addEffect(new AcidicSoilEffect());
     }
 
@@ -42,7 +42,7 @@ class AcidicSoilEffect extends OneShotEffect {
 
     AcidicSoilEffect() {
         super(Outcome.Damage);
-        staticText = "{this} deals damage to each player equal to the number of lands he or she controls";
+        staticText = "{this} deals damage to each player equal to the number of lands they control";
     }
 
     AcidicSoilEffect(final AcidicSoilEffect effect) {
