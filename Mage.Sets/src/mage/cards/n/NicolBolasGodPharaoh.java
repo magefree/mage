@@ -98,11 +98,17 @@ class NicolBolasGodPharaohPlusOneEffect extends OneShotEffect {
             Player opponent = game.getPlayer(opponentId);
             if (opponent != null) {
                 int numberOfCardsToExile = Math.min(2, opponent.getHand().size());
-                Target target = new TargetCardInHand(numberOfCardsToExile, new FilterCard());
-                target.setRequired(true);
-                if (opponent.chooseTarget(Outcome.Exile, target, source, game)) {
-                    Cards cards = new CardsImpl(target.getTargets());
-                    cardsToExile.put(opponentId, cards);
+                if(numberOfCardsToExile > 0) {
+                	Target target = new TargetCardInHand(numberOfCardsToExile, new FilterCard());
+                	target.setRequired(true);
+                	if (opponent.chooseTarget(Outcome.Exile, target, source, game)) {
+                		Cards cards = new CardsImpl(target.getTargets());
+                		cardsToExile.put(opponentId, cards);
+                	}
+                }
+                else
+                {
+                	cardsToExile.put(opponentId, new CardsImpl());
                 }
             }
         }
