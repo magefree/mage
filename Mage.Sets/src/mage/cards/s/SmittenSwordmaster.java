@@ -33,7 +33,7 @@ public final class SmittenSwordmaster extends AdventureCard {
 
         // Curry Favor
         // You gain X life and each opponent loses X life, where X is the number of Knights you control.
-        this.getAdventureSpellAbility().addEffect(new CurryFavorEffect());
+        this.getSpellCard().getSpellAbility().addEffect(new CurryFavorEffect());
     }
 
     private SmittenSwordmaster(final SmittenSwordmaster card) {

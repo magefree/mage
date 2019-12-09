@@ -48,8 +48,8 @@ public final class BrazenBorrower extends AdventureCard {
 
         // Petty Theft
         // Return target nonland permanent an opponent controls to its owner's hand.
-        this.getAdventureSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getAdventureSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellCard().getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        this.getSpellCard().getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     private BrazenBorrower(final BrazenBorrower card) {

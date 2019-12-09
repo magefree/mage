@@ -27,9 +27,9 @@ public final class SilverflameSquire extends AdventureCard {
 
         // On Alert
         // Target creature gets +2/+2 until end of turn. Untap it.
-        this.getAdventureSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
-        this.getAdventureSpellAbility().addEffect(new UntapTargetEffect().setText("Untap it"));
-        this.getAdventureSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellCard().getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
+        this.getSpellCard().getSpellAbility().addEffect(new UntapTargetEffect().setText("Untap it"));
+        this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     private SilverflameSquire(final SilverflameSquire card) {
