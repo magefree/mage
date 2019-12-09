@@ -26,7 +26,7 @@ public final class FirecannonBlast extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageTargetEffect(6),
                 new DamageTargetEffect(3),
-                new InvertCondition(RaidCondition.instance),
+                RaidCondition.instance,
                 "{this} deals 3 damage to target creature.<br><i>Raid</i> &mdash; {this} deals 6 damage instead if you attacked with a creature this turn"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addWatcher(new PlayerAttackedWatcher());
