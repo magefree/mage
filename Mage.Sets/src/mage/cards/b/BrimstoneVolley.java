@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import mage.abilities.condition.common.MorbidCondition;
@@ -9,7 +8,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetAnyTarget;
 import mage.watchers.common.MorbidWatcher;
-
 import java.util.UUID;
 
 /**
