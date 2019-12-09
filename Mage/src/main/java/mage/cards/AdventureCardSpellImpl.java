@@ -7,6 +7,7 @@ package mage.cards;
 
 import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 
@@ -23,6 +24,7 @@ public class AdventureCardSpellImpl extends CardImpl implements AdventureCardSpe
 
     public AdventureCardSpellImpl(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs, AdventureCard adventureCardParent) {
         super(ownerId, setInfo, cardTypes, costs, SpellAbilityType.ADVENTURE_SPELL);
+        this.subtype.add(SubType.ADVENTURE);
         this.adventureCardParent = adventureCardParent;
     }
 
