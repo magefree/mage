@@ -5,6 +5,7 @@ import mage.abilities.*;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.Effect;
+import mage.cards.AdventureCard;
 import mage.cards.Card;
 import mage.cards.SplitCard;
 import mage.constants.Zone;
@@ -811,6 +812,9 @@ public class GameState implements Serializable, Copyable<GameState> {
             removeCopiedCard(((SplitCard) card).getLeftHalfCard());
             removeCopiedCard(((SplitCard) card).getRightHalfCard());
         }
+        if (card instanceof AdventureCard) {
+            removeCopiedCard(((AdventureCard) card).getSpellCard());
+        }
     }
 
     /**
@@ -1165,6 +1169,11 @@ public class GameState implements Serializable, Copyable<GameState> {
             Card rightCard = ((SplitCard) copiedCard).getRightHalfCard();
             copiedCards.put(rightCard.getId(), rightCard);
             addCard(rightCard);
+        }
+        if (copiedCard instanceof AdventureCard) {
+            Card spellCard = ((AdventureCard) copiedCard).getSpellCard();
+            copiedCards.put(spellCard.getId(), spellCard);
+            addCard(spellCard);
         }
         return copiedCard;
     }

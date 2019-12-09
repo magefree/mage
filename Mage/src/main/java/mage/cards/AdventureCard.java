@@ -21,14 +21,14 @@ public abstract class AdventureCard extends CardImpl {
 
     /* The adventure spell card, i.e. Swift End. */
     protected Card spellCard;
-    /* The ability to cast the creature from exile. */
-    protected SpellAbility adventureCreatureAbility;
 
     public AdventureCard(UUID ownerId, CardSetInfo setInfo, CardType[] types, CardType[] typesSpell, String costs, String adventureName, String costsSpell) {
         super(ownerId, setInfo, types, costs);
         spellCard = new AdventureCardSpellImpl(ownerId, setInfo, typesSpell, costsSpell, this);
         spellCard.getSpellAbility().addEffect(ExileAdventureSpellEffect.getInstance());
-        adventureCreatureAbility = new AdventureCreatureAbility(new ManaCostsImpl(costs));
+        spellCard.setName(adventureName);
+        spellCard.getSpellAbility().setCardName(adventureName);
+        this.addAbility(spellCard.getSpellAbility());
     }
 
     public AdventureCard(AdventureCard card) {
