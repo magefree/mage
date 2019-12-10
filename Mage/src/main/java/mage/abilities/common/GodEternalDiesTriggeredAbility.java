@@ -1,5 +1,6 @@
 package mage.abilities.common;
 
+import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -17,8 +18,6 @@ import mage.players.Player;
  * @author TheElk801
  */
 public class GodEternalDiesTriggeredAbility extends TriggeredAbilityImpl {
-    
-    Boolean applied;
 
     public GodEternalDiesTriggeredAbility() {
         super(Zone.ALL, null, true);
@@ -33,7 +32,7 @@ public class GodEternalDiesTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             return zEvent.getFromZone() == Zone.BATTLEFIELD
-                    && (zEvent.getToZone() == Zone.GRAVEYARD 
+                    && (zEvent.getToZone() == Zone.GRAVEYARD
                     || zEvent.getToZone() == Zone.EXILED);
         }
         return false;
@@ -41,24 +40,29 @@ public class GodEternalDiesTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        applied = false;
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.getTargetId().equals(this.getSourceId())) {
-            Permanent permanent = game.getPermanentOrLKIBattlefield(this.getSourceId());
-            // for cases where its triggered ability is removed, ex: Kasmina's Transmutation
-            if (permanent != null) {
-                for (Ability a : permanent.getAbilities()) {
-                    if (a instanceof GodEternalDiesTriggeredAbility) {
-                        applied = true;
-                    }
-                }
-            }
-            if (applied) {
             this.getEffects().clear();
             this.addEffect(new GodEternalEffect(new MageObjectReference(zEvent.getTarget(), game)));
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        Permanent sourcePermanent = null;
+        if (game.getState().getZone(getSourceId()) == Zone.BATTLEFIELD) {
+            sourcePermanent = game.getPermanent(getSourceId());
+        } else {
+            if (game.getShortLivingLKI(getSourceId(), Zone.BATTLEFIELD)) {
+                sourcePermanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD);
             }
         }
-        return applied;
+        if (sourcePermanent == null) {
+            return false;
+        }
+        return hasSourceObjectAbility(game, sourcePermanent, event);
     }
 
     @Override
@@ -68,8 +72,8 @@ public class GodEternalDiesTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When {this} dies or is put into exile from the battlefield, " +
-                "you may put it into its owner's library third from the top.";
+        return "When {this} dies or is put into exile from the battlefield, "
+                + "you may put it into its owner's library third from the top.";
     }
 }
 
