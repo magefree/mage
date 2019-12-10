@@ -291,4 +291,44 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Psychic Intrusion", 1);
         assertGraveyardCount(playerA, 1);
     }
+
+    @Test
+    public void testMultipleAdventures() {
+        /*
+         * Eager Cadet
+         * Creature — Human Soldier
+         * 1/1
+         */
+        /*
+         * Rimrock Knight {1}{R}
+         * Creature — Dwarf Knight
+         * Rimrock Knight can't block.
+         * 3/1
+         * ----
+         * Boulder Rush {R}
+         * Instant — Adventure
+         * Target creature gets +2/+0 until end of turn.
+         */
+
+        setStrictChooseMode(true);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Eager Cadet");
+        addCard(Zone.HAND, playerA, "Rimrock Knight", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Boulder Rush", "Eager Cadet");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Boulder Rush", "Eager Cadet");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rimrock Knight");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rimrock Knight");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertAllCommandsUsed();
+        assertHandCount(playerA, 0);
+        assertPermanentCount(playerA, "Rimrock Knight", 2);
+        assertPermanentCount(playerA, "Eager Cadet", 1);
+        assertPowerToughness(playerA, "Eager Cadet", 5, 1);
+        assertExileCount(playerA, 0);
+        assertGraveyardCount(playerA, 0);
+    }
 }
