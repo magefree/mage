@@ -5,17 +5,17 @@ import mage.abilities.MageSingleton;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.AdventureCard;
 import mage.cards.AdventureCardSpell;
 import mage.cards.Card;
 import mage.constants.AsThoughEffectType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -28,6 +28,10 @@ public class ExileAdventureSpellEffect extends OneShotEffect implements MageSing
 
     public static ExileAdventureSpellEffect getInstance() {
         return instance;
+    }
+
+    public static UUID adventureExileId(UUID controllerId, Game game) {
+        return CardUtil.getExileZoneId(controllerId.toString() + "- On an Adventure", game);
     }
 
     private ExileAdventureSpellEffect() {
@@ -48,8 +52,10 @@ public class ExileAdventureSpellEffect extends OneShotEffect implements MageSing
             if (spell != null && !spell.isCopy()) {
                 Card spellCard = spell.getCard();
                 if (spellCard != null && spellCard instanceof AdventureCardSpell) {
+                    UUID exileId = adventureExileId(controller.getId(), game);
+                    game.getExile().createZone(exileId, "On an Adventure");
                     AdventureCardSpell adventureSpellCard = (AdventureCardSpell) spellCard;
-                    if (controller.moveCards(adventureSpellCard, Zone.EXILED, source, game)) {
+                    if (controller.moveCardsToExile(adventureSpellCard, source, game, true, exileId, "On an Adventure")) {
                         ContinuousEffect effect = new AdventureCastFromExileEffect();
                         effect.setTargetPointer(new FixedTarget(adventureSpellCard.getParentCard().getId(), game));
                         game.addEffect(effect, source);
@@ -86,10 +92,12 @@ class AdventureCastFromExileEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         UUID targetId = getTargetPointer().getFirst(game, source);
+        ExileZone adventureExileZone = game.getExile().getExileZone(ExileAdventureSpellEffect.adventureExileId(affectedControllerId, game));
         if (targetId == null) {
             this.discard();
         } else if (objectId.equals(targetId)
-                && affectedControllerId.equals(source.getControllerId())) {
+                && affectedControllerId.equals(source.getControllerId())
+                && adventureExileZone.contains(objectId)) {
             Card card = game.getCard(objectId);
             return card != null;
         }

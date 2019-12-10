@@ -5,10 +5,13 @@
  */
 package mage.cards;
 
+import mage.abilities.SpellAbility;
+import mage.abilities.effects.common.ExileAdventureSpellEffect;
 import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.game.ExileZone;
 import mage.game.Game;
 
 import java.util.List;
@@ -25,6 +28,7 @@ public class AdventureCardSpellImpl extends CardImpl implements AdventureCardSpe
     public AdventureCardSpellImpl(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs, AdventureCard adventureCardParent) {
         super(ownerId, setInfo, cardTypes, costs, SpellAbilityType.ADVENTURE_SPELL);
         this.subtype.add(SubType.ADVENTURE);
+        this.replaceSpellAbility(new AdventureCardSpellAbility(getSpellAbility()));
         this.adventureCardParent = adventureCardParent;
     }
 
@@ -87,5 +91,21 @@ public class AdventureCardSpellImpl extends CardImpl implements AdventureCardSpe
     @Override
     public AdventureCard getParentCard() {
         return this.adventureCardParent;
+    }
+}
+
+class AdventureCardSpellAbility extends SpellAbility {
+    public AdventureCardSpellAbility(SpellAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public ActivationStatus canActivate(UUID playerId, Game game) {
+        ExileZone adventureExileZone = game.getExile().getExileZone(ExileAdventureSpellEffect.adventureExileId(playerId, game));
+        if (adventureExileZone != null && adventureExileZone.contains(this.getSourceId())) {
+            return ActivationStatus.getFalse();
+        } else {
+            return super.canActivate(playerId, game);
+        }
     }
 }
