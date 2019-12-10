@@ -4,7 +4,6 @@ import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.effects.common.ExileAdventureSpellEffect;
 import mage.constants.*;
 import mage.game.Game;
 
