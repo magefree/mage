@@ -3218,6 +3218,24 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
     }
 
+    private List<Ability> cardPlayableAbilities(Game game, Card card) {
+        List<Ability> playable = new ArrayList();
+        if (card != null) {
+            for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.HAND)) {
+                if (ability instanceof SpellAbility
+                        && null != game.getContinuousEffects().asThough(card.getId(),
+                        AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, ability, getId(), game)) {
+                    playable.add(ability);
+                } else if (ability instanceof PlayLandAbility
+                        && null != game.getContinuousEffects().asThough(card.getId(),
+                        AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, card.getSpellAbility(), getId(), game)) {
+                    playable.add(ability);
+                }
+            }
+        }
+        return playable;
+    }
+
     @Override
     public List<Ability> getPlayable(Game game, boolean hidden) {
         return getPlayable(game, hidden, Zone.ALL, true);
@@ -3294,20 +3312,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (fromAll || fromZone == Zone.EXILED) {
                 for (ExileZone exile : game.getExile().getExileZones()) {
                     for (Card card : exile.getCards(game)) {
-                        if (null != game.getContinuousEffects().asThough(card.getId(),
-                                AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, null, this.getId(), game)) {
-                            for (Ability ability : card.getAbilities()) {
-                                if (ability.getZone().match(Zone.HAND)) {
-                                    ability.setControllerId(this.getId()); // controller must be set for case owner != caster
-                                    if (ability instanceof ActivatedAbility) {
-                                        if (((ActivatedAbility) ability).canActivate(playerId, game).canActivate()) {
-                                            playable.add(ability);
-                                        }
-                                    }
-                                    ability.setControllerId(card.getOwnerId());
-                                }
-                            }
-                        }
+                        playable.addAll(cardPlayableAbilities(game, card));
                     }
                 }
             }
@@ -3316,14 +3321,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (fromAll) {
                 for (Cards revealedCards : game.getState().getRevealed().values()) {
                     for (Card card : revealedCards.getCards(game)) {
-                        if (null != game.getContinuousEffects().asThough(card.getId(),
-                                AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, null, this.getId(), game)) {
-                            for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.HAND)) {
-                                if (ability instanceof SpellAbility || ability instanceof PlayLandAbility) {
-                                    playable.add(ability);
-                                }
-                            }
-                        }
+                        playable.addAll(cardPlayableAbilities(game, card));
                     }
                 }
             }
@@ -3335,14 +3333,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     if (player != null) {
                         if (/*player.isTopCardRevealed() &&*/player.getLibrary().hasCards()) {
                             Card card = player.getLibrary().getFromTop(game);
-                            if (card != null && null != game.getContinuousEffects().asThough(card.getId(),
-                                    AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, card.getSpellAbility(), getId(), game)) {
-                                for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.HAND)) {
-                                    if (ability instanceof SpellAbility || ability instanceof PlayLandAbility) {
-                                        playable.add(ability);
-                                    }
-                                }
-                            }
+                            playable.addAll(cardPlayableAbilities(game, card));
                         }
                     }
                 }

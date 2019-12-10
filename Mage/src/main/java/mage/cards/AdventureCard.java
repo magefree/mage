@@ -21,7 +21,9 @@ public abstract class AdventureCard extends CardImpl {
     public AdventureCard(UUID ownerId, CardSetInfo setInfo, CardType[] types, CardType[] typesSpell, String costs, String adventureName, String costsSpell) {
         super(ownerId, setInfo, types, costs);
         spellCard = new AdventureCardSpellImpl(ownerId, setInfo, adventureName, typesSpell, costsSpell, this);
-        this.addAbility(spellCard.getSpellAbility());
+        Ability adventureAbility = spellCard.getSpellAbility();
+        this.addAbility(adventureAbility);
+        adventureAbility.setSourceId(spellCard.getId());
     }
 
     public AdventureCard(AdventureCard card) {

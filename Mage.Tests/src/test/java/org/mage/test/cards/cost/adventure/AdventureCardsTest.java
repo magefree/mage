@@ -41,6 +41,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertActionsCount(playerA, 1);
         assertHandCount(playerA, 0);
         assertPermanentCount(playerA, "Food", 1);
         assertExileCount(playerA, "Curious Pair", 1);
@@ -335,7 +336,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void testAdventurePermanentText() {
+    public void testRimrockKnightPermanentText() {
         setStrictChooseMode(true);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
         addCard(Zone.HAND, playerA, "Rimrock Knight");
@@ -353,5 +354,145 @@ public class AdventureCardsTest extends CardTestPlayerBase {
 
         Permanent rimrock = getPermanent("Rimrock Knight");
         Assert.assertEquals(rimrock.getRules(currentGame).get(0), "{this} can't block.");
+    }
+
+    /*
+     * Tests for Rule 601.3e:
+     * 601.3e If a rule or effect states that only an alternative set of characteristics or a subset of characteristics
+     * are considered to determine if a card or copy of a card is legal to cast, those alternative characteristics
+     * replace the object’s characteristics prior to determining whether the player may begin to cast it.
+     * Example: Garruk’s Horde says, in part, “You may cast the top card of your library if it’s a creature card.” If
+     * you control Garruk’s Horde and the top card of your library is a noncreature card with morph, you may cast it
+     * using its morph ability.
+     * Example: Melek, Izzet Paragon says, in part, “You may cast the top card of your library if it’s an instant or
+     * sorcery card.” If you control Melek, Izzet Paragon and the top card of your library is Giant Killer, an
+     * adventurer creature card whose Adventure is an instant named Chop Down, you may cast Chop Down but not Giant
+     * Killer. If instead you control Garruk’s Horde and the top card of your library is Giant Killer, you may cast
+     * Giant Killer but not Chop Down.
+     */
+
+    @Test
+    public void testCastTreatsToShareWithMelek() {
+        /*
+         * Melek, Izzet Paragon {4}{U}{R}
+         * Legendary Creature — Weird Wizard
+         * Play with the top card of your library revealed.
+         * You may cast the top card of your library if it's an instant or sorcery card.
+         * Whenever you cast an instant or sorcery spell from your library, copy it. You may choose new targets for the copy.
+         * 2/4
+         */
+        setStrictChooseMode(true);
+        addCard(Zone.BATTLEFIELD, playerA, "Melek, Izzet Paragon");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest");
+        removeAllCardsFromLibrary(playerA);
+        addCard(Zone.LIBRARY, playerA, "Curious Pair");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertAllCommandsUsed();
+        assertHandCount(playerA, 0);
+        assertPermanentCount(playerA, 4);
+        assertPermanentCount(playerA, "Food", 2);
+        assertPermanentCount(playerA, "Curious Pair", 0);
+        assertExileCount(playerA, "Curious Pair", 1);
+        assertGraveyardCount(playerA, 0);
+    }
+
+    @Test
+    public void testCantCastCuriousPairWithMelek() {
+        setStrictChooseMode(true);
+        addCard(Zone.BATTLEFIELD, playerA, "Melek, Izzet Paragon");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        removeAllCardsFromLibrary(playerA);
+        addCard(Zone.LIBRARY, playerA, "Curious Pair");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertActionsCount(playerA, 1);
+        assertPermanentCount(playerA, "Curious Pair", 0);
+        assertLibraryCount(playerA, 1);
+    }
+
+    @Test
+    public void testCastCuriousPairWithGarruksHorde() {
+        /*
+         * Garruk's Horde {5}{G}{G}
+         * Creature — Beast
+         * Trample
+         * Play with the top card of your library revealed.
+         * You may cast the top card of your library if it's a creature card.
+         * 7/7
+         */
+        setStrictChooseMode(true);
+        addCard(Zone.BATTLEFIELD, playerA, "Garruk's Horde");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        removeAllCardsFromLibrary(playerA);
+        addCard(Zone.LIBRARY, playerA, "Curious Pair");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertAllCommandsUsed();
+        assertHandCount(playerA, 0);
+        assertPermanentCount(playerA, "Food", 0);
+        assertPermanentCount(playerA, "Curious Pair", 1);
+        assertExileCount(playerA, 0);
+        assertGraveyardCount(playerA, 0);
+    }
+
+    @Test
+    public void testCantCastTreatsToShareWithGarruksHorde() {
+        setStrictChooseMode(true);
+        addCard(Zone.BATTLEFIELD, playerA, "Garruk's Horde");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest");
+        removeAllCardsFromLibrary(playerA);
+        addCard(Zone.LIBRARY, playerA, "Curious Pair");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertActionsCount(playerA, 1);
+        assertPermanentCount(playerA, "Food", 0);
+        assertLibraryCount(playerA, 1);
+    }
+
+    @Test
+    public void testCastTreatsToShareWithWrennAndSixEmblem() {
+        /*
+         * Melek, Izzet Paragon {4}{U}{R}
+         * Legendary Creature — Weird Wizard
+         * Play with the top card of your library revealed.
+         * You may cast the top card of your library if it's an instant or sorcery card.
+         * Whenever you cast an instant or sorcery spell from your library, copy it. You may choose new targets for the copy.
+         * 2/4
+         */
+        setStrictChooseMode(true);
+        addCard(Zone.BATTLEFIELD, playerA, "Melek, Izzet Paragon");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest");
+        removeAllCardsFromLibrary(playerA);
+        addCard(Zone.LIBRARY, playerA, "Curious Pair");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertAllCommandsUsed();
+        assertHandCount(playerA, 0);
+        assertPermanentCount(playerA, 4);
+        assertPermanentCount(playerA, "Food", 2);
+        assertPermanentCount(playerA, "Curious Pair", 0);
+        assertExileCount(playerA, "Curious Pair", 1);
+        assertGraveyardCount(playerA, 0);
     }
 }
