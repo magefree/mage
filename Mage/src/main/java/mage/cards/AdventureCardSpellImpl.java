@@ -141,7 +141,6 @@ class AdventureCardSpellAbility extends SpellAbility {
         } else {
             sbRule.append(getModes().getText());
         }
-        sbRule.append(super.getRule(false));
         sbRule.append(" <i>(Then exile this card. You may cast the creature later from exile.)</i>");
         return sbRule.toString();
     }
