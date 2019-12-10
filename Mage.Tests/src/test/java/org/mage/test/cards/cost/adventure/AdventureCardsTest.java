@@ -2,6 +2,8 @@ package org.mage.test.cards.cost.adventure;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.game.permanent.Permanent;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -330,5 +332,26 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Eager Cadet", 5, 1);
         assertExileCount(playerA, 0);
         assertGraveyardCount(playerA, 0);
+    }
+
+    @Test
+    public void testAdventurePermanentText() {
+        setStrictChooseMode(true);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.HAND, playerA, "Rimrock Knight");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rimrock Knight");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertAllCommandsUsed();
+        assertHandCount(playerA, 0);
+        assertPermanentCount(playerA, "Rimrock Knight", 1);
+        assertExileCount(playerA, 0);
+        assertGraveyardCount(playerA, 0);
+
+        Permanent rimrock = getPermanent("Rimrock Knight");
+        Assert.assertEquals(rimrock.getRules(currentGame).get(0), "{this} can't block.");
     }
 }

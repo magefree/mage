@@ -35,6 +35,7 @@ public class AdventureCardSpellImpl extends CardImpl implements AdventureCardSpe
         newSpellAbility.addEffect(ExileAdventureSpellEffect.getInstance());
         newSpellAbility.setCardName(adventureName);
         this.replaceSpellAbility(newSpellAbility);
+        spellAbility = newSpellAbility;
 
         this.setName(adventureName);
         this.adventureCardParent = adventureCardParent;
