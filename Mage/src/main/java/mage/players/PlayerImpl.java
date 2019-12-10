@@ -22,10 +22,7 @@ import mage.abilities.keyword.*;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.ManaOptions;
 import mage.actions.MageDrawAction;
-import mage.cards.Card;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.cards.SplitCard;
+import mage.cards.*;
 import mage.cards.decks.Deck;
 import mage.choices.ChoiceImpl;
 import mage.constants.*;
@@ -3305,6 +3302,11 @@ public abstract class PlayerImpl implements Player, Serializable {
                                 splitCard.getRightHalfCard().getAbilities(), availableMana, playable);
                         getPlayableFromGraveyardCard(game, splitCard, splitCard.getSharedAbilities(),
                                 availableMana, playable);
+                    } else if (card instanceof AdventureCard) {
+                        AdventureCard adventureCard = (AdventureCard) card;
+                        getPlayableFromGraveyardCard(game, adventureCard.getSpellCard(),
+                                adventureCard.getSpellCard().getAbilities(), availableMana, playable);
+                        getPlayableFromGraveyardCard(game, adventureCard, adventureCard.getAbilities(), availableMana, playable);
                     } else {
                         getPlayableFromGraveyardCard(game, card, card.getAbilities(), availableMana, playable);
                     }

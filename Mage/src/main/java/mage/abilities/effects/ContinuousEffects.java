@@ -509,7 +509,8 @@ public class ContinuousEffects implements Serializable {
                 Card card = game.getCard(objectId);
                 if (card != null && card instanceof SplitCardHalf) {
                     idToCheck = ((SplitCardHalf) card).getParentCard().getId();
-                } else if (card != null && card instanceof AdventureCardSpell) {
+                } else if (card != null && type == AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE
+                        && card instanceof AdventureCardSpell) {
                     idToCheck = ((AdventureCardSpell) card).getParentCard().getId();
                 } else {
                     idToCheck = objectId;
