@@ -2,6 +2,7 @@ package org.mage.test.cards.cost.adventure;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
@@ -469,22 +470,56 @@ public class AdventureCardsTest extends CardTestPlayerBase {
     @Test
     public void testCastTreatsToShareWithWrennAndSixEmblem() {
         /*
-         * Melek, Izzet Paragon {4}{U}{R}
-         * Legendary Creature — Weird Wizard
-         * Play with the top card of your library revealed.
-         * You may cast the top card of your library if it's an instant or sorcery card.
-         * Whenever you cast an instant or sorcery spell from your library, copy it. You may choose new targets for the copy.
-         * 2/4
+         * Wrenn and Six {R}{G}
+         * Legendary Planeswalker — Wrenn
+         * +1: Return up to one target land card from your graveyard to your hand.
+         * −1: Wrenn and Six deals 1 damage to any target.
+         * −7: You get an emblem with "Instant and sorcery cards in your graveyard have retrace."
+         * Loyalty: 3
          */
         setStrictChooseMode(true);
-        addCard(Zone.BATTLEFIELD, playerA, "Melek, Izzet Paragon");
         addCard(Zone.BATTLEFIELD, playerA, "Forest");
-        removeAllCardsFromLibrary(playerA);
-        addCard(Zone.LIBRARY, playerA, "Curious Pair");
+        addCard(Zone.BATTLEFIELD, playerA, "Wrenn and Six");
+        addCard(Zone.GRAVEYARD,  playerA, "Curious Pair");
+        addCard(Zone.HAND, playerA, "Forest");
 
+        addCounters(1, PhaseStep.UPKEEP, playerA, "Wrenn and Six", CounterType.LOYALTY, 5);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "−7: You get an emblem");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertAllCommandsUsed();
+        assertHandCount(playerA, 0);
+        assertPermanentCount(playerA, "Food", 1);
+        assertPermanentCount(playerA, "Curious Pair", 0);
+        assertPermanentCount(playerA, "Wrenn and Six", 1);
+        assertEmblemCount(playerA, 1);
+        assertExileCount(playerA, "Curious Pair", 1);
+        assertGraveyardCount(playerA, "Forest", 1);
+        assertGraveyardCount(playerA, 1);
+    }
+
+    @Test
+    public void testCastTreatsToShareWithTeferiTimeRaveler() {
+        /*
+         * Teferi, Time Raveler {1}{W}{U}
+         * Legendary Planeswalker — Teferi
+         * Each opponent can cast spells only any time they could cast a sorcery.
+         * +1: Until your next turn, you may cast sorcery spells as though they had flash.
+         * −3: Return up to one target artifact, creature, or enchantment to its owner's hand. Draw a card.
+         * Loyalty: 4
+         */
+        setStrictChooseMode(true);
+        addCard(Zone.BATTLEFIELD, playerA, "Teferi, Time Raveler");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest");
+        addCard(Zone.HAND, playerA, "Curious Pair");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Until your next");
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Treats to Share");
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
         assertAllCommandsUsed();
