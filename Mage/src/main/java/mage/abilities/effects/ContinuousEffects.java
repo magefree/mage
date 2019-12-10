@@ -5,10 +5,7 @@ import mage.MageObjectReference;
 import mage.abilities.*;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.effects.common.continuous.CommanderReplacementEffect;
-import mage.cards.Card;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.cards.SplitCardHalf;
+import mage.cards.*;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
@@ -509,8 +506,11 @@ public class ContinuousEffects implements Serializable {
             if (affectedAbility != null && affectedAbility.getSourceObject(game) instanceof SplitCardHalf) {
                 idToCheck = ((SplitCardHalf) affectedAbility.getSourceObject(game)).getParentCard().getId();
             } else {
-                if (game.getObject(objectId) instanceof SplitCardHalf) {
-                    idToCheck = ((SplitCardHalf) game.getObject(objectId)).getParentCard().getId();
+                Card card = game.getCard(objectId);
+                if (card != null && card instanceof SplitCardHalf) {
+                    idToCheck = ((SplitCardHalf) card).getParentCard().getId();
+                } else if (card != null && card instanceof AdventureCardSpell) {
+                    idToCheck = ((AdventureCardSpell) card).getParentCard().getId();
                 } else {
                     idToCheck = objectId;
                 }

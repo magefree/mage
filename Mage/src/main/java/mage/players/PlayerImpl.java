@@ -3218,10 +3218,14 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
     }
 
-    private List<Ability> cardPlayableAbilities(Game game, Card card) {
+    private List<Ability> cardPlayableAbilities(Game game, Card card, boolean setControllerId) {
         List<Ability> playable = new ArrayList();
         if (card != null) {
             for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.HAND)) {
+                if (setControllerId) {
+                    // For when owner != caster, e.g. with Psychic Intrusion and similar effects.
+                    ability.setControllerId(getId());
+                }
                 if (ability instanceof SpellAbility
                         && null != game.getContinuousEffects().asThough(card.getId(),
                         AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, ability, getId(), game)) {
@@ -3230,6 +3234,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                         && null != game.getContinuousEffects().asThough(card.getId(),
                         AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, card.getSpellAbility(), getId(), game)) {
                     playable.add(ability);
+                }
+                if (setControllerId) {
+                    ability.setControllerId(card.getOwnerId());
                 }
             }
         }
@@ -3312,7 +3319,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (fromAll || fromZone == Zone.EXILED) {
                 for (ExileZone exile : game.getExile().getExileZones()) {
                     for (Card card : exile.getCards(game)) {
-                        playable.addAll(cardPlayableAbilities(game, card));
+                        playable.addAll(cardPlayableAbilities(game, card, true));
                     }
                 }
             }
@@ -3321,7 +3328,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (fromAll) {
                 for (Cards revealedCards : game.getState().getRevealed().values()) {
                     for (Card card : revealedCards.getCards(game)) {
-                        playable.addAll(cardPlayableAbilities(game, card));
+                        playable.addAll(cardPlayableAbilities(game, card, false));
                     }
                 }
             }
@@ -3333,7 +3340,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     if (player != null) {
                         if (/*player.isTopCardRevealed() &&*/player.getLibrary().hasCards()) {
                             Card card = player.getLibrary().getFromTop(game);
-                            playable.addAll(cardPlayableAbilities(game, card));
+                            playable.addAll(cardPlayableAbilities(game, card, false));
                         }
                     }
                 }

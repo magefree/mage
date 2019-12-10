@@ -111,11 +111,14 @@ class AdventureCardSpellAbility extends SpellAbility {
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
         ExileZone adventureExileZone = game.getExile().getExileZone(ExileAdventureSpellEffect.adventureExileId(playerId, game));
-        if (adventureExileZone != null && adventureExileZone.contains(this.getSourceId())) {
-            return ActivationStatus.getFalse();
-        } else {
-            return super.canActivate(playerId, game);
+        Card spellCard = game.getCard(this.getSourceId());
+        if (spellCard != null && spellCard instanceof AdventureCardSpell) {
+            Card card = ((AdventureCardSpell) spellCard).getParentCard();
+            if (adventureExileZone != null && adventureExileZone.contains(card.getId())) {
+                return ActivationStatus.getFalse();
+            }
         }
+        return super.canActivate(playerId, game);
     }
 
     public void setName(String name, String costs) {
@@ -143,5 +146,10 @@ class AdventureCardSpellAbility extends SpellAbility {
         }
         sbRule.append(" <i>(Then exile this card. You may cast the creature later from exile.)</i>");
         return sbRule.toString();
+    }
+
+    @Override
+    public SpellAbility copy() {
+        return new AdventureCardSpellAbility(this);
     }
 }

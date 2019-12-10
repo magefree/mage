@@ -269,9 +269,9 @@ public class AdventureCardsTest extends CardTestPlayerBase {
          * You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast that spell.
          */
         setStrictChooseMode(true);
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
-        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
         addCard(Zone.HAND, playerA, "Psychic Intrusion");
         addCard(Zone.HAND, playerB, "Curious Pair");
 
