@@ -5,6 +5,7 @@
  */
 package mage.cards;
 
+import mage.abilities.Modes;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.ExileAdventureSpellEffect;
 import mage.constants.CardType;
@@ -25,10 +26,17 @@ public class AdventureCardSpellImpl extends CardImpl implements AdventureCardSpe
 
     private AdventureCard adventureCardParent;
 
-    public AdventureCardSpellImpl(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs, AdventureCard adventureCardParent) {
+    public AdventureCardSpellImpl(UUID ownerId, CardSetInfo setInfo, String adventureName, CardType[] cardTypes, String costs, AdventureCard adventureCardParent) {
         super(ownerId, setInfo, cardTypes, costs, SpellAbilityType.ADVENTURE_SPELL);
         this.subtype.add(SubType.ADVENTURE);
-        this.replaceSpellAbility(new AdventureCardSpellAbility(getSpellAbility()));
+
+        AdventureCardSpellAbility newSpellAbility = new AdventureCardSpellAbility(getSpellAbility());
+        newSpellAbility.setName(adventureName, costs);
+        newSpellAbility.addEffect(ExileAdventureSpellEffect.getInstance());
+        newSpellAbility.setCardName(adventureName);
+        this.replaceSpellAbility(newSpellAbility);
+
+        this.setName(adventureName);
         this.adventureCardParent = adventureCardParent;
     }
 
@@ -95,7 +103,7 @@ public class AdventureCardSpellImpl extends CardImpl implements AdventureCardSpe
 }
 
 class AdventureCardSpellAbility extends SpellAbility {
-    public AdventureCardSpellAbility(SpellAbility ability) {
+    public AdventureCardSpellAbility(final SpellAbility ability) {
         super(ability);
     }
 
@@ -107,5 +115,33 @@ class AdventureCardSpellAbility extends SpellAbility {
         } else {
             return super.canActivate(playerId, game);
         }
+    }
+
+    public void setName(String name, String costs) {
+        this.name = "Adventure &mdash; " + name + " " + costs;
+    }
+
+    @Override
+    public String getRule(boolean all) {
+        return this.getRule();
+    }
+
+    @Override
+    public String getRule() {
+        StringBuilder sbRule = new StringBuilder();
+        sbRule.append("Adventure &mdash; ");
+        sbRule.append(this.getCardName());
+        sbRule.append(" ");
+        sbRule.append(manaCosts.getText());
+        sbRule.append(" &mdash; ");
+        Modes modes = this.getModes();
+        if (modes.size() <= 1) {
+            sbRule.append(modes.getMode().getEffects().getTextStartingUpperCase(modes.getMode()));
+        } else {
+            sbRule.append(getModes().getText());
+        }
+        sbRule.append(super.getRule(false));
+        sbRule.append(" <i>(Then exile this card. You may cast the creature later from exile.)</i>");
+        return sbRule.toString();
     }
 }

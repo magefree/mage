@@ -21,10 +21,7 @@ public abstract class AdventureCard extends CardImpl {
 
     public AdventureCard(UUID ownerId, CardSetInfo setInfo, CardType[] types, CardType[] typesSpell, String costs, String adventureName, String costsSpell) {
         super(ownerId, setInfo, types, costs);
-        spellCard = new AdventureCardSpellImpl(ownerId, setInfo, typesSpell, costsSpell, this);
-        spellCard.getSpellAbility().addEffect(ExileAdventureSpellEffect.getInstance());
-        spellCard.setName(adventureName);
-        spellCard.getSpellAbility().setCardName(adventureName);
+        spellCard = new AdventureCardSpellImpl(ownerId, setInfo, adventureName, typesSpell, costsSpell, this);
         this.addAbility(spellCard.getSpellAbility());
     }
 
@@ -83,13 +80,7 @@ public abstract class AdventureCard extends CardImpl {
     @Override
     public Abilities<Ability> getAbilities(Game game) {
         Abilities<Ability> allAbilities = new AbilitiesImpl<>();
-        for (Ability ability : super.getAbilities(game)) {
-            if (ability instanceof SpellAbility
-                    && ((SpellAbility) ability).getSpellAbilityType() != SpellAbilityType.SPLIT
-                    && ((SpellAbility) ability).getSpellAbilityType() != SpellAbilityType.SPLIT_AFTERMATH) {
-                allAbilities.add(ability);
-            }
-        }
+        allAbilities.addAll(super.getAbilities(game));
         allAbilities.addAll(spellCard.getAbilities(game));
         return allAbilities;
     }
