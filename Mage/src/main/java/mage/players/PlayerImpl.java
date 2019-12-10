@@ -3219,8 +3219,10 @@ public abstract class PlayerImpl implements Player, Serializable {
         List<Ability> playable = new ArrayList();
         if (card != null) {
             for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.HAND)) {
+                UUID savedControllerId = null;
                 if (setControllerId) {
                     // For when owner != caster, e.g. with Psychic Intrusion and similar effects.
+                    savedControllerId = getId();
                     ability.setControllerId(getId());
                 }
                 if (ability instanceof SpellAbility
@@ -3233,7 +3235,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     playable.add(ability);
                 }
                 if (setControllerId) {
-                    ability.setControllerId(card.getOwnerId());
+                    ability.setControllerId(savedControllerId);
                 }
             }
         }
