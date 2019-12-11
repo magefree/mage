@@ -22,10 +22,7 @@ import mage.abilities.keyword.*;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.ManaOptions;
 import mage.actions.MageDrawAction;
-import mage.cards.Card;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.cards.SplitCard;
+import mage.cards.*;
 import mage.cards.decks.Deck;
 import mage.choices.ChoiceImpl;
 import mage.constants.*;
@@ -3414,6 +3411,13 @@ public abstract class PlayerImpl implements Player, Serializable {
         for (Ability ability : playableAbilities) {
             if (ability.getSourceId() != null) {
                 playableObjects.add(ability.getSourceId());
+
+                // main card must be marked playable in GUI
+                MageObject object = game.getObject(ability.getSourceId());
+                if (object instanceof SplitCardHalf) {
+                    UUID splitCardId = ((Card) object).getMainCard().getId();
+                    playableObjects.add(splitCardId);
+                }
             }
         }
         return playableObjects;
