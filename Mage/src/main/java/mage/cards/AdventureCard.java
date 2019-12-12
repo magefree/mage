@@ -20,10 +20,7 @@ public abstract class AdventureCard extends CardImpl {
 
     public AdventureCard(UUID ownerId, CardSetInfo setInfo, CardType[] types, CardType[] typesSpell, String costs, String adventureName, String costsSpell) {
         super(ownerId, setInfo, types, costs);
-        spellCard = new AdventureCardSpellImpl(ownerId, setInfo, adventureName, typesSpell, costsSpell, this);
-        Ability adventureAbility = spellCard.getSpellAbility();
-        this.addAbility(adventureAbility);
-        adventureAbility.setSourceId(spellCard.getId());
+        this.spellCard = new AdventureCardSpellImpl(ownerId, setInfo, adventureName, typesSpell, costsSpell, this);
     }
 
     public AdventureCard(AdventureCard card) {
@@ -79,10 +76,18 @@ public abstract class AdventureCard extends CardImpl {
     }
 
     @Override
+    public Abilities<Ability> getAbilities() {
+        Abilities<Ability> allAbilities = new AbilitiesImpl<>();
+        allAbilities.addAll(spellCard.getAbilities());
+        allAbilities.addAll(super.getAbilities());
+        return allAbilities;
+    }
+
+    @Override
     public Abilities<Ability> getAbilities(Game game) {
         Abilities<Ability> allAbilities = new AbilitiesImpl<>();
-        allAbilities.addAll(super.getAbilities(game));
         allAbilities.addAll(spellCard.getAbilities(game));
+        allAbilities.addAll(super.getAbilities(game));
         return allAbilities;
     }
 
