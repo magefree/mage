@@ -3420,6 +3420,13 @@ public abstract class PlayerImpl implements Player, Serializable {
         for (Ability ability : playableAbilities) {
             if (ability.getSourceId() != null) {
                 playableObjects.add(ability.getSourceId());
+
+                // main card must be marked playable in GUI
+                MageObject object = game.getObject(ability.getSourceId());
+                if (object instanceof SplitCardHalf) {
+                    UUID splitCardId = ((Card) object).getMainCard().getId();
+                    playableObjects.add(splitCardId);
+                }
             }
         }
         return playableObjects;

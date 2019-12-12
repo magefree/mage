@@ -185,6 +185,7 @@ Scars of Mirrodin|SOM|
 Stronghold|STH|
 Super Series|SUS|
 Theros|THS|
+Theros: Beyond Death|THB|
 Tempest|TMP|
 Throne of Eldraine|ELD|
 Throne of Eldraine Collector's Edition|CELD|
