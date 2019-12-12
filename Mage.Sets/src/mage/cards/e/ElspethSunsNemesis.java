@@ -36,7 +36,7 @@ public final class ElspethSunsNemesis extends CardImpl {
         this.addAbility(ability);
 
         // −2: Create two 1/1 white Human Soldier creature tokens.
-        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new HumanSoldierToken()), -2));
+        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new HumanSoldierToken(), 2), -2));
 
         // −3: You gain 5 life.
         this.addAbility(new LoyaltyAbility(new GainLifeEffect(5), -3));
