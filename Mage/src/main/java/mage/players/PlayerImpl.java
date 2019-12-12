@@ -3219,6 +3219,10 @@ public abstract class PlayerImpl implements Player, Serializable {
         List<Ability> playable = new ArrayList();
         if (card != null) {
             for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.HAND)) {
+                if (!ability.canActivate(playerId, game).canActivate()) {
+                    continue;
+                }
+
                 UUID savedControllerId = null;
                 if (setControllerId) {
                     // For when owner != caster, e.g. with Psychic Intrusion and similar effects.
