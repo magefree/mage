@@ -39,10 +39,10 @@ public final class QueenOfIce extends AdventureCard {
 
         // Rage of Winter
         // Tap target creature. It doesn’t untap during its controller’s next untap step.
-        this.getAdventureSpellAbility().addEffect(new TapTargetEffect());
-        this.getAdventureSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect()
+        this.getSpellCard().getSpellAbility().addEffect(new TapTargetEffect());
+        this.getSpellCard().getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect()
                 .setText("It doesn't untap during its controller's next untap step"));
-        this.getAdventureSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     private QueenOfIce(final QueenOfIce card) {

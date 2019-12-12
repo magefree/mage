@@ -25,7 +25,7 @@ public final class CuriousPair extends AdventureCard {
 
         // Treats to Share
         // Create a Food token.
-        this.getAdventureSpellAbility().addEffect(new CreateTokenEffect(new FoodToken()));
+        this.getSpellCard().getSpellAbility().addEffect(new CreateTokenEffect(new FoodToken()));
     }
 
     private CuriousPair(final CuriousPair card) {

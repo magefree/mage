@@ -37,7 +37,7 @@ public final class BeanstalkGiant extends AdventureCard {
 
         // Fertile Footsteps
         // Search your library for a basic land card, put it onto the battlefield, then shuffle your library.
-        this.getAdventureSpellAbility().addEffect(
+        this.getSpellCard().getSpellAbility().addEffect(
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND))
         );
     }

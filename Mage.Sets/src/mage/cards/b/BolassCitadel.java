@@ -1,6 +1,7 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Costs;
@@ -90,27 +91,30 @@ class BolassCitadelPlayTheTopCardEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        return applies(objectId, null, source, game, affectedControllerId);
+    }
+
+    @Override
+    public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
         Card cardOnTop = game.getCard(objectId);
         if (cardOnTop == null) {
             return false;
         }
-        if (affectedControllerId.equals(source.getControllerId())
+        if (playerId.equals(source.getControllerId())
                 && cardOnTop.isOwnedBy(source.getControllerId())) {
             Player controller = game.getPlayer(cardOnTop.getOwnerId());
             if (controller != null
                     && cardOnTop.equals(controller.getLibrary().getFromTop(game))) {
-                // add the life cost first
-                PayLifeCost cost = new PayLifeCost(cardOnTop.getManaCost().convertedManaCost());
-                Costs costs = new CostsImpl();
-                costs.add(cost);
-                // check for additional costs that must be paid
-                if (cardOnTop.getSpellAbility() != null) {
-                    for (Cost additionalCost : cardOnTop.getSpellAbility().getCosts()) {
-                        costs.add(additionalCost);
-                    }
+                if (affectedAbility instanceof ActivatedAbility) {
+                    ActivatedAbility activatedAbility = (ActivatedAbility) affectedAbility;
+                    // add the life cost first
+                    PayLifeCost cost = new PayLifeCost(activatedAbility.getManaCosts().convertedManaCost());
+                    Costs costs = new CostsImpl();
+                    costs.add(cost);
+                    costs.addAll(activatedAbility.getCosts());
+                    controller.setCastSourceIdWithAlternateMana(activatedAbility.getSourceId(), null, costs);
+                    return true;
                 }
-                controller.setCastSourceIdWithAlternateMana(cardOnTop.getId(), null, costs);
-                return true;
             }
         }
         return false;

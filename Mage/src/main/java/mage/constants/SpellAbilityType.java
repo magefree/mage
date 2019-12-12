@@ -15,7 +15,7 @@ public enum SpellAbilityType {
     SPLIT_RIGHT("RightSplit SpellAbility"),
     MODE("Mode SpellAbility"),
     SPLICE("Spliced SpellAbility"),
-    ADVENTURE("Adventure SpellAbility");
+    ADVENTURE_SPELL("Adventure SpellAbility");
 
     private final String text;
 

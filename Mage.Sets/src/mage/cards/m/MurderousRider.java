@@ -37,11 +37,11 @@ public final class MurderousRider extends AdventureCard {
 
         // Swift End
         // Destroy target creature or planeswalker. You lose 2 life.
-        this.getAdventureSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getAdventureSpellAbility().addEffect(
+        this.getSpellCard().getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellCard().getSpellAbility().addEffect(
                 new LoseLifeSourceControllerEffect(2).setText("You lose 2 life.")
         );
-        this.getAdventureSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
+        this.getSpellCard().getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
     }
 
     private MurderousRider(final MurderousRider card) {

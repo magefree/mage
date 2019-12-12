@@ -30,8 +30,8 @@ public final class RimrockKnight extends AdventureCard {
 
         // Boulder Rush
         // Target creature gets +2/+0 until end of turn.
-        this.getAdventureSpellAbility().addEffect(new BoostTargetEffect(2, 0, Duration.EndOfTurn));
-        this.getAdventureSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellCard().getSpellAbility().addEffect(new BoostTargetEffect(2, 0, Duration.EndOfTurn));
+        this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     private RimrockKnight(final RimrockKnight card) {

@@ -28,7 +28,7 @@ public final class RosethornAcolyte extends AdventureCard {
 
         // Seasonal Ritual
         // Add one mana of any color.
-        this.getAdventureSpellAbility().addEffect(new AddManaOfAnyColorEffect());
+        this.getSpellCard().getSpellAbility().addEffect(new AddManaOfAnyColorEffect());
     }
 
     private RosethornAcolyte(final RosethornAcolyte card) {

@@ -30,13 +30,13 @@ public final class FaerieGuidemother extends AdventureCard {
 
         // Gift of the Fae
         // Target creature gets +2/+1 and gains flying until end of turn.
-        this.getAdventureSpellAbility().addEffect(new BoostTargetEffect(
+        this.getSpellCard().getSpellAbility().addEffect(new BoostTargetEffect(
                 2, 1, Duration.EndOfTurn
         ).setText("Target creature gets +2/+1"));
-        this.getAdventureSpellAbility().addEffect(new GainAbilityTargetEffect(
+        this.getSpellCard().getSpellAbility().addEffect(new GainAbilityTargetEffect(
                 FlyingAbility.getInstance(), Duration.EndOfTurn
         ).setText("and gains flying until end of turn"));
-        this.getAdventureSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     private FaerieGuidemother(final FaerieGuidemother card) {

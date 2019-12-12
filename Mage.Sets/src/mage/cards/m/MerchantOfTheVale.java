@@ -36,7 +36,7 @@ public final class MerchantOfTheVale extends AdventureCard {
 
         // Haggle
         // You may discard a card. If you do, draw a card.
-        this.getAdventureSpellAbility().addEffect(new DoIfCostPaid(
+        this.getSpellCard().getSpellAbility().addEffect(new DoIfCostPaid(
                 new DrawCardSourceControllerEffect(1), new DiscardCardCost()
         ));
     }

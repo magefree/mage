@@ -37,8 +37,8 @@ public final class HypnoticSprite extends AdventureCard {
 
         // Mesmeric Glare
         // Counter target spell with converted mana cost 3 or less.
-        this.getAdventureSpellAbility().addEffect(new CounterTargetEffect());
-        this.getAdventureSpellAbility().addTarget(new TargetSpell(filter));
+        this.getSpellCard().getSpellAbility().addEffect(new CounterTargetEffect());
+        this.getSpellCard().getSpellAbility().addTarget(new TargetSpell(filter));
     }
 
     private HypnoticSprite(final HypnoticSprite card) {

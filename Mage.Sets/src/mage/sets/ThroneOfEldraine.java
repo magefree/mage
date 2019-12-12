@@ -327,8 +327,5 @@ public final class ThroneOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Worthy Knight", 36, Rarity.RARE, mage.cards.w.WorthyKnight.class));
         cards.add(new SetCardInfo("Yorvo, Lord of Garenbrig", 185, Rarity.RARE, mage.cards.y.YorvoLordOfGarenbrig.class));
         cards.add(new SetCardInfo("Youthful Knight", 37, Rarity.COMMON, mage.cards.y.YouthfulKnight.class));
-
-        // This is here to prevent the incomplete adventure implementation from causing problems and will be removed
-        cards.removeIf(setCardInfo -> AdventureCard.class.isAssignableFrom(setCardInfo.getCardClass()));
     }
 }

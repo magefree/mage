@@ -2,7 +2,10 @@
 package mage.abilities.effects.common.continuous;
 
 import java.util.UUID;
+
+import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.cards.Card;
 import mage.constants.AsThoughEffectType;
@@ -47,12 +50,27 @@ public class PlayTheTopCardEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        return applies(objectId, null, source, game, affectedControllerId);
+    }
+
+    @Override
+    public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
         Card cardOnTop = game.getCard(objectId);
+        Card cardToCheckProperties = cardOnTop;
+
+        // Check each ability individually, as e.g. Adventures and associated creatures may get different results from the filter.
+        if (affectedAbility != null) {
+            MageObject sourceObject = affectedAbility.getSourceObject(game);
+            if (sourceObject != null && sourceObject instanceof Card) {
+                cardToCheckProperties = (Card) sourceObject;
+            }
+        }
+
         if (cardOnTop != null
-                && affectedControllerId.equals(source.getControllerId())
+                && playerId.equals(source.getControllerId())
                 && cardOnTop.isOwnedBy(source.getControllerId())
-                && (!cardOnTop.getManaCost().isEmpty() || cardOnTop.isLand())
-                && filter.match(cardOnTop, game)) {
+                && (!cardToCheckProperties.getManaCost().isEmpty() || cardToCheckProperties.isLand())
+                && filter.match(cardToCheckProperties, game)) {
             Player player = game.getPlayer(cardOnTop.getOwnerId());
             if (player != null && cardOnTop.equals(player.getLibrary().getFromTop(game))) {
                 return true;

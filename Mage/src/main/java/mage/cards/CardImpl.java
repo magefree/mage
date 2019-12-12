@@ -505,6 +505,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                         stackObject = game.getStack().getSpell(((SplitCard) this).getRightHalfCard().getId());
                     }
                 }
+                if (stackObject == null && (this instanceof AdventureCard)) {
+                    stackObject = game.getStack().getSpell(((AdventureCard) this).getSpellCard().getId());
+                }
                 if (stackObject == null) {
                     stackObject = game.getStack().getSpell(getId());
                 }

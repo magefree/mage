@@ -230,6 +230,12 @@ public abstract class GameImpl implements Game, Serializable {
                 gameCards.put(rightCard.getId(), rightCard);
                 state.addCard(rightCard);
             }
+            if (card instanceof AdventureCard) {
+                Card spellCard = ((AdventureCard) card).getSpellCard();
+                spellCard.setOwnerId(ownerId);
+                gameCards.put(spellCard.getId(), spellCard);
+                state.addCard(spellCard);
+            }
         }
     }
 
@@ -1767,7 +1773,7 @@ public abstract class GameImpl implements Game, Serializable {
         Iterator<Card> copiedCards = this.getState().getCopiedCards().iterator();
         while (copiedCards.hasNext()) {
             Card card = copiedCards.next();
-            if (card instanceof SplitCardHalf) {
+            if (card instanceof SplitCardHalf || card instanceof AdventureCardSpell) {
                 continue; // only the main card is moves, not the halves
             }
             Zone zone = state.getZone(card.getId());
