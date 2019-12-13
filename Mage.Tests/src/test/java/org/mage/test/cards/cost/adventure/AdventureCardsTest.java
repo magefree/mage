@@ -10,6 +10,10 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 public class AdventureCardsTest extends CardTestPlayerBase {
+
+    String abilityBrazenBorrowerMainCast = "Cast Brazen Borrower";
+    String abilityBrazenBorrowerAdventureCast = "Cast Petty Theft";
+
     @Test
     public void testCastTreatsToShare() {
         /*
@@ -31,7 +35,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         assertHandCount(playerA, 0);
         assertPermanentCount(playerA, "Food", 1);
         assertExileCount(playerA, "Curious Pair", 1);
-        assertGraveyardCount(playerA,0);
+        assertGraveyardCount(playerA, 0);
     }
 
     @Test
@@ -47,7 +51,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         assertHandCount(playerA, 0);
         assertPermanentCount(playerA, "Food", 1);
         assertExileCount(playerA, "Curious Pair", 1);
-        assertGraveyardCount(playerA,0);
+        assertGraveyardCount(playerA, 0);
     }
 
     @Test
@@ -64,7 +68,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Food", 0);
         assertPermanentCount(playerA, "Curious Pair", 1);
         assertExileCount(playerA, "Curious Pair", 0);
-        assertGraveyardCount(playerA,0);
+        assertGraveyardCount(playerA, 0);
     }
 
     @Test
@@ -125,7 +129,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Food", 0);
         assertPermanentCount(playerA, "Curious Pair", 1);
         assertExileCount(playerA, "Curious Pair", 0);
-        assertGraveyardCount(playerA,0);
+        assertGraveyardCount(playerA, 0);
     }
 
     @Test
@@ -531,5 +535,79 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Curious Pair", 0);
         assertExileCount(playerA, "Curious Pair", 1);
         assertGraveyardCount(playerA, 0);
+    }
+
+    @Test
+    public void test_PlayableAbiities_NoneByMana() {
+
+        addCard(Zone.HAND, playerA, "Brazen Borrower", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Balduvian Bears", 1);
+
+        // no playable by mana
+        checkPlayableAbility("main", 1, PhaseStep.PRECOMBAT_MAIN, playerA, abilityBrazenBorrowerMainCast, false);
+        checkPlayableAbility("adventure", 1, PhaseStep.PRECOMBAT_MAIN, playerA, abilityBrazenBorrowerAdventureCast, false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_PlayableAbiities_NoneByTarget() {
+        // Brazen Borrower {1}{U}{U}
+        // Petty Theft {1}{U} Return target nonland permanent an opponent controls to its owner’s hand.
+
+        addCard(Zone.HAND, playerA, "Brazen Borrower", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        //addCard(Zone.BATTLEFIELD, playerB, "Balduvian Bears", 1);
+
+        // no playable by wrong target
+        checkPlayableAbility("main", 1, PhaseStep.PRECOMBAT_MAIN, playerA, abilityBrazenBorrowerMainCast, false);
+        checkPlayableAbility("adventure", 1, PhaseStep.PRECOMBAT_MAIN, playerA, abilityBrazenBorrowerAdventureCast, false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_PlayableAbiities_OnlyAdventure() {
+        // Brazen Borrower {1}{U}{U}
+        // Petty Theft {1}{U} Return target nonland permanent an opponent controls to its owner’s hand.
+
+        addCard(Zone.HAND, playerA, "Brazen Borrower", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Balduvian Bears", 1);
+
+        // only adventure
+        checkPlayableAbility("main", 1, PhaseStep.PRECOMBAT_MAIN, playerA, abilityBrazenBorrowerMainCast, false);
+        checkPlayableAbility("adventure", 1, PhaseStep.PRECOMBAT_MAIN, playerA, abilityBrazenBorrowerAdventureCast, true);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_PlayableAbiities_All() {
+        // Brazen Borrower {1}{U}{U}
+        // Petty Theft {1}{U} Return target nonland permanent an opponent controls to its owner’s hand.
+
+        addCard(Zone.HAND, playerA, "Brazen Borrower", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.BATTLEFIELD, playerB, "Balduvian Bears", 1);
+
+        // all
+        checkPlayableAbility("main", 1, PhaseStep.PRECOMBAT_MAIN, playerA, abilityBrazenBorrowerMainCast, true);
+        checkPlayableAbility("adventure", 1, PhaseStep.PRECOMBAT_MAIN, playerA, abilityBrazenBorrowerAdventureCast, true);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertAllCommandsUsed();
     }
 }

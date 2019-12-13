@@ -25,6 +25,7 @@ import mage.counters.Counters;
 import mage.designations.Designation;
 import mage.designations.DesignationType;
 import mage.filter.Filter;
+import mage.filter.FilterMana;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.*;
@@ -59,7 +60,6 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import mage.filter.FilterMana;
 
 import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
 
@@ -652,6 +652,13 @@ public class TestPlayer implements Player {
                             wasProccessed = true;
                         }
 
+                        // check playable ability: ability text, must have
+                        if (params[0].equals(CHECK_COMMAND_PLAYABLE_ABILITY) && params.length == 3) {
+                            assertPlayableAbility(action, game, computerPlayer, params[1], Boolean.parseBoolean(params[2]));
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
                         // check battlefield count: target player, card name, count
                         if (params[0].equals(CHECK_COMMAND_PERMANENT_COUNT) && params.length == 4) {
                             assertPermanentCount(action, game, game.getPlayer(UUID.fromString(params[1])), params[2], Integer.parseInt(params[3]));
@@ -997,6 +1004,30 @@ public class TestPlayer implements Player {
             Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must have ability " + abilityClass, true, founded);
         } else {
             Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must have not ability " + abilityClass, false, founded);
+        }
+    }
+
+    private void assertPlayableAbility(PlayerAction action, Game game, Player player, String abilityStartText, boolean mustHave) {
+        boolean founded = false;
+        for (Ability ability : computerPlayer.getPlayable(game, true)) {
+            if (ability.toString().startsWith(abilityStartText)) {
+                founded = true;
+                break;
+            }
+        }
+
+        if (mustHave && !founded) {
+            printStart(action.getActionName());
+            printAbilities(game, computerPlayer.getPlayable(game, true));
+            printEnd();
+            Assert.fail("Must have playable ability, but not found: " + abilityStartText);
+        }
+
+        if (!mustHave && founded) {
+            printStart(action.getActionName());
+            printAbilities(game, computerPlayer.getPlayable(game, true));
+            printEnd();
+            Assert.fail("Must not have playable ability, but found: " + abilityStartText);
         }
     }
 
@@ -3463,7 +3494,7 @@ public class TestPlayer implements Player {
     public void setChooseStrictMode(boolean enable) {
         this.strictChooseMode = enable;
     }
-    
+
     @Override
     public void addPhyrexianToColors(FilterMana colors) {
         computerPlayer.addPhyrexianToColors(colors);
@@ -3478,7 +3509,7 @@ public class TestPlayer implements Player {
     public FilterMana getPhyrexianColors() {
         return computerPlayer.getPhyrexianColors();
     }
-    
+
     @Override
     public SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana) {
         return card.getSpellAbility();
