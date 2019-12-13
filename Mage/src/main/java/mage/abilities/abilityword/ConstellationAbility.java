@@ -12,22 +12,29 @@ import mage.game.permanent.Permanent;
 /**
  * Constellation
  *
- *
  * @author LevelX2
  */
 
 public class ConstellationAbility extends TriggeredAbilityImpl {
+
+    private final boolean thisOr;
 
     public ConstellationAbility(Effect effect) {
         this(effect, false);
     }
 
     public ConstellationAbility(Effect effect, boolean optional) {
+        this(effect, optional, true);
+    }
+
+    public ConstellationAbility(Effect effect, boolean optional, boolean thisOr) {
         super(Zone.BATTLEFIELD, effect, optional);
+        this.thisOr = thisOr;
     }
 
     public ConstellationAbility(final ConstellationAbility ability) {
         super(ability);
+        this.thisOr = ability.thisOr;
     }
 
     @Override
@@ -42,17 +49,17 @@ public class ConstellationAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getPlayerId().equals(this.getControllerId())) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.isEnchantment()) {
-                return true;
-            }
+        if (!event.getPlayerId().equals(this.getControllerId())) {
+            return false;
         }
-        return false;
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        return permanent != null && permanent.isEnchantment();
     }
 
     @Override
     public String getRule() {
-        return new StringBuilder("<i>Constellation</i> &mdash; Whenever {this} or another enchantment enters the battlefield under your control, ").append(super.getRule()).toString();
+        return "<i>Constellation</i> &mdash; Whenever "
+                + (thisOr ? "{this} or another" : "an")
+                + " enchantment enters the battlefield under your control, " + super.getRule();
     }
 }
