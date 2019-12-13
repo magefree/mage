@@ -64,7 +64,7 @@ public final class DrakusethMawOfFlames extends CardImpl {
 class DrakusethMawOfFlamesEffect extends OneShotEffect {
 
     DrakusethMawOfFlamesEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.Damage);
         staticText = "it deals 4 damage to any target and 3 damage to each of "
                 + "up to two other targets.";
     }
@@ -93,12 +93,10 @@ class DrakusethMawOfFlamesEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(targetId);
         if (permanent != null) {
             permanent.damage(damage, source.getSourceId(), game);
-            return;
         }
         Player player = game.getPlayer(targetId);
         if (player != null) {
             player.damage(damage, source.getSourceId(), game);
-            return;
         }
     }
 }
