@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -6,7 +5,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
-import mage.abilities.costs.AdjustingSourceCosts;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
@@ -29,7 +27,7 @@ import mage.util.CardUtil;
 public final class SoulScourge extends CardImpl {
 
     public SoulScourge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");
         this.subtype.add(SubType.NIGHTMARE);
         this.subtype.add(SubType.HORROR);
 
@@ -40,7 +38,7 @@ public final class SoulScourge extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Soul Scourge enters the battlefield, target player loses 3 life.
-        Ability ability = new SoulScourgeEntersBattlefieldTriggeredAbility();
+        Ability ability = new SoulScourgeEntersBattlefieldTriggeredAbility(new LoseLifeTargetEffect(3));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         // When Soul Scourge leaves the battlefield, that player gains 3 life.
@@ -57,28 +55,32 @@ public final class SoulScourge extends CardImpl {
     }
 }
 
-class SoulScourgeEntersBattlefieldTriggeredAbility extends EntersBattlefieldTriggeredAbility implements AdjustingSourceCosts {
+class SoulScourgeEntersBattlefieldTriggeredAbility extends EntersBattlefieldTriggeredAbility {
 
-    public SoulScourgeEntersBattlefieldTriggeredAbility() {
-        super(new LoseLifeTargetEffect(3), false);
+    public SoulScourgeEntersBattlefieldTriggeredAbility(Effect effect) {
+        super(effect, false);
     }
 
-    public SoulScourgeEntersBattlefieldTriggeredAbility(SoulScourgeEntersBattlefieldTriggeredAbility ability) {
+    public SoulScourgeEntersBattlefieldTriggeredAbility(final SoulScourgeEntersBattlefieldTriggeredAbility ability) {
         super(ability);
+    }
+
+    @Override
+    public boolean activate(Game game, boolean noMana) {
+        if (super.activate(game, noMana)) {
+            Player player = game.getPlayer(getFirstTarget());
+            if (player != null) {
+                String key = CardUtil.getCardZoneString("targetPlayer", getSourceId(), game);
+                game.getState().setValue(key, player.getId());
+            }
+            return true;
+        }
+        return false;
     }
 
     @Override
     public SoulScourgeEntersBattlefieldTriggeredAbility copy() {
         return new SoulScourgeEntersBattlefieldTriggeredAbility(this);
-    }
-
-    @Override
-    public void adjustCosts(Ability ability, Game game) {
-        Player player = game.getPlayer(ability.getFirstTarget());
-        if (player != null) {
-            String key = CardUtil.getCardZoneString("targetPlayer", this.getSourceId(), game);
-            game.getState().setValue(key, player.getId());
-        }
     }
 }
 

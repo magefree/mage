@@ -1,5 +1,9 @@
 package mage.game.stack;
 
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -29,11 +33,6 @@ import mage.target.targetadjustment.TargetAdjuster;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
 import mage.watchers.Watcher;
-
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -479,11 +478,6 @@ public class StackAbility extends StackObjImpl implements Ability {
     @Override
     public String getGameLogMessage(Game game) {
         throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setCostModificationActive(boolean active) {
-        throw new UnsupportedOperationException("Not supported. Only neede for flashbacked spells");
     }
 
     @Override

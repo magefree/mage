@@ -67,6 +67,7 @@ public class LaquatussChampionTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 7);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 7);
         addCard(Zone.HAND, playerA, "Laquatus's Champion");
+        // Destroy target creature. It can't be regenerated.
         addCard(Zone.HAND, playerA, "Terminate");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Laquatus's Champion");

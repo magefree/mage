@@ -1,6 +1,9 @@
 package mage.players;
 
 import com.google.common.collect.ImmutableMap;
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.MageObjectReference;
@@ -32,8 +35,8 @@ import mage.counters.Counters;
 import mage.designations.Designation;
 import mage.designations.DesignationType;
 import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
 import mage.filter.FilterMana;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreatureForCombat;
 import mage.filter.common.FilterCreatureForCombatBlock;
@@ -64,10 +67,6 @@ import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
-
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
 
 public abstract class PlayerImpl implements Player, Serializable {
 
@@ -3045,18 +3044,6 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (available != null) {
                 game.getContinuousEffects().costModification(copy, game);
             }
-
-            Card card = game.getCard(ability.getSourceId());
-            if (card != null) {
-                for (Ability ability0 : card.getAbilities()) {
-                    if (ability0 instanceof AdjustingSourceCosts) {
-                        // A workaround for Issue#457
-                        if (!(ability0 instanceof ConvokeAbility)) {
-                            ((AdjustingSourceCosts) ability0).adjustCosts(copy, game);
-                        }
-                    }
-                }
-            }
             boolean canBeCastRegularly = true;
             if (copy instanceof SpellAbility && copy.getManaCosts().isEmpty() && copy.getCosts().isEmpty()) {
                 // 117.6. Some mana costs contain no mana symbols. This represents an unpayable cost...
@@ -3094,7 +3081,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                 }
             }
-            return canPlayCardByAlternateCost(card, available, ability, game);
+            return canPlayCardByAlternateCost(game.getCard(ability.getSourceId()), available, ability, game);
         }
         return false;
     }
@@ -3231,11 +3218,11 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
                 if (ability instanceof SpellAbility
                         && null != game.getContinuousEffects().asThough(card.getId(),
-                        AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, ability, getId(), game)) {
+                                AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, ability, getId(), game)) {
                     playable.add(ability);
                 } else if (ability instanceof PlayLandAbility
                         && null != game.getContinuousEffects().asThough(card.getId(),
-                        AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, card.getSpellAbility(), getId(), game)) {
+                                AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, card.getSpellAbility(), getId(), game)) {
                     playable.add(ability);
                 }
                 if (setControllerId) {
