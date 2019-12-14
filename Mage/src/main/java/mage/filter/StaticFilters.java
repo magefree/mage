@@ -133,7 +133,6 @@ public final class StaticFilters {
         FILTER_CARD_A_NON_LAND.setLockedFilter(true);
     }
 
-
     public static final FilterNonlandCard FILTER_CARDS_NON_LAND = new FilterNonlandCard("nonland cards");
 
     static {
@@ -186,6 +185,13 @@ public final class StaticFilters {
 
     static {
         FILTER_ARTIFACT_CREATURE_PERMANENT.setLockedFilter(true);
+    }
+
+    public static final FilterControlledArtifactPermanent FILTER_ARTIFACTS_NON_CREATURE = new FilterControlledArtifactPermanent("Noncreature artifacts");
+
+    static {
+        FILTER_ARTIFACTS_NON_CREATURE.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        FILTER_ARTIFACTS_NON_CREATURE.setLockedFilter(true);
     }
 
     public static final FilterPermanent FILTER_PERMANENT_ARTIFACT_OR_CREATURE = new FilterPermanent("artifact or creature");
