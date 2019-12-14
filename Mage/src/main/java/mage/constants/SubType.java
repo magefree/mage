@@ -110,6 +110,7 @@ public enum SubType {
     // D
     DATHOMIRIAN("Dathomirian", SubTypeSet.CreatureType, true), // Star Wars
     DAUTHI("Dauthi", SubTypeSet.CreatureType),
+    DEMIGOD("Demigod", SubTypeSet.CreatureType),
     DEMON("Demon", SubTypeSet.CreatureType),
     DESERTER("Deserter", SubTypeSet.CreatureType),
     DEVIL("Devil", SubTypeSet.CreatureType),

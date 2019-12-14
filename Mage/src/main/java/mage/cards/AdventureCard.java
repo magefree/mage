@@ -4,7 +4,8 @@ import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Zone;
 import mage.game.Game;
 
 import java.util.List;
@@ -26,7 +27,7 @@ public abstract class AdventureCard extends CardImpl {
     public AdventureCard(AdventureCard card) {
         super(card);
         this.spellCard = card.getSpellCard().copy();
-        ((AdventureCardSpell)this.spellCard).setParentCard(this);
+        ((AdventureCardSpell) this.spellCard).setParentCard(this);
     }
 
     public Card getSpellCard() {
@@ -89,6 +90,11 @@ public abstract class AdventureCard extends CardImpl {
         allAbilities.addAll(spellCard.getAbilities(game));
         allAbilities.addAll(super.getAbilities(game));
         return allAbilities;
+    }
+
+    public Abilities<Ability> getSharedAbilities() {
+        // abilities without spellcard
+        return super.getAbilities();
     }
 
     @Override

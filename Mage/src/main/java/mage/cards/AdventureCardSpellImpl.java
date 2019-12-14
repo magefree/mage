@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- *
  * @author phulin
  */
 public class AdventureCardSpellImpl extends CardImpl implements AdventureCardSpell {
@@ -112,7 +111,7 @@ class AdventureCardSpellAbility extends SpellAbility {
     public ActivationStatus canActivate(UUID playerId, Game game) {
         ExileZone adventureExileZone = game.getExile().getExileZone(ExileAdventureSpellEffect.adventureExileId(playerId, game));
         Card spellCard = game.getCard(this.getSourceId());
-        if (spellCard != null && spellCard instanceof AdventureCardSpell) {
+        if (spellCard instanceof AdventureCardSpell) {
             Card card = ((AdventureCardSpell) spellCard).getParentCard();
             if (adventureExileZone != null && adventureExileZone.contains(card.getId())) {
                 return ActivationStatus.getFalse();

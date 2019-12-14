@@ -63,7 +63,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
      */
     public boolean spellCanBeActivatedRegularlyNow(UUID playerId, Game game) {
         MageObject object = game.getObject(sourceId);
-        if ((Boolean) game.getState().getValue("CastFromExileEnabled" + object.getId()) != null) {
+        if (game.getState().getValue("CastFromExileEnabled" + object.getId()) != null) {
             return (Boolean) game.getState().getValue("CastFromExileEnabled" + object.getId());  // card like Chandra, Torch of Defiance +1 loyal ability)
         }
         return null != game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game) // check this first to allow Offering in main phase
@@ -98,7 +98,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
             if (getSpellAbilityType() == SpellAbilityType.BASE_ALTERNATE) {
                 Player player = game.getPlayer(playerId);
                 if (player != null
-                        && getSourceId().equals(player.getCastSourceIdWithAlternateMana())) {
+                        && player.getCastSourceIdWithAlternateMana().contains(getSourceId())) {
                     return ActivationStatus.getFalse();
                 }
             }

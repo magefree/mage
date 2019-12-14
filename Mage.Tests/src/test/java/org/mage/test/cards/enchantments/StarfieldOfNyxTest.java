@@ -7,6 +7,7 @@ import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -117,4 +118,48 @@ public class StarfieldOfNyxTest extends CardTestPlayerBase {
         Assert.assertFalse(emrakul.getAbilities().contains(FlyingAbility.getInstance())); // loses flying though
 
     }
+
+    /**
+     * So Starfield of Nyx in play. Detention Sphere with a Song of the Dryads
+     * under it. Wrath of god on the stack. In response I Parallax Wave Honden
+     * of life's Web, Mirrari's Wake, Sphere of Safety, Aura Shards, and
+     * Enchantress's Presence to save them. Wrath resolves and Song of the
+     * Dryads come back along with the 5 named enchantments. Opp targets
+     * Starfield of Nyx with Song of the Dryads. When song of the dryads
+     * attaches all my enchantments stay creatures but as 1/1's instead of cmc.
+     * I untap draw and cast Humility. All my 1/1 enchantments die while opp's
+     * bruna, light of alabaster keeps her abilities. After mirrari's wake dies
+     * due to this I still have double mana. So yea, something broke big time
+     * there.
+     */
+    @Test
+    @Ignore
+    public void testStarfieldOfNyxAndSongOfTheDryads() {
+        // Nontoken creatures you control get +1/+1 and have vigilance.
+        addCard(Zone.BATTLEFIELD, playerA, "Always Watching", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        // At the beginning of your upkeep, you may return target enchantment card from your graveyard to the battlefield.
+        // As long as you control five or more enchantments, each other non-Aura enchantment you control is a creature in
+        // addition to its other types and has base power and base toughness each equal to its converted mana cost.
+        addCard(Zone.HAND, playerA, "Starfield of Nyx"); // "{4}{W}"
+
+        addCard(Zone.BATTLEFIELD, playerB, "Forest", 3);
+        // Enchanted permanent is a colorless Forest land.
+        addCard(Zone.HAND, playerB, "Song of the Dryads"); // Enchant Permanent {2}{G}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Starfield of Nyx");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Song of the Dryads", "Starfield of Nyx");
+
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Always Watching", 5);
+        assertPermanentCount(playerB, "Song of the Dryads", 1);
+
+        assertPowerToughness(playerA, "Always Watching", 0, 0, Filter.ComparisonScope.All);
+
+        assertPermanentCount(playerA, "Forest", 1);
+
+    }
+
 }

@@ -32,7 +32,6 @@ public class BolassCitadelTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore("This is broken for now.")
     public void testCastAdventure() {
         /*
          * Curious Pair {1}{G}
@@ -44,7 +43,6 @@ public class BolassCitadelTest extends CardTestPlayerBase {
          * Create a Food token.
          */
         setStrictChooseMode(true);
-        addCard(Zone.BATTLEFIELD, playerA, "Forest");
         addCard(Zone.BATTLEFIELD, playerA, "Bolas's Citadel");
         removeAllCardsFromLibrary(playerA);
         addCard(Zone.LIBRARY, playerA, "Curious Pair");
@@ -54,7 +52,6 @@ public class BolassCitadelTest extends CardTestPlayerBase {
         execute();
 
         assertAllCommandsUsed();
-        assertTapped("Forest", false);
         assertHandCount(playerA, 0);
         assertPermanentCount(playerA, "Food", 1);
         assertExileCount(playerA, "Curious Pair", 1);

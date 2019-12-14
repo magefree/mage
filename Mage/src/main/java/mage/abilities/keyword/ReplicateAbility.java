@@ -1,16 +1,10 @@
-
 package mage.abilities.keyword;
 
-import java.util.Iterator;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.OptionalAdditionalCost;
-import mage.abilities.costs.OptionalAdditionalCostImpl;
-import mage.abilities.costs.OptionalAdditionalSourceCosts;
+import mage.abilities.costs.*;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -23,8 +17,9 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 
+import java.util.Iterator;
+
 /**
- *
  * @author LevelX2
  */
 public class ReplicateAbility extends StaticAbility implements OptionalAdditionalSourceCosts {
@@ -91,12 +86,12 @@ public class ReplicateAbility extends StaticAbility implements OptionalAdditiona
                     String times = "";
                     if (additionalCost.isRepeatable()) {
                         int numActivations = additionalCost.getActivateCount();
-                        times = Integer.toString(numActivations + 1) + (numActivations == 0 ? " time " : " times ");
+                        times = (numActivations + 1) + (numActivations == 0 ? " time " : " times ");
                     }
                     if (additionalCost.canPay(ability, sourceId, controllerId, game)
                             && player.chooseUse(Outcome.Benefit, new StringBuilder("Pay ").append(times).append(additionalCost.getText(false)).append(" ?").toString(), ability, game)) {
                         additionalCost.activate();
-                        for (Iterator it = ((Costs) additionalCost).iterator(); it.hasNext();) {
+                        for (Iterator it = ((Costs) additionalCost).iterator(); it.hasNext(); ) {
                             Cost cost = (Cost) it.next();
                             if (cost instanceof ManaCostsImpl) {
                                 ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());
@@ -170,7 +165,7 @@ class ReplicateTriggeredAbility extends TriggeredAbilityImpl {
                 if (card != null) {
                     for (Ability ability : card.getAbilities(game)) {
                         if (ability instanceof ReplicateAbility) {
-                            if (((ReplicateAbility) ability).isActivated()) {
+                            if (ability.isActivated()) {
                                 for (Effect effect : this.getEffects()) {
                                     effect.setValue("ReplicateSpell", spell);
                                     effect.setValue("ReplicateCount", ((ReplicateAbility) ability).getActivateCount());
@@ -213,7 +208,7 @@ class ReplicateCopyEffect extends OneShotEffect {
                 if (card != null) {
                     for (Ability ability : card.getAbilities(game)) {
                         if (ability instanceof ReplicateAbility) {
-                            if (((ReplicateAbility) ability).isActivated()) {
+                            if (ability.isActivated()) {
                                 ((ReplicateAbility) ability).resetReplicate();
                             }
                         }
