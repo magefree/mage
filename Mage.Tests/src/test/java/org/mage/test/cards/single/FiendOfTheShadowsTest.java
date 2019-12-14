@@ -6,7 +6,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * also tests regenerate and tests that permanents with protection can be
  * sacrificed
  *
@@ -46,10 +45,13 @@ public class FiendOfTheShadowsTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Swamp");
 
         attack(1, playerA, "Fiend of the Shadows");
+        addTarget(playerB, "Swamp");
         playLand(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Swamp");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 17);
