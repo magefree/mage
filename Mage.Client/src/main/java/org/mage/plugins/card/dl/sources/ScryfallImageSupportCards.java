@@ -243,6 +243,7 @@ public class ScryfallImageSupportCards {
             add("C19");
             add("ELD");
             add("CELD");
+            add("THB");
             //
             add("EURO");
             add("GPX");
