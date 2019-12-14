@@ -1,11 +1,6 @@
-
 package mage.abilities.effects.common.continuous;
 
-import java.util.UUID;
-
-import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.cards.Card;
 import mage.constants.AsThoughEffectType;
@@ -14,6 +9,8 @@ import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -55,26 +52,18 @@ public class PlayTheTopCardEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
-        Card cardOnTop = game.getCard(objectId);
-        Card cardToCheckProperties = cardOnTop;
+        Card cardToCheck = game.getCard(objectId);
+        objectId = game.getCard(objectId).getMainCard().getId(); // for split cards
 
-        // Check each ability individually, as e.g. Adventures and associated creatures may get different results from the filter.
-        if (affectedAbility != null) {
-            MageObject sourceObject = affectedAbility.getSourceObject(game);
-            if (sourceObject != null && sourceObject instanceof Card) {
-                cardToCheckProperties = (Card) sourceObject;
-            }
-        }
-
-        if (cardOnTop != null
+        if (cardToCheck != null
                 && playerId.equals(source.getControllerId())
-                && cardOnTop.isOwnedBy(source.getControllerId())
-                && (!cardToCheckProperties.getManaCost().isEmpty() || cardToCheckProperties.isLand())
-                && filter.match(cardToCheckProperties, game)) {
-            Player player = game.getPlayer(cardOnTop.getOwnerId());
-            if (player != null && cardOnTop.equals(player.getLibrary().getFromTop(game))) {
-                return true;
-            }
+                && cardToCheck.isOwnedBy(source.getControllerId())
+                && (!cardToCheck.getManaCost().isEmpty() || cardToCheck.isLand())
+                && filter.match(cardToCheck, game)) {
+            Player player = game.getPlayer(cardToCheck.getOwnerId());
+
+            UUID needCardID = player.getLibrary().getFromTop(game) == null ? null : player.getLibrary().getFromTop(game).getId();
+            return objectId.equals(needCardID);
         }
         return false;
     }

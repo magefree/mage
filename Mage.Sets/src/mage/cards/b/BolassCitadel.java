@@ -96,15 +96,14 @@ class BolassCitadelPlayTheTopCardEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
-        Card cardOnTop = game.getCard(objectId);
-        if (cardOnTop == null) {
-            return false;
-        }
-        if (playerId.equals(source.getControllerId())
-                && cardOnTop.isOwnedBy(source.getControllerId())) {
-            Player controller = game.getPlayer(cardOnTop.getOwnerId());
+        Card cardToCheck = game.getCard(objectId);
+        objectId = game.getCard(objectId).getMainCard().getId(); // for split cards
+
+        if (playerId.equals(source.getControllerId()) && cardToCheck.isOwnedBy(source.getControllerId())) {
+            Player controller = game.getPlayer(cardToCheck.getOwnerId());
             if (controller != null
-                    && cardOnTop.equals(controller.getLibrary().getFromTop(game))) {
+                    && controller.getLibrary().getFromTop(game) != null
+                    && objectId.equals(controller.getLibrary().getFromTop(game).getId())) {
                 if (affectedAbility instanceof ActivatedAbility) {
                     ActivatedAbility activatedAbility = (ActivatedAbility) affectedAbility;
                     // add the life cost first

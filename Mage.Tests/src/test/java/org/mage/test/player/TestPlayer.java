@@ -2374,18 +2374,23 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public UUID getCastSourceIdWithAlternateMana() {
+    public Set<UUID> getCastSourceIdWithAlternateMana() {
         return computerPlayer.getCastSourceIdWithAlternateMana();
     }
 
     @Override
-    public ManaCosts getCastSourceIdManaCosts() {
+    public Map<UUID, ManaCosts<ManaCost>> getCastSourceIdManaCosts() {
         return computerPlayer.getCastSourceIdManaCosts();
     }
 
     @Override
-    public Costs<Cost> getCastSourceIdCosts() {
+    public Map<UUID, Costs<Cost>> getCastSourceIdCosts() {
         return computerPlayer.getCastSourceIdCosts();
+    }
+
+    @Override
+    public void clearCastSourceIdManaCosts() {
+        computerPlayer.clearCastSourceIdManaCosts();
     }
 
     @Override

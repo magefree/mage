@@ -5,7 +5,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -282,7 +281,8 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Curious Pair");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Psychic Intrusion", playerB);
-        playerA.addChoice("Curious Pair");
+        setChoice(playerA, "Curious Pair");
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair");
 
@@ -462,6 +462,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         removeAllCardsFromLibrary(playerA);
         addCard(Zone.LIBRARY, playerA, "Curious Pair");
 
+        showAvaileableAbilities("abils", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -473,7 +474,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore("Not yet working correctly.")
+    //@Ignore("Not yet working correctly.")
     public void testCastTreatsToShareWithWrennAndSixEmblem() {
         /*
          * Wrenn and Six {R}{G}
@@ -487,11 +488,16 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest");
         addCard(Zone.BATTLEFIELD, playerA, "Wrenn and Six");
         addCard(Zone.GRAVEYARD, playerA, "Curious Pair");
-        addCard(Zone.HAND, playerA, "Forest");
+        addCard(Zone.HAND, playerA, "Forest"); // pay for retrace
 
         addCounters(1, PhaseStep.UPKEEP, playerA, "Wrenn and Six", CounterType.LOYALTY, 5);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-7: You get an emblem");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        showAvaileableAbilities("abils", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
+        // retrace - You may cast this card from your graveyard by discarding a land card as an additional cost to cast it
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share");
+        setChoice(playerA, "Forest");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -523,6 +529,8 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Curious Pair");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Until your next");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        showAvaileableAbilities("abils", 1, PhaseStep.BEGIN_COMBAT, playerA);
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Treats to Share");
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);

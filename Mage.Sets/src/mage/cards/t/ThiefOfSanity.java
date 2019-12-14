@@ -1,8 +1,5 @@
 package mage.cards.t;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -12,18 +9,8 @@ import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.ManaType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.cards.*;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.ManaPoolItem;
@@ -32,8 +19,11 @@ import mage.target.TargetCard;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class ThiefOfSanity extends CardImpl {
@@ -200,12 +190,8 @@ class ThiefOfSanitySpendAnyManaEffect extends AsThoughEffectImpl implements AsTh
         objectId = game.getCard(objectId).getMainCard().getId(); // for split cards
         if (objectId.equals(((FixedTarget) getTargetPointer()).getTarget())
                 && game.getState().getZoneChangeCounter(objectId) <= ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1) {
-            if (affectedControllerId.equals(authorizedPlayerId)) {
-                // if the card moved from exile to stack the zone change counter is increased by 1
-                if (game.getState().getZoneChangeCounter(objectId) == ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1) {
-                    return true;
-                }
-            }
+            // if the card moved from exile to spell the zone change counter is increased by 1 (effect must applies before and on stack, use isCheckPlayableMode?)
+            return affectedControllerId.equals(authorizedPlayerId);
         } else if (((FixedTarget) getTargetPointer()).getTarget().equals(objectId)) {
             // object has moved zone so effect can be discarted
             this.discard();

@@ -1,6 +1,5 @@
 package mage.abilities.effects;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.constants.AsThoughEffectType;
 import mage.constants.Duration;
@@ -8,8 +7,9 @@ import mage.constants.EffectType;
 import mage.constants.Outcome;
 import mage.game.Game;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class AsThoughEffectImpl extends ContinuousEffectImpl implements AsThoughEffect {
@@ -29,10 +29,11 @@ public abstract class AsThoughEffectImpl extends ContinuousEffectImpl implements
 
     @Override
     public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
+        // affectedControllerId = player to check
         if (getAsThoughEffectType().equals(AsThoughEffectType.LOOK_AT_FACE_DOWN)) {
             return applies(objectId, source, playerId, game);
         } else {
-            return applies(objectId, source, affectedAbility.getControllerId(), game);
+            return applies(objectId, source, playerId, game);
         }
     }
 

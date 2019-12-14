@@ -1,7 +1,5 @@
 package mage.cards.d;
 
-import java.util.Objects;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -26,8 +24,10 @@ import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class DaxosOfMeletis extends CardImpl {
@@ -178,11 +178,11 @@ class DaxosOfMeletisSpendAnyManaEffect extends AsThoughEffectImpl implements AsT
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         objectId = game.getCard(objectId).getMainCard().getId(); // for split cards
+        FixedTarget fixedTarget = ((FixedTarget) getTargetPointer());
         return source.isControlledBy(affectedControllerId)
-                && Objects.equals(objectId, ((FixedTarget) getTargetPointer()).getTarget())
-                && ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(objectId)
-                && (((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(objectId))
-                && game.getState().getZone(objectId) == Zone.STACK;
+                && Objects.equals(objectId, fixedTarget.getTarget())
+                && game.getState().getZoneChangeCounter(objectId) <= fixedTarget.getZoneChangeCounter() + 1
+                && (game.getState().getZone(objectId) == Zone.STACK || game.getState().getZone(objectId) == Zone.EXILED);
     }
 
     @Override
