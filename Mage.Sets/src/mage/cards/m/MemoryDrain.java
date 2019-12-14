@@ -18,7 +18,7 @@ public final class MemoryDrain extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
 
         // Counter target spell. Scry 2.
-        this.getSpellAbility().addEffect(new CounterSourceEffect());
+        this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new ScryEffect(2));
     }
