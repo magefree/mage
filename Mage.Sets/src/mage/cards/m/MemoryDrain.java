@@ -1,5 +1,6 @@
 package mage.cards.m;
 
+import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
