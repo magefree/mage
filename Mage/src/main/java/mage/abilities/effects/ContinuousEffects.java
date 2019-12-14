@@ -505,12 +505,19 @@ public class ContinuousEffects implements Serializable {
             UUID idToCheck;
             if (affectedAbility != null && affectedAbility.getSourceObject(game) instanceof SplitCardHalf) {
                 idToCheck = ((SplitCardHalf) affectedAbility.getSourceObject(game)).getParentCard().getId();
+            } else if (affectedAbility != null && affectedAbility.getSourceObject(game) instanceof AdventureCardSpell
+                    && type != AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE
+                    && type != AsThoughEffectType.CAST_AS_INSTANT) {
+                // adventure spell uses alternative characteristics for spell/stack
+                idToCheck = ((AdventureCardSpell) affectedAbility.getSourceObject(game)).getParentCard().getId();
             } else {
                 Card card = game.getCard(objectId);
-                if (card != null && card instanceof SplitCardHalf) {
+                if (card instanceof SplitCardHalf) {
                     idToCheck = ((SplitCardHalf) card).getParentCard().getId();
-                } else if (card != null && type == AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE
-                        && card instanceof AdventureCardSpell) {
+                } else if (card instanceof AdventureCardSpell
+                        && type != AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE
+                        && type != AsThoughEffectType.CAST_AS_INSTANT) {
+                    // adventure spell uses alternative characteristics for spell/stack
                     idToCheck = ((AdventureCardSpell) card).getParentCard().getId();
                 } else {
                     idToCheck = objectId;
