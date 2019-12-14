@@ -1,6 +1,5 @@
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
@@ -10,12 +9,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.ManaType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
 import mage.players.ManaPoolItem;
@@ -25,8 +19,9 @@ import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class PsychicIntrusion extends CardImpl {
@@ -149,10 +144,9 @@ class PsychicIntrusionCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        objectId = game.getCard(objectId).getMainCard().getId(); // for split cards
         if (objectId.equals(getTargetPointer().getFirst(game, source))) {
-            if (affectedControllerId.equals(source.getControllerId())) {
-                return true;
-            }
+            return affectedControllerId.equals(source.getControllerId());
         } else {
             if (((FixedTarget) getTargetPointer()).getTarget().equals(objectId)) {
                 // object has moved zone so effect can be discarted
@@ -189,12 +183,8 @@ class PsychicIntrusionSpendAnyManaEffect extends AsThoughEffectImpl implements A
         objectId = game.getCard(objectId).getMainCard().getId(); // for split cards
         if (objectId.equals(((FixedTarget) getTargetPointer()).getTarget())
                 && game.getState().getZoneChangeCounter(objectId) <= ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1) {
-            if (affectedControllerId.equals(source.getControllerId())) {
-                // if the card moved from exile to spell the zone change counter is increased by 1
-                if (game.getState().getZoneChangeCounter(objectId) == ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1) {
-                    return true;
-                }
-            }
+            // if the card moved from exile to spell the zone change counter is increased by 1 (effect must applies before and on stack, use isCheckPlayableMode?)
+            return affectedControllerId.equals(source.getControllerId());
         } else {
             if (((FixedTarget) getTargetPointer()).getTarget().equals(objectId)) {
                 // object has moved zone so effect can be discarted

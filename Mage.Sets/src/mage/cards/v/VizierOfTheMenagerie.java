@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import mage.MageInt;
@@ -83,12 +82,10 @@ class VizierOfTheMenagerieTopCardCastEffect extends AsThoughEffectImpl {
                     MageObject vizierOfTheMenagerie = game.getObject(source.getSourceId());
                     if (vizierOfTheMenagerie != null
                             && topCard != null) {
-                        if (topCard == card
+                        return topCard == card
                                 && topCard.isCreature()
                                 && topCard.getSpellAbility() != null
-                                && topCard.getSpellAbility().spellCanBeActivatedRegularlyNow(controller.getId(), game)) {
-                            return true;
-                        }
+                                && topCard.getSpellAbility().spellCanBeActivatedRegularlyNow(controller.getId(), game);
                     }
                 }
             }
@@ -120,10 +117,10 @@ class VizierOfTheMenagerieManaEffect extends AsThoughEffectImpl implements AsTho
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        objectId = game.getCard(objectId).getMainCard().getId(); // for split cards
         if (source.isControlledBy(affectedControllerId)) {
             MageObject mageObject = game.getObject(objectId);
-            return mageObject != null
-                    && mageObject.isCreature();
+            return mageObject != null && mageObject.isCreature();
         }
         return false;
     }

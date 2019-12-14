@@ -233,11 +233,12 @@ class GrenzoHavocRaiserSpendAnyManaEffect extends AsThoughEffectImpl implements 
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        objectId = game.getCard(objectId).getMainCard().getId(); // for split cards
+        FixedTarget fixedTarget = ((FixedTarget) getTargetPointer());
         return source.isControlledBy(affectedControllerId)
                 && Objects.equals(objectId, ((FixedTarget) getTargetPointer()).getTarget())
-                && ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(objectId)
-                && (((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(objectId))
-                && game.getState().getZone(objectId) == Zone.STACK;
+                && game.getState().getZoneChangeCounter(objectId) <= fixedTarget.getZoneChangeCounter() + 1
+                && (game.getState().getZone(objectId) == Zone.STACK || game.getState().getZone(objectId) == Zone.EXILED);
     }
 
     @Override
