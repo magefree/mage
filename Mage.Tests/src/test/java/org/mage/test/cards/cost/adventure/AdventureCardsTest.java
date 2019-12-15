@@ -152,6 +152,27 @@ public class AdventureCardsTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void testCastCuriousPairWithMysteriousPathlighter() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Mysterious Pathlighter");
+        addCard(Zone.HAND, playerA, "Curious Pair");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertAllCommandsUsed();
+        assertHandCount(playerA, 0);
+        assertPermanentCount(playerA, "Food", 0);
+        assertPermanentCount(playerA, "Curious Pair", 1);
+        assertPowerToughness(playerA, "Curious Pair", 2, 4);
+        assertExileCount(playerA, "Curious Pair", 0);
+        assertGraveyardCount(playerA, 0);
+    }
+
+    @Test
     public void testCastMemoryTheft() {
         /*
          * Memory Theft {2}{B}
