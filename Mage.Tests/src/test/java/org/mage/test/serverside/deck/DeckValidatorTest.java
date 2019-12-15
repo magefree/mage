@@ -28,14 +28,14 @@ public class DeckValidatorTest extends MageTestBase {
 
         int number;
 
-        public CardNameAmount(String setCode, int cardNumber, int number) {
+        CardNameAmount(String setCode, int cardNumber, int number) {
             this.name = "";
             this.setCode = setCode;
             this.cardNumber = String.valueOf(cardNumber);
             this.number = number;
         }
 
-        public CardNameAmount(String name, int number) {
+        CardNameAmount(String name, int number) {
             this.name = name;
             this.number = number;
         }
@@ -48,11 +48,11 @@ public class DeckValidatorTest extends MageTestBase {
             return number;
         }
 
-        public String getSetCode() {
+        String getSetCode() {
             return setCode;
         }
 
-        public String getCardNumber() {
+        String getCardNumber() {
             return cardNumber;
         }
 
@@ -359,6 +359,7 @@ public class DeckValidatorTest extends MageTestBase {
                     cardinfo = CardRepository.instance.findCard(cardNameAmount.getName());
                 }
                 for (int i = 0; i < cardNameAmount.getNumber(); i++) {
+                    assert cardinfo != null;
                     deckToTest.getCards().add(cardinfo.getCard());
                 }
             }
@@ -372,6 +373,7 @@ public class DeckValidatorTest extends MageTestBase {
                     cardinfo = CardRepository.instance.findCard(cardNameAmount.getName());
                 }
                 for (int i = 0; i < cardNameAmount.getNumber(); i++) {
+                    assert cardinfo != null;
                     deckToTest.getSideboard().add(cardinfo.getCard());
                 }
             }

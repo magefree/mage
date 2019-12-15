@@ -22,7 +22,6 @@ public final class CoreSet2020 extends ExpansionSet {
         return instance;
     }
 
-    private final List<CardInfo> savedSpecialCommon = new ArrayList<>();
     private final List<CardInfo> savedSpecialLand = new ArrayList<>();
 
     private CoreSet2020() {
@@ -399,7 +398,7 @@ public final class CoreSet2020 extends ExpansionSet {
                 criteria.setCodes(this.code).notTypes(CardType.LAND);
                 savedCardsInfos = CardRepository.instance.findCards(criteria);
                 if (maxCardNumberInBooster != Integer.MAX_VALUE) {
-                    savedCardsInfos.removeIf(next -> next.getCardNumberAsInt() > maxCardNumberInBooster && rarity != Rarity.LAND);
+                    savedCardsInfos.removeIf(next -> next.getCardNumberAsInt() > maxCardNumberInBooster);
                 }
                 savedCards.put(rarity, savedCardsInfos);
             }

@@ -25,7 +25,7 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         return instance;
     }
 
-    protected final EnumMap<Rarity, List<CardInfo>> savedDoubleFacedCards;
+    private final EnumMap<Rarity, List<CardInfo>> savedDoubleFacedCards;
 
     private ShadowsOverInnistrad() {
         super("Shadows over Innistrad", "SOI", ExpansionSet.buildDate(2016, 4, 8), SetType.EXPANSION);
@@ -387,7 +387,7 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         }
     }
 
-    public List<CardInfo> getDoubleFacedCardsByRarity(Rarity rarity) {
+    private List<CardInfo> getDoubleFacedCardsByRarity(Rarity rarity) {
         List<CardInfo> savedCardsInfos = savedDoubleFacedCards.get(rarity);
         if (savedCardsInfos == null) {
             CardCriteria criteria = new CardCriteria();

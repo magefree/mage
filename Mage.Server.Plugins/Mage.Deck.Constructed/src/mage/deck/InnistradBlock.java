@@ -12,9 +12,9 @@ public class InnistradBlock extends Constructed {
 
     public InnistradBlock() {
         super("Constructed - Innistrad Block");
-        setCodes.add("ISD");
-        setCodes.add("DKA");
-        setCodes.add("AVR");
+        setCodes.add(mage.sets.Innistrad.getInstance().getCode());
+        setCodes.add(mage.sets.DarkAscension.getInstance().getCode());
+        setCodes.add(mage.sets.AvacynRestored.getInstance().getCode());
     }
 
 }

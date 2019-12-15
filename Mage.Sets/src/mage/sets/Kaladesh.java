@@ -23,7 +23,7 @@ public final class Kaladesh extends ExpansionSet {
         return instance;
     }
 
-    protected final List<CardInfo> savedSpecialLand = new ArrayList<>();
+    private final List<CardInfo> savedSpecialLand = new ArrayList<>();
 
     private Kaladesh() {
         super("Kaladesh", "KLD", ExpansionSet.buildDate(2016, 9, 30), SetType.EXPANSION);

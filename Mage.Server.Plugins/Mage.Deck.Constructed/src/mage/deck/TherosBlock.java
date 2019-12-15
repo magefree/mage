@@ -12,9 +12,9 @@ public class TherosBlock extends Constructed {
 
     public TherosBlock() {
         super("Constructed - Theros Block");
-        setCodes.add("THS");
-        setCodes.add("BNG");
-        setCodes.add("JOU");
+        setCodes.add(mage.sets.Theros.getInstance().getCode());
+        setCodes.add(mage.sets.BornOfTheGods.getInstance().getCode());
+        setCodes.add(mage.sets.JourneyIntoNyx.getInstance().getCode());
     }
 
 }

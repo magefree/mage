@@ -12,7 +12,7 @@ public class KaladeshBlock extends Constructed {
 
     public KaladeshBlock() {
         super("Constructed - Kaladesh Block");
-        setCodes.add("KLD");
-        setCodes.add("AER");
+        setCodes.add(mage.sets.Kaladesh.getInstance().getCode());
+        setCodes.add(mage.sets.AetherRevolt.getInstance().getCode());
     }
 }
