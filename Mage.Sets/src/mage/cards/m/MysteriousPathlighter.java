@@ -17,6 +17,7 @@ import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentCard;
 
 import java.util.UUID;
 
@@ -69,7 +70,8 @@ class MysteriousPathlighterEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-        return permanent instanceof AdventureCard
+        return permanent instanceof PermanentCard
+                && ((PermanentCard) permanent).getCard() instanceof AdventureCard
                 && permanent.isControlledBy(source.getControllerId())
                 && permanent.isCreature();
     }
