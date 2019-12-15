@@ -1,11 +1,11 @@
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.hint.ConditionHint;
 import mage.abilities.keyword.PartnerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -14,8 +14,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.watchers.common.PlayerLostLifeWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class LudevicNecroAlchemist extends CardImpl {
@@ -34,8 +35,9 @@ public final class LudevicNecroAlchemist extends CardImpl {
                 Zone.BATTLEFIELD,
                 new LudevicNecroAlchemistEffect(),
                 TargetController.EACH_PLAYER,
-                new LudevicNecroAlchemistCondition(),
-                false));
+                LudevicNecroAlchemistCondition.instance,
+                false)
+                .addHint(new ConditionHint(LudevicNecroAlchemistCondition.instance, "Player other than you lost life this turn")));
 
         // Partner
         this.addAbility(PartnerAbility.getInstance());
@@ -51,13 +53,16 @@ public final class LudevicNecroAlchemist extends CardImpl {
     }
 }
 
-class LudevicNecroAlchemistCondition implements Condition {
+enum LudevicNecroAlchemistCondition implements Condition {
+
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
         PlayerLostLifeWatcher watcher = game.getState().getWatcher(PlayerLostLifeWatcher.class);
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null
+                && !controller.getId().equals(game.getActivePlayerId())
                 && watcher != null
                 && watcher.getLifeLost(controller.getId()) == 0) {
             for (UUID playerId : controller.getInRange()) {
