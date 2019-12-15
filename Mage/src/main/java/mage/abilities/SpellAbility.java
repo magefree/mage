@@ -63,6 +63,9 @@ public class SpellAbility extends ActivatedAbilityImpl {
      */
     public boolean spellCanBeActivatedRegularlyNow(UUID playerId, Game game) {
         MageObject object = game.getObject(sourceId);
+        if (object == null) {
+            return false;
+        }
         if (game.getState().getValue("CastFromExileEnabled" + object.getId()) != null) {
             return (Boolean) game.getState().getValue("CastFromExileEnabled" + object.getId());  // card like Chandra, Torch of Defiance +1 loyal ability)
         }
