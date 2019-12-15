@@ -23,7 +23,7 @@ public abstract class TargetImpl implements Target {
     protected final Map<UUID, Integer> zoneChangeCounters = new HashMap<>();
 
     protected String targetName;
-    protected Zone zone;
+    protected Zone zone; // all targets will be filtered by that zone, don't use "multi-zone" filter
     protected int maxNumberOfTargets;
     protected int minNumberOfTargets;
     protected boolean required = true;

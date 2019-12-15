@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.triggers;
 
 import mage.constants.PhaseStep;
@@ -7,7 +6,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class EnterLeaveBattlefieldExileTargetTest extends CardTestPlayerBase {
@@ -25,9 +23,12 @@ public class EnterLeaveBattlefieldExileTargetTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Angel of Serenity");
         addTarget(playerA, "Silvercoat Lion^Pillarfield Ox");
+        setChoice(playerA, "Yes");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Angel of Serenity", 1);
         assertExileCount("Silvercoat Lion", 1);

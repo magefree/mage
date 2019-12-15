@@ -765,7 +765,7 @@ public class VerifyCardDataTest {
         // debug only: show direct card info (takes it from class file, not from db repository)
         String cardName = "Essence Capture";
         CardScanner.scan();
-        CardSetInfo testSet = new CardSetInfo("test", "test", "123", Rarity.COMMON);
+        CardSetInfo testSet = new CardSetInfo(cardName, "test", "123", Rarity.COMMON);
         CardInfo cardInfo = CardRepository.instance.findCard(cardName);
         Card card = CardImpl.createCard(cardInfo.getClassName(), testSet);
         card.getRules().stream().forEach(System.out::println);

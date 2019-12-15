@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -13,18 +12,21 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyardOrBattlefield;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class AngelOfSerenity extends CardImpl {
-    
+
     private static final String rule = "you may exile up to three other target creatures from the battlefield and/or creature cards from graveyards.";
 
     public AngelOfSerenity(UUID ownerId, CardSetInfo setInfo) {
@@ -38,10 +40,11 @@ public final class AngelOfSerenity extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Angel of Serenity enters the battlefield, you may exile up to three other target creatures from the battlefield and/or creature cards from graveyards.
-        FilterCreatureCard filter = new FilterCreatureCard("creatures from the battlefield and/or a graveyard");
-        filter.add(Predicates.not(new CardIdPredicate(this.getId())));
+        FilterCreaturePermanent filterBattle = new FilterCreaturePermanent("other target creatures");
+        filterBattle.add(Predicates.not(new CardIdPredicate(this.getId())));
+        FilterCreatureCard filterGrave = StaticFilters.FILTER_CARD_CREATURE;
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect().setText(rule), true);
-        Target target = new TargetCardInGraveyardOrBattlefield(0, 3, filter);
+        Target target = new TargetCardInGraveyardOrBattlefield(0, 3, filterGrave, filterBattle);
         ability.addTarget(target);
         this.addAbility(ability);
 
