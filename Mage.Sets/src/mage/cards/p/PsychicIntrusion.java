@@ -144,7 +144,7 @@ class PsychicIntrusionCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        objectId = game.getCard(objectId).getMainCard().getId(); // for split cards
+        objectId = CardUtil.getMainCardId(game, objectId); // for split cards
         if (objectId.equals(getTargetPointer().getFirst(game, source))) {
             return affectedControllerId.equals(source.getControllerId());
         } else {
@@ -180,7 +180,7 @@ class PsychicIntrusionSpendAnyManaEffect extends AsThoughEffectImpl implements A
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        objectId = game.getCard(objectId).getMainCard().getId(); // for split cards
+        objectId = CardUtil.getMainCardId(game, objectId); // for split cards
         if (objectId.equals(((FixedTarget) getTargetPointer()).getTarget())
                 && game.getState().getZoneChangeCounter(objectId) <= ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1) {
             // if the card moved from exile to spell the zone change counter is increased by 1 (effect must applies before and on stack, use isCheckPlayableMode?)

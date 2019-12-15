@@ -18,6 +18,7 @@ import mage.game.permanent.Permanent;
 import mage.players.ManaPoolItem;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -141,7 +142,7 @@ class QuickSilverElementalBlueManaEffect extends AsThoughEffectImpl implements A
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        objectId = game.getCard(objectId).getMainCard().getId(); // for split cards
+        objectId = CardUtil.getMainCardId(game, objectId); // for split cards
         if (objectId.equals(getTargetPointer().getFirst(game, source))) {
             return affectedControllerId.equals(source.getControllerId());
         }

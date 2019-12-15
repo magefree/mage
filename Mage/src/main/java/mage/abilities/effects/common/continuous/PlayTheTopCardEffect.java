@@ -9,6 +9,7 @@ import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -53,7 +54,7 @@ public class PlayTheTopCardEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
         Card cardToCheck = game.getCard(objectId);
-        objectId = game.getCard(objectId).getMainCard().getId(); // for split cards
+        objectId = CardUtil.getMainCardId(game, objectId); // for split cards
 
         if (cardToCheck != null
                 && playerId.equals(source.getControllerId())

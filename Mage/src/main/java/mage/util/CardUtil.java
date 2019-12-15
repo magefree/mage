@@ -565,7 +565,7 @@ public final class CardUtil {
     public static boolean haveSameNames(String name1, String name2, Boolean ignoreMtgRuleForEmptyNames) {
         if (ignoreMtgRuleForEmptyNames) {
             // simple compare for tests and engine
-            return name1 != null && name2 != null && name1.equals(name2);
+            return name1 != null && name1.equals(name2);
         } else {
             // mtg logic compare for game (empty names can't be same)
             return !haveEmptyName(name1) && !haveEmptyName(name2) && name1.equals(name2);
@@ -586,5 +586,10 @@ public final class CardUtil {
 
     public static boolean haveEmptyName(MageObject object) {
         return object == null || haveEmptyName(object.getName());
+    }
+
+    public static UUID getMainCardId(Game game, UUID objectId) {
+        Card card = game.getCard(objectId);
+        return card != null ? card.getMainCard().getId() : objectId;
     }
 }

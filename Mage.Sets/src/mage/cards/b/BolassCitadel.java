@@ -22,9 +22,9 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
-import mage.abilities.costs.Cost;
 
 /**
  * @author jeffwadsworth
@@ -97,7 +97,7 @@ class BolassCitadelPlayTheTopCardEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
         Card cardToCheck = game.getCard(objectId);
-        objectId = game.getCard(objectId).getMainCard().getId(); // for split cards
+        objectId = CardUtil.getMainCardId(game, objectId); // for split cards
 
         if (playerId.equals(source.getControllerId()) && cardToCheck.isOwnedBy(source.getControllerId())) {
             Player controller = game.getPlayer(cardToCheck.getOwnerId());

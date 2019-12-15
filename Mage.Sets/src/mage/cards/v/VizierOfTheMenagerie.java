@@ -14,6 +14,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -117,7 +118,7 @@ class VizierOfTheMenagerieManaEffect extends AsThoughEffectImpl implements AsTho
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        objectId = game.getCard(objectId).getMainCard().getId(); // for split cards
+        objectId = CardUtil.getMainCardId(game, objectId); // for split cards
         if (source.isControlledBy(affectedControllerId)) {
             MageObject mageObject = game.getObject(objectId);
             return mageObject != null && mageObject.isCreature();
