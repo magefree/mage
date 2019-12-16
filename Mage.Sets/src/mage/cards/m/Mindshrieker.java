@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -12,17 +10,14 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward
  */
 public final class Mindshrieker extends CardImpl {
@@ -35,7 +30,9 @@ public final class Mindshrieker extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // {2}: Target player puts the top card of their library into their graveyard. Mindshrieker gets +X/+X until end of turn, where X is that card's converted mana cost.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MindshriekerEffect(), new ManaCostsImpl("{2}"));
         ability.addTarget(new TargetPlayer());
@@ -56,7 +53,7 @@ public final class Mindshrieker extends CardImpl {
 class MindshriekerEffect extends OneShotEffect {
 
     public MindshriekerEffect() {
-        super(Outcome.BoostCreature);
+        super(Outcome.Detriment);
         staticText = "Target player puts the top card of their library into their graveyard. {this} gets +X/+X until end of turn, where X is that card's converted mana cost";
     }
 
