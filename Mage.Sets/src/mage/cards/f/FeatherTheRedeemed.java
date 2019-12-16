@@ -167,11 +167,9 @@ class FeatherTheRedeemedEffect extends ReplacementEffectImpl {
         if (zEvent.getFromZone() == Zone.STACK
                 && zEvent.getToZone() == Zone.GRAVEYARD
                 && event.getSourceId() != null) {
-            if (event.getSourceId().equals(event.getTargetId())) {
+            if (event.getSourceId().equals(event.getTargetId()) && mor.getZoneChangeCounter() == game.getState().getZoneChangeCounter(event.getSourceId())) {
                 Spell spell = game.getStack().getSpell(mor.getSourceId());
-                if (spell != null && spell.isInstantOrSorcery()) {
-                    return true;
-                }
+                return spell != null && spell.isInstantOrSorcery();
             }
         }
         return false;

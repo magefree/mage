@@ -2851,24 +2851,37 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public void cheat(UUID ownerId, UUID activePlayerId, List<Card> library, List<Card> hand, List<PermanentCard> battlefield, List<Card> graveyard) {
+    public void cheat(UUID ownerId, UUID activePlayerId, List<Card> library, List<Card> hand, List<PermanentCard> battlefield, List<Card> graveyard, List<Card> command) {
         Player player = getPlayer(ownerId);
         if (player != null) {
             loadCards(ownerId, library);
             loadCards(ownerId, hand);
             loadCards(ownerId, battlefield);
             loadCards(ownerId, graveyard);
+            loadCards(ownerId, command);
 
             for (Card card : library) {
                 player.getLibrary().putOnTop(card, this);
             }
+
             for (Card card : hand) {
                 card.setZone(Zone.HAND, this);
                 player.getHand().add(card);
             }
+
             for (Card card : graveyard) {
                 card.setZone(Zone.GRAVEYARD, this);
                 player.getGraveyard().add(card);
+            }
+
+            // as commander (only commander games, look at init code in GameCommanderImpl)
+            if (this instanceof GameCommanderImpl) {
+                for (Card card : command) {
+                    player.addCommanderId(card.getId());
+                    // no needs in initCommander call -- it's uses on game startup (init)
+                }
+            } else if (!command.isEmpty()) {
+                throw new IllegalArgumentException("Command zone supports in commander test games");
             }
 
             // warning, permanents go to battlefield without resolve, continuus effects must be init

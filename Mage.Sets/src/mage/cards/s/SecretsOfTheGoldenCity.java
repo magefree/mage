@@ -5,6 +5,7 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.keyword.AscendEffect;
 import mage.abilities.hint.common.CitysBlessingHint;
+import mage.abilities.hint.common.PermanentsYouControlHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -21,6 +22,8 @@ public final class SecretsOfTheGoldenCity extends CardImpl {
 
         // Ascend
         this.getSpellAbility().addEffect(new AscendEffect());
+        this.getSpellAbility().addHint(CitysBlessingHint.instance);
+        this.getSpellAbility().addHint(PermanentsYouControlHint.instance);
 
         // Draw two cards. If you have the city's blessing, draw three cards instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
@@ -28,7 +31,6 @@ public final class SecretsOfTheGoldenCity extends CardImpl {
                 new DrawCardSourceControllerEffect(2),
                 CitysBlessingCondition.instance,
                 "Draw two cards. If you have the city's blessing, draw three cards instead"));
-        this.getSpellAbility().addHint(CitysBlessingHint.instance);
     }
 
     public SecretsOfTheGoldenCity(final SecretsOfTheGoldenCity card) {

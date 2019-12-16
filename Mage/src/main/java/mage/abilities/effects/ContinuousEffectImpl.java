@@ -311,14 +311,6 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
             }
         }
         return dependentToEffects;
-        /*
-            return allEffectsInLayer.stream()
-                    .filter(effect -> effect.getDependencyTypes().contains(dependendToTypes))
-                    .map(Effect::getId)
-                    .collect(Collectors.toSet());
-
-        }
-        return new HashSet<>();*/
     }
 
     @Override

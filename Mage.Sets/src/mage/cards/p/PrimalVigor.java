@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -15,14 +13,15 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class PrimalVigor extends CardImpl {
 
     public PrimalVigor(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");
 
         // If one or more tokens would be created, twice that many of those tokens are created instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PrimalVigorTokenEffect()));
@@ -93,7 +92,7 @@ class PrimalVigorCounterEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(event.getAmount() * 2);
+        event.setAmountForCounters(event.getAmount() * 2, true);
         return false;
     }
 
@@ -108,11 +107,8 @@ class PrimalVigorCounterEffect extends ReplacementEffectImpl {
         if (permanent == null) {
             permanent = game.getPermanentEntering(event.getTargetId());
         }
-        if (permanent != null && permanent.isCreature()
-                && event.getData() != null && event.getData().equals("+1/+1")) {
-            return true;
-        }
-        return false;
+        return permanent != null && event.getAmount() > 0 && permanent.isCreature()
+                && event.getData() != null && event.getData().equals("+1/+1");
     }
 
     @Override

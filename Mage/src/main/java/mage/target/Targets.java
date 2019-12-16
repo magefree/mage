@@ -66,7 +66,7 @@ public class Targets extends ArrayList<Target> {
             if (!canChoose(source.getSourceId(), playerId, game)) {
                 return false;
             }
-            int state = game.bookmarkState();
+            //int state = game.bookmarkState();
             while (!isChosen()) {
                 Target target = this.getUnchosen().get(0);
                 UUID targetController = playerId;
@@ -93,7 +93,7 @@ public class Targets extends ArrayList<Target> {
                 // Check if there are some rules for targets are violated, if so reset the targets and start again
                 if (this.getUnchosen().isEmpty()
                         && game.replaceEvent(new GameEvent(GameEvent.EventType.TARGETS_VALID, source.getSourceId(), source.getSourceId(), source.getControllerId()), source)) {
-                    game.restoreState(state, "Targets");
+                    //game.restoreState(state, "Targets");
                     clearChosen();
                 }
             }

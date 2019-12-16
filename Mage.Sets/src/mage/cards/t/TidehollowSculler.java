@@ -17,7 +17,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterNonlandCard;
 import mage.game.ExileZone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -79,11 +78,9 @@ class TidehollowScullerExileEffect extends OneShotEffect {
         // 6/7/2013 	If Tidehollow Sculler leaves the battlefield before its first ability has resolved,
         //              its second ability will trigger. This ability will do nothing when it resolves.
         //              Then its first ability will resolve and exile the chosen card forever.
-        Permanent sourcePermanent = (Permanent) source.getSourcePermanentIfItStillExists(game);
         if (controller != null
-                && opponent != null
-                && sourcePermanent != null) {
-            opponent.revealCards(sourcePermanent.getName(), opponent.getHand(), game);
+                && opponent != null) {
+            opponent.revealCards("Tidehollow Sculler", opponent.getHand(), game);
             TargetCard target = new TargetCard(Zone.HAND, new FilterNonlandCard("nonland card to exile"));
             if (controller.choose(Outcome.Exile, opponent.getHand(), target, game)) {
                 Card card = opponent.getHand().get(target.getFirstTarget(), game);
@@ -96,7 +93,7 @@ class TidehollowScullerExileEffect extends OneShotEffect {
                             CardUtil.getExileZoneId(game,
                                     source.getSourceId(),
                                     source.getSourceObjectZoneChangeCounter()),
-                            sourcePermanent.getIdName());
+                            "Tidehollow Sculler");
                 }
             }
             return true;
@@ -126,8 +123,8 @@ class TidehollowScullerLeaveEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
-            int zoneChangeCounter = (sourceObject instanceof PermanentToken) 
-                    ? source.getSourceObjectZoneChangeCounter() 
+            int zoneChangeCounter = (sourceObject instanceof PermanentToken)
+                    ? source.getSourceObjectZoneChangeCounter()
                     : source.getSourceObjectZoneChangeCounter() - 1;
             ExileZone exZone = game.getExile().getExileZone(
                     CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter));

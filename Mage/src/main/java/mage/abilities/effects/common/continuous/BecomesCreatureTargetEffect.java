@@ -69,30 +69,34 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                             }
                         }
                         break;
+
                     case TypeChangingEffects_4:
                         if (sublayer == SubLayer.NA) {
                             if (loseAllAbilities) {
                                 permanent.getSubtype(game).retainAll(SubType.getLandTypes());
                                 permanent.getSubtype(game).addAll(token.getSubtype(game));
                             } else {
-                                if (!token.getSubtype(game).isEmpty()) {
-                                    for (SubType subtype : token.getSubtype(game)) {
-                                        if (!permanent.hasSubtype(subtype, game)) {
-                                            permanent.getSubtype(game).add(subtype);
-                                        }
+                                for (SubType t : token.getSubtype(game)) {
+                                    if (!permanent.hasSubtype(t, game)) {
+                                        permanent.getSubtype(game).add(t);
                                     }
-
                                 }
                             }
-                            if (!token.getCardType().isEmpty()) {
-                                for (CardType t : token.getCardType()) {
-                                    if (!permanent.getCardType().contains(t)) {
-                                        permanent.addCardType(t);
-                                    }
+
+                            for (SuperType t : token.getSuperType()) {
+                                if (!permanent.getSuperType().contains(t)) {
+                                    permanent.addSuperType(t);
+                                }
+                            }
+
+                            for (CardType t : token.getCardType()) {
+                                if (!permanent.getCardType().contains(t)) {
+                                    permanent.addCardType(t);
                                 }
                             }
                         }
                         break;
+
                     case ColorChangingEffects_5:
                         if (sublayer == SubLayer.NA) {
                             if (loseAllAbilities) {
@@ -107,6 +111,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                             }
                         }
                         break;
+
                     case AbilityAddingRemovingEffects_6:
                         if (loseAllAbilities) {
                             permanent.removeAllAbilities(source.getSourceId(), game);

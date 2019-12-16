@@ -52,6 +52,7 @@ public abstract class MageTestPlayerBase {
     protected Map<TestPlayer, List<PermanentCard>> battlefieldCards = new HashMap<>();
     protected Map<TestPlayer, List<Card>> graveyardCards = new HashMap<>();
     protected Map<TestPlayer, List<Card>> libraryCards = new HashMap<>();
+    protected Map<TestPlayer, List<Card>> commandCards = new HashMap<>();
 
     protected Map<TestPlayer, Map<Zone, String>> commands = new HashMap<>();
 
@@ -211,6 +212,9 @@ public abstract class MageTestPlayerBase {
                 } else if ("library".equalsIgnoreCase(zone)) {
                     gameZone = Zone.LIBRARY;
                     cards = getLibraryCards(getPlayer(nickname));
+                } else if ("command".equalsIgnoreCase(zone)) {
+                    gameZone = Zone.COMMAND;
+                    cards = getCommandCards(getPlayer(nickname));
                 } else if ("player".equalsIgnoreCase(zone)) {
                     String command = m.group(3);
                     if ("life".equals(command)) {
@@ -280,27 +284,36 @@ public abstract class MageTestPlayerBase {
         if (graveyardCards.containsKey(player)) {
             return graveyardCards.get(player);
         }
-        List<Card> grave = new ArrayList<>();
-        graveyardCards.put(player, grave);
-        return grave;
+        List<Card> res = new ArrayList<>();
+        graveyardCards.put(player, res);
+        return res;
     }
 
     protected List<Card> getLibraryCards(TestPlayer player) {
         if (libraryCards.containsKey(player)) {
             return libraryCards.get(player);
         }
-        List<Card> library = new ArrayList<>();
-        libraryCards.put(player, library);
-        return library;
+        List<Card> res = new ArrayList<>();
+        libraryCards.put(player, res);
+        return res;
+    }
+
+    protected List<Card> getCommandCards(TestPlayer player) {
+        if (commandCards.containsKey(player)) {
+            return commandCards.get(player);
+        }
+        List<Card> res = new ArrayList<>();
+        commandCards.put(player, res);
+        return res;
     }
 
     protected List<PermanentCard> getBattlefieldCards(TestPlayer player) {
         if (battlefieldCards.containsKey(player)) {
             return battlefieldCards.get(player);
         }
-        List<PermanentCard> battlefield = new ArrayList<>();
-        battlefieldCards.put(player, battlefield);
-        return battlefield;
+        List<PermanentCard> res = new ArrayList<>();
+        battlefieldCards.put(player, res);
+        return res;
     }
 
     protected Map<Zone, String> getCommands(TestPlayer player) {

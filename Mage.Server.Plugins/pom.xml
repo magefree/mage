@@ -25,8 +25,9 @@
         <module>Mage.Game.TinyLeadersDuel</module>
         <module>Mage.Game.CanadianHighlanderDuel</module>
         <module>Mage.Game.PennyDreadfulCommanderFreeForAll</module>
-        <module>Mage.Game.FreeformCommanderFreeForAll</module>
-        <module>Mage.Game.BrawlDuel</module>
+        <module>Mage.Game.FreeformCommanderDuel</module>
+		<module>Mage.Game.FreeformCommanderFreeForAll</module>
+		<module>Mage.Game.BrawlDuel</module>
         <module>Mage.Game.BrawlFreeForAll</module>
         <module>Mage.Game.TwoPlayerDuel</module>
         <module>Mage.Player.AI</module>

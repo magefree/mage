@@ -4,11 +4,12 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.counters.Counter;
+import mage.filter.common.FilterPermanentOrPlayerWithCounter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetPermanentOrPlayerWithCounter;
+import mage.target.common.TargetPermanentOrPlayer;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -47,7 +48,7 @@ public class ProliferateEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Target target = new TargetPermanentOrPlayerWithCounter(0, Integer.MAX_VALUE, true);
+        Target target = new TargetPermanentOrPlayer(0, Integer.MAX_VALUE, new FilterPermanentOrPlayerWithCounter(), true);
         Map<String, Serializable> options = new HashMap<>();
         options.put("UI.right.btn.text", "Done");
         controller.choose(Outcome.Benefit, target, source.getSourceId(), game, options);

@@ -1,20 +1,17 @@
-
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.SourceTappedCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.decorator.ConditionalPreventionEffect;
+import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.UnblockedPredicate;
@@ -24,8 +21,9 @@ import mage.game.events.DamagePlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author MTGfan
  */
 public final class VeteranBodyguard extends CardImpl {
@@ -38,7 +36,11 @@ public final class VeteranBodyguard extends CardImpl {
         this.toughness = new MageInt(5);
 
         // As long as Veteran Bodyguard is untapped, all damage that would be dealt to you by unblocked creatures is dealt to Veteran Bodyguard instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new VeteranBodyguardEffect(), new InvertCondition(SourceTappedCondition.instance), "As long as {this} is untapped, all damage that would be dealt to you by unblocked creatures is dealt to {this} instead.")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalPreventionEffect(
+                new VeteranBodyguardEffect(),
+                new InvertCondition(SourceTappedCondition.instance),
+                "As long as {this} is untapped, all damage that would be dealt to you by unblocked creatures is dealt to {this} instead."
+        )));
     }
 
     public VeteranBodyguard(final VeteranBodyguard card) {
@@ -51,7 +53,7 @@ public final class VeteranBodyguard extends CardImpl {
     }
 }
 
-class VeteranBodyguardEffect extends ReplacementEffectImpl {
+class VeteranBodyguardEffect extends PreventionEffectImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("unblocked creatures");
 
@@ -60,7 +62,7 @@ class VeteranBodyguardEffect extends ReplacementEffectImpl {
     }
 
     VeteranBodyguardEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.RedirectDamage);
+        super(Duration.WhileOnBattlefield);
         staticText = "all combat damage that would be dealt to you by unblocked creatures is dealt to {source} instead";
     }
 
@@ -76,7 +78,7 @@ class VeteranBodyguardEffect extends ReplacementEffectImpl {
             permanent.damage(damageEvent.getAmount(), event.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
             return true;
         }
-        return true;
+        return false;
     }
 
     @Override

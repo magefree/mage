@@ -1,7 +1,5 @@
-
 package mage.abilities.decorator;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.FixedCondition;
@@ -12,12 +10,13 @@ import mage.constants.EffectType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 
-public class ConditionalRequirementEffect extends RequirementEffect  {
+public class ConditionalRequirementEffect extends RequirementEffect {
 
     protected RequirementEffect effect;
     protected RequirementEffect otherwiseEffect;
@@ -27,7 +26,14 @@ public class ConditionalRequirementEffect extends RequirementEffect  {
     protected boolean initDone = false;
 
     public ConditionalRequirementEffect(RequirementEffect effect, Condition condition) {
-        this(Duration.WhileOnBattlefield, effect, condition, null, false);
+        this(effect, condition, null);
+    }
+
+    public ConditionalRequirementEffect(RequirementEffect effect, Condition condition, String text) {
+        this(effect.getDuration(), effect, condition, null, false);
+        if (text != null) {
+            setText(text);
+        }
     }
 
     public ConditionalRequirementEffect(Duration duration, RequirementEffect effect, Condition condition, RequirementEffect otherwiseEffect, boolean lockedInCondition) {
@@ -75,7 +81,7 @@ public class ConditionalRequirementEffect extends RequirementEffect  {
         conditionState = condition.apply(game, source);
         if (conditionState) {
             effect.setTargetPointer(this.targetPointer);
-            return effect.applies(permanent, source,game);
+            return effect.applies(permanent, source, game);
         } else if (otherwiseEffect != null) {
             otherwiseEffect.setTargetPointer(this.targetPointer);
             return otherwiseEffect.applies(permanent, source, game);
@@ -138,7 +144,7 @@ public class ConditionalRequirementEffect extends RequirementEffect  {
         }
         return null;
     }
-    
+
     @Override
     public ConditionalRequirementEffect copy() {
         return new ConditionalRequirementEffect(this);

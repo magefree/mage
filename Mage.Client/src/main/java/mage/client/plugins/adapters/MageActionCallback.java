@@ -363,8 +363,6 @@ public class MageActionCallback implements ActionCallback {
             if (!((GamePane) topPane).getGameId().equals(data.getGameId())) {
                 return;
             }
-        } else if (data.getGameId() != null) {
-            return;
         }
 
         hideTooltipPopup();

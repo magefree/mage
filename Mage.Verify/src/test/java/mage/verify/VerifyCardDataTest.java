@@ -15,6 +15,7 @@ import mage.game.draft.RateCard;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
 import mage.watchers.Watcher;
+import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -40,6 +41,8 @@ import java.util.stream.Collectors;
  * @author JayDi85
  */
 public class VerifyCardDataTest {
+
+    private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
     // right now this is very noisy, and not useful enough to make any assertions on
     private static final boolean CHECK_SOURCE_TOKENS = false;
@@ -411,7 +414,7 @@ public class VerifyCardDataTest {
     }
 
     @Test
-    @Ignore // TODO: enable it on copy() methods removing
+    //@Ignore // TODO: enable it on copy() methods removing
     public void checkWatcherCopyMethods() {
 
         Collection<String> errorsList = new ArrayList<>();
@@ -421,6 +424,13 @@ public class VerifyCardDataTest {
         Set<Class<? extends Watcher>> watcherClassesList = reflections.getSubTypesOf(Watcher.class);
 
         for (Class<? extends Watcher> watcherClass : watcherClassesList) {
+
+            // only watcher class can be extended (e.g. final)
+            if (!watcherClass.getSuperclass().equals(Watcher.class)) {
+                errorsList.add("error, only Watcher class can be extended: " + watcherClass.getName());
+            }
+
+            // no copy methods
             try {
                 Method m = watcherClass.getMethod("copy");
                 if (!m.getGenericReturnType().getTypeName().equals("T")) {
@@ -429,6 +439,34 @@ public class VerifyCardDataTest {
             } catch (NoSuchMethodException e) {
                 errorsList.add("error, can't find copy() method in watcher class: " + watcherClass.getName());
             }
+
+            // no constructor for copy
+            try {
+                Constructor<? extends Watcher> constructor = watcherClass.getDeclaredConstructor(watcherClass);
+                errorsList.add("error, copy constructor is not allowed in watcher class: " + watcherClass.getName());
+            } catch (NoSuchMethodException e) {
+                // all fine, no needs in copy constructors
+            }
+
+            // errors on create
+            try {
+                Constructor<? extends Watcher> constructor = watcherClass.getDeclaredConstructor();
+                constructor.setAccessible(true);
+                Watcher w1 = constructor.newInstance();
+
+                // errors on copy
+                try {
+                    Watcher w2 = w1.copy();
+                    if (w2 == null) {
+                        errorsList.add("error, can't copy watcher with unknown error, look at error logs above: " + watcherClass.getName());
+                    }
+                } catch (Exception e) {
+                    errorsList.add("error, can't copy watcher: " + watcherClass.getName() + " (" + e.getMessage() + ")");
+                }
+            } catch (Exception e) {
+                errorsList.add("error, can't create watcher: " + watcherClass.getName() + " (" + e.getMessage() + ")");
+            }
+
         }
 
         printMessages(warningsList);
@@ -969,6 +1007,30 @@ public class VerifyCardDataTest {
                     Assert.fail("Card with same name have different ratings: " + card.getName());
                 }
             }
+        }
+    }
+
+    @Test
+    public void testCardsCreatingAndConstructorErrors() {
+        int errorsCount = 0;
+        Collection<ExpansionSet> sets = Sets.getInstance().values();
+        for (ExpansionSet set : sets) {
+            for (ExpansionSet.SetCardInfo setInfo : set.getSetCardInfo()) {
+                // catch cards creation errors and report (e.g. on wrong card code or construction checks fail)
+                try {
+                    Card card = CardImpl.createCard(setInfo.getCardClass(), new CardSetInfo(setInfo.getName(), set.getCode(),
+                            setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()));
+                    if (card == null) {
+                        errorsCount++;
+                    }
+                } catch (Throwable e) {
+                    logger.error("Can't create card " + setInfo.getName() + ": " + e.getMessage(), e);
+                }
+            }
+        }
+
+        if (errorsCount > 0) {
+            Assert.fail("Founded " + errorsCount + " broken cards, look at logs for stack error");
         }
     }
 }

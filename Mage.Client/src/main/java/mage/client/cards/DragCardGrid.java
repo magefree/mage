@@ -1,16 +1,5 @@
 package mage.client.cards;
 
-import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.*;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import javax.swing.*;
 import mage.cards.Card;
 import mage.cards.MageCard;
 import mage.cards.decks.DeckCardInfo;
@@ -30,6 +19,18 @@ import mage.view.CardView;
 import mage.view.CardsView;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.CardRenderer;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.List;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * Created by StravantUser on 2016-09-20.
@@ -456,6 +457,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                 --count;
             }
         }
+
         private int count = 0;
     }
 
@@ -511,14 +513,14 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     };
 
     private final CardTypeCounter[] allCounters = {
-        creatureCounter,
-        landCounter,
-        artifactCounter,
-        enchantmentCounter,
-        instantCounter,
-        planeswalkerCounter,
-        sorceryCounter,
-        tribalCounter
+            creatureCounter,
+            landCounter,
+            artifactCounter,
+            enchantmentCounter,
+            instantCounter,
+            planeswalkerCounter,
+            sorceryCounter,
+            tribalCounter
     };
 
     // Listener
@@ -659,7 +661,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
         @Override
         public String toString() {
-            return '(' + sort.toString() + ',' + Boolean.toString(separateCreatures) + ',' + Integer.toString(cardSize) + ')';
+            return '(' + sort.toString() + ',' + separateCreatures + ',' + cardSize + ')';
         }
     }
 
@@ -1767,7 +1769,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         updateCounts();
 
         // Create the card view
-        final MageCard cardPanel = Plugins.instance.getMageCard(card, lastBigCard, new Dimension(getCardWidth(), getCardHeight()), null, true, true);
+        final MageCard cardPanel = Plugins.instance.getMageCard(card, lastBigCard, new Dimension(getCardWidth(), getCardHeight()), null, true, true, PreferencesDialog.getRenderMode());
         cardPanel.update(card);
         cardPanel.setCardCaptionTopOffset(0);
 

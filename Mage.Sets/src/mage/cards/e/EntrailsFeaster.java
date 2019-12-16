@@ -1,7 +1,5 @@
-
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -9,11 +7,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -21,14 +15,15 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class EntrailsFeaster extends CardImpl {
 
     public EntrailsFeaster(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.CAT);
         this.power = new MageInt(1);
@@ -81,7 +76,7 @@ class EntrailsFeasterEffect extends OneShotEffect {
                     if (cardChosen != null) {
                         controller.moveCardsToExile(cardChosen, source, game, true, null, "");
                         if (sourceObject != null) {
-                            sourceObject.getCounters(game).addCounter(CounterType.P1P1.createInstance());
+                            sourceObject.addCounters(CounterType.P1P1.createInstance(), source, game);
                             game.informPlayers(controller.getLogName() + " puts a +1/+1 counter on " + sourceObject.getLogName());
                         }
                     }

@@ -182,7 +182,6 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected final Map<PhaseStep, Step.StepPart> silentPhaseSteps = ImmutableMap.<PhaseStep, Step.StepPart>builder().
             put(PhaseStep.DECLARE_ATTACKERS, Step.StepPart.PRE).build();
 
-
     public PlayerImpl(String name, RangeOfInfluence range) {
         this(UUID.randomUUID());
         this.name = name;
@@ -611,7 +610,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
             if (abilities.containsKey(HexproofAbility.getInstance().getId())) {
                 if (sourceControllerId != null && this.hasOpponent(sourceControllerId, game)
-                        && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, this.getId(), game)) {
+                        && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game)) {
                     return false;
                 }
             }
@@ -2011,24 +2010,30 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public boolean addCounters(Counter counter, Game game) {
         boolean returnCode = true;
-        GameEvent countersEvent = GameEvent.getEvent(EventType.ADD_COUNTERS, playerId, null, playerId, counter.getName(), counter.getCount());
-        if (!game.replaceEvent(countersEvent)) {
-            int amount = countersEvent.getAmount();
+        GameEvent addingAllEvent = GameEvent.getEvent(EventType.ADD_COUNTERS, playerId, null, playerId, counter.getName(), counter.getCount());
+        if (!game.replaceEvent(addingAllEvent)) {
+            int amount = addingAllEvent.getAmount();
             int finalAmount = amount;
+            boolean isEffectFlag = addingAllEvent.getFlag();
             for (int i = 0; i < amount; i++) {
                 Counter eventCounter = counter.copy();
                 eventCounter.remove(eventCounter.getCount() - 1);
-                GameEvent event = GameEvent.getEvent(EventType.ADD_COUNTER, playerId, null, playerId, counter.getName(), 1);
-                if (!game.replaceEvent(event)) {
+                GameEvent addingOneEvent = GameEvent.getEvent(EventType.ADD_COUNTER, playerId, null, playerId, counter.getName(), 1);
+                addingOneEvent.setFlag(isEffectFlag);
+                if (!game.replaceEvent(addingOneEvent)) {
                     getCounters().addCounter(eventCounter);
-                    game.fireEvent(GameEvent.getEvent(EventType.COUNTER_ADDED, playerId, null, playerId, counter.getName(), 1));
+                    GameEvent addedOneEvent = GameEvent.getEvent(EventType.COUNTER_ADDED, playerId, null, playerId, counter.getName(), 1);
+                    addedOneEvent.setFlag(addingOneEvent.getFlag());
+                    game.fireEvent(addedOneEvent);
                 } else {
                     finalAmount--;
                     returnCode = false;
                 }
             }
             if (finalAmount > 0) {
-                game.fireEvent(GameEvent.getEvent(EventType.COUNTERS_ADDED, playerId, null, playerId, counter.getName(), amount));
+                GameEvent addedAllEvent = GameEvent.getEvent(EventType.COUNTERS_ADDED, playerId, null, playerId, counter.getName(), amount);
+                addedAllEvent.setFlag(addingAllEvent.getFlag());
+                game.fireEvent(addedAllEvent);
             }
         } else {
             returnCode = false;

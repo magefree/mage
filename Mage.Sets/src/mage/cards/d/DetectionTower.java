@@ -72,12 +72,12 @@ class DetectionTowerEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (affectedControllerId.equals(source.getControllerId())) {
-            if (game.getOpponents(source.getControllerId()).contains(sourceId)) {
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        if (affectedControllerId.equals(source.getControllerId())) { //
+            if (game.getOpponents(source.getControllerId()).contains(objectId)) {
                 return true;
             }
-            Permanent creature = game.getPermanent(sourceId);
+            Permanent creature = game.getPermanent(objectId);
             if (creature != null
                     && game.getOpponents(source.getControllerId()).contains(creature.getControllerId())) {
                 return true;

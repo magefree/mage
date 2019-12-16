@@ -1,4 +1,3 @@
-
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -45,6 +44,7 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
         this.text = ability.text;
         this.setTargetPointer = ability.setTargetPointer;
         this.onlyOpponents = ability.onlyOpponents;
+        this.orPlaneswalker = ability.orPlaneswalker;
     }
 
     public DealsCombatDamageToAPlayerTriggeredAbility setOrPlaneswalker(boolean orPlaneswalker) {

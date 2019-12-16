@@ -20,6 +20,7 @@ import mage.client.draft.DraftPane;
 import mage.client.draft.DraftPanel;
 import mage.client.game.GamePane;
 import mage.client.game.GamePanel;
+import mage.client.game.PlayAreaPanel;
 import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
 import mage.client.preference.MagePreferences;
@@ -827,6 +828,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
         popupDebug = new javax.swing.JPopupMenu();
         menuDebugTestModalDialog = new javax.swing.JMenuItem();
+        menuDebugTestCardRenderModesDialog = new javax.swing.JMenuItem();
         desktopPane = new MageJDesktop();
         mageToolbar = new javax.swing.JToolBar();
         btnPreferences = new javax.swing.JButton();
@@ -856,6 +858,14 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             }
         });
         popupDebug.add(menuDebugTestModalDialog);
+
+        menuDebugTestCardRenderModesDialog.setText("Test Card Render Modes");
+        menuDebugTestCardRenderModesDialog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuDebugTestCardRenderModesDialogActionPerformed(evt);
+            }
+        });
+        popupDebug.add(menuDebugTestCardRenderModesDialog);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 768));
@@ -1078,6 +1088,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private void btnDebugMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDebugMouseClicked
         popupDebug.show(evt.getComponent(), 0, evt.getComponent().getHeight());
     }//GEN-LAST:event_btnDebugMouseClicked
+
+    private void menuDebugTestCardRenderModesDialogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDebugTestCardRenderModesDialogActionPerformed
+        final TestCardRenderDialog dialog = new TestCardRenderDialog();
+        dialog.showDialog();
+    }//GEN-LAST:event_menuDebugTestCardRenderModesDialogActionPerformed
 
     public void downloadImages() {
         DownloadPicturesService.startDownload();
@@ -1328,6 +1343,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private javax.swing.JToolBar.Separator jSeparatorImages;
     private javax.swing.JToolBar.Separator jSeparatorSymbols;
     private javax.swing.JToolBar mageToolbar;
+    private javax.swing.JMenuItem menuDebugTestCardRenderModesDialog;
     private javax.swing.JMenuItem menuDebugTestModalDialog;
     private javax.swing.JPopupMenu popupDebug;
     private javax.swing.JToolBar.Separator separatorDebug;
@@ -1370,6 +1386,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     public static GamePanel getGame(UUID gameId) {
         return GAMES.get(gameId);
+    }
+
+    public static Map<UUID, PlayAreaPanel> getGamePlayers(UUID gameId) {
+        GamePanel p = GAMES.get(gameId);
+        return p != null ? p.getPlayers() : new HashMap<>();
     }
 
     public static void removeGame(UUID gameId) {

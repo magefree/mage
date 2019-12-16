@@ -15,6 +15,7 @@ import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.constants.*;
@@ -619,6 +620,13 @@ public class TestPlayer implements Player {
                             wasProccessed = true;
                         }
 
+                        // check damage: card name, damage
+                        if (params[0].equals(CHECK_COMMAND_DAMAGE) && params.length == 3) {
+                            assertDamage(action, game, computerPlayer, params[1], Integer.parseInt(params[2]));
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
                         // check life: life
                         if (params[0].equals(CHECK_COMMAND_LIFE) && params.length == 2) {
                             assertLife(action, game, computerPlayer, Integer.parseInt(params[1]));
@@ -734,6 +742,16 @@ public class TestPlayer implements Player {
                         if (params[0].equals(SHOW_COMMAND_HAND) && params.length == 1) {
                             printStart(action.getActionName());
                             printCards(computerPlayer.getHand().getCards(game));
+                            printEnd();
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
+                        // show command
+                        if (params[0].equals(SHOW_COMMAND_COMMAND) && params.length == 1) {
+                            printStart(action.getActionName());
+                            CardsImpl cards = new CardsImpl(computerPlayer.getCommandersIds());
+                            printCards(cards.getCards(game));
                             printEnd();
                             actions.remove(action);
                             wasProccessed = true;
@@ -928,6 +946,12 @@ public class TestPlayer implements Player {
                 Power, perm.getPower().getValue());
         Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " have wrong toughness: " + perm.getToughness().getValue() + " <> " + Toughness,
                 Toughness, perm.getToughness().getValue());
+    }
+
+    private void assertDamage(PlayerAction action, Game game, Player player, String permanentName, int damage) {
+        Permanent perm = findPermanentWithAssert(action, game, player, permanentName);
+
+        Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " have wrong damage: " + perm.getDamage() + " <> " + damage, damage, perm.getDamage());
     }
 
     private void assertLife(PlayerAction action, Game game, Player player, int Life) {
@@ -1393,11 +1417,13 @@ public class TestPlayer implements Player {
         }
         if (!choices.isEmpty()) {
             for (String choice : choices) {
-                for (int index = 0; index < rEffects.size(); index++) {
-                    if (choice.equals(rEffects.get(Integer.toString(index)))) {
+                int index = 0;
+                for (Map.Entry<String, String> entry : rEffects.entrySet()) {
+                    if (entry.getValue().startsWith(choice)) {
                         choices.remove(choice);
                         return index;
                     }
+                    index++;
                 }
             }
             // TODO: enable fail checks and fix tests

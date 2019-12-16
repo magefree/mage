@@ -184,7 +184,15 @@ class GontiLordOfLuxurySpendAnyManaEffect extends AsThoughEffectImpl implements 
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        objectId = game.getCard(objectId).getMainCard().getId(); // for split cards
+        Card theCard = game.getCard(objectId);
+        if(theCard == null){
+            return false;
+        }
+        Card mainCard = theCard.getMainCard();
+        if(mainCard == null){
+            return false;
+        }
+        objectId = mainCard.getId(); // for split cards
         if (objectId.equals(((FixedTarget) getTargetPointer()).getTarget())
                 && game.getState().getZoneChangeCounter(objectId) <= ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1) {
             if (affectedControllerId.equals(source.getControllerId())) {
@@ -229,7 +237,15 @@ class GontiLordOfLuxuryLookEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        objectId = game.getCard(objectId).getMainCard().getId(); // for split cards
+        Card theCard = game.getCard(objectId);
+        if(theCard == null){
+            return false;
+        }
+        Card mainCard = theCard.getMainCard();
+        if(mainCard == null){
+            return false;
+        }
+        objectId = mainCard.getId(); // for split cards
         if (affectedControllerId.equals(source.getControllerId())
                 && game.getState().getZone(objectId) == Zone.EXILED) {
             Player controller = game.getPlayer(source.getControllerId());

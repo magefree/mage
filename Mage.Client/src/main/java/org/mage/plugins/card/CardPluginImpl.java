@@ -2,7 +2,6 @@ package org.mage.plugins.card;
 
 import mage.cards.MagePermanent;
 import mage.cards.action.ActionCallback;
-import mage.client.dialog.PreferencesDialog;
 import mage.client.util.GUISizeHelper;
 import mage.interfaces.plugin.CardPlugin;
 import mage.view.CardView;
@@ -99,25 +98,28 @@ public class CardPluginImpl implements CardPlugin {
      * Temporary card rendering shim. Split card rendering isn't implemented
      * yet, so use old component based rendering for the split cards.
      */
-    private CardPanel makePanel(CardView view, UUID gameId, boolean loadImage, ActionCallback callback, boolean isFoil, Dimension dimension) {
-        String fallback = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_RENDERING_FALLBACK, "false");
-        if (fallback.equals("true")) {
-            return new CardPanelComponentImpl(view, gameId, loadImage, callback, isFoil, dimension);
-        } else {
-            return new CardPanelRenderImpl(view, gameId, loadImage, callback, isFoil, dimension);
+    private CardPanel makePanel(CardView view, UUID gameId, boolean loadImage, ActionCallback callback, boolean isFoil, Dimension dimension, int renderMode) {
+        switch (renderMode) {
+            case 0:
+                return new CardPanelRenderImpl(view, gameId, loadImage, callback, isFoil, dimension);
+            case 1:
+                return new CardPanelComponentImpl(view, gameId, loadImage, callback, isFoil, dimension);
+            default:
+                throw new IllegalStateException("Unknown render mode " + renderMode);
+
         }
     }
 
     @Override
-    public MagePermanent getMagePermanent(PermanentView permanent, Dimension dimension, UUID gameId, ActionCallback callback, boolean canBeFoil, boolean loadImage) {
-        CardPanel cardPanel = makePanel(permanent, gameId, loadImage, callback, false, dimension);
+    public MagePermanent getMagePermanent(PermanentView permanent, Dimension dimension, UUID gameId, ActionCallback callback, boolean canBeFoil, boolean loadImage, int renderMode) {
+        CardPanel cardPanel = makePanel(permanent, gameId, loadImage, callback, false, dimension, renderMode);
         cardPanel.setShowCastingCost(true);
         return cardPanel;
     }
 
     @Override
-    public MagePermanent getMageCard(CardView cardView, Dimension dimension, UUID gameId, ActionCallback callback, boolean canBeFoil, boolean loadImage) {
-        CardPanel cardPanel = makePanel(cardView, gameId, loadImage, callback, false, dimension);
+    public MagePermanent getMageCard(CardView cardView, Dimension dimension, UUID gameId, ActionCallback callback, boolean canBeFoil, boolean loadImage, int renderMode) {
+        CardPanel cardPanel = makePanel(cardView, gameId, loadImage, callback, false, dimension, renderMode);
         cardPanel.setShowCastingCost(true);
         return cardPanel;
     }

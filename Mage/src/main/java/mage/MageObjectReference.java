@@ -53,6 +53,10 @@ public class MageObjectReference implements Comparable<MageObjectReference>, Ser
 
     public MageObjectReference(UUID sourceId, Game game) {
         this.sourceId = sourceId;
+        if (sourceId == null) {
+            throw new IllegalArgumentException("MageObjectReference contains nullable sourceId");
+        }
+
         MageObject mageObject = game.getObject(sourceId);
         if (mageObject != null) {
             this.zoneChangeCounter = mageObject.getZoneChangeCounter(game);

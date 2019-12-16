@@ -1,9 +1,5 @@
-
 package mage.game;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -21,8 +17,11 @@ import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.watchers.common.CommanderInfoWatcher;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author JRHerlehy
  */
 public abstract class GameTinyLeadersImpl extends GameImpl {
@@ -43,7 +42,6 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
 
     @Override
     protected void init(UUID choosingPlayerId) {
-        Ability ability = new SimpleStaticAbility(Zone.COMMAND, new InfoEffect("Commander effects"));
         //Move tiny leader to command zone
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
@@ -55,6 +53,7 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
                     this.loadCards(cards, playerId);
                     player.addCommanderId(commander.getId());
                     commander.moveToZone(Zone.COMMAND, null, this, true);
+                    Ability ability = new SimpleStaticAbility(Zone.COMMAND, new InfoEffect("Commander effects"));
                     ability.addEffect(new CommanderReplacementEffect(commander.getId(), alsoHand, alsoLibrary));
                     ability.addEffect(new CommanderCostModification(commander.getId()));
                     // Commander rule #4 was removed Jan. 18, 2016
@@ -63,13 +62,13 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
                     CommanderInfoWatcher watcher = new CommanderInfoWatcher(commander.getId(), false);
                     getState().addWatcher(watcher);
                     watcher.addCardInfoToCommander(this);
+                    this.getState().addAbility(ability, null);
                 } else {
                     throw new UnknownError("Commander card could not be created. Name: [" + player.getMatchPlayer().getDeck().getName() + ']');
                 }
             }
 
         }
-        this.getState().addAbility(ability, null);
         super.init(choosingPlayerId);
         if (startingPlayerSkipsDraw) {
             state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));

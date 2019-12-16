@@ -8,6 +8,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeOpponentsEffect;
 import mage.abilities.effects.keyword.AscendEffect;
 import mage.abilities.hint.common.CitysBlessingHint;
+import mage.abilities.hint.common.PermanentsYouControlHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -32,6 +33,8 @@ public final class VonasHunger extends CardImpl {
 
         // Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)
         this.getSpellAbility().addEffect(new AscendEffect());
+        this.getSpellAbility().addHint(CitysBlessingHint.instance);
+        this.getSpellAbility().addHint(PermanentsYouControlHint.instance);
 
         // Each opponent sacrifices a creature.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
@@ -43,7 +46,6 @@ public final class VonasHunger extends CardImpl {
                 new VonasHungerEffect(),
                 CitysBlessingCondition.instance,
                 "If you have the city's blessing, instead each opponent sacrifices half the creatures he or she controls rounded up"));
-        this.getSpellAbility().addHint(CitysBlessingHint.instance);
     }
 
     public VonasHunger(final VonasHunger card) {

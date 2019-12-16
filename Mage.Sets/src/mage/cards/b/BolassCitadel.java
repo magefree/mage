@@ -23,6 +23,7 @@ import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
+import mage.abilities.costs.Cost;
 
 /**
  * @author jeffwadsworth
@@ -98,9 +99,16 @@ class BolassCitadelPlayTheTopCardEffect extends AsThoughEffectImpl {
             Player controller = game.getPlayer(cardOnTop.getOwnerId());
             if (controller != null
                     && cardOnTop.equals(controller.getLibrary().getFromTop(game))) {
+                // add the life cost first
                 PayLifeCost cost = new PayLifeCost(cardOnTop.getManaCost().convertedManaCost());
                 Costs costs = new CostsImpl();
                 costs.add(cost);
+                // check for additional costs that must be paid
+                if (cardOnTop.getSpellAbility() != null) {
+                    for (Cost additionalCost : cardOnTop.getSpellAbility().getCosts()) {
+                        costs.add(additionalCost);
+                    }
+                }
                 controller.setCastSourceIdWithAlternateMana(cardOnTop.getId(), null, costs);
                 return true;
             }

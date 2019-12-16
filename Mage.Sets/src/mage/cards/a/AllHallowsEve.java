@@ -1,7 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -9,7 +7,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
@@ -19,8 +19,9 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class AllHallowsEve extends CardImpl {
@@ -72,7 +73,7 @@ class AllHallowsEveEffect extends OneShotEffect {
         if (allHallowsEve != null
                 && controller != null
                 && game.getExile().getCard(allHallowsEve.getId(), game) != null) {
-            allHallowsEve.getCounters(game).removeCounter(CounterType.SCREAM, 1);
+            allHallowsEve.removeCounters(CounterType.SCREAM.getName(), 1, game);
             if (allHallowsEve.getCounters(game).getCount(CounterType.SCREAM) == 0) {
                 allHallowsEve.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
                 for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {

@@ -43,8 +43,11 @@
                       <Component id="filterBar2" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnQuickStart" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="792" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="btnQuickStartDuel" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnQuickStartCommander" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="734" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -60,10 +63,16 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="filterBar1" max="32767" attributes="0"/>
-                              <Component id="btnQuickStart" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnQuickStartDuel" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="filterBar2" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="filterBar2" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="btnQuickStartCommander" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -506,15 +515,26 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="btnQuickStart">
+        <Component class="javax.swing.JButton" name="btnQuickStartDuel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Quick Start"/>
+            <Property name="text" type="java.lang.String" value="Quick start duel"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuickStartActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuickStartDuelActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnQuickStartCommander">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Quick start commander"/>
+            <Property name="focusable" type="boolean" value="false"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="verticalTextPosition" type="int" value="3"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuickStartCommanderActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

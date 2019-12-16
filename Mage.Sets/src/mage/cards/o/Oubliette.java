@@ -1,9 +1,5 @@
-
 package mage.cards.o;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -27,8 +23,11 @@ import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author MarcoMarin
  */
 public final class Oubliette extends CardImpl {
@@ -137,7 +136,7 @@ class OublietteReturnEffect extends OneShotEffect {
             if (counters != null) {
                 for (Counter counter : counters.values()) {
                     if (counter != null) {
-                        newPermanent.getCounters(game).addCounter(counter);
+                        newPermanent.getCounters(game).addCounter(counter); // it's restore counters, not add (e.g. without add events)
                     }
                 }
             }

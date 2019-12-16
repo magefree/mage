@@ -8,6 +8,7 @@ import mage.client.components.ext.dlg.DialogContainer;
 import mage.client.components.ext.dlg.DialogManager;
 import mage.client.components.ext.dlg.DlgParams;
 import mage.client.components.ext.dlg.IDialogPanel;
+import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Command;
 import mage.client.util.SettingsManager;
@@ -162,7 +163,7 @@ public class ChoiceDialog extends IDialogPanel {
             }
 
             CardView card = cardList.get(i);
-            MageCard cardImg = Plugins.instance.getMageCard(card, bigCard, getCardDimension(), gameId, true, true);
+            MageCard cardImg = Plugins.instance.getMageCard(card, bigCard, getCardDimension(), gameId, true, true, PreferencesDialog.getRenderMode());
 
             cardImg.setLocation(dx, dy + j * (height + 30));
             add(cardImg);

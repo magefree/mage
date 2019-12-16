@@ -88,7 +88,9 @@ class ArmoryAutomatonEffect extends OneShotEffect {
             while (player.canRespond() && countBattlefield > 0 && player.chooseUse(Outcome.Benefit, "Select and attach a target Equipment?", source, game)) {
                 Target targetEquipment = new TargetPermanent(currentFilter);
                 targetEquipment.setRequired(false);
-                if (player.choose(Outcome.Benefit, targetEquipment, source.getSourceId(), game)) {
+                if (player.choose(Outcome.Benefit, targetEquipment, source.getSourceId(), game) && targetEquipment.getFirstTarget() != null) {
+                    currentFilter.add(Predicates.not(new PermanentIdPredicate(targetEquipment.getFirstTarget()))); // exclude selected for next time
+
                     Permanent aura = game.getPermanent(targetEquipment.getFirstTarget());
                     if (aura != null) {
                         Permanent attachedTo = game.getPermanent(aura.getAttachedTo());
@@ -96,10 +98,9 @@ class ArmoryAutomatonEffect extends OneShotEffect {
                             attachedTo.removeAttachment(aura.getId(), game);
                         }
                         sourcePermanent.addAttachment(aura.getId(), game);
-
-                        // exclude selected
-                        currentFilter.add(Predicates.not(new PermanentIdPredicate(aura.getId())));
                     }
+                } else {
+                    break;
                 }
                 countBattlefield = game.getBattlefield().getAllActivePermanents(currentFilter, game).size();
             }

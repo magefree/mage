@@ -426,7 +426,7 @@ public class CursesTest extends CardTestPlayerBase {
     }
 
     /*
-     * Reported bug issue #3326 (NOTE test is failing due to bug in code)
+     * Reported bug issue #3326
      * When {Witchbane Orb} triggers when entering the field and there IS a curse attached to you, an error message (I sadly skipped) appears and your turn is reset.
         This happened to me in a 4-player Commander game with {Curse of the Shallow Graves} on the field.
      */

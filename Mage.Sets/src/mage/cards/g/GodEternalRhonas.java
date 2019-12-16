@@ -7,20 +7,18 @@ import mage.abilities.common.GodEternalDiesTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -57,17 +55,13 @@ public final class GodEternalRhonas extends CardImpl {
 }
 
 class GodEternalRhonasEffect extends OneShotEffect {
-
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
+    
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     GodEternalRhonasEffect() {
         super(Outcome.Benefit);
-        staticText = "double the power of each other creature you control until end of turn. " +
-                "Those creatures gain vigilance until end of turn.";
+        staticText = "double the power of each other creature you control until end of turn. "
+                + "Those creatures gain vigilance until end of turn.";
     }
 
     private GodEternalRhonasEffect(final GodEternalRhonasEffect effect) {
@@ -81,8 +75,11 @@ class GodEternalRhonasEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            if (permanent == null) {
+        Permanent godEternalRhonas = game.getPermanent(source.getSourceId());
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
+            if (permanent == null
+                    || godEternalRhonas != null
+                    && permanent == godEternalRhonas) {
                 continue;
             }
             ContinuousEffect effect = new BoostTargetEffect(
@@ -91,11 +88,14 @@ class GodEternalRhonasEffect extends OneShotEffect {
             );
             effect.setTargetPointer(new FixedTarget(permanent, game));
             game.addEffect(effect, source);
+
+            ContinuousEffect effect2 = new GainAbilityTargetEffect(
+                    VigilanceAbility.getInstance(),
+                    Duration.EndOfTurn
+            );
+            effect2.setTargetPointer(new FixedTarget(permanent, game));
+            game.addEffect(effect2, source);
         }
-        game.addEffect(new GainAbilityControlledEffect(
-                VigilanceAbility.getInstance(),
-                Duration.EndOfTurn, filter
-        ), source);
         return true;
     }
 }

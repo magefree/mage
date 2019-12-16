@@ -63,10 +63,7 @@ class MowuLoyalCompanionEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        int amount = event.getAmount();
-        if (amount > 0) {
-            event.setAmount(amount + 1);
-        }
+        event.setAmountForCounters(event.getAmount() + 1, true);
         return false;
     }
 
@@ -77,15 +74,13 @@ class MowuLoyalCompanionEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getData().equals(CounterType.P1P1.getName())) {
+        if (event.getData().equals(CounterType.P1P1.getName()) && event.getAmount() > 0) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent == null) {
                 permanent = game.getPermanentEntering(event.getTargetId());
             }
-            if (permanent != null && permanent.getId().equals(source.getSourceId())
-                    && permanent.isCreature()) {
-                return true;
-            }
+            return permanent != null && permanent.getId().equals(source.getSourceId())
+                    && permanent.isCreature();
         }
         return false;
     }

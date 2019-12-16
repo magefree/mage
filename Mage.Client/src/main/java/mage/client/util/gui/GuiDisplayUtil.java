@@ -181,10 +181,14 @@ public final class GuiDisplayUtil {
 
     public static TextLines getTextLinesfromCardView(CardView card) {
         TextLines textLines = new TextLines();
+
+        // rules
         textLines.setLines(new ArrayList<>(card.getRules()));
         for (String rule : card.getRules()) {
             textLines.setBasicTextLength(textLines.getBasicTextLength() + rule.length());
         }
+
+        // counters
         if (card.getMageObjectType().canHaveCounters()) {
             ArrayList<CounterView> counters = new ArrayList<>();
             if (card instanceof PermanentView) {
@@ -212,6 +216,8 @@ public final class GuiDisplayUtil {
                 textLines.setBasicTextLength(textLines.getBasicTextLength() + 50);
             }
         }
+
+        // damage
         if (card.getMageObjectType().isPermanent() && card instanceof PermanentView) {
             int damage = ((PermanentView) card).getDamage();
             if (damage > 0) {

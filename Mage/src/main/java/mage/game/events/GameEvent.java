@@ -18,6 +18,9 @@ public class GameEvent implements Serializable {
     protected UUID sourceId;
     protected UUID playerId;
     protected int amount;
+    // flags:
+    // for counters: event is result of effect (+1 from planeswalkers is cost, not effect)
+    // for combat damage: event is preventable damage
     protected boolean flag;
     protected String data;
     protected Zone zone;
@@ -431,6 +434,17 @@ public class GameEvent implements Serializable {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public void setAmountForCounters(int amount, boolean isEffect) {
+        this.amount = amount;
+
+        // cost event must be "transformed" to effect event, as example:
+        // planeswalker's +1 cost will be affected by Pir, Imaginative Rascal (1 + 1) and applied as effect by Doubling Season (2 * 2)
+        // https://github.com/magefree/mage/issues/5802
+        if (isEffect) {
+            setFlag(true);
+        }
     }
 
     public boolean getFlag() {
