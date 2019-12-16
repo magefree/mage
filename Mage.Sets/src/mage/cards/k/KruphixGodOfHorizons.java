@@ -1,15 +1,15 @@
-
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -17,11 +17,14 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class KruphixGodOfHorizons extends CardImpl {
+
+    private static final DynamicValue xValue = new DevotionCount(ColoredManaSymbol.G, ColoredManaSymbol.U);
 
     public KruphixGodOfHorizons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{G}{U}");
@@ -34,9 +37,9 @@ public final class KruphixGodOfHorizons extends CardImpl {
         // Indestructible
         this.addAbility(IndestructibleAbility.getInstance());
         // As long as your devotion to green and blue is less than seven, Kruhpix isn't a creature.
-        Effect effect = new LoseCreatureTypeSourceEffect(new DevotionCount(ColoredManaSymbol.G, ColoredManaSymbol.U), 7);
+        Effect effect = new LoseCreatureTypeSourceEffect(xValue, 7);
         effect.setText("As long as your devotion to green and blue is less than seven, Kruhpix isn't a creature");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect).addHint(new ValueHint("Devotion to green and blue", xValue)));
 
         // You have no maximum hand size.
         effect = new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.WhileOnBattlefield, MaximumHandSizeControllerEffect.HandSizeModification.SET);

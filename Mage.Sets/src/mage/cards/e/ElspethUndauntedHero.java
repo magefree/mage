@@ -9,6 +9,7 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryGraveyardPutOntoBattlefieldEffect;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -57,6 +58,7 @@ public final class ElspethUndauntedHero extends CardImpl {
         ability.addEffect(new BoostControlledEffect(
                 xValue, xValue, Duration.EndOfTurn
         ).setText("and get +X/+X, where X is your devotion to white"));
+        ability.addHint(new ValueHint("Devotion to white", xValue));
         this.addAbility(ability);
     }
 

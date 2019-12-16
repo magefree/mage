@@ -1,26 +1,22 @@
-
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -29,15 +25,17 @@ import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 import mage.watchers.common.CardsAmountDrawnThisTurnWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class KeranosGodOfStorms extends CardImpl {
 
-    
+    private static final DynamicValue xValue = new DevotionCount(ColoredManaSymbol.U, ColoredManaSymbol.R);
+
     public KeranosGodOfStorms(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{3}{U}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{U}{R}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
 
@@ -46,17 +44,18 @@ public final class KeranosGodOfStorms extends CardImpl {
 
         // Indestructible
         this.addAbility(IndestructibleAbility.getInstance());
+
         // As long as your devotion to blue and red is less than seven, Keranos isn't a creature.
-        Effect effect = new LoseCreatureTypeSourceEffect(new DevotionCount(ColoredManaSymbol.U, ColoredManaSymbol.R), 7);
+        Effect effect = new LoseCreatureTypeSourceEffect(xValue, 7);
         effect.setText("As long as your devotion to blue and red is less than seven, Keranos isn't a creature");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
-        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect).addHint(new ValueHint("Devotion to blue and red", xValue)));
+
         // Reveal the first card you draw on each of your turns. 
         // Whenever you reveal a land card this way, draw a card. 
         // Whenever you reveal a nonland card this way, Keranos deals 3 damage to any target.
         this.addAbility(new KeranosGodOfStormsTriggeredAbility(), new CardsAmountDrawnThisTurnWatcher());
-        
-        
+
+
     }
 
     public KeranosGodOfStorms(final KeranosGodOfStorms card) {

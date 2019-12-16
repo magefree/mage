@@ -3,6 +3,7 @@ package mage.cards.k;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -28,6 +29,7 @@ public final class KlothyssDesign extends CardImpl {
                 StaticFilters.FILTER_PERMANENT_CREATURES,
                 false, true
         ));
+        this.getSpellAbility().addHint(new ValueHint("Devotion to green", xValue));
     }
 
     private KlothyssDesign(final KlothyssDesign card) {
