@@ -31,7 +31,9 @@ public class Pioneer extends Constructed {
         banned.add("Felidar Guardian");
         banned.add("Field of the Dead");
         banned.add("Leyline of Abundance");
+        banned.add("Nexus of Fate");
         banned.add("Oath of Nissa");
+        banned.add("Oko, Thief of Crowns");
         banned.add("Once Upon a Time");
         banned.add("Smuggler's Copter");
         banned.add("Veil of Summer");
