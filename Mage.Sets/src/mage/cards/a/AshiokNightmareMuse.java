@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
@@ -19,8 +18,10 @@ import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetNonlandPermanent;
 
-import java.util.Objects;
 import java.util.UUID;
+import mage.MageObject;
+import mage.MageObjectReference;
+import mage.cards.Card;
 
 /**
  * @author TheElk801
@@ -60,8 +61,8 @@ class AshiokNightmareMuseBounceEffect extends OneShotEffect {
 
     AshiokNightmareMuseBounceEffect() {
         super(Outcome.Discard);
-        staticText = "return target nonland permanent to its owner's hand, " +
-                "then that player exiles a card from their hand";
+        staticText = "return target nonland permanent to its owner's hand, "
+                + "then that player exiles a card from their hand";
     }
 
     private AshiokNightmareMuseBounceEffect(final AshiokNightmareMuseBounceEffect effect) {
@@ -116,22 +117,31 @@ class AshiokNightmareMuseCastEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller == null
+                || sourceObject == null) {
             return false;
         }
         TargetCardInExile target = new TargetCardInExile(0, 3, filter, null);
         target.setNotTarget(true);
-        if (!player.choose(outcome, target, source.getSourceId(), game)) {
+        if (!controller.chooseTarget(outcome, target, source, game)) { // method is fine, controller is still choosing the card
             return false;
         }
-        target.getTargets()
-                .stream()
-                .map(game::getCard)
-                .filter(Objects::nonNull)
-                .map(card -> card.getSpellAbility() != null
-                        && player.chooseUse(outcome, "Cast " + card.getName() + " without paying its mana cost?", source, game)
-                        && player.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game)));
+        for (UUID targetId : target.getTargets()) {
+            if (targetId != null) {
+                Card chosenCard = game.getCard(targetId);
+                if (chosenCard != null
+                        && game.getState().getZone(chosenCard.getId()) == Zone.EXILED // must be exiled
+                        && game.getOpponents(controller.getId()).contains(chosenCard.getOwnerId()) // must be owned by an opponent
+                        && controller.chooseUse(outcome, "Cast " + chosenCard.getName() + " without paying its mana cost?", source, game)) {
+                    game.getState().setValue("CastFromExileEnabled" + chosenCard.getId(), Boolean.TRUE);  // enable the card to be cast from the exile zone
+                    controller.cast(controller.chooseAbilityForCast(chosenCard, game, true),
+                            game, true, new MageObjectReference(sourceObject, game));
+                    game.getState().setValue("CastFromExileEnabled" + chosenCard.getId(), null);  // reset to null
+                }
+            }
+        }
         return true;
     }
 }
