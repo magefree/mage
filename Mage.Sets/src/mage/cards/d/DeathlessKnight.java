@@ -1,5 +1,6 @@
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
@@ -11,8 +12,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -49,7 +48,7 @@ class DeathlessKnightTriggeredAbility extends TriggeredAbilityImpl {
     private boolean triggeredOnce = false;
 
     DeathlessKnightTriggeredAbility() {
-        super(Zone.ALL, new ReturnSourceFromGraveyardToHandEffect(), false);
+        super(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), false);
     }
 
     private DeathlessKnightTriggeredAbility(final DeathlessKnightTriggeredAbility ability) {
@@ -70,8 +69,7 @@ class DeathlessKnightTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         if (event.getType() != GameEvent.EventType.GAINED_LIFE
-                || !event.getPlayerId().equals(controllerId)
-                || game.getState().getZone(this.getSourceId()) == Zone.GRAVEYARD) {
+                || !event.getPlayerId().equals(getControllerId())) {
             return false;
         }
         if (triggeredOnce) {
