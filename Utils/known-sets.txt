@@ -188,7 +188,7 @@ Tempest Remastered|TempestRemastered|
 Tenth Edition|TenthEdition|
 The Dark|TheDark|
 Theros|Theros|
-Theros: Beyond Death|TherosBeyondDeath|
+Theros Beyond Death|TherosBeyondDeath|
 Throne of Eldraine|ThroneOfEldraine|
 Throne of Eldraine Collector's Edition|ThroneOfEldraineCollectorsEdition|
 Time Spiral|TimeSpiral|
