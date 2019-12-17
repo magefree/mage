@@ -22,8 +22,6 @@ import mage.target.common.TargetNonlandPermanent;
 import java.util.Objects;
 import java.util.UUID;
 
-import static mage.constants.Outcome.Benefit;
-
 /**
  * @author TheElk801
  */
@@ -61,7 +59,7 @@ public final class AshiokNightmareMuse extends CardImpl {
 class AshiokNightmareMuseBounceEffect extends OneShotEffect {
 
     AshiokNightmareMuseBounceEffect() {
-        super(Benefit);
+        super(Outcome.Discard);
         staticText = "return target nonland permanent to its owner's hand, " +
                 "then that player exiles a card from their hand";
     }
@@ -78,7 +76,7 @@ class AshiokNightmareMuseBounceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        Player player = game.getPlayer(game.getControllerId(source.getFirstTarget()));
+        Player player = game.getPlayer(game.getOwnerId(source.getFirstTarget()));
         if (permanent == null || player == null) {
             return false;
         }
@@ -103,7 +101,7 @@ class AshiokNightmareMuseCastEffect extends OneShotEffect {
     }
 
     AshiokNightmareMuseCastEffect() {
-        super(Benefit);
+        super(Outcome.Discard);
         staticText = "You may cast up to three face-up cards your opponents own from exile without paying their mana costs.";
     }
 
