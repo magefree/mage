@@ -41,6 +41,7 @@ import mage.game.draft.Draft;
 import mage.game.match.Match;
 import mage.game.match.MatchPlayer;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
 import mage.game.stack.StackObject;
 import mage.game.tournament.Tournament;
 import mage.player.ai.ComputerPlayer;
@@ -886,11 +887,14 @@ public class TestPlayer implements Player {
         System.out.println("Total permanents: " + cards.size());
 
         List<String> data = cards.stream()
-                .map(c -> (c.getIdName()
-                        + " - " + c.getPower().getValue() + "/" + c.getToughness().getValue()
-                        + (c.isPlaneswalker() ? " - L" + c.getCounters(game).getCount(CounterType.LOYALTY) : "")
-                        + ", " + (c.isTapped() ? "Tapped" : "Untapped")
-                        + (c.getAttachedTo() == null ? "" : ", attached to " + game.getPermanent(c.getAttachedTo()).getIdName())
+                .map(c -> (
+                        ((c instanceof PermanentToken) ? "[T] " : "[C] ")
+                                + c.getIdName()
+                                + (c.isCopy() ? " [copy of " + c.getCopyFrom().getId().toString().substring(0, 3) + "]" : "")
+                                + " - " + c.getPower().getValue() + "/" + c.getToughness().getValue()
+                                + (c.isPlaneswalker() ? " - L" + c.getCounters(game).getCount(CounterType.LOYALTY) : "")
+                                + ", " + (c.isTapped() ? "Tapped" : "Untapped")
+                                + (c.getAttachedTo() == null ? "" : ", attached to " + game.getPermanent(c.getAttachedTo()).getIdName())
                 ))
                 .sorted()
                 .collect(Collectors.toList());

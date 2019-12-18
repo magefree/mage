@@ -45,6 +45,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
 import mage.game.stack.SpellStack;
+import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.game.turn.Phase;
 import mage.game.turn.Step;
@@ -1568,7 +1569,7 @@ public abstract class GameImpl implements Game, Serializable {
             }
             newBluePrint.assignNewId();
             if (copyFromPermanent.isTransformed()) {
-                TransformAbility.transform(newBluePrint, copyFromPermanent.getSecondCardFace(), this);
+                TransformAbility.transform(newBluePrint, newBluePrint.getSecondCardFace(), this);
             }
         }
         if (applier != null) {
@@ -1584,7 +1585,7 @@ public abstract class GameImpl implements Game, Serializable {
         Ability newAbility = source.copy();
         newEffect.init(newAbility, this);
 
-        // If there are already copy effects with dration = Custom to the same object, remove the existing effects because they no longer have any effect
+        // If there are already copy effects with duration = Custom to the same object, remove the existing effects because they no longer have any effect
         if (duration == Duration.Custom) {
             for (Effect effect : getState().getContinuousEffects().getLayeredEffects(this)) {
                 if (effect instanceof CopyEffect) {
