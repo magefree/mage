@@ -52,5 +52,6 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Staggering Insight", 228, Rarity.UNCOMMON, mage.cards.s.StaggeringInsight.class));
         cards.add(new SetCardInfo("Swamp", 252, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("The Akroan War", 124, Rarity.RARE, mage.cards.t.TheAkroanWar.class));
+        cards.add(new SetCardInfo("Victory's Envoy", 289, Rarity.COMMON, mage.cards.v.VictorysEnvoy.class));
     }
 }
