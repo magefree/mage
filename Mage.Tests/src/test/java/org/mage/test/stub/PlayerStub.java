@@ -1048,7 +1048,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public Set<UUID> getPlayableObjects(Game game, Zone zone) {
+    public Map<UUID, Integer> getPlayableObjects(Game game, Zone zone) {
         return null;
     }
 

@@ -182,7 +182,7 @@ class WordOfCommandEffect extends OneShotEffect {
         } else { // Word of Command allows the chosen card to be played "as if it had flash" so we need to invoke such effect to bypass the check
             AsThoughEffectImpl effect2 = new WordOfCommandTestFlashEffect();
             game.addEffect(effect2, source);
-            if (targetPlayer.getPlayableObjects(game, Zone.HAND).contains(card.getId())) {
+            if (targetPlayer.getPlayableObjects(game, Zone.HAND).containsKey(card.getId())) {
                 canPlay = true;
             }
             for (AsThoughEffect eff : game.getContinuousEffects().getApplicableAsThoughEffects(AsThoughEffectType.CAST_AS_INSTANT, game)) {

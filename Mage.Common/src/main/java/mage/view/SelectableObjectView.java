@@ -9,11 +9,15 @@ public interface SelectableObjectView {
 
     void setPlayable(boolean isPlayable);
 
+    void setPlayableAmount(int playableAmount);
+
+    int getPlayableAmount();
+
     boolean isChoosable();
 
     void setChoosable(boolean isChoosable);
 
     boolean isSelected();
 
-    void setSelected(boolean selected);
+    void setSelected(boolean isSelected);
 }

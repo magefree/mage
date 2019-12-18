@@ -637,7 +637,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     List<Ability> getPlayableOptions(Ability ability, Game game);
 
-    Set<UUID> getPlayableObjects(Game game, Zone zone);
+    Map<UUID, Integer> getPlayableObjects(Game game, Zone zone);
 
     LinkedHashMap<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone, Game game);
 
