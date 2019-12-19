@@ -1,6 +1,8 @@
 package mage.cards.d;
 
 import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
@@ -15,9 +17,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
-
-import java.util.Map;
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -81,7 +80,7 @@ class DeafeningSilenceEffect extends ContinuousRuleModifyingEffectImpl {
         }
         DeafeningSilenceWatcher watcher = game.getState().getWatcher(DeafeningSilenceWatcher.class);
         return watcher != null
-                && watcher.spellsCastByPlayerThisTurnNonCreature(event.getPlayerId()) > 1;
+                && watcher.spellsCastByPlayerThisTurnNonCreature(event.getPlayerId()) > 0;
     }
 }
 
