@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.MageItem;
@@ -18,6 +17,7 @@ import mage.target.TargetImpl;
 import mage.util.TargetAddress;
 
 import java.util.*;
+import mage.game.events.GameEvent;
 
 /**
  * @param <T>
@@ -29,7 +29,8 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
 
     public CopySpellForEachItCouldTargetEffect(FilterInPlay<T> filter) {
         super(Outcome.Copy);
-        this.staticText = "copy the spell for each other " + filter.getMessage() + " that spell could target. Each copy targets a different one";
+        this.staticText = "copy the spell for each other " + filter.getMessage()
+                + " that spell could target. Each copy targets a different one";
         this.filter = filter;
     }
 
@@ -67,7 +68,8 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
             for (TargetAddress addr : TargetAddress.walk(spell)) {
                 Target targetInstance = addr.getTarget(spell);
                 if (targetInstance.getNumberOfTargets() > 1) {
-                    throw new UnsupportedOperationException("Changing Target instances with multiple targets is unsupported");
+                    throw new UnsupportedOperationException("Changing Target instances "
+                            + "with multiple targets is unsupported");
                 }
                 if (changeTarget(targetInstance, game, source)) {
                     targetsToBeChanged.add(addr);
@@ -142,25 +144,28 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
                             FilterInPlay<T> setFilter = filter.copy();
                             setFilter.add(new FromSetPredicate(targetCopyMap.keySet()));
                             Target target = new TargetWithAdditionalFilter(sampleTarget, setFilter);
+                            target.setNotTarget(false); // it is targeted, not chosen
                             target.setMinNumberOfTargets(0);
                             target.setMaxNumberOfTargets(1);
-                            target.setTargetName(filter.getMessage() + " that " + spell.getLogName() + " could target (" + targetCopyMap.size() + " remaining)");
-
+                            target.setTargetName(filter.getMessage() + " that " + spell.getLogName()
+                                    + " could target (" + targetCopyMap.size() + " remaining)");
                             // shortcut if there's only one possible target remaining
                             if (targetCopyMap.size() > 1
                                     && target.canChoose(spell.getId(), player.getId(), game)) {
-                                player.choose(Outcome.Neutral, target, spell.getId(), game);
+                                // The original "source" is not applicable here due to the spell being a copy.  ie: Zada, Hedron Grinder
+                                player.chooseTarget(Outcome.Neutral, target, spell.getSpellAbility(), game); // not source, but the spell that is copied
                             }
                             Collection<UUID> chosenIds = target.getTargets();
                             if (chosenIds.isEmpty()) {
                                 chosenIds = targetCopyMap.keySet();
                             }
-
                             List<UUID> toDelete = new ArrayList<>();
                             for (UUID chosenId : chosenIds) {
                                 Spell chosenCopy = targetCopyMap.get(chosenId);
                                 if (chosenCopy != null) {
                                     game.getStack().push(chosenCopy);
+                                    game.fireEvent(new GameEvent(GameEvent.EventType.COPIED_STACKOBJECT,
+                                            chosenCopy.getId(), spell.getId(), source.getControllerId()));
                                     toDelete.add(chosenId);
                                     madeACopy = true;
                                 }
@@ -323,7 +328,8 @@ class TargetWithAdditionalFilter<T extends MageItem> extends TargetImpl {
 
     @Override
     public FilterInPlay<T> getFilter() {
-        return new CompoundFilter((FilterInPlay<T>) originalTarget.getFilter(), additionalFilter, originalTarget.getFilter().getMessage());
+        return new CompoundFilter((FilterInPlay<T>) originalTarget.getFilter(),
+                additionalFilter, originalTarget.getFilter().getMessage());
     }
 
     @Override
