@@ -1,6 +1,8 @@
-
 package mage.cards.s;
 
+import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.SearchEffect;
@@ -8,14 +10,10 @@ import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
-
-import java.util.UUID;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  *
@@ -23,9 +21,8 @@ import java.util.stream.Stream;
  */
 public final class SignalTheClans extends CardImpl {
 
-    public SignalTheClans (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{G}");
-
+    public SignalTheClans(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}{G}");
 
         // Search your library for three creature cards and reveal them. If you reveal three cards with different names, choose one of them at random and put that card into your hand. Shuffle the rest into your library.
         this.getSpellAbility().addEffect(new SignalTheClansEffect());
@@ -36,16 +33,15 @@ public final class SignalTheClans extends CardImpl {
     }
 
     @Override
-    public SignalTheClans  copy() {
+    public SignalTheClans copy() {
         return new SignalTheClans(this);
     }
 }
 
 class SignalTheClansEffect extends SearchEffect {
 
-
     public SignalTheClansEffect() {
-        super(new TargetCardInLibrary(3, new FilterCreatureCard()), Outcome.DrawCard);
+        super(new TargetCardInLibrary(3, StaticFilters.FILTER_CARD_CREATURE), Outcome.DrawCard);
         staticText = "Search your library for three creature cards and reveal them. If you reveal three cards with different names, choose one of them at random and put that card into your hand. Shuffle the rest into your library";
     }
 
@@ -68,9 +64,9 @@ class SignalTheClansEffect extends SearchEffect {
         if (player.searchLibrary(target, source, game)) {
             if (!target.getTargets().isEmpty()) {
                 Cards cards = new CardsImpl();
-                for (UUID cardId: target.getTargets()) {
+                for (UUID cardId : target.getTargets()) {
                     Card card = player.getLibrary().remove(cardId, game);
-                    if (card != null){
+                    if (card != null) {
                         cards.add(card);
                     }
                 }
@@ -78,14 +74,14 @@ class SignalTheClansEffect extends SearchEffect {
                 player.revealCards("Reveal", cards, game);
                 Card cardsArray[] = cards.getCards(game).toArray(new Card[0]);
                 //If you reveal three cards with different names
-                if(Stream.of(cardsArray).map(MageObject::getName).collect(Collectors.toSet()).size() == 3){
+                if (Stream.of(cardsArray).map(MageObject::getName).collect(Collectors.toSet()).size() == 3) {
                     //Choose one of them at random and put that card into your hand
                     Card randomCard = cards.getRandom(game);
                     randomCard.moveToZone(Zone.HAND, source.getSourceId(), game, true);
                     cards.remove(randomCard);
                 }
                 //Shuffle the rest into your library
-                for(Card card : cards.getCards(game)){
+                for (Card card : cards.getCards(game)) {
                     card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
                 }
             }

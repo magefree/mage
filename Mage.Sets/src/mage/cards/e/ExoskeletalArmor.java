@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import java.util.UUID;
@@ -16,7 +15,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -27,7 +26,7 @@ import mage.target.common.TargetCreaturePermanent;
 public final class ExoskeletalArmor extends CardImpl {
 
     public ExoskeletalArmor(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
@@ -37,7 +36,7 @@ public final class ExoskeletalArmor extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // Enchanted creature gets +X/+X, where X is the number of creature cards in all graveyards.
-        CardsInAllGraveyardsCount count = new CardsInAllGraveyardsCount(new FilterCreatureCard());
+        CardsInAllGraveyardsCount count = new CardsInAllGraveyardsCount(StaticFilters.FILTER_CARD_CREATURE);
         Effect effect = new BoostEnchantedEffect(count, count, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature gets +X/+X, where X is the number of creature cards in all graveyards");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));

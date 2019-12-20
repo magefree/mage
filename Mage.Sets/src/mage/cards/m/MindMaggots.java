@@ -13,7 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
@@ -31,7 +31,7 @@ public final class MindMaggots extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // When Mind Maggots enters the battlefield, discard any number of creature cards. 
+        // When Mind Maggots enters the battlefield, discard any number of creature cards.
         // For each card discarded this way, put two +1/+1 counters on Mind Maggots.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new MindMaggotsEffect()));
 
@@ -68,10 +68,10 @@ class MindMaggotsEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int numToDiscard = controller.getAmount(0,
-                    controller.getHand().getCards(new FilterCreatureCard(), game).size(),
+                    controller.getHand().getCards(StaticFilters.FILTER_CARD_CREATURE, game).size(),
                     "Discard how many creature cards?",
                     game);
-            TargetCardInHand target = new TargetCardInHand(numToDiscard, new FilterCreatureCard());
+            TargetCardInHand target = new TargetCardInHand(numToDiscard, StaticFilters.FILTER_CARD_CREATURE);
             if (controller.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
                 for (UUID targetId : target.getTargets()) {
                     Card card = game.getCard(targetId);

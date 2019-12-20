@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -11,9 +10,9 @@ import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreatureCard;
+import mage.constants.SubType;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.SeedGuardianToken;
 import mage.players.Player;
@@ -66,7 +65,7 @@ class SeedGuardianEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int creaturesInGraveyard = controller.getGraveyard().count(new FilterCreatureCard(), game);
+            int creaturesInGraveyard = controller.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, game);
             return new CreateTokenEffect(new SeedGuardianToken(creaturesInGraveyard)).apply(game, source);
         }
         return false;

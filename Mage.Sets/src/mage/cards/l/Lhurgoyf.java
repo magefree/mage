@@ -1,4 +1,3 @@
-
 package mage.cards.l;
 
 import java.util.UUID;
@@ -10,13 +9,13 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -27,7 +26,7 @@ import mage.players.Player;
 public final class Lhurgoyf extends CardImpl {
 
     public Lhurgoyf(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
         this.subtype.add(SubType.LHURGOYF);
 
         this.power = new MageInt(0);
@@ -73,7 +72,7 @@ class LhurgoyfEffect extends ContinuousEffectImpl {
                 for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        number += player.getGraveyard().count(new FilterCreatureCard(), game);
+                        number += player.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, game);
                     }
                 }
 

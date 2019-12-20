@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -13,6 +12,7 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -25,7 +25,7 @@ import mage.target.TargetCard;
 public final class GatherThePack extends CardImpl {
 
     public GatherThePack(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");
 
         // Reveal the top five cards of your library. You may put a creature card from among them into your hand. Put the rest into your graveyard.
         // <i>Spell mastery</i> — If there are two or more instant and/or sorcery cards in your graveyard, put up to two creature cards from among the revealed cards into your hand instead of one.
@@ -64,7 +64,7 @@ class GatherThePackEffect extends OneShotEffect {
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 5));
         if (!cards.isEmpty()) {
             controller.revealCards(sourceObject.getIdName(), cards, game);
-            int creatures = cards.count(new FilterCreatureCard(), source.getSourceId(), source.getControllerId(), game);
+            int creatures = cards.count(StaticFilters.FILTER_CARD_CREATURE, source.getSourceId(), source.getControllerId(), game);
             if (creatures > 0) {
                 int max = 1;
                 if (SpellMasteryCondition.instance.apply(game, source) && creatures > 1) {

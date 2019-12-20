@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -11,9 +10,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterCreatureCard;
-import mage.target.common.TargetCardInYourGraveyard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -23,13 +22,13 @@ import mage.target.common.TargetCreaturePermanent;
 public final class DarigaazsCharm extends CardImpl {
 
     public DarigaazsCharm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}{R}{G}");
 
         // Choose one - Return target creature card from your graveyard to your hand;
         Effect effect = new ReturnToHandTargetEffect();
         effect.setText("Return target creature card from your graveyard to your hand");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard()));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE));
 
         // or Darigaaz's Charm deals 3 damage to any target;
         Mode mode = new Mode();

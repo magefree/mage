@@ -9,7 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -27,7 +27,7 @@ public final class KraulForagers extends CardImpl {
 
         // Undergrowth — When Kraul Foragers enters the battlefield, you gain 1 life for each creature card in your graveyard.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new GainLifeEffect(new CardsInControllerGraveyardCount(new FilterCreatureCard())),
+                new GainLifeEffect(new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE)),
                 false, "<i>Undergrowth</i> &mdash; "
         ));
     }

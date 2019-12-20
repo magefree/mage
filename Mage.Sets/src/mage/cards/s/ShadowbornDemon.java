@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -18,7 +17,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -83,7 +81,7 @@ class CreatureCardsInControllerGraveCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Player p = game.getPlayer(source.getControllerId());
-        if (p != null && p.getGraveyard().count(new FilterCreatureCard(), game) >= value) {
+        if (p != null && p.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, game) >= value) {
             return true;
         }
         return false;

@@ -13,7 +13,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -38,12 +38,12 @@ public final class KaradorGhostChieftain extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Karador, Ghost Chieftain costs {1} less to cast for each creature card in your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.STACK, 
+        this.addAbility(new SimpleStaticAbility(Zone.STACK,
                 new KaradorGhostChieftainCostReductionEffect()));
 
         // During each of your turns, you may cast one creature card from your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
-                new KaradorGhostChieftainContinuousEffect()), 
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new KaradorGhostChieftainContinuousEffect()),
                 new KaradorGhostChieftainWatcher());
     }
 
@@ -72,7 +72,7 @@ class KaradorGhostChieftainCostReductionEffect extends CostModificationEffectImp
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            int reductionAmount = player.getGraveyard().count(new FilterCreatureCard(), game);
+            int reductionAmount = player.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, game);
             CardUtil.reduceCost(abilityToModify, reductionAmount);
             return true;
         }
@@ -81,7 +81,7 @@ class KaradorGhostChieftainCostReductionEffect extends CostModificationEffectImp
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if ((abilityToModify instanceof SpellAbility) 
+        if ((abilityToModify instanceof SpellAbility)
                 && abilityToModify.getSourceId().equals(source.getSourceId())) {
             return game.getCard(abilityToModify.getSourceId()) != null;
         }
@@ -114,11 +114,11 @@ class KaradorGhostChieftainContinuousEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            if (game.getActivePlayerId() == null 
+            if (game.getActivePlayerId() == null
                     || !game.isActivePlayer(player.getId())) {
                 return false;
             }
-            for (Card card : player.getGraveyard().getCards(new FilterCreatureCard(), game)) {
+            for (Card card : player.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game)) {
                 ContinuousEffect effect = new KaradorGhostChieftainCastFromGraveyardEffect();
                 effect.setTargetPointer(new FixedTarget(card.getId()));
                 game.addEffect(effect, source);
@@ -160,9 +160,9 @@ class KaradorGhostChieftainCastFromGraveyardEffect extends AsThoughEffectImpl {
                 && affectedControllerId != null
                 && objectCard.getSpellAbility().spellCanBeActivatedRegularlyNow(affectedControllerId, game)) {
             if (affectedControllerId.equals(source.getControllerId())) {
-                KaradorGhostChieftainWatcher watcher = 
-                        game.getState().getWatcher(KaradorGhostChieftainWatcher.class, source.getSourceId());
-                return watcher != null 
+                KaradorGhostChieftainWatcher watcher
+                        = game.getState().getWatcher(KaradorGhostChieftainWatcher.class, source.getSourceId());
+                return watcher != null
                         && !watcher.isAbilityUsed();
             }
         }
@@ -185,7 +185,7 @@ class KaradorGhostChieftainWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST 
+        if (event.getType() == GameEvent.EventType.SPELL_CAST
                 && event.getZone() == Zone.GRAVEYARD) {
             Spell spell = (Spell) game.getObject(event.getTargetId());
             if (spell.isCreature()) {

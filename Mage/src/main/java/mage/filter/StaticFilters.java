@@ -55,10 +55,9 @@ public final class StaticFilters {
         FILTER_CARD_CARDS.setLockedFilter(true);
     }
 
-    public static final FilterCard FILTER_CARD_ENTCHANTMENT = new FilterCard("entchantment card");
+    public static final FilterCard FILTER_CARD_ENTCHANTMENT = new FilterEnchantmentCard();
 
     static {
-        FILTER_CARD_ENTCHANTMENT.add(new CardTypePredicate(CardType.ENCHANTMENT));
         FILTER_CARD_ENTCHANTMENT.setLockedFilter(true);
     }
 

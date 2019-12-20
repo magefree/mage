@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.Set;
@@ -10,7 +9,7 @@ import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
@@ -24,7 +23,7 @@ import mage.target.common.TargetOpponent;
 public final class AnimalMagnetism extends CardImpl {
 
     public AnimalMagnetism(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}");
 
         // Reveal the top five cards of your library. An opponent chooses a creature card from among them. Put that card onto the battlefield and the rest into your graveyard.
         this.getSpellAbility().addEffect(new AnimalMagnetismEffect());
@@ -76,7 +75,7 @@ class AnimalMagnetismEffect extends OneShotEffect {
                         controller.chooseTarget(Outcome.Detriment, target, source, game);
                         opponent = game.getPlayer(target.getFirstTarget());
                     }
-                    TargetCard target = new TargetCard(1, Zone.LIBRARY, new FilterCreatureCard());
+                    TargetCard target = new TargetCard(1, Zone.LIBRARY, StaticFilters.FILTER_CARD_CREATURE);
                     opponent.chooseTarget(outcome, cards, target, source, game);
                     cardToBattlefield = game.getCard(target.getFirstTarget());
                 }

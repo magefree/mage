@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.Set;
@@ -17,7 +16,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
 
@@ -32,7 +30,7 @@ public final class DefenseOfTheHeart extends CardImpl {
 
         // At the beginning of your upkeep, if an opponent controls three or more creatures, sacrifice Defense of the Heart, search your library for up to two creature cards, and put those cards onto the battlefield. Then shuffle your library.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceEffect(), TargetController.YOU, false);
-        ability.addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, new FilterCreatureCard()), false, Outcome.PutLandInPlay));
+        ability.addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_CREATURE), false, Outcome.PutLandInPlay));
         DefenseOfTheHeartCondition contition = new DefenseOfTheHeartCondition();
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, contition, "At the beginning of your upkeep, if an opponent controls three or more creatures, sacrifice {this}, search your library for up to two creature cards, and put those cards onto the battlefield. Then shuffle your library"));
 

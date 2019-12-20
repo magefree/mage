@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -7,8 +6,8 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -17,7 +16,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -35,7 +34,7 @@ public final class Seance extends CardImpl {
 
         // At the beginning of each upkeep, you may exile target creature card from your graveyard. If you do, create a token that's a copy of that card except it's a Spirit in addition to its other types. Exile it at the beginning of the next end step.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new SeanceEffect(), TargetController.ANY, true);
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard()));
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE));
         this.addAbility(ability);
     }
 

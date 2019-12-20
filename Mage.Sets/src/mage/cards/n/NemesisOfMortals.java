@@ -1,6 +1,6 @@
-
 package mage.cards.n;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -12,12 +12,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -32,7 +29,7 @@ public final class NemesisOfMortals extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Nemesis of Mortals costs {1} less to cast for each creature card in your graveyard.
-        Ability ability = new SimpleStaticAbility(Zone.ALL, new SourceCostReductionForEachCardInGraveyardEffect(new FilterCreatureCard()));
+        Ability ability = new SimpleStaticAbility(Zone.ALL, new SourceCostReductionForEachCardInGraveyardEffect(StaticFilters.FILTER_CARD_CREATURE));
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
 

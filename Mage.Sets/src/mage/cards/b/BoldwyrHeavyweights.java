@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.HashSet;
@@ -16,7 +15,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -28,7 +27,7 @@ import mage.target.common.TargetCardInLibrary;
 public final class BoldwyrHeavyweights extends CardImpl {
 
     public BoldwyrHeavyweights(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
         this.subtype.add(SubType.GIANT, SubType.WARRIOR);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
@@ -72,7 +71,7 @@ class BoldwyrHeavyweightsEffect extends OneShotEffect {
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             Player opponent = game.getPlayer(opponentId);
             if (opponent != null && opponent.chooseUse(Outcome.PutCreatureInPlay, "Search your library for a creature card and put it onto the battlefield?", source, game)) {
-                TargetCardInLibrary target = new TargetCardInLibrary(new FilterCreatureCard());
+                TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_CREATURE);
                 if (opponent.searchLibrary(target, source, game)) {
                     Card targetCard = opponent.getLibrary().getCard(target.getFirstTarget(), game);
                     if (targetCard != null) {

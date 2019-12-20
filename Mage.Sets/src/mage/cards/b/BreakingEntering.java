@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -16,7 +15,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
@@ -70,7 +69,7 @@ class EnteringReturnFromGraveyardToBattlefieldEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Target target = new TargetCardInGraveyard(new FilterCreatureCard());
+            Target target = new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE);
             target.setNotTarget(true);
             if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
                     && controller.chooseTarget(outcome, target, source, game)) {

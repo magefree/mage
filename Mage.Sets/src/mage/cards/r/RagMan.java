@@ -1,6 +1,6 @@
-
 package mage.cards.r;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -14,12 +14,10 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
-
-import java.util.UUID;
 
 /**
  * @author Quercitron
@@ -54,8 +52,6 @@ public final class RagMan extends CardImpl {
 
 class RagManDiscardEffect extends OneShotEffect {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard();
-
     public RagManDiscardEffect() {
         super(Outcome.Discard);
         this.staticText = "and discards a creature card at random";
@@ -77,7 +73,7 @@ class RagManDiscardEffect extends OneShotEffect {
             Cards creatureCardsInHand = new CardsImpl();
             for (UUID cardId : player.getHand()) {
                 Card card = player.getHand().get(cardId, game);
-                if (filter.match(card, game)) {
+                if (StaticFilters.FILTER_CARD_CREATURE.match(card, game)) {
                     creatureCardsInHand.add(card);
                 }
             }

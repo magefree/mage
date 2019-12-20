@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -15,7 +14,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 
 /**
  * @author North
@@ -30,7 +29,7 @@ public final class Bonehoard extends CardImpl {
         this.addAbility(new LivingWeaponAbility());
 
         // Equipped creature gets +X/+X, where X is the number of creature cards in all graveyards.
-        CardsInAllGraveyardsCount value = new CardsInAllGraveyardsCount(new FilterCreatureCard());
+        CardsInAllGraveyardsCount value = new CardsInAllGraveyardsCount(StaticFilters.FILTER_CARD_CREATURE);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(value, value)));
 
         // Equip {2}

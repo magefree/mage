@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -18,7 +17,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.BalduvianToken;
@@ -39,7 +38,7 @@ public final class BalduvianDead extends CardImpl {
 
         // {2}{R}, Exile a creature card from your graveyard: Create a 3/1 black and red Graveborn creature token with haste. Sacrifice it at the beginning of the next end step.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BalduvianDeadEffect(), new ManaCostsImpl("{2}{R}"));
-        TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(new FilterCreatureCard());
+        TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE);
         ability.addCost(new ExileFromGraveCost(target));
         this.addAbility(ability);
 

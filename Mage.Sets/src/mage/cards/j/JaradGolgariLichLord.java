@@ -1,4 +1,3 @@
-
 package mage.cards.j;
 
 import java.util.UUID;
@@ -19,7 +18,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
@@ -48,7 +46,7 @@ public final class JaradGolgariLichLord extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Jarad, Golgari Lich Lord gets +1/+1 for each creature card in your graveyard.
-        DynamicValue amount = new CardsInControllerGraveyardCount(new FilterCreatureCard());
+        DynamicValue amount = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE);
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield));
         this.addAbility(ability);
 
