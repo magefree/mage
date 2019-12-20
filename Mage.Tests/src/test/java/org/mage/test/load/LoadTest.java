@@ -250,7 +250,7 @@ public class LoadTest {
     }
 
     @Test
-    //@Ignore
+    @Ignore
     public void test_TwoAIPlayGame_Multiple() {
 
         // save random seeds for repeated results

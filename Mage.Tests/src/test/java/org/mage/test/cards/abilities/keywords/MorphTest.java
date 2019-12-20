@@ -717,14 +717,22 @@ public class MorphTest extends CardTestPlayerBase {
      * not work correctly. When Vesuvan Shapeshifter turns face up and becomes a
      * copy of the targeted creature, it should still be in the state of
      * "turning face up", thus triggering the ability of the Brine Elemental.
+     * <p>
+     * combo:
+     * Vesuvan Shapeshifter + Brine Elemental
+     * Brine Elemental in play, Vesuvan Shapeshifter in hand
+     * 1) Cast Vesuvan Shapeshifter face-down.
+     * 2) Flip Vesuvan Shapeshifter for its morph cost, copying Brine Elemental. Your opponent skips his next untap.
+     * 3) During your upkeep, flip Vesuvan Shapeshifter face-down.
+     * 4) Repeat from 2.
      */
     @Test
     public void testVesuvanShapeshifter() {
 
         // Morph {5}{U}{U}
         // When Brine Elemental is turned face up, each opponent skips their next untap step.
-        addCard(Zone.HAND, playerA, "Brine Elemental"); // Creature {4}{U}{U} 5/4
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Brine Elemental"); // Creature {4}{U}{U} 5/4
+        //addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
 
         // As Vesuvan Shapeshifter enters the battlefield or is turned face up, you may choose another creature on the battlefield.
         // If you do, until Vesuvan Shapeshifter is turned face down, it becomes a copy of that creature
@@ -733,23 +741,24 @@ public class MorphTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Vesuvan Shapeshifter"); // Creature 0/0
         addCard(Zone.BATTLEFIELD, playerB, "Island", 5);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Brine Elemental");
-        setChoice(playerA, "No"); // cast it normally
-
+        // 1. Cast Vesuvan as face-down
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Vesuvan Shapeshifter");
-        setChoice(playerB, "Yes");
+        setChoice(playerB, "Yes"); // cast as face-down
 
+        // 2. Moth Vesuvan and copy brine
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{1}{U}: Turn this face-down permanent");
-        setChoice(playerB, "Brine Elemental");
+        addTarget(playerB, "Brine Elemental");
 
+        // No face up trigger and choose from Vesuvan
+        // But brine's trigger must works on next turn 3 (skip untap)
+
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
-
         execute();
+        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Brine Elemental", 1);
-
         assertPermanentCount(playerB, "Brine Elemental", 1);
-
         Assert.assertTrue("Skip next turn has to be added to TurnMods", currentGame.getState().getTurnMods().size() == 1);
     }
 
