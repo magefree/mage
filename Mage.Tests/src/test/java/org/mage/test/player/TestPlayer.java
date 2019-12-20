@@ -1453,7 +1453,8 @@ public class TestPlayer implements Player {
 
     private void chooseStrictModeFailed(Game game, String reason) {
         if (strictChooseMode) {
-            Assert.fail("Missing target/choice def for turn " + game.getTurnNum() + ", " + game.getStep().getType().name() + ": " + reason);
+            Assert.fail("Missing target/choice def for turn " + game.getTurnNum() + ", " + this.getName() + ", "
+                    + game.getStep().getType().name() + ": " + reason);
         }
     }
 
@@ -1523,6 +1524,11 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
+        UUID abilityControllerId = computerPlayer.getId();
+        if (target.getTargetController() != null && target.getAbilityController() != null) {
+            abilityControllerId = target.getAbilityController();
+        }
+
         if (!choices.isEmpty()) {
 
             List<String> usedChoices = new ArrayList<>();
@@ -1557,13 +1563,12 @@ public class TestPlayer implements Player {
                                 targetName = targetName.substring(0, targetName.length() - 11);
                             }
                         }
-                        for (Permanent permanent : game.getBattlefield().getActivePermanents(filterPermanent, getId(), sourceId, game)) {
+                        for (Permanent permanent : game.getBattlefield().getActivePermanents(filterPermanent, abilityControllerId, sourceId, game)) {
                             if (target.getTargets().contains(permanent.getId())) {
                                 continue;
                             }
                             if (permanent.getName().equals(targetName)) {
-
-                                if (target.isNotTarget() || target.canTarget(computerPlayer.getId(), permanent.getId(), source, game)) {
+                                if (target.isNotTarget() || target.canTarget(abilityControllerId, permanent.getId(), source, game)) {
                                     if ((permanent.isCopy() && !originOnly) || (!permanent.isCopy() && !copyOnly)) {
                                         target.add(permanent.getId(), game);
                                         targetFound = true;
@@ -1571,7 +1576,7 @@ public class TestPlayer implements Player {
                                     }
                                 }
                             } else if ((permanent.getName() + '-' + permanent.getExpansionSetCode()).equals(targetName)) {
-                                if (target.isNotTarget() || target.canTarget(computerPlayer.getId(), permanent.getId(), source, game)) {
+                                if (target.isNotTarget() || target.canTarget(abilityControllerId, permanent.getId(), source, game)) {
                                     if ((permanent.isCopy() && !originOnly) || (!permanent.isCopy() && !copyOnly)) {
                                         target.add(permanent.getId(), game);
                                         targetFound = true;
@@ -1592,7 +1597,7 @@ public class TestPlayer implements Player {
                 for (Player player : game.getPlayers().values()) {
                     for (String choose2 : choices) {
                         if (player.getName().equals(choose2)) {
-                            if (target.canTarget(computerPlayer.getId(), player.getId(), null, game) && !target.getTargets().contains(player.getId())) {
+                            if (target.canTarget(abilityControllerId, player.getId(), null, game) && !target.getTargets().contains(player.getId())) {
                                 target.add(player.getId(), game);
                                 choices.remove(choose2);
                                 return true;
@@ -1623,7 +1628,7 @@ public class TestPlayer implements Player {
 
                     CheckOneChoice:
                     for (String possibleChoice : possibleChoices) {
-                        Set<UUID> possibleCards = target.possibleTargets(sourceId, target.getTargetController() == null ? getId() : target.getTargetController(), game);
+                        Set<UUID> possibleCards = target.possibleTargets(sourceId, abilityControllerId, game);
                         CheckTargetsList:
                         for (UUID targetId : possibleCards) {
                             MageObject targetObject = game.getObject(targetId);
@@ -1672,7 +1677,7 @@ public class TestPlayer implements Player {
             if (target instanceof TargetSource) {
                 Set<UUID> possibleTargets;
                 TargetSource t = ((TargetSource) target);
-                possibleTargets = t.possibleTargets(sourceId, computerPlayer.getId(), game);
+                possibleTargets = t.possibleTargets(sourceId, abilityControllerId, game);
                 for (String choose2 : choices) {
                     String[] targetList = choose2.split("\\^");
                     boolean targetFound = false;
@@ -1732,18 +1737,20 @@ public class TestPlayer implements Player {
 
         // how to fix: change target definition for addTarget in test's code or update choose from targets implementation in TestPlayer
         if ((foundMulti && !canMulti) || (foundSpecialStart && !canSpecialStart) || (foundSpecialClose && !canSpecialClose) || (foundEquals && !canEquals)) {
-            Assert.fail("Targets list was setup by addTarget with " + targets + ", but target definition [" + targetDefinition + "]"
+            Assert.fail(this.getName() + " - Targets list was setup by addTarget with " + targets + ", but target definition [" + targetDefinition + "]"
                     + " is not supported by [" + canSupportChars + "] for target class " + needTarget.getClass().getSimpleName());
         }
     }
 
     @Override
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
+        UUID abilityControllerId = computerPlayer.getId();
+        if (target.getTargetController() != null && target.getAbilityController() != null) {
+            abilityControllerId = target.getAbilityController();
+        }
+        UUID sourceId = source != null ? source.getSourceId() : null;
+
         if (!targets.isEmpty()) {
-            UUID abilityControllerId = computerPlayer.getId();
-            if (target.getTargetController() != null && target.getAbilityController() != null) {
-                abilityControllerId = target.getAbilityController();
-            }
 
             // do not select
             if (targets.get(0).equals(TARGET_SKIP)) {
@@ -1811,7 +1818,7 @@ public class TestPlayer implements Player {
                         if (filter instanceof FilterPlaneswalkerOrPlayer) {
                             filter = ((FilterPlaneswalkerOrPlayer) filter).getFilterPermanent();
                         }
-                        for (Permanent permanent : game.getBattlefield().getAllActivePermanents((FilterPermanent) filter, game)) {
+                        for (Permanent permanent : game.getBattlefield().getActivePermanents((FilterPermanent) filter, abilityControllerId, sourceId, game)) {
                             if (permanent.getName().equals(targetName) || (permanent.getName() + '-' + permanent.getExpansionSetCode()).equals(targetName)) {
                                 if (target.canTarget(abilityControllerId, permanent.getId(), source, game) && !target.getTargets().contains(permanent.getId())) {
                                     if ((permanent.isCopy() && !originOnly) || (!permanent.isCopy() && !copyOnly)) {
@@ -1989,13 +1996,13 @@ public class TestPlayer implements Player {
             String message;
 
             if (source != null) {
-                message = "Targets list was setup by addTarget with " + targets + ", but not used in ["
+                message = this.getName() + " - Targets list was setup by addTarget with " + targets + ", but not used in ["
                         + "card " + source.getSourceObject(game)
                         + " -> ability " + source.getClass().getSimpleName() + " (" + source.getRule().substring(0, Math.min(20, source.getRule().length()) - 1) + "..." + ")"
                         + " -> target " + target.getClass().getSimpleName() + " (" + target.getMessage() + ")"
                         + "]";
             } else {
-                message = "Targets list was setup by addTarget with " + targets + ", but not used in ["
+                message = this.getName() + " - Targets list was setup by addTarget with " + targets + ", but not used in ["
                         + "card XXX"
                         + " -> target " + target.getClass().getSimpleName() + " (" + target.getMessage() + ")"
                         + "]";

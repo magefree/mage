@@ -214,9 +214,11 @@ public class LoadTest {
         // playing until game over
         boolean startToWatching = false;
         while (true) {
+            GameView gameView = monitor.client.getLastGameView();
+
             checkGame = monitor.getTable(tableId);
             TableState state = checkGame.get().getTableState();
-            logger.warn(state);
+            logger.warn((gameView != null ? "Turn " + gameView.getTurn() + ", " + gameView.getStep().toString() + " - " : "") + state);
 
             if (state == TableState.FINISHED) {
                 break;
@@ -227,7 +229,6 @@ public class LoadTest {
                 startToWatching = true;
             }
 
-            GameView gameView = monitor.client.getLastGameView();
             if (gameView != null) {
                 for (PlayerView p : gameView.getPlayers()) {
                     logger.info(p.getName() + " - Life=" + p.getLife() + "; Lib=" + p.getLibraryCount());
@@ -249,21 +250,21 @@ public class LoadTest {
     }
 
     @Test
-    @Ignore
+    //@Ignore
     public void test_TwoAIPlayGame_Multiple() {
 
         // save random seeds for repeated results
-        Integer gamesAmount = 1000;
+        int gamesAmount = 1000;
         List<Integer> seedsList = new ArrayList<>();
         for (int i = 1; i <= gamesAmount; i++) {
             seedsList.add(RandomUtil.nextInt());
         }
 
-        for (int i = 1; i <= 1000; i++) {
+        for (int i = 1; i <= gamesAmount; i++) {
             long randomSeed = seedsList.get(i);
-            logger.info("RANDOM seed: " + randomSeed);
+            logger.info("Game " + i + " of " + gamesAmount + ", RANDOM seed: " + randomSeed);
             RandomUtil.setSeed(randomSeed);
-            playTwoAIGame("WGUBR", "SWS");
+            playTwoAIGame("WGUBR", "ELD");
         }
     }
 
