@@ -2,6 +2,7 @@ package mage.cards.u;
 
 import mage.MageInt;
 import mage.abilities.common.AttacksEachCombatStaticAbility;
+import mage.abilities.common.EscapesWithAbility;
 import mage.abilities.keyword.EscapeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -30,6 +31,7 @@ public final class UnderworldRageHound extends CardImpl {
         this.addAbility(new EscapeAbility(this, "{3}{R}", 3));
 
         // Underworld Rage-Hound escapes with a +1/+1 counter on it.
+        this.addAbility(new EscapesWithAbility(1));
     }
 
     private UnderworldRageHound(final UnderworldRageHound card) {
