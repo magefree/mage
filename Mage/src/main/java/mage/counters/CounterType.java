@@ -21,6 +21,7 @@ public enum CounterType {
     CARRION("carrion"),
     CHARGE("charge"),
     CHIP("chip"),
+    COIN("coin"),
     CORPSE("corpse"),
     CREDIT("credit"),
     CRYSTAL("crystal"),
