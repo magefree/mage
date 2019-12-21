@@ -22,7 +22,10 @@ import org.mage.test.utils.DeckTestUtils;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Intended to test Mage server under different load patterns.
@@ -188,7 +191,7 @@ public class LoadTest {
         }
     }
 
-    public void playTwoAIGame(String deckColors, String deckAllowedSets) {
+    public void playTwoAIGame(String gameName, String deckColors, String deckAllowedSets) {
         Assert.assertFalse("need deck colors", deckColors.isEmpty());
         Assert.assertFalse("need allowed sets", deckAllowedSets.isEmpty());
 
@@ -197,7 +200,7 @@ public class LoadTest {
 
         // game by monitor
         GameTypeView gameType = monitor.session.getGameTypes().get(0);
-        MatchOptions gameOptions = createSimpleGameOptionsForAI(gameType, monitor.session);
+        MatchOptions gameOptions = createSimpleGameOptionsForAI(gameType, monitor.session, gameName);
         TableView game = monitor.session.createTable(monitor.roomID, gameOptions);
         UUID tableId = game.getTableId();
 
@@ -218,7 +221,11 @@ public class LoadTest {
 
             checkGame = monitor.getTable(tableId);
             TableState state = checkGame.get().getTableState();
-            logger.warn((gameView != null ? "Turn " + gameView.getTurn() + ", " + gameView.getStep().toString() + " - " : "") + state);
+
+            logger.warn(checkGame.get().getTableName()
+                    + (gameView != null ? ", turn " + gameView.getTurn() + ", " + gameView.getStep().toString() : "")
+                    + (gameView != null ? ", active " + gameView.getActivePlayerName() : "")
+                    + ", " + state);
 
             if (state == TableState.FINISHED) {
                 break;
@@ -246,25 +253,34 @@ public class LoadTest {
     @Test
     @Ignore
     public void test_TwoAIPlayGame_One() {
-        playTwoAIGame("GR", "GRN");
+        playTwoAIGame("Single AI game", "GR", "GRN");
     }
 
     @Test
     @Ignore
     public void test_TwoAIPlayGame_Multiple() {
 
-        // save random seeds for repeated results
-        int gamesAmount = 1000;
+        int singleGameSID = -1554824422; // for one game test with same deck
+        int singleGamePlaysAmount = 1000; // multiple run of one game test
+
+        // save random seeds for repeated results (in decks generating)
         List<Integer> seedsList = new ArrayList<>();
-        for (int i = 1; i <= gamesAmount; i++) {
-            seedsList.add(RandomUtil.nextInt());
+        if (singleGameSID != 0) {
+            for (int i = 1; i <= singleGamePlaysAmount; i++) {
+                seedsList.add(singleGameSID);
+            }
+        } else {
+            int gamesAmount = 1000;
+            for (int i = 1; i <= gamesAmount; i++) {
+                seedsList.add(RandomUtil.nextInt());
+            }
         }
 
-        for (int i = 1; i <= gamesAmount; i++) {
+        for (int i = 0; i <= seedsList.size() - 1; i++) {
             long randomSeed = seedsList.get(i);
-            logger.info("Game " + i + " of " + gamesAmount + ", RANDOM seed: " + randomSeed);
+            logger.info("Game " + (i + 1) + " of " + seedsList.size() + ", RANDOM seed: " + randomSeed);
             RandomUtil.setSeed(randomSeed);
-            playTwoAIGame("WGUBR", "ELD");
+            playTwoAIGame("AI game #" + (i + 1), "WGUBR", "ELD");
         }
     }
 
@@ -454,8 +470,8 @@ public class LoadTest {
         return createSimpleGameOptions("Bots test game", gameTypeView, session, PlayerType.HUMAN);
     }
 
-    private MatchOptions createSimpleGameOptionsForAI(GameTypeView gameTypeView, Session session) {
-        return createSimpleGameOptions("AI test game", gameTypeView, session, PlayerType.COMPUTER_MAD);
+    private MatchOptions createSimpleGameOptionsForAI(GameTypeView gameTypeView, Session session, String gameName) {
+        return createSimpleGameOptions(gameName, gameTypeView, session, PlayerType.COMPUTER_MAD);
     }
 
     private class LoadPlayer {

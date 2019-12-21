@@ -70,6 +70,7 @@ import java.util.Map.Entry;
 public class ComputerPlayer extends PlayerImpl implements Player {
 
     private static final Logger log = Logger.getLogger(ComputerPlayer.class);
+    private long lastThinkTime = 0; // msecs for last AI actions calc
 
     protected int PASSIVITY_PENALTY = 5; // Penalty value for doing nothing if some actions are available
     protected boolean ALLOW_INTERRUPT = true;     // change this for test to false / debugging purposes to false to switch off interrupts while debugging
@@ -450,6 +451,18 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         // source can be null (as example: legendary rule permanent selection)
         UUID sourceId = source != null ? source.getSourceId() : null;
 
+        // sometimes a target selection can be made from a player that does not control the ability
+        UUID abilityControllerId = playerId;
+        if (target.getAbilityController() != null) {
+            abilityControllerId = target.getAbilityController();
+        }
+
+        boolean required = target.isRequired(sourceId, game);
+        Set<UUID> possibleTargets = target.possibleTargets(sourceId, abilityControllerId, game);
+        if (possibleTargets.isEmpty() || target.getTargets().size() >= target.getNumberOfTargets()) {
+            required = false;
+        }
+
         // temp lists
         List<Permanent> goodList = new ArrayList<>();
         List<Permanent> badList = new ArrayList<>();
@@ -457,12 +470,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         List<Permanent> goodList2 = new ArrayList<>();
         List<Permanent> badList2 = new ArrayList<>();
         List<Permanent> allList2 = new ArrayList<>();
-
-        // sometimes a target selection can be made from a player that does not control the ability
-        UUID abilityControllerId = playerId;
-        if (target.getAbilityController() != null) {
-            abilityControllerId = target.getAbilityController();
-        }
 
         // TODO: improve to process multiple opponents instead random
         UUID randomOpponentId;
@@ -569,7 +576,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
 
             // use bad list only on required target and add minimum targets
-            boolean required = target.isRequiredExplicitlySet() ? required = target.isRequired() : target.isRequired(source); // got that code from HumanPlayer.chooseTarget
             if (required) {
                 for (Permanent permanent : badList) {
                     if (target.getTargets().size() >= target.getMinNumberOfTargets()) {
@@ -2786,5 +2792,13 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         // restore used in AI simulations
         // all human players converted to computer and analyse
         this.human = false;
+    }
+
+    public long getLastThinkTime() {
+        return lastThinkTime;
+    }
+
+    public void setLastThinkTime(long lastThinkTime) {
+        this.lastThinkTime = lastThinkTime;
     }
 }

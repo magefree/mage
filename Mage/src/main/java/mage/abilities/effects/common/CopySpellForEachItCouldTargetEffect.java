@@ -10,6 +10,7 @@ import mage.filter.FilterImpl;
 import mage.filter.FilterInPlay;
 import mage.filter.predicate.mageobject.FromSetPredicate;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.Target;
@@ -17,7 +18,6 @@ import mage.target.TargetImpl;
 import mage.util.TargetAddress;
 
 import java.util.*;
-import mage.game.events.GameEvent;
 
 /**
  * @param <T>
@@ -259,13 +259,18 @@ class TargetWithAdditionalFilter<T extends MageItem> extends TargetImpl {
     }
 
     @Override
-    public int getMaxNumberOfTargets() {
-        return originalTarget.getMaxNumberOfTargets();
+    public int getMinNumberOfTargets() {
+        return originalTarget.getMinNumberOfTargets();
     }
 
     @Override
     public void setMinNumberOfTargets(int minNumberOfTargets) {
         originalTarget.setMinNumberOfTargets(minNumberOfTargets);
+    }
+
+    @Override
+    public int getMaxNumberOfTargets() {
+        return originalTarget.getMaxNumberOfTargets();
     }
 
     @Override
