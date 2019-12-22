@@ -11,10 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
+import mage.cards.decks.exporter.XmageInfoDeckExporter;
 
 public enum DeckFormats {
 
     XMAGE(new XmageDeckExporter()),
+    XMAGE_INFO(new XmageInfoDeckExporter()),
     MTG_ONLINE(new MtgOnlineDeckExporter()),
     MTG_ARENA(new MtgArenaDeckExporter());
 

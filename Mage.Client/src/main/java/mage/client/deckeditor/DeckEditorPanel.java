@@ -40,6 +40,7 @@ import java.util.*;
 import java.util.concurrent.*;
 
 import static mage.cards.decks.DeckFormats.XMAGE;
+import static mage.cards.decks.DeckFormats.XMAGE_INFO;
 
 /**
  * @author BetaSteward_at_googlemail.com, JayDi85
@@ -67,6 +68,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         fcSelectDeck = new JFileChooser();
         fcSelectDeck.setAcceptAllFileFilterUsed(false);
         fcSelectDeck.addChoosableFileFilter(new DeckFileFilter("dck", "XMage's deck files (*.dck)"));
+        fcSelectDeck.addChoosableFileFilter(new DeckFileFilter("dck_info", "XMage's deck files with info (*.dck_info)"));
         fcImportDeck = new JFileChooser();
         fcImportDeck.setAcceptAllFileFilterUsed(false);
         fcImportDeck.addChoosableFileFilter(new ImportFilter());
@@ -1204,14 +1206,22 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             }
             try {
                 String fileName = file.getPath();
-                if (!fileName.endsWith(".dck")) {
+                if (!(fileName.endsWith(".dck") || fileName.endsWith(".dck_info"))) {
                     fileName += ".dck";
+                }
+                boolean useDeckInfo = false;
+                if (fileName.endsWith(".dck_info")) {
+                    useDeckInfo = true;
                 }
                 MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
                 DeckCardLists cardLists = deck.getDeckCardLists();
                 cardLists.setCardLayout(deckArea.getCardLayout());
                 cardLists.setSideboardLayout(deckArea.getSideboardLayout());
-                XMAGE.getExporter().writeDeck(fileName, cardLists);
+                if (!useDeckInfo) {
+                    XMAGE.getExporter().writeDeck(fileName, cardLists);
+                } else {
+                    XMAGE_INFO.getExporter().writeDeck(fileName, cardLists);
+                }
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage() + "\nTry ensuring that the selected directory is writable.", "Error saving deck", JOptionPane.ERROR_MESSAGE);
             } finally {
