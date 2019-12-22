@@ -26,7 +26,7 @@ public final class RealmCloakedGiant extends AdventureCard {
     }
 
     public RealmCloakedGiant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{5}{W}{W}", "{5}{W}{W}", "{3}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{5}{W}{W}", "Cast Off", "{3}{W}{W}");
 
         this.subtype.add(SubType.GIANT);
         this.power = new MageInt(7);
