@@ -21,7 +21,6 @@ import mage.watchers.Watcher;
 import java.util.*;
 
 /**
- *
  * @author noahg
  */
 public final class PrematureBurial extends CardImpl {
@@ -34,7 +33,6 @@ public final class PrematureBurial extends CardImpl {
 
     public PrematureBurial(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        
 
         // Destroy target nonblack creature that entered the battlefield since your last turn ended.
         this.getSpellAbility().addEffect(new DestroyTargetEffect().setText("Destroy target nonblack creature that entered the battlefield since your last turn ended."));
@@ -59,17 +57,15 @@ class ETBSinceYourLastTurnTarget extends TargetCreaturePermanent {
         this.targetName = "nonblack creature that entered the battlefield since your last turn ended";
     }
 
-    public ETBSinceYourLastTurnTarget(ETBSinceYourLastTurnTarget target){
+    public ETBSinceYourLastTurnTarget(ETBSinceYourLastTurnTarget target) {
         super(target);
     }
 
     @Override
     public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        System.out.println("canTarget called");
         ETBSinceYourLastTurnWatcher watcher = game.getState().getWatcher(ETBSinceYourLastTurnWatcher.class);
-        if (watcher != null){
-            if (watcher.enteredSinceLastTurn(controllerId, new MageObjectReference(id, game))){
-                System.out.println(game.getPermanent(id).getIdName()+" entered since the last turn.");
+        if (watcher != null) {
+            if (watcher.enteredSinceLastTurn(controllerId, new MageObjectReference(id, game))) {
                 return super.canTarget(controllerId, id, source, game);
             }
         }
@@ -80,7 +76,7 @@ class ETBSinceYourLastTurnTarget extends TargetCreaturePermanent {
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
         MageObject targetSource = game.getObject(sourceId);
         ETBSinceYourLastTurnWatcher watcher = game.getState().getWatcher(ETBSinceYourLastTurnWatcher.class);
-        if(targetSource != null) {
+        if (targetSource != null) {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
                 if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
                     if (watcher != null && watcher.enteredSinceLastTurn(sourceControllerId, new MageObjectReference(permanent.getId(), game))) {
@@ -110,22 +106,20 @@ class ETBSinceYourLastTurnWatcher extends Watcher {
     public ETBSinceYourLastTurnWatcher(ETBSinceYourLastTurnWatcher watcher) {
         super(watcher);
         this.playerToETBMap = new HashMap<>();
-        for (UUID player : watcher.playerToETBMap.keySet()){
+        for (UUID player : watcher.playerToETBMap.keySet()) {
             this.playerToETBMap.put(player, new HashSet<>(watcher.playerToETBMap.get(player)));
         }
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.END_TURN_STEP_POST){
-            System.out.println("End of turn for "+game.getPlayer(event.getPlayerId()).getName());
+        if (event.getType() == GameEvent.EventType.END_TURN_STEP_POST) {
             playerToETBMap.put(event.getPlayerId(), new HashSet<>());
-        } else if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD){
+        } else if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             Permanent etbPermanent = game.getPermanent(event.getTargetId());
-            if (etbPermanent != null){
-                System.out.println("nonnull permanent entered: "+etbPermanent.getIdName());
-                for (UUID player : game.getPlayerList()){
-                    if (!playerToETBMap.containsKey(player)){
+            if (etbPermanent != null) {
+                for (UUID player : game.getPlayerList()) {
+                    if (!playerToETBMap.containsKey(player)) {
                         playerToETBMap.put(player, new HashSet<>());
                     }
                     playerToETBMap.get(player).add(new MageObjectReference(etbPermanent.getBasicMageObject(game), game));
@@ -134,12 +128,7 @@ class ETBSinceYourLastTurnWatcher extends Watcher {
         }
     }
 
-    public boolean enteredSinceLastTurn(UUID player, MageObjectReference mor){
+    public boolean enteredSinceLastTurn(UUID player, MageObjectReference mor) {
         return playerToETBMap.get(player).contains(mor);
-    }
-
-    @Override
-    public ETBSinceYourLastTurnWatcher copy() {
-        return new ETBSinceYourLastTurnWatcher(this);
     }
 }
