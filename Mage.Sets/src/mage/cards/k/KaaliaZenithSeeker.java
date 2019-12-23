@@ -1,5 +1,6 @@
 package mage.cards.k;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -17,8 +18,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -75,10 +74,10 @@ class KaaliaZenithSeekerEffect extends OneShotEffect {
 
     KaaliaZenithSeekerEffect() {
         super(Outcome.Benefit);
-        staticText = "look at the top six cards of your library. " +
-                "You may reveal an Angel card, a Demon card, and/or a Dragon card " +
-                "from among them and put them into your hand. " +
-                "Put the rest on the bottom of your library in a random order.";
+        staticText = "look at the top six cards of your library. "
+                + "You may reveal an Angel card, a Demon card, and/or a Dragon card "
+                + "from among them and put them into your hand. "
+                + "Put the rest on the bottom of your library in a random order.";
     }
 
     private KaaliaZenithSeekerEffect(final KaaliaZenithSeekerEffect effect) {
@@ -105,6 +104,7 @@ class KaaliaZenithSeekerEffect extends OneShotEffect {
             }
         }
         cards.removeAll(toHand);
+        player.revealCards(source, toHand, game);
         player.moveCards(toHand, Zone.HAND, source, game);
         player.putCardsOnBottomOfLibrary(cards, game, source, false);
         return true;
