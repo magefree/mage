@@ -11,7 +11,6 @@ import org.mage.test.serverside.base.CardTestCommander4Players;
 public class ExileTargetTest extends CardTestCommander4Players {
 
     // Player order: A -> D -> C -> B
-
     @Test
     public void test_chooseOpponentTargets() {
         // AI sometimes chooses own permanents in multiplayer game instead opponents
@@ -26,12 +25,11 @@ public class ExileTargetTest extends CardTestCommander4Players {
         addCard(Zone.BATTLEFIELD, playerC, "Balduvian Bears", 1); // 2/2
 
         // must select opponent's Balduvian Bears
-        showAvaileableAbilities("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        // showAvaileableAbilities("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Oblivion Ring");
         //addTarget(playerA, "Balduvian Bears"); // disable to activate AI target choose
 
-        showAvaileableAbilities("after", 1, PhaseStep.BEGIN_COMBAT, playerA);
-
+        // showAvaileableAbilities("after", 1, PhaseStep.BEGIN_COMBAT, playerA);
         //setStrictChooseMode(true); // disable strict mode to activate AI for choosing
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();

@@ -362,10 +362,10 @@ public class MorphTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sagu Mauler", NO_TARGET, "Sagu Mauler", StackClause.WHILE_NOT_ON_STACK);
         setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
 
-        showBattlefield("A battle", 1, PhaseStep.POSTCOMBAT_MAIN, playerA);
+        // showBattlefield("A battle", 1, PhaseStep.POSTCOMBAT_MAIN, playerA);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Echoing Decay", EmptyNames.FACE_DOWN_CREATURE.toString());
 
-        showBattlefield("A battle after", 1, PhaseStep.END_TURN, playerA);
+        // showBattlefield("A battle after", 1, PhaseStep.END_TURN, playerA);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
@@ -540,14 +540,14 @@ public class MorphTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akroma, Angel of Fury");
         setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
-        showBattlefield("A battle", 1, PhaseStep.POSTCOMBAT_MAIN, playerA);
-        showBattlefield("B battle", 1, PhaseStep.POSTCOMBAT_MAIN, playerB);
+//        showBattlefield("A battle", 1, PhaseStep.POSTCOMBAT_MAIN, playerA);
+//        showBattlefield("B battle", 1, PhaseStep.POSTCOMBAT_MAIN, playerB);
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Supplant Form");
         addTarget(playerB, EmptyNames.FACE_DOWN_CREATURE.toString());
 
-        showBattlefield("A battle end", 1, PhaseStep.END_TURN, playerA);
-        showBattlefield("B battle end", 1, PhaseStep.END_TURN, playerB);
+//        showBattlefield("A battle end", 1, PhaseStep.END_TURN, playerA);
+//        showBattlefield("B battle end", 1, PhaseStep.END_TURN, playerB);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -718,13 +718,11 @@ public class MorphTest extends CardTestPlayerBase {
      * copy of the targeted creature, it should still be in the state of
      * "turning face up", thus triggering the ability of the Brine Elemental.
      * <p>
-     * combo:
-     * Vesuvan Shapeshifter + Brine Elemental
-     * Brine Elemental in play, Vesuvan Shapeshifter in hand
-     * 1) Cast Vesuvan Shapeshifter face-down.
-     * 2) Flip Vesuvan Shapeshifter for its morph cost, copying Brine Elemental. Your opponent skips his next untap.
-     * 3) During your upkeep, flip Vesuvan Shapeshifter face-down.
-     * 4) Repeat from 2.
+     * combo: Vesuvan Shapeshifter + Brine Elemental Brine Elemental in play,
+     * Vesuvan Shapeshifter in hand 1) Cast Vesuvan Shapeshifter face-down. 2)
+     * Flip Vesuvan Shapeshifter for its morph cost, copying Brine Elemental.
+     * Your opponent skips his next untap. 3) During your upkeep, flip Vesuvan
+     * Shapeshifter face-down. 4) Repeat from 2.
      */
     @Test
     public void testVesuvanShapeshifter() {
@@ -751,7 +749,6 @@ public class MorphTest extends CardTestPlayerBase {
 
         // No face up trigger and choose from Vesuvan
         // But brine's trigger must works on next turn 3 (skip untap)
-
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();

@@ -329,7 +329,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
          * Creature — Human Soldier
          * 1/1
          */
-        /*
+ /*
          * Rimrock Knight {1}{R}
          * Creature — Dwarf Knight
          * Rimrock Knight can't block.
@@ -397,7 +397,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
      * Killer. If instead you control Garruk’s Horde and the top card of your library is Giant Killer, you may cast
      * Giant Killer but not Chop Down.
      */
-
     @Test
     public void testCastTreatsToShareWithMelek() {
         /*
@@ -483,7 +482,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         removeAllCardsFromLibrary(playerA);
         addCard(Zone.LIBRARY, playerA, "Curious Pair");
 
-        showAvaileableAbilities("abils", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        // showAvaileableAbilities("abils", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -514,7 +513,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         addCounters(1, PhaseStep.UPKEEP, playerA, "Wrenn and Six", CounterType.LOYALTY, 5);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-7: You get an emblem");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
-        showAvaileableAbilities("abils", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        // showAvaileableAbilities("abils", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
 
         // retrace - You may cast this card from your graveyard by discarding a land card as an additional cost to cast it
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share");
@@ -551,7 +550,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Until your next");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
-        showAvaileableAbilities("abils", 1, PhaseStep.BEGIN_COMBAT, playerA);
+        // showAvaileableAbilities("abils", 1, PhaseStep.BEGIN_COMBAT, playerA);
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Treats to Share");
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);

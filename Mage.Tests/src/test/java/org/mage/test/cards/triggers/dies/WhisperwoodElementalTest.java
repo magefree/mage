@@ -7,17 +7,18 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- * Whisperwood Elemental - Elemental  {3}{G}{G}
- * At the beginning of your end step, manifest the top card of your library.
- * Sacrifice Whisperwood Elemental: Until end of turn, face-up, nontoken creatures you control gain "When this creature dies, manifest the top card of your library."
+ * Whisperwood Elemental - Elemental {3}{G}{G} At the beginning of your end
+ * step, manifest the top card of your library. Sacrifice Whisperwood Elemental:
+ * Until end of turn, face-up, nontoken creatures you control gain "When this
+ * creature dies, manifest the top card of your library."
  *
  * @author LevelX2
  */
 public class WhisperwoodElementalTest extends CardTestPlayerBase {
 
     /**
-     * Tests that the dies triggered ability of silvercoat lion (gained by sacrificed Whisperwood Elemental)
-     * triggers as he dies from Lightning Bolt
+     * Tests that the dies triggered ability of silvercoat lion (gained by
+     * sacrificed Whisperwood Elemental) triggers as he dies from Lightning Bolt
      */
     @Test
     public void testDiesTriggeredAbility() {
@@ -29,8 +30,6 @@ public class WhisperwoodElementalTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sacrifice {this}: Until end of turn, face-up, nontoken creatures you control gain \"When this creature dies, manifest the top card of your library.");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Silvercoat Lion");
 
-        showBattlefield("A battle", 1, PhaseStep.END_TURN, playerA);
-        showGraveyard("A grave", 1, PhaseStep.END_TURN, playerA);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();

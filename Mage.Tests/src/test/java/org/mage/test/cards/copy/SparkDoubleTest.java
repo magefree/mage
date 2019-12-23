@@ -169,8 +169,7 @@ public class SparkDoubleTest extends CardTestPlayerBase {
         If you control two or more permanents with the same name but only one is legendary, the “legend rule” doesn’t apply. (2019-05-03)
 
         it's applier copy check
-        */
-
+         */
         //
         addCard(Zone.HAND, playerA, "Spark Double"); // {3}{U}
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
@@ -193,14 +192,13 @@ public class SparkDoubleTest extends CardTestPlayerBase {
         checkPermanentCount("must have copy", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akroma, Angel of Wrath", 2);
 
         // make copy of copy by CreateTokenCopyTargetEffect
-        showBattlefield("before last copy", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
+//        showBattlefield("before last copy", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Quasiduplicate");
         addTarget(playerA, "Akroma, Angel of Wrath[only copy]");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
         checkPermanentCount("must have copy", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akroma, Angel of Wrath", 3);
 
-        showBattlefield("after all", 1, PhaseStep.BEGIN_COMBAT, playerA);
-
+//        showBattlefield("after all", 1, PhaseStep.BEGIN_COMBAT, playerA);
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
@@ -230,20 +228,18 @@ public class SparkDoubleTest extends CardTestPlayerBase {
         checkPermanentCount("must have copy", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akroma, Angel of Wrath", 2);
 
         // make copy of copy by CreateTokenCopyTargetEffect
-        showBattlefield("before last copy", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
-        showAvaileableAbilities("before last copy", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        // showBattlefield("before last copy", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        // showAvaileableAbilities("before last copy", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "create a token that");
         addTarget(playerA, "Akroma, Angel of Wrath[only copy]");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
         checkPermanentCount("must have copy", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akroma, Angel of Wrath", 3);
 
-        showBattlefield("after all", 1, PhaseStep.BEGIN_COMBAT, playerA);
-
+        // showBattlefield("after all", 1, PhaseStep.BEGIN_COMBAT, playerA);
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
         assertAllCommandsUsed();
     }
-
 
 }

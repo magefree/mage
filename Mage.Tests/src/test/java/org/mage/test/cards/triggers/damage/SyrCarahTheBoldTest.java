@@ -70,7 +70,7 @@ public class SyrCarahTheBoldTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 3);
 
         // equip to copy abilities
-        showAvaileableAbilities("abils", 2, PhaseStep.PRECOMBAT_MAIN, playerB);
+        // showAvaileableAbilities("abils", 2, PhaseStep.PRECOMBAT_MAIN, playerB);
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Equip {3}", "Embermage Goblin");
         setChoice(playerB, "No"); // no new target
 
