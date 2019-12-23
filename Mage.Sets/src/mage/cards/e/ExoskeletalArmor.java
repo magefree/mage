@@ -11,9 +11,9 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
@@ -36,7 +36,7 @@ public final class ExoskeletalArmor extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // Enchanted creature gets +X/+X, where X is the number of creature cards in all graveyards.
-        CardsInAllGraveyardsCount count = new CardsInAllGraveyardsCount(StaticFilters.FILTER_CARD_CREATURE);
+        CardsInAllGraveyardsCount count = new CardsInAllGraveyardsCount(StaticFilters.FILTER_CARD_CREATURES);
         Effect effect = new BoostEnchantedEffect(count, count, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature gets +X/+X, where X is the number of creature cards in all graveyards");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));

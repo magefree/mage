@@ -79,6 +79,12 @@ public final class StaticFilters {
         FILTER_CARD_CREATURE.setLockedFilter(true);
     }
 
+    public static final FilterCreatureCard FILTER_CARD_CREATURES = new FilterCreatureCard("creature cards");
+
+    static {
+        FILTER_CARD_CREATURES.setLockedFilter(true);
+    }
+
     public static final FilterCreatureCard FILTER_CARD_CREATURE_A = new FilterCreatureCard("a creature card");
 
     static {
