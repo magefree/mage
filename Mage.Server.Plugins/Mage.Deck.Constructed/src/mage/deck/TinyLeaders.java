@@ -76,6 +76,10 @@ public class TinyLeaders extends Constructed {
         banned.add("Wheel of Fortune");
         banned.add("Yawgmoth's Will");
 
+        // TODO: Karn Liberated can't be used in TinyLeaders game (wrong commanders init like missing watchers)
+        //  GameTinyLeadersImpl must extends GameCommanderImpl, not GameImpl
+        banned.add("Karn Liberated");
+
         //Additionally, these Legendary creatures cannot be used as Commanders
         bannedCommander.add("Erayo, Soratami Ascendant");
         bannedCommander.add("Rofellos, Llanowar Emissary");
