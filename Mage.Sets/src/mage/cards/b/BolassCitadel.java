@@ -99,7 +99,9 @@ class BolassCitadelPlayTheTopCardEffect extends AsThoughEffectImpl {
         Card cardToCheck = game.getCard(objectId);
         objectId = CardUtil.getMainCardId(game, objectId); // for split cards
 
-        if (playerId.equals(source.getControllerId()) && cardToCheck.isOwnedBy(source.getControllerId())) {
+        if (cardToCheck != null
+                && playerId.equals(source.getControllerId())
+                && cardToCheck.isOwnedBy(source.getControllerId())) {
             Player controller = game.getPlayer(cardToCheck.getOwnerId());
             if (controller != null
                     && controller.getLibrary().getFromTop(game) != null
