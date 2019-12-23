@@ -138,6 +138,12 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>mage-player-ai-mcts</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>mage-tournament-boosterdraft</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
