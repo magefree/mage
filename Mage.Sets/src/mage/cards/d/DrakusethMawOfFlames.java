@@ -1,5 +1,6 @@
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -11,14 +12,13 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.filter.common.FilterCreaturePlayerOrPlaneswalker;
+import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetAnyTarget;
-import java.util.UUID;
-import mage.filter.common.FilterCreaturePlayerOrPlaneswalker;
-import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.target.Target;
+import mage.target.common.TargetAnyTarget;
 
 /**
  * @author TheElk801
@@ -92,11 +92,11 @@ class DrakusethMawOfFlamesEffect extends OneShotEffect {
     private static void damage(int damage, UUID targetId, Game game, Ability source) {
         Permanent permanent = game.getPermanent(targetId);
         if (permanent != null) {
-            permanent.damage(damage, source.getSourceId(), game);
+            permanent.damage(damage, source.getSourceId(), game, false, true);
         }
         Player player = game.getPlayer(targetId);
         if (player != null) {
-            player.damage(damage, source.getSourceId(), game);
+            player.damage(damage, source.getSourceId(), game, false, true);
         }
     }
 }
