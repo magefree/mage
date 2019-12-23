@@ -1,5 +1,8 @@
 package mage.cards.e;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -18,10 +21,6 @@ import mage.players.Players;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author JRHerlehy
@@ -111,7 +110,6 @@ class ExpropriateDilemmaEffect extends CouncilsDilemmaVoteEffect {
             target.setNotTarget(true);
 
             if (controller != null
-                    && controller != game.getPlayer(playerId)
                     && controller.choose(Outcome.GainControl, target, source.getSourceId(), game)) {
                 Permanent targetPermanent = game.getPermanent(target.getFirstTarget());
 
@@ -123,16 +121,16 @@ class ExpropriateDilemmaEffect extends CouncilsDilemmaVoteEffect {
         if (controller != null) {
             for (Permanent permanent : chosenCards) {
                 ContinuousEffect effect = new ExpropriateControlEffect(controller.getId());
-                effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                effect.setTargetPointer(new FixedTarget(permanent, game));
                 game.addEffect(effect, source);
-                game.informPlayers(controller.getName() + " gained control of " + permanent.getName() + " owned by " + game.getPlayer(permanent.getOwnerId()).getName());
+                game.informPlayers(controller.getName() + " gained control of " + permanent.getIdName() + " owned by " + game.getPlayer(permanent.getOwnerId()).getName());
             }
         }
     }
 
     @Override
     protected void vote(String choiceOne, String choiceTwo, Player controller, Game game, Ability source) {
-        for (UUID playerId : game.getState().getPlayerList(controller.getId())) {
+        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null
                     && player.canRespond()
