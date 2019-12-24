@@ -1,6 +1,7 @@
 package mage.cards.s;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -14,14 +15,12 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.WolfToken;
-import mage.game.stack.Spell;
-import mage.target.targetpointer.FixedTarget;
-import java.util.UUID;
-import mage.MageObject;
 import mage.game.stack.StackObject;
+import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class SilverfurPartisan extends CardImpl {
@@ -79,8 +78,7 @@ class CreaturesYouControlBecomesTargetTriggeredAbility extends TriggeredAbilityI
                 && permanent.isControlledBy(this.controllerId)
                 && (permanent.hasSubtype(SubType.WOLF, game)
                 || permanent.hasSubtype(SubType.WEREWOLF, game))) {
-            if (object instanceof Spell
-                    || object instanceof StackObject) {
+            if (object instanceof StackObject) {
                 if (object.isInstant()
                         || object.isSorcery()) {
                     if (getTargets().isEmpty()) {

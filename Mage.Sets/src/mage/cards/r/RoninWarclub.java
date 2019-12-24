@@ -1,7 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -12,8 +10,8 @@ import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -22,23 +20,24 @@ import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class RoninWarclub extends CardImpl {
 
     public RoninWarclub(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.subtype.add(SubType.EQUIPMENT);
         // Equipped creature gets +2/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 1)));
-        
+
         // Whenever a creature enters the battlefield under your control, attach Ronin Warclub to that creature.
         Ability ability = new RoninWarclubTriggeredAbility();
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-        
+
         // Equip {5} ({5}: Attach to target creature you control. Equip only as a sorcery.)
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(5)));
     }
@@ -51,11 +50,11 @@ public final class RoninWarclub extends CardImpl {
     public RoninWarclub copy() {
         return new RoninWarclub(this);
     }
-    
+
     private class RoninWarclubTriggeredAbility extends TriggeredAbilityImpl {
 
         public RoninWarclubTriggeredAbility() {
-           super(Zone.BATTLEFIELD, new RoninWarclubAttachEffect(), false);
+            super(Zone.BATTLEFIELD, new RoninWarclubAttachEffect(), false);
         }
 
         public RoninWarclubTriggeredAbility(RoninWarclubTriggeredAbility ability) {
@@ -70,8 +69,9 @@ public final class RoninWarclub extends CardImpl {
         @Override
         public boolean checkTrigger(GameEvent event, Game game) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent.isCreature()
-                    && (permanent.isControlledBy(this.controllerId))) {
+            if (permanent != null
+                    && permanent.isCreature()
+                    && permanent.isControlledBy(this.controllerId)) {
 
                 if (!this.getTargets().isEmpty()) {
                     // remove previous target
@@ -94,7 +94,7 @@ public final class RoninWarclub extends CardImpl {
             return new RoninWarclubTriggeredAbility(this);
         }
     }
-    
+
     private static class RoninWarclubAttachEffect extends OneShotEffect {
 
         public RoninWarclubAttachEffect() {

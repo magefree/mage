@@ -13,7 +13,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author jeffwadsworth
  */
 public class OpponentPlaysLandTriggeredAbility extends TriggeredAbilityImpl {
@@ -34,7 +33,7 @@ public class OpponentPlaysLandTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent land = game.getPermanent(event.getTargetId());
-        return game.getOpponents(controllerId).contains(land.getControllerId());
+        return land != null && game.getOpponents(controllerId).contains(land.getControllerId());
     }
 
     @Override

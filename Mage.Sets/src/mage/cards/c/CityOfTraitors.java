@@ -1,8 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.Objects;
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.common.TapSourceCost;
@@ -17,14 +14,16 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class CityOfTraitors extends CardImpl {
 
     public CityOfTraitors(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // When you play another land, sacrifice City of Traitors.
         this.addAbility(new CityOfTraitorsTriggeredAbility());
@@ -61,7 +60,8 @@ class CityOfTraitorsTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent land = game.getPermanent(event.getTargetId());
-        return land.isLand()
+        return land != null
+                && land.isLand()
                 && land.isControlledBy(this.controllerId)
                 && !Objects.equals(event.getTargetId(), this.getSourceId());
     }

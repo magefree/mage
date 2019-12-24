@@ -1,4 +1,3 @@
-
 package mage.cards.j;
 
 import mage.MageInt;
@@ -27,7 +26,6 @@ import mage.target.common.TargetControlledPermanent;
 import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class Jokulmorder extends CardImpl {
@@ -85,7 +83,8 @@ class JokulmorderTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent land = game.getPermanent(event.getTargetId());
-        return land.hasSubtype(SubType.ISLAND, game)
+        return land != null
+                && land.hasSubtype(SubType.ISLAND, game)
                 && land.isControlledBy(this.controllerId);
     }
 
