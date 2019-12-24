@@ -578,6 +578,7 @@ public final class SystemUtil {
             case OUTSIDE:
                 card.setZone(Zone.OUTSIDE, game);
                 game.getExile().getPermanentExile().remove(card);
+                break;
             default:
                 card.moveToZone(zone, null, game, false);
                 break;
