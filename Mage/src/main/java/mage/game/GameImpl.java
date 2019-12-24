@@ -2638,7 +2638,7 @@ public abstract class GameImpl implements Game, Serializable {
             return result;
         }
         DamageEvent damageEvent = (DamageEvent) event;
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, damageEvent.getTargetId(), damageEvent.getSourceId(), source.getControllerId(), damageEvent.getAmount(), false);
+        GameEvent preventEvent = new PreventDamageEvent(damageEvent.getTargetId(), damageEvent.getSourceId(), source.getControllerId(), damageEvent.getAmount(), damageEvent.isCombatDamage());
         if (game.replaceEvent(preventEvent)) {
             result.setReplaced(true);
             return result;

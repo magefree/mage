@@ -20,9 +20,9 @@ import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
-import mage.game.events.DamageEvent;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.PreventDamageEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
@@ -101,7 +101,7 @@ class QuestingBeastPreventionEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!((DamageEvent) event).isCombatDamage()) {
+        if (!((PreventDamageEvent) event).isCombatDamage()) {
             return false;
         }
         Permanent permanent = game.getPermanent(event.getSourceId());

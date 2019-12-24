@@ -11,7 +11,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
+import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.PreventDamageEvent;
 import mage.game.permanent.Permanent;
 
 import java.util.UUID;
@@ -72,7 +74,7 @@ class ShieldOfTheAvatarPreventionEffect extends PreventionEffectImpl {
         if (equipment != null && equipment.getAttachedTo() != null) {
             int numberOfCreaturesControlled = CreaturesYouControlCount.instance.calculate(game, source, this);
             int toPrevent = Math.min(numberOfCreaturesControlled, event.getAmount());
-            GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, equipment.getAttachedTo(), source.getSourceId(), source.getControllerId(), toPrevent, false);
+            GameEvent preventEvent = new PreventDamageEvent(equipment.getAttachedTo(), source.getSourceId(), source.getControllerId(), toPrevent, ((DamageEvent) event).isCombatDamage());
             if (!game.replaceEvent(preventEvent)) {
                 if (event.getAmount() >= toPrevent) {
                     event.setAmount(event.getAmount() - toPrevent);

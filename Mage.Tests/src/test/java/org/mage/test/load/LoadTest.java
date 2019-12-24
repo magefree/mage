@@ -260,17 +260,16 @@ public class LoadTest {
     @Ignore
     public void test_TwoAIPlayGame_Multiple() {
 
-        int singleGameSID = -1554824422; // for one game test with same deck
-        int singleGamePlaysAmount = 1000; // multiple run of one game test
+        int singleGameSID = 0; // for one game test with same deck
+        int gamesAmount = 1000; // multiple run of one game test
 
         // save random seeds for repeated results (in decks generating)
         List<Integer> seedsList = new ArrayList<>();
         if (singleGameSID != 0) {
-            for (int i = 1; i <= singleGamePlaysAmount; i++) {
+            for (int i = 1; i <= gamesAmount; i++) {
                 seedsList.add(singleGameSID);
             }
         } else {
-            int gamesAmount = 1000;
             for (int i = 1; i <= gamesAmount; i++) {
                 seedsList.add(RandomUtil.nextInt());
             }

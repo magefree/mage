@@ -11,7 +11,9 @@ import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.game.Game;
+import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.PreventDamageEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
@@ -85,7 +87,7 @@ class AcolytesRewardEffect extends PreventionEffectImpl {
         } else {
             amount = 0;
         }
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getControllerId(), source.getSourceId(), source.getControllerId(), toPrevent, false);
+        GameEvent preventEvent = new PreventDamageEvent(source.getControllerId(), source.getSourceId(), source.getControllerId(), toPrevent, ((DamageEvent) event).isCombatDamage());
         if (!game.replaceEvent(preventEvent)) {
             Permanent targetCreature = game.getPermanent(source.getFirstTarget());
             if (targetCreature != null) {

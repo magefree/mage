@@ -22,6 +22,7 @@ public class GameEvent implements Serializable {
     // for counters: event is result of effect (+1 from planeswalkers is cost, not effect)
     // for combat damage: event is preventable damage
     // for discard: event is result of effect (1) or result of cost (0)
+    // for prevent damage: try to prevent combat damage (1) or other damage (0)
     protected boolean flag;
     protected String data;
     protected Zone zone;
