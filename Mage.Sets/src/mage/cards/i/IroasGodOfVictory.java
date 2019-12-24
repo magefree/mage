@@ -14,7 +14,7 @@ import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterControlledCreatureInPlay;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -27,11 +27,11 @@ import java.util.UUID;
 public final class IroasGodOfVictory extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures you control");
-    private static final FilterControlledCreatureInPlay filterAttacking = new FilterControlledCreatureInPlay("attacking creatures you control");
+    private static final FilterControlledCreaturePermanent filterAttacking = new FilterControlledCreaturePermanent("attacking creatures you control");
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filterAttacking.getCreatureFilter().add(AttackingPredicate.instance);
+        filterAttacking.add(AttackingPredicate.instance);
     }
 
     private static final DynamicValue xValue = new DevotionCount(ColoredManaSymbol.R, ColoredManaSymbol.W);
@@ -57,7 +57,6 @@ public final class IroasGodOfVictory extends CardImpl {
 
         // Prevent all damage that would be dealt to attacking creatures you control.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageToAllEffect(Duration.WhileOnBattlefield, filterAttacking)));
-
     }
 
     public IroasGodOfVictory(final IroasGodOfVictory card) {

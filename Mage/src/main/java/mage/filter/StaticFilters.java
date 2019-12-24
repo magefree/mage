@@ -15,6 +15,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
+import mage.filter.predicate.other.PlayerPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -607,4 +608,10 @@ public final class StaticFilters {
         FILTER_CARD_ARTIFACT_OR_CREATURE.setLockedFilter(true);
     }
 
+    public static final FilterPlayer FILTER_PLAYER_CONTROLLER = new FilterPlayer("you");
+
+    static {
+        FILTER_PLAYER_CONTROLLER.add(new PlayerPredicate(TargetController.YOU));
+        FILTER_PLAYER_CONTROLLER.setLockedFilter(true);
+    }
 }

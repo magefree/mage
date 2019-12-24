@@ -1,7 +1,5 @@
-
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.PreventAllDamageToAllEffect;
@@ -11,10 +9,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreatureInPlay;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class InnerSanctum extends CardImpl {
@@ -27,7 +26,7 @@ public final class InnerSanctum extends CardImpl {
 
         // Prevent all damage that would be dealt to creatures you control.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new PreventAllDamageToAllEffect(Duration.WhileOnBattlefield, new FilterControlledCreatureInPlay("creatures you control"))
+                new PreventAllDamageToAllEffect(Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES_CONTROLLED)
         ));
     }
 
