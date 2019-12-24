@@ -32,10 +32,8 @@ public final class LudevicNecroAlchemist extends CardImpl {
 
         // At the beginning of each player's end step, that player may draw a card if a player other than you lost life this turn.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD,
                 new LudevicNecroAlchemistEffect(),
                 TargetController.EACH_PLAYER,
-                LudevicNecroAlchemistCondition.instance,
                 false)
                 .addHint(new ConditionHint(LudevicNecroAlchemistCondition.instance, "Player other than you lost life this turn")));
 
@@ -61,9 +59,7 @@ enum LudevicNecroAlchemistCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         PlayerLostLifeWatcher watcher = game.getState().getWatcher(PlayerLostLifeWatcher.class);
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null
-                && watcher != null
-                && watcher.getLifeLost(controller.getId()) == 0) {
+        if (controller != null && watcher != null) {
             for (UUID playerId : controller.getInRange()) {
                 if (watcher.getLifeLost(playerId) > 0) {
                     return true;
@@ -83,7 +79,7 @@ class LudevicNecroAlchemistEffect extends OneShotEffect {
 
     public LudevicNecroAlchemistEffect() {
         super(Outcome.DrawCard);
-        staticText = "that player may draw a card";
+        staticText = "that player may draw a card if a player other than you lost life this turn";
     }
 
     public LudevicNecroAlchemistEffect(final LudevicNecroAlchemistEffect effect) {
@@ -97,6 +93,13 @@ class LudevicNecroAlchemistEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        // Ludevic’s triggered ability triggers at the beginning of each player’s end step, including yours,
+        // even if no player has lost life that turn. Whether or not a player has lost life is checked
+        // only as the triggered ability resolves. (2016-11-08)
+        if (!LudevicNecroAlchemistCondition.instance.apply(game, source)) {
+            return false;
+        }
+
         Player player = game.getPlayer(game.getActivePlayerId());
         if (player != null
                 && player.chooseUse(Outcome.DrawCard, "Draw a card?", source, game)) {
