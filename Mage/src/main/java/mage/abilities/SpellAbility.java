@@ -1,5 +1,7 @@
 package mage.abilities;
 
+import java.util.Optional;
+import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.costs.Cost;
@@ -14,9 +16,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-
-import java.util.Optional;
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -91,7 +90,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
                 }
             }
             // Check if rule modifying events prevent to cast the spell in check playable mode
-            if (this.isCheckPlayableMode()) {
+            if (game.inCheckPlayableState()) {
                 if (game.getContinuousEffects().preventedByRuleModification(
                         GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, this.getId(), this.getSourceId(), playerId), this, game, true)) {
                     return ActivationStatus.getFalse();

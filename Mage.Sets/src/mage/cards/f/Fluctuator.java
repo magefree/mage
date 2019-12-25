@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.LinkedHashSet;
@@ -6,7 +5,6 @@ import java.util.Set;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.CyclingAbility;
@@ -70,9 +68,8 @@ class FluctuatorEffect extends CostModificationEffectImpl {
                 reduceMax = 2;
             }
             if (reduceMax > 0) {
-                int reduce = 0;
-                if (abilityToModify.getAbilityType() == AbilityType.ACTIVATED
-                        && ((ActivatedAbility) abilityToModify).isCheckPlayableMode()) {
+                int reduce;
+                if (game.inCheckPlayableState()) {
                     reduce = reduceMax;
                 } else {
                     ChoiceImpl choice = new ChoiceImpl(true);

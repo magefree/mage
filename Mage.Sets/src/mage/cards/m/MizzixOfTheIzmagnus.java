@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -111,7 +110,7 @@ class MizzixOfTheIzmagnusCostReductionEffect extends CostModificationEffectImpl 
             Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
             if (spell != null) {
                 return StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY.match(spell, source.getSourceId(), source.getControllerId(), game);
-            } else if (((SpellAbility) abilityToModify).isCheckPlayableMode()) {
+            } else if (game.inCheckPlayableState()) {
                 // Spell is not on the stack yet, but possible playable spells are determined
                 Card sourceCard = game.getCard(abilityToModify.getSourceId());
                 return sourceCard != null && StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY.match(sourceCard, source.getSourceId(), source.getControllerId(), game);

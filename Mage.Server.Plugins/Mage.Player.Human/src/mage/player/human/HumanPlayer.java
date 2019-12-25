@@ -1,7 +1,28 @@
 package mage.player.human;
 
+import java.awt.Color;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Queue;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 import mage.MageObject;
-import mage.abilities.*;
+import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
+import mage.abilities.Mode;
+import mage.abilities.Modes;
+import mage.abilities.PlayLandAbility;
+import mage.abilities.SpecialAction;
+import mage.abilities.SpellAbility;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -16,6 +37,11 @@ import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.*;
+import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
+import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
+import static mage.constants.SpellAbilityType.SPLIT;
+import static mage.constants.SpellAbilityType.SPLIT_AFTERMATH;
+import static mage.constants.SpellAbilityType.SPLIT_FUSED;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterBlockingCreature;
@@ -45,16 +71,6 @@ import mage.util.GameLog;
 import mage.util.ManaUtil;
 import mage.util.MessageToClient;
 import org.apache.log4j.Logger;
-
-import java.awt.*;
-import java.io.Serializable;
-import java.util.List;
-import java.util.Queue;
-import java.util.*;
-import java.util.stream.Collectors;
-
-import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
-import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -268,6 +284,9 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean chooseUse(Outcome outcome, String message, String secondMessage, String trueText, String falseText, Ability source, Game game) {
+        if (game.inCheckPlayableState()) {
+            return true;
+        }
         MessageToClient messageToClient = new MessageToClient(message, secondMessage);
         Map<String, Serializable> options = new HashMap<>(2);
         if (trueText != null) {
@@ -334,6 +353,14 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public int chooseReplacementEffect(Map<String, String> rEffects, Game game) {
+        if (game.inCheckPlayableState()) {
+            logger.warn("player interaction in checkPlayableState.");
+            if (rEffects.size() <= 1) {
+                return 0;
+            } else {
+                return 1;
+            }
+        }
         updateGameStatePriority("chooseEffect", game);
         if (rEffects.size() <= 1) {
             return 0;
@@ -394,6 +421,11 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean choose(Outcome outcome, Choice choice, Game game) {
+        if (game.inCheckPlayableState()) {
+            logger.warn("player interaction in checkPlayableState. Choice: " + choice.getMessage());
+            choice.setChoice(choice.getChoices().iterator().next());
+            return true;
+        }
         if (Outcome.PutManaInPool == outcome) {
             if (currentlyUnpaidMana != null
                     && ManaUtil.tryToAutoSelectAManaColor(choice, currentlyUnpaidMana)) {
@@ -429,6 +461,11 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
+        if (game.inCheckPlayableState()) {
+            logger.warn("player interaction in checkPlayableState. Target: " + target.getMessage());
+            // TODO: set default choice
+            return true;
+        }
         // choose one or multiple permanents
         updateGameStatePriority("choose(5)", game);
         UUID abilityControllerId = playerId;
@@ -520,6 +557,11 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
+        if (game.inCheckPlayableState()) {
+            logger.warn("player interaction in checkPlayableState. Target: " + target.getMessage());
+            // TODO: set default choice
+            return true;
+        }
         // choose one or multiple targets
         updateGameStatePriority("chooseTarget", game);
         UUID abilityControllerId = playerId;
@@ -582,6 +624,11 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
+        if (game.inCheckPlayableState()) {
+            logger.warn("player interaction in checkPlayableState. Target: " + target.getMessage());
+            // TODO: set default choice
+            return true;
+        }
         // choose one or multiple cards
         if (cards == null) {
             return false;
@@ -710,9 +757,9 @@ public class HumanPlayer extends PlayerImpl {
             if (!isExecutingMacro()) {
                 String selectedNames = target.getTargetedName(game);
                 game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage()
-                                + "<br> Amount remaining: " + target.getAmountRemaining()
-                                + (selectedNames.isEmpty() ? "" : ", selected: " + selectedNames),
-                                getRelatedObjectName(source, game)),
+                        + "<br> Amount remaining: " + target.getAmountRemaining()
+                        + (selectedNames.isEmpty() ? "" : ", selected: " + selectedNames),
+                        getRelatedObjectName(source, game)),
                         target.possibleTargets(source == null ? null : source.getSourceId(), playerId, game),
                         target.isRequired(source),
                         getOptions(target, null));
@@ -725,7 +772,7 @@ public class HumanPlayer extends PlayerImpl {
 
                     boolean removeMode = target.getTargets().contains(targetId)
                             && chooseUse(outcome, "What do you want to do with " + (targetObject != null ? targetObject.getLogName() : "target") + "?", "",
-                            "Remove from selected", "Add extra amount", source, game);
+                                    "Remove from selected", "Add extra amount", source, game);
 
                     if (removeMode) {
                         target.remove(targetId);
@@ -862,9 +909,9 @@ public class HumanPlayer extends PlayerImpl {
                             if (!skippedAtLeastOnce
                                     || (playerId.equals(game.getActivePlayerId())
                                     && !controllingPlayer
-                                    .getUserData()
-                                    .getUserSkipPrioritySteps()
-                                    .isStopOnAllEndPhases())) {
+                                            .getUserData()
+                                            .getUserSkipPrioritySteps()
+                                            .isStopOnAllEndPhases())) {
                                 skippedAtLeastOnce = true;
                                 if (passWithManaPoolCheck(game)) {
                                     return false;
@@ -896,9 +943,9 @@ public class HumanPlayer extends PlayerImpl {
                         if (haveNewObjectsOnStack
                                 && (playerId.equals(game.getActivePlayerId())
                                 && controllingPlayer
-                                .getUserData()
-                                .getUserSkipPrioritySteps()
-                                .isStopOnStackNewObjects())) {
+                                        .getUserData()
+                                        .getUserSkipPrioritySteps()
+                                        .isStopOnStackNewObjects())) {
                             // new objects on stack -- disable "pass until stack resolved"
                             passedUntilStackResolved = false;
                         } else {
@@ -1235,8 +1282,8 @@ public class HumanPlayer extends PlayerImpl {
             if (passedAllTurns
                     || passedUntilEndStepBeforeMyTurn
                     || (!getControllingPlayersUserData(game)
-                    .getUserSkipPrioritySteps()
-                    .isStopOnDeclareAttackers()
+                            .getUserSkipPrioritySteps()
+                            .isStopOnDeclareAttackers()
                     && (passedTurn
                     || passedTurnSkipStack
                     || passedUntilEndOfTurn
@@ -1419,7 +1466,7 @@ public class HumanPlayer extends PlayerImpl {
     /**
      * Selects a defender for an attacker and adds the attacker to combat
      *
-     * @param defenders  - list of possible defender
+     * @param defenders - list of possible defender
      * @param attackerId - UUID of attacker
      * @param game
      * @return

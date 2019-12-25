@@ -52,7 +52,7 @@ class ExpropriateDilemmaEffect extends CouncilsDilemmaVoteEffect {
 
     public ExpropriateDilemmaEffect() {
         super(Outcome.Benefit);
-        this.staticText = "<i>Council's dilemma</i> — Starting with you, each player votes for time or money. For each time vote, take an extra turn after this one. For each money vote, choose a permanent owned by the voter and gain control of it.";
+        this.staticText = "<i>Council's dilemma</i> — Starting with you, each player votes for time or money. For each time vote, take an extra turn after this one. For each money vote, choose a permanent owned by the voter and gain control of it";
     }
 
     public ExpropriateDilemmaEffect(final ExpropriateDilemmaEffect effect) {
@@ -110,7 +110,7 @@ class ExpropriateDilemmaEffect extends CouncilsDilemmaVoteEffect {
             target.setNotTarget(true);
 
             if (controller != null
-                    && controller.choose(Outcome.GainControl, target, source.getSourceId(), game)) {
+                    && controller.chooseTarget(Outcome.GainControl, target, source, game)) {
                 Permanent targetPermanent = game.getPermanent(target.getFirstTarget());
 
                 if (targetPermanent != null) {
@@ -132,9 +132,7 @@ class ExpropriateDilemmaEffect extends CouncilsDilemmaVoteEffect {
     protected void vote(String choiceOne, String choiceTwo, Player controller, Game game, Ability source) {
         for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
-            if (player != null
-                    && player.canRespond()
-                    && player.isInGame()) {
+            if (player != null) {
                 if (player.chooseUse(Outcome.Vote, "Choose " + choiceOne + '?', source, game)) {
                     voteOneCount++;
                     game.informPlayers(player.getName() + " has voted for " + choiceOne);

@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -30,7 +29,7 @@ import mage.util.CardUtil;
 public final class SharedFate extends CardImpl {
 
     public SharedFate(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");
 
         // If a player would draw a card, that player exiles the top card of one of their opponents' libraries face down instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SharedFateReplacementEffect()));
@@ -78,12 +77,9 @@ class SharedFateReplacementEffect extends ReplacementEffectImpl {
                     Card card = chosenPlayer.getLibrary().getFromTop(game);
                     if (card != null) {
                         playerToDraw.moveCardsToExile(
-                                card,
-                                source,
-                                game,
-                                false,
+                                card, source, game, false,
                                 CardUtil.getExileZoneId(source.getSourceId().toString() + sourcePermanent.getZoneChangeCounter(game) + playerToDraw.getId().toString(), game),
-                                "Shared Fate (" + playerToDraw.getName() + ')');
+                                sourcePermanent.getIdName() + " (" + playerToDraw.getName() + ')');
                         card.setFaceDown(true, game);
                     }
                 }
@@ -126,7 +122,7 @@ class SharedFatePlayEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-       if (game.getState().getZone(objectId) == Zone.EXILED) {
+        if (game.getState().getZone(objectId) == Zone.EXILED) {
             Player player = game.getPlayer(affectedControllerId);
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             UUID exileId = CardUtil.getExileZoneId(source.getSourceId().toString() + sourcePermanent.getZoneChangeCounter(game) + affectedControllerId.toString(), game);
@@ -166,7 +162,7 @@ class SharedFateLookEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-       if (game.getState().getZone(objectId) == Zone.EXILED) {
+        if (game.getState().getZone(objectId) == Zone.EXILED) {
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             UUID exileId = CardUtil.getExileZoneId(source.getSourceId().toString() + sourcePermanent.getZoneChangeCounter(game) + affectedControllerId.toString(), game);
             if (exileId != null) {

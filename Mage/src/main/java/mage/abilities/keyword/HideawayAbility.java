@@ -1,5 +1,6 @@
 package mage.abilities.keyword;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -22,8 +23,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -122,7 +121,7 @@ class HideawayLookAtFaceDownCardEffect extends AsThoughEffectImpl {
 
     public HideawayLookAtFaceDownCardEffect() {
         super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
-        staticText = "You may look at cards exiled with {this}";
+        staticText = "You may look at the cards exiled with {this}";
     }
 
     private HideawayLookAtFaceDownCardEffect(final HideawayLookAtFaceDownCardEffect effect) {
