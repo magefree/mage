@@ -153,4 +153,58 @@ public class EndOfTurnMultiOpponentsTest extends CardTestMultiPlayerBaseWithRang
         assertAllCommandsUsed();
     }
 
+    // leaved players
+    // 800.4i When a player leaves the game, any continuous effects with durations that last until that player's next turn
+    // or until a specific point in that turn will last until that turn would have begun.
+    // They neither expire immediately nor last indefinitely.
+    @Test
+    public void test_UntilYourNextTurnMulti_Leaved() {
+        // Player order: A -> D -> C -> B
+        addCustomCardWithAbility("boost1", playerA, new SimpleStaticAbility(Zone.ALL, new BoostAllEffect(1, 1, Duration.UntilYourNextTurn)));
+
+        EndOfTurnOneOpponentTest.prepareStepChecks(this, "Duration.UntilYourNextTurn effect", 1, playerA, true, PhaseStep.END_TURN);
+        EndOfTurnOneOpponentTest.prepareStepChecks(this, "Duration.UntilYourNextTurn effect", 2, playerD, true, PhaseStep.END_TURN);
+        EndOfTurnOneOpponentTest.prepareStepChecks(this, "Duration.UntilYourNextTurn effect", 3, playerC, true, PhaseStep.END_TURN);
+        EndOfTurnOneOpponentTest.prepareStepChecks(this, "Duration.UntilYourNextTurn effect", 4, playerB, true, PhaseStep.END_TURN);
+        EndOfTurnOneOpponentTest.prepareStepChecks(this, "Duration.UntilYourNextTurn effect", 5, playerD, true, null);
+
+        addCard(Zone.BATTLEFIELD, playerA, cardBear2, 1);
+        addCard(Zone.BATTLEFIELD, playerB, cardBear2, 1);
+        addCard(Zone.BATTLEFIELD, playerC, cardBear2, 1);
+        addCard(Zone.BATTLEFIELD, playerD, cardBear2, 1);
+        //
+        // When Eye of Doom enters the battlefield, each player chooses a nonland permanent and puts a doom counter on it.
+        addCard(Zone.HAND, playerC, "Eye of Doom", 1);
+        addCard(Zone.BATTLEFIELD, playerC, "Forest", 4);
+
+        checkPlayerInGame("A must plays in 1", 1, PhaseStep.PRECOMBAT_MAIN, playerA, playerA, true);
+        attack(1, playerA, cardBear2);
+
+        checkPlayerInGame("A must plays in 2", 2, PhaseStep.PRECOMBAT_MAIN, playerD, playerA, true);
+        attack(2, playerD, cardBear2);
+
+        checkPlayerInGame("A must plays in 3 before", 3, PhaseStep.PRECOMBAT_MAIN, playerC, playerA, true);
+        attack(3, playerC, cardBear2);
+        concede(3, PhaseStep.PRECOMBAT_MAIN, playerA);
+        checkPlayerInGame("A must leaved in 3 after", 3, PhaseStep.POSTCOMBAT_MAIN, playerC, playerA, false);
+
+        // test PlayerList.getNext processing
+        // play Eye of Doom, ask all players to put doom counter
+        castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerC, "Eye of Doom");
+        addTarget(playerC, cardBear2);
+        addTarget(playerB, cardBear2);
+        //addTarget(playerA, cardBear2); // leaved
+        addTarget(playerD, cardBear2);
+
+        checkPlayerInGame("A must leaved in 4", 4, PhaseStep.POSTCOMBAT_MAIN, playerB, playerA, false);
+        attack(4, playerB, cardBear2);
+        checkPlayerInGame("A must leaved in 5", 5, PhaseStep.POSTCOMBAT_MAIN, playerD, playerA, false);
+        attack(5, playerD, cardBear2);
+
+        setStopAt(5, PhaseStep.CLEANUP);
+        setStrictChooseMode(true);
+        execute();
+        assertAllCommandsUsed();
+    }
+
 }

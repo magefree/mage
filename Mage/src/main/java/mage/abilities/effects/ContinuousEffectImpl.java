@@ -217,7 +217,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         boolean canDelete = false;
         Player player = game.getPlayer(startingControllerId);
 
-        // discard on start of turn for leave player
+        // discard on start of turn for leaved player
         // 800.4i When a player leaves the game, any continuous effects with durations that last until that player's next turn
         // or until a specific point in that turn will last until that turn would have begun.
         // They neither expire immediately nor last indefinitely.

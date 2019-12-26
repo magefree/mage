@@ -487,10 +487,10 @@ public abstract class PlayerImpl implements Player, Serializable {
             inRange.add(playerId);
             PlayerList players = game.getState().getPlayerList(playerId);
             for (int i = 0; i < range.getRange(); i++) {
-                Player player = players.getNext(game);
+                Player player = players.getNext(game, false);
                 if (player != null) {
                     while (player.hasLeft()) {
-                        player = players.getNext(game);
+                        player = players.getNext(game, false);
                     }
                     inRange.add(player.getId());
                 }

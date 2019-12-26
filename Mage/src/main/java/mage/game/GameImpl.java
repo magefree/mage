@@ -766,7 +766,7 @@ public abstract class GameImpl implements Game, Serializable {
             state.getTurn().resumePlay(this, wasPaused);
             if (!isPaused() && !checkIfGameIsOver()) {
                 endOfTurn();
-                player = playerList.getNext(this);
+                player = playerList.getNext(this, true);
                 state.setTurnNum(state.getTurnNum() + 1);
             }
         }
@@ -791,7 +791,7 @@ public abstract class GameImpl implements Game, Serializable {
                 if (!playExtraTurns()) {
                     break;
                 }
-                playerByOrder = playerList.getNext(this);
+                playerByOrder = playerList.getNext(this, true);
                 state.setPlayerByOrderId(playerByOrder.getId());
             }
         }
@@ -2494,7 +2494,6 @@ public abstract class GameImpl implements Game, Serializable {
                     perm.removeFromCombat(this, true);
                 }
                 toOutside.add(perm);
-//                it.remove();
             } else if (perm.isControlledBy(player.getId())) {
                 // and any effects which give that player control of any objects or players end
                 Effects:
@@ -2591,7 +2590,7 @@ public abstract class GameImpl implements Game, Serializable {
             if (!isActivePlayer(playerId)) {
                 setMonarchId(null, getActivePlayerId());
             } else {
-                Player nextPlayer = getPlayerList().getNext(this);
+                Player nextPlayer = getPlayerList().getNext(this, true);
                 if (nextPlayer != null) {
                     setMonarchId(null, nextPlayer.getId());
                 }
