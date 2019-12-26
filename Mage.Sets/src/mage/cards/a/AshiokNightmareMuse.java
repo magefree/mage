@@ -118,9 +118,7 @@ class AshiokNightmareMuseCastEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller == null
-                || sourceObject == null) {
+        if (controller == null) {
             return false;
         }
         TargetCardInExile target = new TargetCardInExile(0, 3, filter, null);
@@ -135,10 +133,10 @@ class AshiokNightmareMuseCastEffect extends OneShotEffect {
                         && game.getState().getZone(chosenCard.getId()) == Zone.EXILED // must be exiled
                         && game.getOpponents(controller.getId()).contains(chosenCard.getOwnerId()) // must be owned by an opponent
                         && controller.chooseUse(outcome, "Cast " + chosenCard.getName() + " without paying its mana cost?", source, game)) {
-                    game.getState().setValue("CastFromExileEnabled" + chosenCard.getId(), Boolean.TRUE);  // enable the card to be cast from the exile zone
+                    game.getState().setValue("PlayFromNotOwnHandZone" + chosenCard.getId(), Boolean.TRUE);
                     controller.cast(controller.chooseAbilityForCast(chosenCard, game, true),
-                            game, true, new MageObjectReference(sourceObject, game));
-                    game.getState().setValue("CastFromExileEnabled" + chosenCard.getId(), null);  // reset to null
+                            game, true, new MageObjectReference(source.getSourceObject(game), game));
+                    game.getState().setValue("PlayFromNotOwnHandZone" + chosenCard.getId(), null);
                 }
             }
         }

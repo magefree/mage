@@ -1,4 +1,3 @@
-
 package mage.cards.i;
 
 import java.util.UUID;
@@ -83,7 +82,7 @@ public final class IzzetChemister extends CardImpl {
 
 class IzzetChemisterCastFromExileEffect extends OneShotEffect {
 
-    private UUID exileId;
+    private final UUID exileId;
 
     public IzzetChemisterCastFromExileEffect(UUID exileId, String description) {
         super(Outcome.PlayForFree);
@@ -106,7 +105,8 @@ class IzzetChemisterCastFromExileEffect extends OneShotEffect {
         ExileZone exile = game.getExile().getExileZone(exileId);
         Player controller = game.getPlayer(source.getControllerId());
         FilterCard filter = new FilterCard();
-        if (controller != null && exile != null) {
+        if (controller != null
+                && exile != null) {
             Cards cardsToExile = new CardsImpl();
             cardsToExile.addAll(exile.getCards(game));
             OuterLoop:
@@ -116,11 +116,17 @@ class IzzetChemisterCastFromExileEffect extends OneShotEffect {
                 }
                 TargetCardInExile target = new TargetCardInExile(0, 1, filter, exileId, false);
                 target.setNotTarget(true);
-                while (cardsToExile.count(filter, game) > 0 && controller.choose(Outcome.PlayForFree, cardsToExile, target, game)) {
+                while (cardsToExile.count(filter, game) > 0
+                        && controller.choose(Outcome.PlayForFree, cardsToExile, target, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
-                        controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
-                        cardsToExile.remove(card);
+                        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                        Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true), game, true,
+                                new MageObjectReference(source.getSourceObject(game), game));
+                        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+                        if (cardWasCast) {
+                            cardsToExile.remove(card);
+                        }
                     } else {
                         break OuterLoop;
                     }

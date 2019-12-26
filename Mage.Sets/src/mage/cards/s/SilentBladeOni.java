@@ -18,6 +18,7 @@ import mage.players.Player;
 import mage.target.TargetCard;
 
 import java.util.UUID;
+import mage.MageObject;
 
 /**
  * @author LevelX2
@@ -35,7 +36,8 @@ public final class SilentBladeOni extends CardImpl {
         // Ninjutsu {4}{U}{B}
         this.addAbility(new NinjutsuAbility(new ManaCostsImpl("{4}{U}{B}")));
 
-        // Whenever Silent-Blade Oni deals combat damage to a player, look at that player's hand. You may cast a nonland card in it without paying that card's mana cost.
+        // Whenever Silent-Blade Oni deals combat damage to a player, look at that player's hand. 
+        // You may cast a nonland card in it without paying that card's mana cost.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
                 new SilentBladeOniEffect(), false, true
         ));
@@ -55,8 +57,8 @@ class SilentBladeOniEffect extends OneShotEffect {
 
     SilentBladeOniEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "look at that player's hand. " +
-                "You may cast a nonland card in it without paying that card's mana cost";
+        this.staticText = "look at that player's hand. "
+                + "You may cast a nonland card in it without paying that card's mana cost";
     }
 
     private SilentBladeOniEffect(final SilentBladeOniEffect effect) {
@@ -72,7 +74,8 @@ class SilentBladeOniEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
-        if (opponent == null || controller == null) {
+        if (opponent == null 
+                || controller == null) {
             return false;
         }
         Cards cardsInHand = new CardsImpl();
@@ -88,8 +91,13 @@ class SilentBladeOniEffect extends OneShotEffect {
             return true;
         }
         Card card = game.getCard(target.getFirstTarget());
-        return card != null && controller.cast(
-                card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game)
-        );
+        if (card == null) {
+            return false;
+        }
+        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+        Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
+                game, true, new MageObjectReference(source.getSourceObject(game), game));
+        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+        return cardWasCast;
     }
 }

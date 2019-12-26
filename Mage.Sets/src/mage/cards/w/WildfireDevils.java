@@ -106,10 +106,10 @@ class WildfireDevilsEffect extends OneShotEffect {
         if (!controller.chooseUse(outcome, "Cast the copy of the exiled card?", source, game)) {
             return false;
         }
-        game.getState().setValue("CastFromExileEnabled" + copiedCard.getId(), Boolean.TRUE);  // enable the card to be cast from the exile zone
-        Boolean exiledCardWasCast = controller.cast(controller.chooseAbilityForCast(copiedCard, game, true), game, true,
+        game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), Boolean.TRUE);
+        Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(copiedCard, game, true), game, true,
                 new MageObjectReference(source.getSourceObject(game), game));
-        game.getState().setValue("CastFromExileEnabled" + copiedCard.getId(), null);  // reset to null
-        return exiledCardWasCast;
+        game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), null);
+        return cardWasCast;
     }
 }
