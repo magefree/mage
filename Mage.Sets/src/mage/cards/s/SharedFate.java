@@ -1,5 +1,6 @@
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
@@ -16,8 +17,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
  * @author emerald000 / HCrescent
@@ -75,7 +74,7 @@ class SharedFateReplacementEffect extends ReplacementEffectImpl {
                         playerToDraw.moveCardsToExile(
                                 card, source, game, false,
                                 CardUtil.getExileZoneId(source.getSourceId().toString() + sourcePermanent.getZoneChangeCounter(game) + playerToDraw.getId().toString(), game),
-                                sourcePermanent.getIdName() + " (" + playerToDraw.getName() + ')');
+                                sourcePermanent.getIdName() + "-" + sourcePermanent.getZoneChangeCounter(game) + " (" + playerToDraw.getName() + ')');
                         card.setFaceDown(true, game);
                     }
                 }
