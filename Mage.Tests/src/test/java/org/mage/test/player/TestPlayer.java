@@ -2204,11 +2204,6 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void otherPlayerLeftGame(Game game) {
-        computerPlayer.otherPlayerLeftGame(game);
-    }
-
-    @Override
     public void beginTurn(Game game) {
         checkLegalMovesThisTurn(game);
         computerPlayer.beginTurn(game);

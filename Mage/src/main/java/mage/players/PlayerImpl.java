@@ -458,11 +458,6 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void otherPlayerLeftGame(Game game) {
-        findRange(game);
-    }
-
-    @Override
     public void beginTurn(Game game) {
         this.landsPlayed = 0;
         findRange(game);

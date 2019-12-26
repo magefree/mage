@@ -404,11 +404,6 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public void otherPlayerLeftGame(Game game) {
-
-    }
-
-    @Override
     public ManaPool getManaPool() {
         return null;
     }

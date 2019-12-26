@@ -1,4 +1,3 @@
-
 package mage.game.permanent;
 
 import mage.abilities.keyword.PhasingAbility;
@@ -6,7 +5,6 @@ import mage.constants.CardType;
 import mage.constants.RangeOfInfluence;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
-import mage.players.Player;
 
 import java.io.Serializable;
 import java.util.*;
@@ -85,8 +83,8 @@ public class Battlefield implements Serializable {
                             && permanent.isPhasedIn())
                     .count();
         } else {
-            Set<UUID> range = game.getPlayer(sourcePlayerId).getInRange();
-            return  (int) field.values()
+            List<UUID> range = game.getState().getPlayersInRange(sourcePlayerId, game);
+            return (int) field.values()
                     .stream()
                     .filter(permanent -> range.contains(permanent.getControllerId())
                             && filter.match(permanent, sourceId, sourcePlayerId, game)
@@ -150,7 +148,7 @@ public class Battlefield implements Serializable {
                             && permanent.isPhasedIn()).count() >= num;
 
         } else {
-            Set<UUID> range = game.getPlayer(sourcePlayerId).getInRange();
+            List<UUID> range = game.getState().getPlayersInRange(sourcePlayerId, game);
             return field.values().stream()
                     .filter(permanent -> range.contains(permanent.getControllerId())
                             && filter.match(permanent, null, sourcePlayerId, game)
@@ -298,12 +296,8 @@ public class Battlefield implements Serializable {
                     .filter(perm -> perm.isPhasedIn() && filter.match(perm, sourceId, sourcePlayerId, game))
                     .collect(Collectors.toList());
         } else {
-            Player player = game.getPlayer(sourcePlayerId);
-            if(player == null){
-                return Collections.emptyList();
-            }
-            Set<UUID> range = player.getInRange();
-            return  field.values()
+            List<UUID> range = game.getState().getPlayersInRange(sourcePlayerId, game);
+            return field.values()
                     .stream()
                     .filter(perm -> perm.isPhasedIn() && range.contains(perm.getControllerId())
                             && filter.match(perm, sourceId, sourcePlayerId, game)).collect(Collectors.toList());
@@ -323,7 +317,7 @@ public class Battlefield implements Serializable {
         if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
             return getAllActivePermanents();
         } else {
-            Set<UUID> range = game.getPlayer(sourcePlayerId).getInRange();
+            List<UUID> range = game.getState().getPlayersInRange(sourcePlayerId, game);
             return field.values()
                     .stream()
                     .filter(perm -> perm.isPhasedIn()

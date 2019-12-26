@@ -211,13 +211,6 @@ public interface Player extends MageItem, Copyable<Player> {
      */
     boolean canRespond();
 
-    /**
-     * Called if other player left the game
-     *
-     * @param game
-     */
-    void otherPlayerLeftGame(Game game);
-
     ManaPool getManaPool();
 
     Set<UUID> getInRange();

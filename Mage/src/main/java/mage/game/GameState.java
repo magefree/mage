@@ -635,6 +635,9 @@ public class GameState implements Serializable, Copyable<GameState> {
      * Returns a list of all active players of the game in range of playerId,
      * also setting the playerId to the first/current player of the list. Also
      * returning the other players in turn order.
+     * <p>
+     * Not safe for continuous effects, see rule 800.4k (effects must work until end of turn even after player leaves)
+     * Use Player.InRange() to find active players list at the start of the turn
      *
      * @param playerId
      * @param game
@@ -645,7 +648,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         Player currentPlayer = game.getPlayer(playerId);
         if (currentPlayer != null) {
             for (Player player : players.values()) {
-                if (!player.hasLeft() && !player.hasLost() && currentPlayer.getInRange().contains(player.getId())) {
+                if (player.isInGame() && currentPlayer.getInRange().contains(player.getId())) {
                     newPlayerList.add(player.getId());
                 }
             }
