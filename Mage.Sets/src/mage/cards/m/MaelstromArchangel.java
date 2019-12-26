@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -90,7 +89,10 @@ class MaelstromArchangelCastEffect extends OneShotEffect {
                     }
                 }
                 if (cardToCast != null) {
-                    controller.cast(cardToCast.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                    game.getState().setValue("PlayFromNotOwnHandZone" + cardToCast.getId(), Boolean.TRUE);
+                    controller.cast(controller.chooseAbilityForCast(cardToCast, game, true),
+                            game, true, new MageObjectReference(source.getSourceObject(game), game));
+                    game.getState().setValue("PlayFromNotOwnHandZone" + cardToCast.getId(), null);
                 }
             }
             return true;
