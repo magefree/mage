@@ -1324,6 +1324,8 @@ public abstract class GameImpl implements Game, Serializable {
                         } else {
                             throw new MageException("Error in testclass");
                         }
+                    } finally {
+                        setCheckPlayableState(false);
                     }
                     state.getPlayerList().getNext();
                 }
@@ -1335,6 +1337,7 @@ public abstract class GameImpl implements Game, Serializable {
         } finally {
             resetLKI();
             clearAllBookmarks();
+            setCheckPlayableState(false);
         }
     }
 
