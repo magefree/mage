@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
@@ -8,11 +7,7 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -22,8 +17,9 @@ import mage.players.Player;
 import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000 / HCrescent
  */
 public final class SharedFate extends CardImpl {
@@ -123,17 +119,10 @@ class SharedFatePlayEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         if (game.getState().getZone(objectId) == Zone.EXILED) {
-            Player player = game.getPlayer(affectedControllerId);
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             UUID exileId = CardUtil.getExileZoneId(source.getSourceId().toString() + sourcePermanent.getZoneChangeCounter(game) + affectedControllerId.toString(), game);
-            if (exileId != null) {
-                ExileZone exileZone = game.getExile().getExileZone(exileId);
-                if (exileZone != null && exileZone.contains(objectId)) {
-                    if (player != null && player.chooseUse(outcome, "Play " + game.getCard(objectId).getIdName() + '?', source, game)) {
-                        return true;
-                    }
-                }
-            }
+            ExileZone exileZone = game.getExile().getExileZone(exileId);
+            return exileZone != null && exileZone.contains(objectId);
         }
         return false;
     }
@@ -165,14 +154,10 @@ class SharedFateLookEffect extends AsThoughEffectImpl {
         if (game.getState().getZone(objectId) == Zone.EXILED) {
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             UUID exileId = CardUtil.getExileZoneId(source.getSourceId().toString() + sourcePermanent.getZoneChangeCounter(game) + affectedControllerId.toString(), game);
-            if (exileId != null) {
-                ExileZone exileZone = game.getExile().getExileZone(exileId);
-                if (exileZone != null && exileZone.contains(objectId)) {
-                    Card card = game.getCard(objectId);
-                    if (card != null && game.getState().getZone(objectId) == Zone.EXILED) {
-                        return true;
-                    }
-                }
+            ExileZone exileZone = game.getExile().getExileZone(exileId);
+            if (exileZone != null && exileZone.contains(objectId)) {
+                Card card = game.getCard(objectId);
+                return card != null && game.getState().getZone(objectId) == Zone.EXILED;
             }
         }
         return false;
