@@ -1236,7 +1236,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 case LEFT:
                     players = game.getState().getPlayerList(attackingPlayerId);
                     while (attackingPlayer.isInGame()) {
-                        Player opponent = players.getNext(game);
+                        Player opponent = players.getNext(game, false);
                         if (attackingPlayer.hasOpponent(opponent.getId(), game)) {
                             attackablePlayers.add(opponent.getId());
                             break;

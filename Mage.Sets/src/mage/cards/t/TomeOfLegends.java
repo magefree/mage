@@ -12,8 +12,10 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.other.OwnerPredicate;
 import mage.filter.predicate.permanent.CommanderPredicate;
 
 import java.util.UUID;
@@ -27,6 +29,7 @@ public final class TomeOfLegends extends CardImpl {
 
     static {
         filter.add(CommanderPredicate.instance);
+        filter.add(new OwnerPredicate(TargetController.YOU));
     }
 
     public TomeOfLegends(UUID ownerId, CardSetInfo setInfo) {

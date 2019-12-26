@@ -1,4 +1,3 @@
-
 package mage.cards.l;
 
 import java.util.HashMap;
@@ -16,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -66,13 +64,12 @@ class LivingDeathEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && sourceObject != null) {
             Map<UUID, Set<Card>> exiledCards = new HashMap<>();
-            
+
             // Move creature cards from graveyard to exile
-            
             for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    Set<Card> cardsPlayer = player.getGraveyard().getCards(new FilterCreatureCard(), game);
+                    Set<Card> cardsPlayer = player.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game);
                     if (!cardsPlayer.isEmpty()) {
                         exiledCards.put(player.getId(), cardsPlayer);
                         player.moveCards(cardsPlayer, Zone.EXILED, source, game);
@@ -80,22 +77,20 @@ class LivingDeathEffect extends OneShotEffect {
                 }
             }
             game.applyEffects();
-            
+
             // Sacrifice all creatures
-            
             for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
                 permanent.sacrifice(source.getSourceId(), game);
             }
             game.applyEffects();
-            
+
             // Exiled cards are put onto the battlefield at the same time under their owner's control
-            
             Set<Card> cardsToReturnFromExile = new HashSet<>();
             for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     Set<Card> cardsPlayer = exiledCards.get(playerId);
-                    if (cardsPlayer != null 
+                    if (cardsPlayer != null
                             && !cardsPlayer.isEmpty()) {
                         cardsToReturnFromExile.addAll(cardsPlayer);
                     }

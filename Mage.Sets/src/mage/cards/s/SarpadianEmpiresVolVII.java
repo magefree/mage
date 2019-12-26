@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -34,9 +33,9 @@ public final class SarpadianEmpiresVolVII extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // As Sarpadian Empires, Vol. VII enters the battlefield, choose white Citizen, blue Camarid, black Thrull, red Goblin, or green Saproling.
-        this.addAbility(new AsEntersBattlefieldAbility(new ChooseTokenEffect()));
+        this.addAbility(new AsEntersBattlefieldAbility(new SarpadianEmpiresChooseTokenEffect()));
         // {3}, {T}: Create a 1/1 creature token of the chosen color and type.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateSelectedTokenEffect(), new ManaCostsImpl("{3}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SarpadianEmpiresCreateSelectedTokenEffect(), new ManaCostsImpl("{3}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -51,20 +50,20 @@ public final class SarpadianEmpiresVolVII extends CardImpl {
     }
 }
 
-class ChooseTokenEffect extends OneShotEffect {
+class SarpadianEmpiresChooseTokenEffect extends OneShotEffect {
 
-    public ChooseTokenEffect() {
+    public SarpadianEmpiresChooseTokenEffect() {
         super(Outcome.Neutral);
         this.staticText = "choose white Citizen, blue Camarid, black Thrull, red Goblin, or green Saproling";
     }
 
-    public ChooseTokenEffect(final ChooseTokenEffect effect) {
+    public SarpadianEmpiresChooseTokenEffect(final SarpadianEmpiresChooseTokenEffect effect) {
         super(effect);
     }
 
     @Override
-    public ChooseTokenEffect copy() {
-        return new ChooseTokenEffect(this);
+    public SarpadianEmpiresChooseTokenEffect copy() {
+        return new SarpadianEmpiresChooseTokenEffect(this);
     }
 
     @Override
@@ -89,20 +88,20 @@ class ChooseTokenEffect extends OneShotEffect {
     }
 }
 
-class CreateSelectedTokenEffect extends OneShotEffect {
+class SarpadianEmpiresCreateSelectedTokenEffect extends OneShotEffect {
 
-    public CreateSelectedTokenEffect() {
+    public SarpadianEmpiresCreateSelectedTokenEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "create a 1/1 creature token of the chosen color and type";
     }
 
-    public CreateSelectedTokenEffect(final CreateSelectedTokenEffect effect) {
+    public SarpadianEmpiresCreateSelectedTokenEffect(final SarpadianEmpiresCreateSelectedTokenEffect effect) {
         super(effect);
     }
 
     @Override
-    public CreateSelectedTokenEffect copy() {
-        return new CreateSelectedTokenEffect(this);
+    public SarpadianEmpiresCreateSelectedTokenEffect copy() {
+        return new SarpadianEmpiresCreateSelectedTokenEffect(this);
     }
 
     @Override

@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -12,7 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -67,7 +66,7 @@ class FlashEffect extends OneShotEffect {
             return false;
         }
 
-        TargetCardInHand target = new TargetCardInHand(new FilterCreatureCard());
+        TargetCardInHand target = new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE);
         if (controller.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {

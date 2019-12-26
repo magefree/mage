@@ -1,4 +1,3 @@
-
 package mage.cards.z;
 
 import java.util.UUID;
@@ -12,7 +11,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -70,7 +69,7 @@ class ZamWesselEffect extends OneShotEffect {
         if (controller != null) {
             Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
             if (targetPlayer != null) {
-                TargetCard targetCard = new TargetCard(0, 1, Zone.HAND, new FilterCreatureCard());
+                TargetCard targetCard = new TargetCard(0, 1, Zone.HAND, StaticFilters.FILTER_CARD_CREATURE);
                 controller.choose(outcome, targetPlayer.getHand(), targetCard, game);
                 Card copyFromCard = game.getCard(targetCard.getFirstTarget());
                 if (copyFromCard != null) {

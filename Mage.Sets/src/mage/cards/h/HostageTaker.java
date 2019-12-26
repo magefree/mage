@@ -106,7 +106,7 @@ class HostageTakerExileEffect extends OneShotEffect {
         ContinuousEffect effect = new HostageTakerSpendAnyManaEffect();
         effect.setTargetPointer(new FixedTarget(card.getId(), game));
         game.addEffect(effect, source);
-        return false;
+        return true;
     }
 }
 
@@ -173,11 +173,12 @@ class HostageTakerSpendAnyManaEffect extends AsThoughEffectImpl implements AsTho
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        objectId = CardUtil.getMainCardId(game, objectId); // for split cards
         FixedTarget fixedTarget = ((FixedTarget) getTargetPointer());
         return source.isControlledBy(affectedControllerId)
                 && Objects.equals(objectId, fixedTarget.getTarget())
-                && fixedTarget.getZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(objectId)
-                && game.getState().getZone(objectId) == Zone.STACK;
+                && game.getState().getZoneChangeCounter(objectId) <= fixedTarget.getZoneChangeCounter() + 1
+                && (game.getState().getZone(objectId) == Zone.STACK || game.getState().getZone(objectId) == Zone.EXILED);
     }
 
     @Override

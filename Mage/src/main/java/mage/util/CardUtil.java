@@ -1,9 +1,11 @@
 package mage.util;
 
+import java.text.SimpleDateFormat;
+import java.util.Objects;
+import java.util.UUID;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.*;
@@ -15,10 +17,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.util.functions.CopyTokenFunction;
 
-import java.text.SimpleDateFormat;
-import java.util.Objects;
-import java.util.UUID;
-
 /**
  * @author nantuko
  */
@@ -27,10 +25,10 @@ public final class CardUtil {
     private static final String SOURCE_EXILE_ZONE_TEXT = "SourceExileZone";
 
     static final String[] numberStrings = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
-            "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"};
+        "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"};
 
     static final String[] ordinalStrings = {"first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eightth", "ninth",
-            "tenth", "eleventh", "twelfth", "thirteenth", "fourteenth", "fifteenth", "sixteenth", "seventeenth", "eighteenth", "nineteenth", "twentieth"};
+        "tenth", "eleventh", "twelfth", "thirteenth", "fourteenth", "fifteenth", "sixteenth", "seventeenth", "eighteenth", "nineteenth", "twentieth"};
 
     public static final SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");
 
@@ -145,8 +143,8 @@ public final class CardUtil {
      *
      * @param spellAbility
      * @param manaCostsToReduce costs to reduce
-     * @param convertToGeneric  colored mana does reduce generic mana if no
-     *                          appropriate colored mana is in the costs included
+     * @param convertToGeneric colored mana does reduce generic mana if no
+     * appropriate colored mana is in the costs included
      */
     public static void adjustCost(SpellAbility spellAbility, ManaCosts<ManaCost> manaCostsToReduce, boolean convertToGeneric) {
         ManaCosts<ManaCost> previousCost = spellAbility.getManaCostsToPay();
@@ -331,7 +329,7 @@ public final class CardUtil {
      *
      * @param number number to convert to text
      * @param forOne if the number is 1, this string will be returnedinstead of
-     *               "one".
+     * "one".
      * @return
      */
     public static String numberToText(int number, String forOne) {
@@ -416,7 +414,7 @@ public final class CardUtil {
     /**
      * Creates and saves a (card + zoneChangeCounter) specific exileId.
      *
-     * @param game   the current game
+     * @param game the current game
      * @param source source ability
      * @return the specific UUID
      */
@@ -451,9 +449,9 @@ public final class CardUtil {
      * be specific to a permanent instance. So they won't match, if a permanent
      * was e.g. exiled and came back immediately.
      *
-     * @param text   short value to describe the value
+     * @param text short value to describe the value
      * @param cardId id of the card
-     * @param game   the game
+     * @param game the game
      * @return
      */
     public static String getCardZoneString(String text, UUID cardId, Game game) {
@@ -487,20 +485,6 @@ public final class CardUtil {
         uniqueString.append(objectId);
         uniqueString.append(previous ? zoneChangeCounter - 1 : zoneChangeCounter);
         return uniqueString.toString();
-    }
-
-    /**
-     * Returns if the ability is used to check which cards are playable on hand.
-     * (Issue #457)
-     *
-     * @param ability - ability to check
-     * @return
-     */
-    public static boolean isCheckPlayableMode(Ability ability) {
-        if (ability instanceof ActivatedAbility) {
-            return ((ActivatedAbility) ability).isCheckPlayableMode();
-        }
-        return false;
     }
 
     /**
@@ -560,12 +544,13 @@ public final class CardUtil {
     }
 
     /**
-     * Face down cards and their copy tokens don't have names and that's "empty" names is not equals
+     * Face down cards and their copy tokens don't have names and that's "empty"
+     * names is not equals
      */
     public static boolean haveSameNames(String name1, String name2, Boolean ignoreMtgRuleForEmptyNames) {
         if (ignoreMtgRuleForEmptyNames) {
             // simple compare for tests and engine
-            return name1 != null && name2 != null && name1.equals(name2);
+            return name1 != null && name1.equals(name2);
         } else {
             // mtg logic compare for game (empty names can't be same)
             return !haveEmptyName(name1) && !haveEmptyName(name2) && name1.equals(name2);
@@ -586,5 +571,10 @@ public final class CardUtil {
 
     public static boolean haveEmptyName(MageObject object) {
         return object == null || haveEmptyName(object.getName());
+    }
+
+    public static UUID getMainCardId(Game game, UUID objectId) {
+        Card card = game.getCard(objectId);
+        return card != null ? card.getMainCard().getId() : objectId;
     }
 }

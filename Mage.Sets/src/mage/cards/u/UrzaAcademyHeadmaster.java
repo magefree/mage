@@ -1,5 +1,6 @@
 package mage.cards.u;
 
+import java.util.*;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -44,8 +45,6 @@ import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.*;
 import mage.util.RandomUtil;
-
-import java.util.*;
 
 /**
  * @author L_J
@@ -263,7 +262,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 break;
                             case 6: // (altered) GARRUK CALLER OF BEASTS 2
                                 sb.append("You may put a creature card from your hand onto the battlefield.");
-                                effects.add(new PutCardFromHandOntoBattlefieldEffect(new FilterCreatureCard()));
+                                effects.add(new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_CREATURE));
                                 break;
                             case 7: // (altered) JACE THE MIND SCULPTOR 2
                                 sb.append("Draw three cards, then put a card from your hand on top of your library.");

@@ -8,14 +8,12 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 /**
  * @author LevelX2, JayDi85
  */
-
 public class TidehollowScullerTest extends CardTestPlayerBase {
 
     /**
      * Test if the same Tidehollow Sculler is cast multiple times, the correct
      * corresponding exiled cards are returned
      */
-
     @Test
     public void test_CastOneCardFromHandWillBeExiled() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
@@ -29,7 +27,6 @@ public class TidehollowScullerTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Lightning Bolt", 1); // {R}
         //
         addCard(Zone.HAND, playerB, "Bloodflow Connoisseur", 1);
-
 
         // cast and exile from hand
         checkHandCardCount("B hand must have blood", 1, PhaseStep.UPKEEP, playerB, "Bloodflow Connoisseur", 1);
@@ -86,7 +83,7 @@ public class TidehollowScullerTest extends CardTestPlayerBase {
         checkPermanentCount("A must have 2 tide", 2, PhaseStep.UPKEEP, playerA, "Tidehollow Sculler", 2);
         checkHandCardCount("B hand must have 0 blood", 2, PhaseStep.UPKEEP, playerB, "Bloodflow Connoisseur", 0);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "@tide.1");
-        showHand("B hand", 2, PhaseStep.BEGIN_COMBAT, playerB);
+//        showHand("B hand", 2, PhaseStep.BEGIN_COMBAT, playerB);
         checkPermanentCount("A must have 1 tide", 2, PhaseStep.BEGIN_COMBAT, playerA, "Tidehollow Sculler", 1);
         checkHandCardCount("B hand must have 1 blood", 2, PhaseStep.BEGIN_COMBAT, playerB, "Bloodflow Connoisseur", 1);
         // destroy 2 and return card to hand

@@ -3,18 +3,20 @@ package mage.cards.m;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.cards.*;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.players.ManaPoolItem;
 import mage.players.Player;
+import mage.util.CardUtil;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import mage.abilities.effects.AsThoughManaEffect;
-import mage.players.ManaPoolItem;
 
 /**
  * @author TheElk801
@@ -156,7 +158,7 @@ class MnemonicBetrayalAnyColorEffect extends AsThoughEffectImpl implements AsTho
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        objectId = game.getCard(objectId).getMainCard().getId(); // for split cards
+        objectId = CardUtil.getMainCardId(game, objectId); // for split cards
         if (objectId.equals(card.getId())
                 && card.getZoneChangeCounter(game) <= zoneCounter + 1
                 && affectedControllerId.equals(source.getControllerId())) {

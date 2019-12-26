@@ -1,4 +1,3 @@
-
 package mage.cards.l;
 
 import java.util.HashMap;
@@ -17,7 +16,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -77,7 +75,7 @@ class LivingEndEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    Set<Card> cardsPlayer = player.getGraveyard().getCards(new FilterCreatureCard(), game);
+                    Set<Card> cardsPlayer = player.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game);
                     if (!cardsPlayer.isEmpty()) {
                         exiledCards.put(player.getId(), cardsPlayer);
                         player.moveCards(cardsPlayer, Zone.EXILED, source, game);

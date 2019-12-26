@@ -1,7 +1,5 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -11,8 +9,8 @@ import mage.abilities.keyword.UndyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
@@ -22,14 +20,15 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward
  */
 public final class FlayerOfTheHatebound extends CardImpl {
 
     public FlayerOfTheHatebound(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}");
         this.subtype.add(SubType.DEVIL);
 
         this.power = new MageInt(4);
@@ -71,7 +70,8 @@ class FlayerTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (((EntersTheBattlefieldEvent) event).getFromZone() == Zone.GRAVEYARD
+        if (permanent != null
+                && ((EntersTheBattlefieldEvent) event).getFromZone() == Zone.GRAVEYARD
                 && permanent.isOwnedBy(controllerId)
                 && permanent.isCreature()) {
             Effect effect = this.getEffects().get(0);

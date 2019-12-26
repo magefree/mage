@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -17,8 +15,9 @@ import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class TreasureKeeper extends CardImpl {
@@ -71,7 +70,7 @@ class TreasureKeeperEffect extends OneShotEffect {
                 }
             }
             controller.revealCards(source, toReveal, game);
-            if (nonLandCard != null && controller.chooseUse(outcome, "Cast " + nonLandCard.getLogName() + "without paying its mana cost?", source, game)) {
+            if (nonLandCard != null && controller.chooseUse(outcome, "Cast " + nonLandCard.getLogName() + " without paying its mana cost?", source, game)) {
                 controller.cast(nonLandCard.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
                 toReveal.remove(nonLandCard);
             }

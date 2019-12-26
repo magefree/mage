@@ -4,6 +4,7 @@ import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.Constructed;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -15,7 +16,7 @@ public class Pioneer extends Constructed {
     public Pioneer() {
         super("Constructed - Pioneer");
 
-        Date cutoff = new GregorianCalendar(2012, 10, 5).getTime(); // RTR release date
+        Date cutoff = new GregorianCalendar(2012, Calendar.OCTOBER, 5).getTime(); // RTR release date
         for (ExpansionSet set : Sets.getInstance().values()) {
             if (set.getSetType().isStandardLegal() && (set.getReleaseDate().after(cutoff) || set.getReleaseDate().equals(cutoff))) {
                 setCodes.add(set.getCode());
@@ -30,7 +31,9 @@ public class Pioneer extends Constructed {
         banned.add("Felidar Guardian");
         banned.add("Field of the Dead");
         banned.add("Leyline of Abundance");
+        banned.add("Nexus of Fate");
         banned.add("Oath of Nissa");
+        banned.add("Oko, Thief of Crowns");
         banned.add("Once Upon a Time");
         banned.add("Smuggler's Copter");
         banned.add("Veil of Summer");

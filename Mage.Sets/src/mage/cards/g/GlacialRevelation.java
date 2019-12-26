@@ -16,7 +16,6 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.common.TargetCardInHand;
 
 import java.util.UUID;
 
@@ -73,7 +72,8 @@ class GlacialRevelationEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 6));
         player.revealCards(source, cards, game);
-        TargetCard targetCard = new TargetCardInHand(0, Integer.MAX_VALUE, filter);
+        TargetCard targetCard = new TargetCard(0, Integer.MAX_VALUE, Zone.LIBRARY, filter);
+        targetCard.setNotTarget(true);
         if (player.choose(outcome, cards, targetCard, game)) {
             Cards toHand = new CardsImpl(targetCard.getTargets());
             cards.removeAll(targetCard.getTargets());

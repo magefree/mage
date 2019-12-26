@@ -1,5 +1,6 @@
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
@@ -14,8 +15,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -27,8 +28,6 @@ import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
 import mage.watchers.common.CastFromHandWatcher;
-
-import java.util.UUID;
 
 /**
  * @author goesta
@@ -86,7 +85,7 @@ class ChainerNightmareAdeptContinuousEffect extends ContinuousEffectImpl {
             return false;
         }
 
-        for (Card card : player.getGraveyard().getCards(new FilterCreatureCard(), game)) {
+        for (Card card : player.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game)) {
             ContinuousEffect effect = new ChainerNightmareAdeptCastFromGraveyardEffect();
             effect.setTargetPointer(new FixedTarget(card.getId()));
             game.addEffect(effect, source);
@@ -174,8 +173,8 @@ class ChainerNightmareAdeptWatcher extends Watcher {
 
 class ChainerNightmareAdeptTriggeredAbility extends EntersBattlefieldAllTriggeredAbility {
 
-    private final static String abilityText = "Whenever a nontoken creature enters the battlefield under your control, " +
-            "if you didn't cast it from your hand, it gains haste until your next turn.";
+    private final static String abilityText = "Whenever a nontoken creature enters the battlefield under your control, "
+            + "if you didn't cast it from your hand, it gains haste until your next turn.";
     private final static ContinuousEffect gainHasteUntilNextTurnEffect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.UntilYourNextTurn);
     private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another nontoken creature");
 

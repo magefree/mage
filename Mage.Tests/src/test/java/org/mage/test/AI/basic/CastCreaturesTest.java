@@ -1,4 +1,3 @@
-
 package org.mage.test.AI.basic;
 
 import mage.constants.PhaseStep;
@@ -8,7 +7,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseAI;
 
 /**
- *
  * @author LevelX2
  */
 public class CastCreaturesTest extends CardTestPlayerBaseAI {
@@ -173,7 +171,7 @@ public class CastCreaturesTest extends CardTestPlayerBaseAI {
 
     /**
      * Tests that the creature is cast if enough mana is available.
-     *
+     * <p>
      * Once Ammit Eternal is cast against a computer AI opponent, the AI just
      * decides to sit there and only play basic lands. I've sat there and decked
      * it because it just plays lands. It's like it views giving the Ammit
@@ -194,8 +192,11 @@ public class CastCreaturesTest extends CardTestPlayerBaseAI {
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 3);
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Ammit Eternal");
+
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
         assertPermanentCount(playerB, "Ammit Eternal", 1);
 

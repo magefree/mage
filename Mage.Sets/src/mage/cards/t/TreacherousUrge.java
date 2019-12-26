@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -18,7 +17,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -33,7 +32,7 @@ import mage.target.targetpointer.FixedTarget;
 public final class TreacherousUrge extends CardImpl {
 
     public TreacherousUrge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{B}");
 
         // Target opponent reveals their hand. You may put a creature card from it onto the battlefield under your control. That creature gains haste. Sacrifice it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new TreacherousUrgeEffect());
@@ -51,8 +50,6 @@ public final class TreacherousUrge extends CardImpl {
 }
 
 class TreacherousUrgeEffect extends OneShotEffect {
-
-    private static final FilterCreatureCard filter = new FilterCreatureCard();
 
     public TreacherousUrgeEffect() {
         super(Outcome.Benefit);
@@ -76,10 +73,10 @@ class TreacherousUrgeEffect extends OneShotEffect {
             opponent.revealCards(sourceObject.getName(), opponent.getHand(), game);
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                int cardsHand = opponent.getHand().count(filter, game);
+                int cardsHand = opponent.getHand().count(StaticFilters.FILTER_CARD_CREATURE, game);
                 Card card = null;
                 if (cardsHand > 0) {
-                    TargetCard target = new TargetCard(Zone.HAND, filter);
+                    TargetCard target = new TargetCard(Zone.HAND, StaticFilters.FILTER_CARD_CREATURE);
                     if (controller.choose(Outcome.Benefit, opponent.getHand(), target, game)) {
                         card = opponent.getHand().get(target.getFirstTarget(), game);
                         if (card != null) {

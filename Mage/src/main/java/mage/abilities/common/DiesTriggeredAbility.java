@@ -1,4 +1,3 @@
-
 package mage.abilities.common;
 
 import mage.MageObject;
@@ -34,11 +33,11 @@ public class DiesTriggeredAbility extends ZoneChangeTriggeredAbility {
         if (before == null) {
             return false;
         }
-        if (!(before instanceof PermanentToken) && !this.hasSourceObjectAbility(game, before, event)) {
+        if (!this.hasSourceObjectAbility(game, before, event)) { // the permanent does not have the ability so no trigger
             return false;
         }
-        // check now it is in graveyard
-        if (before.getZoneChangeCounter(game) + 1 == game.getState().getZoneChangeCounter(sourceId)) {
+        // check now it is in graveyard if it is no token
+        if (!(before instanceof PermanentToken) && before.getZoneChangeCounter(game) + 1 == game.getState().getZoneChangeCounter(sourceId)) {
             Zone after = game.getState().getZone(sourceId);
             return after != null && Zone.GRAVEYARD.match(after);
         } else {

@@ -142,7 +142,7 @@ class PeaceTalksPlayersAndPermanentsCantBeTargetsOfSpellsOrActivatedAbilities ex
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        for (UUID playerId : game.getPlayer(source.getControllerId()).getInRange()) {
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             if (event.getTargetId().equals(playerId)) {
                 return false;
             }

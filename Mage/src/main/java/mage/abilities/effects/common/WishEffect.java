@@ -1,8 +1,5 @@
-
 package mage.abilities.effects.common;
 
-import java.util.List;
-import java.util.Set;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -16,8 +13,10 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 
+import java.util.List;
+import java.util.Set;
+
 /**
- *
  * @author Styxo
  */
 public class WishEffect extends OneShotEffect {
@@ -73,7 +72,7 @@ public class WishEffect extends OneShotEffect {
             if (controller.chooseUse(Outcome.Benefit, choiceText, source, game)) {
                 Cards cards = controller.getSideboard();
                 List<Card> exile = game.getExile().getAllCards(game);
-                boolean noTargets = cards.isEmpty() && (alsoFromExile ? exile.isEmpty() : true);
+                boolean noTargets = cards.isEmpty() && (!alsoFromExile || exile.isEmpty());
                 if (noTargets) {
                     game.informPlayer(controller, "You have no cards outside the game" + (alsoFromExile ? " or in exile" : "") + '.');
                     return true;
@@ -96,7 +95,7 @@ public class WishEffect extends OneShotEffect {
                     return true;
                 }
 
-                TargetCard target = new TargetCard(Zone.OUTSIDE, filter);
+                TargetCard target = new TargetCard(Zone.ALL, filter);
                 target.setNotTarget(true);
                 if (controller.choose(Outcome.Benefit, filteredCards, target, game)) {
                     Card card = controller.getSideboard().get(target.getFirstTarget(), game);

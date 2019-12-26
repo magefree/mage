@@ -15,7 +15,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -76,8 +76,8 @@ class LordOfTheVoidEffect extends OneShotEffect {
 
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 7));
         controller.moveCards(cards, Zone.EXILED, source, game);
-        if (!cards.getCards(new FilterCreatureCard(), game).isEmpty()) {
-            TargetCard target = new TargetCard(Zone.EXILED, new FilterCreatureCard());
+        if (!cards.getCards(StaticFilters.FILTER_CARD_CREATURE, game).isEmpty()) {
+            TargetCard target = new TargetCard(Zone.EXILED, StaticFilters.FILTER_CARD_CREATURE);
             if (controller.chooseTarget(outcome, cards, target, source, game)) {
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {

@@ -1,4 +1,3 @@
-
 package mage.cards.w;
 
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -26,7 +25,7 @@ import mage.target.common.TargetCardInLibrary;
 public final class WeirdHarvest extends CardImpl {
 
     public WeirdHarvest(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{G}{G}");
 
         // Each player may search their library for up to X creature cards, reveal those cards, and put them into their hand. Then each player who searched their library this way shuffles it.
         getSpellAbility().addEffect(new WeirdHarvestEffect());
@@ -87,7 +86,7 @@ class WeirdHarvestEffect extends OneShotEffect {
     private void chooseAndSearchLibrary(List<Player> usingPlayers, Player player, int xValue, Ability source, MageObject sourceObject, Game game) {
         if (player.chooseUse(Outcome.PutCardInPlay, "Search your library for up " + xValue + " creature cards and put them into your hand?", source, game)) {
             usingPlayers.add(player);
-            TargetCardInLibrary target = new TargetCardInLibrary(0, xValue, new FilterCreatureCard());
+            TargetCardInLibrary target = new TargetCardInLibrary(0, xValue, StaticFilters.FILTER_CARD_CREATURE);
             if (player.searchLibrary(target, source, game)) {
                 if (!target.getTargets().isEmpty()) {
                     Cards cards = new CardsImpl(target.getTargets());

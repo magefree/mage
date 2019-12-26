@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -17,8 +15,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author cbt33, Loki (Heartbeat of Spring)
  */
 public final class PriceOfGlory extends CardImpl {
@@ -63,12 +62,8 @@ class PriceOfGloryAbility extends TriggeredAbilityImpl {
         if (permanent == null) {
             return false;
         }
-        Player player = game.getPlayer(controllerId);
-        if (player == null) {
-            return false;
-        }
         if (permanent.isLand()
-                && player.getInRange().contains(permanent.getControllerId())
+                && game.getState().getPlayersInRange(controllerId, game).contains(permanent.getControllerId())
                 && !permanent.isControlledBy(game.getActivePlayerId())) { // intervening if clause
             getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
             return true;

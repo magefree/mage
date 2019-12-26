@@ -12,8 +12,8 @@ public class BrainMaggotTest extends CardTestPlayerBase {
 
     /**
      * When Brain Maggot enters the battlefield, target opponent reveals their
-     * hand and you choose a nonland card from it. Exile that card until
-     * Brain Maggot leaves the battlefield.
+     * hand and you choose a nonland card from it. Exile that card until Brain
+     * Maggot leaves the battlefield.
      */
     @Test
     public void testCardFromHandWillBeExiled() {
@@ -48,7 +48,7 @@ public class BrainMaggotTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Brain Maggot");
         addTarget(playerA, playerB);
         setChoice(playerA, "Bloodflow Connoisseur");
-        showExile("exile", 1, PhaseStep.BEGIN_COMBAT, playerB);
+//        showExile("exile", 1, PhaseStep.BEGIN_COMBAT, playerB);
         checkExileCount("blood must be in exile", 1, PhaseStep.BEGIN_COMBAT, playerB, "Bloodflow Connoisseur", 1);
 
         // return

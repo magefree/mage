@@ -13,9 +13,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.target.Target;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetAttackingCreature;
-import mage.target.common.TargetAttackingOrBlockingCreature;
-import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 import org.apache.log4j.Logger;
 
@@ -136,7 +133,7 @@ public final class RateCard {
 
     private static int isEffectRemoval(Card card, Ability ability, Effect effect) {
         if (effect.getOutcome() == Outcome.Removal) {
-            log.debug("Found removal: " + card.getName());
+            // found removal
             return 1;
         }
         //static List<Effect> removalEffects =[BoostTargetEffect,BoostEnchantedEffect]
@@ -153,7 +150,7 @@ public final class RateCard {
         if (effect.getOutcome() == Outcome.Damage || effect instanceof DamageTargetEffect) {
             for (Target target : ability.getTargets()) {
                 if (!(target instanceof TargetPlayerOrPlaneswalker)) {
-                    log.debug("Found damage dealer: " + card.getName());
+                    // found damage dealer
                     return 1;
                 }
             }
@@ -163,11 +160,8 @@ public final class RateCard {
                 effect instanceof ExileTargetEffect ||
                 effect instanceof ExileUntilSourceLeavesEffect) {
             for (Target target : ability.getTargets()) {
-                if (target instanceof TargetCreaturePermanent ||
-                        target instanceof TargetAttackingCreature ||
-                        target instanceof TargetAttackingOrBlockingCreature ||
-                        target instanceof TargetPermanent) {
-                    log.debug("Found destroyer/exiler: " + card.getName());
+                if (target instanceof TargetPermanent) {
+                    // found destroyer/exiler
                     return 1;
                 }
             }

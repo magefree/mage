@@ -42,10 +42,12 @@ public class GainControlDiedCastAgainTest extends CardTestPlayerBase {
 
         attack(2, playerB, "Elesh Norn, Grand Cenobite");
         block(2, playerA, "Keiga, the Tide Star", "Elesh Norn, Grand Cenobite");
-        addTarget(playerB, "Elesh Norn, Grand Cenobite");
+        addTarget(playerA, "Elesh Norn, Grand Cenobite");
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
+        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);

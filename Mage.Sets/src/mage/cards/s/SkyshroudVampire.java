@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -10,10 +9,10 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -23,19 +22,19 @@ import mage.target.common.TargetCardInHand;
 public final class SkyshroudVampire extends CardImpl {
 
     public SkyshroudVampire(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.subtype.add(SubType.VAMPIRE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // Discard a creature card: Skyshroud Vampire gets +2/+2 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD, 
-                new BoostSourceEffect(2,2, Duration.EndOfTurn),
-                new DiscardTargetCost(new TargetCardInHand(new FilterCreatureCard()))));
+                Zone.BATTLEFIELD,
+                new BoostSourceEffect(2, 2, Duration.EndOfTurn),
+                new DiscardTargetCost(new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE))));
     }
 
     public SkyshroudVampire(final SkyshroudVampire card) {

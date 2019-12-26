@@ -14,12 +14,10 @@ import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
-import mage.target.TargetPlayer;
-import mage.target.common.TargetCardInGraveyard;
-import org.apache.log4j.Logger;
-
 import java.util.UUID;
+import mage.players.PlayerList;
+import mage.target.common.TargetCardInGraveyard;
+import mage.util.RandomUtil;
 
 /**
  * @author TheElk801
@@ -55,9 +53,9 @@ public final class WildfireDevils extends CardImpl {
 class WildfireDevilsEffect extends OneShotEffect {
 
     WildfireDevilsEffect() {
-        super(Outcome.Benefit);
-        staticText = "choose a player at random. That player exiles an instant or sorcery card from their graveyard. " +
-                "Copy that card. You may cast the copy without paying its mana cost.";
+        super(Outcome.Neutral);
+        staticText = "choose a player at random. That player exiles an instant or sorcery card from their graveyard. "
+                + "Copy that card. You may cast the copy without paying its mana cost.";
     }
 
     private WildfireDevilsEffect(final WildfireDevilsEffect effect) {
@@ -75,23 +73,28 @@ class WildfireDevilsEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        TargetPlayer targetPlayer = new TargetPlayer();
-        targetPlayer.setRandom(true);
-        targetPlayer.setNotTarget(true);
-        if (!controller.choose(outcome, targetPlayer, source.getSourceId(), game)) {
+        PlayerList players = game.getState().getPlayersInRange(controller.getId(), game);
+        if (players == null) {
             return false;
         }
-        Player player = game.getPlayer(targetPlayer.getFirstTarget());
-        if (player == null || player.getGraveyard().getCards(game).stream().noneMatch(Card::isInstantOrSorcery)) {
+        Player randomPlayer = game.getPlayer(players.get(RandomUtil.nextInt(players.size())));
+        if (randomPlayer == null) {
             return false;
         }
-        TargetCard targetCard = new TargetCardInGraveyard(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY);
+        game.informPlayers("The chosen random player is " + randomPlayer.getLogName());
+        if (randomPlayer.getGraveyard().getCards(game).stream().noneMatch(Card::isInstantOrSorcery)) {
+            return false;
+        }
+        TargetCardInGraveyard targetCard = new TargetCardInGraveyard(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY);
         targetCard.setNotTarget(true);
-        if (!player.choose(outcome, player.getGraveyard(), targetCard, game)) {
+        if (!randomPlayer.choose(Outcome.Discard, randomPlayer.getGraveyard(), targetCard, game)) {
             return false;
         }
         Card card = game.getCard(targetCard.getFirstTarget());
-        player.moveCards(card, Zone.EXILED, source, game);
+        if (card == null) {
+            return false;
+        }
+        randomPlayer.moveCards(card, Zone.EXILED, source, game);
         if (game.getState().getZone(card.getId()) != Zone.EXILED) {
             return false;
         }
@@ -99,15 +102,14 @@ class WildfireDevilsEffect extends OneShotEffect {
         if (copiedCard == null) {
             return false;
         }
-        game.getExile().add(source.getSourceId(), "", card);
-        game.setZone(copiedCard.getId(), Zone.EXILED);
-        if (!controller.chooseUse(outcome, "Cast the exiled card?", source, game)) {
-            return true;
+        randomPlayer.moveCards(copiedCard, Zone.EXILED, source, game);
+        if (!controller.chooseUse(outcome, "Cast the copy of the exiled card?", source, game)) {
+            return false;
         }
-        if (copiedCard.getSpellAbility() == null) {
-            Logger.getLogger(WildfireDevilsEffect.class).error("Wildfire Devils: spell ability == null " + copiedCard.getName());
-            return true;
-        }
-        return controller.cast(copiedCard.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+        game.getState().setValue("CastFromExileEnabled" + copiedCard.getId(), Boolean.TRUE);  // enable the card to be cast from the exile zone
+        Boolean exiledCardWasCast = controller.cast(controller.chooseAbilityForCast(copiedCard, game, true), game, true,
+                new MageObjectReference(source.getSourceObject(game), game));
+        game.getState().setValue("CastFromExileEnabled" + copiedCard.getId(), null);  // reset to null
+        return exiledCardWasCast;
     }
 }

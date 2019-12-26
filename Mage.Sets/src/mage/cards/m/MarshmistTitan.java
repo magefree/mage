@@ -1,40 +1,36 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class MarshmistTitan extends CardImpl {
 
     public MarshmistTitan(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{B}");
         this.subtype.add(SubType.GIANT);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 
         // Marshmist Titan costs {X} less to cast, where X is your devotion to black.
-        this.addAbility(new SimpleStaticAbility(Zone.STACK, new MarshmistTitanCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.STACK, new MarshmistTitanCostReductionEffect())
+                .addHint(new ValueHint("Devotion to black", MarshmistTitanCostReductionEffect.xValue)));
     }
 
     public MarshmistTitan(final MarshmistTitan card) {
@@ -49,6 +45,8 @@ public final class MarshmistTitan extends CardImpl {
 
 class MarshmistTitanCostReductionEffect extends CostModificationEffectImpl {
 
+    static final DynamicValue xValue = new DevotionCount(ColoredManaSymbol.B);
+
     public MarshmistTitanCostReductionEffect() {
         super(Duration.Custom, Outcome.Benefit, CostModificationType.REDUCE_COST);
         staticText = "{this} costs {X} less to cast, where X is your devotion to black  <i>(Each {B} in the mana costs of permanents you control counts toward your devotion to black.)</i> ";
@@ -60,10 +58,10 @@ class MarshmistTitanCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        SpellAbility spellAbility = (SpellAbility)abilityToModify;
+        SpellAbility spellAbility = (SpellAbility) abilityToModify;
         Mana mana = spellAbility.getManaCostsToPay().getMana();
         if (mana.getGeneric() > 0) {
-            int count = new DevotionCount(ColoredManaSymbol.B).calculate(game, source, this);
+            int count = xValue.calculate(game, source, this);
             int newCount = mana.getGeneric() - count;
             if (newCount < 0) {
                 newCount = 0;
@@ -77,10 +75,7 @@ class MarshmistTitanCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify.getSourceId().equals(source.getSourceId()) && (abilityToModify instanceof SpellAbility)) {
-            return true;
-        }
-        return false;
+        return abilityToModify.getSourceId().equals(source.getSourceId()) && (abilityToModify instanceof SpellAbility);
     }
 
     @Override

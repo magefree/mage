@@ -15,7 +15,6 @@ public class ThousandYearStormTest extends CardTestPlayerBase {
     Enchantment
     Whenever you cast an instant or sorcery spell, copy it for each other instant and sorcery spell you’ve cast before it this turn. You may choose new targets for the copies.
      */
-
     @Test
     public void test_CalcBeforeStorm() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
@@ -233,7 +232,6 @@ public class ThousandYearStormTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Augmenting Automaton");
 
         // turn 1
-
         // 1a
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         checkLife("0x copy", 1, PhaseStep.BEGIN_COMBAT, playerB, 20 - 3);
@@ -254,7 +252,6 @@ public class ThousandYearStormTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
     }
-
 
     @Test
     public void test_WaitStackResolvedWithBolts() {
@@ -282,6 +279,8 @@ public class ThousandYearStormTest extends CardTestPlayerBase {
     You control enchanted permanent.
     Cycling {2} ({2}, Discard this card: Draw a card.)
      */
+    // Test fails sometimes with the following message:
+    // java.lang.AssertionError: b 0x copy after control - PlayerA have wrong life: 20 <> 17 expected:<17> but was:<20>
     @Test
     public void test_GetControlNotCounts() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
@@ -296,7 +295,6 @@ public class ThousandYearStormTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Lay Claim");
 
         // turn 2
-
         // pump card for A
         // 1
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
@@ -313,7 +311,6 @@ public class ThousandYearStormTest extends CardTestPlayerBase {
         checkLife("b 0x copy after control", 3, PhaseStep.UPKEEP, playerA, 20 - 3);
 
         // turn 4
-
         // pump for B
         // 1
         castSpell(4, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", playerA);

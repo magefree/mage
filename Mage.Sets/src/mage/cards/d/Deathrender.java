@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -16,8 +15,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -30,7 +28,7 @@ import mage.target.common.TargetCardInHand;
 public final class Deathrender extends CardImpl {
 
     public Deathrender(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +2/+2.
@@ -72,8 +70,7 @@ class DeathrenderEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (controller != null && sourcePermanent != null) {
-            FilterCard filter = new FilterCreatureCard();
-            TargetCardInHand target = new TargetCardInHand(0, 1, filter);
+            TargetCardInHand target = new TargetCardInHand(0, 1, StaticFilters.FILTER_CARD_CREATURE);
             if (controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
                 Card creatureInHand = game.getCard(target.getFirstTarget());
                 if (creatureInHand != null) {

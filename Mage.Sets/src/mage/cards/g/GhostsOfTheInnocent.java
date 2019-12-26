@@ -1,7 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -9,17 +7,16 @@ import mage.abilities.effects.PreventionEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
+import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.events.PreventDamageEvent;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class GhostsOfTheInnocent extends CardImpl {
@@ -81,7 +78,7 @@ class GhostsOfTheInnocentPreventDamageEffect extends ReplacementEffectImpl imple
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         int amount = (int) Math.ceil(event.getAmount() / 2.0);
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, event.getTargetId(), source.getSourceId(), source.getControllerId(), amount, false);
+        GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), source.getSourceId(), source.getControllerId(), amount, ((DamageEvent) event).isCombatDamage());
         if (!game.replaceEvent(preventEvent)) {
             event.setAmount(event.getAmount() - amount);
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, event.getTargetId(), source.getSourceId(), source.getControllerId(), amount));

@@ -142,7 +142,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             // can play
             if (gameView != null && gameView.getCanPlayObjects() != null && !gameView.getCanPlayObjects().isEmpty()) {
                 for (CardView card : cards) {
-                    if (gameView.getCanPlayObjects().contains(card.getId())) {
+                    if (gameView.getCanPlayObjects().containsKey(card.getId())) {
                         return true;
                     }
                 }
@@ -239,7 +239,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
         Color commandColor = Color.BLACK;
         for (CommandObjectView com : player.getCommandObjectList()) {
-            if (game != null && game.getCanPlayObjects() != null && game.getCanPlayObjects().contains(com.getId())) {
+            if (game != null && game.getCanPlayObjects() != null && game.getCanPlayObjects().containsKey(com.getId())) {
                 commandColor = activeValueColor;
                 break;
             }
@@ -269,7 +269,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
         if (!MageFrame.isLite()) {
             int id = player.getUserData().getAvatarId();
-            if (!(id >= 1000) && (id <= 0 || (id <= MIN_AVATAR_ID && id > MAX_AVATAR_ID))) {
+            if (!(id > 1000) && (id != 64) && (id < MIN_AVATAR_ID || id > MAX_AVATAR_ID)) {
                 id = DEFAULT_AVATAR_ID;
             }
             if (id != avatarId) {

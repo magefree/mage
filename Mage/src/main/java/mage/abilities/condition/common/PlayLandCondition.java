@@ -13,6 +13,9 @@ public enum PlayLandCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        if (game.getTurn().getPhase() == null) { // only for getFrameColor for River of Tears before game started
+            return false;
+        }
         PlayLandWatcher watcher = game.getState().getWatcher(PlayLandWatcher.class);
         return watcher != null
                 && watcher.landPlayed(source.getControllerId());

@@ -11,7 +11,6 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 /**
  * @author JayDi85
  */
-
 public class TestAliases extends CardTestPlayerBase {
 
     @Test
@@ -54,7 +53,7 @@ public class TestAliases extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp@battle", 1);
         addCard(Zone.GRAVEYARD, playerA, "Swamp@grave", 1);
 
-        showAliases("A aliases", 1, PhaseStep.UPKEEP, playerA);
+//        showAliases("A aliases", 1, PhaseStep.UPKEEP, playerA);
         checkAliasZone("lib", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "lib", Zone.LIBRARY);
         checkAliasZone("hand", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "hand", Zone.HAND);
         checkAliasZone("battle", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "battle", Zone.BATTLEFIELD);
@@ -77,8 +76,8 @@ public class TestAliases extends CardTestPlayerBase {
         checkPermanentCount("Plains must exists", 1, PhaseStep.UPKEEP, playerB, "Plains", 5);
         checkPermanentCount("Mountain must exists", 1, PhaseStep.UPKEEP, playerB, "Mountain", 5);
         //
-        showAliases("A aliases", 1, PhaseStep.UPKEEP, playerA);
-        showAliases("B aliases", 1, PhaseStep.UPKEEP, playerB);
+//        showAliases("A aliases", 1, PhaseStep.UPKEEP, playerA);
+//        showAliases("B aliases", 1, PhaseStep.UPKEEP, playerB);
         // A
         checkAliasZone("Swamp must not", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Swamp", Zone.BATTLEFIELD, false);
         checkAliasZone("Swamp.1 must not", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Swamp.1", Zone.BATTLEFIELD, false);
@@ -111,7 +110,7 @@ public class TestAliases extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "@lion.3");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "@lion.5");
 
-        showAliases("A aliases", 1, PhaseStep.POSTCOMBAT_MAIN, playerA);
+//        showAliases("A aliases", 1, PhaseStep.POSTCOMBAT_MAIN, playerA);
         checkAliasZone("1", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "lion.1", Zone.BATTLEFIELD, false);
         checkAliasZone("2", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "lion.2", Zone.BATTLEFIELD, true);
         checkAliasZone("3", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "lion.3", Zone.BATTLEFIELD, false);

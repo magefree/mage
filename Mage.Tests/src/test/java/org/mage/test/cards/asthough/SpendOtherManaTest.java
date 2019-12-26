@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.asthough;
 
 import mage.constants.PhaseStep;
@@ -7,7 +6,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class SpendOtherManaTest extends CardTestPlayerBase {
@@ -47,7 +45,7 @@ public class SpendOtherManaTest extends CardTestPlayerBase {
     /**
      * Tron mana doesn't work with Oath of Nissa. (e.g. can't cast Chandra,
      * Flamecaller with Urza's Tower, Power Plant, and Mine.)
-     *
+     * <p>
      * AI don't get the Planeswalker as playable card (probably because of the
      * as thought effect)
      */
@@ -76,7 +74,7 @@ public class SpendOtherManaTest extends CardTestPlayerBase {
      * I was unable to cast Nissa, Voice of Zendikar using black mana with Oath
      * of Nissa in play. Pretty sure Oath is working usually, so here were the
      * conditions in my game:
-     *
+     * <p>
      * -Cast Dark Petition with spell mastery -Attempt to cast Nissa, Voice of
      * Zendikar using the triple black mana from Dark Petition
      */
@@ -122,20 +120,84 @@ public class SpendOtherManaTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Hostage Taker"); // {2}{U}{B}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hostage Taker");
-        setChoice(playerA, "Silvercoat Lion");
+        addTarget(playerA, "Silvercoat Lion");
 
+        // red mana must be used as any mana
         activateManaAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Add {R}."); // red mana to pool
         activateManaAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Add {R}."); // red mana to pool
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Silvercoat Lion"); // cast it from exile with red mana from pool
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Hostage Taker", 1);
         assertTappedCount("Mountain", true, 4);
 
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
-
     }
 
+    @Test
+    public void test_QuicksilverElemental_Normal() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+
+        // {U}: Quicksilver Elemental gains all activated abilities of target creature until end of turn.
+        // You may spend blue mana as though it were mana of any color to pay the activation costs of Quicksilver Elemental’s abilities.
+        addCard(Zone.BATTLEFIELD, playerA, "Quicksilver Elemental"); // Creature {1}{W}
+        // {R}, {T}: Anaba Shaman deals 1 damage to any target.
+        addCard(Zone.BATTLEFIELD, playerB, "Anaba Shaman");
+
+        // gain abilities
+        checkPlayableAbility("must not have", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}, {T}:", false);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{U}:", "Anaba Shaman");
+
+        // use ability
+        checkPlayableAbility("must have new ability", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{R}, {T}:", true);
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{R}, {T}:", playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20 - 1);
+    }
+
+    @Test
+    public void test_QuicksilverElemental_Flicker() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+
+        // {U}: Quicksilver Elemental gains all activated abilities of target creature until end of turn.
+        // You may spend blue mana as though it were mana of any color to pay the activation costs of Quicksilver Elemental’s abilities.
+        addCard(Zone.BATTLEFIELD, playerA, "Quicksilver Elemental"); // Creature {1}{W}
+        // {R}, {T}: Anaba Shaman deals 1 damage to any target.
+        addCard(Zone.BATTLEFIELD, playerB, "Anaba Shaman");
+        // Exile target nontoken permanent, then return it to the battlefield under its owner’s control.
+        addCard(Zone.HAND, playerA, "Flicker"); // {1}{W}
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+
+        // gain abilities
+        checkPlayableAbility("must not have", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}, {T}:", false);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{U}:", "Anaba Shaman");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        checkPlayableAbility("must have new ability", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}, {T}:", true);
+
+        // renew target
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flicker", "Anaba Shaman");
+
+        // use ability
+        checkPlayableAbility("must save ability", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{R}, {T}:", true);
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{R}, {T}:", playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertGraveyardCount(playerA, "Flicker", 1);
+        assertLife(playerA, 20);
+        assertLife(playerB, 20 - 1);
+    }
 }

@@ -26,8 +26,8 @@ public final class GarenbrigCarver extends AdventureCard {
 
         // Shield's Might
         // Target creature gets +2/+2 until end of turn.
-        this.getAdventureSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
-        this.getAdventureSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellCard().getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
+        this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     private GarenbrigCarver(final GarenbrigCarver card) {

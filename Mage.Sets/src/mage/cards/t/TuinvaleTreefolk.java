@@ -26,8 +26,8 @@ public final class TuinvaleTreefolk extends AdventureCard {
 
         // Oaken Boon
         // Put two +1/+1 counters on target creature.
-        this.getAdventureSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)));
-        this.getAdventureSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellCard().getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)));
+        this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     private TuinvaleTreefolk(final TuinvaleTreefolk card) {

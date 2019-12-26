@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
@@ -21,8 +20,9 @@ import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author Styxo
  */
 public final class CunningAbduction extends CardImpl {
@@ -122,15 +122,11 @@ class CunningAbductionSpendAnyManaEffect extends AsThoughEffectImpl implements A
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        objectId = game.getCard(objectId).getMainCard().getId(); // for split cards
+        objectId = CardUtil.getMainCardId(game, objectId); // for split cards
         if (objectId.equals(((FixedTarget) getTargetPointer()).getTarget())
                 && game.getState().getZoneChangeCounter(objectId) <= ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1) {
-            if (affectedControllerId.equals(source.getControllerId())) {
-                // if the card moved from exile to spell the zone change counter is increased by 1
-                if (game.getState().getZoneChangeCounter(objectId) == ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1) {
-                    return true;
-                }
-            }
+            // if the card moved from exile to spell the zone change counter is increased by 1 (effect must applies before and on stack, use isCheckPlayableMode?)
+            return affectedControllerId.equals(source.getControllerId());
         } else if (((FixedTarget) getTargetPointer()).getTarget().equals(objectId)) {
             // object has moved zone so effect can be discarted
             this.discard();

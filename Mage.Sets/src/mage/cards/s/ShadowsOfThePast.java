@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -15,7 +14,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -24,14 +23,14 @@ import mage.filter.common.FilterCreatureCard;
 public final class ShadowsOfThePast extends CardImpl {
 
     public ShadowsOfThePast(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
 
         // Whenever a creature dies, scry 1.
         this.addAbility(new DiesCreatureTriggeredAbility(new ScryEffect(1), false));
 
         // {4}{B}: Each opponent loses 2 life and you gain 2 life. Activate this ability only if there are four or more creature cards in your graveyard.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
-                new LoseLifeOpponentsEffect(2), new ManaCostsImpl<>("{4}{B}"), new CardsInControllerGraveCondition(4, new FilterCreatureCard()));
+                new LoseLifeOpponentsEffect(2), new ManaCostsImpl<>("{4}{B}"), new CardsInControllerGraveCondition(4, StaticFilters.FILTER_CARD_CREATURE));
         Effect effect = new GainLifeEffect(2);
         effect.setText("and you gain 2 life");
         ability.addEffect(effect);

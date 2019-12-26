@@ -43,7 +43,7 @@ class RedcapMeleeEffect extends OneShotEffect {
     private static final Effect effect = new SacrificeControllerEffect(StaticFilters.FILTER_LAND, 1, "");
 
     RedcapMeleeEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.Damage);
         staticText = "{this} deals 4 damage to target creature or planeswalker. " +
                 "If a nonred permanent is dealt damage this way, you sacrifice a land.";
     }

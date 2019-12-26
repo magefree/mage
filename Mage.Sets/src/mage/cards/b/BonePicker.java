@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -7,12 +6,15 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MorbidCondition;
-import mage.abilities.costs.AdjustingSourceCosts;
+import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.CostModificationType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -33,7 +35,7 @@ public final class BonePicker extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Bone Picker costs {3} less to cast if a creature died this turn.
-        this.addAbility(new BonePickerCostAdjustmentAbility(), new MorbidWatcher());
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new BonePickerAdjustingCostsEffect()), new MorbidWatcher());
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
@@ -53,32 +55,37 @@ public final class BonePicker extends CardImpl {
     }
 }
 
-class BonePickerCostAdjustmentAbility extends SimpleStaticAbility implements AdjustingSourceCosts {
+class BonePickerAdjustingCostsEffect extends CostModificationEffectImpl {
 
-    public BonePickerCostAdjustmentAbility() {
-        super(Zone.OUTSIDE, null);
+    BonePickerAdjustingCostsEffect() {
+        super(Duration.EndOfGame, Outcome.Benefit, CostModificationType.REDUCE_COST);
+        staticText = "{this} costs {3} less to cast if a creature died this turn";
     }
 
-    public BonePickerCostAdjustmentAbility(final BonePickerCostAdjustmentAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SimpleStaticAbility copy() {
-        return new BonePickerCostAdjustmentAbility(this);
+    BonePickerAdjustingCostsEffect(BonePickerAdjustingCostsEffect effect) {
+        super(effect);
     }
 
     @Override
-    public String getRule() {
-        return "If a creature died this turn, {this} costs {3} less to cast.";
+    public boolean apply(Game game, Ability source, Ability abilityToModify) {
+        CardUtil.reduceCost(abilityToModify, 3);
+        return true;
     }
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
-        if (ability instanceof SpellAbility) { // Prevent adjustment of activated ability
-            if (MorbidCondition.instance.apply(game, ability)) {
-                CardUtil.adjustCost((SpellAbility) ability, 3);
+    public boolean applies(Ability abilityToModify, Ability source, Game game) {
+        if (abilityToModify.getSourceId().equals(source.getSourceId())
+                && (abilityToModify instanceof SpellAbility)) {
+            if (MorbidCondition.instance.apply(game, abilityToModify)) {
+                return true;
             }
         }
+
+        return false;
+    }
+
+    @Override
+    public BonePickerAdjustingCostsEffect copy() {
+        return new BonePickerAdjustingCostsEffect(this);
     }
 }

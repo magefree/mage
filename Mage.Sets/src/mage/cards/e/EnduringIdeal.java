@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import java.util.UUID;
@@ -11,8 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -25,7 +23,7 @@ import mage.target.common.TargetCardInLibrary;
 public final class EnduringIdeal extends CardImpl {
 
     public EnduringIdeal(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{W}{W}");
 
         // Search your library for an enchantment card and put it onto the battlefield. Then shuffle your library.
         this.getSpellAbility().addEffect(new EnduringIdealEffect());
@@ -47,12 +45,6 @@ public final class EnduringIdeal extends CardImpl {
 
 class EnduringIdealEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterCard();
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
-    }
-
     public EnduringIdealEffect() {
         super(Outcome.Benefit);
         staticText = "Search your library for an enchantment card and put it onto the battlefield. Then shuffle your library";
@@ -67,7 +59,7 @@ class EnduringIdealEffect extends OneShotEffect {
         boolean applied = false;
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            TargetCardInLibrary target = new TargetCardInLibrary(filter);
+            TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_ENTCHANTMENT);
             controller.searchLibrary(target, source, game);
             Card targetCard = game.getCard(target.getFirstTarget());
             if (targetCard == null) {

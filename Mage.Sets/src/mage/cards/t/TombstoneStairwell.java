@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.HashSet;
@@ -18,15 +17,14 @@ import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.TombspawnZombieToken;
-import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TombspawnZombieToken;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
@@ -91,11 +89,11 @@ class TombstoneStairwellCreateTokenEffect extends OneShotEffect {
             } else {
                 tokensCreated = new HashSet<>();
             }
-            
+
             for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                 Player player = game.getPlayer(playerId);
-                int creatureCardsInGraveyard = player.getGraveyard().count(new FilterCreatureCard(), source.getControllerId(), source.getSourceId(), game);
-                token.putOntoBattlefield(creatureCardsInGraveyard, game, source.getSourceId(), playerId);   
+                int creatureCardsInGraveyard = player.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, source.getControllerId(), source.getSourceId(), game);
+                token.putOntoBattlefield(creatureCardsInGraveyard, game, source.getSourceId(), playerId);
                 for (UUID tokenId : token.getLastAddedTokenIds()) {
                     tokensCreated.add(tokenId);
                 }
@@ -119,7 +117,7 @@ class TombstoneStairwellTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.END_TURN_STEP_PRE 
+        return event.getType() == EventType.END_TURN_STEP_PRE
                 || event.getType() == EventType.ZONE_CHANGE;
     }
 
@@ -138,8 +136,7 @@ class TombstoneStairwellTriggeredAbility extends TriggeredAbilityImpl {
                 }
                 return true;
             }
-        }
-        else if (event.getType() == EventType.ZONE_CHANGE) {
+        } else if (event.getType() == EventType.ZONE_CHANGE) {
             if (event.getTargetId().equals(this.getSourceId())) {
                 ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
                 if (zEvent.getFromZone() == Zone.BATTLEFIELD) {

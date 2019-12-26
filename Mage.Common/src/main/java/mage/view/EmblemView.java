@@ -17,6 +17,7 @@ public class EmblemView implements CommandObjectView, Serializable {
     protected String expansionSetCode;
     protected List<String> rules;
     protected boolean isPlayable = false;
+    protected int playableAmount = 0;
 
     public EmblemView(Emblem emblem, Card sourceCard) {
         this.id = emblem.getId();
@@ -68,6 +69,16 @@ public class EmblemView implements CommandObjectView, Serializable {
     }
 
     @Override
+    public void setPlayableAmount(int playableAmount) {
+        this.playableAmount = playableAmount;
+    }
+
+    @Override
+    public int getPlayableAmount() {
+        return playableAmount;
+    }
+
+    @Override
     public boolean isChoosable() {
         // unsupported
         return false;
@@ -85,7 +96,7 @@ public class EmblemView implements CommandObjectView, Serializable {
     }
 
     @Override
-    public void setSelected(boolean selected) {
+    public void setSelected(boolean isSelected) {
         // unsupported
     }
 }

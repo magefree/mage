@@ -14,8 +14,8 @@ import mage.constants.SubType;
 import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 
 /**
  * @author TheElk801
@@ -35,11 +35,14 @@ public final class Frogify extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature loses all abilities and is a blue Frog creature with base power and toughness 1/1.
-        this.addAbility(new SimpleStaticAbility(new BecomesCreatureAttachedEffect(
+        Effect effect = new BecomesCreatureAttachedEffect(
                 new CreatureToken(1, 1, "", SubType.FROG).withColor("U"),
                 "Enchanted creature loses all abilities and is a blue Frog creature with base power and toughness 1/1",
                 Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.ALL
-        )));
+        );
+        effect.setOutcome(Outcome.Detriment);
+        this.addAbility(new SimpleStaticAbility(effect));
+
     }
 
     private Frogify(final Frogify card) {

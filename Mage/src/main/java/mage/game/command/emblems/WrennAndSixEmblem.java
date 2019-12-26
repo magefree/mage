@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.RetraceAbility;
+import mage.cards.AdventureCard;
 import mage.cards.Card;
 import mage.constants.*;
 import mage.game.Game;
@@ -42,7 +43,14 @@ class WrennAndSixEmblemEffect extends ContinuousEffectImpl {
         }
         for (UUID cardId : controller.getGraveyard()) {
             Card card = game.getCard(cardId);
-            if (card == null || !card.isInstantOrSorcery()) {
+            if (card == null) {
+                continue;
+            }
+            if (card instanceof AdventureCard) {
+                // Adventure cards are castable per https://twitter.com/elishffrn/status/1179047911729946624
+                card = ((AdventureCard) card).getSpellCard();
+            }
+            if (!card.isInstantOrSorcery()) {
                 continue;
             }
             Ability ability = new RetraceAbility(card);

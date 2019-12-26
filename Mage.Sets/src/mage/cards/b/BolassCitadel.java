@@ -1,6 +1,7 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Costs;
@@ -21,9 +22,9 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
-import mage.abilities.costs.Cost;
 
 /**
  * @author jeffwadsworth
@@ -90,27 +91,31 @@ class BolassCitadelPlayTheTopCardEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        Card cardOnTop = game.getCard(objectId);
-        if (cardOnTop == null) {
-            return false;
-        }
-        if (affectedControllerId.equals(source.getControllerId())
-                && cardOnTop.isOwnedBy(source.getControllerId())) {
-            Player controller = game.getPlayer(cardOnTop.getOwnerId());
+        return applies(objectId, null, source, game, affectedControllerId);
+    }
+
+    @Override
+    public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
+        Card cardToCheck = game.getCard(objectId);
+        objectId = CardUtil.getMainCardId(game, objectId); // for split cards
+
+        if (cardToCheck != null
+                && playerId.equals(source.getControllerId())
+                && cardToCheck.isOwnedBy(source.getControllerId())) {
+            Player controller = game.getPlayer(cardToCheck.getOwnerId());
             if (controller != null
-                    && cardOnTop.equals(controller.getLibrary().getFromTop(game))) {
-                // add the life cost first
-                PayLifeCost cost = new PayLifeCost(cardOnTop.getManaCost().convertedManaCost());
-                Costs costs = new CostsImpl();
-                costs.add(cost);
-                // check for additional costs that must be paid
-                if (cardOnTop.getSpellAbility() != null) {
-                    for (Cost additionalCost : cardOnTop.getSpellAbility().getCosts()) {
-                        costs.add(additionalCost);
-                    }
+                    && controller.getLibrary().getFromTop(game) != null
+                    && objectId.equals(controller.getLibrary().getFromTop(game).getId())) {
+                if (affectedAbility instanceof ActivatedAbility) {
+                    ActivatedAbility activatedAbility = (ActivatedAbility) affectedAbility;
+                    // add the life cost first
+                    PayLifeCost cost = new PayLifeCost(activatedAbility.getManaCosts().convertedManaCost());
+                    Costs costs = new CostsImpl();
+                    costs.add(cost);
+                    costs.addAll(activatedAbility.getCosts());
+                    controller.setCastSourceIdWithAlternateMana(activatedAbility.getSourceId(), null, costs);
+                    return true;
                 }
-                controller.setCastSourceIdWithAlternateMana(cardOnTop.getId(), null, costs);
-                return true;
             }
         }
         return false;

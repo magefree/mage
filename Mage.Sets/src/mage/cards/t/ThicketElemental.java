@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -14,7 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -32,7 +31,7 @@ public final class ThicketElemental extends CardImpl {
         this.addAbility(new KickerAbility("{1}{G}"));
 
         // When Thicket Elemental enters the battlefield, if it was kicked, you may reveal cards from the top of your library until you reveal a creature card. If you do, put that card onto the battlefield and shuffle all other cards revealed this way into your library.
-        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new RevealCardsFromLibraryUntilEffect(new FilterCreatureCard(), Zone.BATTLEFIELD, Zone.LIBRARY, true));
+        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new RevealCardsFromLibraryUntilEffect(StaticFilters.FILTER_CARD_CREATURE, Zone.BATTLEFIELD, Zone.LIBRARY, true));
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.instance,
                 "When {this} enters the battlefield, if it was kicked, you may reveal cards from the top of your library until you reveal a creature card. If you do, put that card onto the battlefield and shuffle all other cards revealed this way into your library."));
     }

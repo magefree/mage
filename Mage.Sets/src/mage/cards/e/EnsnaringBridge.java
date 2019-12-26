@@ -53,7 +53,7 @@ class EnsnaringBridgeRestrictionEffect extends RestrictionEffect {
         if (controller == null) {
             return false;
         }
-        return controller.getInRange().contains(permanent.getControllerId())
+        return game.getState().getPlayersInRange(controller.getId(), game).contains(permanent.getControllerId())
                 && permanent.getPower().getValue() > controller.getHand().size();
     }
 

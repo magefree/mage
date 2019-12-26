@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import mage.abilities.Ability;
@@ -21,13 +20,12 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class Aetherspouts extends CardImpl {
 
     public Aetherspouts(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
 
 
         // For each attacking creature, its owner puts it on the top or bottom of their library.
@@ -73,14 +71,14 @@ class AetherspoutsEffect extends OneShotEffect {
         game.getPlayerList();
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            PlayerList playerList = game.getPlayerList();
+            PlayerList playerList = game.getPlayerList().copy();
             playerList.setCurrent(game.getActivePlayerId());
             Player player = game.getPlayer(game.getActivePlayerId());
             Player activePlayer = player;
             do {
                 List<Permanent> permanentsToTop = new ArrayList<>();
                 List<Permanent> permanentsToBottom = new ArrayList<>();
-                for (Permanent permanent:game.getState().getBattlefield().getActivePermanents(new FilterAttackingCreature(), player.getId(), source.getSourceId(), game)) {
+                for (Permanent permanent : game.getState().getBattlefield().getActivePermanents(new FilterAttackingCreature(), player.getId(), source.getSourceId(), game)) {
                     if (permanent.isOwnedBy(player.getId())) {
                         if (player.chooseUse(outcome, "Put " + permanent.getLogName() + " to the top? (else it goes to bottom)", source, game)) {
                             permanentsToTop.add(permanent);
@@ -94,7 +92,7 @@ class AetherspoutsEffect extends OneShotEffect {
                 // cards to top
                 Cards cards = new CardsImpl();
                 List<Permanent> toLibrary = new ArrayList<>();
-                for (Permanent permanent: permanentsToTop) {
+                for (Permanent permanent : permanentsToTop) {
                     if (permanent instanceof PermanentToken) {
                         toLibrary.add(permanent);
                     } else {
@@ -128,13 +126,13 @@ class AetherspoutsEffect extends OneShotEffect {
                     }
                 }
                 // move all permanents to lib at the same time
-                for(Permanent permanent: toLibrary) {
+                for (Permanent permanent : toLibrary) {
                     player.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD, true, false);
                 }
                 // cards to bottom
                 cards.clear();
                 toLibrary.clear();
-                for (Permanent permanent: permanentsToBottom) {
+                for (Permanent permanent : permanentsToBottom) {
                     if (permanent instanceof PermanentToken) {
                         toLibrary.add(permanent);
                     } else {
@@ -161,15 +159,15 @@ class AetherspoutsEffect extends OneShotEffect {
                 if (cards.size() == 1) {
                     Card card = cards.get(cards.iterator().next(), game);
                     Permanent permanent = game.getPermanent(card.getId());
-                    if (permanent != null) {                    
+                    if (permanent != null) {
                         toLibrary.add(permanent);
                     }
                 }
                 // move all permanents to lib at the same time
-                for(Permanent permanent: toLibrary) {
+                for (Permanent permanent : toLibrary) {
                     player.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD, false, false);
                 }
-                player = playerList.getNext(game);            
+                player = playerList.getNext(game, false);
             } while (player != null && !player.getId().equals(game.getActivePlayerId()) && activePlayer.canRespond());
             return true;
         }

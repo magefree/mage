@@ -11,7 +11,7 @@ public class LorwynBlock extends Constructed {
 
     public LorwynBlock() {
         super("Constructed - Lorwyn Block");
-        setCodes.add("LRW");
-        setCodes.add("MOR");
+        setCodes.add(mage.sets.Lorwyn.getInstance().getCode());
+        setCodes.add(mage.sets.Morningtide.getInstance().getCode());
     }
 }

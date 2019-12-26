@@ -1,10 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
@@ -29,8 +24,12 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class TidalFlats extends CardImpl {
@@ -76,7 +75,6 @@ class TidalFlatsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.getPlayerList();
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
             return false;

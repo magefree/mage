@@ -25,8 +25,8 @@ public final class MerfolkSecretkeeper extends AdventureCard {
 
         // Venture Deeper
         // Target player puts the top four cards of their library into their graveyard.
-        this.getAdventureSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(4));
-        this.getAdventureSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellCard().getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(4));
+        this.getSpellCard().getSpellAbility().addTarget(new TargetPlayer());
     }
 
     private MerfolkSecretkeeper(final MerfolkSecretkeeper card) {

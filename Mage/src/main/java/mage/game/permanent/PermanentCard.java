@@ -1,15 +1,20 @@
 
 package mage.game.permanent;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.AdventureCard;
 import mage.cards.Card;
 import mage.cards.LevelerCard;
+import mage.constants.SpellAbilityType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 
@@ -86,6 +91,18 @@ public class PermanentCard extends PermanentImpl {
             }
         } else {
             this.abilities = card.getAbilities().copy();
+        }
+        if (card instanceof AdventureCard) {
+            // Adventure card spell abilities should not appear on permanents.
+            List<Ability> toRemove = new ArrayList<Ability>();
+            for (Ability ability : this.abilities) {
+                if (ability instanceof SpellAbility) {
+                    if (((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.ADVENTURE_SPELL) {
+                        toRemove.add(ability);
+                    }
+                }
+            }
+            toRemove.forEach(ability -> this.abilities.remove(ability));
         }
         this.abilities.setControllerId(this.controllerId);
         this.abilities.setSourceId(objectId);

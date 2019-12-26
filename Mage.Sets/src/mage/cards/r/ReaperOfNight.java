@@ -41,8 +41,8 @@ public final class ReaperOfNight extends AdventureCard {
 
         // Harvest Fear
         // Target opponent discards two cards.
-        this.getAdventureSpellAbility().addEffect(new DiscardTargetEffect(2));
-        this.getAdventureSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellCard().getSpellAbility().addEffect(new DiscardTargetEffect(2));
+        this.getSpellCard().getSpellAbility().addTarget(new TargetOpponent());
     }
 
     private ReaperOfNight(final ReaperOfNight card) {

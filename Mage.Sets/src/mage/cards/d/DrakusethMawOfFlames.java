@@ -1,5 +1,6 @@
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -11,12 +12,13 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.filter.common.FilterCreaturePlayerOrPlaneswalker;
+import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.Target;
 import mage.target.common.TargetAnyTarget;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -36,8 +38,16 @@ public final class DrakusethMawOfFlames extends CardImpl {
 
         // Whenever Drakuseth, Maw of Flames attacks, it deals 4 damage to any target and 3 damage to each of up to two other targets.
         Ability ability = new AttacksTriggeredAbility(new DrakusethMawOfFlamesEffect(), false);
-        ability.addTarget(new TargetAnyTarget().withChooseHint("to deal 4 damage"));
-        ability.addTarget(new TargetAnyTarget(0, 2).withChooseHint("to deal 3 damage"));
+        Target target = new TargetAnyTarget().withChooseHint("to deal 4 damage");
+        target.setTargetTag(1);
+        ability.addTarget(target);
+        FilterCreaturePlayerOrPlaneswalker filter = new FilterCreaturePlayerOrPlaneswalker("any target");
+        filter.getCreatureFilter().add(new AnotherTargetPredicate(2, true));
+        filter.getPlayerFilter().add(new AnotherTargetPredicate(2, true));
+        filter.getPlaneswalkerFilter().add(new AnotherTargetPredicate(2, true));
+        target = new TargetAnyTarget(0, 2, filter).withChooseHint("to deal 3 damage");
+        target.setTargetTag(2);
+        ability.addTarget(target);
         this.addAbility(ability);
     }
 
@@ -54,8 +64,9 @@ public final class DrakusethMawOfFlames extends CardImpl {
 class DrakusethMawOfFlamesEffect extends OneShotEffect {
 
     DrakusethMawOfFlamesEffect() {
-        super(Outcome.Benefit);
-        staticText = "it deals 4 damage to any target and 3 damage to each of up to two other targets.";
+        super(Outcome.Damage);
+        staticText = "it deals 4 damage to any target and 3 damage to each of "
+                + "up to two other targets.";
     }
 
     private DrakusethMawOfFlamesEffect(final DrakusethMawOfFlamesEffect effect) {
@@ -81,13 +92,11 @@ class DrakusethMawOfFlamesEffect extends OneShotEffect {
     private static void damage(int damage, UUID targetId, Game game, Ability source) {
         Permanent permanent = game.getPermanent(targetId);
         if (permanent != null) {
-            permanent.damage(damage, source.getSourceId(), game);
-            return;
+            permanent.damage(damage, source.getSourceId(), game, false, true);
         }
         Player player = game.getPlayer(targetId);
         if (player != null) {
-            player.damage(damage, source.getSourceId(), game);
-            return;
+            player.damage(damage, source.getSourceId(), game, false, true);
         }
     }
 }

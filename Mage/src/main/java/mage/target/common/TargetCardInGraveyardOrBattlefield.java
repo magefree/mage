@@ -1,9 +1,7 @@
-
 package mage.target.common;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.cards.Card;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
@@ -19,58 +17,76 @@ import java.util.UUID;
  */
 public class TargetCardInGraveyardOrBattlefield extends TargetCard {
 
-    public TargetCardInGraveyardOrBattlefield() {
-        this(1, 1, new FilterCard("target card in a graveyard or permanent on the battlefield"));
-    }
+    protected final FilterPermanent filterBattlefield;
 
-    public TargetCardInGraveyardOrBattlefield(FilterCard filter) {
-        this(1, 1, filter);
-    }
-
-    public TargetCardInGraveyardOrBattlefield(int numTargets, FilterCard filter) {
-        this(numTargets, numTargets, filter);
-    }
-
-    public TargetCardInGraveyardOrBattlefield(int minNumTargets, int maxNumTargets, FilterCard filter) {
-        super(minNumTargets, maxNumTargets, Zone.GRAVEYARD, filter); // Zone for card
-        this.targetName = filter.getMessage();
+    public TargetCardInGraveyardOrBattlefield(int minNumTargets, int maxNumTargets, FilterCard filterGraveyard, FilterPermanent filterBattlefield) {
+        super(minNumTargets, maxNumTargets, Zone.GRAVEYARD, filterGraveyard); // zone for card in graveyard, don't change
+        this.filterBattlefield = filterBattlefield;
+        this.targetName = filter.getMessage()
+                + " in a graveyard "
+                + (maxNumTargets > 1 ? " and/or " : " or ")
+                + this.filterBattlefield.getMessage()
+                + " on the battlefield";
     }
 
     public TargetCardInGraveyardOrBattlefield(final TargetCardInGraveyardOrBattlefield target) {
         super(target);
+        this.filterBattlefield = target.filterBattlefield;
     }
 
     @Override
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
         if (!super.canChoose(sourceId, sourceControllerId, game)) {
             MageObject targetSource = game.getObject(sourceId);
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterPermanent(), sourceControllerId, game)) {
-                if ((notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) && filter.match(permanent, sourceControllerId, game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filterBattlefield, sourceControllerId, game)) {
+                if ((notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, game))
+                        && filterBattlefield.match(permanent, sourceId, sourceControllerId, game)) {
                     return true;
                 }
             }
             return false;
-
         }
         return true;
     }
 
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(id);
-        if (permanent != null) {
-            return filter.match(permanent, game);
+        if (!super.canTarget(id, source, game)) { // in graveyard first
+            Permanent permanent = game.getPermanent(id);
+            if (permanent != null) {
+                return filterBattlefield.match(permanent, game);
+            }
         }
-        Card card = game.getCard(id);
-        return card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD && filter.match(card, game);
+        return true;
+    }
+
+    @Override
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
+        if (!super.canTarget(playerId, id, source, game)) { // in graveyard first
+            Permanent permanent = game.getPermanent(id);
+            if (permanent != null) {
+                return filterBattlefield.match(permanent, source != null ? source.getSourceId() : null, playerId, game);
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean canTarget(UUID id, Game game) {
+        if (!super.canTarget(id, game)) { // in graveyard first
+            Permanent permanent = game.getPermanent(id);
+            if (permanent != null) {
+                return filterBattlefield.match(permanent, game);
+            }
+        }
+        return true;
     }
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-        //return super.possibleTargets(sourceControllerId, game); //To change body of generated methods, choose Tools | Templates.
-        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, game);
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterPermanent(), sourceControllerId, game)) {
-            if (filter.match(permanent, sourceControllerId, game)) {
+        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, game); // in graveyard first
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filterBattlefield, sourceControllerId, game)) {
+            if (filterBattlefield.match(permanent, null, sourceControllerId, game)) {
                 possibleTargets.add(permanent.getId());
             }
         }
@@ -79,15 +95,14 @@ public class TargetCardInGraveyardOrBattlefield extends TargetCard {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
+        Set<UUID> possibleTargets = super.possibleTargets(sourceId, sourceControllerId, game); // in graveyard first
         MageObject targetSource = game.getObject(sourceId);
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterPermanent(), sourceControllerId, game)) {
-            if ((notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) && filter.match(permanent, sourceId, sourceControllerId, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filterBattlefield, sourceControllerId, sourceId, game)) {
+            if ((notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) && filterBattlefield.match(permanent, sourceId, sourceControllerId, game)) {
                 possibleTargets.add(permanent.getId());
             }
         }
         return possibleTargets;
-
     }
 
     @Override

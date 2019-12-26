@@ -12,9 +12,6 @@ public final class Portal extends ExpansionSet {
 
     private static final Portal instance = new Portal();
 
-    /**
-     * @return
-     */
     public static Portal getInstance() {
         return instance;
     }

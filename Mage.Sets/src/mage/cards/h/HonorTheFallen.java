@@ -1,5 +1,3 @@
-
-
 package mage.cards.h;
 
 import java.util.UUID;
@@ -10,6 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -18,11 +17,10 @@ import mage.players.Player;
  *
  * @author L_J
  */
-
 public final class HonorTheFallen extends CardImpl {
 
     public HonorTheFallen(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
 
         // Exile all creature cards from all graveyards. You gain 1 life for each card exiled this way.
         this.getSpellAbility().addEffect(new HonorTheFallenEffect());
@@ -60,8 +58,8 @@ class HonorTheFallenEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    for (Card card: player.getGraveyard().getCards(game)) {
-                        if (filter.match(card, game)) {
+                    for (Card card : player.getGraveyard().getCards(game)) {
+                        if (StaticFilters.FILTER_CARD_CREATURE.match(card, source.getSourceId(), controller.getId(), game)) {
                             if (card.moveToExile(null, "", source.getSourceId(), game)) {
                                 exiledCards++;
                             }

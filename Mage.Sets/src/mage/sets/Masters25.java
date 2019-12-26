@@ -1,14 +1,13 @@
 
 package mage.sets;
 
-/**
- *
- * @author JayDi85
- */
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
+/**
+ * @author JayDi85
+ */
 public final class Masters25 extends ExpansionSet {
 
     private static final Masters25 instance = new Masters25();

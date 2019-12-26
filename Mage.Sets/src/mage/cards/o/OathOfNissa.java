@@ -1,7 +1,5 @@
-
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -18,9 +16,11 @@ import mage.game.Game;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class OathOfNissa extends CardImpl {
@@ -128,13 +128,10 @@ class OathOfNissaSpendAnyManaEffect extends AsThoughEffectImpl implements AsThou
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        objectId = CardUtil.getMainCardId(game, objectId); // for split cards
         if (source.isControlledBy(affectedControllerId)) {
             MageObject mageObject = game.getObject(objectId);
-            if (mageObject != null) {
-                if (mageObject.isPlaneswalker()) {
-                    return true;
-                }
-            }
+            return mageObject != null && mageObject.isPlaneswalker();
         }
         return false;
     }

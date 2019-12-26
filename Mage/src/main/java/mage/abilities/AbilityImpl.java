@@ -1,5 +1,9 @@
 package mage.abilities;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.costs.*;
@@ -17,7 +21,6 @@ import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.Card;
 import mage.cards.SplitCard;
 import mage.constants.*;
-import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.command.Plane;
@@ -34,11 +37,6 @@ import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -66,7 +64,6 @@ public abstract class AbilityImpl implements Ability {
     protected boolean ruleAtTheTop = false;
     protected boolean ruleVisible = true;
     protected boolean ruleAdditionalCostsVisible = true;
-    protected boolean costModificationActive = true;
     protected boolean activated = false;
     protected boolean worksFaceDown = false;
     protected int sourceObjectZoneChangeCounter;
@@ -116,7 +113,6 @@ public abstract class AbilityImpl implements Ability {
         this.ruleAtTheTop = ability.ruleAtTheTop;
         this.ruleVisible = ability.ruleVisible;
         this.ruleAdditionalCostsVisible = ability.ruleAdditionalCostsVisible;
-        this.costModificationActive = ability.costModificationActive;
         this.worksFaceDown = ability.worksFaceDown;
         this.abilityWord = ability.abilityWord;
         this.sourceObjectZoneChangeCounter = ability.sourceObjectZoneChangeCounter;
@@ -356,30 +352,9 @@ public abstract class AbilityImpl implements Ability {
         }
 
         //20101001 - 601.2e
-        if (costModificationActive) {
-
-            // TODO: replace all AdjustingSourceCosts abilities to continuus effect, see Affinity example
-            //20100716 - 601.2e
-            if (sourceObject != null) {
-                sourceObject.adjustCosts(this, game);
-                if (sourceObject instanceof Card) {
-                    for (Ability ability : ((Card) sourceObject).getAbilities(game)) {
-                        if (ability instanceof AdjustingSourceCosts) {
-                            ((AdjustingSourceCosts) ability).adjustCosts(this, game);
-                        }
-                    }
-                } else {
-                    for (Ability ability : sourceObject.getAbilities()) {
-                        if (ability instanceof AdjustingSourceCosts) {
-                            ((AdjustingSourceCosts) ability).adjustCosts(this, game);
-                        }
-                    }
-                }
-            }
-
+        if (sourceObject != null) {
+            sourceObject.adjustCosts(this, game); // still needed
             game.getContinuousEffects().costModification(this, game);
-        } else {
-            costModificationActive = true;
         }
 
         UUID activatorId = controllerId;
@@ -542,15 +517,14 @@ public abstract class AbilityImpl implements Ability {
 
     /**
      * 601.2b If a cost that will be paid as the spell is being cast includes
-     * Phyrexian mana symbols, the player announces whether they intend to
-     * pay 2 life or the corresponding colored mana cost for each of those
-     * symbols.
+     * Phyrexian mana symbols, the player announces whether they intend to pay 2
+     * life or the corresponding colored mana cost for each of those symbols.
      */
     private void handlePhyrexianManaCosts(Game game, UUID sourceId, Player controller) {
         Iterator<ManaCost> costIterator = manaCostsToPay.iterator();
         while (costIterator.hasNext()) {
             ManaCost cost = costIterator.next();
-            
+
             if (cost instanceof PhyrexianManaCost) {
                 PhyrexianManaCost phyrexianManaCost = (PhyrexianManaCost) cost;
                 PayLifeCost payLifeCost = new PayLifeCost(2);
@@ -1189,11 +1163,6 @@ public abstract class AbilityImpl implements Ability {
             }
         }
         return sb.toString();
-    }
-
-    @Override
-    public void setCostModificationActive(boolean active) {
-        this.costModificationActive = active;
     }
 
     @Override

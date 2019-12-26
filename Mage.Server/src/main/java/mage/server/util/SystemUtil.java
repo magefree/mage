@@ -483,12 +483,18 @@ public final class SystemUtil {
                     gameZone = Zone.LIBRARY;
                 } else if ("token".equalsIgnoreCase(command.zone)) {
                     gameZone = Zone.BATTLEFIELD;
+                } else if ("exiled".equalsIgnoreCase(command.zone)) {
+                    gameZone = Zone.EXILED;
+                } else if ("outside".equalsIgnoreCase(command.zone)) {
+                    gameZone = Zone.OUTSIDE;
                 } else if ("emblem".equalsIgnoreCase(command.zone)) {
                     gameZone = Zone.COMMAND;
                 } else if ("plane".equalsIgnoreCase(command.zone)) {
                     gameZone = Zone.COMMAND;
                 } else if ("commander".equalsIgnoreCase(command.zone)) {
                     gameZone = Zone.COMMAND;
+                } else if ("sideboard".equalsIgnoreCase(command.zone)) {
+                    gameZone = Zone.OUTSIDE;
                 } else {
                     logger.warn("Unknown zone [" + command.zone + "]: " + line);
                     continue;
@@ -527,6 +533,11 @@ public final class SystemUtil {
                     } else {
                         logger.fatal("Commander card can be used in commander game only: " + command.cardName);
                     }
+                } else if ("sideboard".equalsIgnoreCase(command.zone) && cardsToLoad.size() > 0) {
+                    // put to sideboard
+                    for (Card card : cardsToLoad) {
+                        player.getSideboard().add(card);
+                    }
                 } else {
                     // as other card
                     for (Card card : cardsToLoad) {
@@ -560,8 +571,17 @@ public final class SystemUtil {
                 break;
             case STACK:
                 card.cast(game, Zone.EXILED, card.getSpellAbility(), player.getId());
+                break;
+            case EXILED:
+                // nothing to do
+                break;
+            case OUTSIDE:
+                card.setZone(Zone.OUTSIDE, game);
+                game.getExile().getPermanentExile().remove(card);
+                break;
             default:
                 card.moveToZone(zone, null, game, false);
+                break;
         }
         logger.info("Added card to player's " + zone.toString() + ": " + card.getName() + ", player = " + player.getName());
     }

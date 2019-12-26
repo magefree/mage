@@ -16,7 +16,7 @@ public final class DuelDecksDivineVsDemonic extends ExpansionSet {
     }
 
     private DuelDecksDivineVsDemonic() {
-        super("Duel Decks: Divine vs. Demonic", "DDC", ExpansionSet.buildDate(2009, 04, 10), SetType.SUPPLEMENTAL);
+        super("Duel Decks: Divine vs. Demonic", "DDC", ExpansionSet.buildDate(2009, 4, 10), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = true;
 

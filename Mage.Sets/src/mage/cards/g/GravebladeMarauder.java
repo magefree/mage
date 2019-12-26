@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -10,9 +9,9 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreatureCard;
+import mage.constants.SubType;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -23,7 +22,7 @@ import mage.players.Player;
 public final class GravebladeMarauder extends CardImpl {
 
     public GravebladeMarauder(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(1);
@@ -67,7 +66,7 @@ class GravebladeMarauderEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (targetPlayer != null && controller != null) {
-            targetPlayer.loseLife(controller.getGraveyard().count(new FilterCreatureCard(), game), game, false);
+            targetPlayer.loseLife(controller.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, game), game, false);
             return true;
         }
         return false;

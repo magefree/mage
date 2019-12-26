@@ -1,4 +1,3 @@
-
 package mage.cards.n;
 
 import java.util.UUID;
@@ -14,10 +13,10 @@ import mage.abilities.keyword.BestowAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -26,7 +25,7 @@ import mage.filter.common.FilterCreatureCard;
 public final class Nighthowler extends CardImpl {
 
     public Nighthowler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{1}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{B}{B}");
         this.subtype.add(SubType.HORROR);
 
         this.power = new MageInt(0);
@@ -35,7 +34,7 @@ public final class Nighthowler extends CardImpl {
         // Bestow {2}{B}{B}
         this.addAbility(new BestowAbility(this, "{2}{B}{B}"));
         // Nighthowler and enchanted creature each get +X/+X, where X is the number of creature cards in all graveyards.
-        DynamicValue graveCreatures = new CardsInAllGraveyardsCount(new FilterCreatureCard());
+        DynamicValue graveCreatures = new CardsInAllGraveyardsCount(StaticFilters.FILTER_CARD_CREATURE);
         Effect effect = new BoostSourceEffect(graveCreatures, graveCreatures, Duration.WhileOnBattlefield);
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         effect = new BoostEnchantedEffect(graveCreatures, graveCreatures, Duration.WhileOnBattlefield);

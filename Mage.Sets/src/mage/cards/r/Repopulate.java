@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.Set;
@@ -13,7 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -25,8 +24,7 @@ import mage.target.TargetPlayer;
 public final class Repopulate extends CardImpl {
 
     public Repopulate(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
 
         // Shuffle all creature cards from target player's graveyard into that player's library.
         this.getSpellAbility().addTarget(new TargetPlayer());
@@ -60,9 +58,8 @@ class RepopulateEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getFirstTarget());
         if (player != null) {
-            Set<Card> cards = player.getGraveyard().getCards(new FilterCreatureCard(), game);
-            for(Card card : cards)
-            {
+            Set<Card> cards = player.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game);
+            for (Card card : cards) {
                 card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
             }
             player.shuffleLibrary(source, game);

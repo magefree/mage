@@ -29,8 +29,8 @@ public final class ArdenvaleTactician extends AdventureCard {
 
         // Dizzying Swoop
         // Tap up to two target creatures.
-        this.getAdventureSpellAbility().addEffect(new TapTargetEffect());
-        this.getAdventureSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
+        this.getSpellCard().getSpellAbility().addEffect(new TapTargetEffect());
+        this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
     }
 
     private ArdenvaleTactician(final ArdenvaleTactician card) {

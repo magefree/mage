@@ -128,9 +128,7 @@ public interface Game extends MageItem, Serializable {
         return player.getInRange().stream()
                 .filter(opponentId -> !opponentId.equals(playerId))
                 .collect(Collectors.toSet());
-
     }
-
 
     default boolean isActivePlayer(UUID playerId) {
         return getActivePlayerId() != null && getActivePlayerId().equals(playerId);
@@ -202,7 +200,11 @@ public interface Game extends MageItem, Serializable {
 
     boolean isSimulation();
 
-    void setSimulation(boolean simulation);
+    void setSimulation(boolean checkPlayableState);
+
+    boolean inCheckPlayableState();
+
+    void setCheckPlayableState(boolean checkPlayableState);
 
     MageObject getLastKnownInformation(UUID objectId, Zone zone);
 

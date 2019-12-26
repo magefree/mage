@@ -1,5 +1,8 @@
 package mage.abilities;
 
+import java.io.Serializable;
+import java.util.List;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostAdjuster;
@@ -23,10 +26,6 @@ import mage.target.Targets;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.watchers.Watcher;
 
-import java.io.Serializable;
-import java.util.List;
-import java.util.UUID;
-
 /**
  * Practically everything in the game is started from an Ability. This interface
  * describes what an Ability is composed of at the highest level.
@@ -47,8 +46,10 @@ public interface Ability extends Controllable, Serializable {
      *
      * @see mage.players.PlayerImpl#playAbility(mage.abilities.ActivatedAbility,
      * mage.game.Game)
-     * @see mage.game.GameImpl#addTriggeredAbility(mage.abilities.TriggeredAbility)
-     * @see mage.game.GameImpl#addDelayedTriggeredAbility(mage.abilities.DelayedTriggeredAbility)
+     * @see
+     * mage.game.GameImpl#addTriggeredAbility(mage.abilities.TriggeredAbility)
+     * @see
+     * mage.game.GameImpl#addDelayedTriggeredAbility(mage.abilities.DelayedTriggeredAbility)
      */
     void newId();
 
@@ -57,8 +58,10 @@ public interface Ability extends Controllable, Serializable {
      *
      * @see mage.players.PlayerImpl#playAbility(mage.abilities.ActivatedAbility,
      * mage.game.Game)
-     * @see mage.game.GameImpl#addTriggeredAbility(mage.abilities.TriggeredAbility)
-     * @see mage.game.GameImpl#addDelayedTriggeredAbility(mage.abilities.DelayedTriggeredAbility)
+     * @see
+     * mage.game.GameImpl#addTriggeredAbility(mage.abilities.TriggeredAbility)
+     * @see
+     * mage.game.GameImpl#addDelayedTriggeredAbility(mage.abilities.DelayedTriggeredAbility)
      */
     void newOriginalId();
 
@@ -264,15 +267,16 @@ public interface Ability extends Controllable, Serializable {
     /**
      * Activates this ability prompting the controller to pay any mandatory
      *
-     * @param game   A reference the {@link Game} for which this ability should be
-     *               activated within.
+     * @param game A reference the {@link Game} for which this ability should be
+     * activated within.
      * @param noMana Whether or not {@link ManaCosts} have to be paid.
      * @return True if this ability was successfully activated.
      * @see mage.players.PlayerImpl#cast(mage.abilities.SpellAbility,
      * mage.game.Game, boolean)
      * @see mage.players.PlayerImpl#playAbility(mage.abilities.ActivatedAbility,
      * mage.game.Game)
-     * @see mage.players.PlayerImpl#triggerAbility(mage.abilities.TriggeredAbility,
+     * @see
+     * mage.players.PlayerImpl#triggerAbility(mage.abilities.TriggeredAbility,
      * mage.game.Game)
      */
     boolean activate(Game game, boolean noMana);
@@ -286,7 +290,8 @@ public interface Ability extends Controllable, Serializable {
      *
      * @param game The {@link Game} for which this ability resolves within.
      * @return Whether or not this ability successfully resolved.
-     * @see mage.players.PlayerImpl#playManaAbility(mage.abilities.mana.ManaAbility,
+     * @see
+     * mage.players.PlayerImpl#playManaAbility(mage.abilities.mana.ManaAbility,
      * mage.game.Game)
      * @see mage.players.PlayerImpl#specialAction(mage.abilities.SpecialAction,
      * mage.game.Game)
@@ -460,15 +465,6 @@ public interface Ability extends Controllable, Serializable {
      * @return
      */
     String getGameLogMessage(Game game);
-
-    /**
-     * Used to deactivate cost modification logic of ability activation for some
-     * special handling (e.g. FlashbackAbility gets cost modifiaction twice
-     * because of how it's handled now)
-     *
-     * @param active execute no cost modification
-     */
-    void setCostModificationActive(boolean active);
 
     boolean activateAlternateOrAdditionalCosts(MageObject sourceObject, boolean noMana, Player controller, Game game);
 

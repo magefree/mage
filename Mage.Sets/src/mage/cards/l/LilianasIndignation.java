@@ -1,4 +1,3 @@
-
 package mage.cards.l;
 
 import java.util.Set;
@@ -13,7 +12,7 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -25,7 +24,7 @@ import mage.target.TargetPlayer;
 public final class LilianasIndignation extends CardImpl {
 
     public LilianasIndignation(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}");
 
         // Put the top X cards of your library into your graveyard. Target player loses 2 life for each creature card put into your graveyard this way.
         this.getSpellAbility().addEffect(new LilianasIndignationEffect());
@@ -70,7 +69,7 @@ class LilianasIndignationEffect extends OneShotEffect {
                     Set<Card> movedCards = controller.moveCardsToGraveyardWithInfo(cardsToGraveyard.getCards(game), source, game, Zone.LIBRARY);
                     Cards cardsMoved = new CardsImpl();
                     cardsMoved.addAll(movedCards);
-                    int creatures = cardsMoved.count(new FilterCreatureCard(), game);
+                    int creatures = cardsMoved.count(StaticFilters.FILTER_CARD_CREATURE, game);
                     if (creatures > 0) {
                         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
                         if (targetPlayer != null) {

@@ -1,5 +1,9 @@
 package mage.game;
 
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
 import mage.MageException;
 import mage.MageObject;
 import mage.abilities.*;
@@ -29,6 +33,7 @@ import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -64,12 +69,6 @@ import mage.util.functions.ApplyToPermanent;
 import mage.watchers.common.*;
 import org.apache.log4j.Logger;
 
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
-import mage.filter.common.FilterControlledPermanent;
-
 public abstract class GameImpl implements Game, Serializable {
 
     private static final int ROLLBACK_TURNS_MAX = 4;
@@ -77,7 +76,9 @@ public abstract class GameImpl implements Game, Serializable {
     private static final Logger logger = Logger.getLogger(GameImpl.class);
 
     private transient Object customData;
+
     protected boolean simulation = false;
+    protected boolean checkPlayableState = false;
 
     protected final UUID id;
 
@@ -163,6 +164,7 @@ public abstract class GameImpl implements Game, Serializable {
         this.state = game.state.copy();
         this.gameCards = game.gameCards;
         this.simulation = game.simulation;
+        this.checkPlayableState = game.checkPlayableState;
         this.gameOptions = game.gameOptions;
         this.lki.putAll(game.lki);
         this.lkiExtended.putAll(game.lkiExtended);
@@ -186,6 +188,16 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public void setSimulation(boolean simulation) {
         this.simulation = simulation;
+    }
+
+    @Override
+    public void setCheckPlayableState(boolean checkPlayableState) {
+        this.checkPlayableState = checkPlayableState;
+    }
+
+    @Override
+    public boolean inCheckPlayableState() {
+        return checkPlayableState;
     }
 
     @Override
@@ -229,6 +241,12 @@ public abstract class GameImpl implements Game, Serializable {
                 rightCard.setOwnerId(ownerId);
                 gameCards.put(rightCard.getId(), rightCard);
                 state.addCard(rightCard);
+            }
+            if (card instanceof AdventureCard) {
+                Card spellCard = ((AdventureCard) card).getSpellCard();
+                spellCard.setOwnerId(ownerId);
+                gameCards.put(spellCard.getId(), spellCard);
+                state.addCard(spellCard);
             }
         }
     }
@@ -445,7 +463,17 @@ public abstract class GameImpl implements Game, Serializable {
     public Spell getSpellOrLKIStack(UUID spellId) {
         Spell spell = state.getStack().getSpell(spellId);
         if (spell == null) {
-            spell = (Spell) this.getLastKnownInformation(spellId, Zone.STACK);
+            MageObject obj = this.getLastKnownInformation(spellId, Zone.STACK);
+            if (obj instanceof Spell) {
+                spell = (Spell) obj;
+            } else {
+                if (obj != null) {
+                    // copied activated abilities is StackAbility (not spell) and must be ignored here
+                    // if not then java.lang.ClassCastException: mage.game.stack.StackAbility cannot be cast to mage.game.stack.Spell
+                    // see SyrCarahTheBoldTest as example
+                    // logger.error("getSpellOrLKIStack got non spell id - " + obj.getClass().getName() + " - " + obj.getName(), new Throwable());
+                }
+            }
         }
         return spell;
     }
@@ -738,7 +766,7 @@ public abstract class GameImpl implements Game, Serializable {
             state.getTurn().resumePlay(this, wasPaused);
             if (!isPaused() && !checkIfGameIsOver()) {
                 endOfTurn();
-                player = playerList.getNext(this);
+                player = playerList.getNext(this, true);
                 state.setTurnNum(state.getTurnNum() + 1);
             }
         }
@@ -763,7 +791,7 @@ public abstract class GameImpl implements Game, Serializable {
                 if (!playExtraTurns()) {
                     break;
                 }
-                playerByOrder = playerList.getNext(this);
+                playerByOrder = playerList.getNext(this, true);
                 state.setPlayerByOrderId(playerByOrder.getId());
             }
         }
@@ -1296,6 +1324,8 @@ public abstract class GameImpl implements Game, Serializable {
                         } else {
                             throw new MageException("Error in testclass");
                         }
+                    } finally {
+                        setCheckPlayableState(false);
                     }
                     state.getPlayerList().getNext();
                 }
@@ -1307,6 +1337,7 @@ public abstract class GameImpl implements Game, Serializable {
         } finally {
             resetLKI();
             clearAllBookmarks();
+            setCheckPlayableState(false);
         }
     }
 
@@ -1562,7 +1593,7 @@ public abstract class GameImpl implements Game, Serializable {
             }
             newBluePrint.assignNewId();
             if (copyFromPermanent.isTransformed()) {
-                TransformAbility.transform(newBluePrint, copyFromPermanent.getSecondCardFace(), this);
+                TransformAbility.transform(newBluePrint, newBluePrint.getSecondCardFace(), this);
             }
         }
         if (applier != null) {
@@ -1578,7 +1609,7 @@ public abstract class GameImpl implements Game, Serializable {
         Ability newAbility = source.copy();
         newEffect.init(newAbility, this);
 
-        // If there are already copy effects with dration = Custom to the same object, remove the existing effects because they no longer have any effect
+        // If there are already copy effects with duration = Custom to the same object, remove the existing effects because they no longer have any effect
         if (duration == Duration.Custom) {
             for (Effect effect : getState().getContinuousEffects().getLayeredEffects(this)) {
                 if (effect instanceof CopyEffect) {
@@ -1767,7 +1798,7 @@ public abstract class GameImpl implements Game, Serializable {
         Iterator<Card> copiedCards = this.getState().getCopiedCards().iterator();
         while (copiedCards.hasNext()) {
             Card card = copiedCards.next();
-            if (card instanceof SplitCardHalf) {
+            if (card instanceof SplitCardHalf || card instanceof AdventureCardSpell) {
                 continue; // only the main card is moves, not the halves
             }
             Zone zone = state.getZone(card.getId());
@@ -2428,8 +2459,8 @@ public abstract class GameImpl implements Game, Serializable {
      * exist. Then, if there are any objects still controlled by that player,
      * those objects are exiled. This is not a state-based action. It happens as
      * soon as the player leaves the game. If the player who left the game had
-     * priority at the time they left, priority passes to the next player
-     * in turn order who's still in the game. #
+     * priority at the time they left, priority passes to the next player in
+     * turn order who's still in the game. #
      *
      * @param playerId
      */
@@ -2466,7 +2497,6 @@ public abstract class GameImpl implements Game, Serializable {
                     perm.removeFromCombat(this, true);
                 }
                 toOutside.add(perm);
-//                it.remove();
             } else if (perm.isControlledBy(player.getId())) {
                 // and any effects which give that player control of any objects or players end
                 Effects:
@@ -2563,7 +2593,7 @@ public abstract class GameImpl implements Game, Serializable {
             if (!isActivePlayer(playerId)) {
                 setMonarchId(null, getActivePlayerId());
             } else {
-                Player nextPlayer = getPlayerList().getNext(this);
+                Player nextPlayer = getPlayerList().getNext(this, true);
                 if (nextPlayer != null) {
                     setMonarchId(null, nextPlayer.getId());
                 }
@@ -2622,7 +2652,7 @@ public abstract class GameImpl implements Game, Serializable {
             return result;
         }
         DamageEvent damageEvent = (DamageEvent) event;
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, damageEvent.getTargetId(), damageEvent.getSourceId(), source.getControllerId(), damageEvent.getAmount(), false);
+        GameEvent preventEvent = new PreventDamageEvent(damageEvent.getTargetId(), damageEvent.getSourceId(), source.getControllerId(), damageEvent.getAmount(), damageEvent.isCombatDamage());
         if (game.replaceEvent(preventEvent)) {
             result.setReplaced(true);
             return result;

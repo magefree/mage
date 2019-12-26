@@ -1,11 +1,12 @@
-
 package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.hint.ValueHint;
 import mage.cards.*;
 import mage.constants.*;
 import mage.filter.FilterCard;
@@ -35,6 +36,7 @@ public final class DiscipleOfPhenax extends CardImpl {
         // from their hand equal to your devotion to black. You choose one of them. That player discards that card.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DiscipleOfPhenaxEffect(), false);
         ability.addTarget(new TargetPlayer());
+        ability.addHint(new ValueHint("Devotion to black", DiscipleOfPhenaxEffect.xValue));
         this.addAbility(ability);
 
     }
@@ -50,6 +52,8 @@ public final class DiscipleOfPhenax extends CardImpl {
 }
 
 class DiscipleOfPhenaxEffect extends OneShotEffect {
+
+    static final DynamicValue xValue = new DevotionCount(ColoredManaSymbol.B);
 
     public DiscipleOfPhenaxEffect() {
         super(Outcome.Discard);
@@ -67,7 +71,7 @@ class DiscipleOfPhenaxEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int devotion = new DevotionCount(ColoredManaSymbol.B).calculate(game, source, this);
+        int devotion = xValue.calculate(game, source, this);
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
         if (devotion > 0 && targetPlayer != null) {
             Cards revealedCards = new CardsImpl();

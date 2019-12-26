@@ -1,5 +1,8 @@
 package mage.cards.e;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -14,14 +17,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
-import mage.players.Players;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author JRHerlehy
@@ -49,11 +47,9 @@ public final class Expropriate extends CardImpl {
 
 class ExpropriateDilemmaEffect extends CouncilsDilemmaVoteEffect {
 
-    private Players moneyVoters = new Players();
-
     public ExpropriateDilemmaEffect() {
         super(Outcome.Benefit);
-        this.staticText = "<i>Council's dilemma</i> — Starting with you, each player votes for time or money. For each time vote, take an extra turn after this one. For each money vote, choose a permanent owned by the voter and gain control of it.";
+        this.staticText = "<i>Council's dilemma</i> — Starting with you, each player votes for time or money. For each time vote, take an extra turn after this one. For each money vote, choose a permanent owned by the voter and gain control of it";
     }
 
     public ExpropriateDilemmaEffect(final ExpropriateDilemmaEffect effect) {
@@ -103,7 +99,7 @@ class ExpropriateDilemmaEffect extends CouncilsDilemmaVoteEffect {
     private void controlForMoneyVote(Player controller, Game game, Ability source) {
         List<Permanent> chosenCards = new ArrayList<>();
 
-        for (UUID playerId : moneyVoters.keySet()) {
+        for (UUID playerId : choiceTwoVoters.keySet()) {
             FilterPermanent filter = new FilterPermanent("permanent owned by " + game.getPlayer(playerId).getName());
             filter.add(new OwnerIdPredicate(playerId));
 
@@ -111,8 +107,7 @@ class ExpropriateDilemmaEffect extends CouncilsDilemmaVoteEffect {
             target.setNotTarget(true);
 
             if (controller != null
-                    && controller != game.getPlayer(playerId)
-                    && controller.choose(Outcome.GainControl, target, source.getSourceId(), game)) {
+                    && controller.chooseTarget(Outcome.GainControl, target, source, game)) {
                 Permanent targetPermanent = game.getPermanent(target.getFirstTarget());
 
                 if (targetPermanent != null) {
@@ -123,28 +118,9 @@ class ExpropriateDilemmaEffect extends CouncilsDilemmaVoteEffect {
         if (controller != null) {
             for (Permanent permanent : chosenCards) {
                 ContinuousEffect effect = new ExpropriateControlEffect(controller.getId());
-                effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                effect.setTargetPointer(new FixedTarget(permanent, game));
                 game.addEffect(effect, source);
-                game.informPlayers(controller.getName() + " gained control of " + permanent.getName() + " owned by " + game.getPlayer(permanent.getOwnerId()).getName());
-            }
-        }
-    }
-
-    @Override
-    protected void vote(String choiceOne, String choiceTwo, Player controller, Game game, Ability source) {
-        for (UUID playerId : game.getState().getPlayerList(controller.getId())) {
-            Player player = game.getPlayer(playerId);
-            if (player != null
-                    && player.canRespond()
-                    && player.isInGame()) {
-                if (player.chooseUse(Outcome.Vote, "Choose " + choiceOne + '?', source, game)) {
-                    voteOneCount++;
-                    game.informPlayers(player.getName() + " has voted for " + choiceOne);
-                } else {
-                    moneyVoters.addPlayer(player);
-                    voteTwoCount++;
-                    game.informPlayers(player.getName() + " has voted for " + choiceTwo);
-                }
+                game.informPlayers(controller.getName() + " gained control of " + permanent.getIdName() + " owned by " + game.getPlayer(permanent.getOwnerId()).getName());
             }
         }
     }
