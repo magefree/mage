@@ -17,7 +17,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
-import mage.players.Players;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
@@ -47,8 +46,6 @@ public final class Expropriate extends CardImpl {
 }
 
 class ExpropriateDilemmaEffect extends CouncilsDilemmaVoteEffect {
-
-    private Players moneyVoters = new Players();
 
     public ExpropriateDilemmaEffect() {
         super(Outcome.Benefit);
@@ -102,7 +99,7 @@ class ExpropriateDilemmaEffect extends CouncilsDilemmaVoteEffect {
     private void controlForMoneyVote(Player controller, Game game, Ability source) {
         List<Permanent> chosenCards = new ArrayList<>();
 
-        for (UUID playerId : moneyVoters.keySet()) {
+        for (UUID playerId : choiceTwoVoters.keySet()) {
             FilterPermanent filter = new FilterPermanent("permanent owned by " + game.getPlayer(playerId).getName());
             filter.add(new OwnerIdPredicate(playerId));
 
@@ -124,23 +121,6 @@ class ExpropriateDilemmaEffect extends CouncilsDilemmaVoteEffect {
                 effect.setTargetPointer(new FixedTarget(permanent, game));
                 game.addEffect(effect, source);
                 game.informPlayers(controller.getName() + " gained control of " + permanent.getIdName() + " owned by " + game.getPlayer(permanent.getOwnerId()).getName());
-            }
-        }
-    }
-
-    @Override
-    protected void vote(String choiceOne, String choiceTwo, Player controller, Game game, Ability source) {
-        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                if (player.chooseUse(Outcome.Vote, "Choose " + choiceOne + '?', source, game)) {
-                    voteOneCount++;
-                    game.informPlayers(player.getName() + " has voted for " + choiceOne);
-                } else {
-                    moneyVoters.addPlayer(player);
-                    voteTwoCount++;
-                    game.informPlayers(player.getName() + " has voted for " + choiceTwo);
-                }
             }
         }
     }
