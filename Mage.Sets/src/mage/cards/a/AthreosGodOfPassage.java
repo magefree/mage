@@ -6,7 +6,6 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -35,7 +34,6 @@ import java.util.UUID;
 public final class AthreosGodOfPassage extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature you own");
-    private static final DynamicValue xValue = new DevotionCount(ColoredManaSymbol.W, ColoredManaSymbol.B);
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -54,9 +52,9 @@ public final class AthreosGodOfPassage extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
 
         // As long as your devotion to white and black is less than seven, Athreos isn't a creature.
-        Effect effect = new LoseCreatureTypeSourceEffect(xValue, 7);
-        effect.setText("As long as your devotion to white and black is less than seven, Athreos isn't a creature");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect).addHint(new ValueHint("Devotion to white and black", xValue)));
+        Effect effect = new LoseCreatureTypeSourceEffect(DevotionCount.WB, 7);
+        effect.setText("As long as your devotion to white and black is less than seven, {this} isn't a creature");
+        this.addAbility(new SimpleStaticAbility(effect).addHint(new ValueHint("Devotion to white and black", DevotionCount.WB)));
 
         // Whenever another creature you own dies, return it to your hand unless target opponent pays 3 life.
         Ability ability = new AthreosDiesCreatureTriggeredAbility(new AthreosGodOfPassageReturnEffect(), false, filter);

@@ -6,7 +6,6 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -36,7 +35,6 @@ import java.util.UUID;
  */
 public final class AthreosShroudVeiled extends CardImpl {
 
-    private static final DynamicValue xValue = new DevotionCount(ColoredManaSymbol.W, ColoredManaSymbol.B);
     private static final FilterPermanent filter = new FilterCreaturePermanent("another target creature");
 
     static {
@@ -55,10 +53,10 @@ public final class AthreosShroudVeiled extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
 
         // As long as your devotion to white and black is less than seven, Athreos isn't a creature.
-        Effect effect = new LoseCreatureTypeSourceEffect(xValue, 7);
+        Effect effect = new LoseCreatureTypeSourceEffect(DevotionCount.WB, 7);
         effect.setText("As long as your devotion to white and black is less than seven, {this} isn't a creature");
         this.addAbility(new SimpleStaticAbility(effect)
-                .addHint(new ValueHint("Devotion to white and black", xValue)));
+                .addHint(new ValueHint("Devotion to white and black", DevotionCount.WB)));
 
         // At the beginning of your end step, put a coin counter on another target creature.
         Ability ability = new BeginningOfEndStepTriggeredAbility(

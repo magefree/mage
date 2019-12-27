@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -8,7 +7,6 @@ import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -19,17 +17,15 @@ import java.util.UUID;
  */
 public final class AspectOfHydra extends CardImpl {
 
-    private static final DynamicValue xValue = new DevotionCount(ColoredManaSymbol.G);
-
     public AspectOfHydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");
 
         // Target creature gets +X/+X until end of turn, where X is your devotion to green.
-        Effect effect = new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn, true);
+        Effect effect = new BoostTargetEffect(DevotionCount.G, DevotionCount.G, Duration.EndOfTurn, true);
         effect.setText("Target creature gets +X/+X until end of turn, where X is your devotion to green");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addHint(new ValueHint("Devotion to green", xValue));
+        this.getSpellAbility().addHint(new ValueHint("Devotion to green", DevotionCount.G));
     }
 
     public AspectOfHydra(final AspectOfHydra card) {
