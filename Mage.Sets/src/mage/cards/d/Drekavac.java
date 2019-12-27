@@ -10,9 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -22,12 +20,6 @@ import mage.target.common.TargetCardInHand;
  */
 public final class Drekavac extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("noncreature card");
-
-    static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
-    }
-
     public Drekavac(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
         this.subtype.add(SubType.BEAST);
@@ -35,7 +27,7 @@ public final class Drekavac extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Drekavac enters the battlefield, sacrifice it unless you discard a noncreature card.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new DiscardTargetCost(new TargetCardInHand(filter)))));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new DiscardTargetCost(new TargetCardInHand(StaticFilters.FILTER_CARD_A_NON_CREATURE)))));
     }
 
     public Drekavac(final Drekavac card) {
