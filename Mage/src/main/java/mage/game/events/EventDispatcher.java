@@ -1,5 +1,3 @@
-
-
 package mage.game.events;
 
 import java.io.Serializable;
@@ -30,7 +28,7 @@ public abstract class EventDispatcher<E extends ExternalEvent> implements Serial
             listener.event(event);
         }
     }
-    
+
     public void removeAllListener() {
         listeners.clear();
     }

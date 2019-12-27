@@ -6,7 +6,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
-import mage.players.Players;
 
 /**
  * @author JRHerlehy
@@ -14,8 +13,6 @@ import mage.players.Players;
 public abstract class CouncilsDilemmaVoteEffect extends OneShotEffect {
 
     protected int voteOneCount = 0, voteTwoCount = 0;
-    protected final Players choiceOneVoters = new Players();
-    protected final Players choiceTwoVoters = new Players();
 
     public CouncilsDilemmaVoteEffect(Outcome outcome) {
         super(outcome);
@@ -33,11 +30,9 @@ public abstract class CouncilsDilemmaVoteEffect extends OneShotEffect {
                         "Choose " + choiceOne + " or " + choiceTwo + "?",
                         source.getRule(), choiceOne, choiceTwo, source, game)) {
                     voteOneCount++;
-                    choiceOneVoters.addPlayer(player);
                     game.informPlayers(player.getName() + " has voted for " + choiceOne);
                 } else {
                     voteTwoCount++;
-                    choiceTwoVoters.addPlayer(player);
                     game.informPlayers(player.getName() + " has voted for " + choiceTwo);
                 }
             }

@@ -1,5 +1,12 @@
 package mage.remote;
 
+import java.io.*;
+import java.lang.reflect.UndeclaredThrowableException;
+import java.net.*;
+import java.util.*;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.TimeUnit;
+import javax.swing.*;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
@@ -27,14 +34,6 @@ import org.jboss.remoting.callback.InvokerCallbackHandler;
 import org.jboss.remoting.transport.bisocket.Bisocket;
 import org.jboss.remoting.transport.socket.SocketWrapper;
 import org.jboss.remoting.transporter.TransporterClient;
-
-import javax.swing.*;
-import java.io.*;
-import java.lang.reflect.UndeclaredThrowableException;
-import java.net.*;
-import java.util.*;
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author BetaSteward_at_googlemail.com, JayDi85
@@ -502,7 +501,7 @@ public class SessionImpl implements Session {
 
     /**
      * @param askForReconnect - true = connection was lost because of error and
-     *                        ask the user if they want to try to reconnect
+     * ask the user if they want to try to reconnect
      */
     @Override
     public synchronized void disconnect(boolean askForReconnect) {
@@ -557,8 +556,21 @@ public class SessionImpl implements Session {
 
         @Override
         public void handleCallback(Callback callback) throws HandleCallbackException {
-            //logger.info("callback handler");
-            client.processCallback((ClientCallback) callback.getCallbackObject());
+            try {
+//                Object object = callback.getCallbackObject();
+//                if (((ClientCallback) object).getMethod().equals(ClientCallbackMethod.GAME_TARGET)) {
+//                    Object data = ((ClientCallback) object).getData();
+//                    if (data instanceof GameClientMessage) {
+//                        GameClientMessage message = (GameClientMessage) ((ClientCallback) object).getData();
+//                        logger.info("Client Session Event->" + ((ClientCallback) object).getMethod() + " (id:" + ((ClientCallback) object).getMessageId() + ") " + message.getMessage()
+//                        );
+//                    }
+//                }
+                client.processCallback((ClientCallback) callback.getCallbackObject());
+            } catch (Exception ex) {
+                logger.error("handleCallback error", ex);
+            }
+
         }
     }
 

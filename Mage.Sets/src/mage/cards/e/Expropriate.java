@@ -47,6 +47,8 @@ public final class Expropriate extends CardImpl {
 
 class ExpropriateDilemmaEffect extends CouncilsDilemmaVoteEffect {
 
+    private ArrayList<UUID> choiceTwoVoters = new ArrayList<>();
+
     public ExpropriateDilemmaEffect() {
         super(Outcome.Benefit);
         this.staticText = "<i>Council's dilemma</i> — Starting with you, each player votes for time or money. For each time vote, take an extra turn after this one. For each money vote, choose a permanent owned by the voter and gain control of it";
@@ -54,10 +56,6 @@ class ExpropriateDilemmaEffect extends CouncilsDilemmaVoteEffect {
 
     public ExpropriateDilemmaEffect(final ExpropriateDilemmaEffect effect) {
         super(effect);
-    }
-
-    public ExpropriateDilemmaEffect(Outcome outcome) {
-        super(outcome);
     }
 
     @Override
@@ -99,7 +97,7 @@ class ExpropriateDilemmaEffect extends CouncilsDilemmaVoteEffect {
     private void controlForMoneyVote(Player controller, Game game, Ability source) {
         List<Permanent> chosenCards = new ArrayList<>();
 
-        for (UUID playerId : choiceTwoVoters.keySet()) {
+        for (UUID playerId : choiceTwoVoters) {
             FilterPermanent filter = new FilterPermanent("permanent owned by " + game.getPlayer(playerId).getName());
             filter.add(new OwnerIdPredicate(playerId));
 
@@ -121,6 +119,25 @@ class ExpropriateDilemmaEffect extends CouncilsDilemmaVoteEffect {
                 effect.setTargetPointer(new FixedTarget(permanent, game));
                 game.addEffect(effect, source);
                 game.informPlayers(controller.getName() + " gained control of " + permanent.getIdName() + " owned by " + game.getPlayer(permanent.getOwnerId()).getName());
+            }
+        }
+    }
+
+    @Override
+    protected void vote(String choiceOne, String choiceTwo, Player controller, Game game, Ability source) {
+        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                if (player.chooseUse(Outcome.Vote,
+                        "Choose " + choiceOne + " or " + choiceTwo + "?",
+                        source.getRule(), choiceOne, choiceTwo, source, game)) {
+                    voteOneCount++;
+                    game.informPlayers(player.getName() + " has voted for " + choiceOne);
+                } else {
+                    voteTwoCount++;
+                    game.informPlayers(player.getName() + " has voted for " + choiceTwo);
+                    choiceTwoVoters.add(player.getId());
+                }
             }
         }
     }
@@ -154,8 +171,11 @@ class ExpropriateControlEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-        return permanent != null
-                && controllerId != null
-                && permanent.changeControllerId(controllerId, game);
+        if (permanent == null || controllerId == null) {
+            this.discard();
+        } else {
+            permanent.changeControllerId(controllerId, game);
+        }
+        return true;
     }
 }
