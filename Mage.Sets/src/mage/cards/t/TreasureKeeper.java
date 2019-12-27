@@ -16,6 +16,7 @@ import mage.game.Game;
 import mage.players.Player;
 
 import java.util.UUID;
+import mage.MageObject;
 
 /**
  * @author fireshoes
@@ -48,8 +49,10 @@ class TreasureKeeperEffect extends OneShotEffect {
 
     public TreasureKeeperEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "reveal cards from the top of your library until you reveal a nonland card with converted mana cost 3 or less. "
-                + "You may cast that card without paying its mana cost. Put all revealed cards not cast this way on the bottom of your library in a random order";
+        this.staticText = "reveal cards from the top of your library until you reveal a "
+                + "nonland card with converted mana cost 3 or less. "
+                + "You may cast that card without paying its mana cost. Put all revealed "
+                + "cards not cast this way on the bottom of your library in a random order";
     }
 
     public TreasureKeeperEffect(TreasureKeeperEffect effect) {
@@ -58,8 +61,10 @@ class TreasureKeeperEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Boolean cardWasCast = false;
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        if (controller != null
+                && !controller.getLibrary().isEmptyDraw()) {
             CardsImpl toReveal = new CardsImpl();
             Card nonLandCard = null;
             for (Card card : controller.getLibrary().getCards(game)) {
@@ -70,14 +75,19 @@ class TreasureKeeperEffect extends OneShotEffect {
                 }
             }
             controller.revealCards(source, toReveal, game);
-            if (nonLandCard != null && controller.chooseUse(outcome, "Cast " + nonLandCard.getLogName() + " without paying its mana cost?", source, game)) {
-                controller.cast(nonLandCard.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
-                toReveal.remove(nonLandCard);
+            if (nonLandCard != null
+                    && controller.chooseUse(Outcome.PlayForFree, "Cast " + nonLandCard.getLogName() + " without paying its mana cost?", source, game)) {
+                game.getState().setValue("PlayFromNotOwnHandZone" + nonLandCard.getId(), Boolean.TRUE);
+                cardWasCast = controller.cast(controller.chooseAbilityForCast(nonLandCard, game, true),
+                        game, true, new MageObjectReference(source.getSourceObject(game), game));
+                game.getState().setValue("PlayFromNotOwnHandZone" + nonLandCard.getId(), null);
+                if (cardWasCast) {
+                    toReveal.remove(nonLandCard);
+                }
             }
             controller.putCardsOnBottomOfLibrary(toReveal, game, source, false);
-            return true;
         }
-        return false;
+        return cardWasCast;
     }
 
     @Override

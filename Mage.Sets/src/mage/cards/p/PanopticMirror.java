@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
@@ -84,7 +83,7 @@ class PanopticMirrorExileEffect extends OneShotEffect {
         }
 
         TargetCardInHand target = new TargetCardInHand(filter);
-        if (player.choose(this.outcome, target, source.getSourceId(), game)) {
+        if (player.choose(outcome.PlayForFree, target, source.getSourceId(), game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 card.moveToExile(CardUtil.getCardExileZoneId(game, source), "Panoptic Mirror", source.getSourceId(), game);
@@ -103,7 +102,7 @@ class PanopticMirrorCastEffect extends OneShotEffect {
 
     public PanopticMirrorCastEffect() {
         super(Outcome.ReturnToHand);
-        this.staticText = "you may copy a card exiled with Panoptic Mirror. If you do, you may cast the copy without paying its mana cost";
+        this.staticText = "you may copy a card exiled with {this}. If you do, you may cast the copy without paying its mana cost";
     }
 
     public PanopticMirrorCastEffect(final PanopticMirrorCastEffect effect) {
@@ -122,7 +121,10 @@ class PanopticMirrorCastEffect extends OneShotEffect {
         if (PanopticMirror == null) {
             PanopticMirror = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
         }
-        if (PanopticMirror != null && PanopticMirror.getImprinted() != null && !PanopticMirror.getImprinted().isEmpty() && controller != null) {
+        if (PanopticMirror != null
+                && PanopticMirror.getImprinted() != null
+                && !PanopticMirror.getImprinted().isEmpty()
+                && controller != null) {
             CardsImpl cards = new CardsImpl();
             for (UUID uuid : PanopticMirror.getImprinted()) {
                 Card card = game.getCard(uuid);
@@ -145,8 +147,11 @@ class PanopticMirrorCastEffect extends OneShotEffect {
             }
             if (cardToCopy != null) {
                 Card copy = game.copyCard(cardToCopy, source, source.getControllerId());
-                if (controller.chooseUse(outcome, "Cast the copied card without paying mana cost?", source, game)) {
-                    return controller.cast(copy.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                if (controller.chooseUse(outcome.PlayForFree, "Cast the copied card without paying mana cost?", source, game)) {
+                    game.getState().setValue("PlayFromNotOwnHandZone" + copy.getId(), Boolean.TRUE);
+                    controller.cast(controller.chooseAbilityForCast(copy, game, true),
+                            game, true, new MageObjectReference(source.getSourceObject(game), game));
+                    game.getState().setValue("PlayFromNotOwnHandZone" + copy.getId(), null);
                 }
             }
             return true;

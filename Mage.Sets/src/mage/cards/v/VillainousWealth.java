@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import java.util.UUID;
@@ -29,7 +28,8 @@ public final class VillainousWealth extends CardImpl {
     public VillainousWealth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{G}{U}");
 
-        // Target opponent exiles the top X cards of their library. You may cast any number of nonland cards with converted mana cost X or less from among them without paying their mana cost.
+        // Target opponent exiles the top X cards of their library. You may cast any number of nonland cards 
+        // with converted mana cost X or less from among them without paying their mana cost.
         this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().addEffect(new VillainousWealthEffect());
 
@@ -49,7 +49,9 @@ class VillainousWealthEffect extends OneShotEffect {
 
     public VillainousWealthEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "Target opponent exiles the top X cards of their library. You may cast any number of nonland cards with converted mana cost X or less from among them without paying their mana cost";
+        this.staticText = "Target opponent exiles the top X cards of their library. "
+                + "You may cast any number of nonland cards with converted mana cost X "
+                + "or less from among them without paying their mana cost";
     }
 
     public VillainousWealthEffect(final VillainousWealthEffect effect) {
@@ -74,7 +76,8 @@ class VillainousWealthEffect extends OneShotEffect {
                 Cards cardsToExile = new CardsImpl();
                 cardsToExile.addAll(player.getLibrary().getTopCards(game, source.getManaCostsToPay().getX()));
                 controller.moveCards(cardsToExile, Zone.EXILED, source, game);
-                if (controller.chooseUse(Outcome.PlayForFree, "Cast cards exiled with " + mageObject.getLogName() + "  without paying its mana cost?", source, game)) {
+                if (controller.chooseUse(Outcome.PlayForFree, "Cast cards exiled with " + mageObject.getLogName()
+                        + "  without paying its mana cost?", source, game)) {
                     OuterLoop:
                     while (cardsToExile.count(filter, game) > 0) {
                         if (!controller.canRespond()) {
@@ -82,11 +85,17 @@ class VillainousWealthEffect extends OneShotEffect {
                         }
                         TargetCardInExile target = new TargetCardInExile(0, 1, filter, exileId, false);
                         target.setNotTarget(true);
-                        while (cardsToExile.count(filter, game) > 0 && controller.choose(Outcome.PlayForFree, cardsToExile, target, game)) {
+                        while (cardsToExile.count(filter, game) > 0 
+                                && controller.choose(Outcome.PlayForFree, cardsToExile, target, game)) {
                             Card card = game.getCard(target.getFirstTarget());
                             if (card != null) {
-                                controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
-                                cardsToExile.remove(card);
+                                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                                Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
+                                        game, true, new MageObjectReference(source.getSourceObject(game), game));
+                                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+                                if (cardWasCast) {
+                                    cardsToExile.remove(card);
+                                }
                             } else {
                                 break OuterLoop;
                             }

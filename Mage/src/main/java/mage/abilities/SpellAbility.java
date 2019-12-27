@@ -65,8 +65,8 @@ public class SpellAbility extends ActivatedAbilityImpl {
         if (object == null) {
             return false;
         }
-        if (game.getState().getValue("CastFromExileEnabled" + object.getId()) != null) {
-            return (Boolean) game.getState().getValue("CastFromExileEnabled" + object.getId());  // card like Chandra, Torch of Defiance +1 loyal ability)
+        if (game.getState().getValue("PlayFromNotOwnHandZone" + object.getId()) != null) {
+            return (Boolean) game.getState().getValue("PlayFromNotOwnHandZone" + object.getId());  // card like Chandra, Torch of Defiance +1 loyal ability)
         }
         return null != game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game) // check this first to allow Offering in main phase
                 || timing == TimingRule.INSTANT

@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import java.util.HashSet;
@@ -20,7 +19,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -41,7 +40,9 @@ public final class HellcarverDemon extends CardImpl {
 
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever Hellcarver Demon deals combat damage to a player, sacrifice all other permanents you control and discard your hand. Exile the top six cards of your library. You may cast any number of nonland cards exiled this way without paying their mana costs.
+        // Whenever Hellcarver Demon deals combat damage to a player, sacrifice all other permanents you 
+        // control and discard your hand. Exile the top six cards of your library. You may cast any number 
+        // of nonland cards exiled this way without paying their mana costs.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new HellcarverDemonEffect(), false));
     }
 
@@ -59,7 +60,9 @@ class HellcarverDemonEffect extends OneShotEffect {
 
     public HellcarverDemonEffect() {
         super(Outcome.PlayForFree);
-        staticText = "sacrifice all other permanents you control and discard your hand. Exile the top six cards of your library. You may cast any number of nonland cards exiled this way without paying their mana costs.";
+        staticText = "sacrifice all other permanents you control and discard your hand. "
+                + "Exile the top six cards of your library. You may cast any number of "
+                + "nonland cards exiled this way without paying their mana costs.";
     }
 
     public HellcarverDemonEffect(final HellcarverDemonEffect effect) {
@@ -83,7 +86,8 @@ class HellcarverDemonEffect extends OneShotEffect {
             // move cards from library to exile
             Set<Card> currentExiledCards = new HashSet<>();
             currentExiledCards.addAll(controller.getLibrary().getTopCards(game, 6));
-            controller.moveCardsToExile(currentExiledCards, source, game, true, source.getSourceId(), sourceObject.getIdName());
+            controller.moveCardsToExile(currentExiledCards, source, game, true, 
+                    source.getSourceId(), sourceObject.getIdName());
 
             // cast the possible cards without paying the mana
             Cards cardsToCast = new CardsImpl();
@@ -91,18 +95,26 @@ class HellcarverDemonEffect extends OneShotEffect {
             boolean alreadyCast = false;
             while (!cardsToCast.isEmpty()
                     && controller.canRespond()) {
-                if (!controller.chooseUse(outcome, "Cast a" + (alreadyCast ? "nother" : "") + " card exiled with " + sourceObject.getLogName() + " without paying its mana cost?", source, game)) {
+                if (!controller.chooseUse(outcome, "Cast a" + (alreadyCast ? "another" : "")
+                        + " card exiled with " + sourceObject.getLogName() 
+                        + " without paying its mana cost?", source, game)) {
                     break;
                 }
-                TargetCard targetCard = new TargetCard(1, Zone.EXILED, new FilterCard("nonland card to cast for free"));
+                TargetCard targetCard = new TargetCard(1, Zone.EXILED, 
+                        new FilterNonlandCard("nonland card to cast for free"));
                 if (controller.choose(Outcome.PlayForFree, cardsToCast, targetCard, game)) {
                     alreadyCast = true;
                     Card card = game.getCard(targetCard.getFirstTarget());
                     if (card != null) {
-                        if (controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game))) {
+                        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                        Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
+                                game, true, new MageObjectReference(source.getSourceObject(game), game));
+                        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+                        if (cardWasCast) {
                             cardsToCast.remove(card);
                         } else {
-                            game.informPlayer(controller, "You're not able to cast " + card.getIdName() + " or you canceled the casting.");
+                            game.informPlayer(controller, "You're not able to cast " 
+                                    + card.getIdName() + " or you canceled the casting.");
                         }
                     }
                 }
