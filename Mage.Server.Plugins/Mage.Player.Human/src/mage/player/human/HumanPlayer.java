@@ -14,6 +14,7 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import jdk.nashorn.internal.objects.NativeError;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -250,6 +251,9 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean chooseMulligan(Game game) {
+        if (gameInCheckPlayableState(game)) {
+            return true;
+        }
         updateGameStatePriority("chooseMulligan", game);
         int nextHandSize = game.mulliganDownTo(playerId);
         do {
@@ -353,6 +357,9 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public int chooseReplacementEffect(Map<String, String> rEffects, Game game) {
+        if (gameInCheckPlayableState(game)) {
+            return 0;
+        }
         if (game.inCheckPlayableState()) {
             logger.warn("player interaction in checkPlayableState.");
             if (rEffects.size() <= 1) {
@@ -421,9 +428,7 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean choose(Outcome outcome, Choice choice, Game game) {
-        if (game.inCheckPlayableState()) {
-            logger.warn("player interaction in checkPlayableState. Choice: " + choice.getMessage());
-            choice.setChoice(choice.getChoices().iterator().next());
+        if (gameInCheckPlayableState(game)) {
             return true;
         }
         if (Outcome.PutManaInPool == outcome) {
@@ -461,9 +466,7 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
-        if (game.inCheckPlayableState()) {
-            logger.warn("player interaction in checkPlayableState. Target: " + target.getMessage());
-            // TODO: set default choice
+        if (gameInCheckPlayableState(game)) {
             return true;
         }
         // choose one or multiple permanents
@@ -557,9 +560,7 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
-        if (game.inCheckPlayableState()) {
-            logger.warn("player interaction in checkPlayableState. Target: " + target.getMessage());
-            // TODO: set default choice
+        if (gameInCheckPlayableState(game)) {
             return true;
         }
         // choose one or multiple targets
@@ -624,9 +625,7 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
-        if (game.inCheckPlayableState()) {
-            logger.warn("player interaction in checkPlayableState. Target: " + target.getMessage());
-            // TODO: set default choice
+        if (gameInCheckPlayableState(game)) {
             return true;
         }
         // choose one or multiple cards
@@ -685,9 +684,12 @@ public class HumanPlayer extends PlayerImpl {
         return false;
     }
 
+    // choose one or multiple target cards
     @Override
     public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
-        // choose one or multiple target cards
+        if (gameInCheckPlayableState(game)) {
+            return true;
+        }
         updateGameStatePriority("chooseTarget(5)", game);
         while (!abort) {
             boolean required;
@@ -751,6 +753,9 @@ public class HumanPlayer extends PlayerImpl {
     @Override
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
         // choose amount
+        if (gameInCheckPlayableState(game)) {
+            return true;
+        }
         updateGameStatePriority("chooseTargetAmount", game);
         while (!abort) {
             prepareForResponse(game);
@@ -1061,6 +1066,9 @@ public class HumanPlayer extends PlayerImpl {
     @Override
     public TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game) {
         // choose triggered abilitity from list
+        if (gameInCheckPlayableState(game)) {
+            return null;
+        }
         String autoOrderRuleText = null;
         boolean autoOrderUse = getControllingPlayersUserData(game).isAutoOrderTrigger();
         while (!abort) {
@@ -1138,6 +1146,9 @@ public class HumanPlayer extends PlayerImpl {
 
     protected boolean playManaHandling(Ability abilityToCast, ManaCost unpaid, String promptText, Game game) {
         // choose mana to pay (from permanents or from pool)
+        if (gameInCheckPlayableState(game)) {
+            return true;
+        }
         updateGameStatePriority("playMana", game);
         Map<String, Serializable> options = new HashMap<>();
         prepareForResponse(game);
@@ -1174,6 +1185,9 @@ public class HumanPlayer extends PlayerImpl {
      * @return
      */
     public int announceRepetitions(Game game) {
+        if (gameInCheckPlayableState(game)) {
+            return 0;
+        }
         int xValue = 0;
         updateGameStatePriority("announceRepetitions", game);
         do {
@@ -1192,10 +1206,20 @@ public class HumanPlayer extends PlayerImpl {
     /**
      * Gets the amount of mana the player want to spent for a x spell
      *
+     * @param min
+     * @param max
      * @param multiplier - X multiplier after replace events
+     * @param message
+     * @param ability
+     * @param game
+     * @return
      */
     @Override
     public int announceXMana(int min, int max, int multiplier, String message, Game game, Ability ability) {
+        if (gameInCheckPlayableState(game)) {
+            return 0;
+        }
+
         int xValue = 0;
         String extraMessage = (multiplier == 1 ? "" : ", X will be increased by " + multiplier + " times");
         updateGameStatePriority("announceXMana", game);
@@ -1216,6 +1240,9 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variableCost) {
+        if (gameInCheckPlayableState(game)) {
+            return 0;
+        }
         int xValue = 0;
         updateGameStatePriority("announceXCost", game);
         do {
@@ -1262,6 +1289,9 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public void selectAttackers(Game game, UUID attackingPlayerId) {
+        if (gameInCheckPlayableState(game)) {
+            return;
+        }
         updateGameStatePriority("selectAttackers", game);
         FilterCreatureForCombat filter = filterCreatureForCombat.copy();
         filter.add(new ControllerIdPredicate(attackingPlayerId));
@@ -1521,6 +1551,9 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public void selectBlockers(Game game, UUID defendingPlayerId) {
+        if (gameInCheckPlayableState(game)) {
+            return;
+        }
         updateGameStatePriority("selectBlockers", game);
         FilterCreatureForCombatBlock filter = filterCreatureForCombatBlock.copy();
         filter.add(new ControllerIdPredicate(defendingPlayerId));
@@ -1570,6 +1603,9 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public UUID chooseAttackerOrder(List<Permanent> attackers, Game game) {
+        if (gameInCheckPlayableState(game)) {
+            return null;
+        }
         updateGameStatePriority("chooseAttackerOrder", game);
         while (!abort) {
             prepareForResponse(game);
@@ -1590,6 +1626,9 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public UUID chooseBlockerOrder(List<Permanent> blockers, CombatGroup combatGroup, List<UUID> blockerOrder, Game game) {
+        if (gameInCheckPlayableState(game)) {
+            return null;
+        }
         updateGameStatePriority("chooseBlockerOrder", game);
         while (!abort) {
             prepareForResponse(game);
@@ -1609,6 +1648,9 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     protected void selectCombatGroup(UUID defenderId, UUID blockerId, Game game) {
+        if (gameInCheckPlayableState(game)) {
+            return;
+        }
         updateGameStatePriority("selectCombatGroup", game);
         TargetAttackingCreature target = new TargetAttackingCreature();
         prepareForResponse(game);
@@ -1674,6 +1716,9 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public int getAmount(int min, int max, String message, Game game) {
+        if (gameInCheckPlayableState(game)) {
+            return 0;
+        }
         updateGameStatePriority("getAmount", game);
         do {
             prepareForResponse(game);
@@ -1705,6 +1750,9 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     protected void specialAction(Game game) {
+        if (gameInCheckPlayableState(game)) {
+            return;
+        }
         Map<UUID, SpecialAction> specialActions = game.getState().getSpecialActions().getControlledBy(playerId, false);
         if (!specialActions.isEmpty()) {
             updateGameStatePriority("specialAction", game);
@@ -1722,6 +1770,9 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     protected void specialManaAction(ManaCost unpaid, Game game) {
+        if (gameInCheckPlayableState(game)) {
+            return;
+        }
         Map<UUID, SpecialAction> specialActions = game.getState().getSpecialActions().getControlledBy(playerId, true);
         if (!specialActions.isEmpty()) {
             updateGameStatePriority("specialAction", game);
@@ -1749,6 +1800,9 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     protected void activateAbility(LinkedHashMap<UUID, ? extends ActivatedAbility> abilities, MageObject object, Game game) {
+        if (gameInCheckPlayableState(game)) {
+            return;
+        }
         updateGameStatePriority("activateAbility", game);
         if (abilities.size() == 1
                 && suppressAbilityPicker(abilities.values().iterator().next(), game)) {
@@ -1800,6 +1854,9 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public SpellAbility chooseSpellAbilityForCast(SpellAbility ability, Game game, boolean noMana) {
+        if (gameInCheckPlayableState(game)) {
+            return null;
+        }
         switch (ability.getSpellAbilityType()) {
             case SPLIT:
             case SPLIT_FUSED:
@@ -1832,6 +1889,9 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public SpellAbility chooseAbilityForCast(Card card, Game game, boolean nonMana) {
+        if (gameInCheckPlayableState(game)) {
+            return null;
+        }
         MageObject object = game.getObject(card.getId());
         if (object != null) {
             LinkedHashMap<UUID, ActivatedAbility> useableAbilities = getSpellAbilities(object, game.getState().getZone(object.getId()), game);
@@ -1858,6 +1918,9 @@ public class HumanPlayer extends PlayerImpl {
     @Override
     public Mode chooseMode(Modes modes, Ability source, Game game) {
         // choose mode to activate
+        if (gameInCheckPlayableState(game)) {
+            return null;
+        }
         updateGameStatePriority("chooseMode", game);
         if (modes.size() > 1) {
             MageObject obj = game.getObject(source.getSourceId());
@@ -1927,6 +1990,9 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean choosePile(Outcome outcome, String message, List<? extends Card> pile1, List<? extends Card> pile2, Game game) {
+        if (gameInCheckPlayableState(game)) {
+            return true;
+        }
         updateGameStatePriority("choosePile", game);
         do {
             prepareForResponse(game);
@@ -2197,4 +2263,11 @@ public class HumanPlayer extends PlayerImpl {
         return "no available";
     }
 
+    private boolean gameInCheckPlayableState(Game game) {
+        if (game.inCheckPlayableState()) {
+            logger.warn("Player interaction in checkPlayableState./n" + NativeError.printStackTrace(this));
+            return true;
+        }
+        return false;
+    }
 }
