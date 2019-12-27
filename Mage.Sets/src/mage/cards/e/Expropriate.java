@@ -56,6 +56,7 @@ class ExpropriateDilemmaEffect extends CouncilsDilemmaVoteEffect {
 
     public ExpropriateDilemmaEffect(final ExpropriateDilemmaEffect effect) {
         super(effect);
+        this.choiceTwoVoters.addAll(effect.choiceTwoVoters);
     }
 
     @Override
