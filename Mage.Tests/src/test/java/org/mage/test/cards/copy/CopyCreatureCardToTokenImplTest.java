@@ -5,6 +5,7 @@
  */
 package org.mage.test.cards.copy;
 
+import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Ignore;
@@ -54,6 +55,39 @@ public class CopyCreatureCardToTokenImplTest extends CardTestPlayerBase {
 
         assertHandCount(playerA, 3);
         assertGraveyardCount(playerA, 2);
+    }
+
+    /* https://github.com/magefree/mage/issues/5904
+    I had a Faerie Artisans on the battlefield. My opponent played a Thrashing Brontodon.
+    In response to the Faerie Artisans ability, my opponent sacrificed the Brontodon to destroy an artifact.
+    When the Faerie Artisans trigger resolved, no token was created. */
+    @Test
+    public void testFaerieArtisans() {
+        // Flying
+        // Whenever a nontoken creature enters the battlefield under an opponent's control,
+        // create a token that's a copy of that creature except it's an artifact in addition to its other types.
+        // Then exile all other tokens created with Faerie Artisans.
+        addCard(Zone.BATTLEFIELD, playerA, "Faerie Artisans", 1); // Creature {3}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Alpha Myr", 1); // Artifact creature 2/1
+
+        // {1}, Sacrifice Thrashing Brontodon: Destroy target artifact or enchantment.
+        addCard(Zone.HAND, playerB, "Thrashing Brontodon"); // Creature {1}{G}{G}
+        addCard(Zone.BATTLEFIELD, playerB, "Forest", 4);
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Thrashing Brontodon");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}, Sacrifice");
+        addTarget(playerB, "Alpha Myr");
+
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertGraveyardCount(playerB, "Thrashing Brontodon", 1);
+        assertGraveyardCount(playerA, "Alpha Myr", 1);
+        assertPermanentCount(playerA, "Thrashing Brontodon", 1);
+        assertType("Thrashing Brontodon", CardType.ARTIFACT, true);
     }
 
 }

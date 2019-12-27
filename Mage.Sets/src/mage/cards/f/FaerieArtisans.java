@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.StringTokenizer;
@@ -81,7 +80,7 @@ class FaerieArtisansEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanentToCopy = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        Permanent permanentToCopy = game.getPermanentOrLKIBattlefield(getTargetPointer().getFixedTarget(game, source).getTarget());
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && permanentToCopy != null) {
             CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(null, CardType.ARTIFACT, false);
