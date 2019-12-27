@@ -110,6 +110,24 @@ public final class StaticFilters {
         FILTER_CARD_FROM_YOUR_GRAVEYARD.setLockedFilter(true);
     }
 
+    public static final FilterNoncreatureCard FILTER_CARD_NON_CREATURE = new FilterNoncreatureCard();
+
+    static {
+        FILTER_CARD_NON_CREATURE.setLockedFilter(true);
+    }
+
+    public static final FilterNoncreatureCard FILTER_CARD_A_NON_CREATURE = new FilterNoncreatureCard("a noncreature card");
+
+    static {
+        FILTER_CARD_A_NON_CREATURE.setLockedFilter(true);
+    }
+
+    public static final FilterNoncreatureCard FILTER_CARDS_NON_CREATURE = new FilterNoncreatureCard("noncreature cards");
+
+    static {
+        FILTER_CARDS_NON_CREATURE.setLockedFilter(true);
+    }
+
     public static final FilterLandCard FILTER_CARD_LAND = new FilterLandCard();
 
     static {

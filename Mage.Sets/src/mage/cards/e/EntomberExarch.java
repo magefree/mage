@@ -14,10 +14,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -60,12 +57,6 @@ public final class EntomberExarch extends CardImpl {
 
 class EntomberExarchEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterCard("noncreature card");
-
-    static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
-    }
-
     EntomberExarchEffect() {
         super(Outcome.Discard);
         staticText = "target opponent reveals their hand, you choose a noncreature card from it, then that player discards that card";
@@ -82,7 +73,7 @@ class EntomberExarchEffect extends OneShotEffect {
             player.revealCards("Entomber Exarch", player.getHand(), game);
             Player you = game.getPlayer(source.getControllerId());
             if (you != null) {
-                TargetCard target = new TargetCard(Zone.HAND, filter);
+                TargetCard target = new TargetCard(Zone.HAND, StaticFilters.FILTER_CARD_A_NON_CREATURE);
                 if (you.choose(Outcome.Benefit, player.getHand(), target, game)) {
                     Card card = player.getHand().get(target.getFirstTarget(), game);
                     return player.discard(card, source, game);
