@@ -44,7 +44,7 @@ public final class KlothysGodOfDestiny extends CardImpl {
         // As long as your devotion to red and green is less than seven, Klothys isn't a creature.
         Effect effect = new LoseCreatureTypeSourceEffect(xValue, 7);
         effect.setText("As long as your devotion to red and green is less than seven, {this} isn't a creature");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect).addHint(new ValueHint("Devotion to red and green", xValue)));
+        this.addAbility(new SimpleStaticAbility(effect).addHint(new ValueHint("Devotion to red and green", xValue)));
 
         // At the beginning of your precombat main phase, exile target card from a graveyard. If it was a land card, add {R} or {G}. Otherwise, you gain 2 life and Klothys deals 2 damage to each opponent.
         Ability ability = new BeginningOfPreCombatMainTriggeredAbility(
@@ -88,7 +88,9 @@ class KlothysGodOfDestinyEffect extends OneShotEffect {
         if (player == null || card == null) {
             return false;
         }
-        if (card.isLand()) {
+        boolean isLand = card.isLand();
+        player.moveCards(card, Zone.EXILED, source, game);
+        if (isLand) {
             Mana mana = new Mana();
             if (player.chooseUse(
                     Outcome.PutManaInPool, "Choose a color of mana to add",
@@ -99,14 +101,14 @@ class KlothysGodOfDestinyEffect extends OneShotEffect {
                 mana.increaseGreen();
             }
             player.getManaPool().addMana(mana, game, source);
-        } else {
-            player.gainLife(2, game, source);
-            game.getOpponents(player.getId())
-                    .stream()
-                    .map(game::getPlayer)
-                    .filter(Objects::nonNull)
-                    .forEach(opponent -> opponent.damage(2, source.getSourceId(), game));
+            return true;
         }
-        return player.moveCards(card, Zone.EXILED, source, game);
+        player.gainLife(2, game, source);
+        game.getOpponents(player.getId())
+                .stream()
+                .map(game::getPlayer)
+                .filter(Objects::nonNull)
+                .forEach(opponent -> opponent.damage(2, source.getSourceId(), game));
+        return true;
     }
 }
