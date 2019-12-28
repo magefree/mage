@@ -3,7 +3,6 @@ package mage.cards.e;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -13,7 +12,10 @@ import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
@@ -32,8 +34,6 @@ public final class ElspethUndauntedHero extends CardImpl {
     static {
         filter.add(new NamePredicate("Sunlit Hoplite"));
     }
-
-    private static final DynamicValue xValue = new DevotionCount(ColoredManaSymbol.W);
 
     public ElspethUndauntedHero(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}{W}");
@@ -56,9 +56,9 @@ public final class ElspethUndauntedHero extends CardImpl {
                 StaticFilters.FILTER_PERMANENT_CREATURES
         ).setText("Until end of turn, creatures you control gain flying"), -8);
         ability.addEffect(new BoostControlledEffect(
-                xValue, xValue, Duration.EndOfTurn
+                DevotionCount.W, DevotionCount.W, Duration.EndOfTurn
         ).setText("and get +X/+X, where X is your devotion to white"));
-        ability.addHint(new ValueHint("Devotion to white", xValue));
+        ability.addHint(new ValueHint("Devotion to white", DevotionCount.W));
         this.addAbility(ability);
     }
 

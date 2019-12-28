@@ -3,19 +3,18 @@ package mage.cards.g;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -31,13 +30,11 @@ public final class GrayMerchantOfAsphodel extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Gray Merchant of Asphodel enters the battlefield, each opponent loses X life, where X is your devotion to black. You gain life equal to the life lost this way.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new GrayMerchantOfAsphodelEffect(),
-                false)
-                .addHint(new ValueHint("Devotion to black", GrayMerchantOfAsphodelEffect.xValue)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new GrayMerchantOfAsphodelEffect(), false)
+                .addHint(new ValueHint("Devotion to black", DevotionCount.B)));
     }
 
-    public GrayMerchantOfAsphodel(final GrayMerchantOfAsphodel card) {
+    private GrayMerchantOfAsphodel(final GrayMerchantOfAsphodel card) {
         super(card);
     }
 
@@ -49,9 +46,7 @@ public final class GrayMerchantOfAsphodel extends CardImpl {
 
 class GrayMerchantOfAsphodelEffect extends OneShotEffect {
 
-    static final DynamicValue xValue = new DevotionCount(ColoredManaSymbol.B);
-
-    public GrayMerchantOfAsphodelEffect() {
+    GrayMerchantOfAsphodelEffect() {
         super(Outcome.GainLife);
         this.staticText = "each opponent loses X life, where X is your devotion to black. "
                 + "You gain life equal to the life lost this way. "
@@ -59,7 +54,7 @@ class GrayMerchantOfAsphodelEffect extends OneShotEffect {
                 + "counts towards your devotion to black.)</i>";
     }
 
-    public GrayMerchantOfAsphodelEffect(final GrayMerchantOfAsphodelEffect effect) {
+    private GrayMerchantOfAsphodelEffect(final GrayMerchantOfAsphodelEffect effect) {
         super(effect);
     }
 
@@ -71,20 +66,20 @@ class GrayMerchantOfAsphodelEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            int totalLifeLost = 0;
-            int lifeLost = xValue.calculate(game, source, this);
-            if (lifeLost > 0) {
-                for (UUID playerId : game.getOpponents(source.getControllerId())) {
-                    Player opponent = game.getPlayer(playerId);
-                    if (opponent != null) {
-                        totalLifeLost += opponent.loseLife(lifeLost, game, false);
-                    }
-                }
-            }
-            controller.gainLife(totalLifeLost, game, source);
+        if (controller == null) {
+            return false;
+        }
+        int lifeLost = DevotionCount.B.calculate(game, source, this);
+        if (lifeLost == 0) {
             return true;
         }
-        return false;
+        int totalLifeLost = game
+                .getOpponents(source.getControllerId())
+                .stream()
+                .map(game::getPlayer)
+                .filter(Objects::nonNull)
+                .mapToInt(opponent -> opponent.loseLife(lifeLost, game, false))
+                .sum();
+        return controller.gainLife(totalLifeLost, game, source) > 0;
     }
 }

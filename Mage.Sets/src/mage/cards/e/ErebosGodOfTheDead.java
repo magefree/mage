@@ -6,7 +6,6 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -25,8 +24,6 @@ import java.util.UUID;
  */
 public final class ErebosGodOfTheDead extends CardImpl {
 
-    private static final DynamicValue xValue = new DevotionCount(ColoredManaSymbol.B);
-
     public ErebosGodOfTheDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{B}");
         addSuperType(SuperType.LEGENDARY);
@@ -39,27 +36,25 @@ public final class ErebosGodOfTheDead extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
 
         // As long as your devotion to black is less than five, Erebos isn't a creature.
-        Effect effect = new LoseCreatureTypeSourceEffect(xValue, 5);
-        effect.setText("As long as your devotion to black is less than five, Erebos isn't a creature.<i>(Each {B} in the mana costs of permanents you control counts towards your devotion to black.)</i>");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect).addHint(new ValueHint("Devotion to black", xValue)));
+        Effect effect = new LoseCreatureTypeSourceEffect(DevotionCount.B, 5);
+        effect.setText("As long as your devotion to black is less than five, {this} isn't a creature.");
+        this.addAbility(new SimpleStaticAbility(effect).addHint(new ValueHint("Devotion to black", DevotionCount.B)));
 
         // Your opponents can't gain life.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
-                new CantGainLifeAllEffect(
-                        Duration.WhileOnBattlefield,
-                        TargetController.OPPONENT
-                )
+                new CantGainLifeAllEffect(Duration.WhileOnBattlefield, TargetController.OPPONENT)
         ));
 
         // {1}{B}, Pay 2 life: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(
+                new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{1}{B}")
+        );
         ability.addCost(new PayLifeCost(2));
         this.addAbility(ability);
 
     }
 
-    public ErebosGodOfTheDead(final ErebosGodOfTheDead card) {
+    private ErebosGodOfTheDead(final ErebosGodOfTheDead card) {
         super(card);
     }
 
