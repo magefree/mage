@@ -49,7 +49,7 @@ public final class Soulherder extends CardImpl {
         Ability ability = new BeginningOfEndStepTriggeredAbility(
                 new ExileTargetForSourceEffect(), TargetController.YOU, true
         );
-        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect().concatBy("then"));
+        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, true).concatBy("then"));
         ability.addTarget(new TargetControlledCreaturePermanent(filter));
         this.addAbility(ability);
     }
@@ -89,7 +89,8 @@ class SoulherderTriggeredAbility extends ZoneChangeTriggeredAbility {
         if (permanent != null && permanent.isCreature()) {
             // custom check cause ZoneChangeTriggeredAbility for source object only
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            return (fromZone == null || zEvent.getFromZone() == fromZone) && (toZone == null || zEvent.getToZone() == toZone);
+            return (fromZone == null || zEvent.getFromZone() == fromZone)
+                    && (zEvent.getToZone() == toZone || zEvent.getOriginalToZone() == toZone);
         }
         return false;
     }
