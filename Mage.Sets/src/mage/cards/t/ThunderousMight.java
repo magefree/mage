@@ -2,7 +2,6 @@ package mage.cards.t;
 
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAttachedTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.AttachEffect;
@@ -22,8 +21,6 @@ import java.util.UUID;
  */
 public final class ThunderousMight extends CardImpl {
 
-    private static final DynamicValue xValue = new DevotionCount(ColoredManaSymbol.R);
-
     public ThunderousMight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
         this.subtype.add(SubType.AURA);
@@ -36,11 +33,11 @@ public final class ThunderousMight extends CardImpl {
         this.addAbility(ability);
 
         // Whenever enchanted creature attacks, it gets +X/+0 until end of turn, where X is your devotion to red.
-        BoostEnchantedEffect effect = new BoostEnchantedEffect(xValue, new StaticValue(0), Duration.EndOfTurn);
+        BoostEnchantedEffect effect = new BoostEnchantedEffect(DevotionCount.R, new StaticValue(0), Duration.EndOfTurn);
         effect.setText("it gets +X/+0 until end of turn, where X is your devotion to red");
         effect.setLockedIn(true);
         this.addAbility(new AttacksAttachedTriggeredAbility(effect, AttachmentType.AURA, false)
-                .addHint(new ValueHint("Devotion to red", xValue)));
+                .addHint(new ValueHint("Devotion to red", DevotionCount.R)));
     }
 
     public ThunderousMight(final ThunderousMight card) {

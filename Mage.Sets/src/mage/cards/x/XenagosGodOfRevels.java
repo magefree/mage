@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
@@ -37,8 +36,6 @@ public final class XenagosGodOfRevels extends CardImpl {
         filter.add(AnotherPredicate.instance);
     }
 
-    private static final DynamicValue xValue = new DevotionCount(ColoredManaSymbol.R, ColoredManaSymbol.G);
-
     public XenagosGodOfRevels(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{R}{G}");
         addSuperType(SuperType.LEGENDARY);
@@ -51,20 +48,22 @@ public final class XenagosGodOfRevels extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
 
         // As long as your devotion to red and green is less than seven, Xenagos isn't a creature.
-        Effect effect = new LoseCreatureTypeSourceEffect(xValue, 7);
-        effect.setText("As long as your devotion to red and green is less than seven, Xenagos isn't a creature");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect).addHint(new ValueHint("Devotion to red and green", xValue)));
+        Effect effect = new LoseCreatureTypeSourceEffect(DevotionCount.RG, 7);
+        effect.setText("As long as your devotion to red and green is less than seven, {this} isn't a creature");
+        this.addAbility(new SimpleStaticAbility(effect).addHint(new ValueHint("Devotion to red and green", DevotionCount.RG)));
 
         // At the beginning of combat on your turn, another target creature you control gains haste and gets +X/+X until end of turn, where X is that creature's power.
         effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("another target creature you control gains haste");
-        Ability ability = new BeginningOfCombatTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, false, false);
+        Ability ability = new BeginningOfCombatTriggeredAbility(
+                Zone.BATTLEFIELD, effect, TargetController.YOU, false, false
+        );
         ability.addEffect(new XenagosGodOfRevelsEffect());
         ability.addTarget(new TargetControlledCreaturePermanent(1, 1, filter, false));
         this.addAbility(ability);
     }
 
-    public XenagosGodOfRevels(final XenagosGodOfRevels card) {
+    private XenagosGodOfRevels(final XenagosGodOfRevels card) {
         super(card);
     }
 
@@ -76,12 +75,12 @@ public final class XenagosGodOfRevels extends CardImpl {
 
 class XenagosGodOfRevelsEffect extends OneShotEffect {
 
-    public XenagosGodOfRevelsEffect() {
+    XenagosGodOfRevelsEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "and gets +X/+X until end of turn, where X is that creature's power";
     }
 
-    public XenagosGodOfRevelsEffect(final XenagosGodOfRevelsEffect effect) {
+    private XenagosGodOfRevelsEffect(final XenagosGodOfRevelsEffect effect) {
         super(effect);
     }
 
@@ -93,11 +92,12 @@ class XenagosGodOfRevelsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (targetCreature != null) {
-            ContinuousEffect effect = new BoostTargetEffect(targetCreature.getPower().getValue(), targetCreature.getPower().getValue(), Duration.EndOfTurn);
-            effect.setTargetPointer(this.getTargetPointer());
-            game.addEffect(effect, source);
+        if (targetCreature == null) {
+            return false;
         }
+        ContinuousEffect effect = new BoostTargetEffect(targetCreature.getPower().getValue(), targetCreature.getPower().getValue(), Duration.EndOfTurn);
+        effect.setTargetPointer(this.getTargetPointer());
+        game.addEffect(effect, source);
         return false;
     }
 }
