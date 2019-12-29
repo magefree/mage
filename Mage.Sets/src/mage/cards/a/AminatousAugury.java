@@ -157,9 +157,6 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
                 }
                 if (!unusedCardTypes.isEmpty()) {
                     if (!game.inCheckPlayableState()) { // some actions may not be done while the game only checks if a card can be cast
-                        if (!player.chooseUse(outcome, "Cast " + card.getIdName() + " without paying its mana cost?", source, game)) {
-                            return false;
-                        }
                         // Select the card type to consume and remove all not seleczted card types
                         if (unusedCardTypes.size() > 1) {
                             Choice choice = new ChoiceImpl(true);
