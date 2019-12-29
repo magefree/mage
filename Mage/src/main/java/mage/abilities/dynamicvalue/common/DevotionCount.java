@@ -5,6 +5,8 @@ import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.constants.ColoredManaSymbol;
 import mage.game.Game;
 
@@ -35,10 +37,12 @@ public enum DevotionCount implements DynamicValue {
     GW(ColoredManaSymbol.G, ColoredManaSymbol.W),
     GU(ColoredManaSymbol.G, ColoredManaSymbol.U);
 
-    private ArrayList<ColoredManaSymbol> devotionColors = new ArrayList<>();
+    private final ArrayList<ColoredManaSymbol> devotionColors = new ArrayList<>();
+    private final Hint hint;
 
     DevotionCount(ColoredManaSymbol... devotionColor) {
         this.devotionColors.addAll(Arrays.asList(devotionColor));
+        this.hint = new ValueHint(this.getMessage().replace("your d", "D"), this);
     }
 
     @Override
@@ -78,5 +82,9 @@ public enum DevotionCount implements DynamicValue {
             count++;
         }
         return sb.toString();
+    }
+
+    public Hint getHint() {
+        return hint;
     }
 }
