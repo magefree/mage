@@ -64,7 +64,7 @@ class WhisperingSpecterEffect extends OneShotEffect {
         if (player != null) {
             int value = player.getCounters().getCount(CounterType.POISON);
             if (value > 0) {
-                player.discard(value, source, game);
+                player.discard(value, false, source, game);
                 return true;
             }
         }

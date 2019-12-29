@@ -65,7 +65,7 @@ class BreakthroughEffect extends OneShotEffect {
         if (player != null) {
             int amountToKeep = source.getManaCostsToPay().getX();
             if (amountToKeep == 0) {
-                player.discard(player.getHand().size(), source, game);
+                player.discard(player.getHand().size(), false, source, game);
             }
             else if (amountToKeep < player.getHand().size()) {
                 TargetCardInHand target = new TargetCardInHand(amountToKeep, new FilterCard());

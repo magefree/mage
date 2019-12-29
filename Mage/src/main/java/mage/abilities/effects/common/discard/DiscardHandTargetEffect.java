@@ -44,7 +44,7 @@ public class DiscardHandTargetEffect extends OneShotEffect {
             for (UUID playerId: getTargetPointer().getTargets(game, source)) {
                 Player player = game.getPlayer(playerId);                
                 if (player != null) {
-                    player.discard(player.getHand().size(), source, game);
+                    player.discard(player.getHand().size(), false, source, game);
                 }
             }
             return true;

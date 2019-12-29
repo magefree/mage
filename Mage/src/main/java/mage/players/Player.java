@@ -408,9 +408,6 @@ public interface Player extends MageItem, Copyable<Player> {
 
     PlanarDieRoll rollPlanarDie(Game game, ArrayList<UUID> appliedEffects, int numberChaosSides, int numberPlanarSides);
 
-    @Deprecated
-    void discard(int amount, Ability source, Game game);
-
     Card discardOne(boolean random, Ability source, Game game);
 
     Cards discard(int amount, boolean random, Ability source, Game game);

@@ -658,11 +658,6 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public void discard(int amount, Ability source, Game game) {
-
-    }
-
-    @Override
     public Card discardOne(boolean random, Ability source, Game game) {
         return null;
     }

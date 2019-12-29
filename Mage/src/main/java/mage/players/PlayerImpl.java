@@ -693,7 +693,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         + (this.maxHandSize == 1
                                 ? " hand card" : " hand cards"));
             }
-            discard(hand.size() - this.maxHandSize, null, game);
+            discard(hand.size() - this.maxHandSize, false,null, game);
         }
     }
 
@@ -729,16 +729,6 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         library.remove(card.getId(), game);
         return true;
-    }
-
-    /**
-     * @param amount
-     * @param source
-     * @param game
-     */
-    @Override
-    public void discard(int amount, Ability source, Game game) {
-        discard(amount, false, source, game);
     }
 
     @Override
