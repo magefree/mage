@@ -6,10 +6,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.DevotionCount;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
-import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -42,9 +40,8 @@ public final class PharikaGodOfAffliction extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
 
         // As long as your devotion to black and green is less than seven, Pharika isn't a creature.
-        Effect effect = new LoseCreatureTypeSourceEffect(DevotionCount.BG, 7);
-        effect.setText("As long as your devotion to black and green is less than seven, {this} isn't a creature");
-        this.addAbility(new SimpleStaticAbility(effect).addHint(new ValueHint("Devotion to black and green", DevotionCount.BG)));
+        this.addAbility(new SimpleStaticAbility(new LoseCreatureTypeSourceEffect(DevotionCount.BG, 7))
+                .addHint(DevotionCount.BG.getHint()));
 
         // {B}{G}: Exile target creature card from a graveyard. It's owner creates a 1/1 black and green Snake enchantment creature token with deathtouch.
         Ability ability = new SimpleActivatedAbility(new PharikaExileEffect(), new ManaCostsImpl("{B}{G}"));

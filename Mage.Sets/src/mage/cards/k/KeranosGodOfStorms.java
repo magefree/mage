@@ -4,12 +4,10 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
-import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -46,9 +44,8 @@ public final class KeranosGodOfStorms extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
 
         // As long as your devotion to blue and red is less than seven, Keranos isn't a creature.
-        Effect effect = new LoseCreatureTypeSourceEffect(DevotionCount.UR, 7);
-        effect.setText("As long as your devotion to blue and red is less than seven, {this} isn't a creature");
-        this.addAbility(new SimpleStaticAbility(effect).addHint(new ValueHint("Devotion to blue and red", DevotionCount.UR)));
+        this.addAbility(new SimpleStaticAbility(new LoseCreatureTypeSourceEffect(DevotionCount.UR, 7))
+                .addHint(DevotionCount.UR.getHint()));
 
         // Reveal the first card you draw on each of your turns. 
         // Whenever you reveal a land card this way, draw a card. 
@@ -56,7 +53,7 @@ public final class KeranosGodOfStorms extends CardImpl {
         this.addAbility(new KeranosGodOfStormsTriggeredAbility(), new CardsAmountDrawnThisTurnWatcher());
     }
 
-    public KeranosGodOfStorms(final KeranosGodOfStorms card) {
+    private KeranosGodOfStorms(final KeranosGodOfStorms card) {
         super(card);
     }
 

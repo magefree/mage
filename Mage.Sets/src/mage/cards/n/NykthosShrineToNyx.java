@@ -6,7 +6,6 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.common.ManaEffect;
-import mage.abilities.hint.ValueHint;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
@@ -34,14 +33,9 @@ public final class NykthosShrineToNyx extends CardImpl {
 
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
+
         // {2}, {T}: Choose a color. Add an amount of mana of that color equal to your devotion to that color.
-        Ability ability = new NykthosShrineToNyxManaAbility();
-        ability.addHint(new ValueHint("Devotion to white", DevotionCount.W));
-        ability.addHint(new ValueHint("Devotion to blue", DevotionCount.U));
-        ability.addHint(new ValueHint("Devotion to black", DevotionCount.B));
-        ability.addHint(new ValueHint("Devotion to red", DevotionCount.R));
-        ability.addHint(new ValueHint("Devotion to green", DevotionCount.G));
-        this.addAbility(ability);
+        this.addAbility(new NykthosShrineToNyxManaAbility());
     }
 
     private NykthosShrineToNyx(final NykthosShrineToNyx card) {
@@ -59,6 +53,11 @@ class NykthosShrineToNyxManaAbility extends ActivatedManaAbilityImpl {
     NykthosShrineToNyxManaAbility() {
         super(Zone.BATTLEFIELD, new NykthosDynamicManaEffect(), new GenericManaCost(2));
         this.addCost(new TapSourceCost());
+        this.addHint(DevotionCount.W.getHint());
+        this.addHint(DevotionCount.U.getHint());
+        this.addHint(DevotionCount.B.getHint());
+        this.addHint(DevotionCount.R.getHint());
+        this.addHint(DevotionCount.G.getHint());
     }
 
     private NykthosShrineToNyxManaAbility(final NykthosShrineToNyxManaAbility ability) {

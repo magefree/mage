@@ -5,23 +5,21 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
-import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -30,7 +28,8 @@ import java.util.UUID;
  */
 public final class XenagosGodOfRevels extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another target creature you control");
+    private static final FilterPermanent filter
+            = new FilterControlledCreaturePermanent("another target creature you control");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -48,18 +47,19 @@ public final class XenagosGodOfRevels extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
 
         // As long as your devotion to red and green is less than seven, Xenagos isn't a creature.
-        Effect effect = new LoseCreatureTypeSourceEffect(DevotionCount.RG, 7);
-        effect.setText("As long as your devotion to red and green is less than seven, {this} isn't a creature");
-        this.addAbility(new SimpleStaticAbility(effect).addHint(new ValueHint("Devotion to red and green", DevotionCount.RG)));
+        this.addAbility(new SimpleStaticAbility(new LoseCreatureTypeSourceEffect(DevotionCount.RG, 7))
+                .addHint(DevotionCount.RG.getHint()));
 
         // At the beginning of combat on your turn, another target creature you control gains haste and gets +X/+X until end of turn, where X is that creature's power.
-        effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("another target creature you control gains haste");
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                Zone.BATTLEFIELD, effect, TargetController.YOU, false, false
+                Zone.BATTLEFIELD,
+                new GainAbilityTargetEffect(
+                        HasteAbility.getInstance(), Duration.EndOfTurn
+                ).setText("another target creature you control gains haste"),
+                TargetController.YOU, false, false
         );
         ability.addEffect(new XenagosGodOfRevelsEffect());
-        ability.addTarget(new TargetControlledCreaturePermanent(1, 1, filter, false));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 
@@ -95,9 +95,10 @@ class XenagosGodOfRevelsEffect extends OneShotEffect {
         if (targetCreature == null) {
             return false;
         }
-        ContinuousEffect effect = new BoostTargetEffect(targetCreature.getPower().getValue(), targetCreature.getPower().getValue(), Duration.EndOfTurn);
-        effect.setTargetPointer(this.getTargetPointer());
-        game.addEffect(effect, source);
+        int power = targetCreature.getPower().getValue();
+        game.addEffect(new BoostTargetEffect(
+                power, power, Duration.EndOfTurn
+        ).setTargetPointer(this.getTargetPointer()), source);
         return false;
     }
 }

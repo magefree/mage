@@ -7,11 +7,9 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
-import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -53,10 +51,8 @@ public final class AthreosShroudVeiled extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
 
         // As long as your devotion to white and black is less than seven, Athreos isn't a creature.
-        Effect effect = new LoseCreatureTypeSourceEffect(DevotionCount.WB, 7);
-        effect.setText("As long as your devotion to white and black is less than seven, {this} isn't a creature");
-        this.addAbility(new SimpleStaticAbility(effect)
-                .addHint(new ValueHint("Devotion to white and black", DevotionCount.WB)));
+        this.addAbility(new SimpleStaticAbility(new LoseCreatureTypeSourceEffect(DevotionCount.WB, 7))
+                .addHint(DevotionCount.WB.getHint()));
 
         // At the beginning of your end step, put a coin counter on another target creature.
         Ability ability = new BeginningOfEndStepTriggeredAbility(

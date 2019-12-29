@@ -6,15 +6,14 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.DevotionCount;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
-import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
@@ -25,7 +24,7 @@ import java.util.UUID;
  */
 public final class PurphorosGodOfTheForge extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("another creature");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -44,9 +43,8 @@ public final class PurphorosGodOfTheForge extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
 
         // As long as your devotion to red is less than five, Purphoros isn't a creature.
-        Effect effect = new LoseCreatureTypeSourceEffect(DevotionCount.R, 5);
-        effect.setText("As long as your devotion to red is less than five, {this} isn't a creature.");
-        this.addAbility(new SimpleStaticAbility(effect).addHint(new ValueHint("Devotion to red", DevotionCount.R)));
+        this.addAbility(new SimpleStaticAbility(new LoseCreatureTypeSourceEffect(DevotionCount.R, 5))
+                .addHint(DevotionCount.R.getHint()));
 
         // Whenever another creature enters the battlefield under your control, Purphoros deals 2 damage to each opponent.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
@@ -59,7 +57,7 @@ public final class PurphorosGodOfTheForge extends CardImpl {
         ));
     }
 
-    public PurphorosGodOfTheForge(final PurphorosGodOfTheForge card) {
+    private PurphorosGodOfTheForge(final PurphorosGodOfTheForge card) {
         super(card);
     }
 

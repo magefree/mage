@@ -2,7 +2,6 @@ package mage.cards.k;
 
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -22,10 +21,9 @@ public final class KlothyssDesign extends CardImpl {
         // Creatures you control get +X/+X until end of turn, where X is your devotion to green.
         this.getSpellAbility().addEffect(new BoostControlledEffect(
                 DevotionCount.G, DevotionCount.G, Duration.EndOfTurn,
-                StaticFilters.FILTER_PERMANENT_CREATURES,
-                false, true
+                StaticFilters.FILTER_PERMANENT_CREATURES, false, true
         ));
-        this.getSpellAbility().addHint(new ValueHint("Devotion to green", DevotionCount.G));
+        this.getSpellAbility().addHint(DevotionCount.G.getHint());
     }
 
     private KlothyssDesign(final KlothyssDesign card) {

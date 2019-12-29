@@ -10,7 +10,6 @@ import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
-import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -52,9 +51,8 @@ public final class AthreosGodOfPassage extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
 
         // As long as your devotion to white and black is less than seven, Athreos isn't a creature.
-        Effect effect = new LoseCreatureTypeSourceEffect(DevotionCount.WB, 7);
-        effect.setText("As long as your devotion to white and black is less than seven, {this} isn't a creature");
-        this.addAbility(new SimpleStaticAbility(effect).addHint(new ValueHint("Devotion to white and black", DevotionCount.WB)));
+        this.addAbility(new SimpleStaticAbility(new LoseCreatureTypeSourceEffect(DevotionCount.WB, 7))
+                .addHint(DevotionCount.WB.getHint()));
 
         // Whenever another creature you own dies, return it to your hand unless target opponent pays 3 life.
         Ability ability = new AthreosDiesCreatureTriggeredAbility(new AthreosGodOfPassageReturnEffect(), false, filter);
@@ -63,7 +61,7 @@ public final class AthreosGodOfPassage extends CardImpl {
 
     }
 
-    public AthreosGodOfPassage(final AthreosGodOfPassage card) {
+    private AthreosGodOfPassage(final AthreosGodOfPassage card) {
         super(card);
     }
 
@@ -75,12 +73,12 @@ public final class AthreosGodOfPassage extends CardImpl {
 
 class AthreosGodOfPassageReturnEffect extends OneShotEffect {
 
-    public AthreosGodOfPassageReturnEffect() {
+    AthreosGodOfPassageReturnEffect() {
         super(Outcome.Benefit);
         this.staticText = "return it to your hand unless target opponent pays 3 life";
     }
 
-    public AthreosGodOfPassageReturnEffect(final AthreosGodOfPassageReturnEffect effect) {
+    private AthreosGodOfPassageReturnEffect(final AthreosGodOfPassageReturnEffect effect) {
         super(effect);
     }
 
@@ -92,30 +90,29 @@ class AthreosGodOfPassageReturnEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            UUID creatureId = (UUID) this.getValue("creatureId");
-            Card creature = game.getCard(creatureId);
-            if (creature != null) {
-                Player opponent = game.getPlayer(source.getFirstTarget());
-                boolean paid = false;
-                if (opponent != null) {
-                    Cost cost = new PayLifeCost(3);
-                    if (cost.canPay(source, source.getSourceId(), opponent.getId(), game)
-                            && opponent.chooseUse(outcome, "Pay 3 life to prevent that " + creature.getLogName() + " returns to " + controller.getLogName() + "'s hand?", source, game)) {
-                        if (cost.pay(source, game, source.getSourceId(), opponent.getId(), false, null)) {
-                            paid = true;
-                        }
-                    }
-                }
-                if (opponent == null || !paid) {
-                    if (game.getState().getZone(creature.getId()) == Zone.GRAVEYARD) {
-                        controller.moveCards(creature, Zone.HAND, source, game);
-                    }
-                }
-            }
+        if (controller == null) {
+            return false;
+        }
+        UUID creatureId = (UUID) this.getValue("creatureId");
+        Card creature = game.getCard(creatureId);
+        if (creature == null) {
             return true;
         }
-        return false;
+        Player opponent = game.getPlayer(source.getFirstTarget());
+        boolean paid = false;
+        if (opponent != null) {
+            Cost cost = new PayLifeCost(3);
+            if (cost.canPay(source, source.getSourceId(), opponent.getId(), game)
+                    && opponent.chooseUse(outcome, "Pay 3 life to prevent that " + creature.getLogName() + " returns to " + controller.getLogName() + "'s hand?", source, game)
+                    && cost.pay(source, game, source.getSourceId(), opponent.getId(), false, null)) {
+                paid = true;
+            }
+        }
+        if ((opponent != null && paid) || game.getState().getZone(creature.getId()) != Zone.GRAVEYARD) {
+            return true;
+        }
+        controller.moveCards(creature, Zone.HAND, source, game);
+        return true;
     }
 }
 
@@ -123,12 +120,12 @@ class AthreosDiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
 
     protected FilterCreaturePermanent filter;
 
-    public AthreosDiesCreatureTriggeredAbility(Effect effect, boolean optional, FilterCreaturePermanent filter) {
+    AthreosDiesCreatureTriggeredAbility(Effect effect, boolean optional, FilterCreaturePermanent filter) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
     }
 
-    public AthreosDiesCreatureTriggeredAbility(AthreosDiesCreatureTriggeredAbility ability) {
+    private AthreosDiesCreatureTriggeredAbility(AthreosDiesCreatureTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
     }
@@ -146,15 +143,16 @@ class AthreosDiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.isDiesEvent()) {
-            if (zEvent.getTarget() != null && filter.match(zEvent.getTarget(), sourceId, controllerId, game)) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setValue("creatureId", event.getTargetId());
-                }
-                return true;
-            }
+        if (!zEvent.isDiesEvent()) {
+            return false;
         }
-        return false;
+        if (zEvent.getTarget() == null || !filter.match(zEvent.getTarget(), sourceId, controllerId, game)) {
+            return false;
+        }
+        for (Effect effect : this.getEffects()) {
+            effect.setValue("creatureId", event.getTargetId());
+        }
+        return true;
     }
 
     @Override

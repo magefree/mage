@@ -3,7 +3,6 @@ package mage.cards.s;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageAllEffect;
-import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -31,7 +30,7 @@ public final class Skyreaping extends CardImpl {
         Effect effect = new DamageAllEffect(DevotionCount.G, filter);
         effect.setText("{this} deals damage to each creature with flying equal to your devotion to green <i>(Each {G} in the mana costs of permanents you control counts toward your devotion to green.)</i>");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addHint(new ValueHint("Devotion to green", DevotionCount.G));
+        this.getSpellAbility().addHint(DevotionCount.G.getHint());
     }
 
     public Skyreaping(final Skyreaping card) {

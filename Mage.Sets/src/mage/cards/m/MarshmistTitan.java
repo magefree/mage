@@ -7,7 +7,6 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -29,7 +28,7 @@ public final class MarshmistTitan extends CardImpl {
 
         // Marshmist Titan costs {X} less to cast, where X is your devotion to black.
         this.addAbility(new SimpleStaticAbility(Zone.STACK, new MarshmistTitanCostReductionEffect())
-                .addHint(new ValueHint("Devotion to black", DevotionCount.B)));
+                .addHint(DevotionCount.B.getHint()));
     }
 
     private MarshmistTitan(final MarshmistTitan card) {
@@ -46,7 +45,7 @@ class MarshmistTitanCostReductionEffect extends CostModificationEffectImpl {
 
     MarshmistTitanCostReductionEffect() {
         super(Duration.Custom, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "{this} costs {X} less to cast, where X is your devotion to black. " +
+        staticText = "This spell costs {X} less to cast, where X is your devotion to black. " +
                 "<i>(Each {B} in the mana costs of permanents you control counts toward your devotion to black.)</i> ";
     }
 

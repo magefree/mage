@@ -7,11 +7,9 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.DevotionCount;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.CantGainLifeAllEffect;
 import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
-import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -36,9 +34,8 @@ public final class ErebosGodOfTheDead extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
 
         // As long as your devotion to black is less than five, Erebos isn't a creature.
-        Effect effect = new LoseCreatureTypeSourceEffect(DevotionCount.B, 5);
-        effect.setText("As long as your devotion to black is less than five, {this} isn't a creature.");
-        this.addAbility(new SimpleStaticAbility(effect).addHint(new ValueHint("Devotion to black", DevotionCount.B)));
+        this.addAbility(new SimpleStaticAbility(new LoseCreatureTypeSourceEffect(DevotionCount.B, 5))
+                .addHint(DevotionCount.B.getHint()));
 
         // Your opponents can't gain life.
         this.addAbility(new SimpleStaticAbility(

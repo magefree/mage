@@ -6,7 +6,6 @@ import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
-import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -37,10 +36,10 @@ public final class ThunderousMight extends CardImpl {
         effect.setText("it gets +X/+0 until end of turn, where X is your devotion to red");
         effect.setLockedIn(true);
         this.addAbility(new AttacksAttachedTriggeredAbility(effect, AttachmentType.AURA, false)
-                .addHint(new ValueHint("Devotion to red", DevotionCount.R)));
+                .addHint(DevotionCount.R.getHint()));
     }
 
-    public ThunderousMight(final ThunderousMight card) {
+    private ThunderousMight(final ThunderousMight card) {
         super(card);
     }
 

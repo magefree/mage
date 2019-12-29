@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -27,11 +26,12 @@ public final class EvangelOfHeliod extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Evangel of Heliod enters the battlefield, create a number of 1/1 white Soldier creature tokens equal to your devotion to white.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SoldierToken(), DevotionCount.W))
-                .addHint(new ValueHint("Devotion to white", DevotionCount.W)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new CreateTokenEffect(new SoldierToken(), DevotionCount.W)
+        ).addHint(DevotionCount.W.getHint()));
     }
 
-    public EvangelOfHeliod(final EvangelOfHeliod card) {
+    private EvangelOfHeliod(final EvangelOfHeliod card) {
         super(card);
     }
 

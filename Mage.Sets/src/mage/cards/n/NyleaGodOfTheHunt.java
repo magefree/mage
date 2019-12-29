@@ -6,11 +6,9 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.DevotionCount;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
-import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -41,9 +39,8 @@ public final class NyleaGodOfTheHunt extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
 
         // As long as your devotion to green is less than five, Nylea isn't a creature.<i>(Each {G} in the mana costs of permanents you control counts towards your devotion to green.)</i>
-        Effect effect = new LoseCreatureTypeSourceEffect(DevotionCount.G, 5);
-        effect.setText("As long as your devotion to green is less than five, {this} isn't a creature.");
-        this.addAbility(new SimpleStaticAbility(effect).addHint(new ValueHint("Devotion to green", DevotionCount.G)));
+        this.addAbility(new SimpleStaticAbility(new LoseCreatureTypeSourceEffect(DevotionCount.G, 5))
+                .addHint(DevotionCount.G.getHint()));
 
         // Other creatures you control have trample.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(

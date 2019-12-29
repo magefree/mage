@@ -4,10 +4,8 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
-import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -48,9 +46,8 @@ public final class KarametraGodOfHarvests extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
 
         // As long as your devotion to green and white is less than seven, Karametra isn't a creature.
-        Effect effect = new LoseCreatureTypeSourceEffect(DevotionCount.GW, 7);
-        effect.setText("As long as your devotion to green and white is less than seven, {this} isn't a creature");
-        this.addAbility(new SimpleStaticAbility(effect).addHint(new ValueHint("Devotion to green and white", DevotionCount.GW)));
+        this.addAbility(new SimpleStaticAbility(new LoseCreatureTypeSourceEffect(DevotionCount.GW, 7))
+                .addHint(DevotionCount.GW.getHint()));
 
         // Whenever you cast a creature spell, you may search your library for a Forest or Plains card, put it onto the battlefield tapped, then shuffle your library.
         this.addAbility(new SpellCastControllerTriggeredAbility(
@@ -59,7 +56,7 @@ public final class KarametraGodOfHarvests extends CardImpl {
         ));
     }
 
-    public KarametraGodOfHarvests(final KarametraGodOfHarvests card) {
+    private KarametraGodOfHarvests(final KarametraGodOfHarvests card) {
         super(card);
     }
 

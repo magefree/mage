@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -28,7 +27,7 @@ public final class NyleasDisciple extends CardImpl {
         // When Nylea's Disciple enters the battlefield, you gain life equal to your devotion to green.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new GainLifeEffect(DevotionCount.G).setText("you gain life equal to your devotion to green")
-        ).addHint(new ValueHint("Devotion to green", DevotionCount.G)));
+        ).addHint(DevotionCount.G.getHint()));
     }
 
     private NyleasDisciple(final NyleasDisciple card) {

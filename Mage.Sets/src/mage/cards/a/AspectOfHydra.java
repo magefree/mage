@@ -3,7 +3,6 @@ package mage.cards.a;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -25,10 +24,10 @@ public final class AspectOfHydra extends CardImpl {
         effect.setText("Target creature gets +X/+X until end of turn, where X is your devotion to green");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addHint(new ValueHint("Devotion to green", DevotionCount.G));
+        this.getSpellAbility().addHint(DevotionCount.G.getHint());
     }
 
-    public AspectOfHydra(final AspectOfHydra card) {
+    private AspectOfHydra(final AspectOfHydra card) {
         super(card);
     }
 

@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.hint.ValueHint;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -38,7 +37,7 @@ public final class DiscipleOfPhenax extends CardImpl {
         // from their hand equal to your devotion to black. You choose one of them. That player discards that card.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DiscipleOfPhenaxEffect(), false);
         ability.addTarget(new TargetPlayer());
-        ability.addHint(new ValueHint("Devotion to black", DevotionCount.B));
+        ability.addHint(DevotionCount.B.getHint());
         this.addAbility(ability);
 
     }

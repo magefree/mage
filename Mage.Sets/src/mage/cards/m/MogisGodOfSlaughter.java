@@ -1,32 +1,24 @@
 package mage.cards.m;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.dynamicvalue.common.DevotionCount;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
-import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.util.CardUtil;
 
-import java.util.Locale;
 import java.util.UUID;
-
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 
 /**
  * @author LevelX2
@@ -45,16 +37,14 @@ public final class MogisGodOfSlaughter extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
 
         // As long as your devotion to black and red is less than seven, Mogis isn't a creature.
-        Effect effect = new LoseCreatureTypeSourceEffect(DevotionCount.BR, 7);
-        effect.setText("As long as your devotion to black and red is less than seven, {this} isn't a creature");
-        this.addAbility(new SimpleStaticAbility(effect).addHint(new ValueHint("Devotion to black and red", DevotionCount.BR)));
+        this.addAbility(new SimpleStaticAbility(new LoseCreatureTypeSourceEffect(DevotionCount.BR, 7))
+                .addHint(DevotionCount.BR.getHint()));
 
         // At the beginning of each opponent's upkeep, Mogis deals 2 damage to that player unless they sacrifice a creature.
-        effect = new DoUnlessTargetPaysCost(new DamageTargetEffect(2, true, "that player"),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)),
-                "Sacrifice a creature? (otherwise you get 2 damage)");
-        effect.setText("Mogis deals 2 damage to that player unless they sacrifice a creature");
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.OPPONENT, false, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(
+                Zone.BATTLEFIELD, new MogisGodOfSlaughterEffect(),
+                TargetController.OPPONENT, false, true
+        );
         this.addAbility(ability);
     }
 
@@ -68,76 +58,35 @@ public final class MogisGodOfSlaughter extends CardImpl {
     }
 }
 
-class DoUnlessTargetPaysCost extends OneShotEffect {
+class MogisGodOfSlaughterEffect extends OneShotEffect {
 
-    private final OneShotEffect executingEffect;
-    private final Cost cost;
-    private final String userMessage;
-
-    public DoUnlessTargetPaysCost(OneShotEffect effect, Cost cost) {
-        this(effect, cost, null);
+    MogisGodOfSlaughterEffect() {
+        super(Outcome.Damage);
+        staticText = "{this} deals 2 damage to that player unless they sacrifice a creature";
     }
 
-    public DoUnlessTargetPaysCost(OneShotEffect effect, Cost cost, String userMessage) {
-        super(Outcome.Benefit);
-        this.executingEffect = effect;
-        this.cost = cost;
-        this.userMessage = userMessage;
-    }
-
-    public DoUnlessTargetPaysCost(final DoUnlessTargetPaysCost effect) {
+    private MogisGodOfSlaughterEffect(final MogisGodOfSlaughterEffect effect) {
         super(effect);
-        this.executingEffect = (OneShotEffect) effect.executingEffect.copy();
-        this.cost = effect.cost.copy();
-        this.userMessage = effect.userMessage;
+    }
+
+    @Override
+    public MogisGodOfSlaughterEffect copy() {
+        return new MogisGodOfSlaughterEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        MageObject mageObject = game.getObject(source.getSourceId());
-        if (player != null && mageObject != null) {
-            String message = userMessage;
-            if (message == null) {
-                message = getCostText() + " to prevent " + executingEffect.getText(source.getModes().getMode()) + '?';
-            }
-            message = CardUtil.replaceSourceName(message, mageObject.getLogName());
-            cost.clearPaid();
-            if (cost.canPay(source, source.getSourceId(), player.getId(), game) && player.chooseUse(executingEffect.getOutcome(), message, source, game)) {
-                cost.pay(source, game, source.getSourceId(), player.getId(), false, null);
-            }
-            if (!cost.isPaid()) {
-                executingEffect.setTargetPointer(this.targetPointer);
-                return executingEffect.apply(game, source);
-            }
-            return true;
+        Player player = game.getPlayer(game.getActivePlayerId());
+        if (player == null || game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, game.getActivePlayerId(), game) == 0) {
+            return false;
         }
-        return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        if (!staticText.isEmpty()) {
-            return staticText;
+        TargetPermanent target = new TargetControlledCreaturePermanent(1);
+        target.setNotTarget(true);
+        if (!player.chooseUse(outcome, "Sacrifice a creature to prevent 2 damage?", source, game)
+                || !player.choose(outcome, target, source.getSourceId(), game)) {
+            return player.damage(2, source.getSourceId(), game) > 0;
         }
-        return executingEffect.getText(mode) + "unless they" +
-                getCostText();
-    }
-
-    private String getCostText() {
-        StringBuilder sb = new StringBuilder();
-        String costText = cost.getText();
-        if (costText != null
-                && !costText.toLowerCase(Locale.ENGLISH).startsWith("discard")
-                && !costText.toLowerCase(Locale.ENGLISH).startsWith("sacrifice")
-                && !costText.toLowerCase(Locale.ENGLISH).startsWith("remove")) {
-            sb.append("pay ");
-        }
-        return sb.append(costText).toString();
-    }
-
-    @Override
-    public DoUnlessTargetPaysCost copy() {
-        return new DoUnlessTargetPaysCost(this);
+        Permanent permanent = game.getPermanent(target.getFirstTarget());
+        return permanent != null && permanent.sacrifice(source.getSourceId(), game);
     }
 }

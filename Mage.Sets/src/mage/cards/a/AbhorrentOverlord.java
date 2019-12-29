@@ -7,7 +7,6 @@ import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.SacrificeControllerEffect;
-import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -37,7 +36,7 @@ public final class AbhorrentOverlord extends CardImpl {
         // When Abhorrent Overlord enters the battlefield, create a number of 1/1 black Harpy creature tokens with flying equal to your devotion to black.
         Effect effect = new CreateTokenEffect(new AbhorrentOverlordHarpyToken(), DevotionCount.B);
         effect.setText("create a number of 1/1 black Harpy creature tokens with flying equal to your devotion to black. <i>(Each {B} in the mana costs of permanents you control counts toward your devotion to black.)</i>");
-        this.addAbility(new EntersBattlefieldTriggeredAbility(effect).addHint(new ValueHint("Devotion to black", DevotionCount.B)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(effect).addHint(DevotionCount.B.getHint()));
 
         // At the beginning of your upkeep, sacrifice a creature.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, null), TargetController.YOU, false));

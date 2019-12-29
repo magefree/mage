@@ -4,7 +4,6 @@ import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
-import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -26,7 +25,7 @@ public final class Sanguimancy extends CardImpl {
         effect = new LoseLifeSourceControllerEffect(DevotionCount.B);
         effect.setText("and you lose X life, where X is your devotion to black");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addHint(new ValueHint("Devotion to black", DevotionCount.B));
+        this.getSpellAbility().addHint(DevotionCount.B.getHint());
     }
 
     public Sanguimancy(final Sanguimancy card) {

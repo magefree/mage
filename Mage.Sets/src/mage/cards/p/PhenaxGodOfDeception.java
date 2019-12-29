@@ -7,11 +7,9 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.dynamicvalue.common.SourcePermanentToughnessValue;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
-import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -41,9 +39,8 @@ public final class PhenaxGodOfDeception extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
 
         // As long as your devotion to blue and black is less than seven, Phenax isn't a creature.
-        Effect effect = new LoseCreatureTypeSourceEffect(DevotionCount.UB, 7);
-        effect.setText("As long as your devotion to blue and black is less than seven, {this} isn't a creature");
-        this.addAbility(new SimpleStaticAbility(effect).addHint(new ValueHint("Devotion to blue and black", DevotionCount.UB)));
+        this.addAbility(new SimpleStaticAbility(new LoseCreatureTypeSourceEffect(DevotionCount.UB, 7))
+                .addHint(DevotionCount.UB.getHint()));
 
         // Creatures you control have "{T}: Target player puts the top X cards of their library into their graveyard, where X is this creature's toughness."
         Ability ability = new SimpleActivatedAbility(
@@ -59,7 +56,7 @@ public final class PhenaxGodOfDeception extends CardImpl {
         ));
     }
 
-    public PhenaxGodOfDeception(final PhenaxGodOfDeception card) {
+    private PhenaxGodOfDeception(final PhenaxGodOfDeception card) {
         super(card);
     }
 

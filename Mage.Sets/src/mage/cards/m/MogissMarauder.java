@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
@@ -44,7 +43,7 @@ public final class MogissMarauder extends CardImpl {
                 "and haste until end of turn, where X is your devotion to black"
         ));
         ability.setTargetAdjuster(MogissMarauderAdjuster.instance);
-        ability.addHint(new ValueHint("Devotion to black", DevotionCount.B));
+        ability.addHint(DevotionCount.B.getHint());
         this.addAbility(ability);
     }
 

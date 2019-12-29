@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -29,10 +28,10 @@ public final class ReverentHunter extends CardImpl {
         // When Reverent Hunter enters the battlefield, put a number of +1/+1 counters on it equal to your devotion to green.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(
                 CounterType.P1P1.createInstance(0), DevotionCount.G, true
-        )).addHint(new ValueHint("Devotion to green", DevotionCount.G)));
+        )).addHint(DevotionCount.G.getHint()));
     }
 
-    public ReverentHunter(final ReverentHunter card) {
+    private ReverentHunter(final ReverentHunter card) {
         super(card);
     }
 

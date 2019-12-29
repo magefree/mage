@@ -8,7 +8,6 @@ import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -48,7 +47,7 @@ public final class MasterOfWaves extends CardImpl {
         // <i>(Each {U} in the mana costs of permanents you control counts toward your devotion to blue.)</i>
         Effect effect = new CreateTokenEffect(new MasterOfWavesElementalToken(), DevotionCount.U);
         effect.setText("create a number of 1/0 blue Elemental creature tokens equal to your devotion to blue. <i>(Each {U} in the mana costs of permanents you control counts toward your devotion to blue.)</i>");
-        this.addAbility(new EntersBattlefieldTriggeredAbility(effect).addHint(new ValueHint("Devotion to blue", DevotionCount.U)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(effect).addHint(DevotionCount.U.getHint()));
     }
 
     public MasterOfWaves(final MasterOfWaves card) {

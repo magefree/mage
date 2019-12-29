@@ -7,11 +7,9 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.DevotionCount;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
 import mage.abilities.effects.keyword.ScryEffect;
-import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -38,9 +36,8 @@ public final class ThassaGodOfTheSea extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
 
         // As long as your devotion to blue is less than five, Thassa isn't a creature.<i>(Each {U} in the mana costs of permanents you control counts towards your devotion to white.)</i>
-        Effect effect = new LoseCreatureTypeSourceEffect(DevotionCount.U, 5);
-        effect.setText("As long as your devotion to blue is less than five, {this} isn't a creature.");
-        this.addAbility(new SimpleStaticAbility(effect).addHint(new ValueHint("Devotion to blue", DevotionCount.U)));
+        this.addAbility(new SimpleStaticAbility(new LoseCreatureTypeSourceEffect(DevotionCount.U, 5))
+                .addHint(DevotionCount.U.getHint()));
 
         // At the beginning of your upkeep, scry 1.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(

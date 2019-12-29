@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -30,8 +29,9 @@ public final class GrayMerchantOfAsphodel extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Gray Merchant of Asphodel enters the battlefield, each opponent loses X life, where X is your devotion to black. You gain life equal to the life lost this way.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new GrayMerchantOfAsphodelEffect(), false)
-                .addHint(new ValueHint("Devotion to black", DevotionCount.B)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new GrayMerchantOfAsphodelEffect(), false
+        ).addHint(DevotionCount.B.getHint()));
     }
 
     private GrayMerchantOfAsphodel(final GrayMerchantOfAsphodel card) {

@@ -3,7 +3,6 @@ package mage.cards.a;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.PreventionEffectImpl;
-import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -31,7 +30,7 @@ public final class AcolytesReward extends CardImpl {
         this.getSpellAbility().addEffect(new AcolytesRewardEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetAnyTarget());
-        this.getSpellAbility().addHint(new ValueHint("Devotion to white", DevotionCount.W));
+        this.getSpellAbility().addHint(DevotionCount.W.getHint());
     }
 
     private AcolytesReward(final AcolytesReward card) {

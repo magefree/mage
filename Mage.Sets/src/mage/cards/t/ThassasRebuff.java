@@ -2,7 +2,6 @@ package mage.cards.t;
 
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
-import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -21,10 +20,10 @@ public final class ThassasRebuff extends CardImpl {
         // Counter target spell unless its controller pays {X}, where X is your devotion to blue.
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(DevotionCount.U));
         this.getSpellAbility().addTarget(new TargetSpell());
-        this.getSpellAbility().addHint(new ValueHint("Devotion to blue", DevotionCount.U));
+        this.getSpellAbility().addHint(DevotionCount.U.getHint());
     }
 
-    public ThassasRebuff(final ThassasRebuff card) {
+    private ThassasRebuff(final ThassasRebuff card) {
         super(card);
     }
 

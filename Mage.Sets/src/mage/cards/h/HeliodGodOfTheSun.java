@@ -5,11 +5,9 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.DevotionCount;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
-import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
@@ -40,9 +38,8 @@ public final class HeliodGodOfTheSun extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
 
         // As long as your devotion to white is less than five, Heliod isn't a creature.<i>(Each {W} in the mana costs of permanents you control counts towards your devotion to white.)</i>
-        Effect effect = new LoseCreatureTypeSourceEffect(DevotionCount.W, 5);
-        effect.setText("As long as your devotion to white is less than five, {this} isn't a creature.");
-        this.addAbility(new SimpleStaticAbility(effect).addHint(new ValueHint("Devotion to white", DevotionCount.W)));
+        this.addAbility(new SimpleStaticAbility(new LoseCreatureTypeSourceEffect(DevotionCount.W, 5))
+                .addHint(DevotionCount.W.getHint()));
 
         // Other creatures you control have vigilance.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
@@ -57,7 +54,7 @@ public final class HeliodGodOfTheSun extends CardImpl {
 
     }
 
-    public HeliodGodOfTheSun(final HeliodGodOfTheSun card) {
+    private HeliodGodOfTheSun(final HeliodGodOfTheSun card) {
         super(card);
     }
 

@@ -6,7 +6,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.SetToughnessSourceEffect;
-import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -32,9 +31,10 @@ public final class DaxosBlessedByTheSun extends CardImpl {
 
         // Daxos's toughness is equal to your devotion to white.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetToughnessSourceEffect(DevotionCount.W, Duration.EndOfGame
-        ).setText("{this}'s toughness is equal to your devotion to white"))
-                .addHint(new ValueHint("Devotion to white", DevotionCount.W)));
+                Zone.ALL,
+                new SetToughnessSourceEffect(DevotionCount.W, Duration.EndOfGame)
+                        .setText("{this}'s toughness is equal to your devotion to white")
+        ).addHint(DevotionCount.W.getHint()));
 
         // Whenever another creature you control enters the battlefield or dies, you gain 1 life.
         this.addAbility(new DaxosBlessedByTheSunAbility());
