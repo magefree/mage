@@ -1,15 +1,9 @@
-
 package mage.abilities.keyword;
 
-import java.util.Iterator;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.OptionalAdditionalCost;
-import mage.abilities.costs.OptionalAdditionalCostImpl;
-import mage.abilities.costs.OptionalAdditionalSourceCosts;
+import mage.abilities.costs.*;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -22,9 +16,11 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 
+import java.util.Iterator;
+
 /**
  * 702.25. Buyback
- *
+ * <p>
  * 702.25a Buyback appears on some instants and sorceries. It represents two
  * static abilities that function while the spell is on the stack. "Buyback
  * [cost]" means "You may pay an additional [cost] as you cast this spell" and
@@ -57,7 +53,8 @@ public class BuybackAbility extends StaticAbility implements OptionalAdditionalS
 
     public BuybackAbility(final BuybackAbility ability) {
         super(ability);
-        buybackCost = ability.buybackCost;
+        buybackCost = new OptionalAdditionalCostImpl((OptionalAdditionalCostImpl) ability.buybackCost);
+        amountToReduceBy = ability.amountToReduceBy;
     }
 
     @Override
@@ -67,9 +64,7 @@ public class BuybackAbility extends StaticAbility implements OptionalAdditionalS
 
     @Override
     public void addCost(Cost cost) {
-        if (buybackCost != null) {
-            ((Costs) buybackCost).add(cost);
-        }
+        ((OptionalAdditionalCostImpl) buybackCost).add(cost);
     }
 
     public void resetReduceCost() {
@@ -80,24 +75,23 @@ public class BuybackAbility extends StaticAbility implements OptionalAdditionalS
     public int reduceCost(int genericManaToReduce) {
         int amountToReduce = genericManaToReduce;
         boolean foundCostToReduce = false;
-        if (buybackCost != null) {
-            for (Object cost : ((Costs) buybackCost)) {
-                if (cost instanceof ManaCostsImpl) {
-                    for (Object c : (ManaCostsImpl) cost) {
-                        if (c instanceof GenericManaCost) {
-                            int newCostCMC = ((GenericManaCost) c).convertedManaCost() - amountToReduceBy - genericManaToReduce;
-                            foundCostToReduce = true;
-                            if (newCostCMC > 0) {
-                                amountToReduceBy += genericManaToReduce;
-                            } else {
-                                amountToReduce = ((GenericManaCost) c).convertedManaCost() - amountToReduceBy;
-                                amountToReduceBy = ((GenericManaCost) c).convertedManaCost();
-                            }
+        for (Object cost : ((Costs) buybackCost)) {
+            if (cost instanceof ManaCostsImpl) {
+                for (Object c : (ManaCostsImpl) cost) {
+                    if (c instanceof GenericManaCost) {
+                        int newCostCMC = ((GenericManaCost) c).convertedManaCost() - amountToReduceBy - genericManaToReduce;
+                        foundCostToReduce = true;
+                        if (newCostCMC > 0) {
+                            amountToReduceBy += genericManaToReduce;
+                        } else {
+                            amountToReduce = ((GenericManaCost) c).convertedManaCost() - amountToReduceBy;
+                            amountToReduceBy = ((GenericManaCost) c).convertedManaCost();
                         }
                     }
                 }
             }
         }
+
         if (foundCostToReduce) {
             return amountToReduce;
         }
@@ -106,18 +100,29 @@ public class BuybackAbility extends StaticAbility implements OptionalAdditionalS
 
     @Override
     public boolean isActivated() {
-        if (buybackCost != null) {
-            return buybackCost.isActivated();
-        }
-        resetReduceCost();
-        return false;
+        return buybackCost.isActivated();
     }
 
-    public void resetBuyback() {
-        if (buybackCost != null) {
+    private void resetBuyback(Game game) {
+        activateBuyback(game, false);
+        resetReduceCost();
+        buybackCost.reset();
+    }
+
+    private void activateBuyback(Game game, Boolean isActivated) {
+        // xmage uses copies, all statuses must be saved to game state, not abilities
+        game.getState().setValue(this.getSourceId().toString() + "_activatedBuyback", isActivated);
+
+        // for extra info in cast message
+        if (isActivated) {
+            buybackCost.activate();
+        } else {
             buybackCost.reset();
-            resetReduceCost();
         }
+    }
+
+    public boolean isBuybackActivated(Game game) {
+        return Boolean.TRUE.equals(game.getState().getValue(this.getSourceId().toString() + "_activatedBuyback"));
     }
 
     @Override
@@ -125,17 +130,15 @@ public class BuybackAbility extends StaticAbility implements OptionalAdditionalS
         if (ability instanceof SpellAbility) {
             Player player = game.getPlayer(ability.getControllerId());
             if (player != null) {
-                this.resetBuyback();
-                if (buybackCost != null) {
-                    if (player.chooseUse(Outcome.Benefit, "Pay " + buybackCost.getText(false) + " ?", ability, game)) {
-                        buybackCost.activate();
-                        for (Iterator it = ((Costs) buybackCost).iterator(); it.hasNext();) {
-                            Cost cost = (Cost) it.next();
-                            if (cost instanceof ManaCostsImpl) {
-                                ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());
-                            } else {
-                                ability.getCosts().add(cost.copy());
-                            }
+                this.resetBuyback(game);
+                if (player.chooseUse(Outcome.Benefit, "Pay " + buybackCost.getText(false) + " ?", ability, game)) {
+                    activateBuyback(game, true);
+                    for (Iterator it = ((Costs) buybackCost).iterator(); it.hasNext(); ) {
+                        Cost cost = (Cost) it.next();
+                        if (cost instanceof ManaCostsImpl) {
+                            ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());
+                        } else {
+                            ability.getCosts().add(cost.copy());
                         }
                     }
                 }
@@ -145,29 +148,12 @@ public class BuybackAbility extends StaticAbility implements OptionalAdditionalS
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder();
-        if (buybackCost != null) {
-            sb.append(buybackCost.getText(false));
-            sb.append(' ').append(buybackCost.getReminderText());
-        }
-        return sb.toString();
+        return buybackCost.getText(false) + ' ' + buybackCost.getReminderText();
     }
 
     @Override
     public String getCastMessageSuffix() {
-        if (buybackCost != null) {
-            return buybackCost.getCastSuffixMessage(0);
-        } else {
-            return "";
-        }
-    }
-
-    public String getReminderText() {
-        if (buybackCost != null) {
-            return buybackCost.getReminderText();
-        } else {
-            return "";
-        }
+        return buybackCost.getCastSuffixMessage(0);
     }
 }
 
@@ -196,10 +182,9 @@ class BuybackEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getTargetId().equals(source.getSourceId())) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Zone.STACK && zEvent.getToZone() == Zone.GRAVEYARD
-                    && source.getSourceId().equals(event.getSourceId())) { // if spell fizzled, the sourceId is null
-                return true;
-            }
+            // if spell fizzled, the sourceId is null
+            return zEvent.getFromZone() == Zone.STACK && zEvent.getToZone() == Zone.GRAVEYARD
+                    && source.getSourceId().equals(event.getSourceId());
         }
         return false;
     }
@@ -213,7 +198,7 @@ class BuybackEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Card card = game.getCard(source.getSourceId());
         if (card != null && source instanceof BuybackAbility) {
-            if (((BuybackAbility) source).isActivated()) {
+            if (((BuybackAbility) source).isBuybackActivated(game)) {
                 return card.moveToZone(Zone.HAND, source.getSourceId(), game, true, event.getAppliedEffects());
             }
         }

@@ -365,7 +365,7 @@ public class HelperPanel extends JPanel {
             this.mainPanel.setOpaque(false);
         }
 
-        if (buttons.size() == 0) {
+        if (buttons.isEmpty()) {
             return;
         }
 

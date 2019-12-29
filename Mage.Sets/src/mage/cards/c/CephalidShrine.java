@@ -1,12 +1,9 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -19,11 +16,12 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 import mage.players.Player;
+import mage.util.ManaUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class CephalidShrine extends CardImpl {
@@ -93,7 +91,7 @@ class CephalidShrineEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int count = 0;
         MageObject mageObject = game.getObject(source.getSourceId());
-        if(mageObject != null) {
+        if (mageObject != null) {
             Spell spell = (Spell) game.getState().getValue("cephalidShrine" + mageObject);
             if (spell != null) {
                 Player controller = game.getPlayer(spell.getControllerId());
@@ -108,7 +106,7 @@ class CephalidShrineEffect extends OneShotEffect {
                         }
                     }
                     // even if the cost is 0, we still offer
-                    Cost cost = new GenericManaCost(count);
+                    Cost cost = ManaUtil.createManaCost(count, true);
                     if (game.getStack().contains(spell)
                             && cost.canPay(source, source.getSourceId(), controller.getId(), game)
                             && controller.chooseUse(outcome, "Pay " + cost.getText() + " to prevent countering " + spell.getName() + "?", source, game)

@@ -107,7 +107,7 @@ class CephalidSnitchEffect extends LoseAbilityTargetEffect{
                             objectColors.add(o);
                     }
                 //Construct a card filter excluding black
-                if(objectColors.size() > 0) {
+                if(!objectColors.isEmpty()) {
                     FilterCard filter = new FilterCard(filterNameAssembler(objectColors));
                     if (objectColors.size() == 1)
                         filter.add(new ColorPredicate(objectColors.get(0)));

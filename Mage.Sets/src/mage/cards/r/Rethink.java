@@ -1,9 +1,7 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.Cost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -13,15 +11,17 @@ import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetSpell;
+import mage.util.ManaUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class Rethink extends CardImpl {
 
     public Rethink(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");
 
         // Counter target spell unless its controller pays {X}, where X is its converted mana cost.
         this.getSpellAbility().addEffect(new RethinkEffect());
@@ -60,7 +60,7 @@ class RethinkEffect extends OneShotEffect {
         if (spell != null) {
             Player player = game.getPlayer(spell.getControllerId());
             if (player != null) {
-                GenericManaCost cost = new GenericManaCost(spell.getConvertedManaCost());
+                Cost cost = ManaUtil.createManaCost(spell.getConvertedManaCost(), true);
                 if (!cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
                     game.getStack().counter(spell.getId(), source.getSourceId(), game);
                 }

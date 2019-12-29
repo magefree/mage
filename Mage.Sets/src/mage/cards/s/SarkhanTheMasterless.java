@@ -129,7 +129,6 @@ class SarkhanTheMasterlessBecomeDragonEffect extends ContinuousEffectImpl {
                         permanent.addCardType(CardType.CREATURE);
                         permanent.getSubtype(game).clear();
                         permanent.getSubtype(game).add(SubType.DRAGON);
-                        permanent.getSuperType().clear();
                     }
                     break;
                 case ColorChangingEffects_5:

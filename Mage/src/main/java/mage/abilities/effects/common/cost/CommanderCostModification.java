@@ -1,23 +1,28 @@
-
 package mage.abilities.effects.common.cost;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.CastCommanderAbility;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.common.PlayLandAsCommanderAbility;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
+import mage.util.ManaUtil;
+import mage.watchers.common.CommanderPlaysCountWatcher;
+
+import java.util.UUID;
 
 /**
- *
  * @author Plopman
  */
-//20130711
-/*903.10. A player may cast a commander he or she owns from the command zone.
- * Doing so costs that player an additional {2} for each previous time he or she cast that commander from the command zone that game.
- * */
+    /*
+    903.8. A player may cast a commander they own from the command zone. A commander cast from the
+    command zone costs an additional {2} for each previous time the player casting it has cast it from
+    the command zone that game. This additional cost is informally known as the “commander tax.”
+     */
+
+// cast from hand like Remand do not increase commander tax
+
 public class CommanderCostModification extends CostModificationEffectImpl {
 
     private final UUID commanderId;
@@ -34,17 +39,18 @@ public class CommanderCostModification extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        Integer castCount = (Integer) game.getState().getValue(commanderId + "_castCount");
+        CommanderPlaysCountWatcher watcher = game.getState().getWatcher(CommanderPlaysCountWatcher.class);
+        int castCount = watcher.getPlaysCount(commanderId);
         if (castCount > 0) {
-            abilityToModify.getManaCostsToPay().add(new GenericManaCost(2 * castCount));
+            abilityToModify.getManaCostsToPay().add(ManaUtil.createManaCost(2 * castCount, false));
         }
         return true;
-
     }
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        return abilityToModify instanceof CastCommanderAbility && abilityToModify.getSourceId().equals(commanderId);
+        return commanderId.equals(abilityToModify.getSourceId())
+                && (abilityToModify instanceof CastCommanderAbility || abilityToModify instanceof PlayLandAsCommanderAbility);
     }
 
     @Override

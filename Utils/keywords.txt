@@ -65,6 +65,7 @@ Mountaincycling|cost|
 Mountainwalk|new|
 Morph|card, cost|
 Myriad|new|
+Ninjutsu|cost|
 Outlast|cost|
 Persist|new|
 Phasing|instance|
@@ -76,6 +77,7 @@ Prowess|new|
 Reach|instance|
 Rebound|new|
 Renown|number|
+Replicate|card, manaString|
 Riot|new|
 Scavenge|cost|
 Shadow|instance|

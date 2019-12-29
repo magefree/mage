@@ -1,4 +1,3 @@
-
 package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
@@ -20,7 +19,7 @@ public enum BuybackCondition implements Condition {
         if (card != null) {
             return card.getAbilities().stream()
                     .filter(a -> a instanceof BuybackAbility)
-                    .anyMatch(Ability::isActivated);
+                    .anyMatch(a -> ((BuybackAbility) a).isBuybackActivated(game));
         }
         return false;
     }

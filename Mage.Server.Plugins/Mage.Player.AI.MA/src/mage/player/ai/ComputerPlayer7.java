@@ -1,14 +1,14 @@
-
 package mage.player.ai;
 
-import java.util.LinkedList;
 import mage.abilities.Ability;
 import mage.constants.RangeOfInfluence;
 import mage.game.Game;
 import org.apache.log4j.Logger;
 
+import java.util.Date;
+import java.util.LinkedList;
+
 /**
- *
  * @author ayratn
  */
 public class ComputerPlayer7 extends ComputerPlayer6 {
@@ -107,6 +107,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
 
     protected void calculateActions(Game game) {
         if (!getNextAction(game)) {
+            Date startTime = new Date();
             currentScore = GameStateEvaluator2.evaluate(playerId, game);
             Game sim = createSimulation(game);
             SimulationNode2.resetCount();
@@ -137,6 +138,15 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
             } else {
                 logger.info('[' + game.getPlayer(playerId).getName() + "][pre] Action: skip");
             }
+            Date endTime = new Date();
+            this.setLastThinkTime((endTime.getTime() - startTime.getTime()));
+
+            /*
+            logger.warn("Last think time: " + this.getLastThinkTime()
+                    + "; actions: " + actions.size()
+                    + "; hand: " + this.getHand().size()
+                    + "; permanents: " + game.getBattlefield().getAllPermanents().size());
+             */
         } else {
             logger.debug("Next Action exists!");
         }

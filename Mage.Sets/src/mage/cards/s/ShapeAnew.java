@@ -24,7 +24,7 @@ public final class ShapeAnew extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");
 
         // The controller of target artifact sacrifices it, then reveals cards from the top
-        // of their library until he or she reveals an artifact card. That player puts
+        // of their library until they reveal an artifact card. That player puts
         // that card onto the battlefield, then shuffles all other cards revealed this way into their library.
         this.getSpellAbility().addEffect(new ShapeAnewEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_AN));
@@ -43,7 +43,7 @@ public final class ShapeAnew extends CardImpl {
 
         public ShapeAnewEffect() {
             super(Outcome.PutCardInPlay);
-            staticText = "The controller of target artifact sacrifices it, then reveals cards from the top of their library until he or she reveals an artifact card. That player puts that card onto the battlefield, then shuffles all other cards revealed this way into their library";
+            staticText = "The controller of target artifact sacrifices it, then reveals cards from the top of their library until they reveal an artifact card. That player puts that card onto the battlefield, then shuffles all other cards revealed this way into their library";
         }
 
         public ShapeAnewEffect(ShapeAnewEffect effect) {
@@ -74,7 +74,7 @@ public final class ShapeAnew extends CardImpl {
             if (artifactCard != null) {
                 targetController.moveCards(artifactCard, Zone.BATTLEFIELD, source, game);
             }
-            // 1/1/2011: If the first card the player reveals is an artifact card, he or she will still have to shuffle their library even though no other cards were revealed this way.
+            // 1/1/2011: If the first card the player reveals is an artifact card, they will still have to shuffle their library even though no other cards were revealed this way.
             targetController.shuffleLibrary(source, game);
             return true;
         }

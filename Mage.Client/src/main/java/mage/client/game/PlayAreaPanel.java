@@ -1,42 +1,29 @@
-
 package mage.client.game;
-
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.lang.reflect.Field;
-import java.util.UUID;
-import javax.swing.BorderFactory;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.MenuSelectionManager;
-import javax.swing.event.ChangeListener;
 
 import mage.cards.decks.importer.DeckImporter;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.cards.BigCard;
 import mage.client.dialog.PreferencesDialog;
-import static mage.client.dialog.PreferencesDialog.KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS;
-import static mage.client.dialog.PreferencesDialog.KEY_GAME_MANA_AUTOPAYMENT;
-import static mage.client.dialog.PreferencesDialog.KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE;
-import static mage.client.dialog.PreferencesDialog.KEY_USE_FIRST_MANA_ABILITY;
 import mage.client.util.GUISizeHelper;
 import mage.constants.PlayerAction;
+import mage.view.GameView;
 import mage.view.PlayerView;
 import mage.view.UserRequestMessage;
 
+import javax.swing.*;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.event.ChangeListener;
+import java.awt.*;
+import java.awt.event.*;
+import java.lang.reflect.Field;
+import java.util.Set;
+import java.util.UUID;
+
+import static mage.client.dialog.PreferencesDialog.*;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class PlayAreaPanel extends javax.swing.JPanel {
@@ -77,7 +64,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
         popupMenu = new JPopupMenu();
         if (options.isPlayer) {
-            addPopupMenuPlayer(player.getUserData().isAllowRequestShowHandCards());
+            addPopupMenuPlayer(player.getUserData().isAllowRequestHandToAll());
         } else {
             addPopupMenuWatcher();
         }
@@ -85,7 +72,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         setGUISize();
 
         init(player, bigCard, gameId, priorityTime);
-        update(player);
+        update(null, player, null);
     }
 
     public void CleanUp() {
@@ -331,12 +318,12 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             // Request to see hand cards
             menuItem.addActionListener(e -> SessionHandler.sendPlayerAction(PlayerAction.REQUEST_PERMISSION_TO_SEE_HAND_CARDS, gameId, playerId));
         } else {
-            allowViewHandCardsMenuItem = new JCheckBoxMenuItem("Allow requests to show from other users", allowRequestToShowHandCards);
+            allowViewHandCardsMenuItem = new JCheckBoxMenuItem("Allow hand requests from other users", allowRequestToShowHandCards);
             allowViewHandCardsMenuItem.setMnemonic(KeyEvent.VK_A);
-            allowViewHandCardsMenuItem.setToolTipText("If activated watchers or other players can request to see your hand cards. If you grant this to a user, it's valid for the complete match.");
+            allowViewHandCardsMenuItem.setToolTipText("Watchers or other players can request your hand cards once per game. Re-activate it to allow new requests.");
             handCardsMenu.add(allowViewHandCardsMenuItem);
 
-            // Requests allowed
+            // requests allowed (disable -> enable to reset requested list)
             allowViewHandCardsMenuItem.addActionListener(e -> {
                 boolean requestsAllowed = ((JCheckBoxMenuItem) e.getSource()).getState();
                 PreferencesDialog.setPrefValue(KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS, requestsAllowed);
@@ -451,13 +438,13 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             }
         });
 
-        
+
         popupMenu.addSeparator();
-        
+
         menuItem = new JMenuItem("<html>View current deck");
         menuItem.setMnemonic(KeyEvent.VK_V);
         popupMenu.add(menuItem);
-        
+
         // View limited deck
         menuItem.addActionListener(e -> {
             SessionHandler.sendPlayerAction(PlayerAction.VIEW_LIMITED_DECK, gameId, null);
@@ -518,11 +505,11 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         }
     }
 
-    public final void update(PlayerView player) {
-        this.playerPanel.update(player);
+    public final void update(GameView game, PlayerView player, Set<UUID> possibleTargets) {
+        this.playerPanel.update(game, player, possibleTargets);
         this.battlefieldPanel.update(player.getBattlefield());
         if (this.allowViewHandCardsMenuItem != null) {
-            this.allowViewHandCardsMenuItem.setSelected(player.getUserData().isAllowRequestShowHandCards());
+            this.allowViewHandCardsMenuItem.setSelected(player.getUserData().isAllowRequestHandToAll());
         }
     }
 
@@ -547,14 +534,14 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         layout.setHorizontalGroup(
                 layout.createSequentialGroup()
-                .addComponent(playerPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(battlefieldPanel, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(playerPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(ComponentPlacement.RELATED)
+                        .addComponent(battlefieldPanel, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(Alignment.LEADING)
-                .addComponent(playerPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addComponent(battlefieldPanel, GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                        .addComponent(playerPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(battlefieldPanel, GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
         );
         this.setLayout(layout);
     }

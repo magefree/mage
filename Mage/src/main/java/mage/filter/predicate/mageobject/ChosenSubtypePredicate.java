@@ -9,13 +9,10 @@ import mage.filter.predicate.ObjectSourcePlayer;
 import mage.game.Game;
 
 /**
- *
  * @author LoneFox
  */
-public class ChosenSubtypePredicate implements ObjectPlayerPredicate<ObjectSourcePlayer<MageObject>> {
-
-    public ChosenSubtypePredicate() {
-    }
+public enum ChosenSubtypePredicate implements ObjectPlayerPredicate<ObjectSourcePlayer<MageObject>> {
+    instance;
 
     @Override
     public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {

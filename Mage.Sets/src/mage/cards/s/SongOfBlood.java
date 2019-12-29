@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.Set;
@@ -17,7 +16,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -76,7 +75,7 @@ class SongOfBloodEffect extends OneShotEffect {
                 Set<Card> movedCards = controller.moveCardsToGraveyardWithInfo(cardsToGraveyard.getCards(game), source, game, Zone.LIBRARY);
                 Cards cardsMoved = new CardsImpl();
                 cardsMoved.addAll(movedCards);
-                int creatures = cardsMoved.count(new FilterCreatureCard(), game);
+                int creatures = cardsMoved.count(StaticFilters.FILTER_CARD_CREATURE, game);
                 if (creatures > 0) {
                     // Setup a delayed trigger to give +X/+0 to any creature attacking this turn..
                     DelayedTriggeredAbility delayedAbility = new SongOfBloodTriggeredAbility(creatures);

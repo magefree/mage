@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -21,7 +20,7 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -58,7 +57,7 @@ public final class GateToTheAfterlife extends CardImpl {
         // {2}, {T}, Sacrifice Gate to the Afterlife: Search your graveyard, hand, and/or library for a card named God-Pharaoh's Gift and put it onto the battlefield. If you seearch your library this way, shuffle it. Activate this ability only if there are six or more creature cards in your graveyard.
         ability = new ConditionalActivatedAbility(
                 Zone.BATTLEFIELD, new GateToTheAfterlifeEffect(), new GenericManaCost(2),
-                new CardsInControllerGraveCondition(6, new FilterCreatureCard())
+                new CardsInControllerGraveCondition(6, StaticFilters.FILTER_CARD_CREATURE)
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

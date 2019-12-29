@@ -34,7 +34,7 @@ public final class BoobyTrap extends CardImpl {
         etbAbility.addEffect(new ChooseOpponentEffect(Outcome.Damage));
         this.addAbility(etbAbility);
 
-        // The chosen player reveals each card he or she draws.
+        // The chosen player reveals each card they draw.
         // When the chosen player draws the named card, sacrifice Booby Trap. If you do, Booby Trap deals 10 damage to that player.
         this.addAbility(new BoobyTrapTriggeredAbility());
     }
@@ -91,7 +91,7 @@ class BoobyTrapTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "The chosen player reveals each card he or she draws.\n" +
+        return "The chosen player reveals each card they draw.\n" +
                 "When the chosen player draws the named card, sacrifice {this}. If you do, {this} deals 10 damage to that player.";
     }
 }

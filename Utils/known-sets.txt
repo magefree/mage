@@ -26,12 +26,14 @@ Commander 2015 Edition|Commander2015Edition|
 Commander 2016 Edition|Commander2016Edition|
 Commander 2017 Edition|Commander2017Edition|
 Commander 2018|Commander2018Edition|
+Commander 2019|Commander2019Edition|
 Commander Anthology|CommanderAnthology|
 Commander Anthology 2018|CommanderAnthology2018|
 Commander's Arsenal|CommandersArsenal|
 Conflux|Conflux|
 Conspiracy: Take the Crown|ConspiracyTakeTheCrown|
 Core Set 2019|CoreSet2019|
+Core Set 2020|CoreSet2020|
 Dark Ascension|DarkAscension|
 Darksteel|Darksteel|
 Dissension|Dissension|
@@ -88,6 +90,8 @@ From the Vault: Transform|FromTheVaultTransform|
 From the Vault: Twenty|FromTheVaultTwenty|
 Future Sight|FutureSight|
 Game Day|GameDay|
+Game Night|GameNight|
+Game Night 2019|GameNight2019|
 Gatecrash|Gatecrash|
 Global Series: Jiang Yanggu & Mu Yanling|GlobalSeriesJiangYangguAndMuYanling|
 Grand Prix|GrandPrixPromos|
@@ -184,6 +188,9 @@ Tempest Remastered|TempestRemastered|
 Tenth Edition|TenthEdition|
 The Dark|TheDark|
 Theros|Theros|
+Theros Beyond Death|TherosBeyondDeath|
+Throne of Eldraine|ThroneOfEldraine|
+Throne of Eldraine Collector's Edition|ThroneOfEldraineCollectorsEdition|
 Time Spiral|TimeSpiral|
 Time Spiral "Timeshifted"|TimeSpiralTimeshifted|
 Torment|Torment|

@@ -45,7 +45,7 @@ public final class BrutalExpulsion extends CardImpl {
         Mode mode = new Mode();
         mode.addEffect(new DamageTargetEffect(2));
         Effect effect = new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn);
-        effect.setText("If that permanent would be put into a graveyard this turn, exile it instead");
+        effect.setText("If that creature or planeswalker would die this turn, exile it instead");
         mode.addEffect(effect);
         mode.addTarget(new TargetCreatureOrPlaneswalker().withChooseHint("deals 2 damage and exile instead"));
         this.getSpellAbility().addMode(mode);

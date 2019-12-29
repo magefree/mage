@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.game.permanent.token.SaprolingToken;
 
 /**
@@ -28,7 +27,6 @@ public final class OvergrownArmasaur extends CardImpl {
 
         // Enrage - Whenever Overgrown Armasaur is dealt damage, create a 1/1 green Saproling creature token.
         Ability ability = new DealtDamageToSourceTriggeredAbility(
-                Zone.BATTLEFIELD,
                 new CreateTokenEffect(new SaprolingToken()),
                 false,
                 true);

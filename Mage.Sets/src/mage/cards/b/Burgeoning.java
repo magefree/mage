@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.cards.CardImpl;
@@ -13,6 +11,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  * @author duncant
@@ -54,7 +54,7 @@ class BurgeoningTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent land = game.getPermanent(event.getTargetId());
-        return game.getOpponents(controllerId).contains(land.getControllerId());
+        return land != null && game.getOpponents(controllerId).contains(land.getControllerId());
     }
 
     @Override

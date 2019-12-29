@@ -1,4 +1,3 @@
-
 package mage.abilities.costs.mana;
 
 import mage.Mana;
@@ -11,9 +10,8 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
- *
- * @author BetaSteward_at_googlemail.com
  * @param <T>
+ * @author BetaSteward_at_googlemail.com
  */
 public interface ManaCosts<T extends ManaCost> extends List<T>, ManaCost {
 
@@ -21,9 +19,15 @@ public interface ManaCosts<T extends ManaCost> extends List<T>, ManaCost {
 
     List<VariableCost> getVariableCosts();
 
+    boolean containsX();
+
     int getX();
 
-    void setX(int x);
+    /**
+     * @param xValue final X value -- announced X * xMultiplier, where xMultiplier can be changed by replace events like Unbound Flourishing)
+     * @param xPay   real number of pay amount (x * xMultiplier * xInstances, where xInstances is number of {X} in pay like 1, 2, 3)
+     */
+    void setX(int xValue, int xPay);
 
     void load(String mana);
 
@@ -41,7 +45,7 @@ public interface ManaCosts<T extends ManaCost> extends List<T>, ManaCost {
     static ManaCosts<ManaCost> removeVariableManaCost(ManaCosts<ManaCost> m) {
         return m.stream()
                 .filter(mc -> !(mc instanceof VariableManaCost))
-                .collect(Collectors.toCollection(ManaCostsImpl<ManaCost>::new));
+                .collect(Collectors.toCollection(ManaCostsImpl::new));
 
     }
 

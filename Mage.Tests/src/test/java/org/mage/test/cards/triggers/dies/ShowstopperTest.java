@@ -15,7 +15,7 @@ public class ShowstopperTest extends CardTestPlayerBase {
 
     /**
      * Tests that the dies triggered ability of silvercoat lion (gained by Showstopper)
-     * triggers as he dies from Ligning Bolt
+     * triggers as he dies from Lightning Bolt
      *
      */
     @Test

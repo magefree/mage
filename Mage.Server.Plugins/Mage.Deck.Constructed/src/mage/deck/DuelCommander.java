@@ -47,6 +47,7 @@ public class DuelCommander extends Commander {
         banned.add("Polymorph");
         banned.add("Price of Progress");
         banned.add("Protean Hulk");
+        banned.add("Scapeshift");
         banned.add("Sensei's Divining Top");
         banned.add("Shahrazad");
         banned.add("Sol Ring");
@@ -55,25 +56,30 @@ public class DuelCommander extends Commander {
         banned.add("The Tabernacle at Pendrell Vale");
         banned.add("Time Vault");
         banned.add("Time Walk");
+        banned.add("Timetwister");
         banned.add("Tinker");
         banned.add("Tolarian Academy");
         banned.add("Treasure Cruise");
         banned.add("Vampiric Tutor");
 
+        bannedCommander.add("Arahbo, Roar of the World");
         bannedCommander.add("Breya, Etherium Shaper");
         bannedCommander.add("Bruse Tarl, Boorish Herder");
         bannedCommander.add("Derevi, Empyrial Tactician");
         bannedCommander.add("Edgar Markov");
         bannedCommander.add("Edric, Spymaster of Trest");
-        bannedCommander.add("Erayo, Soratami Ascendant");
+        bannedCommander.add("Emry, Lurker of the Loch");
         bannedCommander.add("Geist of Saint Traft");
         bannedCommander.add("Jace, Vryn's Prodigy");
         bannedCommander.add("Marath, Will of the Wild");
+        bannedCommander.add("Najeela, the Blade-Blossom");
         bannedCommander.add("Oloro, Ageless Ascetic");
         bannedCommander.add("Rofellos, Llanowar Emissary");
         bannedCommander.add("Tasigur, the Golden Fang");
+        bannedCommander.add("Teferi, Temporal Archmage");
+        bannedCommander.add("Urza, Lord High Artificer");
         bannedCommander.add("Vial Smasher the Fierce");
-        bannedCommander.add("Zur the Enchanter");
+        bannedCommander.add("Yuriko, the Tiger’s Shadow");
         bannedCommander.add("Zurgo Bellstriker");
     }
 

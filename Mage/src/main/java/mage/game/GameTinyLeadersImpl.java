@@ -16,6 +16,7 @@ import mage.game.mulligan.Mulligan;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.watchers.common.CommanderInfoWatcher;
+import mage.watchers.common.CommanderPlaysCountWatcher;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -42,7 +43,10 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
 
     @Override
     protected void init(UUID choosingPlayerId) {
-        //Move tiny leader to command zone
+        // plays watcher
+        state.addWatcher(new CommanderPlaysCountWatcher());
+
+        // move tiny leader to command zone
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
             if (player != null) {
@@ -54,12 +58,11 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
                     player.addCommanderId(commander.getId());
                     commander.moveToZone(Zone.COMMAND, null, this, true);
                     Ability ability = new SimpleStaticAbility(Zone.COMMAND, new InfoEffect("Commander effects"));
-                    ability.addEffect(new CommanderReplacementEffect(commander.getId(), alsoHand, alsoLibrary));
+                    ability.addEffect(new CommanderReplacementEffect(commander.getId(), alsoHand, alsoLibrary, false, "Commander"));
                     ability.addEffect(new CommanderCostModification(commander.getId()));
                     // Commander rule #4 was removed Jan. 18, 2016
                     // ability.addEffect(new CommanderManaReplacementEffect(player.getId(), CardUtil.getColorIdentity(commander)));
-                    getState().setValue(commander.getId() + "_castCount", 0);
-                    CommanderInfoWatcher watcher = new CommanderInfoWatcher(commander.getId(), false);
+                    CommanderInfoWatcher watcher = new CommanderInfoWatcher("Commander", commander.getId(), false);
                     getState().addWatcher(watcher);
                     watcher.addCardInfoToCommander(this);
                     this.getState().addAbility(ability, null);

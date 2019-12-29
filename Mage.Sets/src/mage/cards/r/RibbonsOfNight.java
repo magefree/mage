@@ -36,7 +36,7 @@ public final class RibbonsOfNight extends CardImpl {
         //If {U} was spent to cast Ribbons of Night, draw a card.
        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(1), 
-                new ManaWasSpentCondition(ColoredManaSymbol.U), "If {U} was spent to cast {this}, draw a card"));
+                new ManaWasSpentCondition(ColoredManaSymbol.U), "If {U} was spent to cast this spell, draw a card"));
     }
 
     public RibbonsOfNight(final RibbonsOfNight card) {

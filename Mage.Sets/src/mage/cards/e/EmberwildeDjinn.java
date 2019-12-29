@@ -41,7 +41,7 @@ public final class EmberwildeDjinn extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // At the beginning of each player's upkeep, that player may pay {R}{R} or 2 life. If he or she does, the player gains control of Emberwilde Djinn.
+        // At the beginning of each player's upkeep, that player may pay {R}{R} or 2 life. If they do, the player gains control of Emberwilde Djinn.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new EmberwildeDjinnEffect(), TargetController.ANY, false));
     }
 
@@ -59,7 +59,7 @@ class EmberwildeDjinnEffect extends OneShotEffect {
 
     EmberwildeDjinnEffect() {
         super(Outcome.Benefit);
-        this.staticText = "that player may pay {R}{R} or 2 life. If he or she does, the player gains control of {this}";
+        this.staticText = "that player may pay {R}{R} or 2 life. If they do, the player gains control of {this}";
     }
 
     EmberwildeDjinnEffect(final EmberwildeDjinnEffect effect) {

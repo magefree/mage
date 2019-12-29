@@ -19,7 +19,6 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- *
  * @author emerald000
  */
 public final class Balance extends CardImpl {
@@ -27,7 +26,7 @@ public final class Balance extends CardImpl {
     public Balance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{W}");
 
-        // Each player chooses a number of lands he or she controls equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players discard cards and sacrifice creatures the same way.
+        // Each player chooses a number of lands they control equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players discard cards and sacrifice creatures the same way.
         this.getSpellAbility().addEffect(new BalanceEffect());
     }
 
@@ -166,9 +165,8 @@ class BalanceEffect extends OneShotEffect {
                 if (player != null && cardsToDiscard.get(playerId) != null) {
                     for (UUID cardId : cardsToDiscard.get(playerId)) {
                         Card card = game.getCard(cardId);
-                        if (card != null) {
-                            player.discard(card, source, game);
-                        }
+                        player.discard(card, source, game);
+
                     }
                 }
             }

@@ -25,7 +25,7 @@ public final class MindBomb extends CardImpl {
     public MindBomb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}");
 
-        // Each player may discard up to three cards. Mind Bomb deals damage to each player equal to 3 minus the number of cards he or she discarded this way.
+        // Each player may discard up to three cards. Mind Bomb deals damage to each player equal to 3 minus the number of cards they discarded this way.
         this.getSpellAbility().addEffect(new MindBombEffect());
     }
 
@@ -44,7 +44,7 @@ class MindBombEffect extends OneShotEffect {
     public MindBombEffect() {
         super(Outcome.Neutral);
         this.staticText = "Each player may discard up to three cards."
-                + " {this} deals damage to each player equal to 3 minus the number of cards he or she discarded this way";
+                + " {this} deals damage to each player equal to 3 minus the number of cards they discarded this way";
     }
 
     public MindBombEffect(final MindBombEffect effect) {
@@ -83,9 +83,8 @@ class MindBombEffect extends OneShotEffect {
                     if (cardsPlayer != null) {
                         for (UUID cardId : cardsPlayer) {
                             Card card = game.getCard(cardId);
-                            if (card != null) {
-                                player.discard(card, source, game);
-                            }
+                            player.discard(card, source, game);
+
                         }
                     }
                 }

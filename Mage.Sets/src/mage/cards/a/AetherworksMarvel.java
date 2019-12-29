@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.Set;
@@ -34,10 +33,15 @@ public final class AetherworksMarvel extends CardImpl {
         addSuperType(SuperType.LEGENDARY);
 
         // Whenever a permanent you control is put into a graveyard, you get {E}.
-        this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(new GetEnergyCountersControllerEffect(1), false, new FilterControlledPermanent("a permanent you control"), false));
+        this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(
+                new GetEnergyCountersControllerEffect(1), false,
+                new FilterControlledPermanent("a permanent you control"), false));
 
-        // {T}, Pay {E}{E}{E}{E}{E}{E}: Look at the top six cards of your library. You may cast a card from among them without paying its mana cost. Put the rest on the bottom of your library in a random order.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AetherworksMarvelEffect(), new TapSourceCost());
+        // {T}, Pay {E}{E}{E}{E}{E}{E}: Look at the top six cards of your library. 
+        // You may cast a card from among them without paying its mana cost. 
+        // Put the rest on the bottom of your library in a random order.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
+                new AetherworksMarvelEffect(), new TapSourceCost());
         ability.addCost(new PayEnergyCost(6));
         this.addAbility(ability);
     }
@@ -56,7 +60,10 @@ class AetherworksMarvelEffect extends OneShotEffect {
 
     AetherworksMarvelEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "Look at the top six cards of your library. You may cast a card from among them without paying its mana cost. Put the rest on the bottom of your library in a random order";
+        this.staticText = "Look at the top six cards of your library. "
+                + "You may cast a card from among them without paying "
+                + "its mana cost. Put the rest on the bottom of your "
+                + "library in a random order";
     }
 
     AetherworksMarvelEffect(final AetherworksMarvelEffect effect) {
@@ -74,11 +81,18 @@ class AetherworksMarvelEffect extends OneShotEffect {
         if (controller != null) {
             Set<Card> cardsSet = controller.getLibrary().getTopCards(game, 6);
             Cards cards = new CardsImpl(cardsSet);
-            TargetCard target = new TargetCardInLibrary(0, 1, new FilterNonlandCard("card to cast without paying its mana cost"));
+            TargetCard target = new TargetCardInLibrary(0, 1, 
+                    new FilterNonlandCard("card to cast without paying its mana cost"));
             if (controller.choose(Outcome.PlayForFree, cards, target, game)) {
                 Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
-                if (card != null && controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game))) {
-                    cards.remove(card);
+                if (card != null) {
+                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                    Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
+                            game, true, new MageObjectReference(source.getSourceObject(game), game));
+                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+                    if (cardWasCast) {
+                        cards.remove(card);
+                    }
                 }
             }
             controller.putCardsOnBottomOfLibrary(cards, game, source, false);

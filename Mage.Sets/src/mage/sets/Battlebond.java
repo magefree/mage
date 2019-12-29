@@ -15,7 +15,6 @@ public final class Battlebond extends ExpansionSet {
         return instance;
     }
 
-
     private Battlebond() {
         super("Battlebond", "BBD", ExpansionSet.buildDate(2018, 6, 8), SetType.SUPPLEMENTAL);
         this.blockName = "Battlebond";
@@ -27,6 +26,8 @@ public final class Battlebond extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+
+        this.maxCardNumberInBooster = 254; // Don't use the 2 foil mystics copies because it would influence a random ratio
 
         cards.add(new SetCardInfo("Aim High", 189, Rarity.UNCOMMON, mage.cards.a.AimHigh.class));
         cards.add(new SetCardInfo("Angel of Retribution", 86, Rarity.UNCOMMON, mage.cards.a.AngelOfRetribution.class));

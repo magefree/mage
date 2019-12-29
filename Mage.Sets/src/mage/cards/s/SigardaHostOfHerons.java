@@ -1,23 +1,20 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HexproofAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.PermanentCard;
-import mage.game.stack.Spell;
-import mage.game.stack.StackAbility;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author noxx
@@ -72,28 +69,12 @@ class SigardaHostOfHeronsEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getPlayerId().equals(source.getControllerId())) {
-            MageObject object = game.getObject(event.getSourceId());
-            if (object instanceof PermanentCard) {
-                if (game.getOpponents(source.getControllerId()).contains(((PermanentCard) object).getControllerId())) {
-                    return true;
-                }
-            }
-            if (object instanceof Spell) {
-                if (game.getOpponents(source.getControllerId()).contains(((Spell) object).getControllerId())) {
-                    return true;
-                }
-            }
-            if (object instanceof Card) {
-                if (game.getOpponents(source.getControllerId()).contains(((Card) object).getOwnerId())) {
-                    return true;
-                }
-            }
-            if (object instanceof StackAbility) {
-                if (game.getOpponents(source.getControllerId()).contains(((StackAbility) object).getControllerId())) {
-                    return true;
-                }
-            }
+        Player controller = game.getPlayer(source.getControllerId());
+        UUID eventSourceControllerId = game.getControllerId(event.getSourceId());
+        Permanent permanent = game.getPermanent(event.getTargetId());
+
+        if (controller != null && permanent != null && permanent.getControllerId() == source.getControllerId()) {
+            return game.getOpponents(source.getControllerId()).contains(eventSourceControllerId);
         }
         return false;
     }

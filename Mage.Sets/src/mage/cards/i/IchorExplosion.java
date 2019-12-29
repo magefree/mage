@@ -3,6 +3,7 @@ package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -52,7 +53,7 @@ class IchorExplosionDynamicValue implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Card sourceCard = game.getCard(sourceAbility.getSourceId());
         if (sourceCard != null) {
-            for (Object cost : sourceAbility.getCosts()) {
+            for (Cost cost : sourceAbility.getCosts()) {
                 if (cost instanceof SacrificeTargetCost) {
                     Permanent p = (Permanent) game.getLastKnownInformation(((SacrificeTargetCost) cost).getPermanents().get(0).getId(), Zone.BATTLEFIELD);
                     return -1 * p.getPower().getValue();

@@ -14,6 +14,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
@@ -26,6 +27,7 @@ public final class CorrosiveMentor extends CardImpl {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
+        filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
     public CorrosiveMentor(UUID ownerId, CardSetInfo setInfo) {

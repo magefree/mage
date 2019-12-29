@@ -50,7 +50,7 @@ public final class VeryCrypticCommandD extends CardImpl {
         this.getSpellAbility().getModes().setMinModes(2);
         this.getSpellAbility().getModes().setMaxModes(2);
 
-        // Return target permanent to its controller�s hand.
+        // Return target permanent to its controller's hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent());
 

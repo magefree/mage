@@ -1,7 +1,5 @@
-
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -16,18 +14,21 @@ import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
+import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.PreventDamageEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward
  */
 public final class UnbreathingHorde extends CardImpl {
 
     public UnbreathingHorde(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.subtype.add(SubType.ZOMBIE);
 
         this.power = new MageInt(0);
@@ -115,7 +116,7 @@ class UnbreathingHordeEffect2 extends PreventionEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         boolean retValue = false;
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), event.getAmount(), false);
+        GameEvent preventEvent = new PreventDamageEvent(source.getFirstTarget(), source.getSourceId(), source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
         int damage = event.getAmount();
         if (!game.replaceEvent(preventEvent)) {
             event.setAmount(0);
@@ -132,9 +133,7 @@ class UnbreathingHordeEffect2 extends PreventionEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)) {
-            if (event.getTargetId().equals(source.getSourceId())) {
-                return true;
-            }
+            return event.getTargetId().equals(source.getSourceId());
         }
         return false;
     }

@@ -58,10 +58,6 @@ public class FilterCreaturePlayerOrPlaneswalker extends FilterPermanentOrPlayer 
         return this.creatureFilter;
     }
 
-    public FilterPlayer getPlayerFilter() {
-        return this.playerFilter;
-    }
-
     public FilterPlaneswalkerPermanent getPlaneswalkerFilter() {
         return this.planeswalkerFilter;
     }

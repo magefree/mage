@@ -9,7 +9,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  * This test is based on rulings of the card Muraganda Petroglyphs in magic Gatherer site
- * (http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=145110), accessed in
+ * (https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=145110), accessed in
  * 08/01/2017.
  *
  * @author alexsandro.

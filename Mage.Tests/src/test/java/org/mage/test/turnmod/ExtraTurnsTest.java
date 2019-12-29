@@ -29,7 +29,7 @@ public class ExtraTurnsTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Emrakul, the Promised End", 1); // {13}
         // Flash (You may cast this spell any time you could cast an instant.)
         // Creature cards you own that aren't on the battlefield have flash.
-        // Each opponent can cast spells only any time he or she could cast a sorcery.
+        // Each opponent can cast spells only any time they could cast a sorcery.
         addCard(Zone.BATTLEFIELD, playerA, "Teferi, Mage of Zhalfir", 1);
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Emrakul, the Promised End");
@@ -56,7 +56,7 @@ public class ExtraTurnsTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Emrakul, the Promised End", 1); // {13}
         // Flash (You may cast this spell any time you could cast an instant.)
         // Creature cards you own that aren't on the battlefield have flash.
-        // Each opponent can cast spells only any time he or she could cast a sorcery.
+        // Each opponent can cast spells only any time they could cast a sorcery.
         addCard(Zone.BATTLEFIELD, playerA, "Teferi, Mage of Zhalfir", 1);
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Emrakul, the Promised End");
@@ -83,7 +83,7 @@ public class ExtraTurnsTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Emrakul, the Promised End", 1); // {13}
         // Flash (You may cast this spell any time you could cast an instant.)
         // Creature cards you own that aren't on the battlefield have flash.
-        // Each opponent can cast spells only any time he or she could cast a sorcery.
+        // Each opponent can cast spells only any time they could cast a sorcery.
         addCard(Zone.BATTLEFIELD, playerA, "Teferi, Mage of Zhalfir", 1);
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Emrakul, the Promised End");

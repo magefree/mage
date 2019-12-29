@@ -7,7 +7,6 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
@@ -22,6 +21,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.ManaUtil;
 
 import java.util.UUID;
 
@@ -41,7 +41,7 @@ public final class EnergyVortex extends CardImpl {
                 new RemoveAllCountersSourceEffect(CounterType.VORTEX), TargetController.YOU, false
         ));
 
-        // At the beginning of the chosen player's upkeep, Energy Vortex deals 3 damage to that player unless he or she pays {1} for each vortex counter on Energy Vortex.
+        // At the beginning of the chosen player's upkeep, Energy Vortex deals 3 damage to that player unless they pay {1} for each vortex counter on Energy Vortex.
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
                         new EnergyVortexEffect(), TargetController.ANY, false
@@ -102,7 +102,7 @@ class EnergyVortexEffect extends OneShotEffect {
             return false;
         }
         int counters = permanent.getCounters(game).getCount(CounterType.VORTEX);
-        Cost cost = new GenericManaCost(counters);
+        Cost cost = ManaUtil.createManaCost(counters, false);
         if (cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
             return true;
         }

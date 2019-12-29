@@ -1,7 +1,5 @@
-
 package mage.abilities.costs.mana;
 
-import java.util.*;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
@@ -14,15 +12,18 @@ import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.filter.Filter;
+import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.players.ManaPool;
 import mage.players.Player;
 import mage.target.Targets;
 import mage.util.ManaUtil;
 
+import java.util.*;
+
 /**
- * @author BetaSteward_at_googlemail.com
  * @param <T>
+ * @author BetaSteward_at_googlemail.com
  */
 public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements ManaCosts<T> {
 
@@ -117,6 +118,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         }
 
         Player player = game.getPlayer(controllerId);
+        handleKrrikPhyrexianManaCosts(controllerId, ability, game);
         if (!player.getManaPool().isForcedToPay()) {
             assignPayment(game, ability, player.getManaPool(), this);
         }
@@ -166,6 +168,11 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 
         while (manaCostIterator.hasNext()) {
             ManaCost manaCost = manaCostIterator.next();
+            PhyrexianManaCost tempPhyrexianCost = null;
+            Mana mana = manaCost.getMana();
+
+            FilterMana phyrexianColors = player.getPhyrexianColors();
+
             if (manaCost instanceof PhyrexianManaCost) {
                 PhyrexianManaCost phyrexianManaCost = (PhyrexianManaCost) manaCost;
                 PayLifeCost payLifeCost = new PayLifeCost(2);
@@ -173,6 +180,56 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                         && player.chooseUse(Outcome.LoseLife, "Pay 2 life instead of " + phyrexianManaCost.getBaseText() + '?', source, game)) {
                     manaCostIterator.remove();
                     tempCosts.add(payLifeCost);
+                }
+            }
+        }
+
+        tempCosts.pay(source, game, source.getSourceId(), player.getId(), false, null);
+    }
+    
+    private void handleKrrikPhyrexianManaCosts(UUID payingPlayerId, Ability source, Game game) {
+        Player player = game.getPlayer(payingPlayerId);
+        if (this == null || player == null) {
+            return; // nothing to be done without any mana costs. prevents NRE from occurring here
+        }
+        Iterator<T> manaCostIterator = this.iterator();
+        Costs<PayLifeCost> tempCosts = new CostsImpl<>();
+
+        while (manaCostIterator.hasNext()) {
+            ManaCost manaCost = manaCostIterator.next();
+            Mana mana = manaCost.getMana();
+            PhyrexianManaCost tempPhyrexianCost = null;
+            FilterMana phyrexianColors = player.getPhyrexianColors();
+
+            /* K'rrik, Son of Yawgmoth ability check */
+            if (phyrexianColors != null) {
+                int phyrexianEnabledPips = mana.count(phyrexianColors);
+                if (phyrexianEnabledPips > 0) {
+                    /* find which color mana is in the cost and set it in the temp Phyrexian cost */
+                    if (phyrexianColors.isWhite() && mana.getWhite() > 0) {
+                        tempPhyrexianCost = new PhyrexianManaCost(ColoredManaSymbol.W);
+                    }
+                    else if (phyrexianColors.isBlue() && mana.getBlue() > 0) {
+                        tempPhyrexianCost = new PhyrexianManaCost(ColoredManaSymbol.U);
+                    }
+                    else if (phyrexianColors.isBlack() && mana.getBlack() > 0) {
+                        tempPhyrexianCost = new PhyrexianManaCost(ColoredManaSymbol.B);
+                    }
+                    else if (phyrexianColors.isRed() && mana.getRed() > 0) {
+                        tempPhyrexianCost = new PhyrexianManaCost(ColoredManaSymbol.R);
+                    }
+                    else if (phyrexianColors.isGreen() && mana.getGreen() > 0) {
+                        tempPhyrexianCost = new PhyrexianManaCost(ColoredManaSymbol.G);
+                    }
+                    
+                    if (tempPhyrexianCost != null) {
+                        PayLifeCost payLifeCost = new PayLifeCost(2);
+                        if (payLifeCost.canPay(source, source.getSourceId(), player.getId(), game)
+                                && player.chooseUse(Outcome.LoseLife, "Pay 2 life (using an active ability) instead of " + tempPhyrexianCost.getBaseText() + '?', source, game)) {
+                            manaCostIterator.remove();
+                            tempCosts.add(payLifeCost);
+                        }
+                    }
                 }
             }
         }
@@ -214,6 +271,11 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     }
 
     @Override
+    public boolean containsX() {
+        return !getVariableCosts().isEmpty();
+    }
+
+    @Override
     public int getX() {
         int amount = 0;
         List<VariableCost> variableCosts = getVariableCosts();
@@ -224,10 +286,10 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     }
 
     @Override
-    public void setX(int x) {
+    public void setX(int xValue, int xPay) {
         List<VariableCost> variableCosts = getVariableCosts();
         if (!variableCosts.isEmpty()) {
-            variableCosts.get(0).setAmount(x);
+            variableCosts.get(0).setAmount(xValue, xPay, false);
         }
     }
 
@@ -339,7 +401,12 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                 if (player != null) {
                     game.undo(playerId);
                     this.clearPaid();
-                    this.setX(referenceCosts.getX());
+
+                    // TODO: checks Word of Command with Unbound Flourishing's X multiplier
+                    // TODO: checks Word of Command with {X}{X} cards
+                    int xValue = referenceCosts.getX();
+                    this.setX(xValue, xValue);
+
                     player.getManaPool().restoreMana(pool.getPoolBookmark());
                     game.bookmarkState();
                 }
@@ -378,15 +445,15 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                         } else if (!symbol.equals("X")) {
                             this.add(new ColoredManaCost(ColoredManaSymbol.lookup(symbol.charAt(0))));
                         } else // check X wasn't added before
-                        if (modifierForX == 0) {
-                            // count X occurence
-                            for (String s : symbols) {
-                                if (s.equals("X")) {
-                                    modifierForX++;
+                            if (modifierForX == 0) {
+                                // count X occurence
+                                for (String s : symbols) {
+                                    if (s.equals("X")) {
+                                        modifierForX++;
+                                    }
                                 }
-                            }
-                            this.add(new VariableManaCost(modifierForX));
-                        } //TODO: handle multiple {X} and/or {Y} symbols
+                                this.add(new VariableManaCost(modifierForX));
+                            } //TODO: handle multiple {X} and/or {Y} symbols
                     } else if (Character.isDigit(symbol.charAt(0))) {
                         this.add(new MonoHybridManaCost(ColoredManaSymbol.lookup(symbol.charAt(2))));
                     } else if (symbol.contains("P")) {

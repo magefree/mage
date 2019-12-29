@@ -1,14 +1,13 @@
-
 package mage.abilities;
 
-import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class StateTriggeredAbility extends TriggeredAbilityImpl {
@@ -23,11 +22,7 @@ public abstract class StateTriggeredAbility extends TriggeredAbilityImpl {
 
     public boolean canTrigger(Game game) {
         //20100716 - 603.8
-        Boolean triggered = (Boolean) game.getState().getValue(getSourceId().toString() + "triggered");
-        if (triggered == null) {
-            triggered = Boolean.FALSE;
-        }
-        return !triggered;
+        return !Boolean.TRUE.equals(game.getState().getValue(getSourceId().toString() + "triggered"));
     }
 
     @Override

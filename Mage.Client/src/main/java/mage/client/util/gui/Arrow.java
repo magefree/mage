@@ -32,6 +32,8 @@ public class Arrow extends JPanel {
         setOpacity(0.6f);
     }
 
+
+    @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         float ex = endX - startX;

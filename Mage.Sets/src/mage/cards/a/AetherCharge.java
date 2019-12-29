@@ -1,7 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -20,8 +18,9 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetOpponentOrPlaneswalker;
 
+import java.util.UUID;
+
 /**
- *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public final class AetherCharge extends CardImpl {
@@ -69,7 +68,7 @@ class AetherChargeTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent.isCreature() && permanent.hasSubtype(SubType.BEAST, game)
+        if (permanent != null && permanent.isCreature() && permanent.hasSubtype(SubType.BEAST, game)
                 && permanent.isControlledBy(this.controllerId)) {
             Effect effect = this.getEffects().get(0);
             effect.setValue("damageSource", event.getTargetId());

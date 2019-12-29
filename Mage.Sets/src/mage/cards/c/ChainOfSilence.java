@@ -32,7 +32,7 @@ public final class ChainOfSilence extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
         
 
-        // Prevent all damage target creature would deal this turn. That creature's controller may sacrifice a land. If the player does, he or she may copy this spell and may choose a new target for that copy.
+        // Prevent all damage target creature would deal this turn. That creature's controller may sacrifice a land. If the player does, they may copy this spell and may choose a new target for that copy.
         this.getSpellAbility().addEffect(new ChainOfSilenceEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
@@ -100,7 +100,7 @@ class ChainOfSilenceEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        return "Prevent all damage target creature would deal this turn. That creature's controller may sacrifice a land. If the player does, he or she may copy this spell and may choose a new target for that copy";
+        return "Prevent all damage target creature would deal this turn. That creature's controller may sacrifice a land. If the player does, they may copy this spell and may choose a new target for that copy";
     }
 
 }

@@ -163,7 +163,7 @@ class HedonistsTroveCastNonlandCardsEffect extends AsThoughEffectImpl {
                             if (!exileZone.contains(cardId)) {
                                 // last checked card this turn is no longer exiled, so you can't cast another with this effect
                                 // TODO: Handle if card was cast/removed from exile with effect from another card.
-                                //       If so, this effect could prevent player from casting although he should be able to use it
+                                //       If so, this effect could prevent player from casting although they should be able to use it
                                 return false;
                             }
                         }

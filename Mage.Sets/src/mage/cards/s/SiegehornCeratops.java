@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 
 /**
@@ -26,7 +25,7 @@ public final class SiegehornCeratops extends CardImpl {
         this.toughness = new MageInt(2);
 
         // <i>Enrage</i> — Whenever Siegehorn Ceratops is dealt damage, put two +1/+1 counters on it.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD,
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(2))
                         .setText("put two +1/+1 counter on it"), false, true));
     }

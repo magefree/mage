@@ -1,7 +1,6 @@
 
 package mage.abilities.common;
 
-import java.util.Locale;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.TargetController;
@@ -11,8 +10,9 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.Locale;
+
 /**
- *
  * @author Loki
  */
 public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
@@ -91,6 +91,7 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
                 }
                 break;
             case ANY:
+            case ACTIVE:
                 if (setTargetPointer && getTargets().isEmpty()) {
                     for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
@@ -137,6 +138,8 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
                 return sb.insert(0, generateZoneString()).insert(0, "At the beginning of each opponent's upkeep, ").toString();
             case ANY:
                 return sb.insert(0, generateZoneString()).insert(0, "At the beginning of each upkeep, ").toString();
+            case ACTIVE:
+                return sb.insert(0, generateZoneString()).insert(0, "At the beginning of each player's upkeep, ").toString();
             case CONTROLLER_ATTACHED_TO:
                 return sb.insert(0, generateZoneString()).insert(0, "At the beginning of the upkeep of enchanted creature's controller, ").toString();
         }

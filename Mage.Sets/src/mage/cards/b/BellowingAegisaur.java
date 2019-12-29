@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -38,7 +37,7 @@ public final class BellowingAegisaur extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Enrage - Whenever Bellowing Aegisaur is dealt damage, put a +1/+1 counter on each other creature you control.
-        Ability ability = new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), false, true);
+        Ability ability = new DealtDamageToSourceTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), false, true);
         this.addAbility(ability);
     }
 

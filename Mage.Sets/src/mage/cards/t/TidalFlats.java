@@ -1,10 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
@@ -29,8 +24,12 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class TidalFlats extends CardImpl {
@@ -38,7 +37,7 @@ public final class TidalFlats extends CardImpl {
     public TidalFlats(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}");
 
-        // {U}{U}: For each attacking creature without flying, its controller may pay {1}. If he or she doesn't, creatures you control blocking that creature gain first strike until end of turn.
+        // {U}{U}: For each attacking creature without flying, its controller may pay {1}. If they don't, creatures you control blocking that creature gain first strike until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TidalFlatsEffect(), new ManaCostsImpl("{U}{U}")));
     }
 
@@ -62,7 +61,7 @@ class TidalFlatsEffect extends OneShotEffect {
 
     public TidalFlatsEffect() {
         super(Outcome.Benefit);
-        this.staticText = "For each attacking creature without flying, its controller may pay {1}. If he or she doesn't, creatures you control blocking that creature gain first strike until end of turn";
+        this.staticText = "For each attacking creature without flying, its controller may pay {1}. If they don't, creatures you control blocking that creature gain first strike until end of turn";
     }
 
     public TidalFlatsEffect(final TidalFlatsEffect effect) {
@@ -76,7 +75,6 @@ class TidalFlatsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.getPlayerList();
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
             return false;

@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.mage.plugins.card.dl.DownloadServiceInfo;
 import org.mage.plugins.card.images.CardDownloadData;
 import org.mage.plugins.card.utils.CardImageUtils;
 
@@ -452,6 +453,11 @@ public enum WizardCardsImageSource implements CardImageSource {
     }
 
     @Override
+    public boolean prepareDownloadList(DownloadServiceInfo downloadServiceInfo, List<CardDownloadData> downloadList) {
+        return true;
+    }
+
+    @Override
     public CardImageUrls generateCardUrl(CardDownloadData card) throws Exception {
         String collectorId = card.getCollectorId();
         String cardSet = card.getSet();
@@ -495,8 +501,8 @@ public enum WizardCardsImageSource implements CardImageSource {
                 }
             }
         }
-        if (link != null && !link.startsWith("http://")) {
-            link = "http://gatherer.wizards.com" + link;
+        if (link != null && !link.startsWith("https://")) {
+            link = "https://gatherer.wizards.com" + link;
         }
 
         if (link != null) {
@@ -522,7 +528,7 @@ public enum WizardCardsImageSource implements CardImageSource {
                 int firstMultiverseIdLastPage = 0;
                 Pages:
                 while (page < 999) {
-                    String searchUrl = "http://gatherer.wizards.com/Pages/Search/Default.aspx?sort=cn+&page=" + page + "&action=advanced&output=spoiler&method=visual&set=+%5B%22" + URLSetName + "%22%5D";
+                    String searchUrl = "https://gatherer.wizards.com/Pages/Search/Default.aspx?sort=cn+&page=" + page + "&action=advanced&output=spoiler&method=visual&set=+%5B%22" + URLSetName + "%22%5D";
                     logger.debug("URL: " + searchUrl);
                     Document doc = CardImageUtils.downloadHtmlDocument(searchUrl);
                     Elements cardsImages = doc.select("img[src^=../../Handlers/]");
@@ -582,7 +588,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         criteria.setCodes(cardSet);
         List<CardInfo> cards = CardRepository.instance.findCards(criteria);
 
-        String urlLandDocument = "http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=" + multiverseId;
+        String urlLandDocument = "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=" + multiverseId;
         Document landDoc = CardImageUtils.downloadHtmlDocument(urlLandDocument);
         Elements variations = landDoc.select("a.variationlink");
         if (!variations.isEmpty()) {
@@ -629,7 +635,7 @@ public enum WizardCardsImageSource implements CardImageSource {
     }
 
     private HashMap<String, Integer> getlocalizedMultiverseIds(Integer englishMultiverseId) throws IOException {
-        String cardLanguagesUrl = "http://gatherer.wizards.com/Pages/Card/Languages.aspx?multiverseid=" + englishMultiverseId;
+        String cardLanguagesUrl = "https://gatherer.wizards.com/Pages/Card/Languages.aspx?multiverseid=" + englishMultiverseId;
         Document cardLanguagesDoc = CardImageUtils.downloadHtmlDocument(cardLanguagesUrl);
         Elements languageTableRows = cardLanguagesDoc.select("tr.cardItem");
         HashMap<String, Integer> localizedIds = new HashMap<>();

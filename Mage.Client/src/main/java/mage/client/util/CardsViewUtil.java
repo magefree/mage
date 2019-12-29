@@ -1,15 +1,14 @@
-
 package mage.client.util;
 
-import java.util.List;
-import java.util.Map;
 import mage.cards.Card;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.view.*;
 
+import java.util.List;
+import java.util.Map;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class CardsViewUtil {
@@ -21,7 +20,7 @@ public final class CardsViewUtil {
             CardInfo cardInfo = CardRepository.instance.findCard(simple.getExpansionSetCode(), simple.getCardNumber());
             Card card = cardInfo != null ? cardInfo.getMockCard() : null;
             if (card != null) {
-                cards.put(simple.getId(), new CardView(card, simple.getId()));
+                cards.put(simple.getId(), new CardView(card, simple));
             }
         }
 
@@ -40,7 +39,7 @@ public final class CardsViewUtil {
                 loadedCards.put(key, card);
             }
             if (card != null) {
-                cards.put(simple.getId(), new CardView(card, simple.getId()));
+                cards.put(simple.getId(), new CardView(card, simple));
             }
         }
 
@@ -55,9 +54,8 @@ public final class CardsViewUtil {
                 CardView cardView = new CardView((EmblemView) commandObject);
                 cards.put(commandObject.getId(), cardView);
             } else if (commandObject instanceof PlaneView) {
-                CardView cardView = null;
-                cardView = new CardView((PlaneView) commandObject);
-                cards.put(commandObject.getId(), cardView);                
+                CardView cardView = new CardView((PlaneView) commandObject);
+                cards.put(commandObject.getId(), cardView);
             } else if (commandObject instanceof CommanderView) {
                 cards.put(commandObject.getId(), (CommanderView) commandObject);
             }

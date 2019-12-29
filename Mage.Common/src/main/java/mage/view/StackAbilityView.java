@@ -1,9 +1,5 @@
-
 package mage.view;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Mode;
 import mage.abilities.Modes;
@@ -18,8 +14,11 @@ import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.TargetPointer;
 import mage.util.GameLog;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class StackAbilityView extends CardView {
@@ -94,7 +93,10 @@ public class StackAbilityView extends CardView {
                             if ((mageObject instanceof Card) && ((Card) mageObject).isFaceDown(game)) {
                                 continue;
                             }
-                            names.add(GameLog.getColoredObjectIdNameForTooltip(mageObject));
+                            String newName = GameLog.getColoredObjectIdNameForTooltip(mageObject);
+                            if (!names.contains(newName)) {
+                                names.add(newName);
+                            }
                         }
                     }
 

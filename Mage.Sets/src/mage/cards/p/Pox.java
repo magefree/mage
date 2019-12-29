@@ -25,7 +25,7 @@ public final class Pox extends CardImpl {
     public Pox(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}{B}{B}");
 
-        // Each player loses a third of their life, then discards a third of the cards in their hand, then sacrifices a third of the creatures he or she controls, then sacrifices a third of the lands he or she controls. Round up each time.
+        // Each player loses a third of their life, then discards a third of the cards in their hand, then sacrifices a third of the creatures they control, then sacrifices a third of the lands they control. Round up each time.
         this.getSpellAbility().addEffect(new PoxEffect());
     }
 
@@ -81,7 +81,7 @@ class PoxEffect extends OneShotEffect {
                     }
                 }
             }
-            // then sacrifices a third of the creatures he or she controls,
+            // then sacrifices a third of the creatures they control,
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
@@ -99,7 +99,7 @@ class PoxEffect extends OneShotEffect {
                     }
                 }
             }
-            // then sacrifices a third of the lands he or she controls.
+            // then sacrifices a third of the lands they control.
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {

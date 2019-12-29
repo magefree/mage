@@ -1,4 +1,3 @@
-
 package mage.cards.w;
 
 import java.util.UUID;
@@ -12,10 +11,10 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -26,9 +25,8 @@ import mage.target.common.TargetCreaturePermanent;
 public final class WreathOfGeists extends CardImpl {
 
     public WreathOfGeists(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.subtype.add(SubType.AURA);
-
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -39,7 +37,7 @@ public final class WreathOfGeists extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +X/+X, where X is the number of creature cards in your graveyard.
-        DynamicValue value = new CardsInControllerGraveyardCount(new FilterCreatureCard());
+        DynamicValue value = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(value, value)));
     }
 

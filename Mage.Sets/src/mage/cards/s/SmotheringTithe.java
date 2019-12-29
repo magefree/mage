@@ -3,7 +3,6 @@ package mage.cards.s;
 import mage.abilities.Ability;
 import mage.abilities.common.DrawCardOpponentTriggeredAbility;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
@@ -13,6 +12,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.token.TreasureToken;
 import mage.players.Player;
+import mage.util.ManaUtil;
 
 import java.util.UUID;
 
@@ -64,7 +64,7 @@ class SmotheringTitheEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Cost cost = new GenericManaCost(2);
+        Cost cost = ManaUtil.createManaCost(2, false);
         if (!player.chooseUse(Outcome.Detriment, "Pay {2} to prevent this effect?", source, game)
                 || !cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
             return new CreateTokenEffect(new TreasureToken()).apply(game, source);

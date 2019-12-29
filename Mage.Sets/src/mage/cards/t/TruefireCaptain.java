@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.target.TargetPlayer;
 
@@ -35,7 +34,7 @@ public final class TruefireCaptain extends CardImpl {
 
         // Whenever Truefire Captain is dealt damage, it deals that much damage to target player.
         Ability ability = new DealtDamageToSourceTriggeredAbility(
-                Zone.BATTLEFIELD, new TruefireCaptainEffect(),
+                new TruefireCaptainEffect(),
                 false, false, true
         );
         ability.addTarget(new TargetPlayer());

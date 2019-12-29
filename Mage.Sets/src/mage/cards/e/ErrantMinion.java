@@ -1,32 +1,26 @@
 package mage.cards.e;
 
-import java.util.UUID;
-import mage.constants.SubType;
-import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
-import mage.constants.Outcome;
-import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.ManaUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class ErrantMinion extends CardImpl {
@@ -89,33 +83,18 @@ class ErrantMinionEffect extends OneShotEffect {
             return false;
         }
         Player controllerOfEnchantedCreature = game.getPlayer(enchantedCreature.getControllerId());
-        if (controllerOfEnchantedCreature != null) {
-            int manaPaid = playerPaysXGenericMana(controllerOfEnchantedCreature, source, game);
-            PreventDamageToTargetEffect effect = new PreventDamageToTargetEffect(Duration.OneUse, manaPaid);
-            effect.setTargetPointer(new FixedTarget(controllerOfEnchantedCreature.getId()));
-            game.addEffect(effect, source);
-            DamageTargetEffect effect2 = new DamageTargetEffect(2);
-            effect2.setTargetPointer(new FixedTarget(controllerOfEnchantedCreature.getId()));
-            effect2.apply(game, source);
-            return true;
+        if (controllerOfEnchantedCreature != null && controllerOfEnchantedCreature.canRespond()) {
+            int manaPaid = ManaUtil.playerPaysXGenericMana(false, "Errant Minion", controllerOfEnchantedCreature, source, game);
+            if (manaPaid > 0) {
+                PreventDamageToTargetEffect effect = new PreventDamageToTargetEffect(Duration.OneUse, manaPaid);
+                effect.setTargetPointer(new FixedTarget(controllerOfEnchantedCreature.getId()));
+                game.addEffect(effect, source);
+                DamageTargetEffect effect2 = new DamageTargetEffect(2);
+                effect2.setTargetPointer(new FixedTarget(controllerOfEnchantedCreature.getId()));
+                effect2.apply(game, source);
+                return true;
+            }
         }
         return false;
     }
-
-    protected static int playerPaysXGenericMana(Player player, Ability source, Game game) {
-        int xValue = 0;
-        boolean payed = false;
-        while (!payed) {
-            xValue = player.announceXMana(0, Integer.MAX_VALUE, "How much mana will you pay?", game, source);
-            if (xValue > 0) {
-                Cost cost = new GenericManaCost(xValue);
-                payed = cost.pay(source, game, source.getSourceId(), player.getId(), false, null);
-            } else {
-                payed = true;
-            }
-        }
-        game.informPlayers(player.getLogName() + " pays {" + xValue + '}');
-        return xValue;
-    }
-
 }

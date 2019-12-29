@@ -1,10 +1,7 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -14,15 +11,17 @@ import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetSpell;
+import mage.util.ManaUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author cbt33, Rafbill (Frightful Delustions)
  */
 public final class Divert extends CardImpl {
 
     public Divert(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
 
         // Change the target of target spell with a single target unless that spell's controller pays {2}.
@@ -59,11 +58,10 @@ class DivertEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(source.getFirstTarget());
-        Cost cost = new GenericManaCost(2);
+        Cost cost = ManaUtil.createManaCost(2, false);
         if (spell != null) {
             Player player = game.getPlayer(spell.getControllerId());
             if (player != null) {
-                cost.clearPaid();
                 if (!cost.pay(source, game, spell.getControllerId(),
                         spell.getControllerId(), false, null)) {
                     return spell.chooseNewTargets(game, source.getControllerId(), true, true, null);

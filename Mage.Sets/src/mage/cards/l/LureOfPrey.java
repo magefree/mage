@@ -1,6 +1,5 @@
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -18,8 +17,9 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.common.CastSpellLastTurnWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class LureOfPrey extends CardImpl {
@@ -73,12 +73,13 @@ class LureOfPreyRestrictionEffect extends ContinuousRuleModifyingEffectImpl {
             if (watcher != null) {
                 for (UUID playerId : game.getOpponents(source.getControllerId())) {
                     if (watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(playerId) != 0) {
-                        return false;
+                        return false; // allow to cast
                     }
                 }
             }
+            return true; // restrict
         }
-        return true;
+        return false;
     }
 
     @Override

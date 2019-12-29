@@ -655,7 +655,7 @@ Elemental, 008, G, 2|2, -, Creature - Elemental, Marco Nelor, -
 Elf Warrior, 009, G, 1|1, -, Creature - Elf Warrior, William O'Connor, -
 Thopter, 010, -, 1|1, -, Artifact Creature - Thopter, Adam Paquette, Flying
 Thopter, 011, -, 1|1, -, Artifact Creature - Thopter, Svetlin Velinov, Flying
-Jace Emblem, 012, -, -, -, Emblem - Jace, Jaime Jones, Whenever you cast a spell� target opponent puts the top five cards of his or her library into his or her graveyard.
+Jace Emblem, 012, -, -, -, Emblem - Jace, Jaime Jones, Whenever you cast a spell� target opponent puts the top five cards of their library into their graveyard.
 Liliana Emblem, 013, -, -, -, Emblem - Liliana, Karla Ortiz, Whenever a creature dies� return it to the battlefield under your control at the beginning of the next end step.
 Chandra Emblem, 014, -, -, -, Emblem - Chandra, Eric Deschamps, At the beginning of your upkeep� this emblem deals 3 damage to you.
 
@@ -743,7 +743,7 @@ Clue, 013, -, -, -, Artifact - Clue, Zezhou Chen, {2}‚ Sacrifice this Artifact
 Clue, 014, -, -, -, Artifact - Clue, Cliff Childs, {2}‚ Sacrifice this Artifact: Draw a card.
 Clue, 015, -, -, -, Artifact - Clue, James Paick, {2}‚ Sacrifice this Artifact: Draw a card.
 Clue, 016, -, -, -, Artifact - Clue, Franz Vohwinkel, {2}‚ Sacrifice this Artifact: Draw a card.
-Jace Emblem, 017, -, -, -, Emblem - Jace, Tyler Jacobson, Whenever an opponent casts his or her first spell each turn� counter that spell.
+Jace Emblem, 017, -, -, -, Emblem - Jace, Tyler Jacobson, Whenever an opponent casts their first spell each turn� counter that spell.
 Arlinn Emblem, 018, -, -, -, Emblem - Arlinn, Winona Nelson, Creatures you control have haste and '{T}: This creature deals damage equal to its power to any target.'
 
 

@@ -1,5 +1,3 @@
-
-
 package mage.cards.h;
 
 import java.util.UUID;
@@ -26,7 +24,7 @@ public final class Harrow extends CardImpl {
         this.color.setGreen(true);        
 
         // As an additional cost to cast Harrow, sacrifice a land.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("land"))));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT)));
 
         // Search your library for up to two basic land cards and put them onto the battlefield. Then shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_BASIC_LAND);

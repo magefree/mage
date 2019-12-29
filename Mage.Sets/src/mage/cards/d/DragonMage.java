@@ -32,7 +32,7 @@ public final class DragonMage extends CardImpl {
         // Whenever Dragon Mage deals combat damage to a player, each player discards their hand and draws seven cards.
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DiscardHandAllEffect(), false);
         Effect effect = new DrawCardAllEffect(7);
-        effect.setText("and draws seven cards");
+        effect.setText(", then draws seven cards");
         ability.addEffect(effect);
         this.addAbility(ability);
     }

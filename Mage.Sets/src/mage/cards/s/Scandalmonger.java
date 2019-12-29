@@ -29,7 +29,7 @@ public final class Scandalmonger extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // {2}: Target player discards a card. Any player may activate this ability but only any time he or she could cast a sorcery.
+        // {2}: Target player discards a card. Any player may activate this ability but only any time they could cast a sorcery.
         ActivateAsSorceryActivatedAbility ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new ManaCostsImpl("{2}"));
         ability.addTarget(new TargetPlayer());
         ability.setMayActivate(TargetController.ANY);

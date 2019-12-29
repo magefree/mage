@@ -32,7 +32,7 @@ public final class PiasRevolution extends CardImpl {
     public PiasRevolution(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
-        // Whenever a nontoken artifact is put into your graveyard from the battlefield, return that card to your hand unless target opponent has Pia's Revolution deal 3 damage to him or her.
+        // Whenever a nontoken artifact is put into your graveyard from the battlefield, return that card to your hand unless target opponent has Pia's Revolution deal 3 damage to them.
         Ability ability = new PiasRevolutionTriggeredAbility();
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
@@ -52,7 +52,7 @@ class PiasRevolutionReturnEffect extends OneShotEffect {
 
     public PiasRevolutionReturnEffect() {
         super(Outcome.Benefit);
-        this.staticText = "return that card to your hand unless target opponent has {this} deal 3 damage to him or her";
+        this.staticText = "return that card to your hand unless target opponent has {this} deal 3 damage to them";
     }
 
     public PiasRevolutionReturnEffect(final PiasRevolutionReturnEffect effect) {

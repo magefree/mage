@@ -1,16 +1,16 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -23,11 +23,14 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class PharikaGodOfAffliction extends CardImpl {
+
+    private static final DynamicValue xValue = new DevotionCount(ColoredManaSymbol.B, ColoredManaSymbol.G);
 
     public PharikaGodOfAffliction(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{B}{G}");
@@ -39,10 +42,12 @@ public final class PharikaGodOfAffliction extends CardImpl {
 
         // Indestructible
         this.addAbility(IndestructibleAbility.getInstance());
+
         // As long as your devotion to black and green is less than seven, Pharika isn't a creature.
-        Effect effect = new LoseCreatureTypeSourceEffect(new DevotionCount(ColoredManaSymbol.B, ColoredManaSymbol.G), 7);
+        Effect effect = new LoseCreatureTypeSourceEffect(xValue, 7);
         effect.setText("As long as your devotion to black and green is less than seven, Pharika isn't a creature");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect).addHint(new ValueHint("Devotion to black and green", xValue)));
+
         // {B}{G}: Exile target creature card from a graveyard. It's owner creates a 1/1 black and green Snake enchantment creature token with deathtouch.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PharikaExileEffect(), new ManaCostsImpl("{B}{G}"));
         Target target = new TargetCardInGraveyard(new FilterCreatureCard("a creature card from a graveyard"));

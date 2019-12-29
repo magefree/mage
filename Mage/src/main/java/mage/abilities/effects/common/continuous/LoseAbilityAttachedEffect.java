@@ -10,7 +10,6 @@ import mage.game.permanent.Permanent;
 import org.apache.log4j.Logger;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class LoseAbilityAttachedEffect extends ContinuousEffectImpl {
@@ -47,7 +46,7 @@ public class LoseAbilityAttachedEffect extends ContinuousEffectImpl {
                 while (creature.getAbilities().contains(ability)) {
                     if (!creature.getAbilities().remove(ability)) {
                         // Something went wrong - ability has an other id?
-                          logger.warn("ability" + ability.getRule() + "couldn't be removed.");
+                        logger.warn("ability" + ability.getRule() + "couldn't be removed.");
                     }
                 }
             }
@@ -59,12 +58,8 @@ public class LoseAbilityAttachedEffect extends ContinuousEffectImpl {
         StringBuilder sb = new StringBuilder();
         sb.append(attachmentType.verb());
         sb.append(" creature ");
-        if (duration == Duration.WhileOnBattlefield) {
-            sb.append("loses ");
-        } else {
-            sb.append("loses ");
-        }
-        sb.append(ability.getRule());    
+        sb.append("loses ");
+        sb.append(ability.getRule());
         staticText = sb.toString();
     }
 

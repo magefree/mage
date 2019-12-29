@@ -34,7 +34,7 @@ public final class TangleWire extends CardImpl {
 
         // Fading 4
         this.addAbility(new FadingAbility(4, this));
-        // At the beginning of each player's upkeep, that player taps an untapped artifact, creature, or land he or she controls for each fade counter on Tangle Wire.
+        // At the beginning of each player's upkeep, that player taps an untapped artifact, creature, or land they control for each fade counter on Tangle Wire.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new TangleWireEffect(), TargetController.ANY, false, true));
     }
 
@@ -49,7 +49,7 @@ public final class TangleWire extends CardImpl {
 }
 class TangleWireEffect extends OneShotEffect {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped artifact, creature, or land he or she controls");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped artifact, creature, or land they control");
     static{
         filter.add(Predicates.not(TappedPredicate.instance));
         filter.add(Predicates.or(
@@ -60,7 +60,7 @@ class TangleWireEffect extends OneShotEffect {
 
     TangleWireEffect() {
         super(Outcome.Sacrifice);
-        staticText = "that player taps an untapped artifact, creature, or land he or she controls for each fade counter on Tangle Wire";
+        staticText = "that player taps an untapped artifact, creature, or land they control for each fade counter on Tangle Wire";
     }
 
     TangleWireEffect(final TangleWireEffect effect) {

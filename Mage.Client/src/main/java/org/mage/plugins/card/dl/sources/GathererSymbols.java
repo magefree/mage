@@ -23,11 +23,11 @@ import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
  */
 public class GathererSymbols implements Iterable<DownloadJob> {
     //TODO chaos and planeswalker symbol
-    //chaos: http://gatherer.wizards.com/Images/Symbols/chaos.gif
+    //chaos: https://gatherer.wizards.com/Images/Symbols/chaos.gif
 
     private static File outDir;
 
-    private static final String urlFmt = "http://gatherer.wizards.com/handlers/image.ashx?size=%1$s&name=%2$s&type=symbol";
+    private static final String urlFmt = "https://gatherer.wizards.com/handlers/image.ashx?size=%1$s&name=%2$s&type=symbol";
 
     private static final String[] sizes = {"small", "medium", "large"};
 

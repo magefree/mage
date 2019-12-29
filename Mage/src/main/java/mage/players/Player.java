@@ -20,6 +20,7 @@ import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.designations.Designation;
 import mage.designations.DesignationType;
+import mage.filter.FilterMana;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.Graveyard;
@@ -210,13 +211,6 @@ public interface Player extends MageItem, Copyable<Player> {
      */
     boolean canRespond();
 
-    /**
-     * Called if other player left the game
-     *
-     * @param game
-     */
-    void otherPlayerLeftGame(Game game);
-
     ManaPool getManaPool();
 
     Set<UUID> getInRange();
@@ -310,7 +304,7 @@ public interface Player extends MageItem, Copyable<Player> {
     void useDeck(Deck deck, Game game);
 
     /**
-     * Called before each applyEffects, to rest all what can be applyed by
+     * Called before each applyEffects, to rest all what can be applied by
      * continuous effects
      */
     void reset();
@@ -324,6 +318,8 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean cast(SpellAbility ability, Game game, boolean noMana, MageObjectReference reference);
 
     SpellAbility chooseSpellAbilityForCast(SpellAbility ability, Game game, boolean noMana);
+
+    SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana);
 
     boolean putInHand(Card card, Game game);
 
@@ -354,8 +350,9 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, UUID targetPlayerId, boolean triggerEvents);
 
     /**
-     * Reveals all players' libraries. Useful for abilities like Jace, Architect of Thought's -8
-     * that have effects that require information from all libraries.
+     * Reveals all players' libraries. Useful for abilities like Jace, Architect
+     * of Thought's -8 that have effects that require information from all
+     * libraries.
      *
      * @param source
      * @param game
@@ -564,7 +561,11 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean putCardsOnTopOfLibrary(Cards cards, Game game, Ability source, boolean anyOrder);
 
     // set the value for X mana spells and abilities
-    int announceXMana(int min, int max, String message, Game game, Ability ability);
+    default int announceXMana(int min, int max, String message, Game game, Ability ability) {
+        return announceXMana(min, max, 1, message, game, ability);
+    }
+
+    int announceXMana(int min, int max, int multiplier, String message, Game game, Ability ability);
 
     // set the value for non mana X costs
     int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variableCost);
@@ -629,7 +630,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     List<Ability> getPlayableOptions(Ability ability, Game game);
 
-    Set<UUID> getPlayableInHand(Game game);
+    Map<UUID, Integer> getPlayableObjects(Game game, Zone zone);
 
     LinkedHashMap<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone, Game game);
 
@@ -655,7 +656,8 @@ public interface Player extends MageItem, Copyable<Player> {
      *
      * @param card
      * @param game
-     * @param abilitiesToActivate extra info about abilities that can be activated on NO option
+     * @param abilitiesToActivate extra info about abilities that can be
+     *                            activated on NO option
      * @return player looked at the card
      */
     boolean lookAtFaceDownCard(Card card, Game game, int abilitiesToActivate);
@@ -695,10 +697,12 @@ public interface Player extends MageItem, Copyable<Player> {
     void addCommanderId(UUID commanderId);
 
     /**
-     * Get the commanderIds of the player
+     * Get the commanderIds of the player Deprecated, use
+     * game.getCommandersIds(xxx) instead
      *
      * @return
      */
+    @Deprecated
     Set<UUID> getCommandersIds();
 
     /**
@@ -840,11 +844,13 @@ public interface Player extends MageItem, Copyable<Player> {
      */
     void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts<ManaCost> manaCosts, Costs<Cost> costs);
 
-    UUID getCastSourceIdWithAlternateMana();
+    Set<UUID> getCastSourceIdWithAlternateMana();
 
-    ManaCosts<ManaCost> getCastSourceIdManaCosts();
+    Map<UUID, ManaCosts<ManaCost>> getCastSourceIdManaCosts();
 
-    Costs<Cost> getCastSourceIdCosts();
+    Map<UUID, Costs<Cost>> getCastSourceIdCosts();
+
+    void clearCastSourceIdManaCosts();
 
     // permission handling to show hand cards
     void addPermissionToShowHandCards(UUID watcherUserId);
@@ -853,7 +859,9 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void revokePermissionToSeeHandCards();
 
-    boolean isRequestToShowHandCardsAllowed();
+    boolean isPlayerAllowedToRequestHand(UUID gameId, UUID requesterPlayerId);
+
+    void addPlayerToRequestedHandList(UUID gameId, UUID requesterPlayerId);
 
     Set<UUID> getUsersAllowedToSeeHandCards();
 
@@ -885,5 +893,11 @@ public interface Player extends MageItem, Copyable<Player> {
     void addDesignation(Designation designation);
 
     List<Designation> getDesignations();
+
+    void addPhyrexianToColors(FilterMana colors);
+
+    void removePhyrexianFromColors(FilterMana colors);
+
+    FilterMana getPhyrexianColors();
 
 }

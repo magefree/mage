@@ -143,6 +143,7 @@ public final class Scourge extends ExpansionSet {
         cards.add(new SetCardInfo("Soul Collector", 74, Rarity.RARE, mage.cards.s.SoulCollector.class));
         cards.add(new SetCardInfo("Spark Spray", 105, Rarity.COMMON, mage.cards.s.SparkSpray.class));
         cards.add(new SetCardInfo("Sprouting Vines", 128, Rarity.COMMON, mage.cards.s.SproutingVines.class));
+        cards.add(new SetCardInfo("Stabilizer", 142, Rarity.RARE, mage.cards.s.Stabilizer.class));
         cards.add(new SetCardInfo("Stifle", 52, Rarity.RARE, mage.cards.s.Stifle.class));
         cards.add(new SetCardInfo("Sulfuric Vortex", 106, Rarity.RARE, mage.cards.s.SulfuricVortex.class));
         cards.add(new SetCardInfo("Temple of the False God", 143, Rarity.UNCOMMON, mage.cards.t.TempleOfTheFalseGod.class));

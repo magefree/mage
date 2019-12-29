@@ -27,7 +27,7 @@ public final class RaziasPurification extends CardImpl {
     public RaziasPurification(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}{W}");
 
-        // Each player chooses three permanents he or she controls, then sacrifices the rest.
+        // Each player chooses three permanents they control, then sacrifices the rest.
         this.getSpellAbility().addEffect(new RaziasPurificationEffect());
     }
 
@@ -45,7 +45,7 @@ class RaziasPurificationEffect extends OneShotEffect {
 
     public RaziasPurificationEffect() {
         super(Outcome.DestroyPermanent);
-        staticText = "Each player chooses three permanents he or she controls, then sacrifices the rest";
+        staticText = "Each player chooses three permanents they control, then sacrifices the rest";
     }
 
     public RaziasPurificationEffect(RaziasPurificationEffect effect) {

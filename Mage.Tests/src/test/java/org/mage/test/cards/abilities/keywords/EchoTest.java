@@ -36,7 +36,7 @@ public class EchoTest extends CardTestPlayerBase {
 
 
         // cast Avalanche Riders and destroy forest
-        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Avalanche Riders");
         addTarget(playerA, "Forest");
 
@@ -45,10 +45,19 @@ public class EchoTest extends CardTestPlayerBase {
         activateManaAbility(3, PhaseStep.UPKEEP, playerA, "{T}: Add {W}");
         activateManaAbility(3, PhaseStep.UPKEEP, playerA, "{T}: Add {W}");
         activateManaAbility(3, PhaseStep.UPKEEP, playerA, "{T}: Add {W}");
-        castSpell(3, PhaseStep.UPKEEP, playerA, "Restoration Angel", null, "Echo {3}{R} <i>(At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)</i>");
+        castSpell(3, PhaseStep.UPKEEP, playerA, "Restoration Angel");
+        addTarget(playerA, "Avalanche Riders");
         setChoice(playerA, "Yes"); // raider do restore
+
+        // Avalanche Riders triggered again
+        addTarget(playerA, "Forest");
+
+        // but no echo for blinked rider
+
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
+        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);
@@ -56,7 +65,8 @@ public class EchoTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Avalanche Riders", 1);
         assertPermanentCount(playerA, "Restoration Angel", 1);
 
-        assertPermanentCount(playerB, "Forest", 0);
+        assertPermanentCount(playerA, "Forest", 0);
+        assertGraveyardCount(playerA, "Forest", 2);
         assertTappedCount("Plains", true, 4);
         assertTappedCount("Mountain", true, 0);
     }

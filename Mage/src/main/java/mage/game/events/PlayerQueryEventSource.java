@@ -1,4 +1,3 @@
-
 package mage.game.events;
 
 import java.io.Serializable;

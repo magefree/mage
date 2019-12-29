@@ -1,7 +1,5 @@
-
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -16,8 +14,9 @@ import mage.players.Player;
 import mage.players.PlayerList;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class Kindle extends CardImpl {
@@ -29,7 +28,7 @@ public final class Kindle extends CardImpl {
     }
 
     public Kindle(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
 
 
         // Kindle deals X damage to any target, where X is 2 plus the number of cards named Kindle in all graveyards.
@@ -64,7 +63,7 @@ class KindleCardsInAllGraveyardsCount implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int amount = 0;
-        PlayerList playerList = game.getPlayerList();
+        PlayerList playerList = game.getPlayerList().copy();
         for (UUID playerUUID : playerList) {
             Player player = game.getPlayer(playerUUID);
             if (player != null) {

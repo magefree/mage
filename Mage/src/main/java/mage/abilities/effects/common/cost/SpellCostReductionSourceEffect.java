@@ -31,7 +31,7 @@ public class SpellCostReductionSourceEffect extends CostModificationEffectImpl {
         this.condition = condition;
 
         StringBuilder sb = new StringBuilder();
-        sb.append("{this} costs ");
+        sb.append("this spell costs ");
         for (String manaSymbol : manaCostsToReduce.getSymbols()) {
             sb.append(manaSymbol);
         }
@@ -52,7 +52,7 @@ public class SpellCostReductionSourceEffect extends CostModificationEffectImpl {
         this.amount = amount;
         this.condition = condition;
         StringBuilder sb = new StringBuilder();
-        sb.append("{this} costs {").append(amount).append("} less to cast");
+        sb.append("this spell costs {").append(amount).append("} less to cast");
         if (this.condition != null) {
             sb.append(" ").append(this.condition.toString().startsWith("if ") ? "" : "if ");
             sb.append(this.condition.toString());

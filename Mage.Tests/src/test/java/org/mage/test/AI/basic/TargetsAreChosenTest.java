@@ -1,4 +1,3 @@
-
 package org.mage.test.AI.basic;
 
 import mage.constants.PhaseStep;
@@ -9,7 +8,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseAI;
 
 /**
- *
  * @author LevelX2
  */
 public class TargetsAreChosenTest extends CardTestPlayerBaseAI {
@@ -158,6 +156,7 @@ public class TargetsAreChosenTest extends CardTestPlayerBaseAI {
         // Whenever a creature an opponent controls dies, put a +1/+1 counter on Malakir Cullblade.
         addCard(Zone.BATTLEFIELD, playerA, "Malakir Cullblade", 5);
 
+        attackSkip(1, playerA);
         attack(3, playerA, "Nefashu");
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -205,7 +204,7 @@ public class TargetsAreChosenTest extends CardTestPlayerBaseAI {
     @Test
     public void testArchfiendOfDepravity() {
         // Flying
-        // At the beginning of each opponent's end step, that player chooses up to two creatures he or she controls, then sacrifices the rest.
+        // At the beginning of each opponent's end step, that player chooses up to two creatures they control, then sacrifices the rest.
         addCard(Zone.BATTLEFIELD, playerB, "Archfiend of Depravity");
 
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 3);

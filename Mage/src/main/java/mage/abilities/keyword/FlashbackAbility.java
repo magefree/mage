@@ -57,10 +57,13 @@ public class FlashbackAbility extends SpellAbility {
 
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
-        ActivationStatus activationStatus = super.canActivate(playerId, game);
-        if (activationStatus.canActivate()) {
+        if (super.canActivate(playerId, game).canActivate()) {
             Card card = game.getCard(getSourceId());
             if (card != null) {
+                // Card must be in the graveyard zone
+                if (game.getState().getZone(card.getId()) != Zone.GRAVEYARD) {
+                    return ActivationStatus.getFalse();
+                }
                 // Cards with no Mana Costs cant't be flashbacked (e.g. Ancestral Vision)
                 if (card.getManaCost().isEmpty()) {
                     return ActivationStatus.getFalse();
@@ -76,7 +79,7 @@ public class FlashbackAbility extends SpellAbility {
                 return card.getSpellAbility().canActivate(playerId, game);
             }
         }
-        return activationStatus;
+        return ActivationStatus.getFalse();
     }
 
     @Override

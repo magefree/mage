@@ -1,34 +1,34 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.Cost;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.ManaUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author noxx
  */
 public final class Fettergeist extends CardImpl {
 
     public Fettergeist(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(3);
@@ -75,8 +75,8 @@ class FettergeistUnlessPaysEffect extends OneShotEffect {
         if (player != null && permanent != null) {
             PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(filter, 1);
             int count = amount.calculate(game, source, this);
-            if (player.chooseUse(Outcome.Benefit, "Pay " + count + "?  Or " + permanent.getName() + " will be sacrificed.", source, game)) {
-                GenericManaCost cost = new GenericManaCost(count);
+            if (player.chooseUse(Outcome.Benefit, "Pay {" + count + "}?  Or " + permanent.getName() + " will be sacrificed.", source, game)) {
+                Cost cost = ManaUtil.createManaCost(count, false);
                 if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
                     return true;
                 }

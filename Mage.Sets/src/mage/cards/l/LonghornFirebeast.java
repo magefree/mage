@@ -31,7 +31,7 @@ public final class LonghornFirebeast extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // When Longhorn Firebeast enters the battlefield, any opponent may have it deal 5 damage to him or her. If a player does, sacrifice Longhorn Firebeast.
+        // When Longhorn Firebeast enters the battlefield, any opponent may have it deal 5 damage to them. If a player does, sacrifice Longhorn Firebeast.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LonghornFirebeastEffect(), false));
     }
 
@@ -49,7 +49,7 @@ class LonghornFirebeastEffect extends OneShotEffect {
 
     public LonghornFirebeastEffect() {
         super(Outcome.Neutral);
-        staticText = "any opponent may have it deal 5 damage to him or her. If a player does, sacrifice {this}";
+        staticText = "any opponent may have it deal 5 damage to them. If a player does, sacrifice {this}";
     }
 
     LonghornFirebeastEffect(final LonghornFirebeastEffect effect) {

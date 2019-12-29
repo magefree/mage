@@ -19,8 +19,8 @@ public class DomainTest extends CardTestPlayerBase {
      */
     @Test
     public void testCollapsingBorders() {
-        // Domain - At the beginning of each player's upkeep, that player gains 1 life for each basic land type among lands he or she controls.
-        // Then Collapsing Borders deals 3 damage to him or her.
+        // Domain - At the beginning of each player's upkeep, that player gains 1 life for each basic land type among lands they control.
+        // Then Collapsing Borders deals 3 damage to that player.
         addCard(Zone.HAND, playerA, "Collapsing Borders", 1); // {3}{R}
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);

@@ -1,11 +1,9 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.Cost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -19,21 +17,23 @@ import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetSpell;
+import mage.util.ManaUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class SpellSyphon extends CardImpl {
 
     public SpellSyphon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
 
         // Counter target spell unless its controller pays {1} for each blue permanent you control.
         this.getSpellAbility().addEffect(new SpellSyphonEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
-        
+
     }
 
     public SpellSyphon(final SpellSyphon card) {
@@ -47,9 +47,9 @@ public final class SpellSyphon extends CardImpl {
 }
 
 class SpellSyphonEffect extends OneShotEffect {
-    
+
     private static final FilterPermanent filter = new FilterPermanent("blue permanent you control");
-    
+
     static {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
         filter.add(new ControllerPredicate(TargetController.YOU));
@@ -79,7 +79,7 @@ class SpellSyphonEffect extends OneShotEffect {
                 if (amount == 0) {
                     game.informPlayers("Spell Syphon: no blue permanents in controller's battlefield.");
                 } else {
-                    GenericManaCost cost = new GenericManaCost(amount);
+                    Cost cost = ManaUtil.createManaCost(amount, false);
                     if (!cost.pay(source, game, spell.getControllerId(), spell.getControllerId(), false)) {
                         game.informPlayers("Spell Syphon: cost wasn't payed - countering target spell.");
                         return game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);

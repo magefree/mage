@@ -27,7 +27,7 @@ public final class GoblinWarCry extends CardImpl {
     public GoblinWarCry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");
 
-        // Target opponent chooses a creature he or she controls. Other creatures he or she controls can't block this turn.
+        // Target opponent chooses a creature they control. Other creatures they control can't block this turn.
         this.getSpellAbility().addEffect(new GoblinWarCryEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
@@ -46,7 +46,7 @@ class GoblinWarCryEffect extends OneShotEffect {
 
     GoblinWarCryEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Target opponent chooses a creature he or she controls. Other creatures he or she controls can't block this turn.";
+        this.staticText = "Target opponent chooses a creature they control. Other creatures they control can't block this turn.";
     }
 
     GoblinWarCryEffect(final GoblinWarCryEffect effect) {
@@ -73,7 +73,7 @@ class GoblinWarCryEffect extends OneShotEffect {
             }
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {
-                game.informPlayers(player.getLogName() + " has chosen " + permanent.getLogName() + " as his only creature able to block this turn");
+                game.informPlayers(player.getLogName() + " has chosen " + permanent.getLogName() + " as their only creature able to block this turn");
             }
         }
         game.addEffect(new GoblinWarCryRestrictionEffect(target.getFirstTarget()), source);

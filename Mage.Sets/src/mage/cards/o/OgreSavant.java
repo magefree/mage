@@ -33,7 +33,7 @@ public final class OgreSavant extends CardImpl {
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(),false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new ManaWasSpentCondition(ColoredManaSymbol.U),
-                "if {U} was spent to cast {this}, return target creature to its owner's hand."),
+                "if {U} was spent to cast this spell, return target creature to its owner's hand."),
                 new ManaSpentToCastWatcher());
     }
 

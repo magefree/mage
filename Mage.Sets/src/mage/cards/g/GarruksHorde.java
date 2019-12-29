@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -13,7 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 
 /**
  * @author nantuko
@@ -21,7 +20,7 @@ import mage.filter.common.FilterCreatureCard;
 public final class GarruksHorde extends CardImpl {
 
     public GarruksHorde(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
         this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(7);
@@ -31,7 +30,7 @@ public final class GarruksHorde extends CardImpl {
         // Play with the top card of your library revealed.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect()));
         // You may cast the top card of your library if it's a creature card.
-        Effect effect = new PlayTheTopCardEffect(new FilterCreatureCard());
+        Effect effect = new PlayTheTopCardEffect(StaticFilters.FILTER_CARD_CREATURE);
         effect.setText("You may cast the top card of your library if it's a creature card");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }

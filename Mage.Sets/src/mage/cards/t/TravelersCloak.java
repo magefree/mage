@@ -50,7 +50,7 @@ public final class TravelersCloak extends CardImpl {
         
         // Enchanted creature has landwalk of the chosen type.
         FilterLandPermanent filter = new FilterLandPermanent("Landwalk of the chosen type");
-        filter.add(new ChosenSubtypePredicate());
+        filter.add(ChosenSubtypePredicate.instance);
         Ability landwalkAbility = new LandwalkAbility(filter);
         Effect effect = new GainAbilityAttachedEffect(landwalkAbility, AttachmentType.AURA);
         effect.setText("Enchanted creature has landwalk of the chosen type");

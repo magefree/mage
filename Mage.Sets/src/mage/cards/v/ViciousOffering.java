@@ -32,7 +32,7 @@ public final class ViciousOffering extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(new BoostTargetEffect(-5, -5, Duration.EndOfTurn),
                 new BoostTargetEffect(-2, -2, Duration.EndOfTurn), new LockedInCondition(KickedCondition.instance),
                 "Target creature gets -2/-2 until end of turn. If this spell was kicked, that creature gets -5/-5 until end of turn instead."));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent().withChooseHint("creature that gets -/-"));
     }
 
     public ViciousOffering(final ViciousOffering card) {

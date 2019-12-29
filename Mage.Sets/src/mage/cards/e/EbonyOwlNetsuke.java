@@ -23,7 +23,7 @@ public final class EbonyOwlNetsuke extends CardImpl {
     public EbonyOwlNetsuke(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
-        // At the beginning of each opponent's upkeep, if that player has seven or more cards in hand, Ebony Owl Netsuke deals 4 damage to him or her.
+        // At the beginning of each opponent's upkeep, if that player has seven or more cards in hand, Ebony Owl Netsuke deals 4 damage to that player.
         this.addAbility(new EbonyOwlNetsukeTriggeredAbility());
     }
 

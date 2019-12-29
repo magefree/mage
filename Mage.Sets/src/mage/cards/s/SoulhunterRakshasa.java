@@ -9,7 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.target.common.TargetOpponentOrPlaneswalker;
+import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
 
@@ -30,11 +30,11 @@ public final class SoulhunterRakshasa extends CardImpl {
 
         // When Soulhunter Rakshasa enters the battlefield, it deals 5 damage to target opponent.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(5, "it"), false);
-        ability.addTarget(new TargetOpponentOrPlaneswalker());
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
 
-    public SoulhunterRakshasa(final SoulhunterRakshasa card) {
+    private SoulhunterRakshasa(final SoulhunterRakshasa card) {
         super(card);
     }
 

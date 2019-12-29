@@ -15,7 +15,7 @@ public class BurningEarthTest extends CardTestPlayerBase {
     /**
      * Burning Earth - It doesn't cause the damage it should. My opponent taps a
      * Blood Crypt and an Overgrown Tomb for black and green mana respectively
-     * and casts his card all the while without taking any damage.
+     * and casts their card all the while without taking any damage.
      *
      */
     @Test

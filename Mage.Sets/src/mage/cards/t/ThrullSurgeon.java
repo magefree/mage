@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
@@ -12,8 +11,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -21,15 +20,15 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
- *
  */
 public final class ThrullSurgeon extends CardImpl {
 
     public ThrullSurgeon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.subtype.add(SubType.THRULL);
 
         this.power = new MageInt(1);
@@ -73,9 +72,8 @@ class ThrullSurgeonEffect extends OneShotEffect {
             target.setNotTarget(true);
             if (you.choose(Outcome.Benefit, targetPlayer.getHand(), target, game)) {
                 Card card = targetPlayer.getHand().get(target.getFirstTarget(), game);
-                if (card != null) {
-                    return targetPlayer.discard(card, source, game);
-                }
+                return targetPlayer.discard(card, source, game);
+
             }
 
         }

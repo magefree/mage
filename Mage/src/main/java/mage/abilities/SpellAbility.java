@@ -1,5 +1,7 @@
 package mage.abilities;
 
+import java.util.Optional;
+import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.costs.Cost;
@@ -14,9 +16,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-
-import java.util.Optional;
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -55,18 +54,31 @@ public class SpellAbility extends ActivatedAbilityImpl {
         this.cardName = ability.cardName;
     }
 
+    /*
+     * 7/5/19 - jgray1206 - Moved null != game.getContinuesEffects()... into this method instead of having it in
+     *                      canActivate. There are abilities that directly use this method that should know when spells
+     *                      can be casted that are affected by the CastAsInstant effect.
+     *                      (i.e. Vizier of the Menagerie and issue #5816)
+     */
     public boolean spellCanBeActivatedRegularlyNow(UUID playerId, Game game) {
         MageObject object = game.getObject(sourceId);
-        return timing == TimingRule.INSTANT
+        if (object == null) {
+            return false;
+        }
+        if (game.getState().getValue("PlayFromNotOwnHandZone" + object.getId()) != null) {
+            return (Boolean) game.getState().getValue("PlayFromNotOwnHandZone" + object.getId());  // card like Chandra, Torch of Defiance +1 loyal ability)
+        }
+        return null != game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game) // check this first to allow Offering in main phase
+                || timing == TimingRule.INSTANT
                 || object.hasAbility(FlashAbility.getInstance().getId(), game)
                 || game.canPlaySorcery(playerId);
     }
 
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
-        if (null != game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game) // check this first to allow Offering in main phase
-                || this.spellCanBeActivatedRegularlyNow(playerId, game)) {
-            if (spellAbilityType == SpellAbilityType.SPLIT || spellAbilityType == SpellAbilityType.SPLIT_AFTERMATH) {
+        if (this.spellCanBeActivatedRegularlyNow(playerId, game)) {
+            if (spellAbilityType == SpellAbilityType.SPLIT
+                    || spellAbilityType == SpellAbilityType.SPLIT_AFTERMATH) {
                 return ActivationStatus.getFalse();
             }
             // fix for Gitaxian Probe and casting opponent's spells
@@ -78,7 +90,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
                 }
             }
             // Check if rule modifying events prevent to cast the spell in check playable mode
-            if (this.isCheckPlayableMode()) {
+            if (game.inCheckPlayableState()) {
                 if (game.getContinuousEffects().preventedByRuleModification(
                         GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, this.getId(), this.getSourceId(), playerId), this, game, true)) {
                     return ActivationStatus.getFalse();
@@ -87,7 +99,8 @@ public class SpellAbility extends ActivatedAbilityImpl {
             // Alternate spell abilities (Flashback, Overload) can't be cast with no mana to pay option
             if (getSpellAbilityType() == SpellAbilityType.BASE_ALTERNATE) {
                 Player player = game.getPlayer(playerId);
-                if (player != null && getSourceId().equals(player.getCastSourceIdWithAlternateMana())) {
+                if (player != null
+                        && player.getCastSourceIdWithAlternateMana().contains(getSourceId())) {
                     return ActivationStatus.getFalse();
                 }
             }
@@ -162,13 +175,15 @@ public class SpellAbility extends ActivatedAbilityImpl {
             return 0;
         }
 
+        // mana cost instances
         for (ManaCost manaCost : card.getManaCost()) {
             if (manaCost instanceof VariableManaCost) {
-                xMultiplier = ((VariableManaCost) manaCost).getMultiplier();
+                xMultiplier = ((VariableManaCost) manaCost).getXInstancesCount();
                 break;
             }
         }
 
+        // mana cost final X value
         boolean hasNonManaXCost = false;
         for (Cost cost : getCosts()) {
             if (cost instanceof VariableCost) {
@@ -182,6 +197,11 @@ public class SpellAbility extends ActivatedAbilityImpl {
             amount = getManaCostsToPay().getX();
         }
         return amount * xMultiplier;
+    }
+
+    public void setCardName(String cardName) {
+        this.cardName = cardName;
+        setSpellName();
     }
 
     private void setSpellName() {

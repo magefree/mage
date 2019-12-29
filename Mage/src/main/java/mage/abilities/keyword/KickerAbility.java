@@ -1,21 +1,22 @@
 package mage.abilities.keyword;
 
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.costs.*;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.costs.mana.VariableManaCost;
 import mage.constants.AbilityType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 20121001 702.31. Kicker 702.31a Kicker is a static ability that functions
@@ -57,7 +58,6 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
     protected String keywordText;
     protected String reminderText;
     protected List<OptionalAdditionalCost> kickerCosts = new LinkedList<>();
-    private int xManaValue = 0;
 
     public KickerAbility(String manaString) {
         this(KICKER_KEYWORD, KICKER_REMINDER_MANA);
@@ -79,10 +79,11 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
 
     public KickerAbility(final KickerAbility ability) {
         super(ability);
-        this.kickerCosts.addAll(ability.kickerCosts);
+        for (OptionalAdditionalCost cost : ability.kickerCosts) {
+            this.kickerCosts.add((OptionalAdditionalCost) cost.copy());
+        }
         this.keywordText = ability.keywordText;
         this.reminderText = ability.reminderText;
-        this.xManaValue = ability.xManaValue;
         this.activations.putAll(ability.activations);
     }
 
@@ -108,16 +109,12 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
             cost.reset();
         }
         String key = getActivationKey(source, "", game);
-        for (Iterator<String> iterator = activations.keySet().iterator(); iterator.hasNext();) {
+        for (Iterator<String> iterator = activations.keySet().iterator(); iterator.hasNext(); ) {
             String activationKey = iterator.next();
             if (activationKey.startsWith(key) && activations.get(activationKey) > 0) {
                 activations.put(key, 0);
             }
         }
-    }
-
-    public int getXManaValue() {
-        return xManaValue;
     }
 
     public int getKickedCounter(Game game, Ability source) {
@@ -167,7 +164,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
         if (zcc > 0 && (source.getAbilityType() == AbilityType.TRIGGERED)) {
             --zcc;
         }
-        return String.valueOf(zcc) + ((kickerCosts.size() > 1) ? costText : "");
+        return zcc + ((kickerCosts.size() > 1) ? costText : "");
     }
 
     @Override
@@ -182,16 +179,16 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
                         String times = "";
                         if (kickerCost.isRepeatable()) {
                             int activatedCount = getKickedCounter(game, ability);
-                            times = Integer.toString(activatedCount + 1) + (activatedCount == 0 ? " time " : " times ");
+                            times = (activatedCount + 1) + (activatedCount == 0 ? " time " : " times ");
                         }
                         if (kickerCost.canPay(ability, sourceId, controllerId, game)
                                 && player.chooseUse(Outcome.Benefit, "Pay " + times + kickerCost.getText(false) + " ?", ability, game)) {
                             this.activateKicker(kickerCost, ability, game);
                             if (kickerCost instanceof Costs) {
-                                for (Iterator itKickerCost = ((Costs) kickerCost).iterator(); itKickerCost.hasNext();) {
+                                for (Iterator itKickerCost = ((Costs) kickerCost).iterator(); itKickerCost.hasNext(); ) {
                                     Object kickerCostObject = itKickerCost.next();
                                     if ((kickerCostObject instanceof Costs) || (kickerCostObject instanceof CostsImpl)) {
-                                        for (@SuppressWarnings("unchecked") Iterator<Cost> itDetails = ((Costs) kickerCostObject).iterator(); itDetails.hasNext();) {
+                                        for (@SuppressWarnings("unchecked") Iterator<Cost> itDetails = ((Costs) kickerCostObject).iterator(); itDetails.hasNext(); ) {
                                             addKickerCostsToAbility(itDetails.next(), ability, game);
                                         }
                                     } else {
@@ -199,7 +196,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
                                     }
                                 }
                             } else {
-                                addKickerCostsToAbility((Cost) kickerCost, ability, game);
+                                addKickerCostsToAbility(kickerCost, ability, game);
                             }
                             again = kickerCost.isRepeatable();
                         } else {
@@ -212,26 +209,9 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
     }
 
     private void addKickerCostsToAbility(Cost cost, Ability ability, Game game) {
+        // can contains multiple costs from multikicker ability
         if (cost instanceof ManaCostsImpl) {
-            @SuppressWarnings("unchecked")
-            List<VariableManaCost> varCosts = ((ManaCostsImpl) cost).getVariableCosts();
-            if (!varCosts.isEmpty()) {
-                // use only first variable cost
-                xManaValue = game.getPlayer(this.controllerId).announceXMana(varCosts.get(0).getMinX(), Integer.MAX_VALUE, "Announce kicker value for " + varCosts.get(0).getText(), game, this);
-                // kicker variable X costs handled internally as multikicker with {1} cost (no multikicker on card)
-                if (!game.isSimulation()) {
-                    game.informPlayers(game.getPlayer(this.controllerId).getLogName() + " announced a value of " + xManaValue + " for " + " kicker X ");
-                }
-                ability.getManaCostsToPay().add(new GenericManaCost(xManaValue));
-                ManaCostsImpl<ManaCost> kickerManaCosts = (ManaCostsImpl) cost;
-                for (ManaCost manaCost : kickerManaCosts) {
-                    if (!(manaCost instanceof VariableManaCost)) {
-                        ability.getManaCostsToPay().add(manaCost.copy());
-                    }
-                }
-            } else {
-                ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());
-            }
+            ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());
         } else {
             ability.getCosts().add(cost.copy());
         }

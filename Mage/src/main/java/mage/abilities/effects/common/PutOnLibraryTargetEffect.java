@@ -1,10 +1,6 @@
 
 package mage.abilities.effects.common;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -12,12 +8,16 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.util.CardUtil;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -62,9 +62,15 @@ public class PutOnLibraryTargetEffect extends OneShotEffect {
                         }
                         break;
                     case GRAVEYARD:
-                        Card card = game.getCard(targetId);
-                        if (card != null && game.getState().getZone(targetId) == Zone.GRAVEYARD) {
-                            cards.add(card);
+                        Card graveyardCard = game.getCard(targetId);
+                        if (graveyardCard != null) {
+                            cards.add(graveyardCard);
+                        }
+                        break;
+                    case STACK:
+                        Card stackSpellCard = game.getSpell(targetId).getCard();
+                        if (stackSpellCard != null) {
+                            cards.add(stackSpellCard);
                         }
                         break;
                 }
@@ -76,7 +82,7 @@ public class PutOnLibraryTargetEffect extends OneShotEffect {
                 if (card != null) {
                     Player owner = game.getPlayer(card.getOwnerId());
                     Cards cardsPlayer = new CardsImpl();
-                    for (Iterator<Card> iterator = cards.iterator(); iterator.hasNext();) {
+                    for (Iterator<Card> iterator = cards.iterator(); iterator.hasNext(); ) {
                         Card next = iterator.next();
                         if (next.isOwnedBy(owner.getId())) {
                             cardsPlayer.add(next);
@@ -95,7 +101,7 @@ public class PutOnLibraryTargetEffect extends OneShotEffect {
                 if (permanent != null) {
                     Player owner = game.getPlayer(permanent.getOwnerId());
                     Cards cardsPlayer = new CardsImpl();
-                    for (Iterator<Permanent> iterator = permanents.iterator(); iterator.hasNext();) {
+                    for (Iterator<Permanent> iterator = permanents.iterator(); iterator.hasNext(); ) {
                         Permanent next = iterator.next();
                         if (next.isOwnedBy(owner.getId())) {
                             cardsPlayer.add(next);

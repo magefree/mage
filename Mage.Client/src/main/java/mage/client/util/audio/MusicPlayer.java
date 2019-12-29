@@ -119,6 +119,8 @@ public class MusicPlayer {
 
         }
 
+
+        @Override
         public void run() {
             try {
                 TimeUnit.MILLISECONDS.sleep(100);
@@ -146,6 +148,8 @@ public class MusicPlayer {
 
         final byte[] tempBuffer = new byte[320];
 
+
+        @Override
         public void run() {
             try {
                 sourceDataLine.flush();

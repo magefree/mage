@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
 
@@ -29,7 +28,6 @@ public final class RangingRaptors extends CardImpl {
 
         // Enrage - Whenever Ranging Raptors is dealt damage, you may search your library for a basic land card, put it onto the battlefield, then shuffle your library.
         Ability ability = new DealtDamageToSourceTriggeredAbility(
-                Zone.BATTLEFIELD,
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true),
                 true,
                 true);

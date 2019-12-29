@@ -22,7 +22,7 @@ public class DivergentTransformationsTest extends CardTestPlayerBase {
         Divergent Transformations {6}{R}
          Instant
         Undaunted (This spell costs 1 less to cast for each opponent.)
-        Exile two target creatures. For each of those creatures, its controller reveals cards from the top of their library until he or she reveals a creature card,
+        Exile two target creatures. For each of those creatures, its controller reveals cards from the top of their library until they reveal a creature card,
                 puts that card onto the battlefield, then shuffles the rest into their library.
         */
         String dTransformations = "Divergent Transformations";        

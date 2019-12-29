@@ -21,7 +21,7 @@ public final class TreasureToken extends TokenImpl {
     static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("XLN", "RNA"));
+        tokenImageSets.addAll(Arrays.asList("XLN", "RNA", "M20", "C19"));
     }
 
     public TreasureToken() {
@@ -33,7 +33,7 @@ public final class TreasureToken extends TokenImpl {
     }
 
     public TreasureToken(String setCode, int tokenType) {
-        super("Treasure", "colorless Treasure artifact token with \"{T}, Sacrifice this artifact: Add one mana of any color.\"");
+        super("Treasure", "Treasure token");
         availableImageSetCodes = tokenImageSets;
         setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.ARTIFACT);

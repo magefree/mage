@@ -5,6 +5,7 @@ import mage.abilities.*;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.Effect;
+import mage.cards.AdventureCard;
 import mage.cards.Card;
 import mage.cards.SplitCard;
 import mage.constants.Zone;
@@ -19,6 +20,7 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.events.ZoneChangeGroupEvent;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
 import mage.game.stack.SpellStack;
 import mage.game.stack.StackObject;
 import mage.game.turn.Turn;
@@ -633,6 +635,9 @@ public class GameState implements Serializable, Copyable<GameState> {
      * Returns a list of all active players of the game in range of playerId,
      * also setting the playerId to the first/current player of the list. Also
      * returning the other players in turn order.
+     * <p>
+     * Not safe for continuous effects, see rule 800.4k (effects must work until end of turn even after player leaves)
+     * Use Player.InRange() to find active players list at the start of the turn
      *
      * @param playerId
      * @param game
@@ -643,7 +648,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         Player currentPlayer = game.getPlayer(playerId);
         if (currentPlayer != null) {
             for (Player player : players.values()) {
-                if (!player.hasLeft() && !player.hasLost() && currentPlayer.getInRange().contains(player.getId())) {
+                if (player.isInGame() && currentPlayer.getInRange().contains(player.getId())) {
                     newPlayerList.add(player.getId());
                 }
             }
@@ -769,18 +774,21 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
         for (Map.Entry<ZoneChangeData, List<GameEvent>> entry : eventsByKey.entrySet()) {
             Set<Card> movedCards = new LinkedHashSet<>();
+            Set<PermanentToken> movedTokens = new LinkedHashSet<>();
             for (Iterator<GameEvent> it = entry.getValue().iterator(); it.hasNext(); ) {
                 GameEvent event = it.next();
                 ZoneChangeEvent castEvent = (ZoneChangeEvent) event;
                 UUID targetId = castEvent.getTargetId();
-                Card card = game.getCard(targetId);
-                if (card != null) {
+                Card card = ZonesHandler.getTargetCard(game, targetId);
+                if (card instanceof PermanentToken) {
+                    movedTokens.add((PermanentToken) card);
+                } else if (card != null) {
                     movedCards.add(card);
                 }
             }
             ZoneChangeData eventData = entry.getKey();
-            if (!movedCards.isEmpty()) {
-                ZoneChangeGroupEvent event = new ZoneChangeGroupEvent(movedCards, eventData.sourceId, eventData.playerId, eventData.fromZone, eventData.toZone);
+            if (!movedCards.isEmpty() || !movedTokens.isEmpty()) {
+                ZoneChangeGroupEvent event = new ZoneChangeGroupEvent(movedCards, movedTokens, eventData.sourceId, eventData.playerId, eventData.fromZone, eventData.toZone);
                 groupEvents.add(event);
             }
         }
@@ -806,6 +814,9 @@ public class GameState implements Serializable, Copyable<GameState> {
         if (card.isSplitCard()) {
             removeCopiedCard(((SplitCard) card).getLeftHalfCard());
             removeCopiedCard(((SplitCard) card).getRightHalfCard());
+        }
+        if (card instanceof AdventureCard) {
+            removeCopiedCard(((AdventureCard) card).getSpellCard());
         }
     }
 
@@ -1161,6 +1172,11 @@ public class GameState implements Serializable, Copyable<GameState> {
             Card rightCard = ((SplitCard) copiedCard).getRightHalfCard();
             copiedCards.put(rightCard.getId(), rightCard);
             addCard(rightCard);
+        }
+        if (copiedCard instanceof AdventureCard) {
+            Card spellCard = ((AdventureCard) copiedCard).getSpellCard();
+            copiedCards.put(spellCard.getId(), spellCard);
+            addCard(spellCard);
         }
         return copiedCard;
     }

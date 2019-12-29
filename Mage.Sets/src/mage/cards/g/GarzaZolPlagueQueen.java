@@ -1,7 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.DealtDamageAndDiedTriggeredAbility;
@@ -16,25 +14,26 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class GarzaZolPlagueQueen extends CardImpl {
 
     public GarzaZolPlagueQueen(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{B}{R}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.VAMPIRE, SubType.NOBLE);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // Haste
         this.addAbility(HasteAbility.getInstance());
-        
+
         // Whenever a creature dealt damage by Garza Zol, Plague Queen this turn dies, put a +1/+1 counter on Garza Zol.
         this.addAbility(new DealtDamageAndDiedTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
 

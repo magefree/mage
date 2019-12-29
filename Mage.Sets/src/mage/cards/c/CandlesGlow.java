@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import mage.abilities.Ability;
@@ -10,20 +9,21 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.game.Game;
+import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.PreventDamageEvent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class CandlesGlow extends CardImpl {
 
     public CandlesGlow(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.subtype.add(SubType.ARCANE);
 
 
@@ -70,7 +70,7 @@ class CandlesGlowPreventDamageTargetEffect extends PreventionEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), event.getAmount(), false);
+        GameEvent preventEvent = new PreventDamageEvent(source.getFirstTarget(), source.getSourceId(), source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
         if (!game.replaceEvent(preventEvent)) {
             int prevented;
             if (event.getAmount() >= this.amount) {
@@ -103,9 +103,7 @@ class CandlesGlowPreventDamageTargetEffect extends PreventionEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (!this.used && super.applies(event, source, game)) {
-            if (source.getTargets().getFirstTarget().equals(event.getTargetId())) {
-                return true;
-            }
+            return source.getTargets().getFirstTarget().equals(event.getTargetId());
         }
         return false;
     }

@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -24,7 +23,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -41,7 +40,7 @@ import mage.watchers.common.LifeLossOtherFromCombatWatcher;
 public final class SithMagic extends CardImpl {
 
     public SithMagic(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{B}{R}");
 
         // <i>Hate</i> &mdash; At the beggining of each combat, if opponent lost life from a source other than combat damage this turn, you may return target card from a graveyard to the battlefield under your control. It gains lifelink and haste. Exile it at the beginning of the next end step or if it would leave the battlefield.
         TriggeredAbility triggeredAbility = new BeginningOfCombatTriggeredAbility(new SithMagicEffect(), TargetController.ANY, true);
@@ -50,7 +49,7 @@ public final class SithMagic extends CardImpl {
                 triggeredAbility,
                 HateCondition.instance,
                 "<i>Hate</i> &mdash; At the beggining of each combat, if opponent lost life from a source other than combat damage this turn, you may return target card from a graveyard to the battlefield under your control. It gains lifelink and haste. Exile it at the beginning of the next end step or if it would leave the battlefield.");
-        ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard()));
+        ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE));
         this.addAbility(ability, new LifeLossOtherFromCombatWatcher());
     }
 

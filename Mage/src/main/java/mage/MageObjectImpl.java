@@ -31,10 +31,10 @@ public abstract class MageObjectImpl implements MageObject {
     protected ObjectColor color;
     protected ObjectColor frameColor;
     protected FrameStyle frameStyle;
-    protected EnumSet<CardType> cardType = EnumSet.noneOf(CardType.class);
+    protected Set<CardType> cardType = EnumSet.noneOf(CardType.class);
     protected SubTypeList subtype = new SubTypeList();
     protected boolean isAllCreatureTypes;
-    protected EnumSet<SuperType> supertype = EnumSet.noneOf(SuperType.class);
+    protected Set<SuperType> supertype = EnumSet.noneOf(SuperType.class);
     protected Abilities<Ability> abilities;
     protected String text;
     protected MageInt power;
@@ -111,7 +111,7 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public EnumSet<CardType> getCardType() {
+    public Set<CardType> getCardType() {
         return cardType;
     }
 
@@ -121,7 +121,7 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public EnumSet<SuperType> getSuperType() {
+    public Set<SuperType> getSuperType() {
         return supertype;
     }
 

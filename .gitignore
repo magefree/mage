@@ -48,6 +48,8 @@ Mage.Server.Plugins/Mage.Game.CommanderFreeForAll/target/
 Mage.Server.Plugins/Mage.Game.FreeForAll/target
 Mage.Server.Plugins/Mage.Game.MomirDuel/target
 Mage.Server.Plugins/Mage.Game.MomirGame/target/
+Mage.Server.Plugins/Mage.Game.OathbreakerDuel/target/
+Mage.Server.Plugins/Mage.Game.OathbreakerFreeForAll/target/
 Mage.Server.Plugins/Mage.Game.PennyDreadfulCommanderFreeForAll/target
 Mage.Server.Plugins/Mage.Game.FreeformCommanderDuel/target/
 Mage.Server.Plugins/Mage.Game.FreeformCommanderFreeForAll/target/
@@ -150,3 +152,6 @@ mage-bundle
 # build-tools config and log files when building client/server with Atom
 .build-tools.cson
 build-output.log
+
+# Visual Studio Code
+.history

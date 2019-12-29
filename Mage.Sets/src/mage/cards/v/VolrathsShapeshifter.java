@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import mage.MageInt;
@@ -49,6 +48,9 @@ class VolrathsShapeshifterEffect extends ContinuousEffectImpl {
 
     public VolrathsShapeshifterEffect() {
         super(Duration.WhileOnBattlefield, Layer.TextChangingEffects_3, SubLayer.NA, Outcome.BecomeCreature);
+        staticText = "As long as the top card of your graveyard is a creature card, "
+                + "{this} has the full text of that card and has the text \"2: Discard a card.\" "
+                + "({this} has that card's name, mana cost, color, types, abilities, power, and toughness.) ";
     }
 
     public VolrathsShapeshifterEffect(final VolrathsShapeshifterEffect effect) {
@@ -65,7 +67,9 @@ class VolrathsShapeshifterEffect extends ContinuousEffectImpl {
         Card card = game.getPlayer(source.getControllerId()).getGraveyard().getTopCard(game);
         Permanent permanent = game.getPermanent(source.getSourceId());
 
-        if (card == null || permanent == null || !card.isCreature()) {
+        if (card == null
+                || permanent == null
+                || !card.isCreature()) {
             return false;
         }
 
@@ -90,7 +94,7 @@ class VolrathsShapeshifterEffect extends ContinuousEffectImpl {
 
         permanent.getSuperType().clear();
         for (SuperType type : card.getSuperType()) {
-                permanent.addSuperType(type);
+            permanent.addSuperType(type);
 
         }
 

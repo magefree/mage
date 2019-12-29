@@ -1,5 +1,6 @@
 package mage.abilities.common;
 
+import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -10,6 +11,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -30,7 +32,8 @@ public class GodEternalDiesTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             return zEvent.getFromZone() == Zone.BATTLEFIELD
-                    && (zEvent.getToZone() == Zone.GRAVEYARD || zEvent.getToZone() == Zone.EXILED);
+                    && (zEvent.getToZone() == Zone.GRAVEYARD
+                    || zEvent.getToZone() == Zone.EXILED);
         }
         return false;
     }
@@ -47,14 +50,30 @@ public class GodEternalDiesTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        Permanent sourcePermanent = null;
+        if (game.getState().getZone(getSourceId()) == Zone.BATTLEFIELD) {
+            sourcePermanent = game.getPermanent(getSourceId());
+        } else {
+            if (game.getShortLivingLKI(getSourceId(), Zone.BATTLEFIELD)) {
+                sourcePermanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD);
+            }
+        }
+        if (sourcePermanent == null) {
+            return false;
+        }
+        return hasSourceObjectAbility(game, sourcePermanent, event);
+    }
+
+    @Override
     public GodEternalDiesTriggeredAbility copy() {
         return new GodEternalDiesTriggeredAbility(this);
     }
 
     @Override
     public String getRule() {
-        return "When {this} dies or is put into exile from the battlefield, " +
-                "you may put it into its owner's library third from the top.";
+        return "When {this} dies or is put into exile from the battlefield, "
+                + "you may put it into its owner's library third from the top.";
     }
 }
 

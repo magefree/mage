@@ -22,12 +22,16 @@ public class SpectacleAbility extends SpellAbility {
     private String rule;
 
     public SpectacleAbility(Card card, ManaCost spectacleCosts) {
-        super(spectacleCosts, card.getName() + " with spectacle", Zone.HAND, SpellAbilityType.BASE_ALTERNATE);
-        this.getCosts().addAll(card.getSpellAbility().getCosts().copy());
-        this.getEffects().addAll(card.getSpellAbility().getEffects().copy());
-        this.getTargets().addAll(card.getSpellAbility().getTargets().copy());
-        this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
-        this.timing = card.getSpellAbility().getTiming();
+        super(card.getSpellAbility());
+        this.newId();
+        this.setCardName(card.getName() + " with spectacle");
+        zone = Zone.HAND;
+        spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
+
+        this.getManaCosts().clear();
+        this.getManaCostsToPay().clear();
+        this.addManaCost(spectacleCosts.copy());
+
         this.setRuleAtTheTop(true);
         this.rule = "Spectacle " + spectacleCosts.getText()
                 + " <i>(You may cast this spell for its spectacle cost rather than its mana cost if an opponent lost life this turn.)</i>";
@@ -41,8 +45,9 @@ public class SpectacleAbility extends SpellAbility {
 
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
-        if (OpponentsLostLifeCount.instance.calculate(game, playerId) > 0) {
-            return super.canActivate(playerId, game);
+        if (OpponentsLostLifeCount.instance.calculate(game, playerId) > 0
+                && super.canActivate(playerId, game).canActivate()) {
+            return ActivationStatus.getTrue();
         }
         return ActivationStatus.getFalse();
     }

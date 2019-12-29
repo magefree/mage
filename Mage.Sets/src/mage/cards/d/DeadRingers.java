@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -29,7 +28,7 @@ public final class DeadRingers extends CardImpl {
     }
 
     public DeadRingers(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}");
 
         // Destroy two target nonblack creatures unless either one is a color the other isn't. They can't be regenerated.
         this.getSpellAbility().addEffect(new DeadRingersEffect());
@@ -65,10 +64,15 @@ class DeadRingersEffect extends DestroyTargetEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Target target = source.getTargets().get(0);
-        Permanent first = game.getPermanentOrLKIBattlefield(target.getTargets().get(0));
-        Permanent second = game.getPermanentOrLKIBattlefield(target.getTargets().get(1));
-        if(first != null && second != null && first.getColor(game).equals(second.getColor(game))) {
-            return super.apply(game, source);
+        if (target != null
+                && target.getTargets().size() > 1) {
+            Permanent first = game.getPermanentOrLKIBattlefield(target.getTargets().get(0));
+            Permanent second = game.getPermanentOrLKIBattlefield(target.getTargets().get(1));
+            if (first != null
+                    && second != null
+                    && first.getColor(game).equals(second.getColor(game))) {
+                return super.apply(game, source);
+            }
         }
         return false;
     }

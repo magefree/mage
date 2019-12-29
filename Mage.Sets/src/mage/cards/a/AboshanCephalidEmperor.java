@@ -1,7 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -24,24 +22,25 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author cbt33
  */
 public final class AboshanCephalidEmperor extends CardImpl {
-    
-static final FilterControlledCreaturePermanent filter1 = new FilterControlledCreaturePermanent("untapped Cephalid you control");
-static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creatures without flying");
 
-static {
-    filter1.add(new SubtypePredicate(SubType.CEPHALID));
-    filter2.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
-}
+    static final FilterControlledCreaturePermanent filter1 = new FilterControlledCreaturePermanent("untapped Cephalid you control");
+    static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creatures without flying");
+
+    static {
+        filter1.add(new SubtypePredicate(SubType.CEPHALID));
+        filter2.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
+    }
 
     public AboshanCephalidEmperor(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.CEPHALID);
+        this.subtype.add(SubType.CEPHALID, SubType.NOBLE);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -50,7 +49,7 @@ static {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter1, true)));
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
-        
+
         // {U}{U}{U}: Tap all creatures without flying.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapAllEffect(filter2), new ManaCostsImpl("{U}{U}{U}")));
     }

@@ -45,7 +45,7 @@ public final class HungeringHydra extends CardImpl {
 
         // Whenever damage is dealt to Hungering Hydra, put that many +1/+1 counters on it.
         this.addAbility(new DealtDamageToSourceTriggeredAbility(
-                Zone.BATTLEFIELD, new HungeringHydraEffect(),
+                new HungeringHydraEffect(),
                 false, false, true
         ));
     }

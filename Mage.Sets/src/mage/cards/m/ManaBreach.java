@@ -29,7 +29,7 @@ public final class ManaBreach extends CardImpl {
     public ManaBreach(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
 
-        // Whenever a player casts a spell, that player returns a land he or she controls to its owner's hand.
+        // Whenever a player casts a spell, that player returns a land they control to its owner's hand.
         this.addAbility(new SpellCastAllTriggeredAbility(new ManaBreachEffect(), StaticFilters.FILTER_SPELL, false, SetTargetPointer.PLAYER));
     }
 
@@ -47,7 +47,7 @@ class ManaBreachEffect extends OneShotEffect {
 
     public ManaBreachEffect() {
         super(Outcome.Detriment);
-        staticText="that player returns a land he or she controls to its owner's hand.";
+        staticText="that player returns a land they control to its owner's hand.";
     }
 
     public boolean apply(Game game, Ability source) {

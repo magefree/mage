@@ -70,7 +70,7 @@ public final class DanceOfTheDead extends CardImpl {
         ability.addEffect(effect);
         this.addAbility(ability);
 
-        // At the beginning of the upkeep of enchanted creature's controller, that player may pay {1}{B}. If he or she does, untap that creature.
+        // At the beginning of the upkeep of enchanted creature's controller, that player may pay {1}{B}. If they do, untap that creature.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DanceOfTheDeadDoIfCostPaidEffect(), TargetController.CONTROLLER_ATTACHED_TO, false));
 
     }
@@ -279,6 +279,6 @@ class DanceOfTheDeadDoIfCostPaidEffect extends DoIfCostPaid {
 
     @Override
     public String getText(Mode mode) {
-        return "that player may " + getCostText() + ". If he or she does, " + executingEffects.getText(mode);
+        return "that player may " + getCostText() + ". If they do, " + executingEffects.getText(mode);
     }
 }

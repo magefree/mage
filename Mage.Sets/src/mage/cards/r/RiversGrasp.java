@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -24,8 +23,9 @@ import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.ManaSpentToCastWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class RiversGrasp extends CardImpl {
@@ -38,10 +38,10 @@ public final class RiversGrasp extends CardImpl {
         Target targetPlayer = new TargetPlayer();
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new ReturnToHandTargetEffect(),
-                new ManaWasSpentCondition(ColoredManaSymbol.U), "If {U} was spent to cast {this}, return up to one target creature to its owner's hand"));
+                new ManaWasSpentCondition(ColoredManaSymbol.U), "If {U} was spent to cast this spell, return up to one target creature to its owner's hand"));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new RiversGraspEffect(),
-                new ManaWasSpentCondition(ColoredManaSymbol.B), " If {B} was spent to cast {this}, target player reveals their hand, you choose a nonland card from it, then that player discards that card"));
+                new ManaWasSpentCondition(ColoredManaSymbol.B), " If {B} was spent to cast this spell, target player reveals their hand, you choose a nonland card from it, then that player discards that card"));
 
         this.getSpellAbility().addTarget(targetCreature);
         this.getSpellAbility().addTarget(targetPlayer);
@@ -86,9 +86,8 @@ class RiversGraspEffect extends OneShotEffect {
                 TargetCard target = new TargetCard(Zone.HAND, StaticFilters.FILTER_CARD_A_NON_LAND);
                 if (controller.choose(Outcome.Benefit, player.getHand(), target, game)) {
                     Card card = player.getHand().get(target.getFirstTarget(), game);
-                    if (card != null) {
-                        return player.discard(card, source, game);
-                    }
+                    return player.discard(card, source, game);
+
                 }
             }
         }

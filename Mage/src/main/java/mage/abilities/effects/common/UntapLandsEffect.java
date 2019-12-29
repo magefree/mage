@@ -64,8 +64,8 @@ public class UntapLandsEffect extends OneShotEffect {
                     }
                 }
                 if (target.choose(Outcome.Untap, source.getControllerId(), source.getSourceId(), game)) {
-                    for (Object targetId : target.getTargets()) {
-                        Permanent p = game.getPermanent((UUID) targetId);
+                    for (UUID targetId : target.getTargets()) {
+                        Permanent p = game.getPermanent(targetId);
                         if (p != null) {
                             p.untap(game);
                         }

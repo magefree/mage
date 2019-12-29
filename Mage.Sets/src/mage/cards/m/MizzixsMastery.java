@@ -1,22 +1,14 @@
-
 package mage.cards.m;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.keyword.OverloadAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
@@ -25,8 +17,10 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class MizzixsMastery extends CardImpl {
@@ -40,7 +34,7 @@ public final class MizzixsMastery extends CardImpl {
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
 
         // Overload {5}{R}{R}{R}
-        Ability ability = new OverloadAbility(this, new MizzixsMasteryOverloadEffect(), new ManaCostsImpl("{5}{R}{R}{R}"), TimingRule.SORCERY);
+        Ability ability = new OverloadAbility(this, new MizzixsMasteryOverloadEffect(), new ManaCostsImpl("{5}{R}{R}{R}"));
         ability.addEffect(ExileSpellEffect.getInstance());
         this.addAbility(ability);
     }

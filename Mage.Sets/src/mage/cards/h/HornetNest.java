@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.token.HornetNestInsectToken;
 import mage.players.Player;
@@ -34,7 +33,7 @@ public final class HornetNest extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // Whenever Hornet Nest is dealt damage, create that many 1/1 green Insect creature tokens with flying and deathtouch.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new HornetNestDealDamageEffect(), false, false, true));
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(new HornetNestDealDamageEffect(), false, false, true));
     }
 
     public HornetNest(final HornetNest card) {

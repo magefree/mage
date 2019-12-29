@@ -62,8 +62,8 @@ class RenounceEffect extends OneShotEffect {
         int amount = 0;
         TargetControlledPermanent toSacrifice = new TargetControlledPermanent(0, Integer.MAX_VALUE, new FilterControlledPermanent(), true);
         if(player.chooseTarget(Outcome.Sacrifice, toSacrifice, source, game)) {
-            for(Object uuid : toSacrifice.getTargets()){
-                Permanent permanent = game.getPermanent((UUID)uuid);
+            for(UUID uuid : toSacrifice.getTargets()){
+                Permanent permanent = game.getPermanent(uuid);
                 if(permanent != null){
                     permanent.sacrifice(source.getSourceId(), game);
                     amount++;

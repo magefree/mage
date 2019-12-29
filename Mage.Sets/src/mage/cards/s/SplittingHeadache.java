@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -18,14 +17,15 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class SplittingHeadache extends CardImpl {
 
     public SplittingHeadache(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}");
 
 
         // Choose one - Target player discards two cards; or target player reveals their hand, you choose a card from it, then that player discards that card.
@@ -74,9 +74,8 @@ class SplittingHeadacheEffect extends OneShotEffect {
                 TargetCard target = new TargetCard(Zone.HAND, new FilterCard());
                 if (you.choose(Outcome.Benefit, player.getHand(), target, game)) {
                     Card card = player.getHand().get(target.getFirstTarget(), game);
-                    if (card != null) {
-                        return player.discard(card, source, game);
-                    }
+                    return player.discard(card, source, game);
+
                 }
             }
         }

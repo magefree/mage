@@ -6,6 +6,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+
 import mage.game.draft.Draft;
 import mage.view.DraftPickView;
 
@@ -16,7 +18,7 @@ import mage.view.DraftPickView;
 public enum DraftManager {
     instance;
 
-    private final ConcurrentHashMap<UUID, DraftController> draftControllers = new ConcurrentHashMap<>();
+    private final ConcurrentMap<UUID, DraftController> draftControllers = new ConcurrentHashMap<>();
 
     public UUID createDraftSession(Draft draft, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId) {
         DraftController draftController = new DraftController(draft, userPlayerMap, tableId);

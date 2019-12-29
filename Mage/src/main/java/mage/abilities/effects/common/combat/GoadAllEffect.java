@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
@@ -11,14 +10,13 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author TheElk801
  */
 public class GoadAllEffect extends OneShotEffect {
 
     public GoadAllEffect() {
         super(Outcome.Benefit);
-        staticText = "Goad all creatures you don't control.";
+        staticText = "Goad all creatures you don't control. <i>(Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)</i>";
     }
 
     public GoadAllEffect(final GoadAllEffect effect) {

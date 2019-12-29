@@ -23,10 +23,10 @@ public final class DragonsMaze extends ExpansionSet {
         return instance;
     }
 
-    List<CardInfo> savedSpecialRares = new ArrayList<>();
+    private List<CardInfo> savedSpecialRares = new ArrayList<>();
 
     private DragonsMaze() {
-        super("Dragon's Maze", "DGM", ExpansionSet.buildDate(2013, 5, 03), SetType.EXPANSION);
+        super("Dragon's Maze", "DGM", ExpansionSet.buildDate(2013, 5, 3), SetType.EXPANSION);
         this.blockName = "Return to Ravnica";
         this.hasBoosters = true;
         this.numBoosterSpecial = 1;
@@ -204,7 +204,7 @@ public final class DragonsMaze extends ExpansionSet {
                 criteria.rarities(rarity).doubleFaced(false);
                 savedCardsInfos = CardRepository.instance.findCards(criteria);
                 if (maxCardNumberInBooster != Integer.MAX_VALUE) {
-                    savedCardsInfos.removeIf(next -> next.getCardNumberAsInt() > maxCardNumberInBooster && rarity != Rarity.LAND);
+                    savedCardsInfos.removeIf(next -> next.getCardNumberAsInt() > maxCardNumberInBooster);
                 }
                 savedCards.put(rarity, savedCardsInfos);
             }
@@ -224,7 +224,6 @@ public final class DragonsMaze extends ExpansionSet {
 
     @Override
     public List<CardInfo> getSpecialRare() {
-        List<CardInfo> specialRares = new ArrayList<>();
         if (savedSpecialRares == null) {
             CardCriteria criteria = new CardCriteria();
             criteria.setCodes("GTC").name("Breeding Pool");
@@ -258,8 +257,7 @@ public final class DragonsMaze extends ExpansionSet {
             criteria.setCodes("RTR").name("Temple Garden");
             savedSpecialRares.addAll(CardRepository.instance.findCards(criteria));
         }
-        specialRares.addAll(savedSpecialRares);
-        return specialRares;
+        return new ArrayList<>(savedSpecialRares);
     }
 
     @Override

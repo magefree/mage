@@ -1,8 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
@@ -19,13 +17,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -33,8 +25,10 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class TibaltTheFiendBlooded extends CardImpl {
@@ -94,9 +88,7 @@ class TibaltTheFiendBloodedFirstEffect extends OneShotEffect {
         if (player != null) {
             player.drawCards(1, game);
             Card card = player.getHand().getRandom(game);
-            if (card != null) {
-                player.discard(card, source, game);
-            }
+            player.discard(card, source, game);
             return true;
         }
         return false;

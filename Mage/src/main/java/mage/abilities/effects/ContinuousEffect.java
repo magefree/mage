@@ -7,6 +7,7 @@ import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.SubLayer;
 import mage.game.Game;
+import mage.target.targetpointer.TargetPointer;
 
 import java.util.EnumSet;
 import java.util.List;
@@ -77,4 +78,7 @@ public interface ContinuousEffect extends Effect {
     boolean isTemporary();
 
     void setTemporary(boolean temporary);
+
+    @Override
+    ContinuousEffect setTargetPointer(TargetPointer targetPointer);
 }

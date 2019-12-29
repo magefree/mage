@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -22,11 +21,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -47,7 +46,7 @@ public final class DralnusPet extends CardImpl {
         // Kicker-{2}{B}, Discard a creature card.
         Costs<Cost> kickerCosts = new CostsImpl<>();
         kickerCosts.add(new ManaCostsImpl<>("{2}{B}"));
-        kickerCosts.add(new DiscardCardCost(new FilterCreatureCard()));
+        kickerCosts.add(new DiscardCardCost(StaticFilters.FILTER_CARD_CREATURE));
         this.addAbility(new KickerAbility(kickerCosts));
         // If Dralnu's Pet was kicked, it enters the battlefield with flying and with X +1/+1 counters on it, where X is the discarded card's converted mana cost.
         Ability ability = new EntersBattlefieldAbility(new DralnusPetEffect(), KickedCondition.instance,

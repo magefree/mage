@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -10,7 +9,7 @@ import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -47,9 +46,10 @@ public final class ConstrictingSliver extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent(filterTarget));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new GainAbilityAllEffect(ability,
-                        Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS,
-                        "Sliver creatures you control have \"When this creature enters the battlefield, you may exile target creature an opponent controls until this creature leaves the battlefield.\"")));
+                new GainAbilityControlledEffect(ability,
+                        Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS)
+                        .setText("Sliver creatures you control have \"When this creature enters the battlefield, "
+                                + "you may exile target creature an opponent controls until this creature leaves the battlefield.\"")));
 
     }
 

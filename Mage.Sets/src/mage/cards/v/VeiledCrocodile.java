@@ -1,6 +1,5 @@
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
@@ -15,8 +14,9 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.token.TokenImpl;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class VeiledCrocodile extends CardImpl {
@@ -76,11 +76,7 @@ class VeiledCrocodileStateTriggeredAbility extends StateTriggeredAbility {
     @Override
     public boolean canTrigger(Game game) {
         //20100716 - 603.8
-        Boolean triggered = (Boolean) game.getState().getValue(getSourceId().toString() + "triggered");
-        if (triggered == null) {
-            triggered = Boolean.FALSE;
-        }
-        return !triggered;
+        return !Boolean.TRUE.equals(game.getState().getValue(getSourceId().toString() + "triggered"));
     }
 
     @Override

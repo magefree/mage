@@ -1,7 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -16,14 +14,15 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class DirtcowlWurm extends CardImpl {
 
     public DirtcowlWurm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
         this.subtype.add(SubType.WURM);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
@@ -59,7 +58,7 @@ class DirtcowlWurmTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent land = game.getPermanent(event.getTargetId());
-        return game.getOpponents(controllerId).contains(land.getControllerId());
+        return land != null && game.getOpponents(controllerId).contains(land.getControllerId());
     }
 
     @Override

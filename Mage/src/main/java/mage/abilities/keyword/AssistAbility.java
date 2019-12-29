@@ -1,4 +1,3 @@
-
 package mage.abilities.keyword;
 
 import mage.Mana;
@@ -7,14 +6,9 @@ import mage.abilities.SpecialAction;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.AlternateManaPaymentAbility;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.constants.AbilityType;
-import mage.constants.ManaType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPlayer;
 import mage.filter.predicate.other.PlayerPredicate;
 import mage.game.Game;
@@ -22,6 +16,7 @@ import mage.players.ManaPool;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPlayer;
+import mage.util.ManaUtil;
 
 /*
  * @author emerald000
@@ -117,12 +112,12 @@ class AssistEffect extends OneShotEffect {
         if (controller != null && targetPlayer != null) {
             int amountToPay = targetPlayer.announceXMana(0, unpaid.getMana().getGeneric(), "How much mana to pay?", game, source);
             if (amountToPay > 0) {
-                Cost cost = new GenericManaCost(amountToPay);
+                Cost cost = ManaUtil.createManaCost(amountToPay, false);
                 if (cost.pay(source, game, source.getSourceId(), targetPlayer.getId(), false)) {
                     ManaPool manaPool = controller.getManaPool();
                     manaPool.addMana(Mana.ColorlessMana(amountToPay), game, source);
                     manaPool.unlockManaType(ManaType.COLORLESS);
-                    game.informPlayers(targetPlayer.getLogName() + " paid " + amountToPay + " mana.");
+                    game.informPlayers(targetPlayer.getLogName() + " paid {" + amountToPay + "}.");
                     game.getState().setValue(source.getSourceId().toString() + game.getState().getZoneChangeCounter(source.getSourceId()), true);
                 }
             }

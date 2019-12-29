@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -10,8 +9,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -19,6 +18,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.functions.ApplyToPermanent;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -44,7 +45,7 @@ public final class Cryptoplasm extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Cryptoplasm(final Cryptoplasm card) {
+    private Cryptoplasm(final Cryptoplasm card) {
         super(card);
     }
 
@@ -57,12 +58,12 @@ public final class Cryptoplasm extends CardImpl {
 
 class CryptoplasmEffect extends OneShotEffect {
 
-    public CryptoplasmEffect() {
+    CryptoplasmEffect() {
         super(Outcome.Copy);
-        this.staticText = "you may have {this} become a copy of another target creature. If you do, {this} gains this ability";
+        this.staticText = "you may have {this} become a copy of another target creature, except it gains this ability";
     }
 
-    public CryptoplasmEffect(final CryptoplasmEffect effect) {
+    private CryptoplasmEffect(final CryptoplasmEffect effect) {
         super(effect);
     }
 

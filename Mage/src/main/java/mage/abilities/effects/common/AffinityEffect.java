@@ -30,7 +30,8 @@ public class AffinityEffect extends CostModificationEffectImpl {
         SpellAbility spellAbility = (SpellAbility)abilityToModify;
         Mana mana = spellAbility.getManaCostsToPay().getMana();
         if (mana.getGeneric() > 0) {
-            int count = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+            // the following works with Sen Triplets and in multiplayer games
+            int count = game.getBattlefield().getActivePermanents(filter, abilityToModify.getControllerId(), source.getId(), game).size();
             int newCount = mana.getGeneric() - count;
             if (newCount < 0) {
                 newCount = 0;

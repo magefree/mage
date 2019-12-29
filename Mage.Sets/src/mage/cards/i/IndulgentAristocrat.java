@@ -1,7 +1,5 @@
-
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -15,13 +13,15 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+
 /**
- *
  * @author fireshoes
  */
 public final class IndulgentAristocrat extends CardImpl {
@@ -34,7 +34,7 @@ public final class IndulgentAristocrat extends CardImpl {
 
     public IndulgentAristocrat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
-        this.subtype.add(SubType.VAMPIRE);
+        this.subtype.add(SubType.VAMPIRE, SubType.NOBLE);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
@@ -47,7 +47,7 @@ public final class IndulgentAristocrat extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IndulgentAristocrat(final IndulgentAristocrat card) {
+    private IndulgentAristocrat(final IndulgentAristocrat card) {
         super(card);
     }
 

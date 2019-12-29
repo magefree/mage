@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -25,14 +24,13 @@ import java.util.UUID;
 
 /**
  * Effect for the DevourAbility
- *
+ * <p>
  * 702.81. Devour 702.81a Devour is a static ability. "Devour N" means "As this
  * object enters the battlefield, you may sacrifice any number of creatures.
  * This permanent enters the battlefield with N +1/+1 counters on it for each
  * creature sacrificed this way." 702.81b Some objects have abilities that refer
  * to the number of creatures the permanent devoured. "It devoured" means
  * "sacrificed as a result of its devour ability as it entered the battlefield."
- *
  *
  * @author LevelX2
  */
@@ -43,6 +41,7 @@ public class DevourEffect extends ReplacementEffectImpl {
     static {
         filter.add(AnotherPredicate.instance);
     }
+
     private final DevourFactor devourFactor;
 
     public DevourEffect(DevourFactor devourFactor) {
@@ -125,10 +124,10 @@ public class DevourEffect extends ReplacementEffectImpl {
         return sb.toString();
     }
 
-    public List<ArrayList<String>> getSubtypes(Game game, UUID permanentId) {
+    public List<SubTypeList> getSubtypes(Game game, UUID permanentId) {
         Object object = game.getState().getValue(permanentId.toString() + "devoured");
         if (object != null) {
-            return (List<ArrayList<String>>) object;
+            return (List<SubTypeList>) object;
         }
         return Collections.emptyList();
     }
@@ -136,7 +135,7 @@ public class DevourEffect extends ReplacementEffectImpl {
     public int getDevouredCreaturesAmount(Game game, UUID permanentId) {
         Object object = game.getState().getValue(permanentId.toString() + "devoured");
         if (object != null) {
-            return ((List<ArrayList<String>>) object).size();
+            return ((List<SubTypeList>) object).size();
         }
         return 0;
     }

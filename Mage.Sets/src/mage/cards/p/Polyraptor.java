@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 
 /**
  *
@@ -28,7 +27,6 @@ public final class Polyraptor extends CardImpl {
 
         // Enrage - Whenever Polyraptor is dealt damage, create a token that's a copy of Polyraptor.
         Ability ability = new DealtDamageToSourceTriggeredAbility(
-                Zone.BATTLEFIELD,
                 new CreateTokenCopySourceEffect(),
                 false,
                 true);

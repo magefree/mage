@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -12,10 +11,10 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -27,7 +26,7 @@ import mage.target.common.TargetCardInLibrary;
 public final class CorpseConnoisseur extends CardImpl {
 
     public CorpseConnoisseur(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.WIZARD);
 
@@ -52,8 +51,8 @@ public final class CorpseConnoisseur extends CardImpl {
 
 class SearchLibraryPutInGraveyard extends SearchEffect {
 
-  public SearchLibraryPutInGraveyard() {
-        super(new TargetCardInLibrary(new FilterCreatureCard()), Outcome.Neutral);
+    public SearchLibraryPutInGraveyard() {
+        super(new TargetCardInLibrary(StaticFilters.FILTER_CARD_CREATURE), Outcome.Neutral);
         staticText = "search your library for a card and put that card into your graveyard. Then shuffle your library";
     }
 
@@ -80,9 +79,8 @@ class SearchLibraryPutInGraveyard extends SearchEffect {
             }
             controller.shuffleLibrary(source, game);
             return true;
-        }    
+        }
         return false;
     }
 
-    
 }

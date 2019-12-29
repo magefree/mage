@@ -2,6 +2,7 @@ package mage.player.ai;
 
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.AbilityImpl;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.PassAbility;
 import mage.abilities.costs.mana.ManaCost;
@@ -128,11 +129,12 @@ public class SimulatedPlayer2 extends ComputerPlayer {
                 }
             }
             if (variableManaCost != null) {
-                int multiplier = variableManaCost.getMultiplier();
+                int xInstancesCount = variableManaCost.getXInstancesCount();
 
                 for (int mana = variableManaCost.getMinX(); mana <= numAvailable; mana++) {
-                    if (mana % multiplier == 0) { // use only values dependant from multiplier
-                        int xAmount = mana / multiplier;
+                    if (mana % xInstancesCount == 0) { // use only values dependant from multiplier
+                        // find possible X value to pay
+                        int xAnnounceValue = mana / xInstancesCount;
                         Ability newAbility = ability.copy();
                         VariableManaCost varCost = null;
                         for (ManaCost cost : newAbility.getManaCostsToPay()) {
@@ -141,9 +143,13 @@ public class SimulatedPlayer2 extends ComputerPlayer {
                                 break; // only one VariableManCost per spell (or is it possible to have more?)
                             }
                         }
-                        // add the specific value for x
-                        newAbility.getManaCostsToPay().add(new ManaCostsImpl(new StringBuilder("{").append(xAmount).append('}').toString()));
-                        newAbility.getManaCostsToPay().setX(xAmount);
+                        // find real X value after replace events
+                        int xMultiplier = 1;
+                        if (newAbility instanceof AbilityImpl) {
+                            xMultiplier = ((AbilityImpl) newAbility).handleManaXMultiplier(game, xMultiplier);
+                        }
+                        newAbility.getManaCostsToPay().add(new ManaCostsImpl(new StringBuilder("{").append(xAnnounceValue).append('}').toString()));
+                        newAbility.getManaCostsToPay().setX(xAnnounceValue * xMultiplier, xAnnounceValue * xInstancesCount);
                         if (varCost != null) {
                             varCost.setPaid();
                         }

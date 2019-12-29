@@ -33,7 +33,7 @@ public final class DryadsCaress extends CardImpl {
         //If {W} was spent to cast Dryad's Caress, untap all creatures you control.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new UntapAllControllerEffect(new FilterControlledCreaturePermanent(), rule), 
-                new ManaWasSpentCondition(ColoredManaSymbol.W), "If {W} was spent to cast {this}, untap all creatures you control"));
+                new ManaWasSpentCondition(ColoredManaSymbol.W), "If {W} was spent to cast this spell, untap all creatures you control"));
     }
 
     public DryadsCaress(final DryadsCaress card) {

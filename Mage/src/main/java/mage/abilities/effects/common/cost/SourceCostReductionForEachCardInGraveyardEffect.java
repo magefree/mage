@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.cost;
 
 import mage.abilities.Ability;
@@ -7,12 +6,12 @@ import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
- *
  * @author Styxo
  */
 public class SourceCostReductionForEachCardInGraveyardEffect extends CostModificationEffectImpl {
@@ -20,7 +19,7 @@ public class SourceCostReductionForEachCardInGraveyardEffect extends CostModific
     private FilterCard filter;
 
     public SourceCostReductionForEachCardInGraveyardEffect() {
-        this(new FilterCard());
+        this(StaticFilters.FILTER_CARD);
     }
 
     public SourceCostReductionForEachCardInGraveyardEffect(FilterCard filter) {
@@ -29,7 +28,7 @@ public class SourceCostReductionForEachCardInGraveyardEffect extends CostModific
         staticText = "{this} costs {1} less to cast for each " + filter.getMessage() + " in your graveyard";
     }
 
-    SourceCostReductionForEachCardInGraveyardEffect(SourceCostReductionForEachCardInGraveyardEffect effect) {
+    private SourceCostReductionForEachCardInGraveyardEffect(SourceCostReductionForEachCardInGraveyardEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
     }

@@ -24,7 +24,7 @@ public final class CerebralEruption extends CardImpl {
     public CerebralEruption(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{R}");
 
-        // Target opponent reveals the top card of their library. Cerebral Eruption deals damage equal to the revealed card's converted mana cost to that player and each creature he or she controls. If a land card is revealed this way, return Cerebral Eruption to its owner's hand.
+        // Target opponent reveals the top card of their library. Cerebral Eruption deals damage equal to the revealed card's converted mana cost to that player and each creature they control. If a land card is revealed this way, return Cerebral Eruption to its owner's hand.
         this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().addEffect(new CerebralEruptionEffect());
     }
@@ -44,7 +44,7 @@ class CerebralEruptionEffect extends OneShotEffect {
 
     CerebralEruptionEffect() {
         super(Outcome.Damage);
-        staticText = "Target opponent reveals the top card of their library. {this} deals damage equal to the revealed card's converted mana cost to that player and each creature he or she controls. If a land card is revealed this way, return {this} to its owner's hand";
+        staticText = "Target opponent reveals the top card of their library. {this} deals damage equal to the revealed card's converted mana cost to that player and each creature they control. If a land card is revealed this way, return {this} to its owner's hand";
     }
 
     CerebralEruptionEffect(final CerebralEruptionEffect effect) {

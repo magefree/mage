@@ -1,7 +1,9 @@
 package org.mage.plugins.card.dl.sources;
 
+import org.mage.plugins.card.dl.DownloadServiceInfo;
 import org.mage.plugins.card.images.CardDownloadData;
 
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -26,6 +28,11 @@ public enum MtgImageSource implements CardImageSource {
     @Override
     public String getFileForHttpImage(String httpImageUrl) {
         return null;
+    }
+
+    @Override
+    public boolean prepareDownloadList(DownloadServiceInfo downloadServiceInfo, List<CardDownloadData> downloadList) {
+        return true;
     }
 
     @Override

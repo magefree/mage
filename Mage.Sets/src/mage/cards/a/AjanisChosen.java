@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import mage.MageInt;
@@ -12,14 +11,12 @@ import mage.filter.common.FilterControlledEnchantmentPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.CatToken;
-import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 
 import java.util.UUID;
 
 /**
- *
  * @author Plopman
  */
 public final class AjanisChosen extends CardImpl {
@@ -76,18 +73,21 @@ class AjanisChosenEffect extends OneShotEffect {
                         Permanent tokenPermanent = game.getPermanent(tokenId);
                         if (tokenPermanent != null) {
                             Permanent oldCreature = game.getPermanent(enchantment.getAttachedTo());
-                            if (oldCreature != null && enchantment.getSpellAbility().getTargets().get(0).canTarget(tokenPermanent.getId(), game) && controller.chooseUse(Outcome.Neutral, "Attach " + enchantment.getName() + " to the token ?", source, game)) {
-                                if (oldCreature.removeAttachment(enchantment.getId(), game)) {
-                                    tokenPermanent.addAttachment(enchantment.getId(), game);
+                            if (oldCreature != null) {
+                                boolean canAttach = enchantment.getSpellAbility() == null
+                                        || (!enchantment.getSpellAbility().getTargets().isEmpty() && enchantment.getSpellAbility().getTargets().get(0).canTarget(tokenPermanent.getId(), game));
+                                if (canAttach && controller.chooseUse(Outcome.Neutral, "Attach " + enchantment.getName() + " to the token ?", source, game)) {
+                                    if (oldCreature.removeAttachment(enchantment.getId(), game)) {
+                                        tokenPermanent.addAttachment(enchantment.getId(), game);
+                                    }
                                 }
                             }
                         }
                     }
                 }
+                return true;
             }
-            return true;
         }
         return false;
     }
-
 }

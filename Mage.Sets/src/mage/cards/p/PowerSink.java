@@ -1,12 +1,9 @@
-
 package mage.cards.p;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.Cost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
@@ -19,9 +16,12 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetSpell;
+import mage.util.ManaUtil;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
- *
  * @author Quercitron
  */
 public final class PowerSink extends CardImpl {
@@ -70,21 +70,19 @@ class PowerSinkCounterUnlessPaysEffect extends OneShotEffect {
             if (player != null && controller != null && sourceObject != null) {
                 int amount = source.getManaCostsToPay().getX();
                 if (amount > 0) {
-                    GenericManaCost cost = new GenericManaCost(amount);
-                    String sb = String.valueOf("Pay " + cost.getText()) + Character.toString('?');
-                    if (player.chooseUse(Outcome.Benefit, sb, source, game)) {
+                    Cost cost = ManaUtil.createManaCost(amount, true);
+                    if (player.chooseUse(Outcome.Benefit, "Pay " + cost.getText() + " to prevent?", source, game)) {
                         if (cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
                             game.informPlayers(sourceObject.getName() + ": additional cost was paid");
                             return true;
                         }
                     }
+                    game.informPlayers(sourceObject.getName() + ": additional cost wasn't paid - countering " + spell.getName());
 
                     // Counter target spell unless its controller pays {X}
-                    if (game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game)) {
-                        game.informPlayers(sourceObject.getName() + ": additional cost wasn't paid - countering " + spell.getName());
-                    }
+                    game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
 
-                    // that player taps all lands with mana abilities he or she controls...
+                    // that player taps all lands with mana abilities they control...
                     List<Permanent> lands = game.getBattlefield().getAllActivePermanents(new FilterLandPermanent(), player.getId(), game);
                     for (Permanent land : lands) {
                         Abilities<Ability> landAbilities = land.getAbilities();

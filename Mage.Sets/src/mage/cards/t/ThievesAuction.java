@@ -1,14 +1,8 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -24,14 +18,15 @@ import mage.target.TargetCard;
 import mage.target.common.TargetCardInExile;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class ThievesAuction extends CardImpl {
 
     public ThievesAuction(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}{R}{R}");
 
         // Exile all nontoken permanents. Starting with you, each player chooses one of the exiled cards and puts it onto the battlefield tapped under their control. Repeat this process until all cards exiled this way have been chosen.
         this.getSpellAbility().addEffect(new ThievesAuctionEffect());
@@ -98,7 +93,7 @@ class ThievesAuctionEffect extends OneShotEffect {
                     }
                 }
                 // Repeat this process until all cards exiled this way have been chosen.
-                player = playerList.getNext(game);
+                player = playerList.getNext(game, false);
             }
             return true;
         }

@@ -27,7 +27,7 @@ public final class Commander2018Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Akoum Refuge", 231, Rarity.UNCOMMON, mage.cards.a.AkoumRefuge.class));
         cards.add(new SetCardInfo("Akroma's Vengeance", 62, Rarity.RARE, mage.cards.a.AkromasVengeance.class));
         cards.add(new SetCardInfo("Aminatou's Augury", 6, Rarity.RARE, mage.cards.a.AminatousAugury.class));
-        cards.add(new SetCardInfo("Aminatou, the Fateshifter", 37, Rarity.MYTHIC, mage.cards.a.AminatouTheFateShifter.class));
+        cards.add(new SetCardInfo("Aminatou, the Fateshifter", 37, Rarity.MYTHIC, mage.cards.a.AminatouTheFateshifter.class));
         cards.add(new SetCardInfo("Ancient Stone Idol", 53, Rarity.RARE, mage.cards.a.AncientStoneIdol.class));
         cards.add(new SetCardInfo("Arcane Sanctum", 232, Rarity.UNCOMMON, mage.cards.a.ArcaneSanctum.class));
         cards.add(new SetCardInfo("Archetype of Imagination", 81, Rarity.UNCOMMON, mage.cards.a.ArchetypeOfImagination.class));

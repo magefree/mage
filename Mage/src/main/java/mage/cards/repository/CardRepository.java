@@ -35,7 +35,7 @@ public enum CardRepository {
     // raise this if db structure was changed
     private static final long CARD_DB_VERSION = 51;
     // raise this if new cards were added to the server
-    private static final long CARD_CONTENT_VERSION = 222;
+    private static final long CARD_CONTENT_VERSION = 227;
     private Dao<CardInfo, Object> cardDao;
     private Set<String> classNames;
     private RepositoryEventSource eventSource = new RepositoryEventSource();
@@ -174,6 +174,13 @@ public enum CardRepository {
 
         }
         return names;
+    }
+
+    public Boolean haveSnowLands(String setCode) {
+        return setCode.equals("CSP")
+                || setCode.equals("MH1")
+                || setCode.equals("ME2")
+                || setCode.equals("ICE");
     }
 
     public Set<String> getNonbasicLandNames() {

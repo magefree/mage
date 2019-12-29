@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
-import mage.abilities.effects.Effect;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
@@ -135,12 +135,14 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         } else {
             permanent = game.getPermanentOrLKIBattlefield(targetId);
         }
+
+        // can target card or permanent
         Card copyFrom;
         ApplyToPermanent applier = new EmptyApplyToPermanent();
         if (permanent != null) {
             // handle copies of copies
             Permanent copyFromPermanent = permanent;
-            for (Effect effect : game.getState().getContinuousEffects().getLayeredEffects(game)) {
+            for (ContinuousEffect effect : game.getState().getContinuousEffects().getLayeredEffects(game)) {
                 if (effect instanceof CopyEffect) {
                     CopyEffect copyEffect = (CopyEffect) effect;
                     // there is another copy effect that our targetPermanent copies stats from

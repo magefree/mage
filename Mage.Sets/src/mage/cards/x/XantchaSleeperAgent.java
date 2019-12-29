@@ -28,11 +28,9 @@ import java.util.UUID;
 
 import static mage.constants.Outcome.Benefit;
 
-
 /**
  * @author jesusjbr
  */
-
 public final class XantchaSleeperAgent extends CardImpl {
 
     public XantchaSleeperAgent(UUID ownerId, CardSetInfo setInfo) {
@@ -145,14 +143,18 @@ class XantchaSleeperAgentAttackRestrictionEffect extends RestrictionEffect {
         boolean allowAttack = true;
         UUID ownerPlayerId = source.getSourcePermanentIfItStillExists(game).getOwnerId();
 
-        if (defenderId.equals(ownerPlayerId)) {
+        if (defenderId.equals(ownerPlayerId)
+                && game.getPlayers().size() == 2) { // if only 2 players are left, it can't attack at all.
             allowAttack = false;
-        } else {
-            Permanent planeswalker = game.getPermanent(defenderId);
-            if (planeswalker != null && planeswalker.isControlledBy(ownerPlayerId)) {
-                allowAttack = false;
-            }
         }
+        if (defenderId.equals(ownerPlayerId)) { // can't attack owner
+            allowAttack = false;
+        }
+        Permanent planeswalker = game.getPermanent(defenderId);
+        if (planeswalker != null && planeswalker.isControlledBy(ownerPlayerId)) {  // can't attack the owner's planeswalkers
+            allowAttack = false;
+        }
+
         return allowAttack;
     }
 }

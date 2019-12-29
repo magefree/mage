@@ -31,7 +31,7 @@ public final class Doomfall extends CardImpl {
         this.getSpellAbility().getModes().setMinModes(1);
         this.getSpellAbility().getModes().setMaxModes(1);
 
-        // • Target opponent exiles a creature he or she controls.
+        // • Target opponent exiles a creature they control.
         this.getSpellAbility().addEffect(new DoomfallEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
 
@@ -57,7 +57,7 @@ class DoomfallEffect extends OneShotEffect {
 
     public DoomfallEffect() {
         super(Outcome.Exile);
-        this.staticText = "target player exiles a creature he or she controls";
+        this.staticText = "target player exiles a creature they control";
     }
 
     public DoomfallEffect(final DoomfallEffect effect) {

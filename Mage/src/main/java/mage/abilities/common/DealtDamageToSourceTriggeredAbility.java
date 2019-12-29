@@ -1,15 +1,14 @@
 
 package mage.abilities.common;
 
-import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedCreatureEvent;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author LevelX2
  */
 public class DealtDamageToSourceTriggeredAbility extends TriggeredAbilityImpl {
@@ -18,16 +17,16 @@ public class DealtDamageToSourceTriggeredAbility extends TriggeredAbilityImpl {
     private final boolean useValue;
     private boolean usedForCombatDamageStep;
 
-    public DealtDamageToSourceTriggeredAbility(Zone zone, Effect effect, boolean optional) {
-        this(zone, effect, optional, false);
+    public DealtDamageToSourceTriggeredAbility(Effect effect, boolean optional) {
+        this(effect, optional, false);
     }
 
-    public DealtDamageToSourceTriggeredAbility(Zone zone, Effect effect, boolean optional, boolean enrage) {
-        this(zone, effect, optional, enrage, false);
+    public DealtDamageToSourceTriggeredAbility(Effect effect, boolean optional, boolean enrage) {
+        this(effect, optional, enrage, false);
     }
 
-    public DealtDamageToSourceTriggeredAbility(Zone zone, Effect effect, boolean optional, boolean enrage, boolean useValue) {
-        super(zone, effect, optional);
+    public DealtDamageToSourceTriggeredAbility(Effect effect, boolean optional, boolean enrage, boolean useValue) {
+        super(Zone.BATTLEFIELD, effect, optional);
         this.enrage = enrage;
         this.useValue = useValue;
         this.usedForCombatDamageStep = false;

@@ -35,7 +35,7 @@ public final class WallOfDust extends CardImpl {
         this.addAbility(new BlocksTriggeredAbility(new WallOfDustRestrictionEffect(), false, true));
     }
 
-    public WallOfDust(final WallOfDust card) {
+    private WallOfDust(final WallOfDust card) {
         super(card);
     }
 
@@ -93,6 +93,7 @@ class WallOfDustRestrictionEffect extends RestrictionEffect {
         return false;
     }
 
+    @Override
     public boolean canAttack(Game game, boolean canUseChooseDialogs) {
         return false;
     }

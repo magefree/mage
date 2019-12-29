@@ -19,22 +19,23 @@ import mage.target.common.TargetCardInLibrary;
 import java.util.UUID;
 
 /**
- *
  * @author Markedagain
  */
 public final class ElfhameSanctuary extends CardImpl {
 
     public ElfhameSanctuary(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
 
         // At the beginning of your upkeep, you may search your library for a basic land card, reveal that card, and put it into your hand. If you do, you skip your draw step this turn and shuffle your library.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND)), TargetController.YOU, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new SearchLibraryPutInHandEffect(
+                new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true
+        ), TargetController.YOU, true);
         ability.addEffect(new SkipDrawStepThisTurn());
-        
+
         this.addAbility(ability);
     }
 
-    public ElfhameSanctuary(final ElfhameSanctuary card) {
+    private ElfhameSanctuary(final ElfhameSanctuary card) {
         super(card);
     }
 
@@ -46,12 +47,12 @@ public final class ElfhameSanctuary extends CardImpl {
 
 class SkipDrawStepThisTurn extends ReplacementEffectImpl {
 
-    public SkipDrawStepThisTurn() {
+    SkipDrawStepThisTurn() {
         super(Duration.UntilYourNextTurn, Outcome.Neutral);
         staticText = "Skip your draw step this turn";
     }
 
-    public SkipDrawStepThisTurn(final SkipDrawStepThisTurn effect) {
+    private SkipDrawStepThisTurn(final SkipDrawStepThisTurn effect) {
         super(effect);
     }
 

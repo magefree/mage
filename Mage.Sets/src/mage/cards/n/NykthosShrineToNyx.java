@@ -1,14 +1,13 @@
 package mage.cards.n;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
@@ -21,8 +20,11 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class NykthosShrineToNyx extends CardImpl {
@@ -35,6 +37,11 @@ public final class NykthosShrineToNyx extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
         // {2}, {T}: Choose a color. Add an amount of mana of that color equal to your devotion to that color.
         Ability ability = new NykthosShrineToNyxManaAbility();
+        ability.addHint(new ValueHint("Devotion to red", NykthosDynamicManaEffect.xValueR));
+        ability.addHint(new ValueHint("Devotion to blue", NykthosDynamicManaEffect.xValueU));
+        ability.addHint(new ValueHint("Devotion to white", NykthosDynamicManaEffect.xValueW));
+        ability.addHint(new ValueHint("Devotion to black", NykthosDynamicManaEffect.xValueB));
+        ability.addHint(new ValueHint("Devotion to green", NykthosDynamicManaEffect.xValueG));
         this.addAbility(ability);
     }
 
@@ -75,6 +82,12 @@ class NykthosShrineToNyxManaAbility extends ActivatedManaAbilityImpl {
 }
 
 class NykthosDynamicManaEffect extends ManaEffect {
+
+    static final DynamicValue xValueR = new DevotionCount(ColoredManaSymbol.R);
+    static final DynamicValue xValueU = new DevotionCount(ColoredManaSymbol.U);
+    static final DynamicValue xValueW = new DevotionCount(ColoredManaSymbol.W);
+    static final DynamicValue xValueB = new DevotionCount(ColoredManaSymbol.B);
+    static final DynamicValue xValueG = new DevotionCount(ColoredManaSymbol.G);
 
     public NykthosDynamicManaEffect() {
         super();
@@ -132,19 +145,19 @@ class NykthosDynamicManaEffect extends ManaEffect {
         if (color != null && !color.isEmpty()) {
             switch (color) {
                 case "Red":
-                    mana.setRed(new DevotionCount(ColoredManaSymbol.R).calculate(game, source, this));
+                    mana.setRed(xValueR.calculate(game, source, this));
                     break;
                 case "Blue":
-                    mana.setBlue(new DevotionCount(ColoredManaSymbol.U).calculate(game, source, this));
+                    mana.setBlue(xValueU.calculate(game, source, this));
                     break;
                 case "White":
-                    mana.setWhite(new DevotionCount(ColoredManaSymbol.W).calculate(game, source, this));
+                    mana.setWhite(xValueW.calculate(game, source, this));
                     break;
                 case "Black":
-                    mana.setBlack(new DevotionCount(ColoredManaSymbol.B).calculate(game, source, this));
+                    mana.setBlack(xValueB.calculate(game, source, this));
                     break;
                 case "Green":
-                    mana.setGreen(new DevotionCount(ColoredManaSymbol.G).calculate(game, source, this));
+                    mana.setGreen(xValueG.calculate(game, source, this));
                     break;
             }
         }

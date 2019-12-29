@@ -1,15 +1,15 @@
-
 package mage.watchers.common;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.watchers.Watcher;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.UUID;
 
 /*
  * Counts amount of life lost current or last turn by players.
@@ -63,6 +63,7 @@ public class PlayerLostLifeWatcher extends Watcher {
 
     @Override
     public void reset() {
+        super.reset();
         amountOfLifeLostLastTurn.clear();
         amountOfLifeLostLastTurn.putAll(amountOfLifeLostThisTurn);
         amountOfLifeLostThisTurn.clear();

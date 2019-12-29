@@ -1,30 +1,30 @@
-
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.common.FilterArtifactSpell;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
+import mage.util.ManaUtil;
+
+import java.util.UUID;
 
 /**
  * @author Loki, North
  */
 public final class Embersmith extends CardImpl {
     public Embersmith(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
 
@@ -50,7 +50,7 @@ public final class Embersmith extends CardImpl {
 class EmbersmithEffect extends OneShotEffect {
     EmbersmithEffect() {
         super(Outcome.Damage);
-        staticText =  "you may pay {1}. If you do, {this} deals 1 damage to any target";
+        staticText = "you may pay {1}. If you do, {this} deals 1 damage to any target";
     }
 
     EmbersmithEffect(final EmbersmithEffect effect) {
@@ -59,8 +59,7 @@ class EmbersmithEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Cost cost = new GenericManaCost(1);
-        cost.clearPaid();
+        Cost cost = ManaUtil.createManaCost(1, false);
         if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
             Permanent permanent = game.getPermanent(source.getFirstTarget());
             if (permanent != null) {

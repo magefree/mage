@@ -23,7 +23,7 @@ public final class InciteRebellion extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{R}");
 
 
-        // For each player, Incite Rebellion deals damage to that player and each creature that player controls equal to the number of creatures he or she controls.
+        // For each player, Incite Rebellion deals damage to that player and each creature that player controls equal to the number of creatures they control.
         this.getSpellAbility().addEffect(new InciteRebellionEffect());
     }
 
@@ -43,7 +43,7 @@ class InciteRebellionEffect extends OneShotEffect {
 
     public InciteRebellionEffect() {
         super(Outcome.Detriment);
-        this.staticText = "For each player, {this} deals damage to that player and each creature that player controls equal to the number of creatures he or she controls";
+        this.staticText = "For each player, {this} deals damage to that player and each creature that player controls equal to the number of creatures they control";
     }
 
     public InciteRebellionEffect(final InciteRebellionEffect effect) {

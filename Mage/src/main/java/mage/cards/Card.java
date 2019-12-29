@@ -150,7 +150,7 @@ public interface Card extends MageObject {
 
     /**
      *
-     * @return The main card of a split half card, otherwise the card itself is
+     * @return The main card of a split half card or adventure spell card, otherwise the card itself is
      * returned
      */
     Card getMainCard();

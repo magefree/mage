@@ -1,9 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -15,14 +11,17 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
- *
  * @author Styxo
  */
 public final class CouncilGuardian extends CardImpl {
@@ -53,7 +52,7 @@ public final class CouncilGuardian extends CardImpl {
 class CouncilsGuardianEffect extends OneShotEffect {
 
     public CouncilsGuardianEffect() {
-        super(Outcome.Exile);
+        super(Outcome.Benefit);
         this.staticText = "starting with you, each player votes for blue, black, red, or green. {this} gains protection from each color with the most votes or tied for most votes";
     }
 
@@ -78,7 +77,7 @@ class CouncilsGuardianEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     choice.clearChoice();
-                    if (player.choose(outcome, choice, game)) {
+                    if (player.choose(Outcome.Detriment, choice, game)) {
                         ObjectColor color = choice.getColor();
                         if (color != null) {
                             if (chosenColors.containsKey(color)) {

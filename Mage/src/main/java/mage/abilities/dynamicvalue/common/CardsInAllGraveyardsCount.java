@@ -1,4 +1,3 @@
-
 package mage.abilities.dynamicvalue.common;
 
 import java.util.UUID;
@@ -25,7 +24,7 @@ public class CardsInAllGraveyardsCount implements DynamicValue {
         this.filter = filter;
     }
 
-    public CardsInAllGraveyardsCount(CardsInAllGraveyardsCount dynamicValue) {
+    public CardsInAllGraveyardsCount(final CardsInAllGraveyardsCount dynamicValue) {
         this.filter = dynamicValue.filter.copy();
     }
 

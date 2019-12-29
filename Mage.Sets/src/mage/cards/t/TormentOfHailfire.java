@@ -23,7 +23,7 @@ public final class TormentOfHailfire extends CardImpl {
     public TormentOfHailfire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
 
-        // Repeat the following process X times. Each opponent loses 3 life unless he or she sacrifices a nonland permanent or discards a card.
+        // Repeat the following process X times. Each opponent loses 3 life unless they sacrifice a nonland permanent or discards a card.
         this.getSpellAbility().addEffect(new TormentOfHailfireEffect());
         
     }
@@ -42,7 +42,7 @@ class TormentOfHailfireEffect extends OneShotEffect {
     
     public TormentOfHailfireEffect() {
         super(Outcome.LoseLife);
-        this.staticText = "Repeat the following process X times. Each opponent loses 3 life unless he or she sacrifices a nonland permanent or discards a card";
+        this.staticText = "Repeat the following process X times. Each opponent loses 3 life unless they sacrifice a nonland permanent or discards a card";
     }
     
     public TormentOfHailfireEffect(final TormentOfHailfireEffect effect) {

@@ -6,12 +6,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.client.constants.Constants;
 import mage.constants.Rarity;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.dl.DownloadJob;
+
 import static org.mage.plugins.card.dl.DownloadJob.fromURL;
 import static org.mage.plugins.card.dl.DownloadJob.toFile;
 import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
@@ -27,12 +29,12 @@ public class GathererSets implements Iterable<DownloadJob> {
         boolean haveRare;
         boolean haveMyth;
 
-        private CheckResult(String ACode, ExpansionSet ASet, boolean AHaveCommon, boolean AHaveUncommon, boolean AHhaveRare, boolean AHaveMyth) {
+        private CheckResult(String ACode, ExpansionSet ASet, boolean AHaveCommon, boolean AHaveUncommon, boolean AHaveRare, boolean AHaveMyth) {
             code = ACode;
             set = ASet;
             haveCommon = AHaveCommon;
             haveUncommon = AHaveUncommon;
-            haveRare = AHhaveRare;
+            haveRare = AHaveRare;
             haveMyth = AHaveMyth;
         }
     }
@@ -43,63 +45,69 @@ public class GathererSets implements Iterable<DownloadJob> {
     private static final Logger logger = Logger.getLogger(GathererSets.class);
 
     private static final String[] symbolsBasic = {"10E", "9ED", "8ED", "7ED", "6ED", "5ED", "4ED", "3ED", "2ED", "LEB", "LEA",
-        "HOP",
-        "ARN", "ATQ", "LEG", "DRK", "FEM", "HML",
-        "ICE", "ALL", "CSP",
-        "MIR", "VIS", "WTH",
-        "TMP", "STH", "EXO",
-        "USG", "ULG", "UDS",
-        "MMQ", "NEM", "PCY",
-        "INV", "PLS", "APC",
-        "ODY", "TOR", "JUD",
-        "ONS", "LGN", "SCG",
-        "MRD", "DST", "5DN",
-        "CHK", "BOK", "SOK",
-        "RAV", "GPT", "DIS",
-        "TSP", "TSB", "PLC", "FUT",
-        "LRW", "MOR",
-        "SHM", "EVE",
-        "MED", "ME2", "ME3", "ME4",
-        "POR", "P02", "PTK",
-        "ARC", "DD3EVG",
-        "W16", "W17",
-        //"APAC" -- gatherer do not have that set, scryfall has PALP
-        //"ARENA" -- is't many set with different codes, not one
-        "CLASH", "CP", "DD3GVL", "DPA", "EURO", "FNMP", "GPX", "GRC", "GUR", "H17", "JR", "MBP", "MGDC", "MLP", "MPRP", "MPS-AKH", "PTC", "S00", "S99", "SUS", "SWS", "UGIN", "UGL", "V10", "V17", "WMCQ", // need to fix
-        "H09", "PD2", "PD3", "UNH", "CM1", "V11", "A25", "UST", "IMA", "DD2", "EVG", "DDC", "DDE", "DDD", "8EB", "9EB", "CHR" // ok
-    // current testing
+            "HOP",
+            "ARN", "ATQ", "LEG", "DRK", "FEM", "HML",
+            "ICE", "ALL", "CSP",
+            "MIR", "VIS", "WTH",
+            "TMP", "STH", "EXO",
+            "USG", "ULG", "UDS",
+            "MMQ", "NEM", "PCY",
+            "INV", "PLS", "APC",
+            "ODY", "TOR", "JUD",
+            "ONS", "LGN", "SCG",
+            "MRD", "DST", "5DN",
+            "CHK", "BOK", "SOK",
+            "RAV", "GPT", "DIS",
+            "TSP", "TSB", "PLC", "FUT",
+            "LRW", "MOR",
+            "SHM", "EVE",
+            "MED", "ME2", "ME3", "ME4",
+            "POR", "P02", "PTK",
+            "ARC", "DD3EVG",
+            "W16", "W17",
+            // "APAC" -- gatherer do not have that set, scryfall has PALP
+            // "ARENA" -- is't many set with different codes, not one
+            // "ATH" -- has cards from many sets, symbol does not exist on gatherer
+            // "CLASH", "CP", "DPA", "EURO", "FNMP", "GPX", "GRC", "GUR", "H17", "JR", "MBP", "MGDC", "MLP", "MPRP", "PTC", "SUS", "SWS", "WMCQ", // need to fix
+            "H09", "PD2", "PD3", "UNH", "CM1", "V11", "A25", "UST", "IMA", "DD2", "EVG", "DDC", "DDE", "DDD", "8EB", "9EB", "CHR", "G18", "DD3GVL", "S00", "S99", "UGL" // ok
+            // current testing
     };
 
     private static final String[] symbolsBasicWithMyth = {"M10", "M11", "M12", "M13", "M14", "M15", "ORI",
-        "DDF", "DDG", "DDH", "DDI", "DDJ", "DDK", "DDL", "DDM", "DDN",
-        "DD3DVD", "DD3JVC", "DDO", "DDP", "DDQ", "DDR", "DDS", "DDT", "DDU",
-        "ALA", "CON", "ARB",
-        "ZEN", "WWK", "ROE",
-        "SOM", "MBS", "NPH",
-        "CMD", "C13", "C14", "C15", "C16", "CMA",
-        "PC2", "PCA",
-        "ISD", "DKA", "AVR",
-        "RTR", "GTC", "DGM",
-        "MMA", "MM2", "EMA", "MM3",
-        "THS", "BNG", "JOU",
-        "CNS", "CN2",
-        "VMA", "TPR",
-        "KTK", "FRF", "DTK",
-        "BFZ", "OGW",
-        "SOI", "EMN",
-        "KLD", "AER",
-        "AKH", "HOU",
-        "XLN", "C17",
-        "RIX", "DOM", "M19",
-        "E01", "CM2", "E02",
-        "GS1", "BBD", "C18"
+            "DDF", "DDG", "DDH", "DDI", "DDJ", "DDK", "DDL", "DDM", "DDN",
+            "DD3DVD", "DD3JVC", "DDO", "DDP", "DDQ", "DDR", "DDS", "DDT", "DDU",
+            "ALA", "CON", "ARB",
+            "ZEN", "WWK", "ROE",
+            "SOM", "MBS", "NPH",
+            "CMD", "C13", "C14", "C15", "C16", "CMA",
+            "PC2", "PCA",
+            "ISD", "DKA", "AVR",
+            "RTR", "GTC", "DGM",
+            "MMA", "MM2", "EMA", "MM3",
+            "THS", "BNG", "JOU",
+            "CNS", "CN2",
+            "VMA", "TPR",
+            "KTK", "FRF", "UGIN", "DTK",
+            "BFZ", "OGW",
+            "SOI", "EMN",
+            "KLD", "AER",
+            "AKH", "HOU",
+            "XLN", "C17",
+            "RIX", "DOM", "M19",
+            "E01", "CM2", "E02",
+            "GS1", "BBD", "C18",
+            "GNT", "UMA", "GRN",
+            "RNA", "WAR", "MH1",
+            "M20"
+            // "HHO", "ANA" -- do not exist on gatherer
     };
 
     private static final String[] symbolsOnlyMyth = {
-        "DRB", "V09", "V12", "V13", "V14", "V15", "V16", "EXP"
+            "DRB", "V09", "V10", "V12", "V13", "V14", "V15", "V16", "V17", "EXP", "MEDM"
+            // "HTR" does not exist
     };
     private static final String[] symbolsOnlySpecial = {
-        "MPS"
+            "MPS", "MPS-AKH"
     };
 
     private static final HashMap<String, String> codeReplacements = new HashMap<>();
@@ -116,8 +124,10 @@ public class GathererSets implements Iterable<DownloadJob> {
         codeReplacements.put("ARN", "AN");
         codeReplacements.put("ATQ", "AQ");
         codeReplacements.put("CMA", "CM1");
+        codeReplacements.put("CHR", "CH");
         codeReplacements.put("DD3DVD", "DD3_DVD");
         codeReplacements.put("DD3EVG", "DD3_EVG");
+        codeReplacements.put("DD3GVL", "DD3_GVL");
         codeReplacements.put("DD3JVC", "DD3_JVC");
         codeReplacements.put("DRK", "DK");
         codeReplacements.put("EXO", "EX");
@@ -128,7 +138,9 @@ public class GathererSets implements Iterable<DownloadJob> {
         codeReplacements.put("LEA", "1E");
         codeReplacements.put("LEB", "2E");
         codeReplacements.put("LEG", "LE");
+        codeReplacements.put("MEDM", "MPS_WAR");
         codeReplacements.put("MPS", "MPS_KLD");
+        codeReplacements.put("MPS-AKH", "MPS_AKH");
         codeReplacements.put("MIR", "MI");
         codeReplacements.put("MMQ", "MM");
         codeReplacements.put("NEM", "NE");
@@ -138,16 +150,19 @@ public class GathererSets implements Iterable<DownloadJob> {
         codeReplacements.put("POR", "PO");
         codeReplacements.put("P02", "P2");
         codeReplacements.put("PTK", "PK");
+        codeReplacements.put("S00", "P4");
+        codeReplacements.put("S99", "P3");
         codeReplacements.put("STH", "ST");
         codeReplacements.put("TMP", "TE");
         codeReplacements.put("UDS", "CG");
+        codeReplacements.put("UGIN", "FRF_UGIN");
+        codeReplacements.put("UGL", "UG");
         codeReplacements.put("ULG", "GU");
         codeReplacements.put("USG", "UZ");
         codeReplacements.put("VIS", "VI");
         codeReplacements.put("WTH", "WL");
         codeReplacements.put("8EB", "8ED"); // inner xmage set for 8th edition
         codeReplacements.put("9EB", "8ED"); // inner xmage set for 9th edition
-        codeReplacements.put("CHR", "CH");
     }
 
     public GathererSets() {
@@ -172,7 +187,7 @@ public class GathererSets implements Iterable<DownloadJob> {
     }
 
     private void CheckSearchResult(String searchCode, ExpansionSet foundedExp, boolean canDownloadTask,
-            boolean haveCommon, boolean haveUncommon, boolean haveRare, boolean haveMyth) {
+                                   boolean haveCommon, boolean haveUncommon, boolean haveRare, boolean haveMyth) {
         // duplicated in settings
         CheckResult res = setsToDownload.get(searchCode);
 
@@ -223,16 +238,16 @@ public class GathererSets implements Iterable<DownloadJob> {
                 // 2. missing rarity icon:
                 // WARNING, need too much time (60+ secs), only for debug mode
                 ///*
-                if ((set.getCardsByRarity(Rarity.COMMON).size() > 0) && !res.haveCommon) {
+                if (!set.getCardsByRarity(Rarity.COMMON).isEmpty() && !res.haveCommon) {
                     logger.error(String.format("Symbols: set have common cards, but don't download icon: %s (%s)", set.getCode(), set.getName()));
                 }
-                if ((set.getCardsByRarity(Rarity.UNCOMMON).size() > 0) && !res.haveUncommon) {
+                if (!set.getCardsByRarity(Rarity.UNCOMMON).isEmpty() && !res.haveUncommon) {
                     logger.error(String.format("Symbols: set have uncommon cards, but don't download icon: %s (%s)", set.getCode(), set.getName()));
                 }
-                if ((set.getCardsByRarity(Rarity.RARE).size() > 0) && !res.haveRare) {
+                if (!set.getCardsByRarity(Rarity.RARE).isEmpty() && !res.haveRare) {
                     logger.error(String.format("Symbols: set have rare cards, but don't download icon: %s (%s)", set.getCode(), set.getName()));
                 }
-                if ((set.getCardsByRarity(Rarity.MYTHIC).size() > 0) && !res.haveMyth) {
+                if (!set.getCardsByRarity(Rarity.MYTHIC).isEmpty() && !res.haveMyth) {
                     logger.error(String.format("Symbols: set have mythic cards, but don't download icon: %s (%s)", set.getCode(), set.getName()));
                 }
                 //*/
@@ -332,7 +347,7 @@ public class GathererSets implements Iterable<DownloadJob> {
         if (codeReplacements.containsKey(set)) {
             set = codeReplacements.get(set);
         }
-        String url = "http://gatherer.wizards.com/Handlers/Image.ashx?type=symbol&set=" + set + "&size=small&rarity=" + urlRarity;
+        String url = "https://gatherer.wizards.com/Handlers/Image.ashx?type=symbol&set=" + set + "&size=small&rarity=" + urlRarity;
         return new DownloadJob(set + '-' + rarity, fromURL(url), toFile(dst));
     }
 }

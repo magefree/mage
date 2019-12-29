@@ -15,7 +15,7 @@ public class BronzeBombshellTest extends CardTestPlayerBase {
     @Test
     public void testEndlessWhispers() {
         // When a player other than Bronze Bombshell's owner controls it, that player sacrifices it.
-        // If the player does, Bronze Bombshell deals 7 damage to him or her.
+        // If the player does, Bronze Bombshell deals 7 damage to the player.
         addCard(Zone.BATTLEFIELD, playerA, "Bronze Bombshell", 1);
 
         // Each creature has "When this creature dies, choose target opponent.

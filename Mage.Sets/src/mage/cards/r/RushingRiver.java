@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import mage.abilities.Ability;
@@ -40,7 +39,7 @@ public final class RushingRiver extends CardImpl {
                 "if this spell was kicked, return another target nonland permanent to its owner's hand");
         effect.setTargetPointer(new SecondTargetPointer());
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetNonlandPermanent());
+        this.getSpellAbility().addTarget(new TargetNonlandPermanent().withChooseHint("nonland to return"));
         this.getSpellAbility().setTargetAdjuster(RushingRiverAdjuster.instance);
     }
 

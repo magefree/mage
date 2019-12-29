@@ -25,7 +25,7 @@ public final class LimDulsHex extends CardImpl {
     public LimDulsHex(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
 
-        // At the beginning of your upkeep, for each player, Lim-Dul's Hex deals 1 damage to that player unless he or she pays {B} or {3}.
+        // At the beginning of your upkeep, for each player, Lim-Dul's Hex deals 1 damage to that player unless they pay {B} or {3}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LimDulsHexEffect(), TargetController.YOU, false));
     }
 
@@ -43,7 +43,7 @@ class LimDulsHexEffect extends OneShotEffect {
 
     public LimDulsHexEffect() {
         super(Outcome.Damage);
-        this.staticText = "for each player, {this} deals 1 damage to that player unless he or she pays {B} or {3}";
+        this.staticText = "for each player, {this} deals 1 damage to that player unless they pay {B} or {3}";
     }
     
     public LimDulsHexEffect(final LimDulsHexEffect effect) {

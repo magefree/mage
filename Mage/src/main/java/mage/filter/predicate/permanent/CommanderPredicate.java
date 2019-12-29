@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.filter.predicate.permanent;
 
 import mage.filter.predicate.Predicate;
@@ -20,7 +15,7 @@ public enum CommanderPredicate implements Predicate<Permanent> {
     public boolean apply(Permanent input, Game game) {
         Player owner = game.getPlayer(input.getOwnerId());
         return owner != null
-                && owner.getCommandersIds().contains(input.getId());
+                && game.getCommandersIds(owner).contains(input.getId());
     }
 
     @Override

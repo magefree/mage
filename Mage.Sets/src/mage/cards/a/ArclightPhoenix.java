@@ -1,30 +1,26 @@
 package mage.cards.a;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.TargetController;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class ArclightPhoenix extends CardImpl {
@@ -42,21 +38,21 @@ public final class ArclightPhoenix extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
 
-        // At the beginning of combat on your turn, if you cast 3 or more instants and/or sorceries this turn, you may return Arclight Phoenix from your graveyard to the battlefield.
+        // At the beginning of combat on your turn, if you cast 3 or more instants and/or sorceries this turn, return Arclight Phoenix from your graveyard to the battlefield.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
                         Zone.GRAVEYARD,
                         new ReturnSourceFromGraveyardToBattlefieldEffect(),
-                        TargetController.YOU, true, false
+                        TargetController.YOU, false, false
                 ), ArclightPhoenixCondition.instance,
                 "At the beginning of combat on your turn, "
-                + "if you've cast three or more instant "
-                + "and sorcery spells this turn, you may return {this} "
-                + "from your graveyard to the battlefield."
+                        + "if you've cast three or more instant "
+                        + "and sorcery spells this turn, return {this} "
+                        + "from your graveyard to the battlefield."
         ), new ArclightPhoenixWatcher());
     }
 
-    public ArclightPhoenix(final ArclightPhoenix card) {
+    private ArclightPhoenix(final ArclightPhoenix card) {
         super(card);
     }
 
@@ -71,10 +67,7 @@ enum ArclightPhoenixCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ArclightPhoenixWatcher watcher
-                = game.getState().getWatcher(
-                        ArclightPhoenixWatcher.class
-                );
+        ArclightPhoenixWatcher watcher = game.getState().getWatcher(ArclightPhoenixWatcher.class);
         return watcher != null && watcher.getInstantSorceryCount(source.getControllerId()) > 2;
     }
 }
@@ -83,7 +76,7 @@ class ArclightPhoenixWatcher extends Watcher {
 
     private final Map<UUID, Integer> instantSorceryCount = new HashMap<>();
 
-    public ArclightPhoenixWatcher() {
+    ArclightPhoenixWatcher() {
         super(WatcherScope.GAME);
     }
 
@@ -107,7 +100,7 @@ class ArclightPhoenixWatcher extends Watcher {
         this.instantSorceryCount.clear();
     }
 
-    public int getInstantSorceryCount(UUID playerId) {
+    int getInstantSorceryCount(UUID playerId) {
         return this.instantSorceryCount.getOrDefault(playerId, 0);
     }
 }

@@ -2,6 +2,7 @@
 package mage.cards.p;
 
 import java.util.EnumSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
@@ -34,8 +35,8 @@ public final class PossibilityStorm extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");
 
         // Whenever a player casts a spell from their hand, that player exiles it, then exiles cards from
-        // the top of their library until he or she exiles a card that shares a card type with it. That
-        // player may cast that card without paying its mana cost. Then he or she puts all cards exiled with
+        // the top of their library until they exile a card that shares a card type with it. That
+        // player may cast that card without paying its mana cost. Then they put all cards exiled with
         // Possibility Storm on the bottom of their library in a random order.
         this.addAbility(new PossibilityStormTriggeredAbility());
     }
@@ -94,7 +95,7 @@ class PossibilityStormEffect extends OneShotEffect {
 
     public PossibilityStormEffect() {
         super(Outcome.Neutral);
-        staticText = "that player exiles it, then exiles cards from the top of their library until he or she exiles a card that shares a card type with it. That player may cast that card without paying its mana cost. Then he or she puts all cards exiled with {this} on the bottom of their library in a random order";
+        staticText = "that player exiles it, then exiles cards from the top of their library until they exile a card that shares a card type with it. That player may cast that card without paying its mana cost. Then they put all cards exiled with {this} on the bottom of their library in a random order";
     }
 
     public PossibilityStormEffect(final PossibilityStormEffect effect) {
@@ -146,7 +147,7 @@ class PossibilityStormEffect extends OneShotEffect {
         return false;
     }
 
-    private boolean sharesType(Card card, EnumSet<CardType> cardTypes) {
+    private boolean sharesType(Card card, Set<CardType> cardTypes) {
         for (CardType type : card.getCardType()) {
             if (cardTypes.contains(type)) {
                 return true;

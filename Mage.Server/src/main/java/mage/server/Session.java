@@ -1,4 +1,3 @@
-
 package mage.server;
 
 import java.util.*;
@@ -352,7 +351,16 @@ public class Session {
             if (valid && callBackLock.tryLock(50, TimeUnit.MILLISECONDS)) {
                 call.setMessageId(messageId++);
                 lockSet = true;
-                callbackHandler.handleCallbackOneway(new Callback(call));
+                Callback callback = new Callback(call);
+//                if (call.getMethod().equals(ClientCallbackMethod.GAME_TARGET)) {
+//                    Object object = call.getData();
+//                    if (object instanceof GameClientMessage) {
+//                        String message = ((GameClientMessage) object).getMessage();
+//                        logger.info("Server Session Event->" + call.getMethod() + " (id:" + call.getMessageId() + ") " + message);
+//                        logger.info(callback.toString());
+//                    }
+//                }
+                callbackHandler.handleCallbackOneway(callback);
             }
         } catch (InterruptedException ex) {
             logger.warn("SESSION LOCK - fireCallback - userId: " + userId + " messageId: " + call.getMessageId(), ex);
@@ -364,6 +372,8 @@ public class Session {
                 logger.trace("Stack trace:", ex);
                 SessionManager.instance.disconnect(sessionId, LostConnection);
             });
+        } catch (Exception ex) {
+            logger.warn("Unspecific exception:", ex);
         } finally {
             if (lockSet) {
                 callBackLock.unlock();

@@ -1,9 +1,4 @@
-
 package mage.watchers.common;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
@@ -15,8 +10,11 @@ import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class DragonOnTheBattlefieldWhileSpellWasCastWatcher extends Watcher {
@@ -48,7 +46,7 @@ public class DragonOnTheBattlefieldWhileSpellWasCastWatcher extends Watcher {
                 if (!revealedOrOnBattlefield) {
                     revealedOrOnBattlefield = game.getBattlefield().countAll(filter, spell.getControllerId(), game) > 0;
                 }
-                if (revealedOrOnBattlefield){
+                if (revealedOrOnBattlefield) {
                     castWithDragonOnTheBattlefield.add(spell.getId());
                 }
 
@@ -58,6 +56,7 @@ public class DragonOnTheBattlefieldWhileSpellWasCastWatcher extends Watcher {
 
     @Override
     public void reset() {
+        super.reset();
         castWithDragonOnTheBattlefield.clear();
     }
 

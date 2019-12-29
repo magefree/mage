@@ -1,8 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
@@ -12,8 +10,8 @@ import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -21,8 +19,10 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPlayer;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class CabalInterrogator extends CardImpl {
@@ -105,16 +105,14 @@ class CabalInterrogatorEffect extends OneShotEffect {
         if (!revealedCards.isEmpty()) {
             targetPlayer.revealCards("Cabal Interrogator", revealedCards, game);
             Card card = null;
-            if(revealedCards.size() > 1) {
+            if (revealedCards.size() > 1) {
                 controller.choose(Outcome.Discard, revealedCards, targetInHand, game);
                 card = revealedCards.get(targetInHand.getFirstTarget(), game);
             } else {
                 card = revealedCards.getRandom(game);
             }
 
-            if (card != null) {
-                targetPlayer.discard(card, source, game);
-            }
+            targetPlayer.discard(card, source, game);
         }
         return true;
     }

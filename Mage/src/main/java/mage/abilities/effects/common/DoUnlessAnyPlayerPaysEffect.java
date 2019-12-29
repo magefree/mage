@@ -1,11 +1,9 @@
 package mage.abilities.effects.common;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
@@ -15,9 +13,11 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
+import mage.util.ManaUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public class DoUnlessAnyPlayerPaysEffect extends OneShotEffect {
@@ -65,34 +65,39 @@ public class DoUnlessAnyPlayerPaysEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         Cost costToPay;
-        if (controller != null
-                && sourceObject != null) {
+        String costValueMessage;
+        if (controller != null && sourceObject != null) {
             if (cost != null) {
                 costToPay = cost.copy();
+                costValueMessage = costToPay.getText();
             } else {
-                costToPay = new GenericManaCost(genericMana.calculate(game, source, this));
+                costToPay = ManaUtil.createManaCost(genericMana, game, source, this);
+                costValueMessage = "{" + genericMana.calculate(game, source, this) + "}";
             }
             String message;
             if (chooseUseText == null) {
                 String effectText = executingEffects.getText(source.getModes().getMode());
-                message = "Pay " + costToPay.getText() + " to prevent (" + effectText.substring(0, effectText.length() - 1) + ")?";
+                message = "Pay " + costValueMessage + " to prevent (" + effectText.substring(0, effectText.length() - 1) + ")?";
             } else {
                 message = chooseUseText;
             }
             message = CardUtil.replaceSourceName(message, sourceObject.getName());
+
             boolean result = true;
             boolean doEffect = true;
             // check if any player is willing to pay
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
-                if (player != null
-                        && costToPay.canPay(source, source.getSourceId(), player.getId(), game) && player.chooseUse(Outcome.Detriment, message, source, game)) {
+                if (player != null && player.canRespond()
+                        && costToPay.canPay(source, source.getSourceId(), player.getId(), game)
+                        && player.chooseUse(Outcome.Detriment, message, source, game)) {
                     costToPay.clearPaid();
                     if (costToPay.pay(source, game, source.getSourceId(), player.getId(), false, null)) {
                         if (!game.isSimulation()) {
                             game.informPlayers(player.getLogName() + " pays the cost to prevent the effect");
                         }
                         doEffect = false;
+                        break;
                     }
                 }
             }

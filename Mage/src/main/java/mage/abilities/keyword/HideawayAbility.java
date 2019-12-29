@@ -1,4 +1,3 @@
-
 package mage.abilities.keyword;
 
 import java.util.UUID;
@@ -27,7 +26,7 @@ import mage.util.CardUtil;
 
 /**
  * @author LevelX2
- *
+ * <p>
  * 702.74. Hideaway 702.74a Hideaway represents a static ability and a triggered
  * ability. "Hideaway" means "This permanent enters the battlefield tapped" and
  * "When this permanent enters the battlefield, look at the top four cards of
@@ -39,6 +38,10 @@ import mage.util.CardUtil;
 public class HideawayAbility extends StaticAbility {
 
     public HideawayAbility() {
+        this("land");
+    }
+
+    public HideawayAbility(String name) {
         super(Zone.ALL, new EntersBattlefieldEffect(new TapSourceEffect(true)));
         Ability ability = new EntersBattlefieldTriggeredAbility(new HideawayExileEffect(), false);
         ability.setRuleVisible(false);
@@ -47,15 +50,17 @@ public class HideawayAbility extends StaticAbility {
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new HideawayLookAtFaceDownCardEffect());
         ability.setRuleVisible(false);
         addSubAbility(ability);
+        this.name = name;
     }
 
-    public HideawayAbility(final HideawayAbility ability) {
+    private HideawayAbility(final HideawayAbility ability) {
         super(ability);
+        this.name = ability.name;
     }
 
     @Override
     public String getRule() {
-        return "Hideaway <i>(This land enters the battlefield tapped. When it does, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.)</i>";
+        return "Hideaway <i>(This " + this.name + " enters the battlefield tapped. When it does, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.)</i>";
     }
 
     @Override
@@ -94,11 +99,13 @@ class HideawayExileEffect extends OneShotEffect {
         cards.addAll(controller.getLibrary().getTopCards(game, 4));
         if (!cards.isEmpty()) {
             TargetCard target1 = new TargetCard(Zone.LIBRARY, filter1);
+            target1.setNotTarget(true);
             if (controller.choose(Outcome.Detriment, cards, target1, game)) {
                 Card card = cards.get(target1.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);
-                    controller.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source),
+                    UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+                    controller.moveCardToExileWithInfo(card, exileId,
                             "Hideaway (" + hideawaySource.getIdName() + ')', source.getSourceId(), game, Zone.LIBRARY, false);
                     card.setFaceDown(true, game);
                 }
@@ -114,10 +121,10 @@ class HideawayLookAtFaceDownCardEffect extends AsThoughEffectImpl {
 
     public HideawayLookAtFaceDownCardEffect() {
         super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
-        staticText = "You may look at cards exiled with {this}";
+        staticText = "You may look at the cards exiled with {this}";
     }
 
-    public HideawayLookAtFaceDownCardEffect(final HideawayLookAtFaceDownCardEffect effect) {
+    private HideawayLookAtFaceDownCardEffect(final HideawayLookAtFaceDownCardEffect effect) {
         super(effect);
     }
 

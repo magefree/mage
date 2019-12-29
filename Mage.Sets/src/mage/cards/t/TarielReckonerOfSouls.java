@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -11,11 +10,11 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
@@ -76,7 +75,7 @@ class TarielReckonerOfSoulsEffect extends OneShotEffect {
         Player targetOpponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (controller != null && targetOpponent != null) {
             Cards creatureCards = new CardsImpl();
-            for (Card card : targetOpponent.getGraveyard().getCards(new FilterCreatureCard(), game)) {
+            for (Card card : targetOpponent.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game)) {
                 creatureCards.add(card);
             }
             if (!creatureCards.isEmpty()) {

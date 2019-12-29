@@ -135,6 +135,7 @@ public class TableView implements Serializable {
             switch (table.getState()) {
                 case WAITING:
                     stateText.append(" (").append(table.getTournament().getPlayers().size()).append('/').append(table.getNumberOfSeats()).append(')');
+                    break;
                 case READY_TO_START:
                 case STARTING:
                     infoText.append(" Time: ").append(table.getTournament().getOptions().getMatchOptions().getMatchTimeLimit().toString());
@@ -153,6 +154,7 @@ public class TableView implements Serializable {
                     if (draft != null) {
                         stateText.append(' ').append(draft.getBoosterNum()).append('/').append(draft.getCardNum() - 1);
                     }
+                    break;
                 default:
             }
             this.additionalInfo = infoText.toString();

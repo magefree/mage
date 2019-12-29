@@ -14,9 +14,9 @@ public class TouchOfMoongloveTest extends CardTestPlayerBase {
 
     /**
      * I blocked my opponent's Pharika's Disciple with a Cleric of the Forward
-     * Order and Guardian Automaton. He cast Touch of Moonglove on his Pharika's
-     * Disciple and both of my creatures were killed, but I only lost 2 life
-     * instead of 4.(and gained 3 from Guardian Automaton dying).
+     * Order and Guardian Automaton. They cast Touch of Moonglove on their
+     * Pharika's Disciple and both of my creatures were killed, but I only lost
+     * 2 life instead of 4.(and gained 3 from Guardian Automaton dying).
      *
      */
     @Test

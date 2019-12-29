@@ -988,6 +988,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         btnDebug.setFocusable(false);
         btnDebug.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnDebug.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnDebugMouseClicked(evt);
             }

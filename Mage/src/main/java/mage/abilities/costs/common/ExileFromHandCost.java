@@ -1,8 +1,5 @@
 package mage.abilities.costs.common;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
@@ -16,8 +13,11 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class ExileFromHandCost extends CostImpl {
@@ -30,10 +30,9 @@ public class ExileFromHandCost extends CostImpl {
     }
 
     /**
-     *
      * @param target
      * @param setXFromCMC the spells X value on the stack is set to the
-     * converted mana costs of the exiled card
+     *                    converted mana costs of the exiled card
      */
     public ExileFromHandCost(TargetCardInHand target, boolean setXFromCMC) {
         this.addTarget(target);
@@ -68,7 +67,9 @@ public class ExileFromHandCost extends CostImpl {
             paid = true;
             if (setXFromCMC) {
                 VariableManaCost vmc = new VariableManaCost();
-                vmc.setAmount(cmc);
+                // no x events - rules from Unbound Flourishing:
+                // - Spells with additional costs that include X won't be affected by Unbound Flourishing. X must be in the spell's mana cost.
+                vmc.setAmount(cmc, cmc, false);
                 vmc.setPaid();
                 ability.getManaCostsToPay().add(vmc);
             }

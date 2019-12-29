@@ -1,13 +1,11 @@
 package org.mage.plugins.card.dl.sources;
 
 import org.apache.log4j.Logger;
+import org.mage.plugins.card.dl.DownloadServiceInfo;
 import org.mage.plugins.card.images.CardDownloadData;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
@@ -44,6 +42,11 @@ public enum GrabbagImageSource implements CardImageSource {
     @Override
     public String getFileForHttpImage(String httpImageUrl) {
         return null;
+    }
+
+    @Override
+    public boolean prepareDownloadList(DownloadServiceInfo downloadServiceInfo, List<CardDownloadData> downloadList) {
+        return true;
     }
 
     @Override
@@ -290,7 +293,7 @@ public enum GrabbagImageSource implements CardImageSource {
         singleLinks.put("SWS/Senator Bail Organa", "BRkUuYU.jpg");
         singleLinks.put("SWS/Senator Lott Dod", "yYQtXZo.jpg");
         singleLinks.put("SWS/Senator Onaconda Farr", "oPez77z.png");
-        singleLinks.put("SWS/Senator Padmé Amidala", "287deD9.jpg");
+        singleLinks.put("SWS/Senator Padme Amidala", "287deD9.jpg");
         singleLinks.put("SWS/Senator Passel Argente", "51qpnaE.jpg");
         singleLinks.put("SWS/Shaak Herd", "PtnZD0I.jpg");
         singleLinks.put("SWS/Shadow Trooper", "09NAiGa.jpg");

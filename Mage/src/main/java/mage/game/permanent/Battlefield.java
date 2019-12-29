@@ -1,17 +1,14 @@
-
 package mage.game.permanent;
-
-import mage.abilities.keyword.PhasingAbility;
-import mage.constants.CardType;
-import mage.constants.RangeOfInfluence;
-import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.players.Player;
 
 import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
+import mage.abilities.keyword.PhasingAbility;
+import mage.constants.CardType;
+import mage.constants.RangeOfInfluence;
+import mage.filter.FilterPermanent;
+import mage.game.Game;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -60,8 +57,8 @@ public class Battlefield implements Serializable {
         return (int) field.values()
                 .stream()
                 .filter(permanent -> permanent.isControlledBy(controllerId)
-                        && filter.match(permanent, game)
-                        && permanent.isPhasedIn())
+                && filter.match(permanent, game)
+                && permanent.isPhasedIn())
                 .count();
 
     }
@@ -71,8 +68,8 @@ public class Battlefield implements Serializable {
      * influence of the specified player id and that match the supplied filter.
      *
      * @param filter
-     * @param sourceId       - sourceId of the MageObject the calling effect/ability
-     *                       belongs to
+     * @param sourceId - sourceId of the MageObject the calling effect/ability
+     * belongs to
      * @param sourcePlayerId
      * @param game
      * @return count
@@ -82,15 +79,15 @@ public class Battlefield implements Serializable {
             return (int) field.values()
                     .stream()
                     .filter(permanent -> filter.match(permanent, sourceId, sourcePlayerId, game)
-                            && permanent.isPhasedIn())
+                    && permanent.isPhasedIn())
                     .count();
         } else {
-            Set<UUID> range = game.getPlayer(sourcePlayerId).getInRange();
-            return  (int) field.values()
+            List<UUID> range = game.getState().getPlayersInRange(sourcePlayerId, game);
+            return (int) field.values()
                     .stream()
                     .filter(permanent -> range.contains(permanent.getControllerId())
-                            && filter.match(permanent, sourceId, sourcePlayerId, game)
-                            && permanent.isPhasedIn()).count();
+                    && filter.match(permanent, sourceId, sourcePlayerId, game)
+                    && permanent.isPhasedIn()).count();
         }
     }
 
@@ -107,7 +104,7 @@ public class Battlefield implements Serializable {
         return field.values()
                 .stream()
                 .filter(permanent -> filter.match(permanent, game)
-                        && permanent.isPhasedIn()).count() >= num;
+                && permanent.isPhasedIn()).count() >= num;
 
     }
 
@@ -126,8 +123,8 @@ public class Battlefield implements Serializable {
         return field.values()
                 .stream()
                 .filter(permanent -> permanent.isControlledBy(controllerId)
-                        && filter.match(permanent, game)
-                        && permanent.isPhasedIn())
+                && filter.match(permanent, game)
+                && permanent.isPhasedIn())
                 .count() >= num;
 
     }
@@ -147,14 +144,14 @@ public class Battlefield implements Serializable {
         if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
             return field.values().stream()
                     .filter(permanent -> filter.match(permanent, null, sourcePlayerId, game)
-                            && permanent.isPhasedIn()).count() >= num;
+                    && permanent.isPhasedIn()).count() >= num;
 
         } else {
-            Set<UUID> range = game.getPlayer(sourcePlayerId).getInRange();
+            List<UUID> range = game.getState().getPlayersInRange(sourcePlayerId, game);
             return field.values().stream()
                     .filter(permanent -> range.contains(permanent.getControllerId())
-                            && filter.match(permanent, null, sourcePlayerId, game)
-                            && permanent.isPhasedIn())
+                    && filter.match(permanent, null, sourcePlayerId, game)
+                    && permanent.isPhasedIn())
                     .count() >= num;
         }
     }
@@ -214,7 +211,7 @@ public class Battlefield implements Serializable {
         return field.values()
                 .stream()
                 .filter(perm -> perm.isPhasedIn()
-                        && perm.isControlledBy(controllerId))
+                && perm.isControlledBy(controllerId))
                 .collect(Collectors.toList());
     }
 
@@ -235,7 +232,8 @@ public class Battlefield implements Serializable {
 
     /**
      * Returns all {@link Permanent} on the battlefield that match the supplied
-     * filter. This method ignores the range of influence.
+     * filter. This method ignores the range of influence. It ignores controller
+     * predicates
      *
      * @param filter
      * @param game
@@ -298,15 +296,11 @@ public class Battlefield implements Serializable {
                     .filter(perm -> perm.isPhasedIn() && filter.match(perm, sourceId, sourcePlayerId, game))
                     .collect(Collectors.toList());
         } else {
-            Player player = game.getPlayer(sourcePlayerId);
-            if(player == null){
-                return Collections.emptyList();
-            }
-            Set<UUID> range = player.getInRange();
-            return  field.values()
+            List<UUID> range = game.getState().getPlayersInRange(sourcePlayerId, game);
+            return field.values()
                     .stream()
                     .filter(perm -> perm.isPhasedIn() && range.contains(perm.getControllerId())
-                            && filter.match(perm, sourceId, sourcePlayerId, game)).collect(Collectors.toList());
+                    && filter.match(perm, sourceId, sourcePlayerId, game)).collect(Collectors.toList());
         }
     }
 
@@ -323,11 +317,11 @@ public class Battlefield implements Serializable {
         if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
             return getAllActivePermanents();
         } else {
-            Set<UUID> range = game.getPlayer(sourcePlayerId).getInRange();
+            List<UUID> range = game.getState().getPlayersInRange(sourcePlayerId, game);
             return field.values()
                     .stream()
                     .filter(perm -> perm.isPhasedIn()
-                            && range.contains(perm.getControllerId()))
+                    && range.contains(perm.getControllerId()))
                     .collect(Collectors.toList());
 
         }
@@ -337,8 +331,8 @@ public class Battlefield implements Serializable {
         return field.values()
                 .stream()
                 .filter(perm -> perm.getAbilities().containsKey(PhasingAbility.getInstance().getId())
-                        && perm.isPhasedIn() &&
-                        perm.isControlledBy(controllerId))
+                && perm.isPhasedIn()
+                && perm.isControlledBy(controllerId))
                 .collect(Collectors.toList());
     }
 

@@ -21,6 +21,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.command.emblems.ChandraTorchOfDefianceEmblem;
 import mage.players.Library;
@@ -89,17 +90,21 @@ class ChandraTorchOfDefianceEffect extends OneShotEffect {
             Library library = controller.getLibrary();
             Card card = library.getFromTop(game);
             if (card != null) {
-                boolean exiledCardWasCast = false;
+                boolean cardWasCast = false;
                 controller.moveCardsToExile(card, source, game, true, source.getSourceId(), sourceObject.getIdName());
-                if (!card.getManaCost().isEmpty() && !card.isLand()) {
-                    if (controller.chooseUse(Outcome.Benefit, "Cast " + card.getName() + "? (You still pay the costs)", source, game)) {
-                        exiledCardWasCast = controller.cast(card.getSpellAbility(), game, false, new MageObjectReference(sourceObject, game));
+                if (!card.getManaCost().isEmpty()
+                        || !card.isLand()) {
+                    if (controller.chooseUse(Outcome.Benefit, "Cast " + card.getName() + "? (You still pay the costs)", source, game)
+                            && (game.getState().getZone(card.getId()) == Zone.EXILED)) { // card must be in the exile zone
+                        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);  // enable the card to be cast from the exile zone
+                        cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, false),
+                                game, false, new MageObjectReference(sourceObject, game));
+                        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);  // reset to null
                     }
                 }
-                if (!exiledCardWasCast) {
+                if (!cardWasCast) {
                     new DamagePlayersEffect(Outcome.Damage, new StaticValue(2), TargetController.OPPONENT).apply(game, source);
                 }
-
             }
             return true;
         }

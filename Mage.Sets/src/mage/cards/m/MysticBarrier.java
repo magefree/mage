@@ -30,16 +30,17 @@ public final class MysticBarrier extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");
 
         // When Mystic Barrier enters the battlefield or at the beginning of your upkeep, choose left or right.
-        this.addAbility(new OrTriggeredAbility(Zone.BATTLEFIELD, new ChooseModeEffect("Choose a direction to allow attacking in.",
+        this.addAbility(new OrTriggeredAbility(Zone.BATTLEFIELD, new ChooseModeEffect(
+                "Choose a direction to allow attacking in.",
                 ALLOW_ATTACKING_LEFT, ALLOW_ATTACKING_RIGHT),
                 new EntersBattlefieldTriggeredAbility(null, false),
                 new BeginningOfUpkeepTriggeredAbility(null, TargetController.YOU, false)));
 
-        // Each player may attack only the opponent seated nearest him or her in the last chosen direction and planeswalkers controlled by that player.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MysticBarrierReplacementEffect()));
+        // Each player may attack only the nearest opponent in the last chosen direction and planeswalkers controlled by that player.
+        this.addAbility(new SimpleStaticAbility(new MysticBarrierReplacementEffect()));
     }
 
-    public MysticBarrier(final MysticBarrier card) {
+    private MysticBarrier(final MysticBarrier card) {
         super(card);
     }
 
@@ -53,10 +54,11 @@ class MysticBarrierReplacementEffect extends ReplacementEffectImpl {
 
     MysticBarrierReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "Each player may attack only the opponent seated nearest him or her in the last chosen direction and planeswalkers controlled by that player";
+        staticText = "Each player may attack only the nearest opponent in the " +
+                "last chosen direction and planeswalkers controlled by that player.";
     }
 
-    MysticBarrierReplacementEffect(MysticBarrierReplacementEffect effect) {
+    private MysticBarrierReplacementEffect(MysticBarrierReplacementEffect effect) {
         super(effect);
     }
 
@@ -74,42 +76,44 @@ class MysticBarrierReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getPlayers().size() > 2) {
             Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null) {
-                if (game.getState().getPlayersInRange(controller.getId(), game).contains(event.getPlayerId())) {
-                    String allowedDirection = (String) game.getState().getValue(source.getSourceId() + "_modeChoice");
-                    if (allowedDirection != null) {
-                        Player defender = game.getPlayer(event.getTargetId());
-                        if (defender == null) {
-                            Permanent planeswalker = game.getPermanent(event.getTargetId());
-                            if (planeswalker != null) {
-                                defender = game.getPlayer(planeswalker.getControllerId());
-                            }
-                        }
-                        if (defender != null) {
-                            PlayerList playerList = game.getState().getPlayerList(event.getPlayerId());
-                            if (allowedDirection.equals(MysticBarrier.ALLOW_ATTACKING_LEFT)) {
-                                if (!playerList.getNext().equals(defender.getId())) {
-                                    // the defender is not the player to the left
-                                    Player attacker = game.getPlayer(event.getPlayerId());
-                                    if (attacker != null) {
-                                        game.informPlayer(attacker, "You can only attack to the left!");
-                                    }
-                                    return true;
-                                }
-                            }
-                            if (allowedDirection.equals(MysticBarrier.ALLOW_ATTACKING_RIGHT)) {
-                                if (!playerList.getPrevious().equals(defender.getId())) {
-                                    // the defender is not the player to the right
-                                    Player attacker = game.getPlayer(event.getPlayerId());
-                                    if (attacker != null) {
-                                        game.informPlayer(attacker, "You can only attack to the right!");
-                                    }
-                                    return true;
-                                }
-                            }
-                        }
-                    }
+            if (controller == null) {
+                return false;
+            }
+            if (!game.getState().getPlayersInRange(controller.getId(), game).contains(event.getPlayerId())) {
+                return false;
+            }
+            String allowedDirection = (String) game.getState().getValue(source.getSourceId() + "_modeChoice");
+            if (allowedDirection == null) {
+                return false;
+            }
+            Player defender = game.getPlayer(event.getTargetId());
+            if (defender == null) {
+                Permanent planeswalker = game.getPermanent(event.getTargetId());
+                if (planeswalker != null) {
+                    defender = game.getPlayer(planeswalker.getControllerId());
                 }
+            }
+            if (defender == null) {
+                return false;
+            }
+            PlayerList playerList = game.getState().getPlayerList(event.getPlayerId());
+            if (allowedDirection.equals(MysticBarrier.ALLOW_ATTACKING_LEFT)
+                    && !playerList.getNext().equals(defender.getId())) {
+                // the defender is not the player to the left
+                Player attacker = game.getPlayer(event.getPlayerId());
+                if (attacker != null) {
+                    game.informPlayer(attacker, "You can only attack to the left!");
+                }
+                return true;
+            }
+            if (allowedDirection.equals(MysticBarrier.ALLOW_ATTACKING_RIGHT)
+                    && !playerList.getPrevious().equals(defender.getId())) {
+                // the defender is not the player to the right
+                Player attacker = game.getPlayer(event.getPlayerId());
+                if (attacker != null) {
+                    game.informPlayer(attacker, "You can only attack to the right!");
+                }
+                return true;
             }
         }
         return false;

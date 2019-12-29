@@ -25,7 +25,7 @@ public final class AncientRunes extends CardImpl {
     public AncientRunes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
 
-        // At the beginning of each player's upkeep, Ancient Runes deals damage to that player equal to the number of artifacts he or she controls.
+        // At the beginning of each player's upkeep, Ancient Runes deals damage to that player equal to the number of artifacts they control.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AncientRunesDamageTargetEffect(), TargetController.ANY, false, true));
     }
 
@@ -53,7 +53,7 @@ class AncientRunesDamageTargetEffect extends OneShotEffect{
         
     @Override
     public String getText(Mode mode) {
-        return "{this} deals damage to that player equal to the number of artifacts he or she controls";
+        return "{this} deals damage to that player equal to the number of artifacts they control";
     }
 
     @Override

@@ -27,7 +27,7 @@ public final class Scrambleverse extends CardImpl {
     public Scrambleverse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{R}{R}");
 
-        // For each nonland permanent, choose a player at random. Then each player gains control of each permanent for which he or she was chosen. Untap those permanents.
+        // For each nonland permanent, choose a player at random. Then each player gains control of each permanent for which they were chosen. Untap those permanents.
         this.getSpellAbility().addEffect(new ScrambleverseEffect());
     }
 
@@ -45,7 +45,7 @@ class ScrambleverseEffect extends OneShotEffect {
 
     public ScrambleverseEffect() {
         super(Outcome.Damage);
-        staticText = "For each nonland permanent, choose a player at random. Then each player gains control of each permanent for which he or she was chosen. Untap those permanents";
+        staticText = "For each nonland permanent, choose a player at random. Then each player gains control of each permanent for which they were chosen. Untap those permanents";
     }
 
     public ScrambleverseEffect(ScrambleverseEffect effect) {

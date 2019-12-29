@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import mage.MageInt;
@@ -18,18 +17,17 @@ import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetAnyTarget;
+import mage.util.SubTypeList;
 
-import java.util.List;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class VoraciousDragon extends CardImpl {
 
     public VoraciousDragon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
         this.subtype.add(SubType.DRAGON);
 
         this.power = new MageInt(4);
@@ -65,16 +63,16 @@ class TwiceDevouredGoblins implements DynamicValue {
         if (sourcePermanent != null) {
             for (Ability ability : sourcePermanent.getAbilities()) {
                 if (ability instanceof DevourAbility) {
-                    for (Effect abilityEffect: ability.getEffects()) {
+                    for (Effect abilityEffect : ability.getEffects()) {
                         if (abilityEffect instanceof DevourEffect) {
                             DevourEffect devourEffect = (DevourEffect) abilityEffect;
                             int amountGoblins = 0;
-                            for (List<String> subtypesItem :devourEffect.getSubtypes(game, sourcePermanent.getId())) {
-                                if (subtypesItem.contains(SubType.GOBLIN.toString())) {
+                            for (SubTypeList subtypesItem : devourEffect.getSubtypes(game, sourcePermanent.getId())) {
+                                if (subtypesItem.contains(SubType.GOBLIN)) {
                                     ++amountGoblins;
                                 }
                             }
-                            return amountGoblins *2;
+                            return amountGoblins * 2;
                         }
                     }
                 }

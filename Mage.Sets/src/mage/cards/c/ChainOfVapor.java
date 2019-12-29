@@ -29,7 +29,7 @@ public final class ChainOfVapor extends CardImpl {
     public ChainOfVapor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
-        // Return target nonland permanent to its owner's hand. Then that permanent's controller may sacrifice a land. If the player does, he or she may copy this spell and may choose a new target for that copy.
+        // Return target nonland permanent to its owner's hand. Then that permanent's controller may sacrifice a land. If the player does, they may copy this spell and may choose a new target for that copy.
         this.getSpellAbility().addEffect(new ChainOfVaporEffect());
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
     }
@@ -97,7 +97,7 @@ class ChainOfVaporEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        return "Return target nonland permanent to its owner's hand. Then that permanent's controller may sacrifice a land. If the player does, he or she may copy this spell and may choose a new target for that copy";
+        return "Return target nonland permanent to its owner's hand. Then that permanent's controller may sacrifice a land. If the player does, they may copy this spell and may choose a new target for that copy";
     }
 
 }

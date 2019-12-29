@@ -38,7 +38,7 @@ public final class CurseOfChaos extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.DrawCard));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
-        // Whenever a player attacks enchanted player with one or more creatures, that attacking player may discard a card. If the player does, he or she draws a card.
+        // Whenever a player attacks enchanted player with one or more creatures, that attacking player may discard a card. If the player does, they draw a card.
         this.addAbility(new CurseOfChaosTriggeredAbility());
     }
 
@@ -97,7 +97,7 @@ class CurseOfChaosEffect extends OneShotEffect {
 
     public CurseOfChaosEffect() {
         super(Outcome.Benefit);
-        this.staticText = "that attacking player may discard a card. If the player does, he or she draws a card";
+        this.staticText = "that attacking player may discard a card. If the player does, they draw a card";
     }
 
     public CurseOfChaosEffect(final CurseOfChaosEffect effect) {

@@ -22,7 +22,7 @@ public final class ButcherOrgg extends CardImpl {
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
-        // You may assign Butcher Orgg's combat damage divided as you choose among defending player and/or any number of creatures he or she controls.
+        // You may assign Butcher Orgg's combat damage divided as you choose among defending player and/or any number of creatures they control.
         this.addAbility(ControllerDivideCombatDamageAbility.getInstance());
     }
 

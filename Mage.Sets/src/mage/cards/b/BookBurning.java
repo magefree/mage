@@ -23,7 +23,7 @@ public final class BookBurning extends CardImpl {
     public BookBurning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
-        // Any player may have Book Burning deal 6 damage to him or her. If no one does, target player puts the top six cards of their library into their graveyard.
+        // Any player may have Book Burning deal 6 damage to them. If no one does, target player puts the top six cards of their library into their graveyard.
         this.getSpellAbility().addEffect(new BookBurningMillEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
@@ -42,7 +42,7 @@ class BookBurningMillEffect extends OneShotEffect {
 
     public BookBurningMillEffect() {
         super(Outcome.Detriment);
-        staticText = "Any player may have {source} deal 6 damage to him or her. If no one does, target player puts the top six cards of their library into their graveyard";
+        staticText = "Any player may have {source} deal 6 damage to them. If no one does, target player puts the top six cards of their library into their graveyard";
     }
 
     public BookBurningMillEffect(final BookBurningMillEffect effect) {
@@ -64,7 +64,7 @@ class BookBurningMillEffect extends OneShotEffect {
                 if (player != null && player.chooseUse(Outcome.Detriment, "Have " + sourceObject.getLogName() + " deal 6 damage to you?", source, game)) {
                     millCards = false;
                     player.damage(6, source.getSourceId(), game, false, true);
-                    game.informPlayers(player.getLogName() + " has " + sourceObject.getLogName() + " deal 6 damage to him or her");
+                    game.informPlayers(player.getLogName() + " has " + sourceObject.getLogName() + " deal 6 damage to them");
                 }
             }
             if (millCards) {

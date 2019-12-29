@@ -61,6 +61,7 @@ class FblthpTheLostTriggeredAbility extends EntersBattlefieldTriggeredAbility {
         super(ability);
     }
 
+    @Override
     public FblthpTheLostTriggeredAbility copy() {
         return new FblthpTheLostTriggeredAbility(this);
     }
@@ -98,7 +99,7 @@ class FblthpTheLostTriggeredAbility extends EntersBattlefieldTriggeredAbility {
 
 class FblthpTheLostWatcher extends Watcher {
 
-    private final Set<MageObjectReference> spellsCastFromLibrary = new HashSet();
+    private final Set<MageObjectReference> spellsCastFromLibrary = new HashSet<>();
 
     FblthpTheLostWatcher() {
         super(WatcherScope.GAME);
@@ -125,6 +126,7 @@ class FblthpTheLostWatcher extends Watcher {
         super.reset();
         spellsCastFromLibrary.clear();
     }
+
 }
 
 class FblthpTheLostTargetedTriggeredAbility extends TriggeredAbilityImpl {

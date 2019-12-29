@@ -36,7 +36,7 @@ import mage.players.Player;
  * "Madness [cost]" means "If a player would discard this card, that player
  * discards it, but may exile it instead of putting it into their graveyard" and
  * "When this card is exiled this way, its owner may cast it by paying [cost]
- * rather than paying its mana cost. If that player doesn't, he or she puts this
+ * rather than paying its mana cost. If that player doesn't, they put this
  * card into their graveyard.
  *
  * 702.33b. Casting a spell using its madness ability follows the rules for
@@ -133,7 +133,7 @@ class MadnessReplacementEffect extends ReplacementEffectImpl {
 }
 
 /**
- * Checks for the MADNESS_CARD_EXILED event to ask the player if he wants to
+ * Checks for the MADNESS_CARD_EXILED event to ask the player if they want to
  * cast the card by it's Madness costs. If not, the card goes to the graveyard.
  */
 class MadnessTriggeredAbility extends TriggeredAbilityImpl {

@@ -5,6 +5,8 @@ import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+
 import mage.MageException;
 import mage.cards.decks.Deck;
 import mage.constants.TableState;
@@ -47,10 +49,10 @@ public class TournamentController {
     private final UUID tableId;
     private boolean started = false;
     private final Tournament tournament;
-    private ConcurrentHashMap<UUID, UUID> userPlayerMap = new ConcurrentHashMap<>();
-    private final ConcurrentHashMap<UUID, TournamentSession> tournamentSessions = new ConcurrentHashMap<>();
+    private ConcurrentMap<UUID, UUID> userPlayerMap = new ConcurrentHashMap<>();
+    private final ConcurrentMap<UUID, TournamentSession> tournamentSessions = new ConcurrentHashMap<>();
 
-    public TournamentController(Tournament tournament, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId) {
+    public TournamentController(Tournament tournament, ConcurrentMap<UUID, UUID> userPlayerMap, UUID tableId) {
         this.userPlayerMap = userPlayerMap;
         chatId = ChatManager.instance.createChatSession("Tournament " + tournament.getId());
         this.tournament = tournament;

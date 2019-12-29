@@ -3,6 +3,7 @@ package org.mage.test.serverside.base;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,6 +24,7 @@ import mage.server.util.config.Plugin;
 import mage.util.Copier;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.mage.test.player.TestComputerPlayer;
 import org.mage.test.player.TestPlayer;
@@ -356,13 +358,45 @@ public abstract class MageTestPlayerBase {
         if (playerD != null) playerD.setChooseStrictMode(enable);
     }
 
+    protected void addCustomCardWithSpell(TestPlayer controllerPlayer, SpellAbility spellAbility, Ability extraAbility, CardType cardType) {
+        addCustomCardWithSpell(spellAbility.getCardName(), controllerPlayer, spellAbility, extraAbility, cardType);
+    }
+
+    protected void addCustomCardWithSpell(String customName, TestPlayer controllerPlayer, SpellAbility spellAbility, Ability extraAbility, CardType cardType) {
+        addCustomCardWithAbility(customName, controllerPlayer, extraAbility, spellAbility, cardType, spellAbility.getManaCostsToPay().getText(), spellAbility.getZone());
+    }
+
     protected void addCustomCardWithAbility(String customName, TestPlayer controllerPlayer, Ability ability) {
-        // add custom card with selected ability to battlefield
+        addCustomCardWithAbility(customName, controllerPlayer, ability, null, CardType.ENCHANTMENT, "", Zone.BATTLEFIELD);
+    }
+
+    protected void addCustomCardWithAbility(String customName, TestPlayer controllerPlayer, Ability ability, SpellAbility spellAbility,
+                                            CardType cardType, String spellCost, Zone putAtZone) {
         CustomTestCard.clearCustomAbilities(customName);
-        CustomTestCard.addCustomAbility(customName, ability);
+        CustomTestCard.addCustomAbility(customName, spellAbility, ability);
+
         CardSetInfo testSet = new CardSetInfo(customName, "custom", "123", Rarity.COMMON);
-        PermanentCard card = new PermanentCard(new CustomTestCard(controllerPlayer.getId(), testSet), controllerPlayer.getId(), currentGame);
-        getBattlefieldCards(controllerPlayer).add(card);
+        PermanentCard card = new PermanentCard(new CustomTestCard(controllerPlayer.getId(), testSet, cardType, spellCost), controllerPlayer.getId(), currentGame);
+
+        switch (putAtZone) {
+            case BATTLEFIELD:
+                getBattlefieldCards(controllerPlayer).add(card);
+                break;
+            case GRAVEYARD:
+                getGraveCards(controllerPlayer).add(card);
+                break;
+            case HAND:
+                getHandCards(controllerPlayer).add(card);
+                break;
+            case LIBRARY:
+                getLibraryCards(controllerPlayer).add(card);
+                break;
+            case COMMAND:
+                getCommandCards(controllerPlayer).add(card);
+                break;
+            default:
+                Assert.fail("Unsupported zone: " + putAtZone);
+        }
     }
 }
 
@@ -370,28 +404,30 @@ public abstract class MageTestPlayerBase {
 class CustomTestCard extends CardImpl {
 
     static private Map<String, Abilities<Ability>> abilitiesList = new HashMap<>(); // card name -> abilities
+    static private Map<String, SpellAbility> spellAbilitiesList = new HashMap<>(); // card name -> spell ability
 
-    static protected void addCustomAbility(String cardName, Ability ability) {
+    static void addCustomAbility(String cardName, SpellAbility spellAbility, Ability ability) {
         if (!abilitiesList.containsKey(cardName)) {
             abilitiesList.put(cardName, new AbilitiesImpl<>());
         }
         Abilities<Ability> oldAbilities = abilitiesList.get(cardName);
-        oldAbilities.add(ability);
+        if (ability != null) oldAbilities.add(ability);
+
+        spellAbilitiesList.put(cardName, spellAbility);
     }
 
-    static protected void clearCustomAbilities(String cardName) {
+    static void clearCustomAbilities(String cardName) {
         abilitiesList.remove(cardName);
+        spellAbilitiesList.remove(cardName);
     }
 
-    static public void clearCustomAbilities() {
-        abilitiesList.clear();
-    }
-
-
-    public CustomTestCard(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "");
+    CustomTestCard(UUID ownerId, CardSetInfo setInfo, CardType cardType, String spellCost) {
+        super(ownerId, setInfo, new CardType[]{cardType}, spellCost);
 
         // load dynamic abilities by card name
+        if (spellAbilitiesList.containsKey(setInfo.getName())) {
+            this.replaceSpellAbility(spellAbilitiesList.get(setInfo.getName()));
+        }
         Abilities<Ability> extraAbitilies = abilitiesList.get(setInfo.getName());
         if (extraAbitilies != null) {
             for (Ability ability : extraAbitilies) {

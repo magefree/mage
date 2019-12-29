@@ -1,10 +1,6 @@
 
 package mage.cards.i;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
@@ -21,8 +17,12 @@ import mage.players.Player;
 import mage.players.PlayerList;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
  * @author Quercitron
  */
 public final class IllicitAuction extends CardImpl {
@@ -66,18 +66,17 @@ class IllicitAuctionEffect extends GainControlTargetEffect {
     public void init(Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent targetCreature = game.getPermanent(source.getFirstTarget());
-        if (controller != null
-                && targetCreature != null) {
-            PlayerList playerList = game.getPlayerList().copy();
-            playerList.setCurrent(game.getActivePlayerId());
-
-            Player winner = game.getPlayer(game.getActivePlayerId());
+        if (controller != null && targetCreature != null) {
+            PlayerList playerList = game.getState().getPlayersInRange(controller.getId(), game);
+            Player winner = game.getPlayer(controller.getId());
             int highBid = 0;
             game.informPlayers(winner.getLogName() + " has bet 0 lifes");
-            Player currentPlayer = playerList.getNextInRange(controller, game);
-            while (!Objects.equals(currentPlayer, winner)) {
+
+            Player currentPlayer = playerList.getNext(game, false);
+            while (currentPlayer != null && !Objects.equals(currentPlayer, winner)) {
                 String text = winner.getLogName() + " has bet " + highBid + " life" + (highBid > 1 ? "s" : "") + ". Top the bid?";
-                if (currentPlayer.chooseUse(Outcome.GainControl, text, source, game)) {
+                if (currentPlayer.canRespond()
+                        && currentPlayer.chooseUse(Outcome.GainControl, text, source, game)) {
                     int newBid = 0;
                     if (!currentPlayer.isHuman()) {//AI will evaluate the creature and bid
                         CreatureEvaluator eval = new CreatureEvaluator();
@@ -85,7 +84,9 @@ class IllicitAuctionEffect extends GainControlTargetEffect {
                         int creatureValue = eval.evaluate(targetCreature, game);
                         newBid = Math.max(creatureValue % 2, computerLife - 100);
                     } else {
-                        newBid = currentPlayer.getAmount(highBid + 1, Integer.MAX_VALUE, "Choose bid", game);
+                        if (currentPlayer.canRespond()) {
+                            newBid = currentPlayer.getAmount(highBid + 1, Integer.MAX_VALUE, "Choose bid", game);
+                        }
                     }
                     if (newBid > highBid) {
                         highBid = newBid;
@@ -93,7 +94,12 @@ class IllicitAuctionEffect extends GainControlTargetEffect {
                         game.informPlayers(currentPlayer.getLogName() + " bet " + newBid + " life" + (newBid > 1 ? "s" : ""));
                     }
                 }
-                currentPlayer = playerList.getNextInRange(controller, game);
+                currentPlayer = playerList.getNext(game, false);
+
+                // stops loop on all players quite
+                if (game.getState().getPlayersInRange(controller.getId(), game).isEmpty()) {
+                    break;
+                }
             }
 
             game.informPlayers(winner.getLogName() + " won the auction with a bid of " + highBid + " life" + (highBid > 1 ? "s" : ""));

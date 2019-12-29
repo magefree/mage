@@ -1415,14 +1415,15 @@ class ImportFilter extends FileFilter {
                     || ext.equalsIgnoreCase("dek")
                     || ext.equalsIgnoreCase("cod")
                     || ext.equalsIgnoreCase("o8d")
-                    || ext.equalsIgnoreCase("draft");
+                    || ext.equalsIgnoreCase("draft")
+                    || ext.equalsIgnoreCase("mtga");
         }
         return false;
     }
 
     @Override
     public String getDescription() {
-        return "All formats (*.dec; *.mwDeck; *.txt; *.dek; *.cod; *.o8d; *.draft)";
+        return "All formats (*.dec; *.mwDeck; *.txt; *.dek; *.cod; *.o8d; *.draft; *.mtga)";
     }
 }
 

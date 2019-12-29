@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.target.common.TargetOpponentOrPlaneswalker;
 
 /**
@@ -28,7 +27,7 @@ public final class SunCrownedHunters extends CardImpl {
 
         // <i>Enrage</i> &mdash; Whenever Sun-Crowned Hunters is dealt damage, it deals 3 damage to target opponent.
         Ability ability = new DealtDamageToSourceTriggeredAbility(
-                Zone.BATTLEFIELD, new DamageTargetEffect(3).setText("it deals 3 damage to target opponent"), false, true
+                new DamageTargetEffect(3).setText("it deals 3 damage to target opponent"), false, true
         );
         ability.addTarget(new TargetOpponentOrPlaneswalker());
         this.addAbility(ability);

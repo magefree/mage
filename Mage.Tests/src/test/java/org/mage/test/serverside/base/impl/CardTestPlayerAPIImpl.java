@@ -55,11 +55,13 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public static final String CHECK_COMMAND_DAMAGE = "DAMAGE";
     public static final String CHECK_COMMAND_LIFE = "LIFE";
     public static final String CHECK_COMMAND_ABILITY = "ABILITY";
+    public static final String CHECK_COMMAND_PLAYABLE_ABILITY = "PLAYABLE_ABILITY";
     public static final String CHECK_COMMAND_PERMANENT_COUNT = "PERMANENT_COUNT";
     public static final String CHECK_COMMAND_PERMANENT_COUNTERS = "PERMANENT_COUNTERS";
     public static final String CHECK_COMMAND_EXILE_COUNT = "EXILE_COUNT";
     public static final String CHECK_COMMAND_HAND_COUNT = "HAND_COUNT";
     public static final String CHECK_COMMAND_HAND_CARD_COUNT = "HAND_CARD_COUNT";
+    public static final String CHECK_COMMAND_COMMAND_CARD_COUNT = "COMMAND_CARD_COUNT";
     public static final String CHECK_COMMAND_COLOR = "COLOR";
     public static final String CHECK_COMMAND_TYPE = "TYPE";
     public static final String CHECK_COMMAND_SUBTYPE = "SUBTYPE";
@@ -317,6 +319,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         check(checkName, turnNum, step, player, CHECK_COMMAND_ABILITY, permanentName, abilityClass.getName(), mustHave.toString());
     }
 
+    public void checkPlayableAbility(String checkName, int turnNum, PhaseStep step, TestPlayer player, String abilityStartText, Boolean mustHave) {
+        check(checkName, turnNum, step, player, CHECK_COMMAND_PLAYABLE_ABILITY, abilityStartText, mustHave.toString());
+    }
+
     public void checkPermanentCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, Integer count) {
         //Assert.assertNotEquals("", permanentName);
         checkPermanentCount(checkName, turnNum, step, player, player, permanentName, count);
@@ -343,6 +349,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public void checkHandCardCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, String cardName, Integer count) {
         //Assert.assertNotEquals("", cardName);
         check(checkName, turnNum, step, player, CHECK_COMMAND_HAND_CARD_COUNT, cardName, count.toString());
+    }
+
+    public void checkCommandCardCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, String cardName, Integer count) {
+        //Assert.assertNotEquals("", cardName);
+        check(checkName, turnNum, step, player, CHECK_COMMAND_COMMAND_CARD_COUNT, cardName, count.toString());
     }
 
     public void checkColor(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, String colors, Boolean mustHave) {
@@ -1521,10 +1532,18 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         player.addAction(turnNum, PhaseStep.DECLARE_ATTACKERS, new StringBuilder("attack:").append(attacker).append("$planeswalker=").append(planeswalker).toString());
     }
 
+    public void attackSkip(int turnNum, TestPlayer player) {
+        attack(turnNum, player, TestPlayer.ATTACK_SKIP);
+    }
+
     public void block(int turnNum, TestPlayer player, String blocker, String attacker) {
         //Assert.assertNotEquals("", blocker);
         //Assert.assertNotEquals("", attacker);
         player.addAction(turnNum, PhaseStep.DECLARE_BLOCKERS, "block:" + blocker + '$' + attacker);
+    }
+
+    public void blockSkip(int turnNum, TestPlayer player) {
+        block(turnNum, player, TestPlayer.BLOCK_SKIP, "");
     }
 
     /**

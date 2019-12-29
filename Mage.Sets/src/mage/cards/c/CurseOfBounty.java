@@ -39,7 +39,7 @@ public final class CurseOfBounty extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // Whenever enchanted player is attacked, untap all nonland permanents you control.
-        // Each opponent attacking that player untaps all nonland permanents he or she controls.
+        // Each opponent attacking that player untaps all nonland permanents they control.
         this.addAbility(new EnchantedPlayerAttackedTriggeredAbility(new CurseOfBountyEffect()));
     }
 

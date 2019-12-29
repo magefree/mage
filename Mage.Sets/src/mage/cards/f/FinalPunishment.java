@@ -22,9 +22,9 @@ public final class FinalPunishment extends CardImpl {
     public FinalPunishment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");
 
-        // Target player loses life equal to the damage already dealt to him or her this turn.
+        // Target player loses life equal to the damage already dealt to that player this turn.
         Effect effect = new LoseLifeTargetEffect(new FinalPunishmentAmount());
-        effect.setText("target player loses life equal to the damage already dealt to him or her this turn");
+        effect.setText("target player loses life equal to the damage already dealt to that player this turn");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addWatcher(new AmountOfDamageAPlayerReceivedThisTurnWatcher());
@@ -59,6 +59,6 @@ class FinalPunishmentAmount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "the damage already dealt to him or her this turn";
+        return "the damage already dealt to that player this turn";
     }
 }

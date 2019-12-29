@@ -91,8 +91,7 @@ class BlessedReincarnationEffect extends OneShotEffect {
                     }
                     permanentController.revealCards(source, toReveal, game);
                     if (toReveal.size() > 1) {
-                        library.shuffle();
-                    }
+                      permanentController.shuffleLibrary(source, game);                    }
                 }
             }
             return true;

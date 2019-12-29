@@ -1,10 +1,8 @@
-
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.Cost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -14,20 +12,23 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.players.Player;
+import mage.util.ManaUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author emerald000
  */
 public final class InTheEyeOfChaos extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an instant spell");
+
     static {
-            filter.add(new CardTypePredicate(CardType.INSTANT));
+        filter.add(new CardTypePredicate(CardType.INSTANT));
     }
 
     public InTheEyeOfChaos(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
         addSuperType(SuperType.WORLD);
 
 
@@ -67,7 +68,7 @@ class InTheEyeOfChaosEffect extends OneShotEffect {
         if (spell != null) {
             Player player = game.getPlayer(spell.getControllerId());
             if (player != null) {
-                GenericManaCost cost = new GenericManaCost(spell.getConvertedManaCost());
+                Cost cost = ManaUtil.createManaCost(spell.getConvertedManaCost(), true);
                 if (!cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
                     game.getStack().counter(spell.getId(), source.getSourceId(), game);
                 }

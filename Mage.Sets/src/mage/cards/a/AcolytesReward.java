@@ -1,36 +1,39 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.PreventionEffectImpl;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.game.Game;
+import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.PreventDamageEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class AcolytesReward extends CardImpl {
 
     public AcolytesReward(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
 
         // Prevent the next X damage that would be dealt to target creature this turn, where X is your devotion to white. If damage is prevented this way, Acolyte's Reward deals that much damage to any target.
         this.getSpellAbility().addEffect(new AcolytesRewardEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().addHint(new ValueHint("Devotion to white", AcolytesRewardEffect.xValue));
     }
 
     public AcolytesReward(final AcolytesReward card) {
@@ -46,6 +49,7 @@ public final class AcolytesReward extends CardImpl {
 class AcolytesRewardEffect extends PreventionEffectImpl {
 
     protected int amount = 0;
+    static final DynamicValue xValue = new DevotionCount(ColoredManaSymbol.W);
 
     public AcolytesRewardEffect() {
         super(Duration.EndOfTurn);
@@ -65,7 +69,7 @@ class AcolytesRewardEffect extends PreventionEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        amount = new DevotionCount(ColoredManaSymbol.W).calculate(game, source, this);
+        amount = xValue.calculate(game, source, this);
     }
 
     @Override
@@ -83,7 +87,7 @@ class AcolytesRewardEffect extends PreventionEffectImpl {
         } else {
             amount = 0;
         }
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getControllerId(), source.getSourceId(), source.getControllerId(), toPrevent, false);
+        GameEvent preventEvent = new PreventDamageEvent(source.getControllerId(), source.getSourceId(), source.getControllerId(), toPrevent, ((DamageEvent) event).isCombatDamage());
         if (!game.replaceEvent(preventEvent)) {
             Permanent targetCreature = game.getPermanent(source.getFirstTarget());
             if (targetCreature != null) {

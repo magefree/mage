@@ -29,7 +29,7 @@ public final class HornOfPlenty extends CardImpl {
     public HornOfPlenty(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
 
-        // Whenever a player casts a spell, he or she may pay {1}. If that player does, he or she draws a card at the beginning of the next end step.
+        // Whenever a player casts a spell, they may pay {1}. If that player does, they draw a card at the beginning of the next end step.
         this.addAbility(new SpellCastAllTriggeredAbility(new HornOfPlentyEffect(), new FilterSpell("a spell"), false, SetTargetPointer.PLAYER));
     }
 
@@ -47,7 +47,7 @@ class HornOfPlentyEffect extends OneShotEffect {
 
     public HornOfPlentyEffect() {
         super(Outcome.Detriment);
-        this.staticText = "he or she may pay {1}. If that player does, he or she draws a card at the beginning of the next end step";
+        this.staticText = "they may pay {1}. If that player does, they draw a card at the beginning of the next end step";
     }
 
     public HornOfPlentyEffect(final HornOfPlentyEffect effect) {

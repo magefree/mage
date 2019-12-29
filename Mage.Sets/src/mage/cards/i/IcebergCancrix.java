@@ -1,0 +1,58 @@
+package mage.cards.i;
+
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SupertypePredicate;
+import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.target.TargetPlayer;
+
+import java.util.UUID;
+
+/**
+ * @author TheElk801
+ */
+public final class IcebergCancrix extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterPermanent();
+
+    static {
+        filter.add(AnotherPredicate.instance);
+        filter.add(new SupertypePredicate(SuperType.SNOW));
+    }
+
+    public IcebergCancrix(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
+
+        this.addSuperType(SuperType.SNOW);
+        this.subtype.add(SubType.CRAB);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(4);
+
+        // Whenever another snow permanent enters the battlefield under your control, you may have target player put the top two cards of their library into their graveyard.
+        Ability ability = new EntersBattlefieldControlledTriggeredAbility(
+                Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(2), filter,
+                true, "Whenever another snow permanent enters the battlefield under your control, " +
+                "you may have target player put the top two cards of their library into their graveyard."
+        );
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
+    }
+
+    private IcebergCancrix(final IcebergCancrix card) {
+        super(card);
+    }
+
+    @Override
+    public IcebergCancrix copy() {
+        return new IcebergCancrix(this);
+    }
+}

@@ -1,4 +1,3 @@
-
 package mage.abilities;
 
 import java.util.UUID;
@@ -61,14 +60,6 @@ public interface ActivatedAbility extends Ability {
      */
     @Override
     ActivatedAbility copy();
-
-    /**
-     * Set a flag to know, that the ability is only created adn used to check
-     * what's playbable for the player.
-     */
-    void setCheckPlayableMode();
-
-    boolean isCheckPlayableMode();
 
     void setMaxActivationsPerTurn(int maxActivationsPerTurn);
 

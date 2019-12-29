@@ -34,7 +34,10 @@ public final class WordOfCommand extends CardImpl {
     public WordOfCommand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}{B}");
 
-        // Look at target opponent's hand and choose a card from it. You control that player until Word of Command finishes resolving. The player plays that card if able. While doing so, the player can activate mana abilities only if they're from lands that player controls and only if mana they produce is spent to activate other mana abilities of lands the player controls and/or to play that card. If the chosen card is cast as a spell, you control the player while that spell is resolving.
+        // Look at target opponent's hand and choose a card from it. You control that player until Word of Command finishes resolving.
+        // The player plays that card if able. While doing so, the player can activate mana abilities only if they're from lands that player controls
+        // and only if mana they produce is spent to activate other mana abilities of lands the player controls and/or to play that card.
+        // If the chosen card is cast as a spell, you control the player while that spell is resolving.
         this.getSpellAbility().addEffect(new WordOfCommandEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
@@ -95,7 +98,7 @@ class WordOfCommandEffect extends OneShotEffect {
             controller.controlPlayersTurn(game, targetPlayer.getId());
             while (controller.canRespond()) {
                 if (controller.chooseUse(Outcome.Benefit, "Resolve " + sourceObject.getLogName() + " now" + (card != null ? " and play " + card.getLogName() : "") + '?', source, game)) {
-                    // this is used to give the controller a little space to utilize his player controlling effect (look at face down creatures, hand, etc.)
+                    // this is used to give the controller a little space to utilize their player controlling effect (look at face down creatures, hand, etc.)
                     break;
                 }
             }
@@ -107,7 +110,7 @@ class WordOfCommandEffect extends OneShotEffect {
                 effect.setTargetPointer(new FixedTarget(targetPlayer.getId()));
                 game.addEffect(effect, source);
 
-                // and only if mana they produce is spent to activate other mana abilities of lands he or she controls and/or play that card
+                // and only if mana they produce is spent to activate other mana abilities of lands they control and/or play that card
                 ManaPool manaPool = targetPlayer.getManaPool();
                 manaPool.setForcedToPay(true);
                 manaPool.storeMana();
@@ -166,7 +169,7 @@ class WordOfCommandEffect extends OneShotEffect {
     private boolean checkPlayability(Card card, Player targetPlayer, Game game, Ability source) {
         // check for card playability
         boolean canPlay = false;
-        if (card.isLand()) { // we can't use getPlayableInHand(game) in here because it disallows playing lands outside the main step
+        if (card.isLand()) { // we can't use getPlayableObjects(game) in here because it disallows playing lands outside the main step // TODO: replace to getPlayable() checks with disable step condition?
             if (targetPlayer.canPlayLand()
                     && game.getActivePlayerId().equals(targetPlayer.getId())) {
                 canPlay = true;
@@ -179,7 +182,7 @@ class WordOfCommandEffect extends OneShotEffect {
         } else { // Word of Command allows the chosen card to be played "as if it had flash" so we need to invoke such effect to bypass the check
             AsThoughEffectImpl effect2 = new WordOfCommandTestFlashEffect();
             game.addEffect(effect2, source);
-            if (targetPlayer.getPlayableInHand(game).contains(card.getId())) {
+            if (targetPlayer.getPlayableObjects(game, Zone.HAND).containsKey(card.getId())) {
                 canPlay = true;
             }
             for (AsThoughEffect eff : game.getContinuousEffects().getApplicableAsThoughEffects(AsThoughEffectType.CAST_AS_INSTANT, game)) {

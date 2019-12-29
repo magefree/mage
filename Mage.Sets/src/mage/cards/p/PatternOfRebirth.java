@@ -1,5 +1,6 @@
 package mage.cards.p;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -12,12 +13,10 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -35,9 +34,9 @@ public final class PatternOfRebirth extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // When enchanted creature dies, that creature's controller may search their library for a creature card and put that card onto the battlefield. If that player does, he or she shuffles their library.
-        Effect effect = new SearchLibraryPutInPlayTargetPlayerEffect(new TargetCardInLibrary(new FilterCreatureCard()), false, false, Outcome.PutCreatureInPlay);
-        effect.setText("that creature's controller may search their library for a creature card and put that card onto the battlefield. If that player does, he or she shuffles their library");
+        // When enchanted creature dies, that creature's controller may search their library for a creature card and put that card onto the battlefield. If that player does, they shuffle their library.
+        Effect effect = new SearchLibraryPutInPlayTargetPlayerEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_CREATURE), false, false, Outcome.PutCreatureInPlay);
+        effect.setText("that creature's controller may search their library for a creature card and put that card onto the battlefield. If that player does, they shuffle their library");
         this.addAbility(new DiesAttachedTriggeredAbility(effect, "enchanted creature", true, true, SetTargetPointer.ATTACHED_TO_CONTROLLER));
 
     }

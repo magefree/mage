@@ -42,7 +42,7 @@ public final class FlameBurst extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public FlameBurst(final FlameBurst card) {
+    private FlameBurst(final FlameBurst card) {
         super(card);
     }
 
@@ -66,6 +66,7 @@ class FlameBurstCount extends CardsInAllGraveyardsCount {
         super(value);
     }
 
+    @Override
     public FlameBurstCount copy() {
         return new FlameBurstCount(this);
     }
@@ -83,7 +84,7 @@ class CountAsFlameBurstAbility extends SimpleStaticAbility {
         super(Zone.GRAVEYARD, new InfoEffect("If {this} is in a graveyard, effects from spells named Flame Burst count it as a card named Flame Burst"));
     }
 
-    public CountAsFlameBurstAbility(CountAsFlameBurstAbility ability) {
+    private CountAsFlameBurstAbility(CountAsFlameBurstAbility ability) {
         super(ability);
     }
 

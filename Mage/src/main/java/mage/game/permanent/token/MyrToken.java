@@ -1,23 +1,23 @@
 package mage.game.permanent.token;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public final class MyrToken extends TokenImpl {
 
     static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("C14", "MM2", "NPH", "SOM"));
+        tokenImageSets.addAll(Arrays.asList("C14", "MM2", "NPH", "SOM", "MH1"));
     }
 
     public MyrToken() {
-        this((String)null);
+        this((String) null);
     }
 
     public MyrToken(String expansionSetCode) {

@@ -1,15 +1,9 @@
-
 package mage.cards.c;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.ForestwalkAbility;
 import mage.cards.CardImpl;
@@ -21,11 +15,14 @@ import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.ManaUtil;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
- *
  */
 public final class ChorusOfTheConclave extends CardImpl {
 
@@ -94,7 +91,7 @@ class ChorusOfTheConclaveReplacementEffect extends ReplacementEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             if (controller.chooseUse(Outcome.Benefit, "Do you wish to pay the additonal cost to add +1/+1 counters to the creature you cast?", source, game)) {
-                xCost += playerPaysXGenericMana(controller, source, game);
+                xCost += ManaUtil.playerPaysXGenericMana(false, "Chorus of the Conclave", controller, source, game);
                 // save the x value to be available for ETB replacement effect
                 Object object = game.getState().getValue("spellX" + source.getSourceId());
                 Map<String, Integer> spellX;
@@ -109,23 +106,6 @@ class ChorusOfTheConclaveReplacementEffect extends ReplacementEffectImpl {
         }
         return false;
     }
-
-    protected static int playerPaysXGenericMana(Player player, Ability source, Game game) {
-        int xValue = 0;
-        boolean payed = false;
-        while (!payed) {
-            xValue = player.announceXMana(0, Integer.MAX_VALUE, "How much mana will you pay?", game, source);
-            if (xValue > 0) {
-                Cost cost = new GenericManaCost(xValue);
-                payed = cost.pay(source, game, source.getSourceId(), player.getId(), false, null);
-            } else {
-                payed = true;
-            }
-        }
-        game.informPlayers(player.getLogName() + " pays {" + xValue + '}');
-        return xValue;
-    }
-
 }
 
 class ChorusOfTheConclaveReplacementEffect2 extends ReplacementEffectImpl {

@@ -24,9 +24,8 @@ import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author JayDi85
@@ -117,6 +116,19 @@ class FinaleOfPromiseEffect extends OneShotEffect {
                 if (id != null && !cardsToCast.contains(id)) {
                     cardsToCast.add(id);
                 }
+            }
+        }
+
+        // ask to cast order
+        if (!cardsToCast.isEmpty()) {
+            String cardsOrder = cardsToCast.stream()
+                    .map(game::getCard)
+                    .filter(Objects::nonNull)
+                    .map(Card::getName)
+                    .collect(Collectors.joining(" -> "));
+            if (!controller.chooseUse(Outcome.Detriment, "Cast cards by choose order: " + cardsOrder + "?", "Finale of Promise",
+                    "Use that order", "Reverse", source, game)) {
+                Collections.reverse(cardsToCast);
             }
         }
 

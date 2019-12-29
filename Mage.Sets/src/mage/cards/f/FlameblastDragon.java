@@ -1,7 +1,5 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -13,12 +11,14 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -26,7 +26,7 @@ import mage.target.common.TargetAnyTarget;
 public final class FlameblastDragon extends CardImpl {
 
     public FlameblastDragon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
         this.subtype.add(SubType.DRAGON);
 
         this.power = new MageInt(5);
@@ -34,6 +34,7 @@ public final class FlameblastDragon extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // Whenever Flameblast Dragon attacks, you may pay {X}{R}. If you do, Flameblast Dragon deals X damage to any target.
         Ability ability = new AttacksTriggeredAbility(new FlameblastDragonEffect(), false);
         ability.addTarget(new TargetAnyTarget());

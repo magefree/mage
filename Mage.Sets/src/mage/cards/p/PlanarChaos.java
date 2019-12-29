@@ -32,7 +32,7 @@ public final class PlanarChaos extends CardImpl {
         // At the beginning of your upkeep, flip a coin. If you lose the flip, sacrifice Planar Chaos.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PlanarChaosUpkeepEffect(), TargetController.YOU, false));
 
-        // Whenever a player casts a spell, that player flips a coin. If he or she loses the flip, counter that spell.
+        // Whenever a player casts a spell, that player flips a coin. If they lose the flip, counter that spell.
         this.addAbility(new SpellCastAllTriggeredAbility(new PlanarChaosCastAllEffect(), new FilterSpell("a spell"), false, SetTargetPointer.SPELL));
     }
 
@@ -82,7 +82,7 @@ class PlanarChaosCastAllEffect extends OneShotEffect {
 
     public PlanarChaosCastAllEffect() {
         super(Outcome.Benefit);
-        this.staticText = "that player flips a coin. If he or she loses the flip, counter that spell";
+        this.staticText = "that player flips a coin. If they lose the flip, counter that spell";
     }
 
     public PlanarChaosCastAllEffect(final PlanarChaosCastAllEffect effect) {

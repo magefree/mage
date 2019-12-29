@@ -5,6 +5,7 @@ import mage.MageObjectReference;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.RestrictionEffect;
@@ -234,6 +235,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         }
     }
 
+    /**
+     * @param game can be null, e.g. for cards viewer
+     * @return
+     */
     @Override
     public List<String> getRules(Game game) {
         try {
@@ -261,7 +266,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
             // restrict hints
             List<String> restrictHints = new ArrayList<>();
-            if (HintUtils.RESTRICT_HINTS_ENABLE) {
+            if (game != null && HintUtils.RESTRICT_HINTS_ENABLE) {
                 for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
                     for (Ability ability : entry.getValue()) {
                         if (!entry.getKey().applies(this, ability, game)) {
@@ -660,6 +665,13 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public boolean changeControllerId(UUID controllerId, Game game) {
         Player newController = game.getPlayer(controllerId);
+        // For each control change compared to last controler send a GAIN_CONTROL replace event to be able to prevent the gain control (e.g. Guardian Beast)
+        if (beforeResetControllerId != controllerId) {
+            GameEvent gainControlEvent = GameEvent.getEvent(GameEvent.EventType.GAIN_CONTROL, this.getId(), null, controllerId);
+            if (game.replaceEvent(gainControlEvent)) {
+                return false;
+            }
+        }
 
         GameEvent loseControlEvent = GameEvent.getEvent(GameEvent.EventType.LOSE_CONTROL, this.getId(), null, controllerId);
 
@@ -884,7 +896,13 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         }
         for (MarkedDamageInfo mdi : markedDamage) {
             Ability source = null;
-            if (mdi.sourceObject instanceof Permanent) {
+            if (mdi.sourceObject instanceof PermanentToken) {
+                /* Tokens dont have a spellAbility. We must make a phony one as the source so the events in addCounters
+                 * can trace the source back to an object/controller.
+                 */
+                source = new SpellAbility(null, ((PermanentToken) mdi.sourceObject).name);
+                source.setSourceId(((PermanentToken) mdi.sourceObject).objectId);
+            } else if (mdi.sourceObject instanceof Permanent) {
                 source = ((Permanent) mdi.sourceObject).getSpellAbility();
             }
             addCounters(mdi.counter, source, game);
@@ -952,7 +970,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     private int checkProtectionAbilities(GameEvent event, UUID sourceId, Game game) {
         MageObject source = game.getObject(sourceId);
         if (source != null && hasProtectionFrom(source, game)) {
-            GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, this.objectId, sourceId, this.controllerId, event.getAmount(), false);
+            GameEvent preventEvent = new PreventDamageEvent(this.objectId, sourceId, this.controllerId, event.getAmount(), ((DamageEvent) event).isCombatDamage());
             if (!game.replaceEvent(preventEvent)) {
                 int preventedDamage = event.getAmount();
                 event.setAmount(0);
@@ -1008,18 +1026,26 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 }
             }
 
-            if (abilities.containsKey(HexproofFromBlackAbility.getInstance().getId())) {
-                if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
-                        && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game)
-                        && source.getColor(game).isBlack()) {
-                    return false;
-                }
-            }
-
             if (abilities.containsKey(HexproofFromWhiteAbility.getInstance().getId())) {
                 if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
                         && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game)
                         && source.getColor(game).isWhite()) {
+                    return false;
+                }
+            }
+
+            if (abilities.containsKey(HexproofFromBlueAbility.getInstance().getId())) {
+                if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
+                        && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game)
+                        && source.getColor(game).isBlue()) {
+                    return false;
+                }
+            }
+
+            if (abilities.containsKey(HexproofFromBlackAbility.getInstance().getId())) {
+                if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
+                        && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game)
+                        && source.getColor(game).isBlack()) {
                     return false;
                 }
             }

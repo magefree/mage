@@ -102,8 +102,7 @@ class TargetCreaturePermanentOpponentSameController extends TargetCreaturePerman
             Permanent firstTargetPermanent = game.getPermanent(id);
             if (firstTargetPermanent != null
                     && game.getOpponents(controllerId).contains(firstTargetPermanent.getControllerId())) {
-                for (Object object : getTargets()) {
-                    UUID targetId = (UUID) object;
+                for (UUID targetId : getTargets()) {
                     Permanent targetPermanent = game.getPermanent(targetId);
                     if (targetPermanent != null) {
                         if (!firstTargetPermanent.getId().equals(targetPermanent.getId())) {

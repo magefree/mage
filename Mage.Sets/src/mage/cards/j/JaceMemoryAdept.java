@@ -64,7 +64,7 @@ class JaceMemoryAdeptEffect extends DrawCardTargetEffect {
         staticText = "Any number of target players each draw twenty cards";
     }
 
-    public JaceMemoryAdeptEffect(final DrawCardTargetEffect effect) {
+    private JaceMemoryAdeptEffect(final DrawCardTargetEffect effect) {
         super(effect);
     }
 
@@ -84,6 +84,7 @@ class JaceMemoryAdeptEffect extends DrawCardTargetEffect {
         return staticText;
     }
 
+    @Override
     public JaceMemoryAdeptEffect copy() {
         return new JaceMemoryAdeptEffect(this);
     }

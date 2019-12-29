@@ -1,11 +1,9 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.Cost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
@@ -19,9 +17,11 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetSpell;
+import mage.util.ManaUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class SpellShrivel extends CardImpl {
@@ -69,21 +69,19 @@ class SpellShrivelCounterUnlessPaysEffect extends OneShotEffect {
         if ((spell instanceof Spell) && sourceObject != null) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                int amount = 4;
-                if (amount > 0) {
-                    GenericManaCost cost = new GenericManaCost(amount);
-                    if (!cost.pay(source, game, spell.getControllerId(), spell.getControllerId(), false)) {
-                        StackObject stackObject = game.getStack().getStackObject(source.getFirstTarget());
-                        if (stackObject != null && !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER, source.getFirstTarget(), source.getSourceId(), stackObject.getControllerId()))) {
-                            game.informPlayers(sourceObject.getIdName() + ": cost wasn't payed - countering " + stackObject.getName());
-                            game.rememberLKI(source.getFirstTarget(), Zone.STACK, stackObject);
-                            controller.moveCards((Spell) spell, Zone.EXILED, source, game);
-                            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERED, source.getFirstTarget(), source.getSourceId(), stackObject.getControllerId()));
-                            return true;
-                        }
-                        return false;
+                Cost cost = ManaUtil.createManaCost(4, false);
+                if (!cost.pay(source, game, spell.getControllerId(), spell.getControllerId(), false)) {
+                    StackObject stackObject = game.getStack().getStackObject(source.getFirstTarget());
+                    if (stackObject != null && !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER, source.getFirstTarget(), source.getSourceId(), stackObject.getControllerId()))) {
+                        game.informPlayers(sourceObject.getIdName() + ": cost wasn't payed - countering " + stackObject.getName());
+                        game.rememberLKI(source.getFirstTarget(), Zone.STACK, stackObject);
+                        controller.moveCards((Spell) spell, Zone.EXILED, source, game);
+                        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERED, source.getFirstTarget(), source.getSourceId(), stackObject.getControllerId()));
+                        return true;
                     }
+                    return false;
                 }
+
             }
         }
         return false;

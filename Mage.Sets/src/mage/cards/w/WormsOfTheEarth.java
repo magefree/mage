@@ -35,7 +35,7 @@ public final class WormsOfTheEarth extends CardImpl {
         // Lands can't enter the battlefield.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WormsOfTheEarthEnterEffect()));
 
-        // At the beginning of each upkeep, any player may sacrifice two lands or have Worms of the Earth deal 5 damage to him or her. If a player does either, destroy Worms of the Earth.
+        // At the beginning of each upkeep, any player may sacrifice two lands or have Worms of the Earth deal 5 damage to that player. If a player does either, destroy Worms of the Earth.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new WormsOfTheEarthDestroyEffect(), TargetController.ANY, false));
     }
 
@@ -117,7 +117,7 @@ class WormsOfTheEarthDestroyEffect extends OneShotEffect {
 
     public WormsOfTheEarthDestroyEffect() {
         super(Outcome.Benefit);
-        this.staticText = "any player may sacrifice two lands or have {this} deal 5 damage to him or her. If a player does either, destroy {this}";
+        this.staticText = "any player may sacrifice two lands or have {this} deal 5 damage to that player. If a player does either, destroy {this}";
     }
 
     public WormsOfTheEarthDestroyEffect(final WormsOfTheEarthDestroyEffect effect) {

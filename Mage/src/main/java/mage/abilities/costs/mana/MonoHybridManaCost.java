@@ -1,14 +1,14 @@
-
 package mage.abilities.costs.mana;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.constants.ColoredManaSymbol;
 import mage.game.Game;
 import mage.players.ManaPool;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MonoHybridManaCost extends ManaCostImpl {
 
@@ -45,7 +45,7 @@ public class MonoHybridManaCost extends ManaCostImpl {
     @Override
     public void assignPayment(Game game, Ability ability, ManaPool pool, Cost costToPay) {
         if (!assignColored(ability, game, pool, mana, costToPay)) {
-            assignGeneric(ability, game, pool, mana2, costToPay);
+            assignGeneric(ability, game, pool, mana2, null, costToPay);
         }
     }
 

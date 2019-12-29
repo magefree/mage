@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -22,7 +21,7 @@ public final class BattleForZendikar extends ExpansionSet {
         return instance;
     }
 
-    protected final List<CardInfo> savedSpecialLand = new ArrayList<>();
+    private final List<CardInfo> savedSpecialLand = new ArrayList<>();
 
     private BattleForZendikar() {
         super("Battle for Zendikar", "BFZ", ExpansionSet.buildDate(2015, 10, 2), SetType.EXPANSION);
@@ -36,6 +35,7 @@ public final class BattleForZendikar extends ExpansionSet {
         this.ratioBoosterMythic = 8;
         this.numBoosterSpecial = 0;
         this.ratioBoosterSpecialLand = 144;
+
         cards.add(new SetCardInfo("Adverse Conditions", 54, Rarity.UNCOMMON, mage.cards.a.AdverseConditions.class));
         cards.add(new SetCardInfo("Akoum Firebird", 138, Rarity.MYTHIC, mage.cards.a.AkoumFirebird.class));
         cards.add(new SetCardInfo("Akoum Hellkite", 139, Rarity.RARE, mage.cards.a.AkoumHellkite.class));
@@ -43,21 +43,21 @@ public final class BattleForZendikar extends ExpansionSet {
         cards.add(new SetCardInfo("Aligned Hedron Network", 222, Rarity.RARE, mage.cards.a.AlignedHedronNetwork.class));
         cards.add(new SetCardInfo("Ally Encampment", 228, Rarity.RARE, mage.cards.a.AllyEncampment.class));
         cards.add(new SetCardInfo("Altar's Reap", 103, Rarity.COMMON, mage.cards.a.AltarsReap.class));
+        cards.add(new SetCardInfo("Angel of Renewal", 18, Rarity.UNCOMMON, mage.cards.a.AngelOfRenewal.class));
         cards.add(new SetCardInfo("Angelic Captain", 208, Rarity.RARE, mage.cards.a.AngelicCaptain.class));
         cards.add(new SetCardInfo("Angelic Gift", 19, Rarity.COMMON, mage.cards.a.AngelicGift.class));
-        cards.add(new SetCardInfo("Angel of Renewal", 18, Rarity.UNCOMMON, mage.cards.a.AngelOfRenewal.class));
         cards.add(new SetCardInfo("Anticipate", 69, Rarity.COMMON, mage.cards.a.Anticipate.class));
         cards.add(new SetCardInfo("Bane of Bala Ged", 1, Rarity.UNCOMMON, mage.cards.b.BaneOfBalaGed.class));
         cards.add(new SetCardInfo("Barrage Tyrant", 127, Rarity.RARE, mage.cards.b.BarrageTyrant.class));
         cards.add(new SetCardInfo("Beastcaller Savant", 170, Rarity.RARE, mage.cards.b.BeastcallerSavant.class));
         cards.add(new SetCardInfo("Belligerent Whiptail", 141, Rarity.COMMON, mage.cards.b.BelligerentWhiptail.class));
         cards.add(new SetCardInfo("Benthic Infiltrator", 55, Rarity.COMMON, mage.cards.b.BenthicInfiltrator.class));
+        cards.add(new SetCardInfo("Blight Herder", 2, Rarity.RARE, mage.cards.b.BlightHerder.class));
         cards.add(new SetCardInfo("Blighted Cataract", 229, Rarity.UNCOMMON, mage.cards.b.BlightedCataract.class));
         cards.add(new SetCardInfo("Blighted Fen", 230, Rarity.UNCOMMON, mage.cards.b.BlightedFen.class));
         cards.add(new SetCardInfo("Blighted Gorge", 231, Rarity.UNCOMMON, mage.cards.b.BlightedGorge.class));
         cards.add(new SetCardInfo("Blighted Steppe", 232, Rarity.UNCOMMON, mage.cards.b.BlightedSteppe.class));
         cards.add(new SetCardInfo("Blighted Woodland", 233, Rarity.UNCOMMON, mage.cards.b.BlightedWoodland.class));
-        cards.add(new SetCardInfo("Blight Herder", 2, Rarity.RARE, mage.cards.b.BlightHerder.class));
         cards.add(new SetCardInfo("Blisterpod", 163, Rarity.COMMON, mage.cards.b.Blisterpod.class));
         cards.add(new SetCardInfo("Bloodbond Vampire", 104, Rarity.UNCOMMON, mage.cards.b.BloodbondVampire.class));
         cards.add(new SetCardInfo("Boiling Earth", 142, Rarity.COMMON, mage.cards.b.BoilingEarth.class));
@@ -66,8 +66,8 @@ public final class BattleForZendikar extends ExpansionSet {
         cards.add(new SetCardInfo("Brilliant Spectrum", 70, Rarity.COMMON, mage.cards.b.BrilliantSpectrum.class));
         cards.add(new SetCardInfo("Bring to Light", 209, Rarity.RARE, mage.cards.b.BringToLight.class));
         cards.add(new SetCardInfo("Brood Butcher", 199, Rarity.RARE, mage.cards.b.BroodButcher.class));
-        cards.add(new SetCardInfo("Broodhunter Wurm", 171, Rarity.COMMON, mage.cards.b.BroodhunterWurm.class));
         cards.add(new SetCardInfo("Brood Monitor", 164, Rarity.UNCOMMON, mage.cards.b.BroodMonitor.class));
+        cards.add(new SetCardInfo("Broodhunter Wurm", 171, Rarity.COMMON, mage.cards.b.BroodhunterWurm.class));
         cards.add(new SetCardInfo("Brutal Expulsion", 200, Rarity.RARE, mage.cards.b.BrutalExpulsion.class));
         cards.add(new SetCardInfo("Call the Scions", 165, Rarity.COMMON, mage.cards.c.CallTheScions.class));
         cards.add(new SetCardInfo("Canopy Vista", 234, Rarity.RARE, mage.cards.c.CanopyVista.class));
@@ -94,8 +94,8 @@ public final class BattleForZendikar extends ExpansionSet {
         cards.add(new SetCardInfo("Dispel", 76, Rarity.COMMON, mage.cards.d.Dispel.class));
         cards.add(new SetCardInfo("Dominator Drone", 92, Rarity.COMMON, mage.cards.d.DominatorDrone.class));
         cards.add(new SetCardInfo("Dragonmaster Outcast", 144, Rarity.MYTHIC, mage.cards.d.DragonmasterOutcast.class));
-        cards.add(new SetCardInfo("Drana, Liberator of Malakir", 109, Rarity.MYTHIC, mage.cards.d.DranaLiberatorOfMalakir.class));
         cards.add(new SetCardInfo("Drana's Emissary", 210, Rarity.UNCOMMON, mage.cards.d.DranasEmissary.class));
+        cards.add(new SetCardInfo("Drana, Liberator of Malakir", 109, Rarity.MYTHIC, mage.cards.d.DranaLiberatorOfMalakir.class));
         cards.add(new SetCardInfo("Drowner of Hope", 57, Rarity.RARE, mage.cards.d.DrownerOfHope.class));
         cards.add(new SetCardInfo("Dust Stalker", 202, Rarity.RARE, mage.cards.d.DustStalker.class));
         cards.add(new SetCardInfo("Dutiful Return", 110, Rarity.COMMON, mage.cards.d.DutifulReturn.class));
@@ -116,22 +116,22 @@ public final class BattleForZendikar extends ExpansionSet {
         cards.add(new SetCardInfo("Firemantle Mage", 145, Rarity.UNCOMMON, mage.cards.f.FiremantleMage.class));
         cards.add(new SetCardInfo("Forerunner of Slaughter", 204, Rarity.UNCOMMON, mage.cards.f.ForerunnerOfSlaughter.class));
         cards.add(new SetCardInfo("Forest", "270a", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Forest", "274b", Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", "271a", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", "272a", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", "273a", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", "274a", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Forest", "270b", Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Forest", "271b", Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Forest", "272b", Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Forest", "273b", Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 270, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 271, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 272, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 273, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 274, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Fortified Rampart", 27, Rarity.COMMON, mage.cards.f.FortifiedRampart.class));
         cards.add(new SetCardInfo("From Beyond", 167, Rarity.RARE, mage.cards.f.FromBeyond.class));
         cards.add(new SetCardInfo("Geyserfield Stalker", 111, Rarity.COMMON, mage.cards.g.GeyserfieldStalker.class));
         cards.add(new SetCardInfo("Ghostly Sentinel", 28, Rarity.COMMON, mage.cards.g.GhostlySentinel.class));
         cards.add(new SetCardInfo("Giant Mantis", 173, Rarity.COMMON, mage.cards.g.GiantMantis.class));
-        cards.add(new SetCardInfo("Gideon, Ally of Zendikar", 29, Rarity.MYTHIC, mage.cards.g.GideonAllyOfZendikar.class));
         cards.add(new SetCardInfo("Gideon's Reproach", 30, Rarity.COMMON, mage.cards.g.GideonsReproach.class));
+        cards.add(new SetCardInfo("Gideon, Ally of Zendikar", 29, Rarity.MYTHIC, mage.cards.g.GideonAllyOfZendikar.class));
         cards.add(new SetCardInfo("Goblin War Paint", 146, Rarity.COMMON, mage.cards.g.GoblinWarPaint.class));
         cards.add(new SetCardInfo("Grave Birthing", 93, Rarity.COMMON, mage.cards.g.GraveBirthing.class));
         cards.add(new SetCardInfo("Greenwarden of Murasa", 174, Rarity.MYTHIC, mage.cards.g.GreenwardenOfMurasa.class));
@@ -152,15 +152,15 @@ public final class BattleForZendikar extends ExpansionSet {
         cards.add(new SetCardInfo("Infuse with the Elements", 175, Rarity.UNCOMMON, mage.cards.i.InfuseWithTheElements.class));
         cards.add(new SetCardInfo("Inspired Charge", 32, Rarity.COMMON, mage.cards.i.InspiredCharge.class));
         cards.add(new SetCardInfo("Island", "255a", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Island", "259b", Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Island", "256a", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", "257a", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", "258a", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", "259a", Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Island", "255b", Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Island", "256b", Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Island", "257b", Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Island", "258b", Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Island", 255, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Island", 256, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Island", 257, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Island", 258, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Island", 259, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Jaddi Offshoot", 176, Rarity.UNCOMMON, mage.cards.j.JaddiOffshoot.class));
         cards.add(new SetCardInfo("Kalastria Healer", 114, Rarity.COMMON, mage.cards.k.KalastriaHealer.class));
         cards.add(new SetCardInfo("Kalastria Nightwatch", 115, Rarity.COMMON, mage.cards.k.KalastriaNightwatch.class));
@@ -187,16 +187,15 @@ public final class BattleForZendikar extends ExpansionSet {
         cards.add(new SetCardInfo("Molten Nursery", 130, Rarity.UNCOMMON, mage.cards.m.MoltenNursery.class));
         cards.add(new SetCardInfo("Mortuary Mire", 240, Rarity.COMMON, mage.cards.m.MortuaryMire.class));
         cards.add(new SetCardInfo("Mountain", "265a", Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
-
-        cards.add(new SetCardInfo("Mountain", "269b", Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", "266a", Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", "267a", Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", "268a", Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", "269a", Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Mountain", "265b", Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Mountain", "266b", Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Mountain", "267b", Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Mountain", "268b", Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 265, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 266, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 267, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 268, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 269, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Munda, Ambush Leader", 215, Rarity.RARE, mage.cards.m.MundaAmbushLeader.class));
         cards.add(new SetCardInfo("Murasa Ranger", 178, Rarity.UNCOMMON, mage.cards.m.MurasaRanger.class));
         cards.add(new SetCardInfo("Murk Strider", 62, Rarity.COMMON, mage.cards.m.MurkStrider.class));
@@ -205,8 +204,8 @@ public final class BattleForZendikar extends ExpansionSet {
         cards.add(new SetCardInfo("Nirkana Assassin", 118, Rarity.COMMON, mage.cards.n.NirkanaAssassin.class));
         cards.add(new SetCardInfo("Nissa's Renewal", 180, Rarity.RARE, mage.cards.n.NissasRenewal.class));
         cards.add(new SetCardInfo("Noyan Dar, Roil Shaper", 216, Rarity.RARE, mage.cards.n.NoyanDarRoilShaper.class));
-        cards.add(new SetCardInfo("Oblivion Sower", 11, Rarity.MYTHIC, mage.cards.o.OblivionSower.class));
         cards.add(new SetCardInfo("Ob Nixilis Reignited", 119, Rarity.MYTHIC, mage.cards.o.ObNixilisReignited.class));
+        cards.add(new SetCardInfo("Oblivion Sower", 11, Rarity.MYTHIC, mage.cards.o.OblivionSower.class));
         cards.add(new SetCardInfo("Omnath, Locus of Rage", 217, Rarity.MYTHIC, mage.cards.o.OmnathLocusOfRage.class));
         cards.add(new SetCardInfo("Ondu Champion", 149, Rarity.COMMON, mage.cards.o.OnduChampion.class));
         cards.add(new SetCardInfo("Ondu Greathorn", 40, Rarity.COMMON, mage.cards.o.OnduGreathorn.class));
@@ -220,15 +219,15 @@ public final class BattleForZendikar extends ExpansionSet {
         cards.add(new SetCardInfo("Pathway Arrows", 225, Rarity.UNCOMMON, mage.cards.p.PathwayArrows.class));
         cards.add(new SetCardInfo("Pilgrim's Eye", 226, Rarity.UNCOMMON, mage.cards.p.PilgrimsEye.class));
         cards.add(new SetCardInfo("Plains", "250a", Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Plains", "254b", Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", "251a", Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", "252a", Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", "253a", Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", "254a", Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Plains", "250b", Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Plains", "251b", Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Plains", "252b", Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Plains", "253b", Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 250, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 251, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 252, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 253, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 254, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Planar Outburst", 42, Rarity.RARE, mage.cards.p.PlanarOutburst.class));
         cards.add(new SetCardInfo("Plated Crusher", 183, Rarity.UNCOMMON, mage.cards.p.PlatedCrusher.class));
         cards.add(new SetCardInfo("Plummet", 184, Rarity.COMMON, mage.cards.p.Plummet.class));
@@ -246,14 +245,14 @@ public final class BattleForZendikar extends ExpansionSet {
         cards.add(new SetCardInfo("Retreat to Kazandu", 186, Rarity.UNCOMMON, mage.cards.r.RetreatToKazandu.class));
         cards.add(new SetCardInfo("Retreat to Valakut", 153, Rarity.UNCOMMON, mage.cards.r.RetreatToValakut.class));
         cards.add(new SetCardInfo("Rising Miasma", 122, Rarity.UNCOMMON, mage.cards.r.RisingMiasma.class));
-        cards.add(new SetCardInfo("Roilmage's Trick", 83, Rarity.COMMON, mage.cards.r.RoilmagesTrick.class));
         cards.add(new SetCardInfo("Roil Spout", 219, Rarity.UNCOMMON, mage.cards.r.RoilSpout.class));
         cards.add(new SetCardInfo("Roil's Retribution", 45, Rarity.UNCOMMON, mage.cards.r.RoilsRetribution.class));
+        cards.add(new SetCardInfo("Roilmage's Trick", 83, Rarity.COMMON, mage.cards.r.RoilmagesTrick.class));
         cards.add(new SetCardInfo("Rolling Thunder", 154, Rarity.UNCOMMON, mage.cards.r.RollingThunder.class));
         cards.add(new SetCardInfo("Rot Shambler", 187, Rarity.UNCOMMON, mage.cards.r.RotShambler.class));
+        cards.add(new SetCardInfo("Ruin Processor", 12, Rarity.COMMON, mage.cards.r.RuinProcessor.class));
         cards.add(new SetCardInfo("Ruination Guide", 64, Rarity.UNCOMMON, mage.cards.r.RuinationGuide.class));
         cards.add(new SetCardInfo("Ruinous Path", 123, Rarity.RARE, mage.cards.r.RuinousPath.class));
-        cards.add(new SetCardInfo("Ruin Processor", 12, Rarity.COMMON, mage.cards.r.RuinProcessor.class));
         cards.add(new SetCardInfo("Rush of Ice", 84, Rarity.COMMON, mage.cards.r.RushOfIce.class));
         cards.add(new SetCardInfo("Salvage Drone", 65, Rarity.COMMON, mage.cards.s.SalvageDrone.class));
         cards.add(new SetCardInfo("Sanctum of Ugin", 242, Rarity.RARE, mage.cards.s.SanctumOfUgin.class));
@@ -283,20 +282,20 @@ public final class BattleForZendikar extends ExpansionSet {
         cards.add(new SetCardInfo("Spawning Bed", 248, Rarity.UNCOMMON, mage.cards.s.SpawningBed.class));
         cards.add(new SetCardInfo("Spell Shrivel", 66, Rarity.COMMON, mage.cards.s.SpellShrivel.class));
         cards.add(new SetCardInfo("Stasis Snare", 50, Rarity.UNCOMMON, mage.cards.s.StasisSnare.class));
-        cards.add(new SetCardInfo("Stonefury", 156, Rarity.COMMON, mage.cards.s.Stonefury.class));
         cards.add(new SetCardInfo("Stone Haven Medic", 51, Rarity.COMMON, mage.cards.s.StoneHavenMedic.class));
+        cards.add(new SetCardInfo("Stonefury", 156, Rarity.COMMON, mage.cards.s.Stonefury.class));
         cards.add(new SetCardInfo("Sunken Hollow", 249, Rarity.RARE, mage.cards.s.SunkenHollow.class));
         cards.add(new SetCardInfo("Sure Strike", 157, Rarity.COMMON, mage.cards.s.SureStrike.class));
         cards.add(new SetCardInfo("Swamp", "260a", Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Swamp", "264b", Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", "261a", Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", "262a", Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", "263a", Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", "264a", Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Swamp", "260b", Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Swamp", "261b", Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Swamp", "262b", Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Swamp", "263b", Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 260, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 261, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 262, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 263, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 264, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swarm Surge", 100, Rarity.COMMON, mage.cards.s.SwarmSurge.class));
         cards.add(new SetCardInfo("Swell of Growth", 191, Rarity.COMMON, mage.cards.s.SwellOfGrowth.class));
         cards.add(new SetCardInfo("Sylvan Scrying", 192, Rarity.UNCOMMON, mage.cards.s.SylvanScrying.class));

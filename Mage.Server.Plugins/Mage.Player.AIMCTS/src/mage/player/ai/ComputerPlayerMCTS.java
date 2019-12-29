@@ -1,4 +1,3 @@
-
 package mage.player.ai;
 
 import mage.constants.PhaseStep;

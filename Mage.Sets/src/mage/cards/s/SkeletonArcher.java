@@ -1,18 +1,18 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class SkeletonArcher extends CardImpl {
@@ -26,7 +26,7 @@ public final class SkeletonArcher extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Skeleton Archer enters the battlefield, it deals 1 damage to any target.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(1), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(1, "it"), false);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

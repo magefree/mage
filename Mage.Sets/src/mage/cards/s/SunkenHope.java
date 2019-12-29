@@ -27,7 +27,7 @@ public final class SunkenHope extends CardImpl {
     public SunkenHope(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
 
-        // At the beginning of each player's upkeep, that player returns a creature he or she controls to its owner's hand.
+        // At the beginning of each player's upkeep, that player returns a creature they control to its owner's hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SunkenHopeReturnToHandEffect(), TargetController.ANY, false, true));
     }
 
@@ -45,7 +45,7 @@ class SunkenHopeReturnToHandEffect extends OneShotEffect {
 
     public SunkenHopeReturnToHandEffect() {
         super(Outcome.ReturnToHand);
-        staticText = "that player returns a creature he or she controls to its owner's hand";
+        staticText = "that player returns a creature they control to its owner's hand";
     }
 
     public SunkenHopeReturnToHandEffect(final SunkenHopeReturnToHandEffect effect) {

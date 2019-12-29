@@ -1,9 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -18,8 +14,11 @@ import mage.players.Player;
 import mage.players.PlayerList;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class TemptWithReflections extends CardImpl {
@@ -81,7 +80,7 @@ class TemptWithReflectionsEffect extends OneShotEffect {
                     }
                     game.informPlayers((player.getLogName() + decision + permanent.getName()));
                 }
-                player = playerList.getNext(game);
+                player = playerList.getNext(game, false);
             } while (!player.getId().equals(game.getActivePlayerId()));
 
             for (UUID playerId : playersSaidYes) {

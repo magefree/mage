@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 
 /**
  *
@@ -24,7 +23,7 @@ public final class ImperialCeratops extends CardImpl {
         this.toughness = new MageInt(5);
 
         // <i>Enrage</i> &mdash; Whenever Imperial Ceratops is dealt damage, you gain 2 life.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), false, true));
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(new GainLifeEffect(2), false, true));
     }
 
     public ImperialCeratops(final ImperialCeratops card) {

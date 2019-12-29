@@ -1,9 +1,7 @@
-
 package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.CyclingDiscardCost;
@@ -70,7 +68,8 @@ class NewPerspectivesCostModificationEffect extends CostModificationEffectImpl {
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         Player controller = game.getPlayer(abilityToModify.getControllerId());
         if (controller != null) {
-            if ((abilityToModify instanceof ActivatedAbility && ((ActivatedAbility) abilityToModify).isCheckPlayableMode()) || controller.chooseUse(Outcome.PlayForFree, "Pay {0} to cycle?", source, game)) {
+            if (game.inCheckPlayableState()
+                    || controller.chooseUse(Outcome.PlayForFree, "Pay {0} to cycle?", source, game)) {
                 abilityToModify.getCosts().clear();
                 abilityToModify.getManaCostsToPay().clear();
                 abilityToModify.getCosts().add(new CyclingDiscardCost());

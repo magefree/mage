@@ -1,16 +1,14 @@
-
-
 package mage.game.permanent.token;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
- *
  * @author LoneFox
  */
 public final class GoatToken extends TokenImpl {
@@ -18,7 +16,7 @@ public final class GoatToken extends TokenImpl {
     static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("EVE", "M13", "M14", "C14"));
+        tokenImageSets.addAll(Arrays.asList("EVE", "M13", "M14", "C14", "ELD"));
     }
 
     public GoatToken() {
@@ -46,5 +44,5 @@ public final class GoatToken extends TokenImpl {
 
     public GoatToken copy() {
         return new GoatToken(this);
-    }   
+    }
 }

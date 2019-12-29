@@ -90,6 +90,7 @@ public class Legacy extends Constructed {
         banned.add("Wheel of Fortune");
         banned.add("Windfall");
         banned.add("Worldknit");
+        banned.add("Wrenn and Six");
         banned.add("Yawgmoth's Bargain");
         banned.add("Yawgmoth's Will");
 

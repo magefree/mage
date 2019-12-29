@@ -1,8 +1,6 @@
-
 package mage.abilities.costs;
 
 /**
- *
  * @author LevelX2
  */
 public class OptionalAdditionalCostImpl extends CostsImpl<Cost> implements OptionalAdditionalCost {
@@ -32,9 +30,10 @@ public class OptionalAdditionalCostImpl extends CostsImpl<Cost> implements Optio
         super(cost);
         this.name = cost.name;
         this.reminderText = cost.reminderText;
+        this.delimiter = cost.delimiter;
         this.activated = cost.activated;
         this.activatedCounter = cost.activatedCounter;
-        this.delimiter = cost.delimiter;
+        this.repeatable = cost.repeatable;
     }
 
     @Override
@@ -77,7 +76,7 @@ public class OptionalAdditionalCostImpl extends CostsImpl<Cost> implements Optio
      * message.
      *
      * @param position - if there are multiple costs, it's the postion the cost
-     * is set (starting with 0)
+     *                 is set (starting with 0)
      * @return
      */
     @Override
@@ -95,7 +94,6 @@ public class OptionalAdditionalCostImpl extends CostsImpl<Cost> implements Optio
 
     /**
      * If the player intends to pay the cost, the cost will be activated
-     *
      */
     @Override
     public void activate() {
@@ -105,7 +103,6 @@ public class OptionalAdditionalCostImpl extends CostsImpl<Cost> implements Optio
 
     /**
      * Reset the activate and count information
-     *
      */
     @Override
     public void reset() {
@@ -145,6 +142,7 @@ public class OptionalAdditionalCostImpl extends CostsImpl<Cost> implements Optio
 
     /**
      * Returns the number of times the cost was activated
+     *
      * @return
      */
     @Override

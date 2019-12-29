@@ -5,7 +5,7 @@ import mage.constants.RangeOfInfluence;
 import mage.game.Game;
 import mage.game.GameException;
 import mage.game.TwoPlayerDuel;
-import mage.game.mulligan.VancouverMulligan;
+import mage.game.mulligan.MulliganType;
 import org.mage.test.player.TestComputerPlayer7;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl;
@@ -21,7 +21,7 @@ public abstract class CardTestPlayerBaseAI extends CardTestPlayerAPIImpl {
 
     @Override
     protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
-        Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ONE, new VancouverMulligan(0), 20);
+        Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ONE, MulliganType.GAME_DEFAULT.getMulligan(0), 20);
 
         playerA = createPlayer(game, playerA, "PlayerA");
         playerB = createPlayer(game, playerB, "PlayerB");
@@ -36,9 +36,5 @@ public abstract class CardTestPlayerBaseAI extends CardTestPlayerAPIImpl {
             return testPlayer;
         }
         return super.createPlayer(name, rangeOfInfluence);
-    }
-
-    public void setAISkill(int skill) {
-        this.skill = skill;
     }
 }

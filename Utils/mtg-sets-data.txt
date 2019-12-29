@@ -33,6 +33,7 @@ Commander 2015 Edition|C15|
 Commander 2016 Edition|C16|
 Commander 2017 Edition|C17|
 Commander 2018 Edition|C18|
+Commander 2019 Edition|C19|
 Champions of Kamigawa|CHK|
 Chronicles|CHR|
 Clash Pack|CLASH|
@@ -127,6 +128,7 @@ Magic 2013|M13|
 Magic 2014|M14|
 Magic 2015|M15|
 Core Set 2019|M19|
+Core Set 2020|M20|
 Masters 25|A25|
 Magic: The Gathering-Commander|CMD|
 Magic: The Gathering-Conspiracy|CNS|
@@ -137,6 +139,8 @@ Masters Edition III|ME3|
 Masters Edition IV|ME4|
 Masters Edition|MED|
 Game Day|MGDC|
+Game Night|GNT|
+Game Night 2019|GN2|
 Mirage|MIR|
 Launch Party|MLP|
 Modern Horizons|MH1|
@@ -181,7 +185,10 @@ Scars of Mirrodin|SOM|
 Stronghold|STH|
 Super Series|SUS|
 Theros|THS|
+Theros Beyond Death|THB|
 Tempest|TMP|
+Throne of Eldraine|ELD|
+Throne of Eldraine Collector's Edition|CELD|
 Torment|TOR|
 Tempest Remastered|TPR|
 Time Spiral "Timeshifted"|TSB|

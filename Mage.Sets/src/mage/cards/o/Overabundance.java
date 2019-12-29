@@ -22,7 +22,7 @@ public final class Overabundance extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{G}");
         
 
-        // Whenever a player taps a land for mana, that player adds one mana of any type that land produced, and Overabundance deals 1 damage to him or her.
+        // Whenever a player taps a land for mana, that player adds one mana of any type that land produced, and Overabundance deals 1 damage to that player.
         this.addAbility(new TapForManaAllTriggeredManaAbility(
                 new AddManaOfAnyTypeProducedEffect(),
                 new FilterLandPermanent( "a player taps a land"),

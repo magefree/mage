@@ -68,7 +68,7 @@ class SnarespinnerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} blocks a creature with flying, {} gets +2/+0 until end of turn";
+        return "Whenever {this} blocks a creature with flying, {this} gets +2/+0 until end of turn";
     }
 
     @Override

@@ -32,7 +32,7 @@ public final class ParallaxTide extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetForSourceEffect(), new RemoveCountersSourceCost(CounterType.FADE.createInstance()));
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
-        // When Parallax Tide leaves the battlefield, each player returns to the battlefield all cards he or she owns exiled with Parallax Tide.
+        // When Parallax Tide leaves the battlefield, each player returns to the battlefield all cards they own exiled with Parallax Tide.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), splitCard));
     }
 

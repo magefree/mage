@@ -18,6 +18,7 @@ import mage.util.SubTypeList;
 import java.io.Serializable;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 public interface MageObject extends MageItem, Serializable {
@@ -32,13 +33,13 @@ public interface MageObject extends MageItem, Serializable {
 
     void setName(String name);
 
-    EnumSet<CardType> getCardType();
+    Set<CardType> getCardType();
 
     SubTypeList getSubtype(Game game);
 
     boolean hasSubtype(SubType subtype, Game game);
 
-    EnumSet<SuperType> getSuperType();
+    Set<SuperType> getSuperType();
 
     Abilities<Ability> getAbilities();
 
@@ -199,7 +200,7 @@ public interface MageObject extends MageItem, Serializable {
 
     void setIsAllCreatureTypes(boolean value);
 
-    default void addCardTypes(EnumSet<CardType> cardType) {
+    default void addCardTypes(Set<CardType> cardType) {
         getCardType().addAll(cardType);
     }
 

@@ -1,6 +1,6 @@
-
 package mage.cards.g;
 
+import java.util.*;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCosts;
@@ -15,12 +15,10 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-
-import java.util.*;
 
 /**
  *
@@ -29,7 +27,7 @@ import java.util.*;
 public final class GhastlyConscription extends CardImpl {
 
     public GhastlyConscription(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{B}{B}");
 
         // Exile all creature cards from target player's graveyard in a face-down pile, shuffle that pile, then manifest those cards.<i> (To manifest a card, put it onto the battlefield face down as a 2/2 creature. Turn it face up at any time for its mana cost if it's a creature card.)</i>
         this.getSpellAbility().addEffect(new GhastlyConscriptionEffect());
@@ -68,7 +66,7 @@ class GhastlyConscriptionEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (controller != null && targetPlayer != null) {
             List<Card> cardsToManifest = new ArrayList<>();
-            for (Card card : targetPlayer.getGraveyard().getCards(new FilterCreatureCard(), game)) {
+            for (Card card : targetPlayer.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game)) {
                 cardsToManifest.add(card);
                 controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
             }

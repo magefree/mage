@@ -14,6 +14,7 @@ import mage.abilities.keyword.ProwessAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterInstantOrSorceryCard;
 
 /**
@@ -29,7 +30,7 @@ public final class BedlamReveler extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Bedlam Reveler costs {1} less to cast for each instant or sorcery card in your graveyard.
-        Ability ability = new SimpleStaticAbility(Zone.ALL, new SourceCostReductionForEachCardInGraveyardEffect(new FilterInstantOrSorceryCard()));
+        Ability ability = new SimpleStaticAbility(Zone.ALL, new SourceCostReductionForEachCardInGraveyardEffect(StaticFilters.FILTER_CARD_INSTANT_AND_SORCERY));
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
 

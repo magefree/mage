@@ -1,7 +1,5 @@
-
 package mage.abilities.keyword;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -13,25 +11,20 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.Card;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SpellAbilityType;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.token.TokenImpl;
-import mage.game.permanent.token.Token;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 import org.apache.log4j.Logger;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class AwakenAbility extends SpellAbility {
@@ -44,12 +37,16 @@ public class AwakenAbility extends SpellAbility {
     private int awakenValue;
 
     public AwakenAbility(Card card, int awakenValue, String awakenCosts) {
-        super(new ManaCostsImpl<>(awakenCosts), card.getName() + " with awaken", Zone.HAND, SpellAbilityType.BASE_ALTERNATE);
-        this.getCosts().addAll(card.getSpellAbility().getCosts().copy());
-        this.getEffects().addAll(card.getSpellAbility().getEffects().copy());
-        this.getTargets().addAll(card.getSpellAbility().getTargets().copy());
-        this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
-        this.timing = card.getSpellAbility().getTiming();
+        super(card.getSpellAbility());
+        this.newId();
+        this.setCardName(card.getName() + " with awaken");
+        zone = Zone.HAND;
+        spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
+
+        this.getManaCosts().clear();
+        this.getManaCostsToPay().clear();
+        this.addManaCost(new ManaCostsImpl<>(awakenCosts));
+
         this.addTarget(new TargetControlledPermanent(new FilterControlledLandPermanent(filterMessage)));
         this.addEffect(new AwakenEffect());
         this.awakenValue = awakenValue;
@@ -57,7 +54,6 @@ public class AwakenAbility extends SpellAbility {
                 + " <i>(If you cast this spell for " + awakenCosts + ", also put "
                 + CardUtil.numberToText(awakenValue, "a")
                 + " +1/+1 counters on target land you control and it becomes a 0/0 Elemental creature with haste. It's still a land.)</i>";
-
     }
 
     public AwakenAbility(final AwakenAbility ability) {
@@ -116,17 +112,17 @@ public class AwakenAbility extends SpellAbility {
                     return effect.apply(game, source);
                 }
             } else // source should never be null, but we are seeing a lot of NPEs from this section
-            if (source == null) {
-                logger.fatal("Source was null in AwakenAbility: Create a bug report or fix the source code");
-            } else if (source.getTargets() == null) {
-                MageObject sourceObj = source.getSourceObject(game);
-                if (sourceObj != null) {
-                    Class<? extends MageObject> sourceClass = sourceObj.getClass();
-                    if (sourceClass != null) {
-                        logger.fatal("getTargets was null in AwakenAbility for " + sourceClass.toString() + " : Create a bug report or fix the source code");
+                if (source == null) {
+                    logger.fatal("Source was null in AwakenAbility: Create a bug report or fix the source code");
+                } else if (source.getTargets() == null) {
+                    MageObject sourceObj = source.getSourceObject(game);
+                    if (sourceObj != null) {
+                        Class<? extends MageObject> sourceClass = sourceObj.getClass();
+                        if (sourceClass != null) {
+                            logger.fatal("getTargets was null in AwakenAbility for " + sourceClass.toString() + " : Create a bug report or fix the source code");
+                        }
                     }
                 }
-            }
             return true;
         }
     }

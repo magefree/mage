@@ -48,6 +48,7 @@ public class VerifyCardDataTest {
     private static final boolean CHECK_SOURCE_TOKENS = false;
 
     private static final HashMap<String, Set<String>> skipCheckLists = new HashMap<>();
+    private static final Set<String> subtypesToIgnore = new HashSet<>();
 
     private static void skipListCreate(String listName) {
         skipCheckLists.put(listName, new LinkedHashSet<>());
@@ -69,6 +70,7 @@ public class VerifyCardDataTest {
         skipListAddName("PT", "UST", "Garbage Elemental");
         skipListAddName("PT", "UST", "Infinity Elemental");
         skipListAddName("PT", "UNH", "Old Fogey");
+        skipListAddName("PT", "MH1", "Ruination Rioter");
 
         // color
         skipListCreate("COLOR");
@@ -355,6 +357,23 @@ public class VerifyCardDataTest {
             }
 
             // TODO: add test to check num cards (hasBasicLands and numLand > 0)
+        }
+
+        // 3. wrong snow land info
+        for (ExpansionSet set : sets) {
+            boolean needSnow = CardRepository.instance.haveSnowLands(set.getCode());
+            boolean haveSnow = false;
+            for (ExpansionSet.SetCardInfo card : set.getSetCardInfo()) {
+                if (card.getName().startsWith("Snow-Covered ")) {
+                    haveSnow = true;
+                    break;
+                }
+            }
+            if (needSnow != haveSnow) {
+                errorsList.add("error, found wrong snow lands info in set " + set.getCode() + ": "
+                        + (haveSnow ? "set have snow card" : "set haven't snow card")
+                        + ", but xmage think that it " + (needSnow ? "have" : "haven't"));
+            }
         }
 
         // TODO: add test to check num cards for rarity (rarityStats > 0 and numRarity > 0)
@@ -700,8 +719,20 @@ public class VerifyCardDataTest {
             }
         }
 
-        if (!eqSet(card.getSubtype(null).stream().map(SubType::toString).collect(Collectors.toSet()), expected)) {
-            fail(card, "subtypes", card.getSubtype(null) + " != " + expected);
+        // Remove subtypes that need to be ignored
+        Collection<String> actual = card
+                .getSubtype(null)
+                .stream()
+                .map(SubType::toString)
+                .collect(Collectors.toSet());
+        actual.removeIf(subtypesToIgnore::contains);
+
+        if (expected != null) {
+            expected.removeIf(subtypesToIgnore::contains);
+        }
+
+        if (!eqSet(actual, expected)) {
+            fail(card, "subtypes", actual + " != " + expected);
         }
     }
 
@@ -760,12 +791,15 @@ public class VerifyCardDataTest {
         String newRule = rule;
 
         // remove reminder text
-        newRule = newRule.replaceAll("(?i)<i>\\(.+\\)</i>", "");
+        newRule = newRule.replaceAll("(?i) <i>\\(.+\\)</i>", "");
+        newRule = newRule.replaceAll("(?i) \\(.+\\)", "");
 
         // replace special text and symbols
         newRule = newRule
                 .replace("{this}", cardName)
-                .replace("&mdash;", "—");
+                .replace("{source}", cardName)
+                .replace("−", "-")
+                .replace("&mdash;", "-");
 
         // remove html marks
         newRule = newRule
@@ -781,7 +815,7 @@ public class VerifyCardDataTest {
         // debug only: show direct card info (takes it from class file, not from db repository)
         String cardName = "Essence Capture";
         CardScanner.scan();
-        CardSetInfo testSet = new CardSetInfo("test", "test", "123", Rarity.COMMON);
+        CardSetInfo testSet = new CardSetInfo(cardName, "test", "123", Rarity.COMMON);
         CardInfo cardInfo = CardRepository.instance.findCard(cardName);
         Card card = CardImpl.createCard(cardInfo.getClassName(), testSet);
         card.getRules().stream().forEach(System.out::println);
@@ -789,7 +823,7 @@ public class VerifyCardDataTest {
 
     private void checkWrongAbilitiesText(Card card, JsonCard ref) {
         // checks missing or wrong text
-        if (!card.getExpansionSetCode().equals("WAR")) {
+        if (!card.getExpansionSetCode().equals("M20")) {
             return;
         }
 
@@ -813,6 +847,7 @@ public class VerifyCardDataTest {
             cardRules[i] = prepareRule(card.getName(), cardRules[i]);
         }
 
+        boolean isFine = true;
         for (String cardRule : cardRules) {
             boolean isAbilityFounded = false;
             for (String refRule : refRules) {
@@ -823,8 +858,28 @@ public class VerifyCardDataTest {
             }
 
             if (!isAbilityFounded) {
+                isFine = false;
                 warn(card, "card ability can't be found in ref [" + card.getName() + ": " + cardRule + "]");
             }
+        }
+
+        // extra message for easy checks
+        if (!isFine) {
+            System.out.println();
+
+            System.out.println("Wrong card " + card.getName());
+            Arrays.sort(cardRules);
+            for (String s : cardRules) {
+                System.out.println(s);
+            }
+
+            System.out.println("ref:");
+            Arrays.sort(refRules);
+            for (String s : refRules) {
+                System.out.println(s);
+            }
+
+            System.out.println();
         }
     }
 

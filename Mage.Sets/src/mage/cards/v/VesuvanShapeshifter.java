@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import mage.MageInt;
@@ -77,8 +76,6 @@ class VesuvanShapeShifterFaceUpApplier extends ApplyToPermanent {
         Effect effect = new VesuvanShapeshifterFaceDownEffect();
         Ability ability = new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, true);
         permanent.getAbilities().add(ability);
-        // Why is this needed?
-        permanent.addAbility(new MorphAbility(permanent, new ManaCostsImpl("{1}{U}")), permanent.getId(), game);
         return true;
     }
 

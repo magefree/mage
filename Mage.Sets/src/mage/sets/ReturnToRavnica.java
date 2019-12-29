@@ -18,7 +18,7 @@ public final class ReturnToRavnica extends ExpansionSet {
     }
 
     private ReturnToRavnica() {
-        super("Return to Ravnica", "RTR", ExpansionSet.buildDate(2012, 9, 29), SetType.EXPANSION);
+        super("Return to Ravnica", "RTR", ExpansionSet.buildDate(2012, 10, 5), SetType.EXPANSION);
         this.blockName = "Return to Ravnica";
         this.hasBoosters = true;
         this.numBoosterLands = 1;

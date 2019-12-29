@@ -1,21 +1,18 @@
-
-
 package mage.view;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
 /**
- *
  * @author Plopman
  */
-public interface CommandObjectView extends Serializable {
-    public String getExpansionSetCode();
+public interface CommandObjectView extends SelectableObjectView {
 
-    public String getName();
+    String getExpansionSetCode();
 
-    public UUID getId();
+    String getName();
 
-    public List<String> getRules();
+    UUID getId();
+
+    List<String> getRules();
 }

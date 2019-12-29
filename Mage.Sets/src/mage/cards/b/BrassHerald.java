@@ -69,7 +69,7 @@ class BrassHeraldEntersEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         FilterCard filter = new FilterCard("creature cards of the chosen type");
-        filter.add(new ChosenSubtypePredicate());
+        filter.add(ChosenSubtypePredicate.instance);
         return new RevealLibraryPutIntoHandEffect(4, filter, Zone.LIBRARY).apply(game, source);
     }
 }

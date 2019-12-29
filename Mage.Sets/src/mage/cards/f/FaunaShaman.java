@@ -1,5 +1,3 @@
-
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -13,10 +11,10 @@ import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
 
@@ -27,7 +25,7 @@ import mage.target.common.TargetCardInLibrary;
 public final class FaunaShaman extends CardImpl {
 
     public FaunaShaman(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.SHAMAN);
 
@@ -36,10 +34,10 @@ public final class FaunaShaman extends CardImpl {
 
         // {G}, {tap}, Discard a creature card: Search your library for a creature card, reveal it, and put it into your hand. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(new FilterCreatureCard()), true),
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_CREATURE), true),
                 new ColoredManaCost(ColoredManaSymbol.G));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new DiscardTargetCost(new TargetCardInHand(new FilterCreatureCard())));
+        ability.addCost(new DiscardTargetCost(new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE)));
         this.addAbility(ability);
     }
 

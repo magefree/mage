@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import java.util.UUID;
@@ -32,9 +31,11 @@ public final class HarnessTheStorm extends CardImpl {
     public HarnessTheStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
-        // Whenever you cast an instant or sorcery spell from your hand, you may cast target card with the same name as that spell from your graveyard.
+        // Whenever you cast an instant or sorcery spell from your hand, you may cast 
+        // target card with the same name as that spell from your graveyard.
         this.addAbility(new HarnessTheStormTriggeredAbility(new HarnessTheStormEffect(),
-                new FilterInstantOrSorcerySpell("an instant or sorcery spell from your hand"), false), new CastFromHandWatcher());
+                new FilterInstantOrSorcerySpell("an instant or sorcery spell from your hand"),
+                false), new CastFromHandWatcher());
     }
 
     public HarnessTheStorm(final HarnessTheStorm card) {
@@ -87,7 +88,8 @@ class HarnessTheStormEffect extends OneShotEffect {
 
     public HarnessTheStormEffect() {
         super(Outcome.Benefit);
-        this.staticText = "you may cast target card with the same name as that spell from your graveyard. <i>(you still pay its costs.)</i>";
+        this.staticText = "you may cast target card with the same name as that "
+                + "spell from your graveyard. <i>(you still pay its costs.)</i>";
     }
 
     public HarnessTheStormEffect(final HarnessTheStormEffect effect) {
@@ -106,8 +108,11 @@ class HarnessTheStormEffect extends OneShotEffect {
         if (controller != null) {
             Card card = controller.getGraveyard().get(getTargetPointer().getFirst(game, source), game);
             if (card != null) {
-                if (controller.chooseUse(outcome, "Cast " + card.getIdName() + " from your graveyard?", source, game)) {
-                    controller.cast(card.getSpellAbility(), game, false, new MageObjectReference(source.getSourceObject(game), game));
+                if (controller.chooseUse(outcome.Benefit, "Cast " + card.getIdName() + " from your graveyard?", source, game)) {
+                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                    controller.cast(controller.chooseAbilityForCast(card, game, false),
+                            game, false, new MageObjectReference(source.getSourceObject(game), game));
+                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
                 }
             }
             return true;

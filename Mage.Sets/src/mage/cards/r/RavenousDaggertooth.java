@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 
 /**
  *
@@ -26,7 +25,7 @@ public final class RavenousDaggertooth extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Enrage - Whenever Ravenous Daggertooth is dealt damage, you gain 2 life.
-        Ability ability = new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), false, true);
+        Ability ability = new DealtDamageToSourceTriggeredAbility(new GainLifeEffect(2), false, true);
         this.addAbility(ability);
     }
 

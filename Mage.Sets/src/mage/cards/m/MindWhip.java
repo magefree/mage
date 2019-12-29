@@ -41,11 +41,11 @@ public final class MindWhip extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // At the beginning of the upkeep of enchanted creature's controller, that player may pay {3}. If he or she doesn't, Mind Whip deals 2 damage to that player and you tap that creature.
+        // At the beginning of the upkeep of enchanted creature's controller, that player may pay {3}. If they don't, Mind Whip deals 2 damage to that player and you tap that creature.
         Effect effect = new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new MindWhipEffect(),
                 new ManaCostsImpl("{3}"),
                 "");
-        effect.setText("that player may pay {3}. If he or she doesn't, {this} deals 2 damage to that player and you tap that creature.");
+        effect.setText("that player may pay {3}. If they don't, {this} deals 2 damage to that player and you tap that creature.");
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 effect,
                 TargetController.CONTROLLER_ATTACHED_TO, false));

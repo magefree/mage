@@ -1,8 +1,5 @@
 package mage.cards.m;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -10,14 +7,10 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.constants.SubType;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -27,8 +20,11 @@ import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class MagusOfTheBalance extends CardImpl {
@@ -186,9 +182,8 @@ class MagusOfTheBalanceEffect extends OneShotEffect {
                 if (player != null && cardsToDiscard.get(playerId) != null) {
                     for (UUID cardId : cardsToDiscard.get(playerId)) {
                         Card card = game.getCard(cardId);
-                        if (card != null) {
-                            player.discard(card, source, game);
-                        }
+                        player.discard(card, source, game);
+
                     }
                 }
             }

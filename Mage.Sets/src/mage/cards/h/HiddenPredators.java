@@ -1,17 +1,11 @@
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -19,8 +13,9 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.TokenImpl;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class HiddenPredators extends CardImpl {
@@ -80,11 +75,7 @@ class HiddenPredatorsStateTriggeredAbility extends StateTriggeredAbility {
     @Override
     public boolean canTrigger(Game game) {
         //20100716 - 603.8
-        Boolean triggered = (Boolean) game.getState().getValue(getSourceId().toString() + "triggered");
-        if (triggered == null) {
-            triggered = Boolean.FALSE;
-        }
-        return !triggered;
+        return !Boolean.TRUE.equals(game.getState().getValue(getSourceId().toString() + "triggered"));
     }
 
     @Override

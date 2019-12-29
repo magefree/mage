@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -29,7 +28,9 @@ public final class DescendantsPath extends CardImpl {
     public DescendantsPath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
-        // At the beginning of your upkeep, reveal the top card of your library. If it's a creature card that shares a creature type with a creature you control, you may cast that card without paying its mana cost. Otherwise, put that card on the bottom of your library.
+        // At the beginning of your upkeep, reveal the top card of your library. 
+        // If it's a creature card that shares a creature type with a creature you control, 
+        // you may cast that card without paying its mana cost. Otherwise, put that card on the bottom of your library.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new DescendantsPathEffect(), TargetController.YOU, false);
         this.addAbility(ability);
     }
@@ -48,7 +49,10 @@ class DescendantsPathEffect extends OneShotEffect {
 
     public DescendantsPathEffect() {
         super(Outcome.Discard);
-        this.staticText = "reveal the top card of your library. If it's a creature card that shares a creature type with a creature you control, you may cast that card without paying its mana cost. Otherwise, put that card on the bottom of your library";
+        this.staticText = "reveal the top card of your library. If it's a creature "
+                + "card that shares a creature type with a creature you control, "
+                + "you may cast that card without paying its mana cost. Otherwise, "
+                + "put that card on the bottom of your library";
     }
 
     public DescendantsPathEffect(final DescendantsPathEffect effect) {
@@ -83,7 +87,10 @@ class DescendantsPathEffect extends OneShotEffect {
                     if (found) {
                         game.informPlayers(sourceObject.getLogName() + ": Found a creature that shares a creature type with the revealed card.");
                         if (controller.chooseUse(Outcome.Benefit, "Cast the card?", source, game)) {
-                            controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                            controller.cast(controller.chooseAbilityForCast(card, game, true),
+                                    game, true, new MageObjectReference(source.getSourceObject(game), game));
+                            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
                         } else {
                             game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " canceled casting the card.");
                             controller.getLibrary().putOnBottom(card, game);

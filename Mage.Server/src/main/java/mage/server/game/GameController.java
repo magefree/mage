@@ -60,15 +60,15 @@ public class GameController implements GameCallback {
     private ScheduledFuture<?> futureTimeout;
     protected static final ScheduledExecutorService timeoutIdleExecutor = ThreadExecutor.instance.getTimeoutIdleExecutor();
 
-    private final ConcurrentHashMap<UUID, GameSessionPlayer> gameSessions = new ConcurrentHashMap<>();
+    private final ConcurrentMap<UUID, GameSessionPlayer> gameSessions = new ConcurrentHashMap<>();
     private final ReadWriteLock gameSessionsLock = new ReentrantReadWriteLock();
 
-    private final ConcurrentHashMap<UUID, GameSessionWatcher> watchers = new ConcurrentHashMap<>();
+    private final ConcurrentMap<UUID, GameSessionWatcher> watchers = new ConcurrentHashMap<>();
     private final ReadWriteLock gameWatchersLock = new ReentrantReadWriteLock();
 
-    private final ConcurrentHashMap<UUID, PriorityTimer> timers = new ConcurrentHashMap<>();
+    private final ConcurrentMap<UUID, PriorityTimer> timers = new ConcurrentHashMap<>();
 
-    private final ConcurrentHashMap<UUID, UUID> userPlayerMap;
+    private final ConcurrentMap<UUID, UUID> userPlayerMap;
     private final UUID gameSessionId;
     private final Game game;
     private final UUID chatId;
@@ -82,7 +82,7 @@ public class GameController implements GameCallback {
     private int turnsToRollback;
     private int requestsOpen;
 
-    public GameController(Game game, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId, UUID choosingPlayerId, GameOptions gameOptions) {
+    public GameController(Game game, ConcurrentMap<UUID, UUID> userPlayerMap, UUID tableId, UUID choosingPlayerId, GameOptions gameOptions) {
         gameSessionId = UUID.randomUUID();
         this.userPlayerMap = userPlayerMap;
         chatId = ChatManager.instance.createChatSession("Game " + game.getId());
@@ -235,7 +235,7 @@ public class GameController implements GameCallback {
 
     /**
      * We create a timer that will run every 250 ms individually for a player
-     * decreasing his internal game counter. Later on this counter is used to
+     * decreasing their internal game counter. Later on this counter is used to
      * get time left to play the whole match.
      * <p>
      * What we also do here is passing Action to PriorityTimer that is the
@@ -596,7 +596,9 @@ public class GameController implements GameCallback {
                     if (gameSession != null) {
                         UUID requestingPlayerId = getPlayerId(userIdRequester);
                         if (requestingPlayerId == null || !requestingPlayerId.equals(grantingPlayer.getId())) { // don't allow request for your own cards
-                            if (grantingPlayer.isRequestToShowHandCardsAllowed()) {
+                            if (grantingPlayer.isPlayerAllowedToRequestHand(game.getId(), requestingPlayerId)) {
+                                // one time request per user restrict, enable request will reset users list and allows again
+                                grantingPlayer.addPlayerToRequestedHandList(game.getId(), requestingPlayerId);
                                 gameSession.requestPermissionToSeeHandCards(userIdRequester);
                             } else {
                                 // player does not allow the request

@@ -1,4 +1,3 @@
-
 package mage.abilities.keyword;
 
 import mage.abilities.SpellAbility;
@@ -10,7 +9,7 @@ import mage.constants.TimingRule;
 
 /**
  * 702.94. Overload
- *
+ * <p>
  * 702.94a. Overload is a keyword that represents two static abilities: one that
  * functions from any zone in which the spell with overload can be cast and
  * another that functions while the card is on the stack. Overload [cost] means
@@ -19,28 +18,23 @@ import mage.constants.TimingRule;
  * instances of the word 'target' with the word 'each.'" Using the overload
  * ability follows the rules for paying alternative costs in rules 601.2b and
  * 601.2e-g.
- *
+ * <p>
  * 702.94b. If a player chooses to pay the overload cost of a spell, that spell
  * won't require any targets. It may affect objects that couldn't be chosen as
  * legal targets if the spell were cast without its overload cost being paid.
- *
+ * <p>
  * 702.94c. Overload's second ability creates a text-changing effect. See rule
  * 612, "Text-Changing Effects."
  *
  * @author LevelX2
- *
  */
 public class OverloadAbility extends SpellAbility {
 
     public OverloadAbility(Card card, Effect effect, ManaCosts costs) {
-        this(card, effect, costs, TimingRule.INSTANT);
-    }
-
-    public OverloadAbility(Card card, Effect effect, ManaCosts costs, TimingRule timingRule) {
         super(costs, card.getName() + " with overload");
         this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
         this.addEffect(effect);
-        this.timing = timingRule;
+        this.timing = (card.isSorcery() ? TimingRule.SORCERY : TimingRule.INSTANT);
     }
 
     public OverloadAbility(final OverloadAbility ability) {

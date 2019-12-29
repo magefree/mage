@@ -21,7 +21,7 @@ public final class Biorhythm extends CardImpl {
     public Biorhythm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{G}{G}");
 
-        // Each player's life total becomes the number of creatures he or she controls.
+        // Each player's life total becomes the number of creatures they control.
         this.getSpellAbility().addEffect(new BiorhythmEffect());
     }
 
@@ -41,7 +41,7 @@ class BiorhythmEffect extends OneShotEffect {
 
     public BiorhythmEffect() {
         super(Outcome.Neutral);
-        this.staticText = "Each player's life total becomes the number of creatures he or she controls";
+        this.staticText = "Each player's life total becomes the number of creatures they control";
     }
 
     public BiorhythmEffect(final BiorhythmEffect effect) {

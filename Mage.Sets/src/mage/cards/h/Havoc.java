@@ -29,9 +29,9 @@ public final class Havoc extends CardImpl {
     public Havoc(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");
 
-        // Whenever an opponent casts a white spell, he or she loses 2 life.
+        // Whenever an opponent casts a white spell, they lose 2 life.
         Effect effect = new LoseLifeTargetEffect(2);
-        effect.setText("he or she loses 2 life");
+        effect.setText("they lose 2 life");
         this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, effect, filter, false, SetTargetPointer.PLAYER));
     }
 

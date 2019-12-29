@@ -1,6 +1,5 @@
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesTappedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -9,19 +8,16 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.PhaseStep;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class FreyalisesWinds extends CardImpl {
@@ -73,8 +69,11 @@ class FreyalisesWindsReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent permanentUntapping = game.getPermanent(event.getTargetId());
-        permanentUntapping.removeCounters(CounterType.WIND.createInstance(), game);
-        return true;
+        if (permanentUntapping != null) {
+            permanentUntapping.removeCounters(CounterType.WIND.createInstance(), game);
+            return true;
+        }
+        return false;
     }
 
     @Override

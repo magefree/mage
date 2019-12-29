@@ -1,4 +1,3 @@
-
 package mage.cards.i;
 
 import java.util.Set;
@@ -11,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -58,7 +57,7 @@ class ImmortalServitudeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
         int count = source.getManaCostsToPay().getX();
-        Set<Card> cards = you.getGraveyard().getCards(new FilterCreatureCard(), game);
+        Set<Card> cards = you.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game);
         for (Card card : cards) {
             if (card != null && card.getConvertedManaCost() == count) {
                 card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);

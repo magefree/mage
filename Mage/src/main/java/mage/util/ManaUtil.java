@@ -4,14 +4,18 @@ import mage.MageObject;
 import mage.Mana;
 import mage.ManaSymbol;
 import mage.abilities.Ability;
-import mage.abilities.costs.mana.AlternateManaPaymentAbility;
-import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaSymbols;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.mana.*;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.mana.*;
 import mage.cards.Card;
 import mage.choices.Choice;
 import mage.constants.ColoredManaSymbol;
+import mage.filter.FilterMana;
 import mage.game.Game;
+import mage.players.Player;
 
 import java.util.*;
 
@@ -26,23 +30,23 @@ public final class ManaUtil {
     /**
      * In case the choice of mana to be produced is obvious, let's discard all
      * other abilities.
-     *
+     * <p>
      * Example: Pay {W}{R}
-     *
+     * <p>
      * Land produces {W} or {G}.
-     *
+     * <p>
      * No need to ask what player wants to choose. {W} mana ability should be
      * left only.
-     *
+     * <p>
      * But we CAN do auto choice only in case we have basic mana abilities.
      * Example: we should pay {1} and we have Cavern of Souls that can produce
      * {1} or any mana of creature type choice. We can't simply auto choose {1}
      * as the second mana ability also makes spell uncounterable.
-     *
+     * <p>
      * In case we can't auto choose we'll simply return the useableAbilities map
      * back to caller without any modification.
      *
-     * @param unpaid Mana we need to pay. Can be null (it is for X costs now).
+     * @param unpaid           Mana we need to pay. Can be null (it is for X costs now).
      * @param useableAbilities List of mana abilities permanent may produce
      * @return List of mana abilities permanent may produce and are reasonable
      * for unpaid mana
@@ -430,7 +434,6 @@ public final class ManaUtil {
      * Converts a collection of mana symbols into a single condensed string e.g.
      * {1}{1}{1}{1}{1}{W} = {5}{W} {2}{B}{2}{B}{2}{B} = {6}{B}{B}{B}
      * {1}{2}{R}{U}{1}{1} = {5}{R}{U} {B}{G}{R} = {B}{G}{R}
-     *
      */
     public static String condenseManaCostString(String rawCost) {
         int total = 0;
@@ -465,5 +468,93 @@ public final class ManaUtil {
         }
         // Return the condensed string
         return sb.toString();
+    }
+
+    public static boolean isColorIdentityCompatible(FilterMana needColors, FilterMana cardColors) {
+        // colorless can be used with any color
+        return needColors != null
+                && !(cardColors.isBlack() && !needColors.isBlack()
+                || cardColors.isBlue() && !needColors.isBlue()
+                || cardColors.isGreen() && !needColors.isGreen()
+                || cardColors.isRed() && !needColors.isRed()
+                || cardColors.isWhite() && !needColors.isWhite());
+    }
+
+    public static void collectColorIdentity(FilterMana destColors, FilterMana newColors) {
+        if (newColors.isWhite()) {
+            destColors.setWhite(true);
+        }
+        if (newColors.isBlue()) {
+            destColors.setBlue(true);
+        }
+        if (newColors.isBlack()) {
+            destColors.setBlack(true);
+        }
+        if (newColors.isRed()) {
+            destColors.setRed(true);
+        }
+        if (newColors.isGreen()) {
+            destColors.setGreen(true);
+        }
+    }
+
+    /**
+     * all ability/effect code with "= new GenericManaCost" must be replaced by createManaCost call
+     */
+    public static ManaCost createManaCost(int genericManaCount, boolean payAsX) {
+        if (payAsX) {
+            VariableManaCost xCost = new VariableManaCost();
+            xCost.setAmount(genericManaCount, genericManaCount, false);
+            return xCost;
+        } else {
+            return new GenericManaCost(genericManaCount);
+        }
+    }
+
+    public static ManaCost createManaCost(DynamicValue genericManaCount, Game game, Ability sourceAbility, Effect effect) {
+        int costValue = genericManaCount.calculate(game, sourceAbility, effect);
+        if (genericManaCount instanceof ManacostVariableValue) {
+            // variable (X must be final value after all events and effects)
+            return createManaCost(costValue, true);
+        } else {
+            // static/generic
+            return createManaCost(costValue, false);
+        }
+    }
+
+    public static int playerPaysXGenericMana(boolean payAsX, String restoreContextName, Player player, Ability source, Game game) {
+        // payAsX - if your cost is X value (some mana can be used for X cost only)
+        // false: "you may pay any amount of mana"
+        // true: "counter that spell unless that player pays {X}"
+
+        int wantToPay = 0;
+        boolean payed = false;
+        if (player.canRespond()) {
+            int bookmark = game.bookmarkState();
+            player.resetStoredBookmark(game);
+
+            wantToPay = player.announceXMana(0, Integer.MAX_VALUE, "How much mana will you pay?", game, source);
+            if (wantToPay > 0) {
+                Cost cost = ManaUtil.createManaCost(wantToPay, payAsX);
+                payed = cost.pay(source, game, source.getSourceId(), player.getId(), false, null);
+            } else {
+                payed = true;
+            }
+
+            if (!payed) {
+                game.restoreState(bookmark, restoreContextName);
+                game.fireUpdatePlayersEvent();
+            } else {
+                game.removeBookmark(bookmark);
+            }
+        }
+
+        if (payed) {
+            game.informPlayers(player.getLogName() + " pays {" + wantToPay + "}.");
+            return wantToPay;
+        } else {
+            return 0;
+        }
+
     }
 }

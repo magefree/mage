@@ -1,19 +1,14 @@
-
 package mage.cards.d;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.hint.ValueHint;
 import mage.cards.*;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -21,14 +16,16 @@ import mage.target.TargetCard;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInHand;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class DiscipleOfPhenax extends CardImpl {
 
     public DiscipleOfPhenax(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
 
@@ -39,6 +36,7 @@ public final class DiscipleOfPhenax extends CardImpl {
         // from their hand equal to your devotion to black. You choose one of them. That player discards that card.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DiscipleOfPhenaxEffect(), false);
         ability.addTarget(new TargetPlayer());
+        ability.addHint(new ValueHint("Devotion to black", DiscipleOfPhenaxEffect.xValue));
         this.addAbility(ability);
 
     }
@@ -54,6 +52,8 @@ public final class DiscipleOfPhenax extends CardImpl {
 }
 
 class DiscipleOfPhenaxEffect extends OneShotEffect {
+
+    static final DynamicValue xValue = new DevotionCount(ColoredManaSymbol.B);
 
     public DiscipleOfPhenaxEffect() {
         super(Outcome.Discard);
@@ -71,7 +71,7 @@ class DiscipleOfPhenaxEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int devotion = new DevotionCount(ColoredManaSymbol.B).calculate(game, source, this);
+        int devotion = xValue.calculate(game, source, this);
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
         if (devotion > 0 && targetPlayer != null) {
             Cards revealedCards = new CardsImpl();
@@ -102,9 +102,8 @@ class DiscipleOfPhenaxEffect extends OneShotEffect {
                     yourChoice.setNotTarget(true);
                     if (you.choose(Outcome.Benefit, revealedCards, yourChoice, game)) {
                         Card card = targetPlayer.getHand().get(yourChoice.getFirstTarget(), game);
-                        if (card != null) {
-                            return targetPlayer.discard(card, source, game);
-                        }
+                        return targetPlayer.discard(card, source, game);
+
                     }
                 } else {
                     return false;

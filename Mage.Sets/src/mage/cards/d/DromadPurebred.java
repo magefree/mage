@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 
 /**
  *
@@ -25,7 +24,7 @@ public final class DromadPurebred extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Whenever Dromad Purebred is dealt damage, you gain 1 life.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), false));
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(new GainLifeEffect(1), false));
     }
 
     public DromadPurebred(final DromadPurebred card) {

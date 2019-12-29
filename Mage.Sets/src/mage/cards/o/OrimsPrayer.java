@@ -1,6 +1,5 @@
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
@@ -13,8 +12,9 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class OrimsPrayer extends CardImpl {
@@ -37,7 +37,7 @@ public final class OrimsPrayer extends CardImpl {
 }
 
 class OrimsPrayerTriggeredAbility extends TriggeredAbilityImpl {
-    
+
     int numberAttackingController = 0;
 
     public OrimsPrayerTriggeredAbility() {
@@ -73,8 +73,8 @@ class OrimsPrayerTriggeredAbility extends TriggeredAbilityImpl {
                 applied = true;
             }
         }
-        if (applied
-                && numberAttackingController > 0) {
+        if (applied && numberAttackingController > 0) {
+            this.getEffects().clear();
             this.getEffects().add(new GainLifeEffect(numberAttackingController));
         }
         return applied;

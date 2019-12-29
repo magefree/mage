@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -27,7 +26,8 @@ public final class Galvanoth extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // At the beginning of your upkeep, you may look at the top card of your library. If it's an instant or sorcery card, you may cast it without paying its mana cost.
+        // At the beginning of your upkeep, you may look at the top card of your library. 
+        // If it's an instant or sorcery card, you may cast it without paying its mana cost.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GalvanothEffect(), TargetController.YOU, true));
     }
 
@@ -45,7 +45,8 @@ class GalvanothEffect extends OneShotEffect {
 
     public GalvanothEffect() {
         super(Outcome.PlayForFree);
-        staticText = "look at the top card of your library. If it's an instant or sorcery card, you may cast it without paying its mana cost";
+        staticText = "look at the top card of your library. If it's an instant or "
+                + "sorcery card, you may cast it without paying its mana cost";
     }
 
     public GalvanothEffect(final GalvanothEffect effect) {
@@ -61,7 +62,10 @@ class GalvanothEffect extends OneShotEffect {
                 controller.lookAtCards(source, null, new CardsImpl(card), game);
                 if (card.isInstant() || card.isSorcery()) {
                     if (controller.chooseUse(Outcome.PlayForFree, "Cast " + card.getName() + " without paying its mana cost?", source, game)) {
-                        controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                        controller.cast(controller.chooseAbilityForCast(card, game, true),
+                                game, true, new MageObjectReference(source.getSourceObject(game), game));
+                        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
                     }
                 }
             }

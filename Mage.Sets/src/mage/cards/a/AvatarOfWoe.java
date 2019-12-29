@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -16,7 +15,7 @@ import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -27,17 +26,17 @@ import mage.target.common.TargetCreaturePermanent;
 public final class AvatarOfWoe extends CardImpl {
 
     public AvatarOfWoe(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{B}{B}");
         this.subtype.add(SubType.AVATAR);
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
 
         // If there are ten or more creature cards total in all graveyards, Avatar of Woe costs {6} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.STACK, new AvatarOfWoeCostReductionEffect()));
-        
+
         // Fear
         this.addAbility(FearAbility.getInstance());
-        
+
         // {tap}: Destroy target creature. It can't be regenerated.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(true), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
@@ -83,9 +82,9 @@ class AvatarOfWoeCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        return abilityToModify.getSourceId().equals(source.getSourceId()) 
-                && (abilityToModify instanceof SpellAbility) 
-                && new CardsInAllGraveyardsCount(new FilterCreatureCard()).calculate(game, source, this) >= 10;
+        return abilityToModify.getSourceId().equals(source.getSourceId())
+                && (abilityToModify instanceof SpellAbility)
+                && new CardsInAllGraveyardsCount(StaticFilters.FILTER_CARD_CREATURE).calculate(game, source, this) >= 10;
     }
 
     @Override

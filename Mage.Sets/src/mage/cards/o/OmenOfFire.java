@@ -38,7 +38,7 @@ public final class OmenOfFire extends CardImpl {
         // Return all Islands to their owners' hands.
         this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(filter));
         
-        // Each player sacrifices a Plains or a white permanent for each white permanent he or she controls.
+        // Each player sacrifices a Plains or a white permanent for each white permanent they control.
         this.getSpellAbility().addEffect(new OmenOfFireEffect());
     }
 
@@ -68,7 +68,7 @@ class OmenOfFireEffect extends OneShotEffect {
 
     public OmenOfFireEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Each player sacrifices a Plains or a white permanent for each white permanent he or she controls";
+        this.staticText = "Each player sacrifices a Plains or a white permanent for each white permanent they control";
     }
 
     public OmenOfFireEffect(final OmenOfFireEffect effect) {

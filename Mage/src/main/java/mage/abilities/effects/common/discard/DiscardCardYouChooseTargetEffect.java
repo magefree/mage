@@ -132,12 +132,10 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
                 if (numberToDiscard > 0) {
                     TargetCard target = new TargetCard(numberToDiscard, Zone.HAND, filter);
                     if (controller.choose(Outcome.Benefit, revealedCards, target, game)) {
-                        for (Object targetId : target.getTargets()) {
-                            Card card = revealedCards.get((UUID) targetId, game);
-                            if (card != null) {
-                                if (!player.discard(card, source, game)) {
-                                    result = false;
-                                }
+                        for (UUID targetId : target.getTargets()) {
+                            Card card = revealedCards.get(targetId, game);
+                            if (!player.discard(card, source, game)) {
+                                result = false;
                             }
                         }
                     }

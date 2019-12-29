@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 public enum SubType {
 
     //205.3k Instants and sorceries share their lists of subtypes; these subtypes are called spell types.
+    ADVENTURE("Adventure", SubTypeSet.SpellType),
     ARCANE("Arcane", SubTypeSet.SpellType),
     TRAP("Trap", SubTypeSet.SpellType),
     // 205.3i: Lands have their own unique set of subtypes; these subtypes are called land types.
@@ -37,6 +38,7 @@ public enum SubType {
     CLUE("Clue", SubTypeSet.ArtifactType),
     CONTRAPTION("Contraption", SubTypeSet.ArtifactType),
     EQUIPMENT("Equipment", SubTypeSet.ArtifactType),
+    FOOD("Food", SubTypeSet.ArtifactType),
     FORTIFICATION("Fortification", SubTypeSet.ArtifactType),
     TREASURE("Treasure", SubTypeSet.ArtifactType),
     VEHICLE("Vehicle", SubTypeSet.ArtifactType),
@@ -108,6 +110,7 @@ public enum SubType {
     // D
     DATHOMIRIAN("Dathomirian", SubTypeSet.CreatureType, true), // Star Wars
     DAUTHI("Dauthi", SubTypeSet.CreatureType),
+    DEMIGOD("Demigod", SubTypeSet.CreatureType),
     DEMON("Demon", SubTypeSet.CreatureType),
     DESERTER("Deserter", SubTypeSet.CreatureType),
     DEVIL("Devil", SubTypeSet.CreatureType),
@@ -227,6 +230,7 @@ public enum SubType {
     MONK("Monk", SubTypeSet.CreatureType),
     MONKEY("Monkey", SubTypeSet.CreatureType),
     MOONFOLK("Moonfolk", SubTypeSet.CreatureType),
+    MOUSE("Mouse", SubTypeSet.CreatureType),
     MUTANT("Mutant", SubTypeSet.CreatureType),
     MYR("Myr", SubTypeSet.CreatureType),
     MYSTIC("Mystic", SubTypeSet.CreatureType),
@@ -239,6 +243,7 @@ public enum SubType {
     NIGHTMARE("Nightmare", SubTypeSet.CreatureType),
     NIGHTSTALKER("Nightstalker", SubTypeSet.CreatureType),
     NINJA("Ninja", SubTypeSet.CreatureType),
+    NOBLE("Noble", SubTypeSet.CreatureType),
     NOGGLE("Noggle", SubTypeSet.CreatureType),
     NOMAD("Nomad", SubTypeSet.CreatureType),
     NYMPH("Nymph", SubTypeSet.CreatureType),
@@ -255,6 +260,7 @@ public enum SubType {
     OYSTER("Oyster", SubTypeSet.CreatureType),
     // P
     PANGOLIN("Pangolin", SubTypeSet.CreatureType),
+    PEASANT("Peasant", SubTypeSet.CreatureType),
     PEGASUS("Pegasus", SubTypeSet.CreatureType),
     PENTAVITE("Pentavite", SubTypeSet.CreatureType),
     PEST("Pest", SubTypeSet.CreatureType),
@@ -292,6 +298,7 @@ public enum SubType {
     SCION("Scion", SubTypeSet.CreatureType),
     SCORPION("Scorpion", SubTypeSet.CreatureType),
     SCOUT("Scout", SubTypeSet.CreatureType),
+    SCULPTURE("Sculpture", SubTypeSet.CreatureType),
     SERF("Serf", SubTypeSet.CreatureType),
     SERPENT("Serpent", SubTypeSet.CreatureType),
     SERVO("Servo", SubTypeSet.CreatureType),
@@ -351,6 +358,7 @@ public enum SubType {
     VOLVER("Volver", SubTypeSet.CreatureType),
     // W
     WALL("Wall", SubTypeSet.CreatureType),
+    WARLOCK("Warlock", SubTypeSet.CreatureType),
     WARRIOR("Warrior", SubTypeSet.CreatureType),
     WEEQUAY("Weequay", SubTypeSet.CreatureType, true),
     WEIRD("Weird", SubTypeSet.CreatureType),
@@ -403,6 +411,7 @@ public enum SubType {
     NISSA("Nissa", SubTypeSet.PlaneswalkerType),
     NIXILIS("Nixilis", SubTypeSet.PlaneswalkerType),
     OBI_WAN("Obi-Wan", SubTypeSet.PlaneswalkerType, true), // Star Wars
+    OKO("Oko", SubTypeSet.PlaneswalkerType),
     RAL("Ral", SubTypeSet.PlaneswalkerType),
     ROWAN("Rowan", SubTypeSet.PlaneswalkerType),
     SAHEELI("Saheeli", SubTypeSet.PlaneswalkerType),
@@ -423,6 +432,7 @@ public enum SubType {
     VRASKA("Vraska", SubTypeSet.PlaneswalkerType),
     WILL("Will", SubTypeSet.PlaneswalkerType),
     WINDGRACE("Windgrace", SubTypeSet.PlaneswalkerType),
+    WRENN("Wrenn", SubTypeSet.PlaneswalkerType),
     XENAGOS("Xenagos", SubTypeSet.PlaneswalkerType),
     YANGGU("Yanggu", SubTypeSet.PlaneswalkerType),
     YANLING("Yanling", SubTypeSet.PlaneswalkerType),

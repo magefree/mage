@@ -31,7 +31,7 @@ public final class DivineReckoning extends CardImpl {
     public DivineReckoning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
 
-        // Each player chooses a creature he or she controls. Destroy the rest.
+        // Each player chooses a creature they control. Destroy the rest.
         this.getSpellAbility().addEffect(new DivineReckoningEffect());
 
         // Flashback {5}{W}{W}
@@ -52,7 +52,7 @@ class DivineReckoningEffect extends OneShotEffect {
 
     public DivineReckoningEffect() {
         super(Outcome.DestroyPermanent);
-        staticText = "Each player chooses a creature he or she controls. Destroy the rest";
+        staticText = "Each player chooses a creature they control. Destroy the rest";
     }
 
     public DivineReckoningEffect(DivineReckoningEffect effect) {

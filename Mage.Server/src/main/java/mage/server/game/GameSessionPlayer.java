@@ -1,14 +1,10 @@
-
 package mage.server.game;
 
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.concurrent.ExecutorService;
 import mage.cards.Cards;
 import mage.choices.Choice;
 import mage.constants.ManaType;
 import mage.constants.PlayerAction;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.Table;
 import mage.interfaces.callback.ClientCallback;
@@ -19,6 +15,11 @@ import mage.server.UserManager;
 import mage.server.util.ThreadExecutor;
 import mage.view.*;
 import org.apache.log4j.Logger;
+
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.ExecutorService;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -152,7 +153,7 @@ public class GameSessionPlayer extends GameSessionWatcher {
                 UserRequestMessage userRequestMessage = new UserRequestMessage(
                         "User request",
                         "Allow user <b>" + watcher.get().getName() + "</b> for this match to see your hand cards?<br>"
-                        + "(You can revoke this every time using related popup menu item of your battlefield.)");
+                                + "(You can revoke this every time using related popup menu item of your battlefield.)");
                 userRequestMessage.setRelatedUser(watcherId, watcher.get().getName());
                 userRequestMessage.setGameId(game.getId());
                 userRequestMessage.setButton1("Accept", PlayerAction.ADD_PERMISSION_TO_SEE_HAND_CARDS);
@@ -188,7 +189,7 @@ public class GameSessionPlayer extends GameSessionWatcher {
         GameView gameView = new GameView(game.getState(), game, playerId, null);
         gameView.setHand(new CardsView(game, player.getHand().getCards(game)));
         if (gameView.getPriorityPlayerName().equals(player.getName())) {
-            gameView.setCanPlayInHand(player.getPlayableInHand(game));
+            gameView.setCanPlayObjects(player.getPlayableObjects(game, Zone.ALL));
         }
 
         processControlledPlayers(player, gameView);

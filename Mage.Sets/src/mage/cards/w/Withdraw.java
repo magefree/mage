@@ -1,10 +1,7 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
@@ -21,9 +18,11 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.ManaUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author emerald000
  */
 public final class Withdraw extends CardImpl {
@@ -79,7 +78,7 @@ class WithdrawEffect extends OneShotEffect {
         if (secondCreature != null) {
             Player creatureController = game.getPlayer(secondCreature.getControllerId());
             if (creatureController != null) {
-                Cost cost = new GenericManaCost(1);
+                Cost cost = ManaUtil.createManaCost(1, false);
                 if (creatureController.chooseUse(Outcome.Benefit, "Pay {1}? (Otherwise " + secondCreature.getName() + " will be returned to its owner's hand)", source, game)) {
                     cost.pay(source, game, source.getSourceId(), creatureController.getId(), false);
                 }

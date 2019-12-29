@@ -1,5 +1,7 @@
 package mage.cards.s;
 
+import java.util.LinkedList;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -12,7 +14,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.*;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.BlockedByIdPredicate;
@@ -22,9 +24,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.LinkedList;
-import java.util.UUID;
 
 /**
  * @author jeffwadsworth
@@ -87,7 +86,7 @@ class SistersOfStoneDeathEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         CardsImpl cardsInExile = new CardsImpl();
-        TargetCard target = new TargetCard(Zone.EXILED, new FilterCreatureCard());
+        TargetCard target = new TargetCard(Zone.EXILED, StaticFilters.FILTER_CARD_CREATURE);
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             ExileZone exile = game.getExile().getExileZone(exileId);

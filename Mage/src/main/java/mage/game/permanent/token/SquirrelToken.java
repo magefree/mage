@@ -1,15 +1,14 @@
-
 package mage.game.permanent.token;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
- *
  * @author North
  */
 public final class SquirrelToken extends TokenImpl {
@@ -17,7 +16,7 @@ public final class SquirrelToken extends TokenImpl {
     static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Collections.singletonList("CNS"));
+        tokenImageSets.addAll(Arrays.asList("CNS", "MH1"));
     }
 
     public SquirrelToken() {

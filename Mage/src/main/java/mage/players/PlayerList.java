@@ -1,12 +1,11 @@
-
 package mage.players;
 
-import java.util.UUID;
 import mage.game.Game;
 import mage.util.CircularList;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class PlayerList extends CircularList<UUID> {
@@ -23,7 +22,7 @@ public class PlayerList extends CircularList<UUID> {
     }
 
     public Player getNextInRange(Player basePlayer, Game game) {
-        UUID currentPlayerBefore = get();
+        UUID currentPlayerBefore = this.get();
         UUID nextPlayerId = super.getNext();
         do {
             if (basePlayer.getInRange().contains(nextPlayerId)) {
@@ -34,7 +33,10 @@ public class PlayerList extends CircularList<UUID> {
         return null;
     }
 
-    public Player getNext(Game game) {
+    /**
+     * checkNextTurnReached - use it turns/priority code only to mark leaved player as "reached next turn end" (need for some continous effects)
+     */
+    public Player getNext(Game game, boolean checkNextTurnReached) {
         UUID start = this.get();
         if (start == null) {
             return null;
@@ -42,11 +44,14 @@ public class PlayerList extends CircularList<UUID> {
         Player player;
         while (true) {
             player = game.getPlayer(super.getNext());
-            if (!player.hasLeft() && !player.hasLost()) {
+            if (player.isInGame()) {
                 break;
             }
-            if (!player.hasReachedNextTurnAfterLeaving()) {
-                player.setReachedNextTurnAfterLeaving(true);
+
+            if (checkNextTurnReached) {
+                if (!player.hasReachedNextTurnAfterLeaving()) {
+                    player.setReachedNextTurnAfterLeaving(true);
+                }
             }
             if (player.getId().equals(start)) {
                 return null;
@@ -60,7 +65,7 @@ public class PlayerList extends CircularList<UUID> {
         UUID start = this.get();
         while (true) {
             player = game.getPlayer(super.getPrevious());
-            if (!player.hasLeft() && !player.hasLost()) {
+            if (player.isInGame()) {
                 break;
             }
             if (player.getId().equals(start)) {

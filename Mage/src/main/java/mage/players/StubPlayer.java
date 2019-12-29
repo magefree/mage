@@ -31,6 +31,7 @@ import java.util.UUID;
 
 import static com.google.common.collect.Iterables.getOnlyElement;
 import static java.util.stream.Collectors.toList;
+import mage.filter.FilterMana;
 
 public class StubPlayer extends PlayerImpl implements Player {
 
@@ -53,7 +54,7 @@ public class StubPlayer extends PlayerImpl implements Player {
 
     @Override
     public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
-        if ("cards to PUT on the BOTTOM of your library (Discard for Mulligan)".equals(target.getFilter().getMessage())) {
+        if (target.getFilter().getMessage() != null && target.getFilter().getMessage().endsWith("(Discard for Mulligan)")) {
             chooseDiscardBottom(game, target.getMinNumberOfTargets(), cards.getCards(game)
                     .stream().map(MageItem::getId).collect(toList())).forEach(cardId -> target.add(cardId, game));
         } else {
@@ -149,7 +150,7 @@ public class StubPlayer extends PlayerImpl implements Player {
     }
 
     @Override
-    public int announceXMana(int min, int max, String message, Game game, Ability ability) {
+    public int announceXMana(int min, int max, int multiplier, String message, Game game, Ability ability) {
         return 0;
     }
 
@@ -217,5 +218,19 @@ public class StubPlayer extends PlayerImpl implements Player {
     public void pickCard(List<Card> cards, Deck deck, Draft draft) {
 
     }
+    
+    @Override
+    public void addPhyrexianToColors(FilterMana colors) {
+        
+    }
 
+    @Override
+    public void removePhyrexianFromColors(FilterMana colors) {
+        
+    }
+
+    @Override
+    public FilterMana getPhyrexianColors() {
+        return (new FilterMana());
+    }
 }

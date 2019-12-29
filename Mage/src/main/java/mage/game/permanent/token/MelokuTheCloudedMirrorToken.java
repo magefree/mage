@@ -1,13 +1,13 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
+
+import java.util.Arrays;
 
 /**
- *
  * @author spjspj
  */
 public final class MelokuTheCloudedMirrorToken extends TokenImpl {
@@ -20,6 +20,7 @@ public final class MelokuTheCloudedMirrorToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(FlyingAbility.getInstance());
+        availableImageSetCodes.addAll(Arrays.asList("CHK", "MMA", "MH1"));
     }
 
     public MelokuTheCloudedMirrorToken(final MelokuTheCloudedMirrorToken token) {

@@ -20,15 +20,12 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
-import mage.abilities.effects.common.PreventDamageToControllerEffect;
 
 /**
  * @author TheElk801
  */
 public final class TheWanderer extends CardImpl {
 
-    private static final String rule = "Prevent all noncombat damage that "
-            + "would be dealt to you and other permanents you control.";
     private static final FilterPermanent filter
             = new FilterControlledPermanent("other permanents you control");
     private static final FilterPermanent filter2
@@ -46,15 +43,9 @@ public final class TheWanderer extends CardImpl {
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
 
         // Prevent all noncombat damage that would be dealt to you and other permanents you control.
-        this.addAbility(new SimpleStaticAbility(
-                new PreventDamageToControllerEffect(
-                        Duration.WhileOnBattlefield, true, false,
-                        Integer.MAX_VALUE
-                ).setText(rule)));
-        this.addAbility(new SimpleStaticAbility(
-                new PreventAllNonCombatDamageToAllEffect(
-                        Duration.WhileOnBattlefield, filter, true
-                ).setText("")));
+        this.addAbility(new SimpleStaticAbility(new PreventAllNonCombatDamageToAllEffect(
+                Duration.WhileOnBattlefield, filter, true
+        )));
 
         // -2: Exile target creature with power 4 or greater.
         Ability ability = new LoyaltyAbility(new ExileTargetEffect(), -2);

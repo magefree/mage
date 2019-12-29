@@ -37,7 +37,7 @@ public final class CrimsonHonorGuard extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 
-        // At the beginning of each player's end step, Crimson Honor Guard deals 4 damage to that player unless he or she controls a commander.
+        // At the beginning of each player's end step, Crimson Honor Guard deals 4 damage to that player unless they control a commander.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new CrimsonHonorGuardEffect(), TargetController.ANY, false));
     }
 
@@ -83,6 +83,6 @@ class CrimsonHonorGuardEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        return "{this} deals 4 damage to that player unless he or she controls a commander";
+        return "{this} deals 4 damage to that player unless they control a commander";
     }
 }

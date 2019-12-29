@@ -1,7 +1,5 @@
-
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
@@ -24,8 +22,9 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class UnconventionalTactics extends CardImpl {
@@ -91,12 +90,10 @@ class UnconventionalTacticsTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent.isCreature()
+        return permanent != null
+                && permanent.isCreature()
                 && permanent.isControlledBy(this.controllerId)
-                && filter.match(permanent, game)) {
-            return true;
-        }
-        return false;
+                && filter.match(permanent, game);
     }
 
     @Override

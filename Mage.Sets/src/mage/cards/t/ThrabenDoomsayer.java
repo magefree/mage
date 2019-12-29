@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -13,19 +11,20 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.token.HumanToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author anonymous
  */
 public final class ThrabenDoomsayer extends CardImpl {
 
     public ThrabenDoomsayer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
 
@@ -36,7 +35,7 @@ public final class ThrabenDoomsayer extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new HumanToken()), new TapSourceCost()));
         // Fateful hour - As long as you have 5 or less life, other creatures you control get +2/+2.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, true),
-                FatefulHourCondition.instance, "As long as you have 5 or less life, other creatures you control get +2/+2")));
+                FatefulHourCondition.instance, "<br><i>Fateful hour</i> &mdash; As long as you have 5 or less life, other creatures you control get +2/+2")));
     }
 
     public ThrabenDoomsayer(final ThrabenDoomsayer card) {

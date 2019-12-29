@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.single;
 
 import mage.constants.PhaseStep;
@@ -7,7 +6,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class ChaliceOfTheVoidTest extends CardTestPlayerBase {
@@ -19,6 +17,7 @@ public class ChaliceOfTheVoidTest extends CardTestPlayerBase {
      * cmc should be 2 in this case, it shouldnt be countered.
      * http://boardgames.stackexchange.com/questions/7327/what-is-the-converted-mana-cost-of-a-spell-with-x-when-cast-with-the-miracle-m
      */
+
     @Test
     public void testX1CountsFor2CMC() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
@@ -31,8 +30,10 @@ public class ChaliceOfTheVoidTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chalice of the Void");
         setChoice(playerA, "X=1");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Chalice of the Void", 2);
 

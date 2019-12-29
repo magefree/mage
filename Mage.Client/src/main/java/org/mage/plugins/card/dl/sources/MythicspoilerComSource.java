@@ -7,6 +7,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.mage.plugins.card.dl.DownloadServiceInfo;
 import org.mage.plugins.card.images.CardDownloadData;
 
 import java.io.BufferedReader;
@@ -379,6 +380,11 @@ public enum MythicspoilerComSource implements CardImageSource {
             }
         }
         return pageLinks;
+    }
+
+    @Override
+    public boolean prepareDownloadList(DownloadServiceInfo downloadServiceInfo, List<CardDownloadData> downloadList) {
+        return true;
     }
 
     @Override

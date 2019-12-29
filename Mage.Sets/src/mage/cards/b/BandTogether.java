@@ -81,7 +81,7 @@ class BandTogetherEffect extends OneShotEffect {
             return false;
         }
 
-        Permanent permanentDamage1 = damageTarget.getTargets().size() < 1 ? null : game.getPermanent(damageTarget.getTargets().get(0));
+        Permanent permanentDamage1 = damageTarget.getTargets().isEmpty() ? null : game.getPermanent(damageTarget.getTargets().get(0));
         Permanent permanentDamage2 = damageTarget.getTargets().size() < 2 ? null : game.getPermanent(damageTarget.getTargets().get(1));
         Permanent permanentDest = game.getPermanent(destTarget.getTargets().get(0));
         if (permanentDest == null) {

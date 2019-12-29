@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -8,7 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -19,7 +18,7 @@ import mage.players.Player;
 public final class BlossomingWreath extends CardImpl {
 
     public BlossomingWreath(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");
 
         // You gain life equal to the number of creature cards in your graveyard.
         this.getSpellAbility().addEffect(new BlossomingWreathEffect());
@@ -54,7 +53,7 @@ public final class BlossomingWreath extends CardImpl {
         public boolean apply(Game game, Ability source) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                controller.gainLife(controller.getGraveyard().count(new FilterCreatureCard(), game), game, source);
+                controller.gainLife(controller.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, game), game, source);
                 return true;
             }
             return false;

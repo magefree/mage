@@ -39,7 +39,7 @@ public final class DreamLeash extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect("permanent")));
     }
 
-    public DreamLeash(final DreamLeash card) {
+    private DreamLeash(final DreamLeash card) {
         super(card);
     }
 
@@ -51,7 +51,8 @@ public final class DreamLeash extends CardImpl {
 
 
 class DreamLeashTarget extends TargetPermanent {
-    
+
+    @Override
     public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
 
         if(super.canTarget(controllerId, id, source, game)){

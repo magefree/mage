@@ -1,8 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -20,14 +18,16 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPlayer;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class GruesomeDiscovery extends CardImpl {
 
     public GruesomeDiscovery(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
 
 
         // Target player discards two cards.
@@ -83,9 +83,8 @@ class GruesomeDiscoveryEffect extends OneShotEffect {
                 List<UUID> targets = target.getTargets();
                 for (UUID targetId : targets) {
                     Card card = targetPlayer.getHand().get(targetId, game);
-                    if (card != null) {
-                        targetPlayer.discard(card, source, game);
-                    }
+                    targetPlayer.discard(card, source, game);
+
                 }
             }
             return true;

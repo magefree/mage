@@ -29,7 +29,7 @@ public final class WarTax extends CardImpl {
     public WarTax(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
-        // {X}{U}: This turn, creatures can't attack unless their controller pays {X} for each attacking creature he or she controls.
+        // {X}{U}: This turn, creatures can't attack unless their controller pays {X} for each attacking creature they control.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WarTaxCantAttackUnlessPaysEffect(), new ManaCostsImpl("{X}{U}")));
     }
 
@@ -49,7 +49,7 @@ class WarTaxCantAttackUnlessPaysEffect extends PayCostToAttackBlockEffectImpl {
 
     WarTaxCantAttackUnlessPaysEffect() {
         super(Duration.EndOfTurn, Outcome.Neutral, RestrictType.ATTACK);
-        staticText = "This turn, creatures can't attack unless their controller pays {X} for each attacking creature he or she controls";
+        staticText = "This turn, creatures can't attack unless their controller pays {X} for each attacking creature they control";
     }
 
     WarTaxCantAttackUnlessPaysEffect(WarTaxCantAttackUnlessPaysEffect effect) {

@@ -25,7 +25,7 @@ public final class FalseCure extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}{B}");
 
 
-        // Until end of turn, whenever a player gains life, that player loses 2 life for each 1 life he or she gained.
+        // Until end of turn, whenever a player gains life, that player loses 2 life for each 1 life they gained.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new FalseCureTriggeredAbility()));
     }
 
@@ -70,6 +70,6 @@ class FalseCureTriggeredAbility extends DelayedTriggeredAbility {
     
     @Override
     public String getRule() {
-        return "Until end of turn, whenever a player gains life, that player loses 2 life for each 1 life he or she gained.";
+        return "Until end of turn, whenever a player gains life, that player loses 2 life for each 1 life they gained.";
     }
 }

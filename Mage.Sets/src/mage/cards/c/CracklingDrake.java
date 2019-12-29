@@ -1,28 +1,22 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.InstantSorceryExileGraveyardCount;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.players.Player;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class CracklingDrake extends CardImpl {
@@ -53,38 +47,12 @@ public final class CracklingDrake extends CardImpl {
         ));
     }
 
-    public CracklingDrake(final CracklingDrake card) {
+    private CracklingDrake(final CracklingDrake card) {
         super(card);
     }
 
     @Override
     public CracklingDrake copy() {
         return new CracklingDrake(this);
-    }
-}
-
-class CracklingDrakeCount implements DynamicValue {
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        Player player = game.getPlayer(sourceAbility.getControllerId());
-        if (player != null) {
-            return player.getGraveyard().count(
-                    StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY, game
-            ) + game.getExile().getExileZone(player.getId()).count(
-                    StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY, game
-            );
-        }
-        return 0;
-    }
-
-    @Override
-    public CracklingDrakeCount copy() {
-        return new CracklingDrakeCount();
-    }
-
-    @Override
-    public String getMessage() {
-        return "";
     }
 }

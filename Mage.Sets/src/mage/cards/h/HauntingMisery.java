@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import java.util.UUID;
@@ -8,7 +7,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
@@ -21,7 +20,7 @@ public final class HauntingMisery extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
 
         // As an additional cost to cast Haunting Misery, exile X creature cards from your graveyard.
-        this.getSpellAbility().addCost(new ExileXFromYourGraveCost(new FilterCreatureCard()));
+        this.getSpellAbility().addCost(new ExileXFromYourGraveCost(StaticFilters.FILTER_CARD_CREATURE));
         // Haunting Misery deals X damage to target player.
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
         this.getSpellAbility().addEffect(new DamageTargetEffect(GetXValue.instance));

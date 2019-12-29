@@ -606,10 +606,13 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     public synchronized void updateGame(GameView game) {
-        updateGame(game, null);
+        updateGame(game, false, null, null);
     }
 
-    public synchronized void updateGame(GameView game, Map<String, Serializable> options) {
+    public synchronized void updateGame(GameView game, boolean showPlayable, Map<String, Serializable> options, Set<UUID> targets) {
+
+        prepareSelectableView(game, showPlayable, options, targets);
+
         if (playerId == null && game.getWatchedHands() == null) {
             this.handContainer.setVisible(false);
         } else {
@@ -622,14 +625,6 @@ public final class GamePanel extends javax.swing.JPanel {
             }
             if (playerId != null) {
                 handCards.put(YOUR_HAND, game.getHand());
-                // Mark playable
-                if (game.getCanPlayInHand() != null) {
-                    for (CardView card : handCards.get(YOUR_HAND).values()) {
-                        if (game.getCanPlayInHand().contains(card.getId())) {
-                            card.setPlayable(true);
-                        }
-                    }
-                }
                 // Get opponents hand cards if available (only possible for players)
                 if (game.getOpponentHands() != null) {
                     for (Map.Entry<String, SimpleCardsView> hand : game.getOpponentHands().entrySet()) {
@@ -719,7 +714,7 @@ public final class GamePanel extends javax.swing.JPanel {
                         }
                     }
                 }
-                players.get(player.getPlayerId()).update(player);
+                players.get(player.getPlayerId()).update(game, player, targets);
                 if (player.getPlayerId().equals(playerId)) {
                     skipButtons.updateFromPlayer(player);
                 }
@@ -1183,25 +1178,23 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     public void ask(String question, GameView gameView, int messageId, Map<String, Serializable> options) {
-        updateGame(gameView);
+        updateGame(gameView, false, options, null);
         this.feedbackPanel.getFeedback(FeedbackMode.QUESTION, question, false, options, messageId, true, gameView.getPhase());
     }
 
-    private void prepareSelectableView(GameView gameView, Map<String, Serializable> options, Set<UUID> targets) {
-        // make cards/perm selectable
-        // highlighting chosen
-        // code calls after each selects or updates, no needs in switch off cards
+    private void prepareSelectableView(GameView gameView, boolean showPlayable, Map<String, Serializable> options, Set<UUID> targets) {
+        // make cards/perm selectable/chooseable/playable
+        // playable must be used for ask dialog only (priority and mana pay)
 
         Zone needZone = Zone.ALL;
-        if (options.containsKey("targetZone")) {
+        if (options != null && options.containsKey("targetZone")) {
             needZone = (Zone) options.get("targetZone");
         }
 
-        List<UUID> needChoosen = null;
-        if (options.containsKey("chosen")) {
+        List<UUID> needChoosen;
+        if (options != null && options.containsKey("chosen")) {
             needChoosen = (List<UUID>) options.get("chosen");
-        }
-        if (needChoosen == null) {
+        } else {
             needChoosen = new ArrayList<>();
         }
 
@@ -1212,7 +1205,14 @@ public final class GamePanel extends javax.swing.JPanel {
             needSelectable = new HashSet<>();
         }
 
-        if (needChoosen.size() == 0 && needSelectable.size() == 0) {
+        Map<UUID, Integer> needPlayable;
+        if (showPlayable && gameView.getCanPlayObjects() != null) {
+            needPlayable = gameView.getCanPlayObjects();
+        } else {
+            needPlayable = new HashMap<>();
+        }
+
+        if (needChoosen.isEmpty() && needSelectable.isEmpty() && needPlayable.isEmpty()) {
             return;
         }
 
@@ -1224,6 +1224,10 @@ public final class GamePanel extends javax.swing.JPanel {
                 }
                 if (needChoosen.contains(card.getId())) {
                     card.setSelected(true);
+                }
+                if (needPlayable.containsKey(card.getId())) {
+                    card.setPlayable(true);
+                    card.setPlayableAmount(needPlayable.get(card.getId()));
                 }
             }
         }
@@ -1237,6 +1241,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 if (needChoosen.contains(card.getKey())) {
                     card.getValue().setSelected(true);
                 }
+                // play from stack unsupported
             }
         }
 
@@ -1249,6 +1254,10 @@ public final class GamePanel extends javax.swing.JPanel {
                     }
                     if (needChoosen.contains(perm.getKey())) {
                         perm.getValue().setSelected(true);
+                    }
+                    if (needPlayable.containsKey(perm.getKey())) {
+                        perm.getValue().setPlayable(true);
+                        perm.getValue().setPlayableAmount(needPlayable.get(perm.getKey()));
                     }
                 }
             }
@@ -1264,6 +1273,10 @@ public final class GamePanel extends javax.swing.JPanel {
                     if (needChoosen.contains(card.getKey())) {
                         card.getValue().setSelected(true);
                     }
+                    if (needPlayable.containsKey(card.getKey())) {
+                        card.getValue().setPlayable(true);
+                        card.getValue().setPlayableAmount(needPlayable.get(card.getKey()));
+                    }
                 }
             }
         }
@@ -1278,6 +1291,28 @@ public final class GamePanel extends javax.swing.JPanel {
                     if (needChoosen.contains(card.getKey())) {
                         card.getValue().setSelected(true);
                     }
+                    if (needPlayable.containsKey(card.getKey())) {
+                        card.getValue().setPlayable(true);
+                        card.getValue().setPlayableAmount(needPlayable.get(card.getKey()));
+                    }
+                }
+            }
+        }
+
+        // command
+        if (needZone == Zone.COMMAND || needZone == Zone.ALL) {
+            for (PlayerView player : gameView.getPlayers()) {
+                for (CommandObjectView com : player.getCommandObjectList()) {
+                    if (needSelectable.contains(com.getId())) {
+                        com.setChoosable(true);
+                    }
+                    if (needChoosen.contains(com.getId())) {
+                        com.setSelected(true);
+                    }
+                    if (needPlayable.containsKey(com.getId())) {
+                        com.setPlayable(true);
+                        com.setPlayableAmount(needPlayable.get(com.getId()));
+                    }
                 }
             }
         }
@@ -1290,6 +1325,20 @@ public final class GamePanel extends javax.swing.JPanel {
                 }
                 if (needChoosen.contains(card.getKey())) {
                     card.getValue().setSelected(true);
+                }
+                if (needPlayable.containsKey(card.getKey())) {
+                    card.getValue().setPlayable(true);
+                    card.getValue().setPlayableAmount(needPlayable.get(card.getKey()));
+                }
+            }
+        }
+
+        // looked at
+        for (LookedAtView look : gameView.getLookedAt()) {
+            for (Map.Entry<UUID, SimpleCardView> card : look.getCards().entrySet()) {
+                if (needPlayable.containsKey(card.getKey())) {
+                    card.getValue().setPlayable(true);
+                    card.getValue().setPlayableAmount(needPlayable.get(card.getKey()));
                 }
             }
         }
@@ -1315,10 +1364,8 @@ public final class GamePanel extends javax.swing.JPanel {
                 switch (needType) {
                     case PICK_ABILITY:
                         popupMenuType = PopUpMenuType.TRIGGER_ORDER;
-                        prepareSelectableView(gameView, options, targets);
                         break;
                     case PICK_TARGET:
-                        prepareSelectableView(gameView, options, targets);
                         break;
                     default:
                         logger.warn("Unknown query type in pick target: " + needType + " in " + message);
@@ -1327,7 +1374,8 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         }
 
-        updateGame(gameView);
+        updateGame(gameView, false, options, targets);
+
         Map<String, Serializable> options0 = options == null ? new HashMap<>() : options;
         ShowCardsDialog dialog = null;
         if (cardView != null && !cardView.isEmpty()) {
@@ -1359,7 +1407,8 @@ public final class GamePanel extends javax.swing.JPanel {
                 PreferencesDialog.getCachedValue(KEY_USE_FIRST_MANA_ABILITY, "false").equals("true"),
                 false);
 
-        updateGame(gameView, options);
+        updateGame(gameView, true, options, null);
+
         boolean controllingPlayer = false;
         for (PlayerView playerView : gameView.getPlayers()) {
             if (playerView.getPlayerId().equals(playerId)) {
@@ -1393,13 +1442,13 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     public void playMana(String message, GameView gameView, Map<String, Serializable> options, int messageId) {
-        updateGame(gameView);
+        updateGame(gameView, true, options, null);
         DialogManager.getManager(gameId).fadeOut();
         this.feedbackPanel.getFeedback(FeedbackMode.CANCEL, message, gameView.getSpecial(), options, messageId, true, gameView.getPhase());
     }
 
     public void playXMana(String message, GameView gameView, int messageId) {
-        updateGame(gameView);
+        updateGame(gameView, true, null, null);
         DialogManager.getManager(gameId).fadeOut();
         this.feedbackPanel.getFeedback(FeedbackMode.CONFIRM, message, gameView.getSpecial(), null, messageId, true, gameView.getPhase());
     }

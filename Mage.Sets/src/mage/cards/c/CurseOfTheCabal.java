@@ -38,14 +38,14 @@ public final class CurseOfTheCabal extends CardImpl {
     public CurseOfTheCabal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{9}{B}");
 
-        // Target player sacrifices half the permanents he or she controls, rounded down.
+        // Target player sacrifices half the permanents they control, rounded down.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new CurseOfTheCabalSacrificeEffect());
 
         // Suspend 2-{2}{B}{B}
         this.addAbility(new SuspendAbility(2, new ManaCostsImpl("{2}{B}{B}"), this));
 
-        // At the beginning of each player's upkeep, if Curse of the Cabal is suspended, that player may sacrifice a permanent. If he or she does, put two time counters on Curse of the Cabal.
+        // At the beginning of each player's upkeep, if Curse of the Cabal is suspended, that player may sacrifice a permanent. If they do, put two time counters on Curse of the Cabal.
         this.addAbility(new CurseOfTheCabalInterveningIfTriggeredAbility());
 
     }
@@ -64,7 +64,7 @@ class CurseOfTheCabalSacrificeEffect extends OneShotEffect {
 
     public CurseOfTheCabalSacrificeEffect() {
         super(Outcome.Sacrifice);
-        this.staticText = "Target player sacrifices half the permanents he or she controls, rounded down.";
+        this.staticText = "Target player sacrifices half the permanents they control, rounded down.";
     }
 
     public CurseOfTheCabalSacrificeEffect(final CurseOfTheCabalSacrificeEffect effect) {
@@ -111,7 +111,7 @@ class CurseOfTheCabalInterveningIfTriggeredAbility extends ConditionalIntervenin
         ),
                 SuspendedCondition.instance,
                 "At the beginning of each player's upkeep, if {this} is suspended, "
-                        + "that player may sacrifice a permanent. If he or she does, "
+                        + "that player may sacrifice a permanent. If they do, "
                         + "put two time counters on {this}."
         );
         // controller has to sac a permanent
@@ -134,6 +134,7 @@ class CurseOfTheCabalTriggeredAbilityConditionalDelay extends AddCountersSourceE
         super(CounterType.TIME.createInstance(), new StaticValue(2), false, true);
     }
 
+    @Override
     public boolean apply(Game game, Ability source) {
         UUID activePlayerId = game.getActivePlayerId();
         Player target = game.getPlayer(activePlayerId);

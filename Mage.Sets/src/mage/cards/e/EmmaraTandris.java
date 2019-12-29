@@ -1,33 +1,32 @@
-
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.PreventAllDamageToAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreatureOrPlayer;
-import mage.filter.predicate.other.PlayerIdPredicate;
+import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class EmmaraTandris extends CardImpl {
 
-    private static final FilterCreatureOrPlayer filter = new FilterCreatureOrPlayer("creature tokens you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature tokens you control");
+
     static {
-        filter.getCreatureFilter().add(TokenPredicate.instance);
-        filter.getCreatureFilter().add(new ControllerPredicate(TargetController.YOU));
-        filter.getPlayerFilter().add(new PlayerIdPredicate(UUID.randomUUID()));
+        filter.add(TokenPredicate.instance);
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public EmmaraTandris(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{W}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.SHAMAN);
@@ -36,7 +35,7 @@ public final class EmmaraTandris extends CardImpl {
         this.toughness = new MageInt(7);
 
         // Prevent all damage that would be dealt to creature tokens you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageToAllEffect(Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageToAllEffect(Duration.WhileOnBattlefield, StaticFilters.FILTER_CREATURE_TOKENS)));
     }
 
     public EmmaraTandris(final EmmaraTandris card) {

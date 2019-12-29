@@ -329,11 +329,11 @@ public class TablesPanel extends javax.swing.JPanel {
         chatPanelMain.getUserChatPanel().setBorder(null);
         chatPanelMain.getUserChatPanel().setChatType(ChatPanelBasic.ChatType.TABLES);
 
-        // 4. BUTTONS
+        // 4. BUTTONS (add new buttons to the end of the list -- if not then users lost their filter settings)
         filterButtons = new JToggleButton[]{btnStateWaiting, btnStateActive, btnStateFinished,
                 btnTypeMatch, btnTypeTourneyConstructed, btnTypeTourneyLimited,
                 btnFormatBlock, btnFormatStandard, btnFormatModern, btnFormatLegacy, btnFormatVintage, btnFormatPremodern, btnFormatCommander, btnFormatTinyLeader, btnFormatLimited, btnFormatOther,
-                btnSkillBeginner, btnSkillCasual, btnSkillSerious, btnRated, btnUnrated, btnOpen, btnPassword};
+                btnSkillBeginner, btnSkillCasual, btnSkillSerious, btnRated, btnUnrated, btnOpen, btnPassword, btnFormatOathbreaker, btnFormatPioneer};
 
         JComponent[] components = new JComponent[]{chatPanelMain, jSplitPane1, jScrollPaneTablesActive, jScrollPaneTablesFinished, jPanelTop, jPanelTables};
         for (JComponent component : components) {
@@ -802,6 +802,9 @@ public class TablesPanel extends javax.swing.JPanel {
         if (btnFormatModern.isSelected()) {
             formatFilterList.add(RowFilter.regexFilter("^Constructed - Modern", TablesTableModel.COLUMN_DECK_TYPE));
         }
+        if (btnFormatPioneer.isSelected()) {
+            formatFilterList.add(RowFilter.regexFilter("^Constructed - Pioneer", TablesTableModel.COLUMN_DECK_TYPE));
+        }
         if (btnFormatLegacy.isSelected()) {
             formatFilterList.add(RowFilter.regexFilter("^Constructed - Legacy", TablesTableModel.COLUMN_DECK_TYPE));
         }
@@ -812,10 +815,13 @@ public class TablesPanel extends javax.swing.JPanel {
             formatFilterList.add(RowFilter.regexFilter("^Constructed - Premodern", TablesTableModel.COLUMN_DECK_TYPE));
         }
         if (btnFormatCommander.isSelected()) {
-            formatFilterList.add(RowFilter.regexFilter("^Commander|^Duel Commander|^Penny Dreadful Commander|^Freeform Commander|^MTGO 1v1 Commander|^Duel Brawl|^Brawl", TablesTableModel.COLUMN_DECK_TYPE));
+            formatFilterList.add(RowFilter.regexFilter("^Commander|^Duel Commander|^Centurion Commander|^Penny Dreadful Commander|^Freeform Commander|^MTGO 1v1 Commander|^Duel Brawl|^Brawl", TablesTableModel.COLUMN_DECK_TYPE));
         }
         if (btnFormatTinyLeader.isSelected()) {
             formatFilterList.add(RowFilter.regexFilter("^Tiny", TablesTableModel.COLUMN_DECK_TYPE));
+        }
+        if (btnFormatOathbreaker.isSelected()) {
+            formatFilterList.add(RowFilter.regexFilter("^Oathbreaker", TablesTableModel.COLUMN_DECK_TYPE));
         }
         if (btnFormatLimited.isSelected()) {
             formatFilterList.add(RowFilter.regexFilter("^Limited", TablesTableModel.COLUMN_DECK_TYPE));
@@ -962,11 +968,13 @@ public class TablesPanel extends javax.swing.JPanel {
         btnFormatBlock = new javax.swing.JToggleButton();
         btnFormatStandard = new javax.swing.JToggleButton();
         btnFormatModern = new javax.swing.JToggleButton();
+        btnFormatPioneer = new javax.swing.JToggleButton();
         btnFormatLegacy = new javax.swing.JToggleButton();
         btnFormatVintage = new javax.swing.JToggleButton();
         btnFormatPremodern = new javax.swing.JToggleButton();
         jSeparator3 = new javax.swing.JToolBar.Separator();
         btnFormatCommander = new javax.swing.JToggleButton();
+        btnFormatOathbreaker = new javax.swing.JToggleButton();
         btnFormatTinyLeader = new javax.swing.JToggleButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
         btnFormatLimited = new javax.swing.JToggleButton();
@@ -1180,7 +1188,7 @@ public class TablesPanel extends javax.swing.JPanel {
         btnRated.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnRated.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRatedbtnFilterActionPerformed(evt);
+                btnFilterActionPerformed(evt);
             }
         });
         filterBar1.add(btnRated);
@@ -1197,7 +1205,7 @@ public class TablesPanel extends javax.swing.JPanel {
         btnUnrated.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnUnrated.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUnratedbtnFilterActionPerformed(evt);
+                btnFilterActionPerformed(evt);
             }
         });
         filterBar1.add(btnUnrated);
@@ -1252,6 +1260,20 @@ public class TablesPanel extends javax.swing.JPanel {
         });
         filterBar2.add(btnFormatModern);
 
+        btnFormatPioneer.setSelected(true);
+        btnFormatPioneer.setText("Pioneer");
+        btnFormatPioneer.setToolTipText("Pioneer format.");
+        btnFormatPioneer.setFocusPainted(false);
+        btnFormatPioneer.setFocusable(false);
+        btnFormatPioneer.setRequestFocusEnabled(false);
+        btnFormatPioneer.setVerifyInputWhenFocusTarget(false);
+        btnFormatPioneer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFilterActionPerformed(evt);
+            }
+        });
+        filterBar2.add(btnFormatPioneer);
+
         btnFormatLegacy.setSelected(true);
         btnFormatLegacy.setText("Legacy");
         btnFormatLegacy.setToolTipText("Legacy format.");
@@ -1279,7 +1301,7 @@ public class TablesPanel extends javax.swing.JPanel {
         btnFormatVintage.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnFormatVintage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFormatVintageActionPerformed(evt);
+                btnFilterActionPerformed(evt);
             }
         });
         filterBar2.add(btnFormatVintage);
@@ -1295,7 +1317,7 @@ public class TablesPanel extends javax.swing.JPanel {
         btnFormatPremodern.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnFormatPremodern.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFormatPremodernActionPerformed(evt);
+                btnFilterActionPerformed(evt);
             }
         });
         filterBar2.add(btnFormatPremodern);
@@ -1316,6 +1338,22 @@ public class TablesPanel extends javax.swing.JPanel {
             }
         });
         filterBar2.add(btnFormatCommander);
+
+        btnFormatOathbreaker.setSelected(true);
+        btnFormatOathbreaker.setText("Oathbreaker");
+        btnFormatOathbreaker.setToolTipText("Oathbreaker format.");
+        btnFormatOathbreaker.setFocusPainted(false);
+        btnFormatOathbreaker.setFocusable(false);
+        btnFormatOathbreaker.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnFormatOathbreaker.setRequestFocusEnabled(false);
+        btnFormatOathbreaker.setVerifyInputWhenFocusTarget(false);
+        btnFormatOathbreaker.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnFormatOathbreaker.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFilterActionPerformed(evt);
+            }
+        });
+        filterBar2.add(btnFormatOathbreaker);
 
         btnFormatTinyLeader.setSelected(true);
         btnFormatTinyLeader.setText("Tiny Leader");
@@ -1432,7 +1470,7 @@ public class TablesPanel extends javax.swing.JPanel {
                                 .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(btnQuickStartDuel)
                                         .addComponent(btnQuickStartCommander))
-                                .addContainerGap(734, Short.MAX_VALUE))
+                                .addContainerGap(667, Short.MAX_VALUE))
         );
         jPanelTopLayout.setVerticalGroup(
                 jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1631,22 +1669,6 @@ public class TablesPanel extends javax.swing.JPanel {
         this.startUpdateTasks(true);
     }//GEN-LAST:event_btnStateFinishedActionPerformed
 
-    private void btnRatedbtnFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRatedbtnFilterActionPerformed
-        setTableFilter();
-    }//GEN-LAST:event_btnRatedbtnFilterActionPerformed
-
-    private void btnUnratedbtnFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUnratedbtnFilterActionPerformed
-        setTableFilter();
-    }//GEN-LAST:event_btnUnratedbtnFilterActionPerformed
-
-    private void btnFormatPremodernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFormatPremodernActionPerformed
-        setTableFilter();
-    }//GEN-LAST:event_btnFormatPremodernActionPerformed
-
-    private void btnFormatVintageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFormatVintageActionPerformed
-        setTableFilter();
-    }//GEN-LAST:event_btnFormatVintageActionPerformed
-
     private void buttonWhatsNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonWhatsNewActionPerformed
         MageFrame.getInstance().showWhatsNewDialog(true);
     }//GEN-LAST:event_buttonWhatsNewActionPerformed
@@ -1666,6 +1688,8 @@ public class TablesPanel extends javax.swing.JPanel {
     private javax.swing.JToggleButton btnFormatLegacy;
     private javax.swing.JToggleButton btnFormatLimited;
     private javax.swing.JToggleButton btnFormatModern;
+    private javax.swing.JToggleButton btnFormatPioneer;
+    private javax.swing.JToggleButton btnFormatOathbreaker;
     private javax.swing.JToggleButton btnFormatOther;
     private javax.swing.JToggleButton btnFormatPremodern;
     private javax.swing.JToggleButton btnFormatStandard;

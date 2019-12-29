@@ -1,6 +1,5 @@
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -20,8 +19,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class IntetTheDreamer extends CardImpl {
@@ -190,7 +190,7 @@ class IntetTheDreamerLookEffect extends AsThoughEffectImpl {
                 return (card != null
                         && card.isFaceDown(game)
                         && game.getExile().containsId(card.getId(), game)
-                        && (Boolean) game.getState().getValue("Exiled_IntetTheDreamer" + card.getId()));
+                        && Boolean.TRUE.equals(game.getState().getValue("Exiled_IntetTheDreamer" + card.getId())));
             }
         }
         return false;

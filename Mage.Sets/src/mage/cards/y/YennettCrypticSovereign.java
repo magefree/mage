@@ -43,7 +43,8 @@ public final class YennettCrypticSovereign extends CardImpl {
         // Menace
         this.addAbility(new MenaceAbility());
 
-        // Whenever Yennett, Cryptic Sovereign attacks, reveal the top card of your library. If that card's converted mana cost is odd, you may cast it without paying its mana cost. Otherwise, draw a card.
+        // Whenever Yennett, Cryptic Sovereign attacks, reveal the top card of your library. If that card's 
+        // converted mana cost is odd, you may cast it without paying its mana cost. Otherwise, draw a card.
         this.addAbility(new AttacksTriggeredAbility(
                 new YennettCrypticSovereignEffect(), false
         ));
@@ -92,6 +93,13 @@ class YennettCrypticSovereignEffect extends OneShotEffect {
         if (card.getConvertedManaCost() % 2 == 1) {
             if (player.chooseUse(outcome, "Cast " + card.getLogName() + " without paying its mana cost?", source, game)) {
                 player.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+            } else {
+                /*
+                7/13/2018 | If the revealed card doesn’t have an odd converted mana cost or if that card does but you 
+                choose not to cast it, you draw a card. Keep in mind that revealing a card doesn’t cause it to change 
+                zones. This means that the card you draw will be the card you revealed.
+                 */
+                player.drawCards(1, game);
             }
         } else {
             player.drawCards(1, game);

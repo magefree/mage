@@ -19,6 +19,7 @@ import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.designations.Designation;
 import mage.designations.DesignationType;
+import mage.filter.FilterMana;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.Graveyard;
@@ -400,11 +401,6 @@ public class PlayerStub implements Player {
     @Override
     public boolean canRespond() {
         return false;
-    }
-
-    @Override
-    public void otherPlayerLeftGame(Game game) {
-
     }
 
     @Override
@@ -912,7 +908,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public int announceXMana(int min, int max, String message, Game game, Ability ability) {
+    public int announceXMana(int min, int max, int multiplier, String message, Game game, Ability ability) {
         return min;
     }
 
@@ -1047,7 +1043,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public Set<UUID> getPlayableInHand(Game game) {
+    public Map<UUID, Integer> getPlayableObjects(Game game, Zone zone) {
         return null;
     }
 
@@ -1207,7 +1203,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public UUID getCastSourceIdWithAlternateMana() {
+    public Set<UUID> getCastSourceIdWithAlternateMana() {
         return null;
     }
 
@@ -1217,13 +1213,18 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public ManaCosts getCastSourceIdManaCosts() {
+    public Map<UUID, Costs<Cost>> getCastSourceIdCosts() {
         return null;
     }
 
     @Override
-    public Costs<Cost> getCastSourceIdCosts() {
+    public Map<UUID, ManaCosts<ManaCost>> getCastSourceIdManaCosts() {
         return null;
+    }
+
+    @Override
+    public void clearCastSourceIdManaCosts() {
+
     }
 
     @Override
@@ -1242,8 +1243,13 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean isRequestToShowHandCardsAllowed() {
+    public boolean isPlayerAllowedToRequestHand(UUID gameId, UUID requesterPlayerId) {
         return false;
+    }
+
+    @Override
+    public void addPlayerToRequestedHandList(UUID gameId, UUID requesterPlayerId) {
+        //
     }
 
     @Override
@@ -1364,6 +1370,26 @@ public class PlayerStub implements Player {
         int hash = 5;
         hash = 41 * hash + Objects.hashCode(this.id);
         return hash;
+    }
+
+    @Override
+    public void addPhyrexianToColors(FilterMana colors) {
+
+    }
+
+    @Override
+    public void removePhyrexianFromColors(FilterMana colors) {
+
+    }
+
+    @Override
+    public FilterMana getPhyrexianColors() {
+        return (new FilterMana());
+    }
+
+    @Override
+    public SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana) {
+        return card.getSpellAbility();
     }
 
 }

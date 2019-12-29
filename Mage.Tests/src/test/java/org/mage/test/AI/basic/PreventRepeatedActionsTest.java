@@ -1,4 +1,3 @@
-
 package org.mage.test.AI.basic;
 
 import mage.constants.PhaseStep;
@@ -10,14 +9,12 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseAI;
 
 /**
- *
  * @author LevelX2
  */
 public class PreventRepeatedActionsTest extends CardTestPlayerBaseAI {
 
     /**
      * Check that an equipment is not switched again an again between creatures
-     *
      */
     @Test
     public void testEquipOnlyOnce() {
@@ -77,10 +74,13 @@ public class PreventRepeatedActionsTest extends CardTestPlayerBaseAI {
 
         attack(2, playerB, "Silvercoat Lion");
         attack(2, playerB, "Silvercoat Lion");
+        blockSkip(2, playerA);
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
+        assertPermanentCount(playerA, "Kiora's Follower", 2);
+        assertPermanentCount(playerB, "Silvercoat Lion", 2);
         assertLife(playerA, 16);
         assertTapped("Kiora's Follower", false);
     }

@@ -13,23 +13,23 @@ import java.util.Map;
  */
 public class CanadianHighlander extends Constructed {
 
-    public static final Map<String, Integer> pointMap = new HashMap<>();
+    private static final Map<String, Integer> pointMap = new HashMap<>();
 
     static {
         pointMap.put("Ancestral Recall", 7);
         pointMap.put("Balance", 1);
         pointMap.put("Birthing Pod", 2);
         pointMap.put("Black Lotus", 7);
-        pointMap.put("Demonic Tutor", 3);
+        pointMap.put("Crop Rotation", 1);
+        pointMap.put("Demonic Tutor", 4);
         pointMap.put("Dig Through Time", 1);
         pointMap.put("Enlightened Tutor", 1);
-        pointMap.put("Fastbond", 1);
-        pointMap.put("Flash", 7);
+        pointMap.put("Flash", 6);
         pointMap.put("Gifts Ungiven", 2);
         pointMap.put("Imperial Seal", 1);
         pointMap.put("Intuition", 1);
         pointMap.put("Library of Alexandria", 1);
-        pointMap.put("Mana Crypt", 3);
+        pointMap.put("Mana Crypt", 4);
         pointMap.put("Mana Drain", 1);
         pointMap.put("Mana Vault", 1);
         pointMap.put("Merchant Scroll", 1);
@@ -42,7 +42,7 @@ public class CanadianHighlander extends Constructed {
         pointMap.put("Mystical Tutor", 2);
         pointMap.put("Natural Order", 4);
         pointMap.put("Protean Hulk", 3);
-        pointMap.put("Sol Ring", 3);
+        pointMap.put("Sol Ring", 4);
         pointMap.put("Spellseeker", 1);
         pointMap.put("Stoneforge Mystic", 1);
         pointMap.put("Strip Mine", 2);
@@ -56,7 +56,7 @@ public class CanadianHighlander extends Constructed {
         pointMap.put("Treasure Cruise", 1);
         pointMap.put("True-Name Nemesis", 1);
         pointMap.put("Umezawa's Jitte", 2);
-        pointMap.put("Vampiric Tutor", 3);
+        pointMap.put("Vampiric Tutor", 2);
     }
 
     public CanadianHighlander() {
@@ -89,14 +89,7 @@ public class CanadianHighlander extends Constructed {
         Map<String, Integer> counts = new HashMap<>();
         countCards(counts, deck.getCards());
         countCards(counts, deck.getSideboard());
-        for (Map.Entry<String, Integer> entry : counts.entrySet()) {
-            if (entry.getValue() > 1) {
-                if (!basicLandNames.contains(entry.getKey()) && !anyNumberCardsAllowed.contains(entry.getKey())) {
-                    invalid.put(entry.getKey(), "Too many: " + entry.getValue());
-                    valid = false;
-                }
-            }
-        }
+        valid = checkCounts(1, counts) && valid;
 
         int allowedPoints = 10;
         int totalPoints = 0;

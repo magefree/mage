@@ -48,7 +48,7 @@ public final class Besmirch extends CardImpl {
 class BesmirchEffect extends OneShotEffect {
 
     public BesmirchEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.GainControl);
         staticText = "Until end of turn, gain control of target creature and it gains haste. Untap and goad that creature";
     }
 
@@ -65,18 +65,27 @@ class BesmirchEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         if (game.getPermanent(source.getFirstTarget()) != null) {
             TargetPointer target = new FixedTarget(source.getFirstTarget());
+
+            // gain control
             ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfTurn);
             effect.setTargetPointer(target);
             game.addEffect(effect, source);
+
+            // haste
             effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
             effect.setTargetPointer(target);
             game.addEffect(effect, source);
-            Effect effect2 = new UntapTargetEffect();
+
+            // goad
+            Effect effect2 = new GoadTargetEffect();
             effect2.setTargetPointer(target);
             effect2.apply(game, source);
-            effect2 = new GoadTargetEffect();
+
+            // untap
+            effect2 = new UntapTargetEffect();
             effect2.setTargetPointer(target);
-            effect.apply(game, source);
+            effect2.apply(game, source);
+
             return true;
         }
         return false;

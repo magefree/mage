@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -21,18 +19,15 @@ import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.ForestwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetArtifactPermanent;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class ScarwoodBandits extends CardImpl {
@@ -117,13 +112,17 @@ class DoUnlessAnyOpponentPaysEffect extends OneShotEffect {
             // check if any opponent is willing to pay
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
-                if (player != null && !player.equals(controller) && cost.canPay(source, source.getSourceId(), player.getId(), game) && player.chooseUse(Outcome.Detriment, message, source, game)) {
+                if (player != null && player.canRespond()
+                        && !player.equals(controller)
+                        && cost.canPay(source, source.getSourceId(), player.getId(), game)
+                        && player.chooseUse(Outcome.Benefit, message, source, game)) {
                     cost.clearPaid();
                     if (cost.pay(source, game, source.getSourceId(), player.getId(), false, null)) {
                         if (!game.isSimulation()) {
                             game.informPlayers(player.getLogName() + " pays the cost to prevent the effect");
                         }
                         doEffect = false;
+                        break;
                     }
                 }
             }

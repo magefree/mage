@@ -12,6 +12,7 @@ import mage.cards.Sets;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
 import mage.filter.FilterMana;
+import mage.util.ManaUtil;
 
 import java.util.*;
 
@@ -20,7 +21,8 @@ import java.util.*;
  */
 public class Commander extends Constructed {
 
-    protected List<String> bannedCommander = new ArrayList<>();
+    protected final List<String> bannedCommander = new ArrayList<>();
+    protected final List<String> bannedPartner = new ArrayList<>();
     protected boolean partnerAllowed = true;
 
     public Commander() {
@@ -42,6 +44,7 @@ public class Commander extends Constructed {
         banned.add("Fastbond");
         banned.add("Gifts Ungiven");
         banned.add("Griselbrand");
+        banned.add("Iona, Shield of Emeria");
         banned.add("Karakas");
         banned.add("Leovold, Emissary of Trest");
         banned.add("Library of Alexandria");
@@ -51,8 +54,8 @@ public class Commander extends Constructed {
         banned.add("Mox Pearl");
         banned.add("Mox Ruby");
         banned.add("Mox Sapphire");
-        banned.add("Painter's Servant");
         banned.add("Panoptic Mirror");
+        banned.add("Paradox Engine");
         banned.add("Primeval Titan");
         banned.add("Prophet of Kruphix");
         banned.add("Recurring Nightmare");
@@ -97,14 +100,7 @@ public class Commander extends Constructed {
         Map<String, Integer> counts = new HashMap<>();
         countCards(counts, deck.getCards());
         countCards(counts, deck.getSideboard());
-        for (Map.Entry<String, Integer> entry : counts.entrySet()) {
-            if (entry.getValue() > 1) {
-                if (!basicLandNames.contains(entry.getKey()) && !anyNumberCardsAllowed.contains(entry.getKey())) {
-                    invalid.put(entry.getKey(), "Too many: " + entry.getValue());
-                    valid = false;
-                }
-            }
-        }
+        valid = checkCounts(1, counts) && valid;
 
         for (String bannedCard : banned) {
             if (counts.containsKey(bannedCard)) {
@@ -113,7 +109,7 @@ public class Commander extends Constructed {
             }
         }
 
-        if (deck.getSideboard().size() < 1 || deck.getSideboard().size() > 2) {
+        if (deck.getSideboard().isEmpty() || deck.getSideboard().size() > 2) {
             if ((deck.getSideboard().size() > 1 && !partnerAllowed)) {
                 invalid.put("Commander", "You may only have one commander");
             }
@@ -134,40 +130,36 @@ public class Commander extends Constructed {
                     invalid.put("Commander", "Commander invalid (" + commander.getName() + ')');
                     valid = false;
                 }
-                if (deck.getSideboard().size() == 2 && !commander.getAbilities().contains(PartnerAbility.getInstance())) {
-                    boolean partnersWith = false;
-                    for (Ability ability : commander.getAbilities()) {
-                        if (ability instanceof PartnerWithAbility
-                                && commanderNames.contains(((PartnerWithAbility) ability).getPartnerName())) {
-                            partnersWith = true;
-                            break;
+                if (deck.getSideboard().size() == 2) {
+                    if (commander.getAbilities().contains(PartnerAbility.getInstance())) {
+                        if (bannedPartner.contains(commander.getName())) {
+                            invalid.put("Commander", "Partner banned (" + commander.getName() + ')');
+                            valid = false;
+                        }
+                    } else {
+                        boolean partnersWith = commander.getAbilities()
+                                .stream()
+                                .filter(PartnerWithAbility.class::isInstance)
+                                .map(PartnerWithAbility.class::cast)
+                                .map(PartnerWithAbility::getPartnerName)
+                                .anyMatch(commanderNames::contains);
+                        if (!partnersWith) {
+                            invalid.put("Commander", "Commander without Partner (" + commander.getName() + ')');
+                            valid = false;
                         }
                     }
-                    if (!partnersWith) {
-                        invalid.put("Commander", "Commander without Partner (" + commander.getName() + ')');
-                        valid = false;
-                    }
                 }
-                FilterMana commanderColor = commander.getColorIdentity();
-                if (commanderColor.isWhite()) {
-                    colorIdentity.setWhite(true);
-                }
-                if (commanderColor.isBlue()) {
-                    colorIdentity.setBlue(true);
-                }
-                if (commanderColor.isBlack()) {
-                    colorIdentity.setBlack(true);
-                }
-                if (commanderColor.isRed()) {
-                    colorIdentity.setRed(true);
-                }
-                if (commanderColor.isGreen()) {
-                    colorIdentity.setGreen(true);
-                }
+                ManaUtil.collectColorIdentity(colorIdentity, commander.getColorIdentity());
             }
         }
+
+        // no needs in cards check on wrong commanders
+        if (!valid) {
+            return false;
+        }
+
         for (Card card : deck.getCards()) {
-            if (!cardHasValidColor(colorIdentity, card)) {
+            if (!ManaUtil.isColorIdentityCompatible(colorIdentity, card.getColorIdentity())) {
                 invalid.put(card.getName(), "Invalid color (" + colorIdentity.toString() + ')');
                 valid = false;
             }
@@ -189,15 +181,6 @@ public class Commander extends Constructed {
             }
         }
         return valid;
-    }
-
-    public boolean cardHasValidColor(FilterMana commander, Card card) {
-        FilterMana cardColor = card.getColorIdentity();
-        return !(cardColor.isBlack() && !commander.isBlack()
-                || cardColor.isBlue() && !commander.isBlue()
-                || cardColor.isGreen() && !commander.isGreen()
-                || cardColor.isRed() && !commander.isRed()
-                || cardColor.isWhite() && !commander.isWhite());
     }
 
     @Override

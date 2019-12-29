@@ -10,9 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -29,7 +27,6 @@ public final class Grollub extends CardImpl {
 
         // Whenever Grollub is dealt damage, each opponent gains that much life.
         this.addAbility(new DealtDamageToSourceTriggeredAbility(
-                Zone.BATTLEFIELD,
                 new EachOpponentGainsLifeEffect(), false, false, true));
 
     }

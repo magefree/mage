@@ -1,5 +1,10 @@
 package mage.client.dialog;
 
+import java.awt.*;
+import java.io.File;
+import java.util.*;
+import java.util.stream.Collectors;
+import javax.swing.*;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckFileFilter;
 import mage.cards.decks.importer.DeckImporter;
@@ -26,13 +31,6 @@ import mage.view.TableView;
 import mage.view.TournamentTypeView;
 import org.apache.log4j.Logger;
 
-import javax.swing.*;
-import java.awt.*;
-import java.io.File;
-import java.util.List;
-import java.util.*;
-import java.util.stream.Collectors;
-
 /**
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
@@ -41,13 +39,13 @@ public class NewTournamentDialog extends MageDialog {
     private static final Logger logger = Logger.getLogger(NewTournamentDialog.class);
 
     private TableView table;
-    private UUID playerId;
+    // private UUID playerId;
     private UUID roomId;
     private String lastSessionId;
     private RandomPacksSelectorDialog randomPackSelector;
     private JTextArea txtRandomPacks;
-    private final List<TournamentPlayerPanel> players = new ArrayList<>();
-    private final List<JPanel> packPanels = new ArrayList<>();
+    private final java.util.List<TournamentPlayerPanel> players = new ArrayList<>();
+    private final java.util.List<JPanel> packPanels = new ArrayList<>();
     private static final int CONSTRUCTION_TIME_MIN = 6;
     private static final int CONSTRUCTION_TIME_MAX = 30;
     private boolean isRandom = false;
@@ -231,15 +229,15 @@ public class NewTournamentDialog extends MageDialog {
         lblName.setText("Name:");
 
         lbTimeLimit.setText("Time Limit:");
-        lbTimeLimit.setToolTipText("The time a player has for the whole match. If a player runs out of time during a game, he loses the complete match. ");
+        lbTimeLimit.setToolTipText("The time a player has for the whole match. If a player runs out of time during a game, they lose the complete match. ");
 
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, cbTimeLimit, org.jdesktop.beansbinding.ObjectProperty.create(), lbTimeLimit, org.jdesktop.beansbinding.BeanProperty.create("labelFor"));
         bindingGroup.addBinding(binding);
 
-        cbTimeLimit.setToolTipText("The time a player has for the whole match. If a player runs out of time during a game, he loses the complete match. ");
+        cbTimeLimit.setToolTipText("The time a player has for the whole match. If a player runs out of time during a game, they lose the complete match. ");
 
         lbSkillLevel.setText("Skill Level:");
-        lbSkillLevel.setToolTipText("The time a player has for the whole match. If a player runs out of time during a game, he loses the complete match. ");
+        lbSkillLevel.setToolTipText("The time a player has for the whole match. If a player runs out of time during a game, they lose the complete match. ");
 
         cbSkillLevel.setToolTipText("<HTML>This option can be used to make it easier to find matches<br>\nwith opponents of the appropriate skill level.");
 
@@ -709,12 +707,12 @@ public class NewTournamentDialog extends MageDialog {
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         this.table = null;
-        this.playerId = null;
+        // this.playerId = null;
         this.hideDialog();
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void updateNumSeats() {
-        int numPlayers = (Integer) this.spnNumPlayers.getValue();
+        // int numPlayers = (Integer) this.spnNumPlayers.getValue();
         int numSeats = (Integer) this.spnNumSeats.getValue();
 
         if (numSeats > 2) {
@@ -966,11 +964,6 @@ public class NewTournamentDialog extends MageDialog {
         }
         randomPackSelector.setSelectedPacks(packList);
         txtRandomPacks.setText(packNames);
-
-        // workaround to apply field's auto-size
-        this.pack();
-        this.revalidate();
-        this.repaint();
     }
 
     private void createRandomPacks() {
@@ -993,6 +986,7 @@ public class NewTournamentDialog extends MageDialog {
             btnSelectRandomPacks.setToolTipText(RandomPacksSelectorDialog.randomDraftDescription);
             btnSelectRandomPacks.addActionListener(evt -> showRandomPackSelectorDialog());
             pnlRandomPacks.add(btnSelectRandomPacks);
+            this.pnlRandomPacks.setMinimumSize(new Dimension(784, 150));
         }
         txtRandomPacks.setText(txtRandomPacks.getText()); // workaround to apply field's auto-size
         this.pack();
@@ -1154,7 +1148,7 @@ public class NewTournamentDialog extends MageDialog {
             int packNumber = 0;
             for (String pack : packsArray) {
                 packNumber++;
-                if (this.packPanels.size() >= packNumber - 1) {
+                if (!packPanels.isEmpty() && this.packPanels.size() >= packNumber - 1) {
                     JPanel panel = packPanels.get(packNumber - 1);
                     JComboBox comboBox = findComboInComponent(panel);
 

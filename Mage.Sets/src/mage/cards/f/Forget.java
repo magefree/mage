@@ -22,7 +22,7 @@ public final class Forget extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}{U}");
 
 
-        // Target player discards two cards, then draws as many cards as he or she discarded this way.
+        // Target player discards two cards, then draws as many cards as they discarded this way.
         this.getSpellAbility().addEffect(new ForgetEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
@@ -41,7 +41,7 @@ class ForgetEffect extends OneShotEffect {
 
     public ForgetEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Target player discards two cards, then draws as many cards as he or she discarded this way";
+        this.staticText = "Target player discards two cards, then draws as many cards as they discarded this way";
     }
     
     public ForgetEffect(final ForgetEffect effect) {

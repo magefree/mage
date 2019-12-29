@@ -13,7 +13,6 @@ public class OathOfLiegesTest extends CardTestPlayerBase {
     //addCard(Zone.BATTLEFIELD, playerA, "Hypersonic Dragon", 1); // can cast spells at any time
     //addCard(Zone.HAND, playerA, "Breath of Life", 1); // {3}{W} // return creatures
     //addCard(Zone.HAND, playerA, "Replenish", 1); // {3}{W} // return all enchantments
-
     @Test
     public void testOath_OwnCardTriggersOnOwnTurn() {
         // A
@@ -140,7 +139,7 @@ public class OathOfLiegesTest extends CardTestPlayerBase {
         // turn 1 - A
         // cast oath A
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Replenish");
-        showBattlefield("A perms", 1, PhaseStep.POSTCOMBAT_MAIN, playerA);
+//        showBattlefield("A perms", 1, PhaseStep.POSTCOMBAT_MAIN, playerA);
         // cast oath copy
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Copy Enchantment");
         setChoice(playerA, "Yes"); // use copy effect
@@ -194,15 +193,14 @@ public class OathOfLiegesTest extends CardTestPlayerBase {
 
         // turn 1 - A
         // nothing
-
         // turn 2 - B
         // cast oath A
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Replenish");
         // cast oath copy by opponent
-        showBattlefield("A perms", 2, PhaseStep.POSTCOMBAT_MAIN, playerA);
-        showBattlefield("B perms", 2, PhaseStep.POSTCOMBAT_MAIN, playerB);
-        showAvaileableAbilities("B abils", 2, PhaseStep.POSTCOMBAT_MAIN, playerB);
-        showHand("B hand", 2, PhaseStep.POSTCOMBAT_MAIN, playerB);
+        // showBattlefield("A perms", 2, PhaseStep.POSTCOMBAT_MAIN, playerA);
+        // showBattlefield("B perms", 2, PhaseStep.POSTCOMBAT_MAIN, playerB);
+        // showAvaileableAbilities("B abils", 2, PhaseStep.POSTCOMBAT_MAIN, playerB);
+        // showHand("B hand", 2, PhaseStep.POSTCOMBAT_MAIN, playerB);
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Copy Enchantment");
         setChoice(playerB, "Yes"); // use copy effect
         setChoice(playerB, "Oath of Lieges"); // target for copy
@@ -210,7 +208,7 @@ public class OathOfLiegesTest extends CardTestPlayerBase {
         checkPermanentCount("B have 1 oath", 2, PhaseStep.END_TURN, playerA, "Oath of Lieges", 1);
         checkPermanentCount("A have 10 plains", 2, PhaseStep.END_TURN, playerA, "Plains", 10);
         checkPermanentCount("B have 12 plains", 2, PhaseStep.END_TURN, playerB, "Plains", 12);
-        showLibrary("lib B", 2, PhaseStep.END_TURN, playerB);
+        // showLibrary("lib B", 2, PhaseStep.END_TURN, playerB);
 
         // turn 3 - A
         // oath A triggers for A and activates

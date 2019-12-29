@@ -1,14 +1,11 @@
-
-
 package mage.abilities.effects.common;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  * @author JRHerlehy
@@ -29,7 +26,9 @@ public abstract class CouncilsDilemmaVoteEffect extends OneShotEffect {
         for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                if (player.chooseUse(Outcome.Vote, "Choose " + choiceOne + '?', source, game)) {
+                if (player.chooseUse(Outcome.Vote,
+                        "Choose " + choiceOne + " or " + choiceTwo + "?",
+                        source.getRule(), choiceOne, choiceTwo, source, game)) {
                     voteOneCount++;
                     game.informPlayers(player.getName() + " has voted for " + choiceOne);
                 } else {

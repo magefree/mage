@@ -22,6 +22,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  *
@@ -32,8 +33,8 @@ public class DraftController {
     private static final Logger logger = Logger.getLogger(GameController.class);
     public static final String INIT_FILE_PATH = "config" + File.separator + "init.txt";
 
-    private final ConcurrentHashMap<UUID, DraftSession> draftSessions = new ConcurrentHashMap<>();
-    private final ConcurrentHashMap<UUID, UUID> userPlayerMap;
+    private final ConcurrentMap<UUID, DraftSession> draftSessions = new ConcurrentHashMap<>();
+    private final ConcurrentMap<UUID, UUID> userPlayerMap;
     private final UUID draftSessionId;
     private final Draft draft;
     private final UUID tableId;

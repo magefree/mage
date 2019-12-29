@@ -1,5 +1,3 @@
-
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -9,33 +7,27 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author jeffwadsworth
  */
 public class PreventCombatDamageBySourceEffect extends PreventionEffectImpl {
 
     public PreventCombatDamageBySourceEffect(Duration duration) {
-            super(duration, Integer.MAX_VALUE, true);
-            staticText = "Prevent all combat damage that would be dealt by {this}" + duration.toString();
+        super(duration, Integer.MAX_VALUE, true);
+        staticText = "Prevent all combat damage that would be dealt by {this}" + duration.toString();
     }
 
     public PreventCombatDamageBySourceEffect(final PreventCombatDamageBySourceEffect effect) {
-            super(effect);
+        super(effect);
     }
 
     @Override
     public PreventCombatDamageBySourceEffect copy() {
-            return new PreventCombatDamageBySourceEffect(this);
+        return new PreventCombatDamageBySourceEffect(this);
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (super.applies(event, source, game)) {
-            if (event.getSourceId().equals(source.getSourceId())) {
-                return true;
-            }
-        }
-        return false;
+        return super.applies(event, source, game)
+                && event.getSourceId().equals(source.getSourceId());
     }
-
 }

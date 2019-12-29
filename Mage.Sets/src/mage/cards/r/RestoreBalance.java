@@ -23,19 +23,18 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- *
  * @author Plopman
  */
 public final class RestoreBalance extends CardImpl {
 
     public RestoreBalance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "");
 
         this.color.setWhite(true);
 
         // Suspend 6-{W}
         this.addAbility(new SuspendAbility(6, new ColoredManaCost(ColoredManaSymbol.W), this));
-        // Each player chooses a number of lands he or she controls equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players sacrifice creatures and discard cards the same way.
+        // Each player chooses a number of lands they control equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players sacrifice creatures and discard cards the same way.
         this.getSpellAbility().addEffect(new RestoreBalanceEffect());
     }
 
@@ -54,7 +53,7 @@ class RestoreBalanceEffect extends OneShotEffect {
 
     RestoreBalanceEffect() {
         super(Outcome.Sacrifice);
-        staticText = "Each player chooses a number of lands he or she controls equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players sacrifice creatures and discard cards the same way";
+        staticText = "Each player chooses a number of lands they control equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players sacrifice creatures and discard cards the same way";
     }
 
     RestoreBalanceEffect(final RestoreBalanceEffect effect) {
@@ -82,7 +81,7 @@ class RestoreBalanceEffect extends OneShotEffect {
                     }
                 }
             }
-            
+
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
@@ -96,7 +95,7 @@ class RestoreBalanceEffect extends OneShotEffect {
                     }
                 }
             }
-            
+
             for (UUID cardId : landsToSacrifice) {
                 Permanent permanent = game.getPermanent(cardId);
                 if (permanent != null) {
@@ -130,14 +129,14 @@ class RestoreBalanceEffect extends OneShotEffect {
                     }
                 }
             }
-            
+
             for (UUID cardId : creaturesToSacrifice) {
                 Permanent permanent = game.getPermanent(cardId);
                 if (permanent != null) {
                     permanent.sacrifice(source.getSourceId(), game);
                 }
             }
-            
+
             //Cards in hand
             int minCard = Integer.MAX_VALUE;
             Map<UUID, Cards> cardsToDiscard = new HashMap<>(2);
@@ -166,15 +165,14 @@ class RestoreBalanceEffect extends OneShotEffect {
                     }
                 }
             }
-            
+
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null && cardsToDiscard.get(playerId) != null) {
                     for (UUID cardId : cardsToDiscard.get(playerId)) {
                         Card card = game.getCard(cardId);
-                        if (card != null) {
-                            player.discard(card, source, game);
-                        }
+                        player.discard(card, source, game);
+
                     }
                 }
             }

@@ -19,7 +19,7 @@ public class ImprisonedInTheMoonTest extends CardTestPlayerBase {
     /* 
      * Reported bug: Urza land enchanted with Imprisoned In the Moon incorrectly makes it so other Urza lands only tap for 1 <> .
      * 
-     * Card ruling: http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=414360
+     * Card ruling: https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=414360
      *   If the enchanted permanent is a land and has land types, it retains those types even though it loses any intrinsic mana abilities associated with them. 
      *   For example, a Plains enchanted by Imprisoned in the Moon is still a Plains, but it can't tap for {W}, only for {C}.
     */

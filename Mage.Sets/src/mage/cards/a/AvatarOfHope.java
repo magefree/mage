@@ -1,13 +1,10 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.AdjustingSourceCosts;
 import mage.abilities.effects.common.combat.CanBlockAdditionalCreatureEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
@@ -32,7 +29,7 @@ public final class AvatarOfHope extends CardImpl {
         this.toughness = new MageInt(9);
 
         // If you have 3 or less life, Avatar of Hope costs {6} less to cast.
-        this.addAbility(new AdjustingCostsAbility());
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new AvatarOfHopeAdjustingCostsEffect()));
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Avatar of Hope can block any number of creatures.
@@ -49,76 +46,39 @@ public final class AvatarOfHope extends CardImpl {
     }
 }
 
-class AdjustingCostsAbility extends SimpleStaticAbility implements AdjustingSourceCosts {
+class AvatarOfHopeAdjustingCostsEffect extends CostModificationEffectImpl {
 
-    public AdjustingCostsAbility() {
-        super(Zone.OUTSIDE, new AdjustingCostsEffect());
+    AvatarOfHopeAdjustingCostsEffect() {
+        super(Duration.EndOfGame, Outcome.Benefit, CostModificationType.REDUCE_COST);
+        staticText = "If you have 3 or less life, {this} costs {6} less to cast";
     }
 
-    public AdjustingCostsAbility(final AdjustingCostsAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SimpleStaticAbility copy() {
-        return new AdjustingCostsAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "If you have 3 or less life, {this} costs {6} less to cast";
-    }
-
-    @Override
-    public void adjustCosts(Ability ability, Game game) {
-        if (ability.getAbilityType() == AbilityType.SPELL) {
-            Player player = game.getPlayer(ability.getControllerId());
-            if (player != null && player.getLife() < 4) {
-                CardUtil.adjustCost((SpellAbility) ability, 6);
-            }
-        }
-    }
-}
-
-class AdjustingCostsEffect extends CostModificationEffectImpl {
-
-    public AdjustingCostsEffect() {
-        super(Duration.Custom, Outcome.Benefit, CostModificationType.REDUCE_COST);
-    }
-
-    public AdjustingCostsEffect(final AdjustingCostsEffect effect) {
+    AvatarOfHopeAdjustingCostsEffect(AvatarOfHopeAdjustingCostsEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        SpellAbility spellAbility = (SpellAbility) abilityToModify;
-        Mana mana = spellAbility.getManaCostsToPay().getMana();
-        Player player = game.getPlayer(source.getControllerId());
-
-        if (mana.getGeneric() > 0 && player != null && player.getLife() < 4) {
-            int newCount = mana.getGeneric() - 6;
-            if (newCount < 0) {
-                newCount = 0;
-            }
-            mana.setGeneric(newCount);
-            spellAbility.getManaCostsToPay().load(mana.toString());
-            return true;
-        }
-        return false;
+        CardUtil.reduceCost(abilityToModify, 6);
+        return true;
     }
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if ((abilityToModify instanceof SpellAbility)
-                && abilityToModify.getSourceId().equals(source.getSourceId())) {
-            return true;
+        if (abilityToModify.getSourceId().equals(source.getSourceId())
+                && (abilityToModify instanceof SpellAbility)) {
+            Player player = game.getPlayer(abilityToModify.getControllerId());
+            if (player != null && player.getLife() < 4) {
+                return true;
+            }
         }
+
         return false;
     }
 
     @Override
-    public AdjustingCostsEffect copy() {
-        return new AdjustingCostsEffect(this);
+    public AvatarOfHopeAdjustingCostsEffect copy() {
+        return new AvatarOfHopeAdjustingCostsEffect(this);
     }
+
 }

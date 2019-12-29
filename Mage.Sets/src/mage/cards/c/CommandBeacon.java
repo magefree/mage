@@ -1,9 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -14,19 +10,23 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.CommanderCardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class CommandBeacon extends CardImpl {
 
     public CommandBeacon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
@@ -67,7 +67,7 @@ class CommandBeaconEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             List<Card> commandersInCommandZone = new ArrayList<>(1);
-            for (UUID commanderId : controller.getCommandersIds()) {
+            for (UUID commanderId : game.getCommandersIds(controller, CommanderCardType.COMMANDER_OR_OATHBREAKER)) {
                 Card commander = game.getCard(commanderId);
                 if (commander != null && game.getState().getZone(commander.getId()) == Zone.COMMAND) {
                     commandersInCommandZone.add(commander);
@@ -75,14 +75,12 @@ class CommandBeaconEffect extends OneShotEffect {
             }
             if (commandersInCommandZone.size() == 1) {
                 controller.moveCards(commandersInCommandZone.get(0), Zone.HAND, source, game);
-            }
-            else if (commandersInCommandZone.size() == 2) {
+            } else if (commandersInCommandZone.size() == 2) {
                 Card firstCommander = commandersInCommandZone.get(0);
                 Card secondCommander = commandersInCommandZone.get(1);
                 if (controller.chooseUse(Outcome.ReturnToHand, "Return which commander to hand?", null, firstCommander.getName(), secondCommander.getName(), source, game)) {
                     controller.moveCards(firstCommander, Zone.HAND, source, game);
-                }
-                else {
+                } else {
                     controller.moveCards(secondCommander, Zone.HAND, source, game);
                 }
             }

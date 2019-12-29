@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -20,8 +18,9 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class BragoKingEternal extends CardImpl {
@@ -29,7 +28,7 @@ public final class BragoKingEternal extends CardImpl {
     public BragoKingEternal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.SPIRIT);
+        this.subtype.add(SubType.SPIRIT, SubType.NOBLE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);

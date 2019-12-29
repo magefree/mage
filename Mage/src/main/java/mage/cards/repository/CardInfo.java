@@ -244,8 +244,8 @@ public class CardInfo {
         return Arrays.asList(list.split(SEPARATOR));
     }
 
-    public final EnumSet<CardType> getTypes() {
-        EnumSet<CardType> list = EnumSet.noneOf(CardType.class);
+    public final Set<CardType> getTypes() {
+        Set<CardType> list = EnumSet.noneOf(CardType.class);
         for (String type : this.types.split(SEPARATOR)) {
             try {
                 list.add(CardType.valueOf(type));
@@ -310,8 +310,8 @@ public class CardInfo {
         this.subtypes = joinList(subtypes);
     }
 
-    public final EnumSet<SuperType> getSupertypes() {
-        EnumSet<SuperType> list = EnumSet.noneOf(SuperType.class);
+    public final Set<SuperType> getSupertypes() {
+        Set<SuperType> list = EnumSet.noneOf(SuperType.class);
         for (String type : this.supertypes.split(SEPARATOR)) {
             try {
                 list.add(SuperType.valueOf(type));

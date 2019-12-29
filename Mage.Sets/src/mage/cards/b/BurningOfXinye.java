@@ -28,7 +28,7 @@ public final class BurningOfXinye extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{R}");
 
 
-        // You destroy four lands you control, then target opponent destroys four lands he or she controls. Then Burning of Xinye deals 4 damage to each creature.
+        // You destroy four lands you control, then target opponent destroys four lands they control. Then Burning of Xinye deals 4 damage to each creature.
         this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().addEffect(new BurningOfXinyeEffect());
         this.getSpellAbility().addEffect(new DamageAllEffect(4, new FilterCreaturePermanent()));
@@ -51,7 +51,7 @@ class BurningOfXinyeEffect extends OneShotEffect{
     
     public BurningOfXinyeEffect() {
         super(Outcome.DestroyPermanent);
-        staticText = "You destroy four lands you control, then target opponent destroys four lands he or she controls";
+        staticText = "You destroy four lands you control, then target opponent destroys four lands they control";
     }
 
     public BurningOfXinyeEffect ( BurningOfXinyeEffect effect ) {

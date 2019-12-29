@@ -1,9 +1,7 @@
-
 package mage.watchers.common;
 
 import mage.constants.WatcherScope;
 import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.watchers.Watcher;
@@ -65,6 +63,7 @@ public class PlayerLostLifeNonCombatWatcher extends Watcher {
 
     @Override
     public void reset() {
+        super.reset();
         amountOfLifeLostLastTurn.clear();
         amountOfLifeLostLastTurn.putAll(amountOfLifeLostThisTurn);
         amountOfLifeLostThisTurn.clear();

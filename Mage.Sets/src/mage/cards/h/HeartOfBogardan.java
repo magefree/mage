@@ -33,7 +33,7 @@ public final class HeartOfBogardan extends CardImpl {
         // Cumulative upkeep-Pay {2}.
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{2}")));
 
-        // When a player doesn't pay Heart of Bogardan's cumulative upkeep, Heart of Bogardan deals X damage to target player and each creature he or she controls, where X is twice the number of age counters on Heart of Bogardan minus 2.
+        // When a player doesn't pay Heart of Bogardan's cumulative upkeep, Heart of Bogardan deals X damage to target player and each creature they control, where X is twice the number of age counters on Heart of Bogardan minus 2.
         this.addAbility(new HeartOfBogardanTriggeredAbility());
     }
 

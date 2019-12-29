@@ -102,7 +102,7 @@ public class LeylineOfTheVoidTest extends CardTestPlayerBase {
     /*
     "Leyline of the Void's second ability doesn't affect token permanents that would be put into an opponent's graveyard from the battlefield. 
     They'll be put into that graveyard as normal (causing any applicable triggered abilities to trigger), then they'll cease to exist."
-    http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=107682
+    https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=107682
     
     */
     @Test

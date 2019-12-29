@@ -1,7 +1,7 @@
 package mage.cards.i;
 
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -19,7 +19,7 @@ import java.util.UUID;
 public final class ImpassionedOrator extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("another creature you control");
+            = new FilterControlledCreaturePermanent("another creature");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -34,7 +34,7 @@ public final class ImpassionedOrator extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever another creature enters the battlefield under your control, you gain 1 life.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(new GainLifeEffect(1), filter));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new GainLifeEffect(1), filter));
     }
 
     private ImpassionedOrator(final ImpassionedOrator card) {

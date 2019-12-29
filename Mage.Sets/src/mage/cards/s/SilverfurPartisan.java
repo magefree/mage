@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import mage.MageInt;
@@ -7,7 +6,6 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.TrampleAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -17,19 +15,18 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.WolfToken;
-import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class SilverfurPartisan extends CardImpl {
 
     public SilverfurPartisan(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add(SubType.WOLF);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(2);
@@ -75,11 +72,15 @@ class CreaturesYouControlBecomesTargetTriggeredAbility extends TriggeredAbilityI
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && permanent.isControlledBy(this.controllerId) && (permanent.hasSubtype(SubType.WOLF, game) || permanent.hasSubtype(SubType.WEREWOLF, game))) {
-            MageObject object = game.getObject(event.getSourceId());
-            if (object instanceof Spell) {
-                Card c = (Spell) object;
-                if (c.isInstant() || c.isSorcery()) {
+        MageObject object = game.getObject(event.getSourceId());
+        if (permanent != null
+                && object != null
+                && permanent.isControlledBy(this.controllerId)
+                && (permanent.hasSubtype(SubType.WOLF, game)
+                || permanent.hasSubtype(SubType.WEREWOLF, game))) {
+            if (object instanceof StackObject) {
+                if (object.isInstant()
+                        || object.isSorcery()) {
                     if (getTargets().isEmpty()) {
                         for (Effect effect : getEffects()) {
                             effect.setTargetPointer(new FixedTarget(event.getTargetId()));
@@ -89,6 +90,7 @@ class CreaturesYouControlBecomesTargetTriggeredAbility extends TriggeredAbilityI
                 }
             }
         }
+
         return false;
     }
 

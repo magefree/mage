@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -38,7 +37,8 @@ public final class MindleechMass extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 
-        // Whenever Mindleech Mass deals combat damage to a player, you may look at that player's hand. If you do, you may cast a nonland card in it without paying that card's mana cost.
+        // Whenever Mindleech Mass deals combat damage to a player, you may look at that 
+        // player's hand. If you do, you may cast a nonland card in it without paying that card's mana cost.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new MindleechMassEffect(), true, true));
     }
 
@@ -56,7 +56,8 @@ class MindleechMassEffect extends OneShotEffect {
 
     public MindleechMassEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "you may look at that player's hand. If you do, you may cast a nonland card in it without paying that card's mana cost";
+        this.staticText = "you may look at that player's hand. If you do, "
+                + "you may cast a nonland card in it without paying that card's mana cost";
     }
 
     public MindleechMassEffect(final MindleechMassEffect effect) {
@@ -82,7 +83,10 @@ class MindleechMassEffect extends OneShotEffect {
                 if (controller.chooseTarget(Outcome.PlayForFree, cardsInHand, target, source, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
-                        controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                        controller.cast(controller.chooseAbilityForCast(card, game, true),
+                                game, true, new MageObjectReference(source.getSourceObject(game), game));
+                        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
                     }
                 }
             }

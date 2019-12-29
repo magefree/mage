@@ -75,7 +75,7 @@ class KheruMindEaterExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (player != null && player.getHand().size() > 0) {
+        if (player != null && !player.getHand().isEmpty()) {
             Target target = new TargetCardInHand(1, new FilterCard());
             target.chooseTarget(Outcome.Exile, player.getId(), source, game);
             Card card = game.getCard(target.getFirstTarget());

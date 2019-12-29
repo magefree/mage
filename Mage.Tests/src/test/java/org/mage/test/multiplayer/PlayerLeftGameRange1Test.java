@@ -1,7 +1,5 @@
-
 package org.mage.test.multiplayer;
 
-import java.io.FileNotFoundException;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
@@ -10,14 +8,15 @@ import mage.counters.CounterType;
 import mage.game.FreeForAll;
 import mage.game.Game;
 import mage.game.GameException;
-import mage.game.mulligan.VancouverMulligan;
+import mage.game.mulligan.MulliganType;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestMultiPlayerBase;
 
+import java.io.FileNotFoundException;
+
 /**
- *
  * @author LevelX2
  */
 public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
@@ -25,7 +24,7 @@ public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
     @Override
     protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
         // Start Life = 2
-        Game game = new FreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ONE, new VancouverMulligan(0), 2);
+        Game game = new FreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ONE, MulliganType.GAME_DEFAULT.getMulligan(0), 2);
         // Player order: A -> D -> C -> B
         playerA = createPlayer(game, playerA, "PlayerA");
         playerB = createPlayer(game, playerB, "PlayerB");
@@ -126,12 +125,12 @@ public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
      * source if it has a proc. To reproduce, a Planeswalker was taken from an
      * original player's control, such as using Scrambleverse to shuffle Jace,
      * Unraveler of Secrets, to a second player and then the second player uses
-     * Jace's ability to create an emblem ("Whenever an opponent casts his or
-     * her first spell each turn, counter that spell."). Then the original
-     * player concedes the game and removes the Planeswalker. Once it becomes an
+     * Jace's ability to create an emblem ("Whenever an opponent casts their
+     * first spell each turn, counter that spell."). Then the original player
+     * concedes the game and removes the Planeswalker. Once it becomes an
      * opponent of the original player's turn and that opponent plays a spell,
      * Xmage throws an error and rollsback the turn.
-     *
+     * <p>
      * I don't have the actual error report on my due to negligence, but what I
      * can recollect is that the error message was along the lines of "The
      * emblem cannot find the original source. This turn will be rolled back".
@@ -278,7 +277,7 @@ public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
     /**
      * Pithing Needle keeps the named card's abilities disabled even after the
      * player controlling the Needle loses the game.
-     *
+     * <p>
      * I saw it happen during a Commander game. A player cast Pithing Needle
      * targeting my Proteus Staff. After I killed him, I still couldn't activate
      * the Staff.
@@ -294,7 +293,7 @@ public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerD, "Island", 3);
         // {2}{U}, {T}: Put target creature on the bottom of its owner's library. That creature's controller reveals cards from the
-        // top of their library until he or she reveals a creature card. The player puts that card onto the battlefield and the
+        // top of their library until they reveal a creature card. The player puts that card onto the battlefield and the
         // rest on the bottom of their library in any order. Activate this ability only any time you could cast a sorcery.
         addCard(Zone.BATTLEFIELD, playerD, "Proteus Staff", 1);
 

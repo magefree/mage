@@ -1,11 +1,8 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -18,9 +15,11 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.ManaUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author emerald000
  */
 public final class PhyrexianTyranny extends CardImpl {
@@ -28,7 +27,7 @@ public final class PhyrexianTyranny extends CardImpl {
     public PhyrexianTyranny(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{B}{R}");
 
-        // Whenever a player draws a card, that player loses 2 life unless he or she pays {2}.
+        // Whenever a player draws a card, that player loses 2 life unless they pay {2}.
         this.addAbility(new PhyrexianTyrannyTriggeredAbility());
     }
 
@@ -74,7 +73,7 @@ class PhyrexianTyrannyTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a player draws a card, that player loses 2 life unless he or she pays {2}.";
+        return "Whenever a player draws a card, that player loses 2 life unless they pay {2}.";
     }
 }
 
@@ -82,7 +81,7 @@ class PhyrexianTyrannyEffect extends OneShotEffect {
 
     PhyrexianTyrannyEffect() {
         super(Outcome.Neutral);
-        this.staticText = "that player loses 2 life unless he or she pays {2}";
+        this.staticText = "that player loses 2 life unless they pay {2}";
     }
 
     PhyrexianTyrannyEffect(final PhyrexianTyrannyEffect effect) {
@@ -98,7 +97,7 @@ class PhyrexianTyrannyEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
-            Cost cost = new GenericManaCost(2);
+            Cost cost = ManaUtil.createManaCost(2, false);
             if (!cost.pay(source, game, player.getId(), player.getId(), false, null)) {
                 player.loseLife(2, game, false);
             }

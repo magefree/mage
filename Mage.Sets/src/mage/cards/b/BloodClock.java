@@ -26,7 +26,7 @@ public final class BloodClock extends CardImpl {
     public BloodClock(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
-        // At the beginning of each player's upkeep, that player returns a permanent he or she controls to its owner's hand unless he or she pays 2 life.
+        // At the beginning of each player's upkeep, that player returns a permanent they control to its owner's hand unless they pay 2 life.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new BloodClockEffect(), TargetController.ANY, false, true);
         this.addAbility(ability);
     }
@@ -45,7 +45,7 @@ class BloodClockEffect extends OneShotEffect {
 
     public BloodClockEffect() {
         super(Outcome.ReturnToHand);
-        this.staticText = "that player returns a permanent he or she controls to its owner's hand unless he or she pays 2 life";
+        this.staticText = "that player returns a permanent they control to its owner's hand unless they pay 2 life";
     }
 
     public BloodClockEffect(final BloodClockEffect effect) {
@@ -65,7 +65,7 @@ class BloodClockEffect extends OneShotEffect {
         }
         if (player.getLife() > 2 && player.chooseUse(Outcome.Neutral, "Pay 2 life? If you don't, return a permanent you control to its owner's hand.", source, game)) {
             player.loseLife(2, game, false);
-            game.informPlayers(player.getLogName() + " pays 2 life. He will not return a permanent he or she controls.");
+            game.informPlayers(player.getLogName() + " pays 2 life. They will not return a permanent they control.");
             return true;
         } else {
             Target target = new TargetControlledPermanent();

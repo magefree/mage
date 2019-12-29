@@ -233,7 +233,7 @@ public class SpellskiteTest extends CardTestPlayerBase {
            once for each instances of the word “target” in the text
            of a spell or ability.  In this case, the target can't be changed
            due to Spellskite already being a target.
-        */
+         */
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
@@ -258,8 +258,6 @@ public class SpellskiteTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{U/P}: Change a target", "Fiery Justice", "Fiery Justice");
         setChoice(playerB, "Yes"); // pay 2 life
 
-        showBattlefield("B battle", 1, PhaseStep.BEGIN_COMBAT, playerB);
-        showGraveyard("B grave", 1, PhaseStep.BEGIN_COMBAT, playerB);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
         assertAllCommandsUsed();
@@ -274,7 +272,7 @@ public class SpellskiteTest extends CardTestPlayerBase {
     public void testThatSplitDamageCanGetRedirected() {
         /* Standard redirect test
            The Spellskite should die from the 5 damage that was redirected to it
-        */
+         */
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);

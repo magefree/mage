@@ -10,6 +10,7 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.targetpointer.TargetPointer;
 
 import java.util.*;
 
@@ -216,7 +217,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         boolean canDelete = false;
         Player player = game.getPlayer(startingControllerId);
 
-        // discard on start of turn for leave player
+        // discard on start of turn for leaved player
         // 800.4i When a player leaves the game, any continuous effects with durations that last until that player's next turn
         // or until a specific point in that turn will last until that turn would have begun.
         // They neither expire immediately nor last indefinitely.
@@ -332,6 +333,12 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     @Override
     public void addDependedToType(DependencyType dependencyType) {
         dependendToTypes.add(dependencyType);
+    }
+
+    @Override
+    public ContinuousEffect setTargetPointer(TargetPointer targetPointer) {
+        super.setTargetPointer(targetPointer);
+        return this;
     }
 
 }

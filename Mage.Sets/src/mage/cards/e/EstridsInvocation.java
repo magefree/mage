@@ -1,6 +1,5 @@
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -14,24 +13,27 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.StaticFilters;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledEnchantmentPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.functions.ApplyToPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class EstridsInvocation extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterControlledEnchantmentPermanent();
 
     public EstridsInvocation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
         // You may have Estrid's Invocation enter the battlefield as a copy of any enchantment you control, except it gains "At the beginning of your upkeep, you may exile this enchantment. If you do, return it to the battlefield under its owner's control."
         this.addAbility(new EntersBattlefieldAbility(new CopyPermanentEffect(
-                StaticFilters.FILTER_ENCHANTMENT_PERMANENT,
-                new EstridsInvocationApplier()
+                filter, new EstridsInvocationApplier()
         ).setText("as a copy of any enchantment you control, except it gains "
                 + "\"At the beginning of your upkeep, "
                 + "you may exile this enchantment. "
@@ -40,7 +42,7 @@ public final class EstridsInvocation extends CardImpl {
         ));
     }
 
-    public EstridsInvocation(final EstridsInvocation card) {
+    private EstridsInvocation(final EstridsInvocation card) {
         super(card);
     }
 
@@ -74,13 +76,13 @@ class EstridsInvocationApplier extends ApplyToPermanent {
 
 class EstridsInvocationEffect extends OneShotEffect {
 
-    public EstridsInvocationEffect() {
+    EstridsInvocationEffect() {
         super(Outcome.Neutral);
         this.staticText = "you may exile this enchantment. "
                 + "If you do, return it to the battlefield under its owner's control";
     }
 
-    public EstridsInvocationEffect(final EstridsInvocationEffect effect) {
+    private EstridsInvocationEffect(final EstridsInvocationEffect effect) {
         super(effect);
     }
 

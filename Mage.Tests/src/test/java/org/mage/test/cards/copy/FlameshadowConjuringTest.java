@@ -14,7 +14,7 @@ public class FlameshadowConjuringTest extends CardTestPlayerBase {
 
     /**
      * My opponent ran into an issue with Priest of the Blood Rite being copied
-     * with Flameshadow Conjuring. His copy was made and removed correctly at
+     * with Flameshadow Conjuring. Their copy was made and removed correctly at
      * the end of the turn, but the "lose two life a turn" trigger still
      * happened twice.
      *

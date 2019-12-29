@@ -27,7 +27,7 @@ public final class SlayerOfTheWicked extends CardImpl {
         filter.add(Predicates.or(
                 new SubtypePredicate(SubType.VAMPIRE),
                 new SubtypePredicate(SubType.WEREWOLF),
-                new SubtypePredicate(SubType.WEREWOLF)));
+                new SubtypePredicate(SubType.ZOMBIE)));
     }
 
     public SlayerOfTheWicked(UUID ownerId, CardSetInfo setInfo) {

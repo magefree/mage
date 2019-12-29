@@ -274,7 +274,7 @@ public class CallbackClientImpl implements CallbackClient {
                         if (panel != null) {
                             appendJsonEvent("GAME_UPDATE", callback.getObjectId(), callback.getData());
 
-                            panel.updateGame((GameView) callback.getData());
+                            panel.updateGame((GameView) callback.getData(), true, null, null); // update after undo
                         }
                         break;
                     }

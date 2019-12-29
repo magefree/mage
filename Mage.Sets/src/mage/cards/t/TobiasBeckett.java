@@ -1,19 +1,19 @@
 package mage.cards.t;
 
-import java.util.Objects;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.*;
-import mage.abilities.effects.common.ExileCardsFromTopOfLibraryTargetEffect;
+import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.AsThoughManaEffect;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.BountyAbility;
 import mage.cards.Card;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -24,15 +24,17 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
  * @author NinthWorld
  */
 public final class TobiasBeckett extends CardImpl {
 
     public TobiasBeckett(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
-        
+
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.HUNTER);
@@ -75,7 +77,7 @@ class TobiasBeckettEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Permanent bountyTriggered = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-            if(bountyTriggered != null) {
+            if (bountyTriggered != null) {
                 Player opponent = game.getPlayer(bountyTriggered.getControllerId());
                 if (opponent != null) {
                     MageObject sourceObject = game.getObject(source.getSourceId());
@@ -170,12 +172,12 @@ class TobiasBeckettSpendAnyManaEffect extends AsThoughEffectImpl implements AsTh
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        objectId = game.getCard(objectId).getMainCard().getId(); // for split cards
+        objectId = CardUtil.getMainCardId(game, objectId); // for split cards
+        FixedTarget fixedTarget = ((FixedTarget) getTargetPointer());
         return source.isControlledBy(affectedControllerId)
-                && Objects.equals(objectId, ((FixedTarget) getTargetPointer()).getTarget())
-                && ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(objectId)
-                && (((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(objectId))
-                && game.getState().getZone(objectId) == Zone.STACK;
+                && Objects.equals(objectId, fixedTarget.getTarget())
+                && game.getState().getZoneChangeCounter(objectId) <= fixedTarget.getZoneChangeCounter() + 1
+                && (game.getState().getZone(objectId) == Zone.STACK || game.getState().getZone(objectId) == Zone.EXILED);
     }
 
     @Override

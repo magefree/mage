@@ -9,6 +9,7 @@ import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.game.ExileZone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
@@ -34,8 +35,14 @@ public class HideawayPlayEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ExileZone zone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
-        if (zone == null || zone.isEmpty()) {
+        ExileZone zone = null;
+        Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (permanent != null) {
+            zone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), permanent.getZoneChangeCounter(game)));
+        }
+        
+        if (zone == null 
+                || zone.isEmpty()) {
             return true;
         }
         Card card = zone.getCards(game).iterator().next();

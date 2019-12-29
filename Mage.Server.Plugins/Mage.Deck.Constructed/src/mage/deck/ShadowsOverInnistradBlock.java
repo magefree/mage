@@ -12,7 +12,7 @@ public class ShadowsOverInnistradBlock extends Constructed {
 
     public ShadowsOverInnistradBlock() {
         super("Constructed - Shadows over Innistrad Block");
-        setCodes.add("SOI");
-        setCodes.add("EDM");
+        setCodes.add(mage.sets.ShadowsOverInnistrad.getInstance().getCode());
+        setCodes.add(mage.sets.EldritchMoon.getInstance().getCode());
     }
 }

@@ -31,7 +31,7 @@ public final class BroodingSaurian extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // At the beginning of each end step, each player gains control of all nontoken permanents he or she owns.
+        // At the beginning of each end step, each player gains control of all nontoken permanents they own.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new BroodingSaurianControlEffect(), TargetController.ANY, false));
     }
 
