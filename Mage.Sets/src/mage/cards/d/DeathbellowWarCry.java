@@ -39,15 +39,15 @@ public final class DeathbellowWarCry extends CardImpl {
 
 class DeathbellowWarCryTarget extends TargetCardInLibrary {
 
-    private static final FilterCard filter
+    private static final FilterCard minotaurFilter
             = new FilterCreatureCard("Minotaur creature cards with different names");
 
     static {
-        filter.add(new SubtypePredicate(SubType.MINOTAUR));
+        minotaurFilter.add(new SubtypePredicate(SubType.MINOTAUR));
     }
 
     DeathbellowWarCryTarget() {
-        super(0, 4, filter);
+        super(0, 4, minotaurFilter);
     }
 
     private DeathbellowWarCryTarget(final DeathbellowWarCryTarget target) {
