@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.HashSet;
@@ -10,10 +9,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterEnchantmentPermanent;
-import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -127,7 +126,7 @@ class TragicArroganceffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterNonlandPermanent(), game)) {
+                    for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENTS_NON_LAND, playerId, game)) {
                         if (!choosenPermanent.contains(permanent)) {
                             permanent.sacrifice(playerId, game);
                         }
