@@ -82,9 +82,9 @@ public class PutCardFromHandOntoBattlefieldEffect extends OneShotEffect {
         }
 
         if (useTargetController) {
-            return "that player may put " + filter.getMessage() + " from their hand onto the battlefield";
+            return "that player may put " + filter.getMessage() + " from their hand onto the battlefield" + (this.tapped ? " tapped" : "");
         } else {
-            return "you may put " + filter.getMessage() + " from your hand onto the battlefield";
+            return "you may put " + filter.getMessage() + " from your hand onto the battlefield" + (this.tapped ? " tapped" : "");
         }
     }
 }
