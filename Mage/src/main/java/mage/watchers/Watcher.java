@@ -5,12 +5,10 @@ import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import org.apache.log4j.Logger;
+import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
 
 import java.io.Serializable;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.*;
 import java.util.*;
 
 /**
@@ -97,12 +95,11 @@ public abstract class Watcher implements Serializable {
             Object[] args = new Object[constructor.getParameterCount()];
             for (int index = 0; index < constructor.getParameterTypes().length; index++) {
                 Class<?> parameterType = constructor.getParameterTypes()[index];
-                if(parameterType.isPrimitive()){
-                    if(parameterType.getSimpleName().equalsIgnoreCase("boolean")){
-                        args[index]=false;
+                if (parameterType.isPrimitive()) {
+                    if (parameterType.getSimpleName().equalsIgnoreCase("boolean")) {
+                        args[index] = false;
                     }
-                }
-                else {
+                } else {
                     args[index] = null;
                 }
 
@@ -119,8 +116,22 @@ public abstract class Watcher implements Serializable {
                         ((Set) field.get(watcher)).clear();
                         ((Set) field.get(watcher)).addAll((Set) field.get(this));
                     } else if (field.getType() == Map.class) {
-                        ((Map) field.get(watcher)).clear();
-                        ((Map) field.get(watcher)).putAll((Map) field.get(this));
+                        Map target = ((Map) field.get(watcher));
+                        target.clear();
+                        Map source = (Map) field.get(this);
+
+                        ParameterizedType parameterizedType = (ParameterizedType) field.getGenericType();
+                        Type valueType = parameterizedType.getActualTypeArguments()[1];
+                        if (valueType instanceof ParameterizedTypeImpl && ((ParameterizedTypeImpl) valueType).getRawType().getSimpleName().contains("Set")) {
+                            source.entrySet().forEach(kv -> {
+                                Object key = ((Map.Entry) kv).getKey();
+                                Set value = (Set) ((Map.Entry) kv).getValue();
+                                target.put(key, new HashSet<>(value));
+                            });
+                        }
+                        else {
+                            ((Map) field.get(watcher)).putAll((Map) field.get(this));
+                        }
                     } else if (field.getType() == List.class) {
                         ((List) field.get(watcher)).clear();
                         ((List) field.get(watcher)).addAll((List) field.get(this));
