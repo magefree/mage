@@ -196,7 +196,7 @@ public class LoadTest {
         Assert.assertFalse("need allowed sets", deckAllowedSets.isEmpty());
 
         // monitor and game source
-        LoadPlayer monitor = new LoadPlayer("monitor");
+        LoadPlayer monitor = new LoadPlayer("monitor", true);
 
         // game by monitor
         GameTypeView gameType = monitor.session.getGameTypes().get(0);
@@ -486,9 +486,13 @@ public class LoadTest {
         String lastGameResult = "";
 
         public LoadPlayer(String userPrefix) {
+            this(userPrefix, false);
+        }
+
+        public LoadPlayer(String userPrefix, boolean joinGameChat) {
             this.userName = TEST_USER_NAME + "_" + userPrefix + "_" + RandomUtil.nextInt(10000);
             this.connection = createSimpleConnection(this.userName);
-            this.client = new SimpleMageClient();
+            this.client = new SimpleMageClient(joinGameChat);
             this.session = new SessionImpl(this.client);
 
             this.session.connect(this.connection);
