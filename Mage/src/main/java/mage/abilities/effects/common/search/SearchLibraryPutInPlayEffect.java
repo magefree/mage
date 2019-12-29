@@ -86,7 +86,7 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect {
             }
             sb.append(target.getTargetName()).append(" and put them onto the battlefield");
         } else {
-            sb.append(target.getTargetName().startsWith("a ") || target.getTargetName().startsWith("an ") ? "" : sb.append("a "))
+            sb.append(target.getTargetName().startsWith("a ") || target.getTargetName().startsWith("an ") ? "" : "a ")
                     .append(target.getTargetName())
                     .append(" and put it onto the battlefield");
         }
