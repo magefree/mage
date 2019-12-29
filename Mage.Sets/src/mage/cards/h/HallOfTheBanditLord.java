@@ -70,17 +70,6 @@ class HallOfTheBanditLordWatcher extends Watcher {
         this.source = source;
     }
 
-    HallOfTheBanditLordWatcher(final HallOfTheBanditLordWatcher watcher) {
-        super(watcher);
-        this.creatures.addAll(watcher.creatures);
-        this.source = watcher.source;
-    }
-
-    @Override
-    public HallOfTheBanditLordWatcher copy() {
-        return new HallOfTheBanditLordWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.MANA_PAID) {

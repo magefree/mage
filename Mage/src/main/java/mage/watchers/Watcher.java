@@ -1,10 +1,8 @@
 
 package mage.watchers;
 
-import mage.Mana;
 import mage.constants.WatcherScope;
 import mage.game.Game;
-import mage.game.turn.Step;
 import mage.game.events.GameEvent;
 import org.apache.log4j.Logger;
 
@@ -12,6 +10,7 @@ import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
 import java.util.*;
 
 /**
@@ -85,35 +84,48 @@ public abstract class Watcher implements Serializable {
 
     public <T extends Watcher> T copy() {
         try {
-            List<?> constructors = Arrays.asList(this.getClass().getConstructors());
+            //use getDeclaredConstructors to allow for package-private constructors (i.e. omit public)
+            List<?> constructors = Arrays.asList(this.getClass().getDeclaredConstructors());
             if (constructors.size() > 1) {
                 logger.error(getClass().getSimpleName() + " has multiple constructors");
                 return null;
             }
 
             Constructor<? extends Watcher> constructor = (Constructor<? extends Watcher>) constructors.get(0);
-            if (constructor.getParameterCount() > 0) {
-                logger.error(getClass().getSimpleName() + " constructor has arguments, should be 0 and inject the parameters by setters");
-                return null;
-            }
+
             constructor.setAccessible(true);
-            T watcher = (T) constructor.newInstance();
+            Object[] args = new Object[constructor.getParameterCount()];
+            for (int index = 0; index < constructor.getParameterTypes().length; index++) {
+                Class<?> parameterType = constructor.getParameterTypes()[index];
+                if(parameterType.isPrimitive()){
+                    if(parameterType.getSimpleName().equalsIgnoreCase("boolean")){
+                        args[index]=false;
+                    }
+                }
+                else {
+                    args[index] = null;
+                }
+
+            }
+            T watcher = (T) constructor.newInstance(args);
             List<Field> allFields = new ArrayList<>();
             allFields.addAll(Arrays.asList(getClass().getDeclaredFields()));
             allFields.addAll(Arrays.asList(getClass().getSuperclass().getDeclaredFields()));
             for (Field field : allFields) {
-                field.setAccessible(true);
-               if (field.getType() == Set.class) {
-                    ((Set) field.get(watcher)).clear();
-                    ((Set) field.get(watcher)).addAll((Set) field.get(this));
-                } else if (field.getType() == Map.class) {
-                    ((Map) field.get(watcher)).clear();
-                    ((Map) field.get(watcher)).putAll((Map) field.get(this));
-                } else if (field.getType() == List.class) {
-                    ((List) field.get(watcher)).clear();
-                    ((List) field.get(watcher)).addAll((List) field.get(this));
-                } else {
-                    if (field.getType() != Logger.class) {
+                if (!Modifier.isStatic(field.getModifiers())) {
+
+                    field.setAccessible(true);
+                    if (field.getType() == Set.class) {
+                        ((Set) field.get(watcher)).clear();
+                        ((Set) field.get(watcher)).addAll((Set) field.get(this));
+                    } else if (field.getType() == Map.class) {
+                        ((Map) field.get(watcher)).clear();
+                        ((Map) field.get(watcher)).putAll((Map) field.get(this));
+                    } else if (field.getType() == List.class) {
+                        ((List) field.get(watcher)).clear();
+                        ((List) field.get(watcher)).addAll((List) field.get(this));
+
+                    } else {
                         field.set(watcher, field.get(this));
                     }
                 }

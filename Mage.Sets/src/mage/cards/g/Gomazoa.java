@@ -123,16 +123,6 @@ class BlockedByWatcher extends Watcher {
         super(WatcherScope.CARD);
     }
 
-    private BlockedByWatcher(final BlockedByWatcher watcher) {
-        super(watcher);
-        this.blockedByWatcher.addAll(watcher.blockedByWatcher);
-    }
-
-    @Override
-    public BlockedByWatcher copy() {
-        return new BlockedByWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {

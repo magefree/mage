@@ -76,11 +76,6 @@ class OathOfLilianaWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public OathOfLilianaWatcher(final OathOfLilianaWatcher watcher) {
-        super(watcher);
-        this.players.addAll(watcher.players);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
@@ -101,9 +96,5 @@ class OathOfLilianaWatcher extends Watcher {
         return players.contains(playerId);
     }
 
-    @Override
-    public OathOfLilianaWatcher copy() {
-        return new OathOfLilianaWatcher(this);
-    }
 
 }

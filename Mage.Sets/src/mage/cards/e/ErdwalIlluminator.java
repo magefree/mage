@@ -89,15 +89,6 @@ class InvestigatedWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public InvestigatedWatcher(final InvestigatedWatcher watcher) {
-        super(watcher);
-    }
-
-    @Override
-    public InvestigatedWatcher copy() {
-        return new InvestigatedWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.INVESTIGATED) {

@@ -74,11 +74,6 @@ class PlayerCastNonCreatureSpellWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public PlayerCastNonCreatureSpellWatcher(final PlayerCastNonCreatureSpellWatcher watcher) {
-        super(watcher);
-        this.playerIds.addAll(watcher.playerIds);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
@@ -87,11 +82,6 @@ class PlayerCastNonCreatureSpellWatcher extends Watcher {
                 playerIds.add(spell.getControllerId());
             }
         }
-    }
-
-    @Override
-    public PlayerCastNonCreatureSpellWatcher copy() {
-        return new PlayerCastNonCreatureSpellWatcher(this);
     }
 
     @Override

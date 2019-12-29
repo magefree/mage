@@ -91,13 +91,6 @@ class ThousandYearWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public ThousandYearWatcher(final ThousandYearWatcher watcher) {
-        super(watcher);
-        for (Entry<UUID, Integer> entry : watcher.amountOfInstantSorcerySpellsCastOnCurrentTurn.entrySet()) {
-            amountOfInstantSorcerySpellsCastOnCurrentTurn.put(entry.getKey(), entry.getValue());
-        }
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST && !sourceId.equals(event.getTargetId())) {
@@ -124,10 +117,4 @@ class ThousandYearWatcher extends Watcher {
     public int getAmountOfSpellsPlayerCastOnCurrentTurn(UUID playerId) {
         return amountOfInstantSorcerySpellsCastOnCurrentTurn.getOrDefault(playerId, 0);
     }
-
-    @Override
-    public ThousandYearWatcher copy() {
-        return new ThousandYearWatcher(this);
-    }
-
 }

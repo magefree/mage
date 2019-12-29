@@ -178,11 +178,6 @@ class KaradorGhostChieftainWatcher extends Watcher {
         super(WatcherScope.CARD);
     }
 
-    KaradorGhostChieftainWatcher(final KaradorGhostChieftainWatcher watcher) {
-        super(watcher);
-        this.abilityUsed = watcher.abilityUsed;
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST 
@@ -192,11 +187,6 @@ class KaradorGhostChieftainWatcher extends Watcher {
                 abilityUsed = true;
             }
         }
-    }
-
-    @Override
-    public KaradorGhostChieftainWatcher copy() {
-        return new KaradorGhostChieftainWatcher(this);
     }
 
     @Override

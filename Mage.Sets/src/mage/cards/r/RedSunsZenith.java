@@ -29,7 +29,7 @@ public final class RedSunsZenith extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.instance));
         this.getSpellAbility().addEffect(new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(ShuffleSpellEffect.getInstance());
-        this.getSpellAbility().addWatcher(new DamagedByWatcher());
+        this.getSpellAbility().addWatcher(new DamagedByWatcher(false));
     }
 
     public RedSunsZenith(final RedSunsZenith card) {

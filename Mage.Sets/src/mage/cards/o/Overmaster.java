@@ -109,15 +109,6 @@ class OvermasterWatcher extends Watcher {
         super(WatcherScope.PLAYER);
     }
 
-    OvermasterWatcher(final OvermasterWatcher watcher) {
-        super(watcher);
-        this.uncounterableSpell = watcher.uncounterableSpell;
-    }
-
-    @Override
-    public OvermasterWatcher copy() {
-        return new OvermasterWatcher(this);
-    }
 
     @Override
     public void watch(GameEvent event, Game game) {

@@ -54,17 +54,6 @@ class SpiritOfTheLabyrinthWatcher extends Watcher {
         this.playersThatDrewCard = new HashSet<>();
     }
 
-    public SpiritOfTheLabyrinthWatcher(final SpiritOfTheLabyrinthWatcher watcher) {
-        super(watcher);
-        this.playersThatDrewCard = new HashSet<>();
-        playersThatDrewCard.addAll(watcher.playersThatDrewCard);
-    }
-
-    @Override
-    public SpiritOfTheLabyrinthWatcher copy() {
-        return new SpiritOfTheLabyrinthWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DREW_CARD ) {

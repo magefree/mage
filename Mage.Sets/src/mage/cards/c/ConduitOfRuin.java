@@ -78,12 +78,6 @@ class ConduitOfRuinWatcher extends Watcher {
         playerCreatureSpells = new HashMap<>();
     }
 
-    public ConduitOfRuinWatcher(final ConduitOfRuinWatcher watcher) {
-        super(watcher);
-        this.playerCreatureSpells = new HashMap<>();
-        playerCreatureSpells.putAll(watcher.playerCreatureSpells);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
@@ -96,11 +90,6 @@ class ConduitOfRuinWatcher extends Watcher {
 
     public int creatureSpellsCastThisTurn(UUID playerId) {
         return playerCreatureSpells.getOrDefault(playerId, 0);
-    }
-
-    @Override
-    public ConduitOfRuinWatcher copy() {
-        return new ConduitOfRuinWatcher(this);
     }
 
     @Override

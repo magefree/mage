@@ -66,16 +66,6 @@ class GeneratorServantWatcher extends Watcher {
         super(WatcherScope.CARD);
     }
 
-    private GeneratorServantWatcher(final GeneratorServantWatcher watcher) {
-        super(watcher);
-        this.creatures.addAll(watcher.creatures);
-    }
-
-    @Override
-    public GeneratorServantWatcher copy() {
-        return new GeneratorServantWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.MANA_PAID) {

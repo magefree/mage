@@ -74,27 +74,13 @@ class DamagedByPiratesWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    private DamagedByPiratesWatcher(final DamagedByPiratesWatcher watcher) {
-        super(watcher);
-        for (UUID playerId : watcher.damageSourceIds.keySet()) {
-            Set<UUID> creatures = new HashSet<>();
-            creatures.addAll(watcher.damageSourceIds.get(playerId));
-            this.damageSourceIds.put(playerId, creatures);
-        }
-    }
-
-    @Override
-    public DamagedByPiratesWatcher copy() {
-        return new DamagedByPiratesWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
             if (((DamagedPlayerEvent) event).isCombatDamage()) {
                 Permanent creature = game.getPermanentOrLKIBattlefield(event.getSourceId());
                 if (creature != null && creature.hasSubtype(SubType.PIRATE, game)) {
-                    if (damageSourceIds.keySet().contains(event.getTargetId())) {
+                    if (damageSourceIds.containsKey(event.getTargetId())) {
                         damageSourceIds.get(event.getTargetId()).add(creature.getId());
                     } else {
                         Set<UUID> creatureSet = new HashSet<>();

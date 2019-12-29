@@ -97,16 +97,6 @@ class PalladiaMorsTheRuinerWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public PalladiaMorsTheRuinerWatcher(final PalladiaMorsTheRuinerWatcher watcher) {
-        super(watcher);
-        damagers.addAll(watcher.damagers);
-    }
-
-    @Override
-    public PalladiaMorsTheRuinerWatcher copy() {
-        return new PalladiaMorsTheRuinerWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         switch (event.getType()) {

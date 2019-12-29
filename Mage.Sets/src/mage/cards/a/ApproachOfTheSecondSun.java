@@ -99,11 +99,6 @@ class ApproachOfTheSecondSunWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public ApproachOfTheSecondSunWatcher(final ApproachOfTheSecondSunWatcher watcher) {
-        super(watcher);
-        approachesCast = new HashMap<>(watcher.approachesCast);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
@@ -118,8 +113,4 @@ class ApproachOfTheSecondSunWatcher extends Watcher {
         return approachesCast.getOrDefault(player, 0);
     }
 
-    @Override
-    public ApproachOfTheSecondSunWatcher copy() {
-        return new ApproachOfTheSecondSunWatcher(this);
-    }
 }

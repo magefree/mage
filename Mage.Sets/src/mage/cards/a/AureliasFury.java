@@ -175,17 +175,6 @@ class AureliasFuryDamagedByWatcher extends Watcher {
         super(WatcherScope.CARD);
     }
 
-    private AureliasFuryDamagedByWatcher(final AureliasFuryDamagedByWatcher watcher) {
-        super(watcher);
-        this.damagedCreatures.addAll(watcher.damagedCreatures);
-        this.damagedPlayers.addAll(watcher.damagedPlayers);
-    }
-
-    @Override
-    public AureliasFuryDamagedByWatcher copy() {
-        return new AureliasFuryDamagedByWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.DAMAGED_CREATURE) {

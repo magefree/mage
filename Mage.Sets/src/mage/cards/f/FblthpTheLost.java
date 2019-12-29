@@ -104,11 +104,6 @@ class FblthpTheLostWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    private FblthpTheLostWatcher(final FblthpTheLostWatcher watcher) {
-        super(watcher);
-        spellsCastFromLibrary.addAll(watcher.spellsCastFromLibrary);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getZone() == Zone.LIBRARY) {
@@ -129,11 +124,6 @@ class FblthpTheLostWatcher extends Watcher {
     public void reset() {
         super.reset();
         spellsCastFromLibrary.clear();
-    }
-
-    @Override
-    public FblthpTheLostWatcher copy() {
-        return new FblthpTheLostWatcher(this);
     }
 }
 

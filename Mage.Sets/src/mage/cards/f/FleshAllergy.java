@@ -60,15 +60,6 @@ class FleshAllergyWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    private FleshAllergyWatcher(final FleshAllergyWatcher watcher) {
-        super(watcher);
-    }
-
-    @Override
-    public FleshAllergyWatcher copy() {
-        return new FleshAllergyWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {

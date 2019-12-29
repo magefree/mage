@@ -60,16 +60,6 @@ class AsmiraHolyAvengerWatcher extends Watcher {
         condition = true;
     }
 
-    public AsmiraHolyAvengerWatcher(final AsmiraHolyAvengerWatcher watcher) {
-        super(watcher);
-        this.creaturesCount = watcher.creaturesCount;
-    }
-
-    @Override
-    public AsmiraHolyAvengerWatcher copy() {
-        return new AsmiraHolyAvengerWatcher(this);
-    }
-
     public int getCreaturesCount() {
         return creaturesCount;
     }

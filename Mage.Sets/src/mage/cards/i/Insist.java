@@ -107,16 +107,6 @@ class InsistWatcher extends Watcher {
         super(WatcherScope.PLAYER);
     }
 
-    InsistWatcher(final InsistWatcher watcher) {
-        super(watcher);
-        this.uncounterableSpell = watcher.uncounterableSpell;
-    }
-
-    @Override
-    public InsistWatcher copy() {
-        return new InsistWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST && ready) {

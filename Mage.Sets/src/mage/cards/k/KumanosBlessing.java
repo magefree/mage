@@ -112,16 +112,6 @@ class DamagedByEnchantedWatcher extends Watcher {
         super(WatcherScope.CARD);
     }
 
-    public DamagedByEnchantedWatcher(final DamagedByEnchantedWatcher watcher) {
-        super(watcher);
-        this.damagedCreatures.addAll(watcher.damagedCreatures);
-    }
-
-    @Override
-    public DamagedByEnchantedWatcher copy() {
-        return new DamagedByEnchantedWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.DAMAGED_CREATURE) {

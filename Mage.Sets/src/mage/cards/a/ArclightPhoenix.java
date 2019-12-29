@@ -87,16 +87,6 @@ class ArclightPhoenixWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public ArclightPhoenixWatcher(final ArclightPhoenixWatcher watcher) {
-        super(watcher);
-        this.instantSorceryCount.putAll(watcher.instantSorceryCount);
-    }
-
-    @Override
-    public ArclightPhoenixWatcher copy() {
-        return new ArclightPhoenixWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {

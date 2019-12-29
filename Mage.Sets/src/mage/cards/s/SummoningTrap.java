@@ -73,16 +73,6 @@ class SummoningTrapWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public SummoningTrapWatcher(final SummoningTrapWatcher watcher) {
-        super(watcher);
-        this.players.addAll(watcher.players);
-    }
-
-    @Override
-    public SummoningTrapWatcher copy() {
-        return new SummoningTrapWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.COUNTERED) {

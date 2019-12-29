@@ -142,20 +142,6 @@ class HopeOfGhirapurCombatDamageWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public HopeOfGhirapurCombatDamageWatcher(final HopeOfGhirapurCombatDamageWatcher watcher) {
-        super(watcher);
-        for (MageObjectReference damager : watcher.combatDamagedPlayers.keySet()) {
-            Set<UUID> players = new HashSet<>();
-            players.addAll(watcher.combatDamagedPlayers.get(damager));
-            this.combatDamagedPlayers.put(damager, players);
-        }
-    }
-
-    @Override
-    public HopeOfGhirapurCombatDamageWatcher copy() {
-        return new HopeOfGhirapurCombatDamageWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.DAMAGED_PLAYER && ((DamagedPlayerEvent) event).isCombatDamage()) {

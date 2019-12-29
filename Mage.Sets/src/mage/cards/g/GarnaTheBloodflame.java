@@ -112,11 +112,6 @@ class GarnaTheBloodflameWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public GarnaTheBloodflameWatcher(final GarnaTheBloodflameWatcher watcher) {
-        super(watcher);
-        this.cards.addAll(watcher.cards);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
@@ -125,11 +120,6 @@ class GarnaTheBloodflameWatcher extends Watcher {
                 cards.add(event.getTargetId());
             }
         }
-    }
-
-    @Override
-    public GarnaTheBloodflameWatcher copy() {
-        return new GarnaTheBloodflameWatcher(this);
     }
 
     public Set<UUID> getCardsPutToGraveyardThisTurn() {

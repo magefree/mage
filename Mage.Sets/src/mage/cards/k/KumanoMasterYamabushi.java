@@ -67,7 +67,7 @@ public final class KumanoMasterYamabushi extends CardImpl {
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
         // If a creature dealt damage by Kumano this turn would die, exile it instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DealtDamageToCreatureBySourceDies(this, Duration.WhileOnBattlefield)), new DamagedByWatcher());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DealtDamageToCreatureBySourceDies(this, Duration.WhileOnBattlefield)), new DamagedByWatcher(false));
         
     }
 

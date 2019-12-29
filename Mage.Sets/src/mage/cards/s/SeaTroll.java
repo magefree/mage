@@ -62,11 +62,6 @@ class SeaTrollWatcher extends Watcher {
         blockedOrBlockedByBlueThisTurnCreatures = new HashSet<>();
     }
 
-    public SeaTrollWatcher(SeaTrollWatcher watcher) {
-        super(watcher);
-        this.blockedOrBlockedByBlueThisTurnCreatures = new HashSet<>(watcher.blockedOrBlockedByBlueThisTurnCreatures);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
@@ -89,11 +84,6 @@ class SeaTrollWatcher extends Watcher {
 
     public boolean blockedOrBlockedByBlueCreatureThisTurn(MageObjectReference creature){
         return blockedOrBlockedByBlueThisTurnCreatures.contains(creature);
-    }
-
-    @Override
-    public SeaTrollWatcher copy() {
-        return new SeaTrollWatcher(this);
     }
 }
 

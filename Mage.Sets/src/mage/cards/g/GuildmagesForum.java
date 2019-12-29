@@ -62,16 +62,6 @@ class GuildmagesForumWatcher extends Watcher {
         this.source = source;
     }
 
-    GuildmagesForumWatcher(final GuildmagesForumWatcher watcher) {
-        super(watcher);
-        this.source = watcher.source;
-    }
-
-    @Override
-    public GuildmagesForumWatcher copy() {
-        return new GuildmagesForumWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.MANA_PAID) {

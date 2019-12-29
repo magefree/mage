@@ -174,22 +174,6 @@ class GrothamaAllDevouringWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    GrothamaAllDevouringWatcher(final GrothamaAllDevouringWatcher watcher) {
-        super(watcher);
-        for (MageObjectReference mor : watcher.damageMap.keySet()) {
-            this.damageMap.putIfAbsent(mor, new HashMap<>());
-            for (UUID key : watcher.damageMap.get(mor).keySet()) {
-                this.damageMap.get(mor).putIfAbsent(key, 0);
-                this.damageMap.get(mor).compute(key, (k, damage) -> damage + watcher.damageMap.get(mor).get(key));
-            }
-        }
-    }
-
-    @Override
-    public GrothamaAllDevouringWatcher copy() {
-        return new GrothamaAllDevouringWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() != GameEvent.EventType.DAMAGED_CREATURE) {

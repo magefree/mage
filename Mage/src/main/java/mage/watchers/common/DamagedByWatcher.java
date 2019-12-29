@@ -23,24 +23,9 @@ public class DamagedByWatcher extends Watcher {
 
     private final boolean watchPlaneswalkers;
 
-    public DamagedByWatcher() {
-        this(false);
-    }
-
     public DamagedByWatcher(boolean watchPlaneswalkers) {
         super(WatcherScope.CARD);
         this.watchPlaneswalkers = watchPlaneswalkers;
-    }
-
-    public DamagedByWatcher(final DamagedByWatcher watcher) {
-        super(watcher);
-        this.damagedBySource.addAll(watcher.damagedBySource);
-        this.watchPlaneswalkers = watcher.watchPlaneswalkers;
-    }
-
-    @Override
-    public DamagedByWatcher copy() {
-        return new DamagedByWatcher(this);
     }
 
     @Override

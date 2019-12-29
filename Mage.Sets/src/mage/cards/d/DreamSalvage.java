@@ -52,13 +52,6 @@ class CardsDiscardedThisTurnWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public CardsDiscardedThisTurnWatcher(final CardsDiscardedThisTurnWatcher watcher) {
-        super(watcher);
-        for (Entry<UUID, Integer> entry : watcher.amountOfCardsDiscardedThisTurn.entrySet()) {
-            amountOfCardsDiscardedThisTurn.put(entry.getKey(), entry.getValue());
-        }
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DISCARDED_CARD) {
@@ -76,11 +69,6 @@ class CardsDiscardedThisTurnWatcher extends Watcher {
     @Override
     public void reset() {
         amountOfCardsDiscardedThisTurn.clear();
-    }
-
-    @Override
-    public CardsDiscardedThisTurnWatcher copy() {
-        return new CardsDiscardedThisTurnWatcher(this);
     }
 }
 

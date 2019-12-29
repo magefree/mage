@@ -125,18 +125,6 @@ class CorrosiveOozeCombatWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public CorrosiveOozeCombatWatcher(final CorrosiveOozeCombatWatcher watcher) {
-        super(watcher);
-        for (Map.Entry<MageObjectReference, Set<MageObjectReference>> entry : watcher.oozeBlocksOrBlocked.entrySet()) {
-            Set<MageObjectReference> newSet = new HashSet<>(entry.getValue());
-            oozeBlocksOrBlocked.put(entry.getKey(), newSet);
-        }
-        for (Map.Entry<MageObjectReference, Set<MageObjectReference>> entry : watcher.oozeEquipmentsToDestroy.entrySet()) {
-            Set<MageObjectReference> newSet = new HashSet<>(entry.getValue());
-            oozeEquipmentsToDestroy.put(entry.getKey(), newSet);
-        }
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.BEGIN_COMBAT_STEP_PRE) {
@@ -208,10 +196,4 @@ class CorrosiveOozeCombatWatcher extends Watcher {
         oozeEquipmentsToDestroy.remove(ooze); // remove here to get no overlap with creatures leaving meanwhile
         return equipmentsToDestroy;
     }
-
-    @Override
-    public CorrosiveOozeCombatWatcher copy() {
-        return new CorrosiveOozeCombatWatcher(this);
-    }
-
 }

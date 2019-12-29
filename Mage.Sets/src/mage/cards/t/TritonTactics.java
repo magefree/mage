@@ -188,10 +188,6 @@ class BlockedCreaturesWatcher extends Watcher {
         super(WatcherScope.CARD);
     }
 
-    public BlockedCreaturesWatcher(final BlockedCreaturesWatcher watcher) {
-        super(watcher);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
@@ -225,10 +221,5 @@ class BlockedCreaturesWatcher extends Watcher {
         attackers = attackerMap.computeIfAbsent(zoneChangeCounter, k -> new HashSet<>());
         attackers.add(CardUtil.getCardZoneString(null, attackerId, game));
         game.getState().setValue("blockedAttackers" + getSourceId().toString(), attackerMap);
-    }
-
-    @Override
-    public BlockedCreaturesWatcher copy() {
-        return new BlockedCreaturesWatcher(this);
     }
 }

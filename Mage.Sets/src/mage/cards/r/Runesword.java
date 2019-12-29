@@ -47,7 +47,7 @@ public final class Runesword extends CardImpl {
         ability.addEffect(new RuneswordCantBeRegeneratedEffect());
         // If a creature dealt damage by the targeted creature would die this turn, exile that creature instead.
         SimpleStaticAbility ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new DealtDamageToCreatureBySourceDies(this, Duration.Custom));
-        ability2.addWatcher(new DamagedByWatcher());
+        ability2.addWatcher(new DamagedByWatcher(false));
         ability2.setRuleVisible(false);
         ability.addEffect(new GainAbilityTargetEffect(ability2, Duration.EndOfTurn, null, false).setText(
                 "If a creature dealt damage by the targeted creature would die this turn, exile that creature instead"));

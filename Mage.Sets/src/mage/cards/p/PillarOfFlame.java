@@ -25,7 +25,7 @@ public final class PillarOfFlame extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         // If a creature dealt damage this way would die this turn, exile it instead.
         this.getSpellAbility().addEffect(new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn));
-        this.getSpellAbility().addWatcher(new DamagedByWatcher());
+        this.getSpellAbility().addWatcher(new DamagedByWatcher(false));
     }
 
     public PillarOfFlame(final PillarOfFlame card) {

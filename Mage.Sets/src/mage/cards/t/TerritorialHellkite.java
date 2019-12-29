@@ -67,19 +67,10 @@ public final class TerritorialHellkite extends CardImpl {
 class AttackedLastCombatWatcher extends Watcher {
 
     // Map<lastCombatOfPlayerId, Map<attackingCreature, attackedPlayerId>>
-    public final Map<UUID, Map<MageObjectReference, UUID>> attackedLastCombatPlayers = new HashMap<>();
+    private final Map<UUID, Map<MageObjectReference, UUID>> attackedLastCombatPlayers = new HashMap<>();
 
     public AttackedLastCombatWatcher() {
         super(WatcherScope.GAME);
-    }
-
-    public AttackedLastCombatWatcher(final AttackedLastCombatWatcher watcher) {
-        super(watcher);
-        for (Entry<UUID, Map<MageObjectReference, UUID>> entry : watcher.attackedLastCombatPlayers.entrySet()) {
-            Map<MageObjectReference, UUID> allAttackersCopy = new HashMap<>();
-            allAttackersCopy.putAll(entry.getValue());
-            attackedLastCombatPlayers.put(entry.getKey(), allAttackersCopy);
-        }
     }
 
     @Override
@@ -104,12 +95,6 @@ class AttackedLastCombatWatcher extends Watcher {
     public Map<MageObjectReference, UUID> getAttackedLastCombatPlayers(UUID combatPlayerId) {
         return attackedLastCombatPlayers.get(combatPlayerId);
     }
-
-    @Override
-    public AttackedLastCombatWatcher copy() {
-        return new AttackedLastCombatWatcher(this);
-    }
-
 }
 
 class AttackIfAbleTargetRandoOpponentSourceEffect extends OneShotEffect {

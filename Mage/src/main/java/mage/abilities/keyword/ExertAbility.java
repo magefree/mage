@@ -149,16 +149,6 @@ class ExertedThisTurnWatcher extends Watcher {
         exertedThisTurnCreatures = new HashSet<>();
     }
 
-    public ExertedThisTurnWatcher(final ExertedThisTurnWatcher watcher) {
-        super(watcher);
-        exertedThisTurnCreatures = new HashSet<>(watcher.exertedThisTurnCreatures);
-    }
-
-    @Override
-    public Watcher copy() {
-        return new ExertedThisTurnWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.BECOMES_EXERTED) {

@@ -87,15 +87,6 @@ class CreaturesDiedThisTurnWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public CreaturesDiedThisTurnWatcher(final CreaturesDiedThisTurnWatcher watcher) {
-        super(watcher);
-    }
-
-    @Override
-    public CreaturesDiedThisTurnWatcher copy() {
-        return new CreaturesDiedThisTurnWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {

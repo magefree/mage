@@ -104,15 +104,6 @@ class ScoutsWarningWatcher extends Watcher {
         super(WatcherScope.PLAYER);
     }
 
-    public ScoutsWarningWatcher(final ScoutsWarningWatcher watcher) {
-        super(watcher);
-    }
-
-    @Override
-    public ScoutsWarningWatcher copy() {
-        return new ScoutsWarningWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {

@@ -64,16 +64,6 @@ class CallerOfTheClawWatcher extends Watcher {
         condition = true;
     }
 
-    public CallerOfTheClawWatcher(final CallerOfTheClawWatcher watcher) {
-        super(watcher);
-        this.creaturesCount = watcher.creaturesCount;
-    }
-
-    @Override
-    public CallerOfTheClawWatcher copy() {
-        return new CallerOfTheClawWatcher(this);
-    }
-
     public int getCreaturesCount() {
         return creaturesCount;
     }

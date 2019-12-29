@@ -114,16 +114,6 @@ class CathedralMembraneWatcher extends Watcher {
         super(WatcherScope.CARD);
     }
 
-    private CathedralMembraneWatcher(final CathedralMembraneWatcher watcher) {
-        super(watcher);
-        this.blockedCreatures.addAll(watcher.blockedCreatures);
-    }
-
-    @Override
-    public CathedralMembraneWatcher copy() {
-        return new CathedralMembraneWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED && event.getSourceId().equals(sourceId)) {

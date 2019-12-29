@@ -138,13 +138,6 @@ class AbandonedSarcophagusWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    private AbandonedSarcophagusWatcher(final AbandonedSarcophagusWatcher watcher) {
-        super(watcher);
-        for (Entry<UUID, Cards> entry : watcher.cycledCardsThisTurn.entrySet()) {
-            cycledCardsThisTurn.put(entry.getKey(), entry.getValue().copy());
-        }
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.CYCLE_CARD
@@ -169,10 +162,5 @@ class AbandonedSarcophagusWatcher extends Watcher {
     public void reset() {
         super.reset();
         cycledCardsThisTurn.clear();
-    }
-
-    @Override
-    public AbandonedSarcophagusWatcher copy() {
-        return new AbandonedSarcophagusWatcher(this);
     }
 }

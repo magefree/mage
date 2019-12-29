@@ -63,11 +63,6 @@ class ActivatedLoyaltyAbilityWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public ActivatedLoyaltyAbilityWatcher(final ActivatedLoyaltyAbilityWatcher watcher) {
-        super(watcher);
-        playerIds.addAll(watcher.playerIds);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ACTIVATED_ABILITY) {
@@ -83,11 +78,6 @@ class ActivatedLoyaltyAbilityWatcher extends Watcher {
     @Override
     public void reset() {
         playerIds.clear();
-    }
-
-    @Override
-    public ActivatedLoyaltyAbilityWatcher copy() {
-        return new ActivatedLoyaltyAbilityWatcher(this);
     }
 
     public boolean activatedLoyaltyAbility(UUID playerId) {

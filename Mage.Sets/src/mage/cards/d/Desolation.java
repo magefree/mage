@@ -109,10 +109,6 @@ class DesolationWatcher extends Watcher {
         super( WatcherScope.GAME);
     }
 
-    public DesolationWatcher(final DesolationWatcher watcher) {
-        super(watcher);
-        this.tappedForManaThisTurnPlayers.addAll(watcher.tappedForManaThisTurnPlayers);
-    }
 
     @Override
     public void watch(GameEvent event, Game game) {
@@ -131,10 +127,7 @@ class DesolationWatcher extends Watcher {
     }
 
     public Set<UUID> getPlayersTappedForMana() {
-        if (tappedForManaThisTurnPlayers != null) {
-            return tappedForManaThisTurnPlayers;
-        }
-        return new HashSet<>();
+        return tappedForManaThisTurnPlayers;
     }
 
     @Override
@@ -143,8 +136,4 @@ class DesolationWatcher extends Watcher {
         tappedForManaThisTurnPlayers.clear();
     }
 
-    @Override
-    public DesolationWatcher copy() {
-        return new DesolationWatcher(this);
-    }
 }

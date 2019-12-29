@@ -147,16 +147,6 @@ class KrovikanVampireCreaturesDamagedWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public KrovikanVampireCreaturesDamagedWatcher(final KrovikanVampireCreaturesDamagedWatcher watcher) {
-        super(watcher);
-        this.damagedBySource.addAll(watcher.damagedBySource);
-    }
-
-    @Override
-    public KrovikanVampireCreaturesDamagedWatcher copy() {
-        return new KrovikanVampireCreaturesDamagedWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.DAMAGED_CREATURE
@@ -183,11 +173,6 @@ class KrovikanVampireCreaturesDiedWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public KrovikanVampireCreaturesDiedWatcher(final KrovikanVampireCreaturesDiedWatcher watcher) {
-        super(watcher);
-        this.diedThisTurn.addAll(watcher.diedThisTurn);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
@@ -207,11 +192,6 @@ class KrovikanVampireCreaturesDiedWatcher extends Watcher {
 
     public Set<UUID> getDiedThisTurn() {
         return this.diedThisTurn;
-    }
-
-    @Override
-    public KrovikanVampireCreaturesDiedWatcher copy() {
-        return new KrovikanVampireCreaturesDiedWatcher(this);
     }
 }
 

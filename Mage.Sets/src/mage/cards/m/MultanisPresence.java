@@ -78,16 +78,6 @@ class MultanisPresenceWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public MultanisPresenceWatcher(final MultanisPresenceWatcher watcher) {
-        super(watcher);
-        this.spellsCast.putAll(watcher.spellsCast);
-    }
-
-    @Override
-    public MultanisPresenceWatcher copy() {
-        return new MultanisPresenceWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (GameEvent.EventType.SPELL_CAST == event.getType()) {

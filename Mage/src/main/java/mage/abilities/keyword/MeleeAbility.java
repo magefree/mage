@@ -45,13 +45,8 @@ class MeleeWatcher extends Watcher {
 
     private Map<UUID, Set<UUID>> playersAttacked = new HashMap<>(0);
 
-    MeleeWatcher() {
+    public MeleeWatcher() {
         super(WatcherScope.GAME);
-    }
-
-    MeleeWatcher(final MeleeWatcher watcher) {
-        super(watcher);
-        this.playersAttacked.putAll(watcher.playersAttacked);
     }
 
     @Override
@@ -71,11 +66,6 @@ class MeleeWatcher extends Watcher {
             return this.playersAttacked.get(attackerId).size();
         }
         return 0;
-    }
-
-    @Override
-    public MeleeWatcher copy() {
-        return new MeleeWatcher(this);
     }
 }
 

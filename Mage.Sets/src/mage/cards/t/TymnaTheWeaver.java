@@ -100,20 +100,6 @@ class TymnaTheWeaverWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public TymnaTheWeaverWatcher(final TymnaTheWeaverWatcher watcher) {
-        super(watcher);
-        for (UUID playerId : watcher.players.keySet()) {
-            Set<UUID> opponents = new HashSet<>();
-            opponents.addAll(watcher.players.get(playerId));
-            players.put(playerId, opponents);
-        }
-    }
-
-    @Override
-    public TymnaTheWeaverWatcher copy() {
-        return new TymnaTheWeaverWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.DAMAGED_PLAYER) {

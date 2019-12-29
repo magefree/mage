@@ -103,15 +103,6 @@ class QuickenWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    private QuickenWatcher(final QuickenWatcher watcher) {
-        super(watcher);
-    }
-
-    @Override
-    public QuickenWatcher copy() {
-        return new QuickenWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {

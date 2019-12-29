@@ -92,15 +92,6 @@ class WhisperingSnitchWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public WhisperingSnitchWatcher(final WhisperingSnitchWatcher watcher) {
-        super(watcher);
-    }
-
-    @Override
-    public WhisperingSnitchWatcher copy() {
-        return new WhisperingSnitchWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SURVEILED) {

@@ -101,13 +101,6 @@ class FreeRangeChickenWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public FreeRangeChickenWatcher(final FreeRangeChickenWatcher watcher) {
-        super(watcher);
-        for (Map.Entry<UUID, Integer> entry : watcher.totalRolls.entrySet()) {
-            this.totalRolls.put(entry.getKey(), entry.getValue());
-        }
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
     }
@@ -115,11 +108,6 @@ class FreeRangeChickenWatcher extends Watcher {
     @Override
     public void reset() {
         totalRolls.clear();
-    }
-
-    @Override
-    public FreeRangeChickenWatcher copy() {
-        return new FreeRangeChickenWatcher(this);
     }
 
     public void addRoll(UUID sourceId, int roll) {

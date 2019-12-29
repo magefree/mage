@@ -450,9 +450,24 @@ public class VerifyCardDataTest {
 
             // errors on create
             try {
-                Constructor<? extends Watcher> constructor = watcherClass.getDeclaredConstructor();
+                List<?> constructors = Arrays.asList(watcherClass.getDeclaredConstructors());
+
+                Constructor<? extends Watcher> constructor = (Constructor<? extends Watcher>) constructors.get(0);
+
+                Object[] args = new Object[constructor.getParameterCount()];
+                for (int index = 0; index < constructor.getParameterTypes().length; index++) {
+                    Class<?> parameterType = constructor.getParameterTypes()[index];
+                        if(parameterType.getSimpleName().equalsIgnoreCase("boolean")){
+                            args[index]=false;
+                        }
+                    else {
+                        args[index] = null;
+                    }
+
+                }
+
                 constructor.setAccessible(true);
-                Watcher w1 = constructor.newInstance();
+                Watcher w1 = constructor.newInstance(args);
 
                 // errors on copy
                 try {

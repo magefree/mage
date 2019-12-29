@@ -91,16 +91,6 @@ class CombatDamageToCreatureWatcher extends Watcher {
         dealtCombatDamageToCreature = new HashSet<>();
     }
 
-    public CombatDamageToCreatureWatcher(final CombatDamageToCreatureWatcher watcher) {
-        super(watcher);
-        dealtCombatDamageToCreature = new HashSet<>(watcher.dealtCombatDamageToCreature);
-    }
-
-    @Override
-    public CombatDamageToCreatureWatcher copy() {
-        return new CombatDamageToCreatureWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE) {

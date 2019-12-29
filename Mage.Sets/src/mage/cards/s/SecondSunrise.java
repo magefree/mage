@@ -85,21 +85,11 @@ class SecondSunriseWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public SecondSunriseWatcher(final SecondSunriseWatcher watcher) {
-        super(watcher);
-        this.cards.addAll(watcher.cards);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
             cards.add(event.getTargetId());
         }
-    }
-
-    @Override
-    public SecondSunriseWatcher copy() {
-        return new SecondSunriseWatcher(this);
     }
 
     @Override

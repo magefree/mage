@@ -107,14 +107,6 @@ class ETBSinceYourLastTurnWatcher extends Watcher {
         this.playerToETBMap = new HashMap<>();
     }
 
-    public ETBSinceYourLastTurnWatcher(ETBSinceYourLastTurnWatcher watcher) {
-        super(watcher);
-        this.playerToETBMap = new HashMap<>();
-        for (UUID player : watcher.playerToETBMap.keySet()){
-            this.playerToETBMap.put(player, new HashSet<>(watcher.playerToETBMap.get(player)));
-        }
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.END_TURN_STEP_POST){
@@ -136,10 +128,5 @@ class ETBSinceYourLastTurnWatcher extends Watcher {
 
     public boolean enteredSinceLastTurn(UUID player, MageObjectReference mor){
         return playerToETBMap.get(player).contains(mor);
-    }
-
-    @Override
-    public ETBSinceYourLastTurnWatcher copy() {
-        return new ETBSinceYourLastTurnWatcher(this);
     }
 }

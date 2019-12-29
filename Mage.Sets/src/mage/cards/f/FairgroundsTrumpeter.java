@@ -76,11 +76,6 @@ class FairgroundsTrumpeterWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public FairgroundsTrumpeterWatcher(final FairgroundsTrumpeterWatcher watcher) {
-        super(watcher);
-        this.players.addAll(watcher.players);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.COUNTER_ADDED && event.getData().equals(CounterType.P1P1.getName())) {
@@ -103,8 +98,4 @@ class FairgroundsTrumpeterWatcher extends Watcher {
         return players.contains(playerId);
     }
 
-    @Override
-    public FairgroundsTrumpeterWatcher copy() {
-        return new FairgroundsTrumpeterWatcher(this);
-    }
 }

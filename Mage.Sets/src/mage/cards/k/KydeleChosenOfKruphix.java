@@ -88,11 +88,6 @@ class KydeleCardsDrawnThisTurnWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public KydeleCardsDrawnThisTurnWatcher(final KydeleCardsDrawnThisTurnWatcher watcher) {
-        super(watcher);
-        this.cardsDrawnThisTurn.putAll(watcher.cardsDrawnThisTurn);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DREW_CARD) {
@@ -110,10 +105,5 @@ class KydeleCardsDrawnThisTurnWatcher extends Watcher {
         super.reset();
         cardsDrawnThisTurn.clear();
 
-    }
-
-    @Override
-    public KydeleCardsDrawnThisTurnWatcher copy() {
-        return new KydeleCardsDrawnThisTurnWatcher(this);
     }
 }

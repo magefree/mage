@@ -160,23 +160,10 @@ class VodalianWarMachineEffect extends OneShotEffect {
 
 class VodalianWarMachineWatcher extends Watcher {
 
-    public Map<MageObjectReference, Set<MageObjectReference>> tappedMerfolkIds = new HashMap<>();
+    private Map<MageObjectReference, Set<MageObjectReference>> tappedMerfolkIds = new HashMap<>();
 
     public VodalianWarMachineWatcher() {
         super(WatcherScope.GAME);
-    }
-
-    public VodalianWarMachineWatcher(final VodalianWarMachineWatcher watcher) {
-        super(watcher);
-        // We have for sure to use copied collections, but there is no need to copy the MageObjectReference objects.
-        for (Entry<MageObjectReference, Set<MageObjectReference>> entry : watcher.tappedMerfolkIds.entrySet()) {
-            this.tappedMerfolkIds.put(entry.getKey(), new HashSet<>(entry.getValue()));
-        }
-    }
-
-    @Override
-    public VodalianWarMachineWatcher copy() {
-        return new VodalianWarMachineWatcher(this);
     }
 
     public Set<MageObjectReference> getTappedMerfolkIds(Permanent permanent, Game game) {

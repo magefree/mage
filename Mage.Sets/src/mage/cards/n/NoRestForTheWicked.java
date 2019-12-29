@@ -98,12 +98,6 @@ class NoRestForTheWickedWatcher extends Watcher {
         this.cards = new ArrayList<>();
     }
 
-    public NoRestForTheWickedWatcher(final NoRestForTheWickedWatcher watcher) {
-        super(watcher);
-        this.cards = new ArrayList<>();
-        this.cards.addAll(watcher.cards);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE
@@ -111,11 +105,6 @@ class NoRestForTheWickedWatcher extends Watcher {
             //400.3 Intercept only the controller's events
             cards.add(event.getTargetId());
         }
-    }
-
-    @Override
-    public NoRestForTheWickedWatcher copy() {
-        return new NoRestForTheWickedWatcher(this);
     }
 
     @Override

@@ -100,15 +100,6 @@ class VeneratedLoxodonWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public VeneratedLoxodonWatcher(final VeneratedLoxodonWatcher watcher) {
-        super(watcher);
-        for (Entry<MageObjectReference, Set<MageObjectReference>> entry : watcher.convokingCreatures.entrySet()) {
-            Set<MageObjectReference> creatures = new HashSet<>();
-            creatures.addAll(entry.getValue());
-            convokingCreatures.put(entry.getKey(), creatures);
-        }
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.CONVOKED) {
@@ -138,8 +129,4 @@ class VeneratedLoxodonWatcher extends Watcher {
         convokingCreatures.clear();
     }
 
-    @Override
-    public VeneratedLoxodonWatcher copy() {
-        return new VeneratedLoxodonWatcher(this);
-    }
 }

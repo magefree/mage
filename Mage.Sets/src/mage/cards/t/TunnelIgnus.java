@@ -56,18 +56,6 @@ class TunnelIgnusWatcher extends Watcher {
         super(WatcherScope.PLAYER);
     }
 
-    public TunnelIgnusWatcher(final TunnelIgnusWatcher watcher) {
-        super(watcher);
-        for (Entry<UUID, Integer> entry : watcher.counts.entrySet()) {
-            counts.put(entry.getKey(), entry.getValue());
-        }
-    }
-
-    @Override
-    public TunnelIgnusWatcher copy() {
-        return new TunnelIgnusWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
