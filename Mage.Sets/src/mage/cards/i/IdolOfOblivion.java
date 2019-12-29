@@ -81,11 +81,6 @@ class IdolOfOblivionWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    private IdolOfOblivionWatcher(final IdolOfOblivionWatcher watcher) {
-        super(watcher);
-        playerIds.addAll(watcher.playerIds);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() != GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
@@ -100,11 +95,6 @@ class IdolOfOblivionWatcher extends Watcher {
     @Override
     public void reset() {
         playerIds.clear();
-    }
-
-    @Override
-    public IdolOfOblivionWatcher copy() {
-        return new IdolOfOblivionWatcher(this);
     }
 
     boolean tokenEntered(UUID playerId) {

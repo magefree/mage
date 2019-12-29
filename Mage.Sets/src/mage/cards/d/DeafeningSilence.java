@@ -92,13 +92,6 @@ class DeafeningSilenceWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    private DeafeningSilenceWatcher(final DeafeningSilenceWatcher watcher) {
-        super(watcher);
-        for (Map.Entry<UUID, Integer> entry : watcher.spellsCastByPlayerThisTurnNonCreature.entrySet()) {
-            spellsCastByPlayerThisTurnNonCreature.put(entry.getKey(), entry.getValue());
-        }
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() != GameEvent.EventType.SPELL_CAST) {
@@ -124,10 +117,5 @@ class DeafeningSilenceWatcher extends Watcher {
 
     public int spellsCastByPlayerThisTurnNonCreature(UUID playerId) {
         return spellsCastByPlayerThisTurnNonCreature.getOrDefault(playerId, 0);
-    }
-
-    @Override
-    public DeafeningSilenceWatcher copy() {
-        return new DeafeningSilenceWatcher(this);
     }
 }

@@ -76,11 +76,6 @@ class ZhalfirinDecoyWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    private ZhalfirinDecoyWatcher(final ZhalfirinDecoyWatcher watcher) {
-        super(watcher);
-        this.players.addAll(watcher.players);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
@@ -101,8 +96,4 @@ class ZhalfirinDecoyWatcher extends Watcher {
         return players.contains(playerId);
     }
 
-    @Override
-    public ZhalfirinDecoyWatcher copy() {
-        return new ZhalfirinDecoyWatcher(this);
-    }
 }

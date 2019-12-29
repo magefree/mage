@@ -21,11 +21,6 @@ public class CardsDrawnThisTurnWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    private CardsDrawnThisTurnWatcher(final CardsDrawnThisTurnWatcher watcher) {
-        super(watcher);
-        this.cardsDrawnThisTurn.putAll(watcher.cardsDrawnThisTurn);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DREW_CARD) {
@@ -43,10 +38,5 @@ public class CardsDrawnThisTurnWatcher extends Watcher {
         super.reset();
         cardsDrawnThisTurn.clear();
 
-    }
-
-    @Override
-    public CardsDrawnThisTurnWatcher copy() {
-        return new CardsDrawnThisTurnWatcher(this);
     }
 }

@@ -140,11 +140,6 @@ class ChainerNightmareAdeptWatcher extends Watcher {
         super(WatcherScope.CARD);
     }
 
-    ChainerNightmareAdeptWatcher(final ChainerNightmareAdeptWatcher watcher) {
-        super(watcher);
-        this.abilityUsed = watcher.abilityUsed;
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getZone() == Zone.GRAVEYARD) {
@@ -153,11 +148,6 @@ class ChainerNightmareAdeptWatcher extends Watcher {
                 abilityUsed = true;
             }
         }
-    }
-
-    @Override
-    public ChainerNightmareAdeptWatcher copy() {
-        return new ChainerNightmareAdeptWatcher(this);
     }
 
     @Override

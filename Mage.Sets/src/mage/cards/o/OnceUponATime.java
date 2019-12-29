@@ -83,16 +83,6 @@ class OnceUponATimeWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    private OnceUponATimeWatcher(final OnceUponATimeWatcher watcher) {
-        super(watcher);
-        this.castSpells.addAll(watcher.castSpells);
-    }
-
-    @Override
-    public OnceUponATimeWatcher copy() {
-        return new OnceUponATimeWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (GameEvent.EventType.SPELL_CAST == event.getType()) {

@@ -97,11 +97,6 @@ class SevinneTheChronoclasmWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    private SevinneTheChronoclasmWatcher(final SevinneTheChronoclasmWatcher watcher) {
-        super(watcher);
-        this.firstSpellThisTurn.putAll(watcher.firstSpellThisTurn);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() != GameEvent.EventType.SPELL_CAST
@@ -123,8 +118,4 @@ class SevinneTheChronoclasmWatcher extends Watcher {
         return targetId != null && targetId.equals(firstSpellThisTurn.getOrDefault(playerId, null));
     }
 
-    @Override
-    public Watcher copy() {
-        return new SevinneTheChronoclasmWatcher(this);
-    }
 }
