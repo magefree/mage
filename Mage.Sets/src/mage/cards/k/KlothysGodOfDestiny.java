@@ -5,7 +5,6 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfPreCombatMainTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -28,8 +27,6 @@ import java.util.UUID;
  */
 public final class KlothysGodOfDestiny extends CardImpl {
 
-    private static final DynamicValue xValue = new DevotionCount(ColoredManaSymbol.R, ColoredManaSymbol.G);
-
     public KlothysGodOfDestiny(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{R}{G}");
 
@@ -42,9 +39,9 @@ public final class KlothysGodOfDestiny extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
 
         // As long as your devotion to red and green is less than seven, Klothys isn't a creature.
-        Effect effect = new LoseCreatureTypeSourceEffect(xValue, 7);
+        Effect effect = new LoseCreatureTypeSourceEffect(DevotionCount.RG, 7);
         effect.setText("As long as your devotion to red and green is less than seven, {this} isn't a creature");
-        this.addAbility(new SimpleStaticAbility(effect).addHint(new ValueHint("Devotion to red and green", xValue)));
+        this.addAbility(new SimpleStaticAbility(effect).addHint(new ValueHint("Devotion to red and green", DevotionCount.RG)));
 
         // At the beginning of your precombat main phase, exile target card from a graveyard. If it was a land card, add {R} or {G}. Otherwise, you gain 2 life and Klothys deals 2 damage to each opponent.
         Ability ability = new BeginningOfPreCombatMainTriggeredAbility(

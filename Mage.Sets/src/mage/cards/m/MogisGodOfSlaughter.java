@@ -8,7 +8,6 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -34,8 +33,6 @@ import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
  */
 public final class MogisGodOfSlaughter extends CardImpl {
 
-    private static final DynamicValue xValue = new DevotionCount(ColoredManaSymbol.B, ColoredManaSymbol.R);
-
     public MogisGodOfSlaughter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{B}{R}");
         addSuperType(SuperType.LEGENDARY);
@@ -48,9 +45,9 @@ public final class MogisGodOfSlaughter extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
 
         // As long as your devotion to black and red is less than seven, Mogis isn't a creature.
-        Effect effect = new LoseCreatureTypeSourceEffect(xValue, 7);
-        effect.setText("As long as your devotion to black and red is less than seven, Mogis isn't a creature");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect).addHint(new ValueHint("Devotion to black and red", xValue)));
+        Effect effect = new LoseCreatureTypeSourceEffect(DevotionCount.BR, 7);
+        effect.setText("As long as your devotion to black and red is less than seven, {this} isn't a creature");
+        this.addAbility(new SimpleStaticAbility(effect).addHint(new ValueHint("Devotion to black and red", DevotionCount.BR)));
 
         // At the beginning of each opponent's upkeep, Mogis deals 2 damage to that player unless they sacrifice a creature.
         effect = new DoUnlessTargetPaysCost(new DamageTargetEffect(2, true, "that player"),
@@ -61,7 +58,7 @@ public final class MogisGodOfSlaughter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MogisGodOfSlaughter(final MogisGodOfSlaughter card) {
+    private MogisGodOfSlaughter(final MogisGodOfSlaughter card) {
         super(card);
     }
 

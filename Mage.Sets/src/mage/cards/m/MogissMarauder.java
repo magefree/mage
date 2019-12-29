@@ -3,7 +3,6 @@ package mage.cards.m;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.hint.ValueHint;
@@ -12,7 +11,6 @@ import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.game.Game;
@@ -36,16 +34,21 @@ public final class MogissMarauder extends CardImpl {
 
         // When Mogis's Marauder enters the battlefield, up to X target creatures each gain intimidate and haste, where X is your devotion to black.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new GainAbilityTargetEffect(IntimidateAbility.getInstance(), Duration.EndOfTurn,
-                        "up to X target creatures each gain intimidate"), false);
-        ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn,
-                "and haste until end of turn, where X is your devotion to black"));
+                new GainAbilityTargetEffect(
+                        IntimidateAbility.getInstance(), Duration.EndOfTurn,
+                        "up to X target creatures each gain intimidate"
+                ), false
+        );
+        ability.addEffect(new GainAbilityTargetEffect(
+                HasteAbility.getInstance(), Duration.EndOfTurn,
+                "and haste until end of turn, where X is your devotion to black"
+        ));
         ability.setTargetAdjuster(MogissMarauderAdjuster.instance);
-        ability.addHint(new ValueHint("Devotion to black", MogissMarauderAdjuster.xValue));
+        ability.addHint(new ValueHint("Devotion to black", DevotionCount.B));
         this.addAbility(ability);
     }
 
-    public MogissMarauder(final MogissMarauder card) {
+    private MogissMarauder(final MogissMarauder card) {
         super(card);
     }
 
@@ -56,15 +59,12 @@ public final class MogissMarauder extends CardImpl {
 }
 
 enum MogissMarauderAdjuster implements TargetAdjuster {
-
     instance;
-
-    static final DynamicValue xValue = new DevotionCount(ColoredManaSymbol.B);
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        int numbTargets = xValue.calculate(game, ability, null);
+        int numbTargets = DevotionCount.B.calculate(game, ability, null);
         if (numbTargets > 0) {
             ability.addTarget(new TargetCreaturePermanent(0, numbTargets));
         }
