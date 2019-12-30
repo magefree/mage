@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.List;
@@ -32,9 +31,11 @@ public final class MindsDilation extends CardImpl {
     public MindsDilation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{U}{U}");
 
-        // Whenever an opponent casts their first spell each turn, that player exiles the top card of their library. If it's a nonland card,
+        // Whenever an opponent casts their first spell each turn, 
+        // that player exiles the top card of their library. If it's a nonland card,
         // you may cast it without paying its mana cost.
-        this.addAbility(new MindsDilationTriggeredAbility(new MindsDilationEffect(), false), new SpellsCastWatcher());
+        this.addAbility(new MindsDilationTriggeredAbility(new MindsDilationEffect(),
+                false), new SpellsCastWatcher());
     }
 
     public MindsDilation(final MindsDilation card) {
@@ -81,16 +82,19 @@ class MindsDilationTriggeredAbility extends SpellCastOpponentTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "Whenever an opponent casts their first spell each turn, that player exiles the top card of their library."
-                + " If it's a nonland card, you may cast it without paying its mana cost.";
+        return "Whenever an opponent casts their first spell each turn, "
+                + "that player exiles the top card of their library."
+                + " If it's a nonland card, you may cast it without "
+                + "paying its mana cost.";
     }
 }
 
 class MindsDilationEffect extends OneShotEffect {
 
     MindsDilationEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "that player exiles the top card of their library. If it's a nonland card, you may cast it without paying its mana cost";
+        super(Outcome.PlayForFree);
+        this.staticText = "that player exiles the top card of their library. "
+                + "If it's a nonland card, you may cast it without paying its mana cost";
     }
 
     MindsDilationEffect(final MindsDilationEffect effect) {
@@ -107,13 +111,20 @@ class MindsDilationEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (controller != null && sourceObject != null && opponent != null) {
+        if (controller != null
+                && sourceObject != null
+                && opponent != null) {
             if (opponent.getLibrary().hasCards()) {
                 Card card = opponent.getLibrary().getFromTop(game);
-                if (card != null && opponent.moveCards(card, Zone.EXILED, source, game)) {
+                if (card != null
+                        && opponent.moveCards(card, Zone.EXILED, source, game)) {
                     if (!card.isLand()) {
-                        if (controller.chooseUse(outcome, "Cast " + card.getLogName() + " without paying its mana cost from exile?", source, game)) {
-                            controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                        if (controller.chooseUse(outcome, "Cast " + card.getLogName()
+                                + " without paying its mana cost from exile?", source, game)) {
+                            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                            controller.cast(controller.chooseAbilityForCast(card, game, true),
+                                    game, true, new MageObjectReference(source.getSourceObject(game), game));
+                            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
                         }
                     }
                 }

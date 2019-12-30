@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -71,7 +70,8 @@ class BringToLightEffect extends OneShotEffect {
         if (controller != null) {
             int numberColors = ColorsOfManaSpentToCastCount.getInstance().calculate(game, source, this);
             FilterCard filter = new FilterCard();
-            filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.INSTANT), new CardTypePredicate(CardType.SORCERY)));
+            filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE),
+                    new CardTypePredicate(CardType.INSTANT), new CardTypePredicate(CardType.SORCERY)));
             filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, numberColors + 1));
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
             controller.searchLibrary(target, source, game);
@@ -81,9 +81,13 @@ class BringToLightEffect extends OneShotEffect {
             }
             controller.shuffleLibrary(source, game);
             if (card != null) {
-                if (controller.chooseUse(outcome, "Cast " + card.getName() + " without paying its mana cost?", source, game)) {
-                    if (card.getSpellAbility() != null) {
-                        controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                if (controller.chooseUse(Outcome.PlayForFree, "Cast " + card.getName()
+                        + " without paying its mana cost?", source, game)) {
+                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                    Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
+                            game, true, new MageObjectReference(source.getSourceObject(game), game));
+                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+                    if (cardWasCast) {
                     } else {
                         Logger.getLogger(BringToLightEffect.class).error("Bring to Light: spellAbility == null " + card.getName());
                     }

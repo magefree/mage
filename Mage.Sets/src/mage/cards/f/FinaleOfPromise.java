@@ -126,7 +126,8 @@ class FinaleOfPromiseEffect extends OneShotEffect {
                     .filter(Objects::nonNull)
                     .map(Card::getName)
                     .collect(Collectors.joining(" -> "));
-            if (!controller.chooseUse(Outcome.Detriment, "Cast cards by choose order: " + cardsOrder + "?", "Finale of Promise",
+            if (!controller.chooseUse(Outcome.Detriment, "Cast cards by choose order: " 
+                    + cardsOrder + "?", "Finale of Promise",
                     "Use that order", "Reverse", source, game)) {
                 Collections.reverse(cardsToCast);
             }
@@ -136,7 +137,10 @@ class FinaleOfPromiseEffect extends OneShotEffect {
         for (UUID id : cardsToCast) {
             Card card = game.getCard(id);
             if (card != null) {
-                controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                controller.cast(controller.chooseAbilityForCast(card, game, true),
+                        game, true, new MageObjectReference(source.getSourceObject(game), game));
+                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
                 ContinuousEffect effect = new FinaleOfPromiseReplacementEffect();
                 effect.setTargetPointer(new FixedTarget(card.getId(), game.getState().getZoneChangeCounter(card.getId())));
                 game.addEffect(effect, source);
@@ -205,6 +209,7 @@ class FinaleOfPromiseReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        return zEvent.getToZone() == Zone.GRAVEYARD && event.getTargetId().equals(getTargetPointer().getFirst(game, source));
+        return zEvent.getToZone() == Zone.GRAVEYARD
+                && event.getTargetId().equals(getTargetPointer().getFirst(game, source));
     }
 }

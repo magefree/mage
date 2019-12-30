@@ -26,7 +26,10 @@ public final class CollectedConjuring extends CardImpl {
     public CollectedConjuring(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}{R}");
 
-        // Exile the top six cards of your library. You may cast up to two sorcery cards with converted mana costs 3 or less from among them without paying their mana cost. Put the exiled cards not cast this way on the bottom of your library in a random order.
+        // Exile the top six cards of your library. You may cast up to two sorcery 
+        // cards with converted mana costs 3 or less from among them without paying 
+        // their mana cost. Put the exiled cards not cast this way on the bottom 
+        // of your library in a random order.
         this.getSpellAbility().addEffect(new CollectedConjuringEffect());
     }
 
@@ -42,7 +45,8 @@ public final class CollectedConjuring extends CardImpl {
 
 class CollectedConjuringEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterCard("sorcery cards with converted mana cost 3 or less");
+    private static final FilterCard filter = new FilterCard(
+            "sorcery cards with converted mana cost 3 or less");
 
     static {
         filter.add(new CardTypePredicate(CardType.SORCERY));
@@ -56,11 +60,11 @@ class CollectedConjuringEffect extends OneShotEffect {
     }
 
     CollectedConjuringEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Exile the top six cards of your library. " +
-                "You may cast up to two sorcery cards with converted mana costs 3 or less from among them " +
-                "without paying their mana cost. Put the exiled cards not cast this way " +
-                "on the bottom of your library in a random order.";
+        super(Outcome.PlayForFree);
+        this.staticText = "Exile the top six cards of your library. "
+                + "You may cast up to two sorcery cards with converted mana costs 3 or less from among them "
+                + "without paying their mana cost. Put the exiled cards not cast this way "
+                + "on the bottom of your library in a random order.";
     }
 
     private CollectedConjuringEffect(final CollectedConjuringEffect effect) {
@@ -76,14 +80,17 @@ class CollectedConjuringEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
-        if (controller == null || sourceObject == null) {
+        if (controller == null 
+                || sourceObject == null) {
             return false;
         }
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 6));
         controller.moveCards(cards, Zone.EXILED, source, game);
         int cardsCast = 0;
-        while (!cards.getCards(filter, source.getSourceId(), source.getControllerId(), game).isEmpty() && cardsCast < 2) {
-            if (!controller.chooseUse(Outcome.PlayForFree, "Cast a card exiled with " + sourceObject.getLogName() + " without paying its mana cost?", source, game)) {
+        while (!cards.getCards(filter, source.getSourceId(), source.getControllerId(), game).isEmpty() 
+                && cardsCast < 2) {
+            if (!controller.chooseUse(Outcome.PlayForFree, "Cast a card exiled with "
+                    + sourceObject.getLogName() + " without paying its mana cost?", source, game)) {
                 break;
             }
             TargetCard targetCard = new TargetCard(1, Zone.EXILED, filter2);
@@ -94,11 +101,16 @@ class CollectedConjuringEffect extends OneShotEffect {
             if (card == null) {
                 continue;
             }
-            if (controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game))) {
+            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+            Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
+                    game, true, new MageObjectReference(source.getSourceObject(game), game));
+            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+            if (cardWasCast) {
                 cards.remove(card);
                 cardsCast++;
             } else {
-                game.informPlayer(controller, "You're not able to cast " + card.getIdName() + " or you canceled the casting.");
+                game.informPlayer(controller, "You're not able to cast " 
+                        + card.getIdName() + " or you canceled the casting.");
             }
         }
         controller.putCardsOnBottomOfLibrary(cards, game, source, false);

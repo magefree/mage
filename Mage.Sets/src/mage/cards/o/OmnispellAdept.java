@@ -35,7 +35,8 @@ public final class OmnispellAdept extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 
-        // {2}{U}, {T}: You may cast an instant or sorcery card from your hand without paying its mana cost.
+        // {2}{U}, {T}: You may cast an instant or sorcery card from your hand 
+        // without paying its mana cost.
         Ability ability = new SimpleActivatedAbility(
                 new OmnispellAdeptEffect(), new ManaCostsImpl("{2}{U}")
         );
@@ -55,11 +56,13 @@ public final class OmnispellAdept extends CardImpl {
 
 class OmnispellAdeptEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterInstantOrSorceryCard("instant or sorcery card from your hand");
+    private static final FilterCard filter = new FilterInstantOrSorceryCard(
+            "instant or sorcery card from your hand");
 
     public OmnispellAdeptEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "you may cast an instant or sorcery card from your hand without paying its mana cost";
+        this.staticText = "you may cast an instant or sorcery card from your hand "
+                + "without paying its mana cost";
     }
 
     public OmnispellAdeptEffect(final OmnispellAdeptEffect effect) {
@@ -79,13 +82,16 @@ class OmnispellAdeptEffect extends OneShotEffect {
         }
         Target target = new TargetCardInHand(filter);
         if (target.canChoose(source.getSourceId(), controller.getId(), game)
-                && controller.chooseUse(outcome, "Cast an instant or sorcery card from your hand without paying its mana cost?", source, game)) {
+                && controller.chooseUse(Outcome.PlayForFree, "Cast an instant or sorcery "
+                        + "card from your hand without paying its mana cost?", source, game)) {
             Card cardToCast = null;
             boolean cancel = false;
-            while (controller.canRespond() && !cancel) {
-                if (controller.chooseTarget(outcome, target, source, game)) {
+            while (controller.canRespond()
+                    && !cancel) {
+                if (controller.chooseTarget(Outcome.PlayForFree, target, source, game)) {
                     cardToCast = game.getCard(target.getFirstTarget());
-                    if (cardToCast != null && cardToCast.getSpellAbility().canChooseTarget(game)) {
+                    if (cardToCast != null
+                            && cardToCast.getSpellAbility().canChooseTarget(game)) {
                         cancel = true;
                     }
                 } else {
@@ -93,7 +99,10 @@ class OmnispellAdeptEffect extends OneShotEffect {
                 }
             }
             if (cardToCast != null) {
-                controller.cast(cardToCast.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                game.getState().setValue("PlayFromNotOwnHandZone" + cardToCast.getId(), Boolean.TRUE);
+                controller.cast(controller.chooseAbilityForCast(cardToCast, game, true),
+                        game, true, new MageObjectReference(source.getSourceObject(game), game));
+                game.getState().setValue("PlayFromNotOwnHandZone" + cardToCast.getId(), null);
             }
         }
         return true;
