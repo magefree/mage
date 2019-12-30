@@ -5,18 +5,18 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.dynamicvalue.common.SourcePermanentToughnessValue;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
-import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.StaticFilters;
 import mage.target.TargetPlayer;
 
@@ -26,8 +26,6 @@ import java.util.UUID;
  * @author LevelX2
  */
 public final class PhenaxGodOfDeception extends CardImpl {
-
-    private static final DynamicValue xValue = new DevotionCount(ColoredManaSymbol.U, ColoredManaSymbol.B);
 
     public PhenaxGodOfDeception(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{U}{B}");
@@ -41,21 +39,24 @@ public final class PhenaxGodOfDeception extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
 
         // As long as your devotion to blue and black is less than seven, Phenax isn't a creature.
-        Effect effect = new LoseCreatureTypeSourceEffect(xValue, 7);
-        effect.setText("As long as your devotion to blue and black is less than seven, Phenax isn't a creature");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect).addHint(new ValueHint("Devotion to blue and black", xValue)));
+        this.addAbility(new SimpleStaticAbility(new LoseCreatureTypeSourceEffect(DevotionCount.UB, 7))
+                .addHint(DevotionCount.UB.getHint()));
 
         // Creatures you control have "{T}: Target player puts the top X cards of their library into their graveyard, where X is this creature's toughness."
-        effect = new PutTopCardOfLibraryIntoGraveTargetEffect(SourcePermanentToughnessValue.getInstance());
-        effect.setText("Target player puts the top X cards of their library into their graveyard, where X is this creature's toughness");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(
+                new PutTopCardOfLibraryIntoGraveTargetEffect(SourcePermanentToughnessValue.getInstance())
+                        .setText("Target player puts the top X cards of their library into their graveyard, " +
+                                "where X is this creature's toughness"), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
-        effect = new GainAbilityControlledEffect(ability, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES, false);
-        effect.setText("Creatures you control have \"{T}: Target player puts the top X cards of their library into their graveyard, where X is this creature's toughness.\"");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(
+                new GainAbilityControlledEffect(
+                        ability, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES, false
+                ).setText("Creatures you control have \"{T}: Target player puts the top X cards of their library " +
+                        "into their graveyard, where X is this creature's toughness.\"")
+        ));
     }
 
-    public PhenaxGodOfDeception(final PhenaxGodOfDeception card) {
+    private PhenaxGodOfDeception(final PhenaxGodOfDeception card) {
         super(card);
     }
 

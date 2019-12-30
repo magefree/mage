@@ -6,12 +6,9 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DevotionCount;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
-import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -27,8 +24,6 @@ import java.util.UUID;
  */
 public final class EpharaGodOfThePolis extends CardImpl {
 
-    private static final DynamicValue xValue = new DevotionCount(ColoredManaSymbol.W, ColoredManaSymbol.U);
-
     public EpharaGodOfThePolis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{W}{U}");
         this.addSuperType(SuperType.LEGENDARY);
@@ -41,19 +36,20 @@ public final class EpharaGodOfThePolis extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
 
         // As long as your devotion to white and blue is less than seven, Ephara isn't a creature.
-        Effect effect = new LoseCreatureTypeSourceEffect(xValue, 7);
-        effect.setText("As long as your devotion to white and blue is less than seven, Ephara isn't a creature");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect).addHint(new ValueHint("Devotion to white and blue", xValue)));
+        this.addAbility(new SimpleStaticAbility(new LoseCreatureTypeSourceEffect(DevotionCount.WU, 7))
+                .addHint(DevotionCount.WU.getHint()));
 
         // At the beginning of each upkeep, if you had another creature enter the battlefield under your control last turn, draw a card.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                        new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), TargetController.ANY, false, false),
-                        HadAnotherCreatureEnterTheBattlefieldCondition.instance,
-                        "At the beginning of each upkeep, if you had another creature enter the battlefield under your control last turn, draw a card."),
-                new PermanentsEnteredBattlefieldWatcher());
+                new BeginningOfUpkeepTriggeredAbility(
+                        Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1),
+                        TargetController.ANY, false, false
+                ), EpharaGodOfThePolisCondition.instance, "At the beginning of each upkeep, " +
+                "if you had another creature enter the battlefield under your control last turn, draw a card."
+        ), new PermanentsEnteredBattlefieldWatcher());
     }
 
-    public EpharaGodOfThePolis(final EpharaGodOfThePolis card) {
+    private EpharaGodOfThePolis(final EpharaGodOfThePolis card) {
         super(card);
     }
 
@@ -63,10 +59,9 @@ public final class EpharaGodOfThePolis extends CardImpl {
     }
 }
 
-enum HadAnotherCreatureEnterTheBattlefieldCondition implements Condition {
+enum EpharaGodOfThePolisCondition implements Condition {
 
     instance;
-
 
     @Override
     public boolean apply(Game game, Ability source) {
