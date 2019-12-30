@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -28,7 +27,8 @@ public final class ReversalOfFortune extends CardImpl {
     public ReversalOfFortune(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
 
-        // Target opponent reveals their hand. You may copy an instant or sorcery card in it. If you do, you may cast the copy without paying its mana cost.
+        // Target opponent reveals their hand. You may copy an instant or sorcery 
+        // card in it. If you do, you may cast the copy without paying its mana cost.
         this.getSpellAbility().addEffect(new ReversalOfFortuneEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
@@ -47,7 +47,9 @@ class ReversalOfFortuneEffect extends OneShotEffect {
 
     public ReversalOfFortuneEffect() {
         super(Outcome.Copy);
-        this.staticText = "Target opponent reveals their hand. You may copy an instant or sorcery card in it. If you do, you may cast the copy without paying its mana cost";
+        this.staticText = "Target opponent reveals their hand. You may copy an "
+                + "instant or sorcery card in it. If you do, you may cast the "
+                + "copy without paying its mana cost";
     }
 
     public ReversalOfFortuneEffect(final ReversalOfFortuneEffect effect) {
@@ -64,7 +66,8 @@ class ReversalOfFortuneEffect extends OneShotEffect {
 
         Player controller = game.getPlayer(source.getControllerId());
         Player opponent = game.getPlayer(source.getFirstTarget());
-        if (controller != null && opponent != null) {
+        if (controller != null 
+                && opponent != null) {
             // Target opponent reveals their hand
             Cards revealedCards = new CardsImpl();
             revealedCards.addAll(opponent.getHand());
@@ -73,13 +76,16 @@ class ReversalOfFortuneEffect extends OneShotEffect {
             //You may copy an instant or sorcery card in it
             TargetCard target = new TargetCard(1, Zone.HAND, new FilterInstantOrSorceryCard());
             target.setRequired(false);
-            if (controller.choose(outcome, revealedCards, target, game)) {
+            if (controller.choose(Outcome.PlayForFree, revealedCards, target, game)) {
                 Card card = revealedCards.get(target.getFirstTarget(), game);
                 //If you do, you may cast the copy without paying its mana cost
                 if (card != null) {
                     Card copiedCard = game.copyCard(card, source, source.getControllerId());
-                    if (controller.chooseUse(outcome, "Cast the copied card without paying mana cost?", source, game)) {
-                        controller.cast(copiedCard.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                    if (controller.chooseUse(Outcome.PlayForFree, "Cast the copied card without paying mana cost?", source, game)) {
+                        game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), Boolean.TRUE);
+                        controller.cast(controller.chooseAbilityForCast(copiedCard, game, true),
+                                game, true, new MageObjectReference(source.getSourceObject(game), game));
+                        game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), null);
                     }
                 } else {
                     return false;

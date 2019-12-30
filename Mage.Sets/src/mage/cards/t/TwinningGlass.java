@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.List;
@@ -35,8 +34,10 @@ public final class TwinningGlass extends CardImpl {
     public TwinningGlass(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
-        // {1}, {tap}: You may cast a nonland card from your hand without paying its mana cost if it has the same name as a spell that was cast this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TwinningGlassEffect(), new ManaCostsImpl("{1}"));
+        // {1}, {tap}: You may cast a nonland card from your hand without paying 
+        // its mana cost if it has the same name as a spell that was cast this turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new TwinningGlassEffect(), new ManaCostsImpl("{1}"));
         ability.addWatcher(new SpellsCastWatcher());
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -56,8 +57,10 @@ public final class TwinningGlass extends CardImpl {
 class TwinningGlassEffect extends OneShotEffect {
 
     public TwinningGlassEffect() {
-        super(Outcome.PutCardInPlay);
-        this.staticText = "You may cast a nonland card from your hand without paying its mana cost if it has the same name as a spell that was cast this turn";
+        super(Outcome.PlayForFree);
+        this.staticText = "You may cast a nonland card from your hand "
+                + "without paying its mana cost if it has the same name "
+                + "as a spell that was cast this turn";
     }
 
     public TwinningGlassEffect(final TwinningGlassEffect effect) {
@@ -92,11 +95,15 @@ class TwinningGlassEffect extends OneShotEffect {
                 }
             }
             TargetCardInHand target = new TargetCardInHand(0, 1, filterCard);
-            if (controller.choose(Outcome.Benefit, controller.getHand(), target, game)) {
+            if (controller.choose(Outcome.PlayForFree, controller.getHand(), target, game)) {
                 Card chosenCard = game.getCard(target.getFirstTarget());
                 if (chosenCard != null) {
-                    if (controller.chooseUse(outcome, "Cast the card without paying mana cost?", source, game)) {
-                        return controller.cast(chosenCard.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                    if (controller.chooseUse(Outcome.PlayForFree, "Cast the card without paying mana cost?", source, game)) {
+                        game.getState().setValue("PlayFromNotOwnHandZone" + chosenCard.getId(), Boolean.TRUE);
+                        Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(chosenCard, game, true),
+                                game, true, new MageObjectReference(source.getSourceObject(game), game));
+                        game.getState().setValue("PlayFromNotOwnHandZone" + chosenCard.getId(), null);
+                        return cardWasCast;
                     }
                 }
             }
