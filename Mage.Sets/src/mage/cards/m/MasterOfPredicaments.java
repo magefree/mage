@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -35,8 +34,12 @@ public final class MasterOfPredicaments extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // Whenever Master of Predicaments deals combat damage to a player, choose a card in your hand.  That player guesses whether the card's converted mana cost is greater than 4.  If the player guessed wrong, you may cast the card without paying its mana cost.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new MasterOfPredicamentsEffect(), false, true));
+        // Whenever Master of Predicaments deals combat damage to a player, 
+        // choose a card in your hand.  That player guesses whether the card's 
+        // converted mana cost is greater than 4.  If the player guessed wrong, 
+        // you may cast the card without paying its mana cost.
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
+                new MasterOfPredicamentsEffect(), false, true));
     }
 
     public MasterOfPredicaments(final MasterOfPredicaments card) {
@@ -52,8 +55,10 @@ public final class MasterOfPredicaments extends CardImpl {
 class MasterOfPredicamentsEffect extends OneShotEffect {
 
     public MasterOfPredicamentsEffect() {
-        super(Outcome.PutCardInPlay);
-        this.staticText = "choose a card in your hand. That player guesses whether the card's converted mana cost is greater than 4. If the player guessed wrong, you may cast the card without paying its mana cost";
+        super(Outcome.PlayForFree);
+        this.staticText = "choose a card in your hand. That player guesses whether "
+                + "the card's converted mana cost is greater than 4. If the player "
+                + "guessed wrong, you may cast the card without paying its mana cost";
     }
 
     public MasterOfPredicamentsEffect(final MasterOfPredicamentsEffect effect) {
@@ -73,7 +78,7 @@ class MasterOfPredicamentsEffect extends OneShotEffect {
                 Card cardFromHand = null;
                 if (controller.getHand().size() > 1) {
                     TargetCard target = new TargetCardInHand(new FilterCard());
-                    if (controller.choose(outcome, controller.getHand(), target, game)) {
+                    if (controller.choose(Outcome.PlayForFree, controller.getHand(), target, game)) {
                         cardFromHand = game.getCard(target.getFirstTarget());
                     }
                 } else {
@@ -87,11 +92,14 @@ class MasterOfPredicamentsEffect extends OneShotEffect {
                     return false;
                 }
                 boolean guessWrong;
-                if (attackedPlayer.chooseUse(Outcome.Detriment, "Is the chosen card's converted mana cost greater than 4?", source, game)) {
-                    game.informPlayers(attackedPlayer.getLogName() + " guessed that the chosen card's converted mana cost is greater than 4");
+                if (attackedPlayer.chooseUse(Outcome.Detriment, "Is the chosen card's converted "
+                        + "mana cost greater than 4?", source, game)) {
+                    game.informPlayers(attackedPlayer.getLogName() + " guessed that the chosen "
+                            + "card's converted mana cost is greater than 4");
                     guessWrong = cardFromHand.getConvertedManaCost() <= 4;
                 } else {
-                    game.informPlayers(attackedPlayer.getLogName() + " guessed that the chosen card's converted mana cost is not greater than 4");
+                    game.informPlayers(attackedPlayer.getLogName() + " guessed that the chosen "
+                            + "card's converted mana cost is not greater than 4");
                     guessWrong = cardFromHand.getConvertedManaCost() > 4;
                 }
                 game.informPlayers(attackedPlayer.getLogName() + " guessed " + (guessWrong ? "wrong" : "right"));
@@ -99,8 +107,12 @@ class MasterOfPredicamentsEffect extends OneShotEffect {
                     if (cardFromHand.isLand()) {
                         // If the revealed card is a land, you can't cast it. So nothing happens
                     } else {
-                        if (controller.chooseUse(outcome, "Cast " + cardFromHand.getName() + " without paying its mana cost?", source, game)) {
-                            controller.cast(cardFromHand.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                        if (controller.chooseUse(outcome, "Cast " + cardFromHand.getName()
+                                + " without paying its mana cost?", source, game)) {
+                            game.getState().setValue("PlayFromNotOwnHandZone" + cardFromHand.getId(), Boolean.TRUE);
+                            controller.cast(controller.chooseAbilityForCast(cardFromHand, game, true),
+                                    game, true, new MageObjectReference(source.getSourceObject(game), game));
+                            game.getState().setValue("PlayFromNotOwnHandZone" + cardFromHand.getId(), null);
                         }
                     }
 

@@ -28,7 +28,10 @@ public final class ChaosWand extends CardImpl {
     public ChaosWand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        // {4}, {T}: Target opponent exiles cards from the top of their library until they exile an instant or sorcery card. You may cast that card without paying its mana cost. Then put the exiled cards that weren't cast this way on the bottom of that library in a random order.
+        // {4}, {T}: Target opponent exiles cards from the top of their library 
+        // until they exile an instant or sorcery card. You may cast that card 
+        // without paying its mana cost. Then put the exiled cards that weren't 
+        // cast this way on the bottom of that library in a random order.
         Ability ability = new SimpleActivatedAbility(
                 new ChaosWandEffect(),
                 new GenericManaCost(4)
@@ -51,7 +54,7 @@ public final class ChaosWand extends CardImpl {
 class ChaosWandEffect extends OneShotEffect {
 
     public ChaosWandEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.PlayForFree);
         this.staticText = "Target opponent exiles cards from the top of their library "
                 + "until they exile an instant or sorcery card. "
                 + "You may cast that card without paying its mana cost. "
@@ -84,9 +87,15 @@ class ChaosWandEffect extends OneShotEffect {
             opponent.moveCards(card, Zone.EXILED, source, game);
             controller.revealCards(source, new CardsImpl(card), game);
             if (card.isInstant() || card.isSorcery()) {
-                if (!controller.chooseUse(outcome, "Cast " + card.getName() + " without paying its mana cost?", source, game)
-                        || !controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game))) {
-                    cardsToShuffle.add(card);
+                if (!controller.chooseUse(Outcome.PlayForFree, "Cast " + card.getName()
+                        + " without paying its mana cost?", source, game)) {
+                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                    Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
+                            game, true, new MageObjectReference(source.getSourceObject(game), game));
+                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+                    if (!cardWasCast) {
+                        cardsToShuffle.add(card);
+                    }
                 }
                 break;
             } else {
