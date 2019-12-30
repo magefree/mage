@@ -229,7 +229,9 @@ public class ContinuousEffects implements Serializable {
     }
 
     private List<ContinuousEffect> filterLayeredEffects(List<ContinuousEffect> effects, Layer layer) {
-        return effects.stream().filter(effect -> effect.hasLayer(layer)).collect(Collectors.toList());
+        return effects.stream()
+                .filter(effect -> effect.hasLayer(layer))
+                .collect(Collectors.toList());
     }
 
     public Map<RequirementEffect, Set<Ability>> getApplicableRequirementEffects(Permanent permanent, boolean playerRealted, Game game) {
@@ -1076,11 +1078,13 @@ public class ContinuousEffects implements Serializable {
 
     private boolean isAbilityStillExists(final Game game, final Ability ability, ContinuousEffect effect) {
         final Card card = game.getPermanentOrLKIBattlefield(ability.getSourceId());
-        if (!(effect instanceof BecomesFaceDownCreatureEffect)) {
+        if (!(effect instanceof BecomesFaceDownCreatureEffect)
+                && (effect != null && !effect.getDuration().equals(Duration.Custom))) { // Custom effects do not depend on the creating permanent
             if (card != null) {
                 return card.getAbilities(game).contains(ability);
             }
         }
+
         return true;
     }
 
