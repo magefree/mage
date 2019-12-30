@@ -1,5 +1,3 @@
-
-
 package mage.server.game;
 
 import org.apache.log4j.Logger;
@@ -16,12 +14,14 @@ public enum GamesRoomManager {
 
     private final ConcurrentHashMap<UUID, GamesRoom> rooms = new ConcurrentHashMap<>();
     private final UUID mainRoomId;
+    private final UUID mainChatId;
     private static final Logger logger = Logger.getLogger(GamesRoomManager.class);
 
 
     GamesRoomManager() {
         GamesRoom mainRoom = new GamesRoomImpl();
         mainRoomId = mainRoom.getRoomId();
+        mainChatId = mainRoom.getChatId();
         rooms.put(mainRoomId, mainRoom);
     }
 
@@ -35,8 +35,12 @@ public enum GamesRoomManager {
         return mainRoomId;
     }
 
+    public UUID getMainChatId() {
+        return mainChatId;
+    }
+
     public Optional<GamesRoom> getRoom(UUID roomId) {
-        if(rooms.containsKey(roomId)) {
+        if (rooms.containsKey(roomId)) {
             return Optional.of(rooms.get(roomId));
         }
         logger.error("room not found : " + roomId);

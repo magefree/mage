@@ -22,6 +22,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public enum UserManager {
     instance;
 
+    private static final int SERVER_TIMEOUTS_USER_INFORM_OPPONENTS_ABOUT_DISCONNECT_AFTER_SECS = 30; // send to chat info about disconnection troubles, must be more than ping timeout
     private static final int SERVER_TIMEOUTS_USER_DISCONNECT_FROM_SERVER_AFTER_SECS = 3 * 60; // removes from all games and chats too (can be seen in users list with disconnected status)
     private static final int SERVER_TIMEOUTS_USER_REMOVE_FROM_SERVER_AFTER_SECS = 8 * 60; // removes from users list
 
@@ -145,6 +146,22 @@ public enum UserManager {
         }
     }
 
+    public void informUserOpponents(final UUID userId, final String message) {
+        if (userId != null) {
+            getUser(userId).ifPresent(user
+                    -> USER_EXECUTOR.execute(
+                    () -> {
+                        try {
+                            logger.info("INFORM OPPONENTS by " + user.getName() + ": " + message);
+                            ChatManager.instance.sendMessageToUserChats(user.getId(), message);
+                        } catch (Exception ex) {
+                            handleException(ex);
+                        }
+                    }
+            ));
+        }
+    }
+
     public boolean extendUserSession(UUID userId, String pingInfo) {
         if (userId != null) {
             User user = users.get(userId);
@@ -163,6 +180,8 @@ public enum UserManager {
      */
     private void checkExpired() {
         try {
+            Calendar calendarInform = Calendar.getInstance();
+            calendarInform.add(Calendar.SECOND, -1 * SERVER_TIMEOUTS_USER_INFORM_OPPONENTS_ABOUT_DISCONNECT_AFTER_SECS);
             Calendar calendarExp = Calendar.getInstance();
             calendarExp.add(Calendar.SECOND, -1 * SERVER_TIMEOUTS_USER_DISCONNECT_FROM_SERVER_AFTER_SECS);
             Calendar calendarRemove = Calendar.getInstance();
@@ -179,6 +198,12 @@ public enum UserManager {
             }
             for (User user : userList) {
                 try {
+                    if (user.getUserState() != UserState.Offline
+                            && user.isExpired(calendarInform.getTime())) {
+                        long secsInfo = (Calendar.getInstance().getTimeInMillis() - user.getLastActivity().getTime()) / 1000;
+                        informUserOpponents(user.getId(), user.getName() + " got connection problem for " + secsInfo + " secs");
+                    }
+
                     if (user.getUserState() == UserState.Offline) {
                         if (user.isExpired(calendarRemove.getTime())) {
                             // removes from users list

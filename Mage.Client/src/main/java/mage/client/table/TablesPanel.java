@@ -64,6 +64,9 @@ public class TablesPanel extends javax.swing.JPanel {
     private static final Logger LOGGER = Logger.getLogger(TablesPanel.class);
     private static final int[] DEFAULT_COLUMNS_WIDTH = {35, 150, 100, 50, 120, 180, 80, 120, 80, 60, 40, 40, 60};
 
+    // ping timeout (warning, must be less than SERVER_TIMEOUTS_USER_INFORM_OPPONENTS_ABOUT_DISCONNECT_AFTER_SECS)
+    public static final int PING_SERVER_SECS = 20;
+
     // refresh timeouts for data downloads from server
     public static final int REFRESH_ACTIVE_TABLES_SECS = 5;
     public static final int REFRESH_FINISHED_TABLES_SECS = 30;

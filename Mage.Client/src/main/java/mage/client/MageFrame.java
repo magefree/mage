@@ -26,6 +26,7 @@ import mage.client.plugins.impl.Plugins;
 import mage.client.preference.MagePreferences;
 import mage.client.remote.CallbackClientImpl;
 import mage.client.table.TablesPane;
+import mage.client.table.TablesPanel;
 import mage.client.tournament.TournamentPane;
 import mage.client.util.*;
 import mage.client.util.audio.MusicPlayer;
@@ -261,7 +262,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         desktopPane.add(errorDialog, JLayeredPane.MODAL_LAYER);
         UI.addComponent(MageComponents.DESKTOP_PANE, desktopPane);
 
-        PING_TASK_EXECUTOR.scheduleAtFixedRate(() -> SessionHandler.ping(), 60, 60, TimeUnit.SECONDS);
+        PING_TASK_EXECUTOR.scheduleAtFixedRate(() -> SessionHandler.ping(), TablesPanel.PING_SERVER_SECS, TablesPanel.PING_SERVER_SECS, TimeUnit.SECONDS);
 
         updateMemUsageTask = new UpdateMemUsageTask(jMemUsageLabel);
 

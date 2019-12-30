@@ -50,7 +50,7 @@ import java.util.zip.GZIPOutputStream;
 public class GameController implements GameCallback {
 
     private static final int GAME_TIMEOUTS_CHECK_JOINING_STATUS_EVERY_SECS = 15; // checks and inform players about joining status
-    private static final int GAME_TIMEOUTS_CANCEL_PLAYER_GAME_JOINING_AFTER_INACTIVE_SECS = 4 * 60; // leave player from game if it don't join and inactive on server
+    private static final int GAME_TIMEOUTS_CANCEL_PLAYER_GAME_JOINING_AFTER_INACTIVE_SECS = 2 * 60; // leave player from game if it don't join and inactive on server
 
     private static final ExecutorService gameExecutor = ThreadExecutor.instance.getGameExecutor();
     private static final Logger logger = Logger.getLogger(GameController.class);
@@ -336,7 +336,10 @@ public class GameController implements GameCallback {
                             GameManager.instance.joinGame(game.getId(), user.getId());
                             logger.debug("Player " + player.getName() + " (disconnected) has joined gameId: " + game.getId());
                         }
-                        ChatManager.instance.broadcast(chatId, player.getName(), user.getPingInfo() + " is pending to join the game", MessageColor.BLUE, true, ChatMessage.MessageType.STATUS, null);
+                        ChatManager.instance.broadcast(chatId, player.getName(), user.getPingInfo()
+                                        + " is pending to join the game (waiting " + user.getSecondsDisconnected() + " of "
+                                        + GAME_TIMEOUTS_CANCEL_PLAYER_GAME_JOINING_AFTER_INACTIVE_SECS + " secs)",
+                                MessageColor.BLUE, true, ChatMessage.MessageType.STATUS, null);
                         if (user.getSecondsDisconnected() > GAME_TIMEOUTS_CANCEL_PLAYER_GAME_JOINING_AFTER_INACTIVE_SECS) {
                             // TODO: 2019.04.22 - if user playing another game on server but not joining (that's the reason?), then that's check will never trigger
                             // Cancel player join possibility lately after 4 minutes
@@ -1201,6 +1204,7 @@ public class GameController implements GameCallback {
         if (activePlayer != null && activePlayer.hasLeft()) {
             sb.append("<br>Found disconnected player! Concede...");
             activePlayer.concede(game);
+            activePlayer.leave(); // abort any wait response actions
 
             Phase currentPhase = game.getPhase();
             if (currentPhase != null) {
@@ -1221,6 +1225,7 @@ public class GameController implements GameCallback {
                 Player p = game.getPlayer(state.getChoosingPlayerId());
                 if (p != null) {
                     p.concede(game);
+                    p.leave(); // abort any wait response actions
                 }
                 Phase currentPhase = game.getPhase();
                 if (currentPhase != null && !fixedAlready) {
@@ -1235,14 +1240,14 @@ public class GameController implements GameCallback {
         }
 
         // fix lost priority
+        Player p = game.getPlayer(state.getPriorityPlayerId());
         sb.append("<br>Checking priority player: " + getName(game.getPlayer(state.getPriorityPlayerId())));
-        if (state.getPriorityPlayerId() != null) {
-            if (game.getPlayer(state.getPriorityPlayerId()).hasLeft()) {
+        if (p != null) {
+            if (p.hasLeft()) {
                 sb.append("<br>Found disconnected player! Concede...");
-                Player p = game.getPlayer(state.getPriorityPlayerId());
-                if (p != null) {
-                    p.concede(game);
-                }
+                p.concede(game);
+                p.leave(); // abort any wait response actions
+
                 Phase currentPhase = game.getPhase();
                 if (currentPhase != null && !fixedAlready) {
                     currentPhase.getStep().skipStep(game, state.getActivePlayerId());
@@ -1250,7 +1255,6 @@ public class GameController implements GameCallback {
                     sb.append("<br>Forcibly passing the phase!");
                 }
             }
-            sb.append(game.getPlayer(state.getPriorityPlayerId()).getName());
             sb.append("</font>");
         }
 
@@ -1272,6 +1276,8 @@ public class GameController implements GameCallback {
             sb.append("Not using future Timeout!");
         }
         sb.append("</font>");
+
+
         return sb.toString();
     }
 }
