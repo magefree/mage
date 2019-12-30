@@ -8,10 +8,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SagaChapter;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -97,13 +94,13 @@ class TymaretCallsTheDeadFirstEffect extends OneShotEffect {
         }
         millEffect.apply(game, source);
         if (player.getGraveyard().count(filter, game) == 0
-                || !player.chooseUse(outcome, "Exile a creature or enchantment card from your graveyard?", source, game)) {
+                || !player.chooseUse(Outcome.Exile, "Exile a creature or enchantment card from your graveyard?", source, game)) {
             return true;
         }
         TargetCard target = new TargetCardInYourGraveyard(filter);
         target.setNotTarget(true);
         if (!player.choose(outcome, player.getGraveyard(), target, game)) {
-            return false;
+            return true;
         }
         return player.moveCards(game.getCard(target.getFirstTarget()), Zone.EXILED, source, game)
                 && tokenEffect.apply(game, source);
@@ -139,6 +136,7 @@ class TymaretCallsTheDeadLastEffect extends OneShotEffect {
             return true;
         }
         player.gainLife(zombieCount, game, source);
-        return player.scry(zombieCount, source, game);
+        player.scry(zombieCount, source, game);
+        return true;
     }
 }
