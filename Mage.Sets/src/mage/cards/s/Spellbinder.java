@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -38,10 +37,13 @@ public final class Spellbinder extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.subtype.add(SubType.EQUIPMENT);
 
-        // Imprint - When Spellbinder enters the battlefield, you may exile an instant card from your hand.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SpellbinderImprintEffect(), true, "<i>Imprint &mdash; </i>"));
+        // Imprint - When Spellbinder enters the battlefield, you may exile 
+        // an instant card from your hand.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new SpellbinderImprintEffect(), true, "<i>Imprint &mdash; </i>"));
 
-        // Whenever equipped creature deals combat damage to a player, you may copy the exiled card. If you do, you may cast the copy without paying its mana cost.
+        // Whenever equipped creature deals combat damage to a player, you may 
+        // copy the exiled card. If you do, you may cast the copy without paying its mana cost.
         this.addAbility(new SpellbinderTriggeredAbility());
 
         // Equip {4}
@@ -82,12 +84,16 @@ class SpellbinderTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
         Permanent p = game.getPermanent(event.getSourceId());
-        return damageEvent.isCombatDamage() && p != null && p.getAttachments().contains(this.getSourceId());
+        return damageEvent.isCombatDamage()
+                && p != null
+                && p.getAttachments().contains(this.getSourceId());
     }
 
     @Override
     public String getRule() {
-        return "Whenever equipped creature deals combat damage to a player, you may copy the exiled card. If you do, you may cast the copy without paying its mana cost.";
+        return "Whenever equipped creature deals combat damage to a player, "
+                + "you may copy the exiled card. If you do, you may cast "
+                + "the copy without paying its mana cost.";
     }
 }
 
@@ -119,11 +125,13 @@ class SpellbinderImprintEffect extends OneShotEffect {
                         && controller.choose(Outcome.Benefit, controller.getHand(), target, game)) {
                     Card card = controller.getHand().get(target.getFirstTarget(), game);
                     if (card != null) {
-                        controller.moveCardToExileWithInfo(card, source.getSourceId(), sourcePermanent.getIdName() + " (Imprint)", source.getSourceId(), game, Zone.HAND, true);
+                        controller.moveCardToExileWithInfo(card, source.getSourceId(),
+                                sourcePermanent.getIdName() + " (Imprint)", source.getSourceId(), game, Zone.HAND, true);
                         Permanent permanent = game.getPermanent(source.getSourceId());
                         if (permanent != null) {
                             permanent.imprint(card.getId(), game);
-                            permanent.addInfo("imprint", CardUtil.addToolTipMarkTags("[Imprinted card - " + card.getLogName() + ']'), game);
+                            permanent.addInfo("imprint", CardUtil.addToolTipMarkTags("[Imprinted card - "
+                                    + card.getLogName() + ']'), game);
                         }
                     }
                 }
@@ -145,7 +153,8 @@ class SpellbinderCopyEffect extends OneShotEffect {
 
     public SpellbinderCopyEffect() {
         super(Outcome.Copy);
-        this.staticText = "You may copy the exiled card. If you do, you may cast the copy without paying its mana cost";
+        this.staticText = "You may copy the exiled card. If you do, "
+                + "you may cast the copy without paying its mana cost";
     }
 
     public SpellbinderCopyEffect(final SpellbinderCopyEffect effect) {
@@ -172,9 +181,13 @@ class SpellbinderCopyEffect extends OneShotEffect {
                             game.getState().setZone(copiedCard.getId(), Zone.EXILED);
                             if (controller.chooseUse(outcome, "Cast the copied card without paying mana cost?", source, game)) {
                                 if (copiedCard.getSpellAbility() != null) {
-                                    controller.cast(copiedCard.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                                    game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), Boolean.TRUE);
+                                    controller.cast(controller.chooseAbilityForCast(copiedCard, game, true),
+                                            game, true, new MageObjectReference(source.getSourceObject(game), game));
+                                    game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), null);
                                 } else {
-                                    Logger.getLogger(SpellbinderCopyEffect.class).error("Spellbinder: spell ability == null " + copiedCard.getName());
+                                    Logger.getLogger(SpellbinderCopyEffect.class).error(
+                                            "Spellbinder: spell ability == null " + copiedCard.getName());
                                 }
                             }
                         }

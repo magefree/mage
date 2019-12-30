@@ -1,4 +1,3 @@
-
 package mage.cards.u;
 
 import java.util.UUID;
@@ -18,7 +17,7 @@ import mage.players.Player;
 /**
  * Gatecrash FAQ 01/2013
  *
- * If you reveal a nonland card, you may cast it during the resolution of
+ * If you reveal a non-land card, you may cast it during the resolution of
  * Unexpected Results. Ignore timing restrictions based on the card's type.
  * Other timing restrictions, such as "Cast [this card] only during combat,"
  * must be followed.
@@ -47,7 +46,9 @@ public final class UnexpectedResults extends CardImpl {
     public UnexpectedResults(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}{U}");
 
-        // Shuffle your library, then reveal the top card. If it's a nonland card, you may cast it without paying its mana cost. If it's a land card, you may put it onto the battlefield and return Unexpected Results to its owner's hand.
+        // Shuffle your library, then reveal the top card. If it's a nonland card, 
+        // you may cast it without paying its mana cost. If it's a land card, you may 
+        // put it onto the battlefield and return Unexpected Results to its owner's hand.
         this.getSpellAbility().addEffect(new UnexpectedResultEffect());
 
     }
@@ -66,7 +67,10 @@ class UnexpectedResultEffect extends OneShotEffect {
 
     public UnexpectedResultEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "Shuffle your library, then reveal the top card. If it's a nonland card, you may cast it without paying its mana cost. If it's a land card, you may put it onto the battlefield and return {this} to its owner's hand";
+        this.staticText = "Shuffle your library, then reveal the top card. "
+                + "If it's a nonland card, you may cast it without paying its mana "
+                + "cost. If it's a land card, you may put it onto the battlefield "
+                + "and return {this} to its owner's hand";
     }
 
     public UnexpectedResultEffect(final UnexpectedResultEffect effect) {
@@ -82,7 +86,8 @@ class UnexpectedResultEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Card sourceCard = game.getCard(source.getSourceId());
-        if (controller == null || sourceCard == null) {
+        if (controller == null 
+                || sourceCard == null) {
             return false;
         }
         if (controller.getLibrary().hasCards()) {
@@ -100,8 +105,13 @@ class UnexpectedResultEffect extends OneShotEffect {
                     return true;
                 }
             } else {
-                if (controller.chooseUse(outcome, "Cast " + card.getName() + " without paying its mana cost?", source, game)) {
-                    return controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                if (controller.chooseUse(outcome, "Cast " + card.getName() 
+                        + " without paying its mana cost?", source, game)) {
+                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                    Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
+                            game, true, new MageObjectReference(source.getSourceObject(game), game));
+                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+                    return cardWasCast;
                 }
             }
             return true;
