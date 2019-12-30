@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import mage.abilities.costs.common.DiscardCardCost;
@@ -9,33 +8,33 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterArtifactCard;
+import mage.filter.common.FilterEnchantmentCard;
 
 import java.util.UUID;
 
 /**
- * @author jeffwadsworth
+ * @author TheElk801
  */
-public final class ThirstForKnowledge extends CardImpl {
+public final class ThirstForMeaning extends CardImpl {
 
-    private static final FilterCard filter = new FilterArtifactCard();
+    private static final FilterCard filter = new FilterEnchantmentCard();
 
-    public ThirstForKnowledge(UUID ownerId, CardSetInfo setInfo) {
+    public ThirstForMeaning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");
 
-        // Draw three cards. Then discard two cards unless you discard an artifact card.
+        // Draw three cards. Then discard two cards unless you discard an enchantment card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
         this.getSpellAbility().addEffect(new DoIfCostPaid(
                 null, new DiscardControllerEffect(2), new DiscardCardCost(filter)
-        ).setText("Then discard two cards unless you discard an artifact card"));
+        ).setText("Then discard two cards unless you discard an enchantment card"));
     }
 
-    private ThirstForKnowledge(final ThirstForKnowledge card) {
+    private ThirstForMeaning(final ThirstForMeaning card) {
         super(card);
     }
 
     @Override
-    public ThirstForKnowledge copy() {
-        return new ThirstForKnowledge(this);
+    public ThirstForMeaning copy() {
+        return new ThirstForMeaning(this);
     }
 }
