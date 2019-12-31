@@ -56,9 +56,9 @@ public final class RakdosTheDefiler extends CardImpl {
         Ability ability = new AttacksTriggeredAbility(effect, false);
         this.addAbility(ability);
 
-        // Whenever Rakdos deals combat damage to a player, that player sacrifices half the non-Demon permanents he or she controls, rounded up.
+        // Whenever Rakdos deals combat damage to a player, that player sacrifices half the non-Demon permanents they control, rounded up.
         effect = new SacrificeEffect(damageToPlayerTriggerFilter, new HalfValue(new PermanentsTargetOpponentControlsCount(damageToPlayerTriggerFilter), true), "");
-        effect.setText("that player sacrifices half the non-Demon permanents he or she controls, rounded up");
+        effect.setText("that player sacrifices half the non-Demon permanents they control, rounded up");
         ability = new DealsCombatDamageToAPlayerTriggeredAbility(effect, false, true);
         this.addAbility(ability);
     }

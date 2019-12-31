@@ -665,6 +665,13 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public boolean changeControllerId(UUID controllerId, Game game) {
         Player newController = game.getPlayer(controllerId);
+        // For each control change compared to last controler send a GAIN_CONTROL replace event to be able to prevent the gain control (e.g. Guardian Beast)
+        if (beforeResetControllerId != controllerId) {
+            GameEvent gainControlEvent = GameEvent.getEvent(GameEvent.EventType.GAIN_CONTROL, this.getId(), null, controllerId);
+            if (game.replaceEvent(gainControlEvent)) {
+                return false;
+            }
+        }
 
         GameEvent loseControlEvent = GameEvent.getEvent(GameEvent.EventType.LOSE_CONTROL, this.getId(), null, controllerId);
 
@@ -963,7 +970,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     private int checkProtectionAbilities(GameEvent event, UUID sourceId, Game game) {
         MageObject source = game.getObject(sourceId);
         if (source != null && hasProtectionFrom(source, game)) {
-            GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, this.objectId, sourceId, this.controllerId, event.getAmount(), false);
+            GameEvent preventEvent = new PreventDamageEvent(this.objectId, sourceId, this.controllerId, event.getAmount(), ((DamageEvent) event).isCombatDamage());
             if (!game.replaceEvent(preventEvent)) {
                 int preventedDamage = event.getAmount();
                 event.setAmount(0);

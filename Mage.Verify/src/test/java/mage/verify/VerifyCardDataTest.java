@@ -48,6 +48,7 @@ public class VerifyCardDataTest {
     private static final boolean CHECK_SOURCE_TOKENS = false;
 
     private static final HashMap<String, Set<String>> skipCheckLists = new HashMap<>();
+    private static final Set<String> subtypesToIgnore = new HashSet<>();
 
     private static void skipListCreate(String listName) {
         skipCheckLists.put(listName, new LinkedHashSet<>());
@@ -668,8 +669,20 @@ public class VerifyCardDataTest {
             }
         }
 
-        if (!eqSet(card.getSubtype(null).stream().map(SubType::toString).collect(Collectors.toSet()), expected)) {
-            fail(card, "subtypes", card.getSubtype(null) + " != " + expected);
+        // Remove subtypes that need to be ignored
+        Collection<String> actual = card
+                .getSubtype(null)
+                .stream()
+                .map(SubType::toString)
+                .collect(Collectors.toSet());
+        actual.removeIf(subtypesToIgnore::contains);
+
+        if (expected != null) {
+            expected.removeIf(subtypesToIgnore::contains);
+        }
+
+        if (!eqSet(actual, expected)) {
+            fail(card, "subtypes", actual + " != " + expected);
         }
     }
 
@@ -752,7 +765,7 @@ public class VerifyCardDataTest {
         // debug only: show direct card info (takes it from class file, not from db repository)
         String cardName = "Essence Capture";
         CardScanner.scan();
-        CardSetInfo testSet = new CardSetInfo("test", "test", "123", Rarity.COMMON);
+        CardSetInfo testSet = new CardSetInfo(cardName, "test", "123", Rarity.COMMON);
         CardInfo cardInfo = CardRepository.instance.findCard(cardName);
         Card card = CardImpl.createCard(cardInfo.getClassName(), testSet);
         card.getRules().stream().forEach(System.out::println);

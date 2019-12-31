@@ -1,5 +1,3 @@
-
-
 package mage.abilities.common;
 
 import mage.MageObject;
@@ -14,7 +12,6 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author LevelX2
  */
 
@@ -27,7 +24,7 @@ public class TurnedFaceUpAllTriggeredAbility extends TriggeredAbilityImpl {
         this(effect, filter, false);
     }
 
-    public TurnedFaceUpAllTriggeredAbility(Effect effect, FilterPermanent filter,  boolean setTargetPointer) {
+    public TurnedFaceUpAllTriggeredAbility(Effect effect, FilterPermanent filter, boolean setTargetPointer) {
         this(Zone.BATTLEFIELD, effect, filter, setTargetPointer, false);
     }
 
@@ -60,7 +57,7 @@ public class TurnedFaceUpAllTriggeredAbility extends TriggeredAbilityImpl {
         if (!event.getTargetId().equals(getSourceId())) {
             MageObject sourceObj = this.getSourceObject(game);
             if (sourceObj != null) {
-                if (sourceObj instanceof  Card && ((Card)sourceObj).isFaceDown(game)) {
+                if (sourceObj instanceof Card && ((Card) sourceObj).isFaceDown(game)) {
                     // if face down and it's not itself that is turned face up, it does not trigger
                     return false;
                 }
@@ -70,9 +67,9 @@ public class TurnedFaceUpAllTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (filter.match(permanent, getSourceId(), getControllerId(), game)) {
+        if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
             if (setTargetPointer) {
-                for (Effect effect: getEffects()) {
+                for (Effect effect : getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                 }
             }

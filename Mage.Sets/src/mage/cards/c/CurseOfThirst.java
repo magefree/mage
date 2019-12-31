@@ -39,7 +39,7 @@ public final class CurseOfThirst extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
-        // At the beginning of enchanted player's upkeep, Curse of Thirst deals damage to that player equal to the number of Curses attached to him or her.
+        // At the beginning of enchanted player's upkeep, Curse of Thirst deals damage to that player equal to the number of Curses attached to them.
         this.addAbility(new CurseOfThirstAbility());
 
     }
@@ -90,7 +90,7 @@ class CurseOfThirstAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "At the beginning of enchanted player's upkeep, Curse of Thirst "
-                + "deals damage to that player equal to the number of Curses attached to him or her.";
+                + "deals damage to that player equal to the number of Curses attached to them.";
     }
 
 }
@@ -130,6 +130,6 @@ class CursesAttachedCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "number of Curses attached to him or her";
+        return "number of Curses attached to them";
     }
 }

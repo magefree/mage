@@ -1,4 +1,3 @@
-
 package mage.cards.k;
 
 import java.util.UUID;
@@ -28,7 +27,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -85,7 +84,7 @@ class KheruLichLordEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Cards cards = new CardsImpl(controller.getGraveyard().getCards(new FilterCreatureCard(), source.getSourceId(), source.getControllerId(), game));
+            Cards cards = new CardsImpl(controller.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, source.getSourceId(), source.getControllerId(), game));
             Card card = cards.getRandom(game);
             if (card != null) {
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game);

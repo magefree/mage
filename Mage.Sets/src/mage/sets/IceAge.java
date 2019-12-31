@@ -32,6 +32,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Aggression", 169, Rarity.UNCOMMON, mage.cards.a.Aggression.class));
         cards.add(new SetCardInfo("Altar of Bone", 281, Rarity.RARE, mage.cards.a.AltarOfBone.class));
         cards.add(new SetCardInfo("Anarchy", 170, Rarity.UNCOMMON, mage.cards.a.Anarchy.class));
+        cards.add(new SetCardInfo("Arctic Foxes", 2, Rarity.COMMON, mage.cards.a.ArcticFoxes.class));
         cards.add(new SetCardInfo("Arenson's Aura", 3, Rarity.COMMON, mage.cards.a.ArensonsAura.class));
         cards.add(new SetCardInfo("Armor of Faith", 4, Rarity.COMMON, mage.cards.a.ArmorOfFaith.class));
         cards.add(new SetCardInfo("Arnjlot's Ascent", 57, Rarity.COMMON, mage.cards.a.ArnjlotsAscent.class));
@@ -99,6 +100,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Elder Druid", 232, Rarity.RARE, mage.cards.e.ElderDruid.class));
         cards.add(new SetCardInfo("Elemental Augury", 286, Rarity.RARE, mage.cards.e.ElementalAugury.class));
         cards.add(new SetCardInfo("Elkin Bottle", 317, Rarity.RARE, mage.cards.e.ElkinBottle.class));
+        cards.add(new SetCardInfo("Elvish Healer", 22, Rarity.COMMON, mage.cards.e.ElvishHealer.class));
         cards.add(new SetCardInfo("Enduring Renewal", 23, Rarity.RARE, mage.cards.e.EnduringRenewal.class));
         cards.add(new SetCardInfo("Energy Storm", 24, Rarity.RARE, mage.cards.e.EnergyStorm.class));
         cards.add(new SetCardInfo("Enervate", 67, Rarity.COMMON, mage.cards.e.Enervate.class));
@@ -106,6 +108,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Errantry", 183, Rarity.COMMON, mage.cards.e.Errantry.class));
         cards.add(new SetCardInfo("Essence Filter", 233, Rarity.COMMON, mage.cards.e.EssenceFilter.class));
         cards.add(new SetCardInfo("Essence Flare", 69, Rarity.COMMON, mage.cards.e.EssenceFlare.class));
+        cards.add(new SetCardInfo("Essence Vortex", 287, Rarity.UNCOMMON, mage.cards.e.EssenceVortex.class));
         cards.add(new SetCardInfo("Fanatical Fever", 234, Rarity.UNCOMMON, mage.cards.f.FanaticalFever.class));
         cards.add(new SetCardInfo("Fear", 124, Rarity.COMMON, mage.cards.f.Fear.class));
         cards.add(new SetCardInfo("Fiery Justice", 288, Rarity.RARE, mage.cards.f.FieryJustice.class));
@@ -118,8 +121,6 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Forbidden Lore", 236, Rarity.RARE, mage.cards.f.ForbiddenLore.class));
         cards.add(new SetCardInfo("Force Void", 70, Rarity.UNCOMMON, mage.cards.f.ForceVoid.class));
         cards.add(new SetCardInfo("Forest", 380, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Forest", 381, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Forest", 382, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forgotten Lore", 237, Rarity.UNCOMMON, mage.cards.f.ForgottenLore.class));
         cards.add(new SetCardInfo("Formation", 25, Rarity.RARE, mage.cards.f.Formation.class));
         cards.add(new SetCardInfo("Foul Familiar", 126, Rarity.COMMON, mage.cards.f.FoulFamiliar.class));
@@ -150,6 +151,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Gorilla Pack", 247, Rarity.COMMON, mage.cards.g.GorillaPack.class));
         cards.add(new SetCardInfo("Gravebind", 129, Rarity.RARE, mage.cards.g.Gravebind.class));
         cards.add(new SetCardInfo("Green Scarab", 28, Rarity.UNCOMMON, mage.cards.g.GreenScarab.class));
+        cards.add(new SetCardInfo("Grizzled Wolverine", 192, Rarity.COMMON, mage.cards.g.GrizzledWolverine.class));
         cards.add(new SetCardInfo("Hallowed Ground", 29, Rarity.UNCOMMON, mage.cards.h.HallowedGround.class));
         cards.add(new SetCardInfo("Halls of Mist", 354, Rarity.RARE, mage.cards.h.HallsOfMist.class));
         cards.add(new SetCardInfo("Heal", 30, Rarity.COMMON, mage.cards.h.Heal.class));
@@ -309,6 +311,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Snow-Covered Mountain", 379, Rarity.LAND, mage.cards.s.SnowCoveredMountain.class));
         cards.add(new SetCardInfo("Snow-Covered Plains", 367, Rarity.LAND, mage.cards.s.SnowCoveredPlains.class));
         cards.add(new SetCardInfo("Snow-Covered Swamp", 372, Rarity.LAND, mage.cards.s.SnowCoveredSwamp.class));
+        cards.add(new SetCardInfo("Snowblind", 264, Rarity.RARE, mage.cards.s.Snowblind.class));
         cards.add(new SetCardInfo("Soldevi Golem", 338, Rarity.RARE, mage.cards.s.SoldeviGolem.class));
         cards.add(new SetCardInfo("Soldevi Machinist", 102, Rarity.UNCOMMON, mage.cards.s.SoldeviMachinist.class));
         cards.add(new SetCardInfo("Soldevi Simulacrum", 339, Rarity.UNCOMMON, mage.cards.s.SoldeviSimulacrum.class));

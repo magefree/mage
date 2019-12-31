@@ -41,7 +41,7 @@ public abstract class FilterImpl<E> implements Filter<E> {
     }
 
     @Override
-    public final Filter add(Predicate<? super E> predicate) {
+    public final Filter<E> add(Predicate<? super E> predicate) {
         if (isLockedFilter()) {
             throw new UnsupportedOperationException("You may not modify a locked filter");
         }

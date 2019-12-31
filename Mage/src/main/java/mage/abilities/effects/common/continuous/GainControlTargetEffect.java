@@ -2,6 +2,7 @@ package mage.abilities.effects.common.continuous;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
@@ -23,6 +24,7 @@ public class GainControlTargetEffect extends ContinuousEffectImpl {
 
     protected UUID controllingPlayerId;
     private boolean fixedControl;
+    private boolean firstControlChange = true;
 
     public GainControlTargetEffect(Duration duration) {
         this(duration, false, null);
@@ -77,31 +79,44 @@ public class GainControlTargetEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            boolean targetStillExists = false;
+            boolean oneTargetStillExists = false;
             for (UUID permanentId : getTargetPointer().getTargets(game, source)) {
                 Permanent permanent = game.getPermanent(permanentId);
                 if (permanent != null) {
-                    targetStillExists = true;
+                    oneTargetStillExists = true;
                     if (!permanent.isControlledBy(controllingPlayerId)) {
                         GameEvent loseControlEvent = GameEvent.getEvent(GameEvent.EventType.LOSE_CONTROL, permanentId, source.getId(), permanent.getControllerId());
                         if (game.replaceEvent(loseControlEvent)) {
                             return false;
                         }
+                        boolean controlChanged = false;
                         if (controllingPlayerId != null) {
-                            permanent.changeControllerId(controllingPlayerId, game);
-                            permanent.getAbilities().setControllerId(controllingPlayerId);
+                            if (permanent.changeControllerId(controllingPlayerId, game)) {
+                                permanent.getAbilities().setControllerId(controllingPlayerId);
+                                controlChanged = true;
+                            }
                         } else {
-                            permanent.changeControllerId(source.getControllerId(), game);
-                            permanent.getAbilities().setControllerId(source.getControllerId());
+                            if (permanent.changeControllerId(source.getControllerId(), game)) {
+                                permanent.getAbilities().setControllerId(source.getControllerId());
+                                controlChanged = true;
+                            }
+                        }
+                        if (source instanceof ActivatedAbility
+                                && firstControlChange && !controlChanged) {
+                            // If it was not possible to get control of target permanent by the activated ability the first time it took place
+                            // the effect failed (e.g. because of Guardian Beast) and must be discarded
+                            // This does not handle correctly multiple targets at once
+                            discard();
                         }
                     }
                 }
             }
             // no valid target exists and the controller is no longer in the game, effect can be discarded
-            if (!targetStillExists
+            if (!oneTargetStillExists
                     || !controller.isInGame()) {
                 discard();
             }
+            firstControlChange = false;
             return true;
         }
         discard(); // controller no longer exists

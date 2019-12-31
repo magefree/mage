@@ -67,7 +67,7 @@ class IslandSanctuaryEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(event.getPlayerId());
         if (controller != null && controller.chooseUse(outcome, "Skip draw card? (If you do, until your next turn, you can't be attacked except by creatures with flying and/or islandwalk)", source, game)) {
-            game.informPlayers(controller.getLogName() + " skips their draw card action. Until their next turn, he or she can't be attacked except by creatures with flying and/or islandwalk");
+            game.informPlayers(controller.getLogName() + " skips their draw card action. Until their next turn, they can't be attacked except by creatures with flying and/or islandwalk");
             game.addEffect(new CantAttackYouAllEffect(Duration.UntilYourNextTurn, notFlyingorIslandwalkCreatures), source);
             return true;
         }

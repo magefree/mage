@@ -1,7 +1,5 @@
-
 package mage.abilities.effects.common;
 
-import java.io.ObjectStreamException;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
@@ -20,6 +18,8 @@ import mage.players.PlayerList;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
 
+import java.io.ObjectStreamException;
+
 /**
  * 1. The controller of the spell or ability chooses an opponent. (This doesn't
  * target the opponent.) 2. Each player involved in the clash reveals the top
@@ -28,15 +28,15 @@ import mage.target.common.TargetOpponent;
  * their revealed card on either the top or bottom of their library.
  * (Note that the player whose turn it is does this first, not necessarily the
  * controller of the clash spell or ability.) When the second player makes this
- * decision, he or she will know what the first player chose. Then all cards are
+ * decision, they will know what the first player chose. Then all cards are
  * moved at the same time. 5. The clash is over. If one player in the clash
  * revealed a card with a higher converted mana cost than all other cards
  * revealed in the clash, that player wins the clash. 6. If any abilities
  * trigger when a player clashes, they trigger and wait to be put on the stack.
  * 7. The clash spell or ability finishes resolving. That usually involves a
- * bonus gained by the controller of the clash spell or ability if he or she won
+ * bonus gained by the controller of the clash spell or ability if they won
  * the clash. 8. Abilities that triggered during the clash are put on the stack.
- *
+ * <p>
  * There are no draws or losses in a clash. Either you win it or you don't. Each
  * spell or ability with clash says what happens if you (the controller of that
  * spell or ability) win the clash. Typically, if you don't win the clash,
@@ -148,7 +148,7 @@ public class ClashEffect extends OneShotEffect implements MageSingleton {
                         if (cardOpponent != null && current.getId().equals(opponent.getId())) {
                             topOpponent = current.chooseUse(Outcome.Detriment, "Put " + cardOpponent.getLogName() + " back on top of your library? (otherwise it goes to bottom)", source, game);
                         }
-                        nextPlayer = playerList.getNext(game);
+                        nextPlayer = playerList.getNext(game, false);
                     } while (nextPlayer != null && !nextPlayer.getId().equals(game.getActivePlayerId()));
                     // put the cards back to library
                     if (cardController != null) {

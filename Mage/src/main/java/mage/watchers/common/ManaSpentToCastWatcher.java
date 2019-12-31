@@ -1,4 +1,3 @@
-
 package mage.watchers.common;
 
 import mage.Mana;
@@ -30,13 +29,15 @@ public class ManaSpentToCastWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getZone() == Zone.HAND) {
+        // There was a check for the from zone being the hand, but that should not matter
+        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             Spell spell = (Spell) game.getObject(event.getTargetId());
             if (spell != null && this.getSourceId().equals(spell.getSourceId())) {
                 payment = spell.getSpellAbility().getManaCostsToPay().getPayment();
             }
         }
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && this.getSourceId().equals(event.getSourceId())) {
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE
+                && this.getSourceId().equals(event.getSourceId())) {
             if (((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
                 payment = null;
             }

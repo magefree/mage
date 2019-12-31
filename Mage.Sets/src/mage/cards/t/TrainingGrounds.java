@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import mage.Mana;
@@ -28,10 +27,10 @@ public final class TrainingGrounds extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}");
 
         // Activated abilities of creatures you control cost up to {2} less to activate. This effect can't reduce the amount of mana an ability costs to activate to less than one mana.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TrainingGroundsEffect()));
+        this.addAbility(new SimpleStaticAbility(new TrainingGroundsEffect()));
     }
 
-    public TrainingGrounds(final TrainingGrounds card) {
+    private TrainingGrounds(final TrainingGrounds card) {
         super(card);
     }
 
@@ -58,47 +57,48 @@ class TrainingGroundsEffect extends CostModificationEffectImpl {
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         Player controller = game.getPlayer(abilityToModify.getControllerId());
-        if (controller != null) {
-            Mana mana = abilityToModify.getManaCostsToPay().getMana();
-            int reduceMax = mana.getGeneric();
-            if (reduceMax > 0 && mana.count() == mana.getGeneric()) {
-                reduceMax--;
-            }
-            if (reduceMax > 2) {
-                reduceMax = 2;
-            }
-            if (reduceMax > 0) {
-                ChoiceImpl choice = new ChoiceImpl(true);
-                Set<String> set = new LinkedHashSet<>();
-
-                for (int i = 0; i <= reduceMax; i++) {
-                    set.add(String.valueOf(i));
-                }
-                choice.setChoices(set);
-                choice.setMessage("Reduce ability cost");
-                if (!controller.choose(Outcome.Benefit, choice, game)) {
-                    return false;
-                }
-                int reduce = Integer.parseInt(choice.getChoice());
-                CardUtil.reduceCost(abilityToModify, reduce);
-            }
+        if (controller == null) {
+            return false;
+        }
+        Mana mana = abilityToModify.getManaCostsToPay().getMana();
+        int reduceMax = mana.getGeneric();
+        if (reduceMax > 0 && mana.count() == mana.getGeneric()) {
+            reduceMax--;
+        }
+        if (reduceMax > 2) {
+            reduceMax = 2;
+        }
+        if (reduceMax <= 0) {
             return true;
         }
+        ChoiceImpl choice = new ChoiceImpl(true);
+        Set<String> set = new LinkedHashSet<>();
 
-        return false;
+        for (int i = 0; i <= reduceMax; i++) {
+            set.add(String.valueOf(i));
+        }
+        choice.setChoices(set);
+        choice.setMessage("Reduce ability cost");
+        if (!controller.choose(Outcome.Benefit, choice, game)) {
+            return false;
+        }
+        int reduce = Integer.parseInt(choice.getChoice());
+        CardUtil.reduceCost(abilityToModify, reduce);
+        return true;
+
     }
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify.getAbilityType() == AbilityType.ACTIVATED
-                || (abilityToModify.getAbilityType() == AbilityType.MANA && (abilityToModify instanceof ActivatedAbility))) {
-            //Activated abilities of creatures you control
-            Permanent permanent = game.getPermanent(abilityToModify.getSourceId());
-            if (permanent != null && permanent.isControlledBy(source.getControllerId())) {
-                return true;
-            }
+        if (abilityToModify.getAbilityType() != AbilityType.ACTIVATED
+                && (abilityToModify.getAbilityType() != AbilityType.MANA
+                || !(abilityToModify instanceof ActivatedAbility))) {
+            return false;
         }
-        return false;
+        //Activated abilities of creatures you control
+        Permanent permanent = game.getPermanent(abilityToModify.getSourceId());
+        return permanent != null && permanent.isCreature()
+                && permanent.isControlledBy(source.getControllerId());
     }
 
     @Override

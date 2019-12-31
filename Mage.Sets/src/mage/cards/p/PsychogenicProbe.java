@@ -23,7 +23,7 @@ public final class PsychogenicProbe extends CardImpl {
     public PsychogenicProbe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
-        // Whenever a spell or ability causes a player to shuffle their library, Psychogenic Probe deals 2 damage to him or her.
+        // Whenever a spell or ability causes a player to shuffle their library, Psychogenic Probe deals 2 damage to that player.
         this.addAbility(new PsychogenicProbeTriggeredAbility());
     }
 
@@ -67,6 +67,6 @@ class PsychogenicProbeTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a spell or ability causes a player to shuffle their library, {this}    deals 2 damage to him or her.";
+        return "Whenever a spell or ability causes a player to shuffle their library, {this} deals 2 damage to that player.";
     }
 }

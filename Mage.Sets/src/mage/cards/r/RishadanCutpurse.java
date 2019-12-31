@@ -23,7 +23,7 @@ public final class RishadanCutpurse extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // When Rishadan Cutpurse enters the battlefield, each opponent sacrifices a permanent unless he or she pays {1}.
+        // When Rishadan Cutpurse enters the battlefield, each opponent sacrifices a permanent unless they pay {1}.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeOpponentsUnlessPayEffect(1)));
     }
 

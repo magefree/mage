@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import mage.MageInt;
@@ -7,7 +6,10 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -35,11 +37,12 @@ public final class DiscipleOfPhenax extends CardImpl {
         // from their hand equal to your devotion to black. You choose one of them. That player discards that card.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DiscipleOfPhenaxEffect(), false);
         ability.addTarget(new TargetPlayer());
+        ability.addHint(DevotionCount.B.getHint());
         this.addAbility(ability);
 
     }
 
-    public DiscipleOfPhenax(final DiscipleOfPhenax card) {
+    private DiscipleOfPhenax(final DiscipleOfPhenax card) {
         super(card);
     }
 
@@ -51,12 +54,12 @@ public final class DiscipleOfPhenax extends CardImpl {
 
 class DiscipleOfPhenaxEffect extends OneShotEffect {
 
-    public DiscipleOfPhenaxEffect() {
+    DiscipleOfPhenaxEffect() {
         super(Outcome.Discard);
         staticText = "target player reveals a number of cards from their hand equal to your devotion to black. You choose one of them. That player discards that card";
     }
 
-    public DiscipleOfPhenaxEffect(final DiscipleOfPhenaxEffect effect) {
+    private DiscipleOfPhenaxEffect(final DiscipleOfPhenaxEffect effect) {
         super(effect);
     }
 
@@ -67,48 +70,46 @@ class DiscipleOfPhenaxEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int devotion = new DevotionCount(ColoredManaSymbol.B).calculate(game, source, this);
+        int devotion = DevotionCount.B.calculate(game, source, this);
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
-        if (devotion > 0 && targetPlayer != null) {
-            Cards revealedCards = new CardsImpl();
-            int amount = Math.min(targetPlayer.getHand().size(), devotion);
-            if (targetPlayer.getHand().size() > amount) {
-                FilterCard filter = new FilterCard("card in target player's hand");
-                TargetCardInHand chosenCards = new TargetCardInHand(amount, amount, filter);
-                chosenCards.setNotTarget(true);
-                if (chosenCards.canChoose(targetPlayer.getId(), game) && targetPlayer.choose(Outcome.Discard, targetPlayer.getHand(), chosenCards, game)) {
-                    if (!chosenCards.getTargets().isEmpty()) {
-                        List<UUID> targets = chosenCards.getTargets();
-                        for (UUID targetid : targets) {
-                            Card card = game.getCard(targetid);
-                            if (card != null) {
-                                revealedCards.add(card);
-                            }
+        if (devotion <= 0 || targetPlayer == null) {
+            return false;
+        }
+        Cards revealedCards = new CardsImpl();
+        int amount = Math.min(targetPlayer.getHand().size(), devotion);
+        if (targetPlayer.getHand().size() > amount) {
+            FilterCard filter = new FilterCard("card in target player's hand");
+            TargetCardInHand chosenCards = new TargetCardInHand(amount, amount, filter);
+            chosenCards.setNotTarget(true);
+            if (chosenCards.canChoose(targetPlayer.getId(), game) && targetPlayer.choose(Outcome.Discard, targetPlayer.getHand(), chosenCards, game)) {
+                if (!chosenCards.getTargets().isEmpty()) {
+                    List<UUID> targets = chosenCards.getTargets();
+                    for (UUID targetid : targets) {
+                        Card card = game.getCard(targetid);
+                        if (card != null) {
+                            revealedCards.add(card);
                         }
                     }
                 }
-            } else {
-                revealedCards.addAll(targetPlayer.getHand());
             }
-            if (!revealedCards.isEmpty()) {
-                targetPlayer.revealCards("Disciple of Phenax", revealedCards, game);
-                Player you = game.getPlayer(source.getControllerId());
-                if (you != null) {
-                    TargetCard yourChoice = new TargetCard(Zone.HAND, new FilterCard());
-                    yourChoice.setNotTarget(true);
-                    if (you.choose(Outcome.Benefit, revealedCards, yourChoice, game)) {
-                        Card card = targetPlayer.getHand().get(yourChoice.getFirstTarget(), game);
-                        return targetPlayer.discard(card, source, game);
-
-                    }
-                } else {
-                    return false;
-                }
-            }
+        } else {
+            revealedCards.addAll(targetPlayer.getHand());
+        }
+        if (revealedCards.isEmpty()) {
             return true;
+        }
+        targetPlayer.revealCards("Disciple of Phenax", revealedCards, game);
+        Player you = game.getPlayer(source.getControllerId());
+        if (you == null) {
+            return false;
+        }
+        TargetCard yourChoice = new TargetCard(Zone.HAND, new FilterCard());
+        yourChoice.setNotTarget(true);
+        if (you.choose(Outcome.Benefit, revealedCards, yourChoice, game)) {
+            Card card = targetPlayer.getHand().get(yourChoice.getFirstTarget(), game);
+            return targetPlayer.discard(card, source, game);
 
         }
-
-        return false;
+        return true;
     }
 }

@@ -1,7 +1,5 @@
-
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -18,8 +16,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class Extinction extends CardImpl {
@@ -44,7 +43,7 @@ public final class Extinction extends CardImpl {
 class ExtinctionEffect extends OneShotEffect {
 
     public ExtinctionEffect() {
-        super(Outcome.UnboostCreature);
+        super(Outcome.DestroyPermanent);
         staticText = "Destroy all creatures of the creature type of your choice";
     }
 

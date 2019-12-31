@@ -1,4 +1,3 @@
-
 package mage.cards.l;
 
 import java.util.HashMap;
@@ -17,7 +16,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -36,7 +34,7 @@ public final class LivingEnd extends CardImpl {
         // Suspend 3-{2}{B}{B}
         this.addAbility(new SuspendAbility(3, new ManaCostsImpl("{2}{B}{B}"), this));
         // Each player exiles all creature cards from their graveyard, then sacrifices all creatures
-        // he or she controls, then puts all cards he or she exiled this way onto the battlefield.
+        // they control, then puts all cards they exiled this way onto the battlefield.
         this.getSpellAbility().addEffect(new LivingEndEffect());
 
     }
@@ -55,7 +53,7 @@ class LivingEndEffect extends OneShotEffect {
 
     public LivingEndEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Each player exiles all creature cards from their graveyard, then sacrifices all creatures he or she controls, then puts all cards he or she exiled this way onto the battlefield";
+        this.staticText = "Each player exiles all creature cards from their graveyard, then sacrifices all creatures they control, then puts all cards they exiled this way onto the battlefield";
     }
 
     public LivingEndEffect(final LivingEndEffect effect) {
@@ -77,7 +75,7 @@ class LivingEndEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    Set<Card> cardsPlayer = player.getGraveyard().getCards(new FilterCreatureCard(), game);
+                    Set<Card> cardsPlayer = player.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game);
                     if (!cardsPlayer.isEmpty()) {
                         exiledCards.put(player.getId(), cardsPlayer);
                         player.moveCards(cardsPlayer, Zone.EXILED, source, game);

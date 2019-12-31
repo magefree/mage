@@ -139,6 +139,8 @@ Masters Edition III|ME3|
 Masters Edition IV|ME4|
 Masters Edition|MED|
 Game Day|MGDC|
+Game Night|GNT|
+Game Night 2019|GN2|
 Mirage|MIR|
 Launch Party|MLP|
 Modern Horizons|MH1|
@@ -183,8 +185,10 @@ Scars of Mirrodin|SOM|
 Stronghold|STH|
 Super Series|SUS|
 Theros|THS|
+Theros Beyond Death|THB|
 Tempest|TMP|
 Throne of Eldraine|ELD|
+Throne of Eldraine Collector's Edition|CELD|
 Torment|TOR|
 Tempest Remastered|TPR|
 Time Spiral "Timeshifted"|TSB|

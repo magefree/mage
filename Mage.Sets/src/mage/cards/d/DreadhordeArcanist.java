@@ -50,7 +50,10 @@ public final class DreadhordeArcanist extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 
-        // Whenever Dreadhorde Arcanist attacks, you may cast target instant or sorcery card with converted mana cost less than or equal to Dreadhorde Arcanist's power from your graveyard without paying its mana cost. If that card would be put into your graveyard this turn, exile it instead.
+        // Whenever Dreadhorde Arcanist attacks, you may cast target instant or 
+        // sorcery card with converted mana cost less than or equal to Dreadhorde Arcanist's 
+        // power from your graveyard without paying its mana cost. If that card would be put 
+        // into your graveyard this turn, exile it instead.
         Ability ability = new AttacksTriggeredAbility(new DreadhordeArcanistEffect(), false);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
@@ -80,10 +83,10 @@ enum DreadhordeArcanistPredicate implements ObjectSourcePlayerPredicate<ObjectSo
 class DreadhordeArcanistEffect extends OneShotEffect {
 
     DreadhordeArcanistEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "you may cast target instant or sorcery card with converted mana cost " +
-                "less than or equal to {this}'s power from your graveyard without paying its mana cost. " +
-                "If that card would be put into your graveyard this turn, exile it instead.";
+        super(Outcome.PlayForFree);
+        this.staticText = "you may cast target instant or sorcery card with converted mana cost "
+                + "less than or equal to {this}'s power from your graveyard without paying its mana cost. "
+                + "If that card would be put into your graveyard this turn, exile it instead.";
     }
 
     private DreadhordeArcanistEffect(final DreadhordeArcanistEffect effect) {
@@ -102,13 +105,12 @@ class DreadhordeArcanistEffect extends OneShotEffect {
             return false;
         }
         Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
-        if (card == null
-                || !controller.chooseUse(outcome, "Cast " + card.getLogName() + '?', source, game)
-                || !controller.cast(
-                card.getSpellAbility(), game, true,
-                new MageObjectReference(source.getSourceObject(game), game)
-        )) {
-            return false;
+        if (card != null
+                && controller.chooseUse(Outcome.PlayForFree, "Cast " + card.getLogName() + '?', source, game)) {
+            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+            controller.cast(controller.chooseAbilityForCast(card, game, true),
+                    game, true, new MageObjectReference(source.getSourceObject(game), game));
+            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
         }
         ContinuousEffect effect = new DreadhordeArcanistReplacementEffect(card.getId());
         effect.setTargetPointer(new FixedTarget(card.getId(), game.getState().getZoneChangeCounter(card.getId())));

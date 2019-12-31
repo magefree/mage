@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -43,8 +42,10 @@ public final class SpellweaverVolute extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // Whenever you cast a sorcery spell, copy the enchanted instant card. You may cast the copy without paying its mana cost.
-        // If you do, exile the enchanted card and attach Spellweaver Volute to another instant card in a graveyard.
+        // Whenever you cast a sorcery spell, copy the enchanted instant card. 
+        // You may cast the copy without paying its mana cost.
+        // If you do, exile the enchanted card and attach Spellweaver Volute 
+        // to another instant card in a graveyard.
         FilterSpell filterSpell = new FilterSpell("a sorcery spell");
         filterSpell.add(new CardTypePredicate(CardType.SORCERY));
         this.addAbility(new SpellCastControllerTriggeredAbility(new SpellweaverVoluteEffect(), filterSpell, false));
@@ -63,7 +64,7 @@ public final class SpellweaverVolute extends CardImpl {
 class SpellweaverVoluteEffect extends OneShotEffect {
 
     public SpellweaverVoluteEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.PlayForFree);
         this.staticText = "copy the enchanted instant card. You may cast the copy without paying its mana cost. \n"
                 + "If you do, exile the enchanted card and attach {this} to another instant card in a graveyard";
     }
@@ -87,21 +88,24 @@ class SpellweaverVoluteEffect extends OneShotEffect {
                 if (enchantedCard != null && game.getState().getZone(enchantedCard.getId()) == Zone.GRAVEYARD) {
                     Player ownerEnchanted = game.getPlayer(enchantedCard.getOwnerId());
                     if (ownerEnchanted != null
-                            && controller.chooseUse(outcome, "Create a copy of " + enchantedCard.getName() + '?', source, game)) {
+                            && controller.chooseUse(Outcome.Copy, "Create a copy of " + enchantedCard.getName() + '?', source, game)) {
                         Card copiedCard = game.copyCard(enchantedCard, source, source.getControllerId());
                         if (copiedCard != null) {
                             ownerEnchanted.getGraveyard().add(copiedCard);
                             game.getState().setZone(copiedCard.getId(), Zone.GRAVEYARD);
-                            if (controller.chooseUse(outcome, "Cast the copied card without paying mana cost?", source, game)) {
+                            if (controller.chooseUse(Outcome.PlayForFree, "Cast the copied card without paying mana cost?", source, game)) {
                                 if (copiedCard.getSpellAbility() != null) {
-                                    controller.cast(copiedCard.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                                    game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), Boolean.TRUE);
+                                    controller.cast(controller.chooseAbilityForCast(copiedCard, game, true),
+                                            game, true, new MageObjectReference(source.getSourceObject(game), game));
+                                    game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), null);
                                 }
                                 if (controller.moveCards(enchantedCard, Zone.EXILED, source, game)) {
                                     FilterCard filter = new FilterCard("instant card in a graveyard");
                                     filter.add(new CardTypePredicate(CardType.INSTANT));
                                     TargetCardInGraveyard auraTarget = new TargetCardInGraveyard(filter);
                                     if (auraTarget.canChoose(source.getSourceId(), controller.getId(), game)) {
-                                        controller.choose(outcome, auraTarget, source.getSourceId(), game);
+                                        controller.choose(Outcome.Benefit, auraTarget, source.getSourceId(), game);
                                         Card newAuraTarget = game.getCard(auraTarget.getFirstTarget());
                                         if (newAuraTarget != null) {
                                             if (enchantedCard.getId().equals(newAuraTarget.getId())) {

@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class CardView extends SimpleCardView implements SelectableObjectView {
+public class CardView extends SimpleCardView {
 
     private static final long serialVersionUID = 1L;
 
@@ -104,9 +104,6 @@ public class CardView extends SimpleCardView implements SelectableObjectView {
     protected boolean rotate;
     protected boolean hideInfo; // controls if the tooltip window is shown (eg. controlled face down morph card)
 
-    protected boolean isPlayable;
-    protected boolean isChoosable;
-    protected boolean selected;
     protected boolean canAttack;
     protected boolean canBlock;
     protected boolean inViewerOnly;
@@ -117,9 +114,13 @@ public class CardView extends SimpleCardView implements SelectableObjectView {
         this(card, null, false);
     }
 
-    public CardView(Card card, UUID cardId) {
+    public CardView(Card card, SimpleCardView simpleCardView) {
         this(card, null, false);
-        this.id = cardId;
+        this.id = simpleCardView.getId();
+
+        this.isPlayable = simpleCardView.isPlayable;
+        this.isChoosable = simpleCardView.isChoosable;
+        this.isSelected = simpleCardView.isSelected;
     }
 
     public CardView(Card card, Game game, UUID cardId) {
@@ -128,10 +129,12 @@ public class CardView extends SimpleCardView implements SelectableObjectView {
     }
 
     public CardView(CardView cardView) {
-        super(cardView.id, cardView.expansionSetCode, cardView.cardNumber, cardView.usesVariousArt, cardView.tokenSetCode, cardView.gameObject, cardView.tokenDescriptor);
+        super(cardView);
         this.originalCard = cardView.originalCard;
 
+        // generetate new ID
         this.id = UUID.randomUUID();
+
         this.parentId = cardView.parentId;
         this.name = cardView.name;
         this.displayName = cardView.displayName;
@@ -198,9 +201,6 @@ public class CardView extends SimpleCardView implements SelectableObjectView {
         this.rotate = cardView.rotate;
         this.hideInfo = cardView.hideInfo;
 
-        this.isPlayable = cardView.isPlayable;
-        this.isChoosable = cardView.isChoosable;
-        this.selected = cardView.selected;
         this.canAttack = cardView.canAttack;
         this.canBlock = cardView.canBlock;
         this.inViewerOnly = cardView.inViewerOnly;
@@ -468,8 +468,6 @@ public class CardView extends SimpleCardView implements SelectableObjectView {
 
         // Get starting loyalty
         this.startingLoyalty = "" + card.getStartingLoyalty();
-
-
     }
 
     public CardView(MageObject object) {
@@ -962,30 +960,6 @@ public class CardView extends SimpleCardView implements SelectableObjectView {
 
     public boolean hideInfo() {
         return hideInfo;
-    }
-
-    public boolean isPlayable() {
-        return isPlayable;
-    }
-
-    public void setPlayable(boolean isPlayable) {
-        this.isPlayable = isPlayable;
-    }
-
-    public boolean isChoosable() {
-        return isChoosable;
-    }
-
-    public void setChoosable(boolean isChoosable) {
-        this.isChoosable = isChoosable;
-    }
-
-    public boolean isSelected() {
-        return selected;
-    }
-
-    public void setSelected(boolean selected) {
-        this.selected = selected;
     }
 
     public boolean isCanAttack() {

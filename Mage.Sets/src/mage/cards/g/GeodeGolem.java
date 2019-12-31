@@ -38,7 +38,8 @@ public final class GeodeGolem extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 
-        // Whenever Geode Golem deals combat damage to a player, you may cast your commander from the command zone without paying its mana cost.
+        // Whenever Geode Golem deals combat damage to a player, you may 
+        // cast your commander from the command zone without paying its mana cost.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new GeodeGolemEffect(), true));
     }
 
@@ -56,7 +57,8 @@ class GeodeGolemEffect extends OneShotEffect {
 
     public GeodeGolemEffect() {
         super(Outcome.PlayForFree);
-        staticText = "you may cast your commander from the command zone without paying its mana cost";
+        staticText = "you may cast your commander from the command zone "
+                + "without paying its mana cost";
     }
 
     public GeodeGolemEffect(final GeodeGolemEffect effect) {
@@ -83,10 +85,12 @@ class GeodeGolemEffect extends OneShotEffect {
             if (possibleCommanders.size() == 1) {
                 selectedCommanderId = possibleCommanders.iterator().next();
             } else {
-                TargetCard target = new TargetCard(Zone.COMMAND, new FilterCard("commander to cast without mana cost"));
+                TargetCard target = new TargetCard(Zone.COMMAND, new FilterCard(
+                        "commander to cast without mana cost"));
                 Cards cards = new CardsImpl(possibleCommanders);
                 target.setNotTarget(true);
-                if (controller.canRespond() && controller.choose(Outcome.Benefit, cards, target, game)) {
+                if (controller.canRespond()
+                        && controller.choose(Outcome.PlayForFree, cards, target, game)) {
                     if (target.getFirstTarget() != null) {
                         selectedCommanderId = target.getFirstTarget();
                     }
@@ -99,7 +103,7 @@ class GeodeGolemEffect extends OneShotEffect {
             }
 
             // PAY
-            // TODO: it's can be broken with commander cost reduction effect
+            // TODO: this is broken with the commander cost reduction effect
             ManaCost cost = null;
             CommanderPlaysCountWatcher watcher = game.getState().getWatcher(CommanderPlaysCountWatcher.class);
             int castCount = watcher.getPlaysCount(commander.getId());
@@ -108,9 +112,14 @@ class GeodeGolemEffect extends OneShotEffect {
             }
 
             // CAST: as spell or as land
-            if (cost == null || cost.pay(source, game, source.getSourceId(), controller.getId(), false, null)) {
+            if (cost == null
+                    || cost.pay(source, game, source.getSourceId(), controller.getId(), false, null)) {
                 if (commander.getSpellAbility() != null) {
-                    return controller.cast(commander.getSpellAbility().copy(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                    game.getState().setValue("PlayFromNotOwnHandZone" + commander.getId(), Boolean.TRUE);
+                    Boolean commanderWasCast = controller.cast(controller.chooseAbilityForCast(commander, game, true),
+                            game, true, new MageObjectReference(source.getSourceObject(game), game));
+                    game.getState().setValue("PlayFromNotOwnHandZone" + commander.getId(), null);
+                    return commanderWasCast;
                 } else {
                     return controller.playLand(commander, game, true);
                 }

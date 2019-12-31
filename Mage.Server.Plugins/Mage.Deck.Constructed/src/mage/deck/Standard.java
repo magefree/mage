@@ -17,7 +17,10 @@ public class Standard extends Constructed {
 
         setCodes.addAll(makeLegalSets());
 
-        banned.add("Rampaging Ferocidon"); // since 2018-01-15
+        banned.add("Field of the Dead");
+        banned.add("Oko, Thief of Crowns");
+        banned.add("Once Upon a Time");
+        banned.add("Veil of Summer");
     }
 
     private static boolean isFallSet(ExpansionSet set) {
@@ -27,7 +30,7 @@ public class Standard extends Constructed {
         return set.getSetType() == SetType.EXPANSION && (cal.get(Calendar.MONTH) > 7);
     }
 
-    public static List<String> makeLegalSets() {
+    static List<String> makeLegalSets() {
         List<String> codes = new ArrayList<>();
         GregorianCalendar current = new GregorianCalendar();
         List<ExpansionSet> sets = new ArrayList(Sets.getInstance().values());

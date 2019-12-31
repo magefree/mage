@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -9,7 +8,7 @@ import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -22,7 +21,7 @@ import mage.target.common.TargetOpponent;
 public final class DubiousChallenge extends CardImpl {
 
     public DubiousChallenge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");
 
         // Look at the top ten cards of your library, exile up to two creature cards from among them, then shuffle your library. Target opponent may choose one of the exiled cards and put it onto the battlefield under their control. Put the rest onto the battlefield under your control.
         getSpellAbility().addEffect(new DubiousChallengeEffect());
@@ -65,7 +64,7 @@ class DubiousChallengeEffect extends OneShotEffect {
             Cards topCards = new CardsImpl();
             topCards.addAll(controller.getLibrary().getTopCards(game, 10));
             controller.lookAtCards(sourceObject.getIdName(), topCards, game);
-            TargetCard targetCreatures = new TargetCard(0, 2, Zone.LIBRARY, new FilterCreatureCard());
+            TargetCard targetCreatures = new TargetCard(0, 2, Zone.LIBRARY, StaticFilters.FILTER_CARD_CREATURE);
             controller.choose(outcome, topCards, targetCreatures, game);
             Cards exiledCards = new CardsImpl(targetCreatures.getTargets());
             if (!exiledCards.isEmpty()) {
@@ -73,7 +72,7 @@ class DubiousChallengeEffect extends OneShotEffect {
                 controller.shuffleLibrary(source, game);
                 Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
                 if (opponent != null) {
-                    TargetCard targetOpponentCreature = new TargetCard(0, 1, Zone.EXILED, new FilterCreatureCard());
+                    TargetCard targetOpponentCreature = new TargetCard(0, 1, Zone.EXILED, StaticFilters.FILTER_CARD_CREATURE);
                     DubiousChallengeMoveToBattlefieldEffect opponentEffect = (DubiousChallengeMoveToBattlefieldEffect) source.getEffects().get(1);
                     DubiousChallengeMoveToBattlefieldEffect controllerEffect = (DubiousChallengeMoveToBattlefieldEffect) source.getEffects().get(2);
                     if (opponent.choose(outcome, exiledCards, targetOpponentCreature, game)) {
@@ -111,8 +110,7 @@ class DubiousChallengeMoveToBattlefieldEffect extends OneShotEffect {
         return new DubiousChallengeMoveToBattlefieldEffect(this);
     }
 
-    public void setPlayerAndCards(Player targetPlayer, Cards targetCards)
-    {
+    public void setPlayerAndCards(Player targetPlayer, Cards targetCards) {
         this.player = targetPlayer;
         this.cards = targetCards;
     }

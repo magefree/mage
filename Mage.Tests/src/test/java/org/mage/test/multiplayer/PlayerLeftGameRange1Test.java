@@ -125,9 +125,9 @@ public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
      * source if it has a proc. To reproduce, a Planeswalker was taken from an
      * original player's control, such as using Scrambleverse to shuffle Jace,
      * Unraveler of Secrets, to a second player and then the second player uses
-     * Jace's ability to create an emblem ("Whenever an opponent casts his or
-     * her first spell each turn, counter that spell."). Then the original
-     * player concedes the game and removes the Planeswalker. Once it becomes an
+     * Jace's ability to create an emblem ("Whenever an opponent casts their
+     * first spell each turn, counter that spell."). Then the original player
+     * concedes the game and removes the Planeswalker. Once it becomes an
      * opponent of the original player's turn and that opponent plays a spell,
      * Xmage throws an error and rollsback the turn.
      * <p>
@@ -293,7 +293,7 @@ public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerD, "Island", 3);
         // {2}{U}, {T}: Put target creature on the bottom of its owner's library. That creature's controller reveals cards from the
-        // top of their library until he or she reveals a creature card. The player puts that card onto the battlefield and the
+        // top of their library until they reveal a creature card. The player puts that card onto the battlefield and the
         // rest on the bottom of their library in any order. Activate this ability only any time you could cast a sorcery.
         addCard(Zone.BATTLEFIELD, playerD, "Proteus Staff", 1);
 

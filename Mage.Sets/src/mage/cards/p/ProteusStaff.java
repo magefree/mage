@@ -31,7 +31,7 @@ public final class ProteusStaff extends CardImpl {
     public ProteusStaff(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        // {2}{U}, {T}: Put target creature on the bottom of its owner's library. That creature's controller reveals cards from the top of their library until he or she reveals a creature card. The player puts that card onto the battlefield and the rest on the bottom of their library in any order. Activate this ability only any time you could cast a sorcery.
+        // {2}{U}, {T}: Put target creature on the bottom of its owner's library. That creature's controller reveals cards from the top of their library until they reveal a creature card. The player puts that card onto the battlefield and the rest on the bottom of their library in any order. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new ProteusStaffEffect(), new ManaCostsImpl<>("{2}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
@@ -52,7 +52,7 @@ class ProteusStaffEffect extends OneShotEffect {
 
     ProteusStaffEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Put target creature on the bottom of its owner's library. That creature's controller reveals cards from the top of their library until he or she reveals a creature card. The player puts that card onto the battlefield and the rest on the bottom of their library in any order.";
+        this.staticText = "Put target creature on the bottom of its owner's library. That creature's controller reveals cards from the top of their library until they reveal a creature card. The player puts that card onto the battlefield and the rest on the bottom of their library in any order.";
     }
 
     ProteusStaffEffect(final ProteusStaffEffect effect) {
@@ -74,7 +74,7 @@ class ProteusStaffEffect extends OneShotEffect {
                 // Put target creature on the bottom of its owner's library.
                 owner.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD, false, true);
 
-                // That creature's controller reveals cards from the top of their library until he or she reveals a creature card.
+                // That creature's controller reveals cards from the top of their library until they reveal a creature card.
                 Cards cards = new CardsImpl();
                 for (Card card : controller.getLibrary().getCards(game)) {
                     if (card != null) {

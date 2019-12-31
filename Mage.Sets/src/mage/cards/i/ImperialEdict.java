@@ -26,7 +26,7 @@ public final class ImperialEdict extends CardImpl {
     public ImperialEdict(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
-        // Target opponent chooses a creature he or she controls. Destroy it.
+        // Target opponent chooses a creature they control. Destroy it.
         this.getSpellAbility().addEffect(new ImperialEdictEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
@@ -45,7 +45,7 @@ class ImperialEdictEffect extends OneShotEffect {
 
     ImperialEdictEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Target opponent chooses a creature he or she controls. Destroy it.";
+        this.staticText = "Target opponent chooses a creature they control. Destroy it.";
     }
 
     ImperialEdictEffect(final ImperialEdictEffect effect) {

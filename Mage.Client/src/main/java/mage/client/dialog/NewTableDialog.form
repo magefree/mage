@@ -359,7 +359,7 @@
     <Component class="javax.swing.JLabel" name="lbTimeLimit">
       <Properties>
         <Property name="text" type="java.lang.String" value="Time Limit:"/>
-        <Property name="toolTipText" type="java.lang.String" value="The active time a player may use to finish the match. If his or her time runs out, the player looses the current game."/>
+        <Property name="toolTipText" type="java.lang.String" value="The active time a player may use to finish the match. If their time runs out, the player looses the current game."/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbTimeLimit">

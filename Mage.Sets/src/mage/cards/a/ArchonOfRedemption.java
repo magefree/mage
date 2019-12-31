@@ -1,7 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -15,6 +13,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -66,7 +66,8 @@ class ArchonOfRedemptionTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent.isControlledBy(getControllerId())
+        if (permanent != null
+                && permanent.isControlledBy(getControllerId())
                 && permanent.isCreature()
                 && (permanent.getId().equals(getSourceId())
                 || (permanent.getAbilities().contains(FlyingAbility.getInstance())))) {

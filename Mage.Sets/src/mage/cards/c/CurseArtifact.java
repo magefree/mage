@@ -36,11 +36,11 @@ public final class CurseArtifact extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
-        // At the beginning of the upkeep of enchanted artifact's controller, Curse Artifact deals 2 damage to that player unless he or she sacrifices that artifact.
+        // At the beginning of the upkeep of enchanted artifact's controller, Curse Artifact deals 2 damage to that player unless they sacrifice that artifact.
         Cost cost = new SacrificeAttachedCost();
         cost.setText("sacrifice attached artifact");
         Effect effect = new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new DamageTargetEffect(2), cost, "Sacrifice enchanted artifact? (otherwise {this} deals 2 damage to you)");
-        effect.setText("{this} deals 2 damage to that player unless he or she sacrifices that artifact");
+        effect.setText("{this} deals 2 damage to that player unless they sacrifice that artifact");
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.CONTROLLER_ATTACHED_TO, false, true, "At the beginning of the upkeep of enchanted artifact's controller, "));
     }
 

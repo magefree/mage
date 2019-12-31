@@ -29,7 +29,7 @@ public final class MadScienceFairProject extends CardImpl {
     public MadScienceFairProject(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        // {T}: Roll a six-sided die. On a 3 or lower, target player adds {C}. Otherwise, that player adds one mana of any color he or she chooses.
+        // {T}: Roll a six-sided die. On a 3 or lower, target player adds {C}. Otherwise, that player adds one mana of any color they choose.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new MadScienceFairManaEffect(), new TapSourceCost()));
     }
 
@@ -47,7 +47,7 @@ class MadScienceFairManaEffect extends ManaEffect {
 
     public MadScienceFairManaEffect() {
         super();
-        this.staticText = "Roll a six-sided die. On a 3 or lower, target player adds {C}. Otherwise, that player adds one mana of any color he or she chooses";
+        this.staticText = "Roll a six-sided die. On a 3 or lower, target player adds {C}. Otherwise, that player adds one mana of any color they choose";
     }
 
     public MadScienceFairManaEffect(final MadScienceFairManaEffect effect) {

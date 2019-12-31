@@ -28,7 +28,7 @@ public final class OathOfScholars extends CardImpl {
     public OathOfScholars(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
 
-        // At the beginning of each player's upkeep, that player chooses target player who has more cards in hand than he or she does and is their opponent. The first player may discard their hand and draw three cards.
+        // At the beginning of each player's upkeep, that player chooses target player who has more cards in hand than they do and is their opponent. The first player may discard their hand and draw three cards.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new OathOfScholarsEffect(), TargetController.ANY, false);
         ability.setTargetAdjuster(OathOfScholarsAdjuster.instance);
         this.addAbility(ability);
@@ -83,7 +83,7 @@ class OathOfScholarsPredicate implements ObjectSourcePlayerPredicate<ObjectSourc
 
     @Override
     public String toString() {
-        return "player who has more cards in hand than he or she does";
+        return "player who has more cards in hand than they do";
     }
 }
 
@@ -91,7 +91,7 @@ class OathOfScholarsEffect extends OneShotEffect {
 
     public OathOfScholarsEffect() {
         super(Outcome.PutCardInPlay);
-        staticText = "that player chooses target player who has more cards in hand than he or she does and is their opponent. The first player may discard their hand and draw three cards";
+        staticText = "that player chooses target player who has more cards in hand than they do and is their opponent. The first player may discard their hand and draw three cards";
     }
 
     public OathOfScholarsEffect(OathOfScholarsEffect effect) {

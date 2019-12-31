@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -36,16 +35,24 @@ public final class BrainInAJar extends CardImpl {
     public BrainInAJar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
-        // {1}, {T}: Put a charge counter on Brain in a Jar, then you may cast an instant or sorcery card with converted mana costs equal to the number of charge counters on Brain in a Jar from your hand without paying its mana cost.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new GenericManaCost(1));
+        // {1}, {T}: Put a charge counter on Brain in a Jar, then you may 
+        // cast an instant or sorcery card with converted mana costs equal 
+        // to the number of charge counters on Brain in a Jar from your 
+        // hand without paying its mana cost.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new AddCountersSourceEffect(CounterType.CHARGE.createInstance()),
+                new GenericManaCost(1));
         ability.addEffect(new BrainInAJarCastEffect());
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
         // {3}, {T}, Remove X charge counters from Brain in a Jar: Scry X.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BrainInAJarScryEffect(), new GenericManaCost(3));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new BrainInAJarScryEffect(),
+                new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.CHARGE.createInstance()));
+        ability.addCost(new RemoveVariableCountersSourceCost(
+                CounterType.CHARGE.createInstance()));
         this.addAbility(ability);
     }
 
@@ -62,8 +69,10 @@ public final class BrainInAJar extends CardImpl {
 class BrainInAJarCastEffect extends OneShotEffect {
 
     public BrainInAJarCastEffect() {
-        super(Outcome.Benefit);
-        this.staticText = ", then you may cast an instant or sorcery card with converted mana costs equal to the number of charge counters on {this} from your hand without paying its mana cost";
+        super(Outcome.PlayForFree);
+        this.staticText = ", then you may cast an instant or sorcery card "
+                + "with converted mana costs equal to the number of charge "
+                + "counters on {this} from your hand without paying its mana cost";
     }
 
     public BrainInAJarCastEffect(final BrainInAJarCastEffect effect) {
@@ -79,17 +88,26 @@ class BrainInAJarCastEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourceObject = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (controller != null && sourceObject != null) {
+        if (controller != null 
+                && sourceObject != null) {
             int counters = sourceObject.getCounters(game).getCount(CounterType.CHARGE);
             FilterCard filter = new FilterInstantOrSorceryCard();
             filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, counters));
-            int cardsToCast = controller.getHand().count(filter, source.getControllerId(), source.getSourceId(), game);
-            if (cardsToCast > 0 && controller.chooseUse(outcome, "Cast an instant or sorcery card with converted mana costs of " + counters + " from your hand without paying its mana cost?", source, game)) {
+            int cardsToCast = controller.getHand().count(filter, source.getControllerId(),
+                    source.getSourceId(), game);
+            if (cardsToCast > 0 
+                    && controller.chooseUse(Outcome.PlayForFree,
+                    "Cast an instant or sorcery card with converted mana costs of "
+                    + counters + " from your hand without paying its mana cost?",
+                    source, game)) {
                 TargetCardInHand target = new TargetCardInHand(filter);
                 controller.chooseTarget(outcome, target, source, game);
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
-                    controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                    controller.cast(controller.chooseAbilityForCast(card, game, true),
+                            game, true, new MageObjectReference(source.getSourceObject(game), game));
+                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
                 }
             }
             return true;

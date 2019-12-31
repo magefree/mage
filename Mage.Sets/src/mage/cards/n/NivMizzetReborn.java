@@ -155,7 +155,7 @@ class NivMizzetRebornEffect extends OneShotEffect {
         player.putCardsOnBottomOfLibrary(cards, game, source, false);
         if (player.moveCards(cards2, Zone.HAND, source, game)) {
             for (Card card : cards2.getCards(game)) {
-                game.informPlayers(player.getName() + " chose " + card.getName() + " and put it into his or her hand.");
+                game.informPlayers(player.getName() + " chose " + card.getName() + " and put it into their hand.");
             }
         }
         return true;

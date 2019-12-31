@@ -125,6 +125,7 @@
         <draftCube name="MTGO Legacy Cube 2017 January" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegacyCubeJanuary2017"/>
         <draftCube name="MTGO Legacy Cube 2017 April" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegacyCubeApril2017"/>
         <draftCube name="MTGO Legacy Cube 2018 February" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegacyCube2018February"/>
+        <draftCube name="MTGO Legacy Cube 2019 July" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegacyCubeJuly2019"/>
         <draftCube name="MTGO Legendary Cube" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegendaryCube"/>
         <draftCube name="MTGO Legendary Cube April 2016" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegendaryCubeApril2016"/>
         <draftCube name="MTGO Modern Cube 2017" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.ModernCube2017"/>
@@ -139,6 +140,7 @@
         <draftCube name="MTGO Vintage Cube June 2018" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.VintageCubeJune2018"/>
         <draftCube name="MTGO Vintage Cube December 2018" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.VintageCubeDecember2018"/>
         <draftCube name="MTGO Vintage Cube June 2019" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.VintageCubeJune2019"/>
+        <draftCube name="MTGO Vintage Cube December 2019" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.VintageCubeDecember2019"/>
         <draftCube name="SCG Con Cube 2018 December" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.ScgConCube2018December"/>
         <draftCube name="The Peasant's Toolbox" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.PeasantsToolboxCube"/>
         <draftCube name="www.MTGCube.com" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.MTGCube"/>
@@ -148,6 +150,7 @@
         <deckType name="Constructed - Standard" jar="mage-deck-constructed.jar" className="mage.deck.Standard"/>
         <deckType name="Constructed - Extended" jar="mage-deck-constructed.jar" className="mage.deck.Extended"/>
         <deckType name="Constructed - Frontier" jar="mage-deck-constructed.jar" className="mage.deck.Frontier"/>
+        <deckType name="Constructed - Pioneer" jar="mage-deck-constructed.jar" className="mage.deck.Pioneer"/>
         <deckType name="Constructed - Modern" jar="mage-deck-constructed.jar" className="mage.deck.Modern"/>
         <deckType name="Constructed - Modern - No Banned List" jar="mage-deck-constructed.jar" className="mage.deck.ModernNoBannedList"/>
         <deckType name="Constructed - Eternal" jar="mage-deck-constructed.jar" className="mage.deck.Eternal"/>
@@ -168,6 +171,7 @@
         <deckType name="Variant Magic - Commander" jar="mage-deck-constructed.jar" className="mage.deck.Commander"/>
         <deckType name="Variant Magic - Duel Commander" jar="mage-deck-constructed.jar" className="mage.deck.DuelCommander"/>
         <deckType name="Variant Magic - MTGO 1v1 Commander" jar="mage-deck-constructed.jar" className="mage.deck.MTGO1v1Commander"/>
+        <deckType name="Variant Magic - Centurion Commander" jar="mage-deck-constructed.jar" className="mage.deck.CenturionCommander"/>
         <deckType name="Variant Magic - Tiny Leaders" jar="mage-deck-constructed.jar" className="mage.deck.TinyLeaders"/>
         <deckType name="Variant Magic - Momir Basic" jar="mage-deck-constructed.jar" className="mage.deck.Momir"/>
         <deckType name="Variant Magic - Penny Dreadful Commander" jar="mage-deck-constructed.jar" className="mage.deck.PennyDreadfulCommander"/>

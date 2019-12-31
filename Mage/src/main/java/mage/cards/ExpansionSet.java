@@ -1,5 +1,8 @@
 package mage.cards;
 
+import java.io.Serializable;
+import java.util.*;
+import java.util.stream.Collectors;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.keyword.PartnerWithAbility;
@@ -11,10 +14,6 @@ import mage.constants.SetType;
 import mage.util.CardUtil;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
-
-import java.io.Serializable;
-import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -270,8 +269,8 @@ public abstract class ExpansionSet implements Serializable {
     }
 
     protected boolean validateColors(List<Card> booster) {
-        List<ObjectColor> magicColors =
-                Arrays.asList(ObjectColor.WHITE, ObjectColor.BLUE, ObjectColor.BLACK, ObjectColor.RED, ObjectColor.GREEN);
+        List<ObjectColor> magicColors
+                = Arrays.asList(ObjectColor.WHITE, ObjectColor.BLUE, ObjectColor.BLACK, ObjectColor.RED, ObjectColor.GREEN);
 
         // all cards colors
         Map<ObjectColor, Integer> colorWeight = new HashMap<>();
@@ -354,7 +353,6 @@ public abstract class ExpansionSet implements Serializable {
             addToBooster(booster, commons);
         }
 
-
         List<CardInfo> rares = getCardsByRarity(Rarity.RARE);
         List<CardInfo> mythics = getCardsByRarity(Rarity.MYTHIC);
         for (int i = 0; i < numBoosterRare; i++) {
@@ -384,6 +382,19 @@ public abstract class ExpansionSet implements Serializable {
                 }
             }
         }
+
+        if (numBoosterLands > 0) {
+            List<CardInfo> specialLands = getSpecialLand();
+            List<CardInfo> basicLands = getCardsByRarity(Rarity.LAND);
+            for (int i = 0; i < numBoosterLands; i++) {
+                if (ratioBoosterSpecialLand > 0 && RandomUtil.nextInt(ratioBoosterSpecialLand) < ratioBoosterSpecialLandNumerator && specialLands != null) {
+                    addToBooster(booster, specialLands);
+                } else {
+                    addToBooster(booster, basicLands);
+                }
+            }
+        }
+
         return booster;
     }
 

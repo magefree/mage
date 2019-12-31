@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -13,6 +12,7 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -26,11 +26,11 @@ import mage.target.common.TargetCardInLibrary;
 public final class ToothAndNail extends CardImpl {
 
     public ToothAndNail(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{G}{G}");
 
         // Choose one -
         // Search your library for up to two creature cards, reveal them, put them into your hand, then shuffle your library;
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 2, new FilterCreatureCard()), true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_CREATURE), true));
         // or put up to two creature cards from your hand onto the battlefield.
         Mode mode = new Mode();
         mode.addEffect(new ToothAndNailPutCreatureOnBattlefieldEffect());

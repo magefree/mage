@@ -51,11 +51,12 @@ public class Vintage extends Constructed {
         restricted.add("Demonic Consultation");
         restricted.add("Demonic Tutor");
         restricted.add("Dig Through Time");
-        restricted.add("Fastbond");
         restricted.add("Flash");
         restricted.add("Gitaxian Probe");
+        restricted.add("Golgari Grave-Troll");
         restricted.add("Gush");
         restricted.add("Imperial Seal");
+        restricted.add("Karn, the Great Creator");
         restricted.add("Library of Alexandria");
         restricted.add("Lion's Eye Diamond");
         restricted.add("Lodestone Golem");
@@ -63,6 +64,7 @@ public class Vintage extends Constructed {
         restricted.add("Mana Crypt");
         restricted.add("Mana Vault");
         restricted.add("Memory Jar");
+        restricted.add("Mental Misstep");
         restricted.add("Merchant Scroll");
         restricted.add("Mind's Desire");
         restricted.add("Monastery Mentory");
@@ -71,7 +73,9 @@ public class Vintage extends Constructed {
         restricted.add("Mox Pearl");
         restricted.add("Mox Ruby");
         restricted.add("Mox Sapphire");
+        restricted.add("Mystic Forge");
         restricted.add("Mystical Tutor");
+        restricted.add("Narset, Parter of Veils");
         restricted.add("Necropotence");
         restricted.add("Ponder");
         restricted.add("Sol Ring");

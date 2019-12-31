@@ -1,4 +1,3 @@
-
 package mage.abilities.keyword;
 
 import mage.abilities.Ability;
@@ -66,8 +65,8 @@ public class TransformAbility extends SimpleStaticAbility {
         for (Ability ability : sourceCard.getAbilities()) {
             permanent.addAbility(ability, game);
         }
-        permanent.getPower().setValue(sourceCard.getPower().getValue());
-        permanent.getToughness().setValue(sourceCard.getToughness().getValue());
+        permanent.getPower().modifyBaseValue(sourceCard.getPower().getValue());
+        permanent.getToughness().modifyBaseValue(sourceCard.getToughness().getValue());
         permanent.setTransformable(sourceCard.isTransformable());
     }
 }

@@ -1,9 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCosts;
@@ -24,17 +20,20 @@ import mage.players.Player;
 import mage.players.PlayerList;
 import mage.target.TargetCard;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author Quercitron
  */
 public final class Tariff extends CardImpl {
 
     public Tariff(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{W}");
 
 
-        // Each player sacrifices the creature he or she controls with the highest converted mana cost unless he or she pays that creature's mana cost. If two or more creatures a player controls are tied for highest cost, that player chooses one.
+        // Each player sacrifices the creature they control with the highest converted mana cost unless they pay that creature's mana cost. If two or more creatures a player controls are tied for highest cost, that player chooses one.
         this.getSpellAbility().addEffect(new TariffEffect());
     }
 
@@ -49,12 +48,12 @@ public final class Tariff extends CardImpl {
 }
 
 class TariffEffect extends OneShotEffect {
-    
+
     public TariffEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Each player sacrifices the creature he or she controls with the highest converted mana cost unless he or she pays that creature's mana cost. If two or more creatures a player controls are tied for highest cost, that player chooses one.";
+        this.staticText = "Each player sacrifices the creature they control with the highest converted mana cost unless they pay that creature's mana cost. If two or more creatures a player controls are tied for highest cost, that player chooses one.";
     }
-    
+
     public TariffEffect(final TariffEffect effect) {
         super(effect);
     }
@@ -63,21 +62,20 @@ class TariffEffect extends OneShotEffect {
     public TariffEffect copy() {
         return new TariffEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         PlayerList playerList = game.getPlayerList().copy();
         playerList.setCurrent(game.getActivePlayerId());
         Player player = game.getPlayer(game.getActivePlayerId());
-        
         do {
             processPlayer(game, source, player);
-            player = playerList.getNext(game);
+            player = playerList.getNext(game, false);
         } while (!player.getId().equals(game.getActivePlayerId()));
-        
+
         return true;
     }
-    
+
     private void processPlayer(Game game, Ability source, Player player) {
         MageObject sourceObject = game.getObject(source.getSourceId());
 
@@ -100,7 +98,7 @@ class TariffEffect extends OneShotEffect {
             creatureToPayFor.sacrifice(source.getSourceId(), game);
         }
     }
-    
+
     private List<Permanent> getPermanentsWithTheHighestCMC(Game game, UUID playerId, FilterPermanent filter) {
         List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, playerId, game);
         int highestCMC = -1;
@@ -135,5 +133,5 @@ class TariffEffect extends OneShotEffect {
         }
         return permanent;
     }
-    
+
 }

@@ -28,7 +28,7 @@ public final class BalancingAct extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}{W}");
 
 
-        // Each player chooses a number of permanents he or she controls equal to the number of permanents controlled by the player who controls the fewest, then sacrifices the rest. Each player discards cards the same way.
+        // Each player chooses a number of permanents they control equal to the number of permanents controlled by the player who controls the fewest, then sacrifices the rest. Each player discards cards the same way.
         this.getSpellAbility().addEffect(new BalancingActEffect());
     }
 
@@ -47,7 +47,7 @@ class BalancingActEffect extends OneShotEffect {
    
     public BalancingActEffect() {
         super(Outcome.Sacrifice);
-        staticText = "Each player chooses a number of permanents he or she controls equal to the number of permanents controlled by the player who controls the fewest, then sacrifices the rest. Each player discards cards the same way";
+        staticText = "Each player chooses a number of permanents they control equal to the number of permanents controlled by the player who controls the fewest, then sacrifices the rest. Each player discards cards the same way";
     }
 
     public BalancingActEffect(final BalancingActEffect effect) {

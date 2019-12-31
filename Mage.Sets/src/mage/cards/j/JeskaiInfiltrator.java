@@ -91,12 +91,12 @@ class JeskaiInfiltratorEffect extends OneShotEffect {
             for (Card card : exileZone.getCards(game)) {
                 card.setFaceDown(true, game);
             }
-            game.fireUpdatePlayersEvent(); // removes Jeskai from Battlefield, so he returns as a fresh permanent to the battlefield with new position
+            game.fireUpdatePlayersEvent(); // removes Jeskai Infiltrator from Battlefield, so Jeskai Infiltrator returns as a fresh permanent to the battlefield with new position
 
             Ability newSource = source.copy();
             newSource.setWorksFaceDown(true);
-            while (!exileZone.isEmpty()) {
-                Card card = exileZone.getRandom(game);
+            //the Set will mimic the Shuffling
+            exileZone.getCards(game).forEach(card -> {
                 ManaCosts manaCosts = null;
                 if (card.isCreature()) {
                     manaCosts = card.getSpellAbility().getManaCosts();
@@ -106,7 +106,7 @@ class JeskaiInfiltratorEffect extends OneShotEffect {
                 }
                 MageObjectReference objectReference = new MageObjectReference(card.getId(), card.getZoneChangeCounter(game) + 1, game);
                 game.addEffect(new BecomesFaceDownCreatureEffect(manaCosts, objectReference, Duration.Custom, FaceDownType.MANIFESTED), newSource);
-            }
+            });
             controller.moveCards(exileZone.getCards(game), Zone.BATTLEFIELD, source, game, false, true, false, null);
             return true;
         }

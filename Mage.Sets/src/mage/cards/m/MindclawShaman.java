@@ -37,7 +37,8 @@ public final class MindclawShaman extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // When Mindclaw Shaman enters the battlefield, target opponent reveals their hand. You may cast an instant or sorcery card from it without paying its mana cost.
+        // When Mindclaw Shaman enters the battlefield, target opponent reveals their hand. 
+        // You may cast an instant or sorcery card from it without paying its mana cost.
         Ability ability = new EntersBattlefieldTriggeredAbility(new MindclawShamanEffect(), false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
@@ -64,8 +65,9 @@ class MindclawShamanEffect extends OneShotEffect {
     }
 
     public MindclawShamanEffect() {
-        super(Outcome.Discard);
-        this.staticText = "target opponent reveals their hand. You may cast an instant or sorcery card from it without paying its mana cost";
+        super(Outcome.PlayForFree);
+        this.staticText = "target opponent reveals their hand. You may cast "
+                + "an instant or sorcery card from it without paying its mana cost";
     }
 
     public MindclawShamanEffect(final MindclawShamanEffect effect) {
@@ -88,13 +90,18 @@ class MindclawShamanEffect extends OneShotEffect {
                 if (controller != null) {
                     TargetCard target = new TargetCard(Zone.HAND, filter);
                     target.setNotTarget(true);
-                    if (controller.choose(Outcome.Benefit, targetOpponent.getHand(), target, game)) {
+                    if (controller.choose(Outcome.PlayForFree, targetOpponent.getHand(), target, game)) {
                         Card chosenCard = targetOpponent.getHand().get(target.getFirstTarget(), game);
                         if (chosenCard != null) {
-                            if (controller.chooseUse(Outcome.Benefit, "Cast the chosen card?", source, game)) {
-                                controller.cast(chosenCard.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                            if (controller.chooseUse(Outcome.PlayForFree, "Cast the chosen card without "
+                                    + "paying its mana cost?", source, game)) {
+                                game.getState().setValue("PlayFromNotOwnHandZone" + chosenCard.getId(), Boolean.TRUE);
+                                    controller.cast(controller.chooseAbilityForCast(chosenCard, game, true),
+                                            game, true, new MageObjectReference(source.getSourceObject(game), game));
+                                    game.getState().setValue("PlayFromNotOwnHandZone" + chosenCard.getId(), null);
                             } else {
-                                game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " canceled casting the card.");
+                                game.informPlayers(sourceObject.getLogName() + ": " 
+                                        + controller.getLogName() + " canceled casting the card.");
                             }
                         }
                     }

@@ -76,6 +76,10 @@ public class TinyLeaders extends Constructed {
         banned.add("Wheel of Fortune");
         banned.add("Yawgmoth's Will");
 
+        // TODO: Karn Liberated can't be used in TinyLeaders game (wrong commanders init like missing watchers)
+        //  GameTinyLeadersImpl must extends GameCommanderImpl, not GameImpl
+        banned.add("Karn Liberated");
+
         //Additionally, these Legendary creatures cannot be used as Commanders
         bannedCommander.add("Erayo, Soratami Ascendant");
         bannedCommander.add("Rofellos, Llanowar Emissary");
@@ -113,14 +117,7 @@ public class TinyLeaders extends Constructed {
         counts.put(deck.getName(), 1); // add the commander to the counts, so it can't be in the deck or sideboard again
         countCards(counts, deck.getCards());
         countCards(counts, deck.getSideboard());
-        for (Map.Entry<String, Integer> entry : counts.entrySet()) {
-            if (entry.getValue() > 1) {
-                if (!basicLandNames.contains(entry.getKey()) && !anyNumberCardsAllowed.contains(entry.getKey())) {
-                    invalid.put(entry.getKey(), "Too many: " + entry.getValue());
-                    valid = false;
-                }
-            }
-        }
+        valid = checkCounts(1, counts) && valid;
 
         for (String bannedCard : banned) {
             if (counts.containsKey(bannedCard)) {

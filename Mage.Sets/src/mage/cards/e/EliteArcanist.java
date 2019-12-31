@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import mage.MageInt;
@@ -132,8 +131,9 @@ class EliteArcanistImprintEffect extends OneShotEffect {
 class EliteArcanistCopyEffect extends OneShotEffect {
 
     public EliteArcanistCopyEffect() {
-        super(Outcome.Copy);
-        this.staticText = "Copy the exiled card. You may cast the copy without paying its mana cost. X is the converted mana cost of the exiled card";
+        super(Outcome.PlayForFree);
+        this.staticText = "Copy the exiled card. You may cast the copy "
+                + "without paying its mana cost. X is the converted mana cost of the exiled card";
     }
 
     public EliteArcanistCopyEffect(final EliteArcanistCopyEffect effect) {
@@ -151,17 +151,24 @@ class EliteArcanistCopyEffect extends OneShotEffect {
         if (sourcePermanent == null) {
             sourcePermanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
         }
-        if (sourcePermanent != null && sourcePermanent.getImprinted() != null && !sourcePermanent.getImprinted().isEmpty()) {
+        if (sourcePermanent != null
+                && sourcePermanent.getImprinted() != null
+                && !sourcePermanent.getImprinted().isEmpty()) {
             Card imprintedInstant = game.getCard(sourcePermanent.getImprinted().get(0));
-            if (imprintedInstant != null && game.getState().getZone(imprintedInstant.getId()) == Zone.EXILED) {
+            if (imprintedInstant != null
+                    && game.getState().getZone(imprintedInstant.getId()) == Zone.EXILED) {
                 Player controller = game.getPlayer(source.getControllerId());
                 if (controller != null) {
                     Card copiedCard = game.copyCard(imprintedInstant, source, source.getControllerId());
                     if (copiedCard != null) {
                         game.getExile().add(source.getSourceId(), "", copiedCard);
                         game.getState().setZone(copiedCard.getId(), Zone.EXILED);
-                        if (controller.chooseUse(outcome, "Cast the copied card without paying mana cost?", source, game)) {
-                            return controller.cast(copiedCard.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                        if (controller.chooseUse(Outcome.PlayForFree, "Cast the copied card without paying mana cost?", source, game)) {
+                            game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), Boolean.TRUE);
+                            Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(copiedCard, game, true),
+                                    game, true, new MageObjectReference(source.getSourceObject(game), game));
+                            game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), null);
+                            return cardWasCast;
                         }
                     }
                 }

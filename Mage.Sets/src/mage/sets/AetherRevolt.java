@@ -22,7 +22,7 @@ public final class AetherRevolt extends ExpansionSet {
         return instance;
     }
 
-    protected final List<CardInfo> savedSpecialLand = new ArrayList<>();
+    private final List<CardInfo> savedSpecialLand = new ArrayList<>();
 
     private AetherRevolt() {
         super("Aether Revolt", "AER", ExpansionSet.buildDate(2017, 1, 20), SetType.EXPANSION);

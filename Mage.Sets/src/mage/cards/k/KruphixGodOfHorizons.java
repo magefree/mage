@@ -1,12 +1,9 @@
-
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
@@ -17,8 +14,9 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class KruphixGodOfHorizons extends CardImpl {
@@ -33,20 +31,22 @@ public final class KruphixGodOfHorizons extends CardImpl {
 
         // Indestructible
         this.addAbility(IndestructibleAbility.getInstance());
+
         // As long as your devotion to green and blue is less than seven, Kruhpix isn't a creature.
-        Effect effect = new LoseCreatureTypeSourceEffect(new DevotionCount(ColoredManaSymbol.G, ColoredManaSymbol.U), 7);
-        effect.setText("As long as your devotion to green and blue is less than seven, Kruhpix isn't a creature");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(new LoseCreatureTypeSourceEffect(DevotionCount.GU, 7))
+                .addHint(DevotionCount.GU.getHint()));
 
         // You have no maximum hand size.
-        effect = new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.WhileOnBattlefield, MaximumHandSizeControllerEffect.HandSizeModification.SET);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(new MaximumHandSizeControllerEffect(
+                Integer.MAX_VALUE, Duration.WhileOnBattlefield,
+                MaximumHandSizeControllerEffect.HandSizeModification.SET
+        )));
         // If unused mana would empty from your mana pool, that mana becomes colorless instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KruphixGodOfHorizonsEffect()));
+        this.addAbility(new SimpleStaticAbility(new KruphixGodOfHorizonsEffect()));
 
     }
 
-    public KruphixGodOfHorizons(final KruphixGodOfHorizons card) {
+    private KruphixGodOfHorizons(final KruphixGodOfHorizons card) {
         super(card);
     }
 
@@ -58,12 +58,12 @@ public final class KruphixGodOfHorizons extends CardImpl {
 
 class KruphixGodOfHorizonsEffect extends ReplacementEffectImpl {
 
-    public KruphixGodOfHorizonsEffect() {
+    KruphixGodOfHorizonsEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If you would lose unspent mana, that mana becomes colorless instead.";
     }
 
-    public KruphixGodOfHorizonsEffect(final KruphixGodOfHorizonsEffect effect) {
+    private KruphixGodOfHorizonsEffect(final KruphixGodOfHorizonsEffect effect) {
         super(effect);
     }
 

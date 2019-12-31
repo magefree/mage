@@ -27,7 +27,7 @@ public final class PhyrexianTyranny extends CardImpl {
     public PhyrexianTyranny(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{B}{R}");
 
-        // Whenever a player draws a card, that player loses 2 life unless he or she pays {2}.
+        // Whenever a player draws a card, that player loses 2 life unless they pay {2}.
         this.addAbility(new PhyrexianTyrannyTriggeredAbility());
     }
 
@@ -73,7 +73,7 @@ class PhyrexianTyrannyTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a player draws a card, that player loses 2 life unless he or she pays {2}.";
+        return "Whenever a player draws a card, that player loses 2 life unless they pay {2}.";
     }
 }
 
@@ -81,7 +81,7 @@ class PhyrexianTyrannyEffect extends OneShotEffect {
 
     PhyrexianTyrannyEffect() {
         super(Outcome.Neutral);
-        this.staticText = "that player loses 2 life unless he or she pays {2}";
+        this.staticText = "that player loses 2 life unless they pay {2}";
     }
 
     PhyrexianTyrannyEffect(final PhyrexianTyrannyEffect effect) {

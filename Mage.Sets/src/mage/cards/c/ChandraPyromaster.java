@@ -38,7 +38,8 @@ public final class ChandraPyromaster extends CardImpl {
 
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(4));
 
-        // +1: Chandra, Pyromaster deals 1 damage to target player and 1 damage to up to one target creature that player controls. That creature can't block this turn.
+        // +1: Chandra, Pyromaster deals 1 damage to target player and 1 damage to 
+        // up to one target creature that player controls. That creature can't block this turn.
         LoyaltyAbility ability1 = new LoyaltyAbility(new ChandraPyromasterEffect1(), 1);
         Target target1 = new TargetPlayerOrPlaneswalker();
         ability1.addTarget(target1);
@@ -49,7 +50,9 @@ public final class ChandraPyromaster extends CardImpl {
         LoyaltyAbility ability2 = new LoyaltyAbility(new ChandraPyromasterEffect2(), 0);
         this.addAbility(ability2);
 
-        // -7: Exile the top ten cards of your library. Choose an instant or sorcery card exiled this way and copy it three times. You may cast the copies without paying their mana costs.
+        // -7: Exile the top ten cards of your library. Choose an instant or sorcery 
+        // card exiled this way and copy it three times. You may cast the copies 
+        // without paying their mana costs.
         LoyaltyAbility ability3 = new LoyaltyAbility(new ChandraPyromasterEffect3(), -7);
         this.addAbility(ability3);
 
@@ -69,7 +72,9 @@ class ChandraPyromasterEffect1 extends OneShotEffect {
 
     public ChandraPyromasterEffect1() {
         super(Outcome.Damage);
-        staticText = "{this} deals 1 damage to target player or planeswalker and 1 damage to up to one target creature that player or that planeswalker's controller controls. That creature can't block this turn.";
+        staticText = "{this} deals 1 damage to target player or planeswalker "
+                + "and 1 damage to up to one target creature that player or that "
+                + "planeswalker's controller controls. That creature can't block this turn.";
     }
 
     public ChandraPyromasterEffect1(final ChandraPyromasterEffect1 effect) {
@@ -83,7 +88,8 @@ class ChandraPyromasterEffect1 extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.damagePlayerOrPlaneswalker(source.getTargets().get(0).getFirstTarget(), 1, source.getSourceId(), game, false, true);
+        game.damagePlayerOrPlaneswalker(source.getTargets().get(0).getFirstTarget(),
+                1, source.getSourceId(), game, false, true);
         Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (creature != null) {
             creature.damage(1, source.getSourceId(), game, false, true);
@@ -98,7 +104,8 @@ class ChandraPyromasterEffect1 extends OneShotEffect {
 class ChandraPyromasterTarget extends TargetPermanent {
 
     public ChandraPyromasterTarget() {
-        super(0, 1, new FilterCreaturePermanent("creature that the targeted player or planeswalker's controller controls"), false);
+        super(0, 1, new FilterCreaturePermanent("creature that the targeted player "
+                + "or planeswalker's controller controls"), false);
     }
 
     public ChandraPyromasterTarget(final ChandraPyromasterTarget target) {
@@ -179,7 +186,8 @@ class ChandraPyromasterEffect2 extends OneShotEffect {
             Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
                 controller.moveCards(card, Zone.EXILED, source, game);
-                ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, Duration.EndOfTurn);
+                ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(
+                        Zone.EXILED, Duration.EndOfTurn);
                 effect.setTargetPointer(new FixedTarget(card, game));
                 game.addEffect(effect, source);
             }
@@ -192,8 +200,10 @@ class ChandraPyromasterEffect2 extends OneShotEffect {
 class ChandraPyromasterEffect3 extends OneShotEffect {
 
     public ChandraPyromasterEffect3() {
-        super(Outcome.PutCardInPlay);
-        this.staticText = "Exile the top ten cards of your library. Choose an instant or sorcery card exiled this way and copy it three times. You may cast the copies without paying their mana costs";
+        super(Outcome.PlayForFree);
+        this.staticText = "Exile the top ten cards of your library. Choose an instant "
+                + "or sorcery card exiled this way and copy it three times. "
+                + "You may cast the copies without paying their mana costs";
     }
 
     public ChandraPyromasterEffect3(final ChandraPyromasterEffect3 effect) {
@@ -223,15 +233,24 @@ class ChandraPyromasterEffect3 extends OneShotEffect {
                     MageObjectReference mor = new MageObjectReference(source.getSourceObject(game), game);
                     if (controller.chooseUse(outcome, "Do you wish to cast copy 1 of " + card.getName(), source, game)) {
                         Card copy1 = game.copyCard(card, source, source.getControllerId());
-                        controller.cast(copy1.getSpellAbility(), game, true, mor);
+                        game.getState().setValue("PlayFromNotOwnHandZone" + copy1.getId(), Boolean.TRUE);
+                        controller.cast(controller.chooseAbilityForCast(copy1, game, true),
+                                game, true, mor);
+                        game.getState().setValue("PlayFromNotOwnHandZone" + copy1.getId(), null);
                     }
                     if (controller.chooseUse(outcome, "Do you wish to cast copy 2 of " + card.getName(), source, game)) {
                         Card copy2 = game.copyCard(card, source, source.getControllerId());
-                        controller.cast(copy2.getSpellAbility(), game, true, mor);
+                        game.getState().setValue("PlayFromNotOwnHandZone" + copy2.getId(), Boolean.TRUE);
+                        controller.cast(controller.chooseAbilityForCast(copy2, game, true),
+                                game, true, mor);
+                        game.getState().setValue("PlayFromNotOwnHandZone" + copy2.getId(), null);
                     }
                     if (controller.chooseUse(outcome, "Do you wish to cast copy 3 of " + card.getName(), source, game)) {
                         Card copy3 = game.copyCard(card, source, source.getControllerId());
-                        controller.cast(copy3.getSpellAbility(), game, true, mor);
+                        game.getState().setValue("PlayFromNotOwnHandZone" + copy3.getId(), Boolean.TRUE);
+                        controller.cast(controller.chooseAbilityForCast(copy3, game, true),
+                                game, true, mor);
+                        game.getState().setValue("PlayFromNotOwnHandZone" + copy3.getId(), null);
                     }
                     return true;
                 }

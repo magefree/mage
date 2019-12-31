@@ -106,7 +106,7 @@ public class SearchLibraryPutInPlayTargetPlayerEffect extends SearchEffect {
         if (forceShuffle) {
             sb.append(". Then that player shuffles their library");
         } else {
-            sb.append(". If that player does, he or she shuffles their library");
+            sb.append(". If that player does, they shuffle their library");
         }
         staticText = sb.toString();
     }

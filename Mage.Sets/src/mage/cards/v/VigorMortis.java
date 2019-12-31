@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import java.util.UUID;
@@ -14,7 +13,7 @@ import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
@@ -33,8 +32,8 @@ public final class VigorMortis extends CardImpl {
         // Return target creature card from your graveyard to the battlefield. If {G} was spent to cast Vigor Mortis, that creature enters the battlefield with an additional +1/+1 counter on it.
         this.getSpellAbility().addEffect(new VigorMortisReplacementEffect()); // has to be added before the moving effect
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
-        this.getSpellAbility().addEffect(new InfoEffect("If {G} was spent to cast {this}, that creature enters the battlefield with an additional +1/+1 counter on it"));
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard()));
+        this.getSpellAbility().addEffect(new InfoEffect("If {G} was spent to cast this spell, that creature enters the battlefield with an additional +1/+1 counter on it"));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE));
 
     }
 

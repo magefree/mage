@@ -2,6 +2,7 @@ package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
@@ -10,8 +11,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
+import mage.target.Target;
 import mage.util.CardUtil;
 
+import java.util.Collection;
 import java.util.UUID;
 
 /**
@@ -72,15 +75,11 @@ class BorealElementalCostIncreaseEffect extends CostModificationEffectImpl {
                 .getSelectedModes()
                 .stream()
                 .map(uuid -> abilityToModify.getModes().get(uuid))
-                .anyMatch(mode -> mode
-                        .getTargets()
-                        .stream()
-                        .anyMatch(target -> target
-                                .getTargets()
-                                .stream()
-                                .anyMatch(uuid -> uuid.equals(source.getSourceId()))
-                        )
-                );
+                .map(Mode::getTargets)
+                .flatMap(Collection::stream)
+                .map(Target::getTargets)
+                .flatMap(Collection::stream)
+                .anyMatch(uuid -> uuid.equals(source.getSourceId()));
     }
 
     @Override

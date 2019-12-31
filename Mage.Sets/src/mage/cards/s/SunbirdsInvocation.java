@@ -35,7 +35,10 @@ public final class SunbirdsInvocation extends CardImpl {
     public SunbirdsInvocation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{R}");
 
-        // Whenever you cast a spell from your hand, reveal the top X cards of your library, where X is that spell's converted mana cost. You may cast a card revealed this way with converted mana cost X or less without paying its mana cost. Put the rest on the bottom of your library in a random order.
+        // Whenever you cast a spell from your hand, reveal the top X cards of your library, 
+        // where X is that spell's converted mana cost. You may cast a card revealed this 
+        // way with converted mana cost X or less without paying its mana cost. Put the 
+        // rest on the bottom of your library in a random order.
         this.addAbility(new SunbirdsInvocationTriggeredAbility());
     }
 
@@ -97,7 +100,10 @@ class SunbirdsInvocationEffect extends OneShotEffect {
 
     public SunbirdsInvocationEffect() {
         super(Outcome.PutCardInPlay);
-        staticText = "reveal the top X cards of your library, where X is that spell's converted mana cost. You may cast a card revealed this way with converted mana cost X or less without paying its mana cost. Put the rest on the bottom of your library in a random order";
+        staticText = "reveal the top X cards of your library, where X is that "
+                + "spell's converted mana cost. You may cast a card revealed this "
+                + "way with converted mana cost X or less without paying its mana cost. "
+                + "Put the rest on the bottom of your library in a random order";
     }
 
     public SunbirdsInvocationEffect(final SunbirdsInvocationEffect effect) {
@@ -129,8 +135,13 @@ class SunbirdsInvocationEffect extends OneShotEffect {
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
                     if (controller.chooseUse(Outcome.Benefit, "Cast " + card.getLogName() + " without paying its mana cost?", source, game)) {
-                        controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
-                        cards.remove(card);
+                        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                        Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
+                                game, true, new MageObjectReference(source.getSourceObject(game), game));
+                        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+                        if (cardWasCast) {
+                            cards.remove(card);
+                        }
                     }
                 }
             }

@@ -26,7 +26,7 @@ public final class IsolationCell extends CardImpl {
     public IsolationCell(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
-        // Whenever an opponent casts a creature spell, that player loses 2 life unless he or she pays {2}.
+        // Whenever an opponent casts a creature spell, that player loses 2 life unless they pay {2}.
         this.addAbility(new IsolationCellTriggeredAbility());
     }
 
@@ -75,7 +75,7 @@ class IsolationCellTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever an opponent casts a creature spell, that player loses 2 life unless he or she pays {2}.";
+        return "Whenever an opponent casts a creature spell, that player loses 2 life unless they pay {2}.";
     }
 }
 
@@ -83,7 +83,7 @@ class IsolationCellEffect extends OneShotEffect {
 
     public IsolationCellEffect() {
         super(Outcome.Neutral);
-        this.staticText = "that player loses 2 life unless he or she pays {2}";
+        this.staticText = "that player loses 2 life unless they pay {2}";
     }
 
     public IsolationCellEffect(final IsolationCellEffect effect) {

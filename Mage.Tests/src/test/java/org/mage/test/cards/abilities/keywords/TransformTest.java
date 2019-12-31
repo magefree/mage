@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
@@ -359,6 +358,56 @@ public class TransformTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Huntmaster of the Fells", 1);
         assertTappedCount("Plains", true, 2);
         assertTappedCount("Wastes", true, 1);
+
+    }
+
+    /**
+     * Having cast Phantasmal Image copying my opponent's flipped Thing in the
+     * Ice, I was left with a 0/4 Awoken Horror.
+     *
+     * https://github.com/magefree/mage/issues/5893
+     *
+     * The transform effect on the stack should fizzle. The card brought back
+     * from Exile should be a new object unless I am interpreting the rules
+     * incorrectly. The returned permanent uses the same GUID.
+     */
+    @Test
+    public void testCopyTransformedThingInTheIce() {
+        // Defender
+        // Thing in the Ice enters the battlefield with four ice counters on it.
+        // Whenever you cast an instant or sorcery spell, remove an ice counter from Thing in the Ice. Then if it has no ice counters on it, transform it.
+        addCard(Zone.HAND, playerA, "Thing in the Ice"); // Creature {1}{U}
+        // Creatures you control get +1/+0 until end of turn.
+        addCard(Zone.HAND, playerA, "Banners Raised", 4); // Creature {R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+
+        // You may have Phantasmal Image enter the battlefield as a copy of any creature
+        // on the battlefield, except it's an Illusion in addition to its other types and
+        // it has "When this creature becomes the target of a spell or ability, sacrifice it."
+        addCard(Zone.HAND, playerB, "Phantasmal Image", 1); // Creature {1}{U}
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thing in the Ice");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Banners Raised");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Banners Raised");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Banners Raised");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Banners Raised");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image");
+        addTarget(playerB, "Awoken Horror");
+
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerA, 20);
+        assertGraveyardCount(playerA, "Banners Raised", 4);
+        assertPermanentCount(playerA, "Thing in the Ice", 0);
+        assertPermanentCount(playerA, "Awoken Horror", 1);
+        assertPowerToughness(playerA, "Awoken Horror", 7, 8);
+
+        assertPermanentCount(playerB, "Awoken Horror", 1);
+        assertPowerToughness(playerB, "Awoken Horror", 7, 8);
 
     }
 

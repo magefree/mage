@@ -241,7 +241,7 @@ public class ManaPoolTest extends CardTestPlayerBase {
         checkManaPool("mana", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "R", 4);
 
         // use for ability
-        showAvaileableAbilities("before ability", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        // showAvaileableAbilities("before ability", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{X}:", playerB);
         setChoice(playerA, "X=3");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);

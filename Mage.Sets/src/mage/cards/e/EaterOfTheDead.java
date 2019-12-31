@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import java.util.UUID;
@@ -11,10 +10,10 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInGraveyard;
@@ -26,14 +25,14 @@ import mage.target.common.TargetCardInGraveyard;
 public final class EaterOfTheDead extends CardImpl {
 
     public EaterOfTheDead(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 
         // {0}: If Eater of the Dead is tapped, exile target creature card from a graveyard and untap Eater of the Dead.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new EaterOfTheDeadEffect(), new GenericManaCost(0));
-        ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard()));
+        ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE));
         this.addAbility(ability);
     }
 
@@ -48,6 +47,7 @@ public final class EaterOfTheDead extends CardImpl {
 }
 
 class EaterOfTheDeadEffect extends OneShotEffect {
+
     EaterOfTheDeadEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "If {this} is tapped, exile target creature card from a graveyard and untap {this}";

@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -11,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.RitualOfTheReturnedZombieToken;
 import mage.players.Player;
@@ -28,7 +27,7 @@ public final class RitualOfTheReturned extends CardImpl {
 
         // Exile target creature card from your graveyard. Create a black Zombie creature token with power equal to the exiled card's power and toughness equal to the exiled card's toughness.
         this.getSpellAbility().addEffect(new RitualOfTheReturnedExileEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard()));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE));
     }
 
     public RitualOfTheReturned(final RitualOfTheReturned card) {

@@ -51,7 +51,7 @@ public final class WhisperingSpecter extends CardImpl {
 class WhisperingSpecterEffect extends OneShotEffect {
     WhisperingSpecterEffect() {
         super(Outcome.Discard);
-        staticText = "If you do, that player discards a card for each poison counter he or she has";
+        staticText = "If you do, that player discards a card for each poison counter they have";
     }
 
     WhisperingSpecterEffect(final WhisperingSpecterEffect effect) {
@@ -64,7 +64,7 @@ class WhisperingSpecterEffect extends OneShotEffect {
         if (player != null) {
             int value = player.getCounters().getCount(CounterType.POISON);
             if (value > 0) {
-                player.discard(value, source, game);
+                player.discard(value, false, source, game);
                 return true;
             }
         }

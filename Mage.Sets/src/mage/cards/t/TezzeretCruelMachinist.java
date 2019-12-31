@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
@@ -9,17 +8,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
-import mage.cards.Card;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.cards.*;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -29,8 +19,9 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInHand;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class TezzeretCruelMachinist extends CardImpl {
@@ -98,25 +89,29 @@ class TezzeretCruelMachinistEffect extends OneShotEffect {
             return false;
         }
         Cards cardsToMove = new CardsImpl();
+
         for (UUID cardId : target.getTargets()) {
             Card card = game.getCard(cardId);
             if (card == null) {
                 continue;
             }
             cardsToMove.add(card);
-            ContinuousEffect effect = new TezzeretCruelMachinistCardTypeEffect();
-            effect.setTargetPointer(new FixedTarget(
+
+            ContinuousEffect effectCardType = new TezzeretCruelMachinistCardTypeEffect();
+            effectCardType.setTargetPointer(new FixedTarget(
                     card.getId(),
                     card.getZoneChangeCounter(game) + 1
             ));
-            game.addEffect(effect, source);
-            effect = new TezzeretCruelMachinistPowerToughnessEffect();
-            effect.setTargetPointer(new FixedTarget(
+            game.addEffect(effectCardType, source);
+
+            ContinuousEffect effectPowerToughness = new TezzeretCruelMachinistPowerToughnessEffect();
+            effectPowerToughness.setTargetPointer(new FixedTarget(
                     card.getId(),
                     card.getZoneChangeCounter(game) + 1
             ));
-            game.addEffect(effect, source);
+            game.addEffect(effectPowerToughness, source);
         }
+
         return player.moveCards(cardsToMove.getCards(game), Zone.BATTLEFIELD, source, game, false, true, true, null);
     }
 }
@@ -137,13 +132,24 @@ class TezzeretCruelMachinistCardTypeEffect extends AddCardTypeTargetEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent == null || !permanent.isFaceDown(game)) {
-            this.discard();
-            return false;
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        for (UUID targetId : targetPointer.getTargets(game, source)) {
+            Permanent target = game.getPermanent(targetId);
+            if (target != null
+                    && target.isFaceDown(game)) {
+                switch (layer) {
+                    case TypeChangingEffects_4:
+                        target.getSuperType().clear();
+                        target.getCardType().clear();
+                        target.getSubtype(game).clear();
+                        target.addCardType(CardType.ARTIFACT);
+                        target.addCardType(CardType.CREATURE);
+                        break;
+                }
+                return true;
+            }
         }
-        return super.apply(game, source);
+        return false;
     }
 }
 
@@ -164,11 +170,15 @@ class TezzeretCruelMachinistPowerToughnessEffect extends SetPowerToughnessTarget
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent == null || !permanent.isFaceDown(game)) {
-            this.discard();
-            return false;
+        for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
+            Permanent target = game.getPermanent(targetId);
+            if (target != null
+                    && target.isFaceDown(game)) {
+                target.getPower().setValue(5);
+                target.getToughness().setValue(5);
+                return true;
+            }
         }
-        return super.apply(game, source);
+        return false;
     }
 }

@@ -1,7 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -16,14 +14,15 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author Backfir3
  */
 public final class AngelicChorus extends CardImpl {
 
     public AngelicChorus(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{W}");
 
         // Whenever a creature enters the battlefield under your control, you gain life equal to its toughness.
         this.addAbility(new AngelicChorusTriggeredAbility());
@@ -57,7 +56,8 @@ class AngelicChorusTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent.isCreature()
+        if (permanent != null
+                && permanent.isCreature()
                 && permanent.isControlledBy(this.controllerId)) {
             this.getEffects().get(0).setValue("lifeSource", event.getTargetId());
             return true;

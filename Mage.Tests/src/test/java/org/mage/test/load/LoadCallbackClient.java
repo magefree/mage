@@ -1,13 +1,13 @@
 package org.mage.test.load;
 
-import java.util.UUID;
 import mage.constants.PlayerAction;
 import mage.interfaces.callback.CallbackClient;
 import mage.interfaces.callback.ClientCallback;
 import mage.remote.Session;
-import mage.utils.CompressUtil;
 import mage.view.*;
 import org.apache.log4j.Logger;
+
+import java.util.UUID;
 
 /**
  * @author JayDi85
@@ -23,18 +23,45 @@ public class LoadCallbackClient implements CallbackClient {
     private boolean gameOver;
     private String gameResult = "unknown";
     private boolean needToConcede = false; // will concede on first priority
+    private boolean joinGameChat = false; // process CHATMESSAGE
 
     private volatile int controlCount;
 
     private GameView gameView;
 
+    public LoadCallbackClient(boolean joinGameChat) {
+        this.joinGameChat = joinGameChat;
+    }
+
     @Override
     public void processCallback(ClientCallback callback) {
+        callback.decompressData();
         controlCount = 0;
-        callback.setData(CompressUtil.decompress(callback.getData()));
-        log.info(getLogStartInfo() + "callback: " + callback.getMethod());
+
+        // ignore bloaded logs
+        switch (callback.getMethod()) {
+            case CHATMESSAGE:
+            case GAME_INFORM:
+            case GAME_UPDATE:
+                break;
+            default:
+                log.info(getLogStartInfo() + "callback: " + callback.getMethod());
+        }
 
         switch (callback.getMethod()) {
+
+            case GAME_INIT:
+                this.gameId = callback.getObjectId();
+                if (joinGameChat) {
+                    session.joinChat(session.getGameChatId(gameId).get());
+                }
+                break;
+
+            case CHATMESSAGE: {
+                ChatMessage message = (ChatMessage) callback.getData();
+                log.info("Chat message: " + message.getMessage());
+                break;
+            }
 
             case START_GAME: {
                 TableClientMessage message = (TableClientMessage) callback.getData();
@@ -50,7 +77,7 @@ public class LoadCallbackClient implements CallbackClient {
             case GAME_INFORM_PERSONAL: {
                 GameClientMessage message = (GameClientMessage) callback.getData();
                 gameView = message.getGameView();
-                log.info(getLogStartInfo() + "Inform: " + message.getMessage());
+                //log.info(getLogStartInfo() + "Inform: " + message.getMessage());
                 break;
             }
 
@@ -126,9 +153,7 @@ public class LoadCallbackClient implements CallbackClient {
                 break;
 
             // skip callbacks (no need to react)
-            case GAME_INIT:
             case GAME_UPDATE:
-            case CHATMESSAGE:
             case JOINED_TABLE:
                 break;
 

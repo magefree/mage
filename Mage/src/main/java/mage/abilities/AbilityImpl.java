@@ -1,5 +1,9 @@
 package mage.abilities;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.costs.*;
@@ -34,11 +38,6 @@ import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
-
 /**
  * @author BetaSteward_at_googlemail.com
  */
@@ -57,7 +56,7 @@ public abstract class AbilityImpl implements Ability {
     protected ManaCosts<ManaCost> manaCostsToPay;
     protected Costs<Cost> costs;
     protected Costs<Cost> optionalCosts;
-    protected Modes modes;
+    protected Modes modes; // access to it by GetModes only (it's can be override by some abilities)
     protected Zone zone;
     protected String name;
     protected AbilityWord abilityWord;
@@ -65,11 +64,10 @@ public abstract class AbilityImpl implements Ability {
     protected boolean ruleAtTheTop = false;
     protected boolean ruleVisible = true;
     protected boolean ruleAdditionalCostsVisible = true;
-    protected boolean costModificationActive = true;
     protected boolean activated = false;
     protected boolean worksFaceDown = false;
     protected int sourceObjectZoneChangeCounter;
-    protected List<Watcher> watchers = new ArrayList<>();
+    protected List<Watcher> watchers = new ArrayList<>(); // access to it by GetWatchers only (it's can be override by some abilities)
     protected List<Ability> subAbilities = null;
     protected boolean canFizzle = true;
     protected TargetAdjuster targetAdjuster = null;
@@ -101,7 +99,7 @@ public abstract class AbilityImpl implements Ability {
         this.manaCostsToPay = ability.manaCostsToPay.copy();
         this.costs = ability.costs.copy();
         this.optionalCosts = ability.optionalCosts.copy();
-        for (Watcher watcher : ability.watchers) {
+        for (Watcher watcher : ability.getWatchers()) {
             watchers.add(watcher.copy());
         }
 
@@ -115,7 +113,6 @@ public abstract class AbilityImpl implements Ability {
         this.ruleAtTheTop = ability.ruleAtTheTop;
         this.ruleVisible = ability.ruleVisible;
         this.ruleAdditionalCostsVisible = ability.ruleAdditionalCostsVisible;
-        this.costModificationActive = ability.costModificationActive;
         this.worksFaceDown = ability.worksFaceDown;
         this.abilityWord = ability.abilityWord;
         this.sourceObjectZoneChangeCounter = ability.sourceObjectZoneChangeCounter;
@@ -262,8 +259,9 @@ public abstract class AbilityImpl implements Ability {
                 this.getManaCostsToPay().clear();
             }
         }
-        if (modes.getAdditionalCost() != null) {
-            modes.getAdditionalCost().addOptionalAdditionalModeCosts(this, game);
+
+        if (getModes().getAdditionalCost() != null) {
+            getModes().getAdditionalCost().addOptionalAdditionalModeCosts(this, game);
         }
         // 20130201 - 601.2b
         // If the spell has alternative or additional costs that will be paid as it's being cast such
@@ -312,12 +310,12 @@ public abstract class AbilityImpl implements Ability {
             // each target the spell requires. A spell may require some targets only if an alternative or
             // additional cost (such as a buyback or kicker cost), or a particular mode, was chosen for it;
             // otherwise, the spell is cast as though it did not require those targets. If the spell has a
-            // variable number of targets, the player announces how many targets he or she will choose before
-            // he or she announces those targets. The same target can't be chosen multiple times for any one
+            // variable number of targets, the player announces how many targets they will choose before
+            // they announce those targets. The same target can't be chosen multiple times for any one
             // instance of the word "target" on the spell. However, if the spell uses the word "target" in
             // multiple places, the same object, player, or zone can be chosen once for each instance of the
             // word "target" (as long as it fits the targeting criteria). If any effects say that an object
-            // or player must be chosen as a target, the player chooses targets so that he or she obeys the
+            // or player must be chosen as a target, the player chooses targets so that they obey the
             // maximum possible number of such effects without violating any rules or effects that say that
             // an object or player can't be chosen as a target. The chosen players, objects, and/or zones
             // each become a target of that spell. (Any abilities that trigger when those players, objects,
@@ -354,30 +352,9 @@ public abstract class AbilityImpl implements Ability {
         }
 
         //20101001 - 601.2e
-        if (costModificationActive) {
-
-            // TODO: replace all AdjustingSourceCosts abilities to continuus effect, see Affinity example
-            //20100716 - 601.2e
-            if (sourceObject != null) {
-                sourceObject.adjustCosts(this, game);
-                if (sourceObject instanceof Card) {
-                    for (Ability ability : ((Card) sourceObject).getAbilities(game)) {
-                        if (ability instanceof AdjustingSourceCosts) {
-                            ((AdjustingSourceCosts) ability).adjustCosts(this, game);
-                        }
-                    }
-                } else {
-                    for (Ability ability : sourceObject.getAbilities()) {
-                        if (ability instanceof AdjustingSourceCosts) {
-                            ((AdjustingSourceCosts) ability).adjustCosts(this, game);
-                        }
-                    }
-                }
-            }
-
+        if (sourceObject != null) {
+            sourceObject.adjustCosts(this, game); // still needed
             game.getContinuousEffects().costModification(this, game);
-        } else {
-            costModificationActive = true;
         }
 
         UUID activatorId = controllerId;
@@ -519,14 +496,14 @@ public abstract class AbilityImpl implements Ability {
 
     /**
      * 601.2b If a cost that will be paid as the spell is being cast includes
-     * Phyrexian mana symbols, the player announces whether he or she intends to
-     * pay 2 life or the corresponding colored mana cost for each of those
-     * symbols.
+     * Phyrexian mana symbols, the player announces whether they intend to pay 2
+     * life or the corresponding colored mana cost for each of those symbols.
      */
     private void handlePhyrexianManaCosts(Game game, UUID sourceId, Player controller) {
         Iterator<ManaCost> costIterator = manaCostsToPay.iterator();
         while (costIterator.hasNext()) {
             ManaCost cost = costIterator.next();
+
             if (cost instanceof PhyrexianManaCost) {
                 PhyrexianManaCost phyrexianManaCost = (PhyrexianManaCost) cost;
                 PayLifeCost payLifeCost = new PayLifeCost(2);
@@ -633,7 +610,7 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public void setControllerId(UUID controllerId) {
         this.controllerId = controllerId;
-        for (Watcher watcher : watchers) {
+        for (Watcher watcher : getWatchers()) {
             watcher.setControllerId(controllerId);
         }
 
@@ -661,7 +638,7 @@ public abstract class AbilityImpl implements Ability {
                 subAbility.setSourceId(sourceId);
             }
         }
-        for (Watcher watcher : watchers) {
+        for (Watcher watcher : getWatchers()) {
             watcher.setSourceId(sourceId);
         }
 
@@ -734,7 +711,7 @@ public abstract class AbilityImpl implements Ability {
 
         watcher.setSourceId(this.sourceId);
         watcher.setControllerId(this.controllerId);
-        watchers.add(watcher);
+        getWatchers().add(watcher);
     }
 
     @Override
@@ -866,7 +843,7 @@ public abstract class AbilityImpl implements Ability {
         if (getModes().getMode() != null) {
             return getModes().getMode().getTargets();
         }
-        return null;
+        return new Targets();
     }
 
     @Override
@@ -1165,11 +1142,6 @@ public abstract class AbilityImpl implements Ability {
             }
         }
         return sb.toString();
-    }
-
-    @Override
-    public void setCostModificationActive(boolean active) {
-        this.costModificationActive = active;
     }
 
     @Override

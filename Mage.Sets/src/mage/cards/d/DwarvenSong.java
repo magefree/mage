@@ -1,7 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BecomesColorTargetEffect;
@@ -9,11 +7,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author maxlebedev
  */
 public final class DwarvenSong extends CardImpl {
@@ -23,13 +21,12 @@ public final class DwarvenSong extends CardImpl {
 
         // Any number of target creatures become red until end of turn.
         Effect effect = new BecomesColorTargetEffect(ObjectColor.RED, Duration.EndOfTurn);
-        effect.setText("Any number of target creatures become red until end of turn");
+        effect.setText("One or more target creatures become red until end of turn");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE, StaticFilters.FILTER_PERMANENT_CREATURE, false));
-
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(1, Integer.MAX_VALUE));
     }
 
-    public DwarvenSong(final DwarvenSong card) {
+    private DwarvenSong(final DwarvenSong card) {
         super(card);
     }
 

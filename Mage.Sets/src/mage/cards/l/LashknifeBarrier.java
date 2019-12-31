@@ -1,7 +1,5 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -18,15 +16,15 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
-/**
- *
- * @author LoneFox
+import java.util.UUID;
 
+/**
+ * @author LoneFox
  */
 public final class LashknifeBarrier extends CardImpl {
 
     public LashknifeBarrier(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 
         // When Lashknife Barrier enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
@@ -79,7 +77,7 @@ class LashknifeBarrierEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent creature = game.getPermanent(event.getTargetId());
-        return creature.isControlledBy(source.getControllerId());
+        return creature != null && creature.isControlledBy(source.getControllerId());
     }
 
 }

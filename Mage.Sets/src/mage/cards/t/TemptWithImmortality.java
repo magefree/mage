@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -11,6 +10,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.other.OwnerIdPredicate;
 import mage.game.Game;
@@ -26,7 +26,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 public final class TemptWithImmortality extends CardImpl {
 
     public TemptWithImmortality(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}");
 
         // Tempting offer - Return a creature card from your graveyard to the battlefield. Each opponent may return a creature card from their graveyard to the battlefield. For each opponent who does, return a creature card from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new TemptWithImmortalityEffect());
@@ -98,7 +98,7 @@ class TemptWithImmortalityEffect extends OneShotEffect {
     }
 
     private boolean returnCreatureFromGraveToBattlefield(Player player, Ability source, Game game) {
-        Target target = new TargetCardInYourGraveyard(new FilterCreatureCard());
+        Target target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE);
         target.setNotTarget(false);
         if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
             if (player.chooseTarget(outcome, target, source, game)) {

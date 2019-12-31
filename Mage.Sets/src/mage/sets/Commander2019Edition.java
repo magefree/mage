@@ -54,6 +54,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Burning Vengeance", 135, Rarity.UNCOMMON, mage.cards.b.BurningVengeance.class));
         cards.add(new SetCardInfo("Burnished Hart", 211, Rarity.UNCOMMON, mage.cards.b.BurnishedHart.class));
         cards.add(new SetCardInfo("Call to the Netherworld", 108, Rarity.COMMON, mage.cards.c.CallToTheNetherworld.class));
+        cards.add(new SetCardInfo("Chainer, Nightmare Adept", 39, Rarity.MYTHIC, mage.cards.c.ChainerNightmareAdept.class));
         cards.add(new SetCardInfo("Champion of Stray Souls", 109, Rarity.MYTHIC, mage.cards.c.ChampionOfStraySouls.class));
         cards.add(new SetCardInfo("Chaos Warp", 136, Rarity.RARE, mage.cards.c.ChaosWarp.class));
         cards.add(new SetCardInfo("Chemister's Insight", 80, Rarity.UNCOMMON, mage.cards.c.ChemistersInsight.class));
@@ -90,6 +91,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Elemental Bond", 163, Rarity.UNCOMMON, mage.cards.e.ElementalBond.class));
         cards.add(new SetCardInfo("Elsha of the Infinite", 40, Rarity.MYTHIC, mage.cards.e.ElshaOfTheInfinite.class));
         cards.add(new SetCardInfo("Emmara Tandris", 191, Rarity.RARE, mage.cards.e.EmmaraTandris.class));
+        cards.add(new SetCardInfo("Empowered Autogenerator", 54, Rarity.RARE, mage.cards.e.EmpoweredAutogenerator.class));
         cards.add(new SetCardInfo("Evolving Wilds", 241, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Exotic Orchard", 242, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Explore", 164, Rarity.COMMON, mage.cards.e.Explore.class));
@@ -158,6 +160,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Jace's Sanctum", 88, Rarity.RARE, mage.cards.j.JacesSanctum.class));
         cards.add(new SetCardInfo("Jungle Hollow", 254, Rarity.COMMON, mage.cards.j.JungleHollow.class));
         cards.add(new SetCardInfo("Jungle Shrine", 255, Rarity.UNCOMMON, mage.cards.j.JungleShrine.class));
+        cards.add(new SetCardInfo("K'rrik, Son of Yawgmoth", 18, Rarity.RARE, mage.cards.k.KrrikSonOfYawgmoth.class));
         cards.add(new SetCardInfo("Kadena's Silencer", 8, Rarity.RARE, mage.cards.k.KadenasSilencer.class));
         cards.add(new SetCardInfo("Kadena, Slinking Sorcerer", 45, Rarity.MYTHIC, mage.cards.k.KadenaSlinkingSorcerer.class));
         cards.add(new SetCardInfo("Kazandu Refuge", 256, Rarity.UNCOMMON, mage.cards.k.KazanduRefuge.class));
@@ -170,6 +173,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Magmaquake", 148, Rarity.RARE, mage.cards.m.Magmaquake.class));
         cards.add(new SetCardInfo("Magus of the Wheel", 149, Rarity.RARE, mage.cards.m.MagusOfTheWheel.class));
         cards.add(new SetCardInfo("Malevolent Whispers", 150, Rarity.UNCOMMON, mage.cards.m.MalevolentWhispers.class));
+        cards.add(new SetCardInfo("Mandate of Peace", 4, Rarity.RARE, mage.cards.m.MandateOfPeace.class));
         cards.add(new SetCardInfo("Marisi, Breaker of the Coil", 46, Rarity.MYTHIC, mage.cards.m.MarisiBreakerOfTheCoil.class));
         cards.add(new SetCardInfo("Mass Diminish", 10, Rarity.RARE, mage.cards.m.MassDiminish.class));
         cards.add(new SetCardInfo("Memorial to Folly", 259, Rarity.UNCOMMON, mage.cards.m.MemorialToFolly.class));
@@ -258,6 +262,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Stratus Dancer", 96, Rarity.RARE, mage.cards.s.StratusDancer.class));
         cards.add(new SetCardInfo("Strionic Resonator", 224, Rarity.RARE, mage.cards.s.StrionicResonator.class));
         cards.add(new SetCardInfo("Stromkirk Occultist", 153, Rarity.RARE, mage.cards.s.StromkirkOccultist.class));
+        cards.add(new SetCardInfo("Sudden Substitution", 11, Rarity.RARE, mage.cards.s.SuddenSubstitution.class));
         cards.add(new SetCardInfo("Sultai Charm", 202, Rarity.UNCOMMON, mage.cards.s.SultaiCharm.class));
         cards.add(new SetCardInfo("Sun Titan", 76, Rarity.MYTHIC, mage.cards.s.SunTitan.class));
         cards.add(new SetCardInfo("Sundering Growth", 203, Rarity.COMMON, mage.cards.s.SunderingGrowth.class));
@@ -265,6 +270,7 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Sunken Hollow", 278, Rarity.RARE, mage.cards.s.SunkenHollow.class));
         cards.add(new SetCardInfo("Swamp", 294, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swiftwater Cliffs", 279, Rarity.COMMON, mage.cards.s.SwiftwaterCliffs.class));
+        cards.add(new SetCardInfo("Tahngarth, First Mate", 50, Rarity.RARE, mage.cards.t.TahngarthFirstMate.class));
         cards.add(new SetCardInfo("Talrand, Sky Summoner", 97, Rarity.RARE, mage.cards.t.TalrandSkySummoner.class));
         cards.add(new SetCardInfo("Tectonic Hellion", 29, Rarity.RARE, mage.cards.t.TectonicHellion.class));
         cards.add(new SetCardInfo("Temple of the False God", 280, Rarity.UNCOMMON, mage.cards.t.TempleOfTheFalseGod.class));
@@ -293,8 +299,10 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Voice of Many", 36, Rarity.UNCOMMON, mage.cards.v.VoiceOfMany.class));
         cards.add(new SetCardInfo("Volrath, the Shapestealer", 51, Rarity.MYTHIC, mage.cards.v.VolrathTheShapestealer.class));
         cards.add(new SetCardInfo("Vraska the Unseen", 207, Rarity.MYTHIC, mage.cards.v.VraskaTheUnseen.class));
+        cards.add(new SetCardInfo("Wall of Stolen Identity", 13, Rarity.RARE, mage.cards.w.WallOfStolenIdentity.class));
         cards.add(new SetCardInfo("Warstorm Surge", 155, Rarity.RARE, mage.cards.w.WarstormSurge.class));
         cards.add(new SetCardInfo("Wayfaring Temple", 208, Rarity.RARE, mage.cards.w.WayfaringTemple.class));
+        cards.add(new SetCardInfo("Wildfire Devils", 30, Rarity.RARE, mage.cards.w.WildfireDevils.class));
         cards.add(new SetCardInfo("Willbender", 102, Rarity.UNCOMMON, mage.cards.w.Willbender.class));
         cards.add(new SetCardInfo("Wind-Scarred Crag", 285, Rarity.COMMON, mage.cards.w.WindScarredCrag.class));
         cards.add(new SetCardInfo("Wingmate Roc", 78, Rarity.MYTHIC, mage.cards.w.WingmateRoc.class));

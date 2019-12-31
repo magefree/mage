@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -34,7 +33,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class GoblinDarkDwellers extends CardImpl {
 
-  private static final FilterInstantOrSorceryCard filter = new FilterInstantOrSorceryCard("instant or sorcery card with converted mana cost 3 or less");
+    private static final FilterInstantOrSorceryCard filter
+            = new FilterInstantOrSorceryCard("instant or sorcery card with converted mana cost 3 or less");
 
     static {
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
@@ -69,8 +69,9 @@ public final class GoblinDarkDwellers extends CardImpl {
 class GoblinDarkDwellersEffect extends OneShotEffect {
 
     GoblinDarkDwellersEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "you may cast target instant or sorcery card with converted mana cost 3 or less from your graveyard without paying its mana cost. "
+        super(Outcome.PlayForFree);
+        this.staticText = "you may cast target instant or sorcery card with "
+                + "converted mana cost 3 or less from your graveyard without paying its mana cost. "
                 + "If that card would be put into your graveyard this turn, exile it instead";
     }
 
@@ -89,8 +90,12 @@ class GoblinDarkDwellersEffect extends OneShotEffect {
         if (controller != null) {
             Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
             if (card != null) {
-                if (controller.chooseUse(outcome, "Cast " + card.getLogName() + '?', source, game)) {
-                    if (controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game))) {
+                if (controller.chooseUse(Outcome.PlayForFree, "Cast " + card.getLogName() + '?', source, game)) {
+                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                    Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
+                            game, true, new MageObjectReference(source.getSourceObject(game), game));
+                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+                    if (cardWasCast) {
                         ContinuousEffect effect = new GoblinDarkDwellersReplacementEffect(card.getId());
                         effect.setTargetPointer(new FixedTarget(card.getId(), game.getState().getZoneChangeCounter(card.getId())));
                         game.addEffect(effect, source);

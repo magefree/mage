@@ -74,7 +74,7 @@ class HateMirageEffect extends OneShotEffect {
                 .flatMap(Collection::stream)
                 .forEach(uuid -> {
                     CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(
-                            source.getId(), null, true
+                            source.getControllerId(), null, true
                     );
                     effect.setTargetPointer(new FixedTarget(uuid, game));
                     effect.apply(game, source);

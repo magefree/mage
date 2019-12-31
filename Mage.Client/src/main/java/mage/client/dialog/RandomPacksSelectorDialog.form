@@ -36,12 +36,17 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Component id="pnlSelect" min="-2" pref="241" max="-2" attributes="0"/>
-              <EmptySpace pref="300" max="32767" attributes="0"/>
-              <Component id="pnlApply" min="-2" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" attributes="0">
-              <Component id="pnlPacks" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="pnlSelect" min="-2" pref="196" max="-2" attributes="0"/>
+                      <EmptySpace pref="402" max="32767" attributes="0"/>
+                      <Component id="pnlApply" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnApply" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="pnlPacks" max="32767" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -49,11 +54,13 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="pnlPacks" min="-2" pref="372" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="pnlPacks" min="-2" pref="362" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="pnlApply" min="-2" pref="32" max="-2" attributes="0"/>
                   <Component id="pnlSelect" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="btnApply" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -64,8 +71,8 @@
     <Container class="java.awt.Panel" name="pnlPacks">
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-        <Property name="columns" type="int" value="12"/>
-        <Property name="rows" type="int" value="11"/>
+        <Property name="columns" type="int" value="13"/>
+        <Property name="rows" type="int" value="12"/>
       </Layout>
     </Container>
     <Container class="javax.swing.JPanel" name="pnlSelect">
@@ -94,17 +101,15 @@
     <Container class="javax.swing.JPanel" name="pnlApply">
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
-      <SubComponents>
-        <Component class="javax.swing.JButton" name="btnApply">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Apply"/>
-            <Property name="toolTipText" type="java.lang.String" value="At least two packs must be selected"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnApplyActionPerformed"/>
-          </Events>
-        </Component>
-      </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="btnApply">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Apply"/>
+        <Property name="toolTipText" type="java.lang.String" value="At least two packs must be selected"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnApplyActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

@@ -54,7 +54,6 @@ public class Premodern extends Constructed {
         banned.add("Entomb");
         banned.add("Flash");
         banned.add("Force of Will");
-        banned.add("Frantic Search");
         banned.add("Goblin Recruiter");
         banned.add("Grim Monolith");
         banned.add("Jeweled Bird");
@@ -76,5 +75,6 @@ public class Premodern extends Constructed {
         banned.add("Windfall");
         banned.add("Worldgorger Dragon");
         banned.add("Yawgmoth's Will");
+        banned.add("Yawgmoth's Bargain");
     }
 }

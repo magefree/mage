@@ -1,0 +1,125 @@
+package mage.cards.h;
+
+import mage.ObjectColor;
+import mage.abilities.Ability;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.Condition;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.WinGameSourceControllerEffect;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
+
+import java.util.Collection;
+import java.util.EnumSet;
+import java.util.Objects;
+import java.util.UUID;
+
+/**
+ * @author TheElk801
+ */
+public final class HappilyEverAfter extends CardImpl {
+
+    public HappilyEverAfter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
+
+        // When Happily Ever After enters the battlefield, each player gains 5 life and draws a card.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new HappilyEverAfterEffect()));
+
+        // At the beginning of your upkeep, if there are five colors among permanents you control, there are six or more card types among permanents you control and/or cards in your graveyard, and your life total is greater than or equal to your starting life total, you win the game.
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
+                new BeginningOfUpkeepTriggeredAbility(
+                        new WinGameSourceControllerEffect(), TargetController.YOU, false
+                ), HappilyEverAfterCondition.instance, "At the beginning of your upkeep, " +
+                "if there are five colors among permanents you control, there are six or more card types " +
+                "among permanents you control and/or cards in your graveyard, and your life total is " +
+                "greater than or equal to your starting life total, you win the game."
+        ));
+    }
+
+    private HappilyEverAfter(final HappilyEverAfter card) {
+        super(card);
+    }
+
+    @Override
+    public HappilyEverAfter copy() {
+        return new HappilyEverAfter(this);
+    }
+}
+
+class HappilyEverAfterEffect extends OneShotEffect {
+
+    HappilyEverAfterEffect() {
+        super(Outcome.GainLife);
+        staticText = "each player gains 5 life and draws a card";
+    }
+
+    private HappilyEverAfterEffect(final HappilyEverAfterEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public HappilyEverAfterEffect copy() {
+        return new HappilyEverAfterEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        game.getState()
+                .getPlayersInRange(source.getControllerId(), game)
+                .stream()
+                .map(game::getPlayer)
+                .filter(Objects::nonNull)
+                .forEachOrdered(player -> {
+                    player.gainLife(5, game, source);
+                    player.drawCards(1, game);
+                });
+        return true;
+    }
+}
+
+enum HappilyEverAfterCondition implements Condition {
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null || player.getLife() < game.getLife()) {
+            return false;
+        }
+        ObjectColor color = new ObjectColor("");
+        game.getBattlefield()
+                .getAllActivePermanents(source.getControllerId())
+                .stream()
+                .map(permanent -> permanent.getColor(game))
+                .forEach(color::addColor);
+        if (color.getColorCount() < 5) {
+            return false;
+        }
+        EnumSet<CardType> cardTypeEnumSet = EnumSet.noneOf(CardType.class);
+        game.getBattlefield()
+                .getAllActivePermanents(source.getControllerId())
+                .stream()
+                .map(Permanent::getCardType)
+                .flatMap(Collection::stream)
+                .forEach(cardTypeEnumSet::add);
+        if (cardTypeEnumSet.size() >= 6) {
+            return true;
+        }
+        player.getGraveyard()
+                .getCards(game)
+                .stream()
+                .map(Card::getCardType)
+                .flatMap(Collection::stream)
+                .forEach(cardTypeEnumSet::add);
+        return cardTypeEnumSet.size() >= 6;
+    }
+}

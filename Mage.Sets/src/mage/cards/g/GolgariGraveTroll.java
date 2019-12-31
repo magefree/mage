@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -14,12 +13,11 @@ import mage.abilities.keyword.DredgeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -31,7 +29,7 @@ import mage.players.Player;
 public final class GolgariGraveTroll extends CardImpl {
 
     public GolgariGraveTroll(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
         this.subtype.add(SubType.TROLL);
         this.subtype.add(SubType.SKELETON);
 
@@ -60,13 +58,6 @@ public final class GolgariGraveTroll extends CardImpl {
 
 class GolgariGraveTrollEffect extends OneShotEffect {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard();
-
-    static {
-
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-    }
-
     public GolgariGraveTrollEffect() {
         super(Outcome.BoostCreature);
     }
@@ -80,7 +71,7 @@ class GolgariGraveTrollEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanentEntering(source.getSourceId());
         if (permanent != null && player != null) {
-            int amount = player.getGraveyard().count(filter, game);
+            int amount = player.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, game);
             if (amount > 0) {
                 permanent.addCounters(CounterType.P1P1.createInstance(amount), source, game);
             }

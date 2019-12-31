@@ -1,14 +1,11 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.DevotionCount;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
@@ -20,14 +17,16 @@ import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.token.PharikaSnakeToken;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class PharikaGodOfAffliction extends CardImpl {
+
+    private static final FilterCreatureCard filter = new FilterCreatureCard("a creature card from a graveyard");
 
     public PharikaGodOfAffliction(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{B}{G}");
@@ -39,14 +38,14 @@ public final class PharikaGodOfAffliction extends CardImpl {
 
         // Indestructible
         this.addAbility(IndestructibleAbility.getInstance());
+
         // As long as your devotion to black and green is less than seven, Pharika isn't a creature.
-        Effect effect = new LoseCreatureTypeSourceEffect(new DevotionCount(ColoredManaSymbol.B, ColoredManaSymbol.G), 7);
-        effect.setText("As long as your devotion to black and green is less than seven, Pharika isn't a creature");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(new LoseCreatureTypeSourceEffect(DevotionCount.BG, 7))
+                .addHint(DevotionCount.BG.getHint()));
+
         // {B}{G}: Exile target creature card from a graveyard. It's owner creates a 1/1 black and green Snake enchantment creature token with deathtouch.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PharikaExileEffect(), new ManaCostsImpl("{B}{G}"));
-        Target target = new TargetCardInGraveyard(new FilterCreatureCard("a creature card from a graveyard"));
-        ability.addTarget(target);
+        Ability ability = new SimpleActivatedAbility(new PharikaExileEffect(), new ManaCostsImpl("{B}{G}"));
+        ability.addTarget(new TargetCardInGraveyard(filter));
         this.addAbility(ability);
 
     }
@@ -63,31 +62,33 @@ public final class PharikaGodOfAffliction extends CardImpl {
 
 class PharikaExileEffect extends OneShotEffect {
 
-    public PharikaExileEffect() {
+    PharikaExileEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "Exile target creature card from a graveyard. Its owner creates a 1/1 black and green Snake enchantment creature token with deathtouch";
     }
 
-    public PharikaExileEffect(final PharikaExileEffect effect) {
+    private PharikaExileEffect(final PharikaExileEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Card targetCard = game.getCard(source.getFirstTarget());
-            if (targetCard != null) {
-                if (game.getState().getZone(source.getFirstTarget()) == Zone.GRAVEYARD) {
-                    controller.moveCardToExileWithInfo(targetCard, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
-                }
-                Player tokenController = game.getPlayer(targetCard.getOwnerId());
-                if (tokenController != null) {
-                    return new PharikaSnakeToken().putOntoBattlefield(1, game, source.getSourceId(), tokenController.getId());
-                }
-            }
+        if (controller == null) {
+            return false;
         }
-        return false;
+        Card targetCard = game.getCard(source.getFirstTarget());
+        if (targetCard == null) {
+            return false;
+        }
+        if (game.getState().getZone(source.getFirstTarget()) == Zone.GRAVEYARD) {
+            controller.moveCards(targetCard, Zone.EXILED, source, game);
+        }
+        Player tokenController = game.getPlayer(targetCard.getOwnerId());
+        if (tokenController == null) {
+            return false;
+        }
+        return new PharikaSnakeToken().putOntoBattlefield(1, game, source.getSourceId(), tokenController.getId());
     }
 
     @Override

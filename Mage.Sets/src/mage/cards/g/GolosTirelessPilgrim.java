@@ -1,5 +1,7 @@
 package mage.cards.g;
 
+import java.util.Set;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -18,9 +20,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.Set;
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -61,8 +60,8 @@ class GolosTirelessPilgrimEffect extends OneShotEffect {
 
     GolosTirelessPilgrimEffect() {
         super(Outcome.Discard);
-        staticText = "Exile the top three cards of your library. " +
-                "You may play them this turn without paying their mana costs.";
+        staticText = "Exile the top three cards of your library. "
+                + "You may play them this turn without paying their mana costs.";
     }
 
     private GolosTirelessPilgrimEffect(final GolosTirelessPilgrimEffect effect) {

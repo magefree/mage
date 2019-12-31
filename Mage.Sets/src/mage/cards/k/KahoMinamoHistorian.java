@@ -1,4 +1,3 @@
-
 package mage.cards.k;
 
 import java.util.UUID;
@@ -42,11 +41,14 @@ public final class KahoMinamoHistorian extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // When Kaho, Minamo Historian enters the battlefield, search your library for up to three instant cards and exile them. Then shuffle your library.
+        // When Kaho, Minamo Historian enters the battlefield, search your library for up to three 
+        // instant cards and exile them. Then shuffle your library.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new KahoMinamoHistorianEffect(), false));
 
-        // {X}, {tap}: You may cast a card with converted mana cost X exiled with Kaho without paying its mana cost.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KahoMinamoHistorianCastEffect(), new ManaCostsImpl("{X}"));
+        // {X}, {tap}: You may cast a card with converted mana cost X exiled with 
+        // Kaho without paying its mana cost.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new KahoMinamoHistorianCastEffect(), new ManaCostsImpl("{X}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -71,7 +73,8 @@ class KahoMinamoHistorianEffect extends SearchEffect {
 
     public KahoMinamoHistorianEffect() {
         super(new TargetCardInLibrary(0, 3, filter), Outcome.Benefit);
-        this.staticText = "search your library for up to three instant cards and exile them. Then shuffle your library";
+        this.staticText = "search your library for up to three instant cards "
+                + "and exile them. Then shuffle your library";
     }
 
     public KahoMinamoHistorianEffect(final KahoMinamoHistorianEffect effect) {
@@ -91,7 +94,8 @@ class KahoMinamoHistorianEffect extends SearchEffect {
             if (controller.searchLibrary(target, source, game)) {
                 UUID exileZone = CardUtil.getCardExileZoneId(game, source);
                 if (!target.getTargets().isEmpty()) {
-                    controller.moveCardsToExile(new CardsImpl(target.getTargets()).getCards(game), source, game, true, exileZone, sourceObject.getIdName());
+                    controller.moveCardsToExile(new CardsImpl(target.getTargets()).getCards(game),
+                            source, game, true, exileZone, sourceObject.getIdName());
                 }
             }
             controller.shuffleLibrary(source, game);
@@ -106,7 +110,8 @@ class KahoMinamoHistorianCastEffect extends OneShotEffect {
 
     public KahoMinamoHistorianCastEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "you may cast a card with converted mana cost X exiled with {this} without paying its mana cost";
+        this.staticText = "you may cast a card with converted mana cost X "
+                + "exiled with {this} without paying its mana cost";
     }
 
     public KahoMinamoHistorianCastEffect(final KahoMinamoHistorianCastEffect effect) {
@@ -126,10 +131,14 @@ class KahoMinamoHistorianCastEffect extends OneShotEffect {
             filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, source.getManaCostsToPay().getX()));
             TargetCardInExile target = new TargetCardInExile(filter, CardUtil.getCardExileZoneId(game, source));
             Cards cards = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
-            if (!cards.isEmpty() && controller.choose(Outcome.PlayForFree, cards, target, game)) {
+            if (!cards.isEmpty()
+                    && controller.choose(Outcome.PlayForFree, cards, target, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
-                    controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                    controller.cast(controller.chooseAbilityForCast(card, game, true),
+                            game, true, new MageObjectReference(source.getSourceObject(game), game));
+                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
                 }
             }
             return true;

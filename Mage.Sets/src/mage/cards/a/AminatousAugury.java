@@ -1,12 +1,25 @@
 package mage.cards.a;
 
 import java.util.EnumSet;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.*;
-import mage.constants.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
+import mage.choices.Choice;
+import mage.choices.ChoiceImpl;
+import mage.constants.AsThoughEffectType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -14,9 +27,6 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
-import java.util.UUID;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 
 /**
  *
@@ -81,12 +91,14 @@ class AminatousAuguryEffect extends OneShotEffect {
                     Zone.EXILED,
                     StaticFilters.FILTER_CARD_LAND_A
             );
-            if (controller.chooseUse(Outcome.PutLandInPlay, "Put a land from among the exiled cards into play?", source, game)) {
-                if (controller.choose(Outcome.PutLandInPlay, cardsToCast, target, game)) {
-                    Card card = cardsToCast.get(target.getFirstTarget(), game);
-                    if (card != null) {
-                        cardsToCast.remove(card);
-                        controller.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, true, null);
+            if (cardsToCast.count(StaticFilters.FILTER_CARD_LAND, game) > 0) {
+                if (controller.chooseUse(Outcome.PutLandInPlay, "Put a land from among the exiled cards into play?", source, game)) {
+                    if (controller.choose(Outcome.PutLandInPlay, cardsToCast, target, game)) {
+                        Card card = cardsToCast.get(target.getFirstTarget(), game);
+                        if (card != null) {
+                            cardsToCast.remove(card);
+                            controller.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, true, null);
+                        }
                     }
                 }
             }
@@ -124,12 +136,12 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         Player player = game.getPlayer(affectedControllerId);
-        EnumSet<CardType> cardTypes = EnumSet.noneOf(CardType.class);
-        Boolean checkType = false;
+        EnumSet<CardType> usedCardTypes = EnumSet.noneOf(CardType.class);
+
         if (game.getState().getValue(source.getSourceId().toString() + "cardTypes") != null) {
-            cardTypes = (EnumSet<CardType>) game.getState().getValue(source.getSourceId().toString() + "cardTypes");
+            usedCardTypes = (EnumSet<CardType>) game.getState().getValue(source.getSourceId().toString() + "cardTypes");
         }
-        //TODO add code for choosing from multiple card types and adding additional costs to the card
+        //TODO add code for adding additional costs to the card
         if (player != null
                 && sourceId != null
                 && sourceId.equals(getTargetPointer().getFirst(game, source))
@@ -137,15 +149,35 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
             Card card = game.getCard(sourceId);
             if (card != null
                     && game.getState().getZone(sourceId) == Zone.EXILED) {
-                for (CardType cardT : cardTypes) {
-                    if (card.getCardType().contains(cardT)) {
-                        checkType = true;
+                EnumSet<CardType> unusedCardTypes = EnumSet.noneOf(CardType.class);
+                for (CardType cardT : card.getCardType()) {
+                    if (!usedCardTypes.contains(cardT)) {
+                        unusedCardTypes.add(cardT);
                     }
                 }
-                if (!checkType) {
-                    player.setCastSourceIdWithAlternateMana(sourceId, null, null);
-                    cardTypes.addAll(card.getCardType());
-                    game.getState().setValue(source.getSourceId().toString() + "cardTypes", cardTypes);
+                if (!unusedCardTypes.isEmpty()) {
+                    if (!game.inCheckPlayableState()) { // some actions may not be done while the game only checks if a card can be cast
+                        // Select the card type to consume and remove all not seleczted card types
+                        if (unusedCardTypes.size() > 1) {
+                            Choice choice = new ChoiceImpl(true);
+                            choice.setMessage("Which card type do you want to consume?");
+                            Set<String> choices = choice.getChoices();
+                            for (CardType cardType : unusedCardTypes) {
+                                choices.add(cardType.toString());
+                            }
+                            player.choose(Outcome.Detriment, choice, game);
+                            for (Iterator<CardType> iterator = unusedCardTypes.iterator(); iterator.hasNext();) {
+                                CardType next = iterator.next();
+                                if (!next.toString().equals(choice.getChoice())) {
+                                    iterator.remove();
+                                }
+                            }
+                            usedCardTypes.add(CardType.fromString(choice.getChoice()));
+                        }
+                        usedCardTypes.addAll(unusedCardTypes);
+                        player.setCastSourceIdWithAlternateMana(sourceId, null, null);
+                        game.getState().setValue(source.getSourceId().toString() + "cardTypes", usedCardTypes);
+                    }
                     return true;
                 }
             }

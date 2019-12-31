@@ -1,15 +1,14 @@
-
 package mage.game.permanent.token;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
- *
  * @author LoneFox
  */
 public final class BeastToken2 extends TokenImpl {
@@ -17,7 +16,7 @@ public final class BeastToken2 extends TokenImpl {
     static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("ZEN", "C14", "DDD", "C15", "DD3GVL", "MM3", "CMA", "E01"));
+        tokenImageSets.addAll(Arrays.asList("ZEN", "C14", "DDD", "C15", "DD3GVL", "MM3", "CMA", "E01", "C19"));
     }
 
     public BeastToken2() {

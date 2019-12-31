@@ -26,7 +26,7 @@ public class SuperType2 extends Constructed {
      * Kamigawa/Ravnica standard, where rotation stabilized.
      * Data taken from http://thattournament.website/historic-tournament.php
      */
-    protected static final String[][] standards = {
+    private static final String[][] standards = {
             // 11th Standard
             {"7ED", "INV", "APC", "PLS", "ODY", "TOR", "JUD"},
             // 12th Standard
@@ -72,7 +72,7 @@ public class SuperType2 extends Constructed {
      * regular validation function to test validity.
      *
      * @param deck - the deck to validate.
-     * @return
+     * @return boolean if valid deck
      */
     @Override
     public boolean validate(Deck deck) {

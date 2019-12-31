@@ -15,7 +15,7 @@ public class FreeformCommanderDuelMatch extends MatchImpl {
 
     @Override
     public void startGame() throws GameException {
-        int startLife = 20;
+        int startLife = 40;
 
         Mulligan mulligan = options.getMulliganType().getMulligan(options.getFreeMulligans());
         FreeformCommanderDuel game = new FreeformCommanderDuel(options.getAttackOption(), options.getRange(), mulligan, startLife);

@@ -15,7 +15,7 @@ public class CursesTest extends CardTestPlayerBase {
     Cruel Reality {5}{B}{B}
     Enchantment - Aura Curse
     Enchant player
-    At the beginning of enchanted player's upkeep, that player sacrifices a creature or planeswalker. If the player can't, he or she loses 5 life.
+    At the beginning of enchanted player's upkeep, that player sacrifices a creature or planeswalker. If the player can't, they lose 5 life.
     */
     private String cReality = "Cruel Reality";
 
@@ -43,7 +43,7 @@ public class CursesTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 5);
         // Enchant player
         // Whenever enchanted player casts an instant or sorcery spell, each other player may copy that
-        // spell and may choose new targets for the copy he or she controls.  
+        // spell and may choose new targets for the copy they control.  
         addCard(Zone.HAND, playerA, "Curse of Echoes");
         // Draw three cards.
         addCard(Zone.HAND, playerB, "Jace's Ingenuity");

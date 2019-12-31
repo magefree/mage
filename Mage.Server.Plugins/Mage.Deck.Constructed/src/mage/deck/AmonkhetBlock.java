@@ -12,7 +12,7 @@ public class AmonkhetBlock extends Constructed {
 
     public AmonkhetBlock() {
         super("Constructed - Amonkhet Block");
-        setCodes.add("AKH");
-        setCodes.add("HOU");
+        setCodes.add(mage.sets.Amonkhet.getInstance().getCode());
+        setCodes.add(mage.sets.HourOfDevastation.getInstance().getCode());
     }
 }

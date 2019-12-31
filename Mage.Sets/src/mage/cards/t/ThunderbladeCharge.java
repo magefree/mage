@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -32,10 +31,13 @@ public final class ThunderbladeCharge extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 
-        // Whenever one or more creatures you control deal combat damage to a player, if Thunderblade Charge is in your graveyard, you may pay {2}{R}{R}{R}. If you do, you may cast it without paying its mana cost.
+        // Whenever one or more creatures you control deal combat damage to a player, 
+        // if Thunderblade Charge is in your graveyard, you may pay {2}{R}{R}{R}. 
+        // If you do, you may cast it without paying its mana cost.
         this.addAbility(new ControlledCreaturesDealCombatDamagePlayerTriggeredAbility(Zone.GRAVEYARD,
                 new DoIfCostPaid(new ThunderbladeChargeCastEffect(), new ManaCostsImpl("{2}{R}{R}{R}"))
-                        .setText("if {this} is in your graveyard, you may pay {2}{R}{R}{R}. If you do, you may cast it without paying its mana cost")));
+                        .setText("if {this} is in your graveyard, you may pay {2}{R}{R}{R}. "
+                                + "If you do, you may cast it without paying its mana cost")));
     }
 
     public ThunderbladeCharge(final ThunderbladeCharge card) {
@@ -71,8 +73,11 @@ class ThunderbladeChargeCastEffect extends OneShotEffect {
         if (controller != null
                 && sourceCard != null
                 && Zone.GRAVEYARD == game.getState().getZone(sourceCard.getId())) {
-            controller.cast(sourceCard.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
-            return true;
+            game.getState().setValue("PlayFromNotOwnHandZone" + sourceCard.getId(), Boolean.TRUE);
+            Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(sourceCard, game, true),
+                    game, true, new MageObjectReference(source.getSourceObject(game), game));
+            game.getState().setValue("PlayFromNotOwnHandZone" + sourceCard.getId(), null);
+            return cardWasCast;
         }
         return false;
     }

@@ -1,6 +1,7 @@
 package mage.cards.t;
 
 import mage.abilities.Ability;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
@@ -39,6 +40,8 @@ public final class ThoughtCollapse extends CardImpl {
 
 class ThoughtCollapseEffect extends OneShotEffect {
 
+    private static final Effect effect = new CounterTargetEffect();
+
     ThoughtCollapseEffect() {
         super(Outcome.Benefit);
         staticText = "Counter target spell. Its controller puts " +
@@ -61,6 +64,6 @@ class ThoughtCollapseEffect extends OneShotEffect {
             return false;
         }
         player.moveCards(player.getLibrary().getTopCards(game, 3), Zone.GRAVEYARD, source, game);
-        return new CounterTargetEffect().apply(game, source);
+        return effect.apply(game, source);
     }
 }

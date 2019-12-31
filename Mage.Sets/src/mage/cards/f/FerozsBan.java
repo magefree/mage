@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -9,20 +8,20 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author LoneFox
-
+ *
  */
 public final class FerozsBan extends CardImpl {
 
     public FerozsBan(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
 
         // Creature spells cost {2} more to cast.
-        Effect effect = new SpellsCostIncreasementAllEffect(new FilterCreatureCard(), 2);
+        Effect effect = new SpellsCostIncreasementAllEffect(StaticFilters.FILTER_CARD_CREATURE, 2);
         effect.setText("Creature spells cost {2} more to cast.");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }

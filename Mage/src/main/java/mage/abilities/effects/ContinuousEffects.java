@@ -1,14 +1,15 @@
 package mage.abilities.effects;
 
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.*;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.effects.common.continuous.CommanderReplacementEffect;
-import mage.cards.Card;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.cards.SplitCardHalf;
+import mage.cards.*;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
@@ -25,11 +26,6 @@ import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import org.apache.log4j.Logger;
-
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -233,7 +229,9 @@ public class ContinuousEffects implements Serializable {
     }
 
     private List<ContinuousEffect> filterLayeredEffects(List<ContinuousEffect> effects, Layer layer) {
-        return effects.stream().filter(effect -> effect.hasLayer(layer)).collect(Collectors.toList());
+        return effects.stream()
+                .filter(effect -> effect.hasLayer(layer))
+                .collect(Collectors.toList());
     }
 
     public Map<RequirementEffect, Set<Ability>> getApplicableRequirementEffects(Permanent permanent, boolean playerRealted, Game game) {
@@ -336,7 +334,7 @@ public class ContinuousEffects implements Serializable {
         }
         // boolean checkLKI = event.getType().equals(EventType.ZONE_CHANGE) || event.getType().equals(EventType.DESTROYED_PERMANENT);
         //get all applicable transient Replacement effects
-        for (Iterator<ReplacementEffect> iterator = replacementEffects.iterator(); iterator.hasNext(); ) {
+        for (Iterator<ReplacementEffect> iterator = replacementEffects.iterator(); iterator.hasNext();) {
             ReplacementEffect effect = iterator.next();
             if (!effect.checksEventType(event, game)) {
                 continue;
@@ -369,7 +367,7 @@ public class ContinuousEffects implements Serializable {
             }
         }
 
-        for (Iterator<PreventionEffect> iterator = preventionEffects.iterator(); iterator.hasNext(); ) {
+        for (Iterator<PreventionEffect> iterator = preventionEffects.iterator(); iterator.hasNext();) {
             PreventionEffect effect = iterator.next();
             if (!effect.checksEventType(event, game)) {
                 continue;
@@ -508,9 +506,20 @@ public class ContinuousEffects implements Serializable {
             UUID idToCheck;
             if (affectedAbility != null && affectedAbility.getSourceObject(game) instanceof SplitCardHalf) {
                 idToCheck = ((SplitCardHalf) affectedAbility.getSourceObject(game)).getParentCard().getId();
+            } else if (affectedAbility != null && affectedAbility.getSourceObject(game) instanceof AdventureCardSpell
+                    && type != AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE
+                    && type != AsThoughEffectType.CAST_AS_INSTANT) {
+                // adventure spell uses alternative characteristics for spell/stack
+                idToCheck = ((AdventureCardSpell) affectedAbility.getSourceObject(game)).getParentCard().getId();
             } else {
-                if (game.getObject(objectId) instanceof SplitCardHalf) {
-                    idToCheck = ((SplitCardHalf) game.getObject(objectId)).getParentCard().getId();
+                Card card = game.getCard(objectId);
+                if (card instanceof SplitCardHalf) {
+                    idToCheck = ((SplitCardHalf) card).getParentCard().getId();
+                } else if (card instanceof AdventureCardSpell
+                        && type != AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE
+                        && type != AsThoughEffectType.CAST_AS_INSTANT) {
+                    // adventure spell uses alternative characteristics for spell/stack
+                    idToCheck = ((AdventureCardSpell) card).getParentCard().getId();
                 } else {
                     idToCheck = objectId;
                 }
@@ -712,10 +721,10 @@ public class ContinuousEffects implements Serializable {
      * Checks if an event won't happen because of an rule modifying effect
      *
      * @param event
-     * @param targetAbility     ability the event is attached to. can be null.
+     * @param targetAbility ability the event is attached to. can be null.
      * @param game
      * @param checkPlayableMode true if the event does not really happen but
-     *                          it's checked if the event would be replaced
+     * it's checked if the event would be replaced
      * @return
      */
     public boolean preventedByRuleModification(GameEvent event, Ability targetAbility, Game game, boolean checkPlayableMode) {
@@ -729,10 +738,7 @@ public class ContinuousEffects implements Serializable {
                         if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
                             effect.setValue("targetAbility", targetAbility);
                             if (effect.applies(event, sourceAbility, game)) {
-                                if (targetAbility instanceof ActivatedAbility && ((ActivatedAbility) targetAbility).isCheckPlayableMode()) {
-                                    checkPlayableMode = true;
-                                }
-                                if (!checkPlayableMode) {
+                                if (!game.inCheckPlayableState()) {
                                     String message = effect.getInfoMessage(sourceAbility, event, game);
                                     if (message != null && !message.isEmpty()) {
                                         if (effect.sendMessageToUser()) {
@@ -762,7 +768,7 @@ public class ContinuousEffects implements Serializable {
         do {
             Map<ReplacementEffect, Set<Ability>> rEffects = getApplicableReplacementEffects(event, game);
             // Remove all consumed effects (ability dependant)
-            for (Iterator<ReplacementEffect> it1 = rEffects.keySet().iterator(); it1.hasNext(); ) {
+            for (Iterator<ReplacementEffect> it1 = rEffects.keySet().iterator(); it1.hasNext();) {
                 ReplacementEffect entry = it1.next();
                 if (consumed.containsKey(entry.getId()) /*&& !(entry instanceof CommanderReplacementEffect) */) { // 903.9.
                     Set<UUID> consumedAbilitiesIds = consumed.get(entry.getId());
@@ -953,7 +959,7 @@ public class ContinuousEffects implements Serializable {
 
                     if (!waitingEffects.isEmpty()) {
                         // check if waiting effects can be applied now
-                        for (Iterator<Map.Entry<ContinuousEffect, Set<UUID>>> iterator = waitingEffects.entrySet().iterator(); iterator.hasNext(); ) {
+                        for (Iterator<Map.Entry<ContinuousEffect, Set<UUID>>> iterator = waitingEffects.entrySet().iterator(); iterator.hasNext();) {
                             Map.Entry<ContinuousEffect, Set<UUID>> entry = iterator.next();
                             if (appliedEffects.containsAll(entry.getValue())) { // all dependent to effects are applied now so apply the effect itself
                                 appliedAbilities = appliedEffectAbilities.get(entry.getKey());
@@ -1072,11 +1078,13 @@ public class ContinuousEffects implements Serializable {
 
     private boolean isAbilityStillExists(final Game game, final Ability ability, ContinuousEffect effect) {
         final Card card = game.getPermanentOrLKIBattlefield(ability.getSourceId());
-        if (!(effect instanceof BecomesFaceDownCreatureEffect)) {
+        if (!(effect instanceof BecomesFaceDownCreatureEffect)
+                && (effect != null && !effect.getDuration().equals(Duration.Custom))) { // Custom effects do not depend on the creating permanent
             if (card != null) {
                 return card.getAbilities(game).contains(ability);
             }
         }
+
         return true;
     }
 

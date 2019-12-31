@@ -23,7 +23,9 @@ public class ScryfallImageSupportCards {
             put("EURO", "pelp").
             put("GPX", "pgpx").
             put("MED", "me1").
-            put("MEDM", "med").build();
+            put("MEDM", "med").
+            put("CELD", "eld"). // scryfall moved ELD and CELD cards in one set, but card numbers are different
+            build();
 
     private static final Set<String> supportedSets = new ArraySet<String>() {
         {
@@ -240,6 +242,8 @@ public class ScryfallImageSupportCards {
             add("M20");
             add("C19");
             add("ELD");
+            add("CELD");
+            add("THB");
             //
             add("EURO");
             add("GPX");
@@ -253,6 +257,7 @@ public class ScryfallImageSupportCards {
             add("SS2");
             add("PPP1");
             add("PF19");
+            add("MPS-AKH");
         }
     };
 

@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -10,7 +9,7 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -21,14 +20,12 @@ import mage.target.common.TargetCardInLibrary;
  */
 public final class BuriedAlive extends CardImpl {
 
-    
     public BuriedAlive(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
         // Search your library for up to three creature cards and put them into your graveyard. Then shuffle your library.
-        this.getSpellAbility().addEffect(new BuriedAliveEffect());        
-        
+        this.getSpellAbility().addEffect(new BuriedAliveEffect());
+
     }
 
     public BuriedAlive(final BuriedAlive card) {
@@ -43,8 +40,8 @@ public final class BuriedAlive extends CardImpl {
 
 class BuriedAliveEffect extends SearchEffect {
 
-  public BuriedAliveEffect() {
-        super(new TargetCardInLibrary(0, 3, new FilterCreatureCard()), Outcome.Detriment);
+    public BuriedAliveEffect() {
+        super(new TargetCardInLibrary(0, 3, StaticFilters.FILTER_CARD_CREATURE), Outcome.Detriment);
         staticText = "Search your library for up to three creature cards and put them into your graveyard. Then shuffle your library";
     }
 
@@ -69,5 +66,5 @@ class BuriedAliveEffect extends SearchEffect {
         }
         return false;
     }
-    
+
 }

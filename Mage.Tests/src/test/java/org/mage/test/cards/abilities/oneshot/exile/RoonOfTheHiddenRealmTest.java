@@ -16,7 +16,7 @@ public class RoonOfTheHiddenRealmTest extends CardTestPlayerBase {
      * Roon of the Hidden Realm is returning cards to their controler's control
      * instead of the owner's control at the end of the turn. I used his ability
      * on a Perplexing Chimera I gave my opponent and in the end of the turn it
-     * returned to the battlefield in his control.
+     * returned to the battlefield in their control.
      */
     @Test
     public void testReturnToBattlefieldForOwner() {

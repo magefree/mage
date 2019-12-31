@@ -24,7 +24,7 @@ public final class BurdenOfGreed extends CardImpl {
     public BurdenOfGreed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}");
 
-        // Target player loses 1 life for each tapped artifact he or she controls.
+        // Target player loses 1 life for each tapped artifact they control.
         getSpellAbility().addTarget(new TargetPlayer());
         getSpellAbility().addEffect(new LoseLifeTargetEffect(new BurdenOfGreedCount()));
 
@@ -65,7 +65,7 @@ class BurdenOfGreedCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "tapped artifact he or she controls";
+        return "tapped artifact they control";
     }
 
 }

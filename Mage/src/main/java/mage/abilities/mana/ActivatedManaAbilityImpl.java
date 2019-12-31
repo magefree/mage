@@ -54,7 +54,7 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
                 && null == game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.ACTIVATE_AS_INSTANT, this, controllerId, game)) {
             return ActivationStatus.getFalse();
         }
-        // check if player is in the process of playing spell costs and he is no longer allowed to use activated mana abilities (e.g. because he started to use improvise)
+        // check if player is in the process of playing spell costs and they are no longer allowed to use activated mana abilities (e.g. because they started to use improvise)
         //20091005 - 605.3a
         return new ActivationStatus(costs.canPay(this, sourceId, controllerId, game), null);
 

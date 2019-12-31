@@ -17,6 +17,7 @@ public final class LightningHelix extends CardImpl {
     public LightningHelix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}{W}");
 
+        // Lightning Helix deals 3 damage to any target and you gain 3 life.
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addEffect(new GainLifeEffect(3).concatBy("and"));

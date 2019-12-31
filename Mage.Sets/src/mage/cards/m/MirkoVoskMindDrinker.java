@@ -32,7 +32,7 @@ public final class MirkoVoskMindDrinker extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // Whenever Mirko Vosk, Mind Drinker deals combat damage to a player, that player reveals cards from the top of their library until he or she reveals four land cards, then puts those cards into their graveyard.
+        // Whenever Mirko Vosk, Mind Drinker deals combat damage to a player, that player reveals cards from the top of their library until they reveal four land cards, then puts those cards into their graveyard.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new MirkoVoskMindDrinkerEffect(), false, true));
     }
 
@@ -51,7 +51,7 @@ class MirkoVoskMindDrinkerEffect extends OneShotEffect {
 
     public MirkoVoskMindDrinkerEffect() {
         super(Outcome.Benefit);
-        this.staticText = "that player reveals cards from the top of their library until he or she reveals four land cards, then puts those cards into their graveyard";
+        this.staticText = "that player reveals cards from the top of their library until they reveal four land cards, then puts those cards into their graveyard";
     }
 
     public MirkoVoskMindDrinkerEffect(final MirkoVoskMindDrinkerEffect effect) {

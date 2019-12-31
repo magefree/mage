@@ -59,14 +59,7 @@ public class FreeformCommander extends Constructed {
         countCards(counts, deck.getCards());
         countCards(counts, deck.getSideboard());
 
-        for (Map.Entry<String, Integer> entry : counts.entrySet()) {
-            if (entry.getValue() > 1) {
-                if (!basicLandNames.contains(entry.getKey()) && !anyNumberCardsAllowed.contains(entry.getKey())) {
-                    invalid.put(entry.getKey(), "Too many: " + entry.getValue());
-                    valid = false;
-                }
-            }
-        }
+        valid = checkCounts(1, counts) && valid;
 
         if (deck.getSideboard().isEmpty() || deck.getSideboard().size() > 2) {
             invalid.put("Commander", "Sideboard must contain only the commander(s)");

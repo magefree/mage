@@ -1,6 +1,6 @@
-
 package mage.cards.n;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -9,6 +9,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -18,10 +19,10 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.NissaSageAnimistToken;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.players.Player;
 import mage.target.common.TargetLandPermanent;
-
-import java.util.UUID;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -48,7 +49,7 @@ public final class NissaSageAnimist extends CardImpl {
         // -7: Untap up to six target lands. They become 6/6 Elemental creatures. They're still lands.
         Ability ability = new LoyaltyAbility(new UntapTargetEffect(), -7);
         ability.addTarget(new TargetLandPermanent(0, 6, StaticFilters.FILTER_LANDS, false));
-        ability.addEffect(new NissaSageAnimistMinusSevenEffect());
+        ability.addEffect(new NissaSageAnimistMinusAnimateEffect());
         this.addAbility(ability);
     }
 
@@ -98,52 +99,82 @@ class NissaSageAnimistPlusOneEffect extends OneShotEffect {
     }
 }
 
-class NissaSageAnimistMinusSevenEffect extends ContinuousEffectImpl {
+class NissaSageAnimistMinusAnimateEffect extends OneShotEffect {
 
-    NissaSageAnimistMinusSevenEffect() {
-        super(Duration.EndOfGame, Outcome.BecomeCreature);
+    public NissaSageAnimistMinusAnimateEffect() {
+        super(Outcome.BecomeCreature);
         this.staticText = "They become 6/6 Elemental creatures. They're still lands";
     }
 
-    NissaSageAnimistMinusSevenEffect(final NissaSageAnimistMinusSevenEffect effect) {
+    public NissaSageAnimistMinusAnimateEffect(final NissaSageAnimistMinusAnimateEffect effect) {
         super(effect);
     }
 
     @Override
-    public NissaSageAnimistMinusSevenEffect copy() {
-        return new NissaSageAnimistMinusSevenEffect(this);
+    public NissaSageAnimistMinusAnimateEffect copy() {
+        return new NissaSageAnimistMinusAnimateEffect(this);
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+    public boolean apply(Game game, Ability source) {
         for (UUID permanentId : this.getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanent(permanentId);
             if (permanent != null) {
-                switch (layer) {
-                    case TypeChangingEffects_4:
-                            permanent.addCardType(CardType.CREATURE);
-                        if (!permanent.hasSubtype(SubType.ELEMENTAL, game)) {
-                            permanent.getSubtype(game).add(SubType.ELEMENTAL);
-                        }
-                        break;
-                    case PTChangingEffects_7:
-                        if (sublayer == SubLayer.SetPT_7b) {
-                            permanent.getToughness().setValue(6);
-                            permanent.getPower().setValue(6);
-                        }
-                }
+                ContinuousEffectImpl effect = new BecomesCreatureTargetEffect(new CreatureToken(6, 6, "", SubType.ELEMENTAL), false, true, Duration.Custom);
+                effect.setTargetPointer(new FixedTarget(permanent, game));
+                game.addEffect(effect, source);
             }
         }
         return true;
     }
 
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.TypeChangingEffects_4 || layer == Layer.PTChangingEffects_7;
-    }
+//    class NissaSageAnimistMinusSevenEffect extends ContinuousEffectImpl {
+//
+//        NissaSageAnimistMinusSevenEffect() {
+//            super(Duration.EndOfGame, Outcome.BecomeCreature);
+//            this.staticText = "They become 6/6 Elemental creatures. They're still lands";
+//        }
+//
+//        NissaSageAnimistMinusSevenEffect(final NissaSageAnimistMinusSevenEffect effect) {
+//            super(effect);
+//        }
+//
+//        @Override
+//        public NissaSageAnimistMinusSevenEffect copy() {
+//            return new NissaSageAnimistMinusSevenEffect(this);
+//        }
+//
+//        @Override
+//        public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+//            for (UUID permanentId : this.getTargetPointer().getTargets(game, source)) {
+//                Permanent permanent = game.getPermanent(permanentId);
+//                if (permanent != null) {
+//                    switch (layer) {
+//                        case TypeChangingEffects_4:
+//                            permanent.addCardType(CardType.CREATURE);
+//                            if (!permanent.hasSubtype(SubType.ELEMENTAL, game)) {
+//                                permanent.getSubtype(game).add(SubType.ELEMENTAL);
+//                            }
+//                            break;
+//                        case PTChangingEffects_7:
+//                            if (sublayer == SubLayer.SetPT_7b) {
+//                                permanent.getToughness().setValue(6);
+//                                permanent.getPower().setValue(6);
+//                            }
+//                    }
+//                }
+//            }
+//            return true;
+//        }
+//
+//        @Override
+//        public boolean apply(Game game, Ability source) {
+//            return false;
+//        }
+//
+//        @Override
+//        public boolean hasLayer(Layer layer) {
+//            return layer == Layer.TypeChangingEffects_4 || layer == Layer.PTChangingEffects_7;
+//        }
+//    }
 }

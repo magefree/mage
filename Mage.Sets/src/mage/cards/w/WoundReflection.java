@@ -24,7 +24,7 @@ public final class WoundReflection extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{B}");
 
 
-        // At the beginning of each end step, each opponent loses life equal to the life he or she lost this turn.
+        // At the beginning of each end step, each opponent loses life equal to the life they lost this turn.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new WoundReflectionEffect(), TargetController.ANY, false));
     }
 
@@ -42,7 +42,7 @@ class WoundReflectionEffect extends OneShotEffect {
     
     public WoundReflectionEffect() {
         super(Outcome.LoseLife);
-        this.staticText = "each opponent loses life equal to the life he or she lost this turn";
+        this.staticText = "each opponent loses life equal to the life they lost this turn";
     }
     
     public WoundReflectionEffect(final WoundReflectionEffect effect) {

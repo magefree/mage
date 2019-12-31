@@ -15,9 +15,9 @@ public class ZendikarBlock extends Constructed {
 
     public ZendikarBlock() {
         super("Constructed - Zendikar Block");
-        setCodes.add("ZEN");
-        setCodes.add("WWK");
-        setCodes.add("ROE");
+        setCodes.add(mage.sets.Zendikar.getInstance().getCode());
+        setCodes.add(mage.sets.Worldwake.getInstance().getCode());
+        setCodes.add(mage.sets.RiseOfTheEldrazi.getInstance().getCode());
     }
 
 }

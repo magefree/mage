@@ -230,7 +230,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public List<String> getRules() {
         try {
-            return abilities.getRules(this.getName());
+            return getAbilities().getRules(this.getName());
         } catch (Exception e) {
             logger.info("Exception in rules generation for card: " + this.getName(), e);
         }
@@ -504,6 +504,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     if (stackObject == null) {
                         stackObject = game.getStack().getSpell(((SplitCard) this).getRightHalfCard().getId());
                     }
+                }
+                if (stackObject == null && (this instanceof AdventureCard)) {
+                    stackObject = game.getStack().getSpell(((AdventureCard) this).getSpellCard().getId());
                 }
                 if (stackObject == null) {
                     stackObject = game.getStack().getSpell(getId());

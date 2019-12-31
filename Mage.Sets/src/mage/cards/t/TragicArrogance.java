@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.HashSet;
@@ -10,10 +9,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterEnchantmentPermanent;
-import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -32,7 +31,7 @@ public final class TragicArrogance extends CardImpl {
     public TragicArrogance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");
 
-        // For each player, you choose from among the permanents that player controls an artifact, a creature, an enchantment, and a planeswalker. Then each player sacrifices all other nonland permanents he or she controls.
+        // For each player, you choose from among the permanents that player controls an artifact, a creature, an enchantment, and a planeswalker. Then each player sacrifices all other nonland permanents they control.
         this.getSpellAbility().addEffect(new TragicArroganceffect());
     }
 
@@ -50,7 +49,7 @@ class TragicArroganceffect extends OneShotEffect {
 
     public TragicArroganceffect() {
         super(Outcome.Benefit);
-        this.staticText = "For each player, you choose from among the permanents that player controls an artifact, a creature, an enchantment, and a planeswalker. Then each player sacrifices all other nonland permanents he or she controls";
+        this.staticText = "For each player, you choose from among the permanents that player controls an artifact, a creature, an enchantment, and a planeswalker. Then each player sacrifices all other nonland permanents they control";
     }
 
     public TragicArroganceffect(final TragicArroganceffect effect) {
@@ -123,11 +122,11 @@ class TragicArroganceffect extends OneShotEffect {
                     }
                 }
             }
-            // Then each player sacrifices all other nonland permanents he or she controls
+            // Then each player sacrifices all other nonland permanents they control
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterNonlandPermanent(), game)) {
+                    for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENTS_NON_LAND, playerId, game)) {
                         if (!choosenPermanent.contains(permanent)) {
                             permanent.sacrifice(playerId, game);
                         }

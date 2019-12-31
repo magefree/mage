@@ -3,6 +3,8 @@ package mage.filter.predicate.other;
 
 import java.util.HashMap;
 import java.util.Locale;
+
+import mage.cards.AdventureCard;
 import mage.cards.Card;
 import mage.cards.SplitCard;
 import mage.constants.SubType;
@@ -70,6 +72,14 @@ public class CardTextPredicate implements Predicate<Card> {
                             }
                         }
                         for (String rule : ((SplitCard) input).getRightHalfCard().getRules(game)) {
+                            if (rule.toLowerCase(Locale.ENGLISH).contains(token)) {
+                                found = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (input instanceof AdventureCard) {
+                        for (String rule : ((AdventureCard) input).getSpellCard().getRules(game)) {
                             if (rule.toLowerCase(Locale.ENGLISH).contains(token)) {
                                 found = true;
                                 break;

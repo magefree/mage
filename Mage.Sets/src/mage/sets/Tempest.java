@@ -112,6 +112,7 @@ public final class Tempest extends ExpansionSet {
         cards.add(new SetCardInfo("Energizer", 285, Rarity.RARE, mage.cards.e.Energizer.class));
         cards.add(new SetCardInfo("Enfeeblement", 133, Rarity.COMMON, mage.cards.e.Enfeeblement.class));
         cards.add(new SetCardInfo("Enraging Licid", 171, Rarity.UNCOMMON, mage.cards.e.EnragingLicid.class));
+        cards.add(new SetCardInfo("Escaped Shapeshifter", 62, Rarity.RARE, mage.cards.e.EscapedShapeshifter.class));
         cards.add(new SetCardInfo("Essence Bottle", 286, Rarity.UNCOMMON, mage.cards.e.EssenceBottle.class));
         cards.add(new SetCardInfo("Evincar's Justice", 134, Rarity.COMMON, mage.cards.e.EvincarsJustice.class));
         cards.add(new SetCardInfo("Excavator", 287, Rarity.UNCOMMON, mage.cards.e.Excavator.class));

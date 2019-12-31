@@ -15,7 +15,6 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -52,7 +51,7 @@ class LeadershipVacuumEffect extends OneShotEffect {
     }
 
     LeadershipVacuumEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.Detriment);
         staticText = "Target player returns each commander they control from the battlefield to the command zone.";
     }
 
@@ -67,13 +66,13 @@ class LeadershipVacuumEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player player = game.getPlayer(source.getFirstTarget());
         if (player == null) {
             return false;
         }
-        return player.moveCards(game.getBattlefield()
-                .getAllActivePermanents(filter, source.getFirstTarget(), game)
-                .stream()
-                .collect(Collectors.toSet()), Zone.COMMAND, source, game);
+
+        return game.getBattlefield().getAllActivePermanents(filter, source.getFirstTarget(), game).stream()
+                .map(commander -> commander.moveToZone(Zone.COMMAND, source.getId(), game, true))
+                .reduce(true, Boolean::logicalAnd);
     }
 }

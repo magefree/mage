@@ -14,7 +14,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author jeffwadsworth
  */
 public class ControllerPlaysLandTriggeredAbility extends TriggeredAbilityImpl {
@@ -35,7 +34,7 @@ public class ControllerPlaysLandTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent land = game.getPermanent(event.getTargetId());
-        return land.getControllerId().equals(controllerId);
+        return land != null && land.getControllerId().equals(controllerId);
     }
 
     @Override

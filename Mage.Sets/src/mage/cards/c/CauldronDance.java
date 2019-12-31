@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -17,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -120,7 +118,7 @@ class CauldronDancePutCreatureFromHandOntoBattlefieldEffect extends OneShotEffec
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             if (controller.chooseUse(Outcome.PutCreatureInPlay, CHOICE_TEXT, source, game)) {
-                TargetCardInHand target = new TargetCardInHand(new FilterCreatureCard());
+                TargetCardInHand target = new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE);
                 if (controller.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {

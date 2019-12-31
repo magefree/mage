@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -19,8 +18,8 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -82,7 +81,7 @@ class GarrukTheVeilCursedValue implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Player player = game.getPlayer(sourceAbility.getControllerId());
         if (player != null) {
-            return player.getGraveyard().getCards(new FilterCreatureCard(), game).size();
+            return player.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game).size();
         }
         return 0;
     }
@@ -142,8 +141,7 @@ class GarrukTheVeilCursedEffect extends OneShotEffect {
 
         if (sacrificed) {
             // search
-            FilterCreatureCard filter = new FilterCreatureCard();
-            TargetCardInLibrary targetInLibrary = new TargetCardInLibrary(filter);
+            TargetCardInLibrary targetInLibrary = new TargetCardInLibrary(StaticFilters.FILTER_CARD_CREATURE);
             Cards cards = new CardsImpl();
             if (controller.searchLibrary(targetInLibrary, source, game)) {
                 for (UUID cardId : targetInLibrary.getTargets()) {

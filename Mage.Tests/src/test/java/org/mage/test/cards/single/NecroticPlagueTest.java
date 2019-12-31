@@ -49,8 +49,8 @@ public class NecroticPlagueTest extends CardTestPlayerBase {
          * Enchantment — Aura, 2BB
          * Enchant creature
          * Enchanted creature has "At the beginning of your upkeep, sacrifice this creature."
-         * When enchanted creature dies, its controller chooses target creature one of his or
-         * her opponents controls. Return Necrotic Plague from its owner's graveyard to the
+         * When enchanted creature dies, its controller chooses target creature one of their
+         * opponents controls. Return Necrotic Plague from its owner's graveyard to the
          * battlefield attached to that creature.
         */
         addCard(Zone.HAND, playerA, "Necrotic Plague");

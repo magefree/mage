@@ -1,4 +1,3 @@
-
 package mage.cards.w;
 
 import java.util.UUID;
@@ -15,7 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -30,7 +29,7 @@ public final class WindingCanyons extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {2}, {tap}: Until end of turn, you may cast creature spells as though they had flash.
-        Effect effect = new AddContinuousEffectToGame(new CastAsThoughItHadFlashAllEffect(Duration.EndOfTurn, new FilterCreatureCard()));
+        Effect effect = new AddContinuousEffectToGame(new CastAsThoughItHadFlashAllEffect(Duration.EndOfTurn, StaticFilters.FILTER_CARD_CREATURE));
         effect.setText("Until end of turn, you may cast creature spells as though they had flash.");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));
         ability.addCost(new TapSourceCost());

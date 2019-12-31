@@ -28,12 +28,12 @@ import mage.util.CardUtil;
  * @author LevelX2
  */
 public final class MesmericFiend extends CardImpl {
-
+    
     public MesmericFiend(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.subtype.add(SubType.NIGHTMARE);
         this.subtype.add(SubType.HORROR);
-
+        
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
@@ -45,11 +45,11 @@ public final class MesmericFiend extends CardImpl {
         // When Mesmeric Fiend leaves the battlefield, return the exiled card to its owner's hand.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new MesmericFiendLeaveEffect(), false));
     }
-
+    
     public MesmericFiend(final MesmericFiend card) {
         super(card);
     }
-
+    
     @Override
     public MesmericFiend copy() {
         return new MesmericFiend(this);
@@ -57,26 +57,26 @@ public final class MesmericFiend extends CardImpl {
 }
 
 class MesmericFiendExileEffect extends OneShotEffect {
-
+    
     public MesmericFiendExileEffect() {
         super(Outcome.Exile);
         this.staticText = "target opponent reveals their hand and you choose a nonland card from it. Exile that card";
     }
-
+    
     public MesmericFiendExileEffect(final MesmericFiendExileEffect effect) {
         super(effect);
     }
-
+    
     @Override
     public MesmericFiendExileEffect copy() {
         return new MesmericFiendExileEffect(this);
     }
-
+    
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player opponent = game.getPlayer(source.getFirstTarget());
-        Permanent sourcePermanent = (Permanent) source.getSourceObject(game);
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null
                 && opponent != null
                 && sourcePermanent != null) {
@@ -97,21 +97,21 @@ class MesmericFiendExileEffect extends OneShotEffect {
 }
 
 class MesmericFiendLeaveEffect extends OneShotEffect {
-
+    
     public MesmericFiendLeaveEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "return the exiled card to its owner's hand";
     }
-
+    
     public MesmericFiendLeaveEffect(final MesmericFiendLeaveEffect effect) {
         super(effect);
     }
-
+    
     @Override
     public MesmericFiendLeaveEffect copy() {
         return new MesmericFiendLeaveEffect(this);
     }
-
+    
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());

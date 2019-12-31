@@ -187,7 +187,7 @@ public class NewTableDialog extends MageDialog {
         lbDeckType.setText("Deck Type:");
 
         lbTimeLimit.setText("Time Limit:");
-        lbTimeLimit.setToolTipText("The active time a player may use to finish the match. If his or her time runs out, the player looses the current game.");
+        lbTimeLimit.setToolTipText("The active time a player may use to finish the match. If their time runs out, the player looses the current game.");
 
         lblGameType.setText("Game Type:");
 
@@ -637,6 +637,7 @@ public class NewTableDialog extends MageDialog {
             case "Variant Magic - Commander":
             case "Variant Magic - Duel Commander":
             case "Variant Magic - MTGO 1v1 Commander":
+            case "Variant Magic - Centurion Commander":
             case "Variant Magic - Penny Dreadful Commander":
                 if (!options.getGameType().startsWith("Commander")) {
                     JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Deck type Commander needs also a Commander game type", "Error", JOptionPane.ERROR_MESSAGE);
@@ -683,6 +684,7 @@ public class NewTableDialog extends MageDialog {
                 if (!options.getDeckType().equals("Variant Magic - Commander")
                         && !options.getDeckType().equals("Variant Magic - Duel Commander")
                         && !options.getDeckType().equals("Variant Magic - MTGO 1v1 Commander")
+                        && !options.getDeckType().equals("Variant Magic - Centurion Commander")
                         && !options.getDeckType().equals("Variant Magic - Freeform Commander")
                         && !options.getDeckType().equals("Variant Magic - Penny Dreadful Commander")) {
                     JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Deck type Commander needs also a Commander game type", "Error", JOptionPane.ERROR_MESSAGE);

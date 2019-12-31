@@ -1,12 +1,12 @@
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import mage.MageInt;
-import mage.constants.CardType;
-import mage.constants.SubType;
 
 /**
  * @author Loki
@@ -16,7 +16,7 @@ public final class SpiritToken extends TokenImpl {
     static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("CHK", "EMA", "C16"));
+        tokenImageSets.addAll(Arrays.asList("CHK", "EMA", "C16", "C19"));
     }
 
     public SpiritToken() {

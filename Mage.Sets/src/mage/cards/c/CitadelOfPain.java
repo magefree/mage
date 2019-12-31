@@ -32,7 +32,7 @@ public final class CitadelOfPain extends CardImpl {
         TriggeredAbility triggered = new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE,
                 "beginning of the end step", true,
                 new CitadelOfPainEffect());
-        // At the beginning of each player's end step, Citadel of Pain deals X damage to that player, where X is the number of untapped lands he or she controls.
+        // At the beginning of each player's end step, Citadel of Pain deals X damage to that player, where X is the number of untapped lands they control.
         this.addAbility(triggered);
     }
 
@@ -52,7 +52,7 @@ class CitadelOfPainEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        return "{this} deals X damage to that player, where X is the number of untapped lands he or she controls.";
+        return "{this} deals X damage to that player, where X is the number of untapped lands they control.";
     }
 
     static {

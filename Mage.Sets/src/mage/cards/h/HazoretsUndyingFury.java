@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import java.util.UUID;
@@ -44,7 +43,8 @@ public final class HazoretsUndyingFury extends CardImpl {
 
         //Land you control don't untap during your next untap step.
         this.getSpellAbility().addEffect(new DontUntapInControllersUntapStepAllEffect(
-                Duration.UntilYourNextTurn, TargetController.YOU, new FilterControlledLandPermanent("Lands you control"))
+                Duration.UntilYourNextTurn, TargetController.YOU,
+                new FilterControlledLandPermanent("Lands you control"))
                 .setText("Lands you control don't untap during your next untap phase"));
     }
 
@@ -60,7 +60,8 @@ public final class HazoretsUndyingFury extends CardImpl {
 
 class HazoretsUndyingFuryEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterCard("nonland cards with converted mana cost 5 or less");
+    private static final FilterCard filter = new FilterCard(
+            "nonland cards with converted mana cost 5 or less");
 
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
@@ -68,8 +69,10 @@ class HazoretsUndyingFuryEffect extends OneShotEffect {
     }
 
     public HazoretsUndyingFuryEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Shuffle your library, then exile the top four cards. You may cast any number of nonland cards with converted mana cost 5 or less from among them without paying their mana costs";
+        super(Outcome.PlayForFree);
+        this.staticText = "Shuffle your library, then exile the top four cards. "
+                + "You may cast any number of nonland cards with converted mana "
+                + "cost 5 or less from among them without paying their mana costs";
     }
 
     public HazoretsUndyingFuryEffect(final HazoretsUndyingFuryEffect effect) {
@@ -85,29 +88,40 @@ class HazoretsUndyingFuryEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null) {
+        if (controller != null 
+                && sourceObject != null) {
             controller.shuffleLibrary(source, game);
             // move cards from library to exile
-            controller.moveCardsToExile(controller.getLibrary().getTopCards(game, 4), source, game, true, source.getSourceId(), sourceObject.getIdName());
+            controller.moveCardsToExile(controller.getLibrary().getTopCards(game, 4),
+                    source, game, true, source.getSourceId(), sourceObject.getIdName());
             // cast the possible cards without paying the mana
             ExileZone hazoretsUndyingFuryExileZone = game.getExile().getExileZone(source.getSourceId());
             Cards cardsToCast = new CardsImpl();
             if (hazoretsUndyingFuryExileZone == null) {
                 return true;
             }
-            cardsToCast.addAll(hazoretsUndyingFuryExileZone.getCards(filter, source.getSourceId(), source.getControllerId(), game));
+            cardsToCast.addAll(hazoretsUndyingFuryExileZone.getCards(filter,
+                    source.getSourceId(), source.getControllerId(), game));
             while (!cardsToCast.isEmpty()) {
-                if (!controller.chooseUse(Outcome.PlayForFree, "Cast (another) a card exiled with " + sourceObject.getLogName() + " without paying its mana cost?", source, game)) {
+                if (!controller.chooseUse(Outcome.PlayForFree,
+                        "Cast (another) a card exiled with "
+                        + sourceObject.getLogName() + " without paying its mana cost?", source, game)) {
                     break;
                 }
-                TargetCard targetCard = new TargetCard(1, Zone.EXILED, new FilterCard("nonland card to cast for free"));
+                TargetCard targetCard = new TargetCard(1, Zone.EXILED, 
+                        new FilterCard("nonland card to cast for free"));
                 if (controller.choose(Outcome.PlayForFree, cardsToCast, targetCard, game)) {
                     Card card = game.getCard(targetCard.getFirstTarget());
                     if (card != null) {
-                        if (controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game))) {
+                        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                        Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
+                                game, true, new MageObjectReference(source.getSourceObject(game), game));
+                        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+                        if (cardWasCast) {
                             cardsToCast.remove(card);
                         } else {
-                            game.informPlayer(controller, "You're not able to cast " + card.getIdName() + " or you canceled the casting.");
+                            game.informPlayer(controller, "You're not able to cast " 
+                                    + card.getIdName() + " or you canceled the casting.");
                         }
                     }
                 }

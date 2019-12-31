@@ -26,7 +26,7 @@ public final class PlanarOverlay extends CardImpl {
     public PlanarOverlay(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}");
 
-        // Each player chooses a land he or she controls of each basic land type. Return those lands to their owners' hands.
+        // Each player chooses a land they control of each basic land type. Return those lands to their owners' hands.
         this.getSpellAbility().addEffect(new PlanarOverlayEffect());
     }
 
@@ -44,7 +44,7 @@ class PlanarOverlayEffect extends OneShotEffect {
 
     public PlanarOverlayEffect() {
         super(Outcome.ReturnToHand);
-        this.staticText = "Each player chooses a land he or she controls of each basic land type. Return those lands to their owners' hands";
+        this.staticText = "Each player chooses a land they control of each basic land type. Return those lands to their owners' hands";
     }
 
     public PlanarOverlayEffect(final PlanarOverlayEffect effect) {

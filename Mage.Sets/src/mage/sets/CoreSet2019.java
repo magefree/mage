@@ -1,9 +1,7 @@
 package mage.sets;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
@@ -23,8 +21,8 @@ public final class CoreSet2019 extends ExpansionSet {
     public static CoreSet2019 getInstance() {
         return instance;
     }
-    List<CardInfo> savedSpecialCommon = new ArrayList<>();
-    protected final List<CardInfo> savedSpecialLand = new ArrayList<>();
+
+    private final List<CardInfo> savedSpecialLand = new ArrayList<>();
 
     private CoreSet2019() {
         super("Core Set 2019", "M19", ExpansionSet.buildDate(2018, 7, 13), SetType.CORE);
@@ -372,7 +370,7 @@ public final class CoreSet2019 extends ExpansionSet {
                 criteria.setCodes(this.code).notTypes(CardType.LAND);
                 savedCardsInfos = CardRepository.instance.findCards(criteria);
                 if (maxCardNumberInBooster != Integer.MAX_VALUE) {
-                    savedCardsInfos.removeIf(next -> next.getCardNumberAsInt() > maxCardNumberInBooster && rarity != Rarity.LAND);
+                    savedCardsInfos.removeIf(next -> next.getCardNumberAsInt() > maxCardNumberInBooster);
                 }
                 savedCards.put(rarity, savedCardsInfos);
             }

@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import java.util.UUID;
@@ -9,7 +8,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
@@ -22,7 +21,7 @@ import mage.target.common.TargetCardInGraveyard;
 public final class ExtractFromDarkness extends CardImpl {
 
     public ExtractFromDarkness(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}{B}");
 
         // Each player puts the top two cards of their library into their graveyard.
         this.getSpellAbility().addEffect(new ExtractFromDarknessMillEffect());
@@ -88,7 +87,7 @@ class ExtractFromDarknessReturnFromGraveyardToBattlefieldEffect extends OneShotE
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Target target = new TargetCardInGraveyard(new FilterCreatureCard());
+            Target target = new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE);
             target.setNotTarget(true);
             if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
                     && controller.chooseTarget(outcome, target, source, game)) {

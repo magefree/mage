@@ -119,7 +119,7 @@ class SisayWeatherlightCaptainEffect extends OneShotEffect {
             return false;
         }
         int power = permanent.getPower().getValue();
-        FilterCard filter = new FilterPermanentCard("permanent card with converted mana cost less than " + power);
+        FilterCard filter = new FilterPermanentCard("legendary permanent card with converted mana cost less than " + power);
         filter.add(new SupertypePredicate(SuperType.LEGENDARY));
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, power));
         return new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)).apply(game, source);

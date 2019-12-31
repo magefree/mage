@@ -14,8 +14,8 @@ public class GolemsHeartTest extends CardTestPlayerBase {
 
     /*
      My opponent and I were both playing artifact decks.
-     He had Golem's Heart out.
-     He wasn't gaining life when I or he was casting spells.
+     They had Golem's Heart out.
+     They weren't gaining life when I or they cast spells.
      */
     @Test
     public void testFirstTriggeredAbility() {

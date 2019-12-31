@@ -12,9 +12,9 @@ public class ReturnToRavnicaBlock extends Constructed {
 
     public ReturnToRavnicaBlock() {
         super("Constructed - Return to Ravnica Block");
-        setCodes.add("RTR");
-        setCodes.add("GTC");
-        setCodes.add("DGM");
+        setCodes.add(mage.sets.ReturnToRavnica.getInstance().getCode());
+        setCodes.add(mage.sets.Gatecrash.getInstance().getCode());
+        setCodes.add(mage.sets.DragonsMaze.getInstance().getCode());
     }
 
 }

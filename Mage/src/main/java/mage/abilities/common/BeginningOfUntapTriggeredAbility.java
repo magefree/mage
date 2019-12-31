@@ -10,11 +10,9 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author Jeff
  */
 public class BeginningOfUntapTriggeredAbility extends TriggeredAbilityImpl {
@@ -59,8 +57,8 @@ public class BeginningOfUntapTriggeredAbility extends TriggeredAbilityImpl {
                 }
                 return yours;
             case NOT_YOU:
-                Player controller = game.getPlayer(this.getControllerId());
-                if (controller != null && controller.getInRange().contains(event.getPlayerId()) && !event.getPlayerId().equals(this.getControllerId())) {
+                if (game.getState().getPlayersInRange(this.getControllerId(), game).contains(event.getPlayerId())
+                        && !event.getPlayerId().equals(this.getControllerId())) {
                     if (getTargets().isEmpty()) {
                         for (Effect effect : this.getEffects()) {
                             effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
@@ -80,8 +78,7 @@ public class BeginningOfUntapTriggeredAbility extends TriggeredAbilityImpl {
                 }
                 break;
             case ANY:
-                controller = game.getPlayer(this.getControllerId());
-                if (controller != null && controller.getInRange().contains(event.getPlayerId())) {
+                if (game.getState().getPlayersInRange(this.getControllerId(), game).contains(event.getPlayerId())) {
                     if (getTargets().isEmpty()) {
                         for (Effect effect : this.getEffects()) {
                             effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
@@ -89,6 +86,7 @@ public class BeginningOfUntapTriggeredAbility extends TriggeredAbilityImpl {
                     }
                     return true;
                 }
+                break;
         }
         return false;
     }

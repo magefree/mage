@@ -36,7 +36,7 @@ public final class ShriekingGrotesque extends CardImpl {
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(1), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new ManaWasSpentCondition(ColoredManaSymbol.B),
-            "if {B} was spent to cast {this}, target player discards a card."), new ManaSpentToCastWatcher());
+            "if {B} was spent to cast this spell, target player discards a card."), new ManaSpentToCastWatcher());
     }
 
     public ShriekingGrotesque(final ShriekingGrotesque card) {

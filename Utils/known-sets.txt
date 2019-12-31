@@ -90,6 +90,8 @@ From the Vault: Transform|FromTheVaultTransform|
 From the Vault: Twenty|FromTheVaultTwenty|
 Future Sight|FutureSight|
 Game Day|GameDay|
+Game Night|GameNight|
+Game Night 2019|GameNight2019|
 Gatecrash|Gatecrash|
 Global Series: Jiang Yanggu & Mu Yanling|GlobalSeriesJiangYangguAndMuYanling|
 Grand Prix|GrandPrixPromos|
@@ -186,7 +188,9 @@ Tempest Remastered|TempestRemastered|
 Tenth Edition|TenthEdition|
 The Dark|TheDark|
 Theros|Theros|
+Theros Beyond Death|TherosBeyondDeath|
 Throne of Eldraine|ThroneOfEldraine|
+Throne of Eldraine Collector's Edition|ThroneOfEldraineCollectorsEdition|
 Time Spiral|TimeSpiral|
 Time Spiral "Timeshifted"|TimeSpiralTimeshifted|
 Torment|Torment|

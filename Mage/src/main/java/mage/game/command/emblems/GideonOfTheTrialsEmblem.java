@@ -1,4 +1,3 @@
-
 package mage.game.command.emblems;
 
 import mage.abilities.Ability;
@@ -15,13 +14,12 @@ import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author spjspj
  */
 public final class GideonOfTheTrialsEmblem extends Emblem {
 
     public GideonOfTheTrialsEmblem() {
-        this.setName("Emblem - Gideon");
+        this.setName("Emblem Gideon");
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new GideonOfTheTrialsCantLoseEffect());
         this.getAbilities().add(ability);
     }
@@ -53,9 +51,7 @@ class GideonOfTheTrialsCantLoseEffect extends ContinuousRuleModifyingEffectImpl 
     public boolean applies(GameEvent event, Ability source, Game game) {
         if ((event.getType() == GameEvent.EventType.WINS && game.getOpponents(source.getControllerId()).contains(event.getPlayerId()))
                 || (event.getType() == GameEvent.EventType.LOSES && event.getPlayerId().equals(source.getControllerId()))) {
-            if (game.getBattlefield().contains(filter, source.getControllerId(), 1, game)) {
-                return true;
-            }
+            return game.getBattlefield().contains(filter, source.getControllerId(), 1, game);
         }
         return false;
     }

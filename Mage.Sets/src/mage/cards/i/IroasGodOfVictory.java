@@ -1,11 +1,8 @@
-
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PreventAllDamageToAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
@@ -14,26 +11,31 @@ import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterControlledCreatureInPlay;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class IroasGodOfVictory extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures you control");
-    private static final FilterControlledCreatureInPlay filterAttacking = new FilterControlledCreatureInPlay("attacking creatures you control");
+    private static final FilterPermanent filter
+            = new FilterCreaturePermanent("Creatures you control");
+    private static final FilterPermanent filterAttacking
+            = new FilterControlledCreaturePermanent("attacking creatures you control");
+
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filterAttacking.getCreatureFilter().add(AttackingPredicate.instance);
+        filterAttacking.add(AttackingPredicate.instance);
     }
-    
+
     public IroasGodOfVictory(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{2}{R}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{R}{W}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
 
@@ -42,21 +44,23 @@ public final class IroasGodOfVictory extends CardImpl {
 
         // Indestructible
         this.addAbility(IndestructibleAbility.getInstance());
-        
+
         // As long as your devotion to red and white is less than seven, Iroas isn't a creature.
-        Effect effect = new LoseCreatureTypeSourceEffect(new DevotionCount(ColoredManaSymbol.R, ColoredManaSymbol.W), 7);
-        effect.setText("As long as your devotion to red and white is less than seven, Iroas isn't a creature");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
-        
+        this.addAbility(new SimpleStaticAbility(new LoseCreatureTypeSourceEffect(DevotionCount.RW, 7))
+                .addHint(DevotionCount.RW.getHint()));
+
         // Creatures you control have menace. (They can't be blocked except by two or more creatures.)
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new MenaceAbility(), Duration.WhileOnBattlefield, filter)));
-        
+        this.addAbility(new SimpleStaticAbility(
+                new GainAbilityAllEffect(new MenaceAbility(), Duration.WhileOnBattlefield, filter)
+        ));
+
         // Prevent all damage that would be dealt to attacking creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageToAllEffect(Duration.WhileOnBattlefield, filterAttacking)));
-        
+        this.addAbility(new SimpleStaticAbility(
+                new PreventAllDamageToAllEffect(Duration.WhileOnBattlefield, filterAttacking)
+        ));
     }
 
-    public IroasGodOfVictory(final IroasGodOfVictory card) {
+    private IroasGodOfVictory(final IroasGodOfVictory card) {
         super(card);
     }
 

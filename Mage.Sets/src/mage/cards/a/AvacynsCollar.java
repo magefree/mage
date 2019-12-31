@@ -1,6 +1,7 @@
 
 package mage.cards.a;
 
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -32,10 +33,15 @@ public final class AvacynsCollar extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+0 and has vigilance.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(1, 0));
+        ability.addEffect(new GainAbilityAttachedEffect(
+                VigilanceAbility.getInstance(), AttachmentType.EQUIPMENT).setText("and has vigilance")
+        );
+        this.addAbility(ability);
+
         // Whenever equipped creature dies, if it was a Human, create a 1/1 white Spirit creature token with flying.
         this.addAbility(new AvacynsCollarTriggeredAbility());
+
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }

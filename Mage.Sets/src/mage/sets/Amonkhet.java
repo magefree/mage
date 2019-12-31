@@ -23,7 +23,7 @@ public final class Amonkhet extends ExpansionSet {
         return instance;
     }
 
-    protected final List<CardInfo> savedSpecialLand = new ArrayList<>();
+    private final List<CardInfo> savedSpecialLand = new ArrayList<>();
 
     private Amonkhet() {
         super("Amonkhet", "AKH", ExpansionSet.buildDate(2017, 4, 28), SetType.EXPANSION);

@@ -18,6 +18,7 @@ public class PlaneView implements CommandObjectView, Serializable {
     protected List<String> rules;
 
     protected boolean isPlayable = false;
+    protected int playableAmount = 0;
 
     public PlaneView(Plane plane, Card sourceCard) {
         this.id = plane.getId();
@@ -68,6 +69,16 @@ public class PlaneView implements CommandObjectView, Serializable {
     }
 
     @Override
+    public void setPlayableAmount(int playableAmount) {
+        this.playableAmount = playableAmount;
+    }
+
+    @Override
+    public int getPlayableAmount() {
+        return playableAmount;
+    }
+
+    @Override
     public boolean isChoosable() {
         // unsupported
         return false;
@@ -85,7 +96,7 @@ public class PlaneView implements CommandObjectView, Serializable {
     }
 
     @Override
-    public void setSelected(boolean selected) {
+    public void setSelected(boolean isSelected) {
         // unsupported
     }
 }

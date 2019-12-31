@@ -1,4 +1,3 @@
-
 package mage.cards.w;
 
 import java.util.UUID;
@@ -56,7 +55,8 @@ class WildfireEternalCastEffect extends OneShotEffect {
 
     public WildfireEternalCastEffect() {
         super(Outcome.Benefit);
-        this.staticText = "you may cast an instant or sorcery card from your hand without paying its mana cost";
+        this.staticText = "you may cast an instant or sorcery card "
+                + "from your hand without paying its mana cost";
     }
 
     public WildfireEternalCastEffect(final WildfireEternalCastEffect effect) {
@@ -74,12 +74,17 @@ class WildfireEternalCastEffect extends OneShotEffect {
         if (controller != null) {
             FilterCard filter = new FilterInstantOrSorceryCard();
             int cardsToCast = controller.getHand().count(filter, source.getControllerId(), source.getSourceId(), game);
-            if (cardsToCast > 0 && controller.chooseUse(outcome, "Cast an instant or sorcery card from your hand without paying its mana cost?", source, game)) {
+            if (cardsToCast > 0
+                    && controller.chooseUse(outcome, "Cast an instant or sorcery card from your "
+                            + "hand without paying its mana cost?", source, game)) {
                 TargetCardInHand target = new TargetCardInHand(filter);
                 controller.chooseTarget(outcome, target, source, game);
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
-                    controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                    controller.cast(controller.chooseAbilityForCast(card, game, true),
+                            game, true, new MageObjectReference(source.getSourceObject(game), game));
+                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
                 }
             }
             return true;

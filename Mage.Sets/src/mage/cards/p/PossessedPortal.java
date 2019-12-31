@@ -34,7 +34,7 @@ public final class PossessedPortal extends CardImpl {
         // If a player would draw a card, that player skips that draw instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PossessedPortalReplacementEffect()));
         
-        // At the beginning of each end step, each player sacrifices a permanent unless he or she discards a card.
+        // At the beginning of each end step, each player sacrifices a permanent unless they discard a card.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new PossessedPortalEffect(), TargetController.ANY, false));
     }
 
@@ -84,7 +84,7 @@ class PossessedPortalEffect extends OneShotEffect {
     
     PossessedPortalEffect() {
         super(Outcome.Benefit);
-        this.staticText = "each player sacrifices a permanent unless he or she discards a card";
+        this.staticText = "each player sacrifices a permanent unless they discard a card";
     }
     
     PossessedPortalEffect(final PossessedPortalEffect effect) {

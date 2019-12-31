@@ -25,7 +25,7 @@ public final class PlagueOfVermin extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{6}{B}");
 
 
-        // Starting with you, each player may pay any amount of life. Repeat this process until no one pays life. Each player creates a 1/1 black Rat creature token for each 1 life he or she paid this way.
+        // Starting with you, each player may pay any amount of life. Repeat this process until no one pays life. Each player creates a 1/1 black Rat creature token for each 1 life they paid this way.
         this.getSpellAbility().addEffect(new PlagueOfVerminEffect());
 
     }
@@ -44,7 +44,7 @@ class PlagueOfVerminEffect extends OneShotEffect {
 
     public PlagueOfVerminEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "Starting with you, each player may pay any amount of life. Repeat this process until no one pays life. Each player creates a 1/1 black Rat creature token for each 1 life he or she paid this way.";
+        this.staticText = "Starting with you, each player may pay any amount of life. Repeat this process until no one pays life. Each player creates a 1/1 black Rat creature token for each 1 life they paid this way.";
     }
 
     public PlagueOfVerminEffect(final PlagueOfVerminEffect effect) {

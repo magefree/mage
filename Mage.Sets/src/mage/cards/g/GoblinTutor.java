@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -11,9 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterArtifactCard;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.common.FilterEnchantmentCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
@@ -72,19 +69,19 @@ class GoblinTutorEffect extends OneShotEffect {
             int amount = controller.rollDice(game, 6);
 
             Effect effect = null;
-            // 2 - A card named Goblin Tutor 
-            // 3 - An enchantment card 
-            // 4 - An artifact card 
-            // 5 - A creature card 
+            // 2 - A card named Goblin Tutor
+            // 3 - An enchantment card
+            // 4 - An artifact card
+            // 5 - A creature card
             // 6 - An instant or sorcery card
             if (amount == 2) {
                 effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, filter), true);
             } else if (amount == 3) {
-                effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, new FilterEnchantmentCard()), true);
+                effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, StaticFilters.FILTER_CARD_ENTCHANTMENT), true);
             } else if (amount == 4) {
-                effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, new FilterArtifactCard()), true);
+                effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, StaticFilters.FILTER_CARD_ARTIFACT), true);
             } else if (amount == 5) {
-                effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, new FilterCreatureCard()), true);
+                effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, StaticFilters.FILTER_CARD_CREATURE), true);
             } else if (amount == 6) {
                 effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, new FilterInstantOrSorceryCard()), true);
             }

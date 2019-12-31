@@ -1,4 +1,3 @@
-
 package mage.cards.l;
 
 import java.util.UUID;
@@ -36,12 +35,14 @@ public final class LivingLore extends CardImpl {
         this.toughness = new MageInt(0);
 
         // As Living Lore enters the battlefield, exile an instant or sorcery card from your graveyard.
-        this.addAbility(new AsEntersBattlefieldAbility(new LivingLoreExileEffect(), "exile an instant or sorcery card from your graveyard"));
+        this.addAbility(new AsEntersBattlefieldAbility(new LivingLoreExileEffect(),
+                "exile an instant or sorcery card from your graveyard"));
 
         // Living Lore's power and toughness are each equal to the exiled card's converted mana cost.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new LivingLoreSetPowerToughnessSourceEffect()));
 
-        // Whenever Living Lore deals combat damage, you may sacrifice it. If you do, you may cast the exiled card without paying its mana cost.
+        // Whenever Living Lore deals combat damage, you may sacrifice it. If you do, 
+        // you may cast the exiled card without paying its mana cost.
         this.addAbility(new DealsCombatDamageTriggeredAbility(new LivingLoreSacrificeEffect(), true));
     }
 
@@ -58,7 +59,7 @@ public final class LivingLore extends CardImpl {
 class LivingLoreExileEffect extends OneShotEffect {
 
     public LivingLoreExileEffect() {
-        super(Outcome.Exile);
+        super(Outcome.Benefit);
         staticText = "exile an instant or sorcery card from your graveyard";
     }
 
@@ -76,12 +77,15 @@ class LivingLoreExileEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentEntering(source.getSourceId());
         if (sourcePermanent != null && controller != null) {
-            TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(new FilterInstantOrSorceryCard("instant or sorcery card from your graveyard"));
+            TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(
+                    new FilterInstantOrSorceryCard("instant or sorcery card from your graveyard"));
             if (controller.chooseTarget(outcome, target, source, game)) {
-                UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId()) + 1);
+                UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(),
+                        game.getState().getZoneChangeCounter(source.getSourceId()) + 1);
                 Card card = controller.getGraveyard().get(target.getFirstTarget(), game);
                 if (card != null) {
-                    controller.moveCardsToExile(card, source, game, true, exileId, sourcePermanent.getIdName());
+                    controller.moveCardsToExile(card, source, game, true, exileId,
+                            sourcePermanent.getIdName());
                 }
             }
             return true;
@@ -142,8 +146,9 @@ class LivingLoreSetPowerToughnessSourceEffect extends ContinuousEffectImpl {
 class LivingLoreSacrificeEffect extends OneShotEffect {
 
     public LivingLoreSacrificeEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "you may sacrifice it. If you do, you may cast the exiled card without paying its mana cost";
+        super(Outcome.PlayForFree);
+        this.staticText = "you may sacrifice it. If you do, you may cast "
+                + "the exiled card without paying its mana cost";
     }
 
     public LivingLoreSacrificeEffect(final LivingLoreSacrificeEffect effect) {
@@ -161,9 +166,12 @@ class LivingLoreSacrificeEffect extends OneShotEffect {
         if (controller != null) {
             MageObject mageObject = source.getSourceObject(game);
             Permanent permanent = game.getPermanent(source.getSourceId());
-            if (permanent != null && mageObject != null && new MageObjectReference(permanent, game).refersTo(mageObject, game)) {
+            if (permanent != null
+                    && mageObject != null
+                    && new MageObjectReference(permanent, game).refersTo(mageObject, game)) {
                 if (permanent.sacrifice(source.getSourceId(), game)) {
-                    UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+                    UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(),
+                            source.getSourceObjectZoneChangeCounter());
                     if (exileId != null) {
                         ExileZone exileZone = game.getExile().getExileZone(exileId);
                         Card exiledCard = null;
@@ -175,7 +183,10 @@ class LivingLoreSacrificeEffect extends OneShotEffect {
                         }
                         if (exiledCard != null) {
                             if (exiledCard.getSpellAbility().canChooseTarget(game)) {
-                                controller.cast(exiledCard.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                                game.getState().setValue("PlayFromNotOwnHandZone" + exiledCard.getId(), Boolean.TRUE);
+                                controller.cast(controller.chooseAbilityForCast(exiledCard, game, true),
+                                        game, true, new MageObjectReference(source.getSourceObject(game), game));
+                                game.getState().setValue("PlayFromNotOwnHandZone" + exiledCard.getId(), null);
                             }
                         }
                     }

@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.ArrayList;
@@ -18,7 +17,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
@@ -68,7 +67,7 @@ class DeathOrGloryEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Cards cards = new CardsImpl(controller.getGraveyard().getCards(new FilterCreatureCard(), game));
+            Cards cards = new CardsImpl(controller.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game));
             if (!cards.isEmpty()) {
                 TargetCard targetCards = new TargetCard(0, cards.size(), Zone.EXILED, new FilterCard("cards to put in the first pile"));
                 List<Card> pile1 = new ArrayList<>();
@@ -88,7 +87,7 @@ class DeathOrGloryEffect extends OneShotEffect {
                 StringBuilder sb = new StringBuilder("First pile of ").append(controller.getLogName()).append(": ");
                 sb.append(pile1.stream().map(Card::getLogName).collect(Collectors.joining(", ")));
                 game.informPlayers(sb.toString());
-                
+
                 sb = new StringBuilder("Second pile of ").append(controller.getLogName()).append(": ");
                 sb.append(pile2.stream().map(Card::getLogName).collect(Collectors.joining(", ")));
                 game.informPlayers(sb.toString());
@@ -100,7 +99,7 @@ class DeathOrGloryEffect extends OneShotEffect {
                         Target targetOpponent = new TargetOpponent(true);
                         if (controller.chooseTarget(Outcome.Neutral, targetOpponent, source, game)) {
                             opponent = game.getPlayer(targetOpponent.getFirstTarget());
-                            game.informPlayers(controller.getLogName() + " chose " + opponent.getLogName() + " to choose his pile");
+                            game.informPlayers(controller.getLogName() + " chose " + opponent.getLogName() + " to choose their pile");
                         }
                     }
                     if (opponent != null) {

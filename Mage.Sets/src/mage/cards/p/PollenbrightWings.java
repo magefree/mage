@@ -66,7 +66,6 @@ class PollenbrightWingsAbility extends TriggeredAbilityImpl {
 
     public PollenbrightWingsAbility() {
         super(Zone.BATTLEFIELD, new PollenbrightWingsEffect());
-        this.addEffect(new UntapAllLandsControllerEffect());
     }
 
     public PollenbrightWingsAbility(final PollenbrightWingsAbility ability) {

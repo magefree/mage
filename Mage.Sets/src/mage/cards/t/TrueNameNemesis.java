@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -36,7 +35,7 @@ import mage.game.stack.StackObject;
 public final class TrueNameNemesis extends CardImpl {
 
     public TrueNameNemesis(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.ROGUE);
 
@@ -44,9 +43,11 @@ public final class TrueNameNemesis extends CardImpl {
         this.toughness = new MageInt(1);
 
         // As True-Name Nemesis enters the battlefield, choose a player.
-        this.addAbility(new AsEntersBattlefieldAbility(new ChoosePlayerEffect(Outcome.Protect)));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChoosePlayerEffect(Outcome.Detriment)));
+
         // True-Name Nemesis has protection from the chosen player.
         this.addAbility(new ProtectionFromPlayerAbility());
+
     }
 
     public TrueNameNemesis(final TrueNameNemesis card) {

@@ -1,8 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.Objects;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -13,13 +10,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.ManaType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.ManaPoolItem;
@@ -27,8 +18,10 @@ import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class StolenStrategy extends CardImpl {
@@ -164,12 +157,12 @@ class StolenStrategySpendAnyManaEffect extends AsThoughEffectImpl implements AsT
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        objectId = game.getCard(objectId).getMainCard().getId(); // for split cards
+        objectId = CardUtil.getMainCardId(game, objectId); // for split cards
+        FixedTarget fixedTarget = ((FixedTarget) getTargetPointer());
         return source.isControlledBy(affectedControllerId)
-                && Objects.equals(objectId, ((FixedTarget) getTargetPointer()).getTarget())
-                && ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(objectId)
-                && (((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(objectId))
-                && game.getState().getZone(objectId) == Zone.STACK;
+                && Objects.equals(objectId, fixedTarget.getTarget())
+                && game.getState().getZoneChangeCounter(objectId) <= fixedTarget.getZoneChangeCounter() + 1
+                && (game.getState().getZone(objectId) == Zone.STACK || game.getState().getZone(objectId) == Zone.EXILED);
     }
 
     @Override

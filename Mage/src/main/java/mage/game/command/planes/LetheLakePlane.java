@@ -34,7 +34,7 @@ public class LetheLakePlane extends Plane {
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.COMMAND, new PutLibraryIntoGraveTargetEffect(10).setText("that player puts the top 10 cards of their library into their graveyard"), TargetController.ANY, false, true);
         this.getAbilities().add(ability);
 
-        // Active player can roll the planar die: Whenever you roll {CHAOS}, target player puts the top ten cards of his or her library into his or her graveyard
+        // Active player can roll the planar die: Whenever you roll {CHAOS}, target player puts the top ten cards of their library into their graveyard
         Effect chaosEffect = new PutTopCardOfLibraryIntoGraveTargetEffect(10);
         Target chaosTarget = new TargetPlayer();
 

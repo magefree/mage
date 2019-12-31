@@ -31,7 +31,7 @@ public final class GlobalRuin extends CardImpl {
     public GlobalRuin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{W}");
 
-        // Each player chooses from the lands he or she controls a land of each basic land type, then sacrifices the rest.
+        // Each player chooses from the lands they control a land of each basic land type, then sacrifices the rest.
         this.getSpellAbility().addEffect(new GlobalRuinDestroyLandEffect());
     }
 
@@ -49,7 +49,7 @@ class GlobalRuinDestroyLandEffect extends OneShotEffect {
 
     public GlobalRuinDestroyLandEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Each player chooses from the lands he or she controls a land of each basic land type, then sacrifices the rest";
+        this.staticText = "Each player chooses from the lands they control a land of each basic land type, then sacrifices the rest";
     }
 
     public GlobalRuinDestroyLandEffect(final GlobalRuinDestroyLandEffect effect) {

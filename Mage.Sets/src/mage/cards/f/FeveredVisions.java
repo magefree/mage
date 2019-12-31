@@ -24,7 +24,7 @@ public final class FeveredVisions extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}{R}");
 
         // At the beginning of each player's end step, that player draws a card. If the player is your opponent and has four or more cards in hand,
-        // Fevered Visions deals 2 damage to him or her.
+        // Fevered Visions deals 2 damage to that player.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new FeveredVisionsEffect(), TargetController.ANY, false));
     }
 
@@ -42,7 +42,7 @@ class FeveredVisionsEffect extends OneShotEffect {
 
     public FeveredVisionsEffect() {
         super(Outcome.DrawCard);
-        staticText = "that player draws a card. If the player is your opponent and has four or more cards in hand, {this} deals 2 damage to him or her";
+        staticText = "that player draws a card. If the player is your opponent and has four or more cards in hand, {this} deals 2 damage to that player";
     }
 
     public FeveredVisionsEffect(final FeveredVisionsEffect effect) {

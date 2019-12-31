@@ -36,7 +36,7 @@ public final class MysticBarrier extends CardImpl {
                 new EntersBattlefieldTriggeredAbility(null, false),
                 new BeginningOfUpkeepTriggeredAbility(null, TargetController.YOU, false)));
 
-        // Each player may attack only the opponent seated nearest him or her in the last chosen direction and planeswalkers controlled by that player.
+        // Each player may attack only the nearest opponent in the last chosen direction and planeswalkers controlled by that player.
         this.addAbility(new SimpleStaticAbility(new MysticBarrierReplacementEffect()));
     }
 

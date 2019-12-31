@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -12,7 +11,7 @@ import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -29,7 +28,7 @@ public final class FleshBlood extends SplitCard {
 
         // Flesh
         // Exile target creature card from a graveyard. Put X +1/+1 counters on target creature, where X is the power of the card you exiled.
-        Target target = new TargetCardInGraveyard(new FilterCreatureCard());
+        Target target = new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE);
         getLeftHalfCard().getSpellAbility().addTarget(target);
         getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
         getLeftHalfCard().getSpellAbility().addEffect(new FleshEffect());

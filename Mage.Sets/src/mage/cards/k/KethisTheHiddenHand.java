@@ -1,6 +1,7 @@
 package mage.cards.k;
 
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -76,23 +77,42 @@ class KethisTheHiddenHandEffect extends ContinuousEffectImpl {
     }
 
     @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        if (!this.affectedObjectsSet) {
+            return;
+        }
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return;
+        }
+        player.getGraveyard()
+                .stream()
+                .map(game::getCard)
+                .filter(Card::isLegendary)
+                .forEach(card -> affectedObjectList.add(new MageObjectReference(card, game)));
+    }
+
+    @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
             return false;
         }
-        for (UUID cardId : controller.getGraveyard()) {
-            Card card = game.getCard(cardId);
-            if (card == null || !card.isLegendary()) {
-                continue;
-            }
+        controller.getGraveyard()
+                .getCards(game)
+                .stream()
+                .filter(card -> affectedObjectList
+                        .stream()
+                        .anyMatch(mor -> mor.refersTo(card, game))
+                ).forEach(card -> {
             Ability ability = new SimpleStaticAbility(
                     Zone.GRAVEYARD, new KethisTheHiddenHandGraveyardEffect()
             );
-            ability.setSourceId(cardId);
+            ability.setSourceId(card.getId());
             ability.setControllerId(card.getOwnerId());
             game.getState().addOtherAbility(card, ability);
-        }
+        });
         return true;
     }
 

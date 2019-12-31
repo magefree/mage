@@ -134,4 +134,60 @@ public class ConditionalPreventionTest extends CardTestPlayerBase {
         assertHandCount(playerA, "Lightning Bolt", 0);
     }
 
+    @Test
+    public void test_PrentableCombatDamage() {
+        // Prevent all damage that would be dealt to creatures.
+        addCard(Zone.BATTLEFIELD, playerA, "Bubble Matrix", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 1);
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Balduvian Bears", 1);
+
+        // player A must do damage
+        attack(1, playerA, "Balduvian Bears", playerB);
+
+        // player B can't do damage (bears must block and safe)
+        attack(4, playerB, "Balduvian Bears", playerA);
+        block(4, playerA, "Balduvian Bears", "Balduvian Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(4, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Balduvian Bears", 1);
+        assertPermanentCount(playerB, "Balduvian Bears", 1);
+        assertLife(playerA, 20);
+        assertLife(playerB, 20 - 2);
+    }
+
+    @Test
+    public void test_UnpreventableCombatDamage() {
+        // Combat damage that would be dealt by creatures you control can't be prevented.
+        addCard(Zone.BATTLEFIELD, playerB, "Questing Beast", 1);
+        //
+        // Prevent all damage that would be dealt to creatures.
+        addCard(Zone.BATTLEFIELD, playerA, "Bubble Matrix", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 1);
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Balduvian Bears", 1);
+
+        // player A must do damage
+        attack(1, playerA, "Balduvian Bears", playerB);
+
+        // player B must be prevented by Bubble Matrix, but can't (Questing Beast)
+        // a -> b -- can't do damage (matrix)
+        // b -> a -- can do damage (matrix -> quest)
+        attack(4, playerB, "Balduvian Bears", playerA);
+        block(4, playerA, "Balduvian Bears", "Balduvian Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(4, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Balduvian Bears", 0);
+        assertPermanentCount(playerB, "Balduvian Bears", 1);
+        assertLife(playerA, 20);
+        assertLife(playerB, 20 - 2);
+    }
 }

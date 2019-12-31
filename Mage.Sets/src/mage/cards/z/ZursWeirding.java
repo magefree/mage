@@ -33,7 +33,7 @@ public final class ZursWeirding extends CardImpl {
         // Players play with their hands revealed.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithHandRevealedEffect(TargetController.ANY)));
 
-        // If a player would draw a card, he or she reveals it instead. Then any other player may pay 2 life. If a player does, put that card into its owner's graveyard. Otherwise, that player draws a card.
+        // If a player would draw a card, they reveal it instead. Then any other player may pay 2 life. If a player does, put that card into its owner's graveyard. Otherwise, that player draws a card.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ZursWeirdingReplacementEffect()));
     }
 
@@ -51,7 +51,7 @@ class ZursWeirdingReplacementEffect extends ReplacementEffectImpl {
 
     public ZursWeirdingReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
-        this.staticText = "If a player would draw a card, he or she reveals it instead. Then any other player may pay 2 life. If a player does, put that card into its owner's graveyard. Otherwise, that player draws a card.";
+        this.staticText = "If a player would draw a card, they reveal it instead. Then any other player may pay 2 life. If a player does, put that card into its owner's graveyard. Otherwise, that player draws a card.";
     }
 
     public ZursWeirdingReplacementEffect(final ZursWeirdingReplacementEffect effect) {

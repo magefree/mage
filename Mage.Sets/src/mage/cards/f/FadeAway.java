@@ -26,7 +26,7 @@ public final class FadeAway extends CardImpl {
     public FadeAway(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");
 
-        // For each creature, its controller sacrifices a permanent unless he or she pays {1}.
+        // For each creature, its controller sacrifices a permanent unless they pay {1}.
         this.getSpellAbility().addEffect(new FadeAwayEffect());
     }
 
@@ -46,7 +46,7 @@ class FadeAwayEffect extends OneShotEffect {
 
     public FadeAwayEffect() {
         super(Outcome.Sacrifice);
-        this.staticText = "For each creature, its controller sacrifices a permanent unless he or she pays {1}";
+        this.staticText = "For each creature, its controller sacrifices a permanent unless they pay {1}";
     }
 
     public FadeAwayEffect(final FadeAwayEffect effect) {

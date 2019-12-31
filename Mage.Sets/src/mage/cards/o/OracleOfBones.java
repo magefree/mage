@@ -1,4 +1,3 @@
-
 package mage.cards.o;
 
 import java.util.UUID;
@@ -43,10 +42,12 @@ public final class OracleOfBones extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
         // Tribute 2
         this.addAbility(new TributeAbility(2));
-        // When Oracle of Bones enters the battlefield, if tribute wasn't paid, you may cast an instant or sorcery card from your hand without paying its mana cost.
+        // When Oracle of Bones enters the battlefield, if tribute wasn't paid, 
+        // you may cast an instant or sorcery card from your hand without paying its mana cost.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new OracleOfBonesCastEffect(), false);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TributeNotPaidCondition.instance,
-                "When {this} enters the battlefield, if its tribute wasn't paid, you may cast an instant or sorcery card from your hand without paying its mana cost."));
+                "When {this} enters the battlefield, if its tribute wasn't paid, "
+                + "you may cast an instant or sorcery card from your hand without paying its mana cost."));
     }
 
     public OracleOfBones(final OracleOfBones card) {
@@ -61,11 +62,13 @@ public final class OracleOfBones extends CardImpl {
 
 class OracleOfBonesCastEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterInstantOrSorceryCard("instant or sorcery card from your hand");
+    private static final FilterCard filter = new FilterInstantOrSorceryCard(
+            "instant or sorcery card from your hand");
 
     public OracleOfBonesCastEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "you may cast an instant or sorcery card from your hand without paying its mana cost";
+        this.staticText = "you may cast an instant or sorcery card "
+                + "from your hand without paying its mana cost";
     }
 
     public OracleOfBonesCastEffect(final OracleOfBonesCastEffect effect) {
@@ -83,13 +86,16 @@ class OracleOfBonesCastEffect extends OneShotEffect {
         if (controller != null) {
             Target target = new TargetCardInHand(filter);
             if (target.canChoose(source.getSourceId(), controller.getId(), game)
-                    && controller.chooseUse(outcome, "Cast an instant or sorcery card from your hand without paying its mana cost?", source, game)) {
+                    && controller.chooseUse(outcome, "Cast an instant or sorcery "
+                            + "card from your hand without paying its mana cost?", source, game)) {
                 Card cardToCast = null;
                 boolean cancel = false;
-                while (controller.canRespond() && !cancel) {
+                while (controller.canRespond() 
+                        && !cancel) {
                     if (controller.chooseTarget(outcome, target, source, game)) {
                         cardToCast = game.getCard(target.getFirstTarget());
-                        if (cardToCast != null && cardToCast.getSpellAbility().canChooseTarget(game)) {
+                        if (cardToCast != null
+                                && cardToCast.getSpellAbility().canChooseTarget(game)) {
                             cancel = true;
                         }
                     } else {
@@ -97,7 +103,10 @@ class OracleOfBonesCastEffect extends OneShotEffect {
                     }
                 }
                 if (cardToCast != null) {
-                    controller.cast(cardToCast.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                    game.getState().setValue("PlayFromNotOwnHandZone" + cardToCast.getId(), Boolean.TRUE);
+                    controller.cast(controller.chooseAbilityForCast(cardToCast, game, true),
+                            game, true, new MageObjectReference(source.getSourceObject(game), game));
+                    game.getState().setValue("PlayFromNotOwnHandZone" + cardToCast.getId(), null);
                 }
             }
             return true;

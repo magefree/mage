@@ -1,5 +1,6 @@
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -14,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
@@ -22,8 +22,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -51,7 +49,7 @@ public final class Soulherder extends CardImpl {
         Ability ability = new BeginningOfEndStepTriggeredAbility(
                 new ExileTargetForSourceEffect(), TargetController.YOU, true
         );
-        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect().concatBy("then"));
+        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, true).concatBy("then"));
         ability.addTarget(new TargetControlledCreaturePermanent(filter));
         this.addAbility(ability);
     }
@@ -69,8 +67,8 @@ public final class Soulherder extends CardImpl {
 class SoulherderTriggeredAbility extends ZoneChangeTriggeredAbility {
 
     SoulherderTriggeredAbility() {
-        super(
-                Zone.BATTLEFIELD, Zone.BATTLEFIELD, Zone.EXILED,
+        super(Zone.BATTLEFIELD,
+                Zone.BATTLEFIELD, Zone.EXILED,
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
                 "Whenever a creature is exiled from the battlefield, ", false
         );
@@ -91,7 +89,8 @@ class SoulherderTriggeredAbility extends ZoneChangeTriggeredAbility {
         if (permanent != null && permanent.isCreature()) {
             // custom check cause ZoneChangeTriggeredAbility for source object only
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            return (fromZone == null || zEvent.getFromZone() == fromZone) && (toZone == null || zEvent.getToZone() == toZone);
+            return (fromZone == null || zEvent.getFromZone() == fromZone)
+                    && (zEvent.getToZone() == toZone || zEvent.getOriginalToZone() == toZone);
         }
         return false;
     }

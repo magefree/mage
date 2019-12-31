@@ -12,13 +12,12 @@ import org.mage.test.serverside.base.CardTestCommander4Players;
 public class CommandersCastTest extends CardTestCommander4Players {
 
     // Player order: A -> D -> C -> B
-
     @Test
     public void test_CastToBattlefieldOneTime() {
         addCard(Zone.COMMAND, playerA, "Balduvian Bears", 1); // {1}{G}, 2/2, commander
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
 
-        showCommand("commanders", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        // showCommand("commanders", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears");
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -71,7 +70,7 @@ public class CommandersCastTest extends CardTestCommander4Players {
     public void test_PlayAsLandOneTime() {
         addCard(Zone.COMMAND, playerA, "Academy Ruins", 1);
 
-        showAvaileableAbilities("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        // showAvaileableAbilities("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Academy Ruins");
         //castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Academy Ruins");
 
@@ -114,8 +113,7 @@ public class CommandersCastTest extends CardTestCommander4Players {
         waitStackResolved(5, PhaseStep.POSTCOMBAT_MAIN);
         checkPermanentCount("after cast 2", 5, PhaseStep.POSTCOMBAT_MAIN, playerA, "Academy Ruins", 1);
 
-        showBattlefield("end battlefield", 5, PhaseStep.END_TURN, playerA);
-
+//        showBattlefield("end battlefield", 5, PhaseStep.END_TURN, playerA);
         setStopAt(5, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
@@ -261,7 +259,7 @@ public class CommandersCastTest extends CardTestCommander4Players {
         addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 2);
 
         // cast overload
-        showAvaileableAbilities("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        // showAvaileableAbilities("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Weapon Surge with overload");
         setChoice(playerA, "Yes"); // move to command zone
         checkAbility("after", 1, PhaseStep.BEGIN_COMBAT, playerA, "Balduvian Bears", FirstStrikeAbility.class, true);

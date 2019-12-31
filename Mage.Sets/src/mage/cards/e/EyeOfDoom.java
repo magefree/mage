@@ -1,9 +1,5 @@
-
 package mage.cards.e;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -27,21 +23,26 @@ import mage.players.PlayerList;
 import mage.target.Target;
 import mage.target.common.TargetNonlandPermanent;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class EyeOfDoom extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("permanent with a doom counter on it");
+
     static {
         filter.add(new CounterPredicate(CounterType.DOOM));
     }
+
     public EyeOfDoom(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // When Eye of Doom enters the battlefield, each player chooses a nonland permanent and puts a doom counter on it.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new EyeOfDoomEffect(),false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new EyeOfDoomEffect(), false));
 
         // {2}, {tap}, Sacrifice Eye of Doom: Destroy each permanent with a doom counter on it.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyAllEffect(filter), new GenericManaCost(2));
@@ -93,10 +94,10 @@ class EyeOfDoomEffect extends OneShotEffect {
                     game.informPlayers(player.getLogName() + " chooses " + permanent.getName());
                 }
             }
-            player = playerList.getNext(game);
+            player = playerList.getNext(game, false);
         } while (!player.getId().equals(game.getActivePlayerId()));
 
-        for (Permanent permanent: permanents) {
+        for (Permanent permanent : permanents) {
             permanent.addCounters(CounterType.DOOM.createInstance(), source, game);
         }
 

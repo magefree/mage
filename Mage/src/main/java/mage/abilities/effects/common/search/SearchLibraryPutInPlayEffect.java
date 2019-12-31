@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.search;
 
 import java.util.List;
@@ -87,7 +86,9 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect {
             }
             sb.append(target.getTargetName()).append(" and put them onto the battlefield");
         } else {
-            sb.append("a ").append(target.getTargetName()).append(" and put it onto the battlefield");
+            sb.append(target.getTargetName().startsWith("a ") || target.getTargetName().startsWith("an ") ? "" : "a ")
+                    .append(target.getTargetName())
+                    .append(" and put it onto the battlefield");
         }
         if (tapped) {
             sb.append(" tapped");

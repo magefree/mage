@@ -14,7 +14,7 @@ import mage.game.Game;
 public interface AlternativeSourceCosts {
 
     /**
-     * Ask the player if he wants to use the alternative costs
+     * Ask the player if they want to use the alternative costs
      * 
      * @param ability ability the alternative cost is activated for
      * @param game

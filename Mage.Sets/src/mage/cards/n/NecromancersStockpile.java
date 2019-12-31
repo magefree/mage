@@ -1,4 +1,3 @@
-
 package mage.cards.n;
 
 import java.util.UUID;
@@ -17,7 +16,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
@@ -29,12 +28,12 @@ import mage.target.common.TargetCardInHand;
 public final class NecromancersStockpile extends CardImpl {
 
     public NecromancersStockpile(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
 
         // {1}{B}, Discard a creature card: Draw a card.
         // If the discarded card was a Zombie card, create a tapped 2/2 black Zombie creature token.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{1}{B}"));
-        ability.addCost(new NecromancersStockpileDiscardTargetCost(new TargetCardInHand(new FilterCreatureCard())));
+        ability.addCost(new NecromancersStockpileDiscardTargetCost(new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE)));
         ability.addEffect(new NecromancersStockpilePutTokenEffect());
         this.addAbility(ability);
     }
@@ -67,7 +66,7 @@ class NecromancersStockpileDiscardTargetCost extends CostImpl {
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         if (targets.choose(Outcome.Discard, controllerId, sourceId, game)) {
             Player player = game.getPlayer(controllerId);
-            if(player != null) {
+            if (player != null) {
                 for (UUID targetId : targets.get(0).getTargets()) {
                     Card card = player.getHand().get(targetId, game);
                     if (card == null) {

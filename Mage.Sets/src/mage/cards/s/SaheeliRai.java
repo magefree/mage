@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
@@ -9,20 +7,16 @@ import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactCard;
 import mage.game.Game;
@@ -31,14 +25,15 @@ import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class SaheeliRai extends CardImpl {
 
     public SaheeliRai(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{U}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{R}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.SAHEELI);
 
@@ -121,7 +116,7 @@ class SaheeliRaiTarget extends TargetCardInLibrary {
     }
 
     @Override
-    public boolean canTarget(UUID id, Cards cards, Game game) {
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Cards cards, Game game) {
         Card card = cards.get(id, game);
         if (card != null) {
             for (UUID targetId : this.getTargets()) {
@@ -130,7 +125,7 @@ class SaheeliRaiTarget extends TargetCardInLibrary {
                     return false;
                 }
             }
-            return filter.match(card, game);
+            return filter.match(card, playerId, game);
         }
         return false;
     }

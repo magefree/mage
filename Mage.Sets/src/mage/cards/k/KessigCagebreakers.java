@@ -1,4 +1,3 @@
-
 package mage.cards.k;
 
 import java.util.UUID;
@@ -11,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.WolfToken;
 import mage.players.Player;
@@ -23,7 +22,7 @@ import mage.players.Player;
 public final class KessigCagebreakers extends CardImpl {
 
     public KessigCagebreakers(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ROGUE);
 
@@ -65,7 +64,7 @@ class KessigCagebreakersEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             WolfToken token = new WolfToken();
-            int count = player.getGraveyard().count(new FilterCreatureCard(), game);
+            int count = player.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, game);
             for (int i = 0; i < count; i++) {
                 token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId(), true, true);
             }

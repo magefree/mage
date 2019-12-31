@@ -17,7 +17,7 @@ public final class CentaurToken extends TokenImpl {
     static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("RTR", "MM3", "RNA"));
+        tokenImageSets.addAll(Arrays.asList("RTR", "MM3", "RNA", "C19"));
     }
 
     public CentaurToken() {

@@ -1,24 +1,17 @@
 
 package mage.cards.j;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
-import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -26,8 +19,11 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.JaceCunningCastawayIllusionToken;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class JaceCunningCastaway extends CardImpl {
@@ -50,7 +46,7 @@ public final class JaceCunningCastaway extends CardImpl {
         this.addAbility(new LoyaltyAbility(new JaceCunningCastawayCopyEffect(), -5));
     }
 
-    public JaceCunningCastaway(final JaceCunningCastaway card) {
+    private JaceCunningCastaway(final JaceCunningCastaway card) {
         super(card);
     }
 
@@ -62,12 +58,12 @@ public final class JaceCunningCastaway extends CardImpl {
 
 class JaceCunningCastawayEffect1 extends OneShotEffect {
 
-    public JaceCunningCastawayEffect1() {
+    JaceCunningCastawayEffect1() {
         super(Outcome.DrawCard);
         this.staticText = "Whenever one or more creatures you control deal combat damage to a player this turn, draw a card, then discard a card";
     }
 
-    public JaceCunningCastawayEffect1(final JaceCunningCastawayEffect1 effect) {
+    private JaceCunningCastawayEffect1(final JaceCunningCastawayEffect1 effect) {
         super(effect);
     }
 
@@ -86,13 +82,13 @@ class JaceCunningCastawayEffect1 extends OneShotEffect {
 
 class JaceCunningCastawayDamageTriggeredAbility extends DelayedTriggeredAbility {
 
-    List<UUID> damagedPlayerIds = new ArrayList<>();
+    private final List<UUID> damagedPlayerIds = new ArrayList<>();
 
-    public JaceCunningCastawayDamageTriggeredAbility() {
+    JaceCunningCastawayDamageTriggeredAbility() {
         super(new DrawDiscardControllerEffect(1, 1), Duration.EndOfTurn, false);
     }
 
-    public JaceCunningCastawayDamageTriggeredAbility(final JaceCunningCastawayDamageTriggeredAbility ability) {
+    private JaceCunningCastawayDamageTriggeredAbility(final JaceCunningCastawayDamageTriggeredAbility ability) {
         super(ability);
     }
 
@@ -104,7 +100,7 @@ class JaceCunningCastawayDamageTriggeredAbility extends DelayedTriggeredAbility 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DAMAGED_PLAYER
-                || event.getType() == GameEvent.EventType.END_COMBAT_STEP_POST;
+                || event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST;
     }
 
     @Override
@@ -119,7 +115,7 @@ class JaceCunningCastawayDamageTriggeredAbility extends DelayedTriggeredAbility 
                 }
             }
         }
-        if (event.getType() == GameEvent.EventType.END_COMBAT_STEP_POST) {
+        if (event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST) {
             damagedPlayerIds.clear();
         }
         return false;
@@ -138,7 +134,7 @@ class JaceCunningCastawayCopyEffect extends OneShotEffect {
         this.staticText = "Create two tokens that are copies of {this}, except they're not legendary";
     }
 
-    JaceCunningCastawayCopyEffect(final JaceCunningCastawayCopyEffect effect) {
+    private JaceCunningCastawayCopyEffect(final JaceCunningCastawayCopyEffect effect) {
         super(effect);
     }
 
@@ -150,12 +146,12 @@ class JaceCunningCastawayCopyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (permanent != null) {
-            CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, false, 2);
-            effect.setTargetPointer(new FixedTarget(source.getSourceId(), game));
-            effect.setIsntLegendary(true);
-            return effect.apply(game, source);
+        if (permanent == null) {
+            return false;
         }
-        return false;
+        CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, false, 2);
+        effect.setTargetPointer(new FixedTarget(source.getSourceId(), game));
+        effect.setIsntLegendary(true);
+        return effect.apply(game, source);
     }
 }

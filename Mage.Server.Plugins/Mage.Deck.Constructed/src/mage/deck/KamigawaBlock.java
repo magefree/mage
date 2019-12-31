@@ -12,9 +12,9 @@ public class KamigawaBlock extends Constructed {
 
     public KamigawaBlock() {
         super("Constructed - Kamigawa Block");
-        setCodes.add("CHK");
-        setCodes.add("BOK");
-        setCodes.add("SOK");
+        setCodes.add(mage.sets.ChampionsOfKamigawa.getInstance().getCode());
+        setCodes.add(mage.sets.BetrayersOfKamigawa.getInstance().getCode());
+        setCodes.add(mage.sets.SaviorsOfKamigawa.getInstance().getCode());
     }
 
 }

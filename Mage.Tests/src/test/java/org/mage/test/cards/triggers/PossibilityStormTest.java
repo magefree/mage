@@ -30,8 +30,8 @@ public class PossibilityStormTest extends CardTestPlayerBase {
     public void TestWithZoeticCavern() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
         // Whenever a player casts a spell from their hand, that player exiles it, then exiles cards from
-        // the top of their library until he or she exiles a card that shares a card type with it. That
-        // player may cast that card without paying its mana cost. Then he or she puts all cards exiled with
+        // the top of their library until they exile a card that shares a card type with it. That
+        // player may cast that card without paying its mana cost. Then they put all cards exiled with
         // Possibility Storm on the bottom of their library in a random order.
         addCard(Zone.BATTLEFIELD, playerA, "Possibility Storm", 1);
 
@@ -74,8 +74,8 @@ public class PossibilityStormTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         // Whenever a player casts a spell from their hand, that player exiles it, then exiles cards from
-        // the top of their library until he or she exiles a card that shares a card type with it. That
-        // player may cast that card without paying its mana cost. Then he or she puts all cards exiled with
+        // the top of their library until they exile a card that shares a card type with it. That
+        // player may cast that card without paying its mana cost. Then they put all cards exiled with
         // Possibility Storm on the bottom of their library in a random order.
         addCard(Zone.BATTLEFIELD, playerA, "Possibility Storm", 1);
 

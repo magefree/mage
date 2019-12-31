@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -7,7 +6,7 @@ import mage.abilities.keyword.ConvokeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -22,7 +21,7 @@ public final class ChordOfCalling extends CardImpl {
         this.addAbility(new ConvokeAbility());
 
         // Search your library for a creature card with converted mana cost X or less and put it onto the battlefield. Then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryWithLessCMCPutInPlayEffect(new FilterCreatureCard()));
+        this.getSpellAbility().addEffect(new SearchLibraryWithLessCMCPutInPlayEffect(StaticFilters.FILTER_CARD_CREATURE));
     }
 
     public ChordOfCalling(final ChordOfCalling card) {

@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import java.util.UUID;
@@ -17,7 +16,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -27,7 +26,7 @@ import mage.target.common.TargetCardInHand;
 public final class ErebossEmissary extends CardImpl {
 
     public ErebossEmissary(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{B}");
         this.subtype.add(SubType.SNAKE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -41,7 +40,7 @@ public final class ErebossEmissary extends CardImpl {
                 new BoostSourceEffect(2, 2, Duration.EndOfTurn),
                 new SourceHasSubtypeCondition(SubType.AURA),
                 "{this} gets +2/+2 until end of turn. If Erebos's Emissary is an Aura, enchanted creature gets +2/+2 until end of turn instead"),
-                new DiscardTargetCost(new TargetCardInHand(new FilterCreatureCard()))));
+                new DiscardTargetCost(new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE))));
 
         // Enchanted creature gets +3/+3
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield)));

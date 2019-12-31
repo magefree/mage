@@ -1,4 +1,3 @@
-
 package mage.cards.y;
 
 import java.util.UUID;
@@ -13,7 +12,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -33,7 +32,7 @@ public final class YoreTillerNephilim extends CardImpl {
 
         // Whenever Yore-Tiller Nephilim attacks, return target creature card from your graveyard to the battlefield tapped and attacking.
         Ability ability = new AttacksTriggeredAbility(new YoreTillerNephilimEffect(), false);
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard()));
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE));
         this.addAbility(ability);
     }
 

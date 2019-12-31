@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.List;
@@ -38,7 +37,9 @@ public final class RashmiEternitiesCrafter extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // Whenever you cast your first spell each turn, reveal the top card of your library. If it's a nonland card with converted mana cost less than that spell's, you may cast it without paying its mana cost. If you don't cast the revealed card, put it into your hand.
+        // Whenever you cast your first spell each turn, reveal the top card of your library. 
+        // If it's a nonland card with converted mana cost less than that spell's, you may cast it 
+        // without paying its mana cost. If you don't cast the revealed card, put it into your hand.
         this.addAbility(new RashmiEternitiesCrafterTriggeredAbility(), new SpellsCastWatcher());
     }
 
@@ -120,9 +121,14 @@ class RashmiEternitiesCrafterEffect extends OneShotEffect {
                 if (cmcObject == null
                         || card.isLand()
                         || card.getConvertedManaCost() >= (int) cmcObject
-                        || !controller.chooseUse(Outcome.PlayForFree, "Cast " + card.getName() + " without paying its mana cost?", source, game)
-                        || !controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game))) {
-                    controller.moveCards(card, Zone.HAND, source, game);
+                        || !controller.chooseUse(Outcome.PlayForFree, "Cast " + card.getName() + " without paying its mana cost?", source, game)) {
+                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                    Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
+                            game, true, new MageObjectReference(source.getSourceObject(game), game));
+                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+                    if (!cardWasCast) {
+                        controller.moveCards(card, Zone.HAND, source, game);
+                    }
                 }
             }
             return true;

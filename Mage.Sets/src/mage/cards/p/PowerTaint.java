@@ -38,9 +38,9 @@ public final class PowerTaint extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // At the beginning of the upkeep of enchanted enchantment's controller, that player loses 2 life unless he or she pays {2}.
+        // At the beginning of the upkeep of enchanted enchantment's controller, that player loses 2 life unless they pay {2}.
         Effect effect = new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new LoseLifeTargetEffect(2), 
-                new ManaCostsImpl("{2}"), "that player loses 2 life unless he or she pays {2}");
+                new ManaCostsImpl("{2}"), "that player loses 2 life unless they pay {2}");
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, 
                 TargetController.CONTROLLER_ATTACHED_TO, false, true, 
                 "At the beginning of the upkeep of enchanted enchantment's controller, "));

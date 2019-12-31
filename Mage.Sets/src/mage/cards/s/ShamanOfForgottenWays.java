@@ -44,7 +44,7 @@ public final class ShamanOfForgottenWays extends CardImpl {
         // {T}:Add two mana in any combination of colors. Spend this mana only to cast creature spells.
         this.addAbility(new ConditionalAnyColorManaAbility(2, new ShamanOfForgottenWaysManaBuilder()));
         
-        // <i>Formidable</i> &mdash; {9}{G}{G},{T}:Each player's life total becomes the number of creatures he or she controls. Activate the ability only if creatures you control have total power 8 or greater.
+        // <i>Formidable</i> &mdash; {9}{G}{G},{T}:Each player's life total becomes the number of creatures they control. Activate the ability only if creatures you control have total power 8 or greater.
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD, 
                 new ShamanOfForgottenWaysEffect(), 
@@ -100,7 +100,7 @@ class ShamanOfForgottenWaysEffect extends OneShotEffect {
     
     public ShamanOfForgottenWaysEffect() {
         super(Outcome.Benefit);
-        this.staticText = "each player's life total becomes the number of creatures he or she controls";
+        this.staticText = "each player's life total becomes the number of creatures they control";
     }
     
     public ShamanOfForgottenWaysEffect(final ShamanOfForgottenWaysEffect effect) {

@@ -21,7 +21,6 @@ import org.mage.test.serverside.base.CardTestPlayerBaseAI;
 public class TargetPriorityTest extends CardTestPlayerBaseAI {
 
     // TODO: enable _target_ tests after computerPlayer.chooseTarget will be reworks like chooseTargetAmount
-
     @Test
     @Ignore
     public void test_target_PriorityKillByBigPT() {
@@ -116,7 +115,6 @@ public class TargetPriorityTest extends CardTestPlayerBaseAI {
         checkPermanentCounters("counters", 1, PhaseStep.BEGIN_COMBAT, playerB, "Balduvian Bears", CounterType.P1P1, 2);
 
         // AI cast avatar on turn 3 and target 1 creature to kil by 3 damage
-
         //setStrictChooseMode(true); // AI
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -144,8 +142,7 @@ public class TargetPriorityTest extends CardTestPlayerBaseAI {
         addCard(Zone.BATTLEFIELD, playerB, "Battering Sliver", 1 * cardsMultiplier); // 4/4 with ability
 
         //castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt");
-
-        showHand("after", 1, PhaseStep.BEGIN_COMBAT, playerA);
+//        showHand("after", 1, PhaseStep.BEGIN_COMBAT, playerA);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
         assertAllCommandsUsed();
@@ -159,9 +156,7 @@ public class TargetPriorityTest extends CardTestPlayerBaseAI {
          */
     }
 
-
     // TARGET AMOUNT
-
     @Test
     public void test_targetAmount_PriorityKillByBigPT() {
         addCard(Zone.HAND, playerA, "Flames of the Firebrand"); // damage 3
@@ -279,7 +274,7 @@ public class TargetPriorityTest extends CardTestPlayerBaseAI {
 
         // must damage x3 Balduvian Bears by -1 to keep alive
         checkDamage("pt after", 1, PhaseStep.BEGIN_COMBAT, playerA, "Balduvian Bears", 1);
-        showBattlefield("after", 1, PhaseStep.BEGIN_COMBAT, playerA);
+        // showBattlefield("after", 1, PhaseStep.BEGIN_COMBAT, playerA);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
         assertAllCommandsUsed();

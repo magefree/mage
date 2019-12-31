@@ -43,21 +43,21 @@ public final class NaturesWrath extends CardImpl {
         // At the beginning of your upkeep, sacrifice Nature's Wrath unless you pay {G}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{G}")), TargetController.YOU, false));
 
-        // Whenever a player puts an Island or blue permanent onto the battlefield, he or she sacrifices an Island or blue permanent.
+        // Whenever a player puts an Island or blue permanent onto the battlefield, they sacrifice an Island or blue permanent.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new SacrificeEffect(filterBlue, 1, ""),
                 filterBlue,
                 false, SetTargetPointer.PLAYER, 
-                "Whenever a player puts an Island or blue permanent onto the battlefield, he or she sacrifices an Island or blue permanent."));
+                "Whenever a player puts an Island or blue permanent onto the battlefield, they sacrifice an Island or blue permanent."));
 
-        // Whenever a player puts a Swamp or black permanent onto the battlefield, he or she sacrifices a Swamp or black permanent.
+        // Whenever a player puts a Swamp or black permanent onto the battlefield, they sacrifice a Swamp or black permanent.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new SacrificeEffect(filterBlack, 1, ""),
                 filterBlack,
                 false, SetTargetPointer.PLAYER, 
-                "Whenever a player puts a Swamp or black permanent onto the battlefield, he or she sacrifices a Swamp or black permanent."));
+                "Whenever a player puts a Swamp or black permanent onto the battlefield, they sacrifice a Swamp or black permanent."));
     }
 
     public NaturesWrath(final NaturesWrath card) {

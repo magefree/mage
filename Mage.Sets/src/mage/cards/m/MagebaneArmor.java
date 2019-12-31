@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -13,25 +11,22 @@ import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.PreventDamageEvent;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class MagebaneArmor extends CardImpl {
 
     public MagebaneArmor(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +2/+4 and loses flying.
@@ -99,7 +94,7 @@ class MagebaneArmorPreventionEffect extends PreventionEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent equipment = game.getPermanent(source.getSourceId());
         if (equipment != null && equipment.getAttachedTo() != null) {
-            GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, equipment.getAttachedTo(), source.getSourceId(), source.getControllerId(), event.getAmount(), false);
+            GameEvent preventEvent = new PreventDamageEvent(equipment.getAttachedTo(), source.getSourceId(), source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
             if (!game.replaceEvent(preventEvent)) {
                 int damage = event.getAmount();
                 event.setAmount(0);
@@ -114,10 +109,8 @@ class MagebaneArmorPreventionEffect extends PreventionEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game) && !((DamageEvent) event).isCombatDamage()) {
             Permanent equipment = game.getPermanent(source.getSourceId());
-            if (equipment != null && equipment.getAttachedTo() != null
-                    && event.getTargetId().equals(equipment.getAttachedTo())) {
-                return true;
-            }
+            return equipment != null && equipment.getAttachedTo() != null
+                    && event.getTargetId().equals(equipment.getAttachedTo());
         }
         return false;
     }

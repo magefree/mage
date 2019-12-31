@@ -19,6 +19,7 @@ import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.designations.Designation;
 import mage.designations.DesignationType;
+import mage.filter.FilterMana;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.Graveyard;
@@ -403,11 +404,6 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public void otherPlayerLeftGame(Game game) {
-
-    }
-
-    @Override
     public ManaPool getManaPool() {
         return null;
     }
@@ -659,11 +655,6 @@ public class PlayerStub implements Player {
     @Override
     public int rollDice(Game game, ArrayList<UUID> appliedEffects, int numSides) {
         return 1;
-    }
-
-    @Override
-    public void discard(int amount, Ability source, Game game) {
-
     }
 
     @Override
@@ -1047,7 +1038,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public Set<UUID> getPlayableObjects(Game game, Zone zone) {
+    public Map<UUID, Integer> getPlayableObjects(Game game, Zone zone) {
         return null;
     }
 
@@ -1207,7 +1198,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public UUID getCastSourceIdWithAlternateMana() {
+    public Set<UUID> getCastSourceIdWithAlternateMana() {
         return null;
     }
 
@@ -1217,13 +1208,18 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public ManaCosts getCastSourceIdManaCosts() {
+    public Map<UUID, Costs<Cost>> getCastSourceIdCosts() {
         return null;
     }
 
     @Override
-    public Costs<Cost> getCastSourceIdCosts() {
+    public Map<UUID, ManaCosts<ManaCost>> getCastSourceIdManaCosts() {
         return null;
+    }
+
+    @Override
+    public void clearCastSourceIdManaCosts() {
+
     }
 
     @Override
@@ -1369,6 +1365,26 @@ public class PlayerStub implements Player {
         int hash = 5;
         hash = 41 * hash + Objects.hashCode(this.id);
         return hash;
+    }
+
+    @Override
+    public void addPhyrexianToColors(FilterMana colors) {
+
+    }
+
+    @Override
+    public void removePhyrexianFromColors(FilterMana colors) {
+
+    }
+
+    @Override
+    public FilterMana getPhyrexianColors() {
+        return (new FilterMana());
+    }
+
+    @Override
+    public SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana) {
+        return card.getSpellAbility();
     }
 
 }

@@ -28,7 +28,7 @@ public final class WindbornMuse extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Creatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you.
+        // Creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouUnlessPayManaAllEffect(new ManaCostsImpl("{2}"))));
 
     }

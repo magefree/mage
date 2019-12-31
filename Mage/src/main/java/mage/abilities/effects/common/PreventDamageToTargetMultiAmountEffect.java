@@ -1,8 +1,5 @@
 package mage.abilities.effects.common;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -10,14 +7,19 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.constants.Duration;
 import mage.game.Game;
+import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.PreventDamageEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetAmount;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class PreventDamageToTargetMultiAmountEffect extends PreventionEffectImpl {
@@ -77,7 +79,7 @@ public class PreventDamageToTargetMultiAmountEffect extends PreventionEffectImpl
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         int targetAmount = targetAmountMap.get(event.getTargetId());
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, event.getTargetId(), source.getSourceId(), source.getControllerId(), event.getAmount(), false);
+        GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), source.getSourceId(), source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
         if (!game.replaceEvent(preventEvent)) {
             if (event.getAmount() >= targetAmount) {
                 int damage = targetAmount;

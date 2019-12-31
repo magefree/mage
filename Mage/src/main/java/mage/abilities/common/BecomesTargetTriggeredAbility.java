@@ -1,35 +1,42 @@
-
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterStackObject;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.StackObject;
+import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author North
  */
 public class BecomesTargetTriggeredAbility extends TriggeredAbilityImpl {
 
     private final FilterStackObject filter;
+    private final SetTargetPointer setTargetPointer;
 
     public BecomesTargetTriggeredAbility(Effect effect) {
         this(effect, StaticFilters.FILTER_SPELL_OR_ABILITY);
     }
 
     public BecomesTargetTriggeredAbility(Effect effect, FilterStackObject filter) {
+        this(effect, filter, SetTargetPointer.NONE);
+    }
+
+    public BecomesTargetTriggeredAbility(Effect effect, FilterStackObject filter, SetTargetPointer setTargetPointer) {
         super(Zone.BATTLEFIELD, effect);
         this.filter = filter.copy();
+        this.setTargetPointer = setTargetPointer;
     }
 
     public BecomesTargetTriggeredAbility(final BecomesTargetTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter.copy();
+        this.setTargetPointer = ability.setTargetPointer;
     }
 
     @Override
@@ -45,7 +52,25 @@ public class BecomesTargetTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
-        return event.getTargetId().equals(getSourceId()) && filter.match(sourceObject, getSourceId(), getControllerId(), game);
+        if (!event.getTargetId().equals(getSourceId())
+                || !filter.match(sourceObject, getSourceId(), getControllerId(), game)) {
+            return false;
+        }
+        switch (setTargetPointer) {
+            case PLAYER:
+                this.getEffects().stream()
+                        .forEach(effect -> effect.setTargetPointer(
+                                new FixedTarget(sourceObject.getControllerId(), game)
+                        ));
+                break;
+            case SPELL:
+                this.getEffects().stream()
+                        .forEach(effect -> effect.setTargetPointer(
+                                new FixedTarget(sourceObject.getId(), game)
+                        ));
+                break;
+        }
+        return true;
     }
 
     @Override
