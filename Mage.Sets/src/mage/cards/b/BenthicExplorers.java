@@ -124,19 +124,7 @@ class BenthicExplorersManaEffect extends ManaEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            //List<Mana> mana = getNetMana(game, source);
-            Mana manaToProduce = produceMana(true, game, source);
-            controller.getManaPool().addMana(manaToProduce, game, source);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public Mana produceMana(boolean netMana, Game game, Ability source) {
+    public Mana produceMana(Game game, Ability source) {
         Mana mana = new Mana();
         Mana types = getManaTypes(game, source);
         Choice choice = new ChoiceColor(true);

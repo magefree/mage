@@ -61,23 +61,7 @@ public class AddConditionalManaOfAnyColorEffect extends ManaEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Mana mana = getMana(game, source);
-            if (mana != null) {
-                checkToFirePossibleEvents(mana, game, source);
-                controller.getManaPool().addMana(mana, game, source);
-            } else {
-                logger.error("There was no mana created: " + source.getSourceObject(game).getName() + " - Ability: " + source.getRule());
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public Mana produceMana(boolean netMana, Game game, Ability source) {
+    public Mana produceMana(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
             return null;

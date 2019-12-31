@@ -123,19 +123,6 @@ class ChromeMoxManaEffect extends ManaEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Mana mana = getMana(game, source);
-            checkToFirePossibleEvents(mana, game, source);
-            controller.getManaPool().addMana(mana, game, source);
-            return true;
-
-        }
-        return false;
-    }
-
-    @Override
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netMana = new ArrayList<>();
         Permanent permanent = game.getPermanent(source.getSourceId());
@@ -167,7 +154,7 @@ class ChromeMoxManaEffect extends ManaEffect {
     }
 
     @Override
-    public Mana produceMana(boolean netMana, Game game, Ability source) {
+    public Mana produceMana(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         Player player = game.getPlayer(source.getControllerId());
         if (permanent != null && player != null) {

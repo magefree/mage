@@ -60,18 +60,12 @@ class VictoryChimesManaEffect extends ManaEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer((UUID) game.getState().getValue(source.getSourceId() + "_player"));
-        if (player != null) {
-            checkToFirePossibleEvents(getMana(game, source), game, source);
-            player.getManaPool().addMana(getMana(game, source), game, source);
-            return true;
-        }
-        return false;
+    public Player getPlayer(Game game, Ability source) {
+        return game.getPlayer((UUID) game.getState().getValue(source.getSourceId() + "_player"));
     }
 
     @Override
-    public Mana produceMana(boolean netMana, Game game, Ability source) {
+    public Mana produceMana(Game game, Ability source) {
         return Mana.ColorlessMana(1);
     }
 

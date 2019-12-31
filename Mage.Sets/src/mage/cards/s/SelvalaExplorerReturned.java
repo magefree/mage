@@ -1,6 +1,7 @@
 
 package mage.cards.s;
 
+import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
@@ -72,25 +73,18 @@ class SelvalaExplorerReturnedEffect extends ManaEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Mana mana = getMana(game, source);
-            if (mana.getGreen() > 0) {
-                controller.getManaPool().addMana(mana, game, source);
-                controller.gainLife(mana.getGreen(), game, source);
-            }
-            return true;
+    public Mana produceMana(Game game, Ability source) {
+        int parleyCount = ParleyCount.getInstance().calculate(game, source, this);
+        Player player = getPlayer(game, source);
+        if (player != null) {
+            player.gainLife(parleyCount, game, source);
         }
-        return false;
+        return Mana.GreenMana(parleyCount);
     }
 
     @Override
-    public Mana produceMana(boolean netMana, Game game, Ability source) {
-        if (netMana) {
-
-        }
-        return Mana.GreenMana(ParleyCount.getInstance().calculate(game, source, this));
+    public List<Mana> getNetMana(Game game, Ability source) {
+        return null;
     }
 
 }

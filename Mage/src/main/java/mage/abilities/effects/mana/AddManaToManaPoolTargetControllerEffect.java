@@ -11,6 +11,8 @@ import mage.abilities.effects.common.ManaEffect;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.List;
+
 /**
  *
  * @author LevelX2
@@ -53,20 +55,22 @@ public class AddManaToManaPoolTargetControllerEffect extends ManaEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (player != null) {
-            player.getManaPool().addMana(getMana(game, source), game, source, emptyOnlyOnTurnsEnd);
-            return true;
-        }
-        return false;
+    public Player getPlayer(Game game, Ability source) {
+        return game.getPlayer(getTargetPointer().getFirst(game, source));
     }
 
     @Override
-    public Mana produceMana(boolean netMana, Game game, Ability source) {
-        if (netMana) {
-            return null;
-        }
+    public Mana produceMana(Game game, Ability source) {
         return mana.copy();
+    }
+
+    @Override
+    protected void addManaToPool(Player player, Mana manaToAdd, Game game, Ability source) {
+        player.getManaPool().addMana(manaToAdd, game, source, emptyOnlyOnTurnsEnd);
+    }
+
+    @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
+        return null;
     }
 }

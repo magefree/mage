@@ -5,6 +5,7 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.ManaEffect;
 import mage.game.Game;
+import mage.players.Player;
 
 public class BasicManaEffect extends ManaEffect {
 
@@ -33,18 +34,12 @@ public class BasicManaEffect extends ManaEffect {
         return new BasicManaEffect(this);
     }
 
-    @Override
-    public boolean apply(Game game, Ability source) {
-        game.getPlayer(source.getControllerId()).getManaPool().addMana(getMana(game, source), game, source);
-        return true;
-    }
-
     public Mana getManaTemplate() {
         return manaTemplate;
     }
 
     @Override
-    public Mana produceMana(boolean netMana, Game game, Ability source) {
+    public Mana produceMana(Game game, Ability source) {
         return manaTemplate.copy();
     }
 

@@ -20,7 +20,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 import java.util.UUID;
 
@@ -106,19 +105,7 @@ class FaeburrowElderManaEffect extends ManaEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        Mana mana = getMana(game, source);
-        checkToFirePossibleEvents(mana, game, source);
-        controller.getManaPool().addMana(mana, game, source);
-        return true;
-    }
-
-    @Override
-    public Mana produceMana(boolean netMana, Game game, Ability source) {
+    public Mana produceMana(Game game, Ability source) {
         Mana mana = new Mana();
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
             if (mana.getBlack() == 0 && permanent.getColor(game).isBlack()) {

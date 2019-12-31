@@ -1,6 +1,8 @@
 
 package mage.cards.k;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -78,25 +80,7 @@ public final class KyrenToy extends CardImpl {
         }
 
         @Override
-        public boolean apply(Game game, Ability source) {
-            Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null) {
-                checkToFirePossibleEvents(getMana(game, source), game, source);
-                controller.getManaPool().addMana(getMana(game, source), game, source);
-                return true;
-            }
-            return false;
-        }
-
-        @Override
-        public Mana produceMana(boolean netMana, Game game, Ability source) {
-            if (netMana) {
-                Permanent sourceObject = game.getPermanent(source.getSourceId());
-                if (sourceObject != null) {
-                    return new Mana(0, 0, 0, 0, 0, 0, 0, sourceObject.getCounters(game).getCount(CounterType.CHARGE) + 1);
-                }
-                return null;
-            }
+        public Mana produceMana(Game game, Ability source) {
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
                 int numberOfMana = 0;
@@ -106,6 +90,17 @@ public final class KyrenToy extends CardImpl {
                     }
                 }
                 return new Mana(0, 0, 0, 0, 0, 0, 0, numberOfMana + 1);
+            }
+            return null;
+        }
+
+        @Override
+        public List<Mana> getNetMana(Game game, Ability source) {
+            Permanent sourceObject = game.getPermanent(source.getSourceId());
+            if (sourceObject != null) {
+                List<Mana> netMana = new ArrayList<>();
+                netMana.add(new Mana(0, 0, 0, 0, 0, 0, 0, sourceObject.getCounters(game).getCount(CounterType.CHARGE) + 1));
+                return netMana;
             }
             return null;
         }

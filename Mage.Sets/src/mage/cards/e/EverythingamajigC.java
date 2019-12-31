@@ -12,6 +12,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
@@ -95,16 +96,15 @@ class ManaScrewAbility extends ActivatedManaAbilityImpl {
     }
 }
 
-class ManaScrewEffect extends BasicManaEffect {
+class ManaScrewEffect extends ManaEffect {
 
     public ManaScrewEffect() {
-        super(Mana.ColorlessMana(2));
+        super();
         this.staticText = "Flip a coin. If you win the flip, add {C}{C}";
     }
 
     public ManaScrewEffect(final ManaScrewEffect effect) {
         super(effect);
-        this.manaTemplate = effect.manaTemplate.copy();
     }
 
     @Override
@@ -113,12 +113,13 @@ class ManaScrewEffect extends BasicManaEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+    public Mana produceMana(Game game, Ability source) {
+        Player player = getPlayer(game, source);
         if (player != null && player.flipCoin(source, game, true)) {
-            player.getManaPool().addMana(getMana(game, source), game, source);
+            return Mana.ColorlessMana(2);
+        } else {
+            return new Mana();
         }
-        return true;
     }
 }
 

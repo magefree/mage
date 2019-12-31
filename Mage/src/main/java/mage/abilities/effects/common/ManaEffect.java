@@ -1,8 +1,5 @@
-
 package mage.abilities.effects.common;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
@@ -13,9 +10,12 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
+import mage.players.Player;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class ManaEffect extends OneShotEffect {
@@ -32,19 +32,26 @@ public abstract class ManaEffect extends OneShotEffect {
         this.createdMana = effect.createdMana == null ? null : effect.createdMana.copy();
     }
 
-    /**
-     * Creates the mana the effect can produce or if that already has happened
-     * returns the mana the effect has created during its process of resolving
-     *
-     * @param game
-     * @param source
-     * @return
-     */
-    public Mana getMana(Game game, Ability source) {
-        if (createdMana == null) {
-            return createdMana = produceMana(false, game, source);
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = getPlayer(game, source);
+        if (player == null) {
+            return false;
         }
-        return createdMana;
+        Mana manaToAdd = produceMana(game, source);
+        if (manaToAdd.count() > 0) {
+            checkToFirePossibleEvents(manaToAdd, game, source);
+            addManaToPool(player, manaToAdd, game, source);
+        }
+        return true;
+    }
+
+    protected Player getPlayer(Game game, Ability source) {
+        return game.getPlayer(source.getControllerId());
+    }
+
+    protected void addManaToPool(Player player, Mana manaToAdd, Game game, Ability source) {
+        player.getManaPool().addMana(manaToAdd, game, source);
     }
 
     /**
@@ -57,7 +64,7 @@ public abstract class ManaEffect extends OneShotEffect {
      */
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netMana = new ArrayList<>();
-        Mana mana = produceMana(true, game, source);
+        Mana mana = produceMana(game, source);
         if (mana != null) {
             netMana.add(mana);
         }
@@ -66,14 +73,15 @@ public abstract class ManaEffect extends OneShotEffect {
 
     /**
      * Produced the mana the effect can produce
+     * WARNING, produceMana can be called multiple times for mana and spell available calculations
+     * if you don't want it then overide getNetMana to return max possible mana values
+     * (if you have choose dialogs or extra effects like new counters in produceMana)
      *
-     * @param netMana true - produce the hypotetical possible mana for check of
-     * possible castable spells
      * @param game
      * @param source
      * @return
      */
-    public abstract Mana produceMana(boolean netMana, Game game, Ability source);
+    public abstract Mana produceMana(Game game, Ability source);
 
     /**
      * Only used for mana effects that decide which kind of mana is produced

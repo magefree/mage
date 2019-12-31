@@ -112,28 +112,16 @@ class VedalkenEngineerEffect extends ManaEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            checkToFirePossibleEvents(getMana(game, source), game, source);
-            controller.getManaPool().addMana(getMana(game, source), game, source);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
     public List<Mana> getNetMana(Game game, Ability source) {
         return netMana;
     }
 
     @Override
-    public Mana produceMana(boolean netMana, Game game, Ability source) {
+    public Mana produceMana(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         ChoiceColor choiceColor = new ChoiceColor(true);
         if (controller != null && controller.choose(Outcome.Benefit, choiceColor, game)) {
-            Mana condMana = manaBuilder.setMana(choiceColor.getMana(amount), source, game).build();
-            return condMana;
+            return manaBuilder.setMana(choiceColor.getMana(amount), source, game).build();
         }
         return null;
     }

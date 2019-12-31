@@ -1,6 +1,8 @@
 
 package mage.cards.m;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
@@ -16,8 +18,10 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
@@ -65,26 +69,12 @@ class MetalworkerManaEffect extends ManaEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        checkToFirePossibleEvents(getMana(game, source), game, source);
-        controller.getManaPool().addMana(getMana(game, source), game, source);
-        return true;
-    }
-
-    @Override
-    public Mana produceMana(boolean netMana, Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
+    public Mana produceMana(Game game, Ability source) {
+        Player controller = getPlayer(game, source);
         if (controller == null) {
             return null;
         }
         int artifacts = controller.getHand().count(StaticFilters.FILTER_CARD_ARTIFACT, game);
-        if (netMana) {
-            return Mana.ColorlessMana(artifacts * 2);
-        }
         if (artifacts > 0) {
             TargetCardInHand target = new TargetCardInHand(0, Integer.MAX_VALUE, StaticFilters.FILTER_CARD_ARTIFACT);
             if (controller.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
@@ -94,6 +84,18 @@ class MetalworkerManaEffect extends ManaEffect {
             }
         }
         return new Mana();
+    }
+
+    @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
+        Player controller = getPlayer(game, source);
+        if (controller == null) {
+            return null;
+        }
+        int artifacts = controller.getHand().count(StaticFilters.FILTER_CARD_ARTIFACT, game);
+        List<Mana> netMana = new ArrayList<>();
+        netMana.add(Mana.ColorlessMana(artifacts * 2));
+        return netMana;
     }
 
 }

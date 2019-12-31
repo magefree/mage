@@ -12,6 +12,7 @@ import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
+import mage.choices.ManaChoice;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -103,43 +104,18 @@ class MarketFestivalManaEffect extends ManaEffect {
         return new MarketFestivalManaEffect(this);
     }
 
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            checkToFirePossibleEvents(getMana(game, source), game, source);
-            controller.getManaPool().addMana(getMana(game, source), game, source);
-            return true;
+    public Player getPlayer(Game game, Ability source) {
+        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        if (sourceObject == null) {
+            return null;
         }
-        return false;
+        return game.getPlayer(sourceObject.getControllerId());
     }
 
     @Override
-    public Mana produceMana(boolean netMana, Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null && sourceObject != null) {
-            int x = 2;
-
-            Mana mana = new Mana();
-            for (int i = 0; i < x; i++) {
-                ChoiceColor choiceColor = new ChoiceColor();
-                if (i == 0) {
-                    choiceColor.setMessage("First mana color for " + sourceObject.getLogName());
-                } else {
-                    choiceColor.setMessage("Second mana color for " + sourceObject.getLogName());
-                }
-                if (!controller.choose(Outcome.Benefit, choiceColor, game)) {
-                    return null;
-                }
-                if (choiceColor.getChoice() == null) { // Possible after reconnect?
-                    return null;
-                }
-                choiceColor.increaseMana(mana);
-            }
-            return mana;
-        }
-        return null;
+    public Mana produceMana(Game game, Ability source) {
+        Player controller = getPlayer(game, source);
+        return ManaChoice.chooseAnyColor(controller, game, 2);
     }
 
 }

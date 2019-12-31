@@ -576,7 +576,9 @@ public class TestPlayer implements Player {
                     String[] groups = command.split("\\$");
                     for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
                         if (permanent.getName().equals(groups[0])) {
-                            Counter counter = new Counter(groups[1], Integer.parseInt(groups[2]));
+                            CounterType counterType = CounterType.findByName(groups[1]);
+                            Assert.assertNotNull("Invalid counter type " + groups[1], counterType);
+                            Counter counter = counterType.createInstance(Integer.parseInt(groups[2]));
                             permanent.addCounters(counter, null, game);
                             actions.remove(action);
                             return true;

@@ -81,18 +81,6 @@ class FoodChainManaEffect extends ManaEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            checkToFirePossibleEvents(getMana(game, source), game, source);
-            controller.getManaPool().addMana(getMana(game, source), game, source);
-            return true;
-        }
-
-        return false;
-    }
-
-    @Override
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netMana = new ArrayList<>();
         int cmc = -1;
@@ -112,10 +100,7 @@ class FoodChainManaEffect extends ManaEffect {
     }
 
     @Override
-    public Mana produceMana(boolean netMana, Game game, Ability source) {
-        if (netMana) {
-            return null;
-        }
+    public Mana produceMana(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int manaCostExiled = 0;

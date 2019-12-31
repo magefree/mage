@@ -90,18 +90,7 @@ class CorruptedGrafstoneManaEffect extends ManaEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            checkToFirePossibleEvents(getMana(game, source), game, source);
-            player.getManaPool().addMana(getMana(game, source), game, source);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public Mana produceMana(boolean netMana, Game game, Ability source) {
+    public Mana produceMana(Game game, Ability source) {
         Mana types = getManaTypesInGraveyard(game, source);
         Choice choice = new ChoiceColor(true);
         choice.getChoices().clear();

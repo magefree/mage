@@ -140,16 +140,7 @@ class CagedSunEffect extends ManaEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            player.getManaPool().addMana(getMana(game, source), game, source);
-        }
-        return true;
-    }
-
-    @Override
-    public Mana produceMana(boolean netMana, Game game, Ability source) {
+    public Mana produceMana(Game game, Ability source) {
         ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
         if (color != null) {
             return new Mana(ColoredManaSymbol.lookup(color.toString().charAt(0)));
