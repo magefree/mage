@@ -4,7 +4,6 @@ import mage.constants.PlayerAction;
 import mage.interfaces.callback.CallbackClient;
 import mage.interfaces.callback.ClientCallback;
 import mage.remote.Session;
-import mage.utils.CompressUtil;
 import mage.view.*;
 import org.apache.log4j.Logger;
 
@@ -37,8 +36,16 @@ public class LoadCallbackClient implements CallbackClient {
     @Override
     public void processCallback(ClientCallback callback) {
         controlCount = 0;
-        callback.setData(CompressUtil.decompress(callback.getData()));
-        log.info(getLogStartInfo() + "callback: " + callback.getMethod());
+
+        // ignore bloaded logs
+        switch (callback.getMethod()) {
+            case CHATMESSAGE:
+            case GAME_INFORM:
+            case GAME_UPDATE:
+                break;
+            default:
+                log.info(getLogStartInfo() + "callback: " + callback.getMethod());
+        }
 
         switch (callback.getMethod()) {
 
@@ -69,7 +76,7 @@ public class LoadCallbackClient implements CallbackClient {
             case GAME_INFORM_PERSONAL: {
                 GameClientMessage message = (GameClientMessage) callback.getData();
                 gameView = message.getGameView();
-                log.info(getLogStartInfo() + "Inform: " + message.getMessage());
+                //log.info(getLogStartInfo() + "Inform: " + message.getMessage());
                 break;
             }
 
