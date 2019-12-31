@@ -334,6 +334,7 @@ public enum SubType {
     SURRAKAR("Surrakar", SubTypeSet.CreatureType),
     SURVIVOR("Survivor", SubTypeSet.CreatureType),
     // T
+    TENTACLE("Tentacle", SubTypeSet.CreatureType),
     TETRAVITE("Tetravite", SubTypeSet.CreatureType),
     THALAKOS("Thalakos", SubTypeSet.CreatureType),
     THOPTER("Thopter", SubTypeSet.CreatureType),
