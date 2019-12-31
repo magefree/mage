@@ -20,8 +20,11 @@ import mage.players.Player;
 public class CascadeAbility extends TriggeredAbilityImpl {
     //20091005 - 702.82
 
-    private static final String REMINDERTEXT = " <i>(When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less."
-            + " You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)</i>";
+    private static final String REMINDERTEXT = " <i>(When you cast this spell, "
+            + "exile cards from the top of your library until you exile a "
+            + "nonland card that costs less."
+            + " You may cast it without paying its mana cost. "
+            + "Put the exiled cards on the bottom in a random order.)</i>";
     private boolean withReminder;
 
     public CascadeAbility() {
@@ -46,7 +49,8 @@ public class CascadeAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        return spell != null && spell.getSourceId().equals(this.getSourceId());
+        return spell != null
+                && spell.getSourceId().equals(this.getSourceId());
     }
 
     @Override
@@ -82,7 +86,8 @@ class CascadeEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        ExileZone exile = game.getExile().createZone(source.getSourceId(), controller.getName() + " Cascade");
+        ExileZone exile = game.getExile().createZone(source.getSourceId(), 
+                controller.getName() + " Cascade");
         card = game.getCard(source.getSourceId());
         if (card == null) {
             return false;
@@ -102,7 +107,10 @@ class CascadeEffect extends OneShotEffect {
 
         if (card != null) {
             if (controller.chooseUse(outcome, "Use cascade effect on " + card.getLogName() + '?', source, game)) {
-                controller.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                controller.cast(controller.chooseAbilityForCast(card, game, true),
+                        game, true, new MageObjectReference(source.getSourceObject(game), game));
+                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
             }
         }
         // Move the remaining cards to the buttom of the library in a random order

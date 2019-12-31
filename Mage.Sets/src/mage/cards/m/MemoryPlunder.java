@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -10,6 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -53,8 +53,9 @@ public final class MemoryPlunder extends CardImpl {
 class MemoryPlunderEffect extends OneShotEffect {
 
     public MemoryPlunderEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "You may cast target instant or sorcery card from an opponent's graveyard without paying its mana cost";
+        super(Outcome.PlayForFree);
+        this.staticText = "You may cast target instant or sorcery card from "
+                + "an opponent's graveyard without paying its mana cost";
     }
 
     public MemoryPlunderEffect(final MemoryPlunderEffect effect) {
@@ -70,9 +71,15 @@ class MemoryPlunderEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card != null) {
-            Player player = game.getPlayer(source.getControllerId());
-            if (player != null && player.chooseUse(Outcome.Benefit, "Cast " + card.getName() + " without paying cost?", source, game)) {
-                player.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+            Player controller = game.getPlayer(source.getControllerId());
+            if (controller != null
+                    && game.getState().getZone(card.getId()) == Zone.GRAVEYARD
+                    && controller.chooseUse(Outcome.PlayForFree, "Cast " + card.getName() + " without paying cost?", source, game)) {
+                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
+                        game, true, new MageObjectReference(source.getSourceObject(game), game));
+                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+                return cardWasCast;
             }
         }
         return false;

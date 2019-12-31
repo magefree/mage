@@ -47,8 +47,11 @@ public final class JelevaNephaliasScourge extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // When Jeleva, Nephalia's Scourge enters the battlefield, each player exiles the top X cards of their library, where X is the amount of mana spent to cast Jeleva.
+
+        // When Jeleva, Nephalia's Scourge enters the battlefield, each player exiles 
+        // the top X cards of their library, where X is the amount of mana spent to cast Jeleva.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new JelevaNephaliasScourgeEffect(), false));
+
         // Whenever Jeleva attacks, you may cast an instant or sorcery card exiled with it without paying its mana cost.
         this.addAbility(new AttacksTriggeredAbility(new JelevaNephaliasCastEffect(), false), new JelevaNephaliasWatcher());
 
@@ -68,7 +71,8 @@ class JelevaNephaliasScourgeEffect extends OneShotEffect {
 
     public JelevaNephaliasScourgeEffect() {
         super(Outcome.Benefit);
-        this.staticText = "each player exiles the top X cards of their library, where X is the amount of mana spent to cast {this}";
+        this.staticText = "each player exiles the top X cards of their library, "
+                + "where X is the amount of mana spent to cast {this}";
     }
 
     public JelevaNephaliasScourgeEffect(final JelevaNephaliasScourgeEffect effect) {
@@ -85,13 +89,16 @@ class JelevaNephaliasScourgeEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         JelevaNephaliasWatcher watcher = game.getState().getWatcher(JelevaNephaliasWatcher.class);
-        if (controller != null && sourceObject != null && watcher != null) {
+        if (controller != null
+                && sourceObject != null
+                && watcher != null) {
             int xValue = watcher.getManaSpentToCastLastTime(sourceObject.getId(), sourceObject.getZoneChangeCounter(game) - 1);
             if (xValue > 0) {
                 for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        player.moveCardsToExile(player.getLibrary().getTopCards(game, xValue), source, game, true, CardUtil.getCardExileZoneId(game, source), sourceObject.getIdName());
+                        player.moveCardsToExile(player.getLibrary().getTopCards(game, xValue),
+                                source, game, true, CardUtil.getCardExileZoneId(game, source), sourceObject.getIdName());
                     }
                 }
             }
@@ -105,7 +112,8 @@ class JelevaNephaliasCastEffect extends OneShotEffect {
 
     public JelevaNephaliasCastEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "you may cast an instant or sorcery card exiled with it without paying its mana cost";
+        this.staticText = "you may cast an instant or sorcery card "
+                + "exiled with it without paying its mana cost";
     }
 
     public JelevaNephaliasCastEffect(final JelevaNephaliasCastEffect effect) {
@@ -122,13 +130,20 @@ class JelevaNephaliasCastEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             ExileZone exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
-            if (exileZone != null && exileZone.count(new FilterInstantOrSorceryCard(), game) > 0) {
-                if (controller.chooseUse(outcome, "Cast an instant or sorcery card from exile?", source, game)) {
-                    TargetCardInExile target = new TargetCardInExile(new FilterInstantOrSorceryCard(), CardUtil.getCardExileZoneId(game, source));
+            if (exileZone != null
+                    && exileZone.count(new FilterInstantOrSorceryCard(), game) > 0) {
+                if (controller.chooseUse(outcome, "Cast an instant or sorcery card from "
+                        + "exile without paying its mana cost?", source, game)) {
+                    TargetCardInExile target = new TargetCardInExile(
+                            new FilterInstantOrSorceryCard(), CardUtil.getCardExileZoneId(game, source));
                     if (controller.choose(Outcome.PlayForFree, exileZone, target, game)) {
                         Card card = game.getCard(target.getFirstTarget());
                         if (card != null) {
-                            return controller.playCard(card, game, true, false, new MageObjectReference(source.getSourceId(), game));
+                            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                            Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
+                                    game, true, new MageObjectReference(source.getSourceObject(game), game));
+                            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+                            return cardWasCast;
                         }
                     }
                 }
@@ -164,7 +179,8 @@ class JelevaNephaliasWatcher extends Watcher {
                 for (StackObject stackObject : game.getStack()) {
                     if (stackObject instanceof Spell) {
                         Spell spell = (Spell) stackObject;
-                        manaSpendToCast.putIfAbsent(spell.getSourceId().toString() + spell.getCard().getZoneChangeCounter(game),
+                        manaSpendToCast.putIfAbsent(spell.getSourceId().toString() 
+                                + spell.getCard().getZoneChangeCounter(game),
                                 spell.getSpellAbility().getManaCostsToPay().convertedManaCost());
                     }
                 }

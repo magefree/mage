@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.cost;
 
 import mage.MageObjectReference;
@@ -40,7 +39,8 @@ public class CastWithoutPayingManaCostEffect extends OneShotEffect {
     public CastWithoutPayingManaCostEffect(DynamicValue maxCost) {
         super(Outcome.PlayForFree);
         this.manaCost = maxCost;
-        this.staticText = "you may cast a card with converted mana cost " + maxCost + " or less from your hand without paying its mana cost";
+        this.staticText = "you may cast a card with converted mana cost "
+                + maxCost + " or less from your hand without paying its mana cost";
     }
 
     public CastWithoutPayingManaCostEffect(final CastWithoutPayingManaCostEffect effect) {
@@ -56,21 +56,24 @@ public class CastWithoutPayingManaCostEffect extends OneShotEffect {
             return false;
         }
         int cmc = manaCost.calculate(game, source, this);
-        FilterCard filter = new FilterNonlandCard("card with converted mana cost " + cmc + " or less from your hand");
+        FilterCard filter = new FilterNonlandCard("card with converted mana cost "
+                + cmc + " or less from your hand");
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, cmc + 1));
 
         Target target = new TargetCardInHand(filter);
         if (target.canChoose(source.getSourceId(), controller.getId(), game)
-                && controller.chooseUse(outcome, "Cast a card with converted mana cost " + cmc
-                + " or less from your hand without paying its mana cost?", source, game)) {
+                && controller.chooseUse(Outcome.PlayForFree, "Cast a card with converted mana cost " + cmc
+                        + " or less from your hand without paying its mana cost?", source, game)) {
             Card cardToCast = null;
             boolean cancel = false;
-            while (controller.canRespond() && !cancel) {
-                if (controller.chooseTarget(outcome, target, source, game)) {
+            while (controller.canRespond() 
+                    && !cancel) {
+                if (controller.chooseTarget(Outcome.PlayForFree, target, source, game)) {
                     cardToCast = game.getCard(target.getFirstTarget());
                     if (cardToCast != null) {
                         if (cardToCast.getSpellAbility() == null) {
-                            Logger.getLogger(CastWithoutPayingManaCostEffect.class).fatal("Card: " + cardToCast.getName() + " is no land and has no spell ability!");
+                            Logger.getLogger(CastWithoutPayingManaCostEffect.class).fatal("Card: "
+                                    + cardToCast.getName() + " is no land and has no spell ability!");
                             cancel = true;
                         }
                         if (cardToCast.getSpellAbility().canChooseTarget(game)) {
@@ -82,7 +85,10 @@ public class CastWithoutPayingManaCostEffect extends OneShotEffect {
                 }
             }
             if (cardToCast != null) {
-                controller.cast(cardToCast.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                game.getState().setValue("PlayFromNotOwnHandZone" + cardToCast.getId(), Boolean.TRUE);
+                controller.cast(controller.chooseAbilityForCast(cardToCast, game, true),
+                        game, true, new MageObjectReference(source.getSourceObject(game), game));
+                game.getState().setValue("PlayFromNotOwnHandZone" + cardToCast.getId(), null);
             }
         }
         return true;

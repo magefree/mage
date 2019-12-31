@@ -41,7 +41,8 @@ public final class Guile extends CardImpl {
         // Guile can't be blocked except by three or more creatures.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(3)));
 
-        // If a spell or ability you control would counter a spell, instead exile that spell and you may play that card without paying its mana cost.
+        // If a spell or ability you control would counter a spell, instead exile that 
+        // spell and you may play that card without paying its mana cost.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GuileReplacementEffect()));
 
         // When Guile is put into a graveyard from anywhere, shuffle it into its owner's library.
@@ -62,7 +63,8 @@ class GuileReplacementEffect extends ReplacementEffectImpl {
 
     GuileReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);
-        staticText = "If a spell or ability you control would counter a spell, instead exile that spell and you may play that card without paying its mana cost";
+        staticText = "If a spell or ability you control would counter a spell, "
+                + "instead exile that spell and you may play that card without paying its mana cost";
     }
 
     GuileReplacementEffect(final GuileReplacementEffect effect) {
@@ -83,11 +85,13 @@ class GuileReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
         Player controller = game.getPlayer(source.getControllerId());
-        if (spell != null && controller != null) {
+        if (spell != null 
+                && controller != null) {
             controller.moveCards(spell, Zone.EXILED, source, game);
             if (!spell.isCopy()) {
                 Card spellCard = spell.getCard();
-                if (spellCard != null && controller.chooseUse(Outcome.PlayForFree, "Cast " + spellCard.getIdName() + " for free?", source, game)) {
+                if (spellCard != null 
+                        && controller.chooseUse(Outcome.PlayForFree, "Play " + spellCard.getIdName() + " for free?", source, game)) {
                     controller.playCard(spellCard, game, true, true, new MageObjectReference(source.getSourceObject(game), game));
                 }
                 return true;

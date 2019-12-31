@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.ArrayList;
@@ -32,7 +31,8 @@ public final class Counterlash extends CardImpl {
     public Counterlash(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{U}{U}");
 
-        // Counter target spell. You may cast a nonland card in your hand that shares a card type with that spell without paying its mana cost.
+        // Counter target spell. You may cast a nonland card in your hand 
+        // that shares a card type with that spell without paying its mana cost.
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new CounterlashEffect());
     }
@@ -51,7 +51,9 @@ class CounterlashEffect extends OneShotEffect {
 
     public CounterlashEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Counter target spell. You may cast a nonland card in your hand that shares a card type with that spell without paying its mana cost";
+        this.staticText = "Counter target spell. You may cast a nonland "
+                + "card in your hand that shares a card type with that "
+                + "spell without paying its mana cost";
     }
 
     public CounterlashEffect(final CounterlashEffect effect) {
@@ -66,10 +68,12 @@ class CounterlashEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         StackObject stackObject = game.getStack().getStackObject(source.getFirstTarget());
-        Player player = game.getPlayer(source.getControllerId());
-        if (stackObject != null && player != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (stackObject != null
+                && controller != null) {
             game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
-            if (player.chooseUse(Outcome.PutCardInPlay, "Cast a nonland card in your hand that shares a card type with that spell without paying its mana cost?", source, game)) {
+            if (controller.chooseUse(Outcome.PlayForFree, "Cast a nonland card in your hand that "
+                    + "shares a card type with that spell without paying its mana cost?", source, game)) {
                 FilterCard filter = new FilterCard();
                 List<Predicate<MageObject>> types = new ArrayList<>();
                 for (CardType type : stackObject.getCardType()) {
@@ -79,10 +83,13 @@ class CounterlashEffect extends OneShotEffect {
                 }
                 filter.add(Predicates.or(types));
                 TargetCardInHand target = new TargetCardInHand(filter);
-                if (player.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
-                    Card card = player.getHand().get(target.getFirstTarget(), game);
+                if (controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
+                    Card card = controller.getHand().get(target.getFirstTarget(), game);
                     if (card != null) {
-                        player.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                        controller.cast(controller.chooseAbilityForCast(card, game, true),
+                                game, true, new MageObjectReference(source.getSourceObject(game), game));
+                        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
                     }
                 }
             }
