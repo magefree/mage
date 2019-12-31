@@ -30,7 +30,9 @@ public final class CarpetOfFlowers extends CardImpl {
     public CarpetOfFlowers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
 
-        // At the beginning of each of your main phases, if you haven't added mana with this ability this turn, you may add up to X mana of any one color, where X is the number of Islands target opponent controls.
+        // At the beginning of each of your main phases, if you haven't added mana 
+        // with this ability this turn, you may add up to X mana of any one color, 
+        // where X is the number of Islands target opponent controls.
         this.addAbility(new CarpetOfFlowersTriggeredAbility());
     }
 
@@ -73,26 +75,36 @@ class CarpetOfFlowersTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
-        return !Boolean.TRUE.equals(game.getState().getValue(this.originalId.toString() + "addMana"));
+        return !Boolean.TRUE.equals(game.getState().getValue(this.originalId.toString()
+                + "addMana"
+                + game.getState().getZoneChangeCounter(sourceId)));
     }
 
     @Override
     public boolean resolve(Game game) {
         boolean value = super.resolve(game);
         if (value == true) {
-            game.getState().setValue(this.originalId.toString() + "addMana", Boolean.TRUE);
+            game.getState().setValue(this.originalId.toString()
+                    + "addMana"
+                    + game.getState().getZoneChangeCounter(sourceId),
+                    Boolean.TRUE);
         }
         return value;
     }
 
     @Override
     public void reset(Game game) {
-        game.getState().setValue(this.originalId.toString() + "addMana", Boolean.FALSE);
+        game.getState().setValue(this.originalId.toString()
+                + "addMana"
+                + game.getState().getZoneChangeCounter(sourceId),
+                Boolean.FALSE);
     }
 
     @Override
     public String getRule() {
-        return "At the beginning of each of your main phases, if you haven't added mana with this ability this turn, " + super.getRule();
+        return "At the beginning of each of your main phases, if "
+                + "you haven't added mana with this ability this turn, "
+                + super.getRule();
     }
 
 }
