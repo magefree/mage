@@ -1,5 +1,6 @@
 package mage.cards.d;
 
+import mage.abilities.Ability;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -60,10 +61,10 @@ class DeathbellowWarCryTarget extends TargetCardInLibrary {
     }
 
     @Override
-    public boolean canTarget(UUID id, Cards cards, Game game) {
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Cards cards, Game game) {
         Card card = cards.get(id, game);
         return card != null
-                && filter.match(card, game)
+                && filter.match(card, playerId, game)
                 && this
                 .getTargets()
                 .stream()

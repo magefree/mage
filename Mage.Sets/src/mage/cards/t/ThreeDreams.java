@@ -1,7 +1,6 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -14,14 +13,15 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class ThreeDreams extends CardImpl {
 
     public ThreeDreams(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{W}");
 
 
         // Search your library for up to three Aura cards with different names, reveal them, and put them into your hand. Then shuffle your library.
@@ -41,6 +41,7 @@ public final class ThreeDreams extends CardImpl {
 class ThreeDreamsTarget extends TargetCardInLibrary {
 
     private static final FilterCard aurafilter = new FilterCard("Aura cards with different names");
+
     static {
         aurafilter.add(new SubtypePredicate(SubType.AURA));
     }
@@ -59,7 +60,7 @@ class ThreeDreamsTarget extends TargetCardInLibrary {
     }
 
     @Override
-    public boolean canTarget(UUID id, Cards cards, Game game) {
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Cards cards, Game game) {
         Card card = cards.get(id, game);
         if (card != null) {
             // check if card with that name was selected before
@@ -69,7 +70,7 @@ class ThreeDreamsTarget extends TargetCardInLibrary {
                     return false;
                 }
             }
-            return filter.match(card, game);
+            return filter.match(card, playerId, game);
         }
         return false;
     }

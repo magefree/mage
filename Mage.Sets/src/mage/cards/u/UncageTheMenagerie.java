@@ -1,14 +1,8 @@
-
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -19,8 +13,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class UncageTheMenagerie extends CardImpl {
@@ -115,7 +110,7 @@ class UncageTheMenagerieTarget extends TargetCardInLibrary {
     }
 
     @Override
-    public boolean canTarget(UUID id, Cards cards, Game game) {
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Cards cards, Game game) {
         Card card = cards.get(id, game);
         if (card != null) {
             for (UUID targetId : this.getTargets()) {
@@ -124,11 +119,12 @@ class UncageTheMenagerieTarget extends TargetCardInLibrary {
                     return false;
                 }
             }
+
             if (!(card.isCreature() && card.getConvertedManaCost() == xValue)) {
                 return false;
             }
 
-            return filter.match(card, game);
+            return filter.match(card, playerId, game);
         }
         return false;
     }

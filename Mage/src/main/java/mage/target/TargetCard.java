@@ -208,8 +208,8 @@ public class TargetCard extends TargetObject {
                 && getFilter() != null && getFilter().match(card, playerId, game);
     }
 
-    public boolean canTarget(UUID id, Cards cards, Game game) {
-        return cards.contains(id) && canTarget(id, game);
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Cards cards, Game game) {
+        return cards.contains(id) && canTarget(playerId, id, source, game);
     }
 
     @Override
