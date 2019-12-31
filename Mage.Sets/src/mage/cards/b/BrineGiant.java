@@ -58,7 +58,7 @@ class BrineGiantCostReductionEffect extends CostModificationEffectImpl {
 
     BrineGiantCostReductionEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "This spell costs {1} less to cast for each artifact you control";
+        staticText = "This spell costs {1} less to cast for each enchantment you control";
     }
 
     private BrineGiantCostReductionEffect(final BrineGiantCostReductionEffect effect) {
