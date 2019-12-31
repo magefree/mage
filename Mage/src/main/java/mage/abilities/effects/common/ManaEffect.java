@@ -1,8 +1,5 @@
-
 package mage.abilities.effects.common;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
@@ -13,11 +10,12 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
-import mage.players.ManaPool;
 import mage.players.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class ManaEffect extends OneShotEffect {
@@ -75,6 +73,9 @@ public abstract class ManaEffect extends OneShotEffect {
 
     /**
      * Produced the mana the effect can produce
+     * WARNING, produceMana can be called multiple times for mana and spell available calculations
+     * if you don't want it then overide getNetMana to return max possible mana values
+     * (if you have choose dialogs or extra effects like new counters in produceMana)
      *
      * @param game
      * @param source

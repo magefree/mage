@@ -16,6 +16,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -30,6 +32,7 @@ public final class EmpoweredAutogenerator extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // {T}: Put a charge counter on Empowered Autogenerator. Add X mana of any one color, where X is the number of charge counters on Empowered Autogenerator.
+        // Empowered Autogenerator's activated ability is a mana ability. It doesn’t use the stack and can’t be responded to. (2019-08-23)
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new EmpoweredAutogeneratorManaEffect(), new TapSourceCost()));
     }
 
@@ -65,34 +68,33 @@ class EmpoweredAutogeneratorManaEffect extends ManaEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (controller == null
-                || sourcePermanent == null) {
-            return false;
-        }
-        sourcePermanent.addCounters(CounterType.CHARGE.createInstance(), source, game);
-        checkToFirePossibleEvents(getMana(game, source), game, source);
-        controller.getManaPool().addMana(getMana(game, source), game, source);
-        return true;
+    public List<Mana> getNetMana(Game game, Ability source) {
+        List<Mana> netMana = new ArrayList<>();
 
+        Permanent sourcePermanent = game.getState().getPermanent(source.getSourceId());
+        if (sourcePermanent != null) {
+            int counters = sourcePermanent.getCounters(game).getCount(CounterType.CHARGE) + 1; // one counter will be added on real mana call
+            if (counters > 0) {
+                netMana.add(Mana.AnyMana(counters));
+            }
+        }
+
+        return netMana;
     }
 
     @Override
-    public Mana produceMana(boolean netMana, Game game, Ability source) {
+    public Mana produceMana(Game game, Ability source) {
         Mana mana = new Mana();
         game.applyEffects();
         Permanent sourcePermanent = game.getState().getPermanent(source.getSourceId());
         if (sourcePermanent == null) {
             return mana;
         }
-        int counters = sourcePermanent.getCounters(game).getCount(CounterType.CHARGE) + 1;
+
+        sourcePermanent.addCounters(CounterType.CHARGE.createInstance(), source, game);
+        int counters = sourcePermanent.getCounters(game).getCount(CounterType.CHARGE);
         if (counters == 0) {
             return mana;
-        }
-        if (netMana) {
-            return new Mana(0, 0, 0, 0, 0, 0, counters, 0);
         }
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {

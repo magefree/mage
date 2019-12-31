@@ -3,12 +3,12 @@ package org.mage.test.cards.mana;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class ConditionalManaTest extends CardTestPlayerBase {
@@ -208,5 +208,82 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         assertAbility(playerA, "Cultivator Drone", FlyingAbility.getInstance(), true);
 
         assertLife(playerB, 18);
+    }
+
+    @Test
+    public void EmpoweredAutogeneratorAddsCountWithMana() {
+        // Empowered Autogenerator's activated ability is a mana ability. It doesn’t use the stack and can’t be responded to. (2019-08-23)
+
+        // Empowered Autogenerator enters the battlefield tapped.
+        // {T}: Put a charge counter on Empowered Autogenerator. Add X mana of any one color, where X is the number of charge counters on Empowered Autogenerator.
+        addCard(Zone.BATTLEFIELD, playerA, "Empowered Autogenerator", 1);
+        //
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
+
+        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Put a charge counter");
+        setChoice(playerA, "Red");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertCounterCount(playerA, "Empowered Autogenerator", CounterType.CHARGE, 1);
+        assertLife(playerB, 20 - 3);
+    }
+
+    @Test
+    public void EmpoweredAutogeneratorAddsDoubleCountersWithDoubleSeason() {
+        // Empowered Autogenerator's activated ability is a mana ability. It doesn’t use the stack and can’t be responded to. (2019-08-23)
+
+        // Empowered Autogenerator enters the battlefield tapped.
+        // {T}: Put a charge counter on Empowered Autogenerator. Add X mana of any one color, where X is the number of charge counters on Empowered Autogenerator.
+        addCard(Zone.BATTLEFIELD, playerA, "Empowered Autogenerator", 1);
+        //
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
+        //
+        // If an effect would put one or more tokens into play under your control, it puts twice that many of those tokens into play instead.
+        // If an effect would place one or more counters on a permanent you control, it places twice that many of those counters on that permanent instead.
+        addCard(Zone.BATTLEFIELD, playerA, "Doubling Season", 1);
+
+        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Put a charge counter");
+        setChoice(playerA, "Red");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertCounterCount(playerA, "Empowered Autogenerator", CounterType.CHARGE, 2);
+        assertLife(playerB, 20 - 3);
+    }
+
+    @Test
+    public void EmpoweredAutogeneratorAddsDoubleCountersWithDoubleSeason_AutoPay() {
+        // Empowered Autogenerator's activated ability is a mana ability. It doesn’t use the stack and can’t be responded to. (2019-08-23)
+
+        // Empowered Autogenerator enters the battlefield tapped.
+        // {T}: Put a charge counter on Empowered Autogenerator. Add X mana of any one color, where X is the number of charge counters on Empowered Autogenerator.
+        addCard(Zone.BATTLEFIELD, playerA, "Empowered Autogenerator", 1);
+        //
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
+        //
+        // If an effect would put one or more tokens into play under your control, it puts twice that many of those tokens into play instead.
+        // If an effect would place one or more counters on a permanent you control, it places twice that many of those counters on that permanent instead.
+        addCard(Zone.BATTLEFIELD, playerA, "Doubling Season", 1);
+
+        //activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Put a charge counter"); // auto pay
+        setChoice(playerA, "Red");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertCounterCount(playerA, "Empowered Autogenerator", CounterType.CHARGE, 2);
+        assertLife(playerB, 20 - 3);
     }
 }
