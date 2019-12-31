@@ -1,8 +1,5 @@
-
 package mage.abilities.effects.mana;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.ManaEffect;
@@ -11,8 +8,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author LevelX2
  */
 public class AddManaAnyColorAttachedControllerEffect extends ManaEffect {
@@ -44,6 +43,13 @@ public class AddManaAnyColorAttachedControllerEffect extends ManaEffect {
     }
 
     @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
+        ArrayList<Mana> netMana = new ArrayList<>();
+        netMana.add(Mana.AnyMana(1));
+        return netMana;
+    }
+
+    @Override
     public Mana produceMana(Game game, Ability source) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
         if (enchantment != null) {
@@ -58,16 +64,4 @@ public class AddManaAnyColorAttachedControllerEffect extends ManaEffect {
         }
         return new Mana();
     }
-
-    @Override
-    public List<Mana> getNetMana(Game game, Ability source) {
-        ArrayList<Mana> netMana = new ArrayList<>();
-        netMana.add(Mana.GreenMana(1));
-        netMana.add(Mana.WhiteMana(1));
-        netMana.add(Mana.BlueMana(1));
-        netMana.add(Mana.RedMana(1));
-        netMana.add(Mana.BlackMana(1));
-        return netMana;
-    }
-
 }

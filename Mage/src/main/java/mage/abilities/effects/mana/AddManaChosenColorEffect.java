@@ -11,10 +11,8 @@ import mage.abilities.Ability;
 import mage.abilities.effects.common.ManaEffect;
 import mage.constants.ColoredManaSymbol;
 import mage.game.Game;
-import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class AddManaChosenColorEffect extends ManaEffect {

@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.mana;
 
 import mage.ConditionalMana;
@@ -13,6 +12,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 import org.apache.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author noxx
@@ -40,10 +42,10 @@ public class AddConditionalManaOfAnyColorEffect extends ManaEffect {
         this.oneChoice = oneChoice;
         //
         staticText = "Add "
-                + (amount instanceof StaticValue ? (CardUtil.numberToText(((StaticValue) amount).toString())) : "")
+                + (amount instanceof StaticValue ? (CardUtil.numberToText(amount.toString())) : "")
                 + " mana "
-                + (oneChoice || (amount instanceof StaticValue && (((StaticValue) amount).toString()).equals("1"))
-                ? "of any" + (amount instanceof StaticValue && (((StaticValue) amount).toString()).equals("1") ? "" : " one") + " color"
+                + (oneChoice || (amount instanceof StaticValue && (amount.toString()).equals("1"))
+                ? "of any" + (amount instanceof StaticValue && (amount.toString()).equals("1") ? "" : " one") + " color"
                 : "in any combination of colors")
                 + ". " + manaBuilder.getRule();
     }
@@ -58,6 +60,18 @@ public class AddConditionalManaOfAnyColorEffect extends ManaEffect {
     @Override
     public AddConditionalManaOfAnyColorEffect copy() {
         return new AddConditionalManaOfAnyColorEffect(this);
+    }
+
+    @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
+        List<Mana> netMana = new ArrayList<>();
+
+        int value = amount.calculate(game, source, this);
+        if (value > 0) {
+            netMana.add(Mana.AnyMana(value));
+        }
+
+        return netMana;
     }
 
     @Override

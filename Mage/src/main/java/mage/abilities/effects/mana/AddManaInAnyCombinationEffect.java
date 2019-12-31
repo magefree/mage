@@ -1,9 +1,5 @@
-
 package mage.abilities.effects.mana;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -14,8 +10,11 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
- *
  * @author LevelX2
  */
 public class AddManaInAnyCombinationEffect extends ManaEffect {
@@ -65,6 +64,16 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
     }
 
     @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
+        ArrayList<Mana> netMana = new ArrayList<>();
+        int amountOfManaLeft = amount.calculate(game, source, this);
+        if (amountOfManaLeft > 0) {
+            netMana.add(Mana.AnyMana(amountOfManaLeft));
+        }
+        return netMana;
+    }
+
+    @Override
     public Mana produceMana(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
@@ -93,13 +102,6 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
         return null;
     }
 
-    @Override
-    public List<Mana> getNetMana(Game game, Ability source) {
-        ArrayList<Mana> netMana = new ArrayList<>();
-        netMana.add(new Mana(0, 0, 0, 0, 0, 0, amount.calculate(game, source, this), 0));
-        return netMana;
-    }
-
     private String setText() {
         StringBuilder sb = new StringBuilder("Add ");
         sb.append(CardUtil.numberToText(amount.toString()));
@@ -116,7 +118,6 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
                 sb.append('{').append(coloredManaSymbol.toString()).append('}');
             }
         }
-        sb.append("");
         return sb.toString();
     }
 }
