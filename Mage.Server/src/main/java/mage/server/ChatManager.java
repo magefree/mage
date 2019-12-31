@@ -5,6 +5,7 @@ import mage.cards.repository.CardRepository;
 import mage.server.exceptions.UserNotFoundException;
 import mage.server.game.GameController;
 import mage.server.game.GameManager;
+import mage.server.game.GamesRoomManager;
 import mage.server.util.SystemUtil;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
@@ -316,12 +317,16 @@ public enum ChatManager {
     }
 
     public void sendLostConnectionMessage(UUID userId, DisconnectReason reason) {
+        UserManager.instance.getUser(userId).ifPresent(user -> sendMessageToUserChats(userId, user.getName() + " " + reason.getMessage()));
+    }
+
+    public void sendMessageToUserChats(UUID userId, String message) {
         UserManager.instance.getUser(userId).ifPresent(user
                 -> getChatSessions()
                 .stream()
+                .filter(chat -> !chat.getChatId().equals(GamesRoomManager.instance.getMainChatId())) // ignore main lobby
                 .filter(chat -> chat.hasUser(userId))
-                .forEach(chatSession -> chatSession.broadcast(null, user.getName() + reason.getMessage(), MessageColor.BLUE, true, MessageType.STATUS, null)));
-
+                .forEach(chatSession -> chatSession.broadcast(null, message, MessageColor.BLUE, true, MessageType.STATUS, null)));
     }
 
     public void removeUser(UUID userId, DisconnectReason reason) {

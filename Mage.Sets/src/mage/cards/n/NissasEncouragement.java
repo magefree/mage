@@ -1,15 +1,8 @@
-
 package mage.cards.n;
 
-import java.util.HashMap;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -21,8 +14,10 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.HashMap;
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class NissasEncouragement extends CardImpl {
@@ -89,8 +84,8 @@ class NissasEncouragementEffect extends OneShotEffect {
             foundCards.put("Brambleweft Behemoth", 0);
             foundCards.put("Nissa, Genesis Mage", 0);
             Cards cards = new CardsImpl();
-            
-            if (!target.getTargets().isEmpty()) {                
+
+            if (!target.getTargets().isEmpty()) {
                 for (UUID cardId : target.getTargets()) {
                     Card card = player.getLibrary().remove(cardId, game);
 
@@ -120,7 +115,7 @@ class NissasEncouragementEffect extends OneShotEffect {
                     }
                 }
             }
-            
+
             if (!cards.isEmpty()) {
                 player.revealCards(sourceCard.getIdName(), cards, game);
                 player.moveCards(cards, Zone.HAND, source, game);
@@ -149,7 +144,7 @@ class NissasEncouragementTarget extends TargetCardInLibrary {
     }
 
     @Override
-    public boolean canTarget(UUID id, Cards cards, Game game) {
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Cards cards, Game game) {
         Card card = cards.get(id, game);
         if (card != null) {
             for (UUID targetId : this.getTargets()) {
@@ -158,7 +153,7 @@ class NissasEncouragementTarget extends TargetCardInLibrary {
                     return false;
                 }
             }
-            return filter.match(card, game);
+            return filter.match(card, playerId, game);
         }
         return false;
     }

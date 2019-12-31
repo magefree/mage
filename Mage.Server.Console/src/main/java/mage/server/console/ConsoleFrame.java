@@ -67,7 +67,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
             logger.fatal("", ex);
         }
 
-        pingTaskExecutor.scheduleAtFixedRate(() -> session.ping(), 60, 60, TimeUnit.SECONDS);
+        pingTaskExecutor.scheduleAtFixedRate(() -> session.ping(), 20, 20, TimeUnit.SECONDS);
     }
 
     public boolean connect(Connection connection) {

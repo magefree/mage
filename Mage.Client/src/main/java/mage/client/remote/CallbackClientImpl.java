@@ -18,7 +18,6 @@ import mage.interfaces.callback.CallbackClient;
 import mage.interfaces.callback.ClientCallback;
 import mage.remote.ActionData;
 import mage.remote.Session;
-import mage.utils.CompressUtil;
 import mage.view.*;
 import mage.view.ChatMessage.MessageType;
 import org.apache.log4j.Logger;
@@ -44,8 +43,8 @@ public class CallbackClientImpl implements CallbackClient {
 
     @Override
     public synchronized void processCallback(final ClientCallback callback) {
+        callback.decompressData();
         SaveObjectUtil.saveObject(callback.getData(), callback.getMethod().toString());
-        callback.setData(CompressUtil.decompress(callback.getData()));
         SwingUtilities.invokeLater(() -> {
             try {
                 logger.debug(callback.getMessageId() + " -- " + callback.getMethod());

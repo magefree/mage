@@ -1,5 +1,6 @@
 package mage.cards.s;
 
+import mage.abilities.Ability;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -55,15 +56,20 @@ class SharedSummonsTarget extends TargetCardInLibrary {
     }
 
     @Override
-    public boolean canTarget(UUID id, Cards cards, Game game) {
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Cards cards, Game game) {
         Card card = cards.get(id, game);
         if (card == null || !card.isCreature()) {
             return false;
         }
-        return !this
+
+        if (!filter.match(card, playerId, game)) {
+            return false;
+        }
+
+        return this
                 .getTargets()
                 .stream()
-                .map(uuid -> game.getCard(uuid))
-                .anyMatch(c -> c != null && c.getName().equals(card.getName()));
+                .map(game::getCard)
+                .noneMatch(c -> c != null && c.getName().equals(card.getName()));
     }
 }
