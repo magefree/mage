@@ -35,6 +35,7 @@ public class LoadCallbackClient implements CallbackClient {
 
     @Override
     public void processCallback(ClientCallback callback) {
+        callback.decompressData();
         controlCount = 0;
 
         // ignore bloaded logs

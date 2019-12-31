@@ -1,5 +1,3 @@
-
-
 package mage.server.game;
 
 import mage.game.Game;
@@ -101,7 +99,6 @@ public class GameSessionWatcher {
         GameView gameView = new GameView(game.getState(), game, null, userId);
         processWatchedHands(userId, gameView);
         return gameView;
-
     }
 
     protected void processWatchedHands(UUID userId, GameView gameView) {
