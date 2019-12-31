@@ -1,27 +1,32 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.cost.SourceCostReductionForEachCardInGraveyardEffect;
 import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.ProwessAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterInstantOrSorceryCard;
+
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class BedlamReveler extends CardImpl {
+
+    private static final DynamicValue cardsCount = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY);
 
     public BedlamReveler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{R}{R}");
@@ -30,22 +35,22 @@ public final class BedlamReveler extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Bedlam Reveler costs {1} less to cast for each instant or sorcery card in your graveyard.
-        Ability ability = new SimpleStaticAbility(Zone.ALL, new SourceCostReductionForEachCardInGraveyardEffect(StaticFilters.FILTER_CARD_INSTANT_AND_SORCERY));
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(
+                Zone.ALL, new SourceCostReductionForEachCardInGraveyardEffect(StaticFilters.FILTER_CARD_INSTANT_AND_SORCERY)
+        ).addHint(new ValueHint("Instant and sorcery cards in your graveyard", cardsCount)));
 
         // Prowess
         this.addAbility(new ProwessAbility());
 
         // When Bedlam Reveler enters the battlefield, discard your hand, then draw three cards.
-        ability = new EntersBattlefieldTriggeredAbility(new DiscardHandControllerEffect());
-        Effect effect = new DrawCardSourceControllerEffect(3);
-        effect.setText("then draw three cards");
-        ability.addEffect(effect);
+        Ability ability = new EntersBattlefieldTriggeredAbility(
+                new DiscardHandControllerEffect().setText("discard your hand,")
+        );
+        ability.addEffect(new DrawCardSourceControllerEffect(3).setText("then draw three cards"));
         this.addAbility(ability);
     }
 
-    public BedlamReveler(final BedlamReveler card) {
+    private BedlamReveler(final BedlamReveler card) {
         super(card);
     }
 
