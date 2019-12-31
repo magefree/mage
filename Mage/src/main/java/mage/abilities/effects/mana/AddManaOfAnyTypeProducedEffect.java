@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.mana;
 
 import mage.Mana;
@@ -10,10 +9,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author LevelX2
  */
 public class AddManaOfAnyTypeProducedEffect extends ManaEffect {
@@ -37,6 +36,16 @@ public class AddManaOfAnyTypeProducedEffect extends ManaEffect {
     }
 
     @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
+        ArrayList<Mana> netMana = new ArrayList<>();
+        Mana types = (Mana) this.getValue("mana"); // TODO: will not work until TriggeredManaAbility fix (see TriggeredManaAbilityMustGivesExtraManaOptions test)
+        if (types != null) {
+            netMana.add(types.copy());
+        }
+        return netMana;
+    }
+
+    @Override
     public Mana produceMana(Game game, Ability source) {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
@@ -45,6 +54,9 @@ public class AddManaOfAnyTypeProducedEffect extends ManaEffect {
                 return null;
             }
             Mana types = (Mana) this.getValue("mana");
+            if (types == null) {
+                return null;
+            }
             Choice choice = new ChoiceColor(true);
             choice.getChoices().clear();
             choice.setMessage("Pick the type of mana to produce");
@@ -99,11 +111,6 @@ public class AddManaOfAnyTypeProducedEffect extends ManaEffect {
             }
             return newMana;
         }
-        return null;
-    }
-
-    @Override
-    public List<Mana> getNetMana(Game game, Ability source) {
         return null;
     }
 

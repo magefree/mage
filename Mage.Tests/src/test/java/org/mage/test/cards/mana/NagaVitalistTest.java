@@ -7,11 +7,11 @@ import mage.constants.Zone;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
+
 import static org.mage.test.utils.ManaOptionsTestUtils.assertDuplicatedManaOptions;
 import static org.mage.test.utils.ManaOptionsTestUtils.assertManaOptions;
 
 /**
- *
  * @author escplan9, JayDi85
  */
 public class NagaVitalistTest extends CardTestPlayerBase {
@@ -51,12 +51,9 @@ public class NagaVitalistTest extends CardTestPlayerBase {
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
         assertDuplicatedManaOptions(manaOptions);
-        Assert.assertEquals("mana variations don't fit", 5, manaOptions.size());
-        assertManaOptions("{B}{B}", manaOptions);
-        assertManaOptions("{W}{W}", manaOptions);
-        assertManaOptions("{U}{U}", manaOptions);
-        assertManaOptions("{R}{R}", manaOptions);
-        assertManaOptions("{G}{G}", manaOptions);
+        Assert.assertEquals("mana variations don't fit", 2, manaOptions.size());
+        assertManaOptions("{B}", manaOptions);
+        assertManaOptions("{Any}{Any}", manaOptions);
     }
 
     public void nagaVitalist_GiftOfParadisesLandCanGiveAnyColorToNaga_Setup(int giftCastTurn, int nagaManaTapTurn, String nagaManaTapColor) {

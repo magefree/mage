@@ -1,12 +1,17 @@
 package org.mage.test.cards.mana;
 
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.mana.ManaOptions;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
+
+import static org.mage.test.utils.ManaOptionsTestUtils.assertDuplicatedManaOptions;
+import static org.mage.test.utils.ManaOptionsTestUtils.assertManaOptions;
 
 /**
  * @author LevelX2
@@ -284,6 +289,76 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertCounterCount(playerA, "Empowered Autogenerator", CounterType.CHARGE, 2);
+        assertLife(playerB, 20 - 3);
+    }
+
+    @Test
+    public void DictateOfKarametra_ManualPay() {
+        // Whenever you tap a land for mana, add one mana of any type that land produced.
+        addCard(Zone.BATTLEFIELD, playerA, "Dictate of Karametra");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        //
+        addCard(Zone.HAND, playerA, "Precision Bolt", 1); // {2}{R}
+
+        // manual mana pay to activate extra mana
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
+        checkManaPool("mana", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "R", 4);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Precision Bolt", playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertLife(playerB, 20 - 3);
+    }
+
+    // TODO: add support TriggeredManaAbility for available mana calculations
+    //  AI can't see extra mana added by AddManaOfAnyTypeProducedEffect and same
+    //  (maybe it was removed by https://github.com/magefree/mage/pull/5943 to fix multiple TAPPED_FOR_MANA calls or never works before)
+    //  As idea: getPlayable -> getManaAvailable -> available.addMana -- search all TriggeredManaAbility
+    //  and process all available net mana by special call like TriggeredManaAbility->getNetManaForEvent(ManaEvent xxx)
+
+    @Test
+    @Ignore
+    public void TriggeredManaAbilityMustGivesExtraManaOptions() {
+        // TriggeredManaAbility must give extra mana options (2 red instead 1)
+        // Whenever you tap a land for mana, add one mana of any type that land produced.
+        addCard(Zone.BATTLEFIELD, playerA, "Dictate of Karametra");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertAllCommandsUsed();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        assertDuplicatedManaOptions(manaOptions);
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        assertManaOptions("{R}{R}", manaOptions);
+    }
+
+    @Test
+    @Ignore
+    public void DictateOfKarametra_AutoPay() {
+        // Whenever you tap a land for mana, add one mana of any type that land produced.
+        addCard(Zone.BATTLEFIELD, playerA, "Dictate of Karametra");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        //
+        addCard(Zone.HAND, playerA, "Precision Bolt", 1); // {2}{R}
+
+        // computer must see available mana (4 red mana instead 2)
+        //activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
+        //activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
+        showAvaileableAbilities("abils", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Precision Bolt", playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertAllCommandsUsed();
+
         assertLife(playerB, 20 - 3);
     }
 }
