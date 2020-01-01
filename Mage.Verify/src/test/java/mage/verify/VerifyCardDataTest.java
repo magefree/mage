@@ -401,7 +401,7 @@ public class VerifyCardDataTest {
                 doubleNames.put(card.getName(), count + 1);
             }
 
-            // check
+            // check double names
             for (ExpansionSet.SetCardInfo card : set.getSetCardInfo()) {
                 boolean cardHaveDoubleName = (doubleNames.getOrDefault(card.getName(), 0) > 1);
                 boolean cardHaveVariousSetting = card.getGraphicInfo() != null && card.getGraphicInfo().getUsesVariousArt();
@@ -624,6 +624,7 @@ public class VerifyCardDataTest {
         //checkNumbers(card, ref); // TODO: load data from allsets.json and check it (allcards.json do not have card numbers)
         checkBasicLands(card, ref);
         checkMissingAbilities(card, ref);
+        checkWrongSymbolsInRules(card);
         checkWrongAbilitiesText(card, ref);
     }
 
@@ -725,6 +726,18 @@ public class VerifyCardDataTest {
         // always 1 ability (to cast)
         if (card.getAbilities().toArray().length == 1) { // all cards have 1 inner ability to cast
             fail(card, "abilities", "card's abilities is empty, but ref have text");
+        }
+    }
+
+    private void checkWrongSymbolsInRules(Card card) {
+        if (card.getName().contains("’")) {
+            fail(card, "card name", "card's names contains restricted symbol ’");
+        }
+
+        for (String rule : card.getRules()) {
+            if (rule.contains("’")) {
+                fail(card, "rules", "card's rules contains restricted symbol ’");
+            }
         }
     }
 
