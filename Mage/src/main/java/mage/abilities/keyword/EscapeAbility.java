@@ -57,7 +57,7 @@ public class EscapeAbility extends SpellAbility {
 
     @Override
     public String getRule() {
-        return "Escape &mdash; " + this.manaCost + ", Exile " + CardUtil.numberToText(this.exileCount) +
+        return "Escape&mdash;" + this.manaCost + ", Exile " + CardUtil.numberToText(this.exileCount) +
                 " other cards from your graveyard. <i>(You may cast this card from your graveyard for its escape cost.)</i>";
     }
 }
