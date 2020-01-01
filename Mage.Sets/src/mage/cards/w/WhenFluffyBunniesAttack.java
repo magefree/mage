@@ -1,9 +1,5 @@
-
 package mage.cards.w;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -20,21 +16,24 @@ import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class WhenFluffyBunniesAttack extends CardImpl {
 
-    public WhenFluffyBunniesAttack (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}");
+    public WhenFluffyBunniesAttack(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{B}");
 
         // Target creature gets -X/-X until end of turn, where X is the number of times the letter of your choice appears in that creature’s name.
         this.getSpellAbility().addEffect(new WhenFluffyBunniesAttackEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public WhenFluffyBunniesAttack (final WhenFluffyBunniesAttack card) {
+    public WhenFluffyBunniesAttack(final WhenFluffyBunniesAttack card) {
         super(card);
     }
 
@@ -49,7 +48,7 @@ class WhenFluffyBunniesAttackEffect extends OneShotEffect {
 
     public WhenFluffyBunniesAttackEffect() {
         super(Outcome.Detriment);
-        staticText = "Target creature gets -X/-X until end of turn, where X is the number of times the letter of your choice appears in that creature’s name";
+        staticText = "Target creature gets -X/-X until end of turn, where X is the number of times the letter of your choice appears in that creature's name";
     }
 
     public WhenFluffyBunniesAttackEffect(final WhenFluffyBunniesAttackEffect effect) {
@@ -76,7 +75,7 @@ class WhenFluffyBunniesAttackEffect extends OneShotEffect {
                     game.informPlayers(mageObject.getLogName() + ": " + controller.getLogName() + " has chosen " + choice.getChoice());
                 }
             }
-            
+
             Character chosenLetter = choice.getChoice().charAt(0);
             int unboostValue = 0;
             String permName = permanent.getName();

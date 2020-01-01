@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import mage.abilities.Ability;
@@ -52,7 +51,7 @@ class AchHansRunEffect extends OneShotEffect {
 
     AchHansRunEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "you may say \"Ach! Hans, run! It’s the …\" and the name of a creature card. If you do, search your library for a card with that name, put it onto the battlefield, then shuffle your library. That creature gains haste. Exile it at the beginning of the next end step";
+        this.staticText = "you may say \"Ach! Hans, run! It's the …\" and the name of a creature card. If you do, search your library for a card with that name, put it onto the battlefield, then shuffle your library. That creature gains haste. Exile it at the beginning of the next end step";
     }
 
     private AchHansRunEffect(final AchHansRunEffect effect) {

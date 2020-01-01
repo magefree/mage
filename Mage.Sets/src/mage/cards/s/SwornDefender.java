@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -10,12 +8,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.BlockedByIdPredicate;
@@ -26,8 +19,9 @@ import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2 & L_J
  */
 public final class SwornDefender extends CardImpl {
@@ -63,7 +57,7 @@ class SwornDefenderEffect extends OneShotEffect {
 
     public SwornDefenderEffect() {
         super(Outcome.Detriment);
-        this.staticText = "{this}'s power becomes the toughness of target creature blocking or being blocked by {this} minus 1 until end of turn, and {this}’s toughness becomes 1 plus the power of that creature until end of turn";
+        this.staticText = "{this}'s power becomes the toughness of target creature blocking or being blocked by {this} minus 1 until end of turn, and {this}'s toughness becomes 1 plus the power of that creature until end of turn";
     }
 
     public SwornDefenderEffect(final SwornDefenderEffect effect) {

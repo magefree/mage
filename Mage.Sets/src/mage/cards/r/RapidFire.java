@@ -1,27 +1,27 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.condition.common.BeforeBlockersAreDeclaredCondition;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.RampageAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class RapidFire extends CardImpl {
@@ -54,7 +54,7 @@ class RapidFireEffect extends OneShotEffect {
 
     public RapidFireEffect() {
         super(Outcome.AddAbility);
-        this.staticText = "If it doesn’t have rampage, that creature gains rampage 2 until end of turn";
+        this.staticText = "If it doesn't have rampage, that creature gains rampage 2 until end of turn";
     }
 
     public RapidFireEffect(final RapidFireEffect effect) {

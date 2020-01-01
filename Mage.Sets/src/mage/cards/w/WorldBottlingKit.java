@@ -1,8 +1,5 @@
-
 package mage.cards.w;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -23,14 +20,16 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class WorldBottlingKit extends CardImpl {
 
     public WorldBottlingKit(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
         // {5}, Sacrifice World-Bottling Kit: Choose a Magic set. Exile all permanents with that set’s expansion symbol except for basic lands.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WorldBottlingKitEffect(), new ManaCostsImpl("{5}"));
@@ -52,7 +51,7 @@ class WorldBottlingKitEffect extends OneShotEffect {
 
     public WorldBottlingKitEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Choose a Magic set. Exile all permanents with that set’s expansion symbol except for basic lands";
+        this.staticText = "Choose a Magic set. Exile all permanents with that set's expansion symbol except for basic lands";
     }
 
     public WorldBottlingKitEffect(final WorldBottlingKitEffect effect) {

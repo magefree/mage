@@ -1,18 +1,8 @@
 package mage.cards.d;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -24,8 +14,10 @@ import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
 
+import java.util.*;
+import java.util.stream.Collectors;
+
 /**
- *
  * @author L_J
  */
 public final class DeathOrGlory extends CardImpl {
@@ -51,7 +43,7 @@ class DeathOrGloryEffect extends OneShotEffect {
 
     DeathOrGloryEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Separate all creature cards in your graveyard into two piles. Exile the pile of an opponent’s choice and return the other to the battlefield";
+        this.staticText = "Separate all creature cards in your graveyard into two piles. Exile the pile of an opponent's choice and return the other to the battlefield";
     }
 
     DeathOrGloryEffect(final DeathOrGloryEffect effect) {

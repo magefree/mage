@@ -57,7 +57,7 @@ class RakdosAugermageEffect extends OneShotEffect {
 
     public RakdosAugermageEffect() {
         super(Outcome.Discard);
-        staticText = "reveal your hand and discard a card of target opponent’s choice";
+        staticText = "reveal your hand and discard a card of target opponent's choice";
     }
 
     public RakdosAugermageEffect(final RakdosAugermageEffect effect) {

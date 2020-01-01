@@ -1,7 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -14,13 +12,7 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -33,12 +25,13 @@ import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class GargantuanGorilla extends CardImpl {
-    
+
     public GargantuanGorilla(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}{G}");
         this.subtype.add(SubType.APE);
@@ -55,11 +48,11 @@ public final class GargantuanGorilla extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
-    
+
     public GargantuanGorilla(final GargantuanGorilla card) {
         super(card);
     }
-    
+
     @Override
     public GargantuanGorilla copy() {
         return new GargantuanGorilla(this);
@@ -70,6 +63,7 @@ class GargantuanGorillaSacrificeEffect extends OneShotEffect {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Forest");
     private static final FilterPermanent filterSnow = new FilterPermanent("snow permanent");
+
     static {
         filter.add(new SubtypePredicate(SubType.FOREST));
         filterSnow.add(new SupertypePredicate(SuperType.SNOW));
@@ -77,7 +71,7 @@ class GargantuanGorillaSacrificeEffect extends OneShotEffect {
 
     public GargantuanGorillaSacrificeEffect() {
         super(Outcome.Sacrifice);
-        staticText = "you may sacrifice a Forest. If you sacrifice a snow Forest this way, {this} gains trample until end of turn. If you don’t sacrifice a Forest, sacrifice {this} and it deals 7 damage to you.";
+        staticText = "you may sacrifice a Forest. If you sacrifice a snow Forest this way, {this} gains trample until end of turn. If you don't sacrifice a Forest, sacrifice {this} and it deals 7 damage to you.";
     }
 
     public GargantuanGorillaSacrificeEffect(final GargantuanGorillaSacrificeEffect effect) {

@@ -144,7 +144,7 @@ class TheFallenApartRestrictionEffect extends RestrictionEffect {
 
     public TheFallenApartRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
-        staticText = "{this} can’t attack if it has no legs and can’t block if it has no arms";
+        staticText = "{this} can't attack if it has no legs and can't block if it has no arms";
     }
 
     public TheFallenApartRestrictionEffect(final TheFallenApartRestrictionEffect effect) {

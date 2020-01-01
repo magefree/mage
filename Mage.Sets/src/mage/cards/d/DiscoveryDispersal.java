@@ -69,7 +69,7 @@ class DispersalEffect extends OneShotEffect {
         super(Outcome.Benefit);
         this.staticText = "Each opponent returns a nonland permanent "
                 + "they control with the highest converted mana cost "
-                + "among permanents they control to its owner’s hand, "
+                + "among permanents they control to its owner's hand, "
                 + "then discards a card.";
     }
 

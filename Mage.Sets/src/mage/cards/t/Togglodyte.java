@@ -94,7 +94,7 @@ class TogglodyteToggleEffect extends OneShotEffect {
 
     public TogglodyteToggleEffect() {
         super(Outcome.Neutral);
-        staticText = "toggle {this}’s ON/OFF switch";
+        staticText = "toggle {this}'s ON/OFF switch";
     }
 
     public TogglodyteToggleEffect(final TogglodyteToggleEffect effect) {
@@ -158,7 +158,7 @@ class TogglodytePreventionEffect extends PreventionEffectImpl {
 
     public TogglodytePreventionEffect() {
         super(Duration.WhileOnBattlefield, Integer.MAX_VALUE, false);
-        staticText = "As long as {this} is turned off, it can’t attack or block, and prevent all damage it would deal";
+        staticText = "As long as {this} is turned off, it can't attack or block, and prevent all damage it would deal";
     }
 
     public TogglodytePreventionEffect(final TogglodytePreventionEffect effect) {

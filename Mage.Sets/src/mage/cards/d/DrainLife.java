@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import mage.abilities.Ability;
@@ -64,8 +63,8 @@ class DrainLifeEffect extends OneShotEffect {
     DrainLifeEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals X damage to any target. You gain life equal to the damage dealt, " +
-                "but not more life than the player’s life total before the damage was dealt, " +
-                "the planeswalker’s loyalty before the damage was dealt, or the creature’s toughness.";
+                "but not more life than the player's life total before the damage was dealt, " +
+                "the planeswalker's loyalty before the damage was dealt, or the creature's toughness.";
     }
 
     private DrainLifeEffect(final DrainLifeEffect effect) {

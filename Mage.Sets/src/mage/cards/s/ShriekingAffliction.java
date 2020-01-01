@@ -1,8 +1,8 @@
 package mage.cards.s;
 
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
@@ -29,8 +29,8 @@ public final class ShriekingAffliction extends CardImpl {
                         Zone.BATTLEFIELD, new LoseLifeTargetEffect(3),
                         TargetController.OPPONENT, false, true
                 ),
-                (Condition)new CardsInHandCondition(ComparisonType.FEWER_THAN, 2, null, TargetController.ACTIVE),
-                "At the beginning of each opponent’s upkeep, if that player has one or fewer cards in hand, they lose 3 life."
+                new CardsInHandCondition(ComparisonType.FEWER_THAN, 2, null, TargetController.ACTIVE),
+                "At the beginning of each opponent's upkeep, if that player has one or fewer cards in hand, they lose 3 life."
         ));
     }
 

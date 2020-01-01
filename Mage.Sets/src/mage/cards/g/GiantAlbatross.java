@@ -24,14 +24,13 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- *
  * @author noahg
  */
 public final class GiantAlbatross extends CardImpl {
 
     public GiantAlbatross(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        
+
         this.subtype.add(SubType.BIRD);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -58,7 +57,7 @@ class GiantAlbatrossEffect extends OneShotEffect {
 
     public GiantAlbatrossEffect() {
         super(Outcome.Detriment);
-        this.staticText = "for each creature that dealt damage to {this} this turn, destroy that creature unless its controller pays 2 life. A creature destroyed this way can’t be regenerated";
+        this.staticText = "for each creature that dealt damage to {this} this turn, destroy that creature unless its controller pays 2 life. A creature destroyed this way can't be regenerated";
     }
 
     public GiantAlbatrossEffect(final GiantAlbatrossEffect effect) {

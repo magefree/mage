@@ -1,12 +1,12 @@
 package mage.cards.d;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.CastOnlyIfConditionIsTrueAbility;
 import mage.abilities.condition.common.OnOpponentsTurnCondition;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.*;
+import mage.abilities.effects.common.PreventDamageByTargetEffect;
+import mage.abilities.effects.common.PreventDamageToTargetEffect;
+import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -19,8 +19,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author noahg
  */
 public final class Delirium extends CardImpl {
@@ -33,10 +34,10 @@ public final class Delirium extends CardImpl {
 
     public Delirium(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}{R}");
-        
+
 
         // Cast this spell only during an opponent’s turn.
-        this.addAbility(new CastOnlyIfConditionIsTrueAbility(OnOpponentsTurnCondition.instance, "Cast this spell only during an opponent’s turn."));
+        this.addAbility(new CastOnlyIfConditionIsTrueAbility(OnOpponentsTurnCondition.instance, "Cast this spell only during an opponent's turn."));
         // Tap target creature that player controls. That creature deals damage equal to its power to the player. Prevent all combat damage that would be dealt to and dealt by the creature this turn.
         this.getSpellAbility().addEffect(new TapTargetEffect().setText("target creature that player controls"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

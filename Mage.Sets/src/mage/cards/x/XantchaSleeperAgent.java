@@ -52,7 +52,7 @@ public final class XantchaSleeperAgent extends CardImpl {
         // {3}: Xantcha’s controller loses 2 life and you draw a card. Any player may activate this ability.
         SimpleActivatedAbility simpleAbility = new SimpleActivatedAbility(
                 new LoseLifePermanentControllerEffect(2)
-                        .setText("{this}’s controller loses 2 life"),
+                        .setText("{this}'s controller loses 2 life"),
                 new GenericManaCost(3)
         );
         simpleAbility.addEffect(new DrawCardSourceControllerEffect(1).setText("and you draw a card"));

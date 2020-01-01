@@ -1,10 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -23,14 +18,18 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class StaffOfTheLetterMagus extends CardImpl {
 
     public StaffOfTheLetterMagus(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // As Staff of the Letter Magus enters the battlefield, choose a consonant other than N, R, S, or T.
         this.addAbility(new AsEntersBattlefieldAbility(new StaffOfTheLetterMagusChooseLetterEffect()));
@@ -74,7 +73,7 @@ class StaffOfTheLetterMagusChooseLetterEffect extends OneShotEffect {
         // Can I choose Y?
         // Yes. We play by popular game show rules here. Y is a consonant.
         // https://magic.wizards.com/en/articles/archive/news/unstable-faqawaslfaqpaftidawabiajtbt-2017-12-06
-        Character[] forbiddenChars = {'A','E','I','N','O','R','S','T','U'};
+        Character[] forbiddenChars = {'A', 'E', 'I', 'N', 'O', 'R', 'S', 'T', 'U'};
         for (Character letter = 'A'; letter <= 'Z'; letter++) {
             if (Arrays.binarySearch(forbiddenChars, letter) < 0) {
                 choices.add(letter.toString());
@@ -105,7 +104,7 @@ class StaffOfTheLetterMagusEffect extends OneShotEffect {
 
     public StaffOfTheLetterMagusEffect() {
         super(Outcome.GainLife);
-        staticText = "you gain 1 life for each time the chosen letter appears in that spell’s name";
+        staticText = "you gain 1 life for each time the chosen letter appears in that spell's name";
     }
 
     public StaffOfTheLetterMagusEffect(final StaffOfTheLetterMagusEffect effect) {

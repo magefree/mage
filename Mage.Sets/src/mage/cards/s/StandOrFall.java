@@ -1,11 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -26,14 +20,19 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 /**
- *
  * @author LevelX2 & L_J
  */
 public final class StandOrFall extends CardImpl {
 
     public StandOrFall(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
 
         // At the beginning of combat on your turn, separate all creatures defending player controls into two piles. Only creatures in the pile of that player’s choice can block this turn.
         this.addAbility(new BeginningOfCombatTriggeredAbility(new StandOrFallEffect(), TargetController.YOU, false));
@@ -53,7 +52,7 @@ class StandOrFallEffect extends OneShotEffect {
 
     public StandOrFallEffect() {
         super(Outcome.Detriment);
-        this.staticText = "separate all creatures defending player controls into two piles. Only creatures in the pile of that player’s choice can block this turn";
+        this.staticText = "separate all creatures defending player controls into two piles. Only creatures in the pile of that player's choice can block this turn";
     }
 
     public StandOrFallEffect(final StandOrFallEffect effect) {
@@ -110,7 +109,7 @@ class StandOrFallEffect extends OneShotEffect {
                         pile2.add(p);
                     }
                 }
-    
+
                 boolean choice = targetPlayer.choosePile(outcome, "Choose which pile can block this turn.", pile1, pile2, game);
                 List<Permanent> chosenPile = choice ? pile2 : pile1;
                 List<Permanent> otherPile = choice ? pile1 : pile2;

@@ -1,6 +1,5 @@
 package mage.cards.u;
 
-import java.util.*;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -45,6 +44,8 @@ import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.*;
 import mage.util.RandomUtil;
+
+import java.util.*;
 
 /**
  * @author L_J
@@ -172,7 +173,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 effects.add(new RevealLibraryPutIntoHandEffect(5, new FilterCreatureCard("creature cards"), Zone.LIBRARY));
                                 break;
                             case 8: // GIDEON JURA 1
-                                sb.append("During target opponent’s next turn, creatures that player controls attack Urza if able.");
+                                sb.append("During target opponent's next turn, creatures that player controls attack Urza if able.");
                                 effects.add(new mage.cards.g.GideonJura(controller.getId(), setInfo).getAbilities().get(2).getEffects().get(0));
                                 target = new TargetOpponent();
                                 break;
@@ -191,11 +192,11 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 target = new TargetPlayer();
                                 break;
                             case 12: // NISSA SAGE ANIMIST 1
-                                sb.append("Reveal the top card of your library. If it’s a land card, put it onto the battlefield. Otherwise, put it into your hand.");
+                                sb.append("Reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put it into your hand.");
                                 effects.add(new mage.cards.n.NissaSageAnimist(controller.getId(), setInfo).getAbilities().get(2).getEffects().get(0));
                                 break;
                             case 13: // NISSA WORLDWAKER 1
-                                sb.append("Target land you control becomes a 4/4 Elemental creature with trample. It’s still a land.");
+                                sb.append("Target land you control becomes a 4/4 Elemental creature with trample. It's still a land.");
                                 effects.add(new mage.cards.n.NissaWorldwaker(controller.getId(), setInfo).getAbilities().get(2).getEffects().get(0));
                                 target = new TargetPermanent(new FilterControlledLandPermanent());
                                 break;
@@ -204,7 +205,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 effects.add(new mage.cards.s.SarkhanUnbroken(controller.getId(), setInfo).getAbilities().get(2).getEffects().get(0));
                                 break;
                             case 15: // SARKHAN THE DRAGONSPEAKER 1
-                                sb.append("Until end of turn, Urza becomes a legendary 4/4 red Dragon creature with flying, indestructible, and haste. (He doesn’t lose loyalty while he’s not a planeswalker.)");
+                                sb.append("Until end of turn, Urza becomes a legendary 4/4 red Dragon creature with flying, indestructible, and haste. (He doesn't lose loyalty while he's not a planeswalker.)");
                                 effects.add(new mage.cards.s.SarkhanTheDragonspeaker(controller.getId(), setInfo).getAbilities().get(2).getEffects().get(0));
                                 break;
                             case 16: // SORIN SOLEMN VISITOR 1
@@ -305,7 +306,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 effects.add(new CreateTokenEffect(new DragonTokenGold(), 1));
                                 break;
                             case 16: // SORIN MARKOV 2
-                                sb.append("Target player’s life total becomes 10.");
+                                sb.append("Target player's life total becomes 10.");
                                 effects.add(new mage.cards.s.SorinMarkov(controller.getId(), setInfo).getAbilities().get(3).getEffects().get(0));
                                 target = new TargetPlayer();
                                 break;
@@ -396,12 +397,12 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 effects.add(new GetEmblemEffect(new KioraMasterOfTheDepthsEmblem()));
                                 break;
                             case 14: // SORIN MARKOV 3
-                                sb.append("You control target player during that player’s next turn.");
+                                sb.append("You control target player during that player's next turn.");
                                 effects.add(new ControlTargetPlayerNextTurnEffect());
                                 target = new TargetPlayer();
                                 break;
                             case 15: // JACE THE MIND SCULPTOR 4
-                                sb.append("Exile all cards from target player’s library, then that player shuffles their hand into their library.");
+                                sb.append("Exile all cards from target player's library, then that player shuffles their hand into their library.");
                                 effects.add(new mage.cards.j.JaceTheMindSculptor(controller.getId(), setInfo).getAbilities().get(5).getEffects().get(0));
                                 target = new TargetPlayer();
                                 break;

@@ -47,8 +47,8 @@ public final class SparkDouble extends CardImpl {
         // it enters with an additional loyalty counter on it if it’s a planeswalker, and it isn’t legendary if that permanent is legendary.
         Effect effect = new CopyPermanentEffect(filter, new SparkDoubleExceptEffectsApplyerToPermanent());
         effect.setText("as a copy of a creature or planeswalker you control, "
-                + "except it enters with an additional +1/+1 counter on it if it’s a creature, "
-                + "it enters with an additional loyalty counter on it if it’s a planeswalker, and it isn’t legendary if that permanent is legendary.");
+                + "except it enters with an additional +1/+1 counter on it if it's a creature, "
+                + "it enters with an additional loyalty counter on it if it's a planeswalker, and it isn't legendary if that permanent is legendary.");
         EntersBattlefieldAbility ability = new EntersBattlefieldAbility(effect, true);
         this.addAbility(ability);
     }

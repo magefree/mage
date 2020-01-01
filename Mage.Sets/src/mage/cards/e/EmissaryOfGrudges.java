@@ -27,7 +27,6 @@ import mage.target.TargetStackObject;
 import java.util.UUID;
 
 /**
- *
  * @author credman0
  */
 public class EmissaryOfGrudges extends CardImpl {
@@ -45,7 +44,7 @@ public class EmissaryOfGrudges extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // As Emissary of Grudges enters the battlefield, secretly choose an opponent.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new ChooseSecretOpponentEffect(),"As {this} enters the battlefield, secretly choose an opponent.")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new ChooseSecretOpponentEffect(), "As {this} enters the battlefield, secretly choose an opponent.")));
         // Choose new targets for target spell or ability if it’s controlled by the chosen player and if it targets you
         // or a permanent you control. Activate this ability only once.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new EmissaryOfGrudgesEffect(), new RevealSecretOpponentCost());
@@ -67,7 +66,7 @@ class EmissaryOfGrudgesEffect extends OneShotEffect {
 
     public EmissaryOfGrudgesEffect() {
         super(Outcome.Neutral);
-        this.staticText = "Choose new targets for target spell or ability if it’s controlled by the chosen player and" +
+        this.staticText = "Choose new targets for target spell or ability if it's controlled by the chosen player and" +
                 " if it targets you or a permanent you control. Activate this ability only once.";
     }
 
@@ -104,7 +103,7 @@ class EmissaryOfGrudgesEffect extends OneShotEffect {
                             }
                         }
                     }
-                    if (targetsYouOrAPermanentYouControl){
+                    if (targetsYouOrAPermanentYouControl) {
                         return stackObject.chooseNewTargets(game, source.getControllerId(), false, false, null);
                     }
                 }

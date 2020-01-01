@@ -1,7 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
@@ -18,8 +16,9 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetSpell;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class Reverberation extends CardImpl {
@@ -52,7 +51,7 @@ class ReverberationEffect extends ReplacementEffectImpl {
 
     public ReverberationEffect() {
         super(Duration.EndOfTurn, Outcome.RedirectDamage);
-        staticText = "All damage that would be dealt this turn by target sorcery spell is dealt to that spell’s controller instead";
+        staticText = "All damage that would be dealt this turn by target sorcery spell is dealt to that spell's controller instead";
     }
 
     public ReverberationEffect(final ReverberationEffect effect) {

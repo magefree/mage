@@ -1,7 +1,5 @@
 package mage.cards.f;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.condition.common.AfterBlockersAreDeclaredCondition;
@@ -12,24 +10,25 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TurnPhase;
+import mage.filter.common.FilterCreatureAttackingYou;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SaprolingToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
-import mage.filter.common.FilterCreatureAttackingYou;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author noahg
  */
 public final class FlashFoliage extends CardImpl {
 
     public FlashFoliage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");
-        
+
 
         // Cast Flash Foliage only during combat after blockers are declared.
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(TurnPhase.COMBAT, AfterBlockersAreDeclaredCondition.instance));
@@ -56,7 +55,7 @@ class FlashFoliageEffect extends OneShotEffect {
 
     public FlashFoliageEffect() {
         super(Outcome.Benefit);
-        this.staticText = "create a 1/1 green Saproling creature token that’s blocking target creature attacking you";
+        this.staticText = "create a 1/1 green Saproling creature token that's blocking target creature attacking you";
     }
 
     public FlashFoliageEffect(final FlashFoliageEffect effect) {

@@ -52,7 +52,7 @@ class MindExtractionEffect extends OneShotEffect {
 
     MindExtractionEffect() {
         super(Outcome.Benefit);
-        staticText = "Target player reveals their hand and discards all cards of each of the sacrificed creature’s colors.";
+        staticText = "Target player reveals their hand and discards all cards of each of the sacrificed creature's colors.";
     }
 
     private MindExtractionEffect(final MindExtractionEffect effect) {

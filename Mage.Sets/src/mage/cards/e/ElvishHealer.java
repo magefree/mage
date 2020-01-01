@@ -53,7 +53,7 @@ class ElvishHealerEffect extends OneShotEffect {
     ElvishHealerEffect() {
         super(Outcome.Benefit);
         staticText = "Prevent the next 1 damage that would be dealt to any target this turn. " +
-                "If it’s a green creature, prevent the next 2 damage instead.";
+                "If it's a green creature, prevent the next 2 damage instead.";
     }
 
     private ElvishHealerEffect(final ElvishHealerEffect effect) {

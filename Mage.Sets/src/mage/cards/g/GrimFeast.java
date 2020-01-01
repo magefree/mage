@@ -1,6 +1,5 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
@@ -17,8 +16,9 @@ import mage.filter.predicate.other.OwnerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class GrimFeast extends CardImpl {
@@ -28,7 +28,7 @@ public final class GrimFeast extends CardImpl {
 
         // At the beginning of your upkeep, Grim Feast deals 1 damage to you.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DamageControllerEffect(1), 
+                new DamageControllerEffect(1),
                 TargetController.YOU, false
         ));
 
@@ -69,7 +69,7 @@ class GrimFeastTriggeredAbility extends PutIntoGraveFromBattlefieldAllTriggeredA
 
     @Override
     public String getRule() {
-        return "Whenever a creature is put into an opponent’s graveyard from the battlefield, "
+        return "Whenever a creature is put into an opponent's graveyard from the battlefield, "
                 + "you gain life equal to its toughness.";
     }
 }

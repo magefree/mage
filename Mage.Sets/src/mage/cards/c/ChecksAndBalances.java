@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import mage.abilities.Ability;
@@ -63,7 +62,7 @@ class ChecksAndBalancesEffect extends OneShotEffect {
 
     public ChecksAndBalancesEffect() {
         super(Outcome.Detriment);
-        staticText = "each of that player’s opponents may discard a card. If they do, counter that spell";
+        staticText = "each of that player's opponents may discard a card. If they do, counter that spell";
     }
 
     public ChecksAndBalancesEffect(final ChecksAndBalancesEffect effect) {

@@ -1,35 +1,29 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.SetToughnessSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class WallOfTombstones extends CardImpl {
 
     public WallOfTombstones(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.subtype.add(SubType.WALL);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
@@ -56,7 +50,7 @@ class WallOfTombstonesEffect extends OneShotEffect {
 
     public WallOfTombstonesEffect() {
         super(Outcome.Detriment);
-        this.staticText = "change {this}’s base toughness to 1 plus the number of creature cards in your graveyard";
+        this.staticText = "change {this}'s base toughness to 1 plus the number of creature cards in your graveyard";
     }
 
     public WallOfTombstonesEffect(final WallOfTombstonesEffect effect) {

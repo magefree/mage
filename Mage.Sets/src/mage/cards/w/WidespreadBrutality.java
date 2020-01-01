@@ -41,7 +41,7 @@ class WidespreadBrutalityEffect extends OneShotEffect {
         super(Outcome.Benefit);
         staticText = "Amass 2, then the Army you amassed deals damage equal to its power to each non-Army creature. " +
                 "<i>(To amass 2, put two +1/+1 counters on an Army you control. " +
-                "If you don’t control one, create a 0/0 black Zombie Army creature token first.)</i>";
+                "If you don't control one, create a 0/0 black Zombie Army creature token first.)</i>";
     }
 
     private WidespreadBrutalityEffect(final WidespreadBrutalityEffect effect) {

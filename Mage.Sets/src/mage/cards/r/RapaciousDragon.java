@@ -30,7 +30,7 @@ public final class RapaciousDragon extends CardImpl {
         // When Rapacious Dragon enters the battlefield, create two Treasure tokens.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new CreateTokenEffect(new TreasureToken(), 2)
-                        .setText("create two Treasure tokens. <i>(They’re artifacts with " +
+                        .setText("create two Treasure tokens. <i>(They're artifacts with " +
                                 "\"{T}, Sacrifice this artifact: Add one mana of any color.\")</i>")
         ));
     }

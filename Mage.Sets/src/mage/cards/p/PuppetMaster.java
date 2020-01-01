@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.costs.Cost;
@@ -22,8 +20,9 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class PuppetMaster extends CardImpl {
@@ -57,7 +56,7 @@ class PuppetMasterEffect extends OneShotEffect {
 
     public PuppetMasterEffect() {
         super(Outcome.ReturnToHand);
-        staticText = "return that card to its owner's hand. If that card is returned to its owner’s hand this way, you may pay {U}{U}{U}. If you do, return {this} to its owner’s hand";
+        staticText = "return that card to its owner's hand. If that card is returned to its owner's hand this way, you may pay {U}{U}{U}. If you do, return {this} to its owner's hand";
     }
 
     public PuppetMasterEffect(final PuppetMasterEffect effect) {
@@ -73,7 +72,7 @@ class PuppetMasterEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Object object = getValue("attachedTo");
         if (object instanceof Permanent) {
-            Card card = game.getCard(((Permanent)object).getId());
+            Card card = game.getCard(((Permanent) object).getId());
             if (card != null) {
                 if (card.moveToZone(Zone.HAND, source.getSourceId(), game, false)) {
                     Cost cost = new ManaCostsImpl("{U}{U}{U}");

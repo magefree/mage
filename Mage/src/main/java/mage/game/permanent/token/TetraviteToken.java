@@ -1,26 +1,21 @@
 package mage.game.permanent.token;
 
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author spjspj
  */
 public final class TetraviteToken extends TokenImpl {
 
     public TetraviteToken() {
-        super("Tetravite", "1/1 colorless Tetravite artifact creature token with flying and \"This creature can’t be enchanted.\"");
+        super("Tetravite", "1/1 colorless Tetravite artifact creature token with flying and \"This creature can't be enchanted.\"");
         cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
         subtype.add(SubType.TETRAVITE);
