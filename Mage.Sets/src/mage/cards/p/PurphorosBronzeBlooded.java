@@ -35,9 +35,9 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class PurphurosBronzeBlooded extends CardImpl {
+public final class PurphorosBronzeBlooded extends CardImpl {
 
-    public PurphurosBronzeBlooded(UUID ownerId, CardSetInfo setInfo) {
+    public PurphorosBronzeBlooded(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{4}{R}");
 
         this.addSuperType(SuperType.LEGENDARY);
@@ -62,13 +62,13 @@ public final class PurphurosBronzeBlooded extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new PurphurosBronzeBloodedEffect(), new ManaCostsImpl("{2}{R}")));
     }
 
-    private PurphurosBronzeBlooded(final PurphurosBronzeBlooded card) {
+    private PurphorosBronzeBlooded(final PurphorosBronzeBlooded card) {
         super(card);
     }
 
     @Override
-    public PurphurosBronzeBlooded copy() {
-        return new PurphurosBronzeBlooded(this);
+    public PurphorosBronzeBlooded copy() {
+        return new PurphorosBronzeBlooded(this);
     }
 }
 
