@@ -24,9 +24,7 @@ import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.ColorlessPredicate;
+import mage.filter.predicate.mageobject.*;
 import mage.filter.predicate.other.CardTextPredicate;
 import mage.filter.predicate.other.ExpansionSetPredicate;
 import mage.game.events.Listener;
@@ -292,6 +290,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
     private CardCriteria buildCriteria() {
         CardCriteria criteria = new CardCriteria();
+        criteria.explicitColorMode(this.tbExplicitColorMode.isSelected());
         criteria.black(this.tbBlack.isSelected());
         criteria.blue(this.tbBlue.isSelected());
         criteria.green(this.tbGreen.isSelected());
@@ -516,6 +515,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         tbBlue = new javax.swing.JToggleButton();
         tbBlack = new javax.swing.JToggleButton();
         tbWhite = new javax.swing.JToggleButton();
+        tbExplicitColorMode = new javax.swing.JToggleButton();
         tbColorless = new javax.swing.JToggleButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         cbExpansionSet = new javax.swing.JComboBox<>();
@@ -659,6 +659,22 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             }
         });
         tbColor.add(tbColorless);
+
+
+        tbExplicitColorMode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/red_x_off.png"))); // NOI18N
+        tbExplicitColorMode.setSelected(false);
+        tbExplicitColorMode.setToolTipText("Only show cards that exactly match your selected color filters.");
+        tbExplicitColorMode.setFocusable(false);
+        tbExplicitColorMode.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        tbExplicitColorMode.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/red_x.png"))); // NOI18N
+        tbExplicitColorMode.setVerifyInputWhenFocusTarget(false);
+        tbExplicitColorMode.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        tbExplicitColorMode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tbExplicitColorModeActionPerformed(evt);
+            }
+        });
+        tbColor.add(tbExplicitColorMode);
         tbColor.add(jSeparator1);
 
         reloadSetsCombobox();
@@ -1341,6 +1357,10 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         filterCardsColor(evt.getModifiers(), evt.getActionCommand());
     }//GEN-LAST:event_tbGreenActionPerformed
 
+    private void tbExplicitColorModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbExplicitColorModeActionPerformed
+        filterCards();
+    }//GEN-LAST:event_tbExplicitColorModeActionPerformed
+
     private void tbBlueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbBlueActionPerformed
         filterCardsColor(evt.getModifiers(), evt.getActionCommand());
     }//GEN-LAST:event_tbBlueActionPerformed
@@ -1543,6 +1563,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private javax.swing.JToggleButton tbCreatures;
     private javax.swing.JToggleButton tbEnchantments;
     private javax.swing.JToggleButton tbGreen;
+    private javax.swing.JToggleButton tbExplicitColorMode;
     private javax.swing.JToggleButton tbInstants;
     private javax.swing.JToggleButton tbLand;
     private javax.swing.JToggleButton tbMythic;

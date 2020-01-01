@@ -34,6 +34,7 @@ public class CardCriteria {
     private boolean red;
     private boolean white;
     private boolean colorless;
+    private boolean explicitColorMode;
     private Integer convertedManaCost;
     private String sortBy;
     private Long start;
@@ -56,6 +57,7 @@ public class CardCriteria {
         this.red = true;
         this.white = true;
         this.colorless = true;
+        this.explicitColorMode = false;
 
         this.minCardNumber = Integer.MIN_VALUE;
         this.maxCardNumber = Integer.MAX_VALUE;
@@ -88,6 +90,11 @@ public class CardCriteria {
 
     public CardCriteria colorless(boolean colorless) {
         this.colorless = colorless;
+        return this;
+    }
+
+    public CardCriteria explicitColorMode(boolean explicitColorMode) {
+        this.explicitColorMode = explicitColorMode;
         return this;
     }
 
@@ -254,30 +261,54 @@ public class CardCriteria {
             if (black) {
                 where.eq("black", true);
                 colorClauses++;
+            } else if (explicitColorMode) {
+                where.eq("black", false);
+                colorClauses++;
             }
+
             if (blue) {
                 where.eq("blue", true);
                 colorClauses++;
+            } else if (explicitColorMode) {
+                where.eq("blue", false);
+                colorClauses++;
             }
+
             if (green) {
                 where.eq("green", true);
                 colorClauses++;
+            } else if (explicitColorMode) {
+                where.eq("green", false);
+                colorClauses++;
             }
+
             if (red) {
                 where.eq("red", true);
                 colorClauses++;
+            } else if (explicitColorMode) {
+                where.eq("red", false);
+                colorClauses++;
             }
+
             if (white) {
                 where.eq("white", true);
                 colorClauses++;
+            } else if (explicitColorMode) {
+                where.eq("white", false);
+                colorClauses++;
             }
+
             if (colorless) {
                 where.eq("black", false).eq("blue", false).eq("green", false).eq("red", false).eq("white", false);
                 where.and(5);
                 colorClauses++;
             }
-            if (colorClauses > 0) {
+            
+            if (colorClauses > 0 && !explicitColorMode) {
                 where.or(colorClauses);
+                clausesCount++;
+            } else if (colorClauses > 0 && explicitColorMode) {
+                where.and(colorClauses);
                 clausesCount++;
             }
         }
