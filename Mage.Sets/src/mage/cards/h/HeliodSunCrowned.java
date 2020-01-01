@@ -20,6 +20,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -33,7 +34,7 @@ import java.util.UUID;
  */
 public final class HeliodSunCrowned extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("creature or enchantment you control");
+    private static final FilterPermanent filter = new FilterControlledPermanent("creature or enchantment you control");
     private static final FilterPermanent filter2 = new FilterCreaturePermanent("another target creature");
 
     static {
