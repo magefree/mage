@@ -28,7 +28,7 @@ public class CenturionCommander extends Commander {
         banned.add("Falling Star");
         banned.add("Fastbond");
         banned.add("Food Chain");
-        banned.add("Gaea’s Cradle");
+        banned.add("Gaea's Cradle");
         banned.add("Gifts Ungiven");
         banned.add("Grim Monolith");
         banned.add("Grindstone");
@@ -41,7 +41,7 @@ public class CenturionCommander extends Commander {
         banned.add("Mana Crypt");
         banned.add("Mana Drain");
         banned.add("Mana Vault");
-        banned.add("Mishra’s Workshop");
+        banned.add("Mishra's Workshop");
         banned.add("Mind Twist");
         banned.add("Mox Diamond");
         banned.add("Mox Emerald");
@@ -54,7 +54,7 @@ public class CenturionCommander extends Commander {
         banned.add("Necropotence");
         banned.add("Oath of Druids");
         banned.add("Protean Hulk");
-        banned.add("Sensei’s Diving Top");
+        banned.add("Sensei's Diving Top");
         banned.add("Serra Ascendant");
         banned.add("Sharazad");
         banned.add("Survival of the Fittest");
@@ -69,7 +69,7 @@ public class CenturionCommander extends Commander {
         banned.add("Vampiric Tutor");
         banned.add("Vanishing");
         banned.add("Winter Orb");
-        banned.add("Yawgmoth’s Bargain");
+        banned.add("Yawgmoth's Bargain");
 
         bannedCommander.add("Baral, Chief of Compliance");
         bannedCommander.add("Derevi, Empyrial Tactician");
