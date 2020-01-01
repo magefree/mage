@@ -79,7 +79,7 @@ public class DuelCommander extends Commander {
         bannedCommander.add("Teferi, Temporal Archmage");
         bannedCommander.add("Urza, Lord High Artificer");
         bannedCommander.add("Vial Smasher the Fierce");
-        bannedCommander.add("Yuriko, the Tiger’s Shadow");
+        bannedCommander.add("Yuriko, the Tiger's Shadow");
         bannedCommander.add("Zurgo Bellstriker");
     }
 
