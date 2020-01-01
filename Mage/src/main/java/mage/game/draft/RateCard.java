@@ -272,6 +272,7 @@ public final class RateCard {
             if (s.length == 2) {
                 Integer rating = Integer.parseInt(s[1].trim());
                 String name = s[0].trim();
+                name = name.replace("’", "'");
                 if (rating > max) {
                     max = rating;
                 }
