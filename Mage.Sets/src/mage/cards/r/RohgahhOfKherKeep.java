@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -14,13 +13,13 @@ import mage.abilities.effects.common.TapAllEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.continuous.GainControlAllEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -113,7 +112,7 @@ class RohgahhOfKherKeepEffect extends OneShotEffect {
                 permanent.tap(game);
             }
             if (opponent != null) {
-                game.addEffect(new GainControlAllEffect(Duration.Custom, filter, opponent.getId()), source);
+                new GainControlAllEffect(Duration.Custom, filter, opponent.getId()).apply(game, source);
                 if (permanent != null) {
                     ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, true, opponent.getId());
                     effect.setTargetPointer(new FixedTarget(permanent, game));

@@ -37,10 +37,6 @@ public final class VarchildBetrayerOfKjeldor extends CardImpl {
                     SubType.SURVIVOR,
                     "Survivors your opponents control"
             );
-    private static final FilterCreaturePermanent filter2
-            = new FilterCreaturePermanent(
-                    SubType.SURVIVOR, "all Survivors"
-            );
 
     static {
         filter1.add(new ControllerPredicate(TargetController.OPPONENT));
@@ -74,7 +70,7 @@ public final class VarchildBetrayerOfKjeldor extends CardImpl {
 
         // When Varchild leaves the battlefield, gain control of all Survivors.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(
-                new GainControlAllEffect(Duration.Custom, filter2), false
+                new GainControlAllEffect(Duration.Custom, new FilterCreaturePermanent(SubType.SURVIVOR, "all Survivors")), false
         ));
     }
 

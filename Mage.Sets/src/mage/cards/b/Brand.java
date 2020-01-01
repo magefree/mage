@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -26,10 +25,10 @@ public final class Brand extends CardImpl {
     }
 
     public Brand(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
 
         // Gain control of all permanents you own. <i>(This effect lasts indefinitely.)</i>
-        this.getSpellAbility().addEffect(new GainControlAllEffect(Duration.EndOfGame, filter));
+        this.getSpellAbility().addEffect(new GainControlAllEffect(Duration.Custom, filter));
 
         // Cycling {2}
         this.addAbility(new CyclingAbility(new GenericManaCost(2)));

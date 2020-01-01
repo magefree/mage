@@ -1,5 +1,6 @@
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
@@ -19,8 +20,6 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetOpponent;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -85,7 +84,8 @@ class AshiokSculptorOfFearsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         FilterPermanent filter = new FilterCreaturePermanent();
         filter.add(new ControllerIdPredicate(source.getFirstTarget()));
-        game.addEffect(new GainControlAllEffect(Duration.Custom, filter), source);
+
+        new GainControlAllEffect(Duration.Custom, filter).apply(game, source);
         return true;
     }
 }
