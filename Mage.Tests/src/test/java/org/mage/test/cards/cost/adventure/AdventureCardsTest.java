@@ -380,8 +380,8 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, 0);
 
         Permanent rimrock = getPermanent("Rimrock Knight");
-        Assert.assertEquals(rimrock.getRules(currentGame).get(0), "Adventure Instant"); // must have adventure spell info on battlefield
-        Assert.assertEquals(rimrock.getRules(currentGame).get(1), "{this} can't block.");
+        Assert.assertTrue(rimrock.getRules(currentGame).get(0).startsWith("Adventure Instant")); // must have adventure spell info on battlefield
+        Assert.assertTrue(rimrock.getRules(currentGame).get(1).startsWith("{this} can't block."));
     }
 
     /*
