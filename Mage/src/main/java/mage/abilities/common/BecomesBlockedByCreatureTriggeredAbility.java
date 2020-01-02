@@ -1,9 +1,9 @@
-
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -11,15 +11,14 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author North
  */
 public class BecomesBlockedByCreatureTriggeredAbility extends TriggeredAbilityImpl {
 
-    private FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private final FilterCreaturePermanent filter;
 
     public BecomesBlockedByCreatureTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.BATTLEFIELD, effect, optional);
+        this(effect, StaticFilters.FILTER_PERMANENT_CREATURE, optional);
     }
 
     public BecomesBlockedByCreatureTriggeredAbility(Effect effect, FilterCreaturePermanent filter, boolean optional) {
@@ -39,14 +38,15 @@ public class BecomesBlockedByCreatureTriggeredAbility extends TriggeredAbilityIm
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(this.getSourceId())) {
-            Permanent blocker = game.getPermanent(event.getSourceId());
-            if (filter.match(blocker, game)) {
-                this.getEffects().setTargetPointer(new FixedTarget(blocker, game));
-                return true;
-            }
+        if (!event.getTargetId().equals(this.getSourceId())) {
+            return false;
         }
-        return false;
+        Permanent blocker = game.getPermanent(event.getSourceId());
+        if (!filter.match(blocker, game)) {
+            return false;
+        }
+        this.getEffects().setTargetPointer(new FixedTarget(blocker, game));
+        return true;
     }
 
     @Override
