@@ -30,7 +30,7 @@ public final class ReverentHoplite extends CardImpl {
                 new CreateTokenEffect(
                         new HumanSoldierToken(), DevotionCount.W
                 ).setText("create a number of 1/1 white Human Soldier creature tokens equal to your devotion to white")
-        ));
+        ).addHint(DevotionCount.W.getHint()));
     }
 
     private ReverentHoplite(final ReverentHoplite card) {
