@@ -3,6 +3,7 @@ package org.mage.plugins.card.dl.sources;
 import mage.client.MageFrame;
 import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
+import mage.util.CardUtil;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -13,7 +14,10 @@ import org.mage.plugins.card.images.CardDownloadData;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.*;
+import java.net.HttpURLConnection;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
+import java.net.URL;
 import java.util.*;
 import java.util.prefs.Preferences;
 
@@ -298,7 +302,7 @@ public enum MythicspoilerComSource implements CardImageSource {
             Preferences prefs = MageFrame.getPreferences();
             Connection.ProxyType proxyType = Connection.ProxyType.valueByText(prefs.get("proxyType", "None"));
             for (String setName : setNames.split("\\^")) {
-                String URLSetName = URLEncoder.encode(setName, "UTF-8");
+                String URLSetName = CardUtil.urlEncode(setName);
                 String baseUrl = "http://mythicspoiler.com/" + URLSetName + '/';
 
                 Map<String, String> pageLinks = getSetLinksFromPage(cardSet, aliasesStart, prefs, proxyType, baseUrl, baseUrl);

@@ -15,10 +15,7 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.abilities.text.TextPart;
-import mage.cards.Card;
-import mage.cards.CardsImpl;
-import mage.cards.FrameStyle;
-import mage.cards.SplitCard;
+import mage.cards.*;
 import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.Counters;
@@ -168,6 +165,13 @@ public class Spell extends StackObjImpl implements Card {
                 return "a card face down";
             }
         }
+
+        if (card instanceof AdventureCardSpell) {
+            AdventureCard adventureCard = ((AdventureCardSpell) card).getParentCard();
+            return GameLog.replaceNameByColoredName(card, getSpellAbility().toString(), adventureCard)
+                    + " as Adventure spell of " + GameLog.getColoredObjectIdName(adventureCard);
+        }
+
         return GameLog.replaceNameByColoredName(card, getSpellAbility().toString());
     }
 
@@ -421,7 +425,11 @@ public class Spell extends StackObjImpl implements Card {
     public String getIdName() {
         String idName;
         if (card != null) {
-            idName = card.getId().toString().substring(0, 3);
+            if (card instanceof AdventureCardSpell) {
+                idName = ((AdventureCardSpell) card).getParentCard().getId().toString().substring(0, 3);
+            } else {
+                idName = card.getId().toString().substring(0, 3);
+            }
         } else {
             idName = getId().toString().substring(0, 3);
         }

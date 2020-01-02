@@ -522,7 +522,6 @@ public enum WizardCardsImageSource implements CardImageSource {
             }
 
             for (String setName : setNames.split("\\^")) {
-                // String URLSetName = URLEncoder.encode(setName, "UTF-8");
                 String URLSetName = setName.replaceAll(" ", "%20");
                 int page = 0;
                 int firstMultiverseIdLastPage = 0;

@@ -33,32 +33,50 @@ public final class GameLog {
         return text.replaceAll(mageObject.getName(), getColoredObjectIdName(mageObject));
     }
 
+    /**
+     * @param mageObject        - original object name to replace
+     * @param text              - original text to insert object's html name
+     * @param alternativeObject - alternative object (object to show in card's hint in GUI)
+     * @return
+     */
+    public static String replaceNameByColoredName(MageObject mageObject, String text, MageObject alternativeObject) {
+        return text.replaceAll(mageObject.getName(), getColoredObjectIdName(mageObject, alternativeObject));
+    }
+
     public static String getColoredObjectName(MageObject mageObject) {
-        return "<font color=\'" + getColorName(mageObject.getColor(null)) + "\'>" + mageObject.getName() + "</font>";
+        return "<font color='" + getColorName(mageObject.getColor(null)) + "'>" + mageObject.getName() + "</font>";
     }
 
     public static String getColoredObjectIdName(MageObject mageObject) {
-        return "<font color=\'" + getColorName(mageObject.getColor(null)) + "\'>" + mageObject.getIdName() + "</font>";
+        return getColoredObjectIdName(mageObject, null);
+    }
+
+    public static String getColoredObjectIdName(MageObject mageObject, MageObject alternativeObject) {
+        return "<font"
+                + " color='" + getColorName(mageObject.getColor(null)) + "'"
+                + " object_id='" + mageObject.getId() + "'"
+                + (alternativeObject == null ? "" : " alternative_name='" + CardUtil.urlEncode(alternativeObject.getName()) + "'")
+                + ">" + mageObject.getIdName() + "</font>";
     }
 
     public static String getColoredObjectIdNameForTooltip(MageObject mageObject) {
-        return "<font color=\'" + getTooltipColorName(mageObject.getColor(null)) + "\'>" + mageObject.getIdName() + "</font>";
+        return "<font color='" + getTooltipColorName(mageObject.getColor(null)) + "'>" + mageObject.getIdName() + "</font>";
     }
 
     public static String getNeutralColoredText(String text) {
-        return "<font color=\'" + LOG_COLOR_NEUTRAL + "\'>" + text + "</font>";
+        return "<font color='" + LOG_COLOR_NEUTRAL + "'>" + text + "</font>";
     }
 
     public static String getColoredPlayerName(String name) {
-        return "<font color=\'" + LOG_COLOR_PLAYER + "\'>" + name + "</font>";
+        return "<font color='" + LOG_COLOR_PLAYER + "'>" + name + "</font>";
     }
 
     public static String getPlayerRequestColoredText(String name) {
-        return "<font color=\'" + LOG_COLOR_PLAYER_REQUEST + "\'>" + name + "</font>";
+        return "<font color='" + LOG_COLOR_PLAYER_REQUEST + "'>" + name + "</font>";
     }
 
     public static String getPlayerConfirmColoredText(String name) {
-        return "<font color=\'" + LOG_COLOR_PLAYER_CONFIRM + "\'>" + name + "</font>";
+        return "<font color='" + LOG_COLOR_PLAYER_CONFIRM + "'>" + name + "</font>";
     }
 
     public static String getSmallSecondLineText(String text) {

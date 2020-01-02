@@ -1,17 +1,14 @@
-
 package mage.util;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.net.URLDecoder;
 import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 
 /**
- *
  * @author North
  */
 public final class ClassScanner {
@@ -30,7 +27,7 @@ public final class ClassScanner {
     public static List<Class> findClasses(ClassLoader classLoader, List<String> packages, Class<?> type) {
         List<Class> cards = new ArrayList<>();
         try {
-            if(classLoader == null) classLoader = Thread.currentThread().getContextClassLoader();
+            if (classLoader == null) classLoader = Thread.currentThread().getContextClassLoader();
             assert classLoader != null;
 
             Map<String, String> dirs = new HashMap<>();
@@ -56,7 +53,7 @@ public final class ClassScanner {
             }
 
             for (String filePath : jars) {
-                File file = new File(URLDecoder.decode(filePath, "UTF-8"));
+                File file = new File(CardUtil.urlDecode(filePath));
                 cards.addAll(findClassesInJar(classLoader, file, packages, type));
             }
         } catch (IOException ex) {
@@ -82,7 +79,7 @@ public final class ClassScanner {
         if (!file.exists()) return cards;
 
 
-        try(JarInputStream jarFile = new JarInputStream(new FileInputStream(file))) {
+        try (JarInputStream jarFile = new JarInputStream(new FileInputStream(file))) {
             while (true) {
                 JarEntry jarEntry = jarFile.getNextJarEntry();
                 if (jarEntry == null) {

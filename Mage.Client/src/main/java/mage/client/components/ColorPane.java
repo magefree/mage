@@ -1,30 +1,26 @@
 package mage.client.components;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.MouseInfo;
-import java.awt.Point;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-import javax.swing.JEditorPane;
-import javax.swing.JPanel;
-import javax.swing.JTextPane;
-import javax.swing.SwingUtilities;
-import javax.swing.event.HyperlinkEvent.EventType;
-import javax.swing.text.html.HTMLDocument;
-import javax.swing.text.html.HTMLEditorKit;
-
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.client.MageFrame;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.components.CardInfoPane;
+import mage.util.CardUtil;
 import mage.utils.ThreadUtils;
 import mage.view.CardView;
+
+import javax.swing.*;
+import javax.swing.event.HyperlinkEvent.EventType;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.html.HTMLDocument;
+import javax.swing.text.html.HTMLEditorKit;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Enhanced {@link JTextPane} with text highlighting support.
@@ -50,8 +46,37 @@ public class ColorPane extends JEditorPane {
             if (tooltipDelay == 0) {
                 return;
             }
-            String name = e.getDescription().substring(1);
-            CardInfo card = CardRepository.instance.findCard(name);
+
+            // finds extra data in html element like object_id, alternative_name, etc
+            Map<String, String> extraData = new HashMap<>();
+            if (e.getSourceElement() instanceof HTMLDocument.RunElement) {
+                HTMLDocument.RunElement el = (HTMLDocument.RunElement) e.getSourceElement();
+                Enumeration attNames = el.getAttributeNames();
+                while (attNames.hasMoreElements()) {
+                    Object attName = attNames.nextElement();
+                    Object attValue = el.getAttribute(attName);
+                    // custom attributes in SimpleAttributeSet element
+                    if (attValue instanceof SimpleAttributeSet) {
+                        SimpleAttributeSet attReal = (SimpleAttributeSet) attValue;
+                        Enumeration attRealNames = attReal.getAttributeNames();
+                        while (attRealNames.hasMoreElements()) {
+                            Object attRealName = attRealNames.nextElement();
+                            Object attRealValue = attReal.getAttribute(attRealName);
+                            String name = attRealName.toString();
+                            String value = attRealValue.toString();
+                            extraData.put(name, value);
+                        }
+                    }
+                }
+            }
+
+            String cardName = e.getDescription().substring(1);
+            String alternativeName = CardUtil.urlDecode(extraData.getOrDefault("alternative_name", ""));
+            if (!alternativeName.isEmpty()) {
+                cardName = alternativeName;
+            }
+
+            CardInfo card = CardRepository.instance.findCard(cardName);
             try {
                 final Component container = MageFrame.getUI().getComponent(MageComponents.POPUP_CONTAINER);
                 if (e.getEventType() == EventType.EXITED) {
@@ -152,9 +177,9 @@ public class ColorPane extends JEditorPane {
         super.paintChildren(g);
     }
 
-    public void enableHyperlinks(){
+    public void enableHyperlinks() {
         hyperlinkEnabled = true;
         addHyperlinkHandlers();
     }
-    
+
 }

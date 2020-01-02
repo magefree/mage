@@ -99,6 +99,12 @@ public class AdventureCardSpellImpl extends CardImpl implements AdventureCardSpe
     public AdventureCard getParentCard() {
         return this.adventureCardParent;
     }
+
+    @Override
+    public String getIdName() {
+        // id must send to main card (popup card hint in game logs)
+        return getName() + " [" + adventureCardParent.getId().toString().substring(0, 3) + ']';
+    }
 }
 
 class AdventureCardSpellAbility extends SpellAbility {

@@ -7,17 +7,16 @@ import com.google.gson.JsonParser;
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.client.util.CardLanguage;
+import mage.util.CardUtil;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.dl.DownloadServiceInfo;
 import org.mage.plugins.card.images.CardDownloadData;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
-import java.net.URLEncoder;
 import java.util.*;
 
 /**
@@ -96,12 +95,7 @@ public enum ScryfallImageSource implements CardImageSource {
                 }
             }
 
-            try {
-                scryfallCollectorId = URLEncoder.encode(scryfallCollectorId, "utf-8");
-            } catch (UnsupportedEncodingException e) {
-                // URL failed to encode, this will cause download to miss in certain environments
-            }
-
+            scryfallCollectorId = CardUtil.urlEncode(scryfallCollectorId);
             baseUrl = "https://api.scryfall.com/cards/" + formatSetName(card.getSet(), isToken) + "/"
                     + scryfallCollectorId + "/" + localizedCode + "?format=image";
             alternativeUrl = "https://api.scryfall.com/cards/" + formatSetName(card.getSet(), isToken) + "/"
@@ -227,7 +221,7 @@ public enum ScryfallImageSource implements CardImageSource {
     }
 
     private String searchCard(Proxy proxy, String set, String name) throws Exception {
-        final URL searchUrl = new URL("https://api.scryfall.com/cards/search?q=s:" + URLEncoder.encode(set + " " + name, "UTF-8"));
+        final URL searchUrl = new URL("https://api.scryfall.com/cards/search?q=s:" + CardUtil.urlEncode(set + " " + name));
         URLConnection request = proxy == null ? searchUrl.openConnection() : searchUrl.openConnection(proxy);
         request.connect();
 
