@@ -362,7 +362,7 @@ public class CardPanelComponentImpl extends CardPanel {
     }
 
     private void setTitle(CardView card) {
-        titleText.setText(!displayTitleAnyway && hasImage ? "" : card.getName());
+        titleText.setText(!displayTitleAnyway && hasImage ? "" : card.getDisplayName());
     }
 
     private void setImage(BufferedImage srcImage) {
