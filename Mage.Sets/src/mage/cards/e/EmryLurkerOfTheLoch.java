@@ -119,7 +119,8 @@ class EmryLurkerOfTheLochPlayEffect extends AsThoughEffectImpl {
         if (targetId != null) {
             return targetId.equals(objectId)
                     && source.isControlledBy(affectedControllerId)
-                    && Zone.GRAVEYARD == game.getState().getZone(objectId);
+                    && Zone.GRAVEYARD == game.getState().getZone(objectId)
+                    && !game.getCard(targetId).isLand();
         } else {
             // the target card has changed zone meanwhile, so the effect is no longer needed
             discard();
