@@ -84,13 +84,6 @@ class CerebralVortexWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    CerebralVortexWatcher(final CerebralVortexWatcher watcher) {
-        super(watcher);
-        for (Entry<UUID, Integer> entry: watcher.draws.entrySet()) {
-            draws.put(entry.getKey(), entry.getValue());
-        }
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.DREW_CARD) {
@@ -110,10 +103,5 @@ class CerebralVortexWatcher extends Watcher {
 
     public int getDraws(UUID playerId) {
         return draws.getOrDefault(playerId, 0);
-    }
-
-    @Override
-    public CerebralVortexWatcher copy() {
-        return new CerebralVortexWatcher(this);
     }
 }

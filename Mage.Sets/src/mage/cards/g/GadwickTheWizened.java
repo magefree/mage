@@ -109,11 +109,6 @@ class GadwickTheWizenedWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    private GadwickTheWizenedWatcher(final GadwickTheWizenedWatcher watcher) {
-        super(watcher);
-        this.xMap.putAll(watcher.xMap);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() != GameEvent.EventType.SPELL_CAST) {
@@ -126,11 +121,6 @@ class GadwickTheWizenedWatcher extends Watcher {
         xMap.put(new MageObjectReference(
                 spell.getSourceId(), spell.getZoneChangeCounter(game) + 1, game
         ), spell.getSpellAbility().getManaCostsToPay().getX());
-    }
-
-    @Override
-    public GadwickTheWizenedWatcher copy() {
-        return new GadwickTheWizenedWatcher(this);
     }
 
     @Override

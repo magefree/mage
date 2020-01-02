@@ -94,11 +94,6 @@ class PowerSurgeWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public PowerSurgeWatcher(final PowerSurgeWatcher watcher) {
-        super(watcher);
-        untappedLandCount = watcher.untappedLandCount;
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.BEGINNING_PHASE_PRE
@@ -114,10 +109,5 @@ class PowerSurgeWatcher extends Watcher {
     @Override
     public void reset() {
         untappedLandCount = 0;
-    }
-
-    @Override
-    public PowerSurgeWatcher copy() {
-        return new PowerSurgeWatcher(this);
     }
 }

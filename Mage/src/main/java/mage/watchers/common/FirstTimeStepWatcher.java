@@ -22,16 +22,6 @@ public class FirstTimeStepWatcher extends Watcher {
         this.eventType = eventType;
     }
 
-    public FirstTimeStepWatcher(final FirstTimeStepWatcher watcher) {
-        super(watcher);
-        this.eventType = watcher.eventType;
-    }
-
-    @Override
-    public FirstTimeStepWatcher copy() {
-        return new FirstTimeStepWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == eventType) {

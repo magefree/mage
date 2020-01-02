@@ -40,12 +40,6 @@ public class DamageDoneWatcher extends Watcher {
         this.damagedObjects = new HashMap<>();
     }
 
-    private DamageDoneWatcher(final DamageDoneWatcher watcher) {
-        super(watcher);
-        this.damagingObjects = new HashMap<>(watcher.damagingObjects);
-        this.damagedObjects = new HashMap<>(watcher.damagedObjects);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         switch (event.getType()) {

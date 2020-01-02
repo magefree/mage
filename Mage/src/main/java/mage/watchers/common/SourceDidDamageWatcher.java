@@ -22,16 +22,6 @@ public class SourceDidDamageWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public SourceDidDamageWatcher(final SourceDidDamageWatcher watcher) {
-        super(watcher);
-        this.damageSources.addAll(watcher.damageSources);
-    }
-
-    @Override
-    public SourceDidDamageWatcher copy() {
-        return new SourceDidDamageWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.DAMAGED_CREATURE

@@ -100,18 +100,6 @@ class IchneumonDruidWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public IchneumonDruidWatcher(final IchneumonDruidWatcher watcher) {
-        super(watcher);
-        for (Map.Entry<UUID, Integer> entry : watcher.playerInstantCount.entrySet()) {
-            playerInstantCount.put(entry.getKey(), entry.getValue());
-        }
-    }
-
-    @Override
-    public IchneumonDruidWatcher copy() {
-        return new IchneumonDruidWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.SPELL_CAST) {

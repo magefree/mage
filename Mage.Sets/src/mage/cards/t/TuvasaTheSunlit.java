@@ -122,11 +122,6 @@ class TuvasaTheSunlitWatcher extends Watcher {
         super( WatcherScope.GAME);
     }
 
-    public TuvasaTheSunlitWatcher(final TuvasaTheSunlitWatcher watcher) {
-        super(watcher);
-        this.firstEnchantmentThisTurn.putAll(watcher.firstEnchantmentThisTurn);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
@@ -147,10 +142,5 @@ class TuvasaTheSunlitWatcher extends Watcher {
 
     public UUID getFirstEnchantmentThisTurn(UUID playerId) {
         return firstEnchantmentThisTurn.get(playerId);
-    }
-
-    @Override
-    public Watcher copy() {
-        return new TuvasaTheSunlitWatcher(this);
     }
 }

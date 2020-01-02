@@ -88,16 +88,6 @@ class DarkbladeAgentWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public DarkbladeAgentWatcher(final DarkbladeAgentWatcher watcher) {
-        super(watcher);
-        this.surveiledThisTurn.addAll(watcher.surveiledThisTurn);
-    }
-
-    @Override
-    public DarkbladeAgentWatcher copy() {
-        return new DarkbladeAgentWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SURVEILED) {

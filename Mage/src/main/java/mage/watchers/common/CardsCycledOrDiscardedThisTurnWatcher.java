@@ -30,18 +30,6 @@ public class CardsCycledOrDiscardedThisTurnWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public CardsCycledOrDiscardedThisTurnWatcher(final CardsCycledOrDiscardedThisTurnWatcher watcher) {
-        super(watcher);
-        for (Entry<UUID, Cards> entry : watcher.cycledOrDiscardedCardsThisTurn.entrySet()) {
-            cycledOrDiscardedCardsThisTurn.put(entry.getKey(), entry.getValue().copy());
-        }
-        for (Entry<UUID, Set<MageObjectReference>> entry : watcher.numberOfCycledOrDiscardedCardsThisTurn.entrySet()) {
-            Set<MageObjectReference> cycledOrDiscardedCards = new HashSet<>();
-            cycledOrDiscardedCards.addAll(entry.getValue());
-            numberOfCycledOrDiscardedCardsThisTurn.put(entry.getKey(), cycledOrDiscardedCards);
-        }
-        numberOfCycledOrDiscardedCardsThisTurn.putAll(watcher.numberOfCycledOrDiscardedCardsThisTurn);
-    }
 
     @Override
     public void watch(GameEvent event, Game game) {
@@ -81,8 +69,4 @@ public class CardsCycledOrDiscardedThisTurnWatcher extends Watcher {
         numberOfCycledOrDiscardedCardsThisTurn.clear();
     }
 
-    @Override
-    public CardsCycledOrDiscardedThisTurnWatcher copy() {
-        return new CardsCycledOrDiscardedThisTurnWatcher(this);
-    }
 }

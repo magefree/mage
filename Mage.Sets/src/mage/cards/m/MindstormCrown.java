@@ -83,11 +83,6 @@ class MindstormCrownWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public MindstormCrownWatcher(final MindstormCrownWatcher watcher) {
-        super(watcher);
-        cardsInHandCount = watcher.cardsInHandCount;
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.BEGINNING_PHASE_PRE
@@ -110,8 +105,4 @@ class MindstormCrownWatcher extends Watcher {
         cardsInHandCount = 0;
     }
 
-    @Override
-    public MindstormCrownWatcher copy() {
-        return new MindstormCrownWatcher(this);
-    }
 }

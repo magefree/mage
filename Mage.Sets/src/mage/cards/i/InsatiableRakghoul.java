@@ -86,10 +86,6 @@ class NonArtifactCreaturesDiedWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public NonArtifactCreaturesDiedWatcher(final NonArtifactCreaturesDiedWatcher watcher) {
-        super(watcher);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
@@ -100,11 +96,6 @@ class NonArtifactCreaturesDiedWatcher extends Watcher {
                 condition = true;
             }
         }
-    }
-
-    @Override
-    public NonArtifactCreaturesDiedWatcher copy() {
-        return new NonArtifactCreaturesDiedWatcher(this);
     }
 
 }

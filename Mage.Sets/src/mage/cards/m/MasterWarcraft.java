@@ -257,21 +257,11 @@ class MasterWarcraftCastWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public MasterWarcraftCastWatcher(final MasterWarcraftCastWatcher watcher) {
-        super(watcher);
-        this.copyCount = watcher.copyCount;
-        this.copyCountApply = watcher.copyCountApply;
-    }
 
     @Override
     public void reset() {
         copyCount = 0;
         copyCountApply = 0;
-    }
-
-    @Override
-    public MasterWarcraftCastWatcher copy() {
-        return new MasterWarcraftCastWatcher(this);
     }
 
     @Override

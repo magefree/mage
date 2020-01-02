@@ -26,16 +26,6 @@ public class CommanderPlaysCountWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public CommanderPlaysCountWatcher(final CommanderPlaysCountWatcher watcher) {
-        super(watcher);
-        this.playsCount.putAll(watcher.playsCount);
-    }
-
-    @Override
-    public CommanderPlaysCountWatcher copy() {
-        return new CommanderPlaysCountWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() != EventType.LAND_PLAYED && event.getType() != EventType.SPELL_CAST) {

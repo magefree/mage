@@ -119,13 +119,6 @@ class GrimReminderWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public GrimReminderWatcher(final GrimReminderWatcher watcher) {
-        super(watcher);
-        for (Map.Entry<String, Set<UUID>> entry : watcher.playersCastSpell.entrySet()) {
-            playersCastSpell.put(entry.getKey(), entry.getValue());
-        }
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
@@ -145,11 +138,6 @@ class GrimReminderWatcher extends Watcher {
 
     public Set<UUID> getPlayersCastSpell(String spellName) {
         return playersCastSpell.getOrDefault(spellName, new HashSet<>());
-    }
-
-    @Override
-    public GrimReminderWatcher copy() {
-        return new GrimReminderWatcher(this);
     }
 
 }

@@ -100,11 +100,6 @@ class GontisMachinationsFirstLostLifeThisTurnWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public GontisMachinationsFirstLostLifeThisTurnWatcher(final GontisMachinationsFirstLostLifeThisTurnWatcher watcher) {
-        super(watcher);
-        this.playersLostLife.putAll(watcher.playersLostLife);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         switch (event.getType()) {
@@ -115,10 +110,6 @@ class GontisMachinationsFirstLostLifeThisTurnWatcher extends Watcher {
         }
     }
 
-    @Override
-    public GontisMachinationsFirstLostLifeThisTurnWatcher copy() {
-        return new GontisMachinationsFirstLostLifeThisTurnWatcher(this);
-    }
 
     @Override
     public void reset() {

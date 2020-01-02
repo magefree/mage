@@ -53,17 +53,6 @@ class PlayCreatureLandWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public PlayCreatureLandWatcher(final PlayCreatureLandWatcher watcher) {
-        super(watcher);
-        playerPlayedLand.addAll(watcher.playerPlayedLand);
-        landPlayed.addAll(watcher.landPlayed);
-    }
-
-    @Override
-    public PlayCreatureLandWatcher copy() {
-        return new PlayCreatureLandWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.PLAY_LAND) {

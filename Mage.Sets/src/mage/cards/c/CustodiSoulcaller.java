@@ -86,11 +86,6 @@ class CustodiSoulcallerWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    CustodiSoulcallerWatcher(final CustodiSoulcallerWatcher watcher) {
-        super(watcher);
-        this.playersAttacked.putAll(watcher.playersAttacked);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.BEGIN_COMBAT_STEP_PRE) {
@@ -104,10 +99,5 @@ class CustodiSoulcallerWatcher extends Watcher {
 
     public int getNumberOfAttackedPlayers(UUID attackerId) {
         return this.playersAttacked.get(attackerId).size();
-    }
-
-    @Override
-    public CustodiSoulcallerWatcher copy() {
-        return new CustodiSoulcallerWatcher(this);
     }
 }

@@ -24,12 +24,6 @@ public class PlayerGainedLifeWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    private PlayerGainedLifeWatcher(final PlayerGainedLifeWatcher watcher) {
-        super(watcher);
-        for (Entry<UUID, Integer> entry : watcher.amountOfLifeGainedThisTurn.entrySet()) {
-            amountOfLifeGainedThisTurn.put(entry.getKey(), entry.getValue());
-        }
-    }
 
     @Override
     public void watch(GameEvent event, Game game) {
@@ -53,10 +47,5 @@ public class PlayerGainedLifeWatcher extends Watcher {
     public void reset() {
         super.reset();
         amountOfLifeGainedThisTurn.clear();
-    }
-
-    @Override
-    public PlayerGainedLifeWatcher copy() {
-        return new PlayerGainedLifeWatcher(this);
     }
 }

@@ -100,21 +100,11 @@ class JandorsRingWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public JandorsRingWatcher(final JandorsRingWatcher watcher) {
-        super(watcher);
-        this.lastDrawnCards.putAll(watcher.lastDrawnCards);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DREW_CARD) {
             lastDrawnCards.putIfAbsent(event.getPlayerId(), event.getTargetId());
         }
-    }
-
-    @Override
-    public JandorsRingWatcher copy() {
-        return new JandorsRingWatcher(this);
     }
 
     @Override
@@ -124,7 +114,7 @@ class JandorsRingWatcher extends Watcher {
     }
 
     public UUID getLastDrewCard(UUID playerId) {
-        return lastDrawnCards.getOrDefault(null, playerId);
+        return lastDrawnCards.get(playerId);
     }
 }
 

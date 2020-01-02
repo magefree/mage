@@ -22,11 +22,6 @@ public class PlayerCastCreatureWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public PlayerCastCreatureWatcher(final PlayerCastCreatureWatcher watcher) {
-        super(watcher);
-        this.playerIds.addAll(watcher.playerIds);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
@@ -35,11 +30,6 @@ public class PlayerCastCreatureWatcher extends Watcher {
                 playerIds.add(spell.getControllerId());
             }
         }
-    }
-
-    @Override
-    public PlayerCastCreatureWatcher copy() {
-        return new PlayerCastCreatureWatcher(this);
     }
 
     @Override

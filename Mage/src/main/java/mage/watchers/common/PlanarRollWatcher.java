@@ -24,13 +24,6 @@ public class PlanarRollWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public PlanarRollWatcher(final PlanarRollWatcher watcher) {
-        super(watcher);
-        for (Entry<UUID, Integer> entry : watcher.numberTimesPlanarDieRolled.entrySet()) {
-            numberTimesPlanarDieRolled.put(entry.getKey(), entry.getValue());
-        }
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.PLANAR_DIE_ROLLED) {

@@ -25,20 +25,6 @@ public class BlockedAttackerWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public BlockedAttackerWatcher(final BlockedAttackerWatcher watcher) {
-        super(watcher);
-        for (MageObjectReference mageObjectReference : watcher.blockData.keySet()) {
-            Set<MageObjectReference> blockedAttackers = new HashSet<>();
-            blockedAttackers.addAll(watcher.blockData.get(mageObjectReference));
-            blockData.put(mageObjectReference, blockedAttackers);
-        }
-    }
-
-//    @Override
-//    public BlockedAttackerWatcher copy() {
-//        return new BlockedAttackerWatcher(this);
-//    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.BLOCKER_DECLARED) {

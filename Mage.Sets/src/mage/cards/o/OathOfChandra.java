@@ -88,11 +88,6 @@ class OathOfChandraWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public OathOfChandraWatcher(final OathOfChandraWatcher watcher) {
-        super(watcher);
-        this.players.addAll(watcher.players);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
@@ -111,11 +106,6 @@ class OathOfChandraWatcher extends Watcher {
 
     public boolean enteredPlaneswalkerForPlayer(UUID playerId) {
         return players.contains(playerId);
-    }
-
-    @Override
-    public OathOfChandraWatcher copy() {
-        return new OathOfChandraWatcher(this);
     }
 
 }

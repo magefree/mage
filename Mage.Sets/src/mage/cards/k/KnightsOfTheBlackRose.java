@@ -108,9 +108,6 @@ class MonarchAtTurnStartWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public MonarchAtTurnStartWatcher(final MonarchAtTurnStartWatcher watcher) {
-        super(watcher);
-    }
 
     @Override
     public void watch(GameEvent event, Game game) {
@@ -120,10 +117,6 @@ class MonarchAtTurnStartWatcher extends Watcher {
         }
     }
 
-    @Override
-    public MonarchAtTurnStartWatcher copy() {
-        return new MonarchAtTurnStartWatcher(this);
-    }
 
     @Override
     public void reset() {

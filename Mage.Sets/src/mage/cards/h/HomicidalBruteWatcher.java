@@ -11,15 +11,6 @@ public class HomicidalBruteWatcher extends Watcher {
         super(WatcherScope.CARD);
     }
 
-    public HomicidalBruteWatcher(final HomicidalBruteWatcher watcher) {
-        super(watcher);
-    }
-
-    @Override
-    public HomicidalBruteWatcher copy() {
-        return new HomicidalBruteWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (condition) {

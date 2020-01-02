@@ -124,10 +124,6 @@ class ShipbreakerKrakenWatcher extends Watcher {
         super(WatcherScope.CARD);
     }
 
-    ShipbreakerKrakenWatcher(ShipbreakerKrakenWatcher watcher) {
-        super(watcher);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.LOST_CONTROL && event.getPlayerId().equals(controllerId) && event.getTargetId().equals(sourceId)) {
@@ -147,10 +143,5 @@ class ShipbreakerKrakenWatcher extends Watcher {
     @Override
     public void reset() {
         //don't reset condition each turn - only when this leaves the battlefield
-    }
-
-    @Override
-    public ShipbreakerKrakenWatcher copy() {
-        return new ShipbreakerKrakenWatcher(this);
     }
 }

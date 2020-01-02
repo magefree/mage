@@ -193,20 +193,6 @@ class CyclopeanTombCounterWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    private CyclopeanTombCounterWatcher(final CyclopeanTombCounterWatcher watcher) {
-        super(watcher);
-        for (MageObjectReference mageObjectReference : watcher.counterData.keySet()) {
-            Set<MageObjectReference> miredLands = new HashSet<>();
-            miredLands.addAll(watcher.counterData.get(mageObjectReference));
-            counterData.put(mageObjectReference, miredLands);
-        }
-    }
-
-    @Override
-    public CyclopeanTombCounterWatcher copy() {
-        return new CyclopeanTombCounterWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.COUNTERS_ADDED && event.getData().equals(CounterType.MIRE.getName()) && event.getAmount() > 0) {

@@ -61,12 +61,6 @@ class RocketLauncherWatcher extends Watcher {
         this.cardId = cardId;
     }
 
-    public RocketLauncherWatcher(final RocketLauncherWatcher watcher) {
-        super(watcher);        
-        this.changedControllerOR1stTurn = watcher.isChangedControllerOR1stTurn();
-        this.cardId = watcher.cardId;
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.CLEANUP_STEP_POST) {            
@@ -78,10 +72,6 @@ class RocketLauncherWatcher extends Watcher {
         }
     }
 
-    @Override
-    public RocketLauncherWatcher copy() {
-        return new RocketLauncherWatcher(this);
-    }
 
     @Override
     public void reset() {

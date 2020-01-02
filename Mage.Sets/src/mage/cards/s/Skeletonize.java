@@ -34,7 +34,7 @@ public final class Skeletonize extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // When a creature dealt damage this way dies this turn, create a 1/1 black Skeleton creature token with "{B}: Regenerate this creature."
         this.getSpellAbility().addEffect(new SkeletonizeEffect());
-        this.getSpellAbility().addWatcher(new DamagedByWatcher());
+        this.getSpellAbility().addWatcher(new DamagedByWatcher(false));
     }
 
     public Skeletonize(final Skeletonize card) {

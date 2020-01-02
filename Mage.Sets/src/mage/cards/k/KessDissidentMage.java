@@ -162,12 +162,6 @@ class KessDissidentMageWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    private KessDissidentMageWatcher(final KessDissidentMageWatcher watcher) {
-        super(watcher);
-        this.allowingObjects.addAll(watcher.allowingObjects);
-        this.castSpells.putAll(watcher.castSpells);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST
@@ -182,11 +176,6 @@ class KessDissidentMageWatcher extends Watcher {
                         event.getAdditionalReference().getSourceId());
             }
         }
-    }
-
-    @Override
-    public KessDissidentMageWatcher copy() {
-        return new KessDissidentMageWatcher(this);
     }
 
     @Override

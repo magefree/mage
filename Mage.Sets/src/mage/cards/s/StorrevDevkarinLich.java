@@ -93,11 +93,6 @@ class StorrevDevkarinLichWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    private StorrevDevkarinLichWatcher(final StorrevDevkarinLichWatcher watcher) {
-        super(watcher);
-        this.cards.addAll(watcher.cards);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.BEGIN_COMBAT_STEP_PRE) {
@@ -112,10 +107,6 @@ class StorrevDevkarinLichWatcher extends Watcher {
         }
     }
 
-    @Override
-    public StorrevDevkarinLichWatcher copy() {
-        return new StorrevDevkarinLichWatcher(this);
-    }
 
     boolean wasPutInAGraveyardThisCombat(UUID cardId, Game game) {
         for (MageObjectReference mor : cards) {

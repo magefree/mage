@@ -122,28 +122,17 @@ class CavernOfSoulsManaCondition extends CreatureCastManaCondition {
 class CavernOfSoulsWatcher extends Watcher {
 
     private List<UUID> spells = new ArrayList<>();
-    private final String originalId;
+    private final UUID originalId;
 
     public CavernOfSoulsWatcher(UUID originalId) {
         super(WatcherScope.CARD);
-        this.originalId = originalId.toString();
-    }
-
-    public CavernOfSoulsWatcher(final CavernOfSoulsWatcher watcher) {
-        super(watcher);
-        this.spells.addAll(watcher.spells);
-        this.originalId = watcher.originalId;
-    }
-
-    @Override
-    public CavernOfSoulsWatcher copy() {
-        return new CavernOfSoulsWatcher(this);
+        this.originalId = originalId;
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.MANA_PAID) {
-            if (event.getData() != null && event.getData().equals(originalId)) {
+            if (event.getData() != null && event.getData().equals(originalId.toString())) {
                 spells.add(event.getTargetId());
             }
         }

@@ -141,17 +141,6 @@ class DiseasedVerminWatcher extends Watcher {
         damagedPlayers = new HashSet<>();
     }
 
-    public DiseasedVerminWatcher(final DiseasedVerminWatcher watcher) {
-        super(watcher);
-        this.damagedPlayers = new HashSet<>();
-        this.damagedPlayers.addAll(watcher.damagedPlayers);
-    }
-
-    @Override
-    public DiseasedVerminWatcher copy() {
-        return new DiseasedVerminWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.DAMAGED_PLAYER

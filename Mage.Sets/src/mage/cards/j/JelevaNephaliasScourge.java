@@ -162,15 +162,6 @@ class JelevaNephaliasWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public JelevaNephaliasWatcher(final JelevaNephaliasWatcher watcher) {
-        super(watcher);
-    }
-
-    @Override
-    public JelevaNephaliasWatcher copy() {
-        return new JelevaNephaliasWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         // Watcher saves all casts becaus of possible Clone cards that copy Jeleva

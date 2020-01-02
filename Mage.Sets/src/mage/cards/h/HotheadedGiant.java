@@ -85,16 +85,6 @@ class HotHeadedGiantWatcher extends Watcher {
         this.cardId = cardId;
     }
 
-    public HotHeadedGiantWatcher(final HotHeadedGiantWatcher watcher) {
-        super(watcher);
-        this.cardId = watcher.cardId;
-    }
-
-    @Override
-    public HotHeadedGiantWatcher copy() {
-        return new HotHeadedGiantWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (condition == true) { //no need to check - condition has already occured

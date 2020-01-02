@@ -90,16 +90,6 @@ class LastSpellCastWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public LastSpellCastWatcher(final LastSpellCastWatcher watcher) {
-        super(watcher);
-        this.lastSpellCast = watcher.getLastSpellCast();
-    }
-
-    @Override
-    public LastSpellCastWatcher copy() {
-        return new LastSpellCastWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.SPELL_CAST) {

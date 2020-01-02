@@ -68,11 +68,6 @@ class CreaturesAttackedWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public CreaturesAttackedWatcher(final CreaturesAttackedWatcher watcher) {
-        super(watcher);
-        this.attackedThisTurnCreatures.addAll(watcher.attackedThisTurnCreatures);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.BEGIN_COMBAT_STEP_PRE) {
@@ -86,12 +81,6 @@ class CreaturesAttackedWatcher extends Watcher {
     public Set<MageObjectReference> getAttackedThisTurnCreatures() {
         return this.attackedThisTurnCreatures;
     }
-
-    @Override
-    public CreaturesAttackedWatcher copy() {
-        return new CreaturesAttackedWatcher(this);
-    }
-
 }
 
 class GrandWarlordRadhaTriggeredAbility extends TriggeredAbilityImpl {

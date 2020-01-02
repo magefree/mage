@@ -99,14 +99,6 @@ class BlockedOrBeenBlockedSinceYourLastUpkeepWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public BlockedOrBeenBlockedSinceYourLastUpkeepWatcher(BlockedOrBeenBlockedSinceYourLastUpkeepWatcher watcher) {
-        super(watcher);
-        for (Map.Entry<UUID, Set<MageObjectReference>> entry : watcher.blockedOrBeenBlockedCreatures.entrySet()) {
-            Set<MageObjectReference> creaturesThatBlockedOrWereBlocked = new HashSet<>(entry.getValue());
-            blockedOrBeenBlockedCreatures.put(entry.getKey(), creaturesThatBlockedOrWereBlocked);
-        }
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.UPKEEP_STEP_POST) {
@@ -127,10 +119,5 @@ class BlockedOrBeenBlockedSinceYourLastUpkeepWatcher extends Watcher {
     public boolean blockedOrBeenBlockedSinceLastUpkeep(MageObjectReference mor, UUID player) {
         return (blockedOrBeenBlockedCreatures.get(player) != null)
                 && blockedOrBeenBlockedCreatures.get(player).contains(mor);
-    }
-
-    @Override
-    public BlockedOrBeenBlockedSinceYourLastUpkeepWatcher copy() {
-        return new BlockedOrBeenBlockedSinceYourLastUpkeepWatcher(this);
     }
 }

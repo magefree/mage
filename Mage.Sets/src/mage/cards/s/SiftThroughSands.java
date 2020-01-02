@@ -83,20 +83,9 @@ class SiftThroughSandsWatcher extends Watcher {
         super(WatcherScope.PLAYER);
     }
 
-    public SiftThroughSandsWatcher(final SiftThroughSandsWatcher watcher) {
-        super(watcher);
-        this.castPeerThroughDepths = watcher.castPeerThroughDepths;
-        this.castReachThroughMists = watcher.castReachThroughMists;
-    }
-
-    @Override
-    public SiftThroughSandsWatcher copy() {
-        return new SiftThroughSandsWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
-        if (condition == true) { //no need to check - condition has already occured
+        if (condition) { //no need to check - condition has already occured
             return;
         }
         if (event.getType() == EventType.SPELL_CAST

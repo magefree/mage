@@ -76,11 +76,6 @@ class BellowingElkWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    private BellowingElkWatcher(final BellowingElkWatcher watcher) {
-        super(watcher);
-        this.playerMap.putAll(watcher.playerMap);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
@@ -101,11 +96,6 @@ class BellowingElkWatcher extends Watcher {
     boolean enteredCreatureForPlayer(UUID playerId, UUID creatureId) {
         Set<UUID> s = playerMap.getOrDefault(playerId, null);
         return s != null && s.stream().anyMatch((UUID id) -> (id != creatureId));
-    }
-
-    @Override
-    public BellowingElkWatcher copy() {
-        return new BellowingElkWatcher(this);
     }
 }
 // I'm not THAT loud...

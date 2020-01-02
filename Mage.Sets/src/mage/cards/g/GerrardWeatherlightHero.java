@@ -98,11 +98,6 @@ class GerrardWeatherlightHeroWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    private GerrardWeatherlightHeroWatcher(final GerrardWeatherlightHeroWatcher watcher) {
-        super(watcher);
-        this.cards.addAll(watcher.cards);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE
@@ -116,11 +111,6 @@ class GerrardWeatherlightHeroWatcher extends Watcher {
             return false;
         }
         return cards.stream().anyMatch(mageObjectReference -> mageObjectReference.refersTo(card, game));
-    }
-
-    @Override
-    public GerrardWeatherlightHeroWatcher copy() {
-        return new GerrardWeatherlightHeroWatcher(this);
     }
 
     @Override

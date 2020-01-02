@@ -26,7 +26,7 @@ public final class Carbonize extends CardImpl {
         this.getSpellAbility().addEffect(new CantRegenerateTargetEffect(Duration.EndOfTurn, "That creature"));
         this.getSpellAbility().addEffect(new ExileTargetIfDiesEffect().setText("If the creature would die this turn, exile it instead"));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
-        this.getSpellAbility().addWatcher(new DamagedByWatcher());
+        this.getSpellAbility().addWatcher(new DamagedByWatcher(false));
 
     }
 

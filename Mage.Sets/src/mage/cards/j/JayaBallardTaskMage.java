@@ -59,7 +59,7 @@ public final class JayaBallardTaskMage extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost()); 
         ability.addEffect(new CantRegenerateEffect());
-        this.addAbility(ability, new DamagedByWatcher());                
+        this.addAbility(ability, new DamagedByWatcher(false));
         
         // {5}{R}{R}, {tap}, Discard a card: Jaya Ballard deals 6 damage to each creature and each player.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(6), new ManaCostsImpl("{5}{R}{R}"));

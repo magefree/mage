@@ -125,22 +125,6 @@ class SavageSummoningWatcher extends Watcher {
         super(WatcherScope.PLAYER);
     }
 
-    public SavageSummoningWatcher(final SavageSummoningWatcher watcher) {
-        super(watcher);
-        this.savageSummoningSpells.addAll(watcher.savageSummoningSpells);
-        for (Entry<UUID, Set<String>> entry : watcher.spellsCastWithSavageSummoning.entrySet()) {
-            this.spellsCastWithSavageSummoning.put(entry.getKey(), entry.getValue());
-        }
-        for (Entry<String, Set<String>> entry : watcher.cardsCastWithSavageSummoning.entrySet()) {
-            this.cardsCastWithSavageSummoning.put(entry.getKey(), entry.getValue());
-        }
-    }
-
-    @Override
-    public SavageSummoningWatcher copy() {
-        return new SavageSummoningWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {

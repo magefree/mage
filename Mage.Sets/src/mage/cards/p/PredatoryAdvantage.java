@@ -68,10 +68,6 @@ class CastCreatureWatcher extends Watcher {
         super(WatcherScope.CARD);
     }
 
-    public CastCreatureWatcher(final CastCreatureWatcher watcher) {
-        super(watcher);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST
@@ -82,10 +78,5 @@ class CastCreatureWatcher extends Watcher {
                 condition = true;
             }
         }
-    }
-
-    @Override
-    public CastCreatureWatcher copy() {
-        return new CastCreatureWatcher(this);
     }
 }

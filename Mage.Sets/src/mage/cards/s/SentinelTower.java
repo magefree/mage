@@ -105,16 +105,6 @@ class SentinelTowerWatcher extends Watcher {
         this.spellsThisTurn = new ArrayList<>();
     }
 
-    SentinelTowerWatcher(final SentinelTowerWatcher effect) {
-        super(effect);
-        this.spellsThisTurn = effect.spellsThisTurn;
-    }
-
-    @Override
-    public SentinelTowerWatcher copy() {
-        return new SentinelTowerWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {

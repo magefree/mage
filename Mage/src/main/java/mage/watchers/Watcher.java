@@ -1,17 +1,17 @@
 
 package mage.watchers;
 
-import java.io.Serializable;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.UUID;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import org.apache.log4j.Logger;
+import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
+
+import java.io.Serializable;
+import java.lang.reflect.*;
+import java.util.*;
 
 /**
- *
  * watches for certain game events to occur and flags condition
  *
  * @author BetaSteward_at_googlemail.com
@@ -24,7 +24,6 @@ public abstract class Watcher implements Serializable {
     protected UUID sourceId;
     protected boolean condition;
     protected final WatcherScope scope;
-
 
 
     public Watcher(WatcherScope scope) {
@@ -62,8 +61,8 @@ public abstract class Watcher implements Serializable {
                 return controllerId + getBasicKey();
             case CARD:
                 return sourceId + getBasicKey();
-                default:
-                    return getBasicKey();
+            default:
+                return getBasicKey();
         }
     }
 
@@ -75,18 +74,75 @@ public abstract class Watcher implements Serializable {
         condition = false;
     }
 
-    protected String getBasicKey(){
+    protected String getBasicKey() {
         return getClass().getSimpleName();
     }
 
     public abstract void watch(GameEvent event, Game game);
 
-    public <T extends Watcher> T copy(){
+    public <T extends Watcher> T copy() {
         try {
-            Constructor<? extends Watcher> constructor = this.getClass().getDeclaredConstructor(getClass());
+            //use getDeclaredConstructors to allow for package-private constructors (i.e. omit public)
+            List<?> constructors = Arrays.asList(this.getClass().getDeclaredConstructors());
+            if (constructors.size() > 1) {
+                logger.error(getClass().getSimpleName() + " has multiple constructors");
+                return null;
+            }
+
+            Constructor<? extends Watcher> constructor = (Constructor<? extends Watcher>) constructors.get(0);
+
             constructor.setAccessible(true);
-            return (T) constructor.newInstance(this);
-        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+            Object[] args = new Object[constructor.getParameterCount()];
+            for (int index = 0; index < constructor.getParameterTypes().length; index++) {
+                Class<?> parameterType = constructor.getParameterTypes()[index];
+                if (parameterType.isPrimitive()) {
+                    if (parameterType.getSimpleName().equalsIgnoreCase("boolean")) {
+                        args[index] = false;
+                    }
+                } else {
+                    args[index] = null;
+                }
+
+            }
+            T watcher = (T) constructor.newInstance(args);
+            List<Field> allFields = new ArrayList<>();
+            allFields.addAll(Arrays.asList(getClass().getDeclaredFields()));
+            allFields.addAll(Arrays.asList(getClass().getSuperclass().getDeclaredFields()));
+            for (Field field : allFields) {
+                if (!Modifier.isStatic(field.getModifiers())) {
+
+                    field.setAccessible(true);
+                    if (field.getType() == Set.class) {
+                        ((Set) field.get(watcher)).clear();
+                        ((Set) field.get(watcher)).addAll((Set) field.get(this));
+                    } else if (field.getType() == Map.class) {
+                        Map target = ((Map) field.get(watcher));
+                        target.clear();
+                        Map source = (Map) field.get(this);
+
+                        ParameterizedType parameterizedType = (ParameterizedType) field.getGenericType();
+                        Type valueType = parameterizedType.getActualTypeArguments()[1];
+                        if (valueType instanceof ParameterizedTypeImpl && ((ParameterizedTypeImpl) valueType).getRawType().getSimpleName().contains("Set")) {
+                            source.entrySet().forEach(kv -> {
+                                Object key = ((Map.Entry) kv).getKey();
+                                Set value = (Set) ((Map.Entry) kv).getValue();
+                                target.put(key, new HashSet<>(value));
+                            });
+                        }
+                        else {
+                            ((Map) field.get(watcher)).putAll((Map) field.get(this));
+                        }
+                    } else if (field.getType() == List.class) {
+                        ((List) field.get(watcher)).clear();
+                        ((List) field.get(watcher)).addAll((List) field.get(this));
+
+                    } else {
+                        field.set(watcher, field.get(this));
+                    }
+                }
+            }
+            return watcher;
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
             logger.error("Can't copy watcher: " + e.getMessage(), e);
         }
         return null;

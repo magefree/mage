@@ -87,16 +87,6 @@ class BlazingEffigyWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public BlazingEffigyWatcher(final BlazingEffigyWatcher watcher) {
-        super(watcher);
-        this.damagedObjects.putAll(watcher.damagedObjects);
-    }
-
-    @Override
-    public BlazingEffigyWatcher copy() {
-        return new BlazingEffigyWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE) {

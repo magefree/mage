@@ -96,12 +96,6 @@ class KadenaSlinkingSorcererWatcher extends Watcher {
         castFaceDown = new HashSet<>();
     }
 
-    private KadenaSlinkingSorcererWatcher(final KadenaSlinkingSorcererWatcher watcher) {
-        super(watcher);
-        this.castFaceDown = new HashSet<>();
-        castFaceDown.addAll(watcher.castFaceDown);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() != GameEvent.EventType.SPELL_CAST) {
@@ -118,10 +112,6 @@ class KadenaSlinkingSorcererWatcher extends Watcher {
         return castFaceDown.contains(playerId);
     }
 
-    @Override
-    public KadenaSlinkingSorcererWatcher copy() {
-        return new KadenaSlinkingSorcererWatcher(this);
-    }
 
     @Override
     public void reset() {

@@ -23,17 +23,6 @@ public class LandfallWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    private LandfallWatcher(final LandfallWatcher watcher) {
-        super(watcher);
-        playerPlayedLand.addAll(watcher.playerPlayedLand);
-        landEnteredBattlefield.addAll(watcher.landEnteredBattlefield);
-    }
-
-    @Override
-    public LandfallWatcher copy() {
-        return new LandfallWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {

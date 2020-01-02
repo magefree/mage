@@ -124,16 +124,6 @@ class MuldrothaTheGravetideWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public MuldrothaTheGravetideWatcher(final MuldrothaTheGravetideWatcher watcher) {
-        super(watcher);
-        sourcePlayedPermanentTypes.putAll(watcher.sourcePlayedPermanentTypes);
-    }
-
-    @Override
-    public MuldrothaTheGravetideWatcher copy() {
-        return new MuldrothaTheGravetideWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.PLAY_LAND) {

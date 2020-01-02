@@ -23,11 +23,6 @@ public class NumberOfTimesPermanentTargetedATurnWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public NumberOfTimesPermanentTargetedATurnWatcher(final NumberOfTimesPermanentTargetedATurnWatcher watcher) {
-        super(watcher);
-        this.permanentsTargeted.putAll(watcher.permanentsTargeted);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.TARGETED) {
@@ -54,10 +49,5 @@ public class NumberOfTimesPermanentTargetedATurnWatcher extends Watcher {
     public void reset() {
         super.reset();
         permanentsTargeted.clear();
-    }
-
-    @Override
-    public NumberOfTimesPermanentTargetedATurnWatcher copy() {
-        return new NumberOfTimesPermanentTargetedATurnWatcher(this);
     }
 }

@@ -57,16 +57,6 @@ class ArchiveTrapWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    private ArchiveTrapWatcher(final ArchiveTrapWatcher watcher) {
-        super(watcher);
-        this.playerIds.addAll(watcher.playerIds);
-    }
-
-    @Override
-    public ArchiveTrapWatcher copy() {
-        return new ArchiveTrapWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.LIBRARY_SEARCHED

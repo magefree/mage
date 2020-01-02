@@ -133,10 +133,6 @@ class TidebinderMageWatcher extends Watcher {
         super(WatcherScope.CARD);
     }
 
-    TidebinderMageWatcher(TidebinderMageWatcher watcher) {
-        super(watcher);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.LOST_CONTROL && event.getPlayerId().equals(controllerId) && event.getTargetId().equals(sourceId)) {
@@ -156,10 +152,5 @@ class TidebinderMageWatcher extends Watcher {
     @Override
     public void reset() {
         //don't reset condition each turn - only when this leaves the battlefield
-    }
-
-    @Override
-    public TidebinderMageWatcher copy() {
-        return new TidebinderMageWatcher(this);
     }
 }

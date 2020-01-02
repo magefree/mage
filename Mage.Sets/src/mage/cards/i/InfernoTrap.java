@@ -75,11 +75,6 @@ class InfernoTrapWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public InfernoTrapWatcher(final InfernoTrapWatcher watcher) {
-        super(watcher);
-        playerDamagedByCreature.putAll(watcher.playerDamagedByCreature);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER
@@ -106,8 +101,4 @@ class InfernoTrapWatcher extends Watcher {
         playerDamagedByCreature.clear();
     }
 
-    @Override
-    public InfernoTrapWatcher copy() {
-        return new InfernoTrapWatcher(this);
-    }
 }

@@ -1,8 +1,5 @@
 package mage.cards.s;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -16,15 +13,15 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.StarfishToken;
 import mage.watchers.Watcher;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author spike
@@ -36,10 +33,10 @@ public final class SpinyStarfish extends CardImpl {
         this.subtype.add(SubType.STARFISH);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
-        
+
         // {U}: Regenerate Spiny Starfish.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{U}")));
-        
+
         // At the beginning of each end step, if Spiny Starfish regenerated this turn, create a 0/1 blue Starfish creature token for each time it regenerated this turn.
         this.addAbility(
                 new ConditionalInterveningIfTriggeredAbility(
@@ -48,7 +45,7 @@ public final class SpinyStarfish extends CardImpl {
                                         new StarfishToken(),
                                         new SpinyStarfishDynamicValue()),
                                 TargetController.ANY,
-                                false), 
+                                false),
                         SpinyStarfishCondition.instance,
                         "At the beginning of each end step, if {this} regenerated this turn, create a 0/1 blue Starfish creature token for each time it regenerated this turn."),
                 new SpinyStarfishWatcher());
@@ -91,11 +88,6 @@ class SpinyStarfishWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public SpinyStarfishWatcher(final SpinyStarfishWatcher watcher) {
-        super(watcher);
-        this.regeneratedCount.putAll(watcher.regeneratedCount);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.REGENERATED) {
@@ -115,17 +107,9 @@ class SpinyStarfishWatcher extends Watcher {
     }
 
     public int regeneratedCount(UUID sourceId) {
-        Integer count = regeneratedCount.get(sourceId);
-        if (count == null) {
-            return 0;
-        }
-        return count;
+        return regeneratedCount.getOrDefault(sourceId, 0);
     }
 
-    @Override
-    public SpinyStarfishWatcher copy() {
-        return new SpinyStarfishWatcher(this);
-    }
 }
 
 class SpinyStarfishDynamicValue implements DynamicValue {

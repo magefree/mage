@@ -22,11 +22,6 @@ public class LifeLossOtherFromCombatWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public LifeLossOtherFromCombatWatcher(final LifeLossOtherFromCombatWatcher watcher) {
-        super(watcher);
-        this.players.addAll(watcher.players);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.LOST_LIFE && !event.getFlag()) {
@@ -51,10 +46,5 @@ public class LifeLossOtherFromCombatWatcher extends Watcher {
     public void reset() {
         super.reset();
         players.clear();
-    }
-
-    @Override
-    public LifeLossOtherFromCombatWatcher copy() {
-        return new LifeLossOtherFromCombatWatcher(this);
     }
 }

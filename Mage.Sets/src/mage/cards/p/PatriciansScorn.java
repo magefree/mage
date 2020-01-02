@@ -76,15 +76,6 @@ class PatriciansScornWatcher extends Watcher {
         super(WatcherScope.CARD);
     }
 
-    public PatriciansScornWatcher(final PatriciansScornWatcher watcher) {
-        super(watcher);
-    }
-
-    @Override
-    public PatriciansScornWatcher copy() {
-        return new PatriciansScornWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (condition) { //no need to check - condition has already occured

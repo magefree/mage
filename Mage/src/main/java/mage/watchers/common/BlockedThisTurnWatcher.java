@@ -16,21 +16,10 @@ import java.util.Set;
  */
 public class BlockedThisTurnWatcher extends Watcher {
 
-    private final Set<MageObjectReference> blockedThisTurnCreatures;
+    private final Set<MageObjectReference> blockedThisTurnCreatures = new HashSet<>();
 
     public BlockedThisTurnWatcher() {
         super(WatcherScope.GAME);
-        blockedThisTurnCreatures = new HashSet<>();
-    }
-
-    public BlockedThisTurnWatcher(final BlockedThisTurnWatcher watcher) {
-        super(watcher);
-        blockedThisTurnCreatures = new HashSet<>(watcher.blockedThisTurnCreatures);
-    }
-
-    @Override
-    public Watcher copy() {
-        return new BlockedThisTurnWatcher(this);
     }
 
     @Override

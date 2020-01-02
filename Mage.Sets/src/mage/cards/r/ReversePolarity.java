@@ -72,13 +72,6 @@ class ReversePolarityWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public ReversePolarityWatcher(final ReversePolarityWatcher watcher) {
-        super(watcher);
-        for (Entry<UUID, Integer> entry : watcher.artifactDamageReceivedThisTurn.entrySet()) {
-            artifactDamageReceivedThisTurn.put(entry.getKey(), entry.getValue());
-        }
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
@@ -102,8 +95,4 @@ class ReversePolarityWatcher extends Watcher {
         artifactDamageReceivedThisTurn.clear();
     }
 
-    @Override
-    public ReversePolarityWatcher copy() {
-        return new ReversePolarityWatcher(this);
-    }
 }

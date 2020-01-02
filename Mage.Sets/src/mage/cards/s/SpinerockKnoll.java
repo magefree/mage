@@ -94,13 +94,6 @@ class SpinerockKnollWatcher extends Watcher {
         super(WatcherScope.CARD);
     }
 
-    SpinerockKnollWatcher(final SpinerockKnollWatcher watcher) {
-        super(watcher);
-        for (Entry<UUID, Integer> entry : watcher.amountOfDamageReceivedThisTurn.entrySet()) {
-            amountOfDamageReceivedThisTurn.put(entry.getKey(), entry.getValue());
-        }
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.DAMAGED_PLAYER) {
@@ -120,10 +113,5 @@ class SpinerockKnollWatcher extends Watcher {
     @Override
     public void reset() {
         amountOfDamageReceivedThisTurn.clear();
-    }
-
-    @Override
-    public SpinerockKnollWatcher copy() {
-        return new SpinerockKnollWatcher(this);
     }
 }

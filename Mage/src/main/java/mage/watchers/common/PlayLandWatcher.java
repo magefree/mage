@@ -22,17 +22,6 @@ public class PlayLandWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public PlayLandWatcher(final PlayLandWatcher watcher) {
-        super(watcher);
-        playerPlayedLand.addAll(watcher.playerPlayedLand);
-        landPlayed.addAll(watcher.landPlayed);
-    }
-
-    @Override
-    public PlayLandWatcher copy() {
-        return new PlayLandWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.LAND_PLAYED) {

@@ -137,10 +137,6 @@ class IcefallRegentWatcher extends Watcher {
         super(WatcherScope.CARD);
     }
 
-    IcefallRegentWatcher(IcefallRegentWatcher watcher) {
-        super(watcher);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.LOST_CONTROL && event.getPlayerId().equals(controllerId) && event.getTargetId().equals(sourceId)) {
@@ -160,11 +156,6 @@ class IcefallRegentWatcher extends Watcher {
     @Override
     public void reset() {
         //don't reset condition each turn - only when this leaves the battlefield
-    }
-
-    @Override
-    public IcefallRegentWatcher copy() {
-        return new IcefallRegentWatcher(this);
     }
 }
 

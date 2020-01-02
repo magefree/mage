@@ -114,11 +114,6 @@ class MoltenPsycheWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public MoltenPsycheWatcher(final MoltenPsycheWatcher watcher) {
-        super(watcher);
-        this.draws.putAll(watcher.draws);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DREW_CARD) {
@@ -138,11 +133,6 @@ class MoltenPsycheWatcher extends Watcher {
 
     public int getDraws(UUID playerId) {
         return draws.getOrDefault(playerId, 0);
-    }
-
-    @Override
-    public MoltenPsycheWatcher copy() {
-        return new MoltenPsycheWatcher(this);
     }
 
 }

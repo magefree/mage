@@ -83,11 +83,6 @@ class FaithsRewardWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public FaithsRewardWatcher(final FaithsRewardWatcher watcher) {
-        super(watcher);
-        this.cards.addAll(watcher.cards);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
@@ -97,11 +92,6 @@ class FaithsRewardWatcher extends Watcher {
 
     public List<UUID> getCards(){
         return cards;
-    }
-
-    @Override
-    public FaithsRewardWatcher copy() {
-        return new FaithsRewardWatcher(this);
     }
 
     @Override

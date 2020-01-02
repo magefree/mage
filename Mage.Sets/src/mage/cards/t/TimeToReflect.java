@@ -76,16 +76,6 @@ class BlockedOrWasBlockedByAZombieWatcher extends Watcher {
         blockedOrWasBlockedByAZombieWatcher = new HashSet<>();
     }
 
-    public BlockedOrWasBlockedByAZombieWatcher(final BlockedOrWasBlockedByAZombieWatcher watcher) {
-        super(watcher);
-        blockedOrWasBlockedByAZombieWatcher = new HashSet<>(watcher.blockedOrWasBlockedByAZombieWatcher);
-    }
-
-    @Override
-    public BlockedOrWasBlockedByAZombieWatcher copy() {
-        return new BlockedOrWasBlockedByAZombieWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {

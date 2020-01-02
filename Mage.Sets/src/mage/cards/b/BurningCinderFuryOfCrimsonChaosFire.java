@@ -200,10 +200,6 @@ class BurningCinderFuryOfCrimsonChaosFireWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public BurningCinderFuryOfCrimsonChaosFireWatcher(final BurningCinderFuryOfCrimsonChaosFireWatcher watcher) {
-        super(watcher);
-        this.tappedActivePlayerIds.addAll(watcher.tappedActivePlayerIds);
-    }
 
     @Override
     public void watch(GameEvent event, Game game) {
@@ -222,10 +218,5 @@ class BurningCinderFuryOfCrimsonChaosFireWatcher extends Watcher {
     @Override
     public void reset() {
         tappedActivePlayerIds.clear();
-    }
-
-    @Override
-    public BurningCinderFuryOfCrimsonChaosFireWatcher copy() {
-        return new BurningCinderFuryOfCrimsonChaosFireWatcher(this);
     }
 }

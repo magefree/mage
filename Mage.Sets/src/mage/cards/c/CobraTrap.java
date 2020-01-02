@@ -74,15 +74,6 @@ class CobraTrapWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public CobraTrapWatcher(final CobraTrapWatcher watcher) {
-        super(watcher);
-    }
-
-    @Override
-    public CobraTrapWatcher copy() {
-        return new CobraTrapWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.DESTROYED_PERMANENT) {

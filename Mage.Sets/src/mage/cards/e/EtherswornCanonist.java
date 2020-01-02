@@ -54,11 +54,6 @@ class EtherswornCanonistWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public EtherswornCanonistWatcher(final EtherswornCanonistWatcher watcher) {
-        super(watcher);
-        this.castNonartifactSpell.addAll(watcher.castNonartifactSpell);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getPlayerId() != null) {
@@ -83,12 +78,6 @@ class EtherswornCanonistWatcher extends Watcher {
     public boolean castNonArtifactSpell(UUID playerId) {
         return castNonartifactSpell.contains(playerId);
     }
-
-    @Override
-    public EtherswornCanonistWatcher copy() {
-        return new EtherswornCanonistWatcher(this);
-    }
-
 }
 
 class EtherswornCanonistReplacementEffect extends ContinuousRuleModifyingEffectImpl {

@@ -99,10 +99,6 @@ class CombatDamageStepStartedWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public CombatDamageStepStartedWatcher(final CombatDamageStepStartedWatcher watcher) {
-        super(watcher);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         // if no damage happens, the first event after is END_COMBAT_STEP_PRE
@@ -111,10 +107,6 @@ class CombatDamageStepStartedWatcher extends Watcher {
         }
     }
 
-    @Override
-    public CombatDamageStepStartedWatcher copy() {
-        return new CombatDamageStepStartedWatcher(this);
-    }
 }
 
 class BerserkDestroyEffect extends OneShotEffect {

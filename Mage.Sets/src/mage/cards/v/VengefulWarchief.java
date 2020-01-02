@@ -88,11 +88,6 @@ class VengefulWarchiefWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    private VengefulWarchiefWatcher(final VengefulWarchiefWatcher watcher) {
-        super(watcher);
-        this.playersLostLife.putAll(watcher.playersLostLife);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.LOST_LIFE) {
@@ -100,11 +95,6 @@ class VengefulWarchiefWatcher extends Watcher {
             timesLifeLost++;
             playersLostLife.put(event.getTargetId(), timesLifeLost);
         }
-    }
-
-    @Override
-    public VengefulWarchiefWatcher copy() {
-        return new VengefulWarchiefWatcher(this);
     }
 
     @Override

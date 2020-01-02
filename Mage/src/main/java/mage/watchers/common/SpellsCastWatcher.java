@@ -30,16 +30,6 @@ public class SpellsCastWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public SpellsCastWatcher(final SpellsCastWatcher watcher) {
-        super(watcher);
-        this.spellsCast.putAll(watcher.spellsCast);
-    }
-
-    @Override
-    public SpellsCastWatcher copy() {
-        return new SpellsCastWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (EventType.SPELL_CAST == event.getType()) {

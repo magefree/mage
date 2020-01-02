@@ -93,16 +93,6 @@ class GreatestAmountOfDamageWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public GreatestAmountOfDamageWatcher(final GreatestAmountOfDamageWatcher watcher) {
-        super(watcher);
-        this.damageAmount = watcher.damageAmount;
-    }
-
-    @Override
-    public GreatestAmountOfDamageWatcher copy() {
-        return new GreatestAmountOfDamageWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         switch(event.getType()) {

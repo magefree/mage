@@ -23,13 +23,6 @@ public class AmountOfDamageAPlayerReceivedThisTurnWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public AmountOfDamageAPlayerReceivedThisTurnWatcher(final AmountOfDamageAPlayerReceivedThisTurnWatcher watcher) {
-        super(watcher);
-        for (Entry<UUID, Integer> entry : watcher.amountOfDamageReceivedThisTurn.entrySet()) {
-            amountOfDamageReceivedThisTurn.put(entry.getKey(), entry.getValue());
-        }
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
@@ -49,10 +42,5 @@ public class AmountOfDamageAPlayerReceivedThisTurnWatcher extends Watcher {
     public void reset() {
         super.reset();
         amountOfDamageReceivedThisTurn.clear();
-    }
-
-    @Override
-    public AmountOfDamageAPlayerReceivedThisTurnWatcher copy() {
-        return new AmountOfDamageAPlayerReceivedThisTurnWatcher(this);
     }
 }

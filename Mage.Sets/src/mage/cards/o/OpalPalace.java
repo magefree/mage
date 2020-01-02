@@ -67,19 +67,8 @@ class OpalPalaceWatcher extends Watcher {
         this.originalId = originalId;
     }
 
-    private OpalPalaceWatcher(final OpalPalaceWatcher watcher) {
-        super(watcher);
-        this.commanderId.addAll(watcher.commanderId);
-        this.originalId = watcher.originalId;
-    }
-
-    public boolean manaUsedToCastCommander(UUID id) {
+    public boolean manaUsedToCastCommander(UUID id){
         return commanderId.contains(id);
-    }
-
-    @Override
-    public OpalPalaceWatcher copy() {
-        return new OpalPalaceWatcher(this);
     }
 
     @Override

@@ -144,10 +144,6 @@ class TimeOfIceWatcher extends Watcher {
         super(WatcherScope.CARD);
     }
 
-    TimeOfIceWatcher(TimeOfIceWatcher watcher) {
-        super(watcher);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.LOST_CONTROL && event.getPlayerId().equals(controllerId) && event.getTargetId().equals(sourceId)) {
@@ -167,10 +163,5 @@ class TimeOfIceWatcher extends Watcher {
     @Override
     public void reset() {
         //don't reset condition each turn - only when this leaves the battlefield
-    }
-
-    @Override
-    public TimeOfIceWatcher copy() {
-        return new TimeOfIceWatcher(this);
     }
 }

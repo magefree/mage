@@ -107,11 +107,6 @@ class SteelHellkiteWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public SteelHellkiteWatcher(final SteelHellkiteWatcher watcher) {
-        super(watcher);
-        this.damageMap.putAll(watcher.damageMap);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER
@@ -125,11 +120,6 @@ class SteelHellkiteWatcher extends Watcher {
     public void reset() {
         super.reset();
         this.damageMap.clear();
-    }
-
-    @Override
-    public Watcher copy() {
-        return new SteelHellkiteWatcher(this);
     }
 
     public Set<UUID> getDamagedPlayers(UUID damagerId) {

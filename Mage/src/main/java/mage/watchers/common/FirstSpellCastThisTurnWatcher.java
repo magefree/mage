@@ -22,12 +22,6 @@ public class FirstSpellCastThisTurnWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public FirstSpellCastThisTurnWatcher(final FirstSpellCastThisTurnWatcher watcher) {
-        super(watcher);
-        playerFirstSpellCast.putAll(watcher.playerFirstSpellCast);
-        playerFirstCastSpell.putAll(watcher.playerFirstCastSpell);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         switch (event.getType()) {
@@ -42,11 +36,6 @@ public class FirstSpellCastThisTurnWatcher extends Watcher {
                     }
                 }
         }
-    }
-
-    @Override
-    public FirstSpellCastThisTurnWatcher copy() {
-        return new FirstSpellCastThisTurnWatcher(this);
     }
 
     @Override

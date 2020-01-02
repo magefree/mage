@@ -59,28 +59,17 @@ public final class BoseijuWhoSheltersAll extends CardImpl {
 class BoseijuWhoSheltersAllWatcher extends Watcher {
 
     private List<UUID> spells = new ArrayList<>();
-    private final String originalId;
+    private final UUID originalId;
 
     public BoseijuWhoSheltersAllWatcher(UUID originalId) {
         super(WatcherScope.CARD);
-        this.originalId = originalId.toString();
-    }
-
-    public BoseijuWhoSheltersAllWatcher(final BoseijuWhoSheltersAllWatcher watcher) {
-        super(watcher);
-        this.spells.addAll(watcher.spells);
-        this.originalId = watcher.originalId;
-    }
-
-    @Override
-    public BoseijuWhoSheltersAllWatcher copy() {
-        return new BoseijuWhoSheltersAllWatcher(this);
+        this.originalId = originalId;
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.MANA_PAID) {
-            if (event.getData() != null && event.getData().equals(originalId)) {
+            if (event.getData() != null && event.getData().equals(originalId.toString())) {
                 Card spell = game.getSpell(event.getTargetId());
                 if (spell != null && (spell.isInstant() || spell.isSorcery())) {
                     spells.add(event.getTargetId());

@@ -107,20 +107,10 @@ class RasputinDreamweaverStartedUntappedWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    RasputinDreamweaverStartedUntappedWatcher(final RasputinDreamweaverStartedUntappedWatcher watcher) {
-        super(watcher);
-        this.startedUntapped.addAll(watcher.startedUntapped);
-    }
-
-    @Override
-    public RasputinDreamweaverStartedUntappedWatcher copy() {
-        return new RasputinDreamweaverStartedUntappedWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.BEGINNING_PHASE_PRE) {
-            game.getBattlefield().getAllActivePermanents(filter, game).stream().forEach(permanent -> startedUntapped.add(permanent.getId()));
+            game.getBattlefield().getAllActivePermanents(filter, game).forEach(permanent -> startedUntapped.add(permanent.getId()));
         }
     }
 

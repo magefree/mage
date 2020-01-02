@@ -78,16 +78,6 @@ class SilumgarScavengerExploitedWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    private SilumgarScavengerExploitedWatcher(final SilumgarScavengerExploitedWatcher watcher) {
-        super(watcher);
-        this.exploitedPermanents.putAll(watcher.exploitedPermanents);
-    }
-
-    @Override
-    public SilumgarScavengerExploitedWatcher copy() {
-        return new SilumgarScavengerExploitedWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.EXPLOITED_CREATURE) {

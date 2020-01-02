@@ -78,22 +78,12 @@ class UrzasMiterWatcher extends Watcher {
         this.cards = new ArrayList<>();
     }
 
-    public UrzasMiterWatcher(final UrzasMiterWatcher watcher) {
-        super(watcher);
-        this.cards = new ArrayList<>();
-        this.cards.addAll(watcher.cards);
-    }
 
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SACRIFICED_PERMANENT) {            
             cards.add(event.getTargetId());
         }
-    }
-
-    @Override
-    public UrzasMiterWatcher copy() {
-        return new UrzasMiterWatcher(this);
     }
 
     @Override

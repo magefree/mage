@@ -28,7 +28,7 @@ public final class KumanosPupils extends CardImpl {
         this.toughness = new MageInt(3);
 
         // If a creature dealt damage by Kumano's Pupils this turn would die, exile it instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DealtDamageToCreatureBySourceDies(this, Duration.WhileOnBattlefield)), new DamagedByWatcher());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DealtDamageToCreatureBySourceDies(this, Duration.WhileOnBattlefield)), new DamagedByWatcher(false));
     }
 
     public KumanosPupils(final KumanosPupils card) {

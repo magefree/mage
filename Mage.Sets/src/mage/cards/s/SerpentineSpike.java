@@ -53,7 +53,7 @@ public final class SerpentineSpike extends CardImpl {
         Effect effect = new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn);
         effect.setText("If a creature dealt damage this way would die this turn, exile it instead");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addWatcher(new DamagedByWatcher());
+        this.getSpellAbility().addWatcher(new DamagedByWatcher(false));
     }
 
     public SerpentineSpike(final SerpentineSpike card) {

@@ -135,16 +135,6 @@ class UbaMaskExiledCardsWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public UbaMaskExiledCardsWatcher(final UbaMaskExiledCardsWatcher watcher) {
-        super(watcher);
-        exiledCards.putAll(watcher.exiledCards);
-    }
-
-    @Override
-    public UbaMaskExiledCardsWatcher copy() {
-        return new UbaMaskExiledCardsWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         // no events to watch

@@ -35,18 +35,6 @@ public class CommanderInfoWatcher extends Watcher {
         this.commanderTypeName = commanderTypeName;
     }
 
-    public CommanderInfoWatcher(final CommanderInfoWatcher watcher) {
-        super(watcher);
-        this.damageToPlayer.putAll(watcher.damageToPlayer);
-        this.checkCommanderDamage = watcher.checkCommanderDamage;
-        this.commanderTypeName = watcher.commanderTypeName;
-    }
-
-    @Override
-    public CommanderInfoWatcher copy() {
-        return new CommanderInfoWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (checkCommanderDamage && event.getType() == EventType.DAMAGED_PLAYER && event instanceof DamagedPlayerEvent) {

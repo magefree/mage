@@ -25,15 +25,6 @@ public class PermanentsSacrificedWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public PermanentsSacrificedWatcher(final PermanentsSacrificedWatcher watcher) {
-        super(watcher);
-    }
-
-    @Override
-    public PermanentsSacrificedWatcher copy() {
-        return new PermanentsSacrificedWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SACRIFICED_PERMANENT) {

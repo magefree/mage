@@ -115,11 +115,6 @@ class CouldAttackThisTurnWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public CouldAttackThisTurnWatcher(final CouldAttackThisTurnWatcher watcher) {
-        super(watcher);
-        this.couldAttackThisTurnCreatures.addAll(watcher.couldAttackThisTurnCreatures);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DECLARE_ATTACKERS_STEP_PRE) {
@@ -149,11 +144,6 @@ class CouldAttackThisTurnWatcher extends Watcher {
 
     public Set<MageObjectReference> getCouldAttackThisTurnCreatures() {
         return this.couldAttackThisTurnCreatures;
-    }
-
-    @Override
-    public CouldAttackThisTurnWatcher copy() {
-        return new CouldAttackThisTurnWatcher(this);
     }
 
     @Override

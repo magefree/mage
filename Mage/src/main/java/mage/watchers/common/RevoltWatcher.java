@@ -24,11 +24,6 @@ public class RevoltWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public RevoltWatcher(final RevoltWatcher watcher) {
-        super(watcher);
-        this.revoltActivePlayerIds.addAll(watcher.revoltActivePlayerIds);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.ZONE_CHANGE && event instanceof ZoneChangeEvent) {
@@ -50,10 +45,5 @@ public class RevoltWatcher extends Watcher {
     public void reset() {
         super.reset();
         revoltActivePlayerIds.clear();
-    }
-
-    @Override
-    public RevoltWatcher copy() {
-        return new RevoltWatcher(this);
     }
 }

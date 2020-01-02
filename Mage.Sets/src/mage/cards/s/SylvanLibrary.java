@@ -122,11 +122,6 @@ class SylvanLibraryCardsDrawnThisTurnWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public SylvanLibraryCardsDrawnThisTurnWatcher(final SylvanLibraryCardsDrawnThisTurnWatcher watcher) {
-        super(watcher);
-        this.cardsDrawnThisTurn.putAll(watcher.cardsDrawnThisTurn);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DREW_CARD) {
@@ -145,11 +140,6 @@ class SylvanLibraryCardsDrawnThisTurnWatcher extends Watcher {
     public void reset() {
         super.reset();
         cardsDrawnThisTurn.clear();
-    }
-
-    @Override
-    public SylvanLibraryCardsDrawnThisTurnWatcher copy() {
-        return new SylvanLibraryCardsDrawnThisTurnWatcher(this);
     }
 }
 

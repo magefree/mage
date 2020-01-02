@@ -101,11 +101,6 @@ class GideonsTriumphWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    private GideonsTriumphWatcher(final GideonsTriumphWatcher watcher) {
-        super(watcher);
-        this.attackedOrBlockedThisTurnCreatures.addAll(watcher.attackedOrBlockedThisTurnCreatures);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED || event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
@@ -115,12 +110,6 @@ class GideonsTriumphWatcher extends Watcher {
 
     boolean attackedOrBlockedThisTurn(Permanent permanent, Game game) {
         return this.attackedOrBlockedThisTurnCreatures.contains(new MageObjectReference(permanent, game));
-    }
-
-
-    @Override
-    public GideonsTriumphWatcher copy() {
-        return new GideonsTriumphWatcher(this);
     }
 
     @Override

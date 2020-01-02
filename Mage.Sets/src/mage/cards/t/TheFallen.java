@@ -83,11 +83,6 @@ class TheFallenWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public TheFallenWatcher(final TheFallenWatcher watcher) {
-        super(watcher);
-        playersAndWalkersDealtDamageThisGame = new HashMap<>(watcher.playersAndWalkersDealtDamageThisGame);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER
@@ -108,10 +103,5 @@ class TheFallenWatcher extends Watcher {
 
     public Set<UUID> getPlayersAndWalkersDealtDamageThisGame(UUID creatureId) {
         return playersAndWalkersDealtDamageThisGame.get(creatureId);
-    }
-
-    @Override
-    public TheFallenWatcher copy() {
-        return new TheFallenWatcher(this);
     }
 }

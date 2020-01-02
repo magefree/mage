@@ -88,16 +88,6 @@ class SoulReapWatcher extends Watcher {
         this.cardId = cardId;
     }
 
-    public SoulReapWatcher(final SoulReapWatcher watcher) {
-        super(watcher);
-        this.cardId = watcher.cardId;
-    }
-
-    @Override
-    public SoulReapWatcher copy() {
-        return new SoulReapWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (condition == true) { //no need to check - condition has already occured

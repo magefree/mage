@@ -23,16 +23,6 @@ public class CastSpellYourLastTurnWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public CastSpellYourLastTurnWatcher(final CastSpellYourLastTurnWatcher watcher) {
-        super(watcher);
-        for (Entry<UUID, Integer> entry : watcher.amountOfSpellsCastOnCurrentTurn.entrySet()) {
-            amountOfSpellsCastOnCurrentTurn.put(entry.getKey(), entry.getValue());
-        }
-        for (Entry<UUID, Integer> entry : watcher.amountOfSpellsCastOnPrevTurn.entrySet()) {
-            amountOfSpellsCastOnPrevTurn.put(entry.getKey(), entry.getValue());
-        }
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         lastActivePlayer = game.getActivePlayerId();

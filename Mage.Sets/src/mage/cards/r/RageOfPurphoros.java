@@ -28,7 +28,7 @@ public final class RageOfPurphoros extends CardImpl {
         this.getSpellAbility().addEffect(new CantRegenerateTargetEffect(Duration.EndOfTurn, "It"));
         this.getSpellAbility().addEffect(new ScryEffect(1));
 
-        this.getSpellAbility().addWatcher(new DamagedByWatcher());
+        this.getSpellAbility().addWatcher(new DamagedByWatcher(false));
     }
 
     public RageOfPurphoros(final RageOfPurphoros card) {

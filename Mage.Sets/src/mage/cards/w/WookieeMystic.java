@@ -1,16 +1,12 @@
-
 package mage.cards.w;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -26,14 +22,17 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author Styxo
  */
 public final class WookieeMystic extends CardImpl {
 
     public WookieeMystic(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{G}{W}");
         this.subtype.add(SubType.WOOKIEE);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(2);
@@ -45,21 +44,21 @@ public final class WookieeMystic extends CardImpl {
         ManaEffect effect = new BasicManaEffect(mana);
         effect.setText("Add {R}. If that mana is spent on a creature spell, it enters the battlefield with a +1/+1 counter on it");
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
-        this.addAbility(ability, new WookieeMysticWatcher(ability));
+        this.addAbility(ability, new WookieeMysticWatcher().withParams(ability));
 
         mana = Mana.GreenMana(1);
         mana.setFlag(true);
         effect = new BasicManaEffect(mana);
         effect.setText("Add {G}. If that mana is spent on a creature spell, it enters the battlefield with a +1/+1 counter on it");
         ability = new SimpleManaAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
-        this.addAbility(ability, new WookieeMysticWatcher(ability));
+        this.addAbility(ability, new WookieeMysticWatcher().withParams(ability));
 
         mana = Mana.WhiteMana(1);
         mana.setFlag(true);
         effect = new BasicManaEffect(mana);
         effect.setText("Add {W}. If that mana is spent on a creature spell, it enters the battlefield with a +1/+1 counter on it");
         ability = new SimpleManaAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
-        this.addAbility(ability, new WookieeMysticWatcher(ability));
+        this.addAbility(ability, new WookieeMysticWatcher().withParams(ability));
     }
 
     public WookieeMystic(final WookieeMystic card) {
@@ -74,23 +73,16 @@ public final class WookieeMystic extends CardImpl {
 
 class WookieeMysticWatcher extends Watcher {
 
-    private final Ability source;
-    private final List<UUID> creatures = new ArrayList<>();
+    private Ability source;
+    private List<UUID> creatures = new ArrayList<>();
 
-    WookieeMysticWatcher(Ability source) {
+    public WookieeMysticWatcher() {
         super(WatcherScope.CARD);
+    }
+
+    Watcher withParams(Ability source) {
         this.source = source;
-    }
-
-    WookieeMysticWatcher(final WookieeMysticWatcher watcher) {
-        super(watcher);
-        this.creatures.addAll(watcher.creatures);
-        this.source = watcher.source;
-    }
-
-    @Override
-    public WookieeMysticWatcher copy() {
-        return new WookieeMysticWatcher(this);
+        return this;
     }
 
     @Override

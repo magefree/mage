@@ -116,16 +116,6 @@ class TalarasBattalionWatcher extends Watcher {
         this.cardId = cardId;
     }
 
-    public TalarasBattalionWatcher(final TalarasBattalionWatcher watcher) {
-        super(watcher);
-        this.cardId = watcher.cardId;
-    }
-
-    @Override
-    public TalarasBattalionWatcher copy() {
-        return new TalarasBattalionWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (condition == true) { //no need to check - condition has already occured

@@ -136,11 +136,6 @@ class GisaAndGeralfWatcher extends Watcher {
         super(WatcherScope.CARD);
     }
 
-    GisaAndGeralfWatcher(final GisaAndGeralfWatcher watcher) {
-        super(watcher);
-        this.abilityUsed = watcher.abilityUsed;
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getZone() == Zone.GRAVEYARD) {
@@ -149,11 +144,6 @@ class GisaAndGeralfWatcher extends Watcher {
                 abilityUsed = true;
             }
         }
-    }
-
-    @Override
-    public GisaAndGeralfWatcher copy() {
-        return new GisaAndGeralfWatcher(this);
     }
 
     @Override

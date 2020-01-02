@@ -75,16 +75,6 @@ class VeilOfSummerWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    private VeilOfSummerWatcher(final VeilOfSummerWatcher watcher) {
-        super(watcher);
-        this.opponentsCastBlueBlackSpell.addAll(watcher.opponentsCastBlueBlackSpell);
-    }
-
-    @Override
-    public VeilOfSummerWatcher copy() {
-        return new VeilOfSummerWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (GameEvent.EventType.SPELL_CAST == event.getType()) {

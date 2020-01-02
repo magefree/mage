@@ -94,16 +94,6 @@ class VengevineWatcher extends Watcher {
         super(WatcherScope.PLAYER);
     }
 
-    public VengevineWatcher(final VengevineWatcher watcher) {
-        super(watcher);
-        this.creatureSpellCount = watcher.creatureSpellCount;
-    }
-
-    @Override
-    public VengevineWatcher copy() {
-        return new VengevineWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         condition = false;

@@ -100,10 +100,6 @@ class VileRedeemerNonTokenCreaturesDiedWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public VileRedeemerNonTokenCreaturesDiedWatcher(final VileRedeemerNonTokenCreaturesDiedWatcher watcher) {
-        super(watcher);
-        this.amountOfCreaturesThatDied.putAll(watcher.amountOfCreaturesThatDied);
-    }
 
     @Override
     public void watch(GameEvent event, Game game) {
@@ -127,10 +123,4 @@ class VileRedeemerNonTokenCreaturesDiedWatcher extends Watcher {
     public int getAmountOfNontokenCreatureDiedThisTurn(UUID playerId) {
         return amountOfCreaturesThatDied.getOrDefault(playerId, 0);
     }
-
-    @Override
-    public VileRedeemerNonTokenCreaturesDiedWatcher copy() {
-        return new VileRedeemerNonTokenCreaturesDiedWatcher(this);
-    }
-
 }

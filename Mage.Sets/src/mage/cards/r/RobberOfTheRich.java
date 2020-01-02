@@ -216,15 +216,6 @@ class RobberOfTheRichWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    private RobberOfTheRichWatcher(final RobberOfTheRichWatcher watcher) {
-        super(watcher);
-        this.rogueAttackers.addAll(watcher.rogueAttackers);
-    }
-
-    @Override
-    public RobberOfTheRichWatcher copy() {
-        return new RobberOfTheRichWatcher(this);
-    }
 
     @Override
     public void watch(GameEvent event, Game game) {

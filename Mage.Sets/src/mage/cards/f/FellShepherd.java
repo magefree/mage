@@ -69,16 +69,6 @@ class FellShepherdWatcher extends Watcher {
         condition = true;
     }
 
-    public FellShepherdWatcher(final FellShepherdWatcher watcher) {
-        super(watcher);
-        this.creatureIds.addAll(watcher.creatureIds);
-    }
-
-    @Override
-    public FellShepherdWatcher copy() {
-        return new FellShepherdWatcher(this);
-    }
-
     public Set<UUID> getCreaturesIds() {
         return creatureIds;
     }

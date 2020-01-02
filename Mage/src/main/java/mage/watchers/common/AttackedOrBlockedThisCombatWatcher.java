@@ -26,12 +26,6 @@ public class AttackedOrBlockedThisCombatWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public AttackedOrBlockedThisCombatWatcher(final AttackedOrBlockedThisCombatWatcher watcher) {
-        super(watcher);
-        this.getAttackedThisTurnCreatures().addAll(watcher.getAttackedThisTurnCreatures());
-        this.getBlockedThisTurnCreatures().addAll(watcher.getBlockedThisTurnCreatures());
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.BEGIN_COMBAT_STEP_PRE) {
@@ -51,11 +45,6 @@ public class AttackedOrBlockedThisCombatWatcher extends Watcher {
 
     public Set<MageObjectReference> getBlockedThisTurnCreatures() {
         return this.blockedThisTurnCreatures;
-    }
-
-    @Override
-    public AttackedOrBlockedThisCombatWatcher copy() {
-        return new AttackedOrBlockedThisCombatWatcher(this);
     }
 
 }

@@ -101,16 +101,6 @@ class EmbalmedThisTurnWatcher extends Watcher {
         embalmedThisTurnTokens = new HashSet<>();
     }
 
-    public EmbalmedThisTurnWatcher(final EmbalmedThisTurnWatcher watcher) {
-        super(watcher);
-        embalmedThisTurnTokens = new HashSet<>(watcher.embalmedThisTurnTokens);
-    }
-
-    @Override
-    public Watcher copy() {
-        return new EmbalmedThisTurnWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.EMBALMED_CREATURE) {

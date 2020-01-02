@@ -23,18 +23,6 @@ public class PlayersAttackedLastTurnWatcher extends Watcher {
         super(WatcherScope.GAME);
     }
 
-    public PlayersAttackedLastTurnWatcher(final PlayersAttackedLastTurnWatcher watcher) {
-        super(watcher);
-        for (Map.Entry<UUID, PlayerList> entry : watcher.playersAttackedInLastTurn.entrySet()) {
-            this.playersAttackedInLastTurn.put(entry.getKey(), entry.getValue());
-        }
-    }
-
-    @Override
-    public PlayersAttackedLastTurnWatcher copy() {
-        return new PlayersAttackedLastTurnWatcher(this);
-    }
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.BEGINNING_PHASE_PRE) {
