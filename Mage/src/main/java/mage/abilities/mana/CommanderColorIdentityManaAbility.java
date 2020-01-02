@@ -14,7 +14,9 @@ import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -59,6 +61,36 @@ class CommanderIdentityManaEffect extends ManaEffect {
     @Override
     public CommanderIdentityManaEffect copy() {
         return new CommanderIdentityManaEffect(this);
+    }
+
+    @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
+        List<Mana> netMana = new ArrayList<>();
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            for (UUID commanderId : game.getCommandersIds(controller)) {
+                Card commander = game.getCard(commanderId);
+                if (commander != null) {
+                    FilterMana commanderMana = commander.getColorIdentity();
+                    if (commanderMana.isBlack()) {
+                        netMana.add(new Mana(ColoredManaSymbol.B));
+                    }
+                    if (commanderMana.isBlue()) {
+                        netMana.add(new Mana(ColoredManaSymbol.U));
+                    }
+                    if (commanderMana.isGreen()) {
+                        netMana.add(new Mana(ColoredManaSymbol.G));
+                    }
+                    if (commanderMana.isRed()) {
+                        netMana.add(new Mana(ColoredManaSymbol.R));
+                    }
+                    if (commanderMana.isWhite()) {
+                        netMana.add(new Mana(ColoredManaSymbol.W));
+                    }
+                }
+            }
+        }
+        return netMana;
     }
 
     @Override
@@ -120,35 +152,4 @@ class CommanderIdentityManaEffect extends ManaEffect {
         }
         return mana;
     }
-
-    @Override
-    public List<Mana> getNetMana(Game game, Ability source) {
-        List<Mana> netMana = new ArrayList<>();
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            for (UUID commanderId : game.getCommandersIds(controller)) {
-                Card commander = game.getCard(commanderId);
-                if (commander != null) {
-                    FilterMana commanderMana = commander.getColorIdentity();
-                    if (commanderMana.isBlack()) {
-                        netMana.add(new Mana(ColoredManaSymbol.B));
-                    }
-                    if (commanderMana.isBlue()) {
-                        netMana.add(new Mana(ColoredManaSymbol.U));
-                    }
-                    if (commanderMana.isGreen()) {
-                        netMana.add(new Mana(ColoredManaSymbol.G));
-                    }
-                    if (commanderMana.isRed()) {
-                        netMana.add(new Mana(ColoredManaSymbol.R));
-                    }
-                    if (commanderMana.isWhite()) {
-                        netMana.add(new Mana(ColoredManaSymbol.W));
-                    }
-                }
-            }
-        }
-        return netMana;
-    }
-
 }

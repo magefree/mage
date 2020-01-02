@@ -20,6 +20,8 @@ import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -85,8 +87,8 @@ class CarpetOfFlowersTriggeredAbility extends TriggeredAbilityImpl {
         boolean value = super.resolve(game);
         if (value == true) {
             game.getState().setValue(this.originalId.toString()
-                    + "addMana"
-                    + game.getState().getZoneChangeCounter(sourceId),
+                            + "addMana"
+                            + game.getState().getZoneChangeCounter(sourceId),
                     Boolean.TRUE);
         }
         return value;
@@ -95,8 +97,8 @@ class CarpetOfFlowersTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public void reset(Game game) {
         game.getState().setValue(this.originalId.toString()
-                + "addMana"
-                + game.getState().getZoneChangeCounter(sourceId),
+                        + "addMana"
+                        + game.getState().getZoneChangeCounter(sourceId),
                 Boolean.FALSE);
     }
 
@@ -125,6 +127,16 @@ class CarpetOfFlowersEffect extends ManaEffect {
 
     CarpetOfFlowersEffect(final CarpetOfFlowersEffect effect) {
         super(effect);
+    }
+
+    @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
+        List<Mana> netMana = new ArrayList<>();
+        int count = game.getBattlefield().count(filter, source.getSourceId(), source.getTargets().getFirstTarget(), game);
+        if (count > 0) {
+            netMana.add(Mana.AnyMana(count));
+        }
+        return netMana;
     }
 
     @Override

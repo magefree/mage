@@ -11,10 +11,10 @@ import mage.abilities.effects.common.ManaEffect;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author LevelX2
  */
 public class AddManaToManaPoolTargetControllerEffect extends ManaEffect {
@@ -29,12 +29,11 @@ public class AddManaToManaPoolTargetControllerEffect extends ManaEffect {
     /**
      * Adds mana to the mana pool of target pointer player
      *
-     * @param mana mana that will be added to the pool
+     * @param mana              mana that will be added to the pool
      * @param textManaPoolOwner text that references to the mana pool owner
-     * (e.g. "damaged player's")
-     * @param emptyOnTurnsEnd if set, the mana will empty only on end of
-     * turnstep
-     *
+     *                          (e.g. "damaged player's")
+     * @param emptyOnTurnsEnd   if set, the mana will empty only on end of
+     *                          turnstep
      */
     public AddManaToManaPoolTargetControllerEffect(Mana mana, String textManaPoolOwner, boolean emptyOnTurnsEnd) {
         super();
@@ -60,6 +59,13 @@ public class AddManaToManaPoolTargetControllerEffect extends ManaEffect {
     }
 
     @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
+        ArrayList<Mana> netMana = new ArrayList<>();
+        netMana.add(mana.copy());
+        return netMana;
+    }
+
+    @Override
     public Mana produceMana(Game game, Ability source) {
         return mana.copy();
     }
@@ -67,10 +73,5 @@ public class AddManaToManaPoolTargetControllerEffect extends ManaEffect {
     @Override
     protected void addManaToPool(Player player, Mana manaToAdd, Game game, Ability source) {
         player.getManaPool().addMana(manaToAdd, game, source, emptyOnlyOnTurnsEnd);
-    }
-
-    @Override
-    public List<Mana> getNetMana(Game game, Ability source) {
-        return null;
     }
 }

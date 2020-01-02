@@ -1,9 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -21,8 +17,11 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class AstralCornucopia extends CardImpl {
@@ -68,6 +67,19 @@ class AstralCornucopiaManaEffect extends ManaEffect {
     }
 
     @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
+        List<Mana> netMana = new ArrayList<>();
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        if (sourcePermanent != null) {
+            int counters = sourcePermanent.getCounters(game).getCount(CounterType.CHARGE.getName());
+            if (counters > 0) {
+                netMana.add(Mana.AnyMana(counters));
+            }
+        }
+        return netMana;
+    }
+
+    @Override
     public Mana produceMana(Game game, Ability source) {
         Mana mana = new Mana();
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
@@ -105,18 +117,6 @@ class AstralCornucopiaManaEffect extends ManaEffect {
         }
 
         return mana;
-    }
-
-    @Override
-    public List<Mana> getNetMana(Game game, Ability source) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (sourcePermanent != null) {
-            int counters = sourcePermanent.getCounters(game).getCount(CounterType.CHARGE.getName());
-            List<Mana> netMana = new ArrayList<>();
-            netMana.add(new Mana(0, 0, 0, 0, 0, 0, counters, 0));
-            return netMana;
-        }
-        return null;
     }
 
 }

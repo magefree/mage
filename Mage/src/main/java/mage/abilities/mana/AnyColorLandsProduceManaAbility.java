@@ -1,4 +1,3 @@
-
 package mage.abilities.mana;
 
 import mage.Mana;
@@ -84,6 +83,34 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
         super(effect);
         this.filter = effect.filter.copy();
         this.onlyColors = effect.onlyColors;
+    }
+
+    @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
+        List<Mana> netManas = new ArrayList<>();
+        Mana types = getManaTypes(game, source);
+        if (types.getBlack() > 0) {
+            netManas.add(new Mana(ColoredManaSymbol.B));
+        }
+        if (types.getRed() > 0) {
+            netManas.add(new Mana(ColoredManaSymbol.R));
+        }
+        if (types.getBlue() > 0) {
+            netManas.add(new Mana(ColoredManaSymbol.U));
+        }
+        if (types.getGreen() > 0) {
+            netManas.add(new Mana(ColoredManaSymbol.G));
+        }
+        if (types.getWhite() > 0) {
+            netManas.add(new Mana(ColoredManaSymbol.W));
+        }
+        if (!onlyColors && types.getColorless() > 0) {
+            netManas.add(Mana.ColorlessMana(1));
+        }
+        if (types.getAny() > 0) {
+            netManas.add(Mana.AnyMana(1));
+        }
+        return netManas;
     }
 
     @Override
@@ -179,34 +206,6 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
         }
         inManaTypeCalculation = false;
         return types;
-    }
-
-    @Override
-    public List<Mana> getNetMana(Game game, Ability source) {
-        List<Mana> netManas = new ArrayList<>();
-        Mana types = getManaTypes(game, source);
-        if (types.getBlack() > 0) {
-            netManas.add(new Mana(ColoredManaSymbol.B));
-        }
-        if (types.getRed() > 0) {
-            netManas.add(new Mana(ColoredManaSymbol.R));
-        }
-        if (types.getBlue() > 0) {
-            netManas.add(new Mana(ColoredManaSymbol.U));
-        }
-        if (types.getGreen() > 0) {
-            netManas.add(new Mana(ColoredManaSymbol.G));
-        }
-        if (types.getWhite() > 0) {
-            netManas.add(new Mana(ColoredManaSymbol.W));
-        }
-        if (types.getColorless() > 0) {
-            netManas.add(Mana.ColorlessMana(1));
-        }
-        if (types.getAny() > 0) {
-            netManas.add(Mana.AnyMana(1));
-        }
-        return netManas;
     }
 
     @Override

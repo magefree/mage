@@ -23,16 +23,16 @@ public class AddManaOfTwoDifferentColorsEffect extends ManaEffect {
     }
 
     @Override
-    public Mana produceMana(Game game, Ability source) {
-        Player player = getPlayer(game, source);
-        return ManaChoice.chooseTwoDifferentColors(player, game);
+    public List<Mana> getNetMana(Game game, Ability source) {
+        ArrayList<Mana> netMana = new ArrayList<>();
+        netMana.add(Mana.AnyMana(2));
+        return netMana;
     }
 
     @Override
-    public List<Mana> getNetMana(Game game, Ability source) {
-        ArrayList<Mana> netMana = new ArrayList<>();
-        netMana.add(new Mana(0, 0, 0, 0, 0, 0, 2, 0));
-        return netMana;
+    public Mana produceMana(Game game, Ability source) {
+        Player player = getPlayer(game, source);
+        return ManaChoice.chooseTwoDifferentColors(player, game);
     }
 
     @Override

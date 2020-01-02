@@ -49,7 +49,7 @@ public class AddManaOfAnyColorEffect extends BasicManaEffect {
 
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
-        return netMana;
+        return new ArrayList<>(this.netMana);
     }
 
     @Override
