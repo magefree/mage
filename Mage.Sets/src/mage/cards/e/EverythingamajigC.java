@@ -1,7 +1,4 @@
-
 package mage.cards.e;
-
-import java.util.UUID;
 
 import mage.Mana;
 import mage.abilities.Ability;
@@ -14,30 +11,25 @@ import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
-import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author Ketsuban
  */
 public final class EverythingamajigC extends CardImpl {
 
     public EverythingamajigC(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
         // Mana Screw
         // 1: Flip a coin. If you win the flip, add CC to your mana pool. Activate this ability only any time you could cast an instant.
@@ -69,7 +61,7 @@ class ManaScrewAbility extends ActivatedManaAbilityImpl {
 
     public ManaScrewAbility() {
         super(Zone.BATTLEFIELD, new ManaScrewEffect(), new GenericManaCost(1));
-        this.netMana.add(new Mana(0, 0, 0, 0, 0, 2, 0, 0));
+        this.netMana.add(Mana.ColorlessMana(2));
     }
 
     public ManaScrewAbility(final ManaScrewAbility ability) {
@@ -110,6 +102,11 @@ class ManaScrewEffect extends ManaEffect {
     @Override
     public ManaScrewEffect copy() {
         return new ManaScrewEffect(this);
+    }
+
+    @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
+        return null;
     }
 
     @Override

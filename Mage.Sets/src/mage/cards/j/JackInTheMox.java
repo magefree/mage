@@ -1,7 +1,5 @@
-
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
@@ -15,8 +13,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class JackInTheMox extends CardImpl {
@@ -60,6 +60,11 @@ class JackInTheMoxManaEffect extends ManaEffect {
 
     JackInTheMoxManaEffect(final JackInTheMoxManaEffect effect) {
         super(effect);
+    }
+
+    @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
+        return null;
     }
 
     @Override

@@ -1,7 +1,5 @@
-
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.ConditionalMana;
 import mage.MageObjectReference;
 import mage.Mana;
@@ -22,11 +20,7 @@ import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -38,8 +32,9 @@ import mage.target.TargetCard;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J (based on jeffwadsworth)
  */
 public final class IceCauldron extends CardImpl {
@@ -147,10 +142,8 @@ class IceCauldronCastFromExileEffect extends AsThoughEffectImpl {
                 && game.getState().getZone(objectId) == Zone.EXILED) {
             Player player = game.getPlayer(source.getControllerId());
             Card card = game.getCard(objectId);
-            if (player != null
-                    && card != null) {
-                return true;
-            }
+            return player != null
+                    && card != null;
         }
         return false;
     }
@@ -231,7 +224,6 @@ class IceCauldronAddManaEffect extends ManaEffect {
             }
         }
         return null;
-
     }
 
 }
@@ -257,9 +249,7 @@ class IceCauldronManaCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         if (source instanceof SpellAbility) {
             Card card = game.getCard(source.getSourceId());
-            if (card != null && card.equals(exiledCard)) {
-                return true;
-            }
+            return card != null && card.equals(exiledCard);
         }
         return false;
     }
