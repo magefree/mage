@@ -329,7 +329,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
          * Creature — Human Soldier
          * 1/1
          */
- /*
+        /*
          * Rimrock Knight {1}{R}
          * Creature — Dwarf Knight
          * Rimrock Knight can't block.
@@ -380,7 +380,8 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, 0);
 
         Permanent rimrock = getPermanent("Rimrock Knight");
-        Assert.assertEquals(rimrock.getRules(currentGame).get(0), "{this} can't block.");
+        Assert.assertEquals(rimrock.getRules(currentGame).get(0), "Adventure Instant"); // must have adventure spell info on battlefield
+        Assert.assertEquals(rimrock.getRules(currentGame).get(1), "{this} can't block.");
     }
 
     /*
