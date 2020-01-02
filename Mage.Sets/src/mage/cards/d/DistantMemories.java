@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.Set;
@@ -22,8 +21,7 @@ import mage.target.common.TargetCardInLibrary;
 public final class DistantMemories extends CardImpl {
 
     public DistantMemories(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
 
         this.getSpellAbility().addEffect(new DistantMemoriesEffect());
     }
@@ -42,7 +40,9 @@ class DistantMemoriesEffect extends OneShotEffect {
 
     public DistantMemoriesEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Search your library for a card, exile it, then shuffle your library. Any opponent may have you put that card into your hand. If no player does, you draw three cards";
+        this.staticText = "Search your library for a card, exile it, then shuffle "
+                + "your library. Any opponent may have you put that card into "
+                + "your hand. If no player does, you draw three cards";
     }
 
     public DistantMemoriesEffect(final DistantMemoriesEffect effect) {
@@ -56,41 +56,41 @@ class DistantMemoriesEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
 
         TargetCardInLibrary target = new TargetCardInLibrary();
-        if (player.searchLibrary(target, source, game)) {
-            Card card = player.getLibrary().remove(target.getFirstTarget(), game);
+        if (controller.searchLibrary(target, source, game)) {
+            Card card = controller.getLibrary().remove(target.getFirstTarget(), game);
             if (card != null) {
                 card.moveToZone(Zone.EXILED, source.getSourceId(), game, false);
-                player.shuffleLibrary(source, game);
+                controller.shuffleLibrary(source, game);
 
                 StringBuilder sb = new StringBuilder();
-                sb.append("Have ").append(player.getLogName()).append(" put ").append(card.getName());
+                sb.append("Have ").append(controller.getLogName()).append(" put ").append(card.getName());
                 sb.append(" in their hand? If none of their opponents says yes, they will draw three cards.");
 
                 boolean putInHand = false;
                 Set<UUID> opponents = game.getOpponents(source.getControllerId());
                 for (UUID opponentUuid : opponents) {
                     Player opponent = game.getPlayer(opponentUuid);
-                    if (opponent != null && !putInHand && opponent.chooseUse(Outcome.Neutral, sb.toString(), source, game)) {
+                    if (opponent != null
+                            && opponent.chooseUse(Outcome.Detriment, sb.toString(), source, game)) {
                         putInHand = true;
                     }
                 }
 
                 if (putInHand) {
-                    game.getExile().getPermanentExile().remove(card);
-                    card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                    controller.moveCards(card, Zone.HAND, source, game);
                 } else {
-                    player.drawCards(3, game);
+                    controller.drawCards(3, game);
                 }
                 return true;
             }
         }
-        player.shuffleLibrary(source, game);
+        controller.shuffleLibrary(source, game);
         return false;
     }
 }
