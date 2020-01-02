@@ -15,6 +15,7 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
 
@@ -36,7 +37,9 @@ public final class AtrisOracleOfHalfTruths extends CardImpl {
         this.addAbility(new MenaceAbility());
 
         // When Atris, Oracle of Half-Truths enters the battlefield, target opponent looks at the top three cards of your library and separates them into a face-down pile and a face-up pile. Put one pile into your hand and the other into your graveyard.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new AtrisOracleOfHalfTruthsEffect()));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new AtrisOracleOfHalfTruthsEffect());
+        ability.addTarget(new TargetOpponent());
+        this.addAbility(ability);
     }
 
     private AtrisOracleOfHalfTruths(final AtrisOracleOfHalfTruths card) {
