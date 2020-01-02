@@ -1,6 +1,7 @@
 package mage.abilities.common;
 
 import mage.abilities.Ability;
+import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -22,15 +23,22 @@ import java.util.UUID;
 public class EscapesWithAbility extends EntersBattlefieldAbility {
 
     private final int counters;
+    private final DelayedTriggeredAbility delayedTriggeredAbility;
 
     public EscapesWithAbility(int counters) {
-        super(new EscapesWithEffect(counters), false);
+        this(counters, null);
+    }
+
+    public EscapesWithAbility(int counters, DelayedTriggeredAbility delayedTriggeredAbility) {
+        super(new EscapesWithEffect(counters, delayedTriggeredAbility), false);
         this.counters = counters;
+        this.delayedTriggeredAbility = delayedTriggeredAbility;
     }
 
     private EscapesWithAbility(final EscapesWithAbility ability) {
         super(ability);
         this.counters = ability.counters;
+        this.delayedTriggeredAbility = ability.delayedTriggeredAbility;
     }
 
     @Override
@@ -41,22 +49,26 @@ public class EscapesWithAbility extends EntersBattlefieldAbility {
     @Override
     public String getRule() {
         return "{this} escapes with " + CardUtil.numberToText(counters, "a")
-                + " +1/+1 counter" + (counters > 1 ? 's' : "") + " on it.";
+                + " +1/+1 counter" + (counters > 1 ? 's' : "") + " on it."
+                + (this.delayedTriggeredAbility != null ? " " + this.delayedTriggeredAbility.getRule() : "");
     }
 }
 
 class EscapesWithEffect extends OneShotEffect {
 
     private final int counter;
+    private final DelayedTriggeredAbility delayedTriggeredAbility;
 
-    EscapesWithEffect(int counter) {
+    EscapesWithEffect(int counter, DelayedTriggeredAbility delayedTriggeredAbility) {
         super(Outcome.BoostCreature);
         this.counter = counter;
+        this.delayedTriggeredAbility = delayedTriggeredAbility;
     }
 
     private EscapesWithEffect(final EscapesWithEffect effect) {
         super(effect);
         this.counter = effect.counter;
+        this.delayedTriggeredAbility = effect.delayedTriggeredAbility;
     }
 
     @Override
@@ -77,6 +89,9 @@ class EscapesWithEffect extends OneShotEffect {
         }
         List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
         permanent.addCounters(CounterType.P1P1.createInstance(counter), source, game, appliedEffects);
+        if (this.delayedTriggeredAbility != null) {
+            game.addDelayedTriggeredAbility(this.delayedTriggeredAbility, source);
+        }
         return true;
     }
 
