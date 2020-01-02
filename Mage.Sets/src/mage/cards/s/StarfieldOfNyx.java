@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.List;
@@ -35,10 +34,13 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public final class StarfieldOfNyx extends CardImpl {
 
-    private static final String rule1 = "As long as you control five or more enchantments, each other non-Aura enchantment you control is a creature in addition to its other types and has base power and base toughness each equal to its converted mana cost.";
+    private static final String rule1 = "As long as you control five or more enchantments, "
+            + "each other non-Aura enchantment you control is a creature in addition to its other types "
+            + "and has base power and base toughness each equal to its converted mana cost.";
 
     private static final FilterCard filterGraveyardEnchantment = new FilterCard("enchantment card from your graveyard");
-    private static final FilterEnchantmentPermanent filterEnchantmentYouControl = new FilterEnchantmentPermanent("enchantment you control");
+    private static final FilterEnchantmentPermanent filterEnchantmentYouControl
+            = new FilterEnchantmentPermanent("enchantment you control");
 
     static {
         filterEnchantmentYouControl.add(new ControllerPredicate(TargetController.YOU));
@@ -52,15 +54,19 @@ public final class StarfieldOfNyx extends CardImpl {
     public StarfieldOfNyx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");
 
-        // At the beginning of your upkeep, you may return target enchantment card from your graveyard to the battlefield.
+        // At the beginning of your upkeep, you may return target enchantment card 
+        // from your graveyard to the battlefield.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
                 new ReturnFromGraveyardToBattlefieldTargetEffect(), TargetController.YOU, true);
         ability.addTarget(new TargetCardInGraveyard(filterGraveyardEnchantment));
         this.addAbility(ability);
 
-        // As long as you control five or more enchantments, each other non-Aura enchantment you control is a creature in addition to its other types and has base power and base toughness each equal to its converted mana cost.
+        // As long as you control five or more enchantments, each other non-Aura enchantment 
+        // you control is a creature in addition to its other types and has base power and 
+        // base toughness each equal to its converted mana cost.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
-                new StarfieldOfNyxEffect(), new PermanentsOnTheBattlefieldCondition(filterEnchantmentYouControl, ComparisonType.MORE_THAN, 4), rule1);
+                new StarfieldOfNyxEffect(), new PermanentsOnTheBattlefieldCondition(
+                        filterEnchantmentYouControl, ComparisonType.MORE_THAN, 4), rule1);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
@@ -76,7 +82,8 @@ public final class StarfieldOfNyx extends CardImpl {
 
 class StarfieldOfNyxEffect extends ContinuousEffectImpl {
 
-    private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("Each other non-Aura enchantment you control");
+    private static final FilterEnchantmentPermanent filter
+            = new FilterEnchantmentPermanent("Each other non-Aura enchantment you control");
 
     static {
         filter.add(Predicates.not(new SubtypePredicate(SubType.AURA)));
@@ -86,7 +93,9 @@ class StarfieldOfNyxEffect extends ContinuousEffectImpl {
 
     public StarfieldOfNyxEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BecomeCreature);
-        staticText = "Each other non-Aura enchantment you control is a creature in addition to its other types and has base power and toughness each equal to its converted mana cost";
+        staticText = "Each other non-Aura enchantment you control is a creature "
+                + "in addition to its other types and has base power and "
+                + "toughness each equal to its converted mana cost";
     }
 
     public StarfieldOfNyxEffect(final StarfieldOfNyxEffect effect) {
@@ -100,7 +109,8 @@ class StarfieldOfNyxEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter,
+                source.getControllerId(), source.getSourceId(), game)) {
             switch (layer) {
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
@@ -129,14 +139,16 @@ class StarfieldOfNyxEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean hasLayer(Layer layer) {
-        return layer == Layer.PTChangingEffects_7 || layer == Layer.TypeChangingEffects_4;
+        return layer == Layer.PTChangingEffects_7
+                || layer == Layer.TypeChangingEffects_4;
     }
 
     @Override
     public Set<UUID> isDependentTo(List<ContinuousEffect> allEffectsInLayer) {
         return allEffectsInLayer
                 .stream()
-                .filter(effect -> effect.getDependencyTypes().contains(DependencyType.AuraAddingRemoving))
+                .filter(effect -> effect.getDependencyTypes().contains(DependencyType.AuraAddingRemoving)
+                || effect.getDependencyTypes().contains(DependencyType.EnchantmentAddingRemoving)) // example: Enchanted Evening
                 .map(Effect::getId)
                 .collect(Collectors.toSet());
 
