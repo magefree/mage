@@ -49,6 +49,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Erebos, Bleak-Hearted", 93, Rarity.MYTHIC, mage.cards.e.ErebosBleakHearted.class));
         cards.add(new SetCardInfo("Escape Velocity", 132, Rarity.UNCOMMON, mage.cards.e.EscapeVelocity.class));
         cards.add(new SetCardInfo("Field of Ruin", 242, Rarity.UNCOMMON, mage.cards.f.FieldOfRuin.class));
+        cards.add(new SetCardInfo("Final Death", 95, Rarity.COMMON, mage.cards.f.FinalDeath.class));
         cards.add(new SetCardInfo("Forest", 254, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Gallia of the Endless Dance", 217, Rarity.RARE, mage.cards.g.GalliaOfTheEndlessDance.class));
         cards.add(new SetCardInfo("Glimpse of Freedom", 50, Rarity.UNCOMMON, mage.cards.g.GlimpseOfFreedom.class));
