@@ -18,41 +18,40 @@ import mage.view.PermanentView;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 import java.awt.image.RasterFormatException;
 import java.util.ArrayList;
 import java.util.List;
-import java.awt.image.BufferedImage;
 
 /**
  * @author stravant@gmail.com
- *
+ * <p>
  * Common base class for card renderers for each card frame / card type.
- *
+ * <p>
  * Follows the template method pattern to implement a new renderer, implement
  * the following methods (they are called in the following order):
- *
+ * <p>
  * * drawBorder() Draws the outermost border of the card, white border or black
  * border
- *
+ * <p>
  * * drawBackground() Draws the background texture / color of the card
- *
+ * <p>
  * * drawArt() Draws the card's art
- *
+ * <p>
  * * drawFrame() Draws the card frame (over the art and background)
- *
+ * <p>
  * * drawOverlays() Draws summoning sickness and possible other overlays
- *
+ * <p>
  * * drawCounters() Draws counters on the card, such as +1/+1 and -1/-1
  * counters
- *
+ * <p>
  * Predefined methods that the implementations can use:
- *
+ * <p>
  * * drawRules(font, bounding box)
- *
+ * <p>
  * * drawNameLine(font, bounding box)
- *
+ * <p>
  * * drawTypeLine(font, bounding box)
- *
  */
 public abstract class CardRenderer {
 
@@ -74,24 +73,24 @@ public abstract class CardRenderer {
     // Common layout metrics between all cards
     // Polygons for counters
     private static final Polygon PLUS_COUNTER_POLY = new Polygon(new int[]{
-        0, 5, 10, 10, 5, 0
+            0, 5, 10, 10, 5, 0
     }, new int[]{
-        3, 0, 3, 10, 9, 10
+            3, 0, 3, 10, 9, 10
     }, 6);
     private static final Polygon MINUS_COUNTER_POLY = new Polygon(new int[]{
-        0, 5, 10, 10, 5, 0
+            0, 5, 10, 10, 5, 0
     }, new int[]{
-        0, 1, 0, 7, 10, 7
+            0, 1, 0, 7, 10, 7
     }, 6);
     private static final Polygon TIME_COUNTER_POLY = new Polygon(new int[]{
-        0, 10, 8, 10, 0, 2
+            0, 10, 8, 10, 0, 2
     }, new int[]{
-        0, 0, 5, 10, 10, 5
+            0, 0, 5, 10, 10, 5
     }, 6);
     private static final Polygon OTHER_COUNTER_POLY = new Polygon(new int[]{
-        1, 9, 9, 1
+            1, 9, 9, 1
     }, new int[]{
-        1, 1, 9, 9
+            1, 1, 9, 9
     }, 4);
 
     // Paint for a card back
@@ -253,11 +252,11 @@ public abstract class CardRenderer {
                 int x2 = (int) (0.8 * cardWidth);
                 int y1 = (int) (0.2 * cardHeight);
                 int y2 = (int) (0.8 * cardHeight);
-                int xPoints[] = {
-                    x1, x2, x1, x2
+                int[] xPoints = {
+                        x1, x2, x1, x2
                 };
-                int yPoints[] = {
-                    y1, y1, y2, y2
+                int[] yPoints = {
+                        y1, y1, y2, y2
                 };
                 g.setColor(new Color(255, 255, 255, 200));
                 g.setStroke(new BasicStroke(7));
@@ -267,10 +266,10 @@ public abstract class CardRenderer {
                 g.drawPolygon(xPoints, yPoints, 4);
                 g.setStroke(new BasicStroke(1));
                 int[] xPoints2 = {
-                    x1, x2, cardWidth / 2
+                        x1, x2, cardWidth / 2
                 };
                 int[] yPoints2 = {
-                    y1, y1, cardHeight / 2
+                        y1, y1, cardHeight / 2
                 };
                 g.setColor(new Color(0, 0, 0, 100));
                 g.fillPolygon(xPoints2, yPoints2, 3);
@@ -300,8 +299,8 @@ public abstract class CardRenderer {
         try {
             BufferedImage subImg
                     = artImage.getSubimage(
-                            (int) (artRect.getX() * fullCardImgWidth), (int) (artRect.getY() * fullCardImgHeight),
-                            (int) artWidth, (int) artHeight);
+                    (int) (artRect.getX() * fullCardImgWidth), (int) (artRect.getY() * fullCardImgHeight),
+                    (int) artWidth, (int) artHeight);
             g.drawImage(subImg,
                     x, y,
                     (int) targetWidth, (int) targetHeight,
@@ -438,20 +437,25 @@ public abstract class CardRenderer {
     }
 
     private Color getRarityColor() {
-        switch (cardView.getRarity()) {
-            case RARE:
-                return new Color(255, 191, 0);
-            case UNCOMMON:
-                return new Color(192, 192, 192);
-            case MYTHIC:
-                return new Color(213, 51, 11);
-            case SPECIAL:
-                return new Color(204, 0, 255);
-            case BONUS:
-                return new Color(129, 228, 228);
-            case COMMON:
-            default:
-                return Color.black;
+        if (cardView.getRarity() != null) {
+            switch (cardView.getRarity()) {
+                case RARE:
+                    return new Color(255, 191, 0);
+                case UNCOMMON:
+                    return new Color(192, 192, 192);
+                case MYTHIC:
+                    return new Color(213, 51, 11);
+                case SPECIAL:
+                    return new Color(204, 0, 255);
+                case BONUS:
+                    return new Color(129, 228, 228);
+                case COMMON:
+                default:
+                    return Color.black;
+            }
+        } else {
+            // tokens
+            return Color.black;
         }
     }
 

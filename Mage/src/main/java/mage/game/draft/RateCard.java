@@ -186,22 +186,27 @@ public final class RateCard {
         // ratings from card rarity
         // some cards can have different rarity -- it's will be used from first set
         int newRating;
-        switch (card.getRarity()) {
-            case COMMON:
-                newRating = DEFAULT_NOT_RATED_CARD_RATING;
-                break;
-            case UNCOMMON:
-                newRating = DEFAULT_NOT_RATED_UNCOMMON_RATING;
-                break;
-            case RARE:
-                newRating = DEFAULT_NOT_RATED_RARE_RATING;
-                break;
-            case MYTHIC:
-                newRating = DEFAULT_NOT_RATED_MYTHIC_RATING;
-                break;
-            default:
-                newRating = DEFAULT_NOT_RATED_CARD_RATING;
-                break;
+        if (card.getRarity() != null) {
+            switch (card.getRarity()) {
+                case COMMON:
+                    newRating = DEFAULT_NOT_RATED_CARD_RATING;
+                    break;
+                case UNCOMMON:
+                    newRating = DEFAULT_NOT_RATED_UNCOMMON_RATING;
+                    break;
+                case RARE:
+                    newRating = DEFAULT_NOT_RATED_RARE_RATING;
+                    break;
+                case MYTHIC:
+                    newRating = DEFAULT_NOT_RATED_MYTHIC_RATING;
+                    break;
+                default:
+                    newRating = DEFAULT_NOT_RATED_CARD_RATING;
+                    break;
+            }
+        } else {
+            // tokens
+            newRating = DEFAULT_NOT_RATED_CARD_RATING;
         }
 
         int oldRating = baseRatings.getOrDefault(card.getName(), 0);

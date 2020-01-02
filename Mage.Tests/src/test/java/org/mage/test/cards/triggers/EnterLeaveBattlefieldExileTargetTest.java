@@ -70,4 +70,40 @@ public class EnterLeaveBattlefieldExileTargetTest extends CardTestPlayerBase {
         assertHandCount(playerB, "Pillarfield Ox", 1);
         assertExileCount(playerB, 0);
     }
+
+    @Test
+    public void testAngelOfSerenityTargets() {
+        // test NPE error while AI targeting battlefield with tokens
+
+        // Flying
+        // When Angel of Serenity enters the battlefield, you may exile up to three other target creatures from the battlefield and/or creature cards from graveyards.
+        addCard(Zone.HAND, playerA, "Angel of Serenity");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 7);
+        //
+        // Create two 2/2 white Knight Ally creature tokens.
+        addCard(Zone.HAND, playerA, "Allied Reinforcements", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        //
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Balduvian Bears", 2);
+        addCard(Zone.GRAVEYARD, playerA, "Silvercoat Lion", 2);
+        addCard(Zone.GRAVEYARD, playerB, "Balduvian Bears", 2);
+
+        // create tokens
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Allied Reinforcements");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // angel
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Angel of Serenity");
+        setChoice(playerA, "Yes");
+        //addTarget(playerA, "Silvercoat Lion^Balduvian Bears"); // AI must target
+
+        //setStrictChooseMode(true); // AI must target
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Knight Ally", 2);
+        assertPermanentCount(playerA, "Angel of Serenity", 1);
+    }
 }
