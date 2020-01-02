@@ -2,6 +2,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DamagePlayersEffect;
@@ -31,6 +32,8 @@ public final class TurretOgre extends CardImpl {
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
     }
 
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
+
     public TurretOgre(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
 
@@ -44,9 +47,11 @@ public final class TurretOgre extends CardImpl {
 
         // When Turret Ogre enters the battlefield, if you control another creature with power 4 or greater, Turret Ogre deals 2 damage to each opponent.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new DamagePlayersEffect(2, TargetController.OPPONENT)),
-                new PermanentsOnTheBattlefieldCondition(filter), "When {this} enters the battlefield, " +
-                "if you control another creature with power 4 or greater, {this} deals 2 damage to each opponent."
+                new EntersBattlefieldTriggeredAbility(
+                        new DamagePlayersEffect(2, TargetController.OPPONENT)
+                ), condition, "When {this} enters the battlefield, " +
+                "if you control another creature with power 4 or greater, " +
+                "{this} deals 2 damage to each opponent."
         ));
     }
 
