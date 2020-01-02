@@ -1,7 +1,5 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -13,8 +11,9 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class LimDulsVault extends CardImpl {
@@ -65,6 +64,7 @@ class LimDulsVaultEffect extends OneShotEffect {
         do {
             Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 5));
             player.lookAtCards(source, null, cards, game);
+
             doAgain = player.chooseUse(outcome, "Pay 1 life and look at the next 5 cards?", source, game);
             if (doAgain) {
                 player.loseLife(1, game, false);
@@ -73,7 +73,7 @@ class LimDulsVaultEffect extends OneShotEffect {
                 player.shuffleLibrary(source, game);
                 player.putCardsOnTopOfLibrary(cards, game, source, true);
             }
-        } while (doAgain);
+        } while (doAgain && player.isHuman()); // AI must stop using it as infinite
 
         return true;
     }
