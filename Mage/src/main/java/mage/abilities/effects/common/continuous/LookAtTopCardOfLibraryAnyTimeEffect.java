@@ -39,6 +39,9 @@ public class LookAtTopCardOfLibraryAnyTimeEffect extends ContinuousEffectImpl {
         if (obj == null) {
             return true;
         }
+        if (!game.getState().getStack().isEmpty()) { // if a card is on the stack, don't allow it
+            return true;
+        }
         controller.lookAtCards("Top card of " + obj.getIdName() + " controller's library", topCard, game);
         return true;
     }
