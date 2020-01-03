@@ -1,6 +1,7 @@
 package mage.game.permanent.token;
 
 import mage.MageInt;
+import mage.abilities.keyword.DefenderAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
@@ -13,6 +14,8 @@ public final class ArtifactWallToken extends TokenImpl {
         subtype.add(SubType.WALL);
         power = new MageInt(0);
         toughness = new MageInt(4);
+
+        addAbility(DefenderAbility.getInstance());
     }
 
     private ArtifactWallToken(final ArtifactWallToken token) {
