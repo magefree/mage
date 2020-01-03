@@ -3281,10 +3281,16 @@ public abstract class PlayerImpl implements Player, Serializable {
             boolean isPlayLand = (ability instanceof PlayLandAbility);
 
             // as original controller
+
+            // land restrictions
+            if (isPlayLand && game.getContinuousEffects().preventedByRuleModification(
+                    GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, ability.getSourceId(),
+                            ability.getSourceId(), this.getId()), ability, game, true)) {
+                continue;
+            }
+
             MageObjectReference permittingObject;
             if (isPlaySpell || isPlayLand) {
-                // play land restriction
-
                 // play hand from non hand zone
                 permittingObject = game.getContinuousEffects().asThough(card.getId(),
                         AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, ability, this.getId(), game);
@@ -3295,8 +3301,6 @@ public abstract class PlayerImpl implements Player, Serializable {
 
             boolean canActivateAsHandZone = permittingObject != null
                     || (fromZone == Zone.GRAVEYARD && canPlayCardsFromGraveyard());
-
-            // TODO: add play land restrictions
 
             // as affected controller
             UUID savedControllerId = ability.getControllerId();
