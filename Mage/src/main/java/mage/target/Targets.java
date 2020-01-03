@@ -19,11 +19,10 @@ public class Targets extends ArrayList<Target> {
 
     private static final Logger logger = Logger.getLogger(Targets.class);
 
-    public Targets() {
-    }
-
-    public Targets(Target target) {
-        this.add(target);
+    public Targets(Target... targets) {
+        for (Target target : targets) {
+            this.add(target);
+        }
     }
 
     public Targets(final Targets targets) {

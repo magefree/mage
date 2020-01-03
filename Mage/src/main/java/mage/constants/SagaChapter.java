@@ -1,14 +1,19 @@
-
 package mage.constants;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
- *
  * @author LevelX2
  */
 public enum SagaChapter {
     CHAPTER_I(1, "I"),
     CHAPTER_II(2, "II"),
-    CHAPTER_III(3, "III");
+    CHAPTER_III(3, "III"),
+    CHAPTER_IV(4, "IV");
+
+    private static final Map<Integer, SagaChapter> chapterMap = new HashMap();
 
     private final String text;
     private final int number;
@@ -28,15 +33,14 @@ public enum SagaChapter {
     }
 
     public static SagaChapter getChapter(int number) {
-        switch (number) {
-            case 1:
-                return CHAPTER_I;
-            case 2:
-                return CHAPTER_II;
-            case 3:
-                return CHAPTER_III;
-            default:
-                return null;
+        initMap();
+        return chapterMap.get(number);
+    }
+
+    private static void initMap() {
+        if (!chapterMap.isEmpty()) {
+            return;
         }
+        Arrays.stream(SagaChapter.values()).forEach(sagaChapter -> chapterMap.put(sagaChapter.getNumber(), sagaChapter));
     }
 }
