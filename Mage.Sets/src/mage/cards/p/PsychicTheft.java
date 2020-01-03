@@ -1,8 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -16,12 +13,8 @@ import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.common.FilterInstantOrSorceryCard;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -30,8 +23,10 @@ import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.SpellsCastWatcher;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author L_J (significantly based on code by jeffwadsworth and Styxo)
  */
 public final class PsychicTheft extends CardImpl {
@@ -102,6 +97,7 @@ class PsychicTheftEffect extends OneShotEffect {
 
                     ConditionalOneShotEffect effect3 = new ConditionalOneShotEffect(effect2, condition, "if you haven't cast it, return it to its owner's hand.");
                     DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect3);
+                    delayedAbility.addWatcher(new SpellsCastWatcher());
                     game.addDelayedTriggeredAbility(delayedAbility, source);
                     return true;
                 }
@@ -138,10 +134,8 @@ class PsychicTheftCastFromExileEffect extends AsThoughEffectImpl {
                 && game.getState().getZone(objectId) == Zone.EXILED) {
             Player player = game.getPlayer(source.getControllerId());
             Card card = game.getCard(objectId);
-            if (player != null
-                    && card != null) {
-                return true;
-            }
+            return player != null
+                    && card != null;
         }
         return false;
     }

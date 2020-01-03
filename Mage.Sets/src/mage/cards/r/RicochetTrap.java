@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import mage.abilities.Ability;
@@ -36,13 +35,11 @@ public final class RicochetTrap extends CardImpl {
         this.subtype.add(SubType.TRAP);
 
         // If an opponent cast a blue spell this turn, you may pay {R} rather than pay Ricochet Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{R}"), RicochetTrapCondition.instance));
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{R}"), RicochetTrapCondition.instance), new SpellsCastWatcher());
 
         // Change the target of target spell with a single target.
         this.getSpellAbility().addEffect(new ChooseNewTargetsTargetEffect(true, true));
         this.getSpellAbility().addTarget(new TargetSpell(filter));
-
-        this.getSpellAbility().addWatcher(new SpellsCastWatcher());
     }
 
     public RicochetTrap(final RicochetTrap card) {

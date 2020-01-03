@@ -1,7 +1,5 @@
 package mage.cards.t;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -25,8 +23,10 @@ import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.watchers.common.SpellsCastWatcher;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class TwinningGlass extends CardImpl {
@@ -38,9 +38,8 @@ public final class TwinningGlass extends CardImpl {
         // its mana cost if it has the same name as a spell that was cast this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new TwinningGlassEffect(), new ManaCostsImpl("{1}"));
-        ability.addWatcher(new SpellsCastWatcher());
         ability.addCost(new TapSourceCost());
-        this.addAbility(ability);
+        this.addAbility(ability, new SpellsCastWatcher());
 
     }
 
