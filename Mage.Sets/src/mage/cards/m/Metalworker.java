@@ -1,9 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -18,15 +14,16 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author anonymous
  */
 public final class Metalworker extends CardImpl {
@@ -69,6 +66,20 @@ class MetalworkerManaEffect extends ManaEffect {
     }
 
     @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
+        Player controller = getPlayer(game, source);
+        if (controller == null) {
+            return null;
+        }
+        List<Mana> netMana = new ArrayList<>();
+        int artifacts = controller.getHand().count(StaticFilters.FILTER_CARD_ARTIFACT, game);
+        if (artifacts > 0) {
+            netMana.add(Mana.ColorlessMana(artifacts * 2));
+        }
+        return netMana;
+    }
+
+    @Override
     public Mana produceMana(Game game, Ability source) {
         Player controller = getPlayer(game, source);
         if (controller == null) {
@@ -85,17 +96,4 @@ class MetalworkerManaEffect extends ManaEffect {
         }
         return new Mana();
     }
-
-    @Override
-    public List<Mana> getNetMana(Game game, Ability source) {
-        Player controller = getPlayer(game, source);
-        if (controller == null) {
-            return null;
-        }
-        int artifacts = controller.getHand().count(StaticFilters.FILTER_CARD_ARTIFACT, game);
-        List<Mana> netMana = new ArrayList<>();
-        netMana.add(Mana.ColorlessMana(artifacts * 2));
-        return netMana;
-    }
-
 }

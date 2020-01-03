@@ -1,7 +1,5 @@
 package mage.cards.s;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -28,8 +26,10 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TokenImpl;
 import mage.players.Player;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class SasayaOrochiAscendant extends CardImpl {
@@ -131,6 +131,11 @@ class SasayasEssenceManaEffect extends ManaEffect {
     }
 
     @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
+        return null;
+    }
+
+    @Override
     public Mana produceMana(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Mana mana = (Mana) this.getValue("mana");
@@ -201,11 +206,6 @@ class SasayasEssenceManaEffect extends ManaEffect {
             }
             return newMana;
         }
-        return null;
-    }
-
-    @Override
-    public List<Mana> getNetMana(Game game, Ability source) {
         return null;
     }
 }

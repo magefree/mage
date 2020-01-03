@@ -1,8 +1,5 @@
 package mage.cards.m;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
@@ -10,18 +7,16 @@ import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.choices.ChoiceColor;
 import mage.choices.ManaChoice;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class MadScienceFairProject extends CardImpl {
@@ -60,6 +55,11 @@ class MadScienceFairManaEffect extends ManaEffect {
     }
 
     @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
+        return null;
+    }
+
+    @Override
     public Mana produceMana(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
@@ -72,10 +72,4 @@ class MadScienceFairManaEffect extends ManaEffect {
         }
         return null;
     }
-
-    @Override
-    public List<Mana> getNetMana(Game game, Ability source) {
-        return null;
-    }
-
 }

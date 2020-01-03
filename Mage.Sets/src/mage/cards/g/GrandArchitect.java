@@ -1,7 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -10,8 +8,8 @@ import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -27,8 +25,9 @@ import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com, nantuko
  */
 public final class GrandArchitect extends CardImpl {
@@ -42,17 +41,22 @@ public final class GrandArchitect extends CardImpl {
     }
 
     public GrandArchitect(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
         this.subtype.add(SubType.VEDALKEN);
         this.subtype.add(SubType.ARTIFICER);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
+        // Other blue creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, boostFilter, true)));
+
+        // {U}: Target artifact creature becomes blue until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrandArchitectEffect(), new ManaCostsImpl("{U}"));
         ability.addTarget(new TargetPermanent(targetFilter));
         this.addAbility(ability);
+
+        // Tap an untapped blue creature you control: Add {C}{C}. Spend this mana only to cast artifact spells or activate abilities of artifacts.
         this.addAbility(new GrandArchitectManaAbility());
     }
 
@@ -137,9 +141,6 @@ class GrandArchitectManaCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source.getSourceId());
-        if (object != null && object.isArtifact()) {
-            return true;
-        }
-        return false;
+        return object != null && object.isArtifact();
     }
 }

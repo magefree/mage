@@ -1,8 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
-import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.AttachEffect;
@@ -11,7 +8,6 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.choices.ChoiceColor;
 import mage.choices.ManaChoice;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -25,8 +21,11 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class MarketFestival extends CardImpl {
@@ -110,6 +109,13 @@ class MarketFestivalManaEffect extends ManaEffect {
             return null;
         }
         return game.getPlayer(sourceObject.getControllerId());
+    }
+
+    @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
+        List<Mana> netMana = new ArrayList<>();
+        netMana.add(Mana.AnyMana(2));
+        return netMana;
     }
 
     @Override

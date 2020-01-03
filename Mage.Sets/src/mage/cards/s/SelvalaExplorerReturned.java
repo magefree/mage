@@ -1,8 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -15,16 +12,14 @@ import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class SelvalaExplorerReturned extends CardImpl {
@@ -73,6 +68,11 @@ class SelvalaExplorerReturnedEffect extends ManaEffect {
     }
 
     @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
+        return null;
+    }
+
+    @Override
     public Mana produceMana(Game game, Ability source) {
         int parleyCount = ParleyCount.getInstance().calculate(game, source, this);
         Player player = getPlayer(game, source);
@@ -81,10 +81,4 @@ class SelvalaExplorerReturnedEffect extends ManaEffect {
         }
         return Mana.GreenMana(parleyCount);
     }
-
-    @Override
-    public List<Mana> getNetMana(Game game, Ability source) {
-        return null;
-    }
-
 }

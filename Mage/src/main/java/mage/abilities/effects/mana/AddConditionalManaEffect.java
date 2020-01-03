@@ -10,10 +10,8 @@ import mage.abilities.Ability;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.game.Game;
-import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class AddConditionalManaEffect extends ManaEffect {
@@ -30,7 +28,7 @@ public class AddConditionalManaEffect extends ManaEffect {
 
     public AddConditionalManaEffect(final AddConditionalManaEffect effect) {
         super(effect);
-        this.mana = effect.mana;
+        this.mana = effect.mana.copy();
         this.manaBuilder = effect.manaBuilder;
     }
 

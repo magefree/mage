@@ -1,9 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
@@ -16,15 +12,17 @@ import mage.abilities.effects.mana.DoUnlessAnyPlayerPaysManaEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.choices.ChoiceColor;
 import mage.choices.ManaChoice;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author jerekwilson
  */
 public final class RhysticCave extends CardImpl {
@@ -95,16 +93,16 @@ class RhysticCaveManaEffect extends ManaEffect {
     }
 
     @Override
-    public Mana produceMana(Game game, Ability source) {
-        Player controller = getPlayer(game, source);
-        return ManaChoice.chooseAnyColor(controller, game, 1);
+    public List<Mana> getNetMana(Game game, Ability source) {
+        List<Mana> netMana = new ArrayList<>();
+        netMana.add(Mana.AnyMana(1));
+        return netMana;
     }
 
     @Override
-    public List<Mana> getNetMana(Game game, Ability source) {
-        List<Mana> netMana = new ArrayList<>();
-        netMana.add(new Mana(0, 0, 0, 0, 0, 0, 1, 0));
-        return netMana;
+    public Mana produceMana(Game game, Ability source) {
+        Player controller = getPlayer(game, source);
+        return ManaChoice.chooseAnyColor(controller, game, 1);
     }
 
     @Override

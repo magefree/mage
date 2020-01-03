@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -14,11 +12,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.game.Game;
-import mage.players.ManaPool;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class SavageVentmaw extends CardImpl {
@@ -59,7 +57,7 @@ class SavageVentmawManaEffect extends ManaEffect {
 
     public SavageVentmawManaEffect(final SavageVentmawManaEffect effect) {
         super(effect);
-        this.mana = effect.mana;
+        this.mana = effect.mana.copy();
         this.staticText = effect.staticText;
     }
 

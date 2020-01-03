@@ -1,9 +1,5 @@
-
 package mage.cards.k;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -23,8 +19,11 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class KyrenToy extends CardImpl {
@@ -80,6 +79,17 @@ public final class KyrenToy extends CardImpl {
         }
 
         @Override
+        public List<Mana> getNetMana(Game game, Ability source) {
+            Permanent sourceObject = game.getPermanent(source.getSourceId());
+            if (sourceObject != null) {
+                List<Mana> netMana = new ArrayList<>();
+                netMana.add(Mana.ColorlessMana(sourceObject.getCounters(game).getCount(CounterType.CHARGE) + 1));
+                return netMana;
+            }
+            return null;
+        }
+
+        @Override
         public Mana produceMana(Game game, Ability source) {
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
@@ -89,18 +99,7 @@ public final class KyrenToy extends CardImpl {
                         numberOfMana = ((RemoveVariableCountersSourceCost) cost).getAmount();
                     }
                 }
-                return new Mana(0, 0, 0, 0, 0, 0, 0, numberOfMana + 1);
-            }
-            return null;
-        }
-
-        @Override
-        public List<Mana> getNetMana(Game game, Ability source) {
-            Permanent sourceObject = game.getPermanent(source.getSourceId());
-            if (sourceObject != null) {
-                List<Mana> netMana = new ArrayList<>();
-                netMana.add(new Mana(0, 0, 0, 0, 0, 0, 0, sourceObject.getCounters(game).getCount(CounterType.CHARGE) + 1));
-                return netMana;
+                return new Mana(Mana.ColorlessMana(numberOfMana + 1));
             }
             return null;
         }

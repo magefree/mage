@@ -14,7 +14,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author magenoxx
  */
 public class AddManaToManaPoolSourceControllerEffect extends OneShotEffect {
@@ -29,7 +28,7 @@ public class AddManaToManaPoolSourceControllerEffect extends OneShotEffect {
 
     public AddManaToManaPoolSourceControllerEffect(final AddManaToManaPoolSourceControllerEffect effect) {
         super(effect);
-        this.mana = effect.mana;
+        this.mana = effect.mana.copy();
     }
 
     @Override

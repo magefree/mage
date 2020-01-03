@@ -44,7 +44,7 @@ public class AddManaToManaPoolTargetControllerEffect extends ManaEffect {
 
     public AddManaToManaPoolTargetControllerEffect(final AddManaToManaPoolTargetControllerEffect effect) {
         super(effect);
-        this.mana = effect.mana;
+        this.mana = effect.mana.copy();
         this.emptyOnlyOnTurnsEnd = effect.emptyOnlyOnTurnsEnd;
     }
 

@@ -12,7 +12,6 @@ import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.constants.Zone;
 
 /**
- *
  * @author LevelX2
  */
 public class ConditionalColorlessManaAbility extends ActivatedManaAbilityImpl {
@@ -23,7 +22,6 @@ public class ConditionalColorlessManaAbility extends ActivatedManaAbilityImpl {
 
     public ConditionalColorlessManaAbility(Cost cost, int amount, ConditionalManaBuilder manaBuilder) {
         super(Zone.BATTLEFIELD, new AddConditionalColorlessManaEffect(amount, manaBuilder), cost);
-        // this.netMana.add(Mana.ColorlessMana(amount)); // When produced during runtime, condition is added (how to add condition here?)
     }
 
     public ConditionalColorlessManaAbility(final ConditionalColorlessManaAbility ability) {

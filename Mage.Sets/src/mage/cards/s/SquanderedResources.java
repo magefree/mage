@@ -1,9 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
@@ -26,8 +22,11 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public final class SquanderedResources extends CardImpl {
@@ -60,6 +59,31 @@ class SquanderedResourcesEffect extends ManaEffect {
 
     public SquanderedResourcesEffect(final SquanderedResourcesEffect effect) {
         super(effect);
+    }
+
+    @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
+        List<Mana> netManas = new ArrayList<>();
+        Mana types = getManaTypes(game, source);
+        if (types.getBlack() > 0) {
+            netManas.add(new Mana(ColoredManaSymbol.B));
+        }
+        if (types.getRed() > 0) {
+            netManas.add(new Mana(ColoredManaSymbol.R));
+        }
+        if (types.getBlue() > 0) {
+            netManas.add(new Mana(ColoredManaSymbol.U));
+        }
+        if (types.getGreen() > 0) {
+            netManas.add(new Mana(ColoredManaSymbol.G));
+        }
+        if (types.getWhite() > 0) {
+            netManas.add(new Mana(ColoredManaSymbol.W));
+        }
+        if (types.getGeneric() > 0) {
+            netManas.add(Mana.ColorlessMana(1));
+        }
+        return netManas;
     }
 
     @Override
@@ -97,7 +121,7 @@ class SquanderedResourcesEffect extends ManaEffect {
         Mana mana = new Mana();
         if (!choice.getChoices().isEmpty()) {
             Player player = game.getPlayer(source.getControllerId());
-            if(player == null){
+            if (player == null) {
                 return mana;
             }
             if (choice.getChoices().size() == 1) {
@@ -132,33 +156,7 @@ class SquanderedResourcesEffect extends ManaEffect {
         return mana;
     }
 
-    @Override
-    public List<Mana> getNetMana(Game game, Ability source) {
-        List<Mana> netManas = new ArrayList<>();
-        Mana types = getManaTypes(game, source);
-        if (types.getBlack() > 0) {
-            netManas.add(new Mana(ColoredManaSymbol.B));
-        }
-        if (types.getRed() > 0) {
-            netManas.add(new Mana(ColoredManaSymbol.R));
-        }
-        if (types.getBlue() > 0) {
-            netManas.add(new Mana(ColoredManaSymbol.U));
-        }
-        if (types.getGreen() > 0) {
-            netManas.add(new Mana(ColoredManaSymbol.G));
-        }
-        if (types.getWhite() > 0) {
-            netManas.add(new Mana(ColoredManaSymbol.W));
-        }
-        if (types.getGeneric() > 0) {
-            netManas.add(Mana.ColorlessMana(1));
-        }
-        return netManas;
-    }
-
     private Mana getManaTypes(Game game, Ability source) {
-
         Mana types = new Mana();
         for (Cost cost : source.getCosts()) {
             if (cost instanceof SacrificeTargetCost && !((SacrificeTargetCost) cost).getPermanents().isEmpty()) {

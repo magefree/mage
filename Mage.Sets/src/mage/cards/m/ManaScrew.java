@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -14,8 +12,10 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class ManaScrew extends CardImpl {
@@ -41,7 +41,8 @@ class ManaScrewAbility extends ActivatedManaAbilityImpl {
 
     public ManaScrewAbility() {
         super(Zone.BATTLEFIELD, new ManaScrewEffect(), new GenericManaCost(1));
-        this.netMana.add(new Mana(0, 0, 0, 0, 0, 2, 0, 0));
+        {
+        }
     }
 
     public ManaScrewAbility(final ManaScrewAbility ability) {
@@ -82,6 +83,11 @@ class ManaScrewEffect extends ManaEffect {
     @Override
     public ManaScrewEffect copy() {
         return new ManaScrewEffect(this);
+    }
+
+    @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
+        return null;
     }
 
     @Override

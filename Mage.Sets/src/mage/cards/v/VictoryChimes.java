@@ -1,7 +1,5 @@
-
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -18,8 +16,9 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class VictoryChimes extends CardImpl {
@@ -29,6 +28,7 @@ public final class VictoryChimes extends CardImpl {
 
         // Untap Victory Chimes during each other player's untap step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UntapSourceDuringEachOtherPlayersUntapStepEffect()));
+
         // {T}: A player of your choice adds {C}.
         ManaEffect effect = new VictoryChimesManaEffect("chosen player");
         effect.setText("a player of your choice adds {C}");

@@ -85,13 +85,11 @@ class VedalkenEngineerEffect extends ManaEffect {
 
     private final int amount;
     private final ConditionalManaBuilder manaBuilder;
-    protected final ArrayList<Mana> netMana = new ArrayList<>();
 
     public VedalkenEngineerEffect(int amount, ConditionalManaBuilder manaBuilder) {
         super();
         this.amount = amount;
         this.manaBuilder = manaBuilder;
-        netMana.add(Mana.AnyMana(amount));
         staticText = "Add " + amount + " mana of any one color. " + manaBuilder.getRule();
     }
 
@@ -99,7 +97,6 @@ class VedalkenEngineerEffect extends ManaEffect {
         super(effect);
         this.amount = effect.amount;
         this.manaBuilder = effect.manaBuilder;
-        this.netMana.addAll(effect.netMana);
     }
 
     @Override
@@ -109,6 +106,8 @@ class VedalkenEngineerEffect extends ManaEffect {
 
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
+        List<Mana> netMana = new ArrayList<>();
+        Mana.AnyMana(amount);
         return netMana;
     }
 

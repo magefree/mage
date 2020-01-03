@@ -1,8 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.List;
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
@@ -11,7 +8,6 @@ import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.choices.ChoiceColor;
 import mage.choices.ManaChoice;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -19,8 +15,11 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author Galatolol
  */
 public final class SpectralSearchlight extends CardImpl {
@@ -63,14 +62,16 @@ class SpectralSearchlightManaEffect extends ManaEffect {
     }
 
     @Override
-    public Mana produceMana(Game game, Ability source) {
-        Player player = getPlayer(game, source);
-        return ManaChoice.chooseAnyColor(player, game, 1);
+    public List<Mana> getNetMana(Game game, Ability source) {
+        List<Mana> netMana = new ArrayList<>();
+        netMana.add(Mana.AnyMana(1));
+        return netMana;
     }
 
     @Override
-    public List<Mana> getNetMana(Game game, Ability source) {
-        return null;
+    public Mana produceMana(Game game, Ability source) {
+        Player player = getPlayer(game, source);
+        return ManaChoice.chooseAnyColor(player, game, 1);
     }
 
     @Override

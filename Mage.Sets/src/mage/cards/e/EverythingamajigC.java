@@ -61,7 +61,6 @@ class ManaScrewAbility extends ActivatedManaAbilityImpl {
 
     public ManaScrewAbility() {
         super(Zone.BATTLEFIELD, new ManaScrewEffect(), new GenericManaCost(1));
-        this.netMana.add(Mana.ColorlessMana(2));
     }
 
     public ManaScrewAbility(final ManaScrewAbility ability) {
