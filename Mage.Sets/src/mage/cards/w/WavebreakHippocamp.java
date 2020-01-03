@@ -29,7 +29,7 @@ public final class WavebreakHippocamp extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever you cast your first spell during each opponent's turn, draw a card.
-        this.addAbility(new WavebreakHippocampTriggeredAbility());
+        this.addAbility(new WavebreakHippocampTriggeredAbility(), new SpellsCastWatcher());
     }
 
     private WavebreakHippocamp(final WavebreakHippocamp card) {
@@ -59,14 +59,20 @@ class WavebreakHippocampTriggeredAbility extends SpellCastControllerTriggeredAbi
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!game.getActivePlayerId().equals(this.getControllerId())
+        if (game.getActivePlayerId().equals(this.getControllerId()) // ignore controller turn
                 || !super.checkTrigger(event, game)) {
             return false;
         }
+
+        if (!game.getOpponents(this.getControllerId()).contains(game.getActivePlayerId())) {
+            return false;
+        }
+
         SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
         if (watcher == null) {
             return false;
         }
+
         List<Spell> spells = watcher.getSpellsCastThisTurn(event.getPlayerId());
         return spells != null && spells.size() == 1;
     }
