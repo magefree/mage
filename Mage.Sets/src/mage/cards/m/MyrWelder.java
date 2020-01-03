@@ -1,5 +1,3 @@
-
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -15,11 +13,11 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactCard;
 import mage.game.Game;
@@ -33,7 +31,7 @@ import mage.target.common.TargetCardInGraveyard;
 public final class MyrWelder extends CardImpl {
 
     public MyrWelder(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
         this.subtype.add(SubType.MYR);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
@@ -104,12 +102,12 @@ class MyrWelderContinuousEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent perm = game.getPermanent(source.getSourceId());
         if (perm != null) {
-            for (UUID imprintedId: perm.getImprinted()) {
+            for (UUID imprintedId : perm.getImprinted()) {
                 Card card = game.getCard(imprintedId);
                 if (card != null) {
-                    for (Ability ability: card.getAbilities()) {
+                    for (Ability ability : card.getAbilities(game)) {
                         if (ability instanceof ActivatedAbility) {
-                            perm.addAbility(ability, game);
+                            perm.addAbility(ability, source.getId(), game);
                         }
                     }
                 }

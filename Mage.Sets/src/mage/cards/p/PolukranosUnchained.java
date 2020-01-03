@@ -1,5 +1,8 @@
 package mage.cards.p;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -22,10 +25,6 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -76,6 +75,7 @@ class PolukranosUnchainedEffect extends OneShotEffect {
 
     PolukranosUnchainedEffect() {
         super(Outcome.BoostCreature);
+        staticText = "with six +1/+1 counters on it. It escapes with twelve +1/+1 counters on it instead";
     }
 
     private PolukranosUnchainedEffect(final PolukranosUnchainedEffect effect) {

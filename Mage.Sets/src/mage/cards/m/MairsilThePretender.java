@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.Objects;
@@ -14,11 +13,11 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -140,7 +139,7 @@ class MairsilThePretenderGainAbilitiesEffect extends ContinuousEffectImpl {
         }
         for (Card card : game.getExile().getAllCards(game)) {
             if (filter.match(card, game) && Objects.equals(card.getOwnerId(), perm.getControllerId())) {
-                for (Ability ability : card.getAbilities()) {
+                for (Ability ability : card.getAbilities(game)) {
                     if (ability instanceof ActivatedAbility) {
                         ActivatedAbility copyAbility = (ActivatedAbility) ability.copy();
                         copyAbility.setMaxActivationsPerTurn(1);

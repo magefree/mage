@@ -1,5 +1,7 @@
 package mage.cards;
 
+import java.util.List;
+import java.util.UUID;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Abilities;
@@ -13,9 +15,6 @@ import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.permanent.Permanent;
-
-import java.util.List;
-import java.util.UUID;
 
 public interface Card extends MageObject {
 
@@ -77,15 +76,15 @@ public interface Card extends MageObject {
      * @param zone
      * @param sourceId
      * @param game
-     * @param flag     If zone
-     *                 <ul>
-     *                 <li>LIBRARY: <ul><li>true - put on top</li><li>false - put on
-     *                 bottom</li></ul></li>
-     *                 <li>BATTLEFIELD: <ul><li>true - tapped</li><li>false -
-     *                 untapped</li></ul></li>
-     *                 <li>GRAVEYARD: <ul><li>true - not from Battlefield</li><li>false - from
-     *                 Battlefield</li></ul></li>
-     *                 </ul>
+     * @param flag If zone
+     * <ul>
+     * <li>LIBRARY: <ul><li>true - put on top</li><li>false - put on
+     * bottom</li></ul></li>
+     * <li>BATTLEFIELD: <ul><li>true - tapped</li><li>false -
+     * untapped</li></ul></li>
+     * <li>GRAVEYARD: <ul><li>true - not from Battlefield</li><li>false - from
+     * Battlefield</li></ul></li>
+     * </ul>
      * @return true if card was moved to zone
      */
     boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag);
@@ -95,8 +94,8 @@ public interface Card extends MageObject {
     /**
      * Moves the card to an exile zone
      *
-     * @param exileId  set to null for generic exile zone
-     * @param name     used for exile zone with the specified exileId
+     * @param exileId set to null for generic exile zone
+     * @param name used for exile zone with the specified exileId
      * @param sourceId
      * @param game
      * @return true if card was moved to zone
@@ -132,6 +131,8 @@ public interface Card extends MageObject {
 
     void addAbility(Ability ability);
 
+    void looseAllAbilities(Game game);
+
     boolean addCounters(Counter counter, Ability source, Game game);
 
     boolean addCounters(Counter counter, Ability source, Game game, boolean isEffect);
@@ -148,8 +149,8 @@ public interface Card extends MageObject {
     Card copy();
 
     /**
-     * @return The main card of a split half card or adventure spell card, otherwise the card itself is
-     * returned
+     * @return The main card of a split half card or adventure spell card,
+     * otherwise the card itself is returned
      */
     Card getMainCard();
 

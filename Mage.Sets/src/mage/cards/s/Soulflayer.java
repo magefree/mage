@@ -1,5 +1,8 @@
 package mage.cards.s;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -15,10 +18,6 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -91,7 +90,7 @@ class SoulflayerEffect extends ContinuousEffectImpl implements SourceEffect {
                         if (!card.isCreature()) {
                             continue;
                         }
-                        for (Ability cardAbility : card.getAbilities()) {
+                        for (Ability cardAbility : card.getAbilities(game)) {
                             if (cardAbility instanceof FlyingAbility) {
                                 abilitiesToAdd.add(FlyingAbility.getInstance());
                             }

@@ -1,5 +1,8 @@
 package mage.cards.a;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -17,11 +20,6 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.watchers.Watcher;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
 
 /**
  * @author jeffwadsworth
@@ -114,7 +112,7 @@ class AbandonedSarcophagusReplacementEffect extends ReplacementEffectImpl {
                 || !card.isOwnedBy(controller.getId())) {
             return false;
         }
-        for (Ability ability : card.getAbilities()) {
+        for (Ability ability : card.getAbilities(game)) {
             if (ability instanceof CyclingAbility) {
                 cardHasCycling = true;
             }

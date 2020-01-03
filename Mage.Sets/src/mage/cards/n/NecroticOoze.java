@@ -1,11 +1,9 @@
-
 package mage.cards.n;
 
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -66,9 +64,9 @@ public final class NecroticOoze extends CardImpl {
                     if (player != null) {
                         for (Card card : player.getGraveyard().getCards(game)) {
                             if (card.isCreature()) {
-                                for (Ability ability : card.getAbilities()) {
+                                for (Ability ability : card.getAbilities(game)) {
                                     if (ability instanceof ActivatedAbility) {
-                                        perm.addAbility(ability, game);
+                                        perm.addAbility(ability, source.getSourceId(), game);
                                     }
                                 }
                             }

@@ -1,9 +1,7 @@
-
 package mage.cards.y;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -21,7 +19,7 @@ import mage.players.Player;
 public final class YixlidJailer extends CardImpl {
 
     public YixlidJailer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.WIZARD);
 
@@ -67,14 +65,7 @@ public final class YixlidJailer extends CardImpl {
                         if (player != null) {
                             for (Card card : player.getGraveyard().getCards(game)) {
                                 if (card != null) {
-                                    card.getAbilities(game).clear(); // Will the abilities ever come back????
-                                    // TODO: Fix that (LevelX2)
-                                    // game.getContinuousEffects().removeGainedEffectsForSource(card.getId());
-                                    // game.getState().resetTriggersForSourceId(card.getId());
-                                    Abilities abilities = game.getState().getAllOtherAbilities(card.getId());
-                                    if (abilities != null) {
-                                        abilities.clear();
-                                    }
+                                    card.looseAllAbilities(game);
                                 }
                             }
                         }

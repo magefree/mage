@@ -1,5 +1,6 @@
 package mage.game.stack;
 
+import java.util.*;
 import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
@@ -30,8 +31,6 @@ import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
-
-import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -1043,6 +1042,11 @@ public class Spell extends StackObjImpl implements Card {
 
     public UUID getCommandedBy() {
         return commandedBy;
+    }
+
+    @Override
+    public void looseAllAbilities(Game game) {
+        throw new UnsupportedOperationException("Spells should not loose all abilities. Check if this operation is correct.");
     }
 
 }

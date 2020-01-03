@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import java.util.UUID;
@@ -16,11 +15,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
@@ -39,7 +38,7 @@ public final class HavengulLich extends CardImpl {
     private static final FilterCard filter = new FilterCreatureCard("creature card in a graveyard");
 
     public HavengulLich(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.WIZARD);
 
@@ -188,7 +187,7 @@ class HavengulLichEffect extends ContinuousEffectImpl {
         Permanent permanent = game.getPermanent(source.getSourceId());
         Card card = game.getCard(cardId);
         if (permanent != null && card != null) {
-            for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD)) {
+            for (ActivatedAbility ability : card.getAbilities(game).getActivatedAbilities(Zone.BATTLEFIELD)) {
                 permanent.addAbility(ability, source.getSourceId(), game);
             }
         }

@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -59,7 +58,7 @@ class MemoryCrystalSpellsCostReductionEffect extends CostModificationEffectImpl 
 
         Card card = game.getCard(abilityToModify.getSourceId());
         if (card != null) {
-            for (Ability ability : card.getAbilities()) {
+            for (Ability ability : card.getAbilities(game)) {
                 if (ability instanceof BuybackAbility) {
                     if (ability.isActivated()) {
                         int amountToReduce = ((BuybackAbility) ability).reduceCost(2);

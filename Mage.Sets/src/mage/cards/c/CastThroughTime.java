@@ -1,6 +1,7 @@
-
 package mage.cards.c;
 
+import java.util.Iterator;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -18,10 +19,6 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 
-import java.util.Iterator;
-import java.util.UUID;
-
-
 /**
  * @author magenoxx_at_gmail.com
  */
@@ -34,7 +31,7 @@ public final class CastThroughTime extends CardImpl {
     }
 
     public CastThroughTime(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{U}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}{U}{U}");
 
         // Instant and sorcery spells you control have rebound.
         //  (Exile the spell as it resolves if you cast it from your hand. At the beginning of your next upkeep, you may cast that card from exile without paying its mana cost.)
@@ -73,7 +70,7 @@ class GainReboundEffect extends ContinuousEffectImpl {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) {
             for (Card card : player.getHand().getCards(CastThroughTime.filter, game)) {
-                addReboundAbility(card, source, game);
+                addReboundAbility(card, game);
             }
             for (Iterator<StackObject> iterator = game.getStack().iterator(); iterator.hasNext();) {
                 StackObject stackObject = iterator.next();
@@ -81,19 +78,19 @@ class GainReboundEffect extends ContinuousEffectImpl {
                     Spell spell = (Spell) stackObject;
                     Card card = spell.getCard();
                     if (card != null) {
-                        addReboundAbility(card, source, game);
+                        addReboundAbility(card, game);
                     }
-                    
-                }                
+
+                }
             }
             return true;
         }
         return false;
     }
 
-    private void addReboundAbility(Card card, Ability source, Game game) {
+    private void addReboundAbility(Card card, Game game) {
         if (CastThroughTime.filter.match(card, game)) {
-            boolean found = card.getAbilities().stream().anyMatch(ability -> ability instanceof ReboundAbility);
+            boolean found = card.getAbilities(game).stream().anyMatch(ability -> ability instanceof ReboundAbility);
             if (!found) {
                 Ability ability = new ReboundAbility();
                 game.getState().addOtherAbility(card, ability);

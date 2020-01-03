@@ -18,6 +18,7 @@ public class CardState implements Serializable {
     protected Map<String, String> info;
     protected Counters counters;
     protected Abilities<Ability> abilities;
+    protected boolean lostAllAbilities;
 
     private static final Map<String, String> emptyInfo = new HashMap<>();
     private static final Abilities<Ability> emptyAbilities = new AbilitiesImpl<>();
@@ -39,6 +40,7 @@ public class CardState implements Serializable {
                 abilities.add(ability.copy());
             }
         }
+        this.lostAllAbilities = state.lostAllAbilities;
     }
 
     public CardState copy() {
@@ -90,20 +92,29 @@ public class CardState implements Serializable {
         abilities.addAll(ability.getSubAbilities());
     }
 
+    /**
+     * Called from applyEffects reset, to reset all layered effects
+     */
     public void clearAbilities() {
         if (abilities != null) {
-//            for (Ability ability: abilities) { // Causes problems if temporary (gained) continuous effects are removed
-//                ability.setSourceId(null);
-//                ability.setControllerId(null);
-//            }
             abilities = null;
         }
+        setLostAllAbilities(false);
     }
 
     public void clear() {
         counters.clear();
         info = null;
         clearAbilities();
+        lostAllAbilities = false;
+    }
+
+    public boolean hasLostAllAbilities() {
+        return lostAllAbilities;
+    }
+
+    public void setLostAllAbilities(boolean lostAllAbilities) {
+        this.lostAllAbilities = lostAllAbilities;
     }
 
 }

@@ -5,17 +5,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
-import mage.Mana;
 import mage.abilities.costs.*;
 import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.*;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ManaEffect;
-import mage.abilities.effects.mana.DynamicManaEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.Card;
@@ -25,7 +21,6 @@ import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.command.Plane;
 import mage.game.events.GameEvent;
-import mage.game.events.ManaEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
@@ -952,7 +947,12 @@ public abstract class AbilityImpl implements Ability {
                     return false;
                 }
                 return ((Permanent) object).isPhasedIn();
-            } else if (!object.getAbilities().contains(this)) {
+            } else if (object instanceof Card) {
+                if (!((Card) object).getAbilities(game).contains(this)) {
+                    return false;
+                }
+                return true;
+            } else if (!object.getAbilities().contains(this)) { // not sure which object it can still be
                 // check if it's an ability that is temporary gained to a card
                 Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(this.getSourceId());
                 return otherAbilities != null && otherAbilities.contains(this);

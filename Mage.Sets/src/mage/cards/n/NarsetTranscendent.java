@@ -1,4 +1,3 @@
-
 package mage.cards.n;
 
 import java.util.UUID;
@@ -18,11 +17,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -171,7 +170,7 @@ class NarsetTranscendentGainReboundEffect extends ContinuousEffectImpl {
             if (spell != null) {
                 Card card = spell.getCard();
                 if (card != null) {
-                    addReboundAbility(card, source, game);
+                    addReboundAbility(card, game);
                 }
             } else {
                 discard();
@@ -181,9 +180,9 @@ class NarsetTranscendentGainReboundEffect extends ContinuousEffectImpl {
         return false;
     }
 
-    private void addReboundAbility(Card card, Ability source, Game game) {
+    private void addReboundAbility(Card card, Game game) {
         boolean found = false;
-        for (Ability ability : card.getAbilities()) {
+        for (Ability ability : card.getAbilities(game)) {
             if (ability instanceof ReboundAbility) {
                 found = true;
                 break;

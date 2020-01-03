@@ -1,5 +1,8 @@
 package mage.cards.j;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -19,10 +22,6 @@ import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -89,7 +88,7 @@ class JhoiraOfTheGhituSuspendEffect extends OneShotEffect {
             if (card == null) {
                 return false;
             }
-            boolean hasSuspend = card.getAbilities().containsClass(SuspendAbility.class);
+            boolean hasSuspend = card.getAbilities(game).containsClass(SuspendAbility.class);
 
             UUID exileId = SuspendAbility.getSuspendExileId(controller.getId(), game);
             if (controller.moveCardToExileWithInfo(card, exileId, "Suspended cards of " + controller.getName(), source.getSourceId(), game, Zone.HAND, true)) {
@@ -104,4 +103,3 @@ class JhoiraOfTheGhituSuspendEffect extends OneShotEffect {
         return false;
     }
 }
-

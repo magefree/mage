@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -108,7 +107,7 @@ class DarkImpostorContinuousEffect extends ContinuousEffectImpl {
             for (UUID imprintedId : perm.getImprinted()) {
                 Card card = game.getCard(imprintedId);
                 if (card != null) {
-                    for (Ability ability : card.getAbilities()) {
+                    for (Ability ability : card.getAbilities(game)) {
                         if (ability instanceof ActivatedAbility) {
                             perm.addAbility(ability.copy(), source.getSourceId(), game);
                         }

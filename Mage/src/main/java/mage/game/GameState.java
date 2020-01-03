@@ -1,5 +1,8 @@
 package mage.game;
 
+import java.io.Serializable;
+import java.util.*;
+import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.abilities.*;
 import mage.abilities.effects.ContinuousEffect;
@@ -33,10 +36,6 @@ import mage.util.Copyable;
 import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import mage.watchers.Watchers;
-
-import java.io.Serializable;
-import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -602,7 +601,6 @@ public class GameState implements Serializable, Copyable<GameState> {
 //    public void addMessage(String message) {
 //        this.messages.add(message);
 //    }
-
     /**
      * Returns a list of all players of the game ignoring range or if a player
      * has lost or left the game.
@@ -636,8 +634,9 @@ public class GameState implements Serializable, Copyable<GameState> {
      * also setting the playerId to the first/current player of the list. Also
      * returning the other players in turn order.
      * <p>
-     * Not safe for continuous effects, see rule 800.4k (effects must work until end of turn even after player leaves)
-     * Use Player.InRange() to find active players list at the start of the turn
+     * Not safe for continuous effects, see rule 800.4k (effects must work until
+     * end of turn even after player leaves) Use Player.InRange() to find active
+     * players list at the start of the turn
      *
      * @param playerId
      * @param game
@@ -775,7 +774,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         for (Map.Entry<ZoneChangeData, List<GameEvent>> entry : eventsByKey.entrySet()) {
             Set<Card> movedCards = new LinkedHashSet<>();
             Set<PermanentToken> movedTokens = new LinkedHashSet<>();
-            for (Iterator<GameEvent> it = entry.getValue().iterator(); it.hasNext(); ) {
+            for (Iterator<GameEvent> it = entry.getValue().iterator(); it.hasNext();) {
                 GameEvent event = it.next();
                 ZoneChangeEvent castEvent = (ZoneChangeEvent) event;
                 UUID targetId = castEvent.getTargetId();
@@ -1008,7 +1007,7 @@ public class GameState implements Serializable, Copyable<GameState> {
      * @param attachedTo
      * @param ability
      * @param copyAbility copies non MageSingleton abilities before adding to
-     *                    state
+     * state
      */
     public void addOtherAbility(Card attachedTo, Ability ability, boolean copyAbility) {
         Ability newAbility;
