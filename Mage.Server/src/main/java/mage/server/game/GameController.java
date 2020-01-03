@@ -1192,6 +1192,14 @@ public class GameController implements GameCallback {
         if (state == null) {
             return "";
         }
+
+        logger.warn("FIX command was called for game " + game.getId() + " - players: " +
+                game.getPlayerList().stream()
+                        .map(game::getPlayer)
+                        .filter(Objects::nonNull)
+                        .map(p -> p.getName() + (p.isInGame() ? " (play)" : " (out)"))
+                        .collect(Collectors.joining(", ")));
+
         StringBuilder sb = new StringBuilder();
         sb.append("<br/>Game State:<br/><font size=-2>");
         sb.append(state);
