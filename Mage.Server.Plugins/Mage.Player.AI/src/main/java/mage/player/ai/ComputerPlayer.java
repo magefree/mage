@@ -1303,7 +1303,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     if (mana.enough(avail)) {
                         SpellAbility ability = card.getSpellAbility();
                         if (ability != null && ability.canActivate(playerId, game).canActivate()
-                                && game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, ability.getSourceId(), ability.getSourceId(), playerId), ability, game, true)) {
+                                && !game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, ability.getSourceId(), ability.getSourceId(), playerId), ability, game, true)) {
                             if (card.getCardType().contains(CardType.INSTANT)
                                     || card.hasAbility(FlashAbility.getInstance().getId(), game)) {
                                 playableInstant.add(card);
