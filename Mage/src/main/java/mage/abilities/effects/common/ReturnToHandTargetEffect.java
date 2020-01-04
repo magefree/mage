@@ -1,10 +1,5 @@
 package mage.abilities.effects.common;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -17,6 +12,8 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.Target;
 import mage.util.CardUtil;
+
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -94,8 +91,13 @@ public class ReturnToHandTargetEffect extends OneShotEffect {
         Target target = mode.getTargets().get(0);
         StringBuilder sb = new StringBuilder("return ");
         if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
-            sb.append("up to ").append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ")
-                    .append(target.getTargetName()).append(" to their owners' hand");
+            sb.append("up to ");
+            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets()));
+            if (!target.getTargetName().contains("target")) {
+                sb.append(" target ");
+            }
+            sb.append(target.getTargetName());
+            sb.append(" to their owners' hand");
             return sb.toString();
         } else {
             if (target.getNumberOfTargets() > 1) {
