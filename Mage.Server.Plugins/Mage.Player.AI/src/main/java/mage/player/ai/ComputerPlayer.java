@@ -2512,16 +2512,10 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         goodList.sort(comparator);
         badList.sort(comparator);
 
-        // real sort
-        if (outcome.isGood()) {
-            // good effect -- most valueable goes first
-            Collections.reverse(goodList);
-            // Collections.reverse(badList);
-        } else {
-            // bad effect - most weakest goes first, no need in reverse
-            // Collections.reverse(goodList);
-            Collections.reverse(badList);
-        }
+        // most valueable goes first in good list
+        Collections.reverse(goodList);
+        // most weakest goes first in bad list (no need to reverse)
+        //Collections.reverse(badList);
 
         allList.addAll(goodList);
         allList.addAll(badList);

@@ -1,7 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -19,20 +17,21 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetOpponentsChoicePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class Arena extends CardImpl {
 
     public Arena(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {3}, {tap}: Tap target creature you control and target creature of an opponent's choice they control. Those creatures fight each other.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ArenaEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());
-        ability.addTarget(new TargetOpponentsChoicePermanent(1, 1, new FilterControlledCreaturePermanent(), false, true));
+        ability.addTarget(new TargetOpponentsChoicePermanent(1, 1, new FilterControlledCreaturePermanent(), false));
         this.addAbility(ability);
     }
 
@@ -47,21 +46,21 @@ public final class Arena extends CardImpl {
 }
 
 class ArenaEffect extends OneShotEffect {
-    
+
     ArenaEffect() {
         super(Outcome.Benefit);
         this.staticText = "Tap target creature you control and target creature of an opponent's choice they control. Those creatures fight each other.";
     }
-    
+
     ArenaEffect(final ArenaEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public ArenaEffect copy() {
         return new ArenaEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent creature = game.getPermanent(source.getFirstTarget());

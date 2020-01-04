@@ -1,7 +1,5 @@
-
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -22,8 +20,9 @@ import mage.players.Player;
 import mage.target.TargetSource;
 import mage.target.common.TargetOpponentsChoicePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class NovaPentacle extends CardImpl {
@@ -34,7 +33,7 @@ public final class NovaPentacle extends CardImpl {
         // {3}, {tap}: The next time a source of your choice would deal damage to you this turn, that damage is dealt to target creature of an opponent's choice instead
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NovaPentacleEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetOpponentsChoicePermanent(1, 1, new FilterCreaturePermanent(), false, true));
+        ability.addTarget(new TargetOpponentsChoicePermanent(1, 1, new FilterCreaturePermanent(), false));
         this.addAbility(ability);
     }
 
@@ -92,9 +91,7 @@ class NovaPentacleEffect extends RedirectionEffect {
         //   check player
         Player player = game.getPlayer(event.getTargetId());
         if (player != null) {
-            if (player.getId().equals(source.getControllerId())) {
-                return true;
-            }
+            return player.getId().equals(source.getControllerId());
         }
         return false;
     }

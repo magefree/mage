@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import mage.abilities.Ability;
@@ -70,12 +69,12 @@ enum VolcanicOfferingAdjuster implements TargetAdjuster {
         FilterLandPermanent filterLandForOpponent = new FilterLandPermanent("nonbasic land not controlled by " + controller.getLogName());
         filterLandForOpponent.add(Predicates.not(new SupertypePredicate(SuperType.BASIC)));
         filterLandForOpponent.add(Predicates.not(new ControllerIdPredicate(controller.getId())));
-        ability.addTarget(new TargetOpponentsChoicePermanent(1, 1, filterLandForOpponent, false, true));
+        ability.addTarget(new TargetOpponentsChoicePermanent(1, 1, filterLandForOpponent, false));
 
         ability.addTarget(new TargetPermanent(filterCreature));
         FilterCreaturePermanent filterCreatureForOpponent = new FilterCreaturePermanent("creature not controlled by " + controller.getLogName());
         filterCreatureForOpponent.add(Predicates.not(new ControllerIdPredicate(controller.getId())));
-        ability.addTarget(new TargetOpponentsChoicePermanent(1, 1, filterCreatureForOpponent, false, true));
+        ability.addTarget(new TargetOpponentsChoicePermanent(1, 1, filterCreatureForOpponent, false));
     }
 }
 

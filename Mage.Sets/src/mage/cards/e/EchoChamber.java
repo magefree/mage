@@ -1,8 +1,5 @@
-
 package mage.cards.e;
 
-import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
@@ -10,21 +7,22 @@ import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbil
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetOpponentsChoicePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class EchoChamber extends CardImpl {
@@ -37,7 +35,7 @@ public final class EchoChamber extends CardImpl {
         // {4}, {tap}: An opponent chooses target creature they control. Create a token that's a copy of that creature. That token gains haste until end of turn. Exile the token at the beginning of the next end step. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new EchoChamberCreateTokenEffect(), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetOpponentsChoicePermanent(1, 1, filter, false, true));
+        ability.addTarget(new TargetOpponentsChoicePermanent(1, 1, filter, false));
         this.addAbility(ability);
     }
 

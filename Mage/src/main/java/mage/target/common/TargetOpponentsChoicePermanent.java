@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.target.common;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.constants.Outcome;
@@ -15,28 +9,22 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Mael
  */
 public class TargetOpponentsChoicePermanent extends TargetPermanent {
 
     protected UUID opponentId = null;
-    private boolean dontTargetPlayer = false;
 
-    public TargetOpponentsChoicePermanent(FilterPermanent filter) {
-        super(1, 1, filter, false);
-    }
-
-    public TargetOpponentsChoicePermanent(int minNumTargets, int maxNumTargets, FilterPermanent filter, boolean notTarget, boolean dontTargetPlayer) {
+    public TargetOpponentsChoicePermanent(int minNumTargets, int maxNumTargets, FilterPermanent filter, boolean notTarget) {
         super(minNumTargets, maxNumTargets, filter, notTarget);
-        this.dontTargetPlayer = dontTargetPlayer;
     }
 
     public TargetOpponentsChoicePermanent(final TargetOpponentsChoicePermanent target) {
         super(target);
         this.opponentId = target.opponentId;
-        this.dontTargetPlayer = target.dontTargetPlayer;
     }
 
     @Override
@@ -68,7 +56,22 @@ public class TargetOpponentsChoicePermanent extends TargetPermanent {
 
     @Override
     public boolean chooseTarget(Outcome outcome, UUID playerId, Ability source, Game game) {
-        return super.chooseTarget(outcome, getOpponentId(playerId, source, game), source, game);
+        // choose opponent
+        if (opponentId == null) {
+            TargetOpponent target = new TargetOpponent(true); // notTarget true = can't cancel
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                if (player.chooseTarget(Outcome.Detriment, target, source, game)) {
+                    opponentId = target.getFirstTarget();
+                }
+            }
+        }
+        if (opponentId == null) {
+            return false;
+        }
+
+        // opponent choose real targets (outcome must be inversed)
+        return super.chooseTarget(Outcome.inverse(outcome), opponentId, source, game);
     }
 
     @Override
@@ -103,22 +106,18 @@ public class TargetOpponentsChoicePermanent extends TargetPermanent {
         return new TargetOpponentsChoicePermanent(this);
     }
 
-    private UUID getOpponentId(UUID playerId, Ability source, Game game) {
-        if (opponentId == null) {
-            TargetOpponent target = new TargetOpponent(dontTargetPlayer);
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                if (player.chooseTarget(Outcome.Detriment, target, source, game)) {
-                    opponentId = target.getFirstTarget();
-                }
-            }
-        }
-        return opponentId;
+    @Override
+    public boolean isRequired() {
+        return true; // opponent can't cancel the spell
+    }
+
+    @Override
+    public boolean isRequired(UUID sourceId, Game game) {
+        return true; // opponent can't cancel the spell
     }
 
     @Override
     public boolean isRequired(Ability ability) {
         return true; // opponent can't cancel the spell
     }
-
 }

@@ -1,7 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -10,11 +8,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -22,8 +16,9 @@ import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponentsChoicePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class DiaochanArtfulBeauty extends CardImpl {
@@ -40,7 +35,7 @@ public final class DiaochanArtfulBeauty extends CardImpl {
         // {tap}: Destroy target creature of your choice, then destroy target creature of an opponent's choice. Activate this ability only during your turn, before attackers are declared.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new DiaochanArtfulBeautyDestroyEffect(), new TapSourceCost(), MyTurnBeforeAttackersDeclaredCondition.instance);
         ability.addTarget(new TargetCreaturePermanent());
-        ability.addTarget(new TargetOpponentsChoicePermanent(1, 1, StaticFilters.FILTER_PERMANENT_CREATURE, false, true));
+        ability.addTarget(new TargetOpponentsChoicePermanent(1, 1, StaticFilters.FILTER_PERMANENT_CREATURE, false));
         this.addAbility(ability);
     }
 
