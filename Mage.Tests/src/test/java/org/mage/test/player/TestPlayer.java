@@ -816,6 +816,15 @@ public class TestPlayer implements Player {
                             wasProccessed = true;
                         }
 
+                        // show available mana
+                        if (params[0].equals(SHOW_COMMAND_AVAILABLE_MANA) && params.length == 1) {
+                            printStart(action.getActionName());
+                            printMana(game, computerPlayer.getManaAvailable(game));
+                            printEnd();
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
                         // show aliases
                         if (params[0].equals(SHOW_COMMAND_ALIASES) && params.length == 1) {
                             printStart(action.getActionName());
@@ -906,9 +915,14 @@ public class TestPlayer implements Player {
         }
     }
 
+    private void printMana(Game game, ManaOptions manaOptions) {
+        System.out.println("Total mana options: " + manaOptions.size());
+        manaOptions.forEach(mana -> {
+            System.out.println(mana.toString());
+        });
+    }
+
     private void printAbilities(Game game, List<Ability> abilities) {
-
-
         System.out.println("Total abilities: " + (abilities != null ? abilities.size() : 0));
         if (abilities == null) {
             return;

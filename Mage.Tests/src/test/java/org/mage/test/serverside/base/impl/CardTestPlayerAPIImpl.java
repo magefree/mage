@@ -77,6 +77,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public static final String SHOW_COMMAND_GRAVEYEARD = "GRAVEYARD";
     public static final String SHOW_COMMAND_EXILE = "EXILE";
     public static final String SHOW_COMMAND_AVAILABLE_ABILITIES = "AVAILABLE_ABILITIES";
+    public static final String SHOW_COMMAND_AVAILABLE_MANA = "AVAILABLE_MANA";
     public static final String SHOW_COMMAND_ALIASES = "ALIASES";
 
     // TODO: add target player param to commands
@@ -419,6 +420,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     public void showAvaileableAbilities(String showName, int turnNum, PhaseStep step, TestPlayer player) {
         show(showName, turnNum, step, player, SHOW_COMMAND_AVAILABLE_ABILITIES);
+    }
+
+    public void showAvaileableMana(String showName, int turnNum, PhaseStep step, TestPlayer player) {
+        show(showName, turnNum, step, player, SHOW_COMMAND_AVAILABLE_MANA);
     }
 
     public void showAliases(String showName, int turnNum, PhaseStep step, TestPlayer player) {
@@ -1347,6 +1352,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, Player target) {
         //Assert.assertNotEquals("", cardName);
+        // warning, target in spell cast command setups without choose target call
         player.addAction(turnNum, step, "activate:Cast " + cardName + "$targetPlayer=" + target.getName());
     }
 
