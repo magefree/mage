@@ -90,6 +90,7 @@ public abstract class GameImpl implements Game, Serializable {
     protected Map<UUID, MeldCard> meldCards = new HashMap<>(0);
 
     protected Map<Zone, HashMap<UUID, MageObject>> lki = new EnumMap<>(Zone.class);
+    protected Map<Zone, HashMap<UUID, CardState>> lkiCardState = new EnumMap<>(Zone.class);
     protected Map<UUID, Map<Integer, MageObject>> lkiExtended = new HashMap<>();
     // Used to check if an object was moved by the current effect in resolution (so Wrath like effect can be handled correctly)
     protected Map<Zone, Set<UUID>> shortLivingLKI = new EnumMap<>(Zone.class);
@@ -168,6 +169,7 @@ public abstract class GameImpl implements Game, Serializable {
         this.gameOptions = game.gameOptions;
         this.lki.putAll(game.lki);
         this.lkiExtended.putAll(game.lkiExtended);
+        this.lkiCardState.putAll(game.lkiCardState);
         this.shortLivingLKI.putAll(game.shortLivingLKI);
         this.permanentsEntering.putAll(game.permanentsEntering);
 
@@ -2774,6 +2776,20 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
+    public CardState getLastKnownInformationCard(UUID objectId, Zone zone) {
+        if (zone == Zone.GRAVEYARD) {
+            Map<UUID, CardState> lkiCardStateMap = lkiCardState.get(zone);
+            if (lkiCardStateMap != null) {
+                CardState cardState = lkiCardStateMap.get(objectId);
+                if (cardState != null) {
+                    return cardState;
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
     public boolean getShortLivingLKI(UUID objectId, Zone zone) {
         Set<UUID> idSet = shortLivingLKI.get(zone);
         if (idSet != null) {
@@ -2817,16 +2833,28 @@ public abstract class GameImpl implements Game, Serializable {
                     lkiExtended.put(objectId, lkiExtendedMap);
                 }
             }
+        } else if (Zone.GRAVEYARD.equals(zone)) {
+            // Remember card state in this public zone (mainly removed/gained abilities)
+            Map<UUID, CardState> lkiMap = lkiCardState.get(zone);
+            if (lkiMap != null) {
+                lkiMap.put(objectId, getState().getCardState(objectId));
+            } else {
+                HashMap<UUID, CardState> newMap = new HashMap<>();
+                newMap.put(objectId, getState().getCardState(objectId).copy());
+                lkiCardState.put(zone, newMap);
+            }
         }
     }
 
     /**
-     * Reset objects stored for Last Known Information.
+     * Reset objects stored for Last Known Information. (Happens if all effects
+     * are applied und stack is empty)
      */
     @Override
     public void resetLKI() {
         lki.clear();
         lkiExtended.clear();
+        lkiCardState.clear();
         infiniteLoopCounter = 0;
         stackObjectsCheck.clear();
     }

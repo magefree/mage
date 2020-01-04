@@ -86,4 +86,79 @@ public class LoosingAbilitiesTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerB, "Gravecrawler", 1);
     }
+
+    /**
+     * Yixlid Jailer works incorrectly with reanimation spelss - I cast Unearth
+     * targeting Seasoned Pyromancer with a Yixlid Jailer in play, but didnt get
+     * the Pyromancer's ETB trigger. This is a bug as Jailer only affaects cards
+     * when they are on the battle field
+     */
+    @Test
+    public void testYixlidJailerAndETBEffects() {
+        // Cards in graveyards lose all abilities.
+        addCard(Zone.HAND, playerA, "Yixlid Jailer"); // Creature 2/1 - {1}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+
+        // When Seasoned Pyromancer enters the battlefield, discard two cards, then draw two cards. For each nonland card discarded this way, create a 1/1 red Elemental creature token.
+        // {3}{R}{R}, Exile Seasoned Pyromancer from your graveyard: Create two 1/1 red Elemental creature tokens.
+        addCard(Zone.GRAVEYARD, playerB, "Seasoned Pyromancer");
+        addCard(Zone.HAND, playerB, "Lightning Bolt", 2);
+        // Return target creature card with converted mana cost 3 or less from your graveyard to the battlefield.
+        // Cycling {2}
+        addCard(Zone.HAND, playerB, "Unearth", 1); // Sorcery {B}
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Yixlid Jailer");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Unearth");
+        setChoice(playerB, "Lightning Bolt^Lightning Bolt");
+
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Yixlid Jailer", 1);
+
+        assertPermanentCount(playerB, "Seasoned Pyromancer", 1);
+
+        assertGraveyardCount(playerB, "Unearth", 1);
+        assertGraveyardCount(playerB, "Lightning Bolt", 2);
+
+    }
+
+    /**
+     * If an ability triggers when the object that has it is put into a hidden
+     * zone from a graveyard, that ability triggers from the graveyard, (such as
+     * Golgari Brownscale), Yixlid Jailer will prevent that ability from
+     * triggering. (2007-05-01)
+     */
+    @Test
+    public void testYixlidJailerAndPutIntoHandEffect() {
+        // Cards in graveyards lose all abilities.
+        addCard(Zone.HAND, playerA, "Yixlid Jailer"); // Creature 2/1 - {1}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+
+        // When Golgari Brownscale is put into your hand from your graveyard, you gain 2 life.
+        // Dredge 2 (If you would draw a card, instead you may put exactly X cards from the top of
+        //   your library into your graveyard. If you do, return this card from your
+        //   graveyard to your hand. Otherwise, draw a card. )
+        addCard(Zone.GRAVEYARD, playerB, "Golgari Brownscale", 1); // Sorcery {B}
+        // Return target creature card from your graveyard to your hand. If it’s a Zombie card, draw a card.
+        addCard(Zone.HAND, playerB, "Cemetery Recruitment", 1); // Sorcery {1}{B}
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Yixlid Jailer");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Cemetery Recruitment");
+
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Yixlid Jailer", 1);
+        assertHandCount(playerB, "Golgari Brownscale", 1);
+        assertGraveyardCount(playerB, "Cemetery Recruitment", 1);
+
+        assertLife(playerB, 20);  // The trigger of Golgari Brownscale does not work because of Yixlid Jailer
+
+    }
+
 }

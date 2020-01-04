@@ -44,7 +44,9 @@ class DredgeEffect extends ReplacementEffectImpl {
     public DredgeEffect(int value) {
         super(Duration.WhileInGraveyard, Outcome.AIDontUseIt);
         this.amount = value;
-        this.staticText = new StringBuilder("Dredge ").append(Integer.toString(value)).append(" <i>(If you would draw a card, instead you may put exactly ").append(value).append(" card(s) from the top of your library into your graveyard. If you do, return this card from your graveyard to your hand. Otherwise, draw a card.)</i>").toString();
+        this.staticText = ("Dredge ") + Integer.toString(value) + " <i>(If you would draw a card, instead you may put exactly "
+                + value + " card(s) from the top of your library into your graveyard. If you do, return this card from "
+                + "your graveyard to your hand. Otherwise, draw a card.)</i>";
     }
 
     public DredgeEffect(final DredgeEffect effect) {

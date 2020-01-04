@@ -1,5 +1,7 @@
 package mage.abilities;
 
+import java.util.Locale;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.effects.Effect;
 import mage.constants.AbilityType;
@@ -10,9 +12,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
-
-import java.util.Locale;
-import java.util.UUID;
+import mage.util.CardUtil;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -158,6 +158,17 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         if (event != null && event.getTargetId() != null && event.getTargetId().equals(getSourceId())) {
             switch (event.getType()) {
                 case ZONE_CHANGE:
+                    ZoneChangeEvent zce = (ZoneChangeEvent) event;
+                    if (event.getTargetId().equals(getSourceId()) && !zce.getToZone().isPublicZone()) {
+                        // If an ability triggers when the object that has it is put into a hidden zone from a graveyard,
+                        // that ability triggers from the graveyard, (such as Golgari Brownscale),
+                        // Yixlid Jailer will prevent that ability from triggering.
+                        if (zce.getFromZone().match(Zone.GRAVEYARD)) {
+                            if (!CardUtil.cardHadAbility(this, game.getLastKnownInformationCard(getSourceId(), zce.getFromZone()), getSourceId(), game)) {
+                                return false;
+                            }
+                        }
+                    }
                 case DESTROYED_PERMANENT:
                     if (isLeavesTheBattlefieldTrigger()) {
                         if (event.getType() == EventType.DESTROYED_PERMANENT) {
