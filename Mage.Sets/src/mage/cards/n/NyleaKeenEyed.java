@@ -64,7 +64,7 @@ public final class NyleaKeenEyed extends CardImpl {
 class NyleaKeenEyedEffect extends OneShotEffect {
 
     NyleaKeenEyedEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.Detriment);
         staticText = "reveal the top card of your library. If it's a creature card, " +
                 "put it into your hand. Otherwise, you may put it into your graveyard";
     }
