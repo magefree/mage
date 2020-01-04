@@ -53,7 +53,7 @@ public final class HaktosTheUnscarred extends CardImpl {
         Ability ability = new ProtectionAbility(filter);
         ability.setRuleVisible(false);
         this.addAbility(new SimpleStaticAbility(
-                new GainAbilitySourceEffect(ability, Duration.EndOfTurn)
+                new GainAbilitySourceEffect(ability, Duration.WhileOnBattlefield)
                         .setText("{this} has protection from each converted mana cost other than the chosen number")
         ));
     }
