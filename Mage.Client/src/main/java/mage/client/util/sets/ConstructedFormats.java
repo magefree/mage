@@ -28,10 +28,10 @@ public final class ConstructedFormats {
     public static final Standard STANDARD_CARDS = new Standard();
 
     // Attention -Month is 0 Based so Feb = 1 for example. //
-    private static final Date extendedDate = new GregorianCalendar(2009, Calendar.AUGUST, 20).getTime();
-    private static final Date frontierDate = new GregorianCalendar(2014, Calendar.JULY, 17).getTime();
-    private static final Date pioneerDate = new GregorianCalendar(2012, Calendar.NOVEMBER, 5).getTime();
-    private static final Date modernDate = new GregorianCalendar(2003, Calendar.JULY, 20).getTime();
+    private static final Date extendedDate = new GregorianCalendar(2009, Calendar.AUGUST, 20 - 1).getTime();
+    private static final Date frontierDate = new GregorianCalendar(2014, Calendar.JULY, 18 - 1).getTime();
+    private static final Date pioneerDate = new GregorianCalendar(2012, Calendar.OCTOBER, 5 - 1).getTime();
+    private static final Date modernDate = new GregorianCalendar(2003, Calendar.JULY, 28 - 1).getTime();
 
     // for all sets just return empty list
     private static final List<String> all = new ArrayList<>();
@@ -137,7 +137,7 @@ public final class ConstructedFormats {
                 underlyingSetCodesPerFormat.get(FRONTIER).add(set.getCode());
             }
 
-            // frontier
+            // pioneer
             if (set.getType().isStandardLegal() && set.getReleaseDate().after(pioneerDate)) {
                 underlyingSetCodesPerFormat.get(PIONEER).add(set.getCode());
             }
