@@ -131,7 +131,9 @@ public class BuybackAbility extends StaticAbility implements OptionalAdditionalS
             Player player = game.getPlayer(ability.getControllerId());
             if (player != null) {
                 this.resetBuyback(game);
-                if (player.chooseUse(Outcome.Benefit, "Pay " + buybackCost.getText(false) + " ?", ability, game)) {
+                // TODO: add AI support to find mana available to pay buyback
+                //  canPay checks only single mana available, not total mana usage
+                if (player.chooseUse(/*Outcome.Benefit*/ Outcome.AIDontUseIt, "Pay " + buybackCost.getText(false) + " ?", ability, game)) {
                     activateBuyback(game, true);
                     for (Iterator it = ((Costs) buybackCost).iterator(); it.hasNext(); ) {
                         Cost cost = (Cost) it.next();
