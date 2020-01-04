@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
@@ -7,7 +6,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author BetaSteward
  */
 public class ConspireTest extends CardTestPlayerBase {
@@ -32,11 +30,10 @@ public class ConspireTest extends CardTestPlayerBase {
     /**
      * Burn Trail Sorcery, 3R (4) Burn Trail deals 3 damage to target creature
      * or player.
-     *
+     * <p>
      * Conspire (As you cast this spell, you may tap two untapped creatures you
      * control that share a color with it. When you do, copy it and you may
      * choose a new target for the copy.)
-     *
      */
     @Test
     public void testConspire() {
@@ -123,5 +120,80 @@ public class ConspireTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertGraveyardCount(playerA, "Burn Trail", 1);
 
+    }
+
+    @Test
+    public void testConspire_User() {
+        // Burn Trail deals 3 damage to any target.
+        // Conspire (As you cast this spell, you may tap two untapped creatures you control that share a color with it.
+        // When you do, copy it and you may choose a new target for the copy.)
+        addCard(Zone.HAND, playerA, "Burn Trail", 1); // {3}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Goblin Assailant", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Burn Trail");
+        addTarget(playerA, playerB);
+        setChoice(playerA, "Yes"); // use conspire
+        setChoice(playerA, "Goblin Assailant^Goblin Assailant");
+        setChoice(playerA, "No"); // don't change target 1
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertAllCommandsUsed();
+
+        assertGraveyardCount(playerA, "Burn Trail", 1);
+        assertLife(playerB, 20 - 3 * 2);
+        assertTapped("Goblin Assailant", true);
+    }
+
+    @Test
+    public void testConspire_AI_can() {
+        // Burn Trail deals 3 damage to any target.
+        // Conspire (As you cast this spell, you may tap two untapped creatures you control that share a color with it.
+        // When you do, copy it and you may choose a new target for the copy.)
+        addCard(Zone.HAND, playerA, "Burn Trail", 1); // {3}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Goblin Assailant", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Burn Trail");
+        addTarget(playerA, playerB);
+        //setChoice(playerA, "Yes"); // use conspire - AI must choose
+        //setChoice(playerA, "Goblin Assailant^Goblin Assailant"); - AI must choose
+        //setChoice(playerA, "No"); // don't change target 1 - AI must choose
+
+        //setStrictChooseMode(true); - AI must choose
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertAllCommandsUsed();
+
+        assertGraveyardCount(playerA, "Burn Trail", 1);
+        assertLife(playerB, 20 - 3 * 2);
+        assertTapped("Goblin Assailant", true);
+    }
+
+    @Test
+    public void testConspire_AI_cannot() {
+        // Burn Trail deals 3 damage to any target.
+        // Conspire (As you cast this spell, you may tap two untapped creatures you control that share a color with it.
+        // When you do, copy it and you may choose a new target for the copy.)
+        addCard(Zone.HAND, playerA, "Burn Trail", 1); // {3}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Goblin Assailant", 2 - 1); // AI can't pay additional cost, must use simple mode
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Burn Trail");
+        addTarget(playerA, playerB);
+        //setChoice(playerA, "Yes"); // use conspire - AI must choose
+        //setChoice(playerA, "Goblin Assailant^Goblin Assailant"); - AI must choose
+        //setChoice(playerA, "No"); // don't change target 1 - AI must choose
+
+        //setStrictChooseMode(true); - AI must choose
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertAllCommandsUsed();
+
+        assertGraveyardCount(playerA, "Burn Trail", 1);
+        assertLife(playerB, 20 - 3); // simple cast
+        assertTapped("Goblin Assailant", false);
     }
 }

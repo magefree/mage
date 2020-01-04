@@ -1,15 +1,14 @@
-
 package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author BetaSteward
  */
 public class KickerTest extends CardTestPlayerBase {
@@ -48,40 +47,81 @@ public class KickerTest extends CardTestPlayerBase {
      * additional {3} as you cast this spell.) Aether Figment can't be blocked.
      * If Aether Figment was kicked, it enters the battlefield with two +1/+1
      * counters on it.
-     *
      */
     @Test
-    public void testUseKicker() {
+    public void testUseKicker_User() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
         addCard(Zone.HAND, playerA, "Aether Figment");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aether Figment");
         setChoice(playerA, "Yes"); // with Kicker
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Aether Figment", 1);
         assertCounterCount("Aether Figment", CounterType.P1P1, 2);
         assertPowerToughness(playerA, "Aether Figment", 3, 3);
-
     }
 
     @Test
-    public void testDontUseKicker() {
+    @Ignore
+    // TODO: enable test after replicate ability will be supported by AI (don't forget about multikicker support too)
+    public void testUseKicker_AI() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+        addCard(Zone.HAND, playerA, "Aether Figment");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aether Figment");
+        //setChoice(playerA, "Yes"); // with Kicker - AI must choose
+
+        //setStrictChooseMode(true); - AI must choose
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Aether Figment", 1);
+        assertCounterCount("Aether Figment", CounterType.P1P1, 2);
+        assertPowerToughness(playerA, "Aether Figment", 3, 3);
+    }
+
+    @Test
+    public void testDontUseKicker_User() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
         addCard(Zone.HAND, playerA, "Aether Figment");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aether Figment");
         setChoice(playerA, "No");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Aether Figment", 1);
         assertCounterCount("Aether Figment", CounterType.P1P1, 0);
         assertPowerToughness(playerA, "Aether Figment", 1, 1);
+    }
 
+    @Test
+    @Ignore
+    // TODO: enable test after replicate ability will be supported by AI (don't forget about multikicker support too)
+    public void testDontUseKicker_AI() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5 - 1); // haven't all mana
+        addCard(Zone.HAND, playerA, "Aether Figment");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aether Figment");
+        //setChoice(playerA, "No"); - AI must choose
+
+        //setStrictChooseMode(true); - AI must choose
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Aether Figment", 1);
+        assertCounterCount("Aether Figment", CounterType.P1P1, 0);
+        assertPowerToughness(playerA, "Aether Figment", 1, 1);
     }
 
     /**
@@ -89,7 +129,6 @@ public class KickerTest extends CardTestPlayerBase {
      * additional {1}{W} any number of times as you cast this spell.) Flying
      * Apex Hawks enters the battlefield with a +1/+1 counter on it for each
      * time it was kicked.
-     *
      */
     @Test
     public void testUseMultikickerOnce() {
@@ -305,7 +344,6 @@ public class KickerTest extends CardTestPlayerBase {
     /**
      * Check that kicker condition does also work for kicker cards with multiple
      * kicker options
-     *
      */
     @Test
     public void testKickerCondition() {
@@ -342,7 +380,6 @@ public class KickerTest extends CardTestPlayerBase {
      * Paying the Kicker on "Marsh Casualties" has no effect. Target player's
      * creatures still only get -1/-1 instead of -2/-2. Was playing against AI.
      * It was me who cast the spell.
-     *
      */
     @Test
     public void testMarshCasualties() {

@@ -6,7 +6,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author noxx
  */
 public class AetherFigmentTest extends CardTestPlayerBase {
@@ -25,13 +24,16 @@ public class AetherFigmentTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Aether Figment");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aether Figment");
+        setChoice(playerA, "Yes"); // use kicker
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         assertPermanentCount(playerA, "Aether Figment", 1);
-        assertPowerToughness(playerA,  "Aether Figment", 3, 3);
+        assertPowerToughness(playerA, "Aether Figment", 3, 3);
     }
 }

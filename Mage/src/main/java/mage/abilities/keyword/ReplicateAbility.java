@@ -89,7 +89,6 @@ public class ReplicateAbility extends StaticAbility implements OptionalAdditiona
                         times = (numActivations + 1) + (numActivations == 0 ? " time " : " times ");
                     }
 
-                    // test costs
                     // TODO: add AI support to find max number of possible activations (from available mana)
                     //  canPay checks only single mana available, not total mana usage
                     if (additionalCost.canPay(ability, sourceId, controllerId, game)

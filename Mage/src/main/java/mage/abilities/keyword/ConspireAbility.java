@@ -1,4 +1,3 @@
-
 package mage.abilities.keyword;
 
 import mage.abilities.Ability;
@@ -13,9 +12,12 @@ import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SharesColorWithSourcePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
@@ -29,9 +31,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /*
  * 702.77. Conspire
@@ -61,7 +60,6 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
     }
 
     public enum ConspireTargets {
-
         NONE,
         ONE,
         MORE
@@ -140,10 +138,11 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
             Player player = game.getPlayer(getControllerId());
             if (player != null) {
                 resetConspire(ability, game);
+                // AI supports conspire
                 if (conspireCost.canPay(ability, getSourceId(), getControllerId(), game)
                         && player.chooseUse(Outcome.Benefit, "Pay " + conspireCost.getText(false) + " ?", ability, game)) {
                     activateConspire(ability, game);
-                    for (Iterator it = conspireCost.iterator(); it.hasNext();) {
+                    for (Iterator it = conspireCost.iterator(); it.hasNext(); ) {
                         Cost cost = (Cost) it.next();
                         ability.getCosts().add(cost.copy());
                     }

@@ -181,8 +181,10 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
                             int activatedCount = getKickedCounter(game, ability);
                             times = (activatedCount + 1) + (activatedCount == 0 ? " time " : " times ");
                         }
+                        // TODO: add AI support to find max number of possible activations (from available mana)
+                        //  canPay checks only single mana available, not total mana usage
                         if (kickerCost.canPay(ability, sourceId, controllerId, game)
-                                && player.chooseUse(Outcome.Benefit, "Pay " + times + kickerCost.getText(false) + " ?", ability, game)) {
+                                && player.chooseUse(/*Outcome.Benefit*/Outcome.AIDontUseIt, "Pay " + times + kickerCost.getText(false) + " ?", ability, game)) {
                             this.activateKicker(kickerCost, ability, game);
                             if (kickerCost instanceof Costs) {
                                 for (Iterator itKickerCost = ((Costs) kickerCost).iterator(); itKickerCost.hasNext(); ) {
