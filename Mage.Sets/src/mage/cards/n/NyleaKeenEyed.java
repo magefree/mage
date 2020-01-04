@@ -92,7 +92,7 @@ class NyleaKeenEyedEffect extends OneShotEffect {
         if (card.isCreature()) {
             return player.moveCards(card, Zone.HAND, source, game);
         }
-        if (!player.chooseUse(outcome, "Put " + card.getName() + " into your graveyard?", source, game)) {
+        if (!player.chooseUse(Outcome.Detriment, "Put " + card.getName() + " into your graveyard?", source, game)) {
             return true;
         }
         return player.moveCards(card, Zone.GRAVEYARD, source, game);

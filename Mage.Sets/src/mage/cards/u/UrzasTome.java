@@ -1,7 +1,5 @@
-
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
@@ -20,8 +18,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class UrzasTome extends CardImpl {
@@ -66,7 +65,7 @@ class UrzasTomeEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         new DrawCardSourceControllerEffect(1).apply(game, source);
         if (controller != null
-                && controller.chooseUse(Outcome.Discard, "Exile a historic card from your graveyard?", source, game)) {
+                && controller.chooseUse(Outcome.Exile, "Exile a historic card from your graveyard?", source, game)) {
             Cost cost = new ExileFromGraveCost(new TargetCardInYourGraveyard(new FilterHistoricCard()));
             if (cost.canPay(source, source.getSourceId(), controller.getId(), game)) {
                 if (cost.pay(source, game, source.getSourceId(), controller.getId(), false, null)) {
