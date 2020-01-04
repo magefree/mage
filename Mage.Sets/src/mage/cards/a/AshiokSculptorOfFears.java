@@ -42,9 +42,9 @@ public final class AshiokSculptorOfFears extends CardImpl {
         ability.addEffect(new PutTopCardOfLibraryIntoGraveEachPlayerEffect(2, TargetController.ANY));
         this.addAbility(ability);
 
-        // −5: Put target creature card from a graveyard onto the battlefield under you control.
+        // −5: Put target creature card from a graveyard onto the battlefield under your control.
         ability = new LoyaltyAbility(new ReturnFromGraveyardToBattlefieldTargetEffect()
-                .setText("put target creature card from a graveyard onto the battlefield under you control"), -5);
+                .setText("put target creature card from a graveyard onto the battlefield under your control"), -5);
         ability.addTarget(new TargetCardInGraveyard(filter));
         this.addAbility(ability);
 

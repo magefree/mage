@@ -8,7 +8,7 @@ import mage.constants.SubType;
 public final class ArtifactWallToken extends TokenImpl {
 
     public ArtifactWallToken() {
-        super("Wall", "colorless 0/4 Wall artifact creature token with defender");
+        super("Wall", "0/4 colorless Wall artifact creature token with defender");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.WALL);
