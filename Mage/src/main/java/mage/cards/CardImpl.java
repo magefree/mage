@@ -292,6 +292,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
      */
     @Override
     public Abilities<Ability> getAbilities(Game game) {
+        if (game == null) {
+            return abilities; // deck editor with empty game
+        }
         CardState cardState = game.getState().getCardState(this.getId());
         if (!cardState.hasLostAllAbilities() && (cardState.getAbilities() == null || cardState.getAbilities().isEmpty())) {
             return abilities;
