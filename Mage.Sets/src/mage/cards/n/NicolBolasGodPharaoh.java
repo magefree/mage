@@ -1,8 +1,5 @@
 package mage.cards.n;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
@@ -26,8 +23,11 @@ import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
- *
  * @author Will
  */
 public final class NicolBolasGodPharaoh extends CardImpl {
@@ -93,30 +93,30 @@ class NicolBolasGodPharaohPlusOneEffect extends OneShotEffect {
         Boolean applied = false;
         // Store for each player the cards to exile, that's important because all exile shall happen at the same time
         Map<UUID, Cards> cardsToExile = new HashMap<>();
+
         // Each player chooses 2 cards to discard
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             Player opponent = game.getPlayer(opponentId);
             if (opponent != null) {
                 int numberOfCardsToExile = Math.min(2, opponent.getHand().size());
-                if(numberOfCardsToExile > 0) {
-                	Target target = new TargetCardInHand(numberOfCardsToExile, new FilterCard());
-                	target.setRequired(true);
-                	if (opponent.chooseTarget(Outcome.Exile, target, source, game)) {
-                		Cards cards = new CardsImpl(target.getTargets());
-                		cardsToExile.put(opponentId, cards);
-                	}
-                }
-                else
-                {
-                	cardsToExile.put(opponentId, new CardsImpl());
+                if (numberOfCardsToExile > 0) {
+                    Target target = new TargetCardInHand(numberOfCardsToExile, new FilterCard());
+                    target.setRequired(true);
+                    if (opponent.chooseTarget(Outcome.Exile, target, source, game)) {
+                        Cards cards = new CardsImpl(target.getTargets());
+                        cardsToExile.put(opponentId, cards);
+                    }
+                } else {
+                    cardsToExile.put(opponentId, new CardsImpl());
                 }
             }
         }
+
         // Exile all chosen cards at the same time
         Cards cardsOpponentsChoseToExile = new CardsImpl();
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             Player opponent = game.getPlayer(opponentId);
-            if (opponent != null) {
+            if (opponent != null && cardsToExile.containsKey(opponentId)) {
                 cardsOpponentsChoseToExile.addAll(cardsToExile.get(opponentId));
                 opponent.moveCards(cardsOpponentsChoseToExile, Zone.EXILED, source, game);
                 applied = true;
@@ -156,13 +156,13 @@ class NicolBolasGodPharaohPlusTwoEffect extends OneShotEffect {
                     opponent.moveCards(card, Zone.EXILED, source, game);
                     if (!card.isLand()) {
                         ContinuousEffect effect = new NicolBolasGodPharaohFromExileEffect();
-                        effect.setTargetPointer(new FixedTarget(card.getId(), 
+                        effect.setTargetPointer(new FixedTarget(card.getId(),
                                 game.getState().getZoneChangeCounter(card.getId())));
                         game.addEffect(effect, source);
                         break;
                     }
                 }
-            } while (library.hasCards() 
+            } while (library.hasCards()
                     && card != null);
             return true;
         }
