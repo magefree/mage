@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.abilities.keywords;
 
 import mage.cards.Card;
@@ -199,18 +198,20 @@ public class HideawayTest extends CardTestPlayerBase {
     }
 
     /**
-     * Reported bug issue #3310: Shelldock's hideaway requirement is for any library to have 20 or fewer cards, it only allows itself to be activated
-     * sometimes when the owner of Shelldock's library has 20 or fewer cards, never the opponents is 20 or fewer
+     * Reported bug issue #3310: Shelldock's hideaway requirement is for any
+     * library to have 20 or fewer cards, it only allows itself to be activated
+     * sometimes when the owner of Shelldock's library has 20 or fewer cards,
+     * never the opponents is 20 or fewer
      */
     @Test
     public void shelldockIsleHideawayConditionOwnLibrary() {
 
-         /*
+        /*
          Shelldock Isle
          Land Hideaway
          {T}: Add {U}.
          {U}, {T}: You may play the exiled card without paying its mana cost if a library has twenty or fewer cards in it.
-        */
+         */
         String sIsle = "Shelldock Isle";
         String ulamog = "Ulamog's Crusher"; // {8} 8/8 annihilator 2 attacks each turn if able
 
@@ -234,20 +235,22 @@ public class HideawayTest extends CardTestPlayerBase {
     }
 
     /**
-     * Reported bug issue #3310: Shelldock's hideaway requirement is for any library to have 20 or fewer cards, it only allows itself to be activated
-     * sometimes when the owner of Shelldock's library has 20 or fewer cards, never the opponents is 20 or fewer
+     * Reported bug issue #3310: Shelldock's hideaway requirement is for any
+     * library to have 20 or fewer cards, it only allows itself to be activated
+     * sometimes when the owner of Shelldock's library has 20 or fewer cards,
+     * never the opponents is 20 or fewer
      *
      * NOTE: test is currently failing due to bug in code. see issue #3310
      */
     @Test
     public void shelldockIsleHideawayConditionOpponentsLibrary() {
 
-         /*
+        /*
          Shelldock Isle
          Land Hideaway
          {T}: Add {U}.
          {U}, {T}: You may play the exiled card without paying its mana cost if a library has twenty or fewer cards in it.
-        */
+         */
         String sIsle = "Shelldock Isle";
         String ulamog = "Ulamog's Crusher"; // {8} 8/8 annihilator 2 attacks each turn if able
         String bSable = "Bronze Sable"; // {2} 2/1 artifact creature
@@ -270,5 +273,47 @@ public class HideawayTest extends CardTestPlayerBase {
         assertLibraryCount(playerB, 3); // opponents library less than 20 so should be able to activate shelldock
         assertTappedCount("Island", true, 1);
         assertPermanentCount(playerA, ulamog, 1);
+    }
+
+    /**
+     * Watcher for tomorrow - Watcher of Tomorrow not working when been blinked
+     * by any source, like Ephemerate or Soulherder, still working if dies
+     * blocking.
+     */
+    @Test
+    public void blinkWatcherFortomorrow() {
+
+        /* Hideaway (This permanent enters the battlefield tapped" and
+           "When this permanent enters the battlefield, look at the top four cards of
+           your library. Exile one of them face down and put the rest on the bottom of
+           your library in any order. The exiled card gains 'Any player who has
+           controlled the permanent that exiled this card may look at this card in the
+           exile zone.'") */
+        // When Watcher for Tomorrow leaves the battlefield, put the exiled card into its owner's hand.
+        addCard(Zone.HAND, playerA, "Watcher for Tomorrow"); // Creature 2/1 - {1}{U}
+
+        // Exile target creature you control, then return it to the battlefield under its owner's control.
+        // Rebound
+        addCard(Zone.HAND, playerA, "Ephemerate"); // Instant {W}
+
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+
+        addCard(Zone.LIBRARY, playerA, "Silvercoat Lion", 4);
+        skipInitShuffling();
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Watcher for Tomorrow");
+        setChoice(playerA, "Silvercoat Lion");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Ephemerate", "Watcher for Tomorrow");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Watcher for Tomorrow", 1);
+        assertExileCount(playerA, "Ephemerate", 1);
+
+        assertHandCount(playerA, "Silvercoat Lion", 1);
+        assertExileCount(playerA, 2);
+        assertTapped("Watcher for Tomorrow", true);
     }
 }
