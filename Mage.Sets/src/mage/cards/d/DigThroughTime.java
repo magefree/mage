@@ -25,7 +25,7 @@ public final class DigThroughTime extends CardImpl {
         this.addAbility(new DelveAbility());
         
         // Look at the top seven cards of your library. Put two of them into your hand and the rest on the bottom of your library in any order.
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(7), false, new StaticValue(2), new FilterCard(), Zone.LIBRARY, false, false));
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(StaticValue.get(7), false, StaticValue.get(2), new FilterCard(), Zone.LIBRARY, false, false));
     }
 
     public DigThroughTime(final DigThroughTime card) {

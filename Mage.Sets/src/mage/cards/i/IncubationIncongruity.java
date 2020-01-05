@@ -30,8 +30,8 @@ public final class IncubationIncongruity extends SplitCard {
         // Incubation
         // Look at the top five cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
         this.getLeftHalfCard().getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(
-                new StaticValue(5), false,
-                new StaticValue(1), StaticFilters.FILTER_CARD_CREATURE_A,
+                StaticValue.get(5), false,
+                StaticValue.get(1), StaticFilters.FILTER_CARD_CREATURE_A,
                 Zone.LIBRARY, false, true, false,
                 Zone.HAND, false, false, false
         ).setBackInRandomOrder(true));

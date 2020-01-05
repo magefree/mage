@@ -31,7 +31,7 @@ public final class SalvageSlasher extends CardImpl {
 
         // Salvage Slasher gets +1/+0 for each artifact card in your graveyard.
         BoostSourceEffect effect = new BoostSourceEffect(new CardsInControllerGraveyardCount(new FilterArtifactCard()),
-                new StaticValue(0),
+                StaticValue.get(0),
                 Duration.WhileOnBattlefield);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }

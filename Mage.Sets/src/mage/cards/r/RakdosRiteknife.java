@@ -42,7 +42,7 @@ public final class RakdosRiteknife extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+0 for each blood counter on Rakdos Riteknife and has "{T}, Sacrifice a creature: Put a blood counter on Rakdos Riteknife."
-        SimpleStaticAbility staticAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(new CountersSourceCount(CounterType.BLOOD), new StaticValue(0)).setText("Equipped creature gets +1/+0 for each blood counter on {this}"));
+        SimpleStaticAbility staticAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(new CountersSourceCount(CounterType.BLOOD), StaticValue.get(0)).setText("Equipped creature gets +1/+0 for each blood counter on {this}"));
         SimpleActivatedAbility grantedAbility = new SimpleActivatedAbility(new RakdosRiteKnifeEffect(this.getId()), new TapSourceCost());
         grantedAbility.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         staticAbility.addEffect(new GainAbilityAttachedEffect(grantedAbility, AttachmentType.EQUIPMENT).setText("and has \"{T}, Sacrifice a creature: Put a blood counter on {this}.\""));

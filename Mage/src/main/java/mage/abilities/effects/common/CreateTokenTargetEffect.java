@@ -22,11 +22,11 @@ public class CreateTokenTargetEffect extends OneShotEffect {
     private boolean attacking;
 
     public CreateTokenTargetEffect(Token token) {
-        this(token, new StaticValue(1));
+        this(token, StaticValue.get(1));
     }
 
     public CreateTokenTargetEffect(Token token, int amount) {
-        this(token, new StaticValue(amount));
+        this(token, StaticValue.get(amount));
     }
 
     public CreateTokenTargetEffect(Token token, DynamicValue amount) {

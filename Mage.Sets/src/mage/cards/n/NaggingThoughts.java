@@ -22,7 +22,7 @@ public final class NaggingThoughts extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");
 
         // Look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(2), false, new StaticValue(1), new FilterCard(), Zone.GRAVEYARD, false, false));
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(StaticValue.get(2), false, StaticValue.get(1), new FilterCard(), Zone.GRAVEYARD, false, false));
 
         // Madness {1}{U}
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{1}{U}")));

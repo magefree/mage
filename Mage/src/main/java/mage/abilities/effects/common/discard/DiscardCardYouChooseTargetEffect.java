@@ -11,6 +11,7 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -31,16 +32,18 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
     private final DynamicValue numberCardsToDiscard;
     private boolean revealAllCards;
 
+    private static final FilterCard filterOneCard = new FilterCard("one card");
+
     public DiscardCardYouChooseTargetEffect() {
         this(new FilterCard("a card"));
     }
 
     public DiscardCardYouChooseTargetEffect(TargetController targetController) {
-        this(new FilterCard("a card"), targetController);
+        this(StaticFilters.FILTER_CARD_A, targetController);
     }
 
     public DiscardCardYouChooseTargetEffect(DynamicValue numberCardsToDiscard, TargetController targetController) {
-        this(numberCardsToDiscard, new FilterCard("cards"), targetController);
+        this(numberCardsToDiscard, StaticFilters.FILTER_CARD_CARDS, targetController);
     }
 
     public DiscardCardYouChooseTargetEffect(FilterCard filter) {
@@ -48,12 +51,11 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
     }
 
     public DiscardCardYouChooseTargetEffect(TargetController targetController, int numberCardsToReveal) {
-        this(new FilterCard("one card"), targetController,
-                new StaticValue(numberCardsToReveal, new StringBuilder(CardUtil.numberToText(numberCardsToReveal)).append(" cards").toString()));
+        this(filterOneCard, targetController, StaticValue.get(numberCardsToReveal));
     }
 
     public DiscardCardYouChooseTargetEffect(TargetController targetController, DynamicValue numberCardsToReveal) {
-        this(new FilterCard("one card"), targetController, numberCardsToReveal);
+        this(filterOneCard, targetController, numberCardsToReveal);
     }
 
     public DiscardCardYouChooseTargetEffect(FilterCard filter, TargetController targetController, DynamicValue numberCardsToReveal) {
@@ -63,13 +65,13 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
 
         this.revealAllCards = false;
         this.numberCardsToReveal = numberCardsToReveal;
-        this.numberCardsToDiscard = new StaticValue(1);
+        this.numberCardsToDiscard = StaticValue.get(1);
 
         staticText = this.setText();
     }
 
     public DiscardCardYouChooseTargetEffect(FilterCard filter, TargetController targetController) {
-        this(new StaticValue(1), filter, targetController);
+        this(StaticValue.get(1), filter, targetController);
     }
 
     public DiscardCardYouChooseTargetEffect(DynamicValue numberCardsToDiscard, FilterCard filter, TargetController targetController) {
@@ -97,54 +99,56 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
-        if (player != null && controller != null) {
-            if (revealAllCards) {
-                this.numberCardsToReveal = new StaticValue(player.getHand().size());
-            }
-            int numberToReveal = this.numberCardsToReveal.calculate(game, source, this);
-            if (numberToReveal > 0) {
-                Cards revealedCards = new CardsImpl();
-                numberToReveal = Math.min(player.getHand().size(), numberToReveal);
-                if (player.getHand().size() > numberToReveal) {
-                    TargetCardInHand chosenCards = new TargetCardInHand(numberToReveal, numberToReveal, new FilterCard("card in " + player.getName() + "'s hand"));
-                    chosenCards.setNotTarget(true);
-                    if (chosenCards.canChoose(player.getId(), game) && player.chooseTarget(Outcome.Discard, player.getHand(), chosenCards, source, game)) {
-                        if (!chosenCards.getTargets().isEmpty()) {
-                            List<UUID> targets = chosenCards.getTargets();
-                            for (UUID targetid : targets) {
-                                Card card = game.getCard(targetid);
-                                if (card != null) {
-                                    revealedCards.add(card);
-                                }
-                            }
-                        }
-                    }
-                } else {
-                    revealedCards.addAll(player.getHand());
-                }
-
-                Card sourceCard = game.getCard(source.getSourceId());
-                player.revealCards(sourceCard != null ? sourceCard.getIdName() + " (" + sourceCard.getZoneChangeCounter(game) + ')' : "Discard", revealedCards, game);
-
-                boolean result = true;
-                int filteredCardsCount = revealedCards.count(filter, source.getSourceId(), source.getControllerId(), game);
-                int numberToDiscard = Math.min(this.numberCardsToDiscard.calculate(game, source, this), filteredCardsCount);
-                if (numberToDiscard > 0) {
-                    TargetCard target = new TargetCard(numberToDiscard, Zone.HAND, filter);
-                    if (controller.choose(Outcome.Benefit, revealedCards, target, game)) {
-                        for (UUID targetId : target.getTargets()) {
-                            Card card = revealedCards.get(targetId, game);
-                            if (!player.discard(card, source, game)) {
-                                result = false;
-                            }
-                        }
-                    }
-                }
-                return result;
-            }
+        if (player == null || controller == null) {
+            return false;
+        }
+        if (revealAllCards) {
+            this.numberCardsToReveal = StaticValue.get(player.getHand().size());
+        }
+        int numberToReveal = this.numberCardsToReveal.calculate(game, source, this);
+        if (numberToReveal <= 0) {
             return true;
         }
-        return false;
+        Cards revealedCards = new CardsImpl();
+        numberToReveal = Math.min(player.getHand().size(), numberToReveal);
+        if (player.getHand().size() > numberToReveal) {
+            TargetCardInHand chosenCards = new TargetCardInHand(numberToReveal, numberToReveal, new FilterCard("card in " + player.getName() + "'s hand"));
+            chosenCards.setNotTarget(true);
+            if (chosenCards.canChoose(player.getId(), game) && player.chooseTarget(Outcome.Discard, player.getHand(), chosenCards, source, game)) {
+                if (!chosenCards.getTargets().isEmpty()) {
+                    List<UUID> targets = chosenCards.getTargets();
+                    for (UUID targetid : targets) {
+                        Card card = game.getCard(targetid);
+                        if (card != null) {
+                            revealedCards.add(card);
+                        }
+                    }
+                }
+            }
+        } else {
+            revealedCards.addAll(player.getHand());
+        }
+
+        Card sourceCard = game.getCard(source.getSourceId());
+        player.revealCards(sourceCard != null ? sourceCard.getIdName() + " (" + sourceCard.getZoneChangeCounter(game) + ')' : "Discard", revealedCards, game);
+
+        boolean result = true;
+        int filteredCardsCount = revealedCards.count(filter, source.getSourceId(), source.getControllerId(), game);
+        int numberToDiscard = Math.min(this.numberCardsToDiscard.calculate(game, source, this), filteredCardsCount);
+        if (numberToDiscard <= 0) {
+            return result;
+        }
+        TargetCard target = new TargetCard(numberToDiscard, Zone.HAND, filter);
+        if (!controller.choose(Outcome.Benefit, revealedCards, target, game)) {
+            return result;
+        }
+        for (UUID targetId : target.getTargets()) {
+            Card card = revealedCards.get(targetId, game);
+            if (!player.discard(card, source, game)) {
+                result = false;
+            }
+        }
+        return result;
     }
 
     @Override
@@ -169,7 +173,7 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
         } else {
             if (numberCardsToReveal instanceof StaticValue) {
                 sb.append(" reveals ");
-                sb.append(numberCardsToReveal.getMessage());
+                sb.append(CardUtil.numberToText(((StaticValue) numberCardsToReveal).getValue()) + " cards");
                 sb.append(" from their hand");
             } else {
                 sb.append(" reveals a number of cards from their hand equal to ");

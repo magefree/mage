@@ -57,7 +57,7 @@ public final class VivienReid extends CardImpl {
         // +1: Look at the top four cards of your library. You may reveal a creature or land card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
         this.addAbility(new LoyaltyAbility(
                 new LookLibraryAndPickControllerEffect(
-                        new StaticValue(4), false, new StaticValue(1), filter,
+                        StaticValue.get(4), false, StaticValue.get(1), filter,
                         Zone.LIBRARY, false, true, false, Zone.HAND, true, false, false)
                         .setBackInRandomOrder(true)
                         .setText("Look at the top four cards of your library. You may reveal a creature or land card from among them"

@@ -47,7 +47,7 @@ public final class GruulBeastmaster extends CardImpl {
 
         // Whenever Gruul Beastmaster attacks, another target creature you control gets +X/+0 until end of turn, where X is Gruul Beastmaster's power.
         Ability ability = new AttacksTriggeredAbility(new BoostTargetEffect(
-                xValue, StaticValue.getZeroValue(), Duration.EndOfTurn, true
+                xValue, StaticValue.get(0), Duration.EndOfTurn, true
         ), false);
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

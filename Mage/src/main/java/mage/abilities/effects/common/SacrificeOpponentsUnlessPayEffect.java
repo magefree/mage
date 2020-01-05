@@ -49,11 +49,11 @@ public class SacrificeOpponentsUnlessPayEffect extends OneShotEffect {
     }
 
     public SacrificeOpponentsUnlessPayEffect(Cost cost, FilterPermanent filter, int amount) {
-        this(cost, filter, new StaticValue(amount));
+        this(cost, filter, StaticValue.get(amount));
     }
 
     public SacrificeOpponentsUnlessPayEffect(int genericManaCost, FilterPermanent filter, int amount) {
-        this(new GenericManaCost(genericManaCost), filter, new StaticValue(amount));
+        this(new GenericManaCost(genericManaCost), filter, StaticValue.get(amount));
     }
 
     public SacrificeOpponentsUnlessPayEffect(Cost cost, FilterPermanent filter, DynamicValue amount) {

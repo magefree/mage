@@ -34,7 +34,7 @@ public final class RafterDemon extends CardImpl {
         // When Rafter Demon enters the battlefield, if its spectacle cost was paid, each opponent discards a card.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DiscardEachPlayerEffect(
-                        new StaticValue(1), false, TargetController.OPPONENT
+                        StaticValue.get(1), false, TargetController.OPPONENT
                 )), SpectacleCondition.instance,
                 "When {this} enters the battlefield, " +
                         "if its spectacle cost was paid, " +

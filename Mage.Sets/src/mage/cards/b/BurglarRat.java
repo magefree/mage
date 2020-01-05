@@ -27,7 +27,7 @@ public final class BurglarRat extends CardImpl {
         // When Burglar Rat enters the battlefield, each opponent discards a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new DiscardEachPlayerEffect(
-                        new StaticValue(1), false,
+                        StaticValue.get(1), false,
                         TargetController.OPPONENT
                 )
         ));

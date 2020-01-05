@@ -32,7 +32,7 @@ public final class GlintNestCrane extends CardImpl {
         // When Glint-Nest Crane enters the battlefield, look at the top four cards of your library. You may reveal an artifact card from among them and
         // put it into your hand. Put the rest on the bottom of your library in any order.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new LookLibraryAndPickControllerEffect(new StaticValue(4), false, new StaticValue(1),
+                new LookLibraryAndPickControllerEffect(StaticValue.get(4), false, StaticValue.get(1),
                         StaticFilters.FILTER_CARD_ARTIFACT_AN, Zone.LIBRARY, false, true, false, Zone.HAND, true)));
     }
 

@@ -25,7 +25,7 @@ public final class ViciousRumors extends CardImpl {
                 new DamagePlayersEffect(1, TargetController.OPPONENT)
         );
         this.getSpellAbility().addEffect(new DiscardEachPlayerEffect(
-                new StaticValue(1), false,
+                StaticValue.get(1), false,
                 TargetController.OPPONENT
         ));
         this.getSpellAbility().addEffect(

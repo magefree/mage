@@ -22,7 +22,7 @@ public class SetPlayerLifeSourceEffect extends OneShotEffect {
     protected DynamicValue amount;
 
     public SetPlayerLifeSourceEffect(int amount) {
-        this(new StaticValue(amount));
+        this(StaticValue.get(amount));
     }
 
     public SetPlayerLifeSourceEffect(DynamicValue amount) {

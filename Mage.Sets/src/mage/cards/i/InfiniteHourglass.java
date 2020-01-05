@@ -39,7 +39,7 @@ public final class InfiniteHourglass extends CardImpl {
                 Zone.BATTLEFIELD,
                 new BoostAllEffect(
                         new CountersSourceCount(CounterType.TIME),
-                        new StaticValue(0),
+                        StaticValue.get(0),
                         Duration.WhileOnBattlefield
                 )
         ));

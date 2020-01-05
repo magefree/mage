@@ -27,7 +27,7 @@ public final class SeekTheWilds extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
 
         // Look at the top four cards of your library. You may reveal a creature or land card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(4), false, new StaticValue(1), filter, false));
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(StaticValue.get(4), false, StaticValue.get(1), filter, false));
 
     }
 

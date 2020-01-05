@@ -31,14 +31,14 @@ public class DamageControllerEffect extends OneShotEffect {
 
     public DamageControllerEffect(int amount, boolean preventable, String whoDealDamageName) {
         super(Outcome.Damage);
-        this.amount = new StaticValue(amount);
+        this.amount = StaticValue.get(amount);
         this.preventable = preventable;
         this.sourceName = whoDealDamageName;
     }
 
     public DamageControllerEffect(int amount, boolean preventable) {
         super(Outcome.Damage);
-        this.amount = new StaticValue(amount);
+        this.amount = StaticValue.get(amount);
         this.preventable = preventable;
     }
 

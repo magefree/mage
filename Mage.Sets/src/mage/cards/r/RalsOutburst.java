@@ -24,7 +24,7 @@ public final class RalsOutburst extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(
-                new StaticValue(2), false, new StaticValue(1),
+                StaticValue.get(2), false, StaticValue.get(1),
                 StaticFilters.FILTER_CARD, Zone.GRAVEYARD, false, false
         ));
     }

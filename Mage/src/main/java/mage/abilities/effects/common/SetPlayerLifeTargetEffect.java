@@ -18,7 +18,7 @@ public class SetPlayerLifeTargetEffect extends OneShotEffect {
     protected DynamicValue amount;
 
     public SetPlayerLifeTargetEffect(int amount) {
-        this(new StaticValue(amount));
+        this(StaticValue.get(amount));
     }
 
     public SetPlayerLifeTargetEffect(DynamicValue amount) {

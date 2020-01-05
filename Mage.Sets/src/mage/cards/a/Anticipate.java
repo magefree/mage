@@ -21,7 +21,7 @@ public final class Anticipate extends CardImpl {
 
         // Look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect
-            (new StaticValue(3), false, new StaticValue(1), new FilterCard(), Zone.LIBRARY, false, false));
+            (StaticValue.get(3), false, StaticValue.get(1), new FilterCard(), Zone.LIBRARY, false, false));
     }
 
     public Anticipate(final Anticipate card) {

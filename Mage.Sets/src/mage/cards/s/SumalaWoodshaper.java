@@ -40,7 +40,7 @@ public final class SumalaWoodshaper extends CardImpl {
 
         // When Sumala Woodshaper enters the battlefield, look at the top four cards of your library. You may reveal a creature or enchantment card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryAndPickControllerEffect(
-                new StaticValue(4), false, new StaticValue(1), filter, Zone.LIBRARY, false,
+                StaticValue.get(4), false, StaticValue.get(1), filter, Zone.LIBRARY, false,
                 true, false, Zone.HAND, false, false, false
         ).setBackInRandomOrder(true), false));
     }

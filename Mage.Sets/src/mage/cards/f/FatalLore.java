@@ -79,7 +79,7 @@ class FatalLoreEffect extends OneShotEffect {
                         destroyCreature.setTargetPointer(new FixedTarget(targetId));
                         destroyCreature.apply(game, source);
                     }
-                    Effect opponentDrawsCards = new DrawCardTargetEffect(new StaticValue(3), false, true);
+                    Effect opponentDrawsCards = new DrawCardTargetEffect(StaticValue.get(3), false, true);
                     opponentDrawsCards.setTargetPointer(new FixedTarget(chosenOpponent.getId()));
                     opponentDrawsCards.apply(game, source);
                     return true;

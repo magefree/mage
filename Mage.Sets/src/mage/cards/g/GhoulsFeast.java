@@ -24,7 +24,7 @@ public final class GhoulsFeast extends CardImpl {
 
         // Target creature gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard.
         DynamicValue xValue = new CardsInControllerGraveyardCount(new FilterCreatureCard("creature card"));
-        this.getSpellAbility().addEffect(new BoostTargetEffect(xValue, new StaticValue(0), Duration.EndOfTurn, true));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(xValue, StaticValue.get(0), Duration.EndOfTurn, true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

@@ -39,7 +39,7 @@ public class MaximumHandSizeControllerEffect extends ContinuousEffectImpl {
     }
 
     public MaximumHandSizeControllerEffect(int handSize, Duration duration, HandSizeModification handSizeModification, TargetController targetController) {
-        this(new StaticValue(handSize), duration, handSizeModification, targetController);
+        this(StaticValue.get(handSize), duration, handSizeModification, targetController);
     }
 
     public MaximumHandSizeControllerEffect(DynamicValue handSize, Duration duration, HandSizeModification handSizeModification, TargetController targetController) {

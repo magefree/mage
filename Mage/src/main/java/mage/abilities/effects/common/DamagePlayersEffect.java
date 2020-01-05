@@ -21,15 +21,15 @@ public class DamagePlayersEffect extends OneShotEffect {
     private String sourceName = "{source}";
 
     public DamagePlayersEffect(int amount) {
-        this(Outcome.Damage, new StaticValue(amount));
+        this(Outcome.Damage, StaticValue.get(amount));
     }
 
     public DamagePlayersEffect(int amount, TargetController controller) {
-        this(Outcome.Damage, new StaticValue(amount), controller);
+        this(Outcome.Damage, StaticValue.get(amount), controller);
     }
 
     public DamagePlayersEffect(int amount, TargetController controller, String whoDealDamageName) {
-        this(Outcome.Damage, new StaticValue(amount), controller);
+        this(Outcome.Damage, StaticValue.get(amount), controller);
 
         this.sourceName = whoDealDamageName;
         setText(); // TODO: replace to @Override public String getText()

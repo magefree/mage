@@ -50,7 +50,7 @@ public final class HarshMentor extends CardImpl {
 class HarshMentorTriggeredAbility extends TriggeredAbilityImpl {
 
     HarshMentorTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(new StaticValue(2), true, "that player", true));
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(StaticValue.get(2), true, "that player", true));
     }
 
     HarshMentorTriggeredAbility(final HarshMentorTriggeredAbility ability) {

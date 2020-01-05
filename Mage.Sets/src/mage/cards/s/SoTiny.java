@@ -44,7 +44,7 @@ public final class SoTiny extends CardImpl {
 
         // Enchanted creature gets -2/-0. It gets -6/-0 instead as long as its controller has seven or more cards in their graveyard.
         this.addAbility(new SimpleStaticAbility(
-                new BoostEnchantedEffect(SoTinyValue.instance, StaticValue.getZeroValue())
+                new BoostEnchantedEffect(SoTinyValue.instance, StaticValue.get(0))
                         .setText("enchanted creature gets -2/-0. It gets -6/-0 instead as long as " +
                                 "its controller has seven or more cards in their graveyard")
         ));

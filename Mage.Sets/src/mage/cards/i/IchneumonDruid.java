@@ -52,7 +52,7 @@ public final class IchneumonDruid extends CardImpl {
 class IchneumonDruidAbility extends TriggeredAbilityImpl {
 
     public IchneumonDruidAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(new StaticValue(4), false, "that player", true));
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(StaticValue.get(4), false, "that player", true));
     }
 
     public IchneumonDruidAbility(final IchneumonDruidAbility ability) {

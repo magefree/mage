@@ -103,7 +103,7 @@ class ChandraTorchOfDefianceEffect extends OneShotEffect {
                     }
                 }
                 if (!cardWasCast) {
-                    new DamagePlayersEffect(Outcome.Damage, new StaticValue(2), TargetController.OPPONENT).apply(game, source);
+                    new DamagePlayersEffect(Outcome.Damage, StaticValue.get(2), TargetController.OPPONENT).apply(game, source);
                 }
             }
             return true;

@@ -35,7 +35,7 @@ public final class TearsOfRage extends CardImpl {
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(PhaseStep.DECLARE_ATTACKERS));
 
         // Attacking creatures you control get +X/+0 until end of turn, where X is the number of attacking creatures. Sacrifice those creatures at the beginning of the next end step.
-        BoostControlledEffect effect = new BoostControlledEffect(new AttackingCreatureCount("the number of attacking creatures"), new StaticValue(0),
+        BoostControlledEffect effect = new BoostControlledEffect(new AttackingCreatureCount("the number of attacking creatures"), StaticValue.get(0),
                 Duration.EndOfTurn, new FilterAttackingCreature("Attacking creatures"), false);
         effect.setLockedIn(true);
         getSpellAbility().addEffect(effect);

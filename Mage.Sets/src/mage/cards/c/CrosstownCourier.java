@@ -70,7 +70,7 @@ public final class CrosstownCourier extends CardImpl {
                 for (Effect effect : getEffects()) {
                     if (effect instanceof PutLibraryIntoGraveTargetEffect) {
                         effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                        ((PutLibraryIntoGraveTargetEffect) effect).setAmount(new StaticValue(event.getAmount()));
+                        ((PutLibraryIntoGraveTargetEffect) effect).setAmount(StaticValue.get(event.getAmount()));
                         return true;
                     }
                 }

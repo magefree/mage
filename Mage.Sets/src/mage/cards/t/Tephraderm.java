@@ -78,7 +78,7 @@ class TephradermCreatureDamageTriggeredAbility extends TriggeredAbilityImpl {
             for (Effect effect : getEffects()) {
                 if (effect instanceof DamageTargetEffect) {
                     effect.setTargetPointer(new FixedTarget(sourcePermanent.getId()));
-                    ((DamageTargetEffect) effect).setAmount(new StaticValue(event.getAmount()));
+                    ((DamageTargetEffect) effect).setAmount(StaticValue.get(event.getAmount()));
                 }
             }
             return true;
@@ -124,7 +124,7 @@ class TephradermSpellDamageTriggeredAbility extends TriggeredAbilityImpl {
             for (Effect effect : getEffects()) {
                 if (effect instanceof DamageTargetEffect) {
                     effect.setTargetPointer(new FixedTarget(sourceSpell.getControllerId()));
-                    ((DamageTargetEffect) effect).setAmount(new StaticValue(event.getAmount()));
+                    ((DamageTargetEffect) effect).setAmount(StaticValue.get(event.getAmount()));
                 }
             }
             return true;

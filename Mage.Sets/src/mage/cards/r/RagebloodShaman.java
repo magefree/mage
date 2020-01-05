@@ -36,7 +36,7 @@ public final class RagebloodShaman extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Other Minotaur creatures you control get +1/+1 and have trample.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(new StaticValue(1), new StaticValue(1), Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(StaticValue.get(1), StaticValue.get(1), Duration.WhileOnBattlefield, filter, true)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter, true)));
     }
 

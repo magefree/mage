@@ -35,7 +35,7 @@ public final class RalIzzetViceroy extends CardImpl {
         // +1: Look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.
         this.addAbility(new LoyaltyAbility(
                 new LookLibraryAndPickControllerEffect(
-                        new StaticValue(2), false, new StaticValue(1),
+                        StaticValue.get(2), false, StaticValue.get(1),
                         StaticFilters.FILTER_CARD, Zone.GRAVEYARD, false, false
                 ), 1
         ));

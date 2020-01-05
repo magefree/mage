@@ -37,7 +37,7 @@ public final class NullProfusion extends CardImpl {
         // Your maximum hand size is two.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new MaximumHandSizeControllerEffect(
-                        new StaticValue(2),
+                        StaticValue.get(2),
                         Duration.WhileOnBattlefield,
                         HandSizeModification.SET,
                         TargetController.YOU

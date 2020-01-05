@@ -34,7 +34,7 @@ public final class MemorialToUnity extends CardImpl {
 
         // {2}{G}, {T}, Sacrifice Memorial to Unity: Look at the top five cards of your library. You may reveal a creature card from among them and put it into your hand. Then put the rest on the bottom of your library in a random order.
         Effect effect = new LookLibraryAndPickControllerEffect(
-                new StaticValue(5), false, new StaticValue(1), new FilterCreatureCard("a creature card"), false, true
+                StaticValue.get(5), false, StaticValue.get(1), new FilterCreatureCard("a creature card"), false, true
         ).setBackInRandomOrder(true);
 
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}{G}"));

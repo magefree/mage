@@ -47,7 +47,7 @@ public final class OloroAgelessAscetic extends CardImpl {
 
         // At the beginning of your upkeep, if Oloro, Ageless Ascetic is in the command zone, you gain 2 life.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.COMMAND,
-                new GainLifeEffect(new StaticValue(2), "if {this} is in the command zone, you gain 2 life"), TargetController.YOU, false));
+                new GainLifeEffect(StaticValue.get(2), "if {this} is in the command zone, you gain 2 life"), TargetController.YOU, false));
     }
 
     public OloroAgelessAscetic(final OloroAgelessAscetic card) {

@@ -24,7 +24,7 @@ public final class SultaiAscendancy extends CardImpl {
 
         // At the beginning of your upkeep, look at the top two cards of your library. Put any number of them into your graveyard and the rest on top of your library in any order.
         Effect effect = new LookLibraryAndPickControllerEffect(
-                new StaticValue(2), false, new StaticValue(2), new FilterCard(), Zone.LIBRARY, true, false, true, Zone.GRAVEYARD, false);
+                StaticValue.get(2), false, StaticValue.get(2), new FilterCard(), Zone.LIBRARY, true, false, true, Zone.GRAVEYARD, false);
         effect.setText("look at the top two cards of your library. Put any number of them into your graveyard and the rest on top of your library in any order");
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, false));
     }

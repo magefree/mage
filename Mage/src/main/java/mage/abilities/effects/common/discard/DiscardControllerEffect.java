@@ -20,11 +20,11 @@ public class DiscardControllerEffect extends OneShotEffect {
     protected boolean randomDiscard;
 
     public DiscardControllerEffect(int amount) {
-        this(new StaticValue(amount));
+        this(StaticValue.get(amount));
     }
 
     public DiscardControllerEffect(int amount, boolean randomDiscard) {
-        this(new StaticValue(amount), randomDiscard);
+        this(StaticValue.get(amount), randomDiscard);
     }
 
     public DiscardControllerEffect(DynamicValue amount) {

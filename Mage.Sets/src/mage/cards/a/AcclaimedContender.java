@@ -59,7 +59,7 @@ public final class AcclaimedContender extends CardImpl {
         // When Acclaimed Contender enters the battlefield, if you control another Knight, look at the top five cards of your library. You may reveal a Knight, Aura, Equipment, or legendary artifact card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new LookLibraryAndPickControllerEffect(
-                        new StaticValue(5), false, new StaticValue(1), filter2, Zone.LIBRARY, false,
+                        StaticValue.get(5), false, StaticValue.get(1), filter2, Zone.LIBRARY, false,
                         true, false, Zone.HAND, true, false, false
                 ).setBackInRandomOrder(true)), condition, "When {this} enters the battlefield, " +
                 "if you control another Knight, look at the top five cards of your library. " +

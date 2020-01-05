@@ -29,7 +29,7 @@ public final class NimGrotesque extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Nim Grotesque gets +1/+0 for each artifact you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new PermanentsOnBattlefieldCount(new FilterControlledArtifactPermanent()), new StaticValue(0), Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new PermanentsOnBattlefieldCount(new FilterControlledArtifactPermanent()), StaticValue.get(0), Duration.WhileOnBattlefield)));
     }
 
     public NimGrotesque(final NimGrotesque card) {

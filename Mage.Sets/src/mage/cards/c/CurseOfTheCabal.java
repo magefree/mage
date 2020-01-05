@@ -131,7 +131,7 @@ class CurseOfTheCabalInterveningIfTriggeredAbility extends ConditionalIntervenin
 class CurseOfTheCabalTriggeredAbilityConditionalDelay extends AddCountersSourceEffect {
 
     public CurseOfTheCabalTriggeredAbilityConditionalDelay() {
-        super(CounterType.TIME.createInstance(), new StaticValue(2), false, true);
+        super(CounterType.TIME.createInstance(), StaticValue.get(2), false, true);
     }
 
     @Override

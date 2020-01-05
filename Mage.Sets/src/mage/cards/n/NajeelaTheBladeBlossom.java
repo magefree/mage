@@ -48,7 +48,7 @@ public final class NajeelaTheBladeBlossom extends CardImpl {
 
         // Whenever a Warrior attacks, you may have its controller create a 1/1 white Warrior creature token that's tapped and attacking.
         this.addAbility(new AttacksAllTriggeredAbility(
-                new CreateTokenTargetEffect(new WarriorToken(), new StaticValue(1), true, true)
+                new CreateTokenTargetEffect(new WarriorToken(), StaticValue.get(1), true, true)
                         .setText("you may have its controller create a 1/1 white Warrior creature token that's tapped and attacking"),
                 true, filter, SetTargetPointer.PLAYER, false, true
         ));

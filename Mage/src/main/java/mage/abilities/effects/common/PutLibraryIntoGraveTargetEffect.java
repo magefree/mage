@@ -19,7 +19,7 @@ public class PutLibraryIntoGraveTargetEffect extends OneShotEffect {
     private DynamicValue amount;
 
     public PutLibraryIntoGraveTargetEffect(int amount) {
-        this(new StaticValue(amount));
+        this(StaticValue.get(amount));
     }
 
     public PutLibraryIntoGraveTargetEffect(DynamicValue amount) {

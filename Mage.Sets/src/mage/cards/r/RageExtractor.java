@@ -66,7 +66,7 @@ class RageExtractorTriggeredAbility extends TriggeredAbilityImpl {
             if (spell != null) {
                 for (ManaCost cost : spell.getCard().getManaCost()) {
                     if (cost instanceof PhyrexianManaCost) {
-                        ((DamageTargetEffect)getEffects().get(0)).setAmount(new StaticValue(spell.getConvertedManaCost()));
+                        ((DamageTargetEffect)getEffects().get(0)).setAmount(StaticValue.get(spell.getConvertedManaCost()));
                         return true;
                     }
                 }

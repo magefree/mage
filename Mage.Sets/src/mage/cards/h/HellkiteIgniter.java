@@ -46,7 +46,7 @@ public final class HellkiteIgniter extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostSourceEffect(
                         new PermanentsOnBattlefieldCount(filter),
-                        new StaticValue(0),
+                        StaticValue.get(0),
                         Duration.EndOfTurn,
                         true),
                 new ManaCostsImpl("{1}{R}")));

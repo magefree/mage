@@ -17,7 +17,7 @@ public class ReinforceAbility extends SimpleActivatedAbility {
     private Cost cost;
 
     public ReinforceAbility(int count, Cost cost) {
-        this(new StaticValue(count), cost);
+        this(StaticValue.get(count), cost);
     }
 
     public ReinforceAbility(DynamicValue count, Cost cost) {

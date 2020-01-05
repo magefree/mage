@@ -34,7 +34,7 @@ public final class CaligoSkinWitch extends CardImpl {
         // When Caligo Skin-Witch enters the battlefield, if it was kicked, each opponent discards two cards.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DiscardEachPlayerEffect(
-                        new StaticValue(2),
+                        StaticValue.get(2),
                         false,
                         TargetController.OPPONENT
                 )),

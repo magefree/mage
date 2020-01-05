@@ -31,7 +31,7 @@ public final class ArterialFlow extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");
 
         // Each opponent discards two cards.
-        this.getSpellAbility().addEffect(new DiscardEachPlayerEffect(new StaticValue(2), false, TargetController.OPPONENT));
+        this.getSpellAbility().addEffect(new DiscardEachPlayerEffect(StaticValue.get(2), false, TargetController.OPPONENT));
         // If you control a Vampire, each opponent loses 2 life and you gain 2 life.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new LoseLifeOpponentsEffect(2), new PermanentsOnTheBattlefieldCondition(filter), 
                 "If you control a Vampire, each opponent loses 2 life"));

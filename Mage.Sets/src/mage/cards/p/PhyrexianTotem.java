@@ -106,7 +106,7 @@ class PhyrexianTotemTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(getSourceId())) {
             getEffects().get(0).setTargetPointer(new FixedTarget(getControllerId()));
-            ((SacrificeEffect) getEffects().get(0)).setAmount(new StaticValue(event.getAmount()));
+            ((SacrificeEffect) getEffects().get(0)).setAmount(StaticValue.get(event.getAmount()));
             return true;
         }
         return false;

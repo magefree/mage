@@ -27,24 +27,24 @@ public class DamageTargetEffect extends OneShotEffect {
     protected String sourceName = "{source}";
 
     public DamageTargetEffect(int amount) {
-        this(new StaticValue(amount), true);
+        this(StaticValue.get(amount), true);
     }
 
     public DamageTargetEffect(int amount, String whoDealDamageName) {
-        this(new StaticValue(amount), true);
+        this(StaticValue.get(amount), true);
         this.sourceName = whoDealDamageName;
     }
 
     public DamageTargetEffect(int amount, boolean preventable) {
-        this(new StaticValue(amount), preventable);
+        this(StaticValue.get(amount), preventable);
     }
 
     public DamageTargetEffect(int amount, boolean preventable, String targetDescription) {
-        this(new StaticValue(amount), preventable, targetDescription);
+        this(StaticValue.get(amount), preventable, targetDescription);
     }
 
     public DamageTargetEffect(int amount, boolean preventable, String targetDescription, String whoDealDamageName) {
-        this(new StaticValue(amount), preventable, targetDescription);
+        this(StaticValue.get(amount), preventable, targetDescription);
         this.sourceName = whoDealDamageName;
     }
 

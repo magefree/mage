@@ -27,11 +27,11 @@ public class DamageEverythingEffect extends OneShotEffect {
     private String sourceName = "{source}";
 
     public DamageEverythingEffect(int amount) {
-        this(new StaticValue(amount), new FilterCreaturePermanent());
+        this(StaticValue.get(amount), new FilterCreaturePermanent());
     }
 
     public DamageEverythingEffect(int amount, String whoDealDamageName) {
-        this(new StaticValue(amount), new FilterCreaturePermanent());
+        this(StaticValue.get(amount), new FilterCreaturePermanent());
 
         this.sourceName = whoDealDamageName;
         setText(); // TODO: replace to @Override public String getText()
@@ -42,7 +42,7 @@ public class DamageEverythingEffect extends OneShotEffect {
     }
 
     public DamageEverythingEffect(int amount, FilterPermanent filter) {
-        this(new StaticValue(amount), filter);
+        this(StaticValue.get(amount), filter);
     }
 
     public DamageEverythingEffect(DynamicValue amount, FilterPermanent filter) {

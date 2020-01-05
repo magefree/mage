@@ -37,7 +37,7 @@ public final class SkallaWolf extends CardImpl {
         // When Skalla Wolf enters the battlefield, look at the top five cards of your library. You may reveal a green card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new LookLibraryAndPickControllerEffect(
-                        new StaticValue(5), false, new StaticValue(1), filter,
+                        StaticValue.get(5), false, StaticValue.get(1), filter,
                         Zone.LIBRARY, false, true, false, Zone.HAND, true, false, false
                 ).setBackInRandomOrder(true).setText("look at the top five cards of your library. "
                         + "You may reveal a green card from among them and put it into your hand. "

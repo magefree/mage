@@ -20,7 +20,7 @@ public final class DrawnFromDreams extends CardImpl {
 
         // Look at the top seven cards of your library. Put two of them into your hand and the rest on the bottom of your library in a random order.
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(
-                new StaticValue(7), false, new StaticValue(2),
+                StaticValue.get(7), false, StaticValue.get(2),
                 StaticFilters.FILTER_CARD, Zone.LIBRARY, false, false
         ).setBackInRandomOrder(true));
     }

@@ -28,7 +28,7 @@ public class AddConditionalManaOfAnyColorEffect extends ManaEffect {
     private final boolean oneChoice;
 
     public AddConditionalManaOfAnyColorEffect(int amount, ConditionalManaBuilder manaBuilder) {
-        this(new StaticValue(amount), manaBuilder);
+        this(StaticValue.get(amount), manaBuilder);
     }
 
     public AddConditionalManaOfAnyColorEffect(DynamicValue amount, ConditionalManaBuilder manaBuilder) {

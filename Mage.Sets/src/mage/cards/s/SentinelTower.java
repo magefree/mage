@@ -80,7 +80,7 @@ class SentinelTowerTriggeredAbility extends SpellCastAllTriggeredAbility {
             }
             for (Effect effect : this.getEffects()) {
                 if (effect instanceof DamageTargetEffect) {
-                    ((DamageTargetEffect) effect).setAmount(new StaticValue(damageToDeal));
+                    ((DamageTargetEffect) effect).setAmount(StaticValue.get(damageToDeal));
                     return true;
                 }
             }

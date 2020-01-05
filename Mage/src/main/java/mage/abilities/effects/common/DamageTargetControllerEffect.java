@@ -21,11 +21,11 @@ public class DamageTargetControllerEffect extends OneShotEffect {
     protected boolean preventable;
 
     public DamageTargetControllerEffect(int amount) {
-        this(new StaticValue(amount), true);
+        this(StaticValue.get(amount), true);
     }
 
     public DamageTargetControllerEffect(int amount, boolean preventable) {
-        this(new StaticValue(amount), preventable);
+        this(StaticValue.get(amount), preventable);
     }
 
     public DamageTargetControllerEffect(DynamicValue amount) {

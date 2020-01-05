@@ -36,7 +36,7 @@ public class AddCountersTargetEffect extends OneShotEffect {
     }
 
     public AddCountersTargetEffect(Counter counter, Outcome outcome) {
-        this(counter, new StaticValue(0), outcome);
+        this(counter, StaticValue.get(0), outcome);
     }
 
     public AddCountersTargetEffect(Counter counter, DynamicValue amount, Outcome outcome) {

@@ -19,7 +19,7 @@ public final class DiabolicVision extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}{B}");
 
         // Look at the top five cards of your library. Put one of them into your hand and the rest on top of your library in any order.
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(5), false, new StaticValue(1), new FilterCard(), true, false));
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(StaticValue.get(5), false, StaticValue.get(1), new FilterCard(), true, false));
     }
 
     public DiabolicVision(final DiabolicVision card) {

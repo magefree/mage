@@ -21,7 +21,7 @@ public final class BloodcurdlingScream extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}");
 
         // Target creature gets +X/+0 until end of turn.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(ExileFromHandCostCardConvertedMana.instance, new StaticValue(0), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(ExileFromHandCostCardConvertedMana.instance, StaticValue.get(0), Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

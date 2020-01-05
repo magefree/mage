@@ -28,7 +28,7 @@ public final class SqueakingPieGrubfellows extends CardImpl {
 
         // Kinship - At the beginning of your upkeep, you may look at the top card of your library. If it shares a creature type with Squeaking Pie Grubfellows, you may reveal it.
         // If you do, each opponent discards a card.
-        this.addAbility(new KinshipAbility(new DiscardEachPlayerEffect(new StaticValue(1), false, TargetController.OPPONENT)));
+        this.addAbility(new KinshipAbility(new DiscardEachPlayerEffect(StaticValue.get(1), false, TargetController.OPPONENT)));
     }
 
     public SqueakingPieGrubfellows(final SqueakingPieGrubfellows card) {

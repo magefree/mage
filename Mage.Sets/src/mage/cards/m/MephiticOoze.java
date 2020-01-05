@@ -38,7 +38,7 @@ public final class MephiticOoze extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Mephitic Ooze gets +1/+0 for each artifact you control.
-        Effect effect = new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter), new StaticValue(0), Duration.WhileOnBattlefield);
+        Effect effect = new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter), StaticValue.get(0), Duration.WhileOnBattlefield);
         effect.setText("{this} gets +1/+0 for each artifact you control");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 

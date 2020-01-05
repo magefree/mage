@@ -32,7 +32,7 @@ public final class MercadiasDownfall extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
 
         // Each attacking creature gets +1/+0 until end of turn for each nonbasic land defending player controls.
-        this.getSpellAbility().addEffect(new BoostAllEffect(new DefendersNonBasicLandCount(), new StaticValue(0), Duration.EndOfTurn, new FilterAttackingCreature(), true, rule));
+        this.getSpellAbility().addEffect(new BoostAllEffect(new DefendersNonBasicLandCount(), StaticValue.get(0), Duration.EndOfTurn, new FilterAttackingCreature(), true, rule));
 
     }
 

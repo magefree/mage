@@ -48,7 +48,7 @@ public final class AzcantaTheSunkenRuin extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new LookLibraryAndPickControllerEffect(
-                        new StaticValue(4), false, new StaticValue(1),
+                        StaticValue.get(4), false, StaticValue.get(1),
                         filter, Zone.LIBRARY, false, true, true
                 ), new ManaCostsImpl<>("{2}{U}")
         );

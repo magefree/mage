@@ -119,7 +119,7 @@ class CurseOfShallowEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player attacker = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (attacker != null && attacker.chooseUse(outcome, "create a tapped 2/2 black Zombie creature token?", source, game)) {
-            Effect effect = new CreateTokenTargetEffect(new ZombieToken(), new StaticValue(1), true, false);
+            Effect effect = new CreateTokenTargetEffect(new ZombieToken(), StaticValue.get(1), true, false);
             effect.setTargetPointer(targetPointer);
             return effect.apply(game, source);
         }

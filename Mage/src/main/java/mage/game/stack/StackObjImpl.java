@@ -200,7 +200,7 @@ public abstract class StackObjImpl implements StackObject {
                     // build a target definition with exactly one possible target to select that replaces old target
                     Target tempTarget = target.copy();
                     if (target instanceof TargetAmount) {
-                        ((TargetAmount) tempTarget).setAmountDefinition(new StaticValue(target.getTargetAmount(targetId)));
+                        ((TargetAmount) tempTarget).setAmountDefinition(StaticValue.get(target.getTargetAmount(targetId)));
                     }
                     tempTarget.setMinNumberOfTargets(1);
                     tempTarget.setMaxNumberOfTargets(1);

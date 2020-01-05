@@ -70,7 +70,7 @@ class SoulshriekEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
-            ContinuousEffect boost = new BoostTargetEffect(new CardsInControllerGraveyardCount(Soulshriek.filterCard), new StaticValue(0), Duration.EndOfTurn);
+            ContinuousEffect boost = new BoostTargetEffect(new CardsInControllerGraveyardCount(Soulshriek.filterCard), StaticValue.get(0), Duration.EndOfTurn);
             boost.setTargetPointer(new FixedTarget(permanent, game));
             game.addEffect(boost, source);
             Effect sacrifice = new SacrificeTargetEffect("Sacrifice that creature at the beginning of the next end step", source.getControllerId());

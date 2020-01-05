@@ -39,7 +39,7 @@ public final class GrimFlayer extends CardImpl {
         // Whenever Grim Flayer deals combat damage to a player, look at the top three cards of your library. Put any number of them into your graveyard
         // and the rest back on top of your library in any order.
         Effect effect = new LookLibraryAndPickControllerEffect(
-                new StaticValue(3), false, new StaticValue(3), new FilterCard(), Zone.LIBRARY, true, false, true, Zone.GRAVEYARD, false);
+                StaticValue.get(3), false, StaticValue.get(3), new FilterCard(), Zone.LIBRARY, true, false, true, Zone.GRAVEYARD, false);
         effect.setText("look at the top three cards of your library. Put any number of them into your graveyard and the rest back on top of your library in any order");
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(effect, false));
 

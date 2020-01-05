@@ -5,24 +5,17 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class StaticValue implements DynamicValue {
 
+    private static final Map<Integer, StaticValue> staticValueMap = new HashMap();
+
     private final int value;
-    private final String message;
-    private static final StaticValue zeroValue = new StaticValue(0);
 
-    public StaticValue(int value) {
-        this(value, "");
-    }
-
-    public StaticValue(int value, String message) {
+    private StaticValue(int value) {
         this.value = value;
-        this.message = message;
-    }
-
-    public StaticValue(final StaticValue staticValue) {
-        this.value = staticValue.value;
-        this.message = staticValue.message;
     }
 
     @Override
@@ -32,7 +25,7 @@ public class StaticValue implements DynamicValue {
 
     @Override
     public StaticValue copy() {
-        return new StaticValue(this);
+        return this;
     }
 
     @Override
@@ -42,14 +35,15 @@ public class StaticValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return message;
+        return "";
     }
 
     public int getValue() {
         return value;
     }
 
-    public static StaticValue getZeroValue() {
-        return zeroValue;
+    public static StaticValue get(int value) {
+        staticValueMap.putIfAbsent(value, new StaticValue(value));
+        return staticValueMap.get(value);
     }
 }

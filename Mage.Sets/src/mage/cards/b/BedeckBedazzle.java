@@ -75,7 +75,7 @@ class BedazzleEffect extends OneShotEffect {
         if (permanent != null) {
             permanent.destroy(source.getSourceId(), game, false);
         }
-        Effect effect = new DamageTargetEffect(new StaticValue(2), true, "", true);
+        Effect effect = new DamageTargetEffect(StaticValue.get(2), true, "", true);
         effect.setTargetPointer(new FixedTarget(source.getTargets().get(1).getFirstTarget(), game));
         effect.apply(game, source);
         return true;

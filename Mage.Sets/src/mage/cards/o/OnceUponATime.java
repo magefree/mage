@@ -46,7 +46,7 @@ public final class OnceUponATime extends CardImpl {
 
         // Look at the top five cards of your library. You may reveal a creature or land card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(
-                new StaticValue(5), false, new StaticValue(1), filter,
+                StaticValue.get(5), false, StaticValue.get(1), filter,
                 Zone.LIBRARY, false, true, false, Zone.HAND,
                 true, false, false
         ).setBackInRandomOrder(true).setText("Look at the top five cards of your library. " +
