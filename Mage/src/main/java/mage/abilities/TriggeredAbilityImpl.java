@@ -169,6 +169,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                             }
                         }
                     }
+                    break;
                 case DESTROYED_PERMANENT:
                     if (isLeavesTheBattlefieldTrigger()) {
                         if (event.getType() == EventType.DESTROYED_PERMANENT) {
@@ -179,12 +180,13 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                             source = game.getLastKnownInformation(getSourceId(), event.getZone());
                         }
                     }
-
+                    break;
                 case PHASED_OUT:
                 case PHASED_IN:
                     if (this.zone == Zone.ALL || game.getLastKnownInformation(getSourceId(), zone) != null) {
                         return this.hasSourceObjectAbility(game, source, event);
                     }
+                    break;
             }
         }
         return super.isInUseableZone(game, source, event);

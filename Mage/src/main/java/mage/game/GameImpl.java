@@ -1918,8 +1918,7 @@ public abstract class GameImpl implements Game, Serializable {
             if (perm.hasSubtype(SubType.AURA, this)) {
                 //20091005 - 704.5n, 702.14c
                 if (perm.getAttachedTo() == null) {
-                    Card card = this.getCard(perm.getId());
-                    if (card != null && !card.isCreature()) { // no bestow creature
+                    if (!perm.isCreature() && !perm.getAbilities(this).containsClass(BestowAbility.class)) {
                         if (movePermanentToGraveyardWithInfo(perm)) {
                             somethingHappened = true;
                         }
