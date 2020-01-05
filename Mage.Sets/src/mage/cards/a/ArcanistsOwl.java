@@ -39,7 +39,7 @@ public final class ArcanistsOwl extends CardImpl {
                         Zone.LIBRARY, false, true, false, Zone.HAND,
                         true, false, false
                 ).setBackInRandomOrder(true).setText("Look at the top four cards of your library. " +
-                        "You may reveal an artifact or enchantment from among them and put it into your hand. " +
+                        "You may reveal an artifact or enchantment card from among them and put it into your hand. " +
                         "Put the rest on the bottom of your library in a random order.")
         ));
     }
