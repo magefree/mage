@@ -18,13 +18,11 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.GoblinRogueToken;
-import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -80,7 +78,7 @@ class WarrenWeirdingEffect extends OneShotEffect {
             return false;
         }
         FilterControlledPermanent filter = new FilterControlledPermanent("creature");
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
         filter.add(new ControllerIdPredicate(player.getId()));
         TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
 

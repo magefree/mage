@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -29,8 +28,8 @@ public final class CropSigil extends CardImpl {
     private static final FilterCard filterLand = new FilterCard("land card in a graveyard");
 
     static {
-        filterCreature.add(new CardTypePredicate(CardType.CREATURE));
-        filterLand.add(new CardTypePredicate(CardType.LAND));
+        filterCreature.add(CardType.CREATURE.getPredicate());
+        filterLand.add(CardType.LAND.getPredicate());
     }
 
     public CropSigil(UUID ownerId, CardSetInfo setInfo) {

@@ -9,7 +9,6 @@ import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetOpponent;
 
@@ -23,7 +22,7 @@ public final class Encroach extends CardImpl {
 
     static {
         filter.add(Predicates.not(new SupertypePredicate(SuperType.BASIC)));
-        filter.add(new CardTypePredicate(CardType.LAND));
+        filter.add(CardType.LAND.getPredicate());
     }
 
     public Encroach(UUID ownerId, CardSetInfo setInfo) {

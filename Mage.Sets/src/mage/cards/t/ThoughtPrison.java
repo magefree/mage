@@ -18,7 +18,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -64,7 +63,7 @@ class ThoughtPrisonImprintEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("nonland card");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
     }
 
     public ThoughtPrisonImprintEffect() {

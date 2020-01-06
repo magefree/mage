@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -51,8 +50,8 @@ class BaneOfProgressEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterPermanent();
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.ENCHANTMENT)));
+                CardType.ARTIFACT.getPredicate(),
+                CardType.ENCHANTMENT.getPredicate()));
     }
     public BaneOfProgressEffect() {
         super(Outcome.DestroyPermanent);

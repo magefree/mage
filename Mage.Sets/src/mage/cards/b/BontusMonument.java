@@ -18,7 +18,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import static mage.filter.StaticFilters.FILTER_SPELL_A_CREATURE;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
@@ -30,7 +29,7 @@ public final class BontusMonument extends CardImpl {
     private static final FilterCard filter = new FilterCard("black creature spells");
 
     static {
-        filter.add(Predicates.and(new ColorPredicate(ObjectColor.BLACK), new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.and(new ColorPredicate(ObjectColor.BLACK), CardType.CREATURE.getPredicate()));
     }
 
     public BontusMonument(UUID ownerId, CardSetInfo setInfo) {

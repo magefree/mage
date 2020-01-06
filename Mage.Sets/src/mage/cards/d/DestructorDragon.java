@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -24,7 +23,7 @@ public final class DestructorDragon extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("noncreature permanent");
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public DestructorDragon(UUID ownerId, CardSetInfo setInfo) {

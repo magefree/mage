@@ -16,7 +16,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -30,7 +29,7 @@ public final class MagmaVein extends CardImpl {
     
     static {
         filter1.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
-        filter2.add(new CardTypePredicate(CardType.LAND));
+        filter2.add(CardType.LAND.getPredicate());
     }
     
     public MagmaVein(UUID ownerId, CardSetInfo setInfo) {

@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -25,7 +24,7 @@ public final class NeurokProdigy extends CardImpl {
     private static final FilterCard filter = new FilterCard("an artifact card");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public NeurokProdigy(UUID ownerId, CardSetInfo setInfo) {

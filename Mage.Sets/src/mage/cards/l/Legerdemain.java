@@ -13,7 +13,6 @@ import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherTargetPredicate;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
@@ -28,7 +27,7 @@ public final class Legerdemain extends CardImpl {
     private static final FilterPermanent firstFilter = new FilterPermanent("artifact or creature");
     private static final FilterPermanent secondFilter = new FilterPermanent("another permanent that shares the type of artifact or creature");
     static {
-        firstFilter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.CREATURE)));
+        firstFilter.add(Predicates.or(CardType.ARTIFACT.getPredicate(), CardType.CREATURE.getPredicate()));
         secondFilter.add(new AnotherTargetPredicate(2));
         secondFilter.add(new SharesTypePredicate());
     }

@@ -15,7 +15,6 @@ import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -50,7 +49,7 @@ class SpreadingPlagueEffect extends OneShotEffect {
     static final FilterPermanent FILTER = new FilterPermanent("creature");
 
     static {
-        FILTER.add(new CardTypePredicate(CardType.CREATURE));
+        FILTER.add(CardType.CREATURE.getPredicate());
     }
 
     SpreadingPlagueEffect() {

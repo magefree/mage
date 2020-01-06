@@ -19,7 +19,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -32,8 +31,8 @@ public final class HalimarTidecaller extends CardImpl {
     private static final FilterCard filterCard = new FilterCard("card with awaken from your graveyard");
 
     static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.LAND.getPredicate());
+        filter.add(CardType.CREATURE.getPredicate());
         filterCard.add(new AbilityPredicate(AwakenAbility.class));
     }
 

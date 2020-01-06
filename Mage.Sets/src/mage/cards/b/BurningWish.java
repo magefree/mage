@@ -8,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -19,7 +18,7 @@ public final class BurningWish extends CardImpl {
     private static final FilterCard filter = new FilterCard("a sorcery card");
 
     static {
-        filter.add(new CardTypePredicate(CardType.SORCERY));
+        filter.add(CardType.SORCERY.getPredicate());
     }
 
     public BurningWish(UUID ownerId, CardSetInfo setInfo) {

@@ -16,7 +16,6 @@ import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -86,7 +85,7 @@ class VoidEffect extends OneShotEffect {
             }
             FilterCard filterCard = new FilterCard();
             filterCard.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, number));
-            filterCard.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+            filterCard.add(Predicates.not(CardType.LAND.getPredicate()));
 
             Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
             if (targetPlayer != null) {

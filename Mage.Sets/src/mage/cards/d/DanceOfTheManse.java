@@ -12,7 +12,6 @@ import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -59,9 +58,9 @@ enum DanceOfTheManseAdjuster implements TargetAdjuster {
         FilterCard filter = new FilterCard("artifact and/or non-Aura enchantment cards " +
                 "each with converted mana cost " + xValue + " or less from your graveyard");
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
+                CardType.ARTIFACT.getPredicate(),
                 Predicates.and(
-                        new CardTypePredicate(CardType.ENCHANTMENT),
+                        CardType.ENCHANTMENT.getPredicate(),
                         Predicates.not(new SubtypePredicate(SubType.AURA))
                 )
         ));

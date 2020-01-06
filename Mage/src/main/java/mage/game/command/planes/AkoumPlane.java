@@ -18,7 +18,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.EnchantedPredicate;
 import mage.game.command.Plane;
 import mage.target.Target;
@@ -36,7 +35,7 @@ public class AkoumPlane extends Plane {
 
     static {
         filter.add(Predicates.not(EnchantedPredicate.instance));
-        filterCard.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filterCard.add(CardType.ENCHANTMENT.getPredicate());
     }
 
     public AkoumPlane() {

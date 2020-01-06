@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 
 /**
@@ -24,7 +23,7 @@ public final class BygoneBishop extends CardImpl {
     private static final FilterSpell filterSpell = new FilterSpell("a creature spell with converted mana cost 3 or less");
 
     static {
-        filterSpell.add(new CardTypePredicate(CardType.CREATURE));
+        filterSpell.add(CardType.CREATURE.getPredicate());
         filterSpell.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
     }
 

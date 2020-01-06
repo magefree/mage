@@ -7,7 +7,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetSpell;
 
 /**
@@ -19,7 +18,7 @@ public final class Extinguish extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("sorcery spell");
 
     static {
-        filter.add(new CardTypePredicate(CardType.SORCERY));
+        filter.add(CardType.SORCERY.getPredicate());
     }
 
     public Extinguish(UUID ownerId, CardSetInfo setInfo) {

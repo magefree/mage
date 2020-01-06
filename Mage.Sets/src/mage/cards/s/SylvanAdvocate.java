@@ -19,7 +19,6 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  * @author fireshoes
@@ -31,7 +30,7 @@ public final class SylvanAdvocate extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("land creatures");
 
     static {
-        filter.add(new CardTypePredicate(CardType.LAND));
+        filter.add(CardType.LAND.getPredicate());
     }
 
     public SylvanAdvocate(UUID ownerId, CardSetInfo setInfo) {

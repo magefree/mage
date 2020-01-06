@@ -3,7 +3,6 @@ package mage.filter.common;
 
 import mage.constants.CardType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -17,7 +16,7 @@ public class FilterEnchantmentCard extends FilterCard {
 
     public FilterEnchantmentCard(String name) {
         super(name);
-        this.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        this.add(CardType.ENCHANTMENT.getPredicate());
     }
 
     public FilterEnchantmentCard(final FilterEnchantmentCard filter) {

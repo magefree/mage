@@ -8,7 +8,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetSpell;
 
 /**
@@ -20,7 +19,7 @@ public final class MysticDenial extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("creature or sorcery spell");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.SORCERY)));
+        filter.add(Predicates.or(CardType.CREATURE.getPredicate(), CardType.SORCERY.getPredicate()));
     }
 
     public MysticDenial(UUID ownerId, CardSetInfo setInfo) {

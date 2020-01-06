@@ -20,7 +20,6 @@ import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.command.Plane;
 import mage.game.events.DamagedPlayerEvent;
@@ -40,7 +39,7 @@ public class UndercityReachesPlane extends Plane {
     private static final FilterCard filter = new FilterCard("creature spells");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
     }
 
     public UndercityReachesPlane() {

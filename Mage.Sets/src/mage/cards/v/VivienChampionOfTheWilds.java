@@ -14,7 +14,6 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.*;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -33,7 +32,7 @@ public final class VivienChampionOfTheWilds extends CardImpl {
     private static final FilterCard filter = new FilterCard("creature spells");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
     }
 
     public VivienChampionOfTheWilds(UUID ownerId, CardSetInfo setInfo) {

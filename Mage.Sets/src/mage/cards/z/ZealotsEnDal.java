@@ -16,7 +16,6 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
@@ -29,7 +28,7 @@ public final class ZealotsEnDal extends CardImpl {
 
     static {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.WHITE)));
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
     }
 
     public ZealotsEnDal(UUID ownerId, CardSetInfo setInfo) {

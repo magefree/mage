@@ -23,7 +23,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -35,7 +34,7 @@ public final class NezahalPrimalTide extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("a noncreature spell");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public NezahalPrimalTide(UUID ownerId, CardSetInfo setInfo) {

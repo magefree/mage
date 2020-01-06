@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -22,7 +21,7 @@ public final class MoltenFrame extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creature");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public MoltenFrame(UUID ownerId, CardSetInfo setInfo) {

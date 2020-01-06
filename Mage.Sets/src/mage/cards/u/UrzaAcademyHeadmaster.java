@@ -33,7 +33,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.*;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.command.emblems.*;
@@ -91,13 +90,13 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
 
     static {
         filter1.add(new ControllerPredicate(TargetController.YOU));
-        filter2.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter2.add(Predicates.not(CardType.CREATURE.getPredicate()));
         filter3.add(Predicates.or(
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.LAND)));
+                CardType.CREATURE.getPredicate(),
+                CardType.LAND.getPredicate()));
         filter4.add(Predicates.or(
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.PLANESWALKER)));
+                CardType.CREATURE.getPredicate(),
+                CardType.PLANESWALKER.getPredicate()));
     }
 
     public UrzaAcademyHeadmasterRandomEffect(int selection, CardSetInfo setInfo) {

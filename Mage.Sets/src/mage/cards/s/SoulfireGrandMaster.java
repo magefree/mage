@@ -17,7 +17,6 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterObject;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -34,7 +33,7 @@ public final class SoulfireGrandMaster extends CardImpl {
     private static final FilterObject filter = new FilterObject("instant and sorcery spells you control");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.INSTANT), new CardTypePredicate(CardType.SORCERY)));
+        filter.add(Predicates.or(CardType.INSTANT.getPredicate(), CardType.SORCERY.getPredicate()));
     }
 
     public SoulfireGrandMaster(UUID ownerId, CardSetInfo setInfo) {
@@ -72,7 +71,7 @@ class SoulfireGrandMasterCastFromHandReplacementEffect extends ReplacementEffect
     private static final FilterCard filter = new FilterCard();
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.INSTANT), new CardTypePredicate(CardType.SORCERY)));
+        filter.add(Predicates.or(CardType.INSTANT.getPredicate(), CardType.SORCERY.getPredicate()));
     }
 
     private UUID spellId;

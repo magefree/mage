@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -26,8 +25,8 @@ public final class ArgivianBlacksmith extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("artifact creature");
     
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.ARTIFACT.getPredicate());
+        filter.add(CardType.CREATURE.getPredicate());
     }
 
     public ArgivianBlacksmith(UUID ownerId, CardSetInfo setInfo) {

@@ -12,10 +12,8 @@ import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.token.DovescapeToken;
-import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 
@@ -28,7 +26,7 @@ public final class Dovescape extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("a noncreature spell");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public Dovescape(UUID ownerId, CardSetInfo setInfo) {

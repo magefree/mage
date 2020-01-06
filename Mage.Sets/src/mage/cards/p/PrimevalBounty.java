@@ -17,7 +17,6 @@ import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.BeastToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -30,7 +29,7 @@ public final class PrimevalBounty extends CardImpl {
     private static final FilterSpell filterNonCreature = new FilterSpell("a noncreature spell");
 
     static {
-        filterNonCreature.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filterNonCreature.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public PrimevalBounty(UUID ownerId, CardSetInfo setInfo) {

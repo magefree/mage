@@ -19,7 +19,6 @@ import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -77,7 +76,7 @@ class GenesisHydraPutOntoBattlefieldEffect extends OneShotEffect {
                 Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, count));
                 controller.revealCards(source, cards, game);
                 FilterCard filter = new FilterPermanentCard("a nonland permanent card with converted mana cost " + count + " or less to put onto the battlefield");
-                filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+                filter.add(Predicates.not(CardType.LAND.getPredicate()));
                 filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, count + 1));
                 TargetCard target1 = new TargetCard(Zone.LIBRARY, filter);
                 target1.setRequired(false);

@@ -17,7 +17,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
@@ -30,10 +29,10 @@ public final class HazoretsMonument extends CardImpl {
     private static final FilterSpell filter2 = new FilterSpell("a creature spell");
 
     static {
-        filter.add(Predicates.and(new ColorPredicate(ObjectColor.RED), new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.and(new ColorPredicate(ObjectColor.RED), CardType.CREATURE.getPredicate()));
     }
     static {
-        filter2.add(new CardTypePredicate(CardType.CREATURE));
+        filter2.add(CardType.CREATURE.getPredicate());
     }
 
     public HazoretsMonument(UUID ownerId, CardSetInfo setInfo) {

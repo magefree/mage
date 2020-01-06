@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.TimingRule;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -23,8 +22,8 @@ public final class MysticRetrieval extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
+                CardType.INSTANT.getPredicate(),
+                CardType.SORCERY.getPredicate()));
     }
 
     public MysticRetrieval(UUID ownerId, CardSetInfo setInfo) {

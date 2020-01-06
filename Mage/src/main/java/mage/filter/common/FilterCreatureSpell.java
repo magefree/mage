@@ -6,7 +6,6 @@ package mage.filter.common;
 
 import mage.constants.CardType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -20,7 +19,7 @@ public class FilterCreatureSpell extends FilterSpell {
 
     public FilterCreatureSpell(String name) {
         super(name);
-        this.add(new CardTypePredicate(CardType.CREATURE));
+        this.add(CardType.CREATURE.getPredicate());
     }
 
 }

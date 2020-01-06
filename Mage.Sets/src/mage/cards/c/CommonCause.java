@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -27,7 +26,7 @@ public final class CommonCause extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Nonartifact creatures");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
+        filter.add(Predicates.not(CardType.ARTIFACT.getPredicate()));
     }
 
     public CommonCause(UUID ownerId, CardSetInfo setInfo) {
@@ -57,7 +56,7 @@ enum AllColorCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         FilterCreaturePermanent filter = new FilterCreaturePermanent("Nonartifact creatures");
-        filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
+        filter.add(Predicates.not(CardType.ARTIFACT.getPredicate()));
         ObjectColor allColor = new ObjectColor("WUBRG");
         for (Permanent thing : game.getBattlefield().getAllActivePermanents(filter, game)) {
             allColor = allColor.intersection(thing.getColor(game));

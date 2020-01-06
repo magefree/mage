@@ -17,7 +17,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -30,7 +29,7 @@ public final class NyxInfusion extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("enchantment");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filter.add(CardType.ENCHANTMENT.getPredicate());
     }
 
     public NyxInfusion(UUID ownerId, CardSetInfo setInfo) {

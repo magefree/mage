@@ -21,7 +21,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -80,7 +79,7 @@ class JeweledSpiritEffect extends OneShotEffect {
         if (controller != null && controller.choose(outcome, choice, game)) {
             FilterCard protectionFilter = new FilterCard();
             if (choice.isArtifactSelected()) {
-                protectionFilter.add(new CardTypePredicate(CardType.ARTIFACT));
+                protectionFilter.add(CardType.ARTIFACT.getPredicate());
             } else {
                 protectionFilter.add(new ColorPredicate(choice.getColor()));
             }

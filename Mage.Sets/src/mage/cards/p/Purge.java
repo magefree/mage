@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -22,7 +21,7 @@ public final class Purge extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creature or black creature");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
+        filter.add(Predicates.or(CardType.ARTIFACT.getPredicate(),
             (new ColorPredicate(ObjectColor.BLACK))));
     }
 

@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -26,9 +25,9 @@ public final class Nucklavee extends CardImpl {
 
     static {
         filterRed.add(new ColorPredicate(ObjectColor.RED));
-        filterRed.add(new CardTypePredicate(CardType.SORCERY));
+        filterRed.add(CardType.SORCERY.getPredicate());
         filterBlue.add(new ColorPredicate(ObjectColor.BLUE));
-        filterBlue.add(new CardTypePredicate(CardType.INSTANT));
+        filterBlue.add(CardType.INSTANT.getPredicate());
     }
 
     public Nucklavee(UUID ownerId, CardSetInfo setInfo) {

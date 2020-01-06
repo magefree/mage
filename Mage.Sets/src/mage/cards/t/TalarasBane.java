@@ -13,7 +13,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -53,7 +52,7 @@ class TalarasBaneEffect extends OneShotEffect {
         filter.add(Predicates.or(
                 new ColorPredicate(ObjectColor.GREEN),
                 new ColorPredicate(ObjectColor.WHITE)));
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
     }
 
     public TalarasBaneEffect() {

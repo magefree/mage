@@ -16,7 +16,6 @@ import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.DarettiConstructToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInGraveyardOrBattlefield;
@@ -34,8 +33,8 @@ public final class DarettiIngeniousIconoclast extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE)
+                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate()
         ));
     }
 

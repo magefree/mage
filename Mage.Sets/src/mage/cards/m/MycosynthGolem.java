@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -23,8 +22,8 @@ public final class MycosynthGolem extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("Artifact creature spells");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.ARTIFACT.getPredicate());
+        filter.add(CardType.CREATURE.getPredicate());
     }
 
     public MycosynthGolem(UUID ownerId, CardSetInfo setInfo) {

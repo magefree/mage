@@ -16,7 +16,6 @@ import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -31,8 +30,8 @@ public final class ApostlesBlessing extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE)));
+                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate()));
     }
 
     public ApostlesBlessing(UUID ownerId, CardSetInfo setInfo) {
@@ -79,7 +78,7 @@ class ApostlesBlessingEffect extends OneShotEffect {
             if (controller.choose(outcome, choice, game)) {
                 FilterCard protectionFilter = new FilterCard();
                 if (choice.isArtifactSelected()) {
-                    protectionFilter.add(new CardTypePredicate(CardType.ARTIFACT));
+                    protectionFilter.add(CardType.ARTIFACT.getPredicate());
                 } else {
                     protectionFilter.add(new ColorPredicate(choice.getColor()));
                 }

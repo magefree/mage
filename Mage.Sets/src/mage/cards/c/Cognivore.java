@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  * @author cbt33
@@ -25,7 +24,7 @@ public final class Cognivore extends CardImpl {
     static final FilterCard filter = new FilterCard("instant cards");
 
     static {
-        filter.add(new CardTypePredicate(CardType.INSTANT));
+        filter.add(CardType.INSTANT.getPredicate());
     }
 
     public Cognivore(UUID ownerId, CardSetInfo setInfo) {

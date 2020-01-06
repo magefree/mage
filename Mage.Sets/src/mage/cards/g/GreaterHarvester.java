@@ -19,7 +19,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -35,11 +34,11 @@ public final class GreaterHarvester extends CardImpl {
     static final FilterPermanent filter = new FilterPermanent("a permanent");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.ENCHANTMENT),
-                new CardTypePredicate(CardType.PLANESWALKER),
-                new CardTypePredicate(CardType.LAND)));
+        filter.add(Predicates.or(CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate(),
+                CardType.ENCHANTMENT.getPredicate(),
+                CardType.PLANESWALKER.getPredicate(),
+                CardType.LAND.getPredicate()));
     }
 
     public GreaterHarvester(UUID ownerId, CardSetInfo setInfo) {

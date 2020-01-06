@@ -13,7 +13,6 @@ import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -24,7 +23,7 @@ public final class GravitySphere extends CardImpl {
     static final private FilterPermanent filter = new FilterPermanent("All creatures");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
     }
 
     public GravitySphere(UUID ownerId, CardSetInfo setInfo) {

@@ -12,7 +12,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.EnchantedPredicate;
 
 /**
@@ -25,7 +24,7 @@ public final class GodhunterOctopus extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ENCHANTMENT),
+                CardType.ENCHANTMENT.getPredicate(),
                 EnchantedPredicate.instance));
     }
 

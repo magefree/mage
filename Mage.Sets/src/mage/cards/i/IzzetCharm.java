@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -24,7 +23,7 @@ public final class IzzetCharm extends CardImpl {
 
     static private final FilterSpell filter = new FilterSpell("noncreature spell");
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public IzzetCharm(UUID ownerId, CardSetInfo setInfo) {

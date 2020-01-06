@@ -12,7 +12,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -23,8 +22,8 @@ public final class GoblinElectromancer extends CardImpl {
     private static final FilterCard filter = new FilterCard("Instant and sorcery spells");
     static {
         filter.add(Predicates.or(
-            new CardTypePredicate(CardType.INSTANT),
-            new CardTypePredicate(CardType.SORCERY)
+            CardType.INSTANT.getPredicate(),
+            CardType.SORCERY.getPredicate()
         ));
     }
 

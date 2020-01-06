@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -24,7 +23,7 @@ public final class Magnivore extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("sorcery cards");
     static {
-        filter.add(new CardTypePredicate(CardType.SORCERY));
+        filter.add(CardType.SORCERY.getPredicate());
     }
 
     public Magnivore(UUID ownerId, CardSetInfo setInfo) {

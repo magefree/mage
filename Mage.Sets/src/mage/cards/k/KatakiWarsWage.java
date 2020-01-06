@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -25,7 +24,7 @@ public final class KatakiWarsWage extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("artifacts");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public KatakiWarsWage(UUID ownerId, CardSetInfo setInfo) {

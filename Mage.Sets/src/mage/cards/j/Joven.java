@@ -16,7 +16,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 /**
  *
@@ -27,7 +26,7 @@ public final class Joven extends CardImpl {
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("noncreature artifact");
     
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public Joven(UUID ownerId, CardSetInfo setInfo) {

@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -23,9 +22,9 @@ public final class AngelicPurge extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("artifact, creature, or enchantment");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.ENCHANTMENT)));
+        filter.add(Predicates.or(CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate(),
+                CardType.ENCHANTMENT.getPredicate()));
     }
 
     public AngelicPurge(UUID ownerId, CardSetInfo setInfo) {

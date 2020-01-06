@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.players.PlayerList;
@@ -55,7 +54,7 @@ class KynaiosAndTirosEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("a land card");
 
     static {
-        filter.add(new CardTypePredicate(CardType.LAND));
+        filter.add(CardType.LAND.getPredicate());
     }
 
     public KynaiosAndTirosEffect() {

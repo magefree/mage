@@ -19,7 +19,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
@@ -31,7 +30,7 @@ public final class EraOfInnovation extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact or Artificer");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
+        filter.add(Predicates.or(CardType.ARTIFACT.getPredicate(),
                 new SubtypePredicate(SubType.ARTIFICER)));
     }
 

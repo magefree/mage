@@ -8,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -19,7 +18,7 @@ public final class CunningWish extends CardImpl {
     private static final FilterCard filter = new FilterCard("an instant card");
 
     static {
-        filter.add(new CardTypePredicate(CardType.INSTANT));
+        filter.add(CardType.INSTANT.getPredicate());
     }
 
     public CunningWish(UUID ownerId, CardSetInfo setInfo) {

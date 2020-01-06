@@ -8,7 +8,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -19,7 +18,7 @@ public class ProwessAbility extends SpellCastControllerTriggeredAbility {
     private static final FilterSpell filterNonCreatureSpell = new  FilterSpell("noncreature spell");
 
     static {
-        filterNonCreatureSpell.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filterNonCreatureSpell.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public ProwessAbility() {

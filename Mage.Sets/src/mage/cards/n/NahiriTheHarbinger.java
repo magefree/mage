@@ -28,7 +28,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -46,10 +45,10 @@ public final class NahiriTheHarbinger extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("enchantment, tapped artifact, or tapped creature");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.ENCHANTMENT),
-                (Predicates.and(new CardTypePredicate(CardType.ARTIFACT),
+        filter.add(Predicates.or(CardType.ENCHANTMENT.getPredicate(),
+                (Predicates.and(CardType.ARTIFACT.getPredicate(),
                         TappedPredicate.instance)),
-                (Predicates.and(new CardTypePredicate(CardType.CREATURE),
+                (Predicates.and(CardType.CREATURE.getPredicate(),
                         TappedPredicate.instance))));
     }
 
@@ -88,8 +87,8 @@ class NahiriTheHarbingerEffect extends SearchEffect {
     private static final FilterCard filterCard = new FilterCard("artifact or creature card");
 
     static {
-        filterCard.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE)));
+        filterCard.add(Predicates.or(CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate()));
     }
 
     NahiriTheHarbingerEffect() {

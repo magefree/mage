@@ -20,7 +20,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -35,7 +34,7 @@ public final class TemporalDistortion extends CardImpl {
     private static final FilterPermanent filter2 = new FilterPermanent("permanents with hourglass counters on them");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.LAND), new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.or(CardType.LAND.getPredicate(), CardType.CREATURE.getPredicate()));
         filter2.add(new CounterPredicate(CounterType.HOURGLASS));
     }
 

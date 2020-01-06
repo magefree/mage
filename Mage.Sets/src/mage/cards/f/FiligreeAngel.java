@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -55,7 +54,7 @@ class FiligreeAngelEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterControlledPermanent();
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public FiligreeAngelEffect() {

@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -26,8 +25,8 @@ public final class HeraldOfThePantheon extends CardImpl {
     private static final FilterSpell filter2 = new FilterSpell("an enchantment spell");
     
     static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT)); 
-        filter2.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filter.add(CardType.ENCHANTMENT.getPredicate());
+        filter2.add(CardType.ENCHANTMENT.getPredicate());
     }
 
     public HeraldOfThePantheon(UUID ownerId, CardSetInfo setInfo) {

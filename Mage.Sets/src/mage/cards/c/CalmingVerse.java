@@ -13,7 +13,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledEnchantmentPermanent;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
@@ -49,7 +48,7 @@ class CalmingVerseEffect extends OneShotEffect {
     private static final FilterPermanent untappedLandFilter = new FilterPermanent("If you control an untapped land");
 
     static {
-        untappedLandFilter.add(new CardTypePredicate(CardType.LAND));
+        untappedLandFilter.add(CardType.LAND.getPredicate());
         untappedLandFilter.add(Predicates.not(TappedPredicate.instance));
     }
 

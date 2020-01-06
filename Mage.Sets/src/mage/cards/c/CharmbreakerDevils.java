@@ -19,7 +19,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
@@ -35,8 +34,8 @@ public final class CharmbreakerDevils extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
+                CardType.INSTANT.getPredicate(),
+                CardType.SORCERY.getPredicate()));
     }
 
     public CharmbreakerDevils(UUID ownerId, CardSetInfo setInfo) {
@@ -84,8 +83,8 @@ class CharmbreakerDevilsEffect extends OneShotEffect {
         if (player != null) {
             FilterCard filter = new FilterCard("instant or sorcery card");
             filter.add(Predicates.or(
-                    new CardTypePredicate(CardType.INSTANT),
-                    new CardTypePredicate(CardType.SORCERY)));
+                    CardType.INSTANT.getPredicate(),
+                    CardType.SORCERY.getPredicate()));
             Card[] cards = player.getGraveyard().getCards(filter, game).toArray(new Card[0]);
             if (cards.length > 0) {
                 Card card = cards[RandomUtil.nextInt(cards.length)];

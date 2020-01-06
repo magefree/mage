@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 import java.util.UUID;
 
@@ -23,8 +22,8 @@ public final class PeerThroughDepths extends CardImpl {
     private static final FilterCard filter = new FilterCard("an instant or sorcery card");
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.SORCERY),
-                new CardTypePredicate(CardType.INSTANT)));
+                CardType.SORCERY.getPredicate(),
+                CardType.INSTANT.getPredicate()));
     }
 
 

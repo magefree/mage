@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TurnPhase;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 
 import java.util.EnumSet;
@@ -28,7 +27,7 @@ public final class DovinsAcuity extends CardImpl {
     private static final FilterSpell filter = new FilterSpell();
 
     static {
-        filter.add(new CardTypePredicate(CardType.INSTANT));
+        filter.add(CardType.INSTANT.getPredicate());
     }
 
     public DovinsAcuity(UUID ownerId, CardSetInfo setInfo) {

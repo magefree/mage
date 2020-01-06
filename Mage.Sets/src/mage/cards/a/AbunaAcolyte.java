@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -27,7 +26,7 @@ public final class AbunaAcolyte extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creature");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public AbunaAcolyte(UUID ownerId, CardSetInfo setInfo) {

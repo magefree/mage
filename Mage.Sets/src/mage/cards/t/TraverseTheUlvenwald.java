@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
@@ -24,7 +23,7 @@ public final class TraverseTheUlvenwald extends CardImpl {
     private static final FilterCard filter = new FilterCard("a creature or land card");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.LAND)));
+        filter.add(Predicates.or(CardType.CREATURE.getPredicate(), CardType.LAND.getPredicate()));
     }
 
     public TraverseTheUlvenwald(UUID ownerId, CardSetInfo setInfo) {

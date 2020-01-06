@@ -16,7 +16,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -32,7 +31,7 @@ public final class ConfiscationCoup extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("creature or artifact");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.ARTIFACT)));
+        filter.add(Predicates.or(CardType.CREATURE.getPredicate(), CardType.ARTIFACT.getPredicate()));
     }
 
     public ConfiscationCoup(UUID ownerId, CardSetInfo setInfo) {

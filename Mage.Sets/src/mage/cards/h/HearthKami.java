@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.XCMCPermanentAdjuster;
 
@@ -25,7 +24,7 @@ public final class HearthKami extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("artifact with converted mana cost X");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public HearthKami(UUID ownerId, CardSetInfo setInfo) {

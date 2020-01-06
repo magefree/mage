@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.events.GameEvent.EventType;
 
 /**
@@ -23,7 +22,7 @@ public final class Serenity extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("artifacts and enchantments");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.ENCHANTMENT)));
+        filter.add(Predicates.or(CardType.ARTIFACT.getPredicate(), CardType.ENCHANTMENT.getPredicate()));
     }
     
     public Serenity(UUID ownerId, CardSetInfo setInfo) {

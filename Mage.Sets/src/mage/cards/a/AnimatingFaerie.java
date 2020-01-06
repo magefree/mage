@@ -14,7 +14,6 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -28,7 +27,7 @@ public final class AnimatingFaerie extends AdventureCard {
             = new FilterControlledArtifactPermanent("noncreature artifact you control");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public AnimatingFaerie(UUID ownerId, CardSetInfo setInfo) {

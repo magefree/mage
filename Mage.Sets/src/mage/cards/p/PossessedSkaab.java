@@ -17,7 +17,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -36,9 +35,9 @@ public final class PossessedSkaab extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY),
-                new CardTypePredicate(CardType.CREATURE)));
+                CardType.INSTANT.getPredicate(),
+                CardType.SORCERY.getPredicate(),
+                CardType.CREATURE.getPredicate()));
     }
 
     public PossessedSkaab(UUID ownerId, CardSetInfo setInfo) {

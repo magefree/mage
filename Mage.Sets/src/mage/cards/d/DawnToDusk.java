@@ -7,7 +7,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetEnchantmentPermanent;
 
@@ -21,7 +20,7 @@ public final class DawnToDusk extends CardImpl {
     private static final FilterCard filterCard = new FilterCard("enchantment card from your graveyard");
 
     static {
-        filterCard.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filterCard.add(CardType.ENCHANTMENT.getPredicate());
     }
 
     public DawnToDusk(UUID ownerId, CardSetInfo setInfo) {

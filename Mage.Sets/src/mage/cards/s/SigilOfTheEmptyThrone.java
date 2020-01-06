@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.AngelToken;
 
 /**
@@ -21,7 +20,7 @@ public final class SigilOfTheEmptyThrone extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("an enchantment spell");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filter.add(CardType.ENCHANTMENT.getPredicate());
     }
 
     public SigilOfTheEmptyThrone(UUID ownerId, CardSetInfo setInfo) {

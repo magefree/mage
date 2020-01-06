@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.SecondTargetPointer;
 
@@ -23,8 +22,8 @@ public final class PullFromTheDeep extends CardImpl {
     private static final FilterCard filterSorcery = new FilterCard("sorcery card from your graveyard");
 
     static {
-        filterInstant.add(new CardTypePredicate(CardType.INSTANT));
-        filterSorcery.add(new CardTypePredicate(CardType.SORCERY));
+        filterInstant.add(CardType.INSTANT.getPredicate());
+        filterSorcery.add(CardType.SORCERY.getPredicate());
     }
 
     public PullFromTheDeep(UUID ownerId, CardSetInfo setInfo) {

@@ -16,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
 
@@ -30,7 +29,7 @@ public final class InterplanarBeacon extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("a planeswalker spell");
 
     static {
-        filter.add(new CardTypePredicate(CardType.PLANESWALKER));
+        filter.add(CardType.PLANESWALKER.getPredicate());
     }
 
     public InterplanarBeacon(UUID ownerId, CardSetInfo setInfo) {

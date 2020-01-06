@@ -20,7 +20,6 @@ import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.token.MetallurgicSummoningsConstructToken;
 import mage.game.stack.Spell;
@@ -36,8 +35,8 @@ public final class MetallurgicSummonings extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
+                CardType.INSTANT.getPredicate(),
+                CardType.SORCERY.getPredicate()));
     }
 
     public MetallurgicSummonings(UUID ownerId, CardSetInfo setInfo) {

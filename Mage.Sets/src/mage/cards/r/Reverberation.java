@@ -8,7 +8,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
@@ -26,7 +25,7 @@ public final class Reverberation extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("sorcery spell");
 
     static {
-        filter.add(new CardTypePredicate(CardType.SORCERY));
+        filter.add(CardType.SORCERY.getPredicate());
     }
 
     public Reverberation(UUID ownerId, CardSetInfo setInfo) {

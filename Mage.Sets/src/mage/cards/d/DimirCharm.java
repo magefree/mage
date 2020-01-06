@@ -15,7 +15,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -35,7 +34,7 @@ public final class DimirCharm extends CardImpl {
 
     static {
         filterCreature.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
-        filterSorcery.add(new CardTypePredicate(CardType.SORCERY));
+        filterSorcery.add(CardType.SORCERY.getPredicate());
     }
 
     public DimirCharm(UUID ownerId, CardSetInfo setInfo) {

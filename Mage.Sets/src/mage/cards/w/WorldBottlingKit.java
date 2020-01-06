@@ -14,7 +14,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -78,7 +77,7 @@ class WorldBottlingKitEffect extends OneShotEffect {
             if (setChosen != null) {
                 game.informPlayers(controller.getLogName() + " has chosen set " + setChosen);
                 FilterPermanent filter = new FilterPermanent();
-                filter.add(Predicates.not(Predicates.and(new CardTypePredicate(CardType.LAND), new SupertypePredicate(SuperType.BASIC))));
+                filter.add(Predicates.not(Predicates.and(CardType.LAND.getPredicate(), new SupertypePredicate(SuperType.BASIC))));
                 List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
                 for (Permanent permanent : permanents) {
                     if (permanent.getExpansionSetCode().equals(setChosen)) {

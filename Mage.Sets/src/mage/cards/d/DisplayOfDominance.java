@@ -15,7 +15,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -36,7 +35,7 @@ public final class DisplayOfDominance extends CardImpl {
         filter.add(Predicates.or(
                 new ColorPredicate(ObjectColor.BLUE),
                 new ColorPredicate(ObjectColor.BLACK)));
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public DisplayOfDominance(UUID ownerId, CardSetInfo setInfo) {

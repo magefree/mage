@@ -5,14 +5,11 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
 import mage.abilities.effects.common.continuous.BecomesColorTargetEffect;
 import mage.abilities.effects.common.continuous.LoseArtifactTypeTargetEffect;
-import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
@@ -20,9 +17,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -34,7 +28,7 @@ public final class NeurokTransmuter extends CardImpl {
     static final FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creature");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public NeurokTransmuter(UUID ownerId, CardSetInfo setInfo) {

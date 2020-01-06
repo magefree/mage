@@ -15,7 +15,6 @@ import mage.constants.ComparisonType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.PowerPredicate;
 
 /**
@@ -26,7 +25,7 @@ public final class MayaelTheAnima extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("a creature card with power 5 or greater");
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 4));
     }
 

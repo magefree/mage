@@ -18,7 +18,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.ConstructToken;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetAnyTarget;
@@ -32,7 +31,7 @@ public final class Flamewright extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("creature with defender");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
         filter.add(new AbilityPredicate(DefenderAbility.class));
     }
 

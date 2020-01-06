@@ -14,7 +14,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.players.PlayerList;
@@ -54,7 +53,7 @@ class HypergenesisEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("an artifact, creature, enchantment, or land card");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.ENCHANTMENT), new CardTypePredicate(CardType.LAND)));
+        filter.add(Predicates.or(CardType.ARTIFACT.getPredicate(), CardType.CREATURE.getPredicate(), CardType.ENCHANTMENT.getPredicate(), CardType.LAND.getPredicate()));
     }
 
     HypergenesisEffect() {

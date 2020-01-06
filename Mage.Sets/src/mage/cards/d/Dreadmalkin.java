@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetControlledPermanent;
 
@@ -30,8 +29,8 @@ public final class Dreadmalkin extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.PLANESWALKER),
-                new CardTypePredicate(CardType.CREATURE)
+                CardType.PLANESWALKER.getPredicate(),
+                CardType.CREATURE.getPredicate()
         ));
         filter.add(AnotherPredicate.instance);
     }

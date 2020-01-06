@@ -15,7 +15,6 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -52,10 +51,10 @@ class WaveOfVitriolEffect extends OneShotEffect {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.ENCHANTMENT),
+                CardType.ARTIFACT.getPredicate(),
+                CardType.ENCHANTMENT.getPredicate(),
                 Predicates.and(
-                        new CardTypePredicate(CardType.LAND),
+                        CardType.LAND.getPredicate(),
                         Predicates.not(new SupertypePredicate(SuperType.BASIC))
                 )
         ));

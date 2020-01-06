@@ -3,7 +3,6 @@ package mage.filter.common;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  * @author ssouders412
@@ -16,7 +15,7 @@ public class FilterNoncreatureCard extends FilterCard {
 
     public FilterNoncreatureCard(String name) {
         super(name);
-        this.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        this.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public FilterNoncreatureCard(final FilterNoncreatureCard filter) {

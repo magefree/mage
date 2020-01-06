@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -58,7 +57,7 @@ class PatronOfTheOrochiEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterPermanent();
     static {
         filter.add(Predicates.or( new SubtypePredicate(SubType.FOREST),
-                                  Predicates.and(new CardTypePredicate(CardType.CREATURE),
+                                  Predicates.and(CardType.CREATURE.getPredicate(),
                                                  new ColorPredicate(ObjectColor.GREEN))
                 ));
     }

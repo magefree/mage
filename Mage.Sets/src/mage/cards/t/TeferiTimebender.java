@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -34,8 +33,8 @@ public final class TeferiTimebender extends CardImpl {
         // +2: Untap up to one target artifact or creature.
         FilterPermanent filter = new FilterPermanent("artifact or creature");
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE)));
+                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate()));
         LoyaltyAbility ability = new LoyaltyAbility(new UntapTargetEffect(), +2);
         ability.addTarget(new TargetPermanent(0, 1, filter, false));
         this.addAbility(ability);

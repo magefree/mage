@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.target.TargetSpell;
@@ -28,7 +27,7 @@ public final class Burnout extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("instant spell");
 
     static {
-            filter.add(new CardTypePredicate(CardType.INSTANT));
+            filter.add(CardType.INSTANT.getPredicate());
     }
 
     public Burnout(UUID ownerId, CardSetInfo setInfo) {

@@ -14,7 +14,6 @@ import mage.constants.*;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 
@@ -30,8 +29,8 @@ public final class RikuOfTwoReflections extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
+                CardType.INSTANT.getPredicate(),
+                CardType.SORCERY.getPredicate()));
         filterPermanent.add(Predicates.not(TokenPredicate.instance));
         filterPermanent.add(AnotherPredicate.instance);
 

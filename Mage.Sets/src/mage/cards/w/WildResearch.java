@@ -16,7 +16,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -31,8 +30,8 @@ public final class WildResearch extends CardImpl {
     private static final FilterCard filterInstant = new FilterCard("instant card");
 
     static {
-        filterEnchantment.add(new CardTypePredicate(CardType.ENCHANTMENT));
-        filterInstant.add(new CardTypePredicate(CardType.INSTANT));
+        filterEnchantment.add(CardType.ENCHANTMENT.getPredicate());
+        filterInstant.add(CardType.INSTANT.getPredicate());
     }
 
     public WildResearch(UUID ownerId, CardSetInfo setInfo) {

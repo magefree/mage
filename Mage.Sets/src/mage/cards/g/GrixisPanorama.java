@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -28,7 +27,7 @@ public final class GrixisPanorama extends CardImpl {
     private static final FilterCard filter = new FilterCard("a basic Island, Swamp, or Mountain card");
 
     static {
-        filter.add(new CardTypePredicate(CardType.LAND));
+        filter.add(CardType.LAND.getPredicate());
         filter.add(new SupertypePredicate(SuperType.BASIC));
         filter.add(Predicates.or(
                 new SubtypePredicate(SubType.ISLAND),

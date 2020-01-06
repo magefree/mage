@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -22,7 +21,7 @@ public final class Terror extends CardImpl {
     private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("nonartifact, nonblack creature");
 
     static {
-        FILTER.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
+        FILTER.add(Predicates.not(CardType.ARTIFACT.getPredicate()));
         FILTER.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 

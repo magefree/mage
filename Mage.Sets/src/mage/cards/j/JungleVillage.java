@@ -13,7 +13,6 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -59,7 +58,7 @@ public final class JungleVillage extends CardImpl {
             addCost(new TapSourceCost());
             addCost(new SacrificeSourceCost());
             FilterCard filter = new FilterCard("basic Mountain, Forest or Plains");
-            filter.add(new CardTypePredicate(CardType.LAND));
+            filter.add(CardType.LAND.getPredicate());
             List<Predicate<MageObject>> subtypePredicates = new ArrayList<>();
             subtypePredicates.add(new SubtypePredicate(SubType.PLAINS));
             subtypePredicates.add(new SubtypePredicate(SubType.MOUNTAIN));

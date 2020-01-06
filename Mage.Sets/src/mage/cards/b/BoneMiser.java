@@ -14,7 +14,6 @@ import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.ZombieToken;
 
 import java.util.UUID;
@@ -27,7 +26,7 @@ public final class BoneMiser extends CardImpl {
     private static final FilterCard filter = new FilterNonlandCard("a noncreature, nonland card");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public BoneMiser(UUID ownerId, CardSetInfo setInfo) {

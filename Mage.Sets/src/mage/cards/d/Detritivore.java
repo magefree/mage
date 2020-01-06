@@ -22,7 +22,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -102,7 +101,7 @@ class NonBasicLandsInOpponentsGraveyards implements DynamicValue {
     private static final FilterCard filter = new FilterCard("nonbasic land card");
 
     static {
-        filter.add(new CardTypePredicate(CardType.LAND));
+        filter.add(CardType.LAND.getPredicate());
         filter.add(Predicates.not(new SupertypePredicate(SuperType.BASIC)));
     }
 

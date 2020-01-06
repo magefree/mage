@@ -2,7 +2,6 @@
 package mage.filter.common;
 
 import mage.constants.CardType;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -16,7 +15,7 @@ public class FilterArtifactCreaturePermanent extends FilterCreaturePermanent {
 
     public FilterArtifactCreaturePermanent(String name) {
         super(name);
-        this.add(new CardTypePredicate(CardType.ARTIFACT));
+        this.add(CardType.ARTIFACT.getPredicate());
     }
 
     public FilterArtifactCreaturePermanent(final FilterArtifactCreaturePermanent filter) {

@@ -14,7 +14,6 @@ import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -32,7 +31,7 @@ public final class Commandeer extends CardImpl {
     private static final FilterSpell filterSpell = new FilterSpell("noncreature spell");
     static {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
-        filterSpell.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filterSpell.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public Commandeer(UUID ownerId, CardSetInfo setInfo) {

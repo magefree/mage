@@ -16,7 +16,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -74,7 +73,7 @@ class WildMammothEffect extends OneShotEffect {
                 int maxCreatures = 0;
                 boolean tie = false;
                 FilterPermanent filter = new FilterPermanent();
-                filter.add(new CardTypePredicate(CardType.CREATURE));
+                filter.add(CardType.CREATURE.getPredicate());
                 
                 for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                     Player player = game.getPlayer(playerId);

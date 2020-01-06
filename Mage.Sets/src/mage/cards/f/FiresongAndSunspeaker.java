@@ -17,7 +17,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.filter.FilterObject;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -33,7 +32,7 @@ public final class FiresongAndSunspeaker extends CardImpl {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));
-        filter.add(Predicates.or(new CardTypePredicate(CardType.INSTANT), new CardTypePredicate(CardType.SORCERY)));
+        filter.add(Predicates.or(CardType.INSTANT.getPredicate(), CardType.SORCERY.getPredicate()));
     }
 
     public FiresongAndSunspeaker(UUID ownerId, CardSetInfo setInfo) {

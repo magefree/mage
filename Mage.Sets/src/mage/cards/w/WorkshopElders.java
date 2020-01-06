@@ -20,7 +20,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactCreaturePermanent;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -36,7 +35,7 @@ public final class WorkshopElders extends CardImpl {
             = new FilterControlledArtifactPermanent("noncreature artifact you control");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public WorkshopElders(UUID ownerId, CardSetInfo setInfo) {

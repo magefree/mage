@@ -10,7 +10,6 @@ import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -72,7 +71,7 @@ class FiremindsForesightSearchEffect extends  OneShotEffect {
 
         for (int cmc=3; cmc > 0; cmc--) {
             FilterCard filter = new FilterCard("instant card with converted mana cost " + cmc);
-            filter.add(new CardTypePredicate(CardType.INSTANT));
+            filter.add(CardType.INSTANT.getPredicate());
             filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, cmc));
 
 

@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -24,9 +23,9 @@ public final class Magmaquake extends CardImpl {
     static {
         filter.add(Predicates.or(
                 Predicates.and(
-                    new CardTypePredicate(CardType.CREATURE),
+                    CardType.CREATURE.getPredicate(),
                     Predicates.not(new AbilityPredicate(FlyingAbility.class))),
-                new CardTypePredicate(CardType.PLANESWALKER)));
+                CardType.PLANESWALKER.getPredicate()));
     }
 
     public Magmaquake(UUID ownerId, CardSetInfo setInfo) {

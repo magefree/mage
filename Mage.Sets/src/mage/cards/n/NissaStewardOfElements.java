@@ -21,7 +21,6 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.TokenImpl;
@@ -96,8 +95,8 @@ class NissaStewardOfElementsEffect extends OneShotEffect {
         }
         int count = 1 + new CountersSourceCount(CounterType.LOYALTY).calculate(game, source, this);
         FilterPermanentCard filter = new FilterPermanentCard();
-        filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.LAND)));
+        filter.add(Predicates.or(CardType.CREATURE.getPredicate(),
+                CardType.LAND.getPredicate()));
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, count));
         Card card = controller.getLibrary().getFromTop(game);
         if (card != null) {

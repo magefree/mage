@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -23,7 +22,7 @@ public final class MoriokScavenger extends CardImpl {
     static final FilterCreatureCard filter = new FilterCreatureCard("artifact creature card from your graveyard");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public MoriokScavenger(UUID ownerId, CardSetInfo setInfo) {

@@ -18,7 +18,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -33,7 +32,7 @@ public final class PetrifiedWoodKin extends CardImpl {
     private static final FilterCard filter = new FilterCard("instants");
 
     static {
-        filter.add(new CardTypePredicate(CardType.INSTANT));
+        filter.add(CardType.INSTANT.getPredicate());
     }
 
     public PetrifiedWoodKin(UUID ownerId, CardSetInfo setInfo) {

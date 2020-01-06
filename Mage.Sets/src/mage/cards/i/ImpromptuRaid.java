@@ -24,7 +24,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -59,7 +58,7 @@ class ImpromptuRaidEffect extends OneShotEffect {
     private static final FilterCard filterPutInGraveyard = new FilterCard("noncreature card to put into your graveyard");
 
     static {
-        filterPutInGraveyard.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filterPutInGraveyard.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public ImpromptuRaidEffect() {

@@ -19,7 +19,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  * @author JRHerlehy
@@ -29,7 +28,7 @@ public final class GrowingRitesOfItlimoc extends CardImpl {
     private static final FilterCard filter = new FilterCard("a creature card");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
     }
 
     public GrowingRitesOfItlimoc(UUID ownerId, CardSetInfo setInfo) {

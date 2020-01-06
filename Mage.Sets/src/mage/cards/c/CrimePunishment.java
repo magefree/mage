@@ -12,7 +12,6 @@ import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInOpponentsGraveyard;
@@ -22,8 +21,8 @@ public final class CrimePunishment extends SplitCard {
     private static final FilterCard filter = new FilterCard("creature or enchantment card from an opponent's graveyard");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.ENCHANTMENT)));
+        filter.add(Predicates.or(CardType.CREATURE.getPredicate(),
+                CardType.ENCHANTMENT.getPredicate()));
     }
 
     public CrimePunishment(UUID ownerId, CardSetInfo setInfo) {

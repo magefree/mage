@@ -22,7 +22,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -36,7 +35,7 @@ public final class OjutaiExemplars extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("a noncreature spell");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public OjutaiExemplars(UUID ownerId, CardSetInfo setInfo) {

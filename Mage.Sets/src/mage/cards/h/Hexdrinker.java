@@ -12,7 +12,6 @@ import mage.cards.LevelerCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 
 import java.util.UUID;
@@ -25,7 +24,7 @@ public final class Hexdrinker extends LevelerCard {
     private static final FilterCard filter = new FilterCard("instants");
 
     static {
-        filter.add(new CardTypePredicate(CardType.INSTANT));
+        filter.add(CardType.INSTANT.getPredicate());
     }
 
     public Hexdrinker(UUID ownerId, CardSetInfo setInfo) {

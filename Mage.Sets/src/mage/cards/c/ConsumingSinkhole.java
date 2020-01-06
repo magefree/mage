@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
@@ -24,7 +23,7 @@ public final class ConsumingSinkhole extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("land creature");
 
     static {
-        filter.add(new CardTypePredicate(CardType.LAND));
+        filter.add(CardType.LAND.getPredicate());
     }
 
     public ConsumingSinkhole(UUID ownerId, CardSetInfo setInfo) {

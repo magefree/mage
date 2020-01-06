@@ -10,7 +10,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -53,7 +52,7 @@ class ReapIntellectEffect extends OneShotEffect {
     private static final FilterCard filterNonLands = new FilterCard("up to X nonland cards");
 
     static {
-        filterNonLands.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+        filterNonLands.add(Predicates.not(CardType.LAND.getPredicate()));
     }
 
     public ReapIntellectEffect() {

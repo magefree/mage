@@ -3,7 +3,6 @@ package mage.cards.c;
 
 import java.util.UUID;
 
-import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
@@ -20,9 +19,6 @@ import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.permanent.token.TokenImpl;
-import mage.game.permanent.token.Token;
 import mage.game.permanent.token.custom.CreatureToken;
 
 
@@ -34,7 +30,7 @@ public final class ChimericEgg extends CardImpl {
     private static final FilterSpell nonArtifactFilter = new FilterSpell("a nonartifact spell");
 
     static {
-        nonArtifactFilter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
+        nonArtifactFilter.add(Predicates.not(CardType.ARTIFACT.getPredicate()));
     }
 
     public ChimericEgg(UUID ownerId, CardSetInfo setInfo) {

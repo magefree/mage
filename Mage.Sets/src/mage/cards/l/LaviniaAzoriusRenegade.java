@@ -16,7 +16,6 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -88,7 +87,7 @@ class LaviniaAzoriusRenegadeReplacementEffect extends ContinuousRuleModifyingEff
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getPlayer(source.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
             FilterCard filter = new FilterCard();
-            filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+            filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
             filter.add(new ConvertedManaCostPredicate(ComparisonType.MORE_THAN, getLandCount(source, event, game)));
 
             Card card = game.getCard(event.getSourceId());

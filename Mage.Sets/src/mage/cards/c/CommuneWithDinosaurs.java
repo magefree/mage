@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
@@ -23,7 +22,7 @@ public final class CommuneWithDinosaurs extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.LAND),
+                CardType.LAND.getPredicate(),
                 new SubtypePredicate(SubType.DINOSAUR)
         ));
     }

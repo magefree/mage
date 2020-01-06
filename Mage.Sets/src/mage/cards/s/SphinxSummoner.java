@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -24,7 +23,7 @@ public final class SphinxSummoner extends CardImpl {
     private static final FilterCard filter = new FilterCard("artifact creature card");
 
     static {
-        filter.add(Predicates.and(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.and(CardType.ARTIFACT.getPredicate(), CardType.CREATURE.getPredicate()));
     }
 
     public SphinxSummoner(UUID ownerId, CardSetInfo setInfo) {

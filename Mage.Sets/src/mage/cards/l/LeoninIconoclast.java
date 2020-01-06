@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPermanent;
 
@@ -25,8 +24,8 @@ public final class LeoninIconoclast extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("enchantment creature an opponent controls");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.ENCHANTMENT.getPredicate());
+        filter.add(CardType.CREATURE.getPredicate());
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 

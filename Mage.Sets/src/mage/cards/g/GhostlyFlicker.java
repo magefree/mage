@@ -15,7 +15,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -30,9 +29,9 @@ public final class GhostlyFlicker extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.LAND),
-                new CardTypePredicate(CardType.ARTIFACT)));
+                CardType.CREATURE.getPredicate(),
+                CardType.LAND.getPredicate(),
+                CardType.ARTIFACT.getPredicate()));
     }
 
     public GhostlyFlicker(UUID ownerId, CardSetInfo setInfo) {

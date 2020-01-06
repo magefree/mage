@@ -3,7 +3,6 @@
 package mage.filter.common;
 
 import mage.constants.CardType;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -17,7 +16,7 @@ public class FilterControlledLandPermanent extends FilterControlledPermanent {
 
     public FilterControlledLandPermanent(String name) {
         super(name);
-        this.add(new CardTypePredicate(CardType.LAND));
+        this.add(CardType.LAND.getPredicate());
     }
 
     public FilterControlledLandPermanent(final FilterControlledLandPermanent filter) {

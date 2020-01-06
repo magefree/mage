@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
@@ -62,7 +61,7 @@ class MysticMeditationEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         FilterCard filter = new FilterCard("creature card to discard");
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
         if (controller != null
                 && controller.getHand().count(filter, game) > 0
                 && controller.chooseUse(Outcome.Discard, "Do you want to discard a creature card?  If you don't, you must discard 2 cards", source, game)) {

@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetArtifactPermanent;
 
 /**
@@ -23,7 +22,7 @@ public final class DrossScorpion extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creature");
     
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
     
     public DrossScorpion(UUID ownerId, CardSetInfo setInfo) {

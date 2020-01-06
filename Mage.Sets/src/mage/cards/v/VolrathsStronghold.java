@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -26,7 +25,7 @@ public final class VolrathsStronghold extends CardImpl {
     private static final FilterCard filter = new FilterCard("creature card from your graveyard");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
     }
 
     public VolrathsStronghold(UUID ownerId, CardSetInfo setInfo) {

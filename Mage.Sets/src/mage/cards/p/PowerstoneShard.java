@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.NamePredicate;
 
 /**
@@ -22,7 +21,7 @@ public final class PowerstoneShard extends CardImpl {
 
     static {
         filter.add(new NamePredicate("Powerstone Shard"));
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public PowerstoneShard(UUID ownerId, CardSetInfo setInfo) {

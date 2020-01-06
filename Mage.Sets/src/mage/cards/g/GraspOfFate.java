@@ -16,7 +16,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -65,7 +64,7 @@ enum GraspOfFateAdjuster implements TargetAdjuster {
             }
             FilterPermanent filter = new FilterPermanent("nonland permanent from opponent " + opponent.getLogName());
             filter.add(new ControllerIdPredicate(opponentId));
-            filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+            filter.add(Predicates.not(CardType.LAND.getPredicate()));
             TargetPermanent target = new TargetPermanent(0, 1, filter, false);
             ability.addTarget(target);
         }

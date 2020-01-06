@@ -18,7 +18,6 @@ import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPlayer;
 
 /**
@@ -33,7 +32,7 @@ public final class HandOfThePraetors extends CardImpl {
     static {
         filter.add(new AbilityPredicate(InfectAbility.class));
         filterSpell.add(new AbilityPredicate(InfectAbility.class));
-        filterSpell.add(new CardTypePredicate(CardType.CREATURE));
+        filterSpell.add(CardType.CREATURE.getPredicate());
     }
 
     public HandOfThePraetors (UUID ownerId, CardSetInfo setInfo) {

@@ -16,7 +16,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -32,7 +31,7 @@ public final class ArcumDagsson extends CardImpl {
     private static final FilterPermanent filter = new FilterArtifactPermanent("artifact creature");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
     }
 
     public ArcumDagsson(UUID ownerId, CardSetInfo setInfo) {
@@ -64,7 +63,7 @@ class ArcumDagssonEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterArtifactCard("noncreature artifact card");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     ArcumDagssonEffect() {

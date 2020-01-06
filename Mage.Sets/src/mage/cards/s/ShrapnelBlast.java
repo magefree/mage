@@ -8,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetAnyTarget;
 
@@ -20,7 +19,7 @@ public final class ShrapnelBlast extends CardImpl {
     private static final FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("an artifact");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(CardType.ARTIFACT.getPredicate());
     }
 
     public ShrapnelBlast(UUID ownerId, CardSetInfo setInfo) {

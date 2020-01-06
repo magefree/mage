@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -16,15 +15,15 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.*;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class WorldQueller extends CardImpl {
@@ -112,7 +111,7 @@ class WorldQuellerEffect extends OneShotEffect {
             }
             if (type != null) {
                 FilterControlledPermanent filter = new FilterControlledPermanent("permanent you control of type " + type.toString());
-                filter.add(new CardTypePredicate(type));
+                filter.add(type.getPredicate());
 
                 TargetPermanent target = new TargetControlledPermanent(1, 1, filter, false);
                 target.setNotTarget(true);

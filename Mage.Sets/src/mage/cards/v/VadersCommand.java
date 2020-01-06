@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCreaturePermanent;
@@ -28,8 +27,8 @@ public final class VadersCommand extends CardImpl {
     private static final FilterCreaturePermanent filterNonArtifact = new FilterCreaturePermanent("nonartifact creature");
 
     static {
-        filterPlaneswalker.add(new CardTypePredicate(CardType.PLANESWALKER));
-        filterNonArtifact.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
+        filterPlaneswalker.add(CardType.PLANESWALKER.getPredicate());
+        filterNonArtifact.add(Predicates.not(CardType.ARTIFACT.getPredicate()));
     }
 
     public VadersCommand(UUID ownerId, CardSetInfo setInfo) {

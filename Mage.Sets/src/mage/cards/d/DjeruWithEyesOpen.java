@@ -18,7 +18,6 @@ import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -33,7 +32,7 @@ public final class DjeruWithEyesOpen extends CardImpl {
     private static final FilterCard filter = new FilterCard("planeswalker card");
 
     static {
-        filter.add(new CardTypePredicate(CardType.PLANESWALKER));
+        filter.add(CardType.PLANESWALKER.getPredicate());
     }
 
     public DjeruWithEyesOpen(UUID ownerId, CardSetInfo setInfo) {

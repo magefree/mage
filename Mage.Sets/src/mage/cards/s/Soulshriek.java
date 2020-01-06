@@ -18,7 +18,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -33,7 +32,7 @@ public class Soulshriek extends CardImpl {
     protected static final FilterCard filterCard = new FilterCard("creature cards");
 
     static {
-        filterCard.add(new CardTypePredicate(CardType.CREATURE));
+        filterCard.add(CardType.CREATURE.getPredicate());
     }
 
     public Soulshriek(UUID ownerId, CardSetInfo setInfo) {

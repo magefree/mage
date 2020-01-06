@@ -12,7 +12,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -30,7 +29,7 @@ public final class CruelRevival extends CardImpl {
     private static final FilterCard filter2 = new FilterCard("Zombie card from your graveyard");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(CardType.CREATURE.getPredicate());
         filter.add(Predicates.not(new SubtypePredicate(SubType.ZOMBIE)));
         filter2.add(new SubtypePredicate(SubType.ZOMBIE));
     }

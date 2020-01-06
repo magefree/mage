@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -27,7 +26,7 @@ public final class InvasiveSurgery extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("sorcery spell");
 
     static {
-        filter.add(new CardTypePredicate(CardType.SORCERY));
+        filter.add(CardType.SORCERY.getPredicate());
     }
 
     public InvasiveSurgery(UUID ownerId, CardSetInfo setInfo) {

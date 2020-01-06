@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
@@ -26,7 +25,7 @@ public final class ReclusiveWight extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another nonland permanent");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
         filter.add(AnotherPredicate.instance);
     }
 

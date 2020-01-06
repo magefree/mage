@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetPermanent;
 
@@ -23,10 +22,10 @@ public final class StreamOfAcid extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new CardTypePredicate(CardType.LAND),
+                CardType.LAND.getPredicate(),
                 Predicates.and(
                     Predicates.not(new ColorPredicate(ObjectColor.BLACK)),
-                    new CardTypePredicate(CardType.CREATURE))));
+                    CardType.CREATURE.getPredicate())));
     }
 
     public StreamOfAcid(UUID ownerId, CardSetInfo setInfo) {

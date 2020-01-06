@@ -15,7 +15,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -28,8 +27,8 @@ public final class UnityOfTheDroids extends CardImpl {
     private static final FilterCreaturePermanent nonArtifactCreatureFilter = new FilterCreaturePermanent("nonartifact creature");
 
     static {
-        artifactCreatureFilter.add(new CardTypePredicate(CardType.ARTIFACT));
-        nonArtifactCreatureFilter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
+        artifactCreatureFilter.add(CardType.ARTIFACT.getPredicate());
+        nonArtifactCreatureFilter.add(Predicates.not(CardType.ARTIFACT.getPredicate()));
 
     }
 

@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  * @author magenoxx_at_gmail.com
@@ -24,7 +23,7 @@ public final class HypersonicDragon extends CardImpl {
     private static final FilterCard filter = new FilterCard("sorcery spells");
     
     static {
-        filter.add(new CardTypePredicate(CardType.SORCERY));
+        filter.add(CardType.SORCERY.getPredicate());
     }
 
     public HypersonicDragon(UUID ownerId, CardSetInfo setInfo) {
