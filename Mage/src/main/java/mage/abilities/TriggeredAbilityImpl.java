@@ -1,7 +1,5 @@
 package mage.abilities;
 
-import java.util.Locale;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.effects.Effect;
 import mage.constants.AbilityType;
@@ -13,6 +11,9 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.Locale;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -155,39 +156,37 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
          * latter triggers trigger from the game state after the move where the
          * Kozilek card is itself and has the ability.
          */
-        if (event != null && event.getTargetId() != null && event.getTargetId().equals(getSourceId())) {
-            switch (event.getType()) {
-                case ZONE_CHANGE:
-                    ZoneChangeEvent zce = (ZoneChangeEvent) event;
-                    if (event.getTargetId().equals(getSourceId()) && !zce.getToZone().isPublicZone()) {
-                        // If an ability triggers when the object that has it is put into a hidden zone from a graveyard,
-                        // that ability triggers from the graveyard, (such as Golgari Brownscale),
-                        // Yixlid Jailer will prevent that ability from triggering.
-                        if (zce.getFromZone().match(Zone.GRAVEYARD)) {
-                            if (!CardUtil.cardHadAbility(this, game.getLastKnownInformationCard(getSourceId(), zce.getFromZone()), getSourceId(), game)) {
-                                return false;
-                            }
+        if (event == null || event.getTargetId() == null || !event.getTargetId().equals(getSourceId())) {
+            return super.isInUseableZone(game, source, event);
+        }
+        switch (event.getType()) {
+            case ZONE_CHANGE:
+                ZoneChangeEvent zce = (ZoneChangeEvent) event;
+                if (event.getTargetId().equals(getSourceId()) && !zce.getToZone().isPublicZone()) {
+                    // If an ability triggers when the object that has it is put into a hidden zone from a graveyard,
+                    // that ability triggers from the graveyard, (such as Golgari Brownscale),
+                    // Yixlid Jailer will prevent that ability from triggering.
+                    if (zce.getFromZone().match(Zone.GRAVEYARD)) {
+                        if (!CardUtil.cardHadAbility(this, game.getLastKnownInformationCard(getSourceId(), zce.getFromZone()), getSourceId(), game)) {
+                            return false;
                         }
                     }
-                    break;
-                case DESTROYED_PERMANENT:
-                    if (isLeavesTheBattlefieldTrigger()) {
-                        if (event.getType() == EventType.DESTROYED_PERMANENT) {
-                            source = game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD);
-                        } else if (((ZoneChangeEvent) event).getTarget() != null) {
-                            source = ((ZoneChangeEvent) event).getTarget();
-                        } else {
-                            source = game.getLastKnownInformation(getSourceId(), event.getZone());
-                        }
+                }
+            case DESTROYED_PERMANENT:
+                if (isLeavesTheBattlefieldTrigger()) {
+                    if (event.getType() == EventType.DESTROYED_PERMANENT) {
+                        source = game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD);
+                    } else if (((ZoneChangeEvent) event).getTarget() != null) {
+                        source = ((ZoneChangeEvent) event).getTarget();
+                    } else {
+                        source = game.getLastKnownInformation(getSourceId(), event.getZone());
                     }
-                    break;
-                case PHASED_OUT:
-                case PHASED_IN:
-                    if (this.zone == Zone.ALL || game.getLastKnownInformation(getSourceId(), zone) != null) {
-                        return this.hasSourceObjectAbility(game, source, event);
-                    }
-                    break;
-            }
+                }
+            case PHASED_OUT:
+            case PHASED_IN:
+                if (this.zone == Zone.ALL || game.getLastKnownInformation(getSourceId(), zone) != null) {
+                    return this.hasSourceObjectAbility(game, source, event);
+                }
         }
         return super.isInUseableZone(game, source, event);
     }
