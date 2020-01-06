@@ -1,7 +1,6 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -24,8 +23,6 @@ import mage.game.stack.Spell;
 import mage.target.TargetPermanent;
 import mage.watchers.Watcher;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -82,7 +79,12 @@ enum GadwickTheWizenedValue implements DynamicValue {
         if (watcher == null) {
             return 0;
         }
-        return watcher.getX(new MageObjectReference(sourceAbility.getSourceId(), game));
+        if (game.getState().getValue(sourceAbility.getSourceId().toString() 
+                + "cardsToDraw") == null) {
+            return 0;
+        }
+        return (Integer) game.getState().getValue(sourceAbility.getSourceId().toString() 
+                + "cardsToDraw");
     }
 
     @Override
@@ -103,8 +105,6 @@ enum GadwickTheWizenedValue implements DynamicValue {
 
 class GadwickTheWizenedWatcher extends Watcher {
 
-    private final Map<MageObjectReference, Integer> xMap = new HashMap();
-
     GadwickTheWizenedWatcher() {
         super(WatcherScope.GAME);
     }
@@ -118,18 +118,10 @@ class GadwickTheWizenedWatcher extends Watcher {
         if (spell == null) {
             return;
         }
-        xMap.put(new MageObjectReference(
-                spell.getSourceId(), spell.getZoneChangeCounter(game) + 1, game
-        ), spell.getSpellAbility().getManaCostsToPay().getX());
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        xMap.clear();
-    }
-
-    public int getX(MageObjectReference mageObjectReference) {
-        return xMap.getOrDefault(mageObjectReference, 0);
+        if (spell.getSourceId() != super.getSourceId()) {
+            return;  // the spell is not Gadwick, the Wizened
+        }
+        game.getState().setValue(spell.getSourceId().toString()
+                + "cardsToDraw", spell.getSpellAbility().getManaCostsToPay().getX());
     }
 }
