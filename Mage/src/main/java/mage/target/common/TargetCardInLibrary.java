@@ -73,9 +73,9 @@ public class TargetCardInLibrary extends TargetCard {
         }
         cards.sort(Comparator.comparing(MageObject::getName));
         Cards cardsId = new CardsImpl();
-        for (Card card : cards) {
+        cards.forEach((card) -> {
             cardsId.add(card);
-        }
+        });
 
         while (!isChosen() && !doneChosing()) {
             if (!player.canRespond()) {
