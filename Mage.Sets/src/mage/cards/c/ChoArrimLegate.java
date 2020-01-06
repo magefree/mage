@@ -15,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -27,8 +26,8 @@ public final class ChoArrimLegate extends CardImpl {
     private static final FilterPermanent filterSwamp = new FilterPermanent();
 
     static {
-        filterPlains.add(new SubtypePredicate(SubType.PLAINS));
-        filterSwamp.add(new SubtypePredicate(SubType.SWAMP));
+        filterPlains.add(SubType.PLAINS.getPredicate());
+        filterSwamp.add(SubType.SWAMP.getPredicate());
     }
 
     public ChoArrimLegate(UUID ownerId, CardSetInfo setInfo) {

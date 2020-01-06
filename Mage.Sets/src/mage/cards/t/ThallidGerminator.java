@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.SaprolingToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -29,7 +28,7 @@ public final class ThallidGerminator extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Saproling");
     static {
-        filter.add(new SubtypePredicate(SubType.SAPROLING));
+        filter.add(SubType.SAPROLING.getPredicate());
     }
 
     public ThallidGerminator(UUID ownerId, CardSetInfo setInfo) {

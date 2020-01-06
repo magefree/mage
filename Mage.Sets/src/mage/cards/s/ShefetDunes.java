@@ -18,7 +18,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -30,7 +29,7 @@ public final class ShefetDunes extends CardImpl {
     private static final FilterControlledPermanent filterDesertPermanent = new FilterControlledPermanent("Desert");
 
     static {
-        filterDesertPermanent.add(new SubtypePredicate(SubType.DESERT));
+        filterDesertPermanent.add(SubType.DESERT.getPredicate());
     }
 
     public ShefetDunes(UUID ownerId, CardSetInfo setInfo) {

@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledPermanent;
@@ -28,7 +27,7 @@ public final class DrownerOfSecrets extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Merfolk you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.MERFOLK));
+        filter.add(SubType.MERFOLK.getPredicate());
         filter.add(Predicates.not(TappedPredicate.instance));
     }
 

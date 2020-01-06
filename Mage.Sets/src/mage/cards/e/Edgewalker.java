@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -22,7 +21,7 @@ public final class Edgewalker extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("Cleric spells");
     static {
-        filter.add(new SubtypePredicate(SubType.CLERIC));
+        filter.add(SubType.CLERIC.getPredicate());
     }
 
     public Edgewalker(UUID ownerId, CardSetInfo setInfo) {

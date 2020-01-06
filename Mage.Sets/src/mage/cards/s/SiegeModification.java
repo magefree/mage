@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -28,7 +27,7 @@ public final class SiegeModification extends CardImpl {
 
     static {
         filter.add(Predicates.or(CardType.CREATURE.getPredicate(),
-                new SubtypePredicate(SubType.VEHICLE)));
+                SubType.VEHICLE.getPredicate()));
     }
 
     public SiegeModification(UUID ownerId, CardSetInfo setInfo) {

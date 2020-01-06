@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -26,7 +25,7 @@ public final class ObsidianBattleAxe extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("a Warrior creature");
     static {
-        filter.add(new SubtypePredicate(SubType.WARRIOR));
+        filter.add(SubType.WARRIOR.getPredicate());
     }
 
     public ObsidianBattleAxe(UUID ownerId, CardSetInfo setInfo) {

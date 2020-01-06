@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -27,7 +26,7 @@ public final class DerangedOutcast extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Human");
 
     static {
-        filter.add(new SubtypePredicate(SubType.HUMAN));
+        filter.add(SubType.HUMAN.getPredicate());
     }
 
     public DerangedOutcast(UUID ownerId, CardSetInfo setInfo) {

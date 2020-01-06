@@ -15,7 +15,6 @@ import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -30,7 +29,7 @@ public final class RangeTrooper extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Trooper creatures you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.TROOPER));
+        filter.add(SubType.TROOPER.getPredicate());
     }
 
     public RangeTrooper(UUID ownerId, CardSetInfo setInfo) {

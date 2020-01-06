@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -23,7 +22,7 @@ public final class HeliodsPilgrim extends CardImpl {
 
     static {
         filter.add(CardType.ENCHANTMENT.getPredicate());
-        filter.add(new SubtypePredicate(SubType.AURA));
+        filter.add(SubType.AURA.getPredicate());
     }
 
     public HeliodsPilgrim(UUID ownerId, CardSetInfo setInfo) {

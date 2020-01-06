@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
 import java.util.UUID;
@@ -27,7 +26,7 @@ public final class LamplighterOfSelhoff extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(new SubtypePredicate(SubType.ZOMBIE));
+        filter.add(SubType.ZOMBIE.getPredicate());
     }
 
     public LamplighterOfSelhoff(UUID ownerId, CardSetInfo setInfo) {

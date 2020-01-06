@@ -20,7 +20,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetAnyTarget;
 
 /**
@@ -31,7 +30,7 @@ public final class ThornbiteStaff extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("a Shaman creature");
     static {
-        filter.add(new SubtypePredicate(SubType.SHAMAN));
+        filter.add(SubType.SHAMAN.getPredicate());
     }
 
     public ThornbiteStaff(UUID ownerId, CardSetInfo setInfo) {

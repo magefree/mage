@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -25,7 +24,7 @@ public final class NineRingedBo extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("spirit");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SPIRIT));
+        filter.add(SubType.SPIRIT.getPredicate());
     }
 
     public NineRingedBo(UUID ownerId, CardSetInfo setInfo) {

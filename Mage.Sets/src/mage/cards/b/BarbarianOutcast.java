@@ -12,7 +12,6 @@ import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -23,7 +22,7 @@ public final class BarbarianOutcast extends CardImpl {
     private static final FilterControlledLandPermanent filterControlledLand = new FilterControlledLandPermanent("a Swamp");
 
     static {
-        filterControlledLand.add(new SubtypePredicate(SubType.SWAMP));
+        filterControlledLand.add(SubType.SWAMP.getPredicate());
     }
 
     public BarbarianOutcast(UUID ownerId, CardSetInfo setInfo) {

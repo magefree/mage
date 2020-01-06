@@ -11,7 +11,6 @@ import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.target.common.TargetAttackingCreature;
 
@@ -27,7 +26,7 @@ public final class BargeIn extends CardImpl {
 
     static {
         filter.add(AttackingPredicate.instance);
-        filter.add(Predicates.not(new SubtypePredicate(SubType.HUMAN)));
+        filter.add(Predicates.not(SubType.HUMAN.getPredicate()));
     }
 
     public BargeIn(UUID ownerId, CardSetInfo setInfo) {

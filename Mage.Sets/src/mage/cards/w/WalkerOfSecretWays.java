@@ -17,7 +17,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -32,7 +31,7 @@ public final class WalkerOfSecretWays extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filterCreature = new FilterControlledCreaturePermanent("Ninja you control");
     static {
-        filterCreature.add((new SubtypePredicate(SubType.NINJA)));
+        filterCreature.add((SubType.NINJA.getPredicate()));
     }
 
     public WalkerOfSecretWays(UUID ownerId, CardSetInfo setInfo) {

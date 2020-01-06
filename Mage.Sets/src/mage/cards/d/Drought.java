@@ -20,7 +20,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.target.common.TargetControlledPermanent;
 
@@ -58,7 +57,7 @@ class DroughtAdditionalCostEffect extends CostModificationEffectImpl {
     private boolean appliesToSpells;
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Swamp");
     static{
-        filter.add(new SubtypePredicate(SubType.SWAMP));
+        filter.add(SubType.SWAMP.getPredicate());
     }
 
     DroughtAdditionalCostEffect(boolean appliesToSpells) {

@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -29,7 +28,7 @@ public final class UlrichsKindred extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking Wolf or Werewolf");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate(SubType.WOLF), new SubtypePredicate(SubType.WEREWOLF)));
+        filter.add(Predicates.or(SubType.WOLF.getPredicate(), SubType.WEREWOLF.getPredicate()));
         filter.add(AttackingPredicate.instance);
     }
 

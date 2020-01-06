@@ -8,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -19,7 +18,7 @@ public final class Choke extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Islands");
     
     static {
-        filter.add(new SubtypePredicate(SubType.ISLAND));
+        filter.add(SubType.ISLAND.getPredicate());
     }    
             
     public Choke(UUID ownerId, CardSetInfo setInfo) {

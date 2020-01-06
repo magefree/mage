@@ -15,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -28,8 +27,8 @@ public final class BladewingTheRisen extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Dragon creatures");
     private static final FilterPermanentCard filterCard = new FilterPermanentCard("Dragon permanent card from your graveyard");
     static {
-        filter.add(new SubtypePredicate(SubType.DRAGON));
-        filterCard.add(new SubtypePredicate(SubType.DRAGON));
+        filter.add(SubType.DRAGON.getPredicate());
+        filterCard.add(SubType.DRAGON.getPredicate());
     }
 
     public BladewingTheRisen(UUID ownerId, CardSetInfo setInfo) {

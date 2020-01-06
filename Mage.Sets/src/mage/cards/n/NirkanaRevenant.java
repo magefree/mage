@@ -16,7 +16,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -57,7 +56,7 @@ class NirkanaRevenantTriggeredAbility extends TriggeredManaAbility {
     
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("Swamp");
     static {
-            filter.add(new SubtypePredicate(SubType.SWAMP));
+            filter.add(SubType.SWAMP.getPredicate());
     }
 
     public NirkanaRevenantTriggeredAbility() {

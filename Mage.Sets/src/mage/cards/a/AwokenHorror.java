@@ -12,7 +12,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -52,7 +51,7 @@ class AwokenHorrorAbility extends TriggeredAbilityImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Horror creatures");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.HORROR)));
+        filter.add(Predicates.not(SubType.HORROR.getPredicate()));
     }
 
     public AwokenHorrorAbility() {

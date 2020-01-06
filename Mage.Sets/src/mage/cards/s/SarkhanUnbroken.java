@@ -20,7 +20,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.token.DragonToken;
 import mage.players.Player;
@@ -35,7 +34,7 @@ public final class SarkhanUnbroken extends CardImpl {
     private static final FilterCard dragonFilter = new FilterCard("Dragon creature cards");
 
     static {
-        dragonFilter.add(new SubtypePredicate(SubType.DRAGON));
+        dragonFilter.add(SubType.DRAGON.getPredicate());
     }
 
     public SarkhanUnbroken(UUID ownerId, CardSetInfo setInfo) {

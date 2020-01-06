@@ -16,7 +16,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -73,7 +72,7 @@ class MalakirBloodwitchEffect extends OneShotEffect {
         }
 
         FilterControlledPermanent filter = new FilterControlledPermanent("Vampire");
-        filter.add(new SubtypePredicate(SubType.VAMPIRE));
+        filter.add(SubType.VAMPIRE.getPredicate());
         int amount = game.getBattlefield().countAll(filter, source.getControllerId(), game);
         Set<UUID> opponents = game.getOpponents(source.getControllerId());
 

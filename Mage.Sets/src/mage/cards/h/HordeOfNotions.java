@@ -16,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -30,7 +29,7 @@ public final class HordeOfNotions extends CardImpl {
     private static final FilterCard filter = new FilterCard("Elemental card from your graveyard");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ELEMENTAL));
+        filter.add(SubType.ELEMENTAL.getPredicate());
     }
 
     public HordeOfNotions(UUID ownerId, CardSetInfo setInfo) {

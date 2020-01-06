@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -49,7 +48,7 @@ class MonsoonEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterPermanent();
     static {
-        filter.add(new SubtypePredicate(SubType.ISLAND));
+        filter.add(SubType.ISLAND.getPredicate());
         filter.add(Predicates.not(TappedPredicate.instance));
     }
 

@@ -19,7 +19,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -78,7 +77,7 @@ class ZirilanOfTheClawEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             FilterPermanentCard filter = new FilterPermanentCard("a Dragon permanent card");
-            filter.add(new SubtypePredicate(SubType.DRAGON));
+            filter.add(SubType.DRAGON.getPredicate());
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
             if (controller.searchLibrary(target, source, game)) {
                 Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);

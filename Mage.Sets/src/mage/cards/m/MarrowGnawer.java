@@ -18,7 +18,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.RatToken;
 import mage.target.common.TargetControlledPermanent;
 
@@ -33,10 +32,9 @@ public final class MarrowGnawer extends CardImpl {
     private static final FilterControlledCreaturePermanent filter3 = new FilterControlledCreaturePermanent("the number of Rats you control");
 
     static {
-        SubtypePredicate ratPredicate = new SubtypePredicate(SubType.RAT);
-        filterFear.add(ratPredicate);
-        filterSacrifice.add(ratPredicate);
-        filter3.add(ratPredicate);
+        filterFear.add(SubType.RAT.getPredicate());
+        filterSacrifice.add(SubType.RAT.getPredicate());
+        filter3.add(SubType.RAT.getPredicate());
     }
 
     public MarrowGnawer (UUID ownerId, CardSetInfo setInfo) {

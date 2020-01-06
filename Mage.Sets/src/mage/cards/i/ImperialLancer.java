@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -26,7 +25,7 @@ public final class ImperialLancer extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Dinosaur");
 
     static {
-        filter.add(new SubtypePredicate(SubType.DINOSAUR));
+        filter.add(SubType.DINOSAUR.getPredicate());
     }
 
     public ImperialLancer(UUID ownerId, CardSetInfo setInfo) {

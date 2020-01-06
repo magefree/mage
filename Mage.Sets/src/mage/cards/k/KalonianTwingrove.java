@@ -11,13 +11,11 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import static mage.cards.k.KalonianTwingrove.filterLands;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.KalonianTwingroveTreefolkWarriorToken;
 
 /**
@@ -29,7 +27,7 @@ public final class KalonianTwingrove extends CardImpl {
     static final FilterControlledPermanent filterLands = new FilterControlledPermanent("Forests you control");
 
     static {
-        filterLands.add(new SubtypePredicate(SubType.FOREST));
+        filterLands.add(SubType.FOREST.getPredicate());
     }
 
     public KalonianTwingrove(UUID ownerId, CardSetInfo setInfo) {

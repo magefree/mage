@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -21,7 +20,7 @@ public final class Dragonstorm extends CardImpl {
     private static final FilterPermanentCard filter = new FilterPermanentCard("Dragon permanent card");
 
     static {
-        filter.add(new SubtypePredicate(SubType.DRAGON));
+        filter.add(SubType.DRAGON.getPredicate());
     }
 
     public Dragonstorm(UUID ownerId, CardSetInfo setInfo) {

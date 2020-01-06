@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.TreasureToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
@@ -30,7 +29,7 @@ public final class RuthlessKnave extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("three Treasures");
 
     static {
-        filter.add(new SubtypePredicate(SubType.TREASURE));
+        filter.add(SubType.TREASURE.getPredicate());
     }
 
     public RuthlessKnave(UUID ownerId, CardSetInfo setInfo) {

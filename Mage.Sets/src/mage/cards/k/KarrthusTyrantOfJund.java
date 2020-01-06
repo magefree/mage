@@ -18,7 +18,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -34,7 +33,7 @@ public final class KarrthusTyrantOfJund extends CardImpl {
     
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(new SubtypePredicate(SubType.DRAGON));
+        filter.add(SubType.DRAGON.getPredicate());
     }
 
     public KarrthusTyrantOfJund(UUID ownerId, CardSetInfo setInfo) {
@@ -87,7 +86,7 @@ class KarrthusEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         FilterPermanent filter = new FilterPermanent();
-        filter.add(new SubtypePredicate(SubType.DRAGON));
+        filter.add(SubType.DRAGON.getPredicate());
         List<Permanent> dragons = game.getBattlefield().getAllActivePermanents(filter, game);
         for (Permanent dragon : dragons) {
             ContinuousEffect effect = new KarrthusControlEffect(source.getControllerId());

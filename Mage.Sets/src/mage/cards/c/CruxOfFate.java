@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -21,7 +20,7 @@ public final class CruxOfFate extends CardImpl {
     private static final FilterCreaturePermanent filterNonDragon = new FilterCreaturePermanent("non-Dragon creatures");
 
     static {
-        filterNonDragon.add(Predicates.not(new SubtypePredicate(SubType.DRAGON)));
+        filterNonDragon.add(Predicates.not(SubType.DRAGON.getPredicate()));
     }
 
     public CruxOfFate(UUID ownerId, CardSetInfo setInfo) {

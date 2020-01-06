@@ -20,7 +20,6 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.EwokToken;
@@ -39,7 +38,7 @@ public final class ChiefChirpa extends CardImpl {
         diedFilter.add(new ColorPredicate(ObjectColor.GREEN));
         diedFilter.add(new ControllerPredicate(TargetController.YOU));
 
-        ewokFilter.add(new SubtypePredicate(SubType.EWOK));
+        ewokFilter.add(SubType.EWOK.getPredicate());
         ewokFilter.add(AnotherPredicate.instance);
     }
 

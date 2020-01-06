@@ -17,7 +17,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.other.AuraCardCanAttachToPermanentId;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -84,7 +83,7 @@ class EvershrikeEffect extends OneShotEffect {
                 boolean exileSource = true;
                 FilterCard filterAuraCard = new FilterCard("Aura card with converted mana cost X or less from your hand");
                 filterAuraCard.add(CardType.ENCHANTMENT.getPredicate());
-                filterAuraCard.add(new SubtypePredicate(SubType.AURA));
+                filterAuraCard.add(SubType.AURA.getPredicate());
                 filterAuraCard.add(new AuraCardCanAttachToPermanentId(evershrikePermanent.getId()));
                 filterAuraCard.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xAmount));
                 int count = controller.getHand().count(filterAuraCard, game);

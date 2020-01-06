@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -30,7 +29,7 @@ public final class BlightedShaman extends CardImpl {
     private static final FilterControlledPermanent filterSwamp = new FilterControlledPermanent("a Swamp");
 
     static {
-        filterSwamp.add(new SubtypePredicate(SubType.SWAMP));
+        filterSwamp.add(SubType.SWAMP.getPredicate());
     }
 
     public BlightedShaman(UUID ownerId, CardSetInfo setInfo) {

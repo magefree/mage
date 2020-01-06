@@ -16,7 +16,6 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetSpell;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -30,7 +29,7 @@ public final class SigilTracer extends CardImpl {
 
     static {
         filter.add(Predicates.not(TappedPredicate.instance));
-        filter.add(new SubtypePredicate(SubType.WIZARD));
+        filter.add(SubType.WIZARD.getPredicate());
     }
 
     public SigilTracer(UUID ownerId, CardSetInfo setInfo) {

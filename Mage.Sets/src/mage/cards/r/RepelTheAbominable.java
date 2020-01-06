@@ -10,7 +10,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterObject;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -21,7 +20,7 @@ public final class RepelTheAbominable extends CardImpl {
     private static final FilterObject filter = new FilterObject("non-Human sources");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.HUMAN)));
+        filter.add(Predicates.not(SubType.HUMAN.getPredicate()));
     }
 
     public RepelTheAbominable(UUID ownerId, CardSetInfo setInfo) {

@@ -15,7 +15,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -29,7 +28,7 @@ public final class HorrorOfHorrors extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("black creature");
 
     static {
-        filter1.add(new SubtypePredicate(SubType.SWAMP));
+        filter1.add(SubType.SWAMP.getPredicate());
         filter2.add(new ColorPredicate(ObjectColor.BLACK));
     }
 

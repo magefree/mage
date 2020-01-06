@@ -20,7 +20,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
@@ -36,7 +35,7 @@ public final class MindSwords extends CardImpl {
     private static final FilterLandPermanent filterSwamp = new FilterLandPermanent("If you control a Swamp");
 
     static {
-        filterSwamp.add(new SubtypePredicate(SubType.SWAMP));
+        filterSwamp.add(SubType.SWAMP.getPredicate());
     }
 
     public MindSwords(UUID ownerId, CardSetInfo setInfo) {

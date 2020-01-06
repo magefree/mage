@@ -23,7 +23,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledPermanent;
 
@@ -37,7 +36,7 @@ public final class Lashknife extends CardImpl {
     private static final FilterControlledCreaturePermanent creatureFilter = new FilterControlledCreaturePermanent("an untapped creature you control");
 
     static {
-        plainsFilter.add(new SubtypePredicate(SubType.PLAINS));
+        plainsFilter.add(SubType.PLAINS.getPredicate());
         creatureFilter.add(Predicates.not(TappedPredicate.instance));
     }
 

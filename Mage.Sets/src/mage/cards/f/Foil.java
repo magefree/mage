@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCardInHand;
 
@@ -23,7 +22,7 @@ public final class Foil extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an Island card");
     static {
-        filter.add(new SubtypePredicate(SubType.ISLAND));
+        filter.add(SubType.ISLAND.getPredicate());
     }
 
     public Foil(UUID ownerId, CardSetInfo setInfo) {

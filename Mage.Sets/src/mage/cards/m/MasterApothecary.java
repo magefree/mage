@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetAnyTarget;
@@ -29,7 +28,7 @@ public final class MasterApothecary extends CardImpl {
     static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("an untapped Cleric you control");
     
     static {
-        filter.add(new SubtypePredicate(SubType.CLERIC));
+        filter.add(SubType.CLERIC.getPredicate());
         filter.add(Predicates.not(TappedPredicate.instance));
     }
 

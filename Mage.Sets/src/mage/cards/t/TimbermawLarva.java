@@ -13,7 +13,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
@@ -25,7 +24,7 @@ public final class TimbermawLarva extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("Forest you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.FOREST));
+        filter.add(SubType.FOREST.getPredicate());
         filter.add(new ControllerPredicate(TargetController.YOU));
 
     }

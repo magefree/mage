@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -26,7 +25,7 @@ public final class WaspOfTheBitterEnd extends CardImpl {
 
     static {
         filter.add(CardType.PLANESWALKER.getPredicate());
-        filter.add(new SubtypePredicate(SubType.BOLAS));
+        filter.add(SubType.BOLAS.getPredicate());
     }
 
     public WaspOfTheBitterEnd(UUID ownerId, CardSetInfo setInfo) {

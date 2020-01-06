@@ -17,7 +17,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -29,7 +28,7 @@ public final class HarborBandit extends CardImpl {
     private static final String rule = "{this} gets +1/+1 as long as you control an Island";
     
     static {
-        filter.add(new SubtypePredicate(SubType.ISLAND));
+        filter.add(SubType.ISLAND.getPredicate());
     }
 
     public HarborBandit(UUID ownerId, CardSetInfo setInfo) {

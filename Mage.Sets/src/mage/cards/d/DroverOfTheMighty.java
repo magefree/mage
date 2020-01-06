@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -23,7 +22,7 @@ public final class DroverOfTheMighty extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Dinosaur");
 
     static {
-        filter.add(new SubtypePredicate(SubType.DINOSAUR));
+        filter.add(SubType.DINOSAUR.getPredicate());
     }
 
     public DroverOfTheMighty(UUID ownerId, CardSetInfo setInfo) {

@@ -17,7 +17,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledPermanent;
@@ -32,7 +31,7 @@ public final class BloodChinFanatic extends CardImpl {
     
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(new SubtypePredicate(SubType.WARRIOR));
+        filter.add(SubType.WARRIOR.getPredicate());
     }
 
     public BloodChinFanatic(UUID ownerId, CardSetInfo setInfo) {

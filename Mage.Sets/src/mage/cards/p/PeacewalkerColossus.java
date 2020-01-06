@@ -15,7 +15,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetControlledPermanent;
 
@@ -30,7 +29,7 @@ public final class PeacewalkerColossus extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(new SubtypePredicate(SubType.VEHICLE));
+        filter.add(SubType.VEHICLE.getPredicate());
     }
 
     public PeacewalkerColossus(UUID ownerId, CardSetInfo setInfo) {

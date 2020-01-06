@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -26,7 +25,7 @@ public final class HaazdaExonerator extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Aura");
 
     static {
-        filter.add(new SubtypePredicate(SubType.AURA));
+        filter.add(SubType.AURA.getPredicate());
     }
 
     public HaazdaExonerator(UUID ownerId, CardSetInfo setInfo) {

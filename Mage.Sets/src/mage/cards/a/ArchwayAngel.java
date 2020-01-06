@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -26,7 +25,7 @@ public final class ArchwayAngel extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledPermanent("Gate you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.GATE));
+        filter.add(SubType.GATE.getPredicate());
     }
 
     public ArchwayAngel(UUID ownerId, CardSetInfo setInfo) {

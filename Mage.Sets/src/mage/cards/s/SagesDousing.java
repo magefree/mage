@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetSpell;
 
 /**
@@ -24,7 +23,7 @@ public final class SagesDousing extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Wizard");
 
     static {
-        filter.add(new SubtypePredicate(SubType.WIZARD));
+        filter.add(SubType.WIZARD.getPredicate());
     }
 
     public SagesDousing(UUID ownerId, CardSetInfo setInfo) {

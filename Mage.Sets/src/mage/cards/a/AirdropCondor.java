@@ -16,7 +16,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetAnyTarget;
 
@@ -29,7 +28,7 @@ public final class AirdropCondor extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Goblin creature");
 
     static {
-        filter.add(new SubtypePredicate(SubType.GOBLIN));
+        filter.add(SubType.GOBLIN.getPredicate());
     }
 
     public AirdropCondor(UUID ownerId, CardSetInfo setInfo) {

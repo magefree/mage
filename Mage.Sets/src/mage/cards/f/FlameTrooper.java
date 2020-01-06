@@ -4,7 +4,6 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.constants.Duration;
 import mage.constants.SubType;
@@ -13,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -24,7 +22,7 @@ public final class FlameTrooper extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Trooper creatures");
 
     static {
-        filter.add(new SubtypePredicate(SubType.TROOPER));
+        filter.add(SubType.TROOPER.getPredicate());
     }
 
     public FlameTrooper(UUID ownerId, CardSetInfo setInfo) {

@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -24,8 +23,8 @@ public final class WildNacatl extends CardImpl {
     private static final FilterPermanent filter2 = new FilterPermanent("Plains");
 
     static {
-        filter1.add(new SubtypePredicate(SubType.MOUNTAIN));
-        filter2.add(new SubtypePredicate(SubType.PLAINS));
+        filter1.add(SubType.MOUNTAIN.getPredicate());
+        filter2.add(SubType.PLAINS.getPredicate());
     }
 
     public WildNacatl(UUID ownerId, CardSetInfo setInfo) {

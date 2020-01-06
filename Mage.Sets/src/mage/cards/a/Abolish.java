@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInHand;
 
@@ -25,7 +24,7 @@ public final class Abolish extends CardImpl {
     private static final FilterCard filterCost = new FilterCard("Plains card");
 
     static {
-        filterCost.add(new SubtypePredicate(SubType.PLAINS));
+        filterCost.add(SubType.PLAINS.getPredicate());
     }
 
     public Abolish(UUID ownerId, CardSetInfo setInfo) {

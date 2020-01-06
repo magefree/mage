@@ -23,7 +23,6 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -39,8 +38,8 @@ public final class ChainerDementiaMaster extends CardImpl {
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("Nightmare creatures");
     private static final FilterPermanent filterPermanent = new FilterPermanent("Nightmares");
     static {
-        filterCreature.add(new SubtypePredicate(SubType.NIGHTMARE));
-        filterPermanent.add(new SubtypePredicate(SubType.NIGHTMARE));
+        filterCreature.add(SubType.NIGHTMARE.getPredicate());
+        filterPermanent.add(SubType.NIGHTMARE.getPredicate());
     }
 
     public ChainerDementiaMaster(UUID ownerId, CardSetInfo setInfo) {

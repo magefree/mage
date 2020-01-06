@@ -16,7 +16,6 @@ import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
@@ -31,8 +30,8 @@ public final class NoggleHedgeMage extends CardImpl {
     private static final FilterLandPermanent filter2 = new FilterLandPermanent();
 
     static {
-        filter.add(new SubtypePredicate(SubType.ISLAND));
-        filter2.add(new SubtypePredicate(SubType.MOUNTAIN));
+        filter.add(SubType.ISLAND.getPredicate());
+        filter2.add(SubType.MOUNTAIN.getPredicate());
     }
 
     private String rule = "When {this} enters the battlefield, if you control two or more Islands, you may tap two target permanents.";

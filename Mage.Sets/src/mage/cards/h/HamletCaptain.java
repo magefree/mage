@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -22,7 +21,7 @@ public final class HamletCaptain extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Humans");
 
     static {
-        filter.add(new SubtypePredicate(SubType.HUMAN));
+        filter.add(SubType.HUMAN.getPredicate());
     }
 
     public HamletCaptain(UUID ownerId, CardSetInfo setInfo) {

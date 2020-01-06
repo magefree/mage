@@ -5,9 +5,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ColorlessManaCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.constants.Duration;
@@ -17,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -28,7 +25,7 @@ public final class MudTrooper extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Trooper creatures you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.TROOPER));
+        filter.add(SubType.TROOPER.getPredicate());
     }
 
     public MudTrooper(UUID ownerId, CardSetInfo setInfo) {

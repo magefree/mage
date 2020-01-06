@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -28,11 +27,11 @@ public final class SlinnVodaTheRisingDeep extends CardImpl {
     static {
         filter.add(Predicates.not(
                 Predicates.or(
-                        new SubtypePredicate(SubType.KRAKEN),
-                        new SubtypePredicate(SubType.LEVIATHAN),
-                        new SubtypePredicate(SubType.OCTOPUS),
-                        new SubtypePredicate(SubType.MERFOLK),
-                        new SubtypePredicate(SubType.SERPENT))
+                        SubType.KRAKEN.getPredicate(),
+                        SubType.LEVIATHAN.getPredicate(),
+                        SubType.OCTOPUS.getPredicate(),
+                        SubType.MERFOLK.getPredicate(),
+                        SubType.SERPENT.getPredicate())
         ));
     }
 

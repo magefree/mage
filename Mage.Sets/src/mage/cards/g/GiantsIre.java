@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
@@ -23,7 +22,7 @@ public final class GiantsIre extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Giant");
 
     static {
-        filter.add(new SubtypePredicate(SubType.GIANT));
+        filter.add(SubType.GIANT.getPredicate());
     }
 
     public GiantsIre(UUID ownerId, CardSetInfo setInfo) {

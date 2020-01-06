@@ -14,7 +14,6 @@ import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -26,7 +25,7 @@ public final class SeaSerpent extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("an Island");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ISLAND));
+        filter.add(SubType.ISLAND.getPredicate());
     }
 
     public SeaSerpent(UUID ownerId, CardSetInfo setInfo) {

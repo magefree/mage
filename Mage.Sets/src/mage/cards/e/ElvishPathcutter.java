@@ -15,7 +15,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -27,7 +26,7 @@ public final class ElvishPathcutter extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elf creature");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ELF));
+        filter.add(SubType.ELF.getPredicate());
     }
 
     public ElvishPathcutter(UUID ownerId, CardSetInfo setInfo) {

@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetAnyTargetAmount;
 
 /**
@@ -22,7 +21,7 @@ public final class JawsOfStone extends CardImpl {
     static final private FilterControlledLandPermanent filter = new FilterControlledLandPermanent("mountains you control");
     
     static {
-        filter.add(new SubtypePredicate(SubType.MOUNTAIN));
+        filter.add(SubType.MOUNTAIN.getPredicate());
     }
 
     static final private String rule = "{this} deals X damage divided as you choose among any number of target creatures and/or players, where X is the number of Mountains you control as you cast {this}";

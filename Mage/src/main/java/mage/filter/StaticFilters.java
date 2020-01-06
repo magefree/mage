@@ -12,7 +12,6 @@ import mage.constants.TargetController;
 import mage.filter.common.*;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.filter.predicate.other.PlayerPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -595,7 +594,7 @@ public final class StaticFilters {
 
     static {
         FILTER_PERMANENT_AURA.add(CardType.ENCHANTMENT.getPredicate());
-        FILTER_PERMANENT_AURA.add(new SubtypePredicate(SubType.AURA));
+        FILTER_PERMANENT_AURA.add(SubType.AURA.getPredicate());
         FILTER_PERMANENT_AURA.setLockedFilter(true);
     }
 
@@ -603,7 +602,7 @@ public final class StaticFilters {
 
     static {
         FILTER_PERMANENT_EQUIPMENT.add(CardType.ARTIFACT.getPredicate());
-        FILTER_PERMANENT_EQUIPMENT.add(new SubtypePredicate(SubType.EQUIPMENT));
+        FILTER_PERMANENT_EQUIPMENT.add(SubType.EQUIPMENT.getPredicate());
         FILTER_PERMANENT_EQUIPMENT.setLockedFilter(true);
     }
 
@@ -611,7 +610,7 @@ public final class StaticFilters {
 
     static {
         FILTER_PERMANENT_FORTIFICATION.add(CardType.ARTIFACT.getPredicate());
-        FILTER_PERMANENT_FORTIFICATION.add(new SubtypePredicate(SubType.FORTIFICATION));
+        FILTER_PERMANENT_FORTIFICATION.add(SubType.FORTIFICATION.getPredicate());
         FILTER_PERMANENT_FORTIFICATION.setLockedFilter(true);
     }
 

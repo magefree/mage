@@ -17,7 +17,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.BatToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -30,7 +29,7 @@ public final class SkeletalVampire extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Bat");
 
     static {
-        filter.add(new SubtypePredicate(SubType.BAT));
+        filter.add(SubType.BAT.getPredicate());
     }
 
     public SkeletalVampire(UUID ownerId, CardSetInfo setInfo) {

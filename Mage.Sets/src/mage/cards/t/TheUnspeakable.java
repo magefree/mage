@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -26,7 +25,7 @@ public final class TheUnspeakable extends CardImpl {
     private static final FilterCard filter = new FilterCard("Arcane card from your graveyard");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ARCANE));
+        filter.add(SubType.ARCANE.getPredicate());
     }
 
     public TheUnspeakable(UUID ownerId, CardSetInfo setInfo) {

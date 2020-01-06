@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
@@ -25,7 +24,7 @@ public final class FathomFleetBoarder extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control another Pirate");
 
     static {
-        filter.add(new SubtypePredicate(SubType.PIRATE));
+        filter.add(SubType.PIRATE.getPredicate());
         filter.add(AnotherPredicate.instance);
     }
 

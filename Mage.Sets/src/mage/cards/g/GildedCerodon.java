@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
@@ -58,8 +57,8 @@ class GildedCerodonCondition implements Condition {
     private static final FilterCard filter2 = new FilterCard();
 
     static {
-        filter.add(new SubtypePredicate(SubType.DESERT));
-        filter2.add(new SubtypePredicate(SubType.DESERT));
+        filter.add(SubType.DESERT.getPredicate());
+        filter2.add(SubType.DESERT.getPredicate());
     }
 
     @Override

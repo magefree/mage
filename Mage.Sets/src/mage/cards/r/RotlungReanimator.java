@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.ZombieToken;
 
 /**
@@ -22,7 +21,7 @@ public final class RotlungReanimator extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("{this} or another Cleric");
     
     static {
-        filter.add(new SubtypePredicate(SubType.CLERIC));
+        filter.add(SubType.CLERIC.getPredicate());
     }
 
     public RotlungReanimator(UUID ownerId, CardSetInfo setInfo) {

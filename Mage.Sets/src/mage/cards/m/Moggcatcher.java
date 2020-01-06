@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -26,7 +25,7 @@ public final class Moggcatcher extends CardImpl {
     private static final FilterPermanentCard filter = new FilterPermanentCard("Goblin permanent card");
 
     static {
-        filter.add(new SubtypePredicate(SubType.GOBLIN));
+        filter.add(SubType.GOBLIN.getPredicate());
     }
 
     public Moggcatcher(UUID ownerId, CardSetInfo setInfo) {

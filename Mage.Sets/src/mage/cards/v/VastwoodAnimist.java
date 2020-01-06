@@ -15,10 +15,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.token.TokenImpl;
-import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -57,7 +55,7 @@ class VastwoodAnimistEffect extends OneShotEffect {
     static final FilterControlledPermanent filterAllies = new FilterControlledPermanent("allies you control");
 
     static {
-        filterAllies.add(new SubtypePredicate(SubType.ALLY));
+        filterAllies.add(SubType.ALLY.getPredicate());
     }
 
     public VastwoodAnimistEffect() {

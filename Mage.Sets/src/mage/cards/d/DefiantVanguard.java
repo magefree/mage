@@ -23,7 +23,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -40,7 +39,7 @@ public final class DefiantVanguard extends CardImpl {
     private static final FilterPermanentCard filter = new FilterPermanentCard("Rebel permanent card with converted mana cost 4 or less");
 
     static {
-        filter.add(new SubtypePredicate(SubType.REBEL));
+        filter.add(SubType.REBEL.getPredicate());
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 5));
     }
 

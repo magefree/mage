@@ -13,7 +13,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -28,7 +27,7 @@ public final class HourOfDevastation extends CardImpl {
                 CardType.CREATURE.getPredicate(),
                 Predicates.and(
                     CardType.PLANESWALKER.getPredicate(),
-                    Predicates.not(new SubtypePredicate(SubType.BOLAS)))));
+                    Predicates.not(SubType.BOLAS.getPredicate()))));
     }
     
     public HourOfDevastation(UUID ownerId, CardSetInfo setInfo) {

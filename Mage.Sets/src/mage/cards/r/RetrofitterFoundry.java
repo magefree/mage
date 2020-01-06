@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.RetrofitterFoundryToken;
 import mage.game.permanent.token.ServoToken;
 import mage.game.permanent.token.ThopterColorlessToken;
@@ -30,8 +29,8 @@ public final class RetrofitterFoundry extends CardImpl {
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("a Thopter");
 
     static {
-        filter1.add(new SubtypePredicate(SubType.SERVO));
-        filter2.add(new SubtypePredicate(SubType.THOPTER));
+        filter1.add(SubType.SERVO.getPredicate());
+        filter2.add(SubType.THOPTER.getPredicate());
     }
 
     public RetrofitterFoundry(UUID ownerId, CardSetInfo setInfo) {

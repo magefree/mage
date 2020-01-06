@@ -15,7 +15,6 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.other.OwnerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -37,7 +36,7 @@ public final class GlyphOfReincarnation extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Wall creature");
 
     static {
-        filter.add(new SubtypePredicate(SubType.WALL));
+        filter.add(SubType.WALL.getPredicate());
     }
 
     public GlyphOfReincarnation(UUID ownerId, CardSetInfo setInfo) {

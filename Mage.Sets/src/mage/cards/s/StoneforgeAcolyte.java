@@ -18,7 +18,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledPermanent;
 
@@ -32,9 +31,9 @@ public final class StoneforgeAcolyte extends CardImpl {
     private static final FilterCard filterEquipment = new FilterCard("an Equipment card");
 
     static {
-        filterAlly.add(new SubtypePredicate(SubType.ALLY));
+        filterAlly.add(SubType.ALLY.getPredicate());
         filterAlly.add(Predicates.not(TappedPredicate.instance));
-        filterEquipment.add(new SubtypePredicate(SubType.EQUIPMENT));
+        filterEquipment.add(SubType.EQUIPMENT.getPredicate());
     }
 
     public StoneforgeAcolyte(UUID ownerId, CardSetInfo setInfo) {

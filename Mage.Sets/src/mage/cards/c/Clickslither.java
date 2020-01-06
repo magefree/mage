@@ -18,7 +18,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -30,7 +29,7 @@ public final class Clickslither extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Goblin");
 
     static {
-        filter.add(new SubtypePredicate((SubType.GOBLIN)));
+        filter.add(SubType.GOBLIN.getPredicate());
     }
 
     public Clickslither(UUID ownerId, CardSetInfo setInfo) {

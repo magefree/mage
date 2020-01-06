@@ -12,7 +12,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -45,7 +44,7 @@ class ZombieApocalypseEffect extends OneShotEffect {
     private static final FilterCreatureCard filterZombie = new FilterCreatureCard();
 
     static {
-        filterZombie.add(new SubtypePredicate(SubType.ZOMBIE));
+        filterZombie.add(SubType.ZOMBIE.getPredicate());
     }
 
     public ZombieApocalypseEffect() {

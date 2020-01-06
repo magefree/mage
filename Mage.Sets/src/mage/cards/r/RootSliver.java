@@ -16,7 +16,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -31,7 +30,7 @@ public final class RootSliver extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("Sliver spells");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SLIVER));
+        filter.add(SubType.SLIVER.getPredicate());
     }
 
     public RootSliver(UUID ownerId, CardSetInfo setInfo) {

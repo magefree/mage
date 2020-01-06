@@ -13,7 +13,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardIdPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AttachedToPredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
@@ -55,7 +54,7 @@ class ArmoryAutomatonEffect extends OneShotEffect {
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("Equipment");
 
     static {
-        filter.add(new SubtypePredicate(SubType.EQUIPMENT));
+        filter.add(SubType.EQUIPMENT.getPredicate());
     }
 
     public ArmoryAutomatonEffect() {

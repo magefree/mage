@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -24,7 +23,7 @@ public final class AphettoVulture extends CardImpl {
     private static final FilterCard filter = new FilterCard("Zombie card from your graveyard");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ZOMBIE));
+        filter.add(SubType.ZOMBIE.getPredicate());
     }
 
     public AphettoVulture(UUID ownerId, CardSetInfo setInfo) {

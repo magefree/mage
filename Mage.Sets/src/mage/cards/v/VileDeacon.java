@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -24,7 +23,7 @@ public final class VileDeacon extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Clerics");
 
     static {
-        filter.add(new SubtypePredicate(SubType.CLERIC));
+        filter.add(SubType.CLERIC.getPredicate());
     }
 
     public VileDeacon(UUID ownerId, CardSetInfo setInfo) {

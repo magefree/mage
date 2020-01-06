@@ -15,7 +15,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.GoblinRogueToken;
 import mage.target.common.TargetControlledPermanent;
 
@@ -28,7 +27,7 @@ public final class MarshFlitter extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Goblin");
 
     static {
-        filter.add(new SubtypePredicate(SubType.EQUIPMENT));
+        filter.add(SubType.EQUIPMENT.getPredicate());
     }
 
     public MarshFlitter(UUID ownerId, CardSetInfo setInfo) {

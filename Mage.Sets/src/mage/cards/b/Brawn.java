@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -31,7 +30,7 @@ public final class Brawn extends CardImpl {
 
     static {
         filter.add(CardType.LAND.getPredicate());
-        filter.add(new SubtypePredicate(SubType.FOREST));
+        filter.add(SubType.FOREST.getPredicate());
     }
 
     public Brawn(UUID ownerId, CardSetInfo setInfo) {

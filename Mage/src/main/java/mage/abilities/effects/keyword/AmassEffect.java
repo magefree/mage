@@ -10,7 +10,6 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ZombieArmyToken;
@@ -29,7 +28,7 @@ public class AmassEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterControlledPermanent("Army you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ARMY));
+        filter.add(SubType.ARMY.getPredicate());
     }
 
     private final DynamicValue amassNumber;

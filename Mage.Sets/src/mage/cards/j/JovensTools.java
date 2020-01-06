@@ -15,7 +15,6 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -26,7 +25,7 @@ public final class JovensTools extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by walls");
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.WALL)));
+        filter.add(Predicates.not(SubType.WALL.getPredicate()));
     }
 
     public JovensTools(UUID ownerId, CardSetInfo setInfo) {

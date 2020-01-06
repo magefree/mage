@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -21,7 +20,7 @@ public final class FugitiveDruid extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("an Aura spell");
 
     static {
-        filter.add(new SubtypePredicate(SubType.AURA));
+        filter.add(SubType.AURA.getPredicate());
     }
 
     public FugitiveDruid(UUID ownerId, CardSetInfo setInfo) {

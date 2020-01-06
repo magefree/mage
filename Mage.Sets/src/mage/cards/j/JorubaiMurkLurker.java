@@ -19,7 +19,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -32,7 +31,7 @@ public final class JorubaiMurkLurker extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("a Swamp");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SWAMP));
+        filter.add(SubType.SWAMP.getPredicate());
     }
 
     public JorubaiMurkLurker(UUID ownerId, CardSetInfo setInfo) {

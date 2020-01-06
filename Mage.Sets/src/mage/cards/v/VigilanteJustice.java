@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
@@ -23,7 +22,7 @@ public final class VigilanteJustice extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a Human");
 
     static {
-        filter.add(new SubtypePredicate(SubType.HUMAN));
+        filter.add(SubType.HUMAN.getPredicate());
     }
 
     public VigilanteJustice(UUID ownerId, CardSetInfo setInfo) {

@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -24,7 +23,7 @@ public final class GangrenousGoliath extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Clerics");
     
     static {
-        filter.add(new SubtypePredicate(SubType.CLERIC));
+        filter.add(SubType.CLERIC.getPredicate());
     }
 
     public GangrenousGoliath(UUID ownerId, CardSetInfo setInfo) {

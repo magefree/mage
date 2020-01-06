@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
@@ -22,7 +21,7 @@ public final class BarrowWitches extends CardImpl {
     private static final FilterCard filter = new FilterCard("Knight card from your graveyard");
 
     static {
-        filter.add(new SubtypePredicate(SubType.KNIGHT));
+        filter.add(SubType.KNIGHT.getPredicate());
     }
 
     public BarrowWitches(UUID ownerId, CardSetInfo setInfo) {

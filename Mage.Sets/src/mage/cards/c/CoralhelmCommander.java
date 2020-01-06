@@ -19,7 +19,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -30,7 +29,7 @@ public final class CoralhelmCommander extends LevelerCard {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Merfolk creatures");
 
     static {
-        filter.add(new SubtypePredicate(SubType.MERFOLK));
+        filter.add(SubType.MERFOLK.getPredicate());
     }
 
     public CoralhelmCommander(UUID ownerId, CardSetInfo setInfo) {

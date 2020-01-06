@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
@@ -27,7 +26,7 @@ public final class GaeasTouch extends CardImpl {
         // You may put a basic Forest card from your hand onto the battlefield. Activate this ability only any time you could cast a sorcery and only once each turn.
         FilterCard filter = new FilterCard("basic Forest card");
         filter.add(new SupertypePredicate(SuperType.BASIC));
-        filter.add(new SubtypePredicate(SubType.FOREST));
+        filter.add(SubType.FOREST.getPredicate());
         LimitedTimesPerTurnActivatedAbility ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD,
                 new PutCardFromHandOntoBattlefieldEffect(filter), new GenericManaCost(0), 1);
         ability.setTiming(TimingRule.SORCERY);

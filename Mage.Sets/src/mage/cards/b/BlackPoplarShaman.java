@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -26,7 +25,7 @@ public final class BlackPoplarShaman extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Treefolk");
 
     static {
-        filter.add(new SubtypePredicate(SubType.TREEFOLK));
+        filter.add(SubType.TREEFOLK.getPredicate());
     }
 
     public BlackPoplarShaman(UUID ownerId, CardSetInfo setInfo) {

@@ -16,7 +16,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.target.TargetSpell;
 
@@ -68,7 +67,7 @@ enum SpellstutterSpritePredicate implements ObjectSourcePlayerPredicate<ObjectSo
     private static final FilterPermanent filter = new FilterPermanent();
 
     static {
-        filter.add(new SubtypePredicate(SubType.FAERIE));
+        filter.add(SubType.FAERIE.getPredicate());
     }
 
     @Override

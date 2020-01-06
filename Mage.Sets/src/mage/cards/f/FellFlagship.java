@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -26,7 +25,7 @@ public final class FellFlagship extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Pirates");
 
     static {
-        filter.add(new SubtypePredicate(SubType.PIRATE));
+        filter.add(SubType.PIRATE.getPredicate());
     }
 
     public FellFlagship(UUID ownerId, CardSetInfo setInfo) {

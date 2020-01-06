@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterAttackingCreature;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
@@ -26,7 +25,7 @@ public final class BullAurochs extends CardImpl {
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("other attacking Aurochs");
 
     static {
-        filter.add(new SubtypePredicate(SubType.AUROCHS));
+        filter.add(SubType.AUROCHS.getPredicate());
         filter.add(AnotherPredicate.instance);
     }
 

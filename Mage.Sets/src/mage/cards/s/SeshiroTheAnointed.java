@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -28,7 +27,7 @@ public final class SeshiroTheAnointed extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Snake creatures");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SNAKE));
+        filter.add(SubType.SNAKE.getPredicate());
     }
 
     public SeshiroTheAnointed(UUID ownerId, CardSetInfo setInfo) {

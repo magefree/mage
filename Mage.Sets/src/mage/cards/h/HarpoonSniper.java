@@ -16,7 +16,6 @@ import mage.constants.ColoredManaSymbol;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetAttackingOrBlockingCreature;
 
 /**
@@ -28,7 +27,7 @@ public final class HarpoonSniper extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Merfolk you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.MERFOLK));
+        filter.add(SubType.MERFOLK.getPredicate());
     }
 
     public HarpoonSniper(UUID ownerId, CardSetInfo setInfo) {

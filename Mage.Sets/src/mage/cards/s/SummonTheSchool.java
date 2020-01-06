@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.permanent.token.MerfolkWizardToken;
 import mage.target.common.TargetControlledPermanent;
@@ -28,7 +27,7 @@ public final class SummonTheSchool extends CardImpl {
 
     static {
         filter.add(Predicates.not(TappedPredicate.instance));
-        filter.add(new SubtypePredicate(SubType.MERFOLK));
+        filter.add(SubType.MERFOLK.getPredicate());
     }
 
     public SummonTheSchool(UUID ownerId, CardSetInfo setInfo) {

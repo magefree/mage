@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -51,7 +50,7 @@ class TakenoSamuraiGeneralEffect extends ContinuousEffectImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     static {
-        filter.add(new SubtypePredicate(SubType.SAMURAI));
+        filter.add(SubType.SAMURAI.getPredicate());
     }
 
     public TakenoSamuraiGeneralEffect() {

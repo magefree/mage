@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -20,7 +19,7 @@ public final class AirborneAid extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Bird on the battlefield");
 
     static {
-        filter.add(new SubtypePredicate(SubType.BIRD));
+        filter.add(SubType.BIRD.getPredicate());
     }
 
     public AirborneAid(UUID ownerId, CardSetInfo setInfo) {

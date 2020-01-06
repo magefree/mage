@@ -4,7 +4,6 @@
 package mage.filter.common;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -18,7 +17,7 @@ public class FilterEquipmentPermanent extends FilterPermanent {
 
     public FilterEquipmentPermanent(String name) {
         super(name);
-        this.add(new SubtypePredicate(SubType.EQUIPMENT));
+        this.add(SubType.EQUIPMENT.getPredicate());
     }
 
     public FilterEquipmentPermanent(final FilterEquipmentPermanent filter) {

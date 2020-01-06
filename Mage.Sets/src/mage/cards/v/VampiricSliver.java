@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -26,7 +25,7 @@ public final class VampiricSliver extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(new SubtypePredicate(SubType.SLIVER));
+        filter.add(SubType.SLIVER.getPredicate());
     }
 
     public VampiricSliver(UUID ownerId, CardSetInfo setInfo) {

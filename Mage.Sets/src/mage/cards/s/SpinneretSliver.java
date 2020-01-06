@@ -13,7 +13,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -24,7 +23,7 @@ public final class SpinneretSliver extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(new SubtypePredicate(SubType.SLIVER));
+        filter.add(SubType.SLIVER.getPredicate());
     }
 
     public SpinneretSliver(UUID ownerId, CardSetInfo setInfo) {

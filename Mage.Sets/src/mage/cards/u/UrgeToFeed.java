@@ -11,7 +11,6 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
@@ -51,7 +50,7 @@ class UrgeToFeedEffect extends OneShotEffect {
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(Predicates.not(TappedPredicate.instance));
-        filter.add(new SubtypePredicate(SubType.VAMPIRE));
+        filter.add(SubType.VAMPIRE.getPredicate());
     }
 
     public UrgeToFeedEffect() {

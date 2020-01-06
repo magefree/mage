@@ -18,7 +18,6 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.SaprolingToken;
 
 /**
@@ -30,7 +29,7 @@ public final class SlimefootTheStowaway extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Saproling you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SAPROLING));
+        filter.add(SubType.SAPROLING.getPredicate());
     }
 
     public SlimefootTheStowaway(UUID ownerId, CardSetInfo setInfo) {

@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -22,7 +21,7 @@ public final class StinkdrinkerDaredevil extends CardImpl {
     private static final FilterCard filter = new FilterCard("Giant spells");
 
     static {
-        filter.add(new SubtypePredicate(SubType.GIANT));
+        filter.add(SubType.GIANT.getPredicate());
     }
 
     public StinkdrinkerDaredevil(UUID ownerId, CardSetInfo setInfo) {

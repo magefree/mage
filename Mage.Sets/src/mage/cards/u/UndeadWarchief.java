@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -26,8 +25,8 @@ public final class UndeadWarchief extends CardImpl {
     private static final FilterCreaturePermanent filterCreatures = new FilterCreaturePermanent("Zombie creatures");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ZOMBIE));
-        filterCreatures.add(new SubtypePredicate(SubType.ZOMBIE));
+        filter.add(SubType.ZOMBIE.getPredicate());
+        filterCreatures.add(SubType.ZOMBIE.getPredicate());
     }
 
     public UndeadWarchief(UUID ownerId, CardSetInfo setInfo) {

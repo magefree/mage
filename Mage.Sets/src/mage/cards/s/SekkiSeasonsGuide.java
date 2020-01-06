@@ -17,7 +17,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -33,7 +32,7 @@ public final class SekkiSeasonsGuide extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("eight Spirits");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SPIRIT));
+        filter.add(SubType.SPIRIT.getPredicate());
     }
 
     public SekkiSeasonsGuide(UUID ownerId, CardSetInfo setInfo) {

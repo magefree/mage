@@ -4,8 +4,6 @@ package mage.filter.common;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import mage.filter.predicate.mageobject.SubtypePredicate;
-
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -29,7 +27,7 @@ public class FilterControlledCreaturePermanent extends FilterControlledPermanent
 
         this.add(CardType.CREATURE.getPredicate());
         if(subtype != null) {
-            this.add(new SubtypePredicate(subtype));
+            this.add(subtype.getPredicate());
         }
     }
 

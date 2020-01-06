@@ -20,7 +20,6 @@ import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -65,7 +64,7 @@ class ElderSpawnEffect extends OneShotEffect {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an Island");
     static {
-        filter.add(new SubtypePredicate(SubType.ISLAND));
+        filter.add(SubType.ISLAND.getPredicate());
     }
     
     public ElderSpawnEffect() {

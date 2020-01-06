@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledPermanent;
 
@@ -27,7 +26,7 @@ public final class GatewayShade extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("untapped Gate you control");
     static {
-        filter.add(new SubtypePredicate(SubType.GATE));
+        filter.add(SubType.GATE.getPredicate());
         filter.add(Predicates.not(TappedPredicate.instance));
     }
 

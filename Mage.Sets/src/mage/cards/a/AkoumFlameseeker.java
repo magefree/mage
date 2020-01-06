@@ -14,7 +14,6 @@ import mage.cards.Cards;
 import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -29,7 +28,7 @@ public final class AkoumFlameseeker extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an untapped Ally you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ALLY));
+        filter.add(SubType.ALLY.getPredicate());
         filter.add(Predicates.not(TappedPredicate.instance));
     }
 

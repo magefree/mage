@@ -16,7 +16,6 @@ import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -35,7 +34,7 @@ public final class AuraGraft extends CardImpl {
 
         // Gain control of target Aura that's attached to a permanent. Attach it to another permanent it can enchant.
         FilterPermanent filter = new FilterPermanent("Aura that's attached to a permanent");
-        filter.add(new SubtypePredicate(SubType.AURA));
+        filter.add(SubType.AURA.getPredicate());
         filter.add(new AttachedToPermanentPredicate());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
 

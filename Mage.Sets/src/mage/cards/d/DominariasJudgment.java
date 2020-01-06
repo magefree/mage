@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  * 
@@ -29,11 +28,11 @@ public final class DominariasJudgment extends CardImpl {
     private static final FilterLandPermanent filterForest = new FilterLandPermanent("Forest");
 
     static {
-        filterPlains.add(new SubtypePredicate(SubType.PLAINS));
-        filterIsland.add(new SubtypePredicate(SubType.ISLAND));
-        filterSwamp.add(new SubtypePredicate(SubType.SWAMP));
-        filterMountain.add(new SubtypePredicate(SubType.MOUNTAIN));
-        filterForest.add(new SubtypePredicate(SubType.FOREST));
+        filterPlains.add(SubType.PLAINS.getPredicate());
+        filterIsland.add(SubType.ISLAND.getPredicate());
+        filterSwamp.add(SubType.SWAMP.getPredicate());
+        filterMountain.add(SubType.MOUNTAIN.getPredicate());
+        filterForest.add(SubType.FOREST.getPredicate());
     }
 
     public DominariasJudgment(UUID ownerId, CardSetInfo setInfo) {

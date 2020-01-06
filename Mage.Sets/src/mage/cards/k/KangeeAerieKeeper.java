@@ -17,7 +17,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
 import java.util.UUID;
@@ -30,7 +29,7 @@ public final class KangeeAerieKeeper extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Bird creatures");
 
     static {
-        filter.add(new SubtypePredicate(SubType.BIRD));
+        filter.add(SubType.BIRD.getPredicate());
         filter.add(AnotherPredicate.instance);
     }
 

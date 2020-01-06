@@ -6,7 +6,6 @@ import mage.abilities.condition.Condition;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -19,7 +18,7 @@ public class EnchantedCreatureSubtypeCondition implements Condition {
     private final FilterPermanent filter = new FilterCreaturePermanent();
 
     public EnchantedCreatureSubtypeCondition(SubType string) {
-        filter.add(new SubtypePredicate(string));
+        filter.add(string.getPredicate());
     }
 
     @Override

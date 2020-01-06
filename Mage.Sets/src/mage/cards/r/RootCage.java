@@ -8,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -19,7 +18,7 @@ public final class RootCage extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Mercenaries");
 
     static {
-        filter.add(new SubtypePredicate(SubType.MERCENARY));
+        filter.add(SubType.MERCENARY.getPredicate());
     }
 
     public RootCage(UUID ownerId, CardSetInfo setInfo) {

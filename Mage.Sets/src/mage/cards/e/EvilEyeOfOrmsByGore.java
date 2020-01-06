@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
@@ -25,8 +24,8 @@ public final class EvilEyeOfOrmsByGore extends CardImpl {
     private static final FilterCreaturePermanent cantBeBlockedByFilter = new FilterCreaturePermanent("except by Walls");
 
     static {
-        cantBeBlockedByFilter.add(Predicates.not(new SubtypePredicate(SubType.WALL)));
-        cantAttackFilter.add(Predicates.not((new SubtypePredicate(SubType.EYE))));
+        cantBeBlockedByFilter.add(Predicates.not(SubType.WALL.getPredicate()));
+        cantAttackFilter.add(Predicates.not((SubType.EYE.getPredicate())));
         cantAttackFilter.add(new ControllerPredicate(TargetController.YOU));
     }
 

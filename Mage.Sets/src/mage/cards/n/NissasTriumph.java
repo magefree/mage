@@ -13,7 +13,6 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPlaneswalkerPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
@@ -29,7 +28,7 @@ public final class NissasTriumph extends CardImpl {
 
     static {
         filter.add(new SupertypePredicate(SuperType.BASIC));
-        filter.add(new SubtypePredicate(SubType.FOREST));
+        filter.add(SubType.FOREST.getPredicate());
     }
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter2);

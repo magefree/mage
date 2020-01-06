@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.Target;
 import mage.target.TargetSpell;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -29,7 +28,7 @@ public final class VoidmageProdigy extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Wizard");
 
     static {
-        filter.add(new SubtypePredicate(SubType.WIZARD));
+        filter.add(SubType.WIZARD.getPredicate());
     }
 
     public VoidmageProdigy(UUID ownerId, CardSetInfo setInfo) {

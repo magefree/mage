@@ -15,10 +15,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.token.TokenImpl;
-import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 
 /**
@@ -29,7 +27,7 @@ public final class ElvishBranchbender extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("Forest");
     static {
-        filter.add(new SubtypePredicate(SubType.FOREST));
+        filter.add(SubType.FOREST.getPredicate());
     }
 
     public ElvishBranchbender(UUID ownerId, CardSetInfo setInfo) {
@@ -60,7 +58,7 @@ class ElvishBranchbenderEffect extends OneShotEffect {
     
     static final FilterControlledPermanent filter = new FilterControlledPermanent("Elves you control");
     static {
-        filter.add(new SubtypePredicate(SubType.ELF));
+        filter.add(SubType.ELF.getPredicate());
     }
     
     ElvishBranchbenderEffect() {

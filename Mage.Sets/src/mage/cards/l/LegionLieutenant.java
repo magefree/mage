@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
@@ -25,7 +24,7 @@ public final class LegionLieutenant extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Vampires you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.VAMPIRE));
+        filter.add(SubType.VAMPIRE.getPredicate());
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

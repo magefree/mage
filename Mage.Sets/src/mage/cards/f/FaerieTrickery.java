@@ -10,7 +10,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetSpell;
 
 /**
@@ -22,7 +21,7 @@ public final class FaerieTrickery extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("non-Faerie spell");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.FAERIE)));
+        filter.add(Predicates.not(SubType.FAERIE.getPredicate()));
     }
 
     public FaerieTrickery(UUID ownerId, CardSetInfo setInfo) {

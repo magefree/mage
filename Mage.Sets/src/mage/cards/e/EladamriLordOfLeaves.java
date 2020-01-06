@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -24,8 +23,8 @@ public final class EladamriLordOfLeaves extends CardImpl {
     private static final FilterPermanent filterPermanents = new FilterPermanent("Elves");
 
     static {
-        filterCreatures.add(new SubtypePredicate(SubType.ELF));
-        filterPermanents.add(new SubtypePredicate(SubType.ELF));
+        filterCreatures.add(SubType.ELF.getPredicate());
+        filterPermanents.add(SubType.ELF.getPredicate());
     }
 
     public EladamriLordOfLeaves(UUID ownerId, CardSetInfo setInfo) {

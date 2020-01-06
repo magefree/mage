@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -26,7 +25,7 @@ public final class ChampionOfDusk extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Vampires you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.VAMPIRE));
+        filter.add(SubType.VAMPIRE.getPredicate());
     }
 
     public ChampionOfDusk(UUID ownerId, CardSetInfo setInfo) {

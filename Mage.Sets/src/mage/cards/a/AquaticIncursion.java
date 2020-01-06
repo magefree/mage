@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.MerfolkHexproofToken;
 import mage.target.TargetPermanent;
 
@@ -28,7 +27,7 @@ public final class AquaticIncursion extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Merfolk");
 
     static {
-        filter.add(new SubtypePredicate(SubType.MERFOLK));
+        filter.add(SubType.MERFOLK.getPredicate());
     }
 
     public AquaticIncursion(UUID ownerId, CardSetInfo setInfo) {

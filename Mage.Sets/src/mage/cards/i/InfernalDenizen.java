@@ -25,7 +25,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
@@ -76,7 +75,7 @@ class InfernalDenizenEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterPermanent();
 
     static {
-        filter.add(new SubtypePredicate(SubType.SWAMP));
+        filter.add(SubType.SWAMP.getPredicate());
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

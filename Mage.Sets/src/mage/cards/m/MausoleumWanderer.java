@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterInstantOrSorcerySpell;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetSpell;
@@ -32,7 +31,7 @@ public final class MausoleumWanderer extends CardImpl {
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(AnotherPredicate.instance);
-        filter.add(new SubtypePredicate(SubType.SPIRIT));
+        filter.add(SubType.SPIRIT.getPredicate());
     }
 
     public MausoleumWanderer(UUID ownerId, CardSetInfo setInfo) {

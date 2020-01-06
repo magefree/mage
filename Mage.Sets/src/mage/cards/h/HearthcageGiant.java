@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.ElementalShamanToken;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -32,8 +31,8 @@ public final class HearthcageGiant extends CardImpl {
     private static final FilterCreaturePermanent filterGiant = new FilterCreaturePermanent("Giant");
 
     static {
-        filterElemental.add(new SubtypePredicate(SubType.ELEMENTAL));
-        filterGiant.add(new SubtypePredicate(SubType.GIANT));
+        filterElemental.add(SubType.ELEMENTAL.getPredicate());
+        filterGiant.add(SubType.GIANT.getPredicate());
     }
 
     public HearthcageGiant(UUID ownerId, CardSetInfo setInfo) {

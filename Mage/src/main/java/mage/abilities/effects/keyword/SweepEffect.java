@@ -9,7 +9,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
@@ -45,7 +44,7 @@ public class SweepEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             FilterPermanent filter = new FilterControlledLandPermanent("any number of " + sweepSubtype + "s you control");
-            filter.add(new SubtypePredicate(sweepSubtype));
+            filter.add(sweepSubtype.getPredicate());
             Target target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
             if (controller.chooseTarget(outcome, target, source, game)) {
                 game.getState().setValue(CardUtil.getCardZoneString("sweep", source.getSourceId(), game), target.getTargets().size());

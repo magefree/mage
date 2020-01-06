@@ -7,7 +7,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -66,7 +65,7 @@ class PlanarOverlayEffect extends OneShotEffect {
                 if (player != null) {
                     for (SubType landName : SubType.getBasicLands()) {
                         FilterLandPermanent filter = new FilterLandPermanent(landName + " to return to hand");
-                        filter.add(new SubtypePredicate(landName));
+                        filter.add(landName.getPredicate());
                         filter.add(new ControllerPredicate(TargetController.YOU));
                         Target target = new TargetLandPermanent(1, 1, filter, true);
                         if (target.canChoose(source.getSourceId(), player.getId(), game)) {

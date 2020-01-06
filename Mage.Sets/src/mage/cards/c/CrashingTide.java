@@ -16,7 +16,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -30,7 +29,7 @@ public final class CrashingTide extends CardImpl {
 
         // Crashing tide has flash as long as you control a Merfolk.
         FilterControlledPermanent filter = new FilterControlledPermanent();
-        filter.add(new SubtypePredicate(SubType.MERFOLK));
+        filter.add(SubType.MERFOLK.getPredicate());
         this.addAbility(new SimpleStaticAbility(Zone.ALL,
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(FlashAbility.getInstance(), Duration.WhileOnBattlefield, true),
                         new PermanentsOnTheBattlefieldCondition(filter),

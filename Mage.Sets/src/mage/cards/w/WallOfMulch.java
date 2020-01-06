@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -27,7 +26,7 @@ public final class WallOfMulch extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Wall");
     
     static {
-        filter.add(new SubtypePredicate(SubType.WALL));
+        filter.add(SubType.WALL.getPredicate());
     }
     
        

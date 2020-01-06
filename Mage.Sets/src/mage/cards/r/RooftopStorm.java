@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -45,7 +44,7 @@ class RooftopStormRuleEffect extends ContinuousEffectImpl {
     private static final FilterCard filter = new FilterCard("Zombie creature spells");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ZOMBIE));
+        filter.add(SubType.ZOMBIE.getPredicate());
         filter.add(CardType.CREATURE.getPredicate());
     }
 

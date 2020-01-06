@@ -13,7 +13,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  * @author dokkaebi
@@ -23,7 +22,7 @@ public final class VirulentSliver extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(new SubtypePredicate(SubType.SLIVER));
+        filter.add(SubType.SLIVER.getPredicate());
     }
 
     public VirulentSliver(UUID ownerId, CardSetInfo setInfo) {

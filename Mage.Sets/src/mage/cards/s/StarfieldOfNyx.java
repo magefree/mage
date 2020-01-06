@@ -19,7 +19,6 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.other.OwnerPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -85,7 +84,7 @@ class StarfieldOfNyxEffect extends ContinuousEffectImpl {
             = new FilterEnchantmentPermanent("Each other non-Aura enchantment you control");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.AURA)));
+        filter.add(Predicates.not(SubType.AURA.getPredicate()));
         filter.add(AnotherPredicate.instance);
         filter.add(new ControllerPredicate(TargetController.YOU));
     }

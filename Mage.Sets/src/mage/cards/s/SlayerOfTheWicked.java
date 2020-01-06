@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -25,9 +24,9 @@ public final class SlayerOfTheWicked extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate(SubType.VAMPIRE),
-                new SubtypePredicate(SubType.WEREWOLF),
-                new SubtypePredicate(SubType.ZOMBIE)));
+                SubType.VAMPIRE.getPredicate(),
+                SubType.WEREWOLF.getPredicate(),
+                SubType.ZOMBIE.getPredicate()));
     }
 
     public SlayerOfTheWicked(UUID ownerId, CardSetInfo setInfo) {

@@ -21,7 +21,6 @@ import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.VampireToken;
 
 /**
@@ -32,7 +31,7 @@ public final class BloodlineKeeper extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control five or more Vampires");
 
     static {
-        filter.add(new SubtypePredicate(SubType.VAMPIRE));
+        filter.add(SubType.VAMPIRE.getPredicate());
     }
 
     public BloodlineKeeper(UUID ownerId, CardSetInfo setInfo) {

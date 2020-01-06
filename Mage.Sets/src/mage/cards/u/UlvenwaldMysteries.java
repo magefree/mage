@@ -15,7 +15,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -35,7 +34,7 @@ public final class UlvenwaldMysteries extends CardImpl {
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(Predicates.not(TokenPredicate.instance));
-        filterClue.add(new SubtypePredicate(SubType.CLUE));
+        filterClue.add(SubType.CLUE.getPredicate());
     }
 
     public UlvenwaldMysteries(UUID ownerId, CardSetInfo setInfo) {

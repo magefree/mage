@@ -15,7 +15,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -32,7 +31,7 @@ public final class ArchdemonOfGreed extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Human");
 
     static {
-        filter.add(new SubtypePredicate(SubType.HUMAN));
+        filter.add(SubType.HUMAN.getPredicate());
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

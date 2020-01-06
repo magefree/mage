@@ -19,7 +19,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -31,7 +30,7 @@ public final class PrizedElephant extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("a Forest");
     
     static {
-        filter.add(new SubtypePredicate(SubType.FOREST));
+        filter.add(SubType.FOREST.getPredicate());
     }
 
     public PrizedElephant(UUID ownerId, CardSetInfo setInfo) {

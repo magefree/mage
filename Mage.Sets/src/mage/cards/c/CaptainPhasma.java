@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.TrooperToken;
 import mage.target.common.TargetCardInLibrary;
@@ -31,9 +30,9 @@ public final class CaptainPhasma extends CardImpl {
     private static final FilterCreatureCard filterCard = new FilterCreatureCard("Trooper card");
 
     static {
-        filter.add(new SubtypePredicate(SubType.TROOPER));
+        filter.add(SubType.TROOPER.getPredicate());
         filter.add(Predicates.not(TokenPredicate.instance));
-        filterCard.add(new SubtypePredicate(SubType.TROOPER));
+        filterCard.add(SubType.TROOPER.getPredicate());
     }
 
     public CaptainPhasma(UUID ownerId, CardSetInfo setInfo) {

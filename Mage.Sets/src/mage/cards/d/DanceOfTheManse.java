@@ -13,7 +13,6 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
@@ -61,7 +60,7 @@ enum DanceOfTheManseAdjuster implements TargetAdjuster {
                 CardType.ARTIFACT.getPredicate(),
                 Predicates.and(
                         CardType.ENCHANTMENT.getPredicate(),
-                        Predicates.not(new SubtypePredicate(SubType.AURA))
+                        Predicates.not(SubType.AURA.getPredicate())
                 )
         ));
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));

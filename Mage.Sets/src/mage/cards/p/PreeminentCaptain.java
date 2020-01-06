@@ -14,7 +14,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -55,7 +54,7 @@ class PreeminentCaptainEffect extends OneShotEffect {
     private static final FilterCreatureCard filter = new FilterCreatureCard("a soldier creature card");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SOLDIER));
+        filter.add(SubType.SOLDIER.getPredicate());
     }
 
     public PreeminentCaptainEffect() {

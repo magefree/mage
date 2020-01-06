@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -24,7 +23,7 @@ public final class SpittingSliver extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("All Sliver creatures");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SLIVER));
+        filter.add(SubType.SLIVER.getPredicate());
     }
 
     public SpittingSliver(UUID ownerId, CardSetInfo setInfo) {

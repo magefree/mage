@@ -19,7 +19,6 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -38,7 +37,7 @@ public final class ArachnusSpinner extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Spider you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SPIDER));
+        filter.add(SubType.SPIDER.getPredicate());
         filter.add(Predicates.not(TappedPredicate.instance));
     }
 

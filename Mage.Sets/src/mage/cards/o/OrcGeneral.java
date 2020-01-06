@@ -17,7 +17,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetControlledPermanent;
 
@@ -31,10 +30,10 @@ public final class OrcGeneral extends CardImpl {
     private static final FilterCreaturePermanent filterOrc = new FilterCreaturePermanent("Other Orc creatures");
     
     static {
-        filterOrcOrGoblin.add(Predicates.or(new SubtypePredicate(SubType.ORC),
-                new SubtypePredicate(SubType.GOBLIN)));
+        filterOrcOrGoblin.add(Predicates.or(SubType.ORC.getPredicate(),
+                SubType.GOBLIN.getPredicate()));
         filterOrcOrGoblin.add(AnotherPredicate.instance);
-        filterOrc.add(new SubtypePredicate(SubType.ORC));
+        filterOrc.add(SubType.ORC.getPredicate());
     }
 
     public OrcGeneral(UUID ownerId, CardSetInfo setInfo) {

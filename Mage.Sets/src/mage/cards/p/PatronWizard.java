@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetSpell;
 import mage.target.common.TargetControlledPermanent;
@@ -29,7 +28,7 @@ public final class PatronWizard extends CardImpl {
     static final private FilterControlledPermanent filter = new FilterControlledPermanent("untapped Wizard you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.WIZARD));
+        filter.add(SubType.WIZARD.getPredicate());
         filter.add(Predicates.not(TappedPredicate.instance));
     }
 

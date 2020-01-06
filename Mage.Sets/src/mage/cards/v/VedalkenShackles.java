@@ -20,7 +20,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -67,7 +66,7 @@ class PowerIslandPredicate implements ObjectPlayerPredicate<ObjectPlayer<Permane
 
     static final FilterLandPermanent filter = new FilterLandPermanent("Island");
     static {
-        filter.add(new SubtypePredicate(SubType.ISLAND));
+        filter.add(SubType.ISLAND.getPredicate());
     }
 
     @Override

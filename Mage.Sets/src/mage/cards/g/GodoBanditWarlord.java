@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetCardInLibrary;
 
@@ -31,7 +30,7 @@ public final class GodoBanditWarlord extends CardImpl {
     private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent(SubType.SAMURAI);
 
     static {
-        filter.add(new SubtypePredicate(SubType.EQUIPMENT));
+        filter.add(SubType.EQUIPMENT.getPredicate());
         filter2.add(AnotherPredicate.instance);
     }
 

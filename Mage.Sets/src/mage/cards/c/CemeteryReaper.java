@@ -19,7 +19,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.ZombieToken;
 import mage.target.common.TargetCardInGraveyard;
 
@@ -31,7 +30,7 @@ public final class CemeteryReaper extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombie creatures");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ZOMBIE));
+        filter.add(SubType.ZOMBIE.getPredicate());
     }
 
     public CemeteryReaper(UUID ownerId, CardSetInfo setInfo) {

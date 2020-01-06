@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
@@ -29,9 +28,9 @@ public final class RootsOfLife extends CardImpl {
     private static final FilterPermanent swampFilter = new FilterPermanent("a Swamp an opponent controls");
 
     static {
-        islandFilter.add(new SubtypePredicate(SubType.ISLAND));
+        islandFilter.add(SubType.ISLAND.getPredicate());
         islandFilter.add(new ControllerPredicate(TargetController.OPPONENT));
-        swampFilter.add(new SubtypePredicate(SubType.SWAMP));
+        swampFilter.add(SubType.SWAMP.getPredicate());
         swampFilter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 

@@ -13,7 +13,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.HumanToken;
 
 import java.util.UUID;
@@ -26,7 +25,7 @@ public final class HarmoniousArchon extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Archon creatures");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.ARCHON)));
+        filter.add(Predicates.not(SubType.ARCHON.getPredicate()));
     }
 
     public HarmoniousArchon(UUID ownerId, CardSetInfo setInfo) {

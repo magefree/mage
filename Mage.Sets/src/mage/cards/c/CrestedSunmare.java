@@ -19,7 +19,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.CrestedSunmareToken;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
@@ -32,7 +31,7 @@ public final class CrestedSunmare extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Horses you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.HORSE));
+        filter.add(SubType.HORSE.getPredicate());
     }
 
     public CrestedSunmare(UUID ownerId, CardSetInfo setInfo) {

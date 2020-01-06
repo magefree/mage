@@ -17,7 +17,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -31,8 +30,8 @@ public final class DeathmarkPrelate extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("non-Zombie creature");
 
     static {
-        filter1.add(new SubtypePredicate(SubType.ZOMBIE));
-        filter2.add(Predicates.not(new SubtypePredicate(SubType.ZOMBIE)));
+        filter1.add(SubType.ZOMBIE.getPredicate());
+        filter2.add(Predicates.not(SubType.ZOMBIE.getPredicate()));
     }
 
     public DeathmarkPrelate(UUID ownerId, CardSetInfo setInfo) {

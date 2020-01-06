@@ -16,7 +16,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -33,7 +32,7 @@ public final class HorobisWhisper extends CardImpl {
 
     static {
         filterTarget.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
-        filterCondition.add(new SubtypePredicate(SubType.SWAMP));
+        filterCondition.add(SubType.SWAMP.getPredicate());
     }
 
     public HorobisWhisper(UUID ownerId, CardSetInfo setInfo) {

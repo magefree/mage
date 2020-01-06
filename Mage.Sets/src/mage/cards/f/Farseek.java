@@ -10,7 +10,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -23,10 +22,10 @@ public final class Farseek extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate(SubType.PLAINS),
-                new SubtypePredicate(SubType.ISLAND),
-                new SubtypePredicate(SubType.SWAMP),
-                new SubtypePredicate(SubType.MOUNTAIN)));
+                SubType.PLAINS.getPredicate(),
+                SubType.ISLAND.getPredicate(),
+                SubType.SWAMP.getPredicate(),
+                SubType.MOUNTAIN.getPredicate()));
     }
 
     public Farseek(UUID ownerId, CardSetInfo setInfo) {

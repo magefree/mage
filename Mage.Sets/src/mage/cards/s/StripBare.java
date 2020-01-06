@@ -11,7 +11,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -63,8 +62,8 @@ class StripBareEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         boolean applied = false;
         FilterPermanent filter = new FilterPermanent();
-        filter.add(Predicates.or(new SubtypePredicate(SubType.EQUIPMENT),
-                new SubtypePredicate(SubType.AURA)));
+        filter.add(Predicates.or(SubType.EQUIPMENT.getPredicate(),
+                SubType.AURA.getPredicate()));
         Permanent targetCreature = game.getPermanent(source.getFirstTarget());
         if (targetCreature != null
                 && !targetCreature.getAttachments().isEmpty()) {

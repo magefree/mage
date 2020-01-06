@@ -13,7 +13,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -28,7 +27,7 @@ public final class DesertNomads extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("desert");
 
     static {
-        filter.add(new SubtypePredicate(SubType.DESERT));
+        filter.add(SubType.DESERT.getPredicate());
     }
 
     public DesertNomads(UUID ownerId, CardSetInfo setInfo) {

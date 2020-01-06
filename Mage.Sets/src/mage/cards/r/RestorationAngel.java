@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -33,7 +32,7 @@ public final class RestorationAngel extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("non-Angel creature you control");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.ANGEL)));
+        filter.add(Predicates.not(SubType.ANGEL.getPredicate()));
     }
 
     public RestorationAngel(UUID ownerId, CardSetInfo setInfo) {

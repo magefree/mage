@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -62,7 +61,7 @@ class FalkenrathGorgerEffect extends ContinuousEffectImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("Vampire creature card you own");
 
     static {
-        filter.add(new SubtypePredicate(SubType.VAMPIRE));
+        filter.add(SubType.VAMPIRE.getPredicate());
 
     }
 

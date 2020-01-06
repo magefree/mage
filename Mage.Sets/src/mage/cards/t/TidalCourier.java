@@ -16,7 +16,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -27,7 +26,7 @@ public final class TidalCourier extends CardImpl {
     private static final FilterCard filter = new FilterCard("Merfolk cards");
 
     static {
-        filter.add(new SubtypePredicate(SubType.MERFOLK));
+        filter.add(SubType.MERFOLK.getPredicate());
     }
 
     public TidalCourier(UUID ownerId, CardSetInfo setInfo) {

@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -25,7 +24,7 @@ public final class SunriseSovereign extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Giant");
 
     static {
-        filter.add(new SubtypePredicate(SubType.GIANT));
+        filter.add(SubType.GIANT.getPredicate());
     }
 
     public SunriseSovereign(UUID ownerId, CardSetInfo setInfo) {

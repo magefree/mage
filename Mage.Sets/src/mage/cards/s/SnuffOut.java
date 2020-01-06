@@ -14,7 +14,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -30,7 +29,7 @@ public final class SnuffOut extends CardImpl {
 
     static {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
-        filterSwamp.add(new SubtypePredicate(SubType.SWAMP));
+        filterSwamp.add(SubType.SWAMP.getPredicate());
     }
 
     public SnuffOut(UUID ownerId, CardSetInfo setInfo) {

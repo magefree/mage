@@ -19,7 +19,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
@@ -32,7 +31,7 @@ public final class NissaVastwoodSeer extends CardImpl {
     private static final FilterCard filter = new FilterCard("basic Forest card");
     static {
         filter.add(new SupertypePredicate(SuperType.BASIC));
-        filter.add(new SubtypePredicate(SubType.FOREST));
+        filter.add(SubType.FOREST.getPredicate());
     }
 
     public NissaVastwoodSeer(UUID ownerId, CardSetInfo setInfo) {

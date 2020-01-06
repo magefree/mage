@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -83,7 +82,7 @@ class ThievingSpriteEffect extends OneShotEffect {
         }
 
         FilterControlledPermanent filter = new FilterControlledPermanent();
-        filter.add(new SubtypePredicate(SubType.FAERIE));
+        filter.add(SubType.FAERIE.getPredicate());
         int numberOfFaeries = game.getBattlefield().countAll(filter, controller.getId(), game);
 
         Cards revealedCards = new CardsImpl();

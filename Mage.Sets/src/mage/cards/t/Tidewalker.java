@@ -19,7 +19,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -30,7 +29,7 @@ public final class Tidewalker extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Island you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ISLAND));
+        filter.add(SubType.ISLAND.getPredicate());
     }
 
     public Tidewalker(UUID ownerId, CardSetInfo setInfo) {

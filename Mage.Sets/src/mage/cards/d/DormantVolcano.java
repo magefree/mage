@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledPermanent;
 
@@ -29,7 +28,7 @@ public final class DormantVolcano extends CardImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("an untapped Mountain");
 
     static {
-        filter.add(new SubtypePredicate(SubType.MOUNTAIN));
+        filter.add(SubType.MOUNTAIN.getPredicate());
         filter.add(Predicates.not(TappedPredicate.instance));
     }
 

@@ -12,7 +12,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.other.AuraCardCanAttachToLKIPermanentId;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -65,7 +64,7 @@ class AuratouchedMageEffect extends OneShotEffect {
 
         if (controller != null) {
             FilterCard filter = new FilterCard("aura that could enchant " + source.getSourceObject(game).getName());
-            filter.add(new SubtypePredicate(SubType.AURA));
+            filter.add(SubType.AURA.getPredicate());
             filter.add(new AuraCardCanAttachToLKIPermanentId(source.getSourceId()));
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
             target.setNotTarget(true);

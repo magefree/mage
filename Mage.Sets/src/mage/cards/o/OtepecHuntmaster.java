@@ -18,7 +18,6 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -31,8 +30,8 @@ public final class OtepecHuntmaster extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Dinosaur");
 
     static {
-        filter.add(new SubtypePredicate(SubType.DINOSAUR));
-        filter2.add(new SubtypePredicate(SubType.DINOSAUR));
+        filter.add(SubType.DINOSAUR.getPredicate());
+        filter2.add(SubType.DINOSAUR.getPredicate());
     }
 
     public OtepecHuntmaster(UUID ownerId, CardSetInfo setInfo) {

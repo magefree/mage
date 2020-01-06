@@ -14,7 +14,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -27,7 +26,7 @@ public final class ThunderOfHooves extends CardImpl {
 
     static {
         filterNotFlying.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
-        filterBeasts.add(new SubtypePredicate(SubType.BEAST));
+        filterBeasts.add(SubType.BEAST.getPredicate());
     }
 
     public ThunderOfHooves(UUID ownerId, CardSetInfo setInfo) {

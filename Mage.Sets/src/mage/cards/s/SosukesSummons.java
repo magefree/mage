@@ -11,7 +11,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.SnakeToken;
 
@@ -25,7 +24,7 @@ public final class SosukesSummons extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a nontoken Snake");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SNAKE));
+        filter.add(SubType.SNAKE.getPredicate());
         filter.add(Predicates.not(TokenPredicate.instance));
     }
 

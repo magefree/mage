@@ -17,7 +17,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -29,7 +28,7 @@ public final class OliviasBloodsworn extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Vampire");
     
     static {
-        filter.add(new SubtypePredicate(SubType.VAMPIRE));
+        filter.add(SubType.VAMPIRE.getPredicate());
     }
 
     public OliviasBloodsworn(UUID ownerId, CardSetInfo setInfo) {

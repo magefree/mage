@@ -18,7 +18,6 @@ import mage.game.permanent.token.UktabiKongApeToken;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledPermanent;
 
@@ -32,7 +31,7 @@ public final class UktabiKong extends CardImpl {
 
     static {
         filter.add(Predicates.not(TappedPredicate.instance));
-        filter.add(new SubtypePredicate(SubType.APE));
+        filter.add(SubType.APE.getPredicate());
     }
 
     public UktabiKong(UUID ownerId, CardSetInfo setInfo) {

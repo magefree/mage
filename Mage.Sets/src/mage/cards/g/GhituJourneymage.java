@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
@@ -27,7 +26,7 @@ public final class GhituJourneymage extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(new SubtypePredicate(SubType.WIZARD));
+        filter.add(SubType.WIZARD.getPredicate());
     }
 
     public GhituJourneymage(UUID ownerId, CardSetInfo setInfo) {

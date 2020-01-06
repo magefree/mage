@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.WandOfTheElementsFirstToken;
 import mage.game.permanent.token.WandOfTheElementsSecondToken;
 import mage.target.common.TargetControlledPermanent;
@@ -27,8 +26,8 @@ public final class WandOfTheElements extends CardImpl {
     private static final FilterControlledPermanent mountainFilter = new FilterControlledPermanent("a Mountain");
 
     static {
-        islandFilter.add(new SubtypePredicate(SubType.ISLAND));
-        mountainFilter.add(new SubtypePredicate(SubType.MOUNTAIN));
+        islandFilter.add(SubType.ISLAND.getPredicate());
+        mountainFilter.add(SubType.MOUNTAIN.getPredicate());
     }
 
     public WandOfTheElements(UUID ownerId, CardSetInfo setInfo) {

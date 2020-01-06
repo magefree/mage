@@ -18,7 +18,6 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -62,7 +61,7 @@ class WhipgrassEntanglerCantAttackUnlessYouPayEffect extends CantAttackBlockUnle
     private static final FilterPermanent filter = new FilterPermanent("Cleric on the battlefield");
 
     static {
-        filter.add(new SubtypePredicate(SubType.CLERIC));
+        filter.add(SubType.CLERIC.getPredicate());
     }
 
     WhipgrassEntanglerCantAttackUnlessYouPayEffect() {

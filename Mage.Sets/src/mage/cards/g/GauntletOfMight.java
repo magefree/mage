@@ -15,7 +15,6 @@ import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -28,7 +27,7 @@ public final class GauntletOfMight extends CardImpl {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));
-        filterMountain.add(new SubtypePredicate(SubType.MOUNTAIN));
+        filterMountain.add(SubType.MOUNTAIN.getPredicate());
     }
     
     public GauntletOfMight(UUID ownerId, CardSetInfo setInfo) {

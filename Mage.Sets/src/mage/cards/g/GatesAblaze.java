@@ -10,7 +10,6 @@ import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -23,7 +22,7 @@ public final class GatesAblaze extends CardImpl {
             = new FilterControlledPermanent("the number of Gates you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.GATE));
+        filter.add(SubType.GATE.getPredicate());
     }
 
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);

@@ -13,7 +13,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -55,7 +54,7 @@ class JacesDefeatEffect extends OneShotEffect {
 
     static {
         filter.add(CardType.PLANESWALKER.getPredicate());
-        filter.add(new SubtypePredicate(SubType.JACE));
+        filter.add(SubType.JACE.getPredicate());
     }
 
     public JacesDefeatEffect() {

@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterEnchantmentPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -23,7 +22,7 @@ public final class ReverentSilence extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("If you control a Forest");
     
     static {
-        filter.add(new SubtypePredicate(SubType.FOREST));
+        filter.add(SubType.FOREST.getPredicate());
     }
     
     public ReverentSilence(UUID ownerId, CardSetInfo setInfo) {

@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -20,7 +19,7 @@ public final class NathsBuffoon extends CardImpl {
     private static final FilterCard filter = new FilterCard("Elves");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ELF));
+        filter.add(SubType.ELF.getPredicate());
     }
 
     public NathsBuffoon(UUID ownerId, CardSetInfo setInfo) {

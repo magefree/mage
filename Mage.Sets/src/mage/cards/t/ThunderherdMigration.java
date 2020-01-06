@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
 
@@ -25,7 +24,7 @@ public final class ThunderherdMigration extends CardImpl {
     private static final FilterCard filter = new FilterCard("a Dinosaur card from your hand");
 
     static {
-        filter.add(new SubtypePredicate(SubType.DINOSAUR));
+        filter.add(SubType.DINOSAUR.getPredicate());
     }
 
     public ThunderherdMigration(UUID ownerId, CardSetInfo setInfo) {

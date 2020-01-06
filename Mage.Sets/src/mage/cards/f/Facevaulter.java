@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -24,7 +23,7 @@ public final class Facevaulter extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Goblin");
 
     static {
-        filter.add(new SubtypePredicate(SubType.GOBLIN));
+        filter.add(SubType.GOBLIN.getPredicate());
     }
 
     public Facevaulter(UUID ownerId, CardSetInfo setInfo) {

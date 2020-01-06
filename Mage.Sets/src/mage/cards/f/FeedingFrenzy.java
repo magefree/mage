@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -24,7 +23,7 @@ public final class FeedingFrenzy extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent();
 
     static {
-        filter.add(new SubtypePredicate(SubType.ZOMBIE));
+        filter.add(SubType.ZOMBIE.getPredicate());
     }
 
     public FeedingFrenzy(UUID ownerId, CardSetInfo setInfo) {

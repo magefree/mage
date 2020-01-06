@@ -23,7 +23,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -41,8 +40,8 @@ public final class SwordOfDungeonsAndDragons extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("Rogues and from Clerics");
      static {filter.add(Predicates.or(
-            new SubtypePredicate(SubType.ROGUE),
-            new SubtypePredicate(SubType.CLERIC)
+            SubType.ROGUE.getPredicate(),
+            SubType.CLERIC.getPredicate()
             ));
     }
 

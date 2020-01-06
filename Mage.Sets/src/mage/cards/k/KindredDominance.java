@@ -14,7 +14,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -64,7 +63,7 @@ class KindredDominanceEffect extends OneShotEffect {
         if (controller != null && controller.choose(outcome, typeChoice, game)) {
             game.informPlayers(controller.getLogName() + " has chosen " + typeChoice.getChoice());
             FilterCreaturePermanent filter = new FilterCreaturePermanent("All creatures not of the chosen type");
-            filter.add(Predicates.not(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice()))));
+            filter.add(Predicates.not(SubType.byDescription(typeChoice.getChoice()).getPredicate()));
             return new DestroyAllEffect(filter).apply(game, source);
         }
         return false;

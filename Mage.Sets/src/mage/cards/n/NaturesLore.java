@@ -7,7 +7,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
@@ -21,7 +20,7 @@ public final class NaturesLore extends CardImpl {
     private static final FilterCard filter = new FilterCard("Forest card");
 
     static {
-        filter.add(new SubtypePredicate(SubType.FOREST));
+        filter.add(SubType.FOREST.getPredicate());
     }
 
     public NaturesLore(UUID ownerId, CardSetInfo setInfo) {

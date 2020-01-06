@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -24,7 +23,7 @@ public final class ThingFromTheDeep extends CardImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("an Island");
     
     static{
-        filter.add(new SubtypePredicate(SubType.ISLAND));
+        filter.add(SubType.ISLAND.getPredicate());
     }
 
     public ThingFromTheDeep(UUID ownerId, CardSetInfo setInfo) {

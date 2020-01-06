@@ -16,7 +16,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -80,7 +80,7 @@ class CorpseHarvesterEffect extends OneShotEffect {
 
     private void searchCard(Player player, Ability source, Game game, Cards cards, String subtype) {
         FilterCard filter = new FilterCard(subtype);
-        filter.add(new SubtypePredicate(SubType.byDescription(subtype)));
+        filter.add(SubType.byDescription(subtype).getPredicate());
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
         if (player.searchLibrary(target, source, game)) {
             Card card = player.getLibrary().remove(target.getFirstTarget(), game);

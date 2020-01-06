@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.SpiritWhiteToken;
@@ -26,7 +25,7 @@ public final class RequiemAngel extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another non-Spirit creature you control");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.SPIRIT)));
+        filter.add(Predicates.not(SubType.SPIRIT.getPredicate()));
         filter.add(AnotherPredicate.instance);
         filter.add(new ControllerPredicate(TargetController.YOU));
     }

@@ -25,7 +25,6 @@ import mage.counters.BoostCounter;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -40,7 +39,7 @@ public final class KrovikanPlague extends CardImpl {
     private static final FilterControlledCreaturePermanent filterNonWall = new FilterControlledCreaturePermanent("non-Wall creature you control");
 
     static {
-        filterNonWall.add(Predicates.not(new SubtypePredicate(SubType.WALL)));
+        filterNonWall.add(Predicates.not(SubType.WALL.getPredicate()));
     }
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("enchanted creature is untapped");

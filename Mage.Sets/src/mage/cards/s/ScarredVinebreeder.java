@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -26,7 +25,7 @@ public final class ScarredVinebreeder extends CardImpl {
     private static final FilterCard filter = new FilterCard("Elf card from your graveyard");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ELF));
+        filter.add(SubType.ELF.getPredicate());
     }
 
     public ScarredVinebreeder(UUID ownerId, CardSetInfo setInfo) {

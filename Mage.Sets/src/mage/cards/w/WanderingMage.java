@@ -19,7 +19,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
@@ -37,8 +36,8 @@ public final class WanderingMage extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate(SubType.CLERIC),
-                new SubtypePredicate(SubType.WIZARD)));
+                SubType.CLERIC.getPredicate(),
+                SubType.WIZARD.getPredicate()));
     }
 
     public WanderingMage(UUID ownerId, CardSetInfo setInfo) {

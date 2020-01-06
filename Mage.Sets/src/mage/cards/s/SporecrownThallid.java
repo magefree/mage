@@ -13,7 +13,6 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -25,8 +24,8 @@ public final class SporecrownThallid extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate(SubType.FUNGUS),
-                new SubtypePredicate(SubType.SAPROLING)
+                SubType.FUNGUS.getPredicate(),
+                SubType.SAPROLING.getPredicate()
         ));
     }
 

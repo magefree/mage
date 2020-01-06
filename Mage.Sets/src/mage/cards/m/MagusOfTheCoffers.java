@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -25,7 +24,7 @@ public final class MagusOfTheCoffers extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Swamp you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SWAMP));
+        filter.add(SubType.SWAMP.getPredicate());
     }
 
     public MagusOfTheCoffers(UUID ownerId, CardSetInfo setInfo) {

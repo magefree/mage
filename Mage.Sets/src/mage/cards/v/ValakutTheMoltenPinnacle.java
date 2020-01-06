@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -31,7 +30,7 @@ public final class ValakutTheMoltenPinnacle extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new SubtypePredicate(SubType.MOUNTAIN));
+        filter.add(SubType.MOUNTAIN.getPredicate());
     }
 
     public ValakutTheMoltenPinnacle(UUID ownerId, CardSetInfo setInfo) {

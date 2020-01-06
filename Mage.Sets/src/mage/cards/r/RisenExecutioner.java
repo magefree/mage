@@ -16,7 +16,6 @@ import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherCardPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -31,7 +30,7 @@ public final class RisenExecutioner extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombie creatures");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ZOMBIE));
+        filter.add(SubType.ZOMBIE.getPredicate());
     }
 
     public RisenExecutioner(UUID ownerId, CardSetInfo setInfo) {

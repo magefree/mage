@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -23,7 +22,7 @@ public final class SeedguideAsh extends CardImpl {
     private static final FilterCard filter = new FilterCard("Forest");
 
     static {
-        filter.add(new SubtypePredicate(SubType.FOREST));
+        filter.add(SubType.FOREST.getPredicate());
     }
 
     public SeedguideAsh(UUID ownerId, CardSetInfo setInfo) {

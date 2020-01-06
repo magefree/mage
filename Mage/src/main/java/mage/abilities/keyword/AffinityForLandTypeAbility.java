@@ -7,7 +7,6 @@ import mage.abilities.hint.ValueHint;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  * @author LevelX2
@@ -32,7 +31,7 @@ public class AffinityForLandTypeAbility extends SimpleStaticAbility {
 
     private static FilterControlledPermanent getFilter(SubType landType) {
         FilterControlledPermanent affinityfilter = new FilterControlledPermanent();
-        affinityfilter.add(new SubtypePredicate(landType));
+        affinityfilter.add(landType.getPredicate());
         return affinityfilter;
 
     }

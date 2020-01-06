@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -32,7 +31,7 @@ public final class GlyphOfDoom extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Wall creature");
 
     static {
-        filter.add(new SubtypePredicate(SubType.WALL));
+        filter.add(SubType.WALL.getPredicate());
     }
 
     public GlyphOfDoom(UUID ownerId, CardSetInfo setInfo) {

@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 
 import java.util.UUID;
@@ -31,7 +30,7 @@ public final class GangrenousZombies extends CardImpl {
 
     static {
         filter.add(new SupertypePredicate(SuperType.SNOW));
-        filter.add(new SubtypePredicate(SubType.SWAMP));
+        filter.add(SubType.SWAMP.getPredicate());
     }
 
     public GangrenousZombies(UUID ownerId, CardSetInfo setInfo) {

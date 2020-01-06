@@ -20,7 +20,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -36,7 +35,7 @@ public final class GoblinShrine extends CardImpl {
     private static final String rule = "As long as enchanted land is a basic Mountain, Goblin creatures get +1/+0.";
 
     static {
-        filterGoblin.add(new SubtypePredicate(SubType.GOBLIN));
+        filterGoblin.add(SubType.GOBLIN.getPredicate());
     }
 
     public GoblinShrine(UUID ownerId, CardSetInfo setInfo) {
@@ -75,7 +74,7 @@ class EnchantedPermanentSubtypeCondition implements Condition {
     private final FilterLandPermanent filter = new FilterLandPermanent();
 
     public EnchantedPermanentSubtypeCondition(SubType subType) {
-        filter.add(new SubtypePredicate(subType));
+        filter.add(subType.getPredicate());
     }
 
     @Override

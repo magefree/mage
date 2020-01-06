@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterAttackingCreature;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
@@ -24,7 +23,7 @@ public final class DireFleetCaptain extends CardImpl {
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("other attacking Pirate");
 
     static {
-        filter.add(new SubtypePredicate(SubType.PIRATE));
+        filter.add(SubType.PIRATE.getPredicate());
         filter.add(AnotherPredicate.instance);
     }
 

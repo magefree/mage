@@ -13,7 +13,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -24,7 +23,7 @@ public final class KinsbaileCavalier extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Knight creatures");
 
     static {
-        filter.add(new SubtypePredicate(SubType.KNIGHT));
+        filter.add(SubType.KNIGHT.getPredicate());
     }
 
     public KinsbaileCavalier(UUID ownerId, CardSetInfo setInfo) {

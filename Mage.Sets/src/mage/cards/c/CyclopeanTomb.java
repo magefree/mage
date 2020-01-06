@@ -20,7 +20,6 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -40,7 +39,7 @@ public final class CyclopeanTomb extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.SWAMP)));
+        filter.add(Predicates.not(SubType.SWAMP.getPredicate()));
     }
 
     public CyclopeanTomb(UUID ownerId, CardSetInfo setInfo) {

@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -28,7 +27,7 @@ public final class SunpetalGrove extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate(SubType.FOREST), new SubtypePredicate(SubType.PLAINS)));
+        filter.add(Predicates.or(SubType.FOREST.getPredicate(), SubType.PLAINS.getPredicate()));
     }
 
     public SunpetalGrove(UUID ownerId, CardSetInfo setInfo) {

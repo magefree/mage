@@ -17,7 +17,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetNonlandPermanent;
@@ -31,7 +30,7 @@ public final class DreamcallerSiren extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another Pirate");
 
     static {
-        filter.add(new SubtypePredicate(SubType.PIRATE));
+        filter.add(SubType.PIRATE.getPredicate());
         filter.add(AnotherPredicate.instance);
         filter.add(new ControllerPredicate(TargetController.YOU));
     }

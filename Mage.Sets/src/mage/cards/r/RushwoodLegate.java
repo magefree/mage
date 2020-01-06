@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -25,8 +24,8 @@ public final class RushwoodLegate extends CardImpl {
     private static final FilterPermanent filterForest = new FilterPermanent();
 
     static {
-        filterForest.add(new SubtypePredicate(SubType.FOREST));
-        filterIsland.add(new SubtypePredicate(SubType.ISLAND));
+        filterForest.add(SubType.FOREST.getPredicate());
+        filterIsland.add(SubType.ISLAND.getPredicate());
     }
 
     public RushwoodLegate(UUID ownerId, CardSetInfo setInfo) {

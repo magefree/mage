@@ -7,7 +7,6 @@ import java.util.List;
 import mage.constants.SubType;
 import mage.constants.SubTypeSet;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -22,10 +21,10 @@ public class FilterOtherCreatureSharingCreatureSubtype extends FilterCreaturePer
     public FilterOtherCreatureSharingCreatureSubtype(Permanent creature, Game game) {
         super("creature sharing a creature type with " + creature.toString());
 
-        List<SubtypePredicate> subtypePredicates = new ArrayList<>();
+        List<SubType.SubTypePredicate> subtypePredicates = new ArrayList<>();
         for (SubType subtype : creature.getSubtype(game)) {
             if (subtype.getSubTypeSet() == SubTypeSet.CreatureType) {
-                subtypePredicates.add(new SubtypePredicate(subtype));
+                subtypePredicates.add(subtype.getPredicate());
             }
         }
         this.add(Predicates.and(

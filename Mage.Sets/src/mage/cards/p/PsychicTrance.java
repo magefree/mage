@@ -15,7 +15,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetSpell;
 
 /**
@@ -27,7 +26,7 @@ public final class PsychicTrance extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Wizards you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.WIZARD));
+        filter.add(SubType.WIZARD.getPredicate());
     }
 
     public PsychicTrance(UUID ownerId, CardSetInfo setInfo) {

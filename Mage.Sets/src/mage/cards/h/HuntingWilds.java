@@ -22,10 +22,8 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.common.FilterLandCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.token.TokenImpl;
-import mage.game.permanent.token.Token;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.targetpointer.FixedTargets;
 
@@ -42,7 +40,7 @@ public final class HuntingWilds extends CardImpl {
         this.addAbility(new KickerAbility("{3}{G}"));
 
         FilterLandCard filter = new FilterLandCard("Forest card");
-        filter.add(new SubtypePredicate(SubType.FOREST));
+        filter.add(SubType.FOREST.getPredicate());
 
         // Search your library for up to two Forest cards and put them onto the battlefield tapped. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, filter), true));

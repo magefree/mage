@@ -19,7 +19,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
@@ -33,9 +32,9 @@ public final class DauntlessDourbark extends CardImpl {
     static final private FilterControlledPermanent filter2 = new FilterControlledPermanent();
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate(SubType.FOREST),
-                new SubtypePredicate(SubType.TREEFOLK)));
-        filter2.add(new SubtypePredicate(SubType.TREEFOLK));
+        filter.add(Predicates.or(SubType.FOREST.getPredicate(),
+                SubType.TREEFOLK.getPredicate()));
+        filter2.add(SubType.TREEFOLK.getPredicate());
         filter2.add(AnotherPredicate.instance);
     }
     

@@ -21,7 +21,6 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
 
 /**
@@ -35,7 +34,7 @@ public final class GiantShark extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature that has been dealt damage this turn");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ISLAND));
+        filter.add(SubType.ISLAND.getPredicate());
         filter2.add(new WasDealtDamageThisTurnPredicate());
     }
 

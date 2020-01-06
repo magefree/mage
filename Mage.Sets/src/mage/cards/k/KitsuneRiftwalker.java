@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -21,7 +20,7 @@ public final class KitsuneRiftwalker extends CardImpl {
     private static final FilterCard filter = new FilterCard("Spirits and from Arcane");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate(SubType.ARCANE), new SubtypePredicate(SubType.SPIRIT)));
+        filter.add(Predicates.or(SubType.ARCANE.getPredicate(), SubType.SPIRIT.getPredicate()));
     }
 
     public KitsuneRiftwalker(UUID ownerId, CardSetInfo setInfo) {

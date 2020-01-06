@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -23,7 +22,7 @@ public final class SylvanMessenger extends CardImpl {
     private static final FilterCard filter = new FilterCard("Elf cards");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ELF));
+        filter.add(SubType.ELF.getPredicate());
     }
 
     public SylvanMessenger(UUID ownerId, CardSetInfo setInfo) {

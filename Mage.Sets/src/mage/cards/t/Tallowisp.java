@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
 
@@ -30,7 +29,7 @@ public final class Tallowisp extends CardImpl {
 
     static {
         filterAura.add(CardType.ENCHANTMENT.getPredicate());
-        filterAura.add(new SubtypePredicate(SubType.AURA));
+        filterAura.add(SubType.AURA.getPredicate());
         filterAura.add(new TallowispAbilityPredicate());
     }
 

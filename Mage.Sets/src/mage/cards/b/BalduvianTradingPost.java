@@ -19,7 +19,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetAttackingCreature;
 import mage.target.common.TargetControlledPermanent;
@@ -33,7 +32,7 @@ public final class BalduvianTradingPost extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an untapped Mountain");
 
     static {
-        filter.add(new SubtypePredicate(SubType.MOUNTAIN));
+        filter.add(SubType.MOUNTAIN.getPredicate());
         filter.add(Predicates.not(TappedPredicate.instance));
     }
 

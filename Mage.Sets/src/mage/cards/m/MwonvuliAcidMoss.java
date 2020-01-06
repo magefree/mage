@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterLandCard;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
 
@@ -23,7 +22,7 @@ public final class MwonvuliAcidMoss extends CardImpl {
     private static final FilterLandCard filterForest = new FilterLandCard("Forest card");
 
     static {
-        filterForest.add(new SubtypePredicate(SubType.FOREST));
+        filterForest.add(SubType.FOREST.getPredicate());
     }
 
     public MwonvuliAcidMoss(UUID ownerId, CardSetInfo setInfo) {

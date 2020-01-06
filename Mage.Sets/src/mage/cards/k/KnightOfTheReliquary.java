@@ -20,7 +20,6 @@ import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
 
@@ -33,7 +32,7 @@ public final class KnightOfTheReliquary extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("Forest or Plains");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate(SubType.FOREST), new SubtypePredicate(SubType.PLAINS)));
+        filter.add(Predicates.or(SubType.FOREST.getPredicate(), SubType.PLAINS.getPredicate()));
     }
 
     public KnightOfTheReliquary(UUID ownerId, CardSetInfo setInfo) {

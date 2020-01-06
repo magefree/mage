@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.turn.TurnMod;
 import mage.target.TargetPlayer;
@@ -27,7 +26,7 @@ public final class WalkTheAeons extends CardImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("three Islands");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ISLAND));
+        filter.add(SubType.ISLAND.getPredicate());
     }
 
     public WalkTheAeons(UUID ownerId, CardSetInfo setInfo) {

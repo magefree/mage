@@ -17,7 +17,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -30,7 +29,7 @@ public final class HeartOfYavimaya extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Forest");
 
     static {
-        filter.add(new SubtypePredicate(SubType.FOREST));
+        filter.add(SubType.FOREST.getPredicate());
     }
 
     public HeartOfYavimaya(UUID ownerId, CardSetInfo setInfo) {

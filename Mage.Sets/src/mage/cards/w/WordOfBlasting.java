@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -23,7 +22,7 @@ public final class WordOfBlasting extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Wall");
 
     static {
-        filter.add(new SubtypePredicate(SubType.WALL));
+        filter.add(SubType.WALL.getPredicate());
     }
 
     public WordOfBlasting(UUID ownerId, CardSetInfo setInfo) {

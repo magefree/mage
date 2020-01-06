@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AttachedToControlledPermanentPredicate;
 import mage.filter.predicate.permanent.AttachedToPredicate;
 import mage.target.TargetPermanent;
@@ -29,7 +28,7 @@ public final class MiracleWorker extends CardImpl {
     static {
         filter.add(new AttachedToControlledPermanentPredicate());
         filter.add(new AttachedToPredicate(new FilterCreaturePermanent()));
-        filter.add(new SubtypePredicate(SubType.AURA));
+        filter.add(SubType.AURA.getPredicate());
     }
 
     public MiracleWorker(UUID ownerId, CardSetInfo setInfo) {

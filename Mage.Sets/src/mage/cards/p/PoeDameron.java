@@ -9,8 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.NamePredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 
@@ -27,7 +25,7 @@ public final class PoeDameron extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(Predicates.not(TokenPredicate.instance));
         filterStarship.add(new ControllerPredicate(TargetController.YOU));
-        filterStarship.add(new SubtypePredicate(SubType.STARSHIP));
+        filterStarship.add(SubType.STARSHIP.getPredicate());
     }
 
     public PoeDameron(UUID ownerId, CardSetInfo setInfo) {

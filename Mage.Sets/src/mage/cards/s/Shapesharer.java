@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -27,7 +26,7 @@ public final class Shapesharer extends CardImpl {
     private static final FilterPermanent filterShapeshifter = new FilterPermanent("Shapeshifter");
 
     static {
-        filterShapeshifter.add(new SubtypePredicate(SubType.SHAPESHIFTER));
+        filterShapeshifter.add(SubType.SHAPESHIFTER.getPredicate());
     }
 
     public Shapesharer(UUID ownerId, CardSetInfo setInfo) {

@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -26,7 +25,7 @@ public final class MilitantInquisitor extends CardImpl {
 
     static {
         filter.add(CardType.ARTIFACT.getPredicate());
-        filter.add(new SubtypePredicate(SubType.EQUIPMENT));
+        filter.add(SubType.EQUIPMENT.getPredicate());
     }
 
     public MilitantInquisitor(UUID ownerId, CardSetInfo setInfo) {

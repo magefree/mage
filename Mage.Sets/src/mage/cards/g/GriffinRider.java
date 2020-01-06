@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -30,7 +29,7 @@ public final class GriffinRider extends CardImpl {
     private static final FilterPermanent filterGriffinCard = new FilterCreaturePermanent();
 
     static {
-        filterGriffinCard.add(new SubtypePredicate(SubType.GRIFFIN));
+        filterGriffinCard.add(SubType.GRIFFIN.getPredicate());
     }
 
     public GriffinRider(UUID ownerId, CardSetInfo setInfo) {

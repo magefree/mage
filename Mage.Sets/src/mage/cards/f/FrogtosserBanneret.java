@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -25,8 +24,8 @@ public final class FrogtosserBanneret extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate(SubType.GOBLIN),
-                new SubtypePredicate(SubType.ROGUE)));
+                SubType.GOBLIN.getPredicate(),
+                SubType.ROGUE.getPredicate()));
     }
 
     public FrogtosserBanneret(UUID ownerId, CardSetInfo setInfo) {

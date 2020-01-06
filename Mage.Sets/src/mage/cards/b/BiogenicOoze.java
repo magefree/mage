@@ -15,7 +15,6 @@ import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.BiogenicOozeToken;
 
 import java.util.UUID;
@@ -28,7 +27,7 @@ public final class BiogenicOoze extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledPermanent("Ooze you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.OOZE));
+        filter.add(SubType.OOZE.getPredicate());
     }
 
     public BiogenicOoze(UUID ownerId, CardSetInfo setInfo) {

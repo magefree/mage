@@ -15,7 +15,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.SquirrelToken;
 
 /**
@@ -27,7 +26,7 @@ public final class DerangedHermit extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Squirrel creatures");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SQUIRREL));
+        filter.add(SubType.SQUIRREL.getPredicate());
     }
 
     public DerangedHermit(UUID ownerId, CardSetInfo setInfo) {

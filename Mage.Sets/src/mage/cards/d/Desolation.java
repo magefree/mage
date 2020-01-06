@@ -16,7 +16,6 @@ import mage.constants.TargetController;
 import mage.constants.WatcherScope;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -54,7 +53,7 @@ class DesolationEffect extends OneShotEffect {
     private static final FilterPermanent filterPlains = new FilterPermanent();
 
     static {
-        filterPlains.add(new SubtypePredicate(SubType.PLAINS));
+        filterPlains.add(SubType.PLAINS.getPredicate());
     }
 
     public DesolationEffect() {

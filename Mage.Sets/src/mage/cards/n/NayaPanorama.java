@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
@@ -31,9 +30,9 @@ public final class NayaPanorama extends CardImpl {
         filter.add(CardType.LAND.getPredicate());
         filter.add(new SupertypePredicate(SuperType.BASIC));
         filter.add(Predicates.or(
-                new SubtypePredicate(SubType.MOUNTAIN),
-                new SubtypePredicate(SubType.FOREST),
-                new SubtypePredicate(SubType.PLAINS)));
+                SubType.MOUNTAIN.getPredicate(),
+                SubType.FOREST.getPredicate(),
+                SubType.PLAINS.getPredicate()));
     }
 
     public NayaPanorama(UUID ownerId, CardSetInfo setInfo) {

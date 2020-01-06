@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledPermanent;
 
@@ -27,7 +26,7 @@ public final class WaterspoutDjinn extends CardImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("an untapped Island");
 
     static{
-        filter.add(new SubtypePredicate(SubType.ISLAND));
+        filter.add(SubType.ISLAND.getPredicate());
         filter.add(Predicates.not(TappedPredicate.instance));
     }
 

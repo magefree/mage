@@ -18,7 +18,6 @@ import mage.choices.Choice;
 import mage.choices.ChoiceCreatureType;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -70,7 +69,7 @@ class WalkingDesecrationEffect extends OneShotEffect {
                 if (player.choose(outcome, typeChoice, game)) {
                     game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoice());
                     FilterCreaturePermanent filter = new FilterCreaturePermanent();
-                    filter.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
+                    filter.add(SubType.byDescription(typeChoice.getChoice()).getPredicate());
                     RequirementEffect effect = new AttacksIfAbleAllEffect(filter, Duration.EndOfTurn);
                     game.addEffect(effect, source);
                     return true;

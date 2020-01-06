@@ -10,7 +10,6 @@ import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -23,7 +22,7 @@ public final class SageOfTheFalls extends CardImpl {
             = new FilterCreaturePermanent("{this} or another non-Human creature");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.HUMAN)));
+        filter.add(Predicates.not(SubType.HUMAN.getPredicate()));
     }
 
     public SageOfTheFalls(UUID ownerId, CardSetInfo setInfo) {

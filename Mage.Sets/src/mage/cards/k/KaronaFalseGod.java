@@ -18,7 +18,6 @@ import mage.choices.Choice;
 import mage.choices.ChoiceCreatureType;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -134,7 +133,7 @@ class KaronaFalseGodEffect extends OneShotEffect {
             if (!typeChosen.isEmpty()) {
                 game.informPlayers(controller.getLogName() + " has chosen " + typeChosen);
                 FilterCreaturePermanent filter = new FilterCreaturePermanent();
-                filter.add(new SubtypePredicate(SubType.byDescription(typeChosen)));
+                filter.add(SubType.byDescription(typeChosen).getPredicate());
                 game.addEffect(new BoostAllEffect(3, 3, Duration.EndOfTurn, filter, false), source);
             }
             return true;

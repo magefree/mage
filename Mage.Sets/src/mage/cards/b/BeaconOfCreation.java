@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.InsectToken;
 
 /**
@@ -22,7 +21,7 @@ public final class BeaconOfCreation extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Forest you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.FOREST));
+        filter.add(SubType.FOREST.getPredicate());
     }
 
     public BeaconOfCreation(UUID ownerId, CardSetInfo setInfo) {

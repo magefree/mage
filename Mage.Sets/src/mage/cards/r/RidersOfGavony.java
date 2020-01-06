@@ -15,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -56,7 +55,7 @@ class RidersOfGavonyGainAbilityControlledEffect extends ContinuousEffectImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Human creatures you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.HUMAN));
+        filter.add(SubType.HUMAN.getPredicate());
     }
 
     protected FilterPermanent protectionFilter;
@@ -84,7 +83,7 @@ class RidersOfGavonyGainAbilityControlledEffect extends ContinuousEffectImpl {
                 SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(permanent.getId(), game);
                 if (subType != null) {
                     protectionFilter = new FilterPermanent(subType.getDescription() + 's');
-                    protectionFilter.add(new SubtypePredicate(subType));
+                    protectionFilter.add(subType.getPredicate());
                 } else {
                     discard();
                 }

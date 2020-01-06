@@ -15,7 +15,6 @@ import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.util.CardUtil;
 
@@ -70,7 +69,7 @@ class GateColossusCostReductionEffect extends CostModificationEffectImpl {
     static final FilterControlledPermanent filter = new FilterControlledPermanent("a Gate");
 
     static {
-        filter.add(new SubtypePredicate(SubType.GATE));
+        filter.add(SubType.GATE.getPredicate());
     }
 
     public GateColossusCostReductionEffect() {

@@ -16,7 +16,6 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
@@ -29,7 +28,7 @@ public final class SarkhanDragonsoul extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("Dragon creature cards");
 
     static {
-        filter.add(new SubtypePredicate(SubType.DRAGON));
+        filter.add(SubType.DRAGON.getPredicate());
     }
 
     public SarkhanDragonsoul(UUID ownerId, CardSetInfo setInfo) {

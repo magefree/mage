@@ -17,7 +17,6 @@ import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInASingleGraveyard;
@@ -31,8 +30,8 @@ public final class ThelonOfHavenwood extends CardImpl {
     private static final FilterCard filterCard = new FilterCard("a Fungus card from a graveyard");
     private static final FilterPermanent filterPermanent = new FilterPermanent("Fungus on the battlefield");
     static {
-        filterCard.add(new SubtypePredicate(SubType.FUNGUS));
-        filterPermanent.add(new SubtypePredicate(SubType.FUNGUS));
+        filterCard.add(SubType.FUNGUS.getPredicate());
+        filterPermanent.add(SubType.FUNGUS.getPredicate());
     }
 
     public ThelonOfHavenwood(UUID ownerId, CardSetInfo setInfo) {
@@ -66,7 +65,7 @@ class ThelonOfHavenwoodBoostEffect extends ContinuousEffectImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Fungus creature");
     static {
-        filter.add(new SubtypePredicate(SubType.FUNGUS));
+        filter.add(SubType.FUNGUS.getPredicate());
     }
 
     ThelonOfHavenwoodBoostEffect() {

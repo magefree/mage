@@ -50,7 +50,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -127,7 +126,7 @@ class FloodgateDamageEffect extends OneShotEffect {
     static {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLUE)));
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
-        filter2.add(new SubtypePredicate(SubType.ISLAND));
+        filter2.add(SubType.ISLAND.getPredicate());
     }
 
     public FloodgateDamageEffect() {

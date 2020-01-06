@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  * @author Loki
@@ -22,7 +21,7 @@ public final class HarabazDruid extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Allies you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ALLY));
+        filter.add(SubType.ALLY.getPredicate());
     }
 
     public HarabazDruid(UUID ownerId, CardSetInfo setInfo) {

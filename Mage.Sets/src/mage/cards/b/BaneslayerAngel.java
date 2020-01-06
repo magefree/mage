@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -26,7 +25,7 @@ public final class BaneslayerAngel extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("Demons and from Dragons");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate(SubType.DEMON), new SubtypePredicate(SubType.DRAGON)));
+        filter.add(Predicates.or(SubType.DEMON.getPredicate(), SubType.DRAGON.getPredicate()));
     }
 
     public BaneslayerAngel(UUID ownerId, CardSetInfo setInfo) {

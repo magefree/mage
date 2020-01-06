@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -26,7 +25,7 @@ public final class OtarianJuggernaut extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Walls");
 
     static {
-        filter.add(new SubtypePredicate(SubType.WALL));
+        filter.add(SubType.WALL.getPredicate());
     }
 
     public OtarianJuggernaut(UUID ownerId, CardSetInfo setInfo) {

@@ -14,7 +14,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -83,7 +82,7 @@ class GemOfBecomingEffect extends OneShotEffect {
 
     private void searchLand(Player player, Ability source, Game game, Cards cards, String subtype) {
         FilterLandCard filter = new FilterLandCard(subtype);
-        filter.add(new SubtypePredicate(SubType.byDescription(subtype)));
+        filter.add(SubType.byDescription(subtype).getPredicate());
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
         if (player.searchLibrary(target, source, game)) {
             Card card = player.getLibrary().remove(target.getFirstTarget(), game);

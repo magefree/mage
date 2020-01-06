@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
@@ -33,7 +32,7 @@ public final class CoffinPuppets extends CardImpl {
             = new FilterControlledLandPermanent("two lands");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SWAMP));
+        filter.add(SubType.SWAMP.getPredicate());
     }
 
     private static final Condition condition = new CompoundCondition(

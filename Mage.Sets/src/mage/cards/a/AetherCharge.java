@@ -11,7 +11,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -28,7 +27,7 @@ public final class AetherCharge extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Beast you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.BEAST));
+        filter.add(SubType.BEAST.getPredicate());
     }
 
     public AetherCharge(UUID ownerId, CardSetInfo setInfo) {

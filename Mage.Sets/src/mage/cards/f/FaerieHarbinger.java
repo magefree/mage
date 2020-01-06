@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -23,7 +22,7 @@ public final class FaerieHarbinger extends CardImpl {
     static final FilterCard filter = new FilterCard("Faerie card");
 
     static {
-        filter.add(new SubtypePredicate(SubType.FAERIE));
+        filter.add(SubType.FAERIE.getPredicate());
     }
 
     public FaerieHarbinger(UUID ownerId, CardSetInfo setInfo) {

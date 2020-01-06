@@ -15,7 +15,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
@@ -60,7 +59,7 @@ class AuntiesSnitchTriggeredAbility extends TriggeredAbilityImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin or Rogue you control");
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(Predicates.or(new SubtypePredicate(SubType.GOBLIN), new SubtypePredicate(SubType.ROGUE)));
+        filter.add(Predicates.or(SubType.GOBLIN.getPredicate(), SubType.ROGUE.getPredicate()));
     }
 
     public AuntiesSnitchTriggeredAbility() {

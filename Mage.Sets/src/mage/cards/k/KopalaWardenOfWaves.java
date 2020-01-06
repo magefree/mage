@@ -19,7 +19,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
@@ -63,7 +62,7 @@ class KopalaWardenOfWavesCostReductionEffect extends CostModificationEffectImpl 
     private static final String effectText = "Spells your opponents cast that target a Merfolk you control cost {2} more to cast";
 
     static {
-        filter.add(new SubtypePredicate(SubType.MERFOLK));
+        filter.add(SubType.MERFOLK.getPredicate());
     }
 
     KopalaWardenOfWavesCostReductionEffect() {
@@ -117,7 +116,7 @@ class KopalaWardenOfWavesCostReductionEffect2 extends CostModificationEffectImpl
     private static final String effectText = "Abilities your opponents activate that target a Merfolk you control cost {2} more to activate";
 
     static {
-        filter.add(new SubtypePredicate(SubType.MERFOLK));
+        filter.add(SubType.MERFOLK.getPredicate());
     }
 
     KopalaWardenOfWavesCostReductionEffect2() {

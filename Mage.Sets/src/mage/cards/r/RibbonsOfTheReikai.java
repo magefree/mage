@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -20,7 +19,7 @@ public final class RibbonsOfTheReikai extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Spirit you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SPIRIT));
+        filter.add(SubType.SPIRIT.getPredicate());
     }
 
     public RibbonsOfTheReikai(UUID ownerId, CardSetInfo setInfo) {

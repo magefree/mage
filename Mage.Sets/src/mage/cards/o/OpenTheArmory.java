@@ -7,7 +7,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
@@ -21,8 +20,8 @@ public final class OpenTheArmory extends CardImpl {
 
     static {
         auraOrEquipmentTarget.add(Predicates.or(
-                new SubtypePredicate(SubType.EQUIPMENT),
-                new SubtypePredicate(SubType.AURA)));
+                SubType.EQUIPMENT.getPredicate(),
+                SubType.AURA.getPredicate()));
     }
 
     public OpenTheArmory(UUID ownerId, CardSetInfo setInfo) {

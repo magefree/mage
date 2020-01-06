@@ -12,7 +12,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -71,7 +70,7 @@ class GrimCaptainsCallEffect extends OneShotEffect {
 
     private void returnToHand(Game game, SubType subType, Player controller, Ability source) {
         FilterCreatureCard filter = new FilterCreatureCard(subType.getDescription() + " card");
-        filter.add(new SubtypePredicate(subType));
+        filter.add(subType.getPredicate());
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(new FilterCreatureCard(filter));
         if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
             if (controller.chooseTarget(outcome, target, source, game)) {

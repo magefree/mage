@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -29,7 +28,7 @@ public final class PlazaOfHarmony extends CardImpl {
     private static final FilterPermanent filter2 = new FilterPermanent(SubType.GATE, "Gate");
 
     static {
-        filter.add(new SubtypePredicate(SubType.GATE));
+        filter.add(SubType.GATE.getPredicate());
     }
 
     private static final Condition condition

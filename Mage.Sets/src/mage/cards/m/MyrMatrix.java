@@ -16,7 +16,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.MyrToken;
 
 /**
@@ -28,7 +27,7 @@ public final class MyrMatrix extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Myr");
 
        static {
-           filter.add(new SubtypePredicate(SubType.MYR));
+           filter.add(SubType.MYR.getPredicate());
        }
 
         public MyrMatrix (UUID ownerId, CardSetInfo setInfo) {

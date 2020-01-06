@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetLandPermanent;
@@ -28,7 +27,7 @@ public final class AquitectsWill extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Merfolk");
 
     static {
-        filter.add(new SubtypePredicate(SubType.MERFOLK));
+        filter.add(SubType.MERFOLK.getPredicate());
     }
 
     public AquitectsWill(UUID ownerId, CardSetInfo setInfo) {

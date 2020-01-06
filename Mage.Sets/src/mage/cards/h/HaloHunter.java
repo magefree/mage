@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -24,7 +23,7 @@ public final class HaloHunter extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Angel");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ANGEL));
+        filter.add(SubType.ANGEL.getPredicate());
     }
 
     public HaloHunter(UUID ownerId, CardSetInfo setInfo) {

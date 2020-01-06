@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -26,7 +25,7 @@ public final class BuccaneersBravado extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Pirate");
 
     static {
-        filter.add(new SubtypePredicate(SubType.PIRATE));
+        filter.add(SubType.PIRATE.getPredicate());
     }
 
     public BuccaneersBravado(UUID ownerId, CardSetInfo setInfo) {

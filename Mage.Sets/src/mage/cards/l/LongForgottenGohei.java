@@ -41,7 +41,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -54,8 +53,8 @@ public final class LongForgottenGohei extends CardImpl {
     private static final FilterCreaturePermanent spiritFilter = new FilterCreaturePermanent("Spirit creatures");
 
     static {
-        arcaneFilter.add(new SubtypePredicate(SubType.ARCANE));
-        spiritFilter.add(new SubtypePredicate(SubType.SPIRIT));
+        arcaneFilter.add(SubType.ARCANE.getPredicate());
+        spiritFilter.add(SubType.SPIRIT.getPredicate());
     }
 
     public LongForgottenGohei(UUID ownerId, CardSetInfo setInfo) {

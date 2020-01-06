@@ -17,7 +17,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -35,7 +34,7 @@ public final class CherishedHatchling extends CardImpl {
     private static final FilterCard filterCard = new FilterCard("Dinosaur spells");
 
     static {
-        filterCard.add(new SubtypePredicate(SubType.DINOSAUR));
+        filterCard.add(SubType.DINOSAUR.getPredicate());
     }
 
     public CherishedHatchling(UUID ownerId, CardSetInfo setInfo) {

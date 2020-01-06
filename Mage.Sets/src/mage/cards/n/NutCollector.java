@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.SquirrelToken;
 
 /**
@@ -26,7 +25,7 @@ public final class NutCollector extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("squirrel");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SQUIRREL));
+        filter.add(SubType.SQUIRREL.getPredicate());
     }
 
     public NutCollector(UUID ownerId, CardSetInfo setInfo) {

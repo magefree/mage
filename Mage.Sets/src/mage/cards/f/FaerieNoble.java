@@ -15,7 +15,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -27,7 +26,7 @@ public final class FaerieNoble extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Faerie creatures");
 
     static {
-        filter.add(new SubtypePredicate(SubType.FAERIE));
+        filter.add(SubType.FAERIE.getPredicate());
     }
 
     public FaerieNoble(UUID ownerId, CardSetInfo setInfo) {

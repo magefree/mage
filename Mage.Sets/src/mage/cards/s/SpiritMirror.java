@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.ReflectionToken;
 import mage.target.TargetPermanent;
@@ -28,9 +27,9 @@ public final class SpiritMirror extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Reflection");
 
     static {
-        filterToken.add(new SubtypePredicate(SubType.REFLECTION));
+        filterToken.add(SubType.REFLECTION.getPredicate());
         filterToken.add(TokenPredicate.instance);
-        filter.add(new SubtypePredicate(SubType.REFLECTION));
+        filter.add(SubType.REFLECTION.getPredicate());
     }
 
     public SpiritMirror(UUID ownerId, CardSetInfo setInfo) {

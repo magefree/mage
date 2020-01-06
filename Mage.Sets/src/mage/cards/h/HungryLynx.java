@@ -22,7 +22,6 @@ import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.DeathtouchRatToken;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
@@ -35,17 +34,17 @@ public final class HungryLynx extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filterCat = new FilterControlledCreaturePermanent("Cats");
     static {
-        filterCat.add(new SubtypePredicate(SubType.CAT));
+        filterCat.add(SubType.CAT.getPredicate());
     }
     
     private static final FilterCard filterProRat = new FilterCard("Rats");
     static {
-        filterProRat.add(new SubtypePredicate(SubType.RAT));
+        filterProRat.add(SubType.RAT.getPredicate());
     }
     
     private static final FilterCreaturePermanent filterRat = new FilterCreaturePermanent("a Rat");
     static {
-        filterRat.add(new SubtypePredicate(SubType.RAT));
+        filterRat.add(SubType.RAT.getPredicate());
     }
     
     public HungryLynx(UUID ownerId, CardSetInfo setInfo) {

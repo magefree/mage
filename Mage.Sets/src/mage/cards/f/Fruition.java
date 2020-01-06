@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -20,7 +19,7 @@ public final class Fruition extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("for each Forest on the battlefield");
 
     static {
-        filter.add(new SubtypePredicate(SubType.FOREST));
+        filter.add(SubType.FOREST.getPredicate());
     }
 
     public Fruition(UUID ownerId, CardSetInfo setInfo) {

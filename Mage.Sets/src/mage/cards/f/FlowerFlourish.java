@@ -12,7 +12,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
@@ -28,8 +27,8 @@ public final class FlowerFlourish extends SplitCard {
     static {
         filter.add(new SupertypePredicate(SuperType.BASIC));
         filter.add(Predicates.or(
-                new SubtypePredicate(SubType.FOREST),
-                new SubtypePredicate(SubType.PLAINS)
+                SubType.FOREST.getPredicate(),
+                SubType.PLAINS.getPredicate()
         ));
     }
 

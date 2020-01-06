@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.token.WolfToken;
 import mage.watchers.common.CastSpellLastTurnWatcher;
@@ -34,8 +33,8 @@ public final class NightpackAmbusher extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate(SubType.WEREWOLF),
-                new SubtypePredicate(SubType.WOLF)
+                SubType.WEREWOLF.getPredicate(),
+                SubType.WOLF.getPredicate()
         ));
     }
 

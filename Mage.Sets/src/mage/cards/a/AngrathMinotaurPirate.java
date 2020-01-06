@@ -20,7 +20,6 @@ import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -53,7 +52,7 @@ public final class AngrathMinotaurPirate extends CardImpl {
 
         // -3: Return target Pirate card from your graveyard to the battlefield.
         FilterCard filterPirateCard = new FilterCreatureCard("pirate card from your graveyard");
-        filterPirateCard.add(new SubtypePredicate(SubType.PIRATE));
+        filterPirateCard.add(SubType.PIRATE.getPredicate());
         Ability ability2 = new LoyaltyAbility(new ReturnFromGraveyardToBattlefieldTargetEffect()
                 .setText("Return target Pirate card from your graveyard to the battlefield"), -3);
         ability2.addTarget(new TargetCardInYourGraveyard(filterPirateCard));

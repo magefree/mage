@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -28,7 +27,7 @@ public final class Immerwolf extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Wolf and Werewolf creatures");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate(SubType.WOLF), new SubtypePredicate(SubType.WEREWOLF)));
+        filter.add(Predicates.or(SubType.WOLF.getPredicate(), SubType.WEREWOLF.getPredicate()));
     }
 
     public Immerwolf(UUID ownerId, CardSetInfo setInfo) {
@@ -63,8 +62,8 @@ class ImmerwolfEffect extends ContinuousRuleModifyingEffectImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(new SubtypePredicate(SubType.WEREWOLF));
-        filter.add(Predicates.not(new SubtypePredicate(SubType.HUMAN)));
+        filter.add(SubType.WEREWOLF.getPredicate());
+        filter.add(Predicates.not(SubType.HUMAN.getPredicate()));
     }
 
     public ImmerwolfEffect() {

@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -25,7 +24,7 @@ public final class HedgeTroll extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Plains");
 
     static {
-        filter.add(new SubtypePredicate(SubType.PLAINS));
+        filter.add(SubType.PLAINS.getPredicate());
     }
 
     public HedgeTroll(UUID ownerId, CardSetInfo setInfo) {

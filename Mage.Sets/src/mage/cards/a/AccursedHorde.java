@@ -15,7 +15,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetAttackingCreature;
 
 /**
@@ -27,7 +26,7 @@ public final class AccursedHorde extends CardImpl {
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking Zombie");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ZOMBIE));
+        filter.add(SubType.ZOMBIE.getPredicate());
     }
 
     public AccursedHorde(UUID ownerId, CardSetInfo setInfo) {

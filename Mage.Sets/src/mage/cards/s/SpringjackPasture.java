@@ -19,7 +19,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.GoatToken;
 
 /**
@@ -32,7 +31,7 @@ public final class SpringjackPasture extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Goats");
 
     static {
-        filter.add(new SubtypePredicate(SubType.GOAT));
+        filter.add(SubType.GOAT.getPredicate());
     }
 
     public SpringjackPasture(UUID ownerId, CardSetInfo setInfo) {

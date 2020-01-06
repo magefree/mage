@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -26,7 +25,7 @@ public final class SummitApes extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("a Mountain");
 
     static {
-        filter.add(new SubtypePredicate(SubType.MOUNTAIN));
+        filter.add(SubType.MOUNTAIN.getPredicate());
     }
 
     public SummitApes(UUID ownerId, CardSetInfo setInfo) {

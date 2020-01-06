@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -21,7 +20,7 @@ public final class PutridRaptor extends CardImpl {
     private static final FilterCard filter = new FilterCard("a Zombie card");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ZOMBIE));
+        filter.add(SubType.ZOMBIE.getPredicate());
     }
 
     public PutridRaptor(UUID ownerId, CardSetInfo setInfo) {

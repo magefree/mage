@@ -21,7 +21,6 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.CardIdPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -37,7 +36,7 @@ public final class OliviaVoldaren extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        vampireFilter.add(new SubtypePredicate(SubType.VAMPIRE));
+        vampireFilter.add(SubType.VAMPIRE.getPredicate());
     }
 
     public OliviaVoldaren(UUID ownerId, CardSetInfo setInfo) {

@@ -18,7 +18,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -31,8 +30,8 @@ public final class FirewakeSliver extends CardImpl {
     private static final FilterCreaturePermanent targetSliverFilter = new FilterCreaturePermanent("Sliver");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SLIVER));
-        targetSliverFilter.add(new SubtypePredicate(SubType.SLIVER));
+        filter.add(SubType.SLIVER.getPredicate());
+        targetSliverFilter.add(SubType.SLIVER.getPredicate());
     }
 
     public FirewakeSliver(UUID ownerId, CardSetInfo setInfo) {

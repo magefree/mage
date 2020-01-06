@@ -22,7 +22,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.WolfToken;
 
 /**
@@ -36,7 +35,7 @@ public final class HowlpackAlpha extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Werewolf and Wolf creatures");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate(SubType.WEREWOLF), new SubtypePredicate(SubType.WOLF)));
+        filter.add(Predicates.or(SubType.WEREWOLF.getPredicate(), SubType.WOLF.getPredicate()));
     }
 
     public HowlpackAlpha(UUID ownerId, CardSetInfo setInfo) {

@@ -12,7 +12,6 @@ import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -27,9 +26,9 @@ public final class ReignOfChaos extends CardImpl {
     private static final FilterCreaturePermanent filter4 = new FilterCreaturePermanent("blue creature");
 
     static {
-        filter1.add(new SubtypePredicate(SubType.PLAINS));
+        filter1.add(SubType.PLAINS.getPredicate());
         filter2.add(new ColorPredicate(ObjectColor.WHITE));
-        filter3.add(new SubtypePredicate(SubType.ISLAND));
+        filter3.add(SubType.ISLAND.getPredicate());
         filter4.add(new ColorPredicate(ObjectColor.BLUE));
     }
 

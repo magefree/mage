@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
@@ -29,7 +28,7 @@ public final class RiverSneak extends CardImpl {
     static {
         filter.add(AnotherPredicate.instance);
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new SubtypePredicate(SubType.MERFOLK));
+        filter.add(SubType.MERFOLK.getPredicate());
     }
 
     public RiverSneak(UUID ownerId, CardSetInfo setInfo) {

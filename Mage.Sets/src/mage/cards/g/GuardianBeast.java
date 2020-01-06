@@ -20,7 +20,6 @@ import mage.filter.FilterStackObject;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -38,7 +37,7 @@ public final class GuardianBeast extends CardImpl {
 
     static {
         filterAura.add(CardType.ENCHANTMENT.getPredicate());
-        filterAura.add(new SubtypePredicate(SubType.AURA));
+        filterAura.add(SubType.AURA.getPredicate());
         filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 

@@ -20,7 +20,6 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -65,7 +64,7 @@ class DepalaPilotExemplarEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("Dwarf and Vehicle cards");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate(SubType.DWARF), new SubtypePredicate(SubType.VEHICLE)));
+        filter.add(Predicates.or(SubType.DWARF.getPredicate(), SubType.VEHICLE.getPredicate()));
     }
 
     DepalaPilotExemplarEffect() {

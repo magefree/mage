@@ -19,7 +19,6 @@ import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -32,7 +31,7 @@ public final class MtendaGriffin extends CardImpl {
     private static final FilterCard filter = new FilterCard("Griffin card from your graveyard");
 
     static {
-        filter.add(new SubtypePredicate(SubType.GRIFFIN));
+        filter.add(SubType.GRIFFIN.getPredicate());
 }
 
     public MtendaGriffin(UUID ownerId, CardSetInfo setInfo) {

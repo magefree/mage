@@ -13,7 +13,6 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -24,7 +23,7 @@ public final class AnowonTheRuinSage extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("non-Vampire creature");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.VAMPIRE)));
+        filter.add(Predicates.not(SubType.VAMPIRE.getPredicate()));
     }
 
     public AnowonTheRuinSage(UUID ownerId, CardSetInfo setInfo) {

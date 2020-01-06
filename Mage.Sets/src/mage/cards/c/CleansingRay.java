@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetEnchantmentPermanent;
 
@@ -26,7 +25,7 @@ public final class CleansingRay extends CardImpl {
         // - Destroy target Vampire.
         getSpellAbility().addEffect(new DestroyTargetEffect());
         FilterPermanent filter = new FilterPermanent("Vampire");
-        filter.add(new SubtypePredicate(SubType.VAMPIRE));
+        filter.add(SubType.VAMPIRE.getPredicate());
         getSpellAbility().addTarget(new TargetPermanent(filter));
 
         // - Destroy target enchantment.

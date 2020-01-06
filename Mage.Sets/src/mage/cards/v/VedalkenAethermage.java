@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -28,8 +27,8 @@ public final class VedalkenAethermage extends CardImpl {
     private static final FilterCard filter2 = new FilterCard("Wizard");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SLIVER));
-        filter2.add(new SubtypePredicate(SubType.WIZARD));
+        filter.add(SubType.SLIVER.getPredicate());
+        filter2.add(SubType.WIZARD.getPredicate());
     }
     
     public VedalkenAethermage(UUID ownerId, CardSetInfo setInfo) {

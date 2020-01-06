@@ -11,7 +11,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -66,7 +65,7 @@ class WitchsVengeanceEffect extends OneShotEffect {
             return false;
         }
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        filter.add(new SubtypePredicate(SubType.byDescription(choice.getChoice())));
+        filter.add(SubType.byDescription(choice.getChoice()).getPredicate());
         game.addEffect(new BoostAllEffect(
                 -3, -3, Duration.EndOfTurn, filter, false
         ), source);

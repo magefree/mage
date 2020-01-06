@@ -17,7 +17,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInLibrary;
@@ -31,7 +30,7 @@ public final class GeneralTazri extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("an Ally creature card");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ALLY));
+        filter.add(SubType.ALLY.getPredicate());
     }
 
     public GeneralTazri(UUID ownerId, CardSetInfo setInfo) {
@@ -71,7 +70,7 @@ class GeneralTazriColorCount implements DynamicValue {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(new SubtypePredicate((SubType.ALLY)));
+        filter.add(SubType.ALLY.getPredicate());
     }
 
     @Override

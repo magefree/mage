@@ -15,7 +15,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.SoldierToken;
 
 /**
@@ -27,7 +26,7 @@ public final class Mobilization extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Soldier creatures");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SOLDIER));
+        filter.add(SubType.SOLDIER.getPredicate());
     }
 
     public Mobilization(UUID ownerId, CardSetInfo setInfo) {

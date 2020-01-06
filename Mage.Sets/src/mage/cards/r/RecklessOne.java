@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -25,7 +24,7 @@ public final class RecklessOne extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Goblins on the battlefield");
 
     static {
-        filter.add(new SubtypePredicate(SubType.GOBLIN));
+        filter.add(SubType.GOBLIN.getPredicate());
     }
 
     public RecklessOne(UUID ownerId, CardSetInfo setInfo) {

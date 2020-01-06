@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -28,7 +27,7 @@ public final class ChokingSands extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("non-Swamp land");
     
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.SWAMP)));
+        filter.add(Predicates.not(SubType.SWAMP.getPredicate()));
     }
 
     public ChokingSands(UUID ownerId, CardSetInfo setInfo) {

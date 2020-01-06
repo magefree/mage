@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
@@ -22,7 +21,7 @@ public final class KoboldTaskmaster extends CardImpl {
     
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new SubtypePredicate(SubType.KOBOLD));
+        filter.add(SubType.KOBOLD.getPredicate());
     }
 
     public KoboldTaskmaster(UUID ownerId, CardSetInfo setInfo) {

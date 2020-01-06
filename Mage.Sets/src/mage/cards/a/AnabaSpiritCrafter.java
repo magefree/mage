@@ -12,7 +12,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -23,7 +22,7 @@ public final class AnabaSpiritCrafter extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Minotaur creatures");
 
     static {
-        filter.add(new SubtypePredicate(SubType.MINOTAUR));
+        filter.add(SubType.MINOTAUR.getPredicate());
     }
 
     public AnabaSpiritCrafter(UUID ownerId, CardSetInfo setInfo) {

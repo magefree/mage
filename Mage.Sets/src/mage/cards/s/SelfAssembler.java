@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -23,7 +22,7 @@ public final class SelfAssembler extends CardImpl {
     private static final FilterCard filter = new FilterCard("an Assembly-Worker card");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ASSEMBLY_WORKER));
+        filter.add(SubType.ASSEMBLY_WORKER.getPredicate());
     }
 
     public SelfAssembler(UUID ownerId, CardSetInfo setInfo) {

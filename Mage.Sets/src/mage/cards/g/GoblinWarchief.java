@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -26,7 +25,7 @@ public final class GoblinWarchief extends CardImpl {
     private static final FilterCard filterSpells = new FilterCard("Goblin spells");
 
     static {
-        filterSpells.add(new SubtypePredicate(SubType.GOBLIN));
+        filterSpells.add(SubType.GOBLIN.getPredicate());
     }
 
     public GoblinWarchief(UUID ownerId, CardSetInfo setInfo) {

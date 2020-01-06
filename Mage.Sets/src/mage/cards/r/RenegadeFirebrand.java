@@ -17,7 +17,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -30,7 +29,7 @@ public final class RenegadeFirebrand extends CardImpl {
 
     static {
         filter.add(CardType.PLANESWALKER.getPredicate());
-        filter.add(new SubtypePredicate(SubType.CHANDRA));
+        filter.add(SubType.CHANDRA.getPredicate());
     }
 
     public RenegadeFirebrand(UUID ownerId, CardSetInfo setInfo) {

@@ -16,7 +16,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.BlockedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -58,7 +57,7 @@ class RoarOfJukaiEffect extends OneShotEffect {
     private static final FilterCreaturePermanent filterBlocked = new FilterCreaturePermanent("blocked creature");
 
     static {
-        filter.add(new SubtypePredicate(SubType.FOREST));
+        filter.add(SubType.FOREST.getPredicate());
         filterBlocked.add(BlockedPredicate.instance);
     }
 

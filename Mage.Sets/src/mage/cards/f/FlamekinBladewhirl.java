@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -22,7 +21,7 @@ public final class FlamekinBladewhirl extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an Elemental card from your hand");
     static {
-        filter.add(new SubtypePredicate(SubType.ELEMENTAL));
+        filter.add(SubType.ELEMENTAL.getPredicate());
     }
 
     public FlamekinBladewhirl(UUID ownerId, CardSetInfo setInfo) {

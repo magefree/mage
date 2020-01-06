@@ -18,7 +18,6 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -31,7 +30,7 @@ public final class MaskedGorgon extends CardImpl {
 
     static {
         filter1.add(Predicates.or(new ColorPredicate(ObjectColor.GREEN), new ColorPredicate(ObjectColor.WHITE)));
-        filter2.add(new SubtypePredicate(SubType.GORGON));
+        filter2.add(SubType.GORGON.getPredicate());
     }
 
     public MaskedGorgon(UUID ownerId, CardSetInfo setInfo) {

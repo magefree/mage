@@ -19,7 +19,6 @@ import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -34,7 +33,7 @@ public final class ArchangelAvacyn extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a non-Angel creature you control");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.ANGEL)));
+        filter.add(Predicates.not(SubType.ANGEL.getPredicate()));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

@@ -3,7 +3,6 @@ package mage.abilities.keyword;
 
 import mage.constants.SubType;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -14,7 +13,7 @@ public class PlainswalkAbility extends LandwalkAbility {
     private static final FilterLandPermanent filter = new FilterLandPermanent("plains");
 
     static {
-        filter.add(new SubtypePredicate(SubType.PLAINS));
+        filter.add(SubType.PLAINS.getPredicate());
     }
 
     public PlainswalkAbility() {

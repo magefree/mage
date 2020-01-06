@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  * @author nantuko
@@ -23,9 +22,9 @@ public final class EliteInquisitor extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("Vampires, from Werewolves, and from Zombies");
 
     static {filter.add(Predicates.or(
-            new SubtypePredicate(SubType.VAMPIRE),
-            new SubtypePredicate(SubType.WEREWOLF),
-            new SubtypePredicate(SubType.ZOMBIE)
+            SubType.VAMPIRE.getPredicate(),
+            SubType.WEREWOLF.getPredicate(),
+            SubType.ZOMBIE.getPredicate()
             ));
     }
 

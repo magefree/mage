@@ -16,7 +16,6 @@ import mage.constants.Zone;
 import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -30,11 +29,11 @@ public final class PerilousForays extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate(SubType.PLAINS),
-                new SubtypePredicate(SubType.ISLAND),
-                new SubtypePredicate(SubType.SWAMP),
-                new SubtypePredicate(SubType.FOREST),
-                new SubtypePredicate(SubType.MOUNTAIN)));
+                SubType.PLAINS.getPredicate(),
+                SubType.ISLAND.getPredicate(),
+                SubType.SWAMP.getPredicate(),
+                SubType.FOREST.getPredicate(),
+                SubType.MOUNTAIN.getPredicate()));
     }
 
     public PerilousForays(UUID ownerId, CardSetInfo setInfo) {

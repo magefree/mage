@@ -16,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -33,7 +32,7 @@ public final class OratorOfOjutai extends CardImpl {
     private static final FilterCard filter = new FilterCard("a Dragon card from your hand (you don't have to)");
 
     static {
-        filter.add(new SubtypePredicate(SubType.DRAGON));
+        filter.add(SubType.DRAGON.getPredicate());
     }
 
     public OratorOfOjutai(UUID ownerId, CardSetInfo setInfo) {

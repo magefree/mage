@@ -18,7 +18,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -30,7 +29,7 @@ public final class AllyEncampment extends CardImpl {
     private static final FilterSpell FILTER = new FilterSpell("an Ally spell");
 
     static {
-        FILTER.add(new SubtypePredicate(SubType.ALLY));
+        FILTER.add(SubType.ALLY.getPredicate());
     }
 
     public AllyEncampment(UUID ownerId, CardSetInfo setInfo) {

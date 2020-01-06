@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
@@ -32,8 +31,8 @@ public final class FrenzySliver extends CardImpl {
     private static final FilterCreaturePermanent targetSliverFilter = new FilterCreaturePermanent("Sliver");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SLIVER));
-        targetSliverFilter.add(new SubtypePredicate(SubType.SLIVER));
+        filter.add(SubType.SLIVER.getPredicate());
+        targetSliverFilter.add(SubType.SLIVER.getPredicate());
     }
         
     public FrenzySliver(UUID ownerId, CardSetInfo setInfo) {

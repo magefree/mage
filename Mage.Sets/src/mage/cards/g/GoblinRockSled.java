@@ -19,7 +19,6 @@ import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -35,7 +34,7 @@ public final class GoblinRockSled extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("a Mountain");
 
     static {
-        filter.add(new SubtypePredicate(SubType.MOUNTAIN));
+        filter.add(SubType.MOUNTAIN.getPredicate());
     }
 
     public GoblinRockSled(UUID ownerId, CardSetInfo setInfo) {

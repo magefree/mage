@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInHand;
@@ -27,7 +26,7 @@ public final class SlumberingTora extends CardImpl {
     private static final FilterCard filter = new FilterCard("Spirit or Arcane card");
     
     static {
-        filter.add(Predicates.or(new SubtypePredicate(SubType.SPIRIT),new SubtypePredicate(SubType.ARCANE)));
+        filter.add(Predicates.or(SubType.SPIRIT.getPredicate(),SubType.ARCANE.getPredicate()));
     }    
 
     public SlumberingTora(UUID ownerId, CardSetInfo setInfo) {

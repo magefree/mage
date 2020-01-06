@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  * @author dustinconrad
@@ -25,8 +24,8 @@ public final class NimbusMaze extends CardImpl {
     private static final FilterControlledPermanent controlPlains = new FilterControlledPermanent("you control a Plains");
 
     static {
-        controlIsland.add(new SubtypePredicate(SubType.ISLAND));
-        controlPlains.add(new SubtypePredicate(SubType.PLAINS));
+        controlIsland.add(SubType.ISLAND.getPredicate());
+        controlPlains.add(SubType.PLAINS.getPredicate());
     }
 
     public NimbusMaze(UUID ownerId, CardSetInfo setInfo) {

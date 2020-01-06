@@ -18,7 +18,6 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -37,7 +36,7 @@ public final class ChandrasRegulator extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate(SubType.MOUNTAIN),
+                SubType.MOUNTAIN.getPredicate(),
                 new ColorPredicate(ObjectColor.RED)
         ));
     }

@@ -12,7 +12,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -24,8 +23,8 @@ public final class BallyrushBanneret extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate(SubType.KITHKIN),
-                new SubtypePredicate(SubType.SOLDIER)));
+                SubType.KITHKIN.getPredicate(),
+                SubType.SOLDIER.getPredicate()));
     }
 
     public BallyrushBanneret(UUID ownerId, CardSetInfo setInfo) {

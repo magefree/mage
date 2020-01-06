@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.permanent.token.SpiritWhiteToken;
 
@@ -29,7 +28,7 @@ public final class DrogskolCavalry extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(new SubtypePredicate(SubType.SPIRIT));
+        filter.add(SubType.SPIRIT.getPredicate());
     }
 
     public DrogskolCavalry(UUID ownerId, CardSetInfo setInfo) {

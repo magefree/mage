@@ -18,7 +18,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -77,7 +76,7 @@ class ElvishSoultillerEffect extends OneShotEffect {
                 }
                 Cards cardsToLibrary = new CardsImpl();
                 FilterCreatureCard filter = new FilterCreatureCard();
-                filter.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
+                filter.add(SubType.byDescription(typeChoice.getChoice()).getPredicate());
                 cardsToLibrary.addAll(controller.getGraveyard().getCards(filter, source.getSourceId(), source.getControllerId(), game));
                 controller.putCardsOnTopOfLibrary(cardsToLibrary, game, source, false);
                 controller.shuffleLibrary(source, game);

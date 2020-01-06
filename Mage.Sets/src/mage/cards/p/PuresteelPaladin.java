@@ -17,7 +17,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  * @author Loki
@@ -26,7 +25,7 @@ public final class PuresteelPaladin extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledPermanent("Equipment");
 
     static {
-        filter.add(new SubtypePredicate(SubType.EQUIPMENT));
+        filter.add(SubType.EQUIPMENT.getPredicate());
     }
 
     public PuresteelPaladin(UUID ownerId, CardSetInfo setInfo) {

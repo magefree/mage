@@ -18,7 +18,6 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.MageInt;
 
@@ -31,7 +30,7 @@ public final class DepartedDeckhand extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.SPIRIT)));
+        filter.add(Predicates.not(SubType.SPIRIT.getPredicate()));
     }
 
     public DepartedDeckhand(UUID ownerId, CardSetInfo setInfo) {

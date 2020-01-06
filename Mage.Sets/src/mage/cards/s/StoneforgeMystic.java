@@ -16,7 +16,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -28,7 +27,7 @@ public final class StoneforgeMystic extends CardImpl {
     private static final FilterCard filter = new FilterCard("an Equipment card");
 
     static {
-        filter.add(new SubtypePredicate(SubType.EQUIPMENT));
+        filter.add(SubType.EQUIPMENT.getPredicate());
     }
 
     public StoneforgeMystic(UUID ownerId, CardSetInfo setInfo) {

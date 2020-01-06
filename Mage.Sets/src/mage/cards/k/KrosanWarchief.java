@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -29,8 +28,8 @@ public final class KrosanWarchief extends CardImpl {
     private static final FilterCreaturePermanent filterTarget = new FilterCreaturePermanent("Beast");
 
     static {
-        filter.add(new SubtypePredicate(SubType.BEAST));
-        filterTarget.add(new SubtypePredicate(SubType.BEAST));
+        filter.add(SubType.BEAST.getPredicate());
+        filterTarget.add(SubType.BEAST.getPredicate());
     }
 
     public KrosanWarchief(UUID ownerId, CardSetInfo setInfo) {

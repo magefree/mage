@@ -18,7 +18,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
@@ -31,7 +30,7 @@ public final class IfnirDeadlands extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Desert");
 
     static {
-        filter.add(new SubtypePredicate(SubType.DESERT));
+        filter.add(SubType.DESERT.getPredicate());
     }
 
     public IfnirDeadlands(UUID ownerId, CardSetInfo setInfo) {

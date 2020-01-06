@@ -15,7 +15,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -28,7 +27,7 @@ public final class DevoutHarpist extends CardImpl {
     private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("Aura attached to a creature");
     static
     {
-        filter.add(new SubtypePredicate(SubType.AURA));
+        filter.add(SubType.AURA.getPredicate());
         filter.add(new DevoutHarpistPredicate());
     }
     public DevoutHarpist(UUID ownerId, CardSetInfo setInfo) {

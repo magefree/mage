@@ -15,7 +15,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetAttackingCreature;
 
 /**
@@ -27,7 +26,7 @@ public final class CrossroadsConsecrator extends CardImpl {
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking Human");
 
     static {
-        filter.add(new SubtypePredicate(SubType.HUMAN));
+        filter.add(SubType.HUMAN.getPredicate());
     }
 
     public CrossroadsConsecrator(UUID ownerId, CardSetInfo setInfo) {

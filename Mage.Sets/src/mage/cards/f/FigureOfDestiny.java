@@ -18,9 +18,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.TokenImpl;
-import mage.game.permanent.token.Token;
 
 /**
  *
@@ -31,8 +29,8 @@ public final class FigureOfDestiny extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent();
     private static final FilterCreaturePermanent filter3 = new FilterCreaturePermanent();
     static {
-        filter2.add(new SubtypePredicate(SubType.SPIRIT));
-        filter3.add(new SubtypePredicate(SubType.WARRIOR));
+        filter2.add(SubType.SPIRIT.getPredicate());
+        filter3.add(SubType.WARRIOR.getPredicate());
     }
 
     public FigureOfDestiny(UUID ownerId, CardSetInfo setInfo) {

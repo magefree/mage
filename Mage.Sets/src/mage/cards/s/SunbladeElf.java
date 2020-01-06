@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -27,7 +26,7 @@ public final class SunbladeElf extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Plains");
 
     static {
-        filter.add(new SubtypePredicate(SubType.PLAINS));
+        filter.add(SubType.PLAINS.getPredicate());
     }
 
     public SunbladeElf(UUID ownerId, CardSetInfo setInfo) {

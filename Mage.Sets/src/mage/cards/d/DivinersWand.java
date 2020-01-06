@@ -19,7 +19,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -31,7 +30,7 @@ public final class DivinersWand extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("a Wizard creature");
 
     static {
-        filter.add(new SubtypePredicate(SubType.WIZARD));
+        filter.add(SubType.WIZARD.getPredicate());
     }
 
     public DivinersWand(UUID ownerId, CardSetInfo setInfo) {

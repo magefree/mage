@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -25,8 +24,8 @@ public final class ForebodingRuins extends CardImpl {
     private static final FilterCard filter = new FilterCard("a Swamp or Mountain card from your hand");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate(SubType.SWAMP),
-                new SubtypePredicate(SubType.MOUNTAIN)));
+        filter.add(Predicates.or(SubType.SWAMP.getPredicate(),
+                SubType.MOUNTAIN.getPredicate()));
     }
 
     public ForebodingRuins(UUID ownerId, CardSetInfo setInfo) {

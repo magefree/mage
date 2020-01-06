@@ -15,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -26,7 +25,7 @@ public final class GempalmSorcerer extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Wizard creatures");
 
     static {
-        filter.add(new SubtypePredicate(SubType.WIZARD));
+        filter.add(SubType.WIZARD.getPredicate());
     }
 
     public GempalmSorcerer(UUID ownerId, CardSetInfo setInfo) {

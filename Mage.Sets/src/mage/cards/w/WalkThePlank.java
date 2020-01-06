@@ -9,7 +9,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -22,7 +21,7 @@ public final class WalkThePlank extends CardImpl {
 
     static {
         filter.add(CardType.CREATURE.getPredicate());
-        filter.add(Predicates.not(new SubtypePredicate(SubType.MERFOLK)));
+        filter.add(Predicates.not(SubType.MERFOLK.getPredicate()));
     }
 
     public WalkThePlank(UUID ownerId, CardSetInfo setInfo) {

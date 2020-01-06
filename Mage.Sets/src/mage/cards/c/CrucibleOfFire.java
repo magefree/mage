@@ -8,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
@@ -20,7 +19,7 @@ public final class CrucibleOfFire extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Dragon creatures");
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new SubtypePredicate(SubType.DRAGON));
+        filter.add(SubType.DRAGON.getPredicate());
     }
     
     public CrucibleOfFire(UUID ownerId, CardSetInfo setInfo) {

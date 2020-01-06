@@ -18,7 +18,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.SaprolingToken;
 import mage.target.common.TargetControlledPermanent;
 
@@ -31,7 +30,7 @@ public final class ElvishFarmer extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Saproling");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SAPROLING));
+        filter.add(SubType.SAPROLING.getPredicate());
     }
 
     public ElvishFarmer(UUID ownerId, CardSetInfo setInfo) {

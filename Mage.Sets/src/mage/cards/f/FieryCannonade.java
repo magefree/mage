@@ -9,7 +9,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -20,7 +19,7 @@ public final class FieryCannonade extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Pirate creature");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.PIRATE)));
+        filter.add(Predicates.not(SubType.PIRATE.getPredicate()));
     }
 
     public FieryCannonade(UUID ownerId, CardSetInfo setInfo) {

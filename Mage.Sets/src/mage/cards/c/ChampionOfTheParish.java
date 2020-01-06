@@ -12,7 +12,6 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
@@ -23,7 +22,7 @@ public final class ChampionOfTheParish extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another Human");
     static {
-        filter.add(new SubtypePredicate(SubType.HUMAN));
+        filter.add(SubType.HUMAN.getPredicate());
         filter.add(AnotherPredicate.instance);
     }
 

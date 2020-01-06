@@ -15,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPlayer;
 
 /**
@@ -27,7 +26,7 @@ public final class GempalmPolluter extends CardImpl {
     static final private FilterPermanent filter = new FilterPermanent("Zombie");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ZOMBIE));
+        filter.add(SubType.ZOMBIE.getPredicate());
     }
 
     public GempalmPolluter(UUID ownerId, CardSetInfo setInfo) {

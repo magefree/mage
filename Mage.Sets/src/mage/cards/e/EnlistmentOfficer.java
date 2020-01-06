@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -23,7 +22,7 @@ public final class EnlistmentOfficer extends CardImpl {
     private static final FilterCard filter = new FilterCard("Soldier cards");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SOLDIER));
+        filter.add(SubType.SOLDIER.getPredicate());
     }
 
     public EnlistmentOfficer(UUID ownerId, CardSetInfo setInfo) {

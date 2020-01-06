@@ -16,9 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.permanent.token.TokenImpl;
-import mage.game.permanent.token.Token;
 import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -33,7 +30,7 @@ public final class AmbushCommander extends CardImpl {
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("Forests you control");
 
     static {
-        filter2.add(new SubtypePredicate(SubType.FOREST));
+        filter2.add(SubType.FOREST.getPredicate());
     }
 
     public AmbushCommander(UUID ownerId, CardSetInfo setInfo) {

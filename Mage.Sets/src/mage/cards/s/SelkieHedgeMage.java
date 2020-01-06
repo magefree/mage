@@ -16,7 +16,6 @@ import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetPermanent;
 
@@ -30,8 +29,8 @@ public final class SelkieHedgeMage extends CardImpl {
     private static final FilterCreaturePermanent filter3 = new FilterCreaturePermanent("tapped creature");
 
     static {
-        filter.add(new SubtypePredicate(SubType.FOREST));
-        filter2.add(new SubtypePredicate(SubType.ISLAND));
+        filter.add(SubType.FOREST.getPredicate());
+        filter2.add(SubType.ISLAND.getPredicate());
         filter3.add(TappedPredicate.instance);
     }
 

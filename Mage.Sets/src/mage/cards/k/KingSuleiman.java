@@ -12,7 +12,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -26,8 +25,8 @@ public final class KingSuleiman extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate(SubType.DJINN),
-                new SubtypePredicate(SubType.EFREET)
+                SubType.DJINN.getPredicate(),
+                SubType.EFREET.getPredicate()
         ));
     }
 

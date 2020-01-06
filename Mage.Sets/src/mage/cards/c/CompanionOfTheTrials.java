@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterPlaneswalkerPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -27,7 +26,7 @@ public final class CompanionOfTheTrials extends CardImpl {
 
     private static final FilterPlaneswalkerPermanent filter = new FilterPlaneswalkerPermanent("you control a Gideon planeswalker");
     static {
-        filter.add(new SubtypePredicate(SubType.GIDEON));
+        filter.add(SubType.GIDEON.getPredicate());
     }
 
     public CompanionOfTheTrials(UUID ownerId, CardSetInfo setInfo) {

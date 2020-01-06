@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.HomunculusToken;
 
 /**
@@ -29,7 +28,7 @@ public final class PuppetConjurer extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Homunculus");
 
     static {
-        filter.add(new SubtypePredicate(SubType.HOMUNCULUS));
+        filter.add(SubType.HOMUNCULUS.getPredicate());
     }
 
     public PuppetConjurer(UUID ownerId, CardSetInfo setInfo) {

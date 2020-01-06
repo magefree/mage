@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
@@ -27,7 +26,7 @@ public final class AttendantOfVraska extends CardImpl {
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(CardType.PLANESWALKER.getPredicate());
-        filter.add(new SubtypePredicate(SubType.VRASKA));
+        filter.add(SubType.VRASKA.getPredicate());
     }
 
     public AttendantOfVraska(UUID ownerId, CardSetInfo setInfo) {

@@ -18,7 +18,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.DragonToken2;
@@ -143,7 +142,7 @@ class SarkhanTheMadDragonDamageEffect extends OneShotEffect {
     static {
         filter = new FilterControlledPermanent();
         filter.add(CardType.CREATURE.getPredicate());
-        filter.add(new SubtypePredicate(SubType.DRAGON));
+        filter.add(SubType.DRAGON.getPredicate());
     }
 
     SarkhanTheMadDragonDamageEffect() {

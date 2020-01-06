@@ -15,7 +15,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.CatToken2;
 
@@ -28,7 +27,7 @@ public final class RegalCaracal extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Cats");
 
     static {
-        filter.add(new SubtypePredicate(SubType.CAT));
+        filter.add(SubType.CAT.getPredicate());
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

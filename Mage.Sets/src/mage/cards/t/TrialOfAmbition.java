@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -25,7 +24,7 @@ public final class TrialOfAmbition extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Cartouche");
 
     static {
-        filter.add(new SubtypePredicate(SubType.CARTOUCHE));
+        filter.add(SubType.CARTOUCHE.getPredicate());
     }
 
     public TrialOfAmbition(UUID ownerId, CardSetInfo setInfo) {

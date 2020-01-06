@@ -29,7 +29,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -63,7 +62,7 @@ public final class TourachsGate extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filterThrull = new FilterControlledCreaturePermanent("a Thrull");
     static {
-        filterThrull.add(new SubtypePredicate(SubType.THRULL));
+        filterThrull.add(SubType.THRULL.getPredicate());
     }
 
     public TourachsGate(UUID ownerId, CardSetInfo setInfo) {

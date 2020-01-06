@@ -9,7 +9,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -22,7 +21,7 @@ public final class RealmCloakedGiant extends AdventureCard {
             = new FilterCreaturePermanent("non-Giant creatures");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.GIANT)));
+        filter.add(Predicates.not(SubType.GIANT.getPredicate()));
     }
 
     public RealmCloakedGiant(UUID ownerId, CardSetInfo setInfo) {

@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -28,7 +27,7 @@ public final class BrassTalonChimera extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Chimera creature");
 
     static {
-        filter.add(new SubtypePredicate(SubType.CHIMERA));
+        filter.add(SubType.CHIMERA.getPredicate());
     }
 
     public BrassTalonChimera(UUID ownerId, CardSetInfo setInfo) {

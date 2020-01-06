@@ -15,7 +15,6 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterNonlandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPermanent;
 
@@ -29,7 +28,7 @@ public final class OjutaiSoulOfWinter extends CardImpl {
     private static final FilterPermanent filterNonlandPermanent = new FilterNonlandPermanent("nonland permanent an opponent controls");
 
     static {
-        filterDragon.add(new SubtypePredicate(SubType.DRAGON));
+        filterDragon.add(SubType.DRAGON.getPredicate());
         filterDragon.add(new ControllerPredicate(TargetController.YOU));
         filterNonlandPermanent.add(new ControllerPredicate(TargetController.OPPONENT));
     }

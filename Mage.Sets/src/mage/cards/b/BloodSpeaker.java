@@ -16,7 +16,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
@@ -30,8 +29,8 @@ public final class BloodSpeaker extends CardImpl {
     private static final FilterCard filterCard = new FilterCard("Demon card");
 
     static {
-        filter.add(new SubtypePredicate(SubType.DEMON));
-        filterCard.add(new SubtypePredicate(SubType.DEMON));
+        filter.add(SubType.DEMON.getPredicate());
+        filterCard.add(SubType.DEMON.getPredicate());
     }
 
     public BloodSpeaker(UUID ownerId, CardSetInfo setInfo) {

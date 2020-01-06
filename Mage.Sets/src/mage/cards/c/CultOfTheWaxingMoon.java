@@ -12,7 +12,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -50,7 +49,7 @@ class CultOfTheWaxingMoonAbility extends TriggeredAbilityImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.HUMAN)));
+        filter.add(Predicates.not(SubType.HUMAN.getPredicate()));
     }
 
     public CultOfTheWaxingMoonAbility() {

@@ -22,7 +22,6 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.command.emblems.NissaWhoShakesTheWorldEmblem;
 import mage.game.events.GameEvent;
@@ -44,7 +43,7 @@ public final class NissaWhoShakesTheWorld extends CardImpl {
 
     static {
         filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-        filter2.add(new SubtypePredicate(SubType.FOREST));
+        filter2.add(SubType.FOREST.getPredicate());
     }
 
     public NissaWhoShakesTheWorld(UUID ownerId, CardSetInfo setInfo) {
@@ -91,7 +90,7 @@ class NissaWhoShakesTheWorldTriggeredAbility extends TriggeredManaAbility {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("Forest");
 
     static {
-        filter.add(new SubtypePredicate(SubType.FOREST));
+        filter.add(SubType.FOREST.getPredicate());
     }
 
     NissaWhoShakesTheWorldTriggeredAbility() {

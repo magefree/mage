@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.ElfToken;
 
 /**
@@ -26,7 +25,7 @@ public final class ImperiousPerfect extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elf creatures");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ELF));
+        filter.add(SubType.ELF.getPredicate());
     }
 
     public ImperiousPerfect(UUID ownerId, CardSetInfo setInfo) {

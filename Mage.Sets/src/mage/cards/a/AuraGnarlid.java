@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -25,7 +24,7 @@ public final class AuraGnarlid extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Aura on the battlefield");
 
     static {
-        filter.add(new SubtypePredicate(SubType.AURA));
+        filter.add(SubType.AURA.getPredicate());
     }
 
     public AuraGnarlid(UUID ownerId, CardSetInfo setInfo) {

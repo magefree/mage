@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetAttackingCreature;
 import mage.target.common.TargetControlledPermanent;
 
@@ -25,7 +24,7 @@ public final class ElvenPalisade extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Forest");
 
     static {
-        filter.add(new SubtypePredicate(SubType.FOREST));
+        filter.add(SubType.FOREST.getPredicate());
     }
 
     public ElvenPalisade(UUID ownerId, CardSetInfo setInfo) {

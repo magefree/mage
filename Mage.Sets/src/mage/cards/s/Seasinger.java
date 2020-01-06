@@ -20,7 +20,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.CardIdPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerControlsIslandPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -36,7 +35,7 @@ public final class Seasinger extends CardImpl {
     private static final FilterCreaturePermanent creatureWhoseControllerControlsIsland = new FilterCreaturePermanent("creature whose controller controls an island");
 
     static {
-        islandYouControl.add(new SubtypePredicate(SubType.ISLAND));
+        islandYouControl.add(SubType.ISLAND.getPredicate());
         islandYouControl.add(new ControllerPredicate(TargetController.YOU));
     }
 

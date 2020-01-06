@@ -14,7 +14,6 @@ import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureSpell;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.token.ReflectionPureToken;
 import mage.game.stack.Spell;
@@ -68,7 +67,7 @@ public final class PureReflection extends CardImpl {
 
             // destroy all Reflections
             FilterPermanent filter = new FilterPermanent("Reflections");
-            filter.add(new SubtypePredicate(SubType.REFLECTION));
+            filter.add(SubType.REFLECTION.getPredicate());
             game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game).forEach((permanent) -> {
                 permanent.destroy(source.getSourceId(), game,false);
             });

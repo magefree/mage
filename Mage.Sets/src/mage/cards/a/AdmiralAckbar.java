@@ -15,7 +15,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.RebelStarshipToken;
@@ -29,7 +28,7 @@ public final class AdmiralAckbar extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Starship creatures");
 
     static {
-        filter.add(new SubtypePredicate(SubType.STARSHIP));
+        filter.add(SubType.STARSHIP.getPredicate());
     }
 
     public AdmiralAckbar(UUID ownerId, CardSetInfo setInfo) {

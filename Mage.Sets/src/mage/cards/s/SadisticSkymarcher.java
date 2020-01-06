@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -25,7 +24,7 @@ public final class SadisticSkymarcher extends CardImpl {
     private static final FilterCard filter = new FilterCard("a Vampire card from your hand");
 
     static {
-        filter.add(new SubtypePredicate(SubType.VAMPIRE));
+        filter.add(SubType.VAMPIRE.getPredicate());
     }
 
     public SadisticSkymarcher(UUID ownerId, CardSetInfo setInfo) {

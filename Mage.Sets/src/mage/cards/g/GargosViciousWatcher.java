@@ -13,7 +13,6 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -30,7 +29,7 @@ public final class GargosViciousWatcher extends CardImpl {
     private static final FilterCard filter = new FilterCard("Hydra spells");
 
     static {
-        filter.add(new SubtypePredicate(SubType.HYDRA));
+        filter.add(SubType.HYDRA.getPredicate());
     }
 
     public GargosViciousWatcher(UUID ownerId, CardSetInfo setInfo) {

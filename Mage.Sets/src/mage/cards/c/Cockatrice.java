@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -26,7 +25,7 @@ public final class Cockatrice extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Wall creature");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.WALL)));
+        filter.add(Predicates.not(SubType.WALL.getPredicate()));
     }
 
     public Cockatrice(UUID ownerId, CardSetInfo setInfo) {

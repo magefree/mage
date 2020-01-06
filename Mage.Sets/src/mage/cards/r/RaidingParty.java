@@ -24,7 +24,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -44,7 +43,7 @@ public final class RaidingParty extends CardImpl {
     
     static {
         filterWhite.add(new ColorPredicate(ObjectColor.WHITE));
-        filterOrc.add(new SubtypePredicate(SubType.ORC));
+        filterOrc.add(SubType.ORC.getPredicate());
     }
 
     public RaidingParty(UUID ownerId, CardSetInfo setInfo) {
@@ -75,7 +74,7 @@ class RaidingPartyEffect extends OneShotEffect {
     static {
         filter.add(Predicates.not(TappedPredicate.instance));
         filter.add(new ColorPredicate(ObjectColor.WHITE));
-        filter2.add(new SubtypePredicate(SubType.PLAINS));
+        filter2.add(SubType.PLAINS.getPredicate());
     }
 
     RaidingPartyEffect() {

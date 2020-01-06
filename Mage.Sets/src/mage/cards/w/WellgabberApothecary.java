@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -28,7 +27,7 @@ public final class WellgabberApothecary extends CardImpl {
 
     static {
         filter.add(TappedPredicate.instance);
-        filter.add(Predicates.or(new SubtypePredicate(SubType.MERFOLK), new SubtypePredicate(SubType.KITHKIN)));
+        filter.add(Predicates.or(SubType.MERFOLK.getPredicate(), SubType.KITHKIN.getPredicate()));
     }
 
     public WellgabberApothecary(UUID ownerId, CardSetInfo setInfo) {

@@ -21,7 +21,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.FilterStackObject;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.target.TargetPermanent;
 
@@ -37,7 +36,7 @@ public final class MercenaryInformer extends CardImpl {
     static {
         filterBlack.add(new ColorPredicate(ObjectColor.BLACK));
         filterMercenary.add(Predicates.not(TokenPredicate.instance));
-        filterMercenary.add(new SubtypePredicate(SubType.MERCENARY));
+        filterMercenary.add(SubType.MERCENARY.getPredicate());
     }
 
     public MercenaryInformer(UUID ownerId, CardSetInfo setInfo) {

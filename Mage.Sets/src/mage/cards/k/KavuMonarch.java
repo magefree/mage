@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
@@ -29,8 +28,8 @@ public final class KavuMonarch extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("another Kavu");
 
     static {
-        filter1.add(new SubtypePredicate(SubType.KAVU));
-        filter2.add(new SubtypePredicate(SubType.KAVU));
+        filter1.add(SubType.KAVU.getPredicate());
+        filter2.add(SubType.KAVU.getPredicate());
         filter2.add(AnotherPredicate.instance);
     }
 

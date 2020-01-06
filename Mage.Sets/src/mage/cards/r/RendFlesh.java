@@ -9,7 +9,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -23,7 +22,7 @@ public final class RendFlesh extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Non-Spirit creature");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.SPIRIT)));
+        filter.add(Predicates.not(SubType.SPIRIT.getPredicate()));
     }
 
     public RendFlesh(UUID ownerId, CardSetInfo setInfo) {

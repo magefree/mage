@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -29,7 +28,7 @@ public final class SionaCaptainOfThePyleas extends CardImpl {
     private static final FilterCard filter = new FilterCard("an Aura card");
 
     static {
-        filter.add(new SubtypePredicate(SubType.AURA));
+        filter.add(SubType.AURA.getPredicate());
     }
 
     public SionaCaptainOfThePyleas(UUID ownerId, CardSetInfo setInfo) {

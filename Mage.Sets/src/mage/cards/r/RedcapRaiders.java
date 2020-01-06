@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledPermanent;
 
@@ -31,7 +30,7 @@ public final class RedcapRaiders extends CardImpl {
 
     static {
         filter.add(Predicates.not(TappedPredicate.instance));
-        filter.add(Predicates.not(new SubtypePredicate(SubType.HUMAN)));
+        filter.add(Predicates.not(SubType.HUMAN.getPredicate()));
     }
 
     public RedcapRaiders(UUID ownerId, CardSetInfo setInfo) {

@@ -17,7 +17,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.RatToken;
@@ -33,7 +32,7 @@ public final class OgreSlumlord extends CardImpl {
     static {
         filter.add(Predicates.not(TokenPredicate.instance));
         filter.add(AnotherPredicate.instance);
-        filter2.add(new SubtypePredicate(SubType.RAT));
+        filter2.add(SubType.RAT.getPredicate());
     }
     
     

@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -67,7 +66,7 @@ class CoordinatedBarrageEffect extends OneShotEffect {
             if (controller.choose(Outcome.Damage, choice, game)) {
                 String chosenType = choice.getChoice();
                 FilterControlledPermanent filter = new FilterControlledPermanent();
-                filter.add(new SubtypePredicate(SubType.byDescription(chosenType)));
+                filter.add(SubType.byDescription(chosenType).getPredicate());
                 int damageDealt = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
                 Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
                 if (permanent != null) {

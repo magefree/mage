@@ -19,7 +19,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.CaribouToken;
 import mage.target.TargetPermanent;
@@ -35,7 +34,7 @@ public final class CaribouRange extends CardImpl {
 
     static {
         filter.add(TokenPredicate.instance);
-        filter.add(new SubtypePredicate(SubType.CARIBOU));
+        filter.add(SubType.CARIBOU.getPredicate());
     }
 
     public CaribouRange(UUID ownerId, CardSetInfo setInfo) {

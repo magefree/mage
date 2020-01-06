@@ -18,7 +18,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -76,7 +75,7 @@ class AngelOfGlorysRiseEffect extends OneShotEffect {
                     .getActivePermanents(new FilterCreaturePermanent(SubType.ZOMBIE, "Zombie"), source.getControllerId(), source.getSourceId(), game));
             controller.moveCards(toExile, Zone.EXILED, source, game);
             FilterCreatureCard filterHuman = new FilterCreatureCard();
-            filterHuman.add(new SubtypePredicate(SubType.HUMAN));
+            filterHuman.add(SubType.HUMAN.getPredicate());
             controller.moveCards(controller.getGraveyard().getCards(filterHuman, game), Zone.BATTLEFIELD, source, game);
         }
         return true;

@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -54,7 +53,7 @@ class SlaveringNullsTriggeredAbility extends TriggeredAbilityImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent();
 
     static {
-        filter.add(new SubtypePredicate(SubType.SWAMP));
+        filter.add(SubType.SWAMP.getPredicate());
     }
 
     public SlaveringNullsTriggeredAbility() {

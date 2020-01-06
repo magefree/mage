@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -24,7 +23,7 @@ public final class GreensideWatcher extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Gate");
     static {
-        filter.add(new SubtypePredicate(SubType.GATE));
+        filter.add(SubType.GATE.getPredicate());
     }
     
     public GreensideWatcher(UUID ownerId, CardSetInfo setInfo) {

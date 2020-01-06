@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -24,7 +23,7 @@ public final class Invisibility extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by Walls");
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.WALL)));
+        filter.add(Predicates.not(SubType.WALL.getPredicate()));
     }
 
     public Invisibility(UUID ownerId, CardSetInfo setInfo) {

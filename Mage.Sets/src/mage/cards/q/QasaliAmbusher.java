@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 
@@ -53,8 +52,8 @@ class QasaliAmbusherAbility extends ActivatedAbilityImpl {
     private static final FilterControlledLandPermanent filterForest = new FilterControlledLandPermanent();
 
     static {
-        filterPlains.add(new SubtypePredicate(SubType.PLAINS));
-        filterForest.add(new SubtypePredicate(SubType.FOREST));
+        filterPlains.add(SubType.PLAINS.getPredicate());
+        filterForest.add(SubType.FOREST.getPredicate());
     }
 
     public QasaliAmbusherAbility() {

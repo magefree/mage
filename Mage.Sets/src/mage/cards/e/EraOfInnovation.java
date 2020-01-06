@@ -19,7 +19,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -31,7 +30,7 @@ public final class EraOfInnovation extends CardImpl {
 
     static {
         filter.add(Predicates.or(CardType.ARTIFACT.getPredicate(),
-                new SubtypePredicate(SubType.ARTIFICER)));
+                SubType.ARTIFICER.getPredicate()));
     }
 
     public EraOfInnovation(UUID ownerId, CardSetInfo setInfo) {

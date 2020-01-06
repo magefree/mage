@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -27,7 +26,7 @@ public final class SpreadingAlgae extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Swamp");
 
     static{
-        filter.add(new SubtypePredicate(SubType.SWAMP));
+        filter.add(SubType.SWAMP.getPredicate());
     }
 
     public SpreadingAlgae(UUID ownerId, CardSetInfo setInfo) {

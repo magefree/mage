@@ -18,7 +18,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetLandPermanent;
@@ -32,7 +31,7 @@ public final class Pyramids extends CardImpl {
     private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("Auras attached to a land");
     
     static {
-        filter.add(new SubtypePredicate(SubType.AURA));
+        filter.add(SubType.AURA.getPredicate());
         filter.add(new PyramidsPredicate());
     }
     

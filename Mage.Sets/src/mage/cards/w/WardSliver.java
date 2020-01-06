@@ -16,7 +16,6 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -60,7 +59,7 @@ class WardSliverGainAbilityControlledEffect extends ContinuousEffectImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Slivers");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SLIVER));
+        filter.add(SubType.SLIVER.getPredicate());
     }
 
     protected FilterPermanent protectionFilter;

@@ -12,7 +12,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -23,9 +22,9 @@ public final class SramSeniorEdificer extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("an Aura, Equipment, or Vehicle spell");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate(SubType.AURA),
-            new SubtypePredicate(SubType.EQUIPMENT),
-            new SubtypePredicate(SubType.VEHICLE)));
+        filter.add(Predicates.or(SubType.AURA.getPredicate(),
+            SubType.EQUIPMENT.getPredicate(),
+            SubType.VEHICLE.getPredicate()));
     }
 
     public SramSeniorEdificer(UUID ownerId, CardSetInfo setInfo) {

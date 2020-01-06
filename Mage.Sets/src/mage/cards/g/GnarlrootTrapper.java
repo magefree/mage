@@ -22,7 +22,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.game.Game;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -39,7 +38,7 @@ public final class GnarlrootTrapper extends CardImpl {
 
     static {
         filter.add(AttackingPredicate.instance);
-        filter.add(new SubtypePredicate(SubType.ELF));
+        filter.add(SubType.ELF.getPredicate());
     }
 
     public GnarlrootTrapper(UUID ownerId, CardSetInfo setInfo) {

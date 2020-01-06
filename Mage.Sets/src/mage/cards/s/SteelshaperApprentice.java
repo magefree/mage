@@ -17,7 +17,6 @@ import mage.constants.ColoredManaSymbol;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -29,7 +28,7 @@ public final class SteelshaperApprentice extends CardImpl {
 
     static {
         filter.add(CardType.ARTIFACT.getPredicate());
-        filter.add(new SubtypePredicate(SubType.EQUIPMENT));
+        filter.add(SubType.EQUIPMENT.getPredicate());
     }
 
     public SteelshaperApprentice(UUID ownerId, CardSetInfo setInfo) {

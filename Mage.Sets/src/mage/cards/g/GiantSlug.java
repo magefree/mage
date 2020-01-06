@@ -21,7 +21,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -80,19 +79,19 @@ class GiantSlugEffect extends OneShotEffect {
                 game.informPlayers(sourcePermanent.getName() + ":  Chosen basic land type is " + choices.getChoice());
                 FilterLandPermanent filter = new FilterLandPermanent(choices.getChoice());
                 if (choices.getChoice().equals("Plains")) {
-                    filter.add(new SubtypePredicate(SubType.PLAINS));
+                    filter.add(SubType.PLAINS.getPredicate());
                 }
                 if (choices.getChoice().equals("Island")) {
-                    filter.add(new SubtypePredicate(SubType.ISLAND));
+                    filter.add(SubType.ISLAND.getPredicate());
                 }
                 if (choices.getChoice().equals("Swamp")) {
-                    filter.add(new SubtypePredicate(SubType.SWAMP));
+                    filter.add(SubType.SWAMP.getPredicate());
                 }
                 if (choices.getChoice().equals("Mountain")) {
-                    filter.add(new SubtypePredicate(SubType.MOUNTAIN));
+                    filter.add(SubType.MOUNTAIN.getPredicate());
                 }
                 if (choices.getChoice().equals("Forest")) {
-                    filter.add(new SubtypePredicate(SubType.FOREST));
+                    filter.add(SubType.FOREST.getPredicate());
                 }
                 Ability landwalkAbility = new LandwalkAbility(filter);
                 game.addEffect(new GainAbilitySourceEffect(landwalkAbility, Duration.EndOfTurn, false), source);

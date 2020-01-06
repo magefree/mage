@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -22,7 +21,7 @@ public final class RiptideBiologist extends CardImpl {
     private static final FilterCard filter = new FilterCard("Beasts");
 
     static {
-        filter.add(new SubtypePredicate(SubType.BEAST));
+        filter.add(SubType.BEAST.getPredicate());
     }
 
     public RiptideBiologist(UUID ownerId, CardSetInfo setInfo) {

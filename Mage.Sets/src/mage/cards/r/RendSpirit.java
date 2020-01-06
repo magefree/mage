@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -20,7 +19,7 @@ public final class RendSpirit extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Spirit");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SPIRIT));
+        filter.add(SubType.SPIRIT.getPredicate());
     }
 
     public RendSpirit(UUID ownerId, CardSetInfo setInfo) {

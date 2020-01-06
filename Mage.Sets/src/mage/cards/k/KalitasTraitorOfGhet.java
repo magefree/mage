@@ -18,7 +18,6 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -38,8 +37,8 @@ public final class KalitasTraitorOfGhet extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(Predicates.or(new SubtypePredicate(SubType.VAMPIRE),
-                (new SubtypePredicate(SubType.ZOMBIE))));
+        filter.add(Predicates.or(SubType.VAMPIRE.getPredicate(),
+                (SubType.ZOMBIE.getPredicate())));
     }
 
     public KalitasTraitorOfGhet(UUID ownerId, CardSetInfo setInfo) {

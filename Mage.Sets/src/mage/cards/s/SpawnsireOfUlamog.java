@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.EldraziSpawnToken;
 
 /**
@@ -27,7 +26,7 @@ public final class SpawnsireOfUlamog extends CardImpl {
     private static final FilterCard filter = new FilterCard("Eldrazi cards");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ELDRAZI));
+        filter.add(SubType.ELDRAZI.getPredicate());
     }
     
     public SpawnsireOfUlamog(UUID ownerId, CardSetInfo setInfo) {

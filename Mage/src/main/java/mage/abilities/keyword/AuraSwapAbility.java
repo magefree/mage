@@ -10,7 +10,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.other.AuraCardCanAttachToPermanentId;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -63,7 +62,7 @@ class AuraSwapEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         FilterCard filterCardToCheck = new FilterCard();
-        filterCardToCheck.add(new SubtypePredicate(SubType.AURA));
+        filterCardToCheck.add(SubType.AURA.getPredicate());
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Permanent auraSourcePermanent = game.getPermanent(source.getSourceId());

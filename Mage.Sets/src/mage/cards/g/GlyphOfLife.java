@@ -13,9 +13,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.DamagedCreatureEvent;
@@ -33,7 +31,7 @@ public final class GlyphOfLife extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Wall creature");
 
     static {
-        filter.add(new SubtypePredicate(SubType.WALL));
+        filter.add(SubType.WALL.getPredicate());
     }
 
     public GlyphOfLife(UUID ownerId, CardSetInfo setInfo) {

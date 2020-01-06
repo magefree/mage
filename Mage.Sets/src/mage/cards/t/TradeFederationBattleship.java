@@ -16,7 +16,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.DroidToken;
 
 /**
@@ -28,7 +27,7 @@ public final class TradeFederationBattleship extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Droid creatures");
 
     static {
-        filter.add(new SubtypePredicate(SubType.DROID));
+        filter.add(SubType.DROID.getPredicate());
     }
 
     public TradeFederationBattleship(UUID ownerId, CardSetInfo setInfo) {

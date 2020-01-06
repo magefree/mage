@@ -15,7 +15,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -32,7 +31,7 @@ public final class DiregrafCaptain extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombie");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ZOMBIE));
+        filter.add(SubType.ZOMBIE.getPredicate());
     }
 
     public DiregrafCaptain(UUID ownerId, CardSetInfo setInfo) {
@@ -65,7 +64,7 @@ class DiregrafCaptainTriggeredAbility extends TriggeredAbilityImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombie");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ZOMBIE));
+        filter.add(SubType.ZOMBIE.getPredicate());
     }
 
     public DiregrafCaptainTriggeredAbility() {

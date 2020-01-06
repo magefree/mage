@@ -18,7 +18,6 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterLandCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -30,8 +29,8 @@ public final class KorlashHeirToBlackblade extends CardImpl {
     private static final FilterControlledPermanent filterPermanent = new FilterControlledPermanent("Swamps you control");
     private static final FilterCard filterCard = new FilterLandCard("Swamp cards");
     static {
-        filterPermanent.add(new SubtypePredicate(SubType.SWAMP));
-        filterCard.add(new SubtypePredicate(SubType.SWAMP));
+        filterPermanent.add(SubType.SWAMP.getPredicate());
+        filterCard.add(SubType.SWAMP.getPredicate());
     }
 
     public KorlashHeirToBlackblade(UUID ownerId, CardSetInfo setInfo) {

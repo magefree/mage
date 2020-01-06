@@ -5,7 +5,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
@@ -36,7 +35,7 @@ public class SimpleGameTest extends CardTestMultiPlayerBase {
         assertLife(playerD, 20);
 
         FilterPermanent filterPermanent = new FilterLandPermanent();
-        filterPermanent.add(new SubtypePredicate(SubType.FOREST));
+        filterPermanent.add(SubType.FOREST.getPredicate());
         List<Permanent> forestCards = currentGame.getBattlefield().getAllActivePermanents(filterPermanent, currentGame);
         Assert.assertEquals(4, forestCards.size());
     }

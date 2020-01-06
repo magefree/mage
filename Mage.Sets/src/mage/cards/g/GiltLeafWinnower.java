@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -28,7 +27,7 @@ public final class GiltLeafWinnower extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Elf creature whose power and toughness aren't equal");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.ELF)));
+        filter.add(Predicates.not(SubType.ELF.getPredicate()));
         filter.add(new PowerToughnessNotEqualPredicate());
     }
 

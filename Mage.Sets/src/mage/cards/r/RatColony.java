@@ -15,7 +15,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
@@ -27,7 +26,7 @@ public final class RatColony extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other Rat you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.RAT));
+        filter.add(SubType.RAT.getPredicate());
         filter.add(AnotherPredicate.instance);
     }
 

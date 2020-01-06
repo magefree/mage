@@ -22,7 +22,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.EdgarMarkovToken;
 
 /**
@@ -35,8 +34,8 @@ public final class EdgarMarkov extends CardImpl {
     private static final FilterSpell filter2 = new FilterSpell("another Vampire spell");//"another" is just there for templating, doesn't affect the card itself
 
     static {
-        filter.add(new SubtypePredicate(SubType.VAMPIRE));
-        filter2.add(new SubtypePredicate(SubType.VAMPIRE));
+        filter.add(SubType.VAMPIRE.getPredicate());
+        filter2.add(SubType.VAMPIRE.getPredicate());
     }
 
     public EdgarMarkov(UUID ownerId, CardSetInfo setInfo) {

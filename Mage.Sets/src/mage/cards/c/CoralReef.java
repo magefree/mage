@@ -23,7 +23,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
@@ -39,7 +38,7 @@ public final class CoralReef extends CardImpl {
     private static final FilterControlledCreaturePermanent untappedBlueCreatureFilter = new FilterControlledCreaturePermanent("an untapped blue creature you control");
     
     static {
-        islandFilter.add(new SubtypePredicate(SubType.ISLAND));
+        islandFilter.add(SubType.ISLAND.getPredicate());
         untappedBlueCreatureFilter.add(Predicates.not(TappedPredicate.instance));
         untappedBlueCreatureFilter.add(new ColorPredicate(ObjectColor.BLUE));
     }

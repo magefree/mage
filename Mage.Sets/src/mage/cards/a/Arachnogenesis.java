@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.token.SpiderToken;
@@ -28,7 +27,7 @@ public final class Arachnogenesis extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Spider creatures");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.SPIDER)));
+        filter.add(Predicates.not(SubType.SPIDER.getPredicate()));
     }
 
     public Arachnogenesis(UUID ownerId, CardSetInfo setInfo) {

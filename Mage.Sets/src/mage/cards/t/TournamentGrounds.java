@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -23,8 +22,8 @@ public final class TournamentGrounds extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate(SubType.KNIGHT),
-                new SubtypePredicate(SubType.EQUIPMENT)
+                SubType.KNIGHT.getPredicate(),
+                SubType.EQUIPMENT.getPredicate()
         ));
     }
 

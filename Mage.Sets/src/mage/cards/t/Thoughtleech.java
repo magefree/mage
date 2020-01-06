@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
@@ -23,7 +22,7 @@ public final class Thoughtleech extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("an Island an opponent controls");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ISLAND));
+        filter.add(SubType.ISLAND.getPredicate());
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 

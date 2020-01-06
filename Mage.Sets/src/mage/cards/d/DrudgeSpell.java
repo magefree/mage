@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.SkeletonToken;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -31,7 +30,7 @@ public final class DrudgeSpell extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("Skeleton tokens");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SKELETON));
+        filter.add(SubType.SKELETON.getPredicate());
         filter.add(TokenPredicate.instance);
     }
 

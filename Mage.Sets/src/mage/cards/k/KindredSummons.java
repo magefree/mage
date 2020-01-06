@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -74,13 +73,13 @@ class KindredSummonsEffect extends OneShotEffect {
                 return false;
             }
             FilterControlledCreaturePermanent filterPermanent = new FilterControlledCreaturePermanent("creature you control of the chosen type");
-            filterPermanent.add(new SubtypePredicate(subType));
+            filterPermanent.add(subType.getPredicate());
             int numberOfCards = game.getBattlefield().countAll(filterPermanent, source.getControllerId(), game);
             Cards revealed = new CardsImpl();
             Set<Card> chosenSubtypeCreatureCards = new LinkedHashSet<>();
             Cards otherCards = new CardsImpl();
             FilterCreatureCard filterCard = new FilterCreatureCard("creature card of the chosen type");
-            filterCard.add(new SubtypePredicate(subType));
+            filterCard.add(subType.getPredicate());
             if (numberOfCards == 0) { // no matches so nothing is revealed
                 game.informPlayers("There are 0 creature cards of the chosen type in " + controller.getName() + "'s library.");
                 return true;

@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -26,8 +25,8 @@ public final class KyrenLegate extends CardImpl {
     private static final FilterPermanent filterMountain = new FilterPermanent();
 
     static {
-        filterPlains.add(new SubtypePredicate(SubType.PLAINS));
-        filterMountain.add(new SubtypePredicate(SubType.MOUNTAIN));
+        filterPlains.add(SubType.PLAINS.getPredicate());
+        filterMountain.add(SubType.MOUNTAIN.getPredicate());
     }
 
     public KyrenLegate(UUID ownerId, CardSetInfo setInfo) {

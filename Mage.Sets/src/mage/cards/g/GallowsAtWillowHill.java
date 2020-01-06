@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -36,7 +35,7 @@ public final class GallowsAtWillowHill extends CardImpl {
 
     static {
         humanFilter.add(Predicates.not(TappedPredicate.instance));
-        humanFilter.add(new SubtypePredicate(SubType.HUMAN));
+        humanFilter.add(SubType.HUMAN.getPredicate());
     }
 
     public GallowsAtWillowHill(UUID ownerId, CardSetInfo setInfo) {

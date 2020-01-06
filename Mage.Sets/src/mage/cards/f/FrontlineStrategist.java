@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -25,7 +24,7 @@ public final class FrontlineStrategist extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Soldier creatures");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.SOLDIER)));
+        filter.add(Predicates.not(SubType.SOLDIER.getPredicate()));
     }
 
     public FrontlineStrategist(UUID ownerId, CardSetInfo setInfo) {

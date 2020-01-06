@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.SerfToken;
 
@@ -26,7 +25,7 @@ public final class SengirAutocrat extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Serf tokens");
 
     static {
-        filter.add(new SubtypePredicate(SubType.SERF));
+        filter.add(SubType.SERF.getPredicate());
         filter.add(TokenPredicate.instance);
     }
 

@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -25,7 +24,7 @@ public final class KrovikanMist extends CardImpl {
     private static final FilterPermanent illusionsFilter = new FilterPermanent("Illusions on the battlefield");
 
     static {
-        illusionsFilter.add(new SubtypePredicate(SubType.ILLUSION));
+        illusionsFilter.add(SubType.ILLUSION.getPredicate());
     }
 
     public KrovikanMist(UUID ownerId, CardSetInfo setInfo) {

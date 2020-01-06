@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -23,7 +22,7 @@ public final class PriestOfTitania extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elf on the battlefield");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ELF));
+        filter.add(SubType.ELF.getPredicate());
     }
 
     public PriestOfTitania(UUID ownerId, CardSetInfo setInfo) {

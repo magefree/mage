@@ -19,7 +19,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -33,8 +32,8 @@ public final class HigureTheStillWind extends CardImpl {
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("Ninja creature");
 
     static {
-        filter.add(new SubtypePredicate(SubType.NINJA));
-        filterCreature.add((new SubtypePredicate(SubType.NINJA)));
+        filter.add(SubType.NINJA.getPredicate());
+        filterCreature.add((SubType.NINJA.getPredicate()));
     }
 
     public HigureTheStillWind(UUID ownerId, CardSetInfo setInfo) {

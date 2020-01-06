@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -22,10 +21,10 @@ public final class WhelmingWave extends CardImpl {
     static {
         filter.add(Predicates.not(
                 Predicates.or(
-                        new SubtypePredicate(SubType.KRAKEN),
-                        new SubtypePredicate(SubType.LEVIATHAN),
-                        new SubtypePredicate(SubType.OCTOPUS),
-                        new SubtypePredicate(SubType.SERPENT))));
+                        SubType.KRAKEN.getPredicate(),
+                        SubType.LEVIATHAN.getPredicate(),
+                        SubType.OCTOPUS.getPredicate(),
+                        SubType.SERPENT.getPredicate())));
     }
     
     public WhelmingWave(UUID ownerId, CardSetInfo setInfo) {

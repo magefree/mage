@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -26,7 +25,7 @@ public final class HanSolo extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Starship you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.STARSHIP));
+        filter.add(SubType.STARSHIP.getPredicate());
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

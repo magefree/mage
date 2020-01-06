@@ -11,7 +11,6 @@ import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -26,7 +25,7 @@ public final class PureSimple extends SplitCard {
     private static final FilterPermanent filterMulticolor = new FilterPermanent("multicolored permanent");
 
     static {
-        filterDestroy.add(Predicates.or(new SubtypePredicate(SubType.AURA), new SubtypePredicate(SubType.EQUIPMENT)));
+        filterDestroy.add(Predicates.or(SubType.AURA.getPredicate(), SubType.EQUIPMENT.getPredicate()));
         filterMulticolor.add(MulticoloredPredicate.instance);
     }
 

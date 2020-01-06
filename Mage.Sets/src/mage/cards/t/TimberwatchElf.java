@@ -15,7 +15,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -27,7 +26,7 @@ public final class TimberwatchElf extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elves");
 
     static {
-        filter.add(new SubtypePredicate(SubType.ELF));
+        filter.add(SubType.ELF.getPredicate());
     }
 
     public TimberwatchElf(UUID ownerId, CardSetInfo setInfo) {

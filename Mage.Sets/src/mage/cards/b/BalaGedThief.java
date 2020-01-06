@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -76,7 +75,7 @@ class BalaGedThiefEffect extends OneShotEffect {
         Player you = game.getPlayer(source.getControllerId());
 
         FilterControlledPermanent filter = new FilterControlledPermanent();
-        filter.add(new SubtypePredicate(SubType.ALLY));
+        filter.add(SubType.ALLY.getPredicate());
 
         int numberOfAllies = game.getBattlefield().countAll(filter, you.getId(), game);
 

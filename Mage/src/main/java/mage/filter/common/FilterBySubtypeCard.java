@@ -4,7 +4,6 @@ package mage.filter.common;
 
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -15,7 +14,7 @@ public class FilterBySubtypeCard extends FilterCard {
 
     public FilterBySubtypeCard(SubType subtype) {
         super(subtype + " card");
-        this.add(new SubtypePredicate(subtype));
+        this.add(subtype.getPredicate());
     }
 
     public FilterBySubtypeCard(final FilterBySubtypeCard filter) {

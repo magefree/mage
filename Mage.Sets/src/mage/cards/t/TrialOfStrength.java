@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.BeastToken3;
 
 /**
@@ -23,7 +22,7 @@ public final class TrialOfStrength extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Cartouche");
 
     static {
-        filter.add(new SubtypePredicate(SubType.CARTOUCHE));
+        filter.add(SubType.CARTOUCHE.getPredicate());
     }
 
     public TrialOfStrength(UUID ownerId, CardSetInfo setInfo) {

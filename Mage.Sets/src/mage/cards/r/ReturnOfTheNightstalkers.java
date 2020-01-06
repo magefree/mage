@@ -12,7 +12,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -46,8 +45,8 @@ class ReturnOfTheNightstalkersEffect extends OneShotEffect {
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent();
 
     static {
-        filter1.add(new SubtypePredicate(SubType.NIGHTSTALKER));
-        filter2.add(new SubtypePredicate(SubType.SWAMP));
+        filter1.add(SubType.NIGHTSTALKER.getPredicate());
+        filter2.add(SubType.SWAMP.getPredicate());
     }
 
     public ReturnOfTheNightstalkersEffect() {

@@ -17,7 +17,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
@@ -30,10 +29,10 @@ public final class TimberProtector extends CardImpl {
     private static final FilterControlledPermanent filterBoth = new FilterControlledPermanent("Other Treefolk and Forests you control");
 
     static {
-        filterTreefolk.add(new SubtypePredicate(SubType.TREEFOLK));
+        filterTreefolk.add(SubType.TREEFOLK.getPredicate());
         filterBoth.add(Predicates.or(
-                new SubtypePredicate(SubType.TREEFOLK),
-                new SubtypePredicate(SubType.FOREST)));
+                SubType.TREEFOLK.getPredicate(),
+                SubType.FOREST.getPredicate()));
         filterBoth.add(AnotherPredicate.instance);
     }
 

@@ -5,9 +5,7 @@ import java.util.UUID;
 
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -21,12 +19,10 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.util.SubTypeList;
 
 /**
  *
@@ -36,7 +32,7 @@ public final class OozeGarden extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("non-Ooze creature");
     static{
-        filter.add(Predicates.not(new SubtypePredicate(SubType.OOZE)));
+        filter.add(Predicates.not(SubType.OOZE.getPredicate()));
     }
     public OozeGarden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");

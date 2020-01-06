@@ -16,7 +16,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -28,8 +27,8 @@ public final class DanithaCapashenParagon extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate(SubType.AURA),
-                new SubtypePredicate(SubType.EQUIPMENT)));
+                SubType.AURA.getPredicate(),
+                SubType.EQUIPMENT.getPredicate()));
     }
 
     public DanithaCapashenParagon(UUID ownerId, CardSetInfo setInfo) {

@@ -17,7 +17,6 @@ import mage.constants.SuperType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.ZombieToken;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -30,7 +29,7 @@ public final class LilianaDeathsMajesty extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Zombie creatures");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.ZOMBIE)));
+        filter.add(Predicates.not(SubType.ZOMBIE.getPredicate()));
     }
 
     public LilianaDeathsMajesty(UUID ownerId, CardSetInfo setInfo) {

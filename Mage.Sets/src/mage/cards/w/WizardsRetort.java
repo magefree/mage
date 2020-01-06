@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetSpell;
 
 /**
@@ -25,7 +24,7 @@ public final class WizardsRetort extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control a Wizard");
 
     static {
-        filter.add(new SubtypePredicate(SubType.WIZARD));
+        filter.add(SubType.WIZARD.getPredicate());
     }
 
     public WizardsRetort(UUID ownerId, CardSetInfo setInfo) {

@@ -12,7 +12,6 @@ import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -24,9 +23,9 @@ public final class KeeperOfProgenitus extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-            new SubtypePredicate(SubType.MOUNTAIN),
-            new SubtypePredicate(SubType.FOREST),
-            new SubtypePredicate(SubType.PLAINS)
+            SubType.MOUNTAIN.getPredicate(),
+            SubType.FOREST.getPredicate(),
+            SubType.PLAINS.getPredicate()
             ));
     }
 

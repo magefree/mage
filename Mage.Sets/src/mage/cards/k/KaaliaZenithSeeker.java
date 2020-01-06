@@ -13,7 +13,6 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -64,7 +63,7 @@ class KaaliaZenithSeekerEffect extends OneShotEffect {
 
         private CreatureFinder(SubType subType) {
             this.filterCard = new FilterCard("a " + subType.toString() + " card");
-            this.filterCard.add(new SubtypePredicate(subType));
+            this.filterCard.add(subType.getPredicate());
         }
 
         private TargetCard getTarget() {

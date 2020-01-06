@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterNonlandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -57,7 +56,7 @@ class ScalelardReckonerTriggeredAbility extends TriggeredAbilityImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Dragon creature you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.DRAGON));
+        filter.add(SubType.DRAGON.getPredicate());
     }
 
     public ScalelardReckonerTriggeredAbility(Effect effect) {

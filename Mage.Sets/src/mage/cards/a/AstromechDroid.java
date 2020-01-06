@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -28,7 +27,7 @@ public final class AstromechDroid extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("starship creature");
 
     static {
-        filter.add(new SubtypePredicate(SubType.STARSHIP));
+        filter.add(SubType.STARSHIP.getPredicate());
     }
 
     public AstromechDroid(UUID ownerId, CardSetInfo setInfo) {

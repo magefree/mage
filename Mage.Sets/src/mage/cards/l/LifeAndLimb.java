@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -45,7 +44,7 @@ class LifeAndLimbEffect extends ContinuousEffectImpl {
     private static final FilterPermanent filter = new FilterPermanent("All Forests and all Saprolings");
 
     static {
-        filter.add(Predicates.or(new SubtypePredicate(SubType.FOREST), new SubtypePredicate(SubType.SAPROLING)));
+        filter.add(Predicates.or(SubType.FOREST.getPredicate(), SubType.SAPROLING.getPredicate()));
     }
 
     LifeAndLimbEffect() {

@@ -13,7 +13,6 @@ import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
@@ -87,7 +86,7 @@ class SharedAnimosityEffect extends ContinuousEffectImpl {
             if(!allCreatureTypes){
                 List<Predicate<MageObject>> predicateList = new ArrayList<>();
                 for(SubType subtype : permanent.getSubtype(game)){
-                    predicateList.add(new SubtypePredicate(subtype));
+                    predicateList.add(subtype.getPredicate());
                 }
                 filter.add(Predicates.or(predicateList));
             }

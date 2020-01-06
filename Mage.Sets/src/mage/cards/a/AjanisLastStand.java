@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -29,7 +28,7 @@ public final class AjanisLastStand extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 
     static {
-        filter.add(new SubtypePredicate(SubType.PLAINS));
+        filter.add(SubType.PLAINS.getPredicate());
     }
 
     public AjanisLastStand(UUID ownerId, CardSetInfo setInfo) {

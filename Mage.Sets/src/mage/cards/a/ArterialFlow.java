@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -24,7 +23,7 @@ public final class ArterialFlow extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("If you control a Vampire,");
     static {
-        filter.add(new SubtypePredicate(SubType.VAMPIRE));
+        filter.add(SubType.VAMPIRE.getPredicate());
     }
 
     public ArterialFlow(UUID ownerId, CardSetInfo setInfo) {

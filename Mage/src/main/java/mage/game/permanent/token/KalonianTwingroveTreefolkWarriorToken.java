@@ -10,7 +10,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -21,7 +20,7 @@ public final class KalonianTwingroveTreefolkWarriorToken extends TokenImpl {
     static final FilterControlledPermanent filterLands = new FilterControlledPermanent("Forests you control");
 
     static {
-        filterLands.add(new SubtypePredicate(SubType.FOREST));
+        filterLands.add(SubType.FOREST.getPredicate());
     }
 
     public KalonianTwingroveTreefolkWarriorToken() {

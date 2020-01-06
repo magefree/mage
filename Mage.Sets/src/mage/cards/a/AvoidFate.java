@@ -9,7 +9,6 @@ import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.other.TargetsPermanentPredicate;
 import mage.target.TargetSpell;
 
@@ -24,7 +23,7 @@ public final class AvoidFate extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("instant or Aura spell that targets a permanent you control");
 
     static {
-        filter.add(Predicates.or(CardType.INSTANT.getPredicate(), new SubtypePredicate(SubType.AURA)));
+        filter.add(Predicates.or(CardType.INSTANT.getPredicate(), SubType.AURA.getPredicate()));
         filter.add(new TargetsPermanentPredicate(StaticFilters.FILTER_CONTROLLED_PERMANENT));
     }
 

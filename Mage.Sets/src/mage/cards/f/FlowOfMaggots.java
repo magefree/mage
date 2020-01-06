@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -25,7 +24,7 @@ public final class FlowOfMaggots extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Wall creatures");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.WALL)));
+        filter.add(Predicates.not(SubType.WALL.getPredicate()));
     }
 
     public FlowOfMaggots(UUID ownerId, CardSetInfo setInfo) {

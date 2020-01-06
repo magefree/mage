@@ -8,7 +8,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterPlaneswalkerPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
@@ -30,7 +29,7 @@ class GideonOfTheTrialsCantLoseEffect extends ContinuousRuleModifyingEffectImpl 
     private static final FilterPlaneswalkerPermanent filter = new FilterPlaneswalkerPermanent("a Gideon planeswalker");
 
     static {
-        filter.add(new SubtypePredicate(SubType.GIDEON));
+        filter.add(SubType.GIDEON.getPredicate());
     }
 
     public GideonOfTheTrialsCantLoseEffect() {

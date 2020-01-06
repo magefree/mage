@@ -16,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -58,7 +57,7 @@ class KentaroTheSmilingCatCastingEffect extends ContinuousEffectImpl {
 	private static final FilterCard filterSamurai = new FilterCard();
 	
 	static {
-		filterSamurai.add(new SubtypePredicate(SubType.SAMURAI));
+		filterSamurai.add(SubType.SAMURAI.getPredicate());
 	}
 	
     static final AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(

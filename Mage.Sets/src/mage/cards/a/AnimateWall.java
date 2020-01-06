@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -26,7 +25,7 @@ public final class AnimateWall extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Wall");
     
     static {
-        filter.add(new SubtypePredicate(SubType.WALL));
+        filter.add(SubType.WALL.getPredicate());
     }
     
     public AnimateWall(UUID ownerId, CardSetInfo setInfo) {

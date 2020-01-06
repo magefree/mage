@@ -22,7 +22,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -37,11 +36,11 @@ public final class TribalGolem extends CardImpl {
     private static final FilterControlledPermanent filter5 = new FilterControlledPermanent("a Zombie");
 
     static {
-        filter1.add(new SubtypePredicate(SubType.BEAST));
-        filter2.add(new SubtypePredicate(SubType.GOBLIN));
-        filter3.add(new SubtypePredicate(SubType.SOLDIER));
-        filter4.add(new SubtypePredicate(SubType.WIZARD));
-        filter5.add(new SubtypePredicate(SubType.ZOMBIE));
+        filter1.add(SubType.BEAST.getPredicate());
+        filter2.add(SubType.GOBLIN.getPredicate());
+        filter3.add(SubType.SOLDIER.getPredicate());
+        filter4.add(SubType.WIZARD.getPredicate());
+        filter5.add(SubType.ZOMBIE.getPredicate());
     }
 
     public TribalGolem(UUID ownerId, CardSetInfo setInfo) {

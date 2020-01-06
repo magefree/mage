@@ -17,7 +17,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -72,7 +71,7 @@ class TsabosDecreeEffect extends OneShotEffect {
                 game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoice());
                 targetPlayer.revealCards("hand of " + targetPlayer.getName(), targetPlayer.getHand(), game);
                 FilterCard filterCard = new FilterCard();
-                filterCard.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
+                filterCard.add(SubType.byDescription(typeChoice.getChoice()).getPredicate());
                 List<Card> toDiscard = new ArrayList<>();
                 for (Card card : targetPlayer.getHand().getCards(game)) {
                     if (filterCard.match(card, game)) {
@@ -83,7 +82,7 @@ class TsabosDecreeEffect extends OneShotEffect {
                     targetPlayer.discard(card, source, game);
                 }
                 FilterCreaturePermanent filterCreaturePermanent = new FilterCreaturePermanent();
-                filterCreaturePermanent.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
+                filterCreaturePermanent.add(SubType.byDescription(typeChoice.getChoice()).getPredicate());
                 for (Permanent creature : game.getBattlefield().getActivePermanents(filterCreaturePermanent, source.getSourceId(), game)) {
                     if (creature.isControlledBy(targetPlayer.getId())) {
                         creature.destroy(source.getSourceId(), game, true);

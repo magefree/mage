@@ -28,7 +28,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -48,10 +47,10 @@ public final class InallaArchmageRitualist extends CardImpl {
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("untapped Wizards you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.WIZARD));
+        filter.add(SubType.WIZARD.getPredicate());
         filter.add(Predicates.not(TokenPredicate.instance));
         filter.add(AnotherPredicate.instance);
-        filter2.add(new SubtypePredicate(SubType.WIZARD));
+        filter2.add(SubType.WIZARD.getPredicate());
         filter2.add(Predicates.not(TappedPredicate.instance));
     }
 

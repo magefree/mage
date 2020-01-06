@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetArtifactPermanent;
@@ -26,7 +25,7 @@ public final class Unforge extends CardImpl {
     private static FilterArtifactPermanent filter = new FilterArtifactPermanent("equipment");
     
     static{
-        filter.add(new SubtypePredicate(SubType.EQUIPMENT));
+        filter.add(SubType.EQUIPMENT.getPredicate());
     }
 
     public Unforge(UUID ownerId, CardSetInfo setInfo) {

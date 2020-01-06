@@ -21,7 +21,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
@@ -35,7 +34,7 @@ public final class OrcishLumberjack extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Forest");
 
     static {
-        filter.add(new SubtypePredicate(SubType.FOREST));
+        filter.add(SubType.FOREST.getPredicate());
     }
 
     public OrcishLumberjack(UUID ownerId, CardSetInfo setInfo) {

@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterPlaneswalkerPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
@@ -29,7 +28,7 @@ public final class DesiccatedNaga extends CardImpl {
     private static final FilterPlaneswalkerPermanent filter = new FilterPlaneswalkerPermanent("you control a Liliana planeswalker");
 
     static {
-        filter.add(new SubtypePredicate(SubType.LILIANA));
+        filter.add(SubType.LILIANA.getPredicate());
     }
 
     public DesiccatedNaga(UUID ownerId, CardSetInfo setInfo) {

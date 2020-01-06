@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -55,7 +54,7 @@ class TalusPaladinTriggeredAbility extends TriggeredAbilityImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("all allies you control");
     
     static {
-        filter.add(new SubtypePredicate(SubType.ALLY));
+        filter.add(SubType.ALLY.getPredicate());
     }
     
     TalusPaladinTriggeredAbility() {

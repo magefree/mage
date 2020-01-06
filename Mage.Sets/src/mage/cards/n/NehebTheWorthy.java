@@ -17,7 +17,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
@@ -29,7 +28,7 @@ public final class NehebTheWorthy extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Minotaurs");
 
     static {
-        filter.add(new SubtypePredicate(SubType.MINOTAUR));
+        filter.add(SubType.MINOTAUR.getPredicate());
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

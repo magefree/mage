@@ -18,7 +18,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -37,7 +36,7 @@ public final class LimDulTheNecromancer extends CardImpl {
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
-        filter2.add(new SubtypePredicate(SubType.ZOMBIE));
+        filter2.add(SubType.ZOMBIE.getPredicate());
     }
 
     public LimDulTheNecromancer(UUID ownerId, CardSetInfo setInfo) {

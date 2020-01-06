@@ -12,7 +12,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
@@ -45,7 +44,7 @@ class TitheEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard("Plains");
     static {
-        filter.add(new SubtypePredicate(SubType.PLAINS));
+        filter.add(SubType.PLAINS.getPredicate());
     }
 
     TitheEffect() {

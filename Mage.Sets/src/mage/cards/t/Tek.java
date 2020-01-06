@@ -19,7 +19,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -35,11 +34,11 @@ public final class Tek extends CardImpl {
     private static final FilterControlledPermanent filterForest = new FilterControlledPermanent("Forest");
 
     static {
-        filterPlains.add(new SubtypePredicate(SubType.PLAINS));
-        filterIsland.add(new SubtypePredicate(SubType.ISLAND));
-        filterSwamp.add(new SubtypePredicate(SubType.SWAMP));
-        filterMountain.add(new SubtypePredicate(SubType.MERCENARY));
-        filterForest.add(new SubtypePredicate(SubType.FOREST));
+        filterPlains.add(SubType.PLAINS.getPredicate());
+        filterIsland.add(SubType.ISLAND.getPredicate());
+        filterSwamp.add(SubType.SWAMP.getPredicate());
+        filterMountain.add(SubType.MERCENARY.getPredicate());
+        filterForest.add(SubType.FOREST.getPredicate());
     }
 
 

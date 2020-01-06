@@ -20,7 +20,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  * @author North, noxx
@@ -32,7 +31,7 @@ public final class MayorOfAvabruck extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Human creatures");
 
     static {
-        filter.add(new SubtypePredicate(SubType.HUMAN));
+        filter.add(SubType.HUMAN.getPredicate());
     }
 
     public MayorOfAvabruck(UUID ownerId, CardSetInfo setInfo) {

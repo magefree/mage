@@ -15,7 +15,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -27,8 +26,8 @@ public final class RhysTheExiled extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Elf");
     private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("Elf you control");
     static {
-        filter.add(new SubtypePredicate(SubType.ELF));
-        filter2.add(new SubtypePredicate(SubType.ELF));
+        filter.add(SubType.ELF.getPredicate());
+        filter2.add(SubType.ELF.getPredicate());
     }
 
     public RhysTheExiled(UUID ownerId, CardSetInfo setInfo) {

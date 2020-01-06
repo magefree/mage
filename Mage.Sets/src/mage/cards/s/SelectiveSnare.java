@@ -12,7 +12,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPermanent;
@@ -63,7 +62,7 @@ enum SelectiveSnareAdjuster implements TargetAdjuster {
         SubType subType = SubType.byDescription(choice.getChoice());
         int xValue = ability.getManaCostsToPay().getX();
         FilterPermanent filter = new FilterCreaturePermanent(subType.toString() + " creatures");
-        filter.add(new SubtypePredicate(subType));
+        filter.add(subType.getPredicate());
         ability.getTargets().clear();
         ability.addTarget(new TargetPermanent(xValue, filter));
     }

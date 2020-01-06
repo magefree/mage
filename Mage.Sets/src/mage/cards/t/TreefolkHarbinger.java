@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -22,7 +21,7 @@ public final class TreefolkHarbinger extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Treefolk or Forest card");
     static {
-       filter.add(Predicates.or(new SubtypePredicate(SubType.TREEFOLK), new SubtypePredicate(SubType.FOREST)));
+       filter.add(Predicates.or(SubType.TREEFOLK.getPredicate(), SubType.FOREST.getPredicate()));
     }
     
     public TreefolkHarbinger(UUID ownerId, CardSetInfo setInfo) {

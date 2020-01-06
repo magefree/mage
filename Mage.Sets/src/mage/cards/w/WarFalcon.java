@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -54,8 +53,8 @@ class WarFalconEffect extends RestrictionEffect {
 
     static {
         filter.add(Predicates.or(
-                new SubtypePredicate(SubType.KNIGHT),
-                new SubtypePredicate(SubType.SOLDIER)));
+                SubType.KNIGHT.getPredicate(),
+                SubType.SOLDIER.getPredicate()));
     }
 
     public WarFalconEffect() {

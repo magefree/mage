@@ -19,7 +19,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.KorSoldierToken;
@@ -74,7 +73,7 @@ class NahiriTheLithomancerFirstAbilityEffect extends OneShotEffect {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an Equipment you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.EQUIPMENT));
+        filter.add(SubType.EQUIPMENT.getPredicate());
     }
 
     NahiriTheLithomancerFirstAbilityEffect() {
@@ -130,7 +129,7 @@ class NahiriTheLithomancerSecondAbilityEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("an Equipment");
 
     static {
-        filter.add(new SubtypePredicate(SubType.EQUIPMENT));
+        filter.add(SubType.EQUIPMENT.getPredicate());
     }
 
     NahiriTheLithomancerSecondAbilityEffect() {

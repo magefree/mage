@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -28,7 +27,7 @@ public final class RosethornHalberd extends CardImpl {
             = new FilterControlledCreaturePermanent("non-Human creature you control");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate(SubType.HUMAN)));
+        filter.add(Predicates.not(SubType.HUMAN.getPredicate()));
     }
 
     public RosethornHalberd(UUID ownerId, CardSetInfo setInfo) {

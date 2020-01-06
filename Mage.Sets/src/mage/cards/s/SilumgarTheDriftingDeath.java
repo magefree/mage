@@ -15,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -29,7 +28,7 @@ public final class SilumgarTheDriftingDeath extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Dragon you control");
 
     static {
-        filter.add(new SubtypePredicate(SubType.DRAGON));
+        filter.add(SubType.DRAGON.getPredicate());
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

@@ -18,7 +18,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -33,7 +32,7 @@ public final class AboshanCephalidEmperor extends CardImpl {
     static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creatures without flying");
 
     static {
-        filter1.add(new SubtypePredicate(SubType.CEPHALID));
+        filter1.add(SubType.CEPHALID.getPredicate());
         filter2.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
 

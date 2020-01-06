@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
@@ -29,7 +28,7 @@ public final class DistrictGuide extends CardImpl {
                 Predicates.and(
                         CardType.LAND.getPredicate(),
                         new SupertypePredicate(SuperType.BASIC)
-                ), new SubtypePredicate(SubType.GATE)
+                ), SubType.GATE.getPredicate()
         ));
     }
 
