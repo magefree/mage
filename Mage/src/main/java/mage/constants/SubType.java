@@ -1,5 +1,8 @@
 package mage.constants;
 
+import mage.MageObject;
+import mage.filter.predicate.Predicate;
+import mage.game.Game;
 import mage.util.SubTypeList;
 
 import java.util.Arrays;
@@ -439,7 +442,30 @@ public enum SubType {
     YANLING("Yanling", SubTypeSet.PlaneswalkerType),
     YODA("Yoda", SubTypeSet.PlaneswalkerType, true);  // Star Wars
 
+    public static class SubTypePredicate implements Predicate<MageObject> {
+
+        private final SubType subtype;
+
+        private SubTypePredicate(SubType subtype) {
+            this.subtype = subtype;
+        }
+
+
+        @Override
+        public boolean apply(MageObject input, Game game) {
+            return input.hasSubtype(subtype, game);
+        }
+
+        @Override
+        public String toString() {
+            return "Subtype(" + subtype + ')';
+        }
+    }
+
     private final SubTypeSet subTypeSet;
+    private final String description;
+    private final boolean customSet;
+    private final SubTypePredicate predicate;
 
     SubType(String description, SubTypeSet subTypeSet) {
         this(description, subTypeSet, false);
@@ -449,19 +475,20 @@ public enum SubType {
         this.description = description;
         this.subTypeSet = subTypeSet;
         this.customSet = customSet;
+        this.predicate = new SubTypePredicate(this);
     }
 
     public String getDescription() {
         return description;
     }
 
-    private final String description;
-
-    private final boolean customSet;
-
     @Override
     public String toString() {
         return description;
+    }
+
+    public SubTypePredicate getPredicate() {
+        return predicate;
     }
 
     public static SubType fromString(String value) {
